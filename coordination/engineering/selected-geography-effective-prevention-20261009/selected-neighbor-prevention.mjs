@@ -6,6 +6,7 @@ import {fileURLToPath} from 'node:url';
 import {execFileSync} from 'node:child_process';
 import {gunzipSync} from 'node:zlib';
 import {processingAllowance, ImmutableReader, SelectedGeometrySources, NativeAssetImage, selectedBaseAssetAlias, selectedGeometrySourceAlias} from '../../../scripts/check-effective-geographic-regression.mjs';
+import {nativeOnlyComponent, deriveSourceTargetNativeDelta} from '../../../src/native-grid.js';
 import {unshuffleOwnershipBytes} from '../../../src/ownership-codec.js';
 const FILE=33554432, SLOT=512;
 const certificates=new WeakMap(), originalAuthorities=new WeakMap(), selectedAdditions=new WeakMap();
@@ -537,6 +538,145 @@ function authorityRegistry(registry) {
  }
  return byId;
 }
+// Source-target evidence uses the same retained registry and literal native
+// patch route. It has no invented original-gap inventory or addition polygon.
+export function qualifySourceTargetNativeAuthority(reader, preimage, binding) {
+ demand(preimage?.version===1&&preimage.kind==='source-target-native-rule-v1'
+  &&Object.keys(preimage).sort().join(',')==='kind,native_patch,source_evidence,version'
+  &&binding?.version===1&&binding.kind==='source-target-native-custody-v1'
+  &&Object.keys(binding).sort().join(',')==='kind,native_patch,source_evidence,version'
+  &&same(preimage.source_evidence,binding.source_evidence)&&same(preimage.native_patch,binding.native_patch),
+ 'Source-target authority inputs differ');
+ const read=p=>{
+  pinCheck(p);let version=p.commit;try{reader.git('cat-file','-e',version+'^{commit}');}catch{version=reader.version;}
+  const d=reader.descriptor(p.path,version);
+  demand(d.mode===p.mode&&d.git_blob_oid===p.git_blob_oid&&d.bytes===p.bytes,'Source-target whole identity differs');
+  const parseReserve=6*(p.decoded_bytes??p.bytes);
+  demand(reader.used+parseReserve<=reader.phaseLimit,'Source-target complete parsed acquisition exceeds phase');
+  reader.used+=parseReserve;reader.admit(d,p.decoded_bytes??0);
+  const raw=reader.read(p.path,{version,expected:p.sha256,decoded:p.decoded_bytes??0});
+  if(p.decoded_bytes===undefined)return raw;
+  const decoded=gunzipSync(raw,{maxOutputLength:p.decoded_bytes});
+  demand(decoded.length===p.decoded_bytes&&sha(decoded)===p.decoded_sha256,'Source-target decoded body differs');return decoded;
+ };
+ const evidence=JSON.parse(read(binding.source_evidence)), proposed=JSON.parse(read(binding.native_patch));
+ demand(evidence?.version===1&&evidence.kind==='source-target-native-evidence-v1'
+  &&Array.isArray(evidence.targets)&&evidence.targets.length>0&&Array.isArray(proposed.rows)
+  &&Object.keys(proposed).join(',')==='rows',
+ 'Incomplete source-target evidence');
+ // The catalogue is the retained consumed-byte inventory, not an author supplied
+ // geometry subset. Each complete original product is rejoined below.
+ demand(evidence.catalogue.path==='coordination/engineering/original-geography-source-corpus-20261006/catalogue.json',
+ 'Require retained original source catalogue');
+ const currentCatalogue=reader.descriptor(evidence.catalogue.path);
+ demand(currentCatalogue.git_blob_oid===evidence.catalogue.git_blob_oid,'Source catalogue differs from the selected retained corpus');
+ const catalogue=JSON.parse(read(evidence.catalogue));
+ const physicalInputs=JSON.parse(read(evidence.physical_input));read(evidence.physical_reproduction);
+ demand(evidence.native_latitudes.sha256===evidence.native_contract.native_latitudes.sha256
+  &&evidence.native_latitudes.decoded_sha256===evidence.native_contract.native_latitudes.decoded_sha256,
+ 'Native source-target latitude contract differs');
+ const latitudeRaw=read(evidence.native_latitudes);
+ const physical=JSON.parse(read(evidence.physical_evidence));
+ demand(evidence.native_contract.size===262166&&latitudeRaw.length===262166*8,
+ 'Unsupported source-target native lattice');
+ const latitudes=Float64Array.from({length:262166},(_,i)=>latitudeRaw.readDoubleLE(i*8));
+ demand(evidence.owner_roster.sha256===evidence.native_contract.original_assets.bounds.sha256,
+ 'Source-target owner roster differs from original native identity asset');
+ const roster=JSON.parse(read(evidence.owner_roster));
+ demand(Array.isArray(roster),'Missing original owner roster');
+ const owners=new Map(roster.map((owner,i)=>[owner.id,owner.index??i+1]));
+ const targets=new Map();
+ for(const target of evidence.targets){
+  demand(!targets.has(target.id)&&owners.get(target.id)===target.pixelIndex&&hash(target.source_receipt_sha256),
+   'Foreign or duplicate source-target identity');
+  const support=physical.results.find(result=>result.target===target.id);
+  demand(support&&Array.isArray(support.issues)&&support.issues.length===0
+   &&target.source_receipt_sha256===evidence.physical_evidence.sha256, 'Missing qualified physical source interpretation');
+  demand(Array.isArray(target.coverage_classes)&&target.coverage_classes.length>0
+   &&target.coverage_classes.every(kind=>['mapped_land_support','mapped_inland_water_support'].includes(kind)),
+   'Unresolved physical support cannot qualify a repair');
+  const polygons=target.coverage_classes.flatMap(kind=>{const geometry=support.support[kind];coordinateBounds(geometry);
+   return geometry.type==='Polygon'?[geometry.coordinates]:geometry.coordinates;});
+  target.coverage_geometry={type:'MultiPolygon',coordinates:polygons};
+  coordinateBounds(target.base_geometry);coordinateBounds(target.coverage_geometry);
+  targets.set(target.id,target);
+ }
+ const rowsByOwner=new Map();let previous=-1;
+ for(const row of proposed.rows){
+  demand(Number.isSafeInteger(row.y)&&row.y>previous&&row.y<262166&&Array.isArray(row.runs),
+   'Invalid source-target native row');previous=row.y;let end=0;
+  for(const run of row.runs){
+   demand(Array.isArray(run)&&run.length===3&&run.every(Number.isSafeInteger)&&run[0]>=end
+    &&run[1]>run[0]&&run[1]<=262166&&[...targets.values()].some(t=>t.pixelIndex===run[2]),
+   'Foreign or conflicting proposed source-target interval');end=run[1];
+   const list=rowsByOwner.get(run[2])??[];let item=list.at(-1);
+   if(item?.y!==row.y){item={y:row.y,runs:[]};list.push(item);}item.runs.push(run);rowsByOwner.set(run[2],list);
+  }
+ }
+ const checked=new Set();
+ for(const family of evidence.families){
+  const record=catalogue.products.find(product=>product.key===family.source_id);
+  demand(record&&family.parts.length===record.parts.length,'Missing complete original source family');
+  const pieces=family.parts.map((pin,i)=>{
+   const expected=record.parts[i];demand(pin.path===expected.path&&pin.sha256===expected.sha256
+    &&pin.bytes===expected.bytes&&pin.decoded_bytes===expected.uncompressed_bytes
+    &&pin.decoded_sha256===expected.uncompressed_sha256,'Source family part differs from retained catalogue');return read(pin);
+  });
+  const raw=Buffer.concat(pieces);demand(raw.length===record.original_bytes&&sha(raw)===record.original_sha256,
+   'Whole original consumed source product differs');
+  const product=JSON.parse(raw);demand(product.features?.length===record.feature_count,'Incomplete original source feature roster');
+  const selected=evidence.targets.filter(target=>target.source_family===family.source_id);
+  demand(selected.length>0,'Unused source family');
+  for(const target of selected){const original=product.features.find(feature=>family.source_id+':'+feature.properties.shapeID===target.id);
+   const measured=physicalInputs.find(input=>input.target===target.id);
+   demand(original&&measured&&same(measured.consumed.geometry,original.geometry)&&same(measured.selected.geometry,target.base_geometry),
+    'Physical source query or selected target differs from measured whole inputs');
+  }
+  const bounds=selected.flatMap(target=>coordinateBounds(target.coverage_geometry));
+  const intersects=(a,b)=>a[0]<=b[2]&&b[0]<=a[2]&&a[1]<=b[3]&&b[1]<=a[3];
+  const sourceFeatures=product.features.filter(feature=>coordinateBounds(feature.geometry).some(part=>bounds.some(box=>intersects(part,box))))
+   .map(feature=>{const id=family.source_id+':'+feature.properties.shapeID;
+    demand(owners.has(id),'Original source requires an explicit reconciled target mapping');
+    return {id,pixelIndex:owners.get(id),geometry:feature.geometry};});
+  const coverageFeatures=selected.map(target=>({id:target.id,pixelIndex:target.pixelIndex,geometry:target.coverage_geometry}));
+  const exclusions=selected.flatMap(target=>(target.territorial_exclusions??[]).map(geometry=>({id:target.id,pixelIndex:target.pixelIndex,geometry})));
+  const selectedOwners=new Set(selected.map(target=>target.pixelIndex)), blocks=new Map();
+  for(const row of proposed.rows)if(row.runs.some(run=>selectedOwners.has(run[2]))){
+   const block=Math.floor(row.y/4096);const list=blocks.get(block)??[];list.push(row);blocks.set(block,list);
+  }
+  for(const [block,rows]of blocks){
+   const rowStart=block*4096,rowEnd=Math.min(262166,rowStart+4096);
+   // Empty rows here derive the permitted source/coverage domain, not a claim
+   // about actual ownership. Actual current owner zero is enforced separately
+   // by selectedAdditiveRows and the emitted native patch application.
+   const allowed=deriveSourceTargetNativeDelta({targets:selected.map(({id,pixelIndex})=>({id,pixelIndex})),
+    sourceFeatures,coverageFeatures,territorialExclusions:exclusions,size:262166,latitudes,rowStart,rowEnd,
+    ownerRows:Array.from({length:rowEnd-rowStart},(_,i)=>({y:rowStart+i,complete_owner_intervals:[]}))});
+   const allowedRows=new Map(allowed.rows.map(row=>[row.y,row.runs]));
+   for(const row of rows)for(const run of row.runs)if(selectedOwners.has(run[2])){
+    demand((allowedRows.get(row.y)??[]).some(span=>span[2]===run[2]&&span[0]<=run[0]&&span[1]>=run[1]),
+     'Proposed native cells lack unique source-target coverage');checked.add(row.y+':'+run.join(':'));
+   }
+  }
+ }
+ demand(checked.size===proposed.rows.reduce((n,row)=>n+row.runs.length,0),'Unqualified proposed native intervals');
+ const ledgerRows=evidence.targets.map(target=>{
+  const native_rows=rowsByOwner.get(target.pixelIndex)??[];demand(native_rows.length>0,'Zero-cell source-target repair');
+  let west=262166,east=0;for(const row of native_rows)for(const run of row.runs){west=Math.min(west,run[0]);east=Math.max(east,run[1]-1);}
+  const native_bounds=[(west+.5)/262166*360-180,latitudes[native_rows.at(-1).y],
+   (east+.5)/262166*360-180,latitudes[native_rows[0].y]];
+  return {representation:'native-cells',component_id:'source-target:'+valueSha({target_id:target.id,evidence:binding.source_evidence.sha256}),
+   target_id:target.id,pixelIndex:target.pixelIndex,disposition:'assigned',base_geometry:target.base_geometry,
+   base_geometry_sha256:valueSha(target.base_geometry),source_receipt_sha256:target.source_receipt_sha256,
+   native_rows,native_bounds,native_cells:native_rows.reduce((n,row)=>n+row.runs.reduce((n,run)=>n+run[1]-run[0],0),0)};
+ }).sort((a,b)=>a.component_id.localeCompare(b.component_id));
+ return {source_scope_ids:ledgerRows.map(row=>row.component_id),original_ledger:{version:2,kind:'native-additive-repair-ledger-v2',
+  scope_ids:ledgerRows.map(row=>row.component_id),rows:ledgerRows},source_rows:ledgerRows,
+  native_proof:{native_contract:evidence.native_contract,native_patches:[{base_reference:evidence.base_reference,rows:proposed.rows}]},
+  original_pins:{source_evidence:binding.source_evidence,native_patch:binding.native_patch},
+  limitations:['Physical interpretation and semantic reconciliation are retained reviewed source evidence; actual current owner-zero is checked by native consumers.']};
+}
+
 // One detached authority acquisition. The returned view cannot authorize a
 // selected release: the committed hook must additionally authenticate the
 // qualified native publication, operating proof and actual current bank.
@@ -556,6 +696,11 @@ export function readRetainedRegistryAuthority(reader, entry) {
  });
  const [preimage,binding]=admitted.map(({p,version})=>JSON.parse(reader.read(p.path,{version,expected:p.sha256})));
  demand(valueSha(preimage)===entry.rule_sha256,'Complete original registry preimage differs');
+ if(binding?.kind==='source-target-native-custody-v1'){
+  const proof=qualifySourceTargetNativeAuthority(reader,preimage,binding);
+  return freeze({...proof,version:1,kind:'authenticated-registry-source-custody-v1',authority_sha256:entry.authority_sha256,
+   rule_sha256:entry.rule_sha256,policy_id:entry.policy_id,policy_version:entry.policy_version,pins});
+ }
  demand(binding?.version===1&&binding.kind==='original-issued-rule-source-custody-v1'&&['kind,native_proof,original_pins,version','kind,native_proof,original_pins,source_output_aliases,version'].includes(Object.keys(binding).sort().join(',')),'Unsupported original authority binding');
  const custody=readOriginalRuleAuthority(reader,binding.original_pins,binding.source_output_aliases??[]);
  demand(same(preimage,custody.rule_preimage)&&custody.rule_sha256===entry.rule_sha256,'Registry relabelled original executed rule');
@@ -581,6 +726,7 @@ export function normaliseRetainedRepairLedger(ledger,registry) {
   demand(['assigned','zero-cell','already-resolved','rejected','awaiting-evidence'].includes(row.disposition),'Unknown original ledger disposition');
   if(!['assigned','zero-cell'].includes(row.disposition))continue;
   const entry=legacy?legacyEntry:authorities.get(row.authority_sha256);demand(entry&&(!Object.hasOwn(row,'rule_sha256')||row.rule_sha256===entry.rule_sha256),'Per-component original authority rebound');
+  if(nativeOnlyComponent({...row,rule_sha256:entry.rule_sha256,authority_sha256:entry.authority_sha256},valueSha)){rows.set(row.component_id,{...row,rule_sha256:entry.rule_sha256,authority_sha256:entry.authority_sha256});continue;}
   demand(typeof row.target_id==='string'&&Number.isSafeInteger(row.pixelIndex)&&row.pixelIndex>0&&hash(row.base_geometry_sha256)&&hash(row.geometry_sha256)&&hash(row.source_receipt_sha256)&&valueSha(row.geometry)===row.geometry_sha256,'Missing complete original primitive identity');
   coordinateBounds(row.geometry);demand(Number.isSafeInteger(row.native_cells)&&(row.disposition==='assigned'?row.native_cells>0:row.native_cells===0),'False original native contribution');
   rows.set(row.component_id,{...row,rule_sha256:entry.rule_sha256,authority_sha256:entry.authority_sha256});
@@ -1139,7 +1285,7 @@ export function readSelectedAdditive(snapshot) {
 
  const expectedScope=new Map();
  for(const proof of proofs){
-  demand(same(named.ledger.parent_inventory,proof.original_ledger.parent_inventory),'Selected ledger changes complete original inventory denominator');
+  if(proof.original_ledger.parent_inventory!==undefined)demand(same(named.ledger.parent_inventory,proof.original_ledger.parent_inventory),'Selected ledger changes complete original inventory denominator');
   for(const original of proof.original_ledger.rows){
    demand(!expectedScope.has(original.component_id),'Ambiguous repeated original authority component');expectedScope.set(original.component_id,{original,proof});
   }
@@ -1165,17 +1311,19 @@ export function readSelectedAdditive(snapshot) {
   for(const run of row.runs){demand(Array.isArray(run)&&run.length===3&&run.every(Number.isSafeInteger)&&run[0]>=end&&run[1]>run[0]&&run[1]<=manifest.size&&selectedOwners.has(run[2]),'Conflicting/foreign native delta interval');end=run[1];total+=run[1]-run[0];}
  }
  const originalPatches=proofs.flatMap(proof=>proof.native_proof.native_patches);
+ const currentContract=Object.fromEntries(['size','coordinateBits','method','native_latitudes','hierarchy_sha256','original_assets'].map(k=>[k,manifest[k]]));
+ demand(proofs.every(p=>same(p.native_proof.native_contract,currentContract)),'Selected additions change native lattice/method/owner-parent contract');
  let rebind=null;
  if(Object.hasOwn(named.ledger,'current_rebind')){
   demand(named.ledger.version===2&&envelope.version===2,'Current rebind is an explicit v2-only extension');
-  const currentContract=Object.fromEntries(['size','coordinateBits','method','native_latitudes','hierarchy_sha256','original_assets'].map(k=>[k,manifest[k]]));
-  demand(proofs.every(p=>same(p.native_proof.native_contract,currentContract)),'Current rebind changes original native lattice/method/owner-parent contract');
   // Complete original scope/pointset/contract checks above have finished.
   // Retain only native patches/contracts and custody before current acquisition.
   expectedScope.clear();
   for(const proof of proofs){delete proof.original_ledger;proof.native_proof={native_contract:proof.native_proof.native_contract,native_patches:proof.native_proof.native_patches};}
   reclaimCompletedRebindFrame();
-  rebind=readCurrentRebindCustody(reader,named.ledger.current_rebind,{baseSelection,registry,originalRows:[...normalized.rows.values()],originalPatches,size:manifest.size,snapshot,carriedMetadataBytes:2*valueBytes({sidecar,admitted,envelope,named,proofs,patch}).length});
+  const legacyAuthorities=new Set(proofs.filter(proof=>proof.original_pins.source_evidence===undefined).map(proof=>proof.authority_sha256));
+  const legacyRegistry={...registry,entries:registry.entries.filter(entry=>legacyAuthorities.has(entry.authority_sha256))};
+  rebind=readCurrentRebindCustody(reader,named.ledger.current_rebind,{baseSelection,registry:legacyRegistry,originalRows:[...normalized.rows.values()].filter(row=>row.representation!=='native-cells'),originalPatches:proofs.filter(p=>p.original_pins.source_evidence===undefined).flatMap(p=>p.native_proof.native_patches),size:manifest.size,snapshot,carriedMetadataBytes:2*valueBytes({sidecar,admitted,envelope,named,proofs,patch}).length});
   demand(same(named.ledger.current_targets,rebind.current_targets),'Ledger current target pointsets differ from complete qualified rebind result');
  }else demand(!Object.hasOwn(named.ledger,'current_targets'),'Current targets require complete rebind custody');
  const expectedByRow=new Map();
@@ -1195,15 +1343,17 @@ export function readSelectedAdditive(snapshot) {
  // helper owns its body arrays. After return those arrays (including the second
  // owner-roster decode) are dead; only this complete view is carried onward.
  // The independently authenticated original owner roster remains in snapshot.
- const consumerRows=[...normalized.rows.values()].map(row=>{if(!rebind)return row;const target=rebind.current_targets.find(target=>target.target_id===row.target_id);demand(target&&owners[target.pixelIndex-1]?.id===target.target_id,'Current rebind owner roster differs');return {...row,base_geometry:target.geometry,base_geometry_sha256:target.geometry_sha256};});
- const carried={sidecar,registry,ledger:named.ledger,patch,envelope,normalized_rows:consumerRows,authority_proofs:proofs.map(proof=>({authority_sha256:proof.authority_sha256,rule_sha256:proof.rule_sha256,source_scope_ids:proof.source_scope_ids,pins:proof.pins,original_pins:proof.original_pins})),assigned_cells:total,...(rebind?{current_rebind:rebind}:{})};
+ const consumerRows=[...normalized.rows.values()].map(row=>{if(!rebind||row.representation==='native-cells')return row;const target=rebind.current_targets.find(target=>target.target_id===row.target_id);demand(target&&owners[target.pixelIndex-1]?.id===target.target_id,'Current rebind owner roster differs');return {...row,base_geometry:target.geometry,base_geometry_sha256:target.geometry_sha256};});
+ const legacy_native_rows=[...new Set(proofs.filter(proof=>proof.original_pins.source_evidence===undefined)
+  .flatMap(proof=>proof.native_proof.native_patches.flatMap(patch=>patch.rows.map(row=>row.y))))].sort((a,b)=>a-b);
+ const carried={sidecar,registry,ledger:named.ledger,patch,envelope,legacy_native_rows,normalized_rows:consumerRows,authority_proofs:proofs.map(proof=>({authority_sha256:proof.authority_sha256,rule_sha256:proof.rule_sha256,source_scope_ids:proof.source_scope_ids,pins:proof.pins,original_pins:proof.original_pins})),assigned_cells:total,...(rebind?{current_rebind:rebind}:{})};
  const result=freeze({...carried,metadata_bytes:valueBytes(carried).length+4096});
  selectedAdditions.set(result,{snapshot});return result;
 }
 export function selectedAdditiveRows(view,row,base) {
  demand(selectedAdditions.has(view),'Require actual committed authenticated additive selection');
  const delta=view.patch.rows.find(r=>r.y===row)?.runs??[];
- if(view.current_rebind&&delta.length){const expected=view.current_rebind.native.current_rows.find(r=>r.y===row);demand(expected&&same(expected.runs,base),'Actual selected complete native row differs from qualified current rebind');}
+ if(view.current_rebind&&delta.length&&view.legacy_native_rows.includes(row)){const expected=view.current_rebind.native.current_rows.find(r=>r.y===row);demand(expected&&same(expected.runs,base),'Actual selected complete native row differs from qualified current rebind');}
  const all=[...base.map(r=>[...r]),...delta.map(r=>[...r])].sort((a,b)=>a[0]-b[0]);let end=0;
  for(const r of all){demand(r[0]>=end,'Selected additive delta overlaps preexisting assigned native cells');end=r[1];}
  return all;

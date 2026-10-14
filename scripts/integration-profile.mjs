@@ -143,10 +143,14 @@ export function validateSelectedExpectations(expected, ledger, ledgerHash, previ
     batches.add(cohort.original_batch_id);
     for (const member of cohort.members) {
       const row = actual.get(member.component_id);
-      needSelected(keys(member, ['component_id','target_id','disposition','geometry_sha256']) && row &&
+      const nativeOnly=row?.representation==='native-cells', representationHash=nativeOnly?'native_rows_sha256':'geometry_sha256';
+      const canonical=value=>Array.isArray(value)?value.map(canonical):value&&typeof value==='object'
+        ?Object.fromEntries(Object.keys(value).sort().map(key=>[key,canonical(value[key])])):value;
+      const actualHash=nativeOnly?sha256(Buffer.from(JSON.stringify(canonical(row.native_rows))+'\n')):row?.geometry_sha256;
+      needSelected(keys(member, ['component_id','target_id','disposition',representationHash]) && row &&
         !members.has(member.component_id) && text(member.target_id) &&
-        ['assigned','zero-cell'].includes(member.disposition) && hash(member.geometry_sha256) &&
-        ['target_id','disposition','geometry_sha256'].every(key => row[key] === member[key]), 'member differs from selected ledger');
+        ['assigned','zero-cell'].includes(member.disposition) && hash(member[representationHash]) && actualHash===member[representationHash] &&
+        ['target_id','disposition'].every(key => row[key] === member[key]), 'member differs from selected ledger');
       members.set(member.component_id, member);
     }
   }
@@ -595,6 +599,25 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
             !/^[a-f0-9]{40}$/.test(requestPin.git_blob_oid ?? '') || !/^[a-f0-9]{40}$/.test(requestPin.commit ?? '')) continue;
         restoredRequest = await pinnedJSON(requestPin);
         if (!restoredRequest.additive?.owner_parts?.some(part => added.has(part.path))) continue;
+      }
+      if (authority.kind === 'source-target-native-custody-v1') {
+        needSelected(authority.version === 1 && keys(authority,['version','kind','source_evidence','native_patch']),
+          'unsupported source-target authority');
+        pin(authority.source_evidence); pin(authority.native_patch);
+        const rule=await pinnedJSON(entry.rule_preimage), evidence=await pinnedJSON(authority.source_evidence);
+        needSelected(rule.version===1&&rule.kind==='source-target-native-rule-v1'
+          &&keys(rule,['version','kind','source_evidence','native_patch'])
+          &&same(rule.source_evidence,authority.source_evidence)&&same(rule.native_patch,authority.native_patch),
+          'source-target rule/input join differs');
+        needSelected(evidence.version===1&&evidence.kind==='source-target-native-evidence-v1'
+          &&Array.isArray(evidence.families)&&evidence.families.length>0&&Array.isArray(evidence.targets)&&evidence.targets.length>0,
+          'missing source-target evidence roles');
+        for (const role of ['catalogue','physical_evidence','physical_input','physical_reproduction','owner_roster','native_latitudes']) pin(evidence[role]);
+        for (const family of evidence.families) {
+          needSelected(text(family.source_id)&&Array.isArray(family.parts)&&family.parts.length>0,'missing complete source family roles');
+          for (const part of family.parts) pin(part);
+        }
+        continue;
       }
       needSelected(authority.version === 1 && authority.kind === 'original-issued-rule-source-custody-v1' &&
         keys(authority.original_pins, ['ledger','native_facts','native_manifest','native_request','source_facts','source_request']),

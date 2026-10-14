@@ -1366,3 +1366,36 @@ test('unreachable accepted SOURCE declarations still require administrative cust
     if(invalid)assert.equal(result,null);else assert.equal(result?.test_selection,'selected-data',stats.failure);
   }
 });
+
+// Structural role eligibility only; the source/native reader separately
+// authenticates whole products and actual map-cell ownership.
+function sourceTargetRoleFixture({wrongRule=false,emptyFamily=false}={}) {
+  return fixture({mutate:f=>{
+    const nativeRows=[{y:3,runs:[[4,5,1]]}];
+    f.rows[1]={component_id:'new',target_id:'target-new',disposition:'assigned',native_cells:1,
+      representation:'native-cells',native_rows:nativeRows};
+    f.ledgerBody.rows=f.rows;
+    f.expected.cumulative_native_cells=3;
+    f.expected.cohorts[0].members[1]={component_id:'new',target_id:'target-new',disposition:'assigned',
+      native_rows_sha256:digest(Buffer.from(JSON.stringify([{runs:[[4,5,1]],y:3}])+'\n'))};
+    const roles=Object.fromEntries(['catalogue','physical_evidence','physical_input','physical_reproduction','owner_roster','native_latitudes']
+      .map(role=>[role,f.leaf('source-target-'+role+'.json')]));
+    const evidence=f.put(prefix+'source-target-evidence.json',{version:1,kind:'source-target-native-evidence-v1',...roles,
+      targets:[{id:'target-new'}],families:[{source_id:'source-family',parts:emptyFamily?[]:[f.leaf('source-family-part.json')]}]});
+    const patch=f.leaf('source-target-native-patch.json');
+    const body={version:1,kind:'source-target-native-custody-v1',source_evidence:evidence,native_patch:patch};
+    const authority=f.put(prefix+'source-target-authority.json',body);
+    const rule=f.put(prefix+'source-target-rule.json',{...body,kind:'source-target-native-rule-v1',
+      native_patch:wrongRule?f.leaf('foreign-source-target-patch.json'):patch});
+    f.registryBody.entries.push({authority_sha256:'c'.repeat(64),policy_id:'retained-source-literal-additions',policy_version:1,
+      rule_preimage:rule,rule_sha256:rule.sha256,source_authority:authority});
+    refreshPins(f);
+  }});
+}
+test('source-target native roles and literal native-row expectations use the existing selected-data route',async()=>{
+  const diagnostics={};assert.ok(await sourceTargetRoleFixture().run({metadataDiagnostics:diagnostics}),diagnostics.failure);
+});
+test('source-target native roles reject a rehashed foreign rule join and incomplete family roles',async()=>{
+  assert.equal(await sourceTargetRoleFixture({wrongRule:true}).run(),null);
+  assert.equal(await sourceTargetRoleFixture({emptyFamily:true}).run(),null);
+});

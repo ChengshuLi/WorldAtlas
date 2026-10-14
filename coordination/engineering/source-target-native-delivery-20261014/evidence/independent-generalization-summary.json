@@ -1,0 +1,149 @@
+{
+  "geography_commit": "9431af7bce2729274500f6733843ebd5b1315117",
+  "cases": [
+    {
+      "case": "Boundary river with positive dated water",
+      "cell": [
+        126023,
+        99412
+      ],
+      "observed": "Unassigned. GSHHG maps land, but original February2024 JRC native pixelrow682,col12209 reports water2 at actual canonical cell center.",
+      "required": "Conflicting physical evidence must withhold land assignment.",
+      "result": "passed generic interpreter no-fill control and independent native TIFF block check",
+      "evidence": [
+        "river-native-source-check.json",
+        "river-water-current.json",
+        "additional-heldout-controls.json"
+      ]
+    },
+    {
+      "case": "Lake island and surrounding water",
+      "cells": [
+        [
+          155100,
+          132565
+        ],
+        [
+          155406,
+          132321
+        ]
+      ],
+      "observed": "Ukerewe is GSHHGlevel3 island187174 in LakeVictorialevel2 lake180508 in Africa1; selected/native owner43766 at island, owner0water nearby. Full parent relations supported; exact cell native membership verified.",
+      "required": "Alternate hierarchy levels: islandland is not lakewater; surroundingwater is not assigned.",
+      "result": "passed",
+      "evidence": [
+        "lake-physical-evidence.json",
+        "lake-current.json",
+        "lake-native-and-decision-controls.json"
+      ]
+    },
+    {
+      "case": "Formerly omitted small island with mapped pond",
+      "cells": [
+        [
+          121850,
+          160396
+        ],
+        [
+          121831,
+          160393
+        ]
+      ],
+      "observed": "Inaccessible Island retains stableid atlas:island:geonames:3370905 owner1110; Skua Pond remains owner0. Original hashed dryland/waterWKB agree at nativecell centers.",
+      "required": "Preserve island identity and positive mappedwater exclusion; source-only inventory cannot establish absence of source-omitted islands.",
+      "result": "passed preservation and namedwater interpretation; historical omission uses retained restoration evidence",
+      "evidence": [
+        "river-island-pond-current.json",
+        "additional-heldout-controls.json"
+      ]
+    },
+    {
+      "case": "Fiji dateline split",
+      "cells": [
+        [
+          262158,
+          143557
+        ],
+        [
+          7,
+          143557
+        ],
+        [
+          131083,
+          143557
+        ]
+      ],
+      "observed": "Both seam sides resolve to Cakaudrove gb:FJI:ADM2:14151628B95966095088914 owner19904; same-row Greenwich control unassigned.",
+      "required": "No seam discontinuity or spurious across-world fill. Out-of-range rawFJI coordinates must remain unsupported rather than clamped.",
+      "result": "passed selected/native cell test; rawsource limit reused from retained dateline diagnosis",
+      "evidence": [
+        "dateline-current.json"
+      ]
+    },
+    {
+      "case": "Source-vintage disagreement",
+      "cell": [
+        126031,
+        99379
+      ],
+      "observed": "Unassigned. Original/consumed GB2020 Idanha both miss, DGTCAOP2025 Idanha covers, IGN ZarzalaMayor misses; comparator independently checked sourcecrosswalk and dates.",
+      "required": "Do not call this downstream simplification loss or silently install newer boundary.",
+      "result": "generic disagreement no-fill control passed; administrative polygon memberships reused from comparator rather than rerun",
+      "evidence": [
+        "river-island-pond-current.json",
+        "additional-heldout-controls.json"
+      ]
+    }
+  ],
+  "prototype_readback": {
+    "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+    "files": {
+      "prototype-additive-rows.json": "ee4c6c378ad2bd1cd9b2b5d765be68dfe7ff3bb34de95c7e4e3054b1b2ddc0c1",
+      "source-native-owner-resolved-cells.json": "bf29e9b570fbd05040c1d7c4434623ac66f0e6de8f585642b0240e41e4244270",
+      "family-neighbor-geometries.json": "04f2c021956290d7f73baee4ef78d1f382cce1d5667e0dcc2aae5a71f764e8fe",
+      "all-stage-inputs.json": "f6b617fdbf5cedc183a09e0f62341fe455f9f9ad23ed9cd3aa93dc90e8a8fad2"
+    },
+    "proposed_cells": 13963,
+    "rows": 1846,
+    "runs": 4549,
+    "revalidated_current_owner_conflicts": 0,
+    "independent_unique_native_source_owner_cells": 13963,
+    "withheld_cells": 8140,
+    "owner_counts": {
+      "23028": 704,
+      "23122": 2090,
+      "30271": 8222,
+      "30340": 2772,
+      "48696": 175
+    },
+    "scope": "Independently checks source-owner native membership, exact proposal/evidence set equality and latest pinned ownership. Reuses author physical classification; does not rederive full physical-source support or imply publication."
+  },
+  "limits": [
+    "Nine real current native-cell queries plus six independent small decision-boundary controls; not a random global accuracy estimate.",
+    "No global rebuild, repository edits, publication, or production geography changes.",
+    "The13,963cell proposal check independently verified currentowner and sourceowner membership but reused author GSHHG masks.",
+    "Downstream source-native loss route does not cover complete islands absent from administrative sources. Existing physical-only inventory remains necessary.",
+    "Evidence is source-relative and dated. Positive mapped/observed water cannot be overridden by coarserland; missing water observations do not demonstrate dryness.",
+    "Diagnostic code is an in-progress worker implementation, not a final exact-head PRreview."
+  ],
+  "diagnostic_code_hashes": {
+    "scripts/diagnose-map-cell.mjs": "4cefc651f474827315cea1fdca86b5a949f8054350463a39b54c5edacb5f9d2b",
+    "src/map-cell-diagnosis.js": "b0fe76c196ad4d744ee6f0e4fed6018fedaf8dacb2e399192fd75919c08da149"
+  },
+  "superseding_user_clarification": {
+    "received": "2026-10-14T02:34:20Z",
+    "territorial_rule": "River-center cells belong to a source-supported location and remain clickable; physical water classification is an independent map layer.",
+    "superseded_claims": [
+      "Boundary-river positivewater by itself must withhold all territorial assignment.",
+      "Physical land/water disagreement by itself precludes source-supported territorial ownership."
+    ],
+    "preserved_findings": [
+      "JRC native positivewater observation and source hashes.",
+      "Currentowner0 readback.",
+      "No nearest-neighbor donations; source-defined membership and current owner preservation.",
+      "Explicit territorial exclusions and source-owner ambiguity remain respected."
+    ],
+    "revised_boundary_river_control": "JRCwater plus independently established Alcantara-to-Brozas territorial source lineage permits consideration for Brozas assignment; no cell installed by this review.",
+    "replacement_evidence": "/tmp/worldatlas-river-ownership/river-territorial-admission-summary.json"
+  }
+}

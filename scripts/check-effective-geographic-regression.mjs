@@ -6,6 +6,7 @@ import {createHash} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
 import {fileURLToPath} from 'node:url';
 import {nativePolygonIntervals,NATIVE_GRID_METHOD} from '../src/native-grid.js';
+import {nativeOnlyComponent} from '../src/native-grid.js';
 import {unshuffleOwnershipBytes} from '../src/ownership-codec.js';
 import {readSelectedAdditive,selectedAdditiveRows,compareVersionedRepairLedgers} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 
@@ -756,10 +757,30 @@ export function newVisibleRepairCandidates(before,after) {
 // native sample inside each new primitive that changes from unowned to its owner.
 // A positive aggregate or a sibling's unrelated changed cell cannot pass.
 export function repairVisibilityWitnesses({candidates,size,latitudes,beforeRows,afterRows}) {
+  demand(Array.isArray(candidates),'Visibility candidate array required');
   const before=ownerRows(beforeRows,size),after=ownerRows(afterRows,size),ys=[...before.keys()];
   demand(JSON.stringify(ys)===JSON.stringify([...after.keys()]),'Visibility before/after row scope differs');
-  const index=indexCandidates(candidates),witnesses=new Map();
-  for(let k=0;k<ys.length;){
+  const ids=new Set(),witnesses=new Map();
+  for(const candidate of candidates){
+    demand(typeof candidate.component_id==='string'&&!ids.has(candidate.component_id),'Duplicate/missing visibility component');
+    ids.add(candidate.component_id);
+    if(candidate.representation!=='native-cells')continue;
+    nativeOnlyComponent(candidate,visibilityDigest);
+    for(const row of candidate.native_rows){
+      if(witnesses.has(candidate.component_id)||!before.has(row.y))continue;
+      for(const [start,end]of row.runs){
+        for(const [left,right]of emptySpans(start,end,before.get(row.y))){
+          const hit=after.get(row.y).find(run=>run[2]===candidate.pixelIndex&&Math.max(left,run[0])<Math.min(right,run[1]));
+          if(hit){witnesses.set(candidate.component_id,{component_id:candidate.component_id,
+            native_rows_sha256:visibilityDigest(candidate.native_rows),x:Math.max(left,hit[0]),y:row.y,
+            previous_owner:0,candidate_owner:hit[2]});break;}
+        }
+        if(witnesses.has(candidate.component_id))break;
+      }
+    }
+  }
+  const index=indexCandidates(candidates.filter(row=>row.representation!=='native-cells'));
+  for(let k=0;index.length&&k<ys.length;){
     const start=ys[k];let end=k+1;while(end<ys.length&&ys[end]-start<4096)end++;
     const native=nativePolygonIntervals(index,{size,latitudes,rowStart:start,rowEnd:ys[end-1]+1});
     for(let n=k;n<end;n++){

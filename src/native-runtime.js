@@ -1,36 +1,8 @@
+import {nativeRuntimeIndex} from './native-grid.js';
+export {nativeRuntimeIndex,polygonParts,nativeOnlyComponent,deriveSourceTargetNativeDelta} from './native-grid.js';
 // Native geometry input for location ownership. Camera projection is separate;
 // this adapter does not change geographic facts or stable source identities.
 import {compileNativeOwnership} from '../scripts/native-ownership/compile-native-ownership.mjs';
-
-export function nativeRuntimeIndex(features) {
-  if (!Array.isArray(features)) throw Error('Explicit native feature roster required');
-  const ids=new Set(),owners=new Set();
-  const index=features.map(feature=>{
-    const owner=feature.pixelIndex,geometry=feature.geometry;
-    if (typeof feature.id!=='string' || !feature.id || ids.has(feature.id) ||
-        !Number.isInteger(owner) || owner<1 || owners.has(owner))
-      throw Error('Native runtime requires unique original IDs and explicit stable owner indices');
-    ids.add(feature.id);owners.add(owner);
-    if (!['Polygon','MultiPolygon'].includes(geometry?.type)) throw Error('Original native geometry required');
-    const polygons=geometry.type==='Polygon'?[geometry.coordinates]:geometry.coordinates;
-    if (!Array.isArray(polygons) || !polygons.length) throw Error('Original native polygons required');
-    return {index:owner,polygons:polygons.map(polygon=>{
-      if (!Array.isArray(polygon) || !polygon.length) throw Error('Original native rings required');
-      return polygon.map(ring=>{
-        if (!Array.isArray(ring) || ring.length<4) throw Error('Original native closed ring required');
-        const result=new Float64Array(ring.length*2);
-        ring.forEach((point,i)=>{
-          if (!Array.isArray(point) || point.length!==2 || !point.every(Number.isFinite) ||
-              Math.abs(point[0])>180 || Math.abs(point[1])>90) throw Error('Original lon/lat coordinates required');
-          result.set(point,i*2);
-        });
-        if (result[0]!==result.at(-2) || result[1]!==result.at(-1)) throw Error('Original native closed ring required');
-        return result;
-      });
-    })};
-  });
-  return index.sort((a,b)=>a.index-b.index);
-}
 
 // Both renderers receive the same compact rows/words. No Float64 rule table is
 // regenerated from browser Math functions; callers supply its verified bytes.
@@ -57,3 +29,4 @@ export async function compileNativeRuntime(features,{size,latitudes,rowBlock=409
   for (const piece of pieces) runs.set(piece.words,piece.offset);
   return {version:result.version,coordinateBits:result.coordinateBits,size,method:result.method,rows,runs};
 }
+
