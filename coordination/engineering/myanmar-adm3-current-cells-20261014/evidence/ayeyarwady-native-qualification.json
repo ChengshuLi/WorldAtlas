@@ -1,0 +1,157 @@
+{
+  "version": 1,
+  "kind": "completed-standalone-native-authority",
+  "execution_commit": "2ab238d1e5f5053661e94c2cd57aeabf555e0b59",
+  "inputs": {
+    "source_evidence": {
+      "commit": "2ab238d1e5f5053661e94c2cd57aeabf555e0b59",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/source-evidence.json"
+    },
+    "native_patch": {
+      "commit": "2ab238d1e5f5053661e94c2cd57aeabf555e0b59",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/ayeyarwady-native-patch.json"
+    }
+  },
+  "observation": {
+    "availableBytes": 2036957184,
+    "currentRssBytes": 53493760,
+    "concurrentReservedBytes": 0
+  },
+  "allowance": {
+    "phaseBytes": 1071972352,
+    "rssBytes": 1071972352
+  },
+  "charged_phase_bytes": 273230405,
+  "elapsed_seconds": 1.1740807079999995,
+  "runtime": {
+    "node": "v24.19.0",
+    "uv": "1.52.1"
+  },
+  "node_max_rss_bytes": 184467456,
+  "qualified_targets": 9,
+  "qualified_cells": 5668,
+  "rule_sha256": "c5784c640b8828b2c9bcab076cb42133451bb577a7ca2f9723707cfbce23ab2e",
+  "component_ids": [
+    "source-target:25c06a332149470184798dff498a86d1205133b89134f38cda7cee8be83801f9",
+    "source-target:382b186149554364d18b7e6b045128ab414b41409425827797747b00c1244e14",
+    "source-target:5624e22c814e52d3e3f750dc755e4d5463434dca754237c2e1600153b34fe740",
+    "source-target:945d5a9b4461b154fb3adc793f6f148fffa03b1fd3dbf32bc417c274942cda0f",
+    "source-target:9fcdc5a551cc8f175f84b7d8d92126eeb0e33b400a2edc79f8e278e0b82a6476",
+    "source-target:ae74b0e26694017a6f1320501cba92add2e56212d8af4ad9533ed49ae296b21c",
+    "source-target:b155ffd0959d23f8f647a880dcf66839632894c09e31914dc10702bd669f0bf5",
+    "source-target:dee68340ba9e1f6a62acc29b0b97ecc6e860d321f8ef8c84292361304bd5e5e5",
+    "source-target:fea855599ed853fde8849380bb34d914e05e04d95f58ba731efe0231acdeb021"
+  ],
+  "products": [
+    {
+      "path": "original-rule-preimage.json",
+      "bytes": 720,
+      "sha256": "c5784c640b8828b2c9bcab076cb42133451bb577a7ca2f9723707cfbce23ab2e"
+    },
+    {
+      "path": "authority-binding.json",
+      "bytes": 723,
+      "sha256": "52c203791635f1c8139fafe51d133b296b8d30a876303284abddf57a4abb639c"
+    },
+    {
+      "path": "ledger.json",
+      "bytes": 114855,
+      "sha256": "60f45e1b4b9d2ee00cf8083f30a5d1b409c3691c7a7b426d3bdfcabe693753c1"
+    }
+  ],
+  "input_inventory": [
+    {
+      "commit": "2ab238d1e5f5053661e94c2cd57aeabf555e0b59",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/source-evidence.json",
+      "mode": "100644",
+      "git_blob_oid": "31d48a815534e219c7ba6b5ee383db7b7d862682",
+      "bytes": 27275,
+      "sha256": "e004cad6b47c6a436297d80425f4023018305cc84825d85ec9cf30c903d69f91",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "2ab238d1e5f5053661e94c2cd57aeabf555e0b59",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/ayeyarwady-native-patch.json",
+      "mode": "100644",
+      "git_blob_oid": "f86b2921856dd7521d55df2060b23a56e9a36c9f",
+      "bytes": 73139,
+      "sha256": "33c67ac55c78fee2ac36331df9f9e379fd9baa6ec982c40e0cb303f54869fa64",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "2ab238d1e5f5053661e94c2cd57aeabf555e0b59",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+      "mode": "100644",
+      "git_blob_oid": "09afab19371f0814da61e79e5f310c5fb2405b6d",
+      "bytes": 403376
+    },
+    {
+      "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+      "mode": "100644",
+      "git_blob_oid": "09afab19371f0814da61e79e5f310c5fb2405b6d",
+      "bytes": 403376,
+      "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "e6739afeafb57eff3856abb15f23129d7e7a7117",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/ayeyarwady-original-stage-inputs.json",
+      "mode": "100644",
+      "git_blob_oid": "0517d4f13f07a96f5b2e13fa9e20253f77056533",
+      "bytes": 288912,
+      "sha256": "4f44601c024b9938214cb17c76ba83a2f4711869241dca230c1b3f46726c35dc",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "8296eee4a79303aab14f37987769548a5404fe6a",
+      "path": "coordination/engineering/source-target-native-delivery-20261014/evidence/physical-reproduction.py",
+      "mode": "100644",
+      "git_blob_oid": "73e005238c929a901185abb8321c419e7cd9f688",
+      "bytes": 5450,
+      "sha256": "05af43d7d7722e8d7bb201f5876a43d9c7f9a2d0f4ea39e467229351a35c9bc3",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+      "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+      "mode": "100644",
+      "git_blob_oid": "de6905e162dc031b1b93248fae91190c39c4ad53",
+      "bytes": 1851757,
+      "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "e6739afeafb57eff3856abb15f23129d7e7a7117",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/ayeyarwady-physical-support.json",
+      "mode": "100644",
+      "git_blob_oid": "b4c735103ef1eaef7b1a403ab501252b879f4e6f",
+      "bytes": 864579,
+      "sha256": "b0d46de2cc907aa7bf28cc87bead4a730efb91450600a5ecec418bd2ae5acb3f",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "7e423077552651d6ec1d6bf6b879c34e956f985a",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/owners.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "9c44513df64995d417dd3832ae604c703e84a506",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz",
+      "mode": "100644",
+      "git_blob_oid": "6a91fcb22b44ae00401a0068a6c3e62bfed62374",
+      "bytes": 1396414,
+      "sha256": "57de50a588f418601412bb7a34cc2f43a3fd6d7d6f16635cb41b95e5ae505db6",
+      "whole_body_consumed": true
+    }
+  ],
+  "limits": [
+    "Physical interpretation and semantic reconciliation are retained reviewed source evidence; actual current owner-zero is checked by native consumers.",
+    "Existing admitted authority qualifies original source/physical/native coverage; current owner-zero consumption and final selected conservation are pending.",
+    "No external process-tree cleanup, live aggregate RSS, deployment or repair acceptance claimed."
+  ]
+}

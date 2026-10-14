@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "kind": "standalone-operating-summary",
+  "phase": "source",
+  "execution_commit": "999311cb46f49f9e844526370bfa136e4d2bb1f7",
+  "input_commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+  "program_sha256": "aeb93f1ae091b805a134c1d6fecadd1e862ef8850fd3c382fb2666a50c295236",
+  "exit_code": 0,
+  "observed_wall_seconds": 11.155867459019646,
+  "observed_darwin_max_rss_bytes": 570834944,
+  "admission": {
+    "observed_at": "2026-10-14T10:30:53.074Z",
+    "observation": {
+      "availableBytes": 1810333696,
+      "currentRssBytes": 51380224,
+      "concurrentReservedBytes": 0
+    },
+    "allowance": {
+      "phaseBytes": 956547072,
+      "rssBytes": 956547072
+    },
+    "node": "v24.19.0",
+    "uv": "1.52.1"
+  },
+  "known_input_runtime_reserves_bytes": 348148443,
+  "planned_wall_seconds": 600,
+  "private_complete_operating_record_sha256": "7e0596ec2d02101af0edc278ca09fc6bc34997190ce5ad2c1b6d5d3e6f4d04b4",
+  "scientific_output_sha256": "a6a59a039760c38cb9bba81a05f5d86c14c2a94884156d9739628559ac7c21a3",
+  "limits": [
+    "Standalone source investigation, not native repair or approval.",
+    "Deadline/process-tree cleanup/live RSS and log enforcement unavailable and not claimed.",
+    "Source program enforces its own raw-plus-decoded input and ordinary output caps.",
+    "Darwin time records child lifetime RSS, not aggregate process-tree RSS.",
+    "Summary projection omits local executable/cache paths; original operating record retained privately.",
+    "This is not a SOURCE/NATIVE-v2 qualified receipt or process-tree enforcement claim."
+  ]
+}

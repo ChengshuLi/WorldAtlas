@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "kind": "exploratory-source-pre-execution-review",
+  "program": "coordination/engineering/myanmar-adm3-current-cells-20261014/independent-review/qualify-ayeyarwady.py",
+  "program_bytes": 18701,
+  "program_sha256": "aeb93f1ae091b805a134c1d6fecadd1e862ef8850fd3c382fb2666a50c295236",
+  "input_commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+  "scope": {
+    "complete_parents": 4,
+    "complete_children": 16,
+    "land_candidates": 5888,
+    "source_relative_holds": 1181,
+    "families": 11,
+    "retained_features": 8489,
+    "advertised_IND_ADM3_features": 6836,
+    "retained_IND_ADM3_features": 6822
+  },
+  "prospective_charge": {
+    "raw_plus_decoded_input_bytes": 204678049,
+    "code_and_output_reserve_bytes": 34603008,
+    "complete_prospective_bytes": 239281057
+  },
+  "independent_static_assessment": "Pass for exact fixed-cohort exploratory run, conditional on current resource admission. Full child roster, row intersections, separate India metadata, mismatch failed-output/exit1 path and country/hole/boundary checks inspected without GIS execution.",
+  "execution_status": "not-run",
+  "limits": [
+    "No original GSHHG, native conservation or territorial approval.",
+    "Exact execution commit/runtime and fresh current-owner applicability must accompany downstream use."
+  ]
+}
