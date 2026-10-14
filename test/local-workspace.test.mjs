@@ -526,6 +526,18 @@ test('exact commit inspection refuses non-commits and ignores replacement-object
     assert.equal(fs.readFileSync(path.join(entry.path, 'README.md'), 'utf8'), 'root');
     manager.release({worker: profile, slot: 'review', token: entry.token});
   }
+  git('replace', '-d', oid);
+  fs.writeFileSync(path.join(repo, 'README.md'), 'foreign replacement commit tree');
+  git('add', 'README.md'); git('commit', '-m', 'replacement commit fixture');
+  git('replace', head, git('rev-parse', 'HEAD').trim());
+  assert.equal(manager.inspect({commit: head}).inputs.find(row => row.path === 'README.md').bytes, 4);
+  for (const profile of ['sparse', 'full']) {
+    const entry = manager.allocate({worker: profile, slot: 'review', commit: head, profile});
+    assert.equal(fs.readFileSync(path.join(entry.path, 'README.md'), 'utf8'), 'root');
+    const released = manager.release({worker: profile, slot: 'review', token: entry.token});
+    assert.equal(released.head, head);
+    assert.equal(git('rev-parse', released.preservedRef).trim(), head);
+  }
 });
 
 test('missing root and descendant tree metadata are classified before any blob sizing', t => {
