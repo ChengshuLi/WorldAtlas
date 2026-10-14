@@ -1805,8 +1805,8 @@
     },
     {
       "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/final-selection/final-metadata-preparation-receipt.json",
-      "bytes": 2835,
-      "sha256": "c02f2f40ce7c1a6e3eaa0cad748b4f70cae61d5515792e2bf33f05452ed65845",
+      "bytes": 3976,
+      "sha256": "b794f16c83c60637b22ea4fcf62f307175f35efb2a304a4f3c0fc5e0a4ac0787",
       "hash_kind": "file-bytes"
     },
     {
@@ -1823,8 +1823,8 @@
     },
     {
       "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/final-selection/runtime-envelope.json",
-      "bytes": 1507,
-      "sha256": "141d0a0ebea4cd7c4a4f6e1a499132de22c2e7a12eeb803ea1e952161bee4e0a",
+      "bytes": 1387,
+      "sha256": "5b8daad1c36213951187ce09b173e0fbeffcc47006ed7443bd2b295a09bd6c1b",
       "hash_kind": "file-bytes"
     },
     {
@@ -1836,13 +1836,13 @@
     {
       "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/final-selection/selection-sidecar.json",
       "bytes": 3523,
-      "sha256": "041c6088bc2486c4861c1a9e0f49e48cfece0523316dec311e6f59f3fcb29f62",
+      "sha256": "04a02db0b915d398c1ca65c0efcfc8872220fa09d385de213b44994227a254a5",
       "hash_kind": "file-bytes"
     },
     {
       "path": "data/ownership-selection.json",
       "bytes": 1602,
-      "sha256": "71e17c84531282d142627e9a838f0368005579b08196f8aaf88b244a3f5c3994",
+      "sha256": "6771432f27c85e800b4f9129c3f2855166e7f79c46d4b565dd3e9d76ba03cfcf",
       "hash_kind": "file-bytes"
     }
   ],
@@ -1895,6 +1895,13 @@
       "description": "Retain the actual final metadata preparation against accepted Vietnam a9c2d4122eed9d08cd3f213d3f5157039c8823bb. Literal preservation of its 184 raw rows, 43 authorities, 43 expectation cohorts and 9,224 patch runs is recorded separately from normalizer equivalence. Appending the unchanged eight-target IDN proposal yields 37,630 candidate native cells, 44 authorities and 192 raw ledger rows. Final assets and the parent-pinned candidate sidecar/hook are data-only artifacts; no source constructor, physical science, full registry/source-closure qualification, current-owner-zero bank readback, selected consumption/no-loss, emitted package or queue acceptance is claimed by this metadata step. Accepted repair credit remains pending and zero. Historical 28,148-cell/43-authority/116-row proposal, original 344 subjects and original immutable pins remain retained. This manifest change requires the applicable full CI route; it does not assert selected-data profile eligibility.",
       "software": "Recorded existing normaliseRetainedRepairLedger/compareVersionedRepairLedgers and finite metadata preservation checks; no scientific rerun or independent review by this manifest author.",
       "units": "Candidate native cells, raw ledger rows, authorities, expectation cohorts and preserved native runs."
+    },
+    {
+      "id": "runtime-flat-public-alias-binding-correction",
+      "kind": "code",
+      "description": "Correct only final runtime ledger.path and patch.path to accepted flat additive-repairs public aliases after the retained package attempt failed with Unsafe additive public asset path. Actual corrected runtime at 03b0ced3caa0e7e439d1455b7dca4bd634e1e475 is 1,387 bytes; its sidecar pin/hook and receipt are refreshed to those exact bytes. Ledger, registry, patch, target/hold scope and prior scientific qualification remain literally unchanged. The pre-correction geography pass and package failure remain historical attempt evidence; they do not approve the corrected current candidate. Fresh full CI/package/consumer proof and renewed exact-head review remain required. This binding repair runs no scientific operator or source/native constructor. The original issue-specific repository paths were composed manually in candidate runtime metadata. The correction copies the accepted Vietnam flat public aliases; the accepted package producer/publisher is unchanged, and no new per-batch wrapper or framework is introduced.",
+      "software": "Existing preparePackageSelectedAdditive public-asset contract and existing evidence validator; no new algorithm or scientific execution.",
+      "units": "Actual runtime-envelope bytes; unchanged proposed native cell counts."
     }
   ],
   "metrics": [
@@ -2797,6 +2804,18 @@
         "commit": "candidate"
       },
       "evaluation_commit": "5ab660cb68821e6b719f1b86819069ecac419ce1"
+    },
+    {
+      "id": "final-runtime-public-envelope-bytes",
+      "value": 1387,
+      "unit": "bytes",
+      "vintage": "archived",
+      "input_sha256": "5b8daad1c36213951187ce09b173e0fbeffcc47006ed7443bd2b295a09bd6c1b",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/final-selection/runtime-envelope.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "03b0ced3caa0e7e439d1455b7dca4bd634e1e475"
     }
   ],
   "metric_bindings": [
@@ -3174,6 +3193,11 @@
       "metric_id": "physical-planning_ceiling_bytes",
       "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/physical/summary.json",
       "json_pointer": "/physical_process_planning_ceiling_bytes"
+    },
+    {
+      "metric_id": "final-runtime-public-envelope-bytes",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/final-selection/final-metadata-preparation-receipt.json",
+      "json_pointer": "/runtime_public_asset_correction/after/bytes"
     }
   ],
   "summaries": [],
@@ -3229,6 +3253,14 @@
     },
     {
       "text": "Final-selection candidate metadata preserves accepted Vietnam a9c2d412 cumulative 25,860 cells and appends the unchanged 11,770-cell IDN proposal, giving 37,630 candidate cells, 44 authorities and 192 raw rows. Current-owner-zero, registry/source consumption, no-loss/readback, emitted-package validation, independent exact-head review and queue acceptance remain pending; no accepted repair credit is claimed.",
+      "status": "supported",
+      "source_ids": [
+        "gb:IDN:ADM2",
+        "gshhg-original-physical"
+      ]
+    },
+    {
+      "text": "The package attempt failed because final runtime ledger/patch names were not valid flat public aliases. Only those runtime paths and their byte-bound sidecar/hook/receipt were corrected; all 37,630 candidate cells and prior source/native qualification remain unchanged. Historical geography success is not current-candidate approval; fresh corrected-head CI, package/consumer proof and exact-head review remain pending.",
       "status": "supported",
       "source_ids": [
         "gb:IDN:ADM2",

@@ -33,6 +33,29 @@ resolution disagreement and supplies no clipping or territorial exclusion rule.
 Only nonempty mapped land support is selected; measured empty inland-water
 GeometryCollections remain unchanged in the complete physical report.
 
+## Package correction and current proof
+
+The retained pre-correction workflow's geography job passed, but its package job
+failed with `Unsafe additive public asset path`. Both outcomes describe that
+historical candidate and remain retained; neither approves the corrected head.
+The issue-specific repository paths were composed manually in candidate runtime
+metadata. The correction copies Vietnam's accepted public aliases; the accepted
+package producer/publisher is unchanged and no per-batch wrapper or framework
+was introduced. The package producer requires flat public aliases for the runtime
+assets. Only
+the final runtime's ledger and patch paths were changed to
+`additive-repairs/retained-activation-ledger.json` and
+`additive-repairs/retained-activation-patch.json`. The corrected runtime is
+1,387 bytes at `03b0ced3caa0e7e439d1455b7dca4bd634e1e475`; the candidate sidecar
+and hook now pin its actual bytes. The final metadata receipt records the failed
+attempt and before/after descriptors. Ledger, registry, patch, counts, targets,
+holds and source/native qualification remain literally unchanged.
+
+Accepted input-support repair `5be73b8d` is adopted. Fresh full CI, corrected-head
+package/consumer validation and renewed exact-head review remain required. No
+scientific rerun, current-candidate gate pass or accepted repair credit is inferred
+from this path correction.
+
 ## Actual phases and limits
 
 The physical run took 5.80029775 seconds and observed 921,075,712 bytes direct-child
