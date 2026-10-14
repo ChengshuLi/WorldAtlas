@@ -315,3 +315,33 @@ a direct repair target can retain Cu Chi as a Hồ Chí Minh competitor, or Hoa 
 and Lien Chieu as Đà Nẵng competitors, without claiming physical support for those
 cities. Actual held-case qualification, current owner-zero checks, source limits,
 selection and publication remain separate from this engineering capability.
+
+## Requested cells outside retained reconstruction residuals
+
+The source-target authority constructor can qualify requested native cell centres
+outside complete retained `missing_reconstruction` and `extra_reconstruction`
+pointsets. This does not clear those whole-source issues or repair their geometry.
+The original physical evidence and its receipt stay unchanged.
+
+The exception requires the existing complete support operation roster and all
+three hierarchy operations. Each nonempty missing/extra operation must have
+exactly one issue containing the identical complete geometry. Omitted, duplicate,
+empty-issued, mismatched, unknown and nonpolygon witnesses fail. Contradictory
+land/water support and hierarchy disagreements must be exact empty pointsets;
+their observed nonempty operations still fail when their issues were omitted.
+Genuine legacy issue-free sparse support keeps its existing route. A present
+nonempty or malformed residual cannot bypass validation through an empty issue
+list. No new evidence field or receipt is required.
+
+The existing exact native scan uses the same authenticated latitude table and
+separate original polygons and holes. Every requested interval is checked against
+residual interiors and all boundary ties. Any contact rejects the request without
+trimming its cells. Since patch rows identify accepted owners rather than source
+members, every measured sibling's residual conservatively vetoes that owner's
+requested cells. Other owners' residuals do not veto an unrelated owner.
+
+Source coverage must still intersect its exact original member before accepted
+owner union. Source/coverage boundaries, competing owners, territorial exclusions,
+current ownership, source authority limits and actual selected-release checks
+retain their existing treatment. This is cell-domain qualification capability;
+actual country qualification, selection and publication remain separate.
