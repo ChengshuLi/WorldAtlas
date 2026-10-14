@@ -1,0 +1,480 @@
+{
+  "version": 1,
+  "issue": 1848,
+  "lane": "engineering",
+  "worker_id": "01a137b3-9c10-702e-9459-1d7fe0ce303c",
+  "subject_ids": [
+    "physical-component:9f5d178736a1a6549f7660e6d048e61923c33865d08f91445a5237ce20d4e29b",
+    "physical-component:ae27cc3d8e51ae163f2052f4455cb072bca1960607d7de8fb8cc087e8257f79b"
+  ],
+  "subject_ids_sha256": "2d94103ab4e3c3d1a3ba8c9f7d8cf97c2532db43b6effc7ccf0328ed0775594b",
+  "baseline": {
+    "commit": "a35ba193cfe5c84424a4952ca752593ebf9d7102",
+    "files": [
+      {
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-005/administrative-source-rule-fit.json",
+        "bytes": 1688243,
+        "sha256": "77aec8595ae41b03f595f28e14c05b5fa09e1a98e15a918dbe0c49cb95866f3b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-005/component-state-318.json",
+        "bytes": 505063,
+        "sha256": "8aaa5d4558eb5137775c159ec234d3dc2a9a90ae965aeaaf27086a63d0462cfd",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-005/family-roster-122.json",
+        "bytes": 39180,
+        "sha256": "acb22105b074fefca33b84488d0d0322ebdba3195a3eff4b0421f53668e651ef",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-15.json",
+        "bytes": 5180426,
+        "sha256": "6f763059820d14a4eab78173a756a8869821dd810e94f77c20eb5510c6cfb1df",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/report.json",
+        "bytes": 57840,
+        "sha256": "2a5b59198681d50f577bc4c2c321174f166aec14f57c7564100fc411ae940df0",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-043-002/components-043.jsonl.gz",
+        "bytes": 1224451,
+        "sha256": "92cc54b70c66cfc4fa0202a8190bf69399a206c910f514a98da2e3f42fea135d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/vintages/cohort100-physical-custody-001/components-047.jsonl.gz",
+        "bytes": 1187023,
+        "sha256": "e418e6cf92971f0afc047b2782fcb035e1f6305c136969469cb8be085089e82d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/ukraine-original-singleton-source-fit-20261010/vintages/physical-restoration-001/sources-000.jsonl.gz",
+        "bytes": 2173285,
+        "sha256": "aaf5e4f099ab25c6e6f96632787f1654ba6054ed378fd591b360e36274ffc264",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/ukraine-original-singleton-source-fit-20261010/vintages/physical-restoration-001/receipt.json",
+        "bytes": 2676,
+        "sha256": "8ef08a5125ca2bde3858f6f165cce2bd559a0abfd7996f1a5d24fdeaf0929147",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/report.json",
+        "bytes": 103877,
+        "sha256": "3527014045c5aedc2b26be8bb5dff97e3e34097b7d4cb66a9b2fe3fcf33a6856",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-operational-batches-000.json.gz",
+        "bytes": 343242,
+        "sha256": "ebce7a1993e62afc589e6e89ec8b9a082551f57d69a3eaf9364ec9dabc9c2efc",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-batches-000.json.gz",
+        "bytes": 1660397,
+        "sha256": "26e8bef1c066f00ad84a03a73505dba1daaeb65315de9419a24aaf9a6d08f722",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-batches-001.json.gz",
+        "bytes": 1674139,
+        "sha256": "7548a2b3ab10339e64ec6432afedda84e21502eb392ee94ace5b0e2f2e6e2de8",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-batches-002.json.gz",
+        "bytes": 1783037,
+        "sha256": "c5eadb68c3c9c03abf5568e7455777b9bea9774e13b9767da476bb8247bbe765",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-batches-003.json.gz",
+        "bytes": 1598911,
+        "sha256": "71ca9168a7c26f6aeee948f18600bbe00c2eeb5515ec22e0d8e9143551b4f7f7",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-batches-004.json.gz",
+        "bytes": 1694391,
+        "sha256": "1fd21e659e1bf23deab5f8970e0a1124ac3f3cf654e758f4a85eb27fba49fff6",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-batches-005.json.gz",
+        "bytes": 1029511,
+        "sha256": "4802ca960cf92d1546ae4348abe86e4b5588056c8f1581d11afcea68cb35b4e8",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/administrative-sources.json",
+        "bytes": 661416,
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+        "bytes": 403376,
+        "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz",
+        "bytes": 1396414,
+        "sha256": "57de50a588f418601412bb7a34cc2f43a3fd6d7d6f16635cb41b95e5ae505db6",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/current-f02-coordinate/certificate.json.gz",
+        "bytes": 7515239,
+        "sha256": "23aef083ceeabff7d76e7da2a6d047e9dc30b40a3e9b03e122492c4d41c9cd7e",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/ownership-selection.json",
+        "bytes": 1603,
+        "sha256": "302f439559e69318b55aa3723946116b41dcc26d58e22b9549548f60d7d69299",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography-bank.json",
+        "bytes": 14656,
+        "sha256": "3750f72a48bb9fd498ca129e20e299904239bfe1b4191919fbc89b636234c776",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/world-index.json",
+        "bytes": 944,
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/release-001/selection-sidecar.json",
+        "bytes": 3521,
+        "sha256": "9d7c827eef311f6c5a2bfc23fdfbe29aaf9219832443cf7277ed6e9f23697d9f",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/assembly-001/ledger.json",
+        "bytes": 1231582,
+        "sha256": "f8d81b595770a1f307d8bc31c18fde3ba0bf8494ecdd2fb8bc135ead07a95862",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/assembly-001/envelope.json",
+        "bytes": 1423,
+        "sha256": "876375b9b4dd447390042460f47b88790cc7b398b18dc862d33d567ac6eb6504",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "original_source_fit": "77aec8595ae41b03f595f28e14c05b5fa09e1a98e15a918dbe0c49cb95866f3b"
+    },
+    "pin_files": {
+      "original_source_fit": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-005/administrative-source-rule-fit.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "accepted-sea318",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/pull/1656",
+      "role": "Retained original source predicates, original pointsets and comparison custody; no new physical interpretation",
+      "vintage": "source-rule-fit-005; MMR ADM3 represented year 2019",
+      "retrieved_at": "2026-10-14",
+      "license": {
+        "status": "redistributable",
+        "terms": "Retained MMR source metadata declares Creative Commons Attribution 4.0; original attribution retained."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Read whole pinned original MMR source, complete existing AUS043/Congo047 physical restorations and UKR sources000; no new inverse, source overlay or GIS replay.",
+      "limit": "Dated source-relative evidence; current physical/legal truth, feature observation dates, cause and authority remain unknown. SOURCE/NATIVE qualification and selection remain outstanding.",
+      "temporal_status": "reference"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "coordination/engineering/mmr-visible-two-20261014/custody/inputs.json",
+      "bytes": 1253,
+      "sha256": "57272ee1b0a17ae8efd9fc2735babeca8fba570fb04580bca4ea1bb118b2732e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/mmr-visible-two-20261014/logs/handoff-001.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/mmr-visible-two-20261014/logs/handoff-001.stdout",
+      "bytes": 149,
+      "sha256": "9e979cfc3b8f7d6db68b91d6d7c8ef5d6701936162dbeadb37d4d60ccc8abaef",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/mmr-visible-two-20261014/logs/neighbors-001.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/mmr-visible-two-20261014/logs/neighbors-001.stdout",
+      "bytes": 430,
+      "sha256": "1d8bd37f98839f434aaca3db4e747ad9f5d35e33c8d3742ff577e5de89bf732e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/mmr-visible-two-20261014/logs/npm-ci-001.stderr",
+      "bytes": 466,
+      "sha256": "eef4b12b8e6714963f2acd36897e9a739cff9408499b714fe67ad13c88339bde",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/mmr-visible-two-20261014/logs/npm-ci-001.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/mmr-visible-two-20261014/logs/npm-ci-002.stderr",
+      "bytes": 747,
+      "sha256": "279fafd9cacb8f72edd90e61d5dcf47e04556b878b24368fd38b5a7b1263b196",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/mmr-visible-two-20261014/logs/npm-ci-002.stdout",
+      "bytes": 27,
+      "sha256": "6b78181c2fefb32ddefef0cb8269c9167e21fa3feeaf48247624319c4d5b17d5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/mmr-visible-two-20261014/logs/predicates-001.stderr",
+      "bytes": 1152,
+      "sha256": "b3a57f34234e5844c7093b38f6c1d6515fed108ebb3d986a78fe85809a178c19",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/mmr-visible-two-20261014/logs/predicates-001.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/mmr-visible-two-20261014/logs/predicates-002.stderr",
+      "bytes": 1621,
+      "sha256": "a72130a731d6fe051d910ef5359c2d2bc81d9f0c29179ee2d06dee87c1f0fa82",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/mmr-visible-two-20261014/logs/predicates-002.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/mmr-visible-two-20261014/logs/predicates-003.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/mmr-visible-two-20261014/logs/predicates-003.stdout",
+      "bytes": 858,
+      "sha256": "c7a0959265870c66361d37388255ecbb4b16a1727c90542998dc88e11f8e6e61",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/mmr-visible-two-20261014/logs/safety-001.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/mmr-visible-two-20261014/logs/safety-001.stdout",
+      "bytes": 331,
+      "sha256": "464274dd9a321f8a8f647f49cf24f5802adecebbd27fddd93419e0c8be8b389a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/mmr-visible-two-20261014/vintages/mmr-current-neighbors-001/publication.json",
+      "bytes": 270,
+      "sha256": "2ea8f4d3161aee2b47891b7b398b5c9631fd70d84817d74d0f55d3a49be15477",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/mmr-visible-two-20261014/vintages/mmr-current-neighbors-001/result.json",
+      "bytes": 156624,
+      "sha256": "47efd5249e5ca3a0c77b38614e5f928f95aacd2f6db837fc1ed8bdb4cb62ebc4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/mmr-visible-two-20261014/vintages/source-handoff-001/publication.json",
+      "bytes": 271,
+      "sha256": "afed1150fd418855e500ca4c101f3475ae6e0d6f21a1ee712d85b860122c8600",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/mmr-visible-two-20261014/vintages/source-handoff-001/source-handoff.json",
+      "bytes": 437150,
+      "sha256": "10bb9fe32dcb5cc71b132a5749f8d4802fcda0e9544d3d85a66455733bdd3cac",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "source-handoff-binding",
+      "kind": "generator",
+      "helper_version": "worldatlas-evidence-preparation-v1",
+      "description": "Join retained whole original source/physical/query pointsets, compatible target preimages and original dispatch membership. Authenticate complete original products and unchanged exact source relation. NewVintage publishes exclusively.",
+      "software": "Python Python 3.12.14; scripts/evidence/immutable.py",
+      "units": "whole bytes and original identities"
+    },
+    {
+      "id": "current-neighbor-binding",
+      "kind": "code",
+      "description": "Authenticate existing full coordinate certificate against current selection, retain complete possible-neighbor targets, and screen every selected additive geometry; bbox exclusions alone do not establish exact overlap.",
+      "software": "Node 24.19.0",
+      "units": "whole-feature SHA256; longitude-latitude bounds"
+    },
+    {
+      "id": "retained-source-predicate",
+      "kind": "code",
+      "description": "Execute unchanged retainedAdministrativeSourcePremises and registeredAdministrativeViews on both genuine rows with adverse changes; no issued SOURCE or NATIVE result.",
+      "software": "Node 24.19.0; unchanged scripts/additive-gap-repair.mjs",
+      "units": "predicate dispositions"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "handoff-001.stdout-components",
+      "value": 2,
+      "unit": "components",
+      "vintage": "baseline",
+      "input_sha256": "77aec8595ae41b03f595f28e14c05b5fa09e1a98e15a918dbe0c49cb95866f3b",
+      "input": {
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-005/administrative-source-rule-fit.json",
+        "commit": "a35ba193cfe5c84424a4952ca752593ebf9d7102"
+      },
+      "evaluation_commit": "a35ba193cfe5c84424a4952ca752593ebf9d7102"
+    },
+    {
+      "id": "handoff-001.stdout-logical_input_bytes",
+      "value": 102690836,
+      "unit": "bytes",
+      "vintage": "baseline",
+      "input_sha256": "77aec8595ae41b03f595f28e14c05b5fa09e1a98e15a918dbe0c49cb95866f3b",
+      "input": {
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-005/administrative-source-rule-fit.json",
+        "commit": "a35ba193cfe5c84424a4952ca752593ebf9d7102"
+      },
+      "evaluation_commit": "a35ba193cfe5c84424a4952ca752593ebf9d7102"
+    },
+    {
+      "id": "handoff-001.stdout-peak_rss_bytes",
+      "value": 145702912,
+      "unit": "bytes",
+      "vintage": "baseline",
+      "input_sha256": "77aec8595ae41b03f595f28e14c05b5fa09e1a98e15a918dbe0c49cb95866f3b",
+      "input": {
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-005/administrative-source-rule-fit.json",
+        "commit": "a35ba193cfe5c84424a4952ca752593ebf9d7102"
+      },
+      "evaluation_commit": "a35ba193cfe5c84424a4952ca752593ebf9d7102"
+    },
+    {
+      "id": "neighbors-001.stdout-complete_owner_rows",
+      "value": 49625,
+      "unit": "owner rows",
+      "vintage": "baseline",
+      "input_sha256": "77aec8595ae41b03f595f28e14c05b5fa09e1a98e15a918dbe0c49cb95866f3b",
+      "input": {
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-005/administrative-source-rule-fit.json",
+        "commit": "a35ba193cfe5c84424a4952ca752593ebf9d7102"
+      },
+      "evaluation_commit": "a35ba193cfe5c84424a4952ca752593ebf9d7102"
+    },
+    {
+      "id": "neighbors-001.stdout-source_parts",
+      "value": 36,
+      "unit": "source parts",
+      "vintage": "baseline",
+      "input_sha256": "77aec8595ae41b03f595f28e14c05b5fa09e1a98e15a918dbe0c49cb95866f3b",
+      "input": {
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-005/administrative-source-rule-fit.json",
+        "commit": "a35ba193cfe5c84424a4952ca752593ebf9d7102"
+      },
+      "evaluation_commit": "a35ba193cfe5c84424a4952ca752593ebf9d7102"
+    },
+    {
+      "id": "neighbors-001.stdout-additive_geometries",
+      "value": 291,
+      "unit": "geometry records",
+      "vintage": "baseline",
+      "input_sha256": "77aec8595ae41b03f595f28e14c05b5fa09e1a98e15a918dbe0c49cb95866f3b",
+      "input": {
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-005/administrative-source-rule-fit.json",
+        "commit": "a35ba193cfe5c84424a4952ca752593ebf9d7102"
+      },
+      "evaluation_commit": "a35ba193cfe5c84424a4952ca752593ebf9d7102"
+    }
+  ],
+  "summaries": [],
+  "conclusions": [
+    {
+      "text": "Both complete original Myanmar cases pass unchanged source-relative premises; current complete source context identifies only their intended targets as possible neighbors. Independent source acceptance and actual SOURCE/NATIVE qualification remain required.",
+      "status": "supported",
+      "source_ids": [
+        "accepted-sea318"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "partial",
+    "implementation": "proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "node coordination/engineering/mmr-visible-two-20261014/custody/check_handoff.mjs",
+    "python -I -B coordination/engineering/mmr-visible-two-20261014/custody/check_safety.py",
+    "node scripts/evidence-quality.mjs coordination/engineering/mmr-visible-two-20261014/evidence-quality.json"
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "handoff-001.stdout-components",
+      "path": "coordination/engineering/mmr-visible-two-20261014/logs/handoff-001.stdout",
+      "json_pointer": "/components"
+    },
+    {
+      "metric_id": "handoff-001.stdout-logical_input_bytes",
+      "path": "coordination/engineering/mmr-visible-two-20261014/logs/handoff-001.stdout",
+      "json_pointer": "/logical_input_bytes"
+    },
+    {
+      "metric_id": "handoff-001.stdout-peak_rss_bytes",
+      "path": "coordination/engineering/mmr-visible-two-20261014/logs/handoff-001.stdout",
+      "json_pointer": "/peak_rss_bytes"
+    },
+    {
+      "metric_id": "neighbors-001.stdout-complete_owner_rows",
+      "path": "coordination/engineering/mmr-visible-two-20261014/logs/neighbors-001.stdout",
+      "json_pointer": "/complete_owner_rows"
+    },
+    {
+      "metric_id": "neighbors-001.stdout-source_parts",
+      "path": "coordination/engineering/mmr-visible-two-20261014/logs/neighbors-001.stdout",
+      "json_pointer": "/source_parts"
+    },
+    {
+      "metric_id": "neighbors-001.stdout-additive_geometries",
+      "path": "coordination/engineering/mmr-visible-two-20261014/logs/neighbors-001.stdout",
+      "json_pointer": "/additive_geometries"
+    }
+  ]
+}
