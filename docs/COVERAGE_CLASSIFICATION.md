@@ -67,16 +67,29 @@ is never promoted to high-resolution truth. Water additionally requires a matchi
 explicit retained lake feature under the native rule. Source vintage and whether
 the historical classification pins match the current selection are shown.
 
-`diagnoseMapCell` in `src/map-cell-diagnosis.js` is also a small reusable interpreter
-for measured evidence. Its decision is `water`, `land-with-location`, `currently-assigned`,
-or `unresolved`. Supported land returns the intended location ID/index/name and
-an additive-repair next step only when the physical mask and unique source join
-support it, with no competing owner, unexplained selected hole, or exact boundary
-ambiguity. Unresolved cells list the particular missing/conflicting evidence.
-Already-assigned cells report `current_owner`, not an evidence-correct intended owner; a native/selection mismatch stays unresolved. The supporting lineage distinguishes downstream geometry loss, native selection
-mismatch and source/vintage disagreement. A hole is not automatically water;
-source containment alone is not dry land. No result authorizes an unsourced
-assignment or replaces the existing repair path's owner-conservation checks.
+`diagnoseMapCell` in `src/map-cell-diagnosis.js` is a small reusable interpreter
+for measured evidence. It returns **independent** `physical_status` and
+`location_status`, plus `current_owner`, a source-supported `intended_location`,
+and concrete ownership blockers. Existing design issues [#528](https://github.com/ChengshuLi/WorldAtlas/issues/528)
+and [#534](https://github.com/ChengshuLi/WorldAtlas/issues/534) keep rivers/lakes as
+separate features: physical water does not imply owner zero, a permanent territorial
+exclusion, a proximity buffer, or a new hierarchy. This diagnostic specifies no
+click precedence.
+
+A positive water feature remains water-supported even when a coarser land mask
+misses it; both source dates and the physical-source disagreement remain explicit.
+Territorial membership is resolved independently by exact source identity joins.
+One supported source location can coexist with water. Missing or competing source
+locations, a source-vintage ownership conflict, an unexplained selected polygon
+hole, or a native/selection mismatch stays unresolved. A hole needs its own
+territorial/semantic evidence; water alone cannot explain why ownership is absent.
+Already-assigned cells report current ownership without claiming it is
+independently correct. Proposed additions still need actual physical source
+coverage and exact source membership; absence of a known water feature is not
+land evidence. The supporting lineage reports each joined source ID separately,
+so an overlapping feature cannot hide another feature's loss. Feature-specific
+dates take precedence over collection dates. No result replaces the repair path's
+existing-owner conservation and territorial-semantics checks.
 
 Run `node --test test/map-cell-diagnosis.test.mjs` for small independent numerical
 and interpretation controls. Real-current-cell runs and source-specific held-out

@@ -84,6 +84,26 @@ const evidenceKind = info => {
     t.natural === 'land' || t.physical_class === 'land' ? 'land' : 'unknown';
 };
 
+// Trace each joined identity separately; overlap with another source feature
+// must not hide one feature's loss. Feature dates take priority over collection dates.
+export function sourceTransitions(original, consumed, selected, selectedSources) {
+  const result = [], compare = (before, after, info, other, destination) => {
+    const oldDate = info.date ?? before.date, newDate = other.date ?? after.date;
+    result.push({from: before.path, to: destination, ids: [info.id], joined: true, before: true,
+      after: after.matches.some(f => f.id === info.id),
+      same_vintage: oldDate != null && newDate != null ? String(oldDate) === String(newDate) : null});
+  };
+  for (const before of original) for (const after of consumed) for (const info of before.matches.filter(f => f.joinable_id)) {
+    const other = after.available_features.find(f => f.id === info.id && f.joinable_id);
+    if (other) compare(before, after, info, other, after.path);
+  }
+  for (const before of consumed) for (const info of before.matches.filter(f => f.joinable_id)) {
+    const other = selectedSources.get(info.id);
+    if (other) compare(before, selected, info, other, 'selected');
+  }
+  return result;
+}
+
 export async function diagnoseCells({repo, commit, cells, original = [], consumed = [], physical = []}) {
   demand(/^[a-f0-9]{40}$/.test(commit ?? ''), 'Use an exact committed geography revision');
   demand(Array.isArray(cells) && cells.length > 0, 'Supply at least one cell');
@@ -175,22 +195,14 @@ export async function diagnoseCells({repo, commit, cells, original = [], consume
       if (role === 'physical') {
         for (const info of measured.matches) report.physicalEvidence.push({...info, kind: evidenceKind(info), explicit_feature: evidenceKind(info) !== 'unknown', covers: true, ...provenance,
           excludes_water: info.tags.excludes_water === true, boundary_ambiguous: measured.boundary_ties.length > 0, date: info.date ?? provenance.date});
-      } else report.lineage[role].push({...provenance, covered: measured.matches.length > 0, ...measured, available_ids: features.map(featureInfo).filter(info => info.joinable_id).map(info => info.id)});
+      } else report.lineage[role].push({...provenance, covered: measured.matches.length > 0, ...measured, available_features: features.map(featureInfo).map(({id, date, joinable_id}) => ({id, date, joinable_id}))});
     }
   }
 
   await physicalReference(reader, snapshot, reports, {size, latitudes});
   for (const report of reports) {
-    for (const before of report.lineage.original) for (const after of report.lineage.consumed) {
-      const ids = before.matches.filter(f => f.joinable_id).map(f => f.id).filter(id => after.available_ids.includes(id));
-      if (ids.length) report.transitions.push({from: before.path, to: after.path, ids, joined: true, before: true, after: after.matches.some(f => ids.includes(f.id)), same_vintage: before.date && after.date ? before.date === after.date : null});
-    }
-    for (const before of report.lineage.consumed) {
-      const ids = before.matches.filter(f => f.joinable_id).map(f => f.id).filter(id => owners.has(id));
-      if (ids.length) report.transitions.push({from: before.path, to: 'selected', ids, joined: true, before: true, after: report.lineage.selected.matches.some(f => ids.includes(f.id)),
-        same_vintage: before.date && ids.every(id => sourceInfo.get(id)?.date) ? ids.every(id => String(sourceInfo.get(id).date) === String(before.date)) : null});
-    }
-    for (const stage of [...report.lineage.original, ...report.lineage.consumed]) delete stage.available_ids;
+    report.transitions = sourceTransitions(report.lineage.original, report.lineage.consumed, report.lineage.selected, sourceInfo);
+    for (const stage of [...report.lineage.original, ...report.lineage.consumed]) delete stage.available_features;
     report.intendedLocations = [...new Set([...report.lineage.original, ...report.lineage.consumed].flatMap(stage => stage.matches.filter(f => f.joinable_id).map(f => f.id)))].filter(id => owners.has(id)).map(id => ({...sourceInfo.get(id), index: owners.get(id)}));
     report.diagnosis = diagnoseMapCell(report);
   }

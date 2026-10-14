@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import {diagnoseMapCell} from '../src/map-cell-diagnosis.js';
-import {measureCellFeatures, sourceFeatureId} from '../scripts/diagnose-map-cell.mjs';
+import {measureCellFeatures, sourceFeatureId, sourceTransitions} from '../scripts/diagnose-map-cell.mjs';
 import {nativeRowLatitudes} from '../src/native-grid.js';
 
 const blank = () => ({effectiveOwner: {index: 0, id: null}, physicalEvidence: [],
@@ -15,31 +15,30 @@ const location = {id: 'location:district', index: 7, name: 'District'};
 
 test('explicit mapped water resolves water; a hole and administrative membership cannot', () => {
   const input = blank(); input.lineage.selected.holes.push({id: location.id}); input.intendedLocations.push(location);
-  assert.equal(diagnoseMapCell(input).decision, 'unresolved');
+  assert.equal(diagnoseMapCell(input).location_status, 'unresolved');
   input.physicalEvidence.push(water);
-  assert.equal(diagnoseMapCell(input).decision, 'water');
-  assert.equal(diagnoseMapCell(input).kind, 'intentional-mapped-water');
+  assert.equal(diagnoseMapCell(input).physical_status, 'water-supported');
+  assert.equal(diagnoseMapCell(input).location_status, 'unresolved');
   input.physicalEvidence = [{...dry, excludes_water: false}];
-  assert.equal(diagnoseMapCell(input).decision, 'unresolved');
+  assert.equal(diagnoseMapCell(input).location_status, 'unresolved');
 });
 
 test('source-relative physical land plus one joined location supports an actionable assignment', () => {
   const input = blank(); input.physicalEvidence.push(dry); input.intendedLocations.push(location);
   const result = diagnoseMapCell(input);
-  assert.equal(result.decision, 'land-with-location'); assert.deepEqual(result.intended_location, location);
-  assert.deepEqual(result.blockers, []); assert.match(result.next_action, /additive native-cell repair/);
+  assert.equal(result.location_status, 'source-supported'); assert.equal(result.physical_status, 'land-supported'); assert.deepEqual(result.intended_location, location);
+  assert.deepEqual(result.blockers, []); assert.match(result.next_action, /source-supported native-cell assignment/);
   assert.deepEqual(input.lineage.selected, {first_owner: 0, holes: []});
 });
 
-test('conflicting water, competing owners, exact boundary and semantic exclusions withhold assignment', () => {
+test('competing owners, exact boundary and unexplained territorial exclusions withhold assignment', () => {
   for (const change of [
-    input => input.physicalEvidence.push(water),
     input => input.intendedLocations.push({...location, id: 'location:other', index: 8}),
     input => input.lineage.selected.holes.push({id: location.id}),
     input => input.lineage.consumed.push({boundary_ties: [{x: 1}]}),
   ]) {
     const input = blank(); input.physicalEvidence.push(dry); input.intendedLocations.push(location); change(input);
-    assert.equal(diagnoseMapCell(input).decision, 'unresolved'); assert.ok(diagnoseMapCell(input).blockers.length);
+    assert.equal(diagnoseMapCell(input).location_status, 'unresolved'); assert.ok(diagnoseMapCell(input).blockers.length);
   }
 });
 
@@ -58,13 +57,15 @@ test('same-vintage joined loss differs from vintage disagreement and unjoined co
 test('native versus selected mismatch is visible even under mapped water', () => {
   const input = blank(); input.lineage.selected.first_owner = 7; input.physicalEvidence.push(water);
   assert.equal(diagnoseMapCell(input).kind, 'native-grid-selection-mismatch');
-  assert.equal(diagnoseMapCell(input).decision, 'unresolved');
+  assert.equal(diagnoseMapCell(input).location_status, 'unresolved');
   input.lineage.native.first_owner = 7; input.effectiveOwner = location;
-  assert.equal(diagnoseMapCell(input).decision, 'currently-assigned');
+  assert.equal(diagnoseMapCell(input).location_status, 'currently-assigned');
+  assert.equal(diagnoseMapCell(input).physical_status, 'water-supported');
+  assert.doesNotMatch(diagnoseMapCell(input).next_action, /Preserve.*exclusion/);
   assert.deepEqual(diagnoseMapCell(input).current_owner, location);
   assert.equal(diagnoseMapCell(input).intended_location, null);
   input.lineage.selected.first_owner = 8;
-  assert.equal(diagnoseMapCell(input).decision, 'unresolved');
+  assert.equal(diagnoseMapCell(input).location_status, 'unresolved');
 });
 
 const size = 360, latitudes = nativeRowLatitudes(size), context = {size, latitudes};
@@ -98,14 +99,14 @@ test('held-out boundary river observation is not painted as land by a coarser ph
   // Independently checked original JRC February 2024 10W_40N pixel (682,12209)
   // is water at this canonical center. GSHHG 2.3.7 maps surrounding land here.
   // Keep the actual observations; no country/coordinate exception is in code.
-  const input = blank(); input.cell = {x: 126023, y: 99412}; input.intendedLocations.push(location);
+  const input = blank(); input.cell = {x: 126023, y: 99412};
   input.physicalEvidence = [
     {...dry, source: 'GSHHG 2.3.7 full L1–L4', date: '2017-06-15', coverage: 'Mapped inland waters excluded; narrow rivers may be absent'},
     {...water, source: 'JRC monthly 10W_40N', date: '2024-02', coverage: 'Observed water at the cell center; not permanent-water inference'},
   ];
   const result = diagnoseMapCell(input);
-  assert.equal(result.decision, 'unresolved'); assert.equal(result.physical_support, 'conflicting');
-  assert.equal(result.intended_location, null); assert.equal(result.kind, 'source-vintage-disagreement');
+  assert.equal(result.physical_status, 'water-supported'); assert.equal(result.physical_source_disagreement, true);
+  assert.equal(result.location_status, 'unresolved'); assert.equal(result.intended_location, null);
 });
 
 test('anonymous or numeric ordinal features cannot establish an upstream identity join', () => {
@@ -121,4 +122,23 @@ test('coordinate CLI rejects out-of-domain latitude before opening any repositor
   const result = spawnSync(process.execPath, [command, '--repo', '/not/a/repository', '--coordinate', '0,90'], {encoding: 'utf8'});
   assert.notEqual(result.status, 0); assert.match(result.stderr, /Coordinate outside the canonical Mercator domain; no clamping/);
   assert.doesNotMatch(result.stderr, /not a git repository/);
+});
+
+
+test('water overlays can coexist with a separately source-supported location', () => {
+  const input = blank(); input.physicalEvidence = [water, dry]; input.intendedLocations = [location];
+  const result = diagnoseMapCell(input);
+  assert.equal(result.physical_status, 'water-supported'); assert.equal(result.physical_source_disagreement, true);
+  assert.equal(result.location_status, 'source-supported'); assert.deepEqual(result.intended_location, location);
+  assert.doesNotMatch(result.next_action, /owner.?zero|water exclusion/);
+});
+
+test('source transitions retain a lost overlapping ID and compare its own feature dates', () => {
+  const a = {id: 'A', date: '2001', joinable_id: true}, b = {id: 'B', date: '2001', joinable_id: true};
+  const original = [{path: 'original', date: '2020', matches: [a, b]}];
+  const consumed = [{path: 'consumed', date: '2020', matches: [b], available_features: [{...a, date: '2002'}, b]}];
+  const transitions = sourceTransitions(original, consumed, {matches: [b]}, new Map([['B', b]]));
+  assert.deepEqual(transitions[0], {from: 'original', to: 'consumed', ids: ['A'], joined: true, before: true, after: false, same_vintage: false});
+  assert.equal(transitions[1].after, true); assert.equal(transitions[1].same_vintage, true);
+  assert.deepEqual(transitions[2].ids, ['B']);
 });
