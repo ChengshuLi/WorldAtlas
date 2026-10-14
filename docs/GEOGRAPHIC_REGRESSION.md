@@ -180,6 +180,10 @@ reports stay archived; they are not a second active acceptance format.
 
 The optional `artifact_consumption` selection binds an ordinary whole qualified
 product certificate and an independently registered whole review API capture.
+Parsed schema bindings compare exact values, types, key sets and ordered arrays;
+JSON object member order is not part of descriptor identity. This does not change
+whole-file encoded/decoded hash, size, mode or immutable Git custody, nor the
+separate private frozen-alias and native-carry mutation checks.
 The renewed Arctic interface includes a complete gzip release-product catalogue:
 the complete certificate's inline roles plus 343 ordinary product roles, with unique space/path keys and
 ordered registry path, compressed hash and decoded payload hash joins. Both full
