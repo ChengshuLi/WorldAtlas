@@ -1,0 +1,151 @@
+{
+  "kind": "bounded-primary-owner-research-not-qualification",
+  "date": "2026-10-14",
+  "parent_id": "framework:province:tamu:faa85aefb80f",
+  "scope": {
+    "land_held": 63,
+    "water": 0,
+    "relative": 0,
+    "conflict_package_cells": 0,
+    "native_block": 27,
+    "repair_intervals": 22,
+    "native_extent_x_half_open_y_inclusive": [
+      199661,
+      199959,
+      112498,
+      113137
+    ]
+  },
+  "target": {
+    "owner": 30323,
+    "id": "gb:MMR:ADM3:66882298B72647689440603",
+    "name": "Tamu",
+    "province_id": "framework:province:tamu:faa85aefb80f",
+    "source_id": "gb:MMR:ADM3",
+    "source_atoms": [
+      "gb:MMR:ADM3:66882298B72647689440603"
+    ],
+    "remaining_counts": {
+      "repair-evaluation:land": 63
+    },
+    "accepted_removed_cells": 0,
+    "reserved_excluded_cells": 0,
+    "blocks": [
+      27
+    ],
+    "source_sids": [
+      36802,
+      44885,
+      44960,
+      45178,
+      70312
+    ],
+    "topology_fields": {
+      "topology_version": 1,
+      "topology_reconciled": true,
+      "topology_conflicts": 3,
+      "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+    },
+    "current_geometry": {
+      "type": "Polygon",
+      "polygons": 1,
+      "coordinate_pairs": 110,
+      "interior_rings": 0,
+      "bounds": [
+        94.1281,
+        23.6451,
+        94.6404,
+        24.7301
+      ]
+    },
+    "original_geometry": {
+      "type": "Polygon",
+      "polygons": 1,
+      "coordinate_pairs": 219,
+      "interior_rings": 0,
+      "bounds": [
+        94.12806425100003,
+        23.645108685,
+        94.64038998100004,
+        24.73014308200006
+      ]
+    }
+  },
+  "source_join": {
+    "represented_year": 2019,
+    "consumed_revision": "9469f09",
+    "source_parent_sid": 44960,
+    "source_parent_ordinal": 63,
+    "source_parent_id": "gb:MMR:ADM2:60261553B38505178364809",
+    "source_region_sid": 44885,
+    "source_region_id": "gb:MMR:ADM1:20573499B8199738503087",
+    "mmr_adm3_sid": 45178,
+    "foreign_source_sids": [
+      36802,
+      70312
+    ],
+    "observed_families": [
+      "gb:IND:ADM1",
+      "gb:IND:ADM3",
+      "gb:MMR:ADM1",
+      "gb:MMR:ADM2",
+      "gb:MMR:ADM3"
+    ],
+    "foreign_sid_feature_names": "Notrecoveredfromsmallmetadataread; no assumedManipur/subdistrictlabel.",
+    "topology": "Retainedreconciledtrue,3conflicts; genericdisplaynote isnotacceptedtargetcutwitness. Zero source-conflictpackagecellsisnotforeignclearance."
+  },
+  "primary_findings": [
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Tamu_2019_MMR.pdf",
+      "provider": "GAD hostedMIMU",
+      "pdf_pages": 94,
+      "evidence_pages_1_based": [
+        3,
+        4,
+        9,
+        10
+      ],
+      "finding": "Importantvintagediscrepancy:despite2019filename,PDFpage3introexplicitlystatesApril2017–March2018conditions; page9populationheadingalso2017–2018. Source2019equivalence cannotbeassumed. Textisextensivelymixedlegacyencoding; geography/administrative-tablecellslosekeynamesanddigits. HistoryrefersKabawaregionandseveraltowns,butnolegalformation/orderIDorcompletesubtownshipnestingcanbereliablyread.",
+      "limit": "No claimofactual2019report, full94pagevintageuniformity,exactdistrictfootprint,borderline,mapdatumorlegalward/subtownshipschedule. Nopixelsavailablefrompriorwebscreenshotcapability; nodownloadattempt."
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_Tamu_2014_ENG.pdf",
+      "provider": "DepartmentofPopulation hostedMIMU",
+      "pdf_pages": 58,
+      "publication_date": "2017-10",
+      "represented_date": "2014-03-29",
+      "evidence_pages_1_based": [
+        1,
+        3,
+        7,
+        10,
+        17,
+        18
+      ],
+      "finding": "ReportidentifiesTamuTownship,TamuDistrict,SagaingRegion. Lists4wards(TamuMyoMa,ZayTan,SanDaKu,SawBwarInn)and7tracts(KunTaung,HeZin,InDaing,AhHlaw,KhaMeik,WiToke,PutThar). Area677.2km2creditsSettlementandLandRecordDepartment2014–2015.",
+      "limit": "ThisreportisnotproofthatcompletehistoricalTamuDistrict/TownshipincludinganyKhampat/Myothitsubtownshiphasthesamefootprintasconsumedsource. Ward/tractrosterisexactforthiscensusreportonly,withno63cellgeometryjoin."
+    }
+  ],
+  "new_specific_blockers": [
+    "Exactnestedsubtownshiprelationshipandextent:Khampat/Myothitleadsnotverifiedbyanaccessibleprimarybody. Needactualformation/nestingnotifications,datesandfullIDs,andward/tractmapshowingwhichareasareinside2019Tamuwholeoriginal. Oneframeworkchilddoesnotestablishdistrictfootprint.",
+    "Actualforeigncompetitors36802/70312andretainedtopology3cutwitnessesmustbejoinedto22candidateintervalsbeforeselectingapplicableborderreach/pillar/map. No exactreachidentifiedbythismetadata/primarypass; genericIBS80treatytextdeliberatelynotrepeated.",
+    "Needoriginaldemarcationmaps/pillarschedulesorjointboundaryrecordforthatidentifiedreach,andgeographicregistration/sourceconventionmatchingconsumed2019geometry. No exactmap/orderfound; no filenameinvented.",
+    "Needreadableactual2019GADbodyorvintagereconciliation; current2019filenamecontains2017–2018intro andlegacyencodedtext.",
+    "All63requireacceptedcell-specificsource/territorialexclusionsandphysicalevidence; zerorelative/conflictcountsgrantnoauthority."
+  ],
+  "access_limits": [
+    {
+      "url": "https://myanmar.unfpa.org/sites/default/files/pub-pdf/Sagaing%20Region%20Census%20Report%20-%20ENGLISH.pdf",
+      "result": "InferredanalogousregionalreportURLreturnedInternalError; notretried."
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_Khampat(ST)_2014_ENG.pdf",
+      "result": "Inferredfilenamepattern; URLnotaccessibleviathistool; noexistenceclaim,noretry."
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_Myothit(ST)_2014_ENG.pdf",
+      "result": "Inferredfilenamepattern; URLnotaccessibleviathistool; noexistenceclaim,noretry."
+    }
+  ],
+  "custody": "Read-onlysmallretainedmetadataandpublicwebtext. No rawPDFbytes/hash,local/browserdownload,permissioncard,GIS/native/GSHHG/sourcepassortrackededits. No IndiaIBS80genericrepeat. Allpreviouspacketspreserved. All63held."
+}

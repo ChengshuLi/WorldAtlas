@@ -1,0 +1,904 @@
+{
+  "scientific_vintage": "f7c358326d776398bc1cffe84df81eac7033091c",
+  "frozen_queue_vintage": "a61b6f9e7f88b1da380e3a834f89d7509132ed71",
+  "inventory_pin": {
+    "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/341d0bbaf81e47cd16ab58ca6d1ab75d5ac120cf732c677e081b12830ea3ef31/work/.cache/mmr-remaining-inventory-20261014-001/inventory.json",
+    "sha256": "efec8d28b63befcb411b6d0d81063af6a962edbec9a1b3f08b86fc3b7bd44157"
+  },
+  "interval_pin": {
+    "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/341d0bbaf81e47cd16ab58ca6d1ab75d5ac120cf732c677e081b12830ea3ef31/work/.cache/mmr-remaining-inventory-20261014-001/remaining-intervals.json.gz",
+    "bytes": 92904,
+    "sha256": "b12b9ed64ecb16fa2b5501648fa4ca91727793fa99ceadffb96d9623519c93aa"
+  },
+  "latitude_pin": {
+    "commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+    "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/341d0bbaf81e47cd16ab58ca6d1ab75d5ac120cf732c677e081b12830ea3ef31/work/coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+    "decoded_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+  },
+  "parent": {
+    "parent_id": "framework:province:myeik:2820a791707f",
+    "repair_land": 56,
+    "repair_water": 0,
+    "repair_cells": 56,
+    "relative": 6564,
+    "conflicts": 5,
+    "complete_child_count": 4,
+    "repair_owner_count": 1,
+    "repair_owners": [
+      30149
+    ],
+    "complete_children": [
+      {
+        "owner": 30149,
+        "id": "gb:MMR:ADM3:66882298B30308301468052",
+        "name": "Tanintharyi",
+        "province_id": "framework:province:myeik:2820a791707f",
+        "source_id": "gb:MMR:ADM3",
+        "source_atoms": [
+          "gb:MMR:ADM3:66882298B30308301468052"
+        ],
+        "remaining_counts": {
+          "repair-evaluation:land": 56,
+          "source-conflict:land": 5
+        },
+        "accepted_removed_cells": 0,
+        "reserved_excluded_cells": 0,
+        "blocks": [
+          29
+        ],
+        "source_sids": [
+          44893,
+          44955,
+          45136,
+          57264,
+          57377,
+          57492,
+          58141
+        ],
+        "topology_fields": {
+          "topology_version": 1,
+          "topology_reconciled": true,
+          "topology_conflicts": 10,
+          "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+        },
+        "current_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 585,
+          "interior_rings": 0,
+          "bounds": [
+            98.7549,
+            11.3165,
+            99.66461004531722,
+            13.4533
+          ]
+        },
+        "original_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 794,
+          "interior_rings": 0,
+          "bounds": [
+            98.75485290100002,
+            11.316458134000122,
+            99.66531837700009,
+            13.453308743000058
+          ]
+        }
+      },
+      {
+        "owner": 30179,
+        "id": "gb:MMR:ADM3:66882298B36911639137507",
+        "name": "Myeik",
+        "province_id": "framework:province:myeik:2820a791707f",
+        "source_id": "gb:MMR:ADM3",
+        "source_atoms": [
+          "gb:MMR:ADM3:66882298B36911639137507"
+        ],
+        "remaining_counts": {
+          "physical-interpretation:source-relative": 62
+        },
+        "accepted_removed_cells": 54,
+        "reserved_excluded_cells": 0,
+        "blocks": [
+          29
+        ],
+        "source_sids": [
+          44893,
+          44955,
+          45121
+        ],
+        "topology_fields": {
+          "topology_version": 1
+        },
+        "current_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 67,
+          "interior_rings": 0,
+          "bounds": [
+            98.5942,
+            12.2225,
+            98.9245,
+            12.7407
+          ]
+        },
+        "original_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 260,
+          "interior_rings": 0,
+          "bounds": [
+            98.59418531700004,
+            12.222456251000068,
+            98.92452302600005,
+            12.740747447000022
+          ]
+        }
+      },
+      {
+        "owner": 30185,
+        "id": "gb:MMR:ADM3:66882298B40667774005147",
+        "name": "Palaw",
+        "province_id": "framework:province:myeik:2820a791707f",
+        "source_id": "gb:MMR:ADM3",
+        "source_atoms": [
+          "gb:MMR:ADM3:66882298B40667774005147"
+        ],
+        "remaining_counts": {
+          "physical-interpretation:source-relative": 835
+        },
+        "accepted_removed_cells": 1055,
+        "reserved_excluded_cells": 0,
+        "blocks": [
+          29
+        ],
+        "source_sids": [
+          44893,
+          44955,
+          45127
+        ],
+        "topology_fields": {
+          "topology_version": 1
+        },
+        "current_geometry": {
+          "type": "MultiPolygon",
+          "polygons": 6,
+          "coordinate_pairs": 153,
+          "interior_rings": 0,
+          "bounds": [
+            98.2357,
+            12.7028,
+            98.8866,
+            13.5287
+          ]
+        },
+        "original_geometry": {
+          "type": "MultiPolygon",
+          "polygons": 18,
+          "coordinate_pairs": 800,
+          "interior_rings": 0,
+          "bounds": [
+            98.17677001299995,
+            12.700655880000088,
+            98.88656693499998,
+            13.528658302000029
+          ]
+        }
+      },
+      {
+        "owner": 30271,
+        "id": "gb:MMR:ADM3:66882298B62167174305830",
+        "name": "Kyunsu",
+        "province_id": "framework:province:myeik:2820a791707f",
+        "source_id": "gb:MMR:ADM3",
+        "source_atoms": [
+          "gb:MMR:ADM3:66882298B62167174305830"
+        ],
+        "remaining_counts": {
+          "physical-interpretation:source-relative": 5667
+        },
+        "accepted_removed_cells": 8222,
+        "reserved_excluded_cells": 0,
+        "blocks": [
+          29
+        ],
+        "source_sids": [
+          44893,
+          44955,
+          45111
+        ],
+        "topology_fields": {
+          "topology_version": 1
+        },
+        "current_geometry": {
+          "type": "MultiPolygon",
+          "polygons": 45,
+          "coordinate_pairs": 578,
+          "interior_rings": 0,
+          "bounds": [
+            97.4351,
+            11.4366,
+            98.9327,
+            12.8175
+          ]
+        },
+        "original_geometry": {
+          "type": "MultiPolygon",
+          "polygons": 118,
+          "coordinate_pairs": 3853,
+          "interior_rings": 0,
+          "bounds": [
+            97.43444395400014,
+            11.426824576000026,
+            98.93268601800008,
+            12.828051820000068
+          ]
+        }
+      }
+    ],
+    "native_blocks": [
+      29
+    ],
+    "observed_source_families": [
+      "gb:MMR:ADM1",
+      "gb:MMR:ADM2",
+      "gb:MMR:ADM3",
+      "gb:THA:ADM1",
+      "gb:THA:ADM2"
+    ],
+    "source_region_features": [
+      {
+        "id": "gb:MMR:ADM1:20573499B47967485654923",
+        "name": "Tanitharyi"
+      }
+    ],
+    "source_parent_features": [
+      {
+        "source_index": 44955,
+        "family_index": 217,
+        "source_id": "gb:MMR:ADM2:60261553B82376991609151",
+        "ordinal": 58,
+        "owners": [],
+        "name": "Myeik",
+        "geometry_status": "raw-native-supported"
+      }
+    ],
+    "decisions": [
+      {
+        "ids": [
+          "gb:MMR:ADM3:66882298B62167174305830",
+          "gb:MMR:ADM3:66882298B36911639137507",
+          "gb:MMR:ADM3:66882298B40667774005147",
+          "gb:MMR:ADM3:66882298B30308301468052"
+        ],
+        "status": "open",
+        "rationale": "Current province Myeik (framework:province:myeik:2820a791707f); inspected exact source identifiers for 4 locations with actual role Township, source gb:MMR:ADM3, reference vintages 2019. Pinned cache contains 330 features; 4 of these location records have entirely matched declared-source member IDs. Source-ID correspondence does not independently approve local geographic purpose, original-footprint retention, administrative reforms or settlement/rank. Exact review stays open until those tests have sourced outcomes.",
+        "evidence": [
+          {
+            "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM3/geoBoundaries-MMR-ADM3.geojson",
+            "title": "Myanmar",
+            "inspected_fact": "Actual location source gb:MMR:ADM3; role Township; reference vintage 2019; license Creative Commons Attribution 4.0 (CC BY 4.0). Source feature/member identifiers were inspected separately from ADM-level labels."
+          }
+        ],
+        "province_id": "framework:province:myeik:2820a791707f",
+        "source_id": "gb:MMR:ADM3",
+        "actual_role": "Township",
+        "specific_reasons": []
+      }
+    ],
+    "prerequisites": [
+      "Complete original source-family membership, exact source/owner/parent joins and whole-footprint parent proof.",
+      "Accepted country/topology exclusions and all explicit holes; ancestry and nearest-bank proximity do not grant territorial authority.",
+      "Whole original GSHHG hierarchy or demonstrably applicable retained target interpretation; preserve all uncertainty/relative intervals.",
+      "Later actual delivery-base effective owner-zero and native authority/conservation."
+    ],
+    "land_only_rule_ceiling": 56
+  },
+  "longitude_formula": "(x+0.5)/262166*360-180",
+  "method": "Read-only retained-interval metadata extrema and exact pinned row-latitude lookup only. No source/native/GIS/GSHHG processing or geographic qualification.",
+  "groups": [
+    {
+      "package_id": "gb-MMR-ADM3--repair-evaluation",
+      "interval_count": 33,
+      "cell_count": 56,
+      "x_inclusive": [
+        203307,
+        203655
+      ],
+      "y_inclusive": [
+        121594,
+        122677
+      ],
+      "centre_envelope_degrees": {
+        "longitude": [
+          99.17693369849638,
+          99.65479886789285
+        ],
+        "latitude": [
+          11.464943881959444,
+          12.918510048157149
+        ]
+      },
+      "source_sids": [
+        44893,
+        44955,
+        45136
+      ],
+      "owners": [
+        30149
+      ],
+      "retained_rows": [
+        [
+          121594,
+          203307,
+          203308,
+          [
+            30149
+          ],
+          [
+            44893,
+            44955,
+            45136
+          ],
+          "land"
+        ],
+        [
+          121650,
+          203320,
+          203321,
+          [
+            30149
+          ],
+          [
+            44893,
+            44955,
+            45136
+          ],
+          "land"
+        ],
+        [
+          121742,
+          203360,
+          203361,
+          [
+            30149
+          ],
+          [
+            44893,
+            44955,
+            45136
+          ],
+          "land"
+        ],
+        [
+          121842,
+          203495,
+          203496,
+          [
+            30149
+          ],
+          [
+            44893,
+            44955,
+            45136
+          ],
+          "land"
+        ],
+        [
+          122170,
+          203557,
+          203560,
+          [
+            30149
+          ],
+          [
+            44893,
+            44955,
+            45136
+          ],
+          "land"
+        ],
+        [
+          122171,
+          203559,
+          203560,
+          [
+            30149
+          ],
+          [
+            44893,
+            44955,
+            45136
+          ],
+          "land"
+        ],
+        [
+          122365,
+          203603,
+          203604,
+          [
+            30149
+          ],
+          [
+            44893,
+            44955,
+            45136
+          ],
+          "land"
+        ],
+        [
+          122366,
+          203603,
+          203604,
+          [
+            30149
+          ],
+          [
+            44893,
+            44955,
+            45136
+          ],
+          "land"
+        ],
+        [
+          122367,
+          203603,
+          203604,
+          [
+            30149
+          ],
+          [
+            44893,
+            44955,
+            45136
+          ],
+          "land"
+        ],
+        [
+          122369,
+          203603,
+          203604,
+          [
+            30149
+          ],
+          [
+            44893,
+            44955,
+            45136
+          ],
+          "land"
+        ],
+        [
+          122375,
+          203607,
+          203609,
+          [
+            30149
+          ],
+          [
+            44893,
+            44955,
+            45136
+          ],
+          "land"
+        ],
+        [
+          122376,
+          203604,
+          203605,
+          [
+            30149
+          ],
+          [
+            44893,
+            44955,
+            45136
+          ],
+          "land"
+        ],
+        [
+          122408,
+          203654,
+          203656,
+          [
+            30149
+          ],
+          [
+            44893,
+            44955,
+            45136
+          ],
+          "land"
+        ],
+        [
+          122409,
+          203652,
+          203655,
+          [
+            30149
+          ],
+          [
+            44893,
+            44955,
+            45136
+          ],
+          "land"
+        ],
+        [
+          122410,
+          203652,
+          203654,
+          [
+            30149
+          ],
+          [
+            44893,
+            44955,
+            45136
+          ],
+          "land"
+        ],
+        [
+          122411,
+          203652,
+          203653,
+          [
+            30149
+          ],
+          [
+            44893,
+            44955,
+            45136
+          ],
+          "land"
+        ],
+        [
+          122413,
+          203636,
+          203643,
+          [
+            30149
+          ],
+          [
+            44893,
+            44955,
+            45136
+          ],
+          "land"
+        ],
+        [
+          122414,
+          203648,
+          203649,
+          [
+            30149
+          ],
+          [
+            44893,
+            44955,
+            45136
+          ],
+          "land"
+        ],
+        [
+          122657,
+          203501,
+          203503,
+          [
+            30149
+          ],
+          [
+            44893,
+            44955,
+            45136
+          ],
+          "land"
+        ],
+        [
+          122658,
+          203497,
+          203499,
+          [
+            30149
+          ],
+          [
+            44893,
+            44955,
+            45136
+          ],
+          "land"
+        ],
+        [
+          122660,
+          203494,
+          203495,
+          [
+            30149
+          ],
+          [
+            44893,
+            44955,
+            45136
+          ],
+          "land"
+        ],
+        [
+          122661,
+          203493,
+          203495,
+          [
+            30149
+          ],
+          [
+            44893,
+            44955,
+            45136
+          ],
+          "land"
+        ],
+        [
+          122662,
+          203492,
+          203494,
+          [
+            30149
+          ],
+          [
+            44893,
+            44955,
+            45136
+          ],
+          "land"
+        ],
+        [
+          122663,
+          203492,
+          203494,
+          [
+            30149
+          ],
+          [
+            44893,
+            44955,
+            45136
+          ],
+          "land"
+        ],
+        [
+          122664,
+          203491,
+          203494,
+          [
+            30149
+          ],
+          [
+            44893,
+            44955,
+            45136
+          ],
+          "land"
+        ],
+        [
+          122665,
+          203490,
+          203493,
+          [
+            30149
+          ],
+          [
+            44893,
+            44955,
+            45136
+          ],
+          "land"
+        ],
+        [
+          122669,
+          203482,
+          203483,
+          [
+            30149
+          ],
+          [
+            44893,
+            44955,
+            45136
+          ],
+          "land"
+        ],
+        [
+          122670,
+          203479,
+          203480,
+          [
+            30149
+          ],
+          [
+            44893,
+            44955,
+            45136
+          ],
+          "land"
+        ],
+        [
+          122671,
+          203476,
+          203477,
+          [
+            30149
+          ],
+          [
+            44893,
+            44955,
+            45136
+          ],
+          "land"
+        ],
+        [
+          122674,
+          203471,
+          203472,
+          [
+            30149
+          ],
+          [
+            44893,
+            44955,
+            45136
+          ],
+          "land"
+        ],
+        [
+          122675,
+          203470,
+          203472,
+          [
+            30149
+          ],
+          [
+            44893,
+            44955,
+            45136
+          ],
+          "land"
+        ],
+        [
+          122676,
+          203470,
+          203471,
+          [
+            30149
+          ],
+          [
+            44893,
+            44955,
+            45136
+          ],
+          "land"
+        ],
+        [
+          122677,
+          203469,
+          203470,
+          [
+            30149
+          ],
+          [
+            44893,
+            44955,
+            45136
+          ],
+          "land"
+        ]
+      ]
+    },
+    {
+      "package_id": "gb-MMR-ADM3--source-conflict",
+      "interval_count": 4,
+      "cell_count": 5,
+      "x_inclusive": [
+        203430,
+        203492
+      ],
+      "y_inclusive": [
+        121852,
+        122762
+      ],
+      "centre_envelope_degrees": {
+        "longitude": [
+          99.34583431871408,
+          99.43097121671002
+        ],
+        "latitude": [
+          11.350529825388987,
+          12.572961163929095
+        ]
+      },
+      "source_sids": [
+        44893,
+        44955,
+        45136,
+        57264,
+        57377,
+        57492,
+        58141
+      ],
+      "owners": [
+        30149,
+        41459,
+        41626,
+        41644
+      ],
+      "retained_rows": [
+        [
+          121852,
+          203492,
+          203493,
+          [
+            30149,
+            41644
+          ],
+          [
+            44893,
+            44955,
+            45136,
+            57264,
+            57492
+          ],
+          "land"
+        ],
+        [
+          122666,
+          203489,
+          203491,
+          [
+            30149,
+            41459
+          ],
+          [
+            44893,
+            44955,
+            45136,
+            57264,
+            58141
+          ],
+          "land"
+        ],
+        [
+          122667,
+          203487,
+          203488,
+          [
+            30149,
+            41459
+          ],
+          [
+            44893,
+            44955,
+            45136,
+            57264,
+            58141
+          ],
+          "land"
+        ],
+        [
+          122762,
+          203430,
+          203431,
+          [
+            30149,
+            41626
+          ],
+          [
+            44893,
+            44955,
+            45136,
+            57377
+          ],
+          "land"
+        ]
+      ]
+    }
+  ]
+}

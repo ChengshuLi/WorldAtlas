@@ -1,0 +1,220 @@
+{
+  "version": 1,
+  "date_utc": "2026-10-14",
+  "worker": "/root/putao_primary_boundary",
+  "scope": "Tanintharyi56 repair-land primary boundary evidence only; five Thai-owner conflicts held separately",
+  "owner": 30149,
+  "id": "gb:MMR:ADM3:66882298B30308301468052",
+  "parent_id": "framework:province:myeik:2820a791707f",
+  "scientific_vintage": "f7c358326d776398bc1cffe84df81eac7033091c",
+  "frozen_queue_vintage": "a61b6f9e7f88b1da380e3a834f89d7509132ed71",
+  "retained_metadata": {
+    "path": "retained-candidate-intervals.json",
+    "bytes": 19520,
+    "sha256": "1d17719c47f4c57141bb34dc3e64f053e42f2d0476d909ac20e21e38a2f20ac2",
+    "scope": "Exact retained interval rows, source SIDs, original/current envelopes, and coordinate extrema only; no source/native/GSHHG/GIS producer."
+  },
+  "repair56": {
+    "package_id": "gb-MMR-ADM3--repair-evaluation",
+    "interval_count": 33,
+    "cell_count": 56,
+    "x_inclusive": [
+      203307,
+      203655
+    ],
+    "y_inclusive": [
+      121594,
+      122677
+    ],
+    "centre_envelope_degrees": {
+      "longitude": [
+        99.17693369849638,
+        99.65479886789285
+      ],
+      "latitude": [
+        11.464943881959444,
+        12.918510048157149
+      ]
+    },
+    "source_sids": [
+      44893,
+      44955,
+      45136
+    ],
+    "owners": [
+      30149
+    ]
+  },
+  "separate_conflicts5": {
+    "package_id": "gb-MMR-ADM3--source-conflict",
+    "interval_count": 4,
+    "cell_count": 5,
+    "x_inclusive": [
+      203430,
+      203492
+    ],
+    "y_inclusive": [
+      121852,
+      122762
+    ],
+    "centre_envelope_degrees": {
+      "longitude": [
+        99.34583431871408,
+        99.43097121671002
+      ],
+      "latitude": [
+        11.350529825388987,
+        12.572961163929095
+      ]
+    },
+    "source_sids": [
+      44893,
+      44955,
+      45136,
+      57264,
+      57377,
+      57492,
+      58141
+    ],
+    "owners": [
+      30149,
+      41459,
+      41626,
+      41644
+    ]
+  },
+  "original_current_geometry": {
+    "original": {
+      "type": "Polygon",
+      "polygons": 1,
+      "coordinate_pairs": 794,
+      "interior_rings": 0,
+      "bounds": [
+        98.75485290100002,
+        11.316458134000122,
+        99.66531837700009,
+        13.453308743000058
+      ]
+    },
+    "current": {
+      "type": "Polygon",
+      "polygons": 1,
+      "coordinate_pairs": 585,
+      "interior_rings": 0,
+      "bounds": [
+        98.7549,
+        11.3165,
+        99.66461004531722,
+        13.4533
+      ]
+    },
+    "topology_fields": {
+      "topology_version": 1,
+      "topology_reconciled": true,
+      "topology_conflicts": 10,
+      "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+    }
+  },
+  "reference_and_flags": {
+    "declared_source_reference_year": 2019,
+    "repair_classes": [
+      "land"
+    ],
+    "repair_owner_count": 1,
+    "repair_sids": [
+      44893,
+      44955,
+      45136
+    ],
+    "repair_has_foreign_sid_in_retained_rows": false,
+    "five_conflicts_handling": "Different package, four intervals, five cells with additional owners41459/41626/41644 and additional source SIDs; not subtracted from or added to the56. Exact country/admin owner binding is handled by another worker.",
+    "physical_support_status": "Parent reports completed retained physical support/stage in accepted myeik-native-followup. This primary-source task did not rerun or independently re-verify that scientific result. Physical support is not border authority.",
+    "temporal_limit": "Reference year and current queue pins are known. The retained rows do not provide an effective legal boundary interval for each cell."
+  },
+  "primary_sources": [
+    {
+      "url": "https://library.law.fsu.edu/Digital-Collections/LimitsinSeas/pdf/ibs063.pdf",
+      "producer": "U.S. Department of State, Office of the Geographer; FSU archive of government-issued International Boundary Study63",
+      "date": "1966-02-01",
+      "pages": 11,
+      "targeted_locators": [
+        "Printed6: peninsular main drainage divide, Khao Daeng and11°40′N",
+        "Printed7, sectionIV.B:1868 Tenasserim boundary convention, exchanged maps and1892 pillar table"
+      ],
+      "finding": "Relevant corridor is the main peninsular watershed. The study explicitly mentions11°40′N, within the retained56-cell latitude envelope; exact source-cell registration is still absent. It identifies two alignment maps exchanged3July1868 and a tabular list of pillars from later1892 demarcation.",
+      "date_anomaly": "Study reports September8,1868 in the catalogue and later citations, but February8,1868 in the treaty body; ratifications exchangedJuly3,1868. Preserve both rather than silently choose one.",
+      "scale_datum": "Not supplied for the two exchanged maps or pillar table. No original survey control inspected.",
+      "geographic_limit": "Mainland southern-sector instrument is relevant to this bounding corridor. No individual ridge, pillar, treaty-map sheet or actual repair cell is matched.",
+      "not_extended": "1934/1937 Pakchan river amendments and northern Mae Sai/Meh Ruak instruments are not treated as authority for this ridge reach."
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Tanintharyi_2019_MMR.pdf",
+      "producer": "Myanmar General Administration Department; MIMU mirror",
+      "date": "2019-09-30 closing signature",
+      "pages": 76,
+      "locators": [
+        "PDFp14: area table and boundary neighbors",
+        "PDFp75: dated closing signature"
+      ],
+      "finding": "Township boundary description states Thailand east, Bokpyin south, Kyunsu/Palaw/Myeik west and Dawei/Metta north. Area table includes Mawtaung town and totals4380.05square miles.",
+      "extent": "Whole township administrative context, broader than56 candidate-centre envelope. Not a survey of the candidate border segments.",
+      "scale_datum": "Unverified; graphic map pages not visually inspected.",
+      "limit": "No original international delimitation map or identified demarcation pillar schedule supplied by the inspected profile passages. Township adjacency and historical narrative do not assign the56 cells."
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_Tanintharyi_2014_ENG.pdf",
+      "producer": "Department of Population, Ministry of Labour, Immigration and Population",
+      "date": "2014 census; report October2017",
+      "pages": 58,
+      "locators": [
+        "Cover/PDFp3: Tanintharyi Township, Myeik District",
+        "PDFp7: figures at a glance"
+      ],
+      "finding": "Names the township and district, reports11344.5km²,2wards,19village tracts.",
+      "extent": "Township statistical reporting unit and regional township locator; not candidate-scale boundary delineation.",
+      "scale_datum": "Not verified.",
+      "limit": "Does not establish a surveyed ridge or legal-boundary registration for the2019 retained geometry."
+    }
+  ],
+  "exact_missing_artifacts": [
+    {
+      "instrument": "Convention between the Governor-General of India and the King of Siam defining the boundary on the mainland between Siam and the British Province of Tenasserim",
+      "year": 1868,
+      "date_locator": "Treaty body8February1868 versus catalogued8September1868; ratification/map exchange3July1868, as explicitly noted in State IBS63 printed7,IV.B.",
+      "artifact": "The two signed/exchanged alignment maps from3July1868, including the main-watershed sheet covering approximately11.46–12.92°N and99.18–99.65°E. Exact sheet identifiers, corner extent, scale and datum are missing.",
+      "access_status": "Original map images and holding record not obtained in the bounded read-only pass; no claim that they are non-digitized or absent."
+    },
+    {
+      "instrument": "1892 demarcation following the1868 mainland convention",
+      "artifact": "Tabular list of boundary pillars, original joint demarcation map/field record and survey-control coordinates covering this exact watershed reach.",
+      "locator": "State IBS63 printed7,IV.B, paragraph following the treaty alignment description. No original table number, pillar numbers or archive file ID supplied.",
+      "access_status": "Original table/images not obtained; precise original archive reference remains unresolved."
+    },
+    {
+      "artifact": "Applicable later bilateral survey/demarcation records through the source2019 reference, connecting the original convention maps/pillars to the retained candidate positions.",
+      "limit": "The1966 study cannot establish by itself whether later relevant local instruments apply in2019."
+    }
+  ],
+  "discovery_limit": {
+    "official_thai_department_url": "https://treaties.mfa.go.th/",
+    "result": "Official department homepage accessible; bounded exact-convention and Thai-language reach searches did not expose an original map/pillar record. Irrelevant search results were excluded. No archive-absence conclusion drawn.",
+    "failed_reference_retries": 0,
+    "prior_inaccessible_TNA_FCDO_portals_retried": false
+  },
+  "conclusion": "Administrative context and the relevant watershed instrument family are identified, but no actual treaty-map/demarcation record binds the56 retained cells to a side of the international boundary. Whole physical support does not supply that legal/survey join. Hold56 repair and the five source-conflict cells separately.",
+  "limits": {
+    "new_accepted_credit": 0,
+    "repair_land_held": 56,
+    "separate_source_conflict_land_held": 5,
+    "new_source_downloads": 0,
+    "browser_downloads": 0,
+    "new_permission_cards": 0,
+    "source_or_GSHHG_or_native_producer_passes": 0,
+    "GIS_processing": 0,
+    "tracked_repository_edits": 0,
+    "sovereignty_adjudication": false,
+    "prior_packets_changed": false,
+    "source_byte_hashes": "Unavailable: primary sources inspected through read-only web only. Hashes in retained metadata apply to pre-existing local inventory/interval/latitude inputs.",
+    "license": "No document-specific reuse permission established for GAD/DoP/convention publications; retained geoBoundaries licensing is not transferred to these documents."
+  }
+}

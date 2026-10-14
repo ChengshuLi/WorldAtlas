@@ -1,0 +1,63 @@
+{
+  "scientific_vintage": "f7c358326d776398bc1cffe84df81eac7033091c",
+  "inventory": {
+    "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/341d0bbaf81e47cd16ab58ca6d1ab75d5ac120cf732c677e081b12830ea3ef31/work/.cache/mmr-remaining-inventory-20261014-001/inventory.json",
+    "sha256": "efec8d28b63befcb411b6d0d81063af6a962edbec9a1b3f08b86fc3b7bd44157"
+  },
+  "intervals": {
+    "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/341d0bbaf81e47cd16ab58ca6d1ab75d5ac120cf732c677e081b12830ea3ef31/work/.cache/mmr-remaining-inventory-20261014-001/remaining-intervals.json.gz",
+    "sha256": "b12b9ed64ecb16fa2b5501648fa4ca91727793fa99ceadffb96d9623519c93aa"
+  },
+  "latitude_pin": {
+    "commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+    "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+    "decoded_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+  },
+  "longitude_formula": "(x+0.5)/262166*360-180",
+  "limit": "Independent extrema only; no source/geometry/GIS process or qualification.",
+  "children": [
+    {
+      "owner": 30146,
+      "interval_count": 101,
+      "cell_count": 126,
+      "x_inclusive": [
+        198876,
+        198939
+      ],
+      "y_inclusive": [
+        113819,
+        114291
+      ],
+      "centre_envelope_degrees": {
+        "longitude": [
+          93.09239184333592,
+          93.17890191710597
+        ],
+        "latitude": [
+          22.459379189501963,
+          23.057053959708114
+        ]
+      },
+      "source_sids": [
+        36797,
+        44884,
+        44908,
+        45182,
+        70771,
+        70772,
+        70775,
+        70778
+      ],
+      "sid_occurrences": {
+        "36797": 39,
+        "44884": 123,
+        "44908": 126,
+        "45182": 126,
+        "70771": 61,
+        "70772": 12,
+        "70775": 16,
+        "70778": 3
+      }
+    }
+  ]
+}

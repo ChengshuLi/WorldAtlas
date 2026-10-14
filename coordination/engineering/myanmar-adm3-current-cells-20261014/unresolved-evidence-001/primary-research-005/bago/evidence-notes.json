@@ -1,0 +1,201 @@
+{
+  "kind": "bounded-primary-admin-research-not-source-clearance",
+  "date": "2026-10-14",
+  "parent_id": "framework:province:bago:8d0140c2c434",
+  "scope": {
+    "land_held": 71,
+    "relative_held": 95,
+    "water": 0,
+    "source_conflicts": 0,
+    "current_complete_children": 8,
+    "repair_owners": 2,
+    "repair_intervals": 22,
+    "native_block": 28
+  },
+  "candidate_members": [
+    {
+      "owner": 30121,
+      "name": "Thanatpin",
+      "id": "gb:MMR:ADM3:66882298B23940339796351",
+      "source_sids": [
+        44894,
+        44903,
+        45006
+      ],
+      "counts": {
+        "repair-evaluation:land": 23,
+        "physical-interpretation:source-relative": 37
+      },
+      "interval_extents": [
+        {
+          "package_id": "gb-MMR-ADM3--repair-evaluation",
+          "rows": 6,
+          "cells": 23,
+          "x_half_open_y_inclusive": [
+            201657,
+            201672,
+            118295,
+            118300
+          ]
+        },
+        {
+          "package_id": "gb-MMR-ADM3--physical-interpretation",
+          "rows": 18,
+          "cells": 37,
+          "x_half_open_y_inclusive": [
+            201671,
+            201709,
+            118300,
+            118430
+          ]
+        }
+      ]
+    },
+    {
+      "owner": 30124,
+      "name": "Kawa",
+      "id": "gb:MMR:ADM3:66882298B24871755522741",
+      "source_sids": [
+        44894,
+        44903,
+        45013
+      ],
+      "counts": {
+        "repair-evaluation:land": 48,
+        "physical-interpretation:source-relative": 58
+      },
+      "interval_extents": [
+        {
+          "package_id": "gb-MMR-ADM3--repair-evaluation",
+          "rows": 16,
+          "cells": 48,
+          "x_half_open_y_inclusive": [
+            201604,
+            201654,
+            118511,
+            118601
+          ]
+        },
+        {
+          "package_id": "gb-MMR-ADM3--physical-interpretation",
+          "rows": 30,
+          "cells": 58,
+          "x_half_open_y_inclusive": [
+            201603,
+            201666,
+            118429,
+            118644
+          ]
+        }
+      ]
+    }
+  ],
+  "complete_current_member_names": [
+    "Thanatpin",
+    "Kawa",
+    "Shwegyin",
+    "Nyaunglebin",
+    "Waw",
+    "Kyauktaga",
+    "Daik-U",
+    "Bago"
+  ],
+  "source_join": {
+    "consumed_vintage": 2019,
+    "geoboundaries_revision": "9469f09",
+    "region_sid": 44894,
+    "region_id": "gb:MMR:ADM1:20573499B19694912925518",
+    "parent_sid": 44903,
+    "parent_ordinal": 6,
+    "parent_id": "gb:MMR:ADM2:60261553B52408869304596",
+    "retained_parent_diagnostics": "Cohortdecisionhas no specific below95percentparentoverlapreason. Absenceofdiagnosticisnotcontainmentproof."
+  },
+  "primary_findings": [
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Thanatpin_2019_MMR.pdf",
+      "provider": "GAD hostedMIMU",
+      "pdf_pages": 82,
+      "evidence_pages_1_based": [
+        1,
+        11,
+        12,
+        13,
+        14,
+        15,
+        18
+      ],
+      "represented_date": "September2019end",
+      "finding": "ProfileidentifiesThanatpininBagoDistrict. FormationhistorycitesMoHA/ReligiousAffairsnotification30August1972 confirmingexistingwards/tracts,followedby20September1973and23August1984notifications; describes6wards/60tracts/99villages. EastboundaryisSittaungRiveroppositeKyaikhto/Bilin, Kawa south,Bago west,Waw north. About16milesSittaungfrontage; Bago–Sittaungcanaltraversestownship. Profiledescribeslowfloodplainground,deepwaterfields,riveraggradation/floodingandsalinity-controlworks.",
+      "limit": "Notificationnumbers/bodies/mapsunread. Namedriverandfloodcontextdoesnotestablishfixedbank,tidalline,centrelineorownershipof23candidatecells. Noexactcandidate→namedtract/canaljoin. Coordinateboundsandareanotadoptedasreplacementgeometry."
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_Thanatpin_2014_ENG.pdf",
+      "provider": "DepartmentofPopulation hostedMIMU",
+      "pdf_pages": 60,
+      "publication_date": "2017-10",
+      "evidence_pages_1_based": [
+        1,
+        3,
+        7
+      ],
+      "finding": "PrimarycensusreportcallsitTanatpinTownship,BagoRegion/BagoDistrict; represents29March2014 census. Figureslist6wards,60villagetracts,area997.1km2. AreafootnotecreditsSettlementandLandRecordDepartment2014–2015.",
+      "limit": "Roster/administrativeunitcorroborationnot2019wholeboundaryorcentreownership. Originalmapscale/datum/licenseunverified."
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_Kawa_2014_ENG.pdf",
+      "provider": "DepartmentofPopulation hostedMIMU",
+      "pdf_pages": 61,
+      "publication_date": "2017-10",
+      "evidence_pages_1_based": [
+        1,
+        3,
+        7,
+        10
+      ],
+      "finding": "KawaTownshipReportexplicitlyBagoRegion/BagoDistrict. 2014figureslist12wards,89villagetracts,area1677.5km2. AreafootnotecreditsSettlementandLandRecordDepartment2014–2015.",
+      "limit": "Noactualformationnotification,river/islandownershipscheduleorexact48candidatecelljoin. Censuspopulation/areaarecontextnotboundaryauthority."
+    },
+    {
+      "url": "https://myanmar.unfpa.org/sites/default/files/pub-pdf/Bago%20Region%20Census%20Report%20-%20ENGLISH.pdf",
+      "provider": "DepartmentofPopulation hostedUNFPA",
+      "pdf_pages": 174,
+      "publication_date": "2015-05",
+      "evidence_pages_1_based": [
+        138,
+        140,
+        142
+      ],
+      "finding": "2014Censusdistrict tablesgroupBago,Tanatpin,Kawa,Waw,Nyaunglebin,Kyauktaga,DaikU,ShwegyinunderBagoDistrict,correspondingbyeightnameswithretainedframeworkmembers.",
+      "limit": "Historicalname-rosteragreementdoesnotprove2019sourcefootprintorcurrentdistrictcontinuity; no laterreorganizationadopted."
+    }
+  ],
+  "blocked_or_unread": [
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Kawa_2019_MMR.pdf",
+      "result": "Singlewebopenreturned403Forbidden. No retry,downloadoralternatepermissionrequested. ExactURLwasinferredfromstandardMIMUfilenamepattern,notverifiedcataloguelink.",
+      "missing": "AccessibleofficialKawa2019GADbodyandrelevantformation/boundarypages."
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Thanatpin_Township",
+      "result": "SecondaryreferenceprovidedGoogleDrivecensuslink; clickreturnedInternalError. Notretried; actualprimarycensuswasreadatMIMUandUNFPAinstead."
+    }
+  ],
+  "concrete_missing_artifacts": [
+    {
+      "target": "Thanatpin23land/37relative",
+      "artifact": "Actual30Aug1972,20Sep1973,23Aug1984MoHA/ReligiousAffairsnotificationbodies,exactnumbersandward/tractschedules/mapswhereapplicable.",
+      "join": "Affectedtract/riverboundary→2019consumedsourcewholefeatureandnative23candidatecells. No mapexistenceorfilenameinvented."
+    },
+    {
+      "target": "Kawa48land/58relative",
+      "artifact": "Readable2019GADprofileandactualtownship/tractboundaryinstrumentIDs/bodies,includinganySittaung/coastal/channelallocationrelevanttoexactcandidatecentres.",
+      "join": "Exact48candidatecells→namedtract/channel/landownership. No coastalcontextborrowedfromsecondaryWikipediaasproof."
+    },
+    {
+      "target": "All71",
+      "artifact": "Acceptedcell-specificsource/parent/competitorexclusionsandwholeoriginalphysicalevidence; delivery-baseeffectiveownerzero/conservationlater.",
+      "join": "Notproducedbythisread-onlyprimaryresearch."
+    }
+  ],
+  "custody": "OnlysmallretainedJSON/gzipmetadataandpublicwebtextreads. No localPDFrawbytes/hashes,downloads/cards/GIS/native/GSHHG/sourcepassortrackededits. Mapdatum/scale/licenseforthesedocumentsnotestablished; geoBoundarieslicenseisnotinherited. Allpreviouspacketsunchanged. All71landand95relativeheld."
+}

@@ -1,0 +1,128 @@
+{
+  "scientific_vintage": "f7c358326d776398bc1cffe84df81eac7033091c",
+  "inventory": {
+    "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/341d0bbaf81e47cd16ab58ca6d1ab75d5ac120cf732c677e081b12830ea3ef31/work/.cache/mmr-remaining-inventory-20261014-001/inventory.json",
+    "sha256": "efec8d28b63befcb411b6d0d81063af6a962edbec9a1b3f08b86fc3b7bd44157"
+  },
+  "intervals": {
+    "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/341d0bbaf81e47cd16ab58ca6d1ab75d5ac120cf732c677e081b12830ea3ef31/work/.cache/mmr-remaining-inventory-20261014-001/remaining-intervals.json.gz",
+    "sha256": "b12b9ed64ecb16fa2b5501648fa4ca91727793fa99ceadffb96d9623519c93aa"
+  },
+  "latitude_pin": {
+    "commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+    "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+    "decoded_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+  },
+  "longitude_formula": "(x+0.5)/262166*360-180",
+  "limit": "Independent extrema only; no source/geometry/GIS process or qualification.",
+  "children": [
+    {
+      "owner": 30393,
+      "kind": "land",
+      "cells": 6,
+      "intervals": 3,
+      "x_inclusive": [
+        198418,
+        198525
+      ],
+      "y_inclusive": [
+        115150,
+        115243
+      ],
+      "centre_envelope_degrees": {
+        "longitude": [
+          92.46347733878537,
+          92.61040714661704
+        ],
+        "latitude": [
+          21.246080975884983,
+          21.365058389499293
+        ]
+      },
+      "source_sids": [
+        2713,
+        44892,
+        44937,
+        45114
+      ],
+      "sid_occurrences": {
+        "2713": 6,
+        "44892": 6,
+        "44937": 6,
+        "45114": 6
+      }
+    },
+    {
+      "owner": 30402,
+      "kind": "land",
+      "cells": 83,
+      "intervals": 71,
+      "x_inclusive": [
+        198209,
+        198546
+      ],
+      "y_inclusive": [
+        115102,
+        115860
+      ],
+      "centre_envelope_degrees": {
+        "longitude": [
+          92.17648360199263,
+          92.63924383787372
+        ],
+        "latitude": [
+          20.454322477589,
+          21.426428330175092
+        ]
+      },
+      "source_sids": [
+        2713,
+        44892,
+        44937,
+        45198
+      ],
+      "sid_occurrences": {
+        "2713": 46,
+        "44892": 83,
+        "44937": 83,
+        "45198": 83
+      }
+    },
+    {
+      "owner": 30402,
+      "kind": "source-relative",
+      "cells": 80,
+      "intervals": 66,
+      "x_inclusive": [
+        198282,
+        198525
+      ],
+      "y_inclusive": [
+        115459,
+        115850
+      ],
+      "centre_envelope_degrees": {
+        "longitude": [
+          92.27672543350394,
+          92.61040714661704
+        ],
+        "latitude": [
+          20.467187924026508,
+          20.969376144935925
+        ]
+      },
+      "source_sids": [
+        2713,
+        44892,
+        44937,
+        45198
+      ],
+      "sid_occurrences": {
+        "2713": 17,
+        "44892": 80,
+        "44937": 80,
+        "45198": 80
+      }
+    }
+  ]
+}

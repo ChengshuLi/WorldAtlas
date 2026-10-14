@@ -1,0 +1,124 @@
+{
+  "parent_id": "framework:province:tamu:faa85aefb80f",
+  "repair_land": 63,
+  "repair_water": 0,
+  "repair_cells": 63,
+  "relative": 0,
+  "conflicts": 0,
+  "complete_child_count": 1,
+  "repair_owner_count": 1,
+  "repair_owners": [
+    30323
+  ],
+  "complete_children": [
+    {
+      "owner": 30323,
+      "id": "gb:MMR:ADM3:66882298B72647689440603",
+      "name": "Tamu",
+      "province_id": "framework:province:tamu:faa85aefb80f",
+      "source_id": "gb:MMR:ADM3",
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B72647689440603"
+      ],
+      "remaining_counts": {
+        "repair-evaluation:land": 63
+      },
+      "accepted_removed_cells": 0,
+      "reserved_excluded_cells": 0,
+      "blocks": [
+        27
+      ],
+      "source_sids": [
+        36802,
+        44885,
+        44960,
+        45178,
+        70312
+      ],
+      "topology_fields": {
+        "topology_version": 1,
+        "topology_reconciled": true,
+        "topology_conflicts": 3,
+        "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+      },
+      "current_geometry": {
+        "type": "Polygon",
+        "polygons": 1,
+        "coordinate_pairs": 110,
+        "interior_rings": 0,
+        "bounds": [
+          94.1281,
+          23.6451,
+          94.6404,
+          24.7301
+        ]
+      },
+      "original_geometry": {
+        "type": "Polygon",
+        "polygons": 1,
+        "coordinate_pairs": 219,
+        "interior_rings": 0,
+        "bounds": [
+          94.12806425100003,
+          23.645108685,
+          94.64038998100004,
+          24.73014308200006
+        ]
+      }
+    }
+  ],
+  "native_blocks": [
+    27
+  ],
+  "observed_source_families": [
+    "gb:IND:ADM1",
+    "gb:IND:ADM3",
+    "gb:MMR:ADM1",
+    "gb:MMR:ADM2",
+    "gb:MMR:ADM3"
+  ],
+  "source_region_features": [
+    {
+      "id": "gb:MMR:ADM1:20573499B8199738503087",
+      "name": "Saigang"
+    }
+  ],
+  "source_parent_features": [
+    {
+      "source_index": 44960,
+      "family_index": 217,
+      "source_id": "gb:MMR:ADM2:60261553B38505178364809",
+      "ordinal": 63,
+      "owners": [],
+      "name": "Tamu",
+      "geometry_status": "raw-native-supported"
+    }
+  ],
+  "decisions": [
+    {
+      "ids": [
+        "gb:MMR:ADM3:66882298B72647689440603"
+      ],
+      "status": "open",
+      "rationale": "Current province Tamu (framework:province:tamu:faa85aefb80f); inspected exact source identifiers for 1 locations with actual role Township, source gb:MMR:ADM3, reference vintages 2019. Pinned cache contains 330 features; 1 of these location records have entirely matched declared-source member IDs. Source-ID correspondence does not independently approve local geographic purpose, original-footprint retention, administrative reforms or settlement/rank. Exact review stays open until those tests have sourced outcomes.",
+      "evidence": [
+        {
+          "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM3/geoBoundaries-MMR-ADM3.geojson",
+          "title": "Myanmar",
+          "inspected_fact": "Actual location source gb:MMR:ADM3; role Township; reference vintage 2019; license Creative Commons Attribution 4.0 (CC BY 4.0). Source feature/member identifiers were inspected separately from ADM-level labels."
+        }
+      ],
+      "province_id": "framework:province:tamu:faa85aefb80f",
+      "source_id": "gb:MMR:ADM3",
+      "actual_role": "Township",
+      "specific_reasons": []
+    }
+  ],
+  "prerequisites": [
+    "Complete original source-family membership, exact source/owner/parent joins and whole-footprint parent proof.",
+    "Accepted country/topology exclusions and all explicit holes; ancestry and nearest-bank proximity do not grant territorial authority.",
+    "Whole original GSHHG hierarchy or demonstrably applicable retained target interpretation; preserve all uncertainty/relative intervals.",
+    "Later actual delivery-base effective owner-zero and native authority/conservation."
+  ],
+  "land_only_rule_ceiling": 63
+}

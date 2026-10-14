@@ -1,0 +1,277 @@
+{
+  "version": 1,
+  "date_utc": "2026-10-14",
+  "worker": "/root/putao_primary_boundary",
+  "kind": "Bounded read-only primary owner and lineage research",
+  "parent_id": "framework:province:laukkaing:cf0b15696321",
+  "scientific_vintage": "f7c358326d776398bc1cffe84df81eac7033091c",
+  "frozen_queue_vintage": "a61b6f9e7f88b1da380e3a834f89d7509132ed71",
+  "repair_land_held": 160,
+  "new_accepted_credit": 0,
+  "complete_children": [
+    {
+      "owner": 30088,
+      "id": "gb:MMR:ADM3:66882298B13890402968202",
+      "name": "Laukkaing",
+      "province_id": "framework:province:laukkaing:cf0b15696321",
+      "source_id": "gb:MMR:ADM3",
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B13890402968202"
+      ],
+      "remaining_counts": {
+        "repair-evaluation:land": 79
+      },
+      "accepted_removed_cells": 0,
+      "reserved_excluded_cells": 0,
+      "blocks": [
+        27
+      ],
+      "source_sids": [
+        44896,
+        44968,
+        45267
+      ],
+      "topology_fields": {
+        "topology_version": 1,
+        "topology_reconciled": true,
+        "topology_conflicts": 2,
+        "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+      },
+      "current_geometry": {
+        "type": "Polygon",
+        "polygons": 1,
+        "coordinate_pairs": 73,
+        "interior_rings": 0,
+        "bounds": [
+          98.5583,
+          23.4593,
+          98.88509017041245,
+          23.8309
+        ]
+      },
+      "original_geometry": {
+        "type": "Polygon",
+        "polygons": 1,
+        "coordinate_pairs": 136,
+        "interior_rings": 0,
+        "bounds": [
+          98.55833499300012,
+          23.45930752600005,
+          98.89085943900002,
+          23.836862546000084
+        ]
+      }
+    },
+    {
+      "owner": 30377,
+      "id": "gb:MMR:ADM3:66882298B9190211902717",
+      "name": "Konkyan",
+      "province_id": "framework:province:laukkaing:cf0b15696321",
+      "source_id": "gb:MMR:ADM3",
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B9190211902717"
+      ],
+      "remaining_counts": {
+        "repair-evaluation:land": 81
+      },
+      "accepted_removed_cells": 0,
+      "reserved_excluded_cells": 0,
+      "blocks": [
+        27
+      ],
+      "source_sids": [
+        15319,
+        44896,
+        44968,
+        45274
+      ],
+      "topology_fields": {
+        "topology_version": 1,
+        "topology_reconciled": true,
+        "topology_conflicts": 3,
+        "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+      },
+      "current_geometry": {
+        "type": "Polygon",
+        "polygons": 1,
+        "coordinate_pairs": 81,
+        "interior_rings": 0,
+        "bounds": [
+          98.4001,
+          23.7498,
+          98.8992,
+          24.1489
+        ]
+      },
+      "original_geometry": {
+        "type": "Polygon",
+        "polygons": 1,
+        "coordinate_pairs": 161,
+        "interior_rings": 0,
+        "bounds": [
+          98.40007919800003,
+          23.74979146400007,
+          98.89921092800003,
+          24.15575202
+        ]
+      }
+    }
+  ],
+  "source_parent_features": [
+    {
+      "source_index": 44968,
+      "family_index": 217,
+      "source_id": "gb:MMR:ADM2:60261553B25476839208576",
+      "ordinal": 71,
+      "owners": [],
+      "name": "Laukkaing",
+      "geometry_status": "raw-native-supported"
+    }
+  ],
+  "inventory_excerpt": "retained-inventory-excerpt.json",
+  "inventory_excerpt_sha256": "10a69b5946ca20e641045d5af77903b7e5d3caedacbf166c3162351e8a306e9b",
+  "interval_limit": "Only copied original/current envelopes and source vintage; no cell-level temporal intervals or candidate coordinates queried.",
+  "sources": [
+    {
+      "url": "https://faolex.fao.org/docs/pdf/mya132824.pdf",
+      "producer": "Republic of the Union of Myanmar Constitution; FAO legal repository mirror of primary legal text",
+      "pages": 213,
+      "adoption_date_in_preamble": "2008-05-29",
+      "locators": [
+        "PDF page23 (zero-based22), printed17: Sections54–56; Section56(e)"
+      ],
+      "exact_clause_56e": "grouping Konkyan and Laukkai townships in Shan State as Kokang Self-Administered Zone",
+      "finding": "Section56(e) names a two-township grouping. Section54 prescribes presidential action on a Chief Minister recommendation for local boundary or name alterations. Neither provision identifies geoBoundaries feature IDs or supplies the retained2019 township coordinates.",
+      "extent_scale_datum": "Named administrative units; no inspected surveyed map annex or scale/datum for these footprints.",
+      "limit": "Constitutional Kokang grouping is supported. Equality with the retained framework parent named Laukkaing, or a particular district polygon, is not proved."
+    },
+    {
+      "url": "https://www.wipo.int/wipolex/en/legislation/details/20215",
+      "producer": "WIPO Lex official institutional legal repository",
+      "locators": [
+        "Text Section56(e); lines3321–3323 in web extraction"
+      ],
+      "finding": "Independently exposes the same Konkyan and Laukkai grouping in the constitutional text.",
+      "limit": "Corroborates legal names only; no source-ID or geometry join."
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Laukkaing_2019_MMR.pdf",
+      "producer": "Myanmar General Administration Department; MIMU mirror",
+      "pages": 43,
+      "dates": {
+        "cover": "2019-09-30",
+        "introduction_reporting_cutoff": "December2019",
+        "population_reporting_cutoff": "December2019"
+      },
+      "locators": [
+        "PDFp1: cover date and Kokang name",
+        "PDFp10: introduction reporting interval",
+        "PDFp13: constitution-related administration narrative",
+        "PDFpp14–15: geography, area, neighbors",
+        "PDFp18: population cutoff"
+      ],
+      "finding": "Places Laukkaing in Kokang SAZ and describes2011 constitutional administration. Area table includes Chinshwehaw town and totals316.96sqmi; displayed component316.67 and town0.3 do not exactly sum to that total. China is east and also north alongside Konkyan; Kunlong south and Kutkai west.",
+      "extent": "Declared township box23°23′–24°10′N,98°25′–98°50′E differs from retained original envelope. Chinshwehaw receives its own town section. No exact footprint correction inferred.",
+      "scale_datum": "Unverified; graphic maps not visually inspected.",
+      "limit": "Cover/intro date conflict prevents treating all content as a30September snapshot. Curfew/emergency orders in narrative do not establish a territorial formation order. Historical sovereignty narrative is not adopted as an adjudication."
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Konkyan_2019_MMR.pdf",
+      "producer": "Myanmar General Administration Department; MIMU mirror",
+      "pages": 44,
+      "cover_date": "2019-09-30",
+      "locators": [
+        "PDFp1: cover date/Kokang",
+        "PDFpp10–11: introduction/history and geography",
+        "PDFp12: area total and boundaries"
+      ],
+      "finding": "Names Konkyan in Kokang SAZ. Profile includes Maw Htike town; area table totals414.33sqmi (township414.25 plus town0.08). China east/north, Laukkaing south, Muse/Kutkai west. Border lengths stated east15miles3furlongs and north9miles5furlongs.",
+      "extent": "Declared23°23′–24°10′N,98°24′–98°50′E; Maw Htike receives a separate town box23°55′–24°10′N,98°33′–98°54′E. These are broad profile boxes, not a surveyed map of source cells.",
+      "scale_datum": "Not established; map pages not visually inspected.",
+      "limit": "History references1897/1960 boundary treaties but no original township formation order or map schedule was identified. Names and area tables alone do not prove retained full-footprint nesting."
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_Laukkaing_2014_ENG.pdf",
+      "producer": "Myanmar Department of Population, Ministry of Labour, Immigration and Population",
+      "pages": 58,
+      "date": "2014 census; report October2017",
+      "locators": [
+        "Cover/PDFp3: actual title Laukine Township Report, Laukine District",
+        "PDFp7: figures at a glance",
+        "PDFp10: census/area source footnotes"
+      ],
+      "finding": "Actual primary title uses Laukine, rather than Laukkaing/Laukkai. Area789.0km²,3wards,7village tracts; census night29March2014 and land-record area vintage2014–2015.",
+      "extent": "Named statistical township and Shan-wide township locator.",
+      "scale_datum": "Unverified; graphic map not inspected.",
+      "limit": "No explicit constitutional-name/source-ID crosswalk, Chinshwehaw nesting schedule or2019 full-footprint equivalence obtained."
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_Konkyan_2014_ENG.pdf",
+      "producer": "Myanmar Department of Population, Ministry of Labour, Immigration and Population",
+      "pages": 58,
+      "date": "29March2014 census night; report October2017",
+      "locators": [
+        "Cover/PDFp3: actual title Kongyan Township Report, Laukine District",
+        "PDFp7: figures at a glance",
+        "PDFp10: area-source footnote",
+        "PDFp18: ward/village-tract roster"
+      ],
+      "finding": "Kongyan report area575.9km²,3wards,4village tracts. Area source is Settlement and Land Record Department2014–2015. Its reporting extent is not shown equivalent to Konkyan GAD total414.33sqmi.",
+      "extent": "Statistical township subject and Shan-wide map locator.",
+      "scale_datum": "Unverified.",
+      "limit": "Original Maw Htike boundary/nesting schedule and names/date crosswalk remain missing. No area-based union or ownership conclusion."
+    },
+    {
+      "url": "https://library.law.fsu.edu/Digital-Collections/LimitsinSeas/pdf/ibs042.pdf",
+      "producer": "U.S. Department of State, Office of the Geographer; FSU archive of primary government study and reproduced treaty text",
+      "title": "International Boundary Study42, Burma–China",
+      "date": "1964-11-30",
+      "pages": 20,
+      "locators": [
+        "Printed8:1897 agreement and1897–1900 demarcation to Nanting",
+        "Printed12: reproduced1960 treaty ArticleVI",
+        "Printed18: ArticleVII(3) map scales, ArticleVIII river-course rule and ArticleX replacement protocol maps"
+      ],
+      "finding": "Reproduced ArticleVI defers the high-conical-peak to NamHpa/NamTing section to the treaty maps. This is a relevant southern-sector archive lead; the text does not register Kokang candidate positions to a survey sheet.",
+      "missing_maps": "Original1:250000 treaty sheets and applicable1:50000 detail sheets, followed by controlling protocol maps and dated survey/control information for the actual Kokang border corridor.",
+      "limit": "Actual map sheet IDs, images, scale-specific extent and datum not obtained. Does not establish current boundary applicability or assign any source cell. Earlier northern Puta-O findings not reused as geographic proof for this cohort.",
+      "river_rule_limit": "ArticleVIII distinguishes midstream for unnavigable rivers from the main navigational channel for navigable rivers, and retains the boundary after a river course change absent another bilateral agreement. A present river channel alone cannot be assumed controlling."
+    }
+  ],
+  "failed_once_no_retry": [
+    {
+      "url": "https://themimu.info/states_regions/shan-north",
+      "result": "Internal error; no retry."
+    },
+    {
+      "url": "https://www.mlis.gov.mm/mLsView.do?lawordSn=10439",
+      "result": "Internal error; FAO/WIPO primary-text mirrors used instead; no retry."
+    }
+  ],
+  "lineage_assessment": {
+    "supported": "A primary constitutional provision groups named Konkyan and Laukkai townships as Kokang SAZ. GAD township covers and text independently place the two Burmese-named profile subjects in Kokang.",
+    "not_supported": "The framework parent name Laukkaing and retained MMR ADM2 source ID are not legal identity evidence for Kokang SAZ. The census district title Laukine is a different administrative label. Complete two-child roster correspondence does not prove identical whole original footprint.",
+    "current_cuts": "Copied original/current envelopes show smaller current north/east extrema; both owners have topology reconciliation notes (2 and3 conflicts). No cut is accepted based on the named legal grouping.",
+    "foreign_sid_limit": "Observed families include CHN ADM1. Konkyan has additional SID15319; its exact country/owner identity is not joined from the available small inventory. No new source or spatial query performed."
+  },
+  "concrete_next_artifacts": [
+    "Official territorial schedule/map and dated implementation or local-change orders linking the Section56(e) named township grouping to Laukkaing district, Kokang SAZ and the exact2019 ADM3 subjects, including constitutional spelling variants.",
+    "Original2019 township maps and administrative nesting schedules for Laukkaing/Chinshwehaw and Konkyan/Maw Htike; explain the distinct2014 census reporting extents without assuming town/sub-township inclusion.",
+    "Applicable original treaty/protocol survey maps for the China border north/east of these two townships, with sheet numbers, datum, control and temporal applicability. ArticleVI is the exact missing-map lead, not a cell assignment.",
+    "Reconcile Laukkaing cover30September2019 against December2019 introduction/population cutoff before using it as a source-vintage pin."
+  ],
+  "limits": {
+    "local_source_downloads": 0,
+    "browser_downloads": 0,
+    "new_permission_cards": 0,
+    "scientific_or_spatial_processing": 0,
+    "source_or_GSHHG_passes": 0,
+    "tracked_repository_edits": 0,
+    "prior_packets_changed": false,
+    "new_accepted_credit": 0,
+    "repair160_held": true,
+    "sovereignty_adjudication": false,
+    "source_byte_hashes": "Not available: web read-only inspection; no original source bytes saved.",
+    "license": "No document-specific reuse clearance established for primary publications. The retained geoBoundaries CC BY4.0 statement does not license GAD/DoP/treaty publications."
+  }
+}

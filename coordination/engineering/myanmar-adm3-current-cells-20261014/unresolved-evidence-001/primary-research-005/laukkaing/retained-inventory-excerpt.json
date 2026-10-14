@@ -1,0 +1,184 @@
+{
+  "scientific_vintage": "f7c358326d776398bc1cffe84df81eac7033091c",
+  "frozen_queue_vintage": "a61b6f9e7f88b1da380e3a834f89d7509132ed71",
+  "inventory_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/341d0bbaf81e47cd16ab58ca6d1ab75d5ac120cf732c677e081b12830ea3ef31/work/.cache/mmr-remaining-inventory-20261014-001/inventory.json",
+  "inventory_sha256": "efec8d28b63befcb411b6d0d81063af6a962edbec9a1b3f08b86fc3b7bd44157",
+  "parent": {
+    "parent_id": "framework:province:laukkaing:cf0b15696321",
+    "repair_land": 160,
+    "repair_water": 0,
+    "repair_cells": 160,
+    "relative": 0,
+    "conflicts": 0,
+    "complete_child_count": 2,
+    "repair_owner_count": 2,
+    "repair_owners": [
+      30088,
+      30377
+    ],
+    "complete_children": [
+      {
+        "owner": 30088,
+        "id": "gb:MMR:ADM3:66882298B13890402968202",
+        "name": "Laukkaing",
+        "province_id": "framework:province:laukkaing:cf0b15696321",
+        "source_id": "gb:MMR:ADM3",
+        "source_atoms": [
+          "gb:MMR:ADM3:66882298B13890402968202"
+        ],
+        "remaining_counts": {
+          "repair-evaluation:land": 79
+        },
+        "accepted_removed_cells": 0,
+        "reserved_excluded_cells": 0,
+        "blocks": [
+          27
+        ],
+        "source_sids": [
+          44896,
+          44968,
+          45267
+        ],
+        "topology_fields": {
+          "topology_version": 1,
+          "topology_reconciled": true,
+          "topology_conflicts": 2,
+          "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+        },
+        "current_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 73,
+          "interior_rings": 0,
+          "bounds": [
+            98.5583,
+            23.4593,
+            98.88509017041245,
+            23.8309
+          ]
+        },
+        "original_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 136,
+          "interior_rings": 0,
+          "bounds": [
+            98.55833499300012,
+            23.45930752600005,
+            98.89085943900002,
+            23.836862546000084
+          ]
+        }
+      },
+      {
+        "owner": 30377,
+        "id": "gb:MMR:ADM3:66882298B9190211902717",
+        "name": "Konkyan",
+        "province_id": "framework:province:laukkaing:cf0b15696321",
+        "source_id": "gb:MMR:ADM3",
+        "source_atoms": [
+          "gb:MMR:ADM3:66882298B9190211902717"
+        ],
+        "remaining_counts": {
+          "repair-evaluation:land": 81
+        },
+        "accepted_removed_cells": 0,
+        "reserved_excluded_cells": 0,
+        "blocks": [
+          27
+        ],
+        "source_sids": [
+          15319,
+          44896,
+          44968,
+          45274
+        ],
+        "topology_fields": {
+          "topology_version": 1,
+          "topology_reconciled": true,
+          "topology_conflicts": 3,
+          "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+        },
+        "current_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 81,
+          "interior_rings": 0,
+          "bounds": [
+            98.4001,
+            23.7498,
+            98.8992,
+            24.1489
+          ]
+        },
+        "original_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 161,
+          "interior_rings": 0,
+          "bounds": [
+            98.40007919800003,
+            23.74979146400007,
+            98.89921092800003,
+            24.15575202
+          ]
+        }
+      }
+    ],
+    "native_blocks": [
+      27
+    ],
+    "observed_source_families": [
+      "gb:CHN:ADM1",
+      "gb:MMR:ADM1",
+      "gb:MMR:ADM2",
+      "gb:MMR:ADM3"
+    ],
+    "source_region_features": [
+      {
+        "id": "gb:MMR:ADM1:20573499B82952573339616",
+        "name": "Shan"
+      }
+    ],
+    "source_parent_features": [
+      {
+        "source_index": 44968,
+        "family_index": 217,
+        "source_id": "gb:MMR:ADM2:60261553B25476839208576",
+        "ordinal": 71,
+        "owners": [],
+        "name": "Laukkaing",
+        "geometry_status": "raw-native-supported"
+      }
+    ],
+    "decisions": [
+      {
+        "ids": [
+          "gb:MMR:ADM3:66882298B13890402968202",
+          "gb:MMR:ADM3:66882298B9190211902717"
+        ],
+        "status": "open",
+        "rationale": "Current province Laukkaing (framework:province:laukkaing:cf0b15696321); inspected exact source identifiers for 2 locations with actual role Township, source gb:MMR:ADM3, reference vintages 2019. Pinned cache contains 330 features; 2 of these location records have entirely matched declared-source member IDs. Source-ID correspondence does not independently approve local geographic purpose, original-footprint retention, administrative reforms or settlement/rank. Exact review stays open until those tests have sourced outcomes.",
+        "evidence": [
+          {
+            "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM3/geoBoundaries-MMR-ADM3.geojson",
+            "title": "Myanmar",
+            "inspected_fact": "Actual location source gb:MMR:ADM3; role Township; reference vintage 2019; license Creative Commons Attribution 4.0 (CC BY 4.0). Source feature/member identifiers were inspected separately from ADM-level labels."
+          }
+        ],
+        "province_id": "framework:province:laukkaing:cf0b15696321",
+        "source_id": "gb:MMR:ADM3",
+        "actual_role": "Township",
+        "specific_reasons": []
+      }
+    ],
+    "prerequisites": [
+      "Complete original source-family membership, exact source/owner/parent joins and whole-footprint parent proof.",
+      "Accepted country/topology exclusions and all explicit holes; ancestry and nearest-bank proximity do not grant territorial authority.",
+      "Whole original GSHHG hierarchy or demonstrably applicable retained target interpretation; preserve all uncertainty/relative intervals.",
+      "Later actual delivery-base effective owner-zero and native authority/conservation."
+    ],
+    "land_only_rule_ceiling": 160
+  },
+  "interval_limit": "Only copied original/current envelopes and source vintage; no cell-level temporal intervals or candidate coordinates queried."
+}

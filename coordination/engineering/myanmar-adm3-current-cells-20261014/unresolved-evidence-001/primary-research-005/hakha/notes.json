@@ -1,0 +1,441 @@
+{
+  "version": 1,
+  "research_date": "2026-10-14",
+  "status": "Bounded documentary research only. All126 repair-land candidates remain held; zero promoted.",
+  "inventory": {
+    "parent_id": "framework:province:hakha:1265b2eedf98",
+    "repair_land": 126,
+    "repair_water": 0,
+    "repair_cells": 126,
+    "relative": 0,
+    "conflicts": 0,
+    "complete_child_count": 2,
+    "repair_owner_count": 1,
+    "repair_owners": [
+      30146
+    ],
+    "complete_children": [
+      {
+        "owner": 30146,
+        "id": "gb:MMR:ADM3:66882298B29817786092146",
+        "name": "Thantlang",
+        "province_id": "framework:province:hakha:1265b2eedf98",
+        "source_id": "gb:MMR:ADM3",
+        "source_atoms": [
+          "gb:MMR:ADM3:66882298B29817786092146"
+        ],
+        "remaining_counts": {
+          "repair-evaluation:land": 126
+        },
+        "accepted_removed_cells": 0,
+        "reserved_excluded_cells": 0,
+        "blocks": [
+          27
+        ],
+        "source_sids": [
+          36797,
+          44884,
+          44908,
+          45182,
+          70771,
+          70772,
+          70775,
+          70778
+        ],
+        "topology_fields": {
+          "topology_version": 1,
+          "topology_reconciled": true,
+          "topology_conflicts": 5,
+          "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+        },
+        "current_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 189,
+          "interior_rings": 0,
+          "bounds": [
+            93.0925,
+            22.0859,
+            93.5414,
+            23.0727
+          ]
+        },
+        "original_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 391,
+          "interior_rings": 0,
+          "bounds": [
+            93.09198427500003,
+            22.085902036000093,
+            93.54139713100005,
+            23.072739027000043
+          ]
+        }
+      },
+      {
+        "owner": 30369,
+        "id": "gb:MMR:ADM3:66882298B89367867823284",
+        "name": "Hakha",
+        "province_id": "framework:province:hakha:1265b2eedf98",
+        "source_id": "gb:MMR:ADM3",
+        "source_atoms": [
+          "gb:MMR:ADM3:66882298B89367867823284"
+        ],
+        "remaining_counts": {},
+        "accepted_removed_cells": 0,
+        "reserved_excluded_cells": 0,
+        "blocks": [],
+        "source_sids": [],
+        "topology_fields": {
+          "topology_version": 1
+        },
+        "current_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 99,
+          "interior_rings": 0,
+          "bounds": [
+            93.4576,
+            22.0057,
+            94.0579,
+            22.8258
+          ]
+        },
+        "original_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 257,
+          "interior_rings": 0,
+          "bounds": [
+            93.45760725000011,
+            22.0057388480001,
+            94.05786399400006,
+            22.827897005000096
+          ]
+        }
+      }
+    ],
+    "native_blocks": [
+      27
+    ],
+    "observed_source_families": [
+      "gb:IND:ADM1",
+      "gb:IND:ADM3",
+      "gb:MMR:ADM1",
+      "gb:MMR:ADM2",
+      "gb:MMR:ADM3"
+    ],
+    "source_region_features": [
+      {
+        "id": "gb:MMR:ADM1:20573499B58864057590207",
+        "name": "Chin"
+      }
+    ],
+    "source_parent_features": [
+      {
+        "source_index": 44908,
+        "family_index": 217,
+        "source_id": "gb:MMR:ADM2:60261553B91300055563286",
+        "ordinal": 11,
+        "owners": [],
+        "name": "Hakha",
+        "geometry_status": "raw-native-supported"
+      }
+    ],
+    "decisions": [
+      {
+        "ids": [
+          "gb:MMR:ADM3:66882298B89367867823284",
+          "gb:MMR:ADM3:66882298B29817786092146"
+        ],
+        "status": "open",
+        "rationale": "Current province Hakha (framework:province:hakha:1265b2eedf98); inspected exact source identifiers for 2 locations with actual role Township, source gb:MMR:ADM3, reference vintages 2019. Pinned cache contains 330 features; 2 of these location records have entirely matched declared-source member IDs. Source-ID correspondence does not independently approve local geographic purpose, original-footprint retention, administrative reforms or settlement/rank. Exact review stays open until those tests have sourced outcomes.",
+        "evidence": [
+          {
+            "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM3/geoBoundaries-MMR-ADM3.geojson",
+            "title": "Myanmar",
+            "inspected_fact": "Actual location source gb:MMR:ADM3; role Township; reference vintage 2019; license Creative Commons Attribution 4.0 (CC BY 4.0). Source feature/member identifiers were inspected separately from ADM-level labels."
+          }
+        ],
+        "province_id": "framework:province:hakha:1265b2eedf98",
+        "source_id": "gb:MMR:ADM3",
+        "actual_role": "Township",
+        "specific_reasons": []
+      }
+    ],
+    "prerequisites": [
+      "Complete original source-family membership, exact source/owner/parent joins and whole-footprint parent proof.",
+      "Accepted country/topology exclusions and all explicit holes; ancestry and nearest-bank proximity do not grant territorial authority.",
+      "Whole original GSHHG hierarchy or demonstrably applicable retained target interpretation; preserve all uncertainty/relative intervals.",
+      "Later actual delivery-base effective owner-zero and native authority/conservation."
+    ],
+    "land_only_rule_ceiling": 126
+  },
+  "custody": {
+    "scientific_vintage": "f7c358326d776398bc1cffe84df81eac7033091c",
+    "inventory": {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/341d0bbaf81e47cd16ab58ca6d1ab75d5ac120cf732c677e081b12830ea3ef31/work/.cache/mmr-remaining-inventory-20261014-001/inventory.json",
+      "sha256": "efec8d28b63befcb411b6d0d81063af6a962edbec9a1b3f08b86fc3b7bd44157"
+    },
+    "intervals": {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/341d0bbaf81e47cd16ab58ca6d1ab75d5ac120cf732c677e081b12830ea3ef31/work/.cache/mmr-remaining-inventory-20261014-001/remaining-intervals.json.gz",
+      "sha256": "b12b9ed64ecb16fa2b5501648fa4ca91727793fa99ceadffb96d9623519c93aa"
+    },
+    "latitude_pin": {
+      "commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+      "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+      "decoded_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+    },
+    "longitude_formula": "(x+0.5)/262166*360-180",
+    "cache_retention_commit": null,
+    "limit": "Small old-cache files read by exact absolute path with SHA256 checked; scientific_vintage is not an untracked-cache retention commit."
+  },
+  "candidate_extent": [
+    {
+      "owner": 30146,
+      "interval_count": 101,
+      "cell_count": 126,
+      "x_inclusive": [
+        198876,
+        198939
+      ],
+      "y_inclusive": [
+        113819,
+        114291
+      ],
+      "centre_envelope_degrees": {
+        "longitude": [
+          93.09239184333592,
+          93.17890191710597
+        ],
+        "latitude": [
+          22.459379189501963,
+          23.057053959708114
+        ]
+      },
+      "source_sids": [
+        36797,
+        44884,
+        44908,
+        45182,
+        70771,
+        70772,
+        70775,
+        70778
+      ],
+      "sid_occurrences": {
+        "36797": 39,
+        "44884": 123,
+        "44908": 126,
+        "45182": 126,
+        "70771": 61,
+        "70772": 12,
+        "70775": 16,
+        "70778": 3
+      }
+    }
+  ],
+  "envelope_limit": "Independent centre extrema in degrees, from retained intervals and verified normlat table; not connected coverage or boundary geometry.",
+  "key_retained_distinctions": [
+    "Complete two-child roster: Thantlang30146 gb:MMR:ADM3:66882298B29817786092146 has126 land cells; Hakha30369 gb:MMR:ADM3:66882298B89367867823284 haszero context cells.",
+    "Thantlang current and original each one polygon withzero interior rings. Currentbounds[93.0925,22.0859,93.5414,23.0727]; originalbounds[93.09198427500003,22.085902036000093,93.54139713100005,23.072739027000043].",
+    "Thantlang display topology_reconciledtrue withfive conflicts; coordinate pairs391original versus189current. This grants no boundary authority.",
+    "Hakha current and original each one polygon withzero holes; currentnorth22.8258 versusoriginal22.827897005000096. Zero candidates does not independently qualify the complete parent.",
+    "ChinADM1SID44884 appears on123of126 candidate cells; HakhaADM2SID44908 andThantlangADM3SID45182 appear on126. Exact three-centre region-reference discrepancy remains unresolved.",
+    "INDADM1SID36797 occurs39times; SIDs70771/70772/70775/70778 occur61/12/16/3times. Inventory reports INDADM1 andINDADM3 families. Names are not guessed; counts overlap and do not independently determine sovereignty."
+  ],
+  "sources": [
+    {
+      "id": "gad-thantlang",
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Thantlang_2019_MMR.pdf",
+      "issuer": "Thantlang Township General Administration Department",
+      "pdf_pages": 66,
+      "cover_date_read": "January2020, day blank/unreadable",
+      "locators": [
+        "PDFpage1cover",
+        "PDFpage11intro",
+        "PDFpage12history",
+        "PDFpage13position/boundary"
+      ],
+      "facts": [
+        "Filename says2019 but actual cover readsJanuary2020. Intro contains2018 and2019; retain the cover/reference-period distinction.",
+        "History has readable4-8-1972,date1-7-2008 anddate13.9.2017. Adjacent2008 number fragment is၂၀၀ ၂၂-၃၇၀ ၁ ၁; adjacent2017fragment is၁၁၆၇ ၂၀၁၇. No complete authority/action or territorial schedule can be read.",
+        "Raw area numbers1370.13 and877459 are visible; unit words are not recoverable, so no area conversion or agreement claim."
+      ],
+      "limits": [
+        "Missing script prevents distinguishing town creation, ward/tract restructuring and township boundary action.",
+        "No full order number silently reconstructed from partial digits.",
+        "No usable map datum/scale or exact western boundary in extracted text."
+      ]
+    },
+    {
+      "id": "gad-hakha",
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Hakha_2019_MMR.pdf",
+      "issuer": "Hakha Township General Administration Department",
+      "pdf_pages": 82,
+      "cover_date_read": "January2020, day blank/unreadable",
+      "locators": [
+        "PDFpage1cover",
+        "PDFpage11history",
+        "PDFpage12position/area/boundary"
+      ],
+      "facts": [
+        "Filename2019, coverJanuary2020.",
+        "History contains dates5.5.1965 and7.7.1966; later fragments include1973/day25,2017/day12/number1164 2017, and16.5.2019/number218 2019. These are retrieval fragments rather than complete formation citations."
+      ],
+      "limits": [
+        "No proof of whole-parent equivalence from fragmentary reform references.",
+        "Hakha township and district are different administrative units."
+      ]
+    },
+    {
+      "id": "dop-thantlang",
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_Thantlang_2014_ENG.pdf",
+      "issuer": "Department of Population, Ministry of Labour, Immigration and Population",
+      "published": "October2017",
+      "census_vintage": 2014,
+      "locators": [
+        "PDFpage1cover",
+        "PDFpage7figures"
+      ],
+      "facts": [
+        "Title explicitly places Thantlang Township inChin State,Haka District.",
+        "Area3551.0km²;3wards;37village tracts."
+      ],
+      "limits": [
+        "Census parent title does not bind every2019source centre or the entire original footprint."
+      ]
+    },
+    {
+      "id": "dop-haka",
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_Haka_2014_ENG.pdf",
+      "issuer": "Department of Population, Ministry of Labour, Immigration and Population",
+      "published": "October2017",
+      "census_vintage": 2014,
+      "locators": [
+        "PDFpage1cover",
+        "PDFpage7figures"
+      ],
+      "facts": [
+        "Title explicitly places Haka Township inChin State,Haka District.",
+        "Area4165.3km²;6wards;30village tracts."
+      ],
+      "limits": [
+        "No exact district formation schedule or polygon annex."
+      ]
+    },
+    {
+      "id": "oag-chin-offices",
+      "url": "https://www.oagmac.gov.mm/content/chin-state-0",
+      "issuer": "Office of the Auditor General of the Union",
+      "date": "No effective/issue date verified",
+      "locator": "Section2.8.4.2,District and Township Audit Offices",
+      "facts": [
+        "Hakha District row listsHakha Township andHtantalan Township."
+      ],
+      "limits": [
+        "Administrative office grouping supports name/parent context, not a dated formation act or full territorial boundaries."
+      ]
+    },
+    {
+      "id": "forest-dfmp-hakha",
+      "url": "https://forestdepartment.gov.mm/my/publications/haakhkhriungsctteaaaupkhuplupkiungmuciimnkinattai-1",
+      "issuer": "Forest Department, Ministry of Natural Resources and Environmental Conservation",
+      "title": "ဟားခါးခရိုင်သစ်တောအုပ်ချုပ်လုပ်ကိုင်မှုစီမံကိန်း(အတွဲ−၁)",
+      "facts": [
+        "Official page identifies Hakha District Forest Management Plan,volume1,typeDFMP."
+      ],
+      "limits": [
+        "Page exposes no usable attachment, issue period, annex/map list,datum or scale. Only a concrete catalogue lead; no plan contents adopted."
+      ]
+    },
+    {
+      "id": "historical-1967-map-dependency",
+      "url": "https://library.law.fsu.edu/Digital-Collections/LimitsinSeas/pdf/ibs080.pdf",
+      "issuer": "U.S.Department of State",
+      "date": "1968-05-15",
+      "locator": "Previously inspected printed3; no repeat fetch inthisHakha pass",
+      "facts": [
+        "Existing specific Chin passage followsRaphuVa toBoinu/Tuipui,downstream toTyao/TioVa junction,then upstream tosourcePillar3L/CH. Footnote points toSurveyofIndiaquarter-inch84E; treatystripmapscale1:126720."
+      ],
+      "limits": [
+        "This passage is a search-area lead for westernChin, not exact candidate-to-course mapping. Original1967annex and later demarcation/datum remain absent.",
+        "Do not substitute present riverbanks or watershed/stream names for authoritative registration."
+      ]
+    }
+  ],
+  "access_limits": [
+    {
+      "url": "http://www.mrtv3.net.mm/newpaper/46newsn.pdf",
+      "state": "One web open internal error; no retry. Source was an official-newspaper lead referenced by secondary material, not adopted proof."
+    },
+    {
+      "url": "https://www.burmalibrary.org/docs13/NLM2012-06-04.pdf",
+      "state": "Search identified archival4June2012NewLightofMyanmar issue; one web open403. Page16/column1 formation lead remains unread; no newspaper formation claim adopted."
+    },
+    {
+      "url": "https://amyothahluttaw.hluttaw.mm/meetings/ချင်းပြည်နယ်၊-ဟားခါးခရိုင်၊-ဟားခါးမြို့နယ်၊-ဆူရ်ခွားမြို့နှင့်-ထန်တလန်မြို့နယ်၊",
+      "state": "Exact2019-08-14 parliamentary item discovered; single web open404. No substantive facts adopted. URL is a readable rendering of the percent-encoded source."
+    },
+    {
+      "url": "http://themimu.info/MapsInfo/Chin/MIMU249v01_090806_Htantlang%20Township_A3.pdf",
+      "state": "Exact6August2009MIMUmap lead; one inaccessible web open. No map contents adopted."
+    },
+    {
+      "url": "https://documents.themimu.info/view/maps/?location=Chin&page=1&view=location",
+      "state": "MIMUcataloguemapsiframe returnedone403; no retry or alternateendpoint."
+    }
+  ],
+  "required_artifacts": [
+    {
+      "artifact": "Original Thantlang1July2008 administrative instrument with full number,authority,restored/transferred-member schedule and geographic annex",
+      "trace": "GADlabelled2019/actualJanuary2020,PDFpage12,numberfragment၂၀၀ ၂၂-၃၇၀ ၁ ၁",
+      "why": "Need exact original-footprint lineage and cuts, not assumed township restoration."
+    },
+    {
+      "artifact": "Original13September2017 administrative instrument with numberfragment1167 2017, exact action/member schedule and map",
+      "trace": "ThantlangGADPDFpage12",
+      "why": "Determine whether scope affects township, town, wards or tracts; no action inferred."
+    },
+    {
+      "artifact": "Readable4August1972Thantlang instrument and referenced township/ward schedule",
+      "trace": "ThantlangGADPDFpage12",
+      "why": "Legal identity alone must be separated from complete2019territorial extent."
+    },
+    {
+      "artifact": "Hakha District formation decision and territorial schedule/map coveringHakha andThantlang, including effective date and anylaterchanges",
+      "trace": "DoP2014reports published2017 confirmHakaDistrict; unread4June2012officialnewspaperpage16column1islead only",
+      "why": "District context cannot replace whole original-footprint parent proof."
+    },
+    {
+      "artifact": "Original10March1967India–Burma1:126720stripmap/demarcationpillar record forRaphu–Boinu/Tuipui–Tyao/Tio westernChin reach, withdatum and registration",
+      "trace": "Previously readIBS80printed3/8; SurveyofIndiaquarter-inchsheet84Elead",
+      "why": "Bind126candidatecentres to historicalline andacceptedexclusions, particularly39foreignADM1occurrences andthreeMMRregion-referenceexceptions."
+    },
+    {
+      "artifact": "HakhaDistrictForestManagementPlanvolume1 actualdatedfile and map/administrativeannexlist",
+      "trace": "OfficialForestDepartmentcatalogueURLabove",
+      "why": "Potential boundedprimarylead for parent/township extent, not yetinspected."
+    }
+  ],
+  "assessment": {
+    "supported": [
+      "Exacttwo-sourcechildroster,126candidatecentres,sourceoccurrences,current/originalboundsandholecountsverified.",
+      "DoPprimaryreports explicitlyassociatebothnamedtownshipswithHakaDistrict in2014censusreporting.",
+      "Newdatedadministrativefragments andexactprimarycatalogue/newspaperleads retained."
+    ],
+    "unknown": [
+      "Full2019original-source-footprintretention andwhole-parentancestry.",
+      "Three-region-referenceexceptions,foreignboundariesandacceptedexclusions.",
+      "Exactboundarycourse,wholeland/waterhierarchyanddeliveryauthorization."
+    ],
+    "promoted_cells": 0
+  },
+  "method_limits": [
+    "Smallretainedinventory/interval/normlatreads andread-onlyprimarywebdocumentreviewonly.",
+    "No local/browserdownloads, newcards, repeatedfailedendpoints, source/GIS/GSHHG/native/raster/scientificprocessing ortrackededits.",
+    "Foreignfeature names remainunassigned; no country/control/sovereignty conclusion.",
+    "Governmentdocumentreuse licensesnotverified; do not transferretainedgeoBoundariesCCBY4.0licensetodocuments."
+  ]
+}
