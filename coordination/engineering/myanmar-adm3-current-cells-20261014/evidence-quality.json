@@ -1,0 +1,1912 @@
+{
+  "version": 1,
+  "issue": 1880,
+  "lane": "engineering",
+  "worker_id": "01a12ebd-03db-7105-9a08-75a5f045a000",
+  "subject_ids": [
+    "gb:MMR:ADM3:66882298B20948488348117",
+    "gb:MMR:ADM3:66882298B21195914889348",
+    "gb:MMR:ADM3:66882298B21473836197235",
+    "gb:MMR:ADM3:66882298B27866808767172",
+    "gb:MMR:ADM3:66882298B33854457780857",
+    "gb:MMR:ADM3:66882298B3445717579771",
+    "gb:MMR:ADM3:66882298B34816344861267",
+    "gb:MMR:ADM3:66882298B35313795132071",
+    "gb:MMR:ADM3:66882298B45976501481961",
+    "gb:MMR:ADM3:66882298B46433982831447",
+    "gb:MMR:ADM3:66882298B48553142968450",
+    "gb:MMR:ADM3:66882298B5626975055677",
+    "gb:MMR:ADM3:66882298B59134367047252",
+    "gb:MMR:ADM3:66882298B59879554977018",
+    "gb:MMR:ADM3:66882298B62212267926712",
+    "gb:MMR:ADM3:66882298B62732217443925",
+    "gb:MMR:ADM3:66882298B63844124977533",
+    "gb:MMR:ADM3:66882298B65618262001870",
+    "gb:MMR:ADM3:66882298B78974611272668",
+    "gb:MMR:ADM3:66882298B84564180686688",
+    "gb:MMR:ADM3:66882298B87314551665108",
+    "gb:MMR:ADM3:66882298B91132834391640",
+    "gb:MMR:ADM3:66882298B93394455443594",
+    "gb:MMR:ADM3:66882298B94192188096874",
+    "gb:MMR:ADM3:66882298B97791680692613",
+    "gb:MMR:ADM3:66882298B98470543554215"
+  ],
+  "subject_ids_sha256": "1b3fcab69b32e453100c1bee748aed9b9fa4792d573b137369e9a8125607c6fa",
+  "baseline": {
+    "version": 2,
+    "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+    "files": [
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-028.json.gz",
+        "bytes": 2094,
+        "sha256": "a878b7eab8260dfc4ab3b1db67e39ef4667047bc8980d779c645b0598f60d234",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 13594,
+        "uncompressed_sha256": "339f333f640ba15c8c22f71b3db888c871464621c2f193780f4a946596f07cd8"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-029.json.gz",
+        "bytes": 19710,
+        "sha256": "c3a2e3b0c84e34e19aa39c7afbb02f62a434f29fad6e64aa7429522b9ebfe30f",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 125470,
+        "uncompressed_sha256": "c4611ff0fcfb89048a4c524493a60b90ced1ff4d80ef9c1bc94a66d6b02b62c9"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/lineage.json.gz",
+        "bytes": 4404456,
+        "sha256": "bacfc99714f832aa4b5719b9fb4ae9837080b948f10df9e9be2b150b281e20d4",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 22336586,
+        "uncompressed_sha256": "607372a1af11bebf58c24aa15bdfae1999fafc532bb65ab7d822c0c20b57a435"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/normalized-source-seams.json",
+        "bytes": 156199,
+        "sha256": "0e74bb81ae45ae9913ee5d43afd303fa33a4b7da8b06e4e6f1cd4419ecd264b4",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/ownership-binding.json",
+        "bytes": 3048,
+        "sha256": "b952192475435c8fbc74a84627994aff4f4e073c36c479d369554fc75251bc89",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-028.json.gz",
+        "bytes": 436795,
+        "sha256": "2d3327eb79a3ef3d56ec58e1400f8394754881183d2937747c303aeef9098cd5",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 2055434,
+        "uncompressed_sha256": "7f11b44dd86940e523b550a4c6a8572714de4cd490629d71bd9e00426c14f700"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-029.json.gz",
+        "bytes": 508848,
+        "sha256": "7af023db048ed84fe910c0ce966508b5b4127c95c6215f0d36213ed20d94b5d2",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 2354796,
+        "uncompressed_sha256": "a62fb29038527ceba28ebef27ee3d487ec4fb0a31ca64610d16f02947b5189ee"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-unassigned-summary.json",
+        "bytes": 154672,
+        "sha256": "a82c56c1d92ff52c0b0e52c9bf329905a05bace4b6a27c12771509d419888501",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/retained-source-catalogue.json",
+        "bytes": 403376,
+        "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-028.json.gz",
+        "bytes": 476733,
+        "sha256": "2000877ef3d698ee43b6e1ae0d7bb0cb8cf505a94b21255076691311fb5c3ba4",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 3372962,
+        "uncompressed_sha256": "1ea269bc51f49a00166c22ffcb3f875761fd98d7c9423b4dd96019b0d584774a"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-029.json.gz",
+        "bytes": 613896,
+        "sha256": "7775f315311056808bfead2394034459a83a3590a201fe0deedb66fea1866528",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4552072,
+        "uncompressed_sha256": "a497602aa36f61e9d86b2078d6811e2362612fe7a11920f50df315b991106798"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-census-summary.json",
+        "bytes": 120963,
+        "sha256": "8a4a6792237259328e56e38d91d0cb22f977de4a35caf4781f0d605e3db1653d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz",
+        "bytes": 1844315,
+        "sha256": "87f2d47e104b3af640351e747d8300d0068a1be23caab9e80558c3f8914eb4aa",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 13496995,
+        "uncompressed_sha256": "7fa99cbf064121e0130b66758c212ae22b2a7be5649f2e250e9cda89a9bd595e"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+        "bytes": 1754890,
+        "sha256": "78007430b6f9faedb188ef0619b7ff0a7a2cc7fff2ec9f1c41ee69936ec4ebd8",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-raster-summary.json",
+        "bytes": 110705,
+        "sha256": "2eec390eb9f9b6595bd0f3c7059b75f271dba013fbad0b3ac0c404114d48eea9",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/global-physical-comparison-20261006/comparison.py",
+        "bytes": 9834,
+        "sha256": "f9c226add23a37a39bf7fd34f5d8bdcb34a8d276b331fabf59bf9867b6f84bfe",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/transport-map.json",
+        "bytes": 56473,
+        "sha256": "644345be3d231431177c416b6ddbe3a1b2486597295af45fd5224857b5612d26",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/member-index.json",
+        "bytes": 5821,
+        "sha256": "1fc10fa094ebd128f21d6440152d391cec879a2ec6ded9d665667f9e42513d12",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/myeik-native-followup-20261014/authority-registry.json",
+        "bytes": 40781,
+        "sha256": "cef4e70eb31df11f78b98e556416028dcbff3803c88e8fcd90bcacde621f2808",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/myeik-native-followup-20261014/ledger.json",
+        "bytes": 1420024,
+        "sha256": "5469ce347ba71779f48d74e724ed83a38c2d92a9e97bc81fb8f04c78aea37166",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/myeik-native-followup-20261014/patch.json",
+        "bytes": 168907,
+        "sha256": "2063448ed664eac98cfdb48eea1529b5d62df0664be060890336505289c02761",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/myeik-native-followup-20261014/runtime-envelope.json",
+        "bytes": 1381,
+        "sha256": "ef3e0ad4bc2a2cb475a1d40572bafea760175d85a2bb5740d26d46ee9479dadc",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+        "bytes": 1851757,
+        "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 2097328,
+        "uncompressed_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+        "bytes": 403376,
+        "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-BGD-ADM1-000.bin.gz",
+        "bytes": 33218,
+        "sha256": "77da64f82264ceb232482415d950ba870b339b1953a8d22afe19baf06dab5495",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 92247,
+        "uncompressed_sha256": "bb91b74c7a7d8a690122b916f5e2f99606d2ce2f18ff938f49d80f15b4ba6aea"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHN-ADM1-000.bin.gz",
+        "bytes": 77377,
+        "sha256": "ef7d65847af732f6e61430d6357a4909252f98771d9b00413d38bc3cb4eb767d",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 263343,
+        "uncompressed_sha256": "bc4afc7eacf4351ae5b3ae7a612327987ce1123cb5deb8574fb49107091c6623"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM1-000.bin.gz",
+        "bytes": 2009868,
+        "sha256": "4a716fa04288d6742b1f43031ea90a26998c86becb1389f46acd3200b3acb1e0",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 5103747,
+        "uncompressed_sha256": "4c63fe43294a391e8f2de4e9f86f3edb60f8688275b9fee90c61fb2aa0c26061"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+        "bytes": 11542134,
+        "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 33554432,
+        "uncompressed_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+        "bytes": 2253028,
+        "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 6485570,
+        "uncompressed_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-LAO-ADM1-000.bin.gz",
+        "bytes": 136573,
+        "sha256": "83a51a0eb283d4e6bb3fc7b8eab6365c92539ed0a3a029c4de8a02e8aaa24519",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 453270,
+        "uncompressed_sha256": "152d7d9f680d84c31214fe327e4d102a330d61f222329701ec8ea00a8d2dfb55"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-LAO-ADM2-000.bin.gz",
+        "bytes": 415901,
+        "sha256": "386b63fd1829ce9228006934b32e740280cd53eb0eaae5c40c0beca8dd5ccae3",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 1317529,
+        "uncompressed_sha256": "a433001f30fd6caa368c3ca44ecc5b739250350601bb4159be6968dcc947e25e"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM1-000.bin.gz",
+        "bytes": 604071,
+        "sha256": "ccb0a975eecbc6c2adafac2e5072879e38b70b7d5fe507c17a370af27af43320",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 1566790,
+        "uncompressed_sha256": "b031c1be502e3eb73ec948e66e9824f1055e03fe8d14dcaf076ace94fe1158dc"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM2-000.bin.gz",
+        "bytes": 971970,
+        "sha256": "a094d21b2fef072c343dbbf0dd324a7bc016cbb6a540d16145ee1400cadaf8e2",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 2577505,
+        "uncompressed_sha256": "ac13eddca60dd54830e4951c3646d3898d8ec7ab086660dfb12d8f89579abf29"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz",
+        "bytes": 1396414,
+        "sha256": "57de50a588f418601412bb7a34cc2f43a3fd6d7d6f16635cb41b95e5ae505db6",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4205367,
+        "uncompressed_sha256": "94c0c9af839094257d13a6fe6590feddb2dcb04540d87e58b656c9f000fb92a2"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-THA-ADM1-000.bin.gz",
+        "bytes": 314966,
+        "sha256": "a0cbbd57b5fb847d36c418051c9e838bee5d9a4c06805a13495612d2cd9cf8e9",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 1009970,
+        "uncompressed_sha256": "841f1250cac868fa966b2089863f01e9c9b4dc9b7fb0d9d6dce9a495e32b32a0"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-THA-ADM2-000.bin.gz",
+        "bytes": 2688274,
+        "sha256": "9ecb1bca78b481b24ed1e94d6a3c4230cde4b1c02c3618a45c784a77e6bcd4ed",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8461813,
+        "uncompressed_sha256": "faae0d9d6fe56b489a9cb3bd5b8fe100025aad99ec554bf7a9f49cbe2216bf10"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/source-target-native-delivery-20261014/evidence/physical-reproduction.py",
+        "bytes": 5450,
+        "sha256": "05af43d7d7722e8d7bb201f5876a43d9c7f9a2d0f4ea39e467229351a35c9bc3",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "data/administrative-sources.json",
+        "bytes": 661416,
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "data/geographic-decisions/asia.json",
+        "bytes": 10723935,
+        "sha256": "a66b5e57b1c8c54dc9480360c61e0f91752c6fc6a0b710dfdf5131abc9dd6807",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "data/geography/part-15.json",
+        "bytes": 5180426,
+        "sha256": "6f763059820d14a4eab78173a756a8869821dd810e94f77c20eb5510c6cfb1df",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "data/global-sources/IND-ADM3-metadata.json",
+        "bytes": 2206,
+        "sha256": "f7bb99ddfcadaa1091c4b634b48c8843ee9d8b636af4f6da1cefccb0d424fc33",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "data/ownership-selection.json",
+        "bytes": 1561,
+        "sha256": "1e75a3224cbfe25933c1828ad2b26176b628c31f60e02b4908711b2bddbc1cc0",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+        "bytes": 4719659,
+        "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 13287234,
+        "uncompressed_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "data/sources.json",
+        "bytes": 1338,
+        "sha256": "b66732450b7ce2f39550058ea1073036c4bf3419f86ca3a58f105aba0bfed0c4",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "scripts/evidence/immutable.py",
+        "bytes": 17414,
+        "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "scripts/prepare.mjs",
+        "bytes": 4376,
+        "sha256": "3a934b9236b2c8dd70b8aafed61c1b5528663366e4fc5df127a5841b501c0bfd",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "scripts/reconcile-topology.py",
+        "bytes": 8419,
+        "sha256": "1739883a9ada57e346f12c009beb4c14091429e810ec7cc77f8b01e8bd3ae763",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "ownership_selection": "1e75a3224cbfe25933c1828ad2b26176b628c31f60e02b4908711b2bddbc1cc0",
+      "source_catalogue": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+      "source_queue": "78007430b6f9faedb188ef0619b7ff0a7a2cc7fff2ec9f1c41ee69936ec4ebd8",
+      "original_mmr_adm3": "57de50a588f418601412bb7a34cc2f43a3fd6d7d6f16635cb41b95e5ae505db6",
+      "selected_mmr_part15": "6f763059820d14a4eab78173a756a8869821dd810e94f77c20eb5510c6cfb1df",
+      "physical_member_index": "1fc10fa094ebd128f21d6440152d391cec879a2ec6ded9d665667f9e42513d12",
+      "physical_transport_map": "644345be3d231431177c416b6ddbe3a1b2486597295af45fd5224857b5612d26"
+    },
+    "pin_files": {
+      "ownership_selection": {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "data/ownership-selection.json"
+      },
+      "source_catalogue": {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json"
+      },
+      "source_queue": {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json"
+      },
+      "original_mmr_adm3": {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz"
+      },
+      "selected_mmr_part15": {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "data/geography/part-15.json"
+      },
+      "physical_member_index": {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/member-index.json"
+      },
+      "physical_transport_map": {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/transport-map.json"
+      }
+    },
+    "subject_files": {
+      "gb:MMR:ADM3:66882298B20948488348117": {
+        "version": 1,
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz",
+        "id_template": "gb:{shapeGroup}:{shapeType}:{shapeID}",
+        "properties": [
+          "shapeGroup",
+          "shapeType",
+          "shapeID"
+        ]
+      },
+      "gb:MMR:ADM3:66882298B21195914889348": {
+        "version": 1,
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz",
+        "id_template": "gb:{shapeGroup}:{shapeType}:{shapeID}",
+        "properties": [
+          "shapeGroup",
+          "shapeType",
+          "shapeID"
+        ]
+      },
+      "gb:MMR:ADM3:66882298B21473836197235": {
+        "version": 1,
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz",
+        "id_template": "gb:{shapeGroup}:{shapeType}:{shapeID}",
+        "properties": [
+          "shapeGroup",
+          "shapeType",
+          "shapeID"
+        ]
+      },
+      "gb:MMR:ADM3:66882298B27866808767172": {
+        "version": 1,
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz",
+        "id_template": "gb:{shapeGroup}:{shapeType}:{shapeID}",
+        "properties": [
+          "shapeGroup",
+          "shapeType",
+          "shapeID"
+        ]
+      },
+      "gb:MMR:ADM3:66882298B33854457780857": {
+        "version": 1,
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz",
+        "id_template": "gb:{shapeGroup}:{shapeType}:{shapeID}",
+        "properties": [
+          "shapeGroup",
+          "shapeType",
+          "shapeID"
+        ]
+      },
+      "gb:MMR:ADM3:66882298B3445717579771": {
+        "version": 1,
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz",
+        "id_template": "gb:{shapeGroup}:{shapeType}:{shapeID}",
+        "properties": [
+          "shapeGroup",
+          "shapeType",
+          "shapeID"
+        ]
+      },
+      "gb:MMR:ADM3:66882298B34816344861267": {
+        "version": 1,
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz",
+        "id_template": "gb:{shapeGroup}:{shapeType}:{shapeID}",
+        "properties": [
+          "shapeGroup",
+          "shapeType",
+          "shapeID"
+        ]
+      },
+      "gb:MMR:ADM3:66882298B35313795132071": {
+        "version": 1,
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz",
+        "id_template": "gb:{shapeGroup}:{shapeType}:{shapeID}",
+        "properties": [
+          "shapeGroup",
+          "shapeType",
+          "shapeID"
+        ]
+      },
+      "gb:MMR:ADM3:66882298B45976501481961": {
+        "version": 1,
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz",
+        "id_template": "gb:{shapeGroup}:{shapeType}:{shapeID}",
+        "properties": [
+          "shapeGroup",
+          "shapeType",
+          "shapeID"
+        ]
+      },
+      "gb:MMR:ADM3:66882298B46433982831447": {
+        "version": 1,
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz",
+        "id_template": "gb:{shapeGroup}:{shapeType}:{shapeID}",
+        "properties": [
+          "shapeGroup",
+          "shapeType",
+          "shapeID"
+        ]
+      },
+      "gb:MMR:ADM3:66882298B48553142968450": {
+        "version": 1,
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz",
+        "id_template": "gb:{shapeGroup}:{shapeType}:{shapeID}",
+        "properties": [
+          "shapeGroup",
+          "shapeType",
+          "shapeID"
+        ]
+      },
+      "gb:MMR:ADM3:66882298B5626975055677": {
+        "version": 1,
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz",
+        "id_template": "gb:{shapeGroup}:{shapeType}:{shapeID}",
+        "properties": [
+          "shapeGroup",
+          "shapeType",
+          "shapeID"
+        ]
+      },
+      "gb:MMR:ADM3:66882298B59134367047252": {
+        "version": 1,
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz",
+        "id_template": "gb:{shapeGroup}:{shapeType}:{shapeID}",
+        "properties": [
+          "shapeGroup",
+          "shapeType",
+          "shapeID"
+        ]
+      },
+      "gb:MMR:ADM3:66882298B59879554977018": {
+        "version": 1,
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz",
+        "id_template": "gb:{shapeGroup}:{shapeType}:{shapeID}",
+        "properties": [
+          "shapeGroup",
+          "shapeType",
+          "shapeID"
+        ]
+      },
+      "gb:MMR:ADM3:66882298B62212267926712": {
+        "version": 1,
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz",
+        "id_template": "gb:{shapeGroup}:{shapeType}:{shapeID}",
+        "properties": [
+          "shapeGroup",
+          "shapeType",
+          "shapeID"
+        ]
+      },
+      "gb:MMR:ADM3:66882298B62732217443925": {
+        "version": 1,
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz",
+        "id_template": "gb:{shapeGroup}:{shapeType}:{shapeID}",
+        "properties": [
+          "shapeGroup",
+          "shapeType",
+          "shapeID"
+        ]
+      },
+      "gb:MMR:ADM3:66882298B63844124977533": {
+        "version": 1,
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz",
+        "id_template": "gb:{shapeGroup}:{shapeType}:{shapeID}",
+        "properties": [
+          "shapeGroup",
+          "shapeType",
+          "shapeID"
+        ]
+      },
+      "gb:MMR:ADM3:66882298B65618262001870": {
+        "version": 1,
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz",
+        "id_template": "gb:{shapeGroup}:{shapeType}:{shapeID}",
+        "properties": [
+          "shapeGroup",
+          "shapeType",
+          "shapeID"
+        ]
+      },
+      "gb:MMR:ADM3:66882298B78974611272668": {
+        "version": 1,
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz",
+        "id_template": "gb:{shapeGroup}:{shapeType}:{shapeID}",
+        "properties": [
+          "shapeGroup",
+          "shapeType",
+          "shapeID"
+        ]
+      },
+      "gb:MMR:ADM3:66882298B84564180686688": {
+        "version": 1,
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz",
+        "id_template": "gb:{shapeGroup}:{shapeType}:{shapeID}",
+        "properties": [
+          "shapeGroup",
+          "shapeType",
+          "shapeID"
+        ]
+      },
+      "gb:MMR:ADM3:66882298B87314551665108": {
+        "version": 1,
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz",
+        "id_template": "gb:{shapeGroup}:{shapeType}:{shapeID}",
+        "properties": [
+          "shapeGroup",
+          "shapeType",
+          "shapeID"
+        ]
+      },
+      "gb:MMR:ADM3:66882298B91132834391640": {
+        "version": 1,
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz",
+        "id_template": "gb:{shapeGroup}:{shapeType}:{shapeID}",
+        "properties": [
+          "shapeGroup",
+          "shapeType",
+          "shapeID"
+        ]
+      },
+      "gb:MMR:ADM3:66882298B93394455443594": {
+        "version": 1,
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz",
+        "id_template": "gb:{shapeGroup}:{shapeType}:{shapeID}",
+        "properties": [
+          "shapeGroup",
+          "shapeType",
+          "shapeID"
+        ]
+      },
+      "gb:MMR:ADM3:66882298B94192188096874": {
+        "version": 1,
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz",
+        "id_template": "gb:{shapeGroup}:{shapeType}:{shapeID}",
+        "properties": [
+          "shapeGroup",
+          "shapeType",
+          "shapeID"
+        ]
+      },
+      "gb:MMR:ADM3:66882298B97791680692613": {
+        "version": 1,
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz",
+        "id_template": "gb:{shapeGroup}:{shapeType}:{shapeID}",
+        "properties": [
+          "shapeGroup",
+          "shapeType",
+          "shapeID"
+        ]
+      },
+      "gb:MMR:ADM3:66882298B98470543554215": {
+        "version": 1,
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz",
+        "id_template": "gb:{shapeGroup}:{shapeType}:{shapeID}",
+        "properties": [
+          "shapeGroup",
+          "shapeType",
+          "shapeID"
+        ]
+      }
+    }
+  },
+  "sources": [
+    {
+      "id": "gb:BGD:ADM1",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BGD/ADM1/geoBoundaries-BGD-ADM1_simplified.geojson",
+      "role": "Complete retained original administrative family supporting source membership, parent lineage and competing-source interpretation.",
+      "vintage": "2015 represented-year claim",
+      "retrieved_at": "Retained acquisition predates accepted source corpus 9431af7; original retrieval date not independently established here.",
+      "license": {
+        "status": "redistributable",
+        "terms": "CC0 1.0 Universal (CC0 1.0) Public Domain Dedication"
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "All original contiguous parts are authenticated in baseline.files at f7c358326d776398bc1cffe84df81eac7033091c; concatenate decoded parts in catalogue ordinal order to restore original bytes bb91b74c7a7d8a690122b916f5e2f99606d2ce2f18ff938f49d80f15b4ba6aea.",
+      "limit": "Reference source dates and physical/source overlaps do not independently establish current territorial ownership."
+    },
+    {
+      "id": "gb:CHN:ADM1",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CHN/ADM1/geoBoundaries-CHN-ADM1_simplified.geojson",
+      "role": "Complete retained original administrative family supporting source membership, parent lineage and competing-source interpretation.",
+      "vintage": "2019 represented-year claim",
+      "retrieved_at": "Retained acquisition predates accepted source corpus 9431af7; original retrieval date not independently established here.",
+      "license": {
+        "status": "redistributable",
+        "terms": "Public Domain"
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "All original contiguous parts are authenticated in baseline.files at f7c358326d776398bc1cffe84df81eac7033091c; concatenate decoded parts in catalogue ordinal order to restore original bytes bc4afc7eacf4351ae5b3ae7a612327987ce1123cb5deb8574fb49107091c6623.",
+      "limit": "Reference source dates and physical/source overlaps do not independently establish current territorial ownership."
+    },
+    {
+      "id": "gb:IND:ADM1",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IND/ADM1/geoBoundaries-IND-ADM1_simplified.geojson",
+      "role": "Complete retained original administrative family supporting source membership, parent lineage and competing-source interpretation.",
+      "vintage": "2011 represented-year claim",
+      "retrieved_at": "Retained acquisition predates accepted source corpus 9431af7; original retrieval date not independently established here.",
+      "license": {
+        "status": "redistributable",
+        "terms": "Creative Commons Attribution 2.5 India (CC BY 2.5 IN)"
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "All original contiguous parts are authenticated in baseline.files at f7c358326d776398bc1cffe84df81eac7033091c; concatenate decoded parts in catalogue ordinal order to restore original bytes 4c63fe43294a391e8f2de4e9f86f3edb60f8688275b9fee90c61fb2aa0c26061.",
+      "limit": "Reference source dates and physical/source overlaps do not independently establish current territorial ownership."
+    },
+    {
+      "id": "gb:IND:ADM3",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IND/ADM3/geoBoundaries-IND-ADM3_simplified.geojson",
+      "role": "Complete retained original administrative family supporting source membership, parent lineage and competing-source interpretation.",
+      "vintage": "2018 represented-year claim",
+      "retrieved_at": "Retained acquisition predates accepted source corpus 9431af7; original retrieval date not independently established here.",
+      "license": {
+        "status": "redistributable",
+        "terms": "Open Data Commons Open Database License 1.0"
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "All original contiguous parts are authenticated in baseline.files at f7c358326d776398bc1cffe84df81eac7033091c; concatenate decoded parts in catalogue ordinal order to restore original bytes 4ea6807d0a0c5aac0b46ee8e31ed7c30fbec273b44345bba1e4a2bb5f299f5fb.",
+      "limit": "Complete retained product, not a fresh acquisition or territorial approval. India ADM3 retained 6822 features while metadata advertises 6836; that discrepancy remains explicit."
+    },
+    {
+      "id": "gb:LAO:ADM1",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/LAO/ADM1/geoBoundaries-LAO-ADM1_simplified.geojson",
+      "role": "Complete retained original administrative family supporting source membership, parent lineage and competing-source interpretation.",
+      "vintage": "2017 represented-year claim",
+      "retrieved_at": "Retained acquisition predates accepted source corpus 9431af7; original retrieval date not independently established here.",
+      "license": {
+        "status": "redistributable",
+        "terms": "Open Data Commons Open Database License 1.0"
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "All original contiguous parts are authenticated in baseline.files at f7c358326d776398bc1cffe84df81eac7033091c; concatenate decoded parts in catalogue ordinal order to restore original bytes 152d7d9f680d84c31214fe327e4d102a330d61f222329701ec8ea00a8d2dfb55.",
+      "limit": "Reference source dates and physical/source overlaps do not independently establish current territorial ownership."
+    },
+    {
+      "id": "gb:LAO:ADM2",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/LAO/ADM2/geoBoundaries-LAO-ADM2_simplified.geojson",
+      "role": "Complete retained original administrative family supporting source membership, parent lineage and competing-source interpretation.",
+      "vintage": "2019 represented-year claim",
+      "retrieved_at": "Retained acquisition predates accepted source corpus 9431af7; original retrieval date not independently established here.",
+      "license": {
+        "status": "redistributable",
+        "terms": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "All original contiguous parts are authenticated in baseline.files at f7c358326d776398bc1cffe84df81eac7033091c; concatenate decoded parts in catalogue ordinal order to restore original bytes a433001f30fd6caa368c3ca44ecc5b739250350601bb4159be6968dcc947e25e.",
+      "limit": "Reference source dates and physical/source overlaps do not independently establish current territorial ownership."
+    },
+    {
+      "id": "gb:MMR:ADM1",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM1/geoBoundaries-MMR-ADM1_simplified.geojson",
+      "role": "Complete retained original administrative family supporting source membership, parent lineage and competing-source interpretation.",
+      "vintage": "2019 represented-year claim",
+      "retrieved_at": "Retained acquisition predates accepted source corpus 9431af7; original retrieval date not independently established here.",
+      "license": {
+        "status": "redistributable",
+        "terms": "Creative Commons Attribution 4.0 (CC BY 4.0)"
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "All original contiguous parts are authenticated in baseline.files at f7c358326d776398bc1cffe84df81eac7033091c; concatenate decoded parts in catalogue ordinal order to restore original bytes b031c1be502e3eb73ec948e66e9824f1055e03fe8d14dcaf076ace94fe1158dc.",
+      "limit": "Reference source dates and physical/source overlaps do not independently establish current territorial ownership."
+    },
+    {
+      "id": "gb:MMR:ADM2",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM2/geoBoundaries-MMR-ADM2_simplified.geojson",
+      "role": "Complete retained original administrative family supporting source membership, parent lineage and competing-source interpretation.",
+      "vintage": "2019 represented-year claim",
+      "retrieved_at": "Retained acquisition predates accepted source corpus 9431af7; original retrieval date not independently established here.",
+      "license": {
+        "status": "redistributable",
+        "terms": "Creative Commons Attribution 4.0 (CC BY 4.0)"
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "All original contiguous parts are authenticated in baseline.files at f7c358326d776398bc1cffe84df81eac7033091c; concatenate decoded parts in catalogue ordinal order to restore original bytes ac13eddca60dd54830e4951c3646d3898d8ec7ab086660dfb12d8f89579abf29.",
+      "limit": "Reference source dates and physical/source overlaps do not independently establish current territorial ownership."
+    },
+    {
+      "id": "gb:MMR:ADM3",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM3/geoBoundaries-MMR-ADM3_simplified.geojson",
+      "role": "Complete retained original administrative family supporting source membership, parent lineage and competing-source interpretation.",
+      "vintage": "2019 represented-year claim",
+      "retrieved_at": "Retained acquisition predates accepted source corpus 9431af7; original retrieval date not independently established here.",
+      "license": {
+        "status": "redistributable",
+        "terms": "Creative Commons Attribution 4.0 (CC BY 4.0)"
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "All original contiguous parts are authenticated in baseline.files at f7c358326d776398bc1cffe84df81eac7033091c; concatenate decoded parts in catalogue ordinal order to restore original bytes 94c0c9af839094257d13a6fe6590feddb2dcb04540d87e58b656c9f000fb92a2.",
+      "limit": "Reference source dates and physical/source overlaps do not independently establish current territorial ownership."
+    },
+    {
+      "id": "gb:THA:ADM1",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/THA/ADM1/geoBoundaries-THA-ADM1_simplified.geojson",
+      "role": "Complete retained original administrative family supporting source membership, parent lineage and competing-source interpretation.",
+      "vintage": "2017 represented-year claim",
+      "retrieved_at": "Retained acquisition predates accepted source corpus 9431af7; original retrieval date not independently established here.",
+      "license": {
+        "status": "redistributable",
+        "terms": "Open Data Commons Open Database License 1.0"
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "All original contiguous parts are authenticated in baseline.files at f7c358326d776398bc1cffe84df81eac7033091c; concatenate decoded parts in catalogue ordinal order to restore original bytes 841f1250cac868fa966b2089863f01e9c9b4dc9b7fb0d9d6dce9a495e32b32a0.",
+      "limit": "Reference source dates and physical/source overlaps do not independently establish current territorial ownership."
+    },
+    {
+      "id": "gb:THA:ADM2",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/THA/ADM2/geoBoundaries-THA-ADM2_simplified.geojson",
+      "role": "Complete retained original administrative family supporting source membership, parent lineage and competing-source interpretation.",
+      "vintage": "2019 represented-year claim",
+      "retrieved_at": "Retained acquisition predates accepted source corpus 9431af7; original retrieval date not independently established here.",
+      "license": {
+        "status": "redistributable",
+        "terms": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "All original contiguous parts are authenticated in baseline.files at f7c358326d776398bc1cffe84df81eac7033091c; concatenate decoded parts in catalogue ordinal order to restore original bytes faae0d9d6fe56b489a9cb3bd5b8fe100025aad99ec554bf7a9f49cbe2216bf10.",
+      "limit": "Reference source dates and physical/source overlaps do not independently establish current territorial ownership."
+    },
+    {
+      "id": "gshhg",
+      "url": "https://www.soest.hawaii.edu/pwessel/gshhg/",
+      "role": "Physical source hierarchy, separate from territorial ownership",
+      "vintage": "GSHHG2.3.7, heterogeneous observations",
+      "retrieved_at": "2026-10-14",
+      "license": {
+        "status": "redistributable",
+        "terms": "LGPL source terms retained in existing custody"
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Restore complete original native gshhs_f.b parts and source metadata from the baseline member-index.json and transport-map.json. The retained physical result enumerates original member/metadata descriptors and the unchanged archived reproducer authenticates complete bytes before target interpretation.",
+      "limit": "Only compact source indexes are checked by this manifest. Full physical member and metadata bytes are restoration-only here; their prior consumption is supported by the retained physical output and independent assessment. No new full physical reproduction or present-day territorial truth is claimed.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "natural-earth",
+      "url": "https://www.naturalearthdata.com/about/terms-of-use/",
+      "role": "Previously accepted reference country border used by topology reconciliation",
+      "vintage": "Retained original reference snapshot",
+      "retrieved_at": "2026-10-14",
+      "license": {
+        "status": "redistributable",
+        "terms": "Public domain"
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Use retained natural-earth-reference-countries.geojson.gz and original data/sources.json hash.",
+      "limit": "Retained reference-country geometry supports analysis of existing display reconciliation, not sovereignty adjudication or automatic administrative repair.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "execution-code-1",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/6d8eec613cc26b1dae0006e44610d22fd6491384/coordination/engineering/myanmar-adm3-current-cells-20261014/independent-review/qualify-east.py",
+      "role": "Exact archived executed method or repository dependency; no new executable is proposed.",
+      "vintage": "6d8eec613cc26b1dae0006e44610d22fd6491384",
+      "retrieved_at": "Read from locally retained immutable Git history on 2026-10-14; no network acquisition.",
+      "license": {
+        "status": "unknown",
+        "terms": "Repository code; reuse terms not independently reassessed in this manifest."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Read git show 6d8eec613cc26b1dae0006e44610d22fd6491384:coordination/engineering/myanmar-adm3-current-cells-20261014/independent-review/qualify-east.py and authenticate 14577 bytes, SHA256 e2ad02530515d4656e6f0b5b8deaecfb6630a097959089a8b57b83ce85f9ff41.",
+      "limit": "Exact code bytes were inspected locally; author execution history is not asserted to be an ancestor of the accepted PR base and is outside baseline-file ancestry validation. Archived source/native execution and current product acceptance are separate.",
+      "execution_file": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/independent-review/qualify-east.py",
+        "bytes": 14577,
+        "sha256": "e2ad02530515d4656e6f0b5b8deaecfb6630a097959089a8b57b83ce85f9ff41",
+        "hash_kind": "file-bytes",
+        "commit": "6d8eec613cc26b1dae0006e44610d22fd6491384"
+      }
+    },
+    {
+      "id": "execution-code-2",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/999311cb46f49f9e844526370bfa136e4d2bb1f7/coordination/engineering/myanmar-adm3-current-cells-20261014/independent-review/qualify-ayeyarwady.py",
+      "role": "Exact archived executed method or repository dependency; no new executable is proposed.",
+      "vintage": "999311cb46f49f9e844526370bfa136e4d2bb1f7",
+      "retrieved_at": "Read from locally retained immutable Git history on 2026-10-14; no network acquisition.",
+      "license": {
+        "status": "unknown",
+        "terms": "Repository code; reuse terms not independently reassessed in this manifest."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Read git show 999311cb46f49f9e844526370bfa136e4d2bb1f7:coordination/engineering/myanmar-adm3-current-cells-20261014/independent-review/qualify-ayeyarwady.py and authenticate 18701 bytes, SHA256 aeb93f1ae091b805a134c1d6fecadd1e862ef8850fd3c382fb2666a50c295236.",
+      "limit": "Exact code bytes were inspected locally; author execution history is not asserted to be an ancestor of the accepted PR base and is outside baseline-file ancestry validation. Archived source/native execution and current product acceptance are separate.",
+      "execution_file": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/independent-review/qualify-ayeyarwady.py",
+        "bytes": 18701,
+        "sha256": "aeb93f1ae091b805a134c1d6fecadd1e862ef8850fd3c382fb2666a50c295236",
+        "hash_kind": "file-bytes",
+        "commit": "999311cb46f49f9e844526370bfa136e4d2bb1f7"
+      }
+    },
+    {
+      "id": "execution-code-3",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/999311cb46f49f9e844526370bfa136e4d2bb1f7/coordination/engineering/source-target-native-delivery-20261014/evidence/physical-reproduction.py",
+      "role": "Exact archived executed method or repository dependency; no new executable is proposed.",
+      "vintage": "999311cb46f49f9e844526370bfa136e4d2bb1f7",
+      "retrieved_at": "Read from locally retained immutable Git history on 2026-10-14; no network acquisition.",
+      "license": {
+        "status": "unknown",
+        "terms": "Repository code; reuse terms not independently reassessed in this manifest."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Read git show 999311cb46f49f9e844526370bfa136e4d2bb1f7:coordination/engineering/source-target-native-delivery-20261014/evidence/physical-reproduction.py and authenticate 5450 bytes, SHA256 05af43d7d7722e8d7bb201f5876a43d9c7f9a2d0f4ea39e467229351a35c9bc3.",
+      "limit": "Exact code bytes were inspected locally; author execution history is not asserted to be an ancestor of the accepted PR base and is outside baseline-file ancestry validation. Archived source/native execution and current product acceptance are separate.",
+      "execution_file": {
+        "path": "coordination/engineering/source-target-native-delivery-20261014/evidence/physical-reproduction.py",
+        "bytes": 5450,
+        "sha256": "05af43d7d7722e8d7bb201f5876a43d9c7f9a2d0f4ea39e467229351a35c9bc3",
+        "hash_kind": "file-bytes",
+        "commit": "999311cb46f49f9e844526370bfa136e4d2bb1f7"
+      }
+    },
+    {
+      "id": "execution-code-4",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/999311cb46f49f9e844526370bfa136e4d2bb1f7/coordination/engineering/global-physical-comparison-20261006/comparison.py",
+      "role": "Exact archived executed method or repository dependency; no new executable is proposed.",
+      "vintage": "999311cb46f49f9e844526370bfa136e4d2bb1f7",
+      "retrieved_at": "Read from locally retained immutable Git history on 2026-10-14; no network acquisition.",
+      "license": {
+        "status": "unknown",
+        "terms": "Repository code; reuse terms not independently reassessed in this manifest."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Read git show 999311cb46f49f9e844526370bfa136e4d2bb1f7:coordination/engineering/global-physical-comparison-20261006/comparison.py and authenticate 9834 bytes, SHA256 f9c226add23a37a39bf7fd34f5d8bdcb34a8d276b331fabf59bf9867b6f84bfe.",
+      "limit": "Exact code bytes were inspected locally; author execution history is not asserted to be an ancestor of the accepted PR base and is outside baseline-file ancestry validation. Archived source/native execution and current product acceptance are separate.",
+      "execution_file": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/comparison.py",
+        "bytes": 9834,
+        "sha256": "f9c226add23a37a39bf7fd34f5d8bdcb34a8d276b331fabf59bf9867b6f84bfe",
+        "hash_kind": "file-bytes",
+        "commit": "999311cb46f49f9e844526370bfa136e4d2bb1f7"
+      }
+    },
+    {
+      "id": "execution-code-5",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/999311cb46f49f9e844526370bfa136e4d2bb1f7/scripts/evidence/immutable.py",
+      "role": "Exact archived executed method or repository dependency; no new executable is proposed.",
+      "vintage": "999311cb46f49f9e844526370bfa136e4d2bb1f7",
+      "retrieved_at": "Read from locally retained immutable Git history on 2026-10-14; no network acquisition.",
+      "license": {
+        "status": "unknown",
+        "terms": "Repository code; reuse terms not independently reassessed in this manifest."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Read git show 999311cb46f49f9e844526370bfa136e4d2bb1f7:scripts/evidence/immutable.py and authenticate 17414 bytes, SHA256 a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46.",
+      "limit": "Exact code bytes were inspected locally; author execution history is not asserted to be an ancestor of the accepted PR base and is outside baseline-file ancestry validation. Archived source/native execution and current product acceptance are separate.",
+      "execution_file": {
+        "path": "scripts/evidence/immutable.py",
+        "bytes": 17414,
+        "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46",
+        "hash_kind": "file-bytes",
+        "commit": "999311cb46f49f9e844526370bfa136e4d2bb1f7"
+      }
+    },
+    {
+      "id": "execution-code-6",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2ab238d1e5f5053661e94c2cd57aeabf555e0b59/scripts/delivery-handoff-advance.mjs",
+      "role": "Exact archived executed method or repository dependency; no new executable is proposed.",
+      "vintage": "2ab238d1e5f5053661e94c2cd57aeabf555e0b59",
+      "retrieved_at": "Read from locally retained immutable Git history on 2026-10-14; no network acquisition.",
+      "license": {
+        "status": "unknown",
+        "terms": "Repository code; reuse terms not independently reassessed in this manifest."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Read git show 2ab238d1e5f5053661e94c2cd57aeabf555e0b59:scripts/delivery-handoff-advance.mjs and authenticate 72997 bytes, SHA256 ca11b67938a043ef6766c457c45df149b23486e3fb4447cec2afb69eea049d3a.",
+      "limit": "Exact code bytes were inspected locally; author execution history is not asserted to be an ancestor of the accepted PR base and is outside baseline-file ancestry validation. Archived source/native execution and current product acceptance are separate.",
+      "execution_file": {
+        "path": "scripts/delivery-handoff-advance.mjs",
+        "bytes": 72997,
+        "sha256": "ca11b67938a043ef6766c457c45df149b23486e3fb4447cec2afb69eea049d3a",
+        "hash_kind": "file-bytes",
+        "commit": "2ab238d1e5f5053661e94c2cd57aeabf555e0b59"
+      }
+    },
+    {
+      "id": "execution-code-7",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2ab238d1e5f5053661e94c2cd57aeabf555e0b59/scripts/geography-prefetch.mjs",
+      "role": "Exact archived executed method or repository dependency; no new executable is proposed.",
+      "vintage": "2ab238d1e5f5053661e94c2cd57aeabf555e0b59",
+      "retrieved_at": "Read from locally retained immutable Git history on 2026-10-14; no network acquisition.",
+      "license": {
+        "status": "unknown",
+        "terms": "Repository code; reuse terms not independently reassessed in this manifest."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Read git show 2ab238d1e5f5053661e94c2cd57aeabf555e0b59:scripts/geography-prefetch.mjs and authenticate 13608 bytes, SHA256 19aba167eb32d5e7c08034a0e748db95e657d2ec0f10f8ee034cdeba9b2720a8.",
+      "limit": "Exact code bytes were inspected locally; author execution history is not asserted to be an ancestor of the accepted PR base and is outside baseline-file ancestry validation. Archived source/native execution and current product acceptance are separate.",
+      "execution_file": {
+        "path": "scripts/geography-prefetch.mjs",
+        "bytes": 13608,
+        "sha256": "19aba167eb32d5e7c08034a0e748db95e657d2ec0f10f8ee034cdeba9b2720a8",
+        "hash_kind": "file-bytes",
+        "commit": "2ab238d1e5f5053661e94c2cd57aeabf555e0b59"
+      }
+    },
+    {
+      "id": "execution-code-8",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2ab238d1e5f5053661e94c2cd57aeabf555e0b59/coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "role": "Exact archived executed method or repository dependency; no new executable is proposed.",
+      "vintage": "2ab238d1e5f5053661e94c2cd57aeabf555e0b59",
+      "retrieved_at": "Read from locally retained immutable Git history on 2026-10-14; no network acquisition.",
+      "license": {
+        "status": "unknown",
+        "terms": "Repository code; reuse terms not independently reassessed in this manifest."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Read git show 2ab238d1e5f5053661e94c2cd57aeabf555e0b59:coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs and authenticate 148712 bytes, SHA256 dc4955d97b55a6171748742e235904a4486dcc61c532b17de9d0a46a6c9721ba.",
+      "limit": "Exact code bytes were inspected locally; author execution history is not asserted to be an ancestor of the accepted PR base and is outside baseline-file ancestry validation. Archived source/native execution and current product acceptance are separate.",
+      "execution_file": {
+        "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+        "bytes": 148712,
+        "sha256": "dc4955d97b55a6171748742e235904a4486dcc61c532b17de9d0a46a6c9721ba",
+        "hash_kind": "file-bytes",
+        "commit": "2ab238d1e5f5053661e94c2cd57aeabf555e0b59"
+      }
+    },
+    {
+      "id": "execution-code-9",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2ab238d1e5f5053661e94c2cd57aeabf555e0b59/src/ownership-codec.js",
+      "role": "Exact archived executed method or repository dependency; no new executable is proposed.",
+      "vintage": "2ab238d1e5f5053661e94c2cd57aeabf555e0b59",
+      "retrieved_at": "Read from locally retained immutable Git history on 2026-10-14; no network acquisition.",
+      "license": {
+        "status": "unknown",
+        "terms": "Repository code; reuse terms not independently reassessed in this manifest."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Read git show 2ab238d1e5f5053661e94c2cd57aeabf555e0b59:src/ownership-codec.js and authenticate 2948 bytes, SHA256 64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d.",
+      "limit": "Exact code bytes were inspected locally; author execution history is not asserted to be an ancestor of the accepted PR base and is outside baseline-file ancestry validation. Archived source/native execution and current product acceptance are separate.",
+      "execution_file": {
+        "path": "src/ownership-codec.js",
+        "bytes": 2948,
+        "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d",
+        "hash_kind": "file-bytes",
+        "commit": "2ab238d1e5f5053661e94c2cd57aeabf555e0b59"
+      }
+    },
+    {
+      "id": "execution-code-10",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2ab238d1e5f5053661e94c2cd57aeabf555e0b59/src/native-grid.js",
+      "role": "Exact archived executed method or repository dependency; no new executable is proposed.",
+      "vintage": "2ab238d1e5f5053661e94c2cd57aeabf555e0b59",
+      "retrieved_at": "Read from locally retained immutable Git history on 2026-10-14; no network acquisition.",
+      "license": {
+        "status": "unknown",
+        "terms": "Repository code; reuse terms not independently reassessed in this manifest."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Read git show 2ab238d1e5f5053661e94c2cd57aeabf555e0b59:src/native-grid.js and authenticate 17642 bytes, SHA256 79bc47ed3d85a1c5a183b1b07e8551e7d9d961c2b09fbe3d00a9f6cc76d75286.",
+      "limit": "Exact code bytes were inspected locally; author execution history is not asserted to be an ancestor of the accepted PR base and is outside baseline-file ancestry validation. Archived source/native execution and current product acceptance are separate.",
+      "execution_file": {
+        "path": "src/native-grid.js",
+        "bytes": 17642,
+        "sha256": "79bc47ed3d85a1c5a183b1b07e8551e7d9d961c2b09fbe3d00a9f6cc76d75286",
+        "hash_kind": "file-bytes",
+        "commit": "2ab238d1e5f5053661e94c2cd57aeabf555e0b59"
+      }
+    },
+    {
+      "id": "execution-code-11",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2ab238d1e5f5053661e94c2cd57aeabf555e0b59/scripts/check-effective-geographic-regression.mjs",
+      "role": "Exact archived executed method or repository dependency; no new executable is proposed.",
+      "vintage": "2ab238d1e5f5053661e94c2cd57aeabf555e0b59",
+      "retrieved_at": "Read from locally retained immutable Git history on 2026-10-14; no network acquisition.",
+      "license": {
+        "status": "unknown",
+        "terms": "Repository code; reuse terms not independently reassessed in this manifest."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Read git show 2ab238d1e5f5053661e94c2cd57aeabf555e0b59:scripts/check-effective-geographic-regression.mjs and authenticate 89420 bytes, SHA256 2d6af0a3946c0dec895ab3c42766ecd88c275c48cd465e6a90ff610e776809fe.",
+      "limit": "Exact code bytes were inspected locally; author execution history is not asserted to be an ancestor of the accepted PR base and is outside baseline-file ancestry validation. Archived source/native execution and current product acceptance are separate.",
+      "execution_file": {
+        "path": "scripts/check-effective-geographic-regression.mjs",
+        "bytes": 89420,
+        "sha256": "2d6af0a3946c0dec895ab3c42766ecd88c275c48cd465e6a90ff610e776809fe",
+        "hash_kind": "file-bytes",
+        "commit": "2ab238d1e5f5053661e94c2cd57aeabf555e0b59"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/source-evidence.json",
+      "bytes": 27275,
+      "sha256": "e004cad6b47c6a436297d80425f4023018305cc84825d85ec9cf30c903d69f91",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/authority-binding.json",
+      "bytes": 723,
+      "sha256": "52c203791635f1c8139fafe51d133b296b8d30a876303284abddf57a4abb639c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/original-rule-preimage.json",
+      "bytes": 720,
+      "sha256": "c5784c640b8828b2c9bcab076cb42133451bb577a7ca2f9723707cfbce23ab2e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/qualified-ledger.json",
+      "bytes": 114855,
+      "sha256": "60f45e1b4b9d2ee00cf8083f30a5d1b409c3691c7a7b426d3bdfcabe693753c1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/ayeyarwady-native-patch.json",
+      "bytes": 73139,
+      "sha256": "33c67ac55c78fee2ac36331df9f9e379fd9baa6ec982c40e0cb303f54869fa64",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/ayeyarwady-native-qualification.json",
+      "bytes": 6868,
+      "sha256": "d34fccc7a1818cc5ce0635c7855b8c88d2372586f1953bf84d616d883562358d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/ayeyarwady-original-stage-inputs.json",
+      "bytes": 288912,
+      "sha256": "4f44601c024b9938214cb17c76ba83a2f4711869241dca230c1b3f46726c35dc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/ayeyarwady-physical-operating.json",
+      "bytes": 1660,
+      "sha256": "b209bad69a2950487794b861269cc25288a1586881b1ce56a6e34514f9ef435f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/ayeyarwady-physical-support.json",
+      "bytes": 864579,
+      "sha256": "b0d46de2cc907aa7bf28cc87bead4a730efb91450600a5ecec418bd2ae5acb3f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/ayeyarwady-physical-time.txt",
+      "bytes": 777,
+      "sha256": "9ba4dbe567ba6bcc754a630417b970ca29000082fccbf5c7c9d4d6423690c1eb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/ayeyarwady-queue-disposition.json",
+      "bytes": 834798,
+      "sha256": "937ead10ba0bf5aa1ef6c0e8284c847eb3ed7f1a2b79a0db85136ce214f509ca",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/ayeyarwady-source-operating.json",
+      "bytes": 1584,
+      "sha256": "5f41b01d58719e20b806fbfb37eb76b9362bce7580a72426ad7e92442de454c4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/ayeyarwady-source-qualification.json",
+      "bytes": 4271090,
+      "sha256": "a6a59a039760c38cb9bba81a05f5d86c14c2a94884156d9739628559ac7c21a3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/ayeyarwady-source-time.txt",
+      "bytes": 777,
+      "sha256": "420d8d8ab1e2aa7396853f8ea550e154861c5645d50b5b0ed6616b2a5d4f2eeb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/current-ownership-subtraction.json",
+      "bytes": 3502,
+      "sha256": "96c425ee9572bd3322175f1d0a58277f2caa281aba68054bcf327c7f15f7399e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/current-pin-lookups.json",
+      "bytes": 1848,
+      "sha256": "d746295b3eb40bc20769cefd67f933a95625a50b4082d2036429d9988ae0f7d0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/east-source-operating.json",
+      "bytes": 810,
+      "sha256": "ed52911bc6bbefc00142c0265fe83145f373ae221d2827a68d6bf0b2ea6fba1d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/east-source-qualification.json",
+      "bytes": 287998,
+      "sha256": "cfcdf6e6207e349c8c39f9c9d3473e5c740065a4754ea4478eb61218e227e179",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/independent-review/ayeyarwady-source-physical-assessment.json",
+      "bytes": 1723,
+      "sha256": "32bff997fd1120cba721b87f5ffdb2b8ae6ae479777b245a4763661f91beba85",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/independent-review/east-assessment.json",
+      "bytes": 2063,
+      "sha256": "ed97ecda2c574490a64186f8c03cebc0528d7b466fdcf6b1f4a7b32a0a6d5f09",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "retained-source-comparison",
+      "kind": "measurement",
+      "description": "Original complete source families, frozen selectors, selected whole geometry and complete parent lineage at scientific vintage f7; exploratory east and Ayeyarwady outputs retain exact archived code/runtime pins. Original consumed geometry supports physical interpretation; selected geometry binds the current base only.",
+      "software": "Archived Python source probes; Shapely 2.1.2 / GEOS 3.13.1 as recorded in outputs.",
+      "units": "native cells; source features; bytes; seconds",
+      "execution_commits": [
+        "6d8eec613cc26b1dae0006e44610d22fd6491384",
+        "999311cb46f49f9e844526370bfa136e4d2bb1f7"
+      ]
+    },
+    {
+      "id": "whole-original-physical",
+      "kind": "measurement",
+      "description": "Unchanged physical-reproduction.py and comparison.py applied to all 16 full original Ayeyarwady targets, including zero-cell children. Whole original member and metadata restoration inputs remain separate from compact manifest validation.",
+      "software": "Archived unchanged Python reproducer; Shapely 2.1.2 / GEOS 3.13.1.",
+      "units": "native cells; source coverage; bytes; seconds",
+      "execution_commit": "999311cb46f49f9e844526370bfa136e4d2bb1f7"
+    },
+    {
+      "id": "native-authority-qualification",
+      "kind": "measurement",
+      "description": "Existing constructOriginalAuthority / qualifySourceTargetNativeAuthority at actual execution commit qualifies 9 positive-cell owners and 5668 cells; outputs are exact retained products. Current owner-zero applicability, cumulative selected composition and final selected-consumer readback remain pending.",
+      "software": "Node v24.19.0, uv 1.52.1; archived repository import closure enumerated as restoration-only code sources.",
+      "units": "native cells; targets; bytes; seconds",
+      "execution_commit": "2ab238d1e5f5053661e94c2cd57aeabf555e0b59"
+    },
+    {
+      "id": "operating-observations",
+      "kind": "measurement",
+      "description": "Reported wall time and Darwin child maximum RSS are observations from retained operating records. No universal 256 MiB cap, optional wrapper qualification, live RSS enforcement, process-tree bound, or new supervisor is inferred. The legacy physical field maximum_rss_kib is not used: Darwin reports bytes, preserved in the operating receipt.",
+      "software": "Retained time/runtime receipts and processing admission observations.",
+      "units": "bytes; seconds"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "east_candidate_cells",
+      "value": 469,
+      "unit": "cells",
+      "vintage": "baseline",
+      "input_sha256": "cfcdf6e6207e349c8c39f9c9d3473e5c740065a4754ea4478eb61218e227e179",
+      "input_file": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/east-source-qualification.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "f7c358326d776398bc1cffe84df81eac7033091c"
+    },
+    {
+      "id": "east_unflagged_land",
+      "value": 227,
+      "unit": "cells",
+      "vintage": "baseline",
+      "input_sha256": "ed97ecda2c574490a64186f8c03cebc0528d7b466fdcf6b1f4a7b32a0a6d5f09",
+      "input_file": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/independent-review/east-assessment.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "f7c358326d776398bc1cffe84df81eac7033091c"
+    },
+    {
+      "id": "east_flagged_land",
+      "value": 211,
+      "unit": "cells",
+      "vintage": "baseline",
+      "input_sha256": "ed97ecda2c574490a64186f8c03cebc0528d7b466fdcf6b1f4a7b32a0a6d5f09",
+      "input_file": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/independent-review/east-assessment.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "f7c358326d776398bc1cffe84df81eac7033091c"
+    },
+    {
+      "id": "east_conflict_controls",
+      "value": 18,
+      "unit": "cells",
+      "vintage": "baseline",
+      "input_sha256": "ed97ecda2c574490a64186f8c03cebc0528d7b466fdcf6b1f4a7b32a0a6d5f09",
+      "input_file": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/independent-review/east-assessment.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "f7c358326d776398bc1cffe84df81eac7033091c"
+    },
+    {
+      "id": "east_physical_holds",
+      "value": 13,
+      "unit": "cells",
+      "vintage": "baseline",
+      "input_sha256": "ed97ecda2c574490a64186f8c03cebc0528d7b466fdcf6b1f4a7b32a0a6d5f09",
+      "input_file": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/independent-review/east-assessment.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "f7c358326d776398bc1cffe84df81eac7033091c"
+    },
+    {
+      "id": "ayeyarwady_source_cells",
+      "value": 7069,
+      "unit": "cells",
+      "vintage": "baseline",
+      "input_sha256": "937ead10ba0bf5aa1ef6c0e8284c847eb3ed7f1a2b79a0db85136ce214f509ca",
+      "input_file": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/ayeyarwady-queue-disposition.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "f7c358326d776398bc1cffe84df81eac7033091c"
+    },
+    {
+      "id": "ayeyarwady_complete_children",
+      "value": 16,
+      "unit": "targets",
+      "vintage": "baseline",
+      "input_sha256": "937ead10ba0bf5aa1ef6c0e8284c847eb3ed7f1a2b79a0db85136ce214f509ca",
+      "input_file": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/ayeyarwady-queue-disposition.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "f7c358326d776398bc1cffe84df81eac7033091c"
+    },
+    {
+      "id": "ayeyarwady_source_relative_holds",
+      "value": 1181,
+      "unit": "cells",
+      "vintage": "baseline",
+      "input_sha256": "937ead10ba0bf5aa1ef6c0e8284c847eb3ed7f1a2b79a0db85136ce214f509ca",
+      "input_file": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/ayeyarwady-queue-disposition.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "f7c358326d776398bc1cffe84df81eac7033091c"
+    },
+    {
+      "id": "ayeyarwady_thabaung_land_holds",
+      "value": 220,
+      "unit": "cells",
+      "vintage": "baseline",
+      "input_sha256": "937ead10ba0bf5aa1ef6c0e8284c847eb3ed7f1a2b79a0db85136ce214f509ca",
+      "input_file": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/ayeyarwady-queue-disposition.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "f7c358326d776398bc1cffe84df81eac7033091c"
+    },
+    {
+      "id": "ayeyarwady_total_holds",
+      "value": 1401,
+      "unit": "cells",
+      "vintage": "baseline",
+      "input_sha256": "937ead10ba0bf5aa1ef6c0e8284c847eb3ed7f1a2b79a0db85136ce214f509ca",
+      "input_file": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/ayeyarwady-queue-disposition.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "f7c358326d776398bc1cffe84df81eac7033091c"
+    },
+    {
+      "id": "remaining_repair_cells",
+      "value": 27212,
+      "unit": "cells",
+      "vintage": "baseline",
+      "input_sha256": "96c425ee9572bd3322175f1d0a58277f2caa281aba68054bcf327c7f15f7399e",
+      "input_file": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/current-ownership-subtraction.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "f7c358326d776398bc1cffe84df81eac7033091c"
+    },
+    {
+      "id": "remaining_conflict_cells",
+      "value": 28,
+      "unit": "cells",
+      "vintage": "baseline",
+      "input_sha256": "96c425ee9572bd3322175f1d0a58277f2caa281aba68054bcf327c7f15f7399e",
+      "input_file": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/current-ownership-subtraction.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "f7c358326d776398bc1cffe84df81eac7033091c"
+    },
+    {
+      "id": "remaining_physical_cells",
+      "value": 18459,
+      "unit": "cells",
+      "vintage": "baseline",
+      "input_sha256": "96c425ee9572bd3322175f1d0a58277f2caa281aba68054bcf327c7f15f7399e",
+      "input_file": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/current-ownership-subtraction.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "f7c358326d776398bc1cffe84df81eac7033091c"
+    },
+    {
+      "id": "new_accepted_repairs",
+      "value": 0,
+      "unit": "cells",
+      "vintage": "baseline",
+      "input_sha256": "96c425ee9572bd3322175f1d0a58277f2caa281aba68054bcf327c7f15f7399e",
+      "input_file": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/current-ownership-subtraction.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "f7c358326d776398bc1cffe84df81eac7033091c"
+    },
+    {
+      "id": "completed_packages",
+      "value": 0,
+      "unit": "packages",
+      "vintage": "baseline",
+      "input_sha256": "96c425ee9572bd3322175f1d0a58277f2caa281aba68054bcf327c7f15f7399e",
+      "input_file": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/current-ownership-subtraction.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "f7c358326d776398bc1cffe84df81eac7033091c"
+    },
+    {
+      "id": "native_qualified_cells",
+      "value": 5668,
+      "unit": "cells",
+      "vintage": "archived",
+      "input_sha256": "d34fccc7a1818cc5ce0635c7855b8c88d2372586f1953bf84d616d883562358d",
+      "input_file": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/ayeyarwady-native-qualification.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "2ab238d1e5f5053661e94c2cd57aeabf555e0b59"
+    },
+    {
+      "id": "native_qualified_targets",
+      "value": 9,
+      "unit": "targets",
+      "vintage": "archived",
+      "input_sha256": "d34fccc7a1818cc5ce0635c7855b8c88d2372586f1953bf84d616d883562358d",
+      "input_file": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/ayeyarwady-native-qualification.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "2ab238d1e5f5053661e94c2cd57aeabf555e0b59"
+    },
+    {
+      "id": "native_observed_seconds",
+      "value": 1.1740807079999995,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "d34fccc7a1818cc5ce0635c7855b8c88d2372586f1953bf84d616d883562358d",
+      "input_file": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/ayeyarwady-native-qualification.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "2ab238d1e5f5053661e94c2cd57aeabf555e0b59"
+    },
+    {
+      "id": "native_charged_phase_bytes",
+      "value": 273230405,
+      "unit": "bytes",
+      "vintage": "archived",
+      "input_sha256": "d34fccc7a1818cc5ce0635c7855b8c88d2372586f1953bf84d616d883562358d",
+      "input_file": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/ayeyarwady-native-qualification.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "2ab238d1e5f5053661e94c2cd57aeabf555e0b59"
+    },
+    {
+      "id": "native_observed_max_rss",
+      "value": 184467456,
+      "unit": "bytes",
+      "vintage": "archived",
+      "input_sha256": "d34fccc7a1818cc5ce0635c7855b8c88d2372586f1953bf84d616d883562358d",
+      "input_file": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/ayeyarwady-native-qualification.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "2ab238d1e5f5053661e94c2cd57aeabf555e0b59"
+    },
+    {
+      "id": "east_observed_seconds",
+      "value": 8.584936208999999,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "ed52911bc6bbefc00142c0265fe83145f373ae221d2827a68d6bf0b2ea6fba1d",
+      "input_file": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/east-source-operating.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "6d8eec613cc26b1dae0006e44610d22fd6491384"
+    },
+    {
+      "id": "east_observed_max_rss",
+      "value": 353533952,
+      "unit": "bytes",
+      "vintage": "archived",
+      "input_sha256": "ed52911bc6bbefc00142c0265fe83145f373ae221d2827a68d6bf0b2ea6fba1d",
+      "input_file": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/east-source-operating.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "6d8eec613cc26b1dae0006e44610d22fd6491384"
+    },
+    {
+      "id": "ayeyarwady-source_observed_seconds",
+      "value": 11.155867459019646,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "5f41b01d58719e20b806fbfb37eb76b9362bce7580a72426ad7e92442de454c4",
+      "input_file": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/ayeyarwady-source-operating.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "999311cb46f49f9e844526370bfa136e4d2bb1f7"
+    },
+    {
+      "id": "ayeyarwady-source_observed_max_rss",
+      "value": 570834944,
+      "unit": "bytes",
+      "vintage": "archived",
+      "input_sha256": "5f41b01d58719e20b806fbfb37eb76b9362bce7580a72426ad7e92442de454c4",
+      "input_file": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/ayeyarwady-source-operating.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "999311cb46f49f9e844526370bfa136e4d2bb1f7"
+    },
+    {
+      "id": "ayeyarwady-physical_observed_seconds",
+      "value": 6.4044105829671025,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "b209bad69a2950487794b861269cc25288a1586881b1ce56a6e34514f9ef435f",
+      "input_file": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/ayeyarwady-physical-operating.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "999311cb46f49f9e844526370bfa136e4d2bb1f7"
+    },
+    {
+      "id": "ayeyarwady-physical_observed_max_rss",
+      "value": 975093760,
+      "unit": "bytes",
+      "vintage": "archived",
+      "input_sha256": "b209bad69a2950487794b861269cc25288a1586881b1ce56a6e34514f9ef435f",
+      "input_file": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/ayeyarwady-physical-operating.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "999311cb46f49f9e844526370bfa136e4d2bb1f7"
+    }
+  ],
+  "summaries": [],
+  "conclusions": [
+    {
+      "status": "supported",
+      "text": "The scientific scope is ten east targets examined against seven complete retained source families, plus sixteen complete Ayeyarwady children across four parents examined against eleven complete retained supporting source families. No source-membership mismatches are reported; India ADM3 has 6822 retained versus 6836 advertised features.",
+      "source_ids": [
+        "gb:BGD:ADM1",
+        "gb:CHN:ADM1",
+        "gb:IND:ADM1",
+        "gb:IND:ADM3",
+        "gb:LAO:ADM1",
+        "gb:LAO:ADM2",
+        "gb:MMR:ADM1",
+        "gb:MMR:ADM2",
+        "gb:MMR:ADM3",
+        "gb:THA:ADM1",
+        "gb:THA:ADM2"
+      ]
+    },
+    {
+      "status": "supported",
+      "text": "Ayeyarwady native qualification records 5668 cells across nine targets. 1181 source-relative cells and 220 Thabaung land cells remain held; the 132 Thabaung source-relative cells are already included within 1181. These are evidence and qualification outcomes, not accepted repairs.",
+      "source_ids": [
+        "gb:MMR:ADM3",
+        "gshhg"
+      ]
+    },
+    {
+      "status": "unresolved",
+      "text": "Current-owner checks, cumulative authority composition, final selected-consumer readback and acceptance are pending. New accepted repaired cells and completed packages remain zero. Source-relative physical absence does not establish ocean or absence of a territorial owner.",
+      "source_ids": [
+        "gb:MMR:ADM3",
+        "gshhg",
+        "natural-earth"
+      ]
+    },
+    {
+      "status": "unresolved",
+      "text": "East source diagnostics include country-reference/reconciliation conflicts and physical holds. Unflagged source membership alone does not authorize repairs. Full original physical sources are restoration-only in this manifest, and archived code authentication does not substitute for independent semantic review.",
+      "source_ids": [
+        "gb:BGD:ADM1",
+        "gb:CHN:ADM1",
+        "gb:IND:ADM1",
+        "gb:IND:ADM3",
+        "gb:LAO:ADM1",
+        "gb:LAO:ADM2",
+        "gb:MMR:ADM1",
+        "gb:MMR:ADM2",
+        "gb:MMR:ADM3",
+        "gb:THA:ADM1",
+        "gb:THA:ADM2",
+        "gshhg",
+        "natural-earth"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "partial",
+    "implementation": "proposed",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "For byte validation only: node scripts/evidence-quality.mjs <this-manifest> <repository>. No scientific rerun was performed while drafting this manifest.",
+    "Restore exact executed methods with the git-show commands and byte hashes in execution-code source records. Restore complete administrative original products from baseline catalogue parts; retain complete input/output configuration in the named source/physical/native receipts.",
+    "Scientific reproduction requires the existing approved route and fresh applicable resource admission; archived operating summaries do not prescribe present resource availability or imply live supervision."
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "east_candidate_cells",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/east-source-qualification.json",
+      "json_pointer": "/candidate_cells"
+    },
+    {
+      "metric_id": "east_unflagged_land",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/independent-review/east-assessment.json",
+      "json_pointer": "/counts/unflagged_land_diagnostic"
+    },
+    {
+      "metric_id": "east_flagged_land",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/independent-review/east-assessment.json",
+      "json_pointer": "/counts/flagged_land_diagnostic"
+    },
+    {
+      "metric_id": "east_conflict_controls",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/independent-review/east-assessment.json",
+      "json_pointer": "/counts/conflict_controls"
+    },
+    {
+      "metric_id": "east_physical_holds",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/independent-review/east-assessment.json",
+      "json_pointer": "/counts/source_relative_holds"
+    },
+    {
+      "metric_id": "ayeyarwady_source_cells",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/ayeyarwady-queue-disposition.json",
+      "json_pointer": "/counts/source_cells"
+    },
+    {
+      "metric_id": "ayeyarwady_complete_children",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/ayeyarwady-queue-disposition.json",
+      "json_pointer": "/counts/scientific_scope_targets"
+    },
+    {
+      "metric_id": "ayeyarwady_source_relative_holds",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/ayeyarwady-queue-disposition.json",
+      "json_pointer": "/counts/source_relative_held_cells"
+    },
+    {
+      "metric_id": "ayeyarwady_thabaung_land_holds",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/ayeyarwady-queue-disposition.json",
+      "json_pointer": "/counts/physical_issue_land_held_cells"
+    },
+    {
+      "metric_id": "ayeyarwady_total_holds",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/ayeyarwady-queue-disposition.json",
+      "json_pointer": "/counts/total_held_cells"
+    },
+    {
+      "metric_id": "remaining_repair_cells",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/current-ownership-subtraction.json",
+      "json_pointer": "/packages/0/remaining_cells"
+    },
+    {
+      "metric_id": "remaining_conflict_cells",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/current-ownership-subtraction.json",
+      "json_pointer": "/packages/1/remaining_cells"
+    },
+    {
+      "metric_id": "remaining_physical_cells",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/current-ownership-subtraction.json",
+      "json_pointer": "/packages/2/remaining_cells"
+    },
+    {
+      "metric_id": "new_accepted_repairs",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/current-ownership-subtraction.json",
+      "json_pointer": "/new_accepted_repaired_cells"
+    },
+    {
+      "metric_id": "completed_packages",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/current-ownership-subtraction.json",
+      "json_pointer": "/completed_packages"
+    },
+    {
+      "metric_id": "native_qualified_cells",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/ayeyarwady-native-qualification.json",
+      "json_pointer": "/qualified_cells"
+    },
+    {
+      "metric_id": "native_qualified_targets",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/ayeyarwady-native-qualification.json",
+      "json_pointer": "/qualified_targets"
+    },
+    {
+      "metric_id": "native_observed_seconds",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/ayeyarwady-native-qualification.json",
+      "json_pointer": "/elapsed_seconds"
+    },
+    {
+      "metric_id": "native_charged_phase_bytes",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/ayeyarwady-native-qualification.json",
+      "json_pointer": "/charged_phase_bytes"
+    },
+    {
+      "metric_id": "native_observed_max_rss",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/ayeyarwady-native-qualification.json",
+      "json_pointer": "/node_max_rss_bytes"
+    },
+    {
+      "metric_id": "east_observed_seconds",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/east-source-operating.json",
+      "json_pointer": "/observed_wall_seconds"
+    },
+    {
+      "metric_id": "east_observed_max_rss",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/east-source-operating.json",
+      "json_pointer": "/maximum_process_rss_bytes"
+    },
+    {
+      "metric_id": "ayeyarwady-source_observed_seconds",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/ayeyarwady-source-operating.json",
+      "json_pointer": "/observed_wall_seconds"
+    },
+    {
+      "metric_id": "ayeyarwady-source_observed_max_rss",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/ayeyarwady-source-operating.json",
+      "json_pointer": "/observed_darwin_max_rss_bytes"
+    },
+    {
+      "metric_id": "ayeyarwady-physical_observed_seconds",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/ayeyarwady-physical-operating.json",
+      "json_pointer": "/observed_wall_seconds"
+    },
+    {
+      "metric_id": "ayeyarwady-physical_observed_max_rss",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/ayeyarwady-physical-operating.json",
+      "json_pointer": "/observed_darwin_max_rss_bytes"
+    }
+  ],
+  "retained_execution_products": [
+    {
+      "role": "source_qualification",
+      "record_path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/ayeyarwady-queue-disposition.json",
+      "json_pointer": "/scientific_inputs/source_qualification",
+      "execution_path": ".cache/mmr-ayeyarwady-source-execution-20261014-001/source-qualification.json",
+      "retained": {
+        "commit": "e6739afeafb57eff3856abb15f23129d7e7a7117",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/ayeyarwady-source-qualification.json",
+        "bytes": 4271090,
+        "sha256": "a6a59a039760c38cb9bba81a05f5d86c14c2a94884156d9739628559ac7c21a3"
+      }
+    },
+    {
+      "role": "physical_support",
+      "record_path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/ayeyarwady-queue-disposition.json",
+      "json_pointer": "/scientific_inputs/physical_support",
+      "execution_path": ".cache/mmr-ayeyarwady-physical-execution-20261014-001/run/.cache/full-census/gshhg-direct/whole-target-support.json",
+      "retained": {
+        "commit": "e6739afeafb57eff3856abb15f23129d7e7a7117",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/ayeyarwady-physical-support.json",
+        "bytes": 864579,
+        "sha256": "b0d46de2cc907aa7bf28cc87bead4a730efb91450600a5ecec418bd2ae5acb3f"
+      }
+    },
+    {
+      "role": "native-qualified-ledger",
+      "record_path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/ayeyarwady-native-qualification.json",
+      "json_pointer": "/products/2",
+      "execution_path": "ledger.json",
+      "retained": {
+        "commit": "cfbf82933c28dde755d5db49aade1ef5b916c43c",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/qualified-ledger.json",
+        "bytes": 114855,
+        "sha256": "60f45e1b4b9d2ee00cf8083f30a5d1b409c3691c7a7b426d3bdfcabe693753c1"
+      }
+    }
+  ]
+}
