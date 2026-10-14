@@ -306,7 +306,7 @@ Its older one-cell probes include 65,032 positive witnesses, but the remaining
 is a current selected-map census. A current complete visible inventory has not
 been established by this implementation.
 
-Use `screenNativeGapCandidates` in `scripts/visible-gap-eligibility.mjs` before
+Use `screenNativeGapCandidates` in `scripts/check-effective-geographic-regression.mjs` before
 expensive source/native repair work. Supply the exact candidate geometries,
 pinned normative latitude bytes and complete current effective owner rows,
 including the selected cumulative patch. It calls the renderer's exact native

@@ -4,7 +4,7 @@ import {gzipSync} from 'node:zlib';
 import {createHash} from 'node:crypto';
 import {nativeRowLatitudes} from '../src/native-grid.js';
 import {screenNativeGapCandidates,newVisibleRepairCandidates,repairVisibilityWitnesses,
-  decodeVisibilityLatitudes,visibilityDigest} from '../scripts/visible-gap-eligibility.mjs';
+  decodeVisibilityLatitudes,visibilityDigest} from '../scripts/check-effective-geographic-regression.mjs';
 
 const size=16,latitudes=nativeRowLatitudes(size);
 const selection={current_selection_sha256:'a'.repeat(64),patch_sha256:'b'.repeat(64),containing_native_asset_ids:['part0']};

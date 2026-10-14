@@ -1,6 +1,5 @@
 // Joint-only native checkpoint consumer. Keep the cold/package import closure literal.
-import {newVisibleRepairCandidates,repairVisibilityWitnesses} from './visible-gap-eligibility.mjs';
-import {compareIntervals} from './check-effective-geographic-regression.mjs';
+import {compareIntervals,newVisibleRepairCandidates,repairVisibilityWitnesses} from './check-effective-geographic-regression.mjs';
 const OUTPUT=4*1024*1024;
 const demand=(v,m)=>{if(!v)throw Error(m);};
 const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
