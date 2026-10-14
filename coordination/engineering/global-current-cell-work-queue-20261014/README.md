@@ -41,6 +41,21 @@ physical queues sit underneath it.
    source-to-location authority, explicit territorial exclusions and all relevant
    competitors. Then use the existing source-target native operator, verify
    conservation and coordinate normal reviewed integration.
+   Trace any current target's accepted topology reconciliation to its retained
+   border/reference authority and test the candidate cells against that authority.
+   Unique administrative-source lineage is not territorial approval; an absence
+   of interior polygon holes does not establish absence of territorial exclusions.
+   Keep competing authorities and exact withheld intervals rather than undoing a
+   reconciled border through an additive patch.
+
+For the Myanmar ADM3 family, the Myeik follow-up (#1874) found that Tanintharyi
+carries an accepted Natural Earth country-border reconciliation. Its nominally
+unique source candidates therefore require that additional country-border check,
+not only Myanmar/Thailand administrative-source overlap. The follow-up retains
+all deferred intervals and competing-border evidence in
+`../myeik-native-followup-20261014/`; future family workers must resolve that
+territorial discrepancy before promoting those intervals. Physical inland water
+and territorial identity remain separate: never substitute a nearest-bank rule.
 
 Example:
 
