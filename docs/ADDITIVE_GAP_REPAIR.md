@@ -266,3 +266,52 @@ refusal. A qualified SOURCE result can feed NATIVE through its exact full operat
 receipt. These phases alone do not select a release or complete a batch: programme
 admission, current neighbor/conservation qualification and the actual selected
 output remain separate requirements. Zero native cells remain zero cells.
+
+## Original members of accepted source aggregations
+
+The source-target constructor can reconcile a retained administrative feature
+whose original ID was merged into an existing native owner. This is an identity
+join under existing accepted aggregation lineage, not a nearest-owner rule or
+new geographic approval. Direct-owner evidence keeps its existing shape.
+
+When a complete source family contains such a target or competitor, include
+`source_membership` in its `source-target-native-evidence-v1` body:
+
+- `lineage`: an ordinary immutable pin for complete `data/semantic-report.json`
+- `index`: an ordinary immutable pin for `data/world-index.json`
+- `parts`: whole canonical geography-part pins containing every encountered
+  aggregate owner
+
+Each pin must match the same path's bytes in the reader's selected Git tree.
+The constructor uses complete `changes[].replaces` lineage as the reverse
+aggregation authority and requires exact agreement with each mapped canonical
+feature's complete `properties.metadata.source_member_ids`. Every listed member
+must occur exactly once in the complete retained original product. Relevant
+split/ambiguous lineage, direct-owner conflicts, missing siblings, duplicate IDs
+and conflicting bases are rejected. Unrelated split records do not block a
+one-to-one aggregation. This route does not support transitive or cross-family
+lineage, nor claim a global reverse scan of unread canonical geography metadata.
+
+For a mapped repair target, keep `targets[].id` as the original source-member ID
+and add `targets[].target_id` for its accepted owner ID. `pixelIndex` remains that
+owner's stable native index; `base_geometry` is its exact canonical geometry.
+The retained physical result and measured input stay keyed by the original
+member. The measured consumed geometry must equal that original source feature,
+and measured selected identity/geometry must equal the accepted owner. Several
+measured members of one owner produce one ledger row without duplicating cells.
+
+The native operator preserves each original polygon and hole under an internal
+scan ordinal, then unions active members by their accepted owner. Its public
+source feature `id` remains the original member; optional `target_id` names the
+accepted owner. Coverage masks name that original member with `source_id`, so
+one member's physical support cannot qualify a sibling-only cell. Only measured
+support is combined; unmeasured regions stay unsupported. Original boundaries,
+other-owner ambiguity, territorial exclusions and all occupied cells retain
+their existing treatment. `nativeRuntimeIndex` still rejects duplicate owners;
+this reconciliation is confined to the source-target additive operator.
+
+Mapped competitors do not need physical repair results of their own. For example,
+a direct repair target can retain Cu Chi as a Hồ Chí Minh competitor, or Hoa Vang
+and Lien Chieu as Đà Nẵng competitors, without claiming physical support for those
+cities. Actual held-case qualification, current owner-zero checks, source limits,
+selection and publication remain separate from this engineering capability.
