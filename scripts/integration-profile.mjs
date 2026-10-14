@@ -620,6 +620,12 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
           &&Array.isArray(evidence.families)&&evidence.families.length>0&&Array.isArray(evidence.targets)&&evidence.targets.length>0,
           'missing source-target evidence roles');
         for (const role of ['catalogue','physical_evidence','physical_input','physical_reproduction','owner_roster','native_latitudes']) pin(evidence[role]);
+        if(evidence.source_membership!==undefined){
+          const membership=evidence.source_membership;
+          needSelected(keys(membership,['index','lineage','parts'])&&Array.isArray(membership.parts)&&membership.parts.length>0,
+            'missing accepted source membership roles');
+          pin(membership.index);pin(membership.lineage);for(const part of membership.parts)pin(part);
+        }
         for (const family of evidence.families) {
           needSelected(text(family.source_id)&&Array.isArray(family.parts)&&family.parts.length>0,'missing complete source family roles');
           for (const part of family.parts) pin(part);

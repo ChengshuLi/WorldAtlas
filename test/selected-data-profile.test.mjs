@@ -1369,7 +1369,7 @@ test('unreachable accepted SOURCE declarations still require administrative cust
 
 // Structural role eligibility only; the source/native reader separately
 // authenticates whole products and actual map-cell ownership.
-function sourceTargetRoleFixture({wrongRule=false,emptyFamily=false,retainedRoles=false,mutateRoles=()=>{}}={}) {
+function sourceTargetRoleFixture({wrongRule=false,emptyFamily=false,retainedRoles=false,sourceMembership,mutateRoles=()=>{}}={}) {
   return fixture({mutate:f=>{
     const nativeRows=[{y:3,runs:[[4,5,1]]}];
     f.rows[1]={component_id:'new',target_id:'target-new',disposition:'assigned',native_cells:1,
@@ -1389,7 +1389,8 @@ function sourceTargetRoleFixture({wrongRule=false,emptyFamily=false,retainedRole
     }
     mutateRoles({f,roles,parts});
     const evidence=f.put(prefix+'source-target-evidence.json',{version:1,kind:'source-target-native-evidence-v1',...roles,
-      targets:[{id:'target-new'}],families:[{source_id:'source-family',parts:emptyFamily?[]:parts}]});
+      targets:[{id:'target-new'}],families:[{source_id:'source-family',parts:emptyFamily?[]:parts}],
+      ...(sourceMembership?{source_membership:sourceMembership(f)}:{})});
     const patch=f.leaf('source-target-native-patch.json');
     const body={version:1,kind:'source-target-native-custody-v1',source_evidence:evidence,native_patch:patch};
     const authority=f.put(prefix+'source-target-authority.json',body);
@@ -1440,4 +1441,13 @@ for(const [label,mutateRoles] of Object.entries({
 }))test('unchanged fixed source roles reject '+label,async()=>{
   const f=sourceTargetRoleFixture({retainedRoles:true,mutateRoles});
   assert.equal(await f.run(),null);
+});
+
+test('accepted source membership fixed roles remain in selected-data closure',async()=>{
+  for(const missing of [false,true]){
+    const f=sourceTargetRoleFixture({sourceMembership:f=>({index:f.leaf('member-index.json'),
+      lineage:f.leaf('member-lineage.json'),parts:missing?[]:[f.leaf('member-geography.json')]})});
+    const diagnostics={},result=await f.run({metadataDiagnostics:diagnostics});
+    if(missing)assert.equal(result,null);else assert.equal(result?.test_selection,'selected-data',diagnostics.failure);
+  }
 });

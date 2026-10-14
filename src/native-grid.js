@@ -224,17 +224,28 @@ export function deriveSourceTargetNativeDelta({targets, sourceFeatures, coverage
     targetByOwner.set(target.pixelIndex, target); targetById.set(target.id, target);
   }
   require(Array.isArray(sourceFeatures) && sourceFeatures.length > 0, 'Missing complete source family');
-  const sourceOwners = new Map();
+  const sourceOwners = new Map(), sourceIds = new Map(), ownerById = new Map();
   for (const feature of sourceFeatures) {
-    require(typeof feature.id === 'string' && feature.id && Number.isSafeInteger(feature.pixelIndex)
-      && feature.pixelIndex > 0 && !sourceOwners.has(feature.pixelIndex), 'Ambiguous source owner roster');
-    sourceOwners.set(feature.pixelIndex, feature.id);
+    const ownerId = feature.target_id ?? feature.id;
+    require(typeof feature.id === 'string' && feature.id && !sourceIds.has(feature.id)
+      && typeof ownerId === 'string' && ownerId && Number.isSafeInteger(feature.pixelIndex)
+      && feature.pixelIndex > 0, 'Ambiguous source owner roster');
+    require((!sourceOwners.has(feature.pixelIndex) || sourceOwners.get(feature.pixelIndex) === ownerId)
+      && (!ownerById.has(ownerId) || ownerById.get(ownerId) === feature.pixelIndex),
+    'Conflicting source owner identity');
+    sourceIds.set(feature.id,{owner:feature.pixelIndex,id:ownerId,index:sourceIds.size+1}); sourceOwners.set(feature.pixelIndex, ownerId);
+    ownerById.set(ownerId, feature.pixelIndex);
   }
   for (const target of targets) require(sourceOwners.get(target.pixelIndex) === target.id,
     'Source target differs from complete source owner roster');
   require(Array.isArray(coverageFeatures) && coverageFeatures.length > 0, 'Missing reviewed coverage');
   for (const feature of [...coverageFeatures, ...territorialExclusions])
     require(targetByOwner.get(feature.pixelIndex)?.id === feature.id, 'Foreign coverage or exclusion target');
+  for (const feature of coverageFeatures) {
+    const source=sourceIds.get(feature.source_id ?? feature.id);
+    require(source?.owner===feature.pixelIndex && source.id===feature.id,
+      'Coverage lacks exact original source membership');
+  }
   const options = {size, latitudes, rowStart, rowEnd};
   const scan = (features, masks = false) => {
     if (!features.length) return {rows:new Map(),ties:[]};
@@ -248,7 +259,20 @@ export function deriveSourceTargetNativeDelta({targets, sourceFeatures, coverage
     }
     return nativePolygonIntervals(nativeRuntimeIndex(features),options);
   };
-  const sources = scan(sourceFeatures), coverage = scan(coverageFeatures,true), excluded = scan(territorialExclusions,true);
+  // Internal scan ordinals preserve each original member's geometry and holes.
+  // Ownership below unions their accepted owners, while coverage must still meet
+  // its own measured member. A member's mask cannot borrow a sibling's geometry.
+  const originals=[...sourceIds], remap=result=>{
+    for(const spans of result.rows.values())for(const span of spans){
+      const [id,source]=originals[span.owner-1];span.owner=source.owner;span.source_id=id;
+    }
+    return result;
+  };
+  const sources=remap(scan(sourceFeatures.map(feature=>({...feature,pixelIndex:sourceIds.get(feature.id).index})))),
+    coverage=remap(scan(coverageFeatures.map(feature=>{
+      const id=feature.source_id??feature.id;
+      return {id,pixelIndex:sourceIds.get(id).index,geometry:feature.geometry};
+    }),true)), excluded=scan(territorialExclusions,true);
   // Exact boundary cells require the existing boundary adjudication; withholding
   // them here must not silently choose whichever source happened to come first.
   const ties = new Map();
@@ -291,7 +315,8 @@ export function deriveSourceTargetNativeDelta({targets, sourceFeatures, coverage
       if (holes.some(run => run.owner === owner && run.start <= start && start < run.end)) {
         counts.territorial_exclusion_cells += count; continue;
       }
-      if (!support.some(run => run.owner === owner && run.start <= start && start < run.end)) {
+      const activeMembers=new Set(source.filter(run=>run.owner===owner&&run.start<=start&&start<run.end).map(run=>run.source_id));
+      if (!support.some(run => run.owner === owner && activeMembers.has(run.source_id) && run.start <= start && start < run.end)) {
         counts.unsupported_coverage_cells += count; continue;
       }
       const previous = runs.at(-1);
