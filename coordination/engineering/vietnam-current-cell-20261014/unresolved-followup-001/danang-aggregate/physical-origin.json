@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "kind": "unchanged-original-physical-result-retention",
+  "original": {
+    "commit": "943dffafa638ecba9fbec679210c3b6f1640fb51",
+    "path": "coordination/engineering/release-physical-source-retention-20261014/original-support.json",
+    "mode": "100644",
+    "git_blob_oid": "2deb0341616165ab0bee0d7824908b0187471143",
+    "bytes": 108968,
+    "sha256": "e789c71b68b63da4d2aaf3c5aee878403009f570208a7a10e495ae5ea87e8809"
+  },
+  "stage_commit": "778cff2721df789706ad0f3b847f3f600b972a3d",
+  "stage_path": "coordination/engineering/vietnam-current-cell-20261014/unresolved-followup-001/danang-aggregate/original-stage-inputs.json",
+  "producer_git_blob_oid": "73e005238c929a901185abb8321c419e7cd9f688",
+  "comparison_git_blob_oid": "86654c37ec854d862073aaf63c8d8d144956b283",
+  "original_admission": {
+    "commit": "943dffafa638ecba9fbec679210c3b6f1640fb51",
+    "path": "coordination/engineering/release-physical-source-retention-20261014/original-admission.json",
+    "mode": "100644",
+    "git_blob_oid": "40ebbe08381283b72c8d3916a1da671a92755e85",
+    "bytes": 87,
+    "sha256": "7961c18f72572c361490a083b2056ff7e149ebf5c33c4e70cf5e6964e8f4ab53"
+  },
+  "measured_original_peak_bytes": 912936960,
+  "platform": "Linux",
+  "limits": [
+    "Retains complete original accepted-method output; no local physical producer replay.",
+    "Seven raw members and five full missing/extra witnesses remain intact.",
+    "Not a candidate-cell or authority qualification; not a portable memory guarantee.",
+    "No optimized unpublished operator is adopted."
+  ]
+}
