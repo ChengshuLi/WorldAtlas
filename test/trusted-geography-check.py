@@ -38,7 +38,6 @@ class Fixture:
                      'package.json', '.github/evidence-policy.json', 'src/regional-import-gate.js',
                      'coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs',
                      'coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs',
-                     'coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint-continuous.mjs',
                      'coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs',
                      'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs']:
             target = self.repo / name

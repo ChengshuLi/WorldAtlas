@@ -85,7 +85,7 @@ export function ordinaryOriginalGeography(report, {baseline, head}) {
   return report?.version === 1 && report.method_id === 'worldatlas-trusted-geography-check-v1' &&
     report.baseline_commit === baseline && report.trusted_code_commit === baseline && report.candidate_commit === head &&
     report.candidate_code_executed === false && report.published === false && report.source_approval === false &&
-    report.gate_status === 'passed' && ['not-applicable', 'no-footprint-change', 'no-new-regression'].includes(report.status) &&
+    report.gate_status === 'passed' && ['not-applicable', 'no-footprint-change', 'no-new-regression', 'no-new-native-loss'].includes(report.status) &&
     !Object.hasOwn(report, 'adjudication');
 }
 

@@ -1,5 +1,5 @@
-// One trusted Node invocation owns checkpoint authority, native comparison and
-// native repair comparison. Proposed commits are data, never imported code.
+// One trusted Node invocation owns checkpoint authority and native comparison.
+// Proposed commits are data, never imported code.
 import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
@@ -10,11 +10,9 @@ import {gzipSync} from 'node:zlib';
 const ROOT = fileURLToPath(new URL('../../../', import.meta.url));
 const P = 'coordination/engineering/selected-geography-effective-prevention-20261009/';
 export const JOINT_CODE = Object.freeze([
-  'scripts/run-geographic-check.py', 'scripts/check-geographic-regression.py',
+  'scripts/run-geographic-check.py',
   'scripts/check-effective-geographic-regression.mjs', 'scripts/selected-checkpoint-native.mjs',
-   'src/native-grid.js', 'src/ownership-codec.js',
-  'scripts/evidence/immutable.py', 'scripts/evidence/geometry.py',
-  'scripts/ellipsoidal_area.py', 'requirements.txt',
+  'src/native-grid.js', 'src/ownership-codec.js',
   P + 'selected-neighbor-prevention.mjs', P + 'selected-checkpoint.mjs', P + 'selected-joint-entry.mjs',
   'scripts/accepted-selected-checkpoint.mjs', 'scripts/check-handoff-scope.mjs',
   'scripts/evidence-policy.mjs', 'scripts/evidence-quality.mjs', 'scripts/geographic-report-artifact.mjs',

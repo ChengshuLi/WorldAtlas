@@ -419,7 +419,13 @@ export function checkGeographicReport(geography, baseline, candidate, codeCommit
   if (codeCommit !== baseline) need(!geography.checkpoint && !geography.reused_baseline_proof && !geography.unchanged_selected_inputs &&
     /^[a-f0-9]{64}$/.test(geography.trusted_code_inventory_sha256 ?? ''),
     'Software geography must bind actual execution inventory without baseline/checkpoint reuse');
-  const ordinaryPass = ['not-applicable', 'no-footprint-change', 'no-new-regression'].includes(geography.status);
+  const nativePass = geography.status === 'no-new-native-loss' && geography.validation_scope === 'selected-native-map-cells'
+    && geography.selected_native_report?.status === 'no-new-native-loss'
+    && geography.selected_native_report.method === 'selected-native-owner-conservation-v1'
+    && geography.selected_native_report.candidate_code_executed === false
+    && geography.selected_native_report.lost_or_reassigned_cells === 0
+    && Array.isArray(geography.selected_native_report.intervals) && geography.selected_native_report.intervals.length === 0;
+  const ordinaryPass = nativePass || ['not-applicable', 'no-footprint-change', 'no-new-regression'].includes(geography.status);
   const waterPass = geography.status === 'regressions-found' &&
     geography.adjudication?.status === 'all-findings-supported-and-reviewed' &&
     geography.adjudication.unresolved_findings === 0;

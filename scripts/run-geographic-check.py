@@ -9,7 +9,6 @@ import pathlib
 import re
 import subprocess
 import tempfile
-import gzip
 import time
 import signal
 import sys
