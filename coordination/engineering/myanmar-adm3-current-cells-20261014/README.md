@@ -1,0 +1,11 @@
+# Myanmar current map-cell investigation
+
+Refs #1880. Input vintage: `f7c358326d776398bc1cffe84df81eac7033091c`; frozen queue: `a61b6f9e7f88b1da380e3a834f89d7509132ed71`.
+
+The complete current cumulative patch removes 12,103 already accepted cells from the 39,315-cell frozen repair package, leaving 27,212 repair-evaluation cells, 28 source-conflict cells and 18,459 physical-interpretation cells. All 12,103 intersections have the original candidate owner; no different-owner intersection was found. This authenticates frozen interval applicability under the unchanged base selection. It does not claim a fresh native acquisition. `evidence/current-pin-lookups.json` records actual local lookup provenance separately from declared historical pins.
+
+The eastern source investigation checked 469 centres (438 repair, 18 source-conflict controls, 13 physical holds), seven complete source families (1,589 features), retained reference countries, exact source membership, current identities, original/current holes and open decisions. No source-membership mismatch occurred. 227 repair cells have no flags in this investigation; 211 have source or reference-country flags. These categories do not approve repair. The selected owners require coherent border review, physical-source evidence, admitted production and native conservation. The complete foreign current-owner geometry and worldwide competitor scope are not independently cleared by this exploratory program.
+
+The unchanged method ran at execution commit `6d8eec613cc26b1dae0006e44610d22fd6491384`. Its observed duration was 8.584936209 seconds and peak process RSS was 353,533,952 bytes. The program charged 143,258,673 raw plus decoded input bytes under its 256 MiB input limit. RSS was observed after execution, without a live termination guard; these are source-investigation measurements. The executable method is retained in execution history and will be removed from the final data-only diff.
+
+Ayeyarwady preparation covers all 16 children of four complete parents: 5,888 land candidates and 1,181 physical holds. Execution is pending. No ownership selection has changed. No new accepted repair and no completed package is claimed (0 of 3).
