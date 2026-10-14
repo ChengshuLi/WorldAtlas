@@ -12,8 +12,7 @@ import pathlib
 FILE = 32 * 1024 * 1024
 PHASE = 256 * 1024 * 1024
 MEMBERS = ('derived-certificate.json.gz', 'derived-facts.json', 'derived-publication.json',
-           'facts.json', 'operands.json.gz', 'publication.json', 'checkpoint-routes.json')
-PIXEL_MEMBERS = ('derived-certificate.json.gz', 'derived-facts.json', 'derived-publication.json', 'checkpoint-routes.json')
+           'checkpoint-routes.json')
 OPTIONAL = ('operating.json',)
 
 
@@ -50,50 +49,16 @@ def _matches(pin, name, descriptors):
             ('decoded_bytes', 'decoded_sha256') if name.endswith('.gz') else ())))
 
 
-def pixel_only_result(issued):
-    """Interpret only the just-executed trusted joint child's scoped result.
-
-    This is a report/transport check, not a substitute for Node qualification.
-    Historical results without this explicit scope use the original consumer.
-    """
-    result = issued.get('continuous', {})
-    if not isinstance(result, dict) or result.get('scope') != 'visible-native-pixel-repair-v1':
-        return None
-    native = issued.get('native', {})
-    visibility = native.get('repair_visibility', {})
-    witnesses = visibility.get('witnesses')
-    rows = native.get('native_row_scope', {}).get('changed_rows')
-    if (result.get('kind') != 'trusted-selected-continuous-comparison-v1'
-            or result.get('status') != 'not-applicable' or 'regressions' not in result or result['regressions'] is not None
-            or 'issued_publication' not in result or result['issued_publication'] is not None or 'original_strict_polygon_result' in result
-            or result.get('candidate_code_executed') is not False
-            or native.get('status') != 'no-new-native-loss'
-            or native.get('method') != 'selected-native-owner-conservation-v1'
-            or native.get('candidate_code_executed') is not False
-            or native.get('lost_or_reassigned_cells') != 0 or native.get('intervals') != []
-            or native.get('native_row_scope', {}).get('proof') != 'shared-qualified-complete-base-and-cumulative-patch'
-            or not isinstance(rows, list) or not rows or native.get('affected_rows') != len(rows)
-            or type(visibility.get('new_components')) is not int or visibility['new_components'] <= 0
-            or not isinstance(witnesses, list) or len(witnesses) != visibility['new_components']
-            or len({w.get('component_id') for w in witnesses}) != len(witnesses)
-            or any(w.get('previous_owner') != 0 or type(w.get('candidate_owner')) is not int
-                   or w['candidate_owner'] <= 0 or w.get('y') not in rows for w in witnesses)):
-        raise ValueError('Pixel-only result lacks genuine positive native repair scope')
-    return {key: value for key, value in result.items() if key != 'derived_checkpoint'}
-
-
 def retain_checkpoint_products(source, destination, issued, *, allowance=PHASE):
     """Read the whole authenticated child set and publish copies exclusively.
 
-    Caller has completed the original Python consumer. The descriptor is returned
+    Caller has completed the actual native consumer. The descriptor is returned
     only after all writes complete; a partial write has no valid final report.
     """
     source = _ordinary_parent(source)
     destination = admit_checkpoint_destination(destination)
     names = set(p.name for p in source.iterdir())
-    pixel = pixel_only_result(issued)
-    required = PIXEL_MEMBERS if pixel is not None else MEMBERS
-    if not set(required) <= names or names - set((*required, *OPTIONAL)):
+    if not set(MEMBERS) <= names or names - set((*MEMBERS, *OPTIONAL)):
         raise ValueError('Incomplete or extra checkpoint product roster')
     if type(allowance) is not int or not 0 < allowance <= PHASE:
         raise ValueError('Invalid complete checkpoint transport allowance')
@@ -136,33 +101,20 @@ def retain_checkpoint_products(source, destination, issued, *, allowance=PHASE):
     actual = sum(row['bytes'] + 8 * row.get('decoded_bytes', row['bytes']) for row in descriptors.values())
     if actual > total or actual > allowance:
         raise ValueError('Checkpoint products changed after union admission')
-    publication = None if pixel is not None else _json(bodies['publication.json'])
     derived = _json(bodies['derived-publication.json'])
     facts = _json(bodies['derived-facts.json'])
     native = issued.get('native', {})
-    continuous = issued.get('continuous_result', {})
-    original = continuous.get('original_strict_polygon_result', {})
     if (native.get('status') != 'no-new-native-loss' or native.get('candidate_code_executed') is not False
-            or pixel is None and (original.get('status') not in ('no-footprint-change', 'no-new-regression')
-                                  or original.get('regressions') not in (None, 0))
-            or pixel is not None and continuous != pixel
-            or continuous.get('candidate_code_executed') is not False
-            or continuous.get('issued_publication') != publication):
-        raise ValueError('Checkpoint products lack matching native and original strict Python success')
-    if (pixel is None and (publication.get('complete') is not True or issued.get('continuous', {}).get('publication') != publication
-                          or not _matches(publication.get('operands'), 'operands.json.gz', descriptors)
-                          or not _matches(publication.get('facts'), 'facts.json', descriptors))
-            or derived.get('complete') is not True or derived.get('accepted_checkpoint') is not False
-            or derived.get('validation_stage') != ('native-passed-continuous-not-applicable' if pixel is not None else 'native-passed-continuous-pending')
-            or issued.get('continuous', {}).get('derived_checkpoint') != derived
+            or native.get('lost_or_reassigned_cells') != 0 or native.get('intervals') != []):
+        raise ValueError('Checkpoint products lack successful native conservation')
+    if (derived.get('complete') is not True or derived.get('accepted_checkpoint') is not False
+            or derived.get('validation_stage') != 'native-passed'
+            or issued.get('derived_checkpoint') != derived
             or not _matches(derived.get('certificate'), 'derived-certificate.json.gz', descriptors)
             or not _matches(derived.get('facts'), 'derived-facts.json', descriptors)
             or not _matches(derived.get('routes'), 'checkpoint-routes.json', descriptors)
-            or facts.get('checkpoint_routes') != derived.get('routes')
-            or facts.get('continuous_publication') != publication):
+            or facts.get('checkpoint_routes') != derived.get('routes')):
         raise ValueError('Checkpoint complete publications or member bindings differ')
-    if pixel is not None and facts.get('validation_stage') != derived['validation_stage']:
-        raise ValueError('Pixel-only facts differ from issued validation scope')
     # Match the producer's pre-wrapper native report without changing either
     # the complete retained report or the provisional derived facts.
     inverse = {key: value for key, value in native.items() if key not in (

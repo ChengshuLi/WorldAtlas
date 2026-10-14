@@ -78,9 +78,12 @@ export function readGeographyJobReceipt(raw, expected) {
 
 export const CHECKPOINT_MEMBERS = Object.freeze([
   'derived-certificate.json.gz', 'derived-facts.json', 'derived-publication.json',
-  'facts.json', 'operands.json.gz', 'publication.json', 'checkpoint-routes.json'
+  'checkpoint-routes.json'
 ]);
-const MEMBER_NAMES = new Set(['geography-check.json', ...CHECKPOINT_MEMBERS, 'operating.json']);
+// Existing accepted archives retain their original three unused polygon files.
+// Recognize their metadata, but never decode them or use them for map validity.
+const ARCHIVED_POLYGON_MEMBERS = ['facts.json', 'operands.json.gz', 'publication.json'];
+const MEMBER_NAMES = new Set(['geography-check.json', ...CHECKPOINT_MEMBERS, ...ARCHIVED_POLYGON_MEMBERS, 'operating.json']);
 const MAX_PHASE = 256 * 1024 * 1024;
 const reportProducts = new WeakMap();
 const exactKeys = (value, keys) => value && typeof value === 'object' && !Array.isArray(value) &&
@@ -197,15 +200,9 @@ export function readReportArchive(raw, expectedHash, expectedBytes, {admit = () 
   need(exactKeys(descriptor, ['version', 'kind', 'members']) && descriptor.version === 1 &&
     descriptor.kind === 'selected-checkpoint-products-v1' && Array.isArray(descriptor.members), 'Invalid checkpoint product descriptor');
   const names = descriptor.members.map(row => row?.name);
-  const pixelOnly = report.selected_continuous_report?.scope === 'visible-native-pixel-repair-v1';
-  const required = pixelOnly ? CHECKPOINT_MEMBERS.filter(name => name.startsWith('derived-') || name === 'checkpoint-routes.json') : CHECKPOINT_MEMBERS;
-  if (pixelOnly) need(report.selected_continuous_report.status === 'not-applicable'
-    && report.selected_continuous_report.regressions === null
-    && !Object.hasOwn(report.selected_continuous_report, 'original_strict_polygon_result'),
-  'Pixel-only checkpoint must not claim a polygon result');
-  need(names.length >= required.length && names.length <= required.length + 1 &&
-    new Set(names).size === names.length && required.every(name => names.includes(name)) &&
-    names.every(name => required.includes(name) || name === 'operating.json') &&
+  need(names.length >= CHECKPOINT_MEMBERS.length && names.length <= CHECKPOINT_MEMBERS.length + ARCHIVED_POLYGON_MEMBERS.length + 1 &&
+    new Set(names).size === names.length && CHECKPOINT_MEMBERS.every(name => names.includes(name)) &&
+    names.every(name => MEMBER_NAMES.has(name) && name !== 'geography-check.json') &&
     entries.size === names.length + 1 && names.every(name => entries.has(name)), 'Checkpoint archive roster differs from authenticated report');
   for (const row of descriptor.members) {
     const gzip = row.name.endsWith('.gz');
@@ -213,12 +210,12 @@ export function readReportArchive(raw, expectedHash, expectedBytes, {admit = () 
       positive(row.bytes) && row.bytes <= MAX_REPORT && row.bytes === entries.get(row.name).size && hash(row.sha256) &&
       (!gzip || positive(row.decoded_bytes) && row.decoded_bytes <= MAX_REPORT && hash(row.decoded_sha256)),
       'Invalid checkpoint member bounds or digest');
-    admitted += row.bytes + 8 * (gzip ? row.decoded_bytes : row.bytes);
+    if (CHECKPOINT_MEMBERS.includes(row.name)) admitted += row.bytes + 8 * (gzip ? row.decoded_bytes : row.bytes);
   }
   need(admitted <= MAX_PHASE, 'Geographic checkpoint combined budget exceeded');
   admit(admitted);
   const members = new Map();
-  for (const row of descriptor.members) {
+  for (const row of descriptor.members.filter(row => CHECKPOINT_MEMBERS.includes(row.name))) {
     const body = decodeMember(raw, entries.get(row.name));
     need(reportHash(body) === row.sha256, 'Checkpoint member differs from authenticated report');
     if (row.name.endsWith('.gz')) {

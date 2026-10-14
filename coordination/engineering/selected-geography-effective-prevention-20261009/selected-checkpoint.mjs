@@ -25,19 +25,6 @@ const ACCEPTED_CODE = ['scripts/accepted-selected-checkpoint.mjs','scripts/check
   'scripts/github-quota.mjs','scripts/github-snapshots.mjs','scripts/integration-proof.mjs',
   'scripts/issue-claim-contract.mjs','scripts/job-deadline.mjs','scripts/research-import-gate.mjs',
   'scripts/worker-result.mjs','src/regional-import-gate.js'];
-const JOINT_CODE = ['scripts/run-geographic-check.py','scripts/check-geographic-regression.py',
-  'scripts/check-effective-geographic-regression.mjs','src/ownership-codec.js',
-  'scripts/evidence/immutable.py','scripts/evidence/geometry.py','scripts/ellipsoidal_area.py','requirements.txt',
-  'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs',
-  'coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs',
-  MODULE,'coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint-continuous.mjs',
-  'coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs'];
-const JOINT_NATIVE_CODE=[...JOINT_CODE.slice(0,3),'scripts/selected-checkpoint-native.mjs',...JOINT_CODE.slice(3)];
-const DERIVED_CODE=[...JOINT_NATIVE_CODE,...ACCEPTED_CODE,'scripts/geographic_checkpoint_products.py'];
-// Earlier accepted executions retain their original closure. New executions
-// additionally bind the exact visibility operator and native rule.
-const VISIBLE_JOINT_NATIVE_CODE=[...JOINT_NATIVE_CODE.slice(0,4),'scripts/visible-gap-eligibility.mjs','src/native-grid.js',...JOINT_NATIVE_CODE.slice(4)];
-const VISIBLE_DERIVED_CODE=[...VISIBLE_JOINT_NATIVE_CODE,...ACCEPTED_CODE,'scripts/geographic_checkpoint_products.py'];
 const demand = (ok, message) => { if (!ok) throw Error(message); };
 const sha = body => createHash('sha256').update(body).digest('hex');
 // Policy is rooted in the executing trusted checkout, independently of the
@@ -246,6 +233,8 @@ function coordinateCheck(certificate, facts, additions) {
     && same(certificate.entry_fields,FIELDS) && same(certificate.binding,facts.binding)
     && certificate.entries.length === facts.complete_owners && certificate.inputs.length === facts.complete_sources,
   'Incomplete accepted coordinate product');
+  demand(valueSha(certificate.entries.map(row=>row.slice(0,4)))===certificate.binding.owners_sha256,
+    'Checkpoint stable owner/index/parent roster differs');
   const ids = new Set(), sources = new Map(certificate.inputs.map(p => [p.path,p]));
   demand(sources.size === certificate.inputs.length, 'Duplicate checkpoint source inventory');
   for (const [i,row] of certificate.entries.entries()) {
@@ -436,7 +425,7 @@ function admitTrustedDerivedSeed(session,reader,archiveReader,root,catalogue) {
     && hash(root.selection_sha256) && hash(root.execution_code_sha256) && hash(root.runtime_sha256),
   'Incomplete trusted derived acceptance/execution identity');
   const roles={facts:'derived-facts.json',certificate:'derived-certificate.json.gz',publication:'derived-publication.json',
-    continuous_facts:'facts.json',operands:'operands.json.gz',continuous_publication:'publication.json',routes:'checkpoint-routes.json'};
+    routes:'checkpoint-routes.json'};
   const products={},members=[];
   for (const [role,name] of Object.entries(roles)) {
     const p=root[role]; products[name]=readBody(session,archiveReader,p);
@@ -470,53 +459,18 @@ function admitTrustedDerivedSeed(session,reader,archiveReader,root,catalogue) {
     && same(operating.cleanup_group_scan?.members,[]), 'Trusted seed lacks measured successful terminal custody');
   // This internal view is not a fabricated geographic report or acceptance
   // receipt. The only authority is the already authenticated trusted catalogue.
-  const report={gate_status:'passed',selected_native_report:joint.native,selected_continuous_report:joint.continuous_result};
+  const report={gate_status:'passed',selected_native_report:joint.native};
   retain(session,{certificate:products['derived-certificate.json.gz'],routes:products['checkpoint-routes.json'].routes});
   return admitDerivedCheckpoint(session,reader,archiveReader,{seedRoot:root,products,member_pins:members,report,
     source:{executing_commit:root.execution_commit,baseline:facts.baseline_commit,candidate_commit:root.selected_commit}});
-}
-
-// Validate the scoped result only after its execution is authenticated: the
-// joint caller has just run the native consumer; admission has an accepted
-// report archive. This numerical join does not mint execution authority.
-export function validatePixelRepairNative(native, additions, {componentIds, changedIds, changedRows, size}) {
-  const visibility = native?.repair_visibility;
-  demand(native?.status === 'no-new-native-loss' && native.method === 'selected-native-owner-conservation-v1'
-    && native.candidate_code_executed === false && native.lost_or_reassigned_cells === 0 && same(native.intervals, [])
-    && native.native_row_scope?.proof === 'shared-qualified-complete-base-and-cumulative-patch',
-  'Pixel-only scope lacks full qualified native conservation');
-  demand(Array.isArray(componentIds) && componentIds.length > 0 && new Set(componentIds).size === componentIds.length
-    && visibility?.new_components === componentIds.length && Array.isArray(visibility.witnesses)
-    && visibility.witnesses.length === componentIds.length
-    && same(visibility.witnesses.map(row => row?.component_id), componentIds),
-  'Pixel-only scope lacks complete positive component witnesses');
-  demand(Number.isSafeInteger(size) && size > 1 && Array.isArray(changedRows) && changedRows.length > 0
-    && changedRows.every((y,i) => Number.isSafeInteger(y) && y >= 0 && y < size && (!i || y > changedRows[i-1]))
-    && native.affected_rows === changedRows.length && same(native.native_row_scope.changed_rows, changedRows),
-  'Pixel-only scope lacks all changed native rows');
-  const rows = new Map(additions.map(row => [row.component_id,row]));
-  demand(rows.size === additions.length, 'Duplicate pixel-repair literal primitive');
-  for (const witness of visibility.witnesses) {
-    const row = rows.get(witness.component_id);
-    demand(row?.disposition === 'assigned' && Number.isSafeInteger(row.native_cells) && row.native_cells > 0
-      && witness.geometry_sha256 === row.geometry_sha256 && witness.previous_owner === 0
-      && witness.candidate_owner === row.pixelIndex && Number.isSafeInteger(witness.candidate_owner) && witness.candidate_owner > 0
-      && Number.isSafeInteger(witness.x) && witness.x >= 0 && witness.x < size && changedRows.includes(witness.y),
-    'Pixel-only component lacks its actual current-gap-to-target witness');
-  }
-  demand(Array.isArray(changedIds) && changedIds.length > 0
-    && same(changedIds, [...new Set(componentIds.map(id => rows.get(id).target_id))].sort()),
-  'Pixel-only scope differs from complete newly changed owner identities');
 }
 
 function admitDerivedCheckpoint(session,reader,archiveReader,accepted) {
   const {source,receipt,report,products,member_pins,seedRoot}=accepted;
   const trusted=session.trusted;
   const facts=products['derived-facts.json'], certificate=products['derived-certificate.json.gz'];
-  const publication=products['derived-publication.json'], continuousFacts=products['facts.json'];
-  const continuousPublication=products['publication.json'], operands=products['operands.json.gz'];
+  const publication=products['derived-publication.json'];
   const census=products['checkpoint-routes.json'];
-  const pixelOnly=facts?.validation_stage==='native-passed-continuous-not-applicable';
   const members=new Map(member_pins.map(p=>[p.name,p]));
   const published=(name,p)=>{
     const actual=members.get(name);
@@ -525,12 +479,8 @@ function admitDerivedCheckpoint(session,reader,archiveReader,accepted) {
       && valueSha(products[name])===(actual.decoded_sha256??actual.sha256),
     'Accepted whole checkpoint publication/member differs: '+name);
   };
-  const factKeys='version,kind,validation_stage,accepted_checkpoint,executing_commit,execution_code,runtime,baseline_accepted_execution,executing_authority_pins,actual_reader_inventories,baseline_commit,candidate_commit,baseline_selection,candidate_selection,candidate_bindings,transition_plan,native_result_sha256,continuous_publication,candidate_code_executed,certificate,checkpoint_routes,executing_policy';
-  const expectedFactKeys=seedRoot?factKeys.split(',').filter(key=>!['checkpoint_routes','executing_policy'].includes(key) || Object.hasOwn(facts??{},key)).join(','):factKeys;
-  keys(facts, expectedFactKeys+(Object.hasOwn(facts??{},'checkpoint_transport_inputs')?',checkpoint_transport_inputs':''),
-    'Unknown accepted derived checkpoint facts');
   demand(facts.version===1 && facts.kind==='derived-selected-checkpoint-candidate-v1'
-    && (pixelOnly || facts.validation_stage==='native-passed-continuous-pending') && facts.accepted_checkpoint===false
+    && facts.accepted_checkpoint===false
     && facts.candidate_code_executed===false && facts.executing_commit===(source.executing_commit??source.baseline)
     && facts.baseline_commit===source.baseline && facts.candidate_commit===source.candidate_commit,
   'Accepted derived execution/selected vintage differs');
@@ -545,19 +495,7 @@ function admitDerivedCheckpoint(session,reader,archiveReader,accepted) {
     demand(same(facts.checkpoint_routes,publication.routes), 'Accepted complete route publication differs');
   }
   demand(same(facts.certificate,publication.certificate), 'Accepted candidate certificate pin differs');
-  if (pixelOnly) {
-    demand(!seedRoot && facts.continuous_publication === null && continuousPublication === undefined
-      && continuousFacts === undefined && operands === undefined
-      && same([...members.keys()].filter(name => name !== 'operating.json').sort(),
-        ['derived-certificate.json.gz','derived-facts.json','derived-publication.json','checkpoint-routes.json'].sort()),
-    'Pixel-only checkpoint must omit continuous products and retain complete derived products');
-  } else {
-    published('facts.json',continuousPublication?.facts); published('operands.json.gz',continuousPublication?.operands);
-    demand(continuousPublication.version===1 && continuousPublication.complete===true
-      && continuousPublication.kind==='trusted-selected-continuous-comparison-v1'
-      && same(facts.continuous_publication,continuousPublication), 'Accepted continuous publication differs');
-  }
-  const native=report.selected_native_report, continuous=report.selected_continuous_report;
+  const native=report.selected_native_report;
   const {runtime:outerRuntime,caller_runtime:outerCaller,execution_runtimes:outerRuntimes,
     execution_code_inventory:outerCode,...nativeInverse}=native??{};
   demand(report.gate_status==='passed' && native?.status==='no-new-native-loss'
@@ -571,24 +509,11 @@ function admitDerivedCheckpoint(session,reader,archiveReader,accepted) {
     && same(outerRuntime,facts.runtime[0]) && same(outerCaller,facts.runtime[1])
     && same(outerRuntimes,facts.runtime) && same(outerCode,facts.execution_code),
   'Accepted native wrapper execution/runtime differs');
-  const strict=continuous?.original_strict_polygon_result;
-  if (pixelOnly) {
-    demand(continuous?.kind === 'trusted-selected-continuous-comparison-v1' && continuous.candidate_code_executed === false
-      && continuous.status === 'not-applicable' && continuous.scope === 'visible-native-pixel-repair-v1'
-      && continuous.regressions === null && continuous.issued_publication === null && strict === undefined,
-    'Pixel-only checkpoint must explicitly report continuous checking as not applicable');
-  } else demand(continuous?.kind===continuousPublication.kind && continuous.candidate_code_executed===false
-    && ['no-new-regression','no-footprint-change'].includes(continuous.status)
-    && (continuous.regressions===0 || continuous.status==='no-footprint-change' && continuous.regressions===null)
-    && strict && strict.status===continuous.status && strict.regressions===continuous.regressions
-    && same(strict.findings,{type:'FeatureCollection',features:[]}) && same(strict.geometry_errors,[])
-    && same(continuous.issued_publication,continuousPublication),
-  'Accepted checkpoint lacks its original successful strict polygon result');
-  const codePaths=facts.execution_code?.map(p=>p.path);
-  if (pixelOnly) demand(same(codePaths,VISIBLE_DERIVED_CODE), 'Pixel-only acceptance requires the actual native visibility execution closure');
-  supported(seedRoot && (same(codePaths,JOINT_NATIVE_CODE)||same(codePaths,VISIBLE_JOINT_NATIVE_CODE))
-    || same(codePaths,DERIVED_CODE)||same(codePaths,VISIBLE_DERIVED_CODE),
-    'Unsupported accepted joint method closure');
+  // Original accepted execution is provenance. Preserve its pins without
+  // reacquiring obsolete polygon methods or requiring their output roster.
+  demand(Array.isArray(facts.execution_code) && new Set(facts.execution_code.map(p=>p.path)).size===facts.execution_code.length
+    && facts.execution_code.some(p=>p.path==='scripts/selected-checkpoint-native.mjs'),
+  'Accepted checkpoint lacks original native execution identity');
   for (const p of facts.execution_code) {
     pin(p); demand(p.commit===facts.executing_commit, 'Accepted executing code was rebound');
     // The original trusted accepted execution already authenticated these exact
@@ -598,19 +523,10 @@ function admitDerivedCheckpoint(session,reader,archiveReader,accepted) {
     && new Set(facts.runtime.map(p=>p.path)).size===3 && facts.runtime.every(p=>typeof p.path==='string'
       && Number.isSafeInteger(p.bytes) && p.bytes>0 && Number.isSafeInteger(p.mode) && hash(p.sha256)),
   'Incomplete accepted execution runtime identities');
-  if (!pixelOnly) keys(continuousFacts,'version,kind,baseline_commit,candidate_commit,executing_commit,execution_code,runtime,plan,inverse,checkpoint_custody,source_custody,validation_route,candidate_code_executed',
-    'Unknown complete accepted continuous facts');
   demand(commit(facts.baseline_accepted_execution?.accepted_head)
     && commit(facts.baseline_accepted_execution?.execution_commit)
-    && commit(facts.baseline_accepted_execution?.historical_selected_commit)
-    && (pixelOnly || same(continuousFacts.checkpoint_custody?.baseline,facts.baseline_accepted_execution)
-      && same(continuousFacts.checkpoint_custody?.candidate,facts.baseline_accepted_execution)),
-  'Accepted complete predecessor checkpoint custody differs');
-  if (!pixelOnly) demand(same(continuousFacts.execution_code,facts.execution_code) && same(continuousFacts.runtime,facts.runtime)
-    && continuousFacts.kind===continuousPublication.kind && continuousFacts.executing_commit===facts.executing_commit
-    && continuousFacts.baseline_commit===facts.baseline_commit && continuousFacts.candidate_commit===facts.candidate_commit
-    && continuousFacts.candidate_code_executed===false && continuousFacts.validation_route==='authenticated-checkpoint-append-v1',
-  'Accepted continuous execution/custody differs');
+    && commit(facts.baseline_accepted_execution?.historical_selected_commit),
+  'Accepted predecessor checkpoint custody differs');
   const selected=readSelection(session,reader);
   supported(same(selected.selection,facts.candidate_selection), 'Accepted checkpoint does not cover the actual complete selector');
   const manifest=readNamed(session,reader,selected.selection.manifest_path,selected.selection.sha256);
@@ -628,70 +544,13 @@ function admitDerivedCheckpoint(session,reader,archiveReader,accepted) {
     demand(target && target.pixelIndex===row.pixelIndex, 'Accepted current target identity omitted');
     return {...row,base_geometry:target.geometry,base_geometry_sha256:target.geometry_sha256};
   });
-  if (!pixelOnly) demand(same(operands.effective_additions?.candidate,additions), 'Accepted complete current primitives differ');
-  coordinateCheck(certificate,{binding:certificate.binding,complete_owners:continuous.complete_owners,
+  coordinateCheck(certificate,{binding:certificate.binding,complete_owners:certificate.entries.length,
     complete_sources:certificate.binding.sources.length},additions);
   demand(same(certificate.inputs.map(p=>p.source),certificate.binding.sources), 'Accepted complete source binding inventory differs');
   demand(same(certificate.binding.selection,selected.selection), 'Accepted certificate selected binding differs');
   completeRows(selected.patch.rows,manifest.size,certificate.entries.length);
   completeRows(rebind.request.current_rows,manifest.size,certificate.entries.length);
   completeRows(rebind.request.acquisition.predecessor_rows,manifest.size,certificate.entries.length);
-  const plan=facts.transition_plan, ids=plan?.required_ids;
-  if (pixelOnly) {
-    demand(!same(facts.baseline_selection, facts.candidate_selection)
-      && plan?.kind === 'complete-selected-continuous-plan-v1' && plan.version === 1
-      && same(plan.source_bindings?.candidate, certificate.binding)
-      && same(plan.source_bindings?.baseline.selection, facts.baseline_selection)
-      && same(plan.changed_ids, continuous.changed_ids), 'Pixel-only certificate transition binding differs');
-    validatePixelRepairNative(native, additions, {componentIds:native.repair_visibility?.witnesses?.map(row => row.component_id),
-      changedIds:plan.changed_ids, changedRows:native.native_row_scope?.changed_rows, size:manifest.size});
-  } else {
-    demand(plan?.kind==='complete-selected-continuous-plan-v1' && plan.version===1
-      && Array.isArray(ids) && same(ids,[...new Set(ids)].sort())
-      && same(plan,continuousFacts.plan) && same(plan,operands.plan)
-      && same(plan.source_bindings,continuous.source_binding) && same(ids,continuous.required_ids)
-      && same(plan.changed_ids,strict.changed_location_ids)
-      && same(plan.source_bindings.candidate,certificate.binding)
-      && same(plan.source_bindings.baseline.selection,facts.baseline_selection),
-    'Accepted complete two-vintage continuous scope differs');
-    demand(operands.version===1 && operands.kind==='complete-selected-continuous-operands-v1'
-      && same(Object.keys(operands.baseline).sort(),ids) && same(Object.keys(operands.candidate).sort(),ids),
-    'Accepted whole source operand scope differs');
-    const sourceCustody=continuousFacts.source_custody;
-    keys(sourceCustody,'baseline,candidate,source_features_reused','Incomplete accepted whole-source custody');
-    demand(sourceCustody.source_features_reused===true, 'Unsupported accepted source projection method');
-    for (const vintage of ['baseline','candidate']) {
-      const side=sourceCustody[vintage], planned=plan.source_paths[vintage];
-      // Plans sort path sets; whole projections preserve certificate source order.
-      // Join the complete unique roster, not these unrelated iteration orders.
-      demand(Array.isArray(planned) && same(planned,[...new Set(planned)].sort())
-        && same(side?.state_binding,plan.source_bindings[vintage]) && Array.isArray(side.inputs)
-        && same(side.inputs.map(p=>p.path).sort(),planned) && Array.isArray(side.actual_inputs)
-        && side.actual_inputs.length===side.inputs.length, 'Accepted complete source input custody differs');
-      for (const input of side.inputs) {
-        const actual=side.actual_inputs.filter(p=>p.path===input.source.path);
-        demand(same(input,certificate.inputs.find(p=>p.path===input.path)) && actual.length===1
-          && actual[0].whole_body_consumed===true && actual[0].mode===input.source.mode
-          && actual[0].git_blob_oid===input.source.git_blob_oid && actual[0].bytes===input.source.bytes
-          && actual[0].sha256===input.source.sha256, 'Accepted source body mode/OID/hash differs');
-      }
-    }
-    const entries=new Map(certificate.entries.map(row=>[row[0],row]));
-    const inverse=continuousFacts.inverse;
-    demand(Array.isArray(inverse) && inverse.length===2*ids.length, 'Accepted complete source inverse omitted rows');
-    for (const vintage of ['baseline','candidate']) {
-      const rows=inverse.filter(row=>row.vintage===vintage);
-      demand(same(rows.map(row=>row.id).sort(),ids), 'Accepted source inverse repeats/omits an owner');
-      for (const row of rows) {
-        const expected=entries.get(row.id), feature=operands[vintage][row.id];
-        demand(expected && row.source===expected[4] && row.ordinal===expected[5]
-          && row.whole_feature_sha256===expected[6] && row.geometry_sha256===expected[7]
-          && row.whole_source_sha256===certificate.inputs.find(p=>p.path===row.source)?.whole_body_sha256
-          && valueSha(feature)===row.whole_feature_sha256 && valueSha(feature.geometry)===row.geometry_sha256,
-        'Accepted whole original feature/geometry inverse differs');
-      }
-    }
-  }
   const inventories=facts.actual_reader_inventories;
   keys(inventories,'baseline,candidate','Missing complete accepted reader inventories');
   for (const inventory of Object.values(inventories)) {
@@ -808,25 +667,6 @@ export function checkpointRouteCensus({transition,budget}) {
     candidate_selection:genuine.candidate.selection,predecessor_paths:[...predecessor].sort(),routes});
   demand(7*valueBytes(result).length<=reserve, 'Complete route output exceeded prospective admission');
   retain(session,result); beginFrame(session,reader); return result;
-}
-
-function planFor(before,after) {
-  const old = new Map(before.entries.map(row => [row[0],row])), next = new Map(after.entries.map(row => [row[0],row]));
-  demand(old.size === next.size && [...old].every(([id,row]) => next.has(id) && same(row.slice(0,4),next.get(id).slice(0,4))),
-    'Complete owner/index/parent roster changed');
-  const changed = [...old].filter(([id,row]) => row[8] !== next.get(id)[8]).map(([id]) => id).sort();
-  const needed = new Set(changed), pairs = new Set();
-  const hits = (a,b) => a[0] <= b[2] && b[0] <= a[2] && a[1] <= b[3] && b[1] <= a[3];
-  for (const id of changed) for (const certificate of [before,after]) for (const row of certificate.entries)
-    if (row[0] !== id && row[9].some(a => [...old.get(id)[9],...next.get(id)[9]].some(b => hits(a,b)))) {
-      needed.add(row[0]); pairs.add([id,row[0]].sort().join('\0'));
-    }
-  return freeze({version:1,kind:'complete-selected-continuous-plan-v1',changed_ids:changed,
-    required_ids:[...needed].sort(),pairs:[...pairs].sort().map(p => p.split('\0')),
-    source_paths:{baseline:[...new Set([...needed].map(id => old.get(id)[4]))].sort(),
-      candidate:[...new Set([...needed].map(id => next.get(id)[4]))].sort()},
-    source_bindings:{baseline:before.binding,candidate:after.binding},
-    limits:['Coordinate exclusion only. All required full original polygons and unchanged strict coverage/overlap predicates remain mandatory.']});
 }
 
 /** Read the selected normative latitude bytes for the actual native consumer.
@@ -1199,16 +1039,16 @@ export function qualifyTransition({state,reader,budget}) {
     demand(same(selected.envelope.base_reference,baseProof.selected.envelope.base_reference)
       && selected.envelope.effective_reference.hierarchy_sha256===selected.envelope.base_reference.hierarchy_sha256,
     'Candidate silently changes complete base release or hierarchy');
-    const {certificate,plan}=deriveCoordinateDelta({certificate:state.certificate,oldAdditions:state.additions,additions,selection:selected.selection});
+    const {certificate,changedIds}=deriveCoordinateDelta({certificate:state.certificate,oldAdditions:state.additions,additions,selection:selected.selection});
     const candidate=newState(session,{...state,selected_commit:reader.version,selection:selected.selection,certificate,
       additions,ledger:selected.ledger,registry:selected.registry,patch:selected.patch},
       {...operandProof,selected,oldAuthorities:authorities});
-    const changedIds=new Set(plan.changed_ids);
+    const changed=new Set(changedIds);
     const oldNative=new Map(state.patch.rows.map(row => [row.y,row.runs])), newNative=new Map(selected.patch.rows.map(row => [row.y,row.runs]));
     const changedNativeRows=[...new Set([...oldNative.keys(),...newNative.keys()])].sort((a,b) => a-b)
       .filter(y => !same(oldNative.get(y)??[],newNative.get(y)??[]));
-    retain(session,{entries:certificate.entries.filter(row => changedIds.has(row[0])),additions,plan,changedNativeRows});
-    const transition=freeze({available:true,baseline:state,candidate,changedIds:plan.changed_ids,changedNativeRows,plan});
+    retain(session,{entries:certificate.entries.filter(row => changed.has(row[0])),additions,changedNativeRows});
+    const transition=freeze({available:true,baseline:state,candidate,changedIds,changedNativeRows});
     transitions.set(transition,session); return transition;
   } catch (error) {
     if (error.reuseUnavailable) return unavailable(error.message,state);
@@ -1250,5 +1090,5 @@ export function deriveCoordinateDelta({certificate,oldAdditions,additions,select
     return next;
   });
   const result={...certificate,binding:{...certificate.binding,selection},entries};
-  return freeze({certificate:result,plan:planFor(certificate,result)});
+  return freeze({certificate:result,changedIds:[...changedIds].sort()});
 }
