@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
-import {ImmutableReader,loadBaseSelection,loadNativeRowTable,acquireNativeRows} from '../../scripts/check-effective-geographic-regression.mjs';
+import {ImmutableReader,loadBaseSelection,loadNativeRowTable,acquireNativeRows} from '../../../../scripts/check-effective-geographic-regression.mjs';
 const base='aaad1215c1b215b415d219b682bc0ff0380d8c73',candidate=process.argv[2],prefix='coordination/engineering/myeik-native-followup-20261014/';
 const sha=x=>createHash('sha256').update(x).digest('hex'),start=Date.now();
 const qualification=JSON.parse(fs.readFileSync(new URL('source-qualification.json',import.meta.url)));
