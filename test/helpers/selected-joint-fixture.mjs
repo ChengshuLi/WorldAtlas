@@ -26,7 +26,7 @@ function addition(id,target,index,base,x){const geometry=polygon(x);return {comp
 const PROGRAMME='coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json';
 const PREFIX = 'coordination/engineering/selected-geography-effective-prevention-20261009/';
 const EXTRA_CODE = JOINT_CODE.filter(name => !CODE.includes(name));
-export async function trustedFixture(t,{incompleteNative=false}={}){
+export async function trustedFixture(t,{incompleteNative=false,nativeOnly=false}={}){
  const root=fs.mkdtempSync(path.join(process.cwd(),'.checkpoint-test-'));
  t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
  const git=(...a)=>execFileSync('git',['-c','core.hooksPath=/dev/null','-c','user.name=Checkpoint fixture','-c','user.email=checkpoint@example.invalid','-C',root,...a],{env:{...process.env,GIT_CONFIG_NOSYSTEM:'1',GIT_CONFIG_GLOBAL:'/dev/null',GIT_NO_LAZY_FETCH:'1'},stdio:['ignore','pipe','pipe']});
@@ -50,24 +50,39 @@ export async function trustedFixture(t,{incompleteNative=false}={}){
  save('original/publication.json',{assets:[{path:'patch-one.json',bytes:pin('original/patch-one.json').bytes,sha256:pin('original/patch-one.json').sha256}]});
  const two=commit();save('original/binding.json',{native_proof:{publication:pin('original/publication.json'),assets:[pin('original/patch-one.json',one)]}});const three=commit();
  const entry={policy_id:'retained-source-literal-additions',policy_version:1,rule_preimage:pin('original/rule.json',one),rule_sha256:pin('original/rule.json',one).sha256,source_authority:pin('original/binding.json',three)};entry.authority_sha256=valueSha(entry);
- const registry={version:1,kind:'retained-rule-authority-registry-v1',entries:[entry]};save('data/registry.json',registry);
+ const legacyRegistry={version:1,kind:'retained-rule-authority-registry-v1',entries:[entry]};
+ let nativeEntry, nativeComponent;
+ if(nativeOnly){
+  nativeComponent={representation:'native-cells',component_id:'source-target:B',target_id:'B',pixelIndex:2,
+   disposition:'assigned',base_geometry:features[1].geometry,base_geometry_sha256:valueSha(features[1].geometry),
+   native_rows:[{y:2,runs:[[2,3,2]]}],native_bounds:[10,20,10,20],native_cells:1,source_receipt_sha256:'c'.repeat(64)};
+  save('original/native-patch.json',{rows:nativeComponent.native_rows});save('original/native-source.json',{fixture:true});
+  const nativeOrigin=commit();
+  const binding={version:1,kind:'source-target-native-custody-v1',source_evidence:pin('original/native-source.json',nativeOrigin),native_patch:pin('original/native-patch.json',nativeOrigin)};
+  save('original/native-binding.json',binding);save('original/native-rule.json',{...binding,kind:'source-target-native-rule-v1'});const bound=commit();
+  nativeEntry={policy_id:'retained-source-literal-additions',policy_version:1,rule_preimage:pin('original/native-rule.json',bound),rule_sha256:pin('original/native-rule.json',bound).sha256,source_authority:pin('original/native-binding.json',bound)};
+  nativeEntry.authority_sha256=valueSha(nativeEntry);
+ }
+ const registry={...legacyRegistry,entries:[entry,...(nativeEntry?[nativeEntry]:[])].sort((a,b)=>a.authority_sha256.localeCompare(b.authority_sha256))};save('data/registry.json',registry);
  const baseSelection={version:1,method:manifest.method,manifest_path:'data/manifest.json',sha256:pin('data/manifest.json',one).sha256,release_id:reference.id,selected_geography:{version:1,kind:'complete-world-index-with-exact-encoded-overrides',path:'data/bank.json',bytes:1,sha256:'d'.repeat(64)}};
  const target={target_id:'A',pixelIndex:1,geometry:features[0].geometry,geometry_sha256:valueSha(features[0].geometry)};
  const currentRows=[{y:1,runs:[[0,1,2]]}];
- const request={base_selection:baseSelection,authority_registry_sha256:valueSha(registry),current_targets:[target],current_rows:currentRows,original_patch_sha256s:[valueSha(originalPatch)],acquisition:{predecessor_rows:[],predecessor_proof:null,native_inputs:[]}};
+ const request={base_selection:baseSelection,authority_registry_sha256:valueSha(legacyRegistry),current_targets:[target],current_rows:currentRows,original_patch_sha256s:[valueSha(originalPatch)],acquisition:{predecessor_rows:[],predecessor_proof:null,native_inputs:[]}};
  const rebind={request,result:{native:{rows:originalPatch.rows}},facts:{acquisition_phases:[]},publication:{},operating:{}};
  for(const [name,body]of Object.entries(rebind))save('accepted-rebind/'+name+'.json',body);const four=commit();
- const rc={version:1,kind:'qualified-native-additive-current-bank-rebind-v1',execution_commit:one,base_selection:baseSelection,authority_registry_sha256:valueSha(registry),...Object.fromEntries(Object.keys(rebind).map(name=>[name,pin('accepted-rebind/'+name+'.json',four)]))};save('accepted-rebind/certificate.json',rc);const five=commit();
- const ledger={version:2,kind:'native-additive-repair-ledger-v2',authority_registry_sha256:valueSha(registry),scope_ids:['old','rejected'],rows:[{...literal,authority_sha256:entry.authority_sha256},{component_id:'rejected',disposition:'rejected',reason:'complete original exception',authority_sha256:entry.authority_sha256}],parent_inventory:{components:2,roster_sha256:'e'.repeat(64)},current_rebind:pin('accepted-rebind/certificate.json',five),current_targets:[target]};save('data/ledger.json',ledger);const six=commit();
- const normalized=[{...literal,authority_sha256:entry.authority_sha256,rule_sha256:entry.rule_sha256}];
+ const rc={version:1,kind:'qualified-native-additive-current-bank-rebind-v1',execution_commit:one,base_selection:baseSelection,authority_registry_sha256:valueSha(legacyRegistry),...Object.fromEntries(Object.keys(rebind).map(name=>[name,pin('accepted-rebind/'+name+'.json',four)]))};save('accepted-rebind/certificate.json',rc);const five=commit();
+ const ledger={version:2,kind:'native-additive-repair-ledger-v2',authority_registry_sha256:valueSha(registry),scope_ids:['old','rejected'],rows:[{...literal,authority_sha256:entry.authority_sha256},{component_id:'rejected',disposition:'rejected',reason:'complete original exception',authority_sha256:entry.authority_sha256}],parent_inventory:{components:2,roster_sha256:'e'.repeat(64)},current_rebind:pin('accepted-rebind/certificate.json',five),current_targets:[target]};
+ if(nativeComponent){ledger.rows.push({...nativeComponent,authority_sha256:nativeEntry.authority_sha256});ledger.scope_ids=ledger.rows.map(row=>row.component_id);}
+ save('data/ledger.json',ledger);const six=commit();
+ const normalized=[{...literal,authority_sha256:entry.authority_sha256,rule_sha256:entry.rule_sha256},...(nativeComponent?[{...nativeComponent,authority_sha256:nativeEntry.authority_sha256,rule_sha256:nativeEntry.rule_sha256}]:[])];
  const effective={...reference,footprints_sha256:valueSha({domain:'worldatlas-effective-native-footprints:v2',base_reference:reference,authority_registry_sha256:valueSha(registry),ledger_sha256:pin('data/ledger.json',six).sha256,components:normalized})};
- const patch={version:2,kind:'unassigned-native-cells-v1',authority_registry_sha256:valueSha(registry),ledger_sha256:pin('data/ledger.json',six).sha256,base_reference:reference,effective_reference:effective,rows:originalPatch.rows};save('data/patch.json',patch);const seven=commit();
+ const patch={version:2,kind:'unassigned-native-cells-v1',authority_registry_sha256:valueSha(registry),ledger_sha256:pin('data/ledger.json',six).sha256,base_reference:reference,effective_reference:effective,rows:[...originalPatch.rows,...(nativeComponent?.native_rows??[])]};save('data/patch.json',patch);const seven=commit();
  const assets={base_manifest:pin('data/manifest.json',one),owner_roster:pin('data/owners.json',one),ledger:pin('data/ledger.json',six),patch:pin('data/patch.json',seven)};
  const envelope={version:2,kind:'retained-native-base-plus-delta-v2',base_reference:reference,effective_reference:effective,...assets};save('data/envelope.json',envelope);const eight=commit();
  const sidecar={version:2,kind:'retained-native-additive-selection-v2',base_selection:baseSelection,authority_registry:pin('data/registry.json',four),logical_asset_map:assets,runtime_envelope:pin('data/envelope.json',eight)};save('data/sidecar.json',sidecar);const nine=commit();
  const selection={...baseSelection,additive_release:{path:'data/sidecar.json',bytes:pin('data/sidecar.json',nine).bytes,sha256:pin('data/sidecar.json',nine).sha256}};save('data/ownership-selection.json',selection);const selected=commit();
  const sourcePin={...pin('data/source.json',one),kind:'ordinary-immutable-git-source'};
- const additions=normalized.map(row=>({...row,base_geometry:target.geometry,base_geometry_sha256:target.geometry_sha256}));
+ const additions=normalized.map(row=>row.representation==='native-cells'?row:{...row,base_geometry:target.geometry,base_geometry_sha256:target.geometry_sha256});
  const derived=deriveCoordinateDelta({certificate,oldAdditions:[],additions,selection}).certificate;
  const full={...derived,binding:{...derived.binding,release:reference,sources:[sourcePin]},inputs:[{path:'data/source.json',source:sourcePin,whole_body_sha256:sourcePin.sha256,bytes:sourcePin.bytes}]};
  const execution_code=CODE.map(name=>pin(name,one)),runtime=[{path:process.execPath,bytes:fs.statSync(process.execPath).size,sha256:'f'.repeat(64)}];

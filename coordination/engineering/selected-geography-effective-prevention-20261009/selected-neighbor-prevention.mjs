@@ -155,7 +155,7 @@ export function selectedCoordinateShard(resolver,sourcePaths,{priorShards=[],out
    const additions=(snapshot.additive?.normalized_rows??[]).filter(r=>r.target_id===id);
    for(const addition of additions)demand(addition.base_geometry_sha256===valueSha(f.geometry),'Effective addition target pointsets are stale against complete selected source');
    const effective={base_geometry_sha256:valueSha(f.geometry),additions};
-   const allBounds=[...coordinateBounds(f.geometry),...additions.flatMap(r=>coordinateBounds(r.geometry))];
+   const allBounds=[...coordinateBounds(f.geometry),...additions.flatMap(r=>nativeOnlyComponent(r,valueSha)?[r.native_bounds]:coordinateBounds(r.geometry))];
    // One conservative rectangle contains every original member/addition bound.
    // A seam member already spans all longitude; merging can only widen exclusion.
    const boxes=[allBounds.reduce((a,b)=>[Math.min(a[0],b[0]),Math.min(a[1],b[1]),Math.max(a[2],b[2]),Math.max(a[3],b[3])])];

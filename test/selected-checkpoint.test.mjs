@@ -49,6 +49,24 @@ test('delta arithmetic rejects omitted old primitives, same-count owner swaps an
  assert.throws(()=>deriveCoordinateDelta({certificate,oldAdditions:[],additions:[old,old],selection:{}}),/Duplicate/);
 });
 
+test('native-only append uses exact native bounds and identity without an addition polygon',()=>{
+ const {features,certificate}=fixtures();
+ const row={representation:'native-cells',component_id:'source-target:A',target_id:'A',pixelIndex:1,
+  disposition:'assigned',base_geometry:features[0].geometry,base_geometry_sha256:certificate.entries[0][7],
+  native_rows:[{y:2,runs:[[3,5,1]]}],native_bounds:[10,20,11,21],native_cells:2,
+  source_receipt_sha256:'a'.repeat(64),authority_sha256:'b'.repeat(64),rule_sha256:'c'.repeat(64)};
+ const result=deriveCoordinateDelta({certificate,oldAdditions:[],additions:[row],selection:{native:true}});
+ assert.deepEqual(result.changedIds,['A']);
+ assert.deepEqual(result.certificate.entries[0][9],[[0,0,11,21]]);
+ assert.equal(result.certificate.entries[0][8],valueSha({base_geometry_sha256:certificate.entries[0][7],additions:[row]}));
+ for(const invalid of [{...row,native_rows:[{y:2,runs:[[3,5,2]]}]},{...row,native_cells:1},
+  {...row,base_geometry:polygon(30)},{...row,native_bounds:[10,20,181,21]}, {...row,geometry:polygon(10)}])
+  assert.throws(()=>deriveCoordinateDelta({certificate,oldAdditions:[],additions:[invalid],selection:{}}),
+   /native component interval|cell count|current base changed|component bounds|foreign fields/i);
+ const changed={...row,native_rows:[{y:2,runs:[[4,6,1]]}]};
+ assert.throws(()=>deriveCoordinateDelta({certificate:result.certificate,oldAdditions:[row],additions:[changed],selection:{}}),/Old effective/);
+});
+
 // This is a fresh miniature trusted repository, not a test-only authority hook.
 // The real entry reads its ordinary committed catalogue and products exactly as
 // production does. Candidate edits never control that executing catalogue.

@@ -117,3 +117,40 @@ test('derived output union is admitted before complete serialization or compress
   assert.throws(() => f.joint.planDerivedOutput(certificate, facts, 30, 50), /before serialization/);
   assert.throws(() => f.joint.planDerivedOutput(certificate, facts, 4096, 4096), /prospective/);
 });
+
+
+test('actual warm joint entry reuses native-only custody without requiring addition polygons or a legacy target',async t=>{
+  const f=await trustedFixture(t,{nativeOnly:true});
+  f.save('unrelated.json',{newer:true});const newer=f.commit();
+  const result=run(f,newer,newer);
+  assert.equal(result.status,0,result.stderr);
+  const report=JSON.parse(result.stdout);
+  assert.equal(report.mode,'authenticated-checkpoint-append-v1');
+  assert.equal(report.native.status,'no-new-native-loss');
+  assert.deepEqual(report.native.native_row_scope.changed_rows,[]);
+  const certificate=JSON.parse(gunzipSync(fs.readFileSync(path.join(f.root,'complete/derived-certificate.json.gz'))));
+  assert.deepEqual(certificate.entries.find(row=>row[0]==='B')[9],[[1,0,10,20]]);
+  assert.equal(f.ledger.current_targets.some(row=>row.target_id==='B'),false);
+  const qualified=f.api.qualifyCheckpoint({reader:f.reader,budget:f.budget});
+  assert.equal(qualified.available,true);
+  const row=qualified.state.additions.find(row=>row.representation==='native-cells');
+  assert.equal(Object.hasOwn(row,'geometry'),false);
+  assert.deepEqual(row.native_rows,[{y:2,runs:[[2,3,2]]}]);
+  f.api.releaseCheckpoint(qualified.state);
+});
+
+
+test('actual warm native-only transition rejects coherently repinned same-count owner reassignment',async t=>{
+  const f=await trustedFixture(t,{nativeOnly:true});
+  const patch={...f.patch,rows:[{y:1,runs:[[2,3,1]]},{y:2,runs:[[2,3,3]]}]};
+  f.save('candidate/patch.json',patch);const p=f.commit();
+  const assets={...f.sidecar.logical_asset_map,patch:f.pin('candidate/patch.json',p)};
+  f.save('candidate/envelope.json',{...f.envelope,...assets});const e=f.commit();
+  f.save('candidate/sidecar.json',{...f.sidecar,logical_asset_map:assets,runtime_envelope:f.pin('candidate/envelope.json',e)});const sc=f.commit();
+  const side=f.pin('candidate/sidecar.json',sc);
+  f.save('data/ownership-selection.json',{...f.selection,additive_release:{path:side.path,bytes:side.bytes,sha256:side.sha256}});const candidate=f.commit();
+  const result=run(f,f.selected,candidate);
+  assert.notEqual(result.status,0);
+  assert.match(result.stderr,/Candidate patch omitted, invented or reassigned original native intervals/);
+  assert.equal(fs.existsSync(path.join(f.root,'complete')),false);
+});
