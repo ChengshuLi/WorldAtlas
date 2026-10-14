@@ -566,3 +566,17 @@ test('queue focused candidate includes the inputs of its nested actual-checkout 
   assert.match(missing.stdout + missing.stderr, /ENOENT/);
   assert.match(missing.stdout + missing.stderr, /selected-checkpoint-reuse-20261012/);
 });
+
+
+test('author focused candidate includes the inputs of its nested actual-checkout probes', () => {
+  const source = fs.readFileSync(path.join(root, '.github/workflows/merge-integration-checks.yml'), 'utf8');
+  const candidate = source.match(/- name: Checkout reviewed head\n        if: needs\.profile\.outputs\.profile == 'evidence'[\s\S]*?sparse-checkout: \|\n((?:            .+\n)+)/);
+  assert.ok(candidate, 'actual focused author checkout must be declared');
+  const directories = candidate[1].trim().split('\n').map(row => row.trim());
+  const result = probe(directories, {checkoutTests: true});
+  assert.equal(result.status, 0, result.stdout + result.stderr);
+  const missing = probe(directories.filter(row => !row.includes('selected-checkpoint-reuse-20261012')), {checkoutTests: true});
+  assert.notEqual(missing.status, 0);
+  assert.match(missing.stdout + missing.stderr, /ENOENT/);
+  assert.match(missing.stdout + missing.stderr, /selected-checkpoint-reuse-20261012/);
+});
