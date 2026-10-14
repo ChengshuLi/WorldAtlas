@@ -1,5 +1,5 @@
-// One trusted Node invocation owns checkpoint authority, native comparison and
-// continuous operand production. Proposed commits are data, never imported code.
+// One trusted Node invocation owns checkpoint authority and native comparison.
+// Proposed commits are data, never imported code.
 import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
@@ -10,12 +10,10 @@ import {gzipSync} from 'node:zlib';
 const ROOT = fileURLToPath(new URL('../../../', import.meta.url));
 const P = 'coordination/engineering/selected-geography-effective-prevention-20261009/';
 export const JOINT_CODE = Object.freeze([
-  'scripts/run-geographic-check.py', 'scripts/check-geographic-regression.py',
-  'scripts/check-effective-geographic-regression.mjs', 'scripts/selected-checkpoint-native.mjs', 'src/ownership-codec.js',
-  'scripts/evidence/immutable.py', 'scripts/evidence/geometry.py',
-  'scripts/ellipsoidal_area.py', 'requirements.txt',
-  P + 'selected-neighbor-prevention.mjs', P + 'selected-continuous-entry.mjs',
-  P + 'selected-checkpoint.mjs', P + 'selected-checkpoint-continuous.mjs', P + 'selected-joint-entry.mjs',
+  'scripts/run-geographic-check.py',
+  'scripts/check-effective-geographic-regression.mjs', 'scripts/selected-checkpoint-native.mjs',
+  'src/native-grid.js', 'src/ownership-codec.js',
+  P + 'selected-neighbor-prevention.mjs', P + 'selected-checkpoint.mjs', P + 'selected-joint-entry.mjs',
   'scripts/accepted-selected-checkpoint.mjs', 'scripts/check-handoff-scope.mjs',
   'scripts/evidence-policy.mjs', 'scripts/evidence-quality.mjs', 'scripts/geographic-report-artifact.mjs',
   'scripts/github-quota.mjs', 'scripts/github-snapshots.mjs', 'scripts/integration-proof.mjs',
@@ -78,7 +76,7 @@ export function planDerivedOutput(certificate, facts, baseBytes, limit = FILE) {
     decoded_bytes:decodedBytes, decoded_sha256:'0'.repeat(64)};
   const factsBytes = jsonBytes({...facts, certificate:placeholder}, limit);
   const publicationBytes = jsonBytes({version:1, complete:true, kind:'derived-selected-checkpoint-candidate-v1',
-    accepted_checkpoint:false, validation_stage:'native-passed-continuous-pending', certificate:placeholder,
+    accepted_checkpoint:false, validation_stage:'native-passed', certificate:placeholder,
     facts:{path:'derived-facts.json', bytes:limit, sha256:'0'.repeat(64)}, ...(facts.checkpoint_routes ? {routes:facts.checkpoint_routes} : {})}, limit);
   const encodedLimit = limit - baseBytes - decodedBytes - 2 * factsBytes - publicationBytes;
   demand(encodedLimit > 0, 'Derived output union exceeds admitted reserve before serialization');
@@ -148,7 +146,6 @@ export async function selectedJointStage(repo, trusted, baseline, candidate, des
   const native = await import('../../../scripts/check-effective-geographic-regression.mjs');
   const {compareSelectedCheckpointNative} = await import('../../../scripts/selected-checkpoint-native.mjs');
   const checkpoint = await import('./selected-checkpoint.mjs');
-  const {checkpointContinuousOperands} = await import('./selected-checkpoint-continuous.mjs');
   const {valueBytes, valueSha} = await import('./selected-neighbor-prevention.mjs');
   const startup = native.selectedBootstrap(repo, baseline, candidate, {parentRuntimePath});
   const {beforeReader, afterReader} = startup;
@@ -207,24 +204,9 @@ export async function selectedJointStage(repo, trusted, baseline, candidate, des
       'Joint native consumer did not complete an actual comparison');
     demand(valueBytes(nativeReport).length <= OUTPUT, 'Joint native report exceeds original output reserve');
     if (nativeReport.status === 'native-regressions-found') return result(nativeReport, null);
-    const product = checkpointContinuousOperands({transition, budget});
-    const operands = valueBytes(product.operands);
-    demand(operands.length < FILE, 'Joint continuous operand ordinary cap');
-    const encoded = gzipSync(operands, {level:9, mtime:0, maxOutputLength:FILE - operands.length});
-    const facts = valueBytes({version:1, kind:'trusted-selected-continuous-comparison-v1',
-      executing_commit:trusted, baseline_commit:baseline, candidate_commit:candidate,
-      execution_code:code, runtime:startup.identities, plan:transition.plan, inverse:product.inverse,
-      checkpoint_custody:{baseline:product.baseline_execution, candidate:product.candidate_execution},
-      source_custody:product.custody, validation_route:'authenticated-checkpoint-append-v1',
-      candidate_code_executed:false});
-    const publication = {version:1, complete:true, kind:'trusted-selected-continuous-comparison-v1',
-      operands:{path:'operands.json.gz', bytes:encoded.length, sha256:sha(encoded), decoded_bytes:operands.length, decoded_sha256:sha(operands)},
-      facts:{path:'facts.json', bytes:facts.length, sha256:sha(facts)}};
-    const publicationBody = valueBytes(publication);
-    // The continuous consumer has already admitted 7 * FILE for the complete
-    // serialized output union. Reauthenticate before retaining the genuine
-    // derived certificate, and keep both output families inside that same cap.
-    // These bytes are a provisional candidate, never a newly minted capability.
+    // Native comparison is the selected-map acceptance boundary. Do not build
+    // or compare continuous polygon operands, including on no-change runs.
+    budget.carriedBytes += 7 * FILE;
     const genuine = checkpoint.authenticateTransition({transition, budget});
     const authorityPaths = [P + 'supported-programs.json',
       'coordination/engineering/selected-checkpoint-reuse-20261012/accepted-checkpoints.json'];
@@ -237,7 +219,7 @@ export async function selectedJointStage(repo, trusted, baseline, candidate, des
     const routes = valueBytes(checkpoint.checkpointRouteCensus({transition, budget}));
     const routePin = {path:'checkpoint-routes.json', bytes:routes.length, sha256:sha(routes)};
     const derivedFactsBase = {version:1, kind:'derived-selected-checkpoint-candidate-v1',
-      validation_stage:'native-passed-continuous-pending', accepted_checkpoint:false,
+      validation_stage:'native-passed', accepted_checkpoint:false,
       executing_commit:trusted, execution_code:code, runtime:startup.identities,
       baseline_accepted_execution:genuine.baseline.accepted_execution,
       executing_authority_pins:authorityPins, executing_policy:executingPolicy,
@@ -247,9 +229,8 @@ export async function selectedJointStage(repo, trusted, baseline, candidate, des
       baseline_selection:genuine.baseline.selection, candidate_selection:genuine.candidate.selection,
       candidate_bindings:{ledger_sha256:valueSha(genuine.candidate.ledger), registry_sha256:valueSha(genuine.candidate.registry),
         patch_sha256:valueSha(genuine.candidate.patch), manifest_sha256:valueSha(genuine.candidate.manifest)},
-      transition_plan:genuine.plan, native_result_sha256:valueSha(nativeReport),
-      continuous_publication:publication, candidate_code_executed:false};
-    const baseBytes = operands.length + encoded.length + 2 * facts.length + publicationBody.length + 2 * routes.length;
+      native_result_sha256:valueSha(nativeReport), candidate_code_executed:false};
+    const baseBytes = 2 * routes.length;
     const archivePlan = planDerivedOutput(genuine.candidate.certificate, derivedFactsBase, baseBytes);
     const certificate = valueBytes(genuine.candidate.certificate);
     demand(certificate.length === archivePlan.decodedBytes, 'Derived certificate serialization size drift');
@@ -258,21 +239,17 @@ export async function selectedJointStage(repo, trusted, baseline, candidate, des
       sha256:sha(certificateEncoded), decoded_bytes:certificate.length, decoded_sha256:sha(certificate)};
     const derivedFacts = valueBytes({...derivedFactsBase, certificate:certificatePin});
     const derivedPublication = {version:1, complete:true, kind:'derived-selected-checkpoint-candidate-v1',
-      accepted_checkpoint:false, validation_stage:'native-passed-continuous-pending', certificate:certificatePin,
+      accepted_checkpoint:false, validation_stage:'native-passed', certificate:certificatePin,
       facts:{path:'derived-facts.json', bytes:derivedFacts.length, sha256:sha(derivedFacts)}, routes:routePin};
     const derivedPublicationBody = valueBytes(derivedPublication);
-    demand(operands.length + encoded.length + 2 * facts.length + publicationBody.length
-      + certificate.length + certificateEncoded.length + 2 * derivedFacts.length + derivedPublicationBody.length + 2 * routes.length < FILE,
-      'Joint continuous and derived checkpoint complete outputs exceed original reserve');
+    demand(certificate.length + certificateEncoded.length + 2 * derivedFacts.length + derivedPublicationBody.length + 2 * routes.length < FILE,
+      'Derived native checkpoint complete outputs exceed original reserve');
     checkpoint.authenticateTransition({transition, budget});
     executionGuard(repo, trusted); fresh(destination); fs.mkdirSync(destination);
-    for (const [name, body] of [['operands.json.gz', encoded], ['facts.json', facts], ['derived-certificate.json.gz', certificateEncoded],
-      ['derived-facts.json', derivedFacts], ['checkpoint-routes.json', routes], ['derived-publication.json', derivedPublicationBody], ['publication.json', publicationBody]])
+    for (const [name, body] of [['derived-certificate.json.gz', certificateEncoded],
+      ['derived-facts.json', derivedFacts], ['checkpoint-routes.json', routes], ['derived-publication.json', derivedPublicationBody]])
       fs.writeFileSync(path.join(destination, name), body, {flag:'wx', mode:0o644});
-    return result(nativeReport, {version:1, kind:publication.kind,
-      status:transition.changedIds.length ? 'selected-operands-complete' : 'no-selected-footprint-change',
-      publication, derived_checkpoint:derivedPublication, changed_ids:transition.changedIds, complete_owners:product.complete_owners,
-      affected_ids:transition.plan.required_ids, candidate_code_executed:false});
+    return result(nativeReport, derivedPublication);
   } finally {
     if (state) checkpoint.releaseCheckpoint(state);
     if (acceptedHandle) accepted.releaseAcceptedCheckpoint(acceptedHandle);
@@ -281,10 +258,10 @@ export async function selectedJointStage(repo, trusted, baseline, candidate, des
     return {version:1, kind:'trusted-selected-joint-comparison-v1', mode:'legacy-cold-required',
       reuse_unavailable:{cold:decision.cold, reason:decision.reason}, candidate_code_executed:false};
   }
-  function result(nativeReport, continuous) {
+  function result(nativeReport, derivedCheckpoint) {
     return {version:1, kind:'trusted-selected-joint-comparison-v1', mode:'authenticated-checkpoint-append-v1',
       native:{...nativeReport, runtime:startup.runtime, caller_runtime:startup.callerRuntime,
-        execution_runtimes:startup.identities, execution_code_inventory:code}, continuous,
+        execution_runtimes:startup.identities, execution_code_inventory:code}, derived_checkpoint:derivedCheckpoint,
       candidate_code_executed:false};
   }
 }

@@ -209,7 +209,7 @@ test('actual selected entry compares typed whole native bank against ordinary pr
 });
 
 
-test('selected continuous source consumes exact encoded override and rejects incomplete or stale maps',()=>{
+test('selected source identity consumes exact encoded override and rejects incomplete or stale maps',()=>{
  const f=fixture();try{
   const base=f.select([[[0,2,1]],[[1,3,2]],[],[]],{transport:true});
   const selection=JSON.parse(fs.readFileSync(path.join(f.repo,'data/ownership-selection.json')));
@@ -230,31 +230,6 @@ test('selected continuous source consumes exact encoded override and rejects inc
   const plan=selectedAffectedPlan(certificate,['old-owner','other-owner'].map(id=>({id,primitives:[geometry]})));assert.deepEqual(plan.pairs,[['old-owner','other-owner']]);assert.deepEqual(plan.required_ids,['old-owner','other-owner']);
   assert.throws(()=>possibleNeighbors(certificate,geometry,{excludeIds:['old-owner','other-owner']}),/SELF target/);
   assert.notDeepEqual(actual.body,execFileSync('git',['-C',f.repo,'show',current+':data/geography/fixture.json']),'historical ordinary path must never replace selected body');
-  const cold=path.join(f.repo,'cold-coordinate-control'),entry=path.join(f.repo,'coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs');
-  const env={...process.env};delete env.NODE_OPTIONS;delete env.NODE_PATH;
-  const invoke=dest=>spawnSync(process.execPath,['--expose-gc',entry,'coordinate',f.repo,current,current,dest],{env,encoding:'utf8'});
-  const noGc=spawnSync(process.execPath,[entry,'coordinate',f.repo,current,current,cold+'-missing-gc'],{env,encoding:'utf8'});assert.notEqual(noGc.status,0);assert.match(noGc.stderr,/authenticated native GC/);assert.equal(fs.existsSync(cold+'-missing-gc'),false);
-  const gcScript=path.join(f.repo,'gc-identity-drift-control.mjs');fs.writeFileSync(gcScript,`const m=await import(${JSON.stringify('file://'+entry)});globalThis.gc=()=>{};m.checkColdReclaimer();`);
-  const gcDrift=spawnSync(process.execPath,['--expose-gc',gcScript],{env,encoding:'utf8'});assert.notEqual(gcDrift.status,0);assert.match(gcDrift.stderr,/authenticated native GC/);fs.unlinkSync(gcScript);
-  const extraFlag=spawnSync(process.execPath,['--expose-gc','--require=node:fs',entry,'coordinate',f.repo,current,current,cold+'-extra-flag'],{env,encoding:'utf8'});assert.notEqual(extraFlag.status,0);assert.match(extraFlag.stderr,/authenticated native GC/);assert.equal(fs.existsSync(cold+'-extra-flag'),false);
-
-  const emitted=invoke(cold);assert.equal(emitted.status,0,emitted.stderr);assert.equal(JSON.parse(emitted.stdout).complete_owners,2);
-  const publication=JSON.parse(fs.readFileSync(path.join(cold,'publication.json'))),facts=fs.readFileSync(path.join(cold,'facts.json'));
-  assert.equal(sha(facts),publication.facts.sha256);assert.equal(JSON.parse(facts).candidate_code_executed,false);
-  const fullFacts=JSON.parse(facts),completeCertificate=JSON.parse(gunzipSync(fs.readFileSync(path.join(cold,'certificate.json.gz'))));
-  assert.equal(fullFacts.source_certificate_domain,'complete-selected-source-pointsets:v1');assert.equal(fullFacts.historical_footprint_authority.recomputed,false);assert.equal(fullFacts.historical_footprint_authority.value,footprint);
-  const accept=value=>acceptColdCoordinateCertificate(snapshot.geometrySources,value,{facts:fullFacts,expectedPublication:publication,publication,encoded_sha256:publication.certificate.sha256,decoded_sha256:publication.certificate.decoded_sha256});
-  assert.equal(accept(structuredClone(completeCertificate)).entries.length,2);
-  const altered=structuredClone(completeCertificate);altered.inputs[0].whole_body_sha256='0'.repeat(64);assert.throws(()=>accept(altered),/source body differs/);
-  const omitted=structuredClone(completeCertificate);omitted.inputs=[];assert.throws(()=>accept(omitted),/Incomplete cold/);
-  const reordered=structuredClone(completeCertificate);reordered.entries.reverse();assert.throws(()=>accept(reordered),/cold owner record/);
-  const rebound=structuredClone(completeCertificate);rebound.inputs[0].source.sha256='0'.repeat(64);assert.throws(()=>accept(rebound),/drifted complete cold source/);
-  const wrongEffective=structuredClone(completeCertificate);wrongEffective.entries[0][8]='0'.repeat(64);assert.throws(()=>accept(wrongEffective),/effective primitive set/);
-
-  const collision=invoke(cold);assert.notEqual(collision.status,0);assert.match(collision.stderr,/already exists/);assert.equal(sha(fs.readFileSync(path.join(cold,'facts.json'))),publication.facts.sha256);
-  const dangling=path.join(f.repo,'dangling-coordinate-control');fs.symlinkSync('/nonexistent-coordinate-fixture',dangling);const link=invoke(dangling);assert.notEqual(link.status,0);assert.match(link.stderr,/already exists/);assert.equal(fs.readlinkSync(dangling),'/nonexistent-coordinate-fixture');fs.unlinkSync(dangling);
-  fs.rmSync(cold,{recursive:true});
-
   assert.throws(()=>snapshot.geometrySources.read('data/geography/foreign.json'),/Foreign source/);
   const incomplete=select({...bank,overrides:[]});assert.throws(()=>loadSelection(new ImmutableReader(f.repo,incomplete)),/Incomplete selected source containing/);
   const stale=select({...bank,native_manifest_sha256:'0'.repeat(64)});assert.throws(()=>loadSelection(new ImmutableReader(f.repo,stale)),/source\/native\/release binding/);
@@ -313,40 +288,6 @@ test('whole original rule custody derives actual issued preimage and refuses reb
   const limited=new ImmutableReader(f.repo,head,{runtimeBytes:268435455,metadataBytes:0,outputBytes:0,allowance:{phaseBytes:256*1024*1024,rssBytes:1024**3}});let opens=0;const git=limited.git.bind(limited);limited.git=(...args)=>{if(args[0]==='cat-file'&&args[1]==='blob')opens++;return git(...args);};assert.throws(()=>readOriginalRuleAuthority(limited,pins),/complete phase/i);assert.equal(opens,0);
   const missing={...pins};delete missing.source_request;assert.throws(()=>readOriginalRuleAuthority(open(),missing),/exact original rule body roster/);
  }finally{f.cleanup();}
-});
-
-
-test('cold selected continuous operands preserve complete neighbors and original loss/overlap comparisons',()=>{
- const f=fixture(),coldRoot=fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(),'selected-continuous-output-fixture-')));try{
-  const rect=(a,b)=>({type:'Polygon',coordinates:[[[a,0],[b,0],[b,1],[a,1],[a,0]]]});
-  const features=geometry=>['old-owner','other-owner'].map((id,i)=>({type:'Feature',id,properties:{id,parent_id:'parent'},geometry:i?rect(2,3):geometry}));
-  const hashFeatures=rows=>sha(Buffer.from(JSON.stringify(rows.map(r=>[r.id,r.geometry]).sort((a,b)=>a[0].localeCompare(b[0])))));
-  const pin=(name,commit)=>{const raw=execFileSync('git',['-C',f.repo,'show',commit+':'+name]),[mode,,git_blob_oid]=f.git('ls-tree',commit,'--',name).split(/[ \t]/);return {commit,path:name,mode,git_blob_oid,bytes:raw.length,sha256:sha(raw)};};
-  const install=(rows,releaseId)=>{
-   const selected=f.select([[[0,1,1]],[[2,3,2]],[],[]],{transport:true,releaseId}),selection=JSON.parse(fs.readFileSync(path.join(f.repo,'data/ownership-selection.json'))),body=Buffer.from(JSON.stringify({type:'FeatureCollection',features:rows})),encoded=f.write('source/current.json.gz',gzipSync(body));
-   const releases=f.write('data/geographic-releases/selected.json.gz',gzipSync(Buffer.from(JSON.stringify({releases:[{id:releaseId,footprints_sha256:hashFeatures(rows)}]}))));f.write('data/geographic-releases/current-manifest.json',{path:'selected.json.gz',sha256:sha(releases)});const origin=f.commit();
-   const override={...pin('source/current.json.gz',origin),logical_path:'data/geography/fixture.json',encoding:'gzip',decoded_bytes:body.length,decoded_sha256:sha(body)},bank={version:1,kind:'complete-world-index-with-exact-encoded-overrides',release_id:releaseId,native_manifest_sha256:selection.sha256,footprints_sha256:hashFeatures(rows),locations:2,world_index:pin('data/world-index.json',selected),unchanged_files:[],overrides:[override]},raw=f.write('source/selected-bank.json',bank);
-   f.write('data/ownership-selection.json',{...selection,selected_geography:{version:1,kind:bank.kind,path:'source/selected-bank.json',bytes:raw.length,sha256:sha(raw)}});return f.commit();
-  };
-  const baseline=install(features(rect(0,1)),'geography:review:before');
-  const run=(candidate,name)=>{f.git('checkout',baseline);const entry=path.join(f.repo,'coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs'),destination=path.join(coldRoot,'continuous-'+name),env={...process.env};delete env.NODE_OPTIONS;delete env.NODE_PATH;
-   const result=spawnSync(process.execPath,['--expose-gc',entry,'continuous',f.repo,baseline,baseline,candidate,destination],{env,encoding:'utf8'});assert.equal(result.status,0,result.stderr);const ack=JSON.parse(result.stdout),pub=JSON.parse(fs.readFileSync(path.join(destination,'publication.json')));assert.deepEqual(pub,ack.publication);
-   const encoded=fs.readFileSync(path.join(destination,pub.operands.path));assert.equal(sha(encoded),pub.operands.sha256);return {ack,operands:JSON.parse(gunzipSync(encoded)),destination};};
-  const gain=install(features(rect(0,1.5)),'geography:review:gain'),positive=run(gain,'gain');assert.deepEqual(positive.ack.changed_ids,['old-owner']);assert.deepEqual(Object.keys(positive.operands.baseline),['old-owner']);assert.equal(positive.operands.plan.source_bindings.baseline.sources.length,1);
-  const lost=install(features(rect(0,.5)),'geography:review:loss'),negative=run(lost,'loss');assert.deepEqual(negative.ack.changed_ids,['old-owner']);
-  const overlap=install(features(rect(0,2.5)),'geography:review:overlap'),conflict=run(overlap,'overlap');assert.deepEqual(conflict.ack.affected_ids,['old-owner','other-owner']);assert.deepEqual(conflict.operands.plan.pairs,[['old-owner','other-owner']]);
-  // Invoke the actual trusted Python caller, not a duplicated polygon algorithm.
-  const python=process.env.WORLDATLAS_TEST_PYTHON??process.env.PYTHON??(process.platform==='darwin'?'/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12':'python3');
-  if(path.isAbsolute(python))assert.ok(fs.existsSync(python),'Actual original Python operator runtime is required for this control');
-  {
-   const driver="import importlib.util,json,pathlib,sys\nsys.path[:0]=json.loads(sys.argv[3])\nsys.path.insert(0,str(pathlib.Path(sys.argv[1])/'scripts'))\ns=importlib.util.spec_from_file_location('original',str(pathlib.Path(sys.argv[1])/'scripts/check-geographic-regression.py'));m=importlib.util.module_from_spec(s);s.loader.exec_module(m)\nv=json.load(open(sys.argv[2]));print(json.dumps(m.compare(v['baseline'],v['candidate'])))";
-   for(const [stage,expected]of [[positive,'no-new-regression'],[negative,'regressions-found'],[conflict,'regressions-found']]){const source=path.join(stage.destination,'plain-control.json');fs.writeFileSync(source,JSON.stringify(stage.operands));const result=spawnSync(python,['-I','-B','-c',driver,f.repo,source,JSON.stringify((process.env.WORLDATLAS_TEST_PYTHON_SITE_PATHS??(process.platform==='darwin'?'/Users/chengshuli/.local/lib/python3.12/site-packages:/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages':'')).split(path.delimiter).filter(Boolean))],{encoding:'utf8'});assert.equal(result.status,0,result.stderr);assert.equal(JSON.parse(result.stdout).status,expected);}
-   const wrapper="import importlib.util,json,pathlib,sys\nsys.path[:0]=json.loads(sys.argv[4]);sys.path.insert(0,str(pathlib.Path(sys.argv[1])/'scripts'))\ndef load(n,p):\n s=importlib.util.spec_from_file_location(n,p);m=importlib.util.module_from_spec(s);s.loader.exec_module(m);return m\nd=load('original',str(pathlib.Path(sys.argv[1])/'scripts/check-geographic-regression.py'));w=load('wrapper',str(pathlib.Path(sys.argv[1])/'scripts/run-geographic-check.py'));print(json.dumps(w.selected_continuous(pathlib.Path(sys.argv[1]),sys.argv[2],sys.argv[3],d)))";
-   const sites=(process.env.WORLDATLAS_TEST_PYTHON_SITE_PATHS??(process.platform==='darwin'?'/Users/chengshuli/.local/lib/python3.12/site-packages:/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages':'')).split(path.delimiter).filter(Boolean);
-   const result=spawnSync(python,['-I','-B','-c',wrapper,f.repo,baseline,overlap,JSON.stringify(sites)],{encoding:'utf8',env:{...process.env,NODE:process.execPath}});assert.equal(result.status,0,result.stderr);const enforced=JSON.parse(result.stdout);assert.equal(enforced.status,'regressions-found');assert.deepEqual(enforced.required_ids,['old-owner','other-owner']);assert.equal(enforced.candidate_code_executed,false);
-
-  }
- }finally{fs.rmSync(coldRoot,{recursive:true,force:true});f.cleanup();}
 });
 
 

@@ -233,58 +233,41 @@ test('continuous different-owner overlap is refused even when no native cell is 
  assert.equal(same.zero_cell_components,2);assert.equal(same.native_conflicts,0);
 });
 
-// Linux compatibility is an exact runtime-byte transition, not a method waiver.
-import {compatibleCurrentRebindCode,CURRENT_REBIND_CODE,valueSha} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
-const linuxHistory=JSON.parse(fs.readFileSync('coordination/engineering/melanesia363-additive-delivery-20261010/linux-runner-portability-20261010/historical-code-vectors.json'));
-const linuxRuntimePaths=['issue-current-rebind-execution.py','supervise-current-rebind.py'].map(name=>'coordination/engineering/additive-native-composition-20261009/'+name);
-// Frozen Linux specimens approved before output-budget adoption (main 61491046).
-// Later live runtime bytes are a different reviewed transition, not this fixture.
-const approvedLinuxRuntime=[
- {path:linuxRuntimePaths[0],bytes:23671,sha256:'37d6e02607204302fc01c5d3d6652c89a937e5e84acaa71fb25f5ddc7bcdf5e8'},
- {path:linuxRuntimePaths[1],bytes:20660,sha256:'5be26c44ef36a097a24c82dab89a91693c94065278f5e15aeb57b0d295755345'}
-];
-test('Linux runtime compatibility keeps complete historical vectors and exact byte pairs',()=>{
- assert.equal(linuxHistory.length,6);
- for(const row of linuxHistory){
-  const historical=row.code;assert.equal(valueSha(historical),row.vector_sha256);assert.deepEqual(historical.map(p=>p.path),CURRENT_REBIND_CODE);
-  const current=historical.map(p=>approvedLinuxRuntime.find(r=>r.path===p.path)??{...p});
-  assert.deepEqual(compatibleCurrentRebindCode(row.commit,current,historical),historical);
-  for(const path of linuxRuntimePaths){
-   for(const key of ['bytes','sha256']){const wrong=structuredClone(current),pin=wrong.find(p=>p.path===path);pin[key]=key==='bytes'?pin.bytes+1:'f'.repeat(64);assert.throws(()=>compatibleCurrentRebindCode(row.commit,wrong,historical),/runtime body differs/);}
-  }
-  const numerical=structuredClone(current);numerical.find(p=>p.path==='src/native-grid.js').sha256='f'.repeat(64);assert.throws(()=>compatibleCurrentRebindCode(row.commit,numerical,historical),/runtime body differs/);
-  assert.throws(()=>compatibleCurrentRebindCode('a'.repeat(40),current,historical),/Unknown historical/);
-  assert.deepEqual(compatibleCurrentRebindCode('a'.repeat(40),historical,historical),historical);
-  const missing=current.slice(1);assert.throws(()=>compatibleCurrentRebindCode(row.commit,missing,historical),/Incomplete/);
-  const forged=structuredClone(historical);forged[0].bytes++;assert.throws(()=>compatibleCurrentRebindCode(row.commit,current,forged),/Unknown historical/);
+// Current wrappers need no historical generation registration. Original
+// execution identities and recomputed operand/owner checks remain independent.
+import {verifyCurrentRebindExecution,currentRebindResult,valueSha} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+test('retained execution authenticates original bytes without equating current wrapper bytes',()=>{
+ const prefix='coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/';
+ const certificate=JSON.parse(fs.readFileSync(prefix+'rebind-certificate-001/certificate.json'));
+ const request=JSON.parse(fs.readFileSync(certificate.request.path));
+ const operating=JSON.parse(fs.readFileSync(certificate.operating.path));
+ const custody=Object.fromEntries(Object.entries(operating.execution_custody).map(([name,pin])=>[name,fs.readFileSync(pin.path)]));
+ custody.result_sha256=certificate.result.sha256;
+ const expectedCode=request.executed_code,check=(code=expectedCode,bodies=custody)=>verifyCurrentRebindExecution({request,operating,expectedCode:code,custody:bodies});
+ const current='scripts/check-effective-geographic-regression.mjs';
+ assert.notEqual(createHash('sha256').update(fs.readFileSync(current)).digest('hex'),expectedCode.find(p=>p.path===current).sha256);
+ assert.ok(check().runtime.length>0);
+ for(const change of [c=>c.pop(),c=>c.reverse(),c=>{c[0].sha256='f'.repeat(64);},c=>{c[0].bytes++;}]){
+  const changed=structuredClone(expectedCode);change(changed);assert.throws(()=>check(changed),/executing code closure/);
+ }
+ for(const name of ['code_source','issued_plan','terminal']){
+  const changed={...custody,[name]:Buffer.from(custody[name])};changed[name][0]^=1;
+  assert.throws(()=>check(expectedCode,changed),/External execution whole body differs/);
  }
 });
-test('Linux legacy compatibility refuses the separately approved output-budget supervisor',()=>{
- // Exact frozen #1747 supervisor, from f3097f971f0d276b0037be0d2b8a9173e5c02721.
- const outputBudgetSupervisor={path:linuxRuntimePaths[1],bytes:21045,sha256:'3744c6e04d90d822ffdd291ddc542e87ba39984f9e4b9947b26b589b8da79674'};
- for(const row of linuxHistory){
-  const current=row.code.map(p=>({...approvedLinuxRuntime.find(r=>r.path===p.path)??p}));
-  Object.assign(current.find(p=>p.path===outputBudgetSupervisor.path),outputBudgetSupervisor);
-  assert.throws(()=>compatibleCurrentRebindCode(row.commit,current,row.code),/runtime body differs/);
- }
-});
-test('Linux runtime pairs preserve only the existing visibility and schema transitions',()=>{
- const transitions=[
-  {path:'scripts/check-effective-geographic-regression.mjs',old:'992257b3a50f790c5f859104c67a3e6f4cf75f8c341440fff78b0dd32b95fab9',bytes:75074,sha256:'801ad9f05a8d7f34ae591ee78a09b71c87090acd4d20c92c9831152528a9c039'},
-  {path:'src/effective-footprint.js',old:'30c524aba3e556d4d92508306a6b76b760a51cf08715457ece72646ee9b5921c',bytes:44682,sha256:'0f971449c093ad728495dc05da9a047872c4b57c55bc75fd79012fbcb3db7e65'},
-  {commit:'16c35b9188d130b060fc2dcf4e917983d42d9db1',path:'src/effective-footprint.js',old:'0f971449c093ad728495dc05da9a047872c4b57c55bc75fd79012fbcb3db7e65',bytes:44784,sha256:'29a2d9867aa8ffae8645559b34e1638a007cc1504f99ef766ef9c44176491e91'},
-  {commit:'bb73f014366ed7e7b10a54a4fb3b2113e8743d66',path:'src/effective-footprint.js',old:'29a2d9867aa8ffae8645559b34e1638a007cc1504f99ef766ef9c44176491e91',bytes:45330,sha256:'28edb52a2befd80b73e0ce62fa3f7de51cada4f9894aab32e5ff2761f1fe0745'}
- ];
- for(const transition of transitions){
-  let exercised=0;
-  for(const row of linuxHistory){
-   if(transition.commit&&row.commit!==transition.commit||row.code.find(p=>p.path===transition.path)?.sha256!==transition.old)continue;
-   const current=row.code.map(p=>approvedLinuxRuntime.find(r=>r.path===p.path)??{...p});Object.assign(current.find(p=>p.path===transition.path),{bytes:transition.bytes,sha256:transition.sha256});
-   assert.deepEqual(compatibleCurrentRebindCode(row.commit,current,row.code),row.code);exercised++;
-   current.find(p=>p.path===transition.path).bytes++;assert.throws(()=>compatibleCurrentRebindCode(row.commit,current,row.code),/runtime body differs/);
-  }
-  assert(exercised>0,'Every named preexisting transition must be exercised');
- }
+test('current rebind recomputes owner and original polygon preservation after generation guard removal',()=>{
+ const polygon=x=>({type:'Polygon',coordinates:[[[x,0],[x+1,0],[x+1,1],[x,0]]]}),base=polygon(0),primitive=polygon(2);
+ const input={baseSelection:{version:1},registry:{version:1},size:16,
+  originalRows:[{component_id:'new',target_id:'A',pixelIndex:1,disposition:'assigned',base_geometry:base,base_geometry_sha256:valueSha(base),geometry:primitive,geometry_sha256:valueSha(primitive)}],
+  originalPatches:[{version:1,kind:'unassigned-native-cells-v1',rows:[{y:3,runs:[[4,5,1]]}]}],
+  currentTargets:[{target_id:'A',pixelIndex:1,geometry:base,geometry_sha256:valueSha(base)}],currentRows:[{y:3,runs:[[0,2,2]]}]};
+ const result=currentRebindResult(input);assert.equal(result.native.assigned_cells,1);
+ assert.deepEqual(result.native.effective_rows,[{y:3,runs:[[0,2,2],[4,5,1]]}]);
+ const occupied=structuredClone(input);occupied.currentRows[0].runs.push([4,5,2]);assert.throws(()=>currentRebindResult(occupied),/already owned/);
+ const rebound=structuredClone(input);rebound.currentTargets[0].pixelIndex=2;assert.throws(()=>currentRebindResult(rebound),/identity differs/);
+ const missing=structuredClone(input);missing.currentRows=[];assert.throws(()=>currentRebindResult(missing),/Missing complete current native row/);
+ const altered=structuredClone(input);altered.currentTargets[0].geometry=polygon(8);altered.currentTargets[0].geometry_sha256=valueSha(altered.currentTargets[0].geometry);
+ assert.throws(()=>currentRebindResult(altered),/loses\/rebuilds an original full polygon group/);
 });
 
 // This is a tiny serialization-boundary fixture, not a source qualification.

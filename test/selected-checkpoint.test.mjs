@@ -12,7 +12,7 @@ import {deriveCoordinateDelta,projectSourceFeatures,projectNativeRows,qualifyTra
 const MODULE='coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs';
 const PROGRAMME='coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json';
 const CATALOGUE='coordination/engineering/selected-checkpoint-reuse-20261012/accepted-checkpoints.json';
-const CODE=[MODULE,'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs','scripts/check-effective-geographic-regression.mjs','src/ownership-codec.js'];
+const CODE=[MODULE,'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs','scripts/check-effective-geographic-regression.mjs','src/native-grid.js','src/ownership-codec.js'];
 const sha=b=>createHash('sha256').update(b).digest('hex');
 const polygon=(x,y=0)=>({type:'Polygon',coordinates:[[[x,y],[x+.2,y],[x+.2,y+.2],[x,y+.2],[x,y]]]});
 const feature=(id,x)=>({type:'Feature',id,properties:{id,parent_id:'parent'},geometry:polygon(x)});
@@ -29,18 +29,15 @@ test('serialized lookalikes cannot mint state or projectors',()=>{
  assert.throws(()=>projectNativeRows({state,rows:[0],budget:{}}),/private qualified/);
  assert.throws(()=>qualifyTransition({state,reader:{},budget:{}}),/private qualified/);
 });
-test('append arithmetic retains all rows and discovers unchanged and changed neighbors in both vintages',()=>{
+test('append arithmetic retains all owners and authenticates changed literal additions',()=>{
  const {certificate}=fixtures(), a=addition('a','A',1,certificate.entries[0][7],1.05), b=addition('b','C',3,certificate.entries[2][7],1.1);
  const result=deriveCoordinateDelta({certificate,oldAdditions:[],additions:[a,b],selection:{next:true}});
  assert.equal(result.certificate.entries.length,3);
  assert.strictEqual(result.certificate.entries[1],certificate.entries[1]);
- assert.deepEqual(result.plan.changed_ids,['A','C']);
- assert.deepEqual(result.plan.required_ids,['A','B','C']);
- assert.deepEqual(result.plan.pairs,[['A','B'],['A','C'],['B','C']]);
+ assert.deepEqual(result.changedIds,['A','C']);
  assert.equal(result.certificate.entries[0][8],valueSha({base_geometry_sha256:certificate.entries[0][7],additions:[a]}));
  assert.deepEqual(result.certificate.entries[0][9],[[0,0,1.25,.2]]);
- assert.deepEqual(result.plan.source_bindings.baseline.selection,{old:true});
- assert.deepEqual(result.plan.source_bindings.candidate.selection,{next:true});
+ assert.deepEqual(result.certificate.binding.selection,{next:true});
 });
 test('delta arithmetic rejects omitted old primitives, same-count owner swaps and stale base hashes',()=>{
  const {certificate}=fixtures(), old=addition('old','A',1,certificate.entries[0][7],.3);
@@ -134,7 +131,7 @@ test('unchanged actual selection at a newer commit reuses the original accepted 
  assert.equal(result.state.selected_commit,newer);assert.equal(result.state.accepted_execution.historical_selected_commit,f.selected);
  const transition=f.api.qualifyTransition({state:result.state,reader,budget});assert.equal(transition.available,true);
  assert.deepEqual(transition.changedIds,[]);assert.deepEqual(transition.changedNativeRows,[]);
- assert.deepEqual(transition.plan.required_ids,[]);
+ assert.deepEqual(transition.changedIds,[]);
 });
 test('committed qualifier edits need no manual catalogue fingerprint refresh',async t=>{
  const f=await trustedFixture(t), catalogue=fs.readFileSync(path.join(f.root,CATALOGUE));
@@ -248,7 +245,7 @@ test('consumer admission authenticates the private complete transition rather th
  assert.equal(transition.available,true);
  assert.equal(f.api.authenticateTransition({transition,budget:f.budget}),transition);
  assert.throws(()=>transition.changedNativeRows.push(1),TypeError);
- assert.throws(()=>transition.plan.required_ids.push('omitted-neighbor'),TypeError);
+ assert.throws(()=>transition.changedIds.push('omitted-neighbor'),TypeError);
  for(const forged of [{...transition},{...transition,plan:{...transition.plan,required_ids:[],pairs:[]}},{...transition,changedNativeRows:[]},JSON.parse(JSON.stringify(transition))])
   assert.throws(()=>f.api.authenticateTransition({transition:forged,budget:f.budget}),/private qualified selected transition/);
  f.api.releaseCheckpoint(state);

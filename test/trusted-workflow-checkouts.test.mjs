@@ -24,7 +24,7 @@ function probe(directories, {geography = false, checkoutTests = false} = {}) {
     }
     return spawnSync(process.execPath, checkoutTests ? ['--test', '--test-concurrency=1', '--test-name-pattern', 'actual sparse declarations include trusted module dependencies', 'test/trusted-workflow-checkouts.test.mjs'] : ['--input-type=module', '-e',
       "await import('./scripts/issue-claim-contract.mjs'); await import('./scripts/research-import-gate.mjs'); await import('./scripts/premerge-evidence.mjs'); await import('./scripts/check-pr-gates.mjs');" +
-      (geography ? "await import('./scripts/check-effective-geographic-regression.mjs'); await import('./coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs'); console.log('complete trusted geography closure imported');" : '')],
+      (geography ? "await import('./scripts/check-effective-geographic-regression.mjs'); await import('./coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs'); console.log('complete trusted geography closure imported');" : '')],
     {cwd: directory, encoding: 'utf8', env: {PATH: process.env.PATH}});
   } finally { fs.rmSync(directory, {recursive: true, force: true}); }
 }
@@ -580,3 +580,13 @@ test('author focused candidate includes the inputs of its nested actual-checkout
   assert.match(missing.stdout + missing.stderr, /ENOENT/);
   assert.match(missing.stdout + missing.stderr, /selected-checkpoint-reuse-20261012/);
 });
+
+for (const workflow of ['worker-merge.yml','merge-integration-checks.yml']) {
+  test(`${workflow}: native geography omits polygon dependencies while general regressions retain them`, () => {
+    const source=fs.readFileSync(path.join(root,'.github/workflows',workflow),'utf8');
+    const geography=source.match(/^  geography:\n([\s\S]*?)(?=^  [a-zA-Z_-]+:|$(?![\s\S]))/m)?.[1];
+    assert(geography);
+    assert.doesNotMatch(geography,/pip install|Install trusted geographic dependencies/);
+    assert.match(source,/pip install[^\n]*requirements\.txt/);
+  });
+}

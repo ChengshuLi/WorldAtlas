@@ -78,9 +78,12 @@ export function readGeographyJobReceipt(raw, expected) {
 
 export const CHECKPOINT_MEMBERS = Object.freeze([
   'derived-certificate.json.gz', 'derived-facts.json', 'derived-publication.json',
-  'facts.json', 'operands.json.gz', 'publication.json', 'checkpoint-routes.json'
+  'checkpoint-routes.json'
 ]);
-const MEMBER_NAMES = new Set(['geography-check.json', ...CHECKPOINT_MEMBERS, 'operating.json']);
+// Existing accepted archives retain their original three unused polygon files.
+// Recognize their metadata, but never decode them or use them for map validity.
+const ARCHIVED_POLYGON_MEMBERS = ['facts.json', 'operands.json.gz', 'publication.json'];
+const MEMBER_NAMES = new Set(['geography-check.json', ...CHECKPOINT_MEMBERS, ...ARCHIVED_POLYGON_MEMBERS, 'operating.json']);
 const MAX_PHASE = 256 * 1024 * 1024;
 const reportProducts = new WeakMap();
 const exactKeys = (value, keys) => value && typeof value === 'object' && !Array.isArray(value) &&
@@ -197,9 +200,9 @@ export function readReportArchive(raw, expectedHash, expectedBytes, {admit = () 
   need(exactKeys(descriptor, ['version', 'kind', 'members']) && descriptor.version === 1 &&
     descriptor.kind === 'selected-checkpoint-products-v1' && Array.isArray(descriptor.members), 'Invalid checkpoint product descriptor');
   const names = descriptor.members.map(row => row?.name);
-  need(names.length >= CHECKPOINT_MEMBERS.length && names.length <= CHECKPOINT_MEMBERS.length + 1 &&
+  need(names.length >= CHECKPOINT_MEMBERS.length && names.length <= CHECKPOINT_MEMBERS.length + ARCHIVED_POLYGON_MEMBERS.length + 1 &&
     new Set(names).size === names.length && CHECKPOINT_MEMBERS.every(name => names.includes(name)) &&
-    names.every(name => CHECKPOINT_MEMBERS.includes(name) || name === 'operating.json') &&
+    names.every(name => MEMBER_NAMES.has(name) && name !== 'geography-check.json') &&
     entries.size === names.length + 1 && names.every(name => entries.has(name)), 'Checkpoint archive roster differs from authenticated report');
   for (const row of descriptor.members) {
     const gzip = row.name.endsWith('.gz');
@@ -207,12 +210,12 @@ export function readReportArchive(raw, expectedHash, expectedBytes, {admit = () 
       positive(row.bytes) && row.bytes <= MAX_REPORT && row.bytes === entries.get(row.name).size && hash(row.sha256) &&
       (!gzip || positive(row.decoded_bytes) && row.decoded_bytes <= MAX_REPORT && hash(row.decoded_sha256)),
       'Invalid checkpoint member bounds or digest');
-    admitted += row.bytes + 8 * (gzip ? row.decoded_bytes : row.bytes);
+    if (CHECKPOINT_MEMBERS.includes(row.name)) admitted += row.bytes + 8 * (gzip ? row.decoded_bytes : row.bytes);
   }
   need(admitted <= MAX_PHASE, 'Geographic checkpoint combined budget exceeded');
   admit(admitted);
   const members = new Map();
-  for (const row of descriptor.members) {
+  for (const row of descriptor.members.filter(row => CHECKPOINT_MEMBERS.includes(row.name))) {
     const body = decodeMember(raw, entries.get(row.name));
     need(reportHash(body) === row.sha256, 'Checkpoint member differs from authenticated report');
     if (row.name.endsWith('.gz')) {
@@ -416,7 +419,13 @@ export function checkGeographicReport(geography, baseline, candidate, codeCommit
   if (codeCommit !== baseline) need(!geography.checkpoint && !geography.reused_baseline_proof && !geography.unchanged_selected_inputs &&
     /^[a-f0-9]{64}$/.test(geography.trusted_code_inventory_sha256 ?? ''),
     'Software geography must bind actual execution inventory without baseline/checkpoint reuse');
-  const ordinaryPass = ['not-applicable', 'no-footprint-change', 'no-new-regression'].includes(geography.status);
+  const nativePass = geography.status === 'no-new-native-loss' && geography.validation_scope === 'selected-native-map-cells'
+    && geography.selected_native_report?.status === 'no-new-native-loss'
+    && geography.selected_native_report.method === 'selected-native-owner-conservation-v1'
+    && geography.selected_native_report.candidate_code_executed === false
+    && geography.selected_native_report.lost_or_reassigned_cells === 0
+    && Array.isArray(geography.selected_native_report.intervals) && geography.selected_native_report.intervals.length === 0;
+  const ordinaryPass = nativePass || ['not-applicable', 'no-footprint-change', 'no-new-regression'].includes(geography.status);
   const waterPass = geography.status === 'regressions-found' &&
     geography.adjudication?.status === 'all-findings-supported-and-reviewed' &&
     geography.adjudication.unresolved_findings === 0;

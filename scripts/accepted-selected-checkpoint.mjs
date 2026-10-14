@@ -106,7 +106,7 @@ export async function acquireAcceptedCheckpoint({api, repo, locator, token, reta
   if (!report.checkpoint) return unavailable('Accepted legacy report has no complete checkpoint products');
   const artifact = geographicReportProducts(report);
   const products = Object.create(null);
-  for (const pin of report.checkpoint.members) {
+  for (const pin of report.checkpoint.members.filter(pin => artifact.members.has(pin.name))) {
     const encoded = artifact.members.get(pin.name);
     const body = pin.name.endsWith('.gz') ? gunzipSync(encoded, {maxOutputLength: pin.decoded_bytes}) : encoded;
     products[pin.name] = JSON.parse(body.toString('utf8'));

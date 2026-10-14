@@ -12,7 +12,7 @@ import pathlib
 FILE = 32 * 1024 * 1024
 PHASE = 256 * 1024 * 1024
 MEMBERS = ('derived-certificate.json.gz', 'derived-facts.json', 'derived-publication.json',
-           'facts.json', 'operands.json.gz', 'publication.json', 'checkpoint-routes.json')
+           'checkpoint-routes.json')
 OPTIONAL = ('operating.json',)
 
 
@@ -52,7 +52,7 @@ def _matches(pin, name, descriptors):
 def retain_checkpoint_products(source, destination, issued, *, allowance=PHASE):
     """Read the whole authenticated child set and publish copies exclusively.
 
-    Caller has completed the original Python consumer. The descriptor is returned
+    Caller has completed the actual native consumer. The descriptor is returned
     only after all writes complete; a partial write has no valid final report.
     """
     source = _ordinary_parent(source)
@@ -101,29 +101,19 @@ def retain_checkpoint_products(source, destination, issued, *, allowance=PHASE):
     actual = sum(row['bytes'] + 8 * row.get('decoded_bytes', row['bytes']) for row in descriptors.values())
     if actual > total or actual > allowance:
         raise ValueError('Checkpoint products changed after union admission')
-    publication = _json(bodies['publication.json'])
     derived = _json(bodies['derived-publication.json'])
     facts = _json(bodies['derived-facts.json'])
     native = issued.get('native', {})
-    continuous = issued.get('continuous_result', {})
-    original = continuous.get('original_strict_polygon_result', {})
-    if (native.get('status') != 'no-new-native-loss' or native.get('candidate_code_executed') is not False
-            or original.get('status') not in ('no-footprint-change', 'no-new-regression')
-            or original.get('regressions') not in (None, 0)
-            or continuous.get('candidate_code_executed') is not False
-            or continuous.get('issued_publication') != publication):
-        raise ValueError('Checkpoint products lack matching native and original strict Python success')
-    if (publication.get('complete') is not True or issued.get('continuous', {}).get('publication') != publication
-            or not _matches(publication.get('operands'), 'operands.json.gz', descriptors)
-            or not _matches(publication.get('facts'), 'facts.json', descriptors)
-            or derived.get('complete') is not True or derived.get('accepted_checkpoint') is not False
-            or derived.get('validation_stage') != 'native-passed-continuous-pending'
-            or issued.get('continuous', {}).get('derived_checkpoint') != derived
+    if (native.get('method') != 'selected-native-owner-conservation-v1' or native.get('status') != 'no-new-native-loss' or native.get('candidate_code_executed') is not False
+            or native.get('lost_or_reassigned_cells') != 0 or native.get('intervals') != []):
+        raise ValueError('Checkpoint products lack successful native conservation')
+    if (derived.get('complete') is not True or derived.get('accepted_checkpoint') is not False
+            or derived.get('validation_stage') != 'native-passed'
+            or issued.get('derived_checkpoint') != derived
             or not _matches(derived.get('certificate'), 'derived-certificate.json.gz', descriptors)
             or not _matches(derived.get('facts'), 'derived-facts.json', descriptors)
             or not _matches(derived.get('routes'), 'checkpoint-routes.json', descriptors)
-            or facts.get('checkpoint_routes') != derived.get('routes')
-            or facts.get('continuous_publication') != publication):
+            or facts.get('checkpoint_routes') != derived.get('routes')):
         raise ValueError('Checkpoint complete publications or member bindings differ')
     # Match the producer's pre-wrapper native report without changing either
     # the complete retained report or the provisional derived facts.

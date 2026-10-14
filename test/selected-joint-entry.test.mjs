@@ -53,7 +53,7 @@ test('joint output collision and dangling symlink fail before qualification and 
 });
 
 test('joint launcher authenticates its additional consumer module before importing it', async t => {
-  const f = await trustedFixture(t), consumer = path.join(f.root, ENTRY.replace('selected-joint-entry', 'selected-checkpoint-continuous'));
+  const f = await trustedFixture(t), consumer = path.join(f.root, 'scripts/selected-checkpoint-native.mjs');
   fs.appendFileSync(consumer, '\nthrow Error("unauthenticated consumer executed");\n');
   const result = run(f, f.selected, f.selected);
   assert.notEqual(result.status, 0); assert.match(result.stderr, /Joint code size differs/);
@@ -61,21 +61,19 @@ test('joint launcher authenticates its additional consumer module before importi
   assert.equal(fs.existsSync(path.join(f.root, 'complete')), false);
 });
 
-test('actual joint CLI qualifies once, runs both real consumers and releases once', async t => {
+test('actual joint CLI qualifies once, runs the real native consumer and releases once', async t => {
   const f = await trustedFixture(t), coverage = path.join(f.root, 'coverage');
   const result = run(f, f.selected, f.selected, path.join(f.root, 'complete'), {NODE_V8_COVERAGE:coverage});
   assert.equal(result.status, 0, result.stderr);
   const report = JSON.parse(result.stdout);
   assert.equal(report.mode, 'authenticated-checkpoint-append-v1');
   assert.equal(report.native.status, 'no-new-native-loss');
-  assert.equal(report.continuous.status, 'no-selected-footprint-change');
-  assert.equal(report.continuous.complete_owners, 3);
-  const publication = JSON.parse(fs.readFileSync(path.join(f.root, 'complete/publication.json')));
-  assert.deepEqual(report.continuous.publication, publication);
+  assert.equal(report.continuous, undefined);
+  assert.deepEqual(fs.readdirSync(path.join(f.root,'complete')).sort(), ['checkpoint-routes.json','derived-certificate.json.gz','derived-facts.json','derived-publication.json']);
   const derived = JSON.parse(fs.readFileSync(path.join(f.root, 'complete/derived-publication.json')));
-  assert.deepEqual(report.continuous.derived_checkpoint, derived);
+  assert.deepEqual(report.derived_checkpoint, derived);
   assert.equal(derived.accepted_checkpoint, false);
-  assert.equal(derived.validation_stage, 'native-passed-continuous-pending');
+  assert.equal(derived.validation_stage, 'native-passed');
   assert.equal(derived.kind, 'derived-selected-checkpoint-candidate-v1');
   const encoded = fs.readFileSync(path.join(f.root, 'complete', derived.certificate.path));
   const decoded = gunzipSync(encoded), certificate = JSON.parse(decoded);
@@ -102,7 +100,7 @@ test('actual joint CLI qualifies once, runs both real consumers and releases onc
     if (!script.url.startsWith('file://' + f.root + '/')) continue;
     for (const fn of script.functions) counts.set(fn.functionName, (counts.get(fn.functionName) ?? 0) + fn.ranges[0].count);
   }
-  for (const name of ['selectedBootstrap', 'qualifyCheckpoint', 'qualifyTransition', 'compareSelectedCheckpointNative', 'checkpointContinuousOperands', 'releaseCheckpoint'])
+  for (const name of ['selectedBootstrap', 'qualifyCheckpoint', 'qualifyTransition', 'compareSelectedCheckpointNative', 'releaseCheckpoint'])
     assert.equal(counts.get(name), 1, name);
   assert.equal(counts.get('loadSelection'), 0);
   assert.equal(counts.get('selectedCoordinateShard'), 0);
