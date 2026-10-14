@@ -6,7 +6,7 @@ import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {authenticateOriginalPackageOutput, requireOriginalPackageOutput,
   requirePackageAssemblyExecution, issuePackageAssemblyExecution} from '../coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs';
-import {requireRetainedPackageTests, integrationTestFiles} from '../scripts/run-integration-tests.mjs';
+import {requireCurrentPackageAssembly, integrationTestFiles} from '../scripts/run-integration-tests.mjs';
 import {admitAssemblyAtlasMetadata,createPackageAssemblyScratch,packageAssemblyInvocation,findOriginalPackage} from '../scripts/assemble-selected-package.mjs';
 import {execFileSync,spawnSync} from 'node:child_process';
 import {committedPackageInputs,committedPackageProducer} from '../scripts/package-output-artifact.mjs';
@@ -109,7 +109,7 @@ test('retained consumer roster keeps current coverage and GPU/Canvas tests',()=>
   const full=integrationTestFiles('full',0,'complete');
   assert(full.includes('test/canonical-compact-repack.test.mjs'));assert(full.includes('test/prepared-parity.test.mjs'));
   assert.throws(()=>integrationTestFiles('full',1,'selected-output'));
-  assert.throws(()=>requireRetainedPackageTests({expected:null}),/Trusted current/);
+  assert.throws(()=>requireCurrentPackageAssembly({expected:null}),/Trusted current/);
 });
 
 test('consumer reduction binds actual current head and trusted assembly receipt digest',t=>{
@@ -120,13 +120,16 @@ test('consumer reduction binds actual current head and trusted assembly receipt 
   const head=git('rev-parse','HEAD'),receipt={kind:'cloudflare',preflight:{inputs:{head}},assembly:{
     kind:'retained-original-output-plus-current-additive',current_execution:{source_commit:head},
     base_restoration_invoked:false,invariant_build_invoked:false,
-    base_tests_reused:['test/canonical-compact-repack.test.mjs','test/prepared-parity.test.mjs'],origin:{run_id:17}}};
+    origin:{run_id:17}}};
   fs.mkdirSync(path.join(root,'.cache'));const file=path.join(root,'.cache/package-input-build.json');
   const write=value=>{const raw=JSON.stringify(value);fs.writeFileSync(file,raw);return sha(raw);};
-  const expected=write(receipt);assert.equal(requireRetainedPackageTests({directory:root,expected}).origin.run_id,17);
-  fs.appendFileSync(file,' ');assert.throws(()=>requireRetainedPackageTests({directory:root,expected}),/digest differs/);
+  const expected=write(receipt),admission=requireCurrentPackageAssembly({directory:root,expected});
+  assert.equal(admission.origin.run_id,17);
+  assert.equal(Object.hasOwn(admission,'base_tests_reused'),false,'Assembly identity must not manufacture original test coverage');
+  assert.doesNotMatch(fs.readFileSync(new URL('../scripts/assemble-selected-package.mjs',import.meta.url),'utf8'),/base_tests_reused/);
+  fs.appendFileSync(file,' ');assert.throws(()=>requireCurrentPackageAssembly({directory:root,expected}),/digest differs/);
   receipt.assembly.current_execution.source_commit='f'.repeat(40);
-  assert.throws(()=>requireRetainedPackageTests({directory:root,expected:write(receipt)}),/same-head/);
+  assert.throws(()=>requireCurrentPackageAssembly({directory:root,expected:write(receipt)}),/same-head/);
 });
 
 test('actual emitted atlas admission follows observed size and shared memory rather than a control-receipt cap',()=>{

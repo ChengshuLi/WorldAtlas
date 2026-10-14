@@ -166,9 +166,8 @@ export async function streamTestProcess(args, {env = process.env,
   }
 }
 // The digest arrives from the just-completed trusted assembly step, not from
-// candidate-selected JSON. The originating job actually ran these two tests;
-// the current output/closure admission preserves their complete base inputs.
-export function requireRetainedPackageTests({directory=process.cwd(),expected=process.env.SELECTED_PACKAGE_ASSEMBLY_SHA256}={}) {
+// candidate-selected JSON. This checks actual assembly identity, not test coverage.
+export function requireCurrentPackageAssembly({directory=process.cwd(),expected=process.env.SELECTED_PACKAGE_ASSEMBLY_SHA256}={}) {
   if(!/^[a-f0-9]{64}$/.test(expected??''))throw Error('Trusted current package assembly digest required');
   const file=path.join(directory,'.cache/package-input-build.json'),stat=fs.lstatSync(file);
   if(!stat.isFile()||stat.isSymbolicLink()||stat.size>8*1024*1024)throw Error('Bounded ordinary assembly receipt required');
@@ -178,19 +177,18 @@ export function requireRetainedPackageTests({directory=process.cwd(),expected=pr
   const head=spawnSync('git',['-C',directory,'rev-parse','HEAD'],{encoding:'utf8'});
   if(head.status!==0||receipt.kind!=='cloudflare'||assembly?.kind!=='retained-original-output-plus-current-additive'||
     assembly.current_execution?.source_commit!==head.stdout.trim()||receipt.preflight?.inputs?.head!==head.stdout.trim()||
-    assembly.base_restoration_invoked!==false||assembly.invariant_build_invoked!==false||
-    JSON.stringify(assembly.base_tests_reused)!==JSON.stringify(['test/canonical-compact-repack.test.mjs','test/prepared-parity.test.mjs']))
-    throw Error('Actual same-head assembly and explicit original base-test proof required');
-  return {origin:assembly.origin,base_tests_reused:assembly.base_tests_reused,
-    limitation:'Original successful base checks reused; this receipt does not attest current native, smoke, or browser execution.'};
+    assembly.base_restoration_invoked!==false||assembly.invariant_build_invoked!==false)
+    throw Error('Actual same-head assembly required');
+  return {origin:assembly.origin,
+    limitation:'Authenticated current assembly identity; this receipt does not attest native, smoke, unit or browser execution.'};
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const profile = process.env.INTEGRATION_PROFILE, shard = Number(process.env.INTEGRATION_SHARD);
   const testSelection = process.env.INTEGRATION_TEST_SELECTION || 'complete';
   const files = integrationTestFiles(profile, shard, testSelection);
-  const retained=testSelection==='selected-output'?requireRetainedPackageTests():null;
-  if(retained)console.log(JSON.stringify({retained_package_tests:retained}));
+  const retained=testSelection==='selected-output'?requireCurrentPackageAssembly():null;
+  if(retained)console.log(JSON.stringify({package_assembly:retained}));
   const git=measuredGitSetup();
   const nativeInputs=await observeSetupPhase('immutable-regression-inputs',()=>prepareNativeRegressionInputs(testSelection === 'complete' ? profile : 'evidence',{run:git.run}),{counters:git.snapshot});
   console.log(JSON.stringify({native_inputs:nativeInputs}));

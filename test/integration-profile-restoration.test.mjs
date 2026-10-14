@@ -193,7 +193,7 @@ test('actual assembled queue command runs current smoke and requires the same-he
     const head=git('rev-parse','HEAD'),receipt=JSON.stringify({kind:'cloudflare',preflight:{inputs:{head}},assembly:{
       kind:'retained-original-output-plus-current-additive',current_execution:{source_commit:head},
       base_restoration_invoked:false,invariant_build_invoked:false,
-      base_tests_reused:['test/canonical-compact-repack.test.mjs','test/prepared-parity.test.mjs'],origin:{run_id:17}}});
+      origin:{run_id:17}}});
     fs.writeFileSync(path.join(f.root,'.cache/package-input-build.json'),receipt+(altered?' ':''));
     const env={...process.env,INTEGRATION_PROFILE:'full',INTEGRATION_SHARD:'0',INTEGRATION_TEST_SELECTION:'selected-output',
       SELECTED_EXPECTATIONS_PATH:f.expectations,SELECTED_PACKAGE_ASSEMBLY_SHA256:createHash('sha256').update(receipt).digest('hex')};
@@ -201,7 +201,7 @@ test('actual assembled queue command runs current smoke and requires the same-he
     const result=spawnSync('bash',['-e','-o','pipefail','-c',selectedWorkflowCommand()],{cwd:f.root,env,encoding:'utf8',timeout:30000});
     assert.equal(result.status,altered?1:0,result.stderr);
     if(altered)assert.match(result.stderr,/receipt digest differs/);
-    else assert.match(result.stdout,/retained_package_tests/);
+    else assert.match(result.stdout,/package_assembly/);
     assert(fs.existsSync(path.join(f.root,'.cache/selected-delivery-smoke.json')));
     assert(!fs.existsSync(path.join(f.root,'.cache/native-normal-built-output.json')));
     assert(!fs.readdirSync(f.root).some(n=>n.startsWith('tests-reached-')));
@@ -218,7 +218,7 @@ test('actual retained-output runner executes current tests without any model res
   const receipt=JSON.stringify({kind:'cloudflare',preflight:{inputs:{head}},assembly:{
     kind:'retained-original-output-plus-current-additive',current_execution:{source_commit:head},
     base_restoration_invoked:false,invariant_build_invoked:false,
-    base_tests_reused:['test/canonical-compact-repack.test.mjs','test/prepared-parity.test.mjs'],origin:{run_id:17}}});
+    origin:{run_id:17}}});
   fs.writeFileSync(path.join(f.root,'.cache/package-input-build.json'),receipt);
   const env={...process.env,INTEGRATION_PROFILE:'full',INTEGRATION_SHARD:'0',INTEGRATION_TEST_SELECTION:'selected-output',
     SELECTED_PACKAGE_ASSEMBLY_SHA256:createHash('sha256').update(receipt).digest('hex')};

@@ -433,7 +433,7 @@ jobs:
             node --input-type=module -e 'import {selectedDeliverySmoke} from "./scripts/integration-profile.mjs"; console.log(JSON.stringify({selected_delivery_smoke:await selectedDeliverySmoke(process.env.SELECTED_EXPECTATIONS_PATH)}));'
           fi
           if test "$INTEGRATION_TEST_SELECTION" = selected-output; then
-            node --input-type=module -e "import {requireRetainedPackageTests} from './scripts/run-integration-tests.mjs'; console.log(JSON.stringify({retained_package_tests:requireRetainedPackageTests()}))"
+            node --input-type=module -e "import {requireCurrentPackageAssembly} from './scripts/run-integration-tests.mjs'; console.log(JSON.stringify({package_assembly:requireCurrentPackageAssembly()}))"
           elif test "$INTEGRATION_TEST_SELECTION" != selected-data; then
             node scripts/run-integration-tests.mjs
           fi
