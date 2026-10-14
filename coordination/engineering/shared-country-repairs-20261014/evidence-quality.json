@@ -1,0 +1,398 @@
+{
+  "version": 1,
+  "issue": 1930,
+  "lane": "engineering",
+  "worker_id": "01a13b6c-91af-722c-88a4-0d9bb2ea0029",
+  "subject_ids": [
+    "atlas:city:VNM-491",
+    "gb:IDN:ADM2:22746128B62804497316712",
+    "gb:IDN:ADM2:22746128B73074683492420",
+    "gb:MMR:ADM3:66882298B17691670471295",
+    "gb:MMR:ADM3:66882298B19696970616392",
+    "gb:MMR:ADM3:66882298B27866808767172",
+    "gb:MMR:ADM3:66882298B77467059166323",
+    "gb:VNM:ADM2:81297802B25768458282790",
+    "gb:VNM:ADM2:81297802B45020933584847",
+    "gb:VNM:ADM2:81297802B51483513425235",
+    "gb:VNM:ADM2:81297802B62948768430814",
+    "gb:VNM:ADM2:81297802B72056692107631",
+    "gb:VNM:ADM2:81297802B7702852417854"
+  ],
+  "status": "qualified-input-checkpoint-no-selected-consumption-yet",
+  "claims": {
+    "proposed_cells": 6340,
+    "source_groups": 7,
+    "receiving_components": 13,
+    "land": 6324,
+    "inland_water": 16,
+    "new_accepted_cells": 0,
+    "current_owner_zero": false
+  },
+  "original_country_issues": [
+    1884,
+    1881,
+    1880
+  ],
+  "original_authorities": [
+    {
+      "id": "idn-bintan3088",
+      "original_authority": {
+        "rule_preimage": {
+          "commit": "2ddd80e68d0e7831014f143dbf5878cbdbbe44cc",
+          "path": "coordination/engineering/indonesia-riau-current-cells-20261014/bintan-followup-001/authority/original-rule-preimage.json",
+          "mode": "100644",
+          "git_blob_oid": "0a229fe2168b4a1cb38f607224594dcb2f515842",
+          "bytes": 756,
+          "sha256": "b9599b88656520f4a1a75bddf53d63d1c1464355362aa1d59812d0a9061d5850"
+        },
+        "source_authority": {
+          "commit": "2ddd80e68d0e7831014f143dbf5878cbdbbe44cc",
+          "path": "coordination/engineering/indonesia-riau-current-cells-20261014/bintan-followup-001/authority/authority-binding.json",
+          "mode": "100644",
+          "git_blob_oid": "8a66fb66a338261c3c6764212554817bb3ecd1f9",
+          "bytes": 759,
+          "sha256": "3135e04fb6082d790199e95c332f597d8372697e3764c0e7731a57d3c06e10a2"
+        },
+        "ledger": {
+          "commit": "2ddd80e68d0e7831014f143dbf5878cbdbbe44cc",
+          "path": "coordination/engineering/indonesia-riau-current-cells-20261014/bintan-followup-001/authority/constructor-result.json",
+          "mode": "100644",
+          "git_blob_oid": "67cecfee6782d11fd204c004a0f0ab602041c670",
+          "bytes": 38437,
+          "sha256": "93ecf36e5cd5f6fcf3621b13c210fbdab9643d209f30ddd9cd438587f141a5b4"
+        },
+        "native_patch": {
+          "bytes": 104210,
+          "commit": "6e4dd11f5ee8fa26a9edbbd5289a5fd32c4bd6a4",
+          "git_blob_oid": "23bb7153b630de32383c34c9ae71145c1eaaae93",
+          "mode": "100644",
+          "path": "coordination/engineering/indonesia-riau-current-cells-20261014/bintan-followup-001/candidate-native-patch.json",
+          "sha256": "445809a7dcce4b3c79ebf2c375b343764b639ef3ef7da328507408d9a46bc2bd"
+        }
+      },
+      "cells": 3088,
+      "component_ids": [
+        "source-target:26540ed79a8943b3526814485d5941d4e21ac6363019cc444354a945d5ac5b53"
+      ],
+      "source_evidence": {
+        "bytes": 174533,
+        "commit": "6e4dd11f5ee8fa26a9edbbd5289a5fd32c4bd6a4",
+        "git_blob_oid": "1a4f22b3670d59aa496e74b5ba8852061d8c19f4",
+        "mode": "100644",
+        "path": "coordination/engineering/indonesia-riau-current-cells-20261014/bintan-followup-001/source-evidence.json",
+        "sha256": "89efb12380ab728b3c6a086b9f0eba62f06dff520d4e66cdf679a4f394a5b79d"
+      },
+      "compose_pin_and_source_bytes": 318695
+    },
+    {
+      "id": "idn-tanjung191",
+      "original_authority": {
+        "rule_preimage": {
+          "commit": "ec5fe3ef84a09098145de951acc4aebde6057314",
+          "path": "coordination/engineering/indonesia-tanjung191-native-followup-20261014/authority/original-rule-preimage.json",
+          "mode": "100644",
+          "git_blob_oid": "89aa34809f8f749e03fb28f3d2c4f081e819c76e",
+          "bytes": 728,
+          "sha256": "257625a3bdc774ddcdf22910489735ba272f3e8c0143a909d8f7b209b6a7cc70"
+        },
+        "source_authority": {
+          "commit": "ec5fe3ef84a09098145de951acc4aebde6057314",
+          "path": "coordination/engineering/indonesia-tanjung191-native-followup-20261014/authority/authority-binding.json",
+          "mode": "100644",
+          "git_blob_oid": "51b37a64c234e0fdc718fcf8a4d1702fe0935ccf",
+          "bytes": 731,
+          "sha256": "929d7677d0cf7d3ac263738a4918246f9ed5e2a61eafcd27f6489a00fb60014e"
+        },
+        "ledger": {
+          "commit": "791aa0a0c5c4428b8eaac3d082f594a86629120b",
+          "path": "coordination/engineering/indonesia-tanjung191-native-followup-20261014/authority/full-constructor-result.json",
+          "mode": "100644",
+          "git_blob_oid": "f8922853a69645e6ed6e3317fa32c7a5da9f8128",
+          "bytes": 23409,
+          "sha256": "366b52d23c8cc408db3f8dbdbb8c3a466f800e4335887a7b4ad3fc272c4a22dd"
+        },
+        "native_patch": {
+          "bytes": 8116,
+          "commit": "a5a5072dfaac59db5285b52f2c4be5514ec16312",
+          "git_blob_oid": "d09b224541a2e1e4f4d756d1ab067a64ad7ce227",
+          "mode": "100644",
+          "path": "coordination/engineering/indonesia-tanjung191-native-followup-20261014/candidate-native-patch.json",
+          "sha256": "a0aeece335031a04450e7085933be5b8dd061cb922557b2506fc381da54f2904"
+        }
+      },
+      "cells": 191,
+      "component_ids": [
+        "source-target:1b2fd3c03c5db24c8f660afc78063cdf1e7b97ad7aa1651755f173c24762fbaf"
+      ],
+      "source_evidence": {
+        "bytes": 8022,
+        "commit": "a5a5072dfaac59db5285b52f2c4be5514ec16312",
+        "git_blob_oid": "3ac1a5f1a34e69e9744c618748fb42c637ab2552",
+        "mode": "100644",
+        "path": "coordination/engineering/indonesia-tanjung191-native-followup-20261014/source-evidence.json",
+        "sha256": "eb8f6935829a166726e4fef3b6c10887af9bbccd7f818694094e3384ec9cfcf3"
+      },
+      "compose_pin_and_source_bytes": 41006
+    },
+    {
+      "id": "vnm-physical185",
+      "original_authority": {
+        "rule_preimage": {
+          "path": "coordination/engineering/vietnam-current-cell-20261014/unresolved-followup-001/physical185/authority/original-rule-preimage.json",
+          "commit": "f18e307986dd288628e64855de40386877b9161a",
+          "mode": "100644",
+          "git_blob_oid": "c40d9662eafe75785f2e80734e4d14d14a1a8455",
+          "bytes": 760,
+          "sha256": "427794de78d7e966feaadc2a9022ba3c07da890fb536575c198b2fa6f8985a01"
+        },
+        "source_authority": {
+          "path": "coordination/engineering/vietnam-current-cell-20261014/unresolved-followup-001/physical185/authority/authority-binding.json",
+          "commit": "f18e307986dd288628e64855de40386877b9161a",
+          "mode": "100644",
+          "git_blob_oid": "e866793bd1ed2ddff774b86cbe2fc96201a46002",
+          "bytes": 763,
+          "sha256": "a925aa4fc5605b232a2a150c5be8a4994b3c1085f1264edd6547974b13ea2a2f"
+        },
+        "ledger": {
+          "path": "coordination/engineering/vietnam-current-cell-20261014/unresolved-followup-001/physical185/authority/constructor-result.json",
+          "commit": "f18e307986dd288628e64855de40386877b9161a",
+          "mode": "100644",
+          "git_blob_oid": "4cdcacc04c8e2d2e610d2ff57af327b611fa5cf1",
+          "bytes": 11829,
+          "sha256": "ad2f5d0aa8f4718fa9900cb67ee2719d70696087976c9b7d550698d3ec0c8330"
+        },
+        "native_patch": {
+          "path": "coordination/engineering/vietnam-current-cell-20261014/unresolved-followup-001/physical185/native-patch.json",
+          "commit": "778cff2721df789706ad0f3b847f3f600b972a3d",
+          "mode": "100644",
+          "git_blob_oid": "d2b9cbb9b1e67adb99187dd62832ecfc060b2c97",
+          "bytes": 11062,
+          "sha256": "e87edb730060eea0e9ae78ed0b160d1bf5ec500eb78d55b982942c8b91d74fbe"
+        }
+      },
+      "cells": 185,
+      "component_ids": [
+        "source-target:049339adb6844e47d59f37cf2136ffaae9540062c8ddfffc4ae24f6405a3072f",
+        "source-target:1446732708df08cc87ee43301df247de8e6392266aed36440d9dc2f04cde54be",
+        "source-target:25688de95347883b6753ade76c681c6a72dc774ecda48b8425e01810146892ec",
+        "source-target:6e4bae279c9ab405b5048fa135bff83862b6b3831c4ece2942a732f3d8c0ab7c",
+        "source-target:e7b79871dd8f3e21a658d94be59c8fdd6af69ff485b29e5ee3d29be58ee30878",
+        "source-target:f2be54f03f58e911b9a58bf5745df68b695256c53efc8c569e1a53bad8a997bc"
+      ],
+      "source_evidence": {
+        "bytes": 21179,
+        "commit": "778cff2721df789706ad0f3b847f3f600b972a3d",
+        "git_blob_oid": "6983aa81fb2a76a3e5584fa05474e74b37a0dc40",
+        "mode": "100644",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/unresolved-followup-001/physical185/source-evidence.json",
+        "sha256": "888f81236118cdf9429600dafce0cbcb75be3f53d8dc23fde625d1beae8147db"
+      },
+      "compose_pin_and_source_bytes": 45593
+    },
+    {
+      "id": "vnm-danang280",
+      "original_authority": {
+        "rule_preimage": {
+          "path": "coordination/engineering/vietnam-current-cell-20261014/unresolved-followup-001/danang-aggregate/authority/original-rule-preimage.json",
+          "commit": "f18e307986dd288628e64855de40386877b9161a",
+          "mode": "100644",
+          "git_blob_oid": "c7573e7eb4153b95bedba9a3530c4bdbe6416ef5",
+          "bytes": 779,
+          "sha256": "4c9cc2475058de7964015b345994cd3ba048d673d6d46d050bdfe9dfab064f94"
+        },
+        "source_authority": {
+          "path": "coordination/engineering/vietnam-current-cell-20261014/unresolved-followup-001/danang-aggregate/authority/authority-binding.json",
+          "commit": "f18e307986dd288628e64855de40386877b9161a",
+          "mode": "100644",
+          "git_blob_oid": "c79f55de50c243765bfc4e1bd0e620c69144be14",
+          "bytes": 782,
+          "sha256": "b35f856d366082015b31158182718d90211b8347658228205d5375faa7c36415"
+        },
+        "ledger": {
+          "path": "coordination/engineering/vietnam-current-cell-20261014/unresolved-followup-001/danang-aggregate/authority/constructor-result.json",
+          "commit": "f18e307986dd288628e64855de40386877b9161a",
+          "mode": "100644",
+          "git_blob_oid": "81a7e3ea3939be861bcff0a075ad52faf6e364c1",
+          "bytes": 5781,
+          "sha256": "78e7ecca0ec4d70b04913d87653a11a50c48a047e01030530472b729f259d22f"
+        },
+        "native_patch": {
+          "path": "coordination/engineering/vietnam-current-cell-20261014/unresolved-followup-001/danang-aggregate/candidate-native-patch.json",
+          "commit": "778cff2721df789706ad0f3b847f3f600b972a3d",
+          "mode": "100644",
+          "git_blob_oid": "7bf594de57d4d1ada21d03a600fb194491ed262b",
+          "bytes": 2750,
+          "sha256": "95d1888843f8d8702832f9d0f073a514752dbce8fd5dd3442197033ac84fe288"
+        }
+      },
+      "cells": 280,
+      "component_ids": [
+        "source-target:ce4c1606178290c5df6623e15ce4408fe4c9d55577c62308a80ee1f7405a2d71"
+      ],
+      "source_evidence": {
+        "bytes": 48676,
+        "commit": "adda04873fba427d270727a259d2c257100ebe1c",
+        "git_blob_oid": "fda5abfbc93a02148129c9d8221efc7fdb5466df",
+        "mode": "100644",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/unresolved-followup-001/danang-aggregate/source-evidence.json",
+        "sha256": "0c6228b58a4fccf73e09f532902b00889b7ce51492ded59d9210c603d7514044"
+      },
+      "compose_pin_and_source_bytes": 58768
+    },
+    {
+      "id": "mmr-hpapun18",
+      "original_authority": {
+        "rule_preimage": {
+          "commit": "695146c62adfa07b67b5ce6332f62ecb45f6d3c1",
+          "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/hpapun-authority-001/original-rule-preimage.json",
+          "mode": "100644",
+          "git_blob_oid": "97b07eb8bf0777c2772ea09270fbf8b5fba07266",
+          "bytes": 789,
+          "sha256": "9242f4334a48d57be374bb59f51e5bccd10bea91fff86d158d6c8e231dc4957f"
+        },
+        "source_authority": {
+          "commit": "695146c62adfa07b67b5ce6332f62ecb45f6d3c1",
+          "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/hpapun-authority-001/authority-binding.json",
+          "mode": "100644",
+          "git_blob_oid": "4f048629c400783580d7b962df9ad26f2ce170f0",
+          "bytes": 792,
+          "sha256": "f1c15985ee499c7d5a20c3082f1fddbcbb343272f08d7db3a0872ad47836bcc1"
+        },
+        "ledger": {
+          "commit": "695146c62adfa07b67b5ce6332f62ecb45f6d3c1",
+          "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/hpapun-authority-001/constructor-result.json",
+          "mode": "100644",
+          "git_blob_oid": "06eef1ac5924a7478888045410750052728c21f5",
+          "bytes": 7125,
+          "sha256": "6364ae4b16151f1bd704d9f5e4c70d7ecd61ff565baa649848fe2cf3a75ea268"
+        },
+        "native_patch": {
+          "commit": "c9c33c777bd01c5214a372ebc3718eed0aa10271",
+          "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/hpapun/candidate-native-patch.json",
+          "mode": "100644",
+          "git_blob_oid": "1cca68a8e1aae060904d6a1b6d22547856a9a51e",
+          "bytes": 627,
+          "sha256": "37bd0d911ec3d203d1c164d6c1695c4505c3f34a2f51a5b1930022ce2cf53cea"
+        }
+      },
+      "cells": 18,
+      "component_ids": [
+        "source-target:8035141d15b09e07bce144e4e87af316241f7d7f5c41e220a480eeffb9494771"
+      ],
+      "source_evidence": {
+        "bytes": 30697,
+        "commit": "21cabde273d1145c33ff6c8da91c2e8e4f0642b9",
+        "git_blob_oid": "bace7a376cc63a75831588e824b2124b14ff5b23",
+        "mode": "100644",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/hpapun-source-preparation/source-evidence.json",
+        "sha256": "bf38b07b6729921e540e7476f28181ac84803f875c14be5e5e60eedc594096a2"
+      },
+      "compose_pin_and_source_bytes": 40030
+    },
+    {
+      "id": "mmr-rakhine901",
+      "original_authority": {
+        "rule_preimage": {
+          "commit": "d76a8affe98c2d70dd6e3f20ef7b19a4c6c13f7e",
+          "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/rakhine901-authority-001/original-rule-preimage.json",
+          "mode": "100644",
+          "git_blob_oid": "7f766ef24d1dab3b3fdfc09b5be12eb363815762",
+          "bytes": 816,
+          "sha256": "116b173596b0a3873cf8a5237491a7f906b29cd109a388ae2a2df90b227fffa2"
+        },
+        "source_authority": {
+          "commit": "d76a8affe98c2d70dd6e3f20ef7b19a4c6c13f7e",
+          "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/rakhine901-authority-001/authority-binding.json",
+          "mode": "100644",
+          "git_blob_oid": "3ca7eaa84b35c10b4e5d8f1825cb21e3fe446630",
+          "bytes": 819,
+          "sha256": "0928b2b14d7fa1769e4acc18e27ffa5192a3059222d3b0b803eb7962a077c362"
+        },
+        "ledger": {
+          "commit": "d76a8affe98c2d70dd6e3f20ef7b19a4c6c13f7e",
+          "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/rakhine901-authority-001/constructor-result.json",
+          "mode": "100644",
+          "git_blob_oid": "df5c5578c33c956730c0c501b38f8048cd42e8c7",
+          "bytes": 19405,
+          "sha256": "442a2ab558d90ff3ecb1b64962bc49b354184101436457494242f4eda785e768"
+        },
+        "native_patch": {
+          "commit": "c9c33c777bd01c5214a372ebc3718eed0aa10271",
+          "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/line-conflict/two-target-901-candidate-native-patch.json",
+          "mode": "100644",
+          "git_blob_oid": "bee4870ba49d6bb61a3ea6fc5da08886f5991453",
+          "bytes": 12661,
+          "sha256": "38070faf3af48734d780509e09497346902b0aeea69877c2dc196d100e572f6f"
+        }
+      },
+      "cells": 901,
+      "component_ids": [
+        "source-target:4108f7235f6e2582f68409eee00f0f252a9e5aa501673eb5f8b651ee54f1df51",
+        "source-target:c47f3ee5c485866d3966f021e0c4fa9647899bcaa7faf61bc7667e17adc435fb"
+      ],
+      "source_evidence": {
+        "bytes": 90929,
+        "commit": "f3e8292345c2bfcfc9b3cde752daefc4312f08d9",
+        "git_blob_oid": "dfc322f42a2f366a2c92475853500a70742e9c68",
+        "mode": "100644",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/line-conflict/two-target-901-source-evidence.json",
+        "sha256": "94f0c82fedb4c871b96c3ef978fd6906d151ff08d4a6df33a1f308ab2436848f"
+      }
+    },
+    {
+      "id": "mmr-kyaukpyu1677",
+      "original_authority": {
+        "rule_preimage": {
+          "commit": "d76a8affe98c2d70dd6e3f20ef7b19a4c6c13f7e",
+          "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/kyaukpyu1677-authority-001/original-rule-preimage.json",
+          "mode": "100644",
+          "git_blob_oid": "447f6e68303cba6e219fca310a7ee55d952772c5",
+          "bytes": 806,
+          "sha256": "8120a66316f26a3dcf4ede89c5962ef322f29d7917d20180fccecd0b191e084a"
+        },
+        "source_authority": {
+          "commit": "d76a8affe98c2d70dd6e3f20ef7b19a4c6c13f7e",
+          "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/kyaukpyu1677-authority-001/authority-binding.json",
+          "mode": "100644",
+          "git_blob_oid": "63449c516880d0e9c7dda13007e5fcdf357816e9",
+          "bytes": 809,
+          "sha256": "572310715295afa885064a2ac42a716187b1d23437bac8d331cbfb69c395b79c"
+        },
+        "ledger": {
+          "commit": "d76a8affe98c2d70dd6e3f20ef7b19a4c6c13f7e",
+          "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/kyaukpyu1677-authority-001/constructor-result.json",
+          "mode": "100644",
+          "git_blob_oid": "16bd25aec24492c239a2ac6d4eaf49c1a901f624",
+          "bytes": 20207,
+          "sha256": "448bdbc2b5a5309ea890b7491bb59eb9409f3ec7b0c1a4fd8f9ed529adc665f8"
+        },
+        "native_patch": {
+          "commit": "c9c33c777bd01c5214a372ebc3718eed0aa10271",
+          "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/line-conflict/30100-candidate-native-patch.json",
+          "mode": "100644",
+          "git_blob_oid": "7181b745fc04e9badbaa63f314db7dc87d87623a",
+          "bytes": 16181,
+          "sha256": "59bc8fc415a66d75f754b7aa639e88cbb769a0df0acb7a24eb56ec321f7d5b94"
+        }
+      },
+      "cells": 1677,
+      "component_ids": [
+        "source-target:7db9414ce4819211a245fab57a9f620bfd8b8fce436cad548b22e48f4349a5bc"
+      ],
+      "source_evidence": {
+        "bytes": 43279,
+        "commit": "f3e8292345c2bfcfc9b3cde752daefc4312f08d9",
+        "git_blob_oid": "85024ea3fb07eedfa6522c60945d0de1713d37b6",
+        "mode": "100644",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/line-conflict/kyaukpyu-1677-source-evidence.json",
+        "sha256": "502ef769802b51935a17f47c7e966d7ad77f7ccfed841acc03222a6951a09fa2"
+      }
+    }
+  ],
+  "limits": [
+    "Every original source/native/physical/query/witness/custody and operating limitation remains unchanged.",
+    "Actual current-owner-zero/nativewater/location/conservation, final emitted consumer/candidate/integration remain pending.",
+    "Preserve actual accepted Myr3816 append and literal package prefix; no SOURCE/GSHHG producer replay.",
+    "All original relative/water/parent/territorial/source-conflict holds stay outside this exact proposed6340-cell patch."
+  ]
+}
