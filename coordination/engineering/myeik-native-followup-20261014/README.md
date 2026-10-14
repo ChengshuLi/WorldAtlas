@@ -55,27 +55,50 @@ validation and ordinary integration/merge timing remain pending.
 
 ## Reproduction and retained evidence
 
-Run `node coordination/engineering/myeik-native-followup-20261014/reproduce.mjs`
-to authenticate whole consumed sources and the literal proposed native patch via
-the unchanged source-native constructor. The original physical reproducer is
-retained byte-for-byte as evidence/physical-reproduction.py. In a fresh bounded
-workspace place original-stage-inputs.json at .cache/full-census/all-stage-inputs.json,
-create .cache/full-census/gshhg-direct, and place the pinned comparison.py module
-beside the reproducer. Run with Shapely 2.1.2/GEOS 3.13.1. It authenticates complete
-original native-member and metadata parts, then selects the relevant whole source
-hierarchy; it does not use old gap polygons as physical truth.
+Use the existing `constructOriginalAuthority` export in
+`scripts/delivery-handoff-advance.mjs`, an `ImmutableReader` pinned to the candidate,
+and the two commit/path locators in this packet's `authority-binding.json`.
+This authenticates the full consumed sources and literal native proposal through
+the admitted constructor. The unchanged physical reproduction program is retained
+at `coordination/engineering/source-target-native-delivery-20261014/evidence/physical-reproduction.py`.
+In a fresh bounded workspace place this packet's original-stage-inputs.json at
+.cache/full-census/all-stage-inputs.json, create .cache/full-census/gshhg-direct,
+and place the pinned comparison.py module beside the retained reproducer. Run
+with Shapely 2.1.2/GEOS 3.13.1. It authenticates complete original native-member
+and metadata parts before interpreting the relevant source hierarchy.
+
+The independent executable probes remain preserved in the reviewed engineering
+history at f3877cd164d0b143c556fe7ed6b4bec06622e02f under this packet's original
+independent-review/ paths. Their actual source and ownership result receipts stay
+in the data-only final packet. New copies of those helpers are unnecessary for
+this delivery and have been removed from its final diff. No evidence is concealed
+by renaming code as data. Later workers can inspect or reproduce the reviewed
+engineering evidence at its exact historical commit.
 
 The compact evidence manifest binds source catalogue/native member/metadata indexes,
 exact current-selection inputs and actual result bytes. The physical reproducer
-owns full original-body authentication; this compact manifest does not pretend to
-independently re-execute that science. Retained source and authority limitations
-remain explicit. The independent review script and its complete pinned receipt are
-under independent-review/. Later unrelated main changes do not invalidate these
-unchanged scoped sources or selected bytes; actual integration still checks the
+owns full original-body authentication; the compact manifest does not claim to
+independently re-execute that science. Actual integration still verifies the
 accepted main plus exact reviewed head.
 
-The retained independent ownership reproducer accepts an exact candidate commit
-and a fresh output filename: `node coordination/engineering/myeik-native-followup-20261014/independent-review/check-ownership.mjs HEAD .cache/new-owner-review.json`.
-It rejects existing files and dangling symlinks before calculation. The Python
-source review accepts a fresh output filename as its sole argument; run it from
-the repository root with the stated Shapely runtime.
+## Qualification instructions for later family workers
+
+Trace accepted topology reconciliation to its retained country-border authority,
+not only unique administrative-source lineage. Check candidate cells against
+competing countries and explicit territorial exclusions. A lack of interior holes
+does not establish absence of territorial exclusions. Distinguish competing-country
+coverage from absence in coarse coastline polygons: the accepted reconciler
+preserved non-overlapping coastlines. Keep the Tanintharyi discrepancy and exact
+withheld intervals unresolved until coordinated territorial review. Physical river
+water remains independent of territorial identity; never assign by nearest bank.
+
+For later data-only packages, use existing admitted constructors and retained
+engineering reproductions instead of adding standalone executable helpers to the
+batch. The first author run here conservatively selected the full suite because
+copied helpers and a modified earlier queue README made the diff more than inert
+selected data. Removing those unnecessary copies restored file-level data-only
+eligibility. The unchanged classifier still rejects accepted source-native .py,
+.bin.gz and .f64le.gz role extensions at its inert-pin boundary, so this delivery
+uses conservative full CI. No classifier or source-role disguise is introduced.
+Record this packaging overhead and dependency wait separately from computation,
+warm geography and end-to-end delivery timings; no fast-route claim is made.
