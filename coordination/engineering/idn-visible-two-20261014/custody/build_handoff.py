@@ -123,7 +123,7 @@ def main():
     if current['scopeIds'] != ids or current['complete_owner_rows'] != 49625 or current['complete_source_parts'] != 36:
         raise ValueError('Current selected context scope incomplete')
     contexts = unique(current['rows'], 'component_id')
-    foreign = json.loads(own('vintages/foreign-neighbors-001/result.json'))
+    foreign = json.loads(own('vintages/foreign-neighbors-002/result.json'))
     foreign_rows = {(r['component_id'], r['foreign_id']): r for r in foreign['results']}
     if len(foreign_rows) != 3 or not all(r['strictly_disjoint'] for r in foreign_rows.values()):
         raise ValueError('Complete actual foreign-neighbor predicates missing')

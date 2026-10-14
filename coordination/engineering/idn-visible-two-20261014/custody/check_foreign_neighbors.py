@@ -32,6 +32,7 @@ def main():
     ns = {'__name__': 'immutable', '__file__': str(ROOT / 'scripts/evidence/immutable.py')}
     exec(compile(helper, ns['__file__'], 'exec'), ns)
     base = ns['Baseline'](ROOT, head, inputs)
+    destination = ns['NewVintage'](base,OWN,vintage,['result.json'])
     if base.materialized_bytes(script) != git('show', head + ':' + script):
         raise ValueError('Executing code drift')
     predicates = base.load_modules({'exact_predicates': 'scripts/evidence/exact_predicates.py'})['exact_predicates']
@@ -78,7 +79,7 @@ def main():
         'limits':['Original exact binary64 values only; no physical truth, authority or source precision claim.','Target applicability, native exclusion and selected conservation remain separate.']}
     if output['peak_rss_bytes'] > 512*1024**2:
         raise ValueError('Metadata predicate process reservation exceeded')
-    ns['NewVintage'](base,OWN,vintage,['result.json']).publish({'result.json':output})
+    destination.publish({'result.json':output})
     print(json.dumps({'foreign_neighbors':len(results),'strictly_disjoint':True,'elapsed_seconds':output['elapsed_seconds'],'peak_rss_bytes':output['peak_rss_bytes']}))
 
 if __name__ == '__main__':
