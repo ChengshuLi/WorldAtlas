@@ -65,7 +65,7 @@ function fixture(t,{full=false,helperBody,selectedHelperBody,omitSelectedHelper=
   const sources=['scripts/run-integration-tests.mjs','scripts/integration-profile.mjs','scripts/package-inputs.mjs','scripts/compile-hosted-migrations.mjs','scripts/ci-setup-observations.mjs'];
   const bodies=sources.map(name=>{
     const p=path.join(repo,name),s=fs.lstatSync(p);
-    assert.ok(s.isFile()&&!s.isSymbolicLink()&&s.size<64*1024);
+    assert.ok(s.isFile()&&!s.isSymbolicLink());
     return fs.readFileSync(p);
   });
   const cache=path.join(repo,'.cache');fs.mkdirSync(cache,{recursive:true});

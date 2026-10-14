@@ -600,6 +600,25 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
         restoredRequest = await pinnedJSON(requestPin);
         if (!restoredRequest.additive?.owner_parts?.some(part => added.has(part.path))) continue;
       }
+      if (authority.kind === 'source-target-native-custody-v1') {
+        needSelected(authority.version === 1 && keys(authority,['version','kind','source_evidence','native_patch']),
+          'unsupported source-target authority');
+        pin(authority.source_evidence); pin(authority.native_patch);
+        const rule=await pinnedJSON(entry.rule_preimage), evidence=await pinnedJSON(authority.source_evidence);
+        needSelected(rule.version===1&&rule.kind==='source-target-native-rule-v1'
+          &&keys(rule,['version','kind','source_evidence','native_patch'])
+          &&same(rule.source_evidence,authority.source_evidence)&&same(rule.native_patch,authority.native_patch),
+          'source-target rule/input join differs');
+        needSelected(evidence.version===1&&evidence.kind==='source-target-native-evidence-v1'
+          &&Array.isArray(evidence.families)&&evidence.families.length>0&&Array.isArray(evidence.targets)&&evidence.targets.length>0,
+          'missing source-target evidence roles');
+        for (const role of ['catalogue','physical_evidence','physical_input','physical_reproduction','owner_roster','native_latitudes']) pin(evidence[role]);
+        for (const family of evidence.families) {
+          needSelected(text(family.source_id)&&Array.isArray(family.parts)&&family.parts.length>0,'missing complete source family roles');
+          for (const part of family.parts) pin(part);
+        }
+        continue;
+      }
       needSelected(authority.version === 1 && authority.kind === 'original-issued-rule-source-custody-v1' &&
         keys(authority.original_pins, ['ledger','native_facts','native_manifest','native_request','source_facts','source_request']),
         'unsupported source authority');
