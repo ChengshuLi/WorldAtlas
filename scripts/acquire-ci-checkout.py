@@ -193,7 +193,7 @@ class Supervisor:
 
 
 def acquire(repository, sha, tree, workspace, total_timeout=420, elapsed_seconds=0,
-            token=None, git_executable=None, emit=None):
+            token=None, git_executable=None, emit=None, regression=False):
     """git_executable is a library-only fault-injection seam, never a CLI option."""
     supplied_token = os.environ.pop('WORLDATLAS_CHECKOUT_TOKEN', None)
     token = supplied_token if token is None else token
@@ -237,24 +237,44 @@ def acquire(repository, sha, tree, workspace, total_timeout=420, elapsed_seconds
             raise AcquisitionError('workspace-filesystem-changed')
         supervisor.run(common + ['init', '--template=', '--quiet', str(staging)], staging, env, 'initialize')
         supervisor.run(common + ['remote', 'add', 'origin', remote], staging, env, 'initialize')
+        if regression:
+            # Source-only work is checked by the existing evidence/geography
+            # readers, not by current software regressions or package inputs.
+            supervisor.run(common + ['sparse-checkout', 'init', '--no-cone'], staging, env, 'initialize')
+            (staging / '.git/info/sparse-checkout').write_text(
+                '/*\n!/data/regional-review/\n!/research/campaigns/\n', encoding='utf-8')
         fetch_env = dict(env)
         if token:
             fetch_env.update(GIT_CONFIG_COUNT='1', GIT_CONFIG_KEY_0='http.https://github.com/.extraheader',
                              GIT_CONFIG_VALUE_0='AUTHORIZATION: basic ' +
                              base64.b64encode(('x-access-token:' + token).encode()).decode())
+        materialize_env = None
         try:
             supervisor.run(common + ['-c', 'protocol.version=2', 'fetch', '--progress', '--no-tags',
-                                     '--no-recurse-submodules', '--depth=1', 'origin', sha],
+                                     '--no-recurse-submodules', '--depth=1',
+                                     *(['--filter=blob:none'] if regression else []), 'origin', sha],
                            staging, fetch_env, 'fetch')
+            commit = supervisor.run(common + ['rev-parse', '--verify', 'FETCH_HEAD^{commit}'], staging, env, 'verify-commit')
+            if commit != sha:
+                raise AcquisitionError('git-identity-mismatch')
+            actual_tree = supervisor.run(common + ['rev-parse', '--verify', sha + '^{tree}'], staging, env, 'verify-tree')
+            if commit != sha or actual_tree != tree:
+                raise AcquisitionError('git-identity-mismatch')
+            # Only this supervised materialization may fetch selected promised
+            # blobs. It inherits transient auth, never candidate code or filters.
+            materialize_env = dict(fetch_env, GIT_NO_LAZY_FETCH='0') if regression else env
+            supervisor.run(common + ['checkout', '--detach', '--force', '--progress', sha],
+                           staging, materialize_env, 'materialize')
         finally:
             fetch_env.clear()
-        commit = supervisor.run(common + ['rev-parse', '--verify', 'FETCH_HEAD^{commit}'], staging, env, 'verify-commit')
-        if commit != sha:
-            raise AcquisitionError('git-identity-mismatch')
-        actual_tree = supervisor.run(common + ['rev-parse', '--verify', sha + '^{tree}'], staging, env, 'verify-tree')
-        if commit != sha or actual_tree != tree:
-            raise AcquisitionError('git-identity-mismatch')
-        supervisor.run(common + ['checkout', '--detach', '--force', '--progress', sha], staging, env, 'materialize')
+            if regression and materialize_env is not None:
+                materialize_env.clear()
+        if regression:
+            # No later consumer may silently hydrate the excluded namespaces.
+            # Historical regression commits keep their existing explicit full fetch.
+            supervisor.run(common + ['config', '--local', 'remote.origin.promisor', 'false'], staging, env, 'verify-checkout')
+            supervisor.run(common + ['config', '--local', '--unset-all', 'remote.origin.partialclonefilter'],
+                           staging, env, 'verify-checkout', accepted=(0, 5))
         head = supervisor.run(common + ['rev-parse', 'HEAD'], staging, env, 'verify-checkout')
         final_tree = supervisor.run(common + ['rev-parse', 'HEAD^{tree}'], staging, env, 'verify-checkout')
         credentials = supervisor.run(common + ['config', '--local', '--name-only', '--get-regexp',
@@ -276,7 +296,7 @@ def acquire(repository, sha, tree, workspace, total_timeout=420, elapsed_seconds
         if supervisor.cancelled:
             raise AcquisitionError('cancelled')
         promoted = True
-        supervisor.report('checkout-complete', sha=sha, tree=tree)
+        supervisor.report('checkout-complete', sha=sha, tree=tree, source_only_omitted=regression)
         return {'sha': sha, 'tree': tree}
     finally:
         token = None
@@ -304,7 +324,9 @@ def main():
     args = parser.parse_args()
     try:
         acquire(args.repository, args.sha, args.tree, args.workspace,
-                args.total_timeout_seconds, args.elapsed_seconds)
+                args.total_timeout_seconds, args.elapsed_seconds,
+                regression=os.environ.get('INTEGRATION_PROFILE') == 'full' and
+                os.environ.get('INTEGRATION_TEST_SELECTION') == 'complete')
     except AcquisitionError as error:
         print(json.dumps({'event': 'acquisition-failed', 'reason': error.category}), flush=True)
         return 130 if error.category == 'cancelled' else 1
