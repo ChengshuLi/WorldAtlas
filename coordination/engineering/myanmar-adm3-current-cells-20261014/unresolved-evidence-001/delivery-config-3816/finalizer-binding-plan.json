@@ -1,0 +1,42 @@
+{
+  "status": "finalizer-binding-plan-not-executed-not-a-futurepin",
+  "new_prefix": "coordination/engineering/myanmar-adm3-current-cells-20261014/combined3816-followup-001/",
+  "selector": {
+    "commit": "2ec1f33cad4b02f2e9bc9e54072e65b5837257dc",
+    "path": "data/ownership-selection.json",
+    "mode": "100644",
+    "git_blob_oid": "2e559a6b97f9e240b68385e5b0fb43d1355be34b",
+    "bytes": 1592,
+    "sha256": "72d78f87dc14b3f945b5df6c24a72be9a7d59ee8a3db752e88d9884f524f239f"
+  },
+  "package_inputs": {
+    "commit": "2ec1f33cad4b02f2e9bc9e54072e65b5837257dc",
+    "path": ".github/package-inputs.json",
+    "mode": "100644",
+    "git_blob_oid": "4daff0de04ef651104ec46ac0b9ae7f86fbfddb7",
+    "bytes": 113567,
+    "sha256": "c7165304e690db7ca379f66b92e1ef626885824cce394155a0b1ccd5ebd3c6ed"
+  },
+  "rebind": {
+    "bytes": 3184,
+    "commit": "149f5e7393965361b67ccaebcdc04e1c14fd97e5",
+    "git_blob_oid": "dc858d5111a19bc861aed1cf5f8a139178b37267",
+    "mode": "100644",
+    "path": "coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-certificate-001/certificate.json",
+    "sha256": "680eb0eccc91e232b7b57f0559123547104a1b93b78fbaa1a0518ec62822dca4"
+  },
+  "actual_composition_outputs_to_pin_after_committed": {
+    "registry": "authority-registry.json",
+    "ledger": "selected-ledger.json",
+    "selected_ledger": "selected-ledger.json",
+    "patch": "patch.json",
+    "runtime_envelope": "runtime-envelope.json"
+  },
+  "composition_destination": "coordination/engineering/myanmar-adm3-current-cells-20261014/combined3816-followup-001/delivery",
+  "sidecar_output": "coordination/engineering/myanmar-adm3-current-cells-20261014/combined3816-followup-001/selection-sidecar.json",
+  "finalizer_entry": "plainNode scripts/prepare-delivery-handoff.mjs finalize concreteCONFIG fresh-ownedDESTINATION",
+  "refresh_rule": "AfteractualVietnamacceptance refresh selector/package_inputs/rebind fromactualacceptedbase together. Keep originalauthorities/scientificmanifest unchanged.",
+  "assembly_rule": "Useacceptedfinalizer togenerateactualsidecar,ownershipselection,packageinputs,expectations andrestorations. No manualpackage/selectorconstruction andnofabricated futurepins.",
+  "outer_roles": "Derived byacceptedfinalizer; donotsupplycaller-owned outerroles.",
+  "current_owner_zero_conservation": "Normalfinalqueue, pending."
+}
