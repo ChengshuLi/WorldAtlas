@@ -14,7 +14,7 @@ import {deriveCoordinateDelta,projectSourceFeatures,projectNativeRows,qualifyTra
 const MODULE='coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs';
 const PROGRAMME='coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json';
 const CATALOGUE='coordination/engineering/selected-checkpoint-reuse-20261012/accepted-checkpoints.json';
-const CODE=[MODULE,'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs','scripts/check-effective-geographic-regression.mjs','scripts/visible-gap-eligibility.mjs','src/native-grid.js','src/ownership-codec.js'];
+const CODE=[MODULE,'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs','scripts/check-effective-geographic-regression.mjs','src/native-grid.js','src/ownership-codec.js'];
 const sha=b=>createHash('sha256').update(b).digest('hex');
 const polygon=(x,y=0)=>({type:'Polygon',coordinates:[[[x,y],[x+.2,y],[x+.2,y+.2],[x,y+.2],[x,y]]]});
 const feature=(id,x)=>({type:'Feature',id,properties:{id,parent_id:'parent'},geometry:polygon(x)});
@@ -233,7 +233,7 @@ const REAL004={
 const JSON_BODY=valueBytes;
 const P='coordination/engineering/selected-geography-effective-prevention-20261009/';
 const JOINT=['scripts/run-geographic-check.py','scripts/check-geographic-regression.py',
-  'scripts/check-effective-geographic-regression.mjs','scripts/selected-checkpoint-native.mjs','scripts/visible-gap-eligibility.mjs','src/native-grid.js','src/ownership-codec.js','scripts/evidence/immutable.py',
+  'scripts/check-effective-geographic-regression.mjs','scripts/selected-checkpoint-native.mjs','src/native-grid.js','src/ownership-codec.js','scripts/evidence/immutable.py',
   'scripts/evidence/geometry.py','scripts/ellipsoidal_area.py','requirements.txt',P+'selected-neighbor-prevention.mjs',
   P+'selected-continuous-entry.mjs',MODULE,P+'selected-checkpoint-continuous.mjs',P+'selected-joint-entry.mjs',
   ...ACCEPTED_CHECKPOINT_CODE,'scripts/geographic_checkpoint_products.py'];
@@ -433,7 +433,7 @@ test('wrapper-only native identities have an exact inverse and empty strict scop
 
 async function installSeed(f,{failedOperating=false,omitRoute=false,omitInherited=false}={}) {
   f={...f,products:structuredClone(f.products)};
-  f.products.facts.execution_code=f.products.facts.execution_code.slice(0,16);
+  f.products.facts.execution_code=f.products.facts.execution_code.slice(0,15);
   f.products.continuousFacts.execution_code=f.products.facts.execution_code;
   const plain=new Map();
   // The real seed keeps clean004's original provisional schema: no backfilled

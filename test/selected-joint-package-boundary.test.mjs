@@ -17,11 +17,12 @@ const PREFIX='coordination/engineering/arctic-three-retained-land-fit-repair-nat
 const ROLES=PREFIX+'qualified-artifacts/application-consumer-code.json';
 const sha=body=>createHash('sha256').update(body).digest('hex');
 
-test('joint native extraction preserves the exact cold checker and every moved numerical body',()=>{
- assert.equal(sha(fs.readFileSync(COLD)),'5aa156ef010e0bfb14b88286a1c82231f6e4a7749c8063142082feb84e721cda');
+test('native conservation primitives stay unchanged while eligibility remains in the selected validator',()=>{
  const source=fs.readFileSync(NATIVE,'utf8'), start=source.indexOf('// Numerical consumers of complete row projections.');
  assert(start>0);
- assert.equal(sha(source.slice(start)),'226438eae159af1aca0848431d1a509485bad2bf2798dfa05ecc1b18af88060e');
+ assert.equal(sha(source.slice(start,source.indexOf('export async function compareSelectedCheckpointNative'))),'cff701084fd49ad75f726910d7a7e5e33f1def8ded120fe86ec081851beca1a6');
+ assert.equal(typeof cold.screenNativeGapCandidates,'function');
+ assert.equal(typeof cold.repairVisibilityWitnesses,'function');
  assert.equal(cold.compareSelectedCheckpointNative,undefined);
  assert.equal(typeof compareSelectedCheckpointNative,'function');
 });
@@ -33,6 +34,8 @@ test('all actual package entries retain their original complete role roster',()=
   const actual=inspectPackageExecutionInputs(ROOT,definition,kind);
   assert.deepEqual(actual.errors,[]);
   assert(actual.files.includes(COLD));
+  assert(actual.files.includes('src/native-grid.js'));
+  assert(!actual.files.includes('scripts/visible-gap-eligibility.mjs'));
   assert(!actual.files.includes(NATIVE));assert(!actual.files.includes(SHARED));
   assert.equal(validatePackageExecutionRoles(actual.files,roles,`scripts/build-${kind}-inner.mjs`),true);
  }

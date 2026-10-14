@@ -5,8 +5,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
-import {ImmutableReader, NativeAssetImage} from '../../../scripts/check-effective-geographic-regression.mjs';
-import {decodeVisibilityLatitudes} from '../../../scripts/visible-gap-eligibility.mjs';
+import {ImmutableReader, NativeAssetImage, decodeVisibilityLatitudes} from '../../../scripts/check-effective-geographic-regression.mjs';
 import {unshuffleOwnershipBytes} from '../../../src/ownership-codec.js';
 import {valueBytes, valueSha, coordinateBounds, nativeBaseSelection,
   normaliseRetainedRepairLedger, readRetainedRegistryAuthority, validateSupportedProgrammeCatalogue,
@@ -36,7 +35,7 @@ const JOINT_NATIVE_CODE=[...JOINT_CODE.slice(0,3),'scripts/selected-checkpoint-n
 const DERIVED_CODE=[...JOINT_NATIVE_CODE,...ACCEPTED_CODE,'scripts/geographic_checkpoint_products.py'];
 // Earlier accepted executions retain their original closure. New executions
 // additionally bind the exact visibility operator and native rule.
-const VISIBLE_JOINT_NATIVE_CODE=[...JOINT_NATIVE_CODE.slice(0,4),'scripts/visible-gap-eligibility.mjs','src/native-grid.js',...JOINT_NATIVE_CODE.slice(4)];
+const VISIBLE_JOINT_NATIVE_CODE=[...JOINT_NATIVE_CODE.slice(0,4),'src/native-grid.js',...JOINT_NATIVE_CODE.slice(4)];
 const VISIBLE_DERIVED_CODE=[...VISIBLE_JOINT_NATIVE_CODE,...ACCEPTED_CODE,'scripts/geographic_checkpoint_products.py'];
 const demand = (ok, message) => { if (!ok) throw Error(message); };
 const sha = body => createHash('sha256').update(body).digest('hex');
