@@ -16,13 +16,19 @@ export function requirePlainExecution({boundedHeap=false}={}) {
 }
 
 // Current operational admission, independent of literal historical receipts.
+// OS availability is already net of resident parent/concurrent memory. Reserve
+// only additional planned concurrent growth and retain half the remainder for
+// parent/system growth and expansion. Both limits cover a complete process/phase,
+// so credit only measured resident RSS, never historical or on-disk byte counts.
 // Kept in this existing low-level guard to avoid expanding native import rosters.
-export function preparationAllowance({availableBytes=process.availableMemory(),concurrentReservedBytes=Number(process.env.WORLDATLAS_CONCURRENT_RESERVED_BYTES??0),phaseBytes,rssBytes}={}) {
-  if (![availableBytes,concurrentReservedBytes].every(n=>Number.isSafeInteger(n)&&n>=0)) throw Error('Invalid current preparation resource observations');
-  const usable=availableBytes-concurrentReservedBytes-2*1024**3-768*1024**2;
-  if (usable<=0) throw Error('Insufficient current preparation memory after parent/concurrent headroom');
-  rssBytes??=Math.floor(usable/2);phaseBytes??=rssBytes;
-  if (![phaseBytes,rssBytes].every(n=>Number.isSafeInteger(n)&&n>0)||phaseBytes>usable||rssBytes>usable) throw Error('Requested preparation allowance exceeds current memory admission');
+export function preparationAllowance({availableBytes=process.availableMemory(),concurrentReservedBytes=Number(process.env.WORLDATLAS_CONCURRENT_RESERVED_BYTES??0),currentRssBytes=process.memoryUsage().rss,phaseBytes,rssBytes}={}) {
+  if (![availableBytes,concurrentReservedBytes,currentRssBytes].every(n=>Number.isSafeInteger(n)&&n>=0)) throw Error('Invalid current preparation resource observations');
+  const growthBytes=Math.floor((availableBytes-concurrentReservedBytes)/2);
+  if (growthBytes<=0) throw Error('Insufficient current preparation memory after concurrent reservation and safety headroom');
+  const rssLimitBytes=currentRssBytes+growthBytes;
+  if (!Number.isSafeInteger(rssLimitBytes)) throw Error('Invalid current preparation resource observations');
+  rssBytes??=rssLimitBytes;phaseBytes??=rssLimitBytes;
+  if (![phaseBytes,rssBytes].every(n=>Number.isSafeInteger(n)&&n>0)||phaseBytes>rssLimitBytes||rssBytes>rssLimitBytes) throw Error('Requested preparation allowance exceeds current memory admission');
   return Object.freeze({phaseBytes,rssBytes});
 }
 export function preparationRequestAllowance(value){
