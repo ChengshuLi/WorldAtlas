@@ -312,7 +312,7 @@ function pack(f,mutate=()=>{}) {
 }
 async function acquire(f,mutate) {
   const p=pack(f,mutate), request='01234567-abcd-4321-aaaa-123456789012',head=f.trusted,baseline=f.trusted,
-    candidate=f.trusted,merged='d'.repeat(40),tree='e'.repeat(40),workflowHead=f.trusted;
+    candidate=f.trusted,merged=f.trusted,tree=f.git('rev-parse',f.trusted+'^{tree}').toString().trim(),workflowHead=f.trusted;
   const source={run_id:12,run_attempt:2,job_id:34,tree,head,baseline,candidate_commit:candidate,
     workflow_path:'.github/workflows/worker-merge.yml',event:'workflow_dispatch',workflow_head:workflowHead,
     artifact_id:56,artifact_name:`geography-${request}-2`,artifact_digest:sha(p.zip),artifact_bytes:p.zip.length,
@@ -514,4 +514,52 @@ test('accepted five-source custody joins complete real-order projections to lexi
     p=>p.continuousFacts.source_custody.baseline.actual_inputs[0].whole_body_consumed=false,
   ]){const a=await acquire(f,mutate);await assert.rejects(qualify(f,a),/source (input custody|body mode\/OID\/hash)/);
     f.transport.releaseAcceptedCheckpoint(a.handle);}
+});
+
+function successorSelector(f,name='successor/sidecar.json') {
+  f.save(name,f.sidecar); const bodyCommit=f.commit(), p=f.pin(name,bodyCommit);
+  f.save('data/ownership-selection.json',{...f.selection,
+    additive_release:{path:name,bytes:p.bytes,sha256:p.sha256}});
+  return f.commit();
+}
+function currentReader(f,a,version) {
+  return new f.native.ImmutableReader(f.root,version,{allowance:a.reader.allowance,
+    budget:a.reader.budget});
+}
+test('older accepted selector advances to actual baseline with zero cold reconstruction',async t=>{
+  const f=await acceptedProducts(t),a=await acquire(f),baseline=successorSelector(f);
+  a.reader=currentReader(f,a,baseline);
+  const read=f.native.ImmutableReader.prototype.read; const sourceReads=[];
+  f.native.ImmutableReader.prototype.read=function(name,...args){sourceReads.push(name);return read.call(this,name,...args);};
+  try {
+    const q=await qualify(f,a);assert.equal(q.available,true);assert.equal(q.state.selected_commit,baseline);
+    assert.equal(q.state.accepted_execution.historical_selected_commit,f.trusted);
+    assert.equal(sourceReads.includes('data/source.json'),false);
+    assert.equal(sourceReads.includes('data/native/runs.bin.gz'),false);
+    assert.equal(q.state.patch.rows[0].runs[0][1]-q.state.patch.rows[0].runs[0][0],1);
+    const transition=f.api.qualifyTransition({state:q.state,reader:a.reader,budget:a.budget});
+    assert.equal(transition.available,true);assert.equal(transition.baseline.selected_commit,baseline);
+    assert.deepEqual(transition.changedNativeRows,[]);
+    const census=f.api.checkpointRouteCensus({transition,budget:a.budget});
+    assert(census.routes.some(p=>p.path==='successor/sidecar.json'));
+    f.api.releaseCheckpoint(q.state);
+  } finally {f.native.ImmutableReader.prototype.read=read;f.transport.releaseAcceptedCheckpoint(a.handle);}
+});
+test('intermediate newly consumed routes cannot change before the next candidate',async t=>{
+  const f=await acceptedProducts(t),a=await acquire(f),baseline=successorSelector(f);
+  a.reader=currentReader(f,a,baseline);const q=await qualify(f,a);assert.equal(q.available,true);
+  // Keep the candidate selector on a new exact copy; mutate the intermediate
+  // ordinary route only. Its old immutable pin alone must not hide this change.
+  successorSelector(f,'candidate/sidecar.json');
+  f.save('successor/sidecar.json',{changed:true});const candidate=f.commit();
+  const result=f.api.qualifyTransition({state:q.state,reader:currentReader(f,a,candidate),budget:a.budget});
+  assert.equal(result.available,false);assert.match(result.reason,/route changed/);
+  f.api.releaseCheckpoint(q.state);f.transport.releaseAcceptedCheckpoint(a.handle);
+});
+test('older checkpoint cannot skip changed source routing on actual baseline',async t=>{
+  const f=await acceptedProducts(t),a=await acquire(f);successorSelector(f);
+  f.save('data/source.json',{type:'FeatureCollection',features:[]});const baseline=f.commit();
+  a.reader=currentReader(f,a,baseline);const result=await qualify(f,a);
+  assert.equal(result.available,false);assert.match(result.reason,/route changed/);
+  f.transport.releaseAcceptedCheckpoint(a.handle);
 });
