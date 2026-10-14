@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "reviewer_worker_id": "/root/authority_binding_review",
+  "outcome": "supported-for-bounded-stock-attempt-with-limits",
+  "blocking_findings": [],
+  "inputs": {
+    "source-evidence.json": {
+      "bytes": 136337,
+      "sha256": "b07cf7d5dfd014475401de1ab474eee042df3a183862ffe2d23d6859fa4791f1"
+    },
+    "six-cell-native-patch.json": {
+      "bytes": 231,
+      "sha256": "027c7060650a0975c7ccb15e854ae916d059ca279b7ca5f0197ed6d0b4313e0b"
+    },
+    "custody-disposition.json": {
+      "bytes": 20352,
+      "sha256": "23ba94483b186baebe7248cab6f9e90c0a626d7c4b1696eb92755343ac7c1453"
+    }
+  },
+  "checks": [
+    "Exact six requested native tuples equal original six MMR-reference records; owner30149/sourceSIDs44893,44955,45136. Five native row records cover six cells.",
+    "Fifty THA-reference records and five separate Thai-owner-conflict records exactly preserved and disjoint from six-cell patch.",
+    "All five whole veto geometries independently matched authenticated complete products by ordinal, feature hash, geometry hash and literal coordinates: THA NaturalEarth country plus Prachuap Khiri Khan, Bang Saphan, Hua Hin and Thap Sakae. Three complete compressed products authenticated/decompressed as JSON only; no geometry predicates.",
+    "Target original/selected stage and physical pins authenticated; base geometry equals original retained selected geometry. All ten topology-conflict metadata retained. Single target physical row has five checked queries/no issues; source0 covers candidate.",
+    "Stock qualifier schema inspected: physical pins now have actual100644 modes, producer locator8296eee resolves exact5450-byte blob/SHA, all stock whole-body pins authenticated offline. No stock entry executed."
+  ],
+  "scientific_disposition": "A narrow stock attempt is justified: adding the entire original THA reference-country veto explicitly preserves the reference convention that was absent from an administrative-veto-only proposal, while four complete original Thai admin vetoes preserve documented competitors. This permits evaluating the six without assuming all ten original cuts are reconstructed or granting whole-border authority. Original56 hold changes only after independently reviewed narrow actual qualification;50+5 remain held.",
+  "resolved_findings": [
+    "Missing physical_input/physical_evidence modes fixed.",
+    "Producer immutable locator changed from locally unavailable b413 commit to accessible8296 commit with identical blob/bytes/hash; old locator not proven scientifically wrong."
+  ],
+  "limits": [
+    "Six cells are not cleared: stock positive physical/source support, source uniqueness, exact ties and all five veto checks remain unexecuted. Any failure must remain held.",
+    "No full-source/GSHHG/native/GIS/GEOS run, no new international scan and no source downloads; only retained-byte/JSON/tuple checks.",
+    "No certification of full-parent containment, ten-cut reconstruction, historical jurisdiction, modern sovereignty, current-owner-zero, conservation, selection or acceptance.",
+    "Draft files still need immutable committed input locators and normal fresh runtime admission before stock execution.",
+    "Initial Git read of unavailable historical commit attempted implicit promisor network and failed DNS; subsequent reads explicitly disabled lazy fetch and all protocols. No remote data acquired."
+  ]
+}
