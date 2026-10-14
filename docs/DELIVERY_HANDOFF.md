@@ -151,12 +151,21 @@ existing smoke runner, not a runtime package input. Keep it in the reviewed pack
 but do not append it to `.github/package-inputs.json` merely because preparation
 emitted it. Preserve prior declarations and append actual consumed roles using the
 existing `finalizedPackageInputs` constructor, not a copied packet filename list.
-The current `package`/`finalize` projection walks the original issued-rule binding
-shape (`original_pins`/`native_proof`); it is not a source-target-native constructor.
-For that distinct binding shape, derive the exact role list from its existing
-reader and validate the actual package/consumer rather than assuming the legacy
-projection supports it. Do not copy old source algorithms or add a new validator
-just to prepare another batch.
+The existing `package` and `finalize` commands handle issued-rule and modern
+`source-target-native-custody-v1` authorities, including mixed registries. After
+completed selected assembly, use `finalize CONFIG DESTINATION` to produce the
+selector, package definition, role inventory and smoke expectations directly;
+no hand-written modern role list or separate package pass is needed.
+Modern roles are the fixed whole-body reads of `qualifySourceTargetNativeAuthority`:
+evidence/patch, catalogue, measured physical inputs/evidence/reproducer, native
+latitudes/roster, declared family parts and optional membership index/lineage/parts.
+All final sidecar assets are included. Nested GIS descriptors are not traversed,
+and neither the physical reproducer nor scientific qualification runs here.
+The existing direct or `additiveRelease`-wrapped envelope's flat public aliases
+remain distinct from Git paths, with encoded/decoded identities preserved.
+Smoke members use original-ledger `native_rows_sha256` for native-only components
+and `geometry_sha256` for literal geometries. Existing accepted package policies,
+selector ordering, custody/rebind, package/consumer and publication gates remain.
 
 ## Retained current13 metadata example
 
@@ -376,31 +385,3 @@ destination rather than replacing an existing completed product.
 
 Standalone preparation retains its existing receipt/configuration contract.
 Published legacy receipts remain supported by their existing consumers.
-
-### Modern source-target package finalization
-
-The existing `package` and `finalize` commands accept both retained issued-rule
-custody and `source-target-native-custody-v1`, including mixed registries.
-Modern roles follow the closed whole-body reads in
-`qualifySourceTargetNativeAuthority`: original evidence and native patch,
-retained catalogue, measured physical inputs/evidence/reproducer, native
-latitudes, owner roster, complete declared source-family parts, and optional
-accepted membership index/lineage/parts. The final sidecar's actual base manifest,
-owner roster, selected ledger, patch and envelope are also package inputs.
-No nested pin walk, physical reproducer execution or additional science is
-performed by metadata finalization. GIS operands inside retained reports or
-contracts do not become runtime inputs merely because they contain descriptors.
-
-The runtime envelope may be direct or under its producer's `additiveRelease`
-wrapper. Its public `additive-repairs/<flat-name>` aliases remain distinct from
-the committed Git paths in the sidecar; their whole encoded/decoded identities
-must agree. Existing accepted package declarations and policy fields remain
-unchanged, with only exact uncovered consumed paths appended. Original selector
-key ordering and repeated finalized bytes remain preserved.
-
-Smoke expectations use the existing representation-specific schema:
-`native_rows_sha256` for native-only components, `geometry_sha256` for literal
-geometry components. These hashes come from original normalized ledger rows.
-`selected-delivery-expectations.json` remains a checkout-only verification file,
-not an additional runtime package input. Actual authority qualification, current
-rebind, package/consumer validation, review and publication gates still apply.
