@@ -109,6 +109,21 @@ export function checkpointTransportInput(reader, name, maximum, admit, {consume 
   return {pin, body};
 }
 
+// This gate precedes authentication of every project import, so it cannot call
+// the reader's allowance helper yet. Match its current measured admission here;
+// parity controls exercise this bootstrap and the authenticated reader together.
+export function jointExecutionAllowance({availableBytes = process.availableMemory(),
+  concurrentReservedBytes = Number(process.env.WORLDATLAS_CONCURRENT_RESERVED_BYTES ?? 0),
+  currentRssBytes = process.memoryUsage().rss} = {}) {
+  demand([availableBytes, concurrentReservedBytes, currentRssBytes].every(value =>
+    Number.isSafeInteger(value) && value >= 0), 'Invalid joint resource observations');
+  const growthBytes = Math.floor((availableBytes - concurrentReservedBytes) / 2);
+  demand(growthBytes > 0, 'Insufficient current joint memory after concurrent reservation and safety headroom');
+  const limit = currentRssBytes + growthBytes;
+  demand(Number.isSafeInteger(limit), 'Invalid joint resource observations');
+  return Object.freeze({phaseBytes: limit, rssBytes: limit});
+}
+
 function executionGuard(repo, trusted) {
   demand(commit(trusted) && fs.realpathSync(repo) === fs.realpathSync(ROOT), 'Joint entry requires its actual trusted checkout');
   demand(process.execArgv.length === 1 && process.execArgv[0] === '--expose-gc'
@@ -122,11 +137,9 @@ function executionGuard(repo, trusted) {
     demand(stat.isFile() && !stat.isSymbolicLink() && stat.size <= FILE, 'Nonordinary joint execution code');
     return {name, file, stat};
   });
-  const available = process.availableMemory(), reserved = Number(process.env.WORLDATLAS_CONCURRENT_RESERVED_BYTES ?? 0);
-  demand([available, reserved].every(value => Number.isSafeInteger(value) && value >= 0), 'Invalid joint resource observations');
-  const phase = Math.floor((available - reserved - 2 * 1024 ** 3 - 768 * 1024 ** 2) / 2);
-  demand(phase > 0 && files.reduce((sum, item) => sum + 2 * item.stat.size, 0)
-    + fs.statSync(process.execPath).size + 8 * 1024 ** 2 + FILE < phase,
+  const allowance = jointExecutionAllowance();
+  demand(files.reduce((sum, item) => sum + 2 * item.stat.size, 0)
+    + fs.statSync(process.execPath).size + 8 * 1024 ** 2 + FILE < allowance.phaseBytes,
   'Joint code/runtime exceeds current allowance before body opens');
   return files.map(({name, file, stat}) => {
     const row = git('ls-tree', '-z', trusted, '--', name).toString();
