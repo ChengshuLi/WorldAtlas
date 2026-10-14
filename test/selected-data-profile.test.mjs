@@ -1369,7 +1369,7 @@ test('unreachable accepted SOURCE declarations still require administrative cust
 
 // Structural role eligibility only; the source/native reader separately
 // authenticates whole products and actual map-cell ownership.
-function sourceTargetRoleFixture({wrongRule=false,emptyFamily=false}={}) {
+function sourceTargetRoleFixture({wrongRule=false,emptyFamily=false,retainedRoles=false,mutateRoles=()=>{}}={}) {
   return fixture({mutate:f=>{
     const nativeRows=[{y:3,runs:[[4,5,1]]}];
     f.rows[1]={component_id:'new',target_id:'target-new',disposition:'assigned',native_cells:1,
@@ -1380,8 +1380,16 @@ function sourceTargetRoleFixture({wrongRule=false,emptyFamily=false}={}) {
       native_rows_sha256:digest(Buffer.from(JSON.stringify([{runs:[[4,5,1]],y:3}])+'\n'))};
     const roles=Object.fromEntries(['catalogue','physical_evidence','physical_input','physical_reproduction','owner_roster','native_latitudes']
       .map(role=>[role,f.leaf('source-target-'+role+'.json')]));
+    const parts=[f.leaf('source-family-part.json')];
+    if(retainedRoles){
+      for(const value of [roles.physical_reproduction,roles.native_latitudes,parts[0]])f.authored.entries.delete(value.path);
+      roles.physical_reproduction=f.put('coordination/engineering/prior/physical-reproduction.py','print(1)\n',true);
+      roles.native_latitudes=f.put('coordination/engineering/prior/native-row-latitudes.f64le.gz',gzipSync(Buffer.from([0,1,2,3,4,5,6,7])),true);
+      parts[0]=f.put('coordination/engineering/prior/source-family-part.bin.gz',gzipSync(Buffer.from('retained source bytes')),true);
+    }
+    mutateRoles({f,roles,parts});
     const evidence=f.put(prefix+'source-target-evidence.json',{version:1,kind:'source-target-native-evidence-v1',...roles,
-      targets:[{id:'target-new'}],families:[{source_id:'source-family',parts:emptyFamily?[]:[f.leaf('source-family-part.json')]}]});
+      targets:[{id:'target-new'}],families:[{source_id:'source-family',parts:emptyFamily?[]:parts}]});
     const patch=f.leaf('source-target-native-patch.json');
     const body={version:1,kind:'source-target-native-custody-v1',source_evidence:evidence,native_patch:patch};
     const authority=f.put(prefix+'source-target-authority.json',body);
@@ -1398,4 +1406,28 @@ test('source-target native roles and literal native-row expectations use the exi
 test('source-target native roles reject a rehashed foreign rule join and incomplete family roles',async()=>{
   assert.equal(await sourceTargetRoleFixture({wrongRule:true}).run(),null);
   assert.equal(await sourceTargetRoleFixture({emptyFamily:true}).run(),null);
+});
+
+test('fixed source roles admit unchanged accepted reproduction and binary inputs without suffix exceptions',async()=>{
+  const f=sourceTargetRoleFixture({retainedRoles:true}),diagnostics={};
+  assert.equal((await f.run({metadataDiagnostics:diagnostics}))?.test_selection,'selected-data',diagnostics.failure);
+  for(const suffix of ['physical-reproduction.py','native-row-latitudes.f64le.gz','source-family-part.bin.gz']){
+    const name='coordination/engineering/prior/'+suffix;
+    assert(!f.reads.includes(f.authored.entries.get(name).sha),'unchanged role body was unnecessarily reread');
+  }
+});
+for(const [label,mutateRoles] of Object.entries({
+  'new executable':({f,roles})=>{roles.physical_reproduction=f.put(prefix+'physical-reproduction.py','new code');},
+  'changed executable':({f,roles})=>{roles.physical_reproduction=f.put(roles.physical_reproduction.path,'changed code');},
+  'changed binary source':({f,parts})=>{parts[0]=f.put(parts[0].path,Buffer.from([1,2,3]));},
+  'forged blob pin':({roles})=>{roles.physical_reproduction.git_blob_oid='0'.repeat(40);},
+  'forged byte count':({roles})=>{roles.physical_reproduction.bytes++;},
+  'missing immutable commit':({roles})=>{delete roles.physical_reproduction.commit;},
+  'invalid hash pin':({roles})=>{roles.physical_reproduction.sha256='invalid';},
+  'executable mode':({f,roles})=>{const name=roles.physical_reproduction.path;f.authored.entries.set(name,{...f.authored.entries.get(name),mode:'100755'});roles.physical_reproduction.mode='100755';},
+  'baseline executable mode':({f,roles})=>{const name=roles.physical_reproduction.path;f.baseline.entries.set(name,{...f.baseline.entries.get(name),mode:'100755'});},
+  'symlink mode':({f,roles})=>{const name=roles.physical_reproduction.path;f.authored.entries.set(name,{...f.authored.entries.get(name),mode:'120000'});},
+}))test('unchanged fixed source roles reject '+label,async()=>{
+  const f=sourceTargetRoleFixture({retainedRoles:true,mutateRoles});
+  assert.equal(await f.run(),null);
 });
