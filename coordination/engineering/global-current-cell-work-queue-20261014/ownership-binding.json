@@ -1,0 +1,65 @@
+{
+  "version": "a61b6f9e7f88b1da380e3a834f89d7509132ed71",
+  "current_commit": "a61b6f9e7f88b1da380e3a834f89d7509132ed71",
+  "size": 262166,
+  "block_rows": 4096,
+  "selection": {
+    "artifact_consumption": {
+      "certificate": {
+        "bytes": 68158,
+        "mode": "100644",
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/consumption-certificate.json",
+        "sha256": "26b505e3131a2513badc45d1552bcf603c24c565bdfb21b0f623fe4e6c7d4070"
+      },
+      "review": {
+        "bytes": 7379,
+        "mode": "100644",
+        "path": "coordination/engineering/additive-native-activation-20261009/independent-native-consumption-wrapper-self-pin-review.json",
+        "sha256": "87ab56e1354dd8a8fda532bfa008436abd35c6c506f0e0685eaa2f2f07f59a8a"
+      }
+    },
+    "manifest_path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/manifest.json",
+    "method": "native-linear-evenodd-first-owner-v1",
+    "release_id": "geography:review:dbb133d7b123bacd1d38253c467891bff656d011000a9f11d369ac9262302bfb",
+    "selected_geography": {
+      "version": 1,
+      "kind": "complete-world-index-with-exact-encoded-overrides",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography-bank.json",
+      "bytes": 14656,
+      "sha256": "3750f72a48bb9fd498ca129e20e299904239bfe1b4191919fbc89b636234c776"
+    },
+    "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+    "version": 1,
+    "additive_release": {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/release-001/selection-sidecar.json",
+      "bytes": 3521,
+      "sha256": "9d7c827eef311f6c5a2bfc23fdfbe29aaf9219832443cf7277ed6e9f23697d9f"
+    }
+  },
+  "native_latitudes": {
+    "root": "repository",
+    "role": "immutable-normative-rule-input",
+    "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+    "commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+    "bytes": 1851757,
+    "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+    "decoded_bytes": 2097328,
+    "decoded_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+  },
+  "patch": {
+    "bytes": 16380,
+    "commit": "9f9c829475d14da1488fe4cc7ec76720e194fd8c",
+    "git_blob_oid": "5d9cbebb7de2a856bae2aa5aff2bda17e0325315",
+    "mode": "100644",
+    "path": "coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/assembly-001/patch.json",
+    "sha256": "b44fc535b704fd88ccad45b85fbad73849b9f54c12bd3a83a158915b072414ac"
+  },
+  "base_accounting": {
+    "checked_rows": 262166,
+    "checked_cells": 68731011556,
+    "unchecked_cells": 0,
+    "owned_cells": 13854401626,
+    "owners": 49625
+  },
+  "method": "Full native row occupied interval union plus selected additive rows, complemented over [0,size). No candidate polygon mask."
+}

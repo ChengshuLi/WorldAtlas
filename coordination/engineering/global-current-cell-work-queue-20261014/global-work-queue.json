@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "frozen_selection_commit": "a61b6f9e7f88b1da380e3a834f89d7509132ed71",
+  "scope": "Current selected native owner-zero domain intersected with retained territorial sources or valid retained physical land; explicit excluded/invalid-source investigations are separate.",
+  "counts": {
+    "territorial_packages": 644,
+    "territorial_source_sessions": 368,
+    "territorial_cells": 40589285,
+    "physical_only_packages": 14,
+    "physical_only_cells": 100304914,
+    "disjoint_counted_packages": 658,
+    "disjoint_counted_cells": 140894199,
+    "additional_domain_investigations": 2,
+    "total_packages": 660,
+    "approved_repair_cells": null
+  },
+  "queues": [
+    {
+      "path": "source-package-queue.json",
+      "sha256": "78007430b6f9faedb188ef0619b7ff0a7a2cc7fff2ec9f1c41ee69936ec4ebd8",
+      "extractor": "source-batch-intervals.mjs",
+      "role": "Retained territorial source/cause packages grouped in shared source-family sessions"
+    },
+    {
+      "path": "physical-package-queue.json",
+      "sha256": "3ccb2d5ef10ea9b7501784b44c7c0ea783df346009dfbb2cc9189a147b9df2f0",
+      "extractor": "physical-batch-intervals.py",
+      "role": "Disjoint broad physical-only source/geographic work plus two separate domain investigations"
+    }
+  ],
+  "scheduling": [
+    "Choose a bounded source-family session and keep its related categories together; packages are not one-worker or one-PR mandates.",
+    "Begin with already-qualified source-target examples and promote disjoint well-supported candidates through the existing operator while other workers resolve shared lineage and broad source disagreements.",
+    "Retain complete competitor sources; coordinate shared owner/source crosswalks. Final geographic integration is serialized and requires current owner-zero revalidation.",
+    "Treat large Arctic source disagreements as source-method questions first. Native cell counts vary strongly with latitude and are not physical area or priority."
+  ],
+  "limitations": [
+    "The retained sources are not a universal authoritative land/territory census.",
+    "Physical land/water differences and unique ancestry do not grant territorial repair authority.",
+    "Antarctica and the malformed physical source are explicit investigations; their uncertain cells are not added as established repair candidates."
+  ]
+}

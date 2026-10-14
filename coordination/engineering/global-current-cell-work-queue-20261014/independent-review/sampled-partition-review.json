@@ -1,0 +1,69 @@
+{
+  "aggregate_partitions": "pass",
+  "tested_blocks": [
+    {
+      "block": 3,
+      "decoded_source_hash": "pass",
+      "sampled_rows": [
+        12288,
+        13363,
+        14370,
+        15377,
+        16383
+      ]
+    },
+    {
+      "block": 14,
+      "decoded_source_hash": "pass",
+      "sampled_rows": [
+        57344,
+        58368,
+        59392,
+        60416,
+        61439
+      ]
+    },
+    {
+      "block": 24,
+      "decoded_source_hash": "pass",
+      "sampled_rows": [
+        98304,
+        99328,
+        99412,
+        100352,
+        101376,
+        102399
+      ]
+    },
+    {
+      "block": 32,
+      "decoded_source_hash": "pass",
+      "sampled_rows": [
+        131072,
+        132096,
+        133120,
+        134144,
+        135167
+      ]
+    },
+    {
+      "block": 43,
+      "decoded_source_hash": "pass",
+      "sampled_rows": [
+        176128,
+        177152,
+        178176,
+        179200,
+        180223
+      ]
+    },
+    {
+      "block": 64,
+      "decoded_source_hash": "pass",
+      "sampled_rows": []
+    }
+  ],
+  "sampled_rows": 26,
+  "sampled_segments": 1029,
+  "max_rss_kib": 657860
+}
