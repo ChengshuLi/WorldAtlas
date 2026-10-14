@@ -520,12 +520,240 @@ def run(repo, config_path, admission_path, output, publication_prefix):
     return {'complete': True, 'output': str(OUT), 'products': list(products), 'repaired_credit': 0}
 
 
+# The shared physical phase keeps the archived original producer and its exact
+# comparison methods intact. Only authenticated input retention changes.
+PHYSICAL_COMPARISON_SHA = 'f9c226add23a37a39bf7fd34f5d8bdcb34a8d276b331fabf59bf9867b6f84bfe'
+
+
+def selected_physical_metadata(parts, read_decoded, bounds, expected_count):
+    """Full authentication first; retain full dictionaries only for the closure."""
+    compact, selected, retained = {}, set(), {}
+    for part in parts:
+        raw = read_decoded(part)
+        for line in raw.splitlines():
+            m = json.loads(line)
+            ident = m['id']
+            compact[ident] = (m['level'], m['container'])
+            a = m.get('decoded_pointset_bounds')
+            if a and any(not (a[2]+shift < box[0] or a[0]+shift > box[2] or a[3] < box[1] or a[1] > box[3])
+                         for shift in (-360, 0, 360) for box in bounds):
+                selected.add(ident)
+            if ident in selected:
+                retained[ident] = m  # Original dictionary semantics: final occurrence wins.
+        del raw
+        line = m = None
+    need(len(compact) == expected_count, 'Incomplete physical metadata inventory')
+    for ident in list(selected):
+        seen = set()
+        while compact[ident][0] in (2, 3, 4):
+            need(ident not in seen, 'Cyclic original physical container chain')
+            seen.add(ident)
+            parent = compact[ident][1]
+            if parent not in compact:
+                break  # The unchanged comparison reports the missing parent.
+            selected.add(parent)
+            ident = parent
+    missing = selected - retained.keys()
+    del compact
+    if missing:
+        # Ancestors may precede their children. Re-read complete authenticated
+        # fragments, never infer their metadata from the compact index.
+        for part in parts:
+            raw = read_decoded(part)
+            for line in raw.splitlines():
+                m = json.loads(line)
+                if m['id'] in missing:
+                    retained[m['id']] = m
+            del raw
+            line = m = None
+    need(set(retained) == selected, 'Missing selected physical metadata')
+    return retained
+
+
+def physical_native_member(index, read_decoded, check):
+    """One complete native body; never retain all pieces plus a second join."""
+    size = index['member_bytes']
+    need(type(size) is int and size > 0, 'Invalid complete native member size')
+    # Caller admits the complete allocation before this function is entered.
+    native = bytearray(size)
+    at = 0
+    for ordinal, part in enumerate(index['parts']):
+        need(part['offset'] == at and part['ordinal'] == ordinal, 'Native fragment order/offset differs')
+        raw = read_decoded(part)
+        need(at+len(raw) <= size, 'Native fragment exceeds complete member')
+        native[at:at+len(raw)] = raw
+        at += len(raw)
+        del raw
+        check()
+    need(at == size and sha(native) == index['member_sha256'], 'Complete original native member differs')
+    return native
+
+
+def run_physical(repo, config_path, admission_path, output, publication_prefix):
+    import types
+    import numpy as np
+    import shapely
+    from shapely.geometry import shape, mapping
+    from shapely.affinity import translate
+    need(__debug__, 'Optimized Python would disable scientific predicates')
+    safe_path(publication_prefix)
+    started = time.monotonic()
+    raw_config = ordinary_bytes(config_path)
+    config = json.loads(raw_config)
+    need(config['version'] == 1, 'Unsupported physical configuration')
+    pins = exact_map(config['inputs'], 'path')
+    roles = config['roles']
+    need(set(roles) == {'stages', 'transport', 'native_index', 'comparison'} and
+         all(name in pins for name in roles.values()), 'Complete physical roles required')
+    prefixes = {key: safe_path(config[key]).rstrip('/')+'/' for key in ('metadata_prefix','native_prefix')}
+    resources = config['resources']
+    need(all(positive_int(resources[key]) for key in ('input_bytes','output_bytes','deadline_seconds')),
+         'Explicit finite physical input/output/time allowances required')
+    admission = json.loads(ordinary_bytes(admission_path))
+    need(0 <= time.time()-admission['observed_unix_seconds'] < 60, 'Fresh physical admission expired')
+    need(admission['program_sha256'] == sha(ordinary_bytes(__file__)) and
+         admission['config_sha256'] == sha(raw_config), 'Physical program/config drift')
+    need(all(positive_int(admission['allowance'][key]) for key in ('rssBytes','phaseBytes')),
+         'Invalid physical allowance')
+    need(config['runtime'] == {'python':sys.version,'numpy':np.__version__,
+         'shapely':shapely.__version__,'geos':shapely.geos_version_string}, 'Physical runtime differs')
+    verify_runtime(admission)
+    consumed = {}
+    env = {**os.environ,'GIT_NO_LAZY_FETCH':'1','GIT_NO_REPLACE_OBJECTS':'1',
+           'GIT_TERMINAL_PROMPT':'0','GIT_CONFIG_NOSYSTEM':'1','GIT_CONFIG_GLOBAL':'/dev/null'}
+    def check():
+        need(peak() < admission['allowance']['rssBytes'], 'Physical RSS allowance exceeded at boundary')
+        need(time.monotonic()-started < resources['deadline_seconds'], 'Physical deadline exceeded at boundary')
+        need(sum(p['bytes']+p.get('decoded_bytes',0) for p in consumed.values()) <= resources['input_bytes'],
+             'Complete physical input inventory exceeds allowance')
+    def read(name):
+        safe_path(name)
+        need(name in pins, 'Unpinned physical input: '+name)
+        pin = pins[name]
+        need(re.fullmatch('[a-f0-9]{40}',pin['commit']) and positive_int(pin['bytes'],MAX_FILE)
+             and re.fullmatch('[a-f0-9]{64}',pin['sha256']), 'Invalid immutable physical pin')
+        command=['git','-c','protocol.allow=never','-C',str(repo)]
+        tree=subprocess.check_output(command+['ls-tree','-z',pin['commit'],'--',name],env=env)
+        need(tree.startswith(b'100644 blob ') and tree.endswith(('\t'+name+'\0').encode()),'Ordinary physical input required')
+        oid=tree.split()[2].split(b'\t')[0].decode()
+        need(oid==pin['git_blob_oid'],'Physical input blob differs')
+        size=int(subprocess.check_output(command+['cat-file','-s',oid],env=env))
+        need(size==pin['bytes'],'Physical input size differs')
+        raw=subprocess.check_output(command+['cat-file','blob',oid],env=env)
+        need(len(raw)==pin['bytes'] and sha(raw)==pin['sha256'],'Physical input hash differs')
+        consumed[name]=pin
+        check()
+        return raw
+    def decoded(part,prefix):
+        raw=read(prefix+part['path'])
+        need(len(raw)==part['bytes'] and sha(raw)==part['sha256'],'Physical fragment encoded binding differs')
+        need(positive_int(part['uncompressed_bytes'],MAX_FILE),'Bounded decoded physical fragment required')
+        with gzip.GzipFile(fileobj=io.BytesIO(raw)) as stream:
+            body=stream.read(part['uncompressed_bytes']+1)
+        need(len(body)==part['uncompressed_bytes'] and sha(body)==part['uncompressed_sha256'],
+             'Physical fragment decoded binding differs')
+        return body
+    check()
+    stages=json.loads(read(roles['stages']))
+    need(isinstance(stages,list) and stages and len({s['target'] for s in stages})==len(stages),
+         'Nonempty unique physical target cohort required')
+    candidates=[shape(s['consumed']['geometry']) for s in stages]
+    transport=json.loads(read(roles['transport']))
+    parts=[e['delivered'] for e in transport['entries'] if e['kind']=='sources']
+    need(parts and len({p['path'] for p in parts})==len(parts),'Complete unique metadata fragments required')
+    metas=selected_physical_metadata(parts,lambda p:decoded(p,prefixes['metadata_prefix']),
+                                    [g.bounds for g in candidates],transport['complete_sources'])
+    gc.collect();check()
+    index=json.loads(read(roles['native_index']))
+    need(index['record_count']==transport['complete_sources'],'Native/metadata complete record counts differ')
+    need(index['member_bytes']+admission['runtime_inventory_bytes']+admission['execution_reserve_bytes']
+         < admission['allowance']['phaseBytes'],'Complete native body exceeds physical phase allowance')
+    native=physical_native_member(index,lambda p:decoded(p,prefixes['native_prefix']),check)
+    helper=read(roles['comparison'])
+    need(sha(helper)==PHYSICAL_COMPARISON_SHA,'Physical comparison method differs from preserved original')
+    comparison=types.ModuleType('comparison')
+    exec(compile(helper,roles['comparison'],'exec'),comparison.__dict__)
+    del helper
+    validity=comparison.ValidityCache();geometries={};actual={}
+    for ident in sorted(metas):
+        m=metas[ident];a=m['native_offset'];n=m['native_record_bytes']
+        need(type(a) is int and type(n) is int and a>=0 and n>=44 and a+n<=len(native),'Incomplete native record range')
+        meta,g=comparison.decode_record(native[a:a+44],native[a+44:a+n],m['ordinal'],a,validity)
+        need(meta['decoded_pointset_binary64_sha256']==m['decoded_pointset_binary64_sha256'],'Physical decoded pointset differs')
+        actual[ident]=meta;geometries[ident]=g
+        del meta
+        check()
+    del native,metas
+    gc.collect();check()
+    def intersects(a,b):
+        return not(a[2]<b[0] or a[0]>b[2] or a[3]<b[1] or a[1]>b[3])
+    chains={}
+    for ident,m in actual.items():
+        if m['level'] in [2,3,4]:
+            parent=m['container'];chains[ident]=comparison.full_container_relation(geometries[ident],geometries.get(parent),validity)
+    results=[]
+    for stage,candidate in zip(stages,candidates):
+     issues=[];levels={i:[] for i in [1,2,3,4]};queries=[]
+     for ident,m in actual.items():
+      a=m.get('decoded_pointset_bounds');g=geometries[ident]
+      if not a:continue
+      for shift in [-360,0,360]:
+       if not intersects([a[0]+shift,a[1],a[2]+shift,a[3]],candidate.bounds):continue
+       if m['level'] not in levels:issues.append({'source':ident,'reason':'unsupported-level'});continue
+       if g is None or m['geometry_issues']:issues.append({'source':ident,'reason':m['geometry_issues']});continue
+       ancestry=ident;seen=set();ok=True
+       while actual[ancestry]['level'] in [2,3,4]:
+        if ancestry in seen or chains[ancestry]['status']!='supported':issues.append({'source':ident,'reason':'container-chain','detail':chains.get(ancestry)});ok=False;break
+        seen.add(ancestry);ancestry=actual[ancestry]['container']
+       if not ok:continue
+       gg=translate(g,xoff=shift) if shift else g;relation,piece=comparison.relation(candidate,gg,ident,shift,validity);queries.append(relation)
+       if relation['status']!='checked':issues.append({'source':ident,'reason':relation});continue
+       if piece is not None and not piece.is_empty:
+        def polygons(g):
+         if g.geom_type=='Polygon':return [g]
+         if g.geom_type in ['MultiPolygon','GeometryCollection']:return [p for sub in g.geoms for p in polygons(sub)]
+         return []
+        levels[m['level']]+=polygons(piece)
+     support=comparison.alternating_support(candidate,levels)
+     for key in ['missing_reconstruction','extra_reconstruction','contradictory_land_water_support']:
+      if not support[key].is_empty:issues.append({'reason':key,'geometry':mapping(support[key])})
+     for key,g in support['hierarchy_disagreements'].items():
+      if not g.is_empty:issues.append({'reason':key,'geometry':mapping(g)})
+     results.append({'target':stage['target'],'source_id_queries':sorted(set(q['source_id'] for q in queries)),'query_relations':queries,'issues':issues,'support':{k:({kk:mapping(vv) for kk,vv in v.items()} if isinstance(v,dict) else mapping(v)) for k,v in support.items()}})
+     print('target',stage['target'],'issues',len(issues),flush=True)
+    check()
+    need(set(consumed)==set(pins),'Physical input inventory contains unconsumed files')
+    verify_runtime(admission)
+    result={'results':results,'source_member':index,'source_metadata_receipts':parts,
+            'runtime':{'shapely':shapely.__version__,'geos':shapely.geos_version_string},
+            'elapsed_seconds':time.monotonic()-started,
+            'maximum_rss_kib':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
+            'scope':'Diagnostic original GSHHG source-relative support for whole consumed targets; heterogeneous observation dates and physical authority limits retained.'}
+    body=(json.dumps(result)+'\n').encode()
+    receipt={'version':1,'complete':True,'program':{'path':'scripts/qualify-source-cohort.py','sha256':sha(ordinary_bytes(__file__))},
+             'outputs':[{'path':publication_prefix+'/whole-target-support.json','bytes':len(body),'sha256':sha(body)}],
+             'inputs':list(consumed.values()),'fresh_admission':admission,'peak_rss_bytes':peak(),
+             'elapsed_seconds':time.monotonic()-started,
+             'limits':['Physical source-relative evidence only; no native selection, factual approval or repaired credit.',
+                       'RSS/time checks occur at code boundaries, not a live process-tree supervisor.']}
+    receipt_raw=(json.dumps(receipt)+'\n').encode()
+    need(len(body)+len(receipt_raw)<=resources['output_bytes'],'Complete physical output exceeds allowance')
+    target=Path(output).absolute()
+    need(not target.exists() and target.parent.is_dir() and all(not p.is_symlink() for p in [target,*target.parents]),
+         'Fresh ordinary physical output destination required')
+    check();target.mkdir()
+    for name,raw in [('whole-target-support.json',body),('execution-receipt.json',receipt_raw)]:
+        with (target/name).open('xb') as stream:stream.write(raw)
+    return {'complete':True,'products':['whole-target-support.json','execution-receipt.json'],'repaired_credit':0}
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--phase', choices=['source','physical'], default='source')
     parser.add_argument('--repo', required=True)
     parser.add_argument('--config', required=True)
     parser.add_argument('--admission', required=True)
     parser.add_argument('--output', required=True)
     parser.add_argument('--publication-prefix', required=True)
     args = parser.parse_args()
-    print(json.dumps(run(args.repo, args.config, args.admission, args.output, args.publication_prefix)))
+    print(json.dumps((run if args.phase=='source' else run_physical)(args.repo, args.config, args.admission, args.output, args.publication_prefix)))
