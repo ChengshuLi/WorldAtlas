@@ -51,7 +51,7 @@ test('native-only default and affected historical contexts retain exact cells an
   const {nativeSourceDigest}=await import('../src/native-source-digest.js');
   const {pickOwnership}=await import('../src/pixel-ownership.js');
   const {applyAdditiveNativePatch,footprintValueSha256:hash,additiveReleaseFootprintDigest,
-    effectiveFootprintBounds,nativeOnlyComponent}=await import('../src/effective-footprint.js');
+    effectiveFootprintBounds,nativeOnlyComponent,verifyAdditiveLedgerSelection}=await import('../src/effective-footprint.js');
   const size=262166, raw=gunzipSync(fs.readFileSync('coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz'));
   const latitudes=Float64Array.from({length:size},(_,i)=>raw.readDoubleLE(i*8));
   const rectangle=(a,b,c,d)=>({type:'Polygon',coordinates:[[[a,b],[c,b],[c,d],[a,d],[a,b]]]});
@@ -71,6 +71,11 @@ test('native-only default and affected historical contexts retain exact cells an
   const features=[selected,b],effectiveReference={...baseReference,id:'geography:fixture-selected',footprints_sha256:additiveReleaseFootprintDigest(baseReference,features)};
   const patch={version:2,kind:'unassigned-native-cells-v1',base_reference:baseReference,effective_reference:effectiveReference,
     ledger_sha256:'f'.repeat(64),authority_registry_sha256:'d'.repeat(64),rows:component.native_rows};
+  const ledger={version:2,kind:'native-additive-repair-ledger-v2',authority_registry_sha256:'d'.repeat(64),
+    parent_inventory:{components:0,report_sha256:'1'.repeat(64),roster_sha256:'2'.repeat(64)},scope_ids:[component.component_id],rows:[component]};
+  assert.equal(verifyAdditiveLedgerSelection(ledger,features,patch).assigned_cells,1);
+  const shifted=structuredClone(patch);shifted.rows[0].runs[0]=[x+10,x+11,1];
+  assert.throws(()=>verifyAdditiveLedgerSelection(ledger,features,shifted),/intervals omitted/);
   const effective=applyAdditiveNativePatch(base,patch,{baseReference,effectiveReference,features});
   assert.equal(pickOwnership(effective,x,y),1);assert.equal(pickOwnership(base,x,y),0);
   assert.equal(effectiveFootprintBounds(selected)[2],10);
@@ -82,4 +87,11 @@ test('native-only default and affected historical contexts retain exact cells an
   assert.equal(pickOwnership(base,ax,y),1);
   const corrupt=structuredClone(component);corrupt.native_rows[0].runs[0][2]=2;
   assert.throws(()=>nativeOnlyComponent(corrupt),/interval/);
+});
+
+test('multiple territorial masks for one target combine without source-ID relaxation',()=>{
+  const input=inputs();input.territorialExclusions=[feature('source:A',1,polygon(-89,-46)),feature('source:A',1,polygon(46,89))];
+  assert.equal(deriveSourceTargetNativeDelta(input).territorial_exclusion_cells,4);
+  const duplicate=inputs();duplicate.sourceFeatures.push(duplicate.sourceFeatures[0]);
+  assert.throws(()=>deriveSourceTargetNativeDelta(duplicate),/source owner roster/);
 });

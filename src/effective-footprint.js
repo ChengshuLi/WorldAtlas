@@ -591,6 +591,11 @@ function verifyVersionedLedgerSelection(ledger,features,patch) {
       require(original&&!seen.has(component.component_id)&&footprintValueSha256(original)===footprintValueSha256(component),'Original component authority removed/rebound');seen.add(component.component_id);}
   }
   require(seen.size===wanted.size&&targetIds.size===targets.size,'Incomplete selected original components/current target scope');
+  const patchRows=new Map(patch.rows.map(row=>[row.y,row.runs]));
+  for (const component of wanted.values()) if (nativeOnlyComponent(component))
+    for (const row of component.native_rows) for (const run of row.runs)
+      require((patchRows.get(row.y)??[]).some(actual=>actual[2]===run[2]&&actual[0]<=run[0]&&actual[1]>=run[1]),
+        'Selected native component intervals omitted or reassigned by patch');
   const allowed=new Set([...wanted.values()].filter(row=>row.disposition==='assigned').map(row=>row.pixelIndex));
   require(Array.isArray(patch.rows)&&patch.rows.every(row=>row.runs.every(run=>allowed.has(run[2]))),'Native cells assigned to zero-cell/unselected owner');
   const cells=patch.rows.reduce((n,row)=>n+row.runs.reduce((sum,run)=>sum+run[1]-run[0],0),0);
@@ -627,9 +632,19 @@ export function deriveSourceTargetNativeDelta({targets, sourceFeatures, coverage
   for (const feature of [...coverageFeatures, ...territorialExclusions])
     require(targetByOwner.get(feature.pixelIndex)?.id === feature.id, 'Foreign coverage or exclusion target');
   const options = {size, latitudes, rowStart, rowEnd};
-  const scan = features => features.length
-    ? nativePolygonIntervals(nativeRuntimeIndex(features), options) : {rows: new Map(), ties: []};
-  const sources = scan(sourceFeatures), coverage = scan(coverageFeatures), excluded = scan(territorialExclusions);
+  const scan = (features, masks = false) => {
+    if (!features.length) return {rows:new Map(),ties:[]};
+    if (masks) {
+      const grouped=new Map();
+      for (const feature of features) {
+        const item=grouped.get(feature.id)??{id:feature.id,pixelIndex:feature.pixelIndex,geometry:{type:'MultiPolygon',coordinates:[]}};
+        item.geometry.coordinates.push(...polygonParts(feature.geometry)); grouped.set(feature.id,item);
+      }
+      features=[...grouped.values()];
+    }
+    return nativePolygonIntervals(nativeRuntimeIndex(features),options);
+  };
+  const sources = scan(sourceFeatures), coverage = scan(coverageFeatures,true), excluded = scan(territorialExclusions,true);
   // Exact boundary cells require the existing boundary adjudication; withholding
   // them here must not silently choose whichever source happened to come first.
   const ties = new Map();
