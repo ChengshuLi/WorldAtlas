@@ -14,7 +14,11 @@ none of the initial 1,165 unique land candidates had already been assigned.
 Independent complete Myanmar/Thailand source-family membership checks reproduce
 the stored candidate memberships without mismatch. Palaw and Myeik have unique
 source membership, no retained Thailand reference-country overlap, valid current
-and original geometries, and no interior territorial holes.
+and original geometries, and no interior territorial holes. Of these cells, 777
+lie outside both coarse Natural Earth country polygons (730 Palaw, 47 Myeik).
+That is retained coastline-resolution disagreement, not competing country
+ownership: the topology reconciler preserved non-overlapping coasts and only
+split shared coverage. Neither target carries a topology-reconciled flag.
 
 Queue uniqueness alone failed to capture Tanintharyi's accepted country-border
 reconciliation: 50 of its 56 nominally unique land candidates lie in the retained

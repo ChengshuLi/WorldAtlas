@@ -46,7 +46,10 @@ physical queues sit underneath it.
    Unique administrative-source lineage is not territorial approval; an absence
    of interior polygon holes does not establish absence of territorial exclusions.
    Keep competing authorities and exact withheld intervals rather than undoing a
-   reconciled border through an additive patch.
+   reconciled border through an additive patch. Distinguish a cell covered by a
+   competing country from a coastline cell outside coarse country polygons: the
+   accepted reconciler preserved non-overlapping coastlines. Coarse reference
+   absence alone must not veto independently supported coastal territory.
 
 For the Myanmar ADM3 family, the Myeik follow-up (#1874) found that Tanintharyi
 carries an accepted Natural Earth country-border reconciliation. Its nominally
