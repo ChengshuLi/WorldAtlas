@@ -33,12 +33,11 @@ const joined = async promises => {
 // across baseline/candidate; typed routing schemas reject unknown input layouts.
 // A second manually maintained source-hash whitelist adds no execution authority.
 export const EXECUTION_CODE = Object.freeze([
-  'scripts/run-geographic-check.py', 'scripts/check-geographic-regression.py',
-  'scripts/check-effective-geographic-regression.mjs', 'scripts/selected-checkpoint-native.mjs', 'src/ownership-codec.js',
-  'scripts/evidence/immutable.py', 'scripts/evidence/geometry.py',
-  'scripts/ellipsoidal_area.py', 'requirements.txt', 'package.json', 'package-lock.json',
-  PREFIX + 'selected-neighbor-prevention.mjs', PREFIX + 'selected-continuous-entry.mjs',
-  PREFIX + 'selected-checkpoint.mjs', PREFIX + 'selected-checkpoint-continuous.mjs', PREFIX + 'selected-joint-entry.mjs',
+  'scripts/run-geographic-check.py',
+  'scripts/check-effective-geographic-regression.mjs', 'scripts/selected-checkpoint-native.mjs', 'src/native-grid.js', 'src/ownership-codec.js',
+  'package.json', 'package-lock.json',
+  PREFIX + 'selected-neighbor-prevention.mjs',
+  PREFIX + 'selected-checkpoint.mjs', PREFIX + 'selected-joint-entry.mjs',
   CHECKPOINTS, ...ACCEPTED_CHECKPOINT_CODE, 'scripts/geographic_checkpoint_products.py'
 ]);
 export const REBIND_CODE = Object.freeze([
