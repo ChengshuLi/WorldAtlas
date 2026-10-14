@@ -29,7 +29,7 @@ Inspect Issues, assignments, comments and active PRs before claiming scope. Post
 - `Refs #N` for partial work; the issue stays open.
 - `Closes #N` for final work only after its complete acceptance criteria and required live verification are met.
 
-Use exactly one of those canonical lines in the PR body. The old `TODO:` ID is optional historical context, not a second tracker. A focused PR may cite source evidence/dependencies without closing other issues. Report milestones, blockers, evidence and next actions in issue comments with dates. The GitHub issue is the authoritative completion record.
+Use exactly one of those canonical lines in the PR body. A focused PR may cite source evidence/dependencies without closing other issues. Report milestones, blockers, evidence and next actions in issue comments with dates. The GitHub issue is the authoritative completion record.
 
 Create a fresh unique lane branch from current `origin/main` for every PR, including subsequent PRs on the same large issue. Never accumulate unrelated work or reuse a merged branch. Unique IDs match `[a-z0-9][a-z0-9-]{0,63}`. Use isolated worktrees; inspect unmerged branches and do not switch another thread's checkout. Resume an active job/campaign serially, with one writer.
 
