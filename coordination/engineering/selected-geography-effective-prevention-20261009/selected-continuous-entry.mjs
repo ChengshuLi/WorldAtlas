@@ -7,7 +7,7 @@ import {createHash} from 'node:crypto';
 import {gzipSync,gunzipSync} from 'node:zlib';
 const FILE=33554432,ROOT=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../../..');
 const P='coordination/engineering/selected-geography-effective-prevention-20261009/';
-const CODE=[P+'selected-continuous-entry.mjs',P+'selected-neighbor-prevention.mjs','scripts/check-effective-geographic-regression.mjs','src/ownership-codec.js','scripts/run-geographic-check.py','scripts/check-geographic-regression.py','scripts/evidence/immutable.py','scripts/evidence/geometry.py','scripts/ellipsoidal_area.py','requirements.txt'];
+const CODE=[P+'selected-continuous-entry.mjs',P+'selected-neighbor-prevention.mjs','scripts/check-effective-geographic-regression.mjs','src/native-grid.js','src/ownership-codec.js','scripts/run-geographic-check.py','scripts/check-geographic-regression.py','scripts/evidence/immutable.py','scripts/evidence/geometry.py','scripts/ellipsoidal_area.py','requirements.txt'];
 const demand=(v,m)=>{if(!v)throw Error(m);},sha=b=>createHash('sha256').update(b).digest('hex');
 const coldGc=globalThis.gc;
 function timedStage(name, details, run) {

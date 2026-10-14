@@ -290,3 +290,56 @@ All 32 MiB whole encoded/decoded member, 256 MiB phase and 512 opened descriptor
 limits remain. A prior oversized paired attempt stays refused. This changes buffer
 lifetime and admission, not scientific geometry/native reconstruction, ownership
 selection, source approval or activation.
+
+
+## Permanent visible-gap repair eligibility
+
+Every new gap repair must change an actual displayed ownership cell. All thematic
+and hierarchy modes use the same fixed native ownership grid; changing a mode
+only changes its presentation. Eligibility is visibility at a supported close
+zoom, not guaranteed visibility in the initial world overview.
+
+The historical 95,173-component source-relative geometric inventory is not a
+visible-gap or repairable-gap denominator. Preserve it as geometric evidence.
+Its older one-cell probes include 65,032 positive witnesses, but the remaining
+30,141 failed/unknown probes are not proven invisible, and none of these counts
+is a current selected-map census. A current complete visible inventory has not
+been established by this implementation.
+
+Use `screenNativeGapCandidates` in `scripts/check-effective-geographic-regression.mjs` before
+expensive source/native repair work. Supply the exact candidate geometries,
+pinned normative latitude bytes and complete current effective owner rows,
+including the selected cumulative patch. It calls the renderer's exact native
+sampling operator. A positive result requires an unassigned native cell inside
+the candidate; neither area nor bounding-box size substitutes for that witness.
+No minimum island fill or separate thematic-mode rasterizer is introduced.
+
+- `visible`: at least one current owner-zero witness. Partial scans retain a
+  lower bound and null full counts.
+- `invisible`: the complete relevant native row scope was checked and yields no
+  current owner-zero cell; distinguish no native sample from already covered.
+- `unknown`: an incomplete negative scan. A failed representative probe stays
+  here until a complete relevant scan establishes otherwise.
+
+Rows bind `current_selection_sha256` (canonical sorted-key JSON plus newline,
+including the additive selector), `patch_sha256` (the pinned whole patch bytes),
+`geometry_sha256`, source family/product, native containing assets, bounds and
+required/checked half-open row extents. Share <=4096-row native blocks across
+candidates and group by source and containing assets; do not rescan all 262,166
+latitudes separately for each global inventory component. Visibility is an
+execution prerequisite, not source/target approval.
+
+At the actual requested baseline-to-candidate native comparison, both the cold
+and checkpoint paths refuse new zero-cell primitives. Each new positive
+primitive must have a literal native sample changing from owner zero to its
+approved target in the actual complete before/after rows. A positive total or
+an unrelated sibling's cell is insufficient. Existing accepted zero-cell rows
+and historical checkpoint traversal are preserved unchanged. The result's
+`repair_visibility` lists the new components and exact cell witnesses.
+
+Current rebind validation authenticates the original executed code, request,
+issuer and output bytes, then independently reacquires current source/native
+operands and recomputes the complete result. An unrelated change to today's
+validator or wrapper does not require a historical generation registration.
+Original source authority, numerical schemas, full result equality and owner
+conservation still apply.
