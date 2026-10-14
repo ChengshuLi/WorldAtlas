@@ -9,7 +9,7 @@ import {ImmutableReader, NativeAssetImage, decodeVisibilityLatitudes} from '../.
 import {unshuffleOwnershipBytes} from '../../../src/ownership-codec.js';
 import {valueBytes, valueSha, coordinateBounds, nativeBaseSelection,
   normaliseRetainedRepairLedger, readRetainedRegistryAuthority, validateSupportedProgrammeCatalogue,
-  compatibleCurrentRebindCode, CURRENT_REBIND_CODE, verifyCurrentRebindExecution, validateCurrentRebindLimits,
+  CURRENT_REBIND_CODE, verifyCurrentRebindExecution, validateCurrentRebindLimits,
   currentRebindResult, currentRebindAcquisitionIdentity, retainedArcticNativeRows} from './selected-neighbor-prevention.mjs';
 
 const FILE = 33554432;
@@ -872,10 +872,8 @@ function expectedNativeAcquisition(proof, neededRows) {
 }
 function authenticateProducerExecution(session,reader,products,bodyPins) {
   const {certificate,request,facts,publication,operating}=products;
-  const code=CURRENT_REBIND_CODE.map(name => { const p=reader.descriptor(name,session.trusted); return {path:name,bytes:p.bytes,sha256:sha(reader.read(name,{version:session.trusted}))}; });
-  const historical=CURRENT_REBIND_CODE.map(name => { const p=reader.descriptor(name,certificate.execution_commit); return {path:name,bytes:p.bytes,sha256:sha(reader.read(name,{version:certificate.execution_commit}))}; });
-  const expectedCode=compatibleCurrentRebindCode(certificate.execution_commit,code,historical,reader);
-  demand(same(request.executed_code,expectedCode),'Unknown complete current producer programme');
+  const expectedCode=CURRENT_REBIND_CODE.map(name => { const p=reader.descriptor(name,certificate.execution_commit); return {path:name,bytes:p.bytes,sha256:sha(reader.read(name,{version:certificate.execution_commit}))}; });
+  demand(same(request.executed_code,expectedCode),'Original producer execution vector differs');
   // Reuse the accepted producer's exact required/optional bounded contract.
   // Its complete limits remain bound to the authenticated original issued plan.
   validateCurrentRebindLimits(request.limits);

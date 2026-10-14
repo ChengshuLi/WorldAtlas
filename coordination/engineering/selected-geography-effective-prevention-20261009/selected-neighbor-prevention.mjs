@@ -972,41 +972,6 @@ export function acquireCurrentRebindOperands(snapshot,registry,originalRows,orig
   limits:['Actual selected before-state acquisition and exact applicability only. Original registry/source/native authority must also be authenticated by the committed reader; no activation or physical approval.','External cold operating qualification and repeated whole outputs remain mandatory before publishing a current_rebind certificate.']});
 }
 
-// Retained qualification stays bound to its original whole execution vector.
-// Only reviewed custody/entry boundaries may differ; numerical methods remain
-// byte-identical and current applicability is independently reacquired below.
-export function compatibleCurrentRebindCode(executionCommit,currentCode,historicalCode,reader) {
- demand(same(currentCode.map(p=>p.path),CURRENT_REBIND_CODE)&&same(historicalCode.map(p=>p.path),CURRENT_REBIND_CODE),'Incomplete current/historical method roster');
- if(same(currentCode,historicalCode))return historicalCode;
- // Current custody/readback boundaries are trusted executing code, not a new
- // historical run. Operating-only workspace admission likewise cannot change
- // retained science. Keep every original descriptor in historical authentication;
- // only remove this cross-vintage comparison. Current operands/results are still
- // independently acquired and compared by readCurrentRebindCustody below.
- const boundaries=new Set(['coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs','coordination/engineering/additive-native-composition-20261009/capture-current-rebind.mjs','coordination/engineering/additive-native-composition-20261009/run-current-rebind.mjs','scripts/local-workspace.mjs','scripts/worker-identity.mjs']);
- if(reader){const policy=readSupportedProgrammeCatalogue(reader);
-  // A reviewed complete current vector remains admitted when a later run
-  // retains it as history. Authenticate all historical bytes, including the
-  // boundaries; only the independently executing current boundary may differ.
-  if(policy.catalogue.current_rebind_migrations.some(p=>((p.execution_commit===executionCommit&&same(p.historical_code,historicalCode))||same(p.current_code,historicalCode))
-   &&currentCode.every((current,i)=>boundaries.has(current.path)||same(current,p.current_code[i]))))return historicalCode;
- }
- demand((executionCommit==='46cb67a6cc0f88c6295d2d70da654baa5c6119a0'&&valueSha(historicalCode)==='e20767cd7f4aea34c1c1ce794bd09c43993905ac8da94779781c616ccd7c20ee')||(executionCommit==='c192aa5c88df9a55594b62f7dcfa6e4226f59682'&&valueSha(historicalCode)==='8542f8b0d2d41e6dc1a31090a91a47cbe383f3ab173f547a4c07aaeb8bb74284')||(executionCommit==='0eefe294390894f66c33e24e7950f21012d3791c'&&valueSha(historicalCode)==='ff910e210d83648c50608a0295a95b7ab1c5840f2f7eb678508cb7e02afe3c1d')||(executionCommit==='16c35b9188d130b060fc2dcf4e917983d42d9db1'&&valueSha(historicalCode)==='4ad24312546806ee47126994436d335e81a851eba499bc3607b232c76bf41d7b')||(executionCommit==='bb73f014366ed7e7b10a54a4fb3b2113e8743d66'&&valueSha(historicalCode)==='41ed51a21ff438fb51533664c6308a3120f245af5c260eec90b028cc21d1431e')||(executionCommit==='75d5a33e52b8d960875055a91ea3b1ed82ad6d71'&&valueSha(historicalCode)==='4ba0e3b564611248d428613c33bd60cf68a99233f2db572f3893a7d46dda429a'),'Unknown historical rebind qualification generation');
- // Exact reviewed Linux issuer/supervisor pairs; the complete historical vector
- // guard above still applies. No other runtime or method body is exempt.
- const linuxRunnerPairs={"46cb67a6cc0f88c6295d2d70da654baa5c6119a0":[{"path":"coordination/engineering/additive-native-composition-20261009/issue-current-rebind-execution.py","old":{"bytes":4199,"sha256":"4320d550b8f1dbe333feb6a47608da0d001394cc14d1ae194a66e2054d089536"},"current":{"bytes":23671,"sha256":"37d6e02607204302fc01c5d3d6652c89a937e5e84acaa71fb25f5ddc7bcdf5e8"}},{"path":"coordination/engineering/additive-native-composition-20261009/supervise-current-rebind.py","old":{"bytes":11664,"sha256":"eda97761561ed61b5fdb4f1a0bfe3b94a440ff625bf8c1780934a6bbede780ea"},"current":{"bytes":20660,"sha256":"5be26c44ef36a097a24c82dab89a91693c94065278f5e15aeb57b0d295755345"}}],"c192aa5c88df9a55594b62f7dcfa6e4226f59682":[{"path":"coordination/engineering/additive-native-composition-20261009/issue-current-rebind-execution.py","old":{"bytes":4199,"sha256":"4320d550b8f1dbe333feb6a47608da0d001394cc14d1ae194a66e2054d089536"},"current":{"bytes":23671,"sha256":"37d6e02607204302fc01c5d3d6652c89a937e5e84acaa71fb25f5ddc7bcdf5e8"}},{"path":"coordination/engineering/additive-native-composition-20261009/supervise-current-rebind.py","old":{"bytes":11664,"sha256":"eda97761561ed61b5fdb4f1a0bfe3b94a440ff625bf8c1780934a6bbede780ea"},"current":{"bytes":20660,"sha256":"5be26c44ef36a097a24c82dab89a91693c94065278f5e15aeb57b0d295755345"}}],"0eefe294390894f66c33e24e7950f21012d3791c":[{"path":"coordination/engineering/additive-native-composition-20261009/issue-current-rebind-execution.py","old":{"bytes":4199,"sha256":"4320d550b8f1dbe333feb6a47608da0d001394cc14d1ae194a66e2054d089536"},"current":{"bytes":23671,"sha256":"37d6e02607204302fc01c5d3d6652c89a937e5e84acaa71fb25f5ddc7bcdf5e8"}},{"path":"coordination/engineering/additive-native-composition-20261009/supervise-current-rebind.py","old":{"bytes":11664,"sha256":"eda97761561ed61b5fdb4f1a0bfe3b94a440ff625bf8c1780934a6bbede780ea"},"current":{"bytes":20660,"sha256":"5be26c44ef36a097a24c82dab89a91693c94065278f5e15aeb57b0d295755345"}}],"16c35b9188d130b060fc2dcf4e917983d42d9db1":[{"path":"coordination/engineering/additive-native-composition-20261009/issue-current-rebind-execution.py","old":{"bytes":4199,"sha256":"4320d550b8f1dbe333feb6a47608da0d001394cc14d1ae194a66e2054d089536"},"current":{"bytes":23671,"sha256":"37d6e02607204302fc01c5d3d6652c89a937e5e84acaa71fb25f5ddc7bcdf5e8"}},{"path":"coordination/engineering/additive-native-composition-20261009/supervise-current-rebind.py","old":{"bytes":11664,"sha256":"eda97761561ed61b5fdb4f1a0bfe3b94a440ff625bf8c1780934a6bbede780ea"},"current":{"bytes":20660,"sha256":"5be26c44ef36a097a24c82dab89a91693c94065278f5e15aeb57b0d295755345"}}],"bb73f014366ed7e7b10a54a4fb3b2113e8743d66":[{"path":"coordination/engineering/additive-native-composition-20261009/issue-current-rebind-execution.py","old":{"bytes":4199,"sha256":"4320d550b8f1dbe333feb6a47608da0d001394cc14d1ae194a66e2054d089536"},"current":{"bytes":23671,"sha256":"37d6e02607204302fc01c5d3d6652c89a937e5e84acaa71fb25f5ddc7bcdf5e8"}},{"path":"coordination/engineering/additive-native-composition-20261009/supervise-current-rebind.py","old":{"bytes":11664,"sha256":"eda97761561ed61b5fdb4f1a0bfe3b94a440ff625bf8c1780934a6bbede780ea"},"current":{"bytes":20660,"sha256":"5be26c44ef36a097a24c82dab89a91693c94065278f5e15aeb57b0d295755345"}}],"75d5a33e52b8d960875055a91ea3b1ed82ad6d71":[{"path":"coordination/engineering/additive-native-composition-20261009/issue-current-rebind-execution.py","old":{"bytes":4199,"sha256":"4320d550b8f1dbe333feb6a47608da0d001394cc14d1ae194a66e2054d089536"},"current":{"bytes":23671,"sha256":"37d6e02607204302fc01c5d3d6652c89a937e5e84acaa71fb25f5ddc7bcdf5e8"}},{"path":"coordination/engineering/additive-native-composition-20261009/supervise-current-rebind.py","old":{"bytes":11664,"sha256":"eda97761561ed61b5fdb4f1a0bfe3b94a440ff625bf8c1780934a6bbede780ea"},"current":{"bytes":20660,"sha256":"5be26c44ef36a097a24c82dab89a91693c94065278f5e15aeb57b0d295755345"}}]};
- for(let i=0;i<currentCode.length;i++)if(!boundaries.has(currentCode[i].path)){
-  const a=currentCode[i],b=historicalCode[i];
-  const visibilityOnly=a.path==='scripts/check-effective-geographic-regression.mjs'&&b.sha256==='992257b3a50f790c5f859104c67a3e6f4cf75f8c341440fff78b0dd32b95fab9'&&b.bytes===75045&&a.sha256==='801ad9f05a8d7f34ae591ee78a09b71c87090acd4d20c92c9831152528a9c039'&&a.bytes===75074;
-  const partialSchemaOnly=a.path==='src/effective-footprint.js'&&b.sha256==='30c524aba3e556d4d92508306a6b76b760a51cf08715457ece72646ee9b5921c'&&b.bytes===42862&&a.sha256==='0f971449c093ad728495dc05da9a047872c4b57c55bc75fd79012fbcb3db7e65'&&a.bytes===44682;
-  const fullSchemaOnly=executionCommit==='16c35b9188d130b060fc2dcf4e917983d42d9db1'&&a.path==='src/effective-footprint.js'&&b.sha256==='0f971449c093ad728495dc05da9a047872c4b57c55bc75fd79012fbcb3db7e65'&&b.bytes===44682&&a.sha256==='29a2d9867aa8ffae8645559b34e1638a007cc1504f99ef766ef9c44176491e91'&&a.bytes===44784;
-  const originalNclSchemaOnly=executionCommit==='bb73f014366ed7e7b10a54a4fb3b2113e8743d66'&&a.path==='src/effective-footprint.js'&&b.sha256==='29a2d9867aa8ffae8645559b34e1638a007cc1504f99ef766ef9c44176491e91'&&b.bytes===44784&&a.sha256==='28edb52a2befd80b73e0ce62fa3f7de51cada4f9894aab32e5ff2761f1fe0745'&&a.bytes===45330;
-  const linuxRunnerOnly=linuxRunnerPairs[executionCommit]?.some(p=>a.path===p.path&&b.path===p.path&&a.bytes===p.current.bytes&&a.sha256===p.current.sha256&&b.bytes===p.old.bytes&&b.sha256===p.old.sha256);
-  demand(same(a,b)||visibilityOnly||partialSchemaOnly||fullSchemaOnly||originalNclSchemaOnly||linuxRunnerOnly,'Historical numerical method or runtime body differs');
- }
- return historicalCode;
-}
-
 // A current rebind is complete data custody plus independently recomputed
 // applicability. It never replaces the original registry/source authority.
 // Preserve completed-frame peaks after a later complete phase resets used.
@@ -1045,12 +1010,12 @@ export function readCurrentRebindCustody(reader,pin,{baseSelection,registry,orig
  demand(reader.used+metadata<=reader.phaseLimit,'Complete current rebind custody admission before body opens');reader.used+=metadata;
  for(const {name,p}of roster){const actual=reader.descriptor(p.path,p.commit);demand(actual.mode===p.mode&&actual.git_blob_oid===p.git_blob_oid&&actual.bytes===p.bytes,'Whole rebind product mode/OID/length differs');if(name!=='result')reader.admit(actual);}
  demand(/^[a-f0-9]{40}$/.test(certificate.execution_commit),'Missing actual rebind execution identity');
- const code=CURRENT_REBIND_CODE.map(path=>reader.descriptor(path));
  const historicalCode=CURRENT_REBIND_CODE.map(path=>reader.descriptor(path,certificate.execution_commit));
- for(const p of [...code,...historicalCode])reader.admit(p);
- const currentCode=code.map(p=>({path:p.path,bytes:p.bytes,sha256:sha(reader.read(p.path))}));
- const originalCode=historicalCode.map(p=>({path:p.path,bytes:p.bytes,sha256:sha(reader.read(p.path,{version:p.commit}))}));
- const expectedCode=compatibleCurrentRebindCode(certificate.execution_commit,currentCode,originalCode,reader);
+ for(const p of historicalCode)reader.admit(p);
+ // Authenticate what originally executed. Current wrapper bytes are not a
+ // historical generation: current operands and complete results are recomputed
+ // below under the current trusted validator, without a cross-vintage whitelist.
+ const expectedCode=historicalCode.map(p=>({path:p.path,bytes:p.bytes,sha256:sha(reader.read(p.path,{version:p.commit}))}));
  const bodies=Object.fromEntries(earlyRoster.map(({name,p})=>[name,JSON.parse(reader.read(p.path,{version:p.commit,expected:p.sha256}))]));
  // External custody verifies the original vector; current acquisition below
  // executes the current trusted closure without relabelling historical runs.
@@ -1082,7 +1047,7 @@ export function readCurrentRebindCustody(reader,pin,{baseSelection,registry,orig
  bodies.request=null;
  reclaimCompletedRebindFrame();
  const priorPhaseBytes=reader.used;
- const liveMetadata=carriedMetadataBytes+2*(valueBytes({certificate,bodies,acquisitionSpec,code,historicalCode,currentCode,originalCode,roster,externalRoster,...(issuedOriginalInputs===undefined?{}:{issuedOriginalInputs})}).length+externalBytes);
+ const liveMetadata=carriedMetadataBytes+2*(valueBytes({certificate,bodies,acquisitionSpec,historicalCode,expectedCode,roster,externalRoster,...(issuedOriginalInputs===undefined?{}:{issuedOriginalInputs})}).length+externalBytes);
 
  const acquired=acquireCurrentRebindOperands(snapshot,registry,originalRows,originalPatches,{...acquisitionSpec,carriedMetadataBytes:liveMetadata});
  // Preserve the complete live-table/result peak before the reopen frame resets.
@@ -1090,7 +1055,7 @@ export function readCurrentRebindCustody(reader,pin,{baseSelection,registry,orig
  // Complete raw row/run frames have returned. All acquired result/rows/targets,
  // source/native custody and the full selected snapshot stay live and charged.
  reclaimCompletedRebindFrame();
- reader.metadataBytes=8*1048576+2*snapshot.metadataBytes+carriedMetadataBytes+2*(valueBytes({certificate,bodies,acquisitionSpec,code,historicalCode,currentCode,originalCode,roster,externalRoster,acquired,...(issuedOriginalInputs===undefined?{}:{issuedOriginalInputs})}).length+externalBytes)+(snapshot.acquisition_buffer_bytes??0);reader.phase();
+ reader.metadataBytes=8*1048576+2*snapshot.metadataBytes+carriedMetadataBytes+2*(valueBytes({certificate,bodies,acquisitionSpec,historicalCode,expectedCode,roster,externalRoster,acquired,...(issuedOriginalInputs===undefined?{}:{issuedOriginalInputs})}).length+externalBytes)+(snapshot.acquisition_buffer_bytes??0);reader.phase();
  for(const name of ['request','result']){
   const {p}=roster.find(row=>row.name===name);
   // Encoded bytes plus parsed/canonical/expected-result scratch are reserved
