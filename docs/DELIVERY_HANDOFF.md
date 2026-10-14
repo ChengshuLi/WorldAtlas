@@ -135,6 +135,29 @@ It never rewrites, repairs or blesses a partial directory. A changed config,
 input, result, head or body needs a fresh vintage. Commit boundaries above are
 intentional: immutable future pins cannot be predicted by bookkeeping.
 
+## Reuse accepted methods; declare only consumed package roles
+
+An ordinary data-only batch should reference applicable accepted helpers and their
+immutable pins instead of copying unchanged executable scripts into a new packet.
+Retain the new inputs/results and concise reproduction instructions; a new method
+or changed executable still needs ordinary code review and its applicable tests.
+Unchanged ordinary leaves reached through the existing fixed reader roles are
+classified by exact accepted-baseline/candidate Git identity, regardless of suffix.
+That test-selection decision does not replace whole-byte scientific validation or
+current executed-code authentication.
+
+`selected-delivery-expectations.json` is checkout-side test metadata read by the
+existing smoke runner, not a runtime package input. Keep it in the reviewed packet,
+but do not append it to `.github/package-inputs.json` merely because preparation
+emitted it. Preserve prior declarations and append actual consumed roles using the
+existing `finalizedPackageInputs` constructor, not a copied packet filename list.
+The current `package`/`finalize` projection walks the original issued-rule binding
+shape (`original_pins`/`native_proof`); it is not a source-target-native constructor.
+For that distinct binding shape, derive the exact role list from its existing
+reader and validate the actual package/consumer rather than assuming the legacy
+projection supports it. Do not copy old source algorithms or add a new validator
+just to prepare another batch.
+
 ## Retained current13 metadata example
 
 `coordination/engineering/delivery-handoff-20261011/current13-requests.json`,

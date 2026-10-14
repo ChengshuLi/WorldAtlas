@@ -284,8 +284,15 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
     needSelected(selection.version === 1 && selection.method === 'native-linear-evenodd-first-owner-v1' &&
       selection.artifact_consumption && same(oldBase, newBase) && !same(oldHook, hook), 'selection changes method/base authority');
     const reachable = new Set(), nativeOperands = new Set(), identities = new Map();
+    const unchangedRole = name => {
+      const before = baseline.entries.get(name), after = authored.entries.get(name);
+      return ordinary(before) && ordinary(after) && before.sha === after.sha && before.size === after.size;
+    };
+    // The fixed walk may retain accepted code or binary sources. Their exact
+    // unchanged tree identity, not their suffix, establishes that this PR adds
+    // no executable change. New leaves keep the inert/native-operand boundary.
     const pin = value => {
-      needSelected(value && safe(value.path) && (/\.(?:json|jsonl\.gz|json\.gz|log)$/.test(value.path) || nativeOperands.has(value.path)) &&
+      needSelected(value && safe(value.path) && (unchangedRole(value.path) || /\.(?:json|jsonl\.gz|json\.gz|log)$/.test(value.path) || nativeOperands.has(value.path)) &&
         hash(value.sha256) && Number.isSafeInteger(value.bytes) && value.bytes >= 0, 'invalid inert role pin');
       const row = authored.entries.get(value.path);
       needSelected(ordinary(row) && row.size === value.bytes &&
@@ -809,10 +816,6 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       needSelected(administrative && administrative.length > previous.length && same(previous, administrative.slice(0, previous.length)) &&
         administrative.slice(previous.length).every(entry => usedRegistrations.has(entry.id)), 'registry is not append-only selected SOURCE data');
     }
-    const unchangedRole = name => {
-      const before = baseline.entries.get(name), after = authored.entries.get(name);
-      return ordinary(before) && ordinary(after) && before.sha === after.sha && before.size === after.size;
-    };
     // Package declarations can introduce already accepted original proof roles.
     // File creation time is not scientific authority: typed reachability plus
     // exact unchanged Git identity is required for these retained leaves.
