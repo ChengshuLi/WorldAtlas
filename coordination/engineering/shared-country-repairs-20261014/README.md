@@ -1,0 +1,11 @@
+# Joint retained native repair delivery
+
+Issue #1930 combines 6,340 already qualified cells: Indonesia 3,279 (Bintan 3,088 and Tanjung Pinang 191), Vietnam 465 (185 direct and Da Nang 280), Myanmar 2,596 (Hpapun 18, Ponnagyun 161, Rathedaung 740, Kyaukpyu 1,677). Original source evidence, full constructor results, patch tuples, classes and witnesses remain pinned unchanged in incoming-authorities.json and the seven receiving rule/binding pairs.
+
+Accepted stock compose and finalize at 35a549b7 both completed from the actual accepted 9d647749 selector. The candidate contains 67,009 native cells, 57 authorities and 262 literal rows. All 60,669 accepted additive cells and 249 literal rows, full inherited rebind and current targets remain preserved. The selector retains original key order. The package preserves all 1,143 declarations in literal order, appending 41 exact roles. Twenty absent original roles are restored byte-for-byte. Only one new authoritative selected-delivery-expectations.json is committed here; the finalizer staging bundle remains local.
+
+Composition completed in 2.79 seconds with 177,913,856-byte external peak RSS; finalization completed in 7.23 seconds with 226,705,408-byte peak. Each used the stock command and a freshly admitted 512 MiB phase. No source, GSHHG, physical producer or constructor replay occurred.
+
+Original scientific limits remain: the Myanmar 901-cell pair retains per-target checked observations from the failed fourteen-target operating envelope; Kyaukpyu exclusively retains its separate successful corrected retry. Bintan retains original reconstruction and hierarchy witnesses and the established source policy; an empty additional territorial-exclusion array does not certify an international border or a complete administrative parent. Da Nang retains its complete seven-member aggregate and all five witnesses. All original parent, water, relative, source-conflict and border holds remain outside this patch.
+
+This is a proposed selected delivery. Current native owner-zero, water/location and conservation readback, emitted-output checks, exact-head review and ordinary integration remain required. No new acceptance credit or deployment is claimed.

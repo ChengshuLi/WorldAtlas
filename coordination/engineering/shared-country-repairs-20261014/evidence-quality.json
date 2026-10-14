@@ -18,7 +18,7 @@
     "gb:VNM:ADM2:81297802B72056692107631",
     "gb:VNM:ADM2:81297802B7702852417854"
   ],
-  "status": "qualified-input-checkpoint-no-selected-consumption-yet",
+  "status": "qualified-composed-finalized-candidate-awaiting-selected-consumer",
   "claims": {
     "proposed_cells": 6340,
     "source_groups": 7,
@@ -394,5 +394,13 @@
     "Actual current-owner-zero/nativewater/location/conservation, final emitted consumer/candidate/integration remain pending.",
     "Preserve actual accepted Myr3816 append and literal package prefix; no SOURCE/GSHHG producer replay.",
     "All original relative/water/parent/territorial/source-conflict holds stay outside this exact proposed6340-cell patch."
-  ]
+  ],
+  "actual_composition": {
+    "cumulative_native_cells": 67009,
+    "authorities": 57,
+    "literal_rows": 262,
+    "inherited_literal_rows_preserved": 249,
+    "current_rebind_preserved": true,
+    "current_targets_preserved": true
+  }
 }

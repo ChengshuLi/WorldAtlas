@@ -1,0 +1,325 @@
+{
+  "reviewer": "/root/rakhine_2578_inputs",
+  "disposition": "Accepted with limits for pre-final literal Myanmar contribution review; no blocking scientific contribution/custody finding.",
+  "input_checkpoint": "c02deece7e9fcecf50534d8d6cac005d6dc18c83",
+  "baseline": {
+    "commit": "9d64774976ce8ecbcd4d9f390f3fddab2943fe1b",
+    "cells": 60669,
+    "all_original_patch_cells_preserved": true,
+    "all_original_raw_ledger_rows_preserved": true,
+    "all_original_authority_entries_preserved": true,
+    "parent_inventory_current_rebind_current_targets_equal": true,
+    "accepted_Myanmar3816_inherited_unchanged": true
+  },
+  "composition": {
+    "cells": 67009,
+    "new_cells": 6340,
+    "Myanmar_new_cells": 2596,
+    "Myanmar_groups": 3,
+    "Myanmar_components": 4,
+    "exact_original_patch_cells_disjoint_from_baseline_each_other": true,
+    "unreviewed_Tanintharyi6_absent": true
+  },
+  "contributions": [
+    {
+      "owner": 30104,
+      "cells": 161,
+      "component": "source-target:4108f7235f6e2582f68409eee00f0f252a9e5aa501673eb5f8b651ee54f1df51",
+      "original_constructor_row_literal_preserved": true,
+      "source_stage_physical_full_descriptors_authenticated": true,
+      "queries": 16,
+      "issues": [
+        "contradictory_land_water_support"
+      ],
+      "physical_commit": "ed1a922ce64ad75dddcbfb5711ad3dad73d3cb3c",
+      "physical_path": "coordination/engineering/myanmar-adm3-current-cells-20261014/rakhine-repair-001/evidence/physical-support.json"
+    },
+    {
+      "owner": 30332,
+      "cells": 740,
+      "component": "source-target:c47f3ee5c485866d3966f021e0c4fa9647899bcaa7faf61bc7667e17adc435fb",
+      "original_constructor_row_literal_preserved": true,
+      "source_stage_physical_full_descriptors_authenticated": true,
+      "queries": 6,
+      "issues": [
+        "contradictory_land_water_support"
+      ],
+      "physical_commit": "ed1a922ce64ad75dddcbfb5711ad3dad73d3cb3c",
+      "physical_path": "coordination/engineering/myanmar-adm3-current-cells-20261014/rakhine-repair-001/evidence/physical-support.json"
+    },
+    {
+      "owner": 30100,
+      "cells": 1677,
+      "component": "source-target:7db9414ce4819211a245fab57a9f620bfd8b8fce436cad548b22e48f4349a5bc",
+      "original_constructor_row_literal_preserved": true,
+      "source_stage_physical_full_descriptors_authenticated": true,
+      "queries": 83,
+      "issues": [
+        "contradictory_land_water_support"
+      ],
+      "physical_commit": "c9c33c777bd01c5214a372ebc3718eed0aa10271",
+      "physical_path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/kyaukpyu-physical/physical-support.json"
+    },
+    {
+      "owner": 30135,
+      "cells": 18,
+      "component": "source-target:8035141d15b09e07bce144e4e87af316241f7d7f5c41e220a480eeffb9494771",
+      "original_constructor_row_literal_preserved": true,
+      "source_stage_physical_full_descriptors_authenticated": true,
+      "queries": 1,
+      "issues": [],
+      "physical_commit": "6899dbf6b695735fdbb621288048de31fc74b29e",
+      "physical_path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/hpapun-physical/physical-support.json"
+    }
+  ],
+  "preservation": [
+    "Original901physical result retains failed14 envelope with complete16/6individual observations; not relabeled successful.",
+    "Kyaukpyu1677uses separate successful physical retry ac83bd...; no interrupted-row substitution.",
+    "Full immutable source evidence, physical results, stage, original selectedbase geometries and actual constructor rows remain byte/record bound through original handoffs and received authority registry.",
+    "Alloriginal25parentheld/23water/2925relativeRakhine holds remain outside exact2596patch; Hpapun nineteenthbordercell and other unresolved cohorts remain held.",
+    "Retained narrow source/reference/foreign limits remain; no wholeborder authority/parentexhaustiveness or legal sovereignty claim."
+  ],
+  "limits": [
+    "Static JSON/whole-byte/hash/tuple inspection only; no source/GSHHG/GIS/native/operator execution.",
+    "Pre-final scientific contribution review only: candidatehead/finalizer, actual currentownerzero/conservation/readback, normal integration and exacthead review remain pending.",
+    "No accepted repair credit or packagecompletion claimed."
+  ],
+  "locators": [
+    {
+      "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/shared-country-delivery-001/composition-products/patch.json",
+      "bytes": 736047,
+      "sha256": "bea10a485ebbfbbf0791b35a55f052061acb4b05da1dd7d0c77d604b97786a87"
+    },
+    {
+      "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/shared-country-delivery-001/composition-products/selected-ledger.json",
+      "bytes": 2423010,
+      "sha256": "ad7e7d2a8bfa60b8d3b8820a8f3be7970e6a768cc6fe990ceba353948752ecf0"
+    },
+    {
+      "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/shared-country-delivery-001/composition-products/authority-registry.json",
+      "bytes": 54841,
+      "sha256": "bcf388a577b8e72f16fe735e80f3b1f706bfe6ce9826417183d5381bd6a70e14"
+    },
+    {
+      "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/shared-country-delivery-001/composition-products/runtime-envelope.json",
+      "bytes": 1390,
+      "sha256": "d7b1442ebf59c0c953e79544df92d047379f1d1545c1af0c675d5024ef0a286a"
+    },
+    {
+      "commit": "9d64774976ce8ecbcd4d9f390f3fddab2943fe1b",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/combined3816-followup-001/selection-sidecar.json",
+      "bytes": 3528,
+      "sha256": "1691ceeb18ba8679277c9a9e992379d23dab0f27e8699a68367e80061104ef4d"
+    },
+    {
+      "commit": "aea926acee8177935480865b1f9aac4153df4004",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/combined3816-followup-001/delivery/patch.json",
+      "bytes": 682558,
+      "sha256": "db027f6cc5c188633cfa1e900ce5bf045621ae0cc6628778c01ad7b00be18538"
+    },
+    {
+      "commit": "aea926acee8177935480865b1f9aac4153df4004",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/combined3816-followup-001/delivery/selected-ledger.json",
+      "bytes": 2320071,
+      "sha256": "8378f2ef208048005088bc4ba757b107b56e5854fb1a8520586ff8000da4c994"
+    },
+    {
+      "commit": "aea926acee8177935480865b1f9aac4153df4004",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/combined3816-followup-001/delivery/authority-registry.json",
+      "bytes": 48261,
+      "sha256": "0f7d0000e0def700c1df5e55f28036535ebe2c051b9ed1202633bd986873dcb7"
+    },
+    {
+      "commit": "c02deece7e9fcecf50534d8d6cac005d6dc18c83",
+      "path": "coordination/engineering/shared-country-repairs-20261014/incoming-authorities.json",
+      "bytes": 29347,
+      "sha256": "68100b91799cb3af25c01447a6321af594711e9e2307dd7d2233a5af5f581f0b"
+    },
+    {
+      "commit": "5ce94327",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/line-conflict-native-preparation-001/combined-delivery-handoff.json",
+      "bytes": 4641,
+      "sha256": "c5f8396d9c566c461cdd3c828571bc9dbbf9487b079fb711061ccc5dd7e7a8ac"
+    },
+    {
+      "commit": "4cfb47e8",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/hpapun-native-observation-001/combined-delivery-handoff.json",
+      "bytes": 2503,
+      "sha256": "2b3523babc939074b78cbf0858146ebb7d94ad730063ad7bc67850a2aa3888c0"
+    },
+    {
+      "commit": "d76a8affe98c2d70dd6e3f20ef7b19a4c6c13f7e",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/rakhine901-authority-001/original-rule-preimage.json",
+      "bytes": 816,
+      "sha256": "116b173596b0a3873cf8a5237491a7f906b29cd109a388ae2a2df90b227fffa2"
+    },
+    {
+      "commit": "d76a8affe98c2d70dd6e3f20ef7b19a4c6c13f7e",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/rakhine901-authority-001/authority-binding.json",
+      "bytes": 819,
+      "sha256": "0928b2b14d7fa1769e4acc18e27ffa5192a3059222d3b0b803eb7962a077c362"
+    },
+    {
+      "commit": "d76a8affe98c2d70dd6e3f20ef7b19a4c6c13f7e",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/rakhine901-authority-001/constructor-result.json",
+      "bytes": 19405,
+      "sha256": "442a2ab558d90ff3ecb1b64962bc49b354184101436457494242f4eda785e768"
+    },
+    {
+      "commit": "c9c33c777bd01c5214a372ebc3718eed0aa10271",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/line-conflict/two-target-901-candidate-native-patch.json",
+      "bytes": 12661,
+      "sha256": "38070faf3af48734d780509e09497346902b0aeea69877c2dc196d100e572f6f"
+    },
+    {
+      "commit": "f3e8292345c2bfcfc9b3cde752daefc4312f08d9",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/line-conflict/two-target-901-source-evidence.json",
+      "bytes": 90929,
+      "sha256": "94f0c82fedb4c871b96c3ef978fd6906d151ff08d4a6df33a1f308ab2436848f"
+    },
+    {
+      "commit": "ed1a922ce64ad75dddcbfb5711ad3dad73d3cb3c",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/rakhine-repair-001/evidence/physical-support.json",
+      "bytes": 1503386,
+      "sha256": "a9b0c7a52f89f4c7ea4a327c593f9f13e3a0b555ae5f8a9b245da669977e3022"
+    },
+    {
+      "commit": "ed1a922ce64ad75dddcbfb5711ad3dad73d3cb3c",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/rakhine-repair-001/evidence/original-stage-inputs.json",
+      "bytes": 274149,
+      "sha256": "eb45ec000762dbb878b35950ca1352c7342e295ecc786538eb9977e8bb79c1ce"
+    },
+    {
+      "commit": "c02deece7e9fcecf50534d8d6cac005d6dc18c83",
+      "path": "coordination/engineering/shared-country-repairs-20261014/authorities/mmr-rakhine901/original-rule-preimage.json",
+      "bytes": 816,
+      "sha256": "116b173596b0a3873cf8a5237491a7f906b29cd109a388ae2a2df90b227fffa2"
+    },
+    {
+      "commit": "c02deece7e9fcecf50534d8d6cac005d6dc18c83",
+      "path": "coordination/engineering/shared-country-repairs-20261014/authorities/mmr-rakhine901/authority-binding.json",
+      "bytes": 819,
+      "sha256": "0928b2b14d7fa1769e4acc18e27ffa5192a3059222d3b0b803eb7962a077c362"
+    },
+    {
+      "commit": "c02deece7e9fcecf50534d8d6cac005d6dc18c83",
+      "path": "coordination/engineering/shared-country-repairs-20261014/authorities/mmr-rakhine901/original-rule-preimage.json",
+      "bytes": 816,
+      "sha256": "116b173596b0a3873cf8a5237491a7f906b29cd109a388ae2a2df90b227fffa2"
+    },
+    {
+      "commit": "c02deece7e9fcecf50534d8d6cac005d6dc18c83",
+      "path": "coordination/engineering/shared-country-repairs-20261014/authorities/mmr-rakhine901/authority-binding.json",
+      "bytes": 819,
+      "sha256": "0928b2b14d7fa1769e4acc18e27ffa5192a3059222d3b0b803eb7962a077c362"
+    },
+    {
+      "commit": "d76a8affe98c2d70dd6e3f20ef7b19a4c6c13f7e",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/kyaukpyu1677-authority-001/original-rule-preimage.json",
+      "bytes": 806,
+      "sha256": "8120a66316f26a3dcf4ede89c5962ef322f29d7917d20180fccecd0b191e084a"
+    },
+    {
+      "commit": "d76a8affe98c2d70dd6e3f20ef7b19a4c6c13f7e",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/kyaukpyu1677-authority-001/authority-binding.json",
+      "bytes": 809,
+      "sha256": "572310715295afa885064a2ac42a716187b1d23437bac8d331cbfb69c395b79c"
+    },
+    {
+      "commit": "d76a8affe98c2d70dd6e3f20ef7b19a4c6c13f7e",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/kyaukpyu1677-authority-001/constructor-result.json",
+      "bytes": 20207,
+      "sha256": "448bdbc2b5a5309ea890b7491bb59eb9409f3ec7b0c1a4fd8f9ed529adc665f8"
+    },
+    {
+      "commit": "c9c33c777bd01c5214a372ebc3718eed0aa10271",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/line-conflict/30100-candidate-native-patch.json",
+      "bytes": 16181,
+      "sha256": "59bc8fc415a66d75f754b7aa639e88cbb769a0df0acb7a24eb56ec321f7d5b94"
+    },
+    {
+      "commit": "f3e8292345c2bfcfc9b3cde752daefc4312f08d9",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/line-conflict/kyaukpyu-1677-source-evidence.json",
+      "bytes": 43279,
+      "sha256": "502ef769802b51935a17f47c7e966d7ad77f7ccfed841acc03222a6951a09fa2"
+    },
+    {
+      "commit": "c9c33c777bd01c5214a372ebc3718eed0aa10271",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/kyaukpyu-physical/physical-support.json",
+      "bytes": 272149,
+      "sha256": "ac83bd44612e601674ed0d72d6f23ee650c16bb417870f6cb85d1d59eb81abff"
+    },
+    {
+      "commit": "c9c33c777bd01c5214a372ebc3718eed0aa10271",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/kyaukpyu-physical/original-stage-inputs.json",
+      "bytes": 26116,
+      "sha256": "b2e053b9207ba027b58e054c6d29ae62b738a877cef8195c46fdcfe3283e27da"
+    },
+    {
+      "commit": "c02deece7e9fcecf50534d8d6cac005d6dc18c83",
+      "path": "coordination/engineering/shared-country-repairs-20261014/authorities/mmr-kyaukpyu1677/original-rule-preimage.json",
+      "bytes": 806,
+      "sha256": "8120a66316f26a3dcf4ede89c5962ef322f29d7917d20180fccecd0b191e084a"
+    },
+    {
+      "commit": "c02deece7e9fcecf50534d8d6cac005d6dc18c83",
+      "path": "coordination/engineering/shared-country-repairs-20261014/authorities/mmr-kyaukpyu1677/authority-binding.json",
+      "bytes": 809,
+      "sha256": "572310715295afa885064a2ac42a716187b1d23437bac8d331cbfb69c395b79c"
+    },
+    {
+      "commit": "695146c62adfa07b67b5ce6332f62ecb45f6d3c1",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/hpapun-authority-001/original-rule-preimage.json",
+      "bytes": 789,
+      "sha256": "9242f4334a48d57be374bb59f51e5bccd10bea91fff86d158d6c8e231dc4957f"
+    },
+    {
+      "commit": "695146c62adfa07b67b5ce6332f62ecb45f6d3c1",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/hpapun-authority-001/authority-binding.json",
+      "bytes": 792,
+      "sha256": "f1c15985ee499c7d5a20c3082f1fddbcbb343272f08d7db3a0872ad47836bcc1"
+    },
+    {
+      "commit": "695146c62adfa07b67b5ce6332f62ecb45f6d3c1",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/hpapun-authority-001/constructor-result.json",
+      "bytes": 7125,
+      "sha256": "6364ae4b16151f1bd704d9f5e4c70d7ecd61ff565baa649848fe2cf3a75ea268"
+    },
+    {
+      "commit": "c9c33c777bd01c5214a372ebc3718eed0aa10271",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/hpapun/candidate-native-patch.json",
+      "bytes": 627,
+      "sha256": "37bd0d911ec3d203d1c164d6c1695c4505c3f34a2f51a5b1930022ce2cf53cea"
+    },
+    {
+      "commit": "21cabde273d1145c33ff6c8da91c2e8e4f0642b9",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/hpapun-source-preparation/source-evidence.json",
+      "bytes": 30697,
+      "sha256": "bf38b07b6729921e540e7476f28181ac84803f875c14be5e5e60eedc594096a2"
+    },
+    {
+      "commit": "6899dbf6b695735fdbb621288048de31fc74b29e",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/hpapun-physical/physical-support.json",
+      "bytes": 34056,
+      "sha256": "8b9225b7acea065c9ee902b887f006ec7bf749792697852e35bf39f83fbe19a2"
+    },
+    {
+      "commit": "c9c33c777bd01c5214a372ebc3718eed0aa10271",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/hpapun/original-stage-inputs.json",
+      "bytes": 28132,
+      "sha256": "8d7738164b4cb44180228c07a400ca24a0890d413b6720be996653d0d58c3ee6"
+    },
+    {
+      "commit": "c02deece7e9fcecf50534d8d6cac005d6dc18c83",
+      "path": "coordination/engineering/shared-country-repairs-20261014/authorities/mmr-hpapun18/original-rule-preimage.json",
+      "bytes": 789,
+      "sha256": "9242f4334a48d57be374bb59f51e5bccd10bea91fff86d158d6c8e231dc4957f"
+    },
+    {
+      "commit": "c02deece7e9fcecf50534d8d6cac005d6dc18c83",
+      "path": "coordination/engineering/shared-country-repairs-20261014/authorities/mmr-hpapun18/authority-binding.json",
+      "bytes": 792,
+      "sha256": "f1c15985ee499c7d5a20c3082f1fddbcbb343272f08d7db3a0872ad47836bcc1"
+    }
+  ]
+}
