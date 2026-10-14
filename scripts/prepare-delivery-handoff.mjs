@@ -898,8 +898,8 @@ export function finalizeDelivery(config, reader) {
 
 const sourceProducts = ['original-stage-inputs.json', 'cohort-intervals.json', 'cohort-config.json',
   'source-qualification.json', 'execution-receipt.json'];
-function sourceBinding(raw) {
-  return {phase: 'source', config_sha256: digest(raw),
+function sourceBinding(raw, phase = 'source') {
+  return {phase, config_sha256: digest(raw),
     program_sha256: digest(fs.readFileSync(fileURLToPath(new URL('./qualify-source-cohort.py', import.meta.url)))),
     entry_sha256: digest(fs.readFileSync(fileURLToPath(import.meta.url)))};
 }
@@ -932,9 +932,11 @@ export function resumeSource(root, destination, config, binding, reader) {
 
 // The source probe has one data-configured scientific implementation. Admission
 // and exclusive publication stay in this existing delivery entry point.
-export async function sourceCohort(config, reader, root, destination) {
-  need(same(Object.keys(config).sort(), ['preparation_allowance', 'processing_allowance', 'runtime_inventory', 'source', 'version'])
-    && config.version === 1 && config.preparation_allowance && config.source?.version === 1,
+export async function sourceCohort(config, reader, root, destination, phase = 'source') {
+  need(['source', 'physical'].includes(phase), 'Unknown scientific delivery phase');
+  const phaseConfig = config[phase];
+  need(same(Object.keys(config).sort(), ['preparation_allowance', 'processing_allowance', 'runtime_inventory', phase, 'version'].sort())
+    && config.version === 1 && config.preparation_allowance && phaseConfig?.version === 1,
     'Explicit source configuration, runtime inventory and allowances required');
   need(same(Object.keys(config.processing_allowance ?? {}).sort(), ['phaseBytes', 'rssBytes']), 'Explicit source processing allowance required');
   const runtime = config.runtime_inventory;
@@ -942,7 +944,7 @@ export async function sourceCohort(config, reader, root, destination) {
     && runtime.files.length > 0 && runtime.files.length <= 512 && unique(runtime.files.map(pin => pin.path))
     && runtime.python?.bytes > 0 && runtime.files.some(pin => same(pin, runtime.python)), 'Complete pinned source runtime inventory required');
   const {processingAllowance} = await import('./check-effective-geographic-regression.mjs');
-  const allowance = processingAllowance(config.processing_allowance);
+  const allowance = processingAllowance({...config.processing_allowance, currentRssBytes: 0});
   let runtimeBytes = 0;
   for (const pin of runtime.files) {
     need(pin && same(Object.keys(pin).sort(), ['bytes', 'path', 'sha256']) && path.isAbsolute(pin.path)
@@ -951,9 +953,9 @@ export async function sourceCohort(config, reader, root, destination) {
     need(Number.isSafeInteger(runtimeBytes) && runtimeBytes < allowance.phaseBytes, 'Runtime inventory exceeds source allowance');
   }
   const helper = fileURLToPath(new URL('./qualify-source-cohort.py', import.meta.url));
-  const helperRaw = fs.readFileSync(helper), sourceRaw = jsonBytes(config.source);
+  const helperRaw = fs.readFileSync(helper), sourceRaw = jsonBytes(phaseConfig);
   const entryRaw = fs.readFileSync(fileURLToPath(import.meta.url));
-  const executionReserve = helperRaw.length + entryRaw.length + sourceRaw.length + config.source.resources.output_bytes;
+  const executionReserve = helperRaw.length + entryRaw.length + sourceRaw.length + phaseConfig.resources.output_bytes;
   need(Number.isSafeInteger(executionReserve) && executionReserve > 0
     && runtimeBytes + executionReserve < allowance.phaseBytes, 'Source execution/output reserve exceeds allowance');
   const runtimeIdentity = pin => {
@@ -983,17 +985,16 @@ export async function sourceCohort(config, reader, root, destination) {
     const output = path.join(staging, 'products'), started = performance.now();
     // Python owns cooperative feature/input/time/output checks. This entry does
     // not claim a hard deadline or process-tree supervisor it does not implement.
-    execFileSync(runtime.python.path, ['-I', '-B', helper, '--repo', root, '--config', sourceFile,
+    execFileSync(runtime.python.path, ['-I', '-B', helper, '--phase', phase, '--repo', root, '--config', sourceFile,
       '--admission', admissionFile, '--output', output, '--publication-prefix', destination], {cwd: root, env: environment(),
       stdio: ['ignore', 'ignore', 'pipe'], maxBuffer: 131072});
     for (const pin of runtime.files) runtimeIdentity(pin);
     need(fs.readFileSync(helper).equals(helperRaw), 'Source helper changed during execution');
-    const names = ['original-stage-inputs.json', 'cohort-intervals.json', 'cohort-config.json',
-      'source-qualification.json', 'execution-receipt.json'];
+    const names = phase === 'source' ? sourceProducts : ['whole-target-support.json', 'execution-receipt.json'];
     need(same(fs.readdirSync(output).sort(), [...names].sort()), 'Incomplete or foreign source output inventory');
     const products = Object.fromEntries(names.map(name => [name, ordinary(root, path.relative(root, path.join(output, name)))]));
     const total = Object.values(products).reduce((n, raw) => n + raw.length, 0);
-    need(total <= config.source.resources.output_bytes, 'Complete source output reserve exceeded');
+    need(total <= phaseConfig.resources.output_bytes, 'Complete source output reserve exceeded');
     return {products, observation: {elapsed_seconds: (performance.now() - started) / 1000, allowance,
       runtime_inventory: identities, limits: ['Source checks are cooperative boundaries, not hard process-tree enforcement.',
         'Source prerequisites are not physical, native, owner-zero or selected-output acceptance.']}};
@@ -1049,18 +1050,18 @@ async function main(args) {
     console.log(JSON.stringify({...publishComplete(), acquisition: result, acquisition_ms: performance.now() - started}));
     return;
   }
-  need(['source', 'native-authority', 'requests', 'native-requests', 'retain', 'rebind-operating', 'rebind-certificate', 'compose', 'package', 'finalize', 'evidence'].includes(phase) && configFile && destination && flags.every(f => f === '--resume') && flags.length <= 1,
-    'Use prepare-delivery-handoff.mjs requests|native-requests|retain|rebind-operating|rebind-certificate|compose|package|finalize|evidence|source|native-authority CONFIG DESTINATION [--resume]');
+  need(['source', 'physical', 'native-authority', 'requests', 'native-requests', 'retain', 'rebind-operating', 'rebind-certificate', 'compose', 'package', 'finalize', 'evidence'].includes(phase) && configFile && destination && flags.every(f => f === '--resume') && flags.length <= 1,
+    'Use prepare-delivery-handoff.mjs requests|native-requests|retain|rebind-operating|rebind-certificate|compose|package|finalize|evidence|source|physical|native-authority CONFIG DESTINATION [--resume]');
   need(!process.execArgv.length && !process.env.NODE_OPTIONS?.trim() && !process.env.NODE_PATH?.trim(), 'Plain Node launch required');
   const root = fs.realpathSync(process.cwd()); admitDestination(root, destination, flags.includes('--resume'));
   const raw = ordinary(root, configFile), config = JSON.parse(raw), reader = pinReader(root, {allowance: config.preparation_allowance});
   reader.budget.add({bytes: raw.length}); need(config.version === 1, 'Versioned preparation config required');
-  const binding = phase === 'source' ? sourceBinding(raw) : {phase, config_sha256: digest(raw)};
+  const binding = ['source','physical'].includes(phase) ? sourceBinding(raw,phase) : {phase, config_sha256: digest(raw)};
   if (phase === 'source' && flags.includes('--resume') && fs.existsSync(path.join(root, destination))) {
     console.log(JSON.stringify(resumeSource(root, destination, config, binding, reader))); return;
   }
   let outputs, observation;
-  if (phase === 'source') { const result = await sourceCohort(config, reader, root, destination); outputs = result.products; observation = result.observation; }
+  if (['source','physical'].includes(phase)) { const result = await sourceCohort(config, reader, root, destination, phase); outputs = result.products; observation = result.observation; }
   if (phase === 'native-authority') { const result = await nativeAuthority(config, reader, root); outputs = result.products; observation = result.observation; }
   if (phase === 'requests') outputs = prepareRequests(config, reader);
   if (phase === 'native-requests') outputs = nativeRequests(config, reader);
