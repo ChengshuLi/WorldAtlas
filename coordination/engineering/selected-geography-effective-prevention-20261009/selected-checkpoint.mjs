@@ -471,6 +471,39 @@ function admitTrustedDerivedSeed(session,reader,archiveReader,root,catalogue) {
     source:{executing_commit:root.execution_commit,baseline:facts.baseline_commit,candidate_commit:root.selected_commit}});
 }
 
+// Validate the scoped result only after its execution is authenticated: the
+// joint caller has just run the native consumer; admission has an accepted
+// report archive. This numerical join does not mint execution authority.
+export function validatePixelRepairNative(native, additions, {componentIds, changedIds, changedRows, size}) {
+  const visibility = native?.repair_visibility;
+  demand(native?.status === 'no-new-native-loss' && native.method === 'selected-native-owner-conservation-v1'
+    && native.candidate_code_executed === false && native.lost_or_reassigned_cells === 0 && same(native.intervals, [])
+    && native.native_row_scope?.proof === 'shared-qualified-complete-base-and-cumulative-patch',
+  'Pixel-only scope lacks full qualified native conservation');
+  demand(Array.isArray(componentIds) && componentIds.length > 0 && new Set(componentIds).size === componentIds.length
+    && visibility?.new_components === componentIds.length && Array.isArray(visibility.witnesses)
+    && visibility.witnesses.length === componentIds.length
+    && same(visibility.witnesses.map(row => row?.component_id), componentIds),
+  'Pixel-only scope lacks complete positive component witnesses');
+  demand(Number.isSafeInteger(size) && size > 1 && Array.isArray(changedRows) && changedRows.length > 0
+    && changedRows.every((y,i) => Number.isSafeInteger(y) && y >= 0 && y < size && (!i || y > changedRows[i-1]))
+    && native.affected_rows === changedRows.length && same(native.native_row_scope.changed_rows, changedRows),
+  'Pixel-only scope lacks all changed native rows');
+  const rows = new Map(additions.map(row => [row.component_id,row]));
+  demand(rows.size === additions.length, 'Duplicate pixel-repair literal primitive');
+  for (const witness of visibility.witnesses) {
+    const row = rows.get(witness.component_id);
+    demand(row?.disposition === 'assigned' && Number.isSafeInteger(row.native_cells) && row.native_cells > 0
+      && witness.geometry_sha256 === row.geometry_sha256 && witness.previous_owner === 0
+      && witness.candidate_owner === row.pixelIndex && Number.isSafeInteger(witness.candidate_owner) && witness.candidate_owner > 0
+      && Number.isSafeInteger(witness.x) && witness.x >= 0 && witness.x < size && changedRows.includes(witness.y),
+    'Pixel-only component lacks its actual current-gap-to-target witness');
+  }
+  demand(Array.isArray(changedIds) && changedIds.length > 0
+    && same(changedIds, [...new Set(componentIds.map(id => rows.get(id).target_id))].sort()),
+  'Pixel-only scope differs from complete newly changed owner identities');
+}
+
 function admitDerivedCheckpoint(session,reader,archiveReader,accepted) {
   const {source,receipt,report,products,member_pins,seedRoot}=accepted;
   const trusted=session.trusted;
@@ -478,6 +511,7 @@ function admitDerivedCheckpoint(session,reader,archiveReader,accepted) {
   const publication=products['derived-publication.json'], continuousFacts=products['facts.json'];
   const continuousPublication=products['publication.json'], operands=products['operands.json.gz'];
   const census=products['checkpoint-routes.json'];
+  const pixelOnly=facts?.validation_stage==='native-passed-continuous-not-applicable';
   const members=new Map(member_pins.map(p=>[p.name,p]));
   const published=(name,p)=>{
     const actual=members.get(name);
@@ -488,10 +522,10 @@ function admitDerivedCheckpoint(session,reader,archiveReader,accepted) {
   };
   const factKeys='version,kind,validation_stage,accepted_checkpoint,executing_commit,execution_code,runtime,baseline_accepted_execution,executing_authority_pins,actual_reader_inventories,baseline_commit,candidate_commit,baseline_selection,candidate_selection,candidate_bindings,transition_plan,native_result_sha256,continuous_publication,candidate_code_executed,certificate,checkpoint_routes,executing_policy';
   const expectedFactKeys=seedRoot?factKeys.split(',').filter(key=>!['checkpoint_routes','executing_policy'].includes(key) || Object.hasOwn(facts??{},key)).join(','):factKeys;
-  keys(facts, expectedFactKeys+(Object.hasOwn(facts??{},'checkpoint_transport_inputs')?',checkpoint_transport_inputs':''),
+  keys(facts, expectedFactKeys+(Object.hasOwn(facts??{},'checkpoint_transport_inputs')?',checkpoint_transport_inputs':'')+(pixelOnly?',repair_components':''),
     'Unknown accepted derived checkpoint facts');
   demand(facts.version===1 && facts.kind==='derived-selected-checkpoint-candidate-v1'
-    && facts.validation_stage==='native-passed-continuous-pending' && facts.accepted_checkpoint===false
+    && (pixelOnly || facts.validation_stage==='native-passed-continuous-pending') && facts.accepted_checkpoint===false
     && facts.candidate_code_executed===false && facts.executing_commit===(source.executing_commit??source.baseline)
     && facts.baseline_commit===source.baseline && facts.candidate_commit===source.candidate_commit,
   'Accepted derived execution/selected vintage differs');
@@ -506,10 +540,18 @@ function admitDerivedCheckpoint(session,reader,archiveReader,accepted) {
     demand(same(facts.checkpoint_routes,publication.routes), 'Accepted complete route publication differs');
   }
   demand(same(facts.certificate,publication.certificate), 'Accepted candidate certificate pin differs');
-  published('facts.json',continuousPublication?.facts); published('operands.json.gz',continuousPublication?.operands);
-  demand(continuousPublication.version===1 && continuousPublication.complete===true
-    && continuousPublication.kind==='trusted-selected-continuous-comparison-v1'
-    && same(facts.continuous_publication,continuousPublication), 'Accepted continuous publication differs');
+  if (pixelOnly) {
+    demand(!seedRoot && facts.continuous_publication === null && continuousPublication === undefined
+      && continuousFacts === undefined && operands === undefined
+      && same([...members.keys()].filter(name => name !== 'operating.json').sort(),
+        ['derived-certificate.json.gz','derived-facts.json','derived-publication.json','checkpoint-routes.json'].sort()),
+    'Pixel-only checkpoint must omit continuous products and retain complete derived products');
+  } else {
+    published('facts.json',continuousPublication?.facts); published('operands.json.gz',continuousPublication?.operands);
+    demand(continuousPublication.version===1 && continuousPublication.complete===true
+      && continuousPublication.kind==='trusted-selected-continuous-comparison-v1'
+      && same(facts.continuous_publication,continuousPublication), 'Accepted continuous publication differs');
+  }
   const native=report.selected_native_report, continuous=report.selected_continuous_report;
   const {runtime:outerRuntime,caller_runtime:outerCaller,execution_runtimes:outerRuntimes,
     execution_code_inventory:outerCode,...nativeInverse}=native??{};
@@ -525,7 +567,12 @@ function admitDerivedCheckpoint(session,reader,archiveReader,accepted) {
     && same(outerRuntimes,facts.runtime) && same(outerCode,facts.execution_code),
   'Accepted native wrapper execution/runtime differs');
   const strict=continuous?.original_strict_polygon_result;
-  demand(continuous?.kind===continuousPublication.kind && continuous.candidate_code_executed===false
+  if (pixelOnly) {
+    demand(continuous?.kind === 'trusted-selected-continuous-comparison-v1' && continuous.candidate_code_executed === false
+      && continuous.status === 'not-applicable' && continuous.scope === 'visible-native-pixel-repair-v1'
+      && continuous.regressions === null && continuous.issued_publication === null && strict === undefined,
+    'Pixel-only checkpoint must explicitly report continuous checking as not applicable');
+  } else demand(continuous?.kind===continuousPublication.kind && continuous.candidate_code_executed===false
     && ['no-new-regression','no-footprint-change'].includes(continuous.status)
     && (continuous.regressions===0 || continuous.status==='no-footprint-change' && continuous.regressions===null)
     && strict && strict.status===continuous.status && strict.regressions===continuous.regressions
@@ -544,15 +591,15 @@ function admitDerivedCheckpoint(session,reader,archiveReader,accepted) {
     && new Set(facts.runtime.map(p=>p.path)).size===3 && facts.runtime.every(p=>typeof p.path==='string'
       && Number.isSafeInteger(p.bytes) && p.bytes>0 && Number.isSafeInteger(p.mode) && hash(p.sha256)),
   'Incomplete accepted execution runtime identities');
-  keys(continuousFacts,'version,kind,baseline_commit,candidate_commit,executing_commit,execution_code,runtime,plan,inverse,checkpoint_custody,source_custody,validation_route,candidate_code_executed',
+  if (!pixelOnly) keys(continuousFacts,'version,kind,baseline_commit,candidate_commit,executing_commit,execution_code,runtime,plan,inverse,checkpoint_custody,source_custody,validation_route,candidate_code_executed',
     'Unknown complete accepted continuous facts');
   demand(commit(facts.baseline_accepted_execution?.accepted_head)
     && commit(facts.baseline_accepted_execution?.execution_commit)
     && commit(facts.baseline_accepted_execution?.historical_selected_commit)
-    && same(continuousFacts.checkpoint_custody?.baseline,facts.baseline_accepted_execution)
-    && same(continuousFacts.checkpoint_custody?.candidate,facts.baseline_accepted_execution),
+    && (pixelOnly || same(continuousFacts.checkpoint_custody?.baseline,facts.baseline_accepted_execution)
+      && same(continuousFacts.checkpoint_custody?.candidate,facts.baseline_accepted_execution)),
   'Accepted complete predecessor checkpoint custody differs');
-  demand(same(continuousFacts.execution_code,facts.execution_code) && same(continuousFacts.runtime,facts.runtime)
+  if (!pixelOnly) demand(same(continuousFacts.execution_code,facts.execution_code) && same(continuousFacts.runtime,facts.runtime)
     && continuousFacts.kind===continuousPublication.kind && continuousFacts.executing_commit===facts.executing_commit
     && continuousFacts.baseline_commit===facts.baseline_commit && continuousFacts.candidate_commit===facts.candidate_commit
     && continuousFacts.candidate_code_executed===false && continuousFacts.validation_route==='authenticated-checkpoint-append-v1',
@@ -574,7 +621,7 @@ function admitDerivedCheckpoint(session,reader,archiveReader,accepted) {
     demand(target && target.pixelIndex===row.pixelIndex, 'Accepted current target identity omitted');
     return {...row,base_geometry:target.geometry,base_geometry_sha256:target.geometry_sha256};
   });
-  demand(same(operands.effective_additions?.candidate,additions), 'Accepted complete current primitives differ');
+  if (!pixelOnly) demand(same(operands.effective_additions?.candidate,additions), 'Accepted complete current primitives differ');
   coordinateCheck(certificate,{binding:certificate.binding,complete_owners:continuous.complete_owners,
     complete_sources:certificate.binding.sources.length},additions);
   demand(same(certificate.inputs.map(p=>p.source),certificate.binding.sources), 'Accepted complete source binding inventory differs');
@@ -583,49 +630,58 @@ function admitDerivedCheckpoint(session,reader,archiveReader,accepted) {
   completeRows(rebind.request.current_rows,manifest.size,certificate.entries.length);
   completeRows(rebind.request.acquisition.predecessor_rows,manifest.size,certificate.entries.length);
   const plan=facts.transition_plan, ids=plan?.required_ids;
-  demand(plan?.kind==='complete-selected-continuous-plan-v1' && plan.version===1
-    && Array.isArray(ids) && same(ids,[...new Set(ids)].sort())
-    && same(plan,continuousFacts.plan) && same(plan,operands.plan)
-    && same(plan.source_bindings,continuous.source_binding) && same(ids,continuous.required_ids)
-    && same(plan.changed_ids,strict.changed_location_ids)
-    && same(plan.source_bindings.candidate,certificate.binding)
-    && same(plan.source_bindings.baseline.selection,facts.baseline_selection),
-  'Accepted complete two-vintage continuous scope differs');
-  demand(operands.version===1 && operands.kind==='complete-selected-continuous-operands-v1'
-    && same(Object.keys(operands.baseline).sort(),ids) && same(Object.keys(operands.candidate).sort(),ids),
-  'Accepted whole source operand scope differs');
-  const sourceCustody=continuousFacts.source_custody;
-  keys(sourceCustody,'baseline,candidate,source_features_reused','Incomplete accepted whole-source custody');
-  demand(sourceCustody.source_features_reused===true, 'Unsupported accepted source projection method');
-  for (const vintage of ['baseline','candidate']) {
-    const side=sourceCustody[vintage], planned=plan.source_paths[vintage];
-    // Plans sort path sets; whole projections preserve certificate source order.
-    // Join the complete unique roster, not these unrelated iteration orders.
-    demand(Array.isArray(planned) && same(planned,[...new Set(planned)].sort())
-      && same(side?.state_binding,plan.source_bindings[vintage]) && Array.isArray(side.inputs)
-      && same(side.inputs.map(p=>p.path).sort(),planned) && Array.isArray(side.actual_inputs)
-      && side.actual_inputs.length===side.inputs.length, 'Accepted complete source input custody differs');
-    for (const input of side.inputs) {
-      const actual=side.actual_inputs.filter(p=>p.path===input.source.path);
-      demand(same(input,certificate.inputs.find(p=>p.path===input.path)) && actual.length===1
-        && actual[0].whole_body_consumed===true && actual[0].mode===input.source.mode
-        && actual[0].git_blob_oid===input.source.git_blob_oid && actual[0].bytes===input.source.bytes
-        && actual[0].sha256===input.source.sha256, 'Accepted source body mode/OID/hash differs');
+  if (pixelOnly) {
+    demand(plan?.kind === 'complete-selected-continuous-plan-v1' && plan.version === 1
+      && same(plan.source_bindings?.candidate, certificate.binding)
+      && same(plan.source_bindings?.baseline.selection, facts.baseline_selection)
+      && same(plan.changed_ids, continuous.changed_ids), 'Pixel-only certificate transition binding differs');
+    validatePixelRepairNative(native, additions, {componentIds:facts.repair_components,
+      changedIds:plan.changed_ids, changedRows:native.native_row_scope?.changed_rows, size:manifest.size});
+  } else {
+    demand(plan?.kind==='complete-selected-continuous-plan-v1' && plan.version===1
+      && Array.isArray(ids) && same(ids,[...new Set(ids)].sort())
+      && same(plan,continuousFacts.plan) && same(plan,operands.plan)
+      && same(plan.source_bindings,continuous.source_binding) && same(ids,continuous.required_ids)
+      && same(plan.changed_ids,strict.changed_location_ids)
+      && same(plan.source_bindings.candidate,certificate.binding)
+      && same(plan.source_bindings.baseline.selection,facts.baseline_selection),
+    'Accepted complete two-vintage continuous scope differs');
+    demand(operands.version===1 && operands.kind==='complete-selected-continuous-operands-v1'
+      && same(Object.keys(operands.baseline).sort(),ids) && same(Object.keys(operands.candidate).sort(),ids),
+    'Accepted whole source operand scope differs');
+    const sourceCustody=continuousFacts.source_custody;
+    keys(sourceCustody,'baseline,candidate,source_features_reused','Incomplete accepted whole-source custody');
+    demand(sourceCustody.source_features_reused===true, 'Unsupported accepted source projection method');
+    for (const vintage of ['baseline','candidate']) {
+      const side=sourceCustody[vintage], planned=plan.source_paths[vintage];
+      // Plans sort path sets; whole projections preserve certificate source order.
+      // Join the complete unique roster, not these unrelated iteration orders.
+      demand(Array.isArray(planned) && same(planned,[...new Set(planned)].sort())
+        && same(side?.state_binding,plan.source_bindings[vintage]) && Array.isArray(side.inputs)
+        && same(side.inputs.map(p=>p.path).sort(),planned) && Array.isArray(side.actual_inputs)
+        && side.actual_inputs.length===side.inputs.length, 'Accepted complete source input custody differs');
+      for (const input of side.inputs) {
+        const actual=side.actual_inputs.filter(p=>p.path===input.source.path);
+        demand(same(input,certificate.inputs.find(p=>p.path===input.path)) && actual.length===1
+          && actual[0].whole_body_consumed===true && actual[0].mode===input.source.mode
+          && actual[0].git_blob_oid===input.source.git_blob_oid && actual[0].bytes===input.source.bytes
+          && actual[0].sha256===input.source.sha256, 'Accepted source body mode/OID/hash differs');
+      }
     }
-  }
-  const entries=new Map(certificate.entries.map(row=>[row[0],row]));
-  const inverse=continuousFacts.inverse;
-  demand(Array.isArray(inverse) && inverse.length===2*ids.length, 'Accepted complete source inverse omitted rows');
-  for (const vintage of ['baseline','candidate']) {
-    const rows=inverse.filter(row=>row.vintage===vintage);
-    demand(same(rows.map(row=>row.id).sort(),ids), 'Accepted source inverse repeats/omits an owner');
-    for (const row of rows) {
-      const expected=entries.get(row.id), feature=operands[vintage][row.id];
-      demand(expected && row.source===expected[4] && row.ordinal===expected[5]
-        && row.whole_feature_sha256===expected[6] && row.geometry_sha256===expected[7]
-        && row.whole_source_sha256===certificate.inputs.find(p=>p.path===row.source)?.whole_body_sha256
-        && valueSha(feature)===row.whole_feature_sha256 && valueSha(feature.geometry)===row.geometry_sha256,
-      'Accepted whole original feature/geometry inverse differs');
+    const entries=new Map(certificate.entries.map(row=>[row[0],row]));
+    const inverse=continuousFacts.inverse;
+    demand(Array.isArray(inverse) && inverse.length===2*ids.length, 'Accepted complete source inverse omitted rows');
+    for (const vintage of ['baseline','candidate']) {
+      const rows=inverse.filter(row=>row.vintage===vintage);
+      demand(same(rows.map(row=>row.id).sort(),ids), 'Accepted source inverse repeats/omits an owner');
+      for (const row of rows) {
+        const expected=entries.get(row.id), feature=operands[vintage][row.id];
+        demand(expected && row.source===expected[4] && row.ordinal===expected[5]
+          && row.whole_feature_sha256===expected[6] && row.geometry_sha256===expected[7]
+          && row.whole_source_sha256===certificate.inputs.find(p=>p.path===row.source)?.whole_body_sha256
+          && valueSha(feature)===row.whole_feature_sha256 && valueSha(feature.geometry)===row.geometry_sha256,
+        'Accepted whole original feature/geometry inverse differs');
+      }
     }
   }
   const inventories=facts.actual_reader_inventories;

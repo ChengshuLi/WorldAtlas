@@ -372,8 +372,8 @@ def consume_selected_continuous(repo, baseline, candidate, detector, destination
 
 
 def selected_joint(repo, baseline, candidate, detector, *, trusted=None, checkpoint_destination=None):
-    products = checkpoint_products_module(repo) if checkpoint_destination is not None else None
-    if products is not None:
+    products = checkpoint_products_module(repo)
+    if checkpoint_destination is not None:
         products.admit_checkpoint_destination(checkpoint_destination)
     env = {key: value for key, value in os.environ.items() if key not in ['NODE_OPTIONS', 'NODE_PATH']}
     entrypoint = repo / 'coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs'
@@ -398,11 +398,12 @@ def selected_joint(repo, baseline, candidate, detector, *, trusted=None, checkpo
             raise ValueError('Joint native comparison result is incomplete')
         if native['status'] == 'native-regressions-found':
             return issued
-        issued['continuous_result'] = consume_selected_continuous(repo, baseline, candidate, detector,
-                                                                  destination, issued.get('continuous'), trusted=trusted)
+        pixel = products.pixel_only_result(issued)
+        issued['continuous_result'] = pixel if pixel is not None else consume_selected_continuous(
+            repo, baseline, candidate, detector, destination, issued.get('continuous'), trusted=trusted)
         original = issued['continuous_result'].get('original_strict_polygon_result', {})
-        if (checkpoint_destination is not None and original.get('status') in ['no-footprint-change', 'no-new-regression']
-                and original.get('regressions') in [None, 0]):
+        if (checkpoint_destination is not None and (pixel is not None or
+                original.get('status') in ['no-footprint-change', 'no-new-regression'] and original.get('regressions') in [None, 0])):
             issued['checkpoint'] = products.retain_checkpoint_products(destination, checkpoint_destination, issued,
                 allowance=min(products.PHASE, selected_consumer_allowance(repo)))
         return issued

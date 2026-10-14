@@ -78,7 +78,7 @@ export function planDerivedOutput(certificate, facts, baseBytes, limit = FILE) {
     decoded_bytes:decodedBytes, decoded_sha256:'0'.repeat(64)};
   const factsBytes = jsonBytes({...facts, certificate:placeholder}, limit);
   const publicationBytes = jsonBytes({version:1, complete:true, kind:'derived-selected-checkpoint-candidate-v1',
-    accepted_checkpoint:false, validation_stage:'native-passed-continuous-pending', certificate:placeholder,
+    accepted_checkpoint:false, validation_stage:facts.validation_stage ?? 'native-passed-continuous-pending', certificate:placeholder,
     facts:{path:'derived-facts.json', bytes:limit, sha256:'0'.repeat(64)}, ...(facts.checkpoint_routes ? {routes:facts.checkpoint_routes} : {})}, limit);
   const encodedLimit = limit - baseBytes - decodedBytes - 2 * factsBytes - publicationBytes;
   demand(encodedLimit > 0, 'Derived output union exceeds admitted reserve before serialization');
@@ -139,6 +139,30 @@ function executionGuard(repo, trusted) {
     demand(local.equals(body) && (stat.mode & 0o777) === (mode === '100755' ? 0o755 : 0o644), 'Joint code body/mode differs');
     return {commit:trusted, path:name, mode, git_blob_oid:oid, bytes:body.length, sha256:sha(body)};
   });
+}
+
+// Conservative actual-tree profile, independent of candidate declarations. Only
+// the selector/transport pointers and newly added inert delivery evidence may
+// accompany the authenticated append. Code, old evidence and other geography
+// changes retain the original continuous path. This is not scientific authority.
+export function pixelRepairOnlyDiff(reader, baseline, candidate) {
+  reader.checkMemory();
+  const fields = execFileSync(reader.gitExecutable, ['-c', 'core.hooksPath=/dev/null', '-C', reader.repo,
+    'diff-tree', '--no-renames', '--raw', '-r', '-z', baseline, candidate],
+  {maxBuffer:OUTPUT, stdio:['ignore','pipe','pipe']}).toString().split('\0');
+  const pointers = new Set(['data/ownership-selection.json', 'data/selected-checkpoint.json', '.github/package-inputs.json']);
+  let selected = false;
+  for (let i = 0; i < fields.length - 1; i += 2) {
+    const match = /^:(000000|100644) (100644) [a-f0-9]{40} [a-f0-9]{40} ([AM])$/.exec(fields[i]);
+    const name = fields[i + 1];
+    if (!match || !name || name.split('/').some(p => !p || p === '.' || p === '..')) return false;
+    if (name === 'data/ownership-selection.json' && match[3] === 'M') selected = true;
+    if (pointers.has(name)) continue;
+    if (match[3] !== 'A' || !/^coordination\/engineering\/[^/]+\//.test(name)
+      || !/\.(?:json|jsonl\.gz|json\.gz|bin\.gz|log|txt|md|zip)$/.test(name)
+      || /(?:^|\/)(?:package(?:-lock)?|tsconfig|jsconfig|binding|deno|composer)\.json$/.test(name)) return false;
+  }
+  return selected;
 }
 
 export async function selectedJointStage(repo, trusted, baseline, candidate, destination, parentRuntimePath) {
@@ -207,25 +231,44 @@ export async function selectedJointStage(repo, trusted, baseline, candidate, des
       'Joint native consumer did not complete an actual comparison');
     demand(valueBytes(nativeReport).length <= OUTPUT, 'Joint native report exceeds original output reserve');
     if (nativeReport.status === 'native-regressions-found') return result(nativeReport, null);
-    const product = checkpointContinuousOperands({transition, budget});
-    const operands = valueBytes(product.operands);
-    demand(operands.length < FILE, 'Joint continuous operand ordinary cap');
-    const encoded = gzipSync(operands, {level:9, mtime:0, maxOutputLength:FILE - operands.length});
-    const facts = valueBytes({version:1, kind:'trusted-selected-continuous-comparison-v1',
-      executing_commit:trusted, baseline_commit:baseline, candidate_commit:candidate,
-      execution_code:code, runtime:startup.identities, plan:transition.plan, inverse:product.inverse,
-      checkpoint_custody:{baseline:product.baseline_execution, candidate:product.candidate_execution},
-      source_custody:product.custody, validation_route:'authenticated-checkpoint-append-v1',
-      candidate_code_executed:false});
-    const publication = {version:1, complete:true, kind:'trusted-selected-continuous-comparison-v1',
-      operands:{path:'operands.json.gz', bytes:encoded.length, sha256:sha(encoded), decoded_bytes:operands.length, decoded_sha256:sha(operands)},
-      facts:{path:'facts.json', bytes:facts.length, sha256:sha(facts)}};
-    const publicationBody = valueBytes(publication);
-    // The continuous consumer has already admitted 7 * FILE for the complete
-    // serialized output union. Reauthenticate before retaining the genuine
-    // derived certificate, and keep both output families inside that same cap.
-    // These bytes are a provisional candidate, never a newly minted capability.
     const genuine = checkpoint.authenticateTransition({transition, budget});
+    const oldComponents = new Set(genuine.baseline.additions.map(row => row.component_id));
+    const repairComponents = genuine.candidate.additions.filter(row => !oldComponents.has(row.component_id)).map(row => row.component_id);
+    if (repairComponents.length > 0) {
+      demand(budget.shared.used + 7 * OUTPUT <= budget.shared.allowance.phaseBytes, 'Pixel repair diff exceeds current shared allowance');
+      budget.carriedBytes += 7 * OUTPUT;
+      checkpoint.authenticateTransition({transition, budget});
+    }
+    const pixelOnly = repairComponents.length > 0 && nativeReport.repair_visibility?.new_components > 0
+      && pixelRepairOnlyDiff(afterReader, baseline, candidate);
+    if (pixelOnly) checkpoint.validatePixelRepairNative(nativeReport, genuine.candidate.additions, {
+      componentIds:repairComponents, changedIds:transition.changedIds, changedRows:transition.changedNativeRows,
+      size:genuine.candidate.manifest.size});
+    const stage = pixelOnly ? 'native-passed-continuous-not-applicable' : 'native-passed-continuous-pending';
+    let product, publication = null, continuousBytes = 0;
+    const outputs = [];
+    if (!pixelOnly) {
+      product = checkpointContinuousOperands({transition, budget});
+      const operands = valueBytes(product.operands);
+      demand(operands.length < FILE, 'Joint continuous operand ordinary cap');
+      const encoded = gzipSync(operands, {level:9, mtime:0, maxOutputLength:FILE - operands.length});
+      const facts = valueBytes({version:1, kind:'trusted-selected-continuous-comparison-v1',
+        executing_commit:trusted, baseline_commit:baseline, candidate_commit:candidate,
+        execution_code:code, runtime:startup.identities, plan:transition.plan, inverse:product.inverse,
+        checkpoint_custody:{baseline:product.baseline_execution, candidate:product.candidate_execution},
+        source_custody:product.custody, validation_route:'authenticated-checkpoint-append-v1',
+        candidate_code_executed:false});
+      publication = {version:1, complete:true, kind:'trusted-selected-continuous-comparison-v1',
+        operands:{path:'operands.json.gz', bytes:encoded.length, sha256:sha(encoded), decoded_bytes:operands.length, decoded_sha256:sha(operands)},
+        facts:{path:'facts.json', bytes:facts.length, sha256:sha(facts)}};
+      const publicationBody = valueBytes(publication);
+      continuousBytes = operands.length + encoded.length + 2 * facts.length + publicationBody.length;
+      outputs.push(['operands.json.gz', encoded], ['facts.json', facts], ['publication.json', publicationBody]);
+    }
+    // Continuous production admits the serialized output union; the pixel-only
+    // branch charges the same reserve below without opening source polygons.
+    // Keep derived certificate and optional continuous products inside that cap.
+    // These bytes are a provisional candidate, never a newly minted capability.
     const authorityPaths = [P + 'supported-programs.json',
       'coordination/engineering/selected-checkpoint-reuse-20261012/accepted-checkpoints.json'];
     const authorityPins = authorityPaths.map(name => beforeReader.inventory.get(trusted + ':' + name));
@@ -237,7 +280,7 @@ export async function selectedJointStage(repo, trusted, baseline, candidate, des
     const routes = valueBytes(checkpoint.checkpointRouteCensus({transition, budget}));
     const routePin = {path:'checkpoint-routes.json', bytes:routes.length, sha256:sha(routes)};
     const derivedFactsBase = {version:1, kind:'derived-selected-checkpoint-candidate-v1',
-      validation_stage:'native-passed-continuous-pending', accepted_checkpoint:false,
+      validation_stage:stage, accepted_checkpoint:false,
       executing_commit:trusted, execution_code:code, runtime:startup.identities,
       baseline_accepted_execution:genuine.baseline.accepted_execution,
       executing_authority_pins:authorityPins, executing_policy:executingPolicy,
@@ -248,8 +291,13 @@ export async function selectedJointStage(repo, trusted, baseline, candidate, des
       candidate_bindings:{ledger_sha256:valueSha(genuine.candidate.ledger), registry_sha256:valueSha(genuine.candidate.registry),
         patch_sha256:valueSha(genuine.candidate.patch), manifest_sha256:valueSha(genuine.candidate.manifest)},
       transition_plan:genuine.plan, native_result_sha256:valueSha(nativeReport),
-      continuous_publication:publication, candidate_code_executed:false};
-    const baseBytes = operands.length + encoded.length + 2 * facts.length + publicationBody.length + 2 * routes.length;
+      continuous_publication:publication, ...(pixelOnly ? {repair_components:repairComponents} : {}), candidate_code_executed:false};
+    const baseBytes = continuousBytes + 2 * routes.length;
+    if (pixelOnly) {
+      demand(budget.shared.used + 7 * FILE <= budget.shared.allowance.phaseBytes, 'Pixel checkpoint output exceeds current shared allowance');
+      budget.carriedBytes += 7 * FILE;
+      checkpoint.authenticateTransition({transition, budget});
+    }
     const archivePlan = planDerivedOutput(genuine.candidate.certificate, derivedFactsBase, baseBytes);
     const certificate = valueBytes(genuine.candidate.certificate);
     demand(certificate.length === archivePlan.decodedBytes, 'Derived certificate serialization size drift');
@@ -258,17 +306,23 @@ export async function selectedJointStage(repo, trusted, baseline, candidate, des
       sha256:sha(certificateEncoded), decoded_bytes:certificate.length, decoded_sha256:sha(certificate)};
     const derivedFacts = valueBytes({...derivedFactsBase, certificate:certificatePin});
     const derivedPublication = {version:1, complete:true, kind:'derived-selected-checkpoint-candidate-v1',
-      accepted_checkpoint:false, validation_stage:'native-passed-continuous-pending', certificate:certificatePin,
+      accepted_checkpoint:false, validation_stage:stage, certificate:certificatePin,
       facts:{path:'derived-facts.json', bytes:derivedFacts.length, sha256:sha(derivedFacts)}, routes:routePin};
     const derivedPublicationBody = valueBytes(derivedPublication);
-    demand(operands.length + encoded.length + 2 * facts.length + publicationBody.length
+    demand(continuousBytes
       + certificate.length + certificateEncoded.length + 2 * derivedFacts.length + derivedPublicationBody.length + 2 * routes.length < FILE,
       'Joint continuous and derived checkpoint complete outputs exceed original reserve');
     checkpoint.authenticateTransition({transition, budget});
     executionGuard(repo, trusted); fresh(destination); fs.mkdirSync(destination);
-    for (const [name, body] of [['operands.json.gz', encoded], ['facts.json', facts], ['derived-certificate.json.gz', certificateEncoded],
-      ['derived-facts.json', derivedFacts], ['checkpoint-routes.json', routes], ['derived-publication.json', derivedPublicationBody], ['publication.json', publicationBody]])
+    for (const [name, body] of [...outputs, ['derived-certificate.json.gz', certificateEncoded],
+      ['derived-facts.json', derivedFacts], ['checkpoint-routes.json', routes], ['derived-publication.json', derivedPublicationBody]])
       fs.writeFileSync(path.join(destination, name), body, {flag:'wx', mode:0o644});
+    if (pixelOnly) return result(nativeReport, {version:1, kind:'trusted-selected-continuous-comparison-v1',
+      status:'not-applicable', scope:'visible-native-pixel-repair-v1', regressions:null, issued_publication:null,
+      derived_checkpoint:derivedPublication, complete_owners:genuine.candidate.certificate.entries.length,
+      changed_ids:transition.changedIds, candidate_code_executed:false,
+      limits:['Continuous polygon coverage/overlap was not checked: this comparison only appends source-qualified visible native-pixel repairs.',
+        'Complete native conservation, actual per-component current-gap-to-target witnesses and unchanged base/source routes were checked.']});
     return result(nativeReport, {version:1, kind:publication.kind,
       status:transition.changedIds.length ? 'selected-operands-complete' : 'no-selected-footprint-change',
       publication, derived_checkpoint:derivedPublication, changed_ids:transition.changedIds, complete_owners:product.complete_owners,
