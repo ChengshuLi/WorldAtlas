@@ -541,3 +541,41 @@ test('inspection and allocation share every support prefix without suppressing a
   assert.ok(!fs.existsSync(path.join(entry.path, 'data/other')));
   manager.release({worker: 'one', slot: 'review', token: entry.token});
 });
+
+
+test('complete documented shell bootstrap refuses failed refresh instead of executing cached main', t => {
+  const {repo, git} = fixture(t);
+  for (const name of ['local-workspace.mjs', 'worker-identity.mjs'])
+    fs.writeFileSync(path.join(repo, 'scripts', name), fs.readFileSync(new URL('../scripts/' + name, import.meta.url)));
+  git('add', 'scripts'); git('commit', '-m', 'cached accepted helpers');
+  const head = git('rev-parse', 'HEAD').trim();
+  git('update-ref', 'refs/remotes/origin/main', head);
+  git('remote', 'set-url', 'origin', path.join(repo, 'unavailable-origin'));
+  const refs = git('show-ref');
+  const status = git('status', '--porcelain');
+  const docs = fs.readFileSync(new URL('../docs/LOCAL_WORKSPACES.md', import.meta.url), 'utf8');
+  const block = docs.split('## Refresh a stale checkout without changing its files')[1].split('```sh\n')[1].split('\n```')[0]
+    .replace('data/YOUR-REQUIRED-PATH', 'data/one.json');
+  assert.throws(() => execFileSync('bash', ['-c', block], {cwd: repo, encoding: 'utf8', stdio: 'pipe'}), error => {
+    assert.doesNotMatch(error.stdout, /inputCount|selectedBytes/);
+    assert.match(error.stderr, /does not appear to be a git repository/);
+    return error.status !== 0;
+  });
+  assert.equal(git('show-ref'), refs);
+  assert.equal(git('status', '--porcelain'), status);
+  assert.ok(!fs.readdirSync(path.join(repo, '.git')).some(name => name.startsWith('worldatlas-helper-')));
+  git('remote', 'set-url', 'origin', repo);
+  git('config', 'uploadpack.allowFilter', 'true');
+  const result = JSON.parse(execFileSync('bash', ['-c', block], {cwd: repo, encoding: 'utf8', stdio: 'pipe'}));
+  assert.equal(result.head, head);
+  assert.ok(result.inputs.some(row => row.path === 'data/one.json'));
+  assert.ok(!fs.readdirSync(path.join(repo, '.git')).some(name => name.startsWith('worldatlas-helper-')));
+  git('config', '--unset-all', 'remote.origin.fetch');
+  git('update-ref', '-d', 'refs/remotes/origin/main');
+  assert.throws(() => execFileSync('bash', ['-c', block], {cwd: repo, encoding: 'utf8', stdio: 'pipe'}), error => {
+    assert.doesNotMatch(error.stdout, /inputCount|selectedBytes/);
+    assert.match(error.stderr, /Needed a single revision/);
+    return error.status !== 0;
+  });
+  assert.ok(!fs.readdirSync(path.join(repo, '.git')).some(name => name.startsWith('worldatlas-helper-')));
+});

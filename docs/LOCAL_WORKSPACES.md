@@ -61,14 +61,16 @@ or overwrite a checkout holding active work.
 The following code-only bootstrap loads both allocator modules from one exact
 locally available main commit. It uses an exclusive temporary directory inside
 the shared Git store, retains the original repository as the current directory,
-and removes only its generated helper copies afterward. Missing helper blobs
+and removes only its generated helper copies afterward. A failed main refresh or
+commit lookup stops without using a cached older pin. Missing helper blobs
 stop before execution; acquire those exact pinned objects through the coordinated
 route below rather than falling back to an old executable. Use Node 24.
 
 ```sh
+(
 git -c fetch.negotiationAlgorithm=noop fetch --no-tags --no-recurse-submodules \
-  --no-auto-maintenance --filter=blob:none origin main
-base=$(GIT_NO_LAZY_FETCH=1 git rev-parse --verify 'origin/main^{commit}')
+  --no-auto-maintenance --filter=blob:none origin main || exit
+base=$(GIT_NO_LAZY_FETCH=1 git rev-parse --verify 'origin/main^{commit}') || exit
 GIT_NO_LAZY_FETCH=1 python3 - "$base" inspect --commit "$base" \
   --include data/YOUR-REQUIRED-PATH <<'PYTHON'
 import os, re, subprocess, sys, tempfile
@@ -98,6 +100,7 @@ with tempfile.TemporaryDirectory(prefix='worldatlas-helper-', dir=common) as dir
     result = subprocess.call(['node', str(Path(directory) / 'local-workspace.mjs'), *args], env=env)
 sys.exit(result)
 PYTHON
+)
 ```
 
 Keep every original `--include` value, including new owned output paths. Replace
