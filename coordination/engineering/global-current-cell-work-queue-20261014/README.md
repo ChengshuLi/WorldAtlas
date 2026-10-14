@@ -31,7 +31,13 @@ physical queues sit underneath it.
    competitor source families, native blocks, measured cost, question and
    completion condition. Reuse the original repository source products named by
    their catalogue; this directory does not copy the original source corpus.
-4. Before an actual additive repair, check the current selected owner-zero state,
+4. Before an actual additive repair, load current ownership only for this package
+   and subtract already-owned intervals from the frozen candidate intervals.
+   Record those as already completed. A prior repair never requires rebuilding
+   this global queue or repeating source research. Recheck target identity and
+   source-lineage compatibility only where the intervening selection/source change
+   actually affects this package. Preserve the original frozen provenance.
+5. For the remaining cells, check the current selected owner-zero state,
    source-to-location authority, explicit territorial exclusions and all relevant
    competitors. Then use the existing source-target native operator, verify
    conservation and coordinate normal reviewed integration.
