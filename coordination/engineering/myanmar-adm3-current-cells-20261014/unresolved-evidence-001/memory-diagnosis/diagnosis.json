@@ -1,0 +1,50 @@
+{
+  "status": "diagnosis-not-physical-execution",
+  "refusal_observation": {
+    "node_available_estimate_bytes": 1261240320,
+    "current_node_rss_bytes": 53280768,
+    "additional_growth_reservation_bytes": 0,
+    "software_half_growth_bytes": 630620160,
+    "software_phase_and_rss_allowance_bytes": 683900928
+  },
+  "formula": {
+    "location": "scripts/check-effective-geographic-regression.mjs:71",
+    "accepted_base": "2ea6db0d4ebc2f503d487227fa2d56e0a2b37265",
+    "expression": "currentRssBytes + floor((availableBytes - concurrentReservedBytes) / 2)",
+    "limit": "A fixed half-growth safety heuristic; not a measurement that the machine has only that much available RAM."
+  },
+  "historical_reservation": {
+    "prior_traced_kyaukpyu_peak_bytes": 898940928,
+    "additional_reserve_bytes": 67108864,
+    "sum_bytes": 966049792,
+    "classification": "Historical reservation heuristic, not measured or derived required peak for the new direct three-target phase.",
+    "relevant_differences": [
+      "Direct producer omits the former tracing bridge and pyproj import.",
+      "The new cohort has three targets; a lower peak has not been established.",
+      "Prepared plan has no measured peak bound or derived output bound."
+    ]
+  },
+  "worker_ownership": {
+    "myanmar_active_or_idle_scientific_processes": 0,
+    "myanmar_loaded_datasets": 0,
+    "vietnam_confirmed_scientific_processes": 0,
+    "indonesia_confirmed_scientific_processes": 0,
+    "worker_additional_growth_reservations_bytes": 0,
+    "observation_limit": "The lone non-CUA Python in the captured snapshot was this measurement process, which exited. App-managed CUA processes have no safely established per-worker ownership; none were terminated.",
+    "unrelated_apps_closed": false
+  },
+  "general_correction": [
+    "Keep accepted admission unchanged for this batch; do not choose a smaller unexplained floor or override the fraction.",
+    "Replace historical peak-plus-margin forecasting with phase-specific actual Python runtime/live-buffer accounting and explicit geometry/result uncertainty.",
+    "In a reviewed shared physical entry, release authenticated compressed/decompressed part buffers after last use and discard unrelated parsed metadata only after complete index authentication and ancestry closure. Preserve all selection and source semantics.",
+    "Avoid retaining both all decoded native parts and the full joined member through a bounded authenticated spool/mapping; preserve complete-member hash before decoding unchanged selected records.",
+    "Treat validity-cache and result-buffer lifetime changes separately with focused equivalence controls; do not weaken exact coordinates, geometry operations, boundary/query rosters or issue retention.",
+    "Preserve the archived original producer unchanged. Implement any liveness repair in shared reusable code, not another per-batch executable wrapper."
+  ],
+  "current_limits": [
+    "Current OS-available estimate and raw free RAM are different measures; nearby snapshots are not simultaneous.",
+    "Hardware RAM is8589934592bytes. Swap is not RAM admission credit.",
+    "No physical producer started, no new cells qualified/accepted, and no runtime cap was overridden.",
+    "The combined3816checkpoint remains09ac43d945203fc877d3a30104f775960e711d65; source/operator work continues independently."
+  ]
+}

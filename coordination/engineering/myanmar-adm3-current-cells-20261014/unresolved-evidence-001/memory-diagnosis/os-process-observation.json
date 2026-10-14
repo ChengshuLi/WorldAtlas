@@ -1,0 +1,28 @@
+{
+  "observed_unix_seconds": 1792014763.8287182,
+  "hardware_ram_bytes": 8589934592,
+  "vm_page_bytes": 16384,
+  "vm_fields_bytes": {
+    "Pages free": 65880064,
+    "Pages inactive": 1073250304,
+    "Pages speculative": 107462656,
+    "Pages wired down": 1971470336,
+    "Pages occupied by compressor": 3591487488
+  },
+  "cua_processes": 57,
+  "cua_aggregate_rss_bytes": 335118336,
+  "chatgpt_app_processes": 85,
+  "chatgpt_app_aggregate_rss_bytes": 1611284480,
+  "non_cua_language_git_gis_processes": [
+    {
+      "pid": 54614,
+      "ppid": 54598,
+      "rss_bytes": 15663104,
+      "command": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3"
+    }
+  ],
+  "limits": [
+    "RSS sums may double-count shared pages; app-managed CUA processes have no established per-worker ownership and are not safe cleanup targets.",
+    "Current measurement differs from the preserved refusal time. OS availability is an estimate; swap is not RAM admission credit."
+  ]
+}
