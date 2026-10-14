@@ -17,10 +17,9 @@ from pathlib import Path
 
 
 class AcquisitionError(Exception):
-    def __init__(self, category, retryable=False):
+    def __init__(self, category):
         super().__init__(category)
         self.category = category
-        self.retryable = retryable
 
 
 MAX_TOTAL_SECONDS = 1800
@@ -71,11 +70,10 @@ class Supervisor:
         self.grace = grace
         self.reserve = 2 * grace + 2
         self.cancelled = False
-        self.attempt = 0
         self.unresolved_groups = set()
 
     def report(self, event, **fields):
-        self.emit(dict(event=event, attempt=self.attempt,
+        self.emit(dict(event=event,
                        elapsed_seconds=round(time.monotonic() - self.started + self.elapsed, 3),
                        remaining_seconds=round(max(0, self.deadline - time.monotonic()), 3), **fields))
 
@@ -114,13 +112,11 @@ class Supervisor:
                 pass
             raise AcquisitionError('process-cleanup-failed')
 
-    def run(self, argv, cwd, env, phase, timeout=None, accepted=(0,), cleanup=False):
+    def run(self, argv, cwd, env, phase, accepted=(0,), cleanup=False):
         if self.cancelled and not cleanup:
             raise AcquisitionError('cancelled')
         start = time.monotonic()
         end = self.deadline - (self.grace if cleanup else self.reserve)
-        if timeout is not None:
-            end = min(end, start + timeout)
         if end <= start:
             raise AcquisitionError('acquisition-deadline')
         child = subprocess.Popen(argv, cwd=str(cwd), env=env, stdin=subprocess.DEVNULL,
@@ -140,7 +136,7 @@ class Supervisor:
                     failure = 'cancelled'
                     break
                 if time.monotonic() >= end:
-                    failure = 'phase-timeout'
+                    failure = 'acquisition-deadline'
                     break
                 for key, _ in selector.select(min(0.1, max(0, end - time.monotonic()))):
                     chunk = os.read(key.fileobj.fileno(), 8192)
@@ -175,7 +171,7 @@ class Supervisor:
                 try:
                     child.wait(timeout=max(0.01, end - time.monotonic()))
                 except subprocess.TimeoutExpired:
-                    failure = 'phase-timeout'
+                    failure = 'acquisition-deadline'
                 self.stop_group(child)
             if self.cancelled and not cleanup:
                 failure = 'cancelled'
@@ -184,8 +180,7 @@ class Supervisor:
             self.report('phase-complete', phase=phase, status=failure or 'success',
                         phase_seconds=round(time.monotonic() - start, 3), exit_code=child.returncode)
             if failure:
-                raise AcquisitionError(failure, retryable=phase == 'fetch' and
-                                       failure in ('phase-timeout', 'command-failed'))
+                raise AcquisitionError(failure)
             return bytes(output).decode('utf-8', errors='strict').strip()
         finally:
             try:
@@ -197,8 +192,8 @@ class Supervisor:
                 child.stderr.close()
 
 
-def acquire(repository, sha, tree, workspace, fetch_timeout=240, total_timeout=420,
-            max_attempts=2, elapsed_seconds=0, token=None, git_executable=None, emit=None):
+def acquire(repository, sha, tree, workspace, total_timeout=420, elapsed_seconds=0,
+            token=None, git_executable=None, emit=None):
     """git_executable is a library-only fault-injection seam, never a CLI option."""
     supplied_token = os.environ.pop('WORLDATLAS_CHECKOUT_TOKEN', None)
     token = supplied_token if token is None else token
@@ -209,12 +204,9 @@ def acquire(repository, sha, tree, workspace, fetch_timeout=240, total_timeout=4
     if not all(re.fullmatch(r'[a-f0-9]{40}', value or '') for value in (sha, tree)):
         raise AcquisitionError('invalid-git-identity')
     total_timeout = finite_seconds(total_timeout, 'total-timeout')
-    fetch_timeout = finite_seconds(fetch_timeout, 'fetch-timeout', maximum=total_timeout)
     elapsed_seconds = finite_seconds(elapsed_seconds, 'elapsed', maximum=total_timeout)
-    if fetch_timeout <= 0 or total_timeout <= 4 or elapsed_seconds >= total_timeout:
+    if total_timeout <= 4 or elapsed_seconds >= total_timeout:
         raise AcquisitionError('invalid-deadline')
-    if type(max_attempts) is not int or max_attempts not in (1, 2):
-        raise AcquisitionError('invalid-attempt-limit')
     workspace = Path(workspace)
     if not workspace.is_absolute() or workspace.is_symlink() or not workspace.is_dir():
         raise AcquisitionError('invalid-workspace')
@@ -236,68 +228,56 @@ def acquire(repository, sha, tree, workspace, fetch_timeout=240, total_timeout=4
     staging = None
     promoted = False
     try:
-        for attempt in range(1, max_attempts + 1):
-            supervisor.attempt = attempt
-            if supervisor.cancelled:
-                raise AcquisitionError('cancelled')
-            if supervisor.deadline - time.monotonic() <= supervisor.reserve:
-                raise AcquisitionError('acquisition-deadline')
-            staging = Path(tempfile.mkdtemp(prefix='.worldatlas-ci-checkout-', dir=str(workspace.parent)))
-            if staging.stat().st_dev != workspace_identity[0]:
-                raise AcquisitionError('workspace-filesystem-changed')
-            supervisor.run(common + ['init', '--template=', '--quiet', str(staging)], staging, env, 'initialize')
-            supervisor.run(common + ['remote', 'add', 'origin', remote], staging, env, 'initialize')
-            fetch_env = dict(env)
-            if token:
-                fetch_env.update(GIT_CONFIG_COUNT='1', GIT_CONFIG_KEY_0='http.https://github.com/.extraheader',
-                                 GIT_CONFIG_VALUE_0='AUTHORIZATION: basic ' +
-                                 base64.b64encode(('x-access-token:' + token).encode()).decode())
-            try:
-                supervisor.run(common + ['-c', 'protocol.version=2', 'fetch', '--progress', '--no-tags',
-                                         '--no-recurse-submodules', '--depth=1', 'origin', sha],
-                               staging, fetch_env, 'fetch', timeout=fetch_timeout)
-            except AcquisitionError as error:
-                fetch_env.clear()
-                if not error.retryable or supervisor.cancelled or attempt == max_attempts:
-                    raise
-                supervisor.run([sys.executable, '-c', 'import shutil,sys;shutil.rmtree(sys.argv[1])', str(staging)],
-                               workspace.parent, env, 'cleanup', cleanup=True)
-                staging = None
-                supervisor.report('acquisition-retry', reason=error.category)
-                continue
-            finally:
-                fetch_env.clear()
-            commit = supervisor.run(common + ['rev-parse', '--verify', 'FETCH_HEAD^{commit}'], staging, env, 'verify-commit')
-            if commit != sha:
-                raise AcquisitionError('git-identity-mismatch')
-            actual_tree = supervisor.run(common + ['rev-parse', '--verify', sha + '^{tree}'], staging, env, 'verify-tree')
-            if commit != sha or actual_tree != tree:
-                raise AcquisitionError('git-identity-mismatch')
-            supervisor.run(common + ['checkout', '--detach', '--force', '--progress', sha], staging, env, 'materialize')
-            head = supervisor.run(common + ['rev-parse', 'HEAD'], staging, env, 'verify-checkout')
-            final_tree = supervisor.run(common + ['rev-parse', 'HEAD^{tree}'], staging, env, 'verify-checkout')
-            credentials = supervisor.run(common + ['config', '--local', '--name-only', '--get-regexp',
-                                                   r'http\..*extraheader|credential\..*|core\.sshcommand|include.*'],
-                                         staging, env, 'credential-audit', accepted=(0, 1))
-            if credentials or head != sha or final_tree != tree:
-                raise AcquisitionError('checkout-verification-failed')
-            if supervisor.cancelled:
-                raise AcquisitionError('cancelled')
-            if (workspace.is_symlink() or not workspace.is_dir() or
-                    (workspace.stat().st_dev, workspace.stat().st_ino) != workspace_identity or list(workspace.iterdir())):
-                raise AcquisitionError('workspace-changed')
-            if time.monotonic() >= supervisor.deadline - supervisor.reserve:
-                raise AcquisitionError('acquisition-deadline')
-            # Atomic directory replacement refuses a newly nonempty destination.
-            # Both directories are on one filesystem; this is not a full-tree copy.
-            os.replace(str(staging), str(workspace))
-            staging = None
-            if supervisor.cancelled:
-                raise AcquisitionError('cancelled')
-            promoted = True
-            supervisor.report('checkout-complete', sha=sha, tree=tree, attempts=attempt)
-            return {'sha': sha, 'tree': tree, 'attempts': attempt}
-        raise AcquisitionError('attempts-exhausted')
+        if supervisor.cancelled:
+            raise AcquisitionError('cancelled')
+        if supervisor.deadline - time.monotonic() <= supervisor.reserve:
+            raise AcquisitionError('acquisition-deadline')
+        staging = Path(tempfile.mkdtemp(prefix='.worldatlas-ci-checkout-', dir=str(workspace.parent)))
+        if staging.stat().st_dev != workspace_identity[0]:
+            raise AcquisitionError('workspace-filesystem-changed')
+        supervisor.run(common + ['init', '--template=', '--quiet', str(staging)], staging, env, 'initialize')
+        supervisor.run(common + ['remote', 'add', 'origin', remote], staging, env, 'initialize')
+        fetch_env = dict(env)
+        if token:
+            fetch_env.update(GIT_CONFIG_COUNT='1', GIT_CONFIG_KEY_0='http.https://github.com/.extraheader',
+                             GIT_CONFIG_VALUE_0='AUTHORIZATION: basic ' +
+                             base64.b64encode(('x-access-token:' + token).encode()).decode())
+        try:
+            supervisor.run(common + ['-c', 'protocol.version=2', 'fetch', '--progress', '--no-tags',
+                                     '--no-recurse-submodules', '--depth=1', 'origin', sha],
+                           staging, fetch_env, 'fetch')
+        finally:
+            fetch_env.clear()
+        commit = supervisor.run(common + ['rev-parse', '--verify', 'FETCH_HEAD^{commit}'], staging, env, 'verify-commit')
+        if commit != sha:
+            raise AcquisitionError('git-identity-mismatch')
+        actual_tree = supervisor.run(common + ['rev-parse', '--verify', sha + '^{tree}'], staging, env, 'verify-tree')
+        if commit != sha or actual_tree != tree:
+            raise AcquisitionError('git-identity-mismatch')
+        supervisor.run(common + ['checkout', '--detach', '--force', '--progress', sha], staging, env, 'materialize')
+        head = supervisor.run(common + ['rev-parse', 'HEAD'], staging, env, 'verify-checkout')
+        final_tree = supervisor.run(common + ['rev-parse', 'HEAD^{tree}'], staging, env, 'verify-checkout')
+        credentials = supervisor.run(common + ['config', '--local', '--name-only', '--get-regexp',
+                                               r'http\..*extraheader|credential\..*|core\.sshcommand|include.*'],
+                                     staging, env, 'credential-audit', accepted=(0, 1))
+        if credentials or head != sha or final_tree != tree:
+            raise AcquisitionError('checkout-verification-failed')
+        if supervisor.cancelled:
+            raise AcquisitionError('cancelled')
+        if (workspace.is_symlink() or not workspace.is_dir() or
+                (workspace.stat().st_dev, workspace.stat().st_ino) != workspace_identity or list(workspace.iterdir())):
+            raise AcquisitionError('workspace-changed')
+        if time.monotonic() >= supervisor.deadline - supervisor.reserve:
+            raise AcquisitionError('acquisition-deadline')
+        # Atomic directory replacement refuses a newly nonempty destination.
+        # Both directories are on one filesystem; this is not a full-tree copy.
+        os.replace(str(staging), str(workspace))
+        staging = None
+        if supervisor.cancelled:
+            raise AcquisitionError('cancelled')
+        promoted = True
+        supervisor.report('checkout-complete', sha=sha, tree=tree)
+        return {'sha': sha, 'tree': tree}
     finally:
         token = None
         try:
@@ -319,14 +299,12 @@ def main():
     parser.add_argument('--sha', required=True)
     parser.add_argument('--tree', required=True)
     parser.add_argument('--workspace', required=True)
-    parser.add_argument('--fetch-timeout-seconds', default='240')
     parser.add_argument('--total-timeout-seconds', default='420')
-    parser.add_argument('--max-attempts', type=int, default=2)
     parser.add_argument('--elapsed-seconds', default='0')
     args = parser.parse_args()
     try:
         acquire(args.repository, args.sha, args.tree, args.workspace,
-                args.fetch_timeout_seconds, args.total_timeout_seconds, args.max_attempts, args.elapsed_seconds)
+                args.total_timeout_seconds, args.elapsed_seconds)
     except AcquisitionError as error:
         print(json.dumps({'event': 'acquisition-failed', 'reason': error.category}), flush=True)
         return 130 if error.category == 'cancelled' else 1
