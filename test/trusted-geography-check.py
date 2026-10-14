@@ -36,7 +36,6 @@ class Fixture:
         for name in ['scripts/check-geographic-regression.py', 'scripts/evidence/immutable.py',
                      'scripts/evidence/geometry.py', 'scripts/ellipsoidal_area.py', 'requirements.txt',
                      'package.json', '.github/evidence-policy.json', 'src/regional-import-gate.js',
-                     'coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs',
                      'coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs',
                      'coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs',
                      'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs']:
@@ -553,10 +552,14 @@ class UnchangedSelectedApplicabilityControls(unittest.TestCase):
         g = self.g
         with self.mock.patch.object(g, 'verify_trusted_checkout', return_value='fixture'), \
              self.mock.patch.object(g, 'inventory', side_effect=[['before'], ['after']]), \
+             self.mock.patch.object(g, 'git', return_value=b'') as selected_inventory, \
              self.mock.patch.object(g, 'unchanged_selected_inputs', side_effect=AssertionError('shortcut consulted')), \
              self.mock.patch.object(g.importlib.util, 'spec_from_file_location', side_effect=RuntimeError('full-check-reached')):
             with self.assertRaisesRegex(RuntimeError, 'full-check-reached'):
                 g.inspect(ROOT, self.baseline, self.candidate, prefetch=True)
+        self.assertEqual(selected_inventory.call_args_list, [
+            self.mock.call(ROOT, 'ls-tree', '-z', version, '--', 'data/ownership-selection.json')
+            for version in [self.baseline, self.candidate]])
 
 
 if __name__ == '__main__':
