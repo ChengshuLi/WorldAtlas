@@ -1,0 +1,105 @@
+"""Execute unchanged retained physical operator in fresh owned scratch."""
+import argparse
+import hashlib
+import json
+import os
+from pathlib import Path
+import resource
+import subprocess
+import sys
+import time
+import types
+
+ROOT=Path('/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/fa678ed92d9b60765f8935b6a7afd117bc7c744c96057999400c37180373dd2e/work')
+HERE=Path('/Users/chengshuli/Documents/Codex/2026-10-14/task-2')
+DEST=ROOT/'.cache/mmr-rakhine-physical-20261014-002-kyaukpyu'
+HEAD='410d66549bedfe013a0044d715547dff2712f464'
+sha=lambda b:hashlib.sha256(b).hexdigest()
+encode=lambda x:(json.dumps(x,sort_keys=True,separators=(',',':'),allow_nan=False)+'\n').encode()
+def require(ok,message):
+    if not ok:raise ValueError(message)
+def fresh(path):
+    for p in [path,*path.parents]:require(not p.is_symlink(),'Symlink physical destination')
+    require(not path.exists(),'Fresh physical run already exists')
+def git(*args):
+    return subprocess.check_output(['git','-C',str(ROOT),'-c','protocol.allow=never',*args],stderr=subprocess.PIPE)
+class ResourceAbort(BaseException):
+    pass
+
+def main():
+    parser=argparse.ArgumentParser();parser.add_argument('--admission',required=True);args=parser.parse_args()
+    os.environ['GIT_NO_LAZY_FETCH']='1';os.environ['GIT_CONFIG_COUNT']='1';os.environ['GIT_CONFIG_KEY_0']='protocol.allow';os.environ['GIT_CONFIG_VALUE_0']='never'
+    require(git('rev-parse','HEAD').decode().strip()==HEAD,'Reviewed HEAD changed')
+    fresh(DEST)
+    plan=json.loads((HERE/'rakhine-physical-execution-proposal-kyaukpyu.json').read_bytes())
+    admission_raw=Path(args.admission).read_bytes();admission=json.loads(admission_raw)
+    require(admission['bridge_sha256']==sha(Path(__file__).read_bytes()) and admission['head']==HEAD,'Fresh admission code/head differs')
+    require(time.time()-admission['observed_unix_seconds']<30,'Stale physical admission')
+    require(admission['prospective_byte_charge']<=admission['allowance']['phaseBytes'],'Physical phase refused fresh admission')
+    stage_path=Path(plan['stage']['path']);stage_raw=stage_path.read_bytes()
+    require(len(stage_raw)==plan['stage']['bytes'] and sha(stage_raw)==plan['stage']['sha256'],'Reviewed screened stage changed')
+    stages=json.loads(stage_raw);targets=[s['target'] for s in stages]
+    require(len(targets)==1 and len(set(targets))==1 and targets==plan['stage']['targets'],'Physical target scope changed')
+    require('gb:MMR:ADM3:66882298B80264177521474' not in targets,'Myebon must be reused')
+    captured={}
+    for pin in plan['git_inputs']:
+        row=git('ls-tree','-z',HEAD,'--',pin['path']).decode().rstrip('\0')
+        require(row.startswith('100644 blob ') and row.split()[2]==pin['git_blob_oid'] and int(git('cat-file','-s',pin['git_blob_oid']))==pin['bytes'],'Physical immutable Git descriptor differs')
+        if pin['role'] in ('unchanged-reproducer','unchanged-comparison-module','complete-source-metadata-index','complete-native-member-index'):
+            raw=git('show',HEAD+':'+pin['path']);require(len(raw)==pin['bytes'] and sha(raw)==pin['sha256'],'Physical executable/index bytes differ');captured[pin['path']]=raw
+    producer_name=next(p['path'] for p in plan['git_inputs'] if p['role']=='unchanged-reproducer')
+    comparison_name=next(p['path'] for p in plan['git_inputs'] if p['role']=='unchanged-comparison-module')
+    require(producer_name in captured and comparison_name in captured,'Missing captured scientific code')
+    import numpy,shapely,pyproj
+    require(numpy.__version__=='2.3.5' and shapely.__version__=='2.1.2' and pyproj.__version__=='3.7.2','Retained runtime versions changed')
+    start=time.monotonic();rss_limit=admission['allowance']['rssBytes'];trace_events=0;last_check=0
+    def check():
+        if time.monotonic()-start>=120:raise ResourceAbort('Finite physical deadline')
+        observed_rss=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+        if observed_rss>=rss_limit:raise ResourceAbort(f'Cooperative physical observed RSS {observed_rss} exceeds fresh allowance {rss_limit}')
+    def trace(frame,event,arg):
+        nonlocal trace_events,last_check
+        if frame.f_code.co_filename not in (producer_name,comparison_name):return None
+        trace_events+=1
+        if trace_events%1024==0:
+            check();last_check=trace_events
+        return trace
+    check();fresh(DEST);DEST.mkdir()
+    census=DEST/'.cache/full-census';out=census/'gshhg-direct';out.mkdir(parents=True)
+    for name,raw in [('all-stage-inputs.json',stage_raw)]:
+        with (census/name).open('xb') as stream:stream.write(raw);stream.flush();os.fsync(stream.fileno())
+    for name,raw in [('admission.json',admission_raw),('bridge.py',Path(__file__).read_bytes()),('input-plan.json',encode(plan))]:
+        with (DEST/name).open('xb') as stream:stream.write(raw);stream.flush();os.fsync(stream.fileno())
+    old_cwd=Path.cwd();os.chdir(DEST)
+    module=types.ModuleType('comparison');module.__file__=comparison_name
+    exec(compile(captured[comparison_name],comparison_name,'exec'),module.__dict__);sys.modules['comparison']=module
+    scope={'__name__':'__main__','__file__':producer_name}
+    try:
+        sys.settrace(trace)
+        exec(compile(captured[producer_name],producer_name,'exec'),scope)
+    finally:
+        sys.settrace(None);os.chdir(old_cwd)
+    check()
+    output=out/'whole-target-support.json'
+    require(output.is_file() and not output.is_symlink(),'Missing/nonordinary physical result')
+    require(output.stat().st_size<=16*1024*1024,'Physical output exceeds admitted16MiB reserve')
+    result_raw=output.read_bytes();result=json.loads(result_raw)
+    actual=[r['target'] for r in result['results']]
+    require(actual==targets and len(set(actual))==1,'Physical result scope incomplete')
+    require(result['source_member']['member_bytes']==95809336 and len(result['source_metadata_receipts'])==18,'Incomplete GSHHG custody')
+    # Issues are retained as data. Success means a completed interpretation,
+    # never that every candidate cell is physically qualified.
+    receipt=dict(status='complete',head=HEAD,stage=dict(bytes=len(stage_raw),sha256=sha(stage_raw),targets=targets),
+        result=dict(path=str(output.relative_to(DEST)),bytes=len(result_raw),sha256=sha(result_raw)),
+        code=[dict(path=n,bytes=len(b),sha256=sha(b)) for n,b in captured.items()],
+        elapsed_seconds=time.monotonic()-start,observed_peak_rss_bytes=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
+        admission=admission,cooperative_trace_events=trace_events,last_cooperative_check_event=last_check,
+        result_issue_counts={r['target']:len(r['issues']) for r in result['results']},
+        runtime=dict(python=sys.version,python_executable=sys.executable,python_realpath=str(Path(sys.executable).resolve()),numpy=numpy.__version__,shapely=shapely.__version__,geos=shapely.geos_version_string,pyproj=pyproj.__version__),
+        limits=['Unchanged whole-target GSHHG source-relative interpretation only; all actual issues/residuals retained.',
+            'Cooperative project-line RSS checks and external owned-process-group deadline; no continuous aggregate RSS enforcement. Original producer maximum_rss_kib field retained unchanged; its Darwin value is bytes.',
+            'No native constructor, current-owner-zero, cell acceptance or delivery. Myebon physical result reused separately.'])
+    receipt_raw=encode(receipt);require(len(receipt_raw)<=65536,'Physical completion metadata exceeds64KiB reserve');check()
+    with (DEST/'publication.json').open('xb') as stream:stream.write(receipt_raw);stream.flush();os.fsync(stream.fileno())
+    print(json.dumps(dict(status='complete',output=str(DEST),elapsed_seconds=receipt['elapsed_seconds'],observed_peak_rss_bytes=receipt['observed_peak_rss_bytes'],issue_counts=receipt['result_issue_counts'])))
+if __name__=='__main__':main()

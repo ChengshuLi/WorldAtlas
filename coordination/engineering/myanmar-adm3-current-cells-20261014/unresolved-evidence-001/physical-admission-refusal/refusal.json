@@ -1,0 +1,23 @@
+{
+  "status": "admission-refused-not-executed",
+  "admission": {
+    "observation": {
+      "availableBytes": 1261240320,
+      "currentRssBytes": 53280768,
+      "concurrentReservedBytes": 0
+    },
+    "allowance": {
+      "phaseBytes": 683900928,
+      "rssBytes": 683900928
+    },
+    "prospective_complete_charge_bytes": 966049792,
+    "observed_unix_ms": 1792013836179
+  },
+  "physical_producer_started": false,
+  "physical_result_exists": false,
+  "compute_reserved": false,
+  "limits": [
+    "Fresh normal admission refused before scientific execution. No physical or native qualification inferred.",
+    "No new per-batch executable wrapper, allowance override or source/GSHHG replay. Prepared3816delivery unchanged."
+  ]
+}
