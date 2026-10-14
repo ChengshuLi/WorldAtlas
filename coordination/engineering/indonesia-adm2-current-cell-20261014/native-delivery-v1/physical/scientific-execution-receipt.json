@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "complete": true,
+  "deadline_seconds": 180,
+  "enforcement_limits": [
+    "No verified process-group deadline cleanup or live aggregate process-tree RSS enforcement",
+    "No SOURCE/NATIVE v2 qualified execution receipt is claimed",
+    "Successful direct child and synchronous Git calls are waited/reaped normally; on deadline preserve timeout without claiming descendant cleanup"
+  ],
+  "repaired_credit": 0,
+  "exit_code": 0,
+  "output": {
+    "path": ".cache/full-census/gshhg-direct/whole-target-support.json",
+    "bytes": 2542871,
+    "sha256": "3a96fe9ab659f2f144a2ad435ab0057dd78de617878b6d6be485241699c134d2"
+  },
+  "inspected_targets": 10,
+  "targets_with_issues": 2,
+  "maximum_child_lifetime_rss_bytes": 921075712,
+  "rss_measurement_limit": "Fresh launcher child lifetime maximum; not live aggregate process-tree enforcement",
+  "elapsed_seconds": 5.800297750043683,
+  "within_planned_rss_ceiling": true
+}
