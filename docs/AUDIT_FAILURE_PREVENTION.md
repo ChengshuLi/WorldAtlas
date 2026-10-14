@@ -109,8 +109,8 @@ current fixes before repeating a historical failure claim.
 
 Resource admission protects a future execution. Scientific review establishes
 what the actual inputs, method and result support. Neither replaces the other.
-The shared evidence readers' 32 MiB file/decoded-file and 256 MiB phase defaults
-are bounds of those implementations, not universal limits on an independently
+The Python `Baseline`/`NewVintage` helper's 32 MiB file/decoded-file and 256 MiB
+phase ceilings are bounds of that implementation, not universal limits on an independently
 reviewed scientific operator. The generic premerge transport gate still enforces
 its own declared-file budgets. Existing command-bound execution contracts,
 including SOURCE/NATIVE v2 qualified receipts, retain every required check.
