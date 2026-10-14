@@ -1,0 +1,141 @@
+{
+  "kind": "bounded-primary-owner-research-not-source-clearance",
+  "date": "2026-10-14",
+  "parent_id": "framework:province:yangon-south:51d86e5c4f5a",
+  "scope": {
+    "land": 227,
+    "relative_held": 333,
+    "water": 0,
+    "conflict": 0,
+    "current_complete_children": 9,
+    "repair_owners": 8,
+    "excluded_distinct_parent": "framework:province:yangon-south:eff008f2cdff (Cocokyun 40 land / 173 relative)"
+  },
+  "retained_input": {
+    "inventory_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/341d0bbaf81e47cd16ab58ca6d1ab75d5ac120cf732c677e081b12830ea3ef31/work/.cache/mmr-remaining-inventory-20261014-001/inventory.json",
+    "sha256": "efec8d28b63befcb411b6d0d81063af6a962edbec9a1b3f08b86fc3b7bd44157",
+    "source_vintage": 2019,
+    "source_revision": "9469f09",
+    "parent_sid": 44958,
+    "parent_original_ordinal": 61,
+    "parent_source_id": "gb:MMR:ADM2:60261553B83294236469928",
+    "region_id": "gb:MMR:ADM1:20573499B24734669936209"
+  },
+  "candidate_extents": [
+    {
+      "package_id": "gb-MMR-ADM3--repair-evaluation",
+      "rows": 158,
+      "cells": 227,
+      "native_grid_extent_x_half_open_y_inclusive": [
+        200868,
+        201565,
+        118606,
+        119032
+      ]
+    },
+    {
+      "package_id": "gb-MMR-ADM3--source-conflict",
+      "rows": 0,
+      "cells": 0,
+      "native_grid_extent_x_half_open_y_inclusive": null
+    },
+    {
+      "package_id": "gb-MMR-ADM3--physical-interpretation",
+      "rows": 124,
+      "cells": 333,
+      "native_grid_extent_x_half_open_y_inclusive": [
+        201032,
+        201598,
+        118668,
+        119041
+      ]
+    }
+  ],
+  "primary_sources": [
+    {
+      "url": "https://myanmar.unfpa.org/sites/default/files/pub-pdf/Yangon%20Region%20Census%20Report%20-%20ENGLISH.pdf",
+      "provider": "Department of Population, hosted UNFPA",
+      "document": "2014 Census Yangon Region, Volume 3-L",
+      "pages": 200,
+      "evidence_page_1_based": 167,
+      "finding": "Table I-2 groups Thanlyin, Kyauktan, Thongwa, Khayan, Twantay, Kawhmu, Kungyangon, Dala, Seikkyi/Khanaungto and Cocogyun under SOUTH YANGON. This is ten historical district members, versus nine in assigned current framework parent; Cocogyun is separately grouped in retained framework inventory. Administrative grouping is supported, not exact boundary geometry.",
+      "limit": "2014 census context does not alone establish exact 2019 source footprint or channel/island allocations."
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Kyauktan_2019_MMR.pdf",
+      "provider": "GAD, hosted MIMU",
+      "pages": 95,
+      "evidence_pages_1_based": [
+        14,
+        15
+      ],
+      "finding": "Report states September 2019 conditions and locates Kyauktan in Yangon southern district. Boundary description identifies Thongwa east, Gulf of Mottama south, Yangon River west and Thanlyin north. Tada is separately listed within township area table.",
+      "limit": "Coordinate extraction on page 15 says 26 degrees latitude, inconsistent with retained 16-degree footprint; not used as a corrected bounding box. No channel centreline/bank rule or source-component-to-island schedule established."
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Dala_2019_MMR.pdf",
+      "provider": "GAD, hosted MIMU",
+      "pages": 67,
+      "evidence_pages_1_based": [
+        14,
+        15,
+        16
+      ],
+      "finding": "2019 profile; page 15 boundary paragraph explicitly names Yangon River on northern side; drainage discussion indicates mostly saline local water sources.",
+      "limit": "Text extraction loses neighbour names; do not fill missing names from secondary descriptions. Printed/extracted coordinates do not match retained footprint reliably. Exact riverbank ownership or tidal boundary not established."
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Kungyangon_2019_MMR.pdf",
+      "provider": "GAD, hosted MIMU",
+      "pages": 105,
+      "evidence_pages_1_based": [
+        15,
+        16
+      ],
+      "finding": "2019 profile includes historical administrative notifications and geographic/boundary section; extracted history cites 16 September 1972 and 27 April 1973 dates, plus 2013/2016 changes.",
+      "limit": "Notification identifiers and boundary names are damaged in extraction; original instruments unverified. Cannot use textual coordinate extraction as whole-footprint proof; no island component allocation verified."
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Kawhmu_2019_MMR.pdf",
+      "provider": "GAD, hosted MIMU",
+      "pages": 78,
+      "evidence_pages_1_based": [
+        14,
+        15
+      ],
+      "finding": "Profile represents September 2019 and cites a 17 July 1972 administrative formation history.",
+      "limit": "Extraction damages text and order identity; underlying notification and exact boundary proof unverified."
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Seikgyikanaungto_2019_MMR.pdf",
+      "provider": "GAD, hosted MIMU",
+      "pages": 65,
+      "evidence_pages_1_based": [
+        14,
+        15
+      ],
+      "finding": "2019 profile contains 1972 formation history and geographical boundary section.",
+      "limit": "Extraction omits substantive boundary names; no exact channel-side ownership adopted."
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/Maps_UNREACH_Improved_Nutruition_Practices_MIMU1444v01_27Jun2016_A4.pdf",
+      "provider": "MIMU",
+      "pages": 1,
+      "date": "2016-06-27",
+      "map_id": "MIMU1444v01",
+      "datum": "Geographic/WGS84",
+      "scale": "Scale bar 0, 1.5, 3, 6 kilometres; numeric representative fraction not established",
+      "coverage": "Southern Yangon project overview naming all mainland cohort townships; thematic nutrition map, not an administrative instrument",
+      "provenance": "Boundaries WFP/MIMU; place names Ministry of Home Affairs GAD translated by MIMU",
+      "license": "Copyright MIMU 2016; free use with attribution, explicit UN non-endorsement disclaimer",
+      "limit": "Township-boundary/coastal-line legend supplies contextual cartography, not exact original2019 source boundary, island schedule or tidal channel rule."
+    }
+  ],
+  "missing_prerequisites": [
+    "Exact 2019 source geometry provenance and boundary convention tying 227 cells to the eight owners; GAD profiles and thematic map are not proof of consumed provider product.",
+    "Whole source ADM2 Yangon(South) historically includes ten census members, including Cocogyun; assigned nine-child framework scope must not be represented as complete historical district without reconciling separately retained Cocokyun parent.",
+    "Underlying GAD/MoHA formation/boundary notification bodies with exact identifiers and any island/channel schedule remain unread; profile references alone do not prove exact line ownership.",
+    "Cell-specific joins to accepted source authority, topology exclusions and whole-original physical evidence remain necessary; none generated in this research. Preserve 333 relative holds."
+  ],
+  "custody": "Read-only web tool document text only. No local PDFs acquired; no original PDF hash or raw-byte custody claimed. Screenshot requests returned no inspectable pixels in visible worker output; no visual legend claim based on them. No downloadMedia, local download, geometry/native/source process or source clearance."
+}

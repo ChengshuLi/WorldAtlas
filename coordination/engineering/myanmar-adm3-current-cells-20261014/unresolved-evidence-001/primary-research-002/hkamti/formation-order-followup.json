@@ -1,0 +1,78 @@
+{
+  "status": "bounded_formation_order_followup_no_annex_acquired",
+  "research_date_utc": "2026-10-14",
+  "prior_packet_sha256": "73a7715eb3b4cc5bff6fc3ee53a1705176db0ed4953e751121656a26aecf8796",
+  "prior_packet_unchanged": true,
+  "document_references": [
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Nanyun_2019_MMR.pdf",
+      "locator": "PDFpage3, section2",
+      "exact_missing_artifacts": [
+        {
+          "description": "Instrument transferring Nanyun/Pansaung from Kachin/Kamaing to Sagaing/Hkamti",
+          "date_in_profile": "1955-10-30",
+          "order_number": null,
+          "annex_link": null
+        },
+        {
+          "description": "Ministry of Home Affairs recognition/formation instrument for Nanyun Township following Nanyun/Donhee consolidation",
+          "year_in_profile": 1968,
+          "order_number": null,
+          "annex_link": null
+        }
+      ],
+      "limits": "These are profile narratives; no original instrument or readable identifier is claimed."
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Lahe_2019_MMR.pdf",
+      "locator": "PDFpages3–4, section2 and3",
+      "exact_missing_artifact": "Original formation/amendment order and constituent village-tract/map annex covering Lahe and Htan Pa Khwe/Htanparkway",
+      "order_number": null,
+      "date": null,
+      "limit": "Web extraction omits substantial history; do not reconstruct missing digits."
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Lay_Shi_2019_MMR.pdf",
+      "locator": "PDFpage3, section2",
+      "exact_missing_artifact": "Readable original formation/amendment instrument and boundary/tract annex for Lay Shi",
+      "order_number": null,
+      "date": null,
+      "limit": "History text mostly missing from web extraction."
+    }
+  ],
+  "new_official_publisher_access": [
+    {
+      "url": "https://gad.gov.mm/local-facts",
+      "observation": "Official Regional Data and Facts catalogue readable. Exposed rows1–50 include Hkamti and current district labels but no Nanyun/Lahe/LayShi annex."
+    },
+    {
+      "url": "https://gad.gov.mm/laws",
+      "observation": "Official applied-laws catalogue readable. Exposed general administration/land/excise laws, no target formation annex."
+    },
+    {
+      "url": "https://gad.gov.mm/all-announcements",
+      "observation": "Official announcements readable. Exposed2026 announcements/general administrative instructions, no target dated annex."
+    }
+  ],
+  "failed_once": {
+    "action": "Attempted official catalogue GET search for Nanyun; form parameter inferred, not verified",
+    "url": "https://gad.gov.mm/local-facts?search=%E1%80%94%E1%80%94%E1%80%BA%E1%80%B8%E1%80%9A%E1%80%BD%E1%80%94%E1%80%BA%E1%80%B8",
+    "result": "Web tool inaccessible; no retry, no local/browser download."
+  },
+  "result": "No original administrative annex or exact formation-order number obtained through the bounded accessible leads. Prior near-equal areas remain aggregation leads only. All417remain unresolved.",
+  "scope_change_proposals_reported_to_parent": {
+    "Kyaukpyu": {
+      "land": 2443,
+      "relative": 1129,
+      "condition": "Western four-parent cohort; collision/reservation check requested before starting."
+    },
+    "Kengtung": {
+      "land": 295,
+      "relative": 0,
+      "condition": "Non-western fallback disjoint from named Myitkyina/Hopang/Kawthoung/Dawei/Mawlamyine/Puta-o/Thaton; not started at time of note."
+    }
+  },
+  "no_local_or_browser_download": true,
+  "no_permission_card_request": true,
+  "no_scientific_process_or_tracked_edit": true
+}

@@ -1,0 +1,394 @@
+{
+  "status": "primary_documentary_packet_complete_no_new_qualification",
+  "research_date_utc": "2026-10-14",
+  "scope": "Kengtung295 disjoint parent; exact retained inventory/interval summaries plus primary official document text only. No downloads, browser downloads, new cards, map renders, source/GIS/native/geometry passes or tracked edits. Hkamti and Dawei packets preserved.",
+  "input_custody": {
+    "scientific_vintage_declared_in_cache": "f7c358326d776398bc1cffe84df81eac7033091c",
+    "inventory": {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/341d0bbaf81e47cd16ab58ca6d1ab75d5ac120cf732c677e081b12830ea3ef31/work/.cache/mmr-remaining-inventory-20261014-001/inventory.json",
+      "sha256": "efec8d28b63befcb411b6d0d81063af6a962edbec9a1b3f08b86fc3b7bd44157"
+    },
+    "intervals": {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/341d0bbaf81e47cd16ab58ca6d1ab75d5ac120cf732c677e081b12830ea3ef31/work/.cache/mmr-remaining-inventory-20261014-001/remaining-intervals.json.gz",
+      "sha256": "b12b9ed64ecb16fa2b5501648fa4ca91727793fa99ceadffb96d9623519c93aa"
+    },
+    "retained_head": null,
+    "explanation": "Exact untracked readonly cache bytes pinned by SHA256; declared scientific vintage does not assert a retention commit.",
+    "latitude_pin": {
+      "commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+      "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+      "decoded_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+    },
+    "longitude_formula": "(x+0.5)/262166*360-180"
+  },
+  "target": {
+    "parent_id": "framework:province:kengtung:7fba967f2349",
+    "land": 295,
+    "relative": 0,
+    "source_parent_features": [
+      {
+        "source_index": 44962,
+        "family_index": 217,
+        "source_id": "gb:MMR:ADM2:60261553B37663404803056",
+        "ordinal": 65,
+        "owners": [],
+        "name": "Kengtung",
+        "geometry_status": "raw-native-supported"
+      }
+    ],
+    "source_region_features": [
+      {
+        "id": "gb:MMR:ADM1:20573499B82952573339616",
+        "name": "Shan"
+      }
+    ],
+    "source_families": [
+      "gb:CHN:ADM1",
+      "gb:MMR:ADM1",
+      "gb:MMR:ADM2",
+      "gb:MMR:ADM3"
+    ],
+    "native_blocks": [
+      27,
+      28
+    ],
+    "complete_children": [
+      {
+        "owner": 30106,
+        "name": "Mongyang",
+        "id": "gb:MMR:ADM3:66882298B1975009216242",
+        "counts": {
+          "repair-evaluation:land": 131
+        },
+        "current_bounds": [
+          99.0269,
+          21.7093,
+          99.9965,
+          22.1627
+        ],
+        "original_bounds": [
+          99.02692520700006,
+          21.70112791800005,
+          99.9964634230001,
+          22.162689066000162
+        ],
+        "current_polygon_count": 4,
+        "current_holes": 1,
+        "original_polygon_count": 1,
+        "original_holes": 0,
+        "topology_fields": {
+          "topology_version": 1,
+          "topology_reconciled": true,
+          "topology_conflicts": 3,
+          "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+        }
+      },
+      {
+        "owner": 30125,
+        "name": "Mongping",
+        "id": "gb:MMR:ADM3:66882298B25077153637290",
+        "counts": {},
+        "current_bounds": [
+          98.4884,
+          20.5791,
+          99.3631,
+          21.6569
+        ],
+        "original_bounds": [
+          98.48826357200005,
+          20.579145343741455,
+          99.36307715300009,
+          21.656927172000028
+        ],
+        "current_polygon_count": 1,
+        "current_holes": 0,
+        "original_polygon_count": 1,
+        "original_holes": 0,
+        "topology_fields": {
+          "topology_version": 1
+        }
+      },
+      {
+        "owner": 30206,
+        "name": "Kengtung",
+        "id": "gb:MMR:ADM3:66882298B45721516561493",
+        "counts": {},
+        "current_bounds": [
+          99.2299,
+          20.9656,
+          99.9808,
+          21.5585
+        ],
+        "original_bounds": [
+          99.22990213700005,
+          20.965635286569494,
+          99.98077931900009,
+          21.558518897000067
+        ],
+        "current_polygon_count": 1,
+        "current_holes": 0,
+        "original_polygon_count": 1,
+        "original_holes": 0,
+        "topology_fields": {
+          "topology_version": 1
+        }
+      },
+      {
+        "owner": 30288,
+        "name": "Mongkhet",
+        "id": "gb:MMR:ADM3:66882298B64902452012974",
+        "counts": {},
+        "current_bounds": [
+          98.9124,
+          21.4781,
+          99.7794,
+          21.9094
+        ],
+        "original_bounds": [
+          98.912370056,
+          21.478120877,
+          99.77942628000008,
+          21.9093836370001
+        ],
+        "current_polygon_count": 1,
+        "current_holes": 0,
+        "original_polygon_count": 1,
+        "original_holes": 0,
+        "topology_fields": {
+          "topology_version": 1
+        }
+      },
+      {
+        "owner": 30298,
+        "name": "Mongla",
+        "id": "gb:MMR:ADM3:66882298B66538175578783",
+        "counts": {
+          "repair-evaluation:land": 164
+        },
+        "current_bounds": [
+          99.6621,
+          21.2708,
+          100.237,
+          21.8228
+        ],
+        "original_bounds": [
+          99.66211060500007,
+          21.270782859000036,
+          100.23812284600005,
+          21.822771194000023
+        ],
+        "current_polygon_count": 1,
+        "current_holes": 0,
+        "original_polygon_count": 1,
+        "original_holes": 0,
+        "topology_fields": {
+          "topology_version": 1,
+          "topology_reconciled": true,
+          "topology_conflicts": 1,
+          "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+        }
+      }
+    ],
+    "candidate_centres": [
+      {
+        "owner": 30106,
+        "name": "Mongyang",
+        "id": "gb:MMR:ADM3:66882298B1975009216242",
+        "interval_count": 68,
+        "cell_count": 131,
+        "x_inclusive": [
+          203311,
+          203899
+        ],
+        "y_inclusive": [
+          114539,
+          114785
+        ],
+        "centre_envelope_degrees": {
+          "longitude": [
+            99.18242640159286,
+            99.98985375678006
+          ],
+          "latitude": [
+            21.83107541631806,
+            22.144305934204606
+          ]
+        },
+        "source_sids": [
+          15319,
+          44896,
+          44962,
+          45296
+        ]
+      },
+      {
+        "owner": 30298,
+        "name": "Mongla",
+        "id": "gb:MMR:ADM3:66882298B66538175578783",
+        "interval_count": 100,
+        "cell_count": 164,
+        "x_inclusive": [
+          203882,
+          204032
+        ],
+        "y_inclusive": [
+          114834,
+          115055
+        ],
+        "centre_envelope_degrees": {
+          "longitude": [
+            99.96650976861991,
+            100.17248613473907
+          ],
+          "latitude": [
+            21.486494746064743,
+            21.768601612015875
+          ]
+        },
+        "source_sids": [
+          15319,
+          44896,
+          44962,
+          45282
+        ]
+      }
+    ],
+    "topology_limit": "Mongyang current geometry4 polygons/1hole differs from original1polygon/0holes; topology_reconciled flags do not establish territorial or hole clearance. Both candidate source SID sets contain15319; inventory identifies observed foreign familyCHN ADM1 but no per-centre country-reference disposition computed."
+  },
+  "catalogue": {
+    "url": "https://themimu.info/states_regions/shan",
+    "gad_mongyang_link": 174,
+    "census_mongyang_link": 236,
+    "census_mongla_link": 248,
+    "gad_upload_date": "2020-08-25",
+    "census_upload_date": "2020-05-13",
+    "limit": "Current overview not used for2019 borders. No Mongla2019GAD entry identified in exposed catalogue."
+  },
+  "primary_documents": [
+    {
+      "id": "GAD_Mongyang_2019",
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Mongyang_2019_MMR.pdf",
+      "publisher": "Myanmar General Administration Department, Mongyang Township; MIMU mirror",
+      "cover_date": "2019-09-30",
+      "cover_parent": "Kengtung District, Shan State",
+      "locator": "PDFpage11, printedp2; PDFpage12, printedp3",
+      "formation_references": [
+        {
+          "date": "1972-08-04",
+          "number_original": "၁၀၃/၅၇/စိတ်(၁)",
+          "number_transliterated": "103/57/Seit(1)",
+          "issuer": "Ministry of Home and Religious Affairs",
+          "role": "11-ward town notification"
+        },
+        {
+          "date": "1972-07-27",
+          "number_original": "၁၀၅/၄/စိတ်(၁)",
+          "number_transliterated": "105/4/Seit(1)",
+          "issuer": "Ministry of Home and Religious Affairs",
+          "role": "Township organization:13wards,15village tracts,334villages"
+        }
+      ],
+      "other_facts": "Area table includes SpecialRegion4 (378.61sqmi) and SpecialRegion2 (514.58sqmi); total1049.67sqmi. North neighborYunnan; Nam Yang named eastern administrative stream, Nam Lwe north-to-south.",
+      "limits": "Original orders/annexes not acquired. Printed position20–21N/99–100E conflicts with retained21.831–22.144N envelope; no silent correction or boundary exclusion. East-neighbor textKengtung differs from2026Mongla; neither establishes a change without an order. No datum or precision basis identified."
+    },
+    {
+      "id": "GAD_Mongyang_2026_direct_publisher",
+      "url": "https://www.gad.gov.mm/storage/localfacts/Vn2hbP9sqjLugbIJx2A7siRdJAcAVAV7HbI5q6qt.pdf",
+      "publisher": "General Administration Department, Ministry of Home Affairs, Myanmar",
+      "cover_date": "2026-03-31",
+      "cover_parent": "Mongyang District, Shan State",
+      "locator": "PDFpage13, printedp2:1972orders; PDFpage14, printedp3:area/borders/drainage",
+      "supported": "Independently repeats the two1972notification dates/numbers and original ward/tract/village counts. East neighbor now readsMongla, southMongkhet, westMatman, northChina; NamYang described byMonglaDistrict.",
+      "limits": "Later corroboration of historical order citations only. Its district label and neighbors cannot be projected back to2019. No original order/annex link found in read text; maps not rendered or qualified. No geodetic datum established."
+    },
+    {
+      "id": "DOP_Mongyang_2014",
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_Mongyang_2014_ENG.pdf",
+      "publisher": "Department of Population, Ministry of Labour, Immigration and Population, Myanmar; MIMU mirror",
+      "report_title": "Mineyan Township Report",
+      "published": "2017-10",
+      "reference_date": "2014-03-29",
+      "locators": "Cover; PDFpage7 figures; PDFpage17 area attribution; PDFpage18/Table1",
+      "supported": "Cover namesKengtungDistrict/ShanState. Area1385.9km2, attributed toSettlement and Land Record Department2014-2015. Table1 lists11wards.",
+      "limit": "Area differs substantially from2019GAD1049.67sqmi (~2718.633km2); no equivalence or complete source-footprint coverage inferred. Catalogue spellingMongyang versus reportMineyan is recorded, not an independent ID crosswalk."
+    },
+    {
+      "id": "DOP_Mongla_2014",
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_Mongla_2014_ENG.pdf",
+      "publisher": "Department of Population, Ministry of Labour, Immigration and Population, Myanmar; MIMU mirror",
+      "report_title": "Minelar Township Report",
+      "published": "2017-10",
+      "reference_date": "2014-03-29",
+      "locators": "Cover; PDFpage7 figures; PDFpage17 area attribution; PDFpage18/Table1",
+      "supported": "Cover namesKengtungDistrict/ShanState; area2282.1km2 withSettlement and Land Record Department2014-2015 attribution. Table1 contains2wards.",
+      "limit": "Names/area/ward table establish reporting context; no exact boundary, datum, source-ID join or relation of164centres toDaluo checkpoint established."
+    },
+    {
+      "id": "IBS42_1964",
+      "url": "https://library.law.fsu.edu/Digital-Collections/LimitsinSeas/pdf/ibs042.pdf",
+      "publisher": "US Department of State, Office of the Geographer; FSU retained mirror",
+      "title": "International Boundary Study No.42: Burma–China Boundary",
+      "date": "1964-11-30",
+      "locators": "Printedp17:ArticleVII.2(13–18); p18:ArticleVII.3/VIII; p9:1961protocol",
+      "facts": "Reproduced1960treaty southern sequence namesNamYung, NamLwe, NamMaw, Nambok, NamLak, NamLam, NamNga and watersheds. ArticleVII.3 identifies1:250000full-boundary and1:50000selected-area annex maps. ArticleVIII distinguishes unnavigable-river midstream from navigable main-channel midpoint and retains boundary after channel change absent another agreement. Text identifies13October1961protocol and replacement detailed maps.",
+      "units_datum_limits": "Historic treaty reproduction and US analysis; no direct local survey. Map scales only, not acquired sheets. Datum unknown; no exact river/peak/pillar tied to any295centres. Historical1964public-availability statement does not establish present availability. No automatic modern river-centreline, nearest-bank or water-land rule follows."
+    }
+  ],
+  "actionable_primary_artifact_requests": [
+    {
+      "artifact": "Original township formation notification and original constituent/boundary annex",
+      "issuer": "Ministry of Home and Religious Affairs",
+      "date": "1972-07-27",
+      "number": "105/4/စိတ်(1)",
+      "reference": "2019GADMongyang PDFpage11/printedp2; independently2026GAD PDFpage13/printedp2",
+      "needed_for": "Mongyang complete footprint, special-region aggregation and later amendments through2019"
+    },
+    {
+      "artifact": "Original11-ward town notification",
+      "issuer": "Ministry of Home and Religious Affairs",
+      "date": "1972-08-04",
+      "number": "103/57/စိတ်(1)",
+      "reference": "Same profiles",
+      "needed_for": "Town-versus-township distinction; cannot substitute town limits for original township feature"
+    },
+    {
+      "artifact": "13October1961 China–Burma boundary protocol with detailed replacement maps and relevant monument records; qualified amendments through2019",
+      "reference": "IBS42 printedp9; treatyArticleVII.3/ArticleX",
+      "needed_for": "Actual southern reach, exact centre-to-boundary correspondence, datum and river rule applicability"
+    }
+  ],
+  "access_attempts": {
+    "succeeded_web_only": [
+      "MIMUShan official document catalogue",
+      "2019MongyangGAD",
+      "2026MongyangGAD direct publisher",
+      "2014DoP Mineyan/Minelar reports",
+      "USStateDeptIBS42"
+    ],
+    "failed_once_no_retry": [
+      {
+        "url": "https://themimu.info/states_regions/shan-east",
+        "result": "Inaccessible; broaderShan catalogue used instead."
+      },
+      {
+        "url": "https://www.npc.gov.cn/wxzl/wxzl/2000-12/25/content_748.htm",
+        "result": "Internal error; no treaty facts adopted from secondary pointers."
+      },
+      {
+        "url": "https://treaty.mfa.gov.cn/tykfiles/20180718/1531876399419.pdf",
+        "result": "Two-page official-host PDF with zero extracted lines; no title/content/annex facts adopted."
+      }
+    ],
+    "search_result_only": "Exact Mongyang formation-order query yielded2026directGADprofile, read and date-checked; no original order located. Mongla1972GAD query returned no results.",
+    "no_download": true,
+    "no_card_request": true,
+    "no_maps_rendered": true
+  },
+  "next_evidence_limits": {
+    "Mongyang131": "Exact1972township annex and subsequent tract/special-region changes, then applicable China boundary map/monuments.2019GADlatitudes and2014area discrepancy must remain visible.",
+    "Mongla164": "Original2019official administrative map/formation instrument and precise China border evidence;2014report name alone insufficient.",
+    "complete_parent": "All5exactsource IDs in retained inventory retained; current five-child Kengtung framework is not independently approved by administrative labels alone."
+  },
+  "licensing": "Short factual documentary notes only. MIMU access creates no new open geospatial license; prior citation/noncommercial/written-permission limits retained. No downloaded geometry or scientific dataset.",
+  "conclusion": "Concrete dated order identifiers, direct-publisher corroboration and applicable treaty-map specifications acquired. No original administrative annex or qualified border map obtained.295land candidates remain unresolved;0newacceptedcells."
+}

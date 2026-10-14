@@ -1,0 +1,337 @@
+{
+  "version": 1,
+  "date_utc": "2026-10-14",
+  "worker": "/root/putao_primary_boundary",
+  "kind": "bounded-read-only-primary-evidence",
+  "parent_id": "framework:province:tachileik:d7c859e72d59",
+  "repair_land": 295,
+  "separate_source_conflict_land": 4,
+  "complete_children": [
+    {
+      "owner": 30113,
+      "id": "gb:MMR:ADM3:66882298B21195914889348",
+      "name": "Tachileik",
+      "province_id": "framework:province:tachileik:d7c859e72d59",
+      "remaining_counts": {
+        "repair-evaluation:land": 156,
+        "source-conflict:land": 4
+      },
+      "source_sids": [
+        41302,
+        44896,
+        44964,
+        45231,
+        57247,
+        57438,
+        57667
+      ],
+      "blocks": [
+        28
+      ],
+      "current_geometry": {
+        "type": "Polygon",
+        "polygons": 1,
+        "coordinate_pairs": 225,
+        "interior_rings": 0,
+        "bounds": [
+          99.4387,
+          20.317,
+          100.64792229758704,
+          21.0471
+        ]
+      },
+      "original_geometry": {
+        "type": "Polygon",
+        "polygons": 1,
+        "coordinate_pairs": 356,
+        "interior_rings": 0,
+        "bounds": [
+          99.43802820941748,
+          20.317030992000106,
+          100.64942603100008,
+          21.047088408000047
+        ]
+      }
+    },
+    {
+      "owner": 30136,
+      "id": "gb:MMR:ADM3:66882298B28068937388118",
+      "name": "Mongyawng",
+      "province_id": "framework:province:tachileik:d7c859e72d59",
+      "remaining_counts": {
+        "repair-evaluation:land": 139
+      },
+      "source_sids": [
+        15319,
+        44896,
+        44964,
+        45298
+      ],
+      "blocks": [
+        28
+      ],
+      "current_geometry": {
+        "type": "Polygon",
+        "polygons": 1,
+        "coordinate_pairs": 233,
+        "interior_rings": 0,
+        "bounds": [
+          99.9971,
+          20.9621,
+          101.1697,
+          21.769895152033214
+        ]
+      },
+      "original_geometry": {
+        "type": "Polygon",
+        "polygons": 1,
+        "coordinate_pairs": 337,
+        "interior_rings": 0,
+        "bounds": [
+          99.99707855100009,
+          20.962065877000068,
+          101.16989157400008,
+          21.778119990000032
+        ]
+      }
+    },
+    {
+      "owner": 30138,
+      "id": "gb:MMR:ADM3:66882298B28152158505759",
+      "name": "Monghpyak",
+      "province_id": "framework:province:tachileik:d7c859e72d59",
+      "remaining_counts": {},
+      "source_sids": [],
+      "blocks": [],
+      "current_geometry": {
+        "type": "Polygon",
+        "polygons": 1,
+        "coordinate_pairs": 80,
+        "interior_rings": 0,
+        "bounds": [
+          99.4543,
+          20.7322,
+          100.1487,
+          21.278
+        ]
+      },
+      "original_geometry": {
+        "type": "Polygon",
+        "polygons": 1,
+        "coordinate_pairs": 209,
+        "interior_rings": 0,
+        "bounds": [
+          99.45372563506544,
+          20.729619399000065,
+          100.14872167400007,
+          21.27795619000008
+        ]
+      }
+    }
+  ],
+  "source_parent_features": [
+    {
+      "source_index": 44964,
+      "family_index": 217,
+      "source_id": "gb:MMR:ADM2:60261553B30441775870549",
+      "ordinal": 67,
+      "owners": [],
+      "name": "Tachileik",
+      "geometry_status": "raw-native-supported"
+    }
+  ],
+  "observed_source_families": [
+    "gb:CHN:ADM1",
+    "gb:LAO:ADM1",
+    "gb:MMR:ADM1",
+    "gb:MMR:ADM2",
+    "gb:MMR:ADM3",
+    "gb:THA:ADM1",
+    "gb:THA:ADM2"
+  ],
+  "scientific_vintage": "f 7 c 358326 d 776398 bc 1 cffe 84 df 81 eac 7033091 c",
+  "frozen_queue_vintage": "a 61 b 6 f 9 e 7 f 88 b 1 da 380 e 3 a 834 f 89 d 7509132 ed 71",
+  "retained_inventory_excerpt": "retained-inventory-excerpt.json",
+  "interval_limit": "Only original reference year 2019 and copied current/original geographic envelopes available; no per-cell temporal intervals or candidate coordinates queried.",
+  "sources": [
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Tachileik_2019_MMR.pdf",
+      "producer": "Myanmar General Administration Department; MIMU mirror",
+      "pages": 101,
+      "date": "30 September 2019; information through end September 2019",
+      "locators": [
+        "PDF p 9: history/order citations",
+        "PDF p 10-11: area/boundary/drainage"
+      ],
+      "findings": "Tachileik borders Laos east and Thailand east/southeast; northern neighbors Monghpyak/Mongyawng. Mekong is named as Myanmar–Laos boundary river; Mae Sai drainage described. Area table includes Tarlay and Kyainglap town rows.",
+      "cited_town_formation_orders": [
+        {
+          "town": "Kyainglap",
+          "date": "2002-04-22",
+          "reference_as_printed": "100/22-318/ဦး1"
+        },
+        {
+          "town": "Tarlay",
+          "date": "2002-08-09",
+          "reference_as_printed": "100/22-330/ဦး1"
+        }
+      ],
+      "extent": "Declared geographic box 20°19′–21°20′N,99°34′–100°39′E; not identical to retained ADM 3 envelope. Graphic maps not inspected.",
+      "scale_datum": "Not established.",
+      "limit": "Printed order references concern town formation; original gazette/orders and territorial map schedules not obtained. No township-boundary authority inferred."
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Mongyawng_2019_MMR.pdf",
+      "producer": "Myanmar General Administration Department; MIMU mirror",
+      "pages": 48,
+      "date": "2019 report; information through end September 2019",
+      "locators": [
+        "PDF p 10: town-formation citations, location, area",
+        "PDFp11: boundary",
+        "PDFp12: drainage"
+      ],
+      "findings": "Laos east; China and Mongla north; Kengtung west; Monghpyak/Tachileik south. Nam Lwe drains to Mekong. No Thai adjacency asserted.",
+      "cited_town_formation_orders": [
+        {
+          "town": "Mongyawng",
+          "date": "1972-08-04",
+          "reference_as_printed": "103/57/စိတ်(1)"
+        },
+        {
+          "town": "Mongyu",
+          "date": "2002-04-22",
+          "reference_as_printed": "100/2-317/ဦး1"
+        }
+      ],
+      "extent": "Declared box 21°25′–21°45′N,100°05′–100°33′E differs materially from retained original ADM 3 envelope 99.9971–101.1699 E,20.9621–21.7781 N. Area table includes Mongyu town.",
+      "scale_datum": "Not established.",
+      "limit": "Order citations and box transcribed from profile; originals/annexes absent. Do not correct geography or equate town formation with township footprint from this mismatch."
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_Mongyawng_2014_ENG.pdf",
+      "producer": "Myanmar Department of Population, Ministry of Labour, Immigration and Population",
+      "pages": 58,
+      "date": "29 March 2014 census; October 2017 report",
+      "locators": [
+        "Cover/PDF p 3: actual title Mineyaung Township, Tachileik District",
+        "PDF p 7: area 1071.8 km²,9 wards/9 village tracts",
+        "PDF p 10 area-source note"
+      ],
+      "findings": "Mongyawng filename contains official Mineyaung report, with area from Settlement and Land Record Department 2014–2015.",
+      "extent": "Statistical township subject and Shan-wide locator; original 2019 Mongyawng full-footprint match unproved.",
+      "scale_datum": "Not established; maps not visually inspected.",
+      "limit": "Spelling, reporting extent and Mongyu/sub-township nesting need explicit crosswalk."
+    },
+    {
+      "url": "https://www.gad.gov.mm/storage/localfacts/UTa9Ir0aIoKvCqkphtrJFDeIRQhA38PcWEL6Ci4y.pdf",
+      "producer": "Myanmar General Administration Department, direct official host",
+      "pages": 86,
+      "date": "Introduction covers April 2025–March 2026; no claim of 2019 boundary effect",
+      "locators": [
+        "PDF p 10: statistical interval",
+        "PDF p 11: same 2002 town-order references"
+      ],
+      "findings": "Direct official newer profile independently repeats Kyainglap 100/22-318/ဦး1(22 April 2002) and Tarlay 100/22-330/ဦး1(9 August 2002).",
+      "extent": "Modern township profile; not substituted for original 2019 geometry.",
+      "scale_datum": "Unverified.",
+      "limit": "Profile is not original formation gazette or surveyed map annex."
+    },
+    {
+      "url": "https://library.law.fsu.edu/Digital-Collections/LimitsinSeas/pdf/ibs033.pdf",
+      "producer": "U.S. Department of State, Office of the Geographer; archived government-issued source at FSU",
+      "title": "International Boundary Study 33: Burma–Laos",
+      "date": "1964-06-18",
+      "pages": 7,
+      "locators": [
+        "Printed 2: boundary brief,1:63360 measurement source",
+        "Printed 4-5: alignment",
+        "Printed 5:1896 Declaration Art III, BFSP 88:13;JO 23 Jan 1896"
+      ],
+      "findings": "Historical rule is Mekong deepest navigable-channel thalweg, China frontier to Nam Kok confluence. Notes practical thalweg difficulty at rapids/island allocation. Best-detail cited series is British BURMA–Southern Shan States 1:63360; AMS 1:250000 also cited.",
+      "extent": "Entire Laos boundary, relevant river corridor rather than exact candidate positions.",
+      "datum": "Not given.",
+      "limit": "No hydrographic survey, dated channel coordinates, individual sheet IDs or map annex supplied; historical description does not locate 2019 cells."
+    },
+    {
+      "url": "https://library.law.fsu.edu/Digital-Collections/LimitsinSeas/pdf/ibs063.pdf",
+      "producer": "U.S. Department of State, Office of the Geographer; archived at FSU",
+      "title": "International Boundary Study 63: Burma–Thailand",
+      "date": "1966-02-01",
+      "pages": 11,
+      "locators": [
+        "Printed 6: northern river alignment",
+        "Printed 8:1894 signed 3-sheet map set;1931–32 notes Cmd 4112",
+        "Printed 9:1940 notes Cmd 6262"
+      ],
+      "findings": "Northern corridor follows Nam Kok/Meh Ruak and Mae Sai, then divides. Identifies 3 signed boundary-map sheets exchanged 17 October 1894;1931–32 Mae Sai change to 1929 deepwater channel;1940 later channel terms.",
+      "extent": "Country-wide study; only northern river corridor relevant here.",
+      "scale_datum": "1894 sheet scale/datum not supplied.",
+      "limit": "Not a dated survey of candidate cells. Original 1940 notes inspected separately below; their specific sudden-change clause must not be flattened to an automatic moving-river rule."
+    },
+    {
+      "url": "https://treaties.fcdo.gov.uk/data/Library2/pdf/1941-TS0003.pdf",
+      "producer": "UK Foreign Office/HMSO; official FCDO treaty archive",
+      "title": "Exchanges of Notes regarding Boundary between Burma and Thailand, TS 3(1941),Cmd 6262",
+      "dates": [
+        "1940-10-01",
+        "1940-12-10"
+      ],
+      "pages": 8,
+      "locators": [
+        "Printed 2-4:Notes 1/2 and 24 March 1939 commission memorandum",
+        "Printed 5-6:Note 3,paragraph(i)A/B and(vi),map footnote",
+        "Printed 7-8:Note 4 acceptance"
+      ],
+      "findings": "Mae Sai changes examined between steel bridge and Sai/Ruak junction; deepwater-channel principle retained. Meh Ruak boundary is deepwater channel; sudden natural course-change territorial transfers require confirmation by both governments. Koh Chang/Kaw Chang variation map referenced.",
+      "actual_missing_maps": [
+        "24 March 1939 Chiengrai commissioners map of old/new Mae Sai channels",
+        "Meh Ruak variation map signed by Stewart and Phya Prakit Kolasastra"
+      ],
+      "annex_availability": "Publication explicitly says maps not reproduced.",
+      "scale_datum": "Absent.",
+      "limit": "Original primary text supplies rule and missing-map identity, not current channel position or modern applicability finding."
+    },
+    {
+      "url": "https://treaties.fcdo.gov.uk/data/Library2/pdf/1932-TS0019.pdf",
+      "catalogue_url": "https://treaties.fcdo.gov.uk/awweb/awarchive?item=78950&type=metadata",
+      "producer": "UKofficial treaty archive",
+      "title": "Agreement/Exchange of Notes regulating boundary Burma(Kengtung)–Siam,TS 19(1932),Cmd 4112",
+      "dates": [
+        "1931-08-27",
+        "1932-03-14"
+      ],
+      "pages": 5,
+      "archive_reference_as_catalogued": "PRO (now TNA) FO 93/95/35/0:0",
+      "inspection": "PDFopened read-only but text extraction returned 0 lines; catalogue identifies record.",
+      "limit": "Map presence/content,scale,datum and exact clauses not verified; no local download or OCR."
+    }
+  ],
+  "failed_once_no_retry": [
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_Tachileik_2014_ENG.pdf",
+      "outcome": "Webinternalerror; no retry."
+    }
+  ],
+  "concrete_next_inputs": [
+    "Original gazette/order 100/22-318/ဦး1 (22 April 2002) for Kyainglap and 100/22-330/ဦး1 (9 August 2002) for Tarlay, with territorial schedules/maps.",
+    "Original Mongyawng order 103/57/စိတ်(1) (4 August 1972) and Mongyu order 100/2-317/ဦး1 (22 April 2002); verify the prefix against the original before use.",
+    "Official 2019 township/sub-township nesting and polygons resolving Mineyaung/Mongyu and Tachileik/Tarlay/Kyainglap extent.",
+    "The 24 March 1939 Mae Sai old/new-channel map and 1940 Meh Ruak variation map; dated hydrographic surveys/control and later relevant agreements.",
+    "Mekong thalweg survey sheets, datum and island/channel allocation records for the actual candidate corridor.",
+    "Exact foreign source-SID identities and exclusion authority; original/display reconciliation alone does not grant ownership."
+  ],
+  "interpretation_limits": {
+    "no_sovereignty_adjudication": true,
+    "no_cell_registration": true,
+    "no_clearance": true,
+    "repair295_held": true,
+    "source_conflict4_held_separately": true,
+    "new_accepted_credit": 0,
+    "local_downloads": 0,
+    "new_permission_cards": 0,
+    "spatial_or_scientific_processing": 0,
+    "prior_files_changed": false,
+    "web_source_hashes": "Not available: read-only web inspection only, no original source bytes downloaded.",
+    "license": "No document-specific license clearance established. MIMU terms were previously recorded; the geo Boundaries license does not apply to these documents."
+  }
+}

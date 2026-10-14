@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "status": "actual2578-constructor-qualified-independent-result-review-accepted-with-limits",
+  "candidate_cells": 2578,
+  "authorities": [
+    {
+      "rule_preimage": {
+        "commit": "d76a8affe98c2d70dd6e3f20ef7b19a4c6c13f7e",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/rakhine901-authority-001/original-rule-preimage.json",
+        "mode": "100644",
+        "git_blob_oid": "7f766ef24d1dab3b3fdfc09b5be12eb363815762",
+        "bytes": 816,
+        "sha256": "116b173596b0a3873cf8a5237491a7f906b29cd109a388ae2a2df90b227fffa2"
+      },
+      "source_authority": {
+        "commit": "d76a8affe98c2d70dd6e3f20ef7b19a4c6c13f7e",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/rakhine901-authority-001/authority-binding.json",
+        "mode": "100644",
+        "git_blob_oid": "3ca7eaa84b35c10b4e5d8f1825cb21e3fe446630",
+        "bytes": 819,
+        "sha256": "0928b2b14d7fa1769e4acc18e27ffa5192a3059222d3b0b803eb7962a077c362"
+      },
+      "ledger": {
+        "commit": "d76a8affe98c2d70dd6e3f20ef7b19a4c6c13f7e",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/rakhine901-authority-001/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "df5c5578c33c956730c0c501b38f8048cd42e8c7",
+        "bytes": 19405,
+        "sha256": "442a2ab558d90ff3ecb1b64962bc49b354184101436457494242f4eda785e768"
+      },
+      "native_patch": {
+        "commit": "c9c33c777bd01c5214a372ebc3718eed0aa10271",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/line-conflict/two-target-901-candidate-native-patch.json",
+        "mode": "100644",
+        "git_blob_oid": "bee4870ba49d6bb61a3ea6fc5da08886f5991453",
+        "bytes": 12661,
+        "sha256": "38070faf3af48734d780509e09497346902b0aeea69877c2dc196d100e572f6f"
+      }
+    },
+    {
+      "rule_preimage": {
+        "commit": "d76a8affe98c2d70dd6e3f20ef7b19a4c6c13f7e",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/kyaukpyu1677-authority-001/original-rule-preimage.json",
+        "mode": "100644",
+        "git_blob_oid": "447f6e68303cba6e219fca310a7ee55d952772c5",
+        "bytes": 806,
+        "sha256": "8120a66316f26a3dcf4ede89c5962ef322f29d7917d20180fccecd0b191e084a"
+      },
+      "source_authority": {
+        "commit": "d76a8affe98c2d70dd6e3f20ef7b19a4c6c13f7e",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/kyaukpyu1677-authority-001/authority-binding.json",
+        "mode": "100644",
+        "git_blob_oid": "63449c516880d0e9c7dda13007e5fcdf357816e9",
+        "bytes": 809,
+        "sha256": "572310715295afa885064a2ac42a716187b1d23437bac8d331cbfb69c395b79c"
+      },
+      "ledger": {
+        "commit": "d76a8affe98c2d70dd6e3f20ef7b19a4c6c13f7e",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/kyaukpyu1677-authority-001/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "16bd25aec24492c239a2ac6d4eaf49c1a901f624",
+        "bytes": 20207,
+        "sha256": "448bdbc2b5a5309ea890b7491bb59eb9409f3ec7b0c1a4fd8f9ed529adc665f8"
+      },
+      "native_patch": {
+        "commit": "c9c33c777bd01c5214a372ebc3718eed0aa10271",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/line-conflict/30100-candidate-native-patch.json",
+        "mode": "100644",
+        "git_blob_oid": "7181b745fc04e9badbaa63f314db7dc87d87623a",
+        "bytes": 16181,
+        "sha256": "59bc8fc415a66d75f754b7aa639e88cbb769a0df0acb7a24eb56ec321f7d5b94"
+      }
+    }
+  ],
+  "review": "actual-result-review.json",
+  "limits": [
+    "Actual constructor qualification is not current-owner-zero, cumulative conservation or final selected acceptance.",
+    "Retain original failed14 envelope for901 and separately successful whole Kyaukpyu observation for1677.",
+    "All original25parent-heldland,23water and2925source-relative Rakhine cells remain held. Native diagnostic zero-veto observations are not substituted for actual constructor products.",
+    "Parent residual/nonexpected-parent geometries remain parent witnesses, not foreign-country vetoes. Retained source-census foreign/competitor absence is narrow centre evidence with original limits."
+  ],
+  "delivery": "Additionalreadyinputs forrootbatchcoordination after actualresultreview; no separate tinyPR/competingdispatch, no active1929headchange."
+}
