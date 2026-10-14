@@ -131,6 +131,8 @@ test('workflow separates untrusted candidate tests from write credentials and se
     assert.match(step,/needs\.prepare\.outputs\.test_selection == 'selected-data'/);
   }
   const steps=integration.split(/\n(?=      - )/).slice(1);
+  const readback=steps.find(step=>step.includes('name: Read back qualified native build outputs when selected\n'));
+  assert.match(readback,/if: needs.prepare.outputs.profile == 'full' && matrix.shard == 0 && steps.assembly.outputs.assembled != 'true'/);
   const credentialSteps=steps.filter(step=>/WORLDATLAS_CHECKOUT_TOKEN:/.test(step));
   assert.equal(credentialSteps.length,2,'read-only acquisition credentials have exactly two trusted consumers');
   for(const step of credentialSteps)assert.match(step,/name: (Authenticate trusted full-checkout bootstrap|Acquire full checkout with authenticated bounded helper)/);
@@ -181,10 +183,8 @@ test('parallel full-regression shards cover each unit file once and focused prof
  assert.ok([0,1,2].some(shard=>integrationNeedsBrowser('full',shard)));
 });
 
-test('ordinary selected data retains CPU base checks while software and explicit output proof retain browser qualification', () => {
- assert.deepEqual(integrationTestFiles('full',0,'selected-data'),
-   ['test/canonical-compact-repack.test.mjs','test/prepared-parity.test.mjs']);
- assert.equal(integrationNeedsBrowser('full',0,'selected-data'),false);
+test('ordinary selected data uses emitted smoke while software and explicit output proof retain unit/browser qualification', () => {
+ assert.throws(()=>integrationTestFiles('full',0,'selected-data'),/Invalid/);
  assert.ok(integrationTestFiles('full',0,'complete').includes('test/compact-ownership.test.mjs'));
  assert.equal(integrationNeedsBrowser('full',0,'complete'),true);
  assert.deepEqual(integrationTestFiles('full',0,'selected-output'),['test/compact-ownership.test.mjs']);

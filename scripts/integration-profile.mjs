@@ -857,8 +857,6 @@ export async function selectedDeliverySmoke(expectationsPath) {
   };
   const selection = JSON.parse(read('data/ownership-selection.json'));
   if (!selection.artifact_consumption || !selection.additive_release) throw Error('Missing actual selected artifact');
-  // Its successful readback was produced by the preceding mandatory build step.
-  read('.cache/native-normal-built-output.json');
   const sidecar = pinned(selection.additive_release), ledgerPin = sidecar.logical_asset_map?.ledger;
   validateSelectedExpectations(JSON.parse(read(expectationsPath)), pinned(ledgerPin), ledgerPin.sha256);
   const {runSelectedDeliverySmoke} = await import('./selected-delivery-smoke.mjs');

@@ -399,7 +399,7 @@ jobs:
             npx playwright install --with-deps chromium
           fi
       - name: Read back qualified native build outputs when selected
-        if: needs.prepare.outputs.profile == 'full' && matrix.shard == 0
+        if: needs.prepare.outputs.profile == 'full' && matrix.shard == 0 && steps.assembly.outputs.assembled != 'true'
         run: |
           if node --input-type=module -e '
             import fs from "node:fs";
@@ -434,7 +434,7 @@ jobs:
           fi
           if test "$INTEGRATION_TEST_SELECTION" = selected-output; then
             node --input-type=module -e "import {requireRetainedPackageTests} from './scripts/run-integration-tests.mjs'; console.log(JSON.stringify({retained_package_tests:requireRetainedPackageTests()}))"
-          else
+          elif test "$INTEGRATION_TEST_SELECTION" != selected-data; then
             node scripts/run-integration-tests.mjs
           fi
       - name: Retain original final-worker package output

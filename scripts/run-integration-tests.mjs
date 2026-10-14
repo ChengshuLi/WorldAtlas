@@ -78,7 +78,7 @@ export function fullRegressionShard(inventory, shard) {
 }
 
 export function integrationTestFiles(profile, shard, testSelection = 'complete') {
-  if (!['complete','selected-data','selected-output'].includes(testSelection) ||
+  if (!['complete','selected-output'].includes(testSelection) ||
       (testSelection !== 'complete' && (profile !== 'full' || shard !== 0))) throw Error('Invalid trusted test selection');
   if (!['full','evidence'].includes(profile) || !Number.isInteger(shard) || shard < 0 || shard > 2 ||
       (profile === 'evidence' && shard !== 0)) throw Error('Invalid trusted integration test profile');
@@ -86,7 +86,6 @@ export function integrationTestFiles(profile, shard, testSelection = 'complete')
     'evidence-quality','premerge-evidence','trusted-workflow-checkouts','merge-integration','merge-integration-entrypoint','integration-proof'];
   const inventory = fs.readdirSync('test').filter(name => name.endsWith('.test.mjs')).sort().map(name=>`test/${name}`);
   const files = testSelection === 'selected-output' ? ['test/compact-ownership.test.mjs']
-    : testSelection === 'selected-data' ? PACKAGED_ASSET_TESTS.filter(name => name !== 'test/compact-ownership.test.mjs')
     : profile === 'full' ? fullRegressionShard(inventory, shard) : focused.map(name => `test/${name}.test.mjs`);
   if (!files.length || files.some(name => !fs.existsSync(name))) throw Error('Missing integration test inventory');
   return files;
@@ -214,6 +213,6 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   prepareIntegrationTests(files);
   console.log(JSON.stringify({profile, test_selection: testSelection, shard, files}));
   process.exitCode = await streamTestProcess(['--test','--test-reporter=tap','--test-concurrency=2', ...files], {
-    env:{...process.env,...(profile==='full' && shard===0?{ATLAS_REQUIRE_STATIC:'1', ...(testSelection === 'selected-data' ? {ATLAS_REQUIRE_PREPARED:'1'} : {})}:{})}
+    env:{...process.env,...(profile==='full' && shard===0?{ATLAS_REQUIRE_STATIC:'1'}:{})}
   });
 }

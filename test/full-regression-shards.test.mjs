@@ -47,16 +47,10 @@ test('test-runner edits and renames require actual full-suite validation', () =>
   }
   assert.equal(integrationProfile('engineering/example', [{filename:'docs/runner.md'}]), 'evidence');
 });
-test('selected-data inventory keeps CPU asset checks and reserves UI qualification for software',()=>{
-  const selected=integrationTestFiles('full',0,'selected-data');
-  const focused=integrationTestFiles('evidence',0);
-  assert.deepEqual(selected,['test/canonical-compact-repack.test.mjs','test/prepared-parity.test.mjs']);
-  assert(focused.every(file=>!selected.includes(file)));
-  assert.equal(new Set(selected).size,selected.length);
+test('ordinary selected delivery has no unit inventory while software and explicit output proof retain asset checks',()=>{
+  assert.throws(()=>integrationTestFiles('full',0,'selected-data'),/Invalid trusted test selection/);
   const reused=integrationTestFiles('full',0,'selected-output');
   assert.deepEqual(reused,['test/compact-ownership.test.mjs']);
-  assert.deepEqual(selected.filter(file=>!reused.includes(file)).sort(),
-    ['test/canonical-compact-repack.test.mjs','test/prepared-parity.test.mjs']);
   for(const file of PACKAGED_ASSET_TESTS)assert(integrationTestFiles('full',0,'complete').includes(file));
   for(const [profile,shard,selection] of [['evidence',0,'selected-data'],['full',1,'selected-data'],['full',0,'unknown']])
     assert.throws(()=>integrationTestFiles(profile,shard,selection),/Invalid trusted test selection/);

@@ -132,6 +132,11 @@ for(const [name,mutate] of Object.entries({
   'executable role':f=>f.authored.entries.get(prefix+'patch.json').mode='100755',
   'tree size drift':f=>f.authored.entries.get(prefix+'patch.json').size++,
   'method change':f=>{f.base.method='new-method';f.put('data/ownership-selection.json',f.base);},
+  'base grid change':f=>{const selection=JSON.parse(f.blobs.get(f.authored.entries.get('data/ownership-selection.json').sha));
+    f.put('data/ownership-selection.json',{...selection,sha256:'f'.repeat(64)});},
+  'mixed renderer change':f=>f.put('src/pixel-ownership.js','export default "changed renderer";'),
+  'mixed prepared content change':f=>f.put('data/ownership-history/index.json',{changed:true}),
+  'mixed canonical input change':f=>f.put('data/canonical-grid/manifest.json',{changed:true}),
 }))test('selected-data falls back to full for '+name,async()=>assert.equal(await fixture({mutate}).run(),null));
 test('rename/copy/removal origins never use selected routing',async()=>{
   for(const delta of [{previous_filename:'src/code.js'},{status:'removed'},{status:'renamed'}]){const f=fixture();Object.assign(f.files.find(row=>row.filename.endsWith('patch.json')),delta);assert.equal(await f.run(),null);}
