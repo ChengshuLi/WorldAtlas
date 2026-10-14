@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "date_utc": "2026-10-14",
+  "worker": "/root/putao_primary_boundary",
+  "scope": "Identify original administrative order identifiers and subjects on already-open Hlaingbwe2019 GAD history page only",
+  "parent_id": "framework:province:hpa-an:3b606d253d82",
+  "retained_notes_sha256": "3cdd2721980435a4c7abf8d0a67eb2c8bacdf25d1e164afe1902806566ef260e",
+  "source_url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Hlaingbwe_2019_MMR.pdf",
+  "page_locator": {
+    "pdf_page_one_based": 15,
+    "web_screenshot_pageno_zero_based": 14,
+    "printed_page": 2
+  },
+  "attempt": {
+    "tool": "web.run screenshot via functions.exec",
+    "parameters": {
+      "ref_id": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Hlaingbwe_2019_MMR.pdf",
+      "pageno": 14
+    },
+    "tool_result_ref": "turn252view0",
+    "returned_type": "string",
+    "image_blocks_received": 0,
+    "exact_error": "Unable to resolve screenshot call because content type is not application/pdf and web screenshot is not enabled",
+    "retry_count": 0
+  },
+  "finding": "No page pixels were available. No visual reading occurred. Earlier extracted history date fragments29January2004 and29April2011 remain incomplete; original order identifiers, subjects, suffixes and territorial effect are not recovered.",
+  "concrete_missing_artifact": "Readable pixels or a reliable transcription of PDFpage15/printed2, then the actual cited administrative orders with their original schedules/maps. The current extraction cannot support a legally reliable instrument identification.",
+  "held": {
+    "repair_land": 206,
+    "separate_source_conflict_land": 8,
+    "separate_source_relative": 13
+  },
+  "limits": {
+    "new_accepted_credit": 0,
+    "visual_read_claimed": false,
+    "local_source_downloads": 0,
+    "browser_downloads": 0,
+    "new_permission_cards": 0,
+    "scientific_or_spatial_processing": 0,
+    "prior_notes_modified": false,
+    "broad_portal_or_cohort_searches": 0,
+    "source_bytes_saved": false
+  }
+}

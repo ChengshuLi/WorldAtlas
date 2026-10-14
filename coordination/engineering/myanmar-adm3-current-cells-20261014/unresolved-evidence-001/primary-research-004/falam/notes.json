@@ -1,0 +1,641 @@
+{
+  "version": 1,
+  "research_date": "2026-10-14",
+  "status": "documentary research only; all168 repair land cells remain open",
+  "parent": {
+    "parent_id": "framework:province:falam:6bc2430c5172",
+    "repair_land": 168,
+    "repair_water": 0,
+    "repair_cells": 168,
+    "relative": 0,
+    "conflicts": 0,
+    "complete_child_count": 3,
+    "repair_owner_count": 3,
+    "repair_owners": [
+      30165,
+      30316,
+      30341
+    ],
+    "complete_children": [
+      {
+        "owner": 30165,
+        "id": "gb:MMR:ADM3:66882298B34348354141761",
+        "name": "Tonzang",
+        "province_id": "framework:province:falam:6bc2430c5172",
+        "source_id": "gb:MMR:ADM3",
+        "source_atoms": [
+          "gb:MMR:ADM3:66882298B34348354141761"
+        ],
+        "remaining_counts": {
+          "repair-evaluation:land": 90
+        },
+        "accepted_removed_cells": 0,
+        "reserved_excluded_cells": 0,
+        "blocks": [
+          27
+        ],
+        "source_sids": [
+          36797,
+          36802,
+          44884,
+          44907,
+          45162,
+          70324,
+          70782,
+          70783
+        ],
+        "topology_fields": {
+          "topology_version": 1,
+          "topology_reconciled": true,
+          "topology_conflicts": 4,
+          "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+        },
+        "current_geometry": {
+          "type": "MultiPolygon",
+          "polygons": 3,
+          "coordinate_pairs": 212,
+          "interior_rings": 0,
+          "bounds": [
+            93.3257,
+            23.4872,
+            94.153,
+            24.0916
+          ]
+        },
+        "original_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 278,
+          "interior_rings": 0,
+          "bounds": [
+            93.32565966800011,
+            23.487233705000076,
+            94.15302636300004,
+            24.10597674800006
+          ]
+        }
+      },
+      {
+        "owner": 30316,
+        "id": "gb:MMR:ADM3:66882298B6984635080223",
+        "name": "Tedim",
+        "province_id": "framework:province:falam:6bc2430c5172",
+        "source_id": "gb:MMR:ADM3",
+        "source_atoms": [
+          "gb:MMR:ADM3:66882298B6984635080223"
+        ],
+        "remaining_counts": {
+          "repair-evaluation:land": 32
+        },
+        "accepted_removed_cells": 0,
+        "reserved_excluded_cells": 0,
+        "blocks": [
+          27
+        ],
+        "source_sids": [
+          36797,
+          44884,
+          44907,
+          45243,
+          70769,
+          70782
+        ],
+        "topology_fields": {
+          "topology_version": 1,
+          "topology_reconciled": true,
+          "topology_conflicts": 1,
+          "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+        },
+        "current_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 90,
+          "interior_rings": 0,
+          "bounds": [
+            93.3882,
+            23.1237,
+            94.0366,
+            23.6168
+          ]
+        },
+        "original_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 242,
+          "interior_rings": 0,
+          "bounds": [
+            93.38823740200009,
+            23.123675274000032,
+            94.03659573800006,
+            23.62195211900009
+          ]
+        }
+      },
+      {
+        "owner": 30341,
+        "id": "gb:MMR:ADM3:66882298B80362939759062",
+        "name": "Falam",
+        "province_id": "framework:province:falam:6bc2430c5172",
+        "source_id": "gb:MMR:ADM3",
+        "source_atoms": [
+          "gb:MMR:ADM3:66882298B80362939759062"
+        ],
+        "remaining_counts": {
+          "repair-evaluation:land": 46
+        },
+        "accepted_removed_cells": 0,
+        "reserved_excluded_cells": 0,
+        "blocks": [
+          27
+        ],
+        "source_sids": [
+          36797,
+          44884,
+          44907,
+          45180,
+          70769,
+          70778
+        ],
+        "topology_fields": {
+          "topology_version": 1,
+          "topology_reconciled": true,
+          "topology_conflicts": 2,
+          "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+        },
+        "current_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 127,
+          "interior_rings": 0,
+          "bounds": [
+            93.3399,
+            22.786,
+            94.0237,
+            23.3688
+          ]
+        },
+        "original_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 267,
+          "interior_rings": 0,
+          "bounds": [
+            93.339866494,
+            22.786043765000063,
+            94.02549703000004,
+            23.36918333500002
+          ]
+        }
+      }
+    ],
+    "native_blocks": [
+      27
+    ],
+    "observed_source_families": [
+      "gb:IND:ADM1",
+      "gb:IND:ADM3",
+      "gb:MMR:ADM1",
+      "gb:MMR:ADM2",
+      "gb:MMR:ADM3"
+    ],
+    "source_region_features": [
+      {
+        "id": "gb:MMR:ADM1:20573499B58864057590207",
+        "name": "Chin"
+      }
+    ],
+    "source_parent_features": [
+      {
+        "source_index": 44907,
+        "family_index": 217,
+        "source_id": "gb:MMR:ADM2:60261553B58296948192675",
+        "ordinal": 10,
+        "owners": [],
+        "name": "Falam",
+        "geometry_status": "raw-native-supported"
+      }
+    ],
+    "decisions": [
+      {
+        "ids": [
+          "gb:MMR:ADM3:66882298B34348354141761",
+          "gb:MMR:ADM3:66882298B80362939759062",
+          "gb:MMR:ADM3:66882298B6984635080223"
+        ],
+        "status": "open",
+        "rationale": "Current province Falam (framework:province:falam:6bc2430c5172); inspected exact source identifiers for 3 locations with actual role Township, source gb:MMR:ADM3, reference vintages 2019. Pinned cache contains 330 features; 3 of these location records have entirely matched declared-source member IDs. Source-ID correspondence does not independently approve local geographic purpose, original-footprint retention, administrative reforms or settlement/rank. Exact review stays open until those tests have sourced outcomes.",
+        "evidence": [
+          {
+            "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM3/geoBoundaries-MMR-ADM3.geojson",
+            "title": "Myanmar",
+            "inspected_fact": "Actual location source gb:MMR:ADM3; role Township; reference vintage 2019; license Creative Commons Attribution 4.0 (CC BY 4.0). Source feature/member identifiers were inspected separately from ADM-level labels."
+          }
+        ],
+        "province_id": "framework:province:falam:6bc2430c5172",
+        "source_id": "gb:MMR:ADM3",
+        "actual_role": "Township",
+        "specific_reasons": []
+      }
+    ],
+    "prerequisites": [
+      "Complete original source-family membership, exact source/owner/parent joins and whole-footprint parent proof.",
+      "Accepted country/topology exclusions and all explicit holes; ancestry and nearest-bank proximity do not grant territorial authority.",
+      "Whole original GSHHG hierarchy or demonstrably applicable retained target interpretation; preserve all uncertainty/relative intervals.",
+      "Later actual delivery-base effective owner-zero and native authority/conservation."
+    ],
+    "land_only_rule_ceiling": 168
+  },
+  "custody": {
+    "inventory": {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/341d0bbaf81e47cd16ab58ca6d1ab75d5ac120cf732c677e081b12830ea3ef31/work/.cache/mmr-remaining-inventory-20261014-001/inventory.json",
+      "sha256": "efec8d28b63befcb411b6d0d81063af6a962edbec9a1b3f08b86fc3b7bd44157"
+    },
+    "intervals": {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/341d0bbaf81e47cd16ab58ca6d1ab75d5ac120cf732c677e081b12830ea3ef31/work/.cache/mmr-remaining-inventory-20261014-001/remaining-intervals.json.gz",
+      "sha256": "b12b9ed64ecb16fa2b5501648fa4ca91727793fa99ceadffb96d9623519c93aa"
+    },
+    "scientific_vintage": "f7c358326d776398bc1cffe84df81eac7033091c",
+    "cache_retention_commit": null,
+    "limit": "Absolute small-cache paths and byte SHA256 verified. scientific_vintage is not a claim that untracked cache files are retained at that commit.",
+    "latitude_pin": {
+      "commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+      "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+      "decoded_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+    },
+    "longitude_formula": "(x+0.5)/262166*360-180"
+  },
+  "centre_envelopes": [
+    {
+      "owner": 30165,
+      "cell_count": 90,
+      "interval_count": 82,
+      "x_inclusive": [
+        199046,
+        199607
+      ],
+      "y_inclusive": [
+        113000,
+        113391
+      ],
+      "centre_envelope_degrees": {
+        "longitude": [
+          93.32583172493764,
+          94.09618333422333
+        ],
+        "latitude": [
+          23.596730652707326,
+          24.08782113518412
+        ]
+      },
+      "source_sids": [
+        36797,
+        36802,
+        44884,
+        44907,
+        45162,
+        70324,
+        70782,
+        70783
+      ]
+    },
+    {
+      "owner": 30316,
+      "cell_count": 32,
+      "interval_count": 29,
+      "x_inclusive": [
+        199093,
+        199113
+      ],
+      "y_inclusive": [
+        113412,
+        113566
+      ],
+      "centre_envelope_degrees": {
+        "longitude": [
+          93.39037098632167,
+          93.41783450180418
+        ],
+        "latitude": [
+          23.376333503609892,
+          23.570302463702486
+        ]
+      },
+      "source_sids": [
+        36797,
+        44884,
+        44907,
+        45243,
+        70769,
+        70782
+      ]
+    },
+    {
+      "owner": 30341,
+      "cell_count": 46,
+      "interval_count": 33,
+      "x_inclusive": [
+        199069,
+        199080
+      ],
+      "y_inclusive": [
+        113585,
+        113751
+      ],
+      "centre_envelope_degrees": {
+        "longitude": [
+          93.35741476774257,
+          93.372519701258
+        ],
+        "latitude": [
+          23.142943158233212,
+          23.35238253281303
+        ]
+      },
+      "source_sids": [
+        36797,
+        44884,
+        44907,
+        45180,
+        70769,
+        70778
+      ]
+    }
+  ],
+  "envelope_limit": "Independent extrema only, not a boundary or connected footprint. Longitude and normlat-derived latitude in degrees.",
+  "source_sid_cell_occurrences": {
+    "30165": {
+      "36797": 7,
+      "36802": 12,
+      "44884": 90,
+      "44907": 90,
+      "45162": 90,
+      "70324": 10,
+      "70782": 55,
+      "70783": 7
+    },
+    "30316": {
+      "36797": 9,
+      "44884": 32,
+      "44907": 32,
+      "45243": 32,
+      "70769": 13,
+      "70782": 19
+    },
+    "30341": {
+      "36797": 17,
+      "44884": 46,
+      "44907": 46,
+      "45180": 46,
+      "70769": 33,
+      "70778": 12
+    }
+  },
+  "source_sid_limit": "Counts can overlap. Exact source SIDs and observed INDADM1/INDADM3/MMRADM1/2/3 families retained; no feature names guessed and no fresh source pass for names.",
+  "foreign_source_family_provenance": [
+    {
+      "key": "gb:IND:ADM1",
+      "source_represented_year_claim": "2011",
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IND/ADM1/geoBoundaries-IND-ADM1_simplified.geojson",
+      "recorded_license": "Creative Commons Attribution 2.5 India (CC BY 2.5 IN)",
+      "original_sha256": "4c63fe43294a391e8f2de4e9f86f3edb60f8688275b9fee90c61fb2aa0c26061"
+    },
+    {
+      "key": "gb:IND:ADM3",
+      "source_represented_year_claim": "2018",
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IND/ADM3/geoBoundaries-IND-ADM3_simplified.geojson",
+      "recorded_license": "Open Data Commons Open Database License 1.0",
+      "original_sha256": "4ea6807d0a0c5aac0b46ee8e31ed7c30fbec273b44345bba1e4a2bb5f299f5fb"
+    },
+    {
+      "key": "gb:MMR:ADM3",
+      "source_represented_year_claim": "2019",
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM3/geoBoundaries-MMR-ADM3_simplified.geojson",
+      "recorded_license": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+      "original_sha256": "94c0c9af839094257d13a6fe6590feddb2dcb04540d87e58b656c9f000fb92a2"
+    }
+  ],
+  "sources": [
+    {
+      "id": "mimu-chin-catalogue",
+      "url": "https://themimu.info/states_regions/chin",
+      "issuer": "MIMU hosting GAD/DoP documents",
+      "facts": [
+        "Links10Tonzang2019,12Tedim2019,18Falam2019; uploaded24August2020. Section heading saysGAD2017 despite2019filenames.",
+        "Tonzang file6.01MB,Tedim7.1MB,Falam1.72MB."
+      ],
+      "limit": "Catalogue labels are not document cover dates or boundary authority."
+    },
+    {
+      "id": "gad-tonzang",
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Tonzang_2019_MMR.pdf",
+      "issuer": "Township GAD",
+      "pdf_pages": 68,
+      "actual_cover_fragment": "၂၀၂၀(2020)",
+      "locators": [
+        "PDFpage1 cover",
+        "PDFpage11 history",
+        "PDFpage12 position/area/boundary",
+        "PDFpage60 table naming Tonzang and Cikha towns"
+      ],
+      "facts": [
+        "Filename claims2019, but extracted cover says2020; retain this vintage mismatch.",
+        "History has readable date fragments15.7.1972 and31.3.2015; authority, order number and exact action are absent from extracted text.",
+        "Area table has raw values1359.576 and0.78, total1360.356; row labels and unit header are not recoverable. Do not assign names or convert this table tokm².",
+        "Position fragments include23°30′,24°,93°20′and94°10′; omitted northern minutes prevent a complete extent statement."
+      ],
+      "limits": [
+        "No readable formation/subdivision schedule, exact boundary text, map datum or scale.",
+        "Tonzang–Cikha scope is a lead from town names and separate census reports, not proven original-footprint containment."
+      ]
+    },
+    {
+      "id": "gad-tedim-unread",
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Tedim_2019_MMR.pdf",
+      "state": "One catalogue-link web open returned internal error. No retry, local/browser download, render or substantive document claim."
+    },
+    {
+      "id": "gad-falam",
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Falam_2019_MMR.pdf",
+      "issuer": "Township GAD",
+      "pdf_pages": 58,
+      "locators": [
+        "PDFpage10 intro/history",
+        "PDFpage11 history/position/area/boundary"
+      ],
+      "facts": [
+        "Intro identifies2018–2019 information. No readable exact cover date recorded.",
+        "History atPDFpage11 contains1973,dayfragment(31),andnumberfragment2/33/(2). Month, authority and intervening script are absent; this is not a complete order citation.",
+        "Raw area-table total988.90 with other entries28.66/960.24; labels/unit header are not recovered.",
+        "Extracted longitude text includes94and80; no normalization of an impossible minute reading or substitution from retained bounds."
+      ],
+      "limits": [
+        "No original order or administrative annex acquired; no inference that a town or township was formed by the fragment.",
+        "Boundary section is missing substantive names in extracted text."
+      ]
+    },
+    {
+      "id": "dop-tonzaung",
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_Tonzaung_2014_ENG.pdf",
+      "issuer": "Department of Population, Ministry of Labour, Immigration and Population",
+      "published": "October2017",
+      "census_vintage": 2014,
+      "locators": [
+        "PDFpage1 cover",
+        "PDFpage7 figures at a glance"
+      ],
+      "facts": [
+        "Tonzaung Township Report; Chin State, Falam District.",
+        "Area2511.6km²; 2wards; 22village tracts."
+      ],
+      "limit": "Reporting title and area do not define exact source footprint, exclusions or township/sub-township inclusion."
+    },
+    {
+      "id": "dop-tedim",
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_Tedim_2014_ENG.pdf",
+      "issuer": "Department of Population, Ministry of Labour, Immigration and Population",
+      "published": "October2017",
+      "census_vintage": 2014,
+      "locators": [
+        "PDFpage1 cover",
+        "PDFpage7 figures at a glance"
+      ],
+      "facts": [
+        "Tedim Township Report; Chin State, Falam District.",
+        "Area2459.7km²; 4wards; 55village tracts."
+      ],
+      "limit": "Reporting title and area do not define exact source footprint, exclusions or township/sub-township inclusion."
+    },
+    {
+      "id": "dop-falam",
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_Falam_2014_ENG.pdf",
+      "issuer": "Department of Population, Ministry of Labour, Immigration and Population",
+      "published": "October2017",
+      "census_vintage": 2014,
+      "locators": [
+        "PDFpage1 cover",
+        "PDFpage7 figures at a glance"
+      ],
+      "facts": [
+        "Falam Township Report; Chin State, Falam District.",
+        "Area2369.5km²; 4wards; 80village tracts."
+      ],
+      "limit": "Reporting title and area do not define exact source footprint, exclusions or township/sub-township inclusion."
+    },
+    {
+      "id": "dop-cikha",
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_CikhaST_2014_ENG.pdf",
+      "issuer": "Department of Population, Ministry of Labour, Immigration and Population",
+      "published": "October2017",
+      "census_vintage": 2014,
+      "locators": [
+        "PDFpage1 cover",
+        "PDFpage7 figures at a glance"
+      ],
+      "facts": [
+        "Cikha Sub-Township Report; Chin State, Falam District.",
+        "Area1011.7km²; 2wards; 9village tracts."
+      ],
+      "limit": "Reporting title and area do not define exact source footprint, exclusions or township/sub-township inclusion."
+    },
+    {
+      "id": "dop-rihkhuadal",
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_RihkhuadalST_2014_ENG.pdf",
+      "issuer": "Department of Population, Ministry of Labour, Immigration and Population",
+      "published": "October2017",
+      "census_vintage": 2014,
+      "locators": [
+        "PDFpage1 cover",
+        "PDFpage7 figures at a glance"
+      ],
+      "facts": [
+        "Rihkhuadal Sub-Township Report; Chin State, Falam District.",
+        "Area194.9km²; 2wards; 6village tracts."
+      ],
+      "limit": "Reporting title and area do not define exact source footprint, exclusions or township/sub-township inclusion."
+    },
+    {
+      "id": "mea-agreement5886",
+      "url": "https://www.mea.gov.in/bilateral-documents?dtl%2F5886%2FAgreement+on+International+Boundary+with+India=",
+      "issuer": "India Ministry of External Affairs",
+      "title": "Agreement on International Boundary with India",
+      "state": "New exact official reference located by search; single web open403. No retry or variant URL. Search snippet alone not adopted as treaty evidence.",
+      "separate_portal_limit": "https://www.mea.gov.in/treatylist.htm also returned one403; no further portal work."
+    },
+    {
+      "id": "ibs80-specific-chin-reach",
+      "url": "https://library.law.fsu.edu/Digital-Collections/LimitsinSeas/pdf/ibs080.pdf",
+      "issuer": "United States Department of State",
+      "date": "1968-05-15",
+      "locators": [
+        "printed3,Chin river/pillar sequence and footnotes",
+        "printed8,annexed map scale"
+      ],
+      "facts": [
+        "Specific Chin passage describes Boinu/Tuipui to Tyao/Tio Va, upstream to source saddleBoundaryPillar3L/CH,thenBapi,Timang/Tuimang,Tuisa,Tuivai andTuikui towardPillar8eastofLunglenHill.",
+        "Later passage namesKhuga/Tuitha,ChalaoLam/Chika,Pillar5,YangkaiLok,ManipurRiver andYangdungLui.",
+        "Footnotes identify Survey of India quarter-inch sheet84E for3L/CH; one-inch84I/1 and quarter-inch83C/83L for later pillar section. Annexed treaty strip maps are1:126720."
+      ],
+      "limits": [
+        "Only new specific Chin reach/pillar/map locators retained here; prior general Naga/Patkai discussion is not repeated.",
+        "No exact centre-to-pillar/course join established. Original bilateral strip maps, geodetic datum and later demarcation are missing.",
+        "U.S. government reproduction/analysis does not substitute for original treaty/demarcation annex."
+      ]
+    },
+    {
+      "id": "champhai-district",
+      "url": "https://champhai.nic.in/about-district/",
+      "issuer": "Champhai District Administration, Government of Mizoram",
+      "page_updated": "2019-03-08",
+      "facts": [
+        "District page states Myanmar on east/south and formation12December1997."
+      ],
+      "limits": [
+        "No international border coordinates or Myanmar township membership.",
+        "Official map pagehttps://champhai.nic.in/map-of-district/ dated12March2019 contains Google Maps iframe, not a bilateral boundary map; no cartographic proof accepted."
+      ]
+    }
+  ],
+  "required_artifacts": [
+    {
+      "artifact": "Readable Tonzang original administrative instruments associated with15July1972 and31March2015, including order numbers, exact subject, Cikha/Tonzang constituent schedule and map annex",
+      "trace": "GADfilelabelled2019 actualcover2020,PDFpage11",
+      "purpose": "Determine2019wholeoriginalfootprint and subunit scope without assigning unreadable words."
+    },
+    {
+      "artifact": "Readable Falam1973 instrument withday31andnumberfragment2/33/(2), including full date/authority/action/territorial schedule and Rihkhuadal inclusion map",
+      "trace": "GADFalam2019PDFpage11",
+      "purpose": "Resolve exact town/township/sub-township lineage and original extent."
+    },
+    {
+      "artifact": "Tedim2019GAD history/boundary map and any cited formation schedule",
+      "trace": "MIMUChincataloguelink12,oneopenfailed",
+      "purpose": "Complete three-township evidence; DoPtitle alone is insufficient."
+    },
+    {
+      "artifact": "Original10March1967India–BurmaAgreement annexed1:126720stripmaps and relevant later joint demarcation/pillar coordinates with datum forTio–3L/CH–Tuimang/Tuisa/Tuivai–Khuga/Manipur reach",
+      "trace": "ExactMEAdocument5886newlead403;IBS80printed3footnotesSurveyofIndia84E/84I1/83C/83L",
+      "purpose": "Map actual candidates to authoritative boundary instead of river-name proximity."
+    }
+  ],
+  "assessment": {
+    "supported": [
+      "Exactcomplete3childroster and168retainedcandidatecentres confirmed.",
+      "OfficialDoP2014reports publishedOct2017 explicitly place all3townships and2separatesubtownshipreports inFalamDistrict.",
+      "Specific administrative-date fragments and particular treaty river/pillar/map locators preserved."
+    ],
+    "unknown": [
+      "Complete original-footprint parent membership and sub-township aggregation.",
+      "Foreign country/ADM3 exclusions and display fragment treatment.",
+      "Precise border/course alignment at every candidate; land/water and whole hierarchy authorization."
+    ],
+    "promoted_cells": 0
+  },
+  "method_limits": [
+    "Onlysmallretainedinventory/interval/normlatreads, boundedprimarywebtext anddata-onlynotes.",
+    "No local/browserdownloads, cards, repeatedfailedrefs, source/geometry/GIS/native/raster/GSHHGprocesses ortrackedrepositoryedits.",
+    "Allcurrentandoriginalinteriorringcountsare0; absenceofholes isnotborderclearance.",
+    "Tonzangcurrent3polygonsversusoriginal1 requiresqualifiedoriginal-footprintretention; currenttopology_reconciled flags do not grant authority.",
+    "No document-reuse license verified for GAD/DoP/MEA/Champhai; source-family licenses kept separate.",
+    "No current sovereignty/control finding."
+  ]
+}
