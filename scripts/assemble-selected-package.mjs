@@ -222,7 +222,6 @@ export async function assembleSelectedPackage({api,repo,expectedHead,originalRun
     const assembly={kind:'retained-original-output-plus-current-additive',origin:found.origin,
       original_manifest_sha256:hash(manifestRaw),runtime_identity_version:2,transition,current_execution:execution,
       original_base_context_retained:true,base_restoration_invoked:false,invariant_build_invoked:false,
-      base_tests_reused:['test/canonical-compact-repack.test.mjs','test/prepared-parity.test.mjs'],
       current_selected_inputs:consumed,elapsed_seconds:(performance.now()-started)/1000};
     const receipt={version:1,kind:'cloudflare',input_definition_sha256:current.input_definition_sha256,assembly,
       preflight:{passed:true,errors:[],inputs:{head:current.head},runtime,

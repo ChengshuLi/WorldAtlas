@@ -1,6 +1,6 @@
 import {finalizedPackageInputs} from '../scripts/prepare-delivery-handoff.mjs';
 import {readFileSync} from 'node:fs';
-import {gzipSync, crc32} from 'node:zlib';
+import {gzipSync, gunzipSync, crc32} from 'node:zlib';
 import {CHECKPOINT_MEMBERS} from '../scripts/geographic-report-artifact.mjs';
 import {renderWorkerResult} from '../scripts/worker-result.mjs';
 import {memoizeImmutableGitBlobs} from '../scripts/immutable-git-blobs.mjs';
@@ -9,6 +9,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
+import {verifyIssueScope} from '../scripts/issue-claim-contract.mjs';
+import {checkPremergeEvidence} from '../scripts/premerge-evidence.mjs';
 import {selectIntegrationProfile} from '../scripts/check-integration-profile.mjs';
 import {prepareIntegration, completeIntegration} from '../scripts/merge-integration.mjs';
 import {PROOF_PATHS, WORKFLOW_PATH} from '../scripts/integration-proof.mjs';
@@ -132,6 +134,11 @@ for(const [name,mutate] of Object.entries({
   'executable role':f=>f.authored.entries.get(prefix+'patch.json').mode='100755',
   'tree size drift':f=>f.authored.entries.get(prefix+'patch.json').size++,
   'method change':f=>{f.base.method='new-method';f.put('data/ownership-selection.json',f.base);},
+  'base grid change':f=>{const selection=JSON.parse(f.blobs.get(f.authored.entries.get('data/ownership-selection.json').sha));
+    f.put('data/ownership-selection.json',{...selection,sha256:'f'.repeat(64)});},
+  'mixed renderer change':f=>f.put('src/pixel-ownership.js','export default "changed renderer";'),
+  'mixed prepared content change':f=>f.put('data/ownership-history/index.json',{changed:true}),
+  'mixed canonical input change':f=>f.put('data/canonical-grid/manifest.json',{changed:true}),
 }))test('selected-data falls back to full for '+name,async()=>assert.equal(await fixture({mutate}).run(),null));
 test('rename/copy/removal origins never use selected routing',async()=>{
   for(const delta of [{previous_filename:'src/code.js'},{status:'removed'},{status:'renamed'}]){const f=fixture();Object.assign(f.files.find(row=>row.filename.endsWith('patch.json')),delta);assert.equal(await f.run(),null);}
@@ -145,7 +152,7 @@ test('whole-ledger expectation check rejects duplicate batches/members and forei
 function gateFixture(f=fixture()) {
   const base='b'.repeat(40), head='c'.repeat(40), root='/repos/owner/repo';
   const issue={number:10,state:'open',created_at:'2020-01-01T00:00:00Z',labels:['type:engineering','kind:work-item','status:ready'],
-    body:'<!-- worldatlas-work:v1\n'+JSON.stringify({max_prs:2,depends_on:[],mode:'engineering',scope:'Exact unchanged-method selected data',...(f.ownedPaths || f.sourceState ? {owned_paths:f.ownedPaths ?? [administrativePath]} : {})})+'\n-->'};
+    body:'<!-- worldatlas-work:v1\n'+JSON.stringify({max_prs:2,depends_on:[],mode:'engineering',scope:'Exact unchanged-method selected data',...(f.evidenceQuality ? {evidence_quality:f.evidenceQuality} : {}),...(f.ownedPaths || f.sourceState ? {owned_paths:f.ownedPaths ?? [administrativePath]} : {})})+'\n-->'};
   const claim={version:1,active:true,issue_number:10,worker_id:'author',claim_id:'selected-claim',branch:f.branch??'engineering/fixture-delivery',mode:'engineering',expires_at:'2099-01-01T00:00:00Z'};
   const pr={number:20,state:'open',changed_files:f.files.length,body:'Refs #10',head:{sha:head,ref:claim.branch,repo:{full_name:'owner/repo'}},
     base:{sha:base,ref:'main',repo:{full_name:'owner/repo'}}};
@@ -225,7 +232,7 @@ function mergeFixture({selectedFixture} = {}) {
     if(method==='PUT'){f.writes.push(body);return {merged:true,sha:'f'.repeat(40)};}
     if(route===root+'/git/ref/heads/main')return {object:{sha:f.base}};
     if(route===root+'/git/commits/'+candidate)return {tree:{sha:'head-tree'},parents:[{sha:f.base},{sha:f.head}]};
-    if(route.includes('/check-runs'))return {check_runs:[{id:1,name:'scope',status:'completed',conclusion:'success',app:{id:1}}]};
+    if(route.includes('/check-runs'))return {check_runs:['scope',...(f.evidenceQuality?['evidence']:[])].map((name,id)=>({id:id+1,name,status:'completed',conclusion:'success',app:{id:1}}))};
     if(route===root+'/commits/'+f.head+'/status')return {statuses:[]};
     if(route.includes('/actions/workflows/merge-integration-checks.yml/runs?'))return {workflow_runs:[f.runRecord]};
     if(route===root+'/actions/runs/44')return f.runRecord;
@@ -1450,4 +1457,203 @@ test('accepted source membership fixed roles remain in selected-data closure',as
     const diagnostics={},result=await f.run({metadataDiagnostics:diagnostics});
     if(missing)assert.equal(result,null);else assert.equal(result?.test_selection,'selected-data',diagnostics.failure);
   }
+});
+
+// Scientific receipts remain independently validated. These tiny metadata
+// fixtures exercise eligibility and propagation, not scientific correctness.
+function scientificManifestFixture() {
+  const f=ownedFixture(), name='coordination/engineering/retained-delivery/evidence-quality.json';
+  f.put(name,{version:1,issue:10,outputs:[]},true);
+  f.put(name,{version:1,issue:10,outputs:[{path:f.packetPrefix+'ledger.json'}]});
+  f.files.push({filename:name,status:'modified'});
+  f.reservation.evidence_manifest=name;
+  f.evidenceQuality={version:1,manifest_path:name,subject_ids:[],pins:{},review_kind:'code'};
+  const part=f.put('data/base-native/rows.bin.gz','immutable native body',true), bounds=f.put('data/base-native/bounds.json.gz','immutable bounds',true);
+  const native=f.put('data/base-native/manifest.json',{version:2,method:f.base.method,parts:[{kind:'rows',path:'rows.bin.gz'}],
+    bounds:{path:'bounds.json.gz'},original_assets:{bounds:{path:bounds.path}}},true);
+  const consumer=f.put('coordination/engineering/prior/application-code.json',{version:1,kind:'qualified-artifact-application-code-closure-v1',
+    critical_files:[{path:SELECTED_SMOKE,bytes:1,sha256:'a'.repeat(64)}]},true), qualification=f.leaf('qualification.json',true);
+  const certificate=f.put('coordination/engineering/prior/base-consumption.json',{version:1,kind:'qualified-arctic-immutable-product-certificate-v1',
+    application_consumer_code:consumer,qualification_inventory:qualification,application_inputs:[consumer,qualification]},true);
+  const comparison=f.leaf('native-comparison.json',true);
+  f.put('scripts/native-ownership/verified-candidates.json',{version:1,candidates:{[native.sha256]:{role:'reviewed-exhaustive-native-rule-comparison',path:comparison.path}}},true);
+  f.base.manifest_path=native.path;f.base.sha256=native.sha256;f.base.artifact_consumption.certificate=certificate;
+  const old=JSON.parse(f.blobs.get(f.baseline.entries.get('data/ownership-selection.json').sha));
+  f.put('data/ownership-selection.json',{...f.base,additive_release:old.additive_release},true);
+  const side=f.put(f.packetPrefix+'selection-sidecar.json',{...f.sidecarBody,base_selection:f.base});
+  f.put('data/ownership-selection.json',{...f.base,additive_release:{path:side.path,bytes:side.bytes,sha256:side.sha256}});
+  f.manifestPath=name;return f;
+}
+test('only the authenticated unconsumed scientific receipt update enters existing selected checks',async()=>{
+  const f=scientificManifestFixture();
+  assert.equal(selectedDataCandidate(f.branch,f.files),false);
+  assert.equal(selectedDataCandidate(f.branch,f.files,f.reservation),true);
+  assert.equal((await f.run()).test_selection,'selected-data');
+  assert(f.reads.includes(f.authored.entries.get(f.manifestPath).sha),'modified manifest syntax was actually read');
+  assert.equal((await gateFixture(scientificManifestFixture()).select()).test_selection,'selected-data');
+  const prepared=await prepareIntegration(mergeFixture({selectedFixture:scientificManifestFixture()}).options);
+  assert.equal(prepared.test_selection,'selected-data');
+  const final=mergeFixture({selectedFixture:scientificManifestFixture()});
+  assert.equal((await final.complete()).accepted,true);assert.equal(final.writes.length,1);
+});
+for(const [name,change] of Object.entries({
+  'undeclared manifest':f=>delete f.reservation.evidence_manifest,
+  'foreign manifest declaration':f=>f.reservation.evidence_manifest='coordination/engineering/other/evidence-quality.json',
+  'arbitrary other edited JSON':f=>{const name=f.packetPrefix+'notes.json';f.put(name,{},true);f.put(name,{updated:true});f.files.push({filename:name,status:'modified'});},
+  'renamed manifest':f=>f.files.find(row=>row.filename===f.manifestPath).previous_filename=f.packetPrefix+'old-evidence-quality.json',
+  'removed manifest':f=>f.files.find(row=>row.filename===f.manifestPath).status='removed',
+  'new manifest reported modified':f=>f.baseline.entries.delete(f.manifestPath),
+  'baseline symlink manifest':f=>f.baseline.entries.get(f.manifestPath).mode='120000',
+  'candidate symlink manifest':f=>f.authored.entries.get(f.manifestPath).mode='120000',
+  'executable-mode manifest':f=>f.authored.entries.get(f.manifestPath).mode='100755',
+  'malformed manifest JSON':f=>f.put(f.manifestPath,'throw new Error("not JSON")'),
+  'manifest in package inputs':f=>{f.definition.inputs.push(f.manifestPath);f.put('.github/package-inputs.json',f.definition);},
+  'manifest in package verification paths':f=>{f.policy.verification_paths.push(f.manifestPath);f.definition.verification_paths.push(f.manifestPath);f.put('.github/package-inputs.json',f.policy,true);f.put('.github/package-inputs.json',f.definition);},
+  'manifest in selected role graph':f=>{const manifest=f.put(f.manifestPath,{version:1});const side=f.put(f.packetPrefix+'selection-sidecar.json',{...f.sidecarBody,logical_asset_map:{...f.sidecarBody.logical_asset_map,patch:manifest}});f.put('data/ownership-selection.json',{...f.base,additive_release:{path:side.path,bytes:side.bytes,sha256:side.sha256}});},
+  'mixed software change':f=>{f.put('src/renderer.js','export const changed=true');f.files.push({filename:'src/renderer.js',status:'modified'});},
+  'changed base authority':f=>f.put('data/ownership-selection.json',{...f.base,manifest_path:'other-base.json',additive_release:{path:f.packetPrefix+'selection-sidecar.json',bytes:1,sha256:'0'.repeat(64)}}),
+}))test('scientific metadata update preserves full fallback for '+name,async()=>{const f=scientificManifestFixture();change(f);assert.equal(await f.run(),null);});
+for(const role of ['manifest_path','selected_geography','certificate','review'])test('scientific receipt cannot be an accepted base '+role+' role',async()=>{
+  const f=scientificManifestFixture();
+  if(role==='manifest_path')f.base.manifest_path=f.manifestPath;
+  else if(role==='selected_geography')f.base.selected_geography={path:f.manifestPath};
+  else f.base.artifact_consumption[role]={path:f.manifestPath};
+  const old=JSON.parse(f.blobs.get(f.baseline.entries.get('data/ownership-selection.json').sha));
+  f.put('data/ownership-selection.json',{...f.base,additive_release:old.additive_release},true);
+  const side=f.put(f.packetPrefix+'selection-sidecar.json',{...f.sidecarBody,base_selection:f.base});
+  f.put('data/ownership-selection.json',{...f.base,additive_release:{path:side.path,bytes:side.bytes,sha256:side.sha256}});
+  assert.equal(await f.run(),null);
+});
+test('author classification requires the current linked issue declaration, never candidate manifest self-claims',async()=>{
+  const f=gateFixture(scientificManifestFixture());
+  const spec=JSON.parse(/<!-- worldatlas-work:v1\n([\s\S]*?)\n-->/.exec(f.issue.body)[1]);
+  delete spec.evidence_quality;f.issue.body='<!-- worldatlas-work:v1\n'+JSON.stringify(spec)+'\n-->';
+  assert.deepEqual(await f.select(),{profile:'full',shards:[0,1,2],geography_software:false});
+});
+test('cold queue scientific validation failure cannot reach merge despite eligible metadata',async()=>{
+  const f=mergeFixture({selectedFixture:scientificManifestFixture()});
+  await assert.rejects(f.complete({evidenceCheck:async()=>{throw Error('Changed scientific evidence is invalid');}}),/scientific evidence/);
+  assert.equal(f.writes.length,0);
+});
+
+function realScientificManifest1906() {
+  const fixed=JSON.parse(readFileSync(new URL('./fixtures/selected-scientific-manifest-pr1906.json',import.meta.url)));
+  const baseline={object:{sha:fixed.base},entries:new Map(fixed.baseline_rows.map(row=>[row.path,{...row}]))},
+    authored={object:{sha:fixed.head},entries:new Map(fixed.authored_rows.map(row=>[row.path,{...row}]))};
+  const blobs=new Map(),reads=[],files=structuredClone(fixed.files);
+  for(const row of fixed.snapshots){
+    const raw=gunzipSync(Buffer.from(row.gzip_base64,'base64'),{maxOutputLength:32*1024*1024});
+    assert.equal(raw.length,row.bytes);assert.equal(digest(raw),row.sha256);
+    assert.equal(createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex'),row.git_blob_oid);
+    blobs.set(row.git_blob_oid,raw);
+  }
+  const api=async route=>{assert(route.includes('/git/blobs/'),route);const sha=route.split('/').at(-1),raw=blobs.get(sha);assert(raw,sha);
+    reads.push(sha);return {sha,size:raw.length,encoding:'base64',content:raw.toString('base64')};};
+  const reservation=verifyIssueScope({branch:fixed.branch,issue:fixed.issue});
+  const f={fixed,files,branch:fixed.branch,baseline,authored,blobs,reads,api,reservation};
+  f.run=(options={})=>selectedDataSelection({api:f.api,repo:'ChengshuLi/WorldAtlas',branch:f.branch,files:f.files,
+    baseline,authored,reservation:f.reservation,...options});return f;
+}
+test('complete immutable PR1906 metadata removes the observed manifest-only early fallback',async()=>{
+  const f=realScientificManifest1906(),stats={};
+  assert.equal(f.fixed.head,'92131353e8dba4bf109bfec2f6ad46628977b8fb');assert.equal(f.files.length,19);
+  const {evidence_manifest,...scope}=f.reservation;
+  assert.equal(selectedDataCandidate(f.branch,f.files,scope),false,'original scope-only boundary rejected this exact diff');
+  assert.equal(selectedDataCandidate(f.branch,f.files,f.reservation),true);
+  assert.deepEqual(await f.run({metadataDiagnostics:stats}),{test_selection:'selected-data',
+    expectations_path:'coordination/engineering/vietnam-current-cell-20261014/mapping-followup-001/delivery/selected-delivery-expectations.json',shards:[0]});
+  assert.equal(stats.read_count,28);assert.equal(stats.read_bytes,5060083);
+  assert(f.reads.includes(f.authored.entries.get(evidence_manifest).sha),'actual changed scientific manifest was parsed');
+});
+for(const [name,change] of Object.entries({
+  'unknown issue manifest':f=>delete f.reservation.evidence_manifest,
+  'missing current manifest':f=>f.authored.entries.delete(f.reservation.evidence_manifest),
+  'base manifest nonordinary':f=>f.baseline.entries.get(f.reservation.evidence_manifest).mode='120000',
+  'changed accepted smoke':f=>f.authored.entries.get(SELECTED_SMOKE).sha='0'.repeat(40),
+  'actual renderer modification':f=>f.files.push({filename:'src/app.js',status:'modified'}),
+  'other existing packet JSON edit':f=>f.files.push({filename:'coordination/engineering/vietnam-current-cell-20261014/other.json',status:'modified'}),
+  'unavailable manifest bytes':f=>f.blobs.delete(f.authored.entries.get(f.reservation.evidence_manifest).sha),
+}))test('original PR1906 keeps complete fallback for '+name,async()=>{const f=realScientificManifest1906();change(f);assert.equal(await f.run(),null);});
+test('eligible scientific metadata never replaces the actual independent scientific validator',async()=>{
+  const f=mergeFixture({selectedFixture:scientificManifestFixture()});
+  assert.equal((await selectedDataSelection({...f.options,branch:f.branch,files:f.files,baseline:f.baseline,authored:f.authored,
+    reservation:{mode:'engineering',owned_paths:f.ownedPaths,evidence_manifest:f.manifestPath}})).test_selection,'selected-data');
+  await assert.rejects(checkPremergeEvidence({...f.options,pr:f.pr,issue:f.issue,
+    reservation:{mode:'engineering',owned_paths:f.ownedPaths},files:f.files}),/Invalid or oversized evidence inventory/);
+  await assert.rejects(f.complete({evidenceCheck:checkPremergeEvidence}),/Invalid or oversized evidence inventory/);
+  assert.equal(f.writes.length,0);
+});
+
+function baseRoutingManifestFixture(change) {
+  const f=scientificManifestFixture(),document=name=>JSON.parse(f.blobs.get(f.authored.entries.get(name).sha));
+  const native=document(f.base.manifest_path),certificate=document(f.base.artifact_consumption.certificate.path),
+    code=document(certificate.application_consumer_code.path),oldNativeHash=f.base.sha256;
+  const existing=f.baseline.entries.get(f.manifestPath),consumed={path:f.manifestPath,bytes:existing.size,
+    mode:existing.mode,sha256:digest(f.blobs.get(existing.sha))};
+  let nativePath=f.base.manifest_path;
+  const state={f,native,certificate,code,consumed,document,setNativePath:name=>nativePath=name};
+  change(state);
+  const codePin=f.put(certificate.application_consumer_code.path===f.manifestPath
+    ? 'coordination/engineering/prior/application-code.json':certificate.application_consumer_code.path,code,true);
+  if(certificate.application_consumer_code.path!==f.manifestPath)certificate.application_consumer_code=codePin;
+  const cert=f.put(f.base.artifact_consumption.certificate.path,certificate,true);
+  const manifest=f.put(nativePath,native,true);
+  const verified=document('scripts/native-ownership/verified-candidates.json'),receipt=verified.candidates[oldNativeHash];
+  f.put('scripts/native-ownership/verified-candidates.json',{...verified,candidates:{[manifest.sha256]:receipt}},true);
+  f.base.manifest_path=nativePath;f.base.sha256=manifest.sha256;f.base.artifact_consumption.certificate=cert;
+  const old=document('data/ownership-selection.json');
+  const oldBaseline=JSON.parse(f.blobs.get(f.baseline.entries.get('data/ownership-selection.json').sha));
+  f.put('data/ownership-selection.json',{...f.base,additive_release:oldBaseline.additive_release},true);
+  const side=f.put(f.packetPrefix+'selection-sidecar.json',{...document(old.additive_release.path),base_selection:f.base});
+  f.put('data/ownership-selection.json',{...f.base,additive_release:{path:side.path,bytes:side.bytes,sha256:side.sha256}});
+  return f;
+}
+for(const [name,change] of Object.entries({
+  'certificate application-consumer code':s=>s.certificate.application_consumer_code=s.consumed,
+  'certificate qualification inventory':s=>s.certificate.qualification_inventory=s.consumed,
+  'certificate release catalogue':s=>s.certificate.release_product_catalogue=s.consumed,
+  'certificate selected registry':s=>{s.certificate.release_product_catalogue=s.certificate.qualification_inventory;s.certificate.selected_artifact_bindings={registry:s.consumed};},
+  'complete certificate application input':s=>s.certificate.application_inputs.push(s.consumed),
+  'application critical source':s=>s.code.critical_files.push(s.consumed),
+  'application entry critical source':s=>s.code.entry_critical_files={'scripts/build-hosted-inner.mjs':[s.consumed]},
+  'native part':s=>{s.setNativePath('coordination/engineering/retained-delivery/base-native-manifest.json');s.native.parts=[{kind:'rows',path:'evidence-quality.json'}];},
+  'native bounds alias':s=>{s.setNativePath('coordination/engineering/retained-delivery/base-native-manifest.json');s.native.bounds.path='evidence-quality.json';},
+  'original bounds pin':s=>s.native.original_assets.bounds=s.consumed,
+  'native transport index':s=>s.native.native_asset_transport={version:1,kind:'ordered-exact-original-byte-fragments',index:s.consumed},
+  'native transport fragment':s=>{const index=s.f.put('coordination/engineering/retained-delivery/index.json',
+    {version:1,kind:'ordered-exact-original-byte-fragments',parts:[{path:'evidence-quality.json'}]},true);
+    s.native.native_asset_transport={version:1,kind:'ordered-exact-original-byte-fragments',index};},
+  'selected source bank':s=>s.f.base.selected_geography={...s.consumed,version:1,kind:'complete-world-index-with-exact-encoded-overrides'},
+  'selected source world index':s=>{const bank=s.f.put('data/base-source-bank.json',{version:1,kind:'complete-world-index-with-exact-encoded-overrides',
+    world_index:s.consumed,unchanged_files:[],overrides:[]},true);s.f.base.selected_geography={...bank,version:1,kind:'complete-world-index-with-exact-encoded-overrides'};},
+  'selected unchanged source':s=>{const bank=s.f.put('data/base-source-bank.json',{version:1,kind:'complete-world-index-with-exact-encoded-overrides',
+    world_index:s.certificate.qualification_inventory,unchanged_files:[s.consumed],overrides:[]},true);s.f.base.selected_geography={...bank,version:1,kind:'complete-world-index-with-exact-encoded-overrides'};},
+  'selected source override':s=>{const bank=s.f.put('data/base-source-bank.json',{version:1,kind:'complete-world-index-with-exact-encoded-overrides',
+    world_index:s.certificate.qualification_inventory,unchanged_files:[],overrides:[s.consumed]},true);s.f.base.selected_geography={...bank,version:1,kind:'complete-world-index-with-exact-encoded-overrides'};},
+  'selected native comparison receipt':s=>{const name='scripts/native-ownership/verified-candidates.json',verified=s.document(name);
+    verified.candidates[s.f.base.sha256].path=s.f.manifestPath;s.f.put(name,verified,true);},
+  'unknown consumption certificate':s=>s.certificate.kind='future-unknown-consumption',
+  'unknown application source metadata':s=>s.code.kind='future-unknown-code-routing',
+  'unknown native transport':s=>s.native.native_asset_transport={version:2,kind:'unknown'},
+  'missing native part roster':s=>delete s.native.parts,
+}))test('edited scientific receipt retains complete regression for deeper '+name,async()=>{
+  const f=baseRoutingManifestFixture(change),stats={};assert.equal(await f.run({metadataDiagnostics:stats}),null,name);
+  assert(stats.failure,name);
+});
+test('deeper base metadata must be ordinary, unchanged, available and authenticated',async()=>{
+  for(const mode of ['100755','120000','160000']){
+    const f=scientificManifestFixture();f.authored.entries.get(f.base.artifact_consumption.certificate.path).mode=mode;
+    assert.equal(await f.run(),null,mode);
+  }
+  const unavailable=scientificManifestFixture();unavailable.blobs.delete(unavailable.authored.entries.get(unavailable.base.artifact_consumption.certificate.path).sha);
+  assert.equal(await unavailable.run(),null);
+  const changed=scientificManifestFixture();changed.put(changed.base.artifact_consumption.certificate.path,{version:1});
+  assert.equal(await changed.run(),null);
+});
+test('real PR1906 deeper-role reads share existing admission rather than reset the metadata budget',async()=>{
+  const f=realScientificManifest1906(),stats={};
+  assert.equal(await f.run({metadataBudgetBytes:4900000,metadataDiagnostics:stats}),null);
+  assert.match(stats.failure,/metadata memory admission exceeded/);assert(stats.read_count>=20);
+  assert(f.reads.includes(f.baseline.entries.get('coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/manifest.json').sha));
+  assert(stats.peak_admitted_bytes<=stats.limit_bytes);
 });

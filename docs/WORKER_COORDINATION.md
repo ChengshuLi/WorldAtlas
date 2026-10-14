@@ -575,6 +575,16 @@ all existing entries, order and other policy fields. Supporting JSON/log evidenc
 cannot create package/import authority. Unknown boundaries retain all three full
 regression shards.
 
+The linked issue's explicitly declared scientific evidence manifest may also be
+updated as metadata. Its exact path comes from the current validated issue contract,
+not a candidate filename or broad JSON allowance. Both tree entries must be ordinary;
+the receipt must stay outside fixed selected/base roles and actual package inputs
+or verification paths. The base check authenticates the unchanged native manifest,
+transport index, source bank, selected comparison registry and consumption/code
+metadata, then excludes their declared reader roles without reading scientific leaves. Bounded syntax checks do not replace its independent
+scientific/evidence validation or exact-head review. Arbitrary existing packet JSON
+edits, consumed manifests and unavailable qualification retain complete regression.
+
 Each such delivery adds exactly one `selected-delivery-expectations.json` under its
 owned delivery directory. Use the existing smoke's version 1 schema, authored from
 reviewed original authority/ledger inputs. Eligibility binds its ledger hash,
@@ -588,11 +598,15 @@ remain reviewed source-side statements, not a new independent source approval.
 Selected data runs ownership, scope and evidence checks on the author head, without
 an author geography, regression or package execution. The serialized queue composes
 current main with the reviewed head, then runs one fresh geography conservation pass
-and one actual Cloudflare build on that candidate. It performs qualified native
-output readback, the generic emitted-asset smoke and the three packaged asset/UI
-files. Chromium and actual selected GPU/Canvas checks remain required. Unchanged
-coordination and synthetic package-control suites do not run for this data-only
-selection, and their historical regression commits are not fetched.
+and one actual package assembly or full Cloudflare build on that candidate. The
+generic emitted-asset smoke checks the complete selected roster, every additive
+patch cell with the actual picker/sampler and retained stable-owner controls.
+New full builds keep qualified native output readback. Authenticated assembly
+retains the successful original readback and verifies unchanged output bytes.
+Ordinary selected data does not rerun unchanged-base unit/browser tests or restore
+canonical/model-reader/SQLite context solely for those tests. Software, content,
+unknown or base-changing work keeps full regression; explicit rollout proof keeps
+its current consumer tests.
 
 There is no selected-data author computation or proof to transfer. The final gate
 requires successful current queue integration and geography, the exact candidate

@@ -1,7 +1,8 @@
 import {quotaDelay,completeReads} from './github-quota.mjs';
 import {HTTP_ATTEMPT_MS} from './job-deadline.mjs';
 import {conditionalSnapshots} from './github-snapshots.mjs';
-import {laneForBranch,validateIssueMetadata,validateIssuePRBody,validateGeographyOwnedPaths,validateEngineeringOwnedPaths} from './check-handoff-scope.mjs';
+import {evidenceRequirement} from './evidence-policy.mjs';
+import {laneForBranch,validateIssueMetadata,validateIssuePRBody,validateGeographyOwnedPaths,validateEngineeringOwnedPaths,validateLanePaths} from './check-handoff-scope.mjs';
 
 export const claimMarker='worldatlas-claim:v1';
 export function canonicalIssueNumber(value){if(!/^[1-9]\d*$/.test(String(value))||!Number.isSafeInteger(Number(value)))throw Error('Use a canonical positive issue number, without leading zeros or exponent notation');return Number(value);}
@@ -27,7 +28,11 @@ function checkLaneMode(branch,spec){
 export function verifyIssueScope({branch, issue}) {
  validateIssueMetadata(branch,issue);
  const spec=workSpec(issue.body);checkLaneMode(branch,spec);
- return {mode:spec.mode,...(spec.owned_paths!==undefined?{owned_paths:[...spec.owned_paths]}:{})};
+ const evidence=spec.mode==='engineering'&&spec.evidence_quality!==undefined
+  ? evidenceRequirement(issue,spec,undefined,branch):null;
+ if(evidence)validateLanePaths(branch,[evidence.manifestPath],{ownedPaths:spec.owned_paths});
+ return {mode:spec.mode,...(spec.owned_paths!==undefined?{owned_paths:[...spec.owned_paths]}:{}),
+  ...(evidence?{evidence_manifest:evidence.manifestPath}:{})};
 }
 function liveOperationScope({issue,branch,dependencies=[],comments=[]}) {
  verifyIssueScope({branch,issue});
