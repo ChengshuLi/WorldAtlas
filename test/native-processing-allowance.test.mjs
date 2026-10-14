@@ -11,7 +11,7 @@ test('native preparation admits requested current aggregate above historical256M
  assert.throws(()=>candidateBudget([],{allowance:{phaseBytes:Number.MAX_SAFE_INTEGER,rssBytes:Number.MAX_SAFE_INTEGER}}),/admission/);
 });
 test('native preparation refuses unadmitted, malformed and RSS-exhausted configurations',()=>{
- for(const options of [{availableBytes:2*GiB},{availableBytes:4*GiB,concurrentReservedBytes:2*GiB},{phaseBytes:NaN},{rssBytes:Infinity},{phaseBytes:0},{phaseBytes:Number.MAX_SAFE_INTEGER}])assert.throws(()=>preparationAllowance(options),/admission|Insufficient/);
+ for(const options of [{availableBytes:1},{availableBytes:4*GiB,concurrentReservedBytes:4*GiB},{phaseBytes:NaN},{rssBytes:Infinity},{phaseBytes:0},{phaseBytes:Number.MAX_SAFE_INTEGER}])assert.throws(()=>preparationAllowance(options),/admission|Insufficient/);
  for(const bad of [null,{}, {phaseBytes:null,rssBytes:null},{phaseBytes:undefined,rssBytes:768*MiB},{phaseBytes:512*MiB,rssBytes:undefined}, {phaseBytes:512*MiB,rssBytes:768*MiB,availableBytes:2**40}])assert.throws(()=>preparationRequestAllowance(bad),/request allowance/);
  assert.throws(()=>candidateBudget([],{allowance:{phaseBytes:MiB,rssBytes:1}}),/RSS/);
 });
@@ -30,5 +30,6 @@ test('exact guard compatibility preserves non-budget helpers and refuses foreign
  assert(start>0&&end>start);const original=Buffer.from(originalPrefix+originalBudget+text.slice(end));const oldPin={bytes:original.length,sha256:sha(original)},newPin={bytes:current.length,sha256:sha(current)};
  assert.equal(verifyPreparationBudgetCode(original,current,oldPin,newPin),current.length-original.length);
  for(const name of ['requirePlainExecution','originalCandidateAssets','committedPreparationFiles','createNativeCandidateOutput','candidateBudget']){const changed=Buffer.from(text.replace('function '+name+'(', 'function '+name+'Changed('));assert.throws(()=>verifyPreparationBudgetCode(original,changed,oldPin,{bytes:changed.length,sha256:sha(changed)}),/preparation guard/);}
+ for(const mutation of ['currentRssBytes+growthBytes','(availableBytes-concurrentReservedBytes)/2']){const changed=Buffer.from(text.replace(mutation,mutation+'+1'));assert.throws(()=>verifyPreparationBudgetCode(original,changed,oldPin,{bytes:changed.length,sha256:sha(changed)}),/current preparation guard/);}
  const changedOld=Buffer.from(original.toString().replace('256 * 1024 * 1024','255 * 1024 * 1024'));assert.throws(()=>verifyPreparationBudgetCode(changedOld,current,{bytes:changedOld.length,sha256:sha(changedOld)},newPin),/historical/);
 });

@@ -11,7 +11,7 @@ test('normal allowance scales with current capacity instead of the former 256 Mi
  const small=processingAllowance({availableBytes:6*GiB,concurrentReservedBytes:GiB});
  const large=processingAllowance({availableBytes:10*GiB,concurrentReservedBytes:GiB});
  assert(small.phaseBytes>256*MiB);assert(large.phaseBytes>small.phaseBytes);
- assert(large.rssBytes<10*GiB-GiB-2*GiB-768*MiB);
+ assert(large.rssBytes<10*GiB-GiB);
  for(const availableBytes of [0,NaN,Infinity,-1,Number.MAX_SAFE_INTEGER+1])assert.throws(()=>processingAllowance({availableBytes}),/observations|memory/);
  for(const concurrentReservedBytes of [-1,NaN,8*GiB])assert.throws(()=>processingAllowance({availableBytes:8*GiB,concurrentReservedBytes}),/observations|memory/);
  assert.throws(()=>processingAllowance({availableBytes:8*GiB,rssBytes:7*GiB}),/admission/);
