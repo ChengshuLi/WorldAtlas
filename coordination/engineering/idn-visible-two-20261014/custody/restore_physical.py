@@ -73,7 +73,7 @@ def main():
         raise ValueError('Original denominator changed')
 
     runtime_pin = config['runtime_inventory']
-    runtime_raw = checked(git('show', head + ':' + runtime_pin['path']), runtime_pin)
+    runtime_raw = checked(git('show', runtime_pin['commit'] + ':' + runtime_pin['path']), runtime_pin)
     runtime = json.loads(runtime_raw)
     if pathlib.Path(sys.executable).resolve() != pathlib.Path(runtime['python_executable']).resolve():
         raise ValueError('Python runtime changed')
