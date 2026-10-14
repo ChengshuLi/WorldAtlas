@@ -140,7 +140,7 @@ for(const change of ['none','withdraw','replace-limits']) test(`final merge rech
   if(name===`/repos/${repo}/git/ref/heads/main`)return {object:{sha:base}};
   if(name===`/repos/${repo}/commits/${head}/status`)return {statuses:[]};
   if(name===`/repos/${repo}/commits/${head}/check-runs`)return {check_runs:['scope','evidence'].map((name,index)=>({id:index+1,name,app:{id:1},status:'completed',conclusion:'success'}))};
-  if(name===`/repos/${repo}/git/commits/${candidate}`)return {tree:{sha:'2'.repeat(40)},parents:[{sha:base},{sha:head}]};
+  if(name===`/repos/${repo}/git/commits/${candidate}`)return {sha:candidate,tree:{sha:'2'.repeat(40)},parents:[{sha:base},{sha:head}]};
   return f.api(route,method,body);
  };
  const report={version:1,method_id:'worldatlas-trusted-geography-check-v1',baseline_commit:base,

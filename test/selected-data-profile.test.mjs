@@ -227,7 +227,7 @@ function mergeFixture({selectedFixture,gateReady=false} = {}) {
     f.mergeReads.push(route);
     if(method==='PUT'){f.writes.push(body);return {merged:true,sha:'f'.repeat(40)};}
     if(route===root+'/git/ref/heads/main')return {object:{sha:f.base}};
-    if(route===root+'/git/commits/'+candidate)return {tree:{sha:'head-tree'},parents:[{sha:f.base},{sha:f.head}]};
+    if(route===root+'/git/commits/'+candidate)return {sha:candidate,tree:{sha:'head-tree'},parents:[{sha:f.base},{sha:f.head}]};
     if(route.includes('/check-runs'))return {check_runs:['scope',...(f.evidenceQuality?['evidence']:[])].map((name,id)=>({id:id+1,name,status:'completed',conclusion:'success',app:{id:1}}))};
     if(route===root+'/commits/'+f.head+'/status')return {statuses:[]};
     if(route.includes('/actions/runs/99/artifacts'))return {total_count:0,artifacts:[]};
