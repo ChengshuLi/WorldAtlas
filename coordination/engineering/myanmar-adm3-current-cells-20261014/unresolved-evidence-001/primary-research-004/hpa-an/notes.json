@@ -1,0 +1,255 @@
+{
+  "version": 1,
+  "date_utc": "2026-10-14",
+  "worker": "/root/putao_primary_boundary",
+  "kind": "Bounded read-only primary document inspection",
+  "parent_id": "framework:province:hpa-an:3b606d253d82",
+  "scientific_vintage": "f7c358326d776398bc1cffe84df81eac7033091c",
+  "frozen_queue_vintage": "a61b6f9e7f88b1da380e3a834f89d7509132ed71",
+  "repair_land_held": 206,
+  "source_conflict_land_held_separately": 8,
+  "source_relative_held_separately": 13,
+  "inventory_excerpt": "retained-inventory-excerpt.json",
+  "inventory_excerpt_sha256": "8844e31236ddba120c7c2dddeabb2a300afa14d7ea3158a40199f17c5e2121be",
+  "complete_child_count": 3,
+  "candidate_owners": [
+    {
+      "owner": 30111,
+      "id": "gb:MMR:ADM3:66882298B20948488348117",
+      "name": "Hpa-An",
+      "remaining_counts": {
+        "repair-evaluation:land": 70,
+        "physical-interpretation:source-relative": 13
+      },
+      "source_sids": [
+        44888,
+        44916,
+        45134
+      ],
+      "original_geometry": {
+        "type": "MultiPolygon",
+        "polygons": 2,
+        "coordinate_pairs": 502,
+        "interior_rings": 0,
+        "bounds": [
+          97.35932352600005,
+          16.517084187000098,
+          98.01141574600005,
+          17.70524656000003
+        ]
+      },
+      "current_geometry": {
+        "type": "Polygon",
+        "polygons": 1,
+        "coordinate_pairs": 138,
+        "interior_rings": 0,
+        "bounds": [
+          97.3678,
+          16.5171,
+          98.0084,
+          17.7052
+        ]
+      }
+    },
+    {
+      "owner": 30163,
+      "id": "gb:MMR:ADM3:66882298B33854457780857",
+      "name": "Hlaingbwe",
+      "remaining_counts": {
+        "repair-evaluation:land": 136,
+        "source-conflict:land": 8
+      },
+      "source_sids": [
+        44888,
+        44916,
+        45122,
+        57248,
+        58126
+      ],
+      "original_geometry": {
+        "type": "Polygon",
+        "polygons": 1,
+        "coordinate_pairs": 420,
+        "interior_rings": 0,
+        "bounds": [
+          97.60324146800004,
+          16.678952715,
+          98.32181125000008,
+          17.845002734000047
+        ]
+      },
+      "current_geometry": {
+        "type": "Polygon",
+        "polygons": 1,
+        "coordinate_pairs": 247,
+        "interior_rings": 0,
+        "bounds": [
+          97.6032,
+          16.6793,
+          98.3087,
+          17.8415
+        ]
+      }
+    },
+    {
+      "owner": 30262,
+      "id": "gb:MMR:ADM3:66882298B59821374859075",
+      "name": "Thandaunggyi",
+      "remaining_counts": {},
+      "source_sids": [],
+      "original_geometry": {
+        "type": "Polygon",
+        "polygons": 1,
+        "coordinate_pairs": 404,
+        "interior_rings": 0,
+        "bounds": [
+          96.39160505300005,
+          18.59857345300002,
+          97.0424419980001,
+          19.509060825000034
+        ]
+      },
+      "current_geometry": {
+        "type": "Polygon",
+        "polygons": 1,
+        "coordinate_pairs": 122,
+        "interior_rings": 0,
+        "bounds": [
+          96.3916,
+          18.5986,
+          97.0424,
+          19.5091
+        ]
+      }
+    }
+  ],
+  "interval_limit": "Only copied original/current envelopes and source vintage; no cell-level temporal intervals or coordinates queried.",
+  "sources": [
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Hpa-An_2019_MMR.pdf",
+      "producer": "Myanmar General Administration Department; MIMU mirror",
+      "pages": 130,
+      "date": "September 2019 cover; day unreadable in extracted text",
+      "locators": [
+        "PDF pp.13–15 / printed pp.1–3: history, location and boundaries"
+      ],
+      "finding": "Actual township profile accessible. Critical names, history, geographic numerals and boundary neighbors are largely missing in text extraction.",
+      "extent": "Township subject; original multipart footprint and administrative subdivisions not established.",
+      "scale_datum": "Not established; graphic maps not visually inspected.",
+      "limit": "No full administrative order or map-annex authority recoverable from this extraction."
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Hlaingbwe_2019_MMR.pdf",
+      "producer": "Myanmar General Administration Department; MIMU mirror",
+      "pages": 80,
+      "date": "Introduction: October 2018–September 2019",
+      "locators": [
+        "PDF p.14 / printed1: reporting interval",
+        "PDF p.15 / printed2: history and location",
+        "PDF p.16 / printed3: area table and neighbors"
+      ],
+      "finding": "Area table explicitly includes Hlaingbwe, Paingkyon and Shan Ywathit; total1671.74 square miles. Neighbor names largely missing in extracted text. Full map not inspected.",
+      "history_fragments_as_extracted": [
+        "၂၈.၂.၁၉၃၇ ၊ ၁၀၃/ ၄၃ / ၁",
+        "၂၉.၁.၂၀၀၄ ၊ ၂၀၀/ ၄၇ ၇၉/ ၁",
+        "၂၉.၄.၂၀၁၁ ၊ ၂၀၀/ ၄၇-၇၉ / ၁"
+      ],
+      "fragment_limit": "These are incomplete OCR fragments, not reliable legal citations. First year may be corrupted. Names, suffixes, precise subjects and territorial effect unproved; do not normalize digits or pair a specific town with an order.",
+      "extent": "Extracted declared box16°14′–17°15′N,96°14′–98°28′E differs materially from retained2019 envelope. This may involve extraction defects; no correction inferred.",
+      "scale_datum": "Not established.",
+      "missing": "Original orders and territorial schedules, readable history/map and full-footprint nesting."
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_Hlaingbwe_2014_ENG.pdf",
+      "producer": "Department of Population, Ministry of Labour, Immigration and Population",
+      "pages": 59,
+      "date": "2014 census; October2017 report",
+      "locators": [
+        "Cover/PDFp3: Hlaingbwe Township, Hpa-an District, Kayin",
+        "PDFp7: figures at a glance; PDFp10 footnotes"
+      ],
+      "finding": "Hlaingbwe report area1341.2km²,4wards,36village tracts. Areas attributed to2014–2015 Settlement and Land Record Department; census night29March2014.",
+      "extent": "Named reporting unit; Kayin-wide township locator Figure1. Scale/datum and full2019 footprint not verified.",
+      "limit": "Does not independently prove aggregation with Paingkyon and Shan Ywathit in2019."
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_Paingkyon_2014_ENG.pdf",
+      "producer": "Department of Population, Ministry of Labour, Immigration and Population",
+      "pages": 59,
+      "date": "29March2014 census night; October2017 report",
+      "locators": [
+        "Cover/PDFp3: Paingkyon Sub-Township, Hpa-an District, Kayin",
+        "PDFp7: figures at a glance",
+        "PDFp10: area source footnote"
+      ],
+      "finding": "Actual separate Sub-Township report:1694.7km²,5wards,27village tracts; area from Settlement and Land Record Department2014–2015.",
+      "extent": "Paingkyon reporting unit and Kayin-wide locator; no inspected surveyed township map.",
+      "scale_datum": "Unverified.",
+      "limit": "The distinct reporting subject confirms an administrative crosswalk is needed. It does not establish the exact2019 ADM3 nesting or footprint."
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/Hpa_An_Township_Disaster_Management_Plans_MMR_Dec2017.pdf",
+      "producer": "Plan introduction states preparation led by Hpa-An GAD and state Relief and Resettlement Department with participating agencies/community; MIMU mirror",
+      "pages": 86,
+      "date": "December2017 per official MIMU index filename; internal figures includeMarch2016",
+      "locators": [
+        "PDFp10 / printed4: preparation leadership",
+        "PDFp15 / printed9: Figure1 village-tract/village map",
+        "PDFp16 / printed10: location and neighboring townships"
+      ],
+      "finding": "Legacy-font text manually read: Hlaingbwe east; Thaton/Paung and Mon west; Mawlamyine south; Bilin/Hpapun north. Thus Hpa-An is domestic-neighbor context, not directly assigned a Thai boundary by this source. Declares1120.09square miles and716857acres.",
+      "extent": "Declared16°30′–17°44′N,97°23′–98°19′E differs from retained2019 envelope; whole-footprint equivalence unproved.",
+      "scale_datum": "Figure1 not visually inspected; unknown.",
+      "limit": "Legacy WinInnwa extraction; neighbor transcription should be checked on the original page before formal authority use. Planning document is not a delimitation instrument."
+    },
+    {
+      "url": "https://themimu.info/states_regions/kayin",
+      "producer": "MIMU catalogue",
+      "finding": "Links both2019 GAD candidates and separate2014 census files for Hlaingbwe, Paingkyon and Shan Ywathit; source of explicit document links.",
+      "limit": "Catalogue grouping is not a township hierarchy authority."
+    }
+  ],
+  "map_locator_only": {
+    "catalogue_url": "https://documents.themimu.info/view/maps/?location=Kayin&page=1&view=location",
+    "title": "State Map VL Kayin MIMU270v10 17Nov2025 36x66 inches.pdf",
+    "url": "https://documents.themimu.info/downloads/5PGA91t/State%20Map_VL_Kayin_MIMU270v10_17Nov2025_36x66%20inches.pdf",
+    "result": "Read-only click returned zero-line HTML; map content not obtained or inspected. Later2025 state map not substituted for2019 township authority."
+  },
+  "failed_once_no_retry": [
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_Hpa-An_2014_ENG.pdf",
+      "result": "Internal error"
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_ShanYwathit_2014_ENG.pdf",
+      "result": "403 Forbidden"
+    },
+    {
+      "url": "https://documents.themimu.info/view/maps/?location=Kayin&page=2&view=location",
+      "result": "Not accessible via web tool"
+    }
+  ],
+  "border_and_topology_limits": {
+    "parent_is_framework": "Complete three-child inventory is a framework parent; separate township reporting documents do not independently prove that entire original parent aggregation.",
+    "thai_scope": "Hlaingbwe has additional source SIDs 57248/58126; the observed parent families include THA ADM1/ADM2. Their exact SID-to-family/owner join is not supplied by the available small inventory and is not assumed here. No foreign-border claim is extended to Hpa-An township.",
+    "hpa_an_topology": "Original MultiPolygon2 is current Polygon1. No authorized component removal inferred from profile existence or planning text.",
+    "hlaingbwe_topology": "Display reconciliation has2 conflicts. Reconciliation and foreign source intersections are not ownership authority.",
+    "not_used": "Search surfaced a2018 malaria study coauthored by national agencies, but it was not adopted as legal boundary/survey evidence. No Hpapun source pass repeated."
+  },
+  "specific_next_artifacts": [
+    "Readable original Hlaingbwe GAD2019 history page and the administrative orders referenced at29January2004 and29April2011, including full identifier, subject, territorial schedules and maps. Do not use incomplete extracted citations as legal identifiers.",
+    "Official2019 Hlaingbwe–Paingkyon–Shan Ywathit aggregation schedule and full township map with scale/datum, and original Shan Ywathit sub-township boundary map.",
+    "Hpa-An2019 readable administrative-boundary map, component/river-island provenance and date crosswalk to original two-component source.",
+    "Only for actual Hlaingbwe border candidates: exact Thai source SID owners, applicable surveyed boundary segment and dated river/bank/control records; candidate-to-document registration remains absent."
+  ],
+  "limits": {
+    "local_source_downloads": 0,
+    "new_permission_cards": 0,
+    "spatial_or_scientific_processing": 0,
+    "new_accepted_credit": 0,
+    "sovereignty_adjudication": false,
+    "prior_notes_modified": false,
+    "source_byte_hashes": "Unavailable: web inspection only, no original source bytes saved.",
+    "license": "No document-specific reuse license established. MIMU catalogue states operational use, no guarantee and no commercial/advertising use; products do not imply UN boundary endorsement."
+  }
+}
