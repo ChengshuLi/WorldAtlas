@@ -1321,6 +1321,60 @@
       "bytes": 2063,
       "sha256": "ed97ecda2c574490a64186f8c03cebc0528d7b466fdcf6b1f4a7b32a0a6d5f09",
       "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/authority-registry.json",
+      "bytes": 43511,
+      "sha256": "783444a2f3fa0b1adbfff336f8a9dd32bedca84be5ba842cd0132d51ddaacdd0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/ledger.json",
+      "bytes": 2020362,
+      "sha256": "b7f78043f8e19b02baae1ebc4a4d860ff01761068eacb6e631dad818568b32c0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/patch.json",
+      "bytes": 514796,
+      "sha256": "22fbc72fb9819de878a7a7065c48fba5825bf2dcd795318f5b0d0e8bcf608fd4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/selected-delivery-expectations.json",
+      "bytes": 73018,
+      "sha256": "bf800292dec58bec853f172b2c1b2cec69c61ae26a3cf41606415ca6b9f4be75",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/final-metadata-conservation.json",
+      "bytes": 3439,
+      "sha256": "a7360b9455134d0147baeadd6ea11abed21292e9e693d61dc2aa20b12349e984",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/runtime-envelope.json",
+      "bytes": 1386,
+      "sha256": "cc6a1e44cb6ac01c8ffaa9f0eb04d31b3b582b4896c43e7e7cea9bd2d90e1ed8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/selection-sidecar.json",
+      "bytes": 3379,
+      "sha256": "acb683b1d96b9065fe9ecfc21e691d1d49d986b83ca22fd9e6ce4fe784a4295f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/ownership-selection.json",
+      "bytes": 1390,
+      "sha256": "8a16f300d91d05fb44d8bbd433754be635f19e1b892194c12370ce527df42939",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": ".github/package-inputs.json",
+      "bytes": 105670,
+      "sha256": "975530444f2bd49dec79663c4a8981da678cff223cf2130acafb7b5729e6a4e8",
+      "hash_kind": "file-bytes"
     }
   ],
   "methods": [
@@ -1357,6 +1411,14 @@
       "description": "Reported wall time and Darwin child maximum RSS are observations from retained operating records. No universal 256 MiB cap, optional wrapper qualification, live RSS enforcement, process-tree bound, or new supervisor is inferred. The legacy physical field maximum_rss_kib is not used: Darwin reports bytes, preserved in the operating receipt.",
       "software": "Retained time/runtime receipts and processing admission observations.",
       "units": "bytes; seconds"
+    },
+    {
+      "id": "final-cumulative-metadata-conservation",
+      "kind": "code",
+      "description": "Committed metadata records existing authority registry construction, literal inherited-row and authority preservation, normalized cumulative rows and patch disjointness. This manifest update recomputes only committed metadata byte descriptors and binds recorded numeric results; no scientific replay, current native owner-zero, final selected-consumer success or accepted repair credit is established.",
+      "software": "Existing repository helpers identified in final-metadata-conservation.json; cache updater uses Python standard library and local Git objects.",
+      "units": "native cells; rows; authorities; components; bytes",
+      "execution_commit": "ea921a7eedb1be99281f566e08e52a82132fa3df"
     }
   ],
   "metrics": [
@@ -1671,6 +1733,126 @@
         "commit": "candidate"
       },
       "evaluation_commit": "999311cb46f49f9e844526370bfa136e4d2bb1f7"
+    },
+    {
+      "id": "final_metadata_cumulative_cells",
+      "value": 43298,
+      "unit": "cells",
+      "vintage": "archived",
+      "input_sha256": "a7360b9455134d0147baeadd6ea11abed21292e9e693d61dc2aa20b12349e984",
+      "input_file": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/final-metadata-conservation.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "fa723283006faae2ab7d9a611d47f7a68c9c22eb"
+    },
+    {
+      "id": "final_metadata_final_rows",
+      "value": 201,
+      "unit": "rows",
+      "vintage": "archived",
+      "input_sha256": "a7360b9455134d0147baeadd6ea11abed21292e9e693d61dc2aa20b12349e984",
+      "input_file": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/final-metadata-conservation.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "fa723283006faae2ab7d9a611d47f7a68c9c22eb"
+    },
+    {
+      "id": "final_metadata_final_authorities",
+      "value": 45,
+      "unit": "authorities",
+      "vintage": "archived",
+      "input_sha256": "a7360b9455134d0147baeadd6ea11abed21292e9e693d61dc2aa20b12349e984",
+      "input_file": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/final-metadata-conservation.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "fa723283006faae2ab7d9a611d47f7a68c9c22eb"
+    },
+    {
+      "id": "final_metadata_preserved_accepted_cells",
+      "value": 37630,
+      "unit": "cells",
+      "vintage": "archived",
+      "input_sha256": "a7360b9455134d0147baeadd6ea11abed21292e9e693d61dc2aa20b12349e984",
+      "input_file": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/final-metadata-conservation.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "fa723283006faae2ab7d9a611d47f7a68c9c22eb"
+    },
+    {
+      "id": "final_metadata_incoming_qualified_cells",
+      "value": 5668,
+      "unit": "cells",
+      "vintage": "archived",
+      "input_sha256": "a7360b9455134d0147baeadd6ea11abed21292e9e693d61dc2aa20b12349e984",
+      "input_file": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/final-metadata-conservation.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "fa723283006faae2ab7d9a611d47f7a68c9c22eb"
+    },
+    {
+      "id": "final_metadata_preserved_raw_rows",
+      "value": 192,
+      "unit": "rows",
+      "vintage": "archived",
+      "input_sha256": "a7360b9455134d0147baeadd6ea11abed21292e9e693d61dc2aa20b12349e984",
+      "input_file": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/final-metadata-conservation.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "fa723283006faae2ab7d9a611d47f7a68c9c22eb"
+    },
+    {
+      "id": "final_metadata_preserved_authority_entries",
+      "value": 44,
+      "unit": "authorities",
+      "vintage": "archived",
+      "input_sha256": "a7360b9455134d0147baeadd6ea11abed21292e9e693d61dc2aa20b12349e984",
+      "input_file": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/final-metadata-conservation.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "fa723283006faae2ab7d9a611d47f7a68c9c22eb"
+    },
+    {
+      "id": "final_metadata_preserved_components",
+      "value": 184,
+      "unit": "components",
+      "vintage": "archived",
+      "input_sha256": "a7360b9455134d0147baeadd6ea11abed21292e9e693d61dc2aa20b12349e984",
+      "input_file": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/final-metadata-conservation.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "fa723283006faae2ab7d9a611d47f7a68c9c22eb"
+    },
+    {
+      "id": "final_metadata_registry_charged_phase_bytes",
+      "value": 273593133,
+      "unit": "bytes",
+      "vintage": "archived",
+      "input_sha256": "a7360b9455134d0147baeadd6ea11abed21292e9e693d61dc2aa20b12349e984",
+      "input_file": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/final-metadata-conservation.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "fa723283006faae2ab7d9a611d47f7a68c9c22eb"
+    },
+    {
+      "id": "final_metadata_registry_fresh_allowance_bytes",
+      "value": 918298624,
+      "unit": "bytes",
+      "vintage": "archived",
+      "input_sha256": "a7360b9455134d0147baeadd6ea11abed21292e9e693d61dc2aa20b12349e984",
+      "input_file": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/final-metadata-conservation.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "fa723283006faae2ab7d9a611d47f7a68c9c22eb"
     }
   ],
   "summaries": [],
@@ -1727,6 +1909,11 @@
         "gshhg",
         "natural-earth"
       ]
+    },
+    {
+      "status": "unresolved",
+      "text": "The retained scientific statements and pending checks above describe their original evidence vintages. The later committed metadata composition preserves inherited accepted cells, raw rows and authorities and appends the qualified Myanmar proposal, as bound by final_metadata metrics. Current native owner-zero, final selected-consumer correctness, acceptance and publication remain unproven by this metadata-only update. Original source and review limits remain in force.",
+      "source_ids": []
     }
   ],
   "stages": {
@@ -1869,6 +2056,56 @@
       "metric_id": "ayeyarwady-physical_observed_max_rss",
       "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/ayeyarwady-physical-operating.json",
       "json_pointer": "/observed_darwin_max_rss_bytes"
+    },
+    {
+      "metric_id": "final_metadata_cumulative_cells",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/final-metadata-conservation.json",
+      "json_pointer": "/cumulative_cells"
+    },
+    {
+      "metric_id": "final_metadata_final_rows",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/final-metadata-conservation.json",
+      "json_pointer": "/final_rows"
+    },
+    {
+      "metric_id": "final_metadata_final_authorities",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/final-metadata-conservation.json",
+      "json_pointer": "/final_authorities"
+    },
+    {
+      "metric_id": "final_metadata_preserved_accepted_cells",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/final-metadata-conservation.json",
+      "json_pointer": "/accepted_cells"
+    },
+    {
+      "metric_id": "final_metadata_incoming_qualified_cells",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/final-metadata-conservation.json",
+      "json_pointer": "/incoming_qualified_cells"
+    },
+    {
+      "metric_id": "final_metadata_preserved_raw_rows",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/final-metadata-conservation.json",
+      "json_pointer": "/preserved_all_raw_rows"
+    },
+    {
+      "metric_id": "final_metadata_preserved_authority_entries",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/final-metadata-conservation.json",
+      "json_pointer": "/preserved_all_authority_entries"
+    },
+    {
+      "metric_id": "final_metadata_preserved_components",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/final-metadata-conservation.json",
+      "json_pointer": "/conservation/preserved_components"
+    },
+    {
+      "metric_id": "final_metadata_registry_charged_phase_bytes",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/final-metadata-conservation.json",
+      "json_pointer": "/authority_registry_constructor/final_charged_phase_bytes"
+    },
+    {
+      "metric_id": "final_metadata_registry_fresh_allowance_bytes",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/final-metadata-conservation.json",
+      "json_pointer": "/authority_registry_constructor/fresh_phase_rss_allowance_bytes"
     }
   ],
   "retained_execution_products": [
