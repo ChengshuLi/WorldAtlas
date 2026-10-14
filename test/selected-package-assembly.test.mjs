@@ -6,7 +6,7 @@ import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {authenticateOriginalPackageOutput, requireOriginalPackageOutput,
   requirePackageAssemblyExecution, issuePackageAssemblyExecution} from '../coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs';
-import {requireRetainedPackageTests, integrationTestFiles} from '../scripts/run-integration-tests.mjs';
+import {requireCurrentPackageAssembly, integrationTestFiles} from '../scripts/run-integration-tests.mjs';
 import {admitAssemblyAtlasMetadata,createPackageAssemblyScratch,packageAssemblyInvocation,findOriginalPackage} from '../scripts/assemble-selected-package.mjs';
 import {execFileSync,spawnSync} from 'node:child_process';
 import {committedPackageInputs,committedPackageProducer} from '../scripts/package-output-artifact.mjs';
@@ -89,6 +89,7 @@ test('origin, successful actual steps, upload receipt and output mutations fail 
     f=>{f.job.run_attempt=1;},
     f=>{f.job.conclusion='failure';},
     f=>{f.job.steps.find(row=>row.name==='Build Cloudflare package without publishing').conclusion='skipped';},
+    f=>{f.job.steps.find(row=>row.name==='Read back qualified native build outputs when selected').conclusion='failure';},
     f=>{f.job.steps=f.job.steps.filter(row=>row.name!=='Run selected-data consumer checks');},
     f=>{f.artifact.expired=true;},
     f=>{f.artifact.digest='sha256:'+'d'.repeat(64);},
@@ -108,7 +109,7 @@ test('retained consumer roster keeps current coverage and GPU/Canvas tests',()=>
   const full=integrationTestFiles('full',0,'complete');
   assert(full.includes('test/canonical-compact-repack.test.mjs'));assert(full.includes('test/prepared-parity.test.mjs'));
   assert.throws(()=>integrationTestFiles('full',1,'selected-output'));
-  assert.throws(()=>requireRetainedPackageTests({expected:null}),/Trusted current/);
+  assert.throws(()=>requireCurrentPackageAssembly({expected:null}),/Trusted current/);
 });
 
 test('consumer reduction binds actual current head and trusted assembly receipt digest',t=>{
@@ -119,13 +120,16 @@ test('consumer reduction binds actual current head and trusted assembly receipt 
   const head=git('rev-parse','HEAD'),receipt={kind:'cloudflare',preflight:{inputs:{head}},assembly:{
     kind:'retained-original-output-plus-current-additive',current_execution:{source_commit:head},
     base_restoration_invoked:false,invariant_build_invoked:false,
-    base_tests_reused:['test/canonical-compact-repack.test.mjs','test/prepared-parity.test.mjs'],origin:{run_id:17}}};
+    origin:{run_id:17}}};
   fs.mkdirSync(path.join(root,'.cache'));const file=path.join(root,'.cache/package-input-build.json');
   const write=value=>{const raw=JSON.stringify(value);fs.writeFileSync(file,raw);return sha(raw);};
-  const expected=write(receipt);assert.equal(requireRetainedPackageTests({directory:root,expected}).origin.run_id,17);
-  fs.appendFileSync(file,' ');assert.throws(()=>requireRetainedPackageTests({directory:root,expected}),/digest differs/);
+  const expected=write(receipt),admission=requireCurrentPackageAssembly({directory:root,expected});
+  assert.equal(admission.origin.run_id,17);
+  assert.equal(Object.hasOwn(admission,'base_tests_reused'),false,'Assembly identity must not manufacture original test coverage');
+  assert.doesNotMatch(fs.readFileSync(new URL('../scripts/assemble-selected-package.mjs',import.meta.url),'utf8'),/base_tests_reused/);
+  fs.appendFileSync(file,' ');assert.throws(()=>requireCurrentPackageAssembly({directory:root,expected}),/digest differs/);
   receipt.assembly.current_execution.source_commit='f'.repeat(40);
-  assert.throws(()=>requireRetainedPackageTests({directory:root,expected:write(receipt)}),/same-head/);
+  assert.throws(()=>requireCurrentPackageAssembly({directory:root,expected:write(receipt)}),/same-head/);
 });
 
 test('actual emitted atlas admission follows observed size and shared memory rather than a control-receipt cap',()=>{
@@ -295,6 +299,46 @@ test('original discovery ignores observer trees but refuses changed build inputs
   }
 });
 
+test('failed-job retry discovers the successful original package attempt without relabeling its producer',async t=>{
+  const f=originalDiscovery(t,{worker:true}),old=globalThis.fetch;t.after(()=>{globalThis.fetch=old;});
+  globalThis.fetch=async()=>new Response(f.log());
+  const originRun=structuredClone(f.run),baseAPI=f.api;
+  originRun.conclusion='failure';f.run.run_attempt=3;f.run.conclusion='success';
+  const api=async route=>{
+    assert(!route.includes('/attempts/3/jobs'),'Do not use relabeled carried jobs');
+    if(route.endsWith('/attempts/2'))return structuredClone(originRun);
+    return baseAPI(route);
+  };
+  api.jobLogRedirect=baseAPI.jobLogRedirect;
+  const found=await findOriginalPackage({api,repo:f.repo,current:f.s.snapshot(),originalRunId:17});
+  assert.equal(found.origin.run_attempt,2);assert.equal(found.origin.job_id,29);
+  assert.equal(found.origin.artifact_name,'cloudflare-package-output-17-2');
+  f.job.conclusion='failure';
+  assert.equal(await findOriginalPackage({api,repo:f.repo,current:f.s.snapshot(),originalRunId:17}),null);
+});
+
+test('unproved newer package cannot replace the authenticated older successful output',async t=>{
+  const f=originalDiscovery(t,{worker:true}),old=globalThis.fetch,oldWarn=console.warn;
+  t.after(()=>{globalThis.fetch=old;console.warn=oldWarn;});
+  globalThis.fetch=async()=>new Response(f.log());
+  const originRun=structuredClone(f.run),baseAPI=f.api,warnings=[];
+  originRun.conclusion='failure';f.run.run_attempt=3;console.warn=message=>warnings.push(message);
+  const partial={...f.artifact,id:42,name:'cloudflare-package-output-17-3'};
+  const newJob={...structuredClone(f.job),id:30,run_attempt:3};
+  const api=async route=>{
+    if(route.includes('/artifacts?'))return {total_count:2,artifacts:[partial,f.artifact]};
+    if(route.includes('/attempts/3/jobs'))return {jobs:[newJob]};
+    if(route.endsWith('/attempts/3'))return structuredClone(f.run);
+    if(route.endsWith('/attempts/2'))return structuredClone(originRun);
+    if(route.endsWith('/jobs/30'))return newJob;
+    return baseAPI(route);
+  };
+  api.jobLogRedirect=baseAPI.jobLogRedirect;
+  const found=await findOriginalPackage({api,repo:f.repo,current:f.s.snapshot(),originalRunId:17});
+  assert.equal(found.origin.run_attempt,2);assert.equal(found.origin.artifact_id,41);
+  assert(warnings.some(message=>message.includes('producer 17/3')),'The newer artifact must actually fail original receipt authentication');
+});
+
 test('final-worker original binds candidate source separately from successful producer workflow SHA',async t=>{
   const old=globalThis.fetch;t.after(()=>{globalThis.fetch=old;});
   const f=original(t,{worker:true});f.run.conclusion='failure';
@@ -319,6 +363,7 @@ test('worker origin rejects substituted source, workflow, job, artifact and inco
     f=>{f.job.head_sha=f.origin.head;},
     f=>{f.job.name='integration (1)';},
     f=>{f.job.conclusion='failure';},
+    f=>{f.job.steps.find(row=>row.name==='Read back qualified native build outputs when selected').conclusion='failure';},
     f=>{f.artifact.workflow_run.head_sha=f.origin.head;},
     f=>{f.workflow.sha='f'.repeat(40);},
     f=>{f.workflow.mode='120000';},
@@ -343,6 +388,7 @@ test('bounded discovery checks both producer workflows and distinct runs sharing
   console.warn=message=>warnings.push(message);t.after(()=>{console.warn=oldWarn;});
   const api=async route=>{
     if(route.includes('/actions/workflows/worker-merge.yml/')){workerReads++;return {workflow_runs:[rejected,rejected,{...f.run,run_attempt:3},f.run]};}
+    if(route.includes('/actions/runs/18/artifacts?'))return {total_count:1,artifacts:[{...f.artifact,name:'cloudflare-package-output-18-2'}]};
     if(route.includes('/actions/runs/18/attempts/2/jobs')){rejectedReads++;throw Error('Authority unavailable https://fixture.invalid/private?signature=secret');}
     if(route.includes('/actions/runs/17/attempts/3/jobs'))return {jobs:[]};
     return baseAPI(route);
@@ -352,7 +398,7 @@ test('bounded discovery checks both producer workflows and distinct runs sharing
   assert.equal(found.origin.head,f.sourceHead);assert.equal(found.origin.workflow_head,f.workflowHead);
   assert.notEqual(found.origin.head,found.origin.workflow_head);assert.equal(found.origin.run_id,17);
   assert.equal(rejectedReads,1);assert.equal(workerReads,1);
-  assert.deepEqual(warnings,['Skipped original package run 18/2: Authority unavailable [delivery address]']);
+  assert.deepEqual(warnings,['Skipped original package producer 18/2: Authority unavailable [delivery address]']);
   assert(f.calls.some(route=>route.includes('merge-integration-checks.yml/runs?event=pull_request&per_page=20&page=1')));
   f.workflow.sha='f'.repeat(40);
   assert.equal(await findOriginalPackage({api,repo:f.repo,current:f.s.snapshot()}),null,'Changed actual workflow must be a cache miss');

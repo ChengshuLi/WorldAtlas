@@ -99,10 +99,10 @@ export function prepareModelReaderCheckout({root,profile,shard}){
     const side=pin('coordination/engineering/fixture/sidecar.json',{logical_asset_map:{ledger}});
     pin('data/ownership-selection.json',{artifact_consumption:{},additive_release:side});
     pin(expectations,{version:1,selected_ledger_sha256:ledger.sha256,cumulative_native_cells:1,cohorts:[{original_batch_id:'original',component_ids:['component'],members:[member]}]});
-    write('dist/client/atlas-geography.json','{}');write('.cache/native-normal-built-output.json','{}');
+    write('dist/client/atlas-geography.json','{}');fs.mkdirSync(path.join(root,'.cache'));
     write('scripts/selected-delivery-smoke.mjs',smokeBody??`import fs from 'node:fs';import assert from 'node:assert/strict';
 export async function runSelectedDeliverySmoke({root,expectationsPath,emittedDirectory,outputPath}){
-  assert.equal(root,process.cwd());assert.equal(process.env.INTEGRATION_PROFILE,'full');assert.equal(process.env.INTEGRATION_TEST_SELECTION,'selected-data');
+  assert.equal(root,process.cwd());assert.equal(process.env.INTEGRATION_PROFILE,'full');assert(['selected-data','selected-output'].includes(process.env.INTEGRATION_TEST_SELECTION));
   assert(fs.existsSync(expectationsPath));assert(fs.existsSync(emittedDirectory+'/atlas-geography.json'));
   fs.writeFileSync(outputPath,'{"fixture_only":true}',{flag:'wx'});return {fixture_only:true};
 }`);
@@ -159,25 +159,53 @@ test('invalid profile rejects before either restoration or tests',t=>{
 });
 
 const restored=`import fs from 'node:fs';export function prepareCanonicalCheckout(){fs.writeFileSync('restored-fixture.json','{}',{flag:'wx'});return {fixture_only:true};}`;
-test('actual queue selected command runs smoke and genuine full setup before asset tests',t=>{
-  for(const workflow of ['queue']){
-    const f=fixture(t,{full:true,selected:true,helperBody:restored}),r=f.run('full','0',workflow);
-    assert.equal(r.status,0,r.stderr);assert.match(r.stdout,/# skipped 0/);assert.match(r.stdout,/"test_selection":"selected-data"/);
-    assert.deepEqual(fs.readdirSync(f.root).filter(n=>n.startsWith('tests-reached-')).sort(),
-      ['tests-reached-canonical-compact-repack','tests-reached-prepared-parity']);
-    assert(fs.existsSync(path.join(f.root,'.cache/selected-delivery-smoke.json')));
-    assert(fs.existsSync(path.join(f.root,'selected-checkout-fixture-reached.json')));
-  }
+test('actual queue selected command runs current smoke without unit tests, restoration or historical readback receipt',t=>{
+  const f=fixture(t,{selected:true}),r=f.run('full');
+  assert.equal(r.status,0,r.stderr);
+  assert(fs.existsSync(path.join(f.root,'.cache/selected-delivery-smoke.json')));
+  assert(!fs.existsSync(path.join(f.root,'.cache/native-normal-built-output.json')));
+  assert(!fs.readdirSync(f.root).some(n=>n.startsWith('tests-reached-')));
+  assert(!r.stdout.includes('canonical_checkout'));
+  assert(!r.stdout.includes('selected_model_reader_checkout'));
 });
-for(const missing of ['dist/client/atlas-geography.json','.cache/native-normal-built-output.json','scripts/selected-delivery-smoke.mjs','coordination/engineering/fixture/selected-delivery-expectations.json'])
+for(const missing of ['dist/client/atlas-geography.json','scripts/selected-delivery-smoke.mjs','coordination/engineering/fixture/selected-delivery-expectations.json'])
  test('real selected-data entry refuses missing actual '+missing+' before tests',t=>{
   const f=fixture(t,{full:true,selected:true,helperBody:restored});fs.unlinkSync(path.join(f.root,missing));const r=f.run();
   assert.notEqual(r.status,0);assert(!fs.readdirSync(f.root).some(n=>n.startsWith('tests-reached-')));
 });
-test('real selected-data entry propagates generic smoke failure and refuses narrowed TAP skips',t=>{
-  for(const options of [{smokeBody:"export async function runSelectedDeliverySmoke(){throw Error('actual smoke refused');}"},{skip:true}]){
-    const f=fixture(t,{full:true,selected:true,helperBody:restored,...options}),r=f.run();assert.notEqual(r.status,0);
-    assert.match(r.stderr,options.skip?/zero skipped tests/:/actual smoke refused/);
+test('real selected-data entry propagates actual smoke failure',t=>{
+  const f=fixture(t,{selected:true,smokeBody:"export async function runSelectedDeliverySmoke(){throw Error('actual smoke refused');}"}),r=f.run();
+  assert.notEqual(r.status,0);assert.match(r.stderr,/actual smoke refused/);
+});
+
+test('ordinary selected data cannot accidentally invoke unit regression or restore context',t=>{
+  const f=fixture(t,{selected:true}),result=spawnSync(process.execPath,['scripts/run-integration-tests.mjs'],{
+    cwd:f.root,env:{...process.env,INTEGRATION_PROFILE:'full',INTEGRATION_SHARD:'0',INTEGRATION_TEST_SELECTION:'selected-data'},encoding:'utf8'});
+  assert.notEqual(result.status,0);assert.match(result.stderr,/Invalid trusted test selection/);
+  assert(!fs.readdirSync(f.root).some(n=>n.startsWith('tests-reached-')));
+});
+
+test('actual assembled queue command runs current smoke and requires the same-head trusted receipt without restoration',t=>{
+  for(const altered of [false,true]){
+    const f=fixture(t,{selected:true});
+    const git=(...args)=>execFileSync('git',['-C',f.root,...args],{encoding:'utf8'}).trim();
+    git('init','-q');git('add','.');git('-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-qm','fixture');
+    const head=git('rev-parse','HEAD'),receipt=JSON.stringify({kind:'cloudflare',preflight:{inputs:{head}},assembly:{
+      kind:'retained-original-output-plus-current-additive',current_execution:{source_commit:head},
+      base_restoration_invoked:false,invariant_build_invoked:false,
+      origin:{run_id:17}}});
+    fs.writeFileSync(path.join(f.root,'.cache/package-input-build.json'),receipt+(altered?' ':''));
+    const env={...process.env,INTEGRATION_PROFILE:'full',INTEGRATION_SHARD:'0',INTEGRATION_TEST_SELECTION:'selected-output',
+      SELECTED_EXPECTATIONS_PATH:f.expectations,SELECTED_PACKAGE_ASSEMBLY_SHA256:createHash('sha256').update(receipt).digest('hex')};
+    delete env.NODE_TEST_CONTEXT;
+    const result=spawnSync('bash',['-e','-o','pipefail','-c',selectedWorkflowCommand()],{cwd:f.root,env,encoding:'utf8',timeout:30000});
+    assert.equal(result.status,altered?1:0,result.stderr);
+    if(altered)assert.match(result.stderr,/receipt digest differs/);
+    else assert.match(result.stdout,/package_assembly/);
+    assert(fs.existsSync(path.join(f.root,'.cache/selected-delivery-smoke.json')));
+    assert(!fs.existsSync(path.join(f.root,'.cache/native-normal-built-output.json')));
+    assert(!fs.readdirSync(f.root).some(n=>n.startsWith('tests-reached-')));
+    assert(!result.stdout.includes('canonical_checkout'));
   }
 });
 
@@ -190,7 +218,7 @@ test('actual retained-output runner executes current tests without any model res
   const receipt=JSON.stringify({kind:'cloudflare',preflight:{inputs:{head}},assembly:{
     kind:'retained-original-output-plus-current-additive',current_execution:{source_commit:head},
     base_restoration_invoked:false,invariant_build_invoked:false,
-    base_tests_reused:['test/canonical-compact-repack.test.mjs','test/prepared-parity.test.mjs'],origin:{run_id:17}}});
+    origin:{run_id:17}}});
   fs.writeFileSync(path.join(f.root,'.cache/package-input-build.json'),receipt);
   const env={...process.env,INTEGRATION_PROFILE:'full',INTEGRATION_SHARD:'0',INTEGRATION_TEST_SELECTION:'selected-output',
     SELECTED_PACKAGE_ASSEMBLY_SHA256:createHash('sha256').update(receipt).digest('hex')};

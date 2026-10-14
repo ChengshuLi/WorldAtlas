@@ -89,7 +89,7 @@ os.execv(${JSON.stringify(realGit)},[${JSON.stringify(realGit)},'-c',${JSON.stri
     WORLDATLAS_CHECKOUT_TOKEN: token, GH_TOKEN: 'unrelated-secret',
     GIT_CONFIG_GLOBAL: config, GIT_CONFIG_COUNT: '1', GIT_CONFIG_KEY_0: 'filter.malicious.smudge', GIT_CONFIG_VALUE_0: `touch ${sentinel}`};
   const args = (extra = []) => [helper, '--repository', 'ChengshuLi/WorldAtlas', '--sha', sha, '--tree', tree,
-    '--workspace', workspace, '--total-timeout-seconds', '12', ...extra];
+    '--workspace', workspace, ...extra];
   const run = (extra = []) => spawnSync('python3', args(extra), {encoding: 'utf8', env, timeout: 16000});
   const rows = () => fs.existsSync(trace) ? fs.readFileSync(trace, 'utf8').trim().split('\n').map(JSON.parse) : [];
   const fetches = () => fs.existsSync(count) ? Number(fs.readFileSync(count, 'utf8')) : 0;
@@ -187,7 +187,7 @@ for (const [profile, selection] of [['full', 'selected-data'], ['full', 'selecte
   });
 }
 
-test('progressing fetch beyond the previous scaled cutoff completes once within the total deadline', t => {
+test('progressing fetch completes once without an acquisition deadline', t => {
   const f = fixture(t, 'progressing'), result = f.run();
   assert.equal(result.status, 0, result.stdout + result.stderr);
   assert.equal(f.fetches(), 1); assert.equal(f.rows().filter(row => row.args?.includes('init')).length, 1);
@@ -209,27 +209,9 @@ test('one command failure stops after one fetch without publishing or leaking Gi
   assert.deepEqual(fs.readdirSync(f.workspace), []); f.clean(); noSecrets(result);
 });
 
-test('overall deadline stops actual TERM-resistant Git child and grandchild with terminal cleanup', t => {
-  const f = fixture(t, 'hang'), start = Date.now(), result = f.run(['--total-timeout-seconds', '7']);
-  assert.equal(result.status, 1, result.stdout + result.stderr);
-  assert.equal(f.fetches(), 1); assert.match(result.stdout, /acquisition-deadline/);
-  assert.ok(Date.now() - start < 8500, 'cleanup stays inside the overall deadline');
-  noLiveDescendant(f.descendant); assert.deepEqual(fs.readdirSync(f.workspace), []); f.clean(); noSecrets(result);
-});
-
-test('software blob materialization shares the unchanged total deadline and cleans TERM-resistant descendants', t => {
-  const f = fixture(t, 'materialize-hang');
-  Object.assign(f.env, {INTEGRATION_PROFILE: 'full', INTEGRATION_TEST_SELECTION: 'complete'});
-  const start = Date.now(), result = f.run(['--total-timeout-seconds', '7']);
-  assert.equal(result.status, 1, result.stdout + result.stderr);
-  assert.equal(f.fetches(), 1); assert.match(result.stdout, /acquisition-deadline/);
-  assert.ok(Date.now() - start < 8500);
-  assert.ok(f.events(result).some(row => row.phase === 'materialize' && row.status === 'acquisition-deadline'));
-  noLiveDescendant(f.descendant); assert.deepEqual(fs.readdirSync(f.workspace), []); f.clean(); noSecrets(result);
-});
-
-test('SIGTERM cancels an actual hanging process group, cleans it and performs no second fetch', async t => {
-  const f = fixture(t, 'hang');
+for(const mode of ['hang','materialize-hang']) test(`SIGTERM cancels ${mode} process group, cleans it and performs no second fetch`, async t => {
+  const f = fixture(t, mode);
+  Object.assign(f.env,{INTEGRATION_PROFILE:'full',INTEGRATION_TEST_SELECTION:'complete'});
   const child = spawn('python3', f.args(), {env: f.env});
   let stdout = '', stderr = '';
   child.stdout.on('data', value => { stdout += value; }); child.stderr.on('data', value => { stderr += value; });
@@ -240,13 +222,14 @@ test('SIGTERM cancels an actual hanging process group, cleans it and performs no
   child.kill('SIGTERM');
   const result = await completed;
   assert.equal(result.status, 130, result.stdout + result.stderr); assert.equal(f.fetches(), 1);
+  assert.ok(Date.now()-start<5000,'cancellation and cleanup remain bounded');
   noLiveDescendant(f.descendant); assert.deepEqual(fs.readdirSync(f.workspace), []); f.clean(); noSecrets(result);
 });
 
 test('unverifiable process cleanup preserves private staging, performs no second fetch and preserves the workspace', t => {
   const f = fixture(t, 'hang');
   const driver = path.join(f.directory, 'unavailable-inspection.py');
-  fs.writeFileSync(driver, `import importlib.util,os,sys
+  fs.writeFileSync(driver, `import importlib.util,os,sys,signal,threading,time
 spec=importlib.util.spec_from_file_location('acquisition',${JSON.stringify(helper)})
 module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
 ordinary=module.live_group
@@ -254,9 +237,13 @@ def unavailable(pgid):
  if os.path.exists(${JSON.stringify(f.descendant)}):raise OSError('fixture process inspection unavailable')
  return ordinary(pgid)
 module.live_group=unavailable
+def cancel():
+ while not os.path.exists(${JSON.stringify(f.descendant)}) : time.sleep(0.02)
+ os.kill(os.getpid(),signal.SIGTERM)
+threading.Thread(target=cancel,daemon=True).start()
 sys.exit(module.main())
 `);
-  const result = spawnSync('python3', [driver, ...f.args(['--total-timeout-seconds', '7']).slice(1)],
+  const result = spawnSync('python3', [driver, ...f.args().slice(1)],
     {encoding: 'utf8', env: f.env, timeout: 16000});
   assert.equal(result.status, 1, result.stdout + result.stderr);
   assert.equal(f.fetches(), 1); assert.match(result.stdout, /process-cleanup-failed/);
@@ -291,34 +278,7 @@ test('foreign contents arriving during fetch are preserved and prevent publicati
   assert.equal(fs.readFileSync(path.join(f.workspace, 'foreign'), 'utf8'), 'preserve me'); f.clean();
 });
 
-test('invalid and already-spent bootstrap budgets refuse before filesystem mutation', t => {
-  const f = fixture(t);
-  for (const args of [['--elapsed-seconds', 'nan'], ['--elapsed-seconds', '-1'], ['--elapsed-seconds', '12'],
-    ['--total-timeout-seconds', 'inf'], ['--total-timeout-seconds', '-1'], ['--total-timeout-seconds', '1801'],
-    ['--elapsed-seconds', 'inf'], ['--total-timeout-seconds', '4']]) {
-    assert.equal(f.run(args).status, 1, args.join(' '));
-  }
-  assert.equal(f.fetches(), 0); assert.deepEqual(fs.readdirSync(f.workspace), []); f.clean();
-});
-
-test('trusted finite budgets above the measured default are configurable without waiting for their deadline', t => {
-  const f = fixture(t), result = f.run(['--total-timeout-seconds', '600']);
-  assert.equal(result.status, 0, result.stdout + result.stderr);
-  assert.equal(f.events(result).at(-1).event, 'checkout-complete');
-  assert.ok(f.events(result).at(-1).remaining_seconds > 580);
-  f.clean(); noSecrets(result);
-});
-
-test('bootstrap elapsed time reduces the single total budget, including terminal cleanup', t => {
-  const f = fixture(t, 'hang');
-  const start = Date.now();
-  const result = f.run(['--total-timeout-seconds', '10', '--elapsed-seconds', '4']);
-  assert.equal(result.status, 1); assert.equal(f.fetches(), 1);
-  assert.ok(Date.now() - start < 6500, 'spent bootstrap time must not be granted again');
-  noLiveDescendant(f.descendant); assert.deepEqual(fs.readdirSync(f.workspace), []); f.clean(); noSecrets(result);
-});
-
-for (const option of ['--fetch-timeout-seconds', '--max-attempts']) test('removed '+option+' refuses before mutation', t => {
+for (const option of ['--fetch-timeout-seconds', '--max-attempts', '--total-timeout-seconds', '--elapsed-seconds']) test('removed '+option+' refuses before mutation', t => {
   const f = fixture(t), result = f.run([option, '2']);
   assert.equal(result.status, 2); assert.match(result.stderr, /unrecognized arguments/);
   assert.equal(f.fetches(), 0); assert.deepEqual(fs.readdirSync(f.workspace), []); f.clean(); noSecrets(result);

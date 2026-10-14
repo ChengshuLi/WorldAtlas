@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "kind": "independent-riau-cumulative-metadata-review",
+  "reviewer": "/root/riau_input_review",
+  "execution_commit": "4ff54e1ce809587c245ac801178fdb643320baa9",
+  "accepted_base": "4f404fe1816396a31d541833b8a709a7999e8dea",
+  "qualification_commit": "aab952621aa5198bef76b7c5bc81c38c5b871bd5",
+  "result": "No static blocker in completed composition products",
+  "checks": {
+    "all_45_prior_authority_objects_preserved": "PASS",
+    "all_201_prior_raw_ledger_rows_preserved": "PASS",
+    "two_new_rows_equal_original_qualified_rows_with_authority_rule_hashes": "PASS",
+    "expanded_patch_exact_disjoint_old_union_candidate": "PASS",
+    "qualified_rule_and_target_bindings": "PASS"
+  },
+  "counts": {
+    "prior_cells": 43298,
+    "added_cells": 10775,
+    "proposed_cells": 54073,
+    "prior_active_components": 193,
+    "prior_authorities": 45,
+    "proposed_authorities": 46,
+    "prior_raw_rows": 201,
+    "proposed_raw_rows": 203
+  },
+  "resources": {
+    "phase_charged_bytes": 369454495,
+    "fresh_phase_rss_allowance_bytes": 957882368,
+    "observed_peak_rss_bytes": 331431936,
+    "product_bytes": 2769110,
+    "output_reserve_bytes": 4194304
+  },
+  "limits": [
+    "Independent read-only output audit; no numerical rerun.",
+    "Actual current-owner-zero and selected consumption remain pending; accepted repair credit is zero.",
+    "Physical003 exceeded its fresh RSS allowance by14032896B; no compliant producer receipt claimed.",
+    "All3279flagged-target repair and4760source-relative candidates remain excluded.",
+    "MMR selected-data runner excluded compact-ownership browser file; fresh all-three-UI proof is not established.",
+    "Final composition must preserve any subsequent accepted Vietnam addition."
+  ]
+}

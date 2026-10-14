@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "source_completion_receipt": {
+    "path": ".cache/riau-qualification-prep-20261014/source-run-001/execution-receipt.json",
+    "sha256": "7dbf7e050501ff4ba2aa9affe59759682de7621598327b291e3bafe26dc52f73"
+  },
+  "source_program_completed": true,
+  "outer_time_wrapper_exit_code": 1,
+  "outer_wrapper_failure": "macOS sysctl kern.clockrate permission denied after the source program emitted its full completion receipt",
+  "external_rss_available": false,
+  "source_self_observed_peak_rss_bytes": 235765760,
+  "fresh_rss_allowance_bytes": 536870912,
+  "source_prerequisite_repair_candidates": 14054,
+  "physical_held": 4760,
+  "science_rerun": false,
+  "denied_api_retried": false,
+  "credit": 0,
+  "limits": [
+    "The wrapper exit code remains1 and is not relabeled0. Source completion is supported by the actual complete receipt, all products, final stdout and absence of a Python traceback.",
+    "Subsequent physical observation uses ordinary child exit plus existing Python resource observations, without retrying the denied sysctl API."
+  ]
+}

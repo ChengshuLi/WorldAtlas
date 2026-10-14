@@ -45,9 +45,6 @@ jobs:
       shards: ${{ steps.prepare.outputs.shards }}
       test_selection: ${{ steps.prepare.outputs.test_selection }}
       expectations_path: ${{ steps.prepare.outputs.expectations_path }}
-      proof_attempt: ${{ steps.prepare.outputs.proof_attempt }}
-      proof_run: ${{ steps.prepare.outputs.proof_run }}
-      geography_proof: ${{ steps.prepare.outputs.geography_proof }}
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
@@ -67,15 +64,9 @@ jobs:
           PREPARE_FALLBACK: 'true'
           MERGE_PHASE: prepare
         run: node scripts/run-worker-merge.mjs
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        if: always()
-        with:
-          name: merge-preflight-${{ inputs.request_id }}
-          path: merge-result.json
-          retention-days: 30
   geography:
     needs: prepare
-    if: needs.prepare.outputs.candidate != '' && needs.prepare.outputs.geography_proof == ''
+    if: needs.prepare.outputs.candidate != ''
     runs-on: ubuntu-latest
     timeout-minutes: 25
     permissions:
@@ -136,7 +127,7 @@ jobs:
           retention-days: 30
   integration:
     needs: prepare
-    if: needs.prepare.outputs.candidate != '' && needs.prepare.outputs.proof_run == ''
+    if: needs.prepare.outputs.candidate != ''
     runs-on: ubuntu-latest
     timeout-minutes: 35
     strategy:
@@ -255,13 +246,11 @@ jobs:
           CI_CHECKOUT_HELPER: ${{ steps.checkout_bootstrap.outputs.helper }}
           CI_CHECKOUT_SHA: ${{ steps.checkout_bootstrap.outputs.sha }}
           CI_CHECKOUT_TREE: ${{ steps.checkout_bootstrap.outputs.tree }}
-          CI_BOOTSTRAP_ELAPSED: ${{ steps.checkout_bootstrap.outputs.elapsed }}
           INTEGRATION_PROFILE: ${{ needs.prepare.outputs.profile }}
           INTEGRATION_TEST_SELECTION: ${{ needs.prepare.outputs.test_selection }}
         run: |
           python3 -I -S -B "$CI_CHECKOUT_HELPER" --repository ChengshuLi/WorldAtlas \
-            --sha "$CI_CHECKOUT_SHA" --tree "$CI_CHECKOUT_TREE" --workspace "$GITHUB_WORKSPACE" \
-            --total-timeout-seconds 420 --elapsed-seconds "$CI_BOOTSTRAP_ELAPSED"
+            --sha "$CI_CHECKOUT_SHA" --tree "$CI_CHECKOUT_TREE" --workspace "$GITHUB_WORKSPACE"
       - name: Legacy full checkout only for proven trusted-helper absence
         if: (needs.prepare.outputs.profile == 'full') && steps.checkout_bootstrap.outputs.mode == 'legacy'
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
@@ -399,7 +388,7 @@ jobs:
             npx playwright install --with-deps chromium
           fi
       - name: Read back qualified native build outputs when selected
-        if: needs.prepare.outputs.profile == 'full' && matrix.shard == 0
+        if: needs.prepare.outputs.profile == 'full' && matrix.shard == 0 && steps.assembly.outputs.assembled != 'true'
         run: |
           if node --input-type=module -e '
             import fs from "node:fs";
@@ -433,8 +422,8 @@ jobs:
             node --input-type=module -e 'import {selectedDeliverySmoke} from "./scripts/integration-profile.mjs"; console.log(JSON.stringify({selected_delivery_smoke:await selectedDeliverySmoke(process.env.SELECTED_EXPECTATIONS_PATH)}));'
           fi
           if test "$INTEGRATION_TEST_SELECTION" = selected-output; then
-            node --input-type=module -e "import {requireRetainedPackageTests} from './scripts/run-integration-tests.mjs'; console.log(JSON.stringify({retained_package_tests:requireRetainedPackageTests()}))"
-          else
+            node --input-type=module -e "import {requireCurrentPackageAssembly} from './scripts/run-integration-tests.mjs'; console.log(JSON.stringify({package_assembly:requireCurrentPackageAssembly()}))"
+          elif test "$INTEGRATION_TEST_SELECTION" != selected-data; then
             node scripts/run-integration-tests.mjs
           fi
       - name: Retain original final-worker package output
@@ -455,7 +444,7 @@ jobs:
         if: always() && needs.prepare.outputs.profile == 'full' && matrix.shard == 0
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: native-built-output-${{ inputs.request_id }}
+          name: native-built-output-${{ inputs.request_id }}-${{ github.run_attempt }}
           path: |
             .cache/native-normal-built-output.json
             .cache/selected-delivery-smoke.json
@@ -493,17 +482,8 @@ jobs:
           CANDIDATE_REF: ${{ needs.prepare.outputs.candidate_ref }}
           TESTED_BASE: ${{ needs.prepare.outputs.base }}
           TESTED_CANDIDATE: ${{ needs.prepare.outputs.candidate }}
-          PROOF_RUN_ATTEMPT: ${{ needs.prepare.outputs.proof_attempt }}
-          PROOF_RUN_ID: ${{ needs.prepare.outputs.proof_run }}
           INTEGRATION_RESULT: ${{ needs.integration.result }}
           GEOGRAPHY_RESULT: ${{ needs.geography.result }}
-          GEOGRAPHY_PROOF: ${{ needs.prepare.outputs.geography_proof }}
           GEOGRAPHY_REPORT_SHA256: ${{ needs.geography.outputs.report_sha256 }}
           GEOGRAPHY_ARTIFACT_NAME: ${{ needs.geography.outputs.artifact_name }}
         run: node scripts/run-worker-merge.mjs
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        if: always()
-        with:
-          name: merge-${{ inputs.request_id }}
-          path: merge-result.json
-          retention-days: 30

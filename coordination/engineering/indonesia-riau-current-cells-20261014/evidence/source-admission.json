@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "observed_at": "2026-10-14T15:36:11.905Z",
+  "observed_unix_seconds": 1791992171.911,
+  "accepted_base": "ecb837c599544ff8462b50f43a678d60c80fa5f6",
+  "observation": {
+    "availableBytes": 1758953472,
+    "currentRssBytes": 80740352,
+    "concurrentReservedBytes": 1048576
+  },
+  "allowance": {
+    "phaseBytes": 536870912,
+    "rssBytes": 536870912
+  },
+  "runtime_inventory_bytes": 74176070,
+  "execution_reserve_bytes": 154045492,
+  "source_input_bytes": 108946959,
+  "program_sha256": "cd5626f085c19d0cd6370210c4cd8019ed86e06eb86fb132685c93f6988fbed8",
+  "observer_sha256": "ffa4559042d2403595f7f3c02ffe8910aeeb98206f6481a091e7fe13c2df6f10",
+  "helper_code": [
+    {
+      "commit": "ecb837c599544ff8462b50f43a678d60c80fa5f6",
+      "path": "scripts/check-effective-geographic-regression.mjs",
+      "bytes": 89420,
+      "sha256": "2d6af0a3946c0dec895ab3c42766ecd88c275c48cd465e6a90ff610e776809fe"
+    },
+    {
+      "commit": "ecb837c599544ff8462b50f43a678d60c80fa5f6",
+      "path": "src/native-grid.js",
+      "bytes": 19304,
+      "sha256": "97c8bac69dd491aed15db0f63b34e4abce494b2287c9e57ca633e90398fdba1c"
+    },
+    {
+      "commit": "ecb837c599544ff8462b50f43a678d60c80fa5f6",
+      "path": "src/ownership-codec.js",
+      "bytes": 2948,
+      "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d"
+    },
+    {
+      "commit": "ecb837c599544ff8462b50f43a678d60c80fa5f6",
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "bytes": 153611,
+      "sha256": "1def340fa7b6adc912df65d483e6aaaffa513ebe1a63e86c2103fffa99760899"
+    },
+    {
+      "commit": "ecb837c599544ff8462b50f43a678d60c80fa5f6",
+      "path": "package.json",
+      "bytes": 1417,
+      "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3"
+    }
+  ],
+  "limits": [
+    "Existing processingAllowance is invoked unchanged. Source checks operate at code/feature boundaries; no hard deadline, live RSS supervisor, process-tree containment or streaming log enforcement."
+  ]
+}

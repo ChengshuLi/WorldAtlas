@@ -78,7 +78,7 @@ export function fullRegressionShard(inventory, shard) {
 }
 
 export function integrationTestFiles(profile, shard, testSelection = 'complete') {
-  if (!['complete','selected-data','selected-output'].includes(testSelection) ||
+  if (!['complete','selected-output'].includes(testSelection) ||
       (testSelection !== 'complete' && (profile !== 'full' || shard !== 0))) throw Error('Invalid trusted test selection');
   if (!['full','evidence'].includes(profile) || !Number.isInteger(shard) || shard < 0 || shard > 2 ||
       (profile === 'evidence' && shard !== 0)) throw Error('Invalid trusted integration test profile');
@@ -86,7 +86,6 @@ export function integrationTestFiles(profile, shard, testSelection = 'complete')
     'evidence-quality','premerge-evidence','trusted-workflow-checkouts','merge-integration','merge-integration-entrypoint','integration-proof'];
   const inventory = fs.readdirSync('test').filter(name => name.endsWith('.test.mjs')).sort().map(name=>`test/${name}`);
   const files = testSelection === 'selected-output' ? ['test/compact-ownership.test.mjs']
-    : testSelection === 'selected-data' ? PACKAGED_ASSET_TESTS.filter(name => name !== 'test/compact-ownership.test.mjs')
     : profile === 'full' ? fullRegressionShard(inventory, shard) : focused.map(name => `test/${name}.test.mjs`);
   if (!files.length || files.some(name => !fs.existsSync(name))) throw Error('Missing integration test inventory');
   return files;
@@ -167,9 +166,8 @@ export async function streamTestProcess(args, {env = process.env,
   }
 }
 // The digest arrives from the just-completed trusted assembly step, not from
-// candidate-selected JSON. The originating job actually ran these two tests;
-// the current output/closure admission preserves their complete base inputs.
-export function requireRetainedPackageTests({directory=process.cwd(),expected=process.env.SELECTED_PACKAGE_ASSEMBLY_SHA256}={}) {
+// candidate-selected JSON. This checks actual assembly identity, not test coverage.
+export function requireCurrentPackageAssembly({directory=process.cwd(),expected=process.env.SELECTED_PACKAGE_ASSEMBLY_SHA256}={}) {
   if(!/^[a-f0-9]{64}$/.test(expected??''))throw Error('Trusted current package assembly digest required');
   const file=path.join(directory,'.cache/package-input-build.json'),stat=fs.lstatSync(file);
   if(!stat.isFile()||stat.isSymbolicLink()||stat.size>8*1024*1024)throw Error('Bounded ordinary assembly receipt required');
@@ -179,19 +177,18 @@ export function requireRetainedPackageTests({directory=process.cwd(),expected=pr
   const head=spawnSync('git',['-C',directory,'rev-parse','HEAD'],{encoding:'utf8'});
   if(head.status!==0||receipt.kind!=='cloudflare'||assembly?.kind!=='retained-original-output-plus-current-additive'||
     assembly.current_execution?.source_commit!==head.stdout.trim()||receipt.preflight?.inputs?.head!==head.stdout.trim()||
-    assembly.base_restoration_invoked!==false||assembly.invariant_build_invoked!==false||
-    JSON.stringify(assembly.base_tests_reused)!==JSON.stringify(['test/canonical-compact-repack.test.mjs','test/prepared-parity.test.mjs']))
-    throw Error('Actual same-head assembly and explicit original base-test proof required');
-  return {origin:assembly.origin,base_tests_reused:assembly.base_tests_reused,
-    limitation:'Original successful base checks reused; this receipt does not attest current native, smoke, or browser execution.'};
+    assembly.base_restoration_invoked!==false||assembly.invariant_build_invoked!==false)
+    throw Error('Actual same-head assembly required');
+  return {origin:assembly.origin,
+    limitation:'Authenticated current assembly identity; this receipt does not attest native, smoke, unit or browser execution.'};
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const profile = process.env.INTEGRATION_PROFILE, shard = Number(process.env.INTEGRATION_SHARD);
   const testSelection = process.env.INTEGRATION_TEST_SELECTION || 'complete';
   const files = integrationTestFiles(profile, shard, testSelection);
-  const retained=testSelection==='selected-output'?requireRetainedPackageTests():null;
-  if(retained)console.log(JSON.stringify({retained_package_tests:retained}));
+  const retained=testSelection==='selected-output'?requireCurrentPackageAssembly():null;
+  if(retained)console.log(JSON.stringify({package_assembly:retained}));
   const git=measuredGitSetup();
   const nativeInputs=await observeSetupPhase('immutable-regression-inputs',()=>prepareNativeRegressionInputs(testSelection === 'complete' ? profile : 'evidence',{run:git.run}),{counters:git.snapshot});
   console.log(JSON.stringify({native_inputs:nativeInputs}));
@@ -214,6 +211,6 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   prepareIntegrationTests(files);
   console.log(JSON.stringify({profile, test_selection: testSelection, shard, files}));
   process.exitCode = await streamTestProcess(['--test','--test-reporter=tap','--test-concurrency=2', ...files], {
-    env:{...process.env,...(profile==='full' && shard===0?{ATLAS_REQUIRE_STATIC:'1', ...(testSelection === 'selected-data' ? {ATLAS_REQUIRE_PREPARED:'1'} : {})}:{})}
+    env:{...process.env,...(profile==='full' && shard===0?{ATLAS_REQUIRE_STATIC:'1'}:{})}
   });
 }

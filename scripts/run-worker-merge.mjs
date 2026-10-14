@@ -1,7 +1,6 @@
-import {createMetadataRegressionProofLoader} from './reuse-pr-regression.mjs';
 import {gitBlobTransport} from './git-blob-transport.mjs';
 import {quotaDelay,requestAccounting} from './github-quota.mjs';
-import {loadGeographicReport, prepareGeographyProof, validateGeographyProof} from './geographic-report-artifact.mjs';
+import {loadGeographicReport} from './geographic-report-artifact.mjs';
 import fs from 'node:fs';
 import {createHash} from 'node:crypto';
 import {performance} from 'node:perf_hooks';
@@ -39,8 +38,6 @@ rawAPI.recovery = (...args) => recovery.run(true, () => recover(...args));
 const transport = gitBlobTransport(rawAPI, {repo, token: process.env.GH_TOKEN, directory: process.cwd(),
   onFetch: row => console.log(JSON.stringify({phase, immutable_transport: row}))});
 const api = transport.api, options = {api, repo, number, expectedHead: input.expected_head, policy: loadEvidencePolicy(),
-  geographyProofLoader: args => prepareGeographyProof({...args, token: process.env.GH_TOKEN}),
-  metadataProofLoader: createMetadataRegressionProofLoader({token: process.env.GH_TOKEN, directory: process.cwd()}),
   prepareFallback: process.env.PREPARE_FALLBACK === 'true',
   integrationRequestId: input.request_id + (process.env.GITHUB_RUN_ID ? `-${process.env.GITHUB_RUN_ID}` : '')};
 let result = {accepted: false, request_id: input.request_id, pr_number: number, phase};
@@ -71,27 +68,22 @@ try {
   if (phase === 'prepare') {
     const state = await prepareIntegration(options);
     result = {...result, accepted: Boolean(state.replayed), ...(state.replayed ? {merge_commit: state.pr.merge_commit_sha} : {}), status: state.replayed ? 'already-merged' : 'testing',
-      tested_base: state.base, tested_candidate: state.candidate, reviewed_head: input.expected_head, profile: state.profile, geography_software: state.geography_software, test_selection: state.test_selection ?? 'complete', expectations_path: state.expectations_path, proof: state.proof, proof_unavailable: state.proof_unavailable,
-      geography_proof: state.geography_proof, candidate_refresh_attempts: state.candidate_refresh_attempts, candidate_ref: state.candidate_ref};
+      tested_base: state.base, tested_candidate: state.candidate, reviewed_head: input.expected_head, profile: state.profile, geography_software: state.geography_software, test_selection: state.test_selection ?? 'complete', expectations_path: state.expectations_path,
+      candidate_refresh_attempts: state.candidate_refresh_attempts, candidate_ref: state.candidate_ref};
     // Only validated commit IDs and owned ref identifiers become job outputs.
-    fs.appendFileSync(process.env.GITHUB_OUTPUT, `geography_software=${state.geography_software === true}\ncandidate_ref=${state.candidate_ref ?? ''}\nproof_attempt=${state.proof?.run_attempt ?? ''}\nproof_run=${state.proof?.run_id ?? ''}\ncandidate=${state.candidate ?? ''}\nbase=${state.base ?? ''}\nprofile=${state.profile ?? 'evidence'}\nshards=${JSON.stringify(state.shards ?? (state.profile === 'full' ? [0,1,2] : [0]))}\ntest_selection=${state.test_selection ?? 'complete'}\nexpectations_path=${state.expectations_path ?? ''}\n`);
-    fs.appendFileSync(process.env.GITHUB_OUTPUT, `geography_proof=${state.geography_proof ? JSON.stringify(state.geography_proof) : ''}\n`);
+    fs.appendFileSync(process.env.GITHUB_OUTPUT, `geography_software=${state.geography_software === true}\ncandidate_ref=${state.candidate_ref ?? ''}\ncandidate=${state.candidate ?? ''}\nbase=${state.base ?? ''}\nprofile=${state.profile ?? 'evidence'}\nshards=${JSON.stringify(state.shards ?? (state.profile === 'full' ? [0,1,2] : [0]))}\ntest_selection=${state.test_selection ?? 'complete'}\nexpectations_path=${state.expectations_path ?? ''}\n`);
   } else {
-    const geographyProof = process.env.GEOGRAPHY_PROOF ? validateGeographyProof(JSON.parse(process.env.GEOGRAPHY_PROOF)) : null;
     const completed = await completeIntegration({...options, integrationResult: process.env.INTEGRATION_RESULT,
       geographyResult: process.env.GEOGRAPHY_RESULT,
-      geographyProof,
       geographyReportHash: process.env.GEOGRAPHY_REPORT_SHA256,
       geographyReportLoader: ({api: reportAPI = api} = {}) => loadGeographicReport({api: reportAPI, repo,
-        runId: geographyProof?.run_id ?? process.env.GITHUB_RUN_ID, source: geographyProof,
-        fresh: geographyProof ? undefined : {run_attempt: Number(process.env.GITHUB_RUN_ATTEMPT),
+        runId: process.env.GITHUB_RUN_ID,
+        fresh: {run_attempt: Number(process.env.GITHUB_RUN_ATTEMPT),
           workflow_head: process.env.GITHUB_SHA, head: input.expected_head, baseline: process.env.TESTED_BASE,
           candidate_commit: process.env.TESTED_CANDIDATE, request_id: input.request_id},
-        artifactName: geographyProof?.artifact_name ?? process.env.GEOGRAPHY_ARTIFACT_NAME,
-        expectedHash: geographyProof?.report_sha256 ?? process.env.GEOGRAPHY_REPORT_SHA256,
+        artifactName: process.env.GEOGRAPHY_ARTIFACT_NAME,
+        expectedHash: process.env.GEOGRAPHY_REPORT_SHA256,
         token: process.env.GH_TOKEN}),
-      proofRunAttempt: process.env.PROOF_RUN_ATTEMPT ? Number(process.env.PROOF_RUN_ATTEMPT) : undefined,
-      proofRunId: process.env.PROOF_RUN_ID ? Number(process.env.PROOF_RUN_ID) : undefined,
       testedBase: process.env.TESTED_BASE, testedCandidate: process.env.TESTED_CANDIDATE});
     result = {...result, ...completed, status: 'merged'};
   }

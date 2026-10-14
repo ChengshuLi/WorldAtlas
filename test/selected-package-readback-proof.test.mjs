@@ -40,7 +40,7 @@ with zipfile.ZipFile(output, 'w', compression=zipfile.ZIP_DEFLATED) as package:
 sys.stdout.buffer.write(output.getvalue())
 `], {input: JSON.stringify({entries, streaming, forceZip64}), env: {PATH: '/usr/bin:/bin'}, maxBuffer: 32 * 1048576});
 const entry = (name, body, options = {}) => ({name, body: Buffer.from(body).toString('base64'), ...options});
-function fixture({author = false, smoke = !author, reportChange, zipChange, archiveChange, streaming = false, forceZip64 = false} = {}) {
+function fixture({author = false, smoke = !author, reportChange, zipChange, archiveChange, streaming = false, forceZip64 = false, attempt = 2} = {}) {
   const pin = (path, body) => ({path, bytes: Buffer.byteLength(body), sha256: hash(body)});
   const assets = [pin('atlas-geography.json', '{}'), pin('native/rows.bin', 'rows')];
   const report = {version: 1, kind: 'ordinary-cloudflare-built-output-readback', head: expectedHead,
@@ -56,14 +56,14 @@ function fixture({author = false, smoke = !author, reportChange, zipChange, arch
   entries = zipChange?.(entries) ?? entries;
   let archive = makeZip(entries, streaming, forceZip64);
   archive = archiveChange?.(archive) ?? archive;
-  const run = {id: 17, run_attempt: 2, head_sha: workflowHead, head_branch: author ? 'engineering/native102' : 'main',
+  const run = {id: 17, run_attempt: attempt, head_sha: workflowHead, head_branch: author ? 'engineering/native102' : 'main',
     event: author ? 'pull_request' : 'workflow_dispatch',
     path: author ? '.github/workflows/merge-integration-checks.yml' : '.github/workflows/worker-merge.yml', status: 'completed', conclusion: 'success',
     repository: {full_name: repo}, head_repository: {full_name: repo},
     ...(author ? {pull_requests: [{number: 1808, url: `https://api.github.com/repos/${repo}/pulls/1808`,
       head: {sha: expectedHead, ref: 'engineering/native102', repo: {url: `https://api.github.com/repos/${repo}`}},
       base: {sha: 'c'.repeat(40), ref: 'main', repo: {url: `https://api.github.com/repos/${repo}`}}}]} : {})};
-  const job = {id: 29, run_id: 17, run_attempt: 2, head_sha: workflowHead, name: author ? 'regression (0)' : 'integration (0)',
+  const job = {id: 29, run_id: 17, run_attempt: attempt, head_sha: workflowHead, name: author ? 'regression (0)' : 'integration (0)',
     status: 'completed', conclusion: 'success', steps: (author ? authorSteps : producerSteps).map((name, index) =>
       ({name, number: index + 12, status: 'completed', conclusion: 'success'}))};
   const artifact = {id: 41, name: author ? `native-built-output-regression-1808-${expectedHead}` : 'native-built-output-12345678-1234-1234-1234-123456789abc', size_in_bytes: archive.length,
@@ -86,8 +86,8 @@ function fixture({author = false, smoke = !author, reportChange, zipChange, arch
   ].map(line => '2026-10-12T20:26:51.9866172Z ' + line).join('\n');
   const api = async route => {
     f.calls.push(route);
-    if (route === `/repos/${repo}/actions/runs/17/attempts/2`) return f.run;
-    if (route === `/repos/${repo}/actions/runs/17/attempts/2/jobs?per_page=100&page=1`) return f.inventory;
+    if (route === `/repos/${repo}/actions/runs/17/attempts/${attempt}`) return f.run;
+    if (route === `/repos/${repo}/actions/runs/17/attempts/${attempt}/jobs?per_page=100&page=1`) return f.inventory;
     if (route === `/repos/${repo}/actions/jobs/29`) return f.job;
     if (route === `/repos/${repo}/actions/artifacts/41`) return f.artifact;
     if (route === `/repos/${repo}/pulls/1808`) return f.acceptedPR;
@@ -109,7 +109,7 @@ function fixture({author = false, smoke = !author, reportChange, zipChange, arch
     assert.equal(String(url), f.artifactLocation);
     return new Response(f.archive);
   };
-  f.load = (options = {}) => loadSelectedPackageReadback({api, repo, runId: 17, attempt: 2, expectedHead, fetchImpl, ...options});
+  f.load = (options = {}) => loadSelectedPackageReadback({api, repo, runId: 17, attempt, expectedHead, fetchImpl, ...options});
   return f;
 }
 
@@ -141,6 +141,16 @@ test('ordinary author full regression authenticates exact PR linkage, full recei
   assert.notEqual(result.origin.head, result.origin.workflow_head);
   assert.equal(result.origin.artifact_name, `native-built-output-regression-1808-${expectedHead}`);
   assert.equal(result.origin.use, 'full-output-comparison-only');
+});
+
+test('attempt-qualified native readback accepts the maximum request ID without weakening artifact custody',async()=>{
+  const f=fixture({attempt:50});
+  f.artifact.name='native-built-output-'+ 'r'.repeat(100)+'-50';
+  const result=await f.load();
+  assert.equal(result.origin.artifact_name,f.artifact.name);
+  assert.equal(result.origin.run_attempt,50);
+  f.artifact.name+='0';
+  await assert.rejects(f.load(),/upload receipt/);
 });
 
 test('explicit author PR agrees with the existing run link before merge without an accepted-PR lookup', async () => {

@@ -11,6 +11,64 @@ test('quota retry only retries an explicit read rejection, and accounts every at
   await api('/repos/a/b/pulls/1');assert.equal(calls,2);assert.equal(accounting.receipt().actual_http_attempts,2);
  });
 });
+for(const status of [500,502,503,504])test(`shared GET retries explicit HTTP${status} within its existing attempt and phase allowance`,async()=>{
+ let calls=0,time=0;const accounting=requestAccounting('merge'),route='/repos/a/b/git/trees/'+'a'.repeat(40);
+ await mocked(async url=>{assert.equal(url,'https://api.github.com'+route);return response(++calls===1?status:200,'999');},async()=>{
+  const api=githubAPI('private',{now:()=>time,sleep:async ms=>{time+=ms;},readWaitMs:10000,
+    deadlineRemaining:()=>60000-time,onRequest:accounting.observe});
+  await api(route);assert.equal(calls,2);assert.equal(time,1000);
+  assert.equal(accounting.receipt().actual_http_attempts,2);
+  assert.equal(accounting.receipt().counts[`GET:immutable-metadata:${status}`],1);
+ });
+});
+test('exhausted transient reads preserve the actual server failure after only two bounded retries',async()=>{
+ let calls=0,time=0;
+ await mocked(async()=>{calls++;return response(500,'999');},async()=>{
+  const api=githubAPI('private',{now:()=>time,sleep:async ms=>{time+=ms;},readWaitMs:10000,
+    deadlineRemaining:()=>60000-time});
+  await assert.rejects(api('/repos/a/b/git/trees/'+'a'.repeat(40)),error=>error.github?.http_status===500&&!error.quotaCause);
+  assert.equal(calls,3);assert.equal(time,3000);
+ });
+});
+test('quota and transient server responses share one unchanged retry ceiling',async()=>{
+ let calls=0,time=99000;
+ await mocked(async()=>{calls++;return response(calls===1?403:calls===2?503:200,calls===1?'0':'999');},async()=>{
+  const api=githubAPI('private',{now:()=>time,sleep:async ms=>{time+=ms;},readWaitMs:10000,
+    deadlineRemaining:()=>160000-time});
+  await api('/repos/a/b/pulls/1');assert.equal(calls,3);assert.equal(time,103000);
+ });
+});
+test('transient response cannot add a wait when the caller or next complete HTTP attempt lacks allowance',async()=>{
+ for(const options of [{readWaitMs:0},{readWaitMs:10000,deadlineRemaining:()=>21000}]){
+  let calls=0;
+  await mocked(async()=>{calls++;return response(502,'999');},async()=>{
+   const api=githubAPI('private',{...options,sleep:async()=>assert.fail('wait is not admitted')});
+   await assert.rejects(api('/repos/a/b/pulls/1'),error=>error.github?.http_status===502);
+   assert.equal(calls,1);
+  });
+ }
+});
+test('transient retry rechecks deadline after an oversleep before another HTTP send',async()=>{
+ let calls=0,time=0;
+ await mocked(async()=>{calls++;return response(504,'999');},async()=>{
+  const api=githubAPI('private',{now:()=>time,readWaitMs:60000,deadlineRemaining:()=>60000-time,
+    sleep:async()=>{time=60000;}});
+  await assert.rejects(api('/repos/a/b/pulls/1'),error=>error.jobDeadline===true);
+  assert.equal(calls,1);
+ });
+});
+test('server failures never retry writes, body-bearing reads, transport ambiguity or unsupported status',async()=>{
+ for(const [method,body,status,ambiguous]of [
+  ['POST',{},500,false],['PUT',{},502,false],['PATCH',{},503,false],['DELETE',undefined,504,false],
+  ['GET',{},500,false],['GET',undefined,200,true],['GET',undefined,401,false],['GET',undefined,404,false],
+  ['GET',undefined,422,false],['GET',undefined,501,false],['GET',undefined,505,false]]){
+  let calls=0;
+  await mocked(async()=>{calls++;if(ambiguous)throw Error('ambiguous transport');return response(status,'999');},async()=>{
+   const api=githubAPI('private',{readWaitMs:60000,sleep:async()=>assert.fail('must not wait')});
+   await assert.rejects(api('/repos/a/b/pulls/1',method,body));assert.equal(calls,1);
+  });
+ }
+});
 test('ordinary permission denial, write denial, and ambiguous write never retry',async()=>{
  for(const [method,remaining,ambiguous] of [['GET','99',false],['POST','0',false],['PUT','0',true]]){
   let calls=0;

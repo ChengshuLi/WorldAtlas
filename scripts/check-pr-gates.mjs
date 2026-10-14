@@ -8,8 +8,6 @@ import {githubAPI, verifyIssueScope} from './issue-claim-contract.mjs';
 import {validateIssuePRBody} from './check-handoff-scope.mjs';
 import {checkPREvidence} from './check-pr-evidence.mjs';
 import {checkLinkedIssue} from './check-linked-github-issue.mjs';
-import {selectIntegrationProfile} from './check-integration-profile.mjs';
-import {deploymentBudgetProfile} from './classify-deployment-budget.mjs';
 import {gitBlobTransport} from './git-blob-transport.mjs';
 import {completeReads, copyAPIFeatures, quotaDelay, requestAccounting} from './github-quota.mjs';
 import {loadJobDeadline, HTTP_ATTEMPT_MS} from './job-deadline.mjs';
@@ -36,13 +34,12 @@ export async function checkPRGates({event, repo, token, api, phase = 'all', code
   if (event.repository?.full_name !== repo || !/^[-\w.]+\/[-\w.]+$/.test(repo ?? '') ||
       !Number.isSafeInteger(scheduled?.number) || scheduled.number < 1 ||
       !/^[a-f0-9]{40}$/.test(scheduled.head?.sha ?? '') || !token) throw Error('Invalid trusted PR gate context');
-  // One coherent authority pass is shared by the selectors. These are freshly
+  // One coherent authority pass is shared by the gates. These are freshly
   // fetched records, not prior verdicts. The final reconciliation below bypasses
   // this pass and reauthenticates every mutable authority against GitHub.
   const captured = new Map(); let captureBytes = 0;
   const read = async route => {
-    const eligible = route.startsWith(root + '/pulls/') || route.startsWith(root + '/issues/') ||
-      route.startsWith(root + '/contents/.github/package-inputs.json?ref=');
+    const eligible = route.startsWith(root + '/pulls/') || route.startsWith(root + '/issues/');
     if (!eligible) return api(route);
     if (captured.has(route)) return JSON.parse(await captured.get(route));
     const pending = api(route).then(value => JSON.stringify(value));
@@ -77,14 +74,6 @@ export async function checkPRGates({event, repo, token, api, phase = 'all', code
     throw Error('Evidence verification did not bind the scheduled head');
   const linked = phase === 'evidence' ? undefined : await checkLinkedIssue({branch: current.head.ref, event: authoritativeEvent,
     token, api: read});
-  const regression = phase === 'evidence' ? undefined : await selectIntegrationProfile({event: authoritativeEvent, repo, api: read});
-  const packageProfile = phase === 'evidence' ? undefined : await deploymentBudgetProfile({event: authoritativeEvent,
-    eventName: 'pull_request', repository: repo, api: read});
-  if (regression?.test_selection === 'selected-data' && packageProfile?.full !== true)
-    throw Error('Selected-data requires complete package inputs for the final candidate build');
-  if (packageProfile?.blocked) throw Object.assign(Error('Package classification deferred for quota'),
-    {blocked: packageProfile, ...(packageProfile.api_error ? {github: packageProfile.api_error} : {})});
-
   // Reconcile the actual issue contract and PR after byte validation.
   const [settled, finalIssue] = await completeReads([api(prRoute), api(issueRoute)]);
   assertHead(settled);
@@ -95,9 +84,7 @@ export async function checkPRGates({event, repo, token, api, phase = 'all', code
   return {status: 'checked', phase, head_sha: scheduled.head.sha, trusted_base: codeCommit ?? scheduled.base?.sha,
     ...(codeCommit ? {event_base: scheduled.base?.sha} : {}),
     github_issue, pr_body: current.body ?? '', evidence, linked,
-    ...(regression ? {profile: regression.profile, shards: regression.shards, geography_software: regression.geography_software,
-      ...(regression.test_selection ? {test_selection: regression.test_selection, expectations_path: regression.expectations_path} : {}),
-      owned_paths: linked.owned_paths ?? [], package: packageProfile} : {})};
+    ...(linked ? {owned_paths: linked.owned_paths ?? []} : {})};
 }
 
 export async function runPRGates({event, env = process.env, directory = process.cwd(),
@@ -146,5 +133,5 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   console.log(JSON.stringify(result));
   if (result.status !== 'checked') process.exitCode = 1;
   else if (phase !== 'evidence') fs.appendFileSync(process.env.GITHUB_OUTPUT,
-    `geography_software=${result.geography_software}\nprofile=${result.profile}\nshards=${JSON.stringify(result.shards)}\ntest_selection=${result.test_selection ?? 'complete'}\nexpectations_path=${result.expectations_path ?? ''}\nowned_paths=${JSON.stringify(result.owned_paths)}\npr_body=${JSON.stringify(result.pr_body)}\nfull=${result.package.full}\nblocked=false\n`);
+    `owned_paths=${JSON.stringify(result.owned_paths)}\npr_body=${JSON.stringify(result.pr_body)}\n`);
 }

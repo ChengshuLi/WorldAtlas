@@ -467,7 +467,7 @@ function modernFinalizationFixture(t, {mixed = false, membership = true} = {}) {
   const git = (...args) => execFileSync('git', args, {cwd: root, stdio: ['pipe', 'pipe', 'pipe']}).toString().trim();
   git('init'); git('config', 'user.name', 'Finalizer fixture'); git('config', 'user.email', 'finalizer@example.invalid');
   const save = (name, value) => write(root, name, Buffer.isBuffer(value) ? value : jsonBytes(value));
-  const commitAll = () => { git('add', '.'); git('commit', '-qm', 'Immutable finalizer fixture'); return git('rev-parse', 'HEAD'); };
+  const commitAll = () => { git('add', '.'); git('commit', '--allow-empty', '-qm', 'Immutable finalizer fixture'); return git('rev-parse', 'HEAD'); };
   const r = pinReader(root), pin = name => r.pin(git('rev-parse', 'HEAD'), name);
   const inherited = 'coordination/engineering/accepted-source/';
   const roles = Object.fromEntries(['physical_input', 'physical_reproduction', 'physical_evidence', 'native_latitudes', 'owner_roster']
@@ -485,7 +485,8 @@ function modernFinalizationFixture(t, {mixed = false, membership = true} = {}) {
   save(ownerPath, gzipSync(ownerRaw)); commitAll();
   const owner = {...pin(ownerPath), encoding: 'gzip', decoded_bytes: ownerRaw.length, decoded_sha256: digest(ownerRaw)};
   save(inherited + 'base-manifest.json', {geographic_release: baseReference.id, footprints_sha256: baseReference.footprints_sha256,
-    hierarchy_sha256: baseReference.hierarchy_sha256, original_assets: {bounds: {sha256: owner.sha256}}}); commitAll();
+    hierarchy_sha256: baseReference.hierarchy_sha256, size: 8, coordinateBits: 3, method: 'native-linear-evenodd-first-owner-v1',
+    native_latitudes: pin(roles.native_latitudes), original_assets: {bounds: {sha256: owner.sha256}}}); commitAll();
   const baseManifest = pin(inherited + 'base-manifest.json');
   // Deliberately unsorted nested selector keys and accepted declaration ordering.
   const base = {version: 1, release_id: baseReference.id, sha256: baseManifest.sha256,
@@ -533,11 +534,13 @@ function modernFinalizationFixture(t, {mixed = false, membership = true} = {}) {
     entries.push(legacy); rows.unshift({component_id: 'legacy:fixture', target_id: 'target', pixelIndex: 1, geometry,
       base_geometry_sha256: digest(jsonBytes(geometry)), geometry_sha256: digest(jsonBytes(geometry)), source_receipt_sha256: 'e'.repeat(64),
       native_cells: 1, disposition: 'assigned', authority_sha256: legacy.authority_sha256, rule_sha256: legacy.rule_sha256});
+    rows.unshift({component_id: 'held:fixture', disposition: 'awaiting-evidence', reason: 'literal unresolved evidence',
+      authority_sha256: legacy.authority_sha256, rule_sha256: legacy.rule_sha256});
   }
   const package_inputs = pin('.github/package-inputs.json');
   const registry = {version: 1, kind: 'retained-rule-authority-registry-v1', entries: entries.sort((a, b) => a.authority_sha256.localeCompare(b.authority_sha256))};
   save(owned + 'registry.json', registry); save(owned + 'ledger.json', {version: 2, kind: 'native-additive-repair-ledger-v2',
-    authority_registry_sha256: digest(jsonBytes(registry)), scope_ids: rows.map(row => row.component_id), rows});
+    authority_registry_sha256: digest(jsonBytes(registry)), parent_inventory: {original_denominator: 7}, scope_ids: rows.map(row => row.component_id), rows});
   save(owned + 'custody.json', {retained: true}); commitAll();
   const registryPin = pin(owned + 'registry.json'), ledgerPin = pin(owned + 'ledger.json');
   const stub = pin(owned + 'custody.json'); save(owned + 'operating.json', {execution_custody: {terminal: stub}}); commitAll();
@@ -545,8 +548,8 @@ function modernFinalizationFixture(t, {mixed = false, membership = true} = {}) {
   const rebind = pin(owned + 'rebind.json');
   save(owned + 'selected-ledger.json', {...r.json(pin(owned + 'ledger.json')), current_rebind: rebind, current_targets: [{target_id: 'target'}]}); commitAll();
   const selected_ledger = pin(owned + 'selected-ledger.json'), effectiveReference = {...baseReference, id: 'geography:effective'};
-  save(owned + 'patch.json', {authority_registry_sha256: digest(jsonBytes(registry)), ledger_sha256: selected_ledger.sha256,
-    base_reference: baseReference, effective_reference: effectiveReference}); commitAll();
+  save(owned + 'patch.json', {version: 2, kind: 'unassigned-native-cells-v1', authority_registry_sha256: digest(jsonBytes(registry)), ledger_sha256: selected_ledger.sha256,
+    base_reference: baseReference, effective_reference: effectiveReference, rows: [...(mixed ? [{y: 1, runs: [[0, 1, 1]]}] : []), ...nativeRows]}); commitAll();
   const assets = {base_manifest: baseManifest, ledger: selected_ledger, owner_roster: owner, patch: pin(owned + 'patch.json')};
   const envelope = {version: 2, kind: 'retained-native-base-plus-delta-v2', base_reference: baseReference, effective_reference: effectiveReference,
     ...Object.fromEntries(Object.entries(assets).map(([role, p]) => [role, {path: 'additive-repairs/' + role + (role === 'owner_roster' ? '.json.gz' : '.json'),
@@ -772,5 +775,160 @@ test('delivery CLI retires review-freeze and queue-submission entry points befor
     assert.throws(() => execFileSync(process.execPath, [script, ...args], {
       encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'], env: {...process.env, NODE_OPTIONS: '', NODE_PATH: ''}
     }), error => error.status === 1 && /Use advance\|status|Use prepare-delivery-handoff/.test(error.stderr));
+  }
+});
+
+function modernCompositionFixture(t, {mixed = true} = {}) {
+  const f = modernFinalizationFixture(t, {mixed}), owned = 'coordination/engineering/modern-next/';
+  const accepted = finalizeDelivery(f.config, f.r);
+  f.save('data/ownership-selection.json', accepted['ownership-selection.json']);
+  f.save('.github/package-inputs.json', accepted['package-inputs.json']); f.commitAll();
+  const selector = f.pin('data/ownership-selection.json'), packageInputs = f.pin('.github/package-inputs.json');
+  const priorLedger = f.r.json(f.config.selected_ledger), priorRegistry = f.r.json(f.config.registry);
+  const priorPatch = f.r.json(f.assets.patch), manifest = f.r.json(f.assets.base_manifest);
+  const evidence = {...f.evidenceBody, base_reference: priorPatch.base_reference,
+    targets: [{...f.evidenceBody.targets[0], source_family: 'source', pixelIndex: 1, base_geometry: priorLedger.rows.find(row => row.representation === 'native-cells').base_geometry,
+      source_receipt_sha256: f.evidenceBody.physical_evidence.sha256}],
+    native_contract: Object.fromEntries(['size', 'coordinateBits', 'method', 'native_latitudes', 'hierarchy_sha256', 'original_assets']
+      .map(key => [key, manifest[key]]))};
+  const patch = {rows: [{y: 3, runs: [[2, 4, 1]]}]};
+  const makeAppend = (change = () => {}) => {
+    const source = structuredClone(evidence), native = structuredClone(patch);
+    const template = priorLedger.rows.find(row => row.representation === 'native-cells');
+    const {authority_sha256, rule_sha256, ...originalRow} = template;
+    const row = {...originalRow, native_rows: structuredClone(patch.rows), native_cells: 2};
+    const state = {source, native, row}; change(state);
+    f.save(owned + 'source-evidence.json', source); f.save(owned + 'native-patch.json', native); f.commitAll();
+    row.component_id = state.component_id ?? 'source-target:' + digest(jsonBytes({target_id: row.target_id, evidence: f.pin(owned + 'source-evidence.json').sha256}));
+    const binding = {version: 1, kind: 'source-target-native-custody-v1',
+      source_evidence: f.pin(owned + 'source-evidence.json'), native_patch: f.pin(owned + 'native-patch.json')};
+    f.save(owned + 'binding.json', binding); f.save(owned + 'rule.json', {...binding, kind: 'source-target-native-rule-v1'}); f.commitAll();
+    const constructed = {products: JSON.parse(JSON.stringify({'original-rule-preimage.json': jsonBytes({...binding, kind: 'source-target-native-rule-v1'}),
+      'authority-binding.json': jsonBytes(binding)})), component_ids: [row.component_id], ledger_rows: [row],
+      rule_sha256: f.pin(owned + 'rule.json').sha256, limitations: ['Actual current owner-zero remains separately required.']};
+    f.save(owned + 'constructed-authority.json', constructed); f.commitAll();
+    return {version: 1, selector, rule_preimage: f.pin(owned + 'rule.json'), source_authority: f.pin(owned + 'binding.json'),
+      ledger: f.pin(owned + 'constructed-authority.json'),
+      native_patch: binding.native_patch, effective_release_id: 'geography:modern-next'};
+  };
+  const config = makeAppend();
+  const finalizeConfig = products => {
+    for (const [name, raw] of Object.entries(products)) f.save(owned + name, raw);
+    f.commitAll();
+    const selected_ledger = f.pin(owned + 'selected-ledger.json');
+    return {version: 1, new_prefix: owned, selector, package_inputs: packageInputs, registry: f.pin(owned + 'authority-registry.json'),
+      ledger: selected_ledger, selected_ledger, rebind: priorLedger.current_rebind, patch: f.pin(owned + 'patch.json'),
+      runtime_envelope: f.pin(owned + 'runtime-envelope.json'), sidecar_output: owned + 'selection-sidecar.json'};
+  };
+  return {...f, owned, config, makeAppend, finalizeConfig, priorLedger, priorRegistry, priorPatch, accepted};
+}
+
+for (const mixed of [false, true]) test('late compose and finalize replace modern assembly and the separate sidecar commit' + (mixed ? ' with inherited legacy exceptions' : ''), t => {
+  const f = modernCompositionFixture(t, {mixed}), composed = '.cache/delivery-handoff/compose';
+  const run = f.run('compose', composed, [], f.config); assert.equal(run.status, 0, run.stderr);
+  const names = ['authority-registry.json', 'selected-ledger.json', 'patch.json', 'runtime-envelope.json'];
+  const products = Object.fromEntries(names.map(name => [name, fs.readFileSync(path.join(f.root, composed, name))]));
+  const registry = JSON.parse(products['authority-registry.json']), ledger = JSON.parse(products['selected-ledger.json']);
+  assert.equal(fs.existsSync(path.join(f.root, f.owned + 'registry.json')), false, 'qualification needs no standalone singleton registry');
+  const authority = {policy_id: 'retained-source-literal-additions', policy_version: 1, rule_preimage: f.config.rule_preimage,
+    rule_sha256: f.config.rule_preimage.sha256, source_authority: f.config.source_authority};
+  assert.deepEqual(registry.entries.find(entry => entry.authority_sha256 === digest(jsonBytes(authority))),
+    {authority_sha256: digest(jsonBytes(authority)), ...authority}, 'existing authority constructor policy/pin contract');
+  for (const entry of f.priorRegistry.entries) assert.deepEqual(registry.entries.find(next => next.authority_sha256 === entry.authority_sha256), entry);
+  for (const row of f.priorLedger.rows) assert.deepEqual(ledger.rows.find(next => next.component_id === row.component_id), row);
+  for (const name of ['parent_inventory', 'current_rebind', 'current_targets']) assert.deepEqual(ledger[name], f.priorLedger[name]);
+  assert.equal(ledger.rows.length, f.priorLedger.rows.length + 1);
+  const patch = JSON.parse(products['patch.json']);
+  assert.deepEqual(patch.rows, [...f.priorPatch.rows, {y: 3, runs: [[2, 4, 1]]}]);
+  const envelope = JSON.parse(products['runtime-envelope.json']).additiveRelease;
+  const priorEnvelope = f.r.json(f.r.json(f.r.pin(f.config.selector.commit, JSON.parse(f.accepted['ownership-selection.json']).additive_release.path)).runtime_envelope).additiveRelease;
+  for (const role of ['base_manifest', 'owner_roster']) assert.deepEqual(envelope[role], priorEnvelope[role]);
+  for (const role of ['ledger', 'patch']) assert.equal(envelope[role].path, priorEnvelope[role].path);
+  const composeResume = f.run('compose', composed, ['--resume'], f.config); assert.equal(composeResume.status, 0, composeResume.stderr);
+  const finalConfig = f.finalizeConfig(products);
+  assert.equal(fs.existsSync(path.join(f.root, finalConfig.sidecar_output)), false);
+  const destination = '.cache/delivery-handoff/final', final = f.run('finalize', destination, [], finalConfig);
+  assert.equal(final.status, 0, final.stderr);
+  const read = name => fs.readFileSync(path.join(f.root, destination, name));
+  const sidecarRaw = read('selection-sidecar.json'), selector = JSON.parse(read('ownership-selection.json'));
+  assert.deepEqual(selector.additive_release, {path: finalConfig.sidecar_output, bytes: sidecarRaw.length, sha256: digest(sidecarRaw)});
+  const base = {...selector}; delete base.additive_release;
+  assert.equal(JSON.stringify(base), JSON.stringify(JSON.parse(f.originalSelector)));
+  const sidecar = JSON.parse(sidecarRaw), originalSidecar = f.r.json(f.r.pin(f.config.selector.commit, JSON.parse(f.accepted['ownership-selection.json']).additive_release.path));
+  for (const role of ['base_manifest', 'owner_roster']) assert.deepEqual(sidecar.logical_asset_map[role], originalSidecar.logical_asset_map[role]);
+  const inputs = JSON.parse(read('package-inputs.json')), priorInputs = JSON.parse(f.accepted['package-inputs.json']);
+  assert.deepEqual(inputs.inputs.slice(0, priorInputs.inputs.length), priorInputs.inputs);
+  assert.ok(inputs.inputs.includes(finalConfig.sidecar_output)); assert.ok(!inputs.inputs.some(name => name.endsWith('selected-delivery-expectations.json')));
+  assert.equal(JSON.parse(read('selected-delivery-expectations.json')).cumulative_native_cells, mixed ? 5 : 4);
+  const roles = JSON.parse(read('package-roles.json')).paths.find(p => p.path === finalConfig.sidecar_output);
+  assert.ok(!Object.hasOwn(roles, 'commit')); assert.deepEqual(roles.roles, ['generated final sidecar']);
+  f.save(finalConfig.sidecar_output, sidecarRaw); f.commitAll();
+  const resumed = f.run('finalize', destination, ['--resume'], finalConfig); assert.equal(resumed.status, 0, resumed.stderr);
+  const repeated = f.run('finalize', '.cache/delivery-handoff/final-again', [], finalConfig); assert.equal(repeated.status, 0, repeated.stderr);
+  for (const name of ['selection-sidecar.json', 'ownership-selection.json', 'package-inputs.json', 'package-roles.json', 'selected-delivery-expectations.json'])
+    assert.deepEqual(fs.readFileSync(path.join(f.root, '.cache/delivery-handoff/final-again', name)), read(name));
+});
+
+test('late modern composition refuses scope, source-contract, patch and occupied-cell changes before publication', t => {
+  const f = modernCompositionFixture(t); let ordinal = 0;
+  for (const [change, pattern] of [
+    [s => { s.component_id = 'held:fixture'; }, /Foreign or duplicate/],
+    [s => { s.row.native_cells = 3; }, /Native component cell count/],
+    [s => { s.native.rows[0].runs[0][2] = 2; }, /ledger intervals differ/],
+    [s => { s.row.pixelIndex = 2; s.row.native_rows[0].runs[0][2] = 2; s.native.rows[0].runs[0][2] = 2; }, /source target\/owner\/receipt/],
+    [s => { s.native.rows[0].y = 2; s.row.native_rows[0].y = 2; }, /overlap/],
+    [s => { s.source.base_reference.id = 'geography:wrong'; }, /baseline\/contract/],
+    [s => { s.source.native_contract.method = 'wrong'; }, /baseline\/contract/],
+    [s => { s.source.targets.push({...s.source.targets[0], id: 'source:B', source_family: 'foreign'}); }, /target\/family\/receipt/],
+    [s => { const correct = {...s.source.targets[0], id: 'source:B'}; s.source.targets[0].source_receipt_sha256 = 'f'.repeat(64);
+      s.source.targets.push(correct); }, /target\/family\/receipt/],
+    [s => { s.native.rows = []; }, /ledger intervals differ/],
+    [s => { s.row.native_rows[0].runs[0][0] = -1; }, /native-only|native-cell|interval|primitive identity/i],
+  ]) {
+    const config = f.makeAppend(change), destination = '.cache/delivery-handoff/refused-compose-' + ordinal++;
+    const result = f.run('compose', destination, [], config); assert.notEqual(result.status, 0); assert.match(result.stderr, pattern);
+    assert.equal(fs.existsSync(path.join(f.root, destination)), false);
+  }
+  const config = f.makeAppend(), altered = {...config, native_patch: {...config.native_patch, sha256: '0'.repeat(64)}};
+  const result = f.run('compose', '.cache/delivery-handoff/refused-pin', [], altered);
+  assert.notEqual(result.status, 0); assert.match(result.stderr, /hash differs/);
+  assert.equal(fs.existsSync(path.join(f.root, '.cache/delivery-handoff/refused-pin')), false);
+  for (const role of ['rule_preimage', 'source_authority']) {
+    const changed = {...config, [role]: {...config[role], sha256: '0'.repeat(64)}};
+    const destination = '.cache/delivery-handoff/refused-' + role, refused = f.run('compose', destination, [], changed);
+    assert.notEqual(refused.status, 0); assert.match(refused.stderr, /hash differs/);
+    assert.equal(fs.existsSync(path.join(f.root, destination)), false);
+  }
+});
+
+test('modern composition accepts compatible mapped members and refuses omitted parsed metadata carry', t => {
+  const f = modernCompositionFixture(t);
+  const compatible = f.makeAppend(s => s.source.targets.push({...s.source.targets[0], id: 'source:B'}));
+  const accepted = f.run('compose', '.cache/delivery-handoff/compatible-members', [], compatible);
+  assert.equal(accepted.status, 0, accepted.stderr);
+  const large = f.makeAppend(s => { s.source.retained_metadata = 'x'.repeat(2 * 1024 * 1024); });
+  const config = {...large, preparation_allowance: {phaseBytes: 4 * 1024 * 1024, rssBytes: 256 * 1024 * 1024}};
+  const destination = '.cache/delivery-handoff/refused-metadata-carry', result = f.run('compose', destination, [], config);
+  assert.notEqual(result.status, 0); assert.match(result.stderr, /composition carry exceeds/);
+  assert.equal(fs.existsSync(path.join(f.root, destination)), false);
+});
+
+test('generated sidecar refuses foreign/colliding outputs and changed release joins before publication', t => {
+  const f = modernCompositionFixture(t), occupied = f.owned + 'occupied-output.json', sentinel = Buffer.from('existing-sidecar-path-sentinel\n');
+  f.save(occupied, sentinel);
+  const config = f.finalizeConfig(composeAuthorities(f.config, f.r)); let ordinal = 0;
+  for (const changed of [
+    {...config, sidecar_output: 'coordination/engineering/foreign/sidecar.json'},
+    {...config, sidecar_output: f.owned + 'preparation.json'},
+    {...config, sidecar_output: f.owned + 'package-inputs.json'},
+    {...config, sidecar_output: occupied},
+    {...config, sidecar: f.r.pin(f.config.selector.commit, JSON.parse(f.accepted['ownership-selection.json']).additive_release.path)},
+    {...config, patch: {...config.patch, sha256: '0'.repeat(64)}},
+    {...config, runtime_envelope: {...config.runtime_envelope, sha256: '0'.repeat(64)}},
+  ]) {
+    const destination = '.cache/delivery-handoff/refused-final-' + ordinal++, result = f.run('finalize', destination, [], changed);
+    assert.notEqual(result.status, 0); assert.match(result.stderr, /sidecar output|existing committed body|hash differs/);
+    assert.equal(fs.existsSync(path.join(f.root, destination)), false);
+    assert.deepEqual(fs.readFileSync(path.join(f.root, occupied)), sentinel);
   }
 });

@@ -11,7 +11,7 @@ import {candidateBudget} from './native-ownership/native-preparation-guards.mjs'
 import {validatePackageInputs} from './package-inputs.mjs';
 import {baselineFiles, validateEvidence} from './evidence-quality.mjs';
 import {composeRetainedLedgers} from '../coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs';
-import {normaliseRetainedRepairLedger, verifyCurrentRebindExecution, CURRENT_REBIND_CODE} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {normaliseRetainedRepairLedger, compareVersionedRepairLedgers, verifyCurrentRebindExecution, CURRENT_REBIND_CODE} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 
 const need = (ok, message) => { if (!ok) throw Error(message); };
 const hex = (value, size) => typeof value === 'string' && new RegExp(`^[a-f0-9]{${size}}$`).test(value);
@@ -501,6 +501,132 @@ export function rebindCustody(config, reader, certificate = false) {
 }
 
 export function composeAuthorities(config, reader) {
+  if (config.selector) {
+    need(config.selector.path === 'data/ownership-selection.json' && typeof config.effective_release_id === 'string'
+      && config.effective_release_id.startsWith('geography:'), 'Original selected baseline and explicit effective release required');
+    const selection = reader.json(config.selector), hook = selection.additive_release;
+    need(hook && safe(hook.path), 'Existing cumulative selection required');
+    const sidecarPin = reader.pin(config.selector.commit, hook.path);
+    need(sidecarPin.bytes === hook.bytes && sidecarPin.sha256 === hook.sha256, 'Original selected sidecar differs');
+    const sidecar = reader.json(sidecarPin), base = {...selection}; delete base.additive_release;
+    need(sidecar.version === 2 && sidecar.kind === 'retained-native-additive-selection-v2'
+      && same(sidecar.base_selection, base), 'Original selected base differs');
+    const assets = sidecar.logical_asset_map;
+    need(assets && same(Object.keys(assets).sort(), ['base_manifest', 'ledger', 'owner_roster', 'patch']), 'Complete prior logical assets required');
+    let inputBytes = [config.selector, sidecarPin, assets.base_manifest, sidecar.authority_registry, assets.ledger, assets.patch, sidecar.runtime_envelope,
+      config.rule_preimage, config.source_authority, config.ledger, config.native_patch].reduce((n, p) => n + p.bytes, 0);
+    // Parsing, literal row copies, interval union and encoded products share the
+    // same preparation allowance. Reserve their carry before opening large bodies.
+    const checkCarry = (outputBytes = 0) => {
+      need(Number.isSafeInteger(inputBytes) && inputBytes > 0, 'Complete composition input sizes required');
+      const usage = reader.budget.snapshot();
+      need(Number.isSafeInteger(usage.accounted_bytes + 12 * inputBytes + outputBytes)
+        && usage.accounted_bytes + 12 * inputBytes + outputBytes <= usage.limit_bytes, 'Aggregate composition carry exceeds preparation allowance');
+    };
+    checkCarry();
+    const priorRegistry = reader.json(sidecar.authority_registry), priorLedger = reader.json(assets.ledger);
+    const priorPatch = reader.json(assets.patch), wrapped = reader.json(sidecar.runtime_envelope);
+    const envelope = wrapped.additiveRelease ?? wrapped;
+    const constructed = reader.json(config.ledger), candidate = reader.json(config.native_patch);
+    need(envelope.version === 2 && envelope.kind === 'retained-native-base-plus-delta-v2', 'Existing v2 runtime envelope required');
+    for (const [role, pin] of Object.entries(assets)) {
+      const declared = envelope[role];
+      need(declared?.bytes === pin.bytes && declared?.sha256 === pin.sha256
+        && (declared.decoded_bytes ?? declared.bytes) === (pin.decoded_bytes ?? pin.bytes)
+        && (declared.decoded_sha256 ?? declared.sha256) === (pin.decoded_sha256 ?? pin.sha256), 'Prior envelope asset binding differs: ' + role);
+    }
+    need(priorRegistry.version === 1 && priorRegistry.kind === 'retained-rule-authority-registry-v1' && priorLedger.version === 2,
+      'Existing v2 cumulative registry/ledger required');
+    const binding = reader.json(config.source_authority), preimage = reader.json(config.rule_preimage);
+    // Literal metadata contract of constructAuthorityRegistry. Retained constructor
+    // results supply qualification; the final selected reader remains authoritative.
+    const rule = reader.pin(config.rule_preimage.commit, config.rule_preimage.path);
+    const authority = {policy_id: 'retained-source-literal-additions', policy_version: 1, rule_preimage: rule,
+      rule_sha256: rule.sha256, source_authority: reader.pin(config.source_authority.commit, config.source_authority.path)};
+    const entry = {authority_sha256: digest(jsonBytes(authority)), ...authority};
+    need(binding.version === 1 && binding.kind === 'source-target-native-custody-v1'
+      && same(Object.keys(binding).sort(), ['kind', 'native_patch', 'source_evidence', 'version'])
+      && same(preimage, {...binding, kind: 'source-target-native-rule-v1'}) && same(binding.native_patch, config.native_patch)
+      && entry.rule_sha256 === digest(jsonBytes(preimage)) && constructed.rule_sha256 === entry.rule_sha256 && unique(constructed.component_ids)
+      && same(constructed.component_ids, constructed.ledger_rows?.map(row => row.component_id)),
+    'Committed modern constructor scope/rule/patch differs');
+    inputBytes += binding.source_evidence.bytes; checkCarry();
+    const evidence = reader.json(binding.source_evidence), manifest = reader.json(assets.base_manifest);
+    const contract = Object.fromEntries(['size', 'coordinateBits', 'method', 'native_latitudes', 'hierarchy_sha256', 'original_assets']
+      .map(key => [key, manifest[key]]));
+    need(same(evidence.base_reference, envelope.base_reference) && same(evidence.native_contract, contract)
+      && assets.base_manifest.sha256 === selection.sha256 && assets.owner_roster.sha256 === manifest.original_assets?.bounds?.sha256,
+    'Modern source changes the selected native baseline/contract');
+    checkCarry();
+    need(priorPatch.version === 2 && priorPatch.authority_registry_sha256 === sidecar.authority_registry.sha256
+      && priorPatch.ledger_sha256 === assets.ledger.sha256 && same(priorPatch.base_reference, envelope.base_reference)
+      && same(priorPatch.effective_reference, envelope.effective_reference), 'Prior cumulative patch bindings differ');
+    need(!priorRegistry.entries.some(old => old.authority_sha256 === entry.authority_sha256), 'Modern authority is already selected');
+    const registry = {...priorRegistry, entries: [...priorRegistry.entries, entry].sort((a, b) => a.authority_sha256.localeCompare(b.authority_sha256))};
+    const oldIds = new Set(priorLedger.rows.map(row => row.component_id));
+    need(unique(evidence.targets?.map(target => target.id)), 'Complete original source-target roster required');
+    const targets = new Map();
+    for (const target of evidence.targets) {
+      const id = target.target_id ?? target.id, prior = targets.get(id);
+      need(target.source_receipt_sha256 === evidence.physical_evidence?.sha256
+        && (!prior || prior.pixelIndex === target.pixelIndex && prior.source_family === target.source_family
+          && same(prior.base_geometry, target.base_geometry)), 'Conflicting original source target/family/receipt');
+      targets.set(id, target);
+    }
+    const added = constructed.ledger_rows.map(row => {
+      need(row.representation === 'native-cells' && row.component_id === 'source-target:' + digest(jsonBytes({target_id: row.target_id,
+        evidence: binding.source_evidence.sha256})) && !oldIds.has(row.component_id)
+        && !Object.hasOwn(row, 'authority_sha256') && !Object.hasOwn(row, 'rule_sha256'), 'Foreign or duplicate modern component');
+      const target = targets.get(row.target_id);
+      need(target?.pixelIndex === row.pixelIndex && same(target.base_geometry, row.base_geometry)
+        && target.source_receipt_sha256 === evidence.physical_evidence?.sha256 && row.source_receipt_sha256 === target.source_receipt_sha256,
+      'Modern row changes the original source target/owner/receipt');
+      return {...row, authority_sha256: entry.authority_sha256, rule_sha256: entry.rule_sha256};
+    });
+    need(added.length === targets.size, 'Modern constructor omits an original source target');
+    const rows = [...priorLedger.rows, ...added].sort((a, b) => a.component_id.localeCompare(b.component_id));
+    const ledger = {...priorLedger, authority_registry_sha256: digest(jsonBytes(registry)), rows, scope_ids: rows.map(row => row.component_id)};
+    compareVersionedRepairLedgers(priorLedger, ledger, {beforeRegistry: priorRegistry, afterRegistry: registry});
+    need(priorLedger.rows.every(row => same(row, rows.find(next => next.component_id === row.component_id))), 'Literal inherited row/exception changed');
+    const normalized = normaliseRetainedRepairLedger(ledger, registry), ledgerRaw = jsonBytes(ledger);
+    const union = patches => {
+      const byRow = new Map();
+      for (const patch of patches) {
+        need(Array.isArray(patch.rows), 'Complete native intervals required'); let previous = -1;
+        for (const row of patch.rows) {
+          need(Number.isSafeInteger(row.y) && row.y > previous && row.y < manifest.size && Array.isArray(row.runs) && row.runs.length,
+            'Invalid complete native row'); previous = row.y; let end = 0;
+          for (const run of row.runs) {
+            need(Array.isArray(run) && run.length === 3 && run.every(Number.isSafeInteger) && run[0] >= end
+              && run[1] > run[0] && run[1] <= manifest.size && run[2] > 0, 'Invalid complete native interval'); end = run[1];
+          }
+          const runs = byRow.get(row.y) ?? []; runs.push(...row.runs.map(run => [...run])); byRow.set(row.y, runs);
+        }
+      }
+      return [...byRow].sort((a, b) => a[0] - b[0]).map(([y, runs]) => {
+        runs.sort((a, b) => a[0] - b[0]); const merged = [];
+        for (const run of runs) {
+          const last = merged.at(-1); need(!last || run[0] >= last[1], 'Modern cells overlap the accepted cumulative patch');
+          if (last && last[1] === run[0] && last[2] === run[2]) last[1] = run[1]; else merged.push(run);
+        }
+        return {y, runs: merged};
+      });
+    };
+    need(same(union([candidate]), union(added.map(row => ({rows: row.native_rows})))), 'Modern ledger intervals differ from original patch');
+    const patchRows = union([priorPatch, candidate]);
+    const effective = {...envelope.effective_reference, id: config.effective_release_id,
+      footprints_sha256: digest(jsonBytes({domain: 'worldatlas-effective-native-footprints:v2', base_reference: envelope.base_reference,
+        authority_registry_sha256: ledger.authority_registry_sha256, ledger_sha256: digest(ledgerRaw), components: [...normalized.rows.values()]}))};
+    const patch = {...priorPatch, authority_registry_sha256: ledger.authority_registry_sha256, ledger_sha256: digest(ledgerRaw),
+      effective_reference: effective, rows: patchRows}, patchRaw = jsonBytes(patch);
+    const nextEnvelope = {...envelope, effective_reference: effective,
+      ledger: {...envelope.ledger, bytes: ledgerRaw.length, sha256: digest(ledgerRaw)},
+      patch: {...envelope.patch, bytes: patchRaw.length, sha256: digest(patchRaw)}};
+    const products = {'authority-registry.json': jsonBytes(registry), 'selected-ledger.json': ledgerRaw, 'patch.json': patchRaw,
+      'runtime-envelope.json': jsonBytes(wrapped.additiveRelease ? {...wrapped, reference_release: effective, additiveRelease: nextEnvelope} : nextEnvelope)};
+    checkCarry(Object.values(products).reduce((n, raw) => n + raw.length, 0));
+    return products;
+  }
   const registries = config.registries.map(p => reader.json(p));
   need(registries.length && registries.every(r => r.version === 1 && r.kind === 'retained-rule-authority-registry-v1'), 'Existing retained registries required');
   const entries = new Map();
@@ -646,14 +772,38 @@ function appendPackageReadPaths(original, paths) {
 export function finalizeDelivery(config, reader) {
   need(typeof config.new_prefix === 'string' && config.new_prefix.endsWith('/')
     && safe(config.new_prefix.slice(0, -1)), 'Exact owned output prefix required');
+  const originalSelector = reader.read(config.selector), selection = JSON.parse(originalSelector);
+  let generatedSidecar;
+  if (config.sidecar_output !== undefined) {
+    need(!config.sidecar && safe(config.sidecar_output) && path.posix.dirname(config.sidecar_output) + '/' === config.new_prefix
+      && !['ownership-selection.json', 'package-inputs.json', 'package-roles.json', 'selected-delivery-expectations.json', 'preparation.json']
+        .includes(path.posix.basename(config.sidecar_output)) && config.patch && config.runtime_envelope,
+    'Fresh flat owned sidecar output and committed patch/envelope required');
+    const hook = selection.additive_release, priorPin = reader.pin(config.selector.commit, hook?.path);
+    need(priorPin.bytes === hook.bytes && priorPin.sha256 === hook.sha256, 'Original selected sidecar differs');
+    const prior = reader.json(priorPin), base = {...selection}; delete base.additive_release;
+    need(prior.version === 2 && prior.kind === 'retained-native-additive-selection-v2' && same(prior.base_selection, base),
+      'Original selected base differs');
+    generatedSidecar = jsonBytes({...prior, authority_registry: config.registry, runtime_envelope: config.runtime_envelope,
+      logical_asset_map: {...prior.logical_asset_map, ledger: config.selected_ledger, patch: config.patch}});
+    // This is a generated output identity, never a fabricated future input pin.
+    const sidecar = {path: config.sidecar_output, mode: '100644', bytes: generatedSidecar.length, sha256: digest(generatedSidecar),
+      git_blob_oid: createHash('sha1').update('blob ' + generatedSidecar.length + '\0').update(generatedSidecar).digest('hex')};
+    const head = reader.git('rev-parse', 'HEAD').toString().trim();
+    if (reader.hasPath(head, sidecar.path)) {
+      const existing = reader.pin(head, sidecar.path);
+      need(existing.mode === sidecar.mode && existing.git_blob_oid === sidecar.git_blob_oid && existing.bytes === sidecar.bytes
+        && existing.sha256 === sidecar.sha256, 'Generated sidecar would replace an existing committed body');
+    }
+    config = {...config, sidecar};
+  }
   need(config.selector?.path === 'data/ownership-selection.json' && config.package_inputs?.path === '.github/package-inputs.json'
     && config.sidecar?.path.startsWith(config.new_prefix) && config.selected_ledger && config.rebind && !config.outer_roles,
   'Finalization requires original selector/package, actual sidecar/ledger/rebind and derived outer roles');
-  const sidecar = reader.json(config.sidecar), assets = sidecar.logical_asset_map;
+  const sidecar = generatedSidecar ? JSON.parse(generatedSidecar) : reader.json(config.sidecar), assets = sidecar.logical_asset_map;
   need(same(Object.keys(sidecar).sort(), ['authority_registry', 'base_selection', 'kind', 'logical_asset_map', 'runtime_envelope', 'version'])
     && assets && same(Object.keys(assets).sort(), ['base_manifest', 'ledger', 'owner_roster', 'patch'])
     && same(sidecar.authority_registry, config.registry) && same(assets.ledger, config.selected_ledger), 'Final sidecar authority/selected-ledger pins differ');
-  const originalSelector = reader.read(config.selector), selection = JSON.parse(originalSelector);
   need(assets.base_manifest.sha256 === selection.sha256, 'Final base manifest differs from unchanged selector');
   const baseManifest = reader.json(assets.base_manifest);
   need(assets.owner_roster.sha256 === baseManifest.original_assets?.bounds?.sha256, 'Final owner roster differs from original native bounds');
@@ -674,8 +824,15 @@ export function finalizeDelivery(config, reader) {
       && (declared.decoded_sha256 ?? declared.sha256) === (pin.decoded_sha256 ?? pin.sha256), 'Final envelope asset descriptor differs: ' + role);
   }
   const selector = finalizedSelection(originalSelector, sidecar, config.sidecar);
-  const outputs = packageProjection({...config, outer_roles: [...Object.values(assets), sidecar.runtime_envelope, config.sidecar]}, reader);
+  const outputs = packageProjection({...config, outer_roles: [...Object.values(assets), sidecar.runtime_envelope,
+    ...(!generatedSidecar ? [config.sidecar] : [])]}, reader);
   const projection = JSON.parse(outputs['package-roles.json']);
+  if (generatedSidecar) {
+    projection.paths.push({...config.sidecar, roles: ['generated final sidecar']});
+    projection.paths.sort((a, b) => a.path.localeCompare(b.path));
+    outputs['package-roles.json'] = jsonBytes(projection);
+    outputs[path.posix.basename(config.sidecar.path)] = generatedSidecar;
+  }
   const paths = projection.paths.map(p => p.path);
   const baselinePackage = reader.json(config.package_inputs);
   validatePackageInputs(baselinePackage);

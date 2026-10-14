@@ -5,13 +5,10 @@ import fs from 'node:fs';
 import {checkPRGates, runPRGates} from '../scripts/check-pr-gates.mjs';
 import {githubAPI, verifyIssueScope} from '../scripts/issue-claim-contract.mjs';
 import {integrationProfile} from '../scripts/integration-profile.mjs';
-import {PROOF_PATHS, WORKFLOW_PATH} from '../scripts/integration-proof.mjs';
 import {requestAccounting} from '../scripts/github-quota.mjs';
 import {loadPackageInputs} from '../scripts/package-inputs.mjs';
 import {checkPREvidence} from '../scripts/check-pr-evidence.mjs';
 import {checkLinkedIssue} from '../scripts/check-linked-github-issue.mjs';
-import {selectIntegrationProfile} from '../scripts/check-integration-profile.mjs';
-import {deploymentBudgetProfile} from '../scripts/classify-deployment-budget.mjs';
 import {inspectMerge, prepareIntegration, completeIntegration} from '../scripts/merge-integration.mjs';
 
 function fixture(lane = 'engineering') {
@@ -102,8 +99,8 @@ test('composed evidence keeps bulk transport, authenticates bytes and rechecks m
 });
 for (const lane of ['engineering', 'geography', 'research']) test(`real composed gates retain ${lane} focused selection without factual approval`, async () => {
   const f = fixture(lane), result = await f.run();
-  assert.equal(result.status, 'checked'); assert.equal(result.profile, 'evidence');
-  assert.deepEqual(result.shards, [0]); assert.equal(result.package.full, false);
+  assert.equal(result.status, 'checked'); assert.equal(result.profile, undefined);
+  assert.equal(result.shards, undefined); assert.equal(result.package, undefined);
   assert.equal(result.evidence.status, 'not-required');
   assert.deepEqual(result.owned_paths, f.claim.owned_paths ?? []);
 });
@@ -125,12 +122,10 @@ async function currentEngineeringReservation(f) {
 test('actual PR selector and merge profile share the authenticated retained engineering prefix', async () => {
   const f = ownedEngineeringFixture();
   assert.equal(integrationProfile(f.pr.head.ref, f.files), 'full', 'No unverified ownership shortcut');
-  const selected = await selectIntegrationProfile({event: f.event, repo: f.repo, api: f.api});
-  assert.equal(selected.profile, 'evidence'); assert.deepEqual(selected.shards, [0]);
   const reservation = await currentEngineeringReservation(f);
   // prepareIntegration and completeIntegration both use this exact exported
   // classifier with their freshly authenticated reservation.
-  assert.equal(integrationProfile(f.pr.head.ref, f.files, reservation), selected.profile);
+  assert.equal(integrationProfile(f.pr.head.ref, f.files, reservation), 'evidence');
   const state = await inspectMerge({repo: f.repo, number: f.pr.number, expectedHead: f.pr.head.sha,
     api: async route => {
       if (route === f.root + '/git/ref/heads/main') return {object: {sha: f.pr.base.sha}};
@@ -143,69 +138,22 @@ test('actual PR selector and merge profile share the authenticated retained engi
   assert.deepEqual(state.reservation, reservation);
   assert.equal(integrationProfile(state.pr.head.ref, state.files, state.reservation), 'evidence');
 });
-test('actual prepare and final merge reuse only successful focused proof for retained engineering ownership', async () => {
-  const f = ownedEngineeringFixture(), candidate = 'c'.repeat(40), testedTree = 'd'.repeat(40), baseTree = 'e'.repeat(40);
-  Object.assign(f.pr, {draft: false, mergeable: true, merge_commit_sha: candidate, title: 'Publish retained evidence'});
-  const workflow = Buffer.from('ref: ${{ github.event.pull_request.head.sha }}\nname: Complete regression shard\nname: Build hosted assets');
-  const workflowOID = createHash('sha1').update(`blob ${workflow.length}\0`).update(workflow).digest('hex');
-  const authorityRows = PROOF_PATHS.map(name => ({path: name, sha: name === WORKFLOW_PATH ? workflowOID : 'f'.repeat(40), mode: '100644', type: 'blob'}));
-  const rows = [...authorityRows, {path: f.files[0].filename, sha: '1'.repeat(40), mode: '100644', type: 'blob'}];
-  const run = {id: 12, run_attempt: 1, head_sha: f.pr.head.sha, event: 'pull_request', path: WORKFLOW_PATH,
-    repository: {full_name: f.repo}, head_repository: {full_name: f.repo}, status: 'completed', conclusion: 'success',
-    pull_requests: [{number: f.pr.number, head: {sha: f.pr.head.sha}}]};
-  const jobs = [{name: 'profile', status: 'completed', conclusion: 'success'},
-    {name: 'regression (0)', status: 'completed', conclusion: 'success', steps: [
-      'Checkout reviewed head', 'Install browser dependencies only for tests that use Playwright', 'Complete regression shard'
-    ].map(name => ({name, status: 'completed', conclusion: 'success'}))}];
-  const writes = [], options = {repo: f.repo, number: f.pr.number, expectedHead: f.pr.head.sha,
-    candidateSleep: async () => {}, policy: {version: 1, mode: 'enforce-new', activation_time: '2100-01-01T00:00:00Z'},
-    evidenceCheck: async () => ({status: 'legacy'}), api: async (route, method = 'GET', body) => {
-      if (method !== 'GET') {assert.equal(method, 'PUT');writes.push(body);return {merged: true, sha: '2'.repeat(40)};}
-      if (route === f.root + '/git/ref/heads/main') return {object: {sha: f.pr.base.sha}};
-      if (route.startsWith(f.root + '/commits/') && route.includes('/check-runs'))
-        return {check_runs: [{id: 1, name: 'scope', app: {id: 1}, status: 'completed', conclusion: 'success'}]};
-      if (route.startsWith(f.root + '/commits/') && route.endsWith('/status')) return {statuses: []};
-      if (route === f.root + '/git/commits/' + candidate) return {tree: {sha: testedTree}, parents: [{sha: f.pr.base.sha}, {sha: f.pr.head.sha}]};
-      if (route === f.root + '/git/commits/' + f.pr.head.sha) return {tree: {sha: testedTree}};
-      if (route === f.root + '/git/commits/' + f.pr.base.sha) return {tree: {sha: baseTree}};
-      if (route.startsWith(f.root + '/git/trees/')) return {truncated: false, tree: route.includes(baseTree) ? authorityRows : rows};
-      if (route === f.root + '/git/blobs/' + workflowOID) return {sha: workflowOID, size: workflow.length, encoding: 'base64', content: workflow.toString('base64')};
-      if (route.includes('/actions/workflows/')) return {workflow_runs: [run]};
-      if (route.endsWith('/actions/runs/12')) return run;
-      if (route.includes('/actions/runs/12/attempts/1/jobs')) return {jobs};
-      return f.api(route);
-    }};
-  const prepared = await prepareIntegration(options);
-  assert.equal(prepared.profile, 'evidence');assert.equal(prepared.proof.profile, 'evidence');
-  assert.equal(prepared.proof.run_id, 12);assert.equal(writes.length, 0);
-  const complete = () => completeIntegration({...options, integrationResult: 'skipped', geographyResult: 'success',
-    testedBase: f.pr.base.sha, testedCandidate: candidate, proofRunId: 12, proofRunAttempt: 1,
-    geographyReportLoader: async () => ({version: 1, method_id: 'worldatlas-trusted-geography-check-v1',
-      baseline_commit: f.pr.base.sha, trusted_code_commit: f.pr.base.sha, candidate_commit: candidate,
-      candidate_code_executed: false, published: false, source_approval: false, gate_status: 'passed', status: 'not-applicable'})});
-  jobs[1].conclusion = 'failure';
-  await assert.rejects(complete(), /proof is no longer valid/);assert.equal(writes.length, 0);
-  jobs[1].conclusion = 'success';
-  const result = await complete();assert.equal(result.accepted, true);assert.equal(result.proof.profile, 'evidence');
-  assert.equal(writes.length, 1);assert.equal(writes[0].sha, f.pr.head.sha);
-});
-
-test('actual composed engineering gates omit lease reads and keep package classification independent', async () => {
+test('actual composed engineering gates omit leases and unused compute classification', async () => {
   const f = ownedEngineeringFixture();
   const result = await checkPRGates({event: f.event, repo: f.repo, token: 'fixture', api: f.api, phase: 'metadata'});
-  assert.equal(result.profile, 'evidence'); assert.equal(result.package.full, false);
+  assert.equal(result.profile, undefined); assert.equal(result.package, undefined);
   assert.deepEqual(result.owned_paths, [f.owned]);
   assert.equal(f.calls.filter(route => route === f.root + '/issues/10').length, 2, 'One captured pass plus final fresh reconciliation');
   assert.equal(f.calls.filter(route => route === f.root + '/issues/10/comments?per_page=100&page=1').length, 0);
   f.files.push({filename: 'src/attributes.js', status: 'modified'});f.pr.changed_files++;
   const full = await checkPRGates({event: f.event, repo: f.repo, token: 'fixture', api: f.api, phase: 'metadata'});
-  assert.equal(full.profile, 'full'); assert.equal(full.package.full, true);
+  assert.equal(full.profile, undefined); assert.equal(full.package, undefined);
 });
 test('ordinary profile ignores historical lease state and readiness labels without reading them', async()=>{
  const f=ownedEngineeringFixture(); f.claim.active=false;f.claim.expires_at='2000-01-01';
  f.issue.labels=['type:engineering','status:blocked'];
  const api=async route=>{assert(!route.includes('/comments')&&!route.includes('/timeline'));return f.api(route);};
- assert.equal((await selectIntegrationProfile({event:f.event,repo:f.repo,api})).profile,'evidence');
+ assert.equal((await checkPRGates({event:f.event,repo:f.repo,token:'fixture',api,phase:'metadata'})).status,'checked');
 });
 for (const [name, mutate] of [
   ['wrong issue type', f => {f.issue.labels[0] = 'type:geography';}],
@@ -213,7 +161,7 @@ for (const [name, mutate] of [
   ['unsafe scope', f => {f.issue.body = f.issue.body.replace('coordination/engineering/retained-job/', 'coordination/engineering/../');}]
 ]) test(`actual retained-prefix PR selection rejects ${name} ownership`, async () => {
   const f = ownedEngineeringFixture();mutate(f);
-  await assert.rejects(selectIntegrationProfile({event: f.event, repo: f.repo, api: f.api}));
+  await assert.rejects(checkPRGates({event:f.event,repo:f.repo,token:'fixture',api:f.api,phase:'metadata'}));
 });
 test('retained-prefix classification does not accept namespace roots, exact files, foreign files or rename origins', async () => {
   const f = ownedEngineeringFixture(), reservation = await currentEngineeringReservation(f);
@@ -236,7 +184,7 @@ test('new retained-prefix exception cannot downgrade the actual selected scienti
   const reservation = await currentEngineeringReservation(f);
   assert.equal(reservation.mode, 'engineering');assert.deepEqual(reservation.owned_paths, [prefix]);
   assert.equal(integrationProfile(f.pr.head.ref, f.files, reservation), 'full');
-  assert.equal((await selectIntegrationProfile({event: f.event, repo: f.repo, api: f.api})).profile, 'full');
+  assert.equal(integrationProfile(f.pr.head.ref,f.files,await currentEngineeringReservation(f)),'full');
 });
 test('new retained-prefix exception accepts additions and only the exact evidence manifest modification', async () => {
   const f = ownedEngineeringFixture(), reservation = await currentEngineeringReservation(f);
@@ -256,12 +204,6 @@ test('new retained-prefix exception accepts additions and only the exact evidenc
   assert.equal(integrationProfile('engineering/retained-job', [{filename: f.owned + 'method.mjs', status: 'modified'}]), 'evidence',
     'Existing branch-aligned behavior is outside this narrow correction');
 });
-test('retained-prefix exception does not use old checked-out package roles after a PR base advance', async () => {
-  const f = ownedEngineeringFixture();f.pr.base.sha = '9'.repeat(40);
-  assert.notEqual(f.event.pull_request.base.sha, f.pr.base.sha);
-  assert.equal((await selectIntegrationProfile({event: f.event, repo: f.repo, api: f.api})).profile, 'full');
-});
-
 test('new retained-prefix additions do not exempt package inputs, module configuration or unknown artifacts', async () => {
   const f = ownedEngineeringFixture(), reservation = await currentEngineeringReservation(f);
   for (const name of ['package.json', 'package-lock.json', 'npm-shrinkwrap.json', '__init__.py', 'sitecustomize.py', 'usercustomize.py',
@@ -282,7 +224,7 @@ test('retained engineering scope changes during actual composed inspection still
   for (const mutate of [
     f => {f.issue.body = f.issue.body.replace('retained-job/', 'foreign-job/');}
   ]) {
-    const f = ownedEngineeringFixture();f.hooks[f.definitionRoute] = () => mutate(f);
+    const f = ownedEngineeringFixture();let reads=0;f.hooks[f.root + '/issues/10'] = () => {if(++reads===2)mutate(f);};
     await assert.rejects(checkPRGates({event: f.event, repo: f.repo, token: 'fixture', api: f.api, phase: 'metadata'}));
   }
 });
@@ -298,12 +240,12 @@ for (const [name, change] of [
   ['PR allowance', f => {f.timeline = [{source: {issue: {number: 19, body: 'Refs #10', pull_request: {}}}}]; f.issue.body = f.issue.body.replace('"max_prs":2', '"max_prs":1');}]
 ]) test(`${name} change during byte/selection work prevents a coherent success`, async () => {
   const f = fixture();
-  f.hooks[f.definitionRoute] = () => change(f);
+  f.hooks[f.root + '/pulls/20/files?per_page=100&page=1'] = () => change(f);
   await assert.rejects(f.run());
 });
 test('ordinary progress and same-holder renewal do not invalidate disposition', async () => {
   const f = fixture();
-  f.hooks[f.definitionRoute] = () => {f.progress = 'Still checking the same evidence'; f.claim.expires_at = '2099-02-01T00:00:00Z';};
+  f.hooks[f.root + '/pulls/20/files?per_page=100&page=1'] = () => {f.progress = 'Still checking the same evidence'; f.claim.expires_at = '2099-02-01T00:00:00Z';};
   assert.equal((await f.run()).status, 'checked');
 });
 test('authenticated conditional reads reduce paid repeats while changed authority is still read', async () => {
@@ -329,22 +271,9 @@ test('a failed real gate closes transport and cannot publish profile outputs', a
     apiFactory: () => f.api, transportFactory: api => ({api, close() {closed = true;}})});
   assert(closed); assert.equal(result.status, 'incomplete-or-invalid'); assert.equal(result.profile, undefined);
 });
-test('incomplete and duplicate changed-file inventories cannot produce focused success', async () => {
-  for (const duplicate of [false, true]) {
-    const f = fixture();
-    if (duplicate) {f.pr.changed_files = 2; f.files.push({...f.files[0]});}
-    else f.files.length = 0;
-    await assert.rejects(f.run(), /Incomplete changed-path inventory/);
-  }
-});
-test('unavailable package definition retains conservative full verification', async () => {
-  const f = fixture(); f.definition.sha = '0'.repeat(40);
-  const result = await f.run();
-  assert.equal(result.package.full, true); assert.equal(result.package.fallback, true);
-});
 test('a changed disposition is fetched through the real conditional client and rejected', async () => {
   const f = fixture(), original = globalThis.fetch; let changedReads = 0;
-  f.hooks[f.definitionRoute] = () => {f.pr.body = 'Closes #10';};
+  f.hooks[f.root + '/pulls/20/files?per_page=100&page=1'] = () => {f.pr.body = 'Closes #10';};
   globalThis.fetch = async (url, options) => {
     const route = new URL(url).pathname + new URL(url).search;
     const body = JSON.stringify(await f.api(route));
@@ -407,8 +336,8 @@ for (const lane of ['engineering', 'geography', 'research']) test(`metadata-only
   const result = await runPRGates({event: f.event, env: {GH_TOKEN: 'fixture', GITHUB_REPOSITORY: f.repo},
     phase: 'metadata', apiFactory: () => f.api,
     transportFactory: () => {throw Error('Metadata must never allocate evidence transport');}});
-  assert.equal(result.status, 'checked'); assert.equal(result.profile, 'evidence');
-  assert.deepEqual(result.shards, [0]); assert.equal(result.package.full, false);
+  assert.equal(result.status, 'checked'); assert.equal(result.profile, undefined);
+  assert.equal(result.shards, undefined); assert.equal(result.package, undefined);
   assert.equal(result.evidence, undefined); assert.deepEqual(result.immutable_transport, []);
 });
 test('independent evidence phase verifies bytes without selecting or waiting for tests', async () => {
@@ -428,27 +357,14 @@ test('independent evidence rejects unmet required evidence and changed ownership
     await assert.rejects(checkPRGates({event: f.event, repo: f.repo, token: 'fixture', api: f.api, phase: 'evidence'}));
   }
 });
-test('workflow starts real evidence independently, preserves test parallelism and separates edited-event cancellation', () => {
-  const source = fs.readFileSync('.github/workflows/merge-integration-checks.yml', 'utf8');
-  const profile = source.slice(source.indexOf('  profile:'), source.indexOf('  evidence:'));
-  const evidence = source.slice(source.indexOf('  evidence:'), source.indexOf('  scope:'));
-  assert.match(profile, /PR_GATE_PHASE: metadata/);
-  assert.doesNotMatch(profile, /node scripts\/check-pr-evidence.mjs/);
-  assert.match(evidence, /PR_GATE_PHASE: evidence/);
-  assert.match(evidence, /node scripts\/check-pr-gates.mjs/);
-  assert.doesNotMatch(evidence, /needs:|Evidence was validated/);
-  assert.match(evidence, /ref: \$\{\{ github.event.pull_request.base.sha \}\}/);
-  for (const job of ['scope', 'geography', 'regression', 'package']) {
-    const start = source.indexOf(`  ${job}:`);
-    const remainder = source.slice(start);
-    const next = remainder.slice(3).search(/\n  [a-z]+:/);
-    const block = next === -1 ? remainder : remainder.slice(0, next + 3);
-    assert.match(block, job === 'package' ? /needs: \[profile, regression\]/ : /needs: profile/);
-    assert.doesNotMatch(block, /needs: evidence/);
-  }
-  assert.match(source, /\(github.event.action == 'edited' \|\| github.event.action == 'ready_for_review'\) && 'metadata' \|\| 'code'/);
+test('automatic author workflow has only fresh trusted authority and scope gates',()=>{
+ const source=fs.readFileSync('.github/workflows/merge-integration-checks.yml','utf8');
+ assert.deepEqual([...source.matchAll(/^  ([a-z]+):$/gm)].map(m=>m[1]),['profile','evidence','scope']);
+ const evidence=source.slice(source.indexOf('  evidence:'),source.indexOf('  scope:'));
+ assert.match(evidence,/PR_GATE_PHASE: evidence/);assert.doesNotMatch(evidence,/needs:/);
+ assert.match(source,/group: worldatlas-author-pr-\$\{\{ github.event.pull_request.number \}\}/);
+ assert.doesNotMatch(source,/npm ci|pip install|playwright|build:cloudflare|reuse-pr-regression|metadata_regression/);
 });
-
 test('parallel evidence phase binds its own actual job start and deadline', async () => {
   const x = await hosted({phase: 'evidence', elapsed: 360000,
     workflow: 'jobs:\n  profile:\n    timeout-minutes: 5\n  evidence:\n    timeout-minutes: 10\n'});
@@ -456,68 +372,13 @@ test('parallel evidence phase binds its own actual job start and deadline', asyn
   assert.equal(x.options.deadlineRemaining(), 210000); assert.equal(x.result.profile, undefined);
 });
 
-test('real split gates reduce paid metadata repeats against independent old readers', async t => {
-  const original = globalThis.fetch;
-  async function measure(split) {
-    const f = fixture('geography'); let attempts = 0, paid = 0, revalidated = 0;
-    globalThis.fetch = async (url, options) => {
-      attempts++;
-      const value = await f.api(new URL(url).pathname + new URL(url).search);
-      const body = JSON.stringify(value), etag = '"' + createHash('sha256').update(body).digest('hex') + '"';
-      const same = options.headers['If-None-Match'] === etag;
-      if (same) revalidated++; else paid++;
-      return new Response(same ? null : body, {status: same ? 304 : 200, headers: {etag}});
-    };
-    const api = () => githubAPI('fixture');
-    if (split) {
-      await Promise.all([
-        checkPRGates({event: f.event, repo: f.repo, token: 'fixture', api: api(), phase: 'metadata'}),
-        checkPRGates({event: f.event, repo: f.repo, token: 'fixture', api: api(), phase: 'evidence'})
-      ]);
-    } else {
-      await Promise.all([
-        checkPREvidence({event: f.event, api: api()}),
-        checkLinkedIssue({branch: f.pr.head.ref, event: f.event, token: 'fixture', api: api(), checkClaim: true}),
-        selectIntegrationProfile({event: f.event, repo: f.repo, api: api()}),
-        deploymentBudgetProfile({event: f.event, eventName: 'pull_request', repository: f.repo, api: api()})
-      ]);
-    }
-    return {attempts, paid, revalidated};
-  }
-  try {
-    const old = await measure(false), split = await measure(true);
-    t.diagnostic(JSON.stringify({fixture_only: true, old, split}));
-    assert(split.paid < old.paid, 'Consolidation must earn its additional reconciliation reads');
-    assert(split.attempts <= old.attempts + 4, 'Only the independent final authority passes may add requests');
-  } finally {globalThis.fetch = original;}
-});
-
-// Evaluate the actual workflow predicates for every declared PR event rather
-// than asserting only that a desired substring exists in the configuration.
-test('draft readiness starts no duplicate run while code and edited events keep their actual gates', () => {
-  const source = fs.readFileSync('.github/workflows/merge-integration-checks.yml', 'utf8');
-  const events = source.match(/types: \[([^\]]+)\]/)[1].split(',').map(x=>x.trim());
-  const groupLine = source.split('\n').find(line=>line.trim().startsWith('group:'));
-  const expression = [...groupLine.matchAll(/\$\{\{ (.*?) \}\}/g)].at(-1)[1];
-  const evaluate = (predicate, action, selection = 'complete', cancelled = false) => Function('action', 'selection', 'always', 'cancelled',
-    `return (${predicate.replaceAll('github.event.action','action').replaceAll('needs.profile.outputs.test_selection','selection')});`)(action, selection, () => true, () => cancelled);
-  const groups = Object.fromEntries(events.map(action=>[action,evaluate(expression,action)]));
-  assert.equal(groups.opened, 'code');assert.equal(groups.synchronize, 'code');assert.equal(groups.reopened, 'code');
-  assert.equal(groups.edited, 'metadata');
-  assert.deepEqual(events, ['opened','synchronize','reopened','edited']);
-  assert.equal(groups.ready_for_review, undefined, 'draft readiness changes no tested bytes or authority binding');
-  assert.notEqual(groups.opened,groups.edited,'body edits must not cancel an unfinished code run');
-  for (const name of ['geography','regression','package']) {
-    const start=source.indexOf(`  ${name}:`), tail=source.slice(start), next=tail.slice(3).search(/\n  [a-z]+:/);
-    const block=next<0?tail:tail.slice(0,next+3), predicate=block.match(/^    if: (.+)$/m)[1];
-    const active=predicate.replace("needs.profile.result == 'success' && ",'');
-    for(const action of events)assert.equal(evaluate(active,action),action !== 'edited',`${name}/${action}`);
-    if(name==='package')for(const action of events)assert.equal(evaluate(active,action,'complete',true),false,'cancelled package never launches');
-  }
-  for(const name of ['profile','evidence','scope']) {
-    const start=source.indexOf(`  ${name}:`),tail=source.slice(start),next=tail.slice(3).search(/\n  [a-z]+:/);
-    const block=next<0?tail:tail.slice(0,next+3);assert.doesNotMatch(block,/^    if: /m,`${name} must refresh authority`);
-  }
+test('all declared PR events share one authority run without an automatic compute phase',()=>{
+ const source=fs.readFileSync('.github/workflows/merge-integration-checks.yml','utf8');
+ const events=source.match(/types: \[([^\]]+)\]/)[1].split(',').map(x=>x.trim());
+ assert.deepEqual(events,['opened','synchronize','reopened','edited']);
+ for(const name of ['profile','evidence','scope'])assert(source.includes('  '+name+':'));
+ for(const name of ['geography','regression','package'])assert(!source.includes('  '+name+':'));
+ assert.match(source,/cancel-in-progress: true/);
 });
 
 test('draft readiness preserves byte authority while both merge phases require current non-draft state', async () => {
@@ -751,7 +612,7 @@ test('current accepted-parent policy keeps original authored event and evidence 
  assert.equal(result.event_base, original.pull_request.base.sha);
  assert.equal(result.head_sha, original.pull_request.head.sha);
  assert.deepEqual(f.event, original);
- assert.ok(f.calls.includes(f.definitionRoute), 'authored package evidence retains original PR metadata');
+ assert(!f.calls.includes(f.definitionRoute),'Author authority has no unused package classification');
 });
 
 test('PR entry refuses an executing checkout different from authenticated accepted parent', async () => {
