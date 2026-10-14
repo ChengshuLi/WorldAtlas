@@ -626,7 +626,8 @@ export function qualifySourceTargetNativeAuthority(reader, preimage, binding) {
   const changes=memberOwners.get(id)??[],direct=owners.get(id);
   if(direct){
    demand(changes.length===0||changes.length===1&&changes[0].id===id,
-    'Source member conflicts with a direct native owner');return {id,pixelIndex:direct};
+    'Source member conflicts with a direct native owner');
+   if(changes.length===0||changes[0].replaces.length===1)return {id,pixelIndex:direct};
   }
   demand(changes.length===1,'Missing or ambiguous accepted source membership');
   const change=changes[0],accepted=canonicalOwners.get(change.id),members=accepted?.properties?.metadata?.source_member_ids;

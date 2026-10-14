@@ -145,6 +145,18 @@ test('actual constructor supports an aggregation retaining an original member ow
   assert.equal(fixture.run().ledger_rows[0].target_id,a);
   assert.equal(fixture.run().ledger_rows[0].native_cells,1);
 });
+for(const [name,mutate,pattern]of [
+  ['omitted sibling',s=>s.originals.splice(1,1),/complete source aggregation member/],
+  ['coherently wrong survivor base',s=>{const geometry=rectangle(0,1);s.targets[0].base_geometry=geometry;s.measured[0].selected.geometry=geometry;},/aggregate base geometry/],
+])test('surviving original owner cannot bypass '+name,()=>{
+  const fixture=constructorFixture(s=>{
+    s.roster[0].id=a;s.lineage.changes[0].id=a;s.accepted.features[0].id=a;
+    s.targets=s.targets.slice(0,1);s.targets[0].target_id=a;
+    s.measured=s.measured.slice(0,1);s.measured[0].selected.id=a;
+    s.physical.results=s.physical.results.slice(0,1);mutate(s);
+  });
+  assert.throws(()=>fixture.run(),pattern);
+});
 function directTarget(state,{membership=true,overlap=false}={}){
   const geometry=state.originals[2].geometry;
   state.targets=[{id:c,pixelIndex:2,source_family:family,base_geometry:geometry,coverage_classes:['mapped_land_support']}];
