@@ -12,8 +12,9 @@ receipt, checks the actual merged PR with the same verifier used by the queue,
 checks the accepted/tested trees, and authenticates the originating geography
 run, job and artifact. It returns an invocation-private handle. The selected
 qualifier independently checks complete selectors, source/native bindings,
-execution lineage, native and original strict Python outcomes and the complete
-present/absent route census before creating its own checkpoint capability.
+execution lineage, native outcomes, the applicable continuous result and the
+complete present/absent route census before creating its own checkpoint capability.
+Full-geometry artifacts still require their original strict Python success.
 
 PR provenance uses `merge-integration-checks.yml` / `pull_request`; the workflow
 head is the reviewed PR head. Queue provenance uses `worker-merge.yml` /
@@ -29,17 +30,37 @@ or rerun historical science.
 ## Authenticated artifact
 
 `geography-check.json` remains the authenticated root, including complete native
-and original strict Python results. Its optional `checkpoint` object has version
+and either the original strict Python result or explicit pixel-only applicability.
+Its optional `checkpoint` object has version
 `1`, kind `selected-checkpoint-products-v1`, and a `members` array. Each member
 has a fixed `name`, exact `bytes` and `sha256`; gzip members additionally bind
 `decoded_bytes` and `decoded_sha256`.
 
-The complete supported roster is:
+The historical full-geometry roster is:
 
 - `derived-certificate.json.gz`, `derived-facts.json`, `derived-publication.json`
 - `facts.json`, `operands.json.gz`, `publication.json`
 - `checkpoint-routes.json`
 - `operating.json` only when an actual producer emits it
+
+An eligible visible native-pixel append-only comparison instead retains exactly
+`derived-certificate.json.gz`, `derived-facts.json`, `derived-publication.json`,
+and `checkpoint-routes.json` (plus optional actual `operating.json`). It sets
+`validation_stage` to `native-passed-continuous-not-applicable` and
+`continuous_publication` to null. Its continuous report explicitly says
+`status:not-applicable`, `scope:visible-native-pixel-repair-v1`, and has no polygon
+result. The complete coordinate certificate is derived arithmetically from the
+unchanged admitted base and actual literal additions; it is not polygon overlap
+approval. Do not add empty continuous files or fabricate a passing polygon test.
+
+This scope requires a genuine authenticated transition and successful complete
+native conservation, including every changed row and each newly selected
+component's actual unowned-to-its-own-target cell witness inside its exact native
+polygon. Empty witness lists are ineligible. An actual baseline-to-candidate Git
+diff permits only selector/locator/package-input changes and newly added inert
+engineering evidence. Code, base/source, old evidence or other geography changes
+keep the original continuous checks. Cold comparisons retain those checks too.
+The native and independent source qualification requirements remain unchanged.
 
 The provisional derived publication keeps `accepted_checkpoint:false` and its
 original validation stage. Acceptance is external custody, not an edited boolean.
@@ -114,9 +135,9 @@ a hosted job receipt or cold acquisition. Current selectors, complete routes,
 consumed policy and current memory allowance are still checked. Candidate data
 cannot register itself in the executing catalogue.
 
-The first selected batch using that seed must pass both original consumers and
-the normal hosted job/merge boundary, which creates the first complete accepted
-artifact. The following selected batch uses that artifact's normal merge receipt
+A selected batch using that seed must pass the applicable native and continuous
+scope rules and the normal hosted job/merge boundary, which creates its complete
+accepted artifact. The following selected batch uses that artifact's normal merge receipt
 and locator through `acquireAcceptedCheckpoint`; it requires no catalogue or
 executable change. Those two real batch handoffs establish bootstrap and generic
 advancement separately.

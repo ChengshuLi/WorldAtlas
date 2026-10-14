@@ -105,3 +105,48 @@ test('runner reserves optional full-bank prefetch for the explicit legacy cold r
     assert.deepEqual(JSON.parse(result.stdout),cold?['joint','prefetch','native','continuous']:['joint']);
   }
 });
+
+function pixelFixture(t) {
+  const f=fixture(t);
+  for(const name of ['facts.json','operands.json.gz','publication.json'])fs.unlinkSync(path.join(f.source,name));
+  const native={status:'no-new-native-loss',method:'selected-native-owner-conservation-v1',candidate_code_executed:false,
+    intervals:[],lost_or_reassigned_cells:0,affected_rows:1,
+    native_row_scope:{proof:'shared-qualified-complete-base-and-cumulative-patch',changed_rows:[3]},
+    repair_visibility:{new_components:1,witnesses:[{component_id:'new',geometry_sha256:'a'.repeat(64),x:2,y:3,previous_owner:0,candidate_owner:1}]}};
+  const derived=JSON.parse(fs.readFileSync(path.join(f.source,'derived-publication.json')));
+  const facts=JSON.parse(fs.readFileSync(path.join(f.source,'derived-facts.json')));
+  derived.validation_stage='native-passed-continuous-not-applicable';
+  Object.assign(facts,{validation_stage:derived.validation_stage,continuous_publication:null,repair_components:['new'],native_result_sha256:reportHash(bytes(native))});
+  derived.facts=f.put('derived-facts.json',bytes(facts));f.put('derived-publication.json',bytes(derived));
+  const result={version:1,kind:'trusted-selected-continuous-comparison-v1',status:'not-applicable',
+    scope:'visible-native-pixel-repair-v1',regressions:null,issued_publication:null,complete_owners:3,
+    changed_ids:['A'],candidate_code_executed:false};
+  f.issued={native,continuous:{...result,derived_checkpoint:derived},continuous_result:result};
+  return f;
+}
+test('pixel-only retention keeps exactly four derived members and never invents polygon success',t=>{
+  const f=pixelFixture(t),result=run(f);assert.equal(result.status,0,result.stderr);
+  const descriptor=JSON.parse(result.stdout);assert.equal(descriptor.members.length,4);
+  assert.deepEqual(descriptor.members.map(row=>row.name),['checkpoint-routes.json','derived-certificate.json.gz','derived-facts.json','derived-publication.json']);
+  for(const row of descriptor.members)assert(fs.readFileSync(path.join(f.out,row.name)).equals(fs.readFileSync(path.join(f.source,row.name))));
+  assert.equal(f.issued.continuous_result.original_strict_polygon_result,undefined);
+});
+test('pixel-only retention rejects missing native evidence, mixed rosters and fabricated polygon claims',t=>{
+  for(const mutate of [f=>f.issued.native.repair_visibility.new_components=0,
+    f=>f.issued.native.repair_visibility.witnesses=[],f=>f.issued.native.repair_visibility.witnesses[0].previous_owner=1,
+    f=>f.issued.native.native_row_scope.changed_rows=[],f=>f.issued.native.lost_or_reassigned_cells=1,
+    f=>f.issued.continuous.original_strict_polygon_result={status:'no-new-regression',regressions:0},
+    f=>f.issued.continuous.regressions=0,f=>delete f.issued.continuous.scope,
+    f=>f.put('publication.json',bytes({})),f=>fs.unlinkSync(path.join(f.source,'checkpoint-routes.json'))]) {
+    const f=pixelFixture(t);mutate(f);const result=run(f);assert.notEqual(result.status,0);assert.deepEqual(fs.readdirSync(f.out),[]);
+  }
+});
+test('actual Python joint wrapper skips polygon consumer only for live explicit pixel scope',t=>{
+  const f=pixelFixture(t),runner=path.resolve('scripts/run-geographic-check.py');
+  Object.assign(f.issued,{kind:'trusted-selected-joint-comparison-v1',mode:'authenticated-checkpoint-append-v1',candidate_code_executed:false});
+  const code=`import importlib.util,json,pathlib,shutil,sys\nspec=importlib.util.spec_from_file_location('parent',sys.argv[1]);m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)\nissued=json.loads(sys.argv[5])\ndef child(command,**kwargs):\n    shutil.copytree(sys.argv[3],pathlib.Path(command[-2]));return json.dumps(issued).encode()\nm.subprocess.check_output=child\ndef polygons(*args,**kwargs): raise AssertionError('continuous polygons must not execute')\nm.consume_selected_continuous=polygons\nm.selected_consumer_allowance=lambda repo:256*1024*1024\nresult=m.selected_joint(pathlib.Path(sys.argv[2]),'a'*40,'b'*40,None,checkpoint_destination=pathlib.Path(sys.argv[4]))\nprint(json.dumps(result))`;
+  const result=spawnSync(process.env.PYTHON??'python3',['-I','-B','-c',code,runner,process.cwd(),f.source,f.out,JSON.stringify(f.issued)],{encoding:'utf8'});
+  assert.equal(result.status,0,result.stderr);const actual=JSON.parse(result.stdout);
+  assert.equal(actual.continuous_result.status,'not-applicable');assert.equal(actual.continuous_result.original_strict_polygon_result,undefined);
+  assert.equal(actual.checkpoint.members.length,4);
+});

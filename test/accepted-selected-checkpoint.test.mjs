@@ -272,3 +272,20 @@ test('prospective metadata admission refuses before fetching the second large co
   }}),/current allowance/);
   assert.equal(commitReads,1);
 });
+
+test('authenticated scoped pixel archive admits four members while legacy remains seven',()=>{
+  const f=checkpoint();
+  const continuousNames=['facts.json','operands.json.gz','publication.json'];
+  f.bodies=f.bodies.filter(([name])=>!continuousNames.includes(name));
+  f.report.checkpoint.members=f.report.checkpoint.members.filter(row=>!continuousNames.includes(row.name));
+  f.report.selected_continuous_report={scope:'visible-native-pixel-repair-v1',status:'not-applicable',regressions:null};
+  const {raw,zip}=encode(f),report=readReportArchive(zip,reportHash(raw));
+  assert.equal(geographicReportProducts(report).members.size,4);
+  for(const mutate of [x=>delete x.report.selected_continuous_report,
+    x=>x.report.selected_continuous_report.regressions=0,
+    x=>x.report.selected_continuous_report.original_strict_polygon_result={status:'no-new-regression'},
+    x=>x.bodies.push(['facts.json',json({})]),x=>x.report.checkpoint.members.pop()]) {
+    const altered=checkpoint();altered.bodies=f.bodies.map(([name,body])=>[name,body]);altered.report=structuredClone(f.report);mutate(altered);
+    const bad=encode(altered);assert.throws(()=>readReportArchive(bad.zip,reportHash(bad.raw)));
+  }
+});

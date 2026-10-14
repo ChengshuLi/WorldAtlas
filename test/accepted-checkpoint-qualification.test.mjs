@@ -294,8 +294,12 @@ function pack(f,mutate=()=>{}) {
     bodies.set(name,encoded);return {path:name,bytes:encoded.length,sha256:sha(encoded),
       ...(name.endsWith('.gz')?{decoded_bytes:decoded.length,decoded_sha256:sha(decoded)}:{})};};
   const certificate=put('derived-certificate.json.gz',p.certificate),routes=put('checkpoint-routes.json',p.census);
-  const cf=put('facts.json',p.continuousFacts),op=put('operands.json.gz',p.operands);
-  const cp={version:1,kind:'trusted-selected-continuous-comparison-v1',complete:true,facts:cf,operands:op};put('publication.json',cp);
+  let cp=null;
+  if (!p.pixelOnly) {
+    const cf=put('facts.json',p.continuousFacts),op=put('operands.json.gz',p.operands);
+    cp={version:1,kind:'trusted-selected-continuous-comparison-v1',complete:true,facts:cf,operands:op};put('publication.json',cp);
+  }
+  const names=p.pixelOnly?MEMBERS.filter(name=>!['facts.json','operands.json.gz','publication.json'].includes(name)):MEMBERS;
   const {runtime,caller_runtime,execution_runtimes,execution_code_inventory,...nativeInverse}=p.native;
   Object.assign(p.facts,{certificate,checkpoint_routes:routes,continuous_publication:cp,native_result_sha256:valueSha(nativeInverse)});
   const df=put('derived-facts.json',p.facts);
@@ -305,10 +309,10 @@ function pack(f,mutate=()=>{}) {
   const report={version:1,method_id:'worldatlas-trusted-geography-check-v1',baseline_commit:f.trusted,
     candidate_commit:f.trusted,trusted_code_commit:f.trusted,candidate_code_executed:false,published:false,
     source_approval:false,gate_status:'passed',status:'no-new-regression',selected_native_report:p.native,
-    selected_continuous_report:p.continuous,checkpoint:{version:1,kind:'selected-checkpoint-products-v1',members:MEMBERS.map(name=>{
+    selected_continuous_report:p.continuous,checkpoint:{version:1,kind:'selected-checkpoint-products-v1',members:names.map(name=>{
       const raw=bodies.get(name),decoded=name.endsWith('.gz')?name.startsWith('derived')?valueBytes(p.certificate):valueBytes(p.operands):null;
       return {name,bytes:raw.length,sha256:sha(raw),...(decoded?{decoded_bytes:decoded.length,decoded_sha256:sha(decoded)}:{})};})}};
-  const raw=valueBytes(report);return {report,raw,zip:zipMembers([['geography-check.json',raw],...MEMBERS.map(name=>[name,bodies.get(name)])])};
+  const raw=valueBytes(report);return {report,raw,zip:zipMembers([['geography-check.json',raw],...names.map(name=>[name,bodies.get(name)])])};
 }
 async function acquire(f,mutate) {
   const p=pack(f,mutate), request='01234567-abcd-4321-aaaa-123456789012',head=f.trusted,baseline=f.trusted,
@@ -514,4 +518,47 @@ test('accepted five-source custody joins complete real-order projections to lexi
     p=>p.continuousFacts.source_custody.baseline.actual_inputs[0].whole_body_consumed=false,
   ]){const a=await acquire(f,mutate);await assert.rejects(qualify(f,a),/source (input custody|body mode\/OID\/hash)/);
     f.transport.releaseAcceptedCheckpoint(a.handle);}
+});
+
+
+// Synthetic accepted-result fixture: these controls exercise transport/admission
+// and do not claim to rerun an actual historical pixel repair or polygon test.
+async function pixelProducts(t) {
+  const f=await acceptedProducts(t),p=f.products;
+  p.pixelOnly=true;
+  const before={...p.facts.candidate_selection,additive_release:{path:'data/previous-sidecar.json',bytes:1,sha256:'9'.repeat(64)}};
+  p.facts.validation_stage='native-passed-continuous-not-applicable';
+  p.facts.repair_components=['old'];p.facts.baseline_selection=before;
+  p.facts.transition_plan.changed_ids=['A'];
+  p.facts.transition_plan.source_bindings.baseline.selection=before;
+  p.native.baseline_selection=before;p.native.affected_rows=1;
+  p.native.native_row_scope.changed_rows=[1];
+  p.native.repair_visibility={new_components:1,witnesses:[{component_id:'old',
+    geometry_sha256:f.ledger.rows[0].geometry_sha256,x:2,y:1,previous_owner:0,candidate_owner:1}]};
+  p.continuous={version:1,kind:'trusted-selected-continuous-comparison-v1',candidate_code_executed:false,
+    complete_owners:3,changed_ids:['A'],status:'not-applicable',scope:'visible-native-pixel-repair-v1',regressions:null};
+  return f;
+}
+test('accepted four-member pixel checkpoint supports successor state without continuous operands',async t=>{
+  const f=await pixelProducts(t),a=await acquire(f),result=await qualify(f,a);
+  assert.equal(result.available,true);assert.equal(result.state.certificate.entries.length,3);
+  assert.equal(result.state.additions.length,1);assert.equal(result.state.additions[0].component_id,'old');
+  const next=new f.native.ImmutableReader(f.root,f.trusted,{allowance:a.reader.allowance,budget:a.reader.budget});
+  const transition=f.api.qualifyTransition({state:result.state,reader:next,budget:a.budget});
+  assert.equal(transition.available,true);assert.deepEqual(transition.changedIds,[]);
+  assert.deepEqual(f.api.projectNativeRows({state:transition.candidate,rows:[1],budget:a.budget}).rows,[{y:1,runs:[[0,1,2]]}]);
+  f.api.releaseCheckpoint(result.state);f.transport.releaseAcceptedCheckpoint(a.handle);
+});
+test('accepted pixel checkpoint rejects coherently rehashed missing or foreign native visibility and owner scope',async t=>{
+  const f=await pixelProducts(t);
+  for(const mutate of [p=>p.native.repair_visibility.new_components=0,
+    p=>p.native.repair_visibility.witnesses=[],p=>p.native.repair_visibility.witnesses[0].candidate_owner=2,
+    p=>p.native.repair_visibility.witnesses[0].geometry_sha256='b'.repeat(64),
+    p=>p.native.repair_visibility.witnesses[0].previous_owner=1,p=>p.native.native_row_scope.changed_rows=[],
+    p=>p.facts.repair_components=['foreign'],p=>p.facts.transition_plan.changed_ids=['B'],
+    p=>p.continuous.complete_owners=2,p=>p.facts.baseline_selection=p.facts.candidate_selection,
+    p=>delete p.facts.executing_policy,p=>p.census.routes.pop()]) {
+    const a=await acquire(f,mutate);
+    await assert.rejects(()=>qualify(f,a));f.transport.releaseAcceptedCheckpoint(a.handle);
+  }
 });

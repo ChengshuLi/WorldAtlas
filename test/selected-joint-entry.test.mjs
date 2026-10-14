@@ -119,3 +119,58 @@ test('derived output union is admitted before complete serialization or compress
   assert.throws(() => f.joint.planDerivedOutput(certificate, facts, 30, 50), /before serialization/);
   assert.throws(() => f.joint.planDerivedOutput(certificate, facts, 4096, 4096), /prospective/);
 });
+
+test('pixel-only profile reads actual baseline-to-candidate modes and paths', async t => {
+  const f = await trustedFixture(t);
+  const baseline = f.git('rev-parse','HEAD').toString().trim();
+  f.save('data/ownership-selection.json', {...f.selection, fixture_pointer_change:true});
+  f.save('coordination/engineering/pixel-fixture/receipt.json', {fixture:true});
+  const candidate = f.commit();
+  assert.equal(f.joint.pixelRepairOnlyDiff(f.reader, baseline, candidate), true);
+  assert.equal(f.joint.pixelRepairOnlyDiff(f.reader, candidate, candidate), false);
+  for (const name of ['scripts/code.mjs','data/source.json','data/hierarchy.json',
+    'coordination/engineering/pixel-fixture/code.py','coordination/engineering/pixel-fixture/package.json']) {
+    f.save(name, {changed:true}); const outside = f.commit();
+    assert.equal(f.joint.pixelRepairOnlyDiff(f.reader, baseline, outside), false, name);
+  }
+});
+
+test('pixel-only profile rejects modified old evidence, deletion, renaming and executable data', async t => {
+  for (const action of ['modify','delete','rename','mode']) {
+    const f = await trustedFixture(t);
+    const name='coordination/engineering/pixel-fixture/receipt.json';
+    f.save(name,{old:true});const baseline=f.commit();
+    f.save('data/ownership-selection.json',{...f.selection,fixture_pointer_change:true});
+    if(action==='modify')f.save(name,{new:true});
+    if(action==='delete')fs.unlinkSync(path.join(f.root,name));
+    if(action==='rename')fs.renameSync(path.join(f.root,name),path.join(f.root,name+'.gz'));
+    if(action==='mode')fs.chmodSync(path.join(f.root,name),0o755);
+    const candidate=f.commit();
+    assert.equal(f.joint.pixelRepairOnlyDiff(f.reader,baseline,candidate),false,action);
+  }
+});
+
+test('pixel scope joins every real native witness to component, geometry, target and complete changed rows', async t => {
+  const f=await trustedFixture(t);
+  const additions=[{component_id:'new',target_id:'A',pixelIndex:1,disposition:'assigned',native_cells:1,geometry_sha256:'a'.repeat(64)}];
+  const native={method:'selected-native-owner-conservation-v1',status:'no-new-native-loss',candidate_code_executed:false,
+    lost_or_reassigned_cells:0,intervals:[],affected_rows:1,
+    native_row_scope:{proof:'shared-qualified-complete-base-and-cumulative-patch',changed_rows:[1]},
+    repair_visibility:{new_components:1,witnesses:[{component_id:'new',geometry_sha256:'a'.repeat(64),
+      x:2,y:1,previous_owner:0,candidate_owner:1}]}};
+  const scope={componentIds:['new'],changedIds:['A'],changedRows:[1],size:4};
+  f.api.validatePixelRepairNative(native,additions,scope);
+  for(const mutate of [
+    n=>n.repair_visibility.new_components=0,n=>n.repair_visibility.witnesses=[],
+    n=>n.repair_visibility.witnesses[0].component_id='sibling',n=>n.repair_visibility.witnesses[0].geometry_sha256='b'.repeat(64),
+    n=>n.repair_visibility.witnesses[0].candidate_owner=2,n=>n.repair_visibility.witnesses[0].previous_owner=2,
+    n=>n.repair_visibility.witnesses[0].y=2,n=>n.repair_visibility.witnesses[0].x=4,
+    n=>n.native_row_scope.changed_rows=[],n=>n.native_row_scope.proof='caller-declaration',
+    n=>n.affected_rows=0,n=>n.lost_or_reassigned_cells=1,n=>n.candidate_code_executed=true]) {
+    const altered=structuredClone(native);mutate(altered);
+    assert.throws(()=>f.api.validatePixelRepairNative(altered,additions,scope));
+  }
+  for(const extra of [{componentIds:[]},{changedIds:[]},{changedIds:['B']},{changedRows:[1,2]},{changedRows:[1,1]}])
+    assert.throws(()=>f.api.validatePixelRepairNative(native,additions,{...scope,...extra}));
+  assert.throws(()=>f.api.validatePixelRepairNative(native,[{...additions[0],native_cells:0}],scope));
+});

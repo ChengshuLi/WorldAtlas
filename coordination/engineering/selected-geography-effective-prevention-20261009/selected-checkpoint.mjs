@@ -585,6 +585,7 @@ function admitDerivedCheckpoint(session,reader,archiveReader,accepted) {
     && same(continuous.issued_publication,continuousPublication),
   'Accepted checkpoint lacks its original successful strict polygon result');
   const codePaths=facts.execution_code?.map(p=>p.path);
+  if (pixelOnly) demand(same(codePaths,VISIBLE_DERIVED_CODE), 'Pixel-only acceptance requires the actual native visibility execution closure');
   supported(seedRoot && (same(codePaths,JOINT_NATIVE_CODE)||same(codePaths,VISIBLE_JOINT_NATIVE_CODE))
     || same(codePaths,DERIVED_CODE)||same(codePaths,VISIBLE_DERIVED_CODE),
     'Unsupported accepted joint method closure');
@@ -637,7 +638,8 @@ function admitDerivedCheckpoint(session,reader,archiveReader,accepted) {
   completeRows(rebind.request.acquisition.predecessor_rows,manifest.size,certificate.entries.length);
   const plan=facts.transition_plan, ids=plan?.required_ids;
   if (pixelOnly) {
-    demand(plan?.kind === 'complete-selected-continuous-plan-v1' && plan.version === 1
+    demand(!same(facts.baseline_selection, facts.candidate_selection)
+      && plan?.kind === 'complete-selected-continuous-plan-v1' && plan.version === 1
       && same(plan.source_bindings?.candidate, certificate.binding)
       && same(plan.source_bindings?.baseline.selection, facts.baseline_selection)
       && same(plan.changed_ids, continuous.changed_ids), 'Pixel-only certificate transition binding differs');

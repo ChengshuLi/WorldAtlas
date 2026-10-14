@@ -64,8 +64,8 @@ def pixel_only_result(issued):
     witnesses = visibility.get('witnesses')
     rows = native.get('native_row_scope', {}).get('changed_rows')
     if (result.get('kind') != 'trusted-selected-continuous-comparison-v1'
-            or result.get('status') != 'not-applicable' or result.get('regressions') is not None
-            or result.get('issued_publication') is not None or 'original_strict_polygon_result' in result
+            or result.get('status') != 'not-applicable' or 'regressions' not in result or result['regressions'] is not None
+            or 'issued_publication' not in result or result['issued_publication'] is not None or 'original_strict_polygon_result' in result
             or result.get('candidate_code_executed') is not False
             or native.get('status') != 'no-new-native-loss'
             or native.get('method') != 'selected-native-owner-conservation-v1'
