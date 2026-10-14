@@ -314,19 +314,21 @@ export async function prepareIntegration(options) {
     let proof = null, proofUnavailable = null;
     try { proof = await integrationProof({...options, head: state.pr.head.sha, profile, testSelection: selection?.test_selection, onUnavailable: value => {proofUnavailable = value;},
       baseline: baseline ?? await tree(options.api, options.repo, state.base), authored, candidate: integrated}); } catch { proofUnavailable = {reason: 'proof-read-unavailable'}; /* isolated tests remain required */ }
+    const software = candidateGeographyCode(profile, state.files, selection?.test_selection);
+    const codeCommit = software ? candidate : state.base;
     let geographyProof = null;
-    if (!candidateGeographyCode(profile, state.files, selection?.test_selection) && proof && options.geographyProofLoader) {
+    if (proof && options.geographyProofLoader) {
       try {
         const loaded = await options.geographyProofLoader({api: options.api, repo: options.repo,
-          number: options.number, head: state.pr.head.sha, baseline: state.base, proof});
+          number: options.number, head: state.pr.head.sha, baseline: state.base, codeCommit, proof});
         if (loaded) {
           bindGeographyProof(loaded.source, {proof, number: options.number, head: state.pr.head.sha, baseline: state.base});
-          checkGeographicReport(loaded.report, state.base, loaded.source.candidate_commit ?? state.pr.head.sha);
+          checkGeographicReport(loaded.report, state.base, loaded.source.candidate_commit ?? state.pr.head.sha, codeCommit);
           geographyProof = loaded.source;
         }
       } catch { /* A missing original report never discards valid regression proof or waives fresh geography. */ }
     }
-    return {...state, candidate, profile, ...selection, geography_software: candidateGeographyCode(profile, state.files, selection?.test_selection), proof, proof_unavailable: proofUnavailable, geography_proof: geographyProof,
+    return {...state, candidate, profile, ...selection, geography_software: software, proof, proof_unavailable: proofUnavailable, geography_proof: geographyProof,
       candidate_refresh_attempts: fresh.attempts, candidate_ref: fresh.reference};
   } catch (error) {
     if (fresh.reference) {
@@ -385,7 +387,6 @@ export async function completeIntegration(options) {
   const geography = await options.geographyReportLoader({api: options.api});
   const geographicCandidate = geographyProof ? geographyProof.candidate_commit ?? state.pr.head.sha : options.testedCandidate;
   const software = candidateGeographyCode(profile, state.files, selection?.test_selection);
-  need(!software || !geographyProof, 'Changed checker code requires fresh candidate geography');
   const codeCommit = software ? options.testedCandidate : state.base;
   const waterPass = checkGeographicReport(geography, state.base, geographicCandidate, codeCommit);
   const geographicSource = geographyProof ?? geographicReportProducts(geography)?.source;

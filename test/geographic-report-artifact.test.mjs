@@ -317,6 +317,42 @@ test('combined geography receipt rejects foreign tree, stale parents and relabel
 });
 
 
+
+function softwareTransport(changeReport = value => value) {
+  return combinedTransport(report => changeReport({...report, trusted_code_commit: report.candidate_commit,
+    candidate_code_executed: true, trusted_code_inventory_sha256: 'f'.repeat(64)}));
+}
+test('original software archive loads only with trusted exact candidate code identity', async () => {
+  const f = softwareTransport();
+  await assert.rejects(prepareGeographyProof(f.options), /exact trusted combined check/);
+  const result = await prepareGeographyProof({...f.options, codeCommit: f.commit.sha});
+  assert.equal(result.source.candidate_commit, f.commit.sha);
+  assert.equal(result.report.trusted_code_commit, f.commit.sha);
+  assert.equal(result.report.candidate_code_executed, true);
+  assert.equal(geographicReportProducts(result.report).source.report_sha256, result.source.report_sha256);
+  const baseline = combinedTransport();
+  await assert.rejects(prepareGeographyProof({...baseline.options, codeCommit: baseline.commit.sha}), /exact trusted combined check/);
+  await assert.rejects(prepareGeographyProof({...f.options, codeCommit: 'e'.repeat(40)}), /Unsupported geographic checker/);
+});
+test('software original custody and pins remain mandatory with explicit candidate code', async () => {
+  for (const mutate of [f => {f.commit.tree.sha = 'e'.repeat(40);}, f => {f.commit.parents.reverse();},
+    f => {f.commit.parents[0].sha = 'e'.repeat(40);}, f => {f.commit.parents[1].sha = 'e'.repeat(40);},
+    f => {f.artifact.id++;}, f => {f.artifact.workflow_run.id++;},
+    f => {f.artifact.workflow_run.head_sha = 'e'.repeat(40);}, f => {f.artifact.digest = 'sha256:' + 'e'.repeat(64);},
+    f => {f.zip = archive(Buffer.from('{}'));},
+    f => {f.log = Buffer.from(f.log.toString().replace('"report_sha256":"', '"report_sha256":"0'));}]) {
+    const f = softwareTransport(); mutate(f);
+    await assert.rejects(prepareGeographyProof({...f.options, codeCommit: f.commit.sha}));
+  }
+  for (const mutation of [{trusted_code_commit: 'e'.repeat(40)}, {candidate_commit: 'e'.repeat(40)},
+    {baseline_commit: 'e'.repeat(40)}, {candidate_code_executed: false}, {trusted_code_inventory_sha256: ''},
+    {checkpoint: {}}, {reused_baseline_proof: {}}, {unchanged_selected_inputs: {}}]) {
+    const f = softwareTransport(report => ({...report, ...mutation}));
+    await assert.rejects(prepareGeographyProof({...f.options, codeCommit: f.commit.sha}));
+  }
+});
+
+
 test('carried producer keeps original custody when step projections are absent or stale', async () => {
   for (const steps of [undefined, [], [{name: 'old checker label', status: 'in_progress', conclusion: null}]]) {
     const f = carriedTransport(); f.jobs[0].steps = steps;

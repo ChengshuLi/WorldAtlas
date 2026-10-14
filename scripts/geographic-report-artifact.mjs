@@ -301,7 +301,7 @@ export async function validateGeographyOrigin(options) {
   await validatePRGeographyCandidate(options);
 }
 
-export async function prepareGeographyProof({api, repo, number, head, baseline, proof, token, fetchImpl = fetch}) {
+export async function prepareGeographyProof({api, repo, number, head, baseline, codeCommit = baseline, proof, token, fetchImpl = fetch}) {
   if (!proof?.geography_job_id) return null;
   need(/^[-\w.]+\/[-\w.]+$/.test(repo ?? '') && positive(number) && positive(proof.geography_job_id) &&
     positive(proof.run_id) && positive(proof.run_attempt) && commit(proof.tree) && commit(head) && commit(baseline),
@@ -328,7 +328,7 @@ export async function prepareGeographyProof({api, repo, number, head, baseline, 
   }
   const report = await loadGeographicReport({api, repo, runId: source.run_id, artifactName: source.artifact_name,
     expectedHash: source.report_sha256, source, token, fetchImpl});
-  if (receipt.candidate_commit) checkGeographicReport(report, baseline, source.candidate_commit);
+  if (receipt.candidate_commit) checkGeographicReport(report, baseline, source.candidate_commit, codeCommit);
   return {source, report};
 }
 
