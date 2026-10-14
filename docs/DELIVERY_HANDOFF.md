@@ -376,3 +376,31 @@ destination rather than replacing an existing completed product.
 
 Standalone preparation retains its existing receipt/configuration contract.
 Published legacy receipts remain supported by their existing consumers.
+
+### Modern source-target package finalization
+
+The existing `package` and `finalize` commands accept both retained issued-rule
+custody and `source-target-native-custody-v1`, including mixed registries.
+Modern roles follow the closed whole-body reads in
+`qualifySourceTargetNativeAuthority`: original evidence and native patch,
+retained catalogue, measured physical inputs/evidence/reproducer, native
+latitudes, owner roster, complete declared source-family parts, and optional
+accepted membership index/lineage/parts. The final sidecar's actual base manifest,
+owner roster, selected ledger, patch and envelope are also package inputs.
+No nested pin walk, physical reproducer execution or additional science is
+performed by metadata finalization. GIS operands inside retained reports or
+contracts do not become runtime inputs merely because they contain descriptors.
+
+The runtime envelope may be direct or under its producer's `additiveRelease`
+wrapper. Its public `additive-repairs/<flat-name>` aliases remain distinct from
+the committed Git paths in the sidecar; their whole encoded/decoded identities
+must agree. Existing accepted package declarations and policy fields remain
+unchanged, with only exact uncovered consumed paths appended. Original selector
+key ordering and repeated finalized bytes remain preserved.
+
+Smoke expectations use the existing representation-specific schema:
+`native_rows_sha256` for native-only components, `geometry_sha256` for literal
+geometry components. These hashes come from original normalized ledger rows.
+`selected-delivery-expectations.json` remains a checkout-only verification file,
+not an additional runtime package input. Actual authority qualification, current
+rebind, package/consumer validation, review and publication gates still apply.
