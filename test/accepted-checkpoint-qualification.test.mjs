@@ -5,6 +5,7 @@ import path from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {execFileSync} from 'node:child_process';
 import {gzipSync,gunzipSync,crc32,deflateRawSync} from 'node:zlib';
+import {trustedFixture as trustedNativeFixture} from './helpers/selected-joint-fixture.mjs';
 import {ACCEPTED_CHECKPOINT_CODE} from '../scripts/accepted-selected-checkpoint.mjs';
 import {renderWorkerResult} from '../scripts/worker-result.mjs';
 import {createHash} from 'node:crypto';
@@ -234,8 +235,8 @@ const JSON_BODY=valueBytes;
 const P='coordination/engineering/selected-geography-effective-prevention-20261009/';
 const {JOINT_CODE:JOINT}=await import('../coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs');
 const MEMBERS=['derived-certificate.json.gz','derived-facts.json','derived-publication.json','checkpoint-routes.json'];
-async function acceptedProducts(t,{sourcePaths,actualProducer=false}={}) {
-  const f=await trustedFixture(t,{sourcePaths});
+async function acceptedProducts(t,{sourcePaths,actualProducer=false,nativeOnly=false}={}) {
+  const f=nativeOnly?await trustedNativeFixture(t,{nativeOnly:true}):await trustedFixture(t,{sourcePaths});
   for(const name of [...JOINT,...(actualProducer?['scripts/check-geographic-regression.py','scripts/evidence/immutable.py','scripts/evidence/geometry.py','scripts/ellipsoidal_area.py','requirements.txt']:[])])f.save(name,fs.readFileSync(name));
   f.save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',checkpoints:[f.rootRow]});
   const trusted=f.commit();
@@ -559,4 +560,24 @@ test('historical advancement rejects a local tree inconsistent with accepted pro
   const baseline=successorSelector(f);a.reader=currentReader(f,a,baseline);
   await assert.rejects(qualify(f,a),/historical checkpoint tree differs/);
   f.transport.releaseAcceptedCheckpoint(a.handle);
+});
+
+
+test('actual native-only joint products survive Python retention and fresh accepted archive qualification',async t=>{
+ const f=await acceptedProducts(t,{actualProducer:true,nativeOnly:true}),a=await acquire(f);
+ // All producer state handles have been released. Admit the independently
+ // transported actual products, without adding a new static checkpoint root.
+ f.save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',checkpoints:[]});f.commit();
+ const result=await qualify(f,a);assert.equal(result.available,true);
+ assert.equal(result.state.accepted_execution.kind,'accepted-selected-checkpoint-artifact-v1');
+ const native=result.state.additions.find(row=>row.representation==='native-cells');
+ assert.equal(native.target_id,'B');assert.equal(Object.hasOwn(native,'geometry'),false);
+ assert.deepEqual(native.native_rows,[{y:2,runs:[[2,3,2]]}]);
+ assert.deepEqual(result.state.certificate,f.products.certificate);
+ assert.deepEqual(result.state.certificate.entries.find(row=>row[0]==='B')[9],[[1,0,10,20]]);
+ assert.deepEqual(result.state.patch.rows,[{y:1,runs:[[2,3,1]]},{y:2,runs:[[2,3,2]]}]);
+ const reader=new f.native.ImmutableReader(f.root,f.trusted,{allowance:a.reader.allowance,budget:a.reader.budget});
+ const transition=f.api.qualifyTransition({state:result.state,reader,budget:a.budget});
+ assert.equal(transition.available,true);assert.deepEqual(transition.changedNativeRows,[]);
+ f.api.releaseCheckpoint(result.state);f.transport.releaseAcceptedCheckpoint(a.handle);
 });

@@ -6,6 +6,7 @@ import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
 import {ImmutableReader, NativeAssetImage, decodeVisibilityLatitudes} from '../../../scripts/check-effective-geographic-regression.mjs';
+import {nativeOnlyComponent} from '../../../src/native-grid.js';
 import {unshuffleOwnershipBytes} from '../../../src/ownership-codec.js';
 import {valueBytes, valueSha, coordinateBounds, nativeBaseSelection,
   normaliseRetainedRepairLedger, readRetainedRegistryAuthority, validateSupportedProgrammeCatalogue,
@@ -30,7 +31,19 @@ const sha = body => createHash('sha256').update(body).digest('hex');
 // selected scientific vintage. Keep its archived census entry, but do not make
 // accepted programme additions look like changed source/native input bytes.
 const PROGRAMME_POLICY = 'coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json';
-const sameScientificRoutes = (reader,routes) => routes.every(p => p.path === PROGRAMME_POLICY || treeRoute(reader,p.path) === p.tree);
+const sameScientificRoutes = (reader,routes,executablePaths) => routes.every(p => p.path === PROGRAMME_POLICY
+  || executablePaths.has(p.path) || treeRoute(reader,p.path) === p.tree);
+// Older route censuses excluded .mjs/.py but also retained executable .js.
+// Keep the complete archived census. Identify code by its authenticated executed
+// role and whole bytes, never by an extension, changed-file list or new hashes.
+function acceptedExecutablePaths(session,inventory,facts,policy) {
+  const roles=[...facts.execution_code,...policy.programs.flatMap(p=>[...p.source_executed_code,...p.native_executed_code]),
+    ...policy.current_rebind_migrations.flatMap(p=>[...p.historical_code,...p.current_code])];
+  const identity=p=>valueSha([p.path,p.bytes,p.sha256]);
+  const bodies=new Set(roles.map(identity));
+  const paths=new Set(inventory.filter(p=>hash(p.sha256)&&bodies.has(identity(p))).map(p=>p.path));
+  retain(session,[...paths]);return paths;
+}
 const same = (a,b) => a === undefined || b === undefined ? a === b : valueSha(a) === valueSha(b);
 const hash = x => typeof x === 'string' && /^[a-f0-9]{64}$/.test(x);
 const commit = x => typeof x === 'string' && /^[a-f0-9]{40}$/.test(x);
@@ -150,7 +163,7 @@ function rootCatalogue(session, reader, {accepted = false} = {}) {
   'Unknown trusted checkpoint catalogue');
   const expectedPaths = [MODULE,
     'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs',
-    'scripts/check-effective-geographic-regression.mjs','src/ownership-codec.js'];
+    'scripts/check-effective-geographic-regression.mjs','src/native-grid.js','src/ownership-codec.js'];
   // HEAD owns current code identity; the catalogue records historical science.
   // Keep authenticating the actual executable bytes without a second hash ledger.
   for (const name of [...expectedPaths, ...(accepted ? ACCEPTED_CODE : [])]) {
@@ -308,17 +321,12 @@ export function qualifyCheckpoint({reader,checkpointId,budget}) {
     demand(retained && same(retained.facts,facts) && same(retained.publication,publication)
       && same(facts.binding.selection,selected.selection), 'Accepted checkpoint detached custody differs');
     const rebind = rebindProducts(session,reader,selected.ledger);
-    demand(same(rebind.request.base_selection,nativeBaseSelection(selected.selection))
-      && rebind.request.authority_registry_sha256 === valueSha(selected.registry)
-      && same(rebind.result.native.rows,selected.patch.rows), 'Accepted checkpoint rebind/native selection differs');
-    const additions = [...selected.normalized.rows.values()].map(row => {
-      const target = rebind.request.current_targets.find(p => p.target_id === row.target_id);
-      demand(target && target.pixelIndex === row.pixelIndex, 'Accepted current target identity omitted');
-      return {...row,base_geometry:target.geometry,base_geometry_sha256:target.geometry_sha256};
-    });
+    const manifest = readNamed(session,reader,selected.selection.manifest_path,selected.selection.sha256);
+    const oldAuthorities=acceptedAuthorities(session,reader,selected);
+    acceptedRebindCheck(selected,rebind,oldAuthorities,manifest.size,certificate.entries.length);
+    const additions=checkpointAdditions(selected,rebind.request.current_targets);
     demand(same(additions,retained.effective_additions), 'Accepted original ledger/normalized additions differ');
     coordinateCheck(certificate,facts,additions);
-    const manifest = readNamed(session,reader,selected.selection.manifest_path,selected.selection.sha256);
     completeRows(selected.patch.rows,manifest.size,certificate.entries.length);
     completeRows(rebind.request.current_rows,manifest.size,certificate.entries.length);
     demand(same(selected.ledger.current_targets,rebind.request.current_targets), 'Accepted complete target roster differs');
@@ -344,14 +352,15 @@ export function qualifyCheckpoint({reader,checkpointId,budget}) {
       supported(priorPolicy[key].every(row => current.has(valueSha(row))),
         'Trusted producer policy no longer preserves accepted eligibility');
     }
-    supported(sameScientificRoutes(reader,routes), 'Accepted checkpoint input or routing alternative changed');
+    session.executablePaths=acceptedExecutablePaths(session,retained.inventory,facts,priorPolicy);
+    supported(sameScientificRoutes(reader,routes,session.executablePaths), 'Accepted checkpoint input or routing alternative changed');
     // All genuine old complete records remain in the state, including exceptions.
     const data = {version:1,kind:'verified-selected-state-v1',selected_commit:reader.version,
       accepted_execution:{accepted_head:root.accepted_head,execution_commit:root.execution_commit,
         historical_selected_commit:root.selected_commit,checkpoint_id:root.id,trusted_catalogue_commit:trusted},
       selection:selected.selection,baseSelection:nativeBaseSelection(selected.selection),certificate,
       additions,ledger:selected.ledger,registry:selected.registry,patch:selected.patch,manifest};
-    return finishCheckpoint(session,reader,{data,routes,rebind,selected,root});
+    return finishCheckpoint(session,reader,{data,routes,rebind,selected,root,oldAuthorities});
   } catch (error) {
     session.closed = true;
     if (error.reuseUnavailable) return unavailable(error.message);
@@ -359,12 +368,18 @@ export function qualifyCheckpoint({reader,checkpointId,budget}) {
   }
 }
 
-function finishCheckpoint(session,reader,{data,routes,rebind,selected,root,carriedCertificate=false}) {
+function acceptedAuthorities(session,reader,selected) {
   const oldAuthorities = new Map();
   // Read only original small patch products already accepted by the checkpoint.
   // No original source/native qualification or selected acquisition is repeated.
   for (const entry of selected.registry.entries) {
     const binding = readBody(session,reader,entry.source_authority);
+    if (binding.kind === 'source-target-native-custody-v1') {
+      keys(binding,'version,kind,source_evidence,native_patch','Unknown accepted native source custody');
+      demand(binding.version===1,'Unknown accepted native source custody version');
+      oldAuthorities.set(entry.authority_sha256,{entry,nativeOnly:true,patches:[readBody(session,reader,binding.native_patch)]});
+      continue;
+    }
     const publication = readBody(session,reader,binding.native_proof.publication);
     demand(publication.assets.length === binding.native_proof.assets.length, 'Accepted native asset roster differs');
     const patches = [];
@@ -377,10 +392,36 @@ function finishCheckpoint(session,reader,{data,routes,rebind,selected,root,carri
     demand(patches.length > 0, 'Accepted native authority has no complete patches');
     oldAuthorities.set(entry.authority_sha256,{entry,patches});
   }
+  return oldAuthorities;
+}
+function legacyRegistry(registry,authorities) {
+  return {...registry,entries:registry.entries.filter(entry=>!authorities.get(entry.authority_sha256).nativeOnly)};
+}
+function checkpointAdditions(selected,currentTargets) {
+  return [...selected.normalized.rows.values()].map(row=>{
+    // Native cells bind their own current pointset and exact interval custody.
+    if (nativeOnlyComponent(row,valueSha)) return row;
+    const target=currentTargets.find(p=>p.target_id===row.target_id);
+    demand(target && target.pixelIndex===row.pixelIndex,'Accepted current target identity omitted');
+    return {...row,base_geometry:target.geometry,base_geometry_sha256:target.geometry_sha256};
+  });
+}
+function acceptedRebindCheck(selected,rebind,authorities,size,owners) {
+  const legacy=[...authorities.values()].filter(proof=>!proof.nativeOnly).flatMap(proof=>proof.patches);
+  demand(same(rebind.request.base_selection,nativeBaseSelection(selected.selection))
+    && rebind.request.authority_registry_sha256===valueSha(legacyRegistry(selected.registry,authorities))
+    && same(rebind.result.native.rows,mergePatchRows(legacy,size,owners))
+    && same(selected.patch.rows,mergePatchRows([...authorities.values()].flatMap(proof=>proof.patches),size,owners)),
+  'Accepted checkpoint rebind/native selection differs');
+}
+function finishCheckpoint(session,reader,{data,routes,rebind,selected,root,oldAuthorities,carriedCertificate=false}) {
+  // Every authority patch remains live, including native-only bodies. Only
+  // the historical rebind denominator excludes native-only source custody.
   const originalPatches = [...oldAuthorities.values()].flatMap(p => p.patches);
+  const legacyPatchHashes = [...oldAuthorities.values()].filter(p=>!p.nativeOnly).flatMap(p=>p.patches.map(valueSha));
   const nativeRows = new Map(rebind.request.current_rows.map(p => [p.y,p]));
   for (const row of rebind.request.acquisition.predecessor_rows) nativeRows.set(row.y,row);
-  demand(same(originalPatches.map(valueSha),rebind.request.original_patch_sha256s), 'Accepted complete original patch denominator differs');
+  demand(same(legacyPatchHashes,rebind.request.original_patch_sha256s), 'Accepted complete original patch denominator differs');
   if (carriedCertificate) {
     const {certificate,...newData}=data;
     retain(session,{data:newData,rebind,originalPatches});
@@ -555,16 +596,10 @@ function admitDerivedCheckpoint(session,reader,archiveReader,accepted) {
     patch_sha256:valueSha(selected.patch),manifest_sha256:valueSha(manifest)}),
   'Accepted checkpoint changed the complete ledger/registry/patch/manifest');
   const rebind=rebindProducts(session,reader,selected.ledger);
-  demand(same(rebind.request.base_selection,nativeBaseSelection(selected.selection))
-    && rebind.request.authority_registry_sha256===valueSha(selected.registry)
-    && same(rebind.result.native.rows,selected.patch.rows)
-    && same(selected.ledger.current_targets,rebind.request.current_targets),
-  'Accepted checkpoint current-base/native/target roster differs');
-  const additions=[...selected.normalized.rows.values()].map(row=>{
-    const target=rebind.request.current_targets.find(p=>p.target_id===row.target_id);
-    demand(target && target.pixelIndex===row.pixelIndex, 'Accepted current target identity omitted');
-    return {...row,base_geometry:target.geometry,base_geometry_sha256:target.geometry_sha256};
-  });
+  const oldAuthorities=acceptedAuthorities(session,reader,selected);
+  acceptedRebindCheck(selected,rebind,oldAuthorities,manifest.size,certificate.entries.length);
+  demand(same(selected.ledger.current_targets,rebind.request.current_targets), 'Accepted complete target roster differs');
+  const additions=checkpointAdditions(selected,rebind.request.current_targets);
   coordinateCheck(certificate,{binding:certificate.binding,complete_owners:certificate.entries.length,
     complete_sources:certificate.binding.sources.length},additions);
   demand(same(certificate.inputs.map(p=>p.source),certificate.binding.sources), 'Accepted complete source binding inventory differs');
@@ -629,7 +664,8 @@ function admitDerivedCheckpoint(session,reader,archiveReader,accepted) {
     supported(priorPolicy[key].every(row=>current.has(valueSha(row))),
       'Trusted producer policy no longer preserves accepted eligibility');
   }
-  supported(sameScientificRoutes(reader,census.routes), 'Accepted checkpoint input or routing alternative changed');
+  session.executablePaths=acceptedExecutablePaths(session,Object.values(inventories).flat(),facts,priorPolicy);
+  supported(sameScientificRoutes(reader,census.routes,session.executablePaths), 'Accepted checkpoint input or routing alternative changed');
   const data={version:1,kind:'verified-selected-state-v1',selected_commit:reader.version,
     accepted_execution:seedRoot?{kind:'trusted-main-derived-selected-checkpoint-v1',checkpoint_id:seedRoot.id,
       accepted_head:seedRoot.accepted_head,execution_commit:facts.executing_commit,
@@ -642,7 +678,7 @@ function admitDerivedCheckpoint(session,reader,archiveReader,accepted) {
     additions,ledger:selected.ledger,registry:selected.registry,patch:selected.patch,manifest};
   // accepted products already belong to the explicitly carried transport
   // allowance. Retain only newly acquired state/patch products, not a resolver.
-  return finishCheckpoint(session,reader,{data,routes:census.routes,rebind,selected,root:null,carriedCertificate:true});
+  return finishCheckpoint(session,reader,{data,routes:census.routes,rebind,selected,root:null,oldAuthorities,carriedCertificate:true});
 }
 
 /** Exact already-consumed executing policy, for durable successor custody. */
@@ -855,7 +891,7 @@ function appendAuthority(session, reader, entry) {
   child.inventory=reader.inventory; // retain actual appended-producer inputs without reopening them
   const proof = readRetainedRegistryAuthority(child,entry);
   session.floor = reader.used;
-  return {entry,patches:proof.native_proof.native_patches,ledger:proof.original_ledger,
+  return {entry,nativeOnly:proof.original_pins.source_evidence!==undefined,patches:proof.native_proof.native_patches,ledger:proof.original_ledger,
     contract:proof.native_proof.native_contract,source_scope_ids:proof.source_scope_ids};
 }
 function expectedNativeAcquisition(proof, neededRows) {
@@ -910,8 +946,9 @@ function authenticateProducerExecution(session,reader,products,bodyPins) {
 }
 function qualifyProjectedRebind(proof, selected, authorities, products) {
   const {session,reader,state}=proof, {certificate,request,facts,publication,operating,result}=products;
-  const base=state.baseSelection, originalRows=[...selected.normalized.rows.values()];
-  const originalPatches=selected.registry.entries.flatMap(entry => authorities.get(entry.authority_sha256).patches);
+  const base=state.baseSelection, registry=legacyRegistry(selected.registry,authorities);
+  const originalRows=[...selected.normalized.rows.values()].filter(row=>!nativeOnlyComponent(row,valueSha));
+  const originalPatches=registry.entries.flatMap(entry => authorities.get(entry.authority_sha256).patches);
   const bodyPins=Object.fromEntries(['request','facts','publication','operating','result'].map(name => [name,certificate[name]]));
   for (const [name,body] of Object.entries({request,facts,publication,operating,result}))
     demand(valueSha(body)===bodyPins[name].sha256 && valueBytes(body).length===bodyPins[name].bytes,'Whole canonical producer output differs');
@@ -919,8 +956,8 @@ function qualifyProjectedRebind(proof, selected, authorities, products) {
   demand(certificate.version===1 && certificate.kind==='qualified-native-additive-current-bank-rebind-v1'
     && request.version===1 && request.kind==='issued-native-additive-current-bank-rebind-v1'
     && certificate.execution_commit===request.execution_commit && same(certificate.base_selection,base)
-    && certificate.authority_registry_sha256===valueSha(selected.registry)
-    && same(request.base_selection,base) && request.authority_registry_sha256===valueSha(selected.registry)
+    && certificate.authority_registry_sha256===valueSha(registry)
+    && same(request.base_selection,base) && request.authority_registry_sha256===valueSha(registry)
     && request.size===state.manifest.size && same(request.original_rows,originalRows)
     && same(request.original_patch_sha256s,originalPatches.map(valueSha)), 'Producer rebind has stale base, omitted original scope or different authority');
   authenticateProducerExecution(session,reader,products,bodyPins);
@@ -955,7 +992,7 @@ function qualifyProjectedRebind(proof, selected, authorities, products) {
   demand(same(currentRebindAcquisitionIdentity(acquisition),currentRebindAcquisitionIdentity(request.acquisition))
     && same(currentTargets,request.current_targets) && same(currentRows,request.current_rows),
   'Producer operands differ from complete retained/projected original sources or native intervals');
-  const expected=currentRebindResult({baseSelection:base,registry:selected.registry,originalRows,originalPatches,
+  const expected=currentRebindResult({baseSelection:base,registry,originalRows,originalPatches,
     currentTargets,currentRows,size:state.manifest.size});
   demand(same(result,expected),'Producer result differs from actual complete delta operands');
   const scopes=sourceInputs.map(p => ({kind:'complete-current-target-source',path:p.path}));
@@ -994,7 +1031,7 @@ export function qualifyTransition({state,reader,budget}) {
     beginFrame(session,reader);
     const selected=readSelection(session,reader);
     supported(same(nativeBaseSelection(selected.selection),state.baseSelection), 'Selected native/source/domain/owner base changed');
-    supported(sameScientificRoutes(reader,baseProof.routes), 'Selected input or present/absent route changed');
+    supported(sameScientificRoutes(reader,baseProof.routes,session.executablePaths), 'Selected input or present/absent route changed');
     for (const role of ['base_manifest','owner_roster'])
       supported(same(selected.sidecar.logical_asset_map[role],baseProof.selected.sidecar.logical_asset_map[role]), 'Selected original manifest/owner alias changed');
     demand(same(selected.ledger.parent_inventory,state.ledger.parent_inventory), 'Complete original source/scope denominator changed');
@@ -1011,8 +1048,10 @@ export function qualifyTransition({state,reader,budget}) {
       demand(entry.policy_id==='retained-source-literal-additions' && entry.policy_version===1, 'Unsupported appended source policy');
       const proof=appendAuthority(session,reader,entry); retain(session,proof); authorities.set(entry.authority_sha256,proof);
       const contract=Object.fromEntries(['size','coordinateBits','method','native_latitudes','hierarchy_sha256','original_assets'].map(k => [k,state.manifest[k]]));
-      demand(same(proof.contract,contract) && same(proof.ledger.parent_inventory,state.ledger.parent_inventory),
+      demand(same(proof.contract,contract) && (same(proof.ledger.parent_inventory,state.ledger.parent_inventory) || proof.nativeOnly && proof.ledger.parent_inventory===undefined),
         'Appended producer changed native contract or complete original source denominator');
+      if (proof.nativeOnly) demand(proof.patches.every(p=>same(p.base_reference,selected.envelope.base_reference)),
+        'Native source-target authority belongs to a different selected base');
       for (const original of proof.ledger.rows) {
         demand(!oldRows.has(original.component_id) && !expectedAdded.has(original.component_id), 'Appended producer repeats original component');
         expectedAdded.set(original.component_id,{original,entry});
@@ -1038,7 +1077,7 @@ export function qualifyTransition({state,reader,budget}) {
     const operandState=newState(session,{...state,selected_commit:reader.version},{...proof});
     const operandProof=states.get(operandState); operandProof.state=operandState;
     let currentTargets;
-    if (addedEntries.length===0 && same(selected.registry,state.registry)
+    if (same(legacyRegistry(selected.registry,authorities),legacyRegistry(state.registry,baseProof.oldAuthorities))
       && same(selected.ledger.current_rebind,state.ledger.current_rebind)) currentTargets=baseProof.rebind.request.current_targets;
     else {
       const products=rebindProducts(session,reader,selected.ledger); retain(session,products);
@@ -1046,11 +1085,7 @@ export function qualifyTransition({state,reader,budget}) {
       operandProof.rebind=products;
     }
     demand(same(selected.ledger.current_targets,currentTargets), 'Ledger complete current target roster differs from qualified operands');
-    const additions=[...selected.normalized.rows.values()].map(row => {
-      const target=currentTargets.find(p => p.target_id===row.target_id);
-      demand(target && target.pixelIndex===row.pixelIndex,'Appended owner identity or actual base geometry missing');
-      return {...row,base_geometry:target.geometry,base_geometry_sha256:target.geometry_sha256};
-    });
+    const additions=checkpointAdditions(selected,currentTargets);
     demand(selected.envelope.effective_reference.footprints_sha256===valueSha({domain:'worldatlas-effective-native-footprints:v2',
       base_reference:selected.envelope.base_reference,authority_registry_sha256:valueSha(selected.registry),
       ledger_sha256:selected.sidecar.logical_asset_map.ledger.sha256,components:[...selected.normalized.rows.values()]}),
@@ -1097,13 +1132,13 @@ export function deriveCoordinateDelta({certificate,oldAdditions,additions,select
     'Old effective primitive/base geometry changed');
   const rows=new Map(certificate.entries.map(row => [row[0],row]));
   for (const row of additions) demand(rows.has(row.target_id) && row.pixelIndex===rows.get(row.target_id)[1]
-    && row.base_geometry_sha256===rows.get(row.target_id)[7] && row.geometry_sha256===valueSha(row.geometry),
+    && row.base_geometry_sha256===rows.get(row.target_id)[7] && (nativeOnlyComponent(row,valueSha) || row.geometry_sha256===valueSha(row.geometry)),
   'Appended primitive targets a stale base, changed geometry or different owner');
   const changedIds=new Set(additions.filter(row => !oldById.has(row.component_id)).map(row => row.target_id));
   const entries=certificate.entries.map(row => {
     if (!changedIds.has(row[0])) return row;
     const all=additions.filter(p => p.target_id===row[0]), added=all.filter(p => !oldById.has(p.component_id));
-    const boxes=[...row[9],...added.flatMap(p => coordinateBounds(p.geometry))];
+    const boxes=[...row[9],...added.flatMap(p => nativeOnlyComponent(p,valueSha)?[p.native_bounds]:coordinateBounds(p.geometry))];
     const next=[...row]; next[8]=valueSha({base_geometry_sha256:row[7],additions:all});
     next[9]=[boxes.reduce((a,b) => [Math.min(a[0],b[0]),Math.min(a[1],b[1]),Math.max(a[2],b[2]),Math.max(a[3],b[3])])];
     return next;

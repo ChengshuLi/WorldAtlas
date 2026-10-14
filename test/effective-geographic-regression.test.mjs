@@ -6,7 +6,7 @@ import path from 'node:path';
 import {execFileSync,spawnSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {gzipSync,gunzipSync} from 'node:zlib';
-import {ImmutableReader,NativeAssetImage,loadSelection,inspectSelected,compareIntervals,compareRepairLedgers,readArtifactConsumption,validateReleaseCatalogue,validateArtifactSourceMetadata,loadNativeRowTable,acquireNativeRows,validateNativeRowCarry} from '../scripts/check-effective-geographic-regression.mjs';
+import {ImmutableReader,NativeAssetImage,SelectedGeometrySources,loadBaseSelection,loadSelection,inspectSelected,compareIntervals,compareRepairLedgers,readArtifactConsumption,validateReleaseCatalogue,validateArtifactSourceMetadata,loadNativeRowTable,acquireNativeRows,validateNativeRowCarry} from '../scripts/check-effective-geographic-regression.mjs';
 import {shuffleOwnershipBytes} from '../src/ownership-codec.js';
 import {JOINT_CODE} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs';
 import {valueBytes,valueSha,readOriginalRuleAuthority,selectedCoordinateShard,joinSelectedCoordinateCertificate,acceptColdCoordinateCertificate,selectedAffectedPlan,possibleNeighbors,compareVersionedRepairLedgers} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
@@ -228,6 +228,19 @@ test('selected source identity consumes exact encoded override and rejects incom
   const certificate=joinSelectedCoordinateCertificate(snapshot.geometrySources,[shard]);
   assert.equal(certificate.entries.length,2);assert.throws(()=>joinSelectedCoordinateCertificate(snapshot.geometrySources,[]),/Missing actual/);assert.throws(()=>joinSelectedCoordinateCertificate(snapshot.geometrySources,[shard,shard]),/duplicate source/);
   const plan=selectedAffectedPlan(certificate,['old-owner','other-owner'].map(id=>({id,primitives:[geometry]})));assert.deepEqual(plan.pairs,[['old-owner','other-owner']]);assert.deepEqual(plan.required_ids,['old-owner','other-owner']);
+  const nativeOnly={representation:'native-cells',component_id:'source-target:old-owner',target_id:'old-owner',pixelIndex:1,
+   disposition:'assigned',base_geometry:geometry,base_geometry_sha256:valueSha(geometry),native_cells:1,
+   native_rows:[{y:2,runs:[[3,4,1]]}],native_bounds:[10,20,10,20],
+   source_receipt_sha256:'a'.repeat(64),authority_sha256:'b'.repeat(64),rule_sha256:'c'.repeat(64)};
+  const nativeSnapshot=loadBaseSelection(new ImmutableReader(f.repo,current));
+  nativeSnapshot.additive={normalized_rows:[nativeOnly]};
+  const nativeSources=new SelectedGeometrySources(nativeSnapshot);
+  const nativeShard=selectedCoordinateShard(nativeSources,['data/geography/fixture.json']);
+  assert.deepEqual(nativeShard.entries.find(row=>row.id==='old-owner').boxes,[[0,0,10,20]]);
+  assert.equal(nativeShard.entries.find(row=>row.id==='old-owner').effective_geometry_sha256,
+   valueSha({base_geometry_sha256:valueSha(geometry),additions:[nativeOnly]}));
+  nativeSnapshot.additive={normalized_rows:[{...nativeOnly,native_rows:[{y:2,runs:[[3,4,2]]}]}]};
+  assert.throws(()=>selectedCoordinateShard(nativeSources,['data/geography/fixture.json']),/native component interval/i);
   assert.throws(()=>possibleNeighbors(certificate,geometry,{excludeIds:['old-owner','other-owner']}),/SELF target/);
   assert.notDeepEqual(actual.body,execFileSync('git',['-C',f.repo,'show',current+':data/geography/fixture.json']),'historical ordinary path must never replace selected body');
   assert.throws(()=>snapshot.geometrySources.read('data/geography/foreign.json'),/Foreign source/);

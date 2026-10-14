@@ -470,7 +470,8 @@ test('full-checkout routing retains exactly one successful canonical verificatio
     const helper=packageStep(job,'Acquire full checkout with authenticated bounded helper'),legacy=packageStep(job,'Legacy full checkout only for proven trusted-helper absence');
     assert.equal(workflowCondition(helper.condition,ctx),mode==='helper');assert.equal(workflowCondition(legacy.condition,ctx),mode==='legacy');
     for(const step of [helper,legacy,...job.steps.filter(step=>step.name===canonical)])assert.equal(workflowCondition(step.condition,ctx,{success:false}),false);
-    assert.match(helper.run,/--fetch-timeout-seconds 240 --total-timeout-seconds 420 --max-attempts 2 --elapsed-seconds/);
+    assert.match(helper.run,/--total-timeout-seconds 420 --elapsed-seconds/);
+    assert.doesNotMatch(helper.run,/--fetch-timeout-seconds|--max-attempts/);
     const tokenSteps=job.steps.filter(step=>/WORLDATLAS_CHECKOUT_TOKEN:/.test(step.text));assert.equal(tokenSteps.length,2);
     for(const step of tokenSteps)assert.ok(['Authenticate trusted full-checkout bootstrap','Acquire full checkout with authenticated bounded helper'].includes(step.name));
     const verify=job.steps.find(step=>step.name===canonical&&workflowCondition(step.condition,ctx));
