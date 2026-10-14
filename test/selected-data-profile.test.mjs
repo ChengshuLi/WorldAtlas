@@ -1416,12 +1416,22 @@ test('fixed source roles admit unchanged accepted reproduction and binary inputs
     assert(!f.reads.includes(f.authored.entries.get(name).sha),'unchanged role body was unnecessarily reread');
   }
 });
+test('unchanged fixed-role admission follows exact identity rather than known filename suffixes',async()=>{
+  const f=sourceTargetRoleFixture({retainedRoles:true,mutateRoles:({f,roles,parts})=>{
+    roles.physical_reproduction=f.put('coordination/engineering/prior/reproducer.unfamiliar','accepted code',true);
+    parts[0]=f.put('coordination/engineering/prior/raw-source-without-extension',Buffer.from([8,7,6]),true);
+  }}),diagnostics={};
+  assert.equal((await f.run({metadataDiagnostics:diagnostics}))?.test_selection,'selected-data',diagnostics.failure);
+});
 for(const [label,mutateRoles] of Object.entries({
   'new executable':({f,roles})=>{roles.physical_reproduction=f.put(prefix+'physical-reproduction.py','new code');},
   'changed executable':({f,roles})=>{roles.physical_reproduction=f.put(roles.physical_reproduction.path,'changed code');},
   'changed binary source':({f,parts})=>{parts[0]=f.put(parts[0].path,Buffer.from([1,2,3]));},
   'forged blob pin':({roles})=>{roles.physical_reproduction.git_blob_oid='0'.repeat(40);},
   'forged byte count':({roles})=>{roles.physical_reproduction.bytes++;},
+  'missing blob binding':({roles})=>{delete roles.physical_reproduction.git_blob_oid;},
+  'missing mode binding':({roles})=>{delete roles.physical_reproduction.mode;},
+  'missing hash binding':({roles})=>{delete roles.physical_reproduction.sha256;},
   'missing immutable commit':({roles})=>{delete roles.physical_reproduction.commit;},
   'invalid hash pin':({roles})=>{roles.physical_reproduction.sha256='invalid';},
   'executable mode':({f,roles})=>{const name=roles.physical_reproduction.path;f.authored.entries.set(name,{...f.authored.entries.get(name),mode:'100755'});roles.physical_reproduction.mode='100755';},
