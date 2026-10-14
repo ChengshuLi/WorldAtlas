@@ -8,7 +8,7 @@ import {gunzipSync} from 'node:zlib';
 import {repositoryReader, sha256} from './evidence-quality.mjs';
 import {loadOwnershipAssets} from '../src/ownership-assets.js';
 import {loadAdditiveNativePatch, effectivePrimitiveGeometries, footprintValueSha256,
-  verifyAdditiveLedgerSelection} from '../src/effective-footprint.js';
+  verifyAdditiveLedgerSelection, nativeOnlyComponent} from '../src/effective-footprint.js';
 import {pickOwnership, samplePackedOwnership} from '../src/pixel-ownership.js';
 
 const hash = value => typeof value === 'string' && /^[a-f0-9]{64}$/.test(value);
@@ -37,11 +37,12 @@ export function validateDeliveryExpectations(value) {
     uniqueStrings(cohort.component_ids, 'expected component roster');
     assert(Array.isArray(cohort.members), 'Missing expected members');
     for (const member of cohort.members) {
-      exactKeys(member, ['component_id', 'target_id', 'disposition', 'geometry_sha256'], 'Expected member');
+      const representationHash = Object.hasOwn(member,'native_rows_sha256') ? 'native_rows_sha256' : 'geometry_sha256';
+      exactKeys(member, ['component_id', 'target_id', 'disposition', representationHash], 'Expected member');
       assert(text(member.component_id) && !components.has(member.component_id), 'Missing/duplicate expected member');
       components.add(member.component_id);
       assert(text(member.target_id) && ['assigned', 'zero-cell'].includes(member.disposition)
-        && hash(member.geometry_sha256), 'Invalid expected target/disposition/geometry');
+        && hash(member[representationHash]), 'Invalid expected target/disposition/geometry');
     }
     assert.deepEqual(cohort.members.map(member => member.component_id).sort(), [...cohort.component_ids].sort(),
       'Expected members must cover the complete component roster exactly');
@@ -71,7 +72,8 @@ export function verifySelectedDelivery({expectations, ledger, ledgerSha256, patc
     members: cohort.members.map(member => {
       const row = selected.get(member.component_id);
       assert(row, `Missing selected member: ${member.component_id}`);
-      for (const field of ['target_id', 'disposition', 'geometry_sha256'])
+      const nativeOnly = nativeOnlyComponent(row);
+      for (const field of ['target_id', 'disposition', ...(nativeOnly ? [] : ['geometry_sha256'])])
         assert.equal(row[field], member[field], `Selected member ${field} differs: ${member.component_id}`);
       const target = loaded.get(member.target_id);
       assert(target && target.pixelIndex === row.pixelIndex, `Missing/wrong loaded target: ${member.target_id}`);
@@ -80,6 +82,10 @@ export function verifySelectedDelivery({expectations, ledger, ledgerSha256, patc
       const matches = components.filter(component => component.component_id === member.component_id);
       assert.equal(matches.length, 1, 'Expected exactly one loaded component');
       assert.deepEqual(matches[0], row, 'Loaded component differs from selected row');
+      if (nativeOnly) {
+        assert.equal(footprintValueSha256(row.native_rows),member.native_rows_sha256,'Actual selected native intervals differ');
+        return {...member,native_intervals_verified:true};
+      }
       assert.equal(footprintValueSha256(row.geometry), member.geometry_sha256, 'Actual selected geometry differs');
       assert(effectivePrimitiveGeometries(target).some(geometry =>
         footprintValueSha256(geometry) === member.geometry_sha256), 'Actual geometry absent from effective primitives');
@@ -95,7 +101,8 @@ export function verifySelectedDelivery({expectations, ledger, ledgerSha256, patc
     added++;
   }
   assert.equal(added, expectations.cumulative_native_cells, 'Wrong cumulative native cell count');
-  assert.equal(added, result?.native?.assigned_cells, 'Rebind result native cell count differs');
+  const nativeOnlyCells=ledger.rows.filter(row=>row.representation==='native-cells').reduce((n,row)=>n+row.native_cells,0);
+  assert.equal(added-nativeOnlyCells, result?.native?.assigned_cells, 'Rebind result native cell count differs');
   assert.equal(added, effective.additive_added_cells, 'Loaded effective native cell count differs');
   assert(Array.isArray(request?.current_rows) && request.current_rows.length > 0
     && Array.isArray(request?.acquisition?.predecessor_rows) && request.acquisition.predecessor_rows.length > 0,

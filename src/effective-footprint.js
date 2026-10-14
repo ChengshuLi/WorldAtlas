@@ -1,3 +1,4 @@
+import {nativePolygonIntervals} from './native-grid.js';
 import {nativeRuntimeIndex, compileNativeRuntime} from './native-runtime.js';
 import {compileNativeOwnership} from '../scripts/native-ownership/compile-native-ownership.mjs';
 import {sha256} from '@noble/hashes/sha2.js';
@@ -88,6 +89,10 @@ export function effectiveFootprintBounds(feature) {
       bounds[0] = Math.min(bounds[0], x); bounds[1] = Math.min(bounds[1], y);
       bounds[2] = Math.max(bounds[2], x); bounds[3] = Math.max(bounds[3], y);
     }
+  for (const row of feature.additiveFootprint?.components ?? []) if (nativeOnlyComponent(row)) {
+    bounds[0] = Math.min(bounds[0], row.native_bounds[0]); bounds[1] = Math.min(bounds[1], row.native_bounds[1]);
+    bounds[2] = Math.max(bounds[2], row.native_bounds[2]); bounds[3] = Math.max(bounds[3], row.native_bounds[3]);
+  }
   return bounds;
 }
 export function assertLegacyFootprint(feature) {
@@ -108,6 +113,8 @@ export function effectiveNativeRuntimeIndex(features) {
   });
 }
 export async function compileEffectiveNativeRuntime(features, options={}) {
+  require(!features.some(feature=>(feature.additiveFootprint?.components??[]).some(row=>row.representation==='native-cells')),
+    'Native-only selections require the retained base plus authenticated native patch, not polygon recompilation');
   if(!features.some(feature=>Object.hasOwn(feature,'additiveFootprint')))return compileNativeRuntime(features,options);
   const {size,latitudes,rowBlock=4096,partWords=1048576,onBlock}=options;
   require(size===262166 && latitudes instanceof Float64Array && latitudes.length===size,
@@ -229,7 +236,7 @@ export function verifyAdditiveLedgerSelection(ledger,features,patch) {
   if(ledger?.version===2)return verifyVersionedLedgerSelection(ledger,features,patch);
   require(ledger?.version===1&&ledger.kind==='native-additive-repair-ledger-v1'&&hex.test(ledger.rule_sha256),'Unsupported additive selection ledger');
   require(JSON.stringify(canonicalValue(ledger.base_reference))===JSON.stringify(canonicalValue(patch.base_reference))&&ledger.rule_sha256===patch.rule_sha256,'Selected ledger source/rule differs from patch');
-  require(Number.isSafeInteger(ledger.parent_inventory?.components)&&ledger.parent_inventory.components>=ledger.rows?.length
+  require(Number.isSafeInteger(ledger.parent_inventory?.components)&&ledger.parent_inventory.components>=ledger.rows?.filter(row=>row.representation!=='native-cells').length
     &&hex.test(ledger.parent_inventory?.report_sha256)&&hex.test(ledger.parent_inventory?.roster_sha256),'Missing complete inventory denominator');
   require(Array.isArray(ledger.scope_ids)&&Array.isArray(ledger.rows)&&ledger.scope_ids.length===ledger.rows.length
     &&new Set(ledger.scope_ids).size===ledger.scope_ids.length,'Missing/duplicate declared ledger scope');
@@ -402,6 +409,49 @@ export function additiveReleaseFootprintDigest(baseReference,features) {
     additions:additions.map(feature=>({id:feature.id,pixelIndex:feature.pixelIndex,footprint:feature.additiveFootprint}))});
 }
 
+// Native additions retain exact intervals, never synthetic polygons. These
+// intervals also survive historical context remapping and supply camera bounds.
+export function nativeOnlyComponent(row) {
+  if (row?.representation !== 'native-cells') return false;
+  exactKeys(row, ['representation','component_id','target_id','pixelIndex','disposition',
+    'base_geometry','base_geometry_sha256','native_rows','native_bounds','native_cells',
+    'source_receipt_sha256','authority_sha256','rule_sha256'], 'Native source-target component');
+  require(typeof row.component_id === 'string' && row.component_id && typeof row.target_id === 'string'
+    && Number.isSafeInteger(row.pixelIndex) && row.pixelIndex > 0 && row.disposition === 'assigned',
+  'Invalid native source-target identity');
+  polygonParts(row.base_geometry);
+  require(footprintValueSha256(row.base_geometry) === row.base_geometry_sha256,
+    'Native component current base changed');
+  for (const key of ['base_geometry_sha256','source_receipt_sha256','authority_sha256','rule_sha256'])
+    require(hex.test(row[key] ?? ''), 'Missing native source-target custody');
+  require(Array.isArray(row.native_rows) && row.native_rows.length > 0, 'Missing native component rows');
+  let last = -1, cells = 0;
+  for (const item of row.native_rows) {
+    exactKeys(item, ['y','runs'], 'Native component row');
+    require(Number.isSafeInteger(item.y) && item.y > last && item.y < 262166
+      && Array.isArray(item.runs) && item.runs.length > 0, 'Invalid native component row');
+    last = item.y; let end = 0;
+    for (const run of item.runs) {
+      require(Array.isArray(run) && run.length === 3 && run.every(Number.isSafeInteger)
+        && run[0] >= end && run[1] > run[0] && run[1] <= 262166 && run[2] === row.pixelIndex,
+      'Invalid native component interval');
+      end = run[1]; cells += run[1] - run[0];
+    }
+  }
+  require(cells === row.native_cells && cells > 0, 'Native component cell count differs');
+  require(Array.isArray(row.native_bounds) && row.native_bounds.length === 4
+    && row.native_bounds.every(Number.isFinite) && row.native_bounds[0] >= -180
+    && row.native_bounds[2] <= 180 && row.native_bounds[1] >= -90 && row.native_bounds[3] <= 90
+    && row.native_bounds[0] <= row.native_bounds[2] && row.native_bounds[1] <= row.native_bounds[3],
+  'Invalid native component bounds');
+  return true;
+}
+export function effectiveNativeAdditionRows(feature) {
+  if (!feature?.additiveFootprint) return [];
+  effectivePrimitiveGeometries(feature);
+  return (feature.additiveFootprint.components ?? []).filter(nativeOnlyComponent).flatMap(row => row.native_rows);
+}
+
 // V2 keeps each complete original component and its issued policy authority.
 // The current base is a separate binding, authenticated by current-bank rebind;
 // original component base geometry is never relabelled as that current base.
@@ -418,6 +468,10 @@ function versionedPrimitiveGeometries(feature) {
   require(Array.isArray(value.components)&&value.components.length>0,'Missing complete original components');
   let previous='';const output=[feature.geometry];
   for(const row of value.components){
+    if (nativeOnlyComponent(row)) {
+      require(row.component_id > previous && row.target_id === feature.id && row.pixelIndex === feature.pixelIndex,
+        'Foreign or unordered native component'); previous = row.component_id; continue;
+    }
     const componentKeys=['base_geometry','base_geometry_sha256','component_id','disposition','geometry','geometry_sha256','native_cells','pixelIndex','source_receipt_sha256','target_id','authority_sha256','rule_sha256'];
     const scoped=Object.hasOwn(row,'geometry_scope'),partial=row.geometry_scope==='supported-fragment';
     exactKeys(row,scoped?[...componentKeys,'geometry_scope','whole_gap_completion',...(partial?['original_candidate','original_remainder']:[])]:componentKeys,'Original authority component');
@@ -501,6 +555,12 @@ function versionedCurrentTargets(ledger) {
     require(typeof row.target_id==='string'&&row.target_id>previous&&Number.isSafeInteger(row.pixelIndex)&&row.pixelIndex>0,'Foreign/duplicate/unordered current target');previous=row.target_id;
     polygonParts(row.geometry);require(hex.test(row.geometry_sha256)&&footprintValueSha256(row.geometry)===row.geometry_sha256,'Current target pointset changed');targets.set(row.target_id,row);
   }
+  for (const row of ledger.rows ?? []) if (nativeOnlyComponent(row)) {
+    const target = {target_id:row.target_id,pixelIndex:row.pixelIndex,geometry:row.base_geometry,geometry_sha256:row.base_geometry_sha256};
+    const old = targets.get(row.target_id);
+    require(!old || footprintValueSha256(old) === footprintValueSha256(target), 'Native target base conflicts with prior target');
+    targets.set(row.target_id, target);
+  }
   return targets;
 }
 
@@ -511,7 +571,7 @@ function verifyVersionedLedgerSelection(ledger,features,patch) {
   // rebind custody. Its selected base and delta count live in the separately
   // authenticated envelope/patch; retain strict checks for explicit summaries.
   if(Object.hasOwn(ledger,'base_reference'))require(footprintValueSha256(ledger.base_reference)===footprintValueSha256(patch.base_reference),'Versioned ledger current bank differs from patch');
-  require(Number.isSafeInteger(ledger.parent_inventory?.components)&&ledger.parent_inventory.components>=ledger.rows?.length
+  require(Number.isSafeInteger(ledger.parent_inventory?.components)&&ledger.parent_inventory.components>=ledger.rows?.filter(row=>row.representation!=='native-cells').length
     &&hex.test(ledger.parent_inventory?.report_sha256)&&hex.test(ledger.parent_inventory?.roster_sha256),'Missing original complete inventory denominator');
   require(Array.isArray(ledger.scope_ids)&&Array.isArray(ledger.rows)&&ledger.scope_ids.length===ledger.rows.length,'Missing complete original versioned scope');
   const targets=versionedCurrentTargets(ledger),wanted=new Map();let previous='';
@@ -537,4 +597,91 @@ function verifyVersionedLedgerSelection(ledger,features,patch) {
   require(Number.isSafeInteger(cells)&&cells>=0,'Invalid complete current native cell total');
   if(Object.hasOwn(ledger,'assigned_cells'))require(Number.isSafeInteger(ledger.assigned_cells)&&cells===ledger.assigned_cells,'Complete current native cell total differs');
   return {selected_components:wanted.size,assigned_cells:cells};
+}
+
+// Shared source-target route. Geometry is evidence for native membership, not an
+// invented continuous addition. The caller authenticates complete source-family
+// products, the reviewed coverage/exclusion masks and the current owner rows.
+// Physical water is deliberately not a territorial exclusion: callers pass only
+// independently supported territorial exclusions (for example retained holes).
+export function deriveSourceTargetNativeDelta({targets, sourceFeatures, coverageFeatures,
+  territorialExclusions = [], ownerRows, size, latitudes, rowStart, rowEnd}) {
+  require(Array.isArray(targets) && targets.length > 0, 'Missing source targets');
+  const targetByOwner = new Map(), targetById = new Map();
+  for (const target of targets) {
+    require(typeof target.id === 'string' && target.id && Number.isSafeInteger(target.pixelIndex)
+      && target.pixelIndex > 0 && !targetByOwner.has(target.pixelIndex) && !targetById.has(target.id),
+    'Duplicate or invalid source target');
+    targetByOwner.set(target.pixelIndex, target); targetById.set(target.id, target);
+  }
+  require(Array.isArray(sourceFeatures) && sourceFeatures.length > 0, 'Missing complete source family');
+  const sourceOwners = new Map();
+  for (const feature of sourceFeatures) {
+    require(typeof feature.id === 'string' && feature.id && Number.isSafeInteger(feature.pixelIndex)
+      && feature.pixelIndex > 0 && !sourceOwners.has(feature.pixelIndex), 'Ambiguous source owner roster');
+    sourceOwners.set(feature.pixelIndex, feature.id);
+  }
+  for (const target of targets) require(sourceOwners.get(target.pixelIndex) === target.id,
+    'Source target differs from complete source owner roster');
+  require(Array.isArray(coverageFeatures) && coverageFeatures.length > 0, 'Missing reviewed coverage');
+  for (const feature of [...coverageFeatures, ...territorialExclusions])
+    require(targetByOwner.get(feature.pixelIndex)?.id === feature.id, 'Foreign coverage or exclusion target');
+  const options = {size, latitudes, rowStart, rowEnd};
+  const scan = features => features.length
+    ? nativePolygonIntervals(nativeRuntimeIndex(features), options) : {rows: new Map(), ties: []};
+  const sources = scan(sourceFeatures), coverage = scan(coverageFeatures), excluded = scan(territorialExclusions);
+  // Exact boundary cells require the existing boundary adjudication; withholding
+  // them here must not silently choose whichever source happened to come first.
+  const ties = new Map();
+  for (const tie of [...sources.ties, ...coverage.ties, ...excluded.ties]) {
+    const spans = ties.get(tie.y) ?? [];
+    spans.push([tie.start ?? tie.x, tie.end ?? tie.x + 1]); ties.set(tie.y, spans);
+  }
+  const current = new Map();
+  for (const row of ownerRows) {
+    require(Number.isSafeInteger(row.y) && row.y >= rowStart && row.y < rowEnd
+      && !current.has(row.y) && Array.isArray(row.complete_owner_intervals), 'Incomplete current owner rows');
+    let end = 0;
+    for (const run of row.complete_owner_intervals) {
+      require(Array.isArray(run) && run.length === 3 && run.every(Number.isSafeInteger)
+        && run[0] >= end && run[1] > run[0] && run[1] <= size && run[2] > 0,
+      'Invalid current owner interval'); end = run[1];
+    }
+    current.set(row.y, row.complete_owner_intervals);
+  }
+  require(current.size === rowEnd - rowStart, 'Missing complete current native row extent');
+  const counts = {assigned_cells: 0, already_owned_cells: 0, ambiguous_owner_cells: 0,
+    unsupported_coverage_cells: 0, territorial_exclusion_cells: 0, boundary_cells: 0};
+  const rows = [], perTarget = new Map(targets.map(target => [target.id, 0]));
+  for (let y = rowStart; y < rowEnd; y++) {
+    const source = sources.rows.get(y) ?? [], support = coverage.rows.get(y) ?? [];
+    const holes = excluded.rows.get(y) ?? [], owned = current.get(y), boundary = ties.get(y) ?? [];
+    const cuts = new Set();
+    for (const run of [...source, ...support, ...holes]) { cuts.add(run.start); cuts.add(run.end); }
+    for (const run of [...owned, ...boundary]) { cuts.add(run[0]); cuts.add(run[1]); }
+    const points = [...cuts].sort((a, b) => a - b), runs = [];
+    for (let i = 0; i + 1 < points.length; i++) {
+      const start = points[i], end = points[i + 1];
+      const owners = new Set(source.filter(run => run.start <= start && start < run.end).map(run => run.owner));
+      if (![...owners].some(owner => targetByOwner.has(owner))) continue;
+      const count = end - start;
+      if (owned.some(run => run[0] <= start && start < run[1])) { counts.already_owned_cells += count; continue; }
+      if (boundary.some(run => run[0] <= start && start < run[1])) { counts.boundary_cells += count; continue; }
+      if (owners.size !== 1) { counts.ambiguous_owner_cells += count; continue; }
+      const owner = [...owners][0], target = targetByOwner.get(owner);
+      if (holes.some(run => run.owner === owner && run.start <= start && start < run.end)) {
+        counts.territorial_exclusion_cells += count; continue;
+      }
+      if (!support.some(run => run.owner === owner && run.start <= start && start < run.end)) {
+        counts.unsupported_coverage_cells += count; continue;
+      }
+      const previous = runs.at(-1);
+      if (previous && previous[1] === start && previous[2] === owner) previous[1] = end;
+      else runs.push([start, end, owner]);
+      counts.assigned_cells += count; perTarget.set(target.id, perTarget.get(target.id) + count);
+    }
+    if (runs.length) rows.push({y, runs});
+  }
+  return {rows, ...counts, removed_cells: 0, reassigned_cells: 0,
+    targets: targets.map(target => ({...target, native_cells: perTarget.get(target.id)}))};
 }

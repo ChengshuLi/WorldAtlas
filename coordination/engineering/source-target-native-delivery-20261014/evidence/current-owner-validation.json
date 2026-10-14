@@ -1,0 +1,95 @@
+{
+  "current_commit": "9431af7bce2729274500f6733843ebd5b1315117",
+  "current_selection_sha256": "ef38a6dab899ad465c07c80e3c849d578ea221ce08515737830f315595f041e7",
+  "current_patch_sha256": "b44fc535b704fd88ccad45b85fbad73849b9f54c12bd3a83a158915b072414ac",
+  "proposed_cells": 13963,
+  "all_current_owner_zero": true,
+  "unique_land_source_owner_evidence": true,
+  "controls": [
+    {
+      "name": "unknown owner",
+      "rejected": "unknown-owner"
+    },
+    {
+      "name": "duplicate run",
+      "rejected": "run-domain"
+    },
+    {
+      "name": "wrong intended stable owner",
+      "rejected": "missing-land-unique-owner-evidence"
+    },
+    {
+      "name": "actual occupied cell overwrite",
+      "rejected": "overwrite-current-owner"
+    }
+  ],
+  "consumed_native_assets": [
+    {
+      "kind": "runs",
+      "offset": 36700160,
+      "words": 1048576,
+      "path": "native-v1/ownership/runs-36700160.bin.gz",
+      "bytes": 892298,
+      "sha256": "4e6692eec8f9702d2298b7f97af8932fabe552936012363754b4ef1e7c0e0b36",
+      "decoded_bytes": 4194304,
+      "decoded_sha256": "4d323f24254a654b526ef987b4a9a37c84be85a6c0a70e33cd08ae4f9e5636f0",
+      "encoding": "byte-shuffle"
+    },
+    {
+      "kind": "runs",
+      "offset": 37748736,
+      "words": 1048576,
+      "path": "native-v1/ownership/runs-37748736.bin.gz",
+      "bytes": 880041,
+      "sha256": "67dfce1a817e105c64b6647b90fb46e922908c49b5b68b4133a39e12f0ac6c69",
+      "decoded_bytes": 4194304,
+      "decoded_sha256": "79efbc91011cd2ae816c3233eb45790c782e7122f077b22076ad2d4907c6f201",
+      "encoding": "byte-shuffle"
+    },
+    {
+      "kind": "runs",
+      "offset": 40894464,
+      "words": 1048576,
+      "path": "native-v1/ownership/runs-40894464.bin.gz",
+      "bytes": 888634,
+      "sha256": "58d26169dfe7b1a4c175ccb7d74cb9f84e88a1622b3bf505c3b80023558360cb",
+      "decoded_bytes": 4194304,
+      "decoded_sha256": "a4a144a29cd7a39e25e81a29a797a040b19bffbf191336c6e56c1632fb09678b",
+      "encoding": "byte-shuffle"
+    },
+    {
+      "kind": "runs",
+      "offset": 41943040,
+      "words": 1048576,
+      "path": "native-v1/ownership/runs-41943040.bin.gz",
+      "bytes": 896715,
+      "sha256": "122d4fef0562496cc574ae61ebd37de4cc9f68d59798fa68977dc7ca70929592",
+      "decoded_bytes": 4194304,
+      "decoded_sha256": "2af2f219c58e8fd6bf652b31e270414ece2cb35d39c9b55df4b3581922daa31b",
+      "encoding": "byte-shuffle"
+    },
+    {
+      "kind": "runs",
+      "offset": 48234496,
+      "words": 1048576,
+      "path": "native-v1/ownership/runs-48234496.bin.gz",
+      "bytes": 878785,
+      "sha256": "486dcf08e55e3cab928b90a48fa7dc128fd2407cd428345b13bd133068da9f59",
+      "decoded_bytes": 4194304,
+      "decoded_sha256": "4f3271ca075f968660cc6c9d2ae80a1cbb93f9d1db47e1f4270e586c1afd8db7",
+      "encoding": "byte-shuffle"
+    },
+    {
+      "kind": "runs",
+      "offset": 49283072,
+      "words": 1048576,
+      "path": "native-v1/ownership/runs-49283072.bin.gz",
+      "bytes": 903382,
+      "sha256": "0bbec87a2b610f5dd3a81cb21b243ba87462e66e15dec26fdd6cfcc67c128c01",
+      "decoded_bytes": 4194304,
+      "decoded_sha256": "b572825fbca3fceb6b214c16f08ea2bec30cb64302088006975ce36870d8edc3",
+      "encoding": "byte-shuffle"
+    }
+  ],
+  "selected_production_changed": false
+}

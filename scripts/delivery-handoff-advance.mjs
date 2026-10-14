@@ -1,6 +1,6 @@
 import {gunzipSync} from 'node:zlib';
 import {ImmutableReader} from './check-effective-geographic-regression.mjs';
-import {valueBytes, valueSha, readOriginalRuleAuthority, qualifyOriginalSourceAuthority, qualifyOriginalNativeAuthority, readRetainedRegistryAuthority} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {valueBytes, valueSha, readOriginalRuleAuthority, qualifyOriginalSourceAuthority, qualifyOriginalNativeAuthority, readRetainedRegistryAuthority, qualifySourceTargetNativeAuthority} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 // Immutable delivery metadata, authority constructors and exact-body acquisition.
 // Resolve actual committed outputs; never accept caller-written derived hashes.
 import path from 'node:path';
@@ -633,6 +633,15 @@ function deriveOriginalBinding(reader, inputs) {
 function constructOriginalAuthority(reader, inputs) {
   need(reader instanceof ImmutableReader, 'Require the existing ImmutableReader');
   const outerMetadata = outerFrame(reader);
+  if (inputs.source_evidence !== undefined) {
+    need(Object.keys(inputs).sort().join(',') === 'native_patch,source_evidence', 'Source-target authority requires two immutable inputs');
+    const source = committedBody(reader, inputs.source_evidence), patch = committedBody(reader, inputs.native_patch);
+    const binding = {version:1,kind:'source-target-native-custody-v1',source_evidence:source.pin,native_patch:patch.pin};
+    const preimage = {...binding,kind:'source-target-native-rule-v1'};
+    const proof = qualifySourceTargetNativeAuthority(reader,preimage,binding);
+    return {products:{'original-rule-preimage.json':valueBytes(preimage),'authority-binding.json':valueBytes(binding)},
+      component_ids:proof.source_scope_ids,ledger_rows:proof.original_ledger.rows,rule_sha256:valueSha(preimage),limitations:proof.limitations};
+  }
   const binding = deriveOriginalBinding(reader, inputs);
   // The discovery bodies are out of scope. Carry only the produced binding into
   // the existing validators, which own their unchanged whole-body accounting.

@@ -1,4 +1,4 @@
-import {effectiveFootprintValue, effectiveNativeRuntimeIndex} from './effective-footprint.js';
+import {effectiveFootprintValue, effectiveNativeRuntimeIndex, effectiveNativeAdditionRows} from './effective-footprint.js';
 import {nativePolygonIntervals, NATIVE_GRID_METHOD} from './native-grid.js';
 import {coverageRow} from '../scripts/audit-grid-intervals.mjs';
 import {LATITUDE_DIGEST} from './ownership-method.js';
@@ -70,7 +70,7 @@ export async function compileNativeLocationContext({referenceFeatures, features,
   const contextual=context.features.map((feature,i)=>{
     const old=originalById.get(feature.id);
     if(sameFootprint(old,feature))return {...originalInput.get(old.pixelIndex),index:i+1};
-    const input=effectiveNativeRuntimeIndex([{...feature,pixelIndex:i+1}])[0];
+    const input={...effectiveNativeRuntimeIndex([Number.isInteger(feature.pixelIndex) ? feature : {...feature,pixelIndex:i+1}])[0],index:i+1};
     changedInputs.push(input);return input;
   });
   const contextualBounds = contextual.map(item => ({...item, ...latitudeBounds(item)}));
@@ -89,6 +89,19 @@ export async function compileNativeLocationContext({referenceFeatures, features,
     if (!sameFootprint(old,next)) changedRanges.push(item);
   }
   const affected = new Uint8Array(base.size), changedRows = new Map();
+  const additions = new Map();
+  for (const feature of context.features) {
+    const owner = context.byId.get(feature.id);
+    for (const row of effectiveNativeAdditionRows(feature)) {
+      const runs = additions.get(row.y) ?? [];
+      runs.push(...row.runs.map(([start,end]) => ({start,end,owner}))); additions.set(row.y,runs);
+    }
+  }
+  // A native-only change or removal can lie beyond the ancillary base polygon.
+  for (const feature of [...referenceFeatures, ...context.features]) {
+    const before = originalById.get(feature.id), after = currentById.get(feature.id);
+    if (!sameFootprint(before, after)) for (const row of effectiveNativeAdditionRows(feature)) affected[row.y] = 1;
+  }
   for (const {min, max} of changedRanges) for (let y = 0; y < base.size; y++)
     if (latitudes[y] >= min && latitudes[y] <= max) affected[y] = 1;
   const ownerMap = new Map(referenceFeatures.map(f => [f.pixelIndex, context.byId.get(f.id) ?? 0]));
@@ -102,7 +115,7 @@ export async function compileNativeLocationContext({referenceFeatures, features,
     const native = nativePolygonIntervals(selected, {size: base.size, rowStart: first, rowEnd: end, latitudes});
     for (let y = first; y < end; y++) if (affected[y]) {
       const segments = [];
-      for (const segment of coverageRow(native.rows.get(y) ?? [], base.size)) {
+      for (const segment of coverageRow([...(native.rows.get(y) ?? []), ...(additions.get(y) ?? [])], base.size)) {
         const id = segment.owners[0];
         if (!id) continue;
         const previous = segments.at(-1);

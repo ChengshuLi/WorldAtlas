@@ -1,0 +1,85 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {deriveSourceTargetNativeDelta} from '../scripts/additive-gap-repair.mjs';
+import {nativeRowLatitudes} from '../src/native-grid.js';
+const polygon = (left, right) => ({type:'Polygon', coordinates:[[[left,-40],[right,-40],[right,40],[left,40],[left,-40]]]});
+const feature = (id, pixelIndex, geometry) => ({id,pixelIndex,geometry});
+function inputs() {
+  const a = feature('source:A',1,polygon(-89,89));
+  return {targets:[{id:a.id,pixelIndex:1}],sourceFeatures:[a],coverageFeatures:[a],
+    ownerRows:Array.from({length:8},(_,y)=>({y,complete_owner_intervals:[]})),
+    size:8,latitudes:nativeRowLatitudes(8),rowStart:0,rowEnd:8};
+}
+test('source-native assignments use the literal grid and need no gap polygons',()=>{
+  const result=deriveSourceTargetNativeDelta(inputs());
+  assert.deepEqual(result.rows,[{y:3,runs:[[2,6,1]]},{y:4,runs:[[2,6,1]]}]);
+  assert.equal(result.assigned_cells,8); assert.equal(result.reassigned_cells,0);
+});
+test('every existing owner is preserved, including the same intended owner',()=>{
+  const input=inputs(); input.ownerRows[3].complete_owner_intervals=[[2,3,2],[4,5,1]];
+  const result=deriveSourceTargetNativeDelta(input);
+  assert.deepEqual(result.rows[0],{y:3,runs:[[3,4,1],[5,6,1]]});
+  assert.equal(result.already_owned_cells,2); assert.equal(result.assigned_cells,6);
+});
+test('competing source owners are withheld symmetrically',()=>{
+  const input=inputs(); input.sourceFeatures.push(feature('source:B',2,polygon(-1,89)));
+  const result=deriveSourceTargetNativeDelta(input);
+  assert.equal(result.ambiguous_owner_cells,4); assert.equal(result.assigned_cells,4);
+});
+test('reviewed territorial exclusions are independent of physical water',()=>{
+  const input=inputs(); input.territorialExclusions=[feature('source:A',1,polygon(-1,89))];
+  const result=deriveSourceTargetNativeDelta(input);
+  assert.equal(result.territorial_exclusion_cells,4); assert.equal(result.assigned_cells,4);
+  // A physical label is not consumed as a territorial exclusion.
+  const water=inputs(); water.physical_status='water-supported';
+  assert.equal(deriveSourceTargetNativeDelta(water).assigned_cells,8);
+});
+test('unsupported coverage stays withheld',()=>{
+  const input=inputs(); input.coverageFeatures=[feature('source:A',1,polygon(-89,-1))];
+  const result=deriveSourceTargetNativeDelta(input);
+  assert.equal(result.unsupported_coverage_cells,4); assert.equal(result.assigned_cells,4);
+});
+test('missing current rows and foreign target joins fail closed',()=>{
+  const input=inputs();input.ownerRows.pop();assert.throws(()=>deriveSourceTargetNativeDelta(input),/extent/);
+  const wrong=inputs();wrong.targets[0].id='invented';assert.throws(()=>deriveSourceTargetNativeDelta(wrong),/roster/);
+});
+
+test('native-only default and affected historical contexts retain exact cells and bounds',async()=>{
+  const fs=await import('node:fs'), {gunzipSync}=await import('node:zlib'), {createHash}=await import('node:crypto');
+  const {compileNativeRuntime}=await import('../src/native-runtime.js');
+  const {compileNativeLocationContext}=await import('../src/native-location-context.js');
+  const {nativeSourceDigest}=await import('../src/native-source-digest.js');
+  const {pickOwnership}=await import('../src/pixel-ownership.js');
+  const {applyAdditiveNativePatch,footprintValueSha256:hash,additiveReleaseFootprintDigest,
+    effectiveFootprintBounds,nativeOnlyComponent}=await import('../src/effective-footprint.js');
+  const size=262166, raw=gunzipSync(fs.readFileSync('coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz'));
+  const latitudes=Float64Array.from({length:size},(_,i)=>raw.readDoubleLE(i*8));
+  const rectangle=(a,b,c,d)=>({type:'Polygon',coordinates:[[[a,b],[c,b],[c,d],[a,d],[a,b]]]});
+  const a=feature('A',1,rectangle(0,0,1,1)), b=feature('B',2,rectangle(2,0,3,1));
+  const base=await compileNativeRuntime([a,b],{size,latitudes});
+  const baseReference={id:'geography:fixture-base',footprints_sha256:(await nativeSourceDigest([a,b])).sha256,hierarchy_sha256:'b'.repeat(64)};
+  Object.assign(base,baseReference,{geographic_release:baseReference.id,reference_owner_sha256:createHash('sha256').update(JSON.stringify([[1,'A'],[2,'B']])).digest('hex')});
+  const x=Math.floor((10+180)/360*size),y=latitudes.findIndex(latitude=>latitude<.5);
+  const component={representation:'native-cells',component_id:'source-target:fixture',target_id:'A',pixelIndex:1,
+    disposition:'assigned',base_geometry:a.geometry,base_geometry_sha256:hash(a.geometry),
+    native_rows:[{y,runs:[[x,x+1,1]]}],native_bounds:[10,latitudes[y],10,latitudes[y]],native_cells:1,
+    source_receipt_sha256:'c'.repeat(64),authority_sha256:'d'.repeat(64),rule_sha256:'e'.repeat(64)};
+  assert.equal(nativeOnlyComponent(component),true);
+  const selected={...a,additiveFootprint:{version:2,kind:'retained-base-plus-additions',
+    baseline_release_sha256:baseReference.footprints_sha256,base_geometry_sha256:hash(a.geometry),ledger_sha256:'f'.repeat(64),
+    authority_registry_sha256:'d'.repeat(64),components:[component]}};
+  const features=[selected,b],effectiveReference={...baseReference,id:'geography:fixture-selected',footprints_sha256:additiveReleaseFootprintDigest(baseReference,features)};
+  const patch={version:2,kind:'unassigned-native-cells-v1',base_reference:baseReference,effective_reference:effectiveReference,
+    ledger_sha256:'f'.repeat(64),authority_registry_sha256:'d'.repeat(64),rows:component.native_rows};
+  const effective=applyAdditiveNativePatch(base,patch,{baseReference,effectiveReference,features});
+  assert.equal(pickOwnership(effective,x,y),1);assert.equal(pickOwnership(base,x,y),0);
+  assert.equal(effectiveFootprintBounds(selected)[2],10);
+  const unchanged=await compileNativeLocationContext({referenceFeatures:features,features,base:effective,latitudes});
+  assert.equal(unchanged.accounting.recomputedRows,0);assert.equal(pickOwnership(unchanged.grid,x,y),1);
+  const changed=await compileNativeLocationContext({referenceFeatures:features,features:[selected],base:effective,latitudes});
+  assert.ok(changed.accounting.recomputedRows>0);assert.equal(pickOwnership(changed.grid,x,y),1);
+  const ax=Math.floor(180.5/360*size);assert.equal(pickOwnership(changed.grid,ax,y),1);
+  assert.equal(pickOwnership(base,ax,y),1);
+  const corrupt=structuredClone(component);corrupt.native_rows[0].runs[0][2]=2;
+  assert.throws(()=>nativeOnlyComponent(corrupt),/interval/);
+});

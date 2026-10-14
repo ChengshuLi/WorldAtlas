@@ -143,10 +143,14 @@ export function validateSelectedExpectations(expected, ledger, ledgerHash, previ
     batches.add(cohort.original_batch_id);
     for (const member of cohort.members) {
       const row = actual.get(member.component_id);
-      needSelected(keys(member, ['component_id','target_id','disposition','geometry_sha256']) && row &&
+      const nativeOnly=row?.representation==='native-cells', representationHash=nativeOnly?'native_rows_sha256':'geometry_sha256';
+      const canonical=value=>Array.isArray(value)?value.map(canonical):value&&typeof value==='object'
+        ?Object.fromEntries(Object.keys(value).sort().map(key=>[key,canonical(value[key])])):value;
+      const actualHash=nativeOnly?sha256(Buffer.from(JSON.stringify(canonical(row.native_rows))+'\n')):row?.geometry_sha256;
+      needSelected(keys(member, ['component_id','target_id','disposition',representationHash]) && row &&
         !members.has(member.component_id) && text(member.target_id) &&
-        ['assigned','zero-cell'].includes(member.disposition) && hash(member.geometry_sha256) &&
-        ['target_id','disposition','geometry_sha256'].every(key => row[key] === member[key]), 'member differs from selected ledger');
+        ['assigned','zero-cell'].includes(member.disposition) && hash(member[representationHash]) && actualHash===member[representationHash] &&
+        ['target_id','disposition'].every(key => row[key] === member[key]), 'member differs from selected ledger');
       members.set(member.component_id, member);
     }
   }
