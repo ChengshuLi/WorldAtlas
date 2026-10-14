@@ -50,6 +50,96 @@ checkout is created; acquire only the explicitly required inputs through the
 coordinated import path, then retry normal allocation. This also applies to full
 profiles, which select every file.
 
+## Refresh a stale checkout without changing its files
+
+The helper that starts an allocation runs before the new checkout exists. Running
+an old primary checkout's script can therefore keep using a previously repaired
+allocator. Before a new job, refresh `origin/main` with blob filtering, pin its
+commit, and read that pin's `AGENTS.md` and this guide. Do not pull, reset, switch
+or overwrite a checkout holding active work.
+
+The following code-only bootstrap loads both allocator modules from one exact
+locally available main commit. It uses an exclusive temporary directory inside
+the shared Git store, retains the original repository as the current directory,
+and removes only its generated helper copies afterward. Missing helper blobs
+stop before execution; acquire those exact pinned objects through the coordinated
+route below rather than falling back to an old executable. Use Node 24.
+
+```sh
+git -c fetch.negotiationAlgorithm=noop fetch --no-tags --no-recurse-submodules \
+  --no-auto-maintenance --filter=blob:none origin main
+base=$(GIT_NO_LAZY_FETCH=1 git rev-parse --verify 'origin/main^{commit}')
+GIT_NO_LAZY_FETCH=1 python3 - "$base" inspect --commit "$base" \
+  --include data/YOUR-REQUIRED-PATH <<'PYTHON'
+import os, re, subprocess, sys, tempfile
+from pathlib import Path
+base, *args = sys.argv[1:]
+if not re.fullmatch('[a-f0-9]{40}', base):
+    raise SystemExit('Exact accepted commit required')
+env = dict(os.environ, GIT_NO_LAZY_FETCH='1', GIT_NO_REPLACE_OBJECTS='1')
+def git(*args, **kwargs):
+    return subprocess.check_output(['git', '--no-replace-objects', *args], env=env, **kwargs)
+common = Path(git('rev-parse', '--path-format=absolute', '--git-common-dir').decode().strip()).resolve(strict=True)
+sources = {}
+for name in ('local-workspace.mjs', 'worker-identity.mjs'):
+    row = git('ls-tree', '-z', base, '--', 'scripts/' + name).rstrip(b'\0')
+    metadata, member = row.split(b'\t')
+    mode, kind, oid = metadata.decode().split()
+    if mode not in ('100644', '100755') or kind != 'blob' or member != ('scripts/' + name).encode():
+        raise SystemExit('Ordinary pinned helper required')
+    status = git('cat-file', '--batch-check=%(objectname) %(objecttype) %(objectsize)', input=oid.encode() + b'\n').decode().split()
+    if len(status) != 3 or status[0] != oid or status[1] != 'blob' or not status[2].isdigit():
+        raise SystemExit('Pinned helper missing; coordinate exact-object acquisition')
+    sources[name] = git('cat-file', 'blob', oid)
+with tempfile.TemporaryDirectory(prefix='worldatlas-helper-', dir=common) as directory:
+    for name, body in sources.items():
+        with (Path(directory) / name).open('xb') as output:
+            output.write(body)
+    result = subprocess.call(['node', str(Path(directory) / 'local-workspace.mjs'), *args], env=env)
+sys.exit(result)
+PYTHON
+```
+
+Keep every original `--include` value, including new owned output paths. Replace
+`inspect --commit "$base" ...` with the documented `check`, `allocate` or `release`
+arguments when needed. The current helper still enforces the shared registry,
+ownership, locks and storage policy. A later main refresh during author allocation
+may add required inputs; inspect its new exact head rather than reusing old OIDs.
+
+## Inspect and acquire only required missing objects
+
+`inspect --commit EXACT_HEAD --profile sparse --include EXACT_PATH ...` is
+read-only: it does not fetch, reserve space, create a branch/checkout or take the
+allocation lock. It uses the allocator's actual selection and returns every
+selected path/OID/available size plus one `missing` row per absent OID with all its
+selected paths. `selectedBytes` is null while any selected size is unknown;
+`availableBytes` is only the known per-path subtotal. An empty missing list does
+not establish storage admission or complete test/scientific dependencies.
+`--profile full` inspects every file and retains submodule refusal.
+
+For a coordinated acquisition, authenticate each missing path/OID/type/size
+against the same immutable GitHub tree. Use the relevant subtree's metadata when
+needed; refuse truncated, conflicting or unknown descriptors. Run `check` before
+downloading and allow for the missing object bytes, the planned checkout
+reservation and other build/dependency needs above the existing free-space floor.
+Only the verified `missing[].oid` list from this exact scope may be imported:
+
+```sh
+# Standard exact-object transport, with verified missing OIDs on stdin.
+git -c fetch.negotiationAlgorithm=noop fetch --no-tags --no-write-fetch-head \
+  --no-recurse-submodules --no-auto-maintenance --filter=blob:none --stdin origin
+```
+
+Serialize shared-store acquisition, use bounded batches, and verify acquired
+blob type, exact OID and byte size against those descriptors. Re-run inspection
+and normal allocation with the same complete scope. Do not replace this with all
+repository OIDs, global `ls-tree -l`, a full clone or automatic lazy fetching.
+This reuses the exact-object transport used by geography acquisition; its
+geography-specific CLI/declaration limits are unchanged and are not a universal
+workspace prefetch interface. Inspection does not resolve an undeclared required
+path: sparse inputs must still cover the actual checks, or use an adequately
+reserved full profile.
+
 ## Storage admission and ongoing checks
 
 Allocation is serialized across this repository by an exclusive local directory
