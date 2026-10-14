@@ -336,3 +336,10 @@ approved target in the actual complete before/after rows. A positive total or
 an unrelated sibling's cell is insufficient. Existing accepted zero-cell rows
 and historical checkpoint traversal are preserved unchanged. The result's
 `repair_visibility` lists the new components and exact cell witnesses.
+
+Current rebind validation authenticates the original executed code, request,
+issuer and output bytes, then independently reacquires current source/native
+operands and recomputes the complete result. An unrelated change to today's
+validator or wrapper does not require a historical generation registration.
+Original source authority, numerical schemas, full result equality and owner
+conservation still apply.
