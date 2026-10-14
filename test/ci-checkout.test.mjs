@@ -11,7 +11,7 @@ const realGit = spawnSync('which', ['git'], {encoding: 'utf8'}).stdout.trim();
 const token = 'fixture-secret-only-checkout-1787';
 const base64Token = Buffer.from('x-access-token:' + token).toString('base64');
 const fixtureEnv = {...process.env, GIT_CONFIG_NOSYSTEM: '1', GIT_CONFIG_GLOBAL: os.devNull,
-  PYTHONDONTWRITEBYTECODE: '1'};
+  PYTHONDONTWRITEBYTECODE: '1', INTEGRATION_PROFILE: '', INTEGRATION_TEST_SELECTION: ''};
 function command(executable, args, options = {}) {
   const result = spawnSync(executable, args, {encoding: 'utf8', env: fixtureEnv, ...options});
   assert.equal(result.status, 0, result.stderr || result.error?.message);
