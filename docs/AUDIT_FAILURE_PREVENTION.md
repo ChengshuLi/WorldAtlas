@@ -80,8 +80,10 @@ expose the particular loss, substitution or false success:
 - **Complete resource accounting:** inspect the union of actual inputs, decoded
   representations and outputs across all reader/helper instances in the same
   execution phase. Splitting a file into chunks or assigning another reader does
-  not reset the phase or decoded-file limit. A lightweight size inventory can
-  establish a budget violation without rerunning the expensive computation.
+  not reset that implementation's phase or decoded-file limit. A lightweight size
+  inventory can establish a budget violation without rerunning the expensive
+  computation. Apply the resource-policy distinction below before deciding that
+  a byte inventory invalidates a scientific result.
 - **Inherited results and citations:** distinguish new computation from copied
   predecessor rows. A repaired helper does not validate results produced by the
   old helper. Check the actual cited content and distinguish printed page numbers
@@ -103,6 +105,48 @@ results). These links identify reported defects and existing repair owners; they
 are not blanket independent confirmation of every scientific finding. Review
 current fixes before repeating a historical failure claim.
 
+## Scientific evidence and reproduction resources
+
+Resource admission protects a future execution. Scientific review establishes
+what the actual inputs, method and result support. Neither replaces the other.
+The shared evidence readers' 32 MiB file/decoded-file and 256 MiB phase defaults
+are bounds of those implementations, not universal limits on an independently
+reviewed scientific operator. The generic premerge transport gate still enforces
+its own declared-file budgets. Existing command-bound execution contracts,
+including SOURCE/NATIVE v2 qualified receipts, retain every required check.
+
+For a custom offline operator, review its actual complete encoded inputs, decoded
+representations, reconstructed members, runtime/dependencies and output growth.
+A reconstructed member is not exempt because its fragments are small; conversely,
+its size is not a Git transport-file size. Cumulative bytes processed and peak
+resident memory are different quantities. Do not infer either from the other or
+partition a cohort when every partition would still read the same complete data.
+
+Before a new reproduction, choose an explicit finite operating allowance from the
+actual machine's reported available memory and exposed constraints, allowing for
+the parent, concurrent reservations, expansion and headroom. Include complete
+output/log growth, a finite deadline and cleanup of owned subprocesses. Use the
+existing applicable safeguards or independently review an equivalent approach.
+Live RSS monitoring and process-tree containment are mandatory when the selected
+execution contract requires them; they are not universal scientific-evidence
+requirements. Do not introduce a platform-specific supervisor solely to satisfy
+another command's receipt shape, or replace one arbitrary cap with a larger one.
+
+For an unchanged completed result, independently verify its consumed input/code
+bindings, complete scope, method, actual output and genuine execution measurements.
+Missing prospective admission or live RSS enforcement alone does not establish
+that the calculation is wrong or require repeating it. Record those missing
+protections explicitly: measured peak RSS is not an enforced limit, child lifetime
+RSS is not aggregate process-tree RSS, and a later capacity observation is not
+retrospective admission. Retain platform-specific units and the original record.
+Repeat science only when changed inputs/methods, invalidated or incomplete results,
+an explicit repeatability requirement, or the applicable execution contract needs
+a new run. Operational fixes can use bounded faithful controls instead.
+
+This distinction does not manufacture a qualified execution receipt, upgrade
+diagnostic source limitations, certify present physical/legal truth, approve a
+source or authorize selection, imports, publication or a completed delivery.
+
 ## Shared execution tools
 
 New evidence producers use these shared helpers for applicable invariants. Review any
@@ -121,7 +165,7 @@ guarantee. Do not silently leave a legacy standalone writer in a new wrapper.
 - `Baseline.subjects(ids)` reads the complete immutable world index, rejects duplicate
   raw IDs/parts and conflicting indexed identities, and returns actual containing-file
   descriptors. Raw and decoded unique inputs count toward the complete 256 MiB phase;
-  ordinary/decoded files retain the 32 MiB cap. Splitting a descriptor list while
+  ordinary/decoded files retain this helper's 32 MiB cap. Splitting a descriptor list while
   executing the same oversized phase is not bounded partitioning.
 - `exact_rows`, `join_rows` and `finite_metrics` in `evidence/contracts.py` derive
   uniqueness, coverage, correspondence and required finite fields from real records.

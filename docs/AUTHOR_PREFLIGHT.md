@@ -43,9 +43,14 @@ contracts. Construct NewVintage before computation, then publish the complete
 product set with its final receipt. Use publish_bytes for plain CSV/JSONL/GeoJSON
 or gzip products: publish takes JSON values; publish_bytes takes complete bytes,
 including already encoded gzip. The owned prefix ends in a slash; each run name is
-fresh. File and decoded-file limits are 32 MiB; the complete phase is 256 MiB and
+fresh. This shared helper's file and decoded-file limits are 32 MiB; its complete phase is 256 MiB and
 the completion receipt is capped at 4,096 bytes. ZIP members require their own decoded admission. See the shared
 guide for limits and interface details.
+
+For independently reviewed custom operators and reuse of unchanged completed
+science, follow [Scientific evidence and reproduction resources](AUDIT_FAILURE_PREVENTION.md#scientific-evidence-and-reproduction-resources).
+Do not treat these helper defaults as universal scientific-validity limits or
+claim retrospective resource admission or enforcement that did not occur.
 
 When changing a shared helper, inspect existing consumers and their authenticated
 code closures before adding a module dependency. Exercise the affected consumer

@@ -16,6 +16,12 @@ Invalid unwrapped polygons, overlapping source multipart land, empty/nonpolygon 
 
 `Baseline(repo, commit, files)` verifies an exact immutable 40-character commit and every declared whole-file SHA-256/byte count before any generation. Ordinary committed blobs are read with Git; symlinks/submodules and files above 32 MiB are refused. Mutable checkout files are never treated as original source bytes. Include reviewed release, hierarchy, subject scope, source registry and source byte pins. An entry hash is not a file hash.
 
+These are this helper's reader bounds. Independently reviewed custom operators
+use the [scientific-evidence and reproduction-resource distinction](AUDIT_FAILURE_PREVENTION.md#scientific-evidence-and-reproduction-resources);
+their complete working representations still need accounting. That distinction
+does not change this helper, the premerge transport gate or an existing qualified
+execution contract.
+
 `Baseline.subjects(ids)` follows the committed `data/world-index.json` parts read loop and records the **actual containing file** and its byte hash. It never infers `part-0` from an optional feature property. All parts are scanned for duplicate/missing requested identities. The index must itself be pinned. Compressed input has a bounded decompression limit. Source registry/receipt pairs can be checked with `validate_source_receipts`: source IDs, whole-file hashes and pinned retained source paths must agree; duplicate receipts fail. Restricted/unretained sources remain explicit limitations in the evidence contract, not invented retained bytes.
 
 `write_new_vintage` writes only beneath an issue-declared research prefix under `vintages/<new-name>/`. Supply the exact owned prefix from the actual issue; the helper cannot discover a GitHub reservation offline. It rereads pins before creating any directory, rejects symlink destinations, preserves existing files and creates a new file atomically with an exclusive hard link. Original retained evidence is never refreshed in place. Choose a new vintage for changed inputs/methods and retain its predecessor. Output descriptors contain actual compressed and canonical uncompressed hashes.
