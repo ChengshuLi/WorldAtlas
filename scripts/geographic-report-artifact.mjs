@@ -81,12 +81,24 @@ const ARCHIVED_POLYGON_MEMBERS = ['facts.json', 'operands.json.gz', 'publication
 const MEMBER_NAMES = new Set(['geography-check.json', ...CHECKPOINT_MEMBERS, ...ARCHIVED_POLYGON_MEMBERS, 'operating.json']);
 const MAX_PHASE = 256 * 1024 * 1024;
 const reportProducts = new WeakMap();
+const preparedQueueSources = new WeakMap();
 const exactKeys = (value, keys) => value && typeof value === 'object' && !Array.isArray(value) &&
   Object.keys(value).sort().join() === [...keys].sort().join();
 
 // This accessor returns data, never accepted-checkpoint authority. Qualification
 // must separately authenticate the bot acceptance and independently merged PR.
 export function geographicReportProducts(report) { return reportProducts.get(report) ?? null; }
+
+// Provenance is private, unlike the mutable product data returned above. Keep
+// the admitted identity too, so replacing/mutating that data cannot relabel it.
+export function preparedQueueSource(report) {
+  const admitted = preparedQueueSources.get(report);
+  if (!admitted) return null;
+  const source = reportProducts.get(report)?.source;
+  need(source && Object.keys(admitted).every(key => source[key] === admitted[key]),
+    'Prepared geographic source differs from authenticated queue producer');
+  return admitted;
+}
 
 function extraFields(raw, start, size) {
   const end = start + size;
@@ -273,7 +285,7 @@ async function readGeographyOriginJob({api, repo, number, source}) {
   need(job && job.run_id === source.run_id &&
     job.run_attempt === source.run_attempt && job.head_sha === workflowHead,
     'Original geographic job identity or successful steps changed');
-  return job;
+  return {job, run};
 }
 
 // Historical PR producers could test a merge commit distinct from reviewed
@@ -290,7 +302,7 @@ export async function validateGeographyOrigin(options) {
   const {source} = options;
   validateGeographyProof(source);
   if (!source.current_run_attempt && !source.workflow_path) return;
-  const job = await readGeographyOriginJob(options);
+  const {job} = await readGeographyOriginJob(options);
   need(job.id === source.job_id, 'Original geographic job identity changed');
   await validatePRGeographyCandidate(options);
 }
@@ -306,7 +318,8 @@ export async function loadGeographicReport({api, repo, runId, artifactName, expe
     const identity = {run_id: Number(runId), run_attempt: originAttempt, head: fresh.head,
       baseline: fresh.baseline, candidate_commit: fresh.candidate_commit,
       workflow_path: QUEUE_WORKFLOW_PATH, event: 'workflow_dispatch', workflow_head: fresh.workflow_head};
-    const job = await readGeographyOriginJob({api, repo, source: identity});
+    const {job, run} = await readGeographyOriginJob({api, repo, source: identity});
+    need(run.head_branch === 'main', 'Fresh queue geography requires an authenticated main producer');
     const client = typeof api.jobLogRedirect === 'function' ? api : githubAPI(token, {fetchImpl, onRequest});
     const response = await client.jobLogRedirect(`/repos/${repo}/actions/jobs/${job.id}/logs`);
     const receipt = readGeographyJobReceipt(await downloadRedirect(response, fetchImpl, MAX_LOG), artifactName);
@@ -353,6 +366,7 @@ export async function loadGeographicReport({api, repo, runId, artifactName, expe
       'Retained geographic archive differs from accepted artifact digest');
     const report = readReportArchive(bytes, expectedHash, source.report_bytes, {admit});
     reportProducts.set(report, {...reportProducts.get(report), source, archive_bytes: bytes, archive_origin: 'retained-exact'});
+    if (fresh) preparedQueueSources.set(report, Object.freeze({...source}));
     return report;
   }
   need(Number.isSafeInteger(matches[0].id) && matches[0].id > 0 &&
@@ -368,7 +382,10 @@ export async function loadGeographicReport({api, repo, runId, artifactName, expe
   if (source) need(bytes.length === source.artifact_bytes && reportHash(bytes) === source.artifact_digest,
     'Original geographic archive differs from trusted upload receipt');
   const report = readReportArchive(bytes, expectedHash, source?.report_bytes, {admit});
+  // Only fresh queue loading authenticates this main-run producer and its job
+  // receipt here. Supplied/historical custody cannot attest queue preparation.
   reportProducts.set(report, {...reportProducts.get(report), source: source ?? null, archive_bytes: bytes, archive_origin: 'actions'});
+  if (fresh) preparedQueueSources.set(report, Object.freeze({...source}));
   return report;
 }
 
