@@ -528,7 +528,7 @@ async function pixelProducts(t) {
   p.pixelOnly=true;
   const before={...p.facts.candidate_selection,additive_release:{path:'data/previous-sidecar.json',bytes:1,sha256:'9'.repeat(64)}};
   p.facts.validation_stage='native-passed-continuous-not-applicable';
-  p.facts.repair_components=['old'];p.facts.baseline_selection=before;
+  p.facts.baseline_selection=before;
   p.facts.transition_plan.changed_ids=['A'];
   p.facts.transition_plan.source_bindings.baseline.selection=before;
   p.native.baseline_selection=before;p.native.affected_rows=1;
@@ -555,7 +555,7 @@ test('accepted pixel checkpoint rejects coherently rehashed missing or foreign n
     p=>p.native.repair_visibility.witnesses=[],p=>p.native.repair_visibility.witnesses[0].candidate_owner=2,
     p=>p.native.repair_visibility.witnesses[0].geometry_sha256='b'.repeat(64),
     p=>p.native.repair_visibility.witnesses[0].previous_owner=1,p=>p.native.native_row_scope.changed_rows=[],
-    p=>p.facts.repair_components=['foreign'],p=>p.facts.transition_plan.changed_ids=['B'],
+    p=>p.native.repair_visibility.witnesses[0].component_id='foreign',p=>p.facts.transition_plan.changed_ids=['B'],
     p=>p.continuous.complete_owners=2,p=>p.facts.baseline_selection=p.facts.candidate_selection,
     p=>delete p.facts.executing_policy,p=>p.census.routes.pop()]) {
     const a=await acquire(f,mutate);

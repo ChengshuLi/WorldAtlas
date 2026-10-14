@@ -527,7 +527,7 @@ function admitDerivedCheckpoint(session,reader,archiveReader,accepted) {
   };
   const factKeys='version,kind,validation_stage,accepted_checkpoint,executing_commit,execution_code,runtime,baseline_accepted_execution,executing_authority_pins,actual_reader_inventories,baseline_commit,candidate_commit,baseline_selection,candidate_selection,candidate_bindings,transition_plan,native_result_sha256,continuous_publication,candidate_code_executed,certificate,checkpoint_routes,executing_policy';
   const expectedFactKeys=seedRoot?factKeys.split(',').filter(key=>!['checkpoint_routes','executing_policy'].includes(key) || Object.hasOwn(facts??{},key)).join(','):factKeys;
-  keys(facts, expectedFactKeys+(Object.hasOwn(facts??{},'checkpoint_transport_inputs')?',checkpoint_transport_inputs':'')+(pixelOnly?',repair_components':''),
+  keys(facts, expectedFactKeys+(Object.hasOwn(facts??{},'checkpoint_transport_inputs')?',checkpoint_transport_inputs':''),
     'Unknown accepted derived checkpoint facts');
   demand(facts.version===1 && facts.kind==='derived-selected-checkpoint-candidate-v1'
     && (pixelOnly || facts.validation_stage==='native-passed-continuous-pending') && facts.accepted_checkpoint===false
@@ -643,7 +643,7 @@ function admitDerivedCheckpoint(session,reader,archiveReader,accepted) {
       && same(plan.source_bindings?.candidate, certificate.binding)
       && same(plan.source_bindings?.baseline.selection, facts.baseline_selection)
       && same(plan.changed_ids, continuous.changed_ids), 'Pixel-only certificate transition binding differs');
-    validatePixelRepairNative(native, additions, {componentIds:facts.repair_components,
+    validatePixelRepairNative(native, additions, {componentIds:native.repair_visibility?.witnesses?.map(row => row.component_id),
       changedIds:plan.changed_ids, changedRows:native.native_row_scope?.changed_rows, size:manifest.size});
   } else {
     demand(plan?.kind==='complete-selected-continuous-plan-v1' && plan.version===1

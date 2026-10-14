@@ -80,9 +80,6 @@ export const CHECKPOINT_MEMBERS = Object.freeze([
   'derived-certificate.json.gz', 'derived-facts.json', 'derived-publication.json',
   'facts.json', 'operands.json.gz', 'publication.json', 'checkpoint-routes.json'
 ]);
-export const PIXEL_CHECKPOINT_MEMBERS = Object.freeze([
-  'derived-certificate.json.gz', 'derived-facts.json', 'derived-publication.json', 'checkpoint-routes.json'
-]);
 const MEMBER_NAMES = new Set(['geography-check.json', ...CHECKPOINT_MEMBERS, 'operating.json']);
 const MAX_PHASE = 256 * 1024 * 1024;
 const reportProducts = new WeakMap();
@@ -201,7 +198,7 @@ export function readReportArchive(raw, expectedHash, expectedBytes, {admit = () 
     descriptor.kind === 'selected-checkpoint-products-v1' && Array.isArray(descriptor.members), 'Invalid checkpoint product descriptor');
   const names = descriptor.members.map(row => row?.name);
   const pixelOnly = report.selected_continuous_report?.scope === 'visible-native-pixel-repair-v1';
-  const required = pixelOnly ? PIXEL_CHECKPOINT_MEMBERS : CHECKPOINT_MEMBERS;
+  const required = pixelOnly ? CHECKPOINT_MEMBERS.filter(name => name.startsWith('derived-') || name === 'checkpoint-routes.json') : CHECKPOINT_MEMBERS;
   if (pixelOnly) need(report.selected_continuous_report.status === 'not-applicable'
     && report.selected_continuous_report.regressions === null
     && !Object.hasOwn(report.selected_continuous_report, 'original_strict_polygon_result'),

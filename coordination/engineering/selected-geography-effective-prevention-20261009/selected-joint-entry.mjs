@@ -292,7 +292,7 @@ export async function selectedJointStage(repo, trusted, baseline, candidate, des
       candidate_bindings:{ledger_sha256:valueSha(genuine.candidate.ledger), registry_sha256:valueSha(genuine.candidate.registry),
         patch_sha256:valueSha(genuine.candidate.patch), manifest_sha256:valueSha(genuine.candidate.manifest)},
       transition_plan:genuine.plan, native_result_sha256:valueSha(nativeReport),
-      continuous_publication:publication, ...(pixelOnly ? {repair_components:repairComponents} : {}), candidate_code_executed:false};
+      continuous_publication:publication, candidate_code_executed:false};
     const baseBytes = continuousBytes + 2 * routes.length;
     if (pixelOnly) {
       demand(budget.shared.used + 7 * FILE <= budget.shared.allowance.phaseBytes, 'Pixel checkpoint output exceeds current shared allowance');

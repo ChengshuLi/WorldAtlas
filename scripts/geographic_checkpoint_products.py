@@ -161,9 +161,8 @@ def retain_checkpoint_products(source, destination, issued, *, allowance=PHASE):
             or facts.get('checkpoint_routes') != derived.get('routes')
             or facts.get('continuous_publication') != publication):
         raise ValueError('Checkpoint complete publications or member bindings differ')
-    if pixel is not None and (facts.get('validation_stage') != derived['validation_stage']
-            or facts.get('repair_components') != [w['component_id'] for w in native['repair_visibility']['witnesses']]):
-        raise ValueError('Pixel-only facts differ from actual native repair scope')
+    if pixel is not None and facts.get('validation_stage') != derived['validation_stage']:
+        raise ValueError('Pixel-only facts differ from issued validation scope')
     # Match the producer's pre-wrapper native report without changing either
     # the complete retained report or the provisional derived facts.
     inverse = {key: value for key, value in native.items() if key not in (

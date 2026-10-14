@@ -116,7 +116,7 @@ function pixelFixture(t) {
   const derived=JSON.parse(fs.readFileSync(path.join(f.source,'derived-publication.json')));
   const facts=JSON.parse(fs.readFileSync(path.join(f.source,'derived-facts.json')));
   derived.validation_stage='native-passed-continuous-not-applicable';
-  Object.assign(facts,{validation_stage:derived.validation_stage,continuous_publication:null,repair_components:['new'],native_result_sha256:reportHash(bytes(native))});
+  Object.assign(facts,{validation_stage:derived.validation_stage,continuous_publication:null,native_result_sha256:reportHash(bytes(native))});
   derived.facts=f.put('derived-facts.json',bytes(facts));f.put('derived-publication.json',bytes(derived));
   const result={version:1,kind:'trusted-selected-continuous-comparison-v1',status:'not-applicable',
     scope:'visible-native-pixel-repair-v1',regressions:null,issued_publication:null,complete_owners:3,
