@@ -575,6 +575,14 @@ all existing entries, order and other policy fields. Supporting JSON/log evidenc
 cannot create package/import authority. Unknown boundaries retain all three full
 regression shards.
 
+The linked issue's explicitly declared scientific evidence manifest may also be
+updated as metadata. Its exact path comes from the current validated issue contract,
+not a candidate filename or broad JSON allowance. Both tree entries must be ordinary;
+the receipt must stay outside fixed selected/base roles and actual package inputs
+or verification paths. Bounded syntax checks do not replace its independent
+scientific/evidence validation or exact-head review. Arbitrary existing packet JSON
+edits, consumed manifests and unavailable qualification retain complete regression.
+
 Each such delivery adds exactly one `selected-delivery-expectations.json` under its
 owned delivery directory. Use the existing smoke's version 1 schema, authored from
 reviewed original authority/ledger inputs. Eligibility binds its ledger hash,

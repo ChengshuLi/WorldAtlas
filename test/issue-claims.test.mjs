@@ -139,3 +139,15 @@ test('live reservation refuses active blockers and can settle historical source-
  const held={...first(),mode:'source-only',branch:'research/historical'};
  assert.equal(transitionClaim({issue:issue(),comments:[comment(held)],request:request({action:'release',branch:held.branch,request_id:'ssssssss-ssss-ssss-ssss-ssssssssssss'}),now}).claim.active,false);
 });
+
+test('engineering scope carries only the existing validated owned scientific manifest',()=>{
+ const quality={version:1,manifest_path:'coordination/engineering/batch/evidence-quality.json',subject_ids:[],pins:{},review_kind:'code'};
+ const scoped=(q=quality)=>issue({body:'<!-- worldatlas-work:v1\n'+JSON.stringify({...spec,owned_paths:['coordination/engineering/batch/'],evidence_quality:q})+'\n-->'});
+ assert.equal(verifyIssueScope({issue:scoped(),branch:'engineering/repair-a'}).evidence_manifest,quality.manifest_path);
+ for(const changes of [{version:2},{manifest_path:'coordination/engineering/foreign/evidence-quality.json'},
+   {manifest_path:'coordination/engineering/batch/../evidence-quality.json'},
+   {manifest_path:'coordination/engineering/batch/other.json'},{review_kind:'unknown'},{subject_ids:['duplicate','duplicate']}])
+  assert.throws(()=>verifyIssueScope({issue:scoped({...quality,...changes}),branch:'engineering/repair-a'}));
+ const template=scoped({...quality,manifest_path:'coordination/engineering/{job}/evidence-quality.json'});
+ assert.equal(verifyIssueScope({issue:template,branch:'engineering/repair-a'}).evidence_manifest,'coordination/engineering/repair-a/evidence-quality.json');
+});
