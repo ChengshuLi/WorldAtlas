@@ -1,0 +1,60 @@
+{
+  "head": "b93320bfc65cf6fc70ddd403c9e3bd09519fc8c4",
+  "accepted_base": "f702b30caa7766f8d0837422eea8e0b686bf73b9",
+  "runtime_bytes": 121304480,
+  "execution_bytes": 368183,
+  "project_code": [
+    {
+      "path": "scripts/check-effective-geographic-regression.mjs",
+      "commit": "b93320bfc65cf6fc70ddd403c9e3bd09519fc8c4",
+      "bytes": 89420,
+      "sha256": "2d6af0a3946c0dec895ab3c42766ecd88c275c48cd465e6a90ff610e776809fe",
+      "git_blob_oid": "efd136faffdbcf166778b38562f10a0d8f4c7d09"
+    },
+    {
+      "path": "scripts/delivery-handoff-advance.mjs",
+      "commit": "b93320bfc65cf6fc70ddd403c9e3bd09519fc8c4",
+      "bytes": 72997,
+      "sha256": "ca11b67938a043ef6766c457c45df149b23486e3fb4447cec2afb69eea049d3a",
+      "git_blob_oid": "034d21d9c9353ce239ad1e7036ac0d14807a0a56"
+    },
+    {
+      "path": "scripts/geography-prefetch.mjs",
+      "commit": "b93320bfc65cf6fc70ddd403c9e3bd09519fc8c4",
+      "bytes": 13608,
+      "sha256": "19aba167eb32d5e7c08034a0e748db95e657d2ec0f10f8ee034cdeba9b2720a8",
+      "git_blob_oid": "1c22d410b9f1337f635d998928ffe9cb94c12815"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "commit": "b93320bfc65cf6fc70ddd403c9e3bd09519fc8c4",
+      "bytes": 157924,
+      "sha256": "2ec226787b05bab9138998d8881d4dd2ccfdc2bdb589883f043b287533ac15bf",
+      "git_blob_oid": "54f2f474e74846bd61530bb152c5f1b78a8c26e9"
+    },
+    {
+      "path": "src/native-grid.js",
+      "commit": "b93320bfc65cf6fc70ddd403c9e3bd09519fc8c4",
+      "bytes": 19304,
+      "sha256": "97c8bac69dd491aed15db0f63b34e4abce494b2287c9e57ca633e90398fdba1c",
+      "git_blob_oid": "7a7d1a8aa7e837ed88ccf5554d6db2df1fb40ac7"
+    },
+    {
+      "path": "src/ownership-codec.js",
+      "commit": "b93320bfc65cf6fc70ddd403c9e3bd09519fc8c4",
+      "bytes": 2948,
+      "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d",
+      "git_blob_oid": "03eacc9bcb1bff03723a93c248ea6de5f2fed5e4"
+    }
+  ],
+  "availableBytes": 1395277824,
+  "currentRssBytes": 54116352,
+  "concurrentReservedBytes": 1048576,
+  "allowance": {
+    "phaseBytes": 751230976,
+    "rssBytes": 751230976
+  },
+  "limits": [
+    "Existing cooperative phase/current-process RSS checks; no live process-tree or hard-wall enforcement."
+  ]
+}
