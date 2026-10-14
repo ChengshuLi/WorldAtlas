@@ -48,7 +48,9 @@ is uncertain, reconcile existing executions and current PR state first; never
 blindly redispatch. Reruns retain the original preparation and exact candidate;
 they cannot bypass missing or failed candidate checks.
 
-Read the workflow jobs, logs and retained result comment/artifact for diagnostics.
+Read the workflow jobs, logs and canonical bot result comment for diagnostics.
+`gh run view RUN-ID --log` retains the complete result even if notification fails;
+no duplicate diagnostic result artifact is produced.
 A green workflow, candidate SHA or bot comment alone does not establish a merge.
 Fresh PR API state must have `merged: true`, `.head.sha` equal to the exact reviewed
 head, and a nonempty `.merge_commit_sha`. Retain that actual squash commit and the

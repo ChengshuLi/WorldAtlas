@@ -59,15 +59,30 @@ test('trusted preparation has PR comment permission while candidate tests remain
     assert.match(unsafe,forbidden);
 });
 
-test('native failed-job retries retain original receipts without artifact-name collisions',()=>{
+test('native failed-job retries retain consumed artifacts without duplicate diagnostic result uploads',()=>{
   const yaml=fs.readFileSync(path.join(root,'.github/workflows/worker-merge.yml'),'utf8');
-  for(const name of ['native-built-output','merge'])
-    assert(yaml.includes(`name: ${name}-\${{ inputs.request_id }}-\${{ github.run_attempt }}`),name);
+  assert(yaml.includes('name: native-built-output-${{ inputs.request_id }}-${{ github.run_attempt }}'));
+  assert.doesNotMatch(yaml,/path: merge-result\.json|name: merge-preflight-/);
   assert.doesNotMatch(yaml,/overwrite: true/);
   const client=fs.readFileSync(path.join(root,'docs/MERGE_QUEUE_CLIENT.md'),'utf8');
   assert.match(client,/gh run rerun RUN-ID --repo ChengshuLi\/WorldAtlas --failed/);
   assert.match(client,/still the tested base/);
   assert.match(client,/execution predates attempt-qualified uploads/);
+});
+
+test('actual entry point logs the exact complete result when bot notification fails',()=>{
+  for(const accepted of [false,true]){
+    const {result,receipt}=run({phase:accepted?'merge':'prepare',merged:accepted,
+      readFails:!accepted,commentFails:true});
+    const logged=result.stdout.trim().split('\n').map(line=>{
+      try{return JSON.parse(line);}catch{return null;}
+    }).filter(row=>row?.request_id==='entrypoint-test-request');
+    assert(logged.length>=2,'The original decision and notification failure must both be preserved');
+    assert.deepEqual(logged.at(-1),receipt,'Every receipt field survives in actual subprocess stdout');
+    assert.equal(receipt.accepted,accepted);
+    assert.match(receipt.notification_error,/POST.*HTTP 403/);
+    assert.equal(result.status,accepted?0:1);
+  }
 });
 
 test('actual entry point saves stale/head/conflict/base diagnostics even when notification fails',()=>{
