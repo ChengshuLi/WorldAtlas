@@ -229,7 +229,7 @@ jobs:
       # Run trusted base code, not scripts modified by the pull request.
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
-          ref: ${{ github.event.pull_request.base.sha }}
+          ref: ${{ needs.profile.outputs.geography_baseline }}
           path: trusted
           persist-credentials: false
           sparse-checkout: |
@@ -264,7 +264,7 @@ jobs:
       - name: Check exact head paths with trusted code and authenticated issue ownership
         env:
           LANE_BRANCH: ${{ github.head_ref }}
-          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          BASE_SHA: ${{ needs.profile.outputs.geography_baseline }}
           OWNED_PATHS: ${{ needs.profile.outputs.owned_paths }}
           PR_BODY_JSON: ${{ needs.profile.outputs.pr_body }}
         working-directory: candidate
@@ -517,7 +517,7 @@ jobs:
         run: |
           python3 -I -S -B "$CI_CHECKOUT_HELPER" --repository ChengshuLi/WorldAtlas \
             --sha "$CI_CHECKOUT_SHA" --tree "$CI_CHECKOUT_TREE" --workspace "$GITHUB_WORKSPACE" \
-            --fetch-timeout-seconds 240 --total-timeout-seconds 420 --max-attempts 2 --elapsed-seconds "$CI_BOOTSTRAP_ELAPSED"
+            --total-timeout-seconds 420 --elapsed-seconds "$CI_BOOTSTRAP_ELAPSED"
       - name: Legacy full checkout only for proven trusted-helper absence
         if: (needs.profile.outputs.profile == 'full') && steps.checkout_bootstrap.outputs.mode == 'legacy'
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
@@ -839,7 +839,7 @@ jobs:
         run: |
           python3 -I -S -B "$CI_CHECKOUT_HELPER" --repository ChengshuLi/WorldAtlas \
             --sha "$CI_CHECKOUT_SHA" --tree "$CI_CHECKOUT_TREE" --workspace "$GITHUB_WORKSPACE" \
-            --fetch-timeout-seconds 240 --total-timeout-seconds 420 --max-attempts 2 --elapsed-seconds "$CI_BOOTSTRAP_ELAPSED"
+            --total-timeout-seconds 420 --elapsed-seconds "$CI_BOOTSTRAP_ELAPSED"
       - name: Legacy full checkout only for proven trusted-helper absence
         if: (needs.profile.outputs.full != 'false' && !(needs.profile.outputs.profile == 'full' && needs.profile.outputs.test_selection == 'complete')) && steps.checkout_bootstrap.outputs.mode == 'legacy'
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803

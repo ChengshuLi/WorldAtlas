@@ -1,7 +1,9 @@
 import {githubPages} from './issue-claim-contract.mjs';
 
+// Classification selects jobs; proof below verifies the completed inventory itself.
+// Its source identity adds no coverage guarantee to an unchanged tested tree.
 export const PROOF_PATHS = ['.github/workflows/merge-integration-checks.yml',
-  'scripts/run-integration-tests.mjs', 'scripts/integration-profile.mjs', 'scripts/check-integration-profile.mjs',
+  'scripts/run-integration-tests.mjs', 'scripts/check-integration-profile.mjs',
   'scripts/check-pr-gates.mjs'];
 export const WORKFLOW_PATH = PROOF_PATHS[0];
 export const QUEUE_WORKFLOW_PATH = '.github/workflows/worker-merge.yml';

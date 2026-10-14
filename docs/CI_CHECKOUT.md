@@ -23,8 +23,7 @@ python3 "$AUTHENTICATED_HELPER" \
   --repository ChengshuLi/WorldAtlas \
   --sha "$EXACT_CANDIDATE_SHA" --tree "$AUTHENTICATED_TREE_SHA" \
   --workspace "$GITHUB_WORKSPACE" \
-  --fetch-timeout-seconds 240 --total-timeout-seconds 420 \
-  --max-attempts 2 --elapsed-seconds "$BOOTSTRAP_ELAPSED_SECONDS"
+  --total-timeout-seconds 420 --elapsed-seconds "$BOOTSTRAP_ELAPSED_SECONDS"
 ```
 
 The workflow obtains the candidate's tree from the exact immutable Git commit
@@ -32,8 +31,8 @@ metadata. Both identifiers must match the fetched commit and checked-out tree.
 The workspace must be an existing empty ordinary absolute directory. The helper
 rechecks its device/inode, absence of symlinks and emptiness immediately before
 atomic same-filesystem replacement. Preexisting or newly arriving foreign files
-are preserved. Every attempt uses a fresh private sibling repository; cleanup
-never removes the workspace to make a retry possible.
+are preserved. Acquisition uses one private sibling repository and one fetch;
+terminal cleanup never removes the workspace.
 
 The dedicated `WORLDATLAS_CHECKOUT_TOKEN` environment variable is removed from
 the helper environment immediately. Only the fetch child receives authentication,
@@ -45,27 +44,21 @@ disabled. No submodules are acquired. The full checkout remains a normal Git
 repository with a detached exact HEAD, depth-one history and unchanged tracked
 file modes/content; it is not reconstructed from an archive or file API.
 
-## Deadlines, retries and cleanup
+## Overall deadline and cleanup
 
-One monotonic total budget includes the supplied bootstrap elapsed time, all
-attempts, checkout, identity checks and cleanup. Each fetch is additionally limited
-to 240 seconds. At most two fetch attempts run. These workflow defaults are
-configurable: the helper accepts a finite total budget up to 1,800 seconds, with
-the fetch limit no greater than that total and bootstrap elapsed time below it.
-The 30-minute implementation ceiling is a broad runaway-acquisition safeguard,
-below the existing 35-minute queue job limit; it is not a measured transfer
-threshold or additional job allowance. A trusted caller must choose its budget
-within its own job deadline and leave time for subsequent work. The author and
-package job limits remain 25 and 30 minutes. Zero/negative/nonfinite budgets,
-values beyond those relationships or the safety ceiling, and attempt counts
-outside one or two refuse. The helper reserves time
-inside the total budget for termination and cleanup, and may refuse another
-attempt when the remaining budget is insufficient.
-
-Only failed or timed-out fetches are retryable. Wrong commit/tree, failed checkout,
-invalid configuration, changed workspace, cancellation or unverifiable process
-cleanup refuse without another fetch. A retry starts only after the prior owned
-process group has stopped and its partial repository has been removed.
+One monotonic total budget includes the supplied bootstrap elapsed time, fetch,
+checkout, identity checks and terminal cleanup. A progressing fetch has no separate
+cutoff and is not restarted in a fresh repository. The workflow default remains
+420 seconds. The helper accepts a finite total budget up to 1,800 seconds, with
+bootstrap elapsed time below it. The 30-minute implementation ceiling remains a
+runaway-acquisition safeguard, below the existing 35-minute queue job limit; it is
+not an additional job allowance. A trusted caller must choose its budget within
+its job deadline and leave time for subsequent work. The author and package job
+limits remain 25 and 30 minutes. Invalid, nonfinite, spent or oversized budgets
+refuse before staging. The supervisor reserves time inside the total budget for
+termination and cleanup. Command failure, wrong commit/tree, failed checkout,
+changed workspace, cancellation or unverifiable process cleanup ends acquisition
+without another fetch.
 
 Each command starts a new process session. SIGINT/SIGTERM and deadlines trigger
 bounded TERM/KILL escalation, direct-child reaping and verification that no live
@@ -77,17 +70,17 @@ and processes that deliberately escape the owned session cannot be guaranteed
 cleaned by user-space supervision; runner teardown remains the final isolation
 boundary. No candidate code runs during acquisition.
 
-The 240/420-second initial settings are operational bounds informed by the sampled
+The retained 420-second total budget is an operational bound informed by sampled
 successful full checkouts (117–292 seconds) and directly inspected fetches
 (approximately 80–220 seconds). The incident fetch lasted 1,595.528 seconds before
 succeeding. These observations establish neither its root cause nor a performance
-percentile. Bounds can reject a healthy slow transfer; a retry may fail or exhaust
-the remaining budget. The existing 25/30/35-minute job limits are not increased,
-and successful acquisition does not promise that later tests finish within them.
+percentile. The overall deadline can still reject a healthy slow transfer; this
+helper does not discard progress to restart it within that same budget. The existing
+25/30/35-minute job limits are not increased, and successful acquisition does not promise that later tests finish within them.
 
 ## Observation and verification
 
-JSON lines report phase, attempt, status, elapsed/remaining seconds and allowlisted
+JSON lines report phase, status, elapsed/remaining seconds and allowlisted
 numeric Git progress. Fetch explicitly requests `--progress`. Raw Git stderr,
 trace files, HTTP headers and arbitrary command output are never emitted. Git
 progress describes the reported operation; it does not independently measure
@@ -98,8 +91,8 @@ The workflow retains one canonical successful checkout verification step under
 the existing proof-consumer name, following either authenticated acquisition or
 the initial legacy path. That step checks the actual detached HEAD, tree, origin
 and absence of credential configuration. Build/tests begin only after success.
-Acquisition retries do not dispatch workflows, revive settled tickets or rerun
-completed scientific checks.
+A failed acquisition does not dispatch another workflow or rerun completed
+scientific checks.
 
 Run the lightweight controls with Node 24 and Python 3.7 or newer:
 
