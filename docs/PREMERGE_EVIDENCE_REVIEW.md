@@ -170,6 +170,16 @@ For a declared scientific manifest, post one `worldatlas-review:v1` JSON comment
 -->
 ```
 
+Before posting a scientific receipt, use the existing `validateReviewReceipt`
+from `scripts/premerge-evidence.mjs` with the actual final manifest/hash, exact
+head, current PR and required review domain. Top-level `outcome` is `accepted`;
+`accepted-with-limits` is a domain outcome, not a top-level replacement. Include
+every validator-generated limit verbatim in the top-level `limits` array,
+alongside the reviewer's additional qualifications. Reuse this existing schema
+and validator rather than inventing labels or paraphrasing required limits.
+A receipt-format rejection does not invalidate unchanged science, but the
+corrected receipt must pass the ordinary gate before integration.
+
 Only needed domains are required; do not claim a review you did not perform. The latest receipt from each worker for the current head is authoritative; any unresolved changes-requested outcome blocks. New commits invalidate reviews even if they only update main. The standard integration workflow rereads the head, current checks, issue contract, actual files/bytes and applicable scientific receipts before a SHA-guarded squash merge. It preserves the soft 1,000 non-test-line review target. No provider changes, token rotation, deployment or live import occurs as part of this gate.
 
 ## Activation proof and limitations

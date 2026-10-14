@@ -160,6 +160,14 @@ independently derived expectations, source inspection or adverse fixtures.
    partial work. Use Closes #N only when all original acceptance, including required
    production acceptance, is proven. Request independent review of the final head.
 
+   Settle the issue acceptance, PR body and completion/continuation disposition
+   before publishing the final measured head. Keep them stable while trusted
+   gates run; put routine progress in issue or PR comments. If an actual scope or
+   disposition correction is necessary, make it, renew the relevant review and
+   run the ordinary gates against the settled state. Preserve the rejected
+   attempt and its elapsed time; a metadata-race rejection is not a successful
+   code or scientific check. Do not weaken the consistency check to avoid it.
+
 Judge completion against the owning issue's original promise. A bounded
 read-boundary or output-safety repair can finish while the original geography
 remains unapproved; its independent source questions keep their existing owners.
