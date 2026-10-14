@@ -39,8 +39,8 @@ identity remain independent; no nearest-bank inference is used.
 
 ## Verification and measured phases
 
-Preparation began 2026-10-14T04:42:26Z. Exact queue extraction took 0.970 seconds;
-current-source/current-owner acquisition and candidate subtraction took 4.807
+Preparation began 2026-10-14T04:42:26Z. Exact queue extraction took 0.968 seconds;
+current-source/current-owner acquisition and candidate subtraction took 4.806
 seconds. Unchanged complete GSHHG source-hierarchy interpretation took 5.520 seconds
 and had no target interpretation issues. The final two-target immutable authority
 constructor took 1.158 seconds. These overlap with independent review and are not
