@@ -1,0 +1,700 @@
+{
+  "version": "a35ba193cfe5c84424a4952ca752593ebf9d7102",
+  "current_commit": "a35ba193cfe5c84424a4952ca752593ebf9d7102",
+  "selection": {
+    "artifact_consumption": {
+      "certificate": {
+        "bytes": 68158,
+        "mode": "100644",
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/consumption-certificate.json",
+        "sha256": "26b505e3131a2513badc45d1552bcf603c24c565bdfb21b0f623fe4e6c7d4070"
+      },
+      "review": {
+        "bytes": 7379,
+        "mode": "100644",
+        "path": "coordination/engineering/additive-native-activation-20261009/independent-native-consumption-wrapper-self-pin-review.json",
+        "sha256": "87ab56e1354dd8a8fda532bfa008436abd35c6c506f0e0685eaa2f2f07f59a8a"
+      }
+    },
+    "manifest_path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/manifest.json",
+    "method": "native-linear-evenodd-first-owner-v1",
+    "release_id": "geography:review:dbb133d7b123bacd1d38253c467891bff656d011000a9f11d369ac9262302bfb",
+    "selected_geography": {
+      "version": 1,
+      "kind": "complete-world-index-with-exact-encoded-overrides",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography-bank.json",
+      "bytes": 14656,
+      "sha256": "3750f72a48bb9fd498ca129e20e299904239bfe1b4191919fbc89b636234c776"
+    },
+    "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+    "version": 1,
+    "additive_release": {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/release-001/selection-sidecar.json",
+      "bytes": 3521,
+      "sha256": "9d7c827eef311f6c5a2bfc23fdfbe29aaf9219832443cf7277ed6e9f23697d9f"
+    }
+  },
+  "patch": {
+    "bytes": 16380,
+    "commit": "9f9c829475d14da1488fe4cc7ec76720e194fd8c",
+    "git_blob_oid": "5d9cbebb7de2a856bae2aa5aff2bda17e0325315",
+    "mode": "100644",
+    "path": "coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/assembly-001/patch.json",
+    "sha256": "b44fc535b704fd88ccad45b85fbad73849b9f54c12bd3a83a158915b072414ac"
+  },
+  "native_latitudes": {
+    "root": "repository",
+    "role": "immutable-normative-rule-input",
+    "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+    "commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+    "bytes": 1851757,
+    "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+    "decoded_bytes": 2097328,
+    "decoded_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+  },
+  "elapsed_ms": 3158,
+  "rss_bytes": 190889984,
+  "candidates": [
+    {
+      "component_id": "physical-component:2b4f4da5787b5d718443cca535274ed74ae62ff08f7b410c46277ef36705e0ff",
+      "geometry_sha256": "3b957cd8e55a6cad598ef9837f11367bab8bf5c5daf04fbb6333eb24c48f1816",
+      "country_codes": [
+        "IDN"
+      ],
+      "source_product": {
+        "captured_file": {
+          "bytes": 3051391,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/global-source-comparisons-a-001-20261006/i/187.bin",
+          "sha256": "ef394916ba97454b5592e66eba1df67199731ce7d9636cc3968843801ae904a8",
+          "uncompressed_bytes": 11002896,
+          "uncompressed_sha256": "146653d488331086ddc43d159a261b01ea6dd08c7ed422e34a9886c3c690430c"
+        },
+        "license": {
+          "status": "redistributable",
+          "terms": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO); original source metadata and attribution retained through source catalogue and feature bindings."
+        },
+        "limit": "Whole source bytes verified, source date/physical water/legal meaning not independently approved.",
+        "original_atlas_recipe": {
+          "bytes": 12313,
+          "commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+          "path": "scripts/administrative.py",
+          "sha256": "d9df8285f1c270856a8e79b95636cf4b8d8496f48b30348a1e4d6d20619b2f22"
+        },
+        "original_atlas_registry": {
+          "Continent": "Asia",
+          "UNSDG-region": "Eastern and South-Eastern Asia",
+          "UNSDG-subregion": "South-Eastern Asia",
+          "admUnitCount": "519",
+          "boundaryCanonical": "regency, city",
+          "boundaryID": "IDN-ADM2-22746128",
+          "boundaryISO": "IDN",
+          "boundaryLicense": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+          "boundaryName": "Indonesia",
+          "boundarySource": "Badan Pusat Statistik (BPS - Statistics Indonesia), World Food Programme, OCHA ROAP",
+          "boundarySourceURL": "data.humdata.org/dataset/indonesia-administrative-boundary-polygons-lines-and-places-levels-0-4b",
+          "boundaryType": "ADM2",
+          "boundaryYearRepresented": "2020",
+          "buildDate": "Dec 12, 2023",
+          "gjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IDN/ADM2/geoBoundaries-IDN-ADM2.geojson",
+          "imagePreview": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IDN/ADM2/geoBoundaries-IDN-ADM2-PREVIEW.png",
+          "licenseDetail": "nan",
+          "licenseSource": "data.humdata.org/dataset/indonesia-administrative-boundary-polygons-lines-and-places-levels-0-4b",
+          "maxAreaSqKM": "44014.03200064065",
+          "maxPerimeterLengthKM": "3634.138024399851",
+          "maxVertices": "216482",
+          "meanAreaSqKM": "3643.688352591525",
+          "meanPerimeterLengthKM": "436.9705237671862",
+          "meanVertices": "7366.0",
+          "minAreaSqKM": "10.783104526832211",
+          "minPerimeterLengthKM": "20.92232602875445",
+          "minVertices": "172",
+          "sha256": "146653d488331086ddc43d159a261b01ea6dd08c7ed422e34a9886c3c690430c",
+          "simplifiedGeometryGeoJSON": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IDN/ADM2/geoBoundaries-IDN-ADM2_simplified.geojson",
+          "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023",
+          "staticDownloadLink": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IDN/ADM2/geoBoundaries-IDN-ADM2-all.zip",
+          "tjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IDN/ADM2/geoBoundaries-IDN-ADM2.topojson",
+          "worldBankIncomeGroup": "Lower-middle-income Countries"
+        },
+        "packet": "global-source-comparisons-a-001-20261006",
+        "product_id": "gb:IDN:ADM2",
+        "retention": "retained",
+        "retrieved_at": "2026-10-06 immutable accepted capsule readback; historical retrieval time remains unknown",
+        "role": "Complete original consumed input geometry, not dated physical land/water or legal authority",
+        "temporal_status": "reference",
+        "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IDN/ADM2/geoBoundaries-IDN-ADM2_simplified.geojson",
+        "verification": "unverified",
+        "vintage": "Original consumed whole SHA 146653d488331086ddc43d159a261b01ea6dd08c7ed422e34a9886c3c690430c; advertised represented year 2020"
+      },
+      "area_m2": 45314.30830963075,
+      "rowStart": 134078,
+      "rowEnd": 134081,
+      "complete": true,
+      "native_candidate_cells": 2,
+      "current_unassigned_cells": 2,
+      "status": "visible",
+      "cells": [
+        {
+          "x": 219539,
+          "y": 134079,
+          "base_owner": 0,
+          "effective_owner": 0
+        },
+        {
+          "x": 219539,
+          "y": 134080,
+          "base_owner": 0,
+          "effective_owner": 0
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:9f5d178736a1a6549f7660e6d048e61923c33865d08f91445a5237ce20d4e29b",
+      "geometry_sha256": "a034b405d73b318d48eced1365d5a19d3ffdfc8a74e5d09e1897851a293f6cf7",
+      "country_codes": [
+        "MMR"
+      ],
+      "source_product": {
+        "captured_file": {
+          "bytes": 1396414,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/global-source-comparisons-a-001-20261006/i/141.bin",
+          "sha256": "57de50a588f418601412bb7a34cc2f43a3fd6d7d6f16635cb41b95e5ae505db6",
+          "uncompressed_bytes": 4205367,
+          "uncompressed_sha256": "94c0c9af839094257d13a6fe6590feddb2dcb04540d87e58b656c9f000fb92a2"
+        },
+        "license": {
+          "status": "redistributable",
+          "terms": "Creative Commons Attribution 4.0 (CC BY 4.0); original source metadata and attribution retained through source catalogue and feature bindings."
+        },
+        "limit": "Whole source bytes verified, source date/physical water/legal meaning not independently approved.",
+        "original_atlas_recipe": {
+          "bytes": 12313,
+          "commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+          "path": "scripts/administrative.py",
+          "sha256": "d9df8285f1c270856a8e79b95636cf4b8d8496f48b30348a1e4d6d20619b2f22"
+        },
+        "original_atlas_registry": {
+          "Continent": "Asia",
+          "UNSDG-region": "Eastern and South-Eastern Asia",
+          "UNSDG-subregion": "South-Eastern Asia",
+          "admUnitCount": "330",
+          "boundaryCanonical": "Township",
+          "boundaryID": "MMR-ADM3-66882298",
+          "boundaryISO": "MMR",
+          "boundaryLicense": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+          "boundaryName": "Myanmar",
+          "boundarySource": "The Myanmar Analytics Project, USAID",
+          "boundarySourceURL": "data.mmanalytics.org/dataset/0202393f-fbdc-4e4f-9ff2-5470aee60aef/resource/4c55b1a7-e9e1-40d6-9b16-c22e062727ec",
+          "boundaryType": "ADM3",
+          "boundaryYearRepresented": "2019",
+          "buildDate": "Dec 12, 2023",
+          "gjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM3/geoBoundaries-MMR-ADM3.geojson",
+          "imagePreview": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM3/geoBoundaries-MMR-ADM3-PREVIEW.png",
+          "licenseDetail": "nan",
+          "licenseSource": "data.mmanalytics.org/dataset/0202393f-fbdc-4e4f-9ff2-5470aee60aef/resource/4c55b1a7-e9e1-40d6-9b16-c22e062727ec",
+          "maxAreaSqKM": "12340.049668821144",
+          "maxPerimeterLengthKM": "2668.392814781436",
+          "maxVertices": "5292",
+          "meanAreaSqKM": "2025.9256176348608",
+          "meanPerimeterLengthKM": "288.62779971592374",
+          "meanVertices": "601.0",
+          "minAreaSqKM": "0.6034277824178252",
+          "minPerimeterLengthKM": "3.336862759353927",
+          "minVertices": "15",
+          "sha256": "94c0c9af839094257d13a6fe6590feddb2dcb04540d87e58b656c9f000fb92a2",
+          "simplifiedGeometryGeoJSON": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM3/geoBoundaries-MMR-ADM3_simplified.geojson",
+          "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023",
+          "staticDownloadLink": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM3/geoBoundaries-MMR-ADM3-all.zip",
+          "tjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM3/geoBoundaries-MMR-ADM3.topojson",
+          "worldBankIncomeGroup": "Lower-middle-income Countries"
+        },
+        "packet": "global-source-comparisons-a-001-20261006",
+        "product_id": "gb:MMR:ADM3",
+        "retention": "retained",
+        "retrieved_at": "2026-10-06 immutable accepted capsule readback; historical retrieval time remains unknown",
+        "role": "Complete original consumed input geometry, not dated physical land/water or legal authority",
+        "temporal_status": "reference",
+        "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM3/geoBoundaries-MMR-ADM3_simplified.geojson",
+        "verification": "unverified",
+        "vintage": "Original consumed whole SHA 94c0c9af839094257d13a6fe6590feddb2dcb04540d87e58b656c9f000fb92a2; advertised represented year 2019"
+      },
+      "area_m2": 86139.49035664447,
+      "rowStart": 122006,
+      "rowEnd": 122011,
+      "complete": true,
+      "native_candidate_cells": 4,
+      "current_unassigned_cells": 4,
+      "status": "visible",
+      "cells": [
+        {
+          "x": 202519,
+          "y": 122007,
+          "base_owner": 0,
+          "effective_owner": 0
+        },
+        {
+          "x": 202518,
+          "y": 122008,
+          "base_owner": 0,
+          "effective_owner": 0
+        },
+        {
+          "x": 202516,
+          "y": 122009,
+          "base_owner": 0,
+          "effective_owner": 0
+        },
+        {
+          "x": 202515,
+          "y": 122010,
+          "base_owner": 0,
+          "effective_owner": 0
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:ae27cc3d8e51ae163f2052f4455cb072bca1960607d7de8fb8cc087e8257f79b",
+      "geometry_sha256": "d14a7d75e87a0711087916593b653fd84259f996b1bba79936e2732afde564bc",
+      "country_codes": [
+        "MMR"
+      ],
+      "source_product": {
+        "captured_file": {
+          "bytes": 1396414,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/global-source-comparisons-a-001-20261006/i/141.bin",
+          "sha256": "57de50a588f418601412bb7a34cc2f43a3fd6d7d6f16635cb41b95e5ae505db6",
+          "uncompressed_bytes": 4205367,
+          "uncompressed_sha256": "94c0c9af839094257d13a6fe6590feddb2dcb04540d87e58b656c9f000fb92a2"
+        },
+        "license": {
+          "status": "redistributable",
+          "terms": "Creative Commons Attribution 4.0 (CC BY 4.0); original source metadata and attribution retained through source catalogue and feature bindings."
+        },
+        "limit": "Whole source bytes verified, source date/physical water/legal meaning not independently approved.",
+        "original_atlas_recipe": {
+          "bytes": 12313,
+          "commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+          "path": "scripts/administrative.py",
+          "sha256": "d9df8285f1c270856a8e79b95636cf4b8d8496f48b30348a1e4d6d20619b2f22"
+        },
+        "original_atlas_registry": {
+          "Continent": "Asia",
+          "UNSDG-region": "Eastern and South-Eastern Asia",
+          "UNSDG-subregion": "South-Eastern Asia",
+          "admUnitCount": "330",
+          "boundaryCanonical": "Township",
+          "boundaryID": "MMR-ADM3-66882298",
+          "boundaryISO": "MMR",
+          "boundaryLicense": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+          "boundaryName": "Myanmar",
+          "boundarySource": "The Myanmar Analytics Project, USAID",
+          "boundarySourceURL": "data.mmanalytics.org/dataset/0202393f-fbdc-4e4f-9ff2-5470aee60aef/resource/4c55b1a7-e9e1-40d6-9b16-c22e062727ec",
+          "boundaryType": "ADM3",
+          "boundaryYearRepresented": "2019",
+          "buildDate": "Dec 12, 2023",
+          "gjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM3/geoBoundaries-MMR-ADM3.geojson",
+          "imagePreview": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM3/geoBoundaries-MMR-ADM3-PREVIEW.png",
+          "licenseDetail": "nan",
+          "licenseSource": "data.mmanalytics.org/dataset/0202393f-fbdc-4e4f-9ff2-5470aee60aef/resource/4c55b1a7-e9e1-40d6-9b16-c22e062727ec",
+          "maxAreaSqKM": "12340.049668821144",
+          "maxPerimeterLengthKM": "2668.392814781436",
+          "maxVertices": "5292",
+          "meanAreaSqKM": "2025.9256176348608",
+          "meanPerimeterLengthKM": "288.62779971592374",
+          "meanVertices": "601.0",
+          "minAreaSqKM": "0.6034277824178252",
+          "minPerimeterLengthKM": "3.336862759353927",
+          "minVertices": "15",
+          "sha256": "94c0c9af839094257d13a6fe6590feddb2dcb04540d87e58b656c9f000fb92a2",
+          "simplifiedGeometryGeoJSON": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM3/geoBoundaries-MMR-ADM3_simplified.geojson",
+          "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023",
+          "staticDownloadLink": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM3/geoBoundaries-MMR-ADM3-all.zip",
+          "tjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM3/geoBoundaries-MMR-ADM3.topojson",
+          "worldBankIncomeGroup": "Lower-middle-income Countries"
+        },
+        "packet": "global-source-comparisons-a-001-20261006",
+        "product_id": "gb:MMR:ADM3",
+        "retention": "retained",
+        "retrieved_at": "2026-10-06 immutable accepted capsule readback; historical retrieval time remains unknown",
+        "role": "Complete original consumed input geometry, not dated physical land/water or legal authority",
+        "temporal_status": "reference",
+        "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM3/geoBoundaries-MMR-ADM3_simplified.geojson",
+        "verification": "unverified",
+        "vintage": "Original consumed whole SHA 94c0c9af839094257d13a6fe6590feddb2dcb04540d87e58b656c9f000fb92a2; advertised represented year 2019"
+      },
+      "area_m2": 35596.34892829693,
+      "rowStart": 116247,
+      "rowEnd": 116250,
+      "complete": true,
+      "native_candidate_cells": 2,
+      "current_unassigned_cells": 2,
+      "status": "visible",
+      "cells": [
+        {
+          "x": 199141,
+          "y": 116248,
+          "base_owner": 0,
+          "effective_owner": 0
+        },
+        {
+          "x": 199138,
+          "y": 116249,
+          "base_owner": 0,
+          "effective_owner": 0
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:e4abb61a130c9be6d764a0a058df31d6acd4f427624c8b3d5af9bdb709b8badf",
+      "geometry_sha256": "9a10aa8c28771becb37b3e2f2da3bba6422712244f44db3a3d4f3786976ebc20",
+      "country_codes": [
+        "IDN"
+      ],
+      "source_product": {
+        "captured_file": {
+          "bytes": 3051391,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/global-source-comparisons-a-001-20261006/i/187.bin",
+          "sha256": "ef394916ba97454b5592e66eba1df67199731ce7d9636cc3968843801ae904a8",
+          "uncompressed_bytes": 11002896,
+          "uncompressed_sha256": "146653d488331086ddc43d159a261b01ea6dd08c7ed422e34a9886c3c690430c"
+        },
+        "license": {
+          "status": "redistributable",
+          "terms": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO); original source metadata and attribution retained through source catalogue and feature bindings."
+        },
+        "limit": "Whole source bytes verified, source date/physical water/legal meaning not independently approved.",
+        "original_atlas_recipe": {
+          "bytes": 12313,
+          "commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+          "path": "scripts/administrative.py",
+          "sha256": "d9df8285f1c270856a8e79b95636cf4b8d8496f48b30348a1e4d6d20619b2f22"
+        },
+        "original_atlas_registry": {
+          "Continent": "Asia",
+          "UNSDG-region": "Eastern and South-Eastern Asia",
+          "UNSDG-subregion": "South-Eastern Asia",
+          "admUnitCount": "519",
+          "boundaryCanonical": "regency, city",
+          "boundaryID": "IDN-ADM2-22746128",
+          "boundaryISO": "IDN",
+          "boundaryLicense": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+          "boundaryName": "Indonesia",
+          "boundarySource": "Badan Pusat Statistik (BPS - Statistics Indonesia), World Food Programme, OCHA ROAP",
+          "boundarySourceURL": "data.humdata.org/dataset/indonesia-administrative-boundary-polygons-lines-and-places-levels-0-4b",
+          "boundaryType": "ADM2",
+          "boundaryYearRepresented": "2020",
+          "buildDate": "Dec 12, 2023",
+          "gjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IDN/ADM2/geoBoundaries-IDN-ADM2.geojson",
+          "imagePreview": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IDN/ADM2/geoBoundaries-IDN-ADM2-PREVIEW.png",
+          "licenseDetail": "nan",
+          "licenseSource": "data.humdata.org/dataset/indonesia-administrative-boundary-polygons-lines-and-places-levels-0-4b",
+          "maxAreaSqKM": "44014.03200064065",
+          "maxPerimeterLengthKM": "3634.138024399851",
+          "maxVertices": "216482",
+          "meanAreaSqKM": "3643.688352591525",
+          "meanPerimeterLengthKM": "436.9705237671862",
+          "meanVertices": "7366.0",
+          "minAreaSqKM": "10.783104526832211",
+          "minPerimeterLengthKM": "20.92232602875445",
+          "minVertices": "172",
+          "sha256": "146653d488331086ddc43d159a261b01ea6dd08c7ed422e34a9886c3c690430c",
+          "simplifiedGeometryGeoJSON": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IDN/ADM2/geoBoundaries-IDN-ADM2_simplified.geojson",
+          "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023",
+          "staticDownloadLink": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IDN/ADM2/geoBoundaries-IDN-ADM2-all.zip",
+          "tjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IDN/ADM2/geoBoundaries-IDN-ADM2.topojson",
+          "worldBankIncomeGroup": "Lower-middle-income Countries"
+        },
+        "packet": "global-source-comparisons-a-001-20261006",
+        "product_id": "gb:IDN:ADM2",
+        "retention": "retained",
+        "retrieved_at": "2026-10-06 immutable accepted capsule readback; historical retrieval time remains unknown",
+        "role": "Complete original consumed input geometry, not dated physical land/water or legal authority",
+        "temporal_status": "reference",
+        "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IDN/ADM2/geoBoundaries-IDN-ADM2_simplified.geojson",
+        "verification": "unverified",
+        "vintage": "Original consumed whole SHA 146653d488331086ddc43d159a261b01ea6dd08c7ed422e34a9886c3c690430c; advertised represented year 2020"
+      },
+      "area_m2": 54099.1967882201,
+      "rowStart": 137068,
+      "rowEnd": 137075,
+      "complete": true,
+      "native_candidate_cells": 3,
+      "current_unassigned_cells": 3,
+      "status": "visible",
+      "cells": [
+        {
+          "x": 216638,
+          "y": 137069,
+          "base_owner": 0,
+          "effective_owner": 0
+        },
+        {
+          "x": 216638,
+          "y": 137070,
+          "base_owner": 0,
+          "effective_owner": 0
+        },
+        {
+          "x": 216637,
+          "y": 137074,
+          "base_owner": 0,
+          "effective_owner": 0
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:f4516260fac3e4331de3658dde9bff6614d897c4bac651a962f80196b6ca94bc",
+      "geometry_sha256": "4395c70ea51ab547323d5a986069913a4bdbde9dfb2de3174e142341a29fcde6",
+      "country_codes": [
+        "VNM"
+      ],
+      "source_product": {
+        "captured_file": {
+          "bytes": 1624579,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/global-source-comparisons-a-001-20261006/i/155.bin",
+          "sha256": "8fa769599000ab536b18b4a9d18c71fe0fecbe134d4443e36e6b2797b41273a8",
+          "uncompressed_bytes": 5273788,
+          "uncompressed_sha256": "2dff75b58e71f736ca9fd6ef7c859be40c6f9a9b7ae5cd0806b36fe8cfa4c4f6"
+        },
+        "license": {
+          "status": "redistributable",
+          "terms": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO); original source metadata and attribution retained through source catalogue and feature bindings."
+        },
+        "limit": "Whole source bytes verified, source date/physical water/legal meaning not independently approved.",
+        "original_atlas_recipe": {
+          "bytes": 12313,
+          "commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+          "path": "scripts/administrative.py",
+          "sha256": "d9df8285f1c270856a8e79b95636cf4b8d8496f48b30348a1e4d6d20619b2f22"
+        },
+        "original_atlas_registry": {
+          "Continent": "Asia",
+          "UNSDG-region": "Eastern and South-Eastern Asia",
+          "UNSDG-subregion": "South-Eastern Asia",
+          "admUnitCount": "708",
+          "boundaryCanonical": "District",
+          "boundaryID": "VNM-ADM2-81297802",
+          "boundaryISO": "VNM",
+          "boundaryLicense": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+          "boundaryName": "Viet Nam",
+          "boundarySource": "OCHA ROAP, Government of Viet Nam",
+          "boundarySourceURL": "data.humdata.org/dataset/viet-nam-administrative-boundaries-polygon-polyline",
+          "boundaryType": "ADM2",
+          "boundaryYearRepresented": "2020",
+          "buildDate": "Dec 12, 2023",
+          "gjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/VNM/ADM2/geoBoundaries-VNM-ADM2.geojson",
+          "imagePreview": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/VNM/ADM2/geoBoundaries-VNM-ADM2-PREVIEW.png",
+          "licenseDetail": "nan",
+          "licenseSource": "data.humdata.org/dataset/viet-nam-administrative-boundaries-polygon-polyline",
+          "maxAreaSqKM": "4074.27599773748",
+          "maxPerimeterLengthKM": "2804.5191891633062",
+          "maxVertices": "43238",
+          "meanAreaSqKM": "472.5408582406968",
+          "meanPerimeterLengthKM": "133.0545855988554",
+          "meanVertices": "1385.0",
+          "minAreaSqKM": "2.163623106229997",
+          "minPerimeterLengthKM": "5.881832884704935",
+          "minVertices": "60",
+          "sha256": "2dff75b58e71f736ca9fd6ef7c859be40c6f9a9b7ae5cd0806b36fe8cfa4c4f6",
+          "simplifiedGeometryGeoJSON": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/VNM/ADM2/geoBoundaries-VNM-ADM2_simplified.geojson",
+          "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023",
+          "staticDownloadLink": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/VNM/ADM2/geoBoundaries-VNM-ADM2-all.zip",
+          "tjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/VNM/ADM2/geoBoundaries-VNM-ADM2.topojson",
+          "worldBankIncomeGroup": "Lower-middle-income Countries"
+        },
+        "packet": "global-source-comparisons-a-001-20261006",
+        "product_id": "gb:VNM:ADM2",
+        "retention": "retained",
+        "retrieved_at": "2026-10-06 immutable accepted capsule readback; historical retrieval time remains unknown",
+        "role": "Complete original consumed input geometry, not dated physical land/water or legal authority",
+        "temporal_status": "reference",
+        "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/VNM/ADM2/geoBoundaries-VNM-ADM2_simplified.geojson",
+        "verification": "unverified",
+        "vintage": "Original consumed whole SHA 2dff75b58e71f736ca9fd6ef7c859be40c6f9a9b7ae5cd0806b36fe8cfa4c4f6; advertised represented year 2020"
+      },
+      "area_m2": 36732.33535751916,
+      "rowStart": 115167,
+      "rowEnd": 115169,
+      "complete": true,
+      "native_candidate_cells": 1,
+      "current_unassigned_cells": 1,
+      "status": "visible",
+      "cells": [
+        {
+          "x": 209470,
+          "y": 115168,
+          "base_owner": 0,
+          "effective_owner": 0
+        }
+      ]
+    }
+  ],
+  "projection_custody": {
+    "selection": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+    "rows": [
+      115168,
+      116248,
+      116249,
+      122007,
+      122008,
+      122009,
+      122010,
+      134079,
+      134080,
+      137069,
+      137070,
+      137074
+    ],
+    "whole_parts": [
+      {
+        "kind": "runs",
+        "offset": 36700160,
+        "words": 1048576,
+        "path": "native-v1/ownership/runs-36700160.bin.gz",
+        "bytes": 892298,
+        "sha256": "4e6692eec8f9702d2298b7f97af8932fabe552936012363754b4ef1e7c0e0b36",
+        "decoded_bytes": 4194304,
+        "decoded_sha256": "4d323f24254a654b526ef987b4a9a37c84be85a6c0a70e33cd08ae4f9e5636f0",
+        "encoding": "byte-shuffle"
+      },
+      {
+        "kind": "runs",
+        "offset": 37748736,
+        "words": 1048576,
+        "path": "native-v1/ownership/runs-37748736.bin.gz",
+        "bytes": 880041,
+        "sha256": "67dfce1a817e105c64b6647b90fb46e922908c49b5b68b4133a39e12f0ac6c69",
+        "decoded_bytes": 4194304,
+        "decoded_sha256": "79efbc91011cd2ae816c3233eb45790c782e7122f077b22076ad2d4907c6f201",
+        "encoding": "byte-shuffle"
+      },
+      {
+        "kind": "runs",
+        "offset": 40894464,
+        "words": 1048576,
+        "path": "native-v1/ownership/runs-40894464.bin.gz",
+        "bytes": 888634,
+        "sha256": "58d26169dfe7b1a4c175ccb7d74cb9f84e88a1622b3bf505c3b80023558360cb",
+        "decoded_bytes": 4194304,
+        "decoded_sha256": "a4a144a29cd7a39e25e81a29a797a040b19bffbf191336c6e56c1632fb09678b",
+        "encoding": "byte-shuffle"
+      },
+      {
+        "kind": "runs",
+        "offset": 48234496,
+        "words": 1048576,
+        "path": "native-v1/ownership/runs-48234496.bin.gz",
+        "bytes": 878785,
+        "sha256": "486dcf08e55e3cab928b90a48fa7dc128fd2407cd428345b13bd133068da9f59",
+        "decoded_bytes": 4194304,
+        "decoded_sha256": "4f3271ca075f968660cc6c9d2ae80a1cbb93f9d1db47e1f4270e586c1afd8db7",
+        "encoding": "byte-shuffle"
+      },
+      {
+        "kind": "runs",
+        "offset": 49283072,
+        "words": 1048576,
+        "path": "native-v1/ownership/runs-49283072.bin.gz",
+        "bytes": 903382,
+        "sha256": "0bbec87a2b610f5dd3a81cb21b243ba87462e66e15dec26fdd6cfcc67c128c01",
+        "decoded_bytes": 4194304,
+        "decoded_sha256": "b572825fbca3fceb6b214c16f08ea2bec30cb64302088006975ce36870d8edc3",
+        "encoding": "byte-shuffle"
+      }
+    ],
+    "whole_inputs": [
+      {
+        "commit": "a35ba193cfe5c84424a4952ca752593ebf9d7102",
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/assets-bank/run-1/chunk-01/part-000.bin.gz",
+        "mode": "100644",
+        "git_blob_oid": "4ad9de48ccd8db37d753b5c024ca6cdc0e5836a5",
+        "bytes": 16775548,
+        "sha256": "e0506f0969dc1d1d58c4cd28dbd441a986e9a07ef3ebc6c447fed35d3c6bd798",
+        "whole_body_consumed": true
+      }
+    ],
+    "member_phases": [
+      {
+        "part": "native-v1/ownership/runs-36700160.bin.gz",
+        "whole_inputs": [
+          {
+            "commit": "a35ba193cfe5c84424a4952ca752593ebf9d7102",
+            "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/assets-bank/run-1/chunk-01/part-000.bin.gz",
+            "mode": "100644",
+            "git_blob_oid": "4ad9de48ccd8db37d753b5c024ca6cdc0e5836a5",
+            "bytes": 16775548,
+            "sha256": "e0506f0969dc1d1d58c4cd28dbd441a986e9a07ef3ebc6c447fed35d3c6bd798",
+            "whole_body_consumed": true
+          }
+        ],
+        "phase_bytes": 237950049
+      },
+      {
+        "part": "native-v1/ownership/runs-37748736.bin.gz",
+        "whole_inputs": [
+          {
+            "commit": "a35ba193cfe5c84424a4952ca752593ebf9d7102",
+            "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/assets-bank/run-1/chunk-01/part-000.bin.gz",
+            "mode": "100644",
+            "git_blob_oid": "4ad9de48ccd8db37d753b5c024ca6cdc0e5836a5",
+            "bytes": 16775548,
+            "sha256": "e0506f0969dc1d1d58c4cd28dbd441a986e9a07ef3ebc6c447fed35d3c6bd798",
+            "whole_body_consumed": true
+          }
+        ],
+        "phase_bytes": 237937792
+      },
+      {
+        "part": "native-v1/ownership/runs-40894464.bin.gz",
+        "whole_inputs": [
+          {
+            "commit": "a35ba193cfe5c84424a4952ca752593ebf9d7102",
+            "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/assets-bank/run-1/chunk-01/part-000.bin.gz",
+            "mode": "100644",
+            "git_blob_oid": "4ad9de48ccd8db37d753b5c024ca6cdc0e5836a5",
+            "bytes": 16775548,
+            "sha256": "e0506f0969dc1d1d58c4cd28dbd441a986e9a07ef3ebc6c447fed35d3c6bd798",
+            "whole_body_consumed": true
+          }
+        ],
+        "phase_bytes": 237946385
+      },
+      {
+        "part": "native-v1/ownership/runs-48234496.bin.gz",
+        "whole_inputs": [
+          {
+            "commit": "a35ba193cfe5c84424a4952ca752593ebf9d7102",
+            "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/assets-bank/run-1/chunk-01/part-000.bin.gz",
+            "mode": "100644",
+            "git_blob_oid": "4ad9de48ccd8db37d753b5c024ca6cdc0e5836a5",
+            "bytes": 16775548,
+            "sha256": "e0506f0969dc1d1d58c4cd28dbd441a986e9a07ef3ebc6c447fed35d3c6bd798",
+            "whole_body_consumed": true
+          }
+        ],
+        "phase_bytes": 237936536
+      },
+      {
+        "part": "native-v1/ownership/runs-49283072.bin.gz",
+        "whole_inputs": [
+          {
+            "commit": "a35ba193cfe5c84424a4952ca752593ebf9d7102",
+            "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/assets-bank/run-1/chunk-01/part-000.bin.gz",
+            "mode": "100644",
+            "git_blob_oid": "4ad9de48ccd8db37d753b5c024ca6cdc0e5836a5",
+            "bytes": 16775548,
+            "sha256": "e0506f0969dc1d1d58c4cd28dbd441a986e9a07ef3ebc6c447fed35d3c6bd798",
+            "whole_body_consumed": true
+          }
+        ],
+        "phase_bytes": 237961133
+      }
+    ],
+    "phase_bytes": 237961133,
+    "planned_phase_bytes": 237961133
+  }
+}
