@@ -1,0 +1,99 @@
+{
+  "purpose": "Finite one-record data identity and explicit workbook hierarchy; no predicate/producer/qualification",
+  "consumed_shapeID": "81297802B37103290877054",
+  "gbOpen_source_record": 488,
+  "gbOpen_DBF_attributes": {
+    "Name": "Que Phong",
+    "Level": "ADM2"
+  },
+  "exact_source_fingerprints": {
+    "current-str": "81297802B37103290877054",
+    "roundtrip-wkt": "81297802B37103290877054"
+  },
+  "gbOpen_raw_record_sha256": "caf74f99e61db05e1a21a4f07e82c5952124a7ae72a8bc11f126454ad0e95c16",
+  "humanitarian_source_record": 301,
+  "humanitarian_DBF_attributes": {
+    "name": "Que Phong",
+    "pcode": "VN40305",
+    "level": "ADM2"
+  },
+  "coordinate_identity_only": {
+    "gbOpen": {
+      "signature": "16a7c11e4dea0dd6a1c922a4a38fe3eaa0d2e60fda2fd34eb8b8501a8dd71d2f",
+      "max_normalization_residual_degrees": 8.526512829121202e-14
+    },
+    "humanitarian": {
+      "signature": "16a7c11e4dea0dd6a1c922a4a38fe3eaa0d2e60fda2fd34eb8b8501a8dd71d2f",
+      "max_normalization_residual_degrees": 1.4210854715202004e-14
+    },
+    "limit": "Nine-decimal coordinate representation identity only, not literal IEEE/geometry equivalence or cell tolerance"
+  },
+  "district_excel_row": 489,
+  "district": {
+    "ADM2_EN": "Que Phong",
+    "ADM2_VI": "Huyện Quế Phong",
+    "ADM2_PCODE": "VN40305",
+    "ADM2_REF": null,
+    "ADM2ALT1_EN": null,
+    "ADM2ALT2_EN": null,
+    "ADM2ALT1_VI": null,
+    "ADM2ALT2_VI": null,
+    "ADM1_EN": "Nghe An",
+    "ADM1_VI": "Nghệ An",
+    "ADM1_PCODE": "VN403",
+    "ADM0_EN": "Viet Nam",
+    "ADM0_VI": "Việt Nam",
+    "ADM0_PCODE": "VN",
+    "DATE": "2019-10-01 00:00:00",
+    "VALIDON": "2020-01-03 00:00:00",
+    "VALIDTO": null,
+    "AREA_SQKM": 1881.449096679688
+  },
+  "province_excel_row": 42,
+  "province": {
+    "ADM1_EN": "Nghe An",
+    "ADM1_VI": "Nghệ An",
+    "ADM1_PCODE": "VN403",
+    "ADM1_REF": null,
+    "ADM1ALT1_EN": null,
+    "ADM1ALT2_EN": null,
+    "ADM1ALT1_VI": null,
+    "ADM1ALT2_VI": null,
+    "ADM0_EN": "Viet Nam",
+    "ADM0_VI": "Việt Nam",
+    "ADM0_PCODE": "VN",
+    "DATE": "2019-10-01 00:00:00",
+    "VALIDON": "2020-01-03 00:00:00",
+    "VALIDTO": null,
+    "AREA_SQKM": 16524.533203125
+  },
+  "parent_method": "Explicit ADM1_PCODE foreign key plus EN/VI names; no prefix inference",
+  "snapshot_limit": "Native DATE2019-10-01/VALIDON2020-01-03; actual surviving workbook2023edition; blankVALIDTO not perpetual validity",
+  "inputs": [
+    {
+      "path": "downloads/geoboundaries-9469f09-VNM_ADM2.zip",
+      "bytes": 12092925,
+      "sha256": "063de5623c512650f87c24376a3f66ec74c224042bece2cc72774e96f4b18c8a"
+    },
+    {
+      "path": "downloads/geoboundaries-9469f09-gbHumanitarian-VNM_ADM2.zip",
+      "bytes": 11343495,
+      "sha256": "e9ddcb88cc611595acc74b0951cb6372c0843f5b7d631520fa0e68c2c5be3619"
+    },
+    {
+      "path": "downloads/pinned-geoBoundaries-VNM-ADM2.dbf",
+      "bytes": 36302,
+      "sha256": "0eae2d48d2d99810d05fa128cd5e7e11fc3895db745eb19bc28ffd0a2c17bd15"
+    },
+    {
+      "path": "downloads/custodian-population-VNM_AdminBoundaries_TabularData.xlsx",
+      "bytes": 63347,
+      "sha256": "dac10333af8476d70ad63e0e7e72c562744b02fd853eaa5a73de4dff5486225b"
+    },
+    {
+      "path": "downloads/custodian-population-VNM_AdminBoundaries_TabularData.xlsx.reading.json",
+      "bytes": 255522,
+      "sha256": "8c7d6e9179d024db18b6500997051f386772b20d8e9e5ea6c05ea3e2010e11aa"
+    }
+  ]
+}

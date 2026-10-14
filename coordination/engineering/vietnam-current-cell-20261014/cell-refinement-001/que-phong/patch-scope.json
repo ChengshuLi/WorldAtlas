@@ -1,0 +1,31 @@
+{
+  "status": "root-authorized-next-queue-data-only-not-qualified",
+  "queue": "957, Que Phong49 branch",
+  "target": "gb:VNM:ADM2:81297802B37103290877054",
+  "owner": 48348,
+  "requested_land_cells": 49,
+  "requested_patch_rows": 20,
+  "requested_patch_file": "native-patch49.json",
+  "requested_patch_sha256": "a8bd2263d1a2edb677feb2871995fe646ffcf97584925a795837950a78072b5d",
+  "native_patch_schema_template": "physical185/authority-preparation/native-patch.json",
+  "requested_original_cells": "cell-partition.json:no_direct_flag_cells",
+  "whole_target_producer_scope": "whole-target-stage-inputs.json, complete original target geometry;49point partition does not clip target",
+  "whole_original_context_cells": 50,
+  "adverse_direct_flagged_cell_excluded_from_requested_authority": {
+    "x": 207452,
+    "y": 116254,
+    "actual_sids": [
+      41305,
+      65133,
+      65643
+    ],
+    "flags": [
+      "foreign-source-family"
+    ],
+    "context_preserved": true
+  },
+  "all_original_qualified_false_and_holds_unchanged": true,
+  "physical_method_execution": "Root coordinates accepted1928 shared entry/fresh admission after acceptance; no futurepin specified here",
+  "newly_qualified_cells": 0,
+  "producer_executed": false
+}

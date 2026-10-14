@@ -1,0 +1,75 @@
+{
+  "scope": "Original immutable full-bank and actual historical execution bindings; not new qualification.",
+  "commit": "a9c2d4122eed9d08cd3f213d3f5157039c8823bb",
+  "records_preserved_qualified_false_for_all50": true,
+  "files": [
+    {
+      "path": "coordination/engineering/vietnam-current-cell-20261014/evidence/source-qualification/cells.json.gz",
+      "bytes": 232506,
+      "sha256": "a85502406c50a52f012802a42f0e7a37480703ebe876aeaf212cfe96bfd65a2b",
+      "git_blob_oid": "48db686a6726c3dc719a722f0260b81e159b988d",
+      "decoded_bytes": 19639757,
+      "decoded_sha256": "e079e92f47b95039bf29d639af7c5eb55e8616e6907f46667a60b4656b8944a5"
+    },
+    {
+      "path": "coordination/engineering/vietnam-current-cell-20261014/evidence/source-qualification/result.json",
+      "bytes": 670769,
+      "sha256": "ca8c7c3a6df5a1b74e58ea0111f51c2df7c1e85ee7a8466a811b2d61051e196b",
+      "git_blob_oid": "111ddb76caaccd1398ac01c460e2305d8a8082d6"
+    },
+    {
+      "path": "coordination/engineering/vietnam-current-cell-20261014/evidence/source-qualification/publication.json",
+      "bytes": 1093,
+      "sha256": "c0404be24b4278a269295f41d6e4f1129ed5ae81ec34a1dab438b7673ce52477",
+      "git_blob_oid": "425468bf3cd5bf801869fbcf78315f35b11d3898"
+    },
+    {
+      "path": "coordination/engineering/vietnam-current-cell-20261014/evidence/source-qualification/original-stage-inputs.json",
+      "bytes": 1417215,
+      "sha256": "50053645024605bd60506c93b975c3a76578ad1369972c0a1068a2a76a0d79ad",
+      "git_blob_oid": "78390447064342efa5e37fbcb8418c2ad293e318"
+    }
+  ],
+  "original_execution_receipt": {
+    "candidate_cells": 40525,
+    "cpu_seconds": 16.777153000000002,
+    "elapsed_seconds": 18.285024416050874,
+    "held_cells": 27903,
+    "outputs": [
+      {
+        "bytes": 670769,
+        "path": ".cache/vietnam-20261014/source-qualification/result.json",
+        "sha256": "ca8c7c3a6df5a1b74e58ea0111f51c2df7c1e85ee7a8466a811b2d61051e196b"
+      },
+      {
+        "bytes": 1417215,
+        "path": ".cache/vietnam-20261014/source-qualification/original-stage-inputs.json",
+        "sha256": "50053645024605bd60506c93b975c3a76578ad1369972c0a1068a2a76a0d79ad"
+      },
+      {
+        "bytes": 232506,
+        "path": ".cache/vietnam-20261014/source-qualification/cells.json.gz",
+        "sha256": "a85502406c50a52f012802a42f0e7a37480703ebe876aeaf212cfe96bfd65a2b"
+      },
+      {
+        "bytes": 174779,
+        "path": ".cache/vietnam-20261014/source-qualification/qualified-patch.json",
+        "sha256": "590babf9169b2c2e2198ec89921ccef6fde4dab1e7d94c67b474e860fe71e55e"
+      },
+      {
+        "bytes": 71744,
+        "path": ".cache/vietnam-20261014/source-qualification/held-selectors.json.gz",
+        "sha256": "eed9305004ae301b6dfc2be49ddde8c1edad94d6342fd2c2c26b0f9e2e1a09ed"
+      }
+    ],
+    "peak_rss_bytes": 368902144,
+    "qualified_cells": 12622,
+    "script_sha256": "a3c3a402c17ca7fa2c21ca1b913ef7f829f998bcaa68fb608cbcfa883949d241"
+  },
+  "original_driver": {
+    "commit": "6030a219ef697f407aa757d5c6525a739fbf9e67",
+    "path": "coordination/engineering/vietnam-current-cell-20261014/source-method-history/check-sources.py",
+    "sha256": "a3c3a402c17ca7fa2c21ca1b913ef7f829f998bcaa68fb608cbcfa883949d241",
+    "role": "Retained script hash equals original publication script_sha256; read only, not executed"
+  }
+}
