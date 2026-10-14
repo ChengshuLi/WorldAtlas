@@ -144,6 +144,18 @@ test('full ledger comparison retains zero-cell primitives and rejects coherent o
  const row={component_id:'x',disposition:'zero-cell',target_id:'a',pixelIndex:1,base_geometry_sha256:'1'.repeat(64),geometry_sha256:'2'.repeat(64),geometry:{type:'Polygon',coordinates:[[[0,0],[1,0],[1,1],[0,0]]]},source_receipt_sha256:'3'.repeat(64)};
  const ledger={version:1,kind:'native-additive-repair-ledger-v1',rule_sha256:'4'.repeat(64),scope_ids:['x'],rows:[row]};
  assert.equal(compareRepairLedgers(ledger,structuredClone(ledger)),1);
+ const reordered=structuredClone(ledger);reordered.rows[0].geometry={coordinates:row.geometry.coordinates,type:row.geometry.type};
+ assert.notEqual(JSON.stringify(reordered.rows[0].geometry),JSON.stringify(row.geometry));
+ assert.equal(compareRepairLedgers(ledger,reordered),1);
+ for(const change of [
+  r=>r.pixelIndex=String(r.pixelIndex),
+  r=>[r.geometry.coordinates[0][1],r.geometry.coordinates[0][2]]=[r.geometry.coordinates[0][2],r.geometry.coordinates[0][1]],
+  r=>r.geometry.coordinates[0].pop(),
+  r=>r.geometry.coordinates[0][1][0]='1',
+  r=>r.geometry.coordinates[0][1]={0:1,1:0},
+  r=>delete r.geometry.type,
+  r=>r.geometry.foreign=null
+ ]){const changed=structuredClone(ledger);change(changed.rows[0]);assert.throws(()=>compareRepairLedgers(ledger,changed),/lost\/rebound/);}
  assert.throws(()=>compareRepairLedgers(ledger,{...ledger,scope_ids:[],rows:[]}),/lost\/rebound/);
  const changed=structuredClone(ledger);changed.rows[0].source_receipt_sha256='5'.repeat(64);assert.throws(()=>compareRepairLedgers(ledger,changed),/lost\/rebound/);
  assert.throws(()=>compareRepairLedgers(ledger,{...ledger,scope_ids:['x','x'],rows:[row,row]}),/duplicate/);
@@ -311,6 +323,11 @@ test('renewed immutable artifact entry binds complete catalogue and independent 
  for(const p of rows)assert.equal(sha(read(p.copy)),p.sha256);
  const certificate=JSON.parse(read('certificate.json')),catalogue=JSON.parse(gunzipSync(read('catalogue.json.gz'))),registry=JSON.parse(gunzipSync(read('registry.json.gz')));
  assert.deepEqual(validateReleaseCatalogue(certificate,catalogue,registry),{inline_roles:137,release_products:343,complete_roles:480});
+ const reorderedCatalogue=structuredClone(certificate),catalogueInput=reorderedCatalogue.application_inputs.find(p=>p.path===certificate.release_product_catalogue.path);
+ const catalogueIndex=reorderedCatalogue.application_inputs.indexOf(catalogueInput);
+ reorderedCatalogue.application_inputs[catalogueIndex]=Object.fromEntries(Object.entries(catalogueInput).reverse());
+ assert.notEqual(JSON.stringify(reorderedCatalogue.application_inputs[catalogueIndex]),JSON.stringify(catalogueInput));
+ assert.deepEqual(validateReleaseCatalogue(reorderedCatalogue,catalogue,registry),{inline_roles:137,release_products:343,complete_roles:480});
  for(const [change,pattern]of [
   [(c,p)=>p.products.pop(),/Incomplete qualified/],
   [(c,p)=>p.products[1]=structuredClone(p.products[0]),/Duplicate/],
@@ -330,6 +347,10 @@ test('renewed immutable artifact entry binds complete catalogue and independent 
   const selection=JSON.parse(read('selection.json')),manifest=JSON.parse(read('manifest.json'));
   const open=()=>new ImmutableReader(f.repo,head);
   const positive=readArtifactConsumption(open(),selection,manifest);assert.equal(positive.review_id,6079096820);assert.equal(positive.releaseCatalogue.complete_roles,480);
+  const reordered=structuredClone(selection);reordered.selected_geography=Object.fromEntries(Object.entries(reordered.selected_geography).reverse());
+  assert.notEqual(JSON.stringify(reordered.selected_geography),JSON.stringify(selection.selected_geography));
+  assert.deepEqual(reordered.selected_geography,selection.selected_geography);
+  assert.equal(readArtifactConsumption(open(),reordered,manifest).review_id,positive.review_id);
   for(const [change,pattern]of [
    [s=>s.artifact_consumption.certificate.sha256='0'.repeat(64),/differs/],
    [s=>s.artifact_consumption.review.sha256='0'.repeat(64),/independently registered/],
@@ -338,9 +359,18 @@ test('renewed immutable artifact entry binds complete catalogue and independent 
    [s=>s.artifact_consumption.certificate.bytes--,/whole mode\/size differs/],
    [s=>s.sha256='0'.repeat(64),/Typed independent/],
    [s=>s.selected_geography.sha256='0'.repeat(64),/Selected source\/policy/],
+   [s=>s.selected_geography.bytes=String(s.selected_geography.bytes),/Selected source\/policy/],
+   [s=>delete s.selected_geography.kind,/Selected source\/policy/],
+   [s=>s.selected_geography.foreign=null,/Selected source\/policy/],
    [s=>s.release_id='geography:foreign',/native\/release/],
    [s=>s.artifact_consumption.approved=true,/Unsupported artifact-consumption/]
   ]){const s=structuredClone(selection);change(s);assert.throws(()=>readArtifactConsumption(open(),s,manifest),pattern);}
+  // Equal parsed values cannot authenticate differently serialized external bytes.
+  const originalBytes=read('certificate.json'),reorderedBytes=Buffer.from(JSON.stringify(Object.fromEntries(Object.entries(certificate).reverse()),null,2)+'\n');
+  assert.equal(reorderedBytes.length,originalBytes.length);assert.notEqual(sha(reorderedBytes),sha(originalBytes));
+  assert.deepEqual(JSON.parse(reorderedBytes),certificate);
+  f.write(selection.artifact_consumption.certificate.path,reorderedBytes);const changedBytes=f.commit();
+  assert.throws(()=>readArtifactConsumption(new ImmutableReader(f.repo,changedBytes),selection,manifest),/Whole immutable input differs/);
  }finally{f.cleanup();}
 });
 

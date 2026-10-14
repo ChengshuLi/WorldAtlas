@@ -5,6 +5,7 @@ import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
 import {fileURLToPath} from 'node:url';
+import {isDeepStrictEqual} from 'node:util';
 import {nativePolygonIntervals,NATIVE_GRID_METHOD} from '../src/native-grid.js';
 import {nativeOnlyComponent} from '../src/native-grid.js';
 import {unshuffleOwnershipBytes} from '../src/ownership-codec.js';
@@ -16,7 +17,9 @@ const demand=(v,m)=>{if(!v)throw Error(m);};
 const hash=v=>typeof v==='string'&&/^[a-f0-9]{64}$/.test(v);
 const commit=v=>typeof v==='string'&&/^[a-f0-9]{40}$/.test(v);
 const safe=v=>typeof v==='string'&&v&&!v.includes('\\')&&!v.includes('\0')&&!path.isAbsolute(v)&&v.split('/').every(p=>p&&p!=='.'&&p!=='..');
-const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+// Parsed schema values ignore object member order, but retain exact types,
+// key sets and ordered arrays. Whole-file hashes and private custody stay separate.
+const same=isDeepStrictEqual;
 const freezeJson=value=>{if(value&&typeof value==='object'){Object.values(value).forEach(freezeJson);Object.freeze(value);}return value;};
 const installedRuntimes=new Map();
 const selectedSnapshots=new WeakMap();
