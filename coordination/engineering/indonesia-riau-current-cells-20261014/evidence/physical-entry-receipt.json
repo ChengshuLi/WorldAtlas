@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "exit_code": 0,
+  "elapsed_seconds": 4.968730207998306,
+  "command": [
+    "/Users/chengshuli/.cache/worldatlas-python-envs/requirements-a911b499659c266373447ffef081b16be803c5b5b2cd22889cc5c7a22811c0ae-python-3.12.14-macos-arm64/bin/python",
+    "-I",
+    "-B",
+    "-c",
+    "import runpy,sys;sys.path.insert(0,sys.argv[1]);runpy.run_path(sys.argv[2],run_name='__main__')",
+    "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/7e3ec7df93e7c3f821e7f8746d845413ea183123a663f2bc71eb558edab005e1/work/.cache/riau-physical-config-20261014-003/code",
+    "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/7e3ec7df93e7c3f821e7f8746d845413ea183123a663f2bc71eb558edab005e1/work/.cache/riau-physical-config-20261014-003/code/physical-reproduction.py"
+  ],
+  "fresh_admission": {
+    "version": 1,
+    "observed_at": "2026-10-14T15:55:32.161Z",
+    "observed_unix_seconds": 1791993332.166,
+    "observation": {
+      "availableBytes": 1523597312,
+      "currentRssBytes": 109723648,
+      "concurrentReservedBytes": 1048576
+    },
+    "allowance": {
+      "phaseBytes": 870998016,
+      "rssBytes": 870998016
+    },
+    "known_charged_phase_bytes": 545497665,
+    "plan_sha256": "4813667c2d35049063cbfb8ac352fe1b5215318b67696fe8d0e0fc48da1ada7b",
+    "helper_code": [
+      {
+        "path": "scripts/check-effective-geographic-regression.mjs",
+        "bytes": 89420,
+        "sha256": "2d6af0a3946c0dec895ab3c42766ecd88c275c48cd465e6a90ff610e776809fe"
+      },
+      {
+        "path": "src/native-grid.js",
+        "bytes": 19304,
+        "sha256": "97c8bac69dd491aed15db0f63b34e4abce494b2287c9e57ca633e90398fdba1c"
+      },
+      {
+        "path": "src/ownership-codec.js",
+        "bytes": 2948,
+        "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d"
+      },
+      {
+        "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+        "bytes": 153611,
+        "sha256": "1def340fa7b6adc912df65d483e6aaaffa513ebe1a63e86c2103fffa99760899"
+      },
+      {
+        "path": "package.json",
+        "bytes": 1417,
+        "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3"
+      }
+    ],
+    "limits": [
+      "Fresh existing allowance admits known bytes; parsed/GEOS expansion is data-dependent, and no live RSS or hard deadline enforcement is claimed."
+    ]
+  },
+  "max_child_lifetime_rss_bytes": 885030912,
+  "pre_science_admission_child_peak_bytes": 111378432,
+  "source_program_peak_raw": 885030912,
+  "source_program_peak_raw_unit": "bytes on Darwin despite legacy key maximum_rss_kib",
+  "within_observed_rss_allowance": false,
+  "within_observed_planned_wall": true,
+  "products": [
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/7e3ec7df93e7c3f821e7f8746d845413ea183123a663f2bc71eb558edab005e1/work/.cache/riau-physical-config-20261014-003/stdout.log",
+      "bytes": 977,
+      "sha256": "34c4d1a60ac1ab63114d57c2b14be2d36454af2fa23f4dbb7cd49288e45a7387"
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/7e3ec7df93e7c3f821e7f8746d845413ea183123a663f2bc71eb558edab005e1/work/.cache/riau-physical-config-20261014-003/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/7e3ec7df93e7c3f821e7f8746d845413ea183123a663f2bc71eb558edab005e1/work/.cache/riau-physical-config-20261014-003/run/.cache/full-census/gshhg-direct/whole-target-support.json",
+      "bytes": 1797357,
+      "sha256": "37fcbba4d60c81225471007005dea086b1e2c38a3739602d4590b9ae46200f6a"
+    }
+  ],
+  "limits": [
+    "No denied sysctl API is retried. Ordinary subprocess exit and resource.getrusage observations are used.",
+    "Child lifetime maximum includes the preceding admission Node child; it is not aggregate process-tree RSS.",
+    "Deadline, RSS and output/log reserves are prospective planning/after-exit observations, not live enforcement or containment.",
+    "Physical output remains source-relative evidence; no current-owner-zero, native authority or accepted repair credit is claimed."
+  ]
+}

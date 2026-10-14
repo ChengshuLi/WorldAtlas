@@ -1,0 +1,183 @@
+{
+  "version": 1,
+  "kind": "existing-source-target-native-constructor-result",
+  "accepted_code": "ecb837c599544ff8462b50f43a678d60c80fa5f6",
+  "input_commit": "ceaebb8c78ec88d9f034577b5d0e7426c72d4585",
+  "inputs": {
+    "source_evidence": {
+      "commit": "ceaebb8c78ec88d9f034577b5d0e7426c72d4585",
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/source-evidence.json"
+    },
+    "native_patch": {
+      "commit": "ceaebb8c78ec88d9f034577b5d0e7426c72d4585",
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/candidate-native-patch.json"
+    }
+  },
+  "observation": {
+    "availableBytes": 1454358528,
+    "currentRssBytes": 53280768,
+    "concurrentReservedBytes": 1048576
+  },
+  "allowance": {
+    "phaseBytes": 779935744,
+    "rssBytes": 779935744
+  },
+  "charged_phase_bytes": 329367503,
+  "qualified_cells": 10775,
+  "component_ids": [
+    "source-target:06cef66639bd7c0e6c1c0bc2be87ed905934432515635676efe40d65e7b8291f",
+    "source-target:fde70a28ab8aa35630f12472c193038d863769cb4d879b5040b90fbb402eb065"
+  ],
+  "rule_sha256": "d3e5d65a69ddad31802bed5fece2b44042bcaa8b52296defe26b46856e1e9409",
+  "elapsed_seconds": 1.368852083,
+  "normalized_node_lifetime_peak_rss_bytes": 222298112,
+  "observed_peak_within_allowance": true,
+  "entry": {
+    "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/7e3ec7df93e7c3f821e7f8746d845413ea183123a663f2bc71eb558edab005e1/work/.cache/riau-native-entry.mjs",
+    "bytes": 5460,
+    "sha256": "f4d7089e7952dbd6f9ec419836aff017263aa173b5be36fa09001946b88502fa"
+  },
+  "code": [
+    {
+      "commit": "ecb837c599544ff8462b50f43a678d60c80fa5f6",
+      "path": "scripts/delivery-handoff-advance.mjs",
+      "bytes": 72997,
+      "sha256": "ca11b67938a043ef6766c457c45df149b23486e3fb4447cec2afb69eea049d3a"
+    },
+    {
+      "commit": "ecb837c599544ff8462b50f43a678d60c80fa5f6",
+      "path": "scripts/check-effective-geographic-regression.mjs",
+      "bytes": 89420,
+      "sha256": "2d6af0a3946c0dec895ab3c42766ecd88c275c48cd465e6a90ff610e776809fe"
+    },
+    {
+      "commit": "ecb837c599544ff8462b50f43a678d60c80fa5f6",
+      "path": "src/native-grid.js",
+      "bytes": 19304,
+      "sha256": "97c8bac69dd491aed15db0f63b34e4abce494b2287c9e57ca633e90398fdba1c"
+    },
+    {
+      "commit": "ecb837c599544ff8462b50f43a678d60c80fa5f6",
+      "path": "src/ownership-codec.js",
+      "bytes": 2948,
+      "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d"
+    },
+    {
+      "commit": "ecb837c599544ff8462b50f43a678d60c80fa5f6",
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "bytes": 153611,
+      "sha256": "1def340fa7b6adc912df65d483e6aaaffa513ebe1a63e86c2103fffa99760899"
+    },
+    {
+      "commit": "ecb837c599544ff8462b50f43a678d60c80fa5f6",
+      "path": "scripts/geography-prefetch.mjs",
+      "bytes": 13608,
+      "sha256": "19aba167eb32d5e7c08034a0e748db95e657d2ec0f10f8ee034cdeba9b2720a8"
+    },
+    {
+      "commit": "ecb837c599544ff8462b50f43a678d60c80fa5f6",
+      "path": "package.json",
+      "bytes": 1417,
+      "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3"
+    }
+  ],
+  "inventory": [
+    {
+      "commit": "ceaebb8c78ec88d9f034577b5d0e7426c72d4585",
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/source-evidence.json",
+      "mode": "100644",
+      "git_blob_oid": "50d458f9a9b5a726413d9e0753158990685a12ef",
+      "bytes": 13310,
+      "sha256": "64331d4248d09396fc45f1c9a14f4cbf8d28b738d7d838c07874c1b890655381",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "ceaebb8c78ec88d9f034577b5d0e7426c72d4585",
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/candidate-native-patch.json",
+      "mode": "100644",
+      "git_blob_oid": "9396a936a69210558242c87fe95de5042f464182",
+      "bytes": 98571,
+      "sha256": "d34fef6dda41f12fb3eff97350423791fc04e4c878dc9940af8bd0125fa256cc",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "ceaebb8c78ec88d9f034577b5d0e7426c72d4585",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+      "mode": "100644",
+      "git_blob_oid": "09afab19371f0814da61e79e5f310c5fb2405b6d",
+      "bytes": 403376
+    },
+    {
+      "commit": "ecb837c599544ff8462b50f43a678d60c80fa5f6",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+      "mode": "100644",
+      "git_blob_oid": "09afab19371f0814da61e79e5f310c5fb2405b6d",
+      "bytes": 403376,
+      "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "e8df8f25c7c2a808a92cb986f804be844bfb7ba5",
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/evidence/original-stage-inputs.json",
+      "mode": "100644",
+      "git_blob_oid": "0858c2e036c4180004ccaca2a878b5558e6ebbdc",
+      "bytes": 279046,
+      "sha256": "7d6d1d88866b6a1ce8ee282100a6c972d3732d301e08df4a56d6bdf14317fcff",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "ecb837c599544ff8462b50f43a678d60c80fa5f6",
+      "path": "coordination/engineering/source-target-native-delivery-20261014/evidence/physical-reproduction.py",
+      "mode": "100644",
+      "git_blob_oid": "73e005238c929a901185abb8321c419e7cd9f688",
+      "bytes": 5450,
+      "sha256": "05af43d7d7722e8d7bb201f5876a43d9c7f9a2d0f4ea39e467229351a35c9bc3",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "ecb837c599544ff8462b50f43a678d60c80fa5f6",
+      "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+      "mode": "100644",
+      "git_blob_oid": "de6905e162dc031b1b93248fae91190c39c4ad53",
+      "bytes": 1851757,
+      "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "e8df8f25c7c2a808a92cb986f804be844bfb7ba5",
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/evidence/physical-support.json",
+      "mode": "100644",
+      "git_blob_oid": "83e203f56034c9777622936723c1edd87c8b887f",
+      "bytes": 1797357,
+      "sha256": "37fcbba4d60c81225471007005dea086b1e2c38a3739602d4590b9ae46200f6a",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "ecb837c599544ff8462b50f43a678d60c80fa5f6",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/owners.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "9c44513df64995d417dd3832ae604c703e84a506",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "ecb837c599544ff8462b50f43a678d60c80fa5f6",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IDN-ADM2-000.bin.gz",
+      "mode": "100644",
+      "git_blob_oid": "d918c74989043677364ff43f9fbec3d1f0d3a3af",
+      "bytes": 3051391,
+      "sha256": "ef394916ba97454b5592e66eba1df67199731ce7d9636cc3968843801ae904a8",
+      "whole_body_consumed": true
+    }
+  ],
+  "limitations": [
+    "Physical interpretation and semantic reconciliation are retained reviewed source evidence; actual current owner-zero is checked by native consumers."
+  ],
+  "limits": [
+    "Existing constructor authenticates original source/physical evidence and derives native coverage; no source/GSHHG producer is replayed.",
+    "Empty ownership rows within native-domain qualification do not prove actual current owner zero; actual accepted-selection consumer/conservation remains pending.",
+    "The existing reader has its normal phase/RSS checks; no extra supervisor, timeout or process-tree control is introduced.",
+    "Physical003 measured RSS overrun remains disclosed in its original receipt; this native call does not relabel that producer as resource-compliant."
+  ]
+}
