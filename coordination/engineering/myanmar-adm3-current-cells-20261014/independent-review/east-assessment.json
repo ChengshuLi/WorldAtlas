@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "kind": "independent-exploratory-source-assessment",
+  "reviewed_execution_commit": "6d8eec613cc26b1dae0006e44610d22fd6491384",
+  "program_sha256": "e2ad02530515d4656e6f0b5b8deaecfb6630a097959089a8b57b83ce85f9ff41",
+  "source_result_sha256": "cfcdf6e6207e349c8c39f9c9d3473e5c740065a4754ea4478eb61218e227e179",
+  "operating_result_sha256": "ed52911bc6bbefc00142c0265fe83145f373ae221d2827a68d6bf0b2ea6fba1d",
+  "checks": [
+    "All 30 immutable input descriptors and encoded/decoded hashes verified independently.",
+    "Seven complete source-ID inventories / 1589 features verified.",
+    "469 candidate cells reproduced using the accepted selector; categories recomputed without GIS rerun.",
+    "Ten current/source ring-hole inventories verified; all result/log/operating bindings checked."
+  ],
+  "counts": {
+    "unflagged_land_diagnostic": 227,
+    "flagged_land_diagnostic": 211,
+    "conflict_controls": 18,
+    "source_relative_holds": 13,
+    "new_accepted_repairs": 0
+  },
+  "limits": [
+    "157 unflagged cells belong to topology-reconciled owners; coherent border questions remain.",
+    "Current geometry membership covers ten Myanmar targets; complete foreign current-owner geometry is not independently cleared.",
+    "Seven complete source families do not establish omitted-family geographic exclusion.",
+    "Tachileik sibling Mongyawng has 139 additional queue cells outside this investigation.",
+    "No candidate hole/boundary hit was observed; results do not exercise positive rejection controls.",
+    "Physical mask labels are reused; no original GSHHG interpretation, admitted authority or native conservation performed."
+  ],
+  "next_candidate": {
+    "owner": 30111,
+    "name": "Hpa-An",
+    "complete_candidate_cells": 83,
+    "land": 70,
+    "physical_holds": 13,
+    "land_outside_all_retained_country_references": 60,
+    "status": "Further investigation only; explicit source/coast interpretation and production gates required."
+  },
+  "review_status": "Diagnostic source report only; no final PR acceptance."
+}

@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "kind": "standalone-operating-summary",
+  "phase": "physical",
+  "execution_commit": "999311cb46f49f9e844526370bfa136e4d2bb1f7",
+  "input_commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+  "program_sha256": "05af43d7d7722e8d7bb201f5876a43d9c7f9a2d0f4ea39e467229351a35c9bc3",
+  "exit_code": 0,
+  "observed_wall_seconds": 6.4044105829671025,
+  "observed_darwin_max_rss_bytes": 975093760,
+  "admission": {
+    "observed_at": "2026-10-14T10:33:16.703Z",
+    "observation": {
+      "availableBytes": 1980825600,
+      "currentRssBytes": 51101696,
+      "concurrentReservedBytes": 0
+    },
+    "allowance": {
+      "phaseBytes": 1041514496,
+      "rssBytes": 1041514496
+    },
+    "node": "v24.19.0",
+    "uv": "1.52.1"
+  },
+  "known_input_runtime_reserves_bytes": 544685091,
+  "planned_wall_seconds": 600,
+  "private_complete_operating_record_sha256": "a4eaba7b6a111ca0e4f747e0ea7e6c5bb4ee1bc34729a8c08ad07c52b95a7f75",
+  "scientific_output_sha256": "b0d46de2cc907aa7bf28cc87bead4a730efb91450600a5ecec418bd2ae5acb3f",
+  "limits": [
+    "Whole-original GSHHG physical interpretation, not native repair or territorial approval.",
+    "Deadline/process-tree cleanup/live RSS and output/log enforcement unavailable and not claimed.",
+    "Darwin time records child lifetime RSS, not aggregate process-tree RSS.",
+    "Legacy physical result maximum_rss_kib contains Darwin bytes despite its field name; use this external byte measurement.",
+    "Summary projection omits local executable/cache paths; original operating record retained privately.",
+    "This is not a SOURCE/NATIVE-v2 qualified receipt or process-tree enforcement claim."
+  ]
+}
