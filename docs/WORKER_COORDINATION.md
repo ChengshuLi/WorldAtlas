@@ -579,7 +579,9 @@ The linked issue's explicitly declared scientific evidence manifest may also be
 updated as metadata. Its exact path comes from the current validated issue contract,
 not a candidate filename or broad JSON allowance. Both tree entries must be ordinary;
 the receipt must stay outside fixed selected/base roles and actual package inputs
-or verification paths. Bounded syntax checks do not replace its independent
+or verification paths. The base check authenticates the unchanged native manifest,
+transport index, source bank, selected comparison registry and consumption/code
+metadata, then excludes their declared reader roles without reading scientific leaves. Bounded syntax checks do not replace its independent
 scientific/evidence validation or exact-head review. Arbitrary existing packet JSON
 edits, consumed manifests and unavailable qualification retain complete regression.
 

@@ -791,6 +791,75 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
         !sourceDeclarations.has(updatedManifest) &&
         !packagePathRequired(updatedManifest, validatePackageInputs(await json(PACKAGE_INPUT_FILE))),
         'scientific manifest is a consumed or nonordinary role');
+      // Accepted base metadata can still name current reader roles outside
+      // package declarations. Read only those fixed routing roots, never their
+      // scientific leaves or arbitrary nested pin/config objects.
+      const role = name => {
+        needSelected(safe(name) && name !== updatedManifest, 'scientific manifest is a consumed base role');
+        return name;
+      };
+      const rolePin = value => {
+        needSelected(value && hash(value.sha256) && Number.isSafeInteger(value.bytes) && value.bytes > 0,
+          'unknown base role pin');
+        return role(value.path);
+      };
+      const baseJSON = async (name, descriptor) => {
+        role(name); needSelected(unchangedRole(name), 'base routing metadata changed or unavailable');
+        const bytes = await read(name, baseline);
+        needSelected(hash(descriptor.sha256) && sha256(bytes) === descriptor.sha256 &&
+          (descriptor.bytes === undefined || bytes.length === descriptor.bytes), 'base routing metadata pin differs');
+        return parseJSON(bytes);
+      };
+      const roles = rows => {
+        needSelected(Array.isArray(rows) && rows.length <= 1024, 'unknown base role roster');
+        return rows;
+      };
+      const native = await baseJSON(selection.manifest_path, {sha256: selection.sha256});
+      needSelected(native.version === 2 && native.method === selection.method && roles(native.parts).length > 0,
+        'unknown base native routing');
+      const nativeRoot = path.posix.dirname(selection.manifest_path);
+      for (const part of native.parts) {
+        needSelected(['rows', 'runs'].includes(part.kind), 'unknown base native part');
+        role(path.posix.join(nativeRoot, role(part.path)));
+      }
+      role(path.posix.join(nativeRoot, role(native.bounds?.path)));
+      role(native.original_assets?.bounds?.path);
+      if (native.native_asset_transport !== undefined) {
+        const transport = native.native_asset_transport;
+        needSelected(transport.version === 1 && transport.kind === 'ordered-exact-original-byte-fragments',
+          'unknown base native transport');
+        const index = await baseJSON(rolePin(transport.index), transport.index);
+        needSelected(index.version === 1 && index.kind === transport.kind, 'unknown base transport index');
+        for (const part of roles(index.parts)) role(path.posix.join(path.posix.dirname(transport.index.path), role(part.path)));
+      }
+      const verified = await json('scripts/native-ownership/verified-candidates.json', baseline);
+      needSelected(unchangedRole('scripts/native-ownership/verified-candidates.json') && verified.version === 1 &&
+        verified.candidates?.[selection.sha256]?.role === 'reviewed-exhaustive-native-rule-comparison', 'unknown base comparison registry');
+      role(verified.candidates[selection.sha256].path);
+      if (selection.selected_geography !== undefined) {
+        const declared = selection.selected_geography, bank = await baseJSON(rolePin(declared), declared);
+        needSelected(declared.version === 1 && declared.kind === 'complete-world-index-with-exact-encoded-overrides' &&
+          bank.version === 1 && bank.kind === declared.kind, 'unknown base source routing');
+        for (const value of [bank.world_index, ...roles(bank.unchanged_files), ...roles(bank.overrides)]) rolePin(value);
+      }
+      const certificatePin = selection.artifact_consumption.certificate;
+      const certificate = await baseJSON(rolePin(certificatePin), certificatePin);
+      needSelected(certificate.version === 1 && certificate.kind === 'qualified-arctic-immutable-product-certificate-v1' &&
+        roles(certificate.application_inputs).length > 0, 'unknown base consumption certificate');
+      for (const value of [certificate.application_consumer_code, certificate.qualification_inventory,
+        ...certificate.application_inputs]) rolePin(value);
+      if (certificate.release_product_catalogue !== undefined) {
+        rolePin(certificate.release_product_catalogue); rolePin(certificate.selected_artifact_bindings?.registry);
+      }
+      const code = await baseJSON(certificate.application_consumer_code.path, certificate.application_consumer_code);
+      needSelected(code.version === 1 && code.kind === 'qualified-artifact-application-code-closure-v1' &&
+        roles(code.critical_files).length > 0, 'unknown base application source routing');
+      for (const value of code.critical_files) rolePin(value);
+      if (code.entry_critical_files !== undefined) {
+        needSelected(code.entry_critical_files && typeof code.entry_critical_files === 'object' &&
+          !Array.isArray(code.entry_critical_files), 'unknown base entry source routing');
+        for (const values of Object.values(code.entry_critical_files)) for (const value of roles(values)) rolePin(value);
+      }
       await json(updatedManifest, authored, false);
     }
     const manifest = `coordination/engineering/${branch.slice('engineering/'.length)}/evidence-quality.json`;

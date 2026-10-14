@@ -1468,6 +1468,20 @@ function scientificManifestFixture() {
   f.files.push({filename:name,status:'modified'});
   f.reservation.evidence_manifest=name;
   f.evidenceQuality={version:1,manifest_path:name,subject_ids:[],pins:{},review_kind:'code'};
+  const part=f.put('data/base-native/rows.bin.gz','immutable native body',true), bounds=f.put('data/base-native/bounds.json.gz','immutable bounds',true);
+  const native=f.put('data/base-native/manifest.json',{version:2,method:f.base.method,parts:[{kind:'rows',path:'rows.bin.gz'}],
+    bounds:{path:'bounds.json.gz'},original_assets:{bounds:{path:bounds.path}}},true);
+  const consumer=f.put('coordination/engineering/prior/application-code.json',{version:1,kind:'qualified-artifact-application-code-closure-v1',
+    critical_files:[{path:SELECTED_SMOKE,bytes:1,sha256:'a'.repeat(64)}]},true), qualification=f.leaf('qualification.json',true);
+  const certificate=f.put('coordination/engineering/prior/base-consumption.json',{version:1,kind:'qualified-arctic-immutable-product-certificate-v1',
+    application_consumer_code:consumer,qualification_inventory:qualification,application_inputs:[consumer,qualification]},true);
+  const comparison=f.leaf('native-comparison.json',true);
+  f.put('scripts/native-ownership/verified-candidates.json',{version:1,candidates:{[native.sha256]:{role:'reviewed-exhaustive-native-rule-comparison',path:comparison.path}}},true);
+  f.base.manifest_path=native.path;f.base.sha256=native.sha256;f.base.artifact_consumption.certificate=certificate;
+  const old=JSON.parse(f.blobs.get(f.baseline.entries.get('data/ownership-selection.json').sha));
+  f.put('data/ownership-selection.json',{...f.base,additive_release:old.additive_release},true);
+  const side=f.put(f.packetPrefix+'selection-sidecar.json',{...f.sidecarBody,base_selection:f.base});
+  f.put('data/ownership-selection.json',{...f.base,additive_release:{path:side.path,bytes:side.bytes,sha256:side.sha256}});
   f.manifestPath=name;return f;
 }
 test('only the authenticated unconsumed scientific receipt update enters existing selected checks',async()=>{
@@ -1548,7 +1562,7 @@ test('complete immutable PR1906 metadata removes the observed manifest-only earl
   assert.equal(selectedDataCandidate(f.branch,f.files,f.reservation),true);
   assert.deepEqual(await f.run({metadataDiagnostics:stats}),{test_selection:'selected-data',
     expectations_path:'coordination/engineering/vietnam-current-cell-20261014/mapping-followup-001/delivery/selected-delivery-expectations.json',shards:[0]});
-  assert.equal(stats.read_count,22);assert.equal(stats.read_bytes,4679154);
+  assert.equal(stats.read_count,28);assert.equal(stats.read_bytes,5060083);
   assert(f.reads.includes(f.authored.entries.get(evidence_manifest).sha),'actual changed scientific manifest was parsed');
 });
 for(const [name,change] of Object.entries({
@@ -1568,4 +1582,78 @@ test('eligible scientific metadata never replaces the actual independent scienti
     reservation:{mode:'engineering',owned_paths:f.ownedPaths},files:f.files}),/Invalid or oversized evidence inventory/);
   await assert.rejects(f.complete({evidenceCheck:checkPremergeEvidence}),/Invalid or oversized evidence inventory/);
   assert.equal(f.writes.length,0);
+});
+
+function baseRoutingManifestFixture(change) {
+  const f=scientificManifestFixture(),document=name=>JSON.parse(f.blobs.get(f.authored.entries.get(name).sha));
+  const native=document(f.base.manifest_path),certificate=document(f.base.artifact_consumption.certificate.path),
+    code=document(certificate.application_consumer_code.path),oldNativeHash=f.base.sha256;
+  const existing=f.baseline.entries.get(f.manifestPath),consumed={path:f.manifestPath,bytes:existing.size,
+    mode:existing.mode,sha256:digest(f.blobs.get(existing.sha))};
+  let nativePath=f.base.manifest_path;
+  const state={f,native,certificate,code,consumed,document,setNativePath:name=>nativePath=name};
+  change(state);
+  const codePin=f.put(certificate.application_consumer_code.path===f.manifestPath
+    ? 'coordination/engineering/prior/application-code.json':certificate.application_consumer_code.path,code,true);
+  if(certificate.application_consumer_code.path!==f.manifestPath)certificate.application_consumer_code=codePin;
+  const cert=f.put(f.base.artifact_consumption.certificate.path,certificate,true);
+  const manifest=f.put(nativePath,native,true);
+  const verified=document('scripts/native-ownership/verified-candidates.json'),receipt=verified.candidates[oldNativeHash];
+  f.put('scripts/native-ownership/verified-candidates.json',{...verified,candidates:{[manifest.sha256]:receipt}},true);
+  f.base.manifest_path=nativePath;f.base.sha256=manifest.sha256;f.base.artifact_consumption.certificate=cert;
+  const old=document('data/ownership-selection.json');
+  const oldBaseline=JSON.parse(f.blobs.get(f.baseline.entries.get('data/ownership-selection.json').sha));
+  f.put('data/ownership-selection.json',{...f.base,additive_release:oldBaseline.additive_release},true);
+  const side=f.put(f.packetPrefix+'selection-sidecar.json',{...document(old.additive_release.path),base_selection:f.base});
+  f.put('data/ownership-selection.json',{...f.base,additive_release:{path:side.path,bytes:side.bytes,sha256:side.sha256}});
+  return f;
+}
+for(const [name,change] of Object.entries({
+  'certificate application-consumer code':s=>s.certificate.application_consumer_code=s.consumed,
+  'certificate qualification inventory':s=>s.certificate.qualification_inventory=s.consumed,
+  'certificate release catalogue':s=>s.certificate.release_product_catalogue=s.consumed,
+  'certificate selected registry':s=>{s.certificate.release_product_catalogue=s.certificate.qualification_inventory;s.certificate.selected_artifact_bindings={registry:s.consumed};},
+  'complete certificate application input':s=>s.certificate.application_inputs.push(s.consumed),
+  'application critical source':s=>s.code.critical_files.push(s.consumed),
+  'application entry critical source':s=>s.code.entry_critical_files={'scripts/build-hosted-inner.mjs':[s.consumed]},
+  'native part':s=>{s.setNativePath('coordination/engineering/retained-delivery/base-native-manifest.json');s.native.parts=[{kind:'rows',path:'evidence-quality.json'}];},
+  'native bounds alias':s=>{s.setNativePath('coordination/engineering/retained-delivery/base-native-manifest.json');s.native.bounds.path='evidence-quality.json';},
+  'original bounds pin':s=>s.native.original_assets.bounds=s.consumed,
+  'native transport index':s=>s.native.native_asset_transport={version:1,kind:'ordered-exact-original-byte-fragments',index:s.consumed},
+  'native transport fragment':s=>{const index=s.f.put('coordination/engineering/retained-delivery/index.json',
+    {version:1,kind:'ordered-exact-original-byte-fragments',parts:[{path:'evidence-quality.json'}]},true);
+    s.native.native_asset_transport={version:1,kind:'ordered-exact-original-byte-fragments',index};},
+  'selected source bank':s=>s.f.base.selected_geography={...s.consumed,version:1,kind:'complete-world-index-with-exact-encoded-overrides'},
+  'selected source world index':s=>{const bank=s.f.put('data/base-source-bank.json',{version:1,kind:'complete-world-index-with-exact-encoded-overrides',
+    world_index:s.consumed,unchanged_files:[],overrides:[]},true);s.f.base.selected_geography={...bank,version:1,kind:'complete-world-index-with-exact-encoded-overrides'};},
+  'selected unchanged source':s=>{const bank=s.f.put('data/base-source-bank.json',{version:1,kind:'complete-world-index-with-exact-encoded-overrides',
+    world_index:s.certificate.qualification_inventory,unchanged_files:[s.consumed],overrides:[]},true);s.f.base.selected_geography={...bank,version:1,kind:'complete-world-index-with-exact-encoded-overrides'};},
+  'selected source override':s=>{const bank=s.f.put('data/base-source-bank.json',{version:1,kind:'complete-world-index-with-exact-encoded-overrides',
+    world_index:s.certificate.qualification_inventory,unchanged_files:[],overrides:[s.consumed]},true);s.f.base.selected_geography={...bank,version:1,kind:'complete-world-index-with-exact-encoded-overrides'};},
+  'selected native comparison receipt':s=>{const name='scripts/native-ownership/verified-candidates.json',verified=s.document(name);
+    verified.candidates[s.f.base.sha256].path=s.f.manifestPath;s.f.put(name,verified,true);},
+  'unknown consumption certificate':s=>s.certificate.kind='future-unknown-consumption',
+  'unknown application source metadata':s=>s.code.kind='future-unknown-code-routing',
+  'unknown native transport':s=>s.native.native_asset_transport={version:2,kind:'unknown'},
+  'missing native part roster':s=>delete s.native.parts,
+}))test('edited scientific receipt retains complete regression for deeper '+name,async()=>{
+  const f=baseRoutingManifestFixture(change),stats={};assert.equal(await f.run({metadataDiagnostics:stats}),null,name);
+  assert(stats.failure,name);
+});
+test('deeper base metadata must be ordinary, unchanged, available and authenticated',async()=>{
+  for(const mode of ['100755','120000','160000']){
+    const f=scientificManifestFixture();f.authored.entries.get(f.base.artifact_consumption.certificate.path).mode=mode;
+    assert.equal(await f.run(),null,mode);
+  }
+  const unavailable=scientificManifestFixture();unavailable.blobs.delete(unavailable.authored.entries.get(unavailable.base.artifact_consumption.certificate.path).sha);
+  assert.equal(await unavailable.run(),null);
+  const changed=scientificManifestFixture();changed.put(changed.base.artifact_consumption.certificate.path,{version:1});
+  assert.equal(await changed.run(),null);
+});
+test('real PR1906 deeper-role reads share existing admission rather than reset the metadata budget',async()=>{
+  const f=realScientificManifest1906(),stats={};
+  assert.equal(await f.run({metadataBudgetBytes:4900000,metadataDiagnostics:stats}),null);
+  assert.match(stats.failure,/metadata memory admission exceeded/);assert(stats.read_count>=20);
+  assert(f.reads.includes(f.baseline.entries.get('coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/manifest.json').sha));
+  assert(stats.peak_admitted_bytes<=stats.limit_bytes);
 });
