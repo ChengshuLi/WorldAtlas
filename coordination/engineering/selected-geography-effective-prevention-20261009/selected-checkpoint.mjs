@@ -407,7 +407,28 @@ export async function qualifyAcceptedCheckpoint({reader,acceptedHandle,budget}) 
     const accepted=readAcceptedCheckpoint(acceptedHandle);
     demand(Number.isSafeInteger(accepted.admitted_bytes) && accepted.admitted_bytes>0
       && budget.carriedBytes>=accepted.admitted_bytes, 'Accepted archive complete live carry is undercharged');
-    return admitDerivedCheckpoint(session,reader,archiveReader,accepted);
+    // An accepted selector may precede the actual baseline by ordinary additive
+    // deliveries. Admit the genuine historical tree, then qualify the existing
+    // append-only transition; never relabel its certificate as today's selector.
+    const currentSelection=readNamed(session,reader,'data/ownership-selection.json');
+    if (same(currentSelection,accepted.products['derived-facts.json'].candidate_selection))
+      return admitDerivedCheckpoint(session,reader,archiveReader,accepted);
+    const origin=accepted.receipt.merge_commit;
+    try { reader.git('rev-parse','--verify',origin+'^{commit}'); }
+    catch { reader.git('fetch','--quiet','--no-tags','--no-write-fetch-head','--filter=blob:none','origin',origin); }
+    demand(reader.git('rev-parse',origin+'^{tree}').toString().trim()===accepted.source.tree,
+      'Accepted historical checkpoint tree differs from authenticated merge');
+    const historical=new ImmutableReader(reader.repo,origin,{runtimeBytes:reader.runtimeBytes,
+      executionBytes:reader.executionBytes,metadataBytes:reader.metadataBytes,outputBytes:reader.outputBytes,
+      gitExecutable:reader.gitExecutable,budget:reader.budget,allowance:reader.allowance});
+    historical.inventory=reader.inventory;
+    const qualified=admitDerivedCheckpoint(session,historical,archiveReader,accepted);
+    const transition=qualifyTransition({state:qualified.state,reader,budget});
+    if (!transition.available) { session.closed=true; return unavailable(transition.reason); }
+    // Every newly consumed baseline route must survive the NEXT transition too.
+    // The existing census includes complete inherited present/absent routes.
+    states.get(transition.candidate).routes=checkpointRouteCensus({transition,budget}).routes;
+    return Object.freeze({available:true,state:transition.candidate});
   } catch (error) {
     session.closed=true;
     if (error.reuseUnavailable) return unavailable(error.message);
