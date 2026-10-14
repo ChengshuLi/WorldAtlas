@@ -1378,14 +1378,16 @@ export function readSelectedAdditive(snapshot) {
  // owner-roster decode) are dead; only this complete view is carried onward.
  // The independently authenticated original owner roster remains in snapshot.
  const consumerRows=[...normalized.rows.values()].map(row=>{if(!rebind||row.representation==='native-cells')return row;const target=rebind.current_targets.find(target=>target.target_id===row.target_id);demand(target&&owners[target.pixelIndex-1]?.id===target.target_id,'Current rebind owner roster differs');return {...row,base_geometry:target.geometry,base_geometry_sha256:target.geometry_sha256};});
- const carried={sidecar,registry,ledger:named.ledger,patch,envelope,normalized_rows:consumerRows,authority_proofs:proofs.map(proof=>({authority_sha256:proof.authority_sha256,rule_sha256:proof.rule_sha256,source_scope_ids:proof.source_scope_ids,pins:proof.pins,original_pins:proof.original_pins})),assigned_cells:total,...(rebind?{current_rebind:rebind}:{})};
+ const legacy_native_rows=[...new Set(proofs.filter(proof=>proof.original_pins.source_evidence===undefined)
+  .flatMap(proof=>proof.native_proof.native_patches.flatMap(patch=>patch.rows.map(row=>row.y))))].sort((a,b)=>a-b);
+ const carried={sidecar,registry,ledger:named.ledger,patch,envelope,legacy_native_rows,normalized_rows:consumerRows,authority_proofs:proofs.map(proof=>({authority_sha256:proof.authority_sha256,rule_sha256:proof.rule_sha256,source_scope_ids:proof.source_scope_ids,pins:proof.pins,original_pins:proof.original_pins})),assigned_cells:total,...(rebind?{current_rebind:rebind}:{})};
  const result=freeze({...carried,metadata_bytes:valueBytes(carried).length+4096});
  selectedAdditions.set(result,{snapshot});return result;
 }
 export function selectedAdditiveRows(view,row,base) {
  demand(selectedAdditions.has(view),'Require actual committed authenticated additive selection');
  const delta=view.patch.rows.find(r=>r.y===row)?.runs??[];
- if(view.current_rebind&&delta.length){const expected=view.current_rebind.native.current_rows.find(r=>r.y===row);demand(expected&&same(expected.runs,base),'Actual selected complete native row differs from qualified current rebind');}
+ if(view.current_rebind&&delta.length&&view.legacy_native_rows.includes(row)){const expected=view.current_rebind.native.current_rows.find(r=>r.y===row);demand(expected&&same(expected.runs,base),'Actual selected complete native row differs from qualified current rebind');}
  const all=[...base.map(r=>[...r]),...delta.map(r=>[...r])].sort((a,b)=>a[0]-b[0]);let end=0;
  for(const r of all){demand(r[0]>=end,'Selected additive delta overlaps preexisting assigned native cells');end=r[1];}
  return all;
