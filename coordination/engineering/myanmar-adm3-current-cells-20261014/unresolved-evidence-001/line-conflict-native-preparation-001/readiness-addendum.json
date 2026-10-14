@@ -1,0 +1,188 @@
+{
+  "disposition": "Two narrow reversible stock constructor attempts can run with accepted operator and fresh normal resource admission. No exact missing input identified that blocks those attempts.",
+  "supersedes": "review.json caveat as a prelaunch gate; original review remains retained",
+  "requested_cell_joins": [
+    {
+      "owner": 30104,
+      "cells": 161,
+      "sids": [
+        [
+          44892,
+          44939,
+          45169
+        ]
+      ],
+      "foreign_sids": [],
+      "mapped_competitor": false
+    },
+    {
+      "owner": 30332,
+      "cells": 740,
+      "sids": [
+        [
+          44892,
+          44939,
+          45150
+        ]
+      ],
+      "foreign_sids": [],
+      "mapped_competitor": false
+    },
+    {
+      "owner": 30100,
+      "cells": 1677,
+      "sids": [
+        [
+          44892,
+          44936,
+          45005
+        ]
+      ],
+      "foreign_sids": [],
+      "mapped_competitor": false
+    }
+  ],
+  "source_records": [
+    {
+      "family_index": 216,
+      "geometry_status": "raw-native-supported",
+      "name": "Rakhine",
+      "ordinal": 9,
+      "owners": [],
+      "source_id": "gb:MMR:ADM1:20573499B29373908448635",
+      "source_index": 44892
+    },
+    {
+      "family_index": 217,
+      "geometry_status": "raw-native-supported",
+      "name": "Sittwe",
+      "ordinal": 42,
+      "owners": [],
+      "source_id": "gb:MMR:ADM2:60261553B78069071602625",
+      "source_index": 44939
+    },
+    {
+      "family_index": 218,
+      "geometry_status": "raw-native-supported",
+      "name": "Rathedaung",
+      "ordinal": 179,
+      "owners": [
+        30332
+      ],
+      "source_id": "gb:MMR:ADM3:66882298B77467059166323",
+      "source_index": 45150
+    },
+    {
+      "family_index": 216,
+      "geometry_status": "raw-native-supported",
+      "name": "Rakhine",
+      "ordinal": 9,
+      "owners": [],
+      "source_id": "gb:MMR:ADM1:20573499B29373908448635",
+      "source_index": 44892
+    },
+    {
+      "family_index": 217,
+      "geometry_status": "raw-native-supported",
+      "name": "Sittwe",
+      "ordinal": 42,
+      "owners": [],
+      "source_id": "gb:MMR:ADM2:60261553B78069071602625",
+      "source_index": 44939
+    },
+    {
+      "family_index": 218,
+      "geometry_status": "raw-native-supported",
+      "name": "Ponnagyun",
+      "ordinal": 198,
+      "owners": [
+        30104
+      ],
+      "source_id": "gb:MMR:ADM3:66882298B19696970616392",
+      "source_index": 45169
+    },
+    {
+      "family_index": 216,
+      "geometry_status": "raw-native-supported",
+      "name": "Rakhine",
+      "ordinal": 9,
+      "owners": [],
+      "source_id": "gb:MMR:ADM1:20573499B29373908448635",
+      "source_index": 44892
+    },
+    {
+      "family_index": 217,
+      "geometry_status": "raw-native-supported",
+      "name": "Kyaukpyu",
+      "ordinal": 39,
+      "owners": [],
+      "source_id": "gb:MMR:ADM2:60261553B96709228149477",
+      "source_index": 44936
+    },
+    {
+      "family_index": 218,
+      "geometry_status": "raw-native-supported",
+      "name": "Kyaukpyu",
+      "ordinal": 34,
+      "owners": [
+        30100
+      ],
+      "source_id": "gb:MMR:ADM3:66882298B17691670471295",
+      "source_index": 45005
+    }
+  ],
+  "frozen_scope": {
+    "products": 368,
+    "features": 73567,
+    "unsupported": [],
+    "excluded": [],
+    "relevant_products": [
+      "gb:BGD:ADM1",
+      "gb:BGD:ADM2",
+      "gb:CHN:ADM1",
+      "gb:CHN:ADM2",
+      "gb:IND:ADM1",
+      "gb:IND:ADM2",
+      "gb:LAO:ADM1",
+      "gb:LAO:ADM2",
+      "gb:MMR:ADM1",
+      "gb:MMR:ADM2",
+      "gb:MMR:ADM3",
+      "gb:THA:ADM1",
+      "gb:THA:ADM2",
+      "gb:IND:ADM3"
+    ],
+    "block028": {
+      "block": 28,
+      "path": "source-candidates-block-028.json.gz",
+      "bytes": 476733,
+      "decoded_bytes": 3372962,
+      "sha256": "2000877ef3d698ee43b6e1ae0d7bb0cb8cf505a94b21255076691311fb5c3ba4",
+      "decoded_sha256": "1ea269bc51f49a00166c22ffcb3f875761fd98d7c9423b4dd96019b0d584774a",
+      "rows": 4096,
+      "input_intervals": 135556,
+      "counts": {
+        "all_source_covered_owner0": 734772,
+        "mapped_candidate_owner0": 130201,
+        "unique_candidate_owner0": 129601,
+        "ambiguous_candidate_owner0": 600,
+        "unmapped_source_only_owner0": 604571,
+        "source_conflict_owner0": 127,
+        "unique_candidate_with_unmapped_overlap": 91080,
+        "multiple_source_feature_coverage": 149529
+      },
+      "elapsed": 18.393,
+      "rss": 678649856
+    }
+  },
+  "producer_trace": "Retained driver.py BASE=f7c358..., HEAD=410d665... authenticates complete sequential/unique SID roster, queue metadata hashes, raw/decoded block028 hashes, original source identities and frozen per-cell SID/physical lookup. No execution repeated.",
+  "policy": "Issue1880 retained .cache/combined3816-issue-before.json snapshot updated2026-10-14T21:21:18Z requires original Myanmar ADM1/2/3, relevant competing families/current joins, original-authority qualification, current-owner-zero/conservation/readback and coordinated integration. Stock full-family uniqueness/positive coverage/ties are execution checks, not prelaunch missing inputs.",
+  "limits": [
+    "Retained exact-cell no-foreign-source/no-mapped-competitor rationale supports attempt readiness; no whole-border/current-worldwide clearance.",
+    "No explicit country-reference membership field in record-joins/cohort: do not infer sovereignty from SID absence; preserve original foreign-source/reference limits for final acceptance.",
+    "Parent exclusions stay parent witnesses; never relabel them foreign vetoes.",
+    "Actual positive support, complete MMR uniqueness, ties/water/outside/exclusions and conservation remain pending actual checks; diagnostic zero effect grants no qualification.",
+    "Failed14 provenance and separate successful Kyaukpyu retry unchanged. All original holds remain."
+  ],
+  "science_replay": false
+}
