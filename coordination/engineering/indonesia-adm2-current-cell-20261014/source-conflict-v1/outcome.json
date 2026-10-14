@@ -1,0 +1,1327 @@
+{
+  "version": 1,
+  "issue": 1884,
+  "worker_id": "/root/neighbor_conflicts_61",
+  "accepted_head": "f7c358326d776398bc1cffe84df81eac7033091c",
+  "frozen_selection": "a61b6f9e7f88b1da380e3a834f89d7509132ed71",
+  "package_id": "gb-IDN-ADM2--source-conflict",
+  "grid_size": 262166,
+  "coordinate_convention": "native y and half-open [start,end) columns",
+  "status": "investigated-held-source-mapping",
+  "counts": {
+    "frozen_cells": 27,
+    "currently_unassigned_cells": 27,
+    "currently_owned_cells": 0,
+    "held_cells": 27,
+    "accepted_cells": 0,
+    "repaired_credit": 0,
+    "intervals": 21,
+    "competing_subjects": 18,
+    "competing_source_features": 26,
+    "source_products": 9,
+    "subject_pair_cohorts": 11,
+    "individual_province_localities": 9,
+    "province_pair_cohorts": 6
+  },
+  "intervals": [
+    {
+      "interval_id": "idn-source-conflict:127959:215460:215461",
+      "y": 127959,
+      "start": 215460,
+      "end": 215461,
+      "cell_count": 1,
+      "physical_support_class": "land",
+      "candidate_owner_indices": [
+        22771,
+        31140
+      ],
+      "competing_stable_subject_ids": [
+        "gb:IDN:ADM2:22746128B24707766174966",
+        "gb:MYS:ADM2:92858781B73026696392194"
+      ],
+      "competing_subject_names": [
+        "Nunukan",
+        "Sipitang"
+      ],
+      "province_ids": [
+        "framework:province:north-kalimantan:c38f2f263afa",
+        "framework:province:sabah:195a4dcb4f73"
+      ],
+      "all_source_feature_indices": [
+        36257,
+        36632,
+        46110
+      ],
+      "all_source_feature_ids": [
+        "gb:IDN:ADM1:65028918B52923737893214",
+        "gb:IDN:ADM2:22746128B24707766174966",
+        "gb:MYS:ADM2:92858781B73026696392194"
+      ],
+      "current_owner": 0,
+      "decision": "held-unresolved-source-mapping",
+      "accepted_cells": 0,
+      "held_cells": 1,
+      "record_locators": {
+        "extracted_input": ".cache/idn-adm2-extraction-20261014-v1/conflict/block-031.json.gz",
+        "json_pointer": "/0",
+        "frozen_input": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-031.json.gz",
+        "frozen_run_pointers": [
+          "/983/runs/20"
+        ]
+      },
+      "authority_finding_ids": [
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "F5"
+      ],
+      "next_action_id": "A1"
+    },
+    {
+      "interval_id": "idn-source-conflict:129422:214785:214786",
+      "y": 129422,
+      "start": 214785,
+      "end": 214786,
+      "cell_count": 1,
+      "physical_support_class": "land",
+      "candidate_owner_indices": [
+        22935,
+        31030
+      ],
+      "competing_stable_subject_ids": [
+        "gb:IDN:ADM2:22746128B54632748429230",
+        "gb:MYS:ADM2:92858781B14210888216544"
+      ],
+      "competing_subject_names": [
+        "Malinau",
+        "Belaga"
+      ],
+      "province_ids": [
+        "framework:province:north-kalimantan:c38f2f263afa",
+        "framework:province:sarawak:8a5fb64d0d51"
+      ],
+      "all_source_feature_indices": [
+        36257,
+        36578,
+        46102
+      ],
+      "all_source_feature_ids": [
+        "gb:IDN:ADM1:65028918B52923737893214",
+        "gb:IDN:ADM2:22746128B54632748429230",
+        "gb:MYS:ADM2:92858781B14210888216544"
+      ],
+      "current_owner": 0,
+      "decision": "held-unresolved-source-mapping",
+      "accepted_cells": 0,
+      "held_cells": 1,
+      "record_locators": {
+        "extracted_input": ".cache/idn-adm2-extraction-20261014-v1/conflict/block-031.json.gz",
+        "json_pointer": "/1",
+        "frozen_input": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-031.json.gz",
+        "frozen_run_pointers": [
+          "/2446/runs/41"
+        ]
+      },
+      "authority_finding_ids": [
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "F5"
+      ],
+      "next_action_id": "A1"
+    },
+    {
+      "interval_id": "idn-source-conflict:129730:214628:214629",
+      "y": 129730,
+      "start": 214628,
+      "end": 214629,
+      "cell_count": 1,
+      "physical_support_class": "land",
+      "candidate_owner_indices": [
+        22935,
+        31106
+      ],
+      "competing_stable_subject_ids": [
+        "gb:IDN:ADM2:22746128B54632748429230",
+        "gb:MYS:ADM2:92858781B56085190058706"
+      ],
+      "competing_subject_names": [
+        "Malinau",
+        "Bukit Mabong"
+      ],
+      "province_ids": [
+        "framework:province:north-kalimantan:c38f2f263afa",
+        "framework:province:sarawak:8a5fb64d0d51"
+      ],
+      "all_source_feature_indices": [
+        36257,
+        36578,
+        46101
+      ],
+      "all_source_feature_ids": [
+        "gb:IDN:ADM1:65028918B52923737893214",
+        "gb:IDN:ADM2:22746128B54632748429230",
+        "gb:MYS:ADM2:92858781B56085190058706"
+      ],
+      "current_owner": 0,
+      "decision": "held-unresolved-source-mapping",
+      "accepted_cells": 0,
+      "held_cells": 1,
+      "record_locators": {
+        "extracted_input": ".cache/idn-adm2-extraction-20261014-v1/conflict/block-031.json.gz",
+        "json_pointer": "/2",
+        "frozen_input": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-031.json.gz",
+        "frozen_run_pointers": [
+          "/2754/runs/21"
+        ]
+      },
+      "authority_finding_ids": [
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "F5"
+      ],
+      "next_action_id": "A1"
+    },
+    {
+      "interval_id": "idn-source-conflict:129732:214627:214628",
+      "y": 129732,
+      "start": 214627,
+      "end": 214628,
+      "cell_count": 1,
+      "physical_support_class": "land",
+      "candidate_owner_indices": [
+        22935,
+        31106
+      ],
+      "competing_stable_subject_ids": [
+        "gb:IDN:ADM2:22746128B54632748429230",
+        "gb:MYS:ADM2:92858781B56085190058706"
+      ],
+      "competing_subject_names": [
+        "Malinau",
+        "Bukit Mabong"
+      ],
+      "province_ids": [
+        "framework:province:north-kalimantan:c38f2f263afa",
+        "framework:province:sarawak:8a5fb64d0d51"
+      ],
+      "all_source_feature_indices": [
+        36257,
+        36578,
+        46101
+      ],
+      "all_source_feature_ids": [
+        "gb:IDN:ADM1:65028918B52923737893214",
+        "gb:IDN:ADM2:22746128B54632748429230",
+        "gb:MYS:ADM2:92858781B56085190058706"
+      ],
+      "current_owner": 0,
+      "decision": "held-unresolved-source-mapping",
+      "accepted_cells": 0,
+      "held_cells": 1,
+      "record_locators": {
+        "extracted_input": ".cache/idn-adm2-extraction-20261014-v1/conflict/block-031.json.gz",
+        "json_pointer": "/3",
+        "frozen_input": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-031.json.gz",
+        "frozen_run_pointers": [
+          "/2756/runs/29"
+        ]
+      },
+      "authority_finding_ids": [
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "F5"
+      ],
+      "next_action_id": "A1"
+    },
+    {
+      "interval_id": "idn-source-conflict:129733:214627:214628",
+      "y": 129733,
+      "start": 214627,
+      "end": 214628,
+      "cell_count": 1,
+      "physical_support_class": "land",
+      "candidate_owner_indices": [
+        22935,
+        31106
+      ],
+      "competing_stable_subject_ids": [
+        "gb:IDN:ADM2:22746128B54632748429230",
+        "gb:MYS:ADM2:92858781B56085190058706"
+      ],
+      "competing_subject_names": [
+        "Malinau",
+        "Bukit Mabong"
+      ],
+      "province_ids": [
+        "framework:province:north-kalimantan:c38f2f263afa",
+        "framework:province:sarawak:8a5fb64d0d51"
+      ],
+      "all_source_feature_indices": [
+        36257,
+        36578,
+        46101
+      ],
+      "all_source_feature_ids": [
+        "gb:IDN:ADM1:65028918B52923737893214",
+        "gb:IDN:ADM2:22746128B54632748429230",
+        "gb:MYS:ADM2:92858781B56085190058706"
+      ],
+      "current_owner": 0,
+      "decision": "held-unresolved-source-mapping",
+      "accepted_cells": 0,
+      "held_cells": 1,
+      "record_locators": {
+        "extracted_input": ".cache/idn-adm2-extraction-20261014-v1/conflict/block-031.json.gz",
+        "json_pointer": "/4",
+        "frozen_input": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-031.json.gz",
+        "frozen_run_pointers": [
+          "/2757/runs/30"
+        ]
+      },
+      "authority_finding_ids": [
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "F5"
+      ],
+      "next_action_id": "A1"
+    },
+    {
+      "interval_id": "idn-source-conflict:129734:214627:214628",
+      "y": 129734,
+      "start": 214627,
+      "end": 214628,
+      "cell_count": 1,
+      "physical_support_class": "land",
+      "candidate_owner_indices": [
+        22935,
+        31106
+      ],
+      "competing_stable_subject_ids": [
+        "gb:IDN:ADM2:22746128B54632748429230",
+        "gb:MYS:ADM2:92858781B56085190058706"
+      ],
+      "competing_subject_names": [
+        "Malinau",
+        "Bukit Mabong"
+      ],
+      "province_ids": [
+        "framework:province:north-kalimantan:c38f2f263afa",
+        "framework:province:sarawak:8a5fb64d0d51"
+      ],
+      "all_source_feature_indices": [
+        36257,
+        36578,
+        46101
+      ],
+      "all_source_feature_ids": [
+        "gb:IDN:ADM1:65028918B52923737893214",
+        "gb:IDN:ADM2:22746128B54632748429230",
+        "gb:MYS:ADM2:92858781B56085190058706"
+      ],
+      "current_owner": 0,
+      "decision": "held-unresolved-source-mapping",
+      "accepted_cells": 0,
+      "held_cells": 1,
+      "record_locators": {
+        "extracted_input": ".cache/idn-adm2-extraction-20261014-v1/conflict/block-031.json.gz",
+        "json_pointer": "/5",
+        "frozen_input": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-031.json.gz",
+        "frozen_run_pointers": [
+          "/2758/runs/27"
+        ]
+      },
+      "authority_finding_ids": [
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "F5"
+      ],
+      "next_action_id": "A1"
+    },
+    {
+      "interval_id": "idn-source-conflict:130021:212813:212815",
+      "y": 130021,
+      "start": 212813,
+      "end": 212815,
+      "cell_count": 2,
+      "physical_support_class": "land",
+      "candidate_owner_indices": [
+        23115,
+        31076
+      ],
+      "competing_stable_subject_ids": [
+        "gb:IDN:ADM2:22746128B82886709098386",
+        "gb:MYS:ADM2:92858781B41369964486545"
+      ],
+      "competing_subject_names": [
+        "Kapuas Hulu",
+        "Song"
+      ],
+      "province_ids": [
+        "framework:province:west-kalimantan:16a25aa9e8c0",
+        "framework:province:sarawak:8a5fb64d0d51"
+      ],
+      "all_source_feature_indices": [
+        36233,
+        36398,
+        46091
+      ],
+      "all_source_feature_ids": [
+        "gb:IDN:ADM1:65028918B19721185942402",
+        "gb:IDN:ADM2:22746128B82886709098386",
+        "gb:MYS:ADM2:92858781B41369964486545"
+      ],
+      "current_owner": 0,
+      "decision": "held-unresolved-source-mapping",
+      "accepted_cells": 0,
+      "held_cells": 2,
+      "record_locators": {
+        "extracted_input": ".cache/idn-adm2-extraction-20261014-v1/conflict/block-031.json.gz",
+        "json_pointer": "/6",
+        "frozen_input": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-031.json.gz",
+        "frozen_run_pointers": [
+          "/3045/runs/18"
+        ]
+      },
+      "authority_finding_ids": [
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "F5"
+      ],
+      "next_action_id": "A1"
+    },
+    {
+      "interval_id": "idn-source-conflict:130192:213846:213847",
+      "y": 130192,
+      "start": 213846,
+      "end": 213847,
+      "cell_count": 1,
+      "physical_support_class": "land",
+      "candidate_owner_indices": [
+        23115,
+        31106
+      ],
+      "competing_stable_subject_ids": [
+        "gb:IDN:ADM2:22746128B82886709098386",
+        "gb:MYS:ADM2:92858781B56085190058706"
+      ],
+      "competing_subject_names": [
+        "Kapuas Hulu",
+        "Bukit Mabong"
+      ],
+      "province_ids": [
+        "framework:province:west-kalimantan:16a25aa9e8c0",
+        "framework:province:sarawak:8a5fb64d0d51"
+      ],
+      "all_source_feature_indices": [
+        36398,
+        45977,
+        46101
+      ],
+      "all_source_feature_ids": [
+        "gb:IDN:ADM2:22746128B82886709098386",
+        "gb:MYS:ADM1:15666254B8535925993004",
+        "gb:MYS:ADM2:92858781B56085190058706"
+      ],
+      "current_owner": 0,
+      "decision": "held-unresolved-source-mapping",
+      "accepted_cells": 0,
+      "held_cells": 1,
+      "record_locators": {
+        "extracted_input": ".cache/idn-adm2-extraction-20261014-v1/conflict/block-031.json.gz",
+        "json_pointer": "/7",
+        "frozen_input": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-031.json.gz",
+        "frozen_run_pointers": [
+          "/3216/runs/28"
+        ]
+      },
+      "authority_finding_ids": [
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "F5"
+      ],
+      "next_action_id": "A1"
+    },
+    {
+      "interval_id": "idn-source-conflict:130333:211907:211908",
+      "y": 130333,
+      "start": 211907,
+      "end": 211908,
+      "cell_count": 1,
+      "physical_support_class": "land",
+      "candidate_owner_indices": [
+        23065,
+        31127
+      ],
+      "competing_stable_subject_ids": [
+        "gb:IDN:ADM2:22746128B74245273608062",
+        "gb:MYS:ADM2:92858781B67044495158935"
+      ],
+      "competing_subject_names": [
+        "Sintang",
+        "Sri Aman"
+      ],
+      "province_ids": [
+        "framework:province:west-kalimantan:16a25aa9e8c0",
+        "framework:province:sarawak:8a5fb64d0d51"
+      ],
+      "all_source_feature_indices": [
+        36712,
+        45977,
+        46079
+      ],
+      "all_source_feature_ids": [
+        "gb:IDN:ADM2:22746128B74245273608062",
+        "gb:MYS:ADM1:15666254B8535925993004",
+        "gb:MYS:ADM2:92858781B67044495158935"
+      ],
+      "current_owner": 0,
+      "decision": "held-unresolved-source-mapping",
+      "accepted_cells": 0,
+      "held_cells": 1,
+      "record_locators": {
+        "extracted_input": ".cache/idn-adm2-extraction-20261014-v1/conflict/block-031.json.gz",
+        "json_pointer": "/8",
+        "frozen_input": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-031.json.gz",
+        "frozen_run_pointers": [
+          "/3357/runs/29"
+        ]
+      },
+      "authority_finding_ids": [
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "F5"
+      ],
+      "next_action_id": "A1"
+    },
+    {
+      "interval_id": "idn-source-conflict:130333:211908:211909",
+      "y": 130333,
+      "start": 211908,
+      "end": 211909,
+      "cell_count": 1,
+      "physical_support_class": "land",
+      "candidate_owner_indices": [
+        23065,
+        31127
+      ],
+      "competing_stable_subject_ids": [
+        "gb:IDN:ADM2:22746128B74245273608062",
+        "gb:MYS:ADM2:92858781B67044495158935"
+      ],
+      "competing_subject_names": [
+        "Sintang",
+        "Sri Aman"
+      ],
+      "province_ids": [
+        "framework:province:west-kalimantan:16a25aa9e8c0",
+        "framework:province:sarawak:8a5fb64d0d51"
+      ],
+      "all_source_feature_indices": [
+        36233,
+        36712,
+        46079
+      ],
+      "all_source_feature_ids": [
+        "gb:IDN:ADM1:65028918B19721185942402",
+        "gb:IDN:ADM2:22746128B74245273608062",
+        "gb:MYS:ADM2:92858781B67044495158935"
+      ],
+      "current_owner": 0,
+      "decision": "held-unresolved-source-mapping",
+      "accepted_cells": 0,
+      "held_cells": 1,
+      "record_locators": {
+        "extracted_input": ".cache/idn-adm2-extraction-20261014-v1/conflict/block-031.json.gz",
+        "json_pointer": "/9",
+        "frozen_input": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-031.json.gz",
+        "frozen_run_pointers": [
+          "/3357/runs/30"
+        ]
+      },
+      "authority_finding_ids": [
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "F5"
+      ],
+      "next_action_id": "A1"
+    },
+    {
+      "interval_id": "idn-source-conflict:130333:211909:211911",
+      "y": 130333,
+      "start": 211909,
+      "end": 211911,
+      "cell_count": 2,
+      "physical_support_class": "land",
+      "candidate_owner_indices": [
+        23065,
+        31127
+      ],
+      "competing_stable_subject_ids": [
+        "gb:IDN:ADM2:22746128B74245273608062",
+        "gb:MYS:ADM2:92858781B67044495158935"
+      ],
+      "competing_subject_names": [
+        "Sintang",
+        "Sri Aman"
+      ],
+      "province_ids": [
+        "framework:province:west-kalimantan:16a25aa9e8c0",
+        "framework:province:sarawak:8a5fb64d0d51"
+      ],
+      "all_source_feature_indices": [
+        36712,
+        45977,
+        46079
+      ],
+      "all_source_feature_ids": [
+        "gb:IDN:ADM2:22746128B74245273608062",
+        "gb:MYS:ADM1:15666254B8535925993004",
+        "gb:MYS:ADM2:92858781B67044495158935"
+      ],
+      "current_owner": 0,
+      "decision": "held-unresolved-source-mapping",
+      "accepted_cells": 0,
+      "held_cells": 2,
+      "record_locators": {
+        "extracted_input": ".cache/idn-adm2-extraction-20261014-v1/conflict/block-031.json.gz",
+        "json_pointer": "/10",
+        "frozen_input": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-031.json.gz",
+        "frozen_run_pointers": [
+          "/3357/runs/31"
+        ]
+      },
+      "authority_finding_ids": [
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "F5"
+      ],
+      "next_action_id": "A1"
+    },
+    {
+      "interval_id": "idn-source-conflict:130389:211487:211489",
+      "y": 130389,
+      "start": 211487,
+      "end": 211489,
+      "cell_count": 2,
+      "physical_support_class": "land",
+      "candidate_owner_indices": [
+        23071,
+        31151
+      ],
+      "competing_stable_subject_ids": [
+        "gb:IDN:ADM2:22746128B74989070523542",
+        "gb:MYS:ADM2:92858781B78299501514110"
+      ],
+      "competing_subject_names": [
+        "Sanggau",
+        "Tebedu"
+      ],
+      "province_ids": [
+        "framework:province:west-kalimantan:16a25aa9e8c0",
+        "framework:province:sarawak:8a5fb64d0d51"
+      ],
+      "all_source_feature_indices": [
+        36691,
+        45977,
+        46076
+      ],
+      "all_source_feature_ids": [
+        "gb:IDN:ADM2:22746128B74989070523542",
+        "gb:MYS:ADM1:15666254B8535925993004",
+        "gb:MYS:ADM2:92858781B78299501514110"
+      ],
+      "current_owner": 0,
+      "decision": "held-unresolved-source-mapping",
+      "accepted_cells": 0,
+      "held_cells": 2,
+      "record_locators": {
+        "extracted_input": ".cache/idn-adm2-extraction-20261014-v1/conflict/block-031.json.gz",
+        "json_pointer": "/11",
+        "frozen_input": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-031.json.gz",
+        "frozen_run_pointers": [
+          "/3413/runs/50"
+        ]
+      },
+      "authority_finding_ids": [
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "F5"
+      ],
+      "next_action_id": "A1"
+    },
+    {
+      "interval_id": "idn-source-conflict:130390:211489:211491",
+      "y": 130390,
+      "start": 211489,
+      "end": 211491,
+      "cell_count": 2,
+      "physical_support_class": "land",
+      "candidate_owner_indices": [
+        23071,
+        31151
+      ],
+      "competing_stable_subject_ids": [
+        "gb:IDN:ADM2:22746128B74989070523542",
+        "gb:MYS:ADM2:92858781B78299501514110"
+      ],
+      "competing_subject_names": [
+        "Sanggau",
+        "Tebedu"
+      ],
+      "province_ids": [
+        "framework:province:west-kalimantan:16a25aa9e8c0",
+        "framework:province:sarawak:8a5fb64d0d51"
+      ],
+      "all_source_feature_indices": [
+        36233,
+        36691,
+        46076
+      ],
+      "all_source_feature_ids": [
+        "gb:IDN:ADM1:65028918B19721185942402",
+        "gb:IDN:ADM2:22746128B74989070523542",
+        "gb:MYS:ADM2:92858781B78299501514110"
+      ],
+      "current_owner": 0,
+      "decision": "held-unresolved-source-mapping",
+      "accepted_cells": 0,
+      "held_cells": 2,
+      "record_locators": {
+        "extracted_input": ".cache/idn-adm2-extraction-20261014-v1/conflict/block-031.json.gz",
+        "json_pointer": "/12",
+        "frozen_input": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-031.json.gz",
+        "frozen_run_pointers": [
+          "/3414/runs/43"
+        ]
+      },
+      "authority_finding_ids": [
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "F5"
+      ],
+      "next_action_id": "A1"
+    },
+    {
+      "interval_id": "idn-source-conflict:130391:211492:211494",
+      "y": 130391,
+      "start": 211492,
+      "end": 211494,
+      "cell_count": 2,
+      "physical_support_class": "land",
+      "candidate_owner_indices": [
+        23071,
+        31151
+      ],
+      "competing_stable_subject_ids": [
+        "gb:IDN:ADM2:22746128B74989070523542",
+        "gb:MYS:ADM2:92858781B78299501514110"
+      ],
+      "competing_subject_names": [
+        "Sanggau",
+        "Tebedu"
+      ],
+      "province_ids": [
+        "framework:province:west-kalimantan:16a25aa9e8c0",
+        "framework:province:sarawak:8a5fb64d0d51"
+      ],
+      "all_source_feature_indices": [
+        36233,
+        36691,
+        46076
+      ],
+      "all_source_feature_ids": [
+        "gb:IDN:ADM1:65028918B19721185942402",
+        "gb:IDN:ADM2:22746128B74989070523542",
+        "gb:MYS:ADM2:92858781B78299501514110"
+      ],
+      "current_owner": 0,
+      "decision": "held-unresolved-source-mapping",
+      "accepted_cells": 0,
+      "held_cells": 2,
+      "record_locators": {
+        "extracted_input": ".cache/idn-adm2-extraction-20261014-v1/conflict/block-031.json.gz",
+        "json_pointer": "/13",
+        "frozen_input": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-031.json.gz",
+        "frozen_run_pointers": [
+          "/3415/runs/52"
+        ]
+      },
+      "authority_finding_ids": [
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "F5"
+      ],
+      "next_action_id": "A1"
+    },
+    {
+      "interval_id": "idn-source-conflict:130392:211495:211497",
+      "y": 130392,
+      "start": 211495,
+      "end": 211497,
+      "cell_count": 2,
+      "physical_support_class": "land",
+      "candidate_owner_indices": [
+        23071,
+        31151
+      ],
+      "competing_stable_subject_ids": [
+        "gb:IDN:ADM2:22746128B74989070523542",
+        "gb:MYS:ADM2:92858781B78299501514110"
+      ],
+      "competing_subject_names": [
+        "Sanggau",
+        "Tebedu"
+      ],
+      "province_ids": [
+        "framework:province:west-kalimantan:16a25aa9e8c0",
+        "framework:province:sarawak:8a5fb64d0d51"
+      ],
+      "all_source_feature_indices": [
+        36233,
+        36691,
+        46076
+      ],
+      "all_source_feature_ids": [
+        "gb:IDN:ADM1:65028918B19721185942402",
+        "gb:IDN:ADM2:22746128B74989070523542",
+        "gb:MYS:ADM2:92858781B78299501514110"
+      ],
+      "current_owner": 0,
+      "decision": "held-unresolved-source-mapping",
+      "accepted_cells": 0,
+      "held_cells": 2,
+      "record_locators": {
+        "extracted_input": ".cache/idn-adm2-extraction-20261014-v1/conflict/block-031.json.gz",
+        "json_pointer": "/14",
+        "frozen_input": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-031.json.gz",
+        "frozen_run_pointers": [
+          "/3416/runs/47"
+        ]
+      },
+      "authority_finding_ids": [
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "F5"
+      ],
+      "next_action_id": "A1"
+    },
+    {
+      "interval_id": "idn-source-conflict:136109:233721:233722",
+      "y": 136109,
+      "start": 233721,
+      "end": 233722,
+      "cell_count": 1,
+      "physical_support_class": "land",
+      "candidate_owner_indices": [
+        23001,
+        35754
+      ],
+      "competing_stable_subject_ids": [
+        "gb:IDN:ADM2:22746128B65756496772256",
+        "gb:PNG:ADM3:22992897B97542007702415"
+      ],
+      "competing_subject_names": [
+        "Merauke",
+        "Lake Murray Rural LLG"
+      ],
+      "province_ids": [
+        "framework:province:papua:856ef2fb442b",
+        "framework:province:middle-fly-district:db865ab83af9"
+      ],
+      "all_source_feature_indices": [
+        36254,
+        36601,
+        50902,
+        50953,
+        51139
+      ],
+      "all_source_feature_ids": [
+        "gb:IDN:ADM1:65028918B16658067687714",
+        "gb:IDN:ADM2:22746128B65756496772256",
+        "gb:PNG:ADM1:602756B48983107143165",
+        "gb:PNG:ADM2:67681753B64880686677125",
+        "gb:PNG:ADM3:22992897B97542007702415"
+      ],
+      "current_owner": 0,
+      "decision": "held-unresolved-source-mapping",
+      "accepted_cells": 0,
+      "held_cells": 1,
+      "record_locators": {
+        "extracted_input": ".cache/idn-adm2-extraction-20261014-v1/conflict/block-033.json.gz",
+        "json_pointer": "/0",
+        "frozen_input": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-033.json.gz",
+        "frozen_run_pointers": [
+          "/941/runs/28"
+        ]
+      },
+      "authority_finding_ids": [
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "F5"
+      ],
+      "next_action_id": "A2"
+    },
+    {
+      "interval_id": "idn-source-conflict:137710:222103:222104",
+      "y": 137710,
+      "start": 222103,
+      "end": 222104,
+      "cell_count": 1,
+      "physical_support_class": "land",
+      "candidate_owner_indices": [
+        22839,
+        42215
+      ],
+      "competing_stable_subject_ids": [
+        "gb:IDN:ADM2:22746128B36840991830224",
+        "gb:TLS:ADM2:22284137B63057021325797"
+      ],
+      "competing_subject_names": [
+        "Belu",
+        "Balibo"
+      ],
+      "province_ids": [
+        "framework:province:east-nusa-tenggara:5b5b49121e97",
+        "framework:province:bobonaro:f2ee924e8e8b"
+      ],
+      "all_source_feature_indices": [
+        36306,
+        58358,
+        58374
+      ],
+      "all_source_feature_ids": [
+        "gb:IDN:ADM2:22746128B36840991830224",
+        "gb:TLS:ADM1:58719522B64128847782213",
+        "gb:TLS:ADM2:22284137B63057021325797"
+      ],
+      "current_owner": 0,
+      "decision": "held-unresolved-source-mapping",
+      "accepted_cells": 0,
+      "held_cells": 1,
+      "record_locators": {
+        "extracted_input": ".cache/idn-adm2-extraction-20261014-v1/conflict/block-033.json.gz",
+        "json_pointer": "/1",
+        "frozen_input": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-033.json.gz",
+        "frozen_run_pointers": [
+          "/2542/runs/23"
+        ]
+      },
+      "authority_finding_ids": [
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "F5"
+      ],
+      "next_action_id": "A3"
+    },
+    {
+      "interval_id": "idn-source-conflict:137711:222102:222103",
+      "y": 137711,
+      "start": 222102,
+      "end": 222103,
+      "cell_count": 1,
+      "physical_support_class": "land",
+      "candidate_owner_indices": [
+        22839,
+        42215
+      ],
+      "competing_stable_subject_ids": [
+        "gb:IDN:ADM2:22746128B36840991830224",
+        "gb:TLS:ADM2:22284137B63057021325797"
+      ],
+      "competing_subject_names": [
+        "Belu",
+        "Balibo"
+      ],
+      "province_ids": [
+        "framework:province:east-nusa-tenggara:5b5b49121e97",
+        "framework:province:bobonaro:f2ee924e8e8b"
+      ],
+      "all_source_feature_indices": [
+        36306,
+        58358,
+        58374
+      ],
+      "all_source_feature_ids": [
+        "gb:IDN:ADM2:22746128B36840991830224",
+        "gb:TLS:ADM1:58719522B64128847782213",
+        "gb:TLS:ADM2:22284137B63057021325797"
+      ],
+      "current_owner": 0,
+      "decision": "held-unresolved-source-mapping",
+      "accepted_cells": 0,
+      "held_cells": 1,
+      "record_locators": {
+        "extracted_input": ".cache/idn-adm2-extraction-20261014-v1/conflict/block-033.json.gz",
+        "json_pointer": "/2",
+        "frozen_input": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-033.json.gz",
+        "frozen_run_pointers": [
+          "/2543/runs/19"
+        ]
+      },
+      "authority_finding_ids": [
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "F5"
+      ],
+      "next_action_id": "A3"
+    },
+    {
+      "interval_id": "idn-source-conflict:137791:222157:222158",
+      "y": 137791,
+      "start": 222157,
+      "end": 222158,
+      "cell_count": 1,
+      "physical_support_class": "land",
+      "candidate_owner_indices": [
+        22839,
+        42172
+      ],
+      "competing_stable_subject_ids": [
+        "gb:IDN:ADM2:22746128B36840991830224",
+        "gb:TLS:ADM2:22284137B11881161065747"
+      ],
+      "competing_subject_names": [
+        "Belu",
+        "Fatumean"
+      ],
+      "province_ids": [
+        "framework:province:east-nusa-tenggara:5b5b49121e97",
+        "framework:province:cova-lima:77efc0acc95b"
+      ],
+      "all_source_feature_indices": [
+        36248,
+        36306,
+        58385
+      ],
+      "all_source_feature_ids": [
+        "gb:IDN:ADM1:65028918B90323071856071",
+        "gb:IDN:ADM2:22746128B36840991830224",
+        "gb:TLS:ADM2:22284137B11881161065747"
+      ],
+      "current_owner": 0,
+      "decision": "held-unresolved-source-mapping",
+      "accepted_cells": 0,
+      "held_cells": 1,
+      "record_locators": {
+        "extracted_input": ".cache/idn-adm2-extraction-20261014-v1/conflict/block-033.json.gz",
+        "json_pointer": "/3",
+        "frozen_input": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-033.json.gz",
+        "frozen_run_pointers": [
+          "/2623/runs/7"
+        ]
+      },
+      "authority_finding_ids": [
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "F5"
+      ],
+      "next_action_id": "A3"
+    },
+    {
+      "interval_id": "idn-source-conflict:137844:222101:222102",
+      "y": 137844,
+      "start": 222101,
+      "end": 222102,
+      "cell_count": 1,
+      "physical_support_class": "land",
+      "candidate_owner_indices": [
+        22839,
+        42172
+      ],
+      "competing_stable_subject_ids": [
+        "gb:IDN:ADM2:22746128B36840991830224",
+        "gb:TLS:ADM2:22284137B11881161065747"
+      ],
+      "competing_subject_names": [
+        "Belu",
+        "Fatumean"
+      ],
+      "province_ids": [
+        "framework:province:east-nusa-tenggara:5b5b49121e97",
+        "framework:province:cova-lima:77efc0acc95b"
+      ],
+      "all_source_feature_indices": [
+        36248,
+        36306,
+        58385
+      ],
+      "all_source_feature_ids": [
+        "gb:IDN:ADM1:65028918B90323071856071",
+        "gb:IDN:ADM2:22746128B36840991830224",
+        "gb:TLS:ADM2:22284137B11881161065747"
+      ],
+      "current_owner": 0,
+      "decision": "held-unresolved-source-mapping",
+      "accepted_cells": 0,
+      "held_cells": 1,
+      "record_locators": {
+        "extracted_input": ".cache/idn-adm2-extraction-20261014-v1/conflict/block-033.json.gz",
+        "json_pointer": "/4",
+        "frozen_input": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-033.json.gz",
+        "frozen_run_pointers": [
+          "/2676/runs/4"
+        ]
+      },
+      "authority_finding_ids": [
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "F5"
+      ],
+      "next_action_id": "A3"
+    },
+    {
+      "interval_id": "idn-source-conflict:138001:222176:222177",
+      "y": 138001,
+      "start": 222176,
+      "end": 222177,
+      "cell_count": 1,
+      "physical_support_class": "land",
+      "candidate_owner_indices": [
+        22947,
+        42189
+      ],
+      "competing_stable_subject_ids": [
+        "gb:IDN:ADM2:22746128B56140662064287",
+        "gb:TLS:ADM2:22284137B39285760424005"
+      ],
+      "competing_subject_names": [
+        "Malaka",
+        "Tilomar"
+      ],
+      "province_ids": [
+        "framework:province:east-nusa-tenggara:5b5b49121e97",
+        "framework:province:cova-lima:77efc0acc95b"
+      ],
+      "all_source_feature_indices": [
+        36248,
+        36576,
+        58422
+      ],
+      "all_source_feature_ids": [
+        "gb:IDN:ADM1:65028918B90323071856071",
+        "gb:IDN:ADM2:22746128B56140662064287",
+        "gb:TLS:ADM2:22284137B39285760424005"
+      ],
+      "current_owner": 0,
+      "decision": "held-unresolved-source-mapping",
+      "accepted_cells": 0,
+      "held_cells": 1,
+      "record_locators": {
+        "extracted_input": ".cache/idn-adm2-extraction-20261014-v1/conflict/block-033.json.gz",
+        "json_pointer": "/5",
+        "frozen_input": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-033.json.gz",
+        "frozen_run_pointers": [
+          "/2833/runs/15"
+        ]
+      },
+      "authority_finding_ids": [
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "F5"
+      ],
+      "next_action_id": "A3"
+    }
+  ],
+  "pair_cohorts": [
+    {
+      "stable_subject_pair": [
+        "gb:IDN:ADM2:22746128B24707766174966",
+        "gb:MYS:ADM2:92858781B73026696392194"
+      ],
+      "interval_indices": [
+        0
+      ],
+      "cells": 1
+    },
+    {
+      "stable_subject_pair": [
+        "gb:IDN:ADM2:22746128B36840991830224",
+        "gb:TLS:ADM2:22284137B11881161065747"
+      ],
+      "interval_indices": [
+        18,
+        19
+      ],
+      "cells": 2
+    },
+    {
+      "stable_subject_pair": [
+        "gb:IDN:ADM2:22746128B36840991830224",
+        "gb:TLS:ADM2:22284137B63057021325797"
+      ],
+      "interval_indices": [
+        16,
+        17
+      ],
+      "cells": 2
+    },
+    {
+      "stable_subject_pair": [
+        "gb:IDN:ADM2:22746128B54632748429230",
+        "gb:MYS:ADM2:92858781B14210888216544"
+      ],
+      "interval_indices": [
+        1
+      ],
+      "cells": 1
+    },
+    {
+      "stable_subject_pair": [
+        "gb:IDN:ADM2:22746128B54632748429230",
+        "gb:MYS:ADM2:92858781B56085190058706"
+      ],
+      "interval_indices": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "cells": 4
+    },
+    {
+      "stable_subject_pair": [
+        "gb:IDN:ADM2:22746128B56140662064287",
+        "gb:TLS:ADM2:22284137B39285760424005"
+      ],
+      "interval_indices": [
+        20
+      ],
+      "cells": 1
+    },
+    {
+      "stable_subject_pair": [
+        "gb:IDN:ADM2:22746128B65756496772256",
+        "gb:PNG:ADM3:22992897B97542007702415"
+      ],
+      "interval_indices": [
+        15
+      ],
+      "cells": 1
+    },
+    {
+      "stable_subject_pair": [
+        "gb:IDN:ADM2:22746128B74245273608062",
+        "gb:MYS:ADM2:92858781B67044495158935"
+      ],
+      "interval_indices": [
+        8,
+        9,
+        10
+      ],
+      "cells": 4
+    },
+    {
+      "stable_subject_pair": [
+        "gb:IDN:ADM2:22746128B74989070523542",
+        "gb:MYS:ADM2:92858781B78299501514110"
+      ],
+      "interval_indices": [
+        11,
+        12,
+        13,
+        14
+      ],
+      "cells": 8
+    },
+    {
+      "stable_subject_pair": [
+        "gb:IDN:ADM2:22746128B82886709098386",
+        "gb:MYS:ADM2:92858781B41369964486545"
+      ],
+      "interval_indices": [
+        6
+      ],
+      "cells": 2
+    },
+    {
+      "stable_subject_pair": [
+        "gb:IDN:ADM2:22746128B82886709098386",
+        "gb:MYS:ADM2:92858781B56085190058706"
+      ],
+      "interval_indices": [
+        7
+      ],
+      "cells": 1
+    }
+  ],
+  "next_actions": [
+    {
+      "id": "A1",
+      "scope": "IDN-MYS: seven exact subject-pair cohorts, 21 cells",
+      "action": "Obtain and retain applicable boundary or administrative mapping authority covering the exact Nunukan/Sipitang, Malinau/Belaga, Malinau/Bukit Mabong, Kapuas Hulu/Song, Kapuas Hulu/Bukit Mabong, Sintang/Sri Aman and Sanggau/Tebedu intervals. Establish date, provenance, usable geometry, positional suitability and the rule for reconciling all competing products; coordinate both country scopes before any proposed ownership change."
+    },
+    {
+      "id": "A2",
+      "scope": "IDN-PNG: Merauke/Lake Murray Rural LLG, 1 cell",
+      "action": "Resolve the exact Merauke/Lake Murray competing mapping while preserving IDN ADM1/2 and PNG ADM1/2/3 evidence. Establish applicable boundary authority and source-vintage compatibility; neither coarser-tier agreement nor ADM3 detail establishes a winner."
+    },
+    {
+      "id": "A3",
+      "scope": "IDN-TLS: Belu/Balibo, Belu/Fatumean, Malaka/Tilomar, 5 cells",
+      "action": "Obtain applicable administrative/boundary authority for these exact three pairs and five cells; authenticate temporal and positional suitability, retain both country source sets and coordinate both scopes. Do not infer a named sovereignty dispute from the overlaps."
+    },
+    {
+      "id": "A4",
+      "scope": "All 27 held cells",
+      "action": "Before any future acceptance, rebind to the then-current selected ownership, subtract assigned cells, independently review the exact source decision and explicit exclusions, and rerun only the affected intervals through the authorized operator. Preserve this held outcome as predecessor evidence."
+    }
+  ],
+  "limits": [
+    "Data-only investigation outcome; no native operator, GIS computation, source retrieval or source geometry repair.",
+    "All current-owner claims are as of accepted_head. The current accounting receipt reuses the identical frozen complete native base and subtracts the selected additive patch.",
+    "The exact cumulative patch was independently read here and overlaps zero held cells; no complete native raster was reloaded.",
+    "Original source geometry conflicts are retained prior evidence and source-record relationships, not a newly recomputed spatial result.",
+    "No applicable authority was found in the named inspected accepted records; broader official research remains required.",
+    "Land class means retained queue physical support only.",
+    "Held investigation outcome is complete for this bounded task; repair and scientific approval remain unresolved."
+  ],
+  "remaining_reviewer_obligations": [
+    "Independently validate the 21-row selector against the frozen package and both pinned blocks, including source sets that change between adjacent intervals.",
+    "Check all 18 stable subject IDs and 26 source IDs against accepted roster/lineage/current owner records; retain all nine products, including unmapped coarser tiers.",
+    "Confirm current accounting receipt scope, same-base pin, current selection and cumulative patch bindings; this packet reuses frozen complete-base accounting and does not reload native base rows.",
+    "Assess the limited authority findings against their cited accepted records; no applicable authority found in these records is not a claim that no authority exists elsewhere.",
+    "Review held-only status and per-pair next actions; no territorial, physical-truth, scientific-approval, repair, or delivery acceptance follows from this investigation.",
+    "For repository publication, move this data-only packet and its input snapshots to the issue-owned durable evidence path and apply normal exact-head review. No review receipt is supplied by this author."
+  ]
+}

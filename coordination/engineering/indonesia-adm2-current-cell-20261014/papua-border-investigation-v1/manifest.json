@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "issue": 1884,
+  "worker_id": "/root/png_sources_61",
+  "accepted_head": "f7c358326d776398bc1cffe84df81eac7033091c",
+  "kind": "data-only-held-Papua-PNG-source-investigation",
+  "complete": true,
+  "outputs": [
+    {
+      "path": "investigation.json",
+      "bytes": 97547,
+      "sha256": "e17257e7440b485be31328e9e7998012ef9dd7ff4e96fdc4dc38b49a3370ccf7"
+    },
+    {
+      "path": "cohort-intervals.json.gz",
+      "bytes": 121235,
+      "sha256": "1e895b55fbdb8ea334fb1d683b5126010b8d1025744c5d0b4648e8ab1d3e1d1b",
+      "decoded_bytes": 1141312,
+      "decoded_sha256": "c8270b16cf85112577e9f44881d5dbc880d6b10f48af60fe85cd34260b65d00d"
+    },
+    {
+      "path": "consumed-inputs.json",
+      "bytes": 26805,
+      "sha256": "17328b864212db9151badd2b0784c789a15bd12197079e1127300b22ae864e4e"
+    },
+    {
+      "path": "current-ownership-receipt.json",
+      "bytes": 23635,
+      "sha256": "7d6b4d523b22f09e5c3db68c5550c960a8c68aa865b5011c0e155dc5a552a37a"
+    }
+  ],
+  "distinct_currently_unassigned_cells": 49939,
+  "accepted_cells": 0,
+  "repaired_credit": 0,
+  "repair_targets": 26,
+  "cohort_interval_segments": 20980,
+  "review_status": "author investigation; independent review pending"
+}

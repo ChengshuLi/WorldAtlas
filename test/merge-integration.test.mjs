@@ -709,9 +709,10 @@ test('queue refuses changed predecessor authority or failed fresh geography afte
 
 // Final merge semantics retained from the removed speculative capacity planner.
 {
-function finalMergeFixture() {
+function finalMergeFixture({software = false} = {}) {
   const repo = 'o/r', head = 'b'.repeat(40), base = 'a'.repeat(40), candidate = 'c'.repeat(40), branch = 'engineering/final-fixture';
-  const manifestPath = 'coordination/engineering/final-fixture/evidence-quality.json', outputPath = 'coordination/engineering/final-fixture/result.json';
+  const manifestPath = 'coordination/engineering/final-fixture/evidence-quality.json';
+  const outputPath = software ? 'scripts/controlled-geography.mjs' : 'coordination/engineering/final-fixture/result.json';
   const baselineRaw = Buffer.from('baseline\n'), outputRaw = Buffer.from('{"controlled":true}\n');
   const desc = (path, raw) => ({path, bytes: raw.length, sha256: sha256(raw), hash_kind: 'file-bytes'});
   const files = [{filename: outputPath, status: 'added'}, {filename: manifestPath, status: 'added'}];
@@ -773,7 +774,7 @@ function finalMergeFixture() {
   return f;
 }
 
-function evidenceFailedProof(f) {
+function evidenceFailedProof(f, {software = false} = {}) {
   const workflow='ref: ${{ github.event.pull_request.head.sha }}\nname: Complete regression shard\nname: Build hosted assets';
   for (const path of PROOF_PATHS) {
     const raw=Buffer.from(path===WORKFLOW_PATH ? workflow : path);
@@ -790,6 +791,17 @@ function evidenceFailedProof(f) {
     {name:'regression (0)',status:'completed',conclusion:'success',steps:
       ['Checkout reviewed head','Install browser dependencies only for tests that use Playwright','Complete regression shard']
         .map(name=>({name,status:'completed',conclusion:'success'}))}];
+  if (software) {
+    f.proofJobs.find(job => job.name === 'package').steps = [
+      {name: 'Use full-regression package verification', status: 'completed', conclusion: 'success'}];
+    f.proofJobs = f.proofJobs.filter(job => !job.name.startsWith('regression ('));
+    for (const shard of [0, 1, 2]) f.proofJobs.push({name: `regression (${shard})`, status: 'completed', conclusion: 'success',
+      steps: ['Checkout reviewed head', 'Install browser dependencies only for tests that use Playwright',
+        'Complete regression shard', 'Install Node dependencies', 'Install Python dependencies',
+        ...(shard === 0 ? ['Build hosted assets', 'Verify full-regression package controls',
+          'Read back qualified native build outputs when selected', 'Verify full-regression package receipt',
+          'Retain full-regression package receipt'] : [])].map(name => ({name, status: 'completed', conclusion: 'success'}))});
+  }
   const original=f.api;f.proofReads=0;
   f.api=async(route,...args)=>{
     if(route.endsWith('/actions/runs/44')) {f.proofReads++;return structuredClone(f.proofRun);}
@@ -840,8 +852,8 @@ test('final proof is checked against revoked authority before any merge write',a
   }
 });
 
-function geographyReuseFixture() {
-  const f = evidenceFailedProof(finalMergeFixture());
+function geographyReuseFixture(options = {}) {
+  const f = evidenceFailedProof(finalMergeFixture(options), options);
   f.pr.mergeable = true; f.pr.merge_commit_sha = f.candidate;
   const job = f.proofJobs.find(job => job.name === 'geography');
   Object.assign(job, {id: 55, steps: ['Checkout trusted geographic checker', 'Install trusted geographic dependencies',
@@ -1016,8 +1028,10 @@ function storedReportArchive(raw) {
   end.writeUInt32LE(46 + name.length, 12); end.writeUInt32LE(30 + name.length + raw.length, 16);
   return Buffer.concat([local, name, raw, central, name, end]);
 }
-function carriedGeographyFixture() {
-  const f = geographyReuseFixture();
+function carriedGeographyFixture({software = false} = {}) {
+  const f = geographyReuseFixture({software});
+  if (software) Object.assign(f.report, {candidate_commit: f.candidate, trusted_code_commit: f.candidate,
+    candidate_code_executed: true, trusted_code_inventory_sha256: 'd'.repeat(64)});
   f.originRun = {...structuredClone(f.proofRun), conclusion: 'cancelled', pull_requests: []};
   f.originJobs = [structuredClone(f.proofJobs.find(job => job.name === 'geography'))];
   Object.assign(f.originJobs[0], {run_id: 44, run_attempt: 1, head_sha: f.head});
@@ -1028,7 +1042,8 @@ function carriedGeographyFixture() {
   f.zip = storedReportArchive(raw);
   f.artifact = {id: 77, name: 'proposed-geography-23-1', expired: false, size_in_bytes: f.zip.length,
     digest: 'sha256:' + reportHash(f.zip), workflow_run: {id: 44, head_sha: f.head}};
-  f.log = Buffer.from([JSON.stringify({report_bytes: raw.length, report_sha256: reportHash(raw)}),
+  f.log = Buffer.from([JSON.stringify({report_bytes: raw.length, report_sha256: reportHash(raw),
+    ...(software ? {candidate_commit: report.candidate_commit} : {})}),
     'SHA256 digest of uploaded artifact zip is ' + reportHash(f.zip),
     `Artifact proposed-geography-23-1 has been successfully uploaded! Final size is ${f.zip.length} bytes. Artifact ID is 77`].join('\n'));
   };
@@ -1036,6 +1051,8 @@ function carriedGeographyFixture() {
   const previous = f.api; f.transportCalls = []; let admission;
   f.api = async (route, method = 'GET', body) => {
     admission?.({route, method}); f.transportCalls.push(route);
+    if (software && route.endsWith(`/git/commits/${f.candidate}`)) return {sha: f.candidate,
+      tree: {sha: f.source.tree}, parents: [{sha: f.base}, {sha: f.head}]};
     if (route.endsWith('/actions/runs/44/attempts/1')) return structuredClone(f.originRun);
     if (route.includes('/actions/runs/44/attempts/1/jobs')) return {jobs: structuredClone(f.originJobs)};
     if (route.includes('/actions/runs/44/attempts/2/jobs')) return {jobs: structuredClone(f.proofJobs)};
@@ -1052,8 +1069,10 @@ function carriedGeographyFixture() {
     assert.equal(init.headers, undefined); assert.equal(init.redirect, 'error');
     return new Response(url.includes('/zip?') ? f.zip : url.includes('/origin?') ? f.originLog ?? f.log : f.log);
   };
-  f.prepare = () => prepareIntegration({...f.options(), geographyProofLoader: args => prepareGeographyProof({
-    ...args, token: 'synthetic', fetchImpl: f.fetchImpl})});
+  f.prepare = (extra = {}) => prepareIntegration({...f.options(), geographyProofLoader: args => {
+    assert.equal(args.codeCommit, software ? f.candidate : f.base);
+    return prepareGeographyProof({...args, token: 'synthetic', fetchImpl: f.fetchImpl});
+  }, ...extra});
   f.reuse = (prepared, extra = {}) => completeIntegration({...f.options(),
     integrationResult: 'skipped', geographyResult: 'skipped', testedCandidate: f.candidate,
     proofRunId: prepared.proof.run_id, proofRunAttempt: prepared.proof.run_attempt,
@@ -1113,6 +1132,65 @@ test('actual final carried reuse rejects identity, source, artifact and report s
     f => {f.zip = storedReportArchive(Buffer.from('{}'));}
   ]) {
     const f = carriedGeographyFixture(), prepared = await f.prepare(); mutate(f, prepared);
+    await assert.rejects(f.reuse(prepared)); assert.equal(f.writes.length, 0);
+  }
+});
+
+test('exact software candidate reuses actual original archive through full prepare and final validation', async () => {
+  const f = carriedGeographyFixture({software: true}), prepared = await f.prepare();
+  assert.equal(prepared.profile, 'full'); assert.equal(prepared.geography_software, true);
+  assert.equal(prepared.proof.profile, 'full'); assert.equal(prepared.proof.run_attempt, 2);
+  assert.equal(prepared.geography_proof.candidate_commit, f.candidate);
+  const originalZip = Buffer.from(f.zip), result = await f.reuse(prepared);
+  assert.equal(result.accepted, true); assert.equal(result.geography.execution, 'reused-original');
+  assert.equal(result.geography.trusted_code_commit, f.candidate);
+  assert.equal(result.geography.candidate_commit, f.candidate);
+  assert.equal(result.geography.source.job_id, 55); assert.equal(result.geography.source.run_attempt, 1);
+  assert.deepEqual(f.zip, originalZip, 'Original execution bytes are retained verbatim');
+  assert.equal(f.transportCalls.filter(route => route.endsWith('/attempts/1')).length, 2);
+  assert.equal(f.writes.filter(row => row.route.endsWith('/merge')).length, 1);
+});
+test('software preparation falls back to fresh geography while retaining full code proof', async () => {
+  for (const mutate of [f => {f.log = Buffer.from('missing');}, f => {f.artifact.expired = true;},
+    f => {f.artifact.id++;}, f => {f.zip = storedReportArchive(Buffer.from('{}'));},
+    f => {f.originJobs[0].conclusion = 'failure';}, f => {f.originRun.head_sha = 'e'.repeat(40);},
+    f => {f.publishReport({...f.report, trusted_code_commit: f.base, candidate_code_executed: false});},
+    f => {f.publishReport({...f.report, checkpoint: {}});},
+    f => {f.publishReport({...f.report, reused_baseline_proof: {}});},
+    f => {f.publishReport({...f.report, unchanged_selected_inputs: {}});}]) {
+    const f = carriedGeographyFixture({software: true}); mutate(f);
+    const prepared = await f.prepare();
+    assert.equal(prepared.proof.profile, 'full'); assert.equal(prepared.geography_proof, null);
+    const fresh = await f.reuse(prepared, {geographyResult: 'success', geographyProof: null,
+      geographyReportLoader: async () => ({...f.report, trusted_code_commit: f.candidate,
+        candidate_code_executed: true, checkpoint: null, reused_baseline_proof: null, unchanged_selected_inputs: null})});
+    assert.equal(fresh.accepted, true); assert.equal(fresh.geography.execution, undefined);
+    assert.equal(fresh.geography.candidate_commit, f.candidate); assert.equal(fresh.geography.source, undefined);
+  }
+});
+test('different software candidate stays fresh even for identical tree and valid original custody', async () => {
+  const f = carriedGeographyFixture({software: true}), origin = 'e'.repeat(40), original = f.api;
+  f.publishReport({...f.report, candidate_commit: origin, trusted_code_commit: origin});
+  f.api = async (route, ...args) => route.endsWith(`/git/commits/${origin}`)
+    ? {sha: origin, tree: {sha: f.source.tree}, parents: [{sha: f.base}, {sha: f.head}]} : original(route, ...args);
+  f.api.jobLogRedirect = original.jobLogRedirect; f.api.artifactRedirect = original.artifactRedirect;
+  const prepared = await f.prepare();
+  assert.equal(prepared.proof.profile, 'full'); assert.equal(prepared.geography_proof, null);
+  const loaded = await prepareGeographyProof({api: f.api, repo: f.repo, number: 23, head: f.head, baseline: f.base,
+    codeCommit: origin, proof: prepared.proof, token: 'synthetic', fetchImpl: f.fetchImpl});
+  await assert.rejects(f.reuse({...prepared, geography_proof: loaded.source}), /Unsupported geographic checker code commit/);
+  assert.equal(f.writes.length, 0);
+});
+test('final software reuse refuses changed candidate pins, custody, science and current authority before writes', async () => {
+  for (const mutate of [(f, p) => {p.geography_proof.candidate_commit = f.head;},
+    (f, p) => {p.geography_proof.tree = 'e'.repeat(40);}, (f, p) => {p.geography_proof.baseline = 'e'.repeat(40);},
+    (f, p) => {p.geography_proof.head = 'e'.repeat(40);}, f => {f.originJobs[0].id++;},
+    f => {f.originJobs[0].conclusion = 'failure';}, f => {f.originRun.run_attempt++;},
+    f => {f.proofRun.run_attempt++;}, f => {f.artifact.id++;}, f => {f.artifact.digest = 'sha256:' + 'e'.repeat(64);},
+    f => {f.zip = storedReportArchive(Buffer.from('{}'));}, f => {f.base = 'e'.repeat(40);},
+    f => {f.pr.head.sha = 'e'.repeat(40);}, f => {f.checks = 'failure';}, f => {f.issue.state = 'closed';},
+    f => {f.review.outcome = 'changes-requested';}]) {
+    const f = carriedGeographyFixture({software: true}), prepared = await f.prepare(); mutate(f, prepared);
     await assert.rejects(f.reuse(prepared)); assert.equal(f.writes.length, 0);
   }
 });

@@ -1,0 +1,3033 @@
+{
+  "version": 1,
+  "issue": 1884,
+  "worker_id": "/root/png_sources_61",
+  "kind": "data-only-held-Papua-PNG-source-investigation",
+  "accepted_head": "f7c358326d776398bc1cffe84df81eac7033091c",
+  "frozen_selection": "a61b6f9e7f88b1da380e3a834f89d7509132ed71",
+  "scope": "Exact Papua/West Papua subsets of the three IDN ADM2 packages; PNG border source/topology context only",
+  "status": "investigation preserved; no repair qualified",
+  "grid_size": 262166,
+  "selector_columns": [
+    "y",
+    "start",
+    "end",
+    "candidate_owner_indices",
+    "source_feature_indices",
+    "physical_class"
+  ],
+  "interval_convention": "native half-open columns; original extracted rows preserved verbatim as JSON values",
+  "counts": {
+    "repair": {
+      "frozen_cells": 27863,
+      "currently_unassigned_cells": 27863,
+      "currently_owned_cells": 0,
+      "intervals": 11250,
+      "IDN_locations": 26,
+      "accepted_cells": 0,
+      "held_cells": 27863,
+      "ownership_receipt_localities": {
+        "framework:province:papua:856ef2fb442b": {
+          "already_owned": 0,
+          "candidate_cells": 9364,
+          "myeik_additions_overlap": 0,
+          "remaining": 9364
+        },
+        "framework:province:west-papua:8b60f6de353b": {
+          "already_owned": 0,
+          "candidate_cells": 18499,
+          "myeik_additions_overlap": 0,
+          "remaining": 18499
+        }
+      }
+    },
+    "physical": {
+      "frozen_cells": 22075,
+      "currently_unassigned_cells": 22075,
+      "currently_owned_cells": 0,
+      "intervals": 9729,
+      "IDN_locations": 24,
+      "accepted_cells": 0,
+      "held_cells": 22075,
+      "ownership_receipt_localities": {
+        "framework:province:papua:856ef2fb442b": {
+          "already_owned": 0,
+          "candidate_cells": 7632,
+          "myeik_additions_overlap": 0,
+          "remaining": 7632
+        },
+        "framework:province:west-papua:8b60f6de353b": {
+          "already_owned": 0,
+          "candidate_cells": 14443,
+          "myeik_additions_overlap": 0,
+          "remaining": 14443
+        }
+      }
+    },
+    "conflict": {
+      "frozen_cells": 1,
+      "currently_unassigned_cells": 1,
+      "currently_owned_cells": 0,
+      "intervals": 1,
+      "IDN_locations": 1,
+      "accepted_cells": 0,
+      "held_cells": 1,
+      "ownership_receipt_localities": {
+        "framework:province:middle-fly-district:db865ab83af9 + framework:province:papua:856ef2fb442b": {
+          "already_owned": 0,
+          "candidate_cells": 1,
+          "myeik_additions_overlap": 0,
+          "remaining": 1
+        }
+      }
+    }
+  },
+  "distinct_currently_unassigned_cells": 49939,
+  "accepted_cells": 0,
+  "repaired_credit": 0,
+  "all_retained_Papua_West_Papua_IDN_locations": 42,
+  "targets": [
+    {
+      "id": "gb:IDN:ADM2:22746128B11366688050704",
+      "pixelIndex": 22702,
+      "name": "Kota Sorong",
+      "province_id": "framework:province:west-papua:8b60f6de353b",
+      "source_family": "gb:IDN:ADM2",
+      "shapeID": "22746128B11366688050704",
+      "source_index": 36513,
+      "original_source_ordinal": 253,
+      "exact_join": "singleton same source atom and current location ID",
+      "source_geometry_reference": {
+        "catalogue_key": "gb:IDN:ADM2",
+        "ordinal": 253,
+        "operation": "unchanged original source geometry; alias changes identity fields only"
+      },
+      "selected_feature_reference": {
+        "path": "data/geography/part-10.json",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+        "feature_ordinal": 1200,
+        "whole_part_sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+      },
+      "retained_metadata": {
+        "source_id": "gb:IDN:ADM2",
+        "original_id": "22746128B11366688050704",
+        "reference_year": "2020",
+        "source_role": "regency, city",
+        "hierarchy_source": "gb:IDN:ADM1",
+        "hierarchy_overlap": 0.987201,
+        "topology_version": 1,
+        "semantic_review": {
+          "status": "open",
+          "continent": "Oceania",
+          "decision_index": 10,
+          "evidence_file": "geographic-decisions"
+        },
+        "retained_interior_ring_count": 0,
+        "ring_count_method": "literal retained polygon array inspection; no GIS or hole qualification"
+      },
+      "packages": {
+        "repair": {
+          "candidate_cells": 169,
+          "currently_unassigned_cells": 169,
+          "intervals": 57,
+          "physical_classes": {
+            "land": 169
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36255,
+                36513
+              ],
+              "cells": 152
+            },
+            {
+              "source_indices": [
+                36513
+              ],
+              "cells": 17
+            }
+          ]
+        },
+        "physical": {
+          "candidate_cells": 228,
+          "currently_unassigned_cells": 228,
+          "intervals": 75,
+          "physical_classes": {
+            "source-relative": 228
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36255,
+                36513
+              ],
+              "cells": 127
+            },
+            {
+              "source_indices": [
+                36513
+              ],
+              "cells": 101
+            }
+          ]
+        }
+      },
+      "disposition": "held-investigation",
+      "accepted_cells": 0
+    },
+    {
+      "id": "gb:IDN:ADM2:22746128B11480476919105",
+      "pixelIndex": 22705,
+      "name": "Teluk Bintuni",
+      "province_id": "framework:province:west-papua:8b60f6de353b",
+      "source_family": "gb:IDN:ADM2",
+      "shapeID": "22746128B11480476919105",
+      "source_index": 36754,
+      "original_source_ordinal": 494,
+      "exact_join": "singleton same source atom and current location ID",
+      "source_geometry_reference": {
+        "catalogue_key": "gb:IDN:ADM2",
+        "ordinal": 494,
+        "operation": "unchanged original source geometry; alias changes identity fields only"
+      },
+      "selected_feature_reference": {
+        "path": "data/geography/part-10.json",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+        "feature_ordinal": 1441,
+        "whole_part_sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+      },
+      "retained_metadata": {
+        "source_id": "gb:IDN:ADM2",
+        "original_id": "22746128B11480476919105",
+        "reference_year": "2020",
+        "source_role": "regency, city",
+        "hierarchy_source": "gb:IDN:ADM1",
+        "hierarchy_overlap": 0.984786,
+        "topology_version": 1,
+        "semantic_review": {
+          "status": "open",
+          "continent": "Oceania",
+          "decision_index": 10,
+          "evidence_file": "geographic-decisions"
+        },
+        "retained_interior_ring_count": 0,
+        "ring_count_method": "literal retained polygon array inspection; no GIS or hole qualification"
+      },
+      "packages": {
+        "repair": {
+          "candidate_cells": 1217,
+          "currently_unassigned_cells": 1217,
+          "intervals": 561,
+          "physical_classes": {
+            "land": 1217
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36255,
+                36754
+              ],
+              "cells": 924
+            },
+            {
+              "source_indices": [
+                36754
+              ],
+              "cells": 293
+            }
+          ]
+        },
+        "physical": {
+          "candidate_cells": 943,
+          "currently_unassigned_cells": 943,
+          "intervals": 432,
+          "physical_classes": {
+            "source-relative": 943
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36255,
+                36754
+              ],
+              "cells": 252
+            },
+            {
+              "source_indices": [
+                36754
+              ],
+              "cells": 691
+            }
+          ]
+        }
+      },
+      "disposition": "held-investigation",
+      "accepted_cells": 0
+    },
+    {
+      "id": "gb:IDN:ADM2:22746128B12986554349068",
+      "pixelIndex": 22713,
+      "name": "Waropen",
+      "province_id": "framework:province:papua:856ef2fb442b",
+      "source_family": "gb:IDN:ADM2",
+      "shapeID": "22746128B12986554349068",
+      "source_index": 36773,
+      "original_source_ordinal": 513,
+      "exact_join": "singleton same source atom and current location ID",
+      "source_geometry_reference": {
+        "catalogue_key": "gb:IDN:ADM2",
+        "ordinal": 513,
+        "operation": "unchanged original source geometry; alias changes identity fields only"
+      },
+      "selected_feature_reference": {
+        "path": "data/geography/part-10.json",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+        "feature_ordinal": 1460,
+        "whole_part_sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+      },
+      "retained_metadata": {
+        "source_id": "gb:IDN:ADM2",
+        "original_id": "22746128B12986554349068",
+        "reference_year": "2020",
+        "source_role": "regency, city",
+        "hierarchy_source": "gb:IDN:ADM1",
+        "hierarchy_overlap": 0.998692,
+        "topology_version": 1,
+        "semantic_review": {
+          "status": "open",
+          "continent": "Oceania",
+          "decision_index": 10,
+          "evidence_file": "geographic-decisions"
+        },
+        "retained_interior_ring_count": 0,
+        "ring_count_method": "literal retained polygon array inspection; no GIS or hole qualification"
+      },
+      "packages": {
+        "repair": {
+          "candidate_cells": 356,
+          "currently_unassigned_cells": 356,
+          "intervals": 174,
+          "physical_classes": {
+            "land": 356
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36254,
+                36773
+              ],
+              "cells": 295
+            },
+            {
+              "source_indices": [
+                36773
+              ],
+              "cells": 61
+            }
+          ]
+        },
+        "physical": {
+          "candidate_cells": 281,
+          "currently_unassigned_cells": 281,
+          "intervals": 142,
+          "physical_classes": {
+            "source-relative": 281
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36254,
+                36773
+              ],
+              "cells": 189
+            },
+            {
+              "source_indices": [
+                36773
+              ],
+              "cells": 92
+            }
+          ]
+        }
+      },
+      "disposition": "held-investigation",
+      "accepted_cells": 0
+    },
+    {
+      "id": "gb:IDN:ADM2:22746128B19254678251292",
+      "pixelIndex": 22743,
+      "name": "Biak Numfor",
+      "province_id": "framework:province:papua:856ef2fb442b",
+      "source_family": "gb:IDN:ADM2",
+      "shapeID": "22746128B19254678251292",
+      "source_index": 36314,
+      "original_source_ordinal": 54,
+      "exact_join": "singleton same source atom and current location ID",
+      "source_geometry_reference": {
+        "catalogue_key": "gb:IDN:ADM2",
+        "ordinal": 54,
+        "operation": "unchanged original source geometry; alias changes identity fields only"
+      },
+      "selected_feature_reference": {
+        "path": "data/geography/part-10.json",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+        "feature_ordinal": 1006,
+        "whole_part_sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+      },
+      "retained_metadata": {
+        "source_id": "gb:IDN:ADM2",
+        "original_id": "22746128B19254678251292",
+        "reference_year": "2020",
+        "source_role": "regency, city",
+        "hierarchy_source": "gb:IDN:ADM1",
+        "hierarchy_overlap": 0.993883,
+        "topology_version": 1,
+        "semantic_review": {
+          "status": "open",
+          "continent": "Oceania",
+          "decision_index": 10,
+          "evidence_file": "geographic-decisions"
+        },
+        "retained_interior_ring_count": 0,
+        "ring_count_method": "literal retained polygon array inspection; no GIS or hole qualification"
+      },
+      "packages": {
+        "repair": {
+          "candidate_cells": 740,
+          "currently_unassigned_cells": 740,
+          "intervals": 362,
+          "physical_classes": {
+            "land": 740
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36254,
+                36314
+              ],
+              "cells": 645
+            },
+            {
+              "source_indices": [
+                36314
+              ],
+              "cells": 95
+            }
+          ]
+        },
+        "physical": {
+          "candidate_cells": 1308,
+          "currently_unassigned_cells": 1308,
+          "intervals": 559,
+          "physical_classes": {
+            "source-relative": 1308
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36254,
+                36314
+              ],
+              "cells": 1004
+            },
+            {
+              "source_indices": [
+                36314
+              ],
+              "cells": 304
+            }
+          ]
+        }
+      },
+      "disposition": "held-investigation",
+      "accepted_cells": 0
+    },
+    {
+      "id": "gb:IDN:ADM2:22746128B21273779065212",
+      "pixelIndex": 22755,
+      "name": "Boven Digoel",
+      "province_id": "framework:province:papua:856ef2fb442b",
+      "source_family": "gb:IDN:ADM2",
+      "shapeID": "22746128B21273779065212",
+      "source_index": 36331,
+      "original_source_ordinal": 71,
+      "exact_join": "singleton same source atom and current location ID",
+      "source_geometry_reference": {
+        "catalogue_key": "gb:IDN:ADM2",
+        "ordinal": 71,
+        "operation": "unchanged original source geometry; alias changes identity fields only"
+      },
+      "selected_feature_reference": {
+        "path": "data/geography/part-10.json",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+        "feature_ordinal": 1023,
+        "whole_part_sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+      },
+      "retained_metadata": {
+        "source_id": "gb:IDN:ADM2",
+        "original_id": "22746128B21273779065212",
+        "reference_year": "2020",
+        "source_role": "regency, city",
+        "hierarchy_source": "gb:IDN:ADM1",
+        "hierarchy_overlap": 0.999865,
+        "topology_version": 1,
+        "topology_reconciled": true,
+        "topology_conflicts": 1,
+        "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+        "original_geometry_sha256": "8ef49fa2b40d4d38fa1cb67c300a0bffdfe02baec2528ff35769cb6243844db5",
+        "semantic_review": {
+          "status": "open",
+          "continent": "Oceania",
+          "decision_index": 10,
+          "evidence_file": "geographic-decisions"
+        },
+        "retained_interior_ring_count": 0,
+        "ring_count_method": "literal retained polygon array inspection; no GIS or hole qualification"
+      },
+      "packages": {
+        "repair": {
+          "candidate_cells": 48,
+          "currently_unassigned_cells": 48,
+          "intervals": 48,
+          "physical_classes": {
+            "land": 48
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36254,
+                36331
+              ],
+              "cells": 48
+            }
+          ]
+        }
+      },
+      "disposition": "held-investigation",
+      "accepted_cells": 0
+    },
+    {
+      "id": "gb:IDN:ADM2:22746128B25112391877259",
+      "pixelIndex": 22773,
+      "name": "Sorong",
+      "province_id": "framework:province:west-papua:8b60f6de353b",
+      "source_family": "gb:IDN:ADM2",
+      "shapeID": "22746128B25112391877259",
+      "source_index": 36718,
+      "original_source_ordinal": 458,
+      "exact_join": "singleton same source atom and current location ID",
+      "source_geometry_reference": {
+        "catalogue_key": "gb:IDN:ADM2",
+        "ordinal": 458,
+        "operation": "unchanged original source geometry; alias changes identity fields only"
+      },
+      "selected_feature_reference": {
+        "path": "data/geography/part-10.json",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+        "feature_ordinal": 1405,
+        "whole_part_sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+      },
+      "retained_metadata": {
+        "source_id": "gb:IDN:ADM2",
+        "original_id": "22746128B25112391877259",
+        "reference_year": "2020",
+        "source_role": "regency, city",
+        "hierarchy_source": "gb:IDN:ADM1",
+        "hierarchy_overlap": 0.974,
+        "topology_version": 1,
+        "semantic_review": {
+          "status": "open",
+          "continent": "Oceania",
+          "decision_index": 10,
+          "evidence_file": "geographic-decisions"
+        },
+        "retained_interior_ring_count": 0,
+        "ring_count_method": "literal retained polygon array inspection; no GIS or hole qualification"
+      },
+      "packages": {
+        "repair": {
+          "candidate_cells": 344,
+          "currently_unassigned_cells": 344,
+          "intervals": 206,
+          "physical_classes": {
+            "land": 344
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36255,
+                36718
+              ],
+              "cells": 225
+            },
+            {
+              "source_indices": [
+                36718
+              ],
+              "cells": 119
+            }
+          ]
+        },
+        "physical": {
+          "candidate_cells": 418,
+          "currently_unassigned_cells": 418,
+          "intervals": 219,
+          "physical_classes": {
+            "source-relative": 418
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36255,
+                36718
+              ],
+              "cells": 56
+            },
+            {
+              "source_indices": [
+                36718
+              ],
+              "cells": 362
+            }
+          ]
+        }
+      },
+      "disposition": "held-investigation",
+      "accepted_cells": 0
+    },
+    {
+      "id": "gb:IDN:ADM2:22746128B27261093121909",
+      "pixelIndex": 22789,
+      "name": "Sarmi",
+      "province_id": "framework:province:papua:856ef2fb442b",
+      "source_family": "gb:IDN:ADM2",
+      "shapeID": "22746128B27261093121909",
+      "source_index": 36692,
+      "original_source_ordinal": 432,
+      "exact_join": "singleton same source atom and current location ID",
+      "source_geometry_reference": {
+        "catalogue_key": "gb:IDN:ADM2",
+        "ordinal": 432,
+        "operation": "unchanged original source geometry; alias changes identity fields only"
+      },
+      "selected_feature_reference": {
+        "path": "data/geography/part-10.json",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+        "feature_ordinal": 1379,
+        "whole_part_sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+      },
+      "retained_metadata": {
+        "source_id": "gb:IDN:ADM2",
+        "original_id": "22746128B27261093121909",
+        "reference_year": "2020",
+        "source_role": "regency, city",
+        "hierarchy_source": "gb:IDN:ADM1",
+        "hierarchy_overlap": 0.998587,
+        "topology_version": 1,
+        "semantic_review": {
+          "status": "open",
+          "continent": "Oceania",
+          "decision_index": 10,
+          "evidence_file": "geographic-decisions"
+        },
+        "retained_interior_ring_count": 0,
+        "ring_count_method": "literal retained polygon array inspection; no GIS or hole qualification"
+      },
+      "packages": {
+        "repair": {
+          "candidate_cells": 454,
+          "currently_unassigned_cells": 454,
+          "intervals": 181,
+          "physical_classes": {
+            "land": 454
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36254,
+                36692
+              ],
+              "cells": 373
+            },
+            {
+              "source_indices": [
+                36692
+              ],
+              "cells": 81
+            }
+          ]
+        },
+        "physical": {
+          "candidate_cells": 275,
+          "currently_unassigned_cells": 275,
+          "intervals": 129,
+          "physical_classes": {
+            "source-relative": 275
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36254,
+                36692
+              ],
+              "cells": 137
+            },
+            {
+              "source_indices": [
+                36692
+              ],
+              "cells": 138
+            }
+          ]
+        }
+      },
+      "disposition": "held-investigation",
+      "accepted_cells": 0
+    },
+    {
+      "id": "gb:IDN:ADM2:22746128B29146649309875",
+      "pixelIndex": 22799,
+      "name": "Nabire",
+      "province_id": "framework:province:papua:856ef2fb442b",
+      "source_family": "gb:IDN:ADM2",
+      "shapeID": "22746128B29146649309875",
+      "source_index": 36620,
+      "original_source_ordinal": 360,
+      "exact_join": "singleton same source atom and current location ID",
+      "source_geometry_reference": {
+        "catalogue_key": "gb:IDN:ADM2",
+        "ordinal": 360,
+        "operation": "unchanged original source geometry; alias changes identity fields only"
+      },
+      "selected_feature_reference": {
+        "path": "data/geography/part-10.json",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+        "feature_ordinal": 1307,
+        "whole_part_sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+      },
+      "retained_metadata": {
+        "source_id": "gb:IDN:ADM2",
+        "original_id": "22746128B29146649309875",
+        "reference_year": "2020",
+        "source_role": "regency, city",
+        "hierarchy_source": "gb:IDN:ADM1",
+        "hierarchy_overlap": 0.976952,
+        "topology_version": 1,
+        "semantic_review": {
+          "status": "open",
+          "continent": "Oceania",
+          "decision_index": 10,
+          "evidence_file": "geographic-decisions"
+        },
+        "retained_interior_ring_count": 0,
+        "ring_count_method": "literal retained polygon array inspection; no GIS or hole qualification"
+      },
+      "packages": {
+        "repair": {
+          "candidate_cells": 975,
+          "currently_unassigned_cells": 975,
+          "intervals": 439,
+          "physical_classes": {
+            "land": 975
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36254,
+                36620
+              ],
+              "cells": 803
+            },
+            {
+              "source_indices": [
+                36255,
+                36620
+              ],
+              "cells": 43
+            },
+            {
+              "source_indices": [
+                36620
+              ],
+              "cells": 129
+            }
+          ]
+        },
+        "physical": {
+          "candidate_cells": 1068,
+          "currently_unassigned_cells": 1068,
+          "intervals": 569,
+          "physical_classes": {
+            "source-relative": 1068
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36254,
+                36620
+              ],
+              "cells": 705
+            },
+            {
+              "source_indices": [
+                36255,
+                36620
+              ],
+              "cells": 32
+            },
+            {
+              "source_indices": [
+                36620
+              ],
+              "cells": 331
+            }
+          ]
+        }
+      },
+      "disposition": "held-investigation",
+      "accepted_cells": 0
+    },
+    {
+      "id": "gb:IDN:ADM2:22746128B39960960221771",
+      "pixelIndex": 22860,
+      "name": "Mamberamo Raya",
+      "province_id": "framework:province:papua:856ef2fb442b",
+      "source_family": "gb:IDN:ADM2",
+      "shapeID": "22746128B39960960221771",
+      "source_index": 36584,
+      "original_source_ordinal": 324,
+      "exact_join": "singleton same source atom and current location ID",
+      "source_geometry_reference": {
+        "catalogue_key": "gb:IDN:ADM2",
+        "ordinal": 324,
+        "operation": "unchanged original source geometry; alias changes identity fields only"
+      },
+      "selected_feature_reference": {
+        "path": "data/geography/part-10.json",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+        "feature_ordinal": 1271,
+        "whole_part_sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+      },
+      "retained_metadata": {
+        "source_id": "gb:IDN:ADM2",
+        "original_id": "22746128B39960960221771",
+        "reference_year": "2020",
+        "source_role": "regency, city",
+        "hierarchy_source": "gb:IDN:ADM1",
+        "hierarchy_overlap": 0.995478,
+        "topology_version": 1,
+        "semantic_review": {
+          "status": "open",
+          "continent": "Oceania",
+          "decision_index": 10,
+          "evidence_file": "geographic-decisions"
+        },
+        "retained_interior_ring_count": 0,
+        "ring_count_method": "literal retained polygon array inspection; no GIS or hole qualification"
+      },
+      "packages": {
+        "repair": {
+          "candidate_cells": 301,
+          "currently_unassigned_cells": 301,
+          "intervals": 123,
+          "physical_classes": {
+            "land": 301
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36254,
+                36584
+              ],
+              "cells": 242
+            },
+            {
+              "source_indices": [
+                36584
+              ],
+              "cells": 59
+            }
+          ]
+        },
+        "physical": {
+          "candidate_cells": 390,
+          "currently_unassigned_cells": 390,
+          "intervals": 223,
+          "physical_classes": {
+            "source-relative": 390
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36254,
+                36584
+              ],
+              "cells": 271
+            },
+            {
+              "source_indices": [
+                36584
+              ],
+              "cells": 119
+            }
+          ]
+        }
+      },
+      "disposition": "held-investigation",
+      "accepted_cells": 0
+    },
+    {
+      "id": "gb:IDN:ADM2:22746128B40289792856685",
+      "pixelIndex": 22862,
+      "name": "Pegunungan Bintang",
+      "province_id": "framework:province:papua:856ef2fb442b",
+      "source_family": "gb:IDN:ADM2",
+      "shapeID": "22746128B40289792856685",
+      "source_index": 36655,
+      "original_source_ordinal": 395,
+      "exact_join": "singleton same source atom and current location ID",
+      "source_geometry_reference": {
+        "catalogue_key": "gb:IDN:ADM2",
+        "ordinal": 395,
+        "operation": "unchanged original source geometry; alias changes identity fields only"
+      },
+      "selected_feature_reference": {
+        "path": "data/geography/part-10.json",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+        "feature_ordinal": 1342,
+        "whole_part_sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+      },
+      "retained_metadata": {
+        "source_id": "gb:IDN:ADM2",
+        "original_id": "22746128B40289792856685",
+        "reference_year": "2020",
+        "source_role": "regency, city",
+        "hierarchy_source": "gb:IDN:ADM1",
+        "hierarchy_overlap": 1.0,
+        "topology_version": 1,
+        "semantic_review": {
+          "status": "open",
+          "continent": "Oceania",
+          "decision_index": 10,
+          "evidence_file": "geographic-decisions"
+        },
+        "retained_interior_ring_count": 0,
+        "ring_count_method": "literal retained polygon array inspection; no GIS or hole qualification"
+      },
+      "packages": {
+        "repair": {
+          "candidate_cells": 29,
+          "currently_unassigned_cells": 29,
+          "intervals": 29,
+          "physical_classes": {
+            "land": 29
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36254,
+                36655
+              ],
+              "cells": 29
+            }
+          ]
+        }
+      },
+      "disposition": "held-investigation",
+      "accepted_cells": 0
+    },
+    {
+      "id": "gb:IDN:ADM2:22746128B47515282892276",
+      "pixelIndex": 22906,
+      "name": "Teluk Wondama",
+      "province_id": "framework:province:west-papua:8b60f6de353b",
+      "source_family": "gb:IDN:ADM2",
+      "shapeID": "22746128B47515282892276",
+      "source_index": 36755,
+      "original_source_ordinal": 495,
+      "exact_join": "singleton same source atom and current location ID",
+      "source_geometry_reference": {
+        "catalogue_key": "gb:IDN:ADM2",
+        "ordinal": 495,
+        "operation": "unchanged original source geometry; alias changes identity fields only"
+      },
+      "selected_feature_reference": {
+        "path": "data/geography/part-10.json",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+        "feature_ordinal": 1442,
+        "whole_part_sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+      },
+      "retained_metadata": {
+        "source_id": "gb:IDN:ADM2",
+        "original_id": "22746128B47515282892276",
+        "reference_year": "2020",
+        "source_role": "regency, city",
+        "hierarchy_source": "gb:IDN:ADM1",
+        "hierarchy_overlap": 0.619154,
+        "topology_version": 1,
+        "semantic_review": {
+          "status": "open",
+          "continent": "Oceania",
+          "decision_index": 11,
+          "evidence_file": "geographic-decisions"
+        },
+        "retained_interior_ring_count": 0,
+        "ring_count_method": "literal retained polygon array inspection; no GIS or hole qualification"
+      },
+      "packages": {
+        "repair": {
+          "candidate_cells": 1840,
+          "currently_unassigned_cells": 1840,
+          "intervals": 734,
+          "physical_classes": {
+            "land": 1840
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36255,
+                36755
+              ],
+              "cells": 1305
+            },
+            {
+              "source_indices": [
+                36755
+              ],
+              "cells": 535
+            }
+          ]
+        },
+        "physical": {
+          "candidate_cells": 1329,
+          "currently_unassigned_cells": 1329,
+          "intervals": 635,
+          "physical_classes": {
+            "source-relative": 1329
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36255,
+                36755
+              ],
+              "cells": 573
+            },
+            {
+              "source_indices": [
+                36755
+              ],
+              "cells": 756
+            }
+          ]
+        }
+      },
+      "disposition": "held-investigation",
+      "accepted_cells": 0
+    },
+    {
+      "id": "gb:IDN:ADM2:22746128B58641314112332",
+      "pixelIndex": 22968,
+      "name": "Manokwari",
+      "province_id": "framework:province:west-papua:8b60f6de353b",
+      "source_family": "gb:IDN:ADM2",
+      "shapeID": "22746128B58641314112332",
+      "source_index": 36593,
+      "original_source_ordinal": 333,
+      "exact_join": "singleton same source atom and current location ID",
+      "source_geometry_reference": {
+        "catalogue_key": "gb:IDN:ADM2",
+        "ordinal": 333,
+        "operation": "unchanged original source geometry; alias changes identity fields only"
+      },
+      "selected_feature_reference": {
+        "path": "data/geography/part-10.json",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+        "feature_ordinal": 1280,
+        "whole_part_sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+      },
+      "retained_metadata": {
+        "source_id": "gb:IDN:ADM2",
+        "original_id": "22746128B58641314112332",
+        "reference_year": "2020",
+        "source_role": "regency, city",
+        "hierarchy_source": "gb:IDN:ADM1",
+        "hierarchy_overlap": 0.988636,
+        "topology_version": 1,
+        "semantic_review": {
+          "status": "open",
+          "continent": "Oceania",
+          "decision_index": 10,
+          "evidence_file": "geographic-decisions"
+        },
+        "retained_interior_ring_count": 0,
+        "ring_count_method": "literal retained polygon array inspection; no GIS or hole qualification"
+      },
+      "packages": {
+        "repair": {
+          "candidate_cells": 376,
+          "currently_unassigned_cells": 376,
+          "intervals": 173,
+          "physical_classes": {
+            "land": 376
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36255,
+                36593
+              ],
+              "cells": 279
+            },
+            {
+              "source_indices": [
+                36593
+              ],
+              "cells": 97
+            }
+          ]
+        },
+        "physical": {
+          "candidate_cells": 310,
+          "currently_unassigned_cells": 310,
+          "intervals": 142,
+          "physical_classes": {
+            "source-relative": 310
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36255,
+                36593
+              ],
+              "cells": 192
+            },
+            {
+              "source_indices": [
+                36593
+              ],
+              "cells": 118
+            }
+          ]
+        }
+      },
+      "disposition": "held-investigation",
+      "accepted_cells": 0
+    },
+    {
+      "id": "gb:IDN:ADM2:22746128B62198228854475",
+      "pixelIndex": 22980,
+      "name": "Asmat",
+      "province_id": "framework:province:papua:856ef2fb442b",
+      "source_family": "gb:IDN:ADM2",
+      "shapeID": "22746128B62198228854475",
+      "source_index": 36274,
+      "original_source_ordinal": 14,
+      "exact_join": "singleton same source atom and current location ID",
+      "source_geometry_reference": {
+        "catalogue_key": "gb:IDN:ADM2",
+        "ordinal": 14,
+        "operation": "unchanged original source geometry; alias changes identity fields only"
+      },
+      "selected_feature_reference": {
+        "path": "data/geography/part-10.json",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+        "feature_ordinal": 966,
+        "whole_part_sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+      },
+      "retained_metadata": {
+        "source_id": "gb:IDN:ADM2",
+        "original_id": "22746128B62198228854475",
+        "reference_year": "2020",
+        "source_role": "regency, city",
+        "hierarchy_source": "gb:IDN:ADM1",
+        "hierarchy_overlap": 0.999712,
+        "topology_version": 1,
+        "semantic_review": {
+          "status": "open",
+          "continent": "Oceania",
+          "decision_index": 10,
+          "evidence_file": "geographic-decisions"
+        },
+        "retained_interior_ring_count": 0,
+        "ring_count_method": "literal retained polygon array inspection; no GIS or hole qualification"
+      },
+      "packages": {
+        "repair": {
+          "candidate_cells": 287,
+          "currently_unassigned_cells": 287,
+          "intervals": 244,
+          "physical_classes": {
+            "land": 287
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36254,
+                36274
+              ],
+              "cells": 200
+            },
+            {
+              "source_indices": [
+                36274
+              ],
+              "cells": 87
+            }
+          ]
+        },
+        "physical": {
+          "candidate_cells": 256,
+          "currently_unassigned_cells": 256,
+          "intervals": 150,
+          "physical_classes": {
+            "source-relative": 256
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36254,
+                36274
+              ],
+              "cells": 215
+            },
+            {
+              "source_indices": [
+                36274
+              ],
+              "cells": 41
+            }
+          ]
+        }
+      },
+      "disposition": "held-investigation",
+      "accepted_cells": 0
+    },
+    {
+      "id": "gb:IDN:ADM2:22746128B63262525003276",
+      "pixelIndex": 22988,
+      "name": "Mappi",
+      "province_id": "framework:province:papua:856ef2fb442b",
+      "source_family": "gb:IDN:ADM2",
+      "shapeID": "22746128B63262525003276",
+      "source_index": 36595,
+      "original_source_ordinal": 335,
+      "exact_join": "singleton same source atom and current location ID",
+      "source_geometry_reference": {
+        "catalogue_key": "gb:IDN:ADM2",
+        "ordinal": 335,
+        "operation": "unchanged original source geometry; alias changes identity fields only"
+      },
+      "selected_feature_reference": {
+        "path": "data/geography/part-10.json",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+        "feature_ordinal": 1282,
+        "whole_part_sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+      },
+      "retained_metadata": {
+        "source_id": "gb:IDN:ADM2",
+        "original_id": "22746128B63262525003276",
+        "reference_year": "2020",
+        "source_role": "regency, city",
+        "hierarchy_source": "gb:IDN:ADM1",
+        "hierarchy_overlap": 0.98381,
+        "topology_version": 1,
+        "semantic_review": {
+          "status": "open",
+          "continent": "Oceania",
+          "decision_index": 10,
+          "evidence_file": "geographic-decisions"
+        },
+        "retained_interior_ring_count": 0,
+        "ring_count_method": "literal retained polygon array inspection; no GIS or hole qualification"
+      },
+      "packages": {
+        "repair": {
+          "candidate_cells": 106,
+          "currently_unassigned_cells": 106,
+          "intervals": 71,
+          "physical_classes": {
+            "land": 106
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36254,
+                36595
+              ],
+              "cells": 85
+            },
+            {
+              "source_indices": [
+                36595
+              ],
+              "cells": 21
+            }
+          ]
+        },
+        "physical": {
+          "candidate_cells": 276,
+          "currently_unassigned_cells": 276,
+          "intervals": 92,
+          "physical_classes": {
+            "source-relative": 276
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36254,
+                36595
+              ],
+              "cells": 237
+            },
+            {
+              "source_indices": [
+                36595
+              ],
+              "cells": 39
+            }
+          ]
+        }
+      },
+      "disposition": "held-investigation",
+      "accepted_cells": 0
+    },
+    {
+      "id": "gb:IDN:ADM2:22746128B65756496772256",
+      "pixelIndex": 23001,
+      "name": "Merauke",
+      "province_id": "framework:province:papua:856ef2fb442b",
+      "source_family": "gb:IDN:ADM2",
+      "shapeID": "22746128B65756496772256",
+      "source_index": 36601,
+      "original_source_ordinal": 341,
+      "exact_join": "singleton same source atom and current location ID",
+      "source_geometry_reference": {
+        "catalogue_key": "gb:IDN:ADM2",
+        "ordinal": 341,
+        "operation": "unchanged original source geometry; alias changes identity fields only"
+      },
+      "selected_feature_reference": {
+        "path": "data/geography/part-10.json",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+        "feature_ordinal": 1288,
+        "whole_part_sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+      },
+      "retained_metadata": {
+        "source_id": "gb:IDN:ADM2",
+        "original_id": "22746128B65756496772256",
+        "reference_year": "2020",
+        "source_role": "regency, city",
+        "hierarchy_source": "gb:IDN:ADM1",
+        "hierarchy_overlap": 0.998646,
+        "topology_version": 1,
+        "topology_reconciled": true,
+        "topology_conflicts": 2,
+        "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+        "original_geometry_sha256": "a562e02796975c8597400b79e1633fa1ca945eb335cffba0b6478762892b92d0",
+        "semantic_review": {
+          "status": "open",
+          "continent": "Oceania",
+          "decision_index": 10,
+          "evidence_file": "geographic-decisions"
+        },
+        "retained_interior_ring_count": 0,
+        "ring_count_method": "literal retained polygon array inspection; no GIS or hole qualification"
+      },
+      "packages": {
+        "repair": {
+          "candidate_cells": 1866,
+          "currently_unassigned_cells": 1866,
+          "intervals": 835,
+          "physical_classes": {
+            "land": 1761,
+            "inland-water": 105
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36254,
+                36601
+              ],
+              "cells": 1681
+            },
+            {
+              "source_indices": [
+                36601
+              ],
+              "cells": 185
+            }
+          ]
+        },
+        "physical": {
+          "candidate_cells": 1179,
+          "currently_unassigned_cells": 1179,
+          "intervals": 643,
+          "physical_classes": {
+            "source-relative": 1179
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36254,
+                36601
+              ],
+              "cells": 969
+            },
+            {
+              "source_indices": [
+                36601
+              ],
+              "cells": 210
+            }
+          ]
+        },
+        "conflict": {
+          "candidate_cells": 1,
+          "currently_unassigned_cells": 1,
+          "intervals": 1,
+          "physical_classes": {
+            "land": 1
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36254,
+                36601,
+                50902,
+                50953,
+                51139
+              ],
+              "cells": 1
+            }
+          ]
+        }
+      },
+      "disposition": "held-investigation",
+      "accepted_cells": 0
+    },
+    {
+      "id": "gb:IDN:ADM2:22746128B68810971865676",
+      "pixelIndex": 23023,
+      "name": "Tambrauw",
+      "province_id": "framework:province:west-papua:8b60f6de353b",
+      "source_family": "gb:IDN:ADM2",
+      "shapeID": "22746128B68810971865676",
+      "source_index": 36737,
+      "original_source_ordinal": 477,
+      "exact_join": "singleton same source atom and current location ID",
+      "source_geometry_reference": {
+        "catalogue_key": "gb:IDN:ADM2",
+        "ordinal": 477,
+        "operation": "unchanged original source geometry; alias changes identity fields only"
+      },
+      "selected_feature_reference": {
+        "path": "data/geography/part-10.json",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+        "feature_ordinal": 1424,
+        "whole_part_sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+      },
+      "retained_metadata": {
+        "source_id": "gb:IDN:ADM2",
+        "original_id": "22746128B68810971865676",
+        "reference_year": "2020",
+        "source_role": "regency, city",
+        "hierarchy_source": "gb:IDN:ADM1",
+        "hierarchy_overlap": 0.993199,
+        "topology_version": 1,
+        "semantic_review": {
+          "status": "open",
+          "continent": "Oceania",
+          "decision_index": 10,
+          "evidence_file": "geographic-decisions"
+        },
+        "retained_interior_ring_count": 0,
+        "ring_count_method": "literal retained polygon array inspection; no GIS or hole qualification"
+      },
+      "packages": {
+        "repair": {
+          "candidate_cells": 347,
+          "currently_unassigned_cells": 347,
+          "intervals": 119,
+          "physical_classes": {
+            "land": 347
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36255,
+                36737
+              ],
+              "cells": 143
+            },
+            {
+              "source_indices": [
+                36737
+              ],
+              "cells": 204
+            }
+          ]
+        },
+        "physical": {
+          "candidate_cells": 9,
+          "currently_unassigned_cells": 9,
+          "intervals": 5,
+          "physical_classes": {
+            "source-relative": 9
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36737
+              ],
+              "cells": 9
+            }
+          ]
+        }
+      },
+      "disposition": "held-investigation",
+      "accepted_cells": 0
+    },
+    {
+      "id": "gb:IDN:ADM2:22746128B71103770185906",
+      "pixelIndex": 23038,
+      "name": "Jayapura",
+      "province_id": "framework:province:papua:856ef2fb442b",
+      "source_family": "gb:IDN:ADM2",
+      "shapeID": "22746128B71103770185906",
+      "source_index": 36388,
+      "original_source_ordinal": 128,
+      "exact_join": "singleton same source atom and current location ID",
+      "source_geometry_reference": {
+        "catalogue_key": "gb:IDN:ADM2",
+        "ordinal": 128,
+        "operation": "unchanged original source geometry; alias changes identity fields only"
+      },
+      "selected_feature_reference": {
+        "path": "data/geography/part-10.json",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+        "feature_ordinal": 1080,
+        "whole_part_sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+      },
+      "retained_metadata": {
+        "source_id": "gb:IDN:ADM2",
+        "original_id": "22746128B71103770185906",
+        "reference_year": "2020",
+        "source_role": "regency, city",
+        "hierarchy_source": "gb:IDN:ADM1",
+        "hierarchy_overlap": 0.999498,
+        "topology_version": 1,
+        "semantic_review": {
+          "status": "open",
+          "continent": "Oceania",
+          "decision_index": 10,
+          "evidence_file": "geographic-decisions"
+        },
+        "retained_interior_ring_count": 0,
+        "ring_count_method": "literal retained polygon array inspection; no GIS or hole qualification"
+      },
+      "packages": {
+        "repair": {
+          "candidate_cells": 593,
+          "currently_unassigned_cells": 593,
+          "intervals": 233,
+          "physical_classes": {
+            "land": 593
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36254,
+                36388
+              ],
+              "cells": 515
+            },
+            {
+              "source_indices": [
+                36388
+              ],
+              "cells": 78
+            }
+          ]
+        },
+        "physical": {
+          "candidate_cells": 88,
+          "currently_unassigned_cells": 88,
+          "intervals": 55,
+          "physical_classes": {
+            "source-relative": 88
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36254,
+                36388
+              ],
+              "cells": 74
+            },
+            {
+              "source_indices": [
+                36388
+              ],
+              "cells": 14
+            }
+          ]
+        }
+      },
+      "disposition": "held-investigation",
+      "accepted_cells": 0
+    },
+    {
+      "id": "gb:IDN:ADM2:22746128B73598541988454",
+      "pixelIndex": 23060,
+      "name": "Supiori",
+      "province_id": "framework:province:papua:856ef2fb442b",
+      "source_family": "gb:IDN:ADM2",
+      "shapeID": "22746128B73598541988454",
+      "source_index": 36733,
+      "original_source_ordinal": 473,
+      "exact_join": "singleton same source atom and current location ID",
+      "source_geometry_reference": {
+        "catalogue_key": "gb:IDN:ADM2",
+        "ordinal": 473,
+        "operation": "unchanged original source geometry; alias changes identity fields only"
+      },
+      "selected_feature_reference": {
+        "path": "data/geography/part-10.json",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+        "feature_ordinal": 1420,
+        "whole_part_sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+      },
+      "retained_metadata": {
+        "source_id": "gb:IDN:ADM2",
+        "original_id": "22746128B73598541988454",
+        "reference_year": "2020",
+        "source_role": "regency, city",
+        "hierarchy_source": "gb:IDN:ADM1",
+        "hierarchy_overlap": 0.976267,
+        "topology_version": 1,
+        "semantic_review": {
+          "status": "open",
+          "continent": "Oceania",
+          "decision_index": 10,
+          "evidence_file": "geographic-decisions"
+        },
+        "retained_interior_ring_count": 0,
+        "ring_count_method": "literal retained polygon array inspection; no GIS or hole qualification"
+      },
+      "packages": {
+        "repair": {
+          "candidate_cells": 398,
+          "currently_unassigned_cells": 398,
+          "intervals": 204,
+          "physical_classes": {
+            "land": 398
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36254,
+                36733
+              ],
+              "cells": 326
+            },
+            {
+              "source_indices": [
+                36733
+              ],
+              "cells": 72
+            }
+          ]
+        },
+        "physical": {
+          "candidate_cells": 668,
+          "currently_unassigned_cells": 668,
+          "intervals": 266,
+          "physical_classes": {
+            "source-relative": 668
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36254,
+                36733
+              ],
+              "cells": 347
+            },
+            {
+              "source_indices": [
+                36733
+              ],
+              "cells": 321
+            }
+          ]
+        }
+      },
+      "disposition": "held-investigation",
+      "accepted_cells": 0
+    },
+    {
+      "id": "gb:IDN:ADM2:22746128B79106566109504",
+      "pixelIndex": 23090,
+      "name": "Fakfak",
+      "province_id": "framework:province:west-papua:8b60f6de353b",
+      "source_family": "gb:IDN:ADM2",
+      "shapeID": "22746128B79106566109504",
+      "source_index": 36362,
+      "original_source_ordinal": 102,
+      "exact_join": "singleton same source atom and current location ID",
+      "source_geometry_reference": {
+        "catalogue_key": "gb:IDN:ADM2",
+        "ordinal": 102,
+        "operation": "unchanged original source geometry; alias changes identity fields only"
+      },
+      "selected_feature_reference": {
+        "path": "data/geography/part-10.json",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+        "feature_ordinal": 1054,
+        "whole_part_sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+      },
+      "retained_metadata": {
+        "source_id": "gb:IDN:ADM2",
+        "original_id": "22746128B79106566109504",
+        "reference_year": "2020",
+        "source_role": "regency, city",
+        "hierarchy_source": "gb:IDN:ADM1",
+        "hierarchy_overlap": 0.992388,
+        "topology_version": 1,
+        "semantic_review": {
+          "status": "open",
+          "continent": "Oceania",
+          "decision_index": 10,
+          "evidence_file": "geographic-decisions"
+        },
+        "retained_interior_ring_count": 0,
+        "ring_count_method": "literal retained polygon array inspection; no GIS or hole qualification"
+      },
+      "packages": {
+        "repair": {
+          "candidate_cells": 1235,
+          "currently_unassigned_cells": 1235,
+          "intervals": 613,
+          "physical_classes": {
+            "land": 1235
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36255,
+                36362
+              ],
+              "cells": 695
+            },
+            {
+              "source_indices": [
+                36362
+              ],
+              "cells": 540
+            }
+          ]
+        },
+        "physical": {
+          "candidate_cells": 1788,
+          "currently_unassigned_cells": 1788,
+          "intervals": 525,
+          "physical_classes": {
+            "source-relative": 1788
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36255,
+                36362
+              ],
+              "cells": 915
+            },
+            {
+              "source_indices": [
+                36362
+              ],
+              "cells": 873
+            }
+          ]
+        }
+      },
+      "disposition": "held-investigation",
+      "accepted_cells": 0
+    },
+    {
+      "id": "gb:IDN:ADM2:22746128B85346986276333",
+      "pixelIndex": 23124,
+      "name": "Kota Jayapura",
+      "province_id": "framework:province:papua:856ef2fb442b",
+      "source_family": "gb:IDN:ADM2",
+      "shapeID": "22746128B85346986276333",
+      "source_index": 36468,
+      "original_source_ordinal": 208,
+      "exact_join": "singleton same source atom and current location ID",
+      "source_geometry_reference": {
+        "catalogue_key": "gb:IDN:ADM2",
+        "ordinal": 208,
+        "operation": "unchanged original source geometry; alias changes identity fields only"
+      },
+      "selected_feature_reference": {
+        "path": "data/geography/part-10.json",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+        "feature_ordinal": 1155,
+        "whole_part_sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+      },
+      "retained_metadata": {
+        "source_id": "gb:IDN:ADM2",
+        "original_id": "22746128B85346986276333",
+        "reference_year": "2020",
+        "source_role": "regency, city",
+        "hierarchy_source": "gb:IDN:ADM1",
+        "hierarchy_overlap": 0.991838,
+        "topology_version": 1,
+        "semantic_review": {
+          "status": "open",
+          "continent": "Oceania",
+          "decision_index": 10,
+          "evidence_file": "geographic-decisions"
+        },
+        "retained_interior_ring_count": 0,
+        "ring_count_method": "literal retained polygon array inspection; no GIS or hole qualification"
+      },
+      "packages": {
+        "repair": {
+          "candidate_cells": 252,
+          "currently_unassigned_cells": 252,
+          "intervals": 138,
+          "physical_classes": {
+            "land": 252
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36254,
+                36468
+              ],
+              "cells": 191
+            },
+            {
+              "source_indices": [
+                36468
+              ],
+              "cells": 61
+            }
+          ]
+        },
+        "physical": {
+          "candidate_cells": 161,
+          "currently_unassigned_cells": 161,
+          "intervals": 84,
+          "physical_classes": {
+            "source-relative": 161
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36254,
+                36468
+              ],
+              "cells": 116
+            },
+            {
+              "source_indices": [
+                36468
+              ],
+              "cells": 45
+            }
+          ]
+        }
+      },
+      "disposition": "held-investigation",
+      "accepted_cells": 0
+    },
+    {
+      "id": "gb:IDN:ADM2:22746128B90221566890304",
+      "pixelIndex": 23160,
+      "name": "Raja Ampat",
+      "province_id": "framework:province:west-papua:8b60f6de353b",
+      "source_family": "gb:IDN:ADM2",
+      "shapeID": "22746128B90221566890304",
+      "source_index": 36681,
+      "original_source_ordinal": 421,
+      "exact_join": "singleton same source atom and current location ID",
+      "source_geometry_reference": {
+        "catalogue_key": "gb:IDN:ADM2",
+        "ordinal": 421,
+        "operation": "unchanged original source geometry; alias changes identity fields only"
+      },
+      "selected_feature_reference": {
+        "path": "data/geography/part-10.json",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+        "feature_ordinal": 1368,
+        "whole_part_sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+      },
+      "retained_metadata": {
+        "source_id": "gb:IDN:ADM2",
+        "original_id": "22746128B90221566890304",
+        "reference_year": "2020",
+        "source_role": "regency, city",
+        "hierarchy_source": "gb:IDN:ADM1",
+        "hierarchy_overlap": 0.922844,
+        "topology_version": 1,
+        "semantic_review": {
+          "status": "open",
+          "continent": "Oceania",
+          "decision_index": 10,
+          "evidence_file": "geographic-decisions"
+        },
+        "retained_interior_ring_count": 0,
+        "ring_count_method": "literal retained polygon array inspection; no GIS or hole qualification"
+      },
+      "packages": {
+        "repair": {
+          "candidate_cells": 10617,
+          "currently_unassigned_cells": 10617,
+          "intervals": 3463,
+          "physical_classes": {
+            "land": 10617
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36255,
+                36681
+              ],
+              "cells": 4140
+            },
+            {
+              "source_indices": [
+                36681
+              ],
+              "cells": 6477
+            }
+          ]
+        },
+        "physical": {
+          "candidate_cells": 6871,
+          "currently_unassigned_cells": 6871,
+          "intervals": 2836,
+          "physical_classes": {
+            "source-relative": 6871
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36255,
+                36681
+              ],
+              "cells": 1655
+            },
+            {
+              "source_indices": [
+                36681
+              ],
+              "cells": 5216
+            }
+          ]
+        }
+      },
+      "disposition": "held-investigation",
+      "accepted_cells": 0
+    },
+    {
+      "id": "gb:IDN:ADM2:22746128B90822416479405",
+      "pixelIndex": 23163,
+      "name": "Manokwari Selatan",
+      "province_id": "framework:province:west-papua:8b60f6de353b",
+      "source_family": "gb:IDN:ADM2",
+      "shapeID": "22746128B90822416479405",
+      "source_index": 36594,
+      "original_source_ordinal": 334,
+      "exact_join": "singleton same source atom and current location ID",
+      "source_geometry_reference": {
+        "catalogue_key": "gb:IDN:ADM2",
+        "ordinal": 334,
+        "operation": "unchanged original source geometry; alias changes identity fields only"
+      },
+      "selected_feature_reference": {
+        "path": "data/geography/part-10.json",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+        "feature_ordinal": 1281,
+        "whole_part_sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+      },
+      "retained_metadata": {
+        "source_id": "gb:IDN:ADM2",
+        "original_id": "22746128B90822416479405",
+        "reference_year": "2020",
+        "source_role": "regency, city",
+        "hierarchy_source": "gb:IDN:ADM1",
+        "hierarchy_overlap": 0.993609,
+        "topology_version": 1,
+        "semantic_review": {
+          "status": "open",
+          "continent": "Oceania",
+          "decision_index": 10,
+          "evidence_file": "geographic-decisions"
+        },
+        "retained_interior_ring_count": 0,
+        "ring_count_method": "literal retained polygon array inspection; no GIS or hole qualification"
+      },
+      "packages": {
+        "repair": {
+          "candidate_cells": 117,
+          "currently_unassigned_cells": 117,
+          "intervals": 75,
+          "physical_classes": {
+            "land": 117
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36255,
+                36594
+              ],
+              "cells": 100
+            },
+            {
+              "source_indices": [
+                36594
+              ],
+              "cells": 17
+            }
+          ]
+        },
+        "physical": {
+          "candidate_cells": 42,
+          "currently_unassigned_cells": 42,
+          "intervals": 25,
+          "physical_classes": {
+            "source-relative": 42
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36255,
+                36594
+              ],
+              "cells": 26
+            },
+            {
+              "source_indices": [
+                36594
+              ],
+              "cells": 16
+            }
+          ]
+        }
+      },
+      "disposition": "held-investigation",
+      "accepted_cells": 0
+    },
+    {
+      "id": "gb:IDN:ADM2:22746128B93097528927367",
+      "pixelIndex": 23169,
+      "name": "Kaimana",
+      "province_id": "framework:province:west-papua:8b60f6de353b",
+      "source_family": "gb:IDN:ADM2",
+      "shapeID": "22746128B93097528927367",
+      "source_index": 36395,
+      "original_source_ordinal": 135,
+      "exact_join": "singleton same source atom and current location ID",
+      "source_geometry_reference": {
+        "catalogue_key": "gb:IDN:ADM2",
+        "ordinal": 135,
+        "operation": "unchanged original source geometry; alias changes identity fields only"
+      },
+      "selected_feature_reference": {
+        "path": "data/geography/part-10.json",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+        "feature_ordinal": 1087,
+        "whole_part_sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+      },
+      "retained_metadata": {
+        "source_id": "gb:IDN:ADM2",
+        "original_id": "22746128B93097528927367",
+        "reference_year": "2020",
+        "source_role": "regency, city",
+        "hierarchy_source": "gb:IDN:ADM1",
+        "hierarchy_overlap": 0.966589,
+        "topology_version": 1,
+        "semantic_review": {
+          "status": "open",
+          "continent": "Oceania",
+          "decision_index": 10,
+          "evidence_file": "geographic-decisions"
+        },
+        "retained_interior_ring_count": 0,
+        "ring_count_method": "literal retained polygon array inspection; no GIS or hole qualification"
+      },
+      "packages": {
+        "repair": {
+          "candidate_cells": 1985,
+          "currently_unassigned_cells": 1985,
+          "intervals": 959,
+          "physical_classes": {
+            "land": 1985
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36254,
+                36395
+              ],
+              "cells": 2
+            },
+            {
+              "source_indices": [
+                36255,
+                36395
+              ],
+              "cells": 1319
+            },
+            {
+              "source_indices": [
+                36395
+              ],
+              "cells": 664
+            }
+          ]
+        },
+        "physical": {
+          "candidate_cells": 2371,
+          "currently_unassigned_cells": 2371,
+          "intervals": 1004,
+          "physical_classes": {
+            "source-relative": 2371
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36255,
+                36395
+              ],
+              "cells": 1186
+            },
+            {
+              "source_indices": [
+                36395
+              ],
+              "cells": 1185
+            }
+          ]
+        }
+      },
+      "disposition": "held-investigation",
+      "accepted_cells": 0
+    },
+    {
+      "id": "gb:IDN:ADM2:22746128B96094928872069",
+      "pixelIndex": 23184,
+      "name": "Kepulauan Yapen",
+      "province_id": "framework:province:papua:856ef2fb442b",
+      "source_family": "gb:IDN:ADM2",
+      "shapeID": "22746128B96094928872069",
+      "source_index": 36421,
+      "original_source_ordinal": 161,
+      "exact_join": "singleton same source atom and current location ID",
+      "source_geometry_reference": {
+        "catalogue_key": "gb:IDN:ADM2",
+        "ordinal": 161,
+        "operation": "unchanged original source geometry; alias changes identity fields only"
+      },
+      "selected_feature_reference": {
+        "path": "data/geography/part-10.json",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+        "feature_ordinal": 1113,
+        "whole_part_sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+      },
+      "retained_metadata": {
+        "source_id": "gb:IDN:ADM2",
+        "original_id": "22746128B96094928872069",
+        "reference_year": "2020",
+        "source_role": "regency, city",
+        "hierarchy_source": "gb:IDN:ADM1",
+        "hierarchy_overlap": 0.982422,
+        "topology_version": 1,
+        "semantic_review": {
+          "status": "open",
+          "continent": "Oceania",
+          "decision_index": 10,
+          "evidence_file": "geographic-decisions"
+        },
+        "retained_interior_ring_count": 0,
+        "ring_count_method": "literal retained polygon array inspection; no GIS or hole qualification"
+      },
+      "packages": {
+        "repair": {
+          "candidate_cells": 2563,
+          "currently_unassigned_cells": 2563,
+          "intervals": 825,
+          "physical_classes": {
+            "land": 2563
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36254,
+                36421
+              ],
+              "cells": 2125
+            },
+            {
+              "source_indices": [
+                36421
+              ],
+              "cells": 438
+            }
+          ]
+        },
+        "physical": {
+          "candidate_cells": 1159,
+          "currently_unassigned_cells": 1159,
+          "intervals": 610,
+          "physical_classes": {
+            "source-relative": 1159
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36254,
+                36421
+              ],
+              "cells": 827
+            },
+            {
+              "source_indices": [
+                36421
+              ],
+              "cells": 332
+            }
+          ]
+        }
+      },
+      "disposition": "held-investigation",
+      "accepted_cells": 0
+    },
+    {
+      "id": "gb:IDN:ADM2:22746128B99267537228675",
+      "pixelIndex": 23200,
+      "name": "Sorong Selatan",
+      "province_id": "framework:province:west-papua:8b60f6de353b",
+      "source_family": "gb:IDN:ADM2",
+      "shapeID": "22746128B99267537228675",
+      "source_index": 36719,
+      "original_source_ordinal": 459,
+      "exact_join": "singleton same source atom and current location ID",
+      "source_geometry_reference": {
+        "catalogue_key": "gb:IDN:ADM2",
+        "ordinal": 459,
+        "operation": "unchanged original source geometry; alias changes identity fields only"
+      },
+      "selected_feature_reference": {
+        "path": "data/geography/part-10.json",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+        "feature_ordinal": 1406,
+        "whole_part_sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+      },
+      "retained_metadata": {
+        "source_id": "gb:IDN:ADM2",
+        "original_id": "22746128B99267537228675",
+        "reference_year": "2020",
+        "source_role": "regency, city",
+        "hierarchy_source": "gb:IDN:ADM1",
+        "hierarchy_overlap": 0.987841,
+        "topology_version": 1,
+        "semantic_review": {
+          "status": "open",
+          "continent": "Oceania",
+          "decision_index": 10,
+          "evidence_file": "geographic-decisions"
+        },
+        "retained_interior_ring_count": 0,
+        "ring_count_method": "literal retained polygon array inspection; no GIS or hole qualification"
+      },
+      "packages": {
+        "repair": {
+          "candidate_cells": 252,
+          "currently_unassigned_cells": 252,
+          "intervals": 162,
+          "physical_classes": {
+            "land": 252
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36255,
+                36719
+              ],
+              "cells": 229
+            },
+            {
+              "source_indices": [
+                36719
+              ],
+              "cells": 23
+            }
+          ]
+        },
+        "physical": {
+          "candidate_cells": 134,
+          "currently_unassigned_cells": 134,
+          "intervals": 77,
+          "physical_classes": {
+            "source-relative": 134
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36255,
+                36719
+              ],
+              "cells": 71
+            },
+            {
+              "source_indices": [
+                36719
+              ],
+              "cells": 63
+            }
+          ]
+        }
+      },
+      "disposition": "held-investigation",
+      "accepted_cells": 0
+    },
+    {
+      "id": "gb:IDN:ADM2:22746128B99426029309213",
+      "pixelIndex": 23202,
+      "name": "Mimika",
+      "province_id": "framework:province:papua:856ef2fb442b",
+      "source_family": "gb:IDN:ADM2",
+      "shapeID": "22746128B99426029309213",
+      "source_index": 36603,
+      "original_source_ordinal": 343,
+      "exact_join": "singleton same source atom and current location ID",
+      "source_geometry_reference": {
+        "catalogue_key": "gb:IDN:ADM2",
+        "ordinal": 343,
+        "operation": "unchanged original source geometry; alias changes identity fields only"
+      },
+      "selected_feature_reference": {
+        "path": "data/geography/part-10.json",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+        "feature_ordinal": 1290,
+        "whole_part_sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+      },
+      "retained_metadata": {
+        "source_id": "gb:IDN:ADM2",
+        "original_id": "22746128B99426029309213",
+        "reference_year": "2020",
+        "source_role": "regency, city",
+        "hierarchy_source": "gb:IDN:ADM1",
+        "hierarchy_overlap": 0.998372,
+        "topology_version": 1,
+        "semantic_review": {
+          "status": "open",
+          "continent": "Oceania",
+          "decision_index": 10,
+          "evidence_file": "geographic-decisions"
+        },
+        "retained_interior_ring_count": 0,
+        "ring_count_method": "literal retained polygon array inspection; no GIS or hole qualification"
+      },
+      "packages": {
+        "repair": {
+          "candidate_cells": 396,
+          "currently_unassigned_cells": 396,
+          "intervals": 222,
+          "physical_classes": {
+            "land": 396
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36254,
+                36603
+              ],
+              "cells": 360
+            },
+            {
+              "source_indices": [
+                36603
+              ],
+              "cells": 36
+            }
+          ]
+        },
+        "physical": {
+          "candidate_cells": 523,
+          "currently_unassigned_cells": 523,
+          "intervals": 232,
+          "physical_classes": {
+            "source-relative": 523
+          },
+          "source_membership_counts": [
+            {
+              "source_indices": [
+                36254,
+                36603
+              ],
+              "cells": 358
+            },
+            {
+              "source_indices": [
+                36603
+              ],
+              "cells": 165
+            }
+          ]
+        }
+      },
+      "disposition": "held-investigation",
+      "accepted_cells": 0
+    }
+  ],
+  "PNG_context_locations": [
+    {
+      "id": "gb:PNG:ADM3:22992897B56162521888322",
+      "pixelIndex": 35609,
+      "name": "Kiunga Rural LLG",
+      "province_id": "framework:province:north-fly-district:f58446b65b27",
+      "selected_feature_reference": {
+        "path": "data/geography/part-19.json",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+        "feature_ordinal": 426,
+        "whole_part_sha256": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269"
+      },
+      "retained_metadata": {
+        "source_id": "gb:PNG:ADM3",
+        "original_id": "22992897B56162521888322",
+        "reference_year": "2019",
+        "source_role": "Local Government Areas",
+        "hierarchy_source": "gb:PNG:ADM2",
+        "hierarchy_overlap": 0.998561,
+        "topology_version": 1,
+        "topology_reconciled": true,
+        "topology_conflicts": 2,
+        "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+        "original_geometry_sha256": "564de032e4ff0886e068e4030665493e903cbc6e4d656353c1e6bd3e11a1c6dc",
+        "semantic_review": {
+          "status": "open",
+          "continent": "Oceania",
+          "decision_index": 32,
+          "evidence_file": "geographic-decisions"
+        },
+        "retained_interior_ring_count": 2,
+        "ring_count_method": "literal retained polygon array inspection; no GIS or hole qualification"
+      },
+      "role": "retained topology/source context; no new native adjudication"
+    },
+    {
+      "id": "gb:PNG:ADM3:22992897B97542007702415",
+      "pixelIndex": 35754,
+      "name": "Lake Murray Rural LLG",
+      "province_id": "framework:province:middle-fly-district:db865ab83af9",
+      "selected_feature_reference": {
+        "path": "data/geography/part-19.json",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+        "feature_ordinal": 454,
+        "whole_part_sha256": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269"
+      },
+      "retained_metadata": {
+        "source_id": "gb:PNG:ADM3",
+        "original_id": "22992897B97542007702415",
+        "reference_year": "2019",
+        "source_role": "Local Government Areas",
+        "hierarchy_source": "gb:PNG:ADM2",
+        "hierarchy_overlap": 0.999359,
+        "topology_version": 1,
+        "topology_reconciled": true,
+        "topology_conflicts": 1,
+        "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+        "original_geometry_sha256": "420df07847b70edaa0d9d2d2fb1976830d1bdbbbb9c13f58b602b8fff836daef",
+        "semantic_review": {
+          "status": "open",
+          "continent": "Oceania",
+          "decision_index": 32,
+          "evidence_file": "geographic-decisions"
+        },
+        "retained_interior_ring_count": 0,
+        "ring_count_method": "literal retained polygon array inspection; no GIS or hole qualification"
+      },
+      "role": "retained topology/source context; no new native adjudication"
+    }
+  ],
+  "parent_context": [
+    {
+      "id": "framework:province:middle-fly-district:db865ab83af9",
+      "name": "Middle Fly District",
+      "parent_id": "framework:area:new-guinea:be74259f0dbc",
+      "source": "gb:PNG:ADM2",
+      "framework_status": "retained-reference",
+      "semantic_action": "open",
+      "boundary_status": "open"
+    },
+    {
+      "id": "framework:province:north-fly-district:f58446b65b27",
+      "name": "North Fly District",
+      "parent_id": "framework:area:new-guinea:be74259f0dbc",
+      "source": "gb:PNG:ADM2",
+      "framework_status": "retained-reference",
+      "semantic_action": "open",
+      "boundary_status": "open"
+    },
+    {
+      "id": "framework:province:papua:856ef2fb442b",
+      "name": "Papua",
+      "parent_id": "framework:area:new-guinea:be74259f0dbc",
+      "source": "gb:IDN:ADM1",
+      "framework_status": "retained-reference",
+      "semantic_action": "open",
+      "boundary_status": "open"
+    },
+    {
+      "id": "framework:province:west-papua:8b60f6de353b",
+      "name": "West Papua",
+      "parent_id": "framework:area:new-guinea:be74259f0dbc",
+      "source": "gb:IDN:ADM1",
+      "framework_status": "retained-reference",
+      "semantic_action": "open",
+      "boundary_status": "open"
+    }
+  ],
+  "source_product_context": [
+    {
+      "advertised_feature_count": 34,
+      "cohort": "administrative-registry",
+      "feature_count": 34,
+      "key": "gb:IDN:ADM1",
+      "metadata_sha256": "da3320ead5ae2cbc9a0c25dbd41379bfac055dce623876bf040825077a4037a8",
+      "original_bytes": 3397843,
+      "original_metadata_file": "data/administrative-sources.json",
+      "original_sha256": "5a6be3d1484166132751fe535dd164e1491e657f2d38dced177f067a7bc00d8f",
+      "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+      "parts": [
+        {
+          "bytes": 1057546,
+          "hash_kind": "file-bytes",
+          "offset": 0,
+          "ordinal": 0,
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IDN-ADM1-000.bin.gz",
+          "sha256": "0e8d4aece3a6467af68d9dcb2674697e7153b6109192ce44e5c268d68cdf37c7",
+          "uncompressed_bytes": 3397843,
+          "uncompressed_sha256": "5a6be3d1484166132751fe535dd164e1491e657f2d38dced177f067a7bc00d8f"
+        }
+      ],
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IDN/ADM1/geoBoundaries-IDN-ADM1_simplified.geojson",
+      "recorded_license": "Open Data Commons Open Database License 1.0",
+      "source_represented_year_claim": "2017"
+    },
+    {
+      "advertised_feature_count": 519,
+      "cohort": "administrative-registry",
+      "feature_count": 519,
+      "key": "gb:IDN:ADM2",
+      "metadata_sha256": "d013dc8421984003f0466cedb71895d3914882a5d7a544a41bf97144f811e36f",
+      "original_bytes": 11002896,
+      "original_metadata_file": "data/administrative-sources.json",
+      "original_sha256": "146653d488331086ddc43d159a261b01ea6dd08c7ed422e34a9886c3c690430c",
+      "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+      "parts": [
+        {
+          "bytes": 3051391,
+          "hash_kind": "file-bytes",
+          "offset": 0,
+          "ordinal": 0,
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IDN-ADM2-000.bin.gz",
+          "sha256": "ef394916ba97454b5592e66eba1df67199731ce7d9636cc3968843801ae904a8",
+          "uncompressed_bytes": 11002896,
+          "uncompressed_sha256": "146653d488331086ddc43d159a261b01ea6dd08c7ed422e34a9886c3c690430c"
+        }
+      ],
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IDN/ADM2/geoBoundaries-IDN-ADM2_simplified.geojson",
+      "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "source_represented_year_claim": "2020"
+    },
+    {
+      "advertised_feature_count": 22,
+      "cohort": "administrative-registry",
+      "feature_count": 22,
+      "key": "gb:PNG:ADM1",
+      "metadata_sha256": "d1626ba7ce5d1da44a805999ce6db8d93c131859d3deb3937444705e77379924",
+      "original_bytes": 1440614,
+      "original_metadata_file": "data/administrative-sources.json",
+      "original_sha256": "f563d7d61b4076429e4db1cd9a22e0d198ce00ba341d9f05cd6e8c51978404fa",
+      "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+      "parts": [
+        {
+          "bytes": 405775,
+          "hash_kind": "file-bytes",
+          "offset": 0,
+          "ordinal": 0,
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-PNG-ADM1-000.bin.gz",
+          "sha256": "795820426a652e94260d2b7e18edd76f21b85f9d6a44b9042be3cabf3f65161e",
+          "uncompressed_bytes": 1440614,
+          "uncompressed_sha256": "f563d7d61b4076429e4db1cd9a22e0d198ce00ba341d9f05cd6e8c51978404fa"
+        }
+      ],
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/PNG/ADM1/geoBoundaries-PNG-ADM1_simplified.geojson",
+      "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "source_represented_year_claim": "2019"
+    },
+    {
+      "advertised_feature_count": 87,
+      "cohort": "administrative-registry",
+      "feature_count": 87,
+      "key": "gb:PNG:ADM2",
+      "metadata_sha256": "336c89e3498beb0922799d95f06f8b897b9d7d0a762ce8d53b75f4a276bec964",
+      "original_bytes": 1721416,
+      "original_metadata_file": "data/administrative-sources.json",
+      "original_sha256": "666e6aad9b69a34156fe9eb178e7541ca16d928856ff2e3d0da8792097f05282",
+      "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+      "parts": [
+        {
+          "bytes": 486346,
+          "hash_kind": "file-bytes",
+          "offset": 0,
+          "ordinal": 0,
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-PNG-ADM2-000.bin.gz",
+          "sha256": "253b822563e0f4e00de8a8268e96830f25cd71732cfe4ce7e7e520f3a4416c18",
+          "uncompressed_bytes": 1721416,
+          "uncompressed_sha256": "666e6aad9b69a34156fe9eb178e7541ca16d928856ff2e3d0da8792097f05282"
+        }
+      ],
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/PNG/ADM2/geoBoundaries-PNG-ADM2_simplified.geojson",
+      "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "source_represented_year_claim": "2019"
+    },
+    {
+      "advertised_feature_count": 326,
+      "cohort": "administrative-registry",
+      "feature_count": 326,
+      "key": "gb:PNG:ADM3",
+      "metadata_sha256": "260de99473d950eb285e61f9cfb6ea1ce45818a0117357313c86d42489b476aa",
+      "original_bytes": 2197437,
+      "original_metadata_file": "data/administrative-sources.json",
+      "original_sha256": "c3a6d49a9f6c150c66a745aa12fff624dcc10a8f67b2478e1f99997f89856590",
+      "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+      "parts": [
+        {
+          "bytes": 614771,
+          "hash_kind": "file-bytes",
+          "offset": 0,
+          "ordinal": 0,
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-PNG-ADM3-000.bin.gz",
+          "sha256": "a549dbcb1c0f84f1bafaee70e2d9853f6458421433ca3efeee6739d5e1056384",
+          "uncompressed_bytes": 2197437,
+          "uncompressed_sha256": "c3a6d49a9f6c150c66a745aa12fff624dcc10a8f67b2478e1f99997f89856590"
+        }
+      ],
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/PNG/ADM3/geoBoundaries-PNG-ADM3_simplified.geojson",
+      "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "source_represented_year_claim": "2019"
+    }
+  ],
+  "source_feature_context": [
+    {
+      "source_index": 36254,
+      "family_index": 152,
+      "source_id": "gb:IDN:ADM1:65028918B16658067687714",
+      "ordinal": 28,
+      "owners": [],
+      "name": "Papua",
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_index": 36255,
+      "family_index": 152,
+      "source_id": "gb:IDN:ADM1:65028918B84835514626455",
+      "ordinal": 29,
+      "owners": [],
+      "name": "West Papua",
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_index": 36274,
+      "family_index": 153,
+      "source_id": "gb:IDN:ADM2:22746128B62198228854475",
+      "ordinal": 14,
+      "owners": [
+        22980
+      ],
+      "name": "Asmat",
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_index": 36314,
+      "family_index": 153,
+      "source_id": "gb:IDN:ADM2:22746128B19254678251292",
+      "ordinal": 54,
+      "owners": [
+        22743
+      ],
+      "name": "Biak Numfor",
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_index": 36331,
+      "family_index": 153,
+      "source_id": "gb:IDN:ADM2:22746128B21273779065212",
+      "ordinal": 71,
+      "owners": [
+        22755
+      ],
+      "name": "Boven Digoel",
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_index": 36362,
+      "family_index": 153,
+      "source_id": "gb:IDN:ADM2:22746128B79106566109504",
+      "ordinal": 102,
+      "owners": [
+        23090
+      ],
+      "name": "Fakfak",
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_index": 36388,
+      "family_index": 153,
+      "source_id": "gb:IDN:ADM2:22746128B71103770185906",
+      "ordinal": 128,
+      "owners": [
+        23038
+      ],
+      "name": "Jayapura",
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_index": 36395,
+      "family_index": 153,
+      "source_id": "gb:IDN:ADM2:22746128B93097528927367",
+      "ordinal": 135,
+      "owners": [
+        23169
+      ],
+      "name": "Kaimana",
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_index": 36421,
+      "family_index": 153,
+      "source_id": "gb:IDN:ADM2:22746128B96094928872069",
+      "ordinal": 161,
+      "owners": [
+        23184
+      ],
+      "name": "Kepulauan Yapen",
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_index": 36468,
+      "family_index": 153,
+      "source_id": "gb:IDN:ADM2:22746128B85346986276333",
+      "ordinal": 208,
+      "owners": [
+        23124
+      ],
+      "name": "Kota Jayapura",
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_index": 36513,
+      "family_index": 153,
+      "source_id": "gb:IDN:ADM2:22746128B11366688050704",
+      "ordinal": 253,
+      "owners": [
+        22702
+      ],
+      "name": "Kota Sorong",
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_index": 36584,
+      "family_index": 153,
+      "source_id": "gb:IDN:ADM2:22746128B39960960221771",
+      "ordinal": 324,
+      "owners": [
+        22860
+      ],
+      "name": "Mamberamo Raya",
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_index": 36593,
+      "family_index": 153,
+      "source_id": "gb:IDN:ADM2:22746128B58641314112332",
+      "ordinal": 333,
+      "owners": [
+        22968
+      ],
+      "name": "Manokwari",
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_index": 36594,
+      "family_index": 153,
+      "source_id": "gb:IDN:ADM2:22746128B90822416479405",
+      "ordinal": 334,
+      "owners": [
+        23163
+      ],
+      "name": "Manokwari Selatan",
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_index": 36595,
+      "family_index": 153,
+      "source_id": "gb:IDN:ADM2:22746128B63262525003276",
+      "ordinal": 335,
+      "owners": [
+        22988
+      ],
+      "name": "Mappi",
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_index": 36601,
+      "family_index": 153,
+      "source_id": "gb:IDN:ADM2:22746128B65756496772256",
+      "ordinal": 341,
+      "owners": [
+        23001
+      ],
+      "name": "Merauke",
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_index": 36603,
+      "family_index": 153,
+      "source_id": "gb:IDN:ADM2:22746128B99426029309213",
+      "ordinal": 343,
+      "owners": [
+        23202
+      ],
+      "name": "Mimika",
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_index": 36620,
+      "family_index": 153,
+      "source_id": "gb:IDN:ADM2:22746128B29146649309875",
+      "ordinal": 360,
+      "owners": [
+        22799
+      ],
+      "name": "Nabire",
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_index": 36655,
+      "family_index": 153,
+      "source_id": "gb:IDN:ADM2:22746128B40289792856685",
+      "ordinal": 395,
+      "owners": [
+        22862
+      ],
+      "name": "Pegunungan Bintang",
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_index": 36681,
+      "family_index": 153,
+      "source_id": "gb:IDN:ADM2:22746128B90221566890304",
+      "ordinal": 421,
+      "owners": [
+        23160
+      ],
+      "name": "Raja Ampat",
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_index": 36692,
+      "family_index": 153,
+      "source_id": "gb:IDN:ADM2:22746128B27261093121909",
+      "ordinal": 432,
+      "owners": [
+        22789
+      ],
+      "name": "Sarmi",
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_index": 36718,
+      "family_index": 153,
+      "source_id": "gb:IDN:ADM2:22746128B25112391877259",
+      "ordinal": 458,
+      "owners": [
+        22773
+      ],
+      "name": "Sorong",
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_index": 36719,
+      "family_index": 153,
+      "source_id": "gb:IDN:ADM2:22746128B99267537228675",
+      "ordinal": 459,
+      "owners": [
+        23200
+      ],
+      "name": "Sorong Selatan",
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_index": 36733,
+      "family_index": 153,
+      "source_id": "gb:IDN:ADM2:22746128B73598541988454",
+      "ordinal": 473,
+      "owners": [
+        23060
+      ],
+      "name": "Supiori",
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_index": 36737,
+      "family_index": 153,
+      "source_id": "gb:IDN:ADM2:22746128B68810971865676",
+      "ordinal": 477,
+      "owners": [
+        23023
+      ],
+      "name": "Tambrauw",
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_index": 36754,
+      "family_index": 153,
+      "source_id": "gb:IDN:ADM2:22746128B11480476919105",
+      "ordinal": 494,
+      "owners": [
+        22705
+      ],
+      "name": "Teluk Bintuni",
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_index": 36755,
+      "family_index": 153,
+      "source_id": "gb:IDN:ADM2:22746128B47515282892276",
+      "ordinal": 495,
+      "owners": [
+        22906
+      ],
+      "name": "Teluk Wondama",
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_index": 36773,
+      "family_index": 153,
+      "source_id": "gb:IDN:ADM2:22746128B12986554349068",
+      "ordinal": 513,
+      "owners": [
+        22713
+      ],
+      "name": "Waropen",
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_index": 50902,
+      "family_index": 263,
+      "source_id": "gb:PNG:ADM1:602756B48983107143165",
+      "ordinal": 21,
+      "owners": [],
+      "name": "Western Province",
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_index": 50953,
+      "family_index": 264,
+      "source_id": "gb:PNG:ADM2:67681753B64880686677125",
+      "ordinal": 50,
+      "owners": [],
+      "name": "Middle Fly District",
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_index": 50962,
+      "family_index": 264,
+      "source_id": "gb:PNG:ADM2:67681753B60857978351937",
+      "ordinal": 59,
+      "owners": [],
+      "name": "North Fly District",
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_index": 51139,
+      "family_index": 265,
+      "source_id": "gb:PNG:ADM3:22992897B97542007702415",
+      "ordinal": 149,
+      "owners": [
+        35754
+      ],
+      "name": "Lake Murray Rural LLG",
+      "geometry_status": "raw-native-supported"
+    }
+  ],
+  "conflict_reference": {
+    "manifest": {
+      "path": ".cache/idn-source-conflict-outcome-1884-v1/manifest.json",
+      "bytes": 1823,
+      "sha256": "5798e190f0838c245a6af9367578436fb25c2cc99dc0eb09ef0c90016201da6c",
+      "custody": "inspected local input; immutable Git pin where explicitly recorded"
+    },
+    "outcome": {
+      "path": ".cache/idn-source-conflict-outcome-1884-v1/outcome.json",
+      "bytes": 39625,
+      "sha256": "67547252b822a2978fd38109251d67786f3c87bf4ac6fdc6e58a8ac200b5ef85",
+      "custody": "inspected local input; immutable Git pin where explicitly recorded"
+    },
+    "exact_referenced_row": [
+      136109,
+      233721,
+      233722,
+      [
+        23001,
+        35754
+      ],
+      [
+        36254,
+        36601,
+        50902,
+        50953,
+        51139
+      ],
+      "land"
+    ],
+    "relationship": "Merauke selector reference only; independent 27-cell conflict investigation owns adjudication"
+  },
+  "findings": [
+    "All 26 repair targets have direct singleton source joins; source identity aliases do not themselves supply territorial approval.",
+    "Boven Digoel repair spans are column [233764,233765), rows [134956,135004); Pegunungan Bintang spans the same column, rows [134909,134938).",
+    "Boven Digoel and Merauke have retained topology-cut metadata despite zero interior rings; absence of rings cannot establish absence of exclusions.",
+    "Kiunga Rural has two retained interior rings and two recorded topology conflicts; Lake Murray has one recorded topology conflict.",
+    "Kaimana, Nabire and Teluk Wondama preserve IDN ADM1/ADM2 vintage and parent mismatch context; no parent clipping or additional competing-location claim is inferred.",
+    "Repair/physical subset rows contain no PNG source feature; complete PNG products remain competitor context from previous source analysis.",
+    "Merauke repair subset includes 105 retained inland-water cells; physical water is not automatically a territorial exclusion.",
+    "Current ownership receipt leaves all 49939 scoped cells unassigned at the accepted head; this is ownership accounting only."
+  ],
+  "next_actions": [
+    "Keep all exact subset selectors held until applicable source/territorial/native qualification is supplied.",
+    "Use admitted retained topology/exclusion and exact native-boundary evidence for Boven Digoel/Merauke and the narrow Pegunungan Bintang border strip; do not recreate cuts from proximity.",
+    "Continue physical interpretation using complete retained hierarchy/local coast-water evidence; absence from physical masks is not ocean.",
+    "Refer Merauke competing-source adjudication to the separate complete conflict investigation.",
+    "Use exact source aliases and preserve the IDN ADM1/ADM2 mismatches as context; do not infer 2026 administrative reforms or approve a complete branch.",
+    "Before any later additive authoring, refresh only affected ownership/source pins and follow the accepted authority/native constructor and independent review."
+  ],
+  "limits": [
+    "Earlier inline exploratory JSON/metadata analysis was not saved as an immutable executable capture; its findings are preserved honestly, and the exact preservation writer is embedded in consumed-inputs.json.",
+    "Preservation reads JSON values, inspects literal retained metadata/ring arrays, authenticates hashes, and validates saved counts. It performs no native rasterization, GIS calculation, scientific rerun, fetch, or territorial adjudication.",
+    "Original source-polygon overlap findings from the earlier completed analysis are context; no new complete source scan or source-authority certification was performed.",
+    "Physical support classifications retain their source vintage/coverage limits; source-relative candidates remain unclassified.",
+    "Semantic and boundary reviews remain open. Neither hierarchy labels nor raw-native-supported status authorizes restoration of excluded territory.",
+    "Zero accepted cells, zero repaired credit, no broader-cohort approval, no cumulative edits, no Git commit."
+  ],
+  "review_status": "author investigation; independent review pending"
+}

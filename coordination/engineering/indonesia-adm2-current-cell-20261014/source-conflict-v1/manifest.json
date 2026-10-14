@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "issue": 1884,
+  "worker_id": "/root/neighbor_conflicts_61",
+  "accepted_head": "f7c358326d776398bc1cffe84df81eac7033091c",
+  "complete": true,
+  "kind": "data-only-held-source-conflict-investigation",
+  "outputs": [
+    {
+      "path": "outcome.json",
+      "bytes": 39625,
+      "sha256": "67547252b822a2978fd38109251d67786f3c87bf4ac6fdc6e58a8ac200b5ef85"
+    },
+    {
+      "path": "competitors.json",
+      "bytes": 71683,
+      "sha256": "a52088c582b6f9a6822fd6959aecd575187ca36275bba84f8b8f6a0ec6e5eced"
+    },
+    {
+      "path": "authority-findings.json",
+      "bytes": 3057,
+      "sha256": "168da4b3832302b546d3dc5f8aff9c520e6b2805710e04cef3f5eff324857922"
+    },
+    {
+      "path": "frozen-selector.json",
+      "bytes": 7390,
+      "sha256": "a235f3d0b4ef505a801cb3d413a40a264e371aecab9ce15c9c9c543ea1a16919"
+    },
+    {
+      "path": "current-ownership-receipt.json",
+      "bytes": 23635,
+      "sha256": "7d6b4d523b22f09e5c3db68c5550c960a8c68aa865b5011c0e155dc5a552a37a"
+    },
+    {
+      "path": "consumed-inputs.json",
+      "bytes": 9717,
+      "sha256": "062d0681e83bf65322433150424e738e9b91f9fca67e75684f95c443a6dd09e5"
+    },
+    {
+      "path": "validation.json",
+      "bytes": 1268,
+      "sha256": "9db5e0959a646b34b602ffe896dd8ad3b80f7e08b372795d56b08a7957d065c0"
+    }
+  ],
+  "counts": {
+    "frozen_cells": 27,
+    "currently_unassigned_cells": 27,
+    "currently_owned_cells": 0,
+    "held_cells": 27,
+    "accepted_cells": 0,
+    "repaired_credit": 0,
+    "intervals": 21,
+    "competing_subjects": 18,
+    "competing_source_features": 26,
+    "source_products": 9,
+    "subject_pair_cohorts": 11,
+    "individual_province_localities": 9,
+    "province_pair_cohorts": 6
+  },
+  "review_status": "author outcome; independent review pending",
+  "no_repair_credit": true
+}
