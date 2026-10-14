@@ -426,7 +426,10 @@ export async function qualifyAcceptedCheckpoint({reader,acceptedHandle,budget}) 
       return admitDerivedCheckpoint(session,reader,archiveReader,accepted);
     const origin=accepted.receipt.merge_commit;
     try { reader.git('rev-parse','--verify',origin+'^{commit}'); }
-    catch { reader.git('fetch','--quiet','--no-tags','--no-write-fetch-head','--filter=blob:none','origin',origin); }
+    catch {
+      try { reader.git('fetch','--quiet','--no-tags','--no-write-fetch-head','--depth=1','--filter=blob:none','origin',origin); }
+      catch { session.closed=true; return unavailable('Accepted historical checkpoint commit unavailable'); }
+    }
     demand(reader.git('rev-parse',origin+'^{tree}').toString().trim()===accepted.source.tree,
       'Accepted historical checkpoint tree differs from authenticated merge');
     const historical=new ImmutableReader(reader.repo,origin,{runtimeBytes:reader.runtimeBytes,
