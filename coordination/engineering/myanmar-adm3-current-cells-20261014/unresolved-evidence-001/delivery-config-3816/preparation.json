@@ -1,0 +1,113 @@
+{
+  "status": "static-config-refreshed-to-accepted-vietnam-not-executed",
+  "frozen_inputs": "09ac43d945203fc877d3a30104f775960e711d65",
+  "api_inspected": {
+    "pr": 1922,
+    "head": "cd450274418dd0c822af94453e0bc3dbd3c02ea1",
+    "path": "scripts/prepare-delivery-handoff.mjs",
+    "blob": "1ce6f37915a216ecc9be6f4e24ee154323239510",
+    "sha256": "fe4f7c5f13e9c9afc952531896913d05074d1d641484dfd702888a63aa69eb63",
+    "acceptance": "OPEN atread; no execution of this candidate code"
+  },
+  "config": "compose-against-accepted-vietnam.json",
+  "accepted_selector": {
+    "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+    "path": "data/ownership-selection.json",
+    "mode": "100644",
+    "git_blob_oid": "b2b0f7834448a8e4bd6ca128839c3b2005500ba8",
+    "bytes": 1582,
+    "sha256": "20ad24bd65f80191be477449121feed2669bf57dac3b47109e6625bcbac9cc02"
+  },
+  "accepted_cumulative_cells": 56853,
+  "new_authorities": [
+    {
+      "rule_sha256": "f48d3aa46654c536b55e6fda97ad0945f1d878c31db4a4437947ff16178378ab",
+      "components": 1,
+      "cells": 220,
+      "targets": [
+        {
+          "target_id": "gb:MMR:ADM3:66882298B78974611272668",
+          "pixelIndex": 30336,
+          "native_cells": 220
+        }
+      ]
+    },
+    {
+      "rule_sha256": "6f46cdd9177b9af358e68f605500188e5d69d4668b6c1d7dac51c4e8e492dcc6",
+      "components": 11,
+      "cells": 3596,
+      "targets": [
+        {
+          "target_id": "gb:MMR:ADM3:66882298B24588945269730",
+          "pixelIndex": 30123,
+          "native_cells": 777
+        },
+        {
+          "target_id": "gb:MMR:ADM3:66882298B67553323255828",
+          "pixelIndex": 30303,
+          "native_cells": 115
+        },
+        {
+          "target_id": "gb:MMR:ADM3:66882298B72213195308331",
+          "pixelIndex": 30322,
+          "native_cells": 842
+        },
+        {
+          "target_id": "gb:MMR:ADM3:66882298B79927633810292",
+          "pixelIndex": 30339,
+          "native_cells": 12
+        },
+        {
+          "target_id": "gb:MMR:ADM3:66882298B47520460749969",
+          "pixelIndex": 30224,
+          "native_cells": 169
+        },
+        {
+          "target_id": "gb:MMR:ADM3:66882298B95740508814243",
+          "pixelIndex": 30392,
+          "native_cells": 130
+        },
+        {
+          "target_id": "gb:MMR:ADM3:66882298B50609184171545",
+          "pixelIndex": 30232,
+          "native_cells": 510
+        },
+        {
+          "target_id": "gb:MMR:ADM3:66882298B25907056324587",
+          "pixelIndex": 30129,
+          "native_cells": 356
+        },
+        {
+          "target_id": "gb:MMR:ADM3:66882298B12562394642113",
+          "pixelIndex": 30081,
+          "native_cells": 272
+        },
+        {
+          "target_id": "gb:MMR:ADM3:66882298B64895356281796",
+          "pixelIndex": 30287,
+          "native_cells": 99
+        },
+        {
+          "target_id": "gb:MMR:ADM3:66882298B19990050947650",
+          "pixelIndex": 30107,
+          "native_cells": 314
+        }
+      ]
+    }
+  ],
+  "proposed_cells": 3816,
+  "static_interval_disjointness": "Allactualaccepted56853intervals includingVietnam2649 are disjointfrom eachother and new220+3596. Currentbaseownerzero/conservation stillpending normalqueue.",
+  "conditional_cumulative_cells_on_this_base": 60669,
+  "delivery_base_rule": "Vietnam2649actuallyaccepted ata285; all56853acceptedintervalsdisjointfromnew3816. Awaitactualaccepted1922/currentbaseguard, compose/finalizeoncefreshadmitted; no qualificationreplay/dispatch.",
+  "expected_cumulative_after_vietnam_if_only_next_change": 60669,
+  "entry": "plainNode scripts/prepare-delivery-handoff.mjs compose CONFIG fresh-owned-DESTINATION; executeonlyafteractualaccepted1922 andfreshnormaladmission",
+  "finalizer": "Existing shared finalize phase after composition outputscommitted; no manualpackageassembly. Retaincombined41-subjectmanifest onfrozen09ac.",
+  "latest_refresh": {
+    "accepted_commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+    "accepted_vietnam_new_cells": 2649,
+    "verified_new_cells": 3816,
+    "all8authoritypins_unchanged": true,
+    "interval_overlap": 0,
+    "qualification_replayed": false
+  }
+}
