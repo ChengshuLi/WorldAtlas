@@ -160,6 +160,21 @@ No proposed input is called accepted merely because a hash matches.
    staged selector/package or using exact `--resume` must produce no changes.
    Scientific assembly, package builds and final delivery remain separate.
 
+For finalization, use local staging by default:
+
+```sh
+node scripts/prepare-delivery-handoff.mjs finalize CONFIG .cache/delivery-handoff/final-UNIQUE
+```
+
+Adopt `ownership-selection.json` as `data/ownership-selection.json` and
+`package-inputs.json` as `.github/package-inputs.json`. Adopt the emitted sidecar
+and `selected-delivery-expectations.json` once at the configured receiving
+`new_prefix`; retain the staged bundle locally for exact `--resume`. Do not also
+commit that bundle under a `finalized/` directory. The delivery has one canonical,
+current-ledger-bound expectations file. A duplicate authoritative copy is not a
+prospective template and correctly retains full regression. This uses the existing
+staging/adoption contract; it adds no writer, automatic Git mutation or resume rule.
+
 Outputs use a fresh directory below `.cache/delivery-handoff/` or the caller's
 issue-owned `coordination/engineering/<job>/`. All products are admitted before
 mutation and created exclusively; `preparation.json` is written last. An explicit
@@ -184,6 +199,13 @@ existing smoke runner, not a runtime package input. Keep it in the reviewed pack
 but do not append it to `.github/package-inputs.json` merely because preparation
 emitted it. Preserve prior declarations and append actual consumed roles using the
 existing `finalizedPackageInputs` constructor, not a copied packet filename list.
+New Markdown or text supporting evidence may use descriptive filenames in the
+issue-owned scope. Selected-data eligibility still requires ordinary, bounded
+UTF-8 text outside the actual reader/source roles and package inputs. Modified or
+renamed files, executable/symlink modes, configuration text and consumed templates
+retain full regression. Document titles do not establish or remove scientific
+approval, and the final review/evidence gates still apply.
+
 The existing `package` and `finalize` commands handle issued-rule and modern
 `source-target-native-custody-v1` authorities, including mixed registries. After
 completed selected assembly, use `finalize CONFIG DESTINATION` to produce the
