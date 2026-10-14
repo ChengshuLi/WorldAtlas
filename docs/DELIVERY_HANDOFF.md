@@ -95,6 +95,18 @@ No proposed input is called accepted merely because a hash matches.
    Flat public aliases come from the accepted envelope, not repository paths.
    This consumes retained qualified metadata; it does not repeat source/physical
    operators or prove actual current owner-zero. Commit those four products.
+   To combine multiple independently qualified originals in that same operation,
+   keep one `selector` and `effective_release_id`, and replace the singleton four
+   pins with `authorities: [{rule_preimage, source_authority, ledger, native_patch},
+   ...]`. The array must be nonempty; mixing it with singleton pins is rejected.
+   Each original retains its own rule, source evidence and physical receipt joins.
+   Checks reject duplicate authorities/components and overlap between new originals
+   as well as the accepted patch. All original/source-evidence bodies share one
+   aggregate preparation allowance. Registry and ledger conservation, one final
+   interval union and one effective reference cover the complete combined result.
+   Array order does not change the emitted bytes. No intermediate selector, new
+   scientific qualification or source/physical rerun is introduced; final actual
+   selected-reader and current-owner-zero acceptance remain separately required.
 5. Existing rebind issuance and supervision remain separate. `rebind-operating`
    accepts actual `request`, `publication`, `terminal` pins and complete
    `execution_custody` pins (`code_source`, `terminal`, `stderr`, `stdout`,
@@ -488,3 +500,23 @@ constructor outputs. This removes per-delivery executable creation; it does not
 retroactively change an earlier mixed-code PR's CI profile. Source-only completion,
 actual selected-consumer conservation, final package output and delivery timing
 remain distinct claims.
+
+### Subsequent batch preparation
+
+For an unchanged accepted command, change the scientific input pins/configuration,
+not its executable implementation. Do not create and pre-review another constructor
+wrapper, rebuild input descriptors by hand, split the returned receipt from its
+ledger rows, or create a later join checkpoint. The complete constructor result is
+already the `compose` input. Review the actual scientific inputs/results and final
+delivery at their existing boundaries; changed code or method still needs relevant
+independent review. Fresh resource admission and any selected execution contract
+remain mandatory. Lightweight metadata follows shared Git/storage safeguards,
+without acquiring a separate all-team GIS compute permission round.
+
+The Tanjung191 input checkpoint at 2026-10-14T20:28:32Z and qualified checkpoint
+at 20:40:59Z bracket 12m27s, while its preserved external execution lasted
+1.581 seconds (20:35:53.305Z–20:35:54.886Z). That interval includes preparation,
+coordination, review and preservation, not solely idle time; it is not a measured
+saving from these commands. The original records and exact removable stages are
+linked in issue #1920. A subsequent adopted package must establish actual delivery
+elapsed and whether those intermediate stages were eliminated.

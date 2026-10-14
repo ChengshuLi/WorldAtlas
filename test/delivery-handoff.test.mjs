@@ -792,23 +792,23 @@ function modernCompositionFixture(t, {mixed = true} = {}) {
     native_contract: Object.fromEntries(['size', 'coordinateBits', 'method', 'native_latitudes', 'hierarchy_sha256', 'original_assets']
       .map(key => [key, manifest[key]]))};
   const patch = {rows: [{y: 3, runs: [[2, 4, 1]]}]};
-  const makeAppend = (change = () => {}) => {
+  const makeAppend = (change = () => {}, appendPrefix = owned) => {
     const source = structuredClone(evidence), native = structuredClone(patch);
     const template = priorLedger.rows.find(row => row.representation === 'native-cells');
     const {authority_sha256, rule_sha256, ...originalRow} = template;
     const row = {...originalRow, native_rows: structuredClone(patch.rows), native_cells: 2};
     const state = {source, native, row}; change(state);
-    f.save(owned + 'source-evidence.json', source); f.save(owned + 'native-patch.json', native); f.commitAll();
-    row.component_id = state.component_id ?? 'source-target:' + digest(jsonBytes({target_id: row.target_id, evidence: f.pin(owned + 'source-evidence.json').sha256}));
+    f.save(appendPrefix + 'source-evidence.json', source); f.save(appendPrefix + 'native-patch.json', native); f.commitAll();
+    row.component_id = state.component_id ?? 'source-target:' + digest(jsonBytes({target_id: row.target_id, evidence: f.pin(appendPrefix + 'source-evidence.json').sha256}));
     const binding = {version: 1, kind: 'source-target-native-custody-v1',
-      source_evidence: f.pin(owned + 'source-evidence.json'), native_patch: f.pin(owned + 'native-patch.json')};
-    f.save(owned + 'binding.json', binding); f.save(owned + 'rule.json', {...binding, kind: 'source-target-native-rule-v1'}); f.commitAll();
+      source_evidence: f.pin(appendPrefix + 'source-evidence.json'), native_patch: f.pin(appendPrefix + 'native-patch.json')};
+    f.save(appendPrefix + 'binding.json', binding); f.save(appendPrefix + 'rule.json', {...binding, kind: 'source-target-native-rule-v1'}); f.commitAll();
     const constructed = {products: JSON.parse(JSON.stringify({'original-rule-preimage.json': jsonBytes({...binding, kind: 'source-target-native-rule-v1'}),
       'authority-binding.json': jsonBytes(binding)})), component_ids: [row.component_id], ledger_rows: [row],
-      rule_sha256: f.pin(owned + 'rule.json').sha256, limitations: ['Actual current owner-zero remains separately required.']};
-    f.save(owned + 'constructed-authority.json', constructed); f.commitAll();
-    return {version: 1, selector, rule_preimage: f.pin(owned + 'rule.json'), source_authority: f.pin(owned + 'binding.json'),
-      ledger: f.pin(owned + 'constructed-authority.json'),
+      rule_sha256: f.pin(appendPrefix + 'rule.json').sha256, limitations: ['Actual current owner-zero remains separately required.']};
+    f.save(appendPrefix + 'constructed-authority.json', constructed); f.commitAll();
+    return {version: 1, selector, rule_preimage: f.pin(appendPrefix + 'rule.json'), source_authority: f.pin(appendPrefix + 'binding.json'),
+      ledger: f.pin(appendPrefix + 'constructed-authority.json'),
       native_patch: binding.native_patch, effective_release_id: 'geography:modern-next'};
   };
   const config = makeAppend();
@@ -931,4 +931,100 @@ test('generated sidecar refuses foreign/colliding outputs and changed release jo
     assert.equal(fs.existsSync(path.join(f.root, destination)), false);
     assert.deepEqual(fs.readFileSync(path.join(f.root, occupied)), sentinel);
   }
+});
+
+
+function modernGroups(config, originals) {
+  const fields = ['rule_preimage', 'source_authority', 'ledger', 'native_patch'];
+  const result = {...config, authorities: originals.map(original => Object.fromEntries(fields.map(key => [key, original[key]])))};
+  for (const key of fields) delete result[key];
+  return result;
+}
+
+function secondModernDelta(state) {
+  state.source.retained_metadata = 'independently-qualified-second-original';
+  state.native.rows = [{y: 3, runs: [[4, 5, 1]]}];
+  state.row.native_rows = structuredClone(state.native.rows); state.row.native_cells = 1;
+}
+
+for (const mixed of [false, true]) test('multiple modern originals compose once with separate custody and unchanged selected baseline' + (mixed ? ' and legacy rows' : ''), t => {
+  const f = modernCompositionFixture(t, {mixed});
+  const second = f.makeAppend(secondModernDelta, f.owned + 'second/');
+  const config = modernGroups(f.config, [f.config, second]);
+  assert.deepEqual(composeAuthorities(modernGroups(f.config, [f.config]), f.r), composeAuthorities(f.config, f.r),
+    'singleton array preserves existing products byte for byte');
+  const products = composeAuthorities(config, f.r);
+  assert.deepEqual(composeAuthorities({...config, authorities: [...config.authorities].reverse()}, f.r), products,
+    'independent originals produce order-independent cumulative bytes');
+  const destination = '.cache/delivery-handoff/multiple-compose';
+  const run = f.run('compose', destination, [], config); assert.equal(run.status, 0, run.stderr);
+  for (const [name, raw] of Object.entries(products)) assert.deepEqual(fs.readFileSync(path.join(f.root, destination, name)), raw);
+  const registry = JSON.parse(products['authority-registry.json']), ledger = JSON.parse(products['selected-ledger.json']);
+  assert.equal(registry.entries.length, f.priorRegistry.entries.length + 2);
+  for (const original of [f.config, second]) {
+    const entry = registry.entries.find(value => value.source_authority.sha256 === original.source_authority.sha256);
+    assert.ok(entry); assert.deepEqual(entry.source_authority, original.source_authority);
+    assert.deepEqual(entry.rule_preimage, original.rule_preimage);
+    const qualified = f.r.json(original.ledger);
+    for (const row of qualified.ledger_rows) assert.deepEqual(ledger.rows.find(value => value.component_id === row.component_id),
+      {...row, authority_sha256: entry.authority_sha256, rule_sha256: entry.rule_sha256});
+  }
+  for (const row of f.priorLedger.rows) assert.deepEqual(ledger.rows.find(value => value.component_id === row.component_id), row);
+  for (const key of ['parent_inventory', 'current_rebind', 'current_targets']) assert.deepEqual(ledger[key], f.priorLedger[key]);
+  assert.deepEqual(JSON.parse(products['patch.json']).rows, [...f.priorPatch.rows, {y: 3, runs: [[2, 5, 1]]}]);
+  const resume = f.run('compose', destination, ['--resume'], config); assert.equal(resume.status, 0, resume.stderr);
+  const finalConfig = f.finalizeConfig(products), finalDestination = '.cache/delivery-handoff/multiple-final';
+  const final = f.run('finalize', finalDestination, [], finalConfig); assert.equal(final.status, 0, final.stderr);
+  const finalRead = name => JSON.parse(fs.readFileSync(path.join(f.root, finalDestination, name)));
+  assert.equal(finalRead('selected-delivery-expectations.json').cumulative_native_cells, mixed ? 6 : 5);
+  const finalSelector = finalRead('ownership-selection.json'); delete finalSelector.additive_release;
+  assert.equal(JSON.stringify(finalSelector), JSON.stringify(JSON.parse(f.originalSelector)));
+  assert.deepEqual(finalRead('package-inputs.json').inputs.slice(0, JSON.parse(f.accepted['package-inputs.json']).inputs.length),
+    JSON.parse(f.accepted['package-inputs.json']).inputs);
+});
+
+test('multiple modern originals reject mixed/empty groups, duplicate authorities/components and cross-original overlaps', t => {
+  const f = modernCompositionFixture(t); let ordinal = 0;
+  const second = f.makeAppend(secondModernDelta, f.owned + 'second/');
+  const config = modernGroups(f.config, [f.config, second]);
+  const refusal = (input, pattern) => {
+    const destination = '.cache/delivery-handoff/multiple-refused-' + ordinal++;
+    const result = f.run('compose', destination, [], input); assert.notEqual(result.status, 0); assert.match(result.stderr, pattern);
+    assert.equal(fs.existsSync(path.join(f.root, destination)), false);
+  };
+  refusal({...config, rule_preimage: f.config.rule_preimage}, /mix singleton/);
+  refusal({...config, authorities: []}, /nonempty/);
+  refusal({...config, authorities: [{}]}, /pin groups/);
+  refusal(modernGroups(f.config, [f.config, f.config]), /already selected or duplicated/);
+  const sameEvidence = f.makeAppend(s => {
+    s.native.rows = [{y: 3, runs: [[4, 5, 1]]}]; s.row.native_rows = structuredClone(s.native.rows); s.row.native_cells = 1;
+  }, f.owned + 'same-source/');
+  refusal(modernGroups(f.config, [f.config, sameEvidence]), /Foreign or duplicate modern component/);
+  for (const [change, pattern] of [
+    [s => { s.native.rows = [{y: 3, runs: [[3, 5, 1]]}]; s.row.native_rows = structuredClone(s.native.rows); s.row.native_cells = 2; }, /overlap/],
+    [s => { s.source.native_contract.method = 'wrong'; }, /baseline\/contract/],
+    [s => { s.source.base_reference.id = 'geography:wrong'; }, /baseline\/contract/],
+    [s => { s.row.source_receipt_sha256 = '0'.repeat(64); }, /source target\/owner\/receipt/],
+    [s => { s.native.rows[0].runs[0][2] = 2; }, /ledger intervals differ/],
+  ]) {
+    const next = f.makeAppend(s => { secondModernDelta(s); change(s); }, f.owned + 'bad-' + ordinal + '/');
+    refusal(modernGroups(f.config, [f.config, next]), pattern);
+  }
+  const badPin = structuredClone(config); badPin.authorities[1].native_patch.sha256 = '0'.repeat(64);
+  refusal(badPin, /hash differs/);
+});
+
+test('multiple modern source-evidence carry is aggregate rather than reset per original', t => {
+  const f = modernCompositionFixture(t);
+  const first = f.makeAppend(s => { s.source.retained_metadata = 'a'.repeat(256 * 1024); }, f.owned + 'large-first/');
+  const second = f.makeAppend(s => { secondModernDelta(s); s.source.retained_metadata = 'b'.repeat(256 * 1024); }, f.owned + 'large-second/');
+  const preparation_allowance = {phaseBytes: 5 * 1024 * 1024, rssBytes: 256 * 1024 * 1024};
+  for (const [ordinal, original] of [first, second].entries()) {
+    const run = f.run('compose', '.cache/delivery-handoff/single-budget-' + ordinal, [], {...original, preparation_allowance});
+    assert.equal(run.status, 0, run.stderr);
+  }
+  const config = {...modernGroups(f.config, [first, second]), preparation_allowance};
+  const destination = '.cache/delivery-handoff/multiple-budget-refused', result = f.run('compose', destination, [], config);
+  assert.notEqual(result.status, 0); assert.match(result.stderr, /composition carry exceeds/);
+  assert.equal(fs.existsSync(path.join(f.root, destination)), false);
 });
