@@ -11,7 +11,7 @@ const realGit = spawnSync('which', ['git'], {encoding: 'utf8'}).stdout.trim();
 const token = 'fixture-secret-only-checkout-1787';
 const base64Token = Buffer.from('x-access-token:' + token).toString('base64');
 const fixtureEnv = {...process.env, GIT_CONFIG_NOSYSTEM: '1', GIT_CONFIG_GLOBAL: os.devNull,
-  PYTHONDONTWRITEBYTECODE: '1'};
+  PYTHONDONTWRITEBYTECODE: '1', INTEGRATION_PROFILE: '', INTEGRATION_TEST_SELECTION: ''};
 function command(executable, args, options = {}) {
   const result = spawnSync(executable, args, {encoding: 'utf8', env: fixtureEnv, ...options});
   assert.equal(result.status, 0, result.stderr || result.error?.message);
@@ -25,11 +25,20 @@ function fixture(t, mode = 'success') {
   fs.mkdirSync(source); fs.mkdirSync(workspace); fs.mkdirSync(shim);
   const git = args => command(realGit, ['-c', 'user.name=Checkout test', '-c', 'user.email=checkout@example.invalid', ...args], {cwd: source});
   git(['init', '--quiet', '--template=']);
+  git(['config', 'uploadpack.allowFilter', 'true']);
   fs.writeFileSync(path.join(source, 'file.txt'), 'exact complete checkout\n');
   fs.writeFileSync(path.join(source, '.gitattributes'), '*.txt filter=malicious\n');
   fs.writeFileSync(path.join(source, '.hidden'), 'retained hidden file\n');
   fs.writeFileSync(path.join(source, 'execute.sh'), '#!/bin/sh\nexit 0\n', {mode: 0o755});
   fs.symlinkSync('file.txt', path.join(source, 'link'));
+  for (const [name, text] of Object.entries({
+    'data/regional-review/source-only/body.txt': 'unconsumed regional source-only bytes\n',
+    'research/campaigns/source-only/body.txt': 'unconsumed historical campaign bytes\n',
+    'research/geography/required/body.txt': 'required original scientific source bytes\n',
+    'coordination/engineering/required/body.txt': 'required archived engineering bytes\n',
+    'data/geography/required/body.txt': 'required application bytes\n',
+    'test/current.test.mjs': 'required current software test inventory\n'
+  })) { fs.mkdirSync(path.dirname(path.join(source, name)), {recursive: true}); fs.writeFileSync(path.join(source, name), text); }
   git(['add', '.']); git(['commit', '--quiet', '-m', 'fixture']);
   const sha = git(['rev-parse', 'HEAD']), tree = git(['rev-parse', 'HEAD^{tree}']);
   const count = path.join(directory, 'fetches'), descendant = path.join(directory, 'descendant');
@@ -67,10 +76,14 @@ if isfetch:
    time.sleep(1)
  if mode=='foreign-workspace':open(os.path.join(workspace,'foreign'),'w').write('preserve me')
  if mode=='wrong-sha':args[-1]=${JSON.stringify(sha)}
- args[args.index('origin')]='file://${source}'
+if ischeckout and mode=='materialize-hang':
+ childcode="import os,signal,time;signal.signal(signal.SIGTERM,signal.SIG_IGN);open("+repr(pidfile)+",'w').write(str(os.getpid()));time.sleep(120)"
+ child=subprocess.Popen([sys.executable,'-c',childcode])
+ signal.signal(signal.SIGTERM,signal.SIG_IGN)
+ time.sleep(120)
 if ischeckout and mode=='credential-leak':
  subprocess.check_call([${JSON.stringify(realGit)},'config','--local','http.https://github.com/.extraheader','untrusted-header'])
-os.execv(${JSON.stringify(realGit)},[${JSON.stringify(realGit)},*args])
+os.execv(${JSON.stringify(realGit)},[${JSON.stringify(realGit)},'-c',${JSON.stringify('url.file://')}+${JSON.stringify(source)}+'.insteadOf=https://github.com/ChengshuLi/WorldAtlas.git',*args])
 `, {mode: 0o755});
   const env = {...fixtureEnv, PATH: shim + path.delimiter + process.env.PATH,
     WORLDATLAS_CHECKOUT_TOKEN: token, GH_TOKEN: 'unrelated-secret',
@@ -82,7 +95,7 @@ os.execv(${JSON.stringify(realGit)},[${JSON.stringify(realGit)},*args])
   const fetches = () => fs.existsSync(count) ? Number(fs.readFileSync(count, 'utf8')) : 0;
   const events = result => result.stdout.trim().split('\n').filter(Boolean).map(JSON.parse);
   const clean = () => assert.deepEqual(fs.readdirSync(directory).filter(name => name.startsWith('.worldatlas-ci-checkout-')), []);
-  return {directory, workspace, source, sha, tree, run, args, env, rows, fetches, events, clean, descendant, sentinel};
+  return {directory, workspace, source, sha, tree, run, args, env, rows, fetches, events, clean, descendant, sentinel, git};
 }
 function noSecrets(result) {
   assert.doesNotMatch(result.stdout + result.stderr, new RegExp(token + '|' + base64Token + '|unrelated-secret'));
@@ -112,6 +125,68 @@ test('real Git checkout preserves exact tree, modes, symlinks and detached ident
   f.clean(); noSecrets(result);
 });
 
+test('complete software profile excludes only source-only files and blobs while preserving exact tree and all regression inputs', t => {
+  const f = fixture(t);
+  Object.assign(f.env, {INTEGRATION_PROFILE: 'full', INTEGRATION_TEST_SELECTION: 'complete'});
+  const result = f.run();
+  assert.equal(result.status, 0, result.stdout + result.stderr);
+  assert.equal(command(realGit, ['-C', f.workspace, 'rev-parse', 'HEAD']), f.sha);
+  assert.equal(command(realGit, ['-C', f.workspace, 'rev-parse', 'HEAD^{tree}']), f.tree);
+  for (const name of ['data/regional-review/source-only/body.txt', 'research/campaigns/source-only/body.txt']) {
+    assert.ok(!fs.existsSync(path.join(f.workspace, name)), name);
+    const blob = f.git(['rev-parse', `${f.sha}:${name}`]);
+    const absent = spawnSync(realGit, ['-C', f.workspace, 'cat-file', '-e', blob],
+      {encoding: 'utf8', env: {...fixtureEnv, GIT_NO_LAZY_FETCH: '1'}, timeout: 2000});
+    assert.notEqual(absent.status, 0, 'excluded blob must not have been downloaded');
+  }
+  for (const name of ['research/geography/required/body.txt', 'coordination/engineering/required/body.txt',
+    'data/geography/required/body.txt', 'test/current.test.mjs', 'file.txt', '.hidden', 'execute.sh']) {
+    assert.deepEqual(fs.readFileSync(path.join(f.workspace, name)), fs.readFileSync(path.join(f.source, name)), name);
+  }
+  assert.equal(fs.readlinkSync(path.join(f.workspace, 'link')), 'file.txt');
+  assert.equal(fs.statSync(path.join(f.workspace, 'execute.sh')).mode & 0o111, 0o111);
+  assert.equal(command(realGit, ['-C', f.workspace, 'config', '--get', 'remote.origin.promisor']), 'false');
+  assert.notEqual(spawnSync(realGit, ['-C', f.workspace, 'config', '--get', 'remote.origin.partialclonefilter']).status, 0);
+  assert.ok(f.rows().some(row => row.fetch && row.args.includes('--filter=blob:none')));
+  assert.ok(f.rows().filter(row => row.auth).every(row => row.fetch || row.checkout));
+  assert.ok(f.rows().every(row => !row.token && !row.gh && row.global === os.devNull));
+  assert.ok(!fs.existsSync(f.sentinel));
+  assert.doesNotMatch(fs.readFileSync(path.join(f.workspace, '.git/config'), 'utf8'), /extraheader|credential|AUTHORIZATION|fixture-secret|insteadOf/);
+  f.clean(); noSecrets(result);
+});
+
+test('sparse software acquisition preserves explicit complete historical commit fetch without later lazy hydration', t => {
+  const f = fixture(t), original = f.sha;
+  fs.writeFileSync(path.join(f.source, 'file.txt'), 'new current software bytes\n');
+  fs.writeFileSync(path.join(f.source, 'data/geography/required/body.txt'), 'new current application bytes\n');
+  f.git(['add', '.']); f.git(['commit', '--quiet', '-m', 'current']);
+  const current = f.git(['rev-parse', 'HEAD']), tree = f.git(['rev-parse', 'HEAD^{tree}']);
+  Object.assign(f.env, {INTEGRATION_PROFILE: 'full', INTEGRATION_TEST_SELECTION: 'complete'});
+  const result = f.run(['--sha', current, '--tree', tree]);
+  assert.equal(result.status, 0, result.stdout + result.stderr);
+  assert.notEqual(spawnSync(realGit, ['-C', f.workspace, 'cat-file', '-e', original + '^{commit}'],
+    {env: {...fixtureEnv, GIT_NO_LAZY_FETCH: '1'}, timeout: 2000}).status, 0);
+  command(realGit, ['-C', f.workspace, 'fetch', '--no-tags', '--depth=1', 'file://' + f.source, original],
+    {env: {...fixtureEnv, GIT_NO_LAZY_FETCH: '1'}, timeout: 2000});
+  assert.equal(command(realGit, ['-C', f.workspace, 'show', original + ':data/geography/required/body.txt'],
+    {env: {...fixtureEnv, GIT_NO_LAZY_FETCH: '1'}, timeout: 2000}), 'required application bytes');
+  assert.ok(!fs.existsSync(path.join(f.workspace, 'data/regional-review')));
+  assert.equal(command(realGit, ['-C', f.workspace, 'rev-parse', 'HEAD']), current);
+  f.clean(); noSecrets(result);
+});
+
+for (const [profile, selection] of [['full', 'selected-data'], ['full', 'selected-output'], ['evidence', 'complete']]) {
+  test(`non-complete software route ${profile}/${selection} retains complete checkout`, t => {
+    const f = fixture(t); Object.assign(f.env, {INTEGRATION_PROFILE: profile, INTEGRATION_TEST_SELECTION: selection});
+    const result = f.run(); assert.equal(result.status, 0, result.stdout + result.stderr);
+    assert.ok(fs.existsSync(path.join(f.workspace, 'data/regional-review/source-only/body.txt')));
+    assert.ok(fs.existsSync(path.join(f.workspace, 'research/campaigns/source-only/body.txt')));
+    assert.ok(!f.rows().some(row => row.args.includes('--filter=blob:none')));
+    assert.ok(f.rows().filter(row => !row.fetch).every(row => !row.auth));
+    f.clean(); noSecrets(result);
+  });
+}
+
 test('progressing fetch beyond the previous scaled cutoff completes once within the total deadline', t => {
   const f = fixture(t, 'progressing'), result = f.run();
   assert.equal(result.status, 0, result.stdout + result.stderr);
@@ -139,6 +214,17 @@ test('overall deadline stops actual TERM-resistant Git child and grandchild with
   assert.equal(result.status, 1, result.stdout + result.stderr);
   assert.equal(f.fetches(), 1); assert.match(result.stdout, /acquisition-deadline/);
   assert.ok(Date.now() - start < 8500, 'cleanup stays inside the overall deadline');
+  noLiveDescendant(f.descendant); assert.deepEqual(fs.readdirSync(f.workspace), []); f.clean(); noSecrets(result);
+});
+
+test('software blob materialization shares the unchanged total deadline and cleans TERM-resistant descendants', t => {
+  const f = fixture(t, 'materialize-hang');
+  Object.assign(f.env, {INTEGRATION_PROFILE: 'full', INTEGRATION_TEST_SELECTION: 'complete'});
+  const start = Date.now(), result = f.run(['--total-timeout-seconds', '7']);
+  assert.equal(result.status, 1, result.stdout + result.stderr);
+  assert.equal(f.fetches(), 1); assert.match(result.stdout, /acquisition-deadline/);
+  assert.ok(Date.now() - start < 8500);
+  assert.ok(f.events(result).some(row => row.phase === 'materialize' && row.status === 'acquisition-deadline'));
   noLiveDescendant(f.descendant); assert.deepEqual(fs.readdirSync(f.workspace), []); f.clean(); noSecrets(result);
 });
 

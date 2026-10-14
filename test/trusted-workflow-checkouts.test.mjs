@@ -482,6 +482,24 @@ test('full-checkout routing retains exactly one successful canonical verificatio
   assert.match(w.regression.steps.find(step=>step.name==='Checkout reviewed head'&&workflowCondition(step.condition,evidence)).text,/sparse-checkout-cone-mode: false/);
 });
 
+test('author and queue reuse complete software selection for sparse acquisition while standalone package stays complete',()=>{
+  const w=packageWorkflow(),author=packageStep(w.regression,'Acquire full checkout with authenticated bounded helper');
+  const standalone=packageStep(w.package,'Acquire full checkout with authenticated bounded helper');
+  assert.match(author.text,/INTEGRATION_PROFILE: \$\{\{ needs\.profile\.outputs\.profile \}\}/);
+  assert.match(author.text,/INTEGRATION_TEST_SELECTION: \$\{\{ needs\.profile\.outputs\.test_selection \}\}/);
+  assert.doesNotMatch(standalone.text,/INTEGRATION_PROFILE:|INTEGRATION_TEST_SELECTION:/);
+  const queue=fs.readFileSync(new URL('../.github/workflows/worker-merge.yml',import.meta.url),'utf8');
+  const acquire=queue.slice(queue.indexOf('      - name: Acquire full checkout with authenticated bounded helper'),
+    queue.indexOf('      - name: Legacy full checkout only for proven trusted-helper absence'));
+  assert.match(acquire,/INTEGRATION_PROFILE: \$\{\{ needs\.prepare\.outputs\.profile \}\}/);
+  assert.match(acquire,/INTEGRATION_TEST_SELECTION: \$\{\{ needs\.prepare\.outputs\.test_selection \}\}/);
+  assert.match(acquire,/--total-timeout-seconds 420 --elapsed-seconds/);
+  const definition=JSON.parse(fs.readFileSync(new URL('../.github/package-inputs.json',import.meta.url),'utf8'));
+  for(const name of [...definition.inputs,...definition.verification_paths])
+    assert.ok(!['data/regional-review/','research/campaigns/'].some(prefix=>name===prefix.slice(0,-1)||name.startsWith(prefix)||prefix.startsWith(name)),
+      'A source-only namespace became an actual package input: '+name);
+});
+
 test('full-checkout bootstrap accepts live main movement while authenticating only the original frozen helper base',()=>{
   for(const {body} of checkoutBootstrapBodies()){
     const f=checkoutBootstrapFixture();f.routes['/pulls/17'].base.sha='d'.repeat(40);
