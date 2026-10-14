@@ -1,3 +1,10 @@
+import copy
+import gzip
+import subprocess
+import sys
+import tempfile
+import time
+from unittest.mock import patch
 import hashlib
 import importlib.util
 import json
@@ -54,4 +61,50 @@ class Native(unittest.TestCase):
     body=m.physical_native_member(index,lambda p:p['body'],lambda:None)
     decoded.append(body)
    self.assertFalse(decoded)
+
+class PhysicalBoundary(unittest.TestCase):
+ def test_authenticated_late_corruption_refuses_before_any_geometry_decode(self):
+  import numpy,shapely
+  for mutation in ['encoded-hash','decoded-hash','decoded-length','whole-hash','missing-tail','offset']:
+   with self.subTest(mutation=mutation),tempfile.TemporaryDirectory() as directory:
+    root=Path(directory);(root/'data').mkdir()
+    marker=root/'decoded-marker'
+    method=("def decode_record(*args):\n open("+repr(str(marker))+",'w').write('called')\n").encode()
+    meta=row(0,1,-1,[0,0,1,1]);meta.update(native_offset=0,native_record_bytes=9,ordinal=0,decoded_pointset_binary64_sha256='a'*64)
+    metadata=gzip.compress((json.dumps(meta)+'\n').encode())
+    raw_metadata=gzip.decompress(metadata)
+    def part(name,body,offset,ordinal):
+     encoded=gzip.compress(body);(root/'data'/name).write_bytes(encoded)
+     return {'path':name,'bytes':len(encoded),'sha256':m.sha(encoded),'uncompressed_bytes':len(body),
+       'uncompressed_sha256':m.sha(body),'offset':offset,'ordinal':ordinal}
+    first=part('native0.gz',b'abcd',0,0);last=part('native1.gz',b'efghi',4,1)
+    metadata_part=part('metadata.gz',raw_metadata,0,0)
+    index={'member_bytes':9,'member_sha256':m.sha(b'abcdefghi'),'record_count':1,'parts':[first,last]}
+    if mutation=='encoded-hash':last['sha256']='0'*64
+    if mutation=='decoded-hash':last['uncompressed_sha256']='0'*64
+    if mutation=='decoded-length':last['uncompressed_bytes']+=1
+    if mutation=='whole-hash':index['member_sha256']='0'*64
+    if mutation=='missing-tail':index['member_bytes']+=1
+    if mutation=='offset':last['offset']+=1
+    (root/'data/transport.json').write_text(json.dumps({'complete_sources':1,'entries':[{'kind':'sources','delivered':metadata_part}]}))
+    (root/'data/index.json').write_text(json.dumps(index));(root/'data/comparison.py').write_bytes(method)
+    (root/'data/stages.json').write_text(json.dumps([{'target':'one','consumed':{'geometry':{'type':'Polygon','coordinates':[[[0,0],[1,0],[1,1],[0,0]]]}}}]))
+    def git(*args):return subprocess.check_output(['git','-C',str(root),*args],stderr=subprocess.DEVNULL)
+    git('init');git('add','data');git('-c','user.name=Test','-c','user.email=test@example.invalid','commit','-m','fixture')
+    commit=git('rev-parse','HEAD').decode().strip();pins=[]
+    for file in sorted((root/'data').iterdir()):
+     name=file.relative_to(root).as_posix();raw=file.read_bytes();pin={'path':name,'commit':commit,'git_blob_oid':git('rev-parse',commit+':'+name).decode().strip(),'bytes':len(raw),'sha256':m.sha(raw)}
+     if name.endswith('.gz'):
+      descriptor=next(p for p in [metadata_part,first,last] if p['path']==file.name)
+      pin.update(decoded_bytes=descriptor['uncompressed_bytes'],decoded_sha256=descriptor['uncompressed_sha256'])
+     pins.append(pin)
+    config={'version':1,'inputs':pins,'roles':{'stages':'data/stages.json','transport':'data/transport.json','native_index':'data/index.json','comparison':'data/comparison.py'},'metadata_prefix':'data','native_prefix':'data','resources':{'input_bytes':1000000,'output_bytes':1000000,'deadline_seconds':60},'runtime':{'python':sys.version,'numpy':numpy.__version__,'shapely':shapely.__version__,'geos':shapely.geos_version_string}}
+    raw=json.dumps(config).encode();(root/'config.json').write_bytes(raw)
+    admission={'observed_unix_seconds':time.time(),'program_sha256':m.sha(Path(m.__file__).read_bytes()),'config_sha256':m.sha(raw),'runtime_inventory_bytes':0,'execution_reserve_bytes':0,'allowance':{'rssBytes':2147483648,'phaseBytes':2147483648}}
+    (root/'admission.json').write_text(json.dumps(admission))
+    with patch.object(m,'verify_runtime',return_value=None),patch.object(m,'PHYSICAL_COMPARISON_SHA',m.sha(method)):
+     with self.assertRaisesRegex(ValueError,'fragment|member'):
+      m.run_physical(root,root/'config.json',root/'admission.json',root/'output','coordination/engineering/test/output')
+    self.assertFalse(marker.exists());self.assertFalse((root/'output').exists())
+
 if __name__=='__main__':unittest.main()

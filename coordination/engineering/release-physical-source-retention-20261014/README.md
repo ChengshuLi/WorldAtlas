@@ -11,9 +11,11 @@ Both runs consumed the seven-target Đà Nẵng stage blob
 `0a9e206beeb15d7e9f597c8b0a6d7f666863c5f9`, from input commit
 `778cff2721df789706ad0f3b847f3f600b972a3d`. Complete original source metadata and
 native member inputs came from accepted `a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8`.
-`operating-config.json` contains the exact full input/runtime pins and the finite
-2 GiB process/phase requests used in the shared entry. Local runtime paths are
-observations, not a portable recipe or permission to skip fresh admission.
+`physical-config.json` contains the exact physical input pins, declared logical
+input/output/time allowances and runtime versions. The original execution receipt
+retains actual admitted runtime identities and finite 2 GiB process/phase requests.
+Environment-specific outer launch configuration stays local; runtime observations
+are not a portable recipe or permission to skip fresh admission.
 
 The optimized physical calculation executed the shared entry and Python program
 at checkpoint `0cbaae7c64` (the original program SHA is in
