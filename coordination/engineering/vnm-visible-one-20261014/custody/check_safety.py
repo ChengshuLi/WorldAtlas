@@ -34,6 +34,7 @@ def rejected(label, command, expected):
 
 before = snapshot()
 cases = [
+    ('check_foreign_neighbors.py', [python, str(code / 'check_foreign_neighbors.py'), head], 'foreign-neighbors-001'),
     ('build_handoff.py', [python, str(code / 'build_handoff.py'), head], 'source-handoff-001'),
     ('bind_current_neighbors.mjs', ['node', str(code / 'bind_current_neighbors.mjs'), head], 'vnm-current-neighbors-001'),
 ]
@@ -47,4 +48,4 @@ for label, command, occupied in cases:
         fixture.unlink()
 
 assert snapshot() == before
-print('All 4 real-entrypoint output refusals passed; original owned bytes unchanged and no publication produced.')
+print('All 6 real-entrypoint output refusals passed; original owned bytes unchanged and no publication produced.')
