@@ -1,5 +1,5 @@
 {
-  "status": "static-config-prepared-not-executed",
+  "status": "static-config-refreshed-to-accepted-vietnam-not-executed",
   "frozen_inputs": "09ac43d945203fc877d3a30104f775960e711d65",
   "api_inspected": {
     "pr": 1922,
@@ -9,16 +9,16 @@
     "sha256": "fe4f7c5f13e9c9afc952531896913d05074d1d641484dfd702888a63aa69eb63",
     "acceptance": "OPEN atread; no execution of this candidate code"
   },
-  "config": "compose-against-accepted-riau.json",
+  "config": "compose-against-accepted-vietnam.json",
   "accepted_selector": {
-    "commit": "2ec1f33cad4b02f2e9bc9e54072e65b5837257dc",
+    "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
     "path": "data/ownership-selection.json",
     "mode": "100644",
-    "git_blob_oid": "2e559a6b97f9e240b68385e5b0fb43d1355be34b",
-    "bytes": 1592,
-    "sha256": "72d78f87dc14b3f945b5df6c24a72be9a7d59ee8a3db752e88d9884f524f239f"
+    "git_blob_oid": "b2b0f7834448a8e4bd6ca128839c3b2005500ba8",
+    "bytes": 1582,
+    "sha256": "20ad24bd65f80191be477449121feed2669bf57dac3b47109e6625bcbac9cc02"
   },
-  "accepted_cumulative_cells": 54204,
+  "accepted_cumulative_cells": 56853,
   "new_authorities": [
     {
       "rule_sha256": "f48d3aa46654c536b55e6fda97ad0945f1d878c31db4a4437947ff16178378ab",
@@ -96,10 +96,18 @@
     }
   ],
   "proposed_cells": 3816,
-  "static_interval_disjointness": "Exact new intervals disjoint from eachother and accepted Riau cumulative patch; no currentbase-owner-zero claim.",
-  "conditional_cumulative_cells_on_this_base": 58020,
-  "delivery_base_rule": "Vietnam2649 goes first. Replace only selector with exact actuallyaccepted latest-main ownership-selection pin at delivery; refreshstaticdisjointness/counts then. No candidateVietnamselector orspeculativecomposition.",
+  "static_interval_disjointness": "Allactualaccepted56853intervals includingVietnam2649 are disjointfrom eachother and new220+3596. Currentbaseownerzero/conservation stillpending normalqueue.",
+  "conditional_cumulative_cells_on_this_base": 60669,
+  "delivery_base_rule": "Vietnam2649actuallyaccepted ata285; all56853acceptedintervalsdisjointfromnew3816. Awaitactualaccepted1922/currentbaseguard, compose/finalizeoncefreshadmitted; no qualificationreplay/dispatch.",
   "expected_cumulative_after_vietnam_if_only_next_change": 60669,
   "entry": "plainNode scripts/prepare-delivery-handoff.mjs compose CONFIG fresh-owned-DESTINATION; executeonlyafteractualaccepted1922 andfreshnormaladmission",
-  "finalizer": "Existing shared finalize phase after composition outputscommitted; no manualpackageassembly. Retaincombined41-subjectmanifest onfrozen09ac."
+  "finalizer": "Existing shared finalize phase after composition outputscommitted; no manualpackageassembly. Retaincombined41-subjectmanifest onfrozen09ac.",
+  "latest_refresh": {
+    "accepted_commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+    "accepted_vietnam_new_cells": 2649,
+    "verified_new_cells": 3816,
+    "all8authoritypins_unchanged": true,
+    "interval_overlap": 0,
+    "qualification_replayed": false
+  }
 }
