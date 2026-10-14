@@ -1,0 +1,321 @@
+{
+  "version": 1,
+  "kind": "exact-current-package-ownership-partition",
+  "accepted_commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+  "frozen_queue_commit": "a61b6f9e7f88b1da380e3a834f89d7509132ed71",
+  "frozen_ownership_binding_sha256": "b952192475435c8fbc74a84627994aff4f4e073c36c479d369554fc75251bc89",
+  "native_base_selection_identical": true,
+  "frozen_package_intervals_reproduced_with_retained_extractor": true,
+  "current_patch_cells": 16378,
+  "current_patch": {
+    "bytes": 168907,
+    "commit": "cb8d960bdeaf55f4dce60ee2dd61172a4263bfca",
+    "git_blob_oid": "4d420429491ed56cfa41571a8f204bf24a21471d",
+    "mode": "100644",
+    "path": "coordination/engineering/myeik-native-followup-20261014/patch.json",
+    "sha256": "2063448ed664eac98cfdb48eea1529b5d62df0664be060890336505289c02761"
+  },
+  "current_ledger": {
+    "bytes": 1420024,
+    "commit": "cb8d960bdeaf55f4dce60ee2dd61172a4263bfca",
+    "git_blob_oid": "f3dafe0bd166f6fc2ad7a242821abcd988f5e30e",
+    "mode": "100644",
+    "path": "coordination/engineering/myeik-native-followup-20261014/ledger.json",
+    "sha256": "5469ce347ba71779f48d74e724ed83a38c2d92a9e97bc81fb8f04c78aea37166"
+  },
+  "current_runtime_envelope": {
+    "bytes": 1381,
+    "commit": "c3ce846830bfd1629c8f33061041420e29f94196",
+    "git_blob_oid": "89d63fc58fd65ff6c149999c91f5995c6a1b24c6",
+    "mode": "100644",
+    "path": "coordination/engineering/myeik-native-followup-20261014/runtime-envelope.json",
+    "sha256": "ef3e0ad4bc2a2cb475a1d40572bafea760175d85a2bb5740d26d46ee9479dadc"
+  },
+  "current_owner_roster": {
+    "bytes": 2663523,
+    "commit": "7e423077552651d6ec1d6bf6b879c34e956f985a",
+    "decoded_bytes": 11096191,
+    "decoded_sha256": "a8086008b7a072dd86483720a2a166785229753422769dbbe0749497d870f428",
+    "git_blob_oid": "9c44513df64995d417dd3832ae604c703e84a506",
+    "mode": "100644",
+    "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/owners.json.gz",
+    "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f"
+  },
+  "results": [
+    {
+      "package_id": "gb-VNM-ADM2--repair-evaluation",
+      "frozen_cells": 15645,
+      "frozen_segments": 6821,
+      "already_completed_cells": 175,
+      "already_completed_segments": 88,
+      "remaining_cells": 15470,
+      "remaining_segments": 6733,
+      "foreign_overlap_cells": 0,
+      "completed_owner_counts": {
+        "gb:VNM:ADM2:81297802B85934029741785": 175
+      },
+      "partition_disjoint_exhaustive": true
+    },
+    {
+      "package_id": "gb-VNM-ADM2--physical-interpretation",
+      "frozen_cells": 24880,
+      "frozen_segments": 9947,
+      "already_completed_cells": 0,
+      "already_completed_segments": 0,
+      "remaining_cells": 24880,
+      "remaining_segments": 9947,
+      "foreign_overlap_cells": 0,
+      "completed_owner_counts": {},
+      "partition_disjoint_exhaustive": true
+    }
+  ],
+  "outputs": [
+    {
+      "path": "repair-evaluation/already-completed.json.gz",
+      "bytes": 549,
+      "sha256": "aaa47d4627ed1f9568354063b7e8f1a35f7cbe950112a844b8637ca1dbbc9890",
+      "decoded_bytes": 4482,
+      "decoded_sha256": "ac0b90b6344c7430fac0666009cc2f1910ce0fa6300a005e9ead154573db8873"
+    },
+    {
+      "path": "repair-evaluation/remaining.json.gz",
+      "bytes": 40675,
+      "sha256": "d6c1527e7840fc810f3420eed4706939891000d5ebafc6c6508fd248cb398199",
+      "decoded_bytes": 332326,
+      "decoded_sha256": "f20854b3275b550f8bd15191980fde6cfb41579e811d7f7f7d618f70dc6cf276"
+    },
+    {
+      "path": "physical-interpretation/already-completed.json.gz",
+      "bytes": 23,
+      "sha256": "7e9822432ddbc7c2682c87809c75babb37f3a1f4a6e7f6ab1302e1f629e646e2",
+      "decoded_bytes": 3,
+      "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "path": "physical-interpretation/remaining.json.gz",
+      "bytes": 55982,
+      "sha256": "7010e1add5133d3ec4c2eae2d37968d3bcef41e9cc4f08883288cf56ffdd135d",
+      "decoded_bytes": 580265,
+      "decoded_sha256": "c341cb49fc2a5ca3cd14297bd8ac55335969d902b8d8e02187de67892f2baa11"
+    }
+  ],
+  "frozen_patch": {
+    "bytes": 16380,
+    "commit": "9f9c829475d14da1488fe4cc7ec76720e194fd8c",
+    "git_blob_oid": "5d9cbebb7de2a856bae2aa5aff2bda17e0325315",
+    "mode": "100644",
+    "path": "coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/assembly-001/patch.json",
+    "sha256": "b44fc535b704fd88ccad45b85fbad73849b9f54c12bd3a83a158915b072414ac"
+  },
+  "frozen_patch_monotonic_conservation": "pending-missing-local-blob",
+  "limitations": [
+    "Exact numerical partitions only; no source or territorial qualification.",
+    "Current accepted selection is bound to complete retained patch/ledger/envelope and unchanged native base.",
+    "Full frozen-patch preservation proof requires the queued frozen patch body, currently absent locally."
+  ],
+  "input_inventory": [
+    {
+      "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/ownership-binding.json",
+      "mode": "100644",
+      "git_blob_oid": "b9d81d18aab6d03dc701ff1337b35e53be81d0af",
+      "bytes": 3048,
+      "sha256": "b952192475435c8fbc74a84627994aff4f4e073c36c479d369554fc75251bc89",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+      "path": "data/ownership-selection.json",
+      "mode": "100644",
+      "git_blob_oid": "cce8bbba4455254ac977f834344b9b6b7d6b7ca8",
+      "bytes": 1561,
+      "sha256": "1e75a3224cbfe25933c1828ad2b26176b628c31f60e02b4908711b2bddbc1cc0",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+      "path": "coordination/engineering/myeik-native-followup-20261014/selection-sidecar.json",
+      "mode": "100644",
+      "git_blob_oid": "103027bbcfffa2068a4dd2b4c4e24d9fedbfa1b5",
+      "bytes": 3359,
+      "sha256": "82ff2acc849ac1029060cbca336cdb7048216e8ff077df45e9eaf62196f7864b",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+      "path": "coordination/engineering/myeik-native-followup-20261014/patch.json",
+      "mode": "100644",
+      "git_blob_oid": "4d420429491ed56cfa41571a8f204bf24a21471d",
+      "bytes": 168907,
+      "sha256": "2063448ed664eac98cfdb48eea1529b5d62df0664be060890336505289c02761",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+      "path": "coordination/engineering/myeik-native-followup-20261014/ledger.json",
+      "mode": "100644",
+      "git_blob_oid": "f3dafe0bd166f6fc2ad7a242821abcd988f5e30e",
+      "bytes": 1420024,
+      "sha256": "5469ce347ba71779f48d74e724ed83a38c2d92a9e97bc81fb8f04c78aea37166",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+      "path": "coordination/engineering/myeik-native-followup-20261014/authority-registry.json",
+      "mode": "100644",
+      "git_blob_oid": "b156296bb0cb3d163137db331bd7a96fe9c0e6e8",
+      "bytes": 40781,
+      "sha256": "cef4e70eb31df11f78b98e556416028dcbff3803c88e8fcd90bcacde621f2808",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+      "path": "coordination/engineering/myeik-native-followup-20261014/runtime-envelope.json",
+      "mode": "100644",
+      "git_blob_oid": "89d63fc58fd65ff6c149999c91f5995c6a1b24c6",
+      "bytes": 1381,
+      "sha256": "ef3e0ad4bc2a2cb475a1d40572bafea760175d85a2bb5740d26d46ee9479dadc",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/base-native-manifest.json",
+      "mode": "100644",
+      "git_blob_oid": "31d970d0fe2bf8c899f020aad09a3826ea451790",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/consumption-certificate.json",
+      "mode": "100644",
+      "git_blob_oid": "720841d4f11d5ba9a2413ebccdcf4978ed9c54d4",
+      "bytes": 68158,
+      "sha256": "26b505e3131a2513badc45d1552bcf603c24c565bdfb21b0f623fe4e6c7d4070",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+      "path": "coordination/engineering/additive-native-activation-20261009/independent-native-consumption-wrapper-self-pin-review.json",
+      "mode": "100644",
+      "git_blob_oid": "4fc7487cd353517bda51dc9d96ca8a3f916b5107",
+      "bytes": 7379,
+      "sha256": "87ab56e1354dd8a8fda532bfa008436abd35c6c506f0e0685eaa2f2f07f59a8a",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography-bank.json",
+      "mode": "100644",
+      "git_blob_oid": "fd6d98e7cc62c97a21f80c122f43a528cfba5bdd",
+      "bytes": 14656,
+      "sha256": "3750f72a48bb9fd498ca129e20e299904239bfe1b4191919fbc89b636234c776",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/owners.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "9c44513df64995d417dd3832ae604c703e84a506",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+      "mode": "100644",
+      "git_blob_oid": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+      "bytes": 1754890,
+      "sha256": "78007430b6f9faedb188ef0619b7ff0a7a2cc7fff2ec9f1c41ee69936ec4ebd8",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "e6e380ec13cd4bcc1d24399a76bfa85ca5805b26",
+      "bytes": 1844315,
+      "sha256": "87f2d47e104b3af640351e747d8300d0068a1be23caab9e80558c3f8914eb4aa",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-raster-summary.json",
+      "mode": "100644",
+      "git_blob_oid": "e17b10b5643c1f6b0c492d02edc70a0d7afc5ee3",
+      "bytes": 110705,
+      "sha256": "2eec390eb9f9b6595bd0f3c7059b75f271dba013fbad0b3ac0c404114d48eea9",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-census-summary.json",
+      "mode": "100644",
+      "git_blob_oid": "fa1e4d101edb54b02bd1ff42a240f2f80ac65832",
+      "bytes": 120963,
+      "sha256": "8a4a6792237259328e56e38d91d0cb22f977de4a35caf4781f0d605e3db1653d",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-unassigned-summary.json",
+      "mode": "100644",
+      "git_blob_oid": "0c934cdaf4b007a741e66d4a080890154bdae53c",
+      "bytes": 154672,
+      "sha256": "a82c56c1d92ff52c0b0e52c9bf329905a05bace4b6a27c12771509d419888501",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/lineage.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "4ef0728e74e11e069bd7bb11e287c6fbb59946fa",
+      "bytes": 4404456,
+      "sha256": "bacfc99714f832aa4b5719b9fb4ae9837080b948f10df9e9be2b150b281e20d4",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/retained-source-catalogue.json",
+      "mode": "100644",
+      "git_blob_oid": "09afab19371f0814da61e79e5f310c5fb2405b6d",
+      "bytes": 403376,
+      "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/normalized-source-seams.json",
+      "mode": "100644",
+      "git_blob_oid": "e22b6270aaf9c27dd3d21381d757b6c34ab81d7b",
+      "bytes": 156199,
+      "sha256": "0e74bb81ae45ae9913ee5d43afd303fa33a4b7da8b06e4e6f1cd4419ecd264b4",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-batch-intervals.mjs",
+      "mode": "100644",
+      "git_blob_oid": "c5ba9331deb93eed40662d1dc579cdaedea55c46",
+      "bytes": 6840,
+      "sha256": "2589022806876f7faa645293fd9a0ea4b22d0c35a5a6a29fbdc30f5b730f5689",
+      "whole_body_consumed": true
+    }
+  ],
+  "input_sha256": {
+    "source-feature-roster.json": "7fa99cbf064121e0130b66758c212ae22b2a7be5649f2e250e9cda89a9bd595e",
+    "source-raster-summary.json": "2eec390eb9f9b6595bd0f3c7059b75f271dba013fbad0b3ac0c404114d48eea9",
+    "source-census-summary.json": "8a4a6792237259328e56e38d91d0cb22f977de4a35caf4781f0d605e3db1653d",
+    "physical-unassigned-summary.json": "a82c56c1d92ff52c0b0e52c9bf329905a05bace4b6a27c12771509d419888501",
+    "lineage.json": "607372a1af11bebf58c24aa15bdfae1999fafc532bb65ab7d822c0c20b57a435",
+    "ownership-binding.json": "b952192475435c8fbc74a84627994aff4f4e073c36c479d369554fc75251bc89",
+    "retained-source-catalogue.json": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+    "normalized-source-seams.json": "0e74bb81ae45ae9913ee5d43afd303fa33a4b7da8b06e4e6f1cd4419ecd264b4"
+  },
+  "elapsed_seconds": 4.144398625,
+  "peak_rss_bytes": 487882752,
+  "reader_complete_phase_bytes": 194418804,
+  "command": "GIT_NO_LAZY_FETCH=1 NODE24 --input-type=module - (inline immutable-reader, nativeBaseSelection, retained segments extractor, exact interval partition)"
+}

@@ -1,0 +1,211 @@
+{
+  "status": "composed-qualified-authority-and-cumulative-metadata",
+  "execution_commit": "9bcf07cb114205574f226c1cceee1e7d5bb9a653",
+  "elapsed_seconds": 2.0708545839999997,
+  "peak_rss_bytes": 339034112,
+  "allowance": {
+    "phaseBytes": 957349888,
+    "rssBytes": 957349888
+  },
+  "phase_charged_bytes": 328253095,
+  "prior_cells": 16378,
+  "proposed_added_cells": 9482,
+  "cumulative_cells": 25860,
+  "new_targets": 76,
+  "conservation": {
+    "preserved_components": 100,
+    "preserved_authorities": 42,
+    "appended_authorities": 1,
+    "limitations": [
+      "Registry and source bodies require independent committed-selector authentication; this comparison approves no appended row."
+    ]
+  },
+  "files": [
+    {
+      "path": "authority-registry.json",
+      "bytes": 41663,
+      "sha256": "3c532a1195060879fe98db926946e4b9d992dd963925b7e22525cfcb12de4f77"
+    },
+    {
+      "path": "ledger.json",
+      "bytes": 1699463,
+      "sha256": "f6dcc41d64c0e4fc5cee3faaa1f85cac71ad091137629f4681220448468c9966"
+    },
+    {
+      "path": "patch.json",
+      "bytes": 285704,
+      "sha256": "3827325f9f8a02396ba61de27c1d45062f8a3d241562c54a0883e3495c94b57f"
+    },
+    {
+      "path": "runtime-envelope.json",
+      "bytes": 1380,
+      "sha256": "55368d74307e2beeb83ca989682e367f6192cfa537faa730eded8efb0f9af046"
+    }
+  ],
+  "input_inventory": [
+    {
+      "commit": "9bcf07cb114205574f226c1cceee1e7d5bb9a653",
+      "path": "coordination/engineering/myeik-native-followup-20261014/authority-registry.json",
+      "mode": "100644",
+      "git_blob_oid": "b156296bb0cb3d163137db331bd7a96fe9c0e6e8",
+      "bytes": 40781,
+      "sha256": "cef4e70eb31df11f78b98e556416028dcbff3803c88e8fcd90bcacde621f2808",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "9bcf07cb114205574f226c1cceee1e7d5bb9a653",
+      "path": "coordination/engineering/myeik-native-followup-20261014/ledger.json",
+      "mode": "100644",
+      "git_blob_oid": "f3dafe0bd166f6fc2ad7a242821abcd988f5e30e",
+      "bytes": 1420024,
+      "sha256": "5469ce347ba71779f48d74e724ed83a38c2d92a9e97bc81fb8f04c78aea37166",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "9bcf07cb114205574f226c1cceee1e7d5bb9a653",
+      "path": "coordination/engineering/myeik-native-followup-20261014/patch.json",
+      "mode": "100644",
+      "git_blob_oid": "4d420429491ed56cfa41571a8f204bf24a21471d",
+      "bytes": 168907,
+      "sha256": "2063448ed664eac98cfdb48eea1529b5d62df0664be060890336505289c02761",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "9bcf07cb114205574f226c1cceee1e7d5bb9a653",
+      "path": "coordination/engineering/myeik-native-followup-20261014/runtime-envelope.json",
+      "mode": "100644",
+      "git_blob_oid": "89d63fc58fd65ff6c149999c91f5995c6a1b24c6",
+      "bytes": 1381,
+      "sha256": "ef3e0ad4bc2a2cb475a1d40572bafea760175d85a2bb5740d26d46ee9479dadc",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "9bcf07cb114205574f226c1cceee1e7d5bb9a653",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/evidence/native-constructor/constructed-authority.json",
+      "mode": "100644",
+      "git_blob_oid": "e6c63b930b7ffe6e8f7f6782cfd6580759eaaf92",
+      "bytes": 267031,
+      "sha256": "199439677c96535c04ec508840d03481bf16a69ae8693462c44192b16a7a3af1",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "9bcf07cb114205574f226c1cceee1e7d5bb9a653",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/candidate-native-patch.json",
+      "mode": "100644",
+      "git_blob_oid": "6757e4644833eb532fd160179ebe726003e202df",
+      "bytes": 129569,
+      "sha256": "d0e06fd2290d68f4017a43f2b5f7318f728d5e9681e427bfb8d1b1e3bff57a11",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "9bcf07cb114205574f226c1cceee1e7d5bb9a653",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/original-rule-preimage.json",
+      "mode": "100644",
+      "git_blob_oid": "c2d762998abd44318e1eed6562e0b5b6547307cd",
+      "bytes": 700,
+      "sha256": "86278b842d14da92998adca4495b3b3bf898732bba02edbfce17f0d3ca476039",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "9bcf07cb114205574f226c1cceee1e7d5bb9a653",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/authority-binding.json",
+      "mode": "100644",
+      "git_blob_oid": "3e1a9e088a7902d1469703cd083de19e5f6bf6cd",
+      "bytes": 703,
+      "sha256": "8eb86ad597a26609ad7a7a4b41a3b8701731f078674e9ade0154f4541c14a5a7",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "a9f99f3038b4c0478924f135e161c12a2539d58f",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/source-evidence.json",
+      "mode": "100644",
+      "git_blob_oid": "910e127702895e7be0f94d242a85534b23aca4a0",
+      "bytes": 105970,
+      "sha256": "6bb4a7180e6238bc326bc980e8978100ea98a6d92ed6ca15cbdc0bc836b5f691",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "a9f99f3038b4c0478924f135e161c12a2539d58f",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/candidate-native-patch.json",
+      "mode": "100644",
+      "git_blob_oid": "6757e4644833eb532fd160179ebe726003e202df",
+      "bytes": 129569,
+      "sha256": "d0e06fd2290d68f4017a43f2b5f7318f728d5e9681e427bfb8d1b1e3bff57a11",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "9bcf07cb114205574f226c1cceee1e7d5bb9a653",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+      "mode": "100644",
+      "git_blob_oid": "09afab19371f0814da61e79e5f310c5fb2405b6d",
+      "bytes": 403376
+    },
+    {
+      "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+      "mode": "100644",
+      "git_blob_oid": "09afab19371f0814da61e79e5f310c5fb2405b6d",
+      "bytes": 403376,
+      "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "df615784a8643883b5aa62742d394a40dd0847f0",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/evidence/original-stage-inputs.json",
+      "mode": "100644",
+      "git_blob_oid": "47a651661fbd4a134b3407746f526954b5ef4e95",
+      "bytes": 1402073,
+      "sha256": "9b085a5dba73a4aaf84f52d5c5bbd763a09525483e2c4f20d9825d79dfe1a5bd",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+      "path": "coordination/engineering/source-target-native-delivery-20261014/evidence/physical-reproduction.py",
+      "mode": "100644",
+      "git_blob_oid": "73e005238c929a901185abb8321c419e7cd9f688",
+      "bytes": 5450,
+      "sha256": "05af43d7d7722e8d7bb201f5876a43d9c7f9a2d0f4ea39e467229351a35c9bc3",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+      "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+      "mode": "100644",
+      "git_blob_oid": "de6905e162dc031b1b93248fae91190c39c4ad53",
+      "bytes": 1851757,
+      "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "df615784a8643883b5aa62742d394a40dd0847f0",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/evidence/physical-support.json",
+      "mode": "100644",
+      "git_blob_oid": "6df5d25bb958becac6756ac207bde8831a03da93",
+      "bytes": 5163680,
+      "sha256": "27dab6a4e81455bcab9143bb9cfa6bb13d2505ae9b6dfbb20526a3254989e33b",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "7e423077552651d6ec1d6bf6b879c34e956f985a",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/owners.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "9c44513df64995d417dd3832ae604c703e84a506",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-VNM-ADM2-000.bin.gz",
+      "mode": "100644",
+      "git_blob_oid": "d6351672b369b2e6919b10b7c959b3b709a3040e",
+      "bytes": 1624579,
+      "sha256": "8fa769599000ab536b18b4a9d18c71fe0fecbe134d4443e36e6b2797b41273a8",
+      "whole_body_consumed": true
+    }
+  ],
+  "limits": [
+    "Metadata composition and registry qualification only; actual base/current owner-zero consumption and selected readback still pending.",
+    "No live aggregate process-tree enforcement or cleanup guarantee."
+  ]
+}
