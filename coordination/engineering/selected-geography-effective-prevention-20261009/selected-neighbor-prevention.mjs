@@ -542,7 +542,9 @@ function authorityRegistry(registry) {
 // patch route. It has no invented original-gap inventory or addition polygon.
 export function qualifySourceTargetNativeAuthority(reader, preimage, binding) {
  demand(preimage?.version===1&&preimage.kind==='source-target-native-rule-v1'
+  &&Object.keys(preimage).sort().join(',')==='kind,native_patch,source_evidence,version'
   &&binding?.version===1&&binding.kind==='source-target-native-custody-v1'
+  &&Object.keys(binding).sort().join(',')==='kind,native_patch,source_evidence,version'
   &&same(preimage.source_evidence,binding.source_evidence)&&same(preimage.native_patch,binding.native_patch),
  'Source-target authority inputs differ');
  const read=p=>{
@@ -558,13 +560,17 @@ export function qualifySourceTargetNativeAuthority(reader, preimage, binding) {
  };
  const evidence=JSON.parse(read(binding.source_evidence)), proposed=JSON.parse(read(binding.native_patch));
  demand(evidence?.version===1&&evidence.kind==='source-target-native-evidence-v1'
-  &&Array.isArray(evidence.targets)&&evidence.targets.length>0&&Array.isArray(proposed.rows),
+  &&Array.isArray(evidence.targets)&&evidence.targets.length>0&&Array.isArray(proposed.rows)
+  &&Object.keys(proposed).join(',')==='rows',
  'Incomplete source-target evidence');
  // The catalogue is the retained consumed-byte inventory, not an author supplied
  // geometry subset. Each complete original product is rejoined below.
  demand(evidence.catalogue.path==='coordination/engineering/original-geography-source-corpus-20261006/catalogue.json',
  'Require retained original source catalogue');
+ const currentCatalogue=reader.descriptor(evidence.catalogue.path);
+ demand(currentCatalogue.git_blob_oid===evidence.catalogue.git_blob_oid,'Source catalogue differs from the selected retained corpus');
  const catalogue=JSON.parse(read(evidence.catalogue));
+ const physicalInputs=JSON.parse(read(evidence.physical_input));read(evidence.physical_reproduction);
  demand(evidence.native_latitudes.sha256===evidence.native_contract.native_latitudes.sha256
   &&evidence.native_latitudes.decoded_sha256===evidence.native_contract.native_latitudes.decoded_sha256,
  'Native source-target latitude contract differs');
@@ -573,6 +579,8 @@ export function qualifySourceTargetNativeAuthority(reader, preimage, binding) {
  demand(evidence.native_contract.size===262166&&latitudeRaw.length===262166*8,
  'Unsupported source-target native lattice');
  const latitudes=Float64Array.from({length:262166},(_,i)=>latitudeRaw.readDoubleLE(i*8));
+ demand(evidence.owner_roster.sha256===evidence.native_contract.original_assets.bounds.sha256,
+ 'Source-target owner roster differs from original native identity asset');
  const roster=JSON.parse(read(evidence.owner_roster));
  demand(Array.isArray(roster),'Missing original owner roster');
  const owners=new Map(roster.map((owner,i)=>[owner.id,owner.index??i+1]));
@@ -618,9 +626,14 @@ export function qualifySourceTargetNativeAuthority(reader, preimage, binding) {
   const product=JSON.parse(raw);demand(product.features?.length===record.feature_count,'Incomplete original source feature roster');
   const selected=evidence.targets.filter(target=>target.source_family===family.source_id);
   demand(selected.length>0,'Unused source family');
-  const bounds=selected.map(target=>coordinateBounds(target.coverage_geometry));
+  for(const target of selected){const original=product.features.find(feature=>family.source_id+':'+feature.properties.shapeID===target.id);
+   const measured=physicalInputs.find(input=>input.target===target.id);
+   demand(original&&measured&&same(measured.consumed.geometry,original.geometry)&&same(measured.selected.geometry,target.base_geometry),
+    'Physical source query or selected target differs from measured whole inputs');
+  }
+  const bounds=selected.flatMap(target=>coordinateBounds(target.coverage_geometry));
   const intersects=(a,b)=>a[0]<=b[2]&&b[0]<=a[2]&&a[1]<=b[3]&&b[1]<=a[3];
-  const sourceFeatures=product.features.filter(feature=>bounds.some(box=>intersects(coordinateBounds(feature.geometry),box)))
+  const sourceFeatures=product.features.filter(feature=>coordinateBounds(feature.geometry).some(part=>bounds.some(box=>intersects(part,box))))
    .map(feature=>{const id=family.source_id+':'+feature.properties.shapeID;
     demand(owners.has(id),'Original source requires an explicit reconciled target mapping');
     return {id,pixelIndex:owners.get(id),geometry:feature.geometry};});
@@ -1332,11 +1345,11 @@ export function readSelectedAdditive(snapshot) {
   for(const run of row.runs){demand(Array.isArray(run)&&run.length===3&&run.every(Number.isSafeInteger)&&run[0]>=end&&run[1]>run[0]&&run[1]<=manifest.size&&selectedOwners.has(run[2]),'Conflicting/foreign native delta interval');end=run[1];total+=run[1]-run[0];}
  }
  const originalPatches=proofs.flatMap(proof=>proof.native_proof.native_patches);
+ const currentContract=Object.fromEntries(['size','coordinateBits','method','native_latitudes','hierarchy_sha256','original_assets'].map(k=>[k,manifest[k]]));
+ demand(proofs.every(p=>same(p.native_proof.native_contract,currentContract)),'Selected additions change native lattice/method/owner-parent contract');
  let rebind=null;
  if(Object.hasOwn(named.ledger,'current_rebind')){
   demand(named.ledger.version===2&&envelope.version===2,'Current rebind is an explicit v2-only extension');
-  const currentContract=Object.fromEntries(['size','coordinateBits','method','native_latitudes','hierarchy_sha256','original_assets'].map(k=>[k,manifest[k]]));
-  demand(proofs.every(p=>same(p.native_proof.native_contract,currentContract)),'Current rebind changes original native lattice/method/owner-parent contract');
   // Complete original scope/pointset/contract checks above have finished.
   // Retain only native patches/contracts and custody before current acquisition.
   expectedScope.clear();
