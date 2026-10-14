@@ -584,12 +584,70 @@ export function qualifySourceTargetNativeAuthority(reader, preimage, binding) {
  'Source-target owner roster differs from original native identity asset');
  const roster=JSON.parse(read(evidence.owner_roster));
  demand(Array.isArray(roster),'Missing original owner roster');
- const owners=new Map(roster.map((owner,i)=>[owner.id,owner.index??i+1]));
- const targets=new Map();
+ const owners=new Map();
+ for(const [i,owner]of roster.entries()){
+  demand(typeof owner.id==='string'&&owner.id&&!owners.has(owner.id)&&(owner.index??i+1)===i+1,
+   'Duplicate or noncanonical original owner roster');owners.set(owner.id,i+1);
+ }
+ // Optional reconciliation uses existing complete aggregation lineage, not an
+ // authored source-to-owner guess. Canonical parts retain the accepted members
+ // and base geometry; the complete lineage exposes omitted competing owners.
+ const memberOwners=new Map(), canonicalOwners=new Map();
+ if(evidence.source_membership!==undefined){
+  const membership=evidence.source_membership;
+  demand(membership&&Object.keys(membership).sort().join(',')==='index,lineage,parts'
+   &&Array.isArray(membership.parts)&&membership.parts.length>0,'Incomplete accepted source membership');
+  const current=p=>{
+   pinCheck(p);const actual=reader.descriptor(p.path);
+   demand(actual.mode===p.mode&&actual.git_blob_oid===p.git_blob_oid&&actual.bytes===p.bytes,
+    'Source membership differs from selected canonical bytes');return JSON.parse(read(p));
+  };
+  demand(membership.lineage.path==='data/semantic-report.json'&&membership.index.path==='data/world-index.json',
+   'Require complete accepted aggregation lineage and world index');
+  const lineage=current(membership.lineage),index=current(membership.index);
+  demand(Array.isArray(lineage.changes)&&Array.isArray(index.parts)&&index.parts.length>0
+   &&new Set(index.parts).size===index.parts.length,'Incomplete accepted membership inventory');
+  for(const change of lineage.changes)if(Array.isArray(change.replaces))for(const member of change.replaces){
+   const changes=memberOwners.get(member)??[];changes.push(change);memberOwners.set(member,changes);
+  }
+  const paths=new Set();
+  for(const pin of membership.parts){
+   demand(index.parts.includes(pin.path.slice(5))&&pin.path.startsWith('data/')&&!paths.has(pin.path),
+    'Foreign or duplicate accepted membership part');paths.add(pin.path);
+   const collection=current(pin);
+   demand(collection.type==='FeatureCollection'&&Array.isArray(collection.features),'Incomplete accepted membership part');
+   for(const feature of collection.features){
+    demand(owners.has(feature.id)&&!canonicalOwners.has(feature.id),'Foreign or duplicate accepted membership owner');
+    canonicalOwners.set(feature.id,feature);
+   }
+  }
+ }
+ const reconcile=(id,originals)=>{
+  const changes=memberOwners.get(id)??[],direct=owners.get(id);
+  if(direct){
+   demand(changes.length===0||changes.length===1&&changes[0].id===id,
+    'Source member conflicts with a direct native owner');
+   if(changes.length===0||changes[0].replaces.length===1)return {id,pixelIndex:direct};
+  }
+  demand(changes.length===1,'Missing or ambiguous accepted source membership');
+  const change=changes[0],accepted=canonicalOwners.get(change.id),members=accepted?.properties?.metadata?.source_member_ids;
+  demand(accepted&&owners.has(change.id)&&Array.isArray(members)&&members.length>0
+   &&members.every(member=>typeof member==='string'&&member)&&new Set(members).size===members.length
+   &&same([...members].sort(),[...change.replaces].sort()),'Incomplete accepted aggregation member set');
+  for(const member of members){
+   const reverse=memberOwners.get(member);
+   demand(originals.has(member)&&(!owners.has(member)||member===change.id)&&reverse?.length===1&&reverse[0]===change,
+    'Missing or conflicting complete source aggregation member');
+  }
+  return {id:change.id,pixelIndex:owners.get(change.id),feature:accepted};
+ };
+ const targets=new Map(), resolvedTargets=new Map();
  for(const target of evidence.targets){
-  demand(!targets.has(target.id)&&owners.get(target.id)===target.pixelIndex&&hash(target.source_receipt_sha256),
+  const ownerId=target.target_id??target.id;
+  demand(typeof target.id==='string'&&target.id&&!targets.has(target.id)&&owners.get(ownerId)===target.pixelIndex&&hash(target.source_receipt_sha256),
    'Foreign or duplicate source-target identity');
-  const support=physical.results.find(result=>result.target===target.id);
+  const supports=physical.results.filter(result=>result.target===target.id);
+  demand(supports.length===1,'Missing or duplicate physical source member');const support=supports[0];
   demand(support&&Array.isArray(support.issues)&&support.issues.length===0
    &&target.source_receipt_sha256===evidence.physical_evidence.sha256, 'Missing qualified physical source interpretation');
   demand(Array.isArray(target.coverage_classes)&&target.coverage_classes.length>0
@@ -600,6 +658,10 @@ export function qualifySourceTargetNativeAuthority(reader, preimage, binding) {
   target.coverage_geometry={type:'MultiPolygon',coordinates:polygons};
   coordinateBounds(target.base_geometry);coordinateBounds(target.coverage_geometry);
   targets.set(target.id,target);
+  const prior=resolvedTargets.get(ownerId);
+  demand(!prior||prior.pixelIndex===target.pixelIndex&&prior.source_family===target.source_family
+   &&same(prior.base_geometry,target.base_geometry),'Conflicting accepted target base or source family');
+  if(!prior)resolvedTargets.set(ownerId,{...target,id:ownerId});
  }
  const rowsByOwner=new Map();let previous=-1;
  for(const row of proposed.rows){
@@ -613,8 +675,9 @@ export function qualifySourceTargetNativeAuthority(reader, preimage, binding) {
    if(item?.y!==row.y){item={y:row.y,runs:[]};list.push(item);}item.runs.push(run);rowsByOwner.set(run[2],list);
   }
  }
- const checked=new Set();
+ const checked=new Set(),families=new Set();
  for(const family of evidence.families){
+  demand(typeof family.source_id==='string'&&!families.has(family.source_id),'Duplicate source family');families.add(family.source_id);
   const record=catalogue.products.find(product=>product.key===family.source_id);
   demand(record&&family.parts.length===record.parts.length,'Missing complete original source family');
   const pieces=family.parts.map((pin,i)=>{
@@ -625,21 +688,31 @@ export function qualifySourceTargetNativeAuthority(reader, preimage, binding) {
   const raw=Buffer.concat(pieces);demand(raw.length===record.original_bytes&&sha(raw)===record.original_sha256,
    'Whole original consumed source product differs');
   const product=JSON.parse(raw);demand(product.features?.length===record.feature_count,'Incomplete original source feature roster');
+  const originals=new Map();
+  for(const feature of product.features){
+   const sourceId=feature.properties?.shapeID;
+   demand(typeof sourceId==='string'&&sourceId&&!originals.has(family.source_id+':'+sourceId),
+    'Duplicate or missing original source feature identity');originals.set(family.source_id+':'+sourceId,feature);
+  }
   const selected=evidence.targets.filter(target=>target.source_family===family.source_id);
   demand(selected.length>0,'Unused source family');
-  for(const target of selected){const original=product.features.find(feature=>family.source_id+':'+feature.properties.shapeID===target.id);
-   const measured=physicalInputs.find(input=>input.target===target.id);
-   demand(original&&measured&&same(measured.consumed.geometry,original.geometry)&&same(measured.selected.geometry,target.base_geometry),
+  for(const target of selected){const original=originals.get(target.id),owner=reconcile(target.id,originals);
+   const measured=physicalInputs.filter(input=>input.target===target.id);
+   demand(owner.id===(target.target_id??target.id)&&owner.pixelIndex===target.pixelIndex,
+    'Source member differs from accepted target mapping');
+   demand(!owner.feature||same(owner.feature.geometry,target.base_geometry),'Accepted aggregate base geometry differs');
+   demand(original&&measured.length===1&&same(measured[0].consumed.geometry,original.geometry)
+    &&measured[0].selected.id===owner.id&&same(measured[0].selected.geometry,target.base_geometry),
     'Physical source query or selected target differs from measured whole inputs');
   }
   const bounds=selected.flatMap(target=>coordinateBounds(target.coverage_geometry));
   const intersects=(a,b)=>a[0]<=b[2]&&b[0]<=a[2]&&a[1]<=b[3]&&b[1]<=a[3];
   const sourceFeatures=product.features.filter(feature=>coordinateBounds(feature.geometry).some(part=>bounds.some(box=>intersects(part,box))))
    .map(feature=>{const id=family.source_id+':'+feature.properties.shapeID;
-    demand(owners.has(id),'Original source requires an explicit reconciled target mapping');
-    return {id,pixelIndex:owners.get(id),geometry:feature.geometry};});
-  const coverageFeatures=selected.map(target=>({id:target.id,pixelIndex:target.pixelIndex,geometry:target.coverage_geometry}));
-  const exclusions=selected.flatMap(target=>(target.territorial_exclusions??[]).map(geometry=>({id:target.id,pixelIndex:target.pixelIndex,geometry})));
+    const owner=reconcile(id,originals);
+    return {id,target_id:owner.id,pixelIndex:owner.pixelIndex,geometry:feature.geometry};});
+  const coverageFeatures=selected.map(target=>({id:target.target_id??target.id,source_id:target.id,pixelIndex:target.pixelIndex,geometry:target.coverage_geometry}));
+  const exclusions=selected.flatMap(target=>(target.territorial_exclusions??[]).map(geometry=>({id:target.target_id??target.id,pixelIndex:target.pixelIndex,geometry})));
   const selectedOwners=new Set(selected.map(target=>target.pixelIndex)), blocks=new Map();
   for(const row of proposed.rows)if(row.runs.some(run=>selectedOwners.has(run[2]))){
    const block=Math.floor(row.y/4096);const list=blocks.get(block)??[];list.push(row);blocks.set(block,list);
@@ -649,7 +722,7 @@ export function qualifySourceTargetNativeAuthority(reader, preimage, binding) {
    // Empty rows here derive the permitted source/coverage domain, not a claim
    // about actual ownership. Actual current owner zero is enforced separately
    // by selectedAdditiveRows and the emitted native patch application.
-   const allowed=deriveSourceTargetNativeDelta({targets:selected.map(({id,pixelIndex})=>({id,pixelIndex})),
+   const allowed=deriveSourceTargetNativeDelta({targets:[...resolvedTargets.values()].filter(target=>target.source_family===family.source_id).map(({id,pixelIndex})=>({id,pixelIndex})),
     sourceFeatures,coverageFeatures,territorialExclusions:exclusions,size:262166,latitudes,rowStart,rowEnd,
     ownerRows:Array.from({length:rowEnd-rowStart},(_,i)=>({y:rowStart+i,complete_owner_intervals:[]}))});
    const allowedRows=new Map(allowed.rows.map(row=>[row.y,row.runs]));
@@ -660,7 +733,7 @@ export function qualifySourceTargetNativeAuthority(reader, preimage, binding) {
   }
  }
  demand(checked.size===proposed.rows.reduce((n,row)=>n+row.runs.length,0),'Unqualified proposed native intervals');
- const ledgerRows=evidence.targets.map(target=>{
+ const ledgerRows=[...resolvedTargets.values()].map(target=>{
   const native_rows=rowsByOwner.get(target.pixelIndex)??[];demand(native_rows.length>0,'Zero-cell source-target repair');
   let west=262166,east=0;for(const row of native_rows)for(const run of row.runs){west=Math.min(west,run[0]);east=Math.max(east,run[1]-1);}
   const native_bounds=[(west+.5)/262166*360-180,latitudes[native_rows.at(-1).y],
