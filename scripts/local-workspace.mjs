@@ -81,19 +81,7 @@ export function workspaceManager(repo, {limits = policy, freeBytes} = {}) {
     const available = freeBytes ? freeBytes() : stats.bavail * stats.bsize;
     return {root, registry, freeBytes: available, checkoutBytes, limits, entries: value.entries, worktrees: inventory};
   };
-  const allocate = ({worker, slot = 'work', branch, commit, profile = 'sparse', include = [], reserveGiB = 1}) => locked(() => {
-    if (!id(worker) || !['work', 'review'].includes(slot)) throw Error('Supply a safe unique worker ID and work/review slot');
-    if (!['sparse', 'full'].includes(profile) || !Array.isArray(include) || !include.every(safeInclude)) throw Error('Use sparse/full profile and literal data/research/coordination paths without traversal or globs');
-    if (!Number.isFinite(reserveGiB) || reserveGiB <= 0 || !Number.isSafeInteger(Math.ceil(reserveGiB * GiB))) throw Error('Reserve must be positive and represent a safe finite byte count');
-    if (slot === 'work' && (!/^(engineering|geography|research)\/[a-z0-9][a-z0-9-]{0,63}$/.test(branch ?? '') || commit)) throw Error('Work needs a fresh lane branch; main is fetched by the allocator');
-    if (slot === 'review' && (branch || !/^[a-f0-9]{40}$/.test(commit ?? ''))) throw Error('Review needs an exact detached 40-character commit');
-    const value = state();
-    if (value.entries.some(entry => entry.worker === worker && entry.slot === slot)) throw Error('Slot occupied; finish and release it before allocating another checkout');
-    const destination = slotPath(worker, slot);
-    ordinaryDirectory(destination);
-    if (fs.existsSync(destination)) throw Error('Unregistered checkout directory exists; inspect instead of overwriting');
-    if (slot === 'work') git('fetch', 'origin', 'main');
-    const head = git('rev-parse', '--verify', `${slot === 'work' ? 'origin/main' : commit}^{commit}`).trim();
+  const inputInventory = (head, profile, include) => {
     const selected = [...support, ...include];
     // Tree metadata needs no blob contents. Global -l sizing can fetch excluded
     // promisor blobs, or abort on them before sparse filtering on some Git versions.
@@ -110,6 +98,7 @@ export function workspaceManager(repo, {limits = policy, freeBytes} = {}) {
       if (type !== 'blob') throw Error('Unknown input type');
     }
     let estimated = 0;
+    const missing = new Map();
     // Bound each request/response, not the overall admitted input count. Repeated
     // OIDs still count once per selected path, matching materialized checkout bytes.
     for (let offset = 0; offset < inputs.length; offset += 1024) {
@@ -120,12 +109,46 @@ export function workspaceManager(repo, {limits = policy, freeBytes} = {}) {
       if (sizes.length !== batch.length) throw Error('Unknown input size');
       for (let index = 0; index < batch.length; index++) {
         const [oid, type, size, extra] = sizes[index].split(' ');
-        if (oid !== batch[index].oid || type !== 'blob' || extra !== undefined || !/^\d+$/.test(size)
-          || !Number.isSafeInteger(Number(size))) throw Error('Unknown input size; selected blobs must be available locally');
+        if (oid !== batch[index].oid || extra !== undefined) throw Error('Unknown input size');
+        if (type === 'missing' && size === undefined) {
+          if (!missing.has(oid)) missing.set(oid, {oid, paths: []});
+          missing.get(oid).paths.push(batch[index].name);
+          batch[index].bytes = null;
+          continue;
+        }
+        if (type !== 'blob' || !/^\d+$/.test(size) || !Number.isSafeInteger(Number(size))) throw Error('Unknown input size');
+        batch[index].bytes = Number(size);
         estimated += Number(size);
         if (!Number.isSafeInteger(estimated)) throw Error('Reserve and selected inputs must represent a safe finite byte count');
       }
     }
+    return {tree, inputs, estimated, missing: [...missing.values()]};
+  };
+  const inspect = ({commit, profile = 'sparse', include = []}) => {
+    if (!/^[a-f0-9]{40}$/.test(commit ?? '')) throw Error('Inspection needs an exact locally available 40-character commit');
+    if (!['sparse', 'full'].includes(profile) || !Array.isArray(include) || !include.every(safeInclude)) throw Error('Use sparse/full profile and literal data/research/coordination paths without traversal or globs');
+    const head = git('rev-parse', '--verify', `${commit}^{commit}`).trim();
+    const {inputs, estimated, missing} = inputInventory(head, profile, include);
+    return {head, profile, include, inputCount: inputs.length, availableBytes: estimated,
+      selectedBytes: missing.length ? null : estimated,
+      inputs: inputs.map(({name, oid, bytes}) => ({path: name, oid, bytes})), missing};
+  };
+  const allocate = ({worker, slot = 'work', branch, commit, profile = 'sparse', include = [], reserveGiB = 1}) => locked(() => {
+    if (!id(worker) || !['work', 'review'].includes(slot)) throw Error('Supply a safe unique worker ID and work/review slot');
+    if (!['sparse', 'full'].includes(profile) || !Array.isArray(include) || !include.every(safeInclude)) throw Error('Use sparse/full profile and literal data/research/coordination paths without traversal or globs');
+    if (!Number.isFinite(reserveGiB) || reserveGiB <= 0 || !Number.isSafeInteger(Math.ceil(reserveGiB * GiB))) throw Error('Reserve must be positive and represent a safe finite byte count');
+    if (slot === 'work' && (!/^(engineering|geography|research)\/[a-z0-9][a-z0-9-]{0,63}$/.test(branch ?? '') || commit)) throw Error('Work needs a fresh lane branch; main is fetched by the allocator');
+    if (slot === 'review' && (branch || !/^[a-f0-9]{40}$/.test(commit ?? ''))) throw Error('Review needs an exact detached 40-character commit');
+    const value = state();
+    if (value.entries.some(entry => entry.worker === worker && entry.slot === slot)) throw Error('Slot occupied; finish and release it before allocating another checkout');
+    const destination = slotPath(worker, slot);
+    ordinaryDirectory(destination);
+    if (fs.existsSync(destination)) throw Error('Unregistered checkout directory exists; inspect instead of overwriting');
+    if (slot === 'work') git('fetch', 'origin', 'main');
+    const head = git('rev-parse', '--verify', `${slot === 'work' ? 'origin/main' : commit}^{commit}`).trim();
+    const selected = [...support, ...include];
+    const {tree, estimated, missing} = inputInventory(head, profile, include);
+    if (missing.length) throw Error(`Unknown input size; selected blobs must be available locally. Run inspect --commit ${head} with this same profile/include scope to list missing paths/OIDs.`);
     const reservation = Math.max(Math.ceil(reserveGiB * GiB), estimated);
     if (!Number.isSafeInteger(reservation)) throw Error('Reserve and selected inputs must represent a safe finite byte count');
     const usage = report();
@@ -177,7 +200,7 @@ export function workspaceManager(repo, {limits = policy, freeBytes} = {}) {
     if (usage.freeBytes < limits.minimumFree) throw Error('Local storage budget breached; stop new generation/installations and inspect report');
     return usage;
   };
-  return {report, check, allocate, release};
+  return {report, check, inspect, allocate, release};
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
@@ -186,7 +209,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
     const options = {include: []};
     for (let index = 0; index < args.length; index += 2) {
       const key = args[index]?.replace(/^--/, '');
-      if (!['worker', 'slot', 'branch', 'commit', 'profile', 'include', 'token', 'reserve-gib'].includes(key) || !args[index + 1]) throw Error('Use report, allocate or release with documented --key value arguments');
+      if (!['worker', 'slot', 'branch', 'commit', 'profile', 'include', 'token', 'reserve-gib'].includes(key) || !args[index + 1]) throw Error('Use report, inspect, allocate or release with documented --key value arguments');
       if (key === 'include') options.include.push(args[index + 1]);
       else if (Object.hasOwn(options, key)) throw Error(`Duplicate ${key}`);
       else options[key] = args[index + 1];
@@ -194,7 +217,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
     if (options['reserve-gib']) options.reserveGiB = Number(options['reserve-gib']);
     if (action === 'allocate' && (options.slot ?? 'work') === 'work') assertAuthorWorkerIdentity(options.worker);
     const manager = workspaceManager(process.cwd());
-    if (!['report', 'check', 'allocate', 'release'].includes(action)) throw Error('Choose report, check, allocate or release');
+    if (!['report', 'check', 'inspect', 'allocate', 'release'].includes(action)) throw Error('Choose report, check, inspect, allocate or release');
     console.log(JSON.stringify(manager[action](options), null, 2));
   } catch (error) { console.error(error.message); process.exitCode = 1; }
 }

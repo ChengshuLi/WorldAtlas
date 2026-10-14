@@ -61,15 +61,19 @@ const NS='coordination/engineering/eastern-two-gap-repair-native-20261007/canoni
 const STOCK_INDEX='b82b195d94530d9b1f48153f7e47616f8b841cb1438ddf59994ba4869a1d7876';
 
 // The allowance belongs to this execution, never to a historical certificate.
-// Availability includes the runtime's exposed OS/cgroup constraints. Reservations
-// are coordinator supplied; admission is cooperative, not a kernel memory quota.
-export function processingAllowance({availableBytes=process.availableMemory(), concurrentReservedBytes=Number(process.env.WORLDATLAS_CONCURRENT_RESERVED_BYTES??0), phaseBytes, rssBytes}={}) {
-  demand([availableBytes,concurrentReservedBytes].every(n=>Number.isSafeInteger(n)&&n>=0),'Invalid current resource observations');
-  const usable=availableBytes-concurrentReservedBytes-2*1024**3-768*1024**2;
-  demand(usable>0,'Insufficient current memory after parent/concurrent headroom');
-  rssBytes??=Math.floor(usable/2);
-  phaseBytes??=rssBytes;
-  demand([phaseBytes,rssBytes].every(n=>Number.isSafeInteger(n)&&n>0)&&rssBytes<=usable&&phaseBytes<=usable,'Requested processing allowance exceeds current memory admission');
+// OS availability already excludes resident parent/concurrent memory. Reserve
+// only their additional planned growth, then leave half of the remainder for
+// parent/system growth and expansion. Both limits cover a complete process/phase,
+// so credit only measured resident RSS, never historical or on-disk byte counts.
+export function processingAllowance({availableBytes=process.availableMemory(), concurrentReservedBytes=Number(process.env.WORLDATLAS_CONCURRENT_RESERVED_BYTES??0), currentRssBytes=process.memoryUsage().rss, phaseBytes, rssBytes}={}) {
+  demand([availableBytes,concurrentReservedBytes,currentRssBytes].every(n=>Number.isSafeInteger(n)&&n>=0),'Invalid current resource observations');
+  const growthBytes=Math.floor((availableBytes-concurrentReservedBytes)/2);
+  demand(growthBytes>0,'Insufficient current memory after concurrent reservation and safety headroom');
+  const rssLimitBytes=currentRssBytes+growthBytes;
+  demand(Number.isSafeInteger(rssLimitBytes),'Invalid current resource observations');
+  rssBytes??=rssLimitBytes;
+  phaseBytes??=rssLimitBytes;
+  demand([phaseBytes,rssBytes].every(n=>Number.isSafeInteger(n)&&n>0)&&rssBytes<=rssLimitBytes&&phaseBytes<=rssLimitBytes,'Requested processing allowance exceeds current memory admission');
   return Object.freeze({phaseBytes,rssBytes});
 }
 

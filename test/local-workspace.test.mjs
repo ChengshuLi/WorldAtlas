@@ -212,8 +212,12 @@ test('assume-unchanged cannot hide unique tracked bytes from cleanup', t => {
 
 // Actual local blobless clone: commit/tree objects arrive via Git's promisor
 // protocol; selected fixture blobs are seeded locally without warming exclusions.
-function partialFixture(t, missing, {packSource = false} = {}) {
+function partialFixture(t, missing, {packSource = false, configureSource} = {}) {
   const source = fixture(t);
+  if (configureSource) {
+    configureSource(source);
+    source.head = source.git('rev-parse', 'HEAD').trim();
+  }
   if (packSource) {
     source.git('repack', '-ad');
     assert.match(source.git('count-objects', '-v'), /^count: 0$/m, 'packed source has no loose objects');
@@ -225,10 +229,10 @@ function partialFixture(t, missing, {packSource = false} = {}) {
     encoding: 'utf8', stdio: 'pipe', env: {...process.env, GIT_NO_LAZY_FETCH: '1'}
   });
   assert.equal(git('config', '--get', 'remote.origin.promisor').trim(), 'true');
-  const absent = source.git('rev-parse', `HEAD:${missing}`).trim();
+  const absent = (Array.isArray(missing) ? missing : [missing]).map(name => source.git('rev-parse', `HEAD:${name}`).trim());
   for (const line of source.git('ls-tree', '-rz', 'HEAD').split('\0').filter(Boolean)) {
     const oid = line.slice(0, line.indexOf('\t')).split(' ')[2];
-    if (oid === absent) continue;
+    if (absent.includes(oid)) continue;
     // Git may pack source objects during ordinary maintenance. Transfer the
     // exact blob bytes through Git rather than assuming loose-object storage.
     const env = {...process.env, GIT_NO_LAZY_FETCH: '1'};
@@ -241,10 +245,10 @@ function partialFixture(t, missing, {packSource = false} = {}) {
   const objectState = () => fs.readdirSync(path.join(repo, '.git/objects'), {recursive: true}).sort();
   const objects = objectState();
   const trace = path.join(source.temporary, 'partial-git-trace.log');
-  const run = options => {
+  const run = (options, action = 'allocate') => {
     const moduleURL = new URL('../scripts/local-workspace.mjs', import.meta.url).href;
     const code = `import {workspaceManager,GiB} from ${JSON.stringify(moduleURL)};
-      try { console.log(JSON.stringify(workspaceManager(${JSON.stringify(repo)},{freeBytes:()=>100*GiB}).allocate(${JSON.stringify({worker: 'partial', slot: 'review', commit: source.head, ...options})}))); }
+      try { console.log(JSON.stringify(workspaceManager(${JSON.stringify(repo)},{freeBytes:()=>100*GiB})[${JSON.stringify(action)}](${JSON.stringify({worker: 'partial', slot: 'review', commit: source.head, ...options})}))); }
       catch(error) { console.error(error.message); process.exitCode=1; }`;
     // Deliberately permit lazy fetch in the caller: allocator sizing must disable
     // it itself. Any accidental fetch is observable, even if Git recovers.
@@ -263,9 +267,9 @@ function partialFixture(t, missing, {packSource = false} = {}) {
     assert.doesNotMatch(log, /ls-tree -rlz/);
     assert.deepEqual(objectState(), objects, 'sizing/checkout must not hydrate an excluded or missing blob');
     const response = execFileSync('git', ['-C', repo, 'cat-file', '--batch-check'], {
-      input: absent + '\n', encoding: 'utf8', env: {...process.env, GIT_NO_LAZY_FETCH: '1'}
+      input: absent.join('\n') + '\n', encoding: 'utf8', env: {...process.env, GIT_NO_LAZY_FETCH: '1'}
     });
-    assert.equal(response.trim(), `${absent} missing`);
+    assert.equal(response.trim(), absent.map(oid => `${oid} missing`).join('\n'));
   };
   return {...source, repo, git, trace, run, checkUnfetched,
     manager: workspaceManager(repo, {freeBytes: () => 100 * GiB})};
@@ -346,6 +350,11 @@ test('bounded selected batches count duplicate blob paths, empty files and full-
       return total + (profile === 'full' || !name.includes('/') || name.startsWith('scripts/') || name.startsWith('docs/')
         || name.startsWith('data/needed/') || name === 'data/one.json' ? Number(metadata.trim().split(/\s+/)[3]) : 0);
     }, 0);
+    const inventory = manager.inspect({commit: head, profile, include});
+    assert.deepEqual(inventory.missing, []);
+    assert.equal(inventory.availableBytes, expected);
+    assert.equal(inventory.selectedBytes, expected);
+    assert.equal(inventory.inputs.reduce((sum, row) => sum + row.bytes, 0), expected);
     const entry = manager.allocate({worker: profile, slot: 'review', commit: head, profile, include, reserveGiB: 1 / GiB});
     assert.equal(entry.reservation, expected);
     assert.equal(fs.readFileSync(path.join(entry.path, 'scripts/duplicate-2099.txt'), 'utf8'), 'root');
@@ -361,7 +370,212 @@ test('selected submodules remain refused while excluded submodule metadata is ha
   const entry = manager.allocate({worker: 'excluded', slot: 'review', commit});
   manager.release({worker: 'excluded', slot: 'review', token: entry.token});
   for (const options of [{include: ['data/vendor']}, {profile: 'full'}]) {
+    assert.throws(() => manager.inspect({commit, ...options}), /Submodule/);
     assert.throws(() => manager.allocate({worker: 'selected', slot: 'review', commit, ...options}), /Submodule/);
     assert.deepEqual(manager.report().entries, []);
   }
+});
+
+
+test('read-only inspection retains required scopes and creates no registry, lock, branch or checkout', t => {
+  const {manager, git, head} = fixture(t);
+  const before = git('worktree', 'list', '--porcelain');
+  const refs = git('show-ref');
+  const scope = {commit: head, include: ['data/needed', 'data/one.json', 'research/new-owned-path']};
+  const result = manager.inspect(scope);
+  assert.equal(result.head, head);
+  assert.deepEqual(result.include, scope.include);
+  assert.deepEqual(result.inputs.map(row => row.path).sort(), [
+    '.gitignore', 'README.md', 'data/needed/input.json', 'data/one.json', 'docs/guide.md', 'scripts/tool.mjs'
+  ]);
+  assert.equal(result.inputCount, 6);
+  assert.deepEqual(result.missing, []);
+  assert.equal(result.selectedBytes, result.inputs.reduce((sum, row) => sum + row.bytes, 0));
+  const {registry, root} = manager.report();
+  assert.ok(!fs.existsSync(registry));
+  assert.ok(!fs.existsSync(root));
+  assert.equal(git('worktree', 'list', '--porcelain'), before);
+  assert.equal(git('show-ref'), refs);
+  assert.throws(() => manager.inspect({commit: 'main'}), /exact locally available/);
+  assert.throws(() => manager.inspect({commit: head, include: ['data/../foreign']}), /literal/);
+  assert.throws(() => manager.inspect({commit: head, profile: 'other'}), /sparse\/full/);
+});
+
+test('promisor inspection lists every missing required path while leaving excluded missing blobs untouched', t => {
+  const {run, manager, git, head, checkUnfetched} = partialFixture(t, [
+    'README.md', 'scripts/tool.mjs', 'data/one.json', 'data/other/large.json'
+  ]);
+  const before = git('worktree', 'list', '--porcelain');
+  const refs = git('show-ref');
+  const result = JSON.parse(run({include: ['data/needed', 'data/one.json']}, 'inspect'));
+  assert.equal(result.head, head);
+  assert.equal(result.selectedBytes, null);
+  assert.deepEqual(result.missing.flatMap(row => row.paths).sort(), ['README.md', 'data/one.json', 'scripts/tool.mjs']);
+  assert.equal(result.missing.length, 3);
+  assert.equal(result.inputs.filter(row => row.bytes === null).length, 3);
+  assert.equal(result.availableBytes, result.inputs.reduce((sum, row) => sum + (row.bytes ?? 0), 0));
+  assert.ok(!result.inputs.some(row => row.path === 'data/other/large.json'));
+  assert.equal(git('worktree', 'list', '--porcelain'), before);
+  assert.equal(git('show-ref'), refs);
+  assert.ok(!fs.existsSync(manager.report().registry));
+  assert.ok(!fs.existsSync(manager.report().root));
+  checkUnfetched();
+});
+
+test('full promisor inspection includes excluded missing inputs and CLI exposes the same exact inventory', t => {
+  const {repo, run, head, checkUnfetched} = partialFixture(t, 'data/other/large.json');
+  const result = JSON.parse(run({profile: 'full'}, 'inspect'));
+  assert.equal(result.selectedBytes, null);
+  assert.deepEqual(result.missing.flatMap(row => row.paths), ['data/other/large.json']);
+  const cli = execFileSync(process.execPath, [new URL('../scripts/local-workspace.mjs', import.meta.url).pathname,
+    'inspect', '--commit', head, '--profile', 'full'], {
+    cwd: repo, encoding: 'utf8', env: {...process.env, GIT_NO_LAZY_FETCH: '0'}
+  });
+  assert.deepEqual(JSON.parse(cli), result);
+  checkUnfetched();
+});
+
+
+test('inspection groups missing duplicate OIDs without omitting materialized paths', t => {
+  const {run, checkUnfetched} = partialFixture(t, 'README.md', {configureSource: ({repo, git}) => {
+    const oid = git('rev-parse', 'HEAD:README.md').trim();
+    execFileSync('git', ['-C', repo, 'update-index', '--add', '--cacheinfo', `100644,${oid},data/needed/alias.txt`]);
+    git('commit', '-m', 'required path alias');
+  }});
+  const result = JSON.parse(run({include: ['data/needed']}, 'inspect'));
+  assert.equal(result.missing.length, 1);
+  assert.deepEqual(result.missing[0].paths, ['README.md', 'data/needed/alias.txt']);
+  assert.equal(result.inputs.filter(row => row.bytes === null).length, 2);
+  assert.equal(result.selectedBytes, null);
+  checkUnfetched();
+});
+
+test('coordinated exact-OID acquisition imports only inspected missing required blobs before normal allocation', t => {
+  const {repo, git, run, manager, head, checkUnfetched} = partialFixture(t, [
+    'README.md', 'scripts/tool.mjs', 'data/one.json', 'data/other/large.json'
+  ], {configureSource: ({git}) => git('config', 'uploadpack.allowAnySHA1InWant', 'true')});
+  const scope = {include: ['data/needed', 'data/one.json']};
+  const before = JSON.parse(run(scope, 'inspect'));
+  checkUnfetched();
+  const refs = git('show-ref');
+  const fetchHead = path.join(repo, '.git/FETCH_HEAD');
+  assert.ok(!fs.existsSync(fetchHead));
+  execFileSync('git', ['-C', repo, '-c', 'fetch.negotiationAlgorithm=noop', 'fetch', '--no-tags',
+    '--no-write-fetch-head', '--no-recurse-submodules', '--no-auto-maintenance', '--filter=blob:none', '--stdin', 'origin'], {
+    input: before.missing.map(row => row.oid).join('\n') + '\n', stdio: 'pipe', env: {...process.env, GIT_NO_LAZY_FETCH: '1'}
+  });
+  assert.equal(git('show-ref'), refs);
+  assert.ok(!fs.existsSync(fetchHead));
+  const after = JSON.parse(run(scope, 'inspect'));
+  assert.deepEqual(after.missing, []);
+  assert.equal(after.inputs.length, before.inputs.length);
+  assert.equal(after.selectedBytes, after.inputs.reduce((sum, row) => sum + row.bytes, 0));
+  const excluded = git('rev-parse', `${head}:data/other/large.json`).trim();
+  const response = execFileSync('git', ['-C', repo, 'cat-file', '--batch-check'], {
+    input: excluded + '\n', encoding: 'utf8', env: {...process.env, GIT_NO_LAZY_FETCH: '1'}
+  });
+  assert.equal(response.trim(), `${excluded} missing`);
+  const entry = JSON.parse(run(scope));
+  assert.equal(fs.readFileSync(path.join(entry.path, 'README.md'), 'utf8'), 'root');
+  assert.equal(fs.readFileSync(path.join(entry.path, 'scripts/tool.mjs'), 'utf8'), 'tool');
+  assert.equal(fs.readFileSync(path.join(entry.path, 'data/one.json'), 'utf8'), 'individual');
+  assert.ok(!fs.existsSync(path.join(entry.path, 'data/other')));
+  manager.release({worker: 'partial', slot: 'review', token: entry.token});
+});
+
+test('documented pinned bootstrap executes both accepted helpers and preserves stale working files', t => {
+  const {repo, git, manager} = fixture(t);
+  const helper = fs.readFileSync(new URL('../scripts/local-workspace.mjs', import.meta.url));
+  const identity = fs.readFileSync(new URL('../scripts/worker-identity.mjs', import.meta.url));
+  fs.writeFileSync(path.join(repo, 'scripts/local-workspace.mjs'), helper);
+  fs.writeFileSync(path.join(repo, 'scripts/worker-identity.mjs'), identity);
+  git('add', 'scripts'); git('commit', '-m', 'accepted helpers');
+  const head = git('rev-parse', 'HEAD').trim();
+  const stale = "throw Error('stale helper must not execute');\n";
+  fs.writeFileSync(path.join(repo, 'scripts/local-workspace.mjs'), stale);
+  fs.writeFileSync(path.join(repo, 'scripts/worker-identity.mjs'), stale);
+  const before = git('status', '--porcelain');
+  const refs = git('show-ref');
+  const docs = fs.readFileSync(new URL('../docs/LOCAL_WORKSPACES.md', import.meta.url), 'utf8');
+  const bootstrap = docs.split("<<'PYTHON'\n")[1].split('\nPYTHON')[0];
+  const run = () => execFileSync('python3', ['-', head, 'inspect', '--commit', head, '--include', 'data/one.json'], {
+    cwd: repo, input: bootstrap, encoding: 'utf8', stdio: 'pipe', env: {...process.env, GIT_NO_LAZY_FETCH: '1'}
+  });
+  const result = JSON.parse(run());
+  assert.deepEqual(result, manager.inspect({commit: head, include: ['data/one.json']}));
+  assert.equal(git('status', '--porcelain'), before);
+  assert.equal(git('show-ref'), refs);
+  assert.equal(fs.readFileSync(path.join(repo, 'scripts/local-workspace.mjs'), 'utf8'), stale);
+  assert.equal(fs.readFileSync(path.join(repo, 'scripts/worker-identity.mjs'), 'utf8'), stale);
+  assert.ok(!fs.readdirSync(path.join(repo, '.git')).some(name => name.startsWith('worldatlas-helper-')));
+  const oid = git('rev-parse', `${head}:scripts/worker-identity.mjs`).trim();
+  fs.unlinkSync(path.join(repo, '.git/objects', oid.slice(0, 2), oid.slice(2)));
+  assert.throws(run, error => /Pinned helper missing/.test(error.stderr));
+  assert.equal(fs.readFileSync(path.join(repo, 'scripts/local-workspace.mjs'), 'utf8'), stale);
+  assert.ok(!fs.readdirSync(path.join(repo, '.git')).some(name => name.startsWith('worldatlas-helper-')));
+  assert.ok(!fs.existsSync(manager.report().registry));
+});
+
+test('inspection and allocation share every support prefix without suppressing an existing allocation lock', t => {
+  const {repo, git, manager} = fixture(t);
+  const required = ['src/main.js', 'hosted/api.mjs', 'drizzle/0001.sql', '.github/workflows/check.yml',
+    '.agents/skills/example/SKILL.md', 'coordination/templates/example.json'];
+  for (const name of required) {
+    fs.mkdirSync(path.dirname(path.join(repo, name)), {recursive: true});
+    fs.writeFileSync(path.join(repo, name), name);
+  }
+  git('add', '.'); git('commit', '-m', 'every support prefix');
+  const head = git('rev-parse', 'HEAD').trim();
+  const result = manager.inspect({commit: head});
+  for (const name of required) assert.ok(result.inputs.some(row => row.path === name), name);
+  const {registry} = manager.report();
+  const lock = path.join(registry, 'lock');
+  fs.mkdirSync(lock, {recursive: true});
+  assert.deepEqual(manager.inspect({commit: head}), result);
+  assert.throws(() => manager.allocate({worker: 'one', slot: 'review', commit: head}), /locked/);
+  assert.ok(fs.existsSync(lock));
+  fs.rmdirSync(lock);
+  const entry = manager.allocate({worker: 'one', slot: 'review', commit: head, reserveGiB: 1 / GiB});
+  assert.equal(entry.reservation, result.selectedBytes);
+  for (const row of result.inputs) assert.ok(fs.existsSync(path.join(entry.path, row.path)), row.path);
+  assert.ok(!fs.existsSync(path.join(entry.path, 'data/other')));
+  manager.release({worker: 'one', slot: 'review', token: entry.token});
+});
+
+
+test('complete documented shell bootstrap refuses failed refresh instead of executing cached main', t => {
+  const {repo, git} = fixture(t);
+  for (const name of ['local-workspace.mjs', 'worker-identity.mjs'])
+    fs.writeFileSync(path.join(repo, 'scripts', name), fs.readFileSync(new URL('../scripts/' + name, import.meta.url)));
+  git('add', 'scripts'); git('commit', '-m', 'cached accepted helpers');
+  const head = git('rev-parse', 'HEAD').trim();
+  git('update-ref', 'refs/remotes/origin/main', head);
+  git('remote', 'set-url', 'origin', path.join(repo, 'unavailable-origin'));
+  const refs = git('show-ref');
+  const status = git('status', '--porcelain');
+  const docs = fs.readFileSync(new URL('../docs/LOCAL_WORKSPACES.md', import.meta.url), 'utf8');
+  const block = docs.split('## Refresh a stale checkout without changing its files')[1].split('```sh\n')[1].split('\n```')[0]
+    .replace('data/YOUR-REQUIRED-PATH', 'data/one.json');
+  assert.throws(() => execFileSync('bash', ['-c', block], {cwd: repo, encoding: 'utf8', stdio: 'pipe'}), error => {
+    assert.doesNotMatch(error.stdout, /inputCount|selectedBytes/);
+    assert.match(error.stderr, /does not appear to be a git repository/);
+    return error.status !== 0;
+  });
+  assert.equal(git('show-ref'), refs);
+  assert.equal(git('status', '--porcelain'), status);
+  assert.ok(!fs.readdirSync(path.join(repo, '.git')).some(name => name.startsWith('worldatlas-helper-')));
+  git('remote', 'set-url', 'origin', repo);
+  git('config', 'uploadpack.allowFilter', 'true');
+  const result = JSON.parse(execFileSync('bash', ['-c', block], {cwd: repo, encoding: 'utf8', stdio: 'pipe'}));
+  assert.equal(result.head, head);
+  assert.ok(result.inputs.some(row => row.path === 'data/one.json'));
+  assert.ok(!fs.readdirSync(path.join(repo, '.git')).some(name => name.startsWith('worldatlas-helper-')));
+  git('config', '--unset-all', 'remote.origin.fetch');
+  git('update-ref', '-d', 'refs/remotes/origin/main');
+  assert.throws(() => execFileSync('bash', ['-c', block], {cwd: repo, encoding: 'utf8', stdio: 'pipe'}), error => {
+    assert.doesNotMatch(error.stdout, /inputCount|selectedBytes/);
+    assert.match(error.stderr, /Needed a single revision/);
+    return error.status !== 0;
+  });
+  assert.ok(!fs.readdirSync(path.join(repo, '.git')).some(name => name.startsWith('worldatlas-helper-')));
 });
