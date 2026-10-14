@@ -1,0 +1,19 @@
+{
+  "actual_scope": {
+    "targets": [
+      "gb:MMR:ADM3:66882298B27866808767172"
+    ],
+    "stage_bytes": 28132,
+    "stage_sha256": "8d7738164b4cb44180228c07a400ca24a0890d413b6720be996653d0d58c3ee6"
+  },
+  "inherited_preparation_fields": "original_stage_inputs and previous_attempt retain three-target preparation history; only the stage above was read by this execution. The admission file is an unchanged prelaunch snapshot.",
+  "executed_tool_receipt": {
+    "exec_session": 76674,
+    "exit_code": 0,
+    "stdout": "stdout.txt",
+    "stderr": "stderr.txt",
+    "compute_released": true
+  },
+  "maximum_rss_field": "Original maximum_rss_kib raw Darwin value889651200 is bytes despite inherited name. time-l independently reported928759808B maxRSS. No unit rewriting in raw result.",
+  "limitations": "No continuously enforced process-tree cap; no source/parent/nativecell/ownership clearance."
+}

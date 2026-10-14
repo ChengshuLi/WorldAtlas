@@ -1,0 +1,618 @@
+{
+  "status": "input-plan-only-no-source-clearance",
+  "derivation": "Small retained JSON inventories only; no source body decode, GIS import, source or physical execution.",
+  "api_status": {
+    "cohort_entry_pr": "#1922",
+    "reported_head": "cd450274",
+    "acceptance": "not assumed",
+    "call_requirements": "MISSING: verify reviewed exact API/schema and accepted commit before supplycall; do not treat proposed entry point as accepted.",
+    "historical_parent_adapter": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/fa678ed92d9b60765f8935b6a7afd117bc7c744c96057999400c37180373dd2e/work/.cache/mmr-rakhine-parent-comparison-20261014-001/adapter.py",
+    "historical_parent_plan": {
+      "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/rakhine-parent-plan.json",
+      "bytes": 3252,
+      "sha256": "6d0bf1cad953c5be50e48f5f3d9d9c695681a1779f5f88935332252c51b13388"
+    },
+    "accepted_generic_methods": [
+      "comparison.relation",
+      "comparison.full_container_relation",
+      "comparison.ValidityCache"
+    ],
+    "comparison_pin": {
+      "bytes": 9834,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/global-physical-comparison-20261006/comparison.py",
+      "sha256": "f9c226add23a37a39bf7fd34f5d8bdcb34a8d276b331fabf59bf9867b6f84bfe"
+    }
+  },
+  "shared_source_inputs": {
+    "complete_family_receipts": [
+      {
+        "family": "gb:MMR:ADM1",
+        "features": 14,
+        "invalid_geometries": [],
+        "represented_year": "2019",
+        "license": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+        "original_sha256": "b031c1be502e3eb73ec948e66e9824f1055e03fe8d14dcaf076ace94fe1158dc"
+      },
+      {
+        "family": "gb:MMR:ADM2",
+        "features": 74,
+        "invalid_geometries": [],
+        "represented_year": "2019",
+        "license": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+        "original_sha256": "ac13eddca60dd54830e4951c3646d3898d8ec7ab086660dfb12d8f89579abf29"
+      },
+      {
+        "family": "gb:MMR:ADM3",
+        "features": 330,
+        "invalid_geometries": [],
+        "represented_year": "2019",
+        "license": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+        "original_sha256": "94c0c9af839094257d13a6fe6590feddb2dcb04540d87e58b656c9f000fb92a2"
+      },
+      {
+        "family": "gb:THA:ADM1",
+        "features": 77,
+        "invalid_geometries": [],
+        "represented_year": "2017",
+        "license": "Open Data Commons Open Database License 1.0",
+        "original_sha256": "841f1250cac868fa966b2089863f01e9c9b4dc9b7fb0d9d6dce9a495e32b32a0"
+      },
+      {
+        "family": "gb:THA:ADM2",
+        "features": 928,
+        "invalid_geometries": [],
+        "represented_year": "2019",
+        "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+        "original_sha256": "faae0d9d6fe56b489a9cb3bd5b8fe100025aad99ec554bf7a9f49cbe2216bf10"
+      },
+      {
+        "family": "gb:LAO:ADM1",
+        "features": 18,
+        "invalid_geometries": [],
+        "represented_year": "2017",
+        "license": "Open Data Commons Open Database License 1.0",
+        "original_sha256": "152d7d9f680d84c31214fe327e4d102a330d61f222329701ec8ea00a8d2dfb55"
+      },
+      {
+        "family": "gb:LAO:ADM2",
+        "features": 148,
+        "invalid_geometries": [],
+        "represented_year": "2019",
+        "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+        "original_sha256": "a433001f30fd6caa368c3ca44ecc5b739250350601bb4159be6968dcc947e25e"
+      }
+    ],
+    "original_product_pins": [
+      {
+        "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM1-000.bin.gz",
+        "git_blob_oid": "3ee6cbf401871f9e6fbba6a9d92b75ee7823d426",
+        "bytes": 604071,
+        "sha256": "ccb0a975eecbc6c2adafac2e5072879e38b70b7d5fe507c17a370af27af43320",
+        "decoded_bytes": 1566790,
+        "decoded_sha256": "b031c1be502e3eb73ec948e66e9824f1055e03fe8d14dcaf076ace94fe1158dc"
+      },
+      {
+        "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM2-000.bin.gz",
+        "git_blob_oid": "c9bc1ded0ff18a5cecb2e91203b668c65dc804ac",
+        "bytes": 971970,
+        "sha256": "a094d21b2fef072c343dbbf0dd324a7bc016cbb6a540d16145ee1400cadaf8e2",
+        "decoded_bytes": 2577505,
+        "decoded_sha256": "ac13eddca60dd54830e4951c3646d3898d8ec7ab086660dfb12d8f89579abf29"
+      },
+      {
+        "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz",
+        "git_blob_oid": "6a91fcb22b44ae00401a0068a6c3e62bfed62374",
+        "bytes": 1396414,
+        "sha256": "57de50a588f418601412bb7a34cc2f43a3fd6d7d6f16635cb41b95e5ae505db6",
+        "decoded_bytes": 4205367,
+        "decoded_sha256": "94c0c9af839094257d13a6fe6590feddb2dcb04540d87e58b656c9f000fb92a2"
+      },
+      {
+        "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-THA-ADM1-000.bin.gz",
+        "git_blob_oid": "697f84f9e9831d64a1a0a085df383663e1e3c932",
+        "bytes": 314966,
+        "sha256": "a0cbbd57b5fb847d36c418051c9e838bee5d9a4c06805a13495612d2cd9cf8e9",
+        "decoded_bytes": 1009970,
+        "decoded_sha256": "841f1250cac868fa966b2089863f01e9c9b4dc9b7fb0d9d6dce9a495e32b32a0"
+      },
+      {
+        "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-THA-ADM2-000.bin.gz",
+        "git_blob_oid": "d43e07ca9416bf37067112b43950af9c10ce8ea6",
+        "bytes": 2688274,
+        "sha256": "9ecb1bca78b481b24ed1e94d6a3c4230cde4b1c02c3618a45c784a77e6bcd4ed",
+        "decoded_bytes": 8461813,
+        "decoded_sha256": "faae0d9d6fe56b489a9cb3bd5b8fe100025aad99ec554bf7a9f49cbe2216bf10"
+      },
+      {
+        "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-LAO-ADM1-000.bin.gz",
+        "git_blob_oid": "35a36eb8b83d3401b0bdfe697e6f7069624cfe18",
+        "bytes": 136573,
+        "sha256": "83a51a0eb283d4e6bb3fc7b8eab6365c92539ed0a3a029c4de8a02e8aaa24519",
+        "decoded_bytes": 453270,
+        "decoded_sha256": "152d7d9f680d84c31214fe327e4d102a330d61f222329701ec8ea00a8d2dfb55"
+      },
+      {
+        "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-LAO-ADM2-000.bin.gz",
+        "git_blob_oid": "8b130c0925274f49eaf3408501c5ef4bd4420614",
+        "bytes": 415901,
+        "sha256": "386b63fd1829ce9228006934b32e740280cd53eb0eaae5c40c0beca8dd5ccae3",
+        "decoded_bytes": 1317529,
+        "decoded_sha256": "a433001f30fd6caa368c3ca44ecc5b739250350601bb4159be6968dcc947e25e"
+      }
+    ],
+    "country_reference_pins": [
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+        "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+        "bytes": 4719659,
+        "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+        "decoded_bytes": 13287234,
+        "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+      }
+    ],
+    "retained_existing_qualification": {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/341d0bbaf81e47cd16ab58ca6d1ab75d5ac120cf732c677e081b12830ea3ef31/work/.cache/mmr-east-source-20261014-001/source-qualification.json",
+      "bytes": 287998,
+      "sha256": "cfcdf6e6207e349c8c39f9c9d3473e5c740065a4754ea4478eb61218e227e179"
+    },
+    "limits": [
+      "Read-only exploratory source qualification; no native patch, repaired cells or territorial approval.",
+      "Current owner-zero applicability is established separately by lead current cumulative-patch subtraction.",
+      "Physical class labels authenticate queue masks; no new original GSHHG reproduction is performed.",
+      "Country-reference membership is a display convention, not sovereignty adjudication.",
+      "Complete seven-family check does not claim a fresh worldwide source scan.",
+      "Unflagged cells still need accepted producer admission and selected-native conservation."
+    ],
+    "scope_rule": "Complete MMR ADM1/ADM2/ADM3 and THA ADM1/ADM2 are common minimum retained observed families. Hpapun prior target study checked seven families including LAO ADM1/ADM2. Retaining seven receipts does not establish completeness against unexamined world families or any Kawthoung target outcomes."
+  },
+  "parent_comparison_scope": {
+    "source_geometries": "Exactly three whole original ADM3 targets: one Hpapun and two Kawthoung, against complete14 MMR ADM1 and74 MMR ADM2.",
+    "target_count": 3,
+    "relation_calls": 264,
+    "expected_container_calls": 6,
+    "coordinate_policy": "Use source-declared CRS84 whole originals with retained exact-predicate methods; no snapping/repair or small-residual waiver.",
+    "limits": [
+      "Current child census is not original whole-parent exhaustiveness.",
+      "Original ADM3 does not encode ADM2 parent identity.",
+      "Whole-parent relation observations must be measured for these targets; Rakhine observations do not transfer."
+    ]
+  },
+  "cohorts": {
+    "Hpapun": {
+      "preparation_head": "9447ba267302be1c7821a256477dbd9de66b7130",
+      "data_packet": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/fa678ed92d9b60765f8935b6a7afd117bc7c744c96057999400c37180373dd2e/work/.cache/mmr-hpapun-preparation-001",
+      "stage": {
+        "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/fa678ed92d9b60765f8935b6a7afd117bc7c744c96057999400c37180373dd2e/work/.cache/mmr-hpapun-preparation-001/original-stage-inputs.json",
+        "bytes": 28132,
+        "sha256": "8d7738164b4cb44180228c07a400ca24a0890d413b6720be996653d0d58c3ee6"
+      },
+      "candidate": {
+        "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/fa678ed92d9b60765f8935b6a7afd117bc7c744c96057999400c37180373dd2e/work/.cache/mmr-hpapun-preparation-001/candidate-native-patch.json",
+        "bytes": 627,
+        "sha256": "37bd0d911ec3d203d1c164d6c1695c4505c3f34a2f51a5b1930022ce2cf53cea"
+      },
+      "held": {
+        "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/fa678ed92d9b60765f8935b6a7afd117bc7c744c96057999400c37180373dd2e/work/.cache/mmr-hpapun-preparation-001/held-border-cell.json",
+        "bytes": 514,
+        "sha256": "47b90da4166c14255faf2c8cdc5279e71ce1466c71a0cbfb28d8ab9b5c5ebd42"
+      },
+      "provenance": {
+        "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/fa678ed92d9b60765f8935b6a7afd117bc7c744c96057999400c37180373dd2e/work/.cache/mmr-hpapun-preparation-001/input-provenance.json",
+        "bytes": 5256,
+        "sha256": "9ace892e186339cf24f304c07611bf76155cf11c5b3b50eb8874437b26a1c8f1"
+      },
+      "target": {
+        "current_covers_candidate_cells": 0,
+        "current_geometry_sha256": "3a9737dc1c23fa0591ca8299b6700e7277b38298ed425960e81435674043bf7f",
+        "holes": {
+          "current": 0,
+          "source": 0
+        },
+        "id": "gb:MMR:ADM3:66882298B27866808767172",
+        "name": "Hpapun",
+        "owner": 30135,
+        "province_id": "framework:province:hpapun:a9952f075cb6"
+      },
+      "owner_parent": {
+        "bounds": [
+          201671.9965627778,
+          117131.68923877085,
+          202280.44015444446,
+          118267.11781021762
+        ],
+        "id": "gb:MMR:ADM3:66882298B27866808767172",
+        "index": 30135,
+        "name": "Hpapun",
+        "province_id": "framework:province:hpapun:a9952f075cb6",
+        "province_index": 2078,
+        "reference_owner": "Myanmar",
+        "source_atoms": [
+          "gb:MMR:ADM3:66882298B27866808767172"
+        ],
+        "source_id": "gb:MMR:ADM3"
+      },
+      "native_target": {
+        "family_index": 218,
+        "geometry_status": "raw-native-supported",
+        "name": "Hpapun",
+        "ordinal": 147,
+        "owners": [
+          30135
+        ],
+        "source_id": "gb:MMR:ADM3:66882298B27866808767172",
+        "source_index": 45118
+      },
+      "parent_source": {
+        "family_index": 217,
+        "geometry_status": "raw-native-supported",
+        "name": "Hpapun",
+        "ordinal": 20,
+        "owners": [],
+        "source_id": "gb:MMR:ADM2:60261553B97076149795033",
+        "source_index": 44917
+      },
+      "region_source": {
+        "family_index": 216,
+        "geometry_status": "raw-native-supported",
+        "name": "Kayin",
+        "ordinal": 5,
+        "owners": [],
+        "source_id": "gb:MMR:ADM1:20573499B82081528957960",
+        "source_index": 44888
+      },
+      "original_ordinal": 147,
+      "topology": {
+        "topology_conflicts": 2,
+        "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+        "topology_reconciled": true,
+        "topology_version": 1
+      },
+      "candidate_cells": 18,
+      "held_border_cells": 1,
+      "retained_target_source_findings": "18 unflagged MMR-reference centres; no holes/boundary/foreign flags. Held nineteenth centre has THA reference plus MaeHongSon ADM1 SID57296. Source result is at its recorded vintage; no fresh current-owner-zero proof.",
+      "physical": "Root reports actual whole-feature zero-issue physical result reviewed; immutable physical receipt locator/hash not independently supplied in this plan. MISSING exact receipt binding before source evidence supplycall.",
+      "missing": [
+        "Case-specific whole-original parent/region residual and complete competitor comparison using accepted path.",
+        "Explicit selected-topology/current base binding and retained foreign border exclusion.",
+        "Actual source/cohort-entry schema/required closure pins; proposed #1922 not accepted by assumption.",
+        "Later effective-owner-zero/native conservation."
+      ]
+    },
+    "Kawthoung": {
+      "preparation_head": "09ac43d945203fc877d3a30104f775960e711d65",
+      "data_packet": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/fa678ed92d9b60765f8935b6a7afd117bc7c744c96057999400c37180373dd2e/work/.cache/mmr-kawthoung-preparation-001",
+      "stage": {
+        "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/fa678ed92d9b60765f8935b6a7afd117bc7c744c96057999400c37180373dd2e/work/.cache/mmr-kawthoung-preparation-001/original-stage-inputs.json",
+        "bytes": 168107,
+        "sha256": "8375890ae28d4d7cd534447e976fc7448a3b040cce840717c46b2c81a133a6ba"
+      },
+      "candidate": {
+        "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/fa678ed92d9b60765f8935b6a7afd117bc7c744c96057999400c37180373dd2e/work/.cache/mmr-kawthoung-preparation-001/candidate-native-patch.json",
+        "bytes": 72523,
+        "sha256": "b26011eca72b28bcec4bf23b1df9cf75827f81806136440f17461fa865e3e51a"
+      },
+      "held": {
+        "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/fa678ed92d9b60765f8935b6a7afd117bc7c744c96057999400c37180373dd2e/work/.cache/mmr-kawthoung-preparation-001/held-intervals.json",
+        "bytes": 150122,
+        "sha256": "c08345c480c9efd07b60721c9d7c4c5ccfa455beee8bd1f57b68d914329b2cdf"
+      },
+      "provenance": {
+        "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/fa678ed92d9b60765f8935b6a7afd117bc7c744c96057999400c37180373dd2e/work/.cache/mmr-kawthoung-preparation-001/input-provenance.json",
+        "bytes": 14165,
+        "sha256": "2e32b69034677279b68abf1dff0974c92a0a077d132f6b121e6b02b24955b9b1"
+      },
+      "complete_parent": "framework:province:kawthoung:25f2b1f750b9",
+      "bindings": [
+        {
+          "lineage": {
+            "bounds": [
+              202366.80928666666,
+              122369.67516448515,
+              203414.70027830516,
+              123348.66361063575
+            ],
+            "id": "gb:MMR:ADM3:66882298B82483484204646",
+            "index": 30350,
+            "name": "Bokpyin",
+            "province_id": "framework:province:kawthoung:25f2b1f750b9",
+            "province_index": 2383,
+            "reference_owner": "Myanmar",
+            "source_atoms": [
+              "gb:MMR:ADM3:66882298B82483484204646"
+            ],
+            "source_id": "gb:MMR:ADM3"
+          },
+          "ordinal": 146,
+          "source_roster": {
+            "family_index": 218,
+            "geometry_status": "raw-native-supported",
+            "name": "Bokpyin",
+            "ordinal": 146,
+            "owners": [
+              30350
+            ],
+            "source_id": "gb:MMR:ADM3:66882298B82483484204646",
+            "source_index": 45117
+          },
+          "topology_metadata": {
+            "original_geometry_sha256": "8dd3ae3ce165febb3d0833cf71f068c777fda51aa0dd8ccef6b12eed5575a242",
+            "topology_conflicts": 3,
+            "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+            "topology_reconciled": true,
+            "topology_version": 1
+          }
+        },
+        {
+          "lineage": {
+            "bounds": [
+              202374.45579500005,
+              123074.92498513246,
+              203124.17773111115,
+              123986.27735110455
+            ],
+            "id": "gb:MMR:ADM3:66882298B86598910616989",
+            "index": 30361,
+            "name": "Kawthoung",
+            "province_id": "framework:province:kawthoung:25f2b1f750b9",
+            "province_index": 2383,
+            "reference_owner": "Myanmar",
+            "source_atoms": [
+              "gb:MMR:ADM3:66882298B86598910616989"
+            ],
+            "source_id": "gb:MMR:ADM3"
+          },
+          "ordinal": 139,
+          "source_roster": {
+            "family_index": 218,
+            "geometry_status": "raw-native-supported",
+            "name": "Kawthoung",
+            "ordinal": 139,
+            "owners": [
+              30361
+            ],
+            "source_id": "gb:MMR:ADM3:66882298B86598910616989",
+            "source_index": 45110
+          },
+          "topology_metadata": {
+            "original_geometry_sha256": "bb1d6c6b7f180ae2c745de1c937d754d74271ebf8c92d7039650c149e289fc7d",
+            "topology_conflicts": 2,
+            "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+            "topology_reconciled": true,
+            "topology_version": 1
+          }
+        }
+      ],
+      "source_roster": [
+        {
+          "family_index": 216,
+          "geometry_status": "raw-native-supported",
+          "name": "Tanitharyi",
+          "ordinal": 10,
+          "owners": [],
+          "source_id": "gb:MMR:ADM1:20573499B47967485654923",
+          "source_index": 44893
+        },
+        {
+          "family_index": 217,
+          "geometry_status": "raw-native-supported",
+          "name": "Kawthoung",
+          "ordinal": 57,
+          "owners": [],
+          "source_id": "gb:MMR:ADM2:60261553B98033082841224",
+          "source_index": 44954
+        },
+        {
+          "family_index": 218,
+          "geometry_status": "raw-native-supported",
+          "name": "Kawthoung",
+          "ordinal": 139,
+          "owners": [
+            30361
+          ],
+          "source_id": "gb:MMR:ADM3:66882298B86598910616989",
+          "source_index": 45110
+        },
+        {
+          "family_index": 218,
+          "geometry_status": "raw-native-supported",
+          "name": "Bokpyin",
+          "ordinal": 146,
+          "owners": [
+            30350
+          ],
+          "source_id": "gb:MMR:ADM3:66882298B82483484204646",
+          "source_index": 45117
+        },
+        {
+          "family_index": 321,
+          "geometry_status": "raw-native-supported",
+          "name": "Chumphon Province",
+          "ordinal": 19,
+          "owners": [],
+          "source_id": "gb:THA:ADM1:36821470B15538290209832",
+          "source_index": 57241
+        },
+        {
+          "family_index": 322,
+          "geometry_status": "raw-native-supported",
+          "name": "Tha Sae",
+          "ordinal": 825,
+          "owners": [
+            41647
+          ],
+          "source_id": "gb:THA:ADM2:78962969B56380938562562",
+          "source_index": 58124
+        }
+      ],
+      "complete_product_inventory": [
+        {
+          "advertised_feature_count": 14,
+          "cohort": "administrative-registry",
+          "feature_count": 14,
+          "key": "gb:MMR:ADM1",
+          "metadata_sha256": "94ab78efea0fc058bfa14533d76f6122de335845ec532c4d4a9cd17dff570bcc",
+          "original_bytes": 1566790,
+          "original_metadata_file": "data/administrative-sources.json",
+          "original_sha256": "b031c1be502e3eb73ec948e66e9824f1055e03fe8d14dcaf076ace94fe1158dc",
+          "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+          "parts": [
+            {
+              "bytes": 604071,
+              "hash_kind": "file-bytes",
+              "offset": 0,
+              "ordinal": 0,
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM1-000.bin.gz",
+              "sha256": "ccb0a975eecbc6c2adafac2e5072879e38b70b7d5fe507c17a370af27af43320",
+              "uncompressed_bytes": 1566790,
+              "uncompressed_sha256": "b031c1be502e3eb73ec948e66e9824f1055e03fe8d14dcaf076ace94fe1158dc"
+            }
+          ],
+          "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM1/geoBoundaries-MMR-ADM1_simplified.geojson",
+          "recorded_license": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+          "source_represented_year_claim": "2019"
+        },
+        {
+          "advertised_feature_count": 74,
+          "cohort": "administrative-registry",
+          "feature_count": 74,
+          "key": "gb:MMR:ADM2",
+          "metadata_sha256": "93cea30f54c34f6135262e8732a31c558d66cc1a9041f9d2beb250fde7e43ade",
+          "original_bytes": 2577505,
+          "original_metadata_file": "data/administrative-sources.json",
+          "original_sha256": "ac13eddca60dd54830e4951c3646d3898d8ec7ab086660dfb12d8f89579abf29",
+          "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+          "parts": [
+            {
+              "bytes": 971970,
+              "hash_kind": "file-bytes",
+              "offset": 0,
+              "ordinal": 0,
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM2-000.bin.gz",
+              "sha256": "a094d21b2fef072c343dbbf0dd324a7bc016cbb6a540d16145ee1400cadaf8e2",
+              "uncompressed_bytes": 2577505,
+              "uncompressed_sha256": "ac13eddca60dd54830e4951c3646d3898d8ec7ab086660dfb12d8f89579abf29"
+            }
+          ],
+          "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM2/geoBoundaries-MMR-ADM2_simplified.geojson",
+          "recorded_license": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+          "source_represented_year_claim": "2019"
+        },
+        {
+          "advertised_feature_count": 330,
+          "cohort": "administrative-registry",
+          "feature_count": 330,
+          "key": "gb:MMR:ADM3",
+          "metadata_sha256": "47544cecee2a593c22b8af18fc26182f3db9558626b3af2dc677e01de23dafb0",
+          "original_bytes": 4205367,
+          "original_metadata_file": "data/administrative-sources.json",
+          "original_sha256": "94c0c9af839094257d13a6fe6590feddb2dcb04540d87e58b656c9f000fb92a2",
+          "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+          "parts": [
+            {
+              "bytes": 1396414,
+              "hash_kind": "file-bytes",
+              "offset": 0,
+              "ordinal": 0,
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz",
+              "sha256": "57de50a588f418601412bb7a34cc2f43a3fd6d7d6f16635cb41b95e5ae505db6",
+              "uncompressed_bytes": 4205367,
+              "uncompressed_sha256": "94c0c9af839094257d13a6fe6590feddb2dcb04540d87e58b656c9f000fb92a2"
+            }
+          ],
+          "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM3/geoBoundaries-MMR-ADM3_simplified.geojson",
+          "recorded_license": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+          "source_represented_year_claim": "2019"
+        },
+        {
+          "advertised_feature_count": 77,
+          "cohort": "administrative-registry",
+          "feature_count": 77,
+          "key": "gb:THA:ADM1",
+          "metadata_sha256": "1c55ad46837740175c07118abb3d8537a33fd476b770ebda3c573ec89b4d11fc",
+          "original_bytes": 1009970,
+          "original_metadata_file": "data/administrative-sources.json",
+          "original_sha256": "841f1250cac868fa966b2089863f01e9c9b4dc9b7fb0d9d6dce9a495e32b32a0",
+          "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+          "parts": [
+            {
+              "bytes": 314966,
+              "hash_kind": "file-bytes",
+              "offset": 0,
+              "ordinal": 0,
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-THA-ADM1-000.bin.gz",
+              "sha256": "a0cbbd57b5fb847d36c418051c9e838bee5d9a4c06805a13495612d2cd9cf8e9",
+              "uncompressed_bytes": 1009970,
+              "uncompressed_sha256": "841f1250cac868fa966b2089863f01e9c9b4dc9b7fb0d9d6dce9a495e32b32a0"
+            }
+          ],
+          "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/THA/ADM1/geoBoundaries-THA-ADM1_simplified.geojson",
+          "recorded_license": "Open Data Commons Open Database License 1.0",
+          "source_represented_year_claim": "2017"
+        },
+        {
+          "advertised_feature_count": 928,
+          "cohort": "administrative-registry",
+          "feature_count": 928,
+          "key": "gb:THA:ADM2",
+          "metadata_sha256": "3adc5206c519649bc075cba28dc8761846b75dcaaf73154d271f7642227748ee",
+          "original_bytes": 8461813,
+          "original_metadata_file": "data/administrative-sources.json",
+          "original_sha256": "faae0d9d6fe56b489a9cb3bd5b8fe100025aad99ec554bf7a9f49cbe2216bf10",
+          "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+          "parts": [
+            {
+              "bytes": 2688274,
+              "hash_kind": "file-bytes",
+              "offset": 0,
+              "ordinal": 0,
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-THA-ADM2-000.bin.gz",
+              "sha256": "9ecb1bca78b481b24ed1e94d6a3c4230cde4b1c02c3618a45c784a77e6bcd4ed",
+              "uncompressed_bytes": 8461813,
+              "uncompressed_sha256": "faae0d9d6fe56b489a9cb3bd5b8fe100025aad99ec554bf7a9f49cbe2216bf10"
+            }
+          ],
+          "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/THA/ADM2/geoBoundaries-THA-ADM2_simplified.geojson",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+          "source_represented_year_claim": "2019"
+        }
+      ],
+      "retained_country_reference": {
+        "expected_bytes": 4719659,
+        "expected_sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+        "local_object_present": true,
+        "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz"
+      },
+      "candidate_cells": 7338,
+      "held_conflict_cells": 5,
+      "held_relative_cells": 4844,
+      "topology_witness_status": {
+        "policy": "Dedicated territory collection replaces duplicate parent-country coverage. Shared interiors follow Natural Earth ADM0 reference borders where unambiguous; remaining shared coverage uses finer original polygon, then stable ID. This is a display partition, not a sovereignty determination. Non-overlapping coverage is preserved after explicit duplicate retirement.",
+        "remaining_overlap_pairs": 0,
+        "target_pairwise_cuts": "not recorded by script/report",
+        "target_residual_repairs": []
+      },
+      "missing": [
+        "Actual two-target complete source-membership/competitor and country-reference cell comparisons.",
+        "Exact original parent/region residual results and cell-specific outside-parent/exclusion treatment.",
+        "Target-specific accepted topology exclusion geometry; aggregate display report emits no per-pair cuts.",
+        "Actual whole-original physical result receipts; prepared finite two-target execution is not a result.",
+        "Fresh current-owner-zero/native authority/conservation."
+      ]
+    }
+  },
+  "global_limits": [
+    "No original/source geometry decoded for this plan.",
+    "No source clearance, geographic authority, package completion or accepted repair credit asserted.",
+    "Preserve separate Hpapun border hold, Kawthoung5 source-conflict and4844 relative holds.",
+    "Do not modify combined3816 scope, PR #1922 code, retained old cache or tracked evidence."
+  ]
+}

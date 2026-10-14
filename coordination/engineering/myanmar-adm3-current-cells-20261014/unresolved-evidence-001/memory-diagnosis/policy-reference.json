@@ -1,0 +1,58 @@
+{
+  "accepted_base": "2ea6db0d4ebc2f503d487227fa2d56e0a2b37265",
+  "current_evidence_input_tree": "24885811afa854b9c4ecf8a47e24b3c5d08ac162",
+  "implementation": {
+    "path": "scripts/check-effective-geographic-regression.mjs",
+    "absolute_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/fa678ed92d9b60765f8935b6a7afd117bc7c744c96057999400c37180373dd2e/work/scripts/check-effective-geographic-regression.mjs",
+    "export": "processingAllowance",
+    "line": 71,
+    "blob_oid": "d7a43d07c7e29212997eba0bd43c6ddcb10ede9e",
+    "bytes": 89599,
+    "sha256": "ec86052f20388f1799cadc45e16b25b1ea97ffaa555c13ce8c60969231ed824c",
+    "formula": "currentRssBytes + floor((availableBytes - concurrentReservedBytes)/2)",
+    "code_rationale_lines": "65-70: OS availability already excludes resident parent/concurrent memory; reserve additional planned growth, leave half for parent/system growth and expansion."
+  },
+  "configuration": {
+    "normal_available": "process.availableMemory()",
+    "normal_resident": "process.memoryUsage().rss",
+    "additional_future_reservations": "WORLDATLAS_CONCURRENT_RESERVED_BYTES; default0",
+    "API_observation_fields": [
+      "availableBytes",
+      "currentRssBytes",
+      "concurrentReservedBytes"
+    ],
+    "API_optional_grants": [
+      "phaseBytes",
+      "rssBytes"
+    ],
+    "grant_restriction": "Optional grants can only lower the computed maximum; no configurable fraction or permitted greater grant in this implementation."
+  },
+  "policy_reference": {
+    "path": "docs/AUDIT_FAILURE_PREVENTION.md",
+    "lines": "125-133",
+    "text": "Choose finite allowance from actual machine available memory/exposed constraints, allowing parent, concurrent reservations, expansion and headroom; existing safeguards or independently reviewed equivalent. This paragraph does not specify a 50percent fraction."
+  },
+  "related_implementations": [
+    {
+      "path": "scripts/native-ownership/native-preparation-guards.mjs",
+      "line": 24,
+      "export": "preparationAllowance",
+      "same_half_formula": true
+    },
+    {
+      "path": "scripts/package-python-runtime.py",
+      "line": 118,
+      "expression": "self.source['available_bytes'] // 2",
+      "context": "Separate Python capacity path; not used for coastal004 admission."
+    }
+  ],
+  "tests": [
+    "test/idle-memory-admission.test.mjs:11-35",
+    "test/warm-entry-memory-admission.test.mjs:35-48",
+    "test/processing-allowance.test.mjs:10-18",
+    "test/native-processing-allowance.test.mjs:33"
+  ],
+  "latest_coastal_receipt": "kawthoung-physical-refusal/admission.json",
+  "latest_hpapun_success": "hpapun-physical/operating.json",
+  "observations": "Node estimatedavailable, rawOSfree pages and hardwareRAM are distinct. Allworkeradditionalreservations0; noappcleanup orpolicyoverride. No further retries while parent cloudworker inspects policy."
+}

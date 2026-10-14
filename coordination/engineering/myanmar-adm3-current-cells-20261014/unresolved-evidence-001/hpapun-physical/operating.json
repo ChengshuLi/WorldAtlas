@@ -1,0 +1,36 @@
+{
+  "status": "physical-producer-exited-zero-not-cell-qualification",
+  "exit_code": 0,
+  "external_wall_seconds_time_l": 3.93,
+  "time_l_maximum_resident_set_size_bytes": 928759808,
+  "producer_maximum_rss_kib_raw_darwin_bytes": 889651200,
+  "producer_elapsed_seconds": 3.3448845419334248,
+  "admission": {
+    "observed_unix_ms": 1792015849977,
+    "observation": {
+      "availableBytes": 1974140928,
+      "currentRssBytes": 52871168,
+      "concurrentReservedBytes": 0
+    },
+    "allowance": {
+      "phaseBytes": 1039941632,
+      "rssBytes": 1039941632
+    },
+    "prospective_complete_charge_bytes": 966049792,
+    "classification": "Empirical priorKyaukpyu898940928+67108864; input-specificHpapun strictselectedsubset/similarstage review, not guaranteedpeak",
+    "status": "admitted",
+    "physical_producer_started": false,
+    "compute_reserved": false
+  },
+  "result": {
+    "bytes": 34056,
+    "sha256": "8b9225b7acea065c9ee902b887f006ec7bf749792697852e35bf39f83fbe19a2"
+  },
+  "invocation": "/usr/bin/time -l /usr/bin/env GIT_NO_LAZY_FETCH=1 GIT_CONFIG_COUNT=1 GIT_CONFIG_KEY_0=protocol.allow GIT_CONFIG_VALUE_0=never /usr/bin/perl -e alarm-exec 120 existing-primary-python -B physical-reproduction.py",
+  "compute_reserved_after_exit": false,
+  "limits": [
+    "time-l and resource observations are observed peaks, not continuous process-tree RSS enforcement.",
+    "Archived producer field maximum_rss_kib is Darwin raw bytes; original result left unchanged.",
+    "Actual whole-feature physical observation does not qualify18nativecells or resolve source/parent/border claims."
+  ]
+}
