@@ -355,6 +355,83 @@
     "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
     "files": [
       {
+        "commit": "5ab660cb68821e6b719f1b86819069ecac419ce1",
+        "path": "coordination/engineering/myeik-native-followup-20261014/authority-registry.json",
+        "bytes": 40781,
+        "sha256": "cef4e70eb31df11f78b98e556416028dcbff3803c88e8fcd90bcacde621f2808",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "5ab660cb68821e6b719f1b86819069ecac419ce1",
+        "path": "coordination/engineering/myeik-native-followup-20261014/ledger.json",
+        "bytes": 1420024,
+        "sha256": "5469ce347ba71779f48d74e724ed83a38c2d92a9e97bc81fb8f04c78aea37166",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "5ab660cb68821e6b719f1b86819069ecac419ce1",
+        "path": "scripts/check-effective-geographic-regression.mjs",
+        "bytes": 89420,
+        "sha256": "2d6af0a3946c0dec895ab3c42766ecd88c275c48cd465e6a90ff610e776809fe",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "5ab660cb68821e6b719f1b86819069ecac419ce1",
+        "path": "scripts/native-ownership/native-preparation-guards.mjs",
+        "bytes": 9407,
+        "sha256": "e4daeabac420c657ed1b369a7d024d7bf545c15470013b3b618fcfb6de515c8c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "a9c2d4122eed9d08cd3f213d3f5157039c8823bb",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/authority-registry.json",
+        "bytes": 41663,
+        "sha256": "3c532a1195060879fe98db926946e4b9d992dd963925b7e22525cfcb12de4f77",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "a9c2d4122eed9d08cd3f213d3f5157039c8823bb",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/ledger.json",
+        "bytes": 1699463,
+        "sha256": "f6dcc41d64c0e4fc5cee3faaa1f85cac71ad091137629f4681220448468c9966",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "a9c2d4122eed9d08cd3f213d3f5157039c8823bb",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/patch.json",
+        "bytes": 285704,
+        "sha256": "3827325f9f8a02396ba61de27c1d45062f8a3d241562c54a0883e3495c94b57f",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "a9c2d4122eed9d08cd3f213d3f5157039c8823bb",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/runtime-envelope.json",
+        "bytes": 1380,
+        "sha256": "55368d74307e2beeb83ca989682e367f6192cfa537faa730eded8efb0f9af046",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "a9c2d4122eed9d08cd3f213d3f5157039c8823bb",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/selected-delivery-expectations.json",
+        "bytes": 66918,
+        "sha256": "a7a361df349afc04697fcbaf47a942f813fe4167222d73f8cef307d3982f57ed",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "a9c2d4122eed9d08cd3f213d3f5157039c8823bb",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/selection-sidecar.json",
+        "bytes": 3355,
+        "sha256": "7416f724bf1da28c67a33a6a2ae901a794061c17bfd9a110449e485fd564defa",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "a9c2d4122eed9d08cd3f213d3f5157039c8823bb",
+        "path": "data/ownership-selection.json",
+        "bytes": 1560,
+        "sha256": "ef3af4e1133e3f5df4b54e0349a3341089b3665afe44af29944f2038a549dc1e",
+        "hash_kind": "file-bytes"
+      },
+      {
         "path": "coordination/engineering/global-current-cell-work-queue-20261014/README.md",
         "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
         "bytes": 9380,
@@ -440,6 +517,27 @@
         "hash_kind": "file-bytes"
       },
       {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/global-physical-comparison-20261006/comparison.py",
+        "bytes": 9834,
+        "sha256": "f9c226add23a37a39bf7fd34f5d8bdcb34a8d276b331fabf59bf9867b6f84bfe",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/transport-map.json",
+        "bytes": 56473,
+        "sha256": "644345be3d231431177c416b6ddbe3a1b2486597295af45fd5224857b5612d26",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/member-index.json",
+        "bytes": 5821,
+        "sha256": "1fc10fa094ebd128f21d6440152d391cec879a2ec6ded9d665667f9e42513d12",
+        "hash_kind": "file-bytes"
+      },
+      {
         "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/owners.json.gz",
         "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
         "bytes": 2663523,
@@ -470,6 +568,13 @@
         "hash_kind": "file-bytes",
         "uncompressed_bytes": 2097328,
         "uncompressed_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+        "bytes": 403376,
+        "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+        "hash_kind": "file-bytes"
       },
       {
         "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IDN-ADM1-000.bin.gz",
@@ -551,6 +656,20 @@
         "hash_kind": "file-bytes",
         "uncompressed_bytes": 335036,
         "uncompressed_sha256": "84106c050c23cb5cedee5f4bc4823c3d3bfcd2400754c67ba4244c6b4c347177"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+        "bytes": 148712,
+        "sha256": "dc4955d97b55a6171748742e235904a4486dcc61c532b17de9d0a46a6c9721ba",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/source-target-native-delivery-20261014/evidence/physical-reproduction.py",
+        "bytes": 5450,
+        "sha256": "05af43d7d7722e8d7bb201f5876a43d9c7f9a2d0f4ea39e467229351a35c9bc3",
+        "hash_kind": "file-bytes"
       },
       {
         "path": "data/administrative-sources.json",
@@ -639,6 +758,13 @@
         "hash_kind": "file-bytes"
       },
       {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "package.json",
+        "bytes": 1417,
+        "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3",
+        "hash_kind": "file-bytes"
+      },
+      {
         "path": "research/geography/indonesia-borneo-writer-integrity-1411/README.md",
         "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
         "bytes": 4863,
@@ -650,6 +776,20 @@
         "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
         "bytes": 7255,
         "sha256": "1400b3cfe75e04eb58668ecc426b7802af6b0e7fe6744a2f16e48d21f8e7c0ad",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "scripts/delivery-handoff-advance.mjs",
+        "bytes": 72997,
+        "sha256": "ca11b67938a043ef6766c457c45df149b23486e3fb4447cec2afb69eea049d3a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "scripts/geography-prefetch.mjs",
+        "bytes": 13608,
+        "sha256": "19aba167eb32d5e7c08034a0e748db95e657d2ec0f10f8ee034cdeba9b2720a8",
         "hash_kind": "file-bytes"
       },
       {
@@ -678,6 +818,13 @@
         "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
         "bytes": 17642,
         "sha256": "79bc47ed3d85a1c5a183b1b07e8551e7d9d961c2b09fbe3d00a9f6cc76d75286",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "src/ownership-codec.js",
+        "bytes": 2948,
+        "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d",
         "hash_kind": "file-bytes"
       }
     ],
@@ -756,6 +903,302 @@
           "decoded_sha256": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269"
         },
         "limit": "Whole ordinary JSON bytes are identical. Original producer/custody records remain unchanged at their ffa locator; this alias authenticates retained accepted bytes, not original ancestry, a new computation or a changed execution vintage."
+      }
+    ],
+    "native_physical_accepted_alias_custody": [
+      {
+        "original_recorded_reference": {
+          "bytes": 56473,
+          "commit": "5ab660cb68821e6b719f1b86819069ecac419ce1",
+          "git_blob_oid": "56943cc4cc0ff21f2fbecca2c0ea7f95f6ca4298",
+          "mode": "100644",
+          "path": "coordination/engineering/global-physical-comparison-20261006/results/transport-map.json",
+          "sha256": "644345be3d231431177c416b6ddbe3a1b2486597295af45fd5224857b5612d26"
+        },
+        "accepted_whole_byte_alias": {
+          "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+          "path": "coordination/engineering/global-physical-comparison-20261006/results/transport-map.json",
+          "mode": "100644",
+          "git_blob_oid": "56943cc4cc0ff21f2fbecca2c0ea7f95f6ca4298",
+          "bytes": 56473,
+          "sha256": "644345be3d231431177c416b6ddbe3a1b2486597295af45fd5224857b5612d26"
+        },
+        "limit": "Original recorded execution/custody locator remains unchanged in its retained receipt. This descriptor authenticates the accepted same-byte body only; it does not relabel the execution commit or certify a replay."
+      },
+      {
+        "original_recorded_reference": {
+          "bytes": 5821,
+          "commit": "5ab660cb68821e6b719f1b86819069ecac419ce1",
+          "git_blob_oid": "a749382ae63a861a8f65a6275a851fea0e79c454",
+          "mode": "100644",
+          "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/member-index.json",
+          "sha256": "1fc10fa094ebd128f21d6440152d391cec879a2ec6ded9d665667f9e42513d12"
+        },
+        "accepted_whole_byte_alias": {
+          "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+          "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/member-index.json",
+          "mode": "100644",
+          "git_blob_oid": "a749382ae63a861a8f65a6275a851fea0e79c454",
+          "bytes": 5821,
+          "sha256": "1fc10fa094ebd128f21d6440152d391cec879a2ec6ded9d665667f9e42513d12"
+        },
+        "limit": "Original recorded execution/custody locator remains unchanged in its retained receipt. This descriptor authenticates the accepted same-byte body only; it does not relabel the execution commit or certify a replay."
+      },
+      {
+        "original_recorded_reference": {
+          "bytes": 9834,
+          "commit": "5ab660cb68821e6b719f1b86819069ecac419ce1",
+          "git_blob_oid": "86654c37ec854d862073aaf63c8d8d144956b283",
+          "mode": "100644",
+          "path": "coordination/engineering/global-physical-comparison-20261006/comparison.py",
+          "sha256": "f9c226add23a37a39bf7fd34f5d8bdcb34a8d276b331fabf59bf9867b6f84bfe"
+        },
+        "accepted_whole_byte_alias": {
+          "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+          "path": "coordination/engineering/global-physical-comparison-20261006/comparison.py",
+          "mode": "100644",
+          "git_blob_oid": "86654c37ec854d862073aaf63c8d8d144956b283",
+          "bytes": 9834,
+          "sha256": "f9c226add23a37a39bf7fd34f5d8bdcb34a8d276b331fabf59bf9867b6f84bfe"
+        },
+        "limit": "Original recorded execution/custody locator remains unchanged in its retained receipt. This descriptor authenticates the accepted same-byte body only; it does not relabel the execution commit or certify a replay."
+      },
+      {
+        "original_recorded_reference": {
+          "bytes": 5450,
+          "commit": "5ab660cb68821e6b719f1b86819069ecac419ce1",
+          "git_blob_oid": "73e005238c929a901185abb8321c419e7cd9f688",
+          "mode": "100644",
+          "path": "coordination/engineering/source-target-native-delivery-20261014/evidence/physical-reproduction.py",
+          "sha256": "05af43d7d7722e8d7bb201f5876a43d9c7f9a2d0f4ea39e467229351a35c9bc3"
+        },
+        "accepted_whole_byte_alias": {
+          "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+          "path": "coordination/engineering/source-target-native-delivery-20261014/evidence/physical-reproduction.py",
+          "mode": "100644",
+          "git_blob_oid": "73e005238c929a901185abb8321c419e7cd9f688",
+          "bytes": 5450,
+          "sha256": "05af43d7d7722e8d7bb201f5876a43d9c7f9a2d0f4ea39e467229351a35c9bc3"
+        },
+        "limit": "Original recorded execution/custody locator remains unchanged in its retained receipt. This descriptor authenticates the accepted same-byte body only; it does not relabel the execution commit or certify a replay."
+      },
+      {
+        "original_recorded_reference": {
+          "bytes": 1417,
+          "path": "package.json",
+          "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3",
+          "commit": "b91ede007eba73365e6ca46f95123d229c3cc38c"
+        },
+        "accepted_whole_byte_alias": {
+          "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+          "path": "package.json",
+          "mode": "100644",
+          "git_blob_oid": "318d842ee999da746956968c9d7e58f9e00cb9e4",
+          "bytes": 1417,
+          "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3"
+        },
+        "limit": "Original recorded execution/custody locator remains unchanged in its retained receipt. This descriptor authenticates the accepted same-byte body only; it does not relabel the execution commit or certify a replay."
+      },
+      {
+        "original_recorded_reference": {
+          "bytes": 89420,
+          "path": "scripts/check-effective-geographic-regression.mjs",
+          "sha256": "2d6af0a3946c0dec895ab3c42766ecd88c275c48cd465e6a90ff610e776809fe",
+          "commit": "b91ede007eba73365e6ca46f95123d229c3cc38c"
+        },
+        "accepted_whole_byte_alias": {
+          "commit": "5ab660cb68821e6b719f1b86819069ecac419ce1",
+          "path": "scripts/check-effective-geographic-regression.mjs",
+          "mode": "100644",
+          "git_blob_oid": "efd136faffdbcf166778b38562f10a0d8f4c7d09",
+          "bytes": 89420,
+          "sha256": "2d6af0a3946c0dec895ab3c42766ecd88c275c48cd465e6a90ff610e776809fe"
+        },
+        "limit": "Original recorded execution/custody locator remains unchanged in its retained receipt. This descriptor authenticates the accepted same-byte body only; it does not relabel the execution commit or certify a replay."
+      },
+      {
+        "original_recorded_reference": {
+          "bytes": 72997,
+          "path": "scripts/delivery-handoff-advance.mjs",
+          "sha256": "ca11b67938a043ef6766c457c45df149b23486e3fb4447cec2afb69eea049d3a",
+          "commit": "b91ede007eba73365e6ca46f95123d229c3cc38c"
+        },
+        "accepted_whole_byte_alias": {
+          "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+          "path": "scripts/delivery-handoff-advance.mjs",
+          "mode": "100644",
+          "git_blob_oid": "034d21d9c9353ce239ad1e7036ac0d14807a0a56",
+          "bytes": 72997,
+          "sha256": "ca11b67938a043ef6766c457c45df149b23486e3fb4447cec2afb69eea049d3a"
+        },
+        "limit": "Original recorded execution/custody locator remains unchanged in its retained receipt. This descriptor authenticates the accepted same-byte body only; it does not relabel the execution commit or certify a replay."
+      },
+      {
+        "original_recorded_reference": {
+          "bytes": 13608,
+          "path": "scripts/geography-prefetch.mjs",
+          "sha256": "19aba167eb32d5e7c08034a0e748db95e657d2ec0f10f8ee034cdeba9b2720a8",
+          "commit": "b91ede007eba73365e6ca46f95123d229c3cc38c"
+        },
+        "accepted_whole_byte_alias": {
+          "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+          "path": "scripts/geography-prefetch.mjs",
+          "mode": "100644",
+          "git_blob_oid": "1c22d410b9f1337f635d998928ffe9cb94c12815",
+          "bytes": 13608,
+          "sha256": "19aba167eb32d5e7c08034a0e748db95e657d2ec0f10f8ee034cdeba9b2720a8"
+        },
+        "limit": "Original recorded execution/custody locator remains unchanged in its retained receipt. This descriptor authenticates the accepted same-byte body only; it does not relabel the execution commit or certify a replay."
+      },
+      {
+        "original_recorded_reference": {
+          "bytes": 9407,
+          "path": "scripts/native-ownership/native-preparation-guards.mjs",
+          "sha256": "e4daeabac420c657ed1b369a7d024d7bf545c15470013b3b618fcfb6de515c8c",
+          "commit": "b91ede007eba73365e6ca46f95123d229c3cc38c"
+        },
+        "accepted_whole_byte_alias": {
+          "commit": "5ab660cb68821e6b719f1b86819069ecac419ce1",
+          "path": "scripts/native-ownership/native-preparation-guards.mjs",
+          "mode": "100644",
+          "git_blob_oid": "ef73f09b7cd95989deca3ca557eba4cacdc78b1d",
+          "bytes": 9407,
+          "sha256": "e4daeabac420c657ed1b369a7d024d7bf545c15470013b3b618fcfb6de515c8c"
+        },
+        "limit": "Original recorded execution/custody locator remains unchanged in its retained receipt. This descriptor authenticates the accepted same-byte body only; it does not relabel the execution commit or certify a replay."
+      },
+      {
+        "original_recorded_reference": {
+          "bytes": 17642,
+          "path": "src/native-grid.js",
+          "sha256": "79bc47ed3d85a1c5a183b1b07e8551e7d9d961c2b09fbe3d00a9f6cc76d75286",
+          "commit": "b91ede007eba73365e6ca46f95123d229c3cc38c"
+        },
+        "accepted_whole_byte_alias": {
+          "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+          "path": "src/native-grid.js",
+          "mode": "100644",
+          "git_blob_oid": "779ff4c59fd5a188fa4fe0c3ebd83319b8e9f1bf",
+          "bytes": 17642,
+          "sha256": "79bc47ed3d85a1c5a183b1b07e8551e7d9d961c2b09fbe3d00a9f6cc76d75286"
+        },
+        "limit": "Original recorded execution/custody locator remains unchanged in its retained receipt. This descriptor authenticates the accepted same-byte body only; it does not relabel the execution commit or certify a replay."
+      },
+      {
+        "original_recorded_reference": {
+          "bytes": 2948,
+          "path": "src/ownership-codec.js",
+          "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d",
+          "commit": "b91ede007eba73365e6ca46f95123d229c3cc38c"
+        },
+        "accepted_whole_byte_alias": {
+          "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+          "path": "src/ownership-codec.js",
+          "mode": "100644",
+          "git_blob_oid": "03eacc9bcb1bff03723a93c248ea6de5f2fed5e4",
+          "bytes": 2948,
+          "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d"
+        },
+        "limit": "Original recorded execution/custody locator remains unchanged in its retained receipt. This descriptor authenticates the accepted same-byte body only; it does not relabel the execution commit or certify a replay."
+      },
+      {
+        "original_recorded_reference": {
+          "bytes": 148712,
+          "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+          "sha256": "dc4955d97b55a6171748742e235904a4486dcc61c532b17de9d0a46a6c9721ba",
+          "commit": "b91ede007eba73365e6ca46f95123d229c3cc38c"
+        },
+        "accepted_whole_byte_alias": {
+          "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+          "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+          "mode": "100644",
+          "git_blob_oid": "c63af24668aac079ba875ed44bd8949d82653a9a",
+          "bytes": 148712,
+          "sha256": "dc4955d97b55a6171748742e235904a4486dcc61c532b17de9d0a46a6c9721ba"
+        },
+        "limit": "Original recorded execution/custody locator remains unchanged in its retained receipt. This descriptor authenticates the accepted same-byte body only; it does not relabel the execution commit or certify a replay."
+      },
+      {
+        "original_recorded_reference": {
+          "commit": "5ab660cb68821e6b719f1b86819069ecac419ce1",
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+          "mode": "100644",
+          "git_blob_oid": "09afab19371f0814da61e79e5f310c5fb2405b6d",
+          "bytes": 403376,
+          "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9"
+        },
+        "accepted_whole_byte_alias": {
+          "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+          "mode": "100644",
+          "git_blob_oid": "09afab19371f0814da61e79e5f310c5fb2405b6d",
+          "bytes": 403376,
+          "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9"
+        },
+        "limit": "Original recorded execution/custody locator remains unchanged in its retained receipt. This descriptor authenticates the accepted same-byte body only; it does not relabel the execution commit or certify a replay."
+      },
+      {
+        "original_recorded_reference": {
+          "commit": "5ab660cb68821e6b719f1b86819069ecac419ce1",
+          "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/owners.json.gz",
+          "mode": "100644",
+          "git_blob_oid": "9c44513df64995d417dd3832ae604c703e84a506",
+          "bytes": 2663523,
+          "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+          "decoded_bytes": 11096191,
+          "decoded_sha256": "a8086008b7a072dd86483720a2a166785229753422769dbbe0749497d870f428"
+        },
+        "accepted_whole_byte_alias": {
+          "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+          "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/owners.json.gz",
+          "mode": "100644",
+          "git_blob_oid": "9c44513df64995d417dd3832ae604c703e84a506",
+          "bytes": 2663523,
+          "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f"
+        },
+        "limit": "Original recorded execution/custody locator remains unchanged in its retained receipt. This descriptor authenticates the accepted same-byte body only; it does not relabel the execution commit or certify a replay."
+      },
+      {
+        "original_recorded_reference": {
+          "commit": "5ab660cb68821e6b719f1b86819069ecac419ce1",
+          "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+          "mode": "100644",
+          "git_blob_oid": "de6905e162dc031b1b93248fae91190c39c4ad53",
+          "bytes": 1851757,
+          "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+          "decoded_bytes": 2097328,
+          "decoded_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+        },
+        "accepted_whole_byte_alias": {
+          "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+          "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+          "mode": "100644",
+          "git_blob_oid": "de6905e162dc031b1b93248fae91190c39c4ad53",
+          "bytes": 1851757,
+          "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147"
+        },
+        "limit": "Original recorded execution/custody locator remains unchanged in its retained receipt. This descriptor authenticates the accepted same-byte body only; it does not relabel the execution commit or certify a replay."
+      },
+      {
+        "original_recorded_reference": {
+          "commit": "5ab660cb68821e6b719f1b86819069ecac419ce1",
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IDN-ADM2-000.bin.gz",
+          "mode": "100644",
+          "git_blob_oid": "d918c74989043677364ff43f9fbec3d1f0d3a3af",
+          "bytes": 3051391,
+          "sha256": "ef394916ba97454b5592e66eba1df67199731ce7d9636cc3968843801ae904a8",
+          "decoded_bytes": 11002896,
+          "decoded_sha256": "146653d488331086ddc43d159a261b01ea6dd08c7ed422e34a9886c3c690430c"
+        },
+        "accepted_whole_byte_alias": {
+          "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IDN-ADM2-000.bin.gz",
+          "mode": "100644",
+          "git_blob_oid": "d918c74989043677364ff43f9fbec3d1f0d3a3af",
+          "bytes": 3051391,
+          "sha256": "ef394916ba97454b5592e66eba1df67199731ce7d9636cc3968843801ae904a8"
+        },
+        "limit": "Original recorded execution/custody locator remains unchanged in its retained receipt. This descriptor authenticates the accepted same-byte body only; it does not relabel the execution commit or certify a replay."
       }
     ]
   },
@@ -918,6 +1361,22 @@
       "verification": "unverified",
       "restoration": "Use data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz with its complete encoded and decoded descriptors.",
       "limit": "Coarse reference coastline and earlier topology reconciliation are context only; no new territorial or physical classification.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "gshhg-original-physical",
+      "url": "https://www.soest.hawaii.edu/pwessel/gshhg/",
+      "role": "Original GSHHG hierarchical land/inland-water support for the ten complete North Maluku source targets, separate from territorial ownership and native current-bank applicability.",
+      "vintage": "Retained GSHHG 2.3.7 source with heterogeneous observation dates",
+      "retrieved_at": "2026-10-14 (reused retained original bytes; no new upstream acquisition in this preparation)",
+      "license": {
+        "status": "unknown",
+        "terms": "Existing accepted custody records LGPL source terms; this preparation does not independently verify current reuse terms."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Use the actual original source/member hashes, all ordered source partitions and measured execution input receipts retained in native-delivery-v1/physical/provenance.json and whole-target-support.json. Compact manifest pins the accepted transport map/member index and actual result; it does not reread the larger full source closure.",
+      "limit": "The compact 256MiB manifest gate verifies retained indexes/results, not all original GSHHG bodies. The larger actual physical execution has its own original body authentication, runtime/RSS and launcher enforcement limits. Source-relative support is not territorial authority, current ground truth or current owner-zero proof.",
       "temporal_status": "reference"
     }
   ],
@@ -1199,6 +1658,192 @@
       "bytes": 1224,
       "sha256": "f18a3cff74397967c51fdf8d122345818bbdd50425640f19414c25d684da2d52",
       "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/physical/held-target-intervals.json",
+      "bytes": 377245,
+      "sha256": "3f80f7aca04118aae13970dbb3bc7e587a88c74924242e92bff2849c69609bdc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/physical/physical-pending.json",
+      "bytes": 2333344,
+      "sha256": "53443f4368e945c4a802d52948090f5b8127a64988ea82101c2ce7bc6b0fdaec",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/physical/physical-run.log",
+      "bytes": 1288,
+      "sha256": "b07824ac9cbb21f5efa98477f26901fb85db12123be89691c764cb6d4c7d5a11",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/physical/prospective-operating-config.json",
+      "bytes": 1954,
+      "sha256": "d468bb06453545d808db7ac9136f0ec2191199219f86fb3330ca69b8e6b12100",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/physical/provenance.json",
+      "bytes": 20281,
+      "sha256": "91feb713a36815aee08609cb1d42be9914a30ff701cf73c2362fd8f993ac6157",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/physical/repair-prerequisites.json",
+      "bytes": 2326285,
+      "sha256": "41245dcb82efe242c5f92a33bf21d67ca4a6d8697aaa71406255a485f188d5ec",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/physical/scientific-execution-receipt.json",
+      "bytes": 941,
+      "sha256": "a738130ac8de6eac2865995d22fbc0a177574ffd7a0e755ae20984d39c4855b0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/physical/summary.json",
+      "bytes": 7318,
+      "sha256": "33c1f9e86b8f36be1d2e8864b823a76ec1d2fc47e7aa239d94a61e1481fcd66b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/physical/whole-target-support.json",
+      "bytes": 2542871,
+      "sha256": "3a96fe9ab659f2f144a2ad435ab0057dd78de617878b6d6be485241699c134d2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/authority/authority-binding.json",
+      "bytes": 744,
+      "sha256": "d0250acf09fbfbea1131855b5375a2b911a4c3a058889d4a9a6d7ece272761e9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/authority/external-timing-limit.json",
+      "bytes": 505,
+      "sha256": "99393170acf8995a1e8cd401512368a1de3e231edaef32cd41debd6a977a4dc8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/authority/external-timing-observation.log",
+      "bytes": 315,
+      "sha256": "b6e9b7108a16d034088cbc55e5531e872caa6acb84b3d79f84632599f84e6c62",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/authority/original-rule-preimage.json",
+      "bytes": 741,
+      "sha256": "82ab71fbf3e369719237b409d6866dde45c4f96f05df83da4ad4d7d8961f11af",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/authority/qualification-observation.json",
+      "bytes": 6590,
+      "sha256": "529525573a663729dffcf3d1cf2f83ec4e752f2da5247613752848c2fe473a69",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/authority/qualified-ledger-rows.json",
+      "bytes": 201841,
+      "sha256": "b927e5eba02fcd78eb1f4a058448d964f4d1a8298412b1fd8bd0a62d8351a57e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/source-evidence.json",
+      "bytes": 37143,
+      "sha256": "10cbbe8a163a83d92a37e90fa2c1cd76e606d0eb72cd23d5b4fd6f2b31f6cb87",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/native-patch.json",
+      "bytes": 156475,
+      "sha256": "64c3cb63d4b93dca3ee7a99dec803f6cf188289baa804a9e98bafa9543cccd30",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/cumulative-proposal/authority-registry.proposed.json",
+      "bytes": 41735,
+      "sha256": "4336a93125c750cda48a2f28b123fea9e99e0f7a557857abe518ae7dc0390645",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/cumulative-proposal/composition-receipt.json",
+      "bytes": 2152,
+      "sha256": "c18c0df23032f40d4e7b76fdd8cf66bd90108360c1fbe1dd18b5f98dbaf4b1fa",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/cumulative-proposal/ledger.proposed.json",
+      "bytes": 1623838,
+      "sha256": "7691b8fe488c0e616dcf0b7ebb5182f846e86dfdcd975ba5ed93d5230aa42e2e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/cumulative-proposal/patch.proposed.json",
+      "bytes": 325372,
+      "sha256": "361f43900c03d399c746ae34bf28575f05cbb789bfae24fd84f2e337e4d2c844",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/cumulative-proposal/runtime-envelope.proposed.json",
+      "bytes": 1343,
+      "sha256": "0cfd23c9ab23d83f4879fc3b6e0da412ec70e417ee78c0691f07049672c67a20",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/cumulative-proposal/selection-descriptor-plan.proposed.json",
+      "bytes": 1571,
+      "sha256": "fa28704ccf262aff312db3dcd52d69a3845c19213e7a9aa34e5e8fedad782b5f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/final-selection/authority-registry.json",
+      "bytes": 42617,
+      "sha256": "e21921c1f8b1c8cab86dfa2aa67b31812e79fdc0cd637a8fd9362613ba3fb8af",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/final-selection/final-metadata-preparation-receipt.json",
+      "bytes": 3976,
+      "sha256": "b794f16c83c60637b22ea4fcf62f307175f35efb2a304a4f3c0fc5e0a4ac0787",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/final-selection/ledger.json",
+      "bytes": 1903277,
+      "sha256": "68d324baf0e0775855041ce9419cdbf784780c6d7a02a5149e525ec256c235c2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/final-selection/patch.json",
+      "bytes": 442175,
+      "sha256": "fb017e73d4109f967af4e3b693ab74e60f6662e8dc5e512ba8eb286c7192e33c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/final-selection/runtime-envelope.json",
+      "bytes": 1387,
+      "sha256": "5b8daad1c36213951187ce09b173e0fbeffcc47006ed7443bd2b295a09bd6c1b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/final-selection/selected-delivery-expectations.json",
+      "bytes": 69797,
+      "sha256": "b094e2cb1003923dcdceb07b7828dd7a600c53c82094e757353731f98ae16979",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/final-selection/selection-sidecar.json",
+      "bytes": 3523,
+      "sha256": "04a02db0b915d398c1ca65c0efcfc8872220fa09d385de213b44994227a254a5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/ownership-selection.json",
+      "bytes": 1602,
+      "sha256": "6771432f27c85e800b4f9129c3f2855166e7f79c46d4b565dd3e9d76ba03cfcf",
+      "hash_kind": "file-bytes"
     }
   ],
   "methods": [
@@ -1222,6 +1867,41 @@
       "description": "Preserve exact Papua/West Papua selector rows, source/parent/topology context and current-ownership references. Earlier inline exploratory analysis was not captured as immutable executable code. The preservation writer is retained as literal JSON data in consumed-inputs.json; it is not a claimed replay or native/GIS execution. The Merauke conflict cell overlaps the separate 27-cell conflict scope and is counted once in whole-session accounting. Original part-10/part-19 consumed locators at nonancestor ffa32416 remain verbatim in the preserved Papua records. The manifest authenticates accepted f7c3583 retained aliases only after complete ordinary mode/OID/byte/SHA equality; decoded identity equals plain JSON body identity. This is explicit byte custody, not an original-ancestry or new-computation claim.",
       "software": "Recorded JSON/metadata inspection and standard-library preservation; analytical runtime/code custody limited as documented.",
       "units": "Native cells, intervals and stable location/source identities; literal ring counts are diagnostic holds, not qualified territorial exclusions."
+    },
+    {
+      "id": "retained-whole-target-physical-interpretation",
+      "kind": "measurement",
+      "description": "Retain the actual unchanged physical-reproduction.py/comparison.py execution, original runtime identity and complete recorded source receipts for ten whole North Maluku targets. GEOS source-relative set/coverage and hierarchy witnesses support categorical native-interval disposition; no new geodesic area/distance measurement is claimed. This preparation authenticates compact accepted index/helper aliases and actual results without repeating the larger source/GIS phase. Two target reconstruction issues remain held; 10,185 issue-free physical candidate cells still require native interpretation. Legacy whole-target-support.maximum_rss_kib is not used as a KiB metric: the typed physical execution receipt/summary records the measured child lifetime maximum in bytes. Deadline/process-group cleanup and live aggregate RSS enforcement were not established.",
+      "software": "Recorded Shapely2.1.2/GEOS3.13.1; actual interpreter path/size/SHA retained in physical/provenance.json. No new runtime capture or independent scientific rerun.",
+      "units": "Native cells, target counts, seconds and bytes; source-relative geometric witnesses, no area/distance inference."
+    },
+    {
+      "id": "retained-source-target-native-qualification",
+      "kind": "measurement",
+      "description": "Retain actual constructOriginalAuthority with ImmutableReader at immutable execution b91ede007eba73365e6ca46f95123d229c3cc38c. The actual source-evidence/native-patch inputs and eight positive ledger rows qualified 11,770 proposed cells. Exact project input/code inventories and fresh finite reader allowance remain in qualification-observation.json. Actual native qualification phase 336,745,487 bytes is separate from this smaller manifest inventory and used its recorded 1,008,640,000 byte allowance. Native current-owner-zero, selected consumer/readback, occupied-cell conservation, cumulative acceptance and repair credit remain pending. The external /usr/bin/time wrapper failed after successful constructor completion due denied sysctl kern.clockrate; no external peak RSS is claimed. Node resourceUsage KiB and final RSS bytes remain separate typed observations. Actual qualify-native.mjs and physical launcher bytes remain authenticated in immutable producer commits b91ede007eba73365e6ca46f95123d229c3cc38c and 4dd34392ee78de635e902570c20416924600fe6c. Final delivery introduces no per-batch executable; unchanged algorithms are immutable references.",
+      "software": "Original recorded Node.js project execution inventory at b91ede007eba73365e6ca46f95123d229c3cc38c; Node runtime version is not recorded in the constructor observation, and no hermetic runtime or process-tree cleanup proof is added.",
+      "units": "Proposed native cells, targets, seconds, bytes and Node-reported KiB; zero accepted repair credit."
+    },
+    {
+      "id": "proposed-cumulative-metadata-composition",
+      "kind": "code",
+      "description": "Historical pre-Vietnam cumulative proposal: Retain the actual data-only proposed authority registry, raw ledger, patch, runtime envelope, pending selector descriptor plan and composition receipt. The recorded comparison preserves 42 prior authorities and 100 effective normalized components; 108 raw prior rows and prior scope IDs are separately retained literally. 43 authorities, 116 raw rows and 28,148 cells are proposal counts only. Registry authority qualification, current-owner-zero and selectedReadSelectedAdditive/readback were not run. PENDING runtime-envelope/selector asset descriptors are explicit unresolved fields, not an active hook. This preparation only binds the existing committed proposal bodies/recorded counts and accepted prior inputs; it does not repeat a composer, registry or native operation.",
+      "software": "Recorded metadata composition using existing normaliseRetainedRepairLedger/compareVersionedRepairLedgers; no new executable producer capture, runtime qualification or independent replay claimed by this manifest preparation.",
+      "units": "Authorities, raw ledger rows, effective components and proposed native cells; accepted repaired cells remain zero."
+    },
+    {
+      "id": "final-selection-after-accepted-vietnam",
+      "kind": "code",
+      "description": "Retain the actual final metadata preparation against accepted Vietnam a9c2d4122eed9d08cd3f213d3f5157039c8823bb. Literal preservation of its 184 raw rows, 43 authorities, 43 expectation cohorts and 9,224 patch runs is recorded separately from normalizer equivalence. Appending the unchanged eight-target IDN proposal yields 37,630 candidate native cells, 44 authorities and 192 raw ledger rows. Final assets and the parent-pinned candidate sidecar/hook are data-only artifacts; no source constructor, physical science, full registry/source-closure qualification, current-owner-zero bank readback, selected consumption/no-loss, emitted package or queue acceptance is claimed by this metadata step. Accepted repair credit remains pending and zero. Historical 28,148-cell/43-authority/116-row proposal, original 344 subjects and original immutable pins remain retained. This manifest change requires the applicable full CI route; it does not assert selected-data profile eligibility.",
+      "software": "Recorded existing normaliseRetainedRepairLedger/compareVersionedRepairLedgers and finite metadata preservation checks; no scientific rerun or independent review by this manifest author.",
+      "units": "Candidate native cells, raw ledger rows, authorities, expectation cohorts and preserved native runs."
+    },
+    {
+      "id": "runtime-flat-public-alias-binding-correction",
+      "kind": "code",
+      "description": "Correct only final runtime ledger.path and patch.path to accepted flat additive-repairs public aliases after the retained package attempt failed with Unsafe additive public asset path. Actual corrected runtime at 03b0ced3caa0e7e439d1455b7dca4bd634e1e475 is 1,387 bytes; its sidecar pin/hook and receipt are refreshed to those exact bytes. Ledger, registry, patch, target/hold scope and prior scientific qualification remain literally unchanged. The pre-correction geography pass and package failure remain historical attempt evidence; they do not approve the corrected current candidate. Fresh full CI/package/consumer proof and renewed exact-head review remain required. This binding repair runs no scientific operator or source/native constructor. The original issue-specific repository paths were composed manually in candidate runtime metadata. The correction copies the accepted Vietnam flat public aliases; the accepted package producer/publisher is unchanged, and no new per-batch wrapper or framework is introduced.",
+      "software": "Existing preparePackageSelectedAdditive public-asset contract and existing evidence validator; no new algorithm or scientific execution.",
+      "units": "Actual runtime-envelope bytes; unchanged proposed native cell counts."
     }
   ],
   "metrics": [
@@ -1584,6 +2264,558 @@
         "commit": "f7c358326d776398bc1cffe84df81eac7033091c"
       },
       "evaluation_commit": "f7c358326d776398bc1cffe84df81eac7033091c"
+    },
+    {
+      "id": "physical-total_source_candidate_cells",
+      "value": 23504,
+      "unit": "native cells",
+      "vintage": "archived",
+      "input_sha256": "3a96fe9ab659f2f144a2ad435ab0057dd78de617878b6d6be485241699c134d2",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/physical/whole-target-support.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "5ab660cb68821e6b719f1b86819069ecac419ce1"
+    },
+    {
+      "id": "physical-repair_candidates",
+      "value": 12424,
+      "unit": "native cells",
+      "vintage": "archived",
+      "input_sha256": "3a96fe9ab659f2f144a2ad435ab0057dd78de617878b6d6be485241699c134d2",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/physical/whole-target-support.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "5ab660cb68821e6b719f1b86819069ecac419ce1"
+    },
+    {
+      "id": "physical-physical_candidates",
+      "value": 11080,
+      "unit": "native cells",
+      "vintage": "archived",
+      "input_sha256": "3a96fe9ab659f2f144a2ad435ab0057dd78de617878b6d6be485241699c134d2",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/physical/whole-target-support.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "5ab660cb68821e6b719f1b86819069ecac419ce1"
+    },
+    {
+      "id": "physical-held_repair_candidates",
+      "value": 654,
+      "unit": "native cells",
+      "vintage": "archived",
+      "input_sha256": "3a96fe9ab659f2f144a2ad435ab0057dd78de617878b6d6be485241699c134d2",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/physical/whole-target-support.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "5ab660cb68821e6b719f1b86819069ecac419ce1"
+    },
+    {
+      "id": "physical-held_physical_candidates",
+      "value": 895,
+      "unit": "native cells",
+      "vintage": "archived",
+      "input_sha256": "3a96fe9ab659f2f144a2ad435ab0057dd78de617878b6d6be485241699c134d2",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/physical/whole-target-support.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "5ab660cb68821e6b719f1b86819069ecac419ce1"
+    },
+    {
+      "id": "physical-held_targets",
+      "value": 2,
+      "unit": "targets",
+      "vintage": "archived",
+      "input_sha256": "3a96fe9ab659f2f144a2ad435ab0057dd78de617878b6d6be485241699c134d2",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/physical/whole-target-support.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "5ab660cb68821e6b719f1b86819069ecac419ce1"
+    },
+    {
+      "id": "physical-inspected_targets",
+      "value": 10,
+      "unit": "targets",
+      "vintage": "archived",
+      "input_sha256": "3a96fe9ab659f2f144a2ad435ab0057dd78de617878b6d6be485241699c134d2",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/physical/whole-target-support.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "5ab660cb68821e6b719f1b86819069ecac419ce1"
+    },
+    {
+      "id": "physical-targets_without_recorded_interpretation_issues",
+      "value": 8,
+      "unit": "targets",
+      "vintage": "archived",
+      "input_sha256": "3a96fe9ab659f2f144a2ad435ab0057dd78de617878b6d6be485241699c134d2",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/physical/whole-target-support.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "5ab660cb68821e6b719f1b86819069ecac419ce1"
+    },
+    {
+      "id": "physical-issue_free_repair_candidates_pending_native_authority",
+      "value": 11770,
+      "unit": "native cells",
+      "vintage": "archived",
+      "input_sha256": "3a96fe9ab659f2f144a2ad435ab0057dd78de617878b6d6be485241699c134d2",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/physical/whole-target-support.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "5ab660cb68821e6b719f1b86819069ecac419ce1"
+    },
+    {
+      "id": "physical-issue_free_physical_candidates_pending_native_interpretation",
+      "value": 10185,
+      "unit": "native cells",
+      "vintage": "archived",
+      "input_sha256": "3a96fe9ab659f2f144a2ad435ab0057dd78de617878b6d6be485241699c134d2",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/physical/whole-target-support.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "5ab660cb68821e6b719f1b86819069ecac419ce1"
+    },
+    {
+      "id": "physical-launcher_elapsed_seconds",
+      "value": 5.800297750043683,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "3a96fe9ab659f2f144a2ad435ab0057dd78de617878b6d6be485241699c134d2",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/physical/whole-target-support.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "5ab660cb68821e6b719f1b86819069ecac419ce1"
+    },
+    {
+      "id": "physical-scientific_result_internal_elapsed_seconds",
+      "value": 5.129166416940279,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "3a96fe9ab659f2f144a2ad435ab0057dd78de617878b6d6be485241699c134d2",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/physical/whole-target-support.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "5ab660cb68821e6b719f1b86819069ecac419ce1"
+    },
+    {
+      "id": "physical-measured_child_lifetime_maximum_rss_bytes",
+      "value": 921075712,
+      "unit": "bytes",
+      "vintage": "archived",
+      "input_sha256": "3a96fe9ab659f2f144a2ad435ab0057dd78de617878b6d6be485241699c134d2",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/physical/whole-target-support.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "5ab660cb68821e6b719f1b86819069ecac419ce1"
+    },
+    {
+      "id": "constructor-qualified_cells",
+      "value": 11770,
+      "unit": "native cells",
+      "vintage": "archived",
+      "input_sha256": "64c3cb63d4b93dca3ee7a99dec803f6cf188289baa804a9e98bafa9543cccd30",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/native-patch.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "b91ede007eba73365e6ca46f95123d229c3cc38c"
+    },
+    {
+      "id": "constructor-qualified_targets",
+      "value": 8,
+      "unit": "targets",
+      "vintage": "archived",
+      "input_sha256": "64c3cb63d4b93dca3ee7a99dec803f6cf188289baa804a9e98bafa9543cccd30",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/native-patch.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "b91ede007eba73365e6ca46f95123d229c3cc38c"
+    },
+    {
+      "id": "constructor-charged_phase_bytes",
+      "value": 336745487,
+      "unit": "bytes",
+      "vintage": "archived",
+      "input_sha256": "64c3cb63d4b93dca3ee7a99dec803f6cf188289baa804a9e98bafa9543cccd30",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/native-patch.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "b91ede007eba73365e6ca46f95123d229c3cc38c"
+    },
+    {
+      "id": "constructor-elapsed_seconds",
+      "value": 1.2403220000000001,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "64c3cb63d4b93dca3ee7a99dec803f6cf188289baa804a9e98bafa9543cccd30",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/native-patch.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "b91ede007eba73365e6ca46f95123d229c3cc38c"
+    },
+    {
+      "id": "constructor-observed_final_rss_bytes",
+      "value": 275808256,
+      "unit": "bytes",
+      "vintage": "archived",
+      "input_sha256": "64c3cb63d4b93dca3ee7a99dec803f6cf188289baa804a9e98bafa9543cccd30",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/native-patch.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "b91ede007eba73365e6ca46f95123d229c3cc38c"
+    },
+    {
+      "id": "constructor-observed_lifetime_maximum_rss_kib",
+      "value": 269344,
+      "unit": "KiB",
+      "vintage": "archived",
+      "input_sha256": "64c3cb63d4b93dca3ee7a99dec803f6cf188289baa804a9e98bafa9543cccd30",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/native-patch.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "b91ede007eba73365e6ca46f95123d229c3cc38c"
+    },
+    {
+      "id": "constructor-repaired_credit",
+      "value": 0,
+      "unit": "native cells",
+      "vintage": "archived",
+      "input_sha256": "64c3cb63d4b93dca3ee7a99dec803f6cf188289baa804a9e98bafa9543cccd30",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/native-patch.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "b91ede007eba73365e6ca46f95123d229c3cc38c"
+    },
+    {
+      "id": "constructor-reader-phase_allowance_bytes",
+      "value": 1008640000,
+      "unit": "bytes",
+      "vintage": "archived",
+      "input_sha256": "64c3cb63d4b93dca3ee7a99dec803f6cf188289baa804a9e98bafa9543cccd30",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/native-patch.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "b91ede007eba73365e6ca46f95123d229c3cc38c"
+    },
+    {
+      "id": "constructor-reader-rss_allowance_bytes",
+      "value": 1008640000,
+      "unit": "bytes",
+      "vintage": "archived",
+      "input_sha256": "64c3cb63d4b93dca3ee7a99dec803f6cf188289baa804a9e98bafa9543cccd30",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/native-patch.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "b91ede007eba73365e6ca46f95123d229c3cc38c"
+    },
+    {
+      "id": "constructor-wrapper-exit-code",
+      "value": 1,
+      "unit": "exit code",
+      "vintage": "archived",
+      "input_sha256": "64c3cb63d4b93dca3ee7a99dec803f6cf188289baa804a9e98bafa9543cccd30",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/native-patch.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "b91ede007eba73365e6ca46f95123d229c3cc38c"
+    },
+    {
+      "id": "constructor-accepted-repaired-cells",
+      "value": 0,
+      "unit": "native cells",
+      "vintage": "archived",
+      "input_sha256": "64c3cb63d4b93dca3ee7a99dec803f6cf188289baa804a9e98bafa9543cccd30",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/native-patch.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "b91ede007eba73365e6ca46f95123d229c3cc38c"
+    },
+    {
+      "id": "cumulative-proposed-resulting_registry_entries",
+      "value": 43,
+      "unit": "authorities",
+      "vintage": "archived",
+      "input_sha256": "5469ce347ba71779f48d74e724ed83a38c2d92a9e97bc81fb8f04c78aea37166",
+      "input_file": {
+        "path": "coordination/engineering/myeik-native-followup-20261014/ledger.json",
+        "commit": "5ab660cb68821e6b719f1b86819069ecac419ce1"
+      },
+      "evaluation_commit": "85abd0655a91de323e5cae8ed29f770dcb426558"
+    },
+    {
+      "id": "cumulative-proposed-resulting_ledger_rows",
+      "value": 116,
+      "unit": "ledger rows",
+      "vintage": "archived",
+      "input_sha256": "5469ce347ba71779f48d74e724ed83a38c2d92a9e97bc81fb8f04c78aea37166",
+      "input_file": {
+        "path": "coordination/engineering/myeik-native-followup-20261014/ledger.json",
+        "commit": "5ab660cb68821e6b719f1b86819069ecac419ce1"
+      },
+      "evaluation_commit": "85abd0655a91de323e5cae8ed29f770dcb426558"
+    },
+    {
+      "id": "cumulative-proposed-composed_patch_cells",
+      "value": 28148,
+      "unit": "native cells",
+      "vintage": "archived",
+      "input_sha256": "5469ce347ba71779f48d74e724ed83a38c2d92a9e97bc81fb8f04c78aea37166",
+      "input_file": {
+        "path": "coordination/engineering/myeik-native-followup-20261014/ledger.json",
+        "commit": "5ab660cb68821e6b719f1b86819069ecac419ce1"
+      },
+      "evaluation_commit": "85abd0655a91de323e5cae8ed29f770dcb426558"
+    },
+    {
+      "id": "cumulative-proposed-composed_patch_rows",
+      "value": 4825,
+      "unit": "native rows",
+      "vintage": "archived",
+      "input_sha256": "5469ce347ba71779f48d74e724ed83a38c2d92a9e97bc81fb8f04c78aea37166",
+      "input_file": {
+        "path": "coordination/engineering/myeik-native-followup-20261014/ledger.json",
+        "commit": "5ab660cb68821e6b719f1b86819069ecac419ce1"
+      },
+      "evaluation_commit": "85abd0655a91de323e5cae8ed29f770dcb426558"
+    },
+    {
+      "id": "cumulative-proposed-existing_ledger_rows",
+      "value": 108,
+      "unit": "ledger rows",
+      "vintage": "archived",
+      "input_sha256": "5469ce347ba71779f48d74e724ed83a38c2d92a9e97bc81fb8f04c78aea37166",
+      "input_file": {
+        "path": "coordination/engineering/myeik-native-followup-20261014/ledger.json",
+        "commit": "5ab660cb68821e6b719f1b86819069ecac419ce1"
+      },
+      "evaluation_commit": "85abd0655a91de323e5cae8ed29f770dcb426558"
+    },
+    {
+      "id": "cumulative-proposed-existing_registry_entries",
+      "value": 42,
+      "unit": "authorities",
+      "vintage": "archived",
+      "input_sha256": "5469ce347ba71779f48d74e724ed83a38c2d92a9e97bc81fb8f04c78aea37166",
+      "input_file": {
+        "path": "coordination/engineering/myeik-native-followup-20261014/ledger.json",
+        "commit": "5ab660cb68821e6b719f1b86819069ecac419ce1"
+      },
+      "evaluation_commit": "85abd0655a91de323e5cae8ed29f770dcb426558"
+    },
+    {
+      "id": "cumulative-proposed-appended_rows",
+      "value": 8,
+      "unit": "ledger rows",
+      "vintage": "archived",
+      "input_sha256": "5469ce347ba71779f48d74e724ed83a38c2d92a9e97bc81fb8f04c78aea37166",
+      "input_file": {
+        "path": "coordination/engineering/myeik-native-followup-20261014/ledger.json",
+        "commit": "5ab660cb68821e6b719f1b86819069ecac419ce1"
+      },
+      "evaluation_commit": "85abd0655a91de323e5cae8ed29f770dcb426558"
+    },
+    {
+      "id": "cumulative-proposed-appended_native_cells",
+      "value": 11770,
+      "unit": "native cells",
+      "vintage": "archived",
+      "input_sha256": "5469ce347ba71779f48d74e724ed83a38c2d92a9e97bc81fb8f04c78aea37166",
+      "input_file": {
+        "path": "coordination/engineering/myeik-native-followup-20261014/ledger.json",
+        "commit": "5ab660cb68821e6b719f1b86819069ecac419ce1"
+      },
+      "evaluation_commit": "85abd0655a91de323e5cae8ed29f770dcb426558"
+    },
+    {
+      "id": "cumulative-proposed-accepted_repaired_cells",
+      "value": 0,
+      "unit": "native cells",
+      "vintage": "archived",
+      "input_sha256": "5469ce347ba71779f48d74e724ed83a38c2d92a9e97bc81fb8f04c78aea37166",
+      "input_file": {
+        "path": "coordination/engineering/myeik-native-followup-20261014/ledger.json",
+        "commit": "5ab660cb68821e6b719f1b86819069ecac419ce1"
+      },
+      "evaluation_commit": "85abd0655a91de323e5cae8ed29f770dcb426558"
+    },
+    {
+      "id": "final-selection-authorities",
+      "value": 44,
+      "unit": "authorities",
+      "vintage": "archived",
+      "input_sha256": "f6dcc41d64c0e4fc5cee3faaa1f85cac71ad091137629f4681220448468c9966",
+      "input_file": {
+        "path": "coordination/engineering/vietnam-current-cell-20261014/ledger.json",
+        "commit": "a9c2d4122eed9d08cd3f213d3f5157039c8823bb"
+      },
+      "evaluation_commit": "0d32e8b54c11175e5fb751742a895d3d42ded6f8"
+    },
+    {
+      "id": "final-selection-raw_rows",
+      "value": 192,
+      "unit": "raw ledger rows",
+      "vintage": "archived",
+      "input_sha256": "f6dcc41d64c0e4fc5cee3faaa1f85cac71ad091137629f4681220448468c9966",
+      "input_file": {
+        "path": "coordination/engineering/vietnam-current-cell-20261014/ledger.json",
+        "commit": "a9c2d4122eed9d08cd3f213d3f5157039c8823bb"
+      },
+      "evaluation_commit": "0d32e8b54c11175e5fb751742a895d3d42ded6f8"
+    },
+    {
+      "id": "final-selection-patch_cells",
+      "value": 37630,
+      "unit": "native cells",
+      "vintage": "archived",
+      "input_sha256": "f6dcc41d64c0e4fc5cee3faaa1f85cac71ad091137629f4681220448468c9966",
+      "input_file": {
+        "path": "coordination/engineering/vietnam-current-cell-20261014/ledger.json",
+        "commit": "a9c2d4122eed9d08cd3f213d3f5157039c8823bb"
+      },
+      "evaluation_commit": "0d32e8b54c11175e5fb751742a895d3d42ded6f8"
+    },
+    {
+      "id": "final-selection-expectation_cohorts",
+      "value": 44,
+      "unit": "expectation cohorts",
+      "vintage": "archived",
+      "input_sha256": "f6dcc41d64c0e4fc5cee3faaa1f85cac71ad091137629f4681220448468c9966",
+      "input_file": {
+        "path": "coordination/engineering/vietnam-current-cell-20261014/ledger.json",
+        "commit": "a9c2d4122eed9d08cd3f213d3f5157039c8823bb"
+      },
+      "evaluation_commit": "0d32e8b54c11175e5fb751742a895d3d42ded6f8"
+    },
+    {
+      "id": "final-selection-preserved-vietnam-authorities",
+      "value": 43,
+      "unit": "authorities",
+      "vintage": "archived",
+      "input_sha256": "f6dcc41d64c0e4fc5cee3faaa1f85cac71ad091137629f4681220448468c9966",
+      "input_file": {
+        "path": "coordination/engineering/vietnam-current-cell-20261014/ledger.json",
+        "commit": "a9c2d4122eed9d08cd3f213d3f5157039c8823bb"
+      },
+      "evaluation_commit": "0d32e8b54c11175e5fb751742a895d3d42ded6f8"
+    },
+    {
+      "id": "final-selection-preserved-vietnam-raw_rows",
+      "value": 184,
+      "unit": "raw ledger rows",
+      "vintage": "archived",
+      "input_sha256": "f6dcc41d64c0e4fc5cee3faaa1f85cac71ad091137629f4681220448468c9966",
+      "input_file": {
+        "path": "coordination/engineering/vietnam-current-cell-20261014/ledger.json",
+        "commit": "a9c2d4122eed9d08cd3f213d3f5157039c8823bb"
+      },
+      "evaluation_commit": "0d32e8b54c11175e5fb751742a895d3d42ded6f8"
+    },
+    {
+      "id": "final-selection-preserved-vietnam-patch_cells",
+      "value": 25860,
+      "unit": "native cells",
+      "vintage": "archived",
+      "input_sha256": "f6dcc41d64c0e4fc5cee3faaa1f85cac71ad091137629f4681220448468c9966",
+      "input_file": {
+        "path": "coordination/engineering/vietnam-current-cell-20261014/ledger.json",
+        "commit": "a9c2d4122eed9d08cd3f213d3f5157039c8823bb"
+      },
+      "evaluation_commit": "0d32e8b54c11175e5fb751742a895d3d42ded6f8"
+    },
+    {
+      "id": "final-selection-preserved-vietnam-expectation_cohorts",
+      "value": 43,
+      "unit": "expectation cohorts",
+      "vintage": "archived",
+      "input_sha256": "f6dcc41d64c0e4fc5cee3faaa1f85cac71ad091137629f4681220448468c9966",
+      "input_file": {
+        "path": "coordination/engineering/vietnam-current-cell-20261014/ledger.json",
+        "commit": "a9c2d4122eed9d08cd3f213d3f5157039c8823bb"
+      },
+      "evaluation_commit": "0d32e8b54c11175e5fb751742a895d3d42ded6f8"
+    },
+    {
+      "id": "final-selection-preserved-vietnam-patch_runs_preserved",
+      "value": 9224,
+      "unit": "native runs",
+      "vintage": "archived",
+      "input_sha256": "f6dcc41d64c0e4fc5cee3faaa1f85cac71ad091137629f4681220448468c9966",
+      "input_file": {
+        "path": "coordination/engineering/vietnam-current-cell-20261014/ledger.json",
+        "commit": "a9c2d4122eed9d08cd3f213d3f5157039c8823bb"
+      },
+      "evaluation_commit": "0d32e8b54c11175e5fb751742a895d3d42ded6f8"
+    },
+    {
+      "id": "physical-complete_legacy_input_bytes",
+      "value": 305573476,
+      "unit": "bytes",
+      "vintage": "archived",
+      "input_sha256": "3a96fe9ab659f2f144a2ad435ab0057dd78de617878b6d6be485241699c134d2",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/physical/whole-target-support.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "5ab660cb68821e6b719f1b86819069ecac419ce1"
+    },
+    {
+      "id": "physical-legacy_input_profile_bytes",
+      "value": 536870912,
+      "unit": "bytes",
+      "vintage": "archived",
+      "input_sha256": "3a96fe9ab659f2f144a2ad435ab0057dd78de617878b6d6be485241699c134d2",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/physical/whole-target-support.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "5ab660cb68821e6b719f1b86819069ecac419ce1"
+    },
+    {
+      "id": "physical-planning_ceiling_bytes",
+      "value": 969580544,
+      "unit": "bytes",
+      "vintage": "archived",
+      "input_sha256": "3a96fe9ab659f2f144a2ad435ab0057dd78de617878b6d6be485241699c134d2",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/physical/whole-target-support.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "5ab660cb68821e6b719f1b86819069ecac419ce1"
+    },
+    {
+      "id": "final-runtime-public-envelope-bytes",
+      "value": 1387,
+      "unit": "bytes",
+      "vintage": "archived",
+      "input_sha256": "5b8daad1c36213951187ce09b173e0fbeffcc47006ed7443bd2b295a09bd6c1b",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/final-selection/runtime-envelope.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "03b0ced3caa0e7e439d1455b7dca4bd634e1e475"
     }
   ],
   "metric_bindings": [
@@ -1736,12 +2968,242 @@
       "metric_id": "papua-conflict-currently_unassigned_cells",
       "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/papua-border-investigation-v1/investigation.json",
       "json_pointer": "/counts/conflict/currently_unassigned_cells"
+    },
+    {
+      "metric_id": "physical-total_source_candidate_cells",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/physical/summary.json",
+      "json_pointer": "/total_source_candidate_cells"
+    },
+    {
+      "metric_id": "physical-repair_candidates",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/physical/summary.json",
+      "json_pointer": "/repair_candidates"
+    },
+    {
+      "metric_id": "physical-physical_candidates",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/physical/summary.json",
+      "json_pointer": "/physical_candidates"
+    },
+    {
+      "metric_id": "physical-held_repair_candidates",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/physical/summary.json",
+      "json_pointer": "/held_repair_candidates"
+    },
+    {
+      "metric_id": "physical-held_physical_candidates",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/physical/summary.json",
+      "json_pointer": "/held_physical_candidates"
+    },
+    {
+      "metric_id": "physical-held_targets",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/physical/summary.json",
+      "json_pointer": "/held_targets"
+    },
+    {
+      "metric_id": "physical-inspected_targets",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/physical/summary.json",
+      "json_pointer": "/inspected_targets"
+    },
+    {
+      "metric_id": "physical-targets_without_recorded_interpretation_issues",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/physical/summary.json",
+      "json_pointer": "/targets_without_recorded_interpretation_issues"
+    },
+    {
+      "metric_id": "physical-issue_free_repair_candidates_pending_native_authority",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/physical/summary.json",
+      "json_pointer": "/issue_free_repair_candidates_pending_native_authority"
+    },
+    {
+      "metric_id": "physical-issue_free_physical_candidates_pending_native_interpretation",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/physical/summary.json",
+      "json_pointer": "/issue_free_physical_candidates_pending_native_interpretation"
+    },
+    {
+      "metric_id": "physical-launcher_elapsed_seconds",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/physical/summary.json",
+      "json_pointer": "/launcher_elapsed_seconds"
+    },
+    {
+      "metric_id": "physical-scientific_result_internal_elapsed_seconds",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/physical/summary.json",
+      "json_pointer": "/scientific_result_internal_elapsed_seconds"
+    },
+    {
+      "metric_id": "physical-measured_child_lifetime_maximum_rss_bytes",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/physical/summary.json",
+      "json_pointer": "/measured_child_lifetime_maximum_rss_bytes"
+    },
+    {
+      "metric_id": "constructor-qualified_cells",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/authority/qualification-observation.json",
+      "json_pointer": "/qualified_cells"
+    },
+    {
+      "metric_id": "constructor-qualified_targets",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/authority/qualification-observation.json",
+      "json_pointer": "/qualified_targets"
+    },
+    {
+      "metric_id": "constructor-charged_phase_bytes",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/authority/qualification-observation.json",
+      "json_pointer": "/charged_phase_bytes"
+    },
+    {
+      "metric_id": "constructor-elapsed_seconds",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/authority/qualification-observation.json",
+      "json_pointer": "/elapsed_seconds"
+    },
+    {
+      "metric_id": "constructor-observed_final_rss_bytes",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/authority/qualification-observation.json",
+      "json_pointer": "/observed_final_rss_bytes"
+    },
+    {
+      "metric_id": "constructor-observed_lifetime_maximum_rss_kib",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/authority/qualification-observation.json",
+      "json_pointer": "/observed_lifetime_maximum_rss_kib"
+    },
+    {
+      "metric_id": "constructor-repaired_credit",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/authority/qualification-observation.json",
+      "json_pointer": "/repaired_credit"
+    },
+    {
+      "metric_id": "constructor-reader-phase_allowance_bytes",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/authority/qualification-observation.json",
+      "json_pointer": "/allowance/phaseBytes"
+    },
+    {
+      "metric_id": "constructor-reader-rss_allowance_bytes",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/authority/qualification-observation.json",
+      "json_pointer": "/allowance/rssBytes"
+    },
+    {
+      "metric_id": "constructor-wrapper-exit-code",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/authority/external-timing-limit.json",
+      "json_pointer": "/wrapper_exit_code"
+    },
+    {
+      "metric_id": "constructor-accepted-repaired-cells",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/authority/external-timing-limit.json",
+      "json_pointer": "/accepted_repaired_cells"
+    },
+    {
+      "metric_id": "cumulative-proposed-resulting_registry_entries",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/cumulative-proposal/composition-receipt.json",
+      "json_pointer": "/resulting_registry_entries"
+    },
+    {
+      "metric_id": "cumulative-proposed-resulting_ledger_rows",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/cumulative-proposal/composition-receipt.json",
+      "json_pointer": "/resulting_ledger_rows"
+    },
+    {
+      "metric_id": "cumulative-proposed-composed_patch_cells",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/cumulative-proposal/composition-receipt.json",
+      "json_pointer": "/composed_patch_cells"
+    },
+    {
+      "metric_id": "cumulative-proposed-composed_patch_rows",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/cumulative-proposal/composition-receipt.json",
+      "json_pointer": "/composed_patch_rows"
+    },
+    {
+      "metric_id": "cumulative-proposed-existing_ledger_rows",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/cumulative-proposal/composition-receipt.json",
+      "json_pointer": "/existing_ledger_rows"
+    },
+    {
+      "metric_id": "cumulative-proposed-existing_registry_entries",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/cumulative-proposal/composition-receipt.json",
+      "json_pointer": "/existing_registry_entries"
+    },
+    {
+      "metric_id": "cumulative-proposed-appended_rows",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/cumulative-proposal/composition-receipt.json",
+      "json_pointer": "/appended_rows"
+    },
+    {
+      "metric_id": "cumulative-proposed-appended_native_cells",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/cumulative-proposal/composition-receipt.json",
+      "json_pointer": "/appended_native_cells"
+    },
+    {
+      "metric_id": "cumulative-proposed-accepted_repaired_cells",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/cumulative-proposal/composition-receipt.json",
+      "json_pointer": "/accepted_repaired_cells"
+    },
+    {
+      "metric_id": "final-selection-authorities",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/final-selection/final-metadata-preparation-receipt.json",
+      "json_pointer": "/combined/authorities"
+    },
+    {
+      "metric_id": "final-selection-raw_rows",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/final-selection/final-metadata-preparation-receipt.json",
+      "json_pointer": "/combined/raw_rows"
+    },
+    {
+      "metric_id": "final-selection-patch_cells",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/final-selection/final-metadata-preparation-receipt.json",
+      "json_pointer": "/combined/patch_cells"
+    },
+    {
+      "metric_id": "final-selection-expectation_cohorts",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/final-selection/final-metadata-preparation-receipt.json",
+      "json_pointer": "/combined/expectation_cohorts"
+    },
+    {
+      "metric_id": "final-selection-preserved-vietnam-authorities",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/final-selection/final-metadata-preparation-receipt.json",
+      "json_pointer": "/vietnam/authorities"
+    },
+    {
+      "metric_id": "final-selection-preserved-vietnam-raw_rows",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/final-selection/final-metadata-preparation-receipt.json",
+      "json_pointer": "/vietnam/raw_rows"
+    },
+    {
+      "metric_id": "final-selection-preserved-vietnam-patch_cells",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/final-selection/final-metadata-preparation-receipt.json",
+      "json_pointer": "/vietnam/patch_cells"
+    },
+    {
+      "metric_id": "final-selection-preserved-vietnam-expectation_cohorts",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/final-selection/final-metadata-preparation-receipt.json",
+      "json_pointer": "/vietnam/expectation_cohorts"
+    },
+    {
+      "metric_id": "final-selection-preserved-vietnam-patch_runs_preserved",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/final-selection/final-metadata-preparation-receipt.json",
+      "json_pointer": "/vietnam/patch_runs_preserved"
+    },
+    {
+      "metric_id": "physical-complete_legacy_input_bytes",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/physical/prospective-operating-config.json",
+      "json_pointer": "/complete_legacy_input_bytes"
+    },
+    {
+      "metric_id": "physical-legacy_input_profile_bytes",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/physical/prospective-operating-config.json",
+      "json_pointer": "/legacy_input_profile_bytes"
+    },
+    {
+      "metric_id": "physical-planning_ceiling_bytes",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/physical/summary.json",
+      "json_pointer": "/physical_process_planning_ceiling_bytes"
+    },
+    {
+      "metric_id": "final-runtime-public-envelope-bytes",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/final-selection/final-metadata-preparation-receipt.json",
+      "json_pointer": "/runtime_public_asset_correction/after/bytes"
     }
   ],
   "summaries": [],
   "conclusions": [
     {
-      "text": "This partial delivery preserves measured North Maluku source-centre findings, current-ownership accounting and all held source-conflict/Papua selectors. Source prerequisites are diagnostic preparation, not physical/native qualification.",
+      "text": "Original f7c3583 source-only investigation snapshot: This partial delivery preserves measured North Maluku source-centre findings, current-ownership accounting and all held source-conflict/Papua selectors. Source prerequisites are diagnostic preparation, not physical/native qualification.",
       "status": "supported",
       "source_ids": [
         "gb:IDN:ADM2"
@@ -1758,21 +3220,62 @@
       ]
     },
     {
-      "text": "Physical hierarchy qualification, native authority, selected-reader conservation, full session dispositions, independent review and delivered repair credit remain pending.",
+      "text": "Original f7c3583 source-only investigation snapshot: Physical hierarchy qualification, native authority, selected-reader conservation, full session dispositions, independent review and delivered repair credit remain pending.",
       "status": "unresolved",
       "source_ids": [
         "gb:IDN:ADM2",
         "natural-earth-reference"
       ]
+    },
+    {
+      "text": "The actual complete ten-target physical-source interpretation retained two reconstruction holds. Its eight issue-free targets provide 11,770 repair proposals; 10,185 physical candidates remain pending native interpretation. These counts do not certify all frozen physical intervals or territorial authority.",
+      "status": "supported",
+      "source_ids": [
+        "gb:IDN:ADM2",
+        "gshhg-original-physical"
+      ]
+    },
+    {
+      "text": "The actual unchanged source-target constructor qualified all 11,770 proposed native cells across eight targets. Current-owner-zero/selected-bank conservation and readback, cumulative acceptance and delivered repair credit remain pending; successful source/native qualification is not selected delivery.",
+      "status": "supported",
+      "source_ids": [
+        "gb:IDN:ADM2",
+        "gshhg-original-physical"
+      ]
+    },
+    {
+      "text": "Historical pre-Vietnam proposal retained unchanged for provenance: The cumulative data remains PROPOSED: 43 authorities, 116 raw ledger rows and 28,148 native cells preserve the prior 108 raw rows/42 authorities, while current-owner-zero, registry qualification, selected readback and cumulative acceptance are still pending. No active selector hook or accepted repair credit is claimed.",
+      "status": "supported",
+      "source_ids": [
+        "gb:IDN:ADM2",
+        "gshhg-original-physical"
+      ]
+    },
+    {
+      "text": "Final-selection candidate metadata preserves accepted Vietnam a9c2d412 cumulative 25,860 cells and appends the unchanged 11,770-cell IDN proposal, giving 37,630 candidate cells, 44 authorities and 192 raw rows. Current-owner-zero, registry/source consumption, no-loss/readback, emitted-package validation, independent exact-head review and queue acceptance remain pending; no accepted repair credit is claimed.",
+      "status": "supported",
+      "source_ids": [
+        "gb:IDN:ADM2",
+        "gshhg-original-physical"
+      ]
+    },
+    {
+      "text": "The package attempt failed because final runtime ledger/patch names were not valid flat public aliases. Only those runtime paths and their byte-bound sidecar/hook/receipt were corrected; all 37,630 candidate cells and prior source/native qualification remain unchanged. Historical geography success is not current-candidate approval; fresh corrected-head CI, package/consumer proof and exact-head review remain pending.",
+      "status": "supported",
+      "source_ids": [
+        "gb:IDN:ADM2",
+        "gshhg-original-physical"
+      ]
     }
   ],
   "stages": {
     "research": "partial",
-    "implementation": "not-proposed",
+    "implementation": "proposed",
     "geographic_approval": "unapproved"
   },
   "commands": [
     "node scripts/evidence-quality.mjs coordination/engineering/indonesia-adm2-current-cell-20261014/evidence-quality.json",
-    "Original producer operands, exact code hashes and fixed-path limitations are documented in source-investigation-v1/reproduction-context.json; no portable scientific replay or second execution is claimed."
+    "Original producer operands, exact code hashes and fixed-path limitations are documented in source-investigation-v1/reproduction-context.json; no portable scientific replay or second execution is claimed.",
+    "Constructor/physical execution receipts preserve their original immutable inputs, executed code and operating limits; this manifest preparation does not rerun those scientific operators. Current-owner-zero and selected consumer/readback remain separate pending phases."
   ]
 }
