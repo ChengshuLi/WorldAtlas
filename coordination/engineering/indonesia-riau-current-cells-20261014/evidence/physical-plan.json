@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "kind": "four-target-unchanged-accepted-physical-producer",
+  "accepted_base": "ecb837c599544ff8462b50f43a678d60c80fa5f6",
+  "source_stage": {
+    "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/7e3ec7df93e7c3f821e7f8746d845413ea183123a663f2bc71eb558edab005e1/work/.cache/riau-qualification-prep-20261014/source-run-001/original-stage-inputs.json",
+    "bytes": 279046,
+    "sha256": "7d6d1d88866b6a1ce8ee282100a6c972d3732d301e08df4a56d6bdf14317fcff"
+  },
+  "staged_input": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/7e3ec7df93e7c3f821e7f8746d845413ea183123a663f2bc71eb558edab005e1/work/.cache/riau-physical-config-20261014-003/run/.cache/full-census/all-stage-inputs.json",
+  "original_program": {
+    "commit": "ecb837c599544ff8462b50f43a678d60c80fa5f6",
+    "path": "coordination/engineering/source-target-native-delivery-20261014/evidence/physical-reproduction.py",
+    "bytes": 5450,
+    "sha256": "05af43d7d7722e8d7bb201f5876a43d9c7f9a2d0f4ea39e467229351a35c9bc3"
+  },
+  "program": {
+    "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/7e3ec7df93e7c3f821e7f8746d845413ea183123a663f2bc71eb558edab005e1/work/.cache/riau-physical-config-20261014-003/code/physical-reproduction.py",
+    "bytes": 5450,
+    "sha256": "05af43d7d7722e8d7bb201f5876a43d9c7f9a2d0f4ea39e467229351a35c9bc3"
+  },
+  "comparison": {
+    "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/7e3ec7df93e7c3f821e7f8746d845413ea183123a663f2bc71eb558edab005e1/work/.cache/riau-physical-config-20261014-003/code/comparison.py",
+    "bytes": 9834,
+    "sha256": "f9c226add23a37a39bf7fd34f5d8bdcb34a8d276b331fabf59bf9867b6f84bfe"
+  },
+  "metadata": [
+    {
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/transport-map.json",
+      "bytes": 56473,
+      "sha256": "644345be3d231431177c416b6ddbe3a1b2486597295af45fd5224857b5612d26",
+      "blob_oid": "56943cc4cc0ff21f2fbecca2c0ea7f95f6ca4298"
+    },
+    {
+      "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/member-index.json",
+      "bytes": 5821,
+      "sha256": "1fc10fa094ebd128f21d6440152d391cec879a2ec6ded9d665667f9e42513d12",
+      "blob_oid": "a749382ae63a861a8f65a6275a851fea0e79c454"
+    }
+  ],
+  "known_encoded_decoded_code_config_bytes": 305367855,
+  "transient_native_join_bytes": 95809336,
+  "runtime_inventory_bytes": 74176070,
+  "output_log_serialization_reserve_bytes": 69271552,
+  "known_phase_charge_before_observer_bytes": 544624813,
+  "working_directory": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/7e3ec7df93e7c3f821e7f8746d845413ea183123a663f2bc71eb558edab005e1/work/.cache/riau-physical-config-20261014-003/run",
+  "output": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/7e3ec7df93e7c3f821e7f8746d845413ea183123a663f2bc71eb558edab005e1/work/.cache/riau-physical-config-20261014-003/run/.cache/full-census/gshhg-direct/whole-target-support.json",
+  "planned_wall_seconds": 180,
+  "limits": [
+    "Byte-identical existing accepted physical-reproduction.py and comparison.py; existing complete source-part/member and decoded-pointset integrity checks remain. No additional metadata-field gate or numerical interpretation is added.",
+    "Whole 18 metadata/3 native products remain complete; the 256MiB source-probe cap is not claimed for this separate legacy physical producer.",
+    "Known byte charge is not a peak-memory bound; native/parsed expansion is data-dependent. Fresh processingAllowance must admit the complete phase at execution.",
+    "No hard deadline, live RSS monitor, output/log enforcement, containment or process-group operations are claimed; no denied sysctl operation will be retried.",
+    "All source-relative and unresolved physical cases remain held; source/physical evidence alone gives no authority, owner-zero or repair credit."
+  ],
+  "revision_reason": "Root directed byte-identical established accepted physical producer/input contract with its actual existing checks. Extra raw-header assertions are removed; physical001 failed receipt and unexecuted physical002 static review remain preserved."
+}
