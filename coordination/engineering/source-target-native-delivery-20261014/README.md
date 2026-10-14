@@ -69,3 +69,9 @@ Measured local phases are distinct: physical comparison 91.873 seconds,
 shared whole-target native operator 9.649 seconds, and immutable source/native
 constructor 1.784 seconds. These are not end-to-end delivery times. Initial
 integration and accepted-reader composition are reported separately from science.
+
+Actual immutable selected-reader readback on the reviewed dependency composition
+passed in 121.315 seconds at 458,149,888 bytes peak RSS: 15,269 cumulative
+cells, including 13,963 new source-target cells and all 1,306 prior cells.
+The exact tested candidate is retained in `evidence/selected-readback.json`.
+This precedes actual emitted-package and ordinary integration validation.
