@@ -65,6 +65,16 @@ test('native-only default and affected historical contexts retain exact cells an
     native_rows:[{y,runs:[[x,x+1,1]]}],native_bounds:[10,latitudes[y],10,latitudes[y]],native_cells:1,
     source_receipt_sha256:'c'.repeat(64),authority_sha256:'d'.repeat(64),rule_sha256:'e'.repeat(64)};
   assert.equal(nativeOnlyComponent(component),true);
+  const {repairVisibilityWitnesses}=await import('../scripts/check-effective-geographic-regression.mjs');
+  const witness=(before,after,candidates=[component])=>repairVisibilityWitnesses({candidates,size,latitudes,
+    beforeRows:[{y,runs:before}],afterRows:[{y,runs:after}]});
+  assert.equal(witness([],[[x,x+1,1]])[0].candidate_owner,1);
+  assert.deepEqual(witness([],[]),[null]);
+  assert.deepEqual(witness([],[[x,x+1,2]]),[null]);
+  assert.deepEqual(witness([[x,x+1,2]],[[x,x+1,1]]),[null]);
+  assert.deepEqual(witness([],[[x+1,x+2,1]]),[null]);
+  assert.throws(()=>witness([],[],[component,component]),/Duplicate/);
+
   const selected={...a,additiveFootprint:{version:2,kind:'retained-base-plus-additions',
     baseline_release_sha256:baseReference.footprints_sha256,base_geometry_sha256:hash(a.geometry),ledger_sha256:'f'.repeat(64),
     authority_registry_sha256:'d'.repeat(64),components:[component]}};
