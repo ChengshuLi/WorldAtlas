@@ -166,10 +166,11 @@ export function validateSelectedExpectations(expected, ledger, ledgerHash, previ
 const branchScope = branch => `coordination/engineering/${branch.slice('engineering/'.length)}/`;
 const inScope = (name, scopes) => scopes.some(prefix => name.startsWith(prefix));
 function supportingText(name, branch, reservation) {
-  return name === branchScope(branch) + 'README.md' ||
-    inScope(name, engineeringOwnedScopes(reservation)) &&
-      (/\/(?:README|CHECKPOINT)\.md$/.test(name) || name.endsWith('.txt') &&
-        !/\/(?:requirements|constraints)(?:[.-].*)?\.txt$/i.test(name));
+  // Names do not establish consumption. The selected-role/package checks below
+  // prove new ordinary bounded text is supporting evidence, regardless of title.
+  return inScope(name, [branchScope(branch), ...engineeringOwnedScopes(reservation)]) &&
+    /\.(?:md|txt)$/.test(name) &&
+    !/\/(?:requirements|constraints)(?:[.-].*)?\.txt$/i.test(name);
 }
 function nativeOperandPath(name, branch, reservation) {
   return /^(?:rows|runs)-[0-9]+\.bin\.gz$/.test(name.split('/').at(-1)) &&
