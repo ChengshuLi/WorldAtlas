@@ -1,10 +1,12 @@
-# Bounded full CI checkout
+# Bounded CI input checkout
 
 The full application acquisitions in `merge-integration-checks.yml` (regression
 and the selected-data package route) and `worker-merge.yml` (integration) use
 `scripts/acquire-ci-checkout.py` after its source is authenticated from the exact
 trusted base. Evidence-only sparse checkouts, geographic readers, test selection,
 package producers, artifact uploads and merge policy retain their existing roles.
+The complete software-regression route omits two unconsumed source-only namespaces
+from its input download; complete regression still means every original test runs.
 
 The author workflow is a `pull_request` workflow. Its workflow SHA can include
 candidate changes, so the acquisition helper is obtained from
@@ -31,23 +33,60 @@ metadata. Both identifiers must match the fetched commit and checked-out tree.
 The workspace must be an existing empty ordinary absolute directory. The helper
 rechecks its device/inode, absence of symlinks and emptiness immediately before
 atomic same-filesystem replacement. Preexisting or newly arriving foreign files
-are preserved. Acquisition uses one private sibling repository and one fetch;
-terminal cleanup never removes the workspace.
+are preserved. Acquisition uses one private sibling repository; terminal cleanup never removes
+the workspace. No phase discards a progressing download and starts another repository.
 
 The dedicated `WORLDATLAS_CHECKOUT_TOKEN` environment variable is removed from
-the helper environment immediately. Only the fetch child receives authentication,
+the helper environment immediately. Only acquisition fetch/materialization children receive authentication,
 through transient Git configuration environment entries. Tokens are not included
-in arguments, repository configuration, receipts or progress output. Checkout and
-verification inherit an allowlisted environment without authentication. Global and
+in arguments, repository configuration, receipts or progress output. Verification inherits an allowlisted environment without authentication;
+ordinary full checkout materialization remains credential-free. Global and
 system Git configuration, template hooks, credential helpers and LFS smudge are
-disabled. No submodules are acquired. The full checkout remains a normal Git
-repository with a detached exact HEAD, depth-one history and unchanged tracked
-file modes/content; it is not reconstructed from an archive or file API.
+disabled. No submodules are acquired. Both routes remain normal Git repositories with a detached exact HEAD,
+depth-one history and unchanged included file modes/content. They are not
+reconstructed from an archive or file API.
+
+## Complete software-regression inputs
+
+The author regression and queue integration acquisition steps supply their existing
+trusted `INTEGRATION_PROFILE` and `INTEGRATION_TEST_SELECTION` outputs. Only
+`full` plus `complete` enables the sparse input download. Standalone package and
+selected-data acquisitions retain the full tree. An older authenticated base helper
+ignores these environment values, so initial integration safely retains the old
+full acquisition; the candidate helper never becomes a credentialed fallback.
+
+The sparse route includes the whole current tree except `data/regional-review/`
+and `research/campaigns/`. These are source-only owned lanes: the ordinary software
+suite uses their namespace strings in ownership tests and creates its own fixtures,
+but does not read their real current packet bodies. Actual application data,
+engineering archives, the current test inventory and consumed `research/geography/`
+remain included. The package-input control fails if either omitted namespace
+becomes a required package/verification input. A new real consumer must revise
+this audited input boundary rather than silently hydrate absent source data.
+
+Git first fetches the exact depth-one commit and complete tree metadata with
+`--filter=blob:none`. Sparse checkout then obtains the selected missing blobs within
+the same supervised total deadline, using transient authentication. Global/system
+configuration, hooks, credential helpers and LFS smudge remain disabled. No candidate
+code runs. The helper disables the origin's promisor behavior and removes its
+partial-clone filter before promotion, preventing later implicit downloads.
+The existing explicit native regression commit fetch remains unchanged; included
+historical input paths can obtain their unique old bytes. An excluded source-only
+historical blob is not promised as a software input, and a plain commit fetch is
+not proof that every omitted blob became available.
+
+At accepted main `ecb837c599544ff8462b50f43a678d60c80fa5f6`, complete Git tree
+metadata contains 31,905 files / 13,068,725,465 raw file bytes. The two exclusions
+remove 5,131 worktree files and 3,955 unique blobs / 2,254,479,257 distinct blob
+bytes, approximately 24.8% of unique source bytes. Shared blobs needed elsewhere
+are retained. These numbers describe input selection, not compressed wire traffic
+or measured throughput; a later ordinary adopted CI run must establish real timing.
+No checkout artifact/cache framework or altered test selection is introduced.
 
 ## Overall deadline and cleanup
 
 One monotonic total budget includes the supplied bootstrap elapsed time, fetch,
-checkout, identity checks and terminal cleanup. A progressing fetch has no separate
+selected blob acquisition/checkout, identity checks and terminal cleanup. A progressing fetch has no separate
 cutoff and is not restarted in a fresh repository. The workflow default remains
 420 seconds. The helper accepts a finite total budget up to 1,800 seconds, with
 bootstrap elapsed time below it. The 30-minute implementation ceiling remains a
@@ -58,7 +97,7 @@ limits remain 25 and 30 minutes. Invalid, nonfinite, spent or oversized budgets
 refuse before staging. The supervisor reserves time inside the total budget for
 termination and cleanup. Command failure, wrong commit/tree, failed checkout,
 changed workspace, cancellation or unverifiable process cleanup ends acquisition
-without another fetch.
+without restarting acquisition.
 
 Each command starts a new process session. SIGINT/SIGTERM and deadlines trigger
 bounded TERM/KILL escalation, direct-child reaping and verification that no live
@@ -101,7 +140,8 @@ GIT_NO_LAZY_FETCH=1 node --test test/ci-checkout.test.mjs
 ```
 
 The tests use tiny real local Git repositories and controlled subprocess failures,
-including a TERM-resistant child/grandchild, cancellation, unobservable cleanup,
+including filtered sparse inputs, explicit historical input fetch, a TERM-resistant
+child/grandchild during fetch or materialization, cancellation, unobservable cleanup,
 wrong immutable identities, foreign workspace contents and secret-bearing stderr.
 Process inspection must be permitted for the actual cleanup controls; denial is
 a failed/unverified test, not a reason to omit its assertions. Hosted adoption and
