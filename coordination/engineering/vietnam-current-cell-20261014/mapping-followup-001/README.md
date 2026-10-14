@@ -1,0 +1,11 @@
+# Vietnam mapped-member repair follow-up
+
+The accepted member-aware constructor qualified 131 proposed cells: Trang Bàng 1 (owner 48311) and Phú Lộc 130 (owner 48513). Complete retained VNM ADM2 source, unchanged original physical evidence, and accepted semantic and canonical membership authenticate the competing cities. Đà Nẵng and Hồ Chí Minh remain competitors only.
+
+Native qualification ran at immutable input commit `1d299b369f8add4372a93185ddc862bab63216eb` using accepted PR #1900 code. The complete charged phase was 407,495,197 bytes against a fresh 898,809,856-byte allowance. External wall time was 9.1396135 seconds; normalized Node main-process lifetime peak RSS was 279,838,720 bytes.
+
+The cumulative composition uses actual accepted Myanmar base `4f404fe1816396a31d541833b8a709a7999e8dea`. It preserves all 43,298 prior cells, 45 authority entries and 201 literal rows, including eight inactive exceptions, then appends exactly 131 cells into the proposed 43,429-cell / 46-authority / 203-row selection. Independent record review verifies all nine Myanmar rows and 5,668 cell/owner tuples remain unchanged. Composition took 2.473014916 seconds and charged 441,238,286 bytes within a fresh 942,891,008-byte allowance; normalized Node lifetime peak was 352,010,240 bytes.
+
+The committed sidecar derives exact product descriptors. The active selector preserves the original `selected_geography` key order. Nine actual consumed runtime roles are appended to the inherited package declaration; the new `selected-delivery-expectations.json` is checkout-only smoke metadata. Ordinary unchanged-producer selected-data delivery retains mandatory CPU/native/offline checks and intentionally omits fresh browser qualification under the accepted package policy.
+
+Actual current-owner-zero consumption, selected conservation/readback, exact-head review and integration remain pending. New accepted credit is zero. All original source and GSHHG products, earlier repairs, source and city-semantic holds, residual physical holds and all physical-interpretation holds remain preserved. Cooperative guards and main-process peak observations do not establish live aggregate process-tree enforcement. Issue #1881 remains partial.
