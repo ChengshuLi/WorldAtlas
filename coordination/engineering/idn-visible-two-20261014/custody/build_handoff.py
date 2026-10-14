@@ -130,7 +130,7 @@ def main():
     # The Node-written context preserves numeric values, not Python's original
     # 0.0/0 spelling. Recover preimages only from authenticated complete banks.
     ordinary_targets = {}
-    for name in ['data/geography/part-18.json', 'data/geography/part-19.json']:
+    for name in ['data/geography/part-10.json']:
         context_pin = next(p for p in current['inputs'] if p['path'] == name)
         bank = unique(json.loads(read(name, expected=context_pin))['features'], 'id')
         for retained in selected_fit:

@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/96fbbfdc645891db85ce3ff61876258140034699aeda258d17d25079505a4a07/work/coordination/engineering/idn-visible-two-20261014/custody/build_handoff.py", line 287, in <module>
+    main()
+  File "/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/96fbbfdc645891db85ce3ff61876258140034699aeda258d17d25079505a4a07/work/coordination/engineering/idn-visible-two-20261014/custody/build_handoff.py", line 134, in main
+    context_pin = next(p for p in current['inputs'] if p['path'] == name)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+StopIteration
