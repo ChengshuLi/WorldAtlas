@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "kind": "finite-tanjung191-stock-constructor-external-observation",
+  "started_at_utc": "2026-10-14T20:35:53.304997+00:00",
+  "finished_at_utc": "2026-10-14T20:35:54.886067+00:00",
+  "exit_code": 0,
+  "elapsed_seconds": 1.5806844159960747,
+  "deadline_seconds": 60,
+  "deadline_terminated": false,
+  "cleanup": "ordinary-completed",
+  "maximum_child_lifetime_rss_bytes": 254214144,
+  "rss_unit_basis": "Darwin /usr/bin/time -l reports maximum resident set size in bytes",
+  "driver_sha256": "13c944b1027d40533cbd7fed38aaff69e5443a317450823c75dbee536465c9e2",
+  "observer_sha256": "db5a56ab285a35c83d41a64e08074396f2e5060216c31849b05864a100f773f1",
+  "logs": [
+    {
+      "path": "stdout.log",
+      "bytes": 1845,
+      "sha256": "f28924d8caa0ef999709a298238fd94062802b445736cd906eae04768e310045"
+    },
+    {
+      "path": "external-time.log",
+      "bytes": 777,
+      "sha256": "14191054210d026658603e848625c2f09701187df73599d3ea408cd5dcb20087"
+    }
+  ],
+  "limits": [
+    "External finite deadline supervises only this owned process group; measured child lifetime RSS is not aggregate process-tree RSS or enforced OS quota.",
+    "Node stock reader performs its own fresh phase/RSS admission and per-reader checks.",
+    "This observation is not qualification if the actual constructor exits nonzero or no successful authority receipt exists."
+  ]
+}
