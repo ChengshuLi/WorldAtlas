@@ -1,5 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {spawnSync} from 'node:child_process';
+import {fileURLToPath} from 'node:url';
 import {diagnoseMapCell} from '../src/map-cell-diagnosis.js';
 import {measureCellFeatures, sourceFeatureId} from '../scripts/diagnose-map-cell.mjs';
 import {nativeRowLatitudes} from '../src/native-grid.js';
@@ -112,4 +114,11 @@ test('anonymous or numeric ordinal features cannot establish an upstream identit
     const measured = measureCellFeatures([{id, properties: {}, geometry}], {x: 180, y: 180}, context);
     assert.equal(measured.matches.length, 1); assert.equal(measured.matches[0].joinable_id, false);
   }
+});
+
+test('coordinate CLI rejects out-of-domain latitude before opening any repository input', () => {
+  const command = fileURLToPath(new URL('../scripts/diagnose-map-cell.mjs', import.meta.url));
+  const result = spawnSync(process.execPath, [command, '--repo', '/not/a/repository', '--coordinate', '0,90'], {encoding: 'utf8'});
+  assert.notEqual(result.status, 0); assert.match(result.stderr, /Coordinate outside the canonical Mercator domain; no clamping/);
+  assert.doesNotMatch(result.stderr, /not a git repository/);
 });

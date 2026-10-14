@@ -165,7 +165,8 @@ export async function diagnoseCells({repo, commit, cells, original = [], consume
     const features = value.type === 'FeatureCollection' ? value.features : value.type === 'Feature' ? [value] : null;
     demand(Array.isArray(features), 'Source input must be GeoJSON');
     const ids = features.map(sourceFeatureId); demand(new Set(ids).size === ids.length, 'Source IDs are not unique');
-    const sourceMatch = Object.entries(administrativeSources).filter(([, metadata]) => [sha(raw), sha(body)].includes(metadata.sha256));
+    const sourceDigests = new Set([sha(raw), sha(body)]);
+    const sourceMatch = Object.entries(administrativeSources).filter(([, metadata]) => sourceDigests.has(metadata.sha256));
     const matchedMetadata = sourceMatch.length === 1 ? sourceMatch[0][1] : null;
     const provenance = {path: name, commit, sha256: sha(raw), date: value.date ?? value.metadata?.date ?? matchedMetadata?.boundaryYearRepresented ?? null,
       source_id: sourceMatch.length === 1 ? sourceMatch[0][0] : null, source_metadata_byte_match: sourceMatch.length === 1, coverage: value.coverage ?? 'supplied-collection-only'};
@@ -244,6 +245,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
     if (key === '--repo' || key === '--commit') options[key.slice(2)] = value;
     else if (key === '--cell' || key === '--coordinate') {
       const pair = value.split(',').map(Number); demand(pair.length === 2 && pair.every(Number.isFinite), 'Use a comma-separated pair');
+      if (key === '--coordinate') demand(pair[0] >= -180 && pair[0] < 180 && Math.abs(pair[1]) <= 85.0511287798066, 'Coordinate outside the canonical Mercator domain; no clamping is applied');
       const [x, y] = key === '--coordinate' ? projectCell(...pair).map(Math.floor) : pair; options.cells.push({x, y});
     } else if (['--original', '--consumed', '--physical'].includes(key)) options[key.slice(2)].push(value);
     else throw Error('Use --repo, --commit, repeated --cell X,Y or --coordinate LON,LAT, and optional --original/--consumed/--physical Git GeoJSON paths');
