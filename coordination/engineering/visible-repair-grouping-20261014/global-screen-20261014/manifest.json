@@ -1,0 +1,197 @@
+{
+  "kind": "current-map-cell-witness-rescreen-v1",
+  "scientific_repair_approval": false,
+  "input_bindings": [
+    {
+      "commit": "a35ba193cfe5c84424a4952ca752593ebf9d7102",
+      "path": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/report.json",
+      "bytes": 103877,
+      "sha256": "3527014045c5aedc2b26be8bb5dff97e3e34097b7d4cb66a9b2fe3fcf33a6856"
+    },
+    {
+      "commit": "a35ba193cfe5c84424a4952ca752593ebf9d7102",
+      "path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/report.json",
+      "bytes": 121260,
+      "sha256": "13f4ce3f8312eb735e2a5253340b018c2d577b4656e9576ec93da3ce15a6e16e"
+    },
+    {
+      "commit": "a35ba193cfe5c84424a4952ca752593ebf9d7102",
+      "path": "coordination/engineering/worldwide-inventory-1164-20261006/run-one/report.json",
+      "bytes": 73547,
+      "sha256": "a5423b1e62b5a0793b83999d87d1f6d50916db482cf2ec74973f75555c2bda6c"
+    },
+    {
+      "commit": "a35ba193cfe5c84424a4952ca752593ebf9d7102",
+      "path": "coordination/engineering/worldwide-successor-1215-20261006/run-one/report.json",
+      "bytes": 65206,
+      "sha256": "3d95a15d3797943290997c9a16fede48e6eb6e0941b0071a5fcd410375c49d46"
+    },
+    {
+      "commit": "a35ba193cfe5c84424a4952ca752593ebf9d7102",
+      "path": "coordination/engineering/global-source-comparisons-a-001-20261006/source-catalogue.json",
+      "bytes": 403376,
+      "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9"
+    },
+    {
+      "commit": "a35ba193cfe5c84424a4952ca752593ebf9d7102",
+      "path": "src/native-grid.js",
+      "bytes": 6408,
+      "sha256": "b54d593b9c6c1144e08cf2d536862dd9a14dd138e1851441dcbe4c487cf2d663"
+    },
+    {
+      "commit": "a35ba193cfe5c84424a4952ca752593ebf9d7102",
+      "path": "src/native-runtime.js",
+      "bytes": 3497,
+      "sha256": "988f7069b6d39cbe0fa7bc3b0e4faaa61c2def7fb3d0ec68b87b5e14c7463600"
+    },
+    {
+      "commit": "a35ba193cfe5c84424a4952ca752593ebf9d7102",
+      "path": "scripts/check-effective-geographic-regression.mjs",
+      "bytes": 77142,
+      "sha256": "5aa156ef010e0bfb14b88286a1c82231f6e4a7749c8063142082feb84e721cda"
+    },
+    {
+      "commit": "a35ba193cfe5c84424a4952ca752593ebf9d7102",
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "bytes": 145206,
+      "sha256": "1593aad902a1c7010c5ffde21b2af2d39edd2093c82fac6973ed207e3b365847"
+    },
+    {
+      "commit": "8981ef25b450257b2a5084068a5c8e6e409518cb",
+      "path": "scripts/group-visible-repairs.mjs",
+      "bytes": 7835,
+      "sha256": "6a004883dc3d0665cc436e7bb64bdfe5a1ce11ef8e7112871f06b0637be1500e"
+    }
+  ],
+  "reproducers": [
+    {
+      "path": "reconstruct.py",
+      "executed_script_sha256": "34ee9b76063d820dd5160aa3060276eae40e03625d80e3da6eecba74ea76a03b",
+      "reproducer_sha256": "34ee9b76063d820dd5160aa3060276eae40e03625d80e3da6eecba74ea76a03b",
+      "change": "None"
+    },
+    {
+      "path": "restore-component-geometries.py",
+      "executed_script_sha256": "976e7a248008b88096954758eb031221d24a79f9f80c931b5d4251528ca11d10",
+      "reproducer_sha256": "976e7a248008b88096954758eb031221d24a79f9f80c931b5d4251528ca11d10",
+      "change": "None"
+    },
+    {
+      "path": "recheck-current-owners.mjs",
+      "executed_script_sha256": "ebbbfa7902bc57c765de9124582ad91fab2f3b4c68f178ea41a8cde943f4a5ec",
+      "reproducer_sha256": "8452f390f9bf41d370718aa1d0d1251f2c0692462ad25268b6c94467dfc2622a",
+      "change": "Equivalent reader import locator only"
+    },
+    {
+      "path": "verify-native-witnesses.mjs",
+      "executed_script_sha256": "25653d69ab590d4c3c056e39baf05bb9ac778b07c53a555ff68ba63edbe04161",
+      "reproducer_sha256": "25653d69ab590d4c3c056e39baf05bb9ac778b07c53a555ff68ba63edbe04161",
+      "change": "None"
+    }
+  ],
+  "outputs": {
+    "positive_rows": [
+      {
+        "path": "positive-rows-000.json.gz",
+        "bytes": 1167764,
+        "sha256": "eb7ae04bb4081790472aa0be83833e1d9bda5a2674956e8fecdd73fd5aac1836",
+        "decoded_bytes": 8388515,
+        "decoded_sha256": "545c241141bf4d48dda93310cb4d2641ac01e6c9d4e135b80eacfe7a789dad74",
+        "records": 7757
+      },
+      {
+        "path": "positive-rows-001.json.gz",
+        "bytes": 1132612,
+        "sha256": "8e86e5547c675570dad41a0d8e1775c93b13d1ab9e05be6a720442dfea57e9c3",
+        "decoded_bytes": 8387882,
+        "decoded_sha256": "eb8719c119a21aa09e3cbb19e0b6524a9291bdc9ee46126ae64ebba87500c2f1",
+        "records": 7462
+      },
+      {
+        "path": "positive-rows-002.json.gz",
+        "bytes": 1094536,
+        "sha256": "cfdf571ee32a8259c6bd8798399fa2fe0fc4d2c19af086f9d24878d63197ef29",
+        "decoded_bytes": 8388475,
+        "decoded_sha256": "917cb6b5212089bd68c4c365dab9122fe56740ad5f6434e6736609d80214fcfa",
+        "records": 7059
+      },
+      {
+        "path": "positive-rows-003.json.gz",
+        "bytes": 1109575,
+        "sha256": "cc99758f957033d66b2fa000a09672227a9f32662e2d2aa3b592f4129974e989",
+        "decoded_bytes": 8387840,
+        "decoded_sha256": "fff493b76338aac8032ae313c9106c84ace2092759b6c30da30e02bf1c04ba8a",
+        "records": 6966
+      },
+      {
+        "path": "positive-rows-004.json.gz",
+        "bytes": 1073972,
+        "sha256": "83a74a6741313da1e11a18155a12397ebb3d9a95fa2a21df6cc856daefb99dc7",
+        "decoded_bytes": 8387678,
+        "decoded_sha256": "23d32c5eb21ce6b8dca883b37e4d8d5e279cda5a74dacc30da353cad4d6c8997",
+        "records": 6653
+      },
+      {
+        "path": "positive-rows-005.json.gz",
+        "bytes": 1128905,
+        "sha256": "239081db59b64c80d48000c499955036da40dbc3c5b8572bc32fe8f6bc43b929",
+        "decoded_bytes": 8388288,
+        "decoded_sha256": "e0130f8826b75bbf84da7836dd226da06a6add4d7ecf7064d89bd6c4de54dc8d",
+        "records": 6868
+      },
+      {
+        "path": "positive-rows-006.json.gz",
+        "bytes": 1128672,
+        "sha256": "f0f9c3b138b0f7b0c1e0bd9eb4c953dd11d7dd7ea7f3e7e5b79231b6a5307a63",
+        "decoded_bytes": 8388449,
+        "decoded_sha256": "b19bb1967a7e8c5fc896c8b616679e3fe00f3d0fa363f79fb912a376ef5747d2",
+        "records": 6825
+      },
+      {
+        "path": "positive-rows-007.json.gz",
+        "bytes": 1123230,
+        "sha256": "b4a17908254dd15e92026c279b23021c5790612d66dfd1db86818d55285120bf",
+        "decoded_bytes": 8388057,
+        "decoded_sha256": "44f438be01c18ec11891767ebfb131551cc98a2f07ababee8696f7e4cdedcbd0",
+        "records": 7102
+      },
+      {
+        "path": "positive-rows-008.json.gz",
+        "bytes": 1137746,
+        "sha256": "0f16430051731647c8c374509ee757e302657db831df973c86e9c8d0e20d8b50",
+        "decoded_bytes": 8388597,
+        "decoded_sha256": "e5753901c58be7b387249188e8c0ce5e0e01f1e7878602930fac6a82137d35eb",
+        "records": 7351
+      },
+      {
+        "path": "positive-rows-009.json.gz",
+        "bytes": 140924,
+        "sha256": "20d4afe1b615b8468e0c335ad40ec6b7abfef106ec771041507db6c1881d9b48",
+        "decoded_bytes": 1087045,
+        "decoded_sha256": "32c7be4fd63df93b3b5073bd2d703391764cb90c7b8d2641d610e5f25befcc01",
+        "records": 953
+      }
+    ],
+    "planning_groups": {
+      "path": "planning-groups.json.gz",
+      "bytes": 2569140,
+      "sha256": "718cc0ed72d2b40eca25238e09042cf6bea983944ee29918c84c812282405b75",
+      "decoded_bytes": 7237875,
+      "decoded_sha256": "99203be344faaabb7ecd0d60c6a8dbe18ea8196b06e2ff5882e0806a1c36e078"
+    },
+    "unknown_rows": {
+      "path": "unknown-rows.json.gz",
+      "bytes": 1189628,
+      "sha256": "ca80c6fd0022de34cfc16a074e402059ca3350829ffd8cc582d6f969bb24b88f",
+      "decoded_bytes": 5600212,
+      "decoded_sha256": "66851b87a34e6adba0d0bd35264e27e357581a74f50d45314e17165b18106ef2"
+    }
+  },
+  "current_selection_sha256": "ef38a6dab899ad465c07c80e3c849d578ea221ce08515737830f315595f041e7",
+  "limitations": [
+    "Confirmed positive witnesses give a lower bound, not total missing map cells or full component cell counts.",
+    "Source catalogue identifies reusable input products; it does not establish target/source/physical/water/legal approval.",
+    "Old misses, now-owned representative witnesses and exact-operator misses remain unknown for other cells.",
+    "Required source qualification and actual runtime memory admission remain independent."
+  ]
+}

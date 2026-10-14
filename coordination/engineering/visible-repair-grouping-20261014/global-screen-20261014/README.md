@@ -1,0 +1,19 @@
+# Current map-cell witness screen and regrouping
+
+Refs #1849. This is a read-only eligibility/planning result, not source qualification or delivered repairs.
+
+The exact native operator confirms 64,996 distinct unassigned map-cell witnesses in 64,996 original components. Another 30,177 components remain unknown for other cells. These are lower-bound observations, not a global total. The original geometric inventory is not treated as a visible-repair target.
+
+Shared source/locality planning produced 243 groups for 32,931 components. The other 32,065 positive components retain their source candidate IDs and remain unresolved for single-product routing: 14,779 unmapped nonadministrative source IDs, 13,070 multiple-source sets, 4,216 without source locators. A planning group does not authenticate source suitability, current physical land, target authority, water exclusion or legal ownership.
+
+The current ownership selection and cumulative patch are pinned in the reports. Existing historical observations and complete original geometries were reconstructed and authenticated from their original retained products and successor deltas. No new global polygon audit was performed. Current owners were acquired once per shared latitude block from whole authenticated containing assets; all representative misses and now-owned witnesses remain unknown. Exact membership used nativePolygonIntervals with the normative binary64 latitude table, grouped into at most 4,096-row blocks. Whole component cell counts remain null because only the retained witness was used to establish a positive lower bound.
+
+Flat positive records are split into bounded gzip parts (at most 8 MiB decoded); the manifest indexes those actual outputs. Group counts are component-cell sums, not deduplicated global totals. Distinct confirmed witness cells were separately counted and are all unique in this run. Native asset lists are conservative unions for the acquired block; they can overestimate shared acquisition but never replace full later runtime admission.
+
+## Reproduction
+
+Use the exact reviewed code checkout 8981ef25b450257b2a5084068a5c8e6e409518cb, with its existing selected-reader code dependencies and pinned Node/Python environment. The underlying owner and numerical-reader inputs match accepted a35ba193; input bindings are recorded in manifest.json. Copy the four reproducer files to `.cache/global-rescreen/` in that checkout so their ordinary relative imports resolve. The owner-reader import was changed only from an equivalent hash-verified existing checkout to the local equivalent module; the executed and portable script digests are both retained.
+
+Create input JSONs by reading the five immutable report/catalogue paths in manifest.json into these names: historical-report.json, frozen-report.json, inventory-report.json, successor-report.json and source-catalogue.json. Run reconstruct.py. Derive witnesses-lean.json from historical-positive-witnesses.json by retaining component_id, cell, cell_centre_lonlat, bounds, source_ids, contact_ids and rank. Run recheck-current-owners.mjs, restore-component-geometries.py, then verify-native-witnesses.mjs. Fresh output paths are required by the Node writers. Read-only Git acquisition resolves the referenced whole retained bodies; do not substitute modern geometry products or change resolution.
+
+Observed processing times were 6.4 seconds for observation reconstruction, 27.8 seconds for current-owner reads, 8.1 seconds for original geometry reconstruction, and 13.2 seconds for exact witness checks and grouping. Peak measured memory remained below 600 MiB. These timings exclude preparation/tooling and do not measure repair-delivery throughput. Source predicates, independent acceptance, actual SOURCE/NATIVE qualification and final effective-map verification remain mandatory before any repair credit.
