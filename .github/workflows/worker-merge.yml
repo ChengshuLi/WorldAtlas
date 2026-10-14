@@ -45,9 +45,6 @@ jobs:
       shards: ${{ steps.prepare.outputs.shards }}
       test_selection: ${{ steps.prepare.outputs.test_selection }}
       expectations_path: ${{ steps.prepare.outputs.expectations_path }}
-      proof_attempt: ${{ steps.prepare.outputs.proof_attempt }}
-      proof_run: ${{ steps.prepare.outputs.proof_run }}
-      geography_proof: ${{ steps.prepare.outputs.geography_proof }}
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
@@ -75,7 +72,7 @@ jobs:
           retention-days: 30
   geography:
     needs: prepare
-    if: needs.prepare.outputs.candidate != '' && needs.prepare.outputs.geography_proof == ''
+    if: needs.prepare.outputs.candidate != ''
     runs-on: ubuntu-latest
     timeout-minutes: 25
     permissions:
@@ -136,7 +133,7 @@ jobs:
           retention-days: 30
   integration:
     needs: prepare
-    if: needs.prepare.outputs.candidate != '' && needs.prepare.outputs.proof_run == ''
+    if: needs.prepare.outputs.candidate != ''
     runs-on: ubuntu-latest
     timeout-minutes: 35
     strategy:
@@ -493,11 +490,8 @@ jobs:
           CANDIDATE_REF: ${{ needs.prepare.outputs.candidate_ref }}
           TESTED_BASE: ${{ needs.prepare.outputs.base }}
           TESTED_CANDIDATE: ${{ needs.prepare.outputs.candidate }}
-          PROOF_RUN_ATTEMPT: ${{ needs.prepare.outputs.proof_attempt }}
-          PROOF_RUN_ID: ${{ needs.prepare.outputs.proof_run }}
           INTEGRATION_RESULT: ${{ needs.integration.result }}
           GEOGRAPHY_RESULT: ${{ needs.geography.result }}
-          GEOGRAPHY_PROOF: ${{ needs.prepare.outputs.geography_proof }}
           GEOGRAPHY_REPORT_SHA256: ${{ needs.geography.outputs.report_sha256 }}
           GEOGRAPHY_ARTIFACT_NAME: ${{ needs.geography.outputs.artifact_name }}
         run: node scripts/run-worker-merge.mjs

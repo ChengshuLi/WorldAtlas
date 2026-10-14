@@ -48,7 +48,7 @@ reconstructed from an archive or file API.
 
 ## Complete software-regression inputs
 
-The author regression and queue integration acquisition steps supply their existing
+The final queue integration acquisition step supplies its existing
 trusted `INTEGRATION_PROFILE` and `INTEGRATION_TEST_SELECTION` outputs. Only
 `full` plus `complete` enables the sparse input download. Standalone package and
 selected-data acquisitions retain the full tree. An older authenticated base helper

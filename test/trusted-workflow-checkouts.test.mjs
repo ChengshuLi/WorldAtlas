@@ -29,7 +29,7 @@ function probe(directories, {geography = false, checkoutTests = false} = {}) {
   } finally { fs.rmSync(directory, {recursive: true, force: true}); }
 }
 
-for (const workflow of ['worker-merge.yml', 'merge-integration-checks.yml']) {
+for (const workflow of ['worker-merge.yml']) {
   test(`${workflow}: actual geographic checkout imports its complete trusted closure`, () => {
     const source = fs.readFileSync(path.join(root, '.github/workflows', workflow), 'utf8');
     const match = source.match(/- name: Checkout trusted geographic checker[\s\S]*?sparse-checkout: \|\n((?:            .+\n)+)/);
@@ -93,7 +93,7 @@ test('sparse candidate still detects changes and rename sources outside the work
 });
 
 
-for (const [workflow, expected] of [['merge-integration-checks.yml', 2], ['worker-merge.yml', 1]]) {
+for (const [workflow, expected] of [['worker-merge.yml', 1]]) {
   test(`${workflow}: immutable normal routes build Cloudflare and retain the separate Site gate`, () => {
     const source = fs.readFileSync(path.join(root, '.github/workflows', workflow), 'utf8');
     const routes = [...source.matchAll(/^        run: (npm run build:cloudflare)$/gm)];
@@ -139,7 +139,7 @@ test('scope candidate includes the inputs of its nested actual-checkout probes',
   assert.match(missing.stdout + missing.stderr, /selected-checkpoint-reuse-20261012/);
 });
 
-for (const [workflow, expected] of [['merge-integration-checks.yml', 2], ['worker-merge.yml', 1]]) {
+for (const [workflow, expected] of [['worker-merge.yml', 1]]) {
   test(`${workflow}: actual post-build readback refuses missing selected helper`, () => {
     const source = fs.readFileSync(path.join(root, '.github/workflows', workflow), 'utf8');
     const blocks = [...source.matchAll(/- name: Read back qualified native build outputs when selected\n        if: .+\n        run: \|\n((?:          .+\n)+)/g)];
@@ -176,8 +176,8 @@ for (const [workflow, expected] of [['merge-integration-checks.yml', 2], ['worke
 
 // Read the actual workflow declarations and shell bodies. These bounded controls
 // model the status-expression subset used here; hosted execution remains required.
-function packageWorkflow() {
-  const source=fs.readFileSync(path.join(root,'.github/workflows/merge-integration-checks.yml'),'utf8');
+function queueWorkflow() {
+  const source=fs.readFileSync(path.join(root,'.github/workflows/worker-merge.yml'),'utf8');
   const job=name=>{
     const match=source.match(new RegExp('^  '+name+':\\n([\\s\\S]*?)(?=^  [a-z][a-z_-]*:|$(?![\\s\\S]))','m'));
     assert(match,'Missing job '+name);
@@ -196,130 +196,31 @@ function packageWorkflow() {
     });
     return {header,condition:header.match(/^    if: (.+)$/m)?.[1],steps};
   };
-  return {source,regression:job('regression'),package:job('package')};
+  return {source,integration:job('integration')};
 }
 function workflowCondition(expression, context, {success=true,cancelled=false}={}) {
   if(expression&&!/\b(?:always|success|failure|cancelled)\(/.test(expression)&&!success)return false;
   return expression?Boolean(new Function('needs','github','matrix','steps','always','cancelled','success','failure',
     `return (${expression});`)(context.needs,context.github,context.matrix,context.steps??{},()=>true,()=>cancelled,()=>success,()=>!success)):success;
 }
-function packageContext({profile='full',selection='complete',full='true',action='synchronize',result='success'}={}) {
-  return {needs:{profile:{result:'success',outputs:{profile,test_selection:selection,full,blocked:'false'}},regression:{result}},
-    github:{event:{action}},matrix:{shard:0},steps:{selected_package:{outputs:{assembled:'false'}}}};
+function queueContext({profile='full',selection='complete'}={}){
+ return {needs:{prepare:{outputs:{profile,test_selection:selection}}},matrix:{shard:0},
+   steps:{assembly:{outputs:{assembled:'false'}}}};
 }
 function packageStep(job,name){const found=job.steps.filter(step=>step.name===name);assert.equal(found.length,1,name);return found[0];}
 
-test('full PR co-locates actual package work on shard zero without changing the complete inventory',()=>{
-  const w=packageWorkflow(),ctx=packageContext();
-  assert.match(w.package.header,/needs: \[profile, regression\]/);
-  assert.match(w.regression.header,/needs: profile/);
-  assert.doesNotMatch(w.regression.header,/needs:.*package/);
-  const controls='node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs test/package-inputs.test.mjs test/package-build.test.mjs';
-  assert.equal(packageStep(w.regression,'Verify full-regression package controls').run,controls);
-  assert.equal(packageStep(w.package,'Verify package controls').run,controls);
-  assert.equal(packageStep(w.regression,'Build hosted assets').run,'npm run build:cloudflare');
-  assert.equal(packageStep(w.regression,'Complete regression shard').run,'node scripts/run-integration-tests.mjs');
-  assert.match(packageStep(w.regression,'Authenticate trusted full-checkout bootstrap').text,/CI_CHECKOUT_SHA: \$\{\{ github.event.pull_request.head.sha \}\}/);
-  assert.match(w.regression.steps.find(step=>step.name==='Checkout reviewed head').text,/CI_CHECKOUT_SHA: \$\{\{ steps.checkout_bootstrap.outputs.sha \}\}/);
-  for(const full of ['true','false'])for(const shard of [0,1,2]){
-    ctx.needs.profile.outputs.full=full;ctx.matrix.shard=shard;
-    const producer=['Verify full-regression package controls','Build hosted assets','Read back qualified native build outputs when selected',
-      'Verify full-regression package receipt','Retain full-regression package receipt'];
-    for(const name of producer)assert.equal(workflowCondition(packageStep(w.regression,name).condition,ctx),shard===0,name);
-    assert.equal(workflowCondition(packageStep(w.regression,'Complete regression shard').condition,ctx),true);
-    assert.equal(w.package.steps.filter(step=>step.run==='npm run build:cloudflare'&&workflowCondition(step.condition,ctx)).length,0);
-    for(const name of ['Checkout complete package inputs','Install package Node dependencies','Install package Python dependencies','Verify package controls'])
-      assert.equal(workflowCondition(packageStep(w.package,name).condition,ctx),false,name);
-    assert.equal(workflowCondition(packageStep(w.package,'Retain declared input build receipt').condition,ctx),false);
-  }
-  const receipt=packageStep(w.regression,'Retain full-regression package receipt');
-  assert.match(receipt.text,/name: package-input-build\n/);assert.match(receipt.text,/path: \|\n            \.cache\/package-input-build.json\n/);
-  assert.match(receipt.text,/if-no-files-found: error/);
-  assert(w.regression.steps.indexOf(packageStep(w.regression,'Inventory original full-regression package output'))<w.regression.steps.indexOf(packageStep(w.regression,'Verify full-regression package controls')),'Incidental controls cannot mutate original capture authority');
-  assert(w.regression.steps.indexOf(packageStep(w.regression,'Read back qualified native build outputs when selected'))<w.regression.steps.indexOf(packageStep(w.regression,'Verify full-regression package receipt')));
-  assert(w.regression.steps.indexOf(packageStep(w.regression,'Complete regression shard'))<w.regression.steps.indexOf(packageStep(w.regression,'Verify full-regression package receipt')),'validate the bytes actually retained after tests');
-});
-
-test('selected-data omits all author compute and keeps final candidate consumers',()=>{
-  const w=packageWorkflow(),ctx=packageContext({selection:'selected-data',result:'skipped'});
-  assert.equal(workflowCondition(w.regression.condition,ctx),false);
-  assert.equal(workflowCondition(w.package.condition,ctx,{success:false}),false);
-  const geography=w.source.slice(w.source.indexOf('  geography:'),w.source.indexOf('  regression:'));
-  assert.match(geography,/if:.*needs.profile.outputs.test_selection != 'selected-data'/);
-  for(const name of ['Assemble selected output from authenticated original package','Install selected-data browser dependencies','Run selected-data consumer checks'])
-    assert(!w.package.steps.some(step=>step.name===name),name);
-  const queue=fs.readFileSync(path.join(root,'.github/workflows/worker-merge.yml'),'utf8');
-  for(const name of ['Check exact combined geography with trusted baseline code','Build the combined application once before asset-dependent tests',
-    'Read back qualified native build outputs when selected','Test applicable combined-tree invariants without publishing or live imports'])
-    assert(queue.includes('- name: '+name),name);
-  assert.match(queue,/selectedDeliverySmoke/);
-  assert(!queue.includes('Verify selected-data package controls'));
-});
-
-test('evidence applicability and metadata/cancelled/failed dependency semantics stay fail-closed',()=>{
-  const w=packageWorkflow();
-  for(const full of ['true','false']){
-    const ctx=packageContext({profile:'evidence',full});
-    assert.equal(workflowCondition(w.package.condition,ctx),true);
-    assert.equal(workflowCondition(packageStep(w.package,'Build Cloudflare package without publishing').condition,ctx),full==='true');
-    assert.equal(workflowCondition(packageStep(w.package,'Use full-regression package verification').condition,ctx),false);
-  }
-  for(const action of ['edited','ready_for_review'])for(const selection of ['complete','selected-data']){
-    const ctx=packageContext({action,selection});
-    assert.equal(workflowCondition(w.regression.condition,ctx),false);assert.equal(workflowCondition(w.package.condition,ctx),false);
-  }
-  for(const profileResult of ['failure','cancelled','skipped']){
-    const ctx=packageContext();ctx.needs.profile.result=profileResult;
-    assert.equal(workflowCondition(w.package.condition,ctx,{success:false}),false);
-  }
-  assert.equal(workflowCondition(w.package.condition,packageContext(),{cancelled:true}),false);
-  const tmp=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-package-gate-'));
-  try{
-    const gate=packageStep(w.package,'Use full-regression package verification');
-    for(const result of ['success','failure','cancelled','skipped','']){
-      const ctx=packageContext({result});
-      assert.equal(workflowCondition(w.package.condition,ctx,{success:result==='success'}),true);
-      const run=spawnSync('/bin/bash',['-e','-c',gate.run],{cwd:tmp,encoding:'utf8',env:{PATH:process.env.PATH,REGRESSION_RESULT:result,GITHUB_STEP_SUMMARY:path.join(tmp,'summary')}});
-      assert.equal(run.status===0,result==='success',result);
-    }
-    assert.equal(fs.readFileSync(path.join(tmp,'summary'),'utf8').trim().split('\n').length,1,'only a successful dependency may report reuse');
-  }finally{fs.rmSync(tmp,{recursive:true});}
-});
-
-test('actual package receipt command refuses missing, stale, failed, changed or nonordinary producer bytes',()=>{
-  const w=packageWorkflow(),body=packageStep(w.regression,'Verify full-regression package receipt').run,head='a'.repeat(40);
-  const cases=['valid','no-native-selection','missing-receipt','stale-head','failed-preflight','preflight-errors','wrong-kind','changed-definition','missing-native','stale-native','symlink','bad-head'];
-  for(const kind of cases){
-    const tmp=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-package-receipt-'));
-    try{
-      for(const dir of ['.cache','.github','data'])fs.mkdirSync(path.join(tmp,dir));
-      const definition='{"version":1}\n';fs.writeFileSync(path.join(tmp,'.github/package-inputs.json'),definition);
-      const hash=execFileSync(process.execPath,['--input-type=module','-e',"import {createHash} from 'node:crypto';process.stdout.write(createHash('sha256').update(process.argv[1]).digest('hex'));",definition],{encoding:'utf8'});
-      const receipt={version:1,kind:'cloudflare',input_definition_sha256:hash,preflight:{passed:true,errors:[],inputs:{head}}};
-      const native={version:1,kind:'ordinary-cloudflare-built-output-readback',head};
-      if(kind==='stale-head')receipt.preflight.inputs.head='b'.repeat(40);
-      if(kind==='failed-preflight')receipt.preflight.passed=false;
-      if(kind==='preflight-errors')receipt.preflight.errors=['missing input'];
-      if(kind==='wrong-kind')receipt.kind='hosted';
-      if(kind==='changed-definition')receipt.input_definition_sha256='b'.repeat(64);
-      if(kind==='stale-native')native.head='b'.repeat(40);
-      const receiptPath=path.join(tmp,'.cache/package-input-build.json');
-      if(kind!=='missing-receipt')fs.writeFileSync(receiptPath,JSON.stringify(receipt));
-      if(kind==='symlink'){fs.renameSync(receiptPath,receiptPath+'.original');fs.symlinkSync(receiptPath+'.original',receiptPath);}
-      fs.writeFileSync(path.join(tmp,'data/ownership-selection.json'),JSON.stringify(kind==='no-native-selection'?{}:{artifact_consumption:{}}));
-      if(!['missing-native','no-native-selection'].includes(kind))fs.writeFileSync(path.join(tmp,'.cache/native-normal-built-output.json'),JSON.stringify(native));
-      const run=spawnSync('/bin/bash',['-e','-c',body],{cwd:tmp,encoding:'utf8',env:{PATH:path.dirname(process.execPath)+':/usr/bin:/bin',PACKAGE_REVIEWED_HEAD:kind==='bad-head'?'':head}});
-      assert.equal(run.status===0,['valid','no-native-selection'].includes(kind),kind+': '+run.stderr);
-    }finally{fs.rmSync(tmp,{recursive:true});}
-  }
-});
-
-test('Cloudflare label and artifacts do not claim the separate Sites reserve measurement',()=>{
-  const w=packageWorkflow(),site=fs.readFileSync(path.join(root,'.github/workflows/deployment-budget.yml'),'utf8');
-  assert.doesNotMatch(w.package.steps.map(step=>step.name).join('\n'),/enforce archive\/file reserves|Retain exact file and archive accounting/);
-  assert.doesNotMatch(w.source,/path: \.cache\/deployment-budget.json/);
-  assert.equal(packageStep(w.package,'Build Cloudflare package without publishing').run,'npm run build:cloudflare');
-  assert.match(site,/run: npm run build:hosted/);assert.match(site,/path: \.cache\/deployment-budget.json/);
+test('automatic author compute is absent while final queue and explicit rollout keep current consumers',()=>{
+ const author=fs.readFileSync(path.join(root,'.github/workflows/merge-integration-checks.yml'),'utf8');
+ assert.deepEqual([...author.matchAll(/^  ([a-z]+):$/gm)].map(m=>m[1]),['profile','evidence','scope']);
+ assert.doesNotMatch(author,/npm ci|pip install|playwright|build:cloudflare|native-built-output|package-input-build/);
+ const queue=fs.readFileSync(path.join(root,'.github/workflows/worker-merge.yml'),'utf8');
+ assert.match(queue,/run: npm run build:cloudflare/);assert.match(queue,/node scripts\/run-integration-tests.mjs/);
+ assert.doesNotMatch(queue,/proof_run|proof_attempt|GEOGRAPHY_PROOF|PROOF_RUN/);
+ const explicit=fs.readFileSync(path.join(root,'.github/workflows/selected-package-proof.yml'),'utf8');
+ assert.match(explicit,/npx playwright install --with-deps chromium/);
+ assert.match(explicit,/INTEGRATION_TEST_SELECTION: selected-output/);assert.match(explicit,/node scripts\/run-integration-tests.mjs/);
+ const site=fs.readFileSync(path.join(root,'.github/workflows/deployment-budget.yml'),'utf8');
+ assert.match(site,/run: npm run build:hosted/);assert.match(site,/path: \.cache\/deployment-budget.json/);
 });
 
 function checkoutBootstrapBodies() {
@@ -414,8 +315,8 @@ finally:
 }
 
 test('full-checkout inline bootstrap authenticates base trees and helper bytes before exposing immutable candidate identity',()=>{
-  const bodies=checkoutBootstrapBodies();assert.equal(bodies.length,3);
-  assert.equal(new Set(bodies.map(row=>row.body)).size,1,'three full acquisition boundaries share identical authentication');
+  const bodies=checkoutBootstrapBodies();assert.equal(bodies.length,1);
+  assert.equal(bodies[0].workflow,'worker-merge.yml','Only final-candidate acquisition remains');
   for(const {body,workflow} of bodies){
     const f=checkoutBootstrapFixture(),result=runCheckoutBootstrap(body,f,{queue:workflow==='worker-merge.yml'});
     assert.equal(result.status,0,result.stderr);assert.equal(result.outputs.mode,'helper');
@@ -459,45 +360,30 @@ test('full-checkout inline bootstrap refuses authentication, completeness, ident
   }
 });
 
-test('full-checkout routing retains exactly one successful canonical verification and acquisition-only credentials',()=>{
-  const w=packageWorkflow();
-  assert.equal((w.package.header.match(/^    permissions:/gm)||[]).length,1);
-  for(const permission of ['contents','pull-requests','actions'])assert.match(w.package.header,new RegExp('^      '+permission+': read$','m'));
-  for(const job of [w.regression,w.package])for(const mode of ['helper','legacy']){
-    const ctx=packageContext({selection:job===w.package?'selected-data':'complete'});ctx.steps={checkout_bootstrap:{outputs:{mode}}};
-    const canonical=job===w.package?'Checkout complete package inputs':'Checkout reviewed head';
-    assert.equal(job.steps.filter(step=>step.name===canonical&&workflowCondition(step.condition,ctx)).length,1);
-    const helper=packageStep(job,'Acquire full checkout with authenticated bounded helper'),legacy=packageStep(job,'Legacy full checkout only for proven trusted-helper absence');
-    assert.equal(workflowCondition(helper.condition,ctx),mode==='helper');assert.equal(workflowCondition(legacy.condition,ctx),mode==='legacy');
-    for(const step of [helper,legacy,...job.steps.filter(step=>step.name===canonical)])assert.equal(workflowCondition(step.condition,ctx,{success:false}),false);
-    assert.match(helper.run,/--total-timeout-seconds 420 --elapsed-seconds/);
-    assert.doesNotMatch(helper.run,/--fetch-timeout-seconds|--max-attempts/);
-    const tokenSteps=job.steps.filter(step=>/WORLDATLAS_CHECKOUT_TOKEN:/.test(step.text));assert.equal(tokenSteps.length,2);
-    for(const step of tokenSteps)assert.ok(['Authenticate trusted full-checkout bootstrap','Acquire full checkout with authenticated bounded helper'].includes(step.name));
-    const verify=job.steps.find(step=>step.name===canonical&&workflowCondition(step.condition,ctx));
-    assert.match(verify.run,/HEAD\^\{tree\}/);assert.match(verify.run,/symbolic-ref/);assert.match(verify.run,/extraheader/);assert.doesNotMatch(verify.text,/WORLDATLAS_CHECKOUT_TOKEN:/);
-  }
-  const evidence=packageContext({profile:'evidence'});
-  assert.equal(w.regression.steps.filter(step=>step.name==='Checkout reviewed head'&&workflowCondition(step.condition,evidence)).length,1);
-  assert.match(w.regression.steps.find(step=>step.name==='Checkout reviewed head'&&workflowCondition(step.condition,evidence)).text,/sparse-checkout-cone-mode: false/);
+test('final queue retains one canonical verification and acquisition-only credentials',()=>{
+ const job=queueWorkflow().integration;
+ for(const mode of ['helper','legacy']){
+  const ctx=queueContext();ctx.steps.checkout_bootstrap={outputs:{mode}};
+  const canonical='Checkout complete candidate for application regression';
+  assert.equal(job.steps.filter(step=>step.name===canonical&&workflowCondition(step.condition,ctx)).length,1);
+  const helper=packageStep(job,'Acquire full checkout with authenticated bounded helper');
+  const legacy=packageStep(job,'Legacy full checkout only for proven trusted-helper absence');
+  assert.equal(workflowCondition(helper.condition,ctx),mode==='helper');assert.equal(workflowCondition(legacy.condition,ctx),mode==='legacy');
+  for(const step of [helper,legacy,...job.steps.filter(step=>step.name===canonical)])assert.equal(workflowCondition(step.condition,ctx,{success:false}),false);
+  const tokens=job.steps.filter(step=>/WORLDATLAS_CHECKOUT_TOKEN:/.test(step.text));assert.equal(tokens.length,2);
+  for(const step of tokens)assert.ok(['Authenticate trusted full-checkout bootstrap','Acquire full checkout with authenticated bounded helper'].includes(step.name));
+  const verify=packageStep(job,canonical);
+  assert.match(verify.run,/HEAD\^\{tree\}/);assert.match(verify.run,/symbolic-ref/);assert.match(verify.run,/extraheader/);assert.doesNotMatch(verify.text,/WORLDATLAS_CHECKOUT_TOKEN:/);
+ }
 });
 
-test('author and queue reuse complete software selection for sparse acquisition while standalone package stays complete',()=>{
-  const w=packageWorkflow(),author=packageStep(w.regression,'Acquire full checkout with authenticated bounded helper');
-  const standalone=packageStep(w.package,'Acquire full checkout with authenticated bounded helper');
-  assert.match(author.text,/INTEGRATION_PROFILE: \$\{\{ needs\.profile\.outputs\.profile \}\}/);
-  assert.match(author.text,/INTEGRATION_TEST_SELECTION: \$\{\{ needs\.profile\.outputs\.test_selection \}\}/);
-  assert.doesNotMatch(standalone.text,/INTEGRATION_PROFILE:|INTEGRATION_TEST_SELECTION:/);
-  const queue=fs.readFileSync(new URL('../.github/workflows/worker-merge.yml',import.meta.url),'utf8');
-  const acquire=queue.slice(queue.indexOf('      - name: Acquire full checkout with authenticated bounded helper'),
-    queue.indexOf('      - name: Legacy full checkout only for proven trusted-helper absence'));
-  assert.match(acquire,/INTEGRATION_PROFILE: \$\{\{ needs\.prepare\.outputs\.profile \}\}/);
-  assert.match(acquire,/INTEGRATION_TEST_SELECTION: \$\{\{ needs\.prepare\.outputs\.test_selection \}\}/);
-  assert.match(acquire,/--total-timeout-seconds 420 --elapsed-seconds/);
-  const definition=JSON.parse(fs.readFileSync(new URL('../.github/package-inputs.json',import.meta.url),'utf8'));
-  for(const name of [...definition.inputs,...definition.verification_paths])
-    assert.ok(!['data/regional-review/','research/campaigns/'].some(prefix=>name===prefix.slice(0,-1)||name.startsWith(prefix)||prefix.startsWith(name)),
-      'A source-only namespace became an actual package input: '+name);
+test('final queue keeps complete software sparse selection without importing source-only namespaces',()=>{
+ const acquire=packageStep(queueWorkflow().integration,'Acquire full checkout with authenticated bounded helper');
+ assert.match(acquire.text,/INTEGRATION_PROFILE: \$\{\{ needs\.prepare\.outputs\.profile \}\}/);
+ assert.match(acquire.text,/INTEGRATION_TEST_SELECTION: \$\{\{ needs\.prepare\.outputs\.test_selection \}\}/);
+ assert.match(acquire.run,/--total-timeout-seconds 420 --elapsed-seconds/);
+ const definition=JSON.parse(fs.readFileSync(path.join(root,'.github/package-inputs.json'),'utf8'));
+ for(const name of [...definition.inputs,...definition.verification_paths])assert.ok(!['data/regional-review/','research/campaigns/'].some(prefix=>name===prefix.slice(0,-1)||name.startsWith(prefix)||prefix.startsWith(name)),name);
 });
 
 test('full-checkout bootstrap accepts live main movement while authenticating only the original frozen helper base',()=>{
@@ -514,7 +400,7 @@ test('full-checkout canonical verification executes against real Git and refuses
   const bodies=['merge-integration-checks.yml','worker-merge.yml'].flatMap(workflow=>
     [...fs.readFileSync(path.join(root,'.github/workflows',workflow),'utf8').matchAll(/python3 -I -S -B - <<'CHECKOUT_VERIFY'\n([\s\S]*?)          CHECKOUT_VERIFY/g)]
       .map(match=>match[1].split('\n').map(line=>line.slice(10)).join('\n')));
-  assert.equal(bodies.length,3);assert.equal(new Set(bodies).size,1);
+  assert.equal(bodies.length,1);assert.equal(new Set(bodies).size,1);
   for(const kind of ['valid','wrong-head','wrong-tree','attached','header','credential-helper','remote-credential','inherited-token']){
     const directory=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-checkout-verification-'));
     try{
@@ -544,35 +430,6 @@ test('full-checkout bootstrap real wall alarm interrupts a continuously tricklin
   assert.ok(Date.now()-started<3000,'real SIGALRM interrupts socket read despite continuous incoming bytes');
 });
 
-test('authenticated metadata path keeps current checkout and controls but never repeats or relabels the original build',()=>{
-  const w=packageWorkflow(),ctx=packageContext();ctx.needs.profile.outputs.metadata_reuse='true';
-  for(const name of ['Verify full-regression package controls','Build hosted assets','Read back qualified native build outputs when selected',
-    'Complete regression shard','Verify full-regression package receipt','Retain full-regression package receipt','Install Python dependencies',
-    'Install browser dependencies only for tests that use Playwright'])
-    assert.equal(workflowCondition(packageStep(w.regression,name).condition,ctx),false,name);
-  for(const name of ['Install Node dependencies','Run current-head regression consumers'])
-    assert.equal(workflowCondition(packageStep(w.regression,name).condition,ctx),true,name);
-  assert.equal(packageStep(w.regression,'Run current-head regression consumers').run,'node scripts/run-metadata-regression-controls.mjs');
-  assert.equal(workflowCondition(packageStep(w.package,'Use full-regression package verification').condition,ctx),false);
-  const reused=packageStep(w.package,'Use authenticated predecessor package verification');
-  assert.equal(workflowCondition(reused.condition,ctx),true);assert.match(reused.run,/test "\$REGRESSION_RESULT" = success/);
-  assert.match(reused.run,/no new build is claimed/);
-  assert.match(w.source,/shards: \$\{\{ steps\.metadata_regression\.outputs\.reused == 'true' && '\[0\]' \|\| steps\.select\.outputs\.shards \}\}/);
-});
-
-test('missing or declined predecessor admission retains ordinary full work and cannot run current-controls-only',()=>{
-  const w=packageWorkflow();for(const reused of [undefined,'false','',null]){
-    const ctx=packageContext();ctx.needs.profile.outputs.metadata_reuse=reused;
-    assert.equal(workflowCondition(packageStep(w.regression,'Complete regression shard').condition,ctx),true);
-    assert.equal(workflowCondition(packageStep(w.regression,'Build hosted assets').condition,ctx),true);
-    assert.equal(workflowCondition(packageStep(w.regression,'Run current-head regression consumers').condition,ctx),false);
-    assert.equal(workflowCondition(packageStep(w.package,'Use full-regression package verification').condition,ctx),true);
-  }
-  const helper=fs.readFileSync(path.join(root,'scripts/run-metadata-regression-controls.mjs'),'utf8');
-  assert.match(helper,/streamTestProcess/);assert.doesNotMatch(helper,/prepareNativeRegressionInputs|prepareCanonicalCheckout|prepareModelReaderCheckout/);
-});
-
-
 test('queue focused candidate includes the inputs of its nested actual-checkout probes', () => {
   const source = fs.readFileSync(path.join(root, '.github/workflows/worker-merge.yml'), 'utf8');
   const candidate = source.match(/- name: Checkout only focused-test inputs for evidence regression[\s\S]*?sparse-checkout: \|\n((?:            .+\n)+)/);
@@ -587,20 +444,7 @@ test('queue focused candidate includes the inputs of its nested actual-checkout 
 });
 
 
-test('author focused candidate includes the inputs of its nested actual-checkout probes', () => {
-  const source = fs.readFileSync(path.join(root, '.github/workflows/merge-integration-checks.yml'), 'utf8');
-  const candidate = source.match(/- name: Checkout reviewed head\n        if: needs\.profile\.outputs\.profile == 'evidence'[\s\S]*?sparse-checkout: \|\n((?:            .+\n)+)/);
-  assert.ok(candidate, 'actual focused author checkout must be declared');
-  const directories = candidate[1].trim().split('\n').map(row => row.trim());
-  const result = probe(directories, {checkoutTests: true});
-  assert.equal(result.status, 0, result.stdout + result.stderr);
-  const missing = probe(directories.filter(row => !row.includes('selected-checkpoint-reuse-20261012')), {checkoutTests: true});
-  assert.notEqual(missing.status, 0);
-  assert.match(missing.stdout + missing.stderr, /ENOENT/);
-  assert.match(missing.stdout + missing.stderr, /selected-checkpoint-reuse-20261012/);
-});
-
-for (const workflow of ['worker-merge.yml','merge-integration-checks.yml']) {
+for (const workflow of ['worker-merge.yml']) {
   test(`${workflow}: native geography omits polygon dependencies while general regressions retain them`, () => {
     const source=fs.readFileSync(path.join(root,'.github/workflows',workflow),'utf8');
     const geography=source.match(/^  geography:\n([\s\S]*?)(?=^  [a-zA-Z_-]+:|$(?![\s\S]))/m)?.[1];
