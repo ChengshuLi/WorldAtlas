@@ -1,0 +1,37 @@
+{
+  "status": "qualified-not-selected",
+  "accepted_code_commit": "35a549b7e16aa151114a3d819e2733250ca7050a",
+  "execution_commit": "ec8e095bb9194a714241597418483c419d6c2d10",
+  "input_commit": "778cff2721df789706ad0f3b847f3f600b972a3d",
+  "command": [
+    "node",
+    "scripts/prepare-delivery-handoff.mjs",
+    "native-authority",
+    "CONFIG",
+    "DESTINATION"
+  ],
+  "exit_code": 0,
+  "external_wall_seconds": 2.1,
+  "external_lifetime_peak_rss_bytes": 376700928,
+  "session_memory_headroom_bytes": 572882944,
+  "concurrent_reserved_bytes": 0,
+  "observation": {
+    "elapsed_seconds": 1.715028209,
+    "charged_phase_bytes": 407324428,
+    "allowance": {
+      "phaseBytes": 536870912,
+      "rssBytes": 536870912
+    },
+    "normalized_node_lifetime_peak_rss_bytes": 376635392,
+    "qualified_cells": 185,
+    "limits": [
+      "Original source/physical producers are not replayed.",
+      "Constructor qualification is not actual current-owner-zero or final selected-output acceptance."
+    ]
+  },
+  "limits": [
+    "Existing current-process cooperative RSS checks; OS alarm bounds wall time. Time-l measures peak and is not a live limiter.",
+    "Qualification does not establish current selected owner-zero, conservation, package output or acceptance.",
+    "All original source/physical witnesses and other held scopes remain unchanged."
+  ]
+}

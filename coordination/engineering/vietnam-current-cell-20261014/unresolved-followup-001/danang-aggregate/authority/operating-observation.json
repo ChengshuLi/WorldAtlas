@@ -1,0 +1,40 @@
+{
+  "status": "qualified-not-selected",
+  "accepted_code_commit": "35a549b7e16aa151114a3d819e2733250ca7050a",
+  "execution_commit": "ec8e095bb9194a714241597418483c419d6c2d10",
+  "input_commits": {
+    "source_evidence": "adda04873fba427d270727a259d2c257100ebe1c",
+    "native_patch": "778cff2721df789706ad0f3b847f3f600b972a3d"
+  },
+  "command": [
+    "node",
+    "scripts/prepare-delivery-handoff.mjs",
+    "native-authority",
+    "CONFIG",
+    "DESTINATION"
+  ],
+  "exit_code": 0,
+  "external_wall_seconds": 1.95,
+  "external_lifetime_peak_rss_bytes": 305512448,
+  "session_memory_headroom_bytes": 572882944,
+  "concurrent_reserved_bytes": 0,
+  "observation": {
+    "elapsed_seconds": 1.576681208,
+    "charged_phase_bytes": 362641143,
+    "allowance": {
+      "phaseBytes": 536870912,
+      "rssBytes": 536870912
+    },
+    "normalized_node_lifetime_peak_rss_bytes": 305266688,
+    "qualified_cells": 280,
+    "limits": [
+      "Original source/physical producers are not replayed.",
+      "Constructor qualification is not actual current-owner-zero or final selected-output acceptance."
+    ]
+  },
+  "limits": [
+    "Existing current-process cooperative RSS checks; OS alarm bounds wall time. Time-l measures peak and is not a live limiter.",
+    "All seven source members and five complete reconstruction witnesses retained.",
+    "Qualification does not establish current selected owner-zero, conservation, package output or acceptance."
+  ]
+}
