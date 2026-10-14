@@ -1,0 +1,195 @@
+{
+  "kind": "bintan-official-parent-identity-source-review",
+  "status": "name-level-legal-parent-supported-position-and-source-geometry-open",
+  "observed_utc": "2026-10-14T22:12:25.344374+00:00",
+  "legal_relationship": {
+    "district_name": "Kabupaten Bintan",
+    "former_district_name": "Kabupaten Kepulauan Riau",
+    "province_name": "Provinsi Kepulauan Riau",
+    "province_formation": {
+      "instrument": "UU25/2002",
+      "effective_date": "2002-10-25",
+      "membership_clause": "Article3",
+      "pdf_page": 3,
+      "precise_boundary_limit": "Article5(2)-(3); referenced map absent from acquired seven-page copy"
+    },
+    "district_renaming": {
+      "instrument": "PP5/2006",
+      "effective_date": "2006-02-23",
+      "identity_and_parent_clause": "Article2",
+      "pdf_page": 4,
+      "boundary_effect": "name change expressly without territorial boundary change",
+      "administrative_transition": "Article3; one year"
+    }
+  },
+  "bps2020": {
+    "kind": "cached-primary-publication-metadata-only",
+    "publication_number": "21020.2003",
+    "catalogue_number": "1102001.2102",
+    "release_date": "2020-04-27",
+    "publication_pdf_acquired": false,
+    "map_acquired": false,
+    "direct_page_status": "HTTP403"
+  },
+  "retained_bindings": {
+    "expected_original_admin_parent": {
+      "source_index": 36253,
+      "family_index": 152,
+      "source_id": "gb:IDN:ADM1:65028918B90123187256494",
+      "ordinal": 27,
+      "owners": [],
+      "name": "Riau Islands",
+      "geometry_status": "raw-native-supported"
+    },
+    "expected_original_admin_parent_whole_source_pin": {
+      "commit": "f5898ab7a791e343e40dccf0e8f94b082b4049b2",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IDN-ADM1-000.bin.gz",
+      "bytes": 1057546,
+      "sha256": "0e8d4aece3a6467af68d9dcb2674697e7153b6109192ce44e5c268d68cdf37c7",
+      "git_blob_oid": "bc32eef256449c5e2ccd671425463fb67c485559",
+      "decoded_bytes": 3397843,
+      "decoded_sha256": "5a6be3d1484166132751fe535dd164e1491e657f2d38dced177f067a7bc00d8f"
+    },
+    "current_selected_framework_parent_pin": {
+      "commit": "7f4bf63d1fd5ad1b997418a1b0435a4aadcd4772",
+      "path": "data/hierarchy.json",
+      "mode": "100644",
+      "git_blob_oid": "324575c55f3c2992517446d1ac06bdd806f06573",
+      "bytes": 10164089,
+      "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+    },
+    "current_selected_framework_parent_record": {
+      "id": "framework:province:riau-islands:4839c8831796",
+      "level": "province",
+      "metadata": {
+        "basis": "Geographic portion of a source administrative unit; not a new government division",
+        "child_count": 5,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "evidence": [
+            {
+              "inspected_fact": "Current declared purpose: Geographic portion of a source administrative unit; not a new government division; exact current parent framework:area:sumatera:728bef1c4923. This declaration alone is not semantic approval.",
+              "title": "gb:IDN:ADM1",
+              "url": "https://www.geoboundaries.org/"
+            },
+            {
+              "inspected_fact": "Actual location source gb:IDN:ADM2; role regency, city; reference vintage 2020; license Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO). Source feature/member identifiers were inspected separately from ADM-level labels.",
+              "title": "Indonesia",
+              "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IDN/ADM2/geoBoundaries-IDN-ADM2.geojson"
+            }
+          ],
+          "rationale": "Actual member audit: 5 locations, roles {'regency, city': 5}, source vintages {'2020': 5}. Current declared purpose is Geographic portion of a source administrative unit; not a new government division. Name/source correspondence was checked where a pinned cache exists; that alone does not prove local-scale consistency or full original-parent correspondence.",
+          "remaining_reasons": [
+            "parent canonical role unknown or unavailable; no ADM-number tier inference"
+          ]
+        },
+        "source": "gb:IDN:ADM1",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Riau Islands",
+      "parent_id": "framework:area:sumatera:728bef1c4923"
+    },
+    "exact_candidate_source_patterns": [
+      {
+        "sids": [
+          36316
+        ],
+        "cells": 1237
+      },
+      {
+        "sids": [
+          36253,
+          36316
+        ],
+        "cells": 1851
+      }
+    ],
+    "exact_original_source_records": [
+      {
+        "source_index": 36253,
+        "family_index": 152,
+        "source_id": "gb:IDN:ADM1:65028918B90123187256494",
+        "ordinal": 27,
+        "owners": [],
+        "name": "Riau Islands",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 36316,
+        "family_index": 153,
+        "source_id": "gb:IDN:ADM2:22746128B62804497316712",
+        "ordinal": 56,
+        "owners": [
+          22985
+        ],
+        "name": "Bintan",
+        "geometry_status": "raw-native-supported"
+      }
+    ],
+    "original_existing_location_review": [
+      {
+        "ids": [
+          "gb:IDN:ADM2:22746128B62804497316712",
+          "gb:IDN:ADM2:22746128B16651418017337",
+          "gb:IDN:ADM2:22746128B73074683492420"
+        ],
+        "status": "open",
+        "rationale": "Current province Riau Islands (framework:province:riau-islands:4839c8831796); inspected exact source identifiers for 3 locations with actual role regency, city, source gb:IDN:ADM2, reference vintages 2020. Pinned cache contains 519 features; 3 of these location records have entirely matched declared-source member IDs. source parent overlap below 95% diagnostic. Source-ID correspondence does not independently approve local geographic purpose, original-footprint retention, administrative reforms or settlement/rank. Exact review stays open until those tests have sourced outcomes.",
+        "evidence": [
+          {
+            "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IDN/ADM2/geoBoundaries-IDN-ADM2.geojson",
+            "title": "Indonesia",
+            "inspected_fact": "Actual location source gb:IDN:ADM2; role regency, city; reference vintage 2020; license Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO). Source feature/member identifiers were inspected separately from ADM-level labels."
+          }
+        ],
+        "province_id": "framework:province:riau-islands:4839c8831796",
+        "source_id": "gb:IDN:ADM2",
+        "actual_role": "regency, city",
+        "specific_reasons": [
+          "source parent overlap below 95% diagnostic"
+        ]
+      }
+    ],
+    "remaining_parent_facts": [
+      "1237 of the exact3088 candidate cells carry Bintan source36316 without expected Riau Islands ADM1 source36253;1851 carry both.",
+      "The retained source program checks full nine-family coverage and target/framework-parent identity, but publishes no expected-admin-parent difference geometry or independently reviewed disposition of these1237 cells.",
+      "Existing Bintan source-parent-overlap review remains open. No official-parent or territorial adjudication was claimed by the original source qualification.",
+      "Retained ADM1 parent source vintage2017 and ADM2 Bintan vintage2020 remain heterogeneous. Their names and framework association alone do not settle boundary correspondence.",
+      "Need actual retained/full original parent residual/exclusion witnesses and reviewed exact-cell policy for the1237 parent-absent cells, or a review establishing why existing direct-original-source additive scope legitimately has no territorial exclusions.",
+      "Old source probe uses rounded binary64 longitude. Its negative foreign observations do not substitute for subsequent exact rational native-source/category/parent boundary qualification."
+    ]
+  },
+  "source_family_vintages": [
+    {
+      "source_family": "gb:IDN:ADM1",
+      "represented_year": "2017",
+      "original_sha256": "5a6be3d1484166132751fe535dd164e1491e657f2d38dced177f067a7bc00d8f",
+      "features": 34
+    },
+    {
+      "source_family": "gb:IDN:ADM2",
+      "represented_year": "2020",
+      "original_sha256": "146653d488331086ddc43d159a261b01ea6dd08c7ed422e34a9886c3c690430c",
+      "features": 519
+    }
+  ],
+  "claims": {
+    "official_name_level_parent_identity": "supported",
+    "dataset_ID_legal_equivalence_certificate": "OPEN",
+    "source_geometry_authority_accuracy": "OPEN",
+    "whole_admin_footprint_certificate": "OPEN",
+    "exact_native_parent_partition": "pending-root-stock-call",
+    "country_exclusion_proof": "OPEN",
+    "territorial_exclusions": null,
+    "framework_semantic_review": "OPEN",
+    "owner_zero": "pending",
+    "acceptance_credit": 0
+  },
+  "method_limit": "Document/source-identity review only; no source geometry import, GIS, native partition, source producer, repo edits or Git acquisition."
+}
