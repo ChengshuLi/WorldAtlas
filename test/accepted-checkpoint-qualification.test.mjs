@@ -354,7 +354,7 @@ test('coherently rehashed omitted routes, stale selectors, old exception drift a
     [p=>p.facts.executing_policy.body+=' ',/policy identity differs/],
     [p=>p.facts.executing_policy.body=p.facts.executing_policy.body.replace('1','2'),/policy body differs/],
     [p=>p.facts.execution_code=p.facts.execution_code.filter(x=>x.path!=='scripts/selected-checkpoint-native.mjs'),/original native execution/],
-    [p=>p.certificate.entries.pop(),/stable owner\/index\/parent roster/]]) {
+    [p=>p.certificate.entries[0][1]=2,/owner\/index\/parent identity/]]) {
     const a=await acquire(f,mutate);
     try {const result=await qualify(f,a);assert.equal(result.available,false);assert.match(result.reason,reason);}
     catch(error){assert.match(error.message,reason);}

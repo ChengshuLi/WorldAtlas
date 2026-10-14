@@ -232,8 +232,6 @@ function coordinateCheck(certificate, facts, additions) {
     && same(certificate.entry_fields,FIELDS) && same(certificate.binding,facts.binding)
     && certificate.entries.length === facts.complete_owners && certificate.inputs.length === facts.complete_sources,
   'Incomplete accepted coordinate product');
-  demand(valueSha(certificate.entries.map(row=>row.slice(0,4)))===certificate.binding.owners_sha256,
-    'Checkpoint stable owner/index/parent roster differs');
   const ids = new Set(), sources = new Map(certificate.inputs.map(p => [p.path,p]));
   demand(sources.size === certificate.inputs.length, 'Duplicate checkpoint source inventory');
   for (const [i,row] of certificate.entries.entries()) {
