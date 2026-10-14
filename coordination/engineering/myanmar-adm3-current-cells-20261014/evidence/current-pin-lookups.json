@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "kind": "immutable-body-lookup-observation",
+  "lookup_commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+  "pins": [
+    {
+      "bytes": 168907,
+      "commit": "cb8d960bdeaf55f4dce60ee2dd61172a4263bfca",
+      "git_blob_oid": "4d420429491ed56cfa41571a8f204bf24a21471d",
+      "mode": "100644",
+      "path": "coordination/engineering/myeik-native-followup-20261014/patch.json",
+      "sha256": "2063448ed664eac98cfdb48eea1529b5d62df0664be060890336505289c02761"
+    },
+    {
+      "bytes": 1420024,
+      "commit": "cb8d960bdeaf55f4dce60ee2dd61172a4263bfca",
+      "git_blob_oid": "f3dafe0bd166f6fc2ad7a242821abcd988f5e30e",
+      "mode": "100644",
+      "path": "coordination/engineering/myeik-native-followup-20261014/ledger.json",
+      "sha256": "5469ce347ba71779f48d74e724ed83a38c2d92a9e97bc81fb8f04c78aea37166"
+    },
+    {
+      "bytes": 40781,
+      "commit": "cb8d960bdeaf55f4dce60ee2dd61172a4263bfca",
+      "git_blob_oid": "b156296bb0cb3d163137db331bd7a96fe9c0e6e8",
+      "mode": "100644",
+      "path": "coordination/engineering/myeik-native-followup-20261014/authority-registry.json",
+      "sha256": "cef4e70eb31df11f78b98e556416028dcbff3803c88e8fcd90bcacde621f2808"
+    },
+    {
+      "bytes": 1381,
+      "commit": "c3ce846830bfd1629c8f33061041420e29f94196",
+      "git_blob_oid": "89d63fc58fd65ff6c149999c91f5995c6a1b24c6",
+      "mode": "100644",
+      "path": "coordination/engineering/myeik-native-followup-20261014/runtime-envelope.json",
+      "sha256": "ef3e0ad4bc2a2cb475a1d40572bafea760175d85a2bb5740d26d46ee9479dadc"
+    }
+  ],
+  "observation": "All four complete bodies were read and matched bytes/SHA256 at the accepted lookup commit. Their declared historical pin commits are retained; this observation does not claim those historical commit trees were available or a fresh native readback."
+}
