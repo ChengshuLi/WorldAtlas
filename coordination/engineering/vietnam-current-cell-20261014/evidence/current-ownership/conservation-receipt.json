@@ -1,0 +1,175 @@
+{
+  "version": 1,
+  "kind": "complete-frozen-current-ownership-conservation",
+  "accepted_commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+  "frozen_queue_commit": "a61b6f9e7f88b1da380e3a834f89d7509132ed71",
+  "declared_frozen_patch": {
+    "bytes": 16380,
+    "commit": "9f9c829475d14da1488fe4cc7ec76720e194fd8c",
+    "git_blob_oid": "5d9cbebb7de2a856bae2aa5aff2bda17e0325315",
+    "mode": "100644",
+    "path": "coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/assembly-001/patch.json",
+    "sha256": "b44fc535b704fd88ccad45b85fbad73849b9f54c12bd3a83a158915b072414ac"
+  },
+  "actual_consumed_frozen_patch": {
+    "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+    "path": "coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/assembly-001/patch.json",
+    "mode": "100644",
+    "git_blob_oid": "5d9cbebb7de2a856bae2aa5aff2bda17e0325315",
+    "bytes": 16380,
+    "sha256": "b44fc535b704fd88ccad45b85fbad73849b9f54c12bd3a83a158915b072414ac",
+    "whole_body_consumed": true
+  },
+  "whole_body_alias": true,
+  "alias_reason": "Original producer commit unavailable locally; accepted same-path ordinary blob has exact declared mode/OID/size/SHA256.",
+  "native_base_selection_identical": true,
+  "frozen_patch_base_reference_identical": true,
+  "frozen_patch_cells": 1306,
+  "current_patch_cells": 16378,
+  "post_frozen_addition_cells": 15072,
+  "all_frozen_patch_rows_checked": 357,
+  "removed_cells": 0,
+  "reassigned_cells": 0,
+  "frozen_package_overlap_with_frozen_patch_cells": 0,
+  "controls": {
+    "missing_native_cell_detected": true,
+    "changed_native_owner_detected": true
+  },
+  "partition_receipt_sha256": "7685f5f9606d3cb9efecee6055dec1e67ecffd2166e5f552b68b3084452f8f0b",
+  "source_qualification_publication_sha256": "c0404be24b4278a269295f41d6e4f1129ed5ae81ec34a1dab438b7673ce52477",
+  "source_qualification_inputs": [
+    {
+      "bytes": 670769,
+      "path": ".cache/vietnam-20261014/source-qualification/result.json",
+      "sha256": "ca8c7c3a6df5a1b74e58ea0111f51c2df7c1e85ee7a8466a811b2d61051e196b"
+    },
+    {
+      "bytes": 1417215,
+      "path": ".cache/vietnam-20261014/source-qualification/original-stage-inputs.json",
+      "sha256": "50053645024605bd60506c93b975c3a76578ad1369972c0a1068a2a76a0d79ad"
+    },
+    {
+      "bytes": 232506,
+      "path": ".cache/vietnam-20261014/source-qualification/cells.json.gz",
+      "sha256": "a85502406c50a52f012802a42f0e7a37480703ebe876aeaf212cfe96bfd65a2b"
+    },
+    {
+      "bytes": 174779,
+      "path": ".cache/vietnam-20261014/source-qualification/qualified-patch.json",
+      "sha256": "590babf9169b2c2e2198ec89921ccef6fde4dab1e7d94c67b474e860fe71e55e"
+    },
+    {
+      "bytes": 71744,
+      "path": ".cache/vietnam-20261014/source-qualification/held-selectors.json.gz",
+      "sha256": "eed9305004ae301b6dfc2be49ddde8c1edad94d6342fd2c2c26b0f9e2e1a09ed"
+    }
+  ],
+  "source_qualified_frozen_cells": 12622,
+  "source_qualified_already_completed_cells": 175,
+  "source_qualified_current_cells": 12447,
+  "per_package": [
+    {
+      "category": "repair-evaluation",
+      "qualified_frozen_cells": 12622,
+      "qualified_already_completed_cells": 175,
+      "qualified_current_cells": 12447,
+      "held_current_cells": 3023
+    },
+    {
+      "category": "physical-interpretation",
+      "qualified_frozen_cells": 0,
+      "qualified_already_completed_cells": 0,
+      "qualified_current_cells": 0,
+      "held_current_cells": 24880
+    }
+  ],
+  "outputs": [
+    {
+      "path": "repair-evaluation/qualified-remaining.json.gz",
+      "bytes": 31158,
+      "sha256": "f5675b6cda7a0ab0e0a6a2d933e8ac95d9da1098e8271a4a56fbc4a2906ea38f",
+      "decoded_bytes": 263714,
+      "decoded_sha256": "b54bdbba3350b7214917d1e1fb20413275a3bc52a10c6a4d55c2523a1e84d2c0"
+    },
+    {
+      "path": "repair-evaluation/held-remaining.json.gz",
+      "bytes": 9263,
+      "sha256": "8a9b5c2dadad0e63e109be064143560aeed773f30a6a90997e57e3af72f9a174",
+      "decoded_bytes": 68614,
+      "decoded_sha256": "9c3811a7715c8dce41845e942b2156b1851d9ffb50acdd40e3f967c2ce57675d"
+    },
+    {
+      "path": "physical-interpretation/qualified-remaining.json.gz",
+      "bytes": 23,
+      "sha256": "7e9822432ddbc7c2682c87809c75babb37f3a1f4a6e7f6ab1302e1f629e646e2",
+      "decoded_bytes": 3,
+      "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "path": "physical-interpretation/held-remaining.json.gz",
+      "bytes": 55982,
+      "sha256": "7010e1add5133d3ec4c2eae2d37968d3bcef41e9cc4f08883288cf56ffdd135d",
+      "decoded_bytes": 580265,
+      "decoded_sha256": "c341cb49fc2a5ca3cd14297bd8ac55335969d902b8d8e02187de67892f2baa11"
+    },
+    {
+      "path": "qualified-current-patch.json",
+      "bytes": 177133,
+      "sha256": "9554f03c5e2e02a57cf481cc0bff63b27dcc3880794d78ad497dd8971181bccb"
+    },
+    {
+      "path": "complete-post-frozen-additions.json.gz",
+      "bytes": 22619,
+      "sha256": "affa03d8e0ddaeedb0f078166fc0690a65dcbd6e318403039952b6bb9940f130",
+      "decoded_bytes": 152713,
+      "decoded_sha256": "7bcaafd7e1c8b5dd21bbc0fa23d9dfb6e356deaa177314b6fd0ed8599d8e591e"
+    }
+  ],
+  "elapsed_seconds": 0.662548166,
+  "peak_rss_bytes": 158154752,
+  "reader_complete_phase_bytes": 147835441,
+  "input_inventory": [
+    {
+      "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/ownership-binding.json",
+      "mode": "100644",
+      "git_blob_oid": "b9d81d18aab6d03dc701ff1337b35e53be81d0af",
+      "bytes": 3048,
+      "sha256": "b952192475435c8fbc74a84627994aff4f4e073c36c479d369554fc75251bc89",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/assembly-001/patch.json",
+      "mode": "100644",
+      "git_blob_oid": "5d9cbebb7de2a856bae2aa5aff2bda17e0325315",
+      "bytes": 16380,
+      "sha256": "b44fc535b704fd88ccad45b85fbad73849b9f54c12bd3a83a158915b072414ac",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+      "path": "coordination/engineering/myeik-native-followup-20261014/patch.json",
+      "mode": "100644",
+      "git_blob_oid": "4d420429491ed56cfa41571a8f204bf24a21471d",
+      "bytes": 168907,
+      "sha256": "2063448ed664eac98cfdb48eea1529b5d62df0664be060890336505289c02761",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/owners.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "9c44513df64995d417dd3832ae604c703e84a506",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "whole_body_consumed": true
+    }
+  ],
+  "limitations": [
+    "Numerical current ownership conservation and partition only.",
+    "Source qualification is consumed from the separately bound source agent result; its scientific review is separate.",
+    "No native raster rebuild, cumulative selected-data edit, commit or push."
+  ],
+  "command": "GIT_NO_LAZY_FETCH=1 NODE24 --input-type=module - (inline ImmutableReader + accepted compareIntervals + exact interval intersections)"
+}
