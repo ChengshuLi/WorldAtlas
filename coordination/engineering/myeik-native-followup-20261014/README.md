@@ -97,8 +97,11 @@ engineering reproductions instead of adding standalone executable helpers to the
 batch. The first author run here conservatively selected the full suite because
 copied helpers and a modified earlier queue README made the diff more than inert
 selected data. Removing those unnecessary copies restored file-level data-only
-eligibility. The unchanged classifier still rejects accepted source-native .py,
-.bin.gz and .f64le.gz role extensions at its inert-pin boundary, so this delivery
-uses conservative full CI. No classifier or source-role disguise is introduced.
+eligibility. The initial accepted classifier rejected source-native .py, .bin.gz and .f64le.gz
+role extensions at its inert-pin boundary. Separate accepted correction #1877
+now authenticates fixed unchanged roles by exact bytes rather than filename suffix;
+this delivery contains no classifier change or source-role disguise. The earlier
+conservative author run passed all eight jobs in 19m31s. Final composition onto
+that accepted correction is being measured through the actual selected-data route.
 Record this packaging overhead and dependency wait separately from computation,
 warm geography and end-to-end delivery timings; no fast-route claim is made.
