@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "kind": "completed-stock-native-authority-operating-observation",
+  "exit_code": 0,
+  "accepted_code_commit": "35a549b7e16aa151114a3d819e2733250ca7050a",
+  "actual_cwd_head": "7f4bf63d1fd5ad1b997418a1b0435a4aadcd4772",
+  "input_commit": "6e4dd11f5ee8fa26a9edbbd5289a5fd32c4bd6a4",
+  "config_sha256": "891c19db8636bf723e49e1d9860ba1194af34f5f4568b81bd1d95182af358540",
+  "fresh_preflight": {
+    "at_utc": "2026-10-14T23:08:46.892Z",
+    "availableBytes": 1822834688,
+    "observed_preflight_rss": 50888704,
+    "currentRssBytes": 0,
+    "concurrentReservedBytes": 0,
+    "headroomBytes": 572882944,
+    "phaseBytes": 603979776,
+    "rssBytes": 603979776,
+    "complete_prospective_bytes": 537589957,
+    "code_commit": "35a549b7e16aa151114a3d819e2733250ca7050a",
+    "config_sha256": "891c19db8636bf723e49e1d9860ba1194af34f5f4568b81bd1d95182af358540",
+    "separate_scientific_child": true,
+    "allowance": {
+      "phaseBytes": 603979776,
+      "rssBytes": 603979776
+    },
+    "admitted": true
+  },
+  "internal_observation": {
+    "elapsed_seconds": 1.5133270829999999,
+    "charged_phase_bytes": 330456035,
+    "allowance": {
+      "phaseBytes": 603979776,
+      "rssBytes": 603979776
+    },
+    "normalized_node_lifetime_peak_rss_bytes": 230309888,
+    "qualified_cells": 3088,
+    "limits": [
+      "Original source/physical producers are not replayed.",
+      "Constructor qualification is not actual current-owner-zero or final selected-output acceptance."
+    ]
+  },
+  "external_seconds": 1.79,
+  "external_peak_rss_bytes": 230309888,
+  "complete_prospective_bytes": 537589957,
+  "deadline_seconds": 120,
+  "deadline_terminated": false,
+  "logs_each_file_cap_bytes": 16777216,
+  "limits": [
+    "Normal exit observed; no whole-process-group enforcement assertion.",
+    "Constructor qualification is not current-owner-zero, conservation or acceptance.",
+    "Original physical/source operating limits and framework/territorial/source-vintage limits remain preserved."
+  ]
+}

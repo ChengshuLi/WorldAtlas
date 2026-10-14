@@ -1,0 +1,2123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+    <meta charset="utf-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Laman Web Rasmi JUPEM </title>
+
+<meta name="keywords" content="Laman Web Rasmi JUPEM" />
+
+<meta name="description"
+    content="Laman web rasmi Jabatan Ukur dan Pemetaan Malaysia (JUPEM). Laman informatif berkaitan waktu solat, arah kiblat, ramalan air pasang surut.">
+
+<meta name="author" content="Jabatan Ukur dan Pemetaan Malaysia">
+
+
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-21KGZTPWLP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-21KGZTPWLP');
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-W35VXS8T');</script>
+<!-- End Google Tag Manager -->
+
+
+    <meta name="google" content="waktu solat, solat, subuh, suboh, fajr, zuhur, zohor, zuhr,  asar, asr, maghrib, dawn, isyak">
+
+    
+    <style >[wire\:loading], [wire\:loading\.delay], [wire\:loading\.inline-block], [wire\:loading\.inline], [wire\:loading\.block], [wire\:loading\.flex], [wire\:loading\.table], [wire\:loading\.grid], [wire\:loading\.inline-flex] {display: none;}[wire\:loading\.delay\.shortest], [wire\:loading\.delay\.shorter], [wire\:loading\.delay\.short], [wire\:loading\.delay\.long], [wire\:loading\.delay\.longer], [wire\:loading\.delay\.longest] {display:none;}[wire\:offline] {display: none;}[wire\:dirty]:not(textarea):not(input):not(select) {display: none;}input:-webkit-autofill, select:-webkit-autofill, textarea:-webkit-autofill {animation-duration: 50000s;animation-name: livewireautofill;}@keyframes livewireautofill { from {} }</style>
+
+    <!-- CSS & Script -->
+    <!-- Favicon JUPEM -->
+<link rel="shortcut icon" href="/main/img/favicon/favicon-16x16.png" type="image/x-icon" />
+<link rel="apple-touch-icon" href="/main/img/favicon/apple-icon-180x180.png">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+
+
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+
+
+
+<link href="https://cdn.datatables.net/2.3.5/css/dataTables.dataTables.min.css" rel="stylesheet">
+
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<style>
+
+
+
+    header {
+        font-family: "Nunito", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: <weight>;
+        font-style: normal;
+    }
+
+    body {
+        font-family: "Nunito", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: <weight>;
+        font-style: normal;
+    }
+
+
+
+    :root {
+        --jupem-secondary: #F58345;
+        --jupem-primary: #007B78;
+    }
+
+    .jupem-primary {
+        color: var(--jupem-primary) !important;
+    }
+
+
+
+
+    .bg-primary {
+        background-color: var(--jupem-primary) !important;
+        border-color: var(--jupem-primary) !important;
+    }
+
+
+    .bg-secondary {
+        background-color: var(--jupem-secondary) !important;
+        border-color: var(--jupem-secondary) !important;
+    }
+
+
+    /* Button Style */
+    .btn-primary {
+        background-color: #007B78 !important;
+        border-color: #007B78 !important;
+    }
+
+    .btn-primary:hover {
+        background-color: #ffffff !important;
+        border-color: #007B78 !important;
+        color:#007B78 !important;
+    }
+
+    .btn-jupem-secondary {
+        background-color: #ffffff !important;
+        border-color: var(--jupem-secondary) !important;
+        color: var(--jupem-secondary) !important;
+
+    }
+
+    .btn-jupem-secondary:hover {
+        color: white;
+        background-color:  var(--jupem-secondary) !important;
+        border-color:  var(--jupem-secondary) !important;
+    }
+
+    /* Button Color Mix */
+    .btn-jupem-mix {
+        background-color: #ffffff !important;
+        border-color: var(--jupem-primary) !important;
+        color: var(--jupem-primary) !important;
+    }
+
+    .btn-jupem-mix:hover {
+        background-color: #ffffff !important;
+        border-color: var(--jupem-secondary) !important;
+        color: var(--jupem-secondary) !important;
+    }
+
+
+
+
+    /* Hover Color Change */
+    .nav-link:hover {
+        font-weight: bold;
+        color: var(--jupem-primary) !important;
+    }
+
+    .nav-link {
+        transition: color 0.3s ease; /* duration and easing */
+        transition: font-weight 0.3s ease;
+        font-weight: bold;
+    }
+
+
+    a.extra-icon-btn {
+        text-decoration: none;
+        background-color: white !important;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 40px;
+        /* border-radius: 7px; */
+        padding: 5px!important;
+        overflow: hidden;
+    }
+
+
+    .extra-icon-btn  img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: contain;
+        display: block;
+    }
+
+    a.extra-icon-btn:hover {
+        text-decoration: none;
+        background-color: white;
+        cursor: pointer;
+        border: 2px solid var(--jupem-secondary);
+    }
+
+    span.icon-circle {
+        flex-shrink: 0;
+        flex-grow: 0;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+    }
+
+
+    /* Iklan Perolehan Badge Style (Start)*/
+
+    /* Transparent Btn */
+    a.transparent-btn {
+        text-decoration: none;
+        padding: 10px;
+        border-radius: 30px;
+        padding-left: 45px;
+        padding-right: 45px;
+        border: 1px solid white;
+        cursor: pointer;
+
+        transition: background-color 0.3s ease;
+    }
+
+    a.transparent-btn:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+        text-decoration: none;
+    }
+
+
+
+    /* Iklan Perolehan Badge Style (End)*/
+
+    /* Line Straight */
+    .vertical-line {
+        width: 2px;
+        height: 60px;
+        background-color: white;
+        margin-left: 20px;
+        float: left;
+    }
+
+    .vertical-line-transaksi{
+        width: 2px;
+        height: 80px;
+        background-color: var(--jupem-primary);
+        float: left;
+    }
+
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    section {
+        /* min-height: 100vh; */
+        /* padding-top: 80px;
+        padding-bottom: 40px; */
+    }
+    header.sticky-top {
+        background: #ffffff;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        z-index: 1030;
+    }
+
+
+
+
+
+
+
+
+
+
+    .carousel-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4); /* adjust darkness */
+    z-index: 2; /* sits above the image */
+    border-radius: 0.5rem; /* match your image rounded corners */
+
+
+    }
+
+    .jupem-grey{
+        color:rgb(65, 65, 65) !important;
+    }
+
+    .custom-border-start {
+        border-left: 2px solid var(--jupem-primary);
+    }
+
+    .custom-bottom-border {
+        position: relative;
+        overflow: visible; /* allow glow blur to show */
+    }
+
+    .custom-bottom-border::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 70%;         /* underline length */
+        height: 2px;
+        background: var(--jupem-primary);
+    }
+
+
+
+        /* Tooltip Background */
+        .custom-tooltip .tooltip-inner {
+            background-color: #0c0c0c;  /* dark background */
+            color: #ffffff;             /* text color */
+            padding: 8px 14px;
+            font-size: 14px;
+            border-radius: 8px;
+            /* box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);  */
+        }
+
+        /* Tooltip Arrow */
+        .custom-tooltip.bs-tooltip-bottom .tooltip-arrow::before {
+            border-bottom-color: #0c0c0c;
+        }
+
+        .custom-tooltip.bs-tooltip-top .tooltip-arrow::before {
+            border-top-color: #0c0c0c;
+        }
+
+        .custom-tooltip.bs-tooltip-start .tooltip-arrow::before {
+            border-left-color: #0c0c0c;
+        }
+
+        .custom-tooltip.bs-tooltip-end .tooltip-arrow::before {
+            border-right-color: #0c0c0c;
+        }
+
+        .tooltip {
+        z-index: 99999 !important;
+        }
+</style>
+
+
+<!-- Own -->
+
+
+
+
+<!-- Mobile Metas -->
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
+
+<!-- Web Fonts  -->
+
+
+<!-- Vendor CSS -->
+
+<link rel="stylesheet" href="/main/vendor/fontawesome-free/css/all.min.css">
+<link rel="stylesheet" href="/main/vendor/animate/animate.compat.css">
+<link rel="stylesheet" href="/main/vendor/animate/animate.min.css">
+<link rel="stylesheet" href="/main/vendor/simple-line-icons/css/simple-line-icons.min.css">
+<link rel="stylesheet" href="/main/vendor/owl.carousel/assets/owl.carousel.min.css">
+<link rel="stylesheet" href="/main/vendor/owl.carousel/assets/owl.theme.default.min.css">
+<link rel="stylesheet" href="/main/vendor/magnific-popup/magnific-popup.min.css">
+
+<link rel="stylesheet" href="/main/vendor/phone-number-validation-master/build/css/intlTelInput.css">
+
+<!-- Baboon -->
+<!-- Admin Extension Specific Page Vendor CSS -->
+<link rel="stylesheet" href="/main/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.css" />
+
+<link rel="stylesheet" href="/main/vendor/select2/select2.min.css" />
+
+
+
+<!-- Datatable -->
+<link rel="stylesheet" href="/main/css/jquery.datatables.min.css" />
+
+<!-- Theme CSS -->
+
+
+
+
+<!-- Revolution Slider CSS -->
+<link rel="stylesheet" href="/main/vendor/rs-plugin/css/settings.css">
+<link rel="stylesheet" href="/main/vendor/rs-plugin/css/layers.css">
+<link rel="stylesheet" href="/main/vendor/rs-plugin/css/navigation.css">
+
+
+<!-- Current Page CSS -->
+
+
+<!-- Skin CSS -->
+
+
+<!-- Custom CSS -->
+
+
+
+
+
+<link rel="stylesheet" href="https://www.jupem.gov.my/main/css/v2/inner.css">
+<link rel="stylesheet" href="https://www.jupem.gov.my/main/css/v2/title.css">
+
+
+<style>
+
+
+</style>
+
+</head>
+
+<style>
+.p-dark {
+    color: #000 !important;
+    text-align: justify !important;
+}
+</style>
+
+<body data-plugin-page-transition>
+    <div class="body">
+        <!-- Header - Logo + Icons 4 + Search - START -->
+        <header class="sticky-top">
+    <style wire:id="l5EuAWwQWGAzBUBJ8TBt" wire:initial-data="{&quot;fingerprint&quot;:{&quot;id&quot;:&quot;l5EuAWwQWGAzBUBJ8TBt&quot;,&quot;name&quot;:&quot;v2.header&quot;,&quot;locale&quot;:&quot;en&quot;,&quot;path&quot;:&quot;en\/info-semasa\/berita-terkini\/13&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;v&quot;:&quot;acj&quot;},&quot;effects&quot;:{&quot;listeners&quot;:[]},&quot;serverMemo&quot;:{&quot;children&quot;:[],&quot;errors&quot;:[],&quot;htmlHash&quot;:&quot;18134f7c&quot;,&quot;data&quot;:[],&quot;dataMeta&quot;:[],&quot;checksum&quot;:&quot;fa815d01bcc2b357fb37df957fd2b1336ab0ad5b14ba81390d54ee31f918b78a&quot;}}">
+    #jupemHeaderOnly .bg-animate {
+        color: white;
+        background-color: var(--jupem-secondary);
+    }
+
+    @keyframes  jupemHeaderNavFade {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    #jupemHeaderOnly .jupem-header-nav-item {
+        opacity: 1;
+        transform: none;
+        transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    #jupemHeaderOnly .jupem-header-nav-hidden {
+        opacity: 0 !important;
+        transform: translateX(-10px);
+        pointer-events: none;
+        width: 0 !important;
+        max-width: 0 !important;
+        min-width: 0 !important;
+        overflow: hidden !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        flex: 0 0 0 !important;
+    }
+
+    #jupemHeaderOnly .jupem-header-search-expand {
+        opacity: 0;
+        transform: translateX(20px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        pointer-events: none;
+    }
+
+    #jupemHeaderOnly .jupem-header-search-expand.visible {
+        opacity: 1;
+        transform: translateX(0);
+        pointer-events: all;
+    }
+
+    #jupemHeaderOnly #jupemHeaderOnlySearchBar {
+        width: 100%;
+    }
+
+    #jupemHeaderOnly #jupemHeaderOnlySearchBar form {
+        width: 100%;
+    }
+
+    @media (min-width: 992px) {
+        #jupemHeaderOnly #jupemHeaderOnlySearchBar form {
+            width: 70%;
+            max-width: 70%;
+        }
+    }
+
+    #jupemHeaderOnly #jupemHeaderOnlySearchBtn {
+        display: flex;
+        align-items: center;
+    }
+
+    #jupemHeaderOnly #jupemHeaderOnlySearchToggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+
+
+
+    #jupemHeaderOnlySearchBar form {
+        margin-bottom: 0;
+        display: flex;
+        align-items: center;
+    }
+
+    #jupemHeaderOnlySearchBar .input-group {
+        align-items: center;
+    }
+
+    #jupemHeaderOnlySearchBar .input-group-text,
+    #jupemHeaderOnlySearchBar .form-control,
+    #jupemHeaderOnlySearchClose {
+        height: 38px;
+    }
+
+    #jupemHeaderOnlySearchClose {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+    }
+
+
+
+
+</style>
+
+<div class="bg-white shadow" id="jupemHeaderOnly">
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+
+            <a class="navbar-brand d-flex align-items-center flex-wrap"
+               href="https://www.jupem.gov.my/en"
+               style="white-space: normal!important;">
+
+                <div>
+                    <img src="https://www.jupem.gov.my/main/img/logo-default/logo-default-208x100.png" alt="Logo" height="50">
+                    <img src="https://www.jupem.gov.my/main/img/logo-default/logo_JUPEM.svg" alt="Logo" height="50">
+                </div>
+
+                <div class="ms-lg-3 d-none d-sm-block">
+                    <span class="mb-0 ms-3 fs-6" style="color: rgb(153, 153, 153);">
+                        Official Website
+                    </span>
+
+                    <h4 class="mb-0 ms-3 text-uppercase" style="color:rgb(90, 90, 90)">
+                        <b>
+                            Department of Survey and Mapping Malaysia
+                        </b>
+                    </h4>
+
+                    <div class="ms-3 mt-1">
+                        <span class="fs-6 pe-2 ps-2 bg-animate">
+                            Ministry of Natural Resources and Environmental Sustainability
+                        </span>
+                    </div>
+                </div>
+            </a>
+
+            
+            <button class="navbar-toggler"
+                    type="button"
+                    id="jupemHeaderOnlyToggler"
+                    aria-controls="jupemHeaderOnlyCollapse"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse mt-2 mt-lg-0" id="jupemHeaderOnlyCollapse">
+                <ul class="navbar-nav ms-auto" id="jupemHeaderOnlyMenu">
+                    <li class="nav-item jupem-header-nav-item">
+                        <a class="nav-link fs-6" href="https://www.jupem.gov.my/en/main-menu">
+                            Main Menu
+                        </a>
+                    </li>
+
+                    <li class="nav-item jupem-header-nav-item">
+                        <a class="nav-link fs-6" href="https://www.jupem.gov.my/en/info-korp/pegawai">
+                            Staff Directory
+                        </a>
+                    </li>
+
+                    <li class="nav-item jupem-header-nav-item">
+                        <a class="nav-link fs-6" href="https://www.jupem.gov.my/en/warga-jupem">
+                            JUPEM Staff
+                        </a>
+                    </li>
+
+                    <li class="nav-item jupem-header-nav-item">
+                        <a class="nav-link fs-6" href="https://www.jupem.gov.my/en/orang-awam">
+                            General Public
+                        </a>
+                    </li>
+
+                    <li class="nav-item jupem-header-nav-item me-3 fs-6">
+                        <a class="nav-link" href="https://www.jupem.gov.my/en/warga-jupem?trigger=true">
+                            JPDSN
+                        </a>
+                    </li>
+
+                    <li class="nav-item jupem-header-nav-item me-3" id="jupemHeaderOnlySearchBtn">
+                        <a class="nav-link d-flex align-items-center h-100" href="#" id="jupemHeaderOnlySearchToggle" aria-label="Buka carian">
+                            <i class="bi bi-search fs-4 fw-bold"></i>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="jupem-header-search-expand d-none align-items-center gap-2 justify-content-end"
+                    id="jupemHeaderOnlySearchBar">
+
+                    <form role="search"
+                          action="https://www.jupem.gov.my/en/carian"
+                          method="get"
+                          class="input-group flex-nowrap"
+                          splwpk-search-function="splwpk-search-function"
+                          >
+
+                        <button type="submit" class="input-group-text bg-transparent border-end-0">
+                            <i class="bi bi-search"></i>
+                        </button>
+
+                        <input name="carian"
+                               type="text"
+                               class="form-control border-start-0"
+                               id="jupemHeaderOnlySearchInput"
+                               placeholder="Search"
+                               style="min-width: 0;">
+                    </form>
+
+                    <a href="#" id="jupemHeaderOnlySearchClose" aria-label="Tutup carian">
+                        <i class="bi bi-x fs-3 fw-bold" style="color: rgba(0, 0, 0, 0.65);"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </nav>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const header = document.getElementById('jupemHeaderOnly');
+    if (!header) return;
+
+    const toggler = header.querySelector('#jupemHeaderOnlyToggler');
+    const collapseEl = header.querySelector('#jupemHeaderOnlyCollapse');
+
+    const searchToggle = header.querySelector('#jupemHeaderOnlySearchToggle');
+    const searchBar = header.querySelector('#jupemHeaderOnlySearchBar');
+    const searchClose = header.querySelector('#jupemHeaderOnlySearchClose');
+    const searchInput = header.querySelector('#jupemHeaderOnlySearchInput');
+
+    const navItems = header.querySelectorAll('.jupem-header-nav-item');
+
+    if (toggler && collapseEl) {
+        toggler.addEventListener('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            const isOpen = collapseEl.classList.contains('show');
+
+            collapseEl.classList.remove('collapsing');
+
+            if (isOpen) {
+                collapseEl.classList.remove('show');
+                collapseEl.classList.add('collapse');
+                toggler.setAttribute('aria-expanded', 'false');
+            } else {
+                collapseEl.classList.add('show');
+                collapseEl.classList.add('collapse');
+                toggler.setAttribute('aria-expanded', 'true');
+            }
+        });
+    }
+
+    if (!searchToggle || !searchBar || !searchClose || !searchInput) return;
+
+    searchToggle.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        navItems.forEach(function (item) {
+            item.classList.add('jupem-header-nav-hidden');
+        });
+
+        setTimeout(function () {
+            searchBar.classList.remove('d-none');
+            searchBar.classList.add('d-flex');
+
+            requestAnimationFrame(function () {
+                searchBar.classList.add('visible');
+            });
+
+            searchInput.focus();
+        }, 220);
+    });
+
+    searchClose.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        searchBar.classList.remove('visible');
+
+        setTimeout(function () {
+            searchBar.classList.add('d-none');
+            searchBar.classList.remove('d-flex');
+
+            navItems.forEach(function (item) {
+                item.classList.remove('jupem-header-nav-hidden');
+            });
+        }, 250);
+    });
+
+    searchInput.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+            searchClose.click();
+        }
+    });
+});
+
+</script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/6850d6a94be5e7190b53284a/1ittsd2aq';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
+</script>
+<!--End of Tawk.to Script-->
+
+<!-- Livewire Component wire-end:l5EuAWwQWGAzBUBJ8TBt -->
+    
+    <style wire:id="MMP765zlTnOdKl6gLfpi" wire:initial-data="{&quot;fingerprint&quot;:{&quot;id&quot;:&quot;MMP765zlTnOdKl6gLfpi&quot;,&quot;name&quot;:&quot;v2.pengumuman&quot;,&quot;locale&quot;:&quot;en&quot;,&quot;path&quot;:&quot;en\/info-semasa\/berita-terkini\/13&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;v&quot;:&quot;acj&quot;},&quot;effects&quot;:{&quot;listeners&quot;:[]},&quot;serverMemo&quot;:{&quot;children&quot;:[],&quot;errors&quot;:[],&quot;htmlHash&quot;:&quot;63b90362&quot;,&quot;data&quot;:[],&quot;dataMeta&quot;:[],&quot;checksum&quot;:&quot;da550dc08c27e43ea0209ffe5f65cad1ba84ac070791e2d131d11e1b92b354ff&quot;}}">
+    .pengumuman-bar {
+        padding: 6px 20px;
+        overflow: hidden;
+    }
+
+    .pengumuman-inner {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        width: 100%;
+        min-width: 0;
+    }
+
+    .pengumuman-text {
+        flex: 1 1 auto;
+        min-width: 0;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #fff;
+        overflow: hidden;
+    }
+
+    .pengumuman-label,
+    .icon-circle {
+        flex: 0 0 auto;
+    }
+
+    .pengumuman-text .news-scroll,
+    .news-scroll {
+        flex: 1 1 auto;
+        min-width: 0;
+        max-width: 100%;
+        overflow: hidden;
+    }
+
+    .top-icons {
+        flex: 0 0 auto;
+        min-width: max-content;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 12px;
+        white-space: nowrap;
+        padding-left: 18px;
+        padding-right: 18px;
+        /* border-left: 1px solid rgba(255,255,255,0.25); */
+        box-sizing: border-box;
+    }
+
+    .date-wrapper {
+        border-left: 2px solid rgba(255,255,255,0.6);
+        padding-left: 10px;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        font-size: 0.8rem;
+        line-height: 1.15;
+        flex: 0 0 auto;
+    }
+
+    .extra-icon-btn {
+        width: 34px;
+        height: 34px;
+        min-width: 34px;
+        min-height: 34px;
+        max-width: 34px;
+        max-height: 34px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50% !important;
+        overflow: hidden;
+        flex: 0 0 34px;
+        aspect-ratio: 1 / 1;
+    }
+
+    .extra-icon-btn img {
+        max-width: 21px;
+        height: auto;
+    }
+
+    #lang_change span {
+        font-size: 0.82rem;
+    }
+
+    @media (max-width: 991.98px) {
+        .pengumuman-bar {
+            padding: 6px 10px;
+        }
+
+        .pengumuman-inner {
+            flex-direction: column-reverse;
+            align-items: stretch;
+            gap: 8px;
+        }
+
+        .pengumuman-text {
+            width: 100%;
+            justify-content: center;
+            text-align: center;
+            padding: 4px 0;
+        }
+
+        .top-icons {
+            width: 100%;
+            min-width: 0;
+            justify-content: center;
+            gap: 8px;
+            padding-left: 0;
+            padding-right: 0;
+            border-left: 0;
+        }
+    }
+
+    @media (max-width: 575.98px) {
+        .top-icons {
+            gap: 5px;
+        }
+
+        .extra-icon-btn {
+            width: 26px;
+            height: 26px;
+            min-width: 26px;
+            min-height: 26px;
+            max-width: 26px;
+            max-height: 26px;
+            flex: 0 0 26px;
+        }
+
+        .extra-icon-btn img {
+            max-width: 16px;
+        }
+
+        #lang_change span {
+            font-size: 0.68rem;
+        }
+
+        .date-wrapper {
+            height: 30px;
+            font-size: 0.61rem;
+            padding-left: 5px;
+        }
+
+        .pengumuman-text {
+            font-size: 0.72rem;
+            gap: 6px;
+        }
+    }
+
+    @media (max-width: 400px) {
+        .top-icons {
+            gap: 4px;
+        }
+
+        .extra-icon-btn {
+            width: 24px;
+            height: 24px;
+            min-width: 24px;
+            min-height: 24px;
+            max-width: 24px;
+            max-height: 24px;
+            flex: 0 0 24px;
+        }
+
+        .extra-icon-btn img {
+            max-width: 14px;
+        }
+
+        .date-wrapper {
+            font-size: 0.56rem;
+            padding-left: 4px;
+        }
+    }
+
+    .pengumuman-inner:has(.top-icons:only-child) {
+        justify-content: flex-end;
+    }
+</style>
+
+
+<style>
+
+    .w3c-color-red    * { color: red !important; }
+    .w3c-color-green  * { color: green !important; }
+    .w3c-color-blue   * { color: blue !important; }
+    .w3c-color-yellow * { color: yellow !important; }
+
+
+    /* W3C Wrapper */
+    .w3c-wrapper {
+    position: relative;
+    display: inline-block;
+    }
+
+    /* Butang W3C */
+    .extra-icon-btn.w3c-btn-toggle {
+    cursor: pointer;
+    background: var(--bs-white);
+    transition: background 0.15s, box-shadow 0.15s;
+    }
+    .extra-icon-btn.w3c-btn-toggle:hover,
+    .extra-icon-btn.w3c-btn-toggle.active {
+        background: #e8f0fe;
+        border-color: var(--jupem-primary);
+    }
+
+
+
+    /* W3C Dropdown — viewport-aware */
+    #headerTopCartDropdown {
+        display: none;
+        position: fixed;        /* fixed supaya tak terikat dengan parent overflow */
+        width: 220px;
+        background: #fff;
+        border: 0.5px solid rgba(0,0,0,0.12);
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+        z-index: 9999;
+        padding: 14px;
+        animation: w3c-fade-in 0.15s ease;
+    }
+
+    #headerTopCartDropdown.open {
+        display: block;
+    }
+
+    /* Caret — akan diposisi semula oleh JS */
+    #headerTopCartDropdown::before {
+        content: '';
+        position: absolute;
+        top: -6px;
+        width: 10px;
+        height: 10px;
+        background: #fff;
+        border-left: 0.5px solid rgba(0,0,0,0.12);
+        border-top: 0.5px solid rgba(0,0,0,0.12);
+        transform: rotate(45deg);
+        right: var(--caret-right, 14px);  /* ikut JS calculation */
+    }
+
+    @media (max-width: 575.98px) {
+        #headerTopCartDropdown {
+            width: calc(100vw - 24px);   /* full width pada mobile */
+            max-width: 300px;
+        }
+    }
+
+    @keyframes  w3c-fade-in {
+        from { opacity: 0; transform: translateY(-4px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Label section */
+    .w3c-section-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+    }
+
+    .w3c-divider {
+    height: 0.5px;
+    background: rgba(0,0,0,0.08);
+    margin: 10px 0;
+    }
+
+    /* Dot warna */
+    .dot-w3c {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: transform 0.12s, box-shadow 0.12s;
+    outline: none;
+    }
+    .dot-w3c:hover {
+    transform: scale(1.18);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+    }
+    .dot-w3c-1 { background: #f1f3f5; border-color: #dee2e6; }
+    .dot-w3c-2 { background: red; }
+    .dot-w3c-3 { background: green; }
+    .dot-w3c-4 { background: blue; }
+    .dot-w3c-5 { background: yellow; }
+
+    /* Butang saiz fon */
+    .w3c-font-size-btn {
+        border: 1px solid #dee2e6;
+        border-radius: 6px;
+        background: #f8f9fa;
+        cursor: pointer;
+        padding: 3px 10px;
+        color: #212529;
+        transition: background 0.12s, border-color 0.12s;
+        text-decoration: none;
+    }
+    .w3c-font-size-btn:hover,
+    .w3c-font-size-btn.active {
+        background: #e8f0fe;
+        border-color: var(--jupem-primary);
+        color: var(--jupem-primary);
+    }
+
+    /* Buang margin default ol */
+    #headerTopCartDropdown .mini-products-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    }
+    #headerTopCartDropdown .item {
+    padding: 0;
+    }
+
+/* W3C - Fix overflow clipping */
+    .pengumuman-bar {
+        overflow: visible !important;
+    }
+
+    .pengumuman-inner {
+        overflow: visible !important;
+    }
+
+    .top-icons {
+        overflow: visible !important;
+        position: relative;
+        z-index: 1000;
+    }
+
+</style>
+
+<div class="container-fluid bg-primary pengumuman-bar">
+    <div class="pengumuman-inner">
+
+        
+                <div class="pengumuman-text">
+
+                <span class="icon-circle bg-white">
+                    <i class="bi bi-info-circle-fill" style="color: var(--jupem-secondary);"></i>
+                </span>
+
+                <span class="fw-bold pengumuman-label" style="text-transform: uppercase;">
+                    [Information]
+                </span>
+
+                <marquee behaviour="scroll"
+                         onmouseover="this.stop();"
+                         onmouseout="this.start();"
+                         direction="left"
+                         class="news-scroll">
+                                            <a href="https://www.jupem.gov.my/en/info-semasa/pengumuman/384" style="text-decoration: none; color: white;">
+                            NOTIS PENUTUPAN SEMENTARA MAKMAL UJIAN ALAT PENGESANAN UTILITI BAWAH TANAH, IBU PEJABAT JUPEM
+                        </a>
+                                    </marquee>
+
+        </div>
+        
+        
+        <div class="top-icons">
+
+            <a class="shadow extra-icon-btn rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" data-bs-container="body"title="Soalan Lazim" href="https://www.jupem.gov.my/en/faq" splwpk-faq="splwpk-faq" timestamp="2026-10-08 05:46:56">
+                <img src="https://www.jupem.gov.my/main/img/shortcut-icon/faq-small.png" alt="FAQ Icon"/>
+            </a>
+
+            <a class="shadow extra-icon-btn rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" data-bs-container="body" title="Hubungi Kami" href="https://www.jupem.gov.my/en/info-korp#tab-3">
+                <img src="https://www.jupem.gov.my/main/img/shortcut-icon/hubungi-small.png" alt="Hubungi Kami"/>
+            </a>
+
+            <a class="shadow extra-icon-btn rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" data-bs-container="body" title="Aduan & Maklum Balas" href="https://www.jupem.gov.my/en/aduan-maklumbalas"
+                splwpk-feedback-form="splwpk-feedback-form"
+                splwpk-online-e-participation="splwpk-online-e-participation"
+                timestamp="2026-10-08 05:46:56">
+                <img src="https://www.jupem.gov.my/main/img/shortcut-icon/maklumbalas-small.png" alt="Maklum Balas"/>
+            </a>
+
+            <a class="shadow extra-icon-btn rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" data-bs-container="body" title="Peta Laman" href="https://www.jupem.gov.my/en/peta-laman" splwpk-sitemap = "splwpk-sitemap">
+                <img src="https://www.jupem.gov.my/main/img/shortcut-icon/peta-small.png" alt="Peta Laman"/>
+            </a>
+
+            
+            
+            <a id="w3c_toggle" class="shadow extra-icon-btn rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" data-bs-container="body" title="W3C">
+                <span style="color: var(--jupem-primary); font-weight: bold; font-size: 1rem;">
+                    <i class="bi bi-person-wheelchair"></i>
+                    
+                </span>
+            </a>
+
+            
+            <div class="header-nav-features-dropdown" id="headerTopCartDropdown" style="z-index: 999;">
+                <ol class="mini-products-list">
+                    <li class="item">
+                        <div class="product-details">
+                            <p class="qty-price">Font Color</p>
+                            <p class="product-name">
+                            <div splwpk-w3c="splwpk-w3c">
+                                <button class="dot-w3c dot-w3c-1" id="fontColorWhite"
+                                    onclick="changeWhite()"></button>
+                                <button class="dot-w3c dot-w3c-2" id="fontColorRed"
+                                    onclick="changeRed()"></button>
+                                <button class="dot-w3c dot-w3c-3" id="fontColorGreen"
+                                    onclick="changeGreen()"></button>
+                                <button class="dot-w3c dot-w3c-4" id="fontColorBlue"
+                                    onclick="changeBlue()"></button>
+                                <button class="dot-w3c dot-w3c-5" id="fontColorYellow"
+                                    onclick="changeYellow()"></button>
+                            </div>
+                            </p>
+                        </div>
+                    </li>
+                </ol>
+                <ol class="mini-products-list">
+                    <li class="item">
+                        <div class="product-details">
+                            <p class="qty-price">
+                                Font Size
+                            </p>
+                            <p class="product-name">
+                                <a href="#" class="text-decoration-none btn-link"
+                                    onclick="change80()" style="font-size: 10px; color: var(--jupem-primary);">A &nbsp;</a>
+                                <a href="#" class="text-decoration-none btn-link"
+                                    onclick="change100()" style="font-size: 12px; color: var(--jupem-primary);">A
+                                    &nbsp;</a>
+                                <a href="#" class="text-decoration-none btn-link"
+                                    onclick="change150()" style="font-size: 14px; color: var(--jupem-primary);">A
+                                    &nbsp;</a>
+                            </p>
+                        </div>
+                    </li>
+                </ol>
+
+                
+                <div class="w3c-divider"></div>
+
+                
+                <div style="text-align: center;">
+                    <button class="w3c-font-size-btn" onclick="resetW3C()" style="width: 100%; padding: 6px 0;">
+                        ↺ Reset
+                    </button>
+                </div>
+            </div>
+
+
+            <a id="lang_change" class="shadow extra-icon-btn rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" data-bs-container="body" title="Tukar Bahasa" href="https://www.jupem.gov.my/ms/info-semasa/berita-terkini/13" splwpk-multilang="splwpk-multilang">
+                <span style="color: var(--jupem-secondary); font-weight: bold;">
+                     MY                 </span>
+            </a>
+
+            <div class="date-wrapper">
+                <span class="fw-bold text-white" style="text-align: right;" splwpk-w3c="splwpk-w3c">
+                    15 October 2026<br><a target="_blank" style="text-decoration: none; color: white; font-weight: bold;" href="https://aims.jupem.gov.my/hijri-calendar" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" data-bs-container="body" title="Takwim Miladiah 2026">04 Jamadilawal 1448H</a>
+                </span>
+            </div>
+
+            <div class="date-wrapper">
+                <span class="fw-bold text-white" style="text-align: right;" >
+                    Thursday<br><span id="live-clock"></span>
+                </span>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+    function updateClock() {
+        const clock = document.getElementById('live-clock');
+
+        if (!clock) return;
+
+        const now = new Date();
+
+        clock.innerHTML = now.toLocaleTimeString('en-US', {
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: true
+        });
+    }
+
+    setInterval(updateClock, 1000);
+    updateClock();
+</script>
+
+
+
+<script>
+    (function () {
+        const toggle = document.getElementById('w3c_toggle');
+        const dropdown = document.getElementById('headerTopCartDropdown');
+
+        if (!toggle || !dropdown) return;
+
+        function positionDropdown() {
+            const rect = toggle.getBoundingClientRect();
+            const dropW = dropdown.offsetWidth;
+            const margin = 8;
+
+            // Cuba align right dulu
+            let left = rect.right - dropW;
+
+            // Jika terpotong di kiri, shift ke kanan
+            if (left < margin) {
+                left = margin;
+            }
+
+            // Jika terpotong di kanan, clamp
+            if (left + dropW > window.innerWidth - margin) {
+                left = window.innerWidth - dropW - margin;
+            }
+
+            const top = rect.bottom + 10;
+
+            dropdown.style.top  = top + 'px';
+            dropdown.style.left = left + 'px';
+
+            // Adjust caret position supaya sentiasa tunjuk ke butang
+            const btnCentreX = rect.left + rect.width / 2;
+            const caretRight = (left + dropW) - btnCentreX - 6;
+            dropdown.style.setProperty('--caret-right', Math.max(10, Math.min(caretRight, dropW - 20)) + 'px');
+        }
+
+        toggle.addEventListener('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            const isOpen = dropdown.classList.contains('open');
+
+            if (!isOpen) {
+                dropdown.classList.add('open');
+                toggle.classList.add('active');
+                // Position selepas display:block supaya offsetWidth ada nilai
+                requestAnimationFrame(positionDropdown);
+            } else {
+                dropdown.classList.remove('open');
+                toggle.classList.remove('active');
+            }
+        });
+
+        document.addEventListener('click', function (e) {
+            if (!toggle.contains(e.target) && !dropdown.contains(e.target)) {
+                dropdown.classList.remove('open');
+                toggle.classList.remove('active');
+            }
+        });
+
+        // Reposition bila resize atau scroll
+        window.addEventListener('resize', function () {
+            if (dropdown.classList.contains('open')) positionDropdown();
+        });
+
+        window.addEventListener('scroll', function () {
+            if (dropdown.classList.contains('open')) positionDropdown();
+        }, true);
+    })();
+</script>
+
+
+<script>
+    // All Elements
+    var allElements = document.querySelectorAll(
+        "div, h1, h2, h3, h4, h5, p, span, a, li, ul, ol, table, tr, td, th, button, input, textarea, select, strong, em, i, b, small, img, br, hr, form, label, input, button, nav, footer, header, section, aside, main, pre, code, blockquote, address, dl, dt, dd, acronym, cite, data, time, sub, sup, kbd, var, samp, mark, q, del, ins, bdo, iframe, object, embed, param, video, audio, source, track, canvas, map, area, b, i, u, s, strike, del, ins, caption, col, colgroup, tbody, thead, tfoot, figure, figcaption, details, summary, dfn, abbr, .text-color-light"
+    );
+
+    // Create cookie
+    function createCookie(name, value, days) {
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            var expires = "; expires=" + date.toGMTString();
+        } else var expires = "";
+        document.cookie = name + "=" + value + expires + "; path=/";
+    }
+
+    // Read cookie
+    function readCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+    }
+
+    // Erase cookie
+    function eraseCookie(name) {
+        createCookie(name, "", -1);
+    }
+
+    function clearColorClass() {
+        document.body.classList.remove('w3c-color-red', 'w3c-color-green', 'w3c-color-blue', 'w3c-color-yellow');
+    }
+
+    function changeWhite() {
+        clearColorClass();
+        eraseCookie('color');
+    }
+
+    function changeRed() {
+        clearColorClass();
+        document.body.classList.add('w3c-color-red');
+        createCookie('color', 'red', 7);
+    }
+
+    function changeGreen() {
+        clearColorClass();
+        document.body.classList.add('w3c-color-green');
+        createCookie('color', 'green', 7);
+    }
+
+    function changeBlue() {
+        clearColorClass();
+        document.body.classList.add('w3c-color-blue');
+        createCookie('color', 'blue', 7);
+    }
+
+    function changeYellow() {
+        clearColorClass();
+        document.body.classList.add('w3c-color-yellow');
+        createCookie('color', 'yellow', 7);
+    }
+
+    function resetW3C() {
+        clearColorClass();
+        eraseCookie('color');
+        change100();
+    }
+
+
+
+    function change80() {
+        document.body.style.fontSize = "80%";
+        return false;
+    }
+
+    function change100() {
+        document.body.style.fontSize = "100%";
+        return false;
+    }
+
+    function change150() {
+        document.body.style.fontSize = "150%";
+        return false;
+    }
+
+    // Set cookie
+    var x = readCookie('color')
+    if (x === 'green') {
+        changeGreen();
+    } else if (x === 'red') {
+        changeRed();
+    } else if (x === 'blue') {
+        changeBlue();
+    } else if (x === 'yellow') {
+        changeYellow();
+    } else if (x === 'white') {
+        changeWhite();
+    }
+
+</script>
+
+<!-- Livewire Component wire-end:MMP765zlTnOdKl6gLfpi --></header>
+        <!-- Header - Logo + Icons 4 + Search - END -->
+
+        <div role="main" class="main">
+            <!-- Title Section - START -->
+            <div wire:id="xujQn402mCSnhZWApttZ" wire:initial-data="{&quot;fingerprint&quot;:{&quot;id&quot;:&quot;xujQn402mCSnhZWApttZ&quot;,&quot;name&quot;:&quot;title.page-title&quot;,&quot;locale&quot;:&quot;en&quot;,&quot;path&quot;:&quot;en\/info-semasa\/berita-terkini\/13&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;v&quot;:&quot;acj&quot;},&quot;effects&quot;:{&quot;listeners&quot;:[]},&quot;serverMemo&quot;:{&quot;children&quot;:[],&quot;errors&quot;:[],&quot;htmlHash&quot;:&quot;f2f7afaa&quot;,&quot;data&quot;:[],&quot;dataMeta&quot;:[],&quot;checksum&quot;:&quot;64d4e0068895ccad7814a0dc76b0c894c21d504a3e08bb63714652d0f5efd3dd&quot;}}">
+    <section class="page-header page-header-modern page-header-md bg-transparent" style="padding: 0 !important;">
+        <div class="container" style="margin-top:50px;">
+            <div class="row">
+                <div class="col-md-6 align-self-center order-2 order-md-1 p-static">
+                    <div class="row">
+                        <div class="font-weight-normal text-title-small">
+                                                    </div>
+                        <div class="font-weight-normal text-6">
+                            <strong class="text-title-strong">
+                                                            </strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 align-self-center order-1">
+                    <ul class="breadcrumb d-block breadcrumb-dark mb-2 mb-md-0">
+                        <li>
+                            <a href="https://www.jupem.gov.my/en">Main Page</a>
+                        </li>
+                        <li class="">
+                                                    </li>
+
+                        
+
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Livewire Component wire-end:xujQn402mCSnhZWApttZ -->            <!-- Title Section - END -->
+
+            <!-- Menu - START -->
+                        <!-- Menu - END -->
+
+            
+            <div class="container" style="margin-bottom: 100px;">
+                <div class="row">
+                    <span class="" style="font-size: .8em;">
+                        Date Published : 21 Nov 2019
+                    </span>
+                </div>
+                <div class="row">
+                    <!-- SUB TITLE - START-->
+                    <h2 class="font-weight-normal text-6 mb-3">
+                                                    Malaysia, Indonesia sign MoU resolved border issue
+                                            </h2>
+                    <!-- SUB TITLE - END-->
+
+                    <!-- CONTENT - START -->
+
+                    <!-- IMAGE - Start-->
+                                        <!-- IMAGE - END-->
+
+                    <!-- PARAGRAPH - START -->
+                    <p class="mt-3 mb-0 para-align p-dark">
+                                                    <p><img alt="" src="https://www.jupem.gov.my/jupem18a/assets/uploads/images/contents/20191121143657-6ac00-mou-malaysia-indonesia.jpg" style="width: 500px; height: 500px;" /></p>
+
+<p style="text-align: justify;">The Forty-Third Meeting of the Joint Malaysia-Indonesia Boundary Committee on the Demarcation and Survey of the International Boundary between Malaysia (Sabah &amp; Sarawak) and Indonesia (North Kalimantan &amp; West Kalimantan) (JMI-43) was held in Hotel Melia, Kuala Lumpur, Malaysia on 19-21 November 2019.</p>
+
+<p style="text-align: justify;">The Malaysian Delegation was led by YBhg. Datuk Zurinah binti Pawanteh, Secretary General, Ministry of Water, Land and Natural Resources, who is also the Chairman of the National Malaysia-Indonesia Boundary Committee while the Indonesian Delegation was led by Drs. Hadi Prabowo, Secretary General, Ministry of Home Affairs Republic of Indonesia who is also the Chairman of the National Indonesia-Malaysia Boundary Committee. The Meeting was co-chaired by both Heads of Delegation.</p>
+
+<p style="text-align: justify;">During this JMI-43 meeting, both Chairmen of the Joint Boundary Committee signed a Memorandum of Understanding (MoU) on the Demarcation and Survey of the International Boundary between Malaysia (Sabah &amp; Sarawak) and Indonesia (Kalimantan Utara &amp; Kalimantan Barat). The MOU resolved two (2) OBPs in Sabah - North Kalimantan Sector, namely the international land boundary near the vicinity of Simantipal River in Pensiangan district and the sub-sector from boundary marker C 500 to boundary marker C 600 in Sipitang district in Sabah.</p>
+
+                                            </p>
+                    <!-- PARAGRAPH - END -->
+
+                    <!-- ATTACHMENT - START -->
+                    
+
+                                        <!-- CONTENT - END -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer - START -->
+        <style>
+    .footer-divider {
+        width: 90%;
+        margin: 1rem auto;
+    }
+
+    .footer-main-container {
+        padding-left: 7rem;
+        padding-right: 7rem;
+    }
+
+    .waktu-operasi-day-pl {
+        padding-left: 30% !important;
+    }
+
+    .counter-card {
+        width: 250px;
+        border: 1px solid #ccc;
+        transition: all 0.3s ease;
+    }
+
+    .counter-card:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 10px rgba(0,0,0,0.15);
+    }
+
+    .jumlah-pelawat-inner {
+        width: 100%;
+        max-width: 540px;
+        margin: 0 auto;
+    }
+
+    .footer-icon-list {
+        color: white;
+        text-shadow: 0 0 5px rgba(255, 255, 255, 0.459);
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .footer-icon-list:hover {
+        color: white;
+        text-shadow: 0 0 5px rgb(255, 255, 255);
+    }
+
+    @media (max-width: 991.98px) {
+
+        .footer-main-container {
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+        }
+
+        .waktu-operasi-row {
+            text-align: center;
+        }
+
+        .waktu-operasi-day-pl,
+        .waktu-operasi-desc-pl {
+            padding-left: 0 !important;
+            text-align: center;
+        }
+
+        .jumlah-pelawat-inner,
+        .recognition-inner {
+            max-width: 100%;
+            width: 100%;
+        }
+
+        .jumlah-pelawat-cards {
+            gap: 0.75rem !important;
+        }
+
+        .jumlah-pelawat-cards .counter-card {
+            flex: 1 1 0;
+            width: 100%;
+            min-width: 0;
+            max-width: 250px;
+        }
+
+        .recognition-inner img {
+            width: 100% !important;
+        }
+    }
+
+    @media (max-width: 575.98px) {
+        .jumlah-pelawat-cards {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .jumlah-pelawat-cards .counter-card {
+            width: 100%;
+            max-width: 250px;
+        }
+    }
+</style>
+
+<div>
+    
+    <hr class="footer-divider jupem-primary">
+
+    
+    <div class="container-fluid footer-main-container">
+        <div class="row mb-1">
+
+            
+            <div class="col-lg-4">
+
+                <div class="pb-5">
+                    <h3 class="fw-bold jupem-primary text-center" >Operating Hours</h3>
+                    
+
+                    <div class="row mt-5 waktu-operasi-row">
+                        <div class="col-lg-6">
+                            <div class="waktu-operasi-day-pl fw-bold jupem-grey">Monday - Thursday</div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="waktu-operasi-desc-pl jupem-grey">8:00 am - 12:30 pm</div>
+                            <div class="waktu-operasi-desc-pl jupem-grey">2:00 pm - 4:30 pm</div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3 waktu-operasi-row">
+                        <div class="col-lg-6">
+                            <div class="waktu-operasi-day-pl fw-bold jupem-grey">Friday</div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="waktu-operasi-desc-pl jupem-grey">8:00 am - 12:00 pm</div>
+                            <div class="waktu-operasi-desc-pl jupem-grey">2:45 pm - 4:30 pm</div>
+                        </div>
+                    </div>
+
+
+                    <div class="row mt-3 waktu-operasi-row">
+                        <div class="col-lg-6">
+                            <div class="waktu-operasi-day-pl fw-bold jupem-grey">Saturday - Sunday /</div>
+                            <div class="waktu-operasi-day-pl fw-bold jupem-grey">Regional Holiday</div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="waktu-operasi-desc-pl jupem-grey">Closed</div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+            
+            <div class="col-lg-4">
+
+                <div class="pb-5">
+                    <h3 class="fw-bold jupem-primary text-center">Visitors</h3>
+
+                    <div class="jumlah-pelawat-inner recognition-inner">
+
+
+                        <div class="row mt-5">
+                            <div class="d-flex gap-4 justify-content-center jumlah-pelawat-cards">
+
+                                <div class="counter-card" splwpk-broadcast="splwpk-broadcast"  timestamp="2026-10-15 05:00:04">
+                                    <div style="background:#e6e6e6; padding:15px; text-align:center;">
+                                        <h3 style="margin:0;">11,593</h3>
+                                    </div>
+                                    <div style="background:#ffffff; padding:10px; text-align:center;">
+                                        Monthly (Oct)
+                                    </div>
+                                </div>
+
+                                <div class="counter-card">
+                                    <div style="background:#e6e6e6; padding:15px; text-align:center;">
+                                        <h3 style="margin:0;">219,830</h3>
+                                    </div>
+                                    <div style="background:#ffffff; padding:10px; text-align:center;">
+                                        Yearly (2026)
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+            
+            <div class="col-lg-4">
+
+                <div class="pb-5">
+                    <h3 class="fw-bold jupem-primary text-center">Recognition</h3>
+
+                    <div class="jumlah-pelawat-inner">
+
+                        <div class="mt-5">
+                            
+                            
+                            <a href="https://www.jupem.gov.my/storage/upload/pdf/sijilPengiktirafan-1739153766.pdf" target="_blank"
+                            rel="noopener noreferrer">
+                                <img class="img-fluid" style="width: 100%;" alt="iso-label"
+                                    src="https://www.jupem.gov.my/main/img/iso/iso-label-2.jpg"/>
+                            </a>
+                            
+                        </div>
+
+                        
+
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+    
+    <div style="background-color: rgb(36, 36, 36);">
+        <div class="container">
+            <div class="row p-3 align-items-center">
+
+                <div class="col-lg-10">
+                    <div class="">
+
+                        <div><span class="fw-bold fs-6" style="color: var(--jupem-secondary);">All Rights Reserved 2026 © Department of Survey and Mapping Malaysia</span></div>
+                        <p class="text-white fs-6">Best view with Google Chrome version 146.0 or above and Mozilla Firefox version 149.0 or above with resolution 1366 x 768 pixels.</p>
+
+
+                        
+                    </div>
+                </div>
+
+                <div class="col-lg-2 text-white">
+                    <div>
+                        <a class="footer-icon-list" href="https://www.jupem.gov.my/ms/dasar-privasi" target="_blank" splwpk-privacy-policy = "splwpk-privacy-policy">
+                            <span class="me-2">
+                                <i class="bi bi-arrow-right-circle-fill" style="color: white"></i>
+                            </span>
+                            Privacy Policy
+                        </a>
+                    </div>
+                    <div>
+                        <a class="footer-icon-list" href="https://www.jupem.gov.my/ms/dasar-keselamatan" target="_blank">
+                            <span class="me-2">
+                                <i class="bi bi-arrow-right-circle-fill" style="color: white"></i>
+                            </span>
+                            Security Policy
+                        </a>
+                    </div>
+
+                    <div>
+                        <a class="footer-icon-list" href="https://www.jupem.gov.my/ms/penafian" target="_blank">
+                            <span class="me-2">
+                                <i class="bi bi-arrow-right-circle-fill" style="color: white"></i>
+                            </span>
+                            Disclaimer
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+        <!-- Footer - END -->
+
+    </div>
+
+    <!-- Vendor -->
+    <!-- Vendor -->
+<script src="/main/vendor/jquery/jquery.min.js"></script>
+<script src="/main/vendor/jquery.appear/jquery.appear.min.js"></script>
+<script src="/main/vendor/jquery.easing/jquery.easing.min.js"></script>
+<script src="/main/vendor/jquery.cookie/jquery.cookie.min.js"></script>
+<script src="/main/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/main/vendor/jquery.validation/jquery.validate.min.js"></script>
+
+<script src="/main/vendor/select2/select2.min.js"></script>
+<script src="/jupem/plugins/chart.js/chart4_3_0.min.js"></script>
+<script src="/main/vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
+<script src="/main/vendor/jquery.gmap/jquery.gmap.min.js"></script>
+<script src="/main/vendor/lazysizes/lazysizes.min.js"></script>
+<script src="/main/vendor/isotope/jquery.isotope.min.js"></script>
+<script src="/main/vendor/owl.carousel/owl.carousel.min.js"></script>
+<script src="/main/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+<script src="/main/vendor/vide/jquery.vide.min.js"></script>
+<script src="/main/vendor/vivus/vivus.min.js"></script>
+<script src="https://pagination.js.org/dist/2.1.5/pagination.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
+
+<!-- Head Libs -->
+<script src="/main/vendor/modernizr/modernizr.min.js"></script>
+
+<!-- Theme Base, Components and Settings -->
+<script src="/main/js/theme.js"></script>
+
+<!-- maklumbalas notel input-->
+<script src="/main/vendor/phone-number-validation-master/build/js/intlTelInput.js"></script>
+
+<!-- Circle Flip Slideshow Script -->
+<script src="/main/vendor/circle-flip-slideshow/js/jquery.flipshow.min.js"></script>
+
+<!-- Current Page Views -->
+<script src="/main/js/views/view.home.js"></script>
+
+<!-- Theme Custom -->
+<script src="/main/js/custom.js"></script>
+
+<!-- Theme Initialization Files (chevronon to top)-->
+
+
+<!-- Script Cak Cak Menu -->
+<script src="/main/js/jupem-js-sara.js"></script>
+
+<!-- Baboon -->
+<!-- Admin Extension Specific Page Vendor -->
+<script src="/main/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+
+<!--Font Awesome Icon v5 -->
+<script src="/main/vendor/fontawesome-free/icons-v5.js"></script>
+
+<script>
+    // Bootstrap Datepicker No Conflict
+    if (typeof($.fn.datepicker) != 'undefined') {
+        $.fn.bootstrapDP = $.fn.datepicker.noConflict();
+    }
+</script>
+
+
+
+<!-- Script Pagination -->
+
+
+<!-- Datatable -->
+<script src="/main/js/jquery.datatables.min.js"></script>
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        // Tender Table
+        var tenderTable = $('#tender-table').DataTable();
+
+        // Piagam Table
+        var piagamTable = $('#piagam-table').DataTable();
+
+        // Pengumuman Table
+        var pengumumanTable = $('#pengumuman-table').DataTable();
+
+        // SebutHarga Table
+        var sebutHargaTable = $('#sebutHarga-table').DataTable();
+
+        // Perolehan Table
+        var perolehanTable = $('#perolehan-table').DataTable();
+
+        // BeritaTerkini Table
+        var beritaTerkiniTable = $('#beritaTerkini-table').DataTable();
+
+        // Pertukaran Pegawai Table
+        var pertukaranPegawaiTable = $('#pertukaranPegawai-table').DataTable();
+
+        // Antarabangsa table
+        var perjanjian_antarabangsa = $('#perjanjian-antarabangsa').DataTable();
+        var malaysia_indonesia = $('#malaysia-indonesia').DataTable();
+
+        // Piagam Filter by text
+        $('#piagam-filter-text').keyup(function() {
+            piagamTable.search($(this).val()).draw();
+        });
+
+        // Piagam Filter by year
+        $('#piagam-filter-year').change(function() {
+            piagamTable.columns([1]).search($(this).val()).draw();
+        });
+
+        // Pengumuman Filter by text
+        $('#pengumuman-filter-text').keyup(function() {
+            pengumumanTable.search($(this).val()).draw();
+        });
+
+        // Pengumuman Filter by year
+        $('#pengumuman-filter-year').change(function() {
+            pengumumanTable.columns([2]).search($(this).val()).draw();
+        });
+
+        // Tender Filter by text
+        $('#tender-filter-text').keyup(function() {
+            tenderTable.search($(this).val()).draw();
+        });
+
+        // Tender Filter by year
+        $('#tender-filter-year').change(function() {
+            tenderTable.columns([2]).search($(this).val()).draw();
+        });
+
+        // Sebut-harga Filter by text
+        $('#sebut-harga-filter-text').keyup(function() {
+            sebutHargaTable.search($(this).val()).draw();
+        });
+
+        // SebutHarga Filter by year
+        $('#sebut-harga-filter-year').change(function() {
+            sebutHargaTable.columns([2]).search($(this).val()).draw();
+        });
+
+        // Perolehan-berjaya Filter by text
+        $('#perolehan-berjaya-filter-text').keyup(function() {
+            perolehanTable.search($(this).val()).draw();
+        });
+
+        // Perolehan-berjaya Filter by year
+        $('#perolehan-berjaya-filter-year').change(function() {
+            perolehanTable.columns([2]).search($(this).val()).draw();
+        });
+
+        // BeritaTerkini Filter by text
+        $('#beritaTerkini-filter-text').keyup(function() {
+            beritaTerkiniTable.search($(this).val()).draw();
+        });
+
+        // BeritaTerkini Filter by year
+        $('#beritaTerkini-filter-year').change(function() {
+            beritaTerkiniTable.columns([2]).search($(this).val()).draw();
+        });
+
+        // Pertukaran Pegawai Filter by selection
+        $('#pertukaran-pegawai-filter-selection').change(function() {
+            pertukaranPegawaiTable.columns([5]).search($(this).val()).draw();
+        });
+
+        // Pertukaran Pegawai Filter by text
+        $('#pertukaran-pegawai-filter-text').keyup(function() {
+            pertukaranPegawaiTable.search($(this).val()).draw();
+        });
+
+        // Contact us
+        $("#contact-us").change(function() {
+            $(this).find("option:selected").each(function() {
+                var optionValue = $(this).attr("value");
+                if (optionValue) {
+                    $(".jupem").not("." + optionValue).hide();
+                    $("." + optionValue).show();
+                } else {
+                    $(".jupem").hide();
+                }
+            });
+        }).change();
+
+
+    });
+
+
+
+</script>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll('.sidebar .nav-link').forEach(function(element) {
+            element.addEventListener('click', function(e) {
+                let nextEl = element.nextElementSibling;
+                let parentEl = element.parentElement;
+
+                if (nextEl) {
+                    e.preventDefault();
+                    let mycollapse = new bootstrap.Collapse(nextEl);
+
+                    if (nextEl.classList.contains('show')) {
+                        mycollapse.hide();
+                    } else {
+                        mycollapse.show();
+                        // find other submenus with class=show
+                        var opened_submenu = parentEl.parentElement.querySelector(
+                            '.submenu.show');
+                        // if it exists, then close all of them
+                        if (opened_submenu) {
+                            new bootstrap.Collapse(opened_submenu);
+                        }
+                    }
+                }
+            }); // addEventListener
+        }) // forEach
+    });
+</script>
+
+
+
+<script>
+    $(document).ready(function() {
+        $('#2Hari').click(function() {
+            $('#2-hari').toggle();
+        });
+
+        $('#7Hari').click(function() {
+            $('#7-hari').toggle();
+        });
+    });
+</script>
+
+
+<script>
+    $(document).ready(function() {
+        // Muat Turun Borang
+        $("#borang").change(function() {
+            $(this).find("option:selected").each(function() {
+                var optionValue = $(this).attr("value");
+                if (optionValue) {
+                    $(".pe-md-5").not("." + optionValue).hide();
+                    $("#" + optionValue).show();
+                } else {
+                    $(".pe-md-5").hide();
+                }
+            });
+        }).change();
+
+        // Struktur Negeri/ Bahagian
+        $("#strukturNegeri, #strukturBahagian").change(function() {
+            var strukturContent = "#" + $(this).attr("id") + "-content";
+            $(this).find("option:selected").each(function() {
+                var optionValue = $(this).attr("value");
+                if (optionValue) {
+                    $(strukturContent + " .show-hide").not("." + optionValue).hide();
+                    $("#" + optionValue).show();
+                } else {
+                    $(strukturContent + " .show-hide").hide();
+                }
+            });
+        }).change();
+    });
+</script>
+
+
+<script>
+    $("#dua").click(function() {
+        $(".nav-link").removeClass("active");
+        $(".tab-pane").removeClass("active");
+        $("#tab5").addClass("active");
+        $("#tab-5").addClass("active");
+    });
+
+    $("#contact-us").click(function() {
+        $(".nav-link").removeClass("active");
+        $(".tab-pane").removeClass("active");
+        $("#tab3").addClass("active");
+        $("#tab-3").addClass("active");
+    });
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+    });
+</script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+        // Fix duplicate IDs
+        const innerPanes = document.querySelectorAll('#pekeliling, #dasar-polisi, #garis-panduan');
+        innerPanes.forEach((pane, i) => {
+            if (i === 0) return;
+            pane.querySelectorAll('[id]').forEach(el => {
+                const old = el.id;
+                const neu = `t${i}-${old}`;
+                el.id = neu;
+                pane.querySelectorAll(`[data-bs-target="#${old}"]`).forEach(a => a.setAttribute('data-bs-target', `#${neu}`));
+                pane.querySelectorAll(`[aria-controls="${old}"]`).forEach(a => a.setAttribute('aria-controls', neu));
+                pane.querySelectorAll(`[aria-labelledby="${old}"]`).forEach(a => a.setAttribute('aria-labelledby', neu));
+                pane.querySelectorAll(`[data-bs-parent="#${old}"]`).forEach(a => a.removeAttribute('data-bs-parent'));
+            });
+        });
+
+        document.querySelectorAll('#pekeliling [data-bs-parent]').forEach(el => el.removeAttribute('data-bs-parent'));
+
+        document.querySelectorAll('.accordion-modern-status-borders .accordion-toggle').forEach(el => {
+            el.removeAttribute('data-bs-toggle');
+        });
+
+        // ONE listener only
+        document.addEventListener('click', function (e) {
+
+            // ── Accordion ──
+            const accordionBtn = e.target.closest('.accordion-toggle');
+            // const accordionBtn = e.target.closest('.accordion-modern-status-borders .accordion-toggle');
+            if (accordionBtn) {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+
+                const targetId = accordionBtn.getAttribute('data-bs-target');
+                const target = targetId ? document.querySelector(targetId) : null;
+                if (!target) return;
+
+                const isOpen = target.classList.contains('show');
+                const instance = bootstrap.Collapse.getOrCreateInstance(target, { toggle: false });
+                if (isOpen) {
+                    instance.hide();
+                    accordionBtn.setAttribute('aria-expanded', 'false');
+                } else {
+                    instance.show();
+                    accordionBtn.setAttribute('aria-expanded', 'true');
+                }
+                return; // stop here, don't fall through
+            }
+
+            // ── Toggle plugin ──
+            const title = e.target.closest('.toggle-title, .accordion-jupem-negeri');
+            if (title) {
+                e.preventDefault();
+                e.stopImmediatePropagation(); // prevent double-fire
+                const section = title.closest('section.toggle');
+                if (section) section.classList.toggle('active');
+                return;
+            }
+
+        }, true); // single capture listener
+
+    });
+</script>
+</body>
+
+</html>

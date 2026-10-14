@@ -1,0 +1,22 @@
+# Scalar coordinate arithmetic for evidence locators only; no geometry/source production.
+import math,json,pathlib
+D=pathlib.Path(__file__).parent
+j=json.loads((D/'exact-six-centres.json').read_text())
+# UTM values transcribed directly from Annex A, not transformed witnesses.
+xy={
+'T504004':(718231.64,8997426.18), 'T504005':(718363.88,8997460.27),
+'T504006':(718484.82,8997788.91), 'T504007':(718594.61,8997906.04),'T504008':(718770.06,8997628.69),
+'T307003':(726957.77,8985333.14),'T307004':(726634.37,8985391.20),'T307005':(726427.77,8985381.65),
+'T626009':(717719.31,8977799.83),'T626010':(717849.07,8977713.78),'T626011':(717940.53,8977676.61),'T626012':(718027.56,8977425.29),
+'T702003':(729081.12,8954389.50),'T702004':(729182.15,8953907.01),'T702005':(729274.10,8953788.54)}
+# Every XY is a visual transcription from the original annex page; independent checking remains required.
+records=[{'id':k,'easting':v[0],'northing':v[1],'provenance':'manual visual transcription, needs independent check before use','pdf_page':14 if k=='T702005' else 11 if k.startswith('T504') else 13 if k.startswith(('T626','T702')) else 8} for k,v in xy.items()]
+segs=[('T307003','T307004'),('T307004','T307005'),('T504004','T504005'),('T504005','T504006'),('T504006','T504007'),('T504007','T504008'),('T626009','T626010'),('T626010','T626011'),('T626011','T626012'),('T702003','T702004'),('T702004','T702005')]
+rows=[]
+for c in j['centres'][1:]:
+ p=c['utm51s_approx_locator_only'];P=(p['easting_m'],p['northing_m']);a=[]
+ for ka,kb in segs:
+  A=xy[ka];B=xy[kb];v=(B[0]-A[0],B[1]-A[1]);q=((P[0]-A[0])*v[0]+(P[1]-A[1])*v[1])/(v[0]**2+v[1]**2);q=max(0,min(1,q));dist=math.hypot(P[0]-A[0]-q*v[0],P[1]-A[1]-q*v[1]);a.append({'endpoint_ids':[ka,kb],'distance_to_straight_chord_m':dist,'chord_parameter':q})
+ rows.append({'interval_id':c['interval_id'],'pair':c['competing_subject_names'],'nearest_inspected_chord':min(a,key=lambda a:a['distance_to_straight_chord_m'])})
+(D/'timor-specific-point-locators.json').write_text(json.dumps({'status':'unreviewed locator only; approximate straight chords omit map turning points; not boundary decisions','manually_transcribed_treaty_points':records,'locators':rows},indent=2)+'\n')
+print(json.dumps(rows,indent=2))

@@ -1,0 +1,23 @@
+# Indonesia 27-cell boundary source checkpoint
+
+Proposed source evidence only. All27 original source-conflict cells remain held; no owner was selected and no qualification, repaired or accepted credit is claimed. Repository destination: `coordination/engineering/indonesia-riau-current-cells-20261014/source-conflict-followup-001/`.
+
+The package contains60 payload files /8,288,837 bytes. Classification is physical, so partial responses and normalized reads cannot be confused with acquired complete bodies:
+
+| Payload directory | Files | Bytes | Meaning |
+|---|---:|---:|---|
+| `payloads/primary/` | 16 | 4,606,844 | Six complete published PDFs and ten complete official HTML bodies, unchanged bytes with URLs/hashes |
+| `payloads/incomplete/` | 2 | 2,000,000 | Capped cartographic HTML and empty failed ministerial-response headers; no full authority body |
+| `payloads/derived/` | 42 | 1,681,993 | Exact frozen centre/raw-source locators, source reviews/corrections, text extraction, one independent page render, normalized reads, manifests and actual acquisition outcomes |
+
+`inventory.json` joins each selected original file/hash to its published path/hash and source URL. The16 complete bodies are reproduced byte-for-byte and include Sarawak's2016/2022 Orders and2026 amendment; official bilateral/custodian notices; completed survey/map access-policy pages and the actual public login redirect; the signed Timor2005 agreement,2026 land factsheet and FAO-hosted PNG approving-Act/treaty reproduction. Complete notices or access-policy pages do not become missing boundary plans, coordinate annexes or maps.
+
+Latest concrete acquisition outcomes are retained: MP7/125 was not supplied by the inspected public routes; the sales route is account-gated within the no-account/purchase/contact scope; cartographic HTTP response stopped at its2MB cap. The ministerial80/2018 download timed out with zero document/headers bytes. Inspected GFTM rosters exposed no missing detailed land-sheet or2013 body. Earlier UN403 and two automatic-review denials remain recorded; no retry or bypass occurred. No document is fabricated from these failures, nor is failure treated as proof that the authority does not exist elsewhere.
+
+Borneo's21 exact native centres and Timor/PNG's6 retain their frozen stable IDs, owner candidates, rational longitudes and normative binary64 latitudes. All eight original `source-conflict-v1` locator/manifest/outcome bodies are included as predecessor records; `frozen-input-pins.json` records their actual `7f4bf63` Git identities. Their recorded ownerzero/custody dates remain predecessor observations, not a fresh current-owner proof. Source dataset bodies and the normative latitude table are already retained through their immutable repository pins and are not duplicated here.
+
+The exact15-coordinate correction and independent source review are preserved. Corrected T307005 is E726427.77/N8985381.65; T626009 N8977799.83; T702005 belongs to PDFpage14. All15 final coordinate/page rows literally match the reviewed disposition, bound to the unchanged original29-page Timor PDF. The independent original-page8 render is included; ancillary duplicate renders/crops are omitted in `excluded-duplicate-views.json`. Reviewed transcription does not certify the approximate scalar projection/distances, exact connecting line, source-vintage mapping or owner choice. The retained locator-method source is text only and was not executed during packaging.
+
+Only private filesystem provenance fields in four derived JSON files were omitted. `omission-records.json` retains every original whole-file SHA/length, published SHA/length and exact field pointer/omission reason. Public source URLs, all scientific/legal facts, coordinate rows, stable IDs, candidate owners, source-blob identities, failed acquisition outcomes and limits remain. Original primary and incomplete HTTP bytes were never sanitized. Original source manifests may cite pre-sanitization hashes; use their original-to-published mapping in the packaging inventory rather than pretending they authenticate modified bytes.
+
+Missing applicable map/marker/datum/vintage and lower-tier owner evidence remains explicit in the source reviews. No treaty chord, coarse meridian, undated plan, current name match or line-distance sign is promoted to a country/owner predicate. This package preserves ongoing research for independent packaging review and parent authoring. Local byte copies/hashes and literal metadata joins were checked; no Git mutation/fetch, download/account/contact/purchase, scientific transform, source/GIS/native/constructor process or owner decision occurred.

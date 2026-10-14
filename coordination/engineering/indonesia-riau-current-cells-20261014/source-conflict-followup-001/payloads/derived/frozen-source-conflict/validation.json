@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "checks": {
+    "accepted_head_matches": true,
+    "complete_extracted_package_equals_frozen_package": true,
+    "complete_selector_21_intervals_27_unique_cells": true,
+    "extracted_inputs_match_current_receipt_hashes": true,
+    "frozen_block_encoded_decoded_hashes_match": true,
+    "all_interval_owners_and_source_sets_match_frozen_rows": true,
+    "all_competitor_rosters_complete": true,
+    "18_subject_id_and_parent_joins_match_selected_owner_roster": true,
+    "current_and_frozen_base_identity_equal": true,
+    "current_selection_sidecar_and_patch_hashes_match_receipt": true,
+    "all_27_cells_have_zero_current_additive_overlap": true,
+    "mapped_source_owner_sets_have_no_common_owner_for_every_interval": true
+  },
+  "consumed_encoded_plus_decoded_unique_bytes": 68381303,
+  "maximum_input_bytes": 33554432,
+  "phase_limit_bytes": 268435456,
+  "method": "Standard-library JSON/hash/identity/interval inspection; no GIS/native recomputation. Assertions executed before output publication.",
+  "unexecuted": [
+    "Independent reviewer checks",
+    "Reload of complete native base raster",
+    "Independent new source-geometry overlap or physical classification",
+    "Official territorial authority acquisition/qualification"
+  ]
+}

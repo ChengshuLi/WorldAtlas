@@ -1,0 +1,1127 @@
+
+
+
+
+
+<HTML>
+
+
+
+
+
+
+
+
+<head>
+<TITLE>Sarawak LawNet System v 1.0</TITLE>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="../include/lnet.css" rel="stylesheet" type="text/css" media="screen" />
+<link rel="stylesheet" style="" href="../include/tabstyle.css">
+<script type="text/javascript" src="../JS/GeneralFormJs.js"></script>
+
+<script language="Javascript">
+function popWindow(URL,title){
+    window.open(URL,title,"width=800,height=700,menubars=no,toolbars=no,scrollbars=yes,resizable=1");
+}
+</script>
+
+<script language="JavaScript">
+<!--
+
+function changeMe(objVal)
+{
+    if(objVal == "Yr"){
+        document.getElementById("SpanYear").style.display = "";   
+        document.getElementById("SpanChapter").style.display = "none";  
+    }
+    if(objVal == "Cp"){
+        document.getElementById("SpanYear").style.display = "none";   
+        document.getElementById("SpanChapter").style.display = "";  
+    }
+}
+
+function searchMe() {
+    document.form.submit();
+}
+
+function displayMe(objVal,PassedOrdIdVal,searchVal) {
+
+   document.form.PassedOrdId=PassedOrdIdVal;
+   document.form.method="POST";
+   document.form.action="../Law/TLnetPublicLawList.jsp?Display="+objVal+"&PassedOrdId="+PassedOrdIdVal+"&searchVal="+searchVal;
+    document.form.submit();
+}
+
+function displayMeOrd(objVal,PassedOrdIdVal) {
+
+   document.form.PassedOrdId=PassedOrdIdVal;
+   document.form.method="POST";
+   document.form.action="../Law/TLnetPublishedOrdList.jsp?Display="+objVal+"&PassedOrdId="+PassedOrdIdVal;
+    document.form.submit();
+}
+
+function displayMeSub(objVal,PassedOrdIdVal) {
+
+   document.form.PassedOrdId=PassedOrdIdVal;
+   document.form.method="POST";
+   document.form.action="../Law/TLnetPublishedSubList.jsp?Display="+objVal+"&PassedOrdId="+PassedOrdIdVal;
+    document.form.submit();
+}
+
+function displayWindow(URL){
+    popwin = window.open(URL,"View","width=800,height=500,top=100,left=150,scrollbars=yes,resizable=1");
+    if (window.focus){popwin.focus()}
+    if (popwin)
+    {
+        popwin.opener=this;
+    }
+}
+
+function chkLi(objVal) {
+
+}
+
+
+-->
+</script>
+
+<!-- Javascript helper methods -->
+<script>
+  d=document;
+  tosWindow = '';
+  
+  function setFocus() {
+    if (d.getElementById) d.getElementById('yschsp').focus();
+  }
+
+  if (d.getElementById) {
+     oTog=d.getElementById('yschtg_w');
+     patchCollectionLinks(oTog, true);
+     oTog=d.getElementById('yschtg');
+     patchCollectionLinks(oTog);     
+  }
+  
+  function patchCollectionLinks(coll, openNewWindow) {
+     if (coll) {
+        aLnx=coll.getElementsByTagName('a');
+        for (var i=0;i<aLnx.length;i++) {
+            if (openNewWindow) {
+               aLnx[i].target = "_blank";
+            }
+            aLnx[i].onclick=passP; 
+        }
+     }
+  }
+
+  function passP(e) {
+    e=(e)?e:((window.event)?window.event:"");
+    if (e) {      
+      var o=(e.target)?((e.target.nodeType==3)?e.target.parentNode:e.target):e.srcElement;
+      if (o.tagName=='SPAN'||o.tagName=='EM'||o.tagName=='STRONG') o=o.parentNode;  // Local  
+      var qs="p";
+      if (o.href.indexOf("yahoo") == -1) {
+         qs="query";  
+      }      
+      var href = o.href; 
+      if (window.RegExp&&window.encodeURIComponent) {
+        var sP=encodeURIComponent(d.getElementById('yschsp').value);                  
+        var re= new RegExp("(\\?|&)" + qs + "\\=(?:.*?)(&|$)", "i");               
+        if (href.indexOf(qs + "=")!=-1) {              
+          href=href.replace(re,"$1" + qs + "="+sP+"$2");           
+        }         
+        else {
+          href+="&" + qs + "="+sP;
+        }       
+      }            
+      if (o.href.indexOf("yahoo") != -1 && readCookie('ytos') == null) {        
+        popYTos(href);
+        return false; 
+      }      
+      o.href = href;    
+    } 
+    return true;    
+  } 
+  
+  function popYTos(href) { 
+     var ref = href;
+     if (window.encodeURIComponent) {
+        ref = encodeURIComponent(ref);
+     }
+     var tosUrl = "tos?yref=" + ref;    
+  	 if (!tosWindow.closed && tosWindow.location) {		
+		tosWindow.close();
+	 } 		
+	 tosWindow=window.open(tosUrl,'','height=360,width=325,resizable=yes,scrollbars=yes');
+	 if (!tosWindow.opener) tosWindow.opener = self;			 
+  }  
+  
+  function readCookie(name) {
+	var nameStr = name + "=";
+	var cookieArray = document.cookie.split(';');
+	for(var i = 0; i < cookieArray.length;i++) {
+	   var cookie = cookieArray[i];
+	   while (cookie.charAt(0) == ' ') cookie = cookie.substring(1,cookie.length);
+	   if (cookie.indexOf(nameStr) == 0) {
+          return cookie.substring(nameStr.length,cookie.length);
+       }
+	}
+	return null;
+  }
+  
+  function addReferrer(e) {
+  
+     if (d.getElementById && window.encodeURIComponent) {       
+       wref=d.getElementById('wref');                   
+       q=d.getElementById('yschsp');
+       url = "http://localhost:10000/search/"+"?index=Lawnet&query="+encodeURIComponent(q.value)+"&queryTimeout="+3000;
+       //url = "http://10.18.5.187:8992/LawNet/search/"+"?query="+encodeURIComponent(q.value)+"&queryTimeout="+3000;
+          url += "&index="+encodeURIComponent("Default");  
+          //window.open(url);
+         
+       document.form1.ref.value = url;
+       document.form1.action="TLnetSearchViews.jsp";
+       document.form1.submit();
+     } 
+  }
+</script> 
+
+
+
+</head>
+
+<!-- DecoMainPageMenu -->
+ 
+<body>
+
+
+
+
+<form id="form" name="form">   
+
+<input type="hidden" name="appname" value="Sarawak LawNet System">
+<input type="hidden" name="module" value="">
+<input type="hidden" name="version" value="1.0">
+<input type="hidden" name="userid" value="">
+<input type="hidden" name="uname" value="">
+<input type="hidden" name="agency" value="JABATAN UNDANG-UNDANG NEGERI">
+<input type="hidden" name="station" value="">
+<input type="hidden" name="tel" value="">
+<input type="hidden" name="fax" value="">
+<input type="hidden" name="email" value="">
+</form>
+<div id="wrapper">
+	<table border="0" cellpadding="0" cellspacing="0" width="100%" class="HeaderTable">
+  <tr>
+  <td>
+      <table border="0" cellpadding="0" cellspacing="0" width="100%" class="HeaderTable">
+      <tr>
+      <td>
+      <div id="menu">      
+     
+			<ul>
+        
+              <li><a href="../Law/TLnetPubHome.jsp" onclick="javascript:chkLi('Hm');">Home</a></li>
+        
+        
+        
+              <li><a href="../Law/TLnetPublishedOrdList.jsp?LTyp=All" onclick="javascript:chkLi('All');">Full Listing</a></li>
+        
+        
+               
+              <li class="current_page_item"><a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx" onclick="javascript:chkLi('Idx');">By Alphabet</a></li>
+        
+        
+         
+             <li><a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Yr" onclick="javascript:chkLi('Yr');">By Year</a></li>
+        
+        
+         
+              <li><a href="../Law/TLnetSearchViews.jsp" onclick="javascript:chkLi('Srch');">Search</a></li>
+        
+        
+             
+			</ul>
+      </div>      
+      </td>
+      <td align="right">      
+      <a href="javascript:openFeedback();"><img src="../images/icons/feed_bck.png" alt="Feedback" title="Feedback"></a>&nbsp;
+      
+      </td>
+      </tr>
+      </table>
+  
+  </td>
+  </tr>
+	</table>
+		<!-- end #menu -->	
+  
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    
+          <tr height="125">
+            <td width="557" height="125"><img height="125" width="557" src="../images/Deco/ban1.jpg" border="0"></td>
+            <td height="125" background="../images/Deco/ban2.jpg"><img height="125" width="19" src="../images/Deco/ban2.jpg" border="0"></td>
+            <td width="414" height="125"><img height="125" width="414" src="../images/Deco/ban3.jpg" border="0"></td>
+          </tr>
+          
+        </table>
+        
+        <table border="0" cellpadding="0" cellspacing="0" width="100%" class="SearchTable">
+    <tr>
+    <td>
+    </td>
+    </tr>
+    </table>
+	<hr />
+  
+  <table width="100%" border="0" cellspacing="0" cellpadding="3">
+  <tr>
+<td background="../images/layout/bg_wel.jpg">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img  src="../images/layout/tle_wel.jpg" border="0"></td>
+<td align="right" background="../images/layout/bg_wel.jpg"><img  src="../images/layout/ban_wel.jpg" border="0"></td>
+</tr>
+    <tr> 
+      <td valign="top" colspan="2">
+       <div id="page">
+      <style>
+.more { display: none; }
+.floatleft { float: left; }
+</style>
+
+<link rel="stylesheet" type="text/css" href="../include/lnet.css" />
+
+<script type="text/javascript" src="../JS/GeneralFormJs.js"></script>
+<script type="text/javascript" src="../JS/jquery-1.7.js"></script>
+
+
+<script type="text/javascript">
+   
+function showHide(shID) {
+   if (document.getElementById(shID)) {
+      if (document.getElementById(shID+'-show').style.display != 'none') {
+         document.getElementById(shID+'-show').style.display = 'none';
+         document.getElementById(shID).style.display = 'block';
+      }
+      else {
+         document.getElementById(shID+'-show').style.display = 'inline';
+         document.getElementById(shID).style.display = 'none';
+      }
+   }
+}
+</script>
+
+<script type="text/javascript">
+  
+function DisplayRecordAll(objN) {
+    sr = objN.value;
+    document.form.method="POST";
+    document.form.action="../Law/TLnetPublishedOrdList.jsp?sr="+sr;
+    document.form.submit();
+}    
+
+function ViewRecordAll(sr) {
+    document.form.action="../Law/TLnetPublishedOrdList.jsp?sr="+sr;
+    document.form.method="POST";
+    document.form.submit();
+}
+
+function DisplayRecordIdx(objN,aID) {
+    sr = objN.value;
+    document.form.method="POST";
+    document.form.action="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId="+aID+"&sr="+sr;
+    document.form.submit();
+}    
+
+function ViewRecordIdx(sr,aID) {
+    document.form.action="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId="+aID+"&sr="+sr;
+    document.form.method="POST";
+    document.form.submit();
+}
+
+
+function getByYr(objVal) { 
+    document.form.method="POST";
+    document.form.action="../Law/TLnetPublishedOrdList.jsp?LTyp=Yr&OrdYr="+objVal;
+    document.form.submit();
+}
+
+function getByCp(objVal) {
+    document.form.method="POST";
+    document.form.action="../Law/TLnetPublishedOrdList.jsp?LTyp=Cp&OrdCp="+objVal;
+    document.form.submit();
+}
+ 
+function printMe(objFrmVal) {
+    popwin = window.open("../Law/TLnetPublishedOrdList_ForPrint.jsp?LTyp="+objFrmVal+"","LawNet","width=800,height=330,top=100,left=150,scrollbars=yes,resizable=1");
+    
+    if (window.focus){popwin.focus()}
+    if (popwin)
+    {
+        popwin.opener=this;
+    }
+}
+
+</script>
+
+
+
+    
+    
+    <input type="hidden" name="PassedOrdId" value="">
+    
+
+    
+    
+    <meta name="decorator" content="PubAplha">    
+    
+    <input type="hidden" name="aId" value="A">
+    <input type="hidden" name="OrdYr" value="">
+    <input type="hidden" name="LTyp" value="Idx">
+    <input type="hidden" name="searchVal" value="" />   
+    
+    <table WIDTH="100%" align="center" BORDER=0 CELLPADDING=0 CELLSPACING=0>
+      <tr>
+      <td valign="top">
+          <h3><img class="imgBottom"  src="../images/icons/gavel.png" alt="Laws of Sarawak" title="Laws of Sarawak">&nbsp;LAWS OF SARAWAK</h3> 
+          
+          <table border="0" width="30%">
+          <tr><td>
+          <fieldset class="redFieldSet"><legend class="LegendNote">Note</legend>
+          <li>Click <img src="../images/icons/plus.gif" class="imgMiddle" border="0"> to view Subsidiaries</li>
+          <li>Click <img src="../images/icons/minus.png" class="imgMiddle" border="0"> to hide Subsidiaries</li>
+          </fieldset>
+          </td>
+          </tr>
+          </table>
+          
+          <table border="0" width="95%" align="center">
+          <tr>
+          <td align="right">
+              <a href="javascript:printMe('Idx');"><img align="right"  src="../images/icons/print-icon.png" border="0" alt="Print" title="Print"></a>
+          </td>
+          </tr>
+          </table>
+          
+          <fieldset><legend class="legendTitle">By Alphabet</legend>
+              
+                  
+<!-- 
+<table border="0" width="100%">
+<tr>
+    <td>
+    <div class="anchorDiv">
+    | <a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=A">A</a> | <a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=B">B</a> | <a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=C">C</a> | <a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=D">D</a>
+
+    | <a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=E">E</a> | <a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=F">F</a> | <a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=G">G</a> | <a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=H">H</a>
+    | <a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=I">I</a> | <a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=J">J</a> | <a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=K">K</a> | <a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=L">L</a>
+
+    | <a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=M">M</a> | <a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=N">N</a> | <a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=O">O</a> | <a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=P">P</a>
+    | <a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=Q">Q</a> | <a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=R">R</a> | <a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=S">S</a> | <a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=T">T</a>
+
+    | <a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=U">U</a> | <a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=V">V</a> | <a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=W">W</a> | <a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=X">X</a>
+    | <a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=Y">Y</a> | <a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=Z">Z</a> |</div>
+
+    </td>
+</tr>
+</table>
+-->
+
+<table width="100%" border="0">
+<tr>
+    <td> 
+    <div id="tablist">&nbsp; 
+
+  <ul>
+  
+    <li><a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=A">&nbsp;&nbsp;A&nbsp;&nbsp;</a></li>
+    <li><a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=B">&nbsp;&nbsp;B&nbsp;&nbsp;</a></li>
+    <li><a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=C">&nbsp;&nbsp;C&nbsp;&nbsp;</a></li>
+    <li><a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=D">&nbsp;&nbsp;D&nbsp;&nbsp;</a></li>
+    <li><a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=E">&nbsp;&nbsp;E&nbsp;&nbsp;</a></li>
+    <li><a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=F">&nbsp;&nbsp;F&nbsp;&nbsp;</a></li>
+    <li><a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=G">&nbsp;&nbsp;G&nbsp;&nbsp;</a></li>
+    <li><a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=H">&nbsp;&nbsp;H&nbsp;&nbsp;</a></li>
+    <li><a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=I">&nbsp;&nbsp;I&nbsp;&nbsp;</a></li>
+    <li><a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=J">&nbsp;&nbsp;J&nbsp;&nbsp;</a></li>
+    <li><a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=K">&nbsp;&nbsp;K&nbsp;&nbsp;</a></li>
+    <li><a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=L">&nbsp;&nbsp;L&nbsp;&nbsp;</a></li>
+
+    <li><a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=M">&nbsp;&nbsp;M&nbsp;&nbsp;</a></li>
+    <li><a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=N">&nbsp;&nbsp;N&nbsp;&nbsp;</a></li>
+    <li><a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=O">&nbsp;&nbsp;O&nbsp;&nbsp;</a></li>
+    <li><a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=P">&nbsp;&nbsp;P&nbsp;&nbsp;</a></li>
+    <li><a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=Q">&nbsp;&nbsp;Q&nbsp;&nbsp;</a></li>
+    <li><a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=R">&nbsp;&nbsp;R&nbsp;&nbsp;</a></li>
+    <li><a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=S">&nbsp;&nbsp;S&nbsp;&nbsp;</a></li>
+    <li><a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=T">&nbsp;&nbsp;T&nbsp;&nbsp;</a></li>
+
+    <li><a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=U">&nbsp;&nbsp;U&nbsp;&nbsp;</a></li>
+    <li><a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=V">&nbsp;&nbsp;V&nbsp;&nbsp;</a></li>
+    <li><a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=W">&nbsp;&nbsp;W&nbsp;&nbsp;</a></li>
+    <li><a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=X">&nbsp;&nbsp;X&nbsp;&nbsp;</a></li>
+    <li><a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=Y">&nbsp;&nbsp;Y&nbsp;&nbsp;</a></li>
+    <li><a href="../Law/TLnetPublishedOrdList.jsp?LTyp=Idx&aId=Z">&nbsp;&nbsp;Z&nbsp;&nbsp;</a></li>
+       
+   
+  </ul>
+  </div>  
+</td>
+</tr>
+</table>
+              
+          
+                
+                    
+                    
+                    <input type="hidden" name="strOrdSQL" value="SELECT ORD_DESC,ORD_TITLE,ORD_NO,ORD_PUB_YEAR, ORD_ID,ORD_FILE_ID, ORD_STATUS_ID, ORD_STATUS, ORD_REPEAL_ID, ORD_IS_FILE_UPLOADED,ORD_IS_CIF,ORD_CIF_REMARKS FROM T_LNET_ORDINANCE WHERE ORD_STATUS in ('Approved','Repealed') AND ORD_INDEX='A' ORDER BY ORD_TITLE ">
+                    
+                    
+                    
+                    
+                    <input type="hidden" name="MYROW" value="6">
+                    
+                    <!-- ORDINANCE MAIN TABLE-->
+                     
+                    
+                    
+                      <table width="98%" border="0" cellpadding="2" cellspacing="0">  
+                        <tr>
+                            <td align="left">
+                            
+                            </td>         
+                            <td align="right"> 
+                              <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                    <tr>
+                                      
+                                        
+                                  <td width="69%"></td>
+                                        
+                                  <td width="8%" class="NormalText" align="right"> 
+                                    
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                                    
+                                  </td>  
+                                        
+                                  <td width="10%" class="NormalText">   
+                                    
+                                        </td>
+                                        
+                                  <td width="7%" class="NormalText" align="left"> 
+                                    
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                                    
+                                  </td>                  
+                                      
+                                    </tr>
+                                  </table>
+                                </td>
+                              </tr>
+                            </table>  
+                          
+                        
+                    
+                    <!-- START BIG TABLE -->
+                    <table width="95%" border="0" cellpadding="0" cellspacing="0" > 
+                     
+                         <tr><td class="GreenYearTitle" colspan="2">A</td></tr>                          
+                          <tr><td class="ruler" colspan="2"></td></tr>  
+                          <tr><td></td></tr>
+                     
+                  
+                    
+                    
+                                   
+                                
+                              
+                              <input type="hidden" name="strOrdId" value="ACDBFTE4L5A0KALF">
+                              <input type="hidden" name="strOrdDesc" value="Administration of Estates Ordinance , 1933 ( Cap. 80 (1948 Ed.) ) ">
+                              <input type="hidden" name="strOrdFileId" value="HGV9BPC1HO60KBSE">
+                              
+                              
+                                    <input type="hidden" name="wcOrdFile" value="TLnetFile.FILE_ID='HGV9BPC1HO60KBSE' ">
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                        
+                                    
+                                
+                                
+                                
+                                
+                                <tr>
+                                  <td width="2%" class="OrdTitle" valign="top">1.</td>
+                                  <td width="80%" valign="top">
+                                  
+                                        <a href="#" id="divareaACDBFTE4L5A0KALF-show" onclick="showHide('divareaACDBFTE4L5A0KALF');return false;"><img src="../images/icons/plus.gif" class="imgMiddle" border="0"></a>&nbsp;                                        
+                                  
+                                  
+                              
+                                        <font class="OrdTitle">Administration of Estates Ordinance , 1933 ( Cap. 80 (1948 Ed.) ) </font>
+                                        
+                                            <a href="../../lawnet_file/Ordinance/ORD_F-ADMIN ESTATE LawNet 2024.pdf" target="_new"><img src="../images/icons/pdf.jpg" class="imgBottom"></a>
+                                        
+                                        
+                                 
+                                 </td>
+                               </tr>
+                               
+                               <tr>
+                               <td></td>
+                               <td>
+                               
+                               <div id="divareaACDBFTE4L5A0KALF" class="more">
+                               <a href="#" id="divareaACDBFTE4L5A0KALF-hide" onclick="showHide('divareaACDBFTE4L5A0KALF');return false;"><img src="../images/icons/minus.png" class="imgMiddle" border="0">&nbsp;Hide Subsidiaries</a>&nbsp;   
+                                    
+                               
+                                    
+                                    
+                                    
+                                    
+                                    <!-- DISPLAY SUB -->
+                                    <!--<table width="100%" border="0"> -->
+                                    
+                                                
+                                                
+                                                    
+                                                
+                                                                            
+                                          <table>
+                                          <tr>                                          
+                                          <td class="SubTitle" colspan="2" valign="top"><img src="../images/icons/greenArr32.png" class="imgMiddle">&nbsp;
+                                          
+                                                Administration of Estates (Probate and Letters of Administration) Rules, 2023 [ Swk.L.N. 66/2023 ]   
+                                                
+                                                    <a href="../../lawnet_file/Subsidiary/SUB_Issue No. 18_L.N. 66 probate.pdf" target="_new"><img src="../images/icons/pdf.jpg" class="imgBottom"></a>
+                                                 
+                                        </td>
+                                          </tr>
+                                        </table>
+                                    
+                                  
+                                    <!--</table>-->
+                                    
+                            
+                            </div>
+                            </td>
+                            </tr>  
+                            
+                            <tr>
+                               <td height="5"></td>
+                            </tr>  
+                            
+                                   
+                                
+                              
+                              <input type="hidden" name="strOrdId" value="5A5BBTC5K1BA0LA6">
+                              <input type="hidden" name="strOrdDesc" value="Administrative Areas Ordinance , 2000 ( Cap. 34 ) ">
+                              <input type="hidden" name="strOrdFileId" value="HGT34IMGJO9A0KG6">
+                              
+                              
+                                    <input type="hidden" name="wcOrdFile" value="TLnetFile.FILE_ID='HGT34IMGJO9A0KG6' ">
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                        
+                                    
+                                
+                                
+                                
+                                
+                                <tr>
+                                  <td width="2%" class="OrdTitle" valign="top">2.</td>
+                                  <td width="80%" valign="top">
+                                  
+                                        <a href="#" id="divarea5A5BBTC5K1BA0LA6-show" onclick="showHide('divarea5A5BBTC5K1BA0LA6');return false;"><img src="../images/icons/plus.gif" class="imgMiddle" border="0"></a>&nbsp;                                        
+                                  
+                                  
+                              
+                                        <font class="OrdTitle">Administrative Areas Ordinance , 2000 ( Cap. 34 ) </font><br><font class=OrdTitle>c.i.f :</font><font class=CifRedText> 16.6.1948 </font>
+                                        
+                                            <a href="../../lawnet_file/Ordinance/ORD_CAP.  34 LawNet 2024.pdf" target="_new"><img src="../images/icons/pdf.jpg" class="imgBottom"></a>
+                                        
+                                        
+                                 
+                                 </td>
+                               </tr>
+                               
+                               <tr>
+                               <td></td>
+                               <td>
+                               
+                               <div id="divarea5A5BBTC5K1BA0LA6" class="more">
+                               <a href="#" id="divarea5A5BBTC5K1BA0LA6-hide" onclick="showHide('divarea5A5BBTC5K1BA0LA6');return false;"><img src="../images/icons/minus.png" class="imgMiddle" border="0">&nbsp;Hide Subsidiaries</a>&nbsp;   
+                                    
+                               
+                                    
+                                    
+                                    
+                                    
+                                    <!-- DISPLAY SUB -->
+                                    <!--<table width="100%" border="0"> -->
+                                    
+                                                
+                                                
+                                                    
+                                                
+                                                                            
+                                          <table>
+                                          <tr>                                          
+                                          <td class="SubTitle" colspan="2" valign="top"><img src="../images/icons/greenArr32.png" class="imgMiddle">&nbsp;
+                                          
+                                                Administrative Areas Order Orders, 2016 [ Swk.L.N. 204/2016 ]   
+                                                
+                                                    <a href="../../lawnet_file/Subsidiary/SUB_Issue No. 50_L.N. 204w(H).pdf" target="_new"><img src="../images/icons/pdf.jpg" class="imgBottom"></a>
+                                                 
+                                        </td>
+                                          </tr>
+                                        </table>
+                                  
+                                                
+                                                
+                                                    
+                                                
+                                                                            
+                                          <table>
+                                          <tr>                                          
+                                          <td class="SubTitle" colspan="2" valign="top"><img src="../images/icons/greenArr32.png" class="imgMiddle">&nbsp;
+                                          
+                                                Administrative Areas Orders, 2022 [ Swk.L.N. 65/2022 ]   
+                                                
+                                                    <a href="../../lawnet_file/Subsidiary/SUB_Issue No. 19_L.N. 65 Administrative Areas.pdf" target="_new"><img src="../images/icons/pdf.jpg" class="imgBottom"></a>
+                                                 
+                                        </td>
+                                          </tr>
+                                        </table>
+                                  
+                                                
+                                                
+                                                    
+                                                
+                                                                            
+                                          <table>
+                                          <tr>                                          
+                                          <td class="SubTitle" colspan="2" valign="top"><img src="../images/icons/greenArr32.png" class="imgMiddle">&nbsp;
+                                          
+                                                The Administrative Areas (Amerndment) Orders, 2026 [ Swk.L.N. 313/2026 ]   
+                                                
+                                                    <a href="../../lawnet_file/Subsidiary/SUB_Issue No. 70_L.N. 313-Administrative Areas.pdf" target="_new"><img src="../images/icons/pdf.jpg" class="imgBottom"></a>
+                                                 
+                                        </td>
+                                          </tr>
+                                        </table>
+                                    
+                                  
+                                    <!--</table>-->
+                                    
+                            
+                            </div>
+                            </td>
+                            </tr>  
+                            
+                            <tr>
+                               <td height="5"></td>
+                            </tr>  
+                            
+                                   
+                                
+                              
+                              <input type="hidden" name="strOrdId" value="ACD00CMAM2I0KALI">
+                              <input type="hidden" name="strOrdDesc" value="Adoption Ordinance , 1942 ( Cap. 91 (1958 Ed.) ) ">
+                              <input type="hidden" name="strOrdFileId" value="HGV9BLA9IP5A0LI2">
+                              
+                              
+                                    <input type="hidden" name="wcOrdFile" value="TLnetFile.FILE_ID='HGV9BLA9IP5A0LI2' ">
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                        
+                                    
+                                
+                                
+                                
+                                
+                                <tr>
+                                  <td width="2%" class="OrdTitle" valign="top">3.</td>
+                                  <td width="80%" valign="top">
+                                  
+                                        <a href="#" id="divareaACD00CMAM2I0KALI-show" onclick="showHide('divareaACD00CMAM2I0KALI');return false;"><img src="../images/icons/plus.gif" class="imgMiddle" border="0"></a>&nbsp;                                        
+                                  
+                                  
+                              
+                                        <font class="OrdTitle">Adoption Ordinance , 1942 ( Cap. 91 (1958 Ed.) ) </font>
+                                        
+                                            <a href="../../lawnet_file/Ordinance/ORD_Adoption LawNet 2024.pdf" target="_new"><img src="../images/icons/pdf.jpg" class="imgBottom"></a>
+                                        
+                                        
+                                 
+                                 </td>
+                               </tr>
+                               
+                               <tr>
+                               <td></td>
+                               <td>
+                               
+                               <div id="divareaACD00CMAM2I0KALI" class="more">
+                               <a href="#" id="divareaACD00CMAM2I0KALI-hide" onclick="showHide('divareaACD00CMAM2I0KALI');return false;"><img src="../images/icons/minus.png" class="imgMiddle" border="0">&nbsp;Hide Subsidiaries</a>&nbsp;   
+                                    
+                               
+                                    
+                                    
+                                    
+                                    
+                                    <!-- DISPLAY SUB -->
+                                    <!--<table width="100%" border="0"> -->
+                                    
+                                                
+                                                
+                                                    
+                                                
+                                                                            
+                                          <table>
+                                          <tr>                                          
+                                          <td class="SubTitle" colspan="2" valign="top"><img src="../images/icons/greenArr32.png" class="imgMiddle">&nbsp;
+                                          
+                                                The Adoption (Central Registry) (Amendment) Regulations, 2020 [ Swk.L.N. 53/2020 ]   
+                                                
+                                                    <a href="../../lawnet_file/Subsidiary/SUB_Issue No. 10_L.N. 53. doc.pdf" target="_new"><img src="../images/icons/pdf.jpg" class="imgBottom"></a>
+                                                 
+                                        </td>
+                                          </tr>
+                                        </table>
+                                    
+                                  
+                                    <!--</table>-->
+                                    
+                            
+                            </div>
+                            </td>
+                            </tr>  
+                            
+                            <tr>
+                               <td height="5"></td>
+                            </tr>  
+                            
+                                   
+                                
+                              
+                              <input type="hidden" name="strOrdId" value="BE7BFPE8K1I0KALB">
+                              <input type="hidden" name="strOrdDesc" value="Advocates Ordinance , 1953 ( Cap. 110 (1958 Ed.) ) ">
+                              <input type="hidden" name="strOrdFileId" value="HGVA0GKDHR7A0LJ0">
+                              
+                              
+                                    <input type="hidden" name="wcOrdFile" value="TLnetFile.FILE_ID='HGVA0GKDHR7A0LJ0' ">
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                        
+                                    
+                                
+                                
+                                
+                                
+                                <tr>
+                                  <td width="2%" class="OrdTitle" valign="top">4.</td>
+                                  <td width="80%" valign="top">
+                                  
+                                        <a href="#" id="divareaBE7BFPE8K1I0KALB-show" onclick="showHide('divareaBE7BFPE8K1I0KALB');return false;"><img src="../images/icons/plus.gif" class="imgMiddle" border="0"></a>&nbsp;                                        
+                                  
+                                  
+                              
+                                        <font class="OrdTitle">Advocates Ordinance , 1953 ( Cap. 110 (1958 Ed.) ) </font>
+                                        
+                                            <a href="../../lawnet_file/Ordinance/ORD_ADVOCATES LawNet 2024.pdf" target="_new"><img src="../images/icons/pdf.jpg" class="imgBottom"></a>
+                                        
+                                        
+                                 
+                                 </td>
+                               </tr>
+                               
+                               <tr>
+                               <td></td>
+                               <td>
+                               
+                               <div id="divareaBE7BFPE8K1I0KALB" class="more">
+                               <a href="#" id="divareaBE7BFPE8K1I0KALB-hide" onclick="showHide('divareaBE7BFPE8K1I0KALB');return false;"><img src="../images/icons/minus.png" class="imgMiddle" border="0">&nbsp;Hide Subsidiaries</a>&nbsp;   
+                                    
+                               
+                                    
+                                    
+                                    
+                                    
+                                    <!-- DISPLAY SUB -->
+                                    <!--<table width="100%" border="0"> -->
+                                    
+                                                
+                                                
+                                                    
+                                                
+                                                                            
+                                          <table>
+                                          <tr>                                          
+                                          <td class="SubTitle" colspan="2" valign="top"><img src="../images/icons/greenArr32.png" class="imgMiddle">&nbsp;
+                                          
+                                                The Advocates (Amendment of Schedule) Orders, 2018 [ Swk.L.N. (f) 1 ]   
+                                                
+                                                    <a href="../../lawnet_file/Subsidiary/SUB_Issue No. 1_L.N.1.pdf" target="_new"><img src="../images/icons/pdf.jpg" class="imgBottom"></a>
+                                                 
+                                        </td>
+                                          </tr>
+                                        </table>
+                                  
+                                                
+                                                
+                                                    
+                                                
+                                                                            
+                                          <table>
+                                          <tr>                                          
+                                          <td class="SubTitle" colspan="2" valign="top"><img src="../images/icons/greenArr32.png" class="imgMiddle">&nbsp;
+                                          
+                                                The Advocates' Remuneration (Amendment) Rules, 2018 [ Swk.L.N. (f) 82 ]   
+                                                
+                                                    <a href="../../lawnet_file/Subsidiary/SUB_Issue No. 27_L.N. (F) 82.pdf" target="_new"><img src="../images/icons/pdf.jpg" class="imgBottom"></a>
+                                                 
+                                        </td>
+                                          </tr>
+                                        </table>
+                                  
+                                                
+                                                
+                                                    
+                                                
+                                                                            
+                                          <table>
+                                          <tr>                                          
+                                          <td class="SubTitle" colspan="2" valign="top"><img src="../images/icons/greenArr32.png" class="imgMiddle">&nbsp;
+                                          
+                                                The Advocates' Remuneration Rules, 1988 [ Swk.L.N. 72/1988 ]   
+                                                
+                                                    <a href="../../lawnet_file/Subsidiary/SUB_Advocates Remuneration Rules, 1988.pdf" target="_new"><img src="../images/icons/pdf.jpg" class="imgBottom"></a>
+                                                 
+                                        </td>
+                                          </tr>
+                                        </table>
+                                  
+                                                
+                                                
+                                                    
+                                                
+                                                                            
+                                          <table>
+                                          <tr>                                          
+                                          <td class="SubTitle" colspan="2" valign="top"><img src="../images/icons/greenArr32.png" class="imgMiddle">&nbsp;
+                                          
+                                                Advocates' Remuneration (Amendment) Rules, 2022 [ Swk.L.N. (f) 348/2022 ]   
+                                                
+                                                    <a href="../../lawnet_file/Subsidiary/SUB_Issue No. 83_L.N. 348 Advocates Rules.pdf" target="_new"><img src="../images/icons/pdf.jpg" class="imgBottom"></a>
+                                                 
+                                        </td>
+                                          </tr>
+                                        </table>
+                                  
+                                                
+                                                
+                                                    
+                                                
+                                                                            
+                                          <table>
+                                          <tr>                                          
+                                          <td class="SubTitle" colspan="2" valign="top"><img src="../images/icons/greenArr32.png" class="imgMiddle">&nbsp;
+                                          
+                                                Advocates (Amendment of Schedule) Orders, 2023 [ Swk.L.N. (f) 235/2023 ]   
+                                                
+                                                    <a href="../../lawnet_file/Subsidiary/SUB_Swk. L.N. (F) 235 Advocates (am.).pdf" target="_new"><img src="../images/icons/pdf.jpg" class="imgBottom"></a>
+                                                 
+                                        </td>
+                                          </tr>
+                                        </table>
+                                    
+                                  
+                                    <!--</table>-->
+                                    
+                            
+                            </div>
+                            </td>
+                            </tr>  
+                            
+                            <tr>
+                               <td height="5"></td>
+                            </tr>  
+                            
+                                   
+                                
+                              
+                              <input type="hidden" name="strOrdId" value="EDCAALA6P6JA0KB5">
+                              <input type="hidden" name="strOrdDesc" value="ANCESTRAL WORSHIP ORDINANCE , 1958 ( Cap. 44 (1958 Ed.) ) ">
+                              <input type="hidden" name="strOrdFileId" value="IFJ9CTD6GQ9A0KF6">
+                              
+                              
+                                    <input type="hidden" name="wcOrdFile" value="TLnetFile.FILE_ID='IFJ9CTD6GQ9A0KF6' ">
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                        
+                                    
+                                
+                                
+                                
+                                
+                                <tr>
+                                  <td width="2%" class="OrdTitle" valign="top">5.</td>
+                                  <td width="80%" valign="top">
+                                  
+                                  
+                              
+                                        <font class="OrdTitle">ANCESTRAL WORSHIP ORDINANCE , 1958 ( Cap. 44 (1958 Ed.) ) </font>
+                                        
+                                            <a href="../../lawnet_file/Ordinance/ORD_F-ANCESTcp44 Lawnet 2024 1.pdf" target="_new"><img src="../images/icons/pdf.jpg" class="imgBottom"></a>
+                                        
+                                        
+                                 
+                                 </td>
+                               </tr>
+                               
+                               <tr>
+                               <td></td>
+                               <td>
+                               
+                               <div id="divareaEDCAALA6P6JA0KB5" class="more">
+                               <a href="#" id="divareaEDCAALA6P6JA0KB5-hide" onclick="showHide('divareaEDCAALA6P6JA0KB5');return false;"><img src="../images/icons/minus.png" class="imgMiddle" border="0">&nbsp;Hide Subsidiaries</a>&nbsp;   
+                                    
+                               
+                            </div>
+                            </td>
+                            </tr>  
+                            
+                            <tr>
+                               <td height="5"></td>
+                            </tr>  
+                            
+                                   
+                                
+                              
+                              <input type="hidden" name="strOrdId" value="EDCA0CMDK3I0KALI">
+                              <input type="hidden" name="strOrdDesc" value="APPLICATION OF LAWS ORDINANCE , 1958 ( Cap. 2 (1958 Ed.) ) ">
+                              <input type="hidden" name="strOrdFileId" value="IFJ9CNE9IR20KAPC">
+                              
+                              
+                                    <input type="hidden" name="wcOrdFile" value="TLnetFile.FILE_ID='IFJ9CNE9IR20KAPC' ">
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                        
+                                    
+                                
+                                
+                                
+                                
+                                <tr>
+                                  <td width="2%" class="OrdTitle" valign="top">6.</td>
+                                  <td width="80%" valign="top">
+                                  
+                                  
+                              
+                                        <font class="OrdTitle">APPLICATION OF LAWS ORDINANCE , 1958 ( Cap. 2 (1958 Ed.) ) </font>
+                                        
+                                            <a href="../../lawnet_file/Ordinance/ORD_F-APPLICcp2 Lawnet 2024 1.pdf" target="_new"><img src="../images/icons/pdf.jpg" class="imgBottom"></a>
+                                        
+                                        
+                                 
+                                 </td>
+                               </tr>
+                               
+                               <tr>
+                               <td></td>
+                               <td>
+                               
+                               <div id="divareaEDCA0CMDK3I0KALI" class="more">
+                               <a href="#" id="divareaEDCA0CMDK3I0KALI-hide" onclick="showHide('divareaEDCA0CMDK3I0KALI');return false;"><img src="../images/icons/minus.png" class="imgMiddle" border="0">&nbsp;Hide Subsidiaries</a>&nbsp;   
+                                    
+                               
+                            </div>
+                            </td>
+                            </tr>  
+                            
+                            <tr>
+                               <td height="5"></td>
+                            </tr>  
+                            
+                       
+                       
+                          <tr><td height="15"></td></tr>
+                        
+                        
+                 
+                    
+                    </table>
+                    
+                    <!-- END BIG TABLE -->
+                      
+                      
+                  
+          </fieldset>
+      </td>
+      </tr>
+    </table>
+
+
+<br>   
+      </div>
+
+      </td>
+    </tr>
+  </table>
+  
+  </div>
+
+
+	<div id="footer">
+    
+<p>
+ 
+
+
+
+
+
+
+
+
+
+
+
+<font class="WhiteFont">Total number of visitors : 
+524670
+</font> <br><br>       
+
+<a href="../Law/TLnetDisclaimer.jsp">Disclaimer</a><br>
+		Copyright 2011 Sarawak Government.All Rights Reserved. version 1.0.0<br>
+    Best viewed in 1024 x 768 screen resolution IE 7.0+ and FF 2.0+</p>
+	</div>
+	<!-- end #footer -->
+  
+</div>
+ </form>
+</body>
+
+
+
+
+</html>

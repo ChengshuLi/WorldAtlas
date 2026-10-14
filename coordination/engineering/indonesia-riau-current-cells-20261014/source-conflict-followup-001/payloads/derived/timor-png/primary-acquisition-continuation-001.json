@@ -1,0 +1,28 @@
+{
+  "scope": "bounded official legal document acquisition and published GFTM map roster inspection; no GIS/source/native/Git process",
+  "target": "https://peraturan.go.id/files/bn1330-2018.pdf",
+  "requested_document": "Interior Ministry Regulation80/2018, BN1330/2018, complete Belu–Malaka boundary body and incorporated map annex",
+  "method": "ordinary HTTPS curl, --fail --location --max-time40 --max-filesize2097152, owned evidence output and response-header path",
+  "approval_outcome": "approved; command actually launched, unlike earlier denied UN target",
+  "storage_before": {"available_1024_blocks":21307880},
+  "execution_outcome": {"exit_code":28,"elapsed_milliseconds_reported":40010,"error":"Connection timed out after40010milliseconds","document_bytes_received":0,"http_response_headers_bytes":0,"original_pdf_exists_after":false},
+  "official_catalogue_chain": {
+    "catalogue_url":"https://www.peraturan.go.id/tahun/pp-no-9-tahun-2019?page=731",
+    "observation":"Official catalogue names Regulation80/2018, Batas Daerah Kabupaten Malaka dengan Kabupaten Belu Provinsi Nusa Tenggara Timur, Interior Ministry; its title link was followed rather than guessing a document ID.",
+    "linked_record_url":"https://www.peraturan.go.id/id/permendagri-no-80-tahun-2018",
+    "record_web_read_outcome":"TimeoutError"
+  },
+  "gftm_official_published_rosters": {
+    "land_page":"https://www.gftm.gov.tl/boundaries/indonesia/land/",
+    "maps_page":"https://www.gftm.gov.tl/library/maps/",
+    "treaties_page":"https://www.gftm.gov.tl/treaties/",
+    "land_page_observation":"Links the already retained29-page2005agreement. Names FirstAddendum21June2013 without a body/map link in the inspected published roster.",
+    "map_page_observation":"Published catalogue describes maritime regional/resource/equidistance/sea-boundary maps. No2005AnnexB land-detail sheet or2013updated land-demarcation sheet is linked in this inspected roster.",
+    "treaties_page_observation":"Inspected page links2018Australia maritime treaty; no separate2013land map body discovered.",
+    "retained_readback":"gftm-published-map-roster-web-read.json",
+    "scope_limit":"This is evidence about the inspected published rosters, not proof that the maps do not exist elsewhere. No maritime map is substituted for a land boundary."
+  },
+  "mirror_search_outcome":"Bounded primary-domain searches produced no authenticated alternative Regulation80/2018 full-body/map locator. Unrelated results were discarded; no guessed mirror body used.",
+  "science_disposition":"No source-vintage/admin-centre intersection can be established from these failed acquisitions/rosters. Existing exact6centres, treaty originals and independently corrected transcription remain preserved; all6held.",
+  "denied_UN_disposition":"No further retry or alternate acquisition method for the denied exactUNURL. Earlier two denials/403 unchanged in acquisition-blockers.json."
+}

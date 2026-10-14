@@ -1,0 +1,239 @@
+{
+  "kind": "derived-only-machine-path-omissions",
+  "records": [
+    {
+      "source": "source-conflict-evidence-timor-png/exact-six-centres.json",
+      "original_bytes": 12166,
+      "original_sha256": "099255b963b98c5b437e3169a5846987e6ea18b1bcdf74ffc2659e706be51c30",
+      "published_path": "payloads/derived/timor-png/exact-six-centres.json",
+      "published_bytes": 11590,
+      "published_sha256": "34c5c2dfe7c025715af6be4b4cc73a493f3fbf81e5a18887e8bbfe4028f1ef9c",
+      "omissions": [
+        {
+          "pointer": "/centres/0/record_locators/extracted_input",
+          "field": "extracted_input",
+          "original_value_sha256": "063435ae93d74290f73b632248e1e93cc42e18ee3280b422f5dd8307c94be1fb",
+          "reason": "local private filesystem field"
+        },
+        {
+          "pointer": "/centres/1/record_locators/extracted_input",
+          "field": "extracted_input",
+          "original_value_sha256": "063435ae93d74290f73b632248e1e93cc42e18ee3280b422f5dd8307c94be1fb",
+          "reason": "local private filesystem field"
+        },
+        {
+          "pointer": "/centres/2/record_locators/extracted_input",
+          "field": "extracted_input",
+          "original_value_sha256": "063435ae93d74290f73b632248e1e93cc42e18ee3280b422f5dd8307c94be1fb",
+          "reason": "local private filesystem field"
+        },
+        {
+          "pointer": "/centres/3/record_locators/extracted_input",
+          "field": "extracted_input",
+          "original_value_sha256": "063435ae93d74290f73b632248e1e93cc42e18ee3280b422f5dd8307c94be1fb",
+          "reason": "local private filesystem field"
+        },
+        {
+          "pointer": "/centres/4/record_locators/extracted_input",
+          "field": "extracted_input",
+          "original_value_sha256": "063435ae93d74290f73b632248e1e93cc42e18ee3280b422f5dd8307c94be1fb",
+          "reason": "local private filesystem field"
+        },
+        {
+          "pointer": "/centres/5/record_locators/extracted_input",
+          "field": "extracted_input",
+          "original_value_sha256": "063435ae93d74290f73b632248e1e93cc42e18ee3280b422f5dd8307c94be1fb",
+          "reason": "local private filesystem field"
+        }
+      ]
+    },
+    {
+      "source": "7f4bf63d1fd5ad1b997418a1b0435a4aadcd4772:coordination/engineering/indonesia-adm2-current-cell-20261014/source-conflict-v1/consumed-inputs.json",
+      "original_bytes": 9717,
+      "original_sha256": "062d0681e83bf65322433150424e738e9b91f9fca67e75684f95c443a6dd09e5",
+      "published_path": "payloads/derived/frozen-source-conflict/consumed-inputs.json",
+      "published_bytes": 9405,
+      "published_sha256": "ad2196398db9bf623f396b86be56f4a324e19094343497f8853d7cb29c1c8715",
+      "omissions": [
+        {
+          "pointer": "/inputs/1/path",
+          "field": "path",
+          "original_value_sha256": "02ebe04c43ec99ebc125048ebdb4002ab3417929604e969558818c0cd4ca6243",
+          "reason": "local private filesystem field"
+        },
+        {
+          "pointer": "/inputs/2/path",
+          "field": "path",
+          "original_value_sha256": "3a48ab3b50f55f1f103e7c3f4f75e11116940590eae70a205fd58e754a624e6b",
+          "reason": "local private filesystem field"
+        },
+        {
+          "pointer": "/inputs/14/path",
+          "field": "path",
+          "original_value_sha256": "09345516aea020563680bb239d88cbd1db99a490349b00b48f07e57e15d314d6",
+          "reason": "local private filesystem field"
+        },
+        {
+          "pointer": "/inputs/16/path",
+          "field": "path",
+          "original_value_sha256": "063435ae93d74290f73b632248e1e93cc42e18ee3280b422f5dd8307c94be1fb",
+          "reason": "local private filesystem field"
+        }
+      ]
+    },
+    {
+      "source": "7f4bf63d1fd5ad1b997418a1b0435a4aadcd4772:coordination/engineering/indonesia-adm2-current-cell-20261014/source-conflict-v1/outcome.json",
+      "original_bytes": 39625,
+      "original_sha256": "67547252b822a2978fd38109251d67786f3c87bf4ac6fdc6e58a8ac200b5ef85",
+      "published_path": "payloads/derived/frozen-source-conflict/outcome.json",
+      "published_bytes": 37609,
+      "published_sha256": "f1c98a75bfdda12d6b19ceee3c02a5fe393ea77fd3ad6783614172b8686f04e5",
+      "omissions": [
+        {
+          "pointer": "/intervals/0/record_locators/extracted_input",
+          "field": "extracted_input",
+          "original_value_sha256": "09345516aea020563680bb239d88cbd1db99a490349b00b48f07e57e15d314d6",
+          "reason": "local private filesystem field"
+        },
+        {
+          "pointer": "/intervals/1/record_locators/extracted_input",
+          "field": "extracted_input",
+          "original_value_sha256": "09345516aea020563680bb239d88cbd1db99a490349b00b48f07e57e15d314d6",
+          "reason": "local private filesystem field"
+        },
+        {
+          "pointer": "/intervals/2/record_locators/extracted_input",
+          "field": "extracted_input",
+          "original_value_sha256": "09345516aea020563680bb239d88cbd1db99a490349b00b48f07e57e15d314d6",
+          "reason": "local private filesystem field"
+        },
+        {
+          "pointer": "/intervals/3/record_locators/extracted_input",
+          "field": "extracted_input",
+          "original_value_sha256": "09345516aea020563680bb239d88cbd1db99a490349b00b48f07e57e15d314d6",
+          "reason": "local private filesystem field"
+        },
+        {
+          "pointer": "/intervals/4/record_locators/extracted_input",
+          "field": "extracted_input",
+          "original_value_sha256": "09345516aea020563680bb239d88cbd1db99a490349b00b48f07e57e15d314d6",
+          "reason": "local private filesystem field"
+        },
+        {
+          "pointer": "/intervals/5/record_locators/extracted_input",
+          "field": "extracted_input",
+          "original_value_sha256": "09345516aea020563680bb239d88cbd1db99a490349b00b48f07e57e15d314d6",
+          "reason": "local private filesystem field"
+        },
+        {
+          "pointer": "/intervals/6/record_locators/extracted_input",
+          "field": "extracted_input",
+          "original_value_sha256": "09345516aea020563680bb239d88cbd1db99a490349b00b48f07e57e15d314d6",
+          "reason": "local private filesystem field"
+        },
+        {
+          "pointer": "/intervals/7/record_locators/extracted_input",
+          "field": "extracted_input",
+          "original_value_sha256": "09345516aea020563680bb239d88cbd1db99a490349b00b48f07e57e15d314d6",
+          "reason": "local private filesystem field"
+        },
+        {
+          "pointer": "/intervals/8/record_locators/extracted_input",
+          "field": "extracted_input",
+          "original_value_sha256": "09345516aea020563680bb239d88cbd1db99a490349b00b48f07e57e15d314d6",
+          "reason": "local private filesystem field"
+        },
+        {
+          "pointer": "/intervals/9/record_locators/extracted_input",
+          "field": "extracted_input",
+          "original_value_sha256": "09345516aea020563680bb239d88cbd1db99a490349b00b48f07e57e15d314d6",
+          "reason": "local private filesystem field"
+        },
+        {
+          "pointer": "/intervals/10/record_locators/extracted_input",
+          "field": "extracted_input",
+          "original_value_sha256": "09345516aea020563680bb239d88cbd1db99a490349b00b48f07e57e15d314d6",
+          "reason": "local private filesystem field"
+        },
+        {
+          "pointer": "/intervals/11/record_locators/extracted_input",
+          "field": "extracted_input",
+          "original_value_sha256": "09345516aea020563680bb239d88cbd1db99a490349b00b48f07e57e15d314d6",
+          "reason": "local private filesystem field"
+        },
+        {
+          "pointer": "/intervals/12/record_locators/extracted_input",
+          "field": "extracted_input",
+          "original_value_sha256": "09345516aea020563680bb239d88cbd1db99a490349b00b48f07e57e15d314d6",
+          "reason": "local private filesystem field"
+        },
+        {
+          "pointer": "/intervals/13/record_locators/extracted_input",
+          "field": "extracted_input",
+          "original_value_sha256": "09345516aea020563680bb239d88cbd1db99a490349b00b48f07e57e15d314d6",
+          "reason": "local private filesystem field"
+        },
+        {
+          "pointer": "/intervals/14/record_locators/extracted_input",
+          "field": "extracted_input",
+          "original_value_sha256": "09345516aea020563680bb239d88cbd1db99a490349b00b48f07e57e15d314d6",
+          "reason": "local private filesystem field"
+        },
+        {
+          "pointer": "/intervals/15/record_locators/extracted_input",
+          "field": "extracted_input",
+          "original_value_sha256": "063435ae93d74290f73b632248e1e93cc42e18ee3280b422f5dd8307c94be1fb",
+          "reason": "local private filesystem field"
+        },
+        {
+          "pointer": "/intervals/16/record_locators/extracted_input",
+          "field": "extracted_input",
+          "original_value_sha256": "063435ae93d74290f73b632248e1e93cc42e18ee3280b422f5dd8307c94be1fb",
+          "reason": "local private filesystem field"
+        },
+        {
+          "pointer": "/intervals/17/record_locators/extracted_input",
+          "field": "extracted_input",
+          "original_value_sha256": "063435ae93d74290f73b632248e1e93cc42e18ee3280b422f5dd8307c94be1fb",
+          "reason": "local private filesystem field"
+        },
+        {
+          "pointer": "/intervals/18/record_locators/extracted_input",
+          "field": "extracted_input",
+          "original_value_sha256": "063435ae93d74290f73b632248e1e93cc42e18ee3280b422f5dd8307c94be1fb",
+          "reason": "local private filesystem field"
+        },
+        {
+          "pointer": "/intervals/19/record_locators/extracted_input",
+          "field": "extracted_input",
+          "original_value_sha256": "063435ae93d74290f73b632248e1e93cc42e18ee3280b422f5dd8307c94be1fb",
+          "reason": "local private filesystem field"
+        },
+        {
+          "pointer": "/intervals/20/record_locators/extracted_input",
+          "field": "extracted_input",
+          "original_value_sha256": "063435ae93d74290f73b632248e1e93cc42e18ee3280b422f5dd8307c94be1fb",
+          "reason": "local private filesystem field"
+        }
+      ]
+    },
+    {
+      "source": "7f4bf63d1fd5ad1b997418a1b0435a4aadcd4772:coordination/engineering/indonesia-adm2-current-cell-20261014/source-conflict-v1/frozen-selector.json",
+      "original_bytes": 7390,
+      "original_sha256": "a235f3d0b4ef505a801cb3d413a40a264e371aecab9ce15c9c9c543ea1a16919",
+      "published_path": "payloads/derived/frozen-source-conflict/frozen-selector.json",
+      "published_bytes": 7144,
+      "published_sha256": "a353db165e497cfe062042954c4b2bccee3d0680b42a2d94139be4c6b40707b8",
+      "omissions": [
+        {
+          "pointer": "/original_input_paths",
+          "field": "original_input_paths",
+          "original_value_sha256": "8f8c1ea6a96d627583ebddfda11b4cad1cea704b43902752b4480b389dbb925d",
+          "entries": 3,
+          "reason": "array containing only local private filesystem provenance paths"
+        }
+      ]
+    }
+  ],
+  "limit": "Only local private filesystem provenance removed. Primary and incomplete raw bytes unchanged; URLs, legal facts, coordinate rows, subject/owner IDs, hashes, failed acquisition outcomes and review limits retained."
+}

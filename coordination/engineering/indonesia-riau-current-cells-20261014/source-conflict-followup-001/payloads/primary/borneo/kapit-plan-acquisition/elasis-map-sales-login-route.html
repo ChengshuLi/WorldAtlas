@@ -1,0 +1,584 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+
+
+
+
+
+
+
+<html>
+    <head>
+        <title>
+            eLASIS
+        </title>
+        
+        <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+        <link rel="icon" href="images/favicon.ico?" type="image/x-icon" />
+
+        
+        
+        <!--//These two lines for modalpopup. Must put before datatable-->
+        <script type="text/javascript" src="bootstrap/js/jquery-3.5.1.js"></script>
+        <script type="text/javascript" src="bootstrap-3.3.7/js/bootstrap.js"></script>
+        <script type="text/javascript" src="bootstrap/js/jquery.dataTables.js"></script>
+        <script type="text/javascript" src="bootstrap/js/dataTables.bootstrap.js"></script>
+        <script src="bootstrap/js/select2.min.js"></script>
+
+        <script type="text/javascript" src="pages/scripts/common.js"></script>
+        <script type="text/javascript" src="pages/scripts/validation.jsp"></script>
+        <script type="text/javascript" src="pages/scripts/validation.js"></script>
+        <script type="text/javascript" src="pages/scripts/confirmation.js"></script>
+        <script type="text/javascript" src="include/popcalendar.js"></script>
+        <script type="text/javascript" src="pages/scripts/lookup.js"></script>
+
+        <script type="text/javascript">
+            //Remark: For eSubmission use [start]
+            
+            function fromELS(){
+                
+            }//Remark: For eSubmission use [end]
+            
+            function leavePage() {
+                var xmlHttp = null;
+                xmlHttp = new XMLHttpRequest();
+                xmlHttp.open("GET", '/eLasis/leavePage.action', false);
+                xmlHttp.send(null);
+            }
+            window.onbeforeunload = leavePage;
+        </script>
+        
+        
+        <link rel="stylesheet" href="include/dhtmlwindow/windowfiles/dhtmlwindow.css" type="text/css" />
+        <script type="text/javascript" src="include/dhtmlwindow/windowfiles/dhtmlwindow.js"></script>
+        <link rel="stylesheet" href="include/dhtmlwindow/modalfiles/modal.css" type="text/css" />
+        <script type="text/javascript" src="include/dhtmlwindow/modalfiles/modal.js"></script>
+        
+        <link href="bootstrap-3.3.7/css/bootstrap.css" rel="stylesheet">
+        <link href="bootstrap/css/font-awesome.min.css" rel="stylesheet"/>
+        <link href="bootstrap/css/jquery.dataTables.css" rel="stylesheet">
+        <link href="bootstrap/css/select2.min.css" rel="stylesheet" />
+        
+        <style>
+            @media (min-width: 769px){
+                .mainframe-body {
+                    margin-top: 192px;
+                }
+            }
+
+            @media (max-width: 768px){
+                .mainframe-body {
+                     margin-top: 102px;
+                }
+            }
+        </style>
+       
+    </head>
+
+    <body>
+        <!--//@18.2.2020. Remark: Cater for eLASIS-STA sso-->
+        
+        <iframe src="https://elasis.sarawak.gov.my/extraction_mapviewer/api/keepalive" style="display:none"></iframe>
+        
+        <div class="container-fluid">
+            
+
+
+
+<link rel="stylesheet" type="text/css" href="storefront/storefront.css">
+
+<nav id="storefront-header" class="navbar navbar-default navbar-fixed-top">
+     
+        
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+
+
+<link href="styles/sso_login_bar.css" rel="stylesheet"/>    
+
+<script src="https://sarawakpass.sarawak.gov.my/swkpass_plugin.js"></script>
+
+<script type="text/javascript" language="javascript">
+    var swkPassConfig={
+       client_id:"elasis_web",
+       state:"bAGRWn8NmKerwcRHBZFK",
+       redirect_uri:"https://elasis.sarawak.gov.my/eLasis/processLoginSSO",
+       logout_redirect_uri:"https://elasis.sarawak.gov.my/eLasis/processLogoutSSO",
+       position:'top_right',/*top_left,top_right,bottom_left,bottom_right*/
+
+       lang:'en',/*en,bm*/
+       main_elem_id: 'swkpass_plugin', /*the main element id that the button will be populate*/
+       ui_mode:'avatar_dropdown',/*login_button,avatar_dropdown*/
+       user_full_name:'', /*populate user?s full name if ui_mode is avatar_dropdown*/
+       user_name:'', /*populate user?s name if ui_mode is avatar_dropdown*/
+       corp_name:'',
+       
+       corp_profile_redirect_uri:'https://elasis.sarawak.gov.my/eLasis/processLoginSSO', 
+       nonce:'nonce_here', /*put nonce here, it will apply to the relevant <style> tag*/
+    };
+    
+    window.addEventListener('load',()=>{
+     
+     /* Remark: For customized logined profile icon that do not show My Profile and My Workspace menus. */
+     swkpassAvatarDropDownItemOverwrite({
+            'my_custom_logout': {
+            'icon': 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDI1LjQuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAzMy40IDMzLjQiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDMzLjQgMzMuNDsiIHhtbDpzcGFjZT0icHJlc2VydmUiPgo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPgoJLnN0MHtmaWxsOiM0NTQ1NDY7fQo8L3N0eWxlPgo8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTkuOSwyNi42di0yLjZoLTIuNnYyLjZjMCwwLjItMC4yLDAuNC0wLjQsMC40SDMuMmMtMC4yLDAtMC40LTAuMi0wLjQtMC40di0yMGMwLTAuMiwwLjItMC40LDAuNC0wLjRoMTMuNgoJYzAuMiwwLDAuNCwwLjIsMC40LDAuNHYyLjloMi42VjYuNmMwLTEuNy0xLjQtMy4xLTMuMS0zLjFIMy4yYy0xLjcsMC0zLjEsMS40LTMuMSwzLjF2MjBjMCwxLjcsMS40LDMuMSwzLjEsMy4xaDEzLjYKCUMxOC41LDI5LjcsMTkuOSwyOC4zLDE5LjksMjYuNnoiLz4KPHBhdGggY2xhc3M9InN0MCIgZD0iTTMyLjksMTUuOUwyNywxMGMtMC41LTAuNS0xLjMtMC41LTEuOCwwYy0wLjUsMC41LTAuNSwxLjMsMCwxLjlsMy43LDMuN0gxMy40Yy0wLjcsMC0xLjMsMC42LTEuMywxLjMKCWMwLDAuNywwLjYsMS4zLDEuMywxLjNoMTUuNGwtMy43LDMuN2MtMC4yLDAuMi0wLjQsMC42LTAuNCwwLjljMCwwLjMsMC4xLDAuNywwLjQsMC45YzAuMywwLjMsMC42LDAuNCwwLjksMC40CgljMC4zLDAsMC43LTAuMSwwLjktMC40bDUuOS01LjlDMzMuNCwxNy4yLDMzLjQsMTYuNCwzMi45LDE1Ljl6Ii8+Cjwvc3ZnPgo=',
+            'label': 'Logout',
+            'link': 'https://sarawakpass.sarawak.gov.my/logout?client_id=elasis_web&post_logout_redirect_uri=https://elasis.sarawak.gov.my/eLasis/processLogoutSSO',
+        },
+     });
+    
+     
+     swkpassInit (swkPassConfig);/*you can use swkid_sso_init as the function name too.*/
+    });
+    
+     function isIPad() {
+        const ua = navigator.userAgent || navigator.vendor || window.opera;
+
+        // Old iPads include "iPad" in UA. Newer iPadOS may present as "MacIntel" but have touch points.
+        return /\biPad\b/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      }
+
+      function isInAppBrowser() {
+        const ua = navigator.userAgent || navigator.vendor || window.opera;
+
+        const isIPadDevice = isIPad();
+        const isIOSDevice = /iPhone|iPod/i.test(ua) || isIPadDevice;
+
+        // iOS webview: AppleWebKit present but Safari absent (common pattern for UIWebView/WKWebView in apps)
+        const iOSWebView = isIOSDevice && /AppleWebKit/i.test(ua) && !/Safari/i.test(ua);
+
+        // Android WebView: 'wv' token (Android WebView) or Crosswalk/XWalk
+        const androidWebView = /wv|Crosswalk|XWalk/i.test(ua);
+
+        // Some app in-app browsers (Facebook, Instagram, Messenger, Line, Twitter, LinkedIn)
+        const socialInApp = /FBAN|FBAV|Instagram|Line|Messenger|Twitter|LinkedInApp/i.test(ua);
+
+        // Chrome on iOS (CriOS) and Firefox on iOS (FxiOS) ? treat as non-Safari iOS browsers (could be in-app or third-party)
+        const otherIosBrowsers = /CriOS|FxiOS/i.test(ua);
+
+        // iOS PWA launched from home screen
+        const iosStandalone = typeof window !== 'undefined' && window.navigator && window.navigator.standalone === true;
+
+        return !!(iOSWebView || androidWebView || socialInApp || otherIosBrowsers || iosStandalone);
+      }
+
+      /* Example usage: hide element on mobile in-app browsers (including iPad) */
+	function hideBarIfMobileOrInApp() {
+	  try {
+		if (isInAppBrowser()) {
+		  const el = document.getElementById('swkpass_plugin');
+		  if (el) el.style.display = 'none';
+		} else {
+		  // Not in-app: keep normal behavior (example commented out in your original)
+//		  alert("Cannot access from browser");
+//		  window.location.href = '/eLasis/error404';
+		}
+	  } catch (err) {
+		// Graceful fallback: if something unexpected happens, don't break the page.
+		console.error('hideBarIfMobileOrInApp error:', err);
+	  }
+	}
+        
+    /** Remark: for mobile inappbrowser **/
+//    function isInAppBrowser() {
+//        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+//
+//        // Common InAppBrowser patterns
+//        return /(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/i.test(userAgent) || 
+//               /wv/i.test(userAgent) || // Android WebView
+//               /Crosswalk/i.test(userAgent) || // Crosswalk WebView
+//               /XWalk/i.test(userAgent) || // Crosswalk
+//               /CriOS/i.test(userAgent) || // Chrome iOS
+//               /FxiOS/i.test(userAgent);   // Firefox iOS
+//    }  
+//    
+//    /** Remark: for mobile inappbrowser  **/
+//    function hideBarIfMobileOrInApp() {
+//        if (isInAppBrowser()) {
+//          document.getElementById('swkid_plugin').style.display = 'none';
+//        }
+//    }
+    
+    /** Remark: for mobile inappbrowser**/
+    document.addEventListener('DOMContentLoaded', hideBarIfMobileOrInApp);
+</script>
+
+
+
+ 
+<div class="swkheader-system-wrapper">
+    <div class="swkheader-system-container">
+        <div id="swkheader-system" class="swkheader-system swkheader-system-website">
+            <div class="swkheader-system-row">
+                <div class="swkheader-system-left">
+                    <div class="swkheader-system-button">
+                        <a class="icon-state-crest" href="welcome"><img src="images/sarawak_hornbill.png"></a>
+                        <a class="icon-app-logo" href="welcome"><img src="images/logo.png"></a>
+                    </div>
+                </div>
+                <div class="swkheader-system-center">
+                    <a href="welcome">
+                        <div class="swkheader-system-name-pre">eLASIS</div>
+                        <div class="swkheader-system-name">eLASIS</div>
+                        <div class="swkheader-system-name-short">eLASIS</div>
+                    </a>
+                </div>
+
+
+                <div class="swkheader-system-right">
+                    <div class="swkheader-system-button-div">
+
+                    </div>
+                    <div class="swkheader-system-button">
+                        <div id="swkpass_plugin"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+    
+    <div class="container-fluid">
+        <div id="header-top">
+            <div class="row storefront_top_header visible-sm visible-md visible-lg">
+               
+                <ul id="top_header" class="nav navbar-nav navbar-left">
+                    <li><div id="assistance_div">&nbsp;&nbsp;Need assistance?<a href="/contact.html"> <b>Contact Us</b></a> &nbsp;or refer to our<a href="/guide.html"> <b>User Guide</b></a> &nbsp;and<a href="/faq.html"> <b>FAQ</b></a> </div></li>
+                </ul>
+    
+                
+            </div><!-- /.row -->
+        </div><!-- /.header-top -->
+        
+        <div class="clearfix"></div>
+
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            
+            <a class="navbar-brand" href="https://elasis.sarawak.gov.my">
+            
+                <img style="margin-top: -8px" src="images/logo_elasis.png" title="eLASIS Storefront" alt="" height="40" weight="40" class="visible-xs visible-sm">
+                <img style="margin-top: -8px" src="images/logo_elasis.png" title="eLASIS Storefront" alt="" class="visible-md visible-lg">
+            </a>
+            
+                               
+
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul id="bottom-header" class="nav navbar-nav">
+                <li ><a target="_parent" href="eMapSaleCart"><strong>Map Sales</strong> <span class="sr-only">(current)</span></a></li>
+                <li ><a target="_parent" href="processcategorySearch?searchType=Land Title"><strong>Land Registry Search</strong></a></li>      
+                <li ><a target="_parent" href="searchLandRentPremiumEnquiry"><strong>Land Rent & Premium</strong></a></li>      
+                </ul>   
+
+
+                <ul id="bottom-header" class="nav navbar-nav navbar-right">
+                    <li>
+                        <a id="cart-sum" href="getPoDetailCart" onclick="">
+                                
+                                
+                                    <span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;
+                                    
+                                        <span id="cartSumm"><mark>Cart: 0 item (RM 0.00)</mark></span>
+                                    
+                                    
+                                
+                        </a>
+                       
+                    </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<script>
+    //Hamizan @9/25/2019 Remark:Fix top header issue and enable collapse top header onscroll down
+    $(window).scroll(function() {
+        if ($(this).scrollTop()) {
+             $("#header-top").fadeOut("fast");
+        } else {
+            $("#header-top").show("fast");
+        }
+    });
+    
+    
+    $('#cart-sum').on('mouseover', function() {
+        $('#sumIFrame').contents().find('body').css("background","#e7e7e7");
+        $('#sumIFrame').contents().find('body').css("cursor","pointer");
+        $('#sumIFrame').contents().find('body').on("click", function () {
+            window.location.href = 'getPoDetailCart';
+        });
+    });
+     $('#cart-sum').on("mouseleave", function () {
+	$('#sumIFrame').contents().find('body').css("background","white");
+    });
+    
+</script>
+
+
+
+            
+            <div class="mainframe-body">
+             
+
+
+
+
+
+<script type="text/javascript">
+    var orderno = 0;
+    function getUserName() {
+        var loginid = document.getElementById("txtuserID").value;
+        return loginid;
+    }
+
+
+    function login() {
+        setCookie("username", getUserName(), 1);
+    }
+
+    function logout() {
+        alert("Hello");
+        //document.location = "1_index.html";
+    }
+
+    function getCookie(c_name)
+    {
+        if (document.cookie.length > 0)
+        {
+            c_start = document.cookie.indexOf(c_name + "=");
+            if (c_start != -1)
+            {
+                c_start = c_start + c_name.length + 1;
+                c_end = document.cookie.indexOf(";", c_start);
+                if (c_end == -1)
+                    c_end = document.cookie.length;
+                return unescape(document.cookie.substring(c_start, c_end));
+            }
+        }
+        return "";
+    }
+
+    function setCookie(c_name, value, expiredays)
+    {
+        var exdate = new Date();
+        exdate.setDate(exdate.getDate() + expiredays);
+        document.cookie = c_name + "=" + escape(value) +
+                ((expiredays == null) ? "" : ";expires=" + exdate.toUTCString());
+    }
+
+    function removeCookie(c_name, value, expiredays)
+    {
+        var exdate = new Date();
+        exdate.setDate(exdate.getDate() + expiredays);
+        document.cookie = c_name + "=" + escape(value) +
+                ((expiredays == null) ? "" : ";expires=" + exdate.toUTCString());
+    }
+
+    function roll_over(btn_id, img_src) {
+        document.getElementById(btn_id).src = img_src;
+    }
+
+    function resetFields(form) {
+        var noOfElements = form.elements.length;
+        for (var i = 0; i < noOfElements; i++) {
+            if (!(form.elements[i].type == "hidden"
+                    || form.elements[i].type == "submit"
+                    || form.elements[i].type == "button")) {
+                clearValue(form.elements[i]);
+            }
+        }
+        setFocus(form);
+    }
+</script>
+
+
+
+
+    
+
+
+
+<link rel="stylesheet" type="text/css" href="storefront/login/loginNew.css">
+<script>
+    $( document ).ready(function() {
+        
+        $('.swkheader-system-wrapper').remove(); //Remove SWK ID header on this page only 
+
+    
+    
+    
+        
+        
+        
+        
+        //AiMin@30.9.2025. [start]
+        //Remark: To solve empty clientid when user clicks too fast on the login button.
+        //        On load /welcome, the storefront_index.jsp will call other sub systems to logout via iframe. It caused to take time to finish load.
+        // disable initially
+        document.getElementById("btn-swkid-login").disabled = true;
+
+        // enable after 3 seconds (3000 ms)
+        setTimeout(function() {
+            document.getElementById("btn-swkid-login").disabled = false;
+        }, 3000);
+        //AiMin@30.9.2025. [end]
+    });
+    
+    function adjustMainContentHeight() {
+     
+        const header = document.querySelector('.navbar-header');
+        
+        const header2 = document.querySelector('.storefront_top_header');
+        const header3 = document.querySelector('.navbar-collapse');
+        
+        const announcement = document.querySelector('.announcement');
+        const mainContent = document.querySelector('.login-card-content');
+        var headerHeight;
+        
+        if (header && mainContent) {
+            if ($(window).width() < 768) { 
+                headerHeight = header.offsetHeight + announcement.offsetHeight;
+            } else {
+                headerHeight = header2.offsetHeight + header3.offsetHeight + announcement.offsetHeight;
+            }    
+            
+            if (announcement.classList.contains('hideHeader'))  headerHeight /=  2;
+            
+            mainContent.style.height = 'calc(100vh - 5px - '+ headerHeight + 'px)';
+            mainContent.style.top = headerHeight + 5 +'px';
+        }
+
+    }
+
+    
+</script>
+
+
+
+<script type="text/javascript" src="include/swkpass/swkpass.js"
+	data-is-login-page="true"
+	data-client-id="elasis_web"
+	data-swkid-state="bAGRWn8NmKerwcRHBZFK"
+	data-redirect-url="https://elasis.sarawak.gov.my/eLasis/processLoginSSO"
+	data-logout-redirect-url="https://elasis.sarawak.gov.my/eLasis/welcome"
+	data-logout-url="https://elasis.sarawak.gov.my/eLasis/processLogoutSSO">
+</script> 
+
+    
+    
+    
+    
+<div class="row">
+    <div class="col-md-10 col-md-offset-1 col-xs-12">
+        
+    <div class="row row-equal">
+
+        <!-- LEFT PANEL -->
+        <div class="col-xs-12 col-sm-6">
+            <div class="panel panel-default announce-panel">
+                <div class="panel-body">
+
+                    <div class="p-3">
+                        
+                        
+                        <p>
+                            <b>Announcement:</b><br>
+                            Starting 30th November 2025, all users must access eLASIS services using SarawakPass. 
+                            Discover the process for migrating your eLASIS User Account to SarawakPass. 
+                            <a href="https://elasis.sarawak.gov.my/guide.html" style="color:#0077f7;"> Guide</a>
+                        </p>
+                        
+                        <p>
+                            <b>IMPORTANT:</b><br>
+                            If your current eLASIS user accounts are accessing to eLodgement / eSubmission of Survey Jobs, you MUST apply for SarawakPass Corporate first. 
+                            Upon approval of your SarawakPass Corporate, only then proceed to login your SarawakPass Corporate to bind your eLASIS Company account to SarawakPass Corporate.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT PANEL -->
+        <div class="col-xs-12 col-sm-6">
+            <div class="panel panel-default login-panel">
+                <div class="panel-body">
+
+                    <div class="p-3">
+                        
+                        
+
+
+                        
+                        <h2 class="login-title">
+                             <img style="margin-top: -8px; max-width:250px; height:auto;" src="images/logo_elasis.png" title="eLASIS Storefront"><br/><br/>
+                             Login to eLASIS
+                        </h2>
+                        <p class="login-subtitle">
+                            <!--Please log in using your SarawakPASS.-->
+                        </p>
+                        <br/>
+
+                        <!-- Sarawak ID Login -->
+                        <div class="mb-2" id="swkpass_plugin"></div>
+
+                        <p class="small info-bar">
+                            SarawakPass is powered by SarawakID. Please log in using your existing account.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+    
+<div class="copyright-footer">
+    <small>Copyright Â© 2025 Sarawak Government. All Rights Reserved. Version 9.0.0 | Last Update: 06 December 2025</small>
+</div>
+
+
+
+    
+    
+     
+    
+     
+    
+      
+
+
+            </div>
+            <br/>
+        </div>
+    </body>
+     
+
+
+
+
+
+
+
+
+</html>

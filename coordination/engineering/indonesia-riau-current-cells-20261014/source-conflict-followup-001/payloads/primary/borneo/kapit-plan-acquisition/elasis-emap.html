@@ -1,0 +1,1497 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>  
+  <title>Official Website eLASIS</title>
+<!--<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7; IE=EmulateIE9">-->
+<meta name="title" content="Official Website eLASIS" >
+<meta name="description" content="Copyright 2019 Sarawak Government" >
+<meta name="keywords" content="Copyright 2019 Sarawak Government" >
+<meta name="distribution" content="Global" >
+<!--<meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+<meta http-equiv="Pragma" content="no-cache" >
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+<meta http-equiv="robots" content="index, follow" >
+<meta http-equiv="revisit-after" content="5 days" >
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="HandheldFriendly" content="true">
+<!--Google webmaster  -->
+
+<!---google webmaster-->
+
+<link rel="stylesheet" href="/bootstrap.min.css">
+<!--<link rel="stylesheet" href="/bootstrap2.min.css">-->
+<link rel="SHORTCUT ICON" href="/upload/browser_icon/myicon.ico"/>
+
+  
+	 <style>
+
+	 </style>
+	 <LINK REL="stylesheet" type="text/css" HREF="/layouts/quartz/layout.css"><LINK REL="stylesheet" type="text/css" HREF="/share-style.css"><LINK REL="stylesheet" type="text/css" HREF="/customize.css">  
+   
+  <style type="text/css">body	{	background-color:#666666 !important; }</style>
+  <SCRIPT LANGUAGE="javascript" TYPE="text/javascript" SRC="/plugins/styleswitch/styleswitch.js"></SCRIPT>
+  <SCRIPT LANGUAGE="javascript" TYPE="text/javascript" SRC="/javascripts/common.js"></SCRIPT>
+  <SCRIPT LANGUAGE="javascript" TYPE="text/javascript" SRC="/javascripts/win.js"></SCRIPT>
+  <SCRIPT LANGUAGE="javascript" TYPE="text/javascript" SRC="/javascripts/dhtml.js"></SCRIPT>
+  <SCRIPT LANGUAGE="javascript" TYPE="text/javascript" SRC="/javascripts/ajax.js"></SCRIPT>
+  <SCRIPT LANGUAGE="javascript" TYPE="text/javascript" SRC="/javascripts/effect.js"></SCRIPT>
+  <SCRIPT LANGUAGE="javascript" TYPE="text/javascript" SRC="/plugins/shortcut/shortcuts.js"></SCRIPT>
+
+  <link rel="stylesheet" href="/plugins/dhtmlwindow/windowfiles/dhtmlwindow.css" type="text/css">
+<script type="text/javascript" src="/plugins/dhtmlwindow/windowfiles/dhtmlwindow.js"></script>
+<script language="javascript">
+dhtmlwindow.imagefiles[0]="/plugins/dhtmlwindow/windowfiles/vista_min.gif";
+dhtmlwindow.imagefiles[1]="/plugins/dhtmlwindow/windowfiles/vista_close.gif";
+dhtmlwindow.imagefiles[2]="/plugins/dhtmlwindow/windowfiles/vista_restore.gif";
+dhtmlwindow.imagefiles[3]="/plugins/dhtmlwindow/windowfiles/resize.gif";
+dhtmlwindow.imagefiles[4]="/plugins/dhtmlwindow/windowfiles/vista_min_highlight.gif";
+dhtmlwindow.imagefiles[5]="/plugins/dhtmlwindow/windowfiles/vista_close_highlight.gif";
+dhtmlwindow.imagefiles[6]="/plugins/dhtmlwindow/windowfiles/vista_restore_highlight.gif";
+function openNewDhtmlWindow( pTitle, pURL, pSetting, pWinType ){
+  var vWinName = unescape(pTitle);
+
+  //var w = screen.width  - 300;
+  //var h = screen.height - 450;
+
+  if (pSetting==''){
+    var pSetting='width=600px,height=400px,left=200px,top=80px,resize=1,scrolling=1';
+    //var pSetting='width='+w+'px,height='+h+'px,left=200px,top=80px,resize=1,scrolling=1';
+  }
+  if (pWinType==''){
+    pWinType='iframe'
+  }
+  mydhtmlwin = dhtmlwindow.open( vWinName, pWinType, pURL, pTitle, pSetting);
+  switch (pWinType.toLowerCase()){
+    case 'div':
+      mydhtmlwin.onclose=function(){
+        originalDiv = document.getElementById(pURL);
+        originalDiv.innerHTML=originalDiv.defaultHTML;
+
+        switch (originalDiv.defaultStyleDisplayStatus){
+          case '':
+            showItSimple(pURL);
+            break;
+          case 'block':
+            showItSimple(pURL);
+            break;
+          case 'none':
+            hideItSimple(pURL);
+            break;
+        }
+        //showItSimple(pURL);
+        return true;
+     }
+     break;
+  }
+
+}
+</script>
+    <SCRIPT LANGUAGE="javascript" TYPE="text/javascript">
+        setCookie('w',screen.width,'');
+    setCookie('h',screen.height,'');
+   	</SCRIPT>
+   </HEAD>
+<BODY leftmargin=0 topmargin=0 marginwidth=0 marginheight=0 onLoad="if (window.runOnLoad){runOnLoad()}" id="body">
+ <!--google analytics-->
+ 	<!--Google Analytics-->
+	 
+ <div id='divAbout' class='systemDoc' style="display:none"></div>
+<div id='divDialog' class='customDialog' style="display:none"></div>
+<div id='divCommonImage' class='commonImage' style="display:none" align=center>
+	<div>	
+				<img id="imgCommon" src="/layouts/quartz/images/loading.gif" border=0 onLoad="setDivToCenter('divCommonImage')" alt="loading">
+		<div style="background-color:#ffffff;" align=right valign=center>
+			<a href="javascript:hideItSimple('divCommonImage');hideItSimple('overlay1')" style='text-decoration:none;'>
+				<span style="font-size:18px; font-family:verdana,tahoma; color:#000000; font-weight:bold">CANCEL</span>
+				<span style="font-size:24px; font-family:verdana,tahoma; color:#000000; font-weight:bold">X</span>
+			</a>
+		</div>		
+			</div>
+</div>
+<div id='overlay1' class='overlay' style='display:none;'></div>
+<div id='divAjaxError' class='nowLoading' style="display:none">
+</div>
+<div id='divLoading' class='nowLoading' style="display:none">
+  <table width=100% cellpadding=0 cellspacing=0 border=0>
+  <tr>
+   <td align="right">
+    <img src="/layouts/quartz/images/loading.gif" border=0 alt="loading">
+   </td>
+   <td>&nbsp;&nbsp;&nbsp;&nbsp;
+    Loading...   </td>
+  </tr>
+ </table>
+</div>
+<div id="divToolTip" style="display:none"><br></div>
+<div id="divTesting"></div>
+<CENTER></center>     <SCRIPT LANGUAGE="javascript" TYPE="text/javascript" SRC="/plugins/jquery/jquery-3.0.0.min.js"></SCRIPT>
+    <SCRIPT LANGUAGE="javascript" TYPE="text/javascript" SRC="/plugins/bootstrap/add_on/bootstrap.min.js"></SCRIPT>
+    
+        <link href="/plugins/bootstrap/bootstrap-4.0/dist/css/font-awesome.min.css" rel="stylesheet">
+        
+        
+        
+    
+<div style="width:100%; padding-left:0; padding-right:0; position:fixed; z-index:4;">
+</div>
+<div style="position:fixed; z-index:3; left:500px; right:200px; min-width:600px; top:;background-color:#f1f1f1;">
+	<div id="notification" class="div_hidden">&nbsp;</div>
+</div>
+<div id='top-row'
+
+
+class=' ' style='z-index:1;width:100%;background-color:#9f042c'>
+<div class='container'  style='background-color:#9f042c'><div class=' ' >
+<script language="javascript">
+var adjVal = 0;
+
+function changeCSSs(pVal,startIndex,endIndex){
+  var lastChr;
+  var lastSecChr;
+  var lastThrChr;
+  var pf;
+  var newval;
+  var fs;
+  var l;
+  
+  var cssRules;
+  if (document.all) {
+    cssRules = 'rules';
+  }
+  else if (document.getElementById) {
+    cssRules = 'cssRules';
+  }
+
+  //for (var S = 0; S < document.styleSheets.length; S++){
+  //for (var S = 1; S < 2; S++){
+    var tmp = endIndex;
+    if(endIndex>document.styleSheets[1][cssRules].length){
+      tmp = document.styleSheets[1][cssRules].length;
+    }
+    for (var R = startIndex; R < tmp; R++) {
+      if(document.styleSheets[1][cssRules][R].style['fontSize']){
+        fs = document.styleSheets[1][cssRules][R].style['fontSize'];
+
+        l=fs.length;
+
+        lastChr = fs.charAt(l-1);
+        lastSecChr = fs.charAt(l-2);
+        lastThrChr = fs.charAt(l-3);
+
+        pf = "";
+        newval = "";
+        if(isNaN(lastThrChr)){
+          newval = fs;
+        }else{
+          if(isNaN(lastSecChr)){
+            pf = pf + lastSecChr;
+          }
+          if(isNaN(lastChr)){
+            pf = pf + lastChr;
+          }
+
+          newval = parseInt(fs.replace(pf,""));
+          //newval = parseFloat(newval) + parseInt(pVal);
+          //newval = newval + pf;
+
+          document.styleSheets[1][cssRules][R].style['fontSize'] = parseFloat(newval) + parseInt(pVal) + pf;
+        }
+      }
+    }
+}
+
+function changefont(pVal) {
+  adjVal = parseInt(adjVal) + parseInt(pVal);
+  if(pVal==0){
+    pVal = adjVal * -1;
+    adjVal = 0;
+  }
+  var t1=setTimeout("changeCSSs("+pVal+",0,400)",1);
+  //var t2=setTimeout("changeCSS("+pVal+",101,200)",1);
+  //var t3=setTimeout("changeCSS("+pVal+",201,300)",1);
+  var controlTag=new Array();
+  controlTag[0]="font";
+  controlTag[1]="div";
+  controlTag[2]="p";
+  controlTag[3]="td";
+  controlTag[4]="a";
+  controlTag[5]="span";
+  controlTag[6]="body";
+  
+  var lastChr;
+  var lastSecChr;
+  var lastThrChr;
+  var pf;
+  var newval;
+  var fs;
+  var l;
+  
+  
+  for(var c=0;c<controlTag.length;c++){
+    innerTag = document.getElementsByTagName(controlTag[c]);
+    for(var i=0;i<innerTag.length;i++) {
+      if((innerTag[i].style.fontSize) || (innerTag[i].size)) {
+        if(innerTag[i].style.fontSize){
+          fs = innerTag[i].style.fontSize;
+        }else{
+          fs = innerTag[i].size;
+        }
+        l=fs.length;
+        
+        lastChr = fs.charAt(l-1);
+        lastSecChr = fs.charAt(l-2);
+        lastThrChr = fs.charAt(l-3);
+
+        pf = "";
+        newval = "";
+        if(isNaN(lastThrChr)){
+          newval = fs;
+        }else{
+          if(isNaN(lastSecChr)){
+            pf = pf + lastSecChr;
+          }
+          if(isNaN(lastChr)){
+            pf = pf + lastChr;
+          }
+          
+          newval = parseInt(fs.replace(pf,""));
+          newval = parseFloat(newval) + parseInt(pVal);
+          newval = newval + pf;
+          
+          if(innerTag[i].style.fontSize){
+            innerTag[i].style.fontSize = newval;
+          }else{
+            innerTag[i].size = newval;
+          }
+        }
+      }else{
+		  var style = window.getComputedStyle(innerTag[i], null).getPropertyValue('font-size');
+		  var fontSize = parseFloat(style); 
+		 if((fontSize + parseInt(pVal))>10){
+		  innerTag[i].style.fontSize = fontSize + parseInt(pVal) + 'px';
+		  }
+		  
+	  }
+	  
+	  console.log(fontSize+'-'+pVal); 
+    }
+  }
+return;
+  var cssRules;
+  if (document.all) {
+    cssRules = 'rules';
+  }
+  else if (document.getElementById) {
+    cssRules = 'cssRules';
+  }
+
+  //for (var S = 0; S < document.styleSheets.length; S++){
+  //for (var S = 1; S < 2; S++){
+    var tmp = document.styleSheets[1][cssRules].length;
+    for (var R = 0; R < tmp; R++) {
+      if(document.styleSheets[1][cssRules][R].style['fontSize']){
+        fs = document.styleSheets[1][cssRules][R].style['fontSize'];
+
+        l=fs.length;
+
+        lastChr = fs.charAt(l-1);
+        lastSecChr = fs.charAt(l-2);
+        lastThrChr = fs.charAt(l-3);
+
+        pf = "";
+        newval = "";
+        if(isNaN(lastThrChr)){
+          newval = fs;
+        }else{
+          if(isNaN(lastSecChr)){
+            pf = pf + lastSecChr;
+          }
+          if(isNaN(lastChr)){
+            pf = pf + lastChr;
+          }
+
+          newval = parseInt(fs.replace(pf,""));
+          //newval = parseFloat(newval) + parseInt(pVal);
+          //newval = newval + pf;
+
+          document.styleSheets[1][cssRules][R].style['fontSize'] = parseFloat(newval) + parseInt(pVal) + pf;
+        }
+      }
+    }
+  //}
+}
+
+
+
+function changeBg(pVal){
+
+	//get BODY tag
+	var img_url='https://elasis.sarawak.gov.my/upload/file_folder/bg_image/'+pVal;
+	setCookie('tmpl_v3_1_homepage_bg','',0);
+vObjBody=document.getElementsByTagName('body');
+vObjBody=vObjBody[0];
+
+	vObjBody.style.background="url('"+img_url+"')";
+	vObjBody.style.backgroundColor="#fff";
+	vObjBody.style.backgroundPosition="-80px 30px";
+
+setCookie('tmpl_v3_1_homepage_bg',pVal,0);
+}
+
+	</script><style>
+.bckground{
+display:none
+}
+
+
+</style><div class="mainLayoutTopMenu row"><div class="col-md-6"><div class="pc_" style="margin:0px;padding:0px;width:100%"><div class="div_portlet_content_no_margin" style='width:auto;'><div id='custom_html_default_15' style='width:100%'>
+
+<style type="text/css">
+
+</style><div class='portlets custom_html'><div><div class='container'><div class="row" style="&#10;    font-size: 15px;&#10;    font-family: arial, helvetica, sans-serif;&#10;    color: #ffffff;&#10;    text-align: left;&#10;    display: flex;&#10;    flex-direction: row;&#10;    flex-grow: 1;&#10;    align-content:flex-end;&#10;    margin-right: -2rem;&#10;    ">
+<div style="    width: 100%;&#10;    text-align: right;&#10;    display: flex;&#10;    flex-wrap: wrap;&#10;    align-items: flex-end;&#10;    align-content: flex-end;">
+<div>&nbsp;Need assistance?<a href="/contact.html"> <span style="color: #ffffff; font-weight: bold; text-decoration: underline;">Contact Us</span></a> &nbsp;or refer to our <a href="/guide.html"><span style="color: #ffffff; font-weight: bold; text-decoration: underline;">User Guide</span></a> &nbsp;and <a href="/faq.html"><span style="color: #ffffff; font-weight: bold; text-decoration: underline;">FAQ</span></a></div>
+</div>
+</div></div>
+</div></div>
+<SCRIPT LANGUAGE="javascript" TYPE="text/javascript">
+</SCRIPT></div>
+
+<div style="clear: both;"></div></div></div></div><div class="col-md-6"><div class="pc_" style="margin:0px;padding:0px;width:100%"><div class="div_portlet_content_no_margin" style='width:auto;'><div id='custom_html_default_18' style='width:100%'>
+
+<style type="text/css">
+
+</style><div class='portlets custom_html'><div><div class='container'><div class="row" style="&#10; text-decoration: none;   font-size: 15px;&#10;    font-family: arial, helvetica, sans-serif;&#10;    color: #ffffff;&#10;    text-align: left;&#10;    display: flex;&#10;    flex-direction: row;&#10;    flex-grow: 1;&#10;    align-content:flex-end;&#10;    margin-right: -2rem;&#10;    ">
+<div style="    width: 100%;&#10;    text-align: right;&#10;    display: grid;    flex-wrap: wrap;&#10;    align-items: flex-end;&#10;    align-content: flex-end;">
+<div><a href="/eLasis/welcome"><span style="color:#FFFFFF;font-weight:bold;">Login</span></a>&nbsp;| <a href="/eLasis/termsConditions"><span style="color:#FFFFFF;font-weight:bold;">Register Now </span></a></div>
+</div>
+</div></div>
+</div></div>
+<SCRIPT LANGUAGE="javascript" TYPE="text/javascript">
+</SCRIPT></div>
+
+<div style="clear: both;"></div></div></div></div></div></div></div>
+</div><div id='header-row' 
+
+
+class='' 
+style='background-color:#ffffff;'
+>
+
+<div class='container' style='background-color:#ffffff;'><div class='row'><div class="pc_main_menu_horizontal" style="margin:0px;padding:0px;width:100%"><div class=" " ><div id='main_menu_horizontal_mcklasis_1 ' style='width:100%'>
+<style type="text/css">
+/*colors for menu*/
+.mainLayoutMenuBar_1{
+  background-color: #08283a;
+  box-sizing: initial;
+}
+
+
+.mainLayoutMenuBar_1{
+
+
+
+margin-left:0px;margin-right:auto;
+
+
+
+}
+
+
+/* ---------------------------- MENU -------------------------------*/
+#main_menu_1, #main_menu_1 ul {
+	padding: 1.5rem;
+	
+	margin: 0;
+
+	list-style: none;
+	 text-align:left;
+}
+
+#main_menu_1 a {
+	display: block;
+	/*width: 10em;*/
+	font-family: Arial !important;font-size: 15px;}
+
+#main_menu_1 li {
+	float: left;
+
+  padding:19px;  font-family: Arial !important;font-size: 15px;  vertical-align:middle;
+  box-sizing: initial;
+}
+
+#main_menu_1 li:first-child {
+	}
+
+#main_menu_1 li:not(:first-child) {
+	}
+
+#main_menu_1 li:last-child {
+	}
+
+
+
+
+
+
+
+
+
+
+#main_menu_1 li  div{
+	width: 100%;
+
+   text-align:left;
+}
+
+#main_menu_1 li  a{
+  
+
+}
+
+#main_menu_1 li  a:hover{
+
+  text-decoration:none;
+  
+}
+
+#main_menu_1 li ul {
+  z-index:999;
+	position: absolute;
+	width: 160px;
+	left: -999em;
+	  margin-top:19px;
+  /*border: 1px solid #000000;*/
+}
+
+#main_menu_1 li ul li{
+	width: 200px !important;
+	width: 158px;
+  border: 0px;
+
+
+   text-align:left;
+
+}
+
+#main_menu_1 li:hover ul, #main_menu_1 li.sfhover ul {
+	left: auto;
+  margin-left:-19px;
+
+}
+
+#main_menu_1 li:hover, #main_menu_1 li.sfhover {
+ 
+  /*border-top: 3px solid transparent;
+  border-bottom: 1px solid #000;
+  border-right:1px inset #fff;
+  background: #6189b3 URL('images/menuBgSel.png') repeat-x;*/
+
+}
+
+#main_menu_1 li li:hover, #main_menu_1 li li.sfhover {
+
+}
+
+#main_menu_1 li:hover ul ul, #main_menu_1 li:hover ul ul ul, #main_menu_1 li.sfhover ul ul, #main_menu_1 li.sfhover ul ul ul {
+  left: -999em;
+}
+
+#main_menu_1 li li:hover ul, #main_menu_1 li li li:hover ul, #main_menu_1 li li.sfhover ul, #main_menu_1 li li li.sfhover ul {
+  left: auto;
+  margin-left:219px;
+  margin-top:-39px;
+}
+
+#main_menu_1 li{
+	cursor:pointer;
+}
+
+#main_menu_1 .down > a:after,#main_menu_1 .down > span:after{
+  content: '\00BB';
+    
+  float:right;
+  margin-left:10px;
+  
+  
+    -moz-transform: rotate(90.0deg);
+  /* Opera 10.5 */
+  -o-transform: rotate(90.0deg);
+  /* Saf3.1+, Chrome */
+  -webkit-transform: rotate(90.0deg);
+  /* IE6,IE7 */
+  filter: progid: DXImageTransform.Microsoft.BasicImage(rotation=0.083);
+  /* IE8 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=0.083)";
+  /* Standard */
+  transform: rotate(90.0deg);
+
+  
+  
+}
+
+#main_menu_1 .down a:only-child:after,#main_menu_1 .down span:only-child:after {
+  content: ''; 
+}
+
+#main_menu_1 .down ul .right a:after,#main_menu_1 .down ul .right span:after {
+  content: '\00BB'; 
+    float:right;
+
+}
+
+#main_menu_1 .down ul .right a:only-child:after,#main_menu_1 .down ul .right span:only-child:after  {
+  content: ''; 
+}
+   
+
+
+
+.mainLayoutMenuBar_1 .firstlvl{
+  background-color: #08283a;
+  color: #ffffff;
+}
+.mainLayoutMenuBar_1 .firstlvl a{
+ color: #ffffff;
+}
+.mainLayoutMenuBar_1 .firstlvl:hover{
+  background-color: #08283a;
+  color: #3687d4;
+}
+.mainLayoutMenuBar_1 .firstlvl a:hover{
+
+  color: #3687d4 !important;
+}
+.mainLayoutMenuBar_1 .firstlvl:hover > a{
+
+  color: #3687d4;
+}
+
+
+
+
+.mainLayoutMenuBar_1 .sndlvl{
+  background-color: #f0f0f0;
+  color: #222222;
+
+}
+
+  
+
+
+
+.mainLayoutMenuBar_1 .sndlvl a{
+ color: #222222;
+}
+.mainLayoutMenuBar_1 .sndlvl:hover{
+  background-color: #f0f0f0;
+  color: #222222;
+}
+.mainLayoutMenuBar_1 .sndlvl a:hover{
+
+  color: #222222;
+}
+.mainLayoutMenuBar_1 .sndlvl:hover > a{
+
+  color: #222222;
+}
+
+
+
+.mainLayoutMenuBar_1 .trdlvl{
+  background-color: #f0f0f0;
+  color: #555555;
+ 
+}
+.mainLayoutMenuBar_1 .trdlvl a{
+ color: #555555;
+}
+.mainLayoutMenuBar_1 .trdlvl:hover{
+  background-color: #f0f0f0;
+  color: #555555;
+}
+.mainLayoutMenuBar_1 .trdlvl a:hover{
+
+  color: #555555;
+}
+.mainLayoutMenuBar_1 .trdlvl:hover > a{
+
+  color: #555555;
+}
+
+
+
+
+  
+
+
+.rotate {
+  /* FF3.5+ */
+  -moz-transform: rotate(-90.0deg);
+  /* Opera 10.5 */
+  -o-transform: rotate(-90.0deg);
+  /* Saf3.1+, Chrome */
+  -webkit-transform: rotate(-90.0deg);
+  /* IE6,IE7 */
+  filter: progid: DXImageTransform.Microsoft.BasicImage(rotation=0.083);
+  /* IE8 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=0.083)";
+  /* Standard */
+  transform: rotate(-90.0deg);
+}
+
+.adaparent{
+font-size:25px;font-weight:bold;
+padding-bottom:2rem;
+  cursor:pointer;
+}
+
+.adaparent:before{
+  content: '\276E'; 
+  padding-right:1em;
+
+}
+
+
+
+
+.subnavcontainer{position:absolute;min-height:50vh;top:70px;right:0px;}
+
+.subnavcontainer .subnav{position:relative;min-height:50vh}
+  
+  
+  
+
+
+  
+.mainLayoutMenuBar_1 .down.firstlvl .nav-link{
+color:#ffffff;
+padding:0px;
+}  
+ .down.firstlvl a{
+font-size:15px !important;
+} 
+.mainLayoutMenuBar_1 .nav-link.active{
+	
+	color:#3687d4!important;
+	background-color:#08283a!important;
+	}
+	
+.subtabctntitle{display:none}
+  .lefttabt{width:5%;  }
+   .rightctnt{width:95%;}
+  .lefttabs{width:25%;    background-color: #072939;}
+  .rightctn{width:75%}
+  .adasub{position:relative;}
+  .adasub:after{
+  content:'\276F';
+  position:absolute;
+  right:10px;top:25%;
+  
+  }
+ .rightctn .tab-content>.active {border:0px;background-color:#f0f0f0;}
+.navx{border-bottom:1px solid #000;min-height:80px;}
+
+.sndmenudesc{font-size:15px; color:#555}
+
+.navbar-toggler.x .navbar-toggler-icon{background-image:url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0, 0, 0, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M 10,10 L 30,30 M 30,10 L 10,30'/%3E%3C/svg%3E")}
+
+
+.navbar-toggler.x.collapsed .navbar-toggler-icon{background-image:url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0, 0, 0, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E")}
+.navbar-toggler-icon{transition:all .21s ease !important}
+
+.collapsing{position:relative;height:0;overflow:hidden;transition:height .05s ease !important}
+
+.rightctn .tab-content div > ul{
+ display: flex;
+    flex-direction: column;
+    list-style: none;
+        flex-wrap: wrap;
+ width:100%;max-height:313px;padding:0px 15px;
+}
+.rightctn .tab-content div ul > li{ flex-grow: 1;line-height:1.5em;    padding: 0.3rem;font-size:15px;color:#555}
+.rightctn .tab-content ul ul{
+   
+    list-style: none;
+ padding:0px;
+}
+
+li.right.sndlvl > .sndlvltitle{
+ flex-grow: 1;font-weight:600;font-size:24px;
+line-height:1.5em;border-bottom:1px solid #55555536;color:#222
+}
+.mawek{border-top: 1px solid #d0d0d078;width: 1280px;top:-1px;
+display: flex;
+position: absolute;transition:all .35s ease !important;z-index: 999;}
+
+
+.mawek:before{content:'';width: 100%;height:300vh;margin-top:70px;
+display: block;
+position: absolute;transition:all .35s ease !important;z-index: -1;background-color: #0000009c;}
+.navbar-brand {
+    padding-left: 1rem;
+}
+
+.rightctn{  background-color: #f0f0f0;
+  color: #222222;      }
+
+
+
+.rightctnt .navbar-toggler {
+    /* color: rgba(0,0,0,.5); */
+    border-color: rgba(0, 0, 0, 0) !important;
+}
+
+
+
+.submenuparent{width:100%;text-align:left}
+
+.submenuparent ul{list-style: none;padding:0;margin:0}
+.submenuparent ul li{float: left;margin-right:15px}
+.submenuparent ul li a{color:#222222;font-size:15px;}
+.submenuparent .selectedmenu{position:relative;}
+.submenuparent .selectedmenu:after{position:absolute;content:'';width:100%;left:0;bottom:-10px;border-bottom:3px solid #f54d4d}
+
+.submenuparent .menuParentTitle{padding-left:;font-weight:bold;font-size:15px;}
+
+
+
+.main_menu_horizontal{border-bottom:1px solid #d0d0d0}
+.navbar.navbar-light.bg-light{padding:0px !important}
+
+
+.menus-signup{margin-top:10px;margin-left:2rem}
+
+.float-left.menus-signup{line-height:40px}
+
+
+@media ( max-width :576px) {
+
+.mawek{
+
+//width: 200%;
+
+}
+
+.mainLayoutTopMenu {display:none}
+.navbar-brand{    display: flex;
+    flex-direction: row;}
+
+ .brand-name strong {
+    display: block;
+}
+
+
+.rightctn .tab-content div > ul {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    flex-wrap: nowrap;
+    width: 100%;
+    height:auto;
+    min-height:500px;
+    padding: 0px 15px;
+}
+
+.drilldown{    transform: translateX(-100vw);}
+.drilldown2{    transform: translateX(-204vw);}
+.navbar-collapse.collapse.show .row{flex-wrap: nowrap;
+
+    width: 100%;
+
+}
+
+ .lefttabs{width:100vw; }
+ .rightctn{width:100vw;}
+ ..rightctn ul{flex-direction:row}
+
+input#toggle {
+     /* visibility: hidden; */
+    position: absolute;
+    top: 0px;
+    right: -20px;
+    z-index: 1;
+    color: red;
+}
+#toggle:checked ~ .lefttabs{
+  transform: translateX(100%);
+}
+#toggle:checked ~ .rightctn{
+  transform: translateX(200%);
+}
+
+.subtabctntitle{display:block}
+ .lefttabt{width:25%;  }
+ .rightctnt{width:75%;}
+ 
+ 
+ .rightctn .tab-content div ul > li{flex-grow:0;}
+ .submenuparent{display:none}
+ 
+ 
+ .float-left.menus-signup{height:40px;line-height:1em}
+ 
+ 
+}
+
+
+
+.navbar.navbar-light.bg-light{padding-bottom:0px;}
+
+
+
+
+
+
+
+
+
+
+@media ( min-width :768px) {
+ .lefttabt{width:25%}
+  .rightctnt{width:75%;}
+ .lefttabs{width:25%}
+  .rightctn{width:75%}
+}
+
+@media ( min-width :992px) {
+ .lefttabt{width:25%}
+  .rightctnt{width:75%;}
+ .lefttabs{width:25%}
+  .rightctn{width:75%}
+}
+
+@media ( min-width :1200px) {
+ .lefttabt{width:15%}
+  .rightctnt{width:85%;}
+ .lefttabs{width:25%}
+  .rightctn{width:75%}
+}
+
+
+
+
+
+
+
+
+
+</style><div class='portlets main_menu_horizontal '>
+<div class='mainLayoutMenuBar_1 '><nav class="navbar navbar-light bg-light">
+    <div class="lefttabt" >
+          <a class="navbar-brand" href="https://elasis.sarawak.gov.my/" style="font-family: 'Roboto light';">
+		<img style="" height="50" width="50" src="https://elasis.sarawak.gov.my/modules/web/portlets/main_menu_horizontal/styles/mcklasis/images/logo_elasis.png" class="top_banner" alt="Welcome to Official Website eLASIS" title="Welcome to Official Website eLASIS">
+	 
+	 </a>
+	 
+	 
+	
+	 
+	 
+	 
+	 
+	 
+	 
+    </div>
+     <div class="rightctnt" style='text-align:right' >
+     
+     
+     
+<div class='float-left'>
+<div class='submenuparent'>
+<div class='menuParentTitle'>Products</div><ul><li class='selectedmenu'><a href='https://elasis.sarawak.gov.my/page-0-8-13-eMap.html' onclick="setHotTopic('https://elasis.sarawak.gov.my/','aHR0cHM6Ly9lbGFzaXMuc2FyYXdhay5nb3YubXkvcGFnZS1taWQtc2lkLTEzLWVNYXAuaHRtbA--','ZU1hcA--','','','main_menu_horizontal','en');" target='_self' alt='Link to eMap' title='Link to eMap'>eMap</a></li>
+<li class=''><a href='https://elasis.sarawak.gov.my/page-0-9-19-Land-Strata-Title.html' onclick="setHotTopic('https://elasis.sarawak.gov.my/','aHR0cHM6Ly9lbGFzaXMuc2FyYXdhay5nb3YubXkvcGFnZS1taWQtc2lkLTE5LUxhbmQtU3RyYXRhLVRpdGxlLmh0bWw-','ZVNlYXJjaA--','','','main_menu_horizontal','en');" target='_self' alt='Link to eSearch' title='Link to eSearch'>eSearch</a></li>
+</ul></div>
+</div>
+  
+     <a class="navbar-brand" href="https://elasis.sarawak.gov.my/" style="font-family: 'Roboto light';display:contents;color:rgba(0,0,0,.5)"><i class='fa fa-home'></i></a>
+      <button class="navbar-toggler x collapsed" type="button" data-toggle="collapse" data-target="#navbarsmain" aria-controls="navbarsmain" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+</div>
+      <div class="collapse navbar-collapse" id="navbarsmain">
+   
+
+	 
+
+
+
+
+<div class=" mawek" style='border-top: 1px solid #d0d0d078;display:flex;'>
+
+    <div class="lefttabs">
+    <div style='height:70px;width:100%;text-align:left;border-bottom: 1px solid #d0d0d078;'>  
+      <a class="navbar-brand" href="https://elasis.sarawak.gov.my/" style="font-family: 'Roboto light';">
+		<img style="" height="50" width="50" src="https://elasis.sarawak.gov.my/upload/mobile_banner/mbanner.png" class="top_banner" alt="Welcome to Official Website eLASIS" title="Welcome to Official Website eLASIS">
+	 </a>  
+   </div>    
+      <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+       <ul  class='nav navbar-nav' id='main_menu_1' ><li class='down firstlvl adasub'><a class="nav-link active" id="v-pills-3-tab" data-toggle="pill" href="#v-pills-3" role="tab" aria-controls="v-pills-3" aria-selected="true">Products</a></li><li class='down firstlvl adasub'><a class="nav-link " id="v-pills-4-tab" data-toggle="pill" href="#v-pills-4" role="tab" aria-controls="v-pills-4" aria-selected="true">Services</a></li><li class='down firstlvl'><a href='https://elasis.sarawak.gov.my/contact.html' onclick="setHotTopic('https://elasis.sarawak.gov.my/','aHR0cHM6Ly9lbGFzaXMuc2FyYXdhay5nb3YubXkvY29udGFjdC5odG1s','Q29udGFjdCBVcw--','','','main_menu_horizontal','en');" target='_self' alt='Link to Contact Us' title='Link to Contact Us'>Contact Us</a></li><li class='down firstlvl'><a href='https://elasis.sarawak.gov.my/guide.html' onclick="setHotTopic('https://elasis.sarawak.gov.my/','aHR0cHM6Ly9lbGFzaXMuc2FyYXdhay5nb3YubXkvZ3VpZGUuaHRtbA--','VXNlciBHdWlkZQ--','','','main_menu_horizontal','en');" target='_self' alt='Link to User Guide' title='Link to User Guide'>User Guide</a></li><li class='down firstlvl'><a href='https://elasis.sarawak.gov.my/eLasis/welcome' onclick="setHotTopic('https://elasis.sarawak.gov.my/','aHR0cHM6Ly9lbGFzaXMuc2FyYXdhay5nb3YubXkvZUxhc2lzL3dlbGNvbWU-','TG9naW4gZUxBU0lT','','','main_menu_horizontal','en');" target='_self' alt='Link to Login eLASIS' title='Link to Login eLASIS'>Login eLASIS</a></li></ul>      </div>
+    </div>
+    <div class="rightctn" style=''><div style='height:70px;border-bottom: 1px solid #d0d0d078;'>
+       
+    <div class='float-left menus-signup' style='display:flex;text-align:left;'>   
+     <a href="https://elasis.sarawak.gov.my/eLasis/termsConditions" style='min-width:110px'><button class="lasisbtn">SIGN UP</button></a><span style=''>to access our products and services</span>
+     </div> 
+    <button class="float-right navbar-toggler x collapsed" style='    margin-top: 1.7rem;
+    margin-right: 1rem;'type="button" data-toggle="collapse" data-target="#navbarsmain" aria-controls="navbarsmain" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button></div>
+   
+      <div class="tab-content" id="v-pills-tabContent">
+      <div class="tab-pane fade show active" id="v-pills-3" role="tabpanel" aria-labelledby="v-pills-3-tab"><div class="subtabctntitle adaparent">Products</span></div><ul><li class='right sndlvl'><div class='sndlvltitle'><a href='https://elasis.sarawak.gov.my/page-0-8-13-eMap.html' onclick="setHotTopic('https://elasis.sarawak.gov.my/','aHR0cHM6Ly9lbGFzaXMuc2FyYXdhay5nb3YubXkvcGFnZS1taWQtc2lkLTEzLWVNYXAuaHRtbA--','ZU1hcA--','','','main_menu_horizontal','en');" target='_self' alt='Link to eMap' title='Link to eMap'>eMap<span class="sndmenudesc"> - Mapping Products</a></div><ul><li class='trdlvl'><a href='https://elasis.sarawak.gov.my/page-0-28-24-Cadastral-Map-Sheet.html' onclick="setHotTopic('https://elasis.sarawak.gov.my/','aHR0cHM6Ly9lbGFzaXMuc2FyYXdhay5nb3YubXkvcGFnZS1taWQtc2lkLTI0LUNhZGFzdHJhbC1NYXAtU2hlZXQuaHRtbA--','Q2FkYXN0cmFsIE1hcA--','','','main_menu_horizontal','en');" target='_self' alt='Link to Cadastral Map' title='Link to Cadastral Map'>Cadastral Map</a></li><li class='trdlvl'><a href='https://elasis.sarawak.gov.my/page-0-29-15-Survey-Plan.html' onclick="setHotTopic('https://elasis.sarawak.gov.my/','aHR0cHM6Ly9lbGFzaXMuc2FyYXdhay5nb3YubXkvcGFnZS1taWQtc2lkLTE1LVN1cnZleS1QbGFuLmh0bWw-','U3VydmV5IFBsYW4-','','','main_menu_horizontal','en');" target='_self' alt='Link to Survey Plan' title='Link to Survey Plan'>Survey Plan</a></li><li class='trdlvl'><a href='https://elasis.sarawak.gov.my/page-0-30-16-Orthophoto.html' onclick="setHotTopic('https://elasis.sarawak.gov.my/','aHR0cHM6Ly9lbGFzaXMuc2FyYXdhay5nb3YubXkvcGFnZS1taWQtc2lkLTE2LU9ydGhvcGhvdG8uaHRtbA--','T3J0aG9waG90bw--','','','main_menu_horizontal','en');" target='_self' alt='Link to Orthophoto' title='Link to Orthophoto'>Orthophoto</a></li><li class='trdlvl'><a href='https://elasis.sarawak.gov.my/page-0-31-17-Aerial-Photograph.html' onclick="setHotTopic('https://elasis.sarawak.gov.my/','aHR0cHM6Ly9lbGFzaXMuc2FyYXdhay5nb3YubXkvcGFnZS1taWQtc2lkLTE3LUFlcmlhbC1QaG90b2dyYXBoLmh0bWw-','QWVyaWFsIFBob3RvZ3JhcGg-','','','main_menu_horizontal','en');" target='_self' alt='Link to Aerial Photograph' title='Link to Aerial Photograph'>Aerial Photograph</a></li><li class='trdlvl'><a href='https://elasis.sarawak.gov.my/page-0-32-18-Cartographic-Map.html' onclick="setHotTopic('https://elasis.sarawak.gov.my/','aHR0cHM6Ly9lbGFzaXMuc2FyYXdhay5nb3YubXkvcGFnZS1taWQtc2lkLTE4LUNhcnRvZ3JhcGhpYy1NYXAuaHRtbA--','Q2FydG9ncmFwaGljIE1hcA--','','','main_menu_horizontal','en');" target='_self' alt='Link to Cartographic Map' title='Link to Cartographic Map'>Cartographic Map</a></li></ul></li><li class='right sndlvl'><div class='sndlvltitle'><a href='https://elasis.sarawak.gov.my/page-0-9-19-Land-Strata-Title.html' onclick="setHotTopic('https://elasis.sarawak.gov.my/','aHR0cHM6Ly9lbGFzaXMuc2FyYXdhay5nb3YubXkvcGFnZS1taWQtc2lkLTE5LUxhbmQtU3RyYXRhLVRpdGxlLmh0bWw-','ZVNlYXJjaA--','','','main_menu_horizontal','en');" target='_self' alt='Link to eSearch' title='Link to eSearch'>eSearch<span class="sndmenudesc"> - Land Registry Search</a></div><ul><li class='trdlvl'><a href='https://elasis.sarawak.gov.my/page-0-33-20-Land-Title-Information.html' onclick="setHotTopic('https://elasis.sarawak.gov.my/','aHR0cHM6Ly9lbGFzaXMuc2FyYXdhay5nb3YubXkvcGFnZS1taWQtc2lkLTIwLUxhbmQtVGl0bGUtSW5mb3JtYXRpb24uaHRtbA--','TGFuZCBUaXRsZQ--','','','main_menu_horizontal','en');" target='_self' alt='Link to Land Title' title='Link to Land Title'>Land Title</a></li><li class='trdlvl'><a href='https://elasis.sarawak.gov.my/page-0-34-21-Strata-Title-Information.html' onclick="setHotTopic('https://elasis.sarawak.gov.my/','aHR0cHM6Ly9lbGFzaXMuc2FyYXdhay5nb3YubXkvcGFnZS1taWQtc2lkLTIxLVN0cmF0YS1UaXRsZS1JbmZvcm1hdGlvbi5odG1s','U3RyYXRhIFRpdGxl','','','main_menu_horizontal','en');" target='_self' alt='Link to Strata Title' title='Link to Strata Title'>Strata Title</a></li></ul></li></ul></div><div class="tab-pane fade " id="v-pills-4" role="tabpanel" aria-labelledby="v-pills-4-tab"><div class="subtabctntitle adaparent">Services</span></div><ul><li class='right sndlvl'><div class='sndlvltitle'><a href='https://elasis.sarawak.gov.my/eLasis/searchLandRentPremiumEnquiry' onclick="setHotTopic('https://elasis.sarawak.gov.my/','aHR0cHM6Ly9lbGFzaXMuc2FyYXdhay5nb3YubXkvZUxhc2lzL3NlYXJjaExhbmRSZW50UHJlbWl1bUVucXVpcnk-','ZVJlbnQ-','','','main_menu_horizontal','en');" target='_self' alt='Link to eRent' title='Link to eRent'>eRent<span class="sndmenudesc"> - Land Rent & Premium Enquiry</a></div></li><li class='right sndlvl'><div class='sndlvltitle'><a href='https://elasis.sarawak.gov.my/page-0-10-9-ePD.html' onclick="setHotTopic('https://elasis.sarawak.gov.my/','aHR0cHM6Ly9lbGFzaXMuc2FyYXdhay5nb3YubXkvcGFnZS1taWQtc2lkLTktZVBELmh0bWw-','ZVBE','','','main_menu_horizontal','en');" target='_self' alt='Link to ePD' title='Link to ePD'>ePD<span class="sndmenudesc"> - Permission to Deal</a></div></li><li class='right sndlvl'><div class='sndlvltitle'><a href='https://elasis.sarawak.gov.my/page-0-11-10-eRLL.html' onclick="setHotTopic('https://elasis.sarawak.gov.my/','aHR0cHM6Ly9lbGFzaXMuc2FyYXdhay5nb3YubXkvcGFnZS1taWQtc2lkLTEwLWVSTEwuaHRtbA--','ZVJMTA--','','','main_menu_horizontal','en');" target='_self' alt='Link to eRLL' title='Link to eRLL'>eRLL<span class="sndmenudesc"> - Renewal of Land Lease</a></div></li><li class='right sndlvl'><div class='sndlvltitle'><a href='https://elasis.sarawak.gov.my/page-0-12-11-Lodgement-of-Instrument.html' onclick="setHotTopic('https://elasis.sarawak.gov.my/','aHR0cHM6Ly9lbGFzaXMuc2FyYXdhay5nb3YubXkvcGFnZS1taWQtc2lkLTExLUxvZGdlbWVudC1vZi1JbnN0cnVtZW50Lmh0bWw-','ZUxvZGdlbWVudA--','','','main_menu_horizontal','en');" target='_self' alt='Link to eLodgement' title='Link to eLodgement'>eLodgement<span class="sndmenudesc"> - Lodgement of Land Instruments</a></div></li><li class='right sndlvl'><div class='sndlvltitle'><a href='https://elasis.sarawak.gov.my/page-0-13-12-eSubmission.html' onclick="setHotTopic('https://elasis.sarawak.gov.my/','aHR0cHM6Ly9lbGFzaXMuc2FyYXdhay5nb3YubXkvcGFnZS1taWQtc2lkLTEyLWVTdWJtaXNzaW9uLmh0bWw-','ZVN1Ym1pc3Npb24-','','','main_menu_horizontal','en');" target='_self' alt='Link to eSubmission' title='Link to eSubmission'>eSubmission<span class="sndmenudesc"> - Submission of Survey Jobs</a></div></li><li class='right sndlvl'><div class='sndlvltitle'><a href='https://elasis.sarawak.gov.my/page-0-37-25-eLASC.html' onclick="setHotTopic('https://elasis.sarawak.gov.my/','aHR0cHM6Ly9lbGFzaXMuc2FyYXdhay5nb3YubXkvcGFnZS1taWQtc2lkLTI1LWVMQVNDLmh0bWw-','ZUxBU0M-','','','main_menu_horizontal','en');" target='_self' alt='Link to eLASC' title='Link to eLASC'>eLASC<span class="sndmenudesc"> - Land Application Status Check</a></div></li><li class='right sndlvl'><div class='sndlvltitle'><a href='https://elasis.sarawak.gov.my/page-0-40-31-eSTRATA.html' onclick="setHotTopic('https://elasis.sarawak.gov.my/','aHR0cHM6Ly9lbGFzaXMuc2FyYXdhay5nb3YubXkvcGFnZS1taWQtc2lkLTMxLWVTVFJBVEEuaHRtbA--','ZVNUUkFUQQ--','','','main_menu_horizontal','en');" target='_self' alt='Link to eSTRATA' title='Link to eSTRATA'>eSTRATA<span class="sndmenudesc"> - Submission of Strata Title Application</a></div></li><li class='right sndlvl'><div class='sndlvltitle'><a href='https://elasis.sarawak.gov.my/page-0-39-30-eXtraction.html' onclick="setHotTopic('https://elasis.sarawak.gov.my/','aHR0cHM6Ly9lbGFzaXMuc2FyYXdhay5nb3YubXkvcGFnZS1taWQtc2lkLTMwLWVYdHJhY3Rpb24uaHRtbA--','ZVh0cmFjdGlvbg--','','','main_menu_horizontal','en');" target='_self' alt='Link to eXtraction' title='Link to eXtraction'>eXtraction<span class="sndmenudesc"> - Extraction of Survey Data</a></div></li><li class='right sndlvl'><div class='sndlvltitle'><a href='https://elasis.sarawak.gov.my/page-0-0-32-TMS.html' onclick="setHotTopic('https://elasis.sarawak.gov.my/','aHR0cHM6Ly9lbGFzaXMuc2FyYXdhay5nb3YubXkvcGFnZS0wLTAtMzItVE1TLmh0bWw-','VE1T','','','main_menu_horizontal','en');" target='_self' alt='Link to TMS' title='Link to TMS'>TMS<span class="sndmenudesc"> - TOL Management System (TMS)</a></div></li><li class='right sndlvl'><div class='sndlvltitle'><a href='https://elasis.sarawak.gov.my/page-0-42-33-Smart-Enforcement.html' onclick="setHotTopic('https://elasis.sarawak.gov.my/','aHR0cHM6Ly9lbGFzaXMuc2FyYXdhay5nb3YubXkvcGFnZS1taWQtc2lkLTMzLVNtYXJ0LUVuZm9yY2VtZW50Lmh0bWw-','U01BUlQgRU5GT1JDRU1FTlQ-','','','main_menu_horizontal','en');" target='_self' alt='Link to SMART ENFORCEMENT' title='Link to SMART ENFORCEMENT'>SMART ENFORCEMENT<span class="sndmenudesc"> - </a></div></li><li class='right sndlvl'><div class='sndlvltitle'><a href='https://elasis.sarawak.gov.my/page-0-43-34-UTiMAPS.html' onclick="setHotTopic('https://elasis.sarawak.gov.my/','aHR0cHM6Ly9lbGFzaXMuc2FyYXdhay5nb3YubXkvcGFnZS1taWQtc2lkLTM0LVVUaU1BUFMuaHRtbA--','VVRpTUFQUw--','','','main_menu_horizontal','en');" target='_self' alt='Link to UTiMAPS' title='Link to UTiMAPS'>UTiMAPS<span class="sndmenudesc"> - Utility Mapping Sarawak</a></div></li></ul></div>  
+      </div>
+    </div>
+    
+  </div>
+  
+  
+  
+   <div class='container'>
+<div class='submenuparent'>
+<div class='menuParentTitle'>Products</div><ul><li class='selectedmenu'><a href='https://elasis.sarawak.gov.my/page-0-8-13-eMap.html' onclick="setHotTopic('https://elasis.sarawak.gov.my/','aHR0cHM6Ly9lbGFzaXMuc2FyYXdhay5nb3YubXkvcGFnZS1taWQtc2lkLTEzLWVNYXAuaHRtbA--','ZU1hcA--','','','main_menu_horizontal','en');" target='_self' alt='Link to eMap' title='Link to eMap'>eMap</a></li>
+<li class=''><a href='https://elasis.sarawak.gov.my/page-0-9-19-Land-Strata-Title.html' onclick="setHotTopic('https://elasis.sarawak.gov.my/','aHR0cHM6Ly9lbGFzaXMuc2FyYXdhay5nb3YubXkvcGFnZS1taWQtc2lkLTE5LUxhbmQtU3RyYXRhLVRpdGxlLmh0bWw-','ZVNlYXJjaA--','','','main_menu_horizontal','en');" target='_self' alt='Link to eSearch' title='Link to eSearch'>eSearch</a></li>
+</ul></div>
+</div>
+  
+  
+  
+  
+</div>
+</nav>
+</div>
+
+<script language = "javascript">
+
+$(document).ready(function() {
+    $(document).click(function (event) {
+        var clickover = $(event.target);
+        console.log(clickover);
+        var _opened = $("#navbarsmain").hasClass("navbar-collapse collapse show");
+        console.log(_opened);
+        if (_opened === true && !clickover.hasClass("navbar-toggler")) {
+           // $("span.navbar-toggler-icon").click();
+        }
+    });
+});
+
+
+$('.adasub').click(function() {
+	 $('.mawek').addClass("drilldown");
+//  alert( "Handler for .click() called." );
+});
+$('.adaparent').click(function() {
+	 $('.mawek').removeClass("drilldown");
+// alert( "Handler for .click() called." );
+});
+
+var keys = {37: 1, 38: 1, 39: 1, 40: 1};
+
+function preventDefault(e) {
+  e = e || window.event;
+  if (e.preventDefault)
+      e.preventDefault();
+  e.returnValue = false;  
+}
+
+function preventDefaultForScrollKeys(e) {
+    if (keys[e.keyCode]) {
+        preventDefault(e);
+        return false;
+    }
+}
+
+function disableScroll() {
+  if (window.addEventListener) // older FF
+      window.addEventListener('DOMMouseScroll', preventDefault, false);
+  document.addEventListener('wheel', preventDefault, {passive: false}); // Disable scrolling in Chrome
+  window.onwheel = preventDefault; // modern standard
+  window.onmousewheel = document.onmousewheel = preventDefault; // older browsers, IE
+  window.ontouchmove  = preventDefault; // mobile
+  document.onkeydown  = preventDefaultForScrollKeys;
+}
+
+function enableScroll() {
+    if (window.removeEventListener)
+        window.removeEventListener('DOMMouseScroll', preventDefault, false);
+    document.removeEventListener('wheel', preventDefault, {passive: false}); // Enable scrolling in Chrome
+    window.onmousewheel = document.onmousewheel = null; 
+    window.onwheel = null; 
+    window.ontouchmove = null;  
+    document.onkeydown = null;  
+}
+
+//if (window.attachEvent) window.attachEvent("onload", sfHover);
+
+
+
+
+</script></div>
+
+<div style="clear: both;"></div></div></div></div></div>                </div>
+                           
+  </div>              
+<div class='container-fluid ct' style='background-color:#ffffff;'>
+<div class='container'><div class='row'>
+            			
+
+</div></div></div>
+<div class='container-fluid' style='background-color:#ffffff;'><div class='row'><div class='container'><div class='row'>
+<SCRIPT LANGUAGE="javascript" TYPE="text/javascript">
+var vFormFieldShowHideStatus='';
+function showFormNormalField(){
+    var ie = document.all ? 1 : 0;
+    vFormFieldShowHideStatus='SHOW_ALL';
+    showItSimple('divFormHideField1');
+    hideItSimple('divFormShowField1');
+    if (ie){
+      changecss(".inputForm .fieldLabel","display","block");
+      changecss(".inputForm .fieldInput","display","block");
+    }else{
+      changecss(".inputForm .fieldLabel","display","");
+      changecss(".inputForm .fieldInput","display","");
+    }
+}
+function hideFormNormalField(){
+    vFormFieldShowHideStatus='SHOW_COMPULSORY';
+    showItSimple('divFormShowField1');
+    hideItSimple('divFormHideField1');
+    changecss(".inputForm .fieldLabel","display","none");
+    changecss(".inputForm .fieldInput","display","none");
+}
+function getFormFieldDisplayStatus(){
+    vFFDS='';
+            if (vFormFieldShowHideStatus){
+          vFFDS='&ffds='+vFormFieldShowHideStatus;
+        }
+            return vFFDS;
+}
+changecss(".inputForm .fieldLabel","display","");changecss(".inputForm .fieldInput","display","");vFormFieldShowHideStatus="SHOW_ALL";</SCRIPT>
+  <div class="container">
+<div class=""><div id='webpage_default_1' style='width: 100%'>
+<style type="text/css">
+.mainLayoutBodyLeftItemTitle{padding:0px;margin:0px}
+
+.collapse-land-title{
+	background-image: url("https://elasis.sarawak.gov.my/modules/web/pages/webpage/styles/default/images/icon_2arrow_up.png");
+	display: inline-block;
+	height: 14px;
+	width: 25px;
+	vertical-align: middle;
+	margin-bottom: 5px;
+}
+.collapse-land-title.collapse{
+	background-image: url("https://elasis.sarawak.gov.my/modules/web/pages/webpage/styles/default/images/icon_1arrow_down.png") !important;
+	display: inline-block;
+	height: 14px;
+	width: 25px;
+	vertical-align: middle;
+}
+.product-listing::before,.product-listing::after{
+	content: '';
+	position: absolute;
+	top: 48px;
+	height: 2px;
+	width: 40%;
+	border-top: 1px solid #d0d0d0;
+}
+.product-listing::before{
+	left:0;
+}
+.product-listing::after{
+	right:0;
+}
+
+
+.btn-link,.btn-link:hover {
+   
+    color: #000;
+   
+}
+
+
+.btn-link.collapsed::after {
+    content: url(https://elasis.sarawak.gov.my/modules/web/pages/webpage/styles/default/images/icon_1arrow_down.png) !important;
+    display: inline-block;
+    height: 14px;
+    width: 25px;
+    vertical-align: middle;
+    position: relative;
+    top: -5px;
+    padding-left: 5px;
+}
+.btn-link::after {
+    content: url(https://elasis.sarawak.gov.my/modules/web/pages/webpage/styles/default/images/icon_2arrow_up.png) !important;
+    display: inline-block;
+    height: 14px;
+    width: 25px;
+    vertical-align: middle;
+    position: relative;
+    top: -5px;
+    padding-left: 5px;
+}
+
+.product-listing{background-color:#fff}
+
+@media ( max-width :576px) {
+.product-listing::before,.product-listing::after{
+
+	width: 15%;
+
+}
+
+}
+
+@media ( max-width :768px) {
+.rbtnctn {
+    flex-direction: column;
+
+}
+img.imgpageheader{width:100%}
+
+
+
+.product-listing::before,.product-listing::after{
+
+	width: 20%;
+
+}
+.page_Content.container > .row{padding:0px 1rem}
+
+.breadelasis span{font-size: 1.5em !important;}
+}
+
+@media ( min-width :768px) {
+
+}
+
+@media ( min-width :992px) {
+
+}
+
+@media ( min-width :1200px) {
+
+}
+
+
+
+
+</style>
+<script language='javascript'>
+function runOnLoad(){
+	  
+}
+
+function bredc(pURL){
+	pURL='breadcrumb.php';
+	pURL+='?t=V2VicGFnZQ==&encode=yes';
+
+    makeGETRequest(pURL,'breadcrumb');
+
+  }
+
+
+  </script>
+<div class='row' style='padding-bottom:1rem'>
+                <div class="mainLayoutBodyLeftItemTitle" style='display:none'>
+              <title>eMap</title><span style="display:none">eMap</span>            </div>
+          
+          
+                    <div class="page_Content container">
+              <div class="breadelasis" style="text-align: center; margin: 30px 0px;"><span style="font-size:40px;font-family:arial;color:#222;">eMap Products</span> <img src="/modules/web/pages/webpage/styles/default/images/icon_arrow_title_TOP.png" border="0" style="margin:0px 10px 10px 10px;display:inline-block!important;" /> <span style="font-family:arial;font-weight:bold;font-size:40px;">Mapping Products</span></div>
+<div class="row res_no_pad_bottom" style="padding-bottom:1rem">
+<div class="col-12 col-md-6 res_no_pad_left res_no_pad_right" style="padding-left:0;padding-right:20px;"><img src="/modules/web/image_show.php?id=20" border="0" style="width: 100%; margin-left: 0; margin-right: 5px;" /></div>
+<div class="col-12 col-md-6" style="margin: auto 0;padding:15px 0 15px 15px;">
+<p style="padding-left:5px;font-weight:bold;font-size:36px;line-height:50px;font-family:arial;">Search our online catalogue for maps, plan, orthophotos &amp; aerial photographs</p>
+<p class="res_no_pad_bottom" style="padding-left:5px;font-size:18px;line-height:36px;font-family:arial;">If you find what you need, select &amp; drop them into a shopping cart, pay up and eMap will deliver the products you purchased over the web to you. Some products are restricted and may require you to apply for permits separately.</p>
+</div>
+</div>
+<div class="row ourserviceproducts">
+<div class="col-12 col-md-4 card" style="border:none; margin-bottom:40px;">
+<div class="imgheader"><img src="/modules/web/image_show.php?id=21" border="0" /></div>
+<div class="cardinfo">
+<div class="cardinfoTitle red" style="padding-bottom:0;">CADASTRAL MAP</div>
+<div class="cardinfoCtn" style="line-height: 36px;">These Map sheets show the Cadastral Boundary of each survey Lot with the Lot numbers clearly visible...</div>
+<a class="seemore" href="/page-0-28-24-Cadastral-Map-Sheet.html">See more&nbsp;<img class="homerightarrow" src="/modules/web/image_show.php?id=2" border="0" /></a></div>
+</div>
+<div class="col-12 col-md-4 card" style="border:none; margin-bottom:40px;">
+<div class="imgheader"><img src="/modules/web/image_show.php?id=22" border="0" /></div>
+<div class="cardinfo">
+<div class="cardinfoTitle red" style="padding-bottom:0;">SURVEY PLAN</div>
+<div class="cardinfoCtn" style="line-height: 36px;">This Plan normally involved engineering plan for development.&nbsp;This Plan need to be deposited by the Superintendent of Land and Survey...</div>
+<a class="seemore" href="/page-0-29-15-Survey-Plan.html">See more&nbsp;<img class="homerightarrow" src="/modules/web/image_show.php?id=2" border="0" /></a></div>
+</div>
+<div class="col-12 col-md-4 card" style="border:none; margin-bottom:40px;">
+<div class="imgheader"><img src="/modules/web/image_show.php?id=23" border="0" /></div>
+<div class="cardinfo">
+<div class="cardinfoTitle red" style="padding-bottom:0;">ORTHOPHOTO</div>
+<div class="cardinfoCtn" style="line-height: 36px;">An aerial photograph which is geometrically corrected ("orthorectified") such that the scale is uniform...</div>
+<a class="seemore" href="/page-0-30-16-Orthophoto.html">See more&nbsp;<img class="homerightarrow" src="/modules/web/image_show.php?id=2" border="0" /></a></div>
+</div>
+<div class="col-12 col-md-4 card" style="border:none; margin-bottom:40px;">
+<div class="imgheader"><img src="/modules/web/image_show.php?id=24" border="0" /></div>
+<div class="cardinfo">
+<div class="cardinfoTitle red" style="padding-bottom:0;">AERIAL PHOTOGRAPH</div>
+<div class="cardinfoCtn" style="line-height: 36px;">Aerial photographs provide useful spatial information and are acquired using a large format camera..</div>
+<a class="seemore" href="/page-0-31-17-Aerial-Photograph.html">See more&nbsp;<img class="homerightarrow" src="/modules/web/image_show.php?id=2" border="0" /></a></div>
+</div>
+<div class="col-12 col-md-4 card" style="border:none; margin-bottom:40px;">
+<div class="imgheader"><img src="/modules/web/image_show.php?id=25" border="0" /></div>
+<div class="cardinfo">
+<div class="cardinfoTitle red" style="padding-bottom:0;">CARTOGRAPHIC MAP</div>
+<div class="cardinfoCtn" style="line-height: 36px;">Topographic, thematic maps and town maps of Sarawak. These maps are classified into Restricted and Unrestricted maps...</div>
+<a class="seemore" href="/page-0-32-18-Cartographic-Map.html">See more&nbsp;<img class="homerightarrow" src="/modules/web/image_show.php?id=2" border="0" /></a></div>
+</div>
+<div class="col-12 col-md-4 card" style="border:none; margin-bottom:40px;">
+<div class="imgheader" style="margin-top:-50px"><img src="/modules/web/image_show.php?id=26" border="0" /></div>
+<div class="cardinfo" style="position:relative">
+<div class="res-margin-left" style="margin-top:-235px;margin-left:50px;">
+<div class="cardinfoTitle white" style="&#xA;    font-size: 48px;&#xA;    font-family: 'Roboto light';&#xA;">Sign up now</div>
+<div class="cardinfoCtn white" style="&#xA;    font-size: 24px;&#xA;    line-height: 36px;&#xA;    padding-bottom: 3px;&#xA;">to access all products &amp; services...</div>
+<button class="lasisbtn"><a href="/eLasis/termsConditions" target="_self">FREE SIGN UP</a></button></div>
+</div>
+</div>
+</div>            </div>
+              
+              </div>
+
+	</div></div></div></div>			                  </div></div></div></div>
+                 
+                 <div class='container-fluid' style='background-color:#ffffff'>
+
+
+<div class='container'><div class=''></div></div>                </div>		
+                <footer class="mainLayoutFooter" style='padding-bottom:24px;background-color:#525252 !important;color:#ffffff !important;'><div class='container'><div class='row'>
+                 
+                  <div class="col-md-8"><div class="row"><div class="pc_footer_menu" style="margin:0px;padding:0px;width:100%"><div class="div_portlet_content_no_margin" ><div id='footer_menu_expose_2' style='width:100%'>
+<style type="text/css">
+#footer_menu_expose_2{
+text-align:left;
+
+}
+
+.mainLayoutFooter #footer_menu_expose_2{
+
+margin-bottom:10px;
+}
+
+#footer_menu_expose_2 .footer_menu,#footer_menu_expose_2 .footer_menu a{
+
+background-color:#525252;
+color:#ffffff;
+font-size:14px;
+font-family:Arial;
+text-decoration: none;
+}
+
+#footer_menu_expose_2 .footer_menu,#footer_menu_expose_2 .footer_menu .nav-main-sub{
+
+
+}
+
+
+
+#footer_menu_expose_2 .footer_menu .nav-main-sub:hover a{
+background-color:#525252;
+color:#ffffff;
+}
+#footer_menu_expose_2 .footer_menu .nav-main-sub:hover{
+background-color:#525252;
+color:#ffffff;
+}
+
+.footer_menu .div_portlet_content{
+
+padding:0px !important;
+
+}
+
+
+.nav-main-expose .nav-main-sub{
+ font-size:16px;
+padding:2rem;
+
+}
+
+
+.nav-main-sub-title  {
+     line-height: 2em;
+     font-size:21px;
+     font-weight:600;
+}
+
+.nav-main-sub-title a {
+    font-size: 21px !important;
+}
+
+ul.nav-sub-expose {
+    padding: 0px;
+    list-style: none;
+      font-size: 16px !important;
+    line-height: 2em;
+}
+
+ul.nav-sub-expose li a{
+ 
+      font-size: 16px !important;
+font-weight:500;
+}
+
+
+</style><div class='portlets footer_menu'>
+
+<div class='expose' style=''>
+<div class='nav-main-expose row'><div class=' col-12 col-sm-6 col-md-4 nav-main-sub'><div class='nav-main-sub-title'><a href='#' onclick="setHotTopic('https://elasis.sarawak.gov.my/','Iw--','UXVpY2tsaW5rcw--','','','footer_menu','en');" target='_self' alt='Link to Quicklinks' title='Link to Quicklinks'>Quicklinks</a></div><ul class="nav-sub-expose"><li><div style=''><a href='https://cm.sarawak.gov.my' onclick="setHotTopic('https://elasis.sarawak.gov.my/','aHR0cHM6Ly9jbS5zYXJhd2FrLmdvdi5teQ--','UHJlbWllciBvZiBTYXJhd2Fr','','','footer_menu','en');" target='_blank' alt='Link to Premier of Sarawak' title='Link to Premier of Sarawak'>Premier of Sarawak</a></div></li><li><div style=''><a href='https://sarawak.gov.my' onclick="setHotTopic('https://elasis.sarawak.gov.my/','aHR0cHM6Ly9zYXJhd2FrLmdvdi5teQ--','U2FyYXdhayBHb3Zlcm5tZW50','','','footer_menu','en');" target='_blank' alt='Link to Sarawak Government' title='Link to Sarawak Government'>Sarawak Government</a></div></li><li><div style=''><a href='https://data.sarawak.gov.my' onclick="setHotTopic('https://elasis.sarawak.gov.my/','aHR0cHM6Ly9kYXRhLnNhcmF3YWsuZ292Lm15','U2FyYXdhayBEYXRh','','','footer_menu','en');" target='_blank' alt='Link to Sarawak Data' title='Link to Sarawak Data'>Sarawak Data</a></div></li><li><div style=''><a href='https://www.malaysia.gov.my/portal/index' onclick="setHotTopic('https://elasis.sarawak.gov.my/','aHR0cHM6Ly93d3cubWFsYXlzaWEuZ292Lm15L3BvcnRhbC9pbmRleA--','TWFsYXlzaWEgR292ZXJubWVudA--','','','footer_menu','en');" target='_blank' alt='Link to Malaysia Government' title='Link to Malaysia Government'>Malaysia Government</a></div></li><li><div style=''><a href='http://www.data.gov.my' onclick="setHotTopic('https://elasis.sarawak.gov.my/','aHR0cDovL3d3dy5kYXRhLmdvdi5teQ--','TWFsYXlzaWEgT3BlbiBEYXRh','','','footer_menu','en');" target='_blank' alt='Link to Malaysia Open Data' title='Link to Malaysia Open Data'>Malaysia Open Data</a></div></li></ul></div><div class=' col-12 col-sm-6 col-md-4 nav-main-sub'><div class='nav-main-sub-title'><a href='#' onclick="setHotTopic('https://elasis.sarawak.gov.my/','Iw--','U3VwcG9ydA--','','','footer_menu','en');" target='_self' alt='Link to Support' title='Link to Support'>Support</a></div><ul class="nav-sub-expose"><li><div style=''><a href='https://elasis.sarawak.gov.my/faq.html' onclick="setHotTopic('https://elasis.sarawak.gov.my/','aHR0cHM6Ly9lbGFzaXMuc2FyYXdhay5nb3YubXkvZmFxLmh0bWw-','RkFR','','','footer_menu','en');" target='_self' alt='Link to FAQ' title='Link to FAQ'>FAQ</a></div></li><li><div style=''><a href='https://elasis.sarawak.gov.my/contact.html' onclick="setHotTopic('https://elasis.sarawak.gov.my/','aHR0cHM6Ly9lbGFzaXMuc2FyYXdhay5nb3YubXkvY29udGFjdC5odG1s','Q29udGFjdCBVcw--','','','footer_menu','en');" target='_self' alt='Link to Contact Us' title='Link to Contact Us'>Contact Us</a></div></li><li><div style=''><a href='https://elasis.sarawak.gov.my/eLasis/termsConditions' onclick="setHotTopic('https://elasis.sarawak.gov.my/','aHR0cHM6Ly9lbGFzaXMuc2FyYXdhay5nb3YubXkvZUxhc2lzL3Rlcm1zQ29uZGl0aW9ucw--','VGVybXMgJiBDb25kaXRpb25z','','','footer_menu','en');" target='_self' alt='Link to Terms & Conditions' title='Link to Terms & Conditions'>Terms & Conditions</a></div></li></ul></div><div class=' col-12 col-sm-6 col-md-4 nav-main-sub'><div class='nav-main-sub-title'><a href='#' onclick="setHotTopic('https://elasis.sarawak.gov.my/','Iw--','RG93bmxvYWQ-','','','footer_menu','en');" target='_self' alt='Link to Download' title='Link to Download'>Download</a></div><ul class="nav-sub-expose"><li><div style=''><a href='https://elasis.sarawak.gov.my/modules/web/pages.php?mod=download&menu_id=0&sub_id=26' onclick="setHotTopic('https://elasis.sarawak.gov.my/','aHR0cHM6Ly9lbGFzaXMuc2FyYXdhay5nb3YubXkvbW9kdWxlcy93ZWIvcGFnZXMucGhwP21vZD1kb3dubG9hZCZtZW51X2lkPTAmc3ViX2lkPTI2','VXNlciBHdWlkZSBNYW51YWw-','0','26','footer_menu','en');" target='_self' alt='Link to User Guide Manual' title='Link to User Guide Manual'>User Guide Manual</a></div></li></ul></div></div>
+</div>
+
+</div><SCRIPT LANGUAGE="javascript" TYPE="text/javascript">
+</SCRIPT></div>
+
+<div style="clear: both;"></div></div></div></div></div><div class="col-md-4" style="background-color:#444444 !important;color:#000000 !important;"><div class="row"><div class="pc_event" style="margin:0px;padding:0px;width:100%"><div class="div_portlet_content_no_margin" ><div id='event_lasis_10' style='width:100%'>
+<style type="text/css">
+#event_lasis_10{
+text-align:left;
+background-color:#444;
+color:#a0a0a0;
+}
+
+.calendarTbl{
+  border:solid 1px #656268;
+}
+.calendarWeek{
+  color:#fff;
+  background-color:#616A72;
+  font-family:Arial,Verdana;
+  font-size:12px;
+}
+.calendarWeekDay{
+  color:#000;
+  background-color:#C8C8C8;
+  font-family:Arial,Verdana;
+  font-size:12px;
+}
+.calendarSunday{
+  color:#fff;
+  background-color:#727272;
+  font-family:Arial,Verdana;
+  font-size:12px;
+}
+
+.calendarToday{
+  color:#737373;
+  color:#000;
+  font-family:Arial,Verdana;
+  font-size:12px;
+  border:1px solid #44758b;
+  border:1px solid #656268;
+}
+
+.calendarEmpty{
+  background-color:#EBEBEB;
+}
+
+/*Calendar: Event Details*/
+.event_title{
+  font-size:16px;
+  font-weight:bold;
+  font-family:arial,verdana;
+}
+
+.event_label{
+  font-size:12px;
+  font-weight:bold;
+  font-family:arial,verdana;
+}
+
+.event_data{
+  font-size:12px;
+  font-weight:normal;
+  font-family:arial,verdana;
+}
+
+.event_icon{
+  width:120px;
+  vertical-align:top;
+}
+
+.event_no_icon{
+  border: 1px solid #000;
+  width:120px;
+  height:100px;
+  text-align:center;
+}
+
+/*Calendar: Event summary*/
+.calendarEvent_label{
+  color:#44758b;
+  color:#000;
+  font-family:Arial,Verdana;
+  font-size:12px;
+  font-weight:bold;
+}
+
+
+.evntlist{
+display:flex;
+padding:1rem 0px;
+margin:0 1rem;
+border-bottom:1px solid #fff2
+
+}
+#event_lasis_10 .readmores{    padding: 1rem;      text-align: right;}
+#event_lasis_10 .readmores a{ color:#f54d4d; }
+
+.calendarEvent_data_date{
+
+  color:#f54d4d;
+  font-family:Arial,Verdana;
+font-size:14px;
+text-transform: uppercase;
+display:flex;
+max-width:90px;
+}
+.calendarEvent_data_title a{
+
+  color:#9e9e9e;
+  font-family:Arial,Verdana;
+font-size:14px;
+text-transform: uppercase;
+}
+
+
+.pc_event .panel-footer{
+border:0px !important;
+background-color:#444 !important;
+color:#a0a0a0!important;
+
+}
+</style><div class='portlets event'>
+<div class='col-12 col-md-12' style='font-size:21px;padding-top:2rem;line-height:2em'>Latest Events</div>
+
+<div></div><div class='row' style='padding:0 1rem'><div class='col-md-12'><center>No event at the moment</center></div></div><div><div class='readmores'><a href='https://elasis.sarawak.gov.my/modules/web/pages.php?mod=event'>SEE ALL</a></div></div></div><SCRIPT LANGUAGE="javascript" TYPE="text/javascript">
+</SCRIPT></div>
+
+<div style="clear: both;"></div></div></div></div></div><div class="col-md-12 colF2" style="border-top:1px solid #fff3;padding-top:1rem"><div class="pc_best_viewed " ><div class="div_portlet_content_no_margin" ><div id='best_viewed_default_12' style='width:100%'>
+<style type="text/css">
+.best_viewed .mainLayoutFooter_copyright{
+text-align:left;
+
+}
+</style><div class='portlets best_viewed'><div class="mainLayoutFooter_copyright">Copyright 2019 Sarawak Government. Best viewed on latest versions of Chrome, Firefox, IE and Safari.</div></div>
+<SCRIPT LANGUAGE="javascript" TYPE="text/javascript">
+</SCRIPT></div>
+
+<div style="clear: both;"></div></div></div></div></div>
+</div></footer>
+
+
+</CENTER></body>
+</html>
+
+<SCRIPT LANGUAGE="javascript" TYPE="text/javascript">
+
+
+</SCRIPT></div>
+

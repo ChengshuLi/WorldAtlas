@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- jQuery 3.5.1 -->
+<script src="/module/web/web/js/jquery.min.js"></script>
+
+<!-- Bootstrap 3.3.7 -->
+<link rel="stylesheet" href="/module/web/web/theme/default/bootstrap.min.css">
+<script src="/module/web/web/js/bootstrap.min.js"></script>
+
+<!-- FontAwesome 4.2 -->
+<link rel="stylesheet" href="/module/web/web/theme/default/font-awesome.min.css">
+
+<!-- jQuery UI -->
+<link rel="stylesheet" href="/module/web/web/theme/default/jquery-ui.css">
+<script src="/module/web/web/js/jquery-ui.js"></script>
+
+<!-- Moment JS -->
+<script src="/module/web/web/js/moment.min.js"></script>
+<script src="/module/web/web/js/moment-with-locales.min.js"></script>
+
+<!-- Owl Carousel 2.3.4 -->
+<link rel="stylesheet" href="/module/web/web/theme/default/owl.carousel.min.css">
+<script src="/module/web/web/js/owl.carousel.min.js"></script>
+
+<!-- Evo Calendar -->
+<link rel="stylesheet" href="/module/web/web/theme/default/evo-calendar.min.css">
+<script src="/module/web/web/js/evo-calendar.min.js"></script>
+
+<!-- Mark.js -->
+<script src="/module/web/web/js/jquery.mark.min.js"></script>
+
+<!-- Chart.js -->
+<script src="/module/web/web/js/chart.min.js"></script>
+
+<!-- Splide JS -->
+<link rel="stylesheet" href="/module/web/web/theme/default/splide.min.css">
+<script src="/module/web/web/js/splide.min.js"></script>
+
+
+<SCRIPT LANGUAGE="javascript" TYPE="text/javascript" SRC="https://landsurvey.sarawak.gov.my/moonlight/js/min/moonlight.js"></SCRIPT><script src="https://landsurvey.sarawak.gov.my/web/web/js/module.js"></script><link rel="stylesheet" type="text/css" href="https://landsurvey.sarawak.gov.my/web/web/default/share.css" /><script type="text/javascript" language="javascript">
+/* All Javascript that need to print by PHP put here. Pure Javascript put in web/js/module.js */
+lbl_field_required='This field is compulsory.';/*For validate_form() function.*/
+lbl_ajax_error='Fail to load required records, please contact administrator if the problem is persistent.';/*For validate_form() function.*/
+</script>
+
+<meta name="description" content="<p>The Official Website of the Land and Survey Department, Sarawak</p>
+">
+<meta name="keywords" content="Official Website of the Land and Survey Department, Sarawak Malaysia">
+
+<html>
+	<head>
+		<!-- <link rel="stylesheet" type="text/css" href="http://10.18.4.76/projects/dynamicweb/engine/v10/branches/module/web/web/theme/default/share.css"> -->
+		<link rel="SHORTCUT ICON" href="/web/attachment/show/?docid=WjJVUzVBQU1FZFBXUGNCUnFvZnNNUT09Ojq7unsSrgmUal6wVG5z49U8">
+		<title>
+			Survey Branch - Official Website of the Land and Survey Department, Sarawak		</title>
+	</head>
+	<body class="hold-transition" onLoad="if (window.runOnLoad){runOnLoad()}">
+		 
+  
+ <div id='divAjaxError' class='nowLoading' style="display:none" >
+	<table width=100% cellpadding=1 cellspacing=0 border=0>
+	<tr>
+		<td align="right"><img alt='icon' src='https://landsurvey.sarawak.gov.my/k/warning.gif' border='0' style='vertical-align:middle;'  /></td>
+		<td><strong>AJAX Error</strong><br/>Sorry, failed to load required information. Please contact your system administrator.</td>
+		<td width=1% valign=top>
+			<a href="javascript:hideItSimple('divAjaxError')">
+				<img alt='icon' src='https://landsurvey.sarawak.gov.my/k/close.png' border='0' style='vertical-align:middle;'  />			</a>
+		</td>
+	</tr>
+	<tr>
+		<td colspan=3 align=right valugb=bottom>
+			<a href="javascript:hideItSimple('divAjaxError')">Close</a>
+		</td>
+	</tr>
+	</table>
+</div>
+
+<!-- Ajax loader -->
+<div id='divLoading' class='nowLoading' style="display:none" >
+	<div class="ajaxDivLoader">
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+	</div>
+</div>
+
+<style>
+	.nowLoading {
+		color: #333;
+		display: none;
+		position: absolute;
+		top: 30%;
+		left: 35%;
+		width: 240px;
+		height: 95px;
+		padding: 10px;
+		border: 1px solid #D1CAA3;
+		background-color: #F9F2AA;
+		text-align: center;
+		overflow: auto;
+		z-index:8080;
+		filter: progid:DXImageTransform.Microsoft.Shadow(color=gray,direction=135,Strength=5), alpha(opacity=90);
+		-moz-opacity: .09;
+		opacity: .90;
+	}
+
+    .ajaxDivLoader{
+        position: relative;
+        z-index: 9999;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        /* background: rgba(0, 0, 0, 0.3); */
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+        justify-content: center;
+		height:350px;
+    }
+
+    .ajaxDivLoader span {
+        display: block;
+        width: 15px;
+        height: 30px;
+        margin-right: 10px;
+        border-radius: 5px;
+        animation-name: redirect-ajaxDivLoader;
+        animation-duration: 0.4s;
+        animation-direction: alternate;
+        animation-iteration-count: infinite;
+        animation-timing-function: cubic-bezier(.19, .97, 1, 1);
+    }
+
+            .ajaxDivLoader span:nth-of-type(1) {
+            background: #fba2a2;
+        }
+        .ajaxDivLoader span:nth-of-type(2) {
+            animation-delay: 0.2s;
+            background: #ff7979;
+        }
+        .ajaxDivLoader span:nth-of-type(3) {
+            animation-delay: 0.3s;
+            background: #ed6464;
+        }
+        .ajaxDivLoader span:nth-of-type(4) {
+            animation-delay: 0.4s;
+            background: #ed4343;
+        }
+        .ajaxDivLoader span:nth-of-type(5) {
+            animation-delay: 0.5s;
+            background: #e92323;
+        }
+        .ajaxDivLoader span:nth-of-type(6) {
+            animation-delay: 0.6s;
+            background: #eb0000;
+        }
+    
+    /* .ajaxDivLoader span:nth-of-type(1) {
+        background: #fba2a2;
+    }
+    .ajaxDivLoader span:nth-of-type(2) {
+        animation-delay: 0.2s;
+        background: #ff7979;
+    }
+    .ajaxDivLoader span:nth-of-type(3) {
+        animation-delay: 0.3s;
+        background:#ed6464;
+    }
+    .ajaxDivLoader span:nth-of-type(4) {
+        animation-delay: 0.4s;
+        background:#ed4343;
+    }
+    .ajaxDivLoader span:nth-of-type(5) {
+        animation-delay: 0.5s;
+        background:#e92323;
+    }
+    .ajaxDivLoader span:nth-of-type(6) {
+        animation-delay: 0.6s;
+        background:#eb0000;
+    } */
+
+    @keyframes redirect-ajaxDivLoader {
+        0% {
+            height: 30px;
+        }
+        100% {
+            height: 150px;
+        }
+    }
+</style>
+
+<!-- Full page loader -->
+<div class="full-page-loader" style="display:none;">
+    <div class="loader">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</div>
+
+<style>
+    .full-page-loader .loader{
+        position: fixed;
+        z-index: 9999;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: rgba(0, 0, 0, 0.3);
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .full-page-loader .loader span {
+        display: block;
+        width: 15px;
+        height: 30px;
+        margin-right: 10px;
+        border-radius: 5px;
+        animation-name: redirect-loader;
+        animation-duration: 0.4s;
+        animation-direction: alternate;
+        animation-iteration-count: infinite;
+        animation-timing-function: cubic-bezier(.19, .97, 1, 1);
+    }
+    
+            .full-page-loader .loader span:nth-of-type(1) {
+            background: #fba2a2;
+        }
+        .full-page-loader .loader span:nth-of-type(2) {
+            animation-delay: 0.2s;
+            background: #ff7979;
+        }
+        .full-page-loader .loader span:nth-of-type(3) {
+            animation-delay: 0.3s;
+            background: #ed6464;
+        }
+        .full-page-loader .loader span:nth-of-type(4) {
+            animation-delay: 0.4s;
+            background: #ed4343;
+        }
+        .full-page-loader .loader span:nth-of-type(5) {
+            animation-delay: 0.5s;
+            background: #e92323;
+        }
+        .full-page-loader .loader span:nth-of-type(6) {
+            animation-delay: 0.6s;
+            background: #eb0000;
+        }
+    
+    /* .full-page-loader .loader span:nth-of-type(1) {
+        background: #fba2a2;
+    }
+    .full-page-loader .loader span:nth-of-type(2) {
+        animation-delay: 0.2s;
+        background: #ff7979;
+    }
+    .full-page-loader .loader span:nth-of-type(3) {
+        animation-delay: 0.3s;
+        background:#ed6464;
+    }
+    .full-page-loader .loader span:nth-of-type(4) {
+        animation-delay: 0.4s;
+        background:#ed4343;
+    }
+    .full-page-loader .loader span:nth-of-type(5) {
+        animation-delay: 0.5s;
+        background:#e92323;
+    }
+    .full-page-loader .loader span:nth-of-type(6) {
+        animation-delay: 0.6s;
+        background:#eb0000;
+    } */
+
+    @keyframes redirect-loader {
+        0% {
+            height: 30px;
+        }
+        100% {
+            height: 150px;
+        }
+    }
+</style>		
+		<div class="wrapper">
+			
+            			
+			<div class="content-wrapper">
+				
+
+
+<div class="template_theme_detect" data-template="template1_">
+	<h1 style="display: none;"></h1>
+	<form splwpk-feedback-form = "splwpk-feedback-form"><input type='hidden' name='moonlight_token_22464' value='189oGe'/></form>
+	<a href="/web/subpage/staffcontact_view/24" style="display:none;" splwpk-publicising = "splwpk-publicising" timestamp="2026-10-15 06:43:50" ></a>
+
+	<!-- The Top Header and Menu -->
+
+<div id="template1_header">	
+	<header>
+		<!-- Top Header contains login register search and light dark mode -->
+		<div class="template1-header">
+			<div class="container">
+				<div id="header-wrapper" style="z-index: 1;position: relative;">
+
+					<!-- <div class="register-box">
+						<span class="swkid"><img src="/module/web/web/theme/default/res/template1/sarawakid.png">Sarawak ID</span><a class="login-btn" href="https://sarawakid.sarawak.gov.my/web/ssov1/login/">Login</a>|<a class="register-btn" href="https://sarawakid.sarawak.gov.my/web/ssov1/signup/">Register</a></div>
+					</div> -->
+						
+					<div class="second-box" style="float:left;" splwpk-multilang="splwpk-multilang" splwpk-w3c="splwpk-w3c">	
+						<div class="login-button" style="float: left; font-size:12px;">	
+														
+						</div>	
+					
+						<select id="lang" name="lang" onchange="javascript:window.location.href = '/web/share/set_lang/'+this.value;">
+														<option value="en"
+							 selected 							>
+							EN							</option>
+														<option value="bm"
+														>
+							BM							</option>
+													</select>
+						<!-- Language option End -->
+
+						<!-- Light Dark Mode Switch -->	
+						<label class="switch" id="template1_switch">
+							<input class="toggle-me" type="checkbox">
+							<span class="slider round"></span>
+						</label>
+						<!-- Light Dark Mode Switch End -->	
+					
+						<!-- Search Form -->
+						<div class="forms-content">
+							<!--form class="is-search-form " action="#" method="get" role="search"-->
+							<form  splwpk-search-function="splwpk-search-function" splwpk-advanced-search-function="splwpk-advanced-search-function" class="is-search-form " id="searchform" action="/web/subpage/search_result_gs/" method="POST" role="search"><input type='hidden' name='moonlight_token_22464' value='189oGe'/>
+								<input type="search" name="search_value" value="" class="is-search-input fill_inited" placeholder="Type To Search" autocomplete="off">
+								<button type="submit" class="is-search-submit"><span class="glyphicon glyphicon-search"></span></button>
+							</form>
+						</div>
+						<!-- Search Form End -->
+				
+					
+					</div>
+
+					<!--div id="swkid_plugin" style="float:left; margin-left:15px;"></div-->
+										<div id="spass_plugin" style="float:left;  margin-left:15px;"></div>
+					
+				</div>
+			</div>
+		</div>
+		<!-- Top Header contains login register search and light dark mode End -->
+		
+		
+		<!-- Main Menu -->
+		<div class="template1-secondary-header">
+			<div class="container">
+				<div class="col-md-3">
+					<img alt="image" class="normal logo" style="max-width:200px; margin-top:15px; margin-bottom:15px;" src="/web/attachment/show/?docid=L2IrNVdselg2VVhQeDZvUTZTTnIwZz09OjqQQkhW4R274988-GPwLnxT">
+					<img alt="image" class="dark logo" style="max-width:200px; margin-top:15px; margin-bottom:15px;" src="/web/attachment/show/?docid=c2c4aVliOWdpdExiT0RFZ0F2SHFUZz09OjogejLmtyz1_EjKqctCCIJ9">
+				</div>
+				
+				<div class="col-md-9">				
+					<nav class="navbar navbar-expand main-nav">
+					
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon">☰</span>
+						</button>
+						
+						
+						<div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">					
+						
+						<!-- 29.9.2020 Close Button -->
+						<button class="closenav navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon">X</span>
+						</button>	
+						<!-- 29.9.2020 End Close Button -->						
+						
+							<ul class="navbar-nav align-self-end" id="primary-nav">
+								<li class="nav-item dropdown menu-0"><a class="nav-link" target="_self" href="https://landsurvey.sarawak.gov.my/web/home/index/" splwpk-sitemap=splwpk-sitemap timestamp='2026-10-15 06:43:50' >HOME</a></li><li class="nav-item dropdown menu-1"><a class="nav-link dropdown-toggle" data-toggle="dropdown" splwpk-about-us=splwpk-about-us timestamp='2026-10-15 06:43:50' >ABOUT US<span class="caret"></span></a><ul class="dropdown-menu drop-1"><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/2148"  timestamp='2026-10-15 06:43:50' >Director's Message</a></li><li class="dropdown-submenu sub-2 "><a class="submenu">Corporate Profile<span class="caret"></span></a><ul class="dropdown-menu drop-2"><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/1101" splwpk-client-charter=splwpk-client-charter timestamp='2026-10-15 06:43:50' >Client Charter</a></li><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/593"  timestamp='2026-10-15 06:43:50' >Vision, Mission, Slogan and Shared Values</a></li></ul></li><li class="dropdown-submenu sub-2 "><a class="submenu">Organisation Structure<span class="caret"></span></a><ul class="dropdown-menu drop-2"><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/1620"  timestamp='2026-10-15 06:43:50' >Our Ministers</a></li><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/701"  timestamp='2026-10-15 06:43:50' >Organisation Chart</a></li></ul></li><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/1621"  timestamp='2026-10-15 06:43:50' >Achievements, Awards &amp; Certifications</a></li><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/1655"  timestamp='2026-10-15 06:43:50' >Government Policy</a></li><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/1822"  timestamp='2026-10-15 06:43:50' >Chief Digital Officer (CDO)</a></li><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/2152" splwpk-about-us=splwpk-about-us timestamp='2026-10-15 06:43:50' >Sarawak Civil Service Environmental Standard (SACSES)</a></li></ul></li><li class="nav-item dropdown menu-2"><a class="nav-link dropdown-toggle" data-toggle="dropdown" splwpk-about-us=splwpk-about-us timestamp='2026-10-15 06:43:50' >OUR BRANCHES<span class="caret"></span></a><ul class="dropdown-menu drop-1"><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/1639"  timestamp='2026-10-15 06:43:50' >Land Branch</a></li><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/1566"  timestamp='2026-10-15 06:43:50' >Survey Branch</a></li><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/1574"  timestamp='2026-10-15 06:43:50' >Planning Branch</a></li><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/1567"  timestamp='2026-10-15 06:43:50' >Valuation Branch</a></li><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/1590"  timestamp='2026-10-15 06:43:50' >Enforcement Branch and Mineral Branch</a></li><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/1582"  timestamp='2026-10-15 06:43:50' >Information System Branch</a></li><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/1656"  timestamp='2026-10-15 06:43:50' >Engineering Branch</a></li><li class="dropdown-submenu sub-2 "><a class="submenu">Management Services Branch<span class="caret"></span></a><ul class="dropdown-menu drop-2"><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/1583"  timestamp='2026-10-15 06:43:50' >Human Resource Management &amp; Administration Section</a></li><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/1580"  timestamp='2026-10-15 06:43:50' >Human Resource Development Section</a></li><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/1579"  timestamp='2026-10-15 06:43:50' >Finance Section</a></li><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/563"  timestamp='2026-10-15 06:43:50' >Public Relations Unit</a></li><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/2143"  timestamp='2023-12-21 15:05:57'>Integrity Unit</a></li></ul></li></ul></li><li class="nav-item dropdown menu-3"><a class="nav-link dropdown-toggle" data-toggle="dropdown"  timestamp='2026-10-15 06:43:50' >STATISTIC<span class="caret"></span></a><ul class="dropdown-menu drop-1"><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/client_charter_list/" splwpk-elecronic-archive=splwpk-elecronic-archive timestamp='2026-10-15 06:43:50' >Client Charter Achievement</a></li><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/service_statistic_list" splwpk-elecronic-archive=splwpk-elecronic-archive timestamp='2026-10-15 06:43:50' >Online Transaction</a></li></ul></li><li class="nav-item dropdown menu-4"><a class="nav-link dropdown-toggle" data-toggle="dropdown" splwpk-broadcast=splwpk-broadcast timestamp='2026-10-15 06:43:50' >MEDIA CENTRE<span class="caret"></span></a><ul class="dropdown-menu drop-1"><li class="dropdown-submenu sub-2 "><a class="submenu">Publications<span class="caret"></span></a><ul class="dropdown-menu drop-2"><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/2144" splwpk-publication=splwpk-publication timestamp='2026-10-15 06:43:50' >Annual Report</a></li><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/1644"  timestamp='2026-10-15 06:43:50' >100 Years Pictorial: Gloriosus In Seacula</a></li><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/1628" splwpk-publication=splwpk-publication timestamp='2026-10-15 06:43:50' >LENSA Bulletins</a></li><li><a target="_self" href="https://landsurvey.sarawak.gov.my/metamorfosis/index.html"  timestamp='2026-10-15 06:43:50' >Metamorfosis Evolusi Inovasi &amp; Kualiti Jabatan Tanah Dan Survei Sarawak</a></li><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/2141"  timestamp='2026-10-15 06:43:50' >Sedekad Menggagahi Pengukuran Tanah NCR Inisiatif Baharu 2010-2020</a></li><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/2142"  timestamp='2026-10-15 06:43:50' >Guidebook For Strata Scheme Development In Sarawak</a></li><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/2147"  timestamp='2024-03-18 15:16:07'>LIMPAS- Pendigitalan Dimensi Bumi Dari Angkasa</a></li><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/2146"  timestamp='2024-03-18 15:08:28'>Garis Panduan Proses Kerja Baharu SPS SPK</a></li></ul></li><li class="dropdown-submenu sub-2 "><a class="submenu">Newsroom<span class="caret"></span></a><ul class="dropdown-menu drop-2"><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/news_list/" splwpk-news=splwpk-news timestamp='2026-10-15 06:43:50' >News</a></li><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/newspaper_cutting_list"  timestamp='2026-10-15 06:43:50' >Newspaper Cutting</a></li></ul></li><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/photo_gallery_list/"  timestamp='2026-10-15 06:43:50' >Photo Gallery</a></li><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/video_list"  timestamp='2026-10-15 06:43:50' >Video Gallery</a></li><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/download_list/1090" splwpk-elecronic-archive=splwpk-elecronic-archive timestamp='2026-10-15 06:43:50' >Audio Clip</a></li><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/1738" splwpk-elecronic-archive=splwpk-elecronic-archive timestamp='2026-10-15 06:43:50' >Statutory Notices</a></li><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/2145" splwpk-news=splwpk-news timestamp='2026-10-15 06:43:50' >In Memoriam</a></li></ul></li><li class="nav-item dropdown menu-5"><a class="nav-link dropdown-toggle" data-toggle="dropdown"  timestamp='2026-10-15 06:43:50' >ONLINE SERVICES<span class="caret"></span></a><ul class="dropdown-menu drop-1"><li><a target="_self" href="https://elasis.sarawak.gov.my/eLasis/searchLandRentPremiumEnquiry" splwpk-online-services=splwpk-online-services timestamp='2026-10-15 06:43:50' >Land Rent &amp; Premium</a></li><li><a target="_self" href="https://elasis.sarawak.gov.my/page-0-9-19-Land-Strata-Title.html"  timestamp='2026-10-15 06:43:50' >Land Registry Search</a></li><li><a target="_self" href="https://elasis.sarawak.gov.my/page-0-8-13-eMap.html"  timestamp='2026-10-15 06:43:50' >Map Sales</a></li><li><a target="_self" href="https://elasis.sarawak.gov.my/page-0-11-10-eRLL.html"  timestamp='2026-10-15 06:43:50' >Application for Renewal of Land Lease</a></li><li><a target="_self" href="https://elasis.sarawak.gov.my/page-0-10-9-ePD.html"  timestamp='2026-10-15 06:43:50' >Application of Permission to Deal</a></li><li><a target="_self" href="https://elasis.sarawak.gov.my/page-0-13-12-eSubmission.html"  timestamp='2026-10-15 06:43:50' >Submission of Survey Jobs</a></li><li><a target="_self" href="https://elasis.sarawak.gov.my/page-0-39-30-eXtraction.html"  timestamp='2026-10-15 06:43:50' >Extraction of Survey Data</a></li><li><a target="_self" href="https://elasis.sarawak.gov.my/page-0-40-31-eSTRATA.html"  timestamp='2026-10-15 06:43:50' >Submission for Strata Title Application</a></li><li><a target="_self" href="https://elasis.sarawak.gov.my/page-0-12-11-eLodgement.html"  timestamp='2026-10-15 06:43:50' >Land Instruments Submission</a></li><li><a target="_self" href="https://elasis.sarawak.gov.my/page-0-37-25-eLASC.html"  timestamp='2026-10-15 06:43:50' >Land Application Status Check</a></li><li><a target="_self" href="https://elasis.sarawak.gov.my/page-0-42-33-Smart-Enforcement.html"  timestamp='2026-10-15 06:43:50' >License to Remove Rock Material (Earth, Sand and Gravel and Limited)</a></li><li><a target="_self" href="https://elasis.sarawak.gov.my/page-0-0-34-UTiMAPS.html#"  timestamp='2026-10-15 06:43:50' >Utility Mapping Sarawak (UTiMAPS)</a></li><li><a target="_self" href="https://carbonstorage.sarawak.gov.my/csis/welcome"  timestamp='2026-10-15 06:43:50' >Application for Licence for Carbon Storage or Storage Permit</a></li></ul></li><li class="nav-item dropdown menu-6"><a class="nav-link dropdown-toggle" data-toggle="dropdown"  timestamp='2026-10-15 06:43:50' >DOWNLOAD<span class="caret"></span></a><ul class="dropdown-menu drop-1"><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/download_list/1087" splwpk-publication=splwpk-publication timestamp='2026-10-15 06:43:50' >Brochure</a></li><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/download_list/1081" splwpk-electronic-archive=splwpk-electronic-archive timestamp='2026-10-15 06:43:50' >Form</a></li><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/download_list/1235"  timestamp='2026-10-15 06:43:50' >Workflow Chart</a></li></ul></li><li class="nav-item dropdown menu-7"><a class="nav-link dropdown-toggle" data-toggle="dropdown"  timestamp='2026-10-15 06:43:50' >CONTACT US<span class="caret"></span></a><ul class="dropdown-menu drop-1"><li class="dropdown-submenu sub-2 "><a class="submenu">Divisional Office<span class="caret"></span></a><ul class="dropdown-menu drop-2"><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/553"  timestamp='2026-10-15 06:43:50' >Kuching</a></li><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/560"  timestamp='2026-10-15 06:43:50' >Sri Aman</a></li><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/562"  timestamp='2026-10-15 06:43:50' >Sibu</a></li><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/319"  timestamp='2026-10-15 06:43:50' >Miri</a></li><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/555"  timestamp='2026-10-15 06:43:50' >Limbang</a></li><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/558"  timestamp='2026-10-15 06:43:50' >Sarikei</a></li><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/556"  timestamp='2026-10-15 06:43:50' >Kapit</a></li><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/561"  timestamp='2026-10-15 06:43:50' >Samarahan</a></li><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/554"  timestamp='2026-10-15 06:43:50' >Bintulu</a></li><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/557"  timestamp='2026-10-15 06:43:50' >Mukah</a></li><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/559"  timestamp='2026-10-15 06:43:50' >Betong</a></li><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/1585"  timestamp='2026-10-15 06:43:50' >Serian</a></li></ul></li><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/1554"  timestamp='2026-10-15 06:43:50' >Location Map (HQ)</a></li><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/feedback_form" splwpk-feedback-form=splwpk-feedback-form timestamp='2026-10-15 06:43:50' >Feedback</a></li><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/staffcontact_view/24"  timestamp='2026-10-15 06:43:50' >Staff Directory</a></li><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/1464" splwpk-procurement=splwpk-procurement timestamp='2026-10-15 06:43:50' >Job Opportunities</a></li><li><a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/faq_view/" splwpk-faq=splwpk-faq timestamp='2026-10-15 06:43:50' >FAQ</a></li></ul></li><li class="nav-item dropdown menu-8"><a class="nav-link" target="_self" href=""  timestamp='2026-10-15 06:43:50' ></a></li>		
+							</ul>
+						</div>
+					</nav>	
+				</div>
+			</div>
+		</div>
+	</header>
+	
+</div>
+</div>
+	
+<style>
+	#template1_switch{
+		margin: 5px 10px;
+	}
+
+	#template1_header select#lang{
+		margin-top:3px;
+	}
+
+	#template1_header #swkid_plugin{
+		position: relative;
+		z-index: 1000 !important;
+	}
+
+	#template1_header #swkid_plugin.before-login{
+		margin-top:3px;
+	}
+
+	#template1_header .login-button{
+		margin-top:3px;
+	}
+
+	.seg_icon {
+	    width: auto;
+	    height: 32px;
+	    width: 32px;
+	}
+	
+	@media (max-width: 991px) {
+		#template1_header #navbarNavDropdown.collapse.in{
+			z-index:1;
+		}
+		
+			}
+
+	@media (max-width: 896px) {
+
+			/* #template1_header .second-box{
+			margin-top: 10px;
+		} */
+	
+		#template1_header .login-button button{
+			margin: auto;
+		}
+
+		#template1_header .register-box{
+			margin-left: 15px;
+		}
+	}
+
+	@media (max-width: 768px) {
+		#template1_header .switch{
+			width:65px;
+		
+		}
+
+		#template1_header .slider:before{
+			bottom:5px;
+		}
+
+		.template1-secondary-header button.navbar-toggler{
+			margin-top: 150px;
+		}
+
+		#template1_header .second-box{
+			width: 100%;
+		}
+
+		#template1_header #swkid_plugin.before-login{
+			margin-top:15px;
+		}
+
+		#template1_header #swkid_plugin.after-login div{
+			justify-content: end;
+			width: 100%;
+		}
+
+		#template1_header #swkid_plugin.after-login{
+			/* z-index: 1000 !important; */
+			position: relative;
+			float: unset !important;
+			top: -69px;
+		}
+
+			}
+
+	
+	@media (max-width: 575px) {
+		#template1_header #swkid_plugin.before-login .swkid-wrapper{
+			padding: 0;
+		}
+
+		#template1_header #swkid_plugin.before-login .swkid-hidden-xs{
+			display: flex !important;
+		}
+	}
+</style>
+
+<script src="https://sarawakid.sarawak.gov.my/web/share/swkid_plugin/?lang=en"></script> 
+	
+<script type="text/javascript">
+	$(function() {
+		$('#primary-nav').moreMenu();
+
+		$('.submenu').click(function() { // when a .dropdow-submenu .submenu is clicked
+			// $('.submenu').not(this).parent().removeClass('active')
+			$(this).parent().toggleClass('active')
+		})
+	});
+
+	swkid_sso_init({ 
+	
+		client_id:'landsurvey_dweb10_web',
+		// state:'',
+		state:'305401792015850',
+		response_type:'code',
+		redirect_uri:'https://landsurvey.sarawak.gov.my/web/home/index/',
+		logout_redirect_uri:'https://landsurvey.sarawak.gov.my/web/home/member_logout/',
+		logout_uri:'https://landsurvey.sarawak.gov.my/web/home/index/',
+		overwrite_login_function:'',		
+		// style:'icon-text-old',
+		// style:'icon-only',
+		// style:'text-only',
+		// style:'icon-full-text',
+		style:'icon-text',
+		// style:'logo-full-text',
+		// profile_listing_style:'simple',
+		//profile_listing_style:'details',
+		profile_listing_style:'seg',
+		myworkspace_newtab:'off',
+		payment_newtab:'off',
+		// profile_listing_email:'on',
+		// profile_listing_email:'off',
+		icon_width:'35',
+		position:'top-right',
+		misc_param:'test12344123!)@))%(!&%)(*$#)^Y%)!($&)!@(#*)!@&)%!<>?M}{:||test12344123test12344123test12344123test12344123test12344123test12344123test12344123test12344123test12344123test12344123test12344123test12344123test12344123test12344123test12344123test12344123test12344123test12344123test12344123test12344123test12344123test12344123test12344123',
+		// hide_header:'on',
+		// hide_login_extra_link:'on',
+		permission:'on',
+		// sub_login_app_name:'Testing APP',
+		login_method:'swkid_login',
+		// login_method:'swknet_login',
+		force_login_btn:'off',
+		servicelisting_uri: "https://landsurvey.sarawak.gov.my/web/subpage/display_nature_list/"
+	});
+
+	function swkid_callback(swkid_response){
+		var short_name = swkid_response['usr_short_name'];
+		var login_by = swkid_response['login_by'];
+		var swkid_login_status = swkid_response['swkid_login_status'];
+		
+		if(swkid_login_status=='before_swkid_login'){
+			/*Do your thing when Sarawak ID is not login, in this case, this function will force logout your website*/
+			// alert('walao, belum login');
+
+			$('#swkid_plugin').addClass('before-login');
+			$('#swkid_plugin').removeClass('after-login');
+		}else{
+			/*Do your thing when Sarawak ID is login, in this case do nothing since your website already login*/
+			// alert('walao, dah login');
+			$('#swkid_plugin').addClass('after-login');
+			$('#swkid_plugin').removeClass('before-login');
+		}
+	}
+</script>
+<div id="top" class="thetop">
+	<div class="container" style="width:100%; padding:0;">
+			<div class="">
+																									<img alt="" class="header-image" src="/web/attachment/show/?docid=QnpHcDBsUGpvZFhtMnRzUlh4R2h6UT09OjrwCTLl3OICyb9KRl6_82WD">
+																										
+			
+							<div class="container">
+					<div class="top-page">
+						<div class="page_title">
+							<h2>Survey Branch</h2>
+						</div>
+					</div>
+				</div>
+					</div>
+	</div>
+</div>
+
+<div class="template_theme_detect" data-template="template_subpage_">
+<div class="template_subpage_view" id="subpage_webpage_view">
+	<div class="adicontainer">
+		
+		<div class="pageheader">
+			<div class="adirow">
+				<div class="adicol-1">
+
+				</div>
+			</div>
+		</div>
+		
+		<input type="hidden" class="text" name="id" id="id" value="5" >		
+		<div class="container">
+			&nbsp;
+			<div class="section1">
+				<!-- <div class="adirow" style="justify-content: end;">
+					<div class="adicol-12">
+						<div class="section-content list-content-back">
+													<a href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_list/" class="back-to-listing"><< Back to Listing</a>
+												</div>
+					</div>
+				</div> -->
+				<div class="list-title">
+													<div class="adicol-1">
+									<div class="section-content box">
+										<div class="list-title"><h2 >Survey Branch</h2></div>
+										<!-- <div class="list-sub" style="margin-top:50px;"><h5>19 Apr 2017</h5></div> -->
+										<br>
+										<div class="list-content" style="overflow:auto;"><p>&nbsp;</p>
+
+<p><img border="0" src="/web/attachment/show/?docid=L3h6NkhMOVhkUXNhTmRBLzlGb2xEdz09OjqNftcb1sbyom1yPp6sFNhR" style="height: auto; max-width: 100%;" /></p>
+
+<p><strong style="font-size: 10pt; text-align: justify;">Introduction</strong></p>
+
+<p><span style="font-size: 10pt;">The Survey Branch of the Land and Survey Department, Headquarters under the charge of the Assistant Director (Survey), is responsible for processing, managing, storing and maintaining spatial data acquired and survey related activities carried out in the state.</span></p>
+
+<p>&nbsp;</p>
+
+<p style="text-align: justify;"><span style="font-size: 10pt;"><strong>Objective</strong></span></p>
+
+<p><span style="font-size: 10pt;">To maintain and manage reliable geospatial data to support efficient land administration.</span></p>
+
+<p><span style="font-size: 10pt;"><strong>Functions</strong></span></p>
+
+<ol style="text-align: justify;">
+	<li><span style="font-size: 10pt;">Providing geodetic controls in the State.</span></li>
+	<li><span style="font-size: 10pt;">Carrying out aerial photography survey.</span></li>
+	<li><span style="font-size: 10pt;">Compiling and producing topographic, thematic and town maps of Sarawak.</span></li>
+	<li><span style="font-size: 10pt;">Sale of restricted and unrestricted maps of Sarawak, survey plans, aerial photographs and orthophotos.</span></li>
+	<li><span style="font-size: 10pt;">Overseeing cadastral survey works carried out by both Government Surveyors and Licensed Land Surveyors in the state and ensuring the standard of survey work is maintained and that survey practices are in accordance with the Survey Branch technical requirements and the Land Surveyors Ordinance, 2001.</span></li>
+	<li><span style="font-size: 10pt;">Storing and maintaining spatial data acquired by the Department.</span></li>
+</ol>
+
+<p><span style="font-size: 10pt;"><strong>Sections under Survey Branch</strong></span></p>
+
+<p><span style="font-size: 10pt;">The Survey Branch consists of five (5)<strong> </strong>main<strong> </strong>sections.</span></p>
+
+<p><span style="font-size: 10pt;"><strong>Geodetic Survey Section</strong></span></p>
+
+<p><span style="font-size: 10pt;">The Geodetic Survey Section is responsible for the establishment of geodetic control network and maintenance of existing Tellurometer Traverse Station (TT) and Standard Traverse Geodimeter (STG) traverse stations in Sarawak. The Geodetic Survey Section is entrusted to ensure that sufficient higher order control stations are available for cadastral survey to be carried out by the respective Divisional offices.&nbsp; Apart from establishing TT &amp; STG control stations, this section also carried out pre-marking and post-marking survey required by Photogrammetry Section for topographic mapping purposes.</span></p>
+
+<p><span style="font-size: 10pt;">For more information regarding types of survey controls, please <a href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/153">click here</a>.</span></p>
+
+<p><span style="font-size: 10pt;"><strong>Project Survey Section</strong></span></p>
+
+<p><span style="font-size: 10pt;">The Project Survey Section at Land and Survey Headquarters is fully responsible for the monitoring of surveys for all Government development projects and to ensure that the surveys are completed on schedule and as budgeted. This section is also entrusted to plan, prepare, issue, check, and approve cadastral controls, land acquisition surveys, or perimeter surveys under contract survey jobs issued to Licensed Land Surveyors, financed either by the Land and Survey Department Development Fund or by statutory bodies / other government agencies. Besides that, this section is also responsible for the monitoring on the performance of appointed Licensed Land Surveyors in the state.</span></p>
+
+<p><span style="font-size: 10pt;"><strong>Cartography Section</strong></span></p>
+
+<p><span style="font-size: 10pt;">The Cartography Section is entrusted with the responsibility of producing and maintaining topographic, thematic and town maps of Sarawak. These maps are classified into Restricted and Unrestricted maps and are available for general information and usage of Government agencies, statutory bodies and the general public, upon application. Maps, aerial photographs / orthophoto are classified as restricted items. Requests for supply of these restricted maps and aerial photographs are subjected to the prior security clearance granted by the Royal Malaysia Police. However, requests for the supply of other unrestricted maps are not subjected to security clearance and may be purchased directly at the Sale Counter at all Land and Survey Department Divisional Offices and Cartography Section at Land and Survey Headquarters, Menara Pelita.</span></p>
+
+<p><span style="font-size: 10pt;">Additional information on <a href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/157" target="_blank">procedure to purchase map/aerial photographs.</a></span></p>
+
+<p><span style="font-size: 10pt;"><strong>Photogrammetry Section</strong></span></p>
+
+<p><span style="font-size: 10pt;">The main function of the Photogrammetry Section is to produce topographical maps in the form of machine plots throughout the State required for development project such as land development schemes, plantation schemes, drainage and irrigation schemes, urban and rural planning, and other feasibility studies for development programs. This section produces Digital Topographical Data, Digital Terrain Model, Digital Urban Map, and Orthophoto Maps for State Development projects and Geographical Information System (GIS). Department acquired and utilized Unmanned Aerial Vehicle (UAV) completed with system to support the existing airborne aerial survey, and utilized mobile LIDAR to acquire data needed for 3D city modeling. In 2018, 3D Unit was established under Photogrammetry Section based on the recent development in technology. This unit is entrusted with the responsibility to produce 3D data and to form 3D City Model Profile for Sarawak State. This data is utilized by the State Planning Unit to aid relevant authorities in the making of prompt decisions.</span></p>
+
+<p><span style="font-size: 10pt;"><strong>Photolitho Section</strong></span></p>
+
+<p><span style="font-size: 10pt;">The main function of this section includes binding of books, printed documents and reports for Departmental use. This section is also responsible in the producing of land rent payment booklets, titles, and other restricted documents. Besides that, this section produces special folders for Land Registers, Land Titles Instruments and other legal documents.</span></p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<ol style="text-align: justify;">
+</ol>
+</div>
+									</div>
+								</div>
+									</div>
+			</div>
+			&nbsp;
+		</div>
+	</div>
+</div>
+</div>	
+<div class="template_theme_detect" data-template="template_subpage_">	
+	<div id="template_subpage_useful_link" class="all-logos grey quicks row all-small">
+			
+			<div class="container small-bottom">
+									<div class="col-md-12">			
+						<h3 class="subtitle">Useful Links</h3>
+					</div>
+							</div>	
+			
+			<div class="col-md-12 align-center bg">			
+				
+				<div class="container small-bottom">
+				
+					<div class="subpage_myCarousel4 carousel carousel-fade carousel-showothers slide" id="subpage-useful-link-carousel-tilenav4" data-interval="false">
+						
+						<div class="carousel-inner">
+																								<div class="item active">
+																		<a class="uqlinks" href="http://www.malaysia.gov.my" target="_blank">
+											<div class="qicons">
+																									<img alt="" src="/web/attachment/show/?docid=RHBLQ1NTSkF6SXJWTHFDbmlySFJ6dz09Ojoj2AZi3DjCW3kUvhZA1eOg">
+																							</div>
+										</a>
+									</div>
+																								<div class="item">
+																		<a class="uqlinks" href="https://premier.sarawak.gov.my/web/home/index/" target="_blank">
+											<div class="qicons">
+																									<img alt="" src="/web/attachment/show/?docid=MEZpc1Y1OFpvbm50N3Y2citXUk1mdz09Ojq6i5Zn9qj_l3W3u38xGntg">
+																							</div>
+										</a>
+									</div>
+																								<div class="item">
+																		<a class="uqlinks" href="https://sarawak.gov.my/" target="_blank">
+											<div class="qicons">
+																									<img alt="" src="/web/attachment/show/?docid=czFYeWgvTm5wOWkwNENaeWcxbU9VZz09Ojry3qjCrdZL6A3Gt9Ngq4uR">
+																							</div>
+										</a>
+									</div>
+																								<div class="item">
+																		<a class="uqlinks" href="https://data.gov.my/" target="_blank">
+											<div class="qicons">
+																									<img alt="" src="/web/attachment/show/?docid=TWsrWEwyc1NOVU1BcFlaOEtPRmJtZz09OjoHlcSiVu5RUYRFAfzBr31T">
+																							</div>
+										</a>
+									</div>
+																								<div class="item">
+																		<a class="uqlinks" href="https://elasis.sarawak.gov.my/" target="_blank">
+											<div class="qicons">
+																									<img alt="" src="/web/attachment/show/?docid=UzhyRFQzZWlKaU91WVZYTCsxKzJTdz09OjrB9xR8vy8BjOtngYaEHLSG">
+																							</div>
+										</a>
+									</div>
+																								<div class="item">
+																		<a class="uqlinks" href="https://kpbsa.sarawak.gov.my/" target="_blank">
+											<div class="qicons">
+																									<img alt="" src="/web/attachment/show/?docid=NlFiTzJuWG5sL1k5VHRmQzhoQldYZz09OjqdTqF3hZvYe-Gygo7WaSiS">
+																							</div>
+										</a>
+									</div>
+																								<div class="item">
+																		<a class="uqlinks" href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/1628" target="_blank">
+											<div class="qicons">
+																									<img alt="" src="/web/attachment/show/?docid=bG5hZjNTQTUyY0VzRElTT29uZHlPZz09Ojpmb19XfmljNNqAUJPHwyQx">
+																							</div>
+										</a>
+									</div>
+																								<div class="item">
+																		<a class="uqlinks" href="https://landsurvey.sarawak.gov.my/web/subpage/download_list/1081" target="_blank">
+											<div class="qicons">
+																									<img alt="" src="/web/attachment/show/?docid=WHlWTGRDL0RFMi9GZ3piV21jK1dhQT09OjqtkclUXzyoNJ_DxLsD0ujX">
+																							</div>
+										</a>
+									</div>
+													</div>
+						
+							<a class="left carousel-control" href="#subpage-useful-link-carousel-tilenav4" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+							<a class="right carousel-control" href="#subpage-useful-link-carousel-tilenav4" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
+					</div>	
+
+				</div>
+
+			</div>
+	</div>
+</div>
+
+<script>
+	var v_id = '4';
+	var slider_speed = ('5' * 1000);
+	$('.subpage_myCarousel' + v_id).carousel({
+		interval: slider_speed
+	});
+
+	var showothers_item = '.subpage_myCarousel' + v_id + '.carousel-showothers .item';
+	$(showothers_item).each(function(){
+		var itemToClone = $(this);
+
+		for (var i=1;i<4;i++) { /* for the 4 in a row function */
+		itemToClone = itemToClone.next();
+
+		// wrap around if at end of item collection
+		if (!itemToClone.length) {
+			itemToClone = $(this).siblings(':first');
+		}
+
+		// grab item, clone, add marker class, add to collection
+		itemToClone.children(':first-child').clone()
+			.addClass("cloneditem-"+(i))
+			.appendTo($(this));
+		}
+	});
+
+</script>
+
+
+<div class="template_theme_detect" data-template="template1_">	
+	<!-- FOOTER -->
+	<footer id="template1_footer">
+		<div class="row small-top-bottom">
+			<div class="container">
+				<div class="col-md-4 small-left-right cop">
+					<div class="cp_lu">
+					<p class="cp"><p>Best view using Mozilla Firefox and Google Chrome with web view resolution 1920 x 1080. | &copy; Copyright of the Land and Survey Department, Sarawak (JTS).&nbsp;</p>
+
+<p>Copyright of this website and its contents but limited to the information, text, images, graphics, sound files, video files and their arrangement, and material therein, is owned by the owner of this website unless otherwise indicated. No part or parts of this website may be modified, copied, distributed, retransmitted, broadcasted, displayed, reproduced, published, licensed, transferred, sold or commercially dealt with in any manner without the express prior written consent of the owner of this website.</p>
+						<br>
+						Last Updated On 14 Oct 2026					</p>
+					</div>
+					<p><strong>Operating Hours</strong><br />
+<br />
+<strong>Monday - Thursday</strong><br />
+8:00am to 1:00pm &amp; 2:00pm to 5:00pm<br />
+<br />
+<strong>Friday</strong><br />
+8:00am to 11:45am &amp; 2:15pm to 5:00pm<br />
+<br />
+<strong>Saturday, Sunday &amp; Public Holiday</strong><br />
+<strong>Counter Closed</strong></p>
+				</div>								
+				<div class="col-md-4 small-left-right links">	
+					<div class="row footer-logo-row">
+						<div class="all-logo">
+								<a href="https://premier.sarawak.gov.my" target="_blank">
+									<img alt="image" src="/module/web/web/theme/default/res/default_icons/cm_default.png">
+								</a>		
+						</div>	
+						<div class="all-logo">
+								<a href="https://sarawak.gov.my" target="_blank">
+									<img alt="image" src="/module/web/web/theme/default/res/default_icons/sarawak_hornbill_default.png">
+								</a>
+						</div>	
+						<div class="all-logo">
+								<a href="https://www.malaysia.gov.my" target="_blank">
+									<img alt="image" src="/module/web/web/theme/default/res/default_icons/federal_logo_default.png">
+								</a>
+						</div>
+					</div>
+					
+					<div class="finfo">
+						<p>Land and Survey Department Sarawak.<br />
+Ground Floor until Level 8, Menara Pelita,<br />
+Jalan Tun Abdul Rahman Yaakub,<br />
+93050 Petra Jaya, Kuching,<br />
+Sarawak, Malaysia.<br />
+<br />
+Telephone : <a href="http://tel:6082-374555">6082-374555</a><br />
+Fax : <a href="http://fax:6082-374582">6082-374582</a><br />
+Email: landsurvey@sarawak.gov.my</p>
+					</div>			
+				</div>		
+				
+				<div class="col-md-4 small-left-right sub-newsletter">
+					<form id="subscribe_form" method="POST" action="/web/subpage/newsletter_subscription_form/"><input type='hidden' name='moonlight_token_22464' value='189oGe'/>	
+						<label>Subscribe Newsletter</label>
+						<input type="text" id="subscriber_email" placeholder=" Your Email" name="subscriber_email">
+						<input type="submit" id="subscribe_submit_btn" value="Subscribe">
+					</form>
+					
+					<div class="b-links">
+						<div><a href="https://gamma.malaysia.gov.my/appdetails/914" splwpk-mobile-apps="splwpk-mobile-apps">Sarawak Gov App</a></div>
+						<div class="gamma">
+							<img alt="image" src="/module/web/web/theme/default/res/default_icons/sarawak_flag.png">
+							<img alt="image" src="/module/web/web/theme/default/res/default_icons/gamma_qr.png">
+						</div>
+					</div>
+				</div>
+				
+			</div>
+			
+			<div class="container f-btm">
+								<div class="col-md-8 small-left-right b-links">
+																										<a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/sitemap/" splwpk-sitemap="splwpk-sitemap" timestamp='2026-10-15 06:43:50'>Sitemap</a>
+																																							<a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/feedback_form/" splwpk-online-e-participation="splwpk-online-e-participation" timestamp='2026-10-15 06:43:50'>Complaint &amp; Feedback</a>
+																																							<a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/31" splwpk-privacy-policy="splwpk-privacy-policy" timestamp='2026-10-15 06:43:50'>Privacy Policy</a>
+																																							<a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/1548" splwpk-online-e-participation="splwpk-online-e-participation" timestamp='2026-10-15 06:43:50'>E-Participation Guidelines</a>
+																																							<a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/1611"  >Security Policy</a>
+																																							<a target="_self" href="https://landsurvey.sarawak.gov.my/web/subpage/webpage_view/1657"  >Personal Data Protection Act 2010</a>
+																						</div>
+				
+				<div class="col-md-4 small-left-right social">					
+					<div class="visitor">Visitor Counter: <span>18461263</span></div>				
+				</div>
+			</div>
+		</div>
+	</footer>
+	
+	<button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fa fa-angle-up" aria-hidden="true"></i></button>	
+	<!-- Custom Side Menu to show Mobile QR code -->			
+	<div class="custom_section_right">
+
+		
+					<div class="hotline" id="esidemenu">
+				<a href="javascript:void(0);" class="side-label sidemenuhover">		
+					<img alt="image" class="sidemenu-icon" src=""><span class="slideout"><span>Scan for Mobile</span>
+				</a>
+				<div class="side-content">
+					<img alt="image" src="/../moonlight/plugin/phpqrcode/moonlight_qrcode.php?
+						data=https://landsurvey.sarawak.gov.my/web/home/index/">				</div>
+			</div>
+		
+				
+		
+				<div class="calendar">
+		  <!-- Trigger the modal with a button -->
+		  <a class="sidemenuhover" data-toggle="modal" data-target="#CalendarModal5"><img alt="image" class="sidemenu-icon" src="">
+		  <span class="slideout">Calendar</span></a>
+
+		  <!-- Modal -->
+		  <div class="modal fade" id="CalendarModal5" role="dialog">
+			<div class="modal-dialog">
+			
+			  <!-- Modal content-->
+			  <div class="modal-content">
+				<div class="modal-body">
+				  <div class="calendar" id="calendar5"></div>
+				  <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+				</div>
+			  </div>
+			  
+			</div>
+		  </div>		
+		</div>
+		
+				
+		
+						<div class="poll">
+				<!-- Trigger the modal with a button -->
+				<a class="sidemenuhover" data-toggle="modal" data-target="#PollModal5" splwpk-online-e-participation="splwpk-online-e-participation" timestamp="2026-10-13 11:46:46"><img alt="image" class="sidemenu-icon" src="">
+				<span class="slideout">Polls</span>
+				</a>
+
+				<!-- Modal -->
+				<div class="modal fade" id="PollModal5" role="dialog">
+					<div class="modal-dialog">
+					
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-body">
+						<h5 style="margin-bottom:20px;">Poll</h5>
+					
+							
+															<form id="frm_data_17" method="POST" enctype="multipart/form-data" action="https://landsurvey.sarawak.gov.my/web/subpage/poll/"><input type='hidden' name='moonlight_token_22464' value='189oGe'/>
+								<h4 style="font-weight:bold;">What do you think of this website?																	</h4>
+																																																																																																																																																																																																																											<span>
+											<input type="radio" onclick="setPollId(58, 17);" name="question[17]" value="58">
+											<label>Very informative</label>
+										</span>
+																																																																																																																																																																																																																																					<span>
+											<input type="radio" onclick="setPollId(59, 17);" name="question[17]" value="59">
+											<label>Informative</label>
+										</span>
+																																																																																																																																																																																															<span>
+											<input type="radio" onclick="setPollId(60, 17);" name="question[17]" value="60">
+											<label>Fairly informative</label>
+										</span>
+																																																																																																																																																																																																							<div class="ssubmit col-md-12" style="margin-bottom:50px;">		
+										<input class="btn-links" type="button" onclick="submitPoll_sidemenu(this.form);" value="Vote">
+										<input class="btn-links" type="button" value="Result" 
+										onclick="window.location.href = 'https://landsurvey.sarawak.gov.my/web/subpage/poll_result/&id=17';">
+									</div>
+								</form>
+															<form id="frm_data_16" method="POST" enctype="multipart/form-data" action="https://landsurvey.sarawak.gov.my/web/subpage/poll/"><input type='hidden' name='moonlight_token_22464' value='189oGe'/>
+								<h4 style="font-weight:bold;">Which platform you prefer to browsing our website?																	</h4>
+																																																																																																																																																																																																								<span>
+											<input type="radio" onclick="setPollId(56, 16);" name="question[16]" value="56">
+											<label>Desktop</label>
+										</span>
+																																																																																																																																																																																																																																					<span>
+											<input type="radio" onclick="setPollId(57, 16);" name="question[16]" value="57">
+											<label>Mobile Phone</label>
+										</span>
+																																																																																																																																																																																																																																																																																																																																																																																																					<div class="ssubmit col-md-12" style="margin-bottom:50px;">		
+										<input class="btn-links" type="button" onclick="submitPoll_sidemenu(this.form);" value="Vote">
+										<input class="btn-links" type="button" value="Result" 
+										onclick="window.location.href = 'https://landsurvey.sarawak.gov.my/web/subpage/poll_result/&id=16';">
+									</div>
+								</form>
+															<form id="frm_data_3" method="POST" enctype="multipart/form-data" action="https://landsurvey.sarawak.gov.my/web/subpage/poll/"><input type='hidden' name='moonlight_token_22464' value='189oGe'/>
+								<h4 style="font-weight:bold;">What do you think of our public service delivery?																	</h4>
+																																																<span>
+											<input type="radio" onclick="setPollId(9, 3);" name="question[3]" value="9">
+											<label>Excellent</label>
+										</span>
+																																																																																																																																																																																																																																					<span>
+											<input type="radio" onclick="setPollId(10, 3);" name="question[3]" value="10">
+											<label>Moderate</label>
+										</span>
+																																																																																																																																																																																																																																					<span>
+											<input type="radio" onclick="setPollId(11, 3);" name="question[3]" value="11">
+											<label>Unsatisfactory</label>
+										</span>
+																																																																																																																																																																																																																																																																																																																																												<div class="ssubmit col-md-12" style="margin-bottom:50px;">		
+										<input class="btn-links" type="button" onclick="submitPoll_sidemenu(this.form);" value="Vote">
+										<input class="btn-links" type="button" value="Result" 
+										onclick="window.location.href = 'https://landsurvey.sarawak.gov.my/web/subpage/poll_result/&id=3';">
+									</div>
+								</form>
+															<form id="frm_data_6" method="POST" enctype="multipart/form-data" action="https://landsurvey.sarawak.gov.my/web/subpage/poll/"><input type='hidden' name='moonlight_token_22464' value='189oGe'/>
+								<h4 style="font-weight:bold;">How do you rate our website?																	</h4>
+																																																																																						<span>
+											<input type="radio" onclick="setPollId(18, 6);" name="question[6]" value="18">
+											<label>Efficient</label>
+										</span>
+																																																																																																																																																																																																																																					<span>
+											<input type="radio" onclick="setPollId(19, 6);" name="question[6]" value="19">
+											<label>Moderate</label>
+										</span>
+																																																																																																																																																																																																																																					<span>
+											<input type="radio" onclick="setPollId(20, 6);" name="question[6]" value="20">
+											<label>Not efficient</label>
+										</span>
+																																																																																																																																																																																																																																																																																																						<div class="ssubmit col-md-12" style="margin-bottom:50px;">		
+										<input class="btn-links" type="button" onclick="submitPoll_sidemenu(this.form);" value="Vote">
+										<input class="btn-links" type="button" value="Result" 
+										onclick="window.location.href = 'https://landsurvey.sarawak.gov.my/web/subpage/poll_result/&id=6';">
+									</div>
+								</form>
+															<form id="frm_data_12" method="POST" enctype="multipart/form-data" action="https://landsurvey.sarawak.gov.my/web/subpage/poll/"><input type='hidden' name='moonlight_token_22464' value='189oGe'/>
+								<h4 style="font-weight:bold;">Are you satisfied with our online services ?																	</h4>
+																																																																																																																																																																		<span>
+											<input type="radio" onclick="setPollId(38, 12);" name="question[12]" value="38">
+											<label>Very Satisfied</label>
+										</span>
+																																																																																																																																																																																																																																					<span>
+											<input type="radio" onclick="setPollId(39, 12);" name="question[12]" value="39">
+											<label>Satisfied</label>
+										</span>
+																																																																																																																																																																																																																		<span>
+											<input type="radio" onclick="setPollId(40, 12);" name="question[12]" value="40">
+											<label>Good</label>
+										</span>
+																																																																																																																																						<span>
+											<input type="radio" onclick="setPollId(41, 12);" name="question[12]" value="41">
+											<label>Not Satisfied</label>
+										</span>
+																																																										<span>
+											<input type="radio" onclick="setPollId(42, 12);" name="question[12]" value="42">
+											<label>Need Improvement</label>
+										</span>
+																																																																																					<div class="ssubmit col-md-12" style="margin-bottom:50px;">		
+										<input class="btn-links" type="button" onclick="submitPoll_sidemenu(this.form);" value="Vote">
+										<input class="btn-links" type="button" value="Result" 
+										onclick="window.location.href = 'https://landsurvey.sarawak.gov.my/web/subpage/poll_result/&id=12';">
+									</div>
+								</form>
+															<form id="frm_data_7" method="POST" enctype="multipart/form-data" action="https://landsurvey.sarawak.gov.my/web/subpage/poll/"><input type='hidden' name='moonlight_token_22464' value='189oGe'/>
+								<h4 style="font-weight:bold;">What specific information do you look for when visiting our website?																	</h4>
+																																																																																																									<span>
+											<input type="radio" onclick="setPollId(21, 7);" name="question[7]" value="21">
+											<label>Land administration and policies in Sarawak</label>
+										</span>
+																																																																																																																																																																																																																																					<span>
+											<input type="radio" onclick="setPollId(22, 7);" name="question[7]" value="22">
+											<label>Matters pertaining to land, enforcement, survey, planning and others</label>
+										</span>
+																																																																																																																																																																																																																																					<span>
+											<input type="radio" onclick="setPollId(23, 7);" name="question[7]" value="23">
+											<label>Services provided by the Department</label>
+										</span>
+																																																																																																																																						<span>
+											<input type="radio" onclick="setPollId(24, 7);" name="question[7]" value="24">
+											<label>Nothing specific</label>
+										</span>
+																																																																																																																																																																	<div class="ssubmit col-md-12" style="margin-bottom:50px;">		
+										<input class="btn-links" type="button" onclick="submitPoll_sidemenu(this.form);" value="Vote">
+										<input class="btn-links" type="button" value="Result" 
+										onclick="window.location.href = 'https://landsurvey.sarawak.gov.my/web/subpage/poll_result/&id=7';">
+									</div>
+								</form>
+															<form id="frm_data_5" method="POST" enctype="multipart/form-data" action="https://landsurvey.sarawak.gov.my/web/subpage/poll/"><input type='hidden' name='moonlight_token_22464' value='189oGe'/>
+								<h4 style="font-weight:bold;">How helpful is our website to you?																	</h4>
+																																																																			<span>
+											<input type="radio" onclick="setPollId(15, 5);" name="question[5]" value="15">
+											<label>Very helpful</label>
+										</span>
+																																																																																																																																																																																																																																					<span>
+											<input type="radio" onclick="setPollId(16, 5);" name="question[5]" value="16">
+											<label>Moderately helpful</label>
+										</span>
+																																																																																																																																																																																																																																					<span>
+											<input type="radio" onclick="setPollId(17, 5);" name="question[5]" value="17">
+											<label>Not so helpful</label>
+										</span>
+																																																																																																																																																																																																																																																																																																																									<div class="ssubmit col-md-12" style="margin-bottom:50px;">		
+										<input class="btn-links" type="button" onclick="submitPoll_sidemenu(this.form);" value="Vote">
+										<input class="btn-links" type="button" value="Result" 
+										onclick="window.location.href = 'https://landsurvey.sarawak.gov.my/web/subpage/poll_result/&id=5';">
+									</div>
+								</form>
+							
+							<a href="https://landsurvey.sarawak.gov.my/web/subpage/poll_result/archive" splwpk-online-e-participation="splwpk-online-e-participation" timestamp="2026-04-07 17:43:40">Archived</a>
+													<button type="button" class="close" data-dismiss="modal">&times;</button>
+						</div>
+					</div>
+					
+					</div>
+				</div>
+				
+				</div>
+		
+				
+		
+				<div class="pop-announcements">
+		<!-- Trigger the modal with a button -->
+		  <a class="sidemenuhover" data-toggle="modal" data-target="#AnnouncementModal5"><img alt="image" class="sidemenu-icon" src="">
+		  <span class="slideout">Announcement</span>
+		  </a>
+
+		  <!-- Modal -->
+		  <div class="modal fade" id="AnnouncementModal5" role="dialog">
+			<div class="modal-dialog">
+			
+			  <!-- Modal content-->
+			  <div class="modal-content">
+				<div class="modal-body sidemenu-announcement" splwpk-broadcast="splwpk-broadcast" timestamp="2026-10-13 11:46:32">
+									<h5>Your Dream Job Start Here</h5>
+					<div class="img-empty"><img alt="image" src="/module/web/web/theme/default/res/default_icons/module_default_img.jpg"></div>
+				  	<div timestamp="2026-10-14 14:21:50"><p><img alt="your dream job start here" src="https://www.sarawak.gov.my/web/share/attachment_dl/?id=WHZJaFkydGVQb21NRUpMZUdvd2tqQT09Ojpv1mdg6X2h_Iof7dKO0Vf0" style="width:1029px" /></p>
+
+<p style="color: rgb(0, 0, 0); font-size: medium; text-align: justify;">The Sarawak State Government introduces JobSarawak as a one-stop platform to connect job seekers and employers across the state.</p>
+
+<p style="color: rgb(0, 0, 0); font-size: medium; text-align: justify;">The portal offers a wide range of employment opportunities across various sectors, including administration, technology, industry, and more. In addition, JobSarawak supports career development and workforce needs to strengthen Sarawak&rsquo;s economy.</p>
+
+<p style="color: rgb(0, 0, 0); font-size: medium; text-align: justify;">Members of the public are encouraged to register and explore career opportunities via the following link:<br />
+<a class="decorated-link" href="https://job.sarawak.gov.my/" rel="noopener" target="_new">https://job.sarawak.gov.my/</a></p>
+</div>
+									
+					<button type="button" class="close" data-dismiss="modal">&times;</button> 
+				</div>
+			  </div>
+			  
+			</div>
+		  </div>
+		
+		</div>
+
+		
+		
+				
+		
+				
+			<div class="slinks" >
+				<a class="sidelinks sidemenuhover" target="_blank" href="https://www.youtube.com/@LANDASChannel" splwpk-open-data="splwpk-open-data" timestamp="2026-10-15 06:43:50">
+					 
+						<img alt="icon" class="sidemenu-icon" src="/module/admin/web/theme/default/res/default_icons/yt-icon-red.png">
+										<span class="slideout">Youtube Landas Channel</span>
+				</a>
+			</div>
+				
+		
+				
+			<div class="slinks" >
+				<a class="sidelinks sidemenuhover" target="_blank" href="https://talikhidmat.sarawak.gov.my/talikhidmat/"  timestamp="2026-10-15 06:43:50">
+											<img alt="icon" class="sidemenu-icon" src="/module/admin/web/theme/default/res/default_icons/talikhidmat.png">
+										<span class="slideout">Talikhidmat</span>
+				</a>
+			</div>
+				
+		
+				
+			<div class="slinks" >
+				<a class="sidelinks sidemenuhover" target="_blank" href="https://landsurvey.sarawak.gov.my/web/subpage/staffcontact_view/24" splwpk-contact-details="splwpk-contact-details" timestamp="2026-10-15 06:43:50">
+											<img alt="icon" class="sidemenu-icon" src="/module/admin/web/theme/default/res/default_icons/directory.png">
+										<span class="slideout">Staff Directory</span>
+				</a>
+			</div>
+				
+		
+	</div>
+	<!-- Custom Side Menu to show Mobile QR code End -->
+
+</div>
+</div>
+  
+<script>
+	$(document).ready(function(e){
+		var id = '5';
+		var footer_calendar = '#calendar' + id;
+		var current_lang = 'en';
+		// console.log(current_lang)
+		// console.log(footer_calendar)
+
+		var v_event_json_encoded = JSON.parse('[{"id":"128","kwd_title":"Wesak Day","event_start_date":"2017-05-10","event_end_date":"2017-05-10"},{"id":"5163","kwd_title":"Dialog Pengambilan Balik Tanah Dibawah Seksyen 53  4 Kanun Tanah Sarawak","event_start_date":"2026-09-17","event_end_date":"2026-09-17"},{"id":"5164","kwd_title":"PROGRAM PENGUKUHAN TANAH HAK ADAT BUMIPUTERA DIBAWAH SEKSYEN 6 DAN 18 KTS DAN NATIVE TERRITORIAL DOMAIN","event_start_date":"2026-09-18","event_end_date":"2026-09-18"},{"id":"5165","kwd_title":"Sesi Dialog Pengambilan Balik Tanah Di Bawah Seksyen 5 3  4 Kanun Tanah Negeri KTN","event_start_date":"2026-09-18","event_end_date":"2026-09-18"},{"id":"5166","kwd_title":"Sarawak Land Registry Conference 2026","event_start_date":"2026-09-19","event_end_date":"2026-09-19"},{"id":"5167","kwd_title":"Bicara Sembang Santai Berkenaan Permohonan Tanah Sempena Program JiwaKomuniti Sembang Santai Kampung Pemindahan Marudi","event_start_date":"2026-09-16","event_end_date":"2026-09-16"},{"id":"5168","kwd_title":"Dialog Seksyen 53  4 Kanun Tanah Negeri Bagi Projek  Pemutihan Tapak Sediaada Sekolah Kebangsaan Long Pilah Baram Miri - Missed Out Lots","event_start_date":"2026-09-18","event_end_date":"2026-09-18"},{"id":"5169","kwd_title":"Sesi Taklimat Ringkas berkenaan dengan Menaiktaraf Skim bersama Pegawai Khas En Anuar Daan mewakili YB Datuk Hjh Rubiah Bt Haji Wang","event_start_date":"2026-09-21","event_end_date":"2026-09-21"},{"id":"5170","kwd_title":"Sesi Dialog Pengambilan Balik Tanah Di Bawah Seksyen 5 3  4 Kanun Tanah Negeri KTN","event_start_date":"2026-09-22","event_end_date":"2026-09-22"},{"id":"5171","kwd_title":"Dialog Seksyen 53  4 Kanun Tanah Negeri","event_start_date":"2026-09-21","event_end_date":"2026-09-21"},{"id":"5172","kwd_title":"Dialog Seksyen 53  4 Kanun Tanah Negeri","event_start_date":"2026-09-21","event_end_date":"2026-09-21"},{"id":"5173","kwd_title":"Dialog Seksyen 53  4 Kanun Tanah Negeri","event_start_date":"2026-09-22","event_end_date":"2026-09-22"},{"id":"5174","kwd_title":"Sesi Dialog Pengambilan Balik Tanah Di Bawah Seksyen 6 4 Kanun Tanah Negeri KTN  Penyerahan Borang K Bagi Projek Penahan Hakisan Tebingan Sungai di Kampung Sageng Simunjan","event_start_date":"2026-09-24","event_end_date":"2026-09-24"},{"id":"5175","kwd_title":"Program EMPOWERING AT WORK SELF-CARE IS SUCCESS WELL-BEING IS POWER","event_start_date":"2026-09-25","event_end_date":"2026-09-25"},{"id":"5176","kwd_title":"SESI DIALOG SEKSYEN 534 KTN SARAWAK MAPAI-SERUDIT-LACHAU MSL 275KV TRANSMISSION LINE PROJECT SECTOR SARIKEI","event_start_date":"2026-09-28","event_end_date":"2026-10-28"},{"id":"5177","kwd_title":"Sesi Perjumpaan dan Perbincangan Isu-isu Berkaitan Tanah Di Bahagian Samarahan Bagi Kawasan Parlimen P197 Kota Samarahan","event_start_date":"2026-09-28","event_end_date":"2026-09-28"},{"id":"5178","kwd_title":"Sesi Dialog Pengambilan Balik Tanah Di Bawah Seksyen 53  4 Kanun Tanah Sarawak Bagi Projek Simanggang Link Road Sri Aman","event_start_date":"2026-09-28","event_end_date":"2026-09-28"},{"id":"5179","kwd_title":"Perasmian Kursus Knowledge Sharing on Land Acquisition Projects and Assessment of Premium for Major Projects Issues and Challenges","event_start_date":"2026-09-29","event_end_date":"2026-09-29"},{"id":"5180","kwd_title":"Majlis Perasmian Agrofest Sarawak","event_start_date":"2026-09-28","event_end_date":"2026-10-28"},{"id":"5181","kwd_title":"Bilik Mesyuarat Utama Jabatan Tanah dan Survei Bahagian Samarahan","event_start_date":"2026-09-29","event_end_date":"2026-09-29"},{"id":"5182","kwd_title":"Sesi Dialog Pengambilan Balik Tanah Di Bawah Seksyen 534 Kanun Tanah Sarawak Bagi Projek Bantong Booster Pump Station Lubok Antu","event_start_date":"2026-09-29","event_end_date":"2026-09-29"},{"id":"5183","kwd_title":"Sesi Dialog Pengambilan Balik Tanah Di Bawah Seksyen 534 Kanun Tanah Sarawak Bagi Projek Jelukong High Level Tank Engkilili","event_start_date":"2026-09-29","event_end_date":"2026-09-29"},{"id":"5184","kwd_title":"SESI DIALOG SEKSYEN 534 KTN SARAWAK BAGI NEW ROAD FROM JALAN JANTING TO JALAN TULAI SARIKEI","event_start_date":"2026-09-29","event_end_date":"2026-09-30"},{"id":"5185","kwd_title":"SESI DIALOG SEKSYEN 534 KTN SARAWAK BAGI RC COMMERCIAL WHARF AT SUNGAI NYELONG SARIKEI DAN RESETTLEMENT SITE AT SG BAJI SARIKEI","event_start_date":"2026-09-30","event_end_date":"2026-09-30"},{"id":"5186","kwd_title":"Majlis Bacaan Yasin  Doa Selamat JTS Bintulu","event_start_date":"2026-10-01","event_end_date":"2026-10-01"},{"id":"5187","kwd_title":"Sesi Dialog Pengambilan Balik Tanah Di Bawah Seksyen 534 Kanun Tanah Sarawak Bagi Projek Sungai Tenggang Reservoir and Booster Pump Station Pantu","event_start_date":"2026-10-01","event_end_date":"2026-10-01"},{"id":"5188","kwd_title":"Sesi Dialog Pengambilan Balik Tanah Di Bawah Seksyen 534 Kanun Tanah Sarawak Bagi Projek Bangkong Booster Pump Station and High Level Tank Pantu","event_start_date":"2026-10-01","event_end_date":"2026-10-01"},{"id":"5189","kwd_title":"SESI DIALOG PENGAMBILAN BALIK TANAH BAGI PEMBANGUNAN INFRASTRUKTUR DAN KEMUDAHAN TELEKOMUNIKASI DI KG MEREMBEH","event_start_date":"2026-10-01","event_end_date":"2026-10-01"},{"id":"5190","kwd_title":"Mesyuarat LAPI Divisional Task Force Jabatan Tanah dan Survei Bahagian Samarahan Bil82026","event_start_date":"2026-10-01","event_end_date":"2026-10-01"},{"id":"5191","kwd_title":"Majlis Penyampaian Cek Dana Bantuan Tanggungjawab Sosial Korporat CSR Fasa II Tahun 2026 Jabatan Tanah dan Survei Bahagian Samarahan","event_start_date":"2026-10-02","event_end_date":"2026-10-02"},{"id":"5192","kwd_title":"Kursus Analisis Perancangan Dan Pembangunan Tanah Di Sarawak","event_start_date":"2026-09-29","event_end_date":"2026-10-01"},{"id":"5193","kwd_title":"Sesi Libat Urus Stakeholders Bersama Pemilik Lot Tanah Kosong","event_start_date":"2026-10-02","event_end_date":"2026-10-02"},{"id":"5194","kwd_title":"MAJLIS PENYERAHAN CEK PELAKSANAAN PROJEK TANGGUNGJAWAB SOSIAL KORPORAT","event_start_date":"2026-10-02","event_end_date":"2026-10-02"},{"id":"5195","kwd_title":"Taklimat dan Kaunter Zakat Tabung Baitumal Sarawak","event_start_date":"2026-10-05","event_end_date":"2026-10-05"},{"id":"5196","kwd_title":"Sesi Dialog Pengambilan Balik Tanah Seksyen 53  4 Kanun Tanah Sarawak Bagi Projek Tapak Baharu Klinik Kesihatan Jenis 5 Dengan Kuarters Nanga Medamit Limbang","event_start_date":"2026-10-01","event_end_date":"2026-10-01"},{"id":"5197","kwd_title":"Sesi Dialog Pengambilan Balik Tanah Seksyen 53  4 Kanun Tanah Sarawak","event_start_date":"2026-10-02","event_end_date":"2026-10-02"},{"id":"5198","kwd_title":"MESYUARAT PENGURUSAN TERTINGGI DOA SELAMAT DAN BACAAN YASIN DI IBU PEJABAT JABATAN TANAH DAN SURVEI SARAWAK","event_start_date":"2026-10-06","event_end_date":"2026-10-06"},{"id":"5199","kwd_title":"Mesyuarat Pengurusan Jabatan Tanah dan Survei Bahagian Samarahan Bil 32026","event_start_date":"2026-10-05","event_end_date":"2026-10-05"},{"id":"5200","kwd_title":"DISCUSSION ON SOIL EROSION ISSUE AT LOT 3441 BLOCK 20 KEMENA LAND DISTRICT","event_start_date":"2026-10-06","event_end_date":"2026-10-06"},{"id":"5201","kwd_title":"JTS KUCHING SERTAI PAMERAN MINI PROGRAM JANGKAUAN KOMUNITI SALCRA BAULUNDU","event_start_date":"2026-10-06","event_end_date":"2026-10-06"},{"id":"5202","kwd_title":"MAJLIS PECAH TANAH DAN PENYERAHANNCEK PAMPASAN TANAH BAGI JALAN SPUR SARE KE JALAN SENTEBU BUKIT KINYAU SARIKEI SERTA PENYERAHAN CEK TANGGUNGJAWAB SOSIAL CSR","event_start_date":"2026-10-07","event_end_date":"2026-10-07"},{"id":"5203","kwd_title":"SESI DIALOG PENGUKURAN TANAH HAK ADAT BUMIPUTERA HAB DI BAWAH SEKSYEN 18 KANUN TANAH NEGERI SARAWAK BAGI KAWASAN SUNGAI MAS ULU JALAN BINTULU-TATAU","event_start_date":"2026-10-08","event_end_date":"2026-10-08"},{"id":"5204","kwd_title":"Sesi Dialog Berkaitan Substation Di Kawasan Food Court Milik Farley Kota Samarahan Lot 9289 Block 26 Muara Tuang Land District","event_start_date":"2026-10-08","event_end_date":"2026-10-08"},{"id":"5205","kwd_title":"Taklimat Pengukuran Tanah Hak Adat Bumiputera NCR dan Native Territorial Domian NTD","event_start_date":"2026-10-07","event_end_date":"2026-10-07"},{"id":"5206","kwd_title":"Majlis Penyerahan Warta Penyerahan Warta Rizab Komunal Bumiputera Seksyen 6  Surat Hakmilik Tanah Seksyen 18 Kanun Tanah Sarawak Bagi Kawasan DUN N78 Mulu","event_start_date":"2026-10-07","event_end_date":"2026-10-07"},{"id":"5207","kwd_title":"Lawatan Tapak Untuk Kerja - Kerja Pembaikan Struktur Waterfront Di Hadapan The Auss Cafe Gedong Samarahan","event_start_date":"2026-10-09","event_end_date":"2026-10-09"},{"id":"5208","kwd_title":"Sesi Dialog Pengambilan Balik Tanah Seksyen 53  4 Kanun Tanah Sarawak Bagi ProjekJalan Akses ke Bario dari Bakelalan","event_start_date":"2026-10-07","event_end_date":"2026-10-07"},{"id":"5209","kwd_title":"Sesi Dialog Pengambilan Balik Tanah Seksyen 53  4 Kanun Tanah Sarawak","event_start_date":"2026-10-08","event_end_date":"2026-10-08"},{"id":"5210","kwd_title":"Sesi Dialog Pengambilan Balik Tanah Seksyen 53  4 Kanun Tanah Sarawak","event_start_date":"2026-10-08","event_end_date":"2026-10-08"},{"id":"5211","kwd_title":"Sesi Dialog Pengambilan Balik Tanah Seksyen 53  4 Kanun Tanah Sarawak","event_start_date":"2026-10-12","event_end_date":"2026-10-12"},{"id":"5212","kwd_title":"Sesi Dialog Pengambilan Balik Tanah Seksyen 53  4 Kanun Tanah Sarawak","event_start_date":"2026-10-13","event_end_date":"2026-10-13"},{"id":"5213","kwd_title":"Kunjungan hormat delegasi Federation of Malaysian Manufacturers FMM ke Jabatan Tanah dan Survei Sarawak","event_start_date":"2026-10-07","event_end_date":"2026-10-07"},{"id":"5214","kwd_title":"HARI INOVASI DAN INTEGRITI TANAH DAN SURVEI SARAWAK 2026","event_start_date":"2026-09-21","event_end_date":"2026-09-22"},{"id":"5215","kwd_title":" Lawatan Penandasarasan PTG JOHOR ke JTS HQ","event_start_date":"2026-10-08","event_end_date":"2026-10-08"},{"id":"5216","kwd_title":"LAWATAN PENANDA ARAS PEJABAT TANAH DAN GALIAN JOHOR KE JABATAN TANAH DAN SURVEI SARAWAK BAHAGIAN SERIAN","event_start_date":"2026-10-09","event_end_date":"2026-10-09"},{"id":"5217","kwd_title":"Sesi Perbincangan Berkaitan Kenderaan dan Pemandu Kenderaan Jabatan Bersama Tuan Penguasa Jabatan Tanah dan Survei Bahagian Samarahan Bil 12026","event_start_date":"2026-10-13","event_end_date":"2026-10-13"}]');
+		// console.log(v_event_json_encoded)
+
+		if(v_event_json_encoded != '' && v_event_json_encoded != false){
+			var v_events = [];
+			v_event_json_encoded.forEach((i)=>{
+				var v_event_start_date = moment(i.event_start_date).format("M/D/YYYY");
+				var v_event_end_date = moment(i.event_end_date).format("M/D/YYYY");
+				var v_event_start_date_standard_format = moment(i.event_start_date).format("D MMM YYYY");
+				var v_event_end_date_standard_format = moment(i.event_end_date).format("D MMM YYYY");
+				var v_event_id = parseInt(i.id);
+				var v_event_title = i.kwd_title;
+				var v_color = 'red';
+				var v_event_date_text = 'Event Date';
+				// console.log(v_event_start_date)
+				v_events.push({
+					id: v_event_id,
+					name: v_event_title, 
+					date: [v_event_start_date, v_event_end_date],
+					color: v_color,
+					type: "event",
+					description: v_event_date_text + ": " + v_event_start_date_standard_format + " - " + v_event_end_date_standard_format
+				});
+			})
+
+			// console.log(v_events)
+
+			$(footer_calendar).evoCalendar({
+				"calendarEvents": v_events,
+				'selectDate':  moment(),
+				'language': current_lang
+			});
+
+
+			$(footer_calendar).on('selectEvent', function(event, activeEvent) {
+				// console.log(activeEvent.id)
+				window.location.href = "/web/subpage/event_view/" + activeEvent.id;
+			});
+
+			$(footer_calendar).on('selectDate', function(event, activeEvent) {
+				$(footer_calendar).evoCalendar('toggleEventList',true);
+			});
+		}else{
+			$(footer_calendar).evoCalendar({'language': current_lang});
+
+			$(footer_calendar).on('selectDate', function(event, activeEvent) {
+				$(footer_calendar).evoCalendar('toggleEventList',true);
+			});
+		}
+	});
+
+	vGlobalPollId="";
+	vGlobalQid="";
+	function setPollId(vPollId, vQid){
+		window.vGlobalPollID = vPollId;
+		window.vGlobalQid = vQid;
+	}
+
+	function submitPoll_sidemenu(form){
+		// alert('Your vote has been submitted');
+		// console.log(form.id)
+
+		var option_checked = false;
+		$("#" + form.id + " input[type=radio]").each(function(){
+			// console.log($(this));
+			if($(this).is(":checked")){
+				option_checked = true;
+			}
+		});
+
+		var ques_cookie = getCookie('poll_'+ form.id);
+		if(option_checked == true && ques_cookie == ''){
+			alert('Your vote has been submitted');
+			$("#" + form.id).submit();
+		}else if(ques_cookie != '' ){
+			alert('You\'ve voted for this poll, please come again after a week.');
+		}else if(option_checked != true ){
+			alert('Please select an option to vote');
+		}
+		// v_url = 'https://landsurvey.sarawak.gov.my/web/subpage/poll_result/';
+		// window.location.href = v_url+'&id=' + vGlobalPollID;
+	}
+	
+	var v_id = '5';
+	var subscribe_form = '#subscribe_form' + v_id;
+	$('#subscribe_submit_btn'+ v_id).click(function(e) {
+		e.preventDefault();
+		var email = $('#subscriber_email').val();
+		if(email == ''){
+			alert('Please enter your Email');
+		}else{
+			var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+			if(!re.test(email)) {
+				alert("Please enter valid Email.");
+				return false;
+			}else{
+				$(subscribe_form).submit();
+			}
+		}
+		return false;
+	});
+	
+	
+</script>			</div>
+			
+			<footer class="main-footer">
+							</footer>
+		</div>
+		
+		<SCRIPT LANGUAGE="javascript" TYPE="text/javascript" SRC="https://landsurvey.sarawak.gov.my//moonlight/plugin/shortcut/shortcuts.js"></SCRIPT><SCRIPT LANGUAGE="javascript" TYPE="text/javascript">j_lbl_field_required="This field is required.";</SCRIPT>	</body>
+</html>
+
+<!-- purpose is for mobile login view  -->
+<div class="modal fade" id="login_modal">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="padding:5px 5px;">
+                <span aria-hidden="true">&times;</span>
+            </button>
+			<div id="modal_body_login"></div>
+		</div>
+	</div>
+</div>
+
+<script src="https://landsurvey.sarawak.gov.my/web/web/js/custom.js"></script>
+<script>
+	$(document).ready(function () {
+		init_color_theme('red','/');	});
+
+	function open_login_modal(){
+		console.log('fsfd');
+		var url = "https://landsurvey.sarawak.gov.my/web/share/login/"+'?view=mobile';
+		makeGETRequest( url, 'modal_body_login');
+	}
+</script>
+
+<script>
+	// show loader when page redirect
+	window.onbeforeunload = function (event) {
+		$('.full-page-loader').show();
+	};
+</script>
+
+
+
+
+<script src="https://sarawakpass.sarawak.gov.my/swkpass_plugin.js"></script>
+<script language="javascript">
+
+
+window.addEventListener('load',()=>{
+	swkpassAvatarDropDownItemAppend({
+			'my_payment':{
+				'icon':'https://service.sarawak.gov.my/web/module/web/web/theme/web/res/icon_svg/icon_payment.svg',
+				'label':'Payment',
+				'link': 'https://service.sarawak.gov.my/web/pub/public/enq_n_pay/?l=en'
+			},
+			'my_service':{
+				'icon':'https://service.sarawak.gov.my/web/module/web/web/theme/web/res/icon_svg/icon_service.svg',
+				'label':'Services',
+				'link': 'https://sarawak.gov.my/web/home/p_display_nature_list/16/?lang=en'
+			}
+		});
+	
+	swkpassInit({
+		client_id: 'landsurvey_dweb10_web',
+		state: '1792017830',
+		redirect_uri: 'https://landsurvey.sarawak.gov.my/web/home/index/?oauth2_auth%26spass',
+		position: 'top_right',//top_left,top_right,bottom_left,bottom_right
+		lang: 'en', //en,bm
+		main_elem_id: 'spass_plugin', //the main element id that the button will be populate
+		//ui_mode: 'login_button', //login_button,avatar_dropdown
+		ui_mode: 'login_button', //login_button,avatar_dropdown
+		///user_full_name: '',
+		user_full_name: '',
+		///user_name: '',
+		user_name: '',
+		// overwrite_login_function: 'spass_overlap_login',
+		logout_redirect_uri: 'https://landsurvey.sarawak.gov.my/web/home/member_logout/',
+		corp_name: '',
+		corp_profile_uri: '',
+		corp_profile_redirect_uri: '',
+	});
+
+});	
+
+</script>
