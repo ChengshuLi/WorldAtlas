@@ -1,0 +1,271 @@
+{
+  "status": "five-source-conflict-centres-held",
+  "research_date_utc": "2026-10-14",
+  "scope": "Bounded primary-document and retained-data reads only. No GIS/native/source raster/GSHHG work, geometry operation, dataset download, import, patch, exclusion or clearance.",
+  "retained_head": "2093460d23ebb861b94d8725c761761e217b7696",
+  "retained_prefix": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/",
+  "inputs_read": [
+    "kawthoung/held-intervals.json",
+    "kawthoung/input-provenance.json",
+    "kawthoung/original-stage-inputs.json",
+    "retained-frozen-inputs/source-conflict/block-030.json.gz"
+  ],
+  "conflict_input_sha256_verified": "09fd4a468b686d48e4dce53ee91cad3009e0bd14c5872911b9eb362c8b645f2b",
+  "centres": [
+    {
+      "x": 203178,
+      "y": 123087,
+      "lon": 98.99979402363391,
+      "lat": 10.912645030840912,
+      "owners": [
+        30350,
+        41647
+      ],
+      "source_sids": [
+        44893,
+        44954,
+        45117,
+        57241,
+        58124
+      ]
+    },
+    {
+      "x": 203178,
+      "y": 123088,
+      "lon": 98.99979402363391,
+      "lat": 10.911296683206162,
+      "owners": [
+        30350,
+        41647
+      ],
+      "source_sids": [
+        44893,
+        44954,
+        45117,
+        57241,
+        58124
+      ]
+    },
+    {
+      "x": 203178,
+      "y": 123089,
+      "lon": 98.99979402363391,
+      "lat": 10.909948329454508,
+      "owners": [
+        30350,
+        41647
+      ],
+      "source_sids": [
+        44893,
+        44954,
+        45117,
+        57241,
+        58124
+      ]
+    },
+    {
+      "x": 203179,
+      "y": 123089,
+      "lon": 99.00116719940803,
+      "lat": 10.909948329454508,
+      "owners": [
+        30350,
+        41647
+      ],
+      "source_sids": [
+        44893,
+        44954,
+        45117,
+        57241,
+        58124
+      ]
+    },
+    {
+      "x": 203179,
+      "y": 123090,
+      "lon": 99.00116719940803,
+      "lat": 10.908599969586664,
+      "owners": [
+        30350,
+        41647
+      ],
+      "source_sids": [
+        44893,
+        44954,
+        45117,
+        58124
+      ]
+    }
+  ],
+  "centre_method": {
+    "size": 262166,
+    "longitude": "(x+0.5)/size*360-180, degrees east",
+    "latitude": "Read little-endian float64 at byte offset y*8 from exact retained native table, degrees north; no freshly generated row latitude used",
+    "latitude_commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+    "latitude_path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+    "decoded_sha256_verified": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23",
+    "datum_limit": "Exact app geographic centres are identified. No datum transformation into an official boundary map was performed; no official local survey datum acquired."
+  },
+  "source_roster": [
+    {
+      "sid": 44893,
+      "id": "gb:MMR:ADM1:20573499B47967485654923",
+      "name": "Tanitharyi"
+    },
+    {
+      "sid": 44954,
+      "id": "gb:MMR:ADM2:60261553B98033082841224",
+      "name": "Kawthoung"
+    },
+    {
+      "sid": 45117,
+      "id": "gb:MMR:ADM3:66882298B82483484204646",
+      "name": "Bokpyin",
+      "owner": 30350,
+      "ordinal": 146
+    },
+    {
+      "sid": 57241,
+      "id": "gb:THA:ADM1:36821470B15538290209832",
+      "name": "Chumphon Province",
+      "ordinal": 19
+    },
+    {
+      "sid": 58124,
+      "id": "gb:THA:ADM2:78962969B56380938562562",
+      "name": "Tha Sae",
+      "owner": 41647,
+      "ordinal": 825
+    }
+  ],
+  "provenance": {
+    "metadata_read": "git HEAD:data/administrative-sources.json",
+    "mmr_adm3": {
+      "represented_year": "2019",
+      "source": "The Myanmar Analytics Project, USAID",
+      "license": "CC BY 4.0",
+      "original_sha256": "94c0c9af839094257d13a6fe6590feddb2dcb04540d87e58b656c9f000fb92a2"
+    },
+    "tha_adm1": {
+      "represented_year": "2017",
+      "source": "OpenStreetMap, Wambacher",
+      "license": "ODbL 1.0",
+      "original_sha256": "841f1250cac868fa966b2089863f01e9c9b4dc9b7fb0d9d6dce9a495e32b32a0"
+    },
+    "tha_adm2": {
+      "represented_year": "2019",
+      "source": "Royal Thai Survey Department, OCHA ROAP",
+      "license": "CC BY 3.0 IGO",
+      "original_sha256": "faae0d9d6fe56b489a9cb3bd5b8fe100025aad99ec554bf7a9f49cbe2216bf10",
+      "source_url": "https://data.humdata.org/dataset/thailand-administrative-boundaries"
+    },
+    "interpretation": "Thai district competitor must not be relabeled OSM merely because covering Thai province has OSM lineage. Fifth cell lacks SID57241 but still has SID58124 and both competing owners. SID absence is not clearance.",
+    "limit": "Metadata claims and retained hashes; no original full source product decoded or new authority/effective-date/CRS verification performed in this task. Provider represented years are not surveyed boundary dates."
+  },
+  "reference_lineage": {
+    "lineage_path": "coordination/engineering/global-current-cell-work-queue-20261014/lineage.json.gz",
+    "bokpyin": {
+      "owner": 30350,
+      "reference_owner": "Myanmar",
+      "parent": "framework:province:kawthoung:25f2b1f750b9",
+      "source_atom": "gb:MMR:ADM3:66882298B82483484204646"
+    },
+    "tha_sae": {
+      "owner": 41647,
+      "reference_owner": "Thailand",
+      "parent": "framework:province:chumphon-province:1a04f4d4375e",
+      "source_atom": "gb:THA:ADM2:78962969B56380938562562"
+    },
+    "bokpyin_reference_metadata": "Selected feature records Natural Earth MMR-3279 framework match; reference year 2019; pinned Natural Earth tree ca96624a56bd078437bca8184e78163e5039ad19; semantic status open; topology conflicts 3",
+    "country_reference_body": {
+      "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+      "expected_bytes": 4719659,
+      "expected_sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+      "verification": "Read retained provenance only; body not decoded here"
+    },
+    "cell_membership_limit": "Conflict rows encode source SIDs and candidate owners, not explicit country-reference centre membership. No new membership was inferred or computed.",
+    "display_policy": "Retained topology report uses Natural Earth ADM0 where unambiguous, then finer original polygon and stableID; display partition only. Pairwise cuts not recorded; zero remaining overlap pairs does not prove border exclusion."
+  },
+  "primary_documentary_evidence": [
+    {
+      "title": "Chumphon Provincial Industry Office, Industrial Development Action Plan, fiscal year BE2565 (2022)",
+      "url": "https://chumphon.industry.go.th/web-upload/66xd1760e5c1ab4b9ae889379bd1a112f49/202205/m_page/11454/2839/file_download/7f51025e8f4137dbf3085813bd553058.pdf",
+      "locator": "Printed page 15, PDF zero-based page index 17, sections 3 and 4; printed page 16 administrative table",
+      "support": "Western neighbors include Kra Buri/Ranong and Myanmar. Western highlands include the Tenasserim hills, described as natural Thailand-Myanmar boundary. Tha Sae appears among province districts.",
+      "limit": "General province description; no held-centre coordinates, local watershed trace, boundary markers, scale or datum. Does not identify the exact district/tambon at any centre or adjudicate the overlap.",
+      "license": "No explicit reproduction license inspected; citation and short paraphrase only."
+    },
+    {
+      "title": "U.S. Department of State, International Boundary Study 63",
+      "date": "1966-02-01",
+      "url": "https://library.law.fsu.edu/Digital-Collections/LimitsinSeas/pdf/ibs063.pdf",
+      "locator": "Printed pages6-7",
+      "support": "Southern alignment follows peninsula water divide to Khao Daeng in Chumbon, then a ridge to Kra-Mathe/Pakchan headwaters. Cites 1868 convention and exchanged maps.",
+      "limit": "Historical regional criterion only. No exact map tie, local watershed geometry, coordinates or datum for these centres. Salween-thalweg evidence from Hpapun is not applicable by default. No inference that this cell is on Pakchan, watershed, or any particular side.",
+      "license": "No explicit reproduction license inspected; citation and short paraphrase only."
+    },
+    {
+      "title": "Song Phi Nong Subdistrict Administrative Organization, general information",
+      "url": "https://www.songpeenong.go.th/general1.php",
+      "date": "Undated page, accessed 2026-10-14",
+      "support": "Thai text describes Song Phi Nong terrain as upland/mountains and western neighbor as Myanmar; its administrative address is Tha Sae, Chumphon.",
+      "limit": "Local administrative context only. No evidence ties any held centre to Song Phi Nong; no cell assignment inferred. No map scale/datum."
+    }
+  ],
+  "manual_inspection_leads": [
+    {
+      "title": "Thai House of Representatives Military Committee, meeting summary, search catalogue date 1 November 2012",
+      "url": "https://old.parliament.go.th/ewtcommittee/ewt/soldier/download/article/article_20121213160207.pdf",
+      "extent": "4 pages",
+      "observed": "Document extraction is corrupt Thai text. English fragments include Main Water Shade, Map of Tenasserim and the Adjacent provinces of the Kingdom of Siam, Detail Survey and Joint Boundary Commission. Search snippet mentions Tha Sae/Chumphon and green-red map.",
+      "limit": "Not reliable enough for substantive findings, date verification or local alignment. Web screenshot calls returned citation strings without image pixels in this runtime, so pages were not visually read. These are retrieval leads only, no treaty-map priority or dispute conclusion asserted.",
+      "next": "Read rendered original, establish exact meeting date, identify the cited map edition/sheet and local district scope, then obtain authoritative sheet/datum/marker or watershed trace."
+    }
+  ],
+  "access_limits": [
+    "HDX source page returned 403; metadata already retained is not fresh verification of RTSD surveying particulars.",
+    "Chumphon provincial boundary page returned 403.",
+    "Department of Agriculture Song Phi Nong community PDF timed out twice; no contents relied upon.",
+    "No bilateral local boundary sheet, surveyed watershed line, marker coordinates or matching datum obtained."
+  ],
+  "missing_exclusion_mapping": [
+    "All five centres: authoritative dated local international boundary/watershed or marker survey covering98.99979402363391–99.00116719940803°E and 10.908599969586664–10.912645030840912°N, with CRS/datum/scale/precision and bilateral/legal applicability.",
+    "All five centres: original RTSD/OCHA 2019 Tha Sae provenance/technical particulars versus MMR 2019 Bokpyin source, to determine whether mismatch is digitization, simplification, datum, vintage or competing interpretation; none diagnosed here.",
+    "All five centres: exact retained country-reference membership and independently traceable original-to-display pairwise cut/exclusion witness. Current display zero-overlap result and parent labels cannot replace it.",
+    "Fifth centre: continuing Tha Sae SID 58124 conflict must be addressed despite absent Chumphon ADM1 SID 57241.",
+    "Separate future engineering proof: accepted territorial decision, current owner-zero applicability and selected-native conservation. No clearance supplied by this documentary task."
+  ],
+  "conclusion": "Keep all five conflict centres held. Primary documents support a mountainous/watershed research route for the southern reach, but do not resolve any centre or authorize a border exception.",
+  "input_custody": {
+    "verified_read_commit": "2093460d23ebb861b94d8725c761761e217b7696",
+    "first_retention_commit_verified": "c9c33c777bd01c5214a372ebc3718eed0aa10271",
+    "generation_head_declared_inside_input_provenance": "09ac43d945203fc877d3a30104f775960e711d65",
+    "distinction": "The original research read worktree files directly. This correction verifies all four input bodies against current HEAD and their first retention commit. The input-provenance head field is the upstream preparation/generation pin, not the commit containing the unresolved-evidence files.",
+    "files": [
+      {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/kawthoung/held-intervals.json",
+        "bytes": 150122,
+        "sha256": "c08345c480c9efd07b60721c9d7c4c5ccfa455beee8bd1f57b68d914329b2cdf",
+        "matches_current_head_and_first_retention_commit": true
+      },
+      {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/kawthoung/input-provenance.json",
+        "bytes": 14165,
+        "sha256": "2e32b69034677279b68abf1dff0974c92a0a077d132f6b121e6b02b24955b9b1",
+        "matches_current_head_and_first_retention_commit": true
+      },
+      {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/kawthoung/original-stage-inputs.json",
+        "bytes": 168107,
+        "sha256": "8375890ae28d4d7cd534447e976fc7448a3b040cce840717c46b2c81a133a6ba",
+        "matches_current_head_and_first_retention_commit": true
+      },
+      {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/retained-frozen-inputs/source-conflict/block-030.json.gz",
+        "bytes": 109,
+        "sha256": "09fd4a468b686d48e4dce53ee91cad3009e0bd14c5872911b9eb362c8b645f2b",
+        "matches_current_head_and_first_retention_commit": true
+      }
+    ]
+  }
+}

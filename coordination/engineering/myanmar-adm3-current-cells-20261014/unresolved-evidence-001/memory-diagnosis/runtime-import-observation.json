@@ -1,0 +1,24 @@
+{
+  "status": "read-only-import-observation",
+  "executable": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+  "python": "3.12.14",
+  "mode": "-B; ordinary user site enabled",
+  "user_site_enabled": true,
+  "user_site": "/Users/chengshuli/.local/lib/python3.12/site-packages",
+  "numpy": {
+    "version": "2.3.5",
+    "file": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/__init__.py"
+  },
+  "shapely": {
+    "version": "2.1.2",
+    "file": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/__init__.py",
+    "geos": "3.13.1"
+  },
+  "limitations": [
+    "No scientific producer launched or qualified by this import probe.",
+    "Primary Python isolated -I mode disables the user-site Shapely import.",
+    "Existing pinned requirements venv separately verified with -I; no installation, runtime wrapper or environment path injection.",
+    "Direct physical producer requires its retained sibling comparison.py; ordinary script-directory import is preserved with -B."
+  ],
+  "existing_venv_executable": "/Users/chengshuli/.cache/worldatlas-python-envs/requirements-a911b499659c266373447ffef081b16be803c5b5b2cd22889cc5c7a22811c0ae-python-3.12.14-macos-arm64/bin/python"
+}
