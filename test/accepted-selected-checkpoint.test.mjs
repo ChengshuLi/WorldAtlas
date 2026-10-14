@@ -238,7 +238,7 @@ test('a missing retained copy never bypasses a permission or inventory failure',
   assert.equal(reads,0);
 });
 test('fresh queue loader retains real workflow identity and original successful upload receipt', async () => {
-  const f=acceptedFixture();f.run.status='in_progress';
+  const f=acceptedFixture();f.run.status='in_progress';f.run.head_branch='main';
   const log=Buffer.from([JSON.stringify({report_sha256:f.source.report_sha256,report_bytes:f.raw.length}),
     `SHA256 digest of uploaded artifact zip is ${f.source.artifact_digest}`,
     `Artifact ${f.source.artifact_name} has been successfully uploaded! Final size is ${f.zip.length} bytes. Artifact ID is 56`].join('\n'));
@@ -286,7 +286,7 @@ test('metadata uses the shared authenticated API with a bounded response and inv
   assert.equal(f.admitted[0],16*1024*1024);
 });
 test('queue rerun carries its actual successful original attempt without relabeling it current', async () => {
-  const f=acceptedFixture();
+  const f=acceptedFixture();f.run.head_branch='main';
   const log=Buffer.from([JSON.stringify({report_sha256:f.source.report_sha256,report_bytes:f.raw.length}),
     `SHA256 digest of uploaded artifact zip is ${f.source.artifact_digest}`,
     `Artifact ${f.source.artifact_name} has been successfully uploaded! Final size is ${f.zip.length} bytes. Artifact ID is 56`].join('\n'));
