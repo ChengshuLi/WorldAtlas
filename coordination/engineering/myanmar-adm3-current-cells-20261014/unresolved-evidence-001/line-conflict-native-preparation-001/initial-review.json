@@ -1,0 +1,87 @@
+{
+  "reviewer": "/root/rakhine_2578_inputs",
+  "executor_identity": "01a13bc1-4be7-7458-80e5-955cb1d6a00c",
+  "kind": "independent-static-scientific-input-review",
+  "accepted_operator_context": "35a549b7e16aa151114a3d819e2733250ca7050a",
+  "scope": "Two stock authority attempts: 901 and 1677; no science/native/GIS/source/GSHHG replay, fetch, downloads or tracked edits",
+  "checks": [
+    {
+      "evidence": "two-target-901-source-evidence.json",
+      "patch": "two-target-901-candidate-native-patch.json",
+      "targets": [
+        {
+          "owner": 30104,
+          "target": "gb:MMR:ADM3:66882298B19696970616392",
+          "cells": 161,
+          "rows": 73,
+          "queries": 16,
+          "contradiction_segments": 4,
+          "exclusions": 4,
+          "query_witness_modes": {
+            "complete-operation-pointset": 2,
+            "disjoint-after-explicit-predicate": 14
+          },
+          "selected_stage_geometry_equal": true,
+          "all_seven_support_operations_retained": true,
+          "all_queries_unique_checked_frame0": true
+        },
+        {
+          "owner": 30332,
+          "target": "gb:MMR:ADM3:66882298B77467059166323",
+          "cells": 740,
+          "rows": 188,
+          "queries": 6,
+          "contradiction_segments": 55,
+          "exclusions": 3,
+          "query_witness_modes": {
+            "complete-operation-pointset": 5,
+            "disjoint-after-explicit-predicate": 1
+          },
+          "selected_stage_geometry_equal": true,
+          "all_seven_support_operations_retained": true,
+          "all_queries_unique_checked_frame0": true
+        }
+      ]
+    },
+    {
+      "evidence": "kyaukpyu-1677-source-evidence.json",
+      "patch": "30100-candidate-native-patch.json",
+      "targets": [
+        {
+          "owner": 30100,
+          "target": "gb:MMR:ADM3:66882298B17691670471295",
+          "cells": 1677,
+          "rows": 250,
+          "queries": 83,
+          "contradiction_segments": 42,
+          "exclusions": 1,
+          "query_witness_modes": {
+            "complete-operation-pointset": 28,
+            "disjoint-after-explicit-predicate": 53,
+            "complete-source-record-reconstruction": 2
+          },
+          "selected_stage_geometry_equal": true,
+          "all_seven_support_operations_retained": true,
+          "all_queries_unique_checked_frame0": true
+        }
+      ]
+    }
+  ],
+  "disposition": "input identity/count/query joins verified; scientific readiness conditional on explicit foreign-exclusion policy/custody and actual positive native checks",
+  "scientific_gaps": [
+    "Source evidence declares only complete MMR ADM3. Territorial exclusions are expected ADM1/ADM2 residuals and nonexpected MMR parents, not authenticated foreign competitor/country-reference geometries. The referenced parent screen explicitly leaves full sibling/foreign source qualification required. No current target-specific foreign-exclusion rationale was established by this static input pair; preserve frozen foreign-source limits, obtain applicable accepted-policy rationale or exact additional evidence before claiming readiness.",
+    "Actual stock constructor must establish positive mapped land, full-family own source uniqueness, no water/outside/tie/territorial/parent contacts. Diagnostic zero residual incidence supplies none of these positive results.",
+    "Two Kyaukpyu source-record reconstruction references 57650 and 186159 must stay complete authenticated query semantics; no invented empty operation geometries. Full source/container custody was not reauthenticated here."
+  ],
+  "preservation": [
+    "901 retains full failed14 envelope and complete individual 16/6-query observations; no retrospective success.",
+    "1677 binds separate successful retry; never use interrupted failed14 Kyaukpyu row.",
+    "All original holds including 25 parent-held,23 water,2925 relative in original Rakhine cohort and all2578 pending cells remain; zero qualification/acceptance/delivery credit.",
+    "Shared diagnostic002 remains diagnostic only; current-owner-zero/conservation and later delivery checks pending."
+  ],
+  "limits": [
+    "No unchanged accepted code re-review, authority run or full consumer/browser gate.",
+    "Static JSON geometry equality/hash/count checks only; no geometric predicates, source decompression or native scan.",
+    "Metadata refs to catalogue/family/roster/latitudes retained exactly; their complete large bodies not decoded or scientifically requalified here."
+  ]
+}
