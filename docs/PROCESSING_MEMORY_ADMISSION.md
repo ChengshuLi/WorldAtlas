@@ -21,28 +21,65 @@ resident applications remain reflected in available memory. A declared pending
 parallel job must reserve its prospective additional memory before it starts;
 these cooperative guards do not discover or serialize other jobs.
 
-After that reservation, half the remaining reported supply stays unallocated for
-parent/system growth and expansion. The other half is admitted additional growth.
-The complete-process ceiling is current measured RSS plus that growth. Both the
-complete-phase byte limit and total-process RSS limit default to this ceiling;
-explicit positive grants cannot exceed it. Only measured RSS gets this resident
-credit, never runtime executable size, transport size or historical phase counts.
-An automatic preparation budget takes one admission observation at its entry;
-it does not re-admit its just-created default against a second non-atomic sample.
-Explicit prior requests are freshly validated without subtracting already
-resident bytes a second time. Lost remaining supply or increased future concurrent
-reservations can still make the same request inadmissible.
+`WORLDATLAS_MEMORY_HEADROOM_BYTES` (or the explicit `headroomBytes` argument)
+is an optional explicit positive safe-integer byte reservation for system/parent growth and
+uncertainty beyond the named concurrent jobs. Zero or malformed explicit policy
+fails with an actionable error and never falls back. When absent, existing
+unattended callers retain conservative automatic sizing: half the unreserved
+available bytes. That is a default heuristic, not a physical maximum. Explicit
+headroom replaces that heuristic completely, so legitimate grants may exceed
+the former half-free ceiling. The same setting must reach the immutable reader, native preparation and pre-import
+joint entry; existing launches inherit it through their environment.
 
-For the reported idle observation of 1,590,296,576 available bytes and 51,658,752
-current RSS bytes, with no concurrent reservation, the default ceiling is
-846,807,040 bytes. That is an admission calculation, not a measured GIS peak or
-proof that any particular native operation fits.
+The coordinator chooses and records the reserve before the operation, using the
+actual environment's observed pressure/availability variation, other planned
+growth and the operation's uncertainty. Do not pick it by subtracting the desired
+job size merely to make admission pass. A historical peak from another input is
+an estimate, not an upper bound for a new workload. No universal reserve is
+established by this change. An operator choosing explicit sizing must justify
+its reserve; absence does not silently select a smaller default reserve.
+
+With explicit headroom, additional admitted growth is available memory minus the
+concurrent-growth reservation and explicit headroom. The complete-process ceiling
+adds only that same process's measured resident RSS. Phase and RSS grants may be
+smaller than this ceiling; existing actual phase/RSS enforcement stays in place.
+Automatic preparation observes admission once; an explicit prior grant is checked
+against fresh observations and can be rejected after supply falls or reservations
+increase. Already resident bytes are not charged twice.
+
+For a **new separate child**, do not credit the preflight parent's RSS. The parent
+remains resident and is already reflected in the available-memory observation.
+Use zero child resident credit before launch, or independently measured existing
+child RSS if the same-child contract supports it. A separate Node preflight does
+not enforce a Python child's RSS. Keep the applicable real enforcement and cleanup
+contract; do not label `/usr/bin/time` peak measurement as a live memory limiter.
+
+The actual Myanmar coastal refusal observed 1,401,257,984 available bytes and
+52,576,256 Node RSS. The removed half-free rule returned 753,205,248. Its historical
+Python peak estimate was 995,868,672, leaving 405,389,312 physical bytes before any
+new child launch. A nearby observed availability change was 572,882,944 bytes,
+larger than that residual. For this current Mac operating session, the coordinator
+chose `WORLDATLAS_MEMORY_HEADROOM_BYTES=572882944`, keeping forecast uncertainty
+separate. With zero new-child resident credit and no concurrent reservation,
+coastal004 would have 828,375,040 admitted bytes and still refuses the historical
+995,868,672-byte estimate. This is a recent observation, not a guarantee, universal
+default, new-target peak measurement or proof any other job fits. Re-evaluate the
+policy after a meaningful operating/environment change; do not shrink it merely
+to pass admission or repeatedly poll unchanged conditions.
+
+Existing launch environments propagate this value to child consumers; configure
+it once at the actual execution boundary, not through another packet wrapper.
+For a separate Python child, the coordinator must pass `currentRssBytes: 0` to
+its prospective guard. Setting the environment does not change child execution
+or install an RSS supervisor. Existing unattended queue/build callers need no new
+configuration and retain their established conservative automatic policy. Do not
+apply the observed Mac reserve to cloud/CI machines without their own basis.
 
 ## Keep the operation bounded
 
-Ordinary launches need no new override. Native preparation already supports
-`--phase-bytes` and `--rss-bytes`; they request smaller explicit limits and do not
-bypass current admission. The immutable reader's default grant is automatic.
+Operators requesting explicit sizing supply justified headroom through the
+argument or existing environment. Native preparation already supports `--phase-bytes` and `--rss-bytes`;
+these request smaller limits and never bypass fresh physical admission.
 Malformed/negative observations, exhausted remaining growth and unsafe integer
 sums fail closed. File/decoded-member bounds, descriptor bounds, complete-phase
 input/carry/output accounting and current RSS checks still apply.

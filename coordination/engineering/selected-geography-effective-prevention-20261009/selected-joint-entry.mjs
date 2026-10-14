@@ -114,10 +114,15 @@ export function checkpointTransportInput(reader, name, maximum, admit, {consume 
 // parity controls exercise this bootstrap and the authenticated reader together.
 export function jointExecutionAllowance({availableBytes = process.availableMemory(),
   concurrentReservedBytes = Number(process.env.WORLDATLAS_CONCURRENT_RESERVED_BYTES ?? 0),
-  currentRssBytes = process.memoryUsage().rss} = {}) {
+  currentRssBytes = process.memoryUsage().rss,
+  headroomBytes = (process.env.WORLDATLAS_MEMORY_HEADROOM_BYTES===undefined?undefined:Number(process.env.WORLDATLAS_MEMORY_HEADROOM_BYTES))} = {}) {
   demand([availableBytes, concurrentReservedBytes, currentRssBytes].every(value =>
     Number.isSafeInteger(value) && value >= 0), 'Invalid joint resource observations');
-  const growthBytes = Math.floor((availableBytes - concurrentReservedBytes) / 2);
+  demand(headroomBytes === undefined || (Number.isSafeInteger(headroomBytes) && headroomBytes > 0),
+    'Set WORLDATLAS_MEMORY_HEADROOM_BYTES or headroomBytes to a justified positive byte reservation for system growth');
+  const growthBytes = headroomBytes === undefined
+    ? Math.floor((availableBytes - concurrentReservedBytes) / 2)
+    : availableBytes - concurrentReservedBytes - headroomBytes;
   demand(growthBytes > 0, 'Insufficient current joint memory after concurrent reservation and safety headroom');
   const limit = currentRssBytes + growthBytes;
   demand(Number.isSafeInteger(limit), 'Invalid joint resource observations');
