@@ -1,0 +1,324 @@
+{
+  "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/341d0bbaf81e47cd16ab58ca6d1ab75d5ac120cf732c677e081b12830ea3ef31/work/.cache/mmr-remaining-inventory-20261014-001/inventory.json",
+  "bytes": 257291,
+  "sha256": "efec8d28b63befcb411b6d0d81063af6a962edbec9a1b3f08b86fc3b7bd44157",
+  "scientific_vintage": "f7c358326d776398bc1cffe84df81eac7033091c",
+  "frozen_queue_vintage": "a61b6f9e7f88b1da380e3a834f89d7509132ed71",
+  "parent_id": "framework:province:myitkyina:dfd6b0c4e1c6",
+  "source_parent_features": [
+    {
+      "source_index": 44912,
+      "family_index": 217,
+      "source_id": "gb:MMR:ADM2:60261553B87045265182451",
+      "ordinal": 15,
+      "owners": [],
+      "name": "Myitkyina",
+      "geometry_status": "raw-native-supported"
+    }
+  ],
+  "source_region_features": [
+    {
+      "id": "gb:MMR:ADM1:20573499B79934184351821",
+      "name": "Kachin"
+    }
+  ],
+  "complete_child_count": 6,
+  "repair_land": 425,
+  "children": [
+    {
+      "owner": 30156,
+      "id": "gb:MMR:ADM3:66882298B33332446672250",
+      "name": "Injangyang",
+      "province_id": "framework:province:myitkyina:dfd6b0c4e1c6",
+      "source_id": "gb:MMR:ADM3",
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B33332446672250"
+      ],
+      "remaining_counts": {},
+      "accepted_removed_cells": 0,
+      "reserved_excluded_cells": 0,
+      "blocks": [],
+      "source_sids": [],
+      "topology_fields": {
+        "topology_version": 1
+      },
+      "current_geometry": {
+        "type": "Polygon",
+        "polygons": 1,
+        "coordinate_pairs": 135,
+        "interior_rings": 0,
+        "bounds": [
+          97.4896,
+          25.5874,
+          98.2892,
+          26.7958
+        ]
+      },
+      "original_geometry": {
+        "type": "Polygon",
+        "polygons": 1,
+        "coordinate_pairs": 388,
+        "interior_rings": 0,
+        "bounds": [
+          97.48961291500008,
+          25.585603306000085,
+          98.289202103,
+          26.795815243000057
+        ]
+      }
+    },
+    {
+      "owner": 30164,
+      "id": "gb:MMR:ADM3:66882298B34211436690128",
+      "name": "Tsawlaw",
+      "province_id": "framework:province:myitkyina:dfd6b0c4e1c6",
+      "source_id": "gb:MMR:ADM3",
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B34211436690128"
+      ],
+      "remaining_counts": {
+        "repair-evaluation:land": 33
+      },
+      "accepted_removed_cells": 0,
+      "reserved_excluded_cells": 0,
+      "blocks": [
+        27
+      ],
+      "source_sids": [
+        44886,
+        44912,
+        45277
+      ],
+      "topology_fields": {
+        "topology_version": 1
+      },
+      "current_geometry": {
+        "type": "Polygon",
+        "polygons": 1,
+        "coordinate_pairs": 99,
+        "interior_rings": 0,
+        "bounds": [
+          98.1298,
+          26.0275,
+          98.7814,
+          26.8503
+        ]
+      },
+      "original_geometry": {
+        "type": "Polygon",
+        "polygons": 1,
+        "coordinate_pairs": 252,
+        "interior_rings": 0,
+        "bounds": [
+          98.12887180500006,
+          26.027489983000088,
+          98.78136091300003,
+          26.85028478400009
+        ]
+      }
+    },
+    {
+      "owner": 30191,
+      "id": "gb:MMR:ADM3:66882298B42133100015884",
+      "name": "Waingmaw",
+      "province_id": "framework:province:myitkyina:dfd6b0c4e1c6",
+      "source_id": "gb:MMR:ADM3",
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B42133100015884"
+      ],
+      "remaining_counts": {
+        "repair-evaluation:land": 166
+      },
+      "accepted_removed_cells": 0,
+      "reserved_excluded_cells": 0,
+      "blocks": [
+        27
+      ],
+      "source_sids": [
+        15319,
+        44886,
+        44912,
+        45275
+      ],
+      "topology_fields": {
+        "topology_version": 1,
+        "topology_reconciled": true,
+        "topology_conflicts": 2,
+        "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+      },
+      "current_geometry": {
+        "type": "Polygon",
+        "polygons": 1,
+        "coordinate_pairs": 190,
+        "interior_rings": 0,
+        "bounds": [
+          97.2653,
+          24.7257,
+          98.18100866983373,
+          25.7255
+        ]
+      },
+      "original_geometry": {
+        "type": "Polygon",
+        "polygons": 1,
+        "coordinate_pairs": 389,
+        "interior_rings": 0,
+        "bounds": [
+          97.2555866190001,
+          24.72566669600005,
+          98.18750436000002,
+          25.72548586199999
+        ]
+      }
+    },
+    {
+      "owner": 30207,
+      "id": "gb:MMR:ADM3:66882298B4579999731353",
+      "name": "Myitkyina",
+      "province_id": "framework:province:myitkyina:dfd6b0c4e1c6",
+      "source_id": "gb:MMR:ADM3",
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B4579999731353"
+      ],
+      "remaining_counts": {},
+      "accepted_removed_cells": 0,
+      "reserved_excluded_cells": 0,
+      "blocks": [],
+      "source_sids": [],
+      "topology_fields": {
+        "topology_version": 1
+      },
+      "current_geometry": {
+        "type": "Polygon",
+        "polygons": 1,
+        "coordinate_pairs": 206,
+        "interior_rings": 0,
+        "bounds": [
+          96.6733,
+          24.5493,
+          97.5359,
+          26.1877
+        ]
+      },
+      "original_geometry": {
+        "type": "Polygon",
+        "polygons": 1,
+        "coordinate_pairs": 768,
+        "interior_rings": 0,
+        "bounds": [
+          96.67334663500014,
+          24.548012783000164,
+          97.5359047970001,
+          26.187665724000045
+        ]
+      }
+    },
+    {
+      "owner": 30260,
+      "id": "gb:MMR:ADM3:66882298B59193658756261",
+      "name": "Tanai",
+      "province_id": "framework:province:myitkyina:dfd6b0c4e1c6",
+      "source_id": "gb:MMR:ADM3",
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B59193658756261"
+      ],
+      "remaining_counts": {
+        "repair-evaluation:land": 6
+      },
+      "accepted_removed_cells": 0,
+      "reserved_excluded_cells": 0,
+      "blocks": [
+        26
+      ],
+      "source_sids": [
+        36798,
+        44886,
+        44912,
+        44992,
+        67629
+      ],
+      "topology_fields": {
+        "topology_version": 1
+      },
+      "current_geometry": {
+        "type": "Polygon",
+        "polygons": 1,
+        "coordinate_pairs": 229,
+        "interior_rings": 0,
+        "bounds": [
+          96.001,
+          25.701,
+          97.2869,
+          27.106
+        ]
+      },
+      "original_geometry": {
+        "type": "Polygon",
+        "polygons": 1,
+        "coordinate_pairs": 802,
+        "interior_rings": 0,
+        "bounds": [
+          95.99385990800005,
+          25.70001799500006,
+          97.28688284400008,
+          27.10688946800011
+        ]
+      }
+    },
+    {
+      "owner": 30286,
+      "id": "gb:MMR:ADM3:66882298B63943979787937",
+      "name": "Chipwi",
+      "province_id": "framework:province:myitkyina:dfd6b0c4e1c6",
+      "source_id": "gb:MMR:ADM3",
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B63943979787937"
+      ],
+      "remaining_counts": {
+        "repair-evaluation:land": 220
+      },
+      "accepted_removed_cells": 0,
+      "reserved_excluded_cells": 0,
+      "blocks": [
+        27
+      ],
+      "source_sids": [
+        15319,
+        44886,
+        44912,
+        45270
+      ],
+      "topology_fields": {
+        "topology_version": 1,
+        "topology_reconciled": true,
+        "topology_conflicts": 2,
+        "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+      },
+      "current_geometry": {
+        "type": "Polygon",
+        "polygons": 1,
+        "coordinate_pairs": 184,
+        "interior_rings": 1,
+        "bounds": [
+          97.9431,
+          25.5501,
+          98.7568,
+          26.5098
+        ]
+      },
+      "original_geometry": {
+        "type": "Polygon",
+        "polygons": 1,
+        "coordinate_pairs": 355,
+        "interior_rings": 0,
+        "bounds": [
+          97.94085652700005,
+          25.54796812500009,
+          98.75679769200008,
+          26.509819977000085
+        ]
+      }
+    }
+  ],
+  "temporal_interval_envelope": "No per-cell or per-child temporal start/end intervals in retained inventory; only source reference year 2019. Geographic current/original bounds are copied unchanged, without computation."
+}

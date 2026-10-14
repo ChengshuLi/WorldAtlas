@@ -1,0 +1,392 @@
+{
+  "version": 1,
+  "date_utc": "2026-10-14",
+  "worker": "/root/putao_primary_boundary",
+  "kind": "bounded-primary-evidence-read-only-web",
+  "parent_id": "framework:province:myitkyina:dfd6b0c4e1c6",
+  "candidate_repair_land": 425,
+  "complete_child_count": 6,
+  "candidate_roster": [
+    {
+      "name": "Injangyang",
+      "owner": 30156,
+      "id": "gb:MMR:ADM3:66882298B33332446672250",
+      "parent_id": "framework:province:myitkyina:dfd6b0c4e1c6",
+      "repair_land": 0,
+      "source_sids": [],
+      "blocks": [],
+      "original_bounds": [
+        97.48961291500008,
+        25.585603306000085,
+        98.289202103,
+        26.795815243000057
+      ],
+      "current_bounds": [
+        97.4896,
+        25.5874,
+        98.2892,
+        26.7958
+      ]
+    },
+    {
+      "name": "Tsawlaw",
+      "owner": 30164,
+      "id": "gb:MMR:ADM3:66882298B34211436690128",
+      "parent_id": "framework:province:myitkyina:dfd6b0c4e1c6",
+      "repair_land": 33,
+      "source_sids": [
+        44886,
+        44912,
+        45277
+      ],
+      "blocks": [
+        27
+      ],
+      "original_bounds": [
+        98.12887180500006,
+        26.027489983000088,
+        98.78136091300003,
+        26.85028478400009
+      ],
+      "current_bounds": [
+        98.1298,
+        26.0275,
+        98.7814,
+        26.8503
+      ]
+    },
+    {
+      "name": "Waingmaw",
+      "owner": 30191,
+      "id": "gb:MMR:ADM3:66882298B42133100015884",
+      "parent_id": "framework:province:myitkyina:dfd6b0c4e1c6",
+      "repair_land": 166,
+      "source_sids": [
+        15319,
+        44886,
+        44912,
+        45275
+      ],
+      "blocks": [
+        27
+      ],
+      "original_bounds": [
+        97.2555866190001,
+        24.72566669600005,
+        98.18750436000002,
+        25.72548586199999
+      ],
+      "current_bounds": [
+        97.2653,
+        24.7257,
+        98.18100866983373,
+        25.7255
+      ]
+    },
+    {
+      "name": "Myitkyina",
+      "owner": 30207,
+      "id": "gb:MMR:ADM3:66882298B4579999731353",
+      "parent_id": "framework:province:myitkyina:dfd6b0c4e1c6",
+      "repair_land": 0,
+      "source_sids": [],
+      "blocks": [],
+      "original_bounds": [
+        96.67334663500014,
+        24.548012783000164,
+        97.5359047970001,
+        26.187665724000045
+      ],
+      "current_bounds": [
+        96.6733,
+        24.5493,
+        97.5359,
+        26.1877
+      ]
+    },
+    {
+      "name": "Tanai",
+      "owner": 30260,
+      "id": "gb:MMR:ADM3:66882298B59193658756261",
+      "parent_id": "framework:province:myitkyina:dfd6b0c4e1c6",
+      "repair_land": 6,
+      "source_sids": [
+        36798,
+        44886,
+        44912,
+        44992,
+        67629
+      ],
+      "blocks": [
+        26
+      ],
+      "original_bounds": [
+        95.99385990800005,
+        25.70001799500006,
+        97.28688284400008,
+        27.10688946800011
+      ],
+      "current_bounds": [
+        96.001,
+        25.701,
+        97.2869,
+        27.106
+      ]
+    },
+    {
+      "name": "Chipwi",
+      "owner": 30286,
+      "id": "gb:MMR:ADM3:66882298B63943979787937",
+      "parent_id": "framework:province:myitkyina:dfd6b0c4e1c6",
+      "repair_land": 220,
+      "source_sids": [
+        15319,
+        44886,
+        44912,
+        45270
+      ],
+      "blocks": [
+        27
+      ],
+      "original_bounds": [
+        97.94085652700005,
+        25.54796812500009,
+        98.75679769200008,
+        26.509819977000085
+      ],
+      "current_bounds": [
+        97.9431,
+        25.5501,
+        98.7568,
+        26.5098
+      ]
+    }
+  ],
+  "retained_metadata_excerpt": "retained-inventory-excerpt.json",
+  "scientific_vintage": "f7c358326d776398bc1cffe84df81eac7033091c",
+  "temporal_interval_envelope": "No per-cell or per-child temporal start/end intervals in retained inventory; only source reference year 2019. Geographic current/original bounds are copied unchanged, without computation.",
+  "source_parent": {
+    "source_index": 44912,
+    "family_index": 217,
+    "source_id": "gb:MMR:ADM2:60261553B87045265182451",
+    "ordinal": 15,
+    "owners": [],
+    "name": "Myitkyina",
+    "geometry_status": "raw-native-supported"
+  },
+  "sources": [
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Waingmaw_2019_MMR.pdf",
+      "producer": "Myanmar General Administration Department; MIMU mirror",
+      "pages": 75,
+      "date": "Cover December 2019; introduction states October 2018 through September 2019",
+      "locators": [
+        "PDF page 1: cover date",
+        "PDF page 12 / printed 1: data period",
+        "PDF page 14 / printed 3: area/limits/terrain",
+        "PDF page 15 / printed 4: drainage",
+        "PDF pages 10–11: map section, not visually inspected"
+      ],
+      "findings": "Geography chapter contains township/town area table. Extractable terrain prose describes two-thirds of land as north–south hills/ranges, remainder plains and rivers. Boundary and drainage sections are mostly omitted by font extraction.",
+      "actual_extent": "Township profile with multiple-town area rows; complete original-ADM3 extent unverified.",
+      "scale": "Not established.",
+      "datum": "Not established.",
+      "limit": "No reliable named boundary/river directions, survey control or candidate registration established. Cover date differs from statistical interval; neither proves boundary effective date."
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Chipwi_2019_MMR.pdf",
+      "producer": "Myanmar General Administration Department; MIMU mirror",
+      "pages": 59,
+      "date": "30 September 2019 on cover",
+      "locators": [
+        "PDF page 1: cover date",
+        "PDF page 15 / printed 4: location and area",
+        "PDF page 16 / printed 5: boundary, terrain and drainage",
+        "PDF page 23: administrative unit table"
+      ],
+      "findings": "Contains geographic location/area, boundary and drainage headings; most substantive names/numbers are omitted by text extraction. Multiple-town administrative/area rows are present.",
+      "actual_extent": "Chipwi profile; detailed map graphics and sub-township footprint aggregation unverified.",
+      "scale": "Not established.",
+      "datum": "Not established.",
+      "limit": "Cannot infer east-border alignment, river bank/thalweg rule, exclusion-hole meaning or Panwa union from partially extracted text."
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_Hsotlaw_2014_ENG.pdf",
+      "producer": "Myanmar Department of Population, Ministry of Labour, Immigration and Population; MIMU-hosted official report",
+      "title": "Hsotlaw Township Report",
+      "pages": 56,
+      "reference_date": "29 March 2014 census night",
+      "publication_date": "October 2017",
+      "locators": [
+        "Cover PDF page 1: report and district identity",
+        "PDF page 7 / figures at a glance: area",
+        "PDF page 10 note 3: area source; PDF page 17 / printed 7: demographic summary"
+      ],
+      "area_km2_as_reported": 3509.4,
+      "area_source": "Settlement and Land Record Department, Ministry of Agriculture, Livestock and Irrigation (2014–2015)",
+      "actual_extent": "Report administrative/statistical subject and Kachin-wide township locator; no detailed boundary survey established from text.",
+      "scale": "Unverified; map graphics not inspected in read-only text workflow.",
+      "datum": "Not established.",
+      "limit": "Census report name/area does not prove 2019 ADM3 whole-footprint equivalence, sub-township nesting, international-boundary alignment or any candidate cell."
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_Waingmaw_2014_ENG.pdf",
+      "producer": "Myanmar Department of Population, Ministry of Labour, Immigration and Population; MIMU-hosted official report",
+      "title": "Waingmaw Township Report",
+      "pages": 59,
+      "reference_date": "29 March 2014 census night",
+      "publication_date": "October 2017",
+      "locators": [
+        "Cover PDF page 1: report and district identity",
+        "PDF page 7 / figures at a glance: area",
+        "PDF page 10 note 3: area source; PDF page 17 / printed 7: demographic summary"
+      ],
+      "area_km2_as_reported": 3625.8,
+      "area_source": "Settlement and Land Record Department, Ministry of Agriculture, Livestock and Irrigation (2014–2015)",
+      "actual_extent": "Report administrative/statistical subject and Kachin-wide township locator; no detailed boundary survey established from text.",
+      "scale": "Unverified; map graphics not inspected in read-only text workflow.",
+      "datum": "Not established.",
+      "limit": "Census report name/area does not prove 2019 ADM3 whole-footprint equivalence, sub-township nesting, international-boundary alignment or any candidate cell."
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_Tanaing_2014_ENG.pdf",
+      "producer": "Myanmar Department of Population, Ministry of Labour, Immigration and Population; MIMU-hosted official report",
+      "title": "Tanaing Township Report",
+      "pages": 58,
+      "reference_date": "29 March 2014 census night",
+      "publication_date": "October 2017",
+      "locators": [
+        "Cover PDF page 1: report and district identity",
+        "PDF page 7 / figures at a glance: area",
+        "PDF page 10 note 3: area source; PDF page 17 / printed 7: demographic summary"
+      ],
+      "area_km2_as_reported": 9117.9,
+      "area_source": "Settlement and Land Record Department, Ministry of Agriculture, Livestock and Irrigation (2014–2015)",
+      "actual_extent": "Report administrative/statistical subject and Kachin-wide township locator; no detailed boundary survey established from text.",
+      "scale": "Unverified; map graphics not inspected in read-only text workflow.",
+      "datum": "Not established.",
+      "limit": "Census report name/area does not prove 2019 ADM3 whole-footprint equivalence, sub-township nesting, international-boundary alignment or any candidate cell."
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_Chiphwe_2014_ENG.pdf",
+      "producer": "Myanmar Department of Population, Ministry of Labour, Immigration and Population; MIMU-hosted official report",
+      "title": "Chiphwe Township Report",
+      "pages": 59,
+      "reference_date": "29 March 2014 census night",
+      "publication_date": "October 2017",
+      "locators": [
+        "Cover PDF page 1: report and district identity",
+        "PDF page 7 / figures at a glance: area",
+        "PDF page 10 note 3: area source; PDF page 17 / printed 7: demographic summary"
+      ],
+      "area_km2_as_reported": 2313.8,
+      "area_source": "Settlement and Land Record Department, Ministry of Agriculture, Livestock and Irrigation (2014–2015)",
+      "actual_extent": "Report administrative/statistical subject and Kachin-wide township locator; no detailed boundary survey established from text.",
+      "scale": "Unverified; map graphics not inspected in read-only text workflow.",
+      "datum": "Not established.",
+      "limit": "Census report name/area does not prove 2019 ADM3 whole-footprint equivalence, sub-township nesting, international-boundary alignment or any candidate cell."
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_Panwa_2014_ENG.pdf",
+      "producer": "Myanmar Department of Population, Ministry of Labour, Immigration and Population; MIMU-hosted official report",
+      "title": "Panwa Sub-Township Report",
+      "pages": 56,
+      "reference_date": "29 March 2014 census night",
+      "publication_date": "October 2017",
+      "locators": [
+        "Cover PDF page 1: report and district identity",
+        "PDF page 7 / figures at a glance: area",
+        "PDF page 10 note 3: area source; PDF page 17 / printed 7: demographic summary"
+      ],
+      "area_km2_as_reported": 1115.6,
+      "area_source": "Settlement and Land Record Department, Ministry of Agriculture, Livestock and Irrigation (2014–2015)",
+      "actual_extent": "Report administrative/statistical subject and Kachin-wide township locator; no detailed boundary survey established from text.",
+      "scale": "Unverified; map graphics not inspected in read-only text workflow.",
+      "datum": "Not established.",
+      "limit": "Census report name/area does not prove 2019 ADM3 whole-footprint equivalence, sub-township nesting, international-boundary alignment or any candidate cell."
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_Hsadone_2014_ENG.pdf",
+      "producer": "Myanmar Department of Population, Ministry of Labour, Immigration and Population; MIMU-hosted official report",
+      "title": "Hsadone Sub-Township Report",
+      "pages": 58,
+      "reference_date": "29 March 2014 census night",
+      "publication_date": "October 2017",
+      "locators": [
+        "Cover PDF page 1: report and district identity",
+        "PDF page 7 / figures at a glance: area",
+        "PDF page 10 note 3: area source; PDF page 17 / printed 7: demographic summary"
+      ],
+      "area_km2_as_reported": 711.4,
+      "area_source": "Settlement and Land Record Department, Ministry of Agriculture, Livestock and Irrigation (2014–2015)",
+      "actual_extent": "Report administrative/statistical subject and Kachin-wide township locator; no detailed boundary survey established from text.",
+      "scale": "Unverified; map graphics not inspected in read-only text workflow.",
+      "datum": "Not established.",
+      "limit": "Census report name/area does not prove 2019 ADM3 whole-footprint equivalence, sub-township nesting, international-boundary alignment or any candidate cell."
+    }
+  ],
+  "failed_once_no_retry": [
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Tsawlaw_2019_MMR.pdf",
+      "outcome": "403 Forbidden; no retry."
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Tanai_2019_MMR.pdf",
+      "outcome": "Web internal error; no retry."
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_Shinbwayyan_2014_ENG.pdf",
+      "outcome": "Web internal error; no retry."
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_Kanpaikit_2014_ENG.pdf",
+      "outcome": "Web internal error; no retry."
+    }
+  ],
+  "findings": [
+    {
+      "kind": "identity-context",
+      "fact": "DoP reports use Hsotlaw, Tanaing and Chiphwe spellings; inventory uses Tsawlaw, Tanai and Chipwi. Myitkyina District context is supported, but spelling similarity is not an exact source-ID or footprint crosswalk."
+    },
+    {
+      "kind": "administrative-extent-gap",
+      "fact": "Separate official 2014 Panwa and Hsadone Sub-Township reports exist. Their nesting and unions with 2019 Chipwi/Waingmaw source footprints require explicit proof. No area-sum argument or source geometry was used to establish it."
+    },
+    {
+      "kind": "inland-topology",
+      "fact": "Retained metadata records Chipwi current geometry with one interior ring versus original zero, and both Chipwi/Waingmaw with topology_conflicts=2 and topology_reconciled=true. That display reconciliation note does not supply surveyed inland ownership, exclusion-hole authority or original-footprint retention."
+    },
+    {
+      "kind": "border-evidence-needed",
+      "fact": "Read-only official profile text does not locate candidate cells against surveyed China-facing boundary pillars, treaty annex sheets or river rules. Retained Puta-O treaty addendum already identifies 1960 treaty Article VII(1) corridor/1961 replacement-map gaps; no repeat treaty fetch performed."
+    }
+  ],
+  "concrete_blockers": [
+    "Map graphics were not visually inspected in this read-only/no-local-download workflow; exact scale, datum and geographic extent remain unverified.",
+    "GAD boundary/drainage text has font-encoding omissions, preventing trustworthy transcription of named boundary lines.",
+    "Need official 2019 township/sub-township formation and nesting records for Panwa/Hsadone/Kanpaikit/Shinbwayyan and original-ADM3 crosswalk; missing subprofile URLs were not retried.",
+    "Need exact China-boundary protocol/pillar sheets, their datum/control and candidate registration before owner authority can be assessed.",
+    "Need inland river bank/channel definitions and documented reason/authority for Chipwi hole and reconciled footprints.",
+    "Retained inventory does not provide per-cell temporal interval envelope or exact foreign source-SID feature identities; no inference made."
+  ],
+  "license": {
+    "terms_url": "https://themimu.info/mimu-terms-conditions",
+    "reused_prior_inspection": "2025-08-04 MIMU terms already documented in retained Puta-O notes; not re-fetched.",
+    "status": "No report-specific open license established. geoBoundaries CC BY4 metadata is not a license for these reports; downstream map/data publication rights not cleared."
+  },
+  "limits_held": {
+    "new_accepted_credit": 0,
+    "approved_cells": 0,
+    "all_425_remain_held": true,
+    "sovereignty_adjudication": false,
+    "local_source_downloads": 0,
+    "browser_downloads": 0,
+    "new_permission_cards": 0,
+    "source_hashes": "Not available for read-only web sources; exact retained local inventory SHA256 recorded.",
+    "scientific_processes": 0,
+    "spatial_queries": 0,
+    "tracked_repo_edits": 0,
+    "old_workspace_mutation": false,
+    "prior_putao_files_changed": false
+  }
+}

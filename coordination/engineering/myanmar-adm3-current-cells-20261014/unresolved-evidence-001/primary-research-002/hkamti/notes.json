@@ -1,0 +1,492 @@
+{
+  "status": "bounded_documentary_research_complete_all417_unresolved",
+  "research_date_utc": "2026-10-14",
+  "scope": "Disjoint Hkamti parent417; retained inventory and intervals read only, verified latitude lookup only, primary documents read through web; no dataset/source/GIS/native passes or downloads.",
+  "retained_custody": {
+    "scientific_vintage_declared_in_cache": "f7c358326d776398bc1cffe84df81eac7033091c",
+    "actual_file_input_pins": {
+      "inventory": {
+        "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/341d0bbaf81e47cd16ab58ca6d1ab75d5ac120cf732c677e081b12830ea3ef31/work/.cache/mmr-remaining-inventory-20261014-001/inventory.json",
+        "sha256": "efec8d28b63befcb411b6d0d81063af6a962edbec9a1b3f08b86fc3b7bd44157"
+      },
+      "remaining_intervals": {
+        "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/341d0bbaf81e47cd16ab58ca6d1ab75d5ac120cf732c677e081b12830ea3ef31/work/.cache/mmr-remaining-inventory-20261014-001/remaining-intervals.json.gz",
+        "sha256": "b12b9ed64ecb16fa2b5501648fa4ca91727793fa99ceadffb96d9623519c93aa"
+      }
+    },
+    "retained_head": null,
+    "retained_head_explanation": "Read exact original readonly .cache files by locator and SHA256; no claim these untracked cache files exist at a Git commit. scientific_vintage is metadata, not a retention commit.",
+    "latitude_pin": {
+      "commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+      "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+      "decoded_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+    },
+    "method": "Inspect parent_ranking only; summarize retained interval rows for exact owners; use standard longitude formula and verified retained normlat. No source-feature/geometry producer run."
+  },
+  "target": {
+    "parent_id": "framework:province:hkamti:83628d5b8714",
+    "land": 417,
+    "water": 0,
+    "relative": 0,
+    "complete_children": [
+      {
+        "owner": 30145,
+        "name": "Lahe",
+        "id": "gb:MMR:ADM3:66882298B29413471910170",
+        "remaining_counts": {
+          "repair-evaluation:land": 77
+        },
+        "topology_reconciled": true
+      },
+      {
+        "owner": 30175,
+        "name": "Lay Shi",
+        "id": "gb:MMR:ADM3:66882298B35396935405838",
+        "remaining_counts": {
+          "repair-evaluation:land": 8
+        },
+        "topology_reconciled": true
+      },
+      {
+        "owner": 30229,
+        "name": "Hkamti",
+        "id": "gb:MMR:ADM3:66882298B49231582531962",
+        "remaining_counts": {},
+        "topology_reconciled": true
+      },
+      {
+        "owner": 30315,
+        "name": "Homalin",
+        "id": "gb:MMR:ADM3:66882298B69745000044463",
+        "remaining_counts": {},
+        "topology_reconciled": true
+      },
+      {
+        "owner": 30371,
+        "name": "Nanyun",
+        "id": "gb:MMR:ADM3:66882298B89556704578744",
+        "remaining_counts": {
+          "repair-evaluation:land": 332
+        },
+        "topology_reconciled": true
+      }
+    ],
+    "source_parent_features": [
+      {
+        "source_index": 44941,
+        "family_index": 217,
+        "source_id": "gb:MMR:ADM2:60261553B91156237471736",
+        "ordinal": 44,
+        "owners": [],
+        "name": "Hkamti",
+        "geometry_status": "raw-native-supported"
+      }
+    ],
+    "source_region_features": [
+      {
+        "id": "gb:MMR:ADM1:20573499B8199738503087",
+        "name": "Saigang"
+      }
+    ],
+    "observed_source_families": [
+      "gb:IND:ADM1",
+      "gb:IND:ADM3",
+      "gb:MMR:ADM1",
+      "gb:MMR:ADM2",
+      "gb:MMR:ADM3"
+    ],
+    "native_blocks": [
+      26,
+      27
+    ],
+    "exact_interval_summaries": [
+      {
+        "owner": 30145,
+        "name": "Lahe",
+        "interval_count": 30,
+        "cell_count": 77,
+        "x_inclusive": [
+          200438,
+          200550
+        ],
+        "y_inclusive": [
+          110907,
+          110931
+        ],
+        "centre_envelope_degrees": {
+          "longitude": [
+            95.23729240252362,
+            95.39108808922589
+          ],
+          "latitude": [
+            26.654588539169726,
+            26.68403860798379
+          ]
+        },
+        "packages": [
+          "gb-MMR-ADM3--repair-evaluation"
+        ],
+        "source_sids": [
+          36798,
+          44885,
+          44941,
+          45193,
+          67654
+        ]
+      },
+      {
+        "owner": 30175,
+        "name": "Lay Shi",
+        "interval_count": 7,
+        "cell_count": 8,
+        "x_inclusive": [
+          200075,
+          200078
+        ],
+        "y_inclusive": [
+          112241,
+          112249
+        ],
+        "centre_envelope_degrees": {
+          "longitude": [
+            94.73882959651519,
+            94.74294912383755
+          ],
+          "latitude": [
+            25.02578396972769,
+            25.035737634927138
+          ]
+        },
+        "packages": [
+          "gb-MMR-ADM3--repair-evaluation"
+        ],
+        "source_sids": [
+          44885,
+          44941,
+          45227,
+          70327
+        ]
+      },
+      {
+        "owner": 30371,
+        "name": "Nanyun",
+        "interval_count": 169,
+        "cell_count": 332,
+        "x_inclusive": [
+          200593,
+          201761
+        ],
+        "y_inclusive": [
+          110350,
+          110870
+        ],
+        "centre_envelope_degrees": {
+          "longitude": [
+            95.45013464751338,
+            97.05400395169477
+          ],
+          "latitude": [
+            26.72942589356986,
+            27.365376976067175
+          ]
+        },
+        "packages": [
+          "gb-MMR-ADM3--repair-evaluation"
+        ],
+        "source_sids": [
+          36798,
+          44885,
+          44941,
+          45016,
+          67583,
+          67620,
+          67628,
+          67629,
+          67709,
+          67718,
+          67752,
+          67756,
+          67766
+        ]
+      }
+    ]
+  },
+  "catalogue": {
+    "url": "https://themimu.info/states_regions/sagaing",
+    "gad_links": {
+      "Nanyun": 17,
+      "Lay_Shi": 28,
+      "Lahe": 29
+    },
+    "catalogue_limits": "Current regional overview not used as2019 boundary evidence. Only catalogue document identities/upload dates used."
+  },
+  "primary_documents": [
+    {
+      "id": "DOP_Nanyun_2014",
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_Nanyun_2014_ENG.pdf",
+      "publisher": "Department of Population, Ministry of Labour, Immigration and Population, Myanmar; MIMU mirror",
+      "publication_date": "2017-10",
+      "reference_date": "2014-03-29 census night",
+      "report_role": "Township",
+      "parent_printed_on_cover": "Hkamti District, Sagaing Region",
+      "area_km2": 2386.2,
+      "wards": 3,
+      "village_tracts": 16,
+      "locators": {
+        "pdf_page_1_based_1": "cover, role, parent, date",
+        "pdf_page_1_based_7": "figures at a glance",
+        "pdf_page_1_based_17": "demographic area with Settlement and Land Record Department2014-2015 attribution",
+        "pdf_page_1_based_18": "Table1 ward/tract list, printedp8"
+      },
+      "limit": "Named reporting unit and summary area, not a boundary or proof of exact consumed source footprint. No sub-township-to-township boundary/tract annex verified."
+    },
+    {
+      "id": "DOP_Pansaung_2014",
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_Pansaung_2014_ENG.pdf",
+      "publisher": "Department of Population, Ministry of Labour, Immigration and Population, Myanmar; MIMU mirror",
+      "publication_date": "2017-10",
+      "reference_date": "2014-03-29 census night",
+      "report_role": "Sub-Township",
+      "parent_printed_on_cover": "Hkamti District, Sagaing Region",
+      "area_km2": 1041.1,
+      "wards": 3,
+      "village_tracts": 9,
+      "locators": {
+        "pdf_page_1_based_1": "cover, role, parent, date",
+        "pdf_page_1_based_7": "figures at a glance",
+        "pdf_page_1_based_17": "demographic area with Settlement and Land Record Department2014-2015 attribution",
+        "pdf_page_1_based_18": "Table1 ward/tract list, printedp8"
+      },
+      "limit": "Named reporting unit and summary area, not a boundary or proof of exact consumed source footprint. No sub-township-to-township boundary/tract annex verified."
+    },
+    {
+      "id": "DOP_DonheeST_2014",
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_DonheeST_2014_ENG.pdf",
+      "publisher": "Department of Population, Ministry of Labour, Immigration and Population, Myanmar; MIMU mirror",
+      "publication_date": "2017-10",
+      "reference_date": "2014-03-29 census night",
+      "report_role": "Sub-Township",
+      "parent_printed_on_cover": "Hkamti District, Sagaing Region",
+      "area_km2": 3191.9,
+      "wards": 3,
+      "village_tracts": 32,
+      "locators": {
+        "pdf_page_1_based_1": "cover, role, parent, date",
+        "pdf_page_1_based_7": "figures at a glance",
+        "pdf_page_1_based_17": "demographic area with Settlement and Land Record Department2014-2015 attribution",
+        "pdf_page_1_based_18": "Table1 ward/tract list, printedp8"
+      },
+      "limit": "Named reporting unit and summary area, not a boundary or proof of exact consumed source footprint. No sub-township-to-township boundary/tract annex verified."
+    },
+    {
+      "id": "DOP_Lahe_2014",
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_Lahe_2014_ENG.pdf",
+      "publisher": "Department of Population, Ministry of Labour, Immigration and Population, Myanmar; MIMU mirror",
+      "publication_date": "2017-10",
+      "reference_date": "2014-03-29 census night",
+      "report_role": "Township",
+      "parent_printed_on_cover": "Hkamti District, Sagaing Region",
+      "area_km2": 3194.3,
+      "wards": 4,
+      "village_tracts": 31,
+      "locators": {
+        "pdf_page_1_based_1": "cover, role, parent, date",
+        "pdf_page_1_based_7": "figures at a glance",
+        "pdf_page_1_based_17": "demographic area with Settlement and Land Record Department2014-2015 attribution",
+        "pdf_page_1_based_18": "Table1 ward/tract list, printedp8"
+      },
+      "limit": "Named reporting unit and summary area, not a boundary or proof of exact consumed source footprint. No sub-township-to-township boundary/tract annex verified."
+    },
+    {
+      "id": "DOP_HtanparkwayST_2014",
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_HtanparkwayST_2014_ENG.pdf",
+      "publisher": "Department of Population, Ministry of Labour, Immigration and Population, Myanmar; MIMU mirror",
+      "publication_date": "2017-10",
+      "reference_date": "2014-03-29 census night",
+      "report_role": "Sub-Township",
+      "parent_printed_on_cover": "Hkamti District, Sagaing Region",
+      "area_km2": 833.9,
+      "wards": 1,
+      "village_tracts": 4,
+      "locators": {
+        "pdf_page_1_based_1": "cover, role, parent, date",
+        "pdf_page_1_based_7": "figures at a glance",
+        "pdf_page_1_based_17": "demographic area with Settlement and Land Record Department2014-2015 attribution",
+        "pdf_page_1_based_18": "Table1 ward/tract list, printedp8"
+      },
+      "limit": "Named reporting unit and summary area, not a boundary or proof of exact consumed source footprint. No sub-township-to-township boundary/tract annex verified."
+    },
+    {
+      "id": "GAD_Nanyun_2019",
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Nanyun_2019_MMR.pdf",
+      "publisher": "Myanmar General Administration Department; MIMU mirror",
+      "catalogue_uploaded": "2020-08-25",
+      "vintage": "Introduction states conditions through end September2019",
+      "locators": [
+        {
+          "pdf_page_1_based": 3,
+          "section": "2 history",
+          "support": "Describes Nanyun, Pansaung, Donhee and Shamee historical subregions; Nanyun/Pansaung inclusion in Sagaing/Hkamti30October1955, and formal township recognition1968."
+        },
+        {
+          "pdf_page_1_based": 3,
+          "section": "3 position",
+          "support": "Text reads26deg29min–27deg11minN and95deg22min–97deg00minE; incomplete font extraction prevents treating as authoritative precise bounds."
+        },
+        {
+          "pdf_page_1_based": 4,
+          "section": "3 area,4 boundary",
+          "support": "Total2555.720 square miles; boundary-field place names largely absent from extracted text."
+        },
+        {
+          "pdf_page_1_based": 10,
+          "section": "19 organization",
+          "support": "Extracted total3 towns,9 wards,59 village tracts,107 villages; row labels incomplete."
+        }
+      ],
+      "limits": "Formation history is secondary within an official administrative profile; original orders not acquired. Cannot use damaged extraction or coarse position statement to resolve97.054E/27.365N retained extrema, or identify border reach."
+    },
+    {
+      "id": "GAD_Lahe_2019",
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Lahe_2019_MMR.pdf",
+      "publisher": "Myanmar General Administration Department; MIMU mirror",
+      "catalogue_uploaded": "2020-08-25",
+      "vintage": "2019 named in introduction; month missing in extraction",
+      "locators": [
+        {
+          "pdf_page_1_based": 4,
+          "section": "3 area,4 boundary",
+          "support": "Lahe and Htan Pa Khwe town named in area introduction; aggregate1555.27 square miles. West neighbor India readable; other neighbor fields and formation orders incomplete."
+        },
+        {
+          "pdf_page_1_based": 5,
+          "section": "6 drainage",
+          "support": "Nam Salein stream described north-to-south; identification spelling needs original-script review."
+        }
+      ],
+      "limits": "No exact boundary line, datum or complete formation-order identifier extracted. Named stream and western neighbor provide context only."
+    },
+    {
+      "id": "GAD_Lay_Shi_2019",
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Lay_Shi_2019_MMR.pdf",
+      "publisher": "Myanmar General Administration Department; MIMU mirror",
+      "catalogue_uploaded": "2020-08-25",
+      "vintage": "2019 introduction; climate text explicitly through September2019",
+      "locators": [
+        {
+          "pdf_page_1_based": 3,
+          "section": "2 history",
+          "support": "Most original text missing in web extraction; no order adopted."
+        },
+        {
+          "pdf_page_1_based": 4,
+          "section": "3 position/area,4 boundary",
+          "support": "Area total1057.463 square miles readable; geographic coordinates and neighbor names mostly absent."
+        }
+      ],
+      "limits": "Need readable original map/annex and accurate place/order extraction for8 retained Lay Shi centres. No attempted reconstruction of missing characters."
+    },
+    {
+      "id": "IBS80_1968",
+      "url": "https://library.law.fsu.edu/Digital-Collections/LimitsinSeas/pdf/ibs080.pdf",
+      "publisher": "US Department of State, Office of the Geographer, Bureau of Intelligence and Research; FSU retained mirror",
+      "title": "International Boundary Study No.80: Burma–India Boundary",
+      "publication_date": "1968-05-15",
+      "locators": [
+        {
+          "printed_page": "2",
+          "pdf_page_1_based": 3,
+          "support": "States bilateral boundary agreement signed10March1967; separate demarcation agreement still prospective at this historical date."
+        },
+        {
+          "printed_pages": "5–6",
+          "pdf_pages_1_based": [
+            6,
+            7
+          ],
+          "support": "Reproduces1967 alignment through Naga watershed/river/peak sequence and northern Patkai watershed, including Brahmaputra–Chindwin divides, then Irrawaddy–Brahmaputra divide."
+        },
+        {
+          "printed_page": "8",
+          "pdf_page_1_based": 9,
+          "support": "Points to1:126720 strip maps annexed to treaty; old Survey of India one-inch and quarter-inch sheets as compilation sources."
+        }
+      ],
+      "units_and_crs": {
+        "treaty_annex_scale": "1:126720 reported in study; actual sheets not acquired",
+        "text_distance_units": "yards and miles; no conversion used to place cells",
+        "datum": "No datum established from text; no map georeference used",
+        "height_values": "Not used as coordinates or converted; peak identifiers only"
+      },
+      "limits": "Primary US governmental analysis with reproduced treaty delimitation, not the original signed bilateral instrument or later demarcation record. No exact mapping of any417centres to named stream, peak, pillar or watershed. Historical US cartographic policy does not adjudicate current territorial ownership."
+    }
+  ],
+  "documentary_scope_comparisons": [
+    {
+      "group": "Nanyun with Pansaung and Donhee",
+      "census_parts_km2": [
+        2386.2,
+        1041.1,
+        3191.9
+      ],
+      "census_sum_km2": 6619.2,
+      "gad2019_total_sqmi": 2555.72,
+      "gad2019_converted_km2": 6619.284413347921,
+      "conversion": "1 international statute square mile=2.589988110336 km2",
+      "inference": "Close aggregate agreement and59 tract count (16+9+32=57, not59) are a scope/lineage lead, not exact equivalence. The2014 Nanyun report alone cannot be assumed to cover the complete consumed Nanyun source feature. Need original constituent annexes and changes through2019."
+    },
+    {
+      "group": "Lahe with Htanparkway",
+      "census_parts_km2": [
+        3194.3,
+        833.9
+      ],
+      "census_sum_km2": 4028.2000000000003,
+      "gad2019_total_sqmi": 1555.27,
+      "gad2019_converted_km2": 4028.1308083622703,
+      "inference": "Near area agreement and GAD naming of both units suggest aggregation for review; no whole-footprint equivalence proven."
+    }
+  ],
+  "specific_gaps_by_candidate_owner": [
+    {
+      "owner": 30371,
+      "count": 332,
+      "gap": "Retained envelope95.450–97.054E/26.729–27.365N spans a large northern area. Need full2019 Nanyun/Pansaung/Donhee constituent boundaries and later amendments, plus India demarcation sheets/monuments. GAD extracted location statement is insufficient and differs from retained extrema; cannot treat either summary as exclusion evidence."
+    },
+    {
+      "owner": 30145,
+      "count": 77,
+      "gap": "Retained narrow northern envelope95.237–95.391E/26.655–26.684N needs exact Lahe/Htanparkway administrative line and applicable India border segment; GAD west-neighbor statement and Nam Salein drainage do not locate these cells."
+    },
+    {
+      "owner": 30175,
+      "count": 8,
+      "gap": "Retained small envelope94.7388–94.74295E/25.02578–25.03574N needs readable Lay Shi boundary/order/map and applicable local India watershed/pillar evidence; web extraction omits coordinates and names."
+    }
+  ],
+  "missing_evidence_path": [
+    "Original2019 GAD township and sub-township constituent/tract maps or formation-order annexes with dates, scale and datum; readable versions needed where extraction omits text.",
+    "Original1967 bilateral agreement with1:126720 annex strip maps, followed by applicable demarcation records and geodetic monument coordinates; narrow local reach must be established before applying textual watershed/river rules.",
+    "Producer lineage/crosswalk from these named official administrative units to consumed2019 MyanmarAnalytics/geoBoundaries source features.",
+    "Explicit country/topology exclusions at each retained centre. Presence of Indian administrative source families cannot be ignored; no source-ID name beyond retained inventory was invented."
+  ],
+  "access_limits": {
+    "web_readable": [
+      "Three2019GAD profiles",
+      "Five2014DoP township/subtownship reports",
+      "IBS80 ten-page primary government study"
+    ],
+    "failed_once": [
+      "Catalogue click for Leshi2014 English report returned internal error; no repeat attempted."
+    ],
+    "not_used": [
+      "Searches for constitution/1967 original treaty yielded no qualified new source; unrelated WIPO record ignored."
+    ],
+    "no_local_or_browser_download": true,
+    "no_permission_card_request": true,
+    "no_map_render": true,
+    "no_scientific_or_tracked_repo_edit": true
+  },
+  "licensing": "MIMU document access does not create an open geospatial dataset license; prior MIMU citation/noncommercial and written-permission restrictions retained. Short factual summaries only. No geometry or document reproduction redistributed.",
+  "conclusion": "Concrete primary administrative and historical boundary leads acquired, but no exact ownership/border/land qualification. All417 retained candidate land cells remain unresolved;0new accepted cells."
+}

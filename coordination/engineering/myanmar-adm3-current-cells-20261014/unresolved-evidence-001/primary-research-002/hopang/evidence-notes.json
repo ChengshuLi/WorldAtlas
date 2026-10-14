@@ -1,0 +1,182 @@
+{
+  "status": "primary-context-and-held-inventory-only",
+  "all_cells_held": 316,
+  "parent": "framework:province:hopang:0da07191a98c",
+  "complete_children": [
+    {
+      "owner": 30220,
+      "id": "gb:MMR:ADM3:66882298B47048273457297",
+      "name": "Mongmao",
+      "cells": 129,
+      "intervals": 37,
+      "native_bounds_halfopen_x_inclusive_y": [
+        203184,
+        113731,
+        203252,
+        113788
+      ],
+      "topology": {
+        "topology_version": 1,
+        "topology_reconciled": true,
+        "topology_conflicts": 1,
+        "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+      },
+      "selected_holes": 0
+    },
+    {
+      "owner": 30268,
+      "id": "gb:MMR:ADM3:66882298B60976321477453",
+      "name": "Pangwaun",
+      "cells": 141,
+      "intervals": 87,
+      "native_bounds_halfopen_x_inclusive_y": [
+        203349,
+        113777,
+        203588,
+        114059
+      ],
+      "topology": {
+        "topology_version": 1,
+        "topology_reconciled": true,
+        "topology_conflicts": 2,
+        "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+      },
+      "selected_holes": 1
+    },
+    {
+      "owner": 30324,
+      "id": "gb:MMR:ADM3:66882298B72712470803341",
+      "name": "Hopang",
+      "cells": 46,
+      "intervals": 33,
+      "native_bounds_halfopen_x_inclusive_y": [
+        203088,
+        113480,
+        203139,
+        113620
+      ],
+      "topology": {
+        "topology_version": 1,
+        "topology_reconciled": true,
+        "topology_conflicts": 2,
+        "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+      },
+      "selected_holes": 1
+    }
+  ],
+  "source_parent": {
+    "source_index": 44965,
+    "family_index": 217,
+    "source_id": "gb:MMR:ADM2:60261553B42594704122339",
+    "ordinal": 68,
+    "owners": [],
+    "name": "Hopang",
+    "geometry_status": "raw-native-supported"
+  },
+  "region": [
+    {
+      "id": "gb:MMR:ADM1:20573499B82952573339616",
+      "name": "Shan"
+    }
+  ],
+  "observed_families": [
+    "gb:CHN:ADM1",
+    "gb:MMR:ADM1",
+    "gb:MMR:ADM2",
+    "gb:MMR:ADM3"
+  ],
+  "native_block": 27,
+  "inventory_pins": [
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/341d0bbaf81e47cd16ab58ca6d1ab75d5ac120cf732c677e081b12830ea3ef31/work/.cache/mmr-remaining-inventory-20261014-001/inventory.json",
+      "bytes": 257291,
+      "sha256": "efec8d28b63befcb411b6d0d81063af6a962edbec9a1b3f08b86fc3b7bd44157"
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/341d0bbaf81e47cd16ab58ca6d1ab75d5ac120cf732c677e081b12830ea3ef31/work/.cache/mmr-remaining-inventory-20261014-001/remaining-intervals.json.gz",
+      "bytes": 92904,
+      "sha256": "b12b9ed64ecb16fa2b5501648fa4ca91727793fa99ceadffb96d9623519c93aa"
+    }
+  ],
+  "all_repair_extent": [
+    203088,
+    113480,
+    203588,
+    114059
+  ],
+  "extent_convention": "x minimum inclusive / maximum exclusive; y min/max inclusive",
+  "sources": [
+    {
+      "url": "https://www.mofa.gov.mm/wp-content/uploads/2018/02/myanmarconstitution2008mm.pdf",
+      "provider": "Myanmar Ministry of Foreign Affairs, primary constitutional document",
+      "document": "Constitution2008,section56(f)",
+      "pdf_pages_one_based": [
+        45,
+        46
+      ],
+      "printed_page": 17,
+      "verified_fact": "Six named townships Hopang,Mongma,Panwai,Nahpan,Metman,Pangsang(Pankham) form two districts within Wa Self-Administered Division.",
+      "application_limit": "Supports constitutional regional grouping and names, not assignment of exact three2019sourceIDs to HopangDistrict, boundarygeometry, foreignclearance or de facto control. Do not confuse Hopang with Hopong in Pa-O provision.",
+      "custody": "WebPDFtext only; no localdownload."
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Hopang_2019_MMR.pdf",
+      "provider": "HopangTownshipGAD distributed by MIMU",
+      "document_date": "2019-09-30",
+      "pages": 54,
+      "inspected_pdf_pages_one_based": [
+        1,
+        9,
+        10,
+        11
+      ],
+      "verified_fact": "Cover identifies HopangDistrict/HopangTownship. Geography describes China east/north,Mongmao south,Kunlong/Hsenwi west and Laukkaing north. Historical account cites7July1972township notification and16February2011Panlong notification; underlying orders were not acquired. Tables distinguish accessible and inaccessible areas.",
+      "order_leads": [
+        {
+          "date": "1972-07-07",
+          "reference_as_extracted": "103/36/စိတ်(1)",
+          "scope": "Hopang/Namtit township formation account in2019profile; originalorder notinspected"
+        },
+        {
+          "date": "2011-02-16",
+          "reference_as_extracted": "200/2481/ဦး1",
+          "scope": "Panlong town/ward/tract formation account; NOT demonstrated HopangDistrict formationorder"
+        }
+      ],
+      "application_limit": "Hopangonly; does not establish Mongmao/Pangwaun sourcegeometry or districtformation. No shapeID crosswalk,exactholegeometry,scale/datum orborderline proof.",
+      "custody": "PublicwebPDFtext only; no rawbytes or rasterinspection."
+    }
+  ],
+  "blocked_leads": [
+    {
+      "url": "https://gad.gov.mm/images/localfacts/1716176468ဟိုပန်မြို့နယ်%20DATA.pdf",
+      "result": "BotVerification; no bypass/retry; cited2023report notinspected."
+    },
+    {
+      "url": "https://www.mrtv3.net.mm/newpaper/69newsn.pdf",
+      "result": "502BadGateway; citedpage10column3 notinspected, date/order notverified."
+    },
+    {
+      "url": "https://www.burmalibrary.org/docs5/Myanmar_Constitution-2008-en.pdf",
+      "result": "403; no retry. Used officialMOFA document instead."
+    },
+    {
+      "url": "https://www.mlis.gov.mm/lsScPop.do?lawordListId=2125",
+      "result": "Webinternalerror; noretry."
+    }
+  ],
+  "primary_missing": [
+    "Actualdistrictformation/order or official completeparentlist assigning these exactthree townships to HopangDistrict at2019vintage.",
+    "Mongmao/Pangwaun ownerboundaryprofiles/maps; MIMU township-profile page notes these2019GAD reports missing.",
+    "Exactspelling/sourceID correspondence Mongma/Mongmao andPanwai/Pangwaun; name resemblance alone insufficient.",
+    "China-border/sourceSID15319 overlap and currentreference/exclusion evidence.",
+    "Pangwaun/Hopang selectedhole membership for candidatecentres and reconciledoriginal-vs-selected cuts.",
+    "Actualwholeoriginal physical qualification and later nativeauthority/currentownerzero/conservation."
+  ],
+  "limits": [
+    "No source/GIS/native/scientific rerun,local/browserdownload,newpermissioncard ortrackedrepoedit.",
+    "Wikipedia consulted only to locate primaryreferences; no primaryclaim adopted from it.",
+    "Self-administered status is not proof of exactterritorialboundary or currentcontrol.",
+    "Zero source-conflict/relative rows in retainedinventory does not establish foreignsourceclearance."
+  ]
+}

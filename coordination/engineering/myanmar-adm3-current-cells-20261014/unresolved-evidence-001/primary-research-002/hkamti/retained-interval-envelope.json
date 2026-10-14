@@ -1,0 +1,130 @@
+{
+  "kind": "read_only_retained_interval_summary_no_source_pass",
+  "scientific_vintage": "f7c358326d776398bc1cffe84df81eac7033091c",
+  "inventory": {
+    "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/341d0bbaf81e47cd16ab58ca6d1ab75d5ac120cf732c677e081b12830ea3ef31/work/.cache/mmr-remaining-inventory-20261014-001/inventory.json",
+    "sha256": "efec8d28b63befcb411b6d0d81063af6a962edbec9a1b3f08b86fc3b7bd44157"
+  },
+  "intervals": {
+    "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/341d0bbaf81e47cd16ab58ca6d1ab75d5ac120cf732c677e081b12830ea3ef31/work/.cache/mmr-remaining-inventory-20261014-001/remaining-intervals.json.gz",
+    "sha256": "b12b9ed64ecb16fa2b5501648fa4ca91727793fa99ceadffb96d9623519c93aa"
+  },
+  "latitude_pin": {
+    "commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+    "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+    "decoded_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+  },
+  "longitude_formula": "(x+0.5)/262166*360-180",
+  "children": [
+    {
+      "owner": 30145,
+      "name": "Lahe",
+      "interval_count": 30,
+      "cell_count": 77,
+      "x_inclusive": [
+        200438,
+        200550
+      ],
+      "y_inclusive": [
+        110907,
+        110931
+      ],
+      "centre_envelope_degrees": {
+        "longitude": [
+          95.23729240252362,
+          95.39108808922589
+        ],
+        "latitude": [
+          26.654588539169726,
+          26.68403860798379
+        ]
+      },
+      "packages": [
+        "gb-MMR-ADM3--repair-evaluation"
+      ],
+      "source_sids": [
+        36798,
+        44885,
+        44941,
+        45193,
+        67654
+      ]
+    },
+    {
+      "owner": 30175,
+      "name": "Lay Shi",
+      "interval_count": 7,
+      "cell_count": 8,
+      "x_inclusive": [
+        200075,
+        200078
+      ],
+      "y_inclusive": [
+        112241,
+        112249
+      ],
+      "centre_envelope_degrees": {
+        "longitude": [
+          94.73882959651519,
+          94.74294912383755
+        ],
+        "latitude": [
+          25.02578396972769,
+          25.035737634927138
+        ]
+      },
+      "packages": [
+        "gb-MMR-ADM3--repair-evaluation"
+      ],
+      "source_sids": [
+        44885,
+        44941,
+        45227,
+        70327
+      ]
+    },
+    {
+      "owner": 30371,
+      "name": "Nanyun",
+      "interval_count": 169,
+      "cell_count": 332,
+      "x_inclusive": [
+        200593,
+        201761
+      ],
+      "y_inclusive": [
+        110350,
+        110870
+      ],
+      "centre_envelope_degrees": {
+        "longitude": [
+          95.45013464751338,
+          97.05400395169477
+        ],
+        "latitude": [
+          26.72942589356986,
+          27.365376976067175
+        ]
+      },
+      "packages": [
+        "gb-MMR-ADM3--repair-evaluation"
+      ],
+      "source_sids": [
+        36798,
+        44885,
+        44941,
+        45016,
+        67583,
+        67620,
+        67628,
+        67629,
+        67709,
+        67718,
+        67752,
+        67756,
+        67766
+      ]
+    }
+  ],
+  "limit": "Envelope combines independent extrema; no foreign membership inference or cell qualification."
+}

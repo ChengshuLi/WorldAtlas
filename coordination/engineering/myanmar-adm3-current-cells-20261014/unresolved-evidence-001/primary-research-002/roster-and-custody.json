@@ -1,0 +1,74 @@
+{
+  "version": 1,
+  "qualified_or_accepted_cells": 0,
+  "source_cohort_cells": 1158,
+  "workers": [
+    {
+      "worker": "/root/putao_primary_boundary",
+      "cohort": "myitkyina",
+      "candidate_cells": 425,
+      "status": "bounded-primary-research-complete-all-cells-held",
+      "blocker": "Sub-township nesting, China protocol alignment, datum and inland topology authority remain unproved.",
+      "files": [
+        {
+          "path": "myitkyina/notes.json",
+          "bytes": 17812,
+          "sha256": "4f772f423dfa1f617c0eba49d404e639d4c45d1540bb7373106987cf3d1ff6cb"
+        },
+        {
+          "path": "myitkyina/retained-inventory-excerpt.json",
+          "bytes": 8515,
+          "sha256": "b565e3347b46cdc68d7766d51e03e87dea7800927009dccb4a09f28dde38129d"
+        }
+      ]
+    },
+    {
+      "worker": "/root/hpapun_border_evidence",
+      "cohort": "hkamti",
+      "candidate_cells": 417,
+      "status": "bounded-primary-research-complete-all-cells-held",
+      "blocker": "Administrative annexes, treaty/demarcation sheets, datum and exact-centre joins remain missing; Indian source overlap remains material.",
+      "files": [
+        {
+          "path": "hkamti/notes.json",
+          "bytes": 21009,
+          "sha256": "73a7715eb3b4cc5bff6fc3ee53a1705176db0ed4953e751121656a26aecf8796"
+        },
+        {
+          "path": "hkamti/retained-parent-inventory.json",
+          "bytes": 9866,
+          "sha256": "162ce3e8c66c0307c60cef0c8652ac96ddf5f1430bfc6cf89df382143fbea422"
+        },
+        {
+          "path": "hkamti/retained-interval-envelope.json",
+          "bytes": 3290,
+          "sha256": "08299a78fe7f9aa6caa58e928645d6323e96e22a9f9aef05b4c2735b9e07f8b3"
+        }
+      ]
+    },
+    {
+      "worker": "/root/rakhine_inventory",
+      "cohort": "hopang",
+      "candidate_cells": 316,
+      "status": "bounded-primary-research-complete-all-cells-held",
+      "blocker": "Exact district formation/parent order, Mongmao/Pangwaun maps, China exclusions and selected-hole/cut membership remain missing.",
+      "files": [
+        {
+          "path": "hopang/evidence-notes.json",
+          "bytes": 7368,
+          "sha256": "475b0287647cd03069ac992ec2b8ce13d153e02dab77a40e27470b30ee3eb71b"
+        },
+        {
+          "path": "hopang/retained-candidate-intervals.json",
+          "bytes": 9401,
+          "sha256": "2dd6ccac881b3842e4b322a7f91dde3352992b037e19ffc1e563715247a8556e"
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Read-only primary references and retained metadata; no source/GSHHG/native/GIS replay, downloads, permission cards or repeated403 requests.",
+    "Area correspondences and document names are leads, not surveyed footprint or native-centre authority.",
+    "No full PDF redistribution; original caches/previous evidence preserved."
+  ]
+}
