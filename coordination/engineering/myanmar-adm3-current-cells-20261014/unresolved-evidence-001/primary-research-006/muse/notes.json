@@ -1,0 +1,164 @@
+{
+  "version": 1,
+  "date_utc": "2026-10-14",
+  "worker": "/root/putao_primary_boundary",
+  "scope": "Previously unexamined Muse44 candidate cohort; bounded read-only primary-source research",
+  "parent_id": "framework:province:muse:10b96718f640",
+  "owner": 30209,
+  "id": "gb:MMR:ADM3:66882298B45954578024958",
+  "scientific_vintage": "f7c358326d776398bc1cffe84df81eac7033091c",
+  "frozen_queue_vintage": "a61b6f9e7f88b1da380e3a834f89d7509132ed71",
+  "retained_metadata_pin": {
+    "path": "retained-candidate-intervals.json",
+    "sha256": "cf737799e4b0a8e071e227b04cd9c155099aa2b83fa5050be81ee1a2754e231d",
+    "bytes": 11755
+  },
+  "candidate_summary": {
+    "owner": 30209,
+    "package_id": "gb-MMR-ADM3--repair-evaluation",
+    "interval_count": 13,
+    "cell_count": 44,
+    "x_inclusive": [
+      202863,
+      202882
+    ],
+    "y_inclusive": [
+      112987,
+      113001
+    ],
+    "centre_envelope_degrees": {
+      "longitude": [
+        98.56724365478362,
+        98.59333399449207
+      ],
+      "latitude": [
+        24.086567528118316,
+        24.104116911005235
+      ]
+    },
+    "source_sids": [
+      44896,
+      44949,
+      45207
+    ],
+    "all_owners": [
+      30209
+    ]
+  },
+  "complete_roster": [
+    {
+      "owner": 30184,
+      "id": "gb:MMR:ADM3:66882298B40242085426704",
+      "name": "Namhkan",
+      "remaining_counts": {}
+    },
+    {
+      "owner": 30209,
+      "id": "gb:MMR:ADM3:66882298B45954578024958",
+      "name": "Muse",
+      "remaining_counts": {
+        "repair-evaluation:land": 44
+      }
+    },
+    {
+      "owner": 30389,
+      "id": "gb:MMR:ADM3:66882298B95137376687287",
+      "name": "Kutkai",
+      "remaining_counts": {}
+    }
+  ],
+  "foreign_source_scope": "Only MMR ADM1/ADM2/ADM3 families and source SIDs44896/44949/45207 occur in this retained cohort. There is no foreign SID, extra owner, separate conflict or relative queue cell for these44. This does not establish accepted country-boundary exclusion.",
+  "geographic_scope": "Tight eastern original-Muse edge: centres98.56724365478362–98.59333399449207E and24.086567528118316–24.104116911005235N. No assumption that Muse city-centre documents alone cover this reach. Current source has3 topology conflicts, distinct from zero separate remaining source-conflict cells.",
+  "primary_sources": [
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Muse_2019_MMR.pdf",
+      "producer": "Myanmar General Administration Department; MIMU mirror",
+      "date": "30September2019 cover; introduction says through September2019; running header Township Data(9-9-2019)",
+      "pages": 96,
+      "locators": [
+        "PDFp1: cover/date",
+        "PDFp9: introduction/history",
+        "PDFp10: geographic box",
+        "PDFpp10–12: area and named town/village-tract rows",
+        "PDFp12: boundary paragraph4",
+        "PDFp13: named drainage"
+      ],
+      "finding": "Aggregate580.57sqmi and63 village tracts; names Mongkoe, Man Hero and Pangsai towns. Boundary paragraph names China’s Yunnan Wanding and Mang Hai east, Jiegao north; Kutkai south and Namhkan west. Foreign-boundary length61.11miles. Drainage includes Shweli, Mongkoe, Tima, NamPaw and NamSe streams.",
+      "extent": "Declared23°35′–24°08′N,97°45′–98°37′E; broad township box contains candidate-centre extrema but is not a boundary survey. The eastern reach is not assigned to a named subunit by these passages.",
+      "formation_order_result": "Readable history discusses Muse settlement/name origin; no original formation/change instrument identifier or territorial schedule was identified. The2002 text search produced no match; absence from extraction is not proof no instrument exists.",
+      "scale_datum": "Not established; map pixels not inspected.",
+      "limit": "Aggregate statistical coverage and adjacent-town names cannot prove the exact2019 ADM3 footprint or locate the44 cells against the international boundary."
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_Muse_2014_ENG.pdf",
+      "producer": "Department of Population, Ministry of Labour, Immigration and Population",
+      "pages": 58,
+      "date": "Census night29March2014; report October2017",
+      "locators": [
+        "Cover/PDFp3: MuSe Township, Muse District",
+        "PDFp7: area/administrative counts",
+        "PDFp10: area-source note",
+        "PDFp18: ward/village-tract roster"
+      ],
+      "finding": "MuSe statistical report covers639.0km²,9wards,16village tracts; area from Settlement and Land Record Department2014–2015. This is materially smaller reporting coverage than the GAD aggregate with additional towns/63tracts.",
+      "extent": "Statistical township subject and Shan-wide township locator; eastern aggregated subunit footprint not established.",
+      "scale_datum": "Not verified; graphic locator not visually inspected.",
+      "limit": "No candidate-to-tract map or explicit Muse/Mongkoe/ManHero/Pangsai2019 nesting crosswalk. Smaller area alone cannot determine any boundary or union."
+    },
+    {
+      "url": "https://library.law.fsu.edu/Digital-Collections/LimitsinSeas/pdf/ibs042.pdf",
+      "producer": "U.S. Department of State, Office of the Geographer; government study with reproduced1960 treaty text, archived at FSU",
+      "title": "International Boundary Study42: Burma–China",
+      "date": "1964-11-30",
+      "pages": 20,
+      "targeted_locator": "Printed14–15, ArticleVII paragraph2(7), specifically MongKo/NamKo original-course, NamHkai/NamPangWa, ManHsing/NamHpawn and Nu junction sequence.",
+      "finding": "The treaty text names an ordered southern-sector river/pass route. For MongKo/NamKo it expressly references the course at past demarcation. It then follows NamHkai/NamPangWa and ManHsing/NamHpawn to the Nu, then Nu to TiKaiKou/NanMen. This gives a concrete named-reach map lead rather than a generic country-wide map request.",
+      "geographic_registration_status": "Provisional lead only: no original sheet, coordinates or place-name survey control establishes that the44-cell box is on a specific part of this sequence. GAD river spellings also require a controlled crosswalk.",
+      "scale_datum": "General treaty map scales1:250000 and select1:50000 already established; no identified Muse-reach sheet or datum inspected.",
+      "limit": "ArticleX protocol maps replace treaty maps; ArticleVIII course-change rule requires applicable agreement evidence. Neither a modern channel nor the present metadata envelope independently assigns these cells."
+    }
+  ],
+  "concrete_new_findings": [
+    "44 candidates are confined to one tight eastern box, not spread across the three-child parent; the retained source list is entirely Myanmar administrative sources.",
+    "The2019 GAD aggregation has additional named towns and63village tracts; the2014 MuSe census has16tracts. A main Muse report cannot be assumed to cover the eastern aggregated source footprint.",
+    "The GAD names Wanding/MangHai/Jiegao and specific local streams; treaty ArticleVII2(7) supplies a named MongKo–ManHsing–Nu reach to investigate only after a location/control crosswalk."
+  ],
+  "precise_actual_failure": {
+    "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_Monekoe_2014_ENG.pdf",
+    "action": "One read-only web open of a plausible official-MIMU filename",
+    "result": "Internal Error; no document content returned.",
+    "retries": 0,
+    "interpretation": "Filename/document existence and access status remain unverified; no403 or non-digitization claim inferred."
+  },
+  "excluded_discovery": "Chinese place-name searches surfaced secondary locator material but no geographically registered official order/map record. None of those results were adopted as boundary evidence or used to identify the opposite owner.",
+  "exact_next_artifacts": [
+    {
+      "artifact": "Official2019 Muse administrative nesting and boundary schedule for Mongkoe/ManHero/Pangsai, with a map containing98.567–98.593E,24.0866–24.1041N and an explicit tie to the original Muse ADM3 subject.",
+      "why": "Needed to connect the tight target box to a named administrative subunit; no specific original order number was recovered."
+    },
+    {
+      "artifact": "Original treaty/protocol surveyed sheet for the ArticleVII2(7) MongKo/NamKo–NamHkai/NamPangWa–ManHsing/NamHpawn–Nu junction reach, with sheet corners, marker IDs, coordinates, datum and relevant2019 applicability.",
+      "why": "Named geographical sequence acquired, but candidate-to-sheet/segment registration remains missing. Do not assume this reach based solely on the cohort name or township centre."
+    },
+    {
+      "artifact": "Actual officially indexed Mongkoe/Monekoe sub-township census/map or GAD annex, including title/spelling and village-tract coverage.",
+      "why": "The attempted filename failed once and the main census does not establish the aggregated eastern coverage."
+    }
+  ],
+  "limits": {
+    "repair_land_held": 44,
+    "new_accepted_credit": 0,
+    "local_source_downloads": 0,
+    "browser_downloads": 0,
+    "new_permission_cards": 0,
+    "scientific_operators": 0,
+    "GIS_native_raster_source_GSHHG_producers": 0,
+    "Git_acquisition": 0,
+    "runtime_setup": 0,
+    "tracked_edits": 0,
+    "prior_packets_changed": false,
+    "sovereignty_adjudication": false,
+    "source_byte_hashes": "Unavailable: web inspection only; retained metadata input bytes are separately pinned.",
+    "license": "No document-specific reuse clearance established for primary publications; retained geoBoundaries license is not transferred to them."
+  }
+}

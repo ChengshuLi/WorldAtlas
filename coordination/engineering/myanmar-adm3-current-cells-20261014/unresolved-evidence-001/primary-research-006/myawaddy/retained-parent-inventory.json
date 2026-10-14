@@ -1,0 +1,293 @@
+[
+  {
+    "parent_id": "framework:province:myawaddy:32bf363d965b",
+    "repair_land": 25,
+    "repair_water": 0,
+    "repair_cells": 25,
+    "relative": 0,
+    "conflicts": 6,
+    "complete_child_count": 1,
+    "repair_owner_count": 1,
+    "repair_owners": [
+      30263
+    ],
+    "complete_children": [
+      {
+        "owner": 30263,
+        "id": "gb:MMR:ADM3:66882298B59879554977018",
+        "name": "Myawaddy",
+        "province_id": "framework:province:myawaddy:32bf363d965b",
+        "source_id": "gb:MMR:ADM3",
+        "source_atoms": [
+          "gb:MMR:ADM3:66882298B59879554977018"
+        ],
+        "remaining_counts": {
+          "repair-evaluation:land": 25,
+          "source-conflict:land": 6
+        },
+        "accepted_removed_cells": 0,
+        "reserved_excluded_cells": 0,
+        "blocks": [
+          28,
+          29
+        ],
+        "source_sids": [
+          44888,
+          44919,
+          45124,
+          57248,
+          57669,
+          58170
+        ],
+        "topology_fields": {
+          "topology_version": 1,
+          "topology_reconciled": true,
+          "topology_conflicts": 5,
+          "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+        },
+        "current_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 546,
+          "interior_rings": 0,
+          "bounds": [
+            98.163,
+            16.039968965517243,
+            98.91910067114094,
+            17.0899
+          ]
+        },
+        "original_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 617,
+          "interior_rings": 0,
+          "bounds": [
+            98.16301931000005,
+            16.039883921000108,
+            98.92170008000006,
+            17.09211446900005
+          ]
+        }
+      }
+    ],
+    "native_blocks": [
+      28,
+      29
+    ],
+    "observed_source_families": [
+      "gb:MMR:ADM1",
+      "gb:MMR:ADM2",
+      "gb:MMR:ADM3",
+      "gb:THA:ADM1",
+      "gb:THA:ADM2"
+    ],
+    "source_region_features": [
+      {
+        "id": "gb:MMR:ADM1:20573499B82081528957960",
+        "name": "Kayin"
+      }
+    ],
+    "source_parent_features": [
+      {
+        "source_index": 44919,
+        "family_index": 217,
+        "source_id": "gb:MMR:ADM2:60261553B30562402338544",
+        "ordinal": 22,
+        "owners": [],
+        "name": "Myawaddy",
+        "geometry_status": "raw-native-supported"
+      }
+    ],
+    "decisions": [
+      {
+        "ids": [
+          "gb:MMR:ADM3:66882298B59879554977018"
+        ],
+        "status": "open",
+        "rationale": "Current province Myawaddy (framework:province:myawaddy:32bf363d965b); inspected exact source identifiers for 1 locations with actual role Township, source gb:MMR:ADM3, reference vintages 2019. Pinned cache contains 330 features; 1 of these location records have entirely matched declared-source member IDs. Source-ID correspondence does not independently approve local geographic purpose, original-footprint retention, administrative reforms or settlement/rank. Exact review stays open until those tests have sourced outcomes.",
+        "evidence": [
+          {
+            "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM3/geoBoundaries-MMR-ADM3.geojson",
+            "title": "Myanmar",
+            "inspected_fact": "Actual location source gb:MMR:ADM3; role Township; reference vintage 2019; license Creative Commons Attribution 4.0 (CC BY 4.0). Source feature/member identifiers were inspected separately from ADM-level labels."
+          }
+        ],
+        "province_id": "framework:province:myawaddy:32bf363d965b",
+        "source_id": "gb:MMR:ADM3",
+        "actual_role": "Township",
+        "specific_reasons": []
+      }
+    ],
+    "prerequisites": [
+      "Complete original source-family membership, exact source/owner/parent joins and whole-footprint parent proof.",
+      "Accepted country/topology exclusions and all explicit holes; ancestry and nearest-bank proximity do not grant territorial authority.",
+      "Whole original GSHHG hierarchy or demonstrably applicable retained target interpretation; preserve all uncertainty/relative intervals.",
+      "Later actual delivery-base effective owner-zero and native authority/conservation."
+    ],
+    "land_only_rule_ceiling": 25
+  },
+  {
+    "parent_id": "framework:province:kawkareik:24452fe8fa4e",
+    "repair_land": 2,
+    "repair_water": 0,
+    "repair_cells": 2,
+    "relative": 0,
+    "conflicts": 0,
+    "complete_child_count": 2,
+    "repair_owner_count": 1,
+    "repair_owners": [
+      30387
+    ],
+    "complete_children": [
+      {
+        "owner": 30196,
+        "id": "gb:MMR:ADM3:66882298B4365732465197",
+        "name": "Kawkareik",
+        "province_id": "framework:province:kawkareik:24452fe8fa4e",
+        "source_id": "gb:MMR:ADM3",
+        "source_atoms": [
+          "gb:MMR:ADM3:66882298B4365732465197"
+        ],
+        "remaining_counts": {},
+        "accepted_removed_cells": 0,
+        "reserved_excluded_cells": 0,
+        "blocks": [],
+        "source_sids": [],
+        "topology_fields": {
+          "topology_version": 1
+        },
+        "current_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 94,
+          "interior_rings": 0,
+          "bounds": [
+            97.8321,
+            16.1973,
+            98.4398,
+            16.8569
+          ]
+        },
+        "original_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 274,
+          "interior_rings": 0,
+          "bounds": [
+            97.83160943600008,
+            16.197304710000026,
+            98.44970283200004,
+            16.856942932
+          ]
+        }
+      },
+      {
+        "owner": 30387,
+        "id": "gb:MMR:ADM3:66882298B94192188096874",
+        "name": "Kyainseikgyi",
+        "province_id": "framework:province:kawkareik:24452fe8fa4e",
+        "source_id": "gb:MMR:ADM3",
+        "source_atoms": [
+          "gb:MMR:ADM3:66882298B94192188096874"
+        ],
+        "remaining_counts": {
+          "repair-evaluation:land": 2
+        },
+        "accepted_removed_cells": 0,
+        "reserved_excluded_cells": 0,
+        "blocks": [
+          29
+        ],
+        "source_sids": [
+          44888,
+          44918,
+          45128
+        ],
+        "topology_fields": {
+          "topology_version": 1,
+          "topology_reconciled": true,
+          "topology_conflicts": 2,
+          "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+        },
+        "current_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 256,
+          "interior_rings": 1,
+          "bounds": [
+            97.8131,
+            15.222597094235697,
+            98.6098446255731,
+            16.4486
+          ]
+        },
+        "original_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 458,
+          "interior_rings": 0,
+          "bounds": [
+            97.81311436200012,
+            15.220625903000084,
+            98.61035479500005,
+            16.458459578000028
+          ]
+        }
+      }
+    ],
+    "native_blocks": [
+      29
+    ],
+    "observed_source_families": [
+      "gb:MMR:ADM1",
+      "gb:MMR:ADM2",
+      "gb:MMR:ADM3"
+    ],
+    "source_region_features": [
+      {
+        "id": "gb:MMR:ADM1:20573499B82081528957960",
+        "name": "Kayin"
+      }
+    ],
+    "source_parent_features": [
+      {
+        "source_index": 44918,
+        "family_index": 217,
+        "source_id": "gb:MMR:ADM2:60261553B42100651402541",
+        "ordinal": 21,
+        "owners": [],
+        "name": "Kawkareik",
+        "geometry_status": "raw-native-supported"
+      }
+    ],
+    "decisions": [
+      {
+        "ids": [
+          "gb:MMR:ADM3:66882298B4365732465197",
+          "gb:MMR:ADM3:66882298B94192188096874"
+        ],
+        "status": "open",
+        "rationale": "Current province Kawkareik (framework:province:kawkareik:24452fe8fa4e); inspected exact source identifiers for 2 locations with actual role Township, source gb:MMR:ADM3, reference vintages 2019. Pinned cache contains 330 features; 2 of these location records have entirely matched declared-source member IDs. Source-ID correspondence does not independently approve local geographic purpose, original-footprint retention, administrative reforms or settlement/rank. Exact review stays open until those tests have sourced outcomes.",
+        "evidence": [
+          {
+            "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM3/geoBoundaries-MMR-ADM3.geojson",
+            "title": "Myanmar",
+            "inspected_fact": "Actual location source gb:MMR:ADM3; role Township; reference vintage 2019; license Creative Commons Attribution 4.0 (CC BY 4.0). Source feature/member identifiers were inspected separately from ADM-level labels."
+          }
+        ],
+        "province_id": "framework:province:kawkareik:24452fe8fa4e",
+        "source_id": "gb:MMR:ADM3",
+        "actual_role": "Township",
+        "specific_reasons": []
+      }
+    ],
+    "prerequisites": [
+      "Complete original source-family membership, exact source/owner/parent joins and whole-footprint parent proof.",
+      "Accepted country/topology exclusions and all explicit holes; ancestry and nearest-bank proximity do not grant territorial authority.",
+      "Whole original GSHHG hierarchy or demonstrably applicable retained target interpretation; preserve all uncertainty/relative intervals.",
+      "Later actual delivery-base effective owner-zero and native authority/conservation."
+    ],
+    "land_only_rule_ceiling": 2
+  }
+]

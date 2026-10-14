@@ -1,0 +1,756 @@
+{
+  "version": 1,
+  "research_date": "2026-10-14",
+  "status": "All25Myawaddy repair land cells, separate6source-conflict cells and2Kyainseikgyi context cells remain held. No promotions.",
+  "parents": [
+    {
+      "parent_id": "framework:province:myawaddy:32bf363d965b",
+      "repair_land": 25,
+      "repair_water": 0,
+      "repair_cells": 25,
+      "relative": 0,
+      "conflicts": 6,
+      "complete_child_count": 1,
+      "repair_owner_count": 1,
+      "repair_owners": [
+        30263
+      ],
+      "complete_children": [
+        {
+          "owner": 30263,
+          "id": "gb:MMR:ADM3:66882298B59879554977018",
+          "name": "Myawaddy",
+          "province_id": "framework:province:myawaddy:32bf363d965b",
+          "source_id": "gb:MMR:ADM3",
+          "source_atoms": [
+            "gb:MMR:ADM3:66882298B59879554977018"
+          ],
+          "remaining_counts": {
+            "repair-evaluation:land": 25,
+            "source-conflict:land": 6
+          },
+          "accepted_removed_cells": 0,
+          "reserved_excluded_cells": 0,
+          "blocks": [
+            28,
+            29
+          ],
+          "source_sids": [
+            44888,
+            44919,
+            45124,
+            57248,
+            57669,
+            58170
+          ],
+          "topology_fields": {
+            "topology_version": 1,
+            "topology_reconciled": true,
+            "topology_conflicts": 5,
+            "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+          },
+          "current_geometry": {
+            "type": "Polygon",
+            "polygons": 1,
+            "coordinate_pairs": 546,
+            "interior_rings": 0,
+            "bounds": [
+              98.163,
+              16.039968965517243,
+              98.91910067114094,
+              17.0899
+            ]
+          },
+          "original_geometry": {
+            "type": "Polygon",
+            "polygons": 1,
+            "coordinate_pairs": 617,
+            "interior_rings": 0,
+            "bounds": [
+              98.16301931000005,
+              16.039883921000108,
+              98.92170008000006,
+              17.09211446900005
+            ]
+          }
+        }
+      ],
+      "native_blocks": [
+        28,
+        29
+      ],
+      "observed_source_families": [
+        "gb:MMR:ADM1",
+        "gb:MMR:ADM2",
+        "gb:MMR:ADM3",
+        "gb:THA:ADM1",
+        "gb:THA:ADM2"
+      ],
+      "source_region_features": [
+        {
+          "id": "gb:MMR:ADM1:20573499B82081528957960",
+          "name": "Kayin"
+        }
+      ],
+      "source_parent_features": [
+        {
+          "source_index": 44919,
+          "family_index": 217,
+          "source_id": "gb:MMR:ADM2:60261553B30562402338544",
+          "ordinal": 22,
+          "owners": [],
+          "name": "Myawaddy",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "decisions": [
+        {
+          "ids": [
+            "gb:MMR:ADM3:66882298B59879554977018"
+          ],
+          "status": "open",
+          "rationale": "Current province Myawaddy (framework:province:myawaddy:32bf363d965b); inspected exact source identifiers for 1 locations with actual role Township, source gb:MMR:ADM3, reference vintages 2019. Pinned cache contains 330 features; 1 of these location records have entirely matched declared-source member IDs. Source-ID correspondence does not independently approve local geographic purpose, original-footprint retention, administrative reforms or settlement/rank. Exact review stays open until those tests have sourced outcomes.",
+          "evidence": [
+            {
+              "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM3/geoBoundaries-MMR-ADM3.geojson",
+              "title": "Myanmar",
+              "inspected_fact": "Actual location source gb:MMR:ADM3; role Township; reference vintage 2019; license Creative Commons Attribution 4.0 (CC BY 4.0). Source feature/member identifiers were inspected separately from ADM-level labels."
+            }
+          ],
+          "province_id": "framework:province:myawaddy:32bf363d965b",
+          "source_id": "gb:MMR:ADM3",
+          "actual_role": "Township",
+          "specific_reasons": []
+        }
+      ],
+      "prerequisites": [
+        "Complete original source-family membership, exact source/owner/parent joins and whole-footprint parent proof.",
+        "Accepted country/topology exclusions and all explicit holes; ancestry and nearest-bank proximity do not grant territorial authority.",
+        "Whole original GSHHG hierarchy or demonstrably applicable retained target interpretation; preserve all uncertainty/relative intervals.",
+        "Later actual delivery-base effective owner-zero and native authority/conservation."
+      ],
+      "land_only_rule_ceiling": 25
+    },
+    {
+      "parent_id": "framework:province:kawkareik:24452fe8fa4e",
+      "repair_land": 2,
+      "repair_water": 0,
+      "repair_cells": 2,
+      "relative": 0,
+      "conflicts": 0,
+      "complete_child_count": 2,
+      "repair_owner_count": 1,
+      "repair_owners": [
+        30387
+      ],
+      "complete_children": [
+        {
+          "owner": 30196,
+          "id": "gb:MMR:ADM3:66882298B4365732465197",
+          "name": "Kawkareik",
+          "province_id": "framework:province:kawkareik:24452fe8fa4e",
+          "source_id": "gb:MMR:ADM3",
+          "source_atoms": [
+            "gb:MMR:ADM3:66882298B4365732465197"
+          ],
+          "remaining_counts": {},
+          "accepted_removed_cells": 0,
+          "reserved_excluded_cells": 0,
+          "blocks": [],
+          "source_sids": [],
+          "topology_fields": {
+            "topology_version": 1
+          },
+          "current_geometry": {
+            "type": "Polygon",
+            "polygons": 1,
+            "coordinate_pairs": 94,
+            "interior_rings": 0,
+            "bounds": [
+              97.8321,
+              16.1973,
+              98.4398,
+              16.8569
+            ]
+          },
+          "original_geometry": {
+            "type": "Polygon",
+            "polygons": 1,
+            "coordinate_pairs": 274,
+            "interior_rings": 0,
+            "bounds": [
+              97.83160943600008,
+              16.197304710000026,
+              98.44970283200004,
+              16.856942932
+            ]
+          }
+        },
+        {
+          "owner": 30387,
+          "id": "gb:MMR:ADM3:66882298B94192188096874",
+          "name": "Kyainseikgyi",
+          "province_id": "framework:province:kawkareik:24452fe8fa4e",
+          "source_id": "gb:MMR:ADM3",
+          "source_atoms": [
+            "gb:MMR:ADM3:66882298B94192188096874"
+          ],
+          "remaining_counts": {
+            "repair-evaluation:land": 2
+          },
+          "accepted_removed_cells": 0,
+          "reserved_excluded_cells": 0,
+          "blocks": [
+            29
+          ],
+          "source_sids": [
+            44888,
+            44918,
+            45128
+          ],
+          "topology_fields": {
+            "topology_version": 1,
+            "topology_reconciled": true,
+            "topology_conflicts": 2,
+            "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+          },
+          "current_geometry": {
+            "type": "Polygon",
+            "polygons": 1,
+            "coordinate_pairs": 256,
+            "interior_rings": 1,
+            "bounds": [
+              97.8131,
+              15.222597094235697,
+              98.6098446255731,
+              16.4486
+            ]
+          },
+          "original_geometry": {
+            "type": "Polygon",
+            "polygons": 1,
+            "coordinate_pairs": 458,
+            "interior_rings": 0,
+            "bounds": [
+              97.81311436200012,
+              15.220625903000084,
+              98.61035479500005,
+              16.458459578000028
+            ]
+          }
+        }
+      ],
+      "native_blocks": [
+        29
+      ],
+      "observed_source_families": [
+        "gb:MMR:ADM1",
+        "gb:MMR:ADM2",
+        "gb:MMR:ADM3"
+      ],
+      "source_region_features": [
+        {
+          "id": "gb:MMR:ADM1:20573499B82081528957960",
+          "name": "Kayin"
+        }
+      ],
+      "source_parent_features": [
+        {
+          "source_index": 44918,
+          "family_index": 217,
+          "source_id": "gb:MMR:ADM2:60261553B42100651402541",
+          "ordinal": 21,
+          "owners": [],
+          "name": "Kawkareik",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "decisions": [
+        {
+          "ids": [
+            "gb:MMR:ADM3:66882298B4365732465197",
+            "gb:MMR:ADM3:66882298B94192188096874"
+          ],
+          "status": "open",
+          "rationale": "Current province Kawkareik (framework:province:kawkareik:24452fe8fa4e); inspected exact source identifiers for 2 locations with actual role Township, source gb:MMR:ADM3, reference vintages 2019. Pinned cache contains 330 features; 2 of these location records have entirely matched declared-source member IDs. Source-ID correspondence does not independently approve local geographic purpose, original-footprint retention, administrative reforms or settlement/rank. Exact review stays open until those tests have sourced outcomes.",
+          "evidence": [
+            {
+              "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM3/geoBoundaries-MMR-ADM3.geojson",
+              "title": "Myanmar",
+              "inspected_fact": "Actual location source gb:MMR:ADM3; role Township; reference vintage 2019; license Creative Commons Attribution 4.0 (CC BY 4.0). Source feature/member identifiers were inspected separately from ADM-level labels."
+            }
+          ],
+          "province_id": "framework:province:kawkareik:24452fe8fa4e",
+          "source_id": "gb:MMR:ADM3",
+          "actual_role": "Township",
+          "specific_reasons": []
+        }
+      ],
+      "prerequisites": [
+        "Complete original source-family membership, exact source/owner/parent joins and whole-footprint parent proof.",
+        "Accepted country/topology exclusions and all explicit holes; ancestry and nearest-bank proximity do not grant territorial authority.",
+        "Whole original GSHHG hierarchy or demonstrably applicable retained target interpretation; preserve all uncertainty/relative intervals.",
+        "Later actual delivery-base effective owner-zero and native authority/conservation."
+      ],
+      "land_only_rule_ceiling": 2
+    }
+  ],
+  "custody": {
+    "scientific_vintage": "f7c358326d776398bc1cffe84df81eac7033091c",
+    "inventory": {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/341d0bbaf81e47cd16ab58ca6d1ab75d5ac120cf732c677e081b12830ea3ef31/work/.cache/mmr-remaining-inventory-20261014-001/inventory.json",
+      "sha256": "efec8d28b63befcb411b6d0d81063af6a962edbec9a1b3f08b86fc3b7bd44157"
+    },
+    "intervals": {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/341d0bbaf81e47cd16ab58ca6d1ab75d5ac120cf732c677e081b12830ea3ef31/work/.cache/mmr-remaining-inventory-20261014-001/remaining-intervals.json.gz",
+      "sha256": "b12b9ed64ecb16fa2b5501648fa4ca91727793fa99ceadffb96d9623519c93aa"
+    },
+    "latitude_pin": {
+      "commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+      "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+      "decoded_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+    },
+    "longitude_formula": "(x+0.5)/262166*360-180",
+    "cache_retention_commit": null,
+    "limit": "Absolute small-cache file paths and SHA256 checked. Scientific vintage is not asserted as retention commit for untracked cache files."
+  },
+  "candidate_extents": [
+    {
+      "owner": 30263,
+      "name": "Myawaddy",
+      "id": "gb:MMR:ADM3:66882298B59879554977018",
+      "parent_id": "framework:province:myawaddy:32bf363d965b",
+      "package_id": "gb-MMR-ADM3--repair-evaluation",
+      "kind": [
+        "land"
+      ],
+      "cells": 25,
+      "intervals": 21,
+      "x_inclusive": [
+        202779,
+        203113
+      ],
+      "y_inclusive": [
+        118512,
+        119241
+      ],
+      "centre_envelope_degrees": {
+        "longitude": [
+          98.45189688975688,
+          98.91053759831556
+        ],
+        "latitude": [
+          16.046481668597952,
+          17.00615960091732
+        ]
+      },
+      "source_sids": [
+        44888,
+        44919,
+        45124,
+        57248
+      ],
+      "sid_occurrences": {
+        "44888": 25,
+        "44919": 25,
+        "45124": 25,
+        "57248": 2
+      },
+      "small_exact_rows": null
+    },
+    {
+      "owner": 30263,
+      "name": "Myawaddy",
+      "id": "gb:MMR:ADM3:66882298B59879554977018",
+      "parent_id": "framework:province:myawaddy:32bf363d965b",
+      "package_id": "gb-MMR-ADM3--source-conflict",
+      "kind": [
+        "land"
+      ],
+      "cells": 6,
+      "intervals": 5,
+      "x_inclusive": [
+        202807,
+        202932
+      ],
+      "y_inclusive": [
+        118676,
+        119216
+      ],
+      "centre_envelope_degrees": {
+        "longitude": [
+          98.49034581143246,
+          98.66199278319846
+        ],
+        "latitude": [
+          16.07947077937632,
+          16.790682737069133
+        ]
+      },
+      "source_sids": [
+        44888,
+        44919,
+        45124,
+        57248,
+        57669,
+        58170
+      ],
+      "sid_occurrences": {
+        "44888": 6,
+        "44919": 6,
+        "45124": 6,
+        "57248": 5,
+        "57669": 3,
+        "58170": 3
+      },
+      "small_exact_rows": [
+        [
+          118676,
+          202810,
+          202811,
+          [
+            30263,
+            41995
+          ],
+          [
+            44888,
+            44919,
+            45124,
+            57248,
+            57669
+          ],
+          "land"
+        ],
+        [
+          118677,
+          202807,
+          202808,
+          [
+            30263,
+            41995
+          ],
+          [
+            44888,
+            44919,
+            45124,
+            57248,
+            57669
+          ],
+          "land"
+        ],
+        [
+          118677,
+          202808,
+          202809,
+          [
+            30263,
+            41995
+          ],
+          [
+            44888,
+            44919,
+            45124,
+            57669
+          ],
+          "land"
+        ],
+        [
+          119215,
+          202931,
+          202932,
+          [
+            30263,
+            41467
+          ],
+          [
+            44888,
+            44919,
+            45124,
+            57248,
+            58170
+          ],
+          "land"
+        ],
+        [
+          119216,
+          202931,
+          202933,
+          [
+            30263,
+            41467
+          ],
+          [
+            44888,
+            44919,
+            45124,
+            57248,
+            58170
+          ],
+          "land"
+        ]
+      ]
+    },
+    {
+      "owner": 30387,
+      "name": "Kyainseikgyi",
+      "id": "gb:MMR:ADM3:66882298B94192188096874",
+      "parent_id": "framework:province:kawkareik:24452fe8fa4e",
+      "package_id": "gb-MMR-ADM3--repair-evaluation",
+      "kind": [
+        "land"
+      ],
+      "cells": 2,
+      "intervals": 1,
+      "x_inclusive": [
+        202632,
+        202633
+      ],
+      "y_inclusive": [
+        119852,
+        119852
+      ],
+      "centre_envelope_degrees": {
+        "longitude": [
+          98.25004005096008,
+          98.2514132267342
+        ],
+        "latitude": [
+          15.238553657330602,
+          15.238553657330602
+        ]
+      },
+      "source_sids": [
+        44888,
+        44918,
+        45128
+      ],
+      "sid_occurrences": {
+        "44888": 2,
+        "44918": 2,
+        "45128": 2
+      },
+      "small_exact_rows": [
+        [
+          119852,
+          202632,
+          202634,
+          [
+            30387
+          ],
+          [
+            44888,
+            44918,
+            45128
+          ],
+          "land"
+        ]
+      ]
+    }
+  ],
+  "extent_limit": "Independent centre extrema; rows preserve package_id because both repair and conflict packages use kindland.25repair and6conflict must not be merged into a25-cell envelope withcombined counts.",
+  "source_family_provenance": [
+    {
+      "key": "gb:MMR:ADM3",
+      "source_represented_year_claim": "2019",
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM3/geoBoundaries-MMR-ADM3_simplified.geojson",
+      "recorded_license": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+      "original_sha256": "94c0c9af839094257d13a6fe6590feddb2dcb04540d87e58b656c9f000fb92a2"
+    },
+    {
+      "key": "gb:THA:ADM1",
+      "source_represented_year_claim": "2017",
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/THA/ADM1/geoBoundaries-THA-ADM1_simplified.geojson",
+      "recorded_license": "Open Data Commons Open Database License 1.0",
+      "original_sha256": "841f1250cac868fa966b2089863f01e9c9b4dc9b7fb0d9d6dce9a495e32b32a0"
+    },
+    {
+      "key": "gb:THA:ADM2",
+      "source_represented_year_claim": "2019",
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/THA/ADM2/geoBoundaries-THA-ADM2_simplified.geojson",
+      "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "original_sha256": "faae0d9d6fe56b489a9cb3bd5b8fe100025aad99ec554bf7a9f49cbe2216bf10"
+    }
+  ],
+  "retained_scope": [
+    "Myawaddy30263 gb:MMR:ADM3:66882298B59879554977018 is the sole child of currentframeworkMyawaddy; sourceparentgb:MMR:ADM2:60261553B30562402338544,SID44919,ordinal22. This is roster context, not whole-parent equivalence.",
+    "Repair25 centres includeTHAADM1SID57248 on2cells; source-conflict6 haveSID57248 on5,SID57669 on3,SID58170 on3. North3 conflict owners30263/41995; south3owners30263/41467. Foreign feature names are not guessed.",
+    "Myawaddy current/original single polygon,zero holes; coordinatepairs546current/617original. Currenteast98.91910067114094 versusoriginal98.92170008000006; currentnorth17.0899 versusoriginal17.09211446900005. Topologyreconciledtrue/conflicts5 does not resolve any cut.",
+    "Kawkareik2 are actuallyKyainseikgyi30387 gb:MMR:ADM3:66882298B94192188096874 at98.25004005096008–98.2514132267342E,15.238553657330602N, well south ofMyawaddyrepairenvelope. Current1hole versusoriginal0 remains unresolved; nofreshKawkareikwebscope added.",
+    "THAADM1 consumedfamilyyear2017/ODbL andTHAADM2year2019/CCBY3.0IGO remain separate provenance. MMRADM3year2019/CCBY4.0 does not license external documents."
+  ],
+  "primary_sources": [
+    {
+      "id": "gad-myawaddy2019",
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Myawaddy_2019_MMR.pdf",
+      "issuer": "MyawaddyTownshipGeneralAdministrationDepartment",
+      "cover_date": "2019-09-30",
+      "pdf_pages": 108,
+      "locators": [
+        "PDFpage1cover",
+        "PDFpages11–12(printed2–3),history/area",
+        "PDFpage13(printed4),boundary/confluence"
+      ],
+      "facts": [
+        "History cites StateLawandOrderRestorationCouncil notification42/95,19September1995, establishingMyawaddyDistrict; original instrument/annex not acquired.",
+        "Explicitly placesMyawaddyTownship withinMyawaddyDistrict,KayinState.",
+        "Area table:Myawaddy714.500,Sugali306.831,Wawlay189.525sqmi; total1210.856sqmi.",
+        "Boundary section namesThailand east,Kawkareik west,Kyainseikgyi south,Hlaingbwe north; Thailand boundary68landmiles and118watermiles.",
+        "Names a confluence aboveမဲကုလားvillage with referenceခမ/မပည/၉၄-၁၁၂၈၄၆ as formation ofThaungyinRiver. Datum,gridunits and map-sheet identity unverified."
+      ],
+      "limits": [
+        "No conversion of thatgridreference toWGS84 orassignmentof candidatecells.",
+        "Printedposition sentence is malformed,including96°10′30″E and reversed/narrow16°05′latitudes; do not silently repair.",
+        "Scope/area rows are not georeferenced original township orborder proof."
+      ]
+    },
+    {
+      "id": "dop-myawady2014",
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_Myawady_2014_ENG.pdf",
+      "issuer": "DepartmentofPopulation,MinistryofLabour,ImmigrationandPopulation",
+      "published": "October2017",
+      "census_vintage": 2014,
+      "locators": [
+        "PDFpage1cover",
+        "PDFpage7figures"
+      ],
+      "facts": [
+        "TitleMyawadyTownshipReport,KayinState,MyawadyDistrict.",
+        "Area1850.5km²;5wards,11village tracts."
+      ],
+      "limits": [
+        "Distinct census reporting scope; nooriginal administrativeannex."
+      ]
+    },
+    {
+      "id": "dop-sugali2014",
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_Sugali_2014_ENG.pdf",
+      "issuer": "DepartmentofPopulation",
+      "published": "October2017",
+      "census_vintage": 2014,
+      "locators": [
+        "PDFpage1cover",
+        "PDFpage7figures"
+      ],
+      "facts": [
+        "SugaliSub-TownshipReport,KayinState,MyawadyDistrict.",
+        "Area794.7km²;1ward,3village tracts."
+      ],
+      "limits": [
+        "Reporttitle doesnot independently place every originalsourcepart insideMyawaddyTownship."
+      ]
+    },
+    {
+      "id": "dop-wawlaymyaing2014",
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_Wawlaymyaing_2014_ENG.pdf",
+      "issuer": "DepartmentofPopulation",
+      "published": "October2017",
+      "census_vintage": 2014,
+      "locators": [
+        "PDFpage1cover",
+        "PDFpage7figures"
+      ],
+      "facts": [
+        "WawlaymyaingSub-TownshipReport,KayinState,MyawadyDistrict.",
+        "Area490.9km²;2wards,3village tracts."
+      ],
+      "limits": [
+        "No proof of wholeoriginalsourcecoverage from its title or area."
+      ]
+    },
+    {
+      "id": "thai-senate-mahawan-question",
+      "url": "https://www.senate.go.th/assets/portals/1/files/15_immer%20working%20senate_2556.pdf",
+      "issuer": "ThaiSenate",
+      "period": "21December2012–19April2013 legislative-session summary",
+      "pdf_pages": 193,
+      "locators": [
+        "PDFpages130–131,printed156–157,question42",
+        "Question submitted13February2012"
+      ],
+      "facts": [
+        "Question42 byPrasongNurak toPrimeMinister recounts alleged25December2011 flagplanting acrossMoei nearWatHuaiMahawong,MahawanSubdistrict,MaeSot andasksaboutboundarymisunderstandings."
+      ],
+      "limits": [
+        "Questioner allegation,not boundary adjudication orgovernment answer.",
+        "No coordinates,map,datum or treaty reach locatable to anyheldcentre; retained aslocal-document followup only.",
+        "No inspection beyondthisspecificquestion needed."
+      ]
+    },
+    {
+      "id": "mimu-kayin-catalogue",
+      "url": "https://themimu.info/states_regions/kayin",
+      "issuer": "MIMU hosting governmentreports",
+      "facts": [
+        "GADMyawaddy2019listed1.86MB,uploaded24August2020.",
+        "Censuscatalogue usesMyawady(single d),link31; initially guessedMyawaddyURL was a different,failedlocator. This is a corrected catalogue identity,not a retry of the failedURL."
+      ],
+      "limits": [
+        "Catalogues names and dates are not boundary authorization."
+      ]
+    }
+  ],
+  "scope_arithmetic_lead": {
+    "census_km2_sum": 3136.1,
+    "gad_sqmi_total": 1210.856,
+    "conversion_km2_per_sqmi": 2.589988110336,
+    "converted_km2": 3136.1026433290076,
+    "interpretation": "Veryclose reported-area agreement explains a plausible Myawady+Sugali+Wawlaymyaing reporting aggregation. Numericagreement andGADrowlabels do not replace legal membership schedules orgeographicfootprints."
+  },
+  "actual_access_failures": [
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_Myawaddy_2014_ENG.pdf",
+      "state": "Single web openinternalerror; no retry. Catalogue later supplied distinct correctlyspelledMyawadyURL."
+    },
+    {
+      "url": "https://greatermekong.org/mae-sot-myawaddy-border-crossing-and-infrastructure-improvements-thailand-part",
+      "state": "Single web open403; no retry. No projectcontents adopted."
+    }
+  ],
+  "required_artifacts": [
+    {
+      "artifact": "OriginalSLORCnotification42/95 dated19September1995,fullconstituent/territorialschedule andmapannex",
+      "trace": "GADMyawaddy2019PDFpage12",
+      "purpose": "Substantiate exact district formation/whole original township-parent extent."
+    },
+    {
+      "artifact": "Originalinstrumentsandmaps forSugali/Wawlaymyaing creation,conversion andrelation toMyawaddyTownship asof2019",
+      "trace": "GADarea rows andseparateDoP2014subtownshipreports",
+      "purpose": "Bind completeoriginalscope instead of treating1850.5km²censusunit aswholegeoBoundariesowner."
+    },
+    {
+      "artifact": "Authoritativebilateralboundarysheet/pillarandsurveyrecord forThaungyin/Moei confluence/landreach,includingmapreferenceခမ/မပည/၉၄-၁၁၂၈၄၆ and geodeticdatum",
+      "trace": "GADPDFpage13specificconfluencelead",
+      "purpose": "Disambiguatemixed68mileland/118milewaterborder and exact25repair/6conflictcentres; riverlabelalonecannotresolve."
+    },
+    {
+      "artifact": "OriginalThaiSenatequestion42file,governmentreplyandanyannex forWatHuaiMahawong/Mahawan/MaeSot boundaryevent",
+      "trace": "ThaiSenate2013summaryPDFpages130–131,questionfiled13February2012",
+      "purpose": "Potential localdispute/maplead only; no assumedconnectiontoheldcentres."
+    },
+    {
+      "artifact": "Qualifiedacceptedexclusion/holeinterpretation forKyainseikgyi currenthole andtwo southerncentres",
+      "trace": "Retainedinventory/currenthole1original0",
+      "purpose": "No primaryscope expansion herebecausecellsare geographicallyseparatefromMyawaddyreach."
+    }
+  ],
+  "assessment": {
+    "supported": [
+      "Exact currentfamily/source IDs,distinct25repair/6conflict scopes and2southerncontext centres retained.",
+      "Dated42/95district notification identified inofficial2019GADprofile.",
+      "Three namedreporting units provide near-identical aggregate area; specific confluencegridreference retained."
+    ],
+    "unknown": [
+      "Legal/geographic completeoriginalfootprintandparentcontainment.",
+      "Preciseborderandexclusionmapping,bothconflictclusters andrepairforeignflags.",
+      "Source revision/countryauthority/holeclearanceandnativequalifieddelivery."
+    ],
+    "promoted_cells": 0
+  },
+  "method_limits": [
+    "Smallretainedinventory/interval/normlatreads andboundedread-onlyprimarywebtext.",
+    "No localdownloads,cards,Gitacquisition,runtimesetup,sourcepasses,GSHHG/GIS/native/rasterprocesses ortrackededits.",
+    "No failedendpointretry; genericIndia/Chinatreatytexts notused.",
+    "Allforeignfeature namesunassigned;no territorial/controlfinding.",
+    "No reuse licenseverifiedforgovernmentdocuments."
+  ]
+}

@@ -1,0 +1,444 @@
+{
+  "scientific_vintage": "f7c358326d776398bc1cffe84df81eac7033091c",
+  "frozen_queue_vintage": "a61b6f9e7f88b1da380e3a834f89d7509132ed71",
+  "inventory_pin": {
+    "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/341d0bbaf81e47cd16ab58ca6d1ab75d5ac120cf732c677e081b12830ea3ef31/work/.cache/mmr-remaining-inventory-20261014-001/inventory.json",
+    "sha256": "efec8d28b63befcb411b6d0d81063af6a962edbec9a1b3f08b86fc3b7bd44157"
+  },
+  "interval_pin": {
+    "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/341d0bbaf81e47cd16ab58ca6d1ab75d5ac120cf732c677e081b12830ea3ef31/work/.cache/mmr-remaining-inventory-20261014-001/remaining-intervals.json.gz",
+    "sha256": "b12b9ed64ecb16fa2b5501648fa4ca91727793fa99ceadffb96d9623519c93aa"
+  },
+  "latitude_pin": {
+    "commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+    "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/341d0bbaf81e47cd16ab58ca6d1ab75d5ac120cf732c677e081b12830ea3ef31/work/coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+    "decoded_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+  },
+  "parent": {
+    "parent_id": "framework:province:muse:10b96718f640",
+    "repair_land": 44,
+    "repair_water": 0,
+    "repair_cells": 44,
+    "relative": 0,
+    "conflicts": 0,
+    "complete_child_count": 3,
+    "repair_owner_count": 1,
+    "repair_owners": [
+      30209
+    ],
+    "complete_children": [
+      {
+        "owner": 30184,
+        "id": "gb:MMR:ADM3:66882298B40242085426704",
+        "name": "Namhkan",
+        "province_id": "framework:province:muse:10b96718f640",
+        "source_id": "gb:MMR:ADM3",
+        "source_atoms": [
+          "gb:MMR:ADM3:66882298B40242085426704"
+        ],
+        "remaining_counts": {},
+        "accepted_removed_cells": 0,
+        "reserved_excluded_cells": 0,
+        "blocks": [],
+        "source_sids": [],
+        "topology_fields": {
+          "topology_version": 1,
+          "topology_reconciled": true,
+          "topology_conflicts": 1,
+          "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+        },
+        "current_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 81,
+          "interior_rings": 0,
+          "bounds": [
+            97.3443,
+            23.4469,
+            97.9211,
+            23.9834
+          ]
+        },
+        "original_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 262,
+          "interior_rings": 0,
+          "bounds": [
+            97.3433091350001,
+            23.44691049200007,
+            97.92307118800002,
+            23.98335307800006
+          ]
+        }
+      },
+      {
+        "owner": 30209,
+        "id": "gb:MMR:ADM3:66882298B45954578024958",
+        "name": "Muse",
+        "province_id": "framework:province:muse:10b96718f640",
+        "source_id": "gb:MMR:ADM3",
+        "source_atoms": [
+          "gb:MMR:ADM3:66882298B45954578024958"
+        ],
+        "remaining_counts": {
+          "repair-evaluation:land": 44
+        },
+        "accepted_removed_cells": 0,
+        "reserved_excluded_cells": 0,
+        "blocks": [
+          27
+        ],
+        "source_sids": [
+          44896,
+          44949,
+          45207
+        ],
+        "topology_fields": {
+          "topology_version": 1,
+          "topology_reconciled": true,
+          "topology_conflicts": 3,
+          "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+        },
+        "current_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 82,
+          "interior_rings": 0,
+          "bounds": [
+            97.8333,
+            23.6722,
+            98.5943,
+            24.1305
+          ]
+        },
+        "original_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 184,
+          "interior_rings": 0,
+          "bounds": [
+            97.83241785400008,
+            23.670544648000046,
+            98.59431172600003,
+            24.130537284000056
+          ]
+        }
+      },
+      {
+        "owner": 30389,
+        "id": "gb:MMR:ADM3:66882298B95137376687287",
+        "name": "Kutkai",
+        "province_id": "framework:province:muse:10b96718f640",
+        "source_id": "gb:MMR:ADM3",
+        "source_atoms": [
+          "gb:MMR:ADM3:66882298B95137376687287"
+        ],
+        "remaining_counts": {},
+        "accepted_removed_cells": 0,
+        "reserved_excluded_cells": 0,
+        "blocks": [],
+        "source_sids": [],
+        "topology_fields": {
+          "topology_version": 1
+        },
+        "current_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 111,
+          "interior_rings": 0,
+          "bounds": [
+            97.6016,
+            23.2954,
+            98.5879,
+            23.9883
+          ]
+        },
+        "original_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 307,
+          "interior_rings": 0,
+          "bounds": [
+            97.60156274500012,
+            23.29540042200009,
+            98.58789577800012,
+            23.98830893700004
+          ]
+        }
+      }
+    ],
+    "native_blocks": [
+      27
+    ],
+    "observed_source_families": [
+      "gb:MMR:ADM1",
+      "gb:MMR:ADM2",
+      "gb:MMR:ADM3"
+    ],
+    "source_region_features": [
+      {
+        "id": "gb:MMR:ADM1:20573499B82952573339616",
+        "name": "Shan"
+      }
+    ],
+    "source_parent_features": [
+      {
+        "source_index": 44949,
+        "family_index": 217,
+        "source_id": "gb:MMR:ADM2:60261553B93917356889079",
+        "ordinal": 52,
+        "owners": [],
+        "name": "Muse",
+        "geometry_status": "raw-native-supported"
+      }
+    ],
+    "decisions": [
+      {
+        "ids": [
+          "gb:MMR:ADM3:66882298B45954578024958",
+          "gb:MMR:ADM3:66882298B95137376687287",
+          "gb:MMR:ADM3:66882298B40242085426704"
+        ],
+        "status": "open",
+        "rationale": "Current province Muse (framework:province:muse:10b96718f640); inspected exact source identifiers for 3 locations with actual role Township, source gb:MMR:ADM3, reference vintages 2019. Pinned cache contains 330 features; 3 of these location records have entirely matched declared-source member IDs. Source-ID correspondence does not independently approve local geographic purpose, original-footprint retention, administrative reforms or settlement/rank. Exact review stays open until those tests have sourced outcomes.",
+        "evidence": [
+          {
+            "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM3/geoBoundaries-MMR-ADM3.geojson",
+            "title": "Myanmar",
+            "inspected_fact": "Actual location source gb:MMR:ADM3; role Township; reference vintage 2019; license Creative Commons Attribution 4.0 (CC BY 4.0). Source feature/member identifiers were inspected separately from ADM-level labels."
+          }
+        ],
+        "province_id": "framework:province:muse:10b96718f640",
+        "source_id": "gb:MMR:ADM3",
+        "actual_role": "Township",
+        "specific_reasons": []
+      }
+    ],
+    "prerequisites": [
+      "Complete original source-family membership, exact source/owner/parent joins and whole-footprint parent proof.",
+      "Accepted country/topology exclusions and all explicit holes; ancestry and nearest-bank proximity do not grant territorial authority.",
+      "Whole original GSHHG hierarchy or demonstrably applicable retained target interpretation; preserve all uncertainty/relative intervals.",
+      "Later actual delivery-base effective owner-zero and native authority/conservation."
+    ],
+    "land_only_rule_ceiling": 44
+  },
+  "groups": [
+    {
+      "owner": 30209,
+      "package_id": "gb-MMR-ADM3--repair-evaluation",
+      "interval_count": 13,
+      "cell_count": 44,
+      "x_inclusive": [
+        202863,
+        202882
+      ],
+      "y_inclusive": [
+        112987,
+        113001
+      ],
+      "centre_envelope_degrees": {
+        "longitude": [
+          98.56724365478362,
+          98.59333399449207
+        ],
+        "latitude": [
+          24.086567528118316,
+          24.104116911005235
+        ]
+      },
+      "source_sids": [
+        44896,
+        44949,
+        45207
+      ],
+      "all_owners": [
+        30209
+      ],
+      "retained_rows": [
+        [
+          112987,
+          202863,
+          202864,
+          [
+            30209
+          ],
+          [
+            44896,
+            44949,
+            45207
+          ],
+          "land"
+        ],
+        [
+          112990,
+          202867,
+          202868,
+          [
+            30209
+          ],
+          [
+            44896,
+            44949,
+            45207
+          ],
+          "land"
+        ],
+        [
+          112992,
+          202870,
+          202872,
+          [
+            30209
+          ],
+          [
+            44896,
+            44949,
+            45207
+          ],
+          "land"
+        ],
+        [
+          112993,
+          202871,
+          202877,
+          [
+            30209
+          ],
+          [
+            44896,
+            44949,
+            45207
+          ],
+          "land"
+        ],
+        [
+          112994,
+          202872,
+          202878,
+          [
+            30209
+          ],
+          [
+            44896,
+            44949,
+            45207
+          ],
+          "land"
+        ],
+        [
+          112995,
+          202874,
+          202880,
+          [
+            30209
+          ],
+          [
+            44896,
+            44949,
+            45207
+          ],
+          "land"
+        ],
+        [
+          112996,
+          202875,
+          202881,
+          [
+            30209
+          ],
+          [
+            44896,
+            44949,
+            45207
+          ],
+          "land"
+        ],
+        [
+          112997,
+          202876,
+          202881,
+          [
+            30209
+          ],
+          [
+            44896,
+            44949,
+            45207
+          ],
+          "land"
+        ],
+        [
+          112998,
+          202878,
+          202882,
+          [
+            30209
+          ],
+          [
+            44896,
+            44949,
+            45207
+          ],
+          "land"
+        ],
+        [
+          112999,
+          202879,
+          202882,
+          [
+            30209
+          ],
+          [
+            44896,
+            44949,
+            45207
+          ],
+          "land"
+        ],
+        [
+          113000,
+          202880,
+          202882,
+          [
+            30209
+          ],
+          [
+            44896,
+            44949,
+            45207
+          ],
+          "land"
+        ],
+        [
+          113001,
+          202881,
+          202882,
+          [
+            30209
+          ],
+          [
+            44896,
+            44949,
+            45207
+          ],
+          "land"
+        ],
+        [
+          113001,
+          202882,
+          202883,
+          [
+            30209
+          ],
+          [
+            44949,
+            45207
+          ],
+          "land"
+        ]
+      ]
+    }
+  ],
+  "method": "Read-only retained metadata extraction and pinned row-latitude lookup; no source/GIS/native scientific producer. Independent extrema, not boundary evidence."
+}

@@ -1,0 +1,122 @@
+{
+  "parent_id": "framework:province:yangon-south:eff008f2cdff",
+  "repair_land": 40,
+  "repair_water": 0,
+  "repair_cells": 40,
+  "relative": 173,
+  "conflicts": 0,
+  "complete_child_count": 1,
+  "repair_owner_count": 1,
+  "repair_owners": [
+    30177
+  ],
+  "complete_children": [
+    {
+      "owner": 30177,
+      "id": "gb:MMR:ADM3:66882298B36196103316909",
+      "name": "Cocokyun",
+      "province_id": "framework:province:yangon-south:eff008f2cdff",
+      "source_id": "gb:MMR:ADM3",
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B36196103316909"
+      ],
+      "remaining_counts": {
+        "repair-evaluation:land": 40,
+        "physical-interpretation:source-relative": 173
+      },
+      "accepted_removed_cells": 0,
+      "reserved_excluded_cells": 0,
+      "blocks": [
+        29
+      ],
+      "source_sids": [
+        44895,
+        44958,
+        45061,
+        66907
+      ],
+      "topology_fields": {
+        "topology_version": 1
+      },
+      "current_geometry": {
+        "type": "MultiPolygon",
+        "polygons": 2,
+        "coordinate_pairs": 17,
+        "interior_rings": 0,
+        "bounds": [
+          93.3504,
+          14.0449,
+          93.6409,
+          14.9061
+        ]
+      },
+      "original_geometry": {
+        "type": "MultiPolygon",
+        "polygons": 2,
+        "coordinate_pairs": 26,
+        "interior_rings": 0,
+        "bounds": [
+          93.3504130730002,
+          14.044257853000126,
+          93.64418827200024,
+          14.906136731000228
+        ]
+      }
+    }
+  ],
+  "native_blocks": [
+    29
+  ],
+  "observed_source_families": [
+    "gb:IND:ADM3",
+    "gb:MMR:ADM1",
+    "gb:MMR:ADM2",
+    "gb:MMR:ADM3"
+  ],
+  "source_region_features": [
+    {
+      "id": "gb:MMR:ADM1:20573499B24734669936209",
+      "name": "Yangon"
+    }
+  ],
+  "source_parent_features": [
+    {
+      "source_index": 44958,
+      "family_index": 217,
+      "source_id": "gb:MMR:ADM2:60261553B83294236469928",
+      "ordinal": 61,
+      "owners": [],
+      "name": "Yangon (South)",
+      "geometry_status": "raw-native-supported"
+    }
+  ],
+  "decisions": [
+    {
+      "ids": [
+        "gb:MMR:ADM3:66882298B36196103316909"
+      ],
+      "status": "open",
+      "rationale": "Current province Yangon (South) (framework:province:yangon-south:eff008f2cdff); inspected exact source identifiers for 1 locations with actual role Township, source gb:MMR:ADM3, reference vintages 2019. Pinned cache contains 330 features; 1 of these location records have entirely matched declared-source member IDs. known parent mismatch / geographic-remnant finding. Source-ID correspondence does not independently approve local geographic purpose, original-footprint retention, administrative reforms or settlement/rank. Exact review stays open until those tests have sourced outcomes.",
+      "evidence": [
+        {
+          "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM3/geoBoundaries-MMR-ADM3.geojson",
+          "title": "Myanmar",
+          "inspected_fact": "Actual location source gb:MMR:ADM3; role Township; reference vintage 2019; license Creative Commons Attribution 4.0 (CC BY 4.0). Source feature/member identifiers were inspected separately from ADM-level labels."
+        }
+      ],
+      "province_id": "framework:province:yangon-south:eff008f2cdff",
+      "source_id": "gb:MMR:ADM3",
+      "actual_role": "Township",
+      "specific_reasons": [
+        "known parent mismatch / geographic-remnant finding"
+      ]
+    }
+  ],
+  "prerequisites": [
+    "Complete original source-family membership, exact source/owner/parent joins and whole-footprint parent proof.",
+    "Accepted country/topology exclusions and all explicit holes; ancestry and nearest-bank proximity do not grant territorial authority.",
+    "Whole original GSHHG hierarchy or demonstrably applicable retained target interpretation; preserve all uncertainty/relative intervals.",
+    "Later actual delivery-base effective owner-zero and native authority/conservation."
+  ],
+  "land_only_rule_ceiling": 40
+}

@@ -1,0 +1,110 @@
+{
+  "kind": "primary-island-jurisdiction-research-not-clearance",
+  "date": "2026-10-14",
+  "parent_id": "framework:province:yangon-south:eff008f2cdff",
+  "scope": {
+    "owner": 30177,
+    "id": "gb:MMR:ADM3:66882298B36196103316909",
+    "repair_land_held": 40,
+    "repair_rows": 19,
+    "repair_extent_x_half_open_y_inclusive": [
+      199077,
+      199085,
+      120671,
+      120727
+    ],
+    "relative_held": 173,
+    "relative_rows": 91,
+    "relative_extent_x_half_open_y_inclusive": [
+      199066,
+      199278,
+      120104,
+      120750
+    ],
+    "water": 0,
+    "source_conflict_cells": 0,
+    "native_block": 29,
+    "excluded_parent": "framework:province:yangon-south:51d86e5c4f5a (mainland227/333)"
+  },
+  "retained_source": {
+    "represented_year": 2019,
+    "revision": "9469f09",
+    "source_sids": [
+      44895,
+      44958,
+      45061,
+      66907
+    ],
+    "mmr_adm3_sid": 45061,
+    "foreign_family": "gb:IND:ADM3",
+    "foreign_sid": 66907,
+    "foreign_feature_name": "Notverifiedfromsmallmetadata; noAndamanfeaturelabelassumed.",
+    "adm2_sid": 44958,
+    "adm2_ordinal": 61,
+    "adm2_id": "gb:MMR:ADM2:60261553B83294236469928",
+    "adm1_id": "gb:MMR:ADM1:20573499B24734669936209",
+    "original_components": 2,
+    "original_coordinate_pairs": 26,
+    "selected_components": 2,
+    "selected_coordinate_pairs": 17,
+    "original_bounds": [
+      93.3504130730002,
+      14.044257853000126,
+      93.64418827200024,
+      14.906136731000228
+    ],
+    "diagnostic": "Knownparentmismatch/geographic-remnantfinding. No new componentgeometry/sourcepass performed."
+  },
+  "primary_findings": [
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Cocokyun_2019_MMR.pdf",
+      "provider": "GAD hostedMIMU",
+      "pdf_pages": 61,
+      "cover_date": "October2019,dayblank",
+      "represented_date": "September2019end (PDF19)",
+      "evidence_pages_1_based": [
+        1,
+        13,
+        14,
+        19,
+        21
+      ],
+      "finding": "CoverplacesCocokyuninYangonSouthDistrict. Historycites26June1969LocalAdministrationnotification497,effective1July1969,then8September1969letter50ဗလက(1)69,and12July1999MoHA100/13-236/ဦး1establishingtwo numberedwards. GeographymentionsCocoLittle,Slipper,Table/Mingalaislands,JerryandIndianAndamansasseawardneighbours; area14.56squaremiles.",
+      "limit": "Theseareprofilecitationsnotactualnotificationbodies.1969municipaltransfermustnotstandinfortownshipterritory. Twowardsarenumberedwithoutaninspectedgeoreferencedislandschedule. Printed/extractedcoordinatesandnorthsouth7mileextentdonotsecurelyexplainwholeconsumedboundsreaching14.906N. No correctioninvented,nomappedPrepariscomponentassertion."
+    },
+    {
+      "url": "https://myanmar.unfpa.org/sites/default/files/pub-pdf/Yangon%20Region%20Census%20Report%20-%20ENGLISH.pdf",
+      "provider": "DepartmentofPopulation hostedUNFPA",
+      "evidence_page_1_based": 167,
+      "finding": "2014censustablegroupsCocogyununderSouthYangonwithmainlandtownships. Thiscorroborateshistoricaladministrativemembership,notparentgeometry.",
+      "limit": "Separatecurrentframeworkparentandgeographic-remnantfindingremainexplicit. No mainland227creditmixedin."
+    }
+  ],
+  "geographic_trace_gap": "Retainedoriginalhas2componentsbutnon-geometrymetadataonlyreportsaggregatebounds. Exactislandnames/ordinal/componentboundsand40landcandidate→componentjoinunverified. SecondaryCoco+Preparisleadexistsbutnotadoptedasprimaryislandmapping. Needactualgeoreferencedislandjurisdictionschedule/mapandshorelineconvention,notbasemaplabels.",
+  "actual_access_failures": [
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_Cocokyun_2014_ENG.pdf",
+      "result": "Singleinferredstandardfilenameopen:URLnotaccessibleviathistool; noexistenceclaim,noretry."
+    },
+    {
+      "url": "https://myanmar.gov.mm/content",
+      "result": "SearchreturnedgenericcontentURLforCocokyuntravelarticle;singleopenURLnotaccessibleviathistool. Notretried; notjurisdictionevidence."
+    }
+  ],
+  "bounded_lookup": "Exact1969/1999order/islandqueriesreturnednorequestedprimarynotificationbodyorannexmap. No failedportalretry,browserdownloadorcredentials. SecondaryWikipediausedonlytoseekprimarylocators; noadoptedterritorialclaim.",
+  "concrete_missing": [
+    {
+      "artifact": "26June1969notification497,8September1969letter50ဗလက(1)69,12July1999MoHA100/13-236/ဦး1 actualsignedbodiesandeffectiveclauses",
+      "purpose": "Distinguishmunicipalassignment,townshipformationandwardjurisdiction; inspectanyannexedislandlist/map. Existenceofmapunverified."
+    },
+    {
+      "artifact": "Primaryislandjurisdictionmap/scheduletyingboth2019sourcecomponentsandall40candidatecentrestonamedislands/wards",
+      "purpose": "Resolvegeographic-remnantfinding; namedneighbourislandsareinsufficient."
+    },
+    {
+      "artifact": "INDADM3SID66907identityandactualcountry/topologycompetitorcutjoins; wholeoriginalphysicalhierarchyandapplicableshorelinevintage/datum",
+      "purpose": "Noforeignclearanceorlandauthorityfromzeroqueueconflicts. Preserve173relativecells."
+    }
+  ],
+  "custody": "SmallretainedJSON/gzipmetadataandwebtextonly. No localPDFrawbytes/hashes,GIS/native/raster/source/GSHHGpass,Gitacquisition,downloads/runtimeinstall,cardsortrackededits. GADmapscale/datum/licenseunverified. Previouspacketsunchanged. All40land173relativeheld."
+}

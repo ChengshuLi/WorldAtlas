@@ -1,0 +1,251 @@
+{
+  "scientific_vintage": "f7c358326d776398bc1cffe84df81eac7033091c",
+  "inventory": {
+    "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/341d0bbaf81e47cd16ab58ca6d1ab75d5ac120cf732c677e081b12830ea3ef31/work/.cache/mmr-remaining-inventory-20261014-001/inventory.json",
+    "sha256": "efec8d28b63befcb411b6d0d81063af6a962edbec9a1b3f08b86fc3b7bd44157"
+  },
+  "intervals": {
+    "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/341d0bbaf81e47cd16ab58ca6d1ab75d5ac120cf732c677e081b12830ea3ef31/work/.cache/mmr-remaining-inventory-20261014-001/remaining-intervals.json.gz",
+    "sha256": "b12b9ed64ecb16fa2b5501648fa4ca91727793fa99ceadffb96d9623519c93aa"
+  },
+  "latitude_pin": {
+    "commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+    "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+    "decoded_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+  },
+  "longitude_formula": "(x+0.5)/262166*360-180",
+  "limit": "Independent extrema only; no source/geometry/GIS process or qualification.",
+  "children": [
+    {
+      "owner": 30263,
+      "name": "Myawaddy",
+      "id": "gb:MMR:ADM3:66882298B59879554977018",
+      "parent_id": "framework:province:myawaddy:32bf363d965b",
+      "package_id": "gb-MMR-ADM3--repair-evaluation",
+      "kind": [
+        "land"
+      ],
+      "cells": 25,
+      "intervals": 21,
+      "x_inclusive": [
+        202779,
+        203113
+      ],
+      "y_inclusive": [
+        118512,
+        119241
+      ],
+      "centre_envelope_degrees": {
+        "longitude": [
+          98.45189688975688,
+          98.91053759831556
+        ],
+        "latitude": [
+          16.046481668597952,
+          17.00615960091732
+        ]
+      },
+      "source_sids": [
+        44888,
+        44919,
+        45124,
+        57248
+      ],
+      "sid_occurrences": {
+        "44888": 25,
+        "44919": 25,
+        "45124": 25,
+        "57248": 2
+      },
+      "small_exact_rows": null
+    },
+    {
+      "owner": 30263,
+      "name": "Myawaddy",
+      "id": "gb:MMR:ADM3:66882298B59879554977018",
+      "parent_id": "framework:province:myawaddy:32bf363d965b",
+      "package_id": "gb-MMR-ADM3--source-conflict",
+      "kind": [
+        "land"
+      ],
+      "cells": 6,
+      "intervals": 5,
+      "x_inclusive": [
+        202807,
+        202932
+      ],
+      "y_inclusive": [
+        118676,
+        119216
+      ],
+      "centre_envelope_degrees": {
+        "longitude": [
+          98.49034581143246,
+          98.66199278319846
+        ],
+        "latitude": [
+          16.07947077937632,
+          16.790682737069133
+        ]
+      },
+      "source_sids": [
+        44888,
+        44919,
+        45124,
+        57248,
+        57669,
+        58170
+      ],
+      "sid_occurrences": {
+        "44888": 6,
+        "44919": 6,
+        "45124": 6,
+        "57248": 5,
+        "57669": 3,
+        "58170": 3
+      },
+      "small_exact_rows": [
+        [
+          118676,
+          202810,
+          202811,
+          [
+            30263,
+            41995
+          ],
+          [
+            44888,
+            44919,
+            45124,
+            57248,
+            57669
+          ],
+          "land"
+        ],
+        [
+          118677,
+          202807,
+          202808,
+          [
+            30263,
+            41995
+          ],
+          [
+            44888,
+            44919,
+            45124,
+            57248,
+            57669
+          ],
+          "land"
+        ],
+        [
+          118677,
+          202808,
+          202809,
+          [
+            30263,
+            41995
+          ],
+          [
+            44888,
+            44919,
+            45124,
+            57669
+          ],
+          "land"
+        ],
+        [
+          119215,
+          202931,
+          202932,
+          [
+            30263,
+            41467
+          ],
+          [
+            44888,
+            44919,
+            45124,
+            57248,
+            58170
+          ],
+          "land"
+        ],
+        [
+          119216,
+          202931,
+          202933,
+          [
+            30263,
+            41467
+          ],
+          [
+            44888,
+            44919,
+            45124,
+            57248,
+            58170
+          ],
+          "land"
+        ]
+      ]
+    },
+    {
+      "owner": 30387,
+      "name": "Kyainseikgyi",
+      "id": "gb:MMR:ADM3:66882298B94192188096874",
+      "parent_id": "framework:province:kawkareik:24452fe8fa4e",
+      "package_id": "gb-MMR-ADM3--repair-evaluation",
+      "kind": [
+        "land"
+      ],
+      "cells": 2,
+      "intervals": 1,
+      "x_inclusive": [
+        202632,
+        202633
+      ],
+      "y_inclusive": [
+        119852,
+        119852
+      ],
+      "centre_envelope_degrees": {
+        "longitude": [
+          98.25004005096008,
+          98.2514132267342
+        ],
+        "latitude": [
+          15.238553657330602,
+          15.238553657330602
+        ]
+      },
+      "source_sids": [
+        44888,
+        44918,
+        45128
+      ],
+      "sid_occurrences": {
+        "44888": 2,
+        "44918": 2,
+        "45128": 2
+      },
+      "small_exact_rows": [
+        [
+          119852,
+          202632,
+          202634,
+          [
+            30387
+          ],
+          [
+            44888,
+            44918,
+            45128
+          ],
+          "land"
+        ]
+      ]
+    }
+  ]
+}
