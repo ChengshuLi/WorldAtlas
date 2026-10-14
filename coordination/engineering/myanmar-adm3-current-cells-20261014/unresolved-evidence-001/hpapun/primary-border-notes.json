@@ -1,0 +1,71 @@
+{
+  "status": "held-source-conflict-not-resolved",
+  "research_date_utc": "2026-10-14",
+  "scope": "Bounded retained-evidence and primary-document research; no heavy/native/GIS/fetch execution, scientific dataset download, geometry operation, source raster, patch, import or territorial decision.",
+  "target": {
+    "id": "gb:MMR:ADM3:66882298B27866808767172",
+    "owner": 30135,
+    "original_adm3_ordinal": 147,
+    "cell": {"x": 202111, "y": 117535},
+    "centre_lon": 97.53461547263947,
+    "centre_lat": 18.284599692131874,
+    "size": 262166,
+    "centre_method": "Longitude=(x+0.5)/size*360-180. Latitude read as little-endian float64 at y*8 from the exact retained native-row-latitudes table. Standard inverse Mercator formula gave 18.28459969213187; retained value remains authoritative.",
+    "latitude_commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+    "latitude_path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+    "latitude_decoded_sha256_verified": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+  },
+  "retained_evidence": {
+    "worktree": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/fa678ed92d9b60765f8935b6a7afd117bc7c744c96057999400c37180373dd2e/work",
+    "files_read": [".cache/mmr-hpapun-preparation-001/held-border-cell.json", ".cache/mmr-hpapun-preparation-001/input-provenance.json", ".cache/mmr-hpapun-preparation-001/candidate-source-records.json"],
+    "held_cell": "Retained source SIDs 44888 Kayin ADM1, 44917 Hpapun ADM2, 45118 Hpapun ADM3 and 57296 Mae Hong Son Province THA ADM1; THA reference membership and foreign-source/reference flags. Original and reference memberships are not sovereignty adjudication.",
+    "attribution_path_read_from_git": "coordination/engineering/original-geography-source-corpus-20261006/individual-source-attribution.json",
+    "mmr_record": "Retained represented-year claim 2019; effective applicability and source authority unverified; original whole sha256 94c0c9af839094257d13a6fe6590feddb2dcb04540d87e58b656c9f000fb92a2, 4205367 bytes, per retained record; not re-decoded here.",
+    "tha_record": "Retained represented-year claim 2017; effective applicability and source authority unverified; original whole sha256 841f1250cac868fa966b2089863f01e9c9b4dc9b7fb0d9d6dce9a495e32b32a0, 1009970 bytes, per retained record; not re-decoded here.",
+    "crs": "MMR original product provenance records urn:ogc:def:crs:OGC:1.3:CRS84. THA CRS not independently inspected in this bounded task. Do not assume a treaty/map datum from these source CRS claims."
+  },
+  "primary_sources": [
+    {
+      "title": "U.S. Department of State, International Boundary Study No. 63, Burma-Thailand Boundary",
+      "url": "https://library.law.fsu.edu/Digital-Collections/LimitsinSeas/pdf/ibs063.pdf",
+      "date": "1966-02-01, verified from cover; FSU index lists 1968 in error",
+      "publisher_and_host": "Primary official U.S. State Department document retained by FSU Law library; not a current bilateral determination",
+      "inspected": "Cover; printed page 6 alignment analysis; printed pages 7-9 treaty references and summary",
+      "support": "Page 6 identifies Salween thalweg as border for 81 miles to the Moei confluence. This supplies a concrete river-channel alignment criterion to investigate rather than choosing one administrative polygon.",
+      "missing": "No modern surveyed channel geometry, coordinates or datum precise enough for held cell. No cell-level inference or current sovereignty conclusion. Historical report's no-known-disputes statement applies to its 1966 context only.",
+      "followup_route": "Obtain authoritative dated local Salween channel/boundary survey or bilateral demarcation map; study references native map series and official pre-independence Survey of India maps, plus 1894 exchanged signed three-sheet maps and Aitchison vol XIV pp100-101. These underlying sheets were not inspected.",
+      "license": "No explicit reproduction license inspected. Citation and short paraphrase only; PDF not downloaded or redistributed."
+    },
+    {
+      "title": "geoBoundaries MMR ADM3 metadata",
+      "url": "https://www.geoboundaries.org/api/current/gbOpen/MMR/ADM3/",
+      "support": "BoundaryID MMR-ADM3-66882298, Township, represented 2019, source Myanmar Analytics Project / USAID; source update 2023-01-19, build 2023-12-12. Confirms independent upstream lineage, not boundary authority.",
+      "license": "Metadata states CC BY 4.0. Retained original attribution preserves exact terms and unverified authority/effective-date limits."
+    },
+    {
+      "title": "geoBoundaries THA ADM1 metadata",
+      "url": "https://www.geoboundaries.org/api/current/gbOpen/THA/ADM1/",
+      "support": "BoundaryID THA-ADM1-36821470, represented 2017, source OpenStreetMap / Wambacher; source update 2023-01-19, build 2023-12-12. Different source/vintage can explain a competing mapping lineage but does not diagnose exact geometrical cause.",
+      "license": "Metadata states ODbL 1.0. Preserve this distinct upstream license; geoBoundaries derivative statement does not independently clear underlying use or territorial authority."
+    },
+    {
+      "title": "MIMU GIS Resources",
+      "url": "https://themimu.info/gis-resources",
+      "support": "Describes its geospatial datasets as intermediate scale 1:250000 in geographic coordinates with WGS1984 datum. MIMU maps are operational products and do not imply UN endorsement of boundaries.",
+      "limit": "General dataset description only; no Hpapun/Mae Hong Son cell-specific map or dataset inspected. No transfer of these properties to geoBoundaries products asserted."
+    },
+    {
+      "title": "MIMU Terms and Conditions",
+      "url": "https://themimu.info/mimu-terms-conditions",
+      "support": "Sections 2.1-2.3 limit commercial use and require special written permission for geospatial dataset copying/distribution and online use; 5.2 requires permission to embed datasets; 6.1 disclaims a boundary/legal-status opinion; 7 disclaims accuracy guarantees.",
+      "limit": "Terms are a source-use gate, not territorial evidence or a new approval process. No MIMU dataset was downloaded or proposed for embedding."
+    }
+  ],
+  "access_limits": [
+    "MIMU legacy Hpapun district PDF URL and guessed old maps/township-overview routes inaccessible through web tool. Current homepage, GIS resources and township profiles page accessible.",
+    "Current MIMU township profiles page has 2019 GAD catalogue but web text searches Hpapun/Papun found no entry; no township report inspected.",
+    "Myanmar Analytics upstream resource page was inaccessible through web tool. geoBoundaries source metadata remains an attributed provider claim.",
+    "No authoritative local modern Salween survey, treaty annex geometry, bilateral boundary coordinates or datum transformation acquired."
+  ],
+  "conclusion": "Retain held status for cell (202111,117535). Evidence concretely explains distinct source lineage and identifies Salween thalweg as historical alignment criterion. It does not locate the held cell relative to an authoritative channel or prove a whole-footprint exception. No new helper or clearance exists."
+}
