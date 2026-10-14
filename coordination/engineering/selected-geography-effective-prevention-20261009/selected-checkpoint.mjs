@@ -415,10 +415,13 @@ function acceptedRebindCheck(selected,rebind,authorities,size,owners) {
   'Accepted checkpoint rebind/native selection differs');
 }
 function finishCheckpoint(session,reader,{data,routes,rebind,selected,root,oldAuthorities,carriedCertificate=false}) {
-  const originalPatches = [...oldAuthorities.values()].filter(p=>!p.nativeOnly).flatMap(p => p.patches);
+  // Every authority patch remains live, including native-only bodies. Only
+  // the historical rebind denominator excludes native-only source custody.
+  const originalPatches = [...oldAuthorities.values()].flatMap(p => p.patches);
+  const legacyPatchHashes = [...oldAuthorities.values()].filter(p=>!p.nativeOnly).flatMap(p=>p.patches.map(valueSha));
   const nativeRows = new Map(rebind.request.current_rows.map(p => [p.y,p]));
   for (const row of rebind.request.acquisition.predecessor_rows) nativeRows.set(row.y,row);
-  demand(same(originalPatches.map(valueSha),rebind.request.original_patch_sha256s), 'Accepted complete original patch denominator differs');
+  demand(same(legacyPatchHashes,rebind.request.original_patch_sha256s), 'Accepted complete original patch denominator differs');
   if (carriedCertificate) {
     const {certificate,...newData}=data;
     retain(session,{data:newData,rebind,originalPatches});
