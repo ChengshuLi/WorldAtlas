@@ -73,3 +73,9 @@ remain explicit. The independent review script and its complete pinned receipt a
 under independent-review/. Later unrelated main changes do not invalidate these
 unchanged scoped sources or selected bytes; actual integration still checks the
 accepted main plus exact reviewed head.
+
+The retained independent ownership reproducer accepts an exact candidate commit
+and a fresh output filename: `node coordination/engineering/myeik-native-followup-20261014/independent-review/check-ownership.mjs HEAD .cache/new-owner-review.json`.
+It rejects existing files and dangling symlinks before calculation. The Python
+source review accepts a fresh output filename as its sole argument; run it from
+the repository root with the stated Shapely runtime.

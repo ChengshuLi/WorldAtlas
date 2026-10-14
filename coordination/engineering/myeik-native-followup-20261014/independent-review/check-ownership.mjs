@@ -3,6 +3,9 @@ import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {ImmutableReader,loadBaseSelection,loadNativeRowTable,acquireNativeRows} from '../../../../scripts/check-effective-geographic-regression.mjs';
 const base='aaad1215c1b215b415d219b682bc0ff0380d8c73',candidate=process.argv[2],prefix='coordination/engineering/myeik-native-followup-20261014/';
+const output=process.argv[3];
+if(!output)throw Error('Supply exact candidate commit and a fresh output file path');
+try{fs.lstatSync(output);throw Error('Output already exists');}catch(error){if(error.code!=='ENOENT')throw error;}
 const sha=x=>createHash('sha256').update(x).digest('hex'),start=Date.now();
 const qualification=JSON.parse(fs.readFileSync(new URL('source-qualification.json',import.meta.url)));
 const proposal=qualification.proposed_patch;
@@ -30,5 +33,5 @@ for(const row of oldLedger.rows)if(JSON.stringify(row)!==JSON.stringify(newRows.
 const missing=new Map(expected);missing.delete(missing.keys().next().value);if(compare(expected,missing))throw Error('Missing-cell control ineffective');
 const wrongOwner=new Map(expected);wrongOwner.set(wrongOwner.keys().next().value,30149);if(compare(expected,wrongOwner))throw Error('Wrong-owner control ineffective');
 const result={version:1,base_commit:base,candidate_commit:execFileSync('git',['rev-parse',candidate],{encoding:'utf8'}).trim(),qualification_sha256:sha(fs.readFileSync(new URL('source-qualification.json',import.meta.url))),proposed_cells:expected.size,rows_checked:ys.length,occupied_base_cells:occupied,prior_additive_overlap_cells:priorOverlap,prior_additive_cells:old.size,cumulative_cells:patch.size,prior_ledger_rows_preserved:oldLedger.rows.length,candidate_ledger_rows:candidateLedger.rows.length,prior_ledger_bytewise_row_preservation:true,exact_patch_set_agreement:true,controls:{missing_cell_detected:true,wrong_owner_detected:true},selection:selection.selection,native_custody:current.custody,source_limits:'Cell conservation and unique retained source agreement are not border or regional semantic approval.',elapsed_seconds:(Date.now()-start)/1000,max_rss_bytes:process.resourceUsage().maxRSS*1024};
-fs.writeFileSync(new URL('ownership-review.json',import.meta.url),JSON.stringify(result,null,2)+'\n',{flag:'wx'});
+fs.writeFileSync(output,JSON.stringify(result,null,2)+'\n',{flag:'wx'});
 console.log(JSON.stringify({candidate:result.candidate_commit,proposed:expected.size,prior:old.size,cumulative:patch.size,rows:ys.length,occupied,priorOverlap,priorRows:oldLedger.rows.length,seconds:result.elapsed_seconds}));
