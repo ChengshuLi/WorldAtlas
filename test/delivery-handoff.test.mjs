@@ -787,7 +787,7 @@ function modernCompositionFixture(t, {mixed = true} = {}) {
   const priorLedger = f.r.json(f.config.selected_ledger), priorRegistry = f.r.json(f.config.registry);
   const priorPatch = f.r.json(f.assets.patch), manifest = f.r.json(f.assets.base_manifest);
   const evidence = {...f.evidenceBody, base_reference: priorPatch.base_reference,
-    targets: [{...f.evidenceBody.targets[0], pixelIndex: 1, base_geometry: priorLedger.rows.find(row => row.representation === 'native-cells').base_geometry,
+    targets: [{...f.evidenceBody.targets[0], source_family: 'source', pixelIndex: 1, base_geometry: priorLedger.rows.find(row => row.representation === 'native-cells').base_geometry,
       source_receipt_sha256: f.evidenceBody.physical_evidence.sha256}],
     native_contract: Object.fromEntries(['size', 'coordinateBits', 'method', 'native_latitudes', 'hierarchy_sha256', 'original_assets']
       .map(key => [key, manifest[key]]))};
@@ -858,6 +858,7 @@ for (const mixed of [false, true]) test('late compose and finalize replace moder
   assert.equal(JSON.parse(read('selected-delivery-expectations.json')).cumulative_native_cells, mixed ? 5 : 4);
   const roles = JSON.parse(read('package-roles.json')).paths.find(p => p.path === finalConfig.sidecar_output);
   assert.ok(!Object.hasOwn(roles, 'commit')); assert.deepEqual(roles.roles, ['generated final sidecar']);
+  f.save(finalConfig.sidecar_output, sidecarRaw); f.commitAll();
   const resumed = f.run('finalize', destination, ['--resume'], finalConfig); assert.equal(resumed.status, 0, resumed.stderr);
   const repeated = f.run('finalize', '.cache/delivery-handoff/final-again', [], finalConfig); assert.equal(repeated.status, 0, repeated.stderr);
   for (const name of ['selection-sidecar.json', 'ownership-selection.json', 'package-inputs.json', 'package-roles.json', 'selected-delivery-expectations.json'])
@@ -874,6 +875,9 @@ test('late modern composition refuses scope, source-contract, patch and occupied
     [s => { s.native.rows[0].y = 2; s.row.native_rows[0].y = 2; }, /overlap/],
     [s => { s.source.base_reference.id = 'geography:wrong'; }, /baseline\/contract/],
     [s => { s.source.native_contract.method = 'wrong'; }, /baseline\/contract/],
+    [s => { s.source.targets.push({...s.source.targets[0], id: 'source:B', source_family: 'foreign'}); }, /target\/family\/receipt/],
+    [s => { const correct = {...s.source.targets[0], id: 'source:B'}; s.source.targets[0].source_receipt_sha256 = 'f'.repeat(64);
+      s.source.targets.push(correct); }, /target\/family\/receipt/],
     [s => { s.native.rows = []; }, /ledger intervals differ/],
     [s => { s.row.native_rows[0].runs[0][0] = -1; }, /native-only|native-cell|interval|primitive identity/i],
   ]) {
@@ -887,18 +891,34 @@ test('late modern composition refuses scope, source-contract, patch and occupied
   assert.equal(fs.existsSync(path.join(f.root, '.cache/delivery-handoff/refused-pin')), false);
 });
 
+test('modern composition accepts compatible mapped members and refuses omitted parsed metadata carry', t => {
+  const f = modernCompositionFixture(t);
+  const compatible = f.makeAppend(s => s.source.targets.push({...s.source.targets[0], id: 'source:B'}));
+  const accepted = f.run('compose', '.cache/delivery-handoff/compatible-members', [], compatible);
+  assert.equal(accepted.status, 0, accepted.stderr);
+  const large = f.makeAppend(s => { s.source.retained_metadata = 'x'.repeat(2 * 1024 * 1024); });
+  const config = {...large, preparation_allowance: {phaseBytes: 4 * 1024 * 1024, rssBytes: 256 * 1024 * 1024}};
+  const destination = '.cache/delivery-handoff/refused-metadata-carry', result = f.run('compose', destination, [], config);
+  assert.notEqual(result.status, 0); assert.match(result.stderr, /composition carry exceeds/);
+  assert.equal(fs.existsSync(path.join(f.root, destination)), false);
+});
+
 test('generated sidecar refuses foreign/colliding outputs and changed release joins before publication', t => {
-  const f = modernCompositionFixture(t), config = f.finalizeConfig(composeAuthorities(f.config, f.r)); let ordinal = 0;
+  const f = modernCompositionFixture(t), occupied = f.owned + 'occupied-output.json', sentinel = Buffer.from('existing-sidecar-path-sentinel\n');
+  f.save(occupied, sentinel);
+  const config = f.finalizeConfig(composeAuthorities(f.config, f.r)); let ordinal = 0;
   for (const changed of [
     {...config, sidecar_output: 'coordination/engineering/foreign/sidecar.json'},
     {...config, sidecar_output: f.owned + 'preparation.json'},
     {...config, sidecar_output: f.owned + 'package-inputs.json'},
+    {...config, sidecar_output: occupied},
     {...config, sidecar: f.r.pin(f.config.selector.commit, JSON.parse(f.accepted['ownership-selection.json']).additive_release.path)},
     {...config, patch: {...config.patch, sha256: '0'.repeat(64)}},
     {...config, runtime_envelope: {...config.runtime_envelope, sha256: '0'.repeat(64)}},
   ]) {
     const destination = '.cache/delivery-handoff/refused-final-' + ordinal++, result = f.run('finalize', destination, [], changed);
-    assert.notEqual(result.status, 0); assert.match(result.stderr, /sidecar output|hash differs/);
+    assert.notEqual(result.status, 0); assert.match(result.stderr, /sidecar output|existing committed body|hash differs/);
     assert.equal(fs.existsSync(path.join(f.root, destination)), false);
+    assert.deepEqual(fs.readFileSync(path.join(f.root, occupied)), sentinel);
   }
 });

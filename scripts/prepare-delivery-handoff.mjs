@@ -513,14 +513,15 @@ export function composeAuthorities(config, reader) {
       && same(sidecar.base_selection, base), 'Original selected base differs');
     const assets = sidecar.logical_asset_map;
     need(assets && same(Object.keys(assets).sort(), ['base_manifest', 'ledger', 'owner_roster', 'patch']), 'Complete prior logical assets required');
-    const inputBytes = [sidecar.authority_registry, assets.ledger, assets.patch, sidecar.runtime_envelope,
+    let inputBytes = [config.selector, sidecarPin, assets.base_manifest, sidecar.authority_registry, assets.ledger, assets.patch, sidecar.runtime_envelope,
       config.registry, config.ledger, config.native_patch].reduce((n, p) => n + p.bytes, 0);
-    need(Number.isSafeInteger(inputBytes) && inputBytes > 0, 'Complete composition input sizes required');
     // Parsing, literal row copies, interval union and encoded products share the
     // same preparation allowance. Reserve their carry before opening large bodies.
-    const checkCarry = () => {
+    const checkCarry = (outputBytes = 0) => {
+      need(Number.isSafeInteger(inputBytes) && inputBytes > 0, 'Complete composition input sizes required');
       const usage = reader.budget.snapshot();
-      need(usage.accounted_bytes + 12 * inputBytes <= usage.limit_bytes, 'Aggregate composition carry exceeds preparation allowance');
+      need(Number.isSafeInteger(usage.accounted_bytes + 12 * inputBytes + outputBytes)
+        && usage.accounted_bytes + 12 * inputBytes + outputBytes <= usage.limit_bytes, 'Aggregate composition carry exceeds preparation allowance');
     };
     checkCarry();
     const priorRegistry = reader.json(sidecar.authority_registry), priorLedger = reader.json(assets.ledger);
@@ -537,13 +538,16 @@ export function composeAuthorities(config, reader) {
     need(appended.version === 1 && appended.kind === 'retained-rule-authority-registry-v1' && appended.entries?.length === 1
       && priorRegistry.version === 1 && priorRegistry.kind === appended.kind && priorLedger.version === 2,
     'Committed singleton modern authority and existing v2 cumulative ledger required');
-    const entry = appended.entries[0], binding = reader.json(entry.source_authority), preimage = reader.json(entry.rule_preimage);
+    const entry = appended.entries[0];
+    inputBytes += entry.source_authority.bytes + entry.rule_preimage.bytes; checkCarry();
+    const binding = reader.json(entry.source_authority), preimage = reader.json(entry.rule_preimage);
     need(binding.version === 1 && binding.kind === 'source-target-native-custody-v1'
       && same(Object.keys(binding).sort(), ['kind', 'native_patch', 'source_evidence', 'version'])
       && same(preimage, {...binding, kind: 'source-target-native-rule-v1'}) && same(binding.native_patch, config.native_patch)
       && entry.rule_sha256 === entry.rule_preimage.sha256 && constructed.rule_sha256 === entry.rule_sha256 && unique(constructed.component_ids)
       && same(constructed.component_ids, constructed.ledger_rows?.map(row => row.component_id)),
     'Committed modern constructor scope/rule/patch differs');
+    inputBytes += binding.source_evidence.bytes; checkCarry();
     const evidence = reader.json(binding.source_evidence), manifest = reader.json(assets.base_manifest);
     const contract = Object.fromEntries(['size', 'coordinateBits', 'method', 'native_latitudes', 'hierarchy_sha256', 'original_assets']
       .map(key => [key, manifest[key]]));
@@ -561,7 +565,9 @@ export function composeAuthorities(config, reader) {
     const targets = new Map();
     for (const target of evidence.targets) {
       const id = target.target_id ?? target.id, prior = targets.get(id);
-      need(!prior || prior.pixelIndex === target.pixelIndex && same(prior.base_geometry, target.base_geometry), 'Conflicting original source target');
+      need(target.source_receipt_sha256 === evidence.physical_evidence?.sha256
+        && (!prior || prior.pixelIndex === target.pixelIndex && prior.source_family === target.source_family
+          && same(prior.base_geometry, target.base_geometry)), 'Conflicting original source target/family/receipt');
       targets.set(id, target);
     }
     const added = constructed.ledger_rows.map(row => {
@@ -613,8 +619,10 @@ export function composeAuthorities(config, reader) {
     const nextEnvelope = {...envelope, effective_reference: effective,
       ledger: {...envelope.ledger, bytes: ledgerRaw.length, sha256: digest(ledgerRaw)},
       patch: {...envelope.patch, bytes: patchRaw.length, sha256: digest(patchRaw)}};
-    return {'authority-registry.json': jsonBytes(registry), 'selected-ledger.json': ledgerRaw, 'patch.json': patchRaw,
+    const products = {'authority-registry.json': jsonBytes(registry), 'selected-ledger.json': ledgerRaw, 'patch.json': patchRaw,
       'runtime-envelope.json': jsonBytes(wrapped.additiveRelease ? {...wrapped, reference_release: effective, additiveRelease: nextEnvelope} : nextEnvelope)};
+    checkCarry(Object.values(products).reduce((n, raw) => n + raw.length, 0));
+    return products;
   }
   const registries = config.registries.map(p => reader.json(p));
   need(registries.length && registries.every(r => r.version === 1 && r.kind === 'retained-rule-authority-registry-v1'), 'Existing retained registries required');
@@ -778,6 +786,12 @@ export function finalizeDelivery(config, reader) {
     // This is a generated output identity, never a fabricated future input pin.
     const sidecar = {path: config.sidecar_output, mode: '100644', bytes: generatedSidecar.length, sha256: digest(generatedSidecar),
       git_blob_oid: createHash('sha1').update('blob ' + generatedSidecar.length + '\0').update(generatedSidecar).digest('hex')};
+    const head = reader.git('rev-parse', 'HEAD').toString().trim();
+    if (reader.hasPath(head, sidecar.path)) {
+      const existing = reader.pin(head, sidecar.path);
+      need(existing.mode === sidecar.mode && existing.git_blob_oid === sidecar.git_blob_oid && existing.bytes === sidecar.bytes
+        && existing.sha256 === sidecar.sha256, 'Generated sidecar would replace an existing committed body');
+    }
     config = {...config, sidecar};
   }
   need(config.selector?.path === 'data/ownership-selection.json' && config.package_inputs?.path === '.github/package-inputs.json'
