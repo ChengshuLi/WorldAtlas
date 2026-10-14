@@ -6,7 +6,7 @@ import {fileURLToPath} from 'node:url';
 import {execFileSync} from 'node:child_process';
 import {gunzipSync} from 'node:zlib';
 import {processingAllowance, ImmutableReader, SelectedGeometrySources, NativeAssetImage, selectedBaseAssetAlias, selectedGeometrySourceAlias} from '../../../scripts/check-effective-geographic-regression.mjs';
-import {nativeOnlyComponent, deriveSourceTargetNativeDelta, nativePolygonIntervals, polygonParts} from '../../../src/native-grid.js';
+import {nativeOnlyComponent, deriveSourceTargetNativeDelta, nativePolygonIntervals, polygonParts, witnessCellEffects, validateWitnessGeometry} from '../../../src/native-grid.js';
 import {unshuffleOwnershipBytes} from '../../../src/ownership-codec.js';
 const FILE=33554432, SLOT=512;
 const certificates=new WeakMap(), originalAuthorities=new WeakMap(), selectedAdditions=new WeakMap();
@@ -538,54 +538,90 @@ function authorityRegistry(registry) {
  }
  return byId;
 }
-// A retained reconstruction residual can be irrelevant to requested native
-// centres without making its original whole-source issue disappear. Require
-// every observed operation and witness before checking that narrower domain.
+// Admit retained whole query semantics before projecting any witness to cells.
+// Coverage shortcuts refer to the complete candidate/source record; no empty
+// replacement geometry is invented. Repeated source IDs require distinct frames.
+function physicalQueryAdmission(result, required) {
+ const present=Object.hasOwn(result,'source_id_queries')||Object.hasOwn(result,'query_relations');
+ demand(present||!required,'Unsupported original native geometry without complete source query evidence; Unresolved contradictory or hierarchy physical support');
+ if(!present)return;
+ const ids=result.source_id_queries,queries=result.query_relations;
+ demand(Array.isArray(ids)&&ids.length>0&&ids.every(Number.isSafeInteger)
+  &&new Set(ids).size===ids.length&&Array.isArray(queries)&&queries.length>0,
+ 'Incomplete physical source query roster');
+ const expected=new Set(ids),seen=new Set(),joined=new Set();
+ for(const q of queries){
+  demand(q&&expected.has(q.source_id)&&[-360,0,360].includes(q.periodic_offset)
+   &&q.status==='checked','Unknown or missing physical source query');
+  demand(!required||q.periodic_offset===0,'Unqualified periodic physical conflict frame');
+  const identity=q.source_id+':'+q.periodic_offset;
+  demand(!seen.has(identity),'Duplicate physical source query frame');seen.add(identity);joined.add(q.source_id);
+  const bools=['source_covers_candidate','candidate_covers_source','intersects','disjoint'];
+  demand(bools.every(k=>typeof q[k]==='boolean')&&q.intersects!==q.disjoint
+   &&(!(q.source_covers_candidate||q.candidate_covers_source)||q.intersects),
+  'Contradictory physical source query predicates');
+  const witness=q.source_covers_candidate?'complete-candidate-reconstruction':
+   q.candidate_covers_source?'complete-source-record-reconstruction':
+   !q.intersects?'disjoint-after-explicit-predicate':'complete-operation-pointset';
+  demand(q.witness===witness,'Inconsistent physical source query witness precedence');
+  const keys=['source_id','periodic_offset','status',...bools,'witness'];
+  if(witness==='complete-operation-pointset')keys.push('witness_geometry');
+  demand(Object.keys(q).sort().join(',')===keys.sort().join(','),'Incomplete or foreign physical source query fields');
+  if(witness==='complete-operation-pointset')
+   demand(!validateWitnessGeometry(q.witness_geometry).empty,'Empty physical source query intersection');
+ }
+ demand(joined.size===expected.size,'Incomplete physical source query identity join');
+}
 function reconstructionResidualPointsets(result) {
  demand(Array.isArray(result?.issues)&&result.support&&typeof result.support==='object',
   'Missing qualified physical source interpretation');
- const support=result.support, residualKeys=['missing_reconstruction','extra_reconstruction'];
+ const support=result.support,residualKeys=['missing_reconstruction','extra_reconstruction'];
  const hierarchyKeys=['L2-outside-L1','L3-outside-L2','L4-outside-L3'];
- const empty=geometry=>{
-  if(!geometry||typeof geometry!=='object'||Array.isArray(geometry))return false;
-  const keys=Object.keys(geometry).sort().join(',');
-  return ['Polygon','MultiPolygon'].includes(geometry.type)&&keys==='coordinates,type'
-    &&Array.isArray(geometry.coordinates)&&geometry.coordinates.length===0
-   ||geometry.type==='GeometryCollection'&&keys==='geometries,type'
-    &&Array.isArray(geometry.geometries)&&geometry.geometries.length===0;
- };
+ const conflictKeys=[...residualKeys,'contradictory_land_water_support',...hierarchyKeys];
  const hierarchy=support.hierarchy_disagreements;
+ const empty=g=>validateWitnessGeometry(g).empty;
  const observed=[...residualKeys,'contradictory_land_water_support'].some(key=>
   Object.hasOwn(support,key)&&!empty(support[key]))
   ||Object.hasOwn(support,'hierarchy_disagreements')&&(!hierarchy||typeof hierarchy!=='object'
    ||Object.keys(hierarchy).sort().join(',')!==hierarchyKeys.join(',')
-   ||Object.values(hierarchy).some(geometry=>!empty(geometry)));
- // Genuine legacy issue-free records need no newly invented support fields.
- // An omitted issue cannot hide a present nonempty or malformed operation.
- if(result.issues.length===0&&!observed)return [];
+   ||Object.values(hierarchy).some(g=>!empty(g)));
+ physicalQueryAdmission(result,false);
+ // Preserve genuine legacy issue-free evidence, while admitting every present
+ // query/support primitive before returning. Unknown fields cannot hide issues.
+ if(result.issues.length===0&&!observed){
+  const allowed=['mapped_land_support','mapped_inland_water_support','outside_mapped_L1_context',
+   'hierarchy_disagreements',...residualKeys,'contradictory_land_water_support'];
+  demand(Object.keys(support).every(k=>allowed.includes(k)),'Incomplete physical residual operation roster');
+  for(const [key,g]of Object.entries(support))if(key!=='hierarchy_disagreements')validateWitnessGeometry(g);
+  return support.outside_mapped_L1_context&&!empty(support.outside_mapped_L1_context)?[support.outside_mapped_L1_context]:[];
+ }
  const supportKeys=['mapped_land_support','mapped_inland_water_support','outside_mapped_L1_context',
   'hierarchy_disagreements',...residualKeys,'contradictory_land_water_support'];
  demand(Object.keys(support).sort().join(',')===supportKeys.sort().join(',')
-  &&hierarchy&&typeof hierarchy==='object'
-  &&Object.keys(hierarchy).sort().join(',')===hierarchyKeys.join(','),
+  &&hierarchy&&typeof hierarchy==='object'&&Object.keys(hierarchy).sort().join(',')===hierarchyKeys.join(','),
  'Incomplete physical residual operation roster');
- demand(empty(support.contradictory_land_water_support)&&hierarchyKeys.every(key=>empty(hierarchy[key])),
-  'Unresolved contradictory or hierarchy physical support');
+ const operations=Object.fromEntries([...supportKeys.filter(k=>k!=='hierarchy_disagreements'),...hierarchyKeys]
+  .map(k=>[k,support[k]??hierarchy[k]]));
+ for(const geometry of Object.values(operations))validateWitnessGeometry(geometry);
+ const general=conflictKeys.some(k=>!empty(operations[k])&&(!residualKeys.includes(k)
+  ||!['Polygon','MultiPolygon'].includes(operations[k].type)));
+ physicalQueryAdmission(result,general);
  const issues=new Map();
  for(const issue of result.issues){
   demand(issue&&Object.keys(issue).sort().join(',')==='geometry,reason'
-   &&residualKeys.includes(issue.reason)&&!issues.has(issue.reason),
-  'Unknown or duplicate physical residual issue');
+   &&conflictKeys.includes(issue.reason)&&!issues.has(issue.reason),'Unknown or duplicate physical residual issue');
   issues.set(issue.reason,issue.geometry);
  }
  const pointsets=[];
- for(const key of residualKeys){
-  const geometry=support[key];
+ for(const key of conflictKeys){
+  const geometry=operations[key];
   if(empty(geometry)){demand(!issues.has(key),'Empty physical residual has an issue witness');continue;}
-  polygonParts(geometry);
-  demand(issues.has(key)&&same(issues.get(key),geometry),'Missing or mismatched complete physical residual witness');
+  demand(issues.has(key)&&same(issues.get(key),geometry),
+   'Missing or mismatched complete physical residual witness; Unresolved contradictory or hierarchy physical support');
   pointsets.push(geometry);
  }
+ // Exterior context is an independent exclusion, never positive land/water.
+ if(!empty(operations.outside_mapped_L1_context))pointsets.push(operations.outside_mapped_L1_context);
  return pointsets;
 }
 
@@ -631,6 +667,8 @@ export function qualifySourceTargetNativeAuthority(reader, preimage, binding) {
  demand(evidence.native_contract.size===262166&&latitudeRaw.length===262166*8,
  'Unsupported source-target native lattice');
  const latitudes=Float64Array.from({length:262166},(_,i)=>latitudeRaw.readDoubleLE(i*8));
+ for(let y=0;y<latitudes.length;y++)demand(Number.isFinite(latitudes[y])&&Math.abs(latitudes[y])<90
+  &&(y===0||latitudes[y]<latitudes[y-1]),'Invalid decreasing source-target native latitude table');
  demand(evidence.owner_roster.sha256===evidence.native_contract.original_assets.bounds.sha256,
  'Source-target owner roster differs from original native identity asset');
  const roster=JSON.parse(read(evidence.owner_roster));
@@ -692,7 +730,7 @@ export function qualifySourceTargetNativeAuthority(reader, preimage, binding) {
   }
   return {id:change.id,pixelIndex:owners.get(change.id),feature:accepted};
  };
- const targets=new Map(), resolvedTargets=new Map(), residualsByOwner=new Map();
+ const targets=new Map(), resolvedTargets=new Map(), residualsByOwner=new Map(), generalOwners=new Set();
  for(const target of evidence.targets){
   const ownerId=target.target_id??target.id;
   demand(typeof target.id==='string'&&target.id&&!targets.has(target.id)&&owners.get(ownerId)===target.pixelIndex&&hash(target.source_receipt_sha256),
@@ -702,14 +740,17 @@ export function qualifySourceTargetNativeAuthority(reader, preimage, binding) {
   demand(target.source_receipt_sha256===evidence.physical_evidence.sha256,
    'Missing qualified physical source interpretation');
   const residuals=reconstructionResidualPointsets(support);
+  const generalIssues=support.issues.some(i=>!['missing_reconstruction','extra_reconstruction'].includes(i.reason)
+   ||!['Polygon','MultiPolygon'].includes(i.geometry?.type));
+  if(generalIssues)generalOwners.add(target.pixelIndex);
   if(residuals.length){
-   const item=residualsByOwner.get(target.pixelIndex)??{index:target.pixelIndex,polygons:[]};
-   for(const geometry of residuals)for(const polygon of polygonParts(geometry))
-    item.polygons.push(polygon.map(ring=>ring.flat()));
+   const item=residualsByOwner.get(target.pixelIndex)??{index:target.pixelIndex,geometries:[]};
+   item.geometries.push(...residuals);
    residualsByOwner.set(target.pixelIndex,item);
   }
   demand(Array.isArray(target.coverage_classes)&&target.coverage_classes.length>0
-   &&target.coverage_classes.every(kind=>['mapped_land_support','mapped_inland_water_support'].includes(kind)),
+   &&target.coverage_classes.every(kind=>['mapped_land_support','mapped_inland_water_support'].includes(kind))
+   &&new Set(target.coverage_classes).size===target.coverage_classes.length,
    'Unresolved physical support cannot qualify a repair');
   const polygons=target.coverage_classes.flatMap(kind=>{const geometry=support.support[kind];coordinateBounds(geometry);
    return geometry.type==='Polygon'?[geometry.coordinates]:geometry.coordinates;});
@@ -732,6 +773,28 @@ export function qualifySourceTargetNativeAuthority(reader, preimage, binding) {
    const list=rowsByOwner.get(run[2])??[];let item=list.at(-1);
    if(item?.y!==row.y){item={y:row.y,runs:[]};list.push(item);}item.runs.push(run);rowsByOwner.set(run[2],list);
   }
+ }
+ // Optional explicit class rows bind land/water identity at each requested
+ // centre. They partition the complete owner patch and cannot introduce cells.
+ const coverageRowsByOwner=new Map();
+ const unionRows=rows=>rows.map(row=>{const runs=[];for(const run of row.runs){
+  const prior=runs.at(-1);if(prior&&prior[1]===run[0])prior[1]=run[1];else runs.push(run.slice(0,2));
+ }return {y:row.y,runs};});
+ for(const target of targets.values())if(target.coverage_rows!==undefined){
+  const rows=target.coverage_rows;demand(Array.isArray(rows)&&rows.length>0,'Missing native coverage class rows');
+  let priorY=-1;
+  for(const row of rows){demand(row&&Object.keys(row).sort().join(',')==='runs,y'
+   &&Number.isSafeInteger(row.y)&&row.y>priorY&&row.y<262166&&Array.isArray(row.runs)&&row.runs.length>0,
+  'Invalid native coverage class row');priorY=row.y;let end=0;
+   for(const run of row.runs){demand(Array.isArray(run)&&run.length===3
+    &&Number.isSafeInteger(run[0])&&Number.isSafeInteger(run[1])&&run[0]>=end&&run[1]>run[0]&&run[1]<=262166
+    &&['mapped_land_support','mapped_inland_water_support'].includes(run[2]),'Invalid native coverage class interval');end=run[1];}
+  }
+  demand(same(unionRows(rows),unionRows(rowsByOwner.get(target.pixelIndex)??[])),
+   'Native coverage classes differ from complete requested owner cells');
+  const prior=coverageRowsByOwner.get(target.pixelIndex);
+  demand(!prior||same(prior,rows),'Conflicting sibling native coverage class bindings');
+  coverageRowsByOwner.set(target.pixelIndex,rows);
  }
  const checked=new Set(),families=new Set();
  for(const family of evidence.families){
@@ -763,6 +826,36 @@ export function qualifySourceTargetNativeAuthority(reader, preimage, binding) {
     &&measured[0].selected.id===owner.id&&same(measured[0].selected.geometry,target.base_geometry),
     'Physical source query or selected target differs from measured whole inputs');
   }
+  // A retained measured sibling cannot escape its owner's veto by being
+  // omitted from the positive selected-target roster. Its complete source and
+  // canonical base joins remain mandatory; it supplies no borrowed coverage.
+  const selectedOwners=new Set(selected.map(t=>t.pixelIndex));
+  for(const [id,original]of originals)if(!targets.has(id)){
+   const candidateOwner=selectedOwners.has(owners.get(id))
+    ||(memberOwners.get(id)??[]).some(change=>selected.some(t=>(t.target_id??t.id)===change.id));
+   if(!candidateOwner)continue;
+   const measured=physicalInputs.filter(input=>input.target===id);
+   const results=physical.results.filter(result=>result.target===id);
+   if(!measured.length&&!results.length)continue;
+   const owner=reconcile(id,originals),target=resolvedTargets.get(owner.id);
+   demand(selectedOwners.has(owner.pixelIndex)&&target
+    &&measured.length===1&&results.length===1,'Missing or duplicate measured sibling physical interpretation');
+   demand(same(measured[0].consumed.geometry,original.geometry)&&measured[0].selected.id===owner.id
+    &&same(measured[0].selected.geometry,target.base_geometry)
+    &&(!owner.feature||same(owner.feature.geometry,target.base_geometry)),
+   'Measured sibling differs from complete original or accepted owner base');
+   const witnesses=reconstructionResidualPointsets(results[0]);
+   if(results[0].issues.some(i=>!['missing_reconstruction','extra_reconstruction'].includes(i.reason)
+    ||!['Polygon','MultiPolygon'].includes(i.geometry?.type)))generalOwners.add(owner.pixelIndex);
+   if(witnesses.length){const item=residualsByOwner.get(owner.pixelIndex)??{index:owner.pixelIndex,geometries:[]};
+    item.geometries.push(...witnesses);residualsByOwner.set(owner.pixelIndex,item);}
+  }
+  for(const target of selected)if(generalOwners.has(target.pixelIndex)){
+   demand(target.coverage_classes.length===1||coverageRowsByOwner.has(target.pixelIndex),
+    'Mixed physical conflict coverage requires explicit native class rows');
+   demand(Array.isArray(target.territorial_exclusions),
+    'General physical conflict qualification requires explicit territorial exclusions');
+  }
   const bounds=selected.flatMap(target=>coordinateBounds(target.coverage_geometry));
   const intersects=(a,b)=>a[0]<=b[2]&&b[0]<=a[2]&&a[1]<=b[3]&&b[1]<=a[3];
   const sourceFeatures=product.features.filter(feature=>coordinateBounds(feature.geometry).some(part=>bounds.some(box=>intersects(part,box))))
@@ -771,7 +864,7 @@ export function qualifySourceTargetNativeAuthority(reader, preimage, binding) {
     return {id,target_id:owner.id,pixelIndex:owner.pixelIndex,geometry:feature.geometry};});
   const coverageFeatures=selected.map(target=>({id:target.target_id??target.id,source_id:target.id,pixelIndex:target.pixelIndex,geometry:target.coverage_geometry}));
   const exclusions=selected.flatMap(target=>(target.territorial_exclusions??[]).map(geometry=>({id:target.target_id??target.id,pixelIndex:target.pixelIndex,geometry})));
-  const selectedOwners=new Set(selected.map(target=>target.pixelIndex)), blocks=new Map();
+  const blocks=new Map();
   for(const row of proposed.rows)if(row.runs.some(run=>selectedOwners.has(run[2]))){
    const block=Math.floor(row.y/4096);const list=blocks.get(block)??[];list.push(row);blocks.set(block,list);
   }
@@ -779,13 +872,29 @@ export function qualifySourceTargetNativeAuthority(reader, preimage, binding) {
    const rowStart=block*4096,rowEnd=Math.min(262166,rowStart+4096);
    // Patch rows name owners, not members. Conservatively keep every measured
    // sibling's original residual parts and boundaries in that owner's veto.
-   const residualIndex=[...residualsByOwner.values()].filter(item=>selectedOwners.has(item.index))
-    .sort((a,b)=>a.index-b.index);
-   const residualScan=residualIndex.length?nativePolygonIntervals(residualIndex,
-    {size:262166,latitudes,rowStart,rowEnd}):{rows:new Map(),ties:[]};
-   const residualTies=new Map();
-   for(const tie of residualScan.ties){const list=residualTies.get(tie.y)??[];
-    list.push(tie);residualTies.set(tie.y,list);}
+   const hitReserve=rows.reduce((n,row)=>n+row.runs.reduce((m,r)=>m+r[1]-r[0],0),0)*192;
+   demand(Number.isSafeInteger(hitReserve)&&reader.used+hitReserve<=reader.phaseLimit,'Candidate-cell hit inventory exceeds allowance');
+   reader.used+=hitReserve;
+   const residualHits=new Set();
+   for(const item of residualsByOwner.values())if(selectedOwners.has(item.index)){
+    const requestedRows=rows.map(row=>({y:row.y,runs:row.runs.filter(run=>run[2]===item.index)}))
+     .filter(row=>row.runs.length);
+    const cells=requestedRows.reduce((n,row)=>n+row.runs.reduce((m,r)=>m+r[1]-r[0],0),0);
+    // Reserve one full operation's flattened geometry, exact integers, scanner
+    // rows/ties and up to four hit kinds per requested centre before predicates.
+    // Parsed immutable input reserve remains live; scratch is released per op.
+    for(const geometry of item.geometries){
+     const stats=validateWitnessGeometry(geometry,{latitudes,rowStart,rowEnd,requestedCells:cells});
+     const reserve=stats.scratch_bytes;
+     demand(Number.isSafeInteger(reserve)&&reader.used+reserve<=reader.phaseLimit,
+      'Complete candidate-cell witness phase exceeds allowance');
+     reader.used+=reserve;
+     try{
+      const effects=witnessCellEffects(geometry,{size:262166,latitudes,requestedRows,nativePolygonIntervals});
+      for(const hit of effects.hits)residualHits.add(item.index+':'+hit.y+':'+hit.x);
+     }finally{reader.used-=reserve;}
+    }
+   }
    // Empty rows here derive the permitted source/coverage domain, not a claim
    // about actual ownership. Actual current owner zero is enforced separately
    // by selectedAdditiveRows and the emitted native patch application.
@@ -793,15 +902,39 @@ export function qualifySourceTargetNativeAuthority(reader, preimage, binding) {
     sourceFeatures,coverageFeatures,territorialExclusions:exclusions,size:262166,latitudes,rowStart,rowEnd,
     ownerRows:Array.from({length:rowEnd-rowStart},(_,i)=>({y:rowStart+i,complete_owner_intervals:[]}))});
    const allowedRows=new Map(allowed.rows.map(row=>[row.y,row.runs]));
+   const classAllowed=new Map();let classReserve=0;
+   for(const kind of ['mapped_land_support','mapped_inland_water_support'])
+    if(selected.some(t=>coverageRowsByOwner.has(t.pixelIndex))){
+     if(selected.every(t=>t.coverage_classes.length===1&&t.coverage_classes[0]===kind)){
+      classAllowed.set(kind,allowedRows);continue;
+     }
+     const features=selected.filter(t=>t.coverage_classes.includes(kind)).map(t=>{
+      const geometry=physical.results.find(r=>r.target===t.id).support[kind];
+      coordinateBounds(geometry);return {id:t.target_id??t.id,source_id:t.id,pixelIndex:t.pixelIndex,geometry};
+     });
+     if(features.length===0){classAllowed.set(kind,new Map());continue;}
+     const reserve=[...sourceFeatures,...features,...exclusions].reduce((n,f)=>n
+      +validateWitnessGeometry(f.geometry,{latitudes,rowStart,rowEnd}).scratch_bytes,0)*2;
+     demand(Number.isSafeInteger(reserve)&&reader.used+reserve<=reader.phaseLimit,
+      'Complete declared physical class scan exceeds allowance');
+     reader.used+=reserve;classReserve+=reserve;
+     const permitted=deriveSourceTargetNativeDelta({targets:[...resolvedTargets.values()].filter(t=>t.source_family===family.source_id).map(({id,pixelIndex})=>({id,pixelIndex})),
+      sourceFeatures,coverageFeatures:features,territorialExclusions:exclusions,size:262166,latitudes,rowStart,rowEnd,
+      ownerRows:Array.from({length:rowEnd-rowStart},(_,i)=>({y:rowStart+i,complete_owner_intervals:[]}))});
+     classAllowed.set(kind,new Map(permitted.rows.map(row=>[row.y,row.runs])));
+    }
    for(const row of rows)for(const run of row.runs)if(selectedOwners.has(run[2])){
-    const intersects=(start,end)=>Math.max(start,run[0])<Math.min(end,run[1]);
-    demand(!(residualScan.rows.get(row.y)??[]).some(span=>span.owner===run[2]&&intersects(span.start,span.end))
-     &&!(residualTies.get(row.y)??[]).some(tie=>tie.owner===run[2]
-      &&intersects(tie.start??tie.x,tie.end??tie.x+1)),
-    'Requested native cells intersect a physical reconstruction residual');
+    for(let x=run[0];x<run[1];x++)demand(!residualHits.has(run[2]+':'+row.y+':'+x),
+     'Requested native cells intersect a physical reconstruction residual or conflict witness');
     demand((allowedRows.get(row.y)??[]).some(span=>span[2]===run[2]&&span[0]<=run[0]&&span[1]>=run[1]),
-     'Proposed native cells lack unique source-target coverage');checked.add(row.y+':'+run.join(':'));
+     'Proposed native cells lack unique source-target coverage');
+    for(const segment of coverageRowsByOwner.get(run[2])?.find(r=>r.y===row.y)?.runs??[]){
+     const start=Math.max(segment[0],run[0]),end=Math.min(segment[1],run[1]);if(start>=end)continue;
+     demand((classAllowed.get(segment[2])?.get(row.y)??[]).some(span=>span[2]===run[2]&&span[0]<=start&&span[1]>=end),
+      'Requested native cells lack declared land/water class support');
+    }checked.add(row.y+':'+run.join(':'));
    }
+   reader.used-=hitReserve+classReserve;
   }
  }
  demand(checked.size===proposed.rows.reduce((n,row)=>n+row.runs.length,0),'Unqualified proposed native intervals');
@@ -819,7 +952,8 @@ export function qualifySourceTargetNativeAuthority(reader, preimage, binding) {
   scope_ids:ledgerRows.map(row=>row.component_id),rows:ledgerRows},source_rows:ledgerRows,
   native_proof:{native_contract:evidence.native_contract,native_patches:[{base_reference:evidence.base_reference,rows:proposed.rows}]},
   original_pins:{source_evidence:binding.source_evidence,native_patch:binding.native_patch},
-  limitations:['Physical interpretation and semantic reconciliation are retained reviewed source evidence; actual current owner-zero is checked by native consumers.']};
+  limitations:['Physical interpretation and semantic reconciliation are retained reviewed source evidence; actual current owner-zero is checked by native consumers.',
+   'Witness exclusion applies only to requested native centres. Original whole-source physical/hierarchy issues and historical source/resource limits remain retained; no whole-parent certification or acceptance is inferred.']};
 }
 
 // One detached authority acquisition. The returned view cannot authorize a

@@ -56,6 +56,9 @@ Fresh PR API state must have `merged: true`, `.head.sha` equal to the exact revi
 head, and a nonempty `.merge_commit_sha`. Retain that actual squash commit and the
 execution URL in the issue checkpoint. Unavailable or mismatched actual PR state
 is unresolved, even if a local observer or result comment reported success.
+As soon as the final merge job is green, perform that PR readback: an Actions
+aggregate can remain in progress after its final job and actual merge finish.
+Do not hold the next ready delivery waiting only for that aggregate watch.
 
 For a settled failed or cancelled execution, inspect its cause and actual PR state.
 If preparation succeeded, the PR remains open at its same reviewed head, main is
@@ -69,7 +72,12 @@ gh run rerun RUN-ID --repo ChengshuLi/WorldAtlas --failed
 Successful jobs and their original artifacts remain valid for that exact candidate,
 even after its disposable branch is cleaned up. The final job still rechecks the
 immutable candidate's parents/tree, current main/head, review, checks and original
-successful geographic producer. Artifact uploads are attempt-qualified; no prior
+successful geographic producer. For a report freshly authenticated from that
+main-run producer, final verification reuses preparation's exact reviewed-byte
+comparison through private immutable producer bindings; it does not download both
+whole trees again. Ordinary, historical and supplied reports retain the original
+comparison. Selected-data qualification still reads its authored/baseline roles.
+Artifact uploads are attempt-qualified; no prior
 evidence is overwritten. Use a fresh request and dispatch if preparation failed,
 main/head changed or the execution predates attempt-qualified uploads. Changed
 reviewed bytes need fresh substantive review. A pending run, uncertain dispatch or

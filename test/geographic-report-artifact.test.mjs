@@ -3,8 +3,11 @@ import assert from 'node:assert/strict';
 import {deflateRawSync, crc32} from 'node:zlib';
 import {githubAPI} from '../scripts/issue-claim-contract.mjs';
 import {requestAccounting} from '../scripts/github-quota.mjs';
+import {completeIntegration, prepareIntegration} from '../scripts/merge-integration.mjs';
+import fs from 'node:fs';
 import {readReportArchive, loadGeographicReport, reportHash, validateGeographyOrigin, validatePRGeographyCandidate,
-  readGeographyJobReceipt, validateGeographyProof, geographicReportProducts, checkGeographicReport} from '../scripts/geographic-report-artifact.mjs';
+  readGeographyJobReceipt, validateGeographyProof, geographicReportProducts, checkGeographicReport,
+  preparedQueueSource} from '../scripts/geographic-report-artifact.mjs';
 
 // Real single-file ZIP records, with both archive formats used by uploaders.
 function archive(raw, {method = 8, descriptor = false, name = 'geography-check.json', attributes = 0} = {}) {
@@ -341,7 +344,7 @@ function freshQueueTransport(changeReport) {
   f.artifact.name = name;
   f.artifact.workflow_run.head_sha = 'e'.repeat(40);
   f.log = Buffer.from(f.log.toString().replace(oldName, name));
-  f.run = {id: 123, run_attempt: 1, head_sha: 'e'.repeat(40), event: 'workflow_dispatch',
+  f.run = {id: 123, run_attempt: 1, head_sha: 'e'.repeat(40), head_branch: 'main', event: 'workflow_dispatch',
     path: '.github/workflows/worker-merge.yml', repository: {full_name: 'owner/repo'},
     head_repository: {full_name: 'owner/repo'}, status: 'in_progress'};
   f.jobs = [{id: 55, run_id: 123, run_attempt: 1, head_sha: f.run.head_sha,
@@ -376,6 +379,9 @@ for (const [label, steps] of [['missing', undefined], ['empty', []], ['stale', [
     const result = await loadGeographicReport(f.loadOptions);
     checkGeographicReport(result, f.options.baseline, f.commit.sha);
     const source = geographicReportProducts(result).source;
+    assert.ok(preparedQueueSource(result));
+    assert.equal(Object.isFrozen(preparedQueueSource(result)), true);
+    assert.equal(Object.hasOwn(geographicReportProducts(result), 'prepared_queue'), false);
     assert.equal(source.job_id, 55); assert.equal(source.run_id, 123); assert.equal(source.run_attempt, 1);
     assert.equal(source.workflow_head, f.run.head_sha); assert.equal(source.head, f.options.head);
     assert.equal(source.tree, f.commit.tree.sha); assert.equal(source.candidate_commit, f.commit.sha);
@@ -401,6 +407,7 @@ test('fresh queue loader rejects foreign or unsuccessful producers and altered r
   for (const mutate of [
     f => {f.run.id++;}, f => {f.run.run_attempt++;}, f => {f.run.head_sha = 'f'.repeat(40);},
     f => {f.run.path = '.github/workflows/other.yml';}, f => {f.run.event = 'push';},
+    f => {f.run.head_branch = 'engineering/foreign';}, f => {delete f.run.head_branch;},
     f => {f.run.repository.full_name = 'foreign/repo';}, f => {f.run.head_repository.full_name = 'foreign/repo';},
     f => {f.jobs[0].id = 0;}, f => {f.jobs[0].run_id++;}, f => {f.jobs[0].run_attempt++;},
     f => {f.jobs[0].head_sha = 'f'.repeat(40);}, f => {f.jobs[0].status = 'in_progress';},
@@ -441,6 +448,156 @@ test('actual fresh software archive binds candidate code without impersonating a
   assert.equal(source.candidate_commit, f.commit.sha);
   assert.equal(source.report_sha256, f.loadOptions.expectedHash);
   assert.equal(source.artifact_digest, reportHash(f.zip));
+});
+
+// Reuse the actual ZIP/run/job/log producer fixture through the final merge
+// boundary. The only replaced components are GitHub responses and byte delivery.
+function queueCompletionFixture(f = freshQueueTransport()) {
+  const {repo, head, baseline: base} = f.options, candidate = f.commit.sha;
+  const root = `/repos/${repo}`, original = f.loadOptions.api;
+  f.calls = []; f.writes = [];
+  f.issue = {number: 1, state: 'open', created_at: '2020-01-01T00:00:00Z',
+    labels: ['type:engineering', 'kind:work-item', 'status:ready'],
+    body: '<!-- worldatlas-work:v1\n' + JSON.stringify({mode: 'engineering', max_prs: 1,
+      depends_on: [], scope: 'Synthetic prepared queue controls'}) + '\n-->'};
+  f.pr = {number: 2, state: 'open', draft: false, merged: false, body: 'Refs #1', title: 'Prepared queue control',
+    changed_files: 1, head: {sha: head, ref: 'engineering/fixture', repo: {full_name: repo}},
+    base: {ref: 'main', sha: base}, mergeable: true, merge_commit_sha: candidate};
+  f.files = [{filename: 'src/a.js', status: 'modified'}];
+  f.authored = [{path: 'src/a.js', sha: '1'.repeat(40), mode: '100644', type: 'blob'}];
+  f.integrated = structuredClone(f.authored); f.baseline = [];
+  f.api = async (route, method = 'GET', body) => {
+    f.calls.push(route); const name = route.split('?')[0];
+    if (method === 'PUT') {f.writes.push(body); return {merged: true, sha: 'f'.repeat(40)};}
+    if (name === root + '/pulls/2') return structuredClone(f.pr);
+    if (name === root + '/issues/1') return structuredClone(f.issue);
+    if (name === root + '/issues/1/timeline') return [];
+    if (name === root + '/pulls/2/files') return structuredClone(f.files);
+    if (name === root + '/commits/' + head + '/check-runs') return {check_runs: [
+      {id: 1, name: 'scope', app: {id: 1}, status: 'completed', conclusion: f.checkConclusion ?? 'success'}]};
+    if (name === root + '/commits/' + head + '/status') return f.status ?? {statuses: []};
+    if (name === root + '/git/ref/heads/main') return {object: {sha: f.currentBase ?? base}};
+    if (name === root + '/git/commits/' + candidate) return structuredClone(f.commit);
+    if (name === root + '/git/commits/' + head) return {sha: head, tree: {sha: '2'.repeat(40)}};
+    if (name === root + '/git/commits/' + base) return {sha: base, tree: {sha: '3'.repeat(40)}};
+    if (name === root + '/git/trees/' + '2'.repeat(40)) return {truncated: false, tree: f.authored};
+    if (name === root + '/git/trees/' + '3'.repeat(40)) return {truncated: false, tree: f.baseline};
+    if (name === root + '/git/trees/' + f.commit.tree.sha) return {truncated: false, tree: f.integrated};
+    return original(route, method, body);
+  };
+  f.api.jobLogRedirect = original.jobLogRedirect; f.api.artifactRedirect = original.artifactRedirect;
+  f.mergeOptions = () => ({api: f.api, repo, number: 2, expectedHead: head,
+    policy: {version: 1, mode: 'enforce-new', activation_time: '2100-01-01T00:00:00Z'},
+    evidenceCheck: async () => {assert.notEqual(f.review, 'withdrawn', 'Fresh exact-head review is required'); return {status: 'legacy'};}});
+  f.load = ({api = f.api} = {}) => loadGeographicReport({...f.loadOptions, api});
+  f.complete = (extra = {}) => completeIntegration({...f.mergeOptions(), integrationResult: 'success', geographyResult: 'success',
+    testedBase: base, testedCandidate: candidate, geographyReportLoader: f.load, ...extra});
+  f.treeReads = () => f.calls.filter(route => /\/git\/trees\/.*\?recursive=1$/.test(route));
+  return f;
+}
+
+test('authenticated main queue reuses successful prepared tree comparison without recursive final reads', async () => {
+  const f = queueCompletionFixture();
+  await prepareIntegration(f.mergeOptions());
+  assert.equal(f.treeReads().length, 2, 'Preparation still compares both complete trees');
+  f.calls.length = 0;
+  const result = await f.complete();
+  assert.equal(result.accepted, true); assert.equal(f.writes.length, 1);
+  assert.deepEqual(f.treeReads(), []);
+  assert(f.calls.some(route => route.endsWith('/git/commits/' + f.commit.sha)), 'Final commit identity is reread');
+  assert.equal(f.metadata.filter(route => route.endsWith('/attempts/1')).length, 1, 'Fresh authentication is not duplicated');
+  const workflow = fs.readFileSync('.github/workflows/worker-merge.yml', 'utf8');
+  assert.match(workflow, /prepare:\n    if: github.ref == 'refs\/heads\/main'/);
+  assert.match(workflow, /geography:\n    needs: prepare\n    if: needs.prepare.outputs.candidate != ''/);
+  assert.match(workflow, /GEOGRAPHY_CANDIDATE: \$\{\{ needs.prepare.outputs.candidate \}\}/);
+});
+
+test('authenticated custody never substitutes for candidate identity, ordered parents or exact source bindings', async () => {
+  for (const field of ['candidate_commit', 'baseline', 'head', 'tree', 'workflow_path', 'event']) {
+    const f = queueCompletionFixture(), geography = await f.load();
+    geographicReportProducts(geography).source[field] = field === 'workflow_path'
+      ? '.github/workflows/merge-integration-checks.yml' : field === 'event' ? 'pull_request' : 'f'.repeat(40);
+    await assert.rejects(f.complete({geographyReportLoader: async () => geography}), /source differs/);
+    assert.equal(f.writes.length, 0, field);
+  }
+  for (const mutate of [f => {f.commit.sha = 'f'.repeat(40);}, f => {delete f.commit.tree;},
+    f => {f.commit.parents.reverse();}, f => {f.commit.parents.pop();},
+    f => {f.commit.parents[0].sha = 'f'.repeat(40);}, f => {f.commit.parents[1].sha = 'f'.repeat(40); }]) {
+    const f = queueCompletionFixture(); mutate(f);
+    await assert.rejects(f.complete(), /candidate identity|exact current main/);
+    assert.equal(f.writes.length, 0); assert.deepEqual(f.treeReads(), []);
+  }
+});
+
+test('forged metadata on plain, archive-only, historical and supplied queue reports cannot skip comparison', async () => {
+  for (const kind of ['plain', 'archive-only', 'historical', 'supplied-queue']) {
+    const f = queueCompletionFixture(kind === 'historical' ? combinedTransport() : freshQueueTransport());
+    const fresh = await f.load(); let geography = fresh;
+    if (kind === 'plain') geography = structuredClone(fresh);
+    if (kind === 'archive-only') geography = readReportArchive(f.zip, f.loadOptions.expectedHash);
+    if (kind === 'supplied-queue') geography = await loadGeographicReport({...f.loadOptions, api: f.api,
+      fresh: undefined, source: geographicReportProducts(fresh).source});
+    const products = geographicReportProducts(geography);
+    if (products) products.prepared_queue = true;
+    geography.prepared_queue = true;
+    assert.equal(preparedQueueSource(geography), null);
+    f.calls.length = 0;
+    f.integrated[0].sha = 'f'.repeat(40);
+    await assert.rejects(f.complete({geographyReportLoader: async () => geography}), /changes reviewed bytes/);
+    assert.equal(f.treeReads().length, 2, kind); assert.equal(f.writes.length, 0, kind);
+  }
+});
+
+test('replacing fresh queue product data cannot relabel private admitted custody', async () => {
+  const f = queueCompletionFixture(), geography = await f.load();
+  const products = geographicReportProducts(geography);
+  products.source = {...products.source, workflow_head: 'f'.repeat(40)};
+  products.prepared_queue = true;
+  await assert.rejects(f.complete({geographyReportLoader: async () => geography}), /source differs from authenticated queue producer/);
+  assert.equal(f.writes.length, 0); assert.deepEqual(f.treeReads(), []);
+});
+
+test('retargeting both genuine report and public custody cannot reuse original preparation', async () => {
+  const f = queueCompletionFixture(), geography = await f.load(), retarget = 'f'.repeat(40);
+  const original = f.api;
+  f.api = async (route, ...args) => route.endsWith('/git/commits/' + retarget)
+    ? {...structuredClone(f.commit), sha: retarget} : original(route, ...args);
+  geography.candidate_commit = retarget;
+  geographicReportProducts(geography).source.candidate_commit = retarget;
+  await assert.rejects(f.complete({testedCandidate: retarget, geographyReportLoader: async () => geography}),
+    /source differs from authenticated queue producer/);
+  assert.equal(f.writes.length, 0); assert.deepEqual(f.treeReads(), []);
+});
+
+test('prepared queue still loads authored and baseline trees for selected-data classification', async () => {
+  const f = queueCompletionFixture();
+  f.files = [{filename: 'data/ownership-selection.json', status: 'modified'},
+    {filename: 'coordination/engineering/fixture/selected-delivery-expectations.json', status: 'added'}];
+  f.pr.changed_files = f.files.length;
+  const result = await f.complete();
+  assert.equal(result.accepted, true);
+  assert.deepEqual(f.treeReads(), ['2', '3'].map(n => `/repos/owner/repo/git/trees/${n.repeat(40)}?recursive=1`));
+  // The absent selected smoke keeps conservative complete validation; this test
+  // establishes tree loading, not a fabricated selected-data qualification.
+  assert.equal(f.writes.length, 1);
+});
+
+test('prepared custody preserves fresh final main, head, issue, check, status and review guards', async () => {
+  for (const changed of ['main', 'head', 'issue', 'check', 'status', 'review']) {
+    const f = queueCompletionFixture();
+    const loader = async options => {
+      const geography = await f.load(options);
+      if (changed === 'main') f.currentBase = 'f'.repeat(40);
+      if (changed === 'head') f.pr.head.sha = 'f'.repeat(40);
+      if (changed === 'issue') f.issue.body += '\nChanged acceptance';
+      if (changed === 'check') f.checkConclusion = 'failure';
+      if (changed === 'status') f.status = {statuses: [{}], state: 'failure'};
+      return geography;
+    };
+    if (changed === 'review') f.review = 'withdrawn';
+    await assert.rejects(f.complete({geographyReportLoader: loader}));
+    assert.equal(f.writes.length, 0, changed);
+  }
 });
 
 

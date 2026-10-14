@@ -5,7 +5,8 @@ import {validateIssuePRBody, validateLanePaths} from './check-handoff-scope.mjs'
 import {checkPremergeEvidence} from './premerge-evidence.mjs';
 import {memoizeImmutableGitBlobs} from './immutable-git-blobs.mjs';
 import {evidenceRequirement} from './evidence-policy.mjs';
-import {checkGeographicReport, geographicReportProducts} from './geographic-report-artifact.mjs';
+import {checkGeographicReport, geographicReportProducts, preparedQueueSource} from './geographic-report-artifact.mjs';
+import {QUEUE_WORKFLOW_PATH} from './integration-proof.mjs';
 
 const need = (condition, message) => { if (!condition) throw Error(message); };
 const root = repo => `/repos/${repo}`;
@@ -339,28 +340,43 @@ export async function completeIntegration(options) {
     'Trusted combined geography check missing, failed or cancelled; no merge performed');
   need(state.base === options.testedBase, 'Main advanced after integration tests; resubmit unchanged head');
   need(typeof options.geographyReportLoader === 'function', 'Missing trusted geography report loader');
-  const candidate = await tree(options.api, options.repo, options.testedCandidate);
-  checkCandidateParents(candidate.object, state.base, state.pr.head.sha);
-  const authored = await tree(options.api, options.repo, state.pr.head.sha);
-  checkReviewedTrees(state.files, authored.entries, candidate.entries);
+  const candidate = await options.api(`${root(options.repo)}/git/commits/${options.testedCandidate}`);
+  need(candidate.sha === options.testedCandidate && candidate.tree?.sha,
+    'Integration candidate identity or tree unavailable');
+  checkCandidateParents(candidate, state.base, state.pr.head.sha);
+  const geography = await options.geographyReportLoader({api: options.api});
+  const products = geographicReportProducts(geography), geographicSource = products?.source;
+  if (geographicSource) need(geographicSource.tree === candidate.tree.sha &&
+    geographicSource.head === state.pr.head.sha && geographicSource.baseline === state.base &&
+    (!geographicSource.candidate_commit || geographicSource.candidate_commit === geography.candidate_commit),
+    'Geographic source differs from accepted candidate identities');
+  const preparedSource = preparedQueueSource(geography);
+  if (preparedSource) need(preparedSource.workflow_path === QUEUE_WORKFLOW_PATH &&
+    preparedSource.event === 'workflow_dispatch' && preparedSource.candidate_commit === options.testedCandidate &&
+    preparedSource.tree === candidate.tree.sha && preparedSource.head === state.pr.head.sha && preparedSource.baseline === state.base,
+    'Prepared geographic source differs from accepted queue candidate');
+  let authored;
+  if (!preparedSource) {
+    const integrated = await tree(options.api, options.repo, options.testedCandidate, candidate);
+    authored = await tree(options.api, options.repo, state.pr.head.sha);
+    checkReviewedTrees(state.files, authored.entries, integrated.entries);
+  }
+  // The authenticated main queue's geography job depends on successful prepare,
+  // which compares these immutable trees before exposing its candidate output.
+  // Ordinary reports and supplied/historical custody retain the full comparison.
   const profile = integrationProfile(state.pr.head.ref, state.files, state.reservation);
   let baseline, selection = null;
   if (profile === 'full' && selectedDataCandidate(state.pr.head.ref, state.files, state.reservation)) {
+    authored ??= await tree(options.api, options.repo, state.pr.head.sha);
     try {
       baseline = await tree(options.api, options.repo, state.base);
       selection = await selectedDataSelection({...options, branch: state.pr.head.ref, files: state.files,
         reservation: state.reservation, baseline, authored});
     } catch { /* Unknown applicability retains full software validation. */ }
   }
-  const geography = await options.geographyReportLoader({api: options.api});
   const software = candidateGeographyCode(profile, state.files, selection?.test_selection);
   const codeCommit = software ? options.testedCandidate : state.base;
   const waterPass = checkGeographicReport(geography, state.base, options.testedCandidate, codeCommit);
-  const geographicSource = geographicReportProducts(geography)?.source;
-  if (geographicSource) need(geographicSource.tree === candidate.object.tree.sha &&
-    geographicSource.head === state.pr.head.sha && geographicSource.baseline === state.base &&
-    (!geographicSource.candidate_commit || geographicSource.candidate_commit === geography.candidate_commit),
-    'Geographic source differs from accepted candidate identities');
   const currentPR = await options.api(`${root(options.repo)}/pulls/${options.number}`);
   const currentIssue = await options.api(`${root(options.repo)}/issues/${state.issue.number}`);
   need(currentPR.head.sha === state.pr.head.sha && currentPR.body === state.pr.body && currentPR.title === state.pr.title &&
