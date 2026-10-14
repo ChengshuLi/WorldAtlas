@@ -1,0 +1,3602 @@
+{
+  "current_commit": "a61b6f9e7f88b1da380e3a834f89d7509132ed71",
+  "size": 262166,
+  "phases": [
+    {
+      "block": 0,
+      "land_supported_unassigned_cells": 0,
+      "inland_water_supported_unassigned_cells": 0,
+      "valid_L1_unassigned_cells": 0,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 0,
+      "land_in_old_candidate_union_cells": 0,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-000.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-000.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-000.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-000.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-000.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        }
+      ]
+    },
+    {
+      "block": 1,
+      "land_supported_unassigned_cells": 0,
+      "inland_water_supported_unassigned_cells": 0,
+      "valid_L1_unassigned_cells": 0,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 0,
+      "land_in_old_candidate_union_cells": 0,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-001.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-001.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-001.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-001.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-001.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        }
+      ]
+    },
+    {
+      "block": 2,
+      "land_supported_unassigned_cells": 2128469,
+      "inland_water_supported_unassigned_cells": 0,
+      "valid_L1_unassigned_cells": 2128469,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 1924997,
+      "land_in_old_candidate_union_cells": 203472,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-002.json.gz",
+          "sha256": "6701a3007caa7ebb45e50f38b93e0a487735f67428b813f858dd18e941c843d5",
+          "decoded_sha256": "7acf7ce959985537fa24d9b42e9a8a6e88abe1eed4a4d4c6e923123d2efe3729",
+          "rows": 1760,
+          "intervals": 7821
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-002.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-002.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-002.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-002.json.gz",
+          "sha256": "4db0817a27aad34c88e31f7cb8f1e1aadcdfd63d9cdd701bf83109856c6be09f",
+          "decoded_sha256": "e37353403a22be26d0e792daf9ed5c94ccfa0e2578ce3236cce0042a3e36f52a",
+          "rows": 1760,
+          "intervals": 7651
+        }
+      ]
+    },
+    {
+      "block": 3,
+      "land_supported_unassigned_cells": 16204590,
+      "inland_water_supported_unassigned_cells": 72700,
+      "valid_L1_unassigned_cells": 16277290,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 13199223,
+      "land_in_old_candidate_union_cells": 3005367,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-003.json.gz",
+          "sha256": "857c9bb90ac465b6ee8581f59b3cf8bddd483f1f705ab53c96dc7c52ce140137",
+          "decoded_sha256": "ab3cb87c864518259878528186847649c32a60c6b7f1d472f4fea6e8c45c8bf3",
+          "rows": 4096,
+          "intervals": 44585
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-003.json.gz",
+          "sha256": "e916579e6285edc3cecd929859964b240a2bd80bf0453085056f7e207456a882",
+          "decoded_sha256": "dd76511613137b9e04dd6406a9d6c23ee72a42729ee70313a6f9ccd29e92d248",
+          "rows": 528,
+          "intervals": 556
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-003.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-003.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-003.json.gz",
+          "sha256": "582cee0ad004a1c8330568ac80d09d86727e7d51688ce8248238b6dd061251aa",
+          "decoded_sha256": "7424a7a93571b4c2c81388ba2d7fc4e45bc3280c245e8da05a7ca72dafb9c010",
+          "rows": 4096,
+          "intervals": 41832
+        }
+      ]
+    },
+    {
+      "block": 4,
+      "land_supported_unassigned_cells": 15183576,
+      "inland_water_supported_unassigned_cells": 31843,
+      "valid_L1_unassigned_cells": 15215419,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 11015798,
+      "land_in_old_candidate_union_cells": 4167778,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-004.json.gz",
+          "sha256": "d9da5577aefd5e9d839e73da265ca5b154857e7572669f14ca69d548669939f5",
+          "decoded_sha256": "d451b635d637b0fe040db7763f0f0385e81cc9c70c98bccc04b9e8cbf7b2cbca",
+          "rows": 4096,
+          "intervals": 42790
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-004.json.gz",
+          "sha256": "9fe87bdc49e326d220503100c895f0734a97396f5ab77b9714fe846d8d8d3175",
+          "decoded_sha256": "429442d8c520896471f8d67f56d0ed6f0b98dee6c3f31274d005e7202c43f14d",
+          "rows": 331,
+          "intervals": 331
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-004.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-004.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-004.json.gz",
+          "sha256": "c5776734c4f4830d565f28dd2094ef2c3894e1211995ef724c4715eb301423d9",
+          "decoded_sha256": "7d0074cc14165e088bdeb2a121bb69f97a560fe144b51e3ed508f6e5bf351b12",
+          "rows": 4096,
+          "intervals": 38752
+        }
+      ]
+    },
+    {
+      "block": 5,
+      "land_supported_unassigned_cells": 13799749,
+      "inland_water_supported_unassigned_cells": 23884,
+      "valid_L1_unassigned_cells": 13823633,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 11721053,
+      "land_in_old_candidate_union_cells": 2078696,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-005.json.gz",
+          "sha256": "dc8b096fb95d33cf87baea588d30fe1300738c3671f60e5ccea631fd51715ef5",
+          "decoded_sha256": "0a9203e806e09f990383c7a14c64fec4a8b5bc16b8948a867a28c588b60c7586",
+          "rows": 4096,
+          "intervals": 73349
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-005.json.gz",
+          "sha256": "08cb5fbf990b166b0f4b4f78523f9641c009952f8f46d58bfeb52bfcfddeb18b",
+          "decoded_sha256": "a1f8d319465187927384a6e3dcfef3bfecc0a08e2dca148fd5616911073c46f5",
+          "rows": 310,
+          "intervals": 310
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-005.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-005.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-005.json.gz",
+          "sha256": "8dd774c92a12bf7d9ab5ac0ce2aeec215488a18be0ef164b6311a7d84bc4792c",
+          "decoded_sha256": "75334a7d0654488f5f9acba5c98b70f276c8a1e1d1cabf8b7f324f3ab8c1dcfa",
+          "rows": 4096,
+          "intervals": 57139
+        }
+      ]
+    },
+    {
+      "block": 6,
+      "land_supported_unassigned_cells": 5647804,
+      "inland_water_supported_unassigned_cells": 0,
+      "valid_L1_unassigned_cells": 5647804,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 3384678,
+      "land_in_old_candidate_union_cells": 2263126,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-006.json.gz",
+          "sha256": "e9ed0b47a072b61a9d34caf35fe83e9f23c48ffc0d6dcda03d735b4950c48e74",
+          "decoded_sha256": "4c0e2762d6ee39990756a1913e434472c9d1374683f1b2a046fdc0070dd0a8b6",
+          "rows": 4096,
+          "intervals": 110740
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-006.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-006.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-006.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-006.json.gz",
+          "sha256": "dfca9b162ea8a1772ff2025e0ebcc982edfe75813b92cc5ffa53de7465d64dc5",
+          "decoded_sha256": "13ff74e3d5c55cac48e579c50d0d7db243aad4093e73e76e4c2a3ae6d5044ba4",
+          "rows": 4096,
+          "intervals": 73260
+        }
+      ]
+    },
+    {
+      "block": 7,
+      "land_supported_unassigned_cells": 4130624,
+      "inland_water_supported_unassigned_cells": 0,
+      "valid_L1_unassigned_cells": 4130624,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 3146921,
+      "land_in_old_candidate_union_cells": 983703,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-007.json.gz",
+          "sha256": "91127fcc99d946c1fa2e2d22d43b1709d15ccdb467424748cbf43416f82675a0",
+          "decoded_sha256": "e618801f3e6dc0e40b97f8fade2fb7a01591716627319d1659b83733d85398ad",
+          "rows": 4096,
+          "intervals": 102545
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-007.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-007.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-007.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-007.json.gz",
+          "sha256": "403ac49a42b8898bab28721c549ff450e24030cdade32e6972b2a61f53bde97a",
+          "decoded_sha256": "6f6f1f735aa1d9406d52a15fb49a9a3f932a2d79eef62c10a7fefe22cff722ee",
+          "rows": 4096,
+          "intervals": 78245
+        }
+      ]
+    },
+    {
+      "block": 8,
+      "land_supported_unassigned_cells": 3357930,
+      "inland_water_supported_unassigned_cells": 0,
+      "valid_L1_unassigned_cells": 3357930,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 2657841,
+      "land_in_old_candidate_union_cells": 700089,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-008.json.gz",
+          "sha256": "ed20e80bdbe2ad95d9e08cadbf0708319329f31d596e3d315653f42fd545a7a3",
+          "decoded_sha256": "16eeba121bbf53d9c4aee3e386ac4281609ac35e50368eff478be98ded53cd22",
+          "rows": 4096,
+          "intervals": 103103
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-008.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-008.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-008.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-008.json.gz",
+          "sha256": "ad9f4082c09f013222c5e18065c2d71902cdb5801aeeea97dbd8b7d9718fcd8a",
+          "decoded_sha256": "678ad5bcf5e38534d82f192e9eeaa1b1a9d9a6bcc7515da198623424cc414dc8",
+          "rows": 4096,
+          "intervals": 83155
+        }
+      ]
+    },
+    {
+      "block": 9,
+      "land_supported_unassigned_cells": 3553646,
+      "inland_water_supported_unassigned_cells": 0,
+      "valid_L1_unassigned_cells": 3553646,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 2104618,
+      "land_in_old_candidate_union_cells": 1449028,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-009.json.gz",
+          "sha256": "e18e0f4b7d511c976455e6595d98af739986afeefc982f4ac7848da0d96d4eca",
+          "decoded_sha256": "aa1c18811f20b09e3b0e15f71fba489edda7aac818b0b11c1344f2e0433550f8",
+          "rows": 4096,
+          "intervals": 94987
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-009.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-009.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-009.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-009.json.gz",
+          "sha256": "71dc450f85c4d6640b8e74d62eb5e89a92adb880e95134ef21152ed6b8d9af92",
+          "decoded_sha256": "16a7207212149fdd07f921945913e565a66ca4d837a7478892ff548c46fd6e6e",
+          "rows": 4096,
+          "intervals": 72663
+        }
+      ]
+    },
+    {
+      "block": 10,
+      "land_supported_unassigned_cells": 4305403,
+      "inland_water_supported_unassigned_cells": 0,
+      "valid_L1_unassigned_cells": 4305403,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 2684814,
+      "land_in_old_candidate_union_cells": 1620589,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-010.json.gz",
+          "sha256": "b928969be2b4fdd874a0a54a06f295685728834f9c5fd704a1e9460e513a0a40",
+          "decoded_sha256": "581839fb7ba22a2bc7dd8f882af2674ede9e4cd4c0ee3ff3df58a2501ec349a4",
+          "rows": 4096,
+          "intervals": 171046
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-010.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-010.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-010.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-010.json.gz",
+          "sha256": "18025bbcd55371217edf58531459a24c6fe446fc2ea76b4daeaad543ee0fe466",
+          "decoded_sha256": "538df42334f64fbb3dd2a9a8be646703b4d670bb26f2a40983ff51f3734da955",
+          "rows": 4096,
+          "intervals": 120132
+        }
+      ]
+    },
+    {
+      "block": 11,
+      "land_supported_unassigned_cells": 3099637,
+      "inland_water_supported_unassigned_cells": 1,
+      "valid_L1_unassigned_cells": 3099638,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 1177672,
+      "land_in_old_candidate_union_cells": 1921965,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-011.json.gz",
+          "sha256": "940c6660d62057b2bfbc51d544be400131b063a1e50c21868b5cbdb50b381ecd",
+          "decoded_sha256": "ba1fc63b21e29ca803d7e23c2dd29cd4945d5981df7da150f5b829c952713ebe",
+          "rows": 4096,
+          "intervals": 104223
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-011.json.gz",
+          "sha256": "62ebab313327bdeca23a92cb18a358ee6f39d44797f961bd0453054e07df5b7a",
+          "decoded_sha256": "46f252f8b5a039bb8840d04858278263998d0cfb35f94bc3cb6722d6a2dd7d39",
+          "rows": 1,
+          "intervals": 1
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-011.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-011.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-011.json.gz",
+          "sha256": "44563a9b6eac6569b92e1440d3f6fde23686d7f25cbbc51223d359b8102c1ad8",
+          "decoded_sha256": "8affc227b60e8aac7a782cc959c1f672be896317a7bc1a2d72eca0ec113eda81",
+          "rows": 4096,
+          "intervals": 74740
+        }
+      ]
+    },
+    {
+      "block": 12,
+      "land_supported_unassigned_cells": 7872319,
+      "inland_water_supported_unassigned_cells": 74028,
+      "valid_L1_unassigned_cells": 7946347,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 2334305,
+      "land_in_old_candidate_union_cells": 5538014,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-012.json.gz",
+          "sha256": "db2c7d209d2102f567911e10e0351e31456d4a0945c0f77bd18c2d3cc6903ad4",
+          "decoded_sha256": "22ae0a63685e671812f82dd2138d547b17c966e6631c4142bf791d7d961072e4",
+          "rows": 4096,
+          "intervals": 194346
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-012.json.gz",
+          "sha256": "9100b9290632bdec0c06d648c51f3808012ab8922ec89cadc15ebab3ef25b7b3",
+          "decoded_sha256": "b10deeafe322c219a9e0e0d19ce7df5c9dc56bb18784f64e2f298c5e847656c7",
+          "rows": 683,
+          "intervals": 1189
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-012.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-012.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-012.json.gz",
+          "sha256": "786ee09694ee33f779153d32104e2c10e0faeeec2ca5794faa7b22c5db75c32d",
+          "decoded_sha256": "6f07f4eca8020e88cab91664121192bbd7df92136fe71d2dbe8a3e13ca00b006",
+          "rows": 4096,
+          "intervals": 122734
+        }
+      ]
+    },
+    {
+      "block": 13,
+      "land_supported_unassigned_cells": 4679465,
+      "inland_water_supported_unassigned_cells": 48712,
+      "valid_L1_unassigned_cells": 4728177,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 1635001,
+      "land_in_old_candidate_union_cells": 3044464,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-013.json.gz",
+          "sha256": "e6356be77efc3ddaf0a41ccfb27944182469926e3e33085218650a0cb22aa11f",
+          "decoded_sha256": "6212359a4790dec28a840b07a9b37f03c70fab13535d8cb2212af424a5e6831d",
+          "rows": 4096,
+          "intervals": 215952
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-013.json.gz",
+          "sha256": "02ed357cfc1ea2d8e7bb897f117f0702c337f6153a3235619396855c8a95aff8",
+          "decoded_sha256": "6f6608b77a2c2200ad8b7a74e35e43383b036b073d90470b819f2b8d31fa3768",
+          "rows": 1038,
+          "intervals": 1400
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-013.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-013.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-013.json.gz",
+          "sha256": "e009fa4dbd86f6232a8bb542c541e477b7f045f6d73c9fde60429646a75c2f79",
+          "decoded_sha256": "1ed6a5fefaf4d2a092c0acbcc8205c163523653c3273709991fb441bc5f609e8",
+          "rows": 4096,
+          "intervals": 128947
+        }
+      ]
+    },
+    {
+      "block": 14,
+      "land_supported_unassigned_cells": 4639611,
+      "inland_water_supported_unassigned_cells": 386349,
+      "valid_L1_unassigned_cells": 5025960,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 2509818,
+      "land_in_old_candidate_union_cells": 2129793,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-014.json.gz",
+          "sha256": "18385a3524f358141f4f7e9d4fd727ed17a50344296d257ff716db02bbf9cc05",
+          "decoded_sha256": "568c706ccc250da545440a81dfbb0778dad30153668c81c13180a837e8393b79",
+          "rows": 4096,
+          "intervals": 325078
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-014.json.gz",
+          "sha256": "9b0ab91b715b1d63fbe3fd94a326c44c5111149bd503e546b3286b5e196e4552",
+          "decoded_sha256": "69dee27d303cb53cb5424cabf3bff301bf8eeee12e3b0a2ac986b937c3dfe79b",
+          "rows": 3135,
+          "intervals": 5668
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-014.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-014.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-014.json.gz",
+          "sha256": "4f81d8dda90029aa3729daf4e89374203156105a42e369fbe560708808deec1e",
+          "decoded_sha256": "39b4b0174790955d592c5c563e701c3684006e23ae0aa30399b6bcea60e74c2a",
+          "rows": 4096,
+          "intervals": 206021
+        }
+      ]
+    },
+    {
+      "block": 15,
+      "land_supported_unassigned_cells": 3156861,
+      "inland_water_supported_unassigned_cells": 76848,
+      "valid_L1_unassigned_cells": 3233709,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 2122874,
+      "land_in_old_candidate_union_cells": 1033987,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-015.json.gz",
+          "sha256": "aa4fa6664bb7a0647a03a65430d732d1d7b5ff01e6041912d0cd52fe010f0e45",
+          "decoded_sha256": "81382e2b7141aff98895e15b32147ada26b0e1bb70f42f92508f60640b93a1bb",
+          "rows": 4096,
+          "intervals": 271223
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-015.json.gz",
+          "sha256": "5d82e9da3bc4c1989dccd12e13d1d93d1e717389dd194aca7dbdeb620f33ce17",
+          "decoded_sha256": "27a3fbb8260a76324cedcb9881441341bfcdd2efc92f64017abe60ea57694721",
+          "rows": 669,
+          "intervals": 936
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-015.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-015.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-015.json.gz",
+          "sha256": "d0ca73b12b073ae081e212801486e277604e678a2d314c98d4287ac567d9cabe",
+          "decoded_sha256": "f23291081c0695e242c1118edf1a3a1486fdb80c0bc78591652687ab94794f13",
+          "rows": 4096,
+          "intervals": 189988
+        }
+      ]
+    },
+    {
+      "block": 16,
+      "land_supported_unassigned_cells": 3251093,
+      "inland_water_supported_unassigned_cells": 390,
+      "valid_L1_unassigned_cells": 3251483,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 2057388,
+      "land_in_old_candidate_union_cells": 1193705,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-016.json.gz",
+          "sha256": "4443838c1de49dedacfb22ad3ac4cec7c3a80f5f864d5a2d7e7f208f4f38b8cf",
+          "decoded_sha256": "f1b8bae2e7497cb8ee1ab4a038306b0019cc4b19abc03ff8387d8ae441bb822a",
+          "rows": 4096,
+          "intervals": 282791
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-016.json.gz",
+          "sha256": "c803bcda5f492f093f5d33e058aa07c4234df409519b9eca3231f34aaac8094a",
+          "decoded_sha256": "5c464f04bbd98af9b9af09b99f64a5b4f57730b9a258e1b93254f757d330e629",
+          "rows": 35,
+          "intervals": 36
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-016.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-016.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-016.json.gz",
+          "sha256": "3e67d1a87d896f9dc2522a3be6be977e7d2f3d92800cf7735ef6bdff23b65148",
+          "decoded_sha256": "3e986d484fe80316e6109c5997ee03cf444d987535dfcd99bec227e04d1e09bf",
+          "rows": 4096,
+          "intervals": 223712
+        }
+      ]
+    },
+    {
+      "block": 17,
+      "land_supported_unassigned_cells": 2215661,
+      "inland_water_supported_unassigned_cells": 1128464,
+      "valid_L1_unassigned_cells": 3344125,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 1331693,
+      "land_in_old_candidate_union_cells": 883968,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-017.json.gz",
+          "sha256": "67f8750043d1218b6d724f67671eb059d2759bacf8c07b8274000a4c4242ae3c",
+          "decoded_sha256": "c7f9d638edad4481b9108d6505d2612e9000db9e9bf7a8b961306019451dc725",
+          "rows": 4096,
+          "intervals": 240851
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-017.json.gz",
+          "sha256": "21f432bcad1deadf7cde34d2a2b3ffbfedc47b83207b6d298ae271a54b0c03e1",
+          "decoded_sha256": "9237f845c34757495b85cbecc5678b16b9a7cc1a36abec0074beb43ed14f3eed",
+          "rows": 2067,
+          "intervals": 6306
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-017.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-017.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-017.json.gz",
+          "sha256": "c4fd04acbfbfbe8e58c792bdf9416c1b6b0256a32a3f8014593350a1b9b4a8c5",
+          "decoded_sha256": "11ca6cb5c6ed5600a9bd4a9be341079f49792431e91c735841618c32dfdde9bb",
+          "rows": 4096,
+          "intervals": 173168
+        }
+      ]
+    },
+    {
+      "block": 18,
+      "land_supported_unassigned_cells": 2856713,
+      "inland_water_supported_unassigned_cells": 3903430,
+      "valid_L1_unassigned_cells": 6760143,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 1716475,
+      "land_in_old_candidate_union_cells": 1140238,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-018.json.gz",
+          "sha256": "1356c9f6e222e387613302f2f6580d62e99ac42becb33312d181c7f373fd82da",
+          "decoded_sha256": "e640f13efc129bb49fe3a8a761b4414cb896250f7494004753c9d808cdec284c",
+          "rows": 4096,
+          "intervals": 347788
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-018.json.gz",
+          "sha256": "9d179791d3904070c7457bf0754e2cbbfe979758bccade558c3f36df7e610ac9",
+          "decoded_sha256": "6f4de4c5303db443e21fed9ee37b09f811a6daba4e69c79e64cdf90d360c7d3f",
+          "rows": 3451,
+          "intervals": 8082
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-018.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-018.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-018.json.gz",
+          "sha256": "a7fedf129899cb139efe3f36ca9d4b7a59229b82954f7312382ffcac9261d6aa",
+          "decoded_sha256": "67726df9b252c76a8e63d559c2b3216a717e880f35d9364fd334d4d54a61772b",
+          "rows": 4096,
+          "intervals": 269194
+        }
+      ]
+    },
+    {
+      "block": 19,
+      "land_supported_unassigned_cells": 1218139,
+      "inland_water_supported_unassigned_cells": 362667,
+      "valid_L1_unassigned_cells": 1580806,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 772337,
+      "land_in_old_candidate_union_cells": 445802,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-019.json.gz",
+          "sha256": "856119147ba011bff828aa0db09b275b17f8894ab0cddbc166ccc7e15ed01750",
+          "decoded_sha256": "b925533495f03b5d1200f339537fab4eaebacb072474aa3486230ab1d8f390e5",
+          "rows": 4096,
+          "intervals": 182140
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-019.json.gz",
+          "sha256": "ac22e99d13a7fe5a502d19a4457337269c5bd27eb2f2c63435933da1d839387b",
+          "decoded_sha256": "629c6a933b8b23821e5a625cf49bc19814b44652f23368d6a0c05bcc4a009151",
+          "rows": 2492,
+          "intervals": 4811
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-019.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-019.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-019.json.gz",
+          "sha256": "9426a09ac1144b72ddde1619288d5ed9cdcbf46677ef8631d2b9c54e44bec672",
+          "decoded_sha256": "8d6f3bf2b6e4248f688d058fa0c108399a4aef748a7acad9bbc61da2574b1833",
+          "rows": 4096,
+          "intervals": 130938
+        }
+      ]
+    },
+    {
+      "block": 20,
+      "land_supported_unassigned_cells": 1580404,
+      "inland_water_supported_unassigned_cells": 2384,
+      "valid_L1_unassigned_cells": 1582788,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 762557,
+      "land_in_old_candidate_union_cells": 817847,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-020.json.gz",
+          "sha256": "aa3b4378a70a2cd246599148fc67e02675ec1dbb4c7fbd172d0e1c962ea1e0a1",
+          "decoded_sha256": "f85a692cdc94bbdbad278a3ae49b5b2b99903d3cfd5416aa2d6bc221da732c68",
+          "rows": 4096,
+          "intervals": 194250
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-020.json.gz",
+          "sha256": "8ee2a437de254000aad0f5a284a90e8ca5cbce7f9e6adfa6659dbfce9368461d",
+          "decoded_sha256": "545c30cbb431faad93a8c456a173098a363243791dee450aa748b8d89708ce55",
+          "rows": 226,
+          "intervals": 271
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-020.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-020.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-020.json.gz",
+          "sha256": "6c5c7be0bda9d91c6d84318561724f3a7f2528b4d9cd67ab0c0c3aa8b6094370",
+          "decoded_sha256": "74afab6833e91b6ee80240171fea6cce7f3b08bb6b31e48787c6c9662da932aa",
+          "rows": 4096,
+          "intervals": 126296
+        }
+      ]
+    },
+    {
+      "block": 21,
+      "land_supported_unassigned_cells": 1543473,
+      "inland_water_supported_unassigned_cells": 279177,
+      "valid_L1_unassigned_cells": 1822650,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 444814,
+      "land_in_old_candidate_union_cells": 1098659,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-021.json.gz",
+          "sha256": "3bf48e2e9b50b22c805240bd458bf6087a131b001c0bef15d1aee9b4120a9fcd",
+          "decoded_sha256": "993925f71e340378ad8e19b57f6de8c710e69a1f569e7a5bd1460038db0873c0",
+          "rows": 4096,
+          "intervals": 170093
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-021.json.gz",
+          "sha256": "7421eac82c2a2690fd626a9aa794ae2e3509b9475d9e29f2a537189175e39fff",
+          "decoded_sha256": "6d140bb9492cec51c757ed73fd3ca49adb6f36a1d9eea54378572469824daa84",
+          "rows": 1344,
+          "intervals": 4091
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-021.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-021.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-021.json.gz",
+          "sha256": "214b69805e0ce5cd2cc9b919556d0333b4fd7654a374cd36b73d6d83c39c83e1",
+          "decoded_sha256": "6a8ef6cd59eb5eb565e1887861b49f331cdae2ad1e2806a4ca6e54a420e31615",
+          "rows": 4096,
+          "intervals": 90386
+        }
+      ]
+    },
+    {
+      "block": 22,
+      "land_supported_unassigned_cells": 1624335,
+      "inland_water_supported_unassigned_cells": 16561372,
+      "valid_L1_unassigned_cells": 18185707,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 281273,
+      "land_in_old_candidate_union_cells": 1343062,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-022.json.gz",
+          "sha256": "280083acf2df51472f98b129a86fb1c1ee6014fc50ae52f747a19f657f50c224",
+          "decoded_sha256": "815ab60ec3bfbda0c2734bc4d4f96b384dbee468abca4e5f4ac0dcbf04d04fbb",
+          "rows": 4096,
+          "intervals": 153258
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-022.json.gz",
+          "sha256": "834f1f086e75beaf957bdb714a0981c67120538eae55c3d2bcc0092025294cb7",
+          "decoded_sha256": "8e24dc8a720d6e71dd546dc3cf627d37c90afd4fc76ebeb1afc15512e2a6a891",
+          "rows": 4096,
+          "intervals": 31907
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-022.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-022.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-022.json.gz",
+          "sha256": "4b184b09a32bbe7a6d0e7084aff506b4855bb587efb1a84943946fe4e551a597",
+          "decoded_sha256": "d20280d4aedb1af80a175fd803906abb1846fd2215dd29bacc06fec4e40b9140",
+          "rows": 4096,
+          "intervals": 62093
+        }
+      ]
+    },
+    {
+      "block": 23,
+      "land_supported_unassigned_cells": 1311801,
+      "inland_water_supported_unassigned_cells": 22047155,
+      "valid_L1_unassigned_cells": 23358956,
+      "source_unknown_envelope_unassigned_cells": 948,
+      "source_unknown_envelope_outside_land_water_cells": 938,
+      "source_unknown_envelope_overlapping_land_cells": 10,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 208128,
+      "land_in_old_candidate_union_cells": 1103673,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-023.json.gz",
+          "sha256": "a1c483ffe23e3d215885edc9f16a12ce40c7f092149479c418493165e8c70868",
+          "decoded_sha256": "e801becf35fdc81b6b3350efaee670a75e3c8115a7a83f8ade2ab7a42f6421de",
+          "rows": 4096,
+          "intervals": 143694
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-023.json.gz",
+          "sha256": "3ed440299bd5498ec6ad6c1bc03bb5332503d4e84a81a5f9005d603bf1eb0a7d",
+          "decoded_sha256": "550bb559cc0a196dd3de37f667f5cee8479d4f9323e1db9885c8fb78a3355af3",
+          "rows": 4096,
+          "intervals": 25193
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-023.json.gz",
+          "sha256": "408d3eed8eb64f866f317987f0048dd261b7446be6de28569f2d6cbb1c817bf2",
+          "decoded_sha256": "8f9ccba95037a1543ed6066b150192f106a8abfac65eb9039df9373cd73725bc",
+          "rows": 64,
+          "intervals": 64
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-023.json.gz",
+          "sha256": "7df532f19a443ab068d30ce9a560dba347d78c43d49c8652808beede6d8f3757",
+          "decoded_sha256": "0eff99b3035ab4afaabecb855f3d28db999ef6fbe55bb3f3b2ebb4ce1214deaa",
+          "rows": 64,
+          "intervals": 68
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-023.json.gz",
+          "sha256": "23479479b01c10f7c008efae136cd497eb54cf403f22997bbef3ef16243df8d2",
+          "decoded_sha256": "d72c8aa49720ab254bb361141c2e8677fd0124a0b0be5b251fb881726e3c629e",
+          "rows": 4096,
+          "intervals": 57404
+        }
+      ]
+    },
+    {
+      "block": 24,
+      "land_supported_unassigned_cells": 1637341,
+      "inland_water_supported_unassigned_cells": 12065246,
+      "valid_L1_unassigned_cells": 13702587,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 333699,
+      "land_in_old_candidate_union_cells": 1303642,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-024.json.gz",
+          "sha256": "6bd541316430926a198355faa17e934aa5e1bf23962bc5e433607450122b5679",
+          "decoded_sha256": "dbcb2f58c81adcaf1aa3aa2d0bbaa6cc185939683bed053bac2d5287b4836665",
+          "rows": 4096,
+          "intervals": 164256
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-024.json.gz",
+          "sha256": "4808672fac8b42ca9ce7b29a1528dbb8abaeb65d43f9754079ab20afd18a2729",
+          "decoded_sha256": "471189001084221221a7caeec61a9609d4fadd650ea1a53b45e93d20bca5bb15",
+          "rows": 4096,
+          "intervals": 9239
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-024.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-024.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-024.json.gz",
+          "sha256": "f3b8f206bd096d82e89ea20ea000b5fc9b21ffb19209f5269157757ad5b4563b",
+          "decoded_sha256": "1914d888f3f7d6af9080f4074c79f8d1157808405a1884450df679f6444d650e",
+          "rows": 4096,
+          "intervals": 76589
+        }
+      ]
+    },
+    {
+      "block": 25,
+      "land_supported_unassigned_cells": 748600,
+      "inland_water_supported_unassigned_cells": 4177,
+      "valid_L1_unassigned_cells": 752777,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 246554,
+      "land_in_old_candidate_union_cells": 502046,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-025.json.gz",
+          "sha256": "28caabab2857b01a6191637b690e2b0d128bac8b3e2ba45aaae0e5ee44072b44",
+          "decoded_sha256": "505a4feee9ae726db0334f6cb6e6b26cf749668de30ecc31f9dfca99a501148f",
+          "rows": 4096,
+          "intervals": 114942
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-025.json.gz",
+          "sha256": "6c0ec3db20bf6278b142e7df333e1f864b7d4850810cf6cad8eaef832ec38aec",
+          "decoded_sha256": "81e61e62d48e929dca3506db5222bfd085bdc459183b09ab5a1a5e86662fadfb",
+          "rows": 26,
+          "intervals": 27
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-025.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-025.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-025.json.gz",
+          "sha256": "920748c6b4f77fe509dca491ecff8ca38c1c0616988167e42f26663bd626e37d",
+          "decoded_sha256": "6f5ea73ee553ba5a685090781d6099db13397a4f256fb3f09c9329b1f3037570",
+          "rows": 4096,
+          "intervals": 65820
+        }
+      ]
+    },
+    {
+      "block": 26,
+      "land_supported_unassigned_cells": 1123598,
+      "inland_water_supported_unassigned_cells": 25119,
+      "valid_L1_unassigned_cells": 1148717,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 220217,
+      "land_in_old_candidate_union_cells": 903381,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-026.json.gz",
+          "sha256": "8c263a02fe617bcd4844473c9237a8868c134860649022b7ad2e2b7371584fa2",
+          "decoded_sha256": "d4ea09c93e2790a9304a6f1864225ce3d0199d952e6211be4bba2dd4a458430b",
+          "rows": 4096,
+          "intervals": 114545
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-026.json.gz",
+          "sha256": "703c18aee9e56cd3635eff1d4c8a4998bdf61497965883c27e41717b426edf16",
+          "decoded_sha256": "468ba76e47d059c05112e8652b8f26cd577b4aabe7a68656d695a4474046f2ab",
+          "rows": 762,
+          "intervals": 911
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-026.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-026.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-026.json.gz",
+          "sha256": "8b3b2575a04b59b932ceb4e827ae0af105ebb8463c8cac43aca8aaea13acd138",
+          "decoded_sha256": "aa907ee195fe3262b3052c326f4a97c1c45d07e78f8c2b4c35e7fa612686f505",
+          "rows": 4095,
+          "intervals": 52185
+        }
+      ]
+    },
+    {
+      "block": 27,
+      "land_supported_unassigned_cells": 1298116,
+      "inland_water_supported_unassigned_cells": 130510,
+      "valid_L1_unassigned_cells": 1428626,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 362191,
+      "land_in_old_candidate_union_cells": 935925,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-027.json.gz",
+          "sha256": "bd038c98361e9d2ee6187765ceb7d91b6bb174114f5dfccd7b92c376839c1eea",
+          "decoded_sha256": "bbae9fd5766c25ab46c02fda90f2bc788e81eb4eca3b419591866ab43ba98b61",
+          "rows": 4096,
+          "intervals": 156010
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-027.json.gz",
+          "sha256": "2280371346676eac0ca982c040504a9dcba640cf66c5c2c3d1385de44cb3767a",
+          "decoded_sha256": "2d251bfcf589c0db7d02be77ac011b25e509bb910e7811532f20aa75a33720f4",
+          "rows": 1768,
+          "intervals": 3342
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-027.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-027.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-027.json.gz",
+          "sha256": "9c24a6ee3b8e780a5cc325e4b3c4a0fd12572aeee8e5aea4988da67e4431065d",
+          "decoded_sha256": "b69ae6876a877178ef49cf7c312170cdca1b1ca7189b124b418a7c2c55c6619d",
+          "rows": 4096,
+          "intervals": 79868
+        }
+      ]
+    },
+    {
+      "block": 28,
+      "land_supported_unassigned_cells": 851762,
+      "inland_water_supported_unassigned_cells": 1388,
+      "valid_L1_unassigned_cells": 853150,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 323121,
+      "land_in_old_candidate_union_cells": 528641,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-028.json.gz",
+          "sha256": "2d3327eb79a3ef3d56ec58e1400f8394754881183d2937747c303aeef9098cd5",
+          "decoded_sha256": "7f11b44dd86940e523b550a4c6a8572714de4cd490629d71bd9e00426c14f700",
+          "rows": 4096,
+          "intervals": 128614
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-028.json.gz",
+          "sha256": "a878b7eab8260dfc4ab3b1db67e39ef4667047bc8980d779c645b0598f60d234",
+          "decoded_sha256": "339f333f640ba15c8c22f71b3db888c871464621c2f193780f4a946596f07cd8",
+          "rows": 338,
+          "intervals": 385
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-028.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-028.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-028.json.gz",
+          "sha256": "8d7669af206598237c072b6841386e026307e5b348c3b2519a9dc15772e7d754",
+          "decoded_sha256": "b4d0e7cf9f4c102efbf50e107606b7c0b6e50b1b29b8d88347acad77d5b144a0",
+          "rows": 4096,
+          "intervals": 70168
+        }
+      ]
+    },
+    {
+      "block": 29,
+      "land_supported_unassigned_cells": 841761,
+      "inland_water_supported_unassigned_cells": 340738,
+      "valid_L1_unassigned_cells": 1182499,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 305627,
+      "land_in_old_candidate_union_cells": 536134,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-029.json.gz",
+          "sha256": "7af023db048ed84fe910c0ce966508b5b4127c95c6215f0d36213ed20d94b5d2",
+          "decoded_sha256": "a62fb29038527ceba28ebef27ee3d487ec4fb0a31ca64610d16f02947b5189ee",
+          "rows": 4096,
+          "intervals": 144780
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-029.json.gz",
+          "sha256": "c3a2e3b0c84e34e19aa39c7afbb02f62a434f29fad6e64aa7429522b9ebfe30f",
+          "decoded_sha256": "c4611ff0fcfb89048a4c524493a60b90ced1ff4d80ef9c1bc94a66d6b02b62c9",
+          "rows": 2647,
+          "intervals": 4274
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-029.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-029.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-029.json.gz",
+          "sha256": "fdcd4457a31726ffdd2e9f86f185a32e570b2eabe89922df236038d6fbd4c970",
+          "decoded_sha256": "4df99c1b100a9b3dd549865579c1b5f2eeae93a4ffb215ca1b555bb2604cffc1",
+          "rows": 4096,
+          "intervals": 70919
+        }
+      ]
+    },
+    {
+      "block": 30,
+      "land_supported_unassigned_cells": 753198,
+      "inland_water_supported_unassigned_cells": 34685,
+      "valid_L1_unassigned_cells": 787883,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 305772,
+      "land_in_old_candidate_union_cells": 447426,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-030.json.gz",
+          "sha256": "2731421e881dd1c8121364409088523a67b12c52ed054642a5994edc96037c0b",
+          "decoded_sha256": "559cc4cc1ef4184d99918769adff38ecbc146fe95c2c41cb7e06357f34356d61",
+          "rows": 4096,
+          "intervals": 141049
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-030.json.gz",
+          "sha256": "0d1d7952380dc823b6eafcf1803b6124a80c06d6e1f16500cc36d9dd82142a4d",
+          "decoded_sha256": "c133f46bf8b5e19b8d6356f990fada11afe6347fd3088cc22dbed7f0f8573741",
+          "rows": 537,
+          "intervals": 595
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-030.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-030.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-030.json.gz",
+          "sha256": "1e3050a58a3c2e8ac098525d5eb541da4717da8ba2d307447bde31d8bd6bb814",
+          "decoded_sha256": "ed5851699c9165ad7df0431f2858551f9a8c1edc00e31b47bd48172c766642a9",
+          "rows": 4096,
+          "intervals": 77773
+        }
+      ]
+    },
+    {
+      "block": 31,
+      "land_supported_unassigned_cells": 787868,
+      "inland_water_supported_unassigned_cells": 6772,
+      "valid_L1_unassigned_cells": 794640,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 240396,
+      "land_in_old_candidate_union_cells": 547472,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-031.json.gz",
+          "sha256": "045752377715c5b2ea0924f9c92e9b65f202b396fc0c585fb3c05831fb7e99ef",
+          "decoded_sha256": "5dd95d58dfc675147d59d05ebed2bae008fb185db9ab295bdb8633aadb4b6ecd",
+          "rows": 4096,
+          "intervals": 113923
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-031.json.gz",
+          "sha256": "9697f1635da0fedd24b4289c42bfd09a9468074f0414b8075dd50f925a990bc3",
+          "decoded_sha256": "f81ca96e91a6576475e0744e427bfe6ad94393322f7b31cd2806c2dba7fd730b",
+          "rows": 744,
+          "intervals": 793
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-031.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-031.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-031.json.gz",
+          "sha256": "6d589f900ece628f08e1ceff60953649fa14c205d5db62c8120e0befd2a23130",
+          "decoded_sha256": "89aa8264a7b9e6b792741e51a9e5b70c5d2eba5a3a50bcc61f9e09a9852a66ef",
+          "rows": 4096,
+          "intervals": 54782
+        }
+      ]
+    },
+    {
+      "block": 32,
+      "land_supported_unassigned_cells": 839622,
+      "inland_water_supported_unassigned_cells": 1804142,
+      "valid_L1_unassigned_cells": 2643764,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 380709,
+      "land_in_old_candidate_union_cells": 458913,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-032.json.gz",
+          "sha256": "2b3d882155a28df8782b346bd7382b2faa1ccfa0ebf1c2f0f2c6d779c055905a",
+          "decoded_sha256": "7f6b485f745b9523165108a1868b7b57e1677aac90f065bbc2e45694d4106566",
+          "rows": 4096,
+          "intervals": 144232
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-032.json.gz",
+          "sha256": "5a8910efab0c7f8667167655e138c1ae0efb7d5ec52ff143c7ef377f925c98a6",
+          "decoded_sha256": "fa64308a425e6d6484635c2c62cfbcce85e0cfdae138bbde81fec0e7798b632d",
+          "rows": 3265,
+          "intervals": 8480
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-032.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-032.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-032.json.gz",
+          "sha256": "25b8fdb097cc166e032ed8a2cabb378cd00d1dbcef59dc4f0e6b2123212f673b",
+          "decoded_sha256": "7430a5fed5d8842c3de82490f667067441971c284ec94795311cbf1ff16709fa",
+          "rows": 4096,
+          "intervals": 83579
+        }
+      ]
+    },
+    {
+      "block": 33,
+      "land_supported_unassigned_cells": 873429,
+      "inland_water_supported_unassigned_cells": 872332,
+      "valid_L1_unassigned_cells": 1745761,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 397229,
+      "land_in_old_candidate_union_cells": 476200,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-033.json.gz",
+          "sha256": "440955ea8d0654a1bc5367c4da0b9eb73df1e79c152ebc7c8576d9a2af9bb7a1",
+          "decoded_sha256": "a34cfb604b26f9bc0769930e4bbcdff2dcd3ae53d4a74c33d1a6e5a9c7084f59",
+          "rows": 4096,
+          "intervals": 117102
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-033.json.gz",
+          "sha256": "bca97a3b465b9559f556a2c9d0948803092f275c7d2d1a0a65d4b9bc1fd72059",
+          "decoded_sha256": "35c71b7797ee53a5d5ce3e729ca76746dfd2bb3b7f0ba8c25f148526c6d1843a",
+          "rows": 3644,
+          "intervals": 4773
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-033.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-033.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-033.json.gz",
+          "sha256": "69878c1571b932bfd2af35da95f0869665863a4aa8e0457961fada246f311ceb",
+          "decoded_sha256": "618dccf45df4dcf3025eddc5cbfb7802550938c9eb4f27a63c136abab9f96890",
+          "rows": 4096,
+          "intervals": 69266
+        }
+      ]
+    },
+    {
+      "block": 34,
+      "land_supported_unassigned_cells": 486618,
+      "inland_water_supported_unassigned_cells": 976273,
+      "valid_L1_unassigned_cells": 1462891,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 204894,
+      "land_in_old_candidate_union_cells": 281724,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-034.json.gz",
+          "sha256": "05e067f8e532302cf5f94a8565fd5dfc231ac0214ff5710d51745315fe568840",
+          "decoded_sha256": "19fb558dc33de6e20f3a497602474d341a92996d03c8628f0186515583010e51",
+          "rows": 4096,
+          "intervals": 93631
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-034.json.gz",
+          "sha256": "13c944a3fca94c97a565ce2af6e0f5e4ec6f8e422dda9b9dab6968b1414e92e4",
+          "decoded_sha256": "6bd9a517feb20a253ab847f39386c499b248897b93e7e6a2d654d48fb7e8d5f4",
+          "rows": 3518,
+          "intervals": 4980
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-034.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-034.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-034.json.gz",
+          "sha256": "04b94e667c3ba1b5dbe5361ae6d9731ea8702281cd615721a286f54d966babcc",
+          "decoded_sha256": "c41201550b1797e9b71a3f4ff24a287fb50433407f8a5534417abc08e06ae7cf",
+          "rows": 4096,
+          "intervals": 49508
+        }
+      ]
+    },
+    {
+      "block": 35,
+      "land_supported_unassigned_cells": 891921,
+      "inland_water_supported_unassigned_cells": 67004,
+      "valid_L1_unassigned_cells": 958925,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 150917,
+      "land_in_old_candidate_union_cells": 741004,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-035.json.gz",
+          "sha256": "981e5d1bf9cb91f3eff7e811a322732c3dce87808923e2dbcb54c7d956b48ea7",
+          "decoded_sha256": "1ac5ec3979b720e6691299c9d9e5f89f6c485f98bec18dcf3eb13dcae6b12494",
+          "rows": 4096,
+          "intervals": 61033
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-035.json.gz",
+          "sha256": "75f06da7dbbbfa0c217328d5d55c34df918840235e3155ae203b45fc4158ae44",
+          "decoded_sha256": "2ff914df195041e6b0fda9eeb1d0c1ccc22978f3224671f1178495e3c2b16fc7",
+          "rows": 917,
+          "intervals": 998
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-035.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-035.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-035.json.gz",
+          "sha256": "eee1858d8b0a33e251d03f90c2e0de2d764c1b8304357cbeb9f6b169ebad051b",
+          "decoded_sha256": "cc302c48b81a8d5a99a765fa05a1d034a1f6aa3bc3d3be86b5dd5f2e3ec11941",
+          "rows": 4091,
+          "intervals": 32164
+        }
+      ]
+    },
+    {
+      "block": 36,
+      "land_supported_unassigned_cells": 150745,
+      "inland_water_supported_unassigned_cells": 0,
+      "valid_L1_unassigned_cells": 150745,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 75307,
+      "land_in_old_candidate_union_cells": 75438,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-036.json.gz",
+          "sha256": "11f095b9f450a01aa41e91a37e9b8db7df3e8f42b276cf7fe92f7190a9706871",
+          "decoded_sha256": "aeb67945845b6957fcb8524c7346a9235e730cc997305ada1ef89693618a27c8",
+          "rows": 4096,
+          "intervals": 43430
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-036.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-036.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-036.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-036.json.gz",
+          "sha256": "bc2bd28937c73bd39abe7ce2379b018dd95d498a522c5d6e27b7809112603db2",
+          "decoded_sha256": "6fd6130563619e188d6f36f378519eea18f7341513a2dd5fb377362e9eff35bd",
+          "rows": 3995,
+          "intervals": 20617
+        }
+      ]
+    },
+    {
+      "block": 37,
+      "land_supported_unassigned_cells": 80433,
+      "inland_water_supported_unassigned_cells": 9098,
+      "valid_L1_unassigned_cells": 89531,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 35604,
+      "land_in_old_candidate_union_cells": 44829,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-037.json.gz",
+          "sha256": "7968adeb24cacca45f6ac1d015fa88eb3b288aef86dcf10cdfe3f775d59d84c4",
+          "decoded_sha256": "1849cf4fc4c53c1ad7993ddeb57155e02e1948450b1c3cc879adb17b4d2336b7",
+          "rows": 4095,
+          "intervals": 24653
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-037.json.gz",
+          "sha256": "2e25139f622de52715c528923b7f16952aea2fa6ab3996c2b74d77c4fd6690d7",
+          "decoded_sha256": "a65a5afbbc592cd513e8e43beea55aad166bac34a72f1c64a73611e801127cfc",
+          "rows": 285,
+          "intervals": 915
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-037.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-037.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-037.json.gz",
+          "sha256": "effa406b99e9e87dea023ddede09b0d1f20a77f4d5705f23c15d845e371ee69f",
+          "decoded_sha256": "dae7b628ee372764e588b436fb270d62465c7e168ee8a0a604f0f5a8d264d44b",
+          "rows": 3621,
+          "intervals": 10267
+        }
+      ]
+    },
+    {
+      "block": 38,
+      "land_supported_unassigned_cells": 220719,
+      "inland_water_supported_unassigned_cells": 221992,
+      "valid_L1_unassigned_cells": 442711,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 88311,
+      "land_in_old_candidate_union_cells": 132408,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-038.json.gz",
+          "sha256": "af6039ecdc8b86d54b956753d36787c0398fe06f6572a86ffd4ae7c42f1c668d",
+          "decoded_sha256": "7bd5c9b8c3ff034cba1f71c02e956daf97f665ecdfe4f3007b3f91fd084103f7",
+          "rows": 4096,
+          "intervals": 45167
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-038.json.gz",
+          "sha256": "b014ac7486ea04f9989b57c6720179959271e83772cf49b3428f6b36878a2cc6",
+          "decoded_sha256": "345f4f70e6fffec65fb738d18a447d50ce7a499ceb14bfd7d092041995443ce2",
+          "rows": 1234,
+          "intervals": 1557
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-038.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-038.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-038.json.gz",
+          "sha256": "c5f27e07b14650ec3368b248fb42234abd784d1622c0126aca20c9faaf331744",
+          "decoded_sha256": "de6443502dcca70bc0ae48940887b3104e6f3b8016c39d687dd939576113190a",
+          "rows": 4023,
+          "intervals": 20594
+        }
+      ]
+    },
+    {
+      "block": 39,
+      "land_supported_unassigned_cells": 182147,
+      "inland_water_supported_unassigned_cells": 0,
+      "valid_L1_unassigned_cells": 182147,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 84955,
+      "land_in_old_candidate_union_cells": 97192,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-039.json.gz",
+          "sha256": "10c65c786f747e1430684408b430e0a30a0e1417edcc8168d4649649f61ccdb6",
+          "decoded_sha256": "f98bd3505948a4af29f0f74fa46c2452b2f3ba0850e91b2115dea641d16f8318",
+          "rows": 4094,
+          "intervals": 35373
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-039.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-039.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-039.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-039.json.gz",
+          "sha256": "31e5dbb66185d4616c1333ce03cd133a084efdd73547365bfbf7329614dba62a",
+          "decoded_sha256": "e3a85e58b0ac9c8847af88da25b7049b3f4f1a141e2f747cf029564b723bfce0",
+          "rows": 3944,
+          "intervals": 17221
+        }
+      ]
+    },
+    {
+      "block": 40,
+      "land_supported_unassigned_cells": 362975,
+      "inland_water_supported_unassigned_cells": 29,
+      "valid_L1_unassigned_cells": 363004,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 218592,
+      "land_in_old_candidate_union_cells": 144383,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-040.json.gz",
+          "sha256": "7d5426df0af4706813a4c51bd67e2f0d3f8ad806773dcfb3903c7590ac596531",
+          "decoded_sha256": "ca1bfe0418cd6375481d8e0360112e24c81529819fa6e166457d90e80cfb756c",
+          "rows": 4096,
+          "intervals": 53825
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-040.json.gz",
+          "sha256": "1524b311531d62c18933581b22d43a87fc75ce6c5f04329f3aabb60720fb4915",
+          "decoded_sha256": "25b0cbe7e1694ae82f7284c5da466a8dd0d5a2fe80f4c2ad549c4ae0fa110415",
+          "rows": 11,
+          "intervals": 11
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-040.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-040.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-040.json.gz",
+          "sha256": "50eec3ca518a038b59b22eac3a06f4eaa48ebb5139aa5b245e30323b896d8bb0",
+          "decoded_sha256": "f2f1284057e26cf4feb87336ad4935747277f0fa6c182a971759d73c78ea2ac9",
+          "rows": 4092,
+          "intervals": 31410
+        }
+      ]
+    },
+    {
+      "block": 41,
+      "land_supported_unassigned_cells": 610709,
+      "inland_water_supported_unassigned_cells": 355,
+      "valid_L1_unassigned_cells": 611064,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 246602,
+      "land_in_old_candidate_union_cells": 364107,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-041.json.gz",
+          "sha256": "5f0748149e052f47b55aead425742fcfc89facc740eb4fb3a4128906f9d629c8",
+          "decoded_sha256": "c09c597d14042612a6dd351534d3847f395434585cdf2582fdd2a12400ca6b75",
+          "rows": 4093,
+          "intervals": 50216
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-041.json.gz",
+          "sha256": "cc2fb53fd46b5a3a1701d1f50cae469f9a192bdd0f2ce8297103ec213e8fbc56",
+          "decoded_sha256": "113490c22a3cf1081b2a1aafc2f5aec624f012e41fe0192dc1d83fd2d90ff936",
+          "rows": 156,
+          "intervals": 157
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-041.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-041.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-041.json.gz",
+          "sha256": "2338e53ad589a854903ded9a220dc2354ec8e9df92f39f1be3fceacd39aaa3d7",
+          "decoded_sha256": "7f69800794f9997900490e338640f9641c905d096c3a5cd0ec9b6be797ac9f11",
+          "rows": 4015,
+          "intervals": 27242
+        }
+      ]
+    },
+    {
+      "block": 42,
+      "land_supported_unassigned_cells": 794493,
+      "inland_water_supported_unassigned_cells": 0,
+      "valid_L1_unassigned_cells": 794493,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 601422,
+      "land_in_old_candidate_union_cells": 193071,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-042.json.gz",
+          "sha256": "7779139ffc2e9d81b7010849b10ad44a75d94b527f2f47b614e7a2bd5c273363",
+          "decoded_sha256": "8f31d416602f7265ad3922cdd70ae88c02b1377b55b2d2af42aca2f6f3a70de3",
+          "rows": 4096,
+          "intervals": 79373
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-042.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-042.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-042.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-042.json.gz",
+          "sha256": "b6f058953ad66f30af8471e45b32a90c31d909577a85db3611a40a1eb9b015a4",
+          "decoded_sha256": "5804f1ccf2f9ddbc7d8688a81462709f08f1052f3414e1733a09b5bb75047684",
+          "rows": 4096,
+          "intervals": 63727
+        }
+      ]
+    },
+    {
+      "block": 43,
+      "land_supported_unassigned_cells": 796414,
+      "inland_water_supported_unassigned_cells": 0,
+      "valid_L1_unassigned_cells": 796414,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 522355,
+      "land_in_old_candidate_union_cells": 274059,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-043.json.gz",
+          "sha256": "2bb6524100aa66867abcb4adb433f7e06297f440eafef68b0dd2266eb4276993",
+          "decoded_sha256": "8dac9079fdf80a9c3e08b566e379ccfce28e57d11ea84f22c7f279b17bcb5fc3",
+          "rows": 4096,
+          "intervals": 68599
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-043.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-043.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-043.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-043.json.gz",
+          "sha256": "aac52be22f8bbe2c2b6ac2240df7df3c7d6a4b74cb45df71ecdd70b0348b2fc0",
+          "decoded_sha256": "0dbf49ece8af2233e100cc6238f02a6e9670b9b3e0a7fc2c4fdb50ed9fb0aaae",
+          "rows": 4096,
+          "intervals": 54896
+        }
+      ]
+    },
+    {
+      "block": 44,
+      "land_supported_unassigned_cells": 19985,
+      "inland_water_supported_unassigned_cells": 0,
+      "valid_L1_unassigned_cells": 19985,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 17016,
+      "land_in_old_candidate_union_cells": 2969,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-044.json.gz",
+          "sha256": "16e13aa2ced401ecbe5a4a62764cd6d8ff30adfb9f2a744e51b34af92a42eb33",
+          "decoded_sha256": "8147a89bb0ab59aa545e3783ca3d97311b928af210a30eea82873686476f0e8c",
+          "rows": 740,
+          "intervals": 1805
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-044.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-044.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-044.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-044.json.gz",
+          "sha256": "738210afde4658718fef970d89a21bbb9d0808c8af9ee90047727c3f25e65543",
+          "decoded_sha256": "5deeeed179cce09ac95621ee5f9e19739713f0d061b9bba2d9fb349b29b9e4c1",
+          "rows": 740,
+          "intervals": 1677
+        }
+      ]
+    },
+    {
+      "block": 45,
+      "land_supported_unassigned_cells": 5133,
+      "inland_water_supported_unassigned_cells": 0,
+      "valid_L1_unassigned_cells": 5133,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 5133,
+      "land_in_old_candidate_union_cells": 0,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-045.json.gz",
+          "sha256": "886eb4e2e1e1100186c4f54330a842a4d0ff96f66536c28e3e4b4989054dcbe5",
+          "decoded_sha256": "8082e58618f48175175102edc3c5545f7f740e5992b8b5b9271e4da33238b597",
+          "rows": 161,
+          "intervals": 302
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-045.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-045.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-045.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-045.json.gz",
+          "sha256": "886eb4e2e1e1100186c4f54330a842a4d0ff96f66536c28e3e4b4989054dcbe5",
+          "decoded_sha256": "8082e58618f48175175102edc3c5545f7f740e5992b8b5b9271e4da33238b597",
+          "rows": 161,
+          "intervals": 302
+        }
+      ]
+    },
+    {
+      "block": 46,
+      "land_supported_unassigned_cells": 0,
+      "inland_water_supported_unassigned_cells": 0,
+      "valid_L1_unassigned_cells": 0,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 0,
+      "land_in_old_candidate_union_cells": 0,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-046.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-046.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-046.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-046.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-046.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        }
+      ]
+    },
+    {
+      "block": 47,
+      "land_supported_unassigned_cells": 0,
+      "inland_water_supported_unassigned_cells": 0,
+      "valid_L1_unassigned_cells": 0,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 0,
+      "land_in_old_candidate_union_cells": 0,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-047.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-047.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-047.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-047.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-047.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        }
+      ]
+    },
+    {
+      "block": 48,
+      "land_supported_unassigned_cells": 0,
+      "inland_water_supported_unassigned_cells": 0,
+      "valid_L1_unassigned_cells": 0,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 0,
+      "land_in_old_candidate_union_cells": 0,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-048.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-048.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-048.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-048.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-048.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        }
+      ]
+    },
+    {
+      "block": 49,
+      "land_supported_unassigned_cells": 43998,
+      "inland_water_supported_unassigned_cells": 0,
+      "valid_L1_unassigned_cells": 43998,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 43998,
+      "land_in_old_candidate_union_cells": 0,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-049.json.gz",
+          "sha256": "e0140a939c90dca45aa69a716151e0648255767ecbf205b9bf907bc92a157b34",
+          "decoded_sha256": "ec9b529fedf55f9d61f603f3b44e639d850844e87768aa8d6889a2d5209d89a0",
+          "rows": 333,
+          "intervals": 346
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-049.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-049.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-049.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-049.json.gz",
+          "sha256": "e0140a939c90dca45aa69a716151e0648255767ecbf205b9bf907bc92a157b34",
+          "decoded_sha256": "ec9b529fedf55f9d61f603f3b44e639d850844e87768aa8d6889a2d5209d89a0",
+          "rows": 333,
+          "intervals": 346
+        }
+      ]
+    },
+    {
+      "block": 50,
+      "land_supported_unassigned_cells": 0,
+      "inland_water_supported_unassigned_cells": 0,
+      "valid_L1_unassigned_cells": 0,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 0,
+      "land_in_old_candidate_union_cells": 0,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-050.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-050.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-050.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-050.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-050.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        }
+      ]
+    },
+    {
+      "block": 51,
+      "land_supported_unassigned_cells": 0,
+      "inland_water_supported_unassigned_cells": 0,
+      "valid_L1_unassigned_cells": 0,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 0,
+      "land_in_old_candidate_union_cells": 0,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-051.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-051.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-051.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-051.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-051.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        }
+      ]
+    },
+    {
+      "block": 52,
+      "land_supported_unassigned_cells": 0,
+      "inland_water_supported_unassigned_cells": 0,
+      "valid_L1_unassigned_cells": 0,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 0,
+      "land_in_old_candidate_union_cells": 0,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-052.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-052.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-052.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-052.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-052.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        }
+      ]
+    },
+    {
+      "block": 53,
+      "land_supported_unassigned_cells": 0,
+      "inland_water_supported_unassigned_cells": 0,
+      "valid_L1_unassigned_cells": 0,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 0,
+      "land_in_old_candidate_union_cells": 0,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-053.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-053.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-053.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-053.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-053.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        }
+      ]
+    },
+    {
+      "block": 54,
+      "land_supported_unassigned_cells": 0,
+      "inland_water_supported_unassigned_cells": 0,
+      "valid_L1_unassigned_cells": 0,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 0,
+      "land_in_old_candidate_union_cells": 0,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-054.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-054.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-054.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-054.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-054.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        }
+      ]
+    },
+    {
+      "block": 55,
+      "land_supported_unassigned_cells": 0,
+      "inland_water_supported_unassigned_cells": 0,
+      "valid_L1_unassigned_cells": 0,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 0,
+      "land_in_old_candidate_union_cells": 0,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-055.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-055.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-055.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-055.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-055.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        }
+      ]
+    },
+    {
+      "block": 56,
+      "land_supported_unassigned_cells": 0,
+      "inland_water_supported_unassigned_cells": 0,
+      "valid_L1_unassigned_cells": 0,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 0,
+      "land_in_old_candidate_union_cells": 0,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-056.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-056.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-056.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-056.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-056.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        }
+      ]
+    },
+    {
+      "block": 57,
+      "land_supported_unassigned_cells": 0,
+      "inland_water_supported_unassigned_cells": 0,
+      "valid_L1_unassigned_cells": 0,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 0,
+      "land_in_old_candidate_union_cells": 0,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-057.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-057.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-057.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-057.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-057.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        }
+      ]
+    },
+    {
+      "block": 58,
+      "land_supported_unassigned_cells": 0,
+      "inland_water_supported_unassigned_cells": 0,
+      "valid_L1_unassigned_cells": 0,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 0,
+      "land_in_old_candidate_union_cells": 0,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-058.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-058.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-058.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-058.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-058.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        }
+      ]
+    },
+    {
+      "block": 59,
+      "land_supported_unassigned_cells": 0,
+      "inland_water_supported_unassigned_cells": 0,
+      "valid_L1_unassigned_cells": 0,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 0,
+      "land_in_old_candidate_union_cells": 0,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-059.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-059.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-059.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-059.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-059.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        }
+      ]
+    },
+    {
+      "block": 60,
+      "land_supported_unassigned_cells": 0,
+      "inland_water_supported_unassigned_cells": 0,
+      "valid_L1_unassigned_cells": 0,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 0,
+      "land_in_old_candidate_union_cells": 0,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-060.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-060.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-060.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-060.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-060.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        }
+      ]
+    },
+    {
+      "block": 61,
+      "land_supported_unassigned_cells": 0,
+      "inland_water_supported_unassigned_cells": 0,
+      "valid_L1_unassigned_cells": 0,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 0,
+      "land_in_old_candidate_union_cells": 0,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-061.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-061.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-061.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-061.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-061.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        }
+      ]
+    },
+    {
+      "block": 62,
+      "land_supported_unassigned_cells": 0,
+      "inland_water_supported_unassigned_cells": 0,
+      "valid_L1_unassigned_cells": 0,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 0,
+      "land_in_old_candidate_union_cells": 0,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-062.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-062.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-062.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-062.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-062.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        }
+      ]
+    },
+    {
+      "block": 63,
+      "land_supported_unassigned_cells": 0,
+      "inland_water_supported_unassigned_cells": 0,
+      "valid_L1_unassigned_cells": 0,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 0,
+      "land_in_old_candidate_union_cells": 0,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-063.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-063.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-063.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-063.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-063.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        }
+      ]
+    },
+    {
+      "block": 64,
+      "land_supported_unassigned_cells": 0,
+      "inland_water_supported_unassigned_cells": 0,
+      "valid_L1_unassigned_cells": 0,
+      "source_unknown_envelope_unassigned_cells": 0,
+      "source_unknown_envelope_outside_land_water_cells": 0,
+      "source_unknown_envelope_overlapping_land_cells": 0,
+      "hierarchy_disagreement_cells": 0,
+      "land_water_overlap_cells": 0,
+      "land_not_in_old_candidate_union_cells": 0,
+      "land_in_old_candidate_union_cells": 0,
+      "files": [
+        {
+          "kind": "physical-support",
+          "path": "physical-support-block-064.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "inland-water-support-block-064.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-envelope",
+          "path": "physical-unknown-envelope-block-064.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-unknown-residual",
+          "path": "physical-unknown-residual-block-064.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        },
+        {
+          "kind": "physical-land-new-discovery",
+          "path": "physical-land-new-discovery-block-064.json.gz",
+          "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+          "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "rows": 0,
+          "intervals": 0
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "land_supported_unassigned_cells": 121762888,
+    "inland_water_supported_unassigned_cells": 61559264,
+    "valid_L1_unassigned_cells": 183322152,
+    "source_unknown_envelope_unassigned_cells": 948,
+    "source_unknown_envelope_outside_land_water_cells": 938,
+    "source_unknown_envelope_overlapping_land_cells": 10,
+    "hierarchy_disagreement_cells": 0,
+    "land_water_overlap_cells": 0,
+    "land_not_in_old_candidate_union_cells": 74604899,
+    "land_in_old_candidate_union_cells": 47157989
+  },
+  "elapsed_seconds": 82.31669616101135,
+  "max_rss_kib": 212504,
+  "scope": "Complete native owner0 domain joined to all retained valid source-relative GSHHG levels1\u20134 and supported complete container chains. River water does not veto territorial-source eligibility; inland water is separate physical context.",
+  "limits": [
+    "Antarctica excluded by project policy:673 source levels5/6 records, no territorial ATA product. Exclusion is not a zero-missing-cell claim.",
+    "One invalid GSHHG L1 source2380 contributes an explicit conservative rectangular unknown envelope.",
+    "GSHHG is retained source-relative physical evidence with heterogeneous observation times, not contemporary perfect ground truth.",
+    "Comparison to old candidate union is contextual only and does not define discovery or workload."
+  ]
+}

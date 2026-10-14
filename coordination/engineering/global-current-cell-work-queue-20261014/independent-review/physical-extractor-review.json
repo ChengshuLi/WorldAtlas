@@ -1,0 +1,29 @@
+{
+  "relocated_executor": "pass",
+  "cases": [
+    {
+      "package_id": "physical-southern-l1-islands",
+      "extracted_scope_cells": 43998,
+      "source_records": 0,
+      "collision_rejected": true
+    },
+    {
+      "package_id": "physical-invalid-source-2380",
+      "extracted_scope_cells": 948,
+      "source_records": 1,
+      "collision_rejected": true
+    },
+    {
+      "package_id": "physical-antarctic-policy-coverage",
+      "extracted_scope_cells": 0,
+      "source_records": 673,
+      "collision_rejected": true
+    }
+  ],
+  "corrupt_source_guard": "pass",
+  "no_completion_manifest_on_failure": "pass",
+  "independent_rectangle_partition": "14 disjoint complete-world rectangles; counts sum 100304914",
+  "boundary_cell_checks": "pass",
+  "script_sha256": "5bc804573e7ad518a93de74e2251a4a5dc506eda8acd8061eb96d2311f66457f",
+  "fixture": "/workspace/scratch/127991fc8b8e/global-census-review-20261014/physical-selector-3mn6ai5t"
+}
