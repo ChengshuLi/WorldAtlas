@@ -68,7 +68,7 @@ def prefetch_declared_inputs(repo, baseline, candidate, timeout=120):
 
 MAX_BYTES = 32 * 1024 * 1024
 TRUSTED_PATHS = ['scripts/run-geographic-check.py', 'scripts/check-geographic-regression.py',
-                 'scripts/check-effective-geographic-regression.mjs', 'scripts/selected-checkpoint-native.mjs', 'src/ownership-codec.js',
+                 'scripts/check-effective-geographic-regression.mjs', 'scripts/selected-checkpoint-native.mjs', 'scripts/visible-gap-eligibility.mjs', 'src/native-grid.js', 'src/ownership-codec.js',
                  'scripts/evidence/immutable.py', 'scripts/evidence/geometry.py',
                  'scripts/ellipsoidal_area.py', 'requirements.txt',
                  'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs',
