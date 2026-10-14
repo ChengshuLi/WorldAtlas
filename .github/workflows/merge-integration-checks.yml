@@ -229,7 +229,7 @@ jobs:
       # Run trusted base code, not scripts modified by the pull request.
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
-          ref: ${{ github.event.pull_request.base.sha }}
+          ref: ${{ needs.profile.outputs.geography_baseline }}
           path: trusted
           persist-credentials: false
           sparse-checkout: |
@@ -264,7 +264,7 @@ jobs:
       - name: Check exact head paths with trusted code and authenticated issue ownership
         env:
           LANE_BRANCH: ${{ github.head_ref }}
-          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          BASE_SHA: ${{ needs.profile.outputs.geography_baseline }}
           OWNED_PATHS: ${{ needs.profile.outputs.owned_paths }}
           PR_BODY_JSON: ${{ needs.profile.outputs.pr_body }}
         working-directory: candidate
