@@ -177,25 +177,7 @@ export function workspaceManager(repo, {limits = policy, freeBytes} = {}) {
     if (usage.freeBytes < limits.minimumFree) throw Error('Local storage budget breached; stop new generation/installations and inspect report');
     return usage;
   };
-  const ownedEntry = directory => state().entries.find(entry => entry.path === directory && entry.slot === 'work');
-  return {report, check, allocate, release, ownedEntry};
-}
-
-// Called only after the queue verifies its accepted receipt against actual GitHub
-// merged state. Local cleanup is separate from successful remote integration.
-export function cleanupCompletedWorkspace(repo, expectedHead) {
-  try {
-    const manager = workspaceManager(repo);
-    const current = fs.realpathSync(execFileSync('git', ['-C', repo, 'rev-parse', '--show-toplevel'], {encoding: 'utf8'}).trim());
-    const entry = manager.ownedEntry(current);
-    if (!entry) return {status: 'unmanaged', reason: 'No owned managed author slot; legacy checkout retained'};
-    const head = execFileSync('git', ['-C', repo, 'rev-parse', 'HEAD'], {encoding: 'utf8'}).trim();
-    const branch = execFileSync('git', ['-C', repo, 'symbolic-ref', '--short', 'HEAD'], {encoding: 'utf8'}).trim();
-    if (head !== expectedHead || branch !== entry.branch) return {status: 'retained', reason: 'Checkout advanced or changed branch since reviewed merge'};
-    return {status: 'released', ...manager.release({worker: entry.worker, slot: entry.slot, token: entry.token})};
-  } catch (error) {
-    return {status: 'pending', reason: error.message};
-  }
+  return {report, check, allocate, release};
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {

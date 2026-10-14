@@ -12,10 +12,10 @@ test('engineering preserves research and other engineering progress',()=>{valida
 test('partial and final PRs link one issue without needing a document tracker ID',()=>{
  assert.deepEqual(validateIssuePRBody('Refs #12\n\nImplement the first part.'),{github_issue:12,issue_action:'reference'});
  assert.deepEqual(validateIssuePRBody('Closes #12\n\nAll acceptance criteria verified.'),{github_issue:12,issue_action:'close'});
- assert.deepEqual(validateIssuePRBody('TODO: ENG-08\nCloses #12'),{todo_id:'ENG-08',github_issue:12,issue_action:'close'});
+ for(const legacy of ['TODO: ENG-08','TODO: obsolete/id','TODO: ENG-01\nTODO: CAM:other:2'])assert.deepEqual(validateIssuePRBody(legacy+'\nCloses #12'),{github_issue:12,issue_action:'close'});
 });
 test('PR policy rejects ambiguous issue links and accidental additional closures',()=>{
- for(const body of ['No issue','Refs #0','Refs #12\nCloses #13','Closes #12 and #13','Closes #12\nFixes #13','Fixes #12','Refs #12\nRefs #13','Refs #12\nThis fixes #13 too.','Closes #12\nThis also resolves #13.','TODO: ENG-01\nTODO: ENG-02\nCloses #12'])assert.throws(()=>validateIssuePRBody(body));
+ for(const body of ['No issue','Refs #0','Refs #12\nCloses #13','Closes #12 and #13','Closes #12\nFixes #13','Fixes #12','Refs #12\nRefs #13','Refs #12\nThis fixes #13 too.','Closes #12\nThis also resolves #13.'])assert.throws(()=>validateIssuePRBody(body));
 });
 test('GitHub issue type agrees with its lane and references an open issue',()=>{
  validateIssueMetadata('engineering/grid',{state:'open',labels:[{name:'type:engineering'},{name:'kind:umbrella'}]});

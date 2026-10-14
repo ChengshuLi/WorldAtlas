@@ -43,10 +43,7 @@ export function validateIssuePRBody(body){
  if(links.length!==1||!/^(Refs|Closes) #[1-9]\d*$/.test(links[0]))throw Error('One issue per PR: use exactly one Refs #<issue-number> for partial work or Closes #<issue-number> for final completion');
  const automaticClosures=[...body.matchAll(/\b(?:close[sd]?|fix(?:e[sd])?|resolve[sd]?)\s+#[1-9]\d*/gi)];
  if(automaticClosures.length!==(links[0].startsWith('Closes')?1:0))throw Error('Additional automatic issue closures are not allowed anywhere in the PR body');
- // Optional historical IDs support the transition from the archived document trackers.
- const todos=[...body.matchAll(/^TODO:\s*(\S+)\s*$/gm)];
- if(todos.length>1)throw Error('Only one legacy TODO ID may be supplied');
- return {...(todos.length?{todo_id:todos[0][1]}:{}),github_issue:Number(links[0].split('#')[1]),issue_action:links[0].startsWith('Closes')?'close':'reference'};
+ return {github_issue:Number(links[0].split('#')[1]),issue_action:links[0].startsWith('Closes')?'close':'reference'};
 }
 export function validateIssueMetadata(branch,issue){
  const {lane}=laneForBranch(branch),expected={engineering:'type:engineering',research:'type:history-research',geography:'type:geography'}[lane];
@@ -68,7 +65,6 @@ export function checkGitScope({branch,base,head='HEAD',run=execFileSync,prBody,o
   if(entries.some(entry=>entry.startsWith('120000 ')||entry.startsWith('160000 ')))throw Error('Geography evidence must use ordinary files, not symlinks or submodules');
  }
  const issue=prBody===undefined?{}:validateIssuePRBody(prBody);
- if(issue.todo_id&&!(lane.lane==='engineering'?/^ENG-\d+(?:-\d+)*$/.test(issue.todo_id):new RegExp('^CAM:'+lane.id+':\\d+$').test(issue.todo_id)))throw Error('PR TODO ID must identify the single issue in its engineering/research lane');
  return {...lane,...issue,base:baseSHA,merge_base:mergeBaseSHA,head:headSHA,changed_files:files.length};
 }
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){

@@ -32,7 +32,7 @@ function fixture(t, mode = 'success') {
   fs.symlinkSync('file.txt', path.join(source, 'link'));
   git(['add', '.']); git(['commit', '--quiet', '-m', 'fixture']);
   const sha = git(['rev-parse', 'HEAD']), tree = git(['rev-parse', 'HEAD^{tree}']);
-  const count = path.join(directory, 'attempts'), descendant = path.join(directory, 'descendant');
+  const count = path.join(directory, 'fetches'), descendant = path.join(directory, 'descendant');
   const sentinel = path.join(directory, 'smudge-ran');
   const config = path.join(directory, 'hostile.gitconfig');
   fs.writeFileSync(config, `[filter "malicious"]\n\tsmudge = touch ${sentinel}\n\trequired = true\n`);
@@ -52,37 +52,37 @@ if isfetch:
  try:n=int(open(count).read())+1
  except FileNotFoundError:n=1
  with open(count,'w') as out:out.write(str(n))
- if mode in ('transient','persistent') and (mode=='persistent' or n==1):
+ if mode=='failure':
   sys.stderr.write('HTTP AUTHORIZATION ${token} ${base64Token}\\n')
   sys.exit(128)
- if mode in ('hang-once','hang-always') and (mode=='hang-always' or n==1):
+ if mode=='hang':
   childcode="import os,signal,time;signal.signal(signal.SIGTERM,signal.SIG_IGN);open("+repr(pidfile)+",'w').write(str(os.getpid()));time.sleep(120)"
   child=subprocess.Popen([sys.executable,'-c',childcode])
   signal.signal(signal.SIGTERM,signal.SIG_IGN)
   sys.stderr.write('Receiving objects:  50% (1/2), ${token} ${base64Token}\\r');sys.stderr.flush()
   time.sleep(120)
- if mode=='hang-once' and n==2:
-  pid=int(open(pidfile).read())
-  result=subprocess.run(['/bin/ps','-p',str(pid),'-o','stat='],stdout=subprocess.PIPE,universal_newlines=True)
-  if result.stdout.strip() and not result.stdout.strip().startswith('Z'):
-   sys.exit(99)
-  with open(trace,'a') as out:out.write(json.dumps({'cleanup_before_retry':True})+'\\n')
+ if mode=='progressing':
+  for percent in (25,50,75):
+   sys.stderr.write('Receiving objects: %d%% (1/2), ${token} ${base64Token}\\r' % percent);sys.stderr.flush()
+   time.sleep(1)
  if mode=='foreign-workspace':open(os.path.join(workspace,'foreign'),'w').write('preserve me')
  if mode=='wrong-sha':args[-1]=${JSON.stringify(sha)}
  args[args.index('origin')]='file://${source}'
+if ischeckout and mode=='credential-leak':
+ subprocess.check_call([${JSON.stringify(realGit)},'config','--local','http.https://github.com/.extraheader','untrusted-header'])
 os.execv(${JSON.stringify(realGit)},[${JSON.stringify(realGit)},*args])
 `, {mode: 0o755});
   const env = {...fixtureEnv, PATH: shim + path.delimiter + process.env.PATH,
     WORLDATLAS_CHECKOUT_TOKEN: token, GH_TOKEN: 'unrelated-secret',
     GIT_CONFIG_GLOBAL: config, GIT_CONFIG_COUNT: '1', GIT_CONFIG_KEY_0: 'filter.malicious.smudge', GIT_CONFIG_VALUE_0: `touch ${sentinel}`};
   const args = (extra = []) => [helper, '--repository', 'ChengshuLi/WorldAtlas', '--sha', sha, '--tree', tree,
-    '--workspace', workspace, '--fetch-timeout-seconds', '2', '--total-timeout-seconds', '12', ...extra];
+    '--workspace', workspace, '--total-timeout-seconds', '12', ...extra];
   const run = (extra = []) => spawnSync('python3', args(extra), {encoding: 'utf8', env, timeout: 16000});
   const rows = () => fs.existsSync(trace) ? fs.readFileSync(trace, 'utf8').trim().split('\n').map(JSON.parse) : [];
-  const attempts = () => fs.existsSync(count) ? Number(fs.readFileSync(count, 'utf8')) : 0;
+  const fetches = () => fs.existsSync(count) ? Number(fs.readFileSync(count, 'utf8')) : 0;
   const events = result => result.stdout.trim().split('\n').filter(Boolean).map(JSON.parse);
   const clean = () => assert.deepEqual(fs.readdirSync(directory).filter(name => name.startsWith('.worldatlas-ci-checkout-')), []);
-  return {directory, workspace, source, sha, tree, run, args, env, rows, attempts, events, clean, descendant, sentinel};
+  return {directory, workspace, source, sha, tree, run, args, env, rows, fetches, events, clean, descendant, sentinel};
 }
 function noSecrets(result) {
   assert.doesNotMatch(result.stdout + result.stderr, new RegExp(token + '|' + base64Token + '|unrelated-secret'));
@@ -112,29 +112,38 @@ test('real Git checkout preserves exact tree, modes, symlinks and detached ident
   f.clean(); noSecrets(result);
 });
 
-test('transient fetch retries once in a fresh repository and publishes only the complete second attempt', t => {
-  const f = fixture(t, 'transient'), result = f.run();
+test('progressing fetch beyond the previous scaled cutoff completes once within the total deadline', t => {
+  const f = fixture(t, 'progressing'), result = f.run();
   assert.equal(result.status, 0, result.stdout + result.stderr);
-  assert.equal(f.attempts(), 2); assert.equal(f.events(result).filter(row => row.event === 'acquisition-retry').length, 1);
-  assert.equal(f.events(result).at(-1).attempts, 2); f.clean(); noSecrets(result);
+  assert.equal(f.fetches(), 1); assert.equal(f.rows().filter(row => row.args?.includes('init')).length, 1);
+  const events = f.events(result), fetch = events.find(row => row.event === 'phase-complete' && row.phase === 'fetch');
+  assert.ok(fetch.phase_seconds >= 3, 'actual fetch exceeds the former 2-second fixture cutoff');
+  assert.equal(fetch.status, 'success');
+  assert.ok(events.some(row => row.event === 'git-progress' && row.phase === 'fetch'
+    && row.activity === 'Receiving objects' && [25, 50, 75].includes(row.percent)));
+  assert.ok(events.every(row => !Object.hasOwn(row, 'attempt') && !Object.hasOwn(row, 'attempts')));
+  assert.ok(!events.some(row => row.event === 'acquisition-retry'));
+  f.clean(); noSecrets(result);
 });
 
-test('persistent failure stops at two fetches without publishing or leaking Git stderr', t => {
-  const f = fixture(t, 'persistent'), result = f.run();
-  assert.equal(result.status, 1); assert.equal(f.attempts(), 2);
+test('one command failure stops after one fetch without publishing or leaking Git stderr', t => {
+  const f = fixture(t, 'failure'), result = f.run();
+  assert.equal(result.status, 1); assert.equal(f.fetches(), 1);
+  assert.equal(f.rows().filter(row => row.args?.includes('init')).length, 1);
+  assert.match(result.stdout, /command-failed/);
   assert.deepEqual(fs.readdirSync(f.workspace), []); f.clean(); noSecrets(result);
 });
 
-test('an actual TERM-resistant Git child and grandchild are dead before the next fetch', t => {
-  const f = fixture(t, 'hang-once'), result = f.run(['--fetch-timeout-seconds', '1']);
-  assert.equal(result.status, 0, result.stdout + result.stderr);
-  assert.equal(f.attempts(), 2); assert.ok(f.rows().some(row => row.cleanup_before_retry));
-  assert.ok(f.events(result).some(row => row.event === 'git-progress' && row.percent === 50));
-  noLiveDescendant(f.descendant); f.clean(); noSecrets(result);
+test('overall deadline stops actual TERM-resistant Git child and grandchild with terminal cleanup', t => {
+  const f = fixture(t, 'hang'), start = Date.now(), result = f.run(['--total-timeout-seconds', '7']);
+  assert.equal(result.status, 1, result.stdout + result.stderr);
+  assert.equal(f.fetches(), 1); assert.match(result.stdout, /acquisition-deadline/);
+  assert.ok(Date.now() - start < 8500, 'cleanup stays inside the overall deadline');
+  noLiveDescendant(f.descendant); assert.deepEqual(fs.readdirSync(f.workspace), []); f.clean(); noSecrets(result);
 });
 
-test('SIGTERM cancels an actual hanging process group, cleans it and never retries', async t => {
-  const f = fixture(t, 'hang-always');
+test('SIGTERM cancels an actual hanging process group, cleans it and performs no second fetch', async t => {
+  const f = fixture(t, 'hang');
   const child = spawn('python3', f.args(), {env: f.env});
   let stdout = '', stderr = '';
   child.stdout.on('data', value => { stdout += value; }); child.stderr.on('data', value => { stderr += value; });
@@ -144,12 +153,12 @@ test('SIGTERM cancels an actual hanging process group, cleans it and never retri
   assert.ok(fs.existsSync(f.descendant));
   child.kill('SIGTERM');
   const result = await completed;
-  assert.equal(result.status, 130, result.stdout + result.stderr); assert.equal(f.attempts(), 1);
+  assert.equal(result.status, 130, result.stdout + result.stderr); assert.equal(f.fetches(), 1);
   noLiveDescendant(f.descendant); assert.deepEqual(fs.readdirSync(f.workspace), []); f.clean(); noSecrets(result);
 });
 
-test('unverifiable process cleanup preserves private staging, refuses retry and preserves the workspace', t => {
-  const f = fixture(t, 'hang-always');
+test('unverifiable process cleanup preserves private staging, performs no second fetch and preserves the workspace', t => {
+  const f = fixture(t, 'hang');
   const driver = path.join(f.directory, 'unavailable-inspection.py');
   fs.writeFileSync(driver, `import importlib.util,os,sys
 spec=importlib.util.spec_from_file_location('acquisition',${JSON.stringify(helper)})
@@ -161,10 +170,10 @@ def unavailable(pgid):
 module.live_group=unavailable
 sys.exit(module.main())
 `);
-  const result = spawnSync('python3', [driver, ...f.args(['--fetch-timeout-seconds', '1']).slice(1)],
+  const result = spawnSync('python3', [driver, ...f.args(['--total-timeout-seconds', '7']).slice(1)],
     {encoding: 'utf8', env: f.env, timeout: 16000});
   assert.equal(result.status, 1, result.stdout + result.stderr);
-  assert.equal(f.attempts(), 1); assert.match(result.stdout, /process-cleanup-failed/);
+  assert.equal(f.fetches(), 1); assert.match(result.stdout, /process-cleanup-failed/);
   const retained = f.events(result).find(row => row.event === 'staging-preserved');
   assert.ok(retained); assert.ok(fs.existsSync(path.join(retained.owned_directory, '.git')));
   assert.deepEqual(fs.readdirSync(f.workspace), []);
@@ -173,19 +182,19 @@ sys.exit(module.main())
   noLiveDescendant(f.descendant); noSecrets(result);
 });
 
-for (const mismatch of ['sha', 'tree']) test(`wrong authenticated ${mismatch} refuses before checkout and without retry`, t => {
+for (const mismatch of ['sha', 'tree']) test(`wrong authenticated ${mismatch} refuses before checkout and with one fetch`, t => {
   const f = fixture(t, mismatch === 'sha' ? 'wrong-sha' : 'success');
   const result = f.run(['--' + mismatch, '0'.repeat(40)]);
-  assert.equal(result.status, 1); assert.equal(f.attempts(), 1);
+  assert.equal(result.status, 1); assert.equal(f.fetches(), 1);
   assert.match(result.stdout, /git-identity-mismatch/); assert.ok(!f.rows().some(row => row.checkout));
   assert.deepEqual(fs.readdirSync(f.workspace), []); f.clean(); noSecrets(result);
 });
 
 test('initial nonempty and symlink destinations preserve foreign files before any Git command', t => {
   const f = fixture(t); fs.writeFileSync(path.join(f.workspace, 'foreign'), 'preserved');
-  assert.equal(f.run().status, 1); assert.equal(f.attempts(), 0);
+  assert.equal(f.run().status, 1); assert.equal(f.fetches(), 0);
   const link = path.join(f.directory, 'alias'); fs.symlinkSync(f.workspace, link);
-  assert.equal(f.run(['--workspace', link]).status, 1); assert.equal(f.attempts(), 0);
+  assert.equal(f.run(['--workspace', link]).status, 1); assert.equal(f.fetches(), 0);
   assert.equal(fs.readFileSync(path.join(link, 'foreign'), 'utf8'), 'preserved');
 });
 
@@ -200,26 +209,38 @@ test('invalid and already-spent bootstrap budgets refuse before filesystem mutat
   const f = fixture(t);
   for (const args of [['--elapsed-seconds', 'nan'], ['--elapsed-seconds', '-1'], ['--elapsed-seconds', '12'],
     ['--total-timeout-seconds', 'inf'], ['--total-timeout-seconds', '-1'], ['--total-timeout-seconds', '1801'],
-    ['--fetch-timeout-seconds', '0'], ['--fetch-timeout-seconds', '13'], ['--fetch-timeout-seconds', 'nan'],
-    ['--elapsed-seconds', 'inf'], ['--max-attempts', '3']]) {
+    ['--elapsed-seconds', 'inf'], ['--total-timeout-seconds', '4']]) {
     assert.equal(f.run(args).status, 1, args.join(' '));
   }
-  assert.equal(f.attempts(), 0); assert.deepEqual(fs.readdirSync(f.workspace), []); f.clean();
+  assert.equal(f.fetches(), 0); assert.deepEqual(fs.readdirSync(f.workspace), []); f.clean();
 });
 
 test('trusted finite budgets above the measured default are configurable without waiting for their deadline', t => {
-  const f = fixture(t), result = f.run(['--total-timeout-seconds', '600', '--fetch-timeout-seconds', '500']);
+  const f = fixture(t), result = f.run(['--total-timeout-seconds', '600']);
   assert.equal(result.status, 0, result.stdout + result.stderr);
   assert.equal(f.events(result).at(-1).event, 'checkout-complete');
   assert.ok(f.events(result).at(-1).remaining_seconds > 580);
   f.clean(); noSecrets(result);
 });
 
-test('bootstrap elapsed time reduces the single total budget, including cleanup and retry admission', t => {
-  const f = fixture(t, 'hang-always');
+test('bootstrap elapsed time reduces the single total budget, including terminal cleanup', t => {
+  const f = fixture(t, 'hang');
   const start = Date.now();
-  const result = f.run(['--total-timeout-seconds', '10', '--elapsed-seconds', '4', '--fetch-timeout-seconds', '5']);
-  assert.equal(result.status, 1); assert.equal(f.attempts(), 1);
+  const result = f.run(['--total-timeout-seconds', '10', '--elapsed-seconds', '4']);
+  assert.equal(result.status, 1); assert.equal(f.fetches(), 1);
   assert.ok(Date.now() - start < 6500, 'spent bootstrap time must not be granted again');
   noLiveDescendant(f.descendant); assert.deepEqual(fs.readdirSync(f.workspace), []); f.clean(); noSecrets(result);
+});
+
+for (const option of ['--fetch-timeout-seconds', '--max-attempts']) test('removed '+option+' refuses before mutation', t => {
+  const f = fixture(t), result = f.run([option, '2']);
+  assert.equal(result.status, 2); assert.match(result.stderr, /unrecognized arguments/);
+  assert.equal(f.fetches(), 0); assert.deepEqual(fs.readdirSync(f.workspace), []); f.clean(); noSecrets(result);
+});
+
+test('credential audit refuses contaminated local configuration without promotion', t => {
+  const f = fixture(t, 'credential-leak'), result = f.run();
+  assert.equal(result.status, 1); assert.equal(f.fetches(), 1);
+  assert.match(result.stdout, /checkout-verification-failed/);
+  assert.deepEqual(fs.readdirSync(f.workspace), []); f.clean(); noSecrets(result);
 });
