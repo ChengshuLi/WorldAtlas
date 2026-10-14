@@ -9,7 +9,7 @@ import {readGeographyReuseTree, reusePRGeography} from './reuse-pr-geography.mjs
 import {prepareGeographyProof} from './geographic-report-artifact.mjs';
 import {METADATA_PROGRAMS, matchMetadataRegressionProgram} from './metadata-regression-program.mjs';
 import {originalFullRegressionJobs} from './regression-proof-jobs.mjs';
-import {inspectUnchangedSelectedGeography} from './check-unchanged-selected-geography.mjs';
+import {inspectExecutingSelectedGeography} from './check-unchanged-selected-geography.mjs';
 import {createRoutingMetadataAcquisition} from './geography-routing-metadata.mjs';
 const need = (value, reason) => {if (!value) throw Error(reason);};
 
@@ -72,7 +72,7 @@ export async function loadMetadataRegressionProof({api, repo, number, head, base
 // planning and final validation. Cache only that immutable collector result;
 // PR/issue/run/job/artifact authority and program admission are always reread.
 export function createMetadataRegressionProofLoader({token, directory = process.cwd(),
-  inspect = inspectUnchangedSelectedGeography, load = loadMetadataRegressionProof,
+  inspect = inspectExecutingSelectedGeography, load = loadMetadataRegressionProof,
   acquire = createRoutingMetadataAcquisition}) {
   let saved;
   const immutableInspect = async (options, authority) => {
