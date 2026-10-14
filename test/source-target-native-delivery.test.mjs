@@ -125,7 +125,7 @@ test('trusted reader, source constructor and profile execute without installed n
     entries.forEach(copy);fs.writeFileSync(path.join(cold,'package.json'),'{"type":"module"}');
     const script=`import assert from 'node:assert/strict';
       for(const entry of ${JSON.stringify(entries)})await import('./'+entry);
-      const {deriveSourceTargetNativeDelta,nativeOnlyComponent}=await import('./src/native-runtime.js');
+      const {deriveSourceTargetNativeDelta,nativeOnlyComponent}=await import('./src/native-grid.js');
       const {nativeRowLatitudes}=await import('./src/native-grid.js');
       const {valueSha}=await import('./coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs');
       const {repairVisibilityWitnesses}=await import('./scripts/check-effective-geographic-regression.mjs');

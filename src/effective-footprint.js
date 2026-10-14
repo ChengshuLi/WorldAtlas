@@ -1,5 +1,6 @@
-import {nativeRuntimeIndex, compileNativeRuntime, polygonParts, nativeOnlyComponent as validateNativeOnlyComponent} from './native-runtime.js';
-export {polygonParts,deriveSourceTargetNativeDelta} from './native-runtime.js';
+import {compileNativeRuntime} from './native-runtime.js';
+import {nativeRuntimeIndex,polygonParts,nativeOnlyComponent as validateNativeOnlyComponent} from './native-grid.js';
+export {polygonParts,deriveSourceTargetNativeDelta} from './native-grid.js';
 import {compileNativeOwnership} from '../scripts/native-ownership/compile-native-ownership.mjs';
 import {sha256} from '@noble/hashes/sha2.js';
 
