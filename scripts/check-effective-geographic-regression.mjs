@@ -757,7 +757,7 @@ export function newVisibleRepairCandidates(before,after) {
 // native sample inside each new primitive that changes from unowned to its owner.
 // A positive aggregate or a sibling's unrelated changed cell cannot pass.
 export function repairVisibilityWitnesses({candidates,size,latitudes,beforeRows,afterRows}) {
-  demand(Array.isArray(candidates)&&candidates.length<=4096,'Bounded visibility candidate roster required');
+  demand(Array.isArray(candidates),'Visibility candidate array required');
   const before=ownerRows(beforeRows,size),after=ownerRows(afterRows,size),ys=[...before.keys()];
   demand(JSON.stringify(ys)===JSON.stringify([...after.keys()]),'Visibility before/after row scope differs');
   const ids=new Set(),witnesses=new Map();

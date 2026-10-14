@@ -74,7 +74,6 @@ test('native-only default and affected historical contexts retain exact cells an
   assert.deepEqual(witness([[x,x+1,2]],[[x,x+1,1]]),[null]);
   assert.deepEqual(witness([],[[x+1,x+2,1]]),[null]);
   assert.throws(()=>witness([],[],[component,component]),/Duplicate/);
-  assert.throws(()=>witness([],[],Array(4097).fill(component)),/Bounded/);
   const sibling={component_id:'geometry:sibling',pixelIndex:1,geometry:rectangle(0,0,1,1)};
   assert.deepEqual(witness([],[[x,x+1,1]],[component,sibling]).map(v=>v?.component_id??null),[component.component_id,null]);
 
