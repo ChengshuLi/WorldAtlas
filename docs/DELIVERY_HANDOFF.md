@@ -108,10 +108,13 @@ No proposed input is called accepted merely because a hash matches.
    It now uses `prepareCurrentSelectedAdditive`, the same current-product
    consumer as ordinary packaging. Its six current bodies are the sidecar,
    envelope, base manifest, owner roster, ledger and patch. Original-job/output
-   custody and current source/runtime admission remain separate; the original
+   custody and current source/Node runtime admission remain separate; the original
    emitted catalog joins to every actual geometry part before current owner,
    parent, target-geometry and effective-release checks. Historical qualification
    custody remains preparation/regression evidence and is not replayed by assembly.
+   Python runs the trusted standard-library bootstrap and authenticated ZIP
+   extractor under `-I -S -B`; assembly does not load or compare unused installed
+   GIS packages or replay their original inventory validation.
    The existing emitted-output smoke still checks occupied-base conservation,
    picker and sampler behavior. A changed invariant package consumer requires a
    new full-output capture before a later data-only assembly can reuse it.

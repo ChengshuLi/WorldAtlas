@@ -272,6 +272,7 @@ export function createPackageOutputManifest(root = process.cwd()) {
     'Original pre-build source snapshot differs');
   const output = inventoryPackageOutput(root);
   const {installed_runtime,...manifestSource}=source;
+  validateInstalledPackageIdentity(installed_runtime);
   const manifest = {version: 1, kind: 'original-cloudflare-package-output', source:manifestSource,
     runtime: {installed: installed_runtime, node: process.version, versions: process.versions, platform: process.platform, arch: process.arch,
       dependencies: streamedPackageFile(root, 'package-lock.json').sha256,
@@ -302,7 +303,14 @@ export function validatePackageOutputManifest(value) {
     hash(value.runtime.installed?.node?.sha256) && hash(value.runtime.installed?.dependencies?.sha256) &&
     value.configuration && typeof value.configuration === 'object' && !Array.isArray(value.configuration) &&
     Object.values(value.configuration).every(item => typeof item === 'string'), 'Missing original runtime/configuration');
-  if(value.runtime.installed?.version===2)validateInstalledPackageIdentity(value.runtime.installed);
+  // Read-only output custody consumes Node identity, not the original scientific
+  // runtime. Keep Python evidence literal here; minting and actual installed
+  // runtime comparison validate its complete inventory before using that claim.
+  if(value.runtime.installed?.version===2){
+    need(same(Object.keys(value.runtime.installed).sort(),['dependencies','node','python','version']),
+      'Exact versioned installed identity fields required');
+    validateNodeIdentity({node:value.runtime.installed.node,dependencies:value.runtime.installed.dependencies});
+  }
   const sources = new Set();
   for (const row of value.source.files) {
     need(safePackagePath(row.path) && !sources.has(row.path) && ['100644','100755'].includes(row.mode) && commit(row.oid),

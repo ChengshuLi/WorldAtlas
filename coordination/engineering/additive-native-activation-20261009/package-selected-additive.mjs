@@ -94,26 +94,21 @@ export async function readOriginalPackageInventory({api,repo,origin}) {
   demand(job.id===origin.job_id&&job.run_id===origin.run_id&&job.run_attempt===origin.run_attempt&&job.head_sha===workflowHead&&
     job.status==='completed'&&job.conclusion==='success'&&Array.isArray(job.steps),'Original package producer did not succeed');
   const step=name=>job.steps.filter(row=>row.name===name&&row.status==='completed'&&row.conclusion==='success').length===1;
-  const full=pullRequest&&job.name==='regression (0)'&&['Snapshot original full-regression package inputs','Verify full-regression package controls',
-    'Build hosted assets','Read back qualified native build outputs when selected','Complete regression shard','Verify full-regression package receipt',
-    'Inventory original full-regression package output','Retain original full-regression package output'].every(step);
-  const selected=pullRequest&&job.name==='package'&&['Snapshot original selected package inputs','Verify package controls',
-    'Build Cloudflare package without publishing','Read back qualified native build outputs when selected',
-    'Run selected-data consumer checks','Inventory original selected package output','Retain original selected package output'].every(step);
-  const finalWorker=worker&&job.name==='integration (0)'&&['Snapshot original final-worker package inputs',
-    'Build the combined application once before asset-dependent tests','Inventory original final-worker package output',
-    'Read back qualified native build outputs when selected','Test applicable combined-tree invariants without publishing or live imports',
-    'Retain original final-worker package output'].every(step);
-  demand(full||selected||finalWorker,'Original package producer lacks required actual steps');
-  const sequence=full?['Snapshot original full-regression package inputs','Build hosted assets','Inventory original full-regression package output',
-    'Read back qualified native build outputs when selected','Complete regression shard','Retain original full-regression package output']:
-    selected?['Snapshot original selected package inputs','Build Cloudflare package without publishing','Inventory original selected package output',
-      'Read back qualified native build outputs when selected','Run selected-data consumer checks','Retain original selected package output']:
-      ['Snapshot original final-worker package inputs','Build the combined application once before asset-dependent tests','Inventory original final-worker package output',
-        'Read back qualified native build outputs when selected','Test applicable combined-tree invariants without publishing or live imports','Retain original final-worker package output'];
+  const full=pullRequest&&job.name==='regression (0)',selected=pullRequest&&job.name==='package',
+    finalWorker=worker&&job.name==='integration (0)';
+  demand(full||selected||finalWorker,'Original package producer differs');
+  // Authenticate actual capture/build/inventory/upload. Removed historical
+  // scientific readback is not a current producer or consumer role.
+  const sequence=full?['Snapshot original full-regression package inputs','Build hosted assets',
+    'Inventory original full-regression package output','Complete regression shard','Retain original full-regression package output']:
+    selected?['Snapshot original selected package inputs','Build Cloudflare package without publishing',
+      'Inventory original selected package output','Run selected-data consumer checks','Retain original selected package output']:
+      ['Snapshot original final-worker package inputs','Build the combined application once before asset-dependent tests',
+        'Inventory original final-worker package output','Test applicable combined-tree invariants without publishing or live imports','Retain original final-worker package output'];
+  demand(sequence.every(step),'Original package producer lacks required actual steps');
   const numbers=sequence.map(name=>job.steps.find(row=>row.name===name).number);
   demand(numbers.every((number,index)=>assemblyPositive(number)&&(index===0||number>numbers[index-1]))&&numbers[2]===numbers[1]+1,
-    'Original inventory must immediately follow the build and upload must follow successful tests');
+    'Original inventory must immediately follow the build and upload must follow successful current tests');
   const artifact=await api(`/repos/${repo}/actions/artifacts/${origin.artifact_id}`);
   demand(artifact.id===origin.artifact_id&&artifact.name===artifactName&&!artifact.expired&&artifact.size_in_bytes===origin.artifact_bytes&&
     artifact.digest==='sha256:'+origin.artifact_digest&&artifact.workflow_run?.id===origin.run_id&&

@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {spawnSync} from 'node:child_process';
 
-test('trusted startup, separated proof entry and verification-only mode resist substitution',()=>{
+test('trusted selected assembly startup resists substitution',()=>{
   const result=spawnSync('python3',['-I','-B','test/selected-package-bootstrap-controls.py','scripts/selected-package-bootstrap.py'],
     {encoding:'utf8',maxBuffer:4*1024*1024,timeout:60000,stdio:['ignore','pipe','pipe']});
   assert.equal(result.error,undefined,result.error?.message);

@@ -12,11 +12,12 @@ import {footprintHash} from './check-prepared.mjs';
 import {githubAPI, githubPages} from './issue-claim-contract.mjs';
 import {integrationTree} from './integration-profile.mjs';
 import {loadPackageInputs, readPackageInputs, containsPackagePath} from './package-inputs.mjs';
-import {inspectPackageRuntime, verifyPackageDependencies} from './package-build.mjs';
+import {inspectPackageNodeRuntime, verifyPackageDependencies} from './package-build.mjs';
 import {committedPackageInputs, committedPackageProducer, PACKAGE_PRODUCER_WORKFLOWS, PACKAGE_PRODUCER_KIND, packageBuildConfiguration,
-  validatePackageOutputManifest, admitPackageInputTransition, admitPackageOutputTransition, inertSelectedPackageInput, streamedPackageFile, installedPackageIdentity, installedPackageDifferences, declaredPackagePythonRoots} from './package-output-artifact.mjs';
+  validatePackageOutputManifest, admitPackageInputTransition, admitPackageOutputTransition, inertSelectedPackageInput, streamedPackageFile, installedPackageDifferences, resolvePackagePythonExecutable} from './package-output-artifact.mjs';
 import {authenticateOriginalPackageOutput, readOriginalPackageInventory, requireOriginalPackageOutput, issuePackageAssemblyExecution, requirePackageAssemblyExecution}
   from '../coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs';
+import {installedNodeIdentity} from './package-node-runtime.mjs';
 
 const need=(ok,message)=>{if(!ok)throw Error(message);};
 const hash=raw=>createHash('sha256').update(raw).digest('hex');
@@ -229,30 +230,34 @@ export async function assembleSelectedPackage({api,repo,expectedHead,originalRun
   try{
     const archive=path.join(scratch,'original.zip'),originalRoot=path.join(scratch,'original');
     await downloadOriginal(api,repo,found.origin,archive);
-    const pythonArgs=['-I','-S','-B',path.join(root,'scripts/extract-package-output.py')];
+    const extractorName='scripts/extract-package-output.py',extractorRaw=fs.readFileSync(path.join(root,extractorName));
+    const extractor=streamedPackageFile(root,extractorName),extractorOid=createHash('sha1').update(`blob ${extractorRaw.length}\0`).update(extractorRaw).digest('hex');
+    need(git(['ls-tree','HEAD','--',extractorName])===`100644 blob ${extractorOid}\t${extractorName}`&&hash(extractorRaw)===extractor.sha256,'Executing package extractor differs from current source');
+    const python=resolvePackagePythonExecutable(),pythonArgs=['-I','-S','-B',path.join(root,extractorName)];
     // Authenticate and consume the archive once through the extractor's held descriptor.
-    execFileSync('python3',[...pythonArgs,archive,originalRoot,found.origin.artifact_digest,found.receipt.package_output_manifest_sha256,String(found.receipt.package_output_manifest_bytes)],{stdio:'pipe',maxBuffer:1048576});
+    execFileSync(python.executable,[...pythonArgs,archive,originalRoot,found.origin.artifact_digest,found.receipt.package_output_manifest_sha256,String(found.receipt.package_output_manifest_bytes)],{stdio:'pipe',maxBuffer:1048576});
+    need(same(streamedPackageFile(root,extractorName),extractor)&&same(resolvePackagePythonExecutable(python.sha256),python),'Package extraction execution changed');
     const manifestRaw=fs.readFileSync(path.join(originalRoot,'.cache/package-output-manifest.json')),manifest=validatePackageOutputManifest(JSON.parse(manifestRaw));
     for(const key of ['head','tree','definition','files','producer','selection'])need(same(manifest.source[key],found.source[key]),'Retained manifest differs from original immutable source: '+key);
-    need(manifest.runtime.installed?.version===2&&manifest.runtime.installed.python?.parser,
-      'Version 2 original installed parser evidence required; legacy aggregate evidence requires a full build');
+    need(manifest.runtime.installed?.version===2,
+      'Version 2 original installed-byte evidence required; legacy aggregate evidence requires a full build');
     const original=await authenticateOriginalPackageOutput({api,repo,origin:found.origin,root:originalRoot,manifestRaw});
-    const installed=installedPackageIdentity(root,declaredPackagePythonRoots(root),{expectedParser:manifest.runtime.installed.python.parser,expectedExecutable:manifest.runtime.installed.python.executable_sha256});
-    const differences=installedPackageDifferences(manifest.runtime.installed,installed);
+    // Only JavaScript dependencies execute during current-product consumption.
+    // Original GIS runtime evidence remains literal in the original manifest;
+    // assembly does not import or claim to reexecute those scientific packages.
+    const installed={version:2,...installedNodeIdentity(root),python:null};
+    const differences=installedPackageDifferences({...manifest.runtime.installed,python:null},installed);
     const recordAndRequireRuntime=()=>{
       fs.writeFileSync(path.join(root,'.cache/package-runtime-comparison.json'),JSON.stringify({version:2,
-        original_manifest_sha256:hash(manifestRaw),current:installed,differences})+'\n',{flag:'wx'});
+        original_manifest_sha256:hash(manifestRaw),compared_components:['node','dependencies'],current:installed,extractor:{python,source:extractor,startup:['-I','-S','-B']},differences})+'\n',{flag:'wx'});
       need(differences.length===0,'Original runtime incompatibility: '+JSON.stringify(differences.map(row=>
         ({component:row.component,...(row.changed_components?{changed_components:row.changed_components}:{}),...(row.changed_files?{changed_files:row.changed_files.slice(0,10),changed_file_count:row.changed_files.length}: {})}))));
     };
     if(differences.length)recordAndRequireRuntime();
-    // Current-product imports run only after original custody and complete
-    // installed-byte admission, with the same no-site startup as measurement.
-    const runtime=inspectPackageRuntime(root);
+    const runtime=inspectPackageNodeRuntime(root);
     if(runtime.errors.length){differences.push({component:'runtime.preflight',errors:runtime.errors});recordAndRequireRuntime();}
     const actualRuntime={node:process.version,platform:process.platform,arch:process.arch,
-      versions:process.versions,dependencies:runtime.package_lock_sha256,
-      python:{version:runtime.python.version,imports:runtime.python.imports}};
+      versions:process.versions,dependencies:runtime.package_lock_sha256};
     for(const [component,value] of Object.entries(actualRuntime))if(!same(manifest.runtime[component],value))
       differences.push({component:'runtime.'+component,original:manifest.runtime[component],current:value});
     if(!same(manifest.configuration,packageBuildConfiguration()))differences.push({component:'configuration',
@@ -300,7 +305,7 @@ export async function assembleSelectedPackage({api,repo,expectedHead,originalRun
       original_base_context_retained:true,base_restoration_invoked:false,invariant_build_invoked:false,
       current_selected_inputs:consumed,elapsed_seconds:(performance.now()-started)/1000};
     const receipt={version:1,kind:'cloudflare',input_definition_sha256:current.input_definition_sha256,assembly,
-      preflight:{passed:true,errors:[],inputs:{head:current.head},runtime,
+      preflight:{passed:true,errors:[],inputs:{head:current.head},runtime:{...runtime,extractor:{python,source:extractor,startup:['-I','-S','-B']}},
         limitation:'Current assembly code, dependency and selected-source admission; original invariant build is reused, not reexecuted.'}};
     const receiptRaw=Buffer.from(JSON.stringify(receipt,null,2)+'\n');
     const receiptTarget=path.join(root,'.cache/package-input-build.json'),stagedReceipt=path.join(scratch,'receipt.json');
@@ -332,26 +337,17 @@ export async function assembleSelectedPackage({api,repo,expectedHead,originalRun
   }
 }
 
-// Production assembly binds source and original output custody. Reference-run
-// authentication and output equivalence belong to the independent observer.
+// Production assembly runs only inside the authenticated selected-data queue.
 export function packageAssemblyInvocation(event, environment = process.env) {
-  const proofMode=environment.GITHUB_EVENT_NAME==='workflow_dispatch'&&environment.GITHUB_WORKFLOW==='Selected package equivalence proof';
-  const workerMode=environment.GITHUB_EVENT_NAME==='workflow_dispatch'&&environment.GITHUB_WORKFLOW==='Serialize worker PR merges'&&
-    environment.GITHUB_REF==='refs/heads/main';
-  need(proofMode||workerMode||environment.GITHUB_EVENT_NAME==='pull_request','Trusted selected-data CI invocation required');
-  if(workerMode)need(environment.INTEGRATION_PROFILE==='full'&&environment.INTEGRATION_SHARD==='0'&&
+  need(environment.GITHUB_EVENT_NAME==='workflow_dispatch'&&environment.GITHUB_WORKFLOW==='Serialize worker PR merges'&&
+    environment.GITHUB_REF==='refs/heads/main','Trusted selected-data worker invocation required');
+  need(environment.INTEGRATION_PROFILE==='full'&&environment.INTEGRATION_SHARD==='0'&&
     environment.INTEGRATION_TEST_SELECTION==='selected-data','Trusted selected-data worker integration (0) required');
-  const expectedHead=proofMode?event.inputs?.source_head:workerMode?environment.SELECTED_PACKAGE_CANDIDATE:event.pull_request?.head?.sha;
-  need(/^[a-f0-9]{40}$/.test(expectedHead??''),proofMode?'Exact proof source head required':'Exact selected package candidate required');
-  let originalRunId;
-  if(proofMode){
-    need(/^[1-9]\d*$/.test(event.inputs?.original_run_id??'')&&Number.isSafeInteger(Number(event.inputs.original_run_id)),
-      'Exact original package run identity required');
-    originalRunId=Number(event.inputs.original_run_id);
-  }
+  const expectedHead=environment.SELECTED_PACKAGE_CANDIDATE;
+  need(/^[a-f0-9]{40}$/.test(expectedHead??''),'Exact selected package candidate required');
   const trustedBase=environment.SELECTED_PACKAGE_TRUSTED_BASE;
   need(trustedBase===undefined||/^[a-f0-9]{40}$/.test(trustedBase),'Exact trusted selected base required');
-  return {proofMode,expectedHead,originalRunId,...(trustedBase===undefined?{}:{trustedBase})};
+  return {expectedHead,...(trustedBase===undefined?{}:{trustedBase})};
 }
 
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
@@ -360,10 +356,9 @@ if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.ur
     need(process.argv.length===2&&process.env.GH_TOKEN&&process.env.GITHUB_REPOSITORY&&process.env.GITHUB_EVENT_PATH,'Trusted selected-data CI invocation required');
     const event=JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH,'utf8'));
     const api=githubAPI(process.env.GH_TOKEN,{conditionalReads:false});delete process.env.GH_TOKEN;delete process.env.GITHUB_TOKEN;
-    const {proofMode,expectedHead,originalRunId,trustedBase}=packageAssemblyInvocation(event);
-    result=await assembleSelectedPackage({api,repo:process.env.GITHUB_REPOSITORY,expectedHead,originalRunId,trustedBase});
-    if(proofMode)need(result.assembled,'Actual assembly required; fallback cannot establish equivalence');
-  }catch(error){if(process.env.GITHUB_EVENT_NAME==='workflow_dispatch'&&process.env.GITHUB_WORKFLOW==='Selected package equivalence proof')process.exitCode=1;result={assembled:false,reason:String(error.message).replace(/https?:\/\/\S+/g,'[delivery address]').slice(0,600)};}
+    const {expectedHead,trustedBase}=packageAssemblyInvocation(event);
+    result=await assembleSelectedPackage({api,repo:process.env.GITHUB_REPOSITORY,expectedHead,trustedBase});
+  }catch(error){result={assembled:false,reason:String(error.message).replace(/https?:\/\/\S+/g,'[delivery address]').slice(0,600)};}
   console.log(JSON.stringify(result));
   if(process.env.GITHUB_OUTPUT)fs.appendFileSync(process.env.GITHUB_OUTPUT,`assembled=${result.assembled}\nassembly_sha256=${result.receipt_sha256??''}\n`);
 }

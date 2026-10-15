@@ -147,8 +147,7 @@ def main():
     cache = Path(os.environ['RUNNER_TOOL_CACHE']).resolve()
     need(node.is_file() and not node.is_symlink() and node.resolve().is_relative_to(cache / 'node'), 'Verified setup-node executable required')
     entry_point = os.environ.get('SELECTED_PACKAGE_ENTRY_POINT', 'scripts/assemble-selected-package.mjs')
-    need(entry_point in ('scripts/assemble-selected-package.mjs', 'scripts/run-selected-package-proof.mjs'),
-         'Unknown trusted package entry point')
+    need(entry_point == 'scripts/assemble-selected-package.mjs', 'Unknown trusted package entry point')
     pending, seen, external = [entry_point], set(), set()
     while pending:
         name = pending.pop()
@@ -183,17 +182,7 @@ def main():
                 external.add(spec)
     need(not external, 'External credential-bearing startup module is not admitted')
     verified('package-lock.json')
-    if 'scripts/package-output-artifact.mjs' in seen:
-        verified('scripts/package-python-runtime.py')
     verified('scripts/extract-package-output.py')
-    if entry_point == 'scripts/run-selected-package-proof.mjs':
-        # This current observer is separately checked out. It reuses this same
-        # verifier before importing the frozen, unchanged assembly programme.
-        verified('scripts/selected-package-bootstrap.py')
-    if os.environ.get('SELECTED_PACKAGE_VERIFY_ONLY') == 'true':
-        print(json.dumps({'kind': 'authenticated-package-startup-closure', 'trusted_base': base,
-                          'entry_point': entry_point, 'files': sorted(seen)}))
-        return
     launch_env = dict(env, GH_TOKEN=os.environ['GH_TOKEN'])
     os.execve(node, [str(node), entry_point], launch_env)
 
