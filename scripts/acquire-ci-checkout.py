@@ -212,6 +212,8 @@ def acquire(repository, sha, tree, workspace, token=None, git_executable=None, e
         if regression:
             # Source-only work is checked by the existing evidence/geography
             # readers, not by current software regressions or package inputs.
+            # Required selected reads and full-build declared-input preflight
+            # fail closed if future dependencies enter these namespaces.
             supervisor.run(common + ['sparse-checkout', 'init', '--no-cone'], staging, env, 'initialize')
             (staging / '.git/info/sparse-checkout').write_text(
                 '/*\n!/data/regional-review/\n!/research/campaigns/\n', encoding='utf-8')
@@ -293,7 +295,7 @@ def main():
     try:
         acquire(args.repository, args.sha, args.tree, args.workspace,
                 regression=os.environ.get('INTEGRATION_PROFILE') == 'full' and
-                os.environ.get('INTEGRATION_TEST_SELECTION') == 'complete')
+                os.environ.get('INTEGRATION_TEST_SELECTION') in ('complete', 'selected-data'))
     except AcquisitionError as error:
         print(json.dumps({'event': 'acquisition-failed', 'reason': error.category}), flush=True)
         return 130 if error.category == 'cancelled' else 1

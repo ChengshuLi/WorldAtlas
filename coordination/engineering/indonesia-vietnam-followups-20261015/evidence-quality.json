@@ -1,0 +1,1053 @@
+{
+  "version": 1,
+  "issue": 1942,
+  "lane": "engineering",
+  "worker_id": "01a13b6c-91af-722c-88a4-0d9bb2ea0029",
+  "subject_ids": [
+    "gb:IDN:ADM2:22746128B36781349389855",
+    "gb:IDN:ADM2:22746128B67952855762127",
+    "gb:IDN:ADM2:22746128B90221566890304",
+    "gb:VNM:ADM2:81297802B14510014839166",
+    "gb:VNM:ADM2:81297802B14703404520131",
+    "gb:VNM:ADM2:81297802B20367953633835",
+    "gb:VNM:ADM2:81297802B2701886719052",
+    "gb:VNM:ADM2:81297802B32838967164839",
+    "gb:VNM:ADM2:81297802B37342354446447",
+    "gb:VNM:ADM2:81297802B39086824409595",
+    "gb:VNM:ADM2:81297802B41294306698552",
+    "gb:VNM:ADM2:81297802B50713424689894",
+    "gb:VNM:ADM2:81297802B53696601888295",
+    "gb:VNM:ADM2:81297802B61263365113672",
+    "gb:VNM:ADM2:81297802B63375818356773",
+    "gb:VNM:ADM2:81297802B6357673458882",
+    "gb:VNM:ADM2:81297802B66107700635107",
+    "gb:VNM:ADM2:81297802B72423367852086",
+    "gb:VNM:ADM2:81297802B72565329345275",
+    "gb:VNM:ADM2:81297802B72882386082996",
+    "gb:VNM:ADM2:81297802B72919536287172",
+    "gb:VNM:ADM2:81297802B75623207701482",
+    "gb:VNM:ADM2:81297802B81765499113898",
+    "gb:VNM:ADM2:81297802B84784766195181",
+    "gb:VNM:ADM2:81297802B94679881937971",
+    "gb:VNM:ADM2:81297802B94706269623038"
+  ],
+  "subject_ids_sha256": "a5a6a6e824c4ef9522b17442030eacd145f72fcd76ebd1ed156f3932c8628342",
+  "baseline": {
+    "version": 2,
+    "commit": "b73fdbb1b0e243b773514ea46aaced496a63028f",
+    "files": [
+      {
+        "path": "data/ownership-selection.json",
+        "commit": "b73fdbb1b0e243b773514ea46aaced496a63028f",
+        "bytes": 1574,
+        "sha256": "f28a419836f741e7102850ed0897d37fbe9640bf91792f45294746b9b8639a2e",
+        "hash_kind": "file-bytes",
+        "role": "accepted-selected-baseline"
+      },
+      {
+        "path": ".github/package-inputs.json",
+        "commit": "b73fdbb1b0e243b773514ea46aaced496a63028f",
+        "bytes": 124045,
+        "sha256": "fac8bea6c67effe66e306de46746b74cba7e8fb6fc4d53ffc80cfd79e02bf89b",
+        "hash_kind": "file-bytes",
+        "role": "accepted-selected-baseline"
+      },
+      {
+        "path": "coordination/engineering/myanmar-vietnam-current-cells-20261015/composition/selected-ledger.json",
+        "commit": "b73fdbb1b0e243b773514ea46aaced496a63028f",
+        "bytes": 2515585,
+        "sha256": "06d6810daa7377897f14f330df79c28b94dbedf0ce88427ba2589948b0e4aaee",
+        "hash_kind": "file-bytes",
+        "role": "accepted-selected-baseline"
+      },
+      {
+        "path": "coordination/engineering/myanmar-vietnam-current-cells-20261015/composition/authority-registry.json",
+        "commit": "b73fdbb1b0e243b773514ea46aaced496a63028f",
+        "bytes": 59737,
+        "sha256": "8db91d11509bff489386e725f2c6adecf4fc69c41532b57f88e9080682ddd046",
+        "hash_kind": "file-bytes",
+        "role": "accepted-selected-baseline"
+      }
+    ],
+    "pins": {
+      "baseline_selector": "f28a419836f741e7102850ed0897d37fbe9640bf91792f45294746b9b8639a2e",
+      "baseline_package_inputs": "fac8bea6c67effe66e306de46746b74cba7e8fb6fc4d53ffc80cfd79e02bf89b",
+      "baseline_selected_ledger": "06d6810daa7377897f14f330df79c28b94dbedf0ce88427ba2589948b0e4aaee",
+      "baseline_authority_registry": "8db91d11509bff489386e725f2c6adecf4fc69c41532b57f88e9080682ddd046"
+    },
+    "pin_files": {
+      "baseline_selector": {
+        "path": "data/ownership-selection.json",
+        "commit": "b73fdbb1b0e243b773514ea46aaced496a63028f"
+      },
+      "baseline_package_inputs": {
+        "path": ".github/package-inputs.json",
+        "commit": "b73fdbb1b0e243b773514ea46aaced496a63028f"
+      },
+      "baseline_selected_ledger": {
+        "path": "coordination/engineering/myanmar-vietnam-current-cells-20261015/composition/selected-ledger.json",
+        "commit": "b73fdbb1b0e243b773514ea46aaced496a63028f"
+      },
+      "baseline_authority_registry": {
+        "path": "coordination/engineering/myanmar-vietnam-current-cells-20261015/composition/authority-registry.json",
+        "commit": "b73fdbb1b0e243b773514ea46aaced496a63028f"
+      }
+    }
+  },
+  "sources": [
+    {
+      "id": "idn-maluku654",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/6e9c45cc56af46d68a2d6ffffb9ada1d795673f6/coordination/engineering/indonesia-maluku-followup-20261015/maluku654/source-evidence.json",
+      "role": "Original immutable source evidence bound by the unchanged whole constructor, rule preimage, custody binding and native patch; exact pins in original_authorities.",
+      "vintage": "Original immutable qualification 0537d91aa5a3bae7f808670541e33ff43ec41a5e",
+      "retrieved_at": "2026-10-15T02:08:52.925328Z",
+      "retrieval_note": "Whole original source and constructor bytes inspected from shared immutable Git. This is this metadata inspection time; original upstream dates and heterogeneous vintages remain in unchanged source evidence.",
+      "license": {
+        "status": "unknown",
+        "terms": "Underlying source terms and uncertainties are retained in the original source evidence; this metadata handoff does not recertify source reuse rights."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Read complete original source 6e9c45cc56af46d68a2d6ffffb9ada1d795673f6:coordination/engineering/indonesia-maluku-followup-20261015/maluku654/source-evidence.json (OID 439ffc327d6df006986fe4e917e96602a92b1d52, 16124 bytes, SHA256 17f6446de92606e2514eeb0c1e689384066fa2853f96254fc27dc364d69e7789); whole constructor 0537d91aa5a3bae7f808670541e33ff43ec41a5e:coordination/engineering/indonesia-maluku-followup-20261015/maluku654/authority/constructor-result.json (OID 857ace734a40c957e8ae13c0a4a5cf26df11ea7a, SHA256 097242fc8d6369022ce8fd5aaf355a9ee08c4f4195266daec782c5b2372808be). Follow unchanged original authority/patch/physical pins.",
+      "limit": "Verification here establishes retained byte identity and metadata bindings only. Original source, physical, parent, territorial, adverse-witness, operating and date limits remain unchanged; current selected-owner-zero/conservation and queue checks remain pending. No producer replay or new qualification.",
+      "temporal_status": "reference",
+      "original_pin": {
+        "bytes": 16124,
+        "commit": "6e9c45cc56af46d68a2d6ffffb9ada1d795673f6",
+        "git_blob_oid": "439ffc327d6df006986fe4e917e96602a92b1d52",
+        "mode": "100644",
+        "path": "coordination/engineering/indonesia-maluku-followup-20261015/maluku654/source-evidence.json",
+        "sha256": "17f6446de92606e2514eeb0c1e689384066fa2853f96254fc27dc364d69e7789"
+      },
+      "constructor_pin": {
+        "commit": "0537d91aa5a3bae7f808670541e33ff43ec41a5e",
+        "path": "coordination/engineering/indonesia-maluku-followup-20261015/maluku654/authority/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "857ace734a40c957e8ae13c0a4a5cf26df11ea7a",
+        "bytes": 18464,
+        "sha256": "097242fc8d6369022ce8fd5aaf355a9ee08c4f4195266daec782c5b2372808be"
+      }
+    },
+    {
+      "id": "vnm-clean309",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/3cd7f0ab90ffced16e3e285163e15fd8ae4af956/coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/clean309/source-evidence.json",
+      "role": "Original immutable source evidence bound by the unchanged whole constructor, rule preimage, custody binding and native patch; exact pins in original_authorities.",
+      "vintage": "Original immutable qualification 128bd31db111857db8f3dc641eb67207267924d2",
+      "retrieved_at": "2026-10-15T02:08:52.925328Z",
+      "retrieval_note": "Whole original source and constructor bytes inspected from shared immutable Git. This is this metadata inspection time; original upstream dates and heterogeneous vintages remain in unchanged source evidence.",
+      "license": {
+        "status": "unknown",
+        "terms": "Underlying source terms and uncertainties are retained in the original source evidence; this metadata handoff does not recertify source reuse rights."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Read complete original source 3cd7f0ab90ffced16e3e285163e15fd8ae4af956:coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/clean309/source-evidence.json (OID 4f2126a85f1165c38b86835e8ae7ddad3dfd2e38, 3477581 bytes, SHA256 c5446fbd5fe4fea3912fb002cdc6e80aa71679fb159c0b35a83936868e92a274); whole constructor 128bd31db111857db8f3dc641eb67207267924d2:coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/clean309/authority/constructor-result.json (OID ea8e11c5201d2a01ef4aa01491ef84d742f348f2, SHA256 7eb7662def358c11da1db1eaf934b8482bec783d372c21af67fdefa2ea6da256). Follow unchanged original authority/patch/physical pins.",
+      "limit": "Verification here establishes retained byte identity and metadata bindings only. Original source, physical, parent, territorial, adverse-witness, operating and date limits remain unchanged; current selected-owner-zero/conservation and queue checks remain pending. No producer replay or new qualification.",
+      "temporal_status": "reference",
+      "original_pin": {
+        "bytes": 3477581,
+        "commit": "3cd7f0ab90ffced16e3e285163e15fd8ae4af956",
+        "git_blob_oid": "4f2126a85f1165c38b86835e8ae7ddad3dfd2e38",
+        "mode": "100644",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/clean309/source-evidence.json",
+        "sha256": "c5446fbd5fe4fea3912fb002cdc6e80aa71679fb159c0b35a83936868e92a274"
+      },
+      "constructor_pin": {
+        "commit": "128bd31db111857db8f3dc641eb67207267924d2",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/clean309/authority/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "ea8e11c5201d2a01ef4aa01491ef84d742f348f2",
+        "bytes": 71181,
+        "sha256": "7eb7662def358c11da1db1eaf934b8482bec783d372c21af67fdefa2ea6da256"
+      }
+    },
+    {
+      "id": "vnm-botrach41",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/3cd7f0ab90ffced16e3e285163e15fd8ae4af956/coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/botrach41/source-evidence.json",
+      "role": "Original immutable source evidence bound by the unchanged whole constructor, rule preimage, custody binding and native patch; exact pins in original_authorities.",
+      "vintage": "Original immutable qualification 128bd31db111857db8f3dc641eb67207267924d2",
+      "retrieved_at": "2026-10-15T02:08:52.925328Z",
+      "retrieval_note": "Whole original source and constructor bytes inspected from shared immutable Git. This is this metadata inspection time; original upstream dates and heterogeneous vintages remain in unchanged source evidence.",
+      "license": {
+        "status": "unknown",
+        "terms": "Underlying source terms and uncertainties are retained in the original source evidence; this metadata handoff does not recertify source reuse rights."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Read complete original source 3cd7f0ab90ffced16e3e285163e15fd8ae4af956:coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/botrach41/source-evidence.json (OID fdc45b1b1da7d2d573d4303dd3f12cadf41f2cfe, 49334 bytes, SHA256 2a66249d7f390a6cd964dd94e3489bbd5d2d5e4043e1ce4ffb07447301a9cf96); whole constructor 128bd31db111857db8f3dc641eb67207267924d2:coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/botrach41/authority/constructor-result.json (OID 54b285c88c196781bf20ce933cdd742004031989, SHA256 717cf512a06b86252dc797edcf446eac6e76e22a4988361a750740899eae6891). Follow unchanged original authority/patch/physical pins.",
+      "limit": "Verification here establishes retained byte identity and metadata bindings only. Original source, physical, parent, territorial, adverse-witness, operating and date limits remain unchanged; current selected-owner-zero/conservation and queue checks remain pending. No producer replay or new qualification.",
+      "temporal_status": "reference",
+      "original_pin": {
+        "bytes": 49334,
+        "commit": "3cd7f0ab90ffced16e3e285163e15fd8ae4af956",
+        "git_blob_oid": "fdc45b1b1da7d2d573d4303dd3f12cadf41f2cfe",
+        "mode": "100644",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/botrach41/source-evidence.json",
+        "sha256": "2a66249d7f390a6cd964dd94e3489bbd5d2d5e4043e1ce4ffb07447301a9cf96"
+      },
+      "constructor_pin": {
+        "commit": "128bd31db111857db8f3dc641eb67207267924d2",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/botrach41/authority/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "54b285c88c196781bf20ce933cdd742004031989",
+        "bytes": 4762,
+        "sha256": "717cf512a06b86252dc797edcf446eac6e76e22a4988361a750740899eae6891"
+      }
+    },
+    {
+      "id": "vnm-anphu1",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/3cd7f0ab90ffced16e3e285163e15fd8ae4af956/coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/anphu1/source-evidence.json",
+      "role": "Original immutable source evidence bound by the unchanged whole constructor, rule preimage, custody binding and native patch; exact pins in original_authorities.",
+      "vintage": "Original immutable qualification 128bd31db111857db8f3dc641eb67207267924d2",
+      "retrieved_at": "2026-10-15T02:08:52.925328Z",
+      "retrieval_note": "Whole original source and constructor bytes inspected from shared immutable Git. This is this metadata inspection time; original upstream dates and heterogeneous vintages remain in unchanged source evidence.",
+      "license": {
+        "status": "unknown",
+        "terms": "Underlying source terms and uncertainties are retained in the original source evidence; this metadata handoff does not recertify source reuse rights."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Read complete original source 3cd7f0ab90ffced16e3e285163e15fd8ae4af956:coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/anphu1/source-evidence.json (OID 35fddef43a9322a40bd7c5129cc89a100d1e990a, 48708 bytes, SHA256 be2cddf9790f7d0fcd0bfcd00b9d332e194b60bb08a71290dc31d84070473281); whole constructor 128bd31db111857db8f3dc641eb67207267924d2:coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/anphu1/authority/constructor-result.json (OID b148fc99bd8ae45a24f0a6d1dea18bef73962621, SHA256 f2f167ef65239cf5599ff62551e629dccb64b42a0d6d4b86c7a4b8dbdc09db7a). Follow unchanged original authority/patch/physical pins.",
+      "limit": "Verification here establishes retained byte identity and metadata bindings only. Original source, physical, parent, territorial, adverse-witness, operating and date limits remain unchanged; current selected-owner-zero/conservation and queue checks remain pending. No producer replay or new qualification.",
+      "temporal_status": "reference",
+      "original_pin": {
+        "bytes": 48708,
+        "commit": "3cd7f0ab90ffced16e3e285163e15fd8ae4af956",
+        "git_blob_oid": "35fddef43a9322a40bd7c5129cc89a100d1e990a",
+        "mode": "100644",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/anphu1/source-evidence.json",
+        "sha256": "be2cddf9790f7d0fcd0bfcd00b9d332e194b60bb08a71290dc31d84070473281"
+      },
+      "constructor_pin": {
+        "commit": "128bd31db111857db8f3dc641eb67207267924d2",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/anphu1/authority/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "b148fc99bd8ae45a24f0a6d1dea18bef73962621",
+        "bytes": 2736,
+        "sha256": "f2f167ef65239cf5599ff62551e629dccb64b42a0d6d4b86c7a4b8dbdc09db7a"
+      }
+    },
+    {
+      "id": "idn-raja10617",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/4af11a67282b6238137abfe54172fc5b5884832a/coordination/engineering/indonesia-raja-ampat-20261015/native10617-input-001/source-evidence.json",
+      "role": "Original immutable source evidence bound by the unchanged whole constructor, rule preimage, custody binding and native patch; exact pins in original_authorities.",
+      "vintage": "Original immutable qualification 52416018196cd2dab44bee8286073cb35f45b05d",
+      "retrieved_at": "2026-10-15T02:08:52.925328Z",
+      "retrieval_note": "Whole original source and constructor bytes inspected from shared immutable Git. This is this metadata inspection time; original upstream dates and heterogeneous vintages remain in unchanged source evidence.",
+      "license": {
+        "status": "unknown",
+        "terms": "Underlying source terms and uncertainties are retained in the original source evidence; this metadata handoff does not recertify source reuse rights."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Read complete original source 4af11a67282b6238137abfe54172fc5b5884832a:coordination/engineering/indonesia-raja-ampat-20261015/native10617-input-001/source-evidence.json (OID e990df7fc520e9f0e384db23cf6a9d903e28621a, 64759 bytes, SHA256 45786512704963cc6aea38942efd798798fc39b5dd1d9cf31412f1929564a1ba); whole constructor 52416018196cd2dab44bee8286073cb35f45b05d:coordination/engineering/indonesia-raja-ampat-20261015/native10617-authority-001/constructor-result.json (OID 589b77b3613d1c73793c3e54e1b9e9f1a0796f99, SHA256 a97e90c778f8858f657a13e692683cf1fa873eb38a767ef9cf25ca980d0bd36b). Follow unchanged original authority/patch/physical pins.",
+      "limit": "Verification here establishes retained byte identity and metadata bindings only. Original source, physical, parent, territorial, adverse-witness, operating and date limits remain unchanged; current selected-owner-zero/conservation and queue checks remain pending. No producer replay or new qualification.",
+      "temporal_status": "reference",
+      "original_pin": {
+        "bytes": 64759,
+        "commit": "4af11a67282b6238137abfe54172fc5b5884832a",
+        "git_blob_oid": "e990df7fc520e9f0e384db23cf6a9d903e28621a",
+        "mode": "100644",
+        "path": "coordination/engineering/indonesia-raja-ampat-20261015/native10617-input-001/source-evidence.json",
+        "sha256": "45786512704963cc6aea38942efd798798fc39b5dd1d9cf31412f1929564a1ba"
+      },
+      "constructor_pin": {
+        "commit": "52416018196cd2dab44bee8286073cb35f45b05d",
+        "path": "coordination/engineering/indonesia-raja-ampat-20261015/native10617-authority-001/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "589b77b3613d1c73793c3e54e1b9e9f1a0796f99",
+        "bytes": 114035,
+        "sha256": "a97e90c778f8858f657a13e692683cf1fa873eb38a767ef9cf25ca980d0bd36b"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "path": ".github/package-inputs.json",
+      "bytes": 127382,
+      "sha256": "e8d0297ea685f80eff42a15dab730ded6c8e3966e76724b050a3a2e5c50966d0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-maluku-followup-20261015/maluku654/authority/authority-binding.json",
+      "bytes": 731,
+      "sha256": "a00746606a79533b284a5975a6f11230ff12e54d68aed58b8dab32cd403d8936",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-maluku-followup-20261015/maluku654/authority/original-rule-preimage.json",
+      "bytes": 728,
+      "sha256": "a0c94282823c47424e8503dac0fda8c6ca7ce3bfbbfcbbac871cdfbbce7a779c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-maluku-followup-20261015/maluku654/candidate-native-patch.json",
+      "bytes": 41498,
+      "sha256": "aafeb1060db5582dd848b90d79f4315def519e4db3d0d1e96b6b87432869a950",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-maluku-followup-20261015/maluku654/source-evidence.json",
+      "bytes": 16124,
+      "sha256": "17f6446de92606e2514eeb0c1e689384066fa2853f96254fc27dc364d69e7789",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-raja-ampat-20261015/native10617-authority-001/authority-binding.json",
+      "bytes": 746,
+      "sha256": "f6aaa0c69b1953e3c567485d313e990d862ebd5f2780716fe3b99859678f0fbd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-raja-ampat-20261015/native10617-authority-001/original-rule-preimage.json",
+      "bytes": 743,
+      "sha256": "ba1ca181f2a062f2dbf01eaef45e6801f0d4e04a643625ab91d90c311e3ff4e7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-raja-ampat-20261015/native10617-input-001/candidate-native-patch.json",
+      "bytes": 310458,
+      "sha256": "7b5da5fcea4e0debc0be5ddc7aa6b5a751c0351a13ba0e2d227da78a5bb04b3b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-raja-ampat-20261015/native10617-input-001/source-evidence.json",
+      "bytes": 64759,
+      "sha256": "45786512704963cc6aea38942efd798798fc39b5dd1d9cf31412f1929564a1ba",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-raja-ampat-20261015/physical-result-001/whole-target-support.json",
+      "bytes": 1576023,
+      "sha256": "8659fe04c16d4391c15b1b3e4ebdc81cb7f8eb23b383fa70204f881474b798e4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-raja-ampat-20261015/whole-physical-input-001/original-stage-inputs.json",
+      "bytes": 560052,
+      "sha256": "7050110248733101a08f74295e8f360baeb2caed2b7b15b0d2a6405a34de5db1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-vietnam-followups-20261015/README.md",
+      "bytes": 1367,
+      "sha256": "0fe8120d5cb8e67c7323ac7e40b513283a09007976676dd8d6d50f9047a9adf2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-vietnam-followups-20261015/component-roster.json",
+      "bytes": 20850,
+      "sha256": "f6abcbd917e40005219328d3f01506f7bff7d378b84834e3e30676fdda05ffb0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-vietnam-followups-20261015/delivery/authority-registry.json",
+      "bytes": 64529,
+      "sha256": "e5efb440975ad4c8dcda9d2449b8a88d59a638ce9fc7ed3344be17df8364aafc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-vietnam-followups-20261015/delivery/patch.json",
+      "bytes": 860023,
+      "sha256": "2f2c91e510626c6bfc86f82f502e2386f16addce67522b6e07bbf6c76058a509",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-vietnam-followups-20261015/delivery/runtime-envelope.json",
+      "bytes": 1396,
+      "sha256": "c6345e67b2d7dc7ebb1558d0032354f848a83f537b26ff20889267220bbbfd3a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-vietnam-followups-20261015/delivery/selected-ledger.json",
+      "bytes": 2726316,
+      "sha256": "ef1f18f7a595709c58316febf9dbc65626d67ce869307145b1008cc89cd17690",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-vietnam-followups-20261015/ownership-selection-v2.json",
+      "bytes": 3428,
+      "sha256": "8c8923c67ea116ef5100ceb4f934be26045d1df2f29ea932899df91c3a30f69b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-vietnam-followups-20261015/preparation/compose-original-quartets.json",
+      "bytes": 9205,
+      "sha256": "aa0f60232083ba83c81cf9dca2594e8c286c6fd6f21c66459abd71697208afa3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-vietnam-followups-20261015/preparation/finalize-request.json",
+      "bytes": 3206,
+      "sha256": "689996fb22cfe210a41a8a8b4e33b72cc43c36ff6a625b3b554805514ecef570",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-vietnam-followups-20261015/preparation/operating-observation.json",
+      "bytes": 2334,
+      "sha256": "d73b9f580f214d974b75924fb390487ac8d121bbbbf3975546b4c38d69366511",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-vietnam-followups-20261015/review/actual-composition-review.json",
+      "bytes": 30165,
+      "sha256": "50d7f191a91e3649c2a8422c8950b93ca818c7dd7eb0e52ad868e1a461e6878b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-vietnam-followups-20261015/review/actual-final-output-review.json",
+      "bytes": 81222,
+      "sha256": "1786dce38657726ed57f80602742deed925c44e95be98e53cc4e350b37706c9c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-vietnam-followups-20261015/review/finalize-config-review.json",
+      "bytes": 22027,
+      "sha256": "2491f988675448fc1814814e65c511e45952103f941e9096b2f84d46cb955790",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-vietnam-followups-20261015/review/review.json",
+      "bytes": 18162,
+      "sha256": "4aa0a11720399cf80026c1717c1b345f7205de97ac1550a2f0758d81a2e31274",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-vietnam-followups-20261015/selected-delivery-expectations.json",
+      "bytes": 133665,
+      "sha256": "05591628cfa74c577cf0660d198eb5897d34d3d9bb3e6fcfcbf8885e1409eaef",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/anphu1/authority/authority-binding.json",
+      "bytes": 758,
+      "sha256": "58bf024c4a4426fdc8d4ca7bedb0acba1701d799417f05efe3a6e9010bf23d52",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/anphu1/authority/original-rule-preimage.json",
+      "bytes": 755,
+      "sha256": "2e9a6c43cfe6e1ef81e23dcde365ffc3e8e819156b8989f759f069265a8fbe08",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/anphu1/native-patch.json",
+      "bytes": 55,
+      "sha256": "8dfa7b0943e2845ef881ffc875329e21daae5d07143236aed7af71ea428c605f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/anphu1/source-evidence.json",
+      "bytes": 48708,
+      "sha256": "be2cddf9790f7d0fcd0bfcd00b9d332e194b60bb08a71290dc31d84070473281",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/botrach41/authority/authority-binding.json",
+      "bytes": 766,
+      "sha256": "207b870e4d99b6981ac879ac67922e3b011ee3843239cba5774093948265aac1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/botrach41/authority/original-rule-preimage.json",
+      "bytes": 763,
+      "sha256": "9a84abcb2bea166ed3ab29d073b8b802406c5a05fe3982c1ed953f5c200bea38",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/botrach41/native-patch.json",
+      "bytes": 1331,
+      "sha256": "1dacc325b558d06256a8ebf8b83f3f2ec16b943602c21f1f77c7d7b332dcd36d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/botrach41/source-evidence.json",
+      "bytes": 49334,
+      "sha256": "2a66249d7f390a6cd964dd94e3489bbd5d2d5e4043e1ce4ffb07447301a9cf96",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/clean309/authority/authority-binding.json",
+      "bytes": 766,
+      "sha256": "eab2f223602387ab03913c3855aade3e9c7177968bee5709fa71e737fc63b3d6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/clean309/authority/original-rule-preimage.json",
+      "bytes": 763,
+      "sha256": "eb3517f79b028b6724dc729cec3a41ccf2bf0a903cdda397493c788b787bffdf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/clean309/native-patch.json",
+      "bytes": 6413,
+      "sha256": "ffbfbaa636002ea0956458510dbda36d5b4b532c5ed04c9eda612f887fb14b2b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/clean309/source-evidence.json",
+      "bytes": 3477581,
+      "sha256": "c5446fbd5fe4fea3912fb002cdc6e80aa71679fb159c0b35a83936868e92a274",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/original-stage-inputs.json",
+      "bytes": 811030,
+      "sha256": "e61a2c5a6179113b30365dd24131bb4a46e5b2ea36860edddf82ce89ace307ea",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/physical/whole-target-support.json",
+      "bytes": 324148,
+      "sha256": "0b0247438ee15cf8f56f28060d4ee3152d66ccbae81c22afb5e8cd75339eeb78",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/ownership-selection.json",
+      "bytes": 1572,
+      "sha256": "daf118af55c14a5c8505db446b393fbf9514d594765c542a7b54c8500284da93",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "retained-five-authority-selected-delivery",
+      "kind": "code",
+      "description": "Reuse the five unchanged full original constructor results and exact rule/custody/source/native-patch inputs. Accepted stock compose and finalize produced this candidate metadata. This manifest inventories whole bytes and original qualification bindings; it does not execute source, physical, native qualification or geometric predicates.",
+      "software": "Accepted WorldAtlas prepare-delivery-handoff.mjs b73fdbb1b0e243b773514ea46aaced496a63028f; actual composition/finalization receipts retained in candidate preparation/operating-observation.json",
+      "units": "whole-file bytes, SHA256, immutable Git OID/commit and literal component identities"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "metric_bindings": [],
+  "conclusions": [
+    {
+      "text": "Five previously qualified authority groups are composed and finalized as a selected-data proposal. Original qualification products and source/witness limits are unchanged. Current selected owner-zero/conservation, trusted emitted checks, exact final-head review and ordinary integration remain pending; this manifest grants no accepted or publication credit.",
+      "status": "unresolved",
+      "source_ids": [
+        "idn-maluku654",
+        "vnm-clean309",
+        "vnm-botrach41",
+        "vnm-anphu1",
+        "idn-raja10617"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "partial",
+    "implementation": "proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "node scripts/prepare-delivery-handoff.mjs compose CONFIG FRESH_DESTINATION (actual versioned request and observed composition products retained)",
+    "node scripts/prepare-delivery-handoff.mjs finalize CONFIG FRESH_DESTINATION (actual versioned request, operating observation and canonical products retained)",
+    "node scripts/evidence-quality.mjs coordination/engineering/indonesia-vietnam-followups-20261015/evidence-quality.json"
+  ],
+  "change_receipts": [
+    {
+      "path": ".github/package-inputs.json",
+      "status": "modified",
+      "original_sha256": "fac8bea6c67effe66e306de46746b74cba7e8fb6fc4d53ffc80cfd79e02bf89b"
+    },
+    {
+      "path": "coordination/engineering/indonesia-maluku-followup-20261015/maluku654/authority/authority-binding.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/indonesia-maluku-followup-20261015/maluku654/authority/original-rule-preimage.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/indonesia-maluku-followup-20261015/maluku654/candidate-native-patch.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/indonesia-maluku-followup-20261015/maluku654/source-evidence.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/indonesia-raja-ampat-20261015/native10617-authority-001/authority-binding.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/indonesia-raja-ampat-20261015/native10617-authority-001/original-rule-preimage.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/indonesia-raja-ampat-20261015/native10617-input-001/candidate-native-patch.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/indonesia-raja-ampat-20261015/native10617-input-001/source-evidence.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/indonesia-raja-ampat-20261015/physical-result-001/whole-target-support.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/indonesia-raja-ampat-20261015/whole-physical-input-001/original-stage-inputs.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/indonesia-vietnam-followups-20261015/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/indonesia-vietnam-followups-20261015/component-roster.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/indonesia-vietnam-followups-20261015/delivery/authority-registry.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/indonesia-vietnam-followups-20261015/delivery/patch.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/indonesia-vietnam-followups-20261015/delivery/runtime-envelope.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/indonesia-vietnam-followups-20261015/delivery/selected-ledger.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/indonesia-vietnam-followups-20261015/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/indonesia-vietnam-followups-20261015/ownership-selection-v2.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/indonesia-vietnam-followups-20261015/preparation/compose-original-quartets.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/indonesia-vietnam-followups-20261015/preparation/finalize-request.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/indonesia-vietnam-followups-20261015/preparation/operating-observation.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/indonesia-vietnam-followups-20261015/review/actual-composition-review.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/indonesia-vietnam-followups-20261015/review/actual-final-output-review.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/indonesia-vietnam-followups-20261015/review/finalize-config-review.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/indonesia-vietnam-followups-20261015/review/review.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/indonesia-vietnam-followups-20261015/selected-delivery-expectations.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/anphu1/authority/authority-binding.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/anphu1/authority/original-rule-preimage.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/anphu1/native-patch.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/anphu1/source-evidence.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/botrach41/authority/authority-binding.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/botrach41/authority/original-rule-preimage.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/botrach41/native-patch.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/botrach41/source-evidence.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/clean309/authority/authority-binding.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/clean309/authority/original-rule-preimage.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/clean309/native-patch.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/clean309/source-evidence.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/original-stage-inputs.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/physical/whole-target-support.json",
+      "status": "added"
+    },
+    {
+      "path": "data/ownership-selection.json",
+      "status": "modified",
+      "original_sha256": "f28a419836f741e7102850ed0897d37fbe9640bf91792f45294746b9b8639a2e"
+    }
+  ],
+  "original_country_issues": [
+    1884,
+    1881
+  ],
+  "original_authorities": [
+    {
+      "id": "idn-maluku654",
+      "cells": 654,
+      "component_ids": [
+        "source-target:09a7b8ecd55a542d49ade7252d8dc245ef797948c178a49eb93173de390da965",
+        "source-target:4a34e6b70c0d6b974a490a19b30954eb96ce595a7237216dd1c987e2ff94fe1e"
+      ],
+      "original_authority": {
+        "rule_preimage": {
+          "commit": "0537d91aa5a3bae7f808670541e33ff43ec41a5e",
+          "path": "coordination/engineering/indonesia-maluku-followup-20261015/maluku654/authority/original-rule-preimage.json",
+          "mode": "100644",
+          "git_blob_oid": "087f39986b39ce5cde78828afa15b06ebc6afda9",
+          "bytes": 728,
+          "sha256": "a0c94282823c47424e8503dac0fda8c6ca7ce3bfbbfcbbac871cdfbbce7a779c"
+        },
+        "source_authority": {
+          "commit": "0537d91aa5a3bae7f808670541e33ff43ec41a5e",
+          "path": "coordination/engineering/indonesia-maluku-followup-20261015/maluku654/authority/authority-binding.json",
+          "mode": "100644",
+          "git_blob_oid": "803a2ed359107594114dbef2fd8a33cc6178b1ea",
+          "bytes": 731,
+          "sha256": "a00746606a79533b284a5975a6f11230ff12e54d68aed58b8dab32cd403d8936"
+        },
+        "ledger": {
+          "commit": "0537d91aa5a3bae7f808670541e33ff43ec41a5e",
+          "path": "coordination/engineering/indonesia-maluku-followup-20261015/maluku654/authority/constructor-result.json",
+          "mode": "100644",
+          "git_blob_oid": "857ace734a40c957e8ae13c0a4a5cf26df11ea7a",
+          "bytes": 18464,
+          "sha256": "097242fc8d6369022ce8fd5aaf355a9ee08c4f4195266daec782c5b2372808be"
+        },
+        "native_patch": {
+          "commit": "6e9c45cc56af46d68a2d6ffffb9ada1d795673f6",
+          "path": "coordination/engineering/indonesia-maluku-followup-20261015/maluku654/candidate-native-patch.json",
+          "mode": "100644",
+          "git_blob_oid": "f715a22e1cf7c3a5530bc5abed02a03ce83e5e58",
+          "bytes": 41498,
+          "sha256": "aafeb1060db5582dd848b90d79f4315def519e4db3d0d1e96b6b87432869a950"
+        }
+      },
+      "source_evidence": {
+        "bytes": 16124,
+        "commit": "6e9c45cc56af46d68a2d6ffffb9ada1d795673f6",
+        "git_blob_oid": "439ffc327d6df006986fe4e917e96602a92b1d52",
+        "mode": "100644",
+        "path": "coordination/engineering/indonesia-maluku-followup-20261015/maluku654/source-evidence.json",
+        "sha256": "17f6446de92606e2514eeb0c1e689384066fa2853f96254fc27dc364d69e7789"
+      }
+    },
+    {
+      "id": "vnm-clean309",
+      "cells": 309,
+      "component_ids": [
+        "source-target:084682b4840b680c94ac8da43158832ca997db263ce737e519ff48384541af6c",
+        "source-target:228dd4d134a2fef876c566d6b9f13d13e567c3dc7cb77dcb60ae163db8404997",
+        "source-target:279e4508d13261e83f4e4e9661cb8090f48aad70fe8d51774517a04be7a05d50",
+        "source-target:353426183a7e387c709acf564ba153b06413ba96ed302abd39557f785a3ccbdd",
+        "source-target:3e9183d8641407d6de0fe0aaccc1273750c3651f742bfa7de7a8fc44008c1552",
+        "source-target:43dd5a681bb2923b176c4fee12df7ab2ff264f2873ee224ba9039ff59a5b87c9",
+        "source-target:523b637c281b82f3eeb5a89ebee66786a7097b1f6c9edb1fc40aa44639845b08",
+        "source-target:5f6ebc89f161cdab3289bdf43f5a4cd058ade28cee7774cf26cf4fe0044b259f",
+        "source-target:73754478d67b5a01f2997be377873e609f28591057f3b4b9d0ec881e9bf5e0ee",
+        "source-target:778b9276a078b779df75760784f4d61bce695473a24e2dd17cda56f0279e1759",
+        "source-target:7c4e9acee2468d307472c031cd7be193f279973979643ddfa18b11ba17330be9",
+        "source-target:838a1f035b0b2e95d965e5d473adab04dcb90a3fcc6371c3b079d2698999fe16",
+        "source-target:83d86e00317b59d2589d6d7d4d9dc1dd1f24a3c0bd59b8772b48b1e54474cd3b",
+        "source-target:8bb799252383b996064b6a390e2c9ba989430a9fc5d27fb5248150d59b09c911",
+        "source-target:b2a2d184b8f00fe27cb46991d0277cecaedb47a3a59e06c0e2c281ba193bee7a",
+        "source-target:baf491b9cf6362a577be108b9bc9a53afb3aab6381ee03d1d9fa8be2154d7cf9",
+        "source-target:d449dd794ae5a2c109ffabac449c4f713c1155e4f5485c205ec9de3055143c8b",
+        "source-target:d4844a64429206135b5b8d86705370dfe4c49e26f491a533d113449c30edd349",
+        "source-target:eede6016d729cbf204ec69a13e4f5b082ecdb479ac2482eae47a23bb38f3516d",
+        "source-target:effe019b6ed2834638d5961e847cd86339f0156132f3bdd2f48049f2f3c1a02c",
+        "source-target:fbd4551d43bc561b7b62d937bf569a3d93c4968993893069c9fdcf56bd9333fe"
+      ],
+      "original_authority": {
+        "rule_preimage": {
+          "commit": "128bd31db111857db8f3dc641eb67207267924d2",
+          "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/clean309/authority/original-rule-preimage.json",
+          "mode": "100644",
+          "git_blob_oid": "eaabb56511bd30991e3e1b2f031dd7eb2a39fc0a",
+          "bytes": 763,
+          "sha256": "eb3517f79b028b6724dc729cec3a41ccf2bf0a903cdda397493c788b787bffdf"
+        },
+        "source_authority": {
+          "commit": "128bd31db111857db8f3dc641eb67207267924d2",
+          "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/clean309/authority/authority-binding.json",
+          "mode": "100644",
+          "git_blob_oid": "043e6b51c95041d5aec7e78bbb0f522ac303ecf1",
+          "bytes": 766,
+          "sha256": "eab2f223602387ab03913c3855aade3e9c7177968bee5709fa71e737fc63b3d6"
+        },
+        "ledger": {
+          "commit": "128bd31db111857db8f3dc641eb67207267924d2",
+          "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/clean309/authority/constructor-result.json",
+          "mode": "100644",
+          "git_blob_oid": "ea8e11c5201d2a01ef4aa01491ef84d742f348f2",
+          "bytes": 71181,
+          "sha256": "7eb7662def358c11da1db1eaf934b8482bec783d372c21af67fdefa2ea6da256"
+        },
+        "native_patch": {
+          "commit": "3cd7f0ab90ffced16e3e285163e15fd8ae4af956",
+          "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/clean309/native-patch.json",
+          "mode": "100644",
+          "git_blob_oid": "33e3c57e7da7687c692d803961d0c09591235e4c",
+          "bytes": 6413,
+          "sha256": "ffbfbaa636002ea0956458510dbda36d5b4b532c5ed04c9eda612f887fb14b2b"
+        }
+      },
+      "source_evidence": {
+        "bytes": 3477581,
+        "commit": "3cd7f0ab90ffced16e3e285163e15fd8ae4af956",
+        "git_blob_oid": "4f2126a85f1165c38b86835e8ae7ddad3dfd2e38",
+        "mode": "100644",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/clean309/source-evidence.json",
+        "sha256": "c5446fbd5fe4fea3912fb002cdc6e80aa71679fb159c0b35a83936868e92a274"
+      }
+    },
+    {
+      "id": "vnm-botrach41",
+      "cells": 41,
+      "component_ids": [
+        "source-target:242b207bc2519bbad19c8f4d0fe8f4190d3d93822ee3f7c4a8f7a0247677e243"
+      ],
+      "original_authority": {
+        "rule_preimage": {
+          "commit": "128bd31db111857db8f3dc641eb67207267924d2",
+          "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/botrach41/authority/original-rule-preimage.json",
+          "mode": "100644",
+          "git_blob_oid": "3923815fe1ee5f53dc1ba72342cab3222e9c44bf",
+          "bytes": 763,
+          "sha256": "9a84abcb2bea166ed3ab29d073b8b802406c5a05fe3982c1ed953f5c200bea38"
+        },
+        "source_authority": {
+          "commit": "128bd31db111857db8f3dc641eb67207267924d2",
+          "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/botrach41/authority/authority-binding.json",
+          "mode": "100644",
+          "git_blob_oid": "531e9ce296a2f4b3b2f194bd33b99edc8e995e05",
+          "bytes": 766,
+          "sha256": "207b870e4d99b6981ac879ac67922e3b011ee3843239cba5774093948265aac1"
+        },
+        "ledger": {
+          "commit": "128bd31db111857db8f3dc641eb67207267924d2",
+          "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/botrach41/authority/constructor-result.json",
+          "mode": "100644",
+          "git_blob_oid": "54b285c88c196781bf20ce933cdd742004031989",
+          "bytes": 4762,
+          "sha256": "717cf512a06b86252dc797edcf446eac6e76e22a4988361a750740899eae6891"
+        },
+        "native_patch": {
+          "commit": "3cd7f0ab90ffced16e3e285163e15fd8ae4af956",
+          "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/botrach41/native-patch.json",
+          "mode": "100644",
+          "git_blob_oid": "40c0becc0ca436d1fe4f095fa099a13c46f0d02d",
+          "bytes": 1331,
+          "sha256": "1dacc325b558d06256a8ebf8b83f3f2ec16b943602c21f1f77c7d7b332dcd36d"
+        }
+      },
+      "source_evidence": {
+        "bytes": 49334,
+        "commit": "3cd7f0ab90ffced16e3e285163e15fd8ae4af956",
+        "git_blob_oid": "fdc45b1b1da7d2d573d4303dd3f12cadf41f2cfe",
+        "mode": "100644",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/botrach41/source-evidence.json",
+        "sha256": "2a66249d7f390a6cd964dd94e3489bbd5d2d5e4043e1ce4ffb07447301a9cf96"
+      }
+    },
+    {
+      "id": "vnm-anphu1",
+      "cells": 1,
+      "component_ids": [
+        "source-target:1f9126266857fdc754c2ebd4a3b6d8b3175842882febe413a5e3ae074e1a2b93"
+      ],
+      "original_authority": {
+        "rule_preimage": {
+          "commit": "128bd31db111857db8f3dc641eb67207267924d2",
+          "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/anphu1/authority/original-rule-preimage.json",
+          "mode": "100644",
+          "git_blob_oid": "97aa278de8ae6fc862747e0cf64613a7781f8abb",
+          "bytes": 755,
+          "sha256": "2e9a6c43cfe6e1ef81e23dcde365ffc3e8e819156b8989f759f069265a8fbe08"
+        },
+        "source_authority": {
+          "commit": "128bd31db111857db8f3dc641eb67207267924d2",
+          "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/anphu1/authority/authority-binding.json",
+          "mode": "100644",
+          "git_blob_oid": "1644726065b5e097ceef903e1d22c30cee4465a8",
+          "bytes": 758,
+          "sha256": "58bf024c4a4426fdc8d4ca7bedb0acba1701d799417f05efe3a6e9010bf23d52"
+        },
+        "ledger": {
+          "commit": "128bd31db111857db8f3dc641eb67207267924d2",
+          "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/anphu1/authority/constructor-result.json",
+          "mode": "100644",
+          "git_blob_oid": "b148fc99bd8ae45a24f0a6d1dea18bef73962621",
+          "bytes": 2736,
+          "sha256": "f2f167ef65239cf5599ff62551e629dccb64b42a0d6d4b86c7a4b8dbdc09db7a"
+        },
+        "native_patch": {
+          "commit": "3cd7f0ab90ffced16e3e285163e15fd8ae4af956",
+          "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/anphu1/native-patch.json",
+          "mode": "100644",
+          "git_blob_oid": "a9c2cdfdaa5c8972e1006b445f4132933033a5b5",
+          "bytes": 55,
+          "sha256": "8dfa7b0943e2845ef881ffc875329e21daae5d07143236aed7af71ea428c605f"
+        }
+      },
+      "source_evidence": {
+        "bytes": 48708,
+        "commit": "3cd7f0ab90ffced16e3e285163e15fd8ae4af956",
+        "git_blob_oid": "35fddef43a9322a40bd7c5129cc89a100d1e990a",
+        "mode": "100644",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/anphu1/source-evidence.json",
+        "sha256": "be2cddf9790f7d0fcd0bfcd00b9d332e194b60bb08a71290dc31d84070473281"
+      }
+    },
+    {
+      "id": "idn-raja10617",
+      "cells": 10617,
+      "component_ids": [
+        "source-target:88714fd8cbdb4318117a68a0036374893fdaa0aa875d39844dd3f300fcd7c461"
+      ],
+      "original_authority": {
+        "rule_preimage": {
+          "commit": "52416018196cd2dab44bee8286073cb35f45b05d",
+          "path": "coordination/engineering/indonesia-raja-ampat-20261015/native10617-authority-001/original-rule-preimage.json",
+          "mode": "100644",
+          "git_blob_oid": "64362c8401b628e869d0967c95c9101db881c797",
+          "bytes": 743,
+          "sha256": "ba1ca181f2a062f2dbf01eaef45e6801f0d4e04a643625ab91d90c311e3ff4e7"
+        },
+        "source_authority": {
+          "commit": "52416018196cd2dab44bee8286073cb35f45b05d",
+          "path": "coordination/engineering/indonesia-raja-ampat-20261015/native10617-authority-001/authority-binding.json",
+          "mode": "100644",
+          "git_blob_oid": "5a3dc17b6ddc8b089be44b60e597ead70146f654",
+          "bytes": 746,
+          "sha256": "f6aaa0c69b1953e3c567485d313e990d862ebd5f2780716fe3b99859678f0fbd"
+        },
+        "ledger": {
+          "commit": "52416018196cd2dab44bee8286073cb35f45b05d",
+          "path": "coordination/engineering/indonesia-raja-ampat-20261015/native10617-authority-001/constructor-result.json",
+          "mode": "100644",
+          "git_blob_oid": "589b77b3613d1c73793c3e54e1b9e9f1a0796f99",
+          "bytes": 114035,
+          "sha256": "a97e90c778f8858f657a13e692683cf1fa873eb38a767ef9cf25ca980d0bd36b"
+        },
+        "native_patch": {
+          "commit": "4af11a67282b6238137abfe54172fc5b5884832a",
+          "path": "coordination/engineering/indonesia-raja-ampat-20261015/native10617-input-001/candidate-native-patch.json",
+          "mode": "100644",
+          "git_blob_oid": "f89b3a40ff537f68613d7a411d858a6ddb927668",
+          "bytes": 310458,
+          "sha256": "7b5da5fcea4e0debc0be5ddc7aa6b5a751c0351a13ba0e2d227da78a5bb04b3b"
+        }
+      },
+      "source_evidence": {
+        "bytes": 64759,
+        "commit": "4af11a67282b6238137abfe54172fc5b5884832a",
+        "git_blob_oid": "e990df7fc520e9f0e384db23cf6a9d903e28621a",
+        "mode": "100644",
+        "path": "coordination/engineering/indonesia-raja-ampat-20261015/native10617-input-001/source-evidence.json",
+        "sha256": "45786512704963cc6aea38942efd798798fc39b5dd1d9cf31412f1929564a1ba"
+      }
+    }
+  ],
+  "qualified_constructor_pins": {
+    "idn-maluku654": {
+      "commit": "0537d91aa5a3bae7f808670541e33ff43ec41a5e",
+      "path": "coordination/engineering/indonesia-maluku-followup-20261015/maluku654/authority/constructor-result.json",
+      "mode": "100644",
+      "git_blob_oid": "857ace734a40c957e8ae13c0a4a5cf26df11ea7a",
+      "bytes": 18464,
+      "sha256": "097242fc8d6369022ce8fd5aaf355a9ee08c4f4195266daec782c5b2372808be"
+    },
+    "vnm-clean309": {
+      "commit": "128bd31db111857db8f3dc641eb67207267924d2",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/clean309/authority/constructor-result.json",
+      "mode": "100644",
+      "git_blob_oid": "ea8e11c5201d2a01ef4aa01491ef84d742f348f2",
+      "bytes": 71181,
+      "sha256": "7eb7662def358c11da1db1eaf934b8482bec783d372c21af67fdefa2ea6da256"
+    },
+    "vnm-botrach41": {
+      "commit": "128bd31db111857db8f3dc641eb67207267924d2",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/botrach41/authority/constructor-result.json",
+      "mode": "100644",
+      "git_blob_oid": "54b285c88c196781bf20ce933cdd742004031989",
+      "bytes": 4762,
+      "sha256": "717cf512a06b86252dc797edcf446eac6e76e22a4988361a750740899eae6891"
+    },
+    "vnm-anphu1": {
+      "commit": "128bd31db111857db8f3dc641eb67207267924d2",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/anphu1/authority/constructor-result.json",
+      "mode": "100644",
+      "git_blob_oid": "b148fc99bd8ae45a24f0a6d1dea18bef73962621",
+      "bytes": 2736,
+      "sha256": "f2f167ef65239cf5599ff62551e629dccb64b42a0d6d4b86c7a4b8dbdc09db7a"
+    },
+    "idn-raja10617": {
+      "commit": "52416018196cd2dab44bee8286073cb35f45b05d",
+      "path": "coordination/engineering/indonesia-raja-ampat-20261015/native10617-authority-001/constructor-result.json",
+      "mode": "100644",
+      "git_blob_oid": "589b77b3613d1c73793c3e54e1b9e9f1a0796f99",
+      "bytes": 114035,
+      "sha256": "a97e90c778f8858f657a13e692683cf1fa873eb38a767ef9cf25ca980d0bd36b"
+    }
+  },
+  "claims": {
+    "incoming_qualified_cells_reused": 11622,
+    "original_authority_groups": 5,
+    "incoming_components": 26,
+    "accepted_predecessor_cells_preserved": 71339,
+    "candidate_cumulative_cells": 82961,
+    "new_accepted_cells": 0,
+    "current_owner_zero": false,
+    "literal_ledger_rows": 296,
+    "selected_expectation_members": 288
+  },
+  "limits": [
+    "The immutable country constructor/source snapshots are not ancestral baseline claims; they remain complete scientific-scope source references.",
+    "Metadata-only composition/finalization resource observations are retained as observations in their exact candidate file; empty metrics avoid pretending to have executed new scientific evaluations.",
+    "Every original source-relative, water, parent, territorial, adverse-query and operating hold remains unchanged; all unfinished7904/4671/NorthMaluku cohorts excluded.",
+    "No new qualification/source/GSHHG/physical replay, fresh browser/GPU/Canvas proof or unrequested full build was performed.",
+    "Trusted selected native/emitted checks and final-head review belong to the coordinated ordinary integration lane."
+  ],
+  "inventory_head": "757b405e103b60b02622661180076b96d61d9658",
+  "inventory_basis": "Exact40published adoption postimages at757b405 plus independently completed final-output review;41output descriptors exclude the manifest itself;42change receipts include final review and manifest."
+}

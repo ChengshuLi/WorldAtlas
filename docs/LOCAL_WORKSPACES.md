@@ -164,12 +164,15 @@ Allocation is serialized across this repository by an exclusive local directory
 lock. It requires at least **10 GiB free after the new reservation**. There is no
 fixed cap on combined checkout usage or on an individual reservation. Reservations
 must be positive, finite and represent safe integer byte counts. Usage reporting
-still includes all registered legacy worktrees, even outside the managed root,
+and `check` still include all registered legacy worktrees, even outside the managed root,
 and the primary checkout's Git store. Each managed slot counts the greater of
 measured usage and its reserved future size; allocation reserves at least the
 selected Git input size and defaults to 1 GiB. Reserve for dependencies, downloads,
 decompression, generated data and build output before starting, rather than
-estimating source size alone. Missing paths or unknown measurements block allocation.
+estimating source size alone. Missing selected inputs or unknown selected input sizes
+block allocation. Allocation checks real free space without traversing registered
+checkouts; missing worktree paths or unknown checkout measurements block `report`
+and `check`.
 
 Run `check` before downloads, installations, reproductions/builds and at work
 milestones. A failure means stop new generation/installation and inspect `report`;
