@@ -70,6 +70,10 @@ Production-deferred work reports verified selected/offline integration separatel
   to selection still require current-baseline conservation and actual selected-output
   verification. Unrelated main commits do not alone require repeating source research.
 - Test changed logic with meaningful positive/adverse cases and run required focused CI.
+  Ordinary coordination changes may include modified tests from the existing focused
+  runner inventory; their ordinary authored blobs and complete runtime fixtures must
+  be available. Unknown, new, removed, renamed or nonordinary test files retain full
+  regression, as do application/package/native changes.
   New exact heads require renewed relevant review, not automatic full reruns by author,
   reviewer and Auditor. Repeat expensive executions only for a changed repeatability
   claim, a relevant input/method/runtime change, a suspect earlier result or an explicit

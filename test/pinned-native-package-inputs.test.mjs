@@ -20,7 +20,13 @@ test('declared ordinary package snapshots authenticate complete native source st
  const image=fs.mkdtempSync(path.join(cache,'image-')),old=process.env.WORLDATLAS_PACKAGE_STAGE,oldCeiling=process.env.GIT_CEILING_DIRECTORIES;
  try{
   write(image,CONTEXT_STAGE_PATH,fs.readFileSync(CONTEXT_STAGE_PATH));
-  write(image,'.github/package-inputs.json',fs.readFileSync('.github/package-inputs.json'));
+  // This explicit historical image owns its original consumed-input roster;
+  // ordinary current package declarations deliberately omit that predecessor.
+  const inputs=[...new Set(['.github/package-inputs.json',CONTEXT_STAGE_PATH,candidatePath,proofPath,
+   candidate.native_latitudes.path,...stage.outputs.map(pin=>pin.path),
+   ...stage.baseline.files.filter(pin=>pin.path.startsWith('data/')).map(pin=>pin.path)])];
+  write(image,'.github/package-inputs.json',Buffer.from(JSON.stringify({version:1,inputs,
+   optional_inputs:[],verification_paths:[],generated_outputs:[]})));
   for(const output of stage.outputs)write(image,output.path,fs.readFileSync(output.path));
   for(const source of stage.baseline.files.filter(f=>f.path.startsWith('data/')))write(image,source.path,reader(source.path,stage.baseline.commit));
   write(image,candidatePath,fs.readFileSync(candidatePath));write(image,proofPath,fs.readFileSync(proofPath));
@@ -35,12 +41,11 @@ test('declared ordinary package snapshots authenticate complete native source st
   const savedManifest=fs.readFileSync(candidatePath);fs.unlinkSync(candidatePath);fs.symlinkSync(path.join(root,candidatePath),candidatePath);
   await assert.rejects(selectBuildOwnership({manifestPath:candidatePath,expectedSha256:'efe31373ff6a2c3f4ba5f11f8cbe37b25337778b344d9dbf1d3dfde301e3e722',expectedReference:reference}),/symlink|ordinary|symbolic/i);
   fs.unlinkSync(candidatePath);write(image,candidatePath,savedManifest);
-  for(const field of ['part','bounds']){
-   const invalid=JSON.parse(savedManifest);
-   (field==='part'?invalid.parts[0]:invalid.bounds).path='../outside.gz';
-   write(image,candidatePath,Buffer.from(JSON.stringify(invalid)));
-   await assert.rejects(selectBuildOwnership({manifestPath:candidatePath,expectedSha256:'efe31373ff6a2c3f4ba5f11f8cbe37b25337778b344d9dbf1d3dfde301e3e722',expectedReference:reference}),/asset must be a declared package input/);
-  }
+  // Native payloads are not resolved as legacy relative package assets. The
+  // reviewed whole-manifest pin rejects changed paths before any transport read.
+  const invalid=JSON.parse(savedManifest);invalid.parts[0].path='../outside.gz';
+  write(image,candidatePath,Buffer.from(JSON.stringify(invalid)));
+  await assert.rejects(selectBuildOwnership({manifestPath:candidatePath,expectedSha256:'efe31373ff6a2c3f4ba5f11f8cbe37b25337778b344d9dbf1d3dfde301e3e722',expectedReference:reference}),/manifest checksum mismatch/);
   write(image,candidatePath,savedManifest);
   const result=await validateContextInputStage({expectedReference:reference});
   assert.equal(result.locations,49625);assert.equal(result.source_files,43);assert.equal(result.scientific_approval,false);

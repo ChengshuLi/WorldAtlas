@@ -21,6 +21,9 @@ function fixture(t) {
   write('node_modules/example/package.json', {version: '1.2.3'});
   write('requirements.txt', 'numpy==2.3.5\nshapely==2.1.2\npyproj==3.7.2\n');
   write('src/first.txt', 'first'); write('src/second.txt', 'second');
+  // This fixture declares and supplies its actual current executable roots.
+  for(const name of ['scripts/build-cloudflare-inner.mjs','scripts/package-build.mjs','coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution.mjs']){definition.inputs.push(name);write(name,'export const fixture=1;\n');}
+  write('.github/package-inputs.json',definition);
   git('init', '-q'); git('add', '.'); git('-c', 'user.name=Fixture', '-c', 'user.email=fixture@example.invalid', 'commit', '-qm', 'fixture');
   // Synthetic runtime probe only; real installed imports are exercised by the
   // completed-output benchmark. No fixture report qualifies scientific work.
@@ -132,7 +135,8 @@ test('all actual package entries expose their complete declared current import c
   const actual=inspectPackageExecutionInputs(root,definition,kind),entry=`scripts/build-${kind}-inner.mjs`;
   assert.deepEqual(actual.errors,[]);
   assert(actual.files.includes(entry));assert(actual.files.includes('scripts/package-build.mjs'));
-  assert(actual.files.includes('scripts/native-ownership/validate-build-context-stage.mjs'));
+  assert(actual.files.includes('scripts/package-current-additive.mjs'));
+  assert(!actual.files.includes('scripts/native-ownership/validate-build-context-stage.mjs'));
   assert.deepEqual(actual.files,[...new Set(actual.files)].sort());
   for(const name of actual.files)assert(containsPackagePath(definition.inputs,name),name);
  }

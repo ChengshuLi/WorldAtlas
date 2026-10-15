@@ -7,7 +7,7 @@ import {execFileSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import {gzipSync} from 'node:zlib';
 import {sha256} from '../scripts/evidence-quality.mjs';
-import {runSelectedDeliverySmoke, verifySelectedDelivery} from '../scripts/selected-delivery-smoke.mjs';
+import {runSelectedDeliverySmoke, verifySelectedDelivery, selectedStableOwnerControls} from '../scripts/selected-delivery-smoke.mjs';
 import {packOwnership} from '../src/pixel-ownership.js';
 import {loadOwnershipAssets} from '../src/ownership-assets.js';
 import {packageStartupOwnership} from '../scripts/package-startup-ownership.mjs';
@@ -38,15 +38,8 @@ function fixture(t, changes = {}) {
   ];
   const baseReference = {id: 'geography:base', footprints_sha256: loadedBaseFootprintSha256(originalFeatures),
     hierarchy_sha256: 'a'.repeat(64)};
-  const request = {current_rows: [{y: 3, runs: [[1,3,1],[8,10,2]]}],
-    acquisition: {predecessor_rows: [{y: 4, runs: [[7,8,2]]}, {y: 3, runs: [[1,3,1],[8,10,2]]}]}};
-  changes.request?.(request);
-  const requestPin = write(root, 'rebind/request.json', json(request));
-  const result = {native: {assigned_cells: 2}};
-  changes.result?.(result);
-  const resultPin = write(root, 'rebind/result.json', json(result));
-  const certificateBytes = json({request: requestPin, result: resultPin});
-  write(root, 'rebind/certificate.json', certificateBytes);
+  // Historical provenance remains an inert pin; routine consumption never opens it.
+  const certificateBytes = json({historical: 'not a routine smoke input'});
   const components = [
     {component_id: 'component-a', disposition: 'assigned', native_cells: 2, geometry: rectangle(1,0,2,1)},
     {component_id: 'component-b', disposition: 'zero-cell', native_cells: 0, geometry: rectangle(3,0,4,1)}
@@ -74,7 +67,7 @@ function fixture(t, changes = {}) {
   changes.patch?.(patch);
   const patchPin = write(emittedDirectory, 'additive-repairs/patch.json', json(patch));
   const rows = Array(262166).fill(new Uint32Array());
-  rows[3] = Uint32Array.from([1,3,1,8,10,2]); rows[4] = Uint32Array.from([7,8,2]);
+  rows[3] = Uint32Array.from([1,2,1,8,10,2]); rows[4] = Uint32Array.from([7,8,2]);
   const packed = packOwnership({size: rows.length, rows});
   const parts = ['rows', 'runs'].map(kind => {
     const bytes = Buffer.from(packed[kind].buffer);
@@ -112,26 +105,28 @@ function fixture(t, changes = {}) {
   changes.expectations?.(expectations);
   const expectationsPath = path.join(directory, 'expectations.json'), outputPath = path.join(directory, 'report.json');
   fs.writeFileSync(expectationsPath, json(expectations));
-  return {directory, root, emittedDirectory, expectationsPath, outputPath, expectations, atlas, ledger, patch, request, result,
+  return {directory, root, emittedDirectory, expectationsPath, outputPath, expectations, atlas, ledger, patch,
     options: {root, emittedDirectory, expectationsPath, outputPath},
     async kernel() {
       const fetcher = async name => new Response(fs.readFileSync(path.join(emittedDirectory, name)));
       const base = await loadOwnershipAssets(atlas.pixelMap, fetcher), features = structuredClone(catalog);
+      const beforeControls = selectedStableOwnerControls(base, patch);
       const effective = await loadAdditiveNativePatch(atlas, features, base, {fetcher});
       return {expectations, ledger, ledgerSha256: ledgerPin.sha256, patch, patchSha256: patchPin.sha256,
-        features, base, effective, request, result};
+        features, base, effective, beforeControls};
     }};
 }
 
 test('actual CLI checks complete mixed assigned/zero-cell cohort, every new cell and stable rows', t => {
   const f = fixture(t);
+  assert.equal(fs.existsSync(path.join(f.root,'rebind')),false,'Routine smoke fixture contains no historical rebind files');
   const stdout = execFileSync(process.execPath, [script, '--root', f.root, '--emitted-directory', f.emittedDirectory,
     '--expectations', f.expectationsPath, '--output', f.outputPath], {encoding: 'utf8'});
   const report = JSON.parse(fs.readFileSync(f.outputPath));
   assert.deepEqual(JSON.parse(stdout), report);
   assert.equal(report.passed, true); assert.equal(report.feature_count, 2);
   assert.equal(report.cumulative_native_cells_picked_and_sampled, 2);
-  assert.equal(report.stable_owner_controls, 2); assert.equal(report.expected_components_verified, 2);
+  assert.equal(report.stable_owner_controls, 1); assert.equal(report.expected_components_verified, 2);
   assert.equal(report.expectations_sha256, sha256(fs.readFileSync(f.expectationsPath)));
   assert(report.inputs.some(input => input.path === 'ownership/runs.bin.gz'));
   for (const input of report.inputs) {
@@ -174,34 +169,43 @@ test('actual kernel rejects missing/duplicate selected rows, target drift and om
   }
 });
 
-test('controls reject changed stable owner, vacuous rows and conflicting duplicate rows', async t => {
-  for (const edit of [
-    request => {request.current_rows[0].runs[0][2] = 2; request.acquisition.predecessor_rows[1].runs[0][2] = 2;},
-    request => request.current_rows = [],
-    request => request.acquisition.predecessor_rows = [],
-    request => request.acquisition.predecessor_rows[0].runs = [],
-    request => request.acquisition.predecessor_rows[1].runs[0][2] = 2
-  ]) {
-    const f = fixture(t, {request: edit});
-    await assert.rejects(runSelectedDeliverySmoke(f.options), /Stable|stable|Conflicting/);
-    assert.equal(fs.existsSync(f.outputPath), false);
+test('saved before-state controls reject real owner mutation without changing added cells', async t => {
+  const f = fixture(t);
+  for (const role of ['base','effective']) {
+    const state = await f.kernel();
+    const control = state.beforeControls[0], grid = state[role];
+    if (role === 'base') grid.runs[grid.rows[control.y * 2] * 2] += 2 ** grid.coordinateBits;
+    else {
+      // The runtime coalesces old/new equal-owner intervals. Split only the
+      // before-state interval so corrupting it leaves both added cells correct.
+      const rows = Array(grid.size).fill(new Uint32Array());
+      rows[3] = Uint32Array.from([1,3,2,3,5,1,8,10,2]);
+      rows[4] = Uint32Array.from([7,8,2]);
+      Object.assign(grid, packOwnership({size:grid.size, rows}));
+    }
+    assert.throws(() => verifySelectedDelivery(state), /Stable (base|effective) owner changed/);
   }
-  const f = fixture(t), state = await f.kernel();
-  // Mutate the actual packed effective owner of a retained control after load.
-  state.effective.runs[state.effective.rows[4 * 2] * 2] -= 2 ** 19;
-  assert.throws(() => verifySelectedDelivery(state), /Stable effective owner changed/);
+  const state = await f.kernel(); state.beforeControls = [];
+  assert.throws(() => verifySelectedDelivery(state), /Missing occupied base owner control/);
 });
 
-test('rebind summary and actual loaded target custody must agree with consumed assets', async t => {
-  const wrongCount = fixture(t, {result: result => result.native.assigned_cells++});
-  await assert.rejects(runSelectedDeliverySmoke(wrongCount.options), /Rebind result native cell count differs/);
+test('current base controls use every affected occupied row and a nonvacuous fallback', async t => {
+  const f = fixture(t), {base} = await f.kernel();
+  assert.deepEqual(selectedStableOwnerControls(base,{rows:[{y:3},{y:4}]}),
+    [{x:1,y:3,id:1},{x:7,y:4,id:2}]);
+  assert.deepEqual(selectedStableOwnerControls(base,{rows:[{y:1}]}),[{x:1,y:3,id:1}]);
+  assert.throws(() => selectedStableOwnerControls({...base,rows:new Uint32Array(base.rows.length)},
+    {rows:[{y:1}]}), /Missing occupied base owner control/);
+});
+
+test('actual loaded target custody agrees with the current pinned roster', async t => {
   const wrongParent = fixture(t, {catalog: features => features[0].properties.parent_id = 'foreign'});
   await assert.rejects(runSelectedDeliverySmoke(wrongParent.options), /owner or parent/);
-  for (const f of [wrongCount, wrongParent]) assert.equal(fs.existsSync(f.outputPath), false);
+  assert.equal(fs.existsSync(wrongParent.outputPath), false);
 });
 
 test('actual loader rejects additions over already occupied native cells', async t => {
-  const f = fixture(t, {patch: patch => patch.rows[0].runs = [[2,4,1]]});
+  const f = fixture(t, {patch: patch => patch.rows[0].runs = [[1,4,1]]});
   await assert.rejects(runSelectedDeliverySmoke(f.options), /replace an assigned cell/);
   assert.equal(fs.existsSync(f.outputPath), false);
 });
