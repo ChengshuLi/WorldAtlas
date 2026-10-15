@@ -598,6 +598,33 @@ independent review. Fresh resource admission and any selected execution contract
 remain mandatory. Lightweight metadata follows shared Git/storage safeguards,
 without acquiring a separate all-team GIS compute permission round.
 
+For unchanged `compose` and `finalize`, reuse the original rule-preimage,
+authority-binding, complete constructor-result and native-patch pins from the
+qualified handoff. Run the stock phases without separate descriptor/config
+attestation reviews, repeated whole-pin receipts or handoff acknowledgment gates.
+The stock reader authenticates each ordinary commit/path, Git object, size and
+whole-file hash; composition checks the original joins and conservation, and
+finalization derives package read roles and exact original staging. Preserve the
+real commit boundaries between phases and every original scientific limit.
+
+Keep one substantive independent actual-output scientific review for the delivery,
+reusing original qualification reviews and applicable unchanged intermediate
+evidence. Check the actual original-to-final scope, inherited and added rows/cells,
+excluded holds and final metadata joins. Current-owner-zero, selected-consumer,
+package/output checks, exact-head review and ordinary author/queue gates remain
+required. A changed code path, scientific method or consequential input/result
+claim still needs its relevant review; stock authentication alone is not that review.
+
+Metadata `preparation_allowance` is optional: omission uses the existing finite
+fresh Node admission, while an explicit phase/RSS request is freshly admitted and
+enforced. Retain actual operating headroom, concurrent-growth reservations and
+the command's byte/descriptor/RSS checks. Reuse applicable existing resource
+evidence instead of producing another per-delivery role inventory or allowance
+attestation; reassess bounds when changed inputs or execution make them inapplicable.
+These defaults do not derive every external prospective runtime/OS/copy reserve
+or grant future capacity. Scientific operator profiles and any required complete
+resource accounting remain separate and unchanged.
+
 The Tanjung191 input checkpoint at 2026-10-14T20:28:32Z and qualified checkpoint
 at 20:40:59Z bracket 12m27s, while its preserved external execution lasted
 1.581 seconds (20:35:53.305Z–20:35:54.886Z). That interval includes preparation,
