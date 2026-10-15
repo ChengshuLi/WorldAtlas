@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "kind": "composition-count-observation",
+  "composition_commit": "fb726f466d69f73b91ad12138397d627af612ae3",
+  "baseline_commit": "73edb1d13f416266930327e559296fcc17f90c02",
+  "cumulative_native_cells": 71339,
+  "ledger_rows": 270,
+  "authority_entries": 62,
+  "accepted_baseline_cells": 67009,
+  "proposed_additions": 4330,
+  "new_accepted_cells": 0,
+  "current_owner_zero": false,
+  "status": "finalized-selected-consumer-pending",
+  "inputs": [
+    {
+      "path": "coordination/engineering/myanmar-vietnam-current-cells-20261015/composition/authority-registry.json",
+      "bytes": 59737,
+      "sha256": "8db91d11509bff489386e725f2c6adecf4fc69c41532b57f88e9080682ddd046"
+    },
+    {
+      "path": "coordination/engineering/myanmar-vietnam-current-cells-20261015/composition/selected-ledger.json",
+      "bytes": 2515585,
+      "sha256": "06d6810daa7377897f14f330df79c28b94dbedf0ce88427ba2589948b0e4aaee"
+    },
+    {
+      "path": "coordination/engineering/myanmar-vietnam-current-cells-20261015/composition/patch.json",
+      "bytes": 775818,
+      "sha256": "6b239273bbf9eea29f06fb5f900e6263068c2eae0ec9af771f82c6ff04856c84"
+    },
+    {
+      "path": "coordination/engineering/myanmar-vietnam-current-cells-20261015/composition/runtime-envelope.json",
+      "bytes": 1385,
+      "sha256": "b709697d856579986ed9733f1593cb5c3d3d9d9ff66c4d2888b9a71b3334d369"
+    }
+  ],
+  "derivation": "Cumulative native cells sum complete patch half-open run lengths; rows and entries are literal array lengths.67009+4330=71339 is composition arithmetic, not independently established predecessor/native-bank preservation.",
+  "limits": [
+    "Count summary only; not consumer-authoritative and not another selected-delivery-expectations file.",
+    "Current ownership, class/location/conservation, emitted selected output and integration acceptance remain pending."
+  ]
+}
