@@ -14,10 +14,9 @@ fs.writeFileSync(path.join(destination,'package.json'),'{"type":"module"}\n');
 const entry=[
   "import assert from 'node:assert/strict';import fs from 'node:fs';",
   "import {issueCheckoutExecution,requireCheckoutExecution} from './artifact-checkout-execution.mjs';",
-  "const admission={kind:'qualified-artifact-normal-package-stat-admission',numerical_aggregate_cap_applied:false};",
   "if(process.env.CONTROL_REFUSAL){let opens=0;const original=fs.openSync;fs.openSync=(...args)=>{opens++;return original(...args)};",
-  "try{assert.throws(()=>issueCheckoutExecution({root:process.cwd(),admission}));assert.equal(opens,0);console.log(JSON.stringify({refused:true,opens}));}finally{fs.openSync=original;}}",
-  "else{const record=issueCheckoutExecution({root:process.cwd(),admission});assert.equal(requireCheckoutExecution(record),record);",
+  "try{assert.throws(()=>issueCheckoutExecution({root:process.cwd()}));assert.equal(opens,0);console.log(JSON.stringify({refused:true,opens}));}finally{fs.openSync=original;}}",
+  "else{const record=issueCheckoutExecution({root:process.cwd()});assert.equal(requireCheckoutExecution(record),record);",
   "let rejected=0;for(const foreign of [{},structuredClone(record)]){assert.throws(()=>requireCheckoutExecution(foreign));rejected++;}",
   "const originalShard=process.env.INTEGRATION_SHARD;process.env.INTEGRATION_SHARD=originalShard==='2'?'1':'2';assert.throws(()=>requireCheckoutExecution(record));rejected++;process.env.INTEGRATION_SHARD=originalShard;",
   "const hash=record.runtime.sha256;record.runtime.sha256='0'.repeat(64);assert.throws(()=>requireCheckoutExecution(record));rejected++;record.runtime.sha256=hash;",

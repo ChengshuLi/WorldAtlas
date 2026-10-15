@@ -1,4 +1,4 @@
-// Mandatory, separately bounded original->compact lineage for the offline native build.
+// Mandatory original->compact lineage for the offline native build.
 // This is not the legacy voluntary partition mechanism or factual source approval.
 import fs from 'node:fs';
 import path from 'node:path';
@@ -39,8 +39,6 @@ export async function validateContextInputStage({root=process.cwd(),readFile,
  need(manifest.issue===1010&&manifest.lane==='engineering','Wrong native context stage scope');
  need(manifest.transform?.kind==='original-native-to-compact-context-v1'&&!manifest.input_stages,
   'Unsupported or recursive context stage');
- const descriptors=[...manifest.baseline.files,...manifest.outputs,...manifest.sources.flatMap(s=>s.files??[])];
- need(descriptors.length<=512,'Context stage descriptor budget exceeded');
  const bytes=validateEvidence(manifest,{readFile,expectedIssue:1010,expectedLane:'engineering'});
  const dir=path.posix.dirname(manifestPath),inputsPath=dir+'/inputs.json',proofPath=dir+'/verification.json';
  const declared=name=>manifest.outputs.find(d=>d.path===name);
@@ -80,7 +78,7 @@ export async function validateContextInputStage({root=process.cwd(),readFile,
    const raw=readFile(file.path,commit);
    need(raw.length===file.bytes&&sha256(raw)===file.sha256,'Executed context code differs');
    need(manifest.baseline.files.some(d=>d.path===file.path&&d.sha256===file.sha256&&d.bytes===file.bytes),
-    'Executed context code omitted from stage budget');
+    'Executed context code omitted from stage inventory');
   }
  }
  const features=[];let next=1;
@@ -90,7 +88,7 @@ export async function validateContextInputStage({root=process.cwd(),readFile,
   need(descriptor&&descriptor.sha256===part.sha256&&descriptor.bytes===part.bytes&&
    descriptor.uncompressed_sha256===part.uncompressed_sha256&&descriptor.uncompressed_bytes===part.uncompressed_bytes,
    'Compact context output is not byte-bound');
-  const values=JSON.parse(gunzipSync(readFile(descriptor.path,'candidate'),{maxOutputLength:32*1024*1024}));
+  const values=JSON.parse(gunzipSync(readFile(descriptor.path,'candidate'),{maxOutputLength:part.uncompressed_bytes+1}));
   need(part.first_owner===next&&values.length===part.owners,'Incomplete compact context sequence');
   for(const feature of values){need(feature.pixelIndex===next++,'Compact owner index differs');features.push(feature);}
  }

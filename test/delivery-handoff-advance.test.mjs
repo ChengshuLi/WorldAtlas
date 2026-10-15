@@ -3,7 +3,7 @@ import {fileURLToPath} from 'node:url';
 import {ImmutableReader} from '../scripts/check-effective-geographic-regression.mjs';
 import {valueBytes} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 import {constructOriginalAuthority, constructAuthorityRegistry} from '../scripts/delivery-handoff-advance.mjs';
-import {materializeRecipe, modelRequestBudget, recheckNativeRequest} from '../scripts/delivery-handoff-advance.mjs';
+import {materializeRecipe} from '../scripts/delivery-handoff-advance.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
@@ -77,7 +77,7 @@ for (const phase of ['advance', 'status']) test('removed '+phase+' CLI refuses b
 {
 const commit='a'.repeat(40),hash=x=>createHash('sha256').update(x).digest('hex');
 const clone=x=>structuredClone(x);
-function fixture({physicalBytes=2000,decodedBytes=5000,phase=4*1024*1024,legacy=false}={}){
+function fixture({physicalBytes=2000,decodedBytes=5000,legacy=false}={}){
  const files=new Map();
  const pin=(path,bytes=123,extra={})=>({commit,path,mode:'100644',blob:hash(path).slice(0,40),bytes,sha256:hash(path),...extra});
  const put=(path,body)=>{const raw=Buffer.from(JSON.stringify(body)+'\n');const p={...pin(path,raw.length),sha256:hash(raw)};files.set(path,{raw,body,pin:p});return {commit,path};};
@@ -85,8 +85,7 @@ function fixture({physicalBytes=2000,decodedBytes=5000,phase=4*1024*1024,legacy=
  const oldCode={path:'code.mjs',bytes:50,sha256:hash('code')};
  const support=[{path:'scripts/local-workspace.mjs',bytes:50,sha256:hash('local')},{path:'scripts/worker-identity.mjs',bytes:50,sha256:hash('worker')}];
  const runtime={version:1,platform:'linux',runtime:['git','node','process-inspector','time'].map(role=>({role,path:'/bin/'+role,mode:493,bytes:1000,sha256:hash(role)})),supervisor:{path:'coordination/engineering/melanesia363-additive-delivery-20261010/supervise-source-native-linux.mjs',bytes:1000,sha256:hash('supervisor')},...(!legacy?{support_code:support}:{})};
- const resources={processing_allowance:{phaseBytes:phase,rssBytes:8*1024*1024},output_reserve:131072,operating_limits:{rss_bytes:8*1024*1024,wall_seconds:30,output_bytes:262144,retained_bytes:600000,log_bytes:1000,monitor_bytes:1000,receipt_bytes:1000}};
- const common={version:1,executed_code:[oldCode],installed_modules:[{...oldCode,path:'node_modules/module.js'}],report:pin('report.json'),parent:{components:3},baseline:{pins:[pin('selection.json')]},output_reserve:131072,operating_runtime:runtime,...(!legacy?{operating_profile:'source-native-v2',...resources}:{})};
+ const common={version:1,executed_code:[oldCode],installed_modules:[{...oldCode,path:'node_modules/module.js'}],report:pin('report.json'),parent:{components:3},baseline:{pins:[pin('selection.json')]},operating_runtime:runtime,...(!legacy?{operating_profile:'source-native-v2'}:{output_reserve:131072})};
  const componentIds=['c-a','c-b','c-c'],targetIds=['t-one'];
  const physicalPins=componentIds.map((id,i)=>pin('retained/components-00'+i+'.jsonl.gz',physicalBytes));
  const sourceMeta=pin('retained/sources-000.jsonl.gz',100);
@@ -109,17 +108,16 @@ function fixture({physicalBytes=2000,decodedBytes=5000,phase=4*1024*1024,legacy=
  const owner=pin('native-owner.gz',200,{uncompressed_bytes:1000,uncompressed_sha256:hash('owner')}),lat=pin('latitudes.gz',50,{uncompressed_bytes:100,uncompressed_sha256:hash('lat')});
  const native={...clone(common),operation:'unactivated-additive-native-batch-v1',destination:'.cache/native-grid-candidates/old-native',additive:{source_profile:source.source_rule.profile,scope_ids:componentIds,source_execution_commit:commit,source_runtime:{bytes:1000,sha256:hash('node')},manifest_path:manifest.path,bounds_path:bounds.path,latitudes_path:lat.path,original_bounds:{sha256:bounds.sha256},owner_parts:[{path:owner.path,manifest_path:'owner.bin',manifest_descriptor:{bytes:owner.bytes}}],...Object.fromEntries(Object.entries(slots).map(([k,p])=>[k,p.path])),inputs:[...source.source_rule.inputs,owner,lat,...Object.values(slots)]}};
  const nativeTemplate=put('native-template.json',native);
- const selection={handoff_id:'accepted-whole',source_template:sourceTemplate,source_resources:clone(resources),native_resources:clone(resources),physical_locator:{input:locator,format:'keyed-path'},targets:[{target_id:'t-one',bank_path:bank.path,native_template:nativeTemplate}],
-  predecessor_allowance:Object.fromEntries(Object.keys(slots).map(k=>[k,{bytes:k==='source_request_path'?131072:1000,...(k==='inventory_path'?{uncompressed_bytes:10000}:{})}])),native_request_bytes_bound:131072};
+ const selection={handoff_id:'accepted-whole',source_template:sourceTemplate,physical_locator:{input:locator,format:'keyed-path'},targets:[{target_id:'t-one',bank_path:bank.path,native_template:nativeTemplate}]};
  const recipe={version:1,id:'delivery',mode:'greedy-model',registry,destination_prefix:'.cache/native-grid-candidates/delivery',handoffs:[selection]};
- return {reader,recipe,files,put,pin,selection,resources,source,native,sourceTemplate,nativeTemplate,componentIds,handoff,locator,registry};
+ return {reader,recipe,files,put,pin,selection,source,native,sourceTemplate,nativeTemplate,componentIds,handoff,locator,registry};
 }
 
 // Exact metadata excerpts from the accepted AUS handoff. No geometry/body reads
 // or new scientific acceptance are represented by this constructor fixture.
 const ausCustody=JSON.parse(fs.readFileSync(new URL('./fixtures/delivery-aus-custody.json',import.meta.url)));
 function ausCustodyFixture(){
- const f=fixture({phase:128*1024*1024}),h=f.files.get('handoff.json').body;
+ const f=fixture(),h=f.files.get('handoff.json').body;
  h.consumed_source_bindings=clone(ausCustody.consumed_source_bindings);
  h.reused_whole_product_inputs=clone(ausCustody.reused_whole_product_inputs);
  h.consumed_inputs=h.consumed_inputs.filter(p=>p.path==='locators.json');
@@ -135,10 +133,6 @@ function ausCustodyFixture(){
   stage.inputs=stage.inputs.filter(p=>p.path!=='admin.gz');stage.inputs.push(admin);
  }
  f.source.source_rule.administrative_products=[admin];
- for(const resources of [f.selection.source_resources,f.selection.native_resources]){
-  resources.processing_allowance.rssBytes=256*1024*1024;
-  resources.operating_limits.rss_bytes=256*1024*1024;
- }
  return {...f,h,admin,componentProducts};
 }
 
@@ -205,7 +199,7 @@ test('reused physical custody refuses missing, malformed and contradictory produ
   h=>{h.reused_whole_product_inputs[0].git_blob_oid='b'.repeat(40);},
  ];
  for(const change of changes){const f=ausCustodyFixture();change(f.h);
-  assert.throws(()=>materializeRecipe(f.recipe,f.reader),/physical|Conflicting input path/);}
+  assert.throws(()=>materializeRecipe(f.recipe,f.reader),/physical|Conflicting input path|Incomplete decoded identity/);}
 });
 
 test('existing exact physical transport aliases remain valid without erasing reuse provenance',()=>{
@@ -221,36 +215,25 @@ test('existing exact physical transport aliases remain valid without erasing reu
 test('derives ordered scopes across original batch boundaries and real templates without component lists',()=>{
  const f=fixture(),out=materializeRecipe(f.recipe,f.reader);assert.equal(out.groups.length,1);assert.deepEqual(out.groups[0].component_ids,f.componentIds);
  const s=JSON.parse(out.products[out.groups[0].source_template]),n=JSON.parse(out.products[out.groups[0].native_template]);
- assert.deepEqual(s.source_rule.expected_ids,f.componentIds);assert.deepEqual(n.additive.scope_ids,f.componentIds);assert.equal(s.source_rule.original_products.length,4);assert.ok(out.groups[0].models.native.predecessor_allowance);
+ assert.deepEqual(s.source_rule.expected_ids,f.componentIds);assert.deepEqual(n.additive.scope_ids,f.componentIds);assert.equal(s.source_rule.original_products.length,4);
  assert.ok(n.additive.inputs.some(p=>p.path==='native-owner.gz'));assert.ok(n.additive.inputs.some(p=>p.path==='latitudes.gz'));
  assert.deepEqual(materializeRecipe(f.recipe,f.reader).products,out.products);assert.equal(out.index.mode,'greedy-model');
 });
 
-test('models constructed encoded and decoded input closure before greedy split; transport alone deduplicates',()=>{
- const f=fixture({physicalBytes:200000,decodedBytes:700000,phase:2400000});const out=materializeRecipe(f.recipe,f.reader);
- assert.ok(out.groups.length>1);assert.deepEqual(out.groups.flatMap(g=>g.component_ids),f.componentIds);
- assert.ok(out.groups.every(g=>g.models.source.fits&&g.models.native.fits));
+test('complete per-group input inventories retain shared source metadata while transport deduplicates',()=>{
+ const f=fixture(),out=materializeRecipe(f.recipe,f.reader);
+ assert.deepEqual(out.groups.flatMap(g=>g.component_ids),f.componentIds);
  const sourceMetadata=out.acquisition_plan.products.filter(p=>p.destinations.some(d=>d.endsWith('/sources-000.jsonl.gz')));assert.equal(sourceMetadata.length,1);
- // The shared physical source is still charged in every independent group.
- for(const g of out.groups){const s=JSON.parse(out.products[g.source_template]);assert.ok(s.source_rule.inputs.some(p=>p.original_product_path==='sources-000.jsonl.gz'));}
+ for(const g of out.groups){const source=JSON.parse(out.products[g.source_template]);assert.ok(source.source_rule.inputs.some(p=>p.original_product_path==='sources-000.jsonl.gz'));}
 });
 
-test('singleton overflow fails rather than silently narrowing scope or raising allowance',()=>{
- const f=fixture({physicalBytes:200000,decodedBytes:700000,phase:1000000});assert.throws(()=>materializeRecipe(f.recipe,f.reader),/Singleton exceeds/);
-});
-
-test('the request body is charged twice and runtime/log/monitor/receipt/support are counted',()=>{
- const f=fixture(),m=modelRequestBudget(f.source);const expectedRuntime=4000+1000+1000+1000+1000+200;
- assert.equal(m.reserved_bytes,1000+131072+131072+(3000+1000+m.request_bytes+1000+1000+1000+200));
- const larger=clone(f.source);larger.extra='x'.repeat(1234);assert.equal(modelRequestBudget(larger).total_bytes-m.total_bytes,2*(modelRequestBudget(larger).request_bytes-m.request_bytes));
- assert.ok(expectedRuntime>0);
-});
-
-test('native reservations include encoded and decoded predecessor bytes; real output is exactly re-admitted',()=>{
- const f=fixture();const a=modelRequestBudget(f.native,{predecessor_allowance:f.selection.predecessor_allowance,request_bytes_bound:131072});
- const bigger=clone(f.selection.predecessor_allowance);bigger.inventory_path.uncompressed_bytes+=12345;
- const b=modelRequestBudget(f.native,{predecessor_allowance:bigger,request_bytes_bound:131072});assert.equal(b.total_bytes-a.total_bytes,12345);
- assert.ok(recheckNativeRequest(f.native).fits);const fail=clone(f.native);fail.additive.inputs.push(f.pin('huge.gz',1000000,{uncompressed_bytes:3000000,uncompressed_sha256:hash('large')}));assert.throws(()=>recheckNativeRequest(fail),/exceeds admission/);
+test('recipe templates retain complete runtime, code and immutable operand identities',()=>{
+ for(const mutate of [
+  f=>{f.source.operating_runtime.runtime[1].sha256='invalid';},
+  f=>{f.source.operating_runtime.support_code.pop();},
+  f=>{f.native.executed_code[0].sha256='invalid';},
+  f=>{f.source.source_rule.inputs.find(p=>p.path==='manifest.json').blob='invalid';},
+ ]){const f=fixture();mutate(f);assert.throws(()=>materializeRecipe(f.recipe,f.reader),/runtime|support|code\/module|immutable input identity/);}
 });
 
 test('requires genuine pinned locator join, exact mapping and handoff roster',()=>{
@@ -291,10 +274,6 @@ test('explicit v2 groups admit a genuine disjoint ordered subset without exhaust
  assert.throws(()=>materializeRecipe(recipe,f.reader),/genuine v2/);
 });
 
-test('candidate request serialization can force a split before publication',()=>{
- const f=fixture();const whole=materializeRecipe(f.recipe,f.reader);f.selection.native_request_bytes_bound=whole.groups[0].models.native.request_bytes-200;
- const split=materializeRecipe(f.recipe,f.reader);assert.ok(split.groups.length>1);assert.ok(split.groups.every(g=>g.models.native.request_bytes<=f.selection.native_request_bytes_bound));
-});
 }
 
 // authority constructor controls
@@ -307,15 +286,18 @@ const ACCEPTED = '9e7b93f43f8a2dccffc23cb1c9e6cd60613f3b9c';
 const PREFIX = 'coordination/engineering/nor-grc-congo-delivery-20261011/';
 const env = {...process.env, GIT_NO_LAZY_FETCH: '1', GIT_CONFIG_NOSYSTEM: '1', GIT_CONFIG_GLOBAL: '/dev/null', GIT_TERMINAL_PROMPT: '0',
   GIT_AUTHOR_NAME: 'Authority test', GIT_AUTHOR_EMAIL: 'test@example.invalid', GIT_COMMITTER_NAME: 'Authority test', GIT_COMMITTER_EMAIL: 'test@example.invalid'};
-const git = (root, args, input) => execFileSync('git', ['-c', 'core.hooksPath=/dev/null', '-C', root, ...args], {env, input, maxBuffer: 33554433, stdio: ['pipe', 'pipe', 'pipe']});
+const git = (root, args, input) => {
+  const command = ['-c', 'core.hooksPath=/dev/null', '-C', root];
+  const output = args[0] === 'show' ? {maxBuffer: Number(execFileSync('git', [...command, 'cat-file', '-s', args[1]], {env})) + 1} : {};
+  return execFileSync('git', [...command, ...args], {env, input, ...output, stdio: ['pipe', 'pipe', 'pipe']});
+};
 class OfflineReader extends ImmutableReader {
   git(...args) { return git(this.repo, args); }
 }
 const reader = (repo = REPO) => new OfflineReader(repo, HEAD);
 const realFixture = process.env.WORLDATLAS_DELIVERY_FIXTURE === '1';
 function deriveCurrent13Fixture(repo = REPO) {
-  const env = {...process.env, GIT_NO_LAZY_FETCH: '1', GIT_CONFIG_NOSYSTEM: '1', GIT_CONFIG_GLOBAL: '/dev/null', GIT_TERMINAL_PROMPT: '0'};
-  const read = p => JSON.parse(execFileSync('git', ['-C', repo, 'show', p.commit + ':' + p.path], {env, maxBuffer: 33554433, stdio: ['pipe', 'pipe', 'pipe']}));
+  const read = p => JSON.parse(git(repo, ['show', p.commit + ':' + p.path]));
   const locate = p => ({commit: p.commit, path: p.path});
   const config = read({commit: HEAD, path: 'coordination/engineering/delivery-handoff-20261011/current13-compose.json'});
   if (config.registries.length !== 1) throw Error('Expected the single accepted current13 registry');
@@ -450,14 +432,6 @@ fixtureTest('all five current13 authorities replay exact bodies and registry fro
   assert.deepEqual(actual.entries, expected);
 });
 
-fixtureTest('registry phase transitions preserve another live reader shared-budget reservation', () => {
-  const peer = reader();
-  peer.metadataBytes += 32 * 1024 * 1024; peer.phase();
-  const entryUsed = peer.used;
-  const shared = new OfflineReader(REPO, HEAD, {allowance: peer.allowance, budget: peer.budget});
-  constructAuthorityRegistry(shared, current13.authorities.map(a => a.committed));
-  assert.ok(peer.used >= entryUsed, 'A registry transition must not release another reader’s charged live graph');
-});
 }
 
 // Actual accepted13 new-partition model; bulk scientific products are not read.
@@ -466,22 +440,22 @@ const implementationFile=path.join(root,'scripts/delivery-handoff-advance.mjs');
 const implementationWorktreeSha=createHash('sha256').update(fs.readFileSync(implementationFile)).digest('hex');
 const {materializeRecipe}=await import(implementationFile);
 const env={...process.env,GIT_NO_LAZY_FETCH:'1',GIT_CONFIG_NOSYSTEM:'1',GIT_CONFIG_GLOBAL:'/dev/null',GIT_TERMINAL_PROMPT:'0'};
-const git=(cwd,...args)=>execFileSync('git',['-c','core.hooksPath=/dev/null',...args],{cwd,env,maxBuffer:4*1024*1024});
+const git=(cwd,...args)=>execFileSync('git',['-c','core.hooksPath=/dev/null',...args],{cwd,env});
 const sha=raw=>createHash('sha256').update(raw).digest('hex');
 const canonical=v=>Array.isArray(v)?v.map(canonical):v&&typeof v==='object'?Object.fromEntries(Object.keys(v).sort().map(k=>[k,canonical(v[k])])):v;
 const json=v=>Buffer.from(JSON.stringify(canonical(v))+'\n');
 const exact=(a,b)=>json(a).equals(json(b));
-const production='512c100efbb4c6334b39cefaabac2d30ec2c7823',dataCommit='dbda60ac426e30e430f8157794e5e7161f01a453';
+const production='512c100efbb4c6334b39cefaabac2d30ec2c7823';
 const templateCommit=git(root,'rev-parse','HEAD').toString().trim();
 const fixture=fs.mkdtempSync(scratch+'/greedy-fixture-');git(fixture,'init','--template=','--quiet');
-const fixtureCommits=new Set(),cache=new Map(),readLog=[],cachedPaths=new Map();
+const fixtureCommits=new Set(),cache=new Map(),readLog=[];
 function put(name,value){fs.writeFileSync(path.join(fixture,name),json(value),{flag:'wx'});}
 function commit(){git(fixture,'add','--all');git(fixture,'-c','user.name=Metadata fixture','-c','user.email=metadata-fixture@example.invalid','commit','--quiet','-m','Metadata-only recipe fixture');const c=git(fixture,'rev-parse','HEAD').toString().trim();fixtureCommits.add(c);return c;}
 function descriptor(commit,name){const repo=fixtureCommits.has(commit)?fixture:root;const line=git(repo,'ls-tree','-z',commit,'--',name).toString();const m=/^100644 blob ([a-f0-9]{40})\t([^\0]+)\0$/.exec(line);assert.ok(m&&m[2]===name,'Missing ordinary metadata path '+name);return {repo,commit,path:name,mode:'100644',git_blob_oid:m[1]};}
-function body(pin){if(cache.has(pin.git_blob_oid))return cache.get(pin.git_blob_oid);const local=cachedPaths.get(pin.git_blob_oid);let raw;
- if(local)raw=fs.readFileSync(local);else {const size=Number(git(pin.repo,'cat-file','-s',pin.git_blob_oid));assert.ok(size<=1048576,'Metadata cap '+pin.path);raw=git(pin.repo,'cat-file','blob',pin.git_blob_oid);}
+function body(pin){if(cache.has(pin.git_blob_oid))return cache.get(pin.git_blob_oid);
+ const size=Number(git(pin.repo,'cat-file','-s',pin.git_blob_oid)),raw=execFileSync('git',['-c','core.hooksPath=/dev/null','cat-file','blob',pin.git_blob_oid],{cwd:pin.repo,env,maxBuffer:size+1});
  assert.equal(createHash('sha1').update(Buffer.from('blob '+raw.length+'\0')).update(raw).digest('hex'),pin.git_blob_oid);
- readLog.push({commit:pin.commit,path:pin.path,bytes:raw.length,sha256:sha(raw),source:local?'verified prior literal':'warm Git metadata'});assert.ok(readLog.reduce((n,p)=>n+p.bytes,0)<20*1048576);cache.set(pin.git_blob_oid,raw);return raw;
+ readLog.push({commit:pin.commit,path:pin.path,bytes:raw.length,sha256:sha(raw),source:'warm Git metadata'});cache.set(pin.git_blob_oid,raw);return raw;
 }
 const reader={pin(commit,path){const d=descriptor(commit,path),raw=body(d);const {repo,...p}=d;return {...p,bytes:raw.length,sha256:sha(raw)};},read(p){const actual=this.pin(p.commit,p.path);assert.equal(actual.git_blob_oid,p.git_blob_oid??p.blob);assert.equal(actual.bytes,p.bytes);assert.equal(actual.sha256,p.sha256);return cache.get(actual.git_blob_oid);},json(p){return JSON.parse(this.read(p));}};
 const load=(commit,path)=>reader.json(reader.pin(commit,path));
@@ -494,32 +468,30 @@ const handoffs=entries.map(e=>({entry:e,pin:{commit:e.accepted_source_commit,...
 const locatorPins=[];
 for(const h of handoffs){const pins=h.body.consumed_inputs.filter(p=>p.path.endsWith('/physical-locators.json')||p.path.endsWith('/physical-inputs.json'));assert.equal(pins.length,1);const p=pins[0];
  const original=descriptor(p.commit,p.path);assert.equal(original.git_blob_oid,p.blob);const raw=body(original);assert.equal(raw.length,p.bytes);assert.equal(sha(raw),p.sha256);locatorPins.push(p);}
-const v2Source=load(templateCommit,prefix+'resource-budget-controls-001/templates/a-source-template.json'),v2Native=load(templateCommit,prefix+'resource-budget-controls-001/templates/a-native-template.json');
+const v2Source=load(templateCommit,prefix+'resource-budget-controls-001/templates/a-source-template.json');
 const code=v2Source.executed_code.map(p=>{const actual=reader.pin(production,p.path);return {path:p.path,bytes:actual.bytes,sha256:actual.sha256};});
 const operating=structuredClone(v2Source.operating_runtime);
 for(const item of [operating.supervisor,...operating.support_code]){const actual=reader.pin(production,item.path);item.bytes=actual.bytes;item.sha256=actual.sha256;}
 const replaceRuntime=request=>({...structuredClone(request),operating_profile:'source-native-v2',executed_code:code,installed_modules:structuredClone(v2Source.installed_modules),operating_runtime:structuredClone(operating)});
 const sourceRequests=new Map(sourceConfig.groups.map(g=>[g.id,reader.json(g.template)]));
 const nativeRequests=new Map(nativeConfig.groups.map(g=>[g.id,reader.json(g.template)]));
-const resources=request=>({processing_allowance:{phaseBytes:384*1024*1024,rssBytes:640*1024*1024},output_reserve:request.output_reserve,operating_limits:structuredClone(v2Source.operating_limits)});
 const physicalChecks=[],selectionDrafts=[];
 const locator=(commit,path)=>({commit,path});
 for(const [hi,h] of handoffs.entries()){
  const sameHandoff=sourceConfig.groups.filter(g=>g.handoff_id===h.entry.id);assert.ok(sameHandoff.length);
- const source=replaceRuntime(sourceRequests.get(sameHandoff[0].id));Object.assign(source,resources(source));put('source-'+hi+'.json',source);
+ const source=replaceRuntime(sourceRequests.get(sameHandoff[0].id));put('source-'+hi+'.json',source);
  const targetRows=[];
  for(const [ti,targetId] of h.entry.target_ids.entries()){
   const components=h.body.candidate_source_native_bindings.filter(r=>r.retained_payload.target_stable_location_id===targetId).map(r=>r.component_id);
   const oldGroups=sameHandoff.filter(g=>sourceRequests.get(g.id).source_rule.expected_ids.some(id=>components.includes(id)));
-  assert.ok(oldGroups.length);const exemplar=replaceRuntime(nativeRequests.get(oldGroups[0].id));Object.assign(exemplar,resources(exemplar));
+  assert.ok(oldGroups.length);const exemplar=replaceRuntime(nativeRequests.get(oldGroups[0].id));
   const parts=new Map(),inputs=new Map(exemplar.additive.inputs.map(p=>[p.path,p]));let bank;
   for(const g of oldGroups){const original=nativeRequests.get(g.id),banks=sourceRequests.get(g.id).source_rule.target_banks;assert.equal(banks.length,1);assert.ok(!bank||bank===banks[0]);bank=banks[0];
    for(const p of original.additive.owner_parts){if(parts.has(p.path))assert.ok(exact(parts.get(p.path),p),'Native containing identity conflict '+p.path);parts.set(p.path,p);const pin=original.additive.inputs.find(x=>x.path===p.path);assert.ok(pin);if(inputs.has(pin.path))assert.ok(exact(inputs.get(pin.path),pin));inputs.set(pin.path,pin);}}
   exemplar.additive.owner_parts=[...parts.values()];exemplar.additive.inputs=[...inputs.values()];const filename='native-'+hi+'-'+ti+'.json';put(filename,exemplar);targetRows.push({target_id:targetId,bank_path:bank,filename});
  }
  for(const r of h.body.physical_restoration.restorations){const matches=h.body.consumed_inputs.filter(p=>p.bytes===r.whole_original_bytes&&p.sha256===r.whole_original_sha256);assert.equal(matches.length,1);physicalChecks.push({handoff_id:h.entry.id,original_product:r.path,source:matches[0]});}
- selectionDrafts.push({handoff_id:h.entry.id,source_filename:'source-'+hi+'.json',source_resources:resources(source),native_resources:resources(v2Native),physical_locator:{input:locator(locatorPins[hi].commit,locatorPins[hi].path),format:locatorPins[hi].path.endsWith('/physical-locators.json')?'keyed-path':'components-comparison-product'},targets:targetRows,
- predecessor_allowance:{source_request_path:{bytes:131072},operating_path:{bytes:1048576},publication_path:{bytes:131072},facts_path:{bytes:4194304},inventory_path:{bytes:4194304,uncompressed_bytes:8388608}},native_request_bytes_bound:131072});
+ selectionDrafts.push({handoff_id:h.entry.id,source_filename:'source-'+hi+'.json',physical_locator:{input:locator(locatorPins[hi].commit,locatorPins[hi].path),format:locatorPins[hi].path.endsWith('/physical-locators.json')?'keyed-path':'components-comparison-product'},targets:targetRows});
 }
 const derivedCommit=commit();
 const recipe={version:1,id:'actual-current13',mode:'greedy-model',registry:locator(registryPin.commit,registryPin.path),destination_prefix:'.cache/native-grid-candidates/current13-greedy-metadata',handoffs:selectionDrafts.map(s=>{const {source_filename,targets,...rest}=s;return {...rest,source_template:locator(derivedCommit,source_filename),targets:targets.map(t=>{const {filename,...target}=t;return {...target,native_template:locator(derivedCommit,filename)};})};})};
@@ -527,7 +499,7 @@ put('recipe.json',recipe);const recipeCommit=commit();
 const implementationPin=reader.pin(templateCommit,'scripts/delivery-handoff-advance.mjs');assert.equal(sha(fs.readFileSync(implementationFile)),implementationWorktreeSha);
 const implementationMatchesHead=implementationWorktreeSha===implementationPin.sha256;
 const output=materializeRecipe(recipe,reader);
-const expected=handoffs.flatMap(h=>h.entry.cohort_ids);assert.deepEqual(output.groups.flatMap(g=>g.component_ids),expected);assert.equal(new Set(expected).size,13);assert.ok(output.groups.every(g=>g.models.source.fits&&g.models.native.fits));
+const expected=handoffs.flatMap(h=>h.entry.cohort_ids);assert.deepEqual(output.groups.flatMap(g=>g.component_ids),expected);assert.equal(new Set(expected).size,13);
 const mutants=[];
 for(const [i,h] of handoffs.entries()){const changed=structuredClone(h.body);assert.ok(changed.original_gap_membership?.members.length);for(const [j,row]of changed.original_gap_membership.members.entries()){assert.equal(typeof row.original_batch_id,'string');row.original_batch_id='r'.repeat(row.original_batch_id.length);}put('relabeled-handoff-'+i+'.json',changed);mutants.push({h,filename:'relabeled-handoff-'+i+'.json'});}
 const mutantCommit=commit();const mutatedRegistry=structuredClone(registry);
@@ -545,12 +517,12 @@ const physical=category('physical',p=>p.uses.includes('physical-product'));
 const admin=category('administrative',p=>p.source.path.includes('original-geography-source-corpus')&&p.source.path.includes('/payloads/'));
 const native=category('native',p=>p.source.path.includes('/native-operands/'));
 const result={version:1,kind:'actual-current13-greedy-metadata-probe',implementation_base_commit:templateCommit,implementation_worktree_sha256:implementationWorktreeSha,implementation_matches_head:implementationMatchesHead,implementation_pin:implementationMatchesHead?implementationPin:null,production_code_commit:production,derived_fixture_commit:derivedCommit,recipe_fixture_commit:recipeCommit,recipe_fixture_path:path.join(fixture,'recipe.json'),component_count:13,ordered_complete_disjoint:true,
- groups:output.groups.map(g=>({id:g.id,components:g.component_ids.length,component_ids:g.component_ids,source_phase_bytes:g.models.source.total_bytes,native_phase_bytes:g.models.native.total_bytes,source_descriptors:g.models.source.descriptors,native_descriptors:g.models.native.descriptors,phase_limit:g.models.source.phase_bytes,source_fits:g.models.source.fits,native_fits:g.models.native.fits})),
+ groups:output.groups.map(g=>({id:g.id,components:g.component_ids.length,component_ids:g.component_ids})),
  old_batch_relabel_control:{changed_field:'original_gap_membership.members[].original_batch_id',all_labels_replaced:true,partitions_unchanged:true,physical_admin_native_transport_identities_unchanged:true,mutant_fixture_commit:mutantCommit},no_bulk_product_body_reads:true,physical_original_pin_checks:physicalChecks,transport:[physical,admin,native],all_unique_transport_bodies:products.length,all_unique_encoded_bytes:output.acquisition_plan.unique_encoded_bytes,metadata_reads:readLog,
- limits:['Metadata recipe test only; no SOURCE/NATIVE/GIS execution or new source admission.','Actual production handoff/locator bytes were read and verified; derived v2 test template commits are isolated scratch fixtures.','Relabeled handoff/registry fixtures are metamorphic controls, not accepted source authority.','Deduplication applies to acquisition planning only; every independent SOURCE/NATIVE phase still includes full inputs and costs.','Prospective request budget excludes live supply and subsequent runtime acquisition accounting, which existing operators retain.']};
+ limits:['Metadata recipe test only; no SOURCE/NATIVE/GIS execution or new source admission.','Actual production handoff/locator bytes were read and verified; derived v2 test template commits are isolated scratch fixtures.','Relabeled handoff/registry fixtures are metamorphic controls, not accepted source authority.','Deduplication applies to acquisition planning only; every independent SOURCE/NATIVE phase still includes full inputs.']};
 assert.equal(sha(fs.readFileSync(implementationFile)),implementationWorktreeSha,'Implementation changed during probe');
 if(writeResult)fs.writeFileSync(path.join(scratch,'recipe-current13-greedy-result.json'),json(result));
-const summary={result:writeResult?path.join(scratch,'recipe-current13-greedy-result.json'):null,groups:result.groups.map(g=>({id:g.id,n:g.components,source:g.source_phase_bytes,native:g.native_phase_bytes,limit:g.phase_limit})),relabel_unchanged:true,transport:result.transport.map(({identities,...r})=>r),metadata_bytes:readLog.reduce((n,p)=>n+p.bytes,0)};
+const summary={result:writeResult?path.join(scratch,'recipe-current13-greedy-result.json'):null,groups:result.groups.map(g=>({id:g.id,n:g.components})),relabel_unchanged:true,transport:result.transport.map(({identities,...r})=>r),metadata_bytes:readLog.reduce((n,p)=>n+p.bytes,0)};
 return {result,summary};
 }
 if (process.env.WORLDATLAS_DELIVERY_FIXTURE === '1') test('real13 greedy model ignores original batch labels and deduplicates physical/admin/native transport',
@@ -560,28 +532,26 @@ if (process.env.WORLDATLAS_DELIVERY_FIXTURE === '1') test('real13 greedy model i
     const {result} = await current13GreedyProbe({root: path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..'), scratch});
     assert.equal(result.component_count, 13);
     assert.deepEqual(result.groups.map(g => g.components), [10, 3]);
-    assert.ok(result.groups.every(g => g.source_phase_bytes <= g.phase_limit && g.native_phase_bytes <= g.phase_limit));
     assert.deepEqual(result.transport.map(r => r.unique_bodies), [14, 3, 7]);
   });
 
-import {admitPublication, pinReader} from '../scripts/prepare-delivery-handoff.mjs';
+import {admitPublication} from '../scripts/prepare-delivery-handoff.mjs';
 test('materialization report preflight refuses late collisions and changed postimages', t => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'delivery-report-'));
   t.after(() => fs.rmSync(root, {recursive: true, force: true}));
   const j = {root}, destination = '.cache/delivery-handoff/report';
   const products = {'materialized-inputs.json': Buffer.from('{}\n')};
-  const commit = admitPublication(j.root, destination, products, {phase: 'materialize'}, false, j.budget);
+  const commit = admitPublication(j.root, destination, products, {phase: 'materialize'}, false);
   assert.equal(fs.existsSync(path.join(j.root, destination)), false);
   fs.mkdirSync(path.join(j.root, destination), {recursive: true}); fs.writeFileSync(path.join(j.root, destination, 'sentinel'), 'preserve');
   assert.throws(commit, /Occupied destination/);
   assert.equal(fs.readFileSync(path.join(j.root, destination, 'sentinel'), 'utf8'), 'preserve');
-  const second = admitPublication(j.root, destination + '-second', products, {phase: 'materialize'}, false, j.budget);
+  const second = admitPublication(j.root, destination + '-second', products, {phase: 'materialize'}, false);
   products['materialized-inputs.json'][0] = 65;
   assert.throws(second, /changed before publication/);
   assert.equal(fs.existsSync(path.join(j.root, destination + '-second')), false);
 });
 
-import {candidateBudget} from '../scripts/native-ownership/native-preparation-guards.mjs';
 import {gzipSync} from 'node:zlib';
 import {acquireDeliveryInputs, deliveryAcquisitionExecute} from '../scripts/delivery-handoff-advance.mjs';
 {
@@ -617,7 +587,7 @@ function fixture(){
   const raw=execFileSync(command,args,options);
   if(control.corruptRead&&args.includes('cat-file')&&args.includes('blob'))return Buffer.from('wrong bytes');return raw;
  };
- const options={execute,token:'',limits:{total:plan.unique_encoded_bytes+2*decoded.length+rawA.length+rawB.length},onMaterialized(event){writes.push(event.path);if(control.interruptFile){control.interruptFile=false;throw Error('fixture interruption after completed alias');}}};
+ const options={execute,token:'',onMaterialized(event){writes.push(event.path);if(control.interruptFile){control.interruptFile=false;throw Error('fixture interruption after completed alias');}}};
  return {directory,origin,destination,plan,options,execute,control,fetchCalls,importedOids,writes,bodyReads,git,rawA,rawB,a,b,destA,destB,oidA,oidB,close(){fs.rmSync(directory,{recursive:true,force:true});}};
 }
 
@@ -635,32 +605,11 @@ test('actual missing Git objects and repeated identities acquire once; complete 
  }finally{f.close();}
 });
 
-test('caller-derived complete byte and destination allowances fail before acquisition',async()=>{
- for(const limits of [{member:1},{total:1},{entries:2},{destinations:1},{total:Infinity},{total:-1},{unknown:1}]){const f=fixture();try{
-  await assert.rejects(acquireDeliveryInputs(f.plan,f.destination,{...f.options,limits:{...f.options.limits,...limits}}));assert.equal(f.fetchCalls.length,0);assert.equal(f.writes.length,0);assert.equal(f.bodyReads.length,0);
- }finally{f.close();}}
- const f=fixture();try{
-  await assert.rejects(acquireDeliveryInputs(f.plan,f.destination,{...f.options,limits:undefined}),/Explicit acquisition/);
-  await assert.rejects(acquireDeliveryInputs(f.plan,f.destination,{...f.options,limits:{total:f.options.limits.total-1}}),/Encoded \+ decoded \+ physical placement/);assert.equal(f.fetchCalls.length,0);assert.equal(f.writes.length,0);
-  const limits={member:Math.max(f.a.bytes,f.a.uncompressed_bytes,f.b.bytes),total:f.options.limits.total,entries:3,destinations:2};
-  const result=await acquireDeliveryInputs(f.plan,f.destination,{...f.options,limits});assert.deepEqual(result.admission.limits,limits);assert.equal(result.admission.total_modeled_bytes,limits.total);assert.equal(result.materialized_files,2);
- }finally{f.close();}
-});
-
 test('interrupted real import resumes from actual object state without fetching the completed identity again',async()=>{
  const f=fixture();try{
   f.control.interruptFetch=true;await assert.rejects(acquireDeliveryInputs(f.plan,f.destination,f.options),/acquisition failed/);assert.equal(f.importedOids.length,1);assert.equal(f.writes.length,0);
   const before=f.git(f.destination,['cat-file','--batch-check'],f.oidA+'\n'+f.oidB+'\n').toString();assert.equal(before.split('\n').filter(line=>line.endsWith(' missing')).length,1);
   const resumed=await acquireDeliveryInputs(f.plan,f.destination,f.options);assert.equal(resumed.status,'complete');assert.equal(f.fetchCalls.length,2);assert.equal(f.fetchCalls[1].length,1);assert.notEqual(f.fetchCalls[1][0],f.importedOids[0]);assert.equal(new Set(f.importedOids).size,2);assert.equal(f.importedOids.length,2);assert.equal(f.writes.length,2);
- }finally{f.close();}
-});
-
-test('the actual shared candidateBudget admits complete transport costs alongside existing metadata and reserves',async()=>{
- const f=fixture();try{
-  const makeBudget=delta=>candidateBudget([{bytes:17}],{reserveBytes:11,reserveDescriptors:1,allowance:{phaseBytes:f.options.limits.total+28+delta,rssBytes:640*1024*1024}});
-  await assert.rejects(acquireDeliveryInputs(f.plan,f.destination,{...f.options,limits:undefined,budget:makeBudget(-1)}),/Encoded \+ decoded \+ physical placement/);assert.equal(f.fetchCalls.length,0);assert.equal(f.writes.length,0);assert.equal(f.bodyReads.length,0);
-  const budget=makeBudget(0);const result=await acquireDeliveryInputs(f.plan,f.destination,{...f.options,limits:undefined,budget});
-  assert.equal(result.admission.shared_budget.accounted_bytes,17+f.options.limits.total);assert.equal(result.admission.shared_budget.accounted_descriptors,8);assert.equal(result.admission.shared_budget.reserved_review_bytes,11);assert.equal(f.fetchCalls.length,1);assert.equal(f.writes.length,2);
  }finally{f.close();}
 });
 
@@ -686,8 +635,8 @@ test('wrong whole bytes or decoded gzip identities cannot produce a materialized
  }finally{f.close();}
 });
 
-test('identity, destination and whole-file admission failures occur before object fetches',async()=>{
- for(const edit of [p=>p.products[0].identity='0'.repeat(64),p=>p.products[0].destinations.push('../escape'),p=>p.products[0].destinations.push('data/unowned.json'),p=>p.products[0].source.bytes=33554433,p=>p.unique_encoded_bytes++]){const f=fixture();try{const bad=structuredClone(f.plan);edit(bad);await assert.rejects(acquireDeliveryInputs(bad,f.destination,f.options));assert.equal(f.fetchCalls.length,0);assert.equal(f.writes.length,0);}finally{f.close();}}
+test('identity, destination and aggregate inventory failures occur before object fetches',async()=>{
+ for(const edit of [p=>p.products[0].identity='0'.repeat(64),p=>p.products[0].destinations.push('../escape'),p=>p.products[0].destinations.push('data/unowned.json'),p=>p.unique_encoded_bytes++]){const f=fixture();try{const bad=structuredClone(f.plan);edit(bad);await assert.rejects(acquireDeliveryInputs(bad,f.destination,f.options));assert.equal(f.fetchCalls.length,0);assert.equal(f.writes.length,0);}finally{f.close();}}
 });
 
 test('plain materialize CLI authenticates a saved recipe index and resumes with identical receipt and zero writes', () => {
@@ -698,7 +647,7 @@ test('plain materialize CLI authenticates a saved recipe index and resumes with 
     const tree = f.git(f.origin, ['mktree'], `100644 blob ${blob}\trecipe-index.json\n`).toString().trim();
     const commit = f.git(f.origin, ['commit-tree', tree], 'saved recipe index\n').toString().trim();
     fs.writeFileSync(path.join(f.origin, 'config.json'), JSON.stringify({version: 1,
-      recipe_index: {commit, path: 'recipe-index.json'}, preparation_allowance: {phaseBytes: 1024 * 1024, rssBytes: 1024 ** 3}}));
+      recipe_index: {commit, path: 'recipe-index.json'}}));
     const script = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../scripts/prepare-delivery-handoff.mjs');
     const env = {...process.env}; delete env.NODE_OPTIONS; delete env.NODE_PATH;
     const run = (...flags) => JSON.parse(execFileSync(process.execPath, [script, 'materialize', 'config.json',
@@ -745,7 +694,7 @@ if (process.env.WORLDATLAS_DELIVERY_V2_FIXTURE === '1') {
     const prep=await import('../scripts/prepare-delivery-handoff.mjs');
     const flow=await import('../scripts/delivery-handoff-advance.mjs');
     const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
-    const r=prep.pinReader(root,{allowance:{phaseBytes:536870912,rssBytes:1073741824}});
+    const r=prep.pinReader(root);
     const head='abf421fbca84da6673a6b0477acfefc9fd594ff4',prefix='coordination/engineering/nor18-selected-20261012/';
     const loc=name=>({commit:head,path:prefix+name}),read=name=>r.json(r.pin(head,prefix+name));
     const locator=p=>({commit:p.commit,path:p.path});
@@ -797,14 +746,13 @@ function completedCustodyRecipe() {
 for(const [label,change] of Object.entries({
  'foreign route':r=>{r.mode='retained-groups';},
  'nonliteral recipe identity':r=>{r.id=['retained-original'];},
- 'unbounded groups':r=>{r.groups=Array(33).fill(r.groups[0]);},
- 'invented issuing resources':r=>{r.operating_profile='source-native-v2';},
+ 'unexpected recipe fields':r=>{r.unexpected=true;},
  'foreign selection context':r=>{r.selector.path='other.json';},
  'unsafe destination':r=>{r.new_prefix='../foreign/';},
 }))test('completed custody refuses '+label+' before reading historical evidence',()=>{
  const recipe=completedCustodyRecipe();change(recipe);
  assert.throws(()=>qualifyCompletedCustody(recipe,{pin(){throw Error('unexpected historical read');}},{}),
-  /Explicit bounded|selection\/package\/retained context/);
+  /Explicit completed-original|selection\/package\/retained context/);
 });
 
 // Explicit offline suite, never a skipped default gate or an implicit download.
@@ -815,8 +763,7 @@ if(process.env.WORLDATLAS_DELIVERY_ORIGINAL_FIXTURE==='1') {
   const prep=await import('../scripts/prepare-delivery-handoff.mjs'),flow=await import('../scripts/delivery-handoff-advance.mjs');
   const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
   const original=JSON.parse(fs.readFileSync(new URL('./fixtures/native102-original-custody.json',import.meta.url)));
-  const allowance={phaseBytes:268435456,rssBytes:536870912};
-  const make=()=>{const r=prep.pinReader(root,{allowance});return {r,adapters:{authorityReader:()=>flow.deliveryAuthorityReader(root,r)}};};
+  const make=()=>{const r=prep.pinReader(root);return {r,adapters:{authorityReader:()=>flow.deliveryAuthorityReader(root,r)}};};
   const recipe=completedCustodyRecipe(),{r,adapters}=make(),qualified=qualifyCompletedCustody(recipe,r,adapters);
   assert.deepEqual(qualified.component_ids,[original.component_id]);
   const group=qualified.groups[0],preimage=JSON.parse(group.qualified_products['original-rule-preimage.json']);
@@ -849,7 +796,7 @@ if(process.env.WORLDATLAS_DELIVERY_ORIGINAL_FIXTURE==='1') {
    const oid=git(['hash-object','-w','--stdin'],prep.jsonBytes(operating));
    const tree=git(['mktree'],'100644 blob '+oid+'\tchanged-operating.json\n');
    const changed=git(['-c','user.name=Fixture','-c','user.email=fixture@example.test','commit-tree',tree], 'Synthetic changed terminal control\n');
-   const local=prep.pinReader(temporary,{allowance}),q=structuredClone(recipe);
+   const local=prep.pinReader(temporary),q=structuredClone(recipe);
    q.groups[0].native_operating={commit:changed,path:'changed-operating.json'};
    assert.throws(()=>qualifyCompletedCustody(q,local,{authorityReader:()=>flow.deliveryAuthorityReader(temporary,local)}),/Unqualified original native operating/);
   });

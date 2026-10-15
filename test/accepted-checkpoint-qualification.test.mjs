@@ -10,7 +10,7 @@ import {ACCEPTED_CHECKPOINT_CODE} from '../scripts/accepted-selected-checkpoint.
 import {renderWorkerResult} from '../scripts/worker-result.mjs';
 import {createHash} from 'node:crypto';
 import {shuffleOwnershipBytes} from '../src/ownership-codec.js';
-import {valueBytes,valueSha,coordinateBounds,validateCurrentRebindLimits} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {valueBytes,valueSha,coordinateBounds} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 import {deriveCoordinateDelta,projectSourceFeatures,projectNativeRows,qualifyTransition} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs';
 const MODULE='coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs';
 const PROGRAMME='coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json';
@@ -84,8 +84,8 @@ async function trustedFixture(t,{incompleteNative=false,sourcePaths}={}){
  const rootRow={id:'fixture',accepted_head:accepted,selected_commit:selected,selection_sha256:valueSha(selection),execution_commit:one,execution_code_sha256:valueSha(execution_code),runtime_sha256:valueSha(runtime),facts:pin('accepted/facts.json'),certificate:{...pin('accepted/certificate.json.gz'),decoded_bytes:valueBytes(full).length,decoded_sha256:valueSha(full)},publication:pin('accepted/publication.json'),custody:pin('accepted/custody.json'),routes:pin('accepted/routes.json')};
  save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',checkpoints:[rootRow]});commit();
  const api=await import(pathToFileURL(path.join(root,MODULE))),native=await import(pathToFileURL(path.join(root,'scripts/check-effective-geographic-regression.mjs')));
- const reader=new native.ImmutableReader(root,selected,{allowance:{phaseBytes:512*1024**2,rssBytes:512*1024**2}}),budget={shared:reader.budget,carriedBytes:1024};
- return {api,native,reader,budget,selected,root,git,save,commit,pin,ledger,patch,sidecar,envelope,selection,rootRow};
+ const reader=new native.ImmutableReader(root,selected);
+ return {api,native,reader,selected,root,git,save,commit,pin,ledger,patch,sidecar,envelope,selection,rootRow};
 }
 
 function zipMembers(members, {descriptor = false, method = 8} = {}) {
@@ -240,12 +240,11 @@ async function acceptedProducts(t,{sourcePaths,actualProducer=false,nativeOnly=f
   for(const name of [...JOINT,...(actualProducer?['scripts/check-geographic-regression.py','scripts/evidence/immutable.py','scripts/evidence/geometry.py','scripts/ellipsoidal_area.py','requirements.txt']:[])])f.save(name,fs.readFileSync(name));
   f.save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',checkpoints:[f.rootRow]});
   const trusted=f.commit();
-  const reader=new f.native.ImmutableReader(f.root,trusted,{allowance:f.reader.allowance});
-  const budget={shared:reader.budget,carriedBytes:1024};
-  const {state}=f.api.qualifyCheckpoint({reader,budget});
-  const afterReader=new f.native.ImmutableReader(f.root,trusted,{allowance:reader.allowance,budget:reader.budget});
-  const transition=f.api.qualifyTransition({state,reader:afterReader,budget});
-  const census=f.api.checkpointRouteCensus({transition,budget});
+  const reader=new f.native.ImmutableReader(f.root,trusted);
+  const {state}=f.api.qualifyCheckpoint({reader});
+  const afterReader=new f.native.ImmutableReader(f.root,trusted,{invocation:reader.invocation});
+  const transition=f.api.qualifyTransition({state,reader:afterReader});
+  const census=f.api.checkpointRouteCensus({transition});
   const certificate=transition.candidate.certificate;
   const inventory=r=>[...r.inventory.values()].sort((a,b)=>(a.commit+':'+a.path).localeCompare(b.commit+':'+b.path));
   const runtime=[0,1,2].map(i=>({path:'/fixture/runtime-'+i,mode:493,bytes:100+i,sha256:String(i+1).repeat(64),version:null}));
@@ -259,7 +258,7 @@ async function acceptedProducts(t,{sourcePaths,actualProducer=false,nativeOnly=f
     baseline_commit:trusted,candidate_commit:trusted,baseline_selection:state.selection,candidate_selection:state.selection,
     candidate_bindings:{ledger_sha256:valueSha(state.ledger),registry_sha256:valueSha(state.registry),
       patch_sha256:valueSha(state.patch),manifest_sha256:valueSha(state.manifest)},
-    native_result_sha256:valueSha(native),candidate_code_executed:false,executing_policy:f.api.checkpointExecutingPolicy({transition,budget})};
+    native_result_sha256:valueSha(native),candidate_code_executed:false,executing_policy:f.api.checkpointExecutingPolicy({transition})};
   const products=structuredClone({facts,certificate,census,native});
   f.api.releaseCheckpoint(state);
   const transport=await import(pathToFileURL(path.join(f.root,'scripts/accepted-selected-checkpoint.mjs')));
@@ -323,14 +322,13 @@ async function acquire(f,mutate,{merged=f.trusted,tree=f.git('rev-parse',f.trust
     throw Error('Unexpected fixture route '+route);
   };
   api.artifactRedirect=async()=>new Response(null,{status:302,headers:{location:'https://fixtures.blob.core.windows.net/zip'}});
-  let carry=0;
   const result=await f.transport.acquireAcceptedCheckpoint({api,repo:'owner/repo',locator:{pr_number:7,request_id:request,head},
-    token:'fixture',admit:bytes=>{carry=Math.max(carry,bytes);},fetchImpl:async()=>new Response(p.zip)});
+    token:'fixture',fetchImpl:async()=>new Response(p.zip)});
   assert.equal(result.available,true);
-  const reader=new f.native.ImmutableReader(f.root,f.trusted,{allowance:f.reader.allowance});
-  return {handle:result.handle,reader,budget:{shared:reader.budget,carriedBytes:carry}};
+  const reader=new f.native.ImmutableReader(f.root,f.trusted);
+  return {handle:result.handle,reader};
 }
-async function qualify(f,a) {return f.api.qualifyAcceptedCheckpoint({reader:a.reader,acceptedHandle:a.handle,budget:a.budget});}
+async function qualify(f,a) {return f.api.qualifyAcceptedCheckpoint({reader:a.reader,acceptedHandle:a.handle});}
 
 test('accepted original archive admits a private successor without a catalogue row for that selector',async t=>{
   const f=await acceptedProducts(t),a=await acquire(f);
@@ -339,11 +337,11 @@ test('accepted original archive admits a private successor without a catalogue r
   const result=await qualify(f,a);assert.equal(result.available,true);
   assert.equal(result.state.accepted_execution.kind,'accepted-selected-checkpoint-artifact-v1');
   assert.equal(result.state.ledger.rows.length,2);assert.equal(result.state.ledger.rows[1].disposition,'rejected');
-  assert.deepEqual(f.api.projectNativeRows({state:result.state,rows:[1],budget:a.budget}).rows,[{y:1,runs:[[0,1,2]]}]);
-  assert.equal(f.api.projectSourceFeatures({state:result.state,ids:['A'],budget:a.budget}).features[0].id,'A');
-  const candidateReader=new f.native.ImmutableReader(f.root,f.trusted,{allowance:a.reader.allowance,budget:a.reader.budget});
-  const transition=f.api.qualifyTransition({state:result.state,reader:candidateReader,budget:a.budget});assert.equal(transition.available,true);
-  assert.deepEqual(f.api.checkpointRouteCensus({transition,budget:a.budget}).routes,f.products.census.routes);
+  assert.deepEqual(f.api.projectNativeRows({state:result.state,rows:[1]}).rows,[{y:1,runs:[[0,1,2]]}]);
+  assert.equal(f.api.projectSourceFeatures({state:result.state,ids:['A']}).features[0].id,'A');
+  const candidateReader=new f.native.ImmutableReader(f.root,f.trusted,{invocation:a.reader.invocation});
+  const transition=f.api.qualifyTransition({state:result.state,reader:candidateReader});assert.equal(transition.available,true);
+  assert.deepEqual(f.api.checkpointRouteCensus({transition}).routes,f.products.census.routes);
   f.api.releaseCheckpoint(result.state);f.transport.releaseAcceptedCheckpoint(a.handle);
 });
 test('actual joint producer and Python retention feed archive transport and next checkpoint admission',async t=>{
@@ -358,7 +356,7 @@ test('actual joint producer and Python retention feed archive transport and next
 });
 test('forged and released acceptance handles cannot mint private selected state',async t=>{
   const f=await acceptedProducts(t),a=await acquire(f);
-  await assert.rejects(f.api.qualifyAcceptedCheckpoint({reader:a.reader,acceptedHandle:{},budget:a.budget}),/private accepted/);
+  await assert.rejects(f.api.qualifyAcceptedCheckpoint({reader:a.reader,acceptedHandle:{}}),/private accepted/);
   f.transport.releaseAcceptedCheckpoint(a.handle);
   await assert.rejects(qualify(f,a),/private accepted/);
 });
@@ -394,20 +392,19 @@ test('accepted admission authenticates committed helper edits without repinning 
   assert.deepEqual(fs.readFileSync(path.join(f.root,CATALOGUE)),catalogue);
   f.transport.releaseAcceptedCheckpoint(a.handle);
 });
-test('archive carry and actual executing code remain necessary at accepted admission',async t=>{
-  const f=await acceptedProducts(t),a=await acquire(f);a.budget.carriedBytes=0;
-  await assert.rejects(qualify(f,a),/carry is undercharged/);
+test('actual executing code remains necessary at accepted admission',async t=>{
+  const f=await acceptedProducts(t);
   fs.appendFileSync(path.join(f.root,'scripts/evidence-policy.mjs'),'\n// uncommitted executable drift\n');
   const b=await acquire(f);await assert.rejects(qualify(f,b),/changed executing checkpoint method/);
 });
 test('census retains complete unchanged/absent routes and rejects public transition wrappers',async t=>{
   const f=await acceptedProducts(t),a=await acquire(f),{state}=await qualify(f,a);
-  const transition=f.api.qualifyTransition({state,reader:a.reader,budget:a.budget});
-  assert.throws(()=>f.api.checkpointRouteCensus({transition:{...transition},budget:a.budget}),/private qualified selected transition/);
-  const census=f.api.checkpointRouteCensus({transition,budget:a.budget});
+  const transition=f.api.qualifyTransition({state,reader:a.reader});
+  assert.throws(()=>f.api.checkpointRouteCensus({transition:{...transition}}),/private qualified selected transition/);
+  const census=f.api.checkpointRouteCensus({transition});
   assert(census.routes.some(p=>p.path==='data/native/runs.bin.gz'));assert(census.routes.some(p=>p.path==='data/source.json'));
   assert(Object.isFrozen(census.routes));f.api.releaseCheckpoint(state);
-  assert.throws(()=>f.api.checkpointRouteCensus({transition,budget:a.budget}),/private qualified selected transition/);
+  assert.throws(()=>f.api.checkpointRouteCensus({transition}),/private qualified selected transition/);
 });
 
 test('wrapper-only native identities preserve the original native report hash',async t=>{
@@ -461,8 +458,8 @@ async function installSeed(f,{failedOperating=false,omitRoute=false,omitInherite
       Object.assign(root[role],{decoded_bytes:valueBytes(body).length,decoded_sha256:valueSha(body)});}
   }
   f.save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',checkpoints:[f.rootRow,root]});f.commit();
-  const reader=new f.native.ImmutableReader(f.root,f.trusted,{allowance:f.reader.allowance});
-  return {reader,checkpointId:root.id,budget:{shared:reader.budget,carriedBytes:0}};
+  const reader=new f.native.ImmutableReader(f.root,f.trusted);
+  return {reader,checkpointId:root.id};
 }
 test('one trusted-main derived seed reuses the same admission with truthful distinct lineage',async t=>{
   const f=await acceptedProducts(t),a=await installSeed(f);
@@ -491,7 +488,7 @@ test('accepted complete source routes remain projected from authenticated immuta
   const sourcePaths=[0,1,8,19,28].map(n=>`data/geography/part-${n}.json`);
   const f=await acceptedProducts(t,{sourcePaths}),accepted=await acquire(f);
   const result=await qualify(f,accepted);assert.equal(result.available,true);
-  const projection=f.api.projectSourceFeatures({state:result.state,ids:['A','B','C','D','E'],budget:accepted.budget});
+  const projection=f.api.projectSourceFeatures({state:result.state,ids:['A','B','C','D','E']});
   assert.deepEqual(projection.inputs.map(p=>p.path),sourcePaths);
   assert.deepEqual(projection.features.map(p=>p.id),['A','B','C','D','E']);
   f.api.releaseCheckpoint(result.state);f.transport.releaseAcceptedCheckpoint(accepted.handle);
@@ -506,8 +503,7 @@ function successorSelector(f,name='successor/sidecar.json') {
   return f.commit();
 }
 function currentReader(f,a,version) {
-  return new f.native.ImmutableReader(f.root,version,{allowance:a.reader.allowance,
-    budget:a.reader.budget});
+  return new f.native.ImmutableReader(f.root,version,{invocation:a.reader.invocation});
 }
 test('older accepted selector advances to actual baseline with zero cold reconstruction',async t=>{
   const f=await acceptedProducts(t),a=await acquire(f),baseline=successorSelector(f);
@@ -520,10 +516,10 @@ test('older accepted selector advances to actual baseline with zero cold reconst
     assert.equal(sourceReads.includes('data/source.json'),false);
     assert.equal(sourceReads.includes('data/native/runs.bin.gz'),false);
     assert.equal(q.state.patch.rows[0].runs[0][1]-q.state.patch.rows[0].runs[0][0],1);
-    const transition=f.api.qualifyTransition({state:q.state,reader:a.reader,budget:a.budget});
+    const transition=f.api.qualifyTransition({state:q.state,reader:a.reader});
     assert.equal(transition.available,true);assert.equal(transition.baseline.selected_commit,baseline);
     assert.deepEqual(transition.changedNativeRows,[]);
-    const census=f.api.checkpointRouteCensus({transition,budget:a.budget});
+    const census=f.api.checkpointRouteCensus({transition});
     assert(census.routes.some(p=>p.path==='successor/sidecar.json'));
     f.api.releaseCheckpoint(q.state);
   } finally {f.native.ImmutableReader.prototype.read=read;f.transport.releaseAcceptedCheckpoint(a.handle);}
@@ -535,7 +531,7 @@ test('intermediate newly consumed routes cannot change before the next candidate
   // ordinary route only. Its old immutable pin alone must not hide this change.
   successorSelector(f,'candidate/sidecar.json');
   f.save('successor/sidecar.json',{changed:true});const candidate=f.commit();
-  const result=f.api.qualifyTransition({state:q.state,reader:currentReader(f,a,candidate),budget:a.budget});
+  const result=f.api.qualifyTransition({state:q.state,reader:currentReader(f,a,candidate)});
   assert.equal(result.available,false);assert.match(result.reason,/route changed/);
   f.api.releaseCheckpoint(q.state);f.transport.releaseAcceptedCheckpoint(a.handle);
 });
@@ -576,8 +572,8 @@ test('actual native-only joint products survive Python retention and fresh accep
  assert.deepEqual(result.state.certificate,f.products.certificate);
  assert.deepEqual(result.state.certificate.entries.find(row=>row[0]==='B')[9],[[1,0,10,20]]);
  assert.deepEqual(result.state.patch.rows,[{y:1,runs:[[2,3,1]]},{y:2,runs:[[2,3,2]]}]);
- const reader=new f.native.ImmutableReader(f.root,f.trusted,{allowance:a.reader.allowance,budget:a.reader.budget});
- const transition=f.api.qualifyTransition({state:result.state,reader,budget:a.budget});
+ const reader=new f.native.ImmutableReader(f.root,f.trusted,{invocation:a.reader.invocation});
+ const transition=f.api.qualifyTransition({state:result.state,reader});
  assert.equal(transition.available,true);assert.deepEqual(transition.changedNativeRows,[]);
  f.api.releaseCheckpoint(result.state);f.transport.releaseAcceptedCheckpoint(a.handle);
 });

@@ -11,28 +11,15 @@ before preparation. Sparse checkouts need the two literal existing composition
 and selected-neighbor helper paths imported by the command; no dataset directory
 is required for the code. Missing immutable bodies fail with lazy fetch disabled.
 
-## New finite resource profiles
+## Execution and memory
 
-New SOURCE/NATIVE issuance requires a `source-native-v2` request template and
-explicit `requested_resources`, either at config level or per group:
-`processing_allowance` contains positive safe integer `phaseBytes` and `rssBytes`;
-`operating_limits` contains positive safe integer `rss_bytes`, `wall_seconds`,
-`output_bytes`, `retained_bytes`, `log_bytes`, `monitor_bytes`, and `receipt_bytes`.
-The requested values replace only these resource fields. No old 256 MiB reader,
-1 GiB process, time, output, log or monitor limit is silently chosen by this tool.
-The request's existing output reserve must be at least 131072 bytes and fit the requested reader phase; its sum with the 131072-byte operating margin must remain safe and fit the output limit. All other finite cross-bounds must fit. The
-existing executing-code and supervisor descriptors, plus ordered
-`operating_runtime.support_code` entries for `scripts/local-workspace.mjs` and
-`scripts/worker-identity.mjs`, must match actual HEAD bytes. A new template must be
-captured against the reviewed v2 operator/runtime; this command does not upgrade
-old scientific code or claim that runtime/resource admission already happened.
-The existing supervisor performs actual available-resource and runtime admission.
-
-Historical examples explicitly select `compatibility: "literal-historical-v1"`.
-That mode preserves the complete literal historical fields and forbids requested
-resource overrides. It is for retained evidence/explicit compatibility, not the
-default for newly issued work. Final v2 scientific execution remains separately
-subject to the resource repair's acceptance and ordinary review.
+SOURCE/NATIVE request templates retain their scientific method, complete immutable
+inputs and exact executed-code/runtime identity. New issuance omits resource-only
+limits, output reservations and memory forecasts. The ordinary runtime and OS own
+memory exhaustion; see [PROCESSING_MEMORY_ADMISSION.md](PROCESSING_MEMORY_ADMISSION.md).
+Historical request fields remain literal provenance when reading original evidence,
+without enforcing their old memory policy on current execution. Failed or partial
+products still cannot establish a successful result.
 
 ## Configurations and explicit commit boundaries
 
@@ -47,7 +34,7 @@ No proposed input is called accepted merely because a hash matches.
    declares the complete delivery scope. Groups partition that scope without
    duplication. The whole accepted handoff determines filtered order. Each group
    stays inside its template's actual method/resource scope; the command preserves
-   all other scientific, input, runtime and resource fields. It does not invent
+   all other scientific, input and runtime fields. It does not invent
    arbitrary batch sizes or classify a new scientific method. Outputs are ordered
    requests and their preparation index. Commit the requests before invoking the
    existing source supervisor separately.
@@ -101,8 +88,7 @@ No proposed input is called accepted merely because a hash matches.
    ...]`. The array must be nonempty; mixing it with singleton pins is rejected.
    Each original retains its own rule, source evidence and physical receipt joins.
    Checks reject duplicate authorities/components and overlap between new originals
-   as well as the accepted patch. All original/source-evidence bodies share one
-   aggregate preparation allowance. Registry and ledger conservation, one final
+   as well as the accepted patch. All original/source-evidence bodies retain their complete immutable identities. Registry and ledger conservation, one final
    interval union and one effective reference cover the complete combined result.
    Array order does not change the emitted bytes. No intermediate selector, new
    scientific qualification or source/physical rerun is introduced; final actual
@@ -155,8 +141,7 @@ No proposed input is called accepted merely because a hash matches.
    Original rule/binding files need no receiving-prefix copies or preliminary
    input checkpoint. Their original paths still require exact accepted identities
    or authenticated local staging for issue-authorized adoption; `new_prefix` continues to constrain
-   owned outputs. The complete accepted registry receives a retained 12x metadata
-   carry charge before parsing. Standalone `package` and initial legacy finalize
+   owned outputs. The complete accepted registry is authenticated before parsing. Standalone `package` and initial legacy finalize
    without an additive hook retain their existing prefix selection.
    It only replaces `additive_release` in the selector, preserving an already-final
    body's bytes. Keep the entire accepted package list verbatim as the prefix;
@@ -590,8 +575,7 @@ wrapper, rebuild input descriptors by hand, split the returned receipt from its
 ledger rows, or create a later join checkpoint. The complete constructor result is
 already the `compose` input. Review the actual scientific inputs/results and final
 delivery at their existing boundaries; changed code or method still needs relevant
-independent review. Fresh resource admission and any selected execution contract
-remain mandatory. Lightweight metadata follows shared Git/storage safeguards,
+independent review. The selected scientific execution contract remains mandatory. Lightweight metadata follows shared Git/storage safeguards,
 without acquiring a separate all-team GIS compute permission round.
 
 For unchanged `compose` and `finalize`, reuse the original rule-preimage,
@@ -611,15 +595,6 @@ package/output checks, exact-head review and ordinary author/queue gates remain
 required. A changed code path, scientific method or consequential input/result
 claim still needs its relevant review; stock authentication alone is not that review.
 
-Metadata `preparation_allowance` is optional: omission uses the existing finite
-fresh Node admission, while an explicit phase/RSS request is freshly admitted and
-enforced. Retain actual operating headroom, concurrent-growth reservations and
-the command's byte/descriptor/RSS checks. Reuse applicable existing resource
-evidence instead of producing another per-delivery role inventory or allowance
-attestation; reassess bounds when changed inputs or execution make them inapplicable.
-These defaults do not derive every external prospective runtime/OS/copy reserve
-or grant future capacity. Scientific operator profiles and any required complete
-resource accounting remain separate and unchanged.
 
 The Tanjung191 input checkpoint at 2026-10-14T20:28:32Z and qualified checkpoint
 at 20:40:59Z bracket 12m27s, while its preserved external execution lasted
@@ -637,14 +612,11 @@ path as `source`, with a distinct physical phase in the shared Python helper.
 It does not extend the Indonesia source classifier or create native authority.
 
 The outer version-1 configuration has `physical`, `runtime_inventory` and
-`processing_allowance`; omit optional `preparation_allowance` for fresh automatic
-Node admission as described above. Explicit intentional parent limits remain
-enforced and output reserve is checked before the child starts. `physical` contains exact
+the version. `physical` contains exact
 ordinary immutable `inputs` pins (commit, path, Git blob, bytes, SHA-256; compressed
 pins additionally declare decoded bytes/SHA-256), `roles` for `stages`,
 `transport`, `native_index` and `comparison`, and the metadata/native repository
-prefixes. It also declares positive finite `resources.input_bytes`,
-`resources.output_bytes`, `resources.deadline_seconds` and exact Python, NumPy,
+prefixes. It declares exact Python, NumPy,
 Shapely and GEOS versions. The comparison method must match the preserved original
 method SHA; configuration cannot introduce another scientific algorithm.
 
@@ -697,8 +669,7 @@ ordinary scoped commits in one fail-fast shell sequence:
 2. For `finalize`, supply `version: 1` and exact `{commit, path}` locators for `selector`,
    `package_inputs`, `rebind` and `composition`; the last names the emitted
    `selected-ledger.json` at `$compose_commit`. Keep `new_prefix`,
-   `sidecar_output` and explicit `preparation_allowance: {phaseBytes, rssBytes}`
-   under the existing current resource admission.
+   `sidecar_output` under the existing owned-output contract.
    The compact route derives the fixed sibling pins; do not mix it with explicit
    derived product pins. Existing explicit configurations remain supported.
 3. Run `finalize CONFIG .cache/delivery-handoff/final-UNIQUE` and use the existing

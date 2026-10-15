@@ -65,7 +65,6 @@ def prefetch_declared_inputs(repo, baseline, candidate, timeout=120):
               'complete_scientific_closure': False, 'partial_import_possible': True}}), file=sys.stderr, flush=True)
 
 
-MAX_BYTES = 32 * 1024 * 1024
 TRUSTED_PATHS = ['scripts/run-geographic-check.py', 'scripts/check-geographic-regression.py',
                  'scripts/check-effective-geographic-regression.mjs', 'scripts/selected-checkpoint-native.mjs',  'src/native-grid.js', 'src/ownership-codec.js',
                  'scripts/evidence/immutable.py', 'scripts/evidence/geometry.py',
@@ -117,15 +116,17 @@ def entry(repo, commit, name):
 
 def read(repo, commit, name):
     blob = entry(repo, commit, name)['git_blob_oid']
-    if int(git(repo, 'cat-file', '-s', blob)) > MAX_BYTES:
-        raise ValueError('Geography input exceeds bounded file size: ' + name)
-    return git(repo, 'cat-file', 'blob', blob)
+    size = int(git(repo, 'cat-file', '-s', blob))
+    raw = git(repo, 'cat-file', 'blob', blob)
+    if len(raw) != size:
+        raise ValueError('Incomplete immutable geography input: ' + name)
+    return raw
 
 
 def inventory(repo, commit):
     index = json.loads(read(repo, commit, 'data/world-index.json'))
     parts = index.get('parts')
-    if not isinstance(parts, list) or not 1 <= len(parts) <= 512 or len(set(parts)) != len(parts):
+    if not isinstance(parts, list) or not len(parts) >= 1 or len(set(parts)) != len(parts):
         raise ValueError('Invalid or incomplete live geography part inventory')
     names = ['data/world-index.json', *PIN_PATHS, *['data/' + safe_path(p) for p in parts]]
     pointer = json.loads(read(repo, commit, PIN_PATHS[-1]))
@@ -184,33 +185,6 @@ def checkpoint_products_module(repo):
     return module
 
 
-def selected_consumer_allowance(repo):
-    # Node has terminated. Admit the actual parent phase with current resources,
-    # installed runtime/code, and the complete retained report/output reserve.
-    env = {key: value for key, value in os.environ.items() if key not in ['NODE_OPTIONS', 'NODE_PATH']}
-    executable = os.environ.get('NODE', 'node')
-    runtime_bytes = pathlib.Path(sys.executable).resolve().stat().st_size
-    code_bytes = sum((repo / name).stat().st_size for name in TRUSTED_PATHS)
-    # Re-observe current resources after the Node native child has exited.
-    # Reuse the trusted reader's OS/cgroup-aware admission instead of an
-    # unrelated fixed historical phase ceiling. The caller pins executing code.
-    allowance_raw = subprocess.check_output([
-        executable, '--input-type=module', '-e',
-        'const {processingAllowance}=await import(process.argv[1]);process.stdout.write(JSON.stringify(processingAllowance()));',
-        (repo / 'scripts/check-effective-geographic-regression.mjs').resolve().as_uri()],
-        env=env, timeout=30)
-    if len(allowance_raw) > 4096:
-        raise ValueError('Oversized current reader allowance')
-    allowance = json.loads(allowance_raw)
-    phase_limit = allowance.get('phaseBytes')
-    if type(phase_limit) is not int or not 0 < phase_limit <= 9007199254740991:
-        raise ValueError('Invalid current checkpoint transport allowance')
-    remaining = phase_limit - runtime_bytes - code_bytes - 2 * MAX_BYTES
-    if remaining <= 0:
-        raise ValueError('Complete selected consumer has no current product allowance')
-    return remaining
-
-
 def selected_joint(repo, baseline, candidate, *, trusted=None, checkpoint_destination=None):
     products = checkpoint_products_module(repo) if checkpoint_destination is not None else None
     if products is not None:
@@ -219,10 +193,9 @@ def selected_joint(repo, baseline, candidate, *, trusted=None, checkpoint_destin
     entrypoint = repo / 'coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs'
     with tempfile.TemporaryDirectory(prefix='trusted-selected-joint-') as temporary:
         destination = pathlib.Path(temporary).resolve() / 'complete'
-        raw = subprocess.check_output([os.environ.get('NODE', 'node'), '--expose-gc', str(entrypoint),
+        raw = subprocess.check_output([os.environ.get('NODE', 'node'), str(entrypoint),
                                        str(repo), trusted or baseline, baseline, candidate, str(destination), sys.executable], env=env)
-        if len(raw) > MAX_BYTES:
-            raise ValueError('Joint selected acknowledgement exceeds output cap')
+
         issued = json.loads(raw)
         if issued.get('kind') != 'trusted-selected-joint-comparison-v1' or issued.get('candidate_code_executed') is not False:
             raise ValueError('Unsupported joint selected acknowledgement')
@@ -241,8 +214,7 @@ def selected_joint(repo, baseline, candidate, *, trusted=None, checkpoint_destin
         if native.get('lost_or_reassigned_cells') != 0 or native.get('intervals') != []:
             raise ValueError('Successful native comparison contradicts conservation results')
         if checkpoint_destination is not None:
-            issued['checkpoint'] = products.retain_checkpoint_products(destination, checkpoint_destination, issued,
-                allowance=min(products.PHASE, selected_consumer_allowance(repo)))
+            issued['checkpoint'] = products.retain_checkpoint_products(destination, checkpoint_destination, issued)
         return issued
 
 
@@ -377,8 +349,7 @@ def inspect(repo, baseline, candidate, *, code_commit=None, prefetch=False, chec
                 native_raw = subprocess.check_output([
                     os.environ.get('NODE', 'node'), str(repo / 'scripts/check-effective-geographic-regression.mjs'),
                     str(repo), baseline, candidate, sys.executable], stderr=subprocess.PIPE, env=env)
-            if len(native_raw) > MAX_BYTES:
-                raise ValueError('Selected native report exceeds bounded output')
+
             native = json.loads(native_raw)
         if (native.get('method') != 'selected-native-owner-conservation-v1'
                 or native.get('candidate_code_executed') is not False
@@ -534,8 +505,7 @@ def main():
         result.get('adjudication', {}).get('status') == 'all-findings-supported-and-reviewed')
     result['gate_status'] = 'passed' if passed else 'blocked'
     raw = (json.dumps(result, sort_keys=True, separators=(',', ':'), allow_nan=False) + '\n').encode()
-    if len(raw) > MAX_BYTES:
-        raise ValueError('Geography check output exceeds bounded report size')
+
     if any(p.is_symlink() for p in [args.out, *args.out.absolute().parents]):
         raise ValueError('Symlink report path forbidden')
     with args.out.open('xb') as stream:

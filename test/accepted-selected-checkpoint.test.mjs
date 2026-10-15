@@ -54,18 +54,9 @@ const encode = f => ({raw: json(f.report), zip: zipMembers([['geography-check.js
 
 for (const descriptor of [false, true]) for (const method of [0, 8]) test(`fixed checkpoint archive preserves every byte: method ${method}, descriptor ${descriptor}`, () => {
   const f = checkpoint(), raw = json(f.report), zip = zipMembers([['geography-check.json',raw],...f.bodies],{descriptor,method});
-  const observed = [];
-  const report = readReportArchive(zip, reportHash(raw), raw.length, {admit: bytes => observed.push(bytes)});
+  const report = readReportArchive(zip, reportHash(raw), raw.length);
   assert.deepEqual(report, f.report); const products = geographicReportProducts(report);
   for (const [name, body] of f.bodies) assert(products.members.get(name).equals(body));
-  assert.equal(products.admitted_bytes, observed.at(-1)); assert(observed.at(-1) > zip.length);
-});
-test('legacy report-only archives retain the full original 32 MiB report bound', () => {
-  const raw=Buffer.alloc(32*1024*1024,32); raw.write('{}');
-  const archive=zipMembers([['geography-check.json',raw]]),charges=[];
-  const report=readReportArchive(archive,reportHash(raw),raw.length,{admit:bytes=>charges.push(bytes)});
-  assert.deepEqual(report,{});assert.equal(geographicReportProducts(report).members.size,0);
-  assert(charges[0]>256*1024*1024); // Current caller admission still sees every representation.
 });
 test('root authentication precedes untrusted descriptor and checkpoint member interpretation', () => {
   const f = checkpoint(), good = encode(f); f.report.checkpoint = {malicious: true};
@@ -97,23 +88,6 @@ test('physical overlap, local metadata drift, links and descriptor corruption re
     assert.throws(() => readReportArchive(zip,reportHash(raw)));
   }
 });
-test('current admission refuses before product allocation and full declared union has a fixed bound', () => {
-  const f = checkpoint(), {raw,zip} = encode(f); let calls = 0;
-  assert.throws(() => readReportArchive(zip,reportHash(raw),raw.length,{admit: () => {calls++; throw Error('current allowance');}}), /current allowance/);
-  assert.equal(calls,1);
-  // Inflate claims can be small individually while the complete live decoded
-  // representation is impossible. All central/local sizes agree with the root.
-  for (const row of f.report.checkpoint.members) { row.bytes=32*1024*1024; if(row.decoded_bytes) row.decoded_bytes=row.bytes; }
-  const hugeRoot = json(f.report), huge = zipMembers([['geography-check.json',hugeRoot],...f.bodies],{descriptor:true});
-  let cursor=huge.readUInt32LE(huge.length-6);
-  for(let i=0;i<f.bodies.length+1;i++) {const nameLength=huge.readUInt16LE(cursor+28); if(i) {
-    huge.writeUInt32LE(32*1024*1024,cursor+24);
-    const local=huge.readUInt32LE(cursor+42), start=local+30+huge.readUInt16LE(local+26), packed=huge.readUInt32LE(cursor+20);
-    huge.writeUInt32LE(32*1024*1024,start+packed+12);
-  } cursor+=46+nameLength;}
-  assert.throws(() => readReportArchive(huge,reportHash(hugeRoot)),/combined budget/);
-});
-
 function acceptedFixture(options, alterReport = () => {}) {
   const f = checkpoint(options); alterReport(f.report);
   const encoded = encode(f); Object.assign(f,encoded);
@@ -153,7 +127,7 @@ test('real acquisition accepts bot/merged/tree/origin/artifact custody and mints
   assert.equal(result.available,true); const proof=readAcceptedCheckpoint(result.handle);
   assert.equal(proof.source.workflow_head,workflowHead); assert.equal(proof.source.head,head);
   assert.equal(proof.archive_origin,'actions'); assert.equal(proof.products['derived-facts.json'].member,'derived-facts.json');
-  assert(Object.isFrozen(proof.products['derived-facts.json'])); assert.equal(proof.admitted_bytes,f.admitted.at(-1));
+  assert(Object.isFrozen(proof.products['derived-facts.json']));
   assert.throws(()=>readAcceptedCheckpoint(JSON.parse(JSON.stringify(result.handle))),/private/);
   releaseAcceptedCheckpoint(result.handle); assert.throws(()=>readAcceptedCheckpoint(result.handle),/private/);
 });
@@ -196,8 +170,6 @@ test('accepted original seven-member archive decodes only native products and pr
   assert.deepEqual(proof.report, f.report);
   assert.equal(proof.report.selected_continuous_report, undefined);
   assert(geographicReportProducts(proof.report).report_bytes.equals(f.raw));
-  assert.equal(geographicReportProducts(proof.report).admitted_bytes,
-    2 * f.zip.length + 8 * f.raw.length + nativePins.reduce((sum, pin) => sum + pin.bytes + 8 * (pin.decoded_bytes ?? pin.bytes), 0));
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'accepted-original-'));
   t.after(() => fs.rmSync(root, {recursive: true, force: true}));
   fs.mkdirSync(path.join(root, 'coordination/engineering/native-repair'), {recursive: true});
@@ -278,13 +250,6 @@ test('retained partial-write failure leaves original ZIP but never publishes a f
   assert(fs.readFileSync(path.join(root,directory,'geography-artifact.zip')).equals(f.zip));
   assert(!fs.existsSync(path.join(root,directory,'selected-checkpoint.json')));
 });
-test('metadata uses the shared authenticated API with a bounded response and inventory allowance',async()=>{
-  const api=acceptedCheckpointAPI('fixture',{fetchImpl:async()=>new Response(Buffer.alloc(2*1024*1024+1))});
-  await assert.rejects(api('/repos/owner/repo/pulls/7'),/bounded page/);
-  const f=acceptedFixture();f.options.api=async()=>Array.from({length:100},()=>({body:'x'.repeat(30000)}));
-  await assert.rejects(acquireAcceptedCheckpoint(f.options),/metadata inventory/);
-  assert.equal(f.admitted[0],16*1024*1024);
-});
 test('queue rerun carries its actual successful original attempt without relabeling it current', async () => {
   const f=acceptedFixture();f.run.head_branch='main';
   const log=Buffer.from([JSON.stringify({report_sha256:f.source.report_sha256,report_bytes:f.raw.length}),
@@ -297,30 +262,4 @@ test('queue rerun carries its actual successful original attempt without relabel
   const source=geographicReportProducts(report).source;
   assert.equal(source.run_attempt,2);assert.equal(source.job_id,34);assert.equal(source.artifact_name,f.source.artifact_name);
   assert(!f.calls.some(route=>route.includes('/attempts/3/')));
-});
-
-test('accepted custody keeps bounded JSON metadata reads serial under one-page admission', async () => {
-  const f=acceptedFixture(), original=f.options.api; let active=0,peak=0;
-  const api=Object.assign(async (...args)=>{
-    active++;peak=Math.max(peak,active);
-    try {await new Promise(resolve=>setTimeout(resolve,1));return await original(...args);}
-    finally {active--;}
-  },{artifactRedirect:original.artifactRedirect,jobLogRedirect:original.jobLogRedirect});
-  const result=await acquireAcceptedCheckpoint({...f.options,api});
-  assert.equal(result.available,true);assert.equal(peak,1);releaseAcceptedCheckpoint(result.handle);
-});
-
-test('prospective metadata admission refuses before fetching the second large commit page', async () => {
-  const f=acceptedFixture(),original=f.options.api;let commitReads=0;
-  const api=Object.assign(async route=>{
-    if(route.includes('/git/commits/')) {
-      commitReads++;
-      return {sha:route.split('/').at(-1),tree:{sha:tree},message:'x'.repeat(2*1024*1024-1024)};
-    }
-    return original(route);
-  },{artifactRedirect:original.artifactRedirect,jobLogRedirect:original.jobLogRedirect});
-  await assert.rejects(acquireAcceptedCheckpoint({...f.options,api,admit:bytes=>{
-    if(bytes>24*1024*1024)throw Error('current allowance');
-  }}),/current allowance/);
-  assert.equal(commitReads,1);
 });

@@ -40,29 +40,27 @@ test('changed caller, helper and other method bytes refuse independently',()=>{
 });
 test('missing, malformed, duplicate and foreign catalogue records refuse',()=>{
  assert.throws(()=>validateSupportedProgrammeCatalogue(null),/Malformed/);
- for(const mutate of [c=>c.programs.push(clone(c.programs[0])),c=>c.programs[0].source_executed_code.push(clone(c.programs[0].source_executed_code[0])),c=>c.programs[0].accepted_head='latest',c=>c.programs[0].unexpected=true,c=>c.programs[0].native_executed_code[0].bytes=33554433]){
+ for(const mutate of [c=>c.programs.push(clone(c.programs[0])),c=>c.programs[0].source_executed_code.push(clone(c.programs[0].source_executed_code[0])),c=>c.programs[0].accepted_head='latest',c=>c.programs[0].unexpected=true]){
   const c=read();mutate(c);assert.throws(()=>validateSupportedProgrammeCatalogue(c));
  }
  const q=request(clone(read().programs[0]));q.sourceProfile='candidate-only';assert.throws(()=>matchSupportedProgramme(read(),q),/Unknown\/ambiguous original/);
 });
-test('actual trusted-checkout catalogue is inventoried and charged, never selected by reader version',()=>{
+test('actual trusted-checkout catalogue is inventoried, never selected by reader version',()=>{
  // The candidate version deliberately predates the catalogue. Policy authority
  // still comes from the actual module checkout, whose code/body is committed.
- const reader=new ImmutableReader(root,'180042b1ef55c69a0b2f7b33a9860951d1b5ea82',{runtimeBytes:1,metadataBytes:1,executionBytes:1,outputBytes:1});
- const before=reader.used,policy=readSupportedProgrammeCatalogue(reader),head=git('rev-parse','HEAD').toString().trim();
+ const reader=new ImmutableReader(root,'180042b1ef55c69a0b2f7b33a9860951d1b5ea82');
+ const policy=readSupportedProgrammeCatalogue(reader),head=git('rev-parse','HEAD').toString().trim();
  assert.equal(policy.pin.commit,head);assert.equal(policy.pin.path,name);assert.equal(policy.pin.sha256,sha(fs.readFileSync(path.join(root,name))));
- assert.equal(policy.pin.whole_body_consumed,true);assert.ok(reader.used>=before+3*policy.pin.bytes);
+ assert.equal(policy.pin.whole_body_consumed,true);
  assert.ok(reader.inventory.has(head+':'+name));assert.deepEqual(policy.catalogue,read());
 });
 
-test('compact programme authority survives a native phase reset with its carry charged',()=>{
+test('compact programme authority retains complete consumed code custody',()=>{
  const head=git('rev-parse','HEAD').toString().trim();
- const reader=new ImmutableReader(root,head,{runtimeBytes:1,metadataBytes:17,executionBytes:1,outputBytes:1});
+ const reader=new ImmutableReader(root,head);
  const proof=readSupportedProgrammeAuthority(reader,request(read().programs[0]));
  assert.deepEqual(Object.keys(proof).sort(),['catalogue','native','source']);
  assert.equal('programs' in proof,false);assert.equal('source_executed_code' in proof,false);
- const carry=2*(JSON.stringify(proof)+'\n').length;assert.equal(reader.metadataBytes,17+carry);
- reader.phase();assert.equal(reader.used,20+carry);
  assert.equal(reader.inventory.get(head+':'+helper).whole_body_consumed,true);
  assert.match(reader.inventory.get(head+':'+helper).sha256,/^[a-f0-9]{64}$/);
 });

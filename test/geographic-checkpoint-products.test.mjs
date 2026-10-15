@@ -82,25 +82,18 @@ test('bounded certificate gzip rejects trailer size lies and concatenated hidden
     const result = run(f); assert.notEqual(result.status, 0); assert.deepEqual(fs.readdirSync(f.out), []);
   }
 });
-test('complete union admission precedes product-body reads and output creation', t => {
-  const f = fixture(t);
-  const code = `import pathlib\noriginal=m['retain_checkpoint_products']\nm['retain_checkpoint_products']=lambda *args: original(*args,allowance=1)\nopened=pathlib.Path.open\ndef guard(self,*args,**kwargs):\n    if self.name.endswith('.json'): raise AssertionError('product body read before admission')\n    return opened(self,*args,**kwargs)\npathlib.Path.open=guard`;
-  const result = run(f, code);
-  assert.notEqual(result.status, 0); assert.match(result.stderr, /current allowance/);
-  assert.doesNotMatch(result.stderr, /product body read before admission/); assert.deepEqual(fs.readdirSync(f.out), []);
-});
 test('partial write failure yields no completion descriptor and preserves failed output evidence', t => {
   const f = fixture(t);
   const code = `import pathlib\noriginal=pathlib.Path.open\ndef fail(self,*args,**kwargs):\n    if self.parent==pathlib.Path(sys.argv[3]) and self.name=='derived-facts.json': raise OSError('injected write failure')\n    return original(self,*args,**kwargs)\npathlib.Path.open=fail`;
   const result = run(f, code); assert.notEqual(result.status, 0); assert.match(result.stderr, /injected write failure/);
-  assert.equal(result.stdout, ''); assert(fs.readdirSync(f.out).length > 0); assert(!fs.existsSync(path.join(f.out, 'geography-check.json')));
+  assert.equal(result.stdout, ''); assert(fs.readdirSync(f.out).length > 0); assert(!fs.existsSync(path.join(f.out, 'geography-check.json'))); assert(!fs.existsSync(path.join(f.out, 'derived-publication.json')));
 });
 test('actual joint parent retains native products before temporary cleanup and withholds failed results', t => {
   for (const loss of [false, true]) {
     const f = fixture(t), runner = path.resolve('scripts/run-geographic-check.py');
     Object.assign(f.issued, {kind: 'trusted-selected-joint-comparison-v1', mode: 'authenticated-checkpoint-append-v1', candidate_code_executed: false});
     if (loss) Object.assign(f.issued.native, {status: 'native-regressions-found', lost_or_reassigned_cells: 1, intervals: [{row: 1}]});
-    const code = `import importlib.util,json,pathlib,shutil,sys\nspec=importlib.util.spec_from_file_location('joint_parent',sys.argv[1]);m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)\nissued=json.loads(sys.argv[5]);destinations=[]\ndef child(command,**kwargs):\n    assert command[2].endswith('/selected-joint-entry.mjs')\n    destination=pathlib.Path(command[-2]);shutil.copytree(sys.argv[3],destination);destinations.append(destination);return json.dumps(issued).encode()\nm.subprocess.check_output=child\nm.selected_consumer_allowance=lambda repo: 256*1024*1024\nresult=m.selected_joint(pathlib.Path(sys.argv[2]),'a'*40,'b'*40,checkpoint_destination=pathlib.Path(sys.argv[4]))\nassert len(destinations)==1 and all(not p.exists() for p in destinations)\nassert not any(name=='shapely' or name.startswith('shapely.') for name in sys.modules)\nprint(json.dumps(result))`;
+    const code = `import importlib.util,json,pathlib,shutil,sys\nspec=importlib.util.spec_from_file_location('joint_parent',sys.argv[1]);m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)\nissued=json.loads(sys.argv[5]);destinations=[]\ndef child(command,**kwargs):\n    assert command[1].endswith('/selected-joint-entry.mjs')\n    destination=pathlib.Path(command[-2]);shutil.copytree(sys.argv[3],destination);destinations.append(destination);return json.dumps(issued).encode()\nm.subprocess.check_output=child\nresult=m.selected_joint(pathlib.Path(sys.argv[2]),'a'*40,'b'*40,checkpoint_destination=pathlib.Path(sys.argv[4]))\nassert len(destinations)==1 and all(not p.exists() for p in destinations)\nassert not any(name=='shapely' or name.startswith('shapely.') for name in sys.modules)\nprint(json.dumps(result))`;
     const result = spawnSync(process.env.PYTHON ?? 'python3', ['-I', '-B', '-c', code, runner, process.cwd(), f.source, f.out, JSON.stringify(f.issued)], {encoding: 'utf8'});
     assert.equal(result.status, 0, result.stderr); const actual = JSON.parse(result.stdout);
     assert.equal(actual.continuous, undefined); assert.equal(actual.continuous_result, undefined);

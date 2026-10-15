@@ -7,7 +7,6 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
-import {processingAllowance} from './check-effective-geographic-regression.mjs';
 import {githubAPI, githubPages} from './issue-claim-contract.mjs';
 import {integrationTree} from './integration-profile.mjs';
 import {loadPackageInputs, readPackageInputs, containsPackagePath} from './package-inputs.mjs';
@@ -22,13 +21,9 @@ const need=(ok,message)=>{if(!ok)throw Error(message);};
 const hash=raw=>createHash('sha256').update(raw).digest('hex');
 const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
 const root=path.dirname(path.dirname(fileURLToPath(import.meta.url)));
-const git=args=>execFileSync('git',['-C',root,...args],{encoding:'utf8',maxBuffer:32*1048576,
+const git=args=>execFileSync('git',['-C',root,...args],{encoding:'utf8',maxBuffer:Infinity,
   env:{...process.env,GIT_NO_LAZY_FETCH:'1',GIT_TERMINAL_PROMPT:'0'}}).trim();
 const ordered=rows=>rows.sort((a,b)=>a.path.localeCompare(b.path,'en'));
-export function admitAssemblyAtlasMetadata(bytes,allowance=processingAllowance()){
-  need(Number.isSafeInteger(bytes)&&bytes>0&&2*bytes<=allowance.phaseBytes,'Actual atlas exceeds current metadata allocation');
-  return bytes;
-}
 export async function createPackageAssemblyScratch(sourceRoot){
   const cache=path.join(sourceRoot,'.cache');
   let stat;try{stat=await fsp.lstat(cache);}catch(error){if(error.code!=='ENOENT')throw error;}
@@ -43,7 +38,7 @@ function admitDisk(bytes,label){
 const treeRows=tree=>ordered([...tree.entries.values()].filter(row=>row.type==='blob').map(row=>({path:row.path,mode:row.mode,oid:row.sha})));
 
 async function blobJSON(api,repo,tree,name){
-  const row=tree.entries.get(name);need(row?.type==='blob'&&row.mode==='100644'&&row.size<=8*1048576,'Bounded ordinary original metadata required');
+  const row=tree.entries.get(name);need(row?.type==='blob'&&row.mode==='100644','Bounded ordinary original metadata required');
   const blob=await api(`/repos/${repo}/git/blobs/${row.sha}`);need(blob.encoding==='base64','Original metadata body unavailable');
   const raw=Buffer.from(blob.content,'base64');need(raw.length===row.size&&createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex')===row.sha,'Original metadata Git identity differs');
   return JSON.parse(raw);
@@ -62,7 +57,7 @@ function acceptedInputsFromTree(base,tree,current){
     if(name.endsWith('/')||inertSelectedPackageInput(name))continue;
     const row=tree.entries.get(name);
     if(row?.type==='blob'&&row.mode==='100644'&&/^[a-f0-9]{40}$/.test(row.sha??'')&&
-      Number.isSafeInteger(row.size)&&row.size>=0&&row.size<=32*1048576)
+      Number.isSafeInteger(row.size)&&row.size>=0)
       files.push({path:name,mode:row.mode,oid:row.sha,bytes:row.size});
   }
   return {commit:base,files};
@@ -226,14 +221,11 @@ export async function assembleSelectedPackage({api,repo,expectedHead,originalRun
     }
     const atlasPath=path.join(originalRoot,'dist/client/atlas-geography.json');
     const atlasPin=manifest.output.files.find(pin=>pin.path==='dist/client/atlas-geography.json');
-    // Atlas is an actual emitted asset, not an 8 MiB control receipt. Charge its
-    // authenticated whole bytes to the same current scientific allowance; the
-    // private execution frame then accounts for the parsed graph and checks RSS.
+    // Authenticate the actual emitted atlas before consuming its selected base.
     need(atlasPin&&fs.statSync(atlasPath).size===atlasPin.bytes,'Authenticated whole atlas size differs');
-    admitAssemblyAtlasMetadata(atlasPin.bytes);
     const atlas=JSON.parse(fs.readFileSync(atlasPath));need(atlas.additiveRelease?.base_reference,'Original additive base descriptor missing');
     const execution=issuePackageAssemblyExecution({original,source:root,stage,executingRoot:root,
-      inheritedMetadata:[current,found.source,manifest,atlas,{runtime}],acceptedInputs:current.accepted_selected_inputs});
+      acceptedInputs:current.accepted_selected_inputs});
     const publication=await preparePackageSelectedAdditive({root:stage,originalPackage:original,assemblyExecution:execution,
       selectedGrid:{sha256:current.selection.sha256},geographicRelease:atlas.additiveRelease.base_reference});
     need(publication,'Genuine current additive publication required');

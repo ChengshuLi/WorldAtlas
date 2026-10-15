@@ -62,7 +62,7 @@ export function qualifiedPreparedReuse(reader, adoption, phase, products = null)
 
 // `templates` and `retained` are produced by the admitted recipe/stage index.
 // They identify files, not component IDs, hashes, source acceptance or approvals.
-export function nativeConfigFromStages(reader, {requests, retained, templates, requested_resources, compatibility}) {
+export function nativeConfigFromStages(reader, {requests, retained, templates, compatibility}) {
   const issued = readPreparedStage(reader, requests, 'requests');
   need(issued.outputs['requests.json'], 'Missing issued request index');
   const index = reader.json(issued.outputs['requests.json']);
@@ -94,8 +94,7 @@ export function nativeConfigFromStages(reader, {requests, retained, templates, r
   });
   // The existing nativeRequests constructor must still validate genuine terminal,
   // publication, whole handoff, complete inventory, runtime and native template.
-  return {version: 1, ...(compatibility === undefined ? {} : {compatibility}),
-    ...(requested_resources === undefined ? {} : {requested_resources}), groups};
+  return {version: 1, ...(compatibility === undefined ? {} : {compatibility}), groups};
 }
 
 export function rebindConfigFromStage(reader, {retained, operating}) {
@@ -243,15 +242,15 @@ export function qualifyFinalizedCheckpoint(recipe, adoption, reader, adapters) {
 // A historical completed SOURCE/NATIVE pair is not a new issuance template.
 // Authenticate its whole original custody, including literal v1 scope.
 export function qualifyCompletedCustody(recipe, reader, adapters) {
-  const unique = values => Array.isArray(values) && values.length > 0 && values.length <= 512
+  const unique = values => Array.isArray(values) && values.length > 0
     && values.every(v => typeof v === 'string' && v.length > 0) && new Set(values).size === values.length;
   need(recipe?.version === 1 && recipe.mode === 'completed-original-custody' && typeof recipe.id === 'string' && /^[a-z0-9-]+$/.test(recipe.id)
     && equal(Object.keys(recipe).sort(), ['groups', 'id', 'mode', 'new_prefix', 'package_inputs', 'retained_registries', 'selector', 'version'])
-    && Array.isArray(recipe.groups) && recipe.groups.length > 0 && recipe.groups.length <= 32,
-    'Explicit bounded completed-original custody recipe required');
+    && Array.isArray(recipe.groups) && recipe.groups.length > 0,
+    'Explicit completed-original custody recipe required');
   need(typeof recipe.new_prefix === 'string' && recipe.new_prefix.endsWith('/') && safe(recipe.new_prefix.slice(0, -1))
     && recipe.selector?.path === 'data/ownership-selection.json' && recipe.package_inputs?.path === '.github/package-inputs.json'
-    && Array.isArray(recipe.retained_registries) && recipe.retained_registries.length <= 512,
+    && Array.isArray(recipe.retained_registries),
     'Completed-original selection/package/retained context required');
   locate(reader, recipe.selector); locate(reader, recipe.package_inputs);
   const retained = recipe.retained_registries.map(p => locate(reader, p));
@@ -270,10 +269,6 @@ export function qualifyCompletedCustody(recipe, reader, adapters) {
       && unique(targets) && equal([...group.target_ids].sort(), targets), 'Completed-original component/target scope differs');
     need(qualified.component_ids.every(id => !components.has(id)), 'Overlapping completed-original component scope');
     qualified.component_ids.forEach(id => components.add(id));
-    // Products remain live while groups are qualified; charge that metadata to
-    // the existing shared phase rather than granting a new resource allowance.
-    need(typeof reader.budget?.add === 'function', 'Completed-original shared metadata budget required');
-    reader.budget.add({bytes: 2 * Object.values(qualified.products).reduce((n, raw) => n + raw.length, 0)});
     groups.push({id: group.id, component_ids: [...qualified.component_ids], target_ids: targets,
       authority_input: input, qualified_products: qualified.products});
   }
@@ -281,10 +276,9 @@ export function qualifyCompletedCustody(recipe, reader, adapters) {
 }
 
 // Existing-contract constructor, scoped to avoid mixing scientific identities.
-export const {materializeRecipe, modelRequestBudget, recheckNativeRequest} = (() => {
+export const {materializeRecipe} = (() => {
 // Metadata-only recipe postimage. No body acquisition, execution or publication.
 const need=(v,m)=>{if(!v)throw Error(m);};
-const FILE=33554432, SUPERVISOR=131072;
 const canon=v=>Array.isArray(v)?v.map(canon):v&&typeof v==='object'?Object.fromEntries(Object.keys(v).sort().map(k=>[k,canon(v[k])])):v;
 const bytes=v=>Buffer.from(JSON.stringify(canon(v))+'\n');
 const sha=v=>createHash('sha256').update(v).digest('hex');
@@ -292,72 +286,39 @@ const equal=(a,b)=>bytes(a).equals(bytes(b));
 const hash=(s,n=64)=>typeof s==='string'&&new RegExp(`^[a-f0-9]{${n}}$`).test(s);
 const safe=s=>typeof s==='string'&&/^[A-Za-z0-9_.\/-]+$/.test(s)&&!s.startsWith('/')&&s.split('/').every(x=>x&&x!=='.'&&x!=='..');
 const unique=a=>Array.isArray(a)&&a.length&&a.every(x=>typeof x==='string'&&x)&&new Set(a).size===a.length;
-const integer=(n,name,max=Number.MAX_SAFE_INTEGER)=>{need(Number.isSafeInteger(n)&&n>=0&&n<=max,'Invalid '+name);return n;};
+const integer=(n,name)=>{need(Number.isSafeInteger(n)&&n>=0,'Invalid '+name);return n;};
 const add=values=>values.reduce((n,v)=>integer(n+v,'aggregate bytes'),0);
 const operatorPin=p=>{const q={...p,blob:p.blob??p.git_blob_oid};delete q.git_blob_oid;return q;};
 const identity=p=>({commit:p.commit,path:p.path,mode:p.mode,blob:p.blob??p.git_blob_oid,bytes:p.bytes,sha256:p.sha256});
 function locate(reader,p){need(p&&equal(Object.keys(p).sort(),['commit','path'])&&hash(p.commit,40)&&safe(p.path),'Exact metadata commit/path locator required');const pin=reader.pin(p.commit,p.path);reader.read(pin);return pin;}
 function read(reader,p){const pin=locate(reader,p);return {pin,body:reader.json(pin)};}
 function uniquePins(pins){const map=new Map();for(const original of pins){const p=operatorPin(original);need(!map.has(p.path)||equal(map.get(p.path),p),'Conflicting input path: '+p.path);map.set(p.path,p);}return [...map.values()];}
-function pinCosts(p){
+function validateOperatorPin(p){
  need(safe(p?.path)&&['100644','100755'].includes(p.mode)&&hash(p.sha256),'Invalid operator input descriptor');
  if(p.kind==='original-report-product')need(p.mode==='100644'&&p.path.startsWith('.cache/additive-native-gap-repair/')&&hash(p.report_sha256)&&/^(components|sources)-\d{3}\.jsonl\.gz$/.test(p.original_product_path),'Invalid original report product');
  else if(p.kind==='completed-inventory-body')need(p.mode==='100644'&&/^\.cache\/native-grid-candidates\/[A-Za-z0-9_-]+\/(facts\.json|publication\.json|inventory\.jsonl\.gz)$/.test(p.path),'Invalid predecessor body');
  else need(hash(p.commit,40)&&hash(p.blob??p.git_blob_oid,40),'Missing immutable input identity');
- const costs=[integer(p.bytes,'whole input',FILE)];
- if(p.uncompressed_bytes!==undefined){need(hash(p.uncompressed_sha256),'Missing decoded identity');costs.push(integer(p.uncompressed_bytes,'decoded input',FILE));}return costs;
+ integer(p.bytes,'whole input');
+ need((p.uncompressed_bytes===undefined)===(p.uncompressed_sha256===undefined),'Incomplete decoded identity');
+ if(p.uncompressed_bytes!==undefined){need(hash(p.uncompressed_sha256),'Missing decoded identity');integer(p.uncompressed_bytes,'decoded input');}
 }
 
-// Mirrors inventoryCommand's prospective candidateBudget accounting, including
-// BOTH child and supervisor request bytes. It is not live RSS/supply admission.
-function modelRequestBudget(request,{predecessor_allowance=null,request_bytes_bound=null}={}){
- const stage=request.source_rule??request.additive;need(stage&&Array.isArray(stage.inputs),'Missing operator stage');
- const literal=request.operating_profile===undefined;
- need(literal||request.operating_profile==='source-native-v2','Unsupported resource profile');
- const allowance=literal?{phaseBytes:256*1024*1024,rssBytes:1024**3}:request.processing_allowance;
- need(allowance&&Object.keys(allowance).sort().join(',')==='phaseBytes,rssBytes'&&Object.values(allowance).every(n=>Number.isSafeInteger(n)&&n>0),'Explicit finite reader allowance required');
- const output=integer(request.output_reserve,'output reserve');need(output>=SUPERVISOR&&output<=allowance.phaseBytes,'Invalid output reserve');
- const operating=request.operating_runtime;need(operating?.version===1&&operating.platform==='linux'&&operating.runtime?.map(p=>p.role).join(',')==='git,node,process-inspector,time','Complete admitted runtime required');
+function validateTemplateIdentity(request){
+ const stage=request.source_rule??request.additive;
+ need(stage&&Array.isArray(stage.inputs)&&Array.isArray(request.baseline?.pins),'Missing operator input inventory');
+ need(request.operating_profile===undefined||request.operating_profile==='source-native-v2','Unsupported operator profile');
+ const operating=request.operating_runtime;
+ need(operating?.version===1&&operating.platform==='linux'&&operating.runtime?.map(p=>p.role).join(',')==='git,node,process-inspector,time','Complete bound runtime required');
  for(const p of operating.runtime)need(typeof p.path==='string'&&p.path.startsWith('/')&&p.mode===493&&hash(p.sha256)&&Number.isSafeInteger(p.bytes)&&p.bytes>0,'Invalid runtime binding');
  need(new Set(operating.runtime.map(p=>p.path)).size===4,'Duplicate runtime path');
- need(operating.supervisor?.path==='coordination/engineering/melanesia363-additive-delivery-20261010/supervise-source-native-linux.mjs'&&hash(operating.supervisor.sha256),'Invalid supervisor');
- const supervisor=integer(operating.supervisor.bytes,'supervisor',SUPERVISOR),actual=bytes(request).length;
- const requestedBound=request_bytes_bound===null?null:integer(request_bytes_bound,'request bytes bound',SUPERVISOR);
- const requestBytes=requestedBound===null?actual:Math.max(actual,requestedBound);
- let monitored=13*1024*1024;
- if(literal)need(request.operating_limits===undefined&&request.processing_allowance===undefined&&operating.support_code===undefined,'Historical resources must remain literal');
- else{
-  const l=request.operating_limits;need(l&&Object.keys(l).sort().join(',')==='log_bytes,monitor_bytes,output_bytes,receipt_bytes,retained_bytes,rss_bytes,wall_seconds'&&Object.values(l).every(n=>Number.isSafeInteger(n)&&n>0)&&Number.isSafeInteger(l.wall_seconds*1000),'Complete operating limits required');
-  need(l.output_bytes>=output+SUPERVISOR&&Number.isSafeInteger(l.output_bytes+l.receipt_bytes)&&l.output_bytes+l.receipt_bytes<=l.retained_bytes&&l.log_bytes<=l.retained_bytes&&l.monitor_bytes<=l.retained_bytes&&l.log_bytes<=l.rss_bytes&&l.monitor_bytes<=l.rss_bytes&&l.receipt_bytes<=l.rss_bytes&&allowance.phaseBytes<=l.rss_bytes&&allowance.rssBytes<=l.rss_bytes,'Inconsistent output/runtime limits');
-  need(operating.support_code?.map(p=>p.path).join(',')==='scripts/local-workspace.mjs,scripts/worker-identity.mjs'&&operating.support_code.every(p=>hash(p.sha256)&&Number.isSafeInteger(p.bytes)&&p.bytes>0&&p.bytes<=FILE),'Complete operating support bindings required');
-  monitored=add([l.log_bytes,l.monitor_bytes,l.receipt_bytes,2*add(operating.support_code.map(p=>p.bytes))]);
+ need(operating.supervisor?.path==='coordination/engineering/melanesia363-additive-delivery-20261010/supervise-source-native-linux.mjs'&&hash(operating.supervisor.sha256)&&Number.isSafeInteger(operating.supervisor.bytes)&&operating.supervisor.bytes>=0,'Invalid supervisor binding');
+ if(request.operating_profile==='source-native-v2')need(operating.support_code?.map(p=>p.path).join(',')==='scripts/local-workspace.mjs,scripts/worker-identity.mjs'&&operating.support_code.every(p=>hash(p.sha256)&&Number.isSafeInteger(p.bytes)&&p.bytes>0),'Complete operating support bindings required');
+ need(Array.isArray(request.executed_code)&&Array.isArray(request.installed_modules),'Complete executed code/module inventories required');
+ for(const p of [...request.executed_code,...request.installed_modules]){
+  need(typeof p.path==='string'&&safe(p.path.replaceAll('@',''))&&hash(p.sha256),'Invalid code/module descriptor');
+  integer(p.bytes,'code/module bytes');
  }
- const sourceSlots=['source_request_path','operating_path','publication_path','facts_path','inventory_path'];
- const slotPaths=new Set(predecessor_allowance?sourceSlots.map(k=>stage[k]):[]);
- let inputPins=stage.inputs;
- const predecessorCosts=[];
- if(predecessor_allowance){
-  need(request.additive&&equal(Object.keys(predecessor_allowance).sort(),[...sourceSlots].sort())&&slotPaths.size===5,'Complete five-role predecessor allowance required');
-  for(const key of sourceSlots){need(stage.inputs.filter(p=>p.path===stage[key]).length===1,'Missing native predecessor slot');const p=predecessor_allowance[key];need(p&&Object.keys(p).every(k=>['bytes','uncompressed_bytes'].includes(k)),'Invalid predecessor allowance');need(p.bytes>0,'Positive predecessor allowance required');predecessorCosts.push(integer(p.bytes,'predecessor encoded allowance',FILE));if(p.uncompressed_bytes!==undefined)predecessorCosts.push(integer(p.uncompressed_bytes,'predecessor decoded allowance',FILE));}
-  need(predecessor_allowance.inventory_path.uncompressed_bytes!==undefined,'Decoded SOURCE inventory allowance required');
-  inputPins=stage.inputs.filter(p=>!slotPaths.has(p.path));
- }
- const code=[...request.executed_code,...request.installed_modules].map(p=>{need(typeof p.path==='string'&&safe(p.path.replaceAll('@',''))&&hash(p.sha256),'Invalid code/module descriptor');return integer(p.bytes,'code/module bytes',FILE);});
- const costs=[...code,requestBytes,...pinCosts(request.report),...inputPins.flatMap(pinCosts),...predecessorCosts,...request.baseline.pins.flatMap(pinCosts)];
- const operatingReserve=add([add(operating.runtime.filter(p=>p.role!=='node').map(p=>p.bytes)),supervisor,requestBytes,monitored]);
- const reserved=add([operating.runtime.find(p=>p.role==='node').bytes,output,SUPERVISOR,operatingReserve]);
- const total=add([...costs,reserved]),descriptors=costs.length+16,reasons=[];
- if(actual>SUPERVISOR||requestBytes>SUPERVISOR)reasons.push('request byte cap');
- if(requestedBound!==null&&actual>requestedBound)reasons.push('request byte reservation');
- if(stage.inputs.length>213)reasons.push('stage descriptor cap');
- if(descriptors>512)reasons.push('phase descriptor cap');
- if(total>allowance.phaseBytes)reasons.push('phase byte cap');
- return {fits:!reasons.length,reasons,request_bytes:actual,modeled_request_bytes:requestBytes,input_bytes:add(costs),reserved_bytes:reserved,total_bytes:total,descriptors,phase_bytes:allowance.phaseBytes,rss_bytes:allowance.rssBytes,predecessor_allowance};
-}
-
-function recheckNativeRequest(request){
- need(request.operation==='unactivated-additive-native-batch-v1','Native request required');
- const model=modelRequestBudget(request);need(model.fits,'Actual native request exceeds admission: '+model.reasons.join(', '));return model;
+ for(const pin of [request.report,...stage.inputs,...request.baseline.pins])validateOperatorPin(pin);
 }
 
 function accepted(reader,registry,selection){
@@ -367,10 +328,6 @@ function accepted(reader,registry,selection){
  need(unique(entry.cohort_ids)&&equal(scope.scopeIds,entry.cohort_ids)&&equal(rows?.map(r=>r.component_id),entry.cohort_ids),'Accepted handoff scope/order changed');
  need(equal([...new Set(rows.map(r=>r.retained_payload?.target_stable_location_id))].sort(),[...entry.target_ids].sort()),'Accepted target mapping changed');
  return {entry,pin:operatorPin(pin),scope,rows};
-}
-function resourceRequest(template,resources){
- need(template.operating_profile==='source-native-v2'&&resources&&equal(Object.keys(resources).sort(),['operating_limits','output_reserve','processing_allowance']),'New recipe requires admitted v2 template and explicit resources');
- return {...structuredClone(template),...structuredClone(resources)};
 }
 function directProduct(binding){return binding.physical_comparison?.original_report_product?.path;}
 function locatorMap(reader,selection,handoff){
@@ -400,11 +357,11 @@ function physicalProduct(handoff,name,report,acquisitions){
   ...(p.uncompressed_bytes===undefined?{}:{uncompressed_bytes:p.uncompressed_bytes}),
   ...(p.uncompressed_sha256===undefined?{}:{uncompressed_sha256:p.uncompressed_sha256})})));
  need(sources.length>0,'No exact whole physical product pin: '+name);
- sources.forEach(pinCosts);
+ sources.forEach(validateOperatorPin);
  need(sources.every(p=>(p.uncompressed_bytes===undefined||p.uncompressed_bytes===r.decoded_bytes)
   &&(p.uncompressed_sha256===undefined||p.uncompressed_sha256===r.decoded_sha256)),
  'Conflicting decoded physical product identity: '+name);
- const source=operatorPin(sources[0]);pinCosts(source);
+ const source=operatorPin(sources[0]);validateOperatorPin(source);
  const destination='.cache/additive-native-gap-repair/delivery/'+source.sha256+'/'+name;
  acquisitions.push({source,destination,role:'physical-product'});
  return {kind:'original-report-product',path:destination,mode:'100644',bytes:r.whole_original_bytes,sha256:r.whole_original_sha256,
@@ -433,7 +390,7 @@ function adminProducts(handoff,pool){
 }
 const sourceKeys=['cases_path','outcomes_path','payloads_path','simplified_comparison_path','generalized_comparison_path','remainders_path'];
 const nativeKeys=['source_request_path','operating_path','publication_path','facts_path','inventory_path'];
-function nativeInvariant(request){const r=structuredClone(request);delete r.destination;for(const k of [...nativeKeys,'scope_ids','source_execution_commit','source_runtime','inputs','owner_parts'])delete r.additive[k];return r;}
+function nativeInvariant(request){const r=structuredClone(request);for(const k of ['destination','processing_allowance','output_reserve','operating_limits'])delete r[k];for(const k of [...nativeKeys,'scope_ids','source_execution_commit','source_runtime','inputs','owner_parts'])delete r.additive[k];return r;}
 function sourceCommon(request){const r=request.source_rule,removed=new Set([...sourceKeys.map(k=>r[k]),r.registry_path,...r.original_products.map(p=>p.path),...r.administrative_products.map(p=>p.path),...r.target_banks]);return r.inputs.filter(p=>!removed.has(p.path));}
 
 function materializeRecipe(recipe,reader){
@@ -441,14 +398,15 @@ function materializeRecipe(recipe,reader){
  if(recipe.mode==='greedy-model')need(safe(recipe.destination_prefix)&&recipe.destination_prefix.startsWith('.cache/native-grid-candidates/'),'Fresh candidate destination prefix required');
  const registry=read(reader,recipe.registry);need(registry.body.version===1&&registry.body.kind==='accepted-administrative-handoffs-v1'&&Array.isArray(registry.body.entries),'Accepted registry required');
  const products={},groups=[],acquisitions=[],allIds=new Set();
- function emit(id,handoff,source,native,models,locators={}){
+ function emit(id,handoff,source,native,locators={}){
+  validateTemplateIdentity(source);validateTemplateIdentity(native);
   const component_ids=source.source_rule.expected_ids;
   need(unique(component_ids)&&component_ids.every(x=>!allIds.has(x)),'Duplicate/empty recipe scope');component_ids.forEach(x=>allIds.add(x));
   need(equal(native.additive.scope_ids,component_ids),'SOURCE/NATIVE scope differs');
   const sourceName=id+'-source-template.json',nativeName=id+'-native-template.json';
   need(!products[sourceName],'Duplicate group label');products[sourceName]=bytes(source);products[nativeName]=bytes(native);
   const group={id,handoff_id:handoff.entry.id,component_ids,source_template:sourceName,native_template:nativeName,
-   source_destination:recipe.mode!=='greedy-model'?source.destination:recipe.destination_prefix+'-'+id+'-source',native_destination:recipe.mode!=='greedy-model'?native.destination:recipe.destination_prefix+'-'+id+'-native',...locators,models};
+   source_destination:recipe.mode!=='greedy-model'?source.destination:recipe.destination_prefix+'-'+id+'-source',native_destination:recipe.mode!=='greedy-model'?native.destination:recipe.destination_prefix+'-'+id+'-native',...locators};
   groups.push(group);
   for(const [stage,request] of [['source',source],['native',native]])for(const p of [request.report,...request.baseline.pins,...(request.source_rule??request.additive).inputs]){
    if(p.kind||(recipe.mode==='greedy-model'&&stage==='native'&&nativeKeys.some(k=>request.additive[k]===p.path)))continue;acquisitions.push({source:operatorPin(p),destination:p.path,role:stage+'-input'});}
@@ -466,21 +424,20 @@ function materializeRecipe(recipe,reader){
     need(equal(native.report,source.report)&&equal(native.parent,source.parent),'SOURCE/NATIVE report or parent identity differs');
     const targets=[...new Set(h.rows.filter(row=>g.component_ids.includes(row.component_id)).map(row=>row.retained_payload.target_stable_location_id))].sort();
     need(unique(g.target_ids)&&equal([...g.target_ids].sort(),targets),'Explicit subset target identities differ from accepted rows');
-    const models={source:modelRequestBudget(source),native:modelRequestBudget(native)};
-    need(models.source.fits&&models.native.fits,'Explicit group exceeds admitted resource bounds');
    }
    const prior=cover.get(h.entry.id)??[];cover.set(h.entry.id,[...prior,...r.expected_ids]);
-   emit(g.id,h,source,native,{source:modelRequestBudget(source),native:modelRequestBudget(native)},{source_locator:g.source_template,native_locator:g.native_template});
+   emit(g.id,h,source,native,{source_locator:g.source_template,native_locator:g.native_template});
   }
   if(!explicit)for(const [id,ids]of cover){const entry=registry.body.entries.find(e=>e.id===id);need(equal([...ids].sort(),[...entry.cohort_ids].sort()),'Replay omitted accepted handoff components');}
  }else{
   need(recipe.compatibility===undefined&&Array.isArray(recipe.handoffs)&&recipe.handoffs.length,'New admitted handoffs required');
   for(const selection of recipe.handoffs){
    need(selection.component_ids===undefined&&selection.groups===undefined,'Component/group lists are not new recipe inputs');
-   const h=accepted(reader,registry,selection),sourceBase=resourceRequest(read(reader,selection.source_template).body,selection.source_resources);
-   need(sourceBase.operation==='retained-land-source-premises-v1'&&sourceBase.source_rule?.profile==='retained-consumed-administrative-source'&&sourceBase.source_rule.geometry_scope==='full-component','Registered administrative full-component recipe required');
+   const h=accepted(reader,registry,selection),sourceBase=structuredClone(read(reader,selection.source_template).body);
+   for(const key of ['processing_allowance','output_reserve','operating_limits'])delete sourceBase[key];
+   need(sourceBase.operating_profile==='source-native-v2'&&sourceBase.operation==='retained-land-source-premises-v1'&&sourceBase.source_rule?.profile==='retained-consumed-administrative-source'&&sourceBase.source_rule.geometry_scope==='full-component','Registered administrative full-component recipe required');
    need(Array.isArray(selection.targets)&&selection.targets.length&&new Set(selection.targets.map(t=>t.target_id)).size===selection.targets.length,'Explicit unique target mapping required');
-   const targetMap=new Map(selection.targets.map(t=>{const n=resourceRequest(read(reader,t.native_template).body,selection.native_resources);need(n.operation==='unactivated-additive-native-batch-v1'&&n.additive?.source_profile===sourceBase.source_rule.profile&&equal(n.baseline,sourceBase.baseline)&&equal(n.report,sourceBase.report)&&equal(n.parent,sourceBase.parent),'Native recipe baseline/report/parent differs');return [t.target_id,{...t,native:n}];}));
+   const targetMap=new Map(selection.targets.map(t=>{const n=structuredClone(read(reader,t.native_template).body);for(const key of ['processing_allowance','output_reserve','operating_limits'])delete n[key];need(n.operating_profile==='source-native-v2'&&n.operation==='unactivated-additive-native-batch-v1'&&n.additive?.source_profile===sourceBase.source_rule.profile&&equal(n.baseline,sourceBase.baseline)&&equal(n.report,sourceBase.report)&&equal(n.parent,sourceBase.parent),'Native recipe baseline/report/parent differs');return [t.target_id,{...t,native:n}];}));
    need(equal([...targetMap.keys()].sort(),[...h.entry.target_ids].sort()),'Target mapping must cover exactly the accepted handoff');
    const pool=uniquePins([...sourceBase.source_rule.inputs,...[...targetMap.values()].flatMap(t=>t.native.additive.inputs)]);
    const admin=adminProducts(h,pool),locators=locatorMap(reader,selection,h),physical=h.scope.original_physical_comparison_bindings;
@@ -505,28 +462,24 @@ function materializeRecipe(recipe,reader){
      nativeExtra.push(...s.inputs.filter(p=>needed.has(p.path)&&!sourceNames.has(p.path)));}
     const s=nativeBase.additive,slots=nativeKeys.map(k=>{const p=s.inputs.filter(p=>p.path===s[k]);need(p.length===1,'Native exemplar lacks five real predecessor slots');return p[0];});
     const native={...nativeBase,destination:recipe.destination_prefix+'-'+id+'-native',additive:{...s,scope_ids:rule.expected_ids,owner_parts:[...ownerParts.values()],inputs:uniquePins([...rule.inputs,...nativeExtra,...slots])}};
-    const models={source:modelRequestBudget(source),native:modelRequestBudget(native,{predecessor_allowance:selection.predecessor_allowance,request_bytes_bound:selection.native_request_bytes_bound})};
-    need(selection.predecessor_allowance&&Number.isSafeInteger(selection.native_request_bytes_bound),'Explicit future SOURCE output/request bounds required');
-    return {id,source,native,models};
+    return {id,source,native};
    }
    let pending=[];
    for(const row of rows){
-    if(pending.length&&!equal(nativeInvariant(pending[0].target.native),nativeInvariant(row.target.native))){const built=construct(pending);emit(built.id,h,built.source,built.native,built.models);pending=[];}
-    let built=construct([...pending,row]);
-    if(!built.models.source.fits||!built.models.native.fits){need(pending.length,'Singleton exceeds admitted SOURCE/NATIVE resource budget: '+row.id);const previous=construct(pending);emit(previous.id,h,previous.source,previous.native,previous.models);pending=[];built=construct([row]);need(built.models.source.fits&&built.models.native.fits,'Singleton exceeds admitted SOURCE/NATIVE resource budget: '+row.id);}
+    if(pending.length&&!equal(nativeInvariant(pending[0].target.native),nativeInvariant(row.target.native))){const built=construct(pending);emit(built.id,h,built.source,built.native);pending=[];}
     pending.push(row);ordinal++;
    }
-   if(pending.length){const built=construct(pending);emit(built.id,h,built.source,built.native,built.models);}
+   if(pending.length){const built=construct(pending);emit(built.id,h,built.source,built.native);}
    need(ordinal===h.entry.cohort_ids.length,'Incomplete recipe materialization');
   }
  }
  const transport=new Map();
- for(const item of acquisitions){const p=item.source;pinCosts(p);const key=sha(bytes({mode:p.mode,bytes:p.bytes,sha256:p.sha256,uncompressed_bytes:p.uncompressed_bytes??null,uncompressed_sha256:p.uncompressed_sha256??null}));const prior=transport.get(key)??{identity:key,source:p,destinations:[],uses:[]};if(!prior.destinations.includes(item.destination))prior.destinations.push(item.destination);if(!prior.uses.includes(item.role))prior.uses.push(item.role);transport.set(key,prior);}
- const acquisition_plan={version:1,kind:'transport-only-deduplicated-input-plan',products:[...transport.values()],unique_encoded_bytes:add([...transport.values()].map(p=>p.source.bytes)),limits:['Acquisition reuse only. Every operator phase authenticates and accounts for its complete issued input closure.']};
- const index={version:1,mode:recipe.mode,registry:registry.pin,...(recipe.compatibility?{compatibility:recipe.compatibility}:{}),groups,acquisition_plan,limits:['Metadata planning is not live resource admission, source approval, execution, or current-bank qualification.','Native templates retain real exemplar slots only until genuine SOURCE results replace them; templates must never execute directly.']};
+ for(const item of acquisitions){const p=item.source;validateOperatorPin(p);const key=sha(bytes({mode:p.mode,bytes:p.bytes,sha256:p.sha256,uncompressed_bytes:p.uncompressed_bytes??null,uncompressed_sha256:p.uncompressed_sha256??null}));const prior=transport.get(key)??{identity:key,source:p,destinations:[],uses:[]};if(!prior.destinations.includes(item.destination))prior.destinations.push(item.destination);if(!prior.uses.includes(item.role))prior.uses.push(item.role);transport.set(key,prior);}
+ const acquisition_plan={version:1,kind:'transport-only-deduplicated-input-plan',products:[...transport.values()],unique_encoded_bytes:add([...transport.values()].map(p=>p.source.bytes)),limits:['Acquisition reuse only. Every operator phase authenticates its complete issued input closure.']};
+ const index={version:1,mode:recipe.mode,registry:registry.pin,...(recipe.compatibility?{compatibility:recipe.compatibility}:{}),groups,acquisition_plan,limits:['Metadata planning is not source approval, execution, or current-bank qualification.','Native templates retain real exemplar slots only until genuine SOURCE results replace them; templates must never execute directly.']};
  products['recipe-index.json']=bytes(index);return {products,groups,index,acquisition_plan};
 }
-return {materializeRecipe, modelRequestBudget, recheckNativeRequest};
+return {materializeRecipe};
 })();
 
 // Existing-contract constructor, scoped to avoid mixing scientific identities.
@@ -538,12 +491,8 @@ export const {constructOriginalAuthority, constructAuthorityRegistry} = (() => {
 const need = (ok, message) => { if (!ok) throw Error(message); };
 const sha = raw => createHash('sha256').update(raw).digest('hex');
 const same = (a, b) => valueBytes(a).equals(valueBytes(b));
-const FILE = 32 * 1024 * 1024;
 const safe = name => typeof name === 'string' && !name.startsWith('/') && !name.includes('\\') && !name.includes('\0')
   && name.split('/').every(part => part && part !== '.' && part !== '..');
-// Preserve already charged state even when another reader owns the shared
-// budget. This adapter cannot declare another reader's live graph released.
-const outerFrame = reader => Math.max(reader.metadataBytes, reader.used - reader.runtimeBytes - reader.executionBytes - reader.outputBytes);
 const identity = p => ({commit: p.commit, path: p.path, mode: p.mode, git_blob_oid: p.git_blob_oid ?? p.blob, bytes: p.bytes, sha256: p.sha256});
 
 function exactLocator(locator) {
@@ -553,21 +502,16 @@ function exactLocator(locator) {
   return locator;
 }
 
-// The declared decoded bound is read from a committed publication, never from
+// The declared decoded identity is read from a committed publication, never from
 // caller-authored derived fields. The actual bytes must agree before it escapes.
 function committedBody(reader, locator, declared = null, parse = false) {
   exactLocator(locator);
   const {commit, path: name} = locator, d = reader.descriptor(name, commit);
-  const decoded = declared?.uncompressed_bytes ?? 0;
-  need(Number.isSafeInteger(decoded) && decoded >= 0 && decoded <= FILE, 'Invalid committed decoded bound');
-  const scratch = (parse ? 4 * (decoded || d.bytes) : 2 * decoded);
-  need(Number.isSafeInteger(scratch) && reader.used + scratch <= reader.phaseLimit, 'Authority constructor metadata exceeds admitted phase');
-  reader.used += scratch;
-  const encoded = reader.read(name, {version: commit, decoded});
+  const encoded = reader.read(name, {version: commit});
   const pin = {...identity({...d, sha256: sha(encoded)})};
   let raw = encoded;
   if (declared?.uncompressed_bytes !== undefined) {
-    raw = gunzipSync(encoded, {maxOutputLength: Math.max(1, decoded)});
+    raw = gunzipSync(encoded);
     pin.uncompressed_bytes = raw.length; pin.uncompressed_sha256 = sha(raw);
   }
   if (declared) for (const key of ['bytes', 'sha256', 'uncompressed_bytes', 'uncompressed_sha256'])
@@ -608,8 +552,8 @@ function deriveOriginalBinding(reader, inputs) {
     if (original.kind === 'completed-inventory-body') aliases.push({original, published});
     else need(same(identity(original), identity(published)), 'Native SOURCE predecessor points to another committed body: ' + key);
   }
-  need(Array.isArray(native.body.assets) && native.body.assets.length > 0 && native.body.assets.length <= 512,
-    'Missing bounded native publication asset roster');
+  need(Array.isArray(native.body.assets) && native.body.assets.length > 0,
+    'Missing native publication asset roster');
   const names = native.body.assets.map(p => p.path);
   need(new Set(names).size === names.length && names.every(n => safe(n) && !n.includes('/')), 'Duplicate/unsafe native publication asset');
   const assets = native.body.assets.map(p => committedBody(reader, native.member(p.path), p).pin);
@@ -632,7 +576,6 @@ function deriveOriginalBinding(reader, inputs) {
 
 function constructOriginalAuthority(reader, inputs) {
   need(reader instanceof ImmutableReader, 'Require the existing ImmutableReader');
-  const outerMetadata = outerFrame(reader);
   if (inputs.source_evidence !== undefined) {
     need(Object.keys(inputs).sort().join(',') === 'native_patch,source_evidence', 'Source-target authority requires two immutable inputs');
     const source = committedBody(reader, inputs.source_evidence), patch = committedBody(reader, inputs.native_patch);
@@ -643,9 +586,6 @@ function constructOriginalAuthority(reader, inputs) {
       component_ids:proof.source_scope_ids,ledger_rows:proof.original_ledger.rows,rule_sha256:valueSha(preimage),limitations:proof.limitations};
   }
   const binding = deriveOriginalBinding(reader, inputs);
-  // The discovery bodies are out of scope. Carry only the produced binding into
-  // the existing validators, which own their unchanged whole-body accounting.
-  reader.metadataBytes = outerMetadata + 4 * valueBytes({inputs, binding, inventory: [...reader.inventory.values()]}).length;
   const custody = readOriginalRuleAuthority(reader, binding.original_pins, binding.source_output_aliases ?? []);
   qualifyOriginalSourceAuthority(custody);
   const native = qualifyOriginalNativeAuthority(custody, binding.native_proof);
@@ -658,10 +598,9 @@ function constructOriginalAuthority(reader, inputs) {
 // selected-consumer policy; the complete original program is re-authenticated by
 // readRetainedRegistryAuthority. A registry alone never approves selection.
 function constructAuthorityRegistry(reader, authorities) {
-  need(reader instanceof ImmutableReader && Array.isArray(authorities) && authorities.length > 0 && authorities.length <= 512,
-    'Require bounded committed authority pairs and existing ImmutableReader');
+  need(reader instanceof ImmutableReader && Array.isArray(authorities) && authorities.length > 0,
+    'Require committed authority pairs and existing ImmutableReader');
   const entries = [], seen = new Set(), components = new Set();
-  const outerMetadata = outerFrame(reader);
   function committedEntry(locators) {
     need(locators && Object.keys(locators).sort().join(',') === 'rule_preimage,source_authority', 'Require committed preimage/binding locators only');
     for (const locator of Object.values(locators)) exactLocator(locator);
@@ -671,15 +610,10 @@ function constructAuthorityRegistry(reader, authorities) {
       rule_preimage: rule.pin, source_authority: binding.pin};
     const entry = {authority_sha256: valueSha(body), ...body};
     need(!seen.has(entry.authority_sha256), 'Duplicate committed original authority'); seen.add(entry.authority_sha256);
-    reader.metadataBytes += 4 * valueBytes({rule: rule.body, entry}).length;
     const proof = readRetainedRegistryAuthority(reader, entry);
     return {entry, scope: [...proof.source_scope_ids]};
   }
   for (const locators of authorities) {
-    // Previous qualified graphs are no longer retained. Keep the registry and
-    // unique component roster live across the next existing-reader phase.
-    reader.metadataBytes = outerMetadata + 4 * valueBytes({authorities, entries, scope: [...components], seen: [...seen], inventory: [...reader.inventory.values()]}).length;
-    reader.phase();
     const {entry, scope} = committedEntry(locators);
     for (const id of scope) { need(!components.has(id), 'Overlapping original authority component'); components.add(id); }
     entries.push(entry);
@@ -691,17 +625,11 @@ return {constructOriginalAuthority, constructAuthorityRegistry};
 })();
 
 export function deliveryAuthorityReader(root, pinReader) {
-  const outer = pinReader.budget.snapshot(), git = pinReader.git;
+  const git = pinReader.git;
   class DeliveryReader extends ImmutableReader {
     git(...args) { return git(...args); }
-    admit(pin, decoded = 0) {
-      const extra = this.charged.has(pin.commit + ':' + pin.path) ? 0 : 1;
-      need(outer.accounted_descriptors + this.charged.size + extra <= 512, 'Shared delivery/authority descriptor budget exceeded');
-      super.admit(pin, decoded);
-    }
   }
-  return new DeliveryReader(root, git('rev-parse', 'HEAD').toString().trim(), {
-    allowance: pinReader.budget.allowance, metadataBytes: 8 * 1024 * 1024 + outer.accounted_bytes});
+  return new DeliveryReader(root, git('rev-parse', 'HEAD').toString().trim());
 }
 
 // Reuse the already authenticated gh account only at an actual cold fetch.
@@ -727,7 +655,6 @@ export function deliveryAcquisitionExecute({execute = execFileSync,
 export const {acquireDeliveryInputs} = (() => {
 // Thin adapter for the existing exact Git object acquisition. It does not
 // decode scientific records, restore logical products or execute operators.
-const CAP=33554432;
 const need=(v,m)=>{if(!v)throw Error(m);};
 const sha=raw=>createHash('sha256').update(raw).digest('hex');
 const oid=raw=>createHash('sha1').update('blob '+raw.length+'\0').update(raw).digest('hex');
@@ -761,26 +688,17 @@ function writeExactFile(root,relative,pin,raw){
  fs.writeFileSync(file,raw,{flag:'wx',mode:0o644});readExactFile(root,relative,pin);return true;
 }
 
-async function acquireDeliveryInputs(plan,root,{execute=execFileSync,token,onMaterialized=()=>{},limits,budget}={}){
- let sharedBefore=null;
- if(budget){need(typeof budget.add==='function'&&typeof budget.snapshot==='function','Existing candidate budget required');sharedBefore=budget.snapshot();
-  need(['limit_bytes','accounted_bytes','reserved_review_bytes'].every(k=>Number.isSafeInteger(sharedBefore[k])&&sharedBefore[k]>=0),'Finite shared acquisition allowance required');
-  limits={...limits,total:Math.min(limits?.total??Number.MAX_SAFE_INTEGER,sharedBefore.limit_bytes-sharedBefore.accounted_bytes-sharedBefore.reserved_review_bytes)};
- }
- need(limits&&typeof limits==='object'&&!Array.isArray(limits)&&Object.keys(limits).every(k=>['member','total','entries','destinations'].includes(k)),'Explicit acquisition allowance required');
- const allowance={member:CAP,entries:512,destinations:512,...limits};
- for(const value of Object.values(allowance))need(Number.isSafeInteger(value)&&value>=0,'Acquisition allowance must be finite');
- need(Number.isSafeInteger(allowance.total)&&allowance.member<=CAP&&allowance.entries<=512,'Existing whole-member and descriptor limits required');
- need(plan?.version===1&&plan.kind==='transport-only-deduplicated-input-plan'&&Array.isArray(plan.products)&&plan.products.length>0&&plan.products.length<=allowance.entries,'Bounded delivery acquisition plan required');
+async function acquireDeliveryInputs(plan,root,{execute=execFileSync,token,onMaterialized=()=>{}}={}){
+ need(plan?.version===1&&plan.kind==='transport-only-deduplicated-input-plan'&&Array.isArray(plan.products)&&plan.products.length>0,'Complete delivery acquisition plan required');
  need(path.isAbsolute(root)&&fs.realpathSync(root)===root,'Actual ordinary acquisition root required');
- const rows=[],objects=new Map(),destinations=new Map(),descriptors=new Map();let declared=0,decodedTotal=0,materializedTotal=0;
+ const rows=[],objects=new Map(),destinations=new Map(),descriptors=new Map();let declared=0;
  for(const item of plan.products){
-  const p=item.source;need(p&&safe(p.path)&&hex(p.commit,40)&&p.mode==='100644'&&hex(p.git_blob_oid??p.blob,40)&&hex(p.sha256,64)&&Number.isSafeInteger(p.bytes)&&p.bytes>=0&&p.bytes<=allowance.member,'Complete immutable acquisition pin required');
+  const p=item.source;need(p&&safe(p.path)&&hex(p.commit,40)&&p.mode==='100644'&&hex(p.git_blob_oid??p.blob,40)&&hex(p.sha256,64)&&Number.isSafeInteger(p.bytes)&&p.bytes>=0,'Complete immutable acquisition pin required');
   need(p.git_blob_oid===undefined||p.blob===undefined||p.git_blob_oid===p.blob,'Conflicting acquisition object aliases');
   need((p.uncompressed_bytes===undefined)===(p.uncompressed_sha256===undefined),'Incomplete decoded acquisition identity');
-  if(p.uncompressed_bytes!==undefined){need(Number.isSafeInteger(p.uncompressed_bytes)&&p.uncompressed_bytes>=0&&p.uncompressed_bytes<=allowance.member&&hex(p.uncompressed_sha256,64),'Bounded decoded acquisition identity required');decodedTotal+=p.uncompressed_bytes;need(Number.isSafeInteger(decodedTotal),'Complete decoded acquisition bound');}
-  need(item.identity===sha(bytes(bodyIdentity(p)))&&Array.isArray(item.destinations)&&item.destinations.length>0&&item.destinations.length<=512,'Acquisition identity/destination inventory differs');
-  declared+=p.bytes;need(Number.isSafeInteger(declared)&&declared<=allowance.total,'Complete declared acquisition bound');
+  if(p.uncompressed_bytes!==undefined)need(Number.isSafeInteger(p.uncompressed_bytes)&&p.uncompressed_bytes>=0&&hex(p.uncompressed_sha256,64),'Complete decoded acquisition identity required');
+  need(item.identity===sha(bytes(bodyIdentity(p)))&&Array.isArray(item.destinations)&&item.destinations.length>0,'Acquisition identity/destination inventory differs');
+  declared+=p.bytes;need(Number.isSafeInteger(declared),'Invalid acquisition aggregate');
   const key=p.git_blob_oid??p.blob,old=objects.get(key);
   need(!old||(old.pin.bytes===p.bytes&&old.pin.sha256===p.sha256&&old.pin.mode===p.mode),'Conflicting immutable acquisition body');
   const group=old??{pin:p,pins:[],destinations:new Set()};group.pins.push(p);objects.set(key,group);
@@ -791,21 +709,13 @@ async function acquireDeliveryInputs(plan,root,{execute=execFileSync,token,onMat
    if(destination===p.path)continue; // Immutable consumers read this from Git.
    need(destination.startsWith('.cache/additive-native-gap-repair/delivery/'+p.sha256+'/'),'Only content-addressed physical aliases may be materialized');
    const before=destinations.get(destination);need(!before||before===key,'Conflicting materialization destination');
-   if(!before){materializedTotal+=p.bytes;need(Number.isSafeInteger(materializedTotal)&&destinations.size<allowance.destinations,'Complete physical alias acquisition bound');}
    destinations.set(destination,key);group.destinations.add(destination);
   }
   rows.push(p);
  }
  need(plan.unique_encoded_bytes===declared,'Declared acquisition aggregate differs');
- const totalModeled=declared+decodedTotal+materializedTotal;
- need(Number.isSafeInteger(totalModeled)&&totalModeled<=allowance.total,'Encoded + decoded + physical placement exceeds explicit acquisition allowance');
- // The CLI's existing budget already includes config, plan and reserved receipts.
- // Admit this entire body inventory before any body read, fetch or file write.
- if(budget){for(const p of rows){budget.add({bytes:p.bytes});if(p.uncompressed_bytes!==undefined)budget.add({bytes:p.uncompressed_bytes});}
-  for(const [destination,key]of destinations)budget.add({bytes:objects.get(key).pin.bytes});budget.snapshot();
- }
  for(const [destination,key]of destinations)readExactFile(root,destination,objects.get(key).pin);
- const acquisition=createAcquisition({repo:root,token,execute,limits:{member:allowance.member,total:allowance.total,entries:allowance.entries},loadDescriptor:async(version,name)=>{const p=descriptors.get(version+':'+name);need(p,'Undeclared acquisition metadata');return {type:'blob',mode:p.mode,sha:p.git_blob_oid??p.blob,size:p.bytes};}});
+ const acquisition=createAcquisition({repo:root,token,execute,loadDescriptor:async(version,name)=>{const p=descriptors.get(version+':'+name);need(p,'Undeclared acquisition metadata');return {type:'blob',mode:p.mode,sha:p.git_blob_oid??p.blob,size:p.bytes};}});
  const admitted=[];
  for(const p of rows)admitted.push(await acquisition.descriptor(p.commit,p.path,{mode:p.mode,git_blob_oid:p.git_blob_oid??p.blob,bytes:p.bytes,sha256:p.sha256}));
  acquisition.acquire(admitted); // Existing import checks and missing-OID resume.
@@ -813,16 +723,15 @@ async function acquireDeliveryInputs(plan,root,{execute=execFileSync,token,onMat
  Object.assign(gitEnv,{GIT_NO_LAZY_FETCH:'1',GIT_NO_REPLACE_OBJECTS:'1',GIT_CONFIG_NOSYSTEM:'1',GIT_CONFIG_GLOBAL:'/dev/null',GIT_TERMINAL_PROMPT:'0'});
  const outcomes=[];let bodyReads=0;
  for(const [key,group] of objects){
-  const raw=execute('git',['-c','core.hooksPath=/dev/null','-C',root,'cat-file','blob',key],{env:gitEnv,maxBuffer:CAP+1,timeout:60000,stdio:['ignore','pipe','pipe']});bodyReads++;
+  const raw=execute('git',['-c','core.hooksPath=/dev/null','-C',root,'cat-file','blob',key],{env:gitEnv,maxBuffer:group.pin.bytes+1,timeout:60000,stdio:['ignore','pipe','pipe']});bodyReads++;
   need(Buffer.isBuffer(raw)&&raw.length===group.pin.bytes&&sha(raw)===group.pin.sha256&&oid(raw)===key,'Acquired body changed before materialization');
   const decodedPins=group.pins.filter(p=>p.uncompressed_bytes!==undefined);
-  if(decodedPins.length){const decoded=gunzipSync(raw,{maxOutputLength:Math.max(1,allowance.member)});for(const p of decodedPins)need(decoded.length===p.uncompressed_bytes&&sha(decoded)===p.uncompressed_sha256,'Acquired decoded identity differs');}
+  if(decodedPins.length){const decoded=gunzipSync(raw);for(const p of decodedPins)need(decoded.length===p.uncompressed_bytes&&sha(decoded)===p.uncompressed_sha256,'Acquired decoded identity differs');}
   for(const destination of group.destinations){const created=writeExactFile(root,destination,group.pin,raw);outcomes.push({path:destination,bytes:raw.length,sha256:group.pin.sha256,created});if(created)onMaterialized({path:destination,bytes:raw.length,sha256:group.pin.sha256});}
  }
  return {version:1,kind:'materialized-delivery-inputs-v1',plan_sha256:sha(bytes(plan)),status:'complete',...acquisition.stats,
   materialization_body_reads:bodyReads,materialized_files:outcomes.filter(p=>p.created).length,resumed_files:outcomes.filter(p=>!p.created).length,files:outcomes,
-  admission:{limits:allowance,declared_encoded_bytes:declared,declared_decoded_bytes:decodedTotal,physical_alias_bytes:materializedTotal,physical_aliases:destinations.size,total_modeled_bytes:totalModeled,...(budget?{shared_budget:budget.snapshot()}:{})},
-  limits:['Transport and exact-byte physical aliases only. Every scientific operator still authenticates and accounts for its own complete inputs.','Completed objects/files resume by their actual identities; partial or corrupted destination files are refused and preserved.']};
+  limits:['Transport and exact-byte physical aliases only. Every scientific operator still authenticates its own complete inputs.','Completed objects/files resume by their actual identities; partial or corrupted destination files are refused and preserved.']};
 }
 return {acquireDeliveryInputs};
 })();

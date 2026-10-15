@@ -6,12 +6,10 @@ import {createHash} from 'node:crypto';
 import {gzipSync,gunzipSync} from 'node:zlib';
 import {loadNativeSourceInputs} from './native-only-inputs.mjs';
 import {compactContextInputs} from './compact-context-inputs.mjs';
-import {committedPreparationFiles,requirePlainExecution,candidateBudget,preparationAllowance} from './native-preparation-guards.mjs';
+import {committedPreparationFiles,requirePlainExecution} from './native-preparation-guards.mjs';
 requirePlainExecution();
-const [baseline,vintage,...resourceArgs]=process.argv.slice(2),requested={};
-for(let i=0;i<resourceArgs.length;i+=2){const k=resourceArgs[i];if(!['--phase-bytes','--rss-bytes'].includes(k)||resourceArgs[i+1]===undefined||requested[k]!==undefined)throw Error('Explicit finite preparation resource arguments required');requested[k]=Number(resourceArgs[i+1]);}
-const allowance=preparationAllowance({phaseBytes:requested['--phase-bytes'],rssBytes:requested['--rss-bytes']});
-if(!/^[a-f0-9]{40}$/.test(baseline??'')||!/^[a-zA-Z0-9_-]+$/.test(vintage??''))throw Error('Use IMMUTABLE-BASELINE FRESH-VINTAGE');
+const [baseline,vintage,...extra]=process.argv.slice(2);
+if(extra.length||!/^[a-f0-9]{40}$/.test(baseline??'')||!/^[a-zA-Z0-9_-]+$/.test(vintage??''))throw Error('Use IMMUTABLE-BASELINE FRESH-VINTAGE');
 const repo=fs.realpathSync('.'),head=execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim();
 const code=committedPreparationFiles(repo,head,['package.json',
  'scripts/native-ownership/prepare-context-inputs.mjs','scripts/native-ownership/compact-context-inputs.mjs',
@@ -21,14 +19,13 @@ const inputs=await loadNativeSourceInputs(repo,baseline),sourceFiles=new Map(inp
 const digest=raw=>createHash('sha256').update(raw).digest('hex');
 const read=name=>{
  const pin=sourceFiles.get(name);if(!pin)throw Error('Undeclared original input');
- const raw=execFileSync('git',['show',baseline+':'+name],{maxBuffer:32*1024*1024});
+ const raw=execFileSync('git',['show',baseline+':'+name],{maxBuffer:pin.bytes+1});
  if(raw.length!==pin.bytes||digest(raw)!==pin.sha256)throw Error('Original input bytes changed');
- return JSON.parse(raw[0]===31&&raw[1]===139?gunzipSync(raw,{maxOutputLength:32*1024*1024}):raw);
+ return JSON.parse(raw[0]===31&&raw[1]===139?gunzipSync(raw):raw);
 };
 const world=read('data/world-index.json'),features=[];
 for(const part of world.parts)features.push(...read('data/'+part).features);
 const compact=compactContextInputs(features,inputs.bounds,inputs.manifest.footprints_sha256);
-const admission=candidateBudget([...inputs.sourceFiles,...code],{reserveBytes:131072,reserveDescriptors:16,allowance});
 const directory=path.join('.cache/native-context-inputs',vintage);
 fs.mkdirSync('.cache/native-context-inputs',{recursive:true});
 if(fs.realpathSync('.cache/native-context-inputs')!==path.join(repo,'.cache/native-context-inputs'))throw Error('Ordinary owned output parent required');
@@ -36,8 +33,7 @@ fs.mkdirSync(directory); // A fresh exclusive vintage; existing outputs remain i
 const parts=[];
 for(let first=0;first<compact.features.length;first+=1500){
  const values=compact.features.slice(first,first+1500),raw=Buffer.from(JSON.stringify(values)+'\n');
- if(raw.length>32*1024*1024)throw Error('Compact decoded part exceeds existing file budget');
- const encoded=gzipSync(raw,{level:9}),name='part-'+first+'.json.gz';admission.add({bytes:encoded.length});
+ const encoded=gzipSync(raw,{level:9}),name='part-'+first+'.json.gz';
  fs.writeFileSync(path.join(directory,name),encoded,{flag:'wx'});
  parts.push({path:name,bytes:encoded.length,sha256:digest(encoded),uncompressed_bytes:raw.length,
   uncompressed_sha256:digest(raw),first_owner:first+1,owners:values.length});
@@ -45,9 +41,9 @@ for(let first=0;first<compact.features.length;first+=1500){
 const report={version:1,baseline_commit:baseline,execution_commit:head,source_files:inputs.sourceFiles,executed_sources:code,
  original_release:inputs.release.id,footprints_sha256:compact.footprints_sha256,owner_sha256:compact.owner_sha256,
  locations:compact.features.length,vertices:inputs.vertices,parts,scope:compact.scope,
- budget:admission.snapshot(),original_files_written:false,scientific_approval:false,installation_ready:false,
+ original_files_written:false,scientific_approval:false,installation_ready:false,
  limits:['Lossless original native geometry and stable ID/parent/index derivative only; complete original metadata remains in source files.',
  'No grid, boundary, factual content, source authority or production delivery change.']};
-const raw=Buffer.from(JSON.stringify(report)+'\n');admission.add({bytes:raw.length});
+const raw=Buffer.from(JSON.stringify(report)+'\n');
 fs.writeFileSync(path.join(directory,'inputs.json'),raw,{flag:'wx'});
-console.log(JSON.stringify({directory,report_sha256:digest(raw),parts:parts.length,bytes:parts.reduce((n,p)=>n+p.bytes,0),budget:admission.snapshot()}));
+console.log(JSON.stringify({directory,report_sha256:digest(raw),parts:parts.length,bytes:parts.reduce((n,p)=>n+p.bytes,0)}));

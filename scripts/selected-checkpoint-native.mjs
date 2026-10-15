@@ -1,6 +1,5 @@
 // Joint-only native checkpoint consumer. Keep the cold/package import closure literal.
 import {compareIntervals,newVisibleRepairCandidates,repairVisibilityWitnesses} from './check-effective-geographic-regression.mjs';
-const OUTPUT=4*1024*1024;
 const demand=(v,m)=>{if(!v)throw Error(m);};
 const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
 
@@ -57,53 +56,41 @@ export function compareEffectiveNativeRows(beforeRows,afterRows,{size,ownersBefo
   demand(same([...before.keys()],rows)&&same([...after.keys()],rows),'Incomplete complete native projection scope');
   const intervals=[];let lostCells=0;
   for(const y of rows)for(const loss of compareIntervals(before.get(y).runs,after.get(y).runs,{row:y,ownersBefore,ownersAfter})){
-    demand(intervals.length<65536,'Exact native finding output exceeds bounded receipt; refuse acceptance');
     lostCells+=loss.end-loss.start;demand(Number.isSafeInteger(lostCells),'Native loss count exceeds exact integer domain');intervals.push(loss);
   }
-  demand(Buffer.byteLength(JSON.stringify(intervals))<=OUTPUT,'Native finding receipt exceeds admitted output reserve');
   return {checked_rows:rows.length,lost_or_reassigned_cells:lostCells,intervals};
 }
 
 // The joint launcher qualifies both states in one invocation and owns release.
 // Authentication stays in the shared projector, including the zero-row path.
-export async function compareSelectedCheckpointNative({transition,budget}) {
+export async function compareSelectedCheckpointNative({transition}) {
   const {authenticateTransition,projectNativeRows,projectVisibilityLatitudes}=await import('../coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs');
-  const {baseline,candidate,changedNativeRows}=authenticateTransition({transition,budget});
+  const {baseline,candidate,changedNativeRows}=authenticateTransition({transition});
   const visibilityCandidates=newVisibleRepairCandidates(baseline.additions,candidate.additions);
   const size=baseline.manifest.size,oldEntries=baseline.certificate.entries,newEntries=candidate.certificate.entries;
   demand(size===candidate.manifest.size&&oldEntries.length===newEntries.length,'Checkpoint native domain or complete owner roster differs');
   for(let i=0;i<oldEntries.length;i++)for(let k=0;k<4;k++)
     demand(oldEntries[i][k]===newEntries[i][k],'Checkpoint original stable owner/index/parent rebound');
-  // Reserve caller objects before allocating them. The shared projector checks
-  // actual RSS and consumes this monotone carry against the same live allowance.
-  const reserve=bytes=>{
-    demand(Number.isSafeInteger(bytes)&&bytes>=0&&Number.isSafeInteger(budget.carriedBytes+bytes)
-      &&budget.shared.used+bytes<budget.shared.allowance.phaseBytes,'Checkpoint native consumer carry exceeds current allowance');
-    budget.carriedBytes+=bytes;
-    authenticateTransition({transition,budget});
-  };
   // The private transition already derives the complete symmetric patch delta
   // from actual authenticated bodies. Caller-created wrappers cannot select it.
   const expected=changedNativeRows;
-  const patchRuns=baseline.patch.rows.reduce((n,row)=>n+row.runs.length,0)+candidate.patch.rows.reduce((n,row)=>n+row.runs.length,0);
-  reserve(7*OUTPUT+(expected.length?oldEntries.length*256+patchRuns*192+(baseline.patch.rows.length+candidate.patch.rows.length)*1024:0));
+
   // qualifyTransition proves identical base selection and all native routes;
   // its candidate cache already contains newly qualified original base rows.
   // Project once, then apply the two cumulative patches to that SAME base.
   demand(same(baseline.baseSelection,candidate.baseSelection)&&baseline.selection.sha256===candidate.selection.sha256,
     'Checkpoint original native base/manifest binding differs');
-  const projection=projectNativeRows({state:candidate,rows:expected,budget});
+  const projection=projectNativeRows({state:candidate,rows:expected});
   let result={checked_rows:0,lost_or_reassigned_cells:0,intervals:[]},visibilityWitnesses=[];
   if(expected.length){
-    const projectionRuns=2*projection.rows.reduce((n,row)=>n+row.runs.length,0);
-    reserve(projectionRuns*192+expected.length*1024+Math.min(65536,2*(projectionRuns+patchRuns))*256);
+
     const owners=oldEntries.map(row=>({id:row[0],index:row[1],province_id:row[2],province_index:row[3]}));
     const oldRows=applyNativeAdditiveRows(projection.rows,baseline.patch,{size,owners});
     const newRows=applyNativeAdditiveRows(projection.rows,candidate.patch,{size,owners});
     result=compareEffectiveNativeRows(oldRows,newRows,{size,ownersBefore:owners,ownersAfter:owners,rows:expected});
     if(visibilityCandidates.length){
-      reserve(8*Buffer.byteLength(JSON.stringify(visibilityCandidates))+4*size*8);
-      const latitudes=projectVisibilityLatitudes({state:candidate,budget});
+
+      const latitudes=projectVisibilityLatitudes({state:candidate});
       visibilityWitnesses=repairVisibilityWitnesses({candidates:visibilityCandidates,size,latitudes,beforeRows:oldRows,afterRows:newRows});
     }
   }
@@ -114,25 +101,10 @@ export async function compareSelectedCheckpointNative({transition,budget}) {
     affected_rows:result.checked_rows,lost_or_reassigned_cells:result.lost_or_reassigned_cells,intervals:result.intervals,
     native_row_scope:{proof:'shared-qualified-complete-base-and-cumulative-patch',changed_rows:expected,
       shared_base_reused_rows:projection.reused_rows,shared_base_acquired_rows:projection.acquired_rows},
-    phases:[{kind:'selected-checkpoint-native-retained-frame',retained_phase_bytes:budget.shared.used,caller_carried_bytes:budget.carriedBytes}],
     checkpoint_custody:{baseline_checkpoint:baseline.accepted_execution,shared_base:projection.custody},
-    output_reserve_bytes:OUTPUT,candidate_code_executed:false,
+    candidate_code_executed:false,
     limits:['Shared qualification and transition authenticate complete selection, registry, ledger, source and native custody before this consumer.',
-      'Native interval conservation is not sub-cell polygon coverage or source authority approval; continuous coverage, when in scope, is reported separately.',
-      'The retained-frame byte count is not an acquisition or process peak.']};
-  // Bound the complete report before creating JSON/string/buffer copies. The
-  // conservative seven-representation reserve above remains live for the writer.
-  let bound=0;
-  const count=value=>{
-    if(value===null||typeof value==='boolean')bound+=5;
-    else if(typeof value==='number')bound+=32;
-    else if(typeof value==='string')bound+=2+6*value.length;
-    else if(Array.isArray(value)){bound+=2+value.length;for(const item of value)count(item);}
-    else {bound+=2;for(const [key,item]of Object.entries(value)){bound+=4+6*key.length;count(item);}}
-    demand(bound<=OUTPUT,'Complete native checkpoint report exceeds admitted output reserve');
-  };
-  count(report);
-  demand(Buffer.byteLength(JSON.stringify(report))<=OUTPUT,'Complete native checkpoint report exceeds admitted output reserve');
+      'Native interval conservation is not sub-cell polygon coverage or source authority approval; continuous coverage, when in scope, is reported separately.']};
   return report;
 }
 

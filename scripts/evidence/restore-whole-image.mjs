@@ -7,9 +7,6 @@ import {createHash} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
 export {retainWholeImage} from '../../coordination/engineering/eastern-two-gap-repair-native-20261007/whole-image.mjs';
 
-const CAP = 32 * 1024 * 1024;
-const PART = 16 * 1024 * 1024;
-const IMAGE = 256 * 1024 * 1024;
 const sha = body => createHash('sha256').update(body).digest('hex');
 const digest = value => typeof value === 'string' && /^[a-f0-9]{64}$/.test(value);
 const safe = value => typeof value === 'string' && !path.isAbsolute(value) &&
@@ -18,7 +15,7 @@ const safe = value => typeof value === 'string' && !path.isAbsolute(value) &&
 function bytes(root, relative) {
   assert(safe(relative) && path.isAbsolute(root) && fs.realpathSync(root) === root);
   const file = path.join(root, relative), stat = fs.lstatSync(file);
-  assert(stat.isFile() && fs.realpathSync(file) === file && stat.size <= CAP);
+  assert(stat.isFile() && fs.realpathSync(file) === file);
   const fd = fs.openSync(file, 'r');
   try {
     const opened = fs.fstatSync(fd);
@@ -39,8 +36,8 @@ function absent(file) {
   try { fs.lstatSync(file); return false; }
   catch (error) { if (error.code === 'ENOENT') return true; throw error; }
 }
-function boundedInteger(value, limit, name) {
-  assert(Number.isSafeInteger(value) && value > 0 && value <= limit, name);
+function positiveInteger(value, name) {
+  assert(Number.isSafeInteger(value) && value > 0, name);
 }
 export function restoreWholeImage(source, out, {expectedIndexSha}) {
   assert(path.isAbsolute(source) && fs.realpathSync(source) === source);
@@ -54,17 +51,17 @@ export function restoreWholeImage(source, out, {expectedIndexSha}) {
   assert.equal(index.issue, 1295);
   assert.equal(index.kind, 'ordered-exact-original-byte-fragments');
   assert(Array.isArray(index.parts) && Array.isArray(index.files));
-  assert(Number.isSafeInteger(index.whole_bytes) && index.whole_bytes >= 0 && index.whole_bytes <= IMAGE, 'Bounded original fixed image required');
+  assert(Number.isSafeInteger(index.whole_bytes) && index.whole_bytes >= 0, 'Invalid original image byte length');
   assert(digest(index.whole_sha256));
-  // Admit complete rosters and aggregate bounds before opening any part.
+  // Authenticate complete rosters and exact offsets before opening any part.
   let offset = 0;
   const names = new Set();
   for (const pin of index.parts) {
     assert(safe(pin.path) && !names.has(pin.path));
     names.add(pin.path);
     assert.equal(pin.offset, offset);
-    boundedInteger(pin.bytes, CAP, 'Encoded part exceeds original cap');
-    boundedInteger(pin.decoded_bytes, PART, 'Decoded part exceeds original cap');
+    positiveInteger(pin.bytes, 'Invalid encoded part byte length');
+    positiveInteger(pin.decoded_bytes, 'Invalid decoded part byte length');
     assert(digest(pin.sha256) && digest(pin.decoded_sha256));
     offset += pin.decoded_bytes;
     assert(Number.isSafeInteger(offset) && offset <= index.whole_bytes);
@@ -76,7 +73,7 @@ export function restoreWholeImage(source, out, {expectedIndexSha}) {
     assert(safe(pin.path) && !members.has(pin.path));
     members.add(pin.path);
     assert.equal(pin.offset, offset);
-    boundedInteger(pin.bytes, CAP, 'Member exceeds original cap');
+    positiveInteger(pin.bytes, 'Invalid member byte length');
     assert(digest(pin.sha256) && ['100644', '100755'].includes(pin.mode));
     offset += pin.bytes;
     assert(Number.isSafeInteger(offset) && offset <= index.whole_bytes);

@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {applyBytePatch,byteSha,BYTE_CAP,verifyWholeBytes} from './byte-patch.mjs';
+import {applyBytePatch,byteSha,verifyWholeBytes} from './byte-patch.mjs';
 const original=Buffer.from('complete original binary\0body'),target=Buffer.from('complete retained binary\0body');
 const pin=b=>({bytes:b.length,sha256:byteSha(b),mode:'100644'});
 let calls=0;const source=name=>{calls++;assert.equal(name,'original');return original;};
@@ -18,7 +18,6 @@ reject('incomplete-output',()=>applyBytePatch([{copy:['original',0,1]}],pin(targ
 reject('source-byte-change',()=>applyBytePatch(good,pin(target),()=>Buffer.alloc(original.length)));
 reject('expected-hash-change',()=>applyBytePatch(good,{...pin(target),sha256:'0'.repeat(64)},source));
 reject('foreign-mode',()=>applyBytePatch(good,{...pin(target),mode:'100777'},source));
-reject('oversized-target',()=>applyBytePatch(good,{...pin(target),bytes:BYTE_CAP+1},source));
 reject('noncanonical-base64-padding-bits',()=>applyBytePatch([{literal:'YR=='}],pin(Buffer.from('a')),source));
 reject('invalid-base64',()=>applyBytePatch([{literal:'!!!!'}],pin(Buffer.from('a')),source));
 calls=0;reject('copy-bound-before-source-operation',()=>applyBytePatch([{copy:['original',0,2]}],pin(Buffer.from('a')),source));assert.equal(calls,0);

@@ -4,23 +4,26 @@ import {fileURLToPath} from 'node:url';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 
-const FILE = 32 * 1024 * 1024, TOTAL = 512 * 1024 * 1024, ENTRIES = 512;
 const repository = 'ChengshuLi/WorldAtlas';
 const oid = value => /^[a-f0-9]{40}$/.test(value ?? '');
 const sha256 = body => createHash('sha256').update(body).digest('hex');
 const safe = value => typeof value === 'string' && value && !value.includes('\\') && !value.includes('\0') && !path.posix.isAbsolute(value) && value.split('/').every(p => p && p !== '.' && p !== '..');
 const requireValue = (value, message) => { if (!value) throw Error(message); };
 
-export function createAcquisition({repo, loadTree, loadDescriptor, execute = execFileSync, token = process.env.GH_TOKEN, limits = {member: FILE, total: TOTAL, entries: ENTRIES}}) {
+export function createAcquisition({repo, loadTree, loadDescriptor, execute = execFileSync, token = process.env.GH_TOKEN}) {
   const env = Object.fromEntries(Object.entries(process.env).filter(([key]) => !key.startsWith('GIT_')));
   Object.assign(env, {GIT_NO_LAZY_FETCH: '1', GIT_NO_REPLACE_OBJECTS: '1', GIT_CONFIG_NOSYSTEM: '1', GIT_CONFIG_GLOBAL: '/dev/null', GIT_TERMINAL_PROMPT: '0',
     GIT_CONFIG_COUNT: token ? '3' : '2', GIT_CONFIG_KEY_0: 'core.hooksPath', GIT_CONFIG_VALUE_0: '/dev/null',
     GIT_CONFIG_KEY_1: 'credential.helper', GIT_CONFIG_VALUE_1: ''});
   if (token) Object.assign(env, {GIT_CONFIG_KEY_2: 'http.https://github.com/.extraheader',
     GIT_CONFIG_VALUE_2: 'AUTHORIZATION: basic ' + Buffer.from('x-access-token:' + token).toString('base64')});
-  const git = (args, input, maxBuffer = FILE + 1024) => {
-    try { return execute('git', ['-C', repo, ...args], {env, input, maxBuffer, timeout: 60000, stdio: ['pipe', 'pipe', 'pipe']}); }
-    catch { throw Error('Bounded geography object acquisition failed'); }
+  const git = (args, input, expectedBytes) => {
+    // Captured output has an exact immutable/protocol length. Commands whose
+    // output is not consumed need no buffered stdout or stderr at all.
+    const output = expectedBytes === undefined ? {} : {maxBuffer: expectedBytes + 1};
+    try { return execute('git', ['-C', repo, ...args], {env, input, ...output, timeout: 60000,
+      stdio: ['pipe', expectedBytes === undefined ? 'ignore' : 'pipe', 'ignore']}); }
+    catch { throw Error('Geography object acquisition failed'); }
   };
   const trees = new Map(), inventory = new Map(), verified = new Set();
   const stats = {scope: 'declared-selected-bank-and-direct-additive-assets', complete_scientific_closure: false,
@@ -29,9 +32,8 @@ export function createAcquisition({repo, loadTree, loadDescriptor, execute = exe
   async function tree(version) {
     requireValue(oid(version), 'Invalid immutable geography commit');
     if (!trees.has(version)) {
-      requireValue(trees.size < 8, 'Geography prefetch tree limit');
       const started = performance.now();
-      const root = git(['rev-parse', version + '^{tree}']).toString().trim();
+      const root = git(['rev-parse', version + '^{tree}'], undefined, 41).toString().trim();
       requireValue(oid(root), 'Invalid immutable geography root tree');
       // GitHub echoes a supplied commit in the envelope SHA. Request the actual
       // locally bound tree OID so the envelope and every row remain exact-bound.
@@ -46,12 +48,12 @@ export function createAcquisition({repo, loadTree, loadDescriptor, execute = exe
   }
   async function descriptor(version, name, expected = {}) {
     requireValue(safe(name), 'Unsafe declared geography path');
-    requireValue(stats.declarations < limits.entries, 'Geography prefetch declaration limit');
     stats.declarations++;
     const row = loadDescriptor ? await loadDescriptor(version, name) : (await tree(version)).get(name);
     requireValue(row?.type === 'blob' && ['100644', '100755'].includes(row.mode) && oid(row.sha)
-      && Number.isSafeInteger(row.size) && row.size >= 0 && row.size <= limits.member, 'Missing, nonordinary or oversized declared geography input');
-    requireValue(git(['ls-tree', '-z', version, '--', name]).toString() === `${row.mode} blob ${row.sha}\t${name}\0`,
+      && Number.isSafeInteger(row.size) && row.size >= 0, 'Missing or nonordinary declared geography input');
+    const expectedTreeRow = `${row.mode} blob ${row.sha}\t${name}\0`;
+    requireValue(git(['ls-tree', '-z', version, '--', name], undefined, Buffer.byteLength(expectedTreeRow)).toString() === expectedTreeRow,
       'Remote descriptor differs from actual immutable Git tree');
     requireValue((expected.mode === undefined || expected.mode === row.mode)
       && (expected.git_blob_oid === undefined || expected.git_blob_oid === row.sha)
@@ -60,7 +62,6 @@ export function createAcquisition({repo, loadTree, loadDescriptor, execute = exe
     const previous = inventory.get(row.sha);
     requireValue(!previous || previous.bytes === row.size, 'Conflicting declared object lengths');
     if (!previous) {
-      requireValue(inventory.size < limits.entries && stats.declared_bytes + row.size <= limits.total, 'Geography prefetch aggregate limit');
       inventory.set(row.sha, {oid: row.sha, bytes: row.size}); stats.declared_bytes += row.size;
     }
     stats.unique_objects = inventory.size;
@@ -78,7 +79,7 @@ export function createAcquisition({repo, loadTree, loadDescriptor, execute = exe
     return descriptor(selected, value.path, value);
   }
   function body(row) {
-    const raw = git(['cat-file', 'blob', row.oid]);
+    const raw = git(['cat-file', 'blob', row.oid], undefined, row.bytes);
     requireValue(raw.length === row.bytes && createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex') === row.oid,
       'Acquired geography object does not match tree');
     requireValue(!row.sha256 || sha256(raw) === row.sha256, 'Acquired geography body differs from declared hash');
@@ -87,7 +88,10 @@ export function createAcquisition({repo, loadTree, loadDescriptor, execute = exe
   function acquire(rows) {
     const unique = [...new Map(rows.map(row => [row.oid, row])).values()];
     if (!unique.length) return;
-    const status = git(['cat-file', '--batch-check=%(objectname) %(objecttype) %(objectsize)'], unique.map(r => r.oid).join('\n') + '\n').toString().trim().split('\n');
+    const statusBytes = unique.reduce((n, row) => n + Math.max(
+      Buffer.byteLength(`${row.oid} missing\n`), Buffer.byteLength(`${row.oid} blob ${row.bytes}\n`)), 0);
+    const status = git(['cat-file', '--batch-check=%(objectname) %(objecttype) %(objectsize)'],
+      unique.map(r => r.oid).join('\n') + '\n', statusBytes).toString().trim().split('\n');
     requireValue(status.length === unique.length, 'Incomplete local object inventory');
     const missing = [];
     for (let i = 0; i < unique.length; i++) {
@@ -98,10 +102,10 @@ export function createAcquisition({repo, loadTree, loadDescriptor, execute = exe
     }
     if (missing.length) {
       // Existing cloud bootstrap import mechanism: exact OIDs, no negotiation
-      // or lazy graph hydration, one bounded batch rather than per-body fetches.
+      // or lazy graph hydration, one shared batch rather than per-body fetches.
       const started = performance.now();
       git(['-c', 'fetch.negotiationAlgorithm=noop', 'fetch', '--no-tags', '--no-write-fetch-head', '--no-recurse-submodules', '--no-auto-maintenance',
-        '--filter=blob:none', '--stdin', 'https://github.com/' + repository + '.git'], missing.map(r => r.oid).join('\n') + '\n', 1024 * 1024);
+        '--filter=blob:none', '--stdin', 'https://github.com/' + repository + '.git'], missing.map(r => r.oid).join('\n') + '\n');
       stats.fetch_ms += Math.round(performance.now() - started);
       stats.fetch_batches++;
     }
@@ -135,7 +139,7 @@ export async function prefetchSelectedGeography(acquisition, baseline, candidate
     const selection = await a.json(version, 'data/ownership-selection.json');
     requireValue(selection.version === 1 && safe(selection.manifest_path), 'Unsupported selected geography');
     const manifest = await a.json(version, selection.manifest_path, {sha256: selection.sha256});
-    requireValue(Array.isArray(manifest.parts) && manifest.parts.length <= ENTRIES, 'Unsupported native part roster');
+    requireValue(Array.isArray(manifest.parts), 'Unsupported native part roster');
     requireValue(manifest.parts.every(p => safe(p.path)), 'Unsafe native part path');
     const root = path.posix.dirname(selection.manifest_path);
     const missingParts = manifest.parts.filter(p => !tree.has(path.posix.join(root, p.path)));
@@ -145,15 +149,14 @@ export async function prefetchSelectedGeography(acquisition, baseline, candidate
       const transport = manifest.native_asset_transport;
       requireValue(transport?.kind === 'ordered-exact-original-byte-fragments' && transport.index, 'Unrecognized native transport; retain ordinary checker acquisition');
       const index = await a.json(version, transport.index.path, transport.index);
-      requireValue(Array.isArray(index.parts) && index.parts.length <= ENTRIES, 'Unsupported native transport roster');
+      requireValue(Array.isArray(index.parts), 'Unsupported native transport roster');
       const directory = path.posix.dirname(transport.index.path);
       for (const p of index.parts) { requireValue(safe(p.path), 'Unsafe transport part'); leaves.push(await a.descriptor(version, path.posix.join(directory, p.path), p)); }
     }
     const declared = selection.selected_geography;
     requireValue(declared?.kind === 'complete-world-index-with-exact-encoded-overrides', 'Unrecognized source bank; retain ordinary checker acquisition');
     const bank = await a.json(version, declared.path, declared);
-    requireValue(Array.isArray(bank.unchanged_files) && Array.isArray(bank.overrides)
-      && bank.unchanged_files.length + bank.overrides.length + 1 <= ENTRIES, 'Unsupported selected source roster');
+    requireValue(Array.isArray(bank.unchanged_files) && Array.isArray(bank.overrides), 'Unsupported selected source roster');
     for (const p of [bank.world_index, ...bank.unchanged_files, ...bank.overrides]) leaves.push(await a.pin(version, p));
     if (selection.additive_release) {
       const p = selection.additive_release, sidecar = await a.json(version, p.path, p);
@@ -179,9 +182,7 @@ export async function githubTree(version, recursive = true) {
   if (process.env.GH_TOKEN) headers.Authorization = 'Bearer ' + process.env.GH_TOKEN;
   const response = await fetch(`https://api.github.com/repos/${repository}/git/trees/${version}${recursive ? '?recursive=1' : ''}`, {headers, signal: AbortSignal.timeout(60000)});
   requireValue(response.ok, 'Geography tree metadata unavailable');
-  const chunks = []; let bytes = 0;
-  for await (const chunk of response.body) { bytes += chunk.length; requireValue(bytes <= FILE, 'Geography tree metadata exceeds bound'); chunks.push(chunk); }
-  return JSON.parse(Buffer.concat(chunks).toString());
+  return response.json();
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {

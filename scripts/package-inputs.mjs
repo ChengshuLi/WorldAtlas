@@ -1,5 +1,3 @@
-import os from 'node:os';
-import {getHeapStatistics} from 'node:v8';
 import fs from 'node:fs';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
@@ -11,16 +9,7 @@ export const safePackagePath = value => typeof value === 'string' && /^[A-Za-z0-
   && !value.startsWith('/') && value.replace(/\/$/, '').split('/').every(part => part && part !== '.' && part !== '..');
 export const containsPackagePath = (paths, file) => paths.some(input => input.endsWith('/') ? file.startsWith(input) : file === input);
 
-export function packageInputByteBudget() {
-  const heap=getHeapStatistics();
-  // Eightfold reservation, shared with native readback: encoded metadata,
-  // decoded strings, parsed object graphs and comparison copies coexist.
-  return Math.floor(Math.min(process.availableMemory?.() ?? os.freemem(), heap.heap_size_limit-heap.used_heap_size)/8);
-}
-
-export function validatePackageInputs(value, {maximumBytes=packageInputByteBudget()} = {}) {
-  if(!Number.isSafeInteger(maximumBytes)||maximumBytes<=0||Buffer.byteLength(JSON.stringify(value)??'')>maximumBytes)
-    throw Error('Package input metadata exceeds available-memory admission');
+export function validatePackageInputs(value) {
   if (value?.version !== 1) throw Error('Unsupported package input definition');
   for (const name of ['inputs', 'optional_inputs', 'verification_paths', 'generated_outputs']) {
     const rows = value[name];
@@ -40,22 +29,17 @@ export function validatePackageInputs(value, {maximumBytes=packageInputByteBudge
 }
 
 export function loadPackageInputs(directory = root) {
-  const file=path.join(directory,PACKAGE_INPUT_FILE),maximumBytes=packageInputByteBudget();
-  if(fs.statSync(file).size>maximumBytes)throw Error('Package input metadata exceeds available-memory admission');
-  return validatePackageInputs(JSON.parse(fs.readFileSync(file,'utf8')),{maximumBytes});
+  const file=path.join(directory,PACKAGE_INPUT_FILE);
+  return validatePackageInputs(JSON.parse(fs.readFileSync(file,'utf8')));
 }
 
-export async function readPackageInputs({route, base, api, maximumBytes=packageInputByteBudget()}) {
-  if(!Number.isSafeInteger(maximumBytes)||maximumBytes<=0)throw Error('Invalid package metadata memory admission');
+export async function readPackageInputs({route, base, api}) {
   const blob = await api(`${route}/contents/${PACKAGE_INPUT_FILE}?ref=${base}`);
   if (blob?.type !== 'file' || blob.encoding !== 'base64' || blob.path !== PACKAGE_INPUT_FILE ||
-      !/^[a-f0-9]{40}$/.test(blob.sha ?? '') || !Number.isSafeInteger(blob.size) || blob.size > maximumBytes || typeof blob.content !== 'string') throw Error('Package input definition unavailable');
-  // Base64 expansion plus ordinary line wrapping fits two encoded characters
-  // per admitted decoded byte. Check before allocating the decoded buffer.
-  if(blob.content.length>2*maximumBytes+4)throw Error('Encoded package metadata exceeds available-memory admission');
+      !/^[a-f0-9]{40}$/.test(blob.sha ?? '') || !Number.isSafeInteger(blob.size) || blob.size <= 0 || typeof blob.content !== 'string') throw Error('Package input definition unavailable');
   const raw = Buffer.from(blob.content, 'base64');
   if (raw.length !== blob.size || createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex') !== blob.sha) throw Error('Package input definition bytes changed');
-  return validatePackageInputs(JSON.parse(raw),{maximumBytes});
+  return validatePackageInputs(JSON.parse(raw));
 }
 
 export function packagePathRequired(file, definition) {
@@ -96,7 +80,7 @@ export function admitPackageInputTransition(before, current, {acceptedInputs, ty
     need(commit(acceptedInputs?.commit)&&Array.isArray(acceptedInputs.files),'Exact trusted selected base required');
     for(const row of acceptedInputs.files){
       need(safePackagePath(row.path)&&!row.path.endsWith('/')&&row.mode==='100644'&&commit(row.oid)&&
-        Number.isSafeInteger(row.bytes)&&row.bytes>=0&&row.bytes<=32*1048576&&!accepted.has(row.path),
+        Number.isSafeInteger(row.bytes)&&row.bytes>=0&&!accepted.has(row.path),
         'Invalid accepted selected input descriptor');
       accepted.set(row.path,row);
     }
