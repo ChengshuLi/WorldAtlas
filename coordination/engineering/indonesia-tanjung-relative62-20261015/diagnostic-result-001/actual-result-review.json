@@ -1,0 +1,301 @@
+{
+  "status": "ACTUAL_DIAGNOSTIC_ACCEPTED_AS_BOUNDED_OBSERVATION_WITH_LIMITS",
+  "reviewer": "/root/tanjung62_result_review_sol",
+  "configured_model": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "high",
+    "basis": "Explicit delegated launch configuration. Runtime identity is not independently exposed; no self-introspection claim."
+  },
+  "scope": "Independent actual-result review using read-only immutable Git bytes, JSON/gzip metadata and captured outputs. No native/scientific rerun, producer replay, geometry predicate, network or shared mutation.",
+  "input_commit": "05e629dc339e7591fb79865eb11d302dd72c3bc4",
+  "accepted_code_commit": "a88fef0755ccf74b252e24d608bb5e7557f1dbb0",
+  "target": "gb:IDN:ADM2:22746128B73074683492420",
+  "owner": 23055,
+  "original_source_ids": [
+    36253,
+    36522
+  ],
+  "original_class": "source-relative",
+  "result": {
+    "requested_cells": 62,
+    "supported_cells": 0,
+    "held_cells": 62,
+    "original_intervals": 44,
+    "native_rows": 38,
+    "held_intervals": 41,
+    "interval_note": "Three adjacent equal-owner pairs are coalesced: 44 original intervals become 41 held/decision intervals, with the identical 62 tuples.",
+    "first_failure": {
+      "predicate": "physical-reconstruction-residual-or-conflict",
+      "run": [
+        207158,
+        207159,
+        23055
+      ],
+      "y": 130368
+    },
+    "rule_sha256": "91ff4b098ebd1478b753268bd451aa1c2c4916d6df41852367e795c29590e3fe"
+  },
+  "physical_custody": {
+    "checked_query_ids": [
+      12,
+      287,
+      5414,
+      7435,
+      11866,
+      20715,
+      33352,
+      36163,
+      51045,
+      52068,
+      63959
+    ],
+    "whole_geometry_parts": {
+      "mapped_land_support": 7,
+      "outside_mapped_L1_context": 62,
+      "missing_reconstruction": 60,
+      "extra_reconstruction": 44
+    },
+    "empty_operands": [
+      "mapped_inland_water_support",
+      "contradictory_land_water_support",
+      "L2-outside-L1",
+      "L3-outside-L2",
+      "L4-outside-L3"
+    ],
+    "report_sha256": "37fcbba4d60c81225471007005dea086b1e2c38a3739602d4590b9ae46200f6a"
+  },
+  "observed_execution": {
+    "numeric_exit": 0,
+    "internal_elapsed_seconds": 5.575424708,
+    "external_elapsed_seconds": 6.955767125,
+    "external_time_l_peak_rss_bytes": 252346368,
+    "normalized_node_lifetime_peak_rss_bytes": 252166144,
+    "charged_phase_bytes": 328446327,
+    "phase_rss_allowance_bytes": 536870912,
+    "complete_prospective_bound_bytes": 476157259,
+    "basis": "Captured single run. Resource observations and prospective bound are distinct; reviewer did not repeat execution."
+  },
+  "findings": [],
+  "checks": [
+    {
+      "check": "immutable input equality source-evidence.json",
+      "result": "passed"
+    },
+    {
+      "check": "immutable input equality native-patch.json",
+      "result": "passed"
+    },
+    {
+      "check": "immutable input equality original-relative-request-custody.json",
+      "result": "passed"
+    },
+    {
+      "check": "raw original extraction hash",
+      "result": "passed"
+    },
+    {
+      "check": "exact original 44 ordinals with all fields",
+      "result": "passed"
+    },
+    {
+      "check": "original subset byte preservation",
+      "result": "passed"
+    },
+    {
+      "check": "62 cells in 44 intervals and 38 rows",
+      "result": "passed"
+    },
+    {
+      "check": "original owner/SIDs/source-relative labels",
+      "result": "passed"
+    },
+    {
+      "check": "patch exact tuple set",
+      "result": "passed"
+    },
+    {
+      "check": "patch exact original interval boundaries",
+      "result": "passed"
+    },
+    {
+      "check": "explicit hypothesis partition",
+      "result": "passed"
+    },
+    {
+      "check": "whole original191 evidence preserved except coverage_rows",
+      "result": "passed"
+    },
+    {
+      "check": "retained raw body coordination/engineering/indonesia-riau-current-cells-20261014/evidence/physical-support.json",
+      "result": "passed"
+    },
+    {
+      "check": "retained raw body coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IDN-ADM2-000.bin.gz",
+      "result": "passed"
+    },
+    {
+      "check": "retained decoded body coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IDN-ADM2-000.bin.gz",
+      "result": "passed"
+    },
+    {
+      "check": "retained raw body coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+      "result": "passed"
+    },
+    {
+      "check": "retained decoded body coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+      "result": "passed"
+    },
+    {
+      "check": "retained raw body coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+      "result": "passed"
+    },
+    {
+      "check": "retained raw body coordination/engineering/indonesia-riau-current-cells-20261014/evidence/original-stage-inputs.json",
+      "result": "passed"
+    },
+    {
+      "check": "retained raw body coordination/engineering/source-target-native-delivery-20261014/evidence/physical-reproduction.py",
+      "result": "passed"
+    },
+    {
+      "check": "retained raw body coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/owners.json.gz",
+      "result": "passed"
+    },
+    {
+      "check": "retained decoded body coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/owners.json.gz",
+      "result": "passed"
+    },
+    {
+      "check": "accepted immutable code coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs",
+      "result": "passed"
+    },
+    {
+      "check": "accepted immutable code coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "result": "passed"
+    },
+    {
+      "check": "accepted immutable code package.json",
+      "result": "passed"
+    },
+    {
+      "check": "accepted immutable code scripts/check-effective-geographic-regression.mjs",
+      "result": "passed"
+    },
+    {
+      "check": "accepted immutable code scripts/delivery-handoff-advance.mjs",
+      "result": "passed"
+    },
+    {
+      "check": "accepted immutable code scripts/evidence-quality.mjs",
+      "result": "passed"
+    },
+    {
+      "check": "accepted immutable code scripts/geography-prefetch.mjs",
+      "result": "passed"
+    },
+    {
+      "check": "accepted immutable code scripts/native-ownership/native-preparation-guards.mjs",
+      "result": "passed"
+    },
+    {
+      "check": "accepted immutable code scripts/package-inputs.mjs",
+      "result": "passed"
+    },
+    {
+      "check": "accepted immutable code scripts/prepare-delivery-handoff.mjs",
+      "result": "passed"
+    },
+    {
+      "check": "accepted immutable code src/native-grid.js",
+      "result": "passed"
+    },
+    {
+      "check": "accepted immutable code src/ownership-codec.js",
+      "result": "passed"
+    },
+    {
+      "check": "12 module closure inventory",
+      "result": "passed"
+    },
+    {
+      "check": "actual result raw hash and length",
+      "result": "passed"
+    },
+    {
+      "check": "complete preparation output receipt",
+      "result": "passed"
+    },
+    {
+      "check": "config raw-byte receipt binding",
+      "result": "passed"
+    },
+    {
+      "check": "actual requested exact patch rows",
+      "result": "passed"
+    },
+    {
+      "check": "complete disjoint partition no duplicates/extras/overlap",
+      "result": "passed"
+    },
+    {
+      "check": "actual derived 62/0/62 counts",
+      "result": "passed"
+    },
+    {
+      "check": "all generic held decisions",
+      "result": "passed"
+    },
+    {
+      "check": "exact first failure",
+      "result": "passed"
+    },
+    {
+      "check": "output native contract equality",
+      "result": "passed"
+    },
+    {
+      "check": "output original pin source_evidence",
+      "result": "passed"
+    },
+    {
+      "check": "output original pin native_patch",
+      "result": "passed"
+    },
+    {
+      "check": "rule SHA recomputed from pinned preimage",
+      "result": "passed"
+    },
+    {
+      "check": "all 11 original physical query identities checked",
+      "result": "passed"
+    },
+    {
+      "check": "nonempty whole positive/exterior/missing/extra retained",
+      "result": "passed"
+    },
+    {
+      "check": "water/conflict/three hierarchy operands remain empty",
+      "result": "passed"
+    },
+    {
+      "check": "numeric successful completed bounded execution",
+      "result": "passed"
+    },
+    {
+      "check": "recorded resource observations and bounds",
+      "result": "passed"
+    }
+  ],
+  "limits": [
+    "All62 remain held and source-relative. mapped_land_support denotes the diagnostic hypothesis; neither class labels nor original SIDs are promoted.",
+    "The generic reason cannot attribute exterior, missing or extra reconstruction contact per cell or distinguish boundary/interior. It does not establish ocean/land classification.",
+    "No authority product, current-owner-zero proof, selected-output acceptance, scientific final/repair credit, whole-source clearance, import or publication authority follows.",
+    "Original source/date/licence/territorial/query limits and earlier source-wrapper/physical-producer failed operating envelopes remain applicable. This successful screening does not clear earlier failures.",
+    "territorial_exclusions=[] means no added exclusion geometry; it does not prove absence of foreign claims or territorial clearance.",
+    "Mapped L1 physical support does not certify administrative parentage. Source parent gb:IDN:ADM1:65028918B90123187256494 and framework parent framework:province:riau-islands:4839c8831796 retain their identities; no official-parent certificate is created.",
+    "Retained selected metadata declares geoBoundaries gbOpen, reference year2020 and CC BY3.0 IGO. This review checks retained bytes/declarations, not upstream authenticity, legal reuse or current geographical authority. Heterogeneous physical observation dates remain retained.",
+    "No reviewer geometry experiment, adverse fixture, safe-reproduction rerun, producer or actual entry-point execution was performed; the entry-point observation is the captured single run. This is no broader independent scientific or safe-reproduction clearance."
+  ],
+  "blockers": [],
+  "next_action": "Preserve62 held source-relative cells. Per-kind attribution remains unavailable in accepted a88; subsequent work follows existing scope and accepted implementation."
+}

@@ -1,0 +1,26 @@
+{
+  "at_utc": "2026-10-15T08:08:25.110054+00:00",
+  "completed_utc": "2026-10-15T08:08:32.065674+00:00",
+  "exit_code": 0,
+  "elapsed_seconds": 6.955767125,
+  "deadline_seconds": 120,
+  "deadline_terminated": false,
+  "direct_child_lifetime_peak_rss_bytes": 252346368,
+  "phase_request_bytes": 536870912,
+  "complete_prospective_bytes": 476157259,
+  "headroom_bytes": 572882944,
+  "concurrent_reserved_bytes": 0,
+  "input_commit": "05e629dc339e7591fb79865eb11d302dd72c3bc4",
+  "accepted_code_commit": "a88fef0755ccf74b252e24d608bb5e7557f1dbb0",
+  "child_exited": true,
+  "reservation_released": true,
+  "no_source_or_physical_replay": true,
+  "projection": {
+    "omitted_fields": [
+      "command",
+      "cwd"
+    ],
+    "reason": "Local executable and checkout paths remain in private original observation.",
+    "original_observation_sha256": "b9ef1435e22bdf3e471b1050e05e824a57903d52b42315617b6ceadfc3badf3b"
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "version": 1,
+  "kind": "metadata-only-Tanjung62-whole-body-native-diagnostic-plan",
+  "source_evidence": {
+    "bytes": 15701,
+    "sha256": "0631755d86f3498e7fd5fecf826fc87df805e437c8e0186022adf27d827532d7",
+    "git_blob_oid": "9f1c50f6f9cd0e4a97db65cf761e045d020fd806"
+  },
+  "native_patch": {
+    "bytes": 5321,
+    "sha256": "7f822a50dbd6e6fb8ccaef1d9b88ccf13ec656c21954cf715e86b7130e31104a",
+    "git_blob_oid": "5912a48af4c21211aa2591f080db023c8b9836f3"
+  },
+  "accepted_code_commit": "a88fef0755ccf74b252e24d608bb5e7557f1dbb0",
+  "accepted_code_receipt": "accepted-code-closure.json",
+  "stock_reader": {
+    "runtime": 121304480,
+    "output": 4194304,
+    "metadata": 8413726,
+    "encoded": 10072922,
+    "decoded": 24196415,
+    "full6xparse": 160215996,
+    "total": 328397843
+  },
+  "block": {
+    "block": 31,
+    "rowStart": 126976,
+    "rowEnd": 131072,
+    "requested_rows": 38,
+    "requested_intervals": 44,
+    "requested_cells": 62,
+    "complete_family_features": 519,
+    "bbox_possible_whole_source_features": [
+      {
+        "shapeID": "22746128B62804497316712",
+        "type": "MultiPolygon",
+        "polygon_parts": 120,
+        "vertices": 1636,
+        "edges": 1516,
+        "crossing_edge_rows": 3532,
+        "span_upper_bound": 1766,
+        "tie_upper_bound": 3532,
+        "scratch_bytes": 3220992
+      },
+      {
+        "shapeID": "22746128B73074683492420",
+        "type": "MultiPolygon",
+        "polygon_parts": 7,
+        "vertices": 229,
+        "edges": 222,
+        "crossing_edge_rows": 436,
+        "span_upper_bound": 218,
+        "tie_upper_bound": 436,
+        "scratch_bytes": 888576
+      }
+    ],
+    "whole_positive_land": {
+      "type": "MultiPolygon",
+      "polygon_parts": 7,
+      "vertices": 544,
+      "edges": 537,
+      "crossing_edge_rows": 460,
+      "span_upper_bound": 230,
+      "tie_upper_bound": 460,
+      "scratch_bytes": 1218048
+    },
+    "whole_residual_witnesses": [
+      {
+        "operation": "outside_mapped_L1_context",
+        "type": "MultiPolygon",
+        "polygon_parts": 62,
+        "vertices": 547,
+        "edges": 485,
+        "crossing_edge_rows": 336,
+        "span_upper_bound": 168,
+        "tie_upper_bound": 336,
+        "scratch_bytes": 1248896
+      },
+      {
+        "operation": "missing_reconstruction",
+        "type": "MultiPolygon",
+        "polygon_parts": 60,
+        "vertices": 253,
+        "edges": 193,
+        "crossing_edge_rows": 164,
+        "span_upper_bound": 82,
+        "tie_upper_bound": 164,
+        "scratch_bytes": 898304
+      },
+      {
+        "operation": "extra_reconstruction",
+        "type": "MultiPolygon",
+        "polygon_parts": 44,
+        "vertices": 183,
+        "edges": 139,
+        "crossing_edge_rows": 120,
+        "span_upper_bound": 60,
+        "tie_upper_bound": 120,
+        "scratch_bytes": 813952
+      }
+    ],
+    "positive_domain_extra_reserve": 10655232,
+    "candidate_hit_inventory": 11904,
+    "maximum_extra_live_scan_superset": 11916032,
+    "class_scan_extra": 0,
+    "class_scan_basis": "Only mapped_land_support declared; existing combined positive scan reused, no separate class groups."
+  },
+  "components": {
+    "full_stock_reader_runtime_inputs": 328397843,
+    "whole_block_positive_and_peak_witness_scratch": 11916032,
+    "complete_executing_code_source_parse_compile_12x": 6664860,
+    "outer_config_parse_12x4096": 49152,
+    "full_output_logs_OS_receipts_superset": 128940960,
+    "explicit_coverage_rows_extra_12x_whole_source": 188412
+  },
+  "complete_prospective_bytes": 476157259,
+  "proposed_phase_rss_bytes": 536870912,
+  "margin_bytes": 60713653,
+  "config_reserve_bytes": 4096,
+  "output_reserve_bytes": 4194304,
+  "external_stdout_stderr_limit_each": 16777216,
+  "external_wall_seconds": 120,
+  "session_headroom_bytes": 572882944,
+  "concurrent_reserved_bytes": 0,
+  "admission_issued": false,
+  "capacity_reserved": false,
+  "basis": "Same full encoded/decoded/6x-parse and whole-block1024B/vertex schedule as retained NM10185/Bintan plans; full512+ family and all whole witnesses unchanged, no clipping or62-only scan discount. External128940960 reserve from bintan-input-checkpoint-001/complete-prospective-resource-plan.json includes6x4MiB output carry,two16MiB logs,OS binary/shared pages,receipts and16MiB loader/stack growth.",
+  "limits": [
+    "Metadata counts/bounds/edge-row allocation arithmetic only; no polygon predicate, scientific helper import/scanner/native execution.",
+    "Whole family parsed once; full4096-row block remains charged, all source and positive/witness geometries retained.",
+    "Prospective arithmetic not peak observation or grant; Main must authenticate exact inputpair commits, owned-relative config and executable closure then freshly admit.",
+    "All62 remain source-relative originals; mapped_land_support is diagnostic hypothesis only. No authority or credit."
+  ]
+}
