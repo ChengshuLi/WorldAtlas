@@ -1,6 +1,6 @@
 # Adopted dated native-centre land support
 
-`vandon1977-ef7c9c5e-display-base-native-centre-land-support-v1.json` supplies the exact 1,977 proposed Vân Đồn centre records for the `adopted-dated-native-centre-land-support-v1` contract. Original owner is 48235, source SID 65810, member `gb:VNM:ADM2:81297802B23156291808671`. The subset retains 1,153 older Quảng Ninh-parent-positive records and 824 older selected-parent-absent records. Parent absence is not an added rejection or positive-parent requirement. This support input is not a constructor result or selected repair.
+`vandon1977-land-support-v1.json` supplies the exact 1,977 proposed Vân Đồn centre records for the `adopted-dated-native-centre-land-support-v1` contract. Original owner is 48235, source SID 65810, member `gb:VNM:ADM2:81297802B23156291808671`. The subset retains 1,153 older Quảng Ninh-parent-positive records and 824 older selected-parent-absent records. Parent absence is not an added rejection or positive-parent requirement. This support input is not a constructor result or selected repair.
 
 ## Evidence and attribution
 
@@ -23,4 +23,4 @@ Each frame has an explicit safe repository-relative `display_base`. Its pin path
 
 Consumption authenticates the published adopted interpretation and its complete pinned bodies. It performs no raster decoding, resampling or pixel reclassification, and declares no raw TIFF or mask body consumed. A dated terrestrial location does not assert whole-cell dry land, annual cover, jurisdiction or a legal shoreline. Original source IDs, coordinates, native lattice and recorded flags/holds stay intact; ordinary source/member/owner, active-source and all existing negative guards remain authoritative.
 
-The 129 contrary Hai Phong-parent land observations, 94 dated water answers, prior 24 separately reviewed land answers, special vegetation-only interpretations, Cát Hải cases and unresolved physical questions are outside this input. Their existing holds and dispositions are unchanged. This input adds no water-class support, automatic qualification, hold clearance or package-completion claim. The preserved `.provisional-v1.json` file is preparation history and must not be consumed.
+The 129 contrary Hai Phong-parent land observations, 94 dated water answers, prior 24 separately reviewed land answers, special vegetation-only interpretations, Cát Hải cases and unresolved physical questions are outside this input. Their existing holds and dispositions are unchanged. This input adds no water-class support, automatic qualification, hold clearance or package-completion claim.
