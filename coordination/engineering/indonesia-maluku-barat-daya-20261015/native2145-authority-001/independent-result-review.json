@@ -1,0 +1,205 @@
+{
+  "version": 1,
+  "reviewer": "/root/delivery11622_config_review",
+  "kind": "FIRST_ACTUAL_MBD2145_STOCK_NATIVE_QUALIFICATION_RESULT_REVIEW",
+  "disposition": "ACCEPTED WITH LIMITS AS QUALIFIED ORIGINAL2145-CELL AUTHORITY",
+  "check_count": 23,
+  "checks": [
+    {
+      "check": "complete4stockproducts only no partial/stale outputs",
+      "pass": true
+    },
+    {
+      "check": "full actual stock output constructor-result.json",
+      "pass": true
+    },
+    {
+      "check": "full actual stock output original-rule-preimage.json",
+      "pass": true
+    },
+    {
+      "check": "full actual stock output authority-binding.json",
+      "pass": true
+    },
+    {
+      "check": "actual stock native completion exact request not diagnostic",
+      "pass": true
+    },
+    {
+      "check": "rule preimage hash bound complete constructor",
+      "pass": true
+    },
+    {
+      "check": "full rule and custody pins identical original inputs",
+      "pass": true
+    },
+    {
+      "check": "published original typed source remains exact bdd1",
+      "pass": true
+    },
+    {
+      "check": "published original patch remains exact e161",
+      "pass": true
+    },
+    {
+      "check": "true original inputcommit ebbdc8 no copied aliases",
+      "pass": true
+    },
+    {
+      "check": "exact one complete assigned native component",
+      "pass": true
+    },
+    {
+      "check": "CID derived actual original target and entire source evidence bytes",
+      "pass": true
+    },
+    {
+      "check": "exact target owner assigned native representation",
+      "pass": true
+    },
+    {
+      "check": "full actual523native rows exact original patch no dropped/extra spans",
+      "pass": true
+    },
+    {
+      "check": "all2145native tuples unique singleowner23148",
+      "pass": true
+    },
+    {
+      "check": "complete selected base every coordinate and basehash retained",
+      "pass": true
+    },
+    {
+      "check": "physical receipt same wholepositive exterior support result",
+      "pass": true
+    },
+    {
+      "check": "selected landclass source family and noninvented foreign limits unchanged",
+      "pass": true
+    },
+    {
+      "check": "native bounds are actual finite ordered values no recomputation",
+      "pass": true
+    },
+    {
+      "check": "reuse23newtypedscientific checks no replay unchanged scope",
+      "pass": true
+    },
+    {
+      "check": "actual result qualified count agrees with exact full rows",
+      "pass": true
+    },
+    {
+      "check": "actual ordinary fresh512admission and resultcharge complete",
+      "pass": true
+    },
+    {
+      "check": "actual runtime1.32060875s and standard1.57s235438080peak observations",
+      "pass": true
+    }
+  ],
+  "failures": [],
+  "actual_products": {
+    "preparation.json": {
+      "bytes": 501,
+      "sha256": "ce132f051082a2518cc00eb7cd25c6406eda0e118dbb2771e994c25437a2c913"
+    },
+    "original-rule-preimage.json": {
+      "bytes": 744,
+      "sha256": "60b0ad252c466c218c5e602ea83c1e631b2c87c672e77f1448284e6a5b7192c8"
+    },
+    "authority-binding.json": {
+      "bytes": 747,
+      "sha256": "e7a73d29917720eebe5b3d6d6c03f1404a43f4658b50170c99e7153f0772cfa3"
+    },
+    "constructor-result.json": {
+      "bytes": 41309,
+      "sha256": "2673a393155b4e89498daa831b737fd9a0121569081a8b87b2c0c5d3434ed1ba"
+    }
+  },
+  "original_inputs": {
+    "source_evidence": {
+      "bytes": 11841,
+      "commit": "ebbdc8c1f8b77457d34a03a0fe290e42cb9941cc",
+      "git_blob_oid": "c1470a363a59cce14971a9a3946ef96cf2b73cdc",
+      "mode": "100644",
+      "path": "coordination/engineering/indonesia-maluku-barat-daya-20261015/native2145-input-001/source-evidence.json",
+      "sha256": "bdd1a97c454ec4a8603712b46b1ccc63ab4b3b68648b15e808276d3a95838aaa"
+    },
+    "native_patch": {
+      "bytes": 32351,
+      "commit": "ebbdc8c1f8b77457d34a03a0fe290e42cb9941cc",
+      "git_blob_oid": "fe13e1d35e144c6a88812c6839984a96b3b9d3a4",
+      "mode": "100644",
+      "path": "coordination/engineering/indonesia-maluku-barat-daya-20261015/native2145-input-001/native-patch.json",
+      "sha256": "e161a1029a1308df77c9001535be84212e2720dfac5da4621e6be5ff5a3c98cb"
+    }
+  },
+  "actual_scientific_scope": {
+    "target_id": "gb:IDN:ADM2:22746128B88480653802061",
+    "component_id": "source-target:e13744f844282997ea0d3105df875fa9c8d02b1bad25527ed7e368c79c8910cb",
+    "owner": 23148,
+    "qualified_cells": 2145,
+    "components": 1,
+    "native_rows": 523,
+    "unmodified_spans": 947,
+    "native_rows_sha256": "6cf6637eb108d664d25778feacf14ef99561d1f3364e2e81ede03889f86ccd4f",
+    "base_geometry_sha256": "f8fda594d4feeca3b51e14e78fe5f0ab02024cd1b56f18f701f732775255e5d2",
+    "native_bounds_actual": [
+      125.72454093970998,
+      -8.336502692336763,
+      130.0816276710176,
+      -6.305899164397438
+    ],
+    "coverage_class": "mapped_land_support",
+    "all2013relative_held_excluded": true,
+    "original_context_cells": 4158,
+    "original_parent_SID": 36249,
+    "original_source_SID": 36579,
+    "full_source_family_members": 519,
+    "source_receipt_sha256": "e910414b360b063fee290f4a3cc3ef4b142f3221579173ede4387f4ee922419e",
+    "wholephysical_queries": 62,
+    "outside_L1_original_nonempty_parts_retained": 247
+  },
+  "operating": {
+    "accepted_code": "b43462432a3a45771b1264fa6b7202cc831f6cec",
+    "config_sha256": "038149d8dc02c28e06be1fb46a66b8fe7dcb6ab742781696873953206b32fce4",
+    "admission_at_utc": "2026-10-15T04:23:58.150Z",
+    "qualified_cells": 2145,
+    "actual_reader_charge_bytes": 317554337,
+    "fresh_phase_RSS_allowance_bytes": 536870912,
+    "internal_elapsed_seconds": 1.3206087499999999,
+    "external_seconds": 1.57,
+    "external_Darwin_peak_RSS_bytes": 235438080,
+    "normalized_Node_lifetime_peak_bytes": 233652224,
+    "peer_exit_confirmed_by_root": "Bahamas exited 2026-10-15T04:08:26.494978Z before MBD; both teams released"
+  },
+  "reused_completed_reviews": [
+    "Original63source/stage review",
+    "Existing76input controls",
+    "Actual148physicalresult review with resolved timing-only addendum",
+    "23typedscientificinput proof including every947repairinterval/all2145tuples and2013relativeexclusion"
+  ],
+  "original_constructor_limitations": [
+    "Physical interpretation and semantic reconciliation are retained reviewed source evidence; actual current owner-zero is checked by native consumers.",
+    "Witness exclusion applies only to requested native centres. Original whole-source physical/hierarchy issues and historical source/resource limits remain retained; no whole-parent certification or acceptance is inferred."
+  ],
+  "acceptance": {
+    "newly_qualified_cells": 2145,
+    "newly_accepted_cells": 0,
+    "parent_reported_accepted_predecessor": "866c42b854910f17a80427dac19b2c850cd68093",
+    "parent_reported_accepted_cells": 99127,
+    "current_owner_zero": "UNRUN",
+    "composition_and_conservation": "PENDING_ROOT_ASSIGNMENT",
+    "selected_reader_emitted_checks": "PENDING_COORDINATED_INTEGRATION"
+  },
+  "limits": [
+    "Completed actual stock constructor qualifies precisely the2145requested native centres in this original component, binding the unchanged source519family, selected base, positive land, empty water and all original nonempty exterior/reconstruction/conflict/hierarchy pointsets. Review compares actual full products/identities/tuples; no qualifier, source, physical, native scanner or geometry predicate was replayed.",
+    "All2013source-relative holds remain excluded through exact original patch. Other water/border/territorial/source-relative holds and original4158wholecontext remain unchanged; no whole-target/whole-parent/legal certification is inferred.",
+    "b65 supplies no independent explicit foreign-veto geometry inventory. Omitted optional field is not an asserted empty foreign conflict set or territorial clearance. Original source/selected reference context and limits remain bound.",
+    "Original source referenceyear2020, selected/modified representation, source-rights/licensing uncertainty and heterogeneous physical dates retain original scope. Byte identity or requested-centre qualification is not present-day legal/geographic truth certification.",
+    "Earlier640MiBphysicalpreflight performed no science; actual512MiBphysicalresult and subsequent native result are distinct completed observations. Bahamas actual exit precedes MBDphysicalpreflight by26.500022seconds; no overlap. General aggregate live process-treeRSS was not measured and separate process peaks do not prove aggregate memory safety.",
+    "No new accepted credit, current-owner-zero, cumulative selected conservation/emitted output, deployment or integration is claimed.2145remain unaccepted after reported99127accepted1948prefix; preserve all original quartets and wait for assigned ordinary cumulative delivery.",
+    "No repeated mechanicalconfig/release/budget attestations or completed63/76/148/23tests; this is one substantive new actual-result review. No scientific helper import/execution, source decode, fetch/network, Git mutation/publication or reservation. Public review contains no private-machine locators."
+  ]
+}

@@ -1,0 +1,137 @@
+{
+  "version": 1,
+  "kind": "actual-stock-native-authority-operating-projection",
+  "projection": "Derived public projection of original local admission/stdout/time/prospective-plan records; original numerical fields retained explicitly, local machine paths omitted. Raw records remain local and are identified by whole hashes below.",
+  "original_raw_records": [
+    {
+      "name": "fresh-admission-001.json",
+      "bytes": 659,
+      "sha256": "8eaffc81c1c01b8099b0922a9af8c853d819d742c884f8868ce66c6158d767a4",
+      "git_blob_oid": "edff4d0e53449c10494812b50bea4b80fb1c043b"
+    },
+    {
+      "name": "native-stdout-001.log",
+      "bytes": 605,
+      "sha256": "1157ff931affec0af45bb643208c0cf2bfbdcd997176232b0a43e7e33cea9ab3",
+      "git_blob_oid": "2fd23f5832925f5c9a4628725ec54586639385d7"
+    },
+    {
+      "name": "native-time-001.log",
+      "bytes": 777,
+      "sha256": "03f20795619fafb95f2632b30aa36ce987282346a68b76eca4772a05d5cada73",
+      "git_blob_oid": "ac343d0bc2f71553ef93694983a991e670ad2319"
+    },
+    {
+      "name": "native-prospective-resource-plan.json",
+      "bytes": 6224,
+      "sha256": "c06c09402cc787a1a88afa210dded9c645e7193db283cb9a31924c266eabeb39",
+      "git_blob_oid": "a3a62b32d2d0928ccf230968133ddaa820ee8943"
+    },
+    {
+      "name": "native-authority-request.json",
+      "bytes": 510,
+      "sha256": "038149d8dc02c28e06be1fb46a66b8fe7dcb6ab742781696873953206b32fce4",
+      "git_blob_oid": "04e17c1d9ed22fb618d1522231b794a33599cc93"
+    }
+  ],
+  "execution_code_commit": "b43462432a3a45771b1264fa6b7202cc831f6cec",
+  "request_sha256": "038149d8dc02c28e06be1fb46a66b8fe7dcb6ab742781696873953206b32fce4",
+  "fresh_admission": {
+    "at_utc": "2026-10-15T04:23:58.150Z",
+    "availableBytes": 1767735296,
+    "currentRssBytes": 50921472,
+    "concurrentReservedBytes": 0,
+    "headroomBytes": 572882944,
+    "phaseBytes": 536870912,
+    "rssBytes": 536870912,
+    "complete_prospective_superset_bytes": 479943047,
+    "same_process_native": true,
+    "allowance": {
+      "phaseBytes": 536870912,
+      "rssBytes": 536870912
+    },
+    "admitted": true
+  },
+  "actual_entry_observation": {
+    "elapsed_seconds": 1.3206087499999999,
+    "charged_phase_bytes": 317554337,
+    "allowance": {
+      "phaseBytes": 536870912,
+      "rssBytes": 536870912
+    },
+    "normalized_node_lifetime_peak_rss_bytes": 233652224,
+    "qualified_cells": 2145,
+    "limits": [
+      "Original source/physical producers are not replayed.",
+      "Constructor qualification is not actual current-owner-zero or final selected-output acceptance."
+    ]
+  },
+  "external_operating": {
+    "elapsed_seconds": 1.57,
+    "Darwin_time_l_peak_rss_bytes": 235438080,
+    "numeric_exit_status": 0,
+    "exit_status_basis": "Operator Main reported actual EXIT0; full completion receipt/products/stdout/time corroborate completion. Projection preparer did not invoke or witness the running operator."
+  },
+  "original_inputs": {
+    "source_evidence": {
+      "bytes": 11841,
+      "commit": "ebbdc8c1f8b77457d34a03a0fe290e42cb9941cc",
+      "git_blob_oid": "c1470a363a59cce14971a9a3946ef96cf2b73cdc",
+      "mode": "100644",
+      "path": "coordination/engineering/indonesia-maluku-barat-daya-20261015/native2145-input-001/source-evidence.json",
+      "sha256": "bdd1a97c454ec4a8603712b46b1ccc63ab4b3b68648b15e808276d3a95838aaa"
+    },
+    "native_patch": {
+      "bytes": 32351,
+      "commit": "ebbdc8c1f8b77457d34a03a0fe290e42cb9941cc",
+      "git_blob_oid": "fe13e1d35e144c6a88812c6839984a96b3b9d3a4",
+      "mode": "100644",
+      "path": "coordination/engineering/indonesia-maluku-barat-daya-20261015/native2145-input-001/native-patch.json",
+      "sha256": "e161a1029a1308df77c9001535be84212e2720dfac5da4621e6be5ff5a3c98cb"
+    }
+  },
+  "original_constructor_result": {
+    "bytes": 41309,
+    "sha256": "2673a393155b4e89498daa831b737fd9a0121569081a8b87b2c0c5d3434ed1ba",
+    "git_blob_oid": "bee97ba0b9baed5440cf00b87b5df509dc80dcba"
+  },
+  "original_rule_preimage": {
+    "bytes": 744,
+    "sha256": "60b0ad252c466c218c5e602ea83c1e631b2c87c672e77f1448284e6a5b7192c8",
+    "git_blob_oid": "544bc11e417fe659e272b7f2af93b683a4ca903e"
+  },
+  "original_authority_binding": {
+    "bytes": 747,
+    "sha256": "e7a73d29917720eebe5b3d6d6c03f1404a43f4658b50170c99e7153f0772cfa3",
+    "git_blob_oid": "46f9ba272225b99091b14b43730823f8c06f612d"
+  },
+  "scope": {
+    "target": "gb:IDN:ADM2:22746128B88480653802061",
+    "owner": 23148,
+    "qualified_requested_cells": 2145,
+    "components": [
+      "source-target:e13744f844282997ea0d3105df875fa9c8d02b1bad25527ed7e368c79c8910cb"
+    ],
+    "new_accepted_cells": 0,
+    "whole_original_context_cells": 4158,
+    "source_relative_held_cells": 2013,
+    "complete_original_family_members": 519,
+    "whole_original_physical_queries": 62,
+    "physical_body_sha256": "e910414b360b063fee290f4a3cc3ef4b142f3221579173ede4387f4ee922419e",
+    "current_owner_zero_proved_here": false,
+    "selected_conservation_or_acceptance_proved_here": false
+  },
+  "source_attribution": {
+    "commit": "393063e6c8fd83533d5800f9813057edacc171a7",
+    "path": "coordination/engineering/indonesia-maluku-barat-daya-20261015/physical-result-001/README.md",
+    "preserve": "Original source attribution/licence, geometry-modification, GSHHG notices and uncertainty disclosures remain in the ancestor physical checkpoint and original source evidence."
+  },
+  "limits": [
+    "Full original constructor ledger row/base geometry/native pointsets and original source/patch/physical pins are retained; this projection does not replace them with descriptors alone.",
+    "All2013source-relative holds and original water/border/territorial/nonrequested holds remain unchanged. Requested-centre qualification is not whole-parent, whole-source, legal-boundary or territory certification.",
+    "No separate explicit foreign-territory veto geometry inventory was supplied by the originalb65packet. Original full source/selected/physical/hierarchy context and input-review limitations remain retained; actualstock success does not invent a whole-foreign inventory proof.",
+    "Complete prospective479943047B is distinct from actualcharged317554337B and process RSS. Node normalized lifetime peak and external Darwin lifetime peak are separately retained; neither establishes aggregate process-tree hard containment.",
+    "Original source/physical producers were not replayed; no native/scientific reexecution by this publisher preparer.",
+    "Root reports accepted1948 baseline99127 at866c42b8; these2145 remain unaccepted pending next delivery/current-owner-zero/conservation/integration."
+  ]
+}
