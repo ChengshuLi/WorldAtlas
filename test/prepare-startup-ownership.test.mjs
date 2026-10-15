@@ -13,6 +13,8 @@ const script = fileURLToPath(new URL('../scripts/prepare-startup-ownership.mjs',
 async function absent(file) { await assert.rejects(fs.lstat(file), {code: 'ENOENT'}); }
 
 async function syntheticPreparation() {
+  const repository = process.cwd(), oldStage = process.env.WORLDATLAS_PACKAGE_STAGE;
+  const oldCeiling = process.env.GIT_CEILING_DIRECTORIES;
   const cache = path.resolve('.cache');
   await fs.mkdir(cache, {recursive: true});
   const root = await fs.mkdtemp(path.join(cache, 'prepare-startup-controls-'));
@@ -22,9 +24,24 @@ async function syntheticPreparation() {
     const {packageNativeLatitudes} = await import('../scripts/package-native-latitudes.mjs');
     const {loadOwnershipAssets} = await import('../src/ownership-assets.js');
     const {loadNativeLatitudes} = await import('../src/native-latitudes.js');
+    const {LATITUDE_DIGEST} = await import('../src/ownership-method.js');
     const reference = {id: 'geography:synthetic-startup-preparation', footprints_sha256: '3'.repeat(64), hierarchy_sha256: '4'.repeat(64)};
     const selected = JSON.parse(await fs.readFile('data/ownership-selection.json'));
     const native = JSON.parse(await fs.readFile(selected.manifest_path));
+    // Use the exact prepared numerical rule in an ordinary fixture snapshot.
+    // Synthetic transport preparation must not need the scientific Git history.
+    const latitudeBytes = await fs.readFile('data/canonical-grid/current-startup/native-v1/native-row-latitudes.f64le.gz');
+    assert.equal(latitudeBytes.length, native.native_latitudes.bytes);
+    assert.equal(sha(latitudeBytes), native.native_latitudes.sha256);
+    assert.equal(sha(gunzipSync(latitudeBytes)), LATITUDE_DIGEST);
+    const latitudeSnapshot = path.join(root, native.native_latitudes.path);
+    await fs.mkdir(path.dirname(latitudeSnapshot), {recursive: true});
+    await fs.writeFile(latitudeSnapshot, latitudeBytes);
+    process.env.GIT_CEILING_DIRECTORIES = cache;
+    assert.notEqual(spawnSync('git', ['-C', root, 'rev-parse', '--git-dir'], {encoding: 'utf8'}).status, 0,
+      'synthetic snapshot cannot discover a parent Git repository');
+    process.chdir(root);
+    process.env.WORLDATLAS_PACKAGE_STAGE = root;
     const source = path.join(root, 'selected'), previous = path.join(root, 'previous');
     const rows = new Uint32Array(262166 * 2);
     rows[1] = 1;
@@ -98,7 +115,7 @@ async function syntheticPreparation() {
       pixelMap: {...old.pixelMap, native_latitudes: latitude.native_latitudes,
         parts: old.pixelMap.parts.map(part => part.kind === 'runs' ? {...part, path: oldVintage} : previousRow)}, files: oldFiles}));
     // Only synthetic selection/qualification lookup is mocked. Packers and restore are real.
-    mock.module(pathToFileURL(path.resolve('scripts/select-build-ownership.mjs')).href, {namedExports: {
+    mock.module(pathToFileURL(path.join(repository, 'scripts/select-build-ownership.mjs')).href, {namedExports: {
       readBuildOwnershipSelection: async () => ({manifestPath, expectedSha256: sha(manifestBytes), requireNative: true, releaseId: reference.id}),
       selectBuildOwnership: async options => {
         assert.deepEqual(options.expectedReference, reference);
@@ -107,7 +124,7 @@ async function syntheticPreparation() {
         return {manifest: JSON.parse(raw), sha256: sha(raw), manifestPath: options.manifestPath, source: path.dirname(options.manifestPath)};
       }
     }});
-    mock.module(pathToFileURL(path.resolve('scripts/read-geographic-release-manifest.mjs')).href,
+    mock.module(pathToFileURL(path.join(repository, 'scripts/read-geographic-release-manifest.mjs')).href,
       {namedExports: {readGeographicReleaseManifest: () => ({releases: [reference]})}});
     const {prepareStartupOwnership} = await import(pathToFileURL(script).href);
     const output = path.join(root, 'prepared');
@@ -126,6 +143,7 @@ async function syntheticPreparation() {
     const latitudes = await loadNativeLatitudes(consumed.pixelMap, reference,
       async url => new Response(await fs.readFile(path.join(consumer, url.slice(2)))));
     assert.equal(latitudes.length, rows.length / 2);
+    assert.deepEqual(await fs.readFile(path.join(consumer, consumed.pixelMap.native_latitudes.transport_path)), latitudeBytes);
     for (const [name, bytes] of originals) assert.deepEqual(await fs.readFile(path.join(source, name)), bytes);
     await assert.rejects(prepareStartupOwnership({output, previous}), /fresh/);
     for (const part of parts) await fs.unlink(path.join(source, part.path));
@@ -172,7 +190,14 @@ async function syntheticPreparation() {
     await absent(badTransport);
     assert.equal((await fs.readdir(path.dirname(output))).some(name => name.startsWith('.prepare-startup-')), false);
     assert.deepEqual(await fs.readFile(manifestPath), manifestBytes);
-  } finally { await fs.rm(root, {recursive: true, force: true}); }
+  } finally {
+    process.chdir(repository);
+    if (oldStage === undefined) delete process.env.WORLDATLAS_PACKAGE_STAGE;
+    else process.env.WORLDATLAS_PACKAGE_STAGE = oldStage;
+    if (oldCeiling === undefined) delete process.env.GIT_CEILING_DIRECTORIES;
+    else process.env.GIT_CEILING_DIRECTORIES = oldCeiling;
+    await fs.rm(root, {recursive: true, force: true});
+  }
 }
 
 if (process.env.WORLDATLAS_STARTUP_SYNTHETIC === '1') {
