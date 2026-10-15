@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "kind": "data-only-publication-payload-inventory",
+  "intended_fresh_branch": "engineering/indonesia-north-maluku-scope-20261015",
+  "receiving_prefix": "coordination/engineering/indonesia-north-maluku-scope-20261015/native10185-input-001/",
+  "commit": null,
+  "files": [
+    {
+      "commit": null,
+      "path": "coordination/engineering/indonesia-north-maluku-scope-20261015/native10185-input-001/source-evidence.json",
+      "mode": "100644",
+      "git_blob_oid": "65d4d5985d2c4de4a5ce710c59ee381d3a268076",
+      "bytes": 254415,
+      "sha256": "839578e9fea40b46a889e06918f8c014e1ece3822ff411b093691b099f51c1dc"
+    },
+    {
+      "commit": null,
+      "path": "coordination/engineering/indonesia-north-maluku-scope-20261015/native10185-input-001/candidate-native-patch.json",
+      "mode": "100644",
+      "git_blob_oid": "701a2e52f0166e7d1f46401589222a658af95236",
+      "bytes": 155419,
+      "sha256": "05f9101d945f70d965b09a475a20d45c8099b8d750c7727e6228c7208a4b6e38"
+    },
+    {
+      "commit": null,
+      "path": "coordination/engineering/indonesia-north-maluku-scope-20261015/native10185-input-001/independent-consumed-operand-review.json",
+      "mode": "100644",
+      "git_blob_oid": "73bddb4b8776c27febdc615d08ad87367e826ef5",
+      "bytes": 13434,
+      "sha256": "96b7fbe0dd6f05d8b46a6752131cbd70d7fc1411c6d041b6a8034f1d5c798cfb"
+    },
+    {
+      "commit": null,
+      "path": "coordination/engineering/indonesia-north-maluku-scope-20261015/native10185-input-001/input-provenance-and-pins.json",
+      "mode": "100644",
+      "git_blob_oid": "4d4535f0660cbc3e3e29d6835d3315eff75605f9",
+      "bytes": 14006,
+      "sha256": "f75238ebab56404fecb6f9014ca53e54c0e7487c23001f2298bef2318120ef5a"
+    },
+    {
+      "commit": null,
+      "path": "coordination/engineering/indonesia-north-maluku-scope-20261015/native10185-input-001/README.md",
+      "mode": "100644",
+      "git_blob_oid": "ffebc8c89a69c3b6c8a8662f0824bdc1df9cda30",
+      "bytes": 3626,
+      "sha256": "42ea9aa2673fd1c2ebb131b58940a1afee7e0882eddfc1aad397f7416ae1d875"
+    }
+  ],
+  "inventory_self_not_hashed": "This inventory lists the five substantive payload bodies; its own exact descriptor is in the local outer handoff to avoid self-reference.",
+  "substantive_files": 5,
+  "substantive_bytes": 440900,
+  "qualification": false,
+  "publication": false,
+  "public_private_path_scan_pass": true,
+  "limits": [
+    "Commit/path proposals do not establish publication or immutable custody.",
+    "Root route assessment, actual controls/qualification/current-owner-zero and integration remain pending."
+  ]
+}

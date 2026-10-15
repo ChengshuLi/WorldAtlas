@@ -1,0 +1,314 @@
+{
+  "version": 1,
+  "reviewer": "/root/delivery11622_config_review",
+  "disposition": "ACCEPT DATA-OPERAND PROPOSAL WITH LIMITS; NOT QUALIFIED OR ADOPTED",
+  "proposal_sha256": "839578e9fea40b46a889e06918f8c014e1ece3822ff411b093691b099f51c1dc",
+  "original_sha256": "10cbbe8a163a83d92a37e90fa2c1cd76e606d0eb72cd23d5b4fd6f2b31f6cb87",
+  "code_basis": {
+    "commit": "b73fdbb1b0e243b773514ea46aaced496a63028f",
+    "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+    "bytes": 172622,
+    "sha256": "cb908b00406b1f834c8bbaa6439afbf9509dabece65965f3bd27ba87b0e2012e"
+  },
+  "checks": [
+    {
+      "check": "exact original37143B SHA10cb and only eight coverage_rows additions",
+      "pass": true
+    },
+    {
+      "check": "proposal254415B SHA839578 exact",
+      "pass": true
+    },
+    {
+      "check": "exact separate newpatch155419B SHA05f910",
+      "pass": true
+    },
+    {
+      "check": "new patch10185 unique owner tuples",
+      "pass": true
+    },
+    {
+      "check": "new10185 zero spatial overlap accepted71339",
+      "pass": true
+    },
+    {
+      "check": "new10185 also zero spatial overlap proposed82961",
+      "pass": true
+    },
+    {
+      "check": "22769 canonical maximal land-only rows exact patch partition",
+      "pass": true
+    },
+    {
+      "check": "22769 old selected row/ID stable and newID absent",
+      "pass": true
+    },
+    {
+      "check": "22769 original positive class remains land-only",
+      "pass": true
+    },
+    {
+      "check": "22769 no overlap old component",
+      "pass": true
+    },
+    {
+      "check": "22796 canonical maximal land-only rows exact patch partition",
+      "pass": true
+    },
+    {
+      "check": "22796 old selected row/ID stable and newID absent",
+      "pass": true
+    },
+    {
+      "check": "22796 original positive class remains land-only",
+      "pass": true
+    },
+    {
+      "check": "22796 no overlap old component",
+      "pass": true
+    },
+    {
+      "check": "22866 canonical maximal land-only rows exact patch partition",
+      "pass": true
+    },
+    {
+      "check": "22866 old selected row/ID stable and newID absent",
+      "pass": true
+    },
+    {
+      "check": "22866 original positive class remains land-only",
+      "pass": true
+    },
+    {
+      "check": "22866 no overlap old component",
+      "pass": true
+    },
+    {
+      "check": "22898 canonical maximal land-only rows exact patch partition",
+      "pass": true
+    },
+    {
+      "check": "22898 old selected row/ID stable and newID absent",
+      "pass": true
+    },
+    {
+      "check": "22898 original positive class remains land-only",
+      "pass": true
+    },
+    {
+      "check": "22898 no overlap old component",
+      "pass": true
+    },
+    {
+      "check": "22930 canonical maximal land-only rows exact patch partition",
+      "pass": true
+    },
+    {
+      "check": "22930 old selected row/ID stable and newID absent",
+      "pass": true
+    },
+    {
+      "check": "22930 original positive class remains land-only",
+      "pass": true
+    },
+    {
+      "check": "22930 no overlap old component",
+      "pass": true
+    },
+    {
+      "check": "23033 canonical maximal land-only rows exact patch partition",
+      "pass": true
+    },
+    {
+      "check": "23033 old selected row/ID stable and newID absent",
+      "pass": true
+    },
+    {
+      "check": "23033 original positive class remains land-only",
+      "pass": true
+    },
+    {
+      "check": "23033 no overlap old component",
+      "pass": true
+    },
+    {
+      "check": "23108 canonical maximal land-only rows exact patch partition",
+      "pass": true
+    },
+    {
+      "check": "23108 old selected row/ID stable and newID absent",
+      "pass": true
+    },
+    {
+      "check": "23108 original positive class remains land-only",
+      "pass": true
+    },
+    {
+      "check": "23108 no overlap old component",
+      "pass": true
+    },
+    {
+      "check": "23198 canonical maximal land-only rows exact patch partition",
+      "pass": true
+    },
+    {
+      "check": "23198 old selected row/ID stable and newID absent",
+      "pass": true
+    },
+    {
+      "check": "23198 original positive class remains land-only",
+      "pass": true
+    },
+    {
+      "check": "23198 no overlap old component",
+      "pass": true
+    },
+    {
+      "check": "eight owners/eight unique newIDs",
+      "pass": true
+    },
+    {
+      "check": "4248coverage runs exact10185 patch",
+      "pass": true
+    },
+    {
+      "check": "old eight11770 cells retained",
+      "pass": true
+    },
+    {
+      "check": "actual b73 explicitly parses compares coverage_rows and classAllowed",
+      "pass": true
+    }
+  ],
+  "check_count": 42,
+  "failures": [],
+  "counts": {
+    "targets": 8,
+    "coverage_runs": 4248,
+    "incoming_requested_cells": 10185,
+    "old_selected_eight_cells": 11770,
+    "overlap_accepted71339": 0,
+    "overlap_proposed82961": 0
+  },
+  "targets": [
+    {
+      "target_id": "gb:IDN:ADM2:22746128B24002479708791",
+      "owner": 22769,
+      "new_cells": 200,
+      "coverage_runs": 83,
+      "old_cells": 376,
+      "old_component_id": "source-target:378e0696c3bbbfb878b350c3778f5fcc71636c8ba744d6fcdc80db5c103dd1e0",
+      "proposed_component_id": "source-target:f20ff311675b3945b67e8af82895a2226ecdfa864a3192cfda5bb2047ec926a6"
+    },
+    {
+      "target_id": "gb:IDN:ADM2:22746128B2838702785556",
+      "owner": 22796,
+      "new_cells": 6031,
+      "coverage_runs": 2223,
+      "old_cells": 5365,
+      "old_component_id": "source-target:d9f0c31495e8108b3cae6de0545f9dee365ebe8776d1f20ee45eaf3f1f8607bb",
+      "proposed_component_id": "source-target:f991ceefaab1dd4061b7808b86c0cf94c8e22541fdd4e66ca24f8b3f9facb9e6"
+    },
+    {
+      "target_id": "gb:IDN:ADM2:22746128B41252486574655",
+      "owner": 22866,
+      "new_cells": 731,
+      "coverage_runs": 386,
+      "old_cells": 1176,
+      "old_component_id": "source-target:6a30b7a546e70447fefef322e57c2d11d81ecd0eb443167c84142c89d68feb32",
+      "proposed_component_id": "source-target:0fe69022d1ee47f91c29300f724086290871a36a60b7d0e9324d9e76a57ef577"
+    },
+    {
+      "target_id": "gb:IDN:ADM2:22746128B46636453933041",
+      "owner": 22898,
+      "new_cells": 673,
+      "coverage_runs": 295,
+      "old_cells": 1135,
+      "old_component_id": "source-target:ce492a40d28b19cadfab0b9a8f0077984f5fb05423d3148e8cd9fbdd5bac6966",
+      "proposed_component_id": "source-target:bb98060026587c5329f639573c5c359cf56351a8b74a7eb18d7da36d355a5bc5"
+    },
+    {
+      "target_id": "gb:IDN:ADM2:22746128B52341022582766",
+      "owner": 22930,
+      "new_cells": 290,
+      "coverage_runs": 155,
+      "old_cells": 854,
+      "old_component_id": "source-target:43d754f07d968de82c5bccf46045d043f019dbe2a862bf16d72c9148f6084325",
+      "proposed_component_id": "source-target:3bd3ad682b6c51165df680c02b67a7a618d059e98ee156de7f2ef0aa17a299c6"
+    },
+    {
+      "target_id": "gb:IDN:ADM2:22746128B70343351071090",
+      "owner": 23033,
+      "new_cells": 1010,
+      "coverage_runs": 430,
+      "old_cells": 698,
+      "old_component_id": "source-target:ab37f4f206f283da9875ff721dd2401349f482762946b51d43db38cfc76c4b8c",
+      "proposed_component_id": "source-target:098916a4b49abfa535605a8e0e4327145b8a58d997787dc55061f84826d2fcb8"
+    },
+    {
+      "target_id": "gb:IDN:ADM2:22746128B81791072961966",
+      "owner": 23108,
+      "new_cells": 371,
+      "coverage_runs": 223,
+      "old_cells": 1021,
+      "old_component_id": "source-target:c52f456d50f4cc48efb965913f8e733e78b6739af90c7db42bec565becb30148",
+      "proposed_component_id": "source-target:8d8cd2ef60d0d9d0593288fc4e196aec846b2c21e01ab4830e0a20efe89cd631"
+    },
+    {
+      "target_id": "gb:IDN:ADM2:22746128B98781354669228",
+      "owner": 23198,
+      "new_cells": 879,
+      "coverage_runs": 453,
+      "old_cells": 1145,
+      "old_component_id": "source-target:40ff6c27299f25ec550f14fdaea3a3330a392b6b20ac272626ca8ba6bb693be2",
+      "proposed_component_id": "source-target:9b2cedf9d13a982800c8da3bf9fb730a8cb7525faf6df21fe9eff4c902df08de"
+    }
+  ],
+  "reasoning": {
+    "consumed_operand": "coverage_rows is validated as the exact complete per-owner candidate patch partition, then each segment is checked in its declared physical class. It constrains which separately pinned native patch may accompany this evidence body. Therefore the exact canonical request-dependent rows are not ignored metadata or an arbitrary success label.",
+    "single_class_nuance": "All8 targets already admit only mapped_land_support. classAllowed for land reuses allowedRows, so the per-cell class geometry predicate adds no positive information or stronger geometric acceptance for this cohort. The new semantic constraint is evidence-to-request pointset/class custody; it is not a new source vintage, classifier or scientific method.",
+    "identity": "Existing v1 hashes target ID plus exact encoded evidence SHA. Binding an exact new disjoint cohort into an already-consumed optional field legitimately changes that existing custody identity without renaming accepted IDs. This is not a general claim that distinct hashes establish contributions or that equivalent encodings get one semantic identity.",
+    "anti_salt_boundary": "The proposal fixes one deterministic maximal-run per-owner derivation from the actual request, preserves every original operand byte after field removal, and permits no ignored keys/locator churn/whitespace or arbitrary row segmentation to obtain IDs. The accepted parser alone does not enforce maximal-run canonicality; this narrower proposal invariant was independently checked, not attributed to a new policy or validator.",
+    "selection_boundary": "All old11770 selected cells/8 original rows remain untouched. Static zero overlap with full accepted71339 and proposed82961 was independently checked. Ordinary stock composer strict all-owner overlap refusal, current selected-base owner-zero and complete retained-reader/integration checks remain mandatory; new IDs alone confer no authority."
+  },
+  "required_actual_later_controls": [
+    {
+      "case": "Unaltered full proposal plus exact full10185 patch",
+      "expected": "Run unchanged accepted stock native-authority once under reviewed complete immutable custody/resource admission; it must prove every requested centre or refuse. No expected science success claimed."
+    },
+    {
+      "case": "Keep proposal body fixed and pair it with changed patch: remove one cell/run, add a previously selected same-owner cell, or transfer a cell owner",
+      "expected": "Actual accepted entry must refuse exact complete owner partition; binding/source and patch pins must be truthful refreshed test operands. Demonstrates nonvacuous cross-file scope constraint."
+    },
+    {
+      "case": "Keep full patch fixed but shorten/add/swap one owner coverage interval",
+      "expected": "Actual partition refusal. Test target-owner isolation, not merely aggregate10185 count."
+    },
+    {
+      "case": "Unknown class, invalid/overlapping interval, duplicate/unsorted row, out-of-grid interval",
+      "expected": "Actual ordinary syntax refusal; no union normalization may conceal overlap."
+    },
+    {
+      "case": "Change one valid nonempty land segment to mapped_inland_water_support, leaving original target coverage_classes land-only",
+      "expected": "Partition still equal but actual classAllowed water empty; refuse declared land/water support. This distinguishes class semantics from pointset count."
+    },
+    {
+      "case": "Supply a geometrically unsupported centre, original residual/contradictory witness hit, nonunique source or boundary tie while keeping scope consistent",
+      "expected": "Actual accepted qualification refuses under unchanged complete source/physical/query/foreign evidence; partition is no substitute for positive scientific proof."
+    },
+    {
+      "case": "Re-segment one same-class adjacent coverage run without changing pointset",
+      "expected": "Stock parser may accept because it coalesces adjacent intervals; this proposal forbids using that representational freedom to generate IDs. Record expected acceptance/canonicalization scope honestly rather than inventing a stock rejection."
+    },
+    {
+      "case": "Use changed evidence identity but overlap any accepted native interval, same or different owner, during ordinary composition",
+      "expected": "Existing composer must refuse actual overlap; retain every literal old authority/row/exception and current rebind/parent/target metadata. No alternate selected-reader overlap policy is approved."
+    }
+  ],
+  "limits": [
+    "Static independent data/code-reading review only. No helper import, native/source/physical/GIS/predicate execution, fetch or Git mutation.",
+    "The254415B file has no immutable publication commit and no actual constructor receipt. All10185 remain unqualified source-relative requests; declared mapped_land_support is a hypothesis to prove.",
+    "Actual full source/physical/stage/family/owner/latitude/parent/competitor/territorial/query/residual conditions remain unchanged and required; no independent legal/present geographic truth is claimed.",
+    "Original proposal may be considered for ordinary immutable input preparation only within Main/root authorized scope; this review itself authorizes no launch, selection, publication, policy adoption or acceptance."
+  ]
+}
