@@ -1,0 +1,2690 @@
+{
+  "status": "positive actual clean309 stock native result; no substantive defect",
+  "run": "clean309-native-001",
+  "checks": [
+    {
+      "check": "exact actual complete71181-byte constructor result",
+      "passed": true,
+      "details": {
+        "binding": {
+          "config_sha256": "4d79b2feb49c0e907c450bdbdf99227f561c6780e3472590cc224ae1dc4c07f1",
+          "phase": "native-authority"
+        },
+        "outputs": {
+          "authority-binding.json": {
+            "bytes": 766,
+            "sha256": "eab2f223602387ab03913c3855aade3e9c7177968bee5709fa71e737fc63b3d6"
+          },
+          "constructor-result.json": {
+            "bytes": 71181,
+            "sha256": "7eb7662def358c11da1db1eaf934b8482bec783d372c21af67fdefa2ea6da256"
+          },
+          "original-rule-preimage.json": {
+            "bytes": 763,
+            "sha256": "eb3517f79b028b6724dc729cec3a41ccf2bf0a903cdda397493c788b787bffdf"
+          }
+        },
+        "version": 1
+      }
+    },
+    {
+      "check": "actual fresh native output/raw config binding",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "actual original two immutable input locators and custody roles",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "source_evidence exact immutable3cd7 reviewed bytes",
+      "passed": true,
+      "details": {
+        "bytes": 3477581,
+        "commit": "3cd7f0ab90ffced16e3e285163e15fd8ae4af956",
+        "git_blob_oid": "4f2126a85f1165c38b86835e8ae7ddad3dfd2e38",
+        "mode": "100644",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/clean309/source-evidence.json",
+        "sha256": "c5446fbd5fe4fea3912fb002cdc6e80aa71679fb159c0b35a83936868e92a274"
+      }
+    },
+    {
+      "check": "native_patch exact immutable3cd7 reviewed bytes",
+      "passed": true,
+      "details": {
+        "bytes": 6413,
+        "commit": "3cd7f0ab90ffced16e3e285163e15fd8ae4af956",
+        "git_blob_oid": "33e3c57e7da7687c692d803961d0c09591235e4c",
+        "mode": "100644",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/clean309/native-patch.json",
+        "sha256": "ffbfbaa636002ea0956458510dbda36d5b4b532c5ed04c9eda612f887fb14b2b"
+      }
+    },
+    {
+      "check": "independent typed and expected partition bindings unchanged",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "actual canonical rule matches complete preimage body",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "exact21 components sorted and complete target owner scope",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "full1175 context and clean1116 original context retained",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "full23target30query actual physical and whole stage preserved",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Lao Cai every original emitted key owner count and individual patch",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Lao Cai every class exact independent expected land partition",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Lao Cai complete base source component and physical receipt",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Lao Cai all whole vetoes exact independent field operand values",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Lao Cai native bounds exact emitted keys normative latitude lookup",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Vu Quang every original emitted key owner count and individual patch",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Vu Quang every class exact independent expected land partition",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Vu Quang complete base source component and physical receipt",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Vu Quang all whole vetoes exact independent field operand values",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Vu Quang native bounds exact emitted keys normative latitude lookup",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Dak Glei every original emitted key owner count and individual patch",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Dak Glei every class exact independent expected land partition",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Dak Glei complete base source component and physical receipt",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Dak Glei all whole vetoes exact independent field operand values",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Dak Glei native bounds exact emitted keys normative latitude lookup",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Thuong Xuan every original emitted key owner count and individual patch",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Thuong Xuan every class exact independent expected land partition",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Thuong Xuan complete base source component and physical receipt",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Thuong Xuan all whole vetoes exact independent field operand values",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Thuong Xuan native bounds exact emitted keys normative latitude lookup",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Vi Xuyen every original emitted key owner count and individual patch",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Vi Xuyen every class exact independent expected land partition",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Vi Xuyen complete base source component and physical receipt",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Vi Xuyen all whole vetoes exact independent field operand values",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Vi Xuyen native bounds exact emitted keys normative latitude lookup",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Xin Man every original emitted key owner count and individual patch",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Xin Man every class exact independent expected land partition",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Xin Man complete base source component and physical receipt",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Xin Man all whole vetoes exact independent field operand values",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Xin Man native bounds exact emitted keys normative latitude lookup",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Cao Loc every original emitted key owner count and individual patch",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Cao Loc every class exact independent expected land partition",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Cao Loc complete base source component and physical receipt",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Cao Loc all whole vetoes exact independent field operand values",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Cao Loc native bounds exact emitted keys normative latitude lookup",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Tuy Duc every original emitted key owner count and individual patch",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Tuy Duc every class exact independent expected land partition",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Tuy Duc complete base source component and physical receipt",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Tuy Duc all whole vetoes exact independent field operand values",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Tuy Duc native bounds exact emitted keys normative latitude lookup",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Nam Giang every original emitted key owner count and individual patch",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Nam Giang every class exact independent expected land partition",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Nam Giang complete base source component and physical receipt",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Nam Giang all whole vetoes exact independent field operand values",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Nam Giang native bounds exact emitted keys normative latitude lookup",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Ha Lang every original emitted key owner count and individual patch",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Ha Lang every class exact independent expected land partition",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Ha Lang complete base source component and physical receipt",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Ha Lang all whole vetoes exact independent field operand values",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Ha Lang native bounds exact emitted keys normative latitude lookup",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Dinh Lap every original emitted key owner count and individual patch",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Dinh Lap every class exact independent expected land partition",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Dinh Lap complete base source component and physical receipt",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Dinh Lap all whole vetoes exact independent field operand values",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Dinh Lap native bounds exact emitted keys normative latitude lookup",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Van Lang every original emitted key owner count and individual patch",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Van Lang every class exact independent expected land partition",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Van Lang complete base source component and physical receipt",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Van Lang all whole vetoes exact independent field operand values",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Van Lang native bounds exact emitted keys normative latitude lookup",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Quan Son every original emitted key owner count and individual patch",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Quan Son every class exact independent expected land partition",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Quan Son complete base source component and physical receipt",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Quan Son all whole vetoes exact independent field operand values",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Quan Son native bounds exact emitted keys normative latitude lookup",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Nam Po every original emitted key owner count and individual patch",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Nam Po every class exact independent expected land partition",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Nam Po complete base source component and physical receipt",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Nam Po all whole vetoes exact independent field operand values",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Nam Po native bounds exact emitted keys normative latitude lookup",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Tan Bien every original emitted key owner count and individual patch",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Tan Bien every class exact independent expected land partition",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Tan Bien complete base source component and physical receipt",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Tan Bien all whole vetoes exact independent field operand values",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Tan Bien native bounds exact emitted keys normative latitude lookup",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "A Luoi every original emitted key owner count and individual patch",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "A Luoi every class exact independent expected land partition",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "A Luoi complete base source component and physical receipt",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "A Luoi all whole vetoes exact independent field operand values",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "A Luoi native bounds exact emitted keys normative latitude lookup",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Muong Lat every original emitted key owner count and individual patch",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Muong Lat every class exact independent expected land partition",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Muong Lat complete base source component and physical receipt",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Muong Lat all whole vetoes exact independent field operand values",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Muong Lat native bounds exact emitted keys normative latitude lookup",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Ky Son every original emitted key owner count and individual patch",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Ky Son every class exact independent expected land partition",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Ky Son complete base source component and physical receipt",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Ky Son all whole vetoes exact independent field operand values",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Ky Son native bounds exact emitted keys normative latitude lookup",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Binh Lieu every original emitted key owner count and individual patch",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Binh Lieu every class exact independent expected land partition",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Binh Lieu complete base source component and physical receipt",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Binh Lieu all whole vetoes exact independent field operand values",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Binh Lieu native bounds exact emitted keys normative latitude lookup",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Nam Nhun every original emitted key owner count and individual patch",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Nam Nhun every class exact independent expected land partition",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Nam Nhun complete base source component and physical receipt",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Nam Nhun all whole vetoes exact independent field operand values",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Nam Nhun native bounds exact emitted keys normative latitude lookup",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Ben Cau every original emitted key owner count and individual patch",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Ben Cau every class exact independent expected land partition",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Ben Cau complete base source component and physical receipt",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Ben Cau all whole vetoes exact independent field operand values",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Ben Cau native bounds exact emitted keys normative latitude lookup",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "exact309 unique total no adverse water relative deferred42",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "actual native observed contribution and admitted resources",
+      "passed": true,
+      "details": {
+        "elapsed_seconds": 2.8343234580000005,
+        "charged_phase_bytes": 431268214,
+        "allowance": {
+          "phaseBytes": 671088640,
+          "rssBytes": 671088640
+        },
+        "normalized_node_lifetime_peak_rss_bytes": 374177792,
+        "qualified_cells": 309,
+        "limits": [
+          "Original source/physical producers are not replayed.",
+          "Constructor qualification is not actual current-owner-zero or final selected-output acceptance."
+        ]
+      }
+    },
+    {
+      "check": "stock limits preserve consumer duties no wholeparent certification",
+      "passed": true,
+      "details": [
+        "Physical interpretation and semantic reconciliation are retained reviewed source evidence; actual current owner-zero is checked by native consumers.",
+        "Witness exclusion applies only to requested native centres. Original whole-source physical/hierarchy issues and historical source/resource limits remain retained; no whole-parent certification or acceptance is inferred."
+      ]
+    },
+    {
+      "check": "all actual output and original reviewed inputs unchanged",
+      "passed": true,
+      "details": null
+    }
+  ],
+  "findings": [],
+  "actual_output_bindings": [
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/b516a693506d065f08d8984390ca7e530077d358a0739e0a661a1199da76763a/work/.cache/delivery-handoff/clean309-native-001/preparation.json",
+      "bytes": 501,
+      "sha256": "b4a307016a707f46a4e7ae9e054fb24d865a7b82286336511c9647a66b17ccdd"
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/b516a693506d065f08d8984390ca7e530077d358a0739e0a661a1199da76763a/work/.cache/delivery-handoff/clean309-native-001/original-rule-preimage.json",
+      "bytes": 763,
+      "sha256": "eb3517f79b028b6724dc729cec3a41ccf2bf0a903cdda397493c788b787bffdf"
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/b516a693506d065f08d8984390ca7e530077d358a0739e0a661a1199da76763a/work/.cache/delivery-handoff/clean309-native-001/authority-binding.json",
+      "bytes": 766,
+      "sha256": "eab2f223602387ab03913c3855aade3e9c7177968bee5709fa71e737fc63b3d6"
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/b516a693506d065f08d8984390ca7e530077d358a0739e0a661a1199da76763a/work/.cache/delivery-handoff/clean309-native-001/constructor-result.json",
+      "bytes": 71181,
+      "sha256": "7eb7662def358c11da1db1eaf934b8482bec783d372c21af67fdefa2ea6da256"
+    }
+  ],
+  "actual_custody": {
+    "kind": "source-target-native-custody-v1",
+    "native_patch": {
+      "bytes": 6413,
+      "commit": "3cd7f0ab90ffced16e3e285163e15fd8ae4af956",
+      "git_blob_oid": "33e3c57e7da7687c692d803961d0c09591235e4c",
+      "mode": "100644",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/clean309/native-patch.json",
+      "sha256": "ffbfbaa636002ea0956458510dbda36d5b4b532c5ed04c9eda612f887fb14b2b"
+    },
+    "source_evidence": {
+      "bytes": 3477581,
+      "commit": "3cd7f0ab90ffced16e3e285163e15fd8ae4af956",
+      "git_blob_oid": "4f2126a85f1165c38b86835e8ae7ddad3dfd2e38",
+      "mode": "100644",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/clean309/source-evidence.json",
+      "sha256": "c5446fbd5fe4fea3912fb002cdc6e80aa71679fb159c0b35a83936868e92a274"
+    },
+    "version": 1
+  },
+  "rule_sha256": "eb3517f79b028b6724dc729cec3a41ccf2bf0a903cdda397493c788b787bffdf",
+  "per_target": [
+    {
+      "name": "Lao Cai",
+      "target": "gb:VNM:ADM2:81297802B32838967164839",
+      "owner": 48308,
+      "native_cells": 3,
+      "native_rows": 3,
+      "component_id": "source-target:084682b4840b680c94ac8da43158832ca997db263ce737e519ff48384541af6c",
+      "base_geometry_sha256": "82568d56183630d6a7cc5d107d40f325a46c1cdc230281b421510eb62a4f13db",
+      "physical_receipt_sha256": "0b0247438ee15cf8f56f28060d4ee3152d66ccbae81c22afb5e8cd75339eeb78",
+      "coverage_class": "mapped_land_support",
+      "whole_veto_operand_ids": [
+        "retained-country-reference:ADM0_A3:CHN"
+      ],
+      "every_native_key": [
+        [
+          48308,
+          206779,
+          114242
+        ],
+        [
+          48308,
+          206780,
+          114243
+        ],
+        [
+          48308,
+          206781,
+          114244
+        ]
+      ],
+      "original_context_records": 18
+    },
+    {
+      "name": "Vu Quang",
+      "target": "gb:VNM:ADM2:81297802B66107700635107",
+      "owner": 48556,
+      "native_cells": 1,
+      "native_rows": 1,
+      "component_id": "source-target:228dd4d134a2fef876c566d6b9f13d13e567c3dc7cb77dcb60ae163db8404997",
+      "base_geometry_sha256": "ec30e749af12c9a3baa5686e887b872367c083f6e5d7d7833412c406b234fa2a",
+      "physical_receipt_sha256": "0b0247438ee15cf8f56f28060d4ee3152d66ccbae81c22afb5e8cd75339eeb78",
+      "coverage_class": "mapped_land_support",
+      "whole_veto_operand_ids": [
+        "retained-country-reference:ADM0_A3:LAO"
+      ],
+      "every_native_key": [
+        [
+          48556,
+          207872,
+          117600
+        ]
+      ],
+      "original_context_records": 4
+    },
+    {
+      "name": "Dak Glei",
+      "target": "gb:VNM:ADM2:81297802B20367953633835",
+      "owner": 48212,
+      "native_cells": 3,
+      "native_rows": 2,
+      "component_id": "source-target:279e4508d13261e83f4e4e9661cb8090f48aad70fe8d51774517a04be7a05d50",
+      "base_geometry_sha256": "2bfaaf0d973c644d044b952a629e1f63cc401d11780490c9bec02ad3ec55ee42",
+      "physical_receipt_sha256": "0b0247438ee15cf8f56f28060d4ee3152d66ccbae81c22afb5e8cd75339eeb78",
+      "coverage_class": "mapped_land_support",
+      "whole_veto_operand_ids": [
+        "gb:LAO:ADM1:31783359B8999899719232",
+        "retained-country-reference:ADM0_A3:LAO"
+      ],
+      "every_native_key": [
+        [
+          48212,
+          209352,
+          120052
+        ],
+        [
+          48212,
+          209353,
+          120053
+        ],
+        [
+          48212,
+          209354,
+          120053
+        ]
+      ],
+      "original_context_records": 46
+    },
+    {
+      "name": "Thuong Xuan",
+      "target": "gb:VNM:ADM2:81297802B72882386082996",
+      "owner": 48599,
+      "native_cells": 13,
+      "native_rows": 8,
+      "component_id": "source-target:353426183a7e387c709acf564ba153b06413ba96ed302abd39557f785a3ccbdd",
+      "base_geometry_sha256": "e228b90f5b807d0ce286773dd78a32629b1b3e0d66653187eb009e462b214c8c",
+      "physical_receipt_sha256": "0b0247438ee15cf8f56f28060d4ee3152d66ccbae81c22afb5e8cd75339eeb78",
+      "coverage_class": "mapped_land_support",
+      "whole_veto_operand_ids": [
+        "retained-country-reference:ADM0_A3:LAO"
+      ],
+      "every_native_key": [
+        [
+          48599,
+          207525,
+          116166
+        ],
+        [
+          48599,
+          207523,
+          116167
+        ],
+        [
+          48599,
+          207524,
+          116167
+        ],
+        [
+          48599,
+          207522,
+          116168
+        ],
+        [
+          48599,
+          207523,
+          116168
+        ],
+        [
+          48599,
+          207524,
+          116168
+        ],
+        [
+          48599,
+          207522,
+          116169
+        ],
+        [
+          48599,
+          207523,
+          116169
+        ],
+        [
+          48599,
+          207521,
+          116170
+        ],
+        [
+          48599,
+          207522,
+          116170
+        ],
+        [
+          48599,
+          207521,
+          116171
+        ],
+        [
+          48599,
+          207520,
+          116172
+        ],
+        [
+          48599,
+          207519,
+          116173
+        ]
+      ],
+      "original_context_records": 16
+    },
+    {
+      "name": "Vi Xuyen",
+      "target": "gb:VNM:ADM2:81297802B6357673458882",
+      "owner": 48535,
+      "native_cells": 2,
+      "native_rows": 1,
+      "component_id": "source-target:3e9183d8641407d6de0fe0aaccc1273750c3651f742bfa7de7a8fc44008c1552",
+      "base_geometry_sha256": "fa1cb8cbdc0439c05297f685a6a0982310bcfe871fcfc8fe3bc0abc390d8a731",
+      "physical_receipt_sha256": "0b0247438ee15cf8f56f28060d4ee3152d66ccbae81c22afb5e8cd75339eeb78",
+      "coverage_class": "mapped_land_support",
+      "whole_veto_operand_ids": [
+        "gb:CHN:ADM1:43563684B84540832148656",
+        "retained-country-reference:ADM0_A3:CHN"
+      ],
+      "every_native_key": [
+        [
+          48535,
+          207353,
+          113990
+        ],
+        [
+          48535,
+          207354,
+          113990
+        ]
+      ],
+      "original_context_records": 68
+    },
+    {
+      "name": "Xin Man",
+      "target": "gb:VNM:ADM2:81297802B50713424689894",
+      "owner": 48439,
+      "native_cells": 57,
+      "native_rows": 10,
+      "component_id": "source-target:43dd5a681bb2923b176c4fee12df7ab2ff264f2873ee224ba9039ff59a5b87c9",
+      "base_geometry_sha256": "9de023f471d2e1edb86a3d222a86d6824692345d82aac5280742fe1d7716858f",
+      "physical_receipt_sha256": "0b0247438ee15cf8f56f28060d4ee3152d66ccbae81c22afb5e8cd75339eeb78",
+      "coverage_class": "mapped_land_support",
+      "whole_veto_operand_ids": [
+        "gb:CHN:ADM1:43563684B84540832148656",
+        "retained-country-reference:ADM0_A3:CHN"
+      ],
+      "every_native_key": [
+        [
+          48439,
+          207102,
+          114099
+        ],
+        [
+          48439,
+          207101,
+          114100
+        ],
+        [
+          48439,
+          207102,
+          114100
+        ],
+        [
+          48439,
+          207103,
+          114100
+        ],
+        [
+          48439,
+          207104,
+          114100
+        ],
+        [
+          48439,
+          207105,
+          114100
+        ],
+        [
+          48439,
+          207106,
+          114100
+        ],
+        [
+          48439,
+          207100,
+          114101
+        ],
+        [
+          48439,
+          207101,
+          114101
+        ],
+        [
+          48439,
+          207102,
+          114101
+        ],
+        [
+          48439,
+          207103,
+          114101
+        ],
+        [
+          48439,
+          207104,
+          114101
+        ],
+        [
+          48439,
+          207105,
+          114101
+        ],
+        [
+          48439,
+          207106,
+          114101
+        ],
+        [
+          48439,
+          207107,
+          114101
+        ],
+        [
+          48439,
+          207108,
+          114101
+        ],
+        [
+          48439,
+          207109,
+          114101
+        ],
+        [
+          48439,
+          207099,
+          114102
+        ],
+        [
+          48439,
+          207100,
+          114102
+        ],
+        [
+          48439,
+          207101,
+          114102
+        ],
+        [
+          48439,
+          207102,
+          114102
+        ],
+        [
+          48439,
+          207103,
+          114102
+        ],
+        [
+          48439,
+          207104,
+          114102
+        ],
+        [
+          48439,
+          207105,
+          114102
+        ],
+        [
+          48439,
+          207106,
+          114102
+        ],
+        [
+          48439,
+          207107,
+          114102
+        ],
+        [
+          48439,
+          207098,
+          114103
+        ],
+        [
+          48439,
+          207099,
+          114103
+        ],
+        [
+          48439,
+          207100,
+          114103
+        ],
+        [
+          48439,
+          207101,
+          114103
+        ],
+        [
+          48439,
+          207102,
+          114103
+        ],
+        [
+          48439,
+          207103,
+          114103
+        ],
+        [
+          48439,
+          207104,
+          114103
+        ],
+        [
+          48439,
+          207098,
+          114104
+        ],
+        [
+          48439,
+          207099,
+          114104
+        ],
+        [
+          48439,
+          207100,
+          114104
+        ],
+        [
+          48439,
+          207101,
+          114104
+        ],
+        [
+          48439,
+          207102,
+          114104
+        ],
+        [
+          48439,
+          207097,
+          114105
+        ],
+        [
+          48439,
+          207098,
+          114105
+        ],
+        [
+          48439,
+          207099,
+          114105
+        ],
+        [
+          48439,
+          207100,
+          114105
+        ],
+        [
+          48439,
+          207097,
+          114106
+        ],
+        [
+          48439,
+          207098,
+          114106
+        ],
+        [
+          48439,
+          207086,
+          114107
+        ],
+        [
+          48439,
+          207087,
+          114107
+        ],
+        [
+          48439,
+          207088,
+          114107
+        ],
+        [
+          48439,
+          207089,
+          114107
+        ],
+        [
+          48439,
+          207090,
+          114107
+        ],
+        [
+          48439,
+          207091,
+          114107
+        ],
+        [
+          48439,
+          207092,
+          114107
+        ],
+        [
+          48439,
+          207093,
+          114107
+        ],
+        [
+          48439,
+          207096,
+          114107
+        ],
+        [
+          48439,
+          207082,
+          114108
+        ],
+        [
+          48439,
+          207083,
+          114108
+        ],
+        [
+          48439,
+          207084,
+          114108
+        ],
+        [
+          48439,
+          207085,
+          114108
+        ]
+      ],
+      "original_context_records": 103
+    },
+    {
+      "name": "Cao Loc",
+      "target": "gb:VNM:ADM2:81297802B94679881937971",
+      "owner": 48756,
+      "native_cells": 4,
+      "native_rows": 2,
+      "component_id": "source-target:523b637c281b82f3eeb5a89ebee66786a7097b1f6c9edb1fc40aa44639845b08",
+      "base_geometry_sha256": "5f14896e4e972ba78542852614153909cb54f1a4cf1aa7f67fd368b3bcf3e1d6",
+      "physical_receipt_sha256": "0b0247438ee15cf8f56f28060d4ee3152d66ccbae81c22afb5e8cd75339eeb78",
+      "coverage_class": "mapped_land_support",
+      "whole_veto_operand_ids": [
+        "retained-country-reference:ADM0_A3:CHN"
+      ],
+      "every_native_key": [
+        [
+          48756,
+          208979,
+          114713
+        ],
+        [
+          48756,
+          208980,
+          114713
+        ],
+        [
+          48756,
+          208981,
+          114713
+        ],
+        [
+          48756,
+          208978,
+          114714
+        ]
+      ],
+      "original_context_records": 82
+    },
+    {
+      "name": "Tuy Duc",
+      "target": "gb:VNM:ADM2:81297802B14510014839166",
+      "owner": 48181,
+      "native_cells": 2,
+      "native_rows": 2,
+      "component_id": "source-target:5f6ebc89f161cdab3289bdf43f5a4cd058ade28cee7774cf26cf4fe0044b259f",
+      "base_geometry_sha256": "83156f46bda5426d7dbd147affdc80d21cf4a3efbd67b55c92af3eab9e8859ff",
+      "physical_receipt_sha256": "0b0247438ee15cf8f56f28060d4ee3152d66ccbae81c22afb5e8cd75339eeb78",
+      "coverage_class": "mapped_land_support",
+      "whole_veto_operand_ids": [
+        "retained-country-reference:ADM0_A3:KHM"
+      ],
+      "every_native_key": [
+        [
+          48181,
+          209192,
+          122045
+        ],
+        [
+          48181,
+          209321,
+          122095
+        ]
+      ],
+      "original_context_records": 5
+    },
+    {
+      "name": "Nam Giang",
+      "target": "gb:VNM:ADM2:81297802B72423367852086",
+      "owner": 48596,
+      "native_cells": 37,
+      "native_rows": 25,
+      "component_id": "source-target:73754478d67b5a01f2997be377873e609f28591057f3b4b9d0ec881e9bf5e0ee",
+      "base_geometry_sha256": "e2a2845568bdc7821f0e4b1ddb736c68d5622b347b3692c8d86cd4864ef83876",
+      "physical_receipt_sha256": "0b0247438ee15cf8f56f28060d4ee3152d66ccbae81c22afb5e8cd75339eeb78",
+      "coverage_class": "mapped_land_support",
+      "whole_veto_operand_ids": [
+        "gb:LAO:ADM1:31783359B64397225362620",
+        "retained-country-reference:ADM0_A3:LAO"
+      ],
+      "every_native_key": [
+        [
+          48596,
+          209187,
+          119480
+        ],
+        [
+          48596,
+          209187,
+          119481
+        ],
+        [
+          48596,
+          209187,
+          119482
+        ],
+        [
+          48596,
+          209187,
+          119483
+        ],
+        [
+          48596,
+          209207,
+          119554
+        ],
+        [
+          48596,
+          209209,
+          119555
+        ],
+        [
+          48596,
+          209250,
+          119564
+        ],
+        [
+          48596,
+          209251,
+          119565
+        ],
+        [
+          48596,
+          209251,
+          119566
+        ],
+        [
+          48596,
+          209252,
+          119566
+        ],
+        [
+          48596,
+          209252,
+          119567
+        ],
+        [
+          48596,
+          209253,
+          119567
+        ],
+        [
+          48596,
+          209254,
+          119568
+        ],
+        [
+          48596,
+          209261,
+          119583
+        ],
+        [
+          48596,
+          209255,
+          119598
+        ],
+        [
+          48596,
+          209256,
+          119598
+        ],
+        [
+          48596,
+          209257,
+          119599
+        ],
+        [
+          48596,
+          209258,
+          119599
+        ],
+        [
+          48596,
+          209259,
+          119599
+        ],
+        [
+          48596,
+          209260,
+          119599
+        ],
+        [
+          48596,
+          209260,
+          119600
+        ],
+        [
+          48596,
+          209261,
+          119600
+        ],
+        [
+          48596,
+          209262,
+          119600
+        ],
+        [
+          48596,
+          209263,
+          119600
+        ],
+        [
+          48596,
+          209261,
+          119601
+        ],
+        [
+          48596,
+          209262,
+          119601
+        ],
+        [
+          48596,
+          209263,
+          119601
+        ],
+        [
+          48596,
+          209264,
+          119601
+        ],
+        [
+          48596,
+          209261,
+          119602
+        ],
+        [
+          48596,
+          209270,
+          119611
+        ],
+        [
+          48596,
+          209270,
+          119612
+        ],
+        [
+          48596,
+          209270,
+          119613
+        ],
+        [
+          48596,
+          209280,
+          119642
+        ],
+        [
+          48596,
+          209280,
+          119643
+        ],
+        [
+          48596,
+          209280,
+          119644
+        ],
+        [
+          48596,
+          209280,
+          119645
+        ],
+        [
+          48596,
+          209285,
+          119659
+        ]
+      ],
+      "original_context_records": 43
+    },
+    {
+      "name": "Ha Lang",
+      "target": "gb:VNM:ADM2:81297802B75623207701482",
+      "owner": 48619,
+      "native_cells": 34,
+      "native_rows": 16,
+      "component_id": "source-target:778b9276a078b779df75760784f4d61bce695473a24e2dd17cda56f0279e1759",
+      "base_geometry_sha256": "bd8f82b3f193c5da7afaa94f5c68d0df19e8c72849d18c355f61629f011f4dbf",
+      "physical_receipt_sha256": "0b0247438ee15cf8f56f28060d4ee3152d66ccbae81c22afb5e8cd75339eeb78",
+      "coverage_class": "mapped_land_support",
+      "whole_veto_operand_ids": [
+        "gb:CHN:ADM1:43563684B59914390554750",
+        "retained-country-reference:ADM0_A3:CHN"
+      ],
+      "every_native_key": [
+        [
+          48619,
+          208736,
+          114179
+        ],
+        [
+          48619,
+          208737,
+          114180
+        ],
+        [
+          48619,
+          208737,
+          114181
+        ],
+        [
+          48619,
+          208738,
+          114182
+        ],
+        [
+          48619,
+          208738,
+          114183
+        ],
+        [
+          48619,
+          208738,
+          114184
+        ],
+        [
+          48619,
+          208739,
+          114184
+        ],
+        [
+          48619,
+          208739,
+          114185
+        ],
+        [
+          48619,
+          208740,
+          114185
+        ],
+        [
+          48619,
+          208739,
+          114186
+        ],
+        [
+          48619,
+          208740,
+          114186
+        ],
+        [
+          48619,
+          208739,
+          114187
+        ],
+        [
+          48619,
+          208740,
+          114187
+        ],
+        [
+          48619,
+          208741,
+          114187
+        ],
+        [
+          48619,
+          208740,
+          114188
+        ],
+        [
+          48619,
+          208741,
+          114188
+        ],
+        [
+          48619,
+          208742,
+          114188
+        ],
+        [
+          48619,
+          208740,
+          114189
+        ],
+        [
+          48619,
+          208741,
+          114189
+        ],
+        [
+          48619,
+          208742,
+          114189
+        ],
+        [
+          48619,
+          208741,
+          114190
+        ],
+        [
+          48619,
+          208742,
+          114190
+        ],
+        [
+          48619,
+          208743,
+          114190
+        ],
+        [
+          48619,
+          208742,
+          114191
+        ],
+        [
+          48619,
+          208743,
+          114191
+        ],
+        [
+          48619,
+          208744,
+          114191
+        ],
+        [
+          48619,
+          208743,
+          114192
+        ],
+        [
+          48619,
+          208744,
+          114192
+        ],
+        [
+          48619,
+          208745,
+          114193
+        ],
+        [
+          48619,
+          208750,
+          114199
+        ],
+        [
+          48619,
+          208751,
+          114199
+        ],
+        [
+          48619,
+          208752,
+          114199
+        ],
+        [
+          48619,
+          208753,
+          114199
+        ],
+        [
+          48619,
+          208754,
+          114199
+        ]
+      ],
+      "original_context_records": 228
+    },
+    {
+      "name": "Dinh Lap",
+      "target": "gb:VNM:ADM2:81297802B72919536287172",
+      "owner": 48600,
+      "native_cells": 1,
+      "native_rows": 1,
+      "component_id": "source-target:7c4e9acee2468d307472c031cd7be193f279973979643ddfa18b11ba17330be9",
+      "base_geometry_sha256": "acea9b54384580793c16ef1667cfc60711d55095942028b9f9982a45c7c7b3df",
+      "physical_receipt_sha256": "0b0247438ee15cf8f56f28060d4ee3152d66ccbae81c22afb5e8cd75339eeb78",
+      "coverage_class": "mapped_land_support",
+      "whole_veto_operand_ids": [
+        "retained-country-reference:ADM0_A3:CHN"
+      ],
+      "every_native_key": [
+        [
+          48600,
+          209177,
+          114883
+        ]
+      ],
+      "original_context_records": 48
+    },
+    {
+      "name": "Van Lang",
+      "target": "gb:VNM:ADM2:81297802B84784766195181",
+      "owner": 48681,
+      "native_cells": 4,
+      "native_rows": 3,
+      "component_id": "source-target:838a1f035b0b2e95d965e5d473adab04dcb90a3fcc6371c3b079d2698999fe16",
+      "base_geometry_sha256": "af823ccd40ad5b63ccc01d868fb411a68229e0f1cb5037accf3f937fc92caffd",
+      "physical_receipt_sha256": "0b0247438ee15cf8f56f28060d4ee3152d66ccbae81c22afb5e8cd75339eeb78",
+      "coverage_class": "mapped_land_support",
+      "whole_veto_operand_ids": [
+        "retained-country-reference:ADM0_A3:CHN"
+      ],
+      "every_native_key": [
+        [
+          48681,
+          208782,
+          114674
+        ],
+        [
+          48681,
+          208783,
+          114675
+        ],
+        [
+          48681,
+          208784,
+          114675
+        ],
+        [
+          48681,
+          208784,
+          114676
+        ]
+      ],
+      "original_context_records": 125
+    },
+    {
+      "name": "Quan Son",
+      "target": "gb:VNM:ADM2:81297802B81765499113898",
+      "owner": 48661,
+      "native_cells": 7,
+      "native_rows": 4,
+      "component_id": "source-target:83d86e00317b59d2589d6d7d4d9dc1dd1f24a3c0bd59b8772b48b1e54474cd3b",
+      "base_geometry_sha256": "4f86f72cd95c1a9fbc06d91bf74a2e4018e05ab30e814008f5bba9123f9d982b",
+      "physical_receipt_sha256": "0b0247438ee15cf8f56f28060d4ee3152d66ccbae81c22afb5e8cd75339eeb78",
+      "coverage_class": "mapped_land_support",
+      "whole_veto_operand_ids": [
+        "retained-country-reference:ADM0_A3:LAO"
+      ],
+      "every_native_key": [
+        [
+          48661,
+          207313,
+          115906
+        ],
+        [
+          48661,
+          207314,
+          115906
+        ],
+        [
+          48661,
+          207481,
+          116094
+        ],
+        [
+          48661,
+          207479,
+          116095
+        ],
+        [
+          48661,
+          207480,
+          116095
+        ],
+        [
+          48661,
+          207478,
+          116096
+        ],
+        [
+          48661,
+          207479,
+          116096
+        ]
+      ],
+      "original_context_records": 16
+    },
+    {
+      "name": "Nam Po",
+      "target": "gb:VNM:ADM2:81297802B39086824409595",
+      "owner": 48365,
+      "native_cells": 38,
+      "native_rows": 27,
+      "component_id": "source-target:8bb799252383b996064b6a390e2c9ba989430a9fc5d27fb5248150d59b09c911",
+      "base_geometry_sha256": "4f913331458dc6e0746fe191d10da018218cbd820aa430db88d7d45d0ad3d452",
+      "physical_receipt_sha256": "0b0247438ee15cf8f56f28060d4ee3152d66ccbae81c22afb5e8cd75339eeb78",
+      "coverage_class": "mapped_land_support",
+      "whole_veto_operand_ids": [
+        "retained-country-reference:ADM0_A3:LAO"
+      ],
+      "every_native_key": [
+        [
+          48365,
+          205730,
+          114670
+        ],
+        [
+          48365,
+          205756,
+          114686
+        ],
+        [
+          48365,
+          205757,
+          114687
+        ],
+        [
+          48365,
+          205758,
+          114688
+        ],
+        [
+          48365,
+          205759,
+          114688
+        ],
+        [
+          48365,
+          205772,
+          114697
+        ],
+        [
+          48365,
+          205775,
+          114699
+        ],
+        [
+          48365,
+          205778,
+          114701
+        ],
+        [
+          48365,
+          205795,
+          114710
+        ],
+        [
+          48365,
+          205800,
+          114711
+        ],
+        [
+          48365,
+          205821,
+          114756
+        ],
+        [
+          48365,
+          205821,
+          114757
+        ],
+        [
+          48365,
+          205821,
+          114758
+        ],
+        [
+          48365,
+          205822,
+          114758
+        ],
+        [
+          48365,
+          205822,
+          114759
+        ],
+        [
+          48365,
+          205823,
+          114760
+        ],
+        [
+          48365,
+          205833,
+          114767
+        ],
+        [
+          48365,
+          205958,
+          114780
+        ],
+        [
+          48365,
+          205957,
+          114781
+        ],
+        [
+          48365,
+          205958,
+          114781
+        ],
+        [
+          48365,
+          205957,
+          114782
+        ],
+        [
+          48365,
+          205958,
+          114782
+        ],
+        [
+          48365,
+          205956,
+          114783
+        ],
+        [
+          48365,
+          205957,
+          114783
+        ],
+        [
+          48365,
+          205958,
+          114783
+        ],
+        [
+          48365,
+          205956,
+          114784
+        ],
+        [
+          48365,
+          205957,
+          114784
+        ],
+        [
+          48365,
+          205956,
+          114785
+        ],
+        [
+          48365,
+          205842,
+          114809
+        ],
+        [
+          48365,
+          205848,
+          114901
+        ],
+        [
+          48365,
+          205847,
+          114902
+        ],
+        [
+          48365,
+          205848,
+          114902
+        ],
+        [
+          48365,
+          205846,
+          114903
+        ],
+        [
+          48365,
+          205847,
+          114903
+        ],
+        [
+          48365,
+          205848,
+          114903
+        ],
+        [
+          48365,
+          205847,
+          114904
+        ],
+        [
+          48365,
+          205848,
+          114904
+        ],
+        [
+          48365,
+          205848,
+          114905
+        ]
+      ],
+      "original_context_records": 52
+    },
+    {
+      "name": "Tan Bien",
+      "target": "gb:VNM:ADM2:81297802B37342354446447",
+      "owner": 48352,
+      "native_cells": 26,
+      "native_rows": 17,
+      "component_id": "source-target:b2a2d184b8f00fe27cb46991d0277cecaedb47a3a59e06c0e2c281ba193bee7a",
+      "base_geometry_sha256": "33aa65ae8c9bc24a98de10f8cbec849c1b3c0bd4045cda1e8500a5a768d4e27e",
+      "physical_receipt_sha256": "0b0247438ee15cf8f56f28060d4ee3152d66ccbae81c22afb5e8cd75339eeb78",
+      "coverage_class": "mapped_land_support",
+      "whole_veto_operand_ids": [
+        "retained-country-reference:ADM0_A3:KHM"
+      ],
+      "every_native_key": [
+        [
+          48352,
+          208242,
+          122547
+        ],
+        [
+          48352,
+          208151,
+          122562
+        ],
+        [
+          48352,
+          208139,
+          122563
+        ],
+        [
+          48352,
+          208140,
+          122563
+        ],
+        [
+          48352,
+          208139,
+          122564
+        ],
+        [
+          48352,
+          208142,
+          122595
+        ],
+        [
+          48352,
+          208143,
+          122596
+        ],
+        [
+          48352,
+          208145,
+          122597
+        ],
+        [
+          48352,
+          208179,
+          122607
+        ],
+        [
+          48352,
+          208180,
+          122608
+        ],
+        [
+          48352,
+          208189,
+          122616
+        ],
+        [
+          48352,
+          208190,
+          122618
+        ],
+        [
+          48352,
+          208190,
+          122619
+        ],
+        [
+          48352,
+          208191,
+          122620
+        ],
+        [
+          48352,
+          208191,
+          122621
+        ],
+        [
+          48352,
+          208194,
+          122685
+        ],
+        [
+          48352,
+          208195,
+          122685
+        ],
+        [
+          48352,
+          208194,
+          122686
+        ],
+        [
+          48352,
+          208195,
+          122686
+        ],
+        [
+          48352,
+          208196,
+          122686
+        ],
+        [
+          48352,
+          208197,
+          122686
+        ],
+        [
+          48352,
+          208199,
+          122686
+        ],
+        [
+          48352,
+          208200,
+          122686
+        ],
+        [
+          48352,
+          208194,
+          122687
+        ],
+        [
+          48352,
+          208200,
+          122687
+        ],
+        [
+          48352,
+          208201,
+          122687
+        ]
+      ],
+      "original_context_records": 27
+    },
+    {
+      "name": "A Luoi",
+      "target": "gb:VNM:ADM2:81297802B94706269623038",
+      "owner": 48757,
+      "native_cells": 6,
+      "native_rows": 2,
+      "component_id": "source-target:baf491b9cf6362a577be108b9bc9a53afb3aab6381ee03d1d9fa8be2154d7cf9",
+      "base_geometry_sha256": "c685c68da9d42868ffb71fd5d073b41b49dc2a4ab30bd637e676a0a04c289c02",
+      "physical_receipt_sha256": "0b0247438ee15cf8f56f28060d4ee3152d66ccbae81c22afb5e8cd75339eeb78",
+      "coverage_class": "mapped_land_support",
+      "whole_veto_operand_ids": [
+        "retained-country-reference:ADM0_A3:LAO"
+      ],
+      "every_native_key": [
+        [
+          48757,
+          209297,
+          119220
+        ],
+        [
+          48757,
+          209257,
+          119229
+        ],
+        [
+          48757,
+          209258,
+          119229
+        ],
+        [
+          48757,
+          209259,
+          119229
+        ],
+        [
+          48757,
+          209260,
+          119229
+        ],
+        [
+          48757,
+          209261,
+          119229
+        ]
+      ],
+      "original_context_records": 8
+    },
+    {
+      "name": "Muong Lat",
+      "target": "gb:VNM:ADM2:81297802B72565329345275",
+      "owner": 48597,
+      "native_cells": 18,
+      "native_rows": 5,
+      "component_id": "source-target:d449dd794ae5a2c109ffabac449c4f713c1155e4f5485c205ec9de3055143c8b",
+      "base_geometry_sha256": "ad301a9793ac1d858e4af496f932ce057556f257d213ce6b73ef9f25ba057ce7",
+      "physical_receipt_sha256": "0b0247438ee15cf8f56f28060d4ee3152d66ccbae81c22afb5e8cd75339eeb78",
+      "coverage_class": "mapped_land_support",
+      "whole_veto_operand_ids": [
+        "retained-country-reference:ADM0_A3:LAO"
+      ],
+      "every_native_key": [
+        [
+          48597,
+          207097,
+          115864
+        ],
+        [
+          48597,
+          207096,
+          115865
+        ],
+        [
+          48597,
+          207097,
+          115865
+        ],
+        [
+          48597,
+          207098,
+          115865
+        ],
+        [
+          48597,
+          207096,
+          115866
+        ],
+        [
+          48597,
+          207097,
+          115866
+        ],
+        [
+          48597,
+          207098,
+          115866
+        ],
+        [
+          48597,
+          207095,
+          115867
+        ],
+        [
+          48597,
+          207096,
+          115867
+        ],
+        [
+          48597,
+          207097,
+          115867
+        ],
+        [
+          48597,
+          207098,
+          115867
+        ],
+        [
+          48597,
+          207099,
+          115867
+        ],
+        [
+          48597,
+          207095,
+          115868
+        ],
+        [
+          48597,
+          207096,
+          115868
+        ],
+        [
+          48597,
+          207097,
+          115868
+        ],
+        [
+          48597,
+          207098,
+          115868
+        ],
+        [
+          48597,
+          207099,
+          115868
+        ],
+        [
+          48597,
+          207100,
+          115868
+        ]
+      ],
+      "original_context_records": 53
+    },
+    {
+      "name": "Ky Son",
+      "target": "gb:VNM:ADM2:81297802B2701886719052",
+      "owner": 48268,
+      "native_cells": 8,
+      "native_rows": 4,
+      "component_id": "source-target:d4844a64429206135b5b8d86705370dfe4c49e26f491a533d113449c30edd349",
+      "base_geometry_sha256": "c41d72508c232eddac48c1ba476b3679d6194db2de23bbc5125b20991004f4a5",
+      "physical_receipt_sha256": "0b0247438ee15cf8f56f28060d4ee3152d66ccbae81c22afb5e8cd75339eeb78",
+      "coverage_class": "mapped_land_support",
+      "whole_veto_operand_ids": [
+        "retained-country-reference:ADM0_A3:LAO"
+      ],
+      "every_native_key": [
+        [
+          48268,
+          206858,
+          116662
+        ],
+        [
+          48268,
+          206866,
+          116795
+        ],
+        [
+          48268,
+          206867,
+          116795
+        ],
+        [
+          48268,
+          206862,
+          116796
+        ],
+        [
+          48268,
+          206863,
+          116796
+        ],
+        [
+          48268,
+          206864,
+          116796
+        ],
+        [
+          48268,
+          206865,
+          116796
+        ],
+        [
+          48268,
+          206984,
+          116896
+        ]
+      ],
+      "original_context_records": 11
+    },
+    {
+      "name": "Binh Lieu",
+      "target": "gb:VNM:ADM2:81297802B53696601888295",
+      "owner": 48460,
+      "native_cells": 41,
+      "native_rows": 8,
+      "component_id": "source-target:eede6016d729cbf204ec69a13e4f5b082ecdb479ac2482eae47a23bb38f3516d",
+      "base_geometry_sha256": "3465d3d8eec91412e6d192fefd8b3cbda3f90e7861c43856b96c32921df0ecbf",
+      "physical_receipt_sha256": "0b0247438ee15cf8f56f28060d4ee3152d66ccbae81c22afb5e8cd75339eeb78",
+      "coverage_class": "mapped_land_support",
+      "whole_veto_operand_ids": [
+        "retained-country-reference:ADM0_A3:CHN"
+      ],
+      "every_native_key": [
+        [
+          48460,
+          209273,
+          114965
+        ],
+        [
+          48460,
+          209272,
+          114966
+        ],
+        [
+          48460,
+          209273,
+          114966
+        ],
+        [
+          48460,
+          209274,
+          114966
+        ],
+        [
+          48460,
+          209275,
+          114966
+        ],
+        [
+          48460,
+          209276,
+          114966
+        ],
+        [
+          48460,
+          209269,
+          114967
+        ],
+        [
+          48460,
+          209270,
+          114967
+        ],
+        [
+          48460,
+          209271,
+          114967
+        ],
+        [
+          48460,
+          209272,
+          114967
+        ],
+        [
+          48460,
+          209273,
+          114967
+        ],
+        [
+          48460,
+          209274,
+          114967
+        ],
+        [
+          48460,
+          209275,
+          114967
+        ],
+        [
+          48460,
+          209276,
+          114967
+        ],
+        [
+          48460,
+          209277,
+          114967
+        ],
+        [
+          48460,
+          209278,
+          114967
+        ],
+        [
+          48460,
+          209276,
+          114968
+        ],
+        [
+          48460,
+          209277,
+          114968
+        ],
+        [
+          48460,
+          209278,
+          114968
+        ],
+        [
+          48460,
+          209279,
+          114968
+        ],
+        [
+          48460,
+          209280,
+          114968
+        ],
+        [
+          48460,
+          209282,
+          114969
+        ],
+        [
+          48460,
+          209394,
+          114972
+        ],
+        [
+          48460,
+          209395,
+          114972
+        ],
+        [
+          48460,
+          209396,
+          114972
+        ],
+        [
+          48460,
+          209392,
+          114973
+        ],
+        [
+          48460,
+          209393,
+          114973
+        ],
+        [
+          48460,
+          209394,
+          114973
+        ],
+        [
+          48460,
+          209395,
+          114973
+        ],
+        [
+          48460,
+          209396,
+          114973
+        ],
+        [
+          48460,
+          209397,
+          114973
+        ],
+        [
+          48460,
+          209390,
+          114974
+        ],
+        [
+          48460,
+          209391,
+          114974
+        ],
+        [
+          48460,
+          209392,
+          114974
+        ],
+        [
+          48460,
+          209393,
+          114974
+        ],
+        [
+          48460,
+          209394,
+          114974
+        ],
+        [
+          48460,
+          209395,
+          114974
+        ],
+        [
+          48460,
+          209396,
+          114974
+        ],
+        [
+          48460,
+          209397,
+          114974
+        ],
+        [
+          48460,
+          209398,
+          114974
+        ],
+        [
+          48460,
+          209399,
+          114974
+        ]
+      ],
+      "original_context_records": 46
+    },
+    {
+      "name": "Nam Nhun",
+      "target": "gb:VNM:ADM2:81297802B14703404520131",
+      "owner": 48183,
+      "native_cells": 3,
+      "native_rows": 2,
+      "component_id": "source-target:effe019b6ed2834638d5961e847cd86339f0156132f3bdd2f48049f2f3c1a02c",
+      "base_geometry_sha256": "aefe89ca7703bf191683d493d2090ad2e958a754f0b2acff9177557331d47da1",
+      "physical_receipt_sha256": "0b0247438ee15cf8f56f28060d4ee3152d66ccbae81c22afb5e8cd75339eeb78",
+      "coverage_class": "mapped_land_support",
+      "whole_veto_operand_ids": [
+        "retained-country-reference:ADM0_A3:CHN"
+      ],
+      "every_native_key": [
+        [
+          48183,
+          206134,
+          114298
+        ],
+        [
+          48183,
+          206135,
+          114298
+        ],
+        [
+          48183,
+          206132,
+          114299
+        ]
+      ],
+      "original_context_records": 115
+    },
+    {
+      "name": "Ben Cau",
+      "target": "gb:VNM:ADM2:81297802B61263365113672",
+      "owner": 48516,
+      "native_cells": 1,
+      "native_rows": 1,
+      "component_id": "source-target:fbd4551d43bc561b7b62d937bf569a3d93c4968993893069c9fdcf56bd9333fe",
+      "base_geometry_sha256": "e51881ab87726d0dd791b5bad4636f76558e970c9514586d7e50bacebd81d274",
+      "physical_receipt_sha256": "0b0247438ee15cf8f56f28060d4ee3152d66ccbae81c22afb5e8cd75339eeb78",
+      "coverage_class": "mapped_land_support",
+      "whole_veto_operand_ids": [
+        "gb:KHM:ADM1:37992800B528078583451",
+        "retained-country-reference:ADM0_A3:KHM"
+      ],
+      "every_native_key": [
+        [
+          48516,
+          208289,
+          122909
+        ]
+      ],
+      "original_context_records": 2
+    }
+  ],
+  "independent_partition_binding": {
+    "path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/repair-package/next-physical351/independent-expected-native-partitions.json",
+    "bytes": 84790,
+    "sha256": "55cfabd00fa660359cc1e489667884756f2286c735a00d502af556dd3a293300"
+  },
+  "base_reference": {
+    "footprints_sha256": "2deeff1457ff9238cb3dbe599e9a858dcce29d8ba88e2a66abe2785ddec0aed9",
+    "hierarchy_sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+    "id": "geography:review:dbb133d7b123bacd1d38253c467891bff656d011000a9f11d369ac9262302bfb"
+  },
+  "native_contract": {
+    "coordinateBits": 19,
+    "hierarchy_sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+    "method": "native-linear-evenodd-first-owner-v1",
+    "native_latitudes": {
+      "bytes": 1851757,
+      "commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+      "decoded_bytes": 2097328,
+      "decoded_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23",
+      "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+      "role": "immutable-normative-rule-input",
+      "root": "repository",
+      "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147"
+    },
+    "original_assets": {
+      "bounds": {
+        "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+        "path": "data/canonical-grid/bounds.json.gz",
+        "role": "original-identity-parent-camera-context",
+        "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f"
+      },
+      "province_membership": {
+        "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+        "path": "data/canonical-grid/province-membership.bin.gz",
+        "role": "original-identity-crosswalk",
+        "sha256": "01f42b69ca969090d10c42d6a1311215a19ce436b0f3e720f7f873f4a18f90da"
+      }
+    },
+    "size": 262166
+  },
+  "original_context": {
+    "all": 1175,
+    "clean21_context": 1116,
+    "requested": 309,
+    "all_adverse_repair": 821,
+    "adverse_inland_water": 12,
+    "source_relative": 3,
+    "deferred42": 42,
+    "all_original_qualified_false": true
+  },
+  "whole_veto_data_bindings": [
+    {
+      "path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/repair-package/next557-source-veto-readiness/whole-original-operands.json",
+      "bytes": 507925,
+      "sha256": "31e27a24b7c79bab65368b120499fbdd7c62cab59f62083ed9844e9d08c9ef41"
+    },
+    {
+      "path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/repair-package/next351-source-veto-readiness/whole-new-operands.json",
+      "bytes": 122427,
+      "sha256": "ca425cc2deb929e871bffbab0f485ce0af589082a3bccf333e2f0894f3756102"
+    }
+  ],
+  "observed_resources": {
+    "elapsed_seconds": 2.8343234580000005,
+    "charged_phase_bytes": 431268214,
+    "allowance": {
+      "phaseBytes": 671088640,
+      "rssBytes": 671088640
+    },
+    "normalized_node_lifetime_peak_rss_bytes": 374177792,
+    "qualified_cells": 309,
+    "limits": [
+      "Original source/physical producers are not replayed.",
+      "Constructor qualification is not actual current-owner-zero or final selected-output acceptance."
+    ]
+  },
+  "limits": [
+    "Actual original309 native contribution only; no other23target/351 or deferred42 qualification inferred",
+    "All original1175context and full23target30query physical/stage evidence retained; AnPhu water/conflicts and BoTrach relative/exterior/extra context remain intact",
+    "Current-owner-zero, current-bank conservation and selected output/delivery remain later consumer results",
+    "No science, GSHHG/native/source predicate or operating machinery replay or re-review"
+  ],
+  "scientific_replay": false,
+  "current_owner_zero_claimed": false,
+  "selected_output_acceptance_claimed": false
+}
