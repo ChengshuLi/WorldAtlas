@@ -936,7 +936,8 @@ export function resumeSource(root, destination, config, binding, reader) {
 
 // The source probe has one data-configured scientific implementation. Admission
 // and exclusive publication stay in this existing delivery entry point.
-export async function sourceCohort(config, reader, root, destination, phase = 'source') {
+export async function sourceCohort(config, reader, root, destination, phase = 'source',
+  {resume = false, binding = sourceBinding(jsonBytes(config), phase), execute = execFileSync} = {}) {
   need(['source', 'physical'].includes(phase), 'Unknown scientific delivery phase');
   const phaseConfig = config[phase];
   need(same(Object.keys(config).sort(), ['preparation_allowance', 'processing_allowance', 'runtime_inventory', phase, 'version'].sort())
@@ -947,6 +948,43 @@ export async function sourceCohort(config, reader, root, destination, phase = 's
   need(runtime && same(Object.keys(runtime).sort(), ['files', 'python']) && Array.isArray(runtime.files)
     && runtime.files.length > 0 && runtime.files.length <= 512 && unique(runtime.files.map(pin => pin.path))
     && runtime.python?.bytes > 0 && runtime.files.some(pin => same(pin, runtime.python)), 'Complete pinned source runtime inventory required');
+  const helper = fileURLToPath(new URL('./qualify-source-cohort.py', import.meta.url));
+  const helperRaw = fs.readFileSync(helper), sourceRaw = jsonBytes(phaseConfig);
+  const entryRaw = fs.readFileSync(fileURLToPath(import.meta.url));
+  need(binding.phase === phase && binding.program_sha256 === digest(helperRaw)
+    && binding.entry_sha256 === digest(entryRaw), 'Source staging execution binding differs');
+  const names = phase === 'source' ? sourceProducts : physicalProducts;
+  const stagingParent = '.cache/delivery-handoff';
+  admitDestination(root, stagingParent + '/source-staging', false);
+  const parent = path.join(root, stagingParent);
+  const prefix = 'source-' + digest(jsonBytes({phase, destination})).slice(0, 16) + '-';
+  const retained = fs.existsSync(parent) ? fs.readdirSync(parent).filter(name => name.startsWith(prefix)) : [];
+  need(retained.length <= 1, 'Ambiguous private source staging; preserve original attempts');
+  const cleanup = staging => () => fs.rmSync(staging, {recursive: true, force: true});
+  if (resume) {
+    need(retained.length === 1, 'No completed private source stage to resume; scientific child was not repeated');
+    const staging = path.join(parent, retained[0]), relative = path.relative(root, staging);
+    admitDestination(root, relative, true);
+    admitDestination(root, relative + '/products', true);
+    need(same(fs.readdirSync(staging).sort(), ['admission.json', 'products', 'source-config.json'])
+      && same(fs.readdirSync(path.join(staging, 'products')).sort(), [...names, 'preparation.json'].sort()),
+    'Incomplete or foreign private source stage');
+    need(ordinary(root, relative + '/source-config.json').equals(sourceRaw), 'Private source configuration differs');
+    const admission = JSON.parse(ordinary(root, relative + '/admission.json'));
+    need(admission.program_sha256 === binding.program_sha256 && admission.config_sha256 === digest(sourceRaw)
+      && same(admission.runtime_files, runtime.files)
+      && same(admission.allowance, config.processing_allowance)
+      && admission.runtime_inventory_bytes === runtime.files.reduce((n, pin) => n + pin.bytes, 0),
+    'Private source admission/runtime binding differs');
+    const {products} = resumeSource(root, destination, config, binding, reader,
+      {sourceDirectory: relative + '/products', prepareOnly: true});
+    const qualified = JSON.parse(products[phase === 'source' ? 'source-qualification.json' : 'execution-receipt.json']);
+    need(same(qualified.fresh_admission, admission), 'Private source original admission differs');
+    return {products, staging: relative, cleanup: cleanup(staging), observation: {
+      retained_private_stage: relative, reused_child_outputs: true,
+      limits: ['Original child execution/runtime/admission facts are retained; no scientific operator was repeated.']}};
+  }
+  need(retained.length === 0, 'Private source stage already exists; use the unchanged invocation with explicit --resume');
   const {processingAllowance} = await import('./check-effective-geographic-regression.mjs');
   const allowance = processingAllowance({...config.processing_allowance, currentRssBytes: 0});
   let runtimeBytes = 0;
@@ -956,9 +994,6 @@ export async function sourceCohort(config, reader, root, destination, phase = 's
     runtimeBytes += pin.bytes;
     need(Number.isSafeInteger(runtimeBytes) && runtimeBytes < allowance.phaseBytes, 'Runtime inventory exceeds source allowance');
   }
-  const helper = fileURLToPath(new URL('./qualify-source-cohort.py', import.meta.url));
-  const helperRaw = fs.readFileSync(helper), sourceRaw = jsonBytes(phaseConfig);
-  const entryRaw = fs.readFileSync(fileURLToPath(import.meta.url));
   const executionReserve = helperRaw.length + entryRaw.length + sourceRaw.length + phaseConfig.resources.output_bytes;
   need(Number.isSafeInteger(executionReserve) && executionReserve > 0
     && runtimeBytes + executionReserve < allowance.phaseBytes, 'Source execution/output reserve exceeds allowance');
@@ -975,10 +1010,9 @@ export async function sourceCohort(config, reader, root, destination, phase = 's
     return {path: pin.path, resolved, bytes, sha256: pin.sha256};
   };
   const identities = runtime.files.map(runtimeIdentity);
-  const stagingParent = '.cache/delivery-handoff';
-  admitDestination(root, stagingParent + '/source-staging', false);
-  fs.mkdirSync(path.join(root, stagingParent), {recursive: true});
-  const staging = fs.mkdtempSync(path.join(root, stagingParent, 'source-'));
+  fs.mkdirSync(parent, {recursive: true});
+  const staging = fs.mkdtempSync(path.join(parent, prefix));
+  let childSucceeded = false;
   try {
     const sourceFile = path.join(staging, 'source-config.json'), admissionFile = path.join(staging, 'admission.json');
     const admission = {version: 1, observed_unix_seconds: Date.now() / 1000, allowance,
@@ -989,21 +1023,26 @@ export async function sourceCohort(config, reader, root, destination, phase = 's
     const output = path.join(staging, 'products'), started = performance.now();
     // Python owns cooperative feature/input/time/output checks. This entry does
     // not claim a hard deadline or process-tree supervisor it does not implement.
-    execFileSync(runtime.python.path, ['-I', '-B', helper, '--phase', phase, '--repo', root, '--config', sourceFile,
+    execute(runtime.python.path, ['-I', '-B', helper, '--phase', phase, '--repo', root, '--config', sourceFile,
       '--admission', admissionFile, '--output', output, '--publication-prefix', destination], {cwd: root, env: environment(),
       stdio: ['ignore', 'ignore', 'pipe'], maxBuffer: 131072});
+    childSucceeded = true;
     for (const pin of runtime.files) runtimeIdentity(pin);
     need(fs.readFileSync(helper).equals(helperRaw), 'Source helper changed during execution');
-    const names = phase === 'source' ? sourceProducts : physicalProducts;
     need(same(fs.readdirSync(output).sort(), [...names].sort()), 'Incomplete or foreign source output inventory');
     const products = Object.fromEntries(names.map(name => [name, ordinary(root, path.relative(root, path.join(output, name)))]));
     const total = Object.values(products).reduce((n, raw) => n + raw.length, 0);
     need(total <= phaseConfig.resources.output_bytes, 'Complete source output reserve exceeded');
-    return {products, observation: {elapsed_seconds: (performance.now() - started) / 1000, allowance,
+    // Retain the existing preparation receipt shape beside the successful child
+    // products. Only successful final publication releases this private stage.
+    const outputs = Object.fromEntries(Object.entries(products).map(([name, raw]) => [name, {bytes: raw.length, sha256: digest(raw)}]));
+    fs.writeFileSync(path.join(output, 'preparation.json'), jsonBytes({version: 1, binding, outputs}), {flag: 'wx'});
+    return {products, staging: path.relative(root, staging), cleanup: cleanup(staging), observation: {
+      elapsed_seconds: (performance.now() - started) / 1000, allowance,
       runtime_inventory: identities, limits: ['Scientific checks are cooperative boundaries, not hard process-tree enforcement.',
         phase === 'physical' ? 'Original physical source-relative support is not native, owner-zero, factual or selected-output acceptance.'
           : 'Source prerequisites are not physical, native, owner-zero or selected-output acceptance.']}};
-  } finally { fs.rmSync(staging, {recursive: true, force: true}); }
+  } finally { if (!childSucceeded) fs.rmSync(staging, {recursive: true, force: true}); }
 }
 
 // Execute the existing modern constructor, rather than authoring a new country
