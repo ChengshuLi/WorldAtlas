@@ -309,6 +309,33 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       needSelected(sha256(bytes) === value.sha256, 'role content hash differs');
       return parseJSON(bytes);
     };
+    // The modern constructor whole-reads this original programme as custody;
+    // it never executes or installs it. Keep the current helper unchanged and
+    // authenticate the original version instead of relabelling current bytes.
+    const physicalReproduction = async value => {
+      const current = authored.entries.get(value?.path);
+      if (ordinary(current) && current.sha === value.git_blob_oid && current.size === value.bytes) return pin(value);
+      needSelected(value && safe(value.path) && unchangedRole(value.path) && value.mode === '100644'
+        && /^[a-f0-9]{40}$/.test(value.commit ?? '') && /^[a-f0-9]{40}$/.test(value.git_blob_oid ?? '')
+        && Number.isSafeInteger(value.bytes) && value.bytes >= 0 && hash(value.sha256),
+      'historical reproduction requires unchanged current code and exact original pin');
+      const vintage = await integrationTree(api, repo, value.commit);
+      needSelected(vintage.object?.sha === value.commit, 'historical reproduction commit differs');
+      const original = vintage.entries.get(value.path);
+      needSelected(ordinary(original) && original.mode === value.mode && original.sha === value.git_blob_oid
+        && original.size === value.bytes, 'historical reproduction commit/path identity differs');
+      const bytes = await readRow(original, false);
+      needSelected(sha256(bytes) === value.sha256, 'historical reproduction whole hash differs');
+      if (value.decoded_bytes !== undefined) {
+        needSelected(Number.isSafeInteger(value.decoded_bytes) && value.decoded_bytes > 0 && hash(value.decoded_sha256),
+          'historical reproduction decoded identity required');
+        const decoded = gunzipSync(bytes, {maxOutputLength: value.decoded_bytes});
+        diagnostics.decoded_bytes += decoded.length;
+        needSelected(decoded.length === value.decoded_bytes && sha256(decoded) === value.decoded_sha256,
+          'historical reproduction decoded identity differs');
+      }
+      reachable.add(value.path);
+    };
     // Only the two declared exceptions need this SOURCE inventory. Ordinary
     // selected deliveries keep their existing small fixed-role walk.
     const sourceDeclarations = new Set(), usedRegistrations = new Set(), acceptedTrees = new Map();
@@ -618,7 +645,8 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
         needSelected(evidence.version===1&&evidence.kind==='source-target-native-evidence-v1'
           &&Array.isArray(evidence.families)&&evidence.families.length>0&&Array.isArray(evidence.targets)&&evidence.targets.length>0,
           'missing source-target evidence roles');
-        for (const role of ['catalogue','physical_evidence','physical_input','physical_reproduction','owner_roster','native_latitudes']) pin(evidence[role]);
+        for (const role of ['catalogue','physical_evidence','physical_input','owner_roster','native_latitudes']) pin(evidence[role]);
+        await physicalReproduction(evidence.physical_reproduction);
         if(evidence.source_membership!==undefined){
           const membership=evidence.source_membership;
           needSelected(keys(membership,['index','lineage','parts'])&&Array.isArray(membership.parts)&&membership.parts.length>0,

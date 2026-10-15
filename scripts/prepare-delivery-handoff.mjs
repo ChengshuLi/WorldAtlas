@@ -748,10 +748,16 @@ export function packageProjection(config, reader, acceptedRegistry = null) {
   const roles = new Map();
   function add(pin, role) {
     need(pin && safe(pin.path), 'Missing whole consumed package role: ' + role);
-    reader.read(pin); const prior = roles.get(pin.path);
+    reader.read(pin);
+    // This closed modern role is consumed by exact versioned Git reads, never
+    // installed or executed at its pathname. Keep each original vintage while
+    // current/filesystem roles retain their existing single-path identity.
+    const key = role === 'source-target physical_reproduction'
+      ? 'physical-reproduction\0' + jsonBytes(pin).toString('utf8') : pin.path;
+    const prior = roles.get(key);
     need(!prior || prior.sha256 === pin.sha256 && prior.bytes === pin.bytes, 'Conflicting package path vintages');
-    if (!prior) roles.set(pin.path, {...pin, roles: []});
-    if (!roles.get(pin.path).roles.includes(role)) roles.get(pin.path).roles.push(role);
+    if (!prior) roles.set(key, {...pin, roles: []});
+    if (!roles.get(key).roles.includes(role)) roles.get(key).roles.push(role);
   }
   need(safe(config.new_prefix.slice(0, -1)) && config.new_prefix.endsWith('/'), 'Explicit new authority prefix required');
   // Finalize supplies the registry authenticated through the original selector.
@@ -859,7 +865,7 @@ export function packageProjection(config, reader, acceptedRegistry = null) {
   }
   for (const pin of config.outer_roles ?? []) add(pin, 'explicit final reader outer role');
   const projection = {version: 1, kind: 'prospective-fixed-role-package-projection', new_authorities: added,
-    paths: [...roles.values()].sort((a, b) => a.path.localeCompare(b.path)),
+    paths: [...roles.values()].sort((a, b) => a.path.localeCompare(b.path) || a.commit.localeCompare(b.commit)),
     pending: ['Compare actual completed selected-reader inventory, preserving prior declarations; run real package/consumer checks.',
       ...(!config.selected_ledger ? ['Actual selected ledger and outer release/custody pins remain pending.'] : [])],
     limits: ['Fixed consumed metadata roles only; no recursive scientific/preparation inputs. This does not certify reader/build success or delivery.']};
@@ -993,7 +999,7 @@ export function finalizeDelivery(config, reader) {
     outputs['package-roles.json'] = jsonBytes(projection);
     outputs[path.posix.basename(config.sidecar.path)] = generatedSidecar;
   }
-  const paths = projection.paths.map(p => p.path);
+  const paths = [...new Set(projection.paths.map(p => p.path))];
   const baselinePackage = reader.json(config.package_inputs);
   validatePackageInputs(baselinePackage);
   const covered = name => baselinePackage.inputs.some(p => p === name || p.endsWith('/') && name.startsWith(p));
@@ -1012,6 +1018,15 @@ export function finalizeDelivery(config, reader) {
   for (const pin of projection.paths.filter(p => !p.path.startsWith(config.new_prefix) || covered(p.path))) {
     try {
       const missing = typeof reader.hasPath === 'function' && !reader.hasPath(config.package_inputs.commit, pin.path);
+      if (!missing && pin.roles.length === 1 && pin.roles[0] === 'source-target physical_reproduction') {
+        // packageProjection authenticated the original commit/path/body. The
+        // live accepted helper remains a separate unchanged filesystem input;
+        // this historical read cannot replace it or grant another role access.
+        const current = reader.pin(config.package_inputs.commit, pin.path);
+        need(current.mode === '100644', 'Current producer path is not ordinary');
+        need(!requested.has(pin.path), 'Restoration would overwrite an existing accepted path');
+        continue;
+      }
       if (missing && requested.has(pin.path)) {
         const snapshot = reader.pin(restored.commit, pin.path);
         need(identity(snapshot, pin), 'Restored snapshot differs from original consumed role');
