@@ -1595,6 +1595,14 @@ export function readCurrentRebindCustody(reader,pin,{baseSelection,registry,orig
  });
 }
 
+// Finish detached acquisition before carrying only the selected consumer's view.
+// The full scientific proof may alias these rows in other presentation fields.
+// Keep this wrapper mutable for current_rebind; its nested graphs remain frozen.
+function completedSelectedAuthority(reader,entry,observationReader) {
+ const proof=readRetainedRegistryAuthority(reader,entry,observationReader);
+ return {authority_sha256:entry.authority_sha256,rule_sha256:entry.rule_sha256,source_scope_ids:proof.source_scope_ids,native_proof:proof.native_proof,original_ledger:proof.original_ledger,pins:proof.pins,original_pins:proof.original_pins};
+}
+
 // Explicit committed data-only hook. This does not discover proposal files.
 export function readSelectedAdditive(snapshot) {
  const {reader,selection,manifest,owners}=snapshot,hook=selection.additive_release;
@@ -1651,13 +1659,13 @@ export function readSelectedAdditive(snapshot) {
   // Previous acquisition bodies have been discarded. Only the complete selected
   // metadata/proof views are live across genuine detached authority phases.
   const child=new ImmutableReader(reader.repo,reader.version,{runtimeBytes:reader.runtimeBytes,executionBytes:reader.executionBytes,outputBytes:4*1024*1024,metadataBytes:reader.metadataBytes+retained,gitExecutable:reader.gitExecutable,allowance:reader.allowance});
-  const proof=readRetainedRegistryAuthority(child,entry,reader);
+  const proof=completedSelectedAuthority(child,entry,reader);
   demand(valueBytes(proof).length<=child.outputBytes,'Complete detached authority view exceeds prospective output reserve');
   for(const row of normalized.rows.values())if(row.authority_sha256===entry.authority_sha256){
    const original=proof.original_ledger.rows.find(r=>r.component_id===row.component_id);
    demand(original&&['assigned','zero-cell'].includes(original.disposition)&&same({...original,authority_sha256:entry.authority_sha256,rule_sha256:entry.rule_sha256},row),'Selected component rebinds original full native/source primitive');
   }
-  const view={authority_sha256:entry.authority_sha256,rule_sha256:entry.rule_sha256,source_scope_ids:proof.source_scope_ids,native_proof:proof.native_proof,original_ledger:proof.original_ledger,pins:proof.pins,original_pins:proof.original_pins};proofs.push(view);retained+=valueBytes(view).length;
+  proofs.push(proof);retained+=valueBytes(proof).length;
  }
 
  const expectedScope=new Map();
