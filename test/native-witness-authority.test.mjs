@@ -64,8 +64,7 @@ function constructorFixture(change=()=>{}){
       throw Error('Unexpected fixture Git request: '+args.join(' '));
     }
   }
-  const reader=()=>new FixtureReader('.',version,{runtimeBytes:0,metadataBytes:0,outputBytes:0,
-    allowance:{phaseBytes:128*1024*1024,rssBytes:1024*1024*1024}});
+  const reader=()=>new FixtureReader('.',version);
   const locators={source_evidence:{commit:version,path:evidence.path},native_patch:{commit:version,path:patch.path}};
   return {run:()=>constructOriginalAuthority(reader(),locators),files,byBlob,membership,reader,state};
 }

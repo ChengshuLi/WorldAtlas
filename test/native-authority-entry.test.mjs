@@ -72,7 +72,7 @@ function gitFixture(t) {
   }};rewrite(evidence);
   save('source-evidence.json',JSON.stringify(evidence));git('add','.');git('commit','-m','Bound modern evidence');
   const head=git('rev-parse','HEAD'),reader=pinReader(root);
-  const config={version:1,preparation_allowance:{phaseBytes:512*1024*1024,rssBytes:512*1024*1024},
+  const config={version:1,
     source_evidence:{commit:head,path:'source-evidence.json'},native_patch:{commit:original,path:'patch.json'}};
   const script=new URL('../scripts/prepare-delivery-handoff.mjs',import.meta.url).pathname;
   const run=(destination,flags=[])=>{save('config.json',JSON.stringify(config));return spawnSync(process.execPath,[script,'native-authority','config.json',destination,...flags],{cwd:root,encoding:'utf8',env:{...process.env,NODE_OPTIONS:'',NODE_PATH:'',GIT_NO_LAZY_FETCH:'1'}});};
@@ -141,24 +141,22 @@ test('native-authority constructor refuses malformed or mutated committed scient
       'executable-patch':/Missing ordinary exact Git body: patch\.json/,
       'unsafe-source-path':/Exact commit and safe whole-file path required/
     }[mutation];
-    assert.doesNotMatch(run.stderr,/Requested preparation allowance|Insufficient current preparation memory|ERR_MODULE_NOT_FOUND|Cannot find (?:module|package)/,mutation+' must reach its intended input boundary');
+    assert.doesNotMatch(run.stderr,/ERR_MODULE_NOT_FOUND|Cannot find (?:module|package)/,mutation+' must reach its intended input boundary');
     assert.match(run.stderr,expected,mutation);
     assert.equal(fs.existsSync(path.join(f.root,destination)),false,mutation+' must not publish authority');
   }
 });
-test('native-authority entry refuses missing pins, handwritten descriptors, symlink destination and undersized admission before publishing',t=>{
-  for(const mutation of ['missing','handwritten','resources','unknown']){
+test('native-authority entry refuses missing pins, handwritten descriptors, and symlink destination before publishing',t=>{
+  for(const mutation of ['missing','handwritten','unknown']){
     const f=gitFixture(t),destination='coordination/engineering/fixture/'+mutation;
     if(mutation==='missing')f.config.native_patch.path='missing.json';
     if(mutation==='handwritten')f.config.native_patch.sha256='1'.repeat(64);
-    if(mutation==='resources')f.config.preparation_allowance.phaseBytes=1024;
     if(mutation==='unknown')f.config.accepted=true;
     const run=f.run(destination);assert.notEqual(run.status,0,mutation);
     const expected={missing:/Missing ordinary exact Git body: missing\.json/,
       handwritten:/Supply exact commit\/path locators only/,
-      resources:/Installed runtime\/metadata exceeds complete phase/,
-      unknown:/Explicit native-authority inputs and allowance required/}[mutation];
-    assert.doesNotMatch(run.stderr,/Requested preparation allowance|Insufficient current preparation memory|ERR_MODULE_NOT_FOUND|Cannot find (?:module|package)/,mutation+' must reach its intended boundary');
+      unknown:/Explicit native-authority inputs required/}[mutation];
+    assert.doesNotMatch(run.stderr,/ERR_MODULE_NOT_FOUND|Cannot find (?:module|package)/,mutation+' must reach its intended boundary');
     assert.match(run.stderr,expected,mutation);
     assert.equal(fs.existsSync(path.join(f.root,destination)),false);
   }
