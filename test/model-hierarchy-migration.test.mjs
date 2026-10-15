@@ -1,23 +1,24 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import {openDatabase,seedDatabase,importRecords,geography,snapshot} from '../database.mjs';
-import {validateHierarchy} from '../hierarchy.mjs';
+import {migrateHierarchy,validateHierarchy} from '../hierarchy.mjs';
+import {location,migrationDatabase,migrationRead} from './fixtures/model-migration.mjs';
 
 test('legacy hierarchy migration preserves historical records and repairs skipped parents',()=>{
-  const legacy=openDatabase(':memory:');
+  const id='atlas:city:GBR-Greater London',current=location(id,{hierarchy_version:3});
+  const legacy=migrationDatabase([current],[{location_id:id,valid_from:1800,valid_to:1801,owner:'Preserved fixture',source:'Migration regression fixture'}]);
   try {
-    seedDatabase(legacy);
-    importRecords(legacy,{states:[{location_id:'atlas:city:GBR-Greater London',valid_from:1800,valid_to:1801,owner:'Preserved fixture',source:'Migration regression fixture'}]});
-    const count=legacy.prepare('SELECT count(*) n FROM states').get().n;
-    const region=legacy.prepare("SELECT id FROM units WHERE level='region' AND name='Britain'").get().id;
+    const states=legacy.prepare('SELECT * FROM states').all();
     legacy.exec('DROP TRIGGER location_parent_update');
-    legacy.prepare("UPDATE locations SET parent_id=?,metadata=json_remove(metadata,'$.hierarchy_version') WHERE id='atlas:city:GBR-Greater London'").run(region);
+    legacy.prepare("UPDATE locations SET parent_id='region',metadata=json_remove(metadata,'$.hierarchy_version') WHERE id=?").run(id);
     legacy.exec(fs.readFileSync('data/schema.sql','utf8'));
-    seedDatabase(legacy);
-    const data=geography(legacy);validateHierarchy(data.units,data.features.map(f=>f.properties));
-    assert.equal(legacy.prepare('SELECT count(*) n FROM states').get().n,count);
-    assert.equal(snapshot(legacy,1800).states[0].owner,'Preserved fixture');
-    assert.equal(legacy.prepare("SELECT level FROM units WHERE id=(SELECT parent_id FROM locations WHERE id='atlas:city:GBR-Greater London')").get().level,'province');
+    // Calling the migration directly prevents migrateReference from repairing it first.
+    const read=migrationRead([current]);migrateHierarchy(legacy,read);
+    validateHierarchy(legacy.prepare('SELECT * FROM units').all(),legacy.prepare('SELECT * FROM locations').all());
+    assert.deepEqual(legacy.prepare('SELECT * FROM states').all(),states);
+    assert.equal(legacy.prepare('SELECT parent_id FROM locations WHERE id=?').get(id).parent_id,'province');
+    assert.equal(JSON.parse(legacy.prepare('SELECT metadata FROM locations WHERE id=?').get(id).metadata).hierarchy_version,3);
+    migrateHierarchy(legacy,read);
+    assert.deepEqual(legacy.prepare('SELECT * FROM states').all(),states);
   } finally {legacy.close();}
 });
