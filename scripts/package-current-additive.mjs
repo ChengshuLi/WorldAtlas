@@ -11,9 +11,12 @@ import {additiveBaseReference,bindAdditiveLedgerFeatures,verifyAdditiveLedgerSel
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 const need=(ok,message)=>{if(!ok)throw Error(message);};
 export async function prepareCurrentSelectedAdditive({root,selectedGrid,geographicRelease,features}) {
-  const selection=JSON.parse(await fs.readFile(path.join(root,'data/ownership-selection.json')));
+  root=await fs.realpath(root);
+  const selectionFile=path.join(root,'data/ownership-selection.json'),selectionStat=await fs.lstat(selectionFile);
+  need(selectionStat.isFile()&&await fs.realpath(selectionFile)===selectionFile,'Current selection must be ordinary');
+  const selection=JSON.parse(await fs.readFile(selectionFile));
   if(selection.additive_release===undefined)return null;
-  const definition=loadPackageInputs(root);
+  const definition=loadPackageInputs(root),inputInventory=[];
   async function read(pin){
     need(pin&&safePackagePath(pin.path)&&!pin.path.endsWith('/')&&containsPackagePath(definition.inputs,pin.path),'Undeclared current additive input');
     const file=path.join(root,pin.path),stat=await fs.lstat(file);
@@ -21,7 +24,9 @@ export async function prepareCurrentSelectedAdditive({root,selectedGrid,geograph
     const raw=await fs.readFile(file);
     need(raw.length===pin.bytes&&sha(raw)===pin.sha256,'Current additive whole checksum differs');
     if(pin.mode!==undefined)need(pin.mode===((stat.mode&0o111)?'100755':'100644'),'Current additive mode differs');
-    if(pin.git_blob_oid!==undefined)need(createHash('sha1').update('blob '+raw.length+'\0').update(raw).digest('hex')===pin.git_blob_oid,'Current additive Git object differs');
+    const oid=createHash('sha1').update('blob '+raw.length+'\0').update(raw).digest('hex');
+    if(pin.git_blob_oid!==undefined)need(oid===pin.git_blob_oid,'Current additive Git object differs');
+    inputInventory.push({...pin,mode:(stat.mode&0o111)?'100755':'100644',git_blob_oid:oid,bytes:raw.length,sha256:sha(raw),whole_body_consumed:true});
     return raw;
   }
   const sidecar=JSON.parse(await read(selection.additive_release));
@@ -58,7 +63,7 @@ export async function prepareCurrentSelectedAdditive({root,selectedGrid,geograph
   const effective=bindAdditiveLedgerFeatures(features,ledger,envelope,base);
   verifyAdditiveLedgerSelection(ledger,effective,patch);
   need(additiveReleaseFootprintDigest(base,effective)===envelope.effective_reference.footprints_sha256,'Current additive effective footprint differs');
-  return {additiveRelease:envelope,reference_release:envelope.effective_reference,
+  return {selection,input_inventory:inputInventory,additiveRelease:envelope,reference_release:envelope.effective_reference,
     async publish(destination){
       const target=path.resolve(destination);
       for(const asset of assets){

@@ -59,6 +59,7 @@ class BootstrapTests(unittest.TestCase):
         self.write('package-lock.json', '{"packages":{}}\n')
         self.write('scripts/assemble-selected-package.mjs', "import './child.mjs';\n")
         self.write('scripts/child.mjs', "import '../coordination/deep/consumer.mjs';\nexport async function deferred(){return import('@noble/hashes/sha2.js');}\n")
+        self.write('scripts/extract-package-output.py', "raise RuntimeError('extractor admission must not execute')\n")
         self.write('coordination/deep/consumer.mjs', "import fs from 'node:fs';\nexport const value=1;\n")
         self.git('init', '-q'); self.git('config', 'user.name', 'Bootstrap test'); self.git('config', 'user.email', 'bootstrap-test@example.invalid')
         self.git('add', '.'); self.git('commit', '-qm', 'Synthetic trusted base')
@@ -122,21 +123,11 @@ class BootstrapTests(unittest.TestCase):
         self.assertEqual(self.started[0][2]['GIT_NO_REPLACE_OBJECTS'],'1')
         self.assertNotIn('GITHUB_TOKEN',self.started[0][2])
         launch=self.started[0][2]
-        if self.env.get('SELECTED_PACKAGE_ENTRY_POINT','scripts/assemble-selected-package.mjs') == 'scripts/assemble-selected-package.mjs':
-            self.assertEqual(launch['GIT_NO_LAZY_FETCH'],'0')
-            self.assertEqual(launch['GIT_CONFIG_VALUE_0'],'true')
-            self.assertEqual(launch['GIT_CONFIG_VALUE_2'],'/dev/null')
-            self.assertEqual(launch['GIT_CONFIG_VALUE_3'],'')
-        else:
-            self.assertNotIn('GIT_CONFIG_COUNT',launch)
-            self.assertEqual(launch['GIT_NO_LAZY_FETCH'],'1')
+        self.assertNotIn('GIT_CONFIG_COUNT',launch)
+        self.assertEqual(launch['GIT_NO_LAZY_FETCH'],'1')
     def rejected(self, reason):
         with self.assertRaisesRegex(ValueError, reason): self.run_bootstrap()
         self.assertEqual(self.started, [])
-
-    def test_package_git_origin_rewrite_is_refused_before_node_launch(self):
-        self.git('config','url.https://foreign.invalid/.insteadOf','https://github.com/')
-        self.rejected('Package Git origin was redirected')
 
     def test_package_git_configuration_is_child_local_and_replaces_injected_options(self):
         before=(self.root/'.git/config').read_bytes()
@@ -225,6 +216,7 @@ class BootstrapTests(unittest.TestCase):
                 original=(self.root/helper).read_bytes();(self.root/helper).unlink()
                 self.rejected('Actual source member missing');self.write(helper,original)
     def test_proof_mode_rejects_untrusted_untracked_helper(self):
+        (self.root/'scripts/extract-package-output.py').unlink()
         self.write('scripts/run-selected-package-proof.mjs',"import './child.mjs';\n");self.trust_changes()
         self.write('scripts/selected-package-bootstrap.py','# untracked verifier\n')
         self.write('scripts/extract-package-output.py','# untracked extractor\n')
@@ -372,11 +364,7 @@ class BootstrapTests(unittest.TestCase):
         for args,kwargs in calls:
             env=kwargs['env']
             for key in ('GH_TOKEN','GITHUB_TOKEN','LD_LIBRARY_PATH'): self.assertNotIn(key,env)
-            if args[0] == ['git','remote','get-url','origin']:
-                self.assertEqual(env['GIT_CONFIG_COUNT'],'4')
-                self.assertNotIn('injected',env.values())
-            else:
-                for key in ('GIT_CONFIG_COUNT','GIT_CONFIG_KEY_0','GIT_CONFIG_VALUE_0'): self.assertNotIn(key,env)
+            for key in ('GIT_CONFIG_COUNT','GIT_CONFIG_KEY_0','GIT_CONFIG_VALUE_0'): self.assertNotIn(key,env)
             self.assertEqual(env['GIT_NO_REPLACE_OBJECTS'],'1'); self.assertEqual(env['GIT_CONFIG_GLOBAL'],'/dev/null')
     def test_authenticate_python_runtime_helper_when_identity_module_is_consumed(self):
         self.write('scripts/child.mjs', "import './package-output-artifact.mjs';\n")
@@ -386,11 +374,17 @@ class BootstrapTests(unittest.TestCase):
         self.write('scripts/package-python-runtime.py', "print('substituted executable helper')\n")
         self.rejected('Actual source differs')
 
+    def test_assembly_authenticates_actual_extractor_before_launch(self):
+        self.write('scripts/extract-package-output.py', '# substituted extractor\n')
+        self.rejected('Actual source differs')
+
     def test_accept_real_repository_static_closure(self):
         # Copy Node's independently parsed static graph, without evaluating modules.
         names=actual_static_graph(SOURCE_ROOT, 'scripts/assemble-selected-package.mjs')
         self.assertIn('scripts/assemble-selected-package.mjs',names)
-        for name in names+['scripts/package-python-runtime.py']: self.write(name,(SOURCE_ROOT/name).read_bytes())
+        self.assertNotIn('scripts/package-current-additive.mjs',names, 'Installed modules stay outside credential-bearing static startup')
+        self.assertNotIn('scripts/check-effective-geographic-regression.mjs',names, 'Assembly must not import the historical scientific reader')
+        for name in names+['scripts/package-python-runtime.py','scripts/extract-package-output.py']: self.write(name,(SOURCE_ROOT/name).read_bytes())
         self.write('package.json',(SOURCE_ROOT/'package.json').read_bytes()); self.trust_changes(); self.accepted()
         cli=(SOURCE_ROOT/'scripts/assemble-selected-package.mjs').read_text()
         self.assertLess(cli.index('delete process.env.GH_TOKEN;delete process.env.GITHUB_TOKEN;'),cli.index('result=await assembleSelectedPackage('))
@@ -562,37 +556,5 @@ class WorkerInstallerBootstrapTests(WorkerWorkflowBootstrapTests):
     step_name='Authenticate selected package installer inputs'
     def test_installer_preflight_is_explicit(self):
         self.assertIn('SELECTED_PACKAGE_PREFLIGHT: install',self.step)
-
-class GitPromisorTests(unittest.TestCase):
-    def test_actual_cold_checkout_reads_historical_tree_and_body_without_scanner(self):
-        with tempfile.TemporaryDirectory(prefix='worldatlas-promisor-') as directory:
-            root=Path(directory); server=root/'server'; server.mkdir(); candidate=root/'candidate'
-            env={k:v for k,v in os.environ.items() if not k.startswith('GIT_')}
-            env.update(GIT_CONFIG_NOSYSTEM='1',GIT_CONFIG_GLOBAL='/dev/null',GIT_NO_LAZY_FETCH='1')
-            def git(repo,*args,environment=env):
-                return subprocess.check_output([SYSTEM_GIT,'-C',str(repo),*args],env=environment,stderr=subprocess.PIPE).decode().strip()
-            git(server,'init','-q');git(server,'config','gc.auto','0');git(server,'config','maintenance.auto','false')
-            git(server,'config','uploadpack.allowFilter','true');git(server,'config','uploadpack.allowAnySHA1InWant','true')
-            (server/'selector.json').write_text('{"historical":true}\n')
-            git(server,'add','.');git(server,'-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-qm','historical source')
-            historical=git(server,'rev-parse','HEAD'); blob=git(server,'rev-parse','HEAD:selector.json')
-            git(server,'checkout','--orphan','current');git(server,'rm','-rf','.')
-            (server/'current.txt').write_text('current source\n')
-            git(server,'add','.');git(server,'-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-qm','current source')
-            subprocess.check_call([SYSTEM_GIT,'clone','--quiet','--no-local','--depth=1','--branch','current',server.as_uri(),str(candidate)],env=env)
-            for value in (historical,blob):
-                with self.assertRaises(subprocess.CalledProcessError):git(candidate,'cat-file','-e',value)
-            before=git(candidate,'rev-parse','HEAD')
-            # Only the fixture's server replaces the production constant. Git's
-            # real lazy-fetch path runs unchanged; no command results are mocked.
-            with patch.object(bootstrap,'PACKAGE_GIT_ORIGIN',server.as_uri()):
-                launch=bootstrap.package_git_environment(env)
-            self.assertEqual(git(candidate,'remote','get-url','origin',environment=launch),server.as_uri())
-            self.assertIn(blob,git(candidate,'ls-tree',historical,'--','selector.json',environment=launch))
-            self.assertEqual(git(candidate,'cat-file','blob',blob,environment=launch),'{"historical":true}')
-            self.assertEqual(git(candidate,'rev-parse','HEAD'),before)
-            self.assertEqual(launch['GIT_NO_REPLACE_OBJECTS'],'1')
-            self.assertEqual(launch['GIT_CONFIG_VALUE_2'],'/dev/null')
-            self.assertEqual(launch['GIT_CONFIG_VALUE_3'],'')
 
 if __name__=='__main__': unittest.main(verbosity=2)

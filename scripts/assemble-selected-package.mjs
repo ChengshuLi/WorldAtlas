@@ -1,20 +1,21 @@
 // Executed only after trusted selected-data classification proves this complete
 // programme is unchanged from the PR base. API credentials stay in trusted code;
-// subprocesses and the current scientific reader receive no token environment.
+// subprocesses and current-product consumption receive no token environment.
 import fs from 'node:fs';
 import fsp from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
+import {gunzipSync} from 'node:zlib';
+import {footprintHash} from './check-prepared.mjs';
 import {githubAPI, githubPages} from './issue-claim-contract.mjs';
 import {integrationTree} from './integration-profile.mjs';
 import {loadPackageInputs, readPackageInputs, containsPackagePath} from './package-inputs.mjs';
 import {inspectPackageRuntime, verifyPackageDependencies} from './package-build.mjs';
 import {committedPackageInputs, committedPackageProducer, PACKAGE_PRODUCER_WORKFLOWS, PACKAGE_PRODUCER_KIND, packageBuildConfiguration,
   validatePackageOutputManifest, admitPackageInputTransition, admitPackageOutputTransition, inertSelectedPackageInput, streamedPackageFile, installedPackageIdentity, installedPackageDifferences, declaredPackagePythonRoots} from './package-output-artifact.mjs';
-import {authenticateOriginalPackageOutput, readOriginalPackageInventory, issuePackageAssemblyExecution, preparePackageSelectedAdditive,
-  publishPackageSelectedAdditive, packageSelectedPublicationInventory, requirePackageAssemblyExecution}
+import {authenticateOriginalPackageOutput, readOriginalPackageInventory, requireOriginalPackageOutput, issuePackageAssemblyExecution, requirePackageAssemblyExecution}
   from '../coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs';
 
 const need=(ok,message)=>{if(!ok)throw Error(message);};
@@ -50,7 +51,7 @@ function sourceCompatible(before,current){
 
 // This is the bootstrap's actual trusted PR/combined-candidate base, not the
 // originating package head. Read only tree metadata for explicit retained leaves;
-// the existing private selected reader authenticates their typed consumption.
+// the current-product consumer records their actual whole-body consumption.
 function acceptedInputsFromTree(base,tree,current){
   const files=[];
   for(const name of current.definition.inputs){
@@ -175,6 +176,48 @@ function currentSource(){
     files:committedPackageInputs(root,definition),producer:committedPackageProducer(root)};
 }
 
+// Reuse the independently authenticated emitted base, including actual geometry.
+// The current ledger cannot supply its own supposedly independent target shape.
+export function readOriginalPackageGeography(original) {
+  const {root:originalRoot,manifest}=requireOriginalPackageOutput(original);
+  const output=new Map(manifest.output.files.map(pin=>[pin.path,pin]));
+  const read=name=>{
+    const pin=output.get(name);need(pin,'Original geography is absent from authenticated output');
+    const raw=fs.readFileSync(path.join(originalRoot,name));
+    need(raw.length===pin.bytes&&hash(raw)===pin.sha256,'Original geography output differs');return raw;
+  };
+  const atlas=JSON.parse(read('dist/client/atlas-geography.json'));
+  need(atlas.additiveRelease?.base_reference,'Original additive base descriptor missing');
+  const asset=pin=>{
+    need(/^additive-repairs\/[A-Za-z0-9_.-]+$/.test(pin?.path??''),'Original additive asset path differs');
+    const name='dist/client/'+pin.path;
+    need(same(output.get(name),{path:name,bytes:pin.bytes,sha256:pin.sha256}),'Original additive asset pin differs');
+    return read(name);
+  };
+  const selectedGrid={sha256:atlas.additiveRelease.base_manifest.sha256,
+    manifest:JSON.parse(asset(atlas.additiveRelease.base_manifest)),bounds:asset(atlas.additiveRelease.owner_roster)};
+  const parts=(names,kind)=>{
+    need(Array.isArray(names)&&names.length>0&&new Set(names).size===names.length,'Complete distinct original '+kind+' parts required');
+    return names.flatMap(name=>{
+      need(typeof name==='string'&&name.startsWith('geography/'+kind+'-')&&/^geography\/(?:catalog|part)-[0-9]+\.json\.gz$/.test(name),'Original geography part path differs');
+      const rows=JSON.parse(gunzipSync(read('dist/client/'+name)));
+      need(Array.isArray(rows)&&rows.length>0,'Nonempty original geography part required');return rows;
+    });
+  };
+  const catalog=parts(atlas.parts,'catalog'),geometries=new Map();
+  for(const row of parts(atlas.geometryParts,'part')){
+    need(typeof row.id==='string'&&!geometries.has(row.id)&&row.geometry,'Duplicate or missing original geometry');
+    geometries.set(row.id,row.geometry);
+  }
+  const ids=new Set(),features=catalog.map(feature=>{
+    need(typeof feature.id==='string'&&!ids.has(feature.id)&&feature.geometry===null&&geometries.has(feature.id),'Original geography identity join differs');
+    ids.add(feature.id);return {...feature,geometry:geometries.get(feature.id)};
+  });
+  const geographicRelease=atlas.additiveRelease.base_reference;
+  need(ids.size===geometries.size&&footprintHash(features)===geographicRelease.footprints_sha256,'Original complete base geometry differs');
+  return {atlas,selectedGrid,geographicRelease,features};
+}
+
 export async function assembleSelectedPackage({api,repo,expectedHead,originalRunId,trustedBase}){
   const started=performance.now(),current=currentSource();need(current.head===expectedHead,'Actual selected head changed');
   const found=await findOriginalPackage({api,repo,current,originalRunId,trustedBase});if(!found)return {assembled:false,reason:'No applicable retained original output in bounded recent-result search'};
@@ -203,7 +246,7 @@ export async function assembleSelectedPackage({api,repo,expectedHead,originalRun
         ({component:row.component,...(row.changed_components?{changed_components:row.changed_components}:{}),...(row.changed_files?{changed_files:row.changed_files.slice(0,10),changed_file_count:row.changed_files.length}: {})}))));
     };
     if(differences.length)recordAndRequireRuntime();
-    // Actual scientific imports run only after original custody and complete
+    // Current-product imports run only after original custody and complete
     // installed-byte admission, with the same no-site startup as measurement.
     const runtime=inspectPackageRuntime(root);
     if(runtime.errors.length){differences.push({component:'runtime.preflight',errors:runtime.errors});recordAndRequireRuntime();}
@@ -216,20 +259,20 @@ export async function assembleSelectedPackage({api,repo,expectedHead,originalRun
       original:manifest.configuration,current:packageBuildConfiguration()});
     recordAndRequireRuntime();
     const stage=path.join(scratch,'assembly');fs.mkdirSync(stage);
-    for(const name of ['.github/package-inputs.json','data/ownership-selection.json']){
-      fs.mkdirSync(path.dirname(path.join(stage,name)),{recursive:true});fs.copyFileSync(path.join(root,name),path.join(stage,name),fs.constants.COPYFILE_EXCL);
-    }
-    const atlasPath=path.join(originalRoot,'dist/client/atlas-geography.json');
-    const atlasPin=manifest.output.files.find(pin=>pin.path==='dist/client/atlas-geography.json');
-    // Authenticate the actual emitted atlas before consuming its selected base.
-    need(atlasPin&&fs.statSync(atlasPath).size===atlasPin.bytes,'Authenticated whole atlas size differs');
-    const atlas=JSON.parse(fs.readFileSync(atlasPath));need(atlas.additiveRelease?.base_reference,'Original additive base descriptor missing');
     const execution=issuePackageAssemblyExecution({original,source:root,stage,executingRoot:root,
       acceptedInputs:current.accepted_selected_inputs});
-    const publication=await preparePackageSelectedAdditive({root:stage,originalPackage:original,assemblyExecution:execution,
-      selectedGrid:{sha256:current.selection.sha256},geographicRelease:atlas.additiveRelease.base_reference});
-    need(publication,'Genuine current additive publication required');
-    const consumed=packageSelectedPublicationInventory(publication,{root:stage});
+    const {atlas,selectedGrid,geographicRelease,features}=readOriginalPackageGeography(original);
+    // The authenticated execution closure includes this literal deferred import.
+    // Installed bytes are admitted above; no dependency sees API credentials.
+    need(!process.env.GH_TOKEN&&!process.env.GITHUB_TOKEN,'Current additive consumption must be credential-free');
+    const {prepareCurrentSelectedAdditive}=await import('./package-current-additive.mjs');
+    const publication=await prepareCurrentSelectedAdditive({root,selectedGrid,geographicRelease,features});
+    need(publication&&same(publication.selection,current.selection),'Genuine same-source current additive publication required');
+    const consumed=publication.input_inventory.map(pin=>{
+      const row=current.files.find(row=>row.path===pin.path);
+      need(row&&row.mode===pin.mode&&row.oid===pin.git_blob_oid&&pin.whole_body_consumed===true,'Current additive input differs from actual source');
+      return {...pin,commit:current.head};
+    });
     const transition=admitPackageOutputTransition(manifest,current,{acceptedInputs:current.accepted_selected_inputs,typedInputs:consumed});
     const oldAssets=['base_manifest','ledger','owner_roster','patch'].map(role=>atlas.additiveRelease[role]);
     need(oldAssets.every(pin=>/^additive-repairs\/[A-Za-z0-9_.-]+$/.test(pin?.path??''))&&new Set(oldAssets.map(pin=>pin.path)).size===4,'Original four public additive assets required');
@@ -245,7 +288,7 @@ export async function assembleSelectedPackage({api,repo,expectedHead,originalRun
       'the actual current additive assets and atlas');
     fs.renameSync(path.join(originalRoot,'dist/client'),path.join(stage,'dist'));
     for(const pin of oldAssets)fs.unlinkSync(path.join(stage,'dist',pin.path));
-    publishPackageSelectedAdditive(publication,{root:stage});
+    await publication.publish(path.join(stage,'dist'));
     fs.writeFileSync(path.join(stage,'dist/atlas-geography.json'),atlasRaw);
     fs.renameSync(path.join(stage,'dist'),path.join(stage,'client'));
     fs.mkdirSync(path.join(stage,'dist'));fs.renameSync(path.join(stage,'client'),path.join(stage,'dist/client'));
