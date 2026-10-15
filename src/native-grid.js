@@ -214,7 +214,8 @@ export function nativeOnlyComponent(row, hashValue) {
   return true;
 }
 export function deriveSourceTargetNativeDelta({targets, sourceFeatures, coverageFeatures,
-  territorialExclusions = [], ownerRows, size, latitudes, rowStart, rowEnd, diagnosticRows, coverageFeatureGroups}) {
+  territorialExclusions = [], ownerRows, size, latitudes, rowStart, rowEnd, diagnosticRows, coverageFeatureGroups,
+  coverageCentres, coverageCentreGroups}) {
   require(Array.isArray(targets) && targets.length > 0, 'Missing source targets');
   const targetByOwner = new Map(), targetById = new Map();
   for (const target of targets) {
@@ -238,8 +239,20 @@ export function deriveSourceTargetNativeDelta({targets, sourceFeatures, coverage
   }
   for (const target of targets) require(sourceOwners.get(target.pixelIndex) === target.id,
     'Source target differs from complete source owner roster');
-  const validateCoverage = features => {
-    require(Array.isArray(features) && features.length > 0, 'Missing reviewed coverage');
+  const validateCentres = centres => {
+    require(Array.isArray(centres), 'Invalid reviewed centre coverage');const seen=new Set();
+    for(const point of centres){
+      exactKeys(point,['source_id','pixelIndex','y','x'],'Reviewed coverage centre');
+      const source=sourceIds.get(point.source_id),key=point.pixelIndex+':'+point.y+':'+point.x;
+      require(source&&targetByOwner.get(point.pixelIndex)?.id===source.id&&source.owner===point.pixelIndex
+        &&Number.isSafeInteger(point.y)&&point.y>=rowStart&&point.y<rowEnd
+        &&Number.isSafeInteger(point.x)&&point.x>=0&&point.x<size&&!seen.has(key),
+      'Coverage centre lacks exact original source membership');seen.add(key);
+    }
+  };
+  if(coverageCentres!==undefined)validateCentres(coverageCentres);
+  const validateCoverage = (features,centres) => {
+    require(Array.isArray(features) && (features.length > 0 || centres?.length > 0), 'Missing reviewed coverage');
     for (const feature of [...features, ...territorialExclusions])
       require(targetByOwner.get(feature.pixelIndex)?.id === feature.id, 'Foreign coverage or exclusion target');
     for (const feature of features) {
@@ -248,11 +261,16 @@ export function deriveSourceTargetNativeDelta({targets, sourceFeatures, coverage
         'Coverage lacks exact original source membership');
     }
   };
-  validateCoverage(coverageFeatures);
+  validateCoverage(coverageFeatures,coverageCentres);
   if (coverageFeatureGroups !== undefined) {
     require(Array.isArray(coverageFeatureGroups), 'Invalid additional coverage groups');
-    for (const features of coverageFeatureGroups) validateCoverage(features);
-  }
+    require(coverageCentreGroups===undefined||Array.isArray(coverageCentreGroups)
+      &&coverageCentreGroups.length===coverageFeatureGroups.length,'Invalid centre coverage groups');
+    for (const [i,features] of coverageFeatureGroups.entries()) {
+      const centres=coverageCentreGroups?.[i];if(centres!==undefined)validateCentres(centres);
+      validateCoverage(features,centres);
+    }
+  } else require(coverageCentreGroups===undefined,'Centre groups require coverage groups');
   const options = {size, latitudes, rowStart, rowEnd};
   const scan = (features, masks = false) => {
     if (!features.length) return {rows:new Map(),ties:[]};
@@ -280,7 +298,17 @@ export function deriveSourceTargetNativeDelta({targets, sourceFeatures, coverage
     const id=feature.source_id??feature.id;
     return {id,pixelIndex:sourceIds.get(id).index,geometry:feature.geometry};
   }),true));
-  let coverage=scanCoverage(coverageFeatures);
+  // Exact adopted centres add positive spans only. The unchanged decision below
+  // still requires the same active original member and every negative guard.
+  const withCentres=(coverage,centres=[])=>{
+    for(const point of centres){
+      const spans=coverage.rows.get(point.y)??[];
+      spans.push({start:point.x,end:point.x+1,owner:point.pixelIndex,source_id:point.source_id});
+      coverage.rows.set(point.y,spans);
+    }
+    return coverage;
+  };
+  let coverage=withCentres(scanCoverage(coverageFeatures),coverageCentres);
   const excluded=scan(territorialExclusions,true);
   const current = new Map();
   for (const row of ownerRows) {
@@ -379,8 +407,8 @@ export function deriveSourceTargetNativeDelta({targets, sourceFeatures, coverage
   // Drop the combined mask before sequential class scans; no cross-call state.
   coverage=null;
   result.coverage_groups=[];
-  for (const features of coverageFeatureGroups)
-    result.coverage_groups.push(evaluate(scanCoverage(features),undefined));
+  for (const [i,features] of coverageFeatureGroups.entries())
+    result.coverage_groups.push(evaluate(withCentres(scanCoverage(features),coverageCentreGroups?.[i]),undefined));
   return result;
 }
 
