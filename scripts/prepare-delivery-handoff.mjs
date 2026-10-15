@@ -13,6 +13,8 @@ import {validatePackageInputs} from './package-inputs.mjs';
 import {baselineFiles, validateEvidence} from './evidence-quality.mjs';
 import {composeRetainedLedgers} from '../coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs';
 import {normaliseRetainedRepairLedger, compareVersionedRepairLedgers, verifyCurrentRebindExecution, CURRENT_REBIND_CODE} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {deliveryAuthorityReader} from './delivery-handoff-advance.mjs';
+import {loadBaseSelection, requireCurrentArtifactBase, requireScientificArtifactSuccession} from './check-effective-geographic-regression.mjs';
 
 const need = (ok, message) => { if (!ok) throw Error(message); };
 const hex = (value, size) => typeof value === 'string' && new RegExp(`^[a-f0-9]{${size}}$`).test(value);
@@ -60,6 +62,62 @@ export function pinReader(root, {allowance} = {}) {
     pin(commit, name) { const p = descriptor(commit, name);
       if (!cache.has(p.git_blob_oid)) { budget.add(p); cache.set(p.git_blob_oid, git('cat-file', 'blob', p.git_blob_oid)); }
       return {...p, sha256: digest(cache.get(p.git_blob_oid))}; }};
+}
+
+// Full equality remains the ordinary/legacy path. A changed operational hook
+// requires the existing private current authority and the sidecar's exact archived
+// rebind base; no caller-supplied exemption, execution version or new receipt.
+function selectedBaseCorrespondence(selection, sidecar, {reader, selectorPin, snapshot} = {}) {
+  const base = {...selection}; delete base.additive_release;
+  if (same(sidecar.base_selection, base)) return snapshot;
+  if (!snapshot) {
+    need(reader && selectorPin?.path === 'data/ownership-selection.json'
+      && hex(selectorPin.commit, 40) && reader.budget, 'Changed complete original base differs; authenticated preparation inputs required');
+    const authority = deliveryAuthorityReader(reader.git('rev-parse', '--absolute-git-dir').toString().trim(), reader);
+    // The selector may be an earlier exact commit than the working HEAD.
+    authority.version = selectorPin.commit;
+    const admit = authority.admit.bind(authority);
+    let synchronized = reader.budget.snapshot().accounted_bytes;
+    const synchronize = () => {
+      const outer = reader.budget.snapshot();
+      need(authority.used >= synchronized && outer.accounted_bytes >= synchronized, 'Shared preparation authority accounting cannot reset');
+      authority.used += outer.accounted_bytes - synchronized;
+      let additional = authority.used - outer.accounted_bytes;
+      // Keep this live reader's runtime, metadata, decoded bodies and comparison
+      // carry in the same allowance through later composition/finalization reads.
+      while (additional > 0) { const bytes = Math.min(additional, 33554432); reader.budget.add({bytes}); additional -= bytes; }
+      synchronized = authority.used;
+    };
+    const phase = authority.phase.bind(authority);
+    authority.phase = () => {
+      // The existing selected-source constructor starts its own phase. Retain
+      // all shared carry already admitted before its ordinary phase accounting.
+      synchronize(); const carried = authority.used; phase();
+      authority.used = Math.max(carried, authority.used); synchronize();
+    };
+    authority.admit = (pin, decoded = 0) => { synchronize(); admit(pin, decoded); synchronize(); };
+    synchronize();
+    snapshot = loadBaseSelection(authority);
+  }
+  need(snapshot && same(snapshot.selection, selection), 'Current authority differs from exact selected input');
+  requireCurrentArtifactBase(snapshot, sidecar.base_selection);
+  const authority = snapshot.reader;
+  const whole = pin => {
+    need(pin && hex(pin.commit, 40) && safe(pin.path) && pin.mode === '100644'
+      && hex(pin.sha256, 64) && Number.isSafeInteger(pin.bytes) && pin.bytes > 0 && pin.bytes <= 33554432,
+    'Complete sidecar rebind custody pin required');
+    const actual = authority.descriptor(pin.path, pin.commit);
+    need(actual.mode === pin.mode && actual.bytes === pin.bytes
+      && actual.git_blob_oid === (pin.git_blob_oid ?? pin.blob), 'Sidecar rebind custody identity differs');
+    need(authority.used + 8 * pin.bytes <= authority.phaseLimit, 'Sidecar rebind metadata exceeds preparation allowance');
+    authority.used += 7 * pin.bytes; authority.admit(actual);
+    return authority.json(pin.path, {version: pin.commit, expected: pin.sha256});
+  };
+  const ledger = whole(sidecar.logical_asset_map?.ledger), certificate = whole(ledger.current_rebind);
+  need(certificate.version === 1 && certificate.kind === 'qualified-native-additive-current-bank-rebind-v1'
+    && same(certificate.base_selection, sidecar.base_selection), 'Sidecar differs from archived rebind base');
+  requireScientificArtifactSuccession(snapshot, certificate.base_selection, certificate.execution_commit);
+  return snapshot;
 }
 
 function ordinary(root, relative) {
@@ -207,9 +265,8 @@ export function prepareEvidence(config, reader) {
       need(hook && safe(hook.path), 'Existing selected additive delivery required');
       const sidecarPin = reader.pin(commit, hook.path);
       need(sidecarPin.bytes === hook.bytes && sidecarPin.sha256 === hook.sha256, 'Selected sidecar differs');
-      const sidecar = metadata(sidecarPin), base = {...selection}; delete base.additive_release;
-      need(sidecar.version === 2 && sidecar.kind === 'retained-native-additive-selection-v2'
-        && same(sidecar.base_selection, base), 'Selected base binding differs');
+      const sidecar = metadata(sidecarPin);
+      need(sidecar.version === 2 && sidecar.kind === 'retained-native-additive-selection-v2', 'Selected base binding differs');
       const registry = reader.pin(commit, sidecar.authority_registry.path);
       const ledger = reader.pin(commit, sidecar.logical_asset_map.ledger.path);
       for (const [actual, original] of [[registry, sidecar.authority_registry], [ledger, sidecar.logical_asset_map.ledger]]) {
@@ -217,12 +274,16 @@ export function prepareEvidence(config, reader) {
         need(actual.bytes === original.bytes && actual.sha256 === original.sha256
           && actual.git_blob_oid === (original.git_blob_oid ?? original.blob), 'Selected original role differs');
       }
-      return {selector: selectorPin, selection, registry, ledger, rows: metadata(ledger).rows};
+      return {selector: selectorPin, selection, sidecar, registry, ledger, rows: metadata(ledger).rows};
     };
     const before = selected(d.baseline_commit), after = selected(d.candidate_commit);
     const oldBase = {...before.selection}, newBase = {...after.selection};
     delete oldBase.additive_release; delete newBase.additive_release;
     need(same(oldBase, newBase) && Array.isArray(before.rows) && Array.isArray(after.rows), 'Delivery base/rows differ');
+    // Both complete base selections already match. Authenticate current candidate
+    // authority once and reuse that same live snapshot for the two retained joins.
+    const snapshot = selectedBaseCorrespondence(after.selection, after.sidecar, {reader, selectorPin: after.selector});
+    selectedBaseCorrespondence(after.selection, before.sidecar, {reader, selectorPin: after.selector, snapshot});
     const prior = new Map(before.rows.map(row => [row.component_id, row]));
     const current = new Map(after.rows.map(row => [row.component_id, row]));
     need(prior.size === before.rows.length && current.size === after.rows.length
@@ -652,9 +713,9 @@ export function composeAuthorities(config, reader) {
     need(hook && safe(hook.path), 'Existing cumulative selection required');
     const sidecarPin = reader.pin(config.selector.commit, hook.path);
     need(sidecarPin.bytes === hook.bytes && sidecarPin.sha256 === hook.sha256, 'Original selected sidecar differs');
-    const sidecar = reader.json(sidecarPin), base = {...selection}; delete base.additive_release;
-    need(sidecar.version === 2 && sidecar.kind === 'retained-native-additive-selection-v2'
-      && same(sidecar.base_selection, base), 'Original selected base differs');
+    const sidecar = reader.json(sidecarPin);
+    need(sidecar.version === 2 && sidecar.kind === 'retained-native-additive-selection-v2', 'Original selected base differs');
+    selectedBaseCorrespondence(selection, sidecar, {reader, selectorPin: config.selector});
     const assets = sidecar.logical_asset_map;
     need(assets && same(Object.keys(assets).sort(), ['base_manifest', 'ledger', 'owner_roster', 'patch']), 'Complete prior logical assets required');
     let inputBytes = [config.selector, sidecarPin, assets.base_manifest, sidecar.authority_registry, assets.ledger, assets.patch, sidecar.runtime_envelope,
@@ -908,10 +969,10 @@ export function packageProjection(config, reader, acceptedRegistry = null) {
 
 const orderedBytes = value => Buffer.from(JSON.stringify(value, null, 2) + '\n');
 
-export function finalizedSelection(originalRaw, sidecar, pin) {
+export function finalizedSelection(originalRaw, sidecar, pin, snapshot) {
   const selection = JSON.parse(originalRaw), base = {...selection}; delete base.additive_release;
-  need(selection.version === 1 && sidecar.version === 2 && sidecar.kind === 'retained-native-additive-selection-v2'
-    && same(sidecar.base_selection, base), 'Final sidecar must preserve the complete original base selection');
+  need(selection.version === 1 && sidecar.version === 2 && sidecar.kind === 'retained-native-additive-selection-v2', 'Final sidecar must preserve the complete original base selection');
+  selectedBaseCorrespondence(selection, sidecar, {snapshot});
   const reference = {path: pin.path, bytes: pin.bytes, sha256: pin.sha256};
   // The selected consumer compares some nested metadata with JSON.stringify.
   // Keep original key insertion order, including selected_geography, and leave
@@ -963,16 +1024,15 @@ export function finalizeDelivery(config, reader) {
   need(typeof config.new_prefix === 'string' && config.new_prefix.endsWith('/')
     && safe(config.new_prefix.slice(0, -1)), 'Exact owned output prefix required');
   const originalSelector = reader.read(config.selector), selection = JSON.parse(originalSelector);
-  let generatedSidecar, prior, acceptedRegistry = null;
+  let generatedSidecar, prior, snapshot, acceptedRegistry = null;
   if (selection.additive_release !== undefined || config.sidecar_output !== undefined) {
     const hook = selection.additive_release;
     need(hook && safe(hook.path), 'Original cumulative selector hook required');
     const priorPin = reader.pin(config.selector.commit, hook.path);
     need(priorPin.bytes === hook.bytes && priorPin.sha256 === hook.sha256, 'Original selected sidecar differs');
     prior = reader.json(priorPin);
-    const base = {...selection}; delete base.additive_release;
-    need(prior.version === 2 && prior.kind === 'retained-native-additive-selection-v2' && same(prior.base_selection, base),
-      'Original selected base differs');
+    need(prior.version === 2 && prior.kind === 'retained-native-additive-selection-v2', 'Original selected base differs');
+    snapshot = selectedBaseCorrespondence(selection, prior, {reader, selectorPin: config.selector});
     const pin = prior.authority_registry;
     need(pin && Number.isSafeInteger(pin.bytes) && pin.bytes > 0 && typeof reader.budget?.add === 'function',
       'Complete accepted registry pin and shared preparation budget required');
@@ -1025,7 +1085,7 @@ export function finalizeDelivery(config, reader) {
       && (declared.decoded_bytes ?? declared.bytes) === (pin.decoded_bytes ?? pin.bytes)
       && (declared.decoded_sha256 ?? declared.sha256) === (pin.decoded_sha256 ?? pin.sha256), 'Final envelope asset descriptor differs: ' + role);
   }
-  const selector = finalizedSelection(originalSelector, sidecar, config.sidecar);
+  const selector = finalizedSelection(originalSelector, sidecar, config.sidecar, snapshot);
   const outputs = packageProjection({...config, outer_roles: [...Object.values(assets), sidecar.runtime_envelope,
     ...(!generatedSidecar ? [config.sidecar] : [])]}, reader, acceptedRegistry);
   const projection = JSON.parse(outputs['package-roles.json']);
@@ -1221,9 +1281,9 @@ export async function sourceEvidence(config, reader) {
   need(hook && same(Object.keys(hook).sort(), ['bytes', 'path', 'sha256']), 'Existing cumulative selection required');
   const sidecarPin = reader.pin(selectorPin.commit, hook.path);
   need(sidecarPin.bytes === hook.bytes && sidecarPin.sha256 === hook.sha256, 'Original selected sidecar differs');
-  const sidecar = reader.json(sidecarPin), base = {...selection}; delete base.additive_release;
-  need(sidecar.version === 2 && sidecar.kind === 'retained-native-additive-selection-v2'
-    && same(sidecar.base_selection, base), 'Original selected base differs');
+  const sidecar = reader.json(sidecarPin);
+  need(sidecar.version === 2 && sidecar.kind === 'retained-native-additive-selection-v2', 'Original selected base differs');
+  selectedBaseCorrespondence(selection, sidecar, {reader, selectorPin});
   const assets = sidecar.logical_asset_map;
   need(assets && same(Object.keys(assets).sort(), ['base_manifest', 'ledger', 'owner_roster', 'patch']),
     'Complete prior logical assets required');
