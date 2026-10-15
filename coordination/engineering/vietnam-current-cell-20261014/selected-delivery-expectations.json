@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "selected_ledger_sha256": "7544bbab8f7b79afb930da9ed821cc6130f507dbe9af65cc9953417e5ba77145",
-  "cumulative_native_cells": 272335,
+  "selected_ledger_sha256": "a38d173f97d3d3ff09d1da821d7462f1e0ea53969e069968e2c84fc1da00cb9e",
+  "cumulative_native_cells": 273006,
   "cohorts": [
     {
       "original_batch_id": "retained-authority-scope:00b82ea8f3dc6686a6c8a685016defe4f5576fb4516012ea14c9ab17ac7fc8b9",
@@ -203,6 +203,20 @@
           "target_id": "gb:SLB:ADM1:17018030B21058058503942",
           "disposition": "assigned",
           "geometry_sha256": "eee3c0e6060a0b62276395a9c0d752fad4c06ba6c5d244eb575b41c1164d9060"
+        }
+      ]
+    },
+    {
+      "original_batch_id": "retained-authority-scope:1db9511372f93e60824bce841c55d84171bbd837411e6b5a5347fa64adf8dd8e",
+      "component_ids": [
+        "source-target:4bc01423e8e7c1bf11ec83feb1c2083d7749336b263f98f9043dfaea8f57b5be"
+      ],
+      "members": [
+        {
+          "component_id": "source-target:4bc01423e8e7c1bf11ec83feb1c2083d7749336b263f98f9043dfaea8f57b5be",
+          "target_id": "gb:VNM:ADM2:81297802B5756602808944",
+          "disposition": "assigned",
+          "native_rows_sha256": "28111578b07b262d00b6284fe14fec43a1488a129aab8453b251340042c984eb"
         }
       ]
     },
