@@ -1,0 +1,700 @@
+{
+  "version": 1,
+  "reviewer": "/root/delivery11622_config_review",
+  "disposition": "PASS WITH LIMITS",
+  "config": {
+    "path": "following-country-delivery-11622/compose-original-quartets.json",
+    "bytes": 9205,
+    "sha256": "aa0f60232083ba83c81cf9dca2594e8c286c6fd6f21c66459abd71697208afa3"
+  },
+  "checks": [
+    {
+      "check": "actual accepted b73 selector is config selector",
+      "pass": true
+    },
+    {
+      "check": "config shape no aliases/manual roles",
+      "pass": true
+    },
+    {
+      "check": "exact five original groups",
+      "pass": true
+    },
+    {
+      "check": "idn-maluku654 exact original quartet slots",
+      "pass": true
+    },
+    {
+      "check": "idn-maluku654 rule_preimage original locator/all supplied fields",
+      "pass": true
+    },
+    {
+      "check": "idn-maluku654 rule_preimage complete pins",
+      "pass": true
+    },
+    {
+      "check": "idn-maluku654 rule_preimage Git path/mode/OID",
+      "pass": true
+    },
+    {
+      "check": "idn-maluku654 rule_preimage full byte/SHA pin",
+      "pass": true
+    },
+    {
+      "check": "idn-maluku654 source_authority original locator/all supplied fields",
+      "pass": true
+    },
+    {
+      "check": "idn-maluku654 source_authority complete pins",
+      "pass": true
+    },
+    {
+      "check": "idn-maluku654 source_authority Git path/mode/OID",
+      "pass": true
+    },
+    {
+      "check": "idn-maluku654 source_authority full byte/SHA pin",
+      "pass": true
+    },
+    {
+      "check": "idn-maluku654 ledger original locator/all supplied fields",
+      "pass": true
+    },
+    {
+      "check": "idn-maluku654 ledger complete pins",
+      "pass": true
+    },
+    {
+      "check": "idn-maluku654 ledger Git path/mode/OID",
+      "pass": true
+    },
+    {
+      "check": "idn-maluku654 ledger full byte/SHA pin",
+      "pass": true
+    },
+    {
+      "check": "idn-maluku654 native_patch original locator/all supplied fields",
+      "pass": true
+    },
+    {
+      "check": "idn-maluku654 native_patch complete pins",
+      "pass": true
+    },
+    {
+      "check": "idn-maluku654 native_patch Git path/mode/OID",
+      "pass": true
+    },
+    {
+      "check": "idn-maluku654 native_patch full byte/SHA pin",
+      "pass": true
+    },
+    {
+      "check": "idn-maluku654 complete constructor rows",
+      "pass": true
+    },
+    {
+      "check": "vnm-clean309 exact original quartet slots",
+      "pass": true
+    },
+    {
+      "check": "vnm-clean309 rule_preimage original locator/all supplied fields",
+      "pass": true
+    },
+    {
+      "check": "vnm-clean309 rule_preimage complete pins",
+      "pass": true
+    },
+    {
+      "check": "vnm-clean309 rule_preimage Git path/mode/OID",
+      "pass": true
+    },
+    {
+      "check": "vnm-clean309 rule_preimage full byte/SHA pin",
+      "pass": true
+    },
+    {
+      "check": "vnm-clean309 source_authority original locator/all supplied fields",
+      "pass": true
+    },
+    {
+      "check": "vnm-clean309 source_authority complete pins",
+      "pass": true
+    },
+    {
+      "check": "vnm-clean309 source_authority Git path/mode/OID",
+      "pass": true
+    },
+    {
+      "check": "vnm-clean309 source_authority full byte/SHA pin",
+      "pass": true
+    },
+    {
+      "check": "vnm-clean309 ledger original locator/all supplied fields",
+      "pass": true
+    },
+    {
+      "check": "vnm-clean309 ledger complete pins",
+      "pass": true
+    },
+    {
+      "check": "vnm-clean309 ledger Git path/mode/OID",
+      "pass": true
+    },
+    {
+      "check": "vnm-clean309 ledger full byte/SHA pin",
+      "pass": true
+    },
+    {
+      "check": "vnm-clean309 native_patch original locator/all supplied fields",
+      "pass": true
+    },
+    {
+      "check": "vnm-clean309 native_patch complete pins",
+      "pass": true
+    },
+    {
+      "check": "vnm-clean309 native_patch Git path/mode/OID",
+      "pass": true
+    },
+    {
+      "check": "vnm-clean309 native_patch full byte/SHA pin",
+      "pass": true
+    },
+    {
+      "check": "vnm-clean309 complete constructor rows",
+      "pass": true
+    },
+    {
+      "check": "vnm-botrach41 exact original quartet slots",
+      "pass": true
+    },
+    {
+      "check": "vnm-botrach41 rule_preimage original locator/all supplied fields",
+      "pass": true
+    },
+    {
+      "check": "vnm-botrach41 rule_preimage complete pins",
+      "pass": true
+    },
+    {
+      "check": "vnm-botrach41 rule_preimage Git path/mode/OID",
+      "pass": true
+    },
+    {
+      "check": "vnm-botrach41 rule_preimage full byte/SHA pin",
+      "pass": true
+    },
+    {
+      "check": "vnm-botrach41 source_authority original locator/all supplied fields",
+      "pass": true
+    },
+    {
+      "check": "vnm-botrach41 source_authority complete pins",
+      "pass": true
+    },
+    {
+      "check": "vnm-botrach41 source_authority Git path/mode/OID",
+      "pass": true
+    },
+    {
+      "check": "vnm-botrach41 source_authority full byte/SHA pin",
+      "pass": true
+    },
+    {
+      "check": "vnm-botrach41 ledger original locator/all supplied fields",
+      "pass": true
+    },
+    {
+      "check": "vnm-botrach41 ledger complete pins",
+      "pass": true
+    },
+    {
+      "check": "vnm-botrach41 ledger Git path/mode/OID",
+      "pass": true
+    },
+    {
+      "check": "vnm-botrach41 ledger full byte/SHA pin",
+      "pass": true
+    },
+    {
+      "check": "vnm-botrach41 native_patch original locator/all supplied fields",
+      "pass": true
+    },
+    {
+      "check": "vnm-botrach41 native_patch complete pins",
+      "pass": true
+    },
+    {
+      "check": "vnm-botrach41 native_patch Git path/mode/OID",
+      "pass": true
+    },
+    {
+      "check": "vnm-botrach41 native_patch full byte/SHA pin",
+      "pass": true
+    },
+    {
+      "check": "vnm-botrach41 complete constructor rows",
+      "pass": true
+    },
+    {
+      "check": "vnm-anphu1 exact original quartet slots",
+      "pass": true
+    },
+    {
+      "check": "vnm-anphu1 rule_preimage original locator/all supplied fields",
+      "pass": true
+    },
+    {
+      "check": "vnm-anphu1 rule_preimage complete pins",
+      "pass": true
+    },
+    {
+      "check": "vnm-anphu1 rule_preimage Git path/mode/OID",
+      "pass": true
+    },
+    {
+      "check": "vnm-anphu1 rule_preimage full byte/SHA pin",
+      "pass": true
+    },
+    {
+      "check": "vnm-anphu1 source_authority original locator/all supplied fields",
+      "pass": true
+    },
+    {
+      "check": "vnm-anphu1 source_authority complete pins",
+      "pass": true
+    },
+    {
+      "check": "vnm-anphu1 source_authority Git path/mode/OID",
+      "pass": true
+    },
+    {
+      "check": "vnm-anphu1 source_authority full byte/SHA pin",
+      "pass": true
+    },
+    {
+      "check": "vnm-anphu1 ledger original locator/all supplied fields",
+      "pass": true
+    },
+    {
+      "check": "vnm-anphu1 ledger complete pins",
+      "pass": true
+    },
+    {
+      "check": "vnm-anphu1 ledger Git path/mode/OID",
+      "pass": true
+    },
+    {
+      "check": "vnm-anphu1 ledger full byte/SHA pin",
+      "pass": true
+    },
+    {
+      "check": "vnm-anphu1 native_patch original locator/all supplied fields",
+      "pass": true
+    },
+    {
+      "check": "vnm-anphu1 native_patch complete pins",
+      "pass": true
+    },
+    {
+      "check": "vnm-anphu1 native_patch Git path/mode/OID",
+      "pass": true
+    },
+    {
+      "check": "vnm-anphu1 native_patch full byte/SHA pin",
+      "pass": true
+    },
+    {
+      "check": "vnm-anphu1 complete constructor rows",
+      "pass": true
+    },
+    {
+      "check": "idn-raja10617 exact original quartet slots",
+      "pass": true
+    },
+    {
+      "check": "idn-raja10617 rule_preimage original locator/all supplied fields",
+      "pass": true
+    },
+    {
+      "check": "idn-raja10617 rule_preimage complete pins",
+      "pass": true
+    },
+    {
+      "check": "idn-raja10617 rule_preimage Git path/mode/OID",
+      "pass": true
+    },
+    {
+      "check": "idn-raja10617 rule_preimage full byte/SHA pin",
+      "pass": true
+    },
+    {
+      "check": "idn-raja10617 source_authority original locator/all supplied fields",
+      "pass": true
+    },
+    {
+      "check": "idn-raja10617 source_authority complete pins",
+      "pass": true
+    },
+    {
+      "check": "idn-raja10617 source_authority Git path/mode/OID",
+      "pass": true
+    },
+    {
+      "check": "idn-raja10617 source_authority full byte/SHA pin",
+      "pass": true
+    },
+    {
+      "check": "idn-raja10617 ledger original locator/all supplied fields",
+      "pass": true
+    },
+    {
+      "check": "idn-raja10617 ledger complete pins",
+      "pass": true
+    },
+    {
+      "check": "idn-raja10617 ledger Git path/mode/OID",
+      "pass": true
+    },
+    {
+      "check": "idn-raja10617 ledger full byte/SHA pin",
+      "pass": true
+    },
+    {
+      "check": "idn-raja10617 native_patch original locator/all supplied fields",
+      "pass": true
+    },
+    {
+      "check": "idn-raja10617 native_patch complete pins",
+      "pass": true
+    },
+    {
+      "check": "idn-raja10617 native_patch Git path/mode/OID",
+      "pass": true
+    },
+    {
+      "check": "idn-raja10617 native_patch full byte/SHA pin",
+      "pass": true
+    },
+    {
+      "check": "idn-raja10617 complete constructor rows",
+      "pass": true
+    },
+    {
+      "check": "26 original components/11622 request retained",
+      "pass": true
+    },
+    {
+      "check": "actual accepted selector Git path/mode/OID",
+      "pass": true
+    },
+    {
+      "check": "actual accepted selector full byte/SHA pin",
+      "pass": true
+    },
+    {
+      "check": "reviewed f1 selector Git path/mode/OID",
+      "pass": true
+    },
+    {
+      "check": "reviewed f1 selector full byte/SHA pin",
+      "pass": true
+    },
+    {
+      "check": "accepted selector identical reviewed f1 postimage",
+      "pass": true
+    },
+    {
+      "check": "actual accepted package Git path/mode/OID",
+      "pass": true
+    },
+    {
+      "check": "actual accepted package full byte/SHA pin",
+      "pass": true
+    },
+    {
+      "check": "reviewed f1 package Git path/mode/OID",
+      "pass": true
+    },
+    {
+      "check": "reviewed f1 package full byte/SHA pin",
+      "pass": true
+    },
+    {
+      "check": "accepted package identical reviewed f1 postimage",
+      "pass": true
+    },
+    {
+      "check": "actual accepted sidecar Git path/mode/OID",
+      "pass": true
+    },
+    {
+      "check": "actual accepted sidecar full byte/SHA pin",
+      "pass": true
+    },
+    {
+      "check": "reviewed f1 sidecar Git path/mode/OID",
+      "pass": true
+    },
+    {
+      "check": "reviewed f1 sidecar full byte/SHA pin",
+      "pass": true
+    },
+    {
+      "check": "accepted sidecar identical reviewed f1 postimage",
+      "pass": true
+    },
+    {
+      "check": "literal sidecar value",
+      "pass": true
+    },
+    {
+      "check": "selector sidecar pin",
+      "pass": true
+    },
+    {
+      "check": "inherited registry Git path/mode/OID",
+      "pass": true
+    },
+    {
+      "check": "inherited registry full byte/SHA pin",
+      "pass": true
+    },
+    {
+      "check": "accepted b73 registry postimage",
+      "pass": true
+    },
+    {
+      "check": "resource inventory authenticated via exact sidecar registry",
+      "pass": true
+    },
+    {
+      "check": "inherited ledger Git path/mode/OID",
+      "pass": true
+    },
+    {
+      "check": "inherited ledger full byte/SHA pin",
+      "pass": true
+    },
+    {
+      "check": "accepted b73 ledger postimage",
+      "pass": true
+    },
+    {
+      "check": "resource inventory authenticated via exact sidecar ledger",
+      "pass": true
+    },
+    {
+      "check": "inherited patch Git path/mode/OID",
+      "pass": true
+    },
+    {
+      "check": "inherited patch full byte/SHA pin",
+      "pass": true
+    },
+    {
+      "check": "accepted b73 patch postimage",
+      "pass": true
+    },
+    {
+      "check": "resource inventory authenticated via exact sidecar patch",
+      "pass": true
+    },
+    {
+      "check": "inherited envelope Git path/mode/OID",
+      "pass": true
+    },
+    {
+      "check": "inherited envelope full byte/SHA pin",
+      "pass": true
+    },
+    {
+      "check": "accepted b73 envelope postimage",
+      "pass": true
+    },
+    {
+      "check": "resource inventory authenticated via exact sidecar envelope",
+      "pass": true
+    },
+    {
+      "check": "prior 123-check review passed and b73 bound",
+      "pass": true
+    },
+    {
+      "check": "accepted code coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs Git path/mode/OID",
+      "pass": true
+    },
+    {
+      "check": "accepted code coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs full byte/SHA pin",
+      "pass": true
+    },
+    {
+      "check": "executing cache coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs exact accepted bytes",
+      "pass": true
+    },
+    {
+      "check": "accepted code coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs Git path/mode/OID",
+      "pass": true
+    },
+    {
+      "check": "accepted code coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs full byte/SHA pin",
+      "pass": true
+    },
+    {
+      "check": "executing cache coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs exact accepted bytes",
+      "pass": true
+    },
+    {
+      "check": "accepted code package.json Git path/mode/OID",
+      "pass": true
+    },
+    {
+      "check": "accepted code package.json full byte/SHA pin",
+      "pass": true
+    },
+    {
+      "check": "executing cache package.json exact accepted bytes",
+      "pass": true
+    },
+    {
+      "check": "accepted code scripts/check-effective-geographic-regression.mjs Git path/mode/OID",
+      "pass": true
+    },
+    {
+      "check": "accepted code scripts/check-effective-geographic-regression.mjs full byte/SHA pin",
+      "pass": true
+    },
+    {
+      "check": "executing cache scripts/check-effective-geographic-regression.mjs exact accepted bytes",
+      "pass": true
+    },
+    {
+      "check": "accepted code scripts/delivery-handoff-advance.mjs Git path/mode/OID",
+      "pass": true
+    },
+    {
+      "check": "accepted code scripts/delivery-handoff-advance.mjs full byte/SHA pin",
+      "pass": true
+    },
+    {
+      "check": "executing cache scripts/delivery-handoff-advance.mjs exact accepted bytes",
+      "pass": true
+    },
+    {
+      "check": "accepted code scripts/evidence-quality.mjs Git path/mode/OID",
+      "pass": true
+    },
+    {
+      "check": "accepted code scripts/evidence-quality.mjs full byte/SHA pin",
+      "pass": true
+    },
+    {
+      "check": "executing cache scripts/evidence-quality.mjs exact accepted bytes",
+      "pass": true
+    },
+    {
+      "check": "accepted code scripts/geography-prefetch.mjs Git path/mode/OID",
+      "pass": true
+    },
+    {
+      "check": "accepted code scripts/geography-prefetch.mjs full byte/SHA pin",
+      "pass": true
+    },
+    {
+      "check": "executing cache scripts/geography-prefetch.mjs exact accepted bytes",
+      "pass": true
+    },
+    {
+      "check": "accepted code scripts/native-ownership/native-preparation-guards.mjs Git path/mode/OID",
+      "pass": true
+    },
+    {
+      "check": "accepted code scripts/native-ownership/native-preparation-guards.mjs full byte/SHA pin",
+      "pass": true
+    },
+    {
+      "check": "executing cache scripts/native-ownership/native-preparation-guards.mjs exact accepted bytes",
+      "pass": true
+    },
+    {
+      "check": "accepted code scripts/package-inputs.mjs Git path/mode/OID",
+      "pass": true
+    },
+    {
+      "check": "accepted code scripts/package-inputs.mjs full byte/SHA pin",
+      "pass": true
+    },
+    {
+      "check": "executing cache scripts/package-inputs.mjs exact accepted bytes",
+      "pass": true
+    },
+    {
+      "check": "accepted code scripts/prepare-delivery-handoff.mjs Git path/mode/OID",
+      "pass": true
+    },
+    {
+      "check": "accepted code scripts/prepare-delivery-handoff.mjs full byte/SHA pin",
+      "pass": true
+    },
+    {
+      "check": "executing cache scripts/prepare-delivery-handoff.mjs exact accepted bytes",
+      "pass": true
+    },
+    {
+      "check": "accepted code src/native-grid.js Git path/mode/OID",
+      "pass": true
+    },
+    {
+      "check": "accepted code src/native-grid.js full byte/SHA pin",
+      "pass": true
+    },
+    {
+      "check": "executing cache src/native-grid.js exact accepted bytes",
+      "pass": true
+    },
+    {
+      "check": "accepted code src/ownership-codec.js Git path/mode/OID",
+      "pass": true
+    },
+    {
+      "check": "accepted code src/ownership-codec.js full byte/SHA pin",
+      "pass": true
+    },
+    {
+      "check": "executing cache src/ownership-codec.js exact accepted bytes",
+      "pass": true
+    },
+    {
+      "check": "accepted closure12files/532527 <=1MiB",
+      "pass": true
+    },
+    {
+      "check": "actual config9205 <=32768",
+      "pass": true
+    },
+    {
+      "check": "complete compose bound434772408 arithmetic retained",
+      "pass": true
+    },
+    {
+      "check": "512MiB config request covers complete bound",
+      "pass": true
+    }
+  ],
+  "check_count": 168,
+  "failures": [],
+  "summary": {
+    "accepted_predecessor_cells": 71339,
+    "groups": 5,
+    "components": 26,
+    "incoming_cells": 11622,
+    "conditional_total": 82961,
+    "code_bytes": 532527,
+    "prospective_compose_bytes": 434772408
+  },
+  "limits": [
+    "Read-only metadata and exact Git/body comparisons; no source/native/scientific operator, fetch, Git mutation or compose execution.",
+    "Existing disjointness/constructor review reused; actual composition, current-owner-zero, fresh admission and final acceptance remain unrun.",
+    "Resource plan retains historic conditional f1 labels; exact b73 selector/package/sidecar and inherited compose postimages were independently authenticated identical here."
+  ]
+}

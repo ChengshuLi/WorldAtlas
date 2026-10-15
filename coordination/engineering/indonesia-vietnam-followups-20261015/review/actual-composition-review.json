@@ -1,0 +1,854 @@
+{
+  "version": 1,
+  "reviewer": "/root/delivery11622_config_review",
+  "disposition": "PASS WITH LIMITS",
+  "review_kind": "actual-stock-composition-original-input-and-inherited-preservation",
+  "groups": [
+    {
+      "id": "idn-maluku654",
+      "components": 2,
+      "cells": 654
+    },
+    {
+      "id": "vnm-clean309",
+      "components": 21,
+      "cells": 309
+    },
+    {
+      "id": "vnm-botrach41",
+      "components": 1,
+      "cells": 41
+    },
+    {
+      "id": "vnm-anphu1",
+      "components": 1,
+      "cells": 1
+    },
+    {
+      "id": "idn-raja10617",
+      "components": 1,
+      "cells": 10617
+    }
+  ],
+  "summary": {
+    "accepted_predecessor_cells": 71339,
+    "incoming_cells": 11622,
+    "actual_cells": 82961,
+    "inherited_authorities": 62,
+    "actual_authorities": 67,
+    "inherited_components": 270,
+    "incoming_components": 26,
+    "actual_components": 296
+  },
+  "products": {
+    "authority-registry.json": {
+      "bytes": 64529,
+      "sha256": "e5efb440975ad4c8dcda9d2449b8a88d59a638ce9fc7ed3344be17df8364aafc"
+    },
+    "patch.json": {
+      "bytes": 860023,
+      "sha256": "2f2c91e510626c6bfc86f82f502e2386f16addce67522b6e07bbf6c76058a509"
+    },
+    "runtime-envelope.json": {
+      "bytes": 1396,
+      "sha256": "c6345e67b2d7dc7ebb1558d0032354f848a83f537b26ff20889267220bbbfd3a"
+    },
+    "selected-ledger.json": {
+      "bytes": 2726316,
+      "sha256": "ef1f18f7a595709c58316febf9dbc65626d67ce869307145b1008cc89cd17690"
+    }
+  },
+  "checks": [
+    {
+      "check": "coordination/engineering/myanmar-vietnam-current-cells-20261015/composition/authority-registry.json exact full retained body",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/myanmar-vietnam-current-cells-20261015/composition/selected-ledger.json exact full retained body",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/myanmar-vietnam-current-cells-20261015/composition/patch.json exact full retained body",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/myanmar-vietnam-current-cells-20261015/composition/runtime-envelope.json exact full retained body",
+      "pass": true
+    },
+    {
+      "check": "actual preparation exact reviewed config SHA",
+      "pass": true
+    },
+    {
+      "check": "preparation authority-registry.json bytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "preparation patch.json bytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "preparation runtime-envelope.json bytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "preparation selected-ledger.json bytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "unique296 components",
+      "pass": true
+    },
+    {
+      "check": "all270 inherited rows literal identical including native_rows",
+      "pass": true
+    },
+    {
+      "check": "inherited270 rows retain relative insertion order",
+      "pass": true
+    },
+    {
+      "check": "all62 inherited registry entries literal identical",
+      "pass": true
+    },
+    {
+      "check": "all other ledger metadata except registry hash/scope/rows literal preserved",
+      "pass": true
+    },
+    {
+      "check": "current_rebind literal preserved",
+      "pass": true
+    },
+    {
+      "check": "parent_inventory literal preserved",
+      "pass": true
+    },
+    {
+      "check": "current_targets literal preserved",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/indonesia-maluku-followup-20261015/maluku654/authority/constructor-result.json exact full retained body",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/indonesia-maluku-followup-20261015/maluku654/candidate-native-patch.json exact full retained body",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/indonesia-maluku-followup-20261015/maluku654/authority/original-rule-preimage.json exact full retained body",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/indonesia-maluku-followup-20261015/maluku654/authority/authority-binding.json exact full retained body",
+      "pass": true
+    },
+    {
+      "check": "idn-maluku654 original patch no duplicate native tuples",
+      "pass": true
+    },
+    {
+      "check": "idn-maluku654 original patch no multiple owners per coordinate",
+      "pass": true
+    },
+    {
+      "check": "idn-maluku654 one original authority without aliases",
+      "pass": true
+    },
+    {
+      "check": "idn-maluku654 original rule SHA unchanged",
+      "pass": true
+    },
+    {
+      "check": "idn-maluku654 source-target:09a7b8ecd55a542d49ade7252d8dc245ef797948c178a49eb93173de390da965 complete original row plus ordinary authority/rule",
+      "pass": true
+    },
+    {
+      "check": "source-target:09a7b8ecd55a542d49ade7252d8dc245ef797948c178a49eb93173de390da965 no duplicate native tuples",
+      "pass": true
+    },
+    {
+      "check": "source-target:09a7b8ecd55a542d49ade7252d8dc245ef797948c178a49eb93173de390da965 no multiple owners per coordinate",
+      "pass": true
+    },
+    {
+      "check": "source-target:09a7b8ecd55a542d49ade7252d8dc245ef797948c178a49eb93173de390da965 declared native_cells",
+      "pass": true
+    },
+    {
+      "check": "idn-maluku654 source-target:4a34e6b70c0d6b974a490a19b30954eb96ce595a7237216dd1c987e2ff94fe1e complete original row plus ordinary authority/rule",
+      "pass": true
+    },
+    {
+      "check": "source-target:4a34e6b70c0d6b974a490a19b30954eb96ce595a7237216dd1c987e2ff94fe1e no duplicate native tuples",
+      "pass": true
+    },
+    {
+      "check": "source-target:4a34e6b70c0d6b974a490a19b30954eb96ce595a7237216dd1c987e2ff94fe1e no multiple owners per coordinate",
+      "pass": true
+    },
+    {
+      "check": "source-target:4a34e6b70c0d6b974a490a19b30954eb96ce595a7237216dd1c987e2ff94fe1e declared native_cells",
+      "pass": true
+    },
+    {
+      "check": "idn-maluku654 actual row union exactly full original candidate",
+      "pass": true
+    },
+    {
+      "check": "idn-maluku654 exact cell request",
+      "pass": true
+    },
+    {
+      "check": "idn-maluku654 incoming groups spatially disjoint",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/clean309/authority/constructor-result.json exact full retained body",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/clean309/native-patch.json exact full retained body",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/clean309/authority/original-rule-preimage.json exact full retained body",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/clean309/authority/authority-binding.json exact full retained body",
+      "pass": true
+    },
+    {
+      "check": "vnm-clean309 original patch no duplicate native tuples",
+      "pass": true
+    },
+    {
+      "check": "vnm-clean309 original patch no multiple owners per coordinate",
+      "pass": true
+    },
+    {
+      "check": "vnm-clean309 one original authority without aliases",
+      "pass": true
+    },
+    {
+      "check": "vnm-clean309 original rule SHA unchanged",
+      "pass": true
+    },
+    {
+      "check": "vnm-clean309 source-target:084682b4840b680c94ac8da43158832ca997db263ce737e519ff48384541af6c complete original row plus ordinary authority/rule",
+      "pass": true
+    },
+    {
+      "check": "source-target:084682b4840b680c94ac8da43158832ca997db263ce737e519ff48384541af6c no duplicate native tuples",
+      "pass": true
+    },
+    {
+      "check": "source-target:084682b4840b680c94ac8da43158832ca997db263ce737e519ff48384541af6c no multiple owners per coordinate",
+      "pass": true
+    },
+    {
+      "check": "source-target:084682b4840b680c94ac8da43158832ca997db263ce737e519ff48384541af6c declared native_cells",
+      "pass": true
+    },
+    {
+      "check": "vnm-clean309 source-target:228dd4d134a2fef876c566d6b9f13d13e567c3dc7cb77dcb60ae163db8404997 complete original row plus ordinary authority/rule",
+      "pass": true
+    },
+    {
+      "check": "source-target:228dd4d134a2fef876c566d6b9f13d13e567c3dc7cb77dcb60ae163db8404997 no duplicate native tuples",
+      "pass": true
+    },
+    {
+      "check": "source-target:228dd4d134a2fef876c566d6b9f13d13e567c3dc7cb77dcb60ae163db8404997 no multiple owners per coordinate",
+      "pass": true
+    },
+    {
+      "check": "source-target:228dd4d134a2fef876c566d6b9f13d13e567c3dc7cb77dcb60ae163db8404997 declared native_cells",
+      "pass": true
+    },
+    {
+      "check": "vnm-clean309 source-target:279e4508d13261e83f4e4e9661cb8090f48aad70fe8d51774517a04be7a05d50 complete original row plus ordinary authority/rule",
+      "pass": true
+    },
+    {
+      "check": "source-target:279e4508d13261e83f4e4e9661cb8090f48aad70fe8d51774517a04be7a05d50 no duplicate native tuples",
+      "pass": true
+    },
+    {
+      "check": "source-target:279e4508d13261e83f4e4e9661cb8090f48aad70fe8d51774517a04be7a05d50 no multiple owners per coordinate",
+      "pass": true
+    },
+    {
+      "check": "source-target:279e4508d13261e83f4e4e9661cb8090f48aad70fe8d51774517a04be7a05d50 declared native_cells",
+      "pass": true
+    },
+    {
+      "check": "vnm-clean309 source-target:353426183a7e387c709acf564ba153b06413ba96ed302abd39557f785a3ccbdd complete original row plus ordinary authority/rule",
+      "pass": true
+    },
+    {
+      "check": "source-target:353426183a7e387c709acf564ba153b06413ba96ed302abd39557f785a3ccbdd no duplicate native tuples",
+      "pass": true
+    },
+    {
+      "check": "source-target:353426183a7e387c709acf564ba153b06413ba96ed302abd39557f785a3ccbdd no multiple owners per coordinate",
+      "pass": true
+    },
+    {
+      "check": "source-target:353426183a7e387c709acf564ba153b06413ba96ed302abd39557f785a3ccbdd declared native_cells",
+      "pass": true
+    },
+    {
+      "check": "vnm-clean309 source-target:3e9183d8641407d6de0fe0aaccc1273750c3651f742bfa7de7a8fc44008c1552 complete original row plus ordinary authority/rule",
+      "pass": true
+    },
+    {
+      "check": "source-target:3e9183d8641407d6de0fe0aaccc1273750c3651f742bfa7de7a8fc44008c1552 no duplicate native tuples",
+      "pass": true
+    },
+    {
+      "check": "source-target:3e9183d8641407d6de0fe0aaccc1273750c3651f742bfa7de7a8fc44008c1552 no multiple owners per coordinate",
+      "pass": true
+    },
+    {
+      "check": "source-target:3e9183d8641407d6de0fe0aaccc1273750c3651f742bfa7de7a8fc44008c1552 declared native_cells",
+      "pass": true
+    },
+    {
+      "check": "vnm-clean309 source-target:43dd5a681bb2923b176c4fee12df7ab2ff264f2873ee224ba9039ff59a5b87c9 complete original row plus ordinary authority/rule",
+      "pass": true
+    },
+    {
+      "check": "source-target:43dd5a681bb2923b176c4fee12df7ab2ff264f2873ee224ba9039ff59a5b87c9 no duplicate native tuples",
+      "pass": true
+    },
+    {
+      "check": "source-target:43dd5a681bb2923b176c4fee12df7ab2ff264f2873ee224ba9039ff59a5b87c9 no multiple owners per coordinate",
+      "pass": true
+    },
+    {
+      "check": "source-target:43dd5a681bb2923b176c4fee12df7ab2ff264f2873ee224ba9039ff59a5b87c9 declared native_cells",
+      "pass": true
+    },
+    {
+      "check": "vnm-clean309 source-target:523b637c281b82f3eeb5a89ebee66786a7097b1f6c9edb1fc40aa44639845b08 complete original row plus ordinary authority/rule",
+      "pass": true
+    },
+    {
+      "check": "source-target:523b637c281b82f3eeb5a89ebee66786a7097b1f6c9edb1fc40aa44639845b08 no duplicate native tuples",
+      "pass": true
+    },
+    {
+      "check": "source-target:523b637c281b82f3eeb5a89ebee66786a7097b1f6c9edb1fc40aa44639845b08 no multiple owners per coordinate",
+      "pass": true
+    },
+    {
+      "check": "source-target:523b637c281b82f3eeb5a89ebee66786a7097b1f6c9edb1fc40aa44639845b08 declared native_cells",
+      "pass": true
+    },
+    {
+      "check": "vnm-clean309 source-target:5f6ebc89f161cdab3289bdf43f5a4cd058ade28cee7774cf26cf4fe0044b259f complete original row plus ordinary authority/rule",
+      "pass": true
+    },
+    {
+      "check": "source-target:5f6ebc89f161cdab3289bdf43f5a4cd058ade28cee7774cf26cf4fe0044b259f no duplicate native tuples",
+      "pass": true
+    },
+    {
+      "check": "source-target:5f6ebc89f161cdab3289bdf43f5a4cd058ade28cee7774cf26cf4fe0044b259f no multiple owners per coordinate",
+      "pass": true
+    },
+    {
+      "check": "source-target:5f6ebc89f161cdab3289bdf43f5a4cd058ade28cee7774cf26cf4fe0044b259f declared native_cells",
+      "pass": true
+    },
+    {
+      "check": "vnm-clean309 source-target:73754478d67b5a01f2997be377873e609f28591057f3b4b9d0ec881e9bf5e0ee complete original row plus ordinary authority/rule",
+      "pass": true
+    },
+    {
+      "check": "source-target:73754478d67b5a01f2997be377873e609f28591057f3b4b9d0ec881e9bf5e0ee no duplicate native tuples",
+      "pass": true
+    },
+    {
+      "check": "source-target:73754478d67b5a01f2997be377873e609f28591057f3b4b9d0ec881e9bf5e0ee no multiple owners per coordinate",
+      "pass": true
+    },
+    {
+      "check": "source-target:73754478d67b5a01f2997be377873e609f28591057f3b4b9d0ec881e9bf5e0ee declared native_cells",
+      "pass": true
+    },
+    {
+      "check": "vnm-clean309 source-target:778b9276a078b779df75760784f4d61bce695473a24e2dd17cda56f0279e1759 complete original row plus ordinary authority/rule",
+      "pass": true
+    },
+    {
+      "check": "source-target:778b9276a078b779df75760784f4d61bce695473a24e2dd17cda56f0279e1759 no duplicate native tuples",
+      "pass": true
+    },
+    {
+      "check": "source-target:778b9276a078b779df75760784f4d61bce695473a24e2dd17cda56f0279e1759 no multiple owners per coordinate",
+      "pass": true
+    },
+    {
+      "check": "source-target:778b9276a078b779df75760784f4d61bce695473a24e2dd17cda56f0279e1759 declared native_cells",
+      "pass": true
+    },
+    {
+      "check": "vnm-clean309 source-target:7c4e9acee2468d307472c031cd7be193f279973979643ddfa18b11ba17330be9 complete original row plus ordinary authority/rule",
+      "pass": true
+    },
+    {
+      "check": "source-target:7c4e9acee2468d307472c031cd7be193f279973979643ddfa18b11ba17330be9 no duplicate native tuples",
+      "pass": true
+    },
+    {
+      "check": "source-target:7c4e9acee2468d307472c031cd7be193f279973979643ddfa18b11ba17330be9 no multiple owners per coordinate",
+      "pass": true
+    },
+    {
+      "check": "source-target:7c4e9acee2468d307472c031cd7be193f279973979643ddfa18b11ba17330be9 declared native_cells",
+      "pass": true
+    },
+    {
+      "check": "vnm-clean309 source-target:838a1f035b0b2e95d965e5d473adab04dcb90a3fcc6371c3b079d2698999fe16 complete original row plus ordinary authority/rule",
+      "pass": true
+    },
+    {
+      "check": "source-target:838a1f035b0b2e95d965e5d473adab04dcb90a3fcc6371c3b079d2698999fe16 no duplicate native tuples",
+      "pass": true
+    },
+    {
+      "check": "source-target:838a1f035b0b2e95d965e5d473adab04dcb90a3fcc6371c3b079d2698999fe16 no multiple owners per coordinate",
+      "pass": true
+    },
+    {
+      "check": "source-target:838a1f035b0b2e95d965e5d473adab04dcb90a3fcc6371c3b079d2698999fe16 declared native_cells",
+      "pass": true
+    },
+    {
+      "check": "vnm-clean309 source-target:83d86e00317b59d2589d6d7d4d9dc1dd1f24a3c0bd59b8772b48b1e54474cd3b complete original row plus ordinary authority/rule",
+      "pass": true
+    },
+    {
+      "check": "source-target:83d86e00317b59d2589d6d7d4d9dc1dd1f24a3c0bd59b8772b48b1e54474cd3b no duplicate native tuples",
+      "pass": true
+    },
+    {
+      "check": "source-target:83d86e00317b59d2589d6d7d4d9dc1dd1f24a3c0bd59b8772b48b1e54474cd3b no multiple owners per coordinate",
+      "pass": true
+    },
+    {
+      "check": "source-target:83d86e00317b59d2589d6d7d4d9dc1dd1f24a3c0bd59b8772b48b1e54474cd3b declared native_cells",
+      "pass": true
+    },
+    {
+      "check": "vnm-clean309 source-target:8bb799252383b996064b6a390e2c9ba989430a9fc5d27fb5248150d59b09c911 complete original row plus ordinary authority/rule",
+      "pass": true
+    },
+    {
+      "check": "source-target:8bb799252383b996064b6a390e2c9ba989430a9fc5d27fb5248150d59b09c911 no duplicate native tuples",
+      "pass": true
+    },
+    {
+      "check": "source-target:8bb799252383b996064b6a390e2c9ba989430a9fc5d27fb5248150d59b09c911 no multiple owners per coordinate",
+      "pass": true
+    },
+    {
+      "check": "source-target:8bb799252383b996064b6a390e2c9ba989430a9fc5d27fb5248150d59b09c911 declared native_cells",
+      "pass": true
+    },
+    {
+      "check": "vnm-clean309 source-target:b2a2d184b8f00fe27cb46991d0277cecaedb47a3a59e06c0e2c281ba193bee7a complete original row plus ordinary authority/rule",
+      "pass": true
+    },
+    {
+      "check": "source-target:b2a2d184b8f00fe27cb46991d0277cecaedb47a3a59e06c0e2c281ba193bee7a no duplicate native tuples",
+      "pass": true
+    },
+    {
+      "check": "source-target:b2a2d184b8f00fe27cb46991d0277cecaedb47a3a59e06c0e2c281ba193bee7a no multiple owners per coordinate",
+      "pass": true
+    },
+    {
+      "check": "source-target:b2a2d184b8f00fe27cb46991d0277cecaedb47a3a59e06c0e2c281ba193bee7a declared native_cells",
+      "pass": true
+    },
+    {
+      "check": "vnm-clean309 source-target:baf491b9cf6362a577be108b9bc9a53afb3aab6381ee03d1d9fa8be2154d7cf9 complete original row plus ordinary authority/rule",
+      "pass": true
+    },
+    {
+      "check": "source-target:baf491b9cf6362a577be108b9bc9a53afb3aab6381ee03d1d9fa8be2154d7cf9 no duplicate native tuples",
+      "pass": true
+    },
+    {
+      "check": "source-target:baf491b9cf6362a577be108b9bc9a53afb3aab6381ee03d1d9fa8be2154d7cf9 no multiple owners per coordinate",
+      "pass": true
+    },
+    {
+      "check": "source-target:baf491b9cf6362a577be108b9bc9a53afb3aab6381ee03d1d9fa8be2154d7cf9 declared native_cells",
+      "pass": true
+    },
+    {
+      "check": "vnm-clean309 source-target:d449dd794ae5a2c109ffabac449c4f713c1155e4f5485c205ec9de3055143c8b complete original row plus ordinary authority/rule",
+      "pass": true
+    },
+    {
+      "check": "source-target:d449dd794ae5a2c109ffabac449c4f713c1155e4f5485c205ec9de3055143c8b no duplicate native tuples",
+      "pass": true
+    },
+    {
+      "check": "source-target:d449dd794ae5a2c109ffabac449c4f713c1155e4f5485c205ec9de3055143c8b no multiple owners per coordinate",
+      "pass": true
+    },
+    {
+      "check": "source-target:d449dd794ae5a2c109ffabac449c4f713c1155e4f5485c205ec9de3055143c8b declared native_cells",
+      "pass": true
+    },
+    {
+      "check": "vnm-clean309 source-target:d4844a64429206135b5b8d86705370dfe4c49e26f491a533d113449c30edd349 complete original row plus ordinary authority/rule",
+      "pass": true
+    },
+    {
+      "check": "source-target:d4844a64429206135b5b8d86705370dfe4c49e26f491a533d113449c30edd349 no duplicate native tuples",
+      "pass": true
+    },
+    {
+      "check": "source-target:d4844a64429206135b5b8d86705370dfe4c49e26f491a533d113449c30edd349 no multiple owners per coordinate",
+      "pass": true
+    },
+    {
+      "check": "source-target:d4844a64429206135b5b8d86705370dfe4c49e26f491a533d113449c30edd349 declared native_cells",
+      "pass": true
+    },
+    {
+      "check": "vnm-clean309 source-target:eede6016d729cbf204ec69a13e4f5b082ecdb479ac2482eae47a23bb38f3516d complete original row plus ordinary authority/rule",
+      "pass": true
+    },
+    {
+      "check": "source-target:eede6016d729cbf204ec69a13e4f5b082ecdb479ac2482eae47a23bb38f3516d no duplicate native tuples",
+      "pass": true
+    },
+    {
+      "check": "source-target:eede6016d729cbf204ec69a13e4f5b082ecdb479ac2482eae47a23bb38f3516d no multiple owners per coordinate",
+      "pass": true
+    },
+    {
+      "check": "source-target:eede6016d729cbf204ec69a13e4f5b082ecdb479ac2482eae47a23bb38f3516d declared native_cells",
+      "pass": true
+    },
+    {
+      "check": "vnm-clean309 source-target:effe019b6ed2834638d5961e847cd86339f0156132f3bdd2f48049f2f3c1a02c complete original row plus ordinary authority/rule",
+      "pass": true
+    },
+    {
+      "check": "source-target:effe019b6ed2834638d5961e847cd86339f0156132f3bdd2f48049f2f3c1a02c no duplicate native tuples",
+      "pass": true
+    },
+    {
+      "check": "source-target:effe019b6ed2834638d5961e847cd86339f0156132f3bdd2f48049f2f3c1a02c no multiple owners per coordinate",
+      "pass": true
+    },
+    {
+      "check": "source-target:effe019b6ed2834638d5961e847cd86339f0156132f3bdd2f48049f2f3c1a02c declared native_cells",
+      "pass": true
+    },
+    {
+      "check": "vnm-clean309 source-target:fbd4551d43bc561b7b62d937bf569a3d93c4968993893069c9fdcf56bd9333fe complete original row plus ordinary authority/rule",
+      "pass": true
+    },
+    {
+      "check": "source-target:fbd4551d43bc561b7b62d937bf569a3d93c4968993893069c9fdcf56bd9333fe no duplicate native tuples",
+      "pass": true
+    },
+    {
+      "check": "source-target:fbd4551d43bc561b7b62d937bf569a3d93c4968993893069c9fdcf56bd9333fe no multiple owners per coordinate",
+      "pass": true
+    },
+    {
+      "check": "source-target:fbd4551d43bc561b7b62d937bf569a3d93c4968993893069c9fdcf56bd9333fe declared native_cells",
+      "pass": true
+    },
+    {
+      "check": "vnm-clean309 actual row union exactly full original candidate",
+      "pass": true
+    },
+    {
+      "check": "vnm-clean309 exact cell request",
+      "pass": true
+    },
+    {
+      "check": "vnm-clean309 incoming groups spatially disjoint",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/botrach41/authority/constructor-result.json exact full retained body",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/botrach41/native-patch.json exact full retained body",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/botrach41/authority/original-rule-preimage.json exact full retained body",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/botrach41/authority/authority-binding.json exact full retained body",
+      "pass": true
+    },
+    {
+      "check": "vnm-botrach41 original patch no duplicate native tuples",
+      "pass": true
+    },
+    {
+      "check": "vnm-botrach41 original patch no multiple owners per coordinate",
+      "pass": true
+    },
+    {
+      "check": "vnm-botrach41 one original authority without aliases",
+      "pass": true
+    },
+    {
+      "check": "vnm-botrach41 original rule SHA unchanged",
+      "pass": true
+    },
+    {
+      "check": "vnm-botrach41 source-target:242b207bc2519bbad19c8f4d0fe8f4190d3d93822ee3f7c4a8f7a0247677e243 complete original row plus ordinary authority/rule",
+      "pass": true
+    },
+    {
+      "check": "source-target:242b207bc2519bbad19c8f4d0fe8f4190d3d93822ee3f7c4a8f7a0247677e243 no duplicate native tuples",
+      "pass": true
+    },
+    {
+      "check": "source-target:242b207bc2519bbad19c8f4d0fe8f4190d3d93822ee3f7c4a8f7a0247677e243 no multiple owners per coordinate",
+      "pass": true
+    },
+    {
+      "check": "source-target:242b207bc2519bbad19c8f4d0fe8f4190d3d93822ee3f7c4a8f7a0247677e243 declared native_cells",
+      "pass": true
+    },
+    {
+      "check": "vnm-botrach41 actual row union exactly full original candidate",
+      "pass": true
+    },
+    {
+      "check": "vnm-botrach41 exact cell request",
+      "pass": true
+    },
+    {
+      "check": "vnm-botrach41 incoming groups spatially disjoint",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/anphu1/authority/constructor-result.json exact full retained body",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/anphu1/native-patch.json exact full retained body",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/anphu1/authority/original-rule-preimage.json exact full retained body",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/anphu1/authority/authority-binding.json exact full retained body",
+      "pass": true
+    },
+    {
+      "check": "vnm-anphu1 original patch no duplicate native tuples",
+      "pass": true
+    },
+    {
+      "check": "vnm-anphu1 original patch no multiple owners per coordinate",
+      "pass": true
+    },
+    {
+      "check": "vnm-anphu1 one original authority without aliases",
+      "pass": true
+    },
+    {
+      "check": "vnm-anphu1 original rule SHA unchanged",
+      "pass": true
+    },
+    {
+      "check": "vnm-anphu1 source-target:1f9126266857fdc754c2ebd4a3b6d8b3175842882febe413a5e3ae074e1a2b93 complete original row plus ordinary authority/rule",
+      "pass": true
+    },
+    {
+      "check": "source-target:1f9126266857fdc754c2ebd4a3b6d8b3175842882febe413a5e3ae074e1a2b93 no duplicate native tuples",
+      "pass": true
+    },
+    {
+      "check": "source-target:1f9126266857fdc754c2ebd4a3b6d8b3175842882febe413a5e3ae074e1a2b93 no multiple owners per coordinate",
+      "pass": true
+    },
+    {
+      "check": "source-target:1f9126266857fdc754c2ebd4a3b6d8b3175842882febe413a5e3ae074e1a2b93 declared native_cells",
+      "pass": true
+    },
+    {
+      "check": "vnm-anphu1 actual row union exactly full original candidate",
+      "pass": true
+    },
+    {
+      "check": "vnm-anphu1 exact cell request",
+      "pass": true
+    },
+    {
+      "check": "vnm-anphu1 incoming groups spatially disjoint",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/indonesia-raja-ampat-20261015/native10617-authority-001/constructor-result.json exact full retained body",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/indonesia-raja-ampat-20261015/native10617-input-001/candidate-native-patch.json exact full retained body",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/indonesia-raja-ampat-20261015/native10617-authority-001/original-rule-preimage.json exact full retained body",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/indonesia-raja-ampat-20261015/native10617-authority-001/authority-binding.json exact full retained body",
+      "pass": true
+    },
+    {
+      "check": "idn-raja10617 original patch no duplicate native tuples",
+      "pass": true
+    },
+    {
+      "check": "idn-raja10617 original patch no multiple owners per coordinate",
+      "pass": true
+    },
+    {
+      "check": "idn-raja10617 one original authority without aliases",
+      "pass": true
+    },
+    {
+      "check": "idn-raja10617 original rule SHA unchanged",
+      "pass": true
+    },
+    {
+      "check": "idn-raja10617 source-target:88714fd8cbdb4318117a68a0036374893fdaa0aa875d39844dd3f300fcd7c461 complete original row plus ordinary authority/rule",
+      "pass": true
+    },
+    {
+      "check": "source-target:88714fd8cbdb4318117a68a0036374893fdaa0aa875d39844dd3f300fcd7c461 no duplicate native tuples",
+      "pass": true
+    },
+    {
+      "check": "source-target:88714fd8cbdb4318117a68a0036374893fdaa0aa875d39844dd3f300fcd7c461 no multiple owners per coordinate",
+      "pass": true
+    },
+    {
+      "check": "source-target:88714fd8cbdb4318117a68a0036374893fdaa0aa875d39844dd3f300fcd7c461 declared native_cells",
+      "pass": true
+    },
+    {
+      "check": "idn-raja10617 actual row union exactly full original candidate",
+      "pass": true
+    },
+    {
+      "check": "idn-raja10617 exact cell request",
+      "pass": true
+    },
+    {
+      "check": "idn-raja10617 incoming groups spatially disjoint",
+      "pass": true
+    },
+    {
+      "check": "exact new26 rows no omitted/extra components",
+      "pass": true
+    },
+    {
+      "check": "exact new5 registry entries no extra aliases",
+      "pass": true
+    },
+    {
+      "check": "accepted71339 patch no duplicate native tuples",
+      "pass": true
+    },
+    {
+      "check": "accepted71339 patch no multiple owners per coordinate",
+      "pass": true
+    },
+    {
+      "check": "actual82961 patch no duplicate native tuples",
+      "pass": true
+    },
+    {
+      "check": "actual82961 patch no multiple owners per coordinate",
+      "pass": true
+    },
+    {
+      "check": "exact71339 accepted cells",
+      "pass": true
+    },
+    {
+      "check": "exact11622 incoming cells",
+      "pass": true
+    },
+    {
+      "check": "zero old/new spatial overlap independent of owner",
+      "pass": true
+    },
+    {
+      "check": "exact old plus incoming patch no changed owners/extra cells",
+      "pass": true
+    },
+    {
+      "check": "literal inherited patch rows recover by filtering new coordinates",
+      "pass": true
+    },
+    {
+      "check": "ledger registry SHA link",
+      "pass": true
+    },
+    {
+      "check": "patch registry/ledger SHA links",
+      "pass": true
+    },
+    {
+      "check": "envelope patch exact bytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "envelope ledger exact bytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "patch/envelope base/effective reference equality",
+      "pass": true
+    },
+    {
+      "check": "effective release exact config",
+      "pass": true
+    },
+    {
+      "check": "base/roster envelope metadata literal inherited",
+      "pass": true
+    },
+    {
+      "check": "scope_ids exact row sequence",
+      "pass": true
+    },
+    {
+      "check": "registry metadata literal retained",
+      "pass": true
+    }
+  ],
+  "check_count": 196,
+  "failures": [],
+  "limits": [
+    "Reuses original substantive scientific qualification without source/physical/native replay.",
+    "No new current-base owner-zero, trusted selected-reader, final candidate/head or acceptance claim. Root retains integration.",
+    "Read-only retained input/result comparison; no fetch or Git mutations."
+  ]
+}
