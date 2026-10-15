@@ -334,7 +334,7 @@ Its config contains `version: 1`, `recipe_index: {commit, path}` for the saved
 `recipe-index.json`, and explicit finite `preparation_allowance: {phaseBytes,
 rssBytes}`. It authenticates that whole index, reserves its deterministic completion
 report/receipt, then shares the same budget across encoded/decoded inputs and
-unique physical placements. Use the normal shared Git import/storage window for
+unique physical placements. Retain storage admission and exact-byte checks for
 actual acquisition. The existing exact-object prefetch importer retrieves missing
 Git bodies once, consulting the existing `gh auth token` login ephemerally only
 when a cold fetch occurs. Tokens are not persisted or printed; warm verification
