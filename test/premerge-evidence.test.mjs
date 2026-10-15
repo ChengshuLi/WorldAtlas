@@ -159,6 +159,24 @@ test('mock remote queue checks exact blobs/head/independent receipt with read-on
   const failed = await checkPremergeEvidence({...f, api: remote.api, repo: 'test/repo', policy: {...policy, mode: 'report-only'}, review: true});
   assert.equal(failed.status, 'report-failure');
 });
+test('manifest discovery omits the unused base read and final checks still authenticate base and history', async () => {
+  const f = fixture(), historical = 'c'.repeat(40);
+  f.manifest.baseline = {version: 2, commit: historical, files: [{...desc('baseline.txt', baseline), commit: historical}], pins: {}};
+  f.manifest.metrics[0].vintage = 'archived';
+  f.files[0].status = f.manifest.change_receipts[0].status = 'modified';
+  f.manifest.change_receipts[0].original_sha256 = sha256(output);
+  const remote = remoteFixture(f);
+  const result = await checkPremergeEvidence({...f, api: remote.api, repo: 'test/repo', policy});
+  const routes = remote.calls.map(row => row.route);
+  const manifestOID = [...remote.blobs].find(([, body]) => body.equals(remote.bytes))[0];
+  const manifestRead = routes.indexOf(`/repos/test/repo/git/blobs/${manifestOID}`);
+  const baseRead = routes.indexOf(`/repos/test/repo/git/commits/${commit}`);
+  assert.ok(baseRead > manifestRead, 'Base discovery must wait until after the candidate manifest is read');
+  assert.equal(routes.filter(route => route === `/repos/test/repo/git/commits/${commit}`).length, 1);
+  assert.equal(routes.filter(route => route === `/repos/test/repo/git/commits/${historical}`).length, 1);
+  assert.ok(result.checked.includes(`${historical}:baseline.txt`));
+  assert.equal(result.change_files_checked, 2, 'The modified output still needs authenticated original base bytes');
+});
 test('incomplete remote trees cannot become a passed byte check', async () => {
   const f = fixture(), remote = remoteFixture(f);
   await assert.rejects(() => checkPremergeEvidence({...f, repo: 'test/repo', policy,
