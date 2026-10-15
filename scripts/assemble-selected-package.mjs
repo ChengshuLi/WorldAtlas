@@ -56,10 +56,7 @@ function sourceCompatible(before,current){
 // This is the bootstrap's actual trusted PR/combined-candidate base, not the
 // originating package head. Read only tree metadata for explicit retained leaves;
 // the existing private selected reader authenticates their typed consumption.
-export async function acceptedSelectedPackageInputs({api,repo,base,current}){
-  need(/^[a-f0-9]{40}$/.test(base??''),'Exact trusted selected base required');
-  const tree=await integrationTree(api,repo,base);
-  need(tree.object.sha===base,'Trusted selected base commit differs');
+function acceptedInputsFromTree(base,tree,current){
   const files=[];
   for(const name of current.definition.inputs){
     if(name.endsWith('/')||inertSelectedPackageInput(name))continue;
@@ -70,11 +67,23 @@ export async function acceptedSelectedPackageInputs({api,repo,base,current}){
   }
   return {commit:base,files};
 }
+export async function acceptedSelectedPackageInputs({api,repo,base,current}){
+  need(/^[a-f0-9]{40}$/.test(base??''),'Exact trusted selected base required');
+  const tree=await integrationTree(api,repo,base);
+  need(tree.object.sha===base,'Trusted selected base commit differs');
+  return acceptedInputsFromTree(base,tree,current);
+}
 
-export async function findOriginalPackage({api,repo,current,originalRunId}){
+export async function findOriginalPackage({api,repo,current,originalRunId,trustedBase}){
   // A small recent-result search is an optimization. Exhaustion means a full
   // build, never a claim that no older result exists.
   need(originalRunId===undefined||Number.isSafeInteger(originalRunId)&&originalRunId>0,'Exact optional original run required');
+  let trustedCommit,acceptedInputs=trustedBase===undefined?current.accepted_selected_inputs:undefined;
+  if(trustedBase!==undefined){
+    need(/^[a-f0-9]{40}$/.test(trustedBase),'Exact trusted selected base required');
+    trustedCommit=await api(`/repos/${repo}/git/commits/${trustedBase}`);
+    need(trustedCommit.sha===trustedBase&&/^[a-f0-9]{40}$/.test(trustedCommit.tree?.sha??''),'Trusted selected base commit differs');
+  }
   const responses=originalRunId===undefined?await Promise.all([
     api(`/repos/${repo}/actions/workflows/merge-integration-checks.yml/runs?event=pull_request&per_page=20&page=1`),
     api(`/repos/${repo}/actions/workflows/worker-merge.yml/runs?event=workflow_dispatch&per_page=20&page=1`)
@@ -125,8 +134,16 @@ export async function findOriginalPackage({api,repo,current,originalRunId}){
           const source={head:origin.head,tree:tree.object.tree.sha,definition,producer,
             files:all.filter(row=>containsPackagePath(definition.inputs,row.path)),
             selection:await blobJSON(api,repo,tree,'data/ownership-selection.json')};
-          if(!sourceCompatible(source,current))continue;
-          return {source,origin,receipt};
+          if(trustedCommit&&!acceptedInputs){
+            need(tree.object.sha===origin.head&&/^[a-f0-9]{40}$/.test(tree.object.tree?.sha??''),'Original source commit differs');
+            // Both commit identities came from this invocation's authenticated API.
+            // Reuse only the already-read complete tree, never a caller-supplied map.
+            acceptedInputs=tree.object.tree.sha===trustedCommit.tree.sha
+              ?acceptedInputsFromTree(trustedBase,tree,current)
+              :await acceptedSelectedPackageInputs({api,repo,base:trustedBase,current});
+          }
+          if(!sourceCompatible(source,{...current,accepted_selected_inputs:acceptedInputs}))continue;
+          return {source,origin,receipt,...(trustedCommit?{accepted_selected_inputs:acceptedInputs}:{})};
         }catch(error){
           console.warn(`Skipped original package producer ${run.id}/${attempt}: ${String(error.message).replace(/https?:\/\/\S+/g,'[delivery address]').slice(0,300)}`);
         }
@@ -165,8 +182,8 @@ function currentSource(){
 
 export async function assembleSelectedPackage({api,repo,expectedHead,originalRunId,trustedBase}){
   const started=performance.now(),current=currentSource();need(current.head===expectedHead,'Actual selected head changed');
-  if(trustedBase!==undefined)current.accepted_selected_inputs=await acceptedSelectedPackageInputs({api,repo,base:trustedBase,current});
-  const found=await findOriginalPackage({api,repo,current,originalRunId});if(!found)return {assembled:false,reason:'No applicable retained original output in bounded recent-result search'};
+  const found=await findOriginalPackage({api,repo,current,originalRunId,trustedBase});if(!found)return {assembled:false,reason:'No applicable retained original output in bounded recent-result search'};
+  if(trustedBase!==undefined)current.accepted_selected_inputs=found.accepted_selected_inputs;
   await verifyPackageDependencies(path.join(root,'node_modules'));
   admitDisk(found.origin.artifact_bytes,'the actual authenticated original archive');
   const scratch=await createPackageAssemblyScratch(root);
