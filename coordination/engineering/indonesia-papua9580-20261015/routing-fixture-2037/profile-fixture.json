@@ -1,0 +1,367 @@
+{
+  "version": 1,
+  "kind": "unaccepted-read-only-papua-selected-profile-fixture",
+  "accepted_baseline": "73852925a517d7c07c6475d6ce2281f9481ad705",
+  "source_data_head": "cf448f8b9df91b08cad9dd79f6cfe70c14f618b1",
+  "source_original_base": "f9c1abc4acba3e2dd6be2e1f157839532924fd78",
+  "branch": "engineering/indonesia-papua9580-followup-20261015",
+  "mode": "engineering",
+  "issue": 2006,
+  "scope_prefix": "coordination/engineering/indonesia-papua9580-20261015/",
+  "code_profile": "f82acf8da15646afd9ef51d57e2bd0c186f4aabd",
+  "code_equivalence": "accepted2037 exact profile plus reviewed2022 historical-reader correction",
+  "files": [
+    {
+      "filename": ".github/package-inputs.json",
+      "status": "modified",
+      "mode": "100644",
+      "source_commit": "cf448f8b9df91b08cad9dd79f6cfe70c14f618b1",
+      "source_path": ".github/package-inputs.json",
+      "bytes": 155630,
+      "sha256": "aa7b002098be7809a97aa5c50301b08996963dd3b8c997cfa8a4099828f3d01c",
+      "git_blob_oid": "d0cafb2f64b867b53bb6c6ac27dbec5bf02396f3",
+      "counterfactual_replacement": {
+        "record_path": "coordination/engineering/indonesia-papua9580-20261015/routing-fixture-2037/package-inputs-257.json",
+        "bytes": 14490,
+        "sha256": "4a8996e3fcf1c40f3de2b384f77ef97757bdd0664b39bc1100fed32e79422478",
+        "git_blob_oid": "393c00f4f59b38747cc3c561adeb38f9c8477d37"
+      }
+    },
+    {
+      "filename": "coordination/engineering/indonesia-papua9580-20261015/delivery/authority-registry.json",
+      "status": "added",
+      "mode": "100644",
+      "source_commit": "cf448f8b9df91b08cad9dd79f6cfe70c14f618b1",
+      "source_path": "coordination/engineering/indonesia-papua9580-20261015/delivery/authority-registry.json",
+      "bytes": 79967,
+      "sha256": "0b1becb4e884ca53f9f9f389572725703e111fd94be625c9d4fe451cb01f4a30",
+      "git_blob_oid": "0a9a8a71cd56999da3c71f745665af15f73f6882"
+    },
+    {
+      "filename": "coordination/engineering/indonesia-papua9580-20261015/delivery/compose-config.json",
+      "status": "added",
+      "mode": "100644",
+      "source_commit": "cf448f8b9df91b08cad9dd79f6cfe70c14f618b1",
+      "source_path": "coordination/engineering/indonesia-papua9580-20261015/delivery/compose-config.json",
+      "bytes": 2128,
+      "sha256": "6abfc542d45373f7399933a9ba0e4e2c6a048153726647fbc817f1446e90ea8d",
+      "git_blob_oid": "f9d583934b5804ec678f8e3a96414182baceffaf"
+    },
+    {
+      "filename": "coordination/engineering/indonesia-papua9580-20261015/delivery/compose-operating.json",
+      "status": "added",
+      "mode": "100644",
+      "source_commit": "cf448f8b9df91b08cad9dd79f6cfe70c14f618b1",
+      "source_path": "coordination/engineering/indonesia-papua9580-20261015/delivery/compose-operating.json",
+      "bytes": 916,
+      "sha256": "aecf393aa9ae31368970a1c0569f3eadc0ff2d7febeab0509d7d38b2886056a1",
+      "git_blob_oid": "5272af1f5a992fad89ce71c0209cfe461ac60723"
+    },
+    {
+      "filename": "coordination/engineering/indonesia-papua9580-20261015/delivery/compose-time.log",
+      "status": "added",
+      "mode": "100644",
+      "source_commit": "cf448f8b9df91b08cad9dd79f6cfe70c14f618b1",
+      "source_path": "coordination/engineering/indonesia-papua9580-20261015/delivery/compose-time.log",
+      "bytes": 777,
+      "sha256": "667862cf631720b1a80dab322ae5962b8aad77d17a610ae1254cc7b979c5d883",
+      "git_blob_oid": "39fd21fc0e6ad9d9d091f1c43d8165ab786ade2e"
+    },
+    {
+      "filename": "coordination/engineering/indonesia-papua9580-20261015/delivery/finalize-config.json",
+      "status": "added",
+      "mode": "100644",
+      "source_commit": "cf448f8b9df91b08cad9dd79f6cfe70c14f618b1",
+      "source_path": "coordination/engineering/indonesia-papua9580-20261015/delivery/finalize-config.json",
+      "bytes": 845,
+      "sha256": "c098e1c4a381610e721ceb1ec1f57531872ce2ece6b3f38d4e375622a04cd9aa",
+      "git_blob_oid": "99f2c3c554a8b5ae7c021b90c6052b6045392855"
+    },
+    {
+      "filename": "coordination/engineering/indonesia-papua9580-20261015/delivery/finalize-external-time.txt",
+      "status": "added",
+      "mode": "100644",
+      "source_commit": "cf448f8b9df91b08cad9dd79f6cfe70c14f618b1",
+      "source_path": "coordination/engineering/indonesia-papua9580-20261015/delivery/finalize-external-time.txt",
+      "bytes": 777,
+      "sha256": "ff40e7e7b75e37864dcfa651e2bf9386c0641056203701b63ce3b7f08f241dd1",
+      "git_blob_oid": "d20428ed809d0fe28240cd202a2937c9d0d8441f"
+    },
+    {
+      "filename": "coordination/engineering/indonesia-papua9580-20261015/delivery/finalize-operating.json",
+      "status": "added",
+      "mode": "100644",
+      "source_commit": "cf448f8b9df91b08cad9dd79f6cfe70c14f618b1",
+      "source_path": "coordination/engineering/indonesia-papua9580-20261015/delivery/finalize-operating.json",
+      "bytes": 927,
+      "sha256": "68f7ded59bd9d6b45505f31d7bb7f1838955e2e9da2364f474f38b492bb66271",
+      "git_blob_oid": "68293842a7ba34ee2e7da2d6d6750eb0ff7970d4"
+    },
+    {
+      "filename": "coordination/engineering/indonesia-papua9580-20261015/delivery/finalize-stdout.json",
+      "status": "added",
+      "mode": "100644",
+      "source_commit": "cf448f8b9df91b08cad9dd79f6cfe70c14f618b1",
+      "source_path": "coordination/engineering/indonesia-papua9580-20261015/delivery/finalize-stdout.json",
+      "bytes": 205,
+      "sha256": "0c9d49eef2e3e0b816c9ee0cfed2807dfa0aab2aea37ca1b4899a2e08de45244",
+      "git_blob_oid": "cb6d53f9209d840a28c27b8a1acbe986ab7cba85"
+    },
+    {
+      "filename": "coordination/engineering/indonesia-papua9580-20261015/delivery/finalizer-preparation.json",
+      "status": "added",
+      "mode": "100644",
+      "source_commit": "cf448f8b9df91b08cad9dd79f6cfe70c14f618b1",
+      "source_path": "coordination/engineering/indonesia-papua9580-20261015/delivery/finalizer-preparation.json",
+      "bytes": 738,
+      "sha256": "f2220ce66909fbcaf24818da9aed672bb70b03c3d7052fc9b4066d10de53a5f8",
+      "git_blob_oid": "0d917d5bdb68108bac69f4da21c924e77914ad73"
+    },
+    {
+      "filename": "coordination/engineering/indonesia-papua9580-20261015/delivery/patch.json",
+      "status": "added",
+      "mode": "100644",
+      "source_commit": "cf448f8b9df91b08cad9dd79f6cfe70c14f618b1",
+      "source_path": "coordination/engineering/indonesia-papua9580-20261015/delivery/patch.json",
+      "bytes": 2719539,
+      "sha256": "6dfbd77aa601e7b983561e429aaa18e56faa5c5917108d1f1dc5d85538ba96b2",
+      "git_blob_oid": "a1eccf31052956b25b0dc47448b851c9d9cdab4d"
+    },
+    {
+      "filename": "coordination/engineering/indonesia-papua9580-20261015/delivery/preparation.json",
+      "status": "added",
+      "mode": "100644",
+      "source_commit": "cf448f8b9df91b08cad9dd79f6cfe70c14f618b1",
+      "source_path": "coordination/engineering/indonesia-papua9580-20261015/delivery/preparation.json",
+      "bytes": 596,
+      "sha256": "002bae5913315a4acd70906f613a1fa25cfade70b8f5d5f425087c68eda46616",
+      "git_blob_oid": "b56de14d61920f2329a94cdaf415880f6df908a7"
+    },
+    {
+      "filename": "coordination/engineering/indonesia-papua9580-20261015/delivery/runtime-envelope.json",
+      "status": "added",
+      "mode": "100644",
+      "source_commit": "cf448f8b9df91b08cad9dd79f6cfe70c14f618b1",
+      "source_path": "coordination/engineering/indonesia-papua9580-20261015/delivery/runtime-envelope.json",
+      "bytes": 1392,
+      "sha256": "487a2432f20ce34ebd4a869cf6104915f0dd2870d1aacf83dca139d154eb15ca",
+      "git_blob_oid": "a512720a29c7f286a5ad7fe922cbeff744774035"
+    },
+    {
+      "filename": "coordination/engineering/indonesia-papua9580-20261015/delivery/selected-ledger.json",
+      "status": "added",
+      "mode": "100644",
+      "source_commit": "cf448f8b9df91b08cad9dd79f6cfe70c14f618b1",
+      "source_path": "coordination/engineering/indonesia-papua9580-20261015/delivery/selected-ledger.json",
+      "bytes": 6716249,
+      "sha256": "caa17d12a6a11de548bc54cdc7058c7c2247acf51d99b6b72c224b878b32dc06",
+      "git_blob_oid": "0733b650e94f8726b0d830079e736d004431e052"
+    },
+    {
+      "filename": "coordination/engineering/indonesia-papua9580-20261015/evidence-quality.json",
+      "status": "added",
+      "mode": "100644",
+      "source_commit": "cf448f8b9df91b08cad9dd79f6cfe70c14f618b1",
+      "source_path": "coordination/engineering/indonesia-papua9580-20261015/evidence-quality.json",
+      "bytes": 13917,
+      "sha256": "502be947aee3d3579aaaf57c9cfaf8c2e5e08e088396a6482d942e3eae4a5bdc",
+      "git_blob_oid": "1cc64381af59fd36b98890c2efeddca6fc21cc44"
+    },
+    {
+      "filename": "coordination/engineering/indonesia-papua9580-20261015/native9580-authority-001/authority-binding.json",
+      "status": "added",
+      "mode": "100644",
+      "source_commit": "cf448f8b9df91b08cad9dd79f6cfe70c14f618b1",
+      "source_path": "coordination/engineering/indonesia-papua9580-20261015/native9580-authority-001/authority-binding.json",
+      "bytes": 742,
+      "sha256": "c85c614a946cb17bd08a504dd2ec4dffa8e362aebb852e604154e7a9f0420771",
+      "git_blob_oid": "59aae5d9ed742aa1aad4a19351cd525ee7868595"
+    },
+    {
+      "filename": "coordination/engineering/indonesia-papua9580-20261015/native9580-authority-001/original-rule-preimage.json",
+      "status": "added",
+      "mode": "100644",
+      "source_commit": "cf448f8b9df91b08cad9dd79f6cfe70c14f618b1",
+      "source_path": "coordination/engineering/indonesia-papua9580-20261015/native9580-authority-001/original-rule-preimage.json",
+      "bytes": 739,
+      "sha256": "db0a72fed747461b1f8e3b37a75b371e4b081be4cdc83a20cda112c7ebd53251",
+      "git_blob_oid": "6a57d32fc3c32e46a6be39ecd8906cb1d61026de"
+    },
+    {
+      "filename": "coordination/engineering/indonesia-papua9580-20261015/native9580-input-001/candidate-native-patch.json",
+      "status": "added",
+      "mode": "100644",
+      "source_commit": "cf448f8b9df91b08cad9dd79f6cfe70c14f618b1",
+      "source_path": "coordination/engineering/indonesia-papua9580-20261015/native9580-input-001/candidate-native-patch.json",
+      "bytes": 126511,
+      "sha256": "428c8a506a6a029d17fb19d1c8795675ce6789be03b634151094ec42ae5b3958",
+      "git_blob_oid": "e286606e6c3a64d2ebce90885fab2e378e9a18c9"
+    },
+    {
+      "filename": "coordination/engineering/indonesia-papua9580-20261015/native9580-input-001/source-evidence.json",
+      "status": "added",
+      "mode": "100644",
+      "source_commit": "cf448f8b9df91b08cad9dd79f6cfe70c14f618b1",
+      "source_path": "coordination/engineering/indonesia-papua9580-20261015/native9580-input-001/source-evidence.json",
+      "bytes": 33522,
+      "sha256": "c4ef6e068497273ea6cc05c706847dd6d8f2776efba018dd5418214d0eb793ac",
+      "git_blob_oid": "630254b24c203a33770e3a1e6152d6a73d995498"
+    },
+    {
+      "filename": "coordination/engineering/indonesia-papua9580-20261015/ownership-selection-v2.json",
+      "status": "added",
+      "mode": "100644",
+      "source_commit": "cf448f8b9df91b08cad9dd79f6cfe70c14f618b1",
+      "source_path": "coordination/engineering/indonesia-papua9580-20261015/ownership-selection-v2.json",
+      "bytes": 3397,
+      "sha256": "f18b445ac20df9ec74d5e14617d5ad194b567efba51d25ce85979ddb8afd0076",
+      "git_blob_oid": "7310e425c0f54343b69ed82c8a11eb606faaf0ad"
+    },
+    {
+      "filename": "coordination/engineering/indonesia-papua9580-20261015/package-roles.json",
+      "status": "added",
+      "mode": "100644",
+      "source_commit": "cf448f8b9df91b08cad9dd79f6cfe70c14f618b1",
+      "source_path": "coordination/engineering/indonesia-papua9580-20261015/package-roles.json",
+      "bytes": 10991,
+      "sha256": "b507c8b583c2e4ec6695a553dc7760e58b8000335746ebb91008f083e49156b9",
+      "git_blob_oid": "64a33bac092e78fdf1926560cfd73dbbe2dadcd7"
+    },
+    {
+      "filename": "coordination/engineering/indonesia-papua9580-20261015/selected-delivery-expectations.json",
+      "status": "added",
+      "mode": "100644",
+      "source_commit": "cf448f8b9df91b08cad9dd79f6cfe70c14f618b1",
+      "source_path": "coordination/engineering/indonesia-papua9580-20261015/selected-delivery-expectations.json",
+      "bytes": 301399,
+      "sha256": "ed6f492ef9b9e9ab2869f26eb1a5076b803164992c8672e822c4852425260837",
+      "git_blob_oid": "bd426d4c7aa0c275ec0f7c00da29e3cbcb1bdadb"
+    },
+    {
+      "filename": "coordination/engineering/indonesia-papua9580-20261015/selected-native-consumer-001/checkpoint-routes.json",
+      "status": "added",
+      "mode": "100644",
+      "source_commit": "cf448f8b9df91b08cad9dd79f6cfe70c14f618b1",
+      "source_path": "coordination/engineering/indonesia-papua9580-20261015/selected-native-consumer-001/checkpoint-routes.json",
+      "bytes": 293055,
+      "sha256": "74a1e34d16f5b4b314cf947b8578283303e5df94e5c1ec1ab1837c2ba759787f",
+      "git_blob_oid": "223c6c0b90b9ef16d4db9bf1d9b95d1b3e20d75c"
+    },
+    {
+      "filename": "coordination/engineering/indonesia-papua9580-20261015/selected-native-consumer-001/derived-certificate.json.gz",
+      "status": "added",
+      "mode": "100644",
+      "source_commit": "cf448f8b9df91b08cad9dd79f6cfe70c14f618b1",
+      "source_path": "coordination/engineering/indonesia-papua9580-20261015/selected-native-consumer-001/derived-certificate.json.gz",
+      "bytes": 7517534,
+      "sha256": "dd5f3d35801a3e39f09ae519fd1a22deaed6de6d7a2afba91ee911a937c09f36",
+      "git_blob_oid": "2f7f982ff863d961d0e4265e8d8914e193106703"
+    },
+    {
+      "filename": "coordination/engineering/indonesia-papua9580-20261015/selected-native-consumer-001/derived-facts.json",
+      "status": "added",
+      "mode": "100644",
+      "source_commit": "cf448f8b9df91b08cad9dd79f6cfe70c14f618b1",
+      "source_path": "coordination/engineering/indonesia-papua9580-20261015/selected-native-consumer-001/derived-facts.json",
+      "bytes": 501572,
+      "sha256": "b6144c5e959fdf51f5e5d022ca6b756b9a94ac1f0d80cdcf79acf3a0887d9dbb",
+      "git_blob_oid": "692e77313ec3973a99579de1c66ab670979588ce"
+    },
+    {
+      "filename": "coordination/engineering/indonesia-papua9580-20261015/selected-native-consumer-001/derived-publication.json",
+      "status": "added",
+      "mode": "100644",
+      "source_commit": "cf448f8b9df91b08cad9dd79f6cfe70c14f618b1",
+      "source_path": "coordination/engineering/indonesia-papua9580-20261015/selected-native-consumer-001/derived-publication.json",
+      "bytes": 660,
+      "sha256": "dd6f06e9020a43072dc2580cc07ed5ebfc959ba526cd1a0560b3a29adeacbc43",
+      "git_blob_oid": "75f97d3897cba144528d10bb8186d4413cbc6976"
+    },
+    {
+      "filename": "coordination/engineering/indonesia-papua9580-20261015/selected-native-consumer-001/execution-observation.json",
+      "status": "added",
+      "mode": "100644",
+      "source_commit": "cf448f8b9df91b08cad9dd79f6cfe70c14f618b1",
+      "source_path": "coordination/engineering/indonesia-papua9580-20261015/selected-native-consumer-001/execution-observation.json",
+      "bytes": 3120,
+      "sha256": "53a1d43185d5cf5f12ca3f9594fc317c4a0ddd69a6bf9f9c250eb2128ee0dc7d",
+      "git_blob_oid": "809d9d210ecab0fc8fb4b1813b0451fd91f455a0"
+    },
+    {
+      "filename": "coordination/engineering/indonesia-papua9580-20261015/selected-native-consumer-001/stderr-time.log",
+      "status": "added",
+      "mode": "100644",
+      "source_commit": "cf448f8b9df91b08cad9dd79f6cfe70c14f618b1",
+      "source_path": "coordination/engineering/indonesia-papua9580-20261015/selected-native-consumer-001/stderr-time.log",
+      "bytes": 777,
+      "sha256": "022d960b7909d541dcf58f5bc9a65e7a5a50f62f56afd657657ecad4cb398389",
+      "git_blob_oid": "c0776af439202be59d74d8f4b52e5d1c1af8dbc7"
+    },
+    {
+      "filename": "coordination/engineering/indonesia-papua9580-20261015/selected-native-consumer-001/stdout.json",
+      "status": "added",
+      "mode": "100644",
+      "source_commit": "cf448f8b9df91b08cad9dd79f6cfe70c14f618b1",
+      "source_path": "coordination/engineering/indonesia-papua9580-20261015/selected-native-consumer-001/stdout.json",
+      "bytes": 77740,
+      "sha256": "adbd8fe61fd4678ab3aa7cc6154252eadc37107b9fd8d63e8b41dac214431a09",
+      "git_blob_oid": "a75fe5c679da6af9a7614f4a5f8a5346defbfefe"
+    },
+    {
+      "filename": "coordination/engineering/indonesia-papua9580-20261015/whole-physical-input-001/original-stage-inputs.json",
+      "status": "added",
+      "mode": "100644",
+      "source_commit": "cf448f8b9df91b08cad9dd79f6cfe70c14f618b1",
+      "source_path": "coordination/engineering/indonesia-papua9580-20261015/whole-physical-input-001/original-stage-inputs.json",
+      "bytes": 253503,
+      "sha256": "6e85ffadb32f34dd92b6061a2c0df997a69d8d0bca0e230c493305db0544237b",
+      "git_blob_oid": "0ba9b04b5561c3bda4b8004e1118734a3f8488dd"
+    },
+    {
+      "filename": "coordination/engineering/indonesia-papua9580-20261015/whole-physical-result-001/whole-target-support.json",
+      "status": "added",
+      "mode": "100644",
+      "source_commit": "cf448f8b9df91b08cad9dd79f6cfe70c14f618b1",
+      "source_path": "coordination/engineering/indonesia-papua9580-20261015/whole-physical-result-001/whole-target-support.json",
+      "bytes": 2093799,
+      "sha256": "aa9384e344c08e6c71644182f91b2c466a7d054aa5db2b78073362f01fe463ab",
+      "git_blob_oid": "4579fb6bfc51de3df463083863938d969a92e0fb"
+    },
+    {
+      "filename": "data/ownership-selection.json",
+      "status": "modified",
+      "mode": "100644",
+      "source_commit": "cf448f8b9df91b08cad9dd79f6cfe70c14f618b1",
+      "source_path": "data/ownership-selection.json",
+      "bytes": 1564,
+      "sha256": "6a0d4c7596dc8cf5cddf17547621a2a73db66d67ddc0870d4709d1da8746bedb",
+      "git_blob_oid": "b2abcfeb2ef1fded14f7c553cd324bffd6a43bd2"
+    }
+  ],
+  "package_projection": {
+    "record_path": "coordination/engineering/indonesia-papua9580-20261015/routing-fixture-2037/package-inputs-257.json",
+    "bytes": 14490,
+    "sha256": "4a8996e3fcf1c40f3de2b384f77ef97757bdd0664b39bc1100fed32e79422478",
+    "git_blob_oid": "393c00f4f59b38747cc3c561adeb38f9c8477d37"
+  },
+  "unreachable_added_declarations": [
+    "coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-001/code-source.json",
+    "coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-001/issued-plan.json",
+    "coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-001/stderr.log",
+    "coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-001/stdout.json",
+    "coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-001/terminal.json"
+  ],
+  "expected_before": {
+    "profile": "full",
+    "selectedDataCandidate": true,
+    "selectedDataSelection": null,
+    "failure": "Selected-data: package change is not append-only exact reachable data"
+  },
+  "limitations": [
+    "No accepted delivery/candidate handle is fabricated.",
+    "Only package body differs from the literal32-file cf data overlay; original manifest and finalizer observations remain historical and do not establish new-base premerge validity.",
+    "257 package body is now an actual stock metadata-finalizer emission on reviewedf82/accepted738; no original science replay or data acceptance follows.",
+    "Use real baseline/tree/source bodies and existing profile methods, not a replacement predicate.",
+    "Assembly owner may compare its new role/consumer route without changing original scientific evidence."
+  ]
+}
