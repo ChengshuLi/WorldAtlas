@@ -1,0 +1,65 @@
+{
+  "at_utc": "2026-10-15T16:57:17.381626+00:00",
+  "completed_utc": "2026-10-15T16:59:22.512725+00:00",
+  "actual_trusted_head": "bd9c3a831ee7d4084f8541c8dffc1a9a1bbf053c",
+  "execution_acceptance_at_launch": "reviewed-unmerged",
+  "baseline": "4aa52927bf61765cc462a2d0824fa5bce83df919",
+  "candidate": "c6d5c278b55050b09ec97dc1cbf9ed39f26e243b",
+  "exit_code": 0,
+  "elapsed_seconds": 125.11115625000093,
+  "deadline_seconds": null,
+  "deadline_terminated": false,
+  "cancellation_requested": false,
+  "direct_child_lifetime_peak_rss_bytes": 1065517056,
+  "application_memory_policy_configured": false,
+  "numeric_phase_or_rss_override": false,
+  "child_exited": true,
+  "reservation_released": true,
+  "joint_mode": "authenticated-checkpoint-append-v1",
+  "reuse_unavailable": null,
+  "native_status": "no-new-native-loss",
+  "cold_fallback_executed": false,
+  "producer_replayed": false,
+  "pr1999_integration_attempted": false,
+  "public_action": false,
+  "kind": "retained-selected-native-consumer-execution-observation",
+  "raw_supervisor_receipt": {
+    "bytes": 3198,
+    "sha256": "d8c69324b211c43030f6bd58571a3cb9c44dae1c81e11bf04e9143a2e2d1da4e",
+    "hash_kind": "file-bytes"
+  },
+  "native_result_sha256": "8d6923727b729fb02ab87f4344997a4bc91eec6e1186b2712a6e04527024652d",
+  "emitted_inventory": [
+    {
+      "path": "coordination/engineering/indonesia-remaining264-20261015/selected-native-consumer-004/checkpoint-routes.json",
+      "bytes": 241092,
+      "sha256": "57a8779fd6b37f32b862c8f25de7a897389ed57fa2fe8c499f639ca04646f6d4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-remaining264-20261015/selected-native-consumer-004/derived-certificate.json.gz",
+      "bytes": 7517512,
+      "sha256": "303fafaffda65da95deb1b100f83bd1d9b1c0651f8a25948807a97ebfa9c07ef",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 18418617,
+      "uncompressed_sha256": "2f0d84f98bad8e6b18345d69cb042c32d171d2613397a00477b343d462685e2a"
+    },
+    {
+      "path": "coordination/engineering/indonesia-remaining264-20261015/selected-native-consumer-004/derived-facts.json",
+      "bytes": 466555,
+      "sha256": "3459dacf5e08e70483ab1e13fd39f26968950e1365625806f360e0baf7840755",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-remaining264-20261015/selected-native-consumer-004/derived-publication.json",
+      "bytes": 660,
+      "sha256": "9e063348cd87c94edc781d57e1e9e6ec40fee9ea984d5dcc88b059639c9b383f",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "limits": [
+    "Projection of the actual supervisor receipt; incidental command, checkout/interpreter paths and credential availability metadata are omitted. Raw receipt identity is retained above.",
+    "Elapsed seconds and direct-child lifetime maximum RSS bytes are observations; no hard deadline, configured aggregate application-memory policy or process-tree peak is established.",
+    "PR2008 was independently reviewed but unmerged at execution. Native success does not establish emitted-package, picker/sampler, exact-final-head, integration or accepted delivery."
+  ]
+}
