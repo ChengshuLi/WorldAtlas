@@ -1,0 +1,91 @@
+{
+  "kind": "main-adoption-twelve-dated-canopy-body-location-facets",
+  "adopted_at": "2026-10-15T23:46:09.374008+00:00",
+  "author_packet": {
+    "path": ".cache/worker4-mmr-bulk-physical-review-001/dated-canopy12/proposed-dated-canopy12.json",
+    "bytes": 206350,
+    "sha256": "418650427808842516fa2786e9503e0e6ee3d5e9c305292657398120c93057f5"
+  },
+  "independent_review": {
+    "path": ".cache/worker1-mmr-bulk-physical-20261015-001/dated-canopy12-independent-review-004/independent-dated-canopy12-review.json",
+    "sha256": "79616f5cea4f1d4d4ad95e83e5fc0cfc5d4c2741ea46b4aa4e5f28abc067e9ca"
+  },
+  "original_keys": [
+    {
+      "owner": 30350,
+      "y": 123153,
+      "x": 202632
+    },
+    {
+      "owner": 30350,
+      "y": 123250,
+      "x": 202616
+    },
+    {
+      "owner": 30361,
+      "y": 123252,
+      "x": 202783
+    },
+    {
+      "owner": 30361,
+      "y": 123258,
+      "x": 202779
+    },
+    {
+      "owner": 30361,
+      "y": 123259,
+      "x": 202779
+    },
+    {
+      "owner": 30350,
+      "y": 123201,
+      "x": 202832
+    },
+    {
+      "owner": 30350,
+      "y": 123213,
+      "x": 202789
+    },
+    {
+      "owner": 30350,
+      "y": 123217,
+      "x": 202789
+    },
+    {
+      "owner": 30361,
+      "y": 123299,
+      "x": 202621
+    },
+    {
+      "owner": 30361,
+      "y": 123370,
+      "x": 202810
+    },
+    {
+      "owner": 30361,
+      "y": 123667,
+      "x": 202671
+    },
+    {
+      "owner": 30361,
+      "y": 123829,
+      "x": 202537
+    }
+  ],
+  "actual_dated_source": "Existing retained Sentinel2A PMM January25 2020 RGB/NIR/native masks/SCL and exact source-associated centres",
+  "decision": "Adopt exactly twelve dated visible vegetation/canopy body-location facets, supported by actual saved visual/spectral context, exact native positions, original-source body association and distinct consequential review.",
+  "previous_known_original_answered": 16983,
+  "new_disjoint_answers": 12,
+  "known_original_answered_union": 16995,
+  "remaining_specific_physical_questions": 1464,
+  "original_physical_denominator": 18459,
+  "limits": [
+    "No inferred dryground, understorey/waterinterface, exactshoreline, wholeAtlas-cell, sovereignty or native/repair authority.",
+    "Actual adjacent SCL5 beach and class2 dark-pixel quality flags retained; no SCL-only clear-groundtruth assertion.",
+    "Existing151/386 answers not rereviewed or counted; withdrawn170 remainswithdrawn.",
+    "SourceSTAC millisecond timestamp and more precise producerXML timestamp are samepass, not two observations."
+  ],
+  "new_source_or_raster_kernel_calls": 0,
+  "native_or_repair_credit": 0,
+  "publication": "pending"
+}

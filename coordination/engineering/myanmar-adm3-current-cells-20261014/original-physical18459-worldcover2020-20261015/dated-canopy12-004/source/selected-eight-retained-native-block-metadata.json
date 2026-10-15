@@ -1,0 +1,2064 @@
+{
+  "raw_complete_native_body": {
+    "path": ".cache/worker1-mmr-physical-followup-001/new-dated-source-001/first-native-observation-001/actual-native-blocks-001/S2A_47PMM_20200125_0_L2A/native-observations.json",
+    "bytes": 9861264,
+    "sha256": "728d52e06bc8d00685fc44b7930643cbc3c557c25fe33842e5689a1f2b48b481",
+    "git_blob_oid": "b051c6e9f7758e195f1b4f910fa454439d43083a",
+    "full2107body_remains_retained_privately": true
+  },
+  "block_metadata": [
+    {
+      "block": [
+        0,
+        1
+      ],
+      "indices": [
+        6,
+        7,
+        16,
+        17,
+        29,
+        30,
+        35,
+        45,
+        46,
+        47,
+        48,
+        53,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        62,
+        63,
+        67,
+        68,
+        72,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        84,
+        87,
+        88,
+        89,
+        94,
+        97,
+        101,
+        102,
+        135,
+        136,
+        137,
+        142,
+        143,
+        147,
+        148,
+        149,
+        150,
+        152,
+        153,
+        163,
+        166
+      ],
+      "point_count": 50,
+      "assets": {
+        "red": {
+          "window": [
+            1023,
+            0,
+            1026,
+            1025
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            410190.0,
+            0.0,
+            -10.0,
+            1200000.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "valid_pixel_count": 1051650,
+          "total_pixels": 1051650,
+          "output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-00-01/red.tif",
+            "bytes": 1244423,
+            "sha256": "8b2368d001ae0f947c9f26a01b6f4a56b1ab793cc9c6233f84b97a627a80fad8"
+          },
+          "source_mask_output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-00-01/red-source-mask.tif",
+            "bytes": 7761,
+            "sha256": "441849fb3033fc792b44b665aafb8197a2d69c8b35aab0aac9bbc9d1ba0b32f8"
+          }
+        },
+        "green": {
+          "window": [
+            1023,
+            0,
+            1026,
+            1025
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            410190.0,
+            0.0,
+            -10.0,
+            1200000.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "valid_pixel_count": 1051650,
+          "total_pixels": 1051650,
+          "output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-00-01/green.tif",
+            "bytes": 1346257,
+            "sha256": "6b3632deb65f2bcdb2f3bd6293956db0c4a31991c413a23f1ecc515e8a60af90"
+          },
+          "source_mask_output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-00-01/green-source-mask.tif",
+            "bytes": 7761,
+            "sha256": "f2adc0845c4e7551eb9126a5b1a7c6c83e19316b2d4fe500ccd54a71a768cb5a"
+          }
+        },
+        "blue": {
+          "window": [
+            1023,
+            0,
+            1026,
+            1025
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            410190.0,
+            0.0,
+            -10.0,
+            1200000.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "valid_pixel_count": 1051650,
+          "total_pixels": 1051650,
+          "output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-00-01/blue.tif",
+            "bytes": 1318329,
+            "sha256": "3b01c1380a21273dfbda312960527ee81bfd6f741fc8e8c2dcecd18f59c41715"
+          },
+          "source_mask_output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-00-01/blue-source-mask.tif",
+            "bytes": 7761,
+            "sha256": "4a186b57f93505904a324cda257a79a6dd878ff19a21149bb69c4736d4b8474c"
+          }
+        },
+        "nir": {
+          "window": [
+            1023,
+            0,
+            1026,
+            1025
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            410190.0,
+            0.0,
+            -10.0,
+            1200000.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "valid_pixel_count": 1051650,
+          "total_pixels": 1051650,
+          "output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-00-01/nir.tif",
+            "bytes": 1387645,
+            "sha256": "db92dc1b6c2205c402c0e1366f26e48c154b205408b6717f09ece406a88bf104"
+          },
+          "source_mask_output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-00-01/nir-source-mask.tif",
+            "bytes": 7761,
+            "sha256": "ccb54400d56ae506a51a60fccda70ece1cacb3612c7010c35ffc9ce9f7919c7a"
+          }
+        },
+        "scl": {
+          "window": [
+            511,
+            0,
+            514,
+            513
+          ],
+          "transform": [
+            20.0,
+            0.0,
+            410180.0,
+            0.0,
+            -20.0,
+            1200000.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "valid_pixel_count": 263682,
+          "total_pixels": 263682,
+          "output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-00-01/scl.tif",
+            "bytes": 8443,
+            "sha256": "56fb69a908b26458d953a8dba0f48171f091d678498181371de15d9572d4af9a"
+          },
+          "source_mask_output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-00-01/scl-source-mask.tif",
+            "bytes": 2749,
+            "sha256": "d2d5905ec5d2bdad749713af84b0f1dd54f2f313751c1d52c9047894e68350c8"
+          }
+        }
+      },
+      "displays": [
+        {
+          "path": "S2A_47PMM_20200125_0_L2A/block-00-01/rgb-native.png",
+          "bytes": 1337986,
+          "sha256": "2eb52b181bfc62d3c833930f0b09f870ac20ccbdd3919890d847cefa216e886a"
+        },
+        {
+          "path": "S2A_47PMM_20200125_0_L2A/block-00-01/rgb-centres.png",
+          "bytes": 1350503,
+          "sha256": "5d6ef9cf861f73eda31419646290bdf6459997c7fb3467c09399e193306d0e69"
+        },
+        {
+          "path": "S2A_47PMM_20200125_0_L2A/block-00-01/nir-red-green-native.png",
+          "bytes": 1430996,
+          "sha256": "4d3dc798da51beeda15facdbea33ad90194f2c17d391b79cbaae7e2891e0d044"
+        },
+        {
+          "path": "S2A_47PMM_20200125_0_L2A/block-00-01/nir-red-green-centres.png",
+          "bytes": 1437684,
+          "sha256": "e9d7e7b8fef5088a7d5e697072332da3cf20bc15608ec52820905ed66c4f54c4"
+        }
+      ]
+    },
+    {
+      "block": [
+        1,
+        1
+      ],
+      "indices": [
+        182,
+        187,
+        192,
+        195,
+        196,
+        200,
+        201,
+        211,
+        225,
+        232,
+        290,
+        291,
+        296,
+        307,
+        308,
+        309,
+        310,
+        311,
+        312,
+        313,
+        314,
+        315,
+        316,
+        317,
+        318,
+        319,
+        320,
+        326,
+        327,
+        328,
+        329,
+        334,
+        335,
+        356,
+        357,
+        358,
+        359,
+        364,
+        365,
+        366,
+        367,
+        368,
+        369,
+        370,
+        376,
+        377,
+        378,
+        384,
+        385,
+        387,
+        388,
+        389,
+        390,
+        391,
+        392,
+        393
+      ],
+      "point_count": 56,
+      "assets": {
+        "red": {
+          "window": [
+            1023,
+            1023,
+            1026,
+            1026
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            410190.0,
+            0.0,
+            -10.0,
+            1189770.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "valid_pixel_count": 1052676,
+          "total_pixels": 1052676,
+          "output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-01-01/red.tif",
+            "bytes": 1207749,
+            "sha256": "4f649c303bf06abf45667ff267b13563cd740740c856bfc4b1dcff9b2640352e"
+          },
+          "source_mask_output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-01-01/red-source-mask.tif",
+            "bytes": 7761,
+            "sha256": "0c9b77c7ded762e1437bb8ad277b628c877d7d612b23d7de1dfda2c736cc892f"
+          }
+        },
+        "green": {
+          "window": [
+            1023,
+            1023,
+            1026,
+            1026
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            410190.0,
+            0.0,
+            -10.0,
+            1189770.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "valid_pixel_count": 1052676,
+          "total_pixels": 1052676,
+          "output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-01-01/green.tif",
+            "bytes": 1307419,
+            "sha256": "90c2f0812495e5dc74d095d4f52069c0b692505a27322ecd50bfd6e993ec392f"
+          },
+          "source_mask_output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-01-01/green-source-mask.tif",
+            "bytes": 7761,
+            "sha256": "206f5b56f58cddecfefa31119c0720ab24b200f594b3a741d3ed453d926cb7b2"
+          }
+        },
+        "blue": {
+          "window": [
+            1023,
+            1023,
+            1026,
+            1026
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            410190.0,
+            0.0,
+            -10.0,
+            1189770.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "valid_pixel_count": 1052676,
+          "total_pixels": 1052676,
+          "output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-01-01/blue.tif",
+            "bytes": 1271025,
+            "sha256": "0a7e2186b50ed98b05148864d41d29182ddcdebb7649c0f99f48d13b33ee0dbd"
+          },
+          "source_mask_output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-01-01/blue-source-mask.tif",
+            "bytes": 7761,
+            "sha256": "35f13ae788f98aaafcd99a24b95e26e6140a747a96061570fdb07f41f74e4f1d"
+          }
+        },
+        "nir": {
+          "window": [
+            1023,
+            1023,
+            1026,
+            1026
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            410190.0,
+            0.0,
+            -10.0,
+            1189770.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "valid_pixel_count": 1052676,
+          "total_pixels": 1052676,
+          "output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-01-01/nir.tif",
+            "bytes": 1314251,
+            "sha256": "4bccd9656791a285c4b033241a0e6a11ce04101929eaeae7f53f286e78742aa0"
+          },
+          "source_mask_output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-01-01/nir-source-mask.tif",
+            "bytes": 7761,
+            "sha256": "2fd64f6d03e39245bf735ec336b8635bfc3b2ddb6249d0cd2e313ff3fa9b7bae"
+          }
+        },
+        "scl": {
+          "window": [
+            511,
+            511,
+            514,
+            514
+          ],
+          "transform": [
+            20.0,
+            0.0,
+            410180.0,
+            0.0,
+            -20.0,
+            1189780.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "valid_pixel_count": 264196,
+          "total_pixels": 264196,
+          "output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-01-01/scl.tif",
+            "bytes": 8201,
+            "sha256": "d2ced32fc933b8ae3de489d3d31335755dbc82c73939ed1b515150774937e81b"
+          },
+          "source_mask_output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-01-01/scl-source-mask.tif",
+            "bytes": 2753,
+            "sha256": "1b9f202189f073f072aa849e08ee33b77bcf24997e4f65c87fd360a463327ce5"
+          }
+        }
+      },
+      "displays": [
+        {
+          "path": "S2A_47PMM_20200125_0_L2A/block-01-01/rgb-native.png",
+          "bytes": 1316580,
+          "sha256": "3f4dbf7bd0eb447e1976c8e961916705aec9d697cd27971789082448b2f3f11b"
+        },
+        {
+          "path": "S2A_47PMM_20200125_0_L2A/block-01-01/rgb-centres.png",
+          "bytes": 1331481,
+          "sha256": "1ab54ea76a8c977e132f20bf3add405c6d77dfaf5d7503994f649ffa86ed2d7f"
+        },
+        {
+          "path": "S2A_47PMM_20200125_0_L2A/block-01-01/nir-red-green-native.png",
+          "bytes": 1360460,
+          "sha256": "8b15f6de104788f19ce0228f05e8d32e8a15a8d652f01da487b7ae3b30112172"
+        },
+        {
+          "path": "S2A_47PMM_20200125_0_L2A/block-01-01/nir-red-green-centres.png",
+          "bytes": 1368448,
+          "sha256": "039f123b2606a59d905918e6ba811c951007e8a90c042a43643b420f25c5359f"
+        }
+      ]
+    },
+    {
+      "block": [
+        1,
+        3
+      ],
+      "indices": [
+        292,
+        293,
+        294,
+        297,
+        298,
+        299,
+        301,
+        302,
+        303,
+        306,
+        321,
+        322,
+        323,
+        330,
+        331,
+        332,
+        336,
+        337,
+        338,
+        339,
+        340,
+        341,
+        342,
+        343,
+        344,
+        345,
+        346,
+        347,
+        348,
+        349,
+        350,
+        351,
+        352,
+        353,
+        354,
+        355,
+        360,
+        361,
+        362,
+        363,
+        371,
+        372,
+        373,
+        374,
+        375,
+        379,
+        380,
+        381,
+        382,
+        383,
+        386
+      ],
+      "point_count": 51,
+      "assets": {
+        "red": {
+          "window": [
+            3071,
+            1023,
+            1026,
+            1026
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            430670.0,
+            0.0,
+            -10.0,
+            1189770.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "valid_pixel_count": 1052676,
+          "total_pixels": 1052676,
+          "output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-01-03/red.tif",
+            "bytes": 1213707,
+            "sha256": "13789789fc03cf7fa63120cb6582183e809da4039115f7acb2f9fc61a783116c"
+          },
+          "source_mask_output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-01-03/red-source-mask.tif",
+            "bytes": 7761,
+            "sha256": "7c12950c4fe2270100c4551307d28c3c54a0aa17beb2959f79292c7f81391cb5"
+          }
+        },
+        "green": {
+          "window": [
+            3071,
+            1023,
+            1026,
+            1026
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            430670.0,
+            0.0,
+            -10.0,
+            1189770.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "valid_pixel_count": 1052676,
+          "total_pixels": 1052676,
+          "output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-01-03/green.tif",
+            "bytes": 1320351,
+            "sha256": "6765e7fa4221393dec9e9431cd0312ab2b2d75d84eb4cb9c15357e8e62c1f739"
+          },
+          "source_mask_output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-01-03/green-source-mask.tif",
+            "bytes": 7761,
+            "sha256": "961d9ef3e04f4427a7b81734e67339ec24bf1b98550c9002391edbdd61ab69ce"
+          }
+        },
+        "blue": {
+          "window": [
+            3071,
+            1023,
+            1026,
+            1026
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            430670.0,
+            0.0,
+            -10.0,
+            1189770.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "valid_pixel_count": 1052676,
+          "total_pixels": 1052676,
+          "output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-01-03/blue.tif",
+            "bytes": 1300841,
+            "sha256": "5f8581e4400c473e085a3d451beb2aa04ab1a8459666a23e4d89a1a1d9cf7dd3"
+          },
+          "source_mask_output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-01-03/blue-source-mask.tif",
+            "bytes": 7761,
+            "sha256": "7ada35037e2f08909a67c9a759b797200936f3635a2dc7713f2a588d6df3c3f9"
+          }
+        },
+        "nir": {
+          "window": [
+            3071,
+            1023,
+            1026,
+            1026
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            430670.0,
+            0.0,
+            -10.0,
+            1189770.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "valid_pixel_count": 1052676,
+          "total_pixels": 1052676,
+          "output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-01-03/nir.tif",
+            "bytes": 1036869,
+            "sha256": "20fed66d3b1b9dea4854c3a24550bed8da447d8b41608c110549123e14bfacd7"
+          },
+          "source_mask_output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-01-03/nir-source-mask.tif",
+            "bytes": 7761,
+            "sha256": "465975f8910ff9a79992e1c36a14abab278a42131f2d1fc06232be8281bcbdb7"
+          }
+        },
+        "scl": {
+          "window": [
+            1535,
+            511,
+            514,
+            514
+          ],
+          "transform": [
+            20.0,
+            0.0,
+            430660.0,
+            0.0,
+            -20.0,
+            1189780.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "valid_pixel_count": 264196,
+          "total_pixels": 264196,
+          "output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-01-03/scl.tif",
+            "bytes": 3491,
+            "sha256": "017b534b3ac3665909c5511c6ea0591e74c356a9f7099325e29764dbb5959956"
+          },
+          "source_mask_output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-01-03/scl-source-mask.tif",
+            "bytes": 2753,
+            "sha256": "eca9af208a116fcf02b8d8fd0bb3be13e213499cb455099023f0507e4ad3226e"
+          }
+        }
+      },
+      "displays": [
+        {
+          "path": "S2A_47PMM_20200125_0_L2A/block-01-03/rgb-native.png",
+          "bytes": 1042891,
+          "sha256": "5cebbbc83cfe00116ce344750378e99d9236859732de73ba85669662bab1b8ef"
+        },
+        {
+          "path": "S2A_47PMM_20200125_0_L2A/block-01-03/rgb-centres.png",
+          "bytes": 1058181,
+          "sha256": "40dbe6662a3700e5dd3a434b1e1f203cf55b1d3a876e1d3cd288ee23cc5bfcfb"
+        },
+        {
+          "path": "S2A_47PMM_20200125_0_L2A/block-01-03/nir-red-green-native.png",
+          "bytes": 944926,
+          "sha256": "f0be948b9440ea1e1985751bb8e498fc6fc8779a539f906c15ddee299ebf32ec"
+        },
+        {
+          "path": "S2A_47PMM_20200125_0_L2A/block-01-03/nir-red-green-centres.png",
+          "bytes": 954378,
+          "sha256": "53226b6be6f4eb4c3e80dda649baf3240644bfe02f79b85237a8c18677671f35"
+        }
+      ]
+    },
+    {
+      "block": [
+        1,
+        4
+      ],
+      "indices": [
+        172,
+        173,
+        174,
+        175,
+        176,
+        177,
+        178,
+        179,
+        180,
+        181,
+        183,
+        184,
+        185,
+        186,
+        188,
+        189,
+        190,
+        191,
+        193,
+        194,
+        197,
+        198,
+        199,
+        202,
+        203,
+        204,
+        205,
+        206,
+        207,
+        208,
+        209,
+        210,
+        212,
+        213,
+        214,
+        215,
+        216,
+        217,
+        218,
+        219,
+        220,
+        221,
+        222,
+        223,
+        224,
+        226,
+        227,
+        228,
+        229,
+        230,
+        231,
+        233,
+        234,
+        235,
+        236,
+        237,
+        238,
+        239,
+        240,
+        241,
+        242,
+        243,
+        244,
+        245,
+        246,
+        247,
+        248,
+        249,
+        250,
+        251,
+        252,
+        253,
+        254,
+        255,
+        256,
+        257,
+        258,
+        259,
+        260,
+        261,
+        262,
+        263,
+        264,
+        265,
+        266,
+        267,
+        268,
+        269,
+        270,
+        271,
+        272,
+        273,
+        274,
+        275,
+        276,
+        277,
+        278,
+        279,
+        280,
+        281,
+        282,
+        283,
+        284,
+        285,
+        286,
+        287,
+        288,
+        289,
+        295,
+        300,
+        304,
+        305,
+        324,
+        325,
+        333
+      ],
+      "point_count": 115,
+      "assets": {
+        "red": {
+          "window": [
+            4095,
+            1023,
+            1026,
+            1026
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            440910.0,
+            0.0,
+            -10.0,
+            1189770.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "valid_pixel_count": 1052676,
+          "total_pixels": 1052676,
+          "output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-01-04/red.tif",
+            "bytes": 1503455,
+            "sha256": "c8813c65d443a737165fd2db2bbf0647dc1b39d9c95f779b06727c7ab98d0ccf"
+          },
+          "source_mask_output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-01-04/red-source-mask.tif",
+            "bytes": 7761,
+            "sha256": "d8620374741235d97ebcc836c2a54e4d7cdb65bc36311b00e63c52e68ab14c8d"
+          }
+        },
+        "green": {
+          "window": [
+            4095,
+            1023,
+            1026,
+            1026
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            440910.0,
+            0.0,
+            -10.0,
+            1189770.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "valid_pixel_count": 1052676,
+          "total_pixels": 1052676,
+          "output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-01-04/green.tif",
+            "bytes": 1498521,
+            "sha256": "a6a35cce287768ec54f74e2e8307a1db996f1d377ecd820271c38e9558a9435a"
+          },
+          "source_mask_output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-01-04/green-source-mask.tif",
+            "bytes": 7761,
+            "sha256": "720aa9b31bd53cee7ce77749523276309b808e68501337380faf2749890ad2a0"
+          }
+        },
+        "blue": {
+          "window": [
+            4095,
+            1023,
+            1026,
+            1026
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            440910.0,
+            0.0,
+            -10.0,
+            1189770.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "valid_pixel_count": 1052676,
+          "total_pixels": 1052676,
+          "output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-01-04/blue.tif",
+            "bytes": 1469069,
+            "sha256": "f2070d1fec0c7dbe685ead7f76365f4b20014d9942bb7bfd0cb4660e42baeaf7"
+          },
+          "source_mask_output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-01-04/blue-source-mask.tif",
+            "bytes": 7761,
+            "sha256": "c3f850fa5b9d66312235c616ca54c48dff72f0e7ab1ec530254c8c097a9d8699"
+          }
+        },
+        "nir": {
+          "window": [
+            4095,
+            1023,
+            1026,
+            1026
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            440910.0,
+            0.0,
+            -10.0,
+            1189770.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "valid_pixel_count": 1052676,
+          "total_pixels": 1052676,
+          "output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-01-04/nir.tif",
+            "bytes": 1611009,
+            "sha256": "69c415a306c4bedf62fffb5586dca87365f2690427a42f3fca0b953dce58cc27"
+          },
+          "source_mask_output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-01-04/nir-source-mask.tif",
+            "bytes": 7761,
+            "sha256": "1d7447cb431e741a4ad756088757d99e3a650514b8d4e6e01b1e89d0e5f488ec"
+          }
+        },
+        "scl": {
+          "window": [
+            2047,
+            511,
+            514,
+            514
+          ],
+          "transform": [
+            20.0,
+            0.0,
+            440900.0,
+            0.0,
+            -20.0,
+            1189780.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "valid_pixel_count": 264196,
+          "total_pixels": 264196,
+          "output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-01-04/scl.tif",
+            "bytes": 17243,
+            "sha256": "07e87395d3d48e6850b129d9bdb4ef1af2fa479e4669388fbb1848c77762ca22"
+          },
+          "source_mask_output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-01-04/scl-source-mask.tif",
+            "bytes": 2753,
+            "sha256": "4245fe4ce4a971409616e73bba7534993ba5bee46cce97be039ed01a48ce9ecf"
+          }
+        }
+      },
+      "displays": [
+        {
+          "path": "S2A_47PMM_20200125_0_L2A/block-01-04/rgb-native.png",
+          "bytes": 1552023,
+          "sha256": "97f5b75ff500cac1245657960326aa57cb2213ce3f47ebe1d0465fe93915149a"
+        },
+        {
+          "path": "S2A_47PMM_20200125_0_L2A/block-01-04/rgb-centres.png",
+          "bytes": 1583598,
+          "sha256": "446d7c98f415ff9a710db1e202d201f5f983805d2b88dc07b97f0409c01f6fb1"
+        },
+        {
+          "path": "S2A_47PMM_20200125_0_L2A/block-01-04/nir-red-green-native.png",
+          "bytes": 1758231,
+          "sha256": "30ec30e0fbfbaa4caba04ecc9fb55cfff6b7cb89748e87b9724741e4ace999f2"
+        },
+        {
+          "path": "S2A_47PMM_20200125_0_L2A/block-01-04/nir-red-green-centres.png",
+          "bytes": 1778035,
+          "sha256": "4192479db69e0d49f59c403aa80835c68016dfad792b27882b92f2fe47406e21"
+        }
+      ]
+    },
+    {
+      "block": [
+        2,
+        1
+      ],
+      "indices": [
+        394,
+        395,
+        409,
+        414,
+        416,
+        417,
+        418,
+        419,
+        420,
+        421,
+        422,
+        423,
+        424,
+        425,
+        426,
+        427,
+        428,
+        429,
+        430,
+        431,
+        432,
+        433,
+        434,
+        435,
+        436,
+        437,
+        438,
+        439,
+        440,
+        441,
+        442,
+        443,
+        444,
+        446,
+        447,
+        448,
+        449,
+        450,
+        451,
+        453,
+        454,
+        455,
+        456,
+        457,
+        458,
+        459,
+        460,
+        461,
+        462,
+        463,
+        464,
+        465,
+        466,
+        467,
+        468,
+        469,
+        470,
+        471,
+        472,
+        473,
+        474,
+        475,
+        476,
+        477,
+        478,
+        479,
+        480,
+        481,
+        482,
+        483,
+        484,
+        485,
+        486,
+        491
+      ],
+      "point_count": 74,
+      "assets": {
+        "red": {
+          "window": [
+            1023,
+            2047,
+            1026,
+            1026
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            410190.0,
+            0.0,
+            -10.0,
+            1179530.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "valid_pixel_count": 1052676,
+          "total_pixels": 1052676,
+          "output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-02-01/red.tif",
+            "bytes": 1122783,
+            "sha256": "1842ced5bee8a554480bb34a8dfc7cc4562409aee96af537f1a15bbb89383f28"
+          },
+          "source_mask_output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-02-01/red-source-mask.tif",
+            "bytes": 7761,
+            "sha256": "d62c20c0354bdaff3b20b2fe9882c812015d5737fc131c1ca6f6b462a7ad23b8"
+          }
+        },
+        "green": {
+          "window": [
+            1023,
+            2047,
+            1026,
+            1026
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            410190.0,
+            0.0,
+            -10.0,
+            1179530.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "valid_pixel_count": 1052676,
+          "total_pixels": 1052676,
+          "output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-02-01/green.tif",
+            "bytes": 1220257,
+            "sha256": "fe461ead3803c3e4059e5d5b67c703189693d6bd7ed9ac826042d0b323f91f69"
+          },
+          "source_mask_output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-02-01/green-source-mask.tif",
+            "bytes": 7761,
+            "sha256": "8cc43bef5b1370bb36b0a8c86601874a8a4212d12b34f41a71bc0e0214f4b2f5"
+          }
+        },
+        "blue": {
+          "window": [
+            1023,
+            2047,
+            1026,
+            1026
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            410190.0,
+            0.0,
+            -10.0,
+            1179530.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "valid_pixel_count": 1052676,
+          "total_pixels": 1052676,
+          "output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-02-01/blue.tif",
+            "bytes": 1174669,
+            "sha256": "c0468fec18be7c31669a84694f0b258b177ad0033c9371a149215798e6f2cf5c"
+          },
+          "source_mask_output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-02-01/blue-source-mask.tif",
+            "bytes": 7761,
+            "sha256": "d5145c6c85b64e37b0818290c9c5cc1c57554e97c9b2d0cc2774c5bd15faedb6"
+          }
+        },
+        "nir": {
+          "window": [
+            1023,
+            2047,
+            1026,
+            1026
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            410190.0,
+            0.0,
+            -10.0,
+            1179530.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "valid_pixel_count": 1052676,
+          "total_pixels": 1052676,
+          "output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-02-01/nir.tif",
+            "bytes": 1161281,
+            "sha256": "79bb0986b43b850081661ba87b36b0133e9109c5934ee3a390d538b801b3b077"
+          },
+          "source_mask_output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-02-01/nir-source-mask.tif",
+            "bytes": 7761,
+            "sha256": "98bc87e7f6c425d666ba566fa191c7c7037cb0cefa01c80ea6926d6269c2193a"
+          }
+        },
+        "scl": {
+          "window": [
+            511,
+            1023,
+            514,
+            514
+          ],
+          "transform": [
+            20.0,
+            0.0,
+            410180.0,
+            0.0,
+            -20.0,
+            1179540.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "valid_pixel_count": 264196,
+          "total_pixels": 264196,
+          "output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-02-01/scl.tif",
+            "bytes": 5115,
+            "sha256": "5f6700363b81507c5e3a39bb4f04ffeca4e00310e77b6df3065fcf70803d78b0"
+          },
+          "source_mask_output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-02-01/scl-source-mask.tif",
+            "bytes": 2753,
+            "sha256": "afbeee5d82465a839d4c838b003f7363d84417c58128c194dade962798a81402"
+          }
+        }
+      },
+      "displays": [
+        {
+          "path": "S2A_47PMM_20200125_0_L2A/block-02-01/rgb-native.png",
+          "bytes": 1123372,
+          "sha256": "40a9c53e692a4268981e1c07b94321450f985000b6846e64007f7f3e4a70ca8b"
+        },
+        {
+          "path": "S2A_47PMM_20200125_0_L2A/block-02-01/rgb-centres.png",
+          "bytes": 1140308,
+          "sha256": "b2f6a725e3b8ad28b06a393246c3ed05c74d83bca0aceb68a6d6c2e14ed51c5b"
+        },
+        {
+          "path": "S2A_47PMM_20200125_0_L2A/block-02-01/nir-red-green-native.png",
+          "bytes": 1056046,
+          "sha256": "1fed201bb22881493c45954e5afcda54455600a27f3431e80d1480d53c897874"
+        },
+        {
+          "path": "S2A_47PMM_20200125_0_L2A/block-02-01/nir-red-green-centres.png",
+          "bytes": 1067363,
+          "sha256": "63d481a3e40ef1aea8fada7b82a59814c4eca46d38ee49fffc914bf7e97923ad"
+        }
+      ]
+    },
+    {
+      "block": [
+        3,
+        4
+      ],
+      "indices": [
+        518,
+        519,
+        520,
+        522,
+        523,
+        526,
+        528,
+        530,
+        565,
+        569,
+        572,
+        573,
+        576,
+        577,
+        578,
+        579,
+        580,
+        581,
+        582,
+        583,
+        584,
+        585,
+        587,
+        588,
+        589,
+        590,
+        591,
+        592,
+        593,
+        594,
+        595,
+        596,
+        597,
+        598,
+        599,
+        600,
+        601,
+        602,
+        603,
+        604,
+        605,
+        606,
+        607,
+        608,
+        609,
+        627,
+        628,
+        629,
+        630,
+        631,
+        640,
+        641,
+        642
+      ],
+      "point_count": 53,
+      "assets": {
+        "red": {
+          "window": [
+            4095,
+            3071,
+            1026,
+            1026
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            440910.0,
+            0.0,
+            -10.0,
+            1169290.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "valid_pixel_count": 1052676,
+          "total_pixels": 1052676,
+          "output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-03-04/red.tif",
+            "bytes": 1550231,
+            "sha256": "633a6861d5b4d2826dbf90d0b1547c4114fd203fd377933ef115daaeec4dc32e"
+          },
+          "source_mask_output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-03-04/red-source-mask.tif",
+            "bytes": 7761,
+            "sha256": "61a00ad0d00f9c3a4e0c8c72a4524f034e674dabd19b18a65d1612e4f6db8028"
+          }
+        },
+        "green": {
+          "window": [
+            4095,
+            3071,
+            1026,
+            1026
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            440910.0,
+            0.0,
+            -10.0,
+            1169290.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "valid_pixel_count": 1052676,
+          "total_pixels": 1052676,
+          "output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-03-04/green.tif",
+            "bytes": 1569473,
+            "sha256": "ec2c55de8eb9b43d978e7f87ca5cb4ec67b8ec78a86c7b8074216f45e030b607"
+          },
+          "source_mask_output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-03-04/green-source-mask.tif",
+            "bytes": 7761,
+            "sha256": "213f0c4c99cbb1529b95891fa76647b36fb3b88d7ab183722c6efb4c9943472d"
+          }
+        },
+        "blue": {
+          "window": [
+            4095,
+            3071,
+            1026,
+            1026
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            440910.0,
+            0.0,
+            -10.0,
+            1169290.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "valid_pixel_count": 1052676,
+          "total_pixels": 1052676,
+          "output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-03-04/blue.tif",
+            "bytes": 1531407,
+            "sha256": "e70fe532b92658cf79a929dbabde9b5cb10e65f81888b6954881a5c126a85a12"
+          },
+          "source_mask_output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-03-04/blue-source-mask.tif",
+            "bytes": 7761,
+            "sha256": "b197f2fdac8f43f4fd5d5ac95202df39eb9f840e37f7294f6f59fe98f9cd6509"
+          }
+        },
+        "nir": {
+          "window": [
+            4095,
+            3071,
+            1026,
+            1026
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            440910.0,
+            0.0,
+            -10.0,
+            1169290.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "valid_pixel_count": 1052676,
+          "total_pixels": 1052676,
+          "output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-03-04/nir.tif",
+            "bytes": 1648171,
+            "sha256": "9951bf4336a983f58ee0a3a4d8682be0684a585b6b4ee5399312afadcfb4c725"
+          },
+          "source_mask_output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-03-04/nir-source-mask.tif",
+            "bytes": 7761,
+            "sha256": "08ccbf19209eb2e0d62f30d909af0e4fb3707f44c31d9b480ea651af921cf8e4"
+          }
+        },
+        "scl": {
+          "window": [
+            2047,
+            1535,
+            514,
+            514
+          ],
+          "transform": [
+            20.0,
+            0.0,
+            440900.0,
+            0.0,
+            -20.0,
+            1169300.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "valid_pixel_count": 264196,
+          "total_pixels": 264196,
+          "output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-03-04/scl.tif",
+            "bytes": 21339,
+            "sha256": "9d0a6310dcf9cafc7d5c1f9a5f807741af809bb726c37de7681bef81d8e99bb4"
+          },
+          "source_mask_output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-03-04/scl-source-mask.tif",
+            "bytes": 2753,
+            "sha256": "f2b731e8937bb0464b7f0e999fdd307eaabc38288013dccc082b7094f79b7358"
+          }
+        }
+      },
+      "displays": [
+        {
+          "path": "S2A_47PMM_20200125_0_L2A/block-03-04/rgb-native.png",
+          "bytes": 1631823,
+          "sha256": "2e14b6e043b1ce209bb46be82f18c15eb60f5b7fe4ef789fa965a5ab7474312e"
+        },
+        {
+          "path": "S2A_47PMM_20200125_0_L2A/block-03-04/rgb-centres.png",
+          "bytes": 1643872,
+          "sha256": "61d09eb2972a7ea0683e00df2ee48f4027c2db51494e9db77dafe1997574cebc"
+        },
+        {
+          "path": "S2A_47PMM_20200125_0_L2A/block-03-04/nir-red-green-native.png",
+          "bytes": 1681050,
+          "sha256": "42a3380e5c71ef9da8e66dfccca526fd20112e4ab5b50632efb3a5e765a78fde"
+        },
+        {
+          "path": "S2A_47PMM_20200125_0_L2A/block-03-04/nir-red-green-centres.png",
+          "bytes": 1689075,
+          "sha256": "80f4211cecaa6e753b100b741bfebc71ecb80169da2cfa97028230ac9f136112"
+        }
+      ]
+    },
+    {
+      "block": [
+        7,
+        2
+      ],
+      "indices": [
+        1199,
+        1200,
+        1201,
+        1202,
+        1203,
+        1204,
+        1210,
+        1211,
+        1212,
+        1213,
+        1214,
+        1215,
+        1216,
+        1217,
+        1218,
+        1219,
+        1222,
+        1223,
+        1224,
+        1225,
+        1226,
+        1227,
+        1228,
+        1229,
+        1230,
+        1231,
+        1234,
+        1235,
+        1236,
+        1237,
+        1238,
+        1239,
+        1240,
+        1241,
+        1242,
+        1243,
+        1244,
+        1246,
+        1247,
+        1248,
+        1249,
+        1250,
+        1251,
+        1252,
+        1253,
+        1254,
+        1255,
+        1256,
+        1257,
+        1258,
+        1259,
+        1260,
+        1261,
+        1262,
+        1263,
+        1264,
+        1265,
+        1266,
+        1267,
+        1268,
+        1269,
+        1271,
+        1272,
+        1273,
+        1274,
+        1275,
+        1276,
+        1277,
+        1278,
+        1279,
+        1280,
+        1281,
+        1282,
+        1283,
+        1285,
+        1286,
+        1287,
+        1288,
+        1289,
+        1290,
+        1291,
+        1292,
+        1293,
+        1294,
+        1295,
+        1296,
+        1297,
+        1298,
+        1299,
+        1300,
+        1301,
+        1302,
+        1303,
+        1304,
+        1305,
+        1306,
+        1307,
+        1309,
+        1310,
+        1311,
+        1312,
+        1313,
+        1314,
+        1315,
+        1316,
+        1318,
+        1319,
+        1320,
+        1321,
+        1328,
+        1334,
+        1335,
+        1336,
+        1337,
+        1343,
+        1344,
+        1345,
+        1356,
+        1357,
+        1358,
+        1359,
+        1369,
+        1370,
+        1371,
+        1379,
+        1380
+      ],
+      "point_count": 126,
+      "assets": {
+        "red": {
+          "window": [
+            2047,
+            7167,
+            1026,
+            1026
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            420430.0,
+            0.0,
+            -10.0,
+            1128330.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "valid_pixel_count": 1052676,
+          "total_pixels": 1052676,
+          "output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-07-02/red.tif",
+            "bytes": 1021587,
+            "sha256": "9fa36830fef3be36ce896d02f50c44683e05ee55761b10687002b8daec19fcf2"
+          },
+          "source_mask_output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-07-02/red-source-mask.tif",
+            "bytes": 7761,
+            "sha256": "7bc309c4d89b275ef665ef9676e55a79d6980c46a6bcb3f8a77e452712e9765c"
+          }
+        },
+        "green": {
+          "window": [
+            2047,
+            7167,
+            1026,
+            1026
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            420430.0,
+            0.0,
+            -10.0,
+            1128330.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "valid_pixel_count": 1052676,
+          "total_pixels": 1052676,
+          "output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-07-02/green.tif",
+            "bytes": 1144309,
+            "sha256": "0d0db157e33f4612feee8b5959d19b1e391c954c57e3c42f078df3fa1beb17ae"
+          },
+          "source_mask_output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-07-02/green-source-mask.tif",
+            "bytes": 7761,
+            "sha256": "f1d508bd6632821effdc1a69920746e30a709981e6931c33fe79854d8bd93a36"
+          }
+        },
+        "blue": {
+          "window": [
+            2047,
+            7167,
+            1026,
+            1026
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            420430.0,
+            0.0,
+            -10.0,
+            1128330.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "valid_pixel_count": 1052676,
+          "total_pixels": 1052676,
+          "output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-07-02/blue.tif",
+            "bytes": 1146365,
+            "sha256": "a72b00f840f4b1e6a2b2bb86c8a317562d9862abdbabec2bb35b6fdedca9e7a4"
+          },
+          "source_mask_output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-07-02/blue-source-mask.tif",
+            "bytes": 7761,
+            "sha256": "f4df6e75c9b56631e4ae49aec232fd3c738a91e7e633491cad42baf03514bbf4"
+          }
+        },
+        "nir": {
+          "window": [
+            2047,
+            7167,
+            1026,
+            1026
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            420430.0,
+            0.0,
+            -10.0,
+            1128330.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "valid_pixel_count": 1052676,
+          "total_pixels": 1052676,
+          "output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-07-02/nir.tif",
+            "bytes": 1053363,
+            "sha256": "612a3ac576643be73a3b4d56ef709e5d41c1eb551f7f3c8c98a3fb927e1ee1f0"
+          },
+          "source_mask_output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-07-02/nir-source-mask.tif",
+            "bytes": 7761,
+            "sha256": "c9b373a7ea528ccfe61fa781fb338f5014e12276ab1d8c74c7b744e21c05ac58"
+          }
+        },
+        "scl": {
+          "window": [
+            1023,
+            3583,
+            514,
+            514
+          ],
+          "transform": [
+            20.0,
+            0.0,
+            420420.0,
+            0.0,
+            -20.0,
+            1128340.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "valid_pixel_count": 264196,
+          "total_pixels": 264196,
+          "output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-07-02/scl.tif",
+            "bytes": 5249,
+            "sha256": "9804b3f3e32c8f468709bdb64d6db02db4254c72929bffa7dc14e5c9e3123909"
+          },
+          "source_mask_output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-07-02/scl-source-mask.tif",
+            "bytes": 2753,
+            "sha256": "f354218889c62bf977fa1c131e78cd9ac719a1d65bef033169af3a02aa88ee40"
+          }
+        }
+      },
+      "displays": [
+        {
+          "path": "S2A_47PMM_20200125_0_L2A/block-07-02/rgb-native.png",
+          "bytes": 1087345,
+          "sha256": "eff9d2f57ac185d13ef2147b530aa0816b4b6139212c78b3b00347b375c0922f"
+        },
+        {
+          "path": "S2A_47PMM_20200125_0_L2A/block-07-02/rgb-centres.png",
+          "bytes": 1116492,
+          "sha256": "50f5f36798575274e819f54251891f39c045c8fff85377f22b618473cdfea9e2"
+        },
+        {
+          "path": "S2A_47PMM_20200125_0_L2A/block-07-02/nir-red-green-native.png",
+          "bytes": 1005982,
+          "sha256": "37c92ab54430657905dc6e821c4b8067675ddcf56d52151d76fdb0c0e5f48358"
+        },
+        {
+          "path": "S2A_47PMM_20200125_0_L2A/block-07-02/nir-red-green-centres.png",
+          "bytes": 1025210,
+          "sha256": "9e924a16d467a00b01f34099c55924e41059a94063a3187ed03d30e2787dfd36"
+        }
+      ]
+    },
+    {
+      "block": [
+        10,
+        0
+      ],
+      "indices": [
+        2082,
+        2084,
+        2086,
+        2087,
+        2088,
+        2089,
+        2090,
+        2091,
+        2092,
+        2093,
+        2094,
+        2095,
+        2096,
+        2097,
+        2098,
+        2099,
+        2100,
+        2101,
+        2102,
+        2103,
+        2104,
+        2105,
+        2106
+      ],
+      "point_count": 23,
+      "assets": {
+        "red": {
+          "window": [
+            0,
+            10239,
+            1025,
+            741
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            399960.0,
+            0.0,
+            -10.0,
+            1097610.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "valid_pixel_count": 759525,
+          "total_pixels": 759525,
+          "output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-10-00/red.tif",
+            "bytes": 956341,
+            "sha256": "9f615b13be7722cbf1a42b09af87cf2758079e34b77510b12f6bc08a07f27719"
+          },
+          "source_mask_output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-10-00/red-source-mask.tif",
+            "bytes": 5919,
+            "sha256": "983595a93646cabb1e6433c1786a7677be2c9a1e557075bd294ea5d72c723568"
+          }
+        },
+        "green": {
+          "window": [
+            0,
+            10239,
+            1025,
+            741
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            399960.0,
+            0.0,
+            -10.0,
+            1097610.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "valid_pixel_count": 759525,
+          "total_pixels": 759525,
+          "output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-10-00/green.tif",
+            "bytes": 1021407,
+            "sha256": "af5867070602ab8374f6025e1dfcbc95fd87481a681fb92c56db092a716c49b8"
+          },
+          "source_mask_output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-10-00/green-source-mask.tif",
+            "bytes": 5919,
+            "sha256": "997d9db750473636c067545d51a8e831d5902620e0118f5b783af90e59e7559c"
+          }
+        },
+        "blue": {
+          "window": [
+            0,
+            10239,
+            1025,
+            741
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            399960.0,
+            0.0,
+            -10.0,
+            1097610.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "valid_pixel_count": 759525,
+          "total_pixels": 759525,
+          "output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-10-00/blue.tif",
+            "bytes": 982277,
+            "sha256": "894bde131b9fcbe9965d90f2a6f9e963848ce6ecd172e376d0563d59de60c6d0"
+          },
+          "source_mask_output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-10-00/blue-source-mask.tif",
+            "bytes": 5919,
+            "sha256": "590176ad38c218f0cd0c2a0e086bf7816459003f6143d90852d624c74caa7e93"
+          }
+        },
+        "nir": {
+          "window": [
+            0,
+            10239,
+            1025,
+            741
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            399960.0,
+            0.0,
+            -10.0,
+            1097610.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "valid_pixel_count": 759525,
+          "total_pixels": 759525,
+          "output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-10-00/nir.tif",
+            "bytes": 1090387,
+            "sha256": "8180da607033741ec846889f69938b8f9337226c3372d4817c4d3863e97a0fbb"
+          },
+          "source_mask_output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-10-00/nir-source-mask.tif",
+            "bytes": 5919,
+            "sha256": "aa5a9ee59b5615f9ac6972ba39dd5e5200a4fe2d48b14cafd14b85fc005063a8"
+          }
+        },
+        "scl": {
+          "window": [
+            0,
+            5119,
+            513,
+            371
+          ],
+          "transform": [
+            20.0,
+            0.0,
+            399960.0,
+            0.0,
+            -20.0,
+            1097620.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "valid_pixel_count": 190323,
+          "total_pixels": 190323,
+          "output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-10-00/scl.tif",
+            "bytes": 5157,
+            "sha256": "d4774352583bd0dca490d7ff1e4e8861103f199459672c61075ab224d0009920"
+          },
+          "source_mask_output": {
+            "path": "S2A_47PMM_20200125_0_L2A/block-10-00/scl-source-mask.tif",
+            "bytes": 2297,
+            "sha256": "a2a2d5db77f11108603ce4c3c4460a3417e16c66fc91e908330cae0563e41810"
+          }
+        }
+      },
+      "displays": [
+        {
+          "path": "S2A_47PMM_20200125_0_L2A/block-10-00/rgb-native.png",
+          "bytes": 1016756,
+          "sha256": "cbea85ac1007ded294aaffa2b4a14406c5228e88e1de2546c77fc7dedba1c277"
+        },
+        {
+          "path": "S2A_47PMM_20200125_0_L2A/block-10-00/rgb-centres.png",
+          "bytes": 1026884,
+          "sha256": "1e820c4527701feebe057d9fd1fa9185b6ce9acc482930fa0d0053fc3c375ca7"
+        },
+        {
+          "path": "S2A_47PMM_20200125_0_L2A/block-10-00/nir-red-green-native.png",
+          "bytes": 1082421,
+          "sha256": "475afddd0aaef5fbd84896f8f9a6307855dc3f55200c23c7f60ba99f3a57b8eb"
+        },
+        {
+          "path": "S2A_47PMM_20200125_0_L2A/block-10-00/nir-red-green-centres.png",
+          "bytes": 1087419,
+          "sha256": "76594c077ec3bda70404cecfc0d405130ab06b86972833671bed5fb87c420fbc"
+        }
+      ]
+    }
+  ],
+  "publicly_mirrored_here": "Twelve literalpointRGBNIR/SCL3x3/fullmasks and alreadyproducedexact12pairedPNGcontext only. Whole8blockTIFFs/16sourcePNGframes are retainedprivately withoriginalpins,notallassertedpublic."
+}
