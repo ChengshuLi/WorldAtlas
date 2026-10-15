@@ -1,0 +1,1326 @@
+{
+  "kind": "Root-adopted-four-original-physical-context-supplement-answers",
+  "adopted_utc": "2026-10-15T23:16:48.735776+00:00",
+  "original_issue": 1884,
+  "distinct_review_sha256": "b25fbcadab0b0433b0b8fd084579156bc79ca5f3274d77ff462c13981a3c4721",
+  "source_reads": 0,
+  "new_bounded_answers": 4,
+  "previous_known_adopted_answers": 92541,
+  "known_exact_adopted_union": 92545,
+  "specific_residuals": 41301,
+  "original_denominator": 133846,
+  "records": [
+    {
+      "point_index": 50356,
+      "original_key": {
+        "owner": 23090,
+        "y": 133094,
+        "x": 227210
+      },
+      "original_record_unchanged": {
+        "original_category": "physical",
+        "original_block": 32,
+        "original_record_ordinal": 18487,
+        "original_owners": [
+          23090
+        ],
+        "original_SIDs": [
+          36255,
+          36362
+        ],
+        "original_class": "source-relative",
+        "original_interval": [
+          133094,
+          227210,
+          227211,
+          [
+            23090
+          ],
+          [
+            36255,
+            36362
+          ],
+          "source-relative"
+        ]
+      },
+      "original_observation_unchanged": {
+        "point_index": 50356,
+        "original_category": "physical",
+        "original_block": 32,
+        "original_record_ordinal": 18487,
+        "original_owners": [
+          23090
+        ],
+        "original_SIDs": [
+          36255,
+          36362
+        ],
+        "original_class": "source-relative",
+        "original_interval": [
+          133094,
+          227210,
+          227211,
+          [
+            23090
+          ],
+          [
+            36255,
+            36362
+          ],
+          "source-relative"
+        ],
+        "y": 133094,
+        "x": 227210,
+        "longitude": 131.9999542274742,
+        "latitude": -2.761073793804394,
+        "ideal_longitude_numerator": 34605900,
+        "ideal_longitude_denominator": 262166,
+        "canonical_owners": [
+          23090
+        ],
+        "original_source_claims": [
+          {
+            "source_index": 36255,
+            "family_index": 152,
+            "source_id": "gb:IDN:ADM1:65028918B84835514626455",
+            "ordinal": 29,
+            "owners": [],
+            "name": "West Papua",
+            "geometry_status": "raw-native-supported"
+          },
+          {
+            "source_index": 36362,
+            "family_index": 153,
+            "source_id": "gb:IDN:ADM2:22746128B79106566109504",
+            "ordinal": 102,
+            "owners": [
+              23090
+            ],
+            "name": "Fakfak",
+            "geometry_status": "raw-native-supported"
+          }
+        ],
+        "tile": "S03E129",
+        "native_row": 33132,
+        "native_col": 35999,
+        "grid_basis": "actual-saved-tile-header",
+        "cached_centre_array": null,
+        "cached_context_arrays": [],
+        "all_available_context_cached": false,
+        "neighbourhood_complete": false,
+        "missing_context_native_blocks": [
+          [
+            32,
+            35
+          ]
+        ],
+        "source_class_observation": {
+          "coverage_status": "valid-native-value",
+          "class_code": 10,
+          "valid_mask": 255,
+          "nodata_match": false,
+          "neighbourhood_complete": false,
+          "neighbourhood_codes": null,
+          "neighbourhood_masks": null,
+          "centre_array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S03E129/new-block-32-35.npz",
+          "source_object_identity": {
+            "last-modified": "Tue, 25 Oct 2022 13:41:54 GMT",
+            "etag": "\"b8c1f77622761736a38b8700ca6b4f2b\"",
+            "accept-ranges": "bytes",
+            "content-length": "7694709"
+          }
+        },
+        "adopted_answer": null,
+        "coverage_status": "valid-native-value",
+        "class_code": 10,
+        "valid_mask": 255,
+        "nodata_match": false,
+        "neighbourhood_codes": null,
+        "neighbourhood_masks": null,
+        "centre_array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S03E129/new-block-32-35.npz",
+        "source_object_identity": {
+          "last-modified": "Tue, 25 Oct 2022 13:41:54 GMT",
+          "etag": "\"b8c1f77622761736a38b8700ca6b4f2b\"",
+          "accept-ranges": "bytes",
+          "content-length": "7694709"
+        }
+      },
+      "separate_actual_context_supplement": {
+        "point_index": 50356,
+        "original_key": {
+          "owner": 23090,
+          "y": 133094,
+          "x": 227210
+        },
+        "original_tile": "S03E129",
+        "native_row": 33132,
+        "native_col": 35999,
+        "class_code": 10,
+        "original_neighbourhood_codes": null,
+        "original_neighbourhood_masks": null,
+        "completed_neighbourhood_codes": [
+          [
+            10,
+            10,
+            10
+          ],
+          [
+            10,
+            10,
+            10
+          ],
+          [
+            10,
+            10,
+            10
+          ]
+        ],
+        "completed_neighbourhood_masks": [
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            255,
+            255,
+            255
+          ]
+        ],
+        "centre_observation_unchanged": true,
+        "cross_frame_neighbours": 3,
+        "samples": [
+          {
+            "dy": -1,
+            "dx": -1,
+            "tile": "S03E129",
+            "native_row": 33131,
+            "native_col": 35998,
+            "array_sha256": "0cd85bc8de16a16c8bb229e7b40652319fc328cf5206b46f2845ca0350ac6193",
+            "code": 10,
+            "valid_mask": 255,
+            "cross_frame": false
+          },
+          {
+            "dy": -1,
+            "dx": 0,
+            "tile": "S03E129",
+            "native_row": 33131,
+            "native_col": 35999,
+            "array_sha256": "0cd85bc8de16a16c8bb229e7b40652319fc328cf5206b46f2845ca0350ac6193",
+            "code": 10,
+            "valid_mask": 255,
+            "cross_frame": false
+          },
+          {
+            "dy": -1,
+            "dx": 1,
+            "tile": "S03E132",
+            "native_row": 33131,
+            "native_col": 0,
+            "array_sha256": "4bc880ece4963acf655f9fb01ead6d11690c76ef8c86e6494f4440fa95d8ad28",
+            "code": 10,
+            "valid_mask": 255,
+            "cross_frame": true
+          },
+          {
+            "dy": 0,
+            "dx": -1,
+            "tile": "S03E129",
+            "native_row": 33132,
+            "native_col": 35998,
+            "array_sha256": "0cd85bc8de16a16c8bb229e7b40652319fc328cf5206b46f2845ca0350ac6193",
+            "code": 10,
+            "valid_mask": 255,
+            "cross_frame": false
+          },
+          {
+            "dy": 0,
+            "dx": 0,
+            "tile": "S03E129",
+            "native_row": 33132,
+            "native_col": 35999,
+            "array_sha256": "0cd85bc8de16a16c8bb229e7b40652319fc328cf5206b46f2845ca0350ac6193",
+            "code": 10,
+            "valid_mask": 255,
+            "cross_frame": false
+          },
+          {
+            "dy": 0,
+            "dx": 1,
+            "tile": "S03E132",
+            "native_row": 33132,
+            "native_col": 0,
+            "array_sha256": "4bc880ece4963acf655f9fb01ead6d11690c76ef8c86e6494f4440fa95d8ad28",
+            "code": 10,
+            "valid_mask": 255,
+            "cross_frame": true
+          },
+          {
+            "dy": 1,
+            "dx": -1,
+            "tile": "S03E129",
+            "native_row": 33133,
+            "native_col": 35998,
+            "array_sha256": "0cd85bc8de16a16c8bb229e7b40652319fc328cf5206b46f2845ca0350ac6193",
+            "code": 10,
+            "valid_mask": 255,
+            "cross_frame": false
+          },
+          {
+            "dy": 1,
+            "dx": 0,
+            "tile": "S03E129",
+            "native_row": 33133,
+            "native_col": 35999,
+            "array_sha256": "0cd85bc8de16a16c8bb229e7b40652319fc328cf5206b46f2845ca0350ac6193",
+            "code": 10,
+            "valid_mask": 255,
+            "cross_frame": false
+          },
+          {
+            "dy": 1,
+            "dx": 1,
+            "tile": "S03E132",
+            "native_row": 33133,
+            "native_col": 0,
+            "array_sha256": "4bc880ece4963acf655f9fb01ead6d11690c76ef8c86e6494f4440fa95d8ad28",
+            "code": 10,
+            "valid_mask": 255,
+            "cross_frame": true
+          }
+        ],
+        "proposed_answer": null,
+        "adopted_answer": null
+      },
+      "source_native_association": {
+        "basis": "Authenticated frozen source-candidate interval coverage preserved by original physical extraction; exact519member, roster, owner and reverse lineage bindings. Not a fresh strict-INTERIOR or boundary/tie measurement.",
+        "original_ADM2_claim": {
+          "source_index": 36362,
+          "family_index": 153,
+          "source_id": "gb:IDN:ADM2:22746128B79106566109504",
+          "ordinal": 102,
+          "owners": [
+            23090
+          ],
+          "name": "Fakfak",
+          "geometry_status": "raw-native-supported"
+        },
+        "actual_ADM1_claims": [
+          {
+            "source_index": 36255,
+            "family_index": 152,
+            "source_id": "gb:IDN:ADM1:65028918B84835514626455",
+            "ordinal": 29,
+            "owners": [],
+            "name": "West Papua",
+            "geometry_status": "raw-native-supported"
+          }
+        ],
+        "other_recorded_source_claims": [],
+        "retained_stage_original_member_equality_available": true,
+        "frozen_framework_parent": "framework:province:west-papua:8b60f6de353b",
+        "historical9f40_parent": "framework:province:west-papua:8b60f6de353b",
+        "parent_discrepancy_claims": [],
+        "documented_selected_geographic_portion": false,
+        "whole_report_cohort": "papua6",
+        "complete_association_record": "per-original-key-source-associations.jsonl",
+        "association_point_index": 50356
+      },
+      "adopted_bounded_answer": true,
+      "completed_question_credit": 1,
+      "actual_answer": "The annual2020 WorldCover Map supports tree canopy at this unchanged native source-associated location; tree cover includes flooded forest and does not prove dry ground beneath the canopy.",
+      "remaining_limits": [
+        "Annual2020 model, native point scale and source-registration limits remain; independent current/legal jurisdiction is not adjudicated.",
+        "Canopy flooding/understorey wetness is not answered by tree cover."
+      ],
+      "all_original_source_parent_foreign_territorial_portion_holds_unchanged": true,
+      "broader_original_question_closure": null,
+      "native_authority_or_repair_credit": 0
+    },
+    {
+      "point_index": 60852,
+      "original_key": {
+        "owner": 23094,
+        "y": 135002,
+        "x": 227210
+      },
+      "original_record_unchanged": {
+        "original_category": "physical",
+        "original_block": 32,
+        "original_record_ordinal": 29955,
+        "original_owners": [
+          23094
+        ],
+        "original_SIDs": [
+          36530
+        ],
+        "original_class": "source-relative",
+        "original_interval": [
+          135002,
+          227210,
+          227212,
+          [
+            23094
+          ],
+          [
+            36530
+          ],
+          "source-relative"
+        ]
+      },
+      "original_observation_unchanged": {
+        "point_index": 60852,
+        "original_category": "physical",
+        "original_block": 32,
+        "original_record_ordinal": 29955,
+        "original_owners": [
+          23094
+        ],
+        "original_SIDs": [
+          36530
+        ],
+        "original_class": "source-relative",
+        "original_interval": [
+          135002,
+          227210,
+          227212,
+          [
+            23094
+          ],
+          [
+            36530
+          ],
+          "source-relative"
+        ],
+        "y": 135002,
+        "x": 227210,
+        "longitude": 131.9999542274742,
+        "latitude": -5.374264444938588,
+        "ideal_longitude_numerator": 34605900,
+        "ideal_longitude_denominator": 262166,
+        "canonical_owners": [
+          23094
+        ],
+        "original_source_claims": [
+          {
+            "source_index": 36530,
+            "family_index": 153,
+            "source_id": "gb:IDN:ADM2:22746128B79752231805890",
+            "ordinal": 270,
+            "owners": [
+              23094
+            ],
+            "name": "Kota Tual",
+            "geometry_status": "raw-native-supported"
+          }
+        ],
+        "tile": "S06E129",
+        "native_row": 28491,
+        "native_col": 35999,
+        "grid_basis": "actual-saved-tile-header",
+        "cached_centre_array": null,
+        "cached_context_arrays": [],
+        "all_available_context_cached": false,
+        "neighbourhood_complete": false,
+        "missing_context_native_blocks": [
+          [
+            27,
+            35
+          ]
+        ],
+        "source_class_observation": {
+          "coverage_status": "valid-native-value",
+          "class_code": 80,
+          "valid_mask": 255,
+          "nodata_match": false,
+          "neighbourhood_complete": false,
+          "neighbourhood_codes": null,
+          "neighbourhood_masks": null,
+          "centre_array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S06E129/new-block-27-35.npz",
+          "source_object_identity": {
+            "last-modified": "Tue, 25 Oct 2022 13:42:04 GMT",
+            "etag": "\"df49d6f1acd5349681578dcd62bb856b\"",
+            "accept-ranges": "bytes",
+            "content-length": "4610928"
+          }
+        },
+        "adopted_answer": null,
+        "coverage_status": "valid-native-value",
+        "class_code": 80,
+        "valid_mask": 255,
+        "nodata_match": false,
+        "neighbourhood_codes": null,
+        "neighbourhood_masks": null,
+        "centre_array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S06E129/new-block-27-35.npz",
+        "source_object_identity": {
+          "last-modified": "Tue, 25 Oct 2022 13:42:04 GMT",
+          "etag": "\"df49d6f1acd5349681578dcd62bb856b\"",
+          "accept-ranges": "bytes",
+          "content-length": "4610928"
+        }
+      },
+      "separate_actual_context_supplement": {
+        "point_index": 60852,
+        "original_key": {
+          "owner": 23094,
+          "y": 135002,
+          "x": 227210
+        },
+        "original_tile": "S06E129",
+        "native_row": 28491,
+        "native_col": 35999,
+        "class_code": 80,
+        "original_neighbourhood_codes": null,
+        "original_neighbourhood_masks": null,
+        "completed_neighbourhood_codes": [
+          [
+            80,
+            80,
+            80
+          ],
+          [
+            80,
+            80,
+            80
+          ],
+          [
+            80,
+            80,
+            80
+          ]
+        ],
+        "completed_neighbourhood_masks": [
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            255,
+            255,
+            255
+          ]
+        ],
+        "centre_observation_unchanged": true,
+        "cross_frame_neighbours": 3,
+        "samples": [
+          {
+            "dy": -1,
+            "dx": -1,
+            "tile": "S06E129",
+            "native_row": 28490,
+            "native_col": 35998,
+            "array_sha256": "6684c73b2fb63240034faf066532be7fb8984af1784f052a89c8726385b9c151",
+            "code": 80,
+            "valid_mask": 255,
+            "cross_frame": false
+          },
+          {
+            "dy": -1,
+            "dx": 0,
+            "tile": "S06E129",
+            "native_row": 28490,
+            "native_col": 35999,
+            "array_sha256": "6684c73b2fb63240034faf066532be7fb8984af1784f052a89c8726385b9c151",
+            "code": 80,
+            "valid_mask": 255,
+            "cross_frame": false
+          },
+          {
+            "dy": -1,
+            "dx": 1,
+            "tile": "S06E132",
+            "native_row": 28490,
+            "native_col": 0,
+            "array_sha256": "e62af232bd0f7efceaa64ba08b9f487afa261e8db7570016b1f67a65da2a4a4e",
+            "code": 80,
+            "valid_mask": 255,
+            "cross_frame": true
+          },
+          {
+            "dy": 0,
+            "dx": -1,
+            "tile": "S06E129",
+            "native_row": 28491,
+            "native_col": 35998,
+            "array_sha256": "6684c73b2fb63240034faf066532be7fb8984af1784f052a89c8726385b9c151",
+            "code": 80,
+            "valid_mask": 255,
+            "cross_frame": false
+          },
+          {
+            "dy": 0,
+            "dx": 0,
+            "tile": "S06E129",
+            "native_row": 28491,
+            "native_col": 35999,
+            "array_sha256": "6684c73b2fb63240034faf066532be7fb8984af1784f052a89c8726385b9c151",
+            "code": 80,
+            "valid_mask": 255,
+            "cross_frame": false
+          },
+          {
+            "dy": 0,
+            "dx": 1,
+            "tile": "S06E132",
+            "native_row": 28491,
+            "native_col": 0,
+            "array_sha256": "e62af232bd0f7efceaa64ba08b9f487afa261e8db7570016b1f67a65da2a4a4e",
+            "code": 80,
+            "valid_mask": 255,
+            "cross_frame": true
+          },
+          {
+            "dy": 1,
+            "dx": -1,
+            "tile": "S06E129",
+            "native_row": 28492,
+            "native_col": 35998,
+            "array_sha256": "6684c73b2fb63240034faf066532be7fb8984af1784f052a89c8726385b9c151",
+            "code": 80,
+            "valid_mask": 255,
+            "cross_frame": false
+          },
+          {
+            "dy": 1,
+            "dx": 0,
+            "tile": "S06E129",
+            "native_row": 28492,
+            "native_col": 35999,
+            "array_sha256": "6684c73b2fb63240034faf066532be7fb8984af1784f052a89c8726385b9c151",
+            "code": 80,
+            "valid_mask": 255,
+            "cross_frame": false
+          },
+          {
+            "dy": 1,
+            "dx": 1,
+            "tile": "S06E132",
+            "native_row": 28492,
+            "native_col": 0,
+            "array_sha256": "e62af232bd0f7efceaa64ba08b9f487afa261e8db7570016b1f67a65da2a4a4e",
+            "code": 80,
+            "valid_mask": 255,
+            "cross_frame": true
+          }
+        ],
+        "proposed_answer": null,
+        "adopted_answer": null
+      },
+      "source_native_association": {
+        "basis": "Authenticated frozen source-candidate interval coverage preserved by original physical extraction; exact519member, roster, owner and reverse lineage bindings. Not a fresh strict-INTERIOR or boundary/tie measurement.",
+        "original_ADM2_claim": {
+          "source_index": 36530,
+          "family_index": 153,
+          "source_id": "gb:IDN:ADM2:22746128B79752231805890",
+          "ordinal": 270,
+          "owners": [
+            23094
+          ],
+          "name": "Kota Tual",
+          "geometry_status": "raw-native-supported"
+        },
+        "actual_ADM1_claims": [],
+        "other_recorded_source_claims": [],
+        "retained_stage_original_member_equality_available": true,
+        "frozen_framework_parent": "framework:province:maluku:f39da568968f",
+        "historical9f40_parent": "framework:province:maluku:f39da568968f",
+        "parent_discrepancy_claims": [],
+        "documented_selected_geographic_portion": true,
+        "whole_report_cohort": "remaining264",
+        "complete_association_record": "per-original-key-source-associations.jsonl",
+        "association_point_index": 60852
+      },
+      "adopted_bounded_answer": true,
+      "completed_question_credit": 1,
+      "actual_answer": "The annual2020 WorldCover Map supports a persistent-water surface body at this unchanged native source-associated location; it does not identify fresh/salt water, river/lake/sea, a bank, thalweg or jurisdiction.",
+      "remaining_limits": [
+        "Annual2020 model, native point scale and source-registration limits remain; independent current/legal jurisdiction is not adjudicated.",
+        "Water kind, exact river association/bank/thalweg and jurisdiction remain separate where consequential.",
+        "A source administrative unit is not identical to its selected geographic portion; no selected-footprint inclusion is established."
+      ],
+      "all_original_source_parent_foreign_territorial_portion_holds_unchanged": true,
+      "broader_original_question_closure": null,
+      "native_authority_or_repair_credit": 0
+    },
+    {
+      "point_index": 67780,
+      "original_key": {
+        "owner": 22996,
+        "y": 135460,
+        "x": 227827
+      },
+      "original_record_unchanged": {
+        "original_category": "physical",
+        "original_block": 33,
+        "original_record_ordinal": 2529,
+        "original_owners": [
+          22996
+        ],
+        "original_SIDs": [
+          36249,
+          36581
+        ],
+        "original_class": "source-relative",
+        "original_interval": [
+          135460,
+          227827,
+          227829,
+          [
+            22996
+          ],
+          [
+            36249,
+            36581
+          ],
+          "source-relative"
+        ]
+      },
+      "original_observation_unchanged": {
+        "point_index": 67780,
+        "original_category": "physical",
+        "original_block": 33,
+        "original_record_ordinal": 2529,
+        "original_owners": [
+          22996
+        ],
+        "original_SIDs": [
+          36249,
+          36581
+        ],
+        "original_class": "source-relative",
+        "original_interval": [
+          135460,
+          227827,
+          227829,
+          [
+            22996
+          ],
+          [
+            36249,
+            36581
+          ],
+          "source-relative"
+        ],
+        "y": 135460,
+        "x": 227827,
+        "longitude": 132.84720368011108,
+        "latitude": -6.000080122156084,
+        "ideal_longitude_numerator": 34828020,
+        "ideal_longitude_denominator": 262166,
+        "canonical_owners": [
+          22996
+        ],
+        "original_source_claims": [
+          {
+            "source_index": 36249,
+            "family_index": 152,
+            "source_id": "gb:IDN:ADM1:65028918B48178230554278",
+            "ordinal": 23,
+            "owners": [],
+            "name": "Maluku",
+            "geometry_status": "raw-native-supported"
+          },
+          {
+            "source_index": 36581,
+            "family_index": 153,
+            "source_id": "gb:IDN:ADM2:22746128B6545713511337",
+            "ordinal": 321,
+            "owners": [
+              22996
+            ],
+            "name": "Maluku Tenggara",
+            "geometry_status": "raw-native-supported"
+          }
+        ],
+        "tile": "S09E132",
+        "native_row": 0,
+        "native_col": 10166,
+        "grid_basis": "official-v100-nominal-frame-needs-actual-header",
+        "cached_centre_array": null,
+        "cached_context_arrays": [],
+        "all_available_context_cached": false,
+        "neighbourhood_complete": false,
+        "missing_context_native_blocks": [
+          [
+            0,
+            9
+          ]
+        ],
+        "source_class_observation": {
+          "coverage_status": "valid-native-value",
+          "class_code": 10,
+          "valid_mask": 255,
+          "nodata_match": false,
+          "neighbourhood_complete": false,
+          "neighbourhood_codes": null,
+          "neighbourhood_masks": null,
+          "centre_array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S09E132/new-block-00-09.npz",
+          "source_object_identity": {
+            "last-modified": "Tue, 25 Oct 2022 13:42:18 GMT",
+            "etag": "\"c45f617b8fb8b8ad432dc9d6fdbcb023\"",
+            "accept-ranges": "bytes",
+            "content-length": "4767330"
+          }
+        },
+        "adopted_answer": null,
+        "coverage_status": "valid-native-value",
+        "class_code": 10,
+        "valid_mask": 255,
+        "nodata_match": false,
+        "neighbourhood_codes": null,
+        "neighbourhood_masks": null,
+        "centre_array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S09E132/new-block-00-09.npz",
+        "source_object_identity": {
+          "last-modified": "Tue, 25 Oct 2022 13:42:18 GMT",
+          "etag": "\"c45f617b8fb8b8ad432dc9d6fdbcb023\"",
+          "accept-ranges": "bytes",
+          "content-length": "4767330"
+        }
+      },
+      "separate_actual_context_supplement": {
+        "point_index": 67780,
+        "original_key": {
+          "owner": 22996,
+          "y": 135460,
+          "x": 227827
+        },
+        "original_tile": "S09E132",
+        "native_row": 0,
+        "native_col": 10166,
+        "class_code": 10,
+        "original_neighbourhood_codes": null,
+        "original_neighbourhood_masks": null,
+        "completed_neighbourhood_codes": [
+          [
+            10,
+            10,
+            10
+          ],
+          [
+            10,
+            10,
+            10
+          ],
+          [
+            10,
+            10,
+            10
+          ]
+        ],
+        "completed_neighbourhood_masks": [
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            255,
+            255,
+            255
+          ]
+        ],
+        "centre_observation_unchanged": true,
+        "cross_frame_neighbours": 3,
+        "samples": [
+          {
+            "dy": -1,
+            "dx": -1,
+            "tile": "S06E132",
+            "native_row": 35999,
+            "native_col": 10165,
+            "array_sha256": "483f6a490ea3dd696e970fbfe8773df9469c6209c85f6aa7762c09e3aa29fba2",
+            "code": 10,
+            "valid_mask": 255,
+            "cross_frame": true
+          },
+          {
+            "dy": -1,
+            "dx": 0,
+            "tile": "S06E132",
+            "native_row": 35999,
+            "native_col": 10166,
+            "array_sha256": "483f6a490ea3dd696e970fbfe8773df9469c6209c85f6aa7762c09e3aa29fba2",
+            "code": 10,
+            "valid_mask": 255,
+            "cross_frame": true
+          },
+          {
+            "dy": -1,
+            "dx": 1,
+            "tile": "S06E132",
+            "native_row": 35999,
+            "native_col": 10167,
+            "array_sha256": "483f6a490ea3dd696e970fbfe8773df9469c6209c85f6aa7762c09e3aa29fba2",
+            "code": 10,
+            "valid_mask": 255,
+            "cross_frame": true
+          },
+          {
+            "dy": 0,
+            "dx": -1,
+            "tile": "S09E132",
+            "native_row": 0,
+            "native_col": 10165,
+            "array_sha256": "e935c97b57cbdc3b3e14cb62e3359a563d88cb37137ee5399163f41de4d30b06",
+            "code": 10,
+            "valid_mask": 255,
+            "cross_frame": false
+          },
+          {
+            "dy": 0,
+            "dx": 0,
+            "tile": "S09E132",
+            "native_row": 0,
+            "native_col": 10166,
+            "array_sha256": "e935c97b57cbdc3b3e14cb62e3359a563d88cb37137ee5399163f41de4d30b06",
+            "code": 10,
+            "valid_mask": 255,
+            "cross_frame": false
+          },
+          {
+            "dy": 0,
+            "dx": 1,
+            "tile": "S09E132",
+            "native_row": 0,
+            "native_col": 10167,
+            "array_sha256": "e935c97b57cbdc3b3e14cb62e3359a563d88cb37137ee5399163f41de4d30b06",
+            "code": 10,
+            "valid_mask": 255,
+            "cross_frame": false
+          },
+          {
+            "dy": 1,
+            "dx": -1,
+            "tile": "S09E132",
+            "native_row": 1,
+            "native_col": 10165,
+            "array_sha256": "e935c97b57cbdc3b3e14cb62e3359a563d88cb37137ee5399163f41de4d30b06",
+            "code": 10,
+            "valid_mask": 255,
+            "cross_frame": false
+          },
+          {
+            "dy": 1,
+            "dx": 0,
+            "tile": "S09E132",
+            "native_row": 1,
+            "native_col": 10166,
+            "array_sha256": "e935c97b57cbdc3b3e14cb62e3359a563d88cb37137ee5399163f41de4d30b06",
+            "code": 10,
+            "valid_mask": 255,
+            "cross_frame": false
+          },
+          {
+            "dy": 1,
+            "dx": 1,
+            "tile": "S09E132",
+            "native_row": 1,
+            "native_col": 10167,
+            "array_sha256": "e935c97b57cbdc3b3e14cb62e3359a563d88cb37137ee5399163f41de4d30b06",
+            "code": 10,
+            "valid_mask": 255,
+            "cross_frame": false
+          }
+        ],
+        "proposed_answer": null,
+        "adopted_answer": null
+      },
+      "source_native_association": {
+        "basis": "Authenticated frozen source-candidate interval coverage preserved by original physical extraction; exact519member, roster, owner and reverse lineage bindings. Not a fresh strict-INTERIOR or boundary/tie measurement.",
+        "original_ADM2_claim": {
+          "source_index": 36581,
+          "family_index": 153,
+          "source_id": "gb:IDN:ADM2:22746128B6545713511337",
+          "ordinal": 321,
+          "owners": [
+            22996
+          ],
+          "name": "Maluku Tenggara",
+          "geometry_status": "raw-native-supported"
+        },
+        "actual_ADM1_claims": [
+          {
+            "source_index": 36249,
+            "family_index": 152,
+            "source_id": "gb:IDN:ADM1:65028918B48178230554278",
+            "ordinal": 23,
+            "owners": [],
+            "name": "Maluku",
+            "geometry_status": "raw-native-supported"
+          }
+        ],
+        "other_recorded_source_claims": [],
+        "retained_stage_original_member_equality_available": true,
+        "frozen_framework_parent": "framework:province:maluku:f39da568968f",
+        "historical9f40_parent": "framework:province:maluku:f39da568968f",
+        "parent_discrepancy_claims": [],
+        "documented_selected_geographic_portion": true,
+        "whole_report_cohort": "remaining264",
+        "complete_association_record": "per-original-key-source-associations.jsonl",
+        "association_point_index": 67780
+      },
+      "adopted_bounded_answer": true,
+      "completed_question_credit": 1,
+      "actual_answer": "The annual2020 WorldCover Map supports tree canopy at this unchanged native source-associated location; tree cover includes flooded forest and does not prove dry ground beneath the canopy.",
+      "remaining_limits": [
+        "Annual2020 model, native point scale and source-registration limits remain; independent current/legal jurisdiction is not adjudicated.",
+        "Canopy flooding/understorey wetness is not answered by tree cover.",
+        "A source administrative unit is not identical to its selected geographic portion; no selected-footprint inclusion is established."
+      ],
+      "all_original_source_parent_foreign_territorial_portion_holds_unchanged": true,
+      "broader_original_question_closure": null,
+      "native_authority_or_repair_credit": 0
+    },
+    {
+      "point_index": 67781,
+      "original_key": {
+        "owner": 22996,
+        "y": 135460,
+        "x": 227828
+      },
+      "original_record_unchanged": {
+        "original_category": "physical",
+        "original_block": 33,
+        "original_record_ordinal": 2529,
+        "original_owners": [
+          22996
+        ],
+        "original_SIDs": [
+          36249,
+          36581
+        ],
+        "original_class": "source-relative",
+        "original_interval": [
+          135460,
+          227827,
+          227829,
+          [
+            22996
+          ],
+          [
+            36249,
+            36581
+          ],
+          "source-relative"
+        ]
+      },
+      "original_observation_unchanged": {
+        "point_index": 67781,
+        "original_category": "physical",
+        "original_block": 33,
+        "original_record_ordinal": 2529,
+        "original_owners": [
+          22996
+        ],
+        "original_SIDs": [
+          36249,
+          36581
+        ],
+        "original_class": "source-relative",
+        "original_interval": [
+          135460,
+          227827,
+          227829,
+          [
+            22996
+          ],
+          [
+            36249,
+            36581
+          ],
+          "source-relative"
+        ],
+        "y": 135460,
+        "x": 227828,
+        "longitude": 132.8485768558852,
+        "latitude": -6.000080122156084,
+        "ideal_longitude_numerator": 34828380,
+        "ideal_longitude_denominator": 262166,
+        "canonical_owners": [
+          22996
+        ],
+        "original_source_claims": [
+          {
+            "source_index": 36249,
+            "family_index": 152,
+            "source_id": "gb:IDN:ADM1:65028918B48178230554278",
+            "ordinal": 23,
+            "owners": [],
+            "name": "Maluku",
+            "geometry_status": "raw-native-supported"
+          },
+          {
+            "source_index": 36581,
+            "family_index": 153,
+            "source_id": "gb:IDN:ADM2:22746128B6545713511337",
+            "ordinal": 321,
+            "owners": [
+              22996
+            ],
+            "name": "Maluku Tenggara",
+            "geometry_status": "raw-native-supported"
+          }
+        ],
+        "tile": "S09E132",
+        "native_row": 0,
+        "native_col": 10182,
+        "grid_basis": "official-v100-nominal-frame-needs-actual-header",
+        "cached_centre_array": null,
+        "cached_context_arrays": [],
+        "all_available_context_cached": false,
+        "neighbourhood_complete": false,
+        "missing_context_native_blocks": [
+          [
+            0,
+            9
+          ]
+        ],
+        "source_class_observation": {
+          "coverage_status": "valid-native-value",
+          "class_code": 10,
+          "valid_mask": 255,
+          "nodata_match": false,
+          "neighbourhood_complete": false,
+          "neighbourhood_codes": null,
+          "neighbourhood_masks": null,
+          "centre_array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S09E132/new-block-00-09.npz",
+          "source_object_identity": {
+            "last-modified": "Tue, 25 Oct 2022 13:42:18 GMT",
+            "etag": "\"c45f617b8fb8b8ad432dc9d6fdbcb023\"",
+            "accept-ranges": "bytes",
+            "content-length": "4767330"
+          }
+        },
+        "adopted_answer": null,
+        "coverage_status": "valid-native-value",
+        "class_code": 10,
+        "valid_mask": 255,
+        "nodata_match": false,
+        "neighbourhood_codes": null,
+        "neighbourhood_masks": null,
+        "centre_array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S09E132/new-block-00-09.npz",
+        "source_object_identity": {
+          "last-modified": "Tue, 25 Oct 2022 13:42:18 GMT",
+          "etag": "\"c45f617b8fb8b8ad432dc9d6fdbcb023\"",
+          "accept-ranges": "bytes",
+          "content-length": "4767330"
+        }
+      },
+      "separate_actual_context_supplement": {
+        "point_index": 67781,
+        "original_key": {
+          "owner": 22996,
+          "y": 135460,
+          "x": 227828
+        },
+        "original_tile": "S09E132",
+        "native_row": 0,
+        "native_col": 10182,
+        "class_code": 10,
+        "original_neighbourhood_codes": null,
+        "original_neighbourhood_masks": null,
+        "completed_neighbourhood_codes": [
+          [
+            10,
+            10,
+            10
+          ],
+          [
+            10,
+            10,
+            10
+          ],
+          [
+            10,
+            10,
+            10
+          ]
+        ],
+        "completed_neighbourhood_masks": [
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            255,
+            255,
+            255
+          ]
+        ],
+        "centre_observation_unchanged": true,
+        "cross_frame_neighbours": 3,
+        "samples": [
+          {
+            "dy": -1,
+            "dx": -1,
+            "tile": "S06E132",
+            "native_row": 35999,
+            "native_col": 10181,
+            "array_sha256": "483f6a490ea3dd696e970fbfe8773df9469c6209c85f6aa7762c09e3aa29fba2",
+            "code": 10,
+            "valid_mask": 255,
+            "cross_frame": true
+          },
+          {
+            "dy": -1,
+            "dx": 0,
+            "tile": "S06E132",
+            "native_row": 35999,
+            "native_col": 10182,
+            "array_sha256": "483f6a490ea3dd696e970fbfe8773df9469c6209c85f6aa7762c09e3aa29fba2",
+            "code": 10,
+            "valid_mask": 255,
+            "cross_frame": true
+          },
+          {
+            "dy": -1,
+            "dx": 1,
+            "tile": "S06E132",
+            "native_row": 35999,
+            "native_col": 10183,
+            "array_sha256": "483f6a490ea3dd696e970fbfe8773df9469c6209c85f6aa7762c09e3aa29fba2",
+            "code": 10,
+            "valid_mask": 255,
+            "cross_frame": true
+          },
+          {
+            "dy": 0,
+            "dx": -1,
+            "tile": "S09E132",
+            "native_row": 0,
+            "native_col": 10181,
+            "array_sha256": "e935c97b57cbdc3b3e14cb62e3359a563d88cb37137ee5399163f41de4d30b06",
+            "code": 10,
+            "valid_mask": 255,
+            "cross_frame": false
+          },
+          {
+            "dy": 0,
+            "dx": 0,
+            "tile": "S09E132",
+            "native_row": 0,
+            "native_col": 10182,
+            "array_sha256": "e935c97b57cbdc3b3e14cb62e3359a563d88cb37137ee5399163f41de4d30b06",
+            "code": 10,
+            "valid_mask": 255,
+            "cross_frame": false
+          },
+          {
+            "dy": 0,
+            "dx": 1,
+            "tile": "S09E132",
+            "native_row": 0,
+            "native_col": 10183,
+            "array_sha256": "e935c97b57cbdc3b3e14cb62e3359a563d88cb37137ee5399163f41de4d30b06",
+            "code": 10,
+            "valid_mask": 255,
+            "cross_frame": false
+          },
+          {
+            "dy": 1,
+            "dx": -1,
+            "tile": "S09E132",
+            "native_row": 1,
+            "native_col": 10181,
+            "array_sha256": "e935c97b57cbdc3b3e14cb62e3359a563d88cb37137ee5399163f41de4d30b06",
+            "code": 10,
+            "valid_mask": 255,
+            "cross_frame": false
+          },
+          {
+            "dy": 1,
+            "dx": 0,
+            "tile": "S09E132",
+            "native_row": 1,
+            "native_col": 10182,
+            "array_sha256": "e935c97b57cbdc3b3e14cb62e3359a563d88cb37137ee5399163f41de4d30b06",
+            "code": 10,
+            "valid_mask": 255,
+            "cross_frame": false
+          },
+          {
+            "dy": 1,
+            "dx": 1,
+            "tile": "S09E132",
+            "native_row": 1,
+            "native_col": 10183,
+            "array_sha256": "e935c97b57cbdc3b3e14cb62e3359a563d88cb37137ee5399163f41de4d30b06",
+            "code": 10,
+            "valid_mask": 255,
+            "cross_frame": false
+          }
+        ],
+        "proposed_answer": null,
+        "adopted_answer": null
+      },
+      "source_native_association": {
+        "basis": "Authenticated frozen source-candidate interval coverage preserved by original physical extraction; exact519member, roster, owner and reverse lineage bindings. Not a fresh strict-INTERIOR or boundary/tie measurement.",
+        "original_ADM2_claim": {
+          "source_index": 36581,
+          "family_index": 153,
+          "source_id": "gb:IDN:ADM2:22746128B6545713511337",
+          "ordinal": 321,
+          "owners": [
+            22996
+          ],
+          "name": "Maluku Tenggara",
+          "geometry_status": "raw-native-supported"
+        },
+        "actual_ADM1_claims": [
+          {
+            "source_index": 36249,
+            "family_index": 152,
+            "source_id": "gb:IDN:ADM1:65028918B48178230554278",
+            "ordinal": 23,
+            "owners": [],
+            "name": "Maluku",
+            "geometry_status": "raw-native-supported"
+          }
+        ],
+        "other_recorded_source_claims": [],
+        "retained_stage_original_member_equality_available": true,
+        "frozen_framework_parent": "framework:province:maluku:f39da568968f",
+        "historical9f40_parent": "framework:province:maluku:f39da568968f",
+        "parent_discrepancy_claims": [],
+        "documented_selected_geographic_portion": true,
+        "whole_report_cohort": "remaining264",
+        "complete_association_record": "per-original-key-source-associations.jsonl",
+        "association_point_index": 67781
+      },
+      "adopted_bounded_answer": true,
+      "completed_question_credit": 1,
+      "actual_answer": "The annual2020 WorldCover Map supports tree canopy at this unchanged native source-associated location; tree cover includes flooded forest and does not prove dry ground beneath the canopy.",
+      "remaining_limits": [
+        "Annual2020 model, native point scale and source-registration limits remain; independent current/legal jurisdiction is not adjudicated.",
+        "Canopy flooding/understorey wetness is not answered by tree cover.",
+        "A source administrative unit is not identical to its selected geographic portion; no selected-footprint inclusion is established."
+      ],
+      "all_original_source_parent_foreign_territorial_portion_holds_unchanged": true,
+      "broader_original_question_closure": null,
+      "native_authority_or_repair_credit": 0
+    }
+  ]
+}

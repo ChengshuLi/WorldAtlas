@@ -1,0 +1,47 @@
+{
+  "scope": "Independent metadata/scope/coordinate-plan review only; no imagery read replay",
+  "outcome": "passed-for-exact-plan",
+  "keys": 9332,
+  "owners": {
+    "22727": 1486,
+    "22698": 894,
+    "22796": 2376,
+    "22734": 4576
+  },
+  "actual_header_tiles": 14,
+  "required_centre_blocks": 297,
+  "duplicate_indices_or_keys": 0,
+  "scope_omissions_or_additions": 0,
+  "changed_original_or_observation_fields": 0,
+  "native_transform_mapping_mismatches": 0,
+  "out_of_asset_points": 0,
+  "source_spec": "ESA officialdataaccess:annualyearlymedianL2A composites,native1degree,4uint16,scale0.0001,offset0,nodata0,CCBY4; no singleacquisition/tide",
+  "reader_status": "Actual acquisition reader pending author exacthash; this receipt does not approve unseen code",
+  "inputs": [
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/exact-residual-keys.jsonl",
+      "bytes": 33651079,
+      "sha256": "a4efa518c9259747746766d8d517893aec4d56a71f3763e71451848c94595f0b"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/scope-summary.json",
+      "bytes": 3663,
+      "sha256": "1dc57b7a1952408a0c5e0a10a444562c3ef47876859792ea1730c3e75bb80ed6"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/plan_composite_windows.py",
+      "bytes": 2038,
+      "sha256": "53b30df8a4f0e6c58dd8a51702679164baefffa812c298939a415fb49997d43b"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-2020-native-block-plan.json",
+      "bytes": 2298535,
+      "sha256": "0b60d822014271282a7d8a96cff9fd6ba7a06874f1467ae3fbd57e2983590934"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-2020-asset-heads.json",
+      "bytes": 11781,
+      "sha256": "46336a50ceae941296a08101c87c6f4ebc7984dd394c9287a7c835433d26d0f1"
+    }
+  ]
+}

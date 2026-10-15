@@ -1,0 +1,497 @@
+{
+  "reviewer": "/root/physical_remainder_exact_scope",
+  "outcome": "source-result-custody-identity-and-native-value-join-passed",
+  "report": {
+    "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-largest-residuals-001/worker1-source/rgbnir-source-observations.json",
+    "bytes": 113961,
+    "sha256": "da2c6ef6ee786541220486778bb74d428c794665d3582ae7d5bee2735205f5bd"
+  },
+  "reader": {
+    "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-largest-residuals-001/worker1-source/read_composite_windows.py",
+    "bytes": 9534,
+    "sha256": "c2c9dbd0fb5252c26e55d329cd81a7992f114a297e6d5f5aa06a392341aeb2eb"
+  },
+  "exact_original_keys": 9332,
+  "actual_arrays_hashed_and_decoded": 297,
+  "actual_context_pixel_requests_checked": 83985,
+  "status_counts": {
+    "valid-native-bands": 9331,
+    "nodata": 1
+  },
+  "owner_status_counts": {
+    "22727": {
+      "valid-native-bands": 1486
+    },
+    "22796": {
+      "valid-native-bands": 2376
+    },
+    "22698": {
+      "valid-native-bands": 894
+    },
+    "22734": {
+      "valid-native-bands": 4575,
+      "nodata": 1
+    }
+  },
+  "duplicate_missing_or_changed_original_rows": 0,
+  "raw_values_or_masks_mismatches": 0,
+  "tiles": [
+    {
+      "tile": "N00E103",
+      "keys": 142,
+      "arrays": 5,
+      "status_counts": {
+        "valid-native-bands": 142
+      },
+      "incomplete_context": []
+    },
+    {
+      "tile": "N00E104",
+      "keys": 629,
+      "arrays": 20,
+      "status_counts": {
+        "valid-native-bands": 629
+      },
+      "incomplete_context": []
+    },
+    {
+      "tile": "N00E127",
+      "keys": 152,
+      "arrays": 12,
+      "status_counts": {
+        "valid-native-bands": 152
+      },
+      "incomplete_context": []
+    },
+    {
+      "tile": "N01E103",
+      "keys": 551,
+      "arrays": 9,
+      "status_counts": {
+        "valid-native-bands": 551
+      },
+      "incomplete_context": []
+    },
+    {
+      "tile": "N01E104",
+      "keys": 164,
+      "arrays": 7,
+      "status_counts": {
+        "valid-native-bands": 164
+      },
+      "incomplete_context": []
+    },
+    {
+      "tile": "N02E117",
+      "keys": 303,
+      "arrays": 11,
+      "status_counts": {
+        "valid-native-bands": 303
+      },
+      "incomplete_context": []
+    },
+    {
+      "tile": "N03E117",
+      "keys": 591,
+      "arrays": 18,
+      "status_counts": {
+        "valid-native-bands": 591
+      },
+      "incomplete_context": []
+    },
+    {
+      "tile": "S01E127",
+      "keys": 1018,
+      "arrays": 55,
+      "status_counts": {
+        "valid-native-bands": 1018
+      },
+      "incomplete_context": []
+    },
+    {
+      "tile": "S01E128",
+      "keys": 311,
+      "arrays": 24,
+      "status_counts": {
+        "valid-native-bands": 311
+      },
+      "incomplete_context": []
+    },
+    {
+      "tile": "S02E127",
+      "keys": 387,
+      "arrays": 28,
+      "status_counts": {
+        "valid-native-bands": 387
+      },
+      "incomplete_context": []
+    },
+    {
+      "tile": "S02E128",
+      "keys": 508,
+      "arrays": 10,
+      "status_counts": {
+        "valid-native-bands": 508
+      },
+      "incomplete_context": []
+    },
+    {
+      "tile": "S06E134",
+      "keys": 2534,
+      "arrays": 38,
+      "status_counts": {
+        "valid-native-bands": 2534
+      },
+      "incomplete_context": []
+    },
+    {
+      "tile": "S07E134",
+      "keys": 1887,
+      "arrays": 55,
+      "status_counts": {
+        "valid-native-bands": 1886,
+        "nodata": 1
+      },
+      "incomplete_context": [
+        68700
+      ]
+    },
+    {
+      "tile": "S08E134",
+      "keys": 155,
+      "arrays": 5,
+      "status_counts": {
+        "valid-native-bands": 155
+      },
+      "incomplete_context": []
+    }
+  ],
+  "exceptions": [
+    {
+      "point_index": 68700,
+      "original_key": {
+        "owner": 22734,
+        "y": 135614,
+        "x": 229288
+      },
+      "tile": "S07E134",
+      "observation": {
+        "coverage_status": "valid-native-bands",
+        "band_values": [
+          267,
+          605,
+          284,
+          3489
+        ],
+        "band_masks": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "nodata_matches": [
+          false,
+          false,
+          false,
+          false
+        ],
+        "band_order": [
+          "red",
+          "green",
+          "blue",
+          "nir"
+        ],
+        "reflectance_scale": 0.0001,
+        "reflectance_offset": 0,
+        "native_row": 2524,
+        "native_col": 10240,
+        "neighbourhood_complete": false,
+        "neighbourhood_values": [
+          [
+            null,
+            [
+              267,
+              605,
+              284,
+              3853
+            ],
+            [
+              251,
+              576,
+              260,
+              3853
+            ]
+          ],
+          [
+            null,
+            [
+              267,
+              605,
+              284,
+              3489
+            ],
+            [
+              251,
+              576,
+              284,
+              3590
+            ]
+          ],
+          [
+            null,
+            [
+              283,
+              591,
+              284,
+              3389
+            ],
+            [
+              235,
+              520,
+              260,
+              3409
+            ]
+          ]
+        ],
+        "neighbourhood_masks": [
+          [
+            null,
+            [
+              255,
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255,
+              255
+            ]
+          ],
+          [
+            null,
+            [
+              255,
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255,
+              255
+            ]
+          ],
+          [
+            null,
+            [
+              255,
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255,
+              255
+            ]
+          ]
+        ],
+        "centre_array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-02-10.npz",
+        "source_object_identity": {
+          "last-modified": "Tue, 24 Jan 2023 17:25:26 GMT",
+          "etag": "\"322bfbabb9821373c79fc1822fd258c0-61\"",
+          "accept-ranges": "bytes",
+          "content-length": "508269508"
+        },
+        "source_year": 2020,
+        "temporal_scope": "annual median composite, not dated scene",
+        "source_url": "https://esa-worldcover-s2.s3.eu-central-1.amazonaws.com/rgbnir/2020/S07/ESA_WorldCover_10m_2020_v100_S07E134_S2RGBNIR.tif"
+      }
+    },
+    {
+      "point_index": 71456,
+      "original_key": {
+        "owner": 22734,
+        "y": 136102,
+        "x": 229097
+      },
+      "tile": "S07E134",
+      "observation": {
+        "coverage_status": "nodata",
+        "band_values": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "band_masks": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "nodata_matches": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "band_order": [
+          "red",
+          "green",
+          "blue",
+          "nir"
+        ],
+        "reflectance_scale": 0.0001,
+        "reflectance_offset": 0,
+        "native_row": 10513,
+        "native_col": 7093,
+        "neighbourhood_complete": true,
+        "neighbourhood_values": [
+          [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ]
+        ],
+        "neighbourhood_masks": [
+          [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ]
+        ],
+        "centre_array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-10-06.npz",
+        "source_object_identity": {
+          "last-modified": "Tue, 24 Jan 2023 17:25:26 GMT",
+          "etag": "\"322bfbabb9821373c79fc1822fd258c0-61\"",
+          "accept-ranges": "bytes",
+          "content-length": "508269508"
+        },
+        "source_year": 2020,
+        "temporal_scope": "annual median composite, not dated scene",
+        "source_url": "https://esa-worldcover-s2.s3.eu-central-1.amazonaws.com/rgbnir/2020/S07/ESA_WorldCover_10m_2020_v100_S07E134_S2RGBNIR.tif"
+      }
+    }
+  ],
+  "review_limits": [
+    "No source acquisition/replay or remote imagery reopened.",
+    "Complete means all requested observations and retained masks are accounted for; it does not mean every key is valid or every local context complete.",
+    "Annual median composite has no single date/tide and is not independent ground truth or a new classification.",
+    "Substantive geographic interpretation and adoption remain separate from this exact value/custody review."
+  ]
+}

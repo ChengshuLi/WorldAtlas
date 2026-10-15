@@ -1,0 +1,84 @@
+{
+  "kind": "author-proposed-bounded9332-rgbnir-body-location-dispositions",
+  "keys": 9332,
+  "proposed_answers": 5642,
+  "remaining": 3690,
+  "owners": {
+    "22727": {
+      "keys": 1486,
+      "proposed_answers": 0,
+      "remaining": 1486
+    },
+    "22796": {
+      "keys": 2376,
+      "proposed_answers": 1689,
+      "remaining": 687
+    },
+    "22698": {
+      "keys": 894,
+      "proposed_answers": 0,
+      "remaining": 894
+    },
+    "22734": {
+      "keys": 4576,
+      "proposed_answers": 3953,
+      "remaining": 623
+    }
+  },
+  "categories": {
+    "unresolved-developed-islet-and-wet-edge": 1486,
+    "unresolved-wet-or-shore-mixed-native-location": 1283,
+    "annual2020-rgbnir-supported-vegetated-body-location": 5642,
+    "unresolved-pond-channel-or-vegetated-fringe": 894,
+    "unresolved-local-shadow-water-edge-or-source-disagreement": 25,
+    "unresolved-composite-context-gap-and-shore": 1,
+    "unresolved-actual-composite-nodata": 1
+  },
+  "perkey_proposal": {
+    "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-largest-residuals-001/worker1-source/proposed-rgbnir-physical-location-dispositions.jsonl.gz",
+    "bytes": 1621733,
+    "sha256": "a1b0ddb5824a2533979dbc5185adcd7e8193555ad7e02fdf4489fa54f8be2705",
+    "decoded_bytes": 53913863,
+    "decoded_sha256": "cfa5ed442a0f86dea4d2ebdffd29d15cb184a6060f1cb4d0bc26120bad03e518"
+  },
+  "source_report": {
+    "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-largest-residuals-001/worker1-source/rgbnir-source-observations.json",
+    "sha256": "da2c6ef6ee786541220486778bb74d428c794665d3582ae7d5bee2735205f5bd"
+  },
+  "manual_reviewed_exception_indices": {
+    "22734": [
+      60461,
+      60462,
+      63509,
+      65608,
+      67982,
+      70975,
+      71456,
+      71542
+    ],
+    "22796": [
+      24135,
+      24386,
+      24596,
+      24981,
+      25153,
+      27148,
+      27248,
+      28761,
+      29499,
+      30156,
+      30240,
+      30375,
+      30618,
+      33131,
+      35118,
+      38041,
+      38249,
+      39857
+    ]
+  },
+  "basis": "Author reviewed all25 actual native-block contact sheets/297blocks, raw centre/context bands and26 individually reviewed exception crops; selected coherent natural-canopy groups, no automatic spectral threshold classifier or product class rewrite.",
+  "independent_review": null,
+  "root_adoption": null,
+  "repair_credit": 0
+}

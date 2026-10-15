@@ -1,0 +1,46 @@
+{
+  "kind": "actual-annual-composite-source-execution-not-disposition",
+  "pid": 60844,
+  "unified_exec_session": 97630,
+  "shell_exit_code": 0,
+  "started_utc": "2026-10-15T23:09:52.899000+00:00",
+  "ended_utc": "2026-10-15T23:14:01.330693+00:00",
+  "elapsed_seconds": 248.43112312501762,
+  "observed_process_peak_rss_bytes": 468369408,
+  "reader": {
+    "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-largest-residuals-001/worker1-source/read_composite_windows.py",
+    "bytes": 9534,
+    "sha256": "c2c9dbd0fb5252c26e55d329cd81a7992f114a297e6d5f5aa06a392341aeb2eb"
+  },
+  "source_report": {
+    "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-largest-residuals-001/worker1-source/rgbnir-source-observations.json",
+    "bytes": 113961,
+    "sha256": "da2c6ef6ee786541220486778bb74d428c794665d3582ae7d5bee2735205f5bd"
+  },
+  "stdout": {
+    "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-largest-residuals-001/worker1-source/rgbnir-attempt-001.stdout.jsonl",
+    "bytes": 33445,
+    "sha256": "604fa88583e5f0e5c00b77932fc6d22c463dc380e13990bb22f3a3d1d306d67e"
+  },
+  "stderr": {
+    "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-largest-residuals-001/worker1-source/rgbnir-attempt-001.stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "requested_keys": 9332,
+  "observed_keys": 9332,
+  "coverage_status_counts": {
+    "valid-native-bands": 9331,
+    "nodata": 1
+  },
+  "native_blocks_read": 297,
+  "no_application_memory_budgets_or_heap_flags_or_elapsed_kill": true,
+  "new_adopted_answers": 0,
+  "repair_credit": 0,
+  "git_mutation": false,
+  "exceptions": {
+    "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-largest-residuals-001/worker1-source/rgbnir-actual-exceptions.json",
+    "bytes": 871,
+    "sha256": "5f427d325aaf3e4e6a435220cb379f7d88857efecfabdf362c428eef6b9bdbdb"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "reviewer": "/root/physical_remainder_exact_scope",
+  "scope": "Fresh first acquisition launch of exact9332 annual2020RGBNIR keys only; static source inspection, independent exactkey/headercoordinate/blockplan derivation, official product specification read; no duplicateacquisition",
+  "outcome": "accepted-for-fresh-source-read-with-stated-scientific-limits",
+  "reader": {
+    "path": "idn-physical-largest-residuals-001/worker1-source/read_composite_windows.py",
+    "bytes": 9534,
+    "sha256": "c2c9dbd0fb5252c26e55d329cd81a7992f114a297e6d5f5aa06a392341aeb2eb"
+  },
+  "syntax_parse": "passed",
+  "checked": [
+    "Frozenplan0b60d822 and exactkeysa4efa518 authenticated before use",
+    "All9332unchanged originalkeys and centrecoords independentlymatch residualparentdispositions and actualsavedheadermapping",
+    "Only14pinnedsourceURLs and297nativecoreblocks, actualHEADobjectidentity and rastermetadata/indexrevalidated",
+    "Native4banduint16 values and4literal masks retained, no interpolation/resampling/fill/classification",
+    "Actual centre values, nodataflags and masks retained separately; missingneighborcontextnull/false",
+    "Wholearrays/pointJSONL/sourceheader pinned, atomicpartial-to-complete products, failure creates incomplete report",
+    "Annualmedian/sourceyear2020/noinstantaneousdateortide and0answer/adoption/repairlimits retained"
+  ],
+  "exact_context_gap": {
+    "point_index": 68700,
+    "owner": 22734,
+    "tile": "S07E134",
+    "missing_adjacent_native_block": [
+      2,
+      9
+    ],
+    "centre_inside": true
+  },
+  "resume_limit": "Done-tile resume validates observation producthash but does not itself rehash retained arrays/header on that shortcut. No existing done-tile cache was present at this first-launch review. Final result review will authenticate all arrays/headers; this is not an approval of unverified mutated cache reuse.",
+  "not_executed": [
+    "No remote imagery values reread",
+    "No source producer or rasterio call by reviewer",
+    "No scientific class or adoption decision"
+  ]
+}

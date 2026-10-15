@@ -1,0 +1,11 @@
+# Read-only water/land+location gap assessment for this9332 subset
+
+Within the41,305 original remaining physical-review keys, this task examined the exact9,332 Aru/Halmahera/Batam/Bulungan subset. It does not extrapolate these counts to the other31,973 or alter the existing map policy.
+
+5,642 keys now have an authored, independently reviewable positive visible-vegetated-body/location answer from actual2020 RGB/NIR morphology plus retained affirmative source-version association. Their lack of instantaneous tide, dry-substrate, named river/lake/sea, bank/thalweg or independent present legal jurisdiction should not become a new universal completion gate for this bounded physical-body answer. Canopy can flood, and nothing here certifies its ground is dry. These are proposed answer counts, not adopted dispositions.
+
+The remaining3,690 are not all proved fundamentally unanswerable. They are the exact current proposal's unanswered keys:1,486 Batam developed/wet edges and894 Bulungan pond/fringe keys need further point-body interpretation of already saved native imagery;1,283 Aru/Halmahera wet/shore mixtures need actual local placement;25 individually inspected channel/shadow/shore/source-disagreement cases remain ambiguous;one has a partial neighbouring context andone is actual nodata. Many may be answerable from current raw imagery without a new remote source read. Their common missing fact is actual visible water-versus-ground/body placement at the unchanged point, rather than a blanket prerequisite for fine hydrology, legal title or a new source-qualification packet.
+
+The nodata point71456 truly lacks useful RGBNIR here; a valid alternative observation is needed before a surface inference. At68700 the neighbouring-block gap is explicit but does not make the full saved core unusable; its mixed-shore point needs interpretation, not an automatic context-veto rule. Rectilinear pond water and vegetated levees must be separated; the all-Map95 point5198 demonstrates that actual physical ambiguity rather than missing legal nomenclature.
+
+All original location/owner/parent/foreign/portion/reconstruction evidence remains separate and unchanged. No new policy, classification method, adopted count, source replay, native qualification or repair credit is introduced by this assessment.

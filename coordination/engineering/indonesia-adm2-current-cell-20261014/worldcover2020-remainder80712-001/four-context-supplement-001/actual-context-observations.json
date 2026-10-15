@@ -1,0 +1,885 @@
+{
+  "worker": "/root/cell_method_review",
+  "status": "FOUR_CONTEXT_GAPS_OBSERVED_FROM_EXISTING_SAVED_ARRAYS_PENDING_SCIENTIFIC_REVIEW",
+  "point_count": 4,
+  "cross_frame_neighbour_values": 12,
+  "source_network_calls": 0,
+  "new_remote_source_block_reads": 0,
+  "local_saved_npz_reads": 6,
+  "numpy_version": "2.3.5",
+  "grid_join": "Actual EPSG4326 36000-square2020v100 grids: identical1/12000degree resolution,zero skew,3degree adjacent origins. Eastcol36000\u2192adjacentcol0; northrow-1\u2192adjacentrow35999. No clamp/resampling/reprojection.",
+  "original_four_records_sha256": "dd87edde68003159cabb4f3ea0a5200eb03dd0e3ba79028b757435225e536d95",
+  "array_bindings": [
+    {
+      "tile": "S03E129",
+      "native_block": [
+        32,
+        35
+      ],
+      "metadata_sha256": "9b5b9de9f95e1fb9699a46ec0492624e98c80f8ef5adaf28532531a4c9005170",
+      "array": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S03E129/new-block-32-35.npz",
+        "bytes": 1676,
+        "sha256": "0cd85bc8de16a16c8bb229e7b40652319fc328cf5206b46f2845ca0350ac6193"
+      },
+      "source_header_sha256": "157df6ab4403dcf1afa71d4da3c5e8e6cb8770e3c4686c76946d2d980a987d6a",
+      "source_url": "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v100/2020/map/ESA_WorldCover_10m_2020_v100_S03E129_Map.tif",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:41:54 GMT",
+        "etag": "\"b8c1f77622761736a38b8700ca6b4f2b\"",
+        "accept-ranges": "bytes",
+        "content-length": "7694709"
+      },
+      "transform": [
+        8.333333333333333e-05,
+        0.0,
+        129.0,
+        0.0,
+        -8.333333333333333e-05,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "shape": [
+        36000,
+        36000
+      ],
+      "window": {
+        "row_off": 32768,
+        "col_off": 35840,
+        "height": 1024,
+        "width": 160
+      }
+    },
+    {
+      "tile": "S03E132",
+      "native_block": [
+        32,
+        0
+      ],
+      "metadata_sha256": "3eb2dce20e585a1e8ac29357a6dd576584e94640ba83ecac15887847d2689443",
+      "array": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S03E132/new-block-32-00.npz",
+        "bytes": 13007,
+        "sha256": "4bc880ece4963acf655f9fb01ead6d11690c76ef8c86e6494f4440fa95d8ad28"
+      },
+      "source_header_sha256": "baa6a6627221dcccb4c8af2bc0cd8001878238f014f02a6401afbf0c5a7f99af",
+      "source_url": "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v100/2020/map/ESA_WorldCover_10m_2020_v100_S03E132_Map.tif",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:41:54 GMT",
+        "etag": "\"dd8c9165078945a3c893fb36d5ac80ae-2\"",
+        "accept-ranges": "bytes",
+        "content-length": "13123675"
+      },
+      "transform": [
+        8.333333333333333e-05,
+        0.0,
+        132.0,
+        0.0,
+        -8.333333333333333e-05,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "shape": [
+        36000,
+        36000
+      ],
+      "window": {
+        "row_off": 32768,
+        "col_off": 0,
+        "height": 1024,
+        "width": 1024
+      }
+    },
+    {
+      "tile": "S06E129",
+      "native_block": [
+        27,
+        35
+      ],
+      "metadata_sha256": "1eb16d58f16923f86a2374b29bc64cac5fbffc87831555fa857cf8e2074756e3",
+      "array": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S06E129/new-block-27-35.npz",
+        "bytes": 3273,
+        "sha256": "6684c73b2fb63240034faf066532be7fb8984af1784f052a89c8726385b9c151"
+      },
+      "source_header_sha256": "ee4e1654516e99cdf1cd9552271d3498de4a0a9a2f3592f1fe14ede48ffe8828",
+      "source_url": "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v100/2020/map/ESA_WorldCover_10m_2020_v100_S06E129_Map.tif",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:42:04 GMT",
+        "etag": "\"df49d6f1acd5349681578dcd62bb856b\"",
+        "accept-ranges": "bytes",
+        "content-length": "4610928"
+      },
+      "transform": [
+        8.333333333333333e-05,
+        0.0,
+        129.0,
+        0.0,
+        -8.333333333333333e-05,
+        -3.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "shape": [
+        36000,
+        36000
+      ],
+      "window": {
+        "row_off": 27648,
+        "col_off": 35840,
+        "height": 1024,
+        "width": 160
+      }
+    },
+    {
+      "tile": "S06E132",
+      "native_block": [
+        27,
+        0
+      ],
+      "metadata_sha256": "d26c4b582ac6c41d71261505c0a3cb0e268ea73036d63b51f0b3267eaa25c23e",
+      "array": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S06E132/new-block-27-00.npz",
+        "bytes": 8936,
+        "sha256": "e62af232bd0f7efceaa64ba08b9f487afa261e8db7570016b1f67a65da2a4a4e"
+      },
+      "source_header_sha256": "2fc7b548a1fd743bd6b496a8a2622cfa4d3772e36e2a86035a15a71a718fa2f9",
+      "source_url": "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v100/2020/map/ESA_WorldCover_10m_2020_v100_S06E132_Map.tif",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:42:04 GMT",
+        "etag": "\"dcc8ae050f705a2053a10fcdd9635f9a\"",
+        "accept-ranges": "bytes",
+        "content-length": "6975532"
+      },
+      "transform": [
+        8.333333333333333e-05,
+        0.0,
+        132.0,
+        0.0,
+        -8.333333333333333e-05,
+        -3.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "shape": [
+        36000,
+        36000
+      ],
+      "window": {
+        "row_off": 27648,
+        "col_off": 0,
+        "height": 1024,
+        "width": 1024
+      }
+    },
+    {
+      "tile": "S09E132",
+      "native_block": [
+        0,
+        9
+      ],
+      "metadata_sha256": "d0ae291af161f84011b6b56078fd73a06aacfcbb277a6aace99246fb1c4f1319",
+      "array": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S09E132/new-block-00-09.npz",
+        "bytes": 2723,
+        "sha256": "e935c97b57cbdc3b3e14cb62e3359a563d88cb37137ee5399163f41de4d30b06"
+      },
+      "source_header_sha256": "1689abcc919f196b7ea87ccd084feb3e32c821f99c73d4d04ce550ce79c5f381",
+      "source_url": "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v100/2020/map/ESA_WorldCover_10m_2020_v100_S09E132_Map.tif",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:42:18 GMT",
+        "etag": "\"c45f617b8fb8b8ad432dc9d6fdbcb023\"",
+        "accept-ranges": "bytes",
+        "content-length": "4767330"
+      },
+      "transform": [
+        8.333333333333333e-05,
+        0.0,
+        132.0,
+        0.0,
+        -8.333333333333333e-05,
+        -6.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "shape": [
+        36000,
+        36000
+      ],
+      "window": {
+        "row_off": 0,
+        "col_off": 9216,
+        "height": 1024,
+        "width": 1024
+      }
+    },
+    {
+      "tile": "S06E132",
+      "native_block": [
+        35,
+        9
+      ],
+      "metadata_sha256": "ef1bfb6cf6f68ff9c60aff09d026cd77c8ed01027f27da2c5f427b418e3fa2c3",
+      "array": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S06E132/new-block-35-09.npz",
+        "bytes": 1566,
+        "sha256": "483f6a490ea3dd696e970fbfe8773df9469c6209c85f6aa7762c09e3aa29fba2"
+      },
+      "source_header_sha256": "2fc7b548a1fd743bd6b496a8a2622cfa4d3772e36e2a86035a15a71a718fa2f9",
+      "source_url": "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v100/2020/map/ESA_WorldCover_10m_2020_v100_S06E132_Map.tif",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:42:04 GMT",
+        "etag": "\"dcc8ae050f705a2053a10fcdd9635f9a\"",
+        "accept-ranges": "bytes",
+        "content-length": "6975532"
+      },
+      "transform": [
+        8.333333333333333e-05,
+        0.0,
+        132.0,
+        0.0,
+        -8.333333333333333e-05,
+        -3.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "shape": [
+        36000,
+        36000
+      ],
+      "window": {
+        "row_off": 35840,
+        "col_off": 9216,
+        "height": 160,
+        "width": 1024
+      }
+    }
+  ],
+  "records": [
+    {
+      "point_index": 50356,
+      "original_key": {
+        "owner": 23090,
+        "y": 133094,
+        "x": 227210
+      },
+      "original_tile": "S03E129",
+      "native_row": 33132,
+      "native_col": 35999,
+      "class_code": 10,
+      "original_neighbourhood_codes": null,
+      "original_neighbourhood_masks": null,
+      "completed_neighbourhood_codes": [
+        [
+          10,
+          10,
+          10
+        ],
+        [
+          10,
+          10,
+          10
+        ],
+        [
+          10,
+          10,
+          10
+        ]
+      ],
+      "completed_neighbourhood_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "centre_observation_unchanged": true,
+      "cross_frame_neighbours": 3,
+      "samples": [
+        {
+          "dy": -1,
+          "dx": -1,
+          "tile": "S03E129",
+          "native_row": 33131,
+          "native_col": 35998,
+          "array_sha256": "0cd85bc8de16a16c8bb229e7b40652319fc328cf5206b46f2845ca0350ac6193",
+          "code": 10,
+          "valid_mask": 255,
+          "cross_frame": false
+        },
+        {
+          "dy": -1,
+          "dx": 0,
+          "tile": "S03E129",
+          "native_row": 33131,
+          "native_col": 35999,
+          "array_sha256": "0cd85bc8de16a16c8bb229e7b40652319fc328cf5206b46f2845ca0350ac6193",
+          "code": 10,
+          "valid_mask": 255,
+          "cross_frame": false
+        },
+        {
+          "dy": -1,
+          "dx": 1,
+          "tile": "S03E132",
+          "native_row": 33131,
+          "native_col": 0,
+          "array_sha256": "4bc880ece4963acf655f9fb01ead6d11690c76ef8c86e6494f4440fa95d8ad28",
+          "code": 10,
+          "valid_mask": 255,
+          "cross_frame": true
+        },
+        {
+          "dy": 0,
+          "dx": -1,
+          "tile": "S03E129",
+          "native_row": 33132,
+          "native_col": 35998,
+          "array_sha256": "0cd85bc8de16a16c8bb229e7b40652319fc328cf5206b46f2845ca0350ac6193",
+          "code": 10,
+          "valid_mask": 255,
+          "cross_frame": false
+        },
+        {
+          "dy": 0,
+          "dx": 0,
+          "tile": "S03E129",
+          "native_row": 33132,
+          "native_col": 35999,
+          "array_sha256": "0cd85bc8de16a16c8bb229e7b40652319fc328cf5206b46f2845ca0350ac6193",
+          "code": 10,
+          "valid_mask": 255,
+          "cross_frame": false
+        },
+        {
+          "dy": 0,
+          "dx": 1,
+          "tile": "S03E132",
+          "native_row": 33132,
+          "native_col": 0,
+          "array_sha256": "4bc880ece4963acf655f9fb01ead6d11690c76ef8c86e6494f4440fa95d8ad28",
+          "code": 10,
+          "valid_mask": 255,
+          "cross_frame": true
+        },
+        {
+          "dy": 1,
+          "dx": -1,
+          "tile": "S03E129",
+          "native_row": 33133,
+          "native_col": 35998,
+          "array_sha256": "0cd85bc8de16a16c8bb229e7b40652319fc328cf5206b46f2845ca0350ac6193",
+          "code": 10,
+          "valid_mask": 255,
+          "cross_frame": false
+        },
+        {
+          "dy": 1,
+          "dx": 0,
+          "tile": "S03E129",
+          "native_row": 33133,
+          "native_col": 35999,
+          "array_sha256": "0cd85bc8de16a16c8bb229e7b40652319fc328cf5206b46f2845ca0350ac6193",
+          "code": 10,
+          "valid_mask": 255,
+          "cross_frame": false
+        },
+        {
+          "dy": 1,
+          "dx": 1,
+          "tile": "S03E132",
+          "native_row": 33133,
+          "native_col": 0,
+          "array_sha256": "4bc880ece4963acf655f9fb01ead6d11690c76ef8c86e6494f4440fa95d8ad28",
+          "code": 10,
+          "valid_mask": 255,
+          "cross_frame": true
+        }
+      ],
+      "proposed_answer": null,
+      "adopted_answer": null
+    },
+    {
+      "point_index": 60852,
+      "original_key": {
+        "owner": 23094,
+        "y": 135002,
+        "x": 227210
+      },
+      "original_tile": "S06E129",
+      "native_row": 28491,
+      "native_col": 35999,
+      "class_code": 80,
+      "original_neighbourhood_codes": null,
+      "original_neighbourhood_masks": null,
+      "completed_neighbourhood_codes": [
+        [
+          80,
+          80,
+          80
+        ],
+        [
+          80,
+          80,
+          80
+        ],
+        [
+          80,
+          80,
+          80
+        ]
+      ],
+      "completed_neighbourhood_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "centre_observation_unchanged": true,
+      "cross_frame_neighbours": 3,
+      "samples": [
+        {
+          "dy": -1,
+          "dx": -1,
+          "tile": "S06E129",
+          "native_row": 28490,
+          "native_col": 35998,
+          "array_sha256": "6684c73b2fb63240034faf066532be7fb8984af1784f052a89c8726385b9c151",
+          "code": 80,
+          "valid_mask": 255,
+          "cross_frame": false
+        },
+        {
+          "dy": -1,
+          "dx": 0,
+          "tile": "S06E129",
+          "native_row": 28490,
+          "native_col": 35999,
+          "array_sha256": "6684c73b2fb63240034faf066532be7fb8984af1784f052a89c8726385b9c151",
+          "code": 80,
+          "valid_mask": 255,
+          "cross_frame": false
+        },
+        {
+          "dy": -1,
+          "dx": 1,
+          "tile": "S06E132",
+          "native_row": 28490,
+          "native_col": 0,
+          "array_sha256": "e62af232bd0f7efceaa64ba08b9f487afa261e8db7570016b1f67a65da2a4a4e",
+          "code": 80,
+          "valid_mask": 255,
+          "cross_frame": true
+        },
+        {
+          "dy": 0,
+          "dx": -1,
+          "tile": "S06E129",
+          "native_row": 28491,
+          "native_col": 35998,
+          "array_sha256": "6684c73b2fb63240034faf066532be7fb8984af1784f052a89c8726385b9c151",
+          "code": 80,
+          "valid_mask": 255,
+          "cross_frame": false
+        },
+        {
+          "dy": 0,
+          "dx": 0,
+          "tile": "S06E129",
+          "native_row": 28491,
+          "native_col": 35999,
+          "array_sha256": "6684c73b2fb63240034faf066532be7fb8984af1784f052a89c8726385b9c151",
+          "code": 80,
+          "valid_mask": 255,
+          "cross_frame": false
+        },
+        {
+          "dy": 0,
+          "dx": 1,
+          "tile": "S06E132",
+          "native_row": 28491,
+          "native_col": 0,
+          "array_sha256": "e62af232bd0f7efceaa64ba08b9f487afa261e8db7570016b1f67a65da2a4a4e",
+          "code": 80,
+          "valid_mask": 255,
+          "cross_frame": true
+        },
+        {
+          "dy": 1,
+          "dx": -1,
+          "tile": "S06E129",
+          "native_row": 28492,
+          "native_col": 35998,
+          "array_sha256": "6684c73b2fb63240034faf066532be7fb8984af1784f052a89c8726385b9c151",
+          "code": 80,
+          "valid_mask": 255,
+          "cross_frame": false
+        },
+        {
+          "dy": 1,
+          "dx": 0,
+          "tile": "S06E129",
+          "native_row": 28492,
+          "native_col": 35999,
+          "array_sha256": "6684c73b2fb63240034faf066532be7fb8984af1784f052a89c8726385b9c151",
+          "code": 80,
+          "valid_mask": 255,
+          "cross_frame": false
+        },
+        {
+          "dy": 1,
+          "dx": 1,
+          "tile": "S06E132",
+          "native_row": 28492,
+          "native_col": 0,
+          "array_sha256": "e62af232bd0f7efceaa64ba08b9f487afa261e8db7570016b1f67a65da2a4a4e",
+          "code": 80,
+          "valid_mask": 255,
+          "cross_frame": true
+        }
+      ],
+      "proposed_answer": null,
+      "adopted_answer": null
+    },
+    {
+      "point_index": 67780,
+      "original_key": {
+        "owner": 22996,
+        "y": 135460,
+        "x": 227827
+      },
+      "original_tile": "S09E132",
+      "native_row": 0,
+      "native_col": 10166,
+      "class_code": 10,
+      "original_neighbourhood_codes": null,
+      "original_neighbourhood_masks": null,
+      "completed_neighbourhood_codes": [
+        [
+          10,
+          10,
+          10
+        ],
+        [
+          10,
+          10,
+          10
+        ],
+        [
+          10,
+          10,
+          10
+        ]
+      ],
+      "completed_neighbourhood_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "centre_observation_unchanged": true,
+      "cross_frame_neighbours": 3,
+      "samples": [
+        {
+          "dy": -1,
+          "dx": -1,
+          "tile": "S06E132",
+          "native_row": 35999,
+          "native_col": 10165,
+          "array_sha256": "483f6a490ea3dd696e970fbfe8773df9469c6209c85f6aa7762c09e3aa29fba2",
+          "code": 10,
+          "valid_mask": 255,
+          "cross_frame": true
+        },
+        {
+          "dy": -1,
+          "dx": 0,
+          "tile": "S06E132",
+          "native_row": 35999,
+          "native_col": 10166,
+          "array_sha256": "483f6a490ea3dd696e970fbfe8773df9469c6209c85f6aa7762c09e3aa29fba2",
+          "code": 10,
+          "valid_mask": 255,
+          "cross_frame": true
+        },
+        {
+          "dy": -1,
+          "dx": 1,
+          "tile": "S06E132",
+          "native_row": 35999,
+          "native_col": 10167,
+          "array_sha256": "483f6a490ea3dd696e970fbfe8773df9469c6209c85f6aa7762c09e3aa29fba2",
+          "code": 10,
+          "valid_mask": 255,
+          "cross_frame": true
+        },
+        {
+          "dy": 0,
+          "dx": -1,
+          "tile": "S09E132",
+          "native_row": 0,
+          "native_col": 10165,
+          "array_sha256": "e935c97b57cbdc3b3e14cb62e3359a563d88cb37137ee5399163f41de4d30b06",
+          "code": 10,
+          "valid_mask": 255,
+          "cross_frame": false
+        },
+        {
+          "dy": 0,
+          "dx": 0,
+          "tile": "S09E132",
+          "native_row": 0,
+          "native_col": 10166,
+          "array_sha256": "e935c97b57cbdc3b3e14cb62e3359a563d88cb37137ee5399163f41de4d30b06",
+          "code": 10,
+          "valid_mask": 255,
+          "cross_frame": false
+        },
+        {
+          "dy": 0,
+          "dx": 1,
+          "tile": "S09E132",
+          "native_row": 0,
+          "native_col": 10167,
+          "array_sha256": "e935c97b57cbdc3b3e14cb62e3359a563d88cb37137ee5399163f41de4d30b06",
+          "code": 10,
+          "valid_mask": 255,
+          "cross_frame": false
+        },
+        {
+          "dy": 1,
+          "dx": -1,
+          "tile": "S09E132",
+          "native_row": 1,
+          "native_col": 10165,
+          "array_sha256": "e935c97b57cbdc3b3e14cb62e3359a563d88cb37137ee5399163f41de4d30b06",
+          "code": 10,
+          "valid_mask": 255,
+          "cross_frame": false
+        },
+        {
+          "dy": 1,
+          "dx": 0,
+          "tile": "S09E132",
+          "native_row": 1,
+          "native_col": 10166,
+          "array_sha256": "e935c97b57cbdc3b3e14cb62e3359a563d88cb37137ee5399163f41de4d30b06",
+          "code": 10,
+          "valid_mask": 255,
+          "cross_frame": false
+        },
+        {
+          "dy": 1,
+          "dx": 1,
+          "tile": "S09E132",
+          "native_row": 1,
+          "native_col": 10167,
+          "array_sha256": "e935c97b57cbdc3b3e14cb62e3359a563d88cb37137ee5399163f41de4d30b06",
+          "code": 10,
+          "valid_mask": 255,
+          "cross_frame": false
+        }
+      ],
+      "proposed_answer": null,
+      "adopted_answer": null
+    },
+    {
+      "point_index": 67781,
+      "original_key": {
+        "owner": 22996,
+        "y": 135460,
+        "x": 227828
+      },
+      "original_tile": "S09E132",
+      "native_row": 0,
+      "native_col": 10182,
+      "class_code": 10,
+      "original_neighbourhood_codes": null,
+      "original_neighbourhood_masks": null,
+      "completed_neighbourhood_codes": [
+        [
+          10,
+          10,
+          10
+        ],
+        [
+          10,
+          10,
+          10
+        ],
+        [
+          10,
+          10,
+          10
+        ]
+      ],
+      "completed_neighbourhood_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "centre_observation_unchanged": true,
+      "cross_frame_neighbours": 3,
+      "samples": [
+        {
+          "dy": -1,
+          "dx": -1,
+          "tile": "S06E132",
+          "native_row": 35999,
+          "native_col": 10181,
+          "array_sha256": "483f6a490ea3dd696e970fbfe8773df9469c6209c85f6aa7762c09e3aa29fba2",
+          "code": 10,
+          "valid_mask": 255,
+          "cross_frame": true
+        },
+        {
+          "dy": -1,
+          "dx": 0,
+          "tile": "S06E132",
+          "native_row": 35999,
+          "native_col": 10182,
+          "array_sha256": "483f6a490ea3dd696e970fbfe8773df9469c6209c85f6aa7762c09e3aa29fba2",
+          "code": 10,
+          "valid_mask": 255,
+          "cross_frame": true
+        },
+        {
+          "dy": -1,
+          "dx": 1,
+          "tile": "S06E132",
+          "native_row": 35999,
+          "native_col": 10183,
+          "array_sha256": "483f6a490ea3dd696e970fbfe8773df9469c6209c85f6aa7762c09e3aa29fba2",
+          "code": 10,
+          "valid_mask": 255,
+          "cross_frame": true
+        },
+        {
+          "dy": 0,
+          "dx": -1,
+          "tile": "S09E132",
+          "native_row": 0,
+          "native_col": 10181,
+          "array_sha256": "e935c97b57cbdc3b3e14cb62e3359a563d88cb37137ee5399163f41de4d30b06",
+          "code": 10,
+          "valid_mask": 255,
+          "cross_frame": false
+        },
+        {
+          "dy": 0,
+          "dx": 0,
+          "tile": "S09E132",
+          "native_row": 0,
+          "native_col": 10182,
+          "array_sha256": "e935c97b57cbdc3b3e14cb62e3359a563d88cb37137ee5399163f41de4d30b06",
+          "code": 10,
+          "valid_mask": 255,
+          "cross_frame": false
+        },
+        {
+          "dy": 0,
+          "dx": 1,
+          "tile": "S09E132",
+          "native_row": 0,
+          "native_col": 10183,
+          "array_sha256": "e935c97b57cbdc3b3e14cb62e3359a563d88cb37137ee5399163f41de4d30b06",
+          "code": 10,
+          "valid_mask": 255,
+          "cross_frame": false
+        },
+        {
+          "dy": 1,
+          "dx": -1,
+          "tile": "S09E132",
+          "native_row": 1,
+          "native_col": 10181,
+          "array_sha256": "e935c97b57cbdc3b3e14cb62e3359a563d88cb37137ee5399163f41de4d30b06",
+          "code": 10,
+          "valid_mask": 255,
+          "cross_frame": false
+        },
+        {
+          "dy": 1,
+          "dx": 0,
+          "tile": "S09E132",
+          "native_row": 1,
+          "native_col": 10182,
+          "array_sha256": "e935c97b57cbdc3b3e14cb62e3359a563d88cb37137ee5399163f41de4d30b06",
+          "code": 10,
+          "valid_mask": 255,
+          "cross_frame": false
+        },
+        {
+          "dy": 1,
+          "dx": 1,
+          "tile": "S09E132",
+          "native_row": 1,
+          "native_col": 10183,
+          "array_sha256": "e935c97b57cbdc3b3e14cb62e3359a563d88cb37137ee5399163f41de4d30b06",
+          "code": 10,
+          "valid_mask": 255,
+          "cross_frame": false
+        }
+      ],
+      "proposed_answer": null,
+      "adopted_answer": null
+    }
+  ],
+  "limits": [
+    "Original source/adopted files unchanged and historical incomplete null contexts retained.",
+    "These are separate actual cached-neighbour observations, not new adopted answers.",
+    "All physical/source/parent/portion/territorial/waterbank limits unchanged; no native qualification or repaircredit."
+  ]
+}
