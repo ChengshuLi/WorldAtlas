@@ -157,8 +157,8 @@ git -c fetch.negotiationAlgorithm=noop fetch --no-tags --no-write-fetch-head \
   --no-recurse-submodules --no-auto-maintenance --filter=blob:none --stdin origin
 ```
 
-Serialize shared-store acquisition, use bounded batches, and verify acquired
-blob type, exact OID and byte size against those descriptors. Re-run inspection
+Use bounded batches and verify acquired blob type, exact OID and byte size
+against those descriptors. Re-run inspection
 and normal allocation with the same complete scope. Do not replace this with all
 repository OIDs, global `ls-tree -l`, a full clone or automatic lazy fetching.
 This reuses the exact-object transport used by geography acquisition; its
@@ -166,6 +166,15 @@ geography-specific CLI/declaration limits are unchanged and are not a universal
 workspace prefetch interface. Inspection does not resolve an undeclared required
 path: sparse inputs must still cover the actual checks, or use an adequately
 reserved full profile.
+
+Immutable object reads and private transport stores need no manual chat grant,
+start announcement or release acknowledgment. Ordinary exact-OID shared-store
+imports also need none when their exact remote/filter is already registered and
+no strict-origin inventory interval, shallow rewrite or maintenance is active.
+Coordinate shared configuration setup, mutable ref/FETCH_HEAD decisions, shallow
+changes, maintenance and strict-origin whole-store before/fetch/after inventories.
+Keep checkout/index/output ownership, the allocator lock, storage admission and
+all exact-byte checks.
 
 ## Storage admission and ongoing checks
 
