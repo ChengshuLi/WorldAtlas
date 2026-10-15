@@ -1,0 +1,31 @@
+Command failed: /Users/chengshuli/.cache/worldatlas-python-envs/requirements-a911b499659c266373447ffef081b16be803c5b5b2cd22889cc5c7a22811c0ae-python-3.12.14-macos-arm64/bin/python -I -B /Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/b516a693506d065f08d8984390ca7e530077d358a0739e0a661a1199da76763a/work/scripts/qualify-source-cohort.py --phase physical --repo /Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/b516a693506d065f08d8984390ca7e530077d358a0739e0a661a1199da76763a/work --config /Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/b516a693506d065f08d8984390ca7e530077d358a0739e0a661a1199da76763a/work/.cache/delivery-handoff/source-VhPKmp/source-config.json --admission /Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/b516a693506d065f08d8984390ca7e530077d358a0739e0a661a1199da76763a/work/.cache/delivery-handoff/source-VhPKmp/admission.json --output /Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/b516a693506d065f08d8984390ca7e530077d358a0739e0a661a1199da76763a/work/.cache/delivery-handoff/source-VhPKmp/products --publication-prefix .cache/delivery-handoff/quephong49-physical-001
+Traceback (most recent call last):
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/b516a693506d065f08d8984390ca7e530077d358a0739e0a661a1199da76763a/work/scripts/qualify-source-cohort.py", line 772, in <module>
+    print(json.dumps((run if args.phase=='source' else run_physical)(args.repo, args.config, args.admission, args.output, args.publication_prefix)))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/b516a693506d065f08d8984390ca7e530077d358a0739e0a661a1199da76763a/work/scripts/qualify-source-cohort.py", line 626, in run_physical
+    verify_runtime(admission)
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/b516a693506d065f08d8984390ca7e530077d358a0739e0a661a1199da76763a/work/scripts/qualify-source-cohort.py", line 206, in verify_runtime
+    need(not missing, 'Loaded runtime file omitted from admission inventory: ' + ', '.join(missing))
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/b516a693506d065f08d8984390ca7e530077d358a0739e0a661a1199da76763a/work/scripts/qualify-source-cohort.py", line 39, in need
+    raise ValueError(message)
+ValueError: Loaded runtime file omitted from admission inventory: /Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/bz2.py, /Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/lzma.py, /Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/shutil.py
+
+        0.61 real         0.21 user         0.12 sys
+           207437824  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+               13213  page reclaims
+                2653  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                  11  messages sent
+                   6  messages received
+                   0  signals received
+                 237  voluntary context switches
+                1284  involuntary context switches
+          1364017168  instructions retired
+           675664503  cycles elapsed
+            91922112  peak memory footprint
