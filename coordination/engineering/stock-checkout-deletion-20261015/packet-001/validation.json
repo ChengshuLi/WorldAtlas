@@ -1,0 +1,15 @@
+{
+  "command": "node --test test/ci-checkout.test.mjs test/trusted-workflow-checkouts.test.mjs",
+  "runtime": "Node24.19.0",
+  "pass": 23,
+  "fail": 0,
+  "skip": 0,
+  "duration_ms": 12507.1995,
+  "authenticated_fixture_files": 486,
+  "fixture_bytes_approx": 9810000,
+  "limits": [
+    "Task-side composed published2046/2047/2048 preimages; not an accepted combined Git head.",
+    "No hosted stock checkout timing, full build, world hydration or science execution.",
+    "Full raw task logs and original metadata remain preserved privately."
+  ]
+}

@@ -1,0 +1,133 @@
+{
+  "status": "TASK_ONLY_REVIEWED_CHECKOUT_DELTA",
+  "nominal_accepted_base": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+  "nominal_tree": "e6634dee5668b81330afc0e51dd46aa54b140e01",
+  "component_heads": {
+    "2046": "b215228aa5b1a2dea21871b622f462b623b1f2c2",
+    "2047": "43e97becbd84520788b72a1b90511aaa4d574541",
+    "2048": "4292eec51578918f222c3d4254445a0e6c4283c5"
+  },
+  "binding_note": "Composed task preimages preserve published2046/2047 identical check removal,2047 wrapper deadline deletion, and2047 author absence plus2048 proof deletion in trusted tests. No published combined Git head or canonical59a139 bytes claimed. Parent ordinary author reconciles against actual accepted main675cf628+2046 as appropriate. Apply checkout-only.patch, not stale whole-file overlays.",
+  "files": [
+    {
+      "path": ".github/workflows/worker-merge.yml",
+      "status": "modified",
+      "preimage": {
+        "bytes": 26697,
+        "sha256": "704c063f4d9eb547f25c419200e05230720eb8da6f7c8e5b3a5f35ed4b5cfd2f",
+        "git_blob_oid": "970b971aab67c9fd927a2c53585e7c0cd91e3af1"
+      },
+      "postimage": {
+        "bytes": 20271,
+        "sha256": "2dc9e45e0aab8252e385bdab2de082c8a2097bc73e6606eeeb3c93d8fbd2ae0f",
+        "git_blob_oid": "1753be29612d4df2892b79a8f5a4aa744b6731b8"
+      }
+    },
+    {
+      "path": "docs/CI_CHECKOUT.md",
+      "status": "modified",
+      "preimage": {
+        "bytes": 8528,
+        "sha256": "73511e1e966117eea2c8f485518ec7c7258545acedf98df8282d67e8aa0e8448",
+        "git_blob_oid": "51191dbfd017cc512fb2c6429d4ff35b9a37d425"
+      },
+      "postimage": {
+        "bytes": 3533,
+        "sha256": "09be0f0f6c7d603ab997a0f8fea7fefc6e46dc6245093c9d39765214b536e14f",
+        "git_blob_oid": "2921e3ecf7eb03c296e99ec9739d7323920ae4ab"
+      }
+    },
+    {
+      "path": "scripts/merge-integration.mjs",
+      "status": "modified",
+      "preimage": {
+        "bytes": 23933,
+        "sha256": "5dfe142f388faa198cb2e0c18fcdac9b7469d2e647ed45f4a7e6f41fa8274502",
+        "git_blob_oid": "01a3d396f082351ef6e29de7d36b1770daf8af4f"
+      },
+      "postimage": {
+        "bytes": 24461,
+        "sha256": "480d254f3e6712ce99fedc641696143115b054280dea3d40ff8e85bb6ff51afa",
+        "git_blob_oid": "6c2136b0528a214d0bb761bf04af03f279986a7d"
+      }
+    },
+    {
+      "path": "scripts/package-inputs.mjs",
+      "status": "modified",
+      "preimage": {
+        "bytes": 7525,
+        "sha256": "7ef9f385a99b3e3eeaa209f1c4e3f64cba4c42aec08b1a5f6f1824d2426d4c53",
+        "git_blob_oid": "e2e248e889d5547fbffa63d2c662b0624375c7e8"
+      },
+      "postimage": {
+        "bytes": 10053,
+        "sha256": "05d0844b7ae0058be185be2c57890ddd64d20bb4fa58eb147a7310be4778db1d",
+        "git_blob_oid": "5b9300bf925516318c7a4641d008b97a8547d15e"
+      }
+    },
+    {
+      "path": "scripts/run-worker-merge.mjs",
+      "status": "modified",
+      "preimage": {
+        "bytes": 7355,
+        "sha256": "84a3adad7ef9217a3cc0b18a772c269ed02c23180caf9d8610bf6ccd4d4f3cd7",
+        "git_blob_oid": "92156a68720409bd2bd8360af5bc2bbbcc560c78"
+      },
+      "postimage": {
+        "bytes": 7686,
+        "sha256": "071773cd1909bca47d4d6cfbc0e22bb7ac1122c0b358d054e67e3e5cc1fff018",
+        "git_blob_oid": "0f92df60085e4eb612bca59414d333d6ded118b3"
+      }
+    },
+    {
+      "path": "test/ci-checkout.test.mjs",
+      "status": "modified",
+      "preimage": {
+        "bytes": 47646,
+        "sha256": "d12b0d461f9a7bbd1940c8450cc7da3f4bda335a3ecd72ce2375e679f2e84e71",
+        "git_blob_oid": "d794f686b3ed1ad617e2f0e430b22d28d31094f0"
+      },
+      "postimage": {
+        "bytes": 5306,
+        "sha256": "92d0befdcc31c1efded7bfa7b19c856f212c6517cfdc4f0fffac320e2cff86db",
+        "git_blob_oid": "d3233602ed2f34cfc5769d8c73731ad141869283"
+      }
+    },
+    {
+      "path": "test/trusted-workflow-checkouts.test.mjs",
+      "status": "modified",
+      "preimage": {
+        "bytes": 34019,
+        "sha256": "9aebb0bb382a7559c2933176ca5da5c8f0c22f02c4d009bce2db689eec090a43",
+        "git_blob_oid": "f2ef43d7bbbad6f9a6806473710a18fcb84a5102"
+      },
+      "postimage": {
+        "bytes": 22696,
+        "sha256": "26f3e6b9d4ab6952c438068bf10299dd825992826830c97516d1648344659cd3",
+        "git_blob_oid": "d1c2b53ce2b0d30abc96aa9891ff5a6b126b0385"
+      }
+    },
+    {
+      "path": "scripts/acquire-ci-checkout.py",
+      "status": "deleted",
+      "preimage": {
+        "bytes": 21631,
+        "sha256": "ed56aabc8f45b6931796eebffc804d64727727d8f5c054230b8fb5665e85ee98",
+        "git_blob_oid": "06e818c57b6c77797060e29565a9be085be7f7e0"
+      },
+      "postimage": null
+    }
+  ],
+  "review": "worker4-review/review.md",
+  "validation": {
+    "runtime": "Node24.19.0",
+    "command": "node --test test/ci-checkout.test.mjs test/trusted-workflow-checkouts.test.mjs",
+    "pass": 23,
+    "fail": 0,
+    "skipped": 0,
+    "duration_ms": 12507.1995,
+    "log": "full-changed-tests.log",
+    "fixture_inputs": "full-test-fixture-inputs.json",
+    "limits": "Task fixture imports trusted closures and executes actual workflow shell/verifier controls; no hosted stock-action throughput/fullbuild/science assertion."
+  }
+}
