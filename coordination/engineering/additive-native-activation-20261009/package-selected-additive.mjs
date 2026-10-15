@@ -4,6 +4,7 @@ import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {ImmutableReader,loadSelection,processingAllowance} from '../../../scripts/check-effective-geographic-regression.mjs';
 import {loadPackageInputs,containsPackagePath} from '../../../scripts/package-inputs.mjs';
+import {admitPackageInputTransition} from '../../../scripts/package-output-artifact.mjs';
 import {valueBytes,valueSha} from '../selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 
 const demand=(v,m)=>{if(!v)throw Error(m);};
@@ -55,6 +56,18 @@ export function bindPackageImmutableCommits(reader,declared){
  return fetched;
 }
 
+// The already-authenticated trusted-base descriptors bound the only names this
+// observer may carry. Actual detached readers invoke it only after typed success.
+export function retainSelectedPackageInputs(expected, inputs, retained, admit) {
+  for(const pin of inputs){
+    const accepted=expected.find(row=>row.path===pin.path);
+    if(!accepted||retained.has(pin.path)||accepted.mode!==pin.mode||accepted.oid!==pin.git_blob_oid||accepted.bytes!==pin.bytes)continue;
+    // Reserve the complete copied descriptor and map-key carry before retaining.
+    admit(2*valueBytes({path:pin.path,pin}).length);
+    retained.set(pin.path,{...pin});
+  }
+}
+
 // Called before context/database allocations. The package issuer authenticates
 // its executing closure; the existing private selected reader authenticates all
 // source/rule/current-rebind authority. This bridge grants no new authority.
@@ -103,9 +116,12 @@ export async function preparePackageSelectedAdditive({root,currentExecution,cons
   const inheritedBytes=assembling?execution.inherited_metadata_bytes:
     2*(461664+95064+235002+valueBytes(restoredReceipt).length+valueBytes(consumedContext).length+valueBytes(consumed).length);
   const metadataBytes=8*1048576+inheritedBytes+2*valueBytes(execution).length;
+  const selectedInputs=new Map();
+  const pending=assembling?currentAssemblies.get(execution).transition.accepted_selected_inputs?.files??[]:[];
   const reader=new ImmutableReader(execution.source_root,execution.source_commit,{
     runtimeBytes:execution.runtime.bytes+gitStat.size,executionBytes,
     metadataBytes,outputBytes:0,gitExecutable:git,...(assembling?{allowance:execution.allowance}:{})});
+  if(pending.length)reader.captureSelectedInputs=(inputs,admit)=>retainSelectedPackageInputs(pending,inputs,selectedInputs,admit);
   bindPackageImmutableCommits(reader,name=>containsPackagePath(definition.inputs,name)||execution.files.some(p=>p.path===name));
   const wholeRead=reader.read.bind(reader);
   reader.read=(name,options)=>{
@@ -136,13 +152,17 @@ export async function preparePackageSelectedAdditive({root,currentExecution,cons
   reader.outputBytes=outputBytes;
   reader.metadataBytes+=snapshot.metadataBytes+2*valueBytes(view).length;reader.phase();
   const copied=readBoundPublicationAssets(reader,roster,name=>containsPackagePath(definition.inputs,name)||execution.files.some(p=>p.path===name));
-  const bodies=copied.bodies;
+  const bodies=copied.bodies,inputInventory=[...copied.input_inventory,...selectedInputs.values()];
+  if(assembling){
+    const held=currentAssemblies.get(execution);
+    admitPackageInputTransition(original.manifest.source,held.source,{acceptedInputs:held.acceptedInputs,typedInputs:inputInventory});
+  }
   requireExecution(execution);
   const gitEnd=ordinary(git);for(const k of ['dev','ino','size','mode','mtimeMs','ctimeMs'])demand(gitEnd[k]===gitStat[k],'Git program pathname drift');
   demand(createHash('sha256').update(fs.readFileSync(git)).digest('hex')===gitHash,'Whole executing Git program drift');
   const token=Object.freeze({additiveRelease:envelope,reference_release:envelope.effective_reference});
   publications.set(token,{root:fs.realpathSync(root),roster,bodies,gitHash,inheritedBytes,outputBytes,
-    input_inventory:copied.input_inventory,complete_phase_bytes:copied.complete_phase_bytes});
+    input_inventory:inputInventory,complete_phase_bytes:copied.complete_phase_bytes});
   return token;
 }
 
@@ -353,7 +373,7 @@ function assemblyCode(source,executingRoot) {
   visit('scripts/assemble-selected-package.mjs');return files.sort((a,b)=>a.path.localeCompare(b.path,'en'));
 }
 
-function assemblySourceAdmission(original,source) {
+function assemblySourceAdmission(original,source,acceptedInputs) {
   const before=requireOriginalPackageOutput(original).manifest.source,definition=loadPackageInputs(source);
   const read=name=>{
     const file=path.join(source,name),stat=ordinary(file);demand(stat.size<=8*1048576,'Bounded assembly source metadata required');
@@ -362,10 +382,6 @@ function assemblySourceAdmission(original,source) {
   };
   demand(assemblySame(read('.github/package-inputs.json'),definition),'Current package definition drift');
   const selection=read('data/ownership-selection.json');
-  const {inputs:oldInputs,...oldPolicy}=before.definition,{inputs:newInputs,...newPolicy}=definition;
-  demand(assemblySame(oldPolicy,newPolicy)&&assemblySame(oldInputs,newInputs.slice(0,oldInputs.length)),'Original package policy changed');
-  const {additive_release:oldHook,...oldBase}=before.selection,{additive_release:newHook,...newBase}=selection;
-  demand(oldHook&&newHook&&assemblySame(oldBase,newBase),'Original package base selection changed');
   const all=assemblyGit(source,['ls-tree','-rz','--full-tree','HEAD']).split('\0').filter(Boolean).map(line=>{
     const tab=line.indexOf('\t'),[mode,type,oid]=line.slice(0,tab).split(' ');return {path:line.slice(tab+1),mode,type,oid};
   });
@@ -379,24 +395,21 @@ function assemblySourceAdmission(original,source) {
   const workflowPins=workflows.map(({type,...row})=>row);
   demand(before.producer?.kind==='immediate-cloudflare-build-v1'&&assemblySame(before.producer,{kind:'immediate-cloudflare-build-v1',workflows:workflowPins}),
     'Immediate original build capture and unchanged producer workflow required');
-  const current=new Map(plain.map(row=>[row.path,row]));
-  const old=new Map(before.files.map(row=>[row.path,row])),exceptions=new Set(['.github/package-inputs.json','data/ownership-selection.json']);
-  demand(old.size===before.files.length&&old.size>0,'Complete unique original source inventory required');
-  for(const [name,row]of old)demand(current.has(name)&&(exceptions.has(name)||assemblySame(row,current.get(name))),'Original package input changed: '+name);
-  const added=newInputs.slice(oldInputs.length);
-  demand(added.every(name=>!name.endsWith('/')&&/^coordination\/engineering\/[^/]+\/.+\.(?:json|jsonl\.gz|json\.gz|log)$/.test(name)&&current.get(name)?.mode==='100644'),'Exact inert selected additions required');
-  for(const name of current.keys())demand(old.has(name)||added.includes(name),'New directory or optional package input is not invariant');
+  const current={head:assemblyGit(source,['rev-parse','HEAD']).trim(),definition,selection,files:plain,
+    producer:{kind:'immediate-cloudflare-build-v1',workflows:workflowPins}};
+  const transition=admitPackageInputTransition(before,current,{acceptedInputs,preliminary:true});
+  return {current,transition};
 }
 
 // Separate from package-issued full-build execution: this authenticates only the
 // actual small assembly programme and its immutable current source identities.
-export function issuePackageAssemblyExecution({original,source,stage,executingRoot,inheritedMetadata}) {
+export function issuePackageAssemblyExecution({original,source,stage,executingRoot,inheritedMetadata,acceptedInputs}) {
   requireOriginalPackageOutput(original);
   demand(Array.isArray(inheritedMetadata)&&inheritedMetadata.length===5,'Complete assembly metadata frame required');
   const metadataBytes=2*valueBytes(inheritedMetadata).length;
   demand(process.execArgv.length===0&&!process.env.NODE_OPTIONS?.trim()&&!process.env.NODE_PATH?.trim(),'Plain assembly Node execution required');
   source=fs.realpathSync(source);stage=fs.realpathSync(stage);executingRoot=fs.realpathSync(executingRoot);
-  assemblySourceAdmission(original,source);
+  const admittedSource=assemblySourceAdmission(original,source,acceptedInputs);
   demand(path.resolve(process.argv[1])===path.join(executingRoot,'scripts/assemble-selected-package.mjs'),'Actual assembly driver required');
   const files=assemblyCode(source,executingRoot), executable=fs.realpathSync(process.execPath);
   const allowance=processingAllowance(),runtimeStat=ordinary(executable);
@@ -407,7 +420,7 @@ export function issuePackageAssemblyExecution({original,source,stage,executingRo
   const record=Object.freeze({kind:'current-selected-package-assembly',source_root:source,
     source_commit:assemblyGit(source,['rev-parse','HEAD']).trim(),source_tree:assemblyGit(source,['rev-parse','HEAD^{tree}']).trim(),
     stage_root:stage,entry_point:'scripts/assemble-selected-package.mjs',files,runtime,allowance,original,inherited_metadata_bytes:metadataBytes});
-  currentAssemblies.set(record,{executingRoot,fingerprint:valueSha(record)});return record;
+  currentAssemblies.set(record,{executingRoot,fingerprint:valueSha(record),source:admittedSource.current,transition:structuredClone(admittedSource.transition),acceptedInputs:structuredClone(acceptedInputs)});return record;
 }
 export function requirePackageAssemblyExecution(record) {
   const held=currentAssemblies.get(record);demand(held&&held.fingerprint===valueSha(record),'Private current assembly execution required');

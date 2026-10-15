@@ -5,15 +5,18 @@ import os from 'node:os';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {authenticateOriginalPackageOutput, requireOriginalPackageOutput,
-  requirePackageAssemblyExecution, issuePackageAssemblyExecution} from '../coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs';
+  requirePackageAssemblyExecution, issuePackageAssemblyExecution,retainSelectedPackageInputs} from '../coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs';
 import {requireCurrentPackageAssembly, integrationTestFiles} from '../scripts/run-integration-tests.mjs';
-import {admitAssemblyAtlasMetadata,createPackageAssemblyScratch,packageAssemblyInvocation,findOriginalPackage} from '../scripts/assemble-selected-package.mjs';
+import {admitAssemblyAtlasMetadata,createPackageAssemblyScratch,packageAssemblyInvocation,findOriginalPackage,acceptedSelectedPackageInputs} from '../scripts/assemble-selected-package.mjs';
 import {execFileSync,spawnSync} from 'node:child_process';
-import {committedPackageInputs,committedPackageProducer} from '../scripts/package-output-artifact.mjs';
+import {ImmutableReader} from '../scripts/check-effective-geographic-regression.mjs';
+import {nativeRowLatitudes} from '../src/native-grid.js';
+import {readRetainedRegistryAuthority,valueBytes,valueSha} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {admitPackageInputTransition,committedPackageInputs,committedPackageProducer} from '../scripts/package-output-artifact.mjs';
 
 const sha=raw=>createHash('sha256').update(raw).digest('hex');
 function original(t,{worker=false}={}){
-  const root=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-original-package-'));
+  const root=fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(),'atlas-original-package-')));
   t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
   const bodies={'dist/client/atlas-geography.json':'{}','dist/client/a.bin':'invariant',
     'dist/cloudflare/index.js':'worker','dist/cloudflare/wrangler.json':'{}'};
@@ -204,8 +207,10 @@ function sourceFixture(f){
   write('scripts/builder.mjs','actual consumed builder');write('package-lock.json','{}');
   write('scripts/package-output-artifact.mjs','capture writer');write('scripts/package-node-runtime.mjs','runtime inventory');
   git('init','-q');commit();
-  const snapshot=()=>({head:git('rev-parse','HEAD'),tree:git('rev-parse','HEAD^{tree}'),definition,selection,
-    files:committedPackageInputs(f.root,definition),producer:committedPackageProducer(f.root)});
+  const snapshot=()=>({head:git('rev-parse','HEAD'),tree:git('rev-parse','HEAD^{tree}'),
+    definition:JSON.parse(fs.readFileSync(path.join(f.root,'.github/package-inputs.json'))),
+    selection:JSON.parse(fs.readFileSync(path.join(f.root,'data/ownership-selection.json'))),
+    files:committedPackageInputs(f.root,JSON.parse(fs.readFileSync(path.join(f.root,'.github/package-inputs.json')))),producer:committedPackageProducer(f.root)});
   return {write,git,commit,snapshot};
 }
 
@@ -243,7 +248,7 @@ test('private assembly admission uses actual declared inputs and rejects legacy 
   for(const name of ['coordination/engineering/child-reader/helper.mjs','coordination/engineering/child-reader/absent.json']){
     const bad=structuredClone(declaration);bad.inputs.push(name);s.write('.github/package-inputs.json',bad);
     if(name.endsWith('.mjs'))s.write(name,'executable');s.commit();
-    assert.throws(()=>issue(token),/Exact inert selected additions required/);
+    assert.throws(()=>issue(token),/not unchanged on trusted base|New selected declaration is absent/);
     s.write('.github/package-inputs.json',declaration);
     if(name.endsWith('.mjs'))fs.unlinkSync(path.join(f.root,name));s.commit();
   }
@@ -444,4 +449,140 @@ test('PR discovery checks actual merge-ref workflow bytes even when source and r
   assert.equal(await discover(),null,'Source/run workflow bytes cannot stand in for actual executed workflow');
   delete f.receipt.executed_workflow;
   assert.equal(await discover(),null,'No inferred workflow provenance for older captures');
+});
+
+
+test('trusted invocation carries the existing exact selected base without receipt-derived authority',()=>{
+  const base='b'.repeat(40),head='a'.repeat(40);
+  const env={GITHUB_EVENT_NAME:'pull_request',SELECTED_PACKAGE_TRUSTED_BASE:base};
+  assert.equal(packageAssemblyInvocation({pull_request:{head:{sha:head}}},env).trustedBase,base);
+  assert.throws(()=>packageAssemblyInvocation({pull_request:{head:{sha:head}}},{...env,SELECTED_PACKAGE_TRUSTED_BASE:'main'}),/Exact trusted selected base/);
+});
+
+test('discovery and actual private execution admit32 leaves including a later accepted typed code candidate',async t=>{
+  if(process.execArgv.length||process.env.NODE_OPTIONS?.trim()||process.env.NODE_PATH?.trim()){
+    execFileSync(process.execPath,[new URL(import.meta.url).pathname],{env:{...process.env,NODE_OPTIONS:'',NODE_PATH:'',NODE_TEST_CONTEXT:undefined},encoding:'utf8'});return;
+  }
+  const f=originalDiscovery(t),oldFetch=globalThis.fetch,oldEntry=process.argv[1];
+  t.after(()=>{globalThis.fetch=oldFetch;process.argv[1]=oldEntry;});globalThis.fetch=async()=>new Response(f.log());
+  const manifest=JSON.parse(f.manifestRaw);manifest.source=f.before;
+  f.manifestRaw=Buffer.from(JSON.stringify(manifest)+'\n');f.receipt.package_output_manifest_sha256=sha(f.manifestRaw);
+  f.receipt.package_output_manifest_bytes=f.manifestRaw.length;
+  const token=await authenticateOriginalPackageOutput(f);
+  const code='scripts/qualify-source-cohort.py';f.s.write(code,'accepted original SOURCE implementation');f.s.commit();
+  const acceptedHead=f.s.git('rev-parse','HEAD');assert.notEqual(acceptedHead,f.sourceHead);
+  const baseAPI=f.api,api=async route=>{
+    if(route===`/repos/${f.repo}/git/commits/${acceptedHead}`)return {sha:acceptedHead,tree:{sha:f.s.git('rev-parse',acceptedHead+'^{tree}')}};
+    if(route===`/repos/${f.repo}/git/trees/${f.s.git('rev-parse',acceptedHead+'^{tree}')}?recursive=1`){
+      const tree=f.s.git('ls-tree','-rlz',acceptedHead).split('\0').filter(Boolean).map(line=>{
+        const [meta,path]=line.split('\t'),[mode,type,sha,size]=meta.trim().split(/\s+/);return {path,mode,type,sha,size:Number(size)};
+      });return {tree,truncated:false};
+    }
+    return baseAPI(route);
+  };api.jobLogRedirect=baseAPI.jobLogRedirect;
+  const declaration=JSON.parse(fs.readFileSync(path.join(f.root,'.github/package-inputs.json')));
+  for(let i=0;i<31;i++){const name=`coordination/engineering/retained-source/operand-${i}.json`;declaration.inputs.push(name);f.s.write(name,{role:i});}
+  declaration.inputs.push(code);f.s.write('.github/package-inputs.json',declaration);f.s.commit();
+  const current=f.s.snapshot();current.accepted_selected_inputs=await acceptedSelectedPackageInputs({api,repo:f.repo,base:acceptedHead,current});
+  assert.equal((await findOriginalPackage({api,repo:f.repo,current,originalRunId:17})).origin.head,f.sourceHead);
+  const stage=fs.mkdtempSync(path.join(f.root,'stage-'));process.argv[1]=path.join(f.root,'scripts/assemble-selected-package.mjs');
+  const issue=()=>issuePackageAssemblyExecution({original:token,source:f.root,stage,executingRoot:f.root,
+    inheritedMetadata:[null,null,null,null,null],acceptedInputs:current.accepted_selected_inputs});
+  assert.doesNotThrow(()=>requirePackageAssemblyExecution(issue()),'Preliminary execution admission grants no publication capability');
+  const invariant=fs.readFileSync(path.join(f.root,'dist/client/a.bin'),'utf8');
+  for(const value of ['new or changed executable code','new code with refreshed arbitrary pin metadata']){
+    f.s.write(code,value);f.s.commit();assert.throws(issue,/not unchanged on trusted base/);
+    assert.equal(await findOriginalPackage({api,repo:f.repo,current:{...f.s.snapshot(),accepted_selected_inputs:current.accepted_selected_inputs},originalRunId:17}),null);
+    assert.equal(fs.readFileSync(path.join(f.root,'dist/client/a.bin'),'utf8'),invariant);
+    assert.equal(fs.existsSync(path.join(stage,'dist')),false,'Rejected candidate never publishes output');
+  }
+});
+
+// Bounded real typed-reader bridge: one requested native cell, in-memory Git
+// operands and the existing SOURCE evaluator. No original country dataset or
+// physical producer is launched by this regression.
+function detachedSourceFixture({invalid=false}={}){
+  const version='a'.repeat(40),family='gb:TST:ADM2',id=family+':A',size=262166;
+  const geometry={type:'Polygon',coordinates:[[[-.03,-.02],[.03,-.02],[.03,.02],[-.03,.02],[-.03,-.02]]]};
+  const files=new Map(),byBlob=new Map();
+  const put=(name,value)=>{
+    const raw=Buffer.isBuffer(value)?value:valueBytes(value);
+    const oid=createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex');
+    const pin={commit:version,path:name,mode:'100644',git_blob_oid:oid,bytes:raw.length,sha256:sha(raw)};
+    files.set(name,{raw,pin});byBlob.set(oid,raw);return pin;
+  };
+  const source=put('original-source.json',{type:'FeatureCollection',features:[{type:'Feature',properties:{shapeID:'A'},geometry}]}),
+    roster=put('owners.json',[{id,index:1}]),physical=put('physical.json',{results:[{target:id,issues:[],support:{mapped_land_support:geometry}}]}),
+    measured=put('measured.json',[{target:id,consumed:{geometry},selected:{id,geometry}}]),
+    helper=put('scripts/retained-role.py',Buffer.from('# retained typed SOURCE fixture')),
+    unreferenced=put('scripts/unreferenced-role.py',Buffer.from('# no typed SOURCE role'));
+  const catalogue=put('coordination/engineering/original-geography-source-corpus-20261006/catalogue.json',{
+    products:[{key:family,parts:[{path:source.path,bytes:source.bytes,sha256:source.sha256}],feature_count:1,
+      original_bytes:source.bytes,original_sha256:source.sha256}]});
+  const latitudes=nativeRowLatitudes(size),raw=Buffer.alloc(size*8);
+  for(let i=0;i<size;i++)raw.writeDoubleLE(latitudes[i],i*8);
+  const nativeLatitudes=put('latitudes.f64le',raw);
+  const evidence=put('source-evidence.json',{version:1,kind:'source-target-native-evidence-v1',catalogue,
+    owner_roster:roster,physical_evidence:physical,physical_input:measured,physical_reproduction:helper,
+    native_latitudes:nativeLatitudes,native_contract:{size,native_latitudes:nativeLatitudes,original_assets:{bounds:{sha256:roster.sha256}}},
+    base_reference:{id:'fixture-base'},families:[{source_id:family,parts:[source]}],
+    targets:[{id,pixelIndex:1,source_family:family,base_geometry:geometry,coverage_classes:['mapped_land_support'],
+      territorial_exclusions:[],source_receipt_sha256:physical.sha256}],arbitrary_pin_shaped_metadata:unreferenced});
+  const x=Math.floor(size/2+(invalid?1:.01)/360*size),patch=put('patch.json',{rows:[{y:size/2,runs:[[x,x+1,1]]}]}),
+    binding={version:1,kind:'source-target-native-custody-v1',source_evidence:evidence,native_patch:patch},
+    preimage={...binding,kind:'source-target-native-rule-v1'},
+    authority={policy_id:'retained-source-literal-additions',policy_version:1,rule_preimage:put('rule.json',preimage),
+      rule_sha256:valueSha(preimage),source_authority:put('binding.json',binding)},
+    entry={...authority,authority_sha256:valueSha(authority)};
+  class FixtureReader extends ImmutableReader{
+    git(...args){
+      if(args[0]==='ls-tree'){
+        const name=args.at(-1),item=files.get(name);assert.ok(item,name);
+        return Buffer.from(`100644 blob ${item.pin.git_blob_oid}\t${name}\0`);
+      }
+      if(args[0]==='cat-file'&&args[1]==='-e')return Buffer.alloc(0);
+      if(args[0]==='cat-file'&&args[1]==='-s')return Buffer.from(String(byBlob.get(args[2]).length));
+      if(args[0]==='cat-file'&&args[1]==='blob')return byBlob.get(args[2]);
+      throw Error('Unexpected bounded fixture Git request: '+args.join(' '));
+    }
+  }
+  const reader=()=>new FixtureReader('.',version,{runtimeBytes:0,metadataBytes:0,outputBytes:0,
+    allowance:{phaseBytes:128*1048576,rssBytes:1024*1048576}});
+  const accepted={commit:version,files:[helper,unreferenced].map(p=>({path:p.path,mode:p.mode,oid:p.git_blob_oid,bytes:p.bytes}))};
+  const definition={version:1,inputs:['.github/package-inputs.json','data/ownership-selection.json'],
+    optional_inputs:[],verification_paths:[],generated_outputs:['dist/']},producer={kind:'immediate-cloudflare-build-v1',workflows:[]},
+    before={head:version,definition,selection:{version:1,additive_release:{path:'coordination/engineering/old/release.json'}},producer,
+      files:definition.inputs.map(path=>({path,mode:'100644',oid:'b'.repeat(40)}))};
+  const current=names=>({...before,definition:{...definition,inputs:[...definition.inputs,...names]},
+    files:[...before.files,...names.map(path=>({path,mode:'100644',oid:files.get(path).pin.git_blob_oid}))]});
+  return {reader,entry,helper,unreferenced,accepted,before,current};
+}
+
+test('detached typed SOURCE success retains only requested exact descriptors before final admission',()=>{
+  const f=detachedSourceFixture(),parent=f.reader(),child=f.reader(),retained=new Map();
+  parent.captureSelectedInputs=(inputs,admit)=>retainSelectedPackageInputs(f.accepted.files,inputs,retained,admit);
+  const proof=readRetainedRegistryAuthority(child,f.entry,parent);
+  assert.equal(proof.kind,'authenticated-registry-source-custody-v1');
+  assert.ok(retained.has(f.helper.path),'Actual child SOURCE read must reach the final package gate');
+  assert.equal(retained.has(f.unreferenced.path),false,'Pin-shaped arbitrary metadata is not typed reachability');
+  assert.equal(parent.inventory.size,0,'No wholesale child inventory merge');
+  assert.ok(parent.metadataBytes>0);assert.equal(parent.used,parent.metadataBytes);
+  assert.doesNotThrow(()=>admitPackageInputTransition(f.before,f.current([f.helper.path]),
+    {acceptedInputs:f.accepted,typedInputs:[...retained.values()]}));
+  assert.throws(()=>admitPackageInputTransition(f.before,f.current([f.helper.path,f.unreferenced.path]),
+    {acceptedInputs:f.accepted,typedInputs:[...retained.values()]}),/lacks authenticated typed consumption/);
+  const ordinary=f.reader();assert.deepEqual(readRetainedRegistryAuthority(ordinary,f.entry),proof,
+    'Default reader proof is unchanged by optional descriptor observation');
+  assert.equal(ordinary.captureSelectedInputs,undefined);
+});
+
+test('failed detached SOURCE validation or descriptor budget cannot retain admission evidence',()=>{
+  const f=detachedSourceFixture({invalid:true}),parent=f.reader(),retained=new Map();
+  parent.captureSelectedInputs=(inputs,admit)=>retainSelectedPackageInputs(f.accepted.files,inputs,retained,admit);
+  assert.throws(()=>readRetainedRegistryAuthority(f.reader(),f.entry,parent));
+  assert.equal(retained.size,0);assert.equal(parent.metadataBytes,0);
+  const valid=detachedSourceFixture(),small=valid.reader(),pending=new Map();small.used=small.phaseLimit;
+  small.captureSelectedInputs=(inputs,admit)=>retainSelectedPackageInputs(valid.accepted.files,inputs,pending,admit);
+  assert.throws(()=>readRetainedRegistryAuthority(valid.reader(),valid.entry,small),/retention exceeds authority or parent phase/);
+  assert.equal(pending.size,0);assert.equal(small.metadataBytes,0);
 });

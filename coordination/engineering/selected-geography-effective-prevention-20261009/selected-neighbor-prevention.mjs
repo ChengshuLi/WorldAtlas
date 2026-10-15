@@ -1026,7 +1026,23 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
 // One detached authority acquisition. The returned view cannot authorize a
 // selected release: the committed hook must additionally authenticate the
 // qualified native publication, operating proof and actual current bank.
-export function readRetainedRegistryAuthority(reader, entry) {
+export function readRetainedRegistryAuthority(reader, entry, observationReader) {
+ // Only the package bridge supplies an observer. Carry requested descriptor
+ // custody after this detached typed authority succeeds, without retaining its
+ // scientific bodies or changing default readers' inventories and proof views.
+ const observed=proof=>{
+  if(typeof observationReader?.captureSelectedInputs==='function')
+   observationReader.captureSelectedInputs(reader.inventory.values(),bytes=>{
+    demand(Number.isSafeInteger(bytes)&&bytes>0&&Number.isSafeInteger(observationReader.metadataBytes),
+     'Bounded selected input descriptor retention required');
+    reader.checkMemory();observationReader.checkMemory();
+    const childBytes=reader.used+bytes,parentBytes=observationReader.used+bytes,metadataBytes=observationReader.metadataBytes+bytes;
+    demand([childBytes,parentBytes,metadataBytes].every(Number.isSafeInteger)&&childBytes<=reader.phaseLimit&&parentBytes<=observationReader.phaseLimit,
+     'Selected input descriptor retention exceeds authority or parent phase');
+    reader.used=childBytes;observationReader.used=parentBytes;observationReader.metadataBytes=metadataBytes;
+   });
+  return proof;
+ };
  const singleton={version:1,kind:'retained-rule-authority-registry-v1',entries:[entry]};
  authorityRegistry(singleton);
  const pins=[entry.rule_preimage,entry.source_authority];
@@ -1044,8 +1060,8 @@ export function readRetainedRegistryAuthority(reader, entry) {
  demand(valueSha(preimage)===entry.rule_sha256,'Complete original registry preimage differs');
  if(binding?.kind==='source-target-native-custody-v1'){
   const proof=qualifySourceTargetNativeAuthority(reader,preimage,binding);
-  return freeze({...proof,version:1,kind:'authenticated-registry-source-custody-v1',authority_sha256:entry.authority_sha256,
-   rule_sha256:entry.rule_sha256,policy_id:entry.policy_id,policy_version:entry.policy_version,pins});
+  return observed(freeze({...proof,version:1,kind:'authenticated-registry-source-custody-v1',authority_sha256:entry.authority_sha256,
+   rule_sha256:entry.rule_sha256,policy_id:entry.policy_id,policy_version:entry.policy_version,pins}));
  }
  demand(binding?.version===1&&binding.kind==='original-issued-rule-source-custody-v1'&&['kind,native_proof,original_pins,version','kind,native_proof,original_pins,source_output_aliases,version'].includes(Object.keys(binding).sort().join(',')),'Unsupported original authority binding');
  const custody=readOriginalRuleAuthority(reader,binding.original_pins,binding.source_output_aliases??[]);
@@ -1054,11 +1070,11 @@ export function readRetainedRegistryAuthority(reader, entry) {
  const codeIdentity=rows=>rows.map(p=>{demand(Object.keys(p).sort().join(',')==='bytes,path,sha256','Unsupported original complete code roster shape');return {path:p.path,bytes:p.bytes,sha256:p.sha256};});
  const programmeAuthority=readSupportedProgrammeAuthority(reader,{preimageVersion:preimage.version,sourceProfile:custody.source_rule.profile??null,sourceCode:codeIdentity(original.source_request.executed_code),nativeCode:codeIdentity(original.native_request.executed_code)});
  const source=qualifyOriginalSourceAuthority(custody),native=qualifyOriginalNativeAuthority(custody,binding.native_proof);
- return freeze({version:1,kind:'authenticated-registry-source-custody-v1',authority_sha256:entry.authority_sha256,
+ return observed(freeze({version:1,kind:'authenticated-registry-source-custody-v1',authority_sha256:entry.authority_sha256,
   rule_sha256:entry.rule_sha256,original_program_authority:programmeAuthority,policy_id:entry.policy_id,policy_version:entry.policy_version,
   pins,original_pins:binding.original_pins,source_scope_ids:custody.source_scope_ids,
   source_rows:source.rows,native_proof:native,original_ledger:custody.ledger,complete_phase_bytes:reader.used,
-  limitations:['Whole original preimage, issued requests and qualified source predecessor authenticated. Policy semantics and actual current selected-bank applicability remain separately required; this view cannot authorize selection.']});
+  limitations:['Whole original preimage, issued requests and qualified source predecessor authenticated. Policy semantics and actual current selected-bank applicability remain separately required; this view cannot authorize selection.']}));
 }
 
 export function normaliseRetainedRepairLedger(ledger,registry) {
@@ -1620,7 +1636,7 @@ export function readSelectedAdditive(snapshot) {
   // Previous acquisition bodies have been discarded. Only the complete selected
   // metadata/proof views are live across genuine detached authority phases.
   const child=new ImmutableReader(reader.repo,reader.version,{runtimeBytes:reader.runtimeBytes,executionBytes:reader.executionBytes,outputBytes:4*1024*1024,metadataBytes:reader.metadataBytes+retained,gitExecutable:reader.gitExecutable,allowance:reader.allowance});
-  const proof=readRetainedRegistryAuthority(child,entry);
+  const proof=readRetainedRegistryAuthority(child,entry,reader);
   demand(valueBytes(proof).length<=child.outputBytes,'Complete detached authority view exceeds prospective output reserve');
   for(const row of normalized.rows.values())if(row.authority_sha256===entry.authority_sha256){
    const original=proof.original_ledger.rows.find(r=>r.component_id===row.component_id);
