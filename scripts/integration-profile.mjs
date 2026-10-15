@@ -18,7 +18,7 @@ export const COORDINATION_PATHS = new Set([
   // Test-runner changes require full regression to validate the real inventory.
   'scripts/run-worker-merge.mjs',
   '.github/workflows/handoff-scope.yml',
-  '.github/workflows/merge-integration-checks.yml', '.github/workflows/worker-merge.yml',
+  '.github/workflows/worker-merge.yml',
   '.github/evidence-policy.json'
 ]);
 // Only the actual focused runner inventory may accompany coordination changes.

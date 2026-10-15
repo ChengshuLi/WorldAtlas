@@ -121,7 +121,9 @@ export function packageBuildConfiguration(env = process.env) {
 }
 
 // The staged image inventories build and capture code, dependencies and config.
-// Only the two genuine workflow invocations are outside that source boundary.
+// Historical author captures retain both original workflow identities. Current
+// captures require the remaining queue producer; immutable source comparison
+// prevents transferring an old two-workflow capture into a queue-only producer.
 // Post-build tests/observers run after capture, not as producer identity inputs.
 export const PACKAGE_PRODUCER_WORKFLOWS = [
   '.github/workflows/merge-integration-checks.yml', '.github/workflows/worker-merge.yml',
@@ -132,7 +134,8 @@ export function committedPackageProducer(root, head = 'HEAD') {
     need(match, 'Ordinary package producer workflow required');
     return {path:match[2],mode:'100644',oid:match[1]};
   });
-  need(same(workflows.map(row=>row.path),PACKAGE_PRODUCER_WORKFLOWS),'Complete package producer workflows required');
+  need(same(workflows.map(row=>row.path),PACKAGE_PRODUCER_WORKFLOWS) ||
+    same(workflows.map(row=>row.path),[PACKAGE_PRODUCER_WORKFLOWS[1]]),'Complete package producer workflows required');
   return {kind:PACKAGE_PRODUCER_KIND,workflows};
 }
 
@@ -293,8 +296,10 @@ export function validatePackageOutputManifest(value) {
   // capture policy explicitly rather than reinterpreting the old programme.
   const producer=value.source.producer;
   if(producer!==undefined)need(producer?.kind===PACKAGE_PRODUCER_KIND&&
-    Array.isArray(producer.workflows)&&producer.workflows.length===PACKAGE_PRODUCER_WORKFLOWS.length&&
-    producer.workflows.every((row,index)=>row.path===PACKAGE_PRODUCER_WORKFLOWS[index]&&row.mode==='100644'&&commit(row.oid)),
+    Array.isArray(producer.workflows)&&
+    (same(producer.workflows.map(row=>row?.path),PACKAGE_PRODUCER_WORKFLOWS)||
+     same(producer.workflows.map(row=>row?.path),[PACKAGE_PRODUCER_WORKFLOWS[1]]))&&
+    producer.workflows.every(row=>row.mode==='100644'&&commit(row.oid)),
     'Invalid immediate package producer identity');
   need(value.source.selection && typeof value.source.selection === 'object' &&
     value.runtime && typeof value.runtime.node === 'string' && typeof value.runtime.platform === 'string' &&

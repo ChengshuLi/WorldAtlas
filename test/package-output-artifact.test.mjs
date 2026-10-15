@@ -11,7 +11,7 @@ import {createPackageOutputManifest, snapshotPackageOutputSource, inventoryPacka
 import {compareSelectedPackageOutput,compareSelectedPackageReadback,normalizeDeclarationReadAccounting} from '../scripts/compare-selected-package-output.mjs';
 
 const hash = raw => createHash('sha256').update(raw).digest('hex');
-function fixture(t) {
+function fixture(t,{author=true}={}) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'atlas-package-output-'));
   t.after(() => fs.rmSync(root, {recursive: true, force: true}));
   const write = (name, value) => { fs.mkdirSync(path.dirname(path.join(root, name)), {recursive: true});
@@ -22,7 +22,7 @@ function fixture(t) {
   write('package-lock.json', {lockfileVersion: 3});
   write('scripts/package-output-artifact.mjs','synthetic capture writer');
   write('scripts/package-node-runtime.mjs','synthetic runtime inventory');
-  write('.github/workflows/merge-integration-checks.yml', 'genuine package build and immediate capture');
+  if(author)write('.github/workflows/merge-integration-checks.yml', 'genuine package build and immediate capture');
   write('.github/workflows/worker-merge.yml','genuine final-worker package producer');
   write('node_modules/example/index.js','original dependency body');
   const git = (...args) => execFileSync('git', ['-C', root, ...args], {encoding: 'utf8'}).trim();
@@ -42,6 +42,29 @@ test('retains complete actual Cloudflare output and original input identity', t 
   assert.equal(manifest.source.files.length, 5); assert.equal(manifest.output.files.length, 4);
   assert.equal(verifyPackageOutput(root, manifest), true);
   assert.match(manifest.semantics, /Original full/);
+});
+
+test('queue-only captures bind their actual producer and cannot adopt historical two-workflow identity',t=>{
+  const current=fixture(t,{author:false}), historical=fixture(t);
+  const manifest=createPackageOutputManifest(current.root);
+  assert.deepEqual(manifest.source.producer.workflows.map(row=>row.path),['.github/workflows/worker-merge.yml']);
+  assert.equal(validatePackageOutputManifest(manifest),manifest);
+  assert.equal(verifyPackageOutput(current.root,manifest),true);
+  const before=createPackageOutputManifest(historical.root).source;
+  before.selection={additive_release:{path:'coordination/engineering/old/release.json'}};
+  const after={...structuredClone(before),producer:manifest.source.producer};
+  assert.throws(()=>admitPackageInputTransition(before,after),/unchanged producer workflow/);
+  for(const workflows of [[],[before.producer.workflows[0]],
+    [{...manifest.source.producer.workflows[0],path:'.github/workflows/foreign.yml'}],
+    [{...manifest.source.producer.workflows[0],mode:'120000'}],
+    [{...manifest.source.producer.workflows[0],oid:'invalid'}],
+    [manifest.source.producer.workflows[0],manifest.source.producer.workflows[0]]]) {
+    const changed=structuredClone(manifest);changed.source.producer.workflows=workflows;
+    assert.throws(()=>validatePackageOutputManifest(changed),/producer identity/);
+  }
+  current.git('rm','.github/workflows/worker-merge.yml');
+  current.git('-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-qm','remove queue');
+  assert.throws(()=>committedPackageProducer(current.root),/Complete package producer workflows/);
 });
 
 test('missing, extra, truncated and same-size substituted output cannot pass custody', t => {

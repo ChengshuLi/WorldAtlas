@@ -79,10 +79,12 @@ export async function findOriginalPackage({api,repo,current,originalRunId,truste
     trustedCommit=await api(`/repos/${repo}/git/commits/${trustedBase}`);
     need(trustedCommit.sha===trustedBase&&/^[a-f0-9]{40}$/.test(trustedCommit.tree?.sha??''),'Trusted selected base commit differs');
   }
-  const responses=originalRunId===undefined?await Promise.all([
-    api(`/repos/${repo}/actions/workflows/merge-integration-checks.yml/runs?event=pull_request&per_page=20&page=1`),
-    api(`/repos/${repo}/actions/workflows/worker-merge.yml/runs?event=workflow_dispatch&per_page=20&page=1`)
-  ]):[{workflow_runs:[await api(`/repos/${repo}/actions/runs/${originalRunId}`)]}];
+  const workflows=current.producer?.workflows?.map(row=>row.path);
+  need(same(workflows,PACKAGE_PRODUCER_WORKFLOWS)||same(workflows,[PACKAGE_PRODUCER_WORKFLOWS[1]]),
+    'Complete current package producer workflows required');
+  const responses=originalRunId===undefined?await Promise.all(workflows.map(workflow=>
+    api(`/repos/${repo}/actions/workflows/${path.posix.basename(workflow)}/runs?event=${workflow===PACKAGE_PRODUCER_WORKFLOWS[0]?'pull_request':'workflow_dispatch'}&per_page=20&page=1`)
+  )):[{workflow_runs:[await api(`/repos/${repo}/actions/runs/${originalRunId}`)]}];
   need(responses.every(response=>Array.isArray(response.workflow_runs)&&response.workflow_runs.length<=20),'Bounded original run discovery unavailable');
   const runs=responses.flatMap(response=>response.workflow_runs).sort((a,b)=>b.id-a.id||b.run_attempt-a.run_attempt);
   if(originalRunId!==undefined)need(runs.length===1&&runs[0]?.id===originalRunId,'Pinned original run identity differs');

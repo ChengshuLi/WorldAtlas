@@ -82,7 +82,6 @@ TRUSTED_PATHS = ['scripts/run-geographic-check.py', 'scripts/check-geographic-re
                  'scripts/github-snapshots.mjs',
                  'scripts/integration-proof.mjs',
                  'scripts/issue-claim-contract.mjs',
-                 'scripts/job-deadline.mjs',
                  'scripts/research-import-gate.mjs',
                  'scripts/worker-result.mjs',
                  'src/regional-import-gate.js']

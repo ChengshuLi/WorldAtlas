@@ -1,8 +1,9 @@
 import {quotaDelay,completeReads} from './github-quota.mjs';
-import {HTTP_ATTEMPT_MS} from './job-deadline.mjs';
 import {conditionalSnapshots} from './github-snapshots.mjs';
 import {evidenceRequirement} from './evidence-policy.mjs';
 import {laneForBranch,validateIssueMetadata,validateIssuePRBody,validateGeographyOwnedPaths,validateEngineeringOwnedPaths,validateLanePaths} from './check-handoff-scope.mjs';
+
+const HTTP_ATTEMPT_MS = 20_000;
 
 export const claimMarker='worldatlas-claim:v1';
 export function canonicalIssueNumber(value){if(!/^[1-9]\d*$/.test(String(value))||!Number.isSafeInteger(Number(value)))throw Error('Use a canonical positive issue number, without leading zeros or exponent notation');return Number(value);}

@@ -373,7 +373,8 @@ function assemblySourceAdmission(original,source,acceptedInputs) {
   const plain=rows.map(({type,...row})=>row);
   const workflowPaths=['.github/workflows/merge-integration-checks.yml','.github/workflows/worker-merge.yml'];
   const workflows=all.filter(row=>workflowPaths.includes(row.path));
-  demand(workflows.length===workflowPaths.length&&workflows.every(row=>row.type==='blob'&&row.mode==='100644'),
+  demand((workflows.length===1||workflows.length===2)&&workflows.some(row=>row.path===workflowPaths[1])&&
+    workflows.every(row=>row.type==='blob'&&row.mode==='100644'),
     'Ordinary original producer workflows required');
   const workflowPins=workflows.map(({type,...row})=>row);
   demand(before.producer?.kind==='immediate-cloudflare-build-v1'&&assemblySame(before.producer,{kind:'immediate-cloudflare-build-v1',workflows:workflowPins}),
