@@ -226,6 +226,11 @@ function mergeFixture({selectedFixture,gateReady=false} = {}) {
     if(route===root+'/merges'&&method==='POST'){assert.notEqual(body.base,'main');assert.equal(body.head,f.head);return {sha:candidate};}
     if(route===root+'/git/ref/heads/main')return {object:{sha:f.base}};
     if(route===root+'/git/commits/'+candidate)return {sha:candidate,tree:{sha:'head-tree'},parents:[{sha:f.base},{sha:f.head}]};
+    if(route===root+'/contents/.github/package-inputs.json?ref='+candidate){
+      const row=f.authored.entries.get('.github/package-inputs.json'),bytes=f.blobs.get(row.sha);
+      assert(bytes,'Candidate definition must come from its actual authored tree');
+      return {type:'file',path:row.path,sha:row.sha,size:row.size,encoding:'base64',content:bytes.toString('base64')};
+    }
     if(route.includes('/check-runs'))return {check_runs:['scope',...(f.evidenceQuality?['evidence']:[])].map((name,id)=>({id:id+1,name,status:'completed',conclusion:'success',app:{id:1}}))};
     if(route===root+'/commits/'+f.head+'/status')return {statuses:[]};
     if(route.includes('/actions/runs/99/artifacts'))return {total_count:0,artifacts:[]};
@@ -243,6 +248,10 @@ test('real selected prepare has no author proof and final merge accepts the fres
   const preparedFixture=mergeFixture(), prepared=await prepareIntegration(preparedFixture.options);
   assert.equal(prepared.profile,'full');assert.equal(prepared.test_selection,'selected-data');assert.deepEqual(prepared.shards,[0]);
   assert(!('proof' in prepared));assert(!('geography_proof' in prepared));
+  assert.equal(prepared.candidate_tree,'head-tree');
+  assert(prepared.checkout_patterns.includes('/'+prepared.expectations_path));
+  assert(preparedFixture.mergeReads.includes('/repos/owner/repo/contents/.github/package-inputs.json?ref='+'9'.repeat(40)),
+    'Checkout selection must authenticate the actual integrated candidate definition');
   // A separate final-phase fixture has no cross-job byte cache or evidence overlap.
   const first=mergeFixture(),result=await first.complete();assert.equal(result.accepted,true);assert.equal(first.writes.length,1);
   assert(!first.mergeReads.some(route=>route.includes('/actions/')), 'No speculative proof or artifact discovery');
