@@ -1,0 +1,328 @@
+{
+  "version": 1,
+  "kind": "substantive-actual-aru5460-selected-composition-review",
+  "reviewer": "/root/delivery11622_config_review",
+  "disposition": "ACCEPTED_WITH_LIMITS; EXACT_ORIGINAL_APPEND_AND_BASELINE_PRESERVED",
+  "check_count": 31,
+  "checks": [
+    {
+      "check": "Baseline independently read from actual accepted21fd selector, not stale ead preparation",
+      "pass": true
+    },
+    {
+      "check": "Actual selector additive sidecar exact wholebyte binding retained",
+      "pass": true
+    },
+    {
+      "check": "Actual accepted sidecar binds original baseline registry",
+      "pass": true
+    },
+    {
+      "check": "Actual accepted sidecar binds original baseline ledger",
+      "pass": true
+    },
+    {
+      "check": "Actual accepted sidecar binds original baseline patch",
+      "pass": true
+    },
+    {
+      "check": "Actual accepted sidecar binds original baseline envelope",
+      "pass": true
+    },
+    {
+      "check": "Original actual1edc authority group and23c9 patch only, no aliases or additional groups",
+      "pass": true
+    },
+    {
+      "check": "Original full constructor90050bytes remains the independently reviewed first actual authority body",
+      "pass": true
+    },
+    {
+      "check": "All73 accepted registry entries remain literal and retain relative order; exactly one newauthority",
+      "pass": true
+    },
+    {
+      "check": "New registry entry binds exact original rule/custody bodies with unchanged literal-additions policy",
+      "pass": true
+    },
+    {
+      "check": "All335 accepted ledger rows remain fully literal including all originalnative_rows/geometries/status/custody andorder",
+      "pass": true
+    },
+    {
+      "check": "New literal component equals every original constructor field; only stockrule/authority joinfields added",
+      "pass": true
+    },
+    {
+      "check": "New source component row exactowner22734/CID/5460 and native943rows2433spans match originalpatch",
+      "pass": true
+    },
+    {
+      "check": "Original rule/source/physical bindings preserved through actualnewregistry and ledgerjoins",
+      "pass": true
+    },
+    {
+      "check": "Original mixed5433land+27water request preserved without class rewrite",
+      "pass": true
+    },
+    {
+      "check": "Whole accepted current_rebind retained literal",
+      "pass": true
+    },
+    {
+      "check": "Whole accepted parent_inventory retained literal",
+      "pass": true
+    },
+    {
+      "check": "Whole accepted current_targets retained literal",
+      "pass": true
+    },
+    {
+      "check": "Inherited currentrebind is still original149f custody, not a newly reissued alias",
+      "pass": true
+    },
+    {
+      "check": "All baseline scopeIDs retained with exact original order and onlynewCID added",
+      "pass": true
+    },
+    {
+      "check": "Actual baseline139838 patch cells/owners independently counted",
+      "pass": true
+    },
+    {
+      "check": "Original qualified5460 patch cells are spatially disjoint from entire accepted21fd patch",
+      "pass": true
+    },
+    {
+      "check": "Actual combined patch is exact old-plus-originalnew tuple/owner union, with no deletion/reassignment/extras",
+      "pass": true
+    },
+    {
+      "check": "Patch base_reference remains accepted baseline literal",
+      "pass": true
+    },
+    {
+      "check": "Envelope original base manifest/reference/owner roster remain accepted baseline literal",
+      "pass": true
+    },
+    {
+      "check": "All actual registry-ledger-patch fullbodyhashlinks join without substitution",
+      "pass": true
+    },
+    {
+      "check": "Actual runtime-envelope ledger/patch wholebytes andhashes match emitted originals",
+      "pass": true
+    },
+    {
+      "check": "Actual effective release identity/reference remains consistent through patch/envelope",
+      "pass": true
+    },
+    {
+      "check": "Actual ordinary completion receipt binds exactcomposeconfiguration andallfourproducts",
+      "pass": true
+    },
+    {
+      "check": "Actual counts derive145298cells/74authorities/336literalrows/328selectedmembers; eight priorinactive unchanged",
+      "pass": true
+    },
+    {
+      "check": "Actual four output sizes remain within original complete proposedbounds",
+      "pass": true
+    }
+  ],
+  "failures": [],
+  "accepted_baseline": {
+    "commit": "21fd27d6752dec663fd541cf948264d4e1d982e0",
+    "cells": 139838,
+    "authorities": 73,
+    "literal_rows": 335,
+    "selected_members": 327
+  },
+  "actual_composition": {
+    "native_cells": 145298,
+    "authorities": 74,
+    "literal_rows": 336,
+    "selected_members": 328,
+    "inactive_literal_rows": 8
+  },
+  "actual_original_aru_append": {
+    "cells": 5460,
+    "owner": 22734,
+    "component_id": "source-target:87a62d1b9a31537291a5e7888ff024dc634fdc86e5ec6b35663f2504b1188233",
+    "land": 5433,
+    "inland_water": 27,
+    "native_rows": 943,
+    "original_spans": 2433,
+    "relative_held_excluded": 6326,
+    "original_constructor": {
+      "commit": "1edc9e35cb0df84db77b219553593679cc21a9fb",
+      "path": "coordination/engineering/indonesia-kepulauan-aru-20261015/native5460-authority-001/constructor-result.json",
+      "mode": "100644",
+      "git_blob_oid": "1e298d7172c8487f6362eeb2c6303f822845f037",
+      "bytes": 90050,
+      "sha256": "50a97f1753daef6db0a6076e3c97ac35b44ecc66f03992774c0c59ddc62bce51"
+    },
+    "native_patch": {
+      "commit": "23c9d63be15307b0203f2636210ac0e2a44dee2b",
+      "path": "coordination/engineering/indonesia-kepulauan-aru-20261015/native5460-input-001/native-patch.json",
+      "mode": "100644",
+      "git_blob_oid": "23b9ccc56f26093790b1c303870b37f9e1d72a15",
+      "bytes": 74283,
+      "sha256": "b873a7c60e7c48fd956e85f779c29209de39a655f9d99cfe86b4ab300fb87dd5"
+    }
+  },
+  "actual_products": {
+    "authority-registry.json": {
+      "bytes": 71149,
+      "sha256": "c48b14d0509509b4534abe489a0eb521dfdab7c908418d97f92cba8a2bca3801"
+    },
+    "selected-ledger.json": {
+      "bytes": 3528881,
+      "sha256": "30413d226c0dd5a2bfa810f7a8296a161466890e6abd653829e9590a1759f16b"
+    },
+    "patch.json": {
+      "bytes": 1430379,
+      "sha256": "eaa51f1e2adf7512873195f030d929e6e190f16a1980461e1a19d019639a6d12"
+    },
+    "runtime-envelope.json": {
+      "bytes": 1390,
+      "sha256": "7baa67950c65db995ed050f1a4e7b032b418acb7545e3a0ca28294216fa00536"
+    }
+  },
+  "whole_read_receipts": [
+    {
+      "commit": "21fd27d6752dec663fd541cf948264d4e1d982e0",
+      "path": "data/ownership-selection.json",
+      "mode": "100644",
+      "git_blob_oid": "59e66085278320add134761c49746be3c71a8833",
+      "bytes": 1566,
+      "sha256": "97c8458fee9e59b1e0a684d5917307a2672fba507802ee33e059c4057cdb2a3e"
+    },
+    {
+      "commit": "21fd27d6752dec663fd541cf948264d4e1d982e0",
+      "path": "coordination/engineering/bahamas38566-delivery-20261015/ownership-selection-v2.json",
+      "mode": "100644",
+      "git_blob_oid": "9d6c7903fc5283601701a2f447e221d42caaf1e1",
+      "bytes": 3417,
+      "sha256": "215018f9c0a6dd97f48bd6ff292f3ff8587f056a012d52f891a3b46918d485a6"
+    },
+    {
+      "bytes": 252447,
+      "commit": "7e423077552651d6ec1d6bf6b879c34e956f985a",
+      "git_blob_oid": "31d970d0fe2bf8c899f020aad09a3826ea451790",
+      "mode": "100644",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/base-native-manifest.json",
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba"
+    },
+    {
+      "bytes": 70211,
+      "commit": "0c2b38db513e8d7f44468f45e8284c75b51c20c9",
+      "git_blob_oid": "a7e4e5aa5002c65fa04219db4587b066b6a6ab7e",
+      "mode": "100644",
+      "path": "coordination/engineering/bahamas38566-delivery-20261015/composition/authority-registry.json",
+      "sha256": "fce9c4f9ef382a174fd843d2d062dea9d8bb8cf5e4fc99f40b486d0515a382f0"
+    },
+    {
+      "bytes": 3439607,
+      "commit": "0c2b38db513e8d7f44468f45e8284c75b51c20c9",
+      "git_blob_oid": "ced2526d10ae726256777c4af1868c0f742a04a0",
+      "mode": "100644",
+      "path": "coordination/engineering/bahamas38566-delivery-20261015/composition/selected-ledger.json",
+      "sha256": "c55be525143de96d5a022277b1b96f08888d8d996738d5df384b614e0889eaad"
+    },
+    {
+      "bytes": 1362981,
+      "commit": "0c2b38db513e8d7f44468f45e8284c75b51c20c9",
+      "git_blob_oid": "e3907c9bee8b236b3d4173d3aef9dccf5e7932b2",
+      "mode": "100644",
+      "path": "coordination/engineering/bahamas38566-delivery-20261015/composition/patch.json",
+      "sha256": "f1c00973837121a1f03f4456dcad99d14f198b2ef3347486b406691650d89978"
+    },
+    {
+      "bytes": 1378,
+      "commit": "0c2b38db513e8d7f44468f45e8284c75b51c20c9",
+      "git_blob_oid": "4dff23b335aae202913b0a59f87e9741234d7c48",
+      "mode": "100644",
+      "path": "coordination/engineering/bahamas38566-delivery-20261015/composition/runtime-envelope.json",
+      "sha256": "0e76d360f02e39b5c630fe0809af7d9135e88761e416227bb14f9088579a109f"
+    },
+    {
+      "commit": "1edc9e35cb0df84db77b219553593679cc21a9fb",
+      "path": "coordination/engineering/indonesia-kepulauan-aru-20261015/native5460-authority-001/original-rule-preimage.json",
+      "mode": "100644",
+      "git_blob_oid": "c3c912100a3a42be82a583a363fa007c1e57b2f6",
+      "bytes": 737,
+      "sha256": "3435718571c0ec508a34fa947c5c6b6333785337584a66ffe4450a3a414db513"
+    },
+    {
+      "commit": "1edc9e35cb0df84db77b219553593679cc21a9fb",
+      "path": "coordination/engineering/indonesia-kepulauan-aru-20261015/native5460-authority-001/authority-binding.json",
+      "mode": "100644",
+      "git_blob_oid": "bb96784991b2c79b29a074d638439caa16525337",
+      "bytes": 740,
+      "sha256": "8d406f599ffd6c27d64e5e682498f9c2e542d91b9726b2c72454b4b094b44946"
+    },
+    {
+      "commit": "1edc9e35cb0df84db77b219553593679cc21a9fb",
+      "path": "coordination/engineering/indonesia-kepulauan-aru-20261015/native5460-authority-001/constructor-result.json",
+      "mode": "100644",
+      "git_blob_oid": "1e298d7172c8487f6362eeb2c6303f822845f037",
+      "bytes": 90050,
+      "sha256": "50a97f1753daef6db0a6076e3c97ac35b44ecc66f03992774c0c59ddc62bce51"
+    },
+    {
+      "commit": "23c9d63be15307b0203f2636210ac0e2a44dee2b",
+      "path": "coordination/engineering/indonesia-kepulauan-aru-20261015/native5460-input-001/native-patch.json",
+      "mode": "100644",
+      "git_blob_oid": "23b9ccc56f26093790b1c303870b37f9e1d72a15",
+      "bytes": 74283,
+      "sha256": "b873a7c60e7c48fd956e85f779c29209de39a655f9d99cfe86b4ab300fb87dd5"
+    },
+    {
+      "bytes": 132032,
+      "commit": "23c9d63be15307b0203f2636210ac0e2a44dee2b",
+      "git_blob_oid": "9e762a9ca3f97575a0b555f6d9e8ec61a376941c",
+      "mode": "100644",
+      "path": "coordination/engineering/indonesia-kepulauan-aru-20261015/native5460-input-001/source-evidence.json",
+      "sha256": "f738cef09aba5d385277acc6c5429f7ff7d35443e5c0c8a360327d9f557dc55c"
+    }
+  ],
+  "reused_scientific_reviews": [
+    {
+      "path": "idn-aru11786-original-input-review-001/review.json",
+      "sha256": "c9b18cc2a85c2032f241b1ee12d95389005293ac8a919d9010cb2d58ea3723ca"
+    },
+    {
+      "path": "idn-aru11786-actual-physical-review-001/review.json",
+      "sha256": "7a9e290cb1aee68a4029f18431ebfa2d05dde766b4c931a88edd1498ebdee538"
+    },
+    {
+      "path": "idn-aru5460-scientific-input-review-001/review.json",
+      "sha256": "e0739f5b9a7dd9fe2eadb609d475ea2b984fd14579a0ff6aecc92bef73309f3d"
+    },
+    {
+      "path": "idn-aru5460-actual-diagnostics-review-001/review.json",
+      "sha256": "027a70dbd1d1e718e2f071912ca8bdc43135823f43df032a359b52ed47190f03"
+    },
+    {
+      "path": "idn-aru5460-actual-native-review-001/review.json",
+      "sha256": "ed85e360a4a17a8158ca3b8e682f5aeacbd08b6621bbb7e2bf15df93c5c723bb"
+    }
+  ],
+  "operating": {
+    "exit_code": 0,
+    "external_seconds": 4.536519791,
+    "code_commit": "21fd27d6752dec663fd541cf948264d4e1d982e0",
+    "config": ".cache/delivery-handoff/aru5460-compose-21fd-config.json",
+    "destination": ".cache/delivery-handoff/aru5460-compose-21fd-001",
+    "science_replayed": false
+  },
+  "limits": [
+    "This is actual metadata composition with an exact qualified append, not selected current-owner-zero/conservation/emitted-output proof, final candidate review, integration or acceptance. No newly accepted credit is claimed.",
+    "Original238checked physical queries and all21retained contradictionsegments/positive land+water/exterior/hierarchy bodies remain bound. Native qualification and zero-line contact do not erase wholephysical contradiction or establish whole-parent/legal clearance.",
+    "All6326relative-held cells remain outside the new patch;27water requests remain classified as inlandwater. Original source/reference2020, selected modified geometry, source/date/licensing/factual uncertainty and physical/cooperative operating limits persist.",
+    "Explicit territorial_exclusions=[] supplies no additional geometries; independent foreign-veto inventory and universal territorial absence are not supplied or inferred. No invented empty-inventory certification gate is added.",
+    "Entire accepted21fd139838cell baseline,73registryentries/335literalrows andoriginal149f rebind/parent_inventory/current_targets remain unchanged; accepted Bahamas append is retained.",
+    "One actual output review reuses prior52/30/17/19/18source/native proofs. Only whole actualmetadata and tuple/owner set comparisons were performed; no scientific operators/helpers, native scans, source/physical replay, network/fetch, shared Git mutation or public publication."
+  ]
+}
