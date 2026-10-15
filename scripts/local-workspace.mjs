@@ -89,6 +89,10 @@ export function workspaceManager(repo, {limits = policy, freeBytes} = {}) {
     if (!Number.isSafeInteger(bytes) || bytes < 0) throw Error('Unknown checkout usage');
     return {path: directory, bytes};
   });
+  const availableBytes = () => {
+    const stats = fs.statfsSync(common);
+    return freeBytes ? freeBytes() : stats.bavail * stats.bsize;
+  };
   const report = () => {
     const value = state();
     const inventory = worktrees();
@@ -101,9 +105,7 @@ export function workspaceManager(repo, {limits = policy, freeBytes} = {}) {
     for (const entry of value.entries) {
       if (!inventory.some(item => item.path === entry.path)) checkoutBytes += entry.reservation;
     }
-    const stats = fs.statfsSync(common);
-    const available = freeBytes ? freeBytes() : stats.bavail * stats.bsize;
-    return {root, registry, freeBytes: available, checkoutBytes, limits, entries: value.entries, worktrees: inventory};
+    return {root, registry, freeBytes: availableBytes(), checkoutBytes, limits, entries: value.entries, worktrees: inventory};
   };
   const inputInventory = (head, profile, include) => {
     const selected = [...support, ...include];
@@ -188,8 +190,7 @@ export function workspaceManager(repo, {limits = policy, freeBytes} = {}) {
     if (missing.length) throw Error(`Unknown input size; selected blobs must be available locally. Run inspect --commit ${head} with this same profile/include scope to list missing paths/OIDs.`);
     const reservation = Math.max(Math.ceil(reserveGiB * GiB), estimated);
     if (!Number.isSafeInteger(reservation)) throw Error('Reserve and selected inputs must represent a safe finite byte count');
-    const usage = report();
-    if (usage.freeBytes - reservation < limits.minimumFree) throw Error('Insufficient disk headroom; release completed workspaces before allocation');
+    if (availableBytes() - reservation < limits.minimumFree) throw Error('Insufficient disk headroom; release completed workspaces before allocation');
     const entry = {worker, slot, path: destination, token: randomUUID(), head, branch: branch ?? null,
       profile, include, reservation, status: 'preparing', createdAt: new Date().toISOString()};
     value.entries.push(entry);
