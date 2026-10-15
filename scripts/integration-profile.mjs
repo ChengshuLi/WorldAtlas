@@ -37,7 +37,6 @@ const FOCUSED_TEST_PATHS = new Set([
   'test/delivery-handoff-advance.test.mjs',
   'test/delivery-handoff.test.mjs',
   'test/delivery-registry-delta.test.mjs',
-  'test/delivery-role-staging.test.mjs',
   'test/local-workspace.test.mjs',
   'test/native-authority-entry.test.mjs',
   'test/native-diagnostic-entry.test.mjs',

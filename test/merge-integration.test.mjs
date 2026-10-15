@@ -226,8 +226,8 @@ test('parallel full-regression shards cover each unit file once and focused prof
  }
  assert.deepEqual([...shards].sort(),expected);assert.equal(new Set(shards).size,expected.length);
  const focused=integrationTestFiles('evidence',0);
- for(const name of ['delivery-evidence-derivation', 'delivery-finalize-config', 'delivery-handoff-advance', 'delivery-handoff', 'delivery-registry-delta', 'delivery-role-staging', 'local-workspace', 'native-authority-entry', 'native-diagnostic-entry', 'native-witness-authority', 'physical-source-retention', 'source-cohort', 'source-completed-staging', 'source-evidence-derivation', 'source-member-native-delivery', 'source-publication-admission', 'source-target-native-delivery'])assert.equal(focused.filter(file=>file===`test/${name}.test.mjs`).length,1);
- assert.equal(focused.length,28);
+ for(const name of ['delivery-evidence-derivation', 'delivery-finalize-config', 'delivery-handoff-advance', 'delivery-handoff', 'delivery-registry-delta', 'local-workspace', 'native-authority-entry', 'native-diagnostic-entry', 'native-witness-authority', 'physical-source-retention', 'source-cohort', 'source-completed-staging', 'source-evidence-derivation', 'source-member-native-delivery', 'source-publication-admission', 'source-target-native-delivery'])assert.equal(focused.filter(file=>file===`test/${name}.test.mjs`).length,1);
+ assert.equal(focused.length,27);
  for(const name of ['premerge-evidence','regional-research-gate','handoff-scope','merge-integration'])assert.ok(focused.includes(`test/${name}.test.mjs`));
  assert.throws(()=>integrationTestFiles('evidence',1),/Invalid/);
  assert.equal(integrationNeedsBrowser('evidence',0),false);
