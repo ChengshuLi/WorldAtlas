@@ -1,0 +1,9 @@
+# Prior53,134 historical part descriptor erratum — PASS
+
+Distinct reviewer `/root/remaining474_malinau_mahakam105` independently read the existing offline historical9f40 part10 body and verified its Git path identity, byte length and SHA256. The correct descriptor is `9f40f4d0a345328e9f1e11525e444e83144e94ba:data/geography/part-10.json`, Git blob `84b4cf537b801c7f6d3840173c49b7e4293a139d`,5,144,571B SHA256 `ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2`.
+
+All161 saved owner-evidence `selected_feature_ordinal` values address the actual expected part10 features. Their IDs, names, parent IDs and documented geographic-portion meanings exactly match that part and the public association summary's saved owner values: zero differences. Part10 contains1,500 total features; the descriptor identifies the whole part, not just its514 IDN features. The prior summary's sole `existing_membership_descriptors.parts` entry instead named part28. That is a real historical provenance-address error, corrected by this descriptor replacement.
+
+The narrow fix does not change any selected-owner metadata value, original519 source member, strict retained exterior association, source observation, interval/key, context/exception flag, adopted physical answer or count. These scientific facts and the36,760 adopted-key set were independently established and do not depend on relabelling part28 as the source. Keep original checkpointd307 intact and publish the explicit part10 descriptor erratum/review transparently. No scientific rerun or new current-parent/selected-footprint approval is implied.
+
+Exact old/new descriptors and the independent comparison result are in `prior53134-part-descriptor-erratum-review.json`. No source/HTTP/GIS/native execution, shared Git mutation or publication occurred in this review.

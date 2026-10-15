@@ -3,8 +3,8 @@
   "files": [
     {
       "path": "README.md",
-      "bytes": 6250,
-      "sha256": "c9954efcf9523c298f78677781f96485ab52cbf1578ad54274586be56314202e"
+      "bytes": 6919,
+      "sha256": "872912db7f960f69668226367f8d7531665b9bd477c33f91370cdfc562eb3461"
     },
     {
       "path": "adopted-physical-interpretations.json.gz",
@@ -132,6 +132,16 @@
       "sha256": "80fc50c79e2b0c3f69f8736bd3997ad0b0aeb72d0120771fa0bb4a8ccb9817e1"
     },
     {
+      "path": "review/historical-part-descriptor-erratum-review.json",
+      "bytes": 1597,
+      "sha256": "ab1b569c6db269b15ec4260755ede5c16687582185479258a6339f388bd64474"
+    },
+    {
+      "path": "review/historical-part-descriptor-erratum-review.md",
+      "bytes": 1828,
+      "sha256": "c541c7942b5dffb3718033add160fdbff16cc94ed154c6991625e8b08f81dbb3"
+    },
+    {
       "path": "review/independent-original-scope-and-coordinate-review.json",
       "bytes": 2679,
       "sha256": "9148b6a788287240d30cc9920859f2958765e32256222380e236873af2ee7de3"
@@ -152,9 +162,14 @@
       "sha256": "b2766ea9d8c3569c4f9267499411fe2f9d0808e8660cdc67ce86daf2641bbcc2"
     },
     {
+      "path": "source-association/historical-part-descriptor-erratum.json",
+      "bytes": 1213,
+      "sha256": "c8f08ea3e43470f796bee05136976840c7174350d237a144142f06432a54bb07"
+    },
+    {
       "path": "source-association/join-summary.json",
       "bytes": 131872,
-      "sha256": "888f714857f082d35e26ba3ec45e76152821be58d558db3f1c2e33f502dd07cd"
+      "sha256": "8bcfe0eb12b75c17b3d76d5f380cc8cc0dad47e8a1caa7a7aa498da44bb4c520"
     },
     {
       "path": "source-association/per-original-key-ownership-joins.jsonl.gz",
@@ -190,5 +205,6 @@
       "bytes": 12759,
       "sha256": "797c7072d87912de826add9057a04ad366e286b69dd938c7d53d6b1cee063153"
     }
-  ]
+  ],
+  "historical_descriptor_correction": "Only the historical selected-member part descriptor and transparent documentation/review changed; all scientific and adopted record bodies remain exact d307."
 }

@@ -1,0 +1,35 @@
+{
+  "reviewer": "/root/remaining474_malinau_mahakam105",
+  "status": "PASS_MINIMAL_HISTORICAL_DESCRIPTOR_ERRATUM",
+  "affected_original_checkpoint": "d307c50204158260405d6a703a5f1d8190472752",
+  "old_incorrect_part_descriptor": {
+    "commit": "9f40f4d0a345328e9f1e11525e444e83144e94ba",
+    "path": "data/geography/part-28.json",
+    "mode": "100644",
+    "git_blob_oid": "a9e03cb07194a73f643af85d1e6db94abe3b5fc9",
+    "bytes": 6613963,
+    "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d"
+  },
+  "correct_part_descriptor": {
+    "commit": "9f40f4d0a345328e9f1e11525e444e83144e94ba",
+    "path": "data/geography/part-10.json",
+    "mode": "100644",
+    "git_blob_oid": "84b4cf537b801c7f6d3840173c49b7e4293a139d",
+    "bytes": 5144571,
+    "sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+  },
+  "actual_part_total_features": 1500,
+  "saved_owner_metadata_compared": 161,
+  "compared": [
+    "literal selected_feature_ordinal -> actual part10 feature",
+    "target",
+    "name",
+    "selected_framework_parent",
+    "documented_selected_geographic_portion"
+  ],
+  "mismatches": [],
+  "source_observations_or_original_family_or_strict_interior_changed": false,
+  "adopted_keyset_count_or_exception_meaning_changed": false,
+  "new_source_GIS_native_execution": false,
+  "conclusion": "Correct only the historical part descriptor from part28 to actualpart10 and publish a transparent erratum retaining original d307. Existing161 metadata values/ordinals and all independently established source/physical/adoption meanings remain unchanged."
+}

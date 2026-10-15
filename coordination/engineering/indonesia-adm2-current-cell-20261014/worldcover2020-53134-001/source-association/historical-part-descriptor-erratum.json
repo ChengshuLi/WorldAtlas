@@ -1,0 +1,23 @@
+{
+  "kind": "transparent-historical-current-member-descriptor-binding-correction",
+  "affected_prior_checkpoint": "d307c50204158260405d6a703a5f1d8190472752",
+  "old_binding_error": "existing_membership_descriptors.parts incorrectly names part28; saved owner metadata selected ordinal/name/id/parent/portion fields actually match part10. Original source-family and retained exterior association basis are independent.",
+  "correct_part": {
+    "commit": "9f40f4d0a345328e9f1e11525e444e83144e94ba",
+    "path": "data/geography/part-10.json",
+    "mode": "100644",
+    "git_blob_oid": "84b4cf537b801c7f6d3840173c49b7e4293a139d",
+    "bytes": 5144571,
+    "sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+  },
+  "owners_compared": 161,
+  "fields_compared": [
+    "selected_feature_ordinal",
+    "target",
+    "name",
+    "selected_framework_parent",
+    "documented_selected_geographic_portion"
+  ],
+  "mismatches": [],
+  "unchanged_science": "No source observation, interval, centre, class, original519 member, physical disposition count or adopted credit changed. No geometry predicate/source/native execution. This is a historical descriptor erratum, not a current polygon approval."
+}
