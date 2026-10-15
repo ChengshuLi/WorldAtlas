@@ -1,0 +1,41 @@
+{
+  "kind": "actual-historical-original-quartet-compose-comparison",
+  "code_commit": "1a05558e8d2d3c882d5e2b309fb2ac9f4e543081",
+  "compose_exit": 0,
+  "external_seconds": 2.49,
+  "peak_rss_bytes": 183943168,
+  "native_cells": 67009,
+  "all_patch_rows_runs_equal_retained6340": true,
+  "inherited_rows_literal_unchanged": 249,
+  "inherited_authorities_literal_unchanged": 50,
+  "all262_scientific_rows_equal_excluding_authority_sha256": true,
+  "new_authority_id_changes": 7,
+  "incoming_row_authority_id_changes": 13,
+  "new_acceptance_credit": 0,
+  "pins": {
+    "authority-registry.json": {
+      "path": "coordination/engineering/original-quartet-replay-20261015/delivery/authority-registry.json",
+      "bytes": 55083,
+      "sha256": "0b8f718c6c4c95faa401d95abc6158fcb5429ee47d25ad9df476f5d51606fea8",
+      "git_blob_oid": "d5560afcf464cbb58b60249ad21c45321349a768"
+    },
+    "selected-ledger.json": {
+      "path": "coordination/engineering/original-quartet-replay-20261015/delivery/selected-ledger.json",
+      "bytes": 2423010,
+      "sha256": "a31a037bc43f058a064c7fb9317323bf2587fe145125a8b0fe989cfe661bb34b",
+      "git_blob_oid": "71c751d9940a1147e877fac8e71567dfa1eeba2b"
+    },
+    "patch.json": {
+      "path": "coordination/engineering/original-quartet-replay-20261015/delivery/patch.json",
+      "bytes": 736047,
+      "sha256": "94a73ac4aff9d356e94518598ae099c168bc5014ec54687cc091f24b6c003e44",
+      "git_blob_oid": "0e8975e1c7e6f8945efb87ee3f99c8461249ecce"
+    },
+    "runtime-envelope.json": {
+      "path": "coordination/engineering/original-quartet-replay-20261015/delivery/runtime-envelope.json",
+      "bytes": 1390,
+      "sha256": "25d02a42b882bc33bdb8e97b37326f7e351df279de7b83666025dee198e60ff7",
+      "git_blob_oid": "f2cafd84a75b170d7a6dcefc141ee3a40218d7f3"
+    }
+  }
+}

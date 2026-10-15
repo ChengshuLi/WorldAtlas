@@ -1,0 +1,73 @@
+{
+  "version": 1,
+  "selector": {
+    "commit": "9d64774976ce8ecbcd4d9f390f3fddab2943fe1b",
+    "path": "data/ownership-selection.json",
+    "mode": "100644",
+    "git_blob_oid": "fd6560bca5d99dbbc793555cdc1dffd7967dc49e",
+    "bytes": 1592,
+    "sha256": "b26826cff438b56d56af08e50fd02170fe77a06507dcc042540a18f706b31c2c"
+  },
+  "package_inputs": {
+    "commit": "9d64774976ce8ecbcd4d9f390f3fddab2943fe1b",
+    "path": ".github/package-inputs.json",
+    "mode": "100644",
+    "git_blob_oid": "7a6d6e2274bf95ecdaf5700e7b28be2c55842e8f",
+    "bytes": 115194,
+    "sha256": "e771033d0316d64728397ebf3f37f486e8877717d3ca8648b7eda1d35f0e5349"
+  },
+  "rebind": {
+    "bytes": 3184,
+    "commit": "149f5e7393965361b67ccaebcdc04e1c14fd97e5",
+    "git_blob_oid": "dc858d5111a19bc861aed1cf5f8a139178b37267",
+    "mode": "100644",
+    "path": "coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-certificate-001/certificate.json",
+    "sha256": "680eb0eccc91e232b7b57f0559123547104a1b93b78fbaa1a0518ec62822dca4"
+  },
+  "preparation_allowance": {
+    "phaseBytes": 536870912,
+    "rssBytes": 536870912
+  },
+  "new_prefix": "coordination/engineering/original-quartet-replay-20261015/",
+  "sidecar_output": "coordination/engineering/original-quartet-replay-20261015/ownership-selection-v2.json",
+  "registry": {
+    "commit": "85bc501763e2ef0745e0620626d0fc0a18ba69ed",
+    "mode": "100644",
+    "path": "coordination/engineering/original-quartet-replay-20261015/delivery/authority-registry.json",
+    "bytes": 55083,
+    "sha256": "0b8f718c6c4c95faa401d95abc6158fcb5429ee47d25ad9df476f5d51606fea8",
+    "git_blob_oid": "d5560afcf464cbb58b60249ad21c45321349a768"
+  },
+  "ledger": {
+    "commit": "85bc501763e2ef0745e0620626d0fc0a18ba69ed",
+    "mode": "100644",
+    "path": "coordination/engineering/original-quartet-replay-20261015/delivery/selected-ledger.json",
+    "bytes": 2423010,
+    "sha256": "a31a037bc43f058a064c7fb9317323bf2587fe145125a8b0fe989cfe661bb34b",
+    "git_blob_oid": "71c751d9940a1147e877fac8e71567dfa1eeba2b"
+  },
+  "selected_ledger": {
+    "commit": "85bc501763e2ef0745e0620626d0fc0a18ba69ed",
+    "mode": "100644",
+    "path": "coordination/engineering/original-quartet-replay-20261015/delivery/selected-ledger.json",
+    "bytes": 2423010,
+    "sha256": "a31a037bc43f058a064c7fb9317323bf2587fe145125a8b0fe989cfe661bb34b",
+    "git_blob_oid": "71c751d9940a1147e877fac8e71567dfa1eeba2b"
+  },
+  "patch": {
+    "commit": "85bc501763e2ef0745e0620626d0fc0a18ba69ed",
+    "mode": "100644",
+    "path": "coordination/engineering/original-quartet-replay-20261015/delivery/patch.json",
+    "bytes": 736047,
+    "sha256": "94a73ac4aff9d356e94518598ae099c168bc5014ec54687cc091f24b6c003e44",
+    "git_blob_oid": "0e8975e1c7e6f8945efb87ee3f99c8461249ecce"
+  },
+  "runtime_envelope": {
+    "commit": "85bc501763e2ef0745e0620626d0fc0a18ba69ed",
+    "mode": "100644",
+    "path": "coordination/engineering/original-quartet-replay-20261015/delivery/runtime-envelope.json",
+    "bytes": 1390,
+    "sha256": "25d02a42b882bc33bdb8e97b37326f7e351df279de7b83666025dee198e60ff7",
+    "git_blob_oid": "f2cafd84a75b170d7a6dcefc141ee3a40218d7f3"
+  }
+}
