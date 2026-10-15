@@ -1,0 +1,51 @@
+{
+  "reviewer": "/root/authority_binding_review",
+  "status": "immutable-input-and-strict-config-binding-accepted-with-limits",
+  "source_commit": "c26422bdbf41f369cc7b73cf60cb79376de2c5b2",
+  "source_path": "coordination/engineering/myanmar-bokpyin-diagnostic-20261015/inputs/source-evidence.json",
+  "source_bytes": 119802,
+  "source_sha256": "ed64d3f47ba305b8d336bc0e84a888cdea7c9add8fd8a95536470eec676b239b",
+  "source_byte_identical_to_prior_review": true,
+  "prior_review": "independent-input-review.json",
+  "native_patch": {
+    "bytes": 35827,
+    "commit": "b1301fa07270bcf0d91be48a6d49445c307562cf",
+    "git_blob_oid": "8578b8af5fa3eb0892c0cee7e5b24915dc9c02c6",
+    "mode": "100644",
+    "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/coastal-candidate-cell-preparation-001/bokpyin/parent-sid-narrow/candidate-native-patch.json",
+    "sha256": "e4d91372be68cc43b382d8f712346fc4cffd694e5f95a3cff3a95644f235317a"
+  },
+  "all_source_input_pins_unchanged_from_reviewed_correction": true,
+  "limits": [
+    "All3616 remain held; this diagnostic input review grants no qualification or current-owner-zero/release clearance.",
+    "1GiB phase/RSS are finite requested allowances, not a fresh grant or measured peak. Resourceworker reported1,028,915,401B complete bound; its derivation is outside this scientific binding review.",
+    "Fresh admission and peer resource coordination remain execution prerequisites. No accepted-code replay or scientific/operator execution performed."
+  ],
+  "config": {
+    "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/fa678ed92d9b60765f8935b6a7afd117bc7c744c96057999400c37180373dd2e/work/coordination/engineering/myanmar-bokpyin-diagnostic-20261015/inputs/native-diagnostic-config.json",
+    "bytes": 512,
+    "sha256": "ddd36b0dcef64a7f0aa7628a8bebb9ab9f763a4fa4eea0db7f8720b06e6b9081",
+    "value": {
+      "native_patch": {
+        "commit": "b1301fa07270bcf0d91be48a6d49445c307562cf",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/coastal-candidate-cell-preparation-001/bokpyin/parent-sid-narrow/candidate-native-patch.json"
+      },
+      "preparation_allowance": {
+        "phaseBytes": 1073741824,
+        "rssBytes": 1073741824
+      },
+      "source_evidence": {
+        "commit": "c26422bdbf41f369cc7b73cf60cb79376de2c5b2",
+        "path": "coordination/engineering/myanmar-bokpyin-diagnostic-20261015/inputs/source-evidence.json"
+      },
+      "version": 1
+    }
+  },
+  "checks": {
+    "strict_four_keys": true,
+    "exact_reviewed_source_commit_path": true,
+    "exact_original_patch_commit_path": true,
+    "source_and_patch_previously_byte_authenticated": true,
+    "scope_unchanged": true
+  }
+}

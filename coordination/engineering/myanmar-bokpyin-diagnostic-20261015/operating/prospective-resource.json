@@ -1,0 +1,45 @@
+{
+  "base_with_fixed_width_future_commit_and_1GiB_canonical_config": 277825675,
+  "config_bytes": 512,
+  "trace_bytes": 1933656,
+  "blocks": [
+    {
+      "block": 29,
+      "requested_cells": 895,
+      "hit_reserve": 171840,
+      "residual_witness_max": 7031488,
+      "complete_main_scan_reserve": 614235392,
+      "live_scan_peak": 614235392,
+      "subtotal": 894166563
+    },
+    {
+      "block": 30,
+      "requested_cells": 2721,
+      "hit_reserve": 522432,
+      "residual_witness_max": 9280320,
+      "complete_main_scan_reserve": 588252032,
+      "live_scan_peak": 588252032,
+      "subtotal": 868533795
+    }
+  ],
+  "five_method_bytes": 469546,
+  "extra_operating_reservation_policy_bytes": 134217728,
+  "request_phase_and_rss_bytes": 1073741824,
+  "complete_prospective_with_policy_reservation": 1028915401,
+  "remaining_to_requested_cap": 44826423,
+  "operating_reservation_description": "Explicit proposed operating policy cushion, not measured allocation: extra serialization/readback and receipt/control bytes, installed Git/shim and one bounded Git child/control-pipe phase, code/module overhead beyond five literal method bytes. Existing 4MiB output and 8MiB metadata are already in base. OS growth/concurrency headroom remains external to this process reservation.",
+  "limitations": [
+    "No predicate or native scan executed; all330 original features used as conservative superset.",
+    "Accepted entry enforces its own counters/RSS, but does not itself reserve complete main scan scratch or hash executing methods/runtime.",
+    "Fresh normal current-machine admission is mandatory; this is not an admission result."
+  ],
+  "all_statically_loaded_code_bytes": 531110,
+  "additional_transitive_code_beyond_five_methods": 61564,
+  "source_commit": "c26422bdbf41f369cc7b73cf60cb79376de2c5b2",
+  "actual_config": {
+    "path": "coordination/engineering/myanmar-bokpyin-diagnostic-20261015/inputs/native-diagnostic-config.json",
+    "bytes": 512,
+    "sha256": "ddd36b0dcef64a7f0aa7628a8bebb9ab9f763a4fa4eea0db7f8720b06e6b9081"
+  },
+  "status": "Frozen prospective resource proposal; no diagnostic launch or machine admission"
+}

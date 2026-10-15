@@ -1,0 +1,598 @@
+{
+  "scope": "Structural resource metadata only; all original features retained as conservative superset; no coverage/authority result",
+  "source_evidence": {
+    "bytes": 119802,
+    "sha256": "ed64d3f47ba305b8d336bc0e84a888cdea7c9add8fd8a95536470eec676b239b"
+  },
+  "source_family_pin": {
+    "bytes": 1396414,
+    "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+    "decoded_bytes": 4205367,
+    "decoded_sha256": "94c0c9af839094257d13a6fe6590feddb2dcb04540d87e58b656c9f000fb92a2",
+    "git_blob_oid": "6a91fcb22b44ae00401a0068a6c3e62bfed62374",
+    "mode": "100644",
+    "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz",
+    "sha256": "57de50a588f418601412bb7a34cc2f43a3fd6d7d6f16635cb41b95e5ae505db6"
+  },
+  "source_records": 330,
+  "all_source_features": {
+    "parts": 330,
+    "vertices": 95948,
+    "polygons": 709,
+    "rings": 709,
+    "segments": 0,
+    "points": 0,
+    "blocks": {
+      "29": {
+        "edges": 95239,
+        "crossing_edge_rows": 61518,
+        "span_upper_bound": 30759,
+        "tie_upper_bound": 61518,
+        "scratch_bytes_without_requested_cells": 116538560
+      },
+      "30": {
+        "edges": 95239,
+        "crossing_edge_rows": 9528,
+        "span_upper_bound": 4764,
+        "tie_upper_bound": 9528,
+        "scratch_bytes_without_requested_cells": 101565440
+      }
+    }
+  },
+  "coverage_features": {
+    "parts": 1,
+    "vertices": 5031,
+    "polygons": 79,
+    "rings": 79,
+    "segments": 0,
+    "points": 0,
+    "blocks": {
+      "29": {
+        "edges": 4952,
+        "crossing_edge_rows": 2410,
+        "span_upper_bound": 1205,
+        "tie_upper_bound": 2410,
+        "scratch_bytes_without_requested_cells": 6374336
+      },
+      "30": {
+        "edges": 4952,
+        "crossing_edge_rows": 4394,
+        "span_upper_bound": 2197,
+        "tie_upper_bound": 4394,
+        "scratch_bytes_without_requested_cells": 6945728
+      }
+    }
+  },
+  "territorial_exclusions": {
+    "parts": 3,
+    "vertices": 4461,
+    "polygons": 24,
+    "rings": 24,
+    "segments": 0,
+    "points": 0,
+    "blocks": {
+      "29": {
+        "edges": 4437,
+        "crossing_edge_rows": 14628,
+        "span_upper_bound": 7314,
+        "tie_upper_bound": 14628,
+        "scratch_bytes_without_requested_cells": 9309696
+      },
+      "30": {
+        "edges": 4437,
+        "crossing_edge_rows": 19524,
+        "span_upper_bound": 9762,
+        "tie_upper_bound": 19524,
+        "scratch_bytes_without_requested_cells": 10719744
+      }
+    }
+  },
+  "all_main_scan_geometries": {
+    "parts": 334,
+    "vertices": 105440,
+    "polygons": 812,
+    "rings": 812,
+    "segments": 0,
+    "points": 0,
+    "blocks": {
+      "29": {
+        "edges": 104628,
+        "crossing_edge_rows": 78556,
+        "span_upper_bound": 39278,
+        "tie_upper_bound": 78556,
+        "scratch_bytes_without_requested_cells": 131165824
+      },
+      "30": {
+        "edges": 104628,
+        "crossing_edge_rows": 33446,
+        "span_upper_bound": 16723,
+        "tie_upper_bound": 33446,
+        "scratch_bytes_without_requested_cells": 118174144
+      }
+    }
+  },
+  "physical_support_structures": {
+    "gb:MMR:ADM3:66882298B82483484204646": {
+      "mapped_land_support": {
+        "parts": 1,
+        "vertices": 5031,
+        "polygons": 79,
+        "rings": 79,
+        "segments": 0,
+        "points": 0,
+        "blocks": {
+          "29": {
+            "edges": 4952,
+            "crossing_edge_rows": 2410,
+            "span_upper_bound": 1205,
+            "tie_upper_bound": 2410,
+            "scratch_bytes_without_requested_cells": 6374336
+          },
+          "30": {
+            "edges": 4952,
+            "crossing_edge_rows": 4394,
+            "span_upper_bound": 2197,
+            "tie_upper_bound": 4394,
+            "scratch_bytes_without_requested_cells": 6945728
+          }
+        }
+      },
+      "mapped_inland_water_support": {
+        "parts": 1,
+        "vertices": 0,
+        "polygons": 0,
+        "rings": 0,
+        "segments": 0,
+        "points": 0,
+        "blocks": {
+          "29": {
+            "edges": 0,
+            "crossing_edge_rows": 0,
+            "span_upper_bound": 0,
+            "tie_upper_bound": 0,
+            "scratch_bytes_without_requested_cells": 528512
+          },
+          "30": {
+            "edges": 0,
+            "crossing_edge_rows": 0,
+            "span_upper_bound": 0,
+            "tie_upper_bound": 0,
+            "scratch_bytes_without_requested_cells": 528512
+          }
+        }
+      },
+      "outside_mapped_L1_context": {
+        "parts": 1,
+        "vertices": 4924,
+        "polygons": 343,
+        "rings": 346,
+        "segments": 0,
+        "points": 0,
+        "blocks": {
+          "29": {
+            "edges": 4578,
+            "crossing_edge_rows": 1890,
+            "span_upper_bound": 945,
+            "tie_upper_bound": 1890,
+            "scratch_bytes_without_requested_cells": 6115008
+          },
+          "30": {
+            "edges": 4578,
+            "crossing_edge_rows": 3206,
+            "span_upper_bound": 1603,
+            "tie_upper_bound": 3206,
+            "scratch_bytes_without_requested_cells": 6494016
+          }
+        }
+      },
+      "hierarchy_disagreements/L2-outside-L1": {
+        "parts": 1,
+        "vertices": 0,
+        "polygons": 0,
+        "rings": 0,
+        "segments": 0,
+        "points": 0,
+        "blocks": {
+          "29": {
+            "edges": 0,
+            "crossing_edge_rows": 0,
+            "span_upper_bound": 0,
+            "tie_upper_bound": 0,
+            "scratch_bytes_without_requested_cells": 528512
+          },
+          "30": {
+            "edges": 0,
+            "crossing_edge_rows": 0,
+            "span_upper_bound": 0,
+            "tie_upper_bound": 0,
+            "scratch_bytes_without_requested_cells": 528512
+          }
+        }
+      },
+      "hierarchy_disagreements/L3-outside-L2": {
+        "parts": 1,
+        "vertices": 0,
+        "polygons": 0,
+        "rings": 0,
+        "segments": 0,
+        "points": 0,
+        "blocks": {
+          "29": {
+            "edges": 0,
+            "crossing_edge_rows": 0,
+            "span_upper_bound": 0,
+            "tie_upper_bound": 0,
+            "scratch_bytes_without_requested_cells": 528512
+          },
+          "30": {
+            "edges": 0,
+            "crossing_edge_rows": 0,
+            "span_upper_bound": 0,
+            "tie_upper_bound": 0,
+            "scratch_bytes_without_requested_cells": 528512
+          }
+        }
+      },
+      "hierarchy_disagreements/L4-outside-L3": {
+        "parts": 1,
+        "vertices": 0,
+        "polygons": 0,
+        "rings": 0,
+        "segments": 0,
+        "points": 0,
+        "blocks": {
+          "29": {
+            "edges": 0,
+            "crossing_edge_rows": 0,
+            "span_upper_bound": 0,
+            "tie_upper_bound": 0,
+            "scratch_bytes_without_requested_cells": 528512
+          },
+          "30": {
+            "edges": 0,
+            "crossing_edge_rows": 0,
+            "span_upper_bound": 0,
+            "tie_upper_bound": 0,
+            "scratch_bytes_without_requested_cells": 528512
+          }
+        }
+      },
+      "missing_reconstruction": {
+        "parts": 1,
+        "vertices": 0,
+        "polygons": 0,
+        "rings": 0,
+        "segments": 0,
+        "points": 0,
+        "blocks": {
+          "29": {
+            "edges": 0,
+            "crossing_edge_rows": 0,
+            "span_upper_bound": 0,
+            "tie_upper_bound": 0,
+            "scratch_bytes_without_requested_cells": 528512
+          },
+          "30": {
+            "edges": 0,
+            "crossing_edge_rows": 0,
+            "span_upper_bound": 0,
+            "tie_upper_bound": 0,
+            "scratch_bytes_without_requested_cells": 528512
+          }
+        }
+      },
+      "extra_reconstruction": {
+        "parts": 1,
+        "vertices": 0,
+        "polygons": 0,
+        "rings": 0,
+        "segments": 0,
+        "points": 0,
+        "blocks": {
+          "29": {
+            "edges": 0,
+            "crossing_edge_rows": 0,
+            "span_upper_bound": 0,
+            "tie_upper_bound": 0,
+            "scratch_bytes_without_requested_cells": 528512
+          },
+          "30": {
+            "edges": 0,
+            "crossing_edge_rows": 0,
+            "span_upper_bound": 0,
+            "tie_upper_bound": 0,
+            "scratch_bytes_without_requested_cells": 528512
+          }
+        }
+      },
+      "contradictory_land_water_support": {
+        "parts": 1,
+        "vertices": 0,
+        "polygons": 0,
+        "rings": 0,
+        "segments": 0,
+        "points": 0,
+        "blocks": {
+          "29": {
+            "edges": 0,
+            "crossing_edge_rows": 0,
+            "span_upper_bound": 0,
+            "tie_upper_bound": 0,
+            "scratch_bytes_without_requested_cells": 528512
+          },
+          "30": {
+            "edges": 0,
+            "crossing_edge_rows": 0,
+            "span_upper_bound": 0,
+            "tie_upper_bound": 0,
+            "scratch_bytes_without_requested_cells": 528512
+          }
+        }
+      }
+    },
+    "gb:MMR:ADM3:66882298B86598910616989": {
+      "mapped_land_support": {
+        "parts": 1,
+        "vertices": 3658,
+        "polygons": 91,
+        "rings": 91,
+        "segments": 0,
+        "points": 0,
+        "blocks": {
+          "29": {
+            "edges": 3567,
+            "crossing_edge_rows": 0,
+            "span_upper_bound": 0,
+            "tie_upper_bound": 0,
+            "scratch_bytes_without_requested_cells": 4274304
+          },
+          "30": {
+            "edges": 3567,
+            "crossing_edge_rows": 4934,
+            "span_upper_bound": 2467,
+            "tie_upper_bound": 4934,
+            "scratch_bytes_without_requested_cells": 5695296
+          }
+        }
+      },
+      "mapped_inland_water_support": {
+        "parts": 1,
+        "vertices": 0,
+        "polygons": 0,
+        "rings": 0,
+        "segments": 0,
+        "points": 0,
+        "blocks": {
+          "29": {
+            "edges": 0,
+            "crossing_edge_rows": 0,
+            "span_upper_bound": 0,
+            "tie_upper_bound": 0,
+            "scratch_bytes_without_requested_cells": 528512
+          },
+          "30": {
+            "edges": 0,
+            "crossing_edge_rows": 0,
+            "span_upper_bound": 0,
+            "tie_upper_bound": 0,
+            "scratch_bytes_without_requested_cells": 528512
+          }
+        }
+      },
+      "outside_mapped_L1_context": {
+        "parts": 1,
+        "vertices": 3737,
+        "polygons": 216,
+        "rings": 223,
+        "segments": 0,
+        "points": 0,
+        "blocks": {
+          "29": {
+            "edges": 3514,
+            "crossing_edge_rows": 0,
+            "span_upper_bound": 0,
+            "tie_upper_bound": 0,
+            "scratch_bytes_without_requested_cells": 4355200
+          },
+          "30": {
+            "edges": 3514,
+            "crossing_edge_rows": 4066,
+            "span_upper_bound": 2033,
+            "tie_upper_bound": 4066,
+            "scratch_bytes_without_requested_cells": 5526208
+          }
+        }
+      },
+      "hierarchy_disagreements/L2-outside-L1": {
+        "parts": 1,
+        "vertices": 0,
+        "polygons": 0,
+        "rings": 0,
+        "segments": 0,
+        "points": 0,
+        "blocks": {
+          "29": {
+            "edges": 0,
+            "crossing_edge_rows": 0,
+            "span_upper_bound": 0,
+            "tie_upper_bound": 0,
+            "scratch_bytes_without_requested_cells": 528512
+          },
+          "30": {
+            "edges": 0,
+            "crossing_edge_rows": 0,
+            "span_upper_bound": 0,
+            "tie_upper_bound": 0,
+            "scratch_bytes_without_requested_cells": 528512
+          }
+        }
+      },
+      "hierarchy_disagreements/L3-outside-L2": {
+        "parts": 1,
+        "vertices": 0,
+        "polygons": 0,
+        "rings": 0,
+        "segments": 0,
+        "points": 0,
+        "blocks": {
+          "29": {
+            "edges": 0,
+            "crossing_edge_rows": 0,
+            "span_upper_bound": 0,
+            "tie_upper_bound": 0,
+            "scratch_bytes_without_requested_cells": 528512
+          },
+          "30": {
+            "edges": 0,
+            "crossing_edge_rows": 0,
+            "span_upper_bound": 0,
+            "tie_upper_bound": 0,
+            "scratch_bytes_without_requested_cells": 528512
+          }
+        }
+      },
+      "hierarchy_disagreements/L4-outside-L3": {
+        "parts": 1,
+        "vertices": 0,
+        "polygons": 0,
+        "rings": 0,
+        "segments": 0,
+        "points": 0,
+        "blocks": {
+          "29": {
+            "edges": 0,
+            "crossing_edge_rows": 0,
+            "span_upper_bound": 0,
+            "tie_upper_bound": 0,
+            "scratch_bytes_without_requested_cells": 528512
+          },
+          "30": {
+            "edges": 0,
+            "crossing_edge_rows": 0,
+            "span_upper_bound": 0,
+            "tie_upper_bound": 0,
+            "scratch_bytes_without_requested_cells": 528512
+          }
+        }
+      },
+      "missing_reconstruction": {
+        "parts": 1,
+        "vertices": 938,
+        "polygons": 229,
+        "rings": 229,
+        "segments": 0,
+        "points": 0,
+        "blocks": {
+          "29": {
+            "edges": 709,
+            "crossing_edge_rows": 0,
+            "span_upper_bound": 0,
+            "tie_upper_bound": 0,
+            "scratch_bytes_without_requested_cells": 1489024
+          },
+          "30": {
+            "edges": 709,
+            "crossing_edge_rows": 1236,
+            "span_upper_bound": 618,
+            "tie_upper_bound": 1236,
+            "scratch_bytes_without_requested_cells": 1844992
+          }
+        }
+      },
+      "extra_reconstruction": {
+        "parts": 1,
+        "vertices": 918,
+        "polygons": 225,
+        "rings": 225,
+        "segments": 0,
+        "points": 0,
+        "blocks": {
+          "29": {
+            "edges": 693,
+            "crossing_edge_rows": 0,
+            "span_upper_bound": 0,
+            "tie_upper_bound": 0,
+            "scratch_bytes_without_requested_cells": 1468544
+          },
+          "30": {
+            "edges": 693,
+            "crossing_edge_rows": 1192,
+            "span_upper_bound": 596,
+            "tie_upper_bound": 1192,
+            "scratch_bytes_without_requested_cells": 1811840
+          }
+        }
+      },
+      "contradictory_land_water_support": {
+        "parts": 1,
+        "vertices": 0,
+        "polygons": 0,
+        "rings": 0,
+        "segments": 0,
+        "points": 0,
+        "blocks": {
+          "29": {
+            "edges": 0,
+            "crossing_edge_rows": 0,
+            "span_upper_bound": 0,
+            "tie_upper_bound": 0,
+            "scratch_bytes_without_requested_cells": 528512
+          },
+          "30": {
+            "edges": 0,
+            "crossing_edge_rows": 0,
+            "span_upper_bound": 0,
+            "tie_upper_bound": 0,
+            "scratch_bytes_without_requested_cells": 528512
+          }
+        }
+      }
+    }
+  },
+  "query_counts": {
+    "gb:MMR:ADM3:66882298B82483484204646": 477,
+    "gb:MMR:ADM3:66882298B86598910616989": 375
+  },
+  "requested_properties": {
+    "66882298B89556704578744": {
+      "shapeName": "Nanyun",
+      "shapeISO": "",
+      "shapeID": "66882298B89556704578744",
+      "shapeGroup": "MMR",
+      "shapeType": "ADM3"
+    },
+    "66882298B29413471910170": {
+      "shapeName": "Lahe",
+      "shapeISO": "",
+      "shapeID": "66882298B29413471910170",
+      "shapeGroup": "MMR",
+      "shapeType": "ADM3"
+    },
+    "66882298B35396935405838": {
+      "shapeName": "Lay Shi",
+      "shapeISO": "",
+      "shapeID": "66882298B35396935405838",
+      "shapeGroup": "MMR",
+      "shapeType": "ADM3"
+    }
+  },
+  "observation": {
+    "elapsed_seconds": 1.9723709999999999,
+    "process_peak_rss_bytes": 54738944,
+    "rss_units": "Darwin bytes"
+  },
+  "query_validation_structural_maxima": {
+    "gb:MMR:ADM3:66882298B82483484204646": {
+      "retained_query_count": 477,
+      "queries_with_witness_geometry": 60,
+      "max_individual_parts": 1,
+      "max_individual_vertices": 2190
+    },
+    "gb:MMR:ADM3:66882298B86598910616989": {
+      "retained_query_count": 375,
+      "queries_with_witness_geometry": 68,
+      "max_individual_parts": 1,
+      "max_individual_vertices": 1027
+    }
+  }
+}
