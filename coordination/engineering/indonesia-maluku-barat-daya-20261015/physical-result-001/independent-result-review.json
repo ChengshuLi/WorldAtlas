@@ -1,0 +1,778 @@
+{
+  "version": 1,
+  "reviewer": "/root/delivery11622_config_review",
+  "kind": "FIRST_ACTUAL_WHOLE_ORIGINAL_MBD_PHYSICAL_RESULT_REVIEW",
+  "disposition": "ACCEPTED WITH LIMITS AS COMPLETED PHYSICAL OBSERVATION",
+  "check_count": 148,
+  "checks": [
+    {
+      "check": "whole403735B actual output exact SHA",
+      "pass": true
+    },
+    {
+      "check": "full123780B completion receipt exact SHA",
+      "pass": true
+    },
+    {
+      "check": "exact fresh512config hash",
+      "pass": true
+    },
+    {
+      "check": "complete nonresumed output and prep binding",
+      "pass": true
+    },
+    {
+      "check": "exact three actual files no partial/stale body",
+      "pass": true
+    },
+    {
+      "check": "completed output receipt execution-receipt.json",
+      "pass": true
+    },
+    {
+      "check": "completed output receipt whole-target-support.json",
+      "pass": true
+    },
+    {
+      "check": "one whole target exact published original",
+      "pass": true
+    },
+    {
+      "check": "all25 consumed input descriptors exact actual request no extras",
+      "pass": true
+    },
+    {
+      "check": "62 original source query records all checked",
+      "pass": true
+    },
+    {
+      "check": "62 listed source IDs exactly queries no omissions/duplicates",
+      "pass": true
+    },
+    {
+      "check": "no source geometry/container/unknown or support issue reported",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID51",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID180",
+      "pass": true
+    },
+    {
+      "check": "retained operation geometry finite nonempty SID180",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID446",
+      "pass": true
+    },
+    {
+      "check": "retained operation geometry finite nonempty SID446",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID655",
+      "pass": true
+    },
+    {
+      "check": "retained operation geometry finite nonempty SID655",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID960",
+      "pass": true
+    },
+    {
+      "check": "retained operation geometry finite nonempty SID960",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID1045",
+      "pass": true
+    },
+    {
+      "check": "retained operation geometry finite nonempty SID1045",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID1357",
+      "pass": true
+    },
+    {
+      "check": "retained operation geometry finite nonempty SID1357",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID1368",
+      "pass": true
+    },
+    {
+      "check": "retained operation geometry finite nonempty SID1368",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID1526",
+      "pass": true
+    },
+    {
+      "check": "retained operation geometry finite nonempty SID1526",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID1733",
+      "pass": true
+    },
+    {
+      "check": "retained operation geometry finite nonempty SID1733",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID2295",
+      "pass": true
+    },
+    {
+      "check": "retained operation geometry finite nonempty SID2295",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID2433",
+      "pass": true
+    },
+    {
+      "check": "retained operation geometry finite nonempty SID2433",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID3195",
+      "pass": true
+    },
+    {
+      "check": "retained operation geometry finite nonempty SID3195",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID3366",
+      "pass": true
+    },
+    {
+      "check": "retained operation geometry finite nonempty SID3366",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID4344",
+      "pass": true
+    },
+    {
+      "check": "retained operation geometry finite nonempty SID4344",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID4580",
+      "pass": true
+    },
+    {
+      "check": "retained operation geometry finite nonempty SID4580",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID4630",
+      "pass": true
+    },
+    {
+      "check": "retained operation geometry finite nonempty SID4630",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID4699",
+      "pass": true
+    },
+    {
+      "check": "retained operation geometry finite nonempty SID4699",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID5207",
+      "pass": true
+    },
+    {
+      "check": "retained operation geometry finite nonempty SID5207",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID6443",
+      "pass": true
+    },
+    {
+      "check": "retained operation geometry finite nonempty SID6443",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID7108",
+      "pass": true
+    },
+    {
+      "check": "retained operation geometry finite nonempty SID7108",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID7565",
+      "pass": true
+    },
+    {
+      "check": "retained operation geometry finite nonempty SID7565",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID9526",
+      "pass": true
+    },
+    {
+      "check": "retained operation geometry finite nonempty SID9526",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID9756",
+      "pass": true
+    },
+    {
+      "check": "retained operation geometry finite nonempty SID9756",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID10288",
+      "pass": true
+    },
+    {
+      "check": "retained operation geometry finite nonempty SID10288",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID10823",
+      "pass": true
+    },
+    {
+      "check": "retained operation geometry finite nonempty SID10823",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID13483",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID15885",
+      "pass": true
+    },
+    {
+      "check": "retained operation geometry finite nonempty SID15885",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID17118",
+      "pass": true
+    },
+    {
+      "check": "retained operation geometry finite nonempty SID17118",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID17864",
+      "pass": true
+    },
+    {
+      "check": "retained operation geometry finite nonempty SID17864",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID21816",
+      "pass": true
+    },
+    {
+      "check": "retained operation geometry finite nonempty SID21816",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID26333",
+      "pass": true
+    },
+    {
+      "check": "retained operation geometry finite nonempty SID26333",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID26834",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID27289",
+      "pass": true
+    },
+    {
+      "check": "retained operation geometry finite nonempty SID27289",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID27542",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID33718",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID41698",
+      "pass": true
+    },
+    {
+      "check": "retained operation geometry finite nonempty SID41698",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID43430",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID45137",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID46641",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID46876",
+      "pass": true
+    },
+    {
+      "check": "retained operation geometry finite nonempty SID46876",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID50250",
+      "pass": true
+    },
+    {
+      "check": "retained operation geometry finite nonempty SID50250",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID50541",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID52143",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID56643",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID57397",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID58041",
+      "pass": true
+    },
+    {
+      "check": "retained operation geometry finite nonempty SID58041",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID59015",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID60747",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID73573",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID87602",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID88221",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID88813",
+      "pass": true
+    },
+    {
+      "check": "retained operation geometry finite nonempty SID88813",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID104958",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID105881",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID119674",
+      "pass": true
+    },
+    {
+      "check": "retained operation geometry finite nonempty SID119674",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID120666",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID133230",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID156599",
+      "pass": true
+    },
+    {
+      "check": "retained operation geometry finite nonempty SID156599",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID164226",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID165695",
+      "pass": true
+    },
+    {
+      "check": "actual checked relation precedence/predicates/witness SID170933",
+      "pass": true
+    },
+    {
+      "check": "all seven whole support fields retained",
+      "pass": true
+    },
+    {
+      "check": "positive mapped land is nonempty45polygon parts",
+      "pass": true
+    },
+    {
+      "check": "exterior retained nonempty247parts no blanket coverage claim",
+      "pass": true
+    },
+    {
+      "check": "actual empty whole support mapped_inland_water_support",
+      "pass": true
+    },
+    {
+      "check": "actual empty whole support missing_reconstruction",
+      "pass": true
+    },
+    {
+      "check": "actual empty whole support extra_reconstruction",
+      "pass": true
+    },
+    {
+      "check": "actual empty whole support contradictory_land_water_support",
+      "pass": true
+    },
+    {
+      "check": "all3 hierarchy disagreements explicitly empty",
+      "pass": true
+    },
+    {
+      "check": "actual operation/disjoint evidence62 exact split",
+      "pass": true
+    },
+    {
+      "check": "all18 source metadata receipts preserved",
+      "pass": true
+    },
+    {
+      "check": "actual whole metadata read receipt sources-000.jsonl.gz",
+      "pass": true
+    },
+    {
+      "check": "actual whole metadata read receipt sources-001.jsonl.gz",
+      "pass": true
+    },
+    {
+      "check": "actual whole metadata read receipt sources-002.jsonl.gz",
+      "pass": true
+    },
+    {
+      "check": "actual whole metadata read receipt sources-003.jsonl.gz",
+      "pass": true
+    },
+    {
+      "check": "actual whole metadata read receipt sources-004.jsonl.gz",
+      "pass": true
+    },
+    {
+      "check": "actual whole metadata read receipt sources-005.jsonl.gz",
+      "pass": true
+    },
+    {
+      "check": "actual whole metadata read receipt sources-006.jsonl.gz",
+      "pass": true
+    },
+    {
+      "check": "actual whole metadata read receipt sources-007.jsonl.gz",
+      "pass": true
+    },
+    {
+      "check": "actual whole metadata read receipt sources-008.jsonl.gz",
+      "pass": true
+    },
+    {
+      "check": "actual whole metadata read receipt sources-009.jsonl.gz",
+      "pass": true
+    },
+    {
+      "check": "actual whole metadata read receipt sources-010.jsonl.gz",
+      "pass": true
+    },
+    {
+      "check": "actual whole metadata read receipt sources-011.jsonl.gz",
+      "pass": true
+    },
+    {
+      "check": "actual whole metadata read receipt sources-012.jsonl.gz",
+      "pass": true
+    },
+    {
+      "check": "actual whole metadata read receipt sources-013.jsonl.gz",
+      "pass": true
+    },
+    {
+      "check": "actual whole metadata read receipt sources-014.jsonl.gz",
+      "pass": true
+    },
+    {
+      "check": "actual whole metadata read receipt sources-015.jsonl.gz",
+      "pass": true
+    },
+    {
+      "check": "actual whole metadata read receipt sources-016.jsonl.gz",
+      "pass": true
+    },
+    {
+      "check": "actual whole metadata read receipt sources-017.jsonl.gz",
+      "pass": true
+    },
+    {
+      "check": "complete native member188612records95809336bytes bound",
+      "pass": true
+    },
+    {
+      "check": "actual unchanged program comparison identities bound",
+      "pass": true
+    },
+    {
+      "check": "inner canonical config and output reserve actually bound",
+      "pass": true
+    },
+    {
+      "check": "actual fresh separate-child512phase/RSS admission no override",
+      "pass": true
+    },
+    {
+      "check": "actual observed303808512Darwinpeak under both actual allowances",
+      "pass": true
+    },
+    {
+      "check": "actual completion in120s deadline with standard4.57s observation",
+      "pass": true
+    },
+    {
+      "check": "actual runtime388 retained actual receipt identity not rehashed",
+      "pass": true
+    },
+    {
+      "check": "earlier640refusal distinct before science retained",
+      "pass": true
+    }
+  ],
+  "failures": [],
+  "actual_result": {
+    "bytes": 403735,
+    "sha256": "e910414b360b063fee290f4a3cc3ef4b142f3221579173ede4387f4ee922419e"
+  },
+  "actual_execution_receipt": {
+    "bytes": 123780,
+    "sha256": "977977a8b500df7e3f92869d0882494bac3750f3d35aded6c8f30b0a73b4d741"
+  },
+  "actual_original_target": "gb:IDN:ADM2:22746128B88480653802061",
+  "scope": {
+    "whole_original_targets": 1,
+    "target_id": "gb:IDN:ADM2:22746128B88480653802061",
+    "consumed_feature_type": "MultiPolygon",
+    "selected_feature_type": "MultiPolygon",
+    "owner": 23148,
+    "source_SID": 36579,
+    "source_parent_SID": 36249,
+    "source_parent_id": "gb:IDN:ADM1:65028918B48178230554278",
+    "selected_parent": "framework:province:maluku:f39da568968f",
+    "unrelated_same_name_parent_excluded": "framework:province:maluku:96c506a8d8f9",
+    "original_source_family_members": 519,
+    "source_family_ordinal": 319,
+    "selected_part": 10,
+    "selected_part_ordinal": 1266,
+    "original_request_intervals": 1874,
+    "context_cells": 4158,
+    "repair_land_labels_only": 2145,
+    "relative_held": 2013,
+    "unrelated61water_cells_excluded": true
+  },
+  "actual_scientific_observations": {
+    "queries": 62,
+    "checked": 62,
+    "unknown": 0,
+    "issues": [],
+    "witnesses": {
+      "disjoint-after-explicit-predicate": 24,
+      "complete-operation-pointset": 38
+    },
+    "support": {
+      "mapped_land_support": {
+        "type": "MultiPolygon",
+        "top_level_parts": 45,
+        "coordinate_positions": 3869,
+        "empty": false,
+        "sha256_canonical": "74888fa35c0cd4bb13c92feeb5d915969e9882d5bcceea141c3fec1d5091b814"
+      },
+      "mapped_inland_water_support": {
+        "type": "GeometryCollection",
+        "children": [],
+        "empty": true,
+        "sha256_canonical": "8c9d0294a6a29b13b238c387607c61c4aa50bb15300089c01846536d010c4455"
+      },
+      "outside_mapped_L1_context": {
+        "type": "MultiPolygon",
+        "top_level_parts": 247,
+        "coordinate_positions": 4171,
+        "empty": false,
+        "sha256_canonical": "a38c698b7d2990cab58307149a445e79a3334aa1506ca28f3ebafcb39cab15d3"
+      },
+      "hierarchy_disagreements": {
+        "L2-outside-L1": {
+          "type": "GeometryCollection",
+          "children": [],
+          "empty": true,
+          "sha256_canonical": "8c9d0294a6a29b13b238c387607c61c4aa50bb15300089c01846536d010c4455"
+        },
+        "L3-outside-L2": {
+          "type": "GeometryCollection",
+          "children": [],
+          "empty": true,
+          "sha256_canonical": "8c9d0294a6a29b13b238c387607c61c4aa50bb15300089c01846536d010c4455"
+        },
+        "L4-outside-L3": {
+          "type": "GeometryCollection",
+          "children": [],
+          "empty": true,
+          "sha256_canonical": "8c9d0294a6a29b13b238c387607c61c4aa50bb15300089c01846536d010c4455"
+        }
+      },
+      "missing_reconstruction": {
+        "type": "Polygon",
+        "top_level_parts": 0,
+        "coordinate_positions": 0,
+        "empty": true,
+        "sha256_canonical": "36b71e85a763d7806f1dc3a0e281a440938aea7799ac7e989f532ff032c61b02"
+      },
+      "extra_reconstruction": {
+        "type": "Polygon",
+        "top_level_parts": 0,
+        "coordinate_positions": 0,
+        "empty": true,
+        "sha256_canonical": "36b71e85a763d7806f1dc3a0e281a440938aea7799ac7e989f532ff032c61b02"
+      },
+      "contradictory_land_water_support": {
+        "type": "GeometryCollection",
+        "children": [],
+        "empty": true,
+        "sha256_canonical": "8c9d0294a6a29b13b238c387607c61c4aa50bb15300089c01846536d010c4455"
+      }
+    },
+    "no_native_centres_evaluated_by_review": true
+  },
+  "inventory": {
+    "path": "idn-maluku-barat-daya-actual-physical-review-001/actual-query-and-support-inventory.json",
+    "sha256": "5073e9980c84f1025156630f66a1834ed59b81a3c5cc897e0b4b5975beaf359c"
+  },
+  "operating": {
+    "accepted_code": "b43462432a3a45771b1264fa6b7202cc831f6cec",
+    "config_sha256": "f92bb5cb73f58c59c8299787f87b0f7cf0a1dc2b2245d844d3083630cb3a716a",
+    "helper_sha256": "58ef81739b264085b2997be7baa3df03ba6bb673f91a160176efd79b71fec081",
+    "entry_sha256": "5ad0dc382eb6d17999759f5399b2469c486deebda0e6fdb6401772fcb66a70c6",
+    "separate_processing_request": 536870912,
+    "preparation_request": 536870912,
+    "full_stock_child_charge": 373979459,
+    "observed_Darwin_peak_bytes": 303808512,
+    "external_seconds": 4.57,
+    "internal_physical_seconds": 4.140344374929555,
+    "complete_25input_receipt": true,
+    "prior640preflight_no_science": true,
+    "coordination_overlap_limit": {
+      "peer_phase": "Vietnam Bahamas512MiB completed before MBD preflight",
+      "peer_release_status": "RESOLVED_EXITED_BEFORE_MBD_PREFLIGHT",
+      "aggregate_safe_overlap": "No temporal overlap; aggregate live process-tree RSS still not measured",
+      "preflight_at_utc": "2026-10-15T04:08:52.995Z",
+      "recorded_available_bytes": 1871380480,
+      "session_headroom_bytes": 572882944,
+      "after_headroom_bytes_for_MBD_alone": 1298497536,
+      "recorded_concurrent_reserved_bytes": 0,
+      "zero_reservation_is_not_other_worker_absence_proof": true,
+      "child_admission_unix_seconds": 1792037337.445,
+      "child_admission_at_utc": "2026-10-15T04:08:57.445Z",
+      "receipt_mtime_at_utc_as_reported": "2026-10-15T04:09:01.772893Z",
+      "child_elapsed_seconds": 4.147793167,
+      "outer_seconds": 4.57,
+      "next_heavy_requires_confirmed_peer_exit": false,
+      "no_scientific_replay_or_aggregate_guarantee": true,
+      "peer_actual_exit_at_utc": "2026-10-15T04:08:26.494978Z",
+      "seconds_before_MBD_preflight": 26.500022,
+      "temporal_overlap": "NONE; root trustworthy exact timing correction",
+      "timing_basis": "Root supplied trustworthy exact Bahamas actual exit timestamp; no new timing/scientific execution by reviewer",
+      "next_phase_coordination": "Both teams released; root directs next phase without another acknowledgment round"
+    }
+  },
+  "reused_input_reviews": {
+    "source63_sha256": "59b9793eb28863f584c998ff88fd3a7afce7968253a1769dbef78eb395cf9de9",
+    "public76_review": "idn-maluku-barat-daya-public-config-review-001/review.json",
+    "no_unchanged_mechanical_attestation_repeated": true
+  },
+  "next_native_requirements": [
+    "Prepare immutable typed source-evidence and native patch for the exact2145repair/land request only, retaining complete4158originalcontext/1874intervals, whole source/selected target and original identities/family/nativecontract/owner-roster/normative-latitude/base descriptors. All2013relative holds stay excluded.",
+    "Bind this exact completed physical body and original stage without discarding the nonempty outside-L1 geometry. Retain all62query records, positive land and complete original water/exterior/reconstruction/conflict/hierarchy witnesses and other existing whole foreign/territorial/competitor veto evidence.",
+    "One ordinary accepted stock constructor under separately reviewed actual complete inputs and fresh normal admission must prove each requested native centre in source/selected/positive-land support, outside water/exterior/vetoes, unique owner/class and no boundary ties. No result or source label permits inference that all2145willqualify.",
+    "Preserve real constructor products and review actual result; current-owner-zero/cumulative conservation/queue acceptance are later independent gates. No source or physical replay is needed for unchanged evidence."
+  ],
+  "limits": [
+    "This is a completed whole-original source-relative physical observation, not native qualification or a whole-target/whole-parent/legal/geographic acceptance. Mapped land and outside-L1 are both nonempty; no requested-centre support result is derived here.",
+    "All2013relative holds and unrelated61water/other owner/border/territorial holds remain unchanged; no classification/relative promotion is performed.",
+    "Original heterogeneous GSHHG/administrative dates, source rights/licensing uncertainty and framework reference/legal limits remain unchanged. All62checkedqueries and empty reported issues do not establish present territorial/legal truth.",
+    "The result field maximum_rss_kib contains Darwin resource.ru_maxrss as returned (bytes on this Mac); it matches303808512-byte execution/time-l peaks. Do not multiply by1024 or claim aggregate live process-tree enforcement. Cooperative boundary RSS/deadline scope remains explicit.",
+    "First640MiB preflight refused before science; new512MiB normaladmission was a genuine separately requested phase after root direction, not an override or relabelled earlier result.",
+    "Review reads actual JSON/receipts and existing method semantics only; no geometry/native/scientific helper import, predicate, source decode, fetch/network, Git mutation, publication or reservation. Outside PR1948; no selected-ownerzero or accepted credit.",
+    "Timing correction resolved: root supplied trustworthy Bahamas actual exit2026-10-15T04:08:26.494978Z, before MBD preflight2026-10-15T04:08:52.995Z by26.500022seconds; there was no overlap of these two scientific phases. Both teams released. The earlier pending-overlap addendum remains historical, not a current unresolved blocker. MBD raw admission/timestamps remain unchanged: available1871380480B/headroom572882944B/childRSScredit0/concurrentReservedBytes0, child admission04:08:57.445Z (1792037337.445 Unix seconds), childelapsed4.147793167s, receiptmtime04:09:01.772893Z and outer4.57s; request512MiB/fullstockcharge373979459B. Recorded zero reservation is not independently proof of other-worker absence; here the actual peer-exit timestamp resolves temporal overlap. The1298497536B after-headroom arithmetic applies to MBD admission. General aggregate live process-tree RSS was not measured and separate peaks are not an aggregate RSS guarantee. Original148scientific findings and accepted-with-limits disposition remain unchanged; no counterfactual rerun."
+  ],
+  "publication_projection": {
+    "kind": "DERIVED_PUBLIC_REVIEW_PROJECTION",
+    "derived_not_byte_identical_to_original_review": true,
+    "raw_local_review_sha256": "e1bf57f6f582fcc3541cfea5c25cc780a57c5d3abec5d11258bb668402bcdb9f",
+    "raw_local_review_bytes": 26299,
+    "omitted_fields": [
+      "/actual_result/path"
+    ],
+    "omission_reason": "Only absolute private-machine output locator omitted. Original raw review and historical pending timing record retained locally.",
+    "unchanged": "All148checks, actual result/receipt hashes and sizes, original scope, numerical observations and scientific disposition retained. Current timing correction establishes no overlap; aggregate RSS was not measured. Historical pending-overlap addendum remains preserved.",
+    "no_new_scientific_review_or_execution": true
+  }
+}
