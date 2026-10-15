@@ -1,0 +1,9 @@
+# Myanmar remaining-repair first whole physical inputs
+
+Unqualified input preparation for issue #1880. No physical result, native authority, current-owner-zero/conservation or accepted repair is claimed.
+
+The frozen original39315 Myanmar repair cells minus31498 already selected original cells leave7817. This request contains7479 original land cells in3761 intervals across72 whole targets, excluding128 cells on earlier attempted/observed targets and210 retained competing-source/reference flags. Those exclusions remain held; the128 are not all scientific refusals. Every selected and consumed target feature retains its complete original geometry and properties. Complete parent context covers28 parents/128 children.
+
+Source attribution: original geoBoundaries gbOpen Myanmar ADM3, represented2019, Creative Commons Attribution4.0 as declared in retained source metadata. The unchanged original330-feature source is pinned at9431af7bce2729274500f6733843ebd5b1315117:coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz (SHA25657de50a588f418601412bb7a34cc2f43a3fd6d7d6f16635cb41b95e5ae505db6). Selected features are unchanged values from f6068aaf855b26e746afba0c030f0f1dc62df0c7:data/geography/part-15.json (SHA2566f763059820d14a4eab78173a756a8869821dd810e94f77c20eb5510c6cfb1df). Original source roles, dates and limits remain applicable; this does not certify present physical or sovereign truth.
+
+The existing accepted physical entry will consume the whole stage with its24 unchanged common scientific pins. Later native promotion still requires actual positive coverage, every exclusion/witness/tie check, source/parent/owner joins, independent result review and ordinary current-selection integration. Whole stage preparation does not waive those conditions or turn a frozen land label into an observation. No GSHHG/source producer was run for this input preparation.
