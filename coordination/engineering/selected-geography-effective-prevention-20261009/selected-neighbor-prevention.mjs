@@ -497,7 +497,7 @@ function physicalQueryAdmission(result, required) {
  }
  demand(joined.size===expected.size,'Incomplete physical source query identity join');
 }
-function reconstructionResidualPointsets(result) {
+function reconstructionResidualPointsets(result, dated = false) {
  demand(Array.isArray(result?.issues)&&result.support&&typeof result.support==='object',
   'Missing qualified physical source interpretation');
  const support=result.support,residualKeys=['missing_reconstruction','extra_reconstruction'];
@@ -505,6 +505,11 @@ function reconstructionResidualPointsets(result) {
  const conflictKeys=[...residualKeys,'contradictory_land_water_support',...hierarchyKeys];
  const hierarchy=support.hierarchy_disagreements;
  const empty=g=>validateWitnessGeometry(g).empty;
+ const witness=(role,geometry)=>({source_id:result.target,role,geometry});
+ // Mapped water remains distinct positive water evidence. It cannot supersede
+ // exterior context and blocks the dated-land exception at any actual contact.
+ const waterContext=()=>dated&&support.mapped_inland_water_support&&!empty(support.mapped_inland_water_support)
+  ?[witness('mapped_inland_water_support',support.mapped_inland_water_support)]:[];
  const observed=[...residualKeys,'contradictory_land_water_support'].some(key=>
   Object.hasOwn(support,key)&&!empty(support[key]))
   ||Object.hasOwn(support,'hierarchy_disagreements')&&(!hierarchy||typeof hierarchy!=='object'
@@ -518,7 +523,8 @@ function reconstructionResidualPointsets(result) {
    'hierarchy_disagreements',...residualKeys,'contradictory_land_water_support'];
   demand(Object.keys(support).every(k=>allowed.includes(k)),'Incomplete physical residual operation roster');
   for(const [key,g]of Object.entries(support))if(key!=='hierarchy_disagreements')validateWitnessGeometry(g);
-  return support.outside_mapped_L1_context&&!empty(support.outside_mapped_L1_context)?[support.outside_mapped_L1_context]:[];
+  return [...(support.outside_mapped_L1_context&&!empty(support.outside_mapped_L1_context)
+   ?[witness('outside_mapped_L1_context',support.outside_mapped_L1_context)]:[]),...waterContext()];
  }
  const supportKeys=['mapped_land_support','mapped_inland_water_support','outside_mapped_L1_context',
   'hierarchy_disagreements',...residualKeys,'contradictory_land_water_support'];
@@ -543,11 +549,12 @@ function reconstructionResidualPointsets(result) {
   if(empty(geometry)){demand(!issues.has(key),'Empty physical residual has an issue witness');continue;}
   demand(issues.has(key)&&same(issues.get(key),geometry),
    'Missing or mismatched complete physical residual witness; Unresolved contradictory or hierarchy physical support');
-  pointsets.push(geometry);
+  pointsets.push(witness(key,geometry));
  }
- // Exterior context is an independent exclusion, never positive land/water.
- if(!empty(operations.outside_mapped_L1_context))pointsets.push(operations.outside_mapped_L1_context);
- return pointsets;
+ // Preserve the context role and original member; it is never positive land.
+ if(!empty(operations.outside_mapped_L1_context))
+  pointsets.push(witness('outside_mapped_L1_context',operations.outside_mapped_L1_context));
+ return [...pointsets,...waterContext()];
 }
 
 // Source-target evidence uses the same retained registry and literal native
@@ -803,13 +810,13 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
   demand(supports.length===1,'Missing or duplicate physical source member');const support=supports[0];
   demand(target.source_receipt_sha256===evidence.physical_evidence.sha256,
    'Missing qualified physical source interpretation');
-  const residuals=reconstructionResidualPointsets(support);
+  const residuals=reconstructionResidualPointsets(support,dated);
   const generalIssues=support.issues.some(i=>!['missing_reconstruction','extra_reconstruction'].includes(i.reason)
    ||!['Polygon','MultiPolygon'].includes(i.geometry?.type));
   if(generalIssues)generalOwners.add(target.pixelIndex);
   if(residuals.length){
-   const item=residualsByOwner.get(target.pixelIndex)??{index:target.pixelIndex,geometries:[]};
-   item.geometries.push(...residuals);
+   const item=residualsByOwner.get(target.pixelIndex)??{index:target.pixelIndex,witnesses:[]};
+   item.witnesses.push(...residuals);
    residualsByOwner.set(target.pixelIndex,item);
   }
   demand(Array.isArray(target.coverage_classes)&&target.coverage_classes.length>0
@@ -868,7 +875,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
   if(prior&&prior[1]===start&&prior[2]===owner&&prior[3]===reason)prior[1]=end;
   else runs.push([start,end,owner,reason]);diagnosticRows.set(y,runs);
  };
- const checked=new Set(),families=new Set();
+ const checked=new Set(),families=new Set(),physicalContextHits=[];
  for(const family of evidence.families){
   demand(typeof family.source_id==='string'&&!families.has(family.source_id),'Duplicate source family');families.add(family.source_id);
   const record=catalogue.products.find(product=>product.key===family.source_id);
@@ -916,11 +923,11 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
     &&same(measured[0].selected.geometry,target.base_geometry)
     &&(!owner.feature||same(owner.feature.geometry,target.base_geometry)),
    'Measured sibling differs from complete original or accepted owner base');
-   const witnesses=reconstructionResidualPointsets(results[0]);
+   const witnesses=reconstructionResidualPointsets(results[0],dated);
    if(results[0].issues.some(i=>!['missing_reconstruction','extra_reconstruction'].includes(i.reason)
     ||!['Polygon','MultiPolygon'].includes(i.geometry?.type)))generalOwners.add(owner.pixelIndex);
-   if(witnesses.length){const item=residualsByOwner.get(owner.pixelIndex)??{index:owner.pixelIndex,geometries:[]};
-    item.geometries.push(...witnesses);residualsByOwner.set(owner.pixelIndex,item);}
+   if(witnesses.length){const item=residualsByOwner.get(owner.pixelIndex)??{index:owner.pixelIndex,witnesses:[]};
+    item.witnesses.push(...witnesses);residualsByOwner.set(owner.pixelIndex,item);}
   }
   for(const target of selected)if(generalOwners.has(target.pixelIndex)){
    demand(target.coverage_classes.length===1||coverageRowsByOwner.has(target.pixelIndex),
@@ -947,21 +954,34 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
   }
   for(const [block,rows]of blocks){
    const rowStart=block*4096,rowEnd=Math.min(262166,rowStart+4096);
-   // Patch rows name owners, not members. Conservatively keep every measured
-   // sibling's original residual parts and boundaries in that owner's veto.
-   const residualHits=new Set();
+   // Preserve every actual role/member contact. Only exact exterior interiors
+   // can be considered below, after the unchanged native source/owner guards.
+   const residualHits=new Set(),waterHits=new Set(),exteriorHits=[];
    for(const item of residualsByOwner.values())if(selectedOwners.has(item.index)){
     const requestedRows=rows.map(row=>({y:row.y,runs:row.runs.filter(run=>run[2]===item.index)}))
      .filter(row=>row.runs.length);
-    for(const geometry of item.geometries){
-     validateWitnessGeometry(geometry);
-     const effects=witnessCellEffects(geometry,{size:262166,latitudes,requestedRows,nativePolygonIntervals});
-     for(const hit of effects.hits)residualHits.add(item.index+':'+hit.y+':'+hit.x);
+    for(const witness of item.witnesses){
+     validateWitnessGeometry(witness.geometry);
+     const effects=witnessCellEffects(witness.geometry,{size:262166,latitudes,requestedRows,nativePolygonIntervals});
+     for(const hit of effects.hits){
+      const key=item.index+':'+hit.y+':'+hit.x;
+      if(witness.role==='mapped_inland_water_support')waterHits.add(key);
+      else if(witness.role==='outside_mapped_L1_context')exteriorHits.push({
+       source_id:witness.source_id,pixelIndex:item.index,role:witness.role,...hit});
+      else residualHits.add(key);
+     }
     }
    }
    // Class masks share the complete source/exclusion scan below, but retain
    // independent member coverage and boundary adjudication.
    const blockCentres=datedCentres.filter(p=>selected.some(t=>t.id===p.source_id)&&p.y>=rowStart&&p.y<rowEnd);
+   // Actual mapped water contradicts this typed terrestrial-centre claim even
+   // when no exterior context is present. Other mapped-water class cells retain
+   // their existing semantics; only exact authenticated dated-land keys veto.
+   for(const point of blockCentres){
+    const key=point.pixelIndex+':'+point.y+':'+point.x;
+    if(waterHits.has(key))residualHits.add(key);
+   }
    const classes=[],coverageFeatureGroups=[],coverageCentreGroups=[];
    for(const kind of ['mapped_land_support','mapped_inland_water_support'])
     if(selected.some(t=>coverageRowsByOwner.has(t.pixelIndex))){
@@ -989,6 +1009,18 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
     ...(diagnostic?{diagnosticRows:rows.map(row=>({y:row.y,runs:row.runs.filter(r=>selectedOwners.has(r[2]))})).filter(row=>row.runs.length)}:{}),
     ownerRows:Array.from({length:rowEnd-rowStart},(_,i)=>({y:rowStart+i,complete_owner_intervals:[]}))});
    const allowedRows=new Map(allowed.rows.map(row=>[row.y,row.runs]));
+   // The native view reuses its existing complete source scan and decision;
+   // owner equality alone never lets an active sibling lend its dated support.
+   const matchedCentres=new Set((allowed.source_matched_coverage_centres??[])
+    .map(p=>JSON.stringify([p.source_id,p.pixelIndex,p.y,p.x])));
+   for(const hit of exteriorHits){
+    const key=hit.pixelIndex+':'+hit.y+':'+hit.x;
+    const superseded=hit.kind==='interior'&&!waterHits.has(key)
+     &&matchedCentres.has(JSON.stringify([hit.source_id,hit.pixelIndex,hit.y,hit.x]));
+    if(!superseded)residualHits.add(key);
+    if(dated)physicalContextHits.push({...hit,resolution:superseded
+     ?'superseded-by-adopted-dated-terrestrial-centre':'retained-exterior-veto'});
+   }
    const decisionRows=diagnostic?new Map(allowed.diagnostic_rows.map(row=>[row.y,row.runs])):null;
    const classAllowed=new Map(classes.map(item=>[item.kind,item.combined?allowedRows:item.empty?new Map()
     :new Map(allowed.coverage_groups[item.group].rows.map(row=>[row.y,row.runs]))]));
@@ -1039,6 +1071,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
    supported_rows:supported,held_rows:held,decision_rows:decisions,first_failure:firstFailure,
    requested_cells:requested,supported_cells:supportedCells,held_cells:heldCells,
    original_pins:{source_evidence:binding.source_evidence,native_patch:binding.native_patch},
+   ...(dated?{physical_context_hits:physicalContextHits}:{}),
    rule_sha256:valueSha(preimage),native_contract:evidence.native_contract,
    limitations:['Native diagnostic screening only; no authority products, current-owner-zero, acceptance or whole-source clearance.',
     'All original source, physical, query, witness and territorial limits remain retained.']};
@@ -1058,6 +1091,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
   scope_ids:ledgerRows.map(row=>row.component_id),rows:ledgerRows},source_rows:ledgerRows,
   native_proof:{native_contract:evidence.native_contract,native_patches:[{base_reference:evidence.base_reference,rows:proposed.rows}]},
   original_pins:{source_evidence:binding.source_evidence,native_patch:binding.native_patch},
+  ...(dated?{physical_context_hits:physicalContextHits}:{}),
   limitations:['Physical interpretation and semantic reconciliation are retained reviewed source evidence; actual current owner-zero is checked by native consumers.',
    'Witness exclusion applies only to requested native centres. Original whole-source physical/hierarchy issues and historical source/resource limits remain retained; no whole-parent certification or acceptance is inferred.']};
 }
