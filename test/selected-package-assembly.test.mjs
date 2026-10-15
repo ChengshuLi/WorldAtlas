@@ -306,6 +306,54 @@ test('original discovery ignores observer trees but refuses changed build inputs
   }
 });
 
+test('discovery reuses only its authenticated identical base tree and retains exact commit and input checks',async t=>{
+  const f=originalDiscovery(t),oldFetch=globalThis.fetch,oldWarn=console.warn;
+  t.after(()=>{globalThis.fetch=oldFetch;console.warn=oldWarn;});
+  globalThis.fetch=async()=>new Response(f.log());console.warn=()=>{};
+  f.receipt.executed_workflow.sha=f.sourceHead;
+  f.s.git('-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','--allow-empty','-qm','same tree, distinct base');
+  let trustedBase=f.s.git('rev-parse','HEAD'),truncate=false,wrongCommit=false,missingCommit=false,wrongOriginal=false;
+  const calls=[],baseAPI=f.api;
+  const api=async route=>{
+    calls.push(route);
+    const commit=/\/git\/commits\/([a-f0-9]{40})$/.exec(route);
+    if(commit)return {sha:missingCommit&&commit[1]===trustedBase?undefined:(wrongCommit&&commit[1]===trustedBase||wrongOriginal&&commit[1]===f.sourceHead)?'0'.repeat(40):commit[1],tree:{sha:f.s.git('rev-parse',commit[1]+'^{tree}')}};
+    const tree=/\/git\/trees\/([a-f0-9]{40})\?recursive=1$/.exec(route);
+    if(tree){
+      const rows=f.s.git('ls-tree','-rlz',tree[1]).split('\0').filter(Boolean).map(line=>{
+        const [metadata,path]=line.split('\t'),[mode,type,sha,size]=metadata.trim().split(/\s+/);return {path,mode,type,sha,size:Number(size)};
+      });return {tree:rows,truncated:truncate};
+    }
+    return baseAPI(route);
+  };
+  api.jobLogRedirect=baseAPI.jobLogRedirect;
+  const discover=()=>findOriginalPackage({api,repo:f.repo,current:f.s.snapshot(),originalRunId:17,trustedBase});
+  const recursive=()=>calls.filter(route=>route.includes('/git/trees/')&&route.endsWith('?recursive=1'));
+  assert.notEqual(trustedBase,f.sourceHead);
+  const found=await discover();
+  assert.equal(found.origin.head,f.sourceHead);assert.equal(found.source.head,f.sourceHead);
+  assert.equal(found.accepted_selected_inputs.commit,trustedBase);
+  assert.equal(calls.filter(route=>route.endsWith('/git/commits/'+trustedBase)).length,1);
+  assert.equal(calls.filter(route=>route.endsWith('/git/commits/'+f.sourceHead)).length,1);
+  assert.deepEqual(recursive(),[`/repos/${f.repo}/git/trees/${f.before.tree}?recursive=1`]);
+  const builder=found.accepted_selected_inputs.files.find(row=>row.path==='scripts/builder.mjs');
+  assert.equal(builder.oid,f.rows.find(row=>row.path===builder.path).sha);
+  calls.length=0;truncate=true;assert.equal(await discover(),null);truncate=false;
+  wrongCommit=true;await assert.rejects(discover(),/Trusted selected base commit differs/);wrongCommit=false;
+  missingCommit=true;await assert.rejects(discover(),/Trusted selected base commit differs/);missingCommit=false;
+  wrongOriginal=true;assert.equal(await discover(),null);wrongOriginal=false;
+  f.s.write('README.md','A different accepted tree with unchanged package inputs');f.s.commit();
+  trustedBase=f.s.git('rev-parse','HEAD');calls.length=0;
+  assert.equal((await discover()).origin.head,f.sourceHead);
+  assert.deepEqual(recursive(),[`/repos/${f.repo}/git/trees/${f.before.tree}?recursive=1`,
+    `/repos/${f.repo}/git/trees/${f.s.git('rev-parse',trustedBase+'^{tree}')}?recursive=1`]);
+  for(const name of ['scripts/builder.mjs','.github/workflows/worker-merge.yml']){
+    const original=fs.readFileSync(path.join(f.root,name),'utf8');f.s.write(name,'changed');f.s.commit();
+    assert.equal(await discover(),null,'Tree reuse must not hide changed '+name);
+    f.s.write(name,original);f.s.commit();
+  }
+});
+
 test('failed-job retry discovers the successful original package attempt without relabeling its producer',async t=>{
   const f=originalDiscovery(t,{worker:true}),old=globalThis.fetch;t.after(()=>{globalThis.fetch=old;});
   globalThis.fetch=async()=>new Response(f.log());
