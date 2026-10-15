@@ -180,11 +180,97 @@ const deliveryMetricFields = Object.freeze({
 });
 
 export function prepareEvidence(config, reader) {
-  const manifest = reader.json(config.template);
+  let manifest;
+  if (config.delivery !== undefined) {
+    const d = config.delivery;
+    need(d && Object.keys(d).every(key => ['version', 'baseline_commit', 'candidate_commit', 'manifest_path', 'issue',
+      'worker_id', 'subject_ids', 'sources', 'limits', 'qualified_constructor_pins', 'pins', 'original_authorities',
+      'original_country_issues', 'validation'].includes(key)), 'Unknown delivery evidence field');
+    need(!config.template && d?.version === 1 && hex(d.baseline_commit, 40) && hex(d.candidate_commit, 40)
+      && safe(d.manifest_path) && Number.isSafeInteger(d.issue) && d.issue > 0
+      && typeof d.worker_id === 'string' && d.worker_id.trim() && unique(d.subject_ids)
+      && Array.isArray(d.sources) && d.sources.every(source => source.retention === 'restoration-only' && source.files === undefined)
+      && (d.validation === undefined || Array.isArray(d.validation)) && Array.isArray(d.limits) && d.limits.length
+      && d.limits.every(limit => typeof limit === 'string' && limit.trim())
+      && Array.isArray(d.qualified_constructor_pins) && d.qualified_constructor_pins.length,
+    'Explicit delivery scope, original scientific citations and limits required');
+    reader.git('merge-base', '--is-ancestor', d.baseline_commit, d.candidate_commit);
+    const descriptor = pin => ({path: pin.path, commit: d.baseline_commit,
+      bytes: pin.bytes, sha256: pin.sha256, hash_kind: 'file-bytes'});
+    const metadata = pin => {
+      for (let i = 0; i < 12; i++) reader.budget.add({bytes: pin.bytes});
+      return reader.json(pin);
+    };
+    const selected = commit => {
+      const selectorPin = reader.pin(commit, 'data/ownership-selection.json'), selection = metadata(selectorPin);
+      const hook = selection.additive_release;
+      need(hook && safe(hook.path), 'Existing selected additive delivery required');
+      const sidecarPin = reader.pin(commit, hook.path);
+      need(sidecarPin.bytes === hook.bytes && sidecarPin.sha256 === hook.sha256, 'Selected sidecar differs');
+      const sidecar = metadata(sidecarPin), base = {...selection}; delete base.additive_release;
+      need(sidecar.version === 2 && sidecar.kind === 'retained-native-additive-selection-v2'
+        && same(sidecar.base_selection, base), 'Selected base binding differs');
+      const registry = reader.pin(commit, sidecar.authority_registry.path);
+      const ledger = reader.pin(commit, sidecar.logical_asset_map.ledger.path);
+      for (const [actual, original] of [[registry, sidecar.authority_registry], [ledger, sidecar.logical_asset_map.ledger]]) {
+        reader.read(original);
+        need(actual.bytes === original.bytes && actual.sha256 === original.sha256
+          && actual.git_blob_oid === (original.git_blob_oid ?? original.blob), 'Selected original role differs');
+      }
+      return {selector: selectorPin, selection, registry, ledger, rows: metadata(ledger).rows};
+    };
+    const before = selected(d.baseline_commit), after = selected(d.candidate_commit);
+    const oldBase = {...before.selection}, newBase = {...after.selection};
+    delete oldBase.additive_release; delete newBase.additive_release;
+    need(same(oldBase, newBase) && Array.isArray(before.rows) && Array.isArray(after.rows), 'Delivery base/rows differ');
+    const prior = new Map(before.rows.map(row => [row.component_id, row]));
+    const current = new Map(after.rows.map(row => [row.component_id, row]));
+    need(prior.size === before.rows.length && current.size === after.rows.length
+      && [...prior].every(([id, row]) => current.has(id) && same(row, current.get(id))), 'Inherited delivery row changed');
+    const targets = [...new Set(after.rows.filter(row => !prior.has(row.component_id)).map(row => row.target_id))].sort();
+    need(same(targets, [...d.subject_ids].sort()), 'Delivery subjects differ from actual added rows');
+    const baseline = {version: 2, commit: d.baseline_commit, files: [], pins: {}, pin_files: {}};
+    const baselineRoles = {...before, package_inputs: reader.pin(d.baseline_commit, '.github/package-inputs.json')};
+    for (const [name, role] of Object.entries({baseline_selector: 'selector', baseline_package_inputs: 'package_inputs',
+      baseline_selected_ledger: 'ledger', baseline_authority_registry: 'registry'})) {
+      const pin = baselineRoles[role]; reader.read(pin);
+      baseline.files.push(descriptor(pin)); baseline.pins[name] = pin.sha256;
+      baseline.pin_files[name] = {path: pin.path, commit: d.baseline_commit};
+    }
+    need(d.pins === undefined || same(d.pins, baseline.pins), 'Issue baseline pins differ from actual accepted baseline');
+    const names = reader.git('diff', '--name-only', '--diff-filter=ACMRT', '-z', d.baseline_commit, d.candidate_commit, '--')
+      .toString().split('\0').filter(name => name && name !== d.manifest_path);
+    need(names.length + baseline.files.length <= 512 && new Set(names).size === names.length, 'Bounded unique delivery outputs required');
+    const outputs = names.map(name => {
+      const pin = reader.pin(d.candidate_commit, name); reader.read(pin);
+      const {commit, ...file} = descriptor(pin); return file;
+    });
+    const ids = new Set();
+    for (const original of d.qualified_constructor_pins) {
+      need(typeof original.id === 'string' && original.id && !ids.has(original.id), 'Unique original constructor references required');
+      ids.add(original.id); reader.read(original.pin);
+      const source = d.sources.filter(source => source.id === original.id);
+      need(source.length === 1 && source[0].retention === 'restoration-only'
+        && same(source[0].original_pin, original.pin), 'Complete original checkpoint citation required');
+    }
+    manifest = {version: 1, issue: d.issue, lane: 'engineering', worker_id: d.worker_id,
+      subject_ids: d.subject_ids, subject_ids_sha256: digest(Buffer.from(JSON.stringify([...d.subject_ids].sort()))),
+      baseline, sources: d.sources, outputs, methods: [{id: 'retained-selected-delivery', kind: 'code',
+        description: 'Derive immutable accepted baseline and candidate byte inventory; original qualification is retained, not replayed.',
+        software: 'WorldAtlas prepare-delivery-handoff evidence', units: 'whole-file bytes and SHA-256'}],
+      metrics: [], metric_bindings: [], summaries: [], conclusions: [{status: 'unresolved',
+        text: 'Byte custody does not establish scientific approval, current-owner-zero, integration, acceptance or publication.',
+        source_ids: d.sources.map(source => source.id)}],
+      stages: {research: 'partial', implementation: 'proposed', geographic_approval: 'unapproved'}, commands: [],
+      qualified_constructor_pins: d.qualified_constructor_pins, limits: d.limits,
+      ...(d.validation ? {validation: d.validation} : {}),
+      ...(d.original_authorities ? {original_authorities: d.original_authorities} : {}),
+      ...(d.original_country_issues ? {original_country_issues: d.original_country_issues} : {})};
+  } else manifest = reader.json(config.template);
   need(manifest.baseline?.version === 2 && Array.isArray(manifest.metrics) && !manifest.metrics.length
     && (!manifest.metric_bindings || Array.isArray(manifest.metric_bindings) && !manifest.metric_bindings.length),
   'Evidence construction requires a v2-baseline template with empty metrics/bindings');
-  need(Array.isArray(config.metric_sources) && config.metric_sources.length, 'Explicit measured delivery sources required');
+  need(Array.isArray(config.metric_sources) && (config.delivery !== undefined || config.metric_sources.length), 'Explicit measured delivery sources required');
   manifest.metric_bindings = [];
   const ids = new Set();
   for (const source of config.metric_sources) {
