@@ -10,7 +10,6 @@ import {gzipSync} from 'node:zlib';
 import {candidateBudget} from '../scripts/native-ownership/native-preparation-guards.mjs';
 import {digest, jsonBytes, pinReader, sourceEvidence} from '../scripts/prepare-delivery-handoff.mjs';
 
-const repository = fileURLToPath(new URL('../', import.meta.url));
 const helper = fileURLToPath(new URL('../scripts/prepare-delivery-handoff.mjs', import.meta.url));
 const commit = 'a'.repeat(40), original = 'b'.repeat(40), prefix = 'coordination/engineering/control/';
 const baselineKeys = ['native_contract', 'native_latitudes', 'owner_roster', 'base_reference'];
@@ -230,7 +229,12 @@ function gitFixture(t) {
   write(root, 'config.json', jsonBytes(config));
   const run = (destination, resume = false) => spawnSync(process.execPath, [helper, 'source-evidence', 'config.json', destination, ...(resume ? ['--resume'] : [])],
     {cwd: root, encoding: 'utf8', env: {...process.env, NODE_OPTIONS: '', NODE_PATH: ''}});
-  return {root, config, run};
+  const expected = {...f.config.source_evidence,
+    native_contract: Object.fromEntries(contractKeys.map(key => [key, manifest[key]])),
+    native_latitudes: {...reader.pin(originalCommit, f.native_latitudes.path),
+      decoded_bytes: f.native_latitudes.decoded_bytes, decoded_sha256: f.native_latitudes.decoded_sha256},
+    owner_roster: assets.owner_roster, base_reference: f.base_reference};
+  return {root, config, run, expected};
 }
 
 test('actual CLI derives once from local config and safely resumes exact completed bytes', t => {
@@ -264,14 +268,27 @@ test('CLI refusal preserves collision and dangling-symlink destinations and crea
   assert.equal(fs.existsSync(path.join(root, prefixPath, 'refused')), false);
 });
 
-const accepted = '73edb1d13f416266930327e559296fcc17f90c02';
-const retainedAvailable = spawnSync('git', ['cat-file', '-e', accepted + '^{commit}'],
-  {cwd: repository, env: {...process.env, GIT_NO_LAZY_FETCH: '1'}}).status === 0;
-test('retained accepted Vietnam evidence is reconstructed identically without source or native replay',
-  {skip: retainedAvailable ? false : 'Historical accepted commit is absent in this checkout'}, async () => {
-    const reader = pinReader(repository), evidence = reader.json(reader.pin(accepted,
-      'coordination/engineering/vietnam-current-cell-20261014/source-evidence.json'));
-    const outputs = await sourceEvidence({version: 1, selector: {commit: accepted, path: 'data/ownership-selection.json'},
-      source_evidence: withoutBaseline(evidence)}, reader);
-    assert.deepEqual(outputs['source-evidence.json'], jsonBytes(evidence));
-  });
+test('cold Git fixture reconstructs all baseline fields and scientific claims without historical objects', async t => {
+  const {root, config, expected} = gitFixture(t);
+  assert.equal(git(root, 'remote'), '', 'fixture must have no source of historical objects');
+  assert.equal(fs.existsSync(path.join(root, '.git/objects/info/alternates')), false);
+  assert.equal(git(root, 'rev-list', '--all').split('\n').length, 4, 'only fixture-authored history exists');
+  // The former optional country case depended on this commit's complete tree,
+  // although checking for its commit object alone could not establish that.
+  const historical = spawnSync('git', ['-c', 'protocol.allow=never', 'cat-file', '-e',
+    '73edb1d13f416266930327e559296fcc17f90c02^{commit}'],
+  {cwd: root, env: {...process.env, GIT_NO_LAZY_FETCH: '1', GIT_CONFIG_GLOBAL: '/dev/null', GIT_CONFIG_NOSYSTEM: '1'}});
+  assert.equal(historical.error, undefined);
+  assert.notEqual(historical.status, 0, 'historical accepted commit must be absent');
+
+  const outputs = await sourceEvidence(config, pinReader(root)), actual = JSON.parse(outputs['source-evidence.json']);
+  for (const key of baselineKeys) assert.deepEqual(actual[key], expected[key], key);
+  assert.deepEqual(withoutBaseline(actual), config.source_evidence, 'all supplied scientific claims survive literally');
+  assert.deepEqual(outputs['source-evidence.json'], jsonBytes(expected), 'complete independently constructed expected body');
+
+  const invalid = structuredClone(config);
+  invalid.source_evidence.native_contract = structuredClone(expected.native_contract);
+  invalid.source_evidence.native_contract.native_latitudes.mode = '100644';
+  await assert.rejects(sourceEvidence(invalid, pinReader(root)), /Supplied source evidence changes accepted baseline/,
+    'a present contaminated contract must fail through the real Git reader');
+});
