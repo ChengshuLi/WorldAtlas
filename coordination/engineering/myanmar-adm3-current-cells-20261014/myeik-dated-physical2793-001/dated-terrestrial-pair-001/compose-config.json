@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "selector": {
+    "commit": "832191562d92440474acf5678de5f3ae2ec20369",
+    "path": "data/ownership-selection.json",
+    "mode": "100644",
+    "git_blob_oid": "1c48a838d1071321ae3161f1948732ee80e28050",
+    "bytes": 1567,
+    "sha256": "bf755abedaac856e43194dc1d49af7a421cbbfa38041c871b6accb009033d72d"
+  },
+  "effective_release_id": "geography:myanmar-myeik2-delivery-20261015",
+  "authorities": [
+    {
+      "rule_preimage": {
+        "commit": "ea9f724d41ae4fdc07a569a5417a64b64d6dd33e",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/myeik-dated-physical2793-001/dated-terrestrial-pair-001/native-authority-provisional-001/complete-output/original-rule-preimage.json",
+        "mode": "100644",
+        "git_blob_oid": "b58694be39f166218109837a9600c9fe08437c4d",
+        "bytes": 872,
+        "sha256": "a910bddf77cf9fcdd82854560f12c89bf615dd3628a8312f4be6cb96f3fa1528"
+      },
+      "source_authority": {
+        "commit": "ea9f724d41ae4fdc07a569a5417a64b64d6dd33e",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/myeik-dated-physical2793-001/dated-terrestrial-pair-001/native-authority-provisional-001/complete-output/authority-binding.json",
+        "mode": "100644",
+        "git_blob_oid": "b6cae3126ffa81eb2a53c6d3e1f8ca876e3fd981",
+        "bytes": 875,
+        "sha256": "9147b88ae3bcf0f804fbc54cb5a0077d9b5fd7289635f4bc7e3d167a9224256b"
+      },
+      "ledger": {
+        "commit": "ea9f724d41ae4fdc07a569a5417a64b64d6dd33e",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/myeik-dated-physical2793-001/dated-terrestrial-pair-001/native-authority-provisional-001/complete-output/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "ae030ad6542e09bf98d1de2f5bc8eea751394327",
+        "bytes": 12717,
+        "sha256": "4eb631396ce0cf15df7bb57bfff4c284a6f919e3557a2424bf16040848d98231"
+      },
+      "native_patch": {
+        "bytes": 275,
+        "commit": "9140c516be8b1a1fe5dc422782ef8cf8a64595f7",
+        "git_blob_oid": "7dc02b0f1bcebb422fa274529f3ce7dbd7acab8f",
+        "mode": "100644",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/myeik-dated-physical2793-001/dated-terrestrial-pair-001/stock-source-evidence-001/candidate-native-patch.json",
+        "sha256": "d4189021223c14b3324ae5baa289b5921ffc3af7586b88583c98ec8b06bdd997"
+      }
+    }
+  ]
+}
