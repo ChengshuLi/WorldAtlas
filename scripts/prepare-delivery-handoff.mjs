@@ -1265,7 +1265,8 @@ export async function nativeAuthority(config, reader, root, diagnostic = false) 
     products = {...result.products, 'constructor-result.json': jsonBytes({version: 1,
       kind: 'existing-source-target-native-constructor-result', inputs,
       component_ids: result.component_ids, rule_sha256: result.rule_sha256, ledger_rows: result.ledger_rows,
-      limitations: result.limitations})};
+      limitations: result.limitations,
+      ...(Object.hasOwn(result,'physical_context_hits') ? {physical_context_hits: result.physical_context_hits} : {})})};
   }
   return {products, observation: {elapsed_seconds: (performance.now() - started) / 1000,
     ...(diagnostic ? {requested_cells: result.requested_cells, supported_cells: result.supported_cells, held_cells: result.held_cells}

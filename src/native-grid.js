@@ -294,6 +294,8 @@ export function deriveSourceTargetNativeDelta({targets, sourceFeatures, coverage
     return result;
   };
   const sources=remap(scan(sourceFeatures.map(feature=>({...feature,pixelIndex:sourceIds.get(feature.id).index}))));
+  const activeSourceMembers=(source,owner,x)=>new Set(source.filter(run=>
+    run.owner===owner&&run.start<=x&&x<run.end).map(run=>run.source_id));
   const scanCoverage = features => remap(scan(features.map(feature=>{
     const id=feature.source_id??feature.id;
     return {id,pixelIndex:sourceIds.get(id).index,geometry:feature.geometry};
@@ -372,7 +374,7 @@ export function deriveSourceTargetNativeDelta({targets, sourceFeatures, coverage
         const owner = [...owners][0];
         if (holes.some(run => run.owner === owner && run.start <= start && start < run.end))
           return {reason: 'territorial_exclusion_cells'};
-        const activeMembers = new Set(source.filter(run => run.owner === owner && run.start <= start && start < run.end).map(run => run.source_id));
+        const activeMembers = activeSourceMembers(source,owner,start);
         if (!support.some(run => run.owner === owner && activeMembers.has(run.source_id) && run.start <= start && start < run.end))
           return {reason: 'unsupported_coverage_cells'};
         return {reason: 'assigned_cells', owner};
@@ -403,6 +405,16 @@ export function deriveSourceTargetNativeDelta({targets, sourceFeatures, coverage
       ...(diagnosticRows === undefined ? {} : {diagnostic_rows: diagnostic})};
   };
   const result=evaluate(coverage,diagnosticRows);
+  // Internal member-level view of the already scanned domain. A successful
+  // owner row is necessary but insufficient: the exact dated member must be
+  // active here as well. No new geometry scan or authority input is introduced.
+  if(coverageCentres!==undefined){
+    const allowedRows=new Map(result.rows.map(row=>[row.y,row.runs]));
+    result.source_matched_coverage_centres=coverageCentres.filter(point=>
+      activeSourceMembers(sources.rows.get(point.y)??[],point.pixelIndex,point.x).has(point.source_id)
+      &&(allowedRows.get(point.y)??[]).some(run=>run[2]===point.pixelIndex
+        &&run[0]<=point.x&&point.x<run[1]));
+  }
   if (coverageFeatureGroups === undefined) return result;
   // Drop the combined mask before sequential class scans; no cross-call state.
   coverage=null;
