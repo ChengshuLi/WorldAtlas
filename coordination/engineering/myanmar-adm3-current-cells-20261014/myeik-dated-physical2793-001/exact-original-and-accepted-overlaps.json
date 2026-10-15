@@ -1,0 +1,81 @@
+{
+  "kind": "exact-integer-original-scope-and-accepted-overlap-check",
+  "checked_utc": "2026-10-15T15:16:07.153223+00:00",
+  "publication_status": "This immutable evidence records Main adoption; original-issue remote decision is recorded separately after readback.",
+  "adoption": {
+    "path": "adopted-dated-physical-answers.json",
+    "bytes": 3195738,
+    "sha256": "02798701cd4730f025521e9167d30128b51168d256c140a79df4d0b4fd1233c2"
+  },
+  "original_physical_package": {
+    "id": "gb-MMR-ADM3--physical-interpretation",
+    "cells": 18459,
+    "rows": 9162,
+    "retained_inventory_sha256": "b12b9ed64ecb16fa2b5501648fa4ca91727793fa99ceadffb96d9623519c93aa"
+  },
+  "scope": {
+    "whole_myeik_parent_original_keys": 6564,
+    "selected_keys": 2793,
+    "selected_inside_original_physical": 2793,
+    "selected_outside_original_physical": 0,
+    "answered_keys": 2235,
+    "answered_inside_original_physical": 2235,
+    "answered_outside_original_physical": 0,
+    "selected_unfinished": 558,
+    "other_parent_keys_unread_here": 3771,
+    "parent_not_answered_here": 4329,
+    "complete_original_intervals": 839
+  },
+  "accepted_native_patch": {
+    "accepted_baseline": "8c68e8c47657c50199068fda24b3b821d7fcd2e0; data unchanged through 4aa52927bf61765cc462a2d0824fa5bce83df919",
+    "cells": 149632,
+    "git_blob_oid": "b947dd7c1ac7cb5f993e603db505b12f81e42be9",
+    "bytes": 1486554,
+    "sha256": "900a44a64114bc3f6273e4fea96f550b58445ed6d9336b5393b00221a77154d4",
+    "answered_overlap": 0,
+    "selected_overlap": 0
+  },
+  "current_accepted_binding": {
+    "commit": "4aa52927bf61765cc462a2d0824fa5bce83df919",
+    "selector_path": "data/ownership-selection.json",
+    "selector_bytes": 1598,
+    "selector_sha256": "e60efb4a763648793bdf3fc5ea7e1bc540e2befa08bbbac68081d1f44fc6bae0",
+    "sidecar": {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/remaining4334-delivery-001/ownership-selection-v2.json",
+      "bytes": 3545,
+      "sha256": "ec6fab5fe7857ca8c3ac9029c2f1b7785d3a43b89141863182b4bb42d8240861"
+    },
+    "whole_authenticated_patch_pin": {
+      "bytes": 1486554,
+      "commit": "dcb13811d22ea8c15b5ef35e06b69aca7bb16834",
+      "git_blob_oid": "b947dd7c1ac7cb5f993e603db505b12f81e42be9",
+      "mode": "100644",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/remaining4334-delivery-001/composition/patch.json",
+      "sha256": "900a44a64114bc3f6273e4fea96f550b58445ed6d9336b5393b00221a77154d4"
+    }
+  },
+  "other_original_package_intersections": {
+    "gb-MMR-ADM3--repair-evaluation": {
+      "retained_keys": 21544,
+      "answered_overlap": 0,
+      "selected_overlap": 0
+    },
+    "gb-MMR-ADM3--source-conflict": {
+      "retained_keys": 56,
+      "answered_overlap": 0,
+      "selected_overlap": 0
+    }
+  },
+  "prior_2944_adopted_open_questions": {
+    "keys": 2944,
+    "answered_overlap": 0,
+    "selected_overlap": 0,
+    "whole_myeik_parent_overlap": 0,
+    "completed_answer_credit": 0,
+    "path": "Original retained observation SHA256 67cc0bb3c93688f574a3bc9a811c8b6548e27636b6d9f8bb874e07bdb4e37a88",
+    "sha256": "67cc0bb3c93688f574a3bc9a811c8b6548e27636b6d9f8bb874e07bdb4e37a88"
+  },
+  "historical_completed_answer_keyset": null,
+  "historical_overlap_limit": "The exhaustive historical completed-answer keyset remains unreconciled. Zero overlap is verified with the149632-cell accepted native patch and known prior2944 open-question scope, not asserted for unavailable exhaustive historical answers.",
+  "method": "Exact (owner,y,x) joins over retained immutable interval metadata and one whole-authenticated already-local accepted patch body. No imagery, spatial predicate, scientific producer, source hydration, or network used."
+}
