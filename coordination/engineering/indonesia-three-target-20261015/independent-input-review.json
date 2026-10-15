@@ -1,0 +1,210 @@
+{
+  "version": 1,
+  "reviewer": "/root/next1005_review_cont",
+  "disposition": "PASS focused combined input preparation; no scientific execution or qualification. Actual combined stage publication and accepted code/admission remain required.",
+  "combined_stage": {
+    "artifact_name": "three-whole-original-stage-inputs.json",
+    "bytes": 207625,
+    "sha256": "446dba776b66b52a69ab73a7223d7e35816b8b6883fbc317fde0dfb080553f49"
+  },
+  "combined_intervals": {
+    "artifact_name": "three-target-requested-intervals.json",
+    "bytes": 315793,
+    "sha256": "e144e39f88581ce8d8c004809479b632b03ff363b4b7838fda97b9fc98f2b9c5"
+  },
+  "config_reviewed": {
+    "artifact_name": "config-awaiting-immutable-combined-stage.json",
+    "bytes": 140387,
+    "sha256": "b369f7461c991da56ecb57e69cd1d2521e36f2f1c2e8c4f1a9f5c6caf4c75ff4"
+  },
+  "individual_stage_bodies": [
+    {
+      "artifact_name": "banggai-laut3290-original-stage-inputs.json",
+      "bytes": 59087,
+      "sha256": "6c24cf5c1c78a71f25ba2f038e94468ec356d2a95cbcadc8316837b6063d7575"
+    },
+    {
+      "artifact_name": "banggai1635-original-stage-inputs.json",
+      "bytes": 44497,
+      "sha256": "5b4c3dfaff406f20e4eac36dfc0b28daa201599b5bfc6b1c756485659456abaa"
+    },
+    {
+      "artifact_name": "maluku-tenggara-barat6309-original-stage-inputs.json",
+      "bytes": 104045,
+      "sha256": "854fa3bcc68a8f089dc7f898028b2895c2ab7ec7c5562bdad51c28ed0be5b33e"
+    }
+  ],
+  "individual_reviews_reused": [
+    {
+      "artifact_name": "independent-input-checks.json",
+      "bytes": 3280,
+      "sha256": "fdd93e42fe9eef14e1106af104cbb7d8191ad26db7827748b752b83052c1a6a8"
+    },
+    {
+      "artifact_name": "independent-complete-input-review.json",
+      "bytes": 10057,
+      "sha256": "0f548aca1f383c644dda9513ed4599833a0abeb5ceb2263ce5392f1494b1ae40"
+    }
+  ],
+  "individual_interval_bodies": [
+    {
+      "artifact_name": "banggai-laut3290-requested-intervals.json",
+      "bytes": 95402,
+      "sha256": "82ab99f95db8cbeb7ee2a397bb0f96b4d1164b65948731435e279706a3b5446a"
+    },
+    {
+      "artifact_name": "banggai1635-requested-intervals.json",
+      "bytes": 51032,
+      "sha256": "61c7c859f21b752bdf410162e926b00d1c513cfb311eaea7a14d1781a790870c"
+    },
+    {
+      "artifact_name": "maluku-tenggara-barat6309-requested-intervals.json",
+      "bytes": 169553,
+      "sha256": "41723e123e0509656adb95744d9435cab981d3890628f2ab303a508026351af3"
+    }
+  ],
+  "checks": [
+    {
+      "check": "combined exact 207625 bytes and SHA",
+      "pass": true
+    },
+    {
+      "check": "combined Git blob preimage exact",
+      "pass": true
+    },
+    {
+      "check": "three exact whole record shapes and no duplicate targets",
+      "pass": true
+    },
+    {
+      "check": "original Banggai reviews passed whole feature equality",
+      "pass": true
+    },
+    {
+      "check": "Maluku complete input review passed all46 checks",
+      "pass": true
+    },
+    {
+      "check": "individual stage byte hash banggai-laut3290-original-stage-inputs.json",
+      "pass": true
+    },
+    {
+      "check": "combined whole consumed selected exact banggai-laut3290-original-stage-inputs.json",
+      "pass": true
+    },
+    {
+      "check": "individual stage byte hash banggai1635-original-stage-inputs.json",
+      "pass": true
+    },
+    {
+      "check": "combined whole consumed selected exact banggai1635-original-stage-inputs.json",
+      "pass": true
+    },
+    {
+      "check": "individual stage byte hash maluku-tenggara-barat6309-original-stage-inputs.json",
+      "pass": true
+    },
+    {
+      "check": "combined whole consumed selected exact maluku-tenggara-barat6309-original-stage-inputs.json",
+      "pass": true
+    },
+    {
+      "check": "combined data array is exactly concatenated reviewed individual records",
+      "pass": true
+    },
+    {
+      "check": "Banggai individual hash bindings match completed review",
+      "pass": true
+    },
+    {
+      "check": "Maluku individual SHA binds completed review",
+      "pass": true
+    },
+    {
+      "check": "unchanged interval columns banggai-laut3290-requested-intervals.json",
+      "pass": true
+    },
+    {
+      "check": "unchanged interval columns banggai1635-requested-intervals.json",
+      "pass": true
+    },
+    {
+      "check": "unchanged interval columns maluku-tenggara-barat6309-requested-intervals.json",
+      "pass": true
+    },
+    {
+      "check": "all exact original 4978 interval records concatenated unchanged",
+      "pass": true
+    },
+    {
+      "check": "original total 11234 cells and source labels preserved",
+      "pass": true
+    },
+    {
+      "check": "exact requested owners and group counts",
+      "pass": true
+    },
+    {
+      "check": "all178 North Maluku cross-parent observations retained",
+      "pass": true
+    },
+    {
+      "check": "all24 stock common pins and runtime388 exactly reviewed Maluku config",
+      "pass": true
+    },
+    {
+      "check": "only expected combined input-byte charge differs from reviewed config",
+      "pass": true
+    },
+    {
+      "check": "no stage input or role invented",
+      "pass": true
+    },
+    {
+      "check": "exact complete25 input charge 305290984",
+      "pass": true
+    },
+    {
+      "check": "only expected transport native index comparison roles before binding",
+      "pass": true
+    },
+    {
+      "check": "combined publication prerequisite explicit",
+      "pass": true
+    }
+  ],
+  "checks_passed": 27,
+  "scope_summary": {
+    "whole_targets": 3,
+    "requested_cells": 11234,
+    "intervals": 4978,
+    "original_repair_land_labels": 7904,
+    "original_physical_source_relative_labels": 3330,
+    "retained_cross_parent_north_maluku_cells": 178,
+    "common_inputs": 24,
+    "total_inputs_after_actual_combined_publication": 25,
+    "complete_logical_input_bytes": 305290984
+  },
+  "limits": [
+    "Exact full original consumed and selected pairs reused, including all coordinates/properties/source identity; no clipping, transformation, added target or class promotion.",
+    "All original cross-parent, water and source-relative holds retained. Other Maluku/Sulawesi targets remain outside this packet.",
+    "Individual immutable descriptors cannot pin the combined stream. Actual combined commit/path and stage-role binding remain pending; no future locator accepted.",
+    "Prior reviewed common input/whole-family/runtime custody reused without decoding retained native/GSHHG bodies again. No new executable wrapper.",
+    "Actual physical support, queries, unknowns, witnesses, native qualification, current owner-zero, conservation, final head and integration remain unrun."
+  ],
+  "qualified_cells": 0,
+  "accepted_cells": 0,
+  "operating_observation": {
+    "elapsed_seconds": 0.022675707999999996,
+    "python_peak_rss_bytes": 21659648,
+    "network": false,
+    "git_mutations": false,
+    "scientific_execution": false,
+    "compute_reservation_bytes": 0
+  },
+  "publication_projection": {
+    "original_review_bytes": 7272,
+    "original_review_sha256": "e976d42a3543c1e3a9b7c23137b56bbc9e36856a841c242da4cff6309a8bf245",
+    "only_transformation": "Local artifact path fields replaced by logical basenames under artifact_name; all identities, hashes, checks, review disposition and limits preserved."
+  }
+}

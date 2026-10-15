@@ -1,0 +1,138 @@
+{
+  "status": "Data-only whole original stage assembly; not physical/source/native qualification",
+  "combined_stage": {
+    "path": "three-whole-original-stage-inputs.json",
+    "mode": "100644",
+    "bytes": 207625,
+    "sha256": "446dba776b66b52a69ab73a7223d7e35816b8b6883fbc317fde0dfb080553f49",
+    "git_blob_oid": "85e35a41748423421eca6dba408e45aa2ae8cb98"
+  },
+  "source_family_pin": {
+    "commit": "5ab660cb68821e6b719f1b86819069ecac419ce1",
+    "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IDN-ADM2-000.bin.gz",
+    "git_blob_oid": "d918c74989043677364ff43f9fbec3d1f0d3a3af",
+    "bytes": 3051391,
+    "sha256": "ef394916ba97454b5592e66eba1df67199731ce7d9636cc3968843801ae904a8",
+    "decoded_bytes": 11002896,
+    "decoded_sha256": "146653d488331086ddc43d159a261b01ea6dd08c7ed422e34a9886c3c690430c"
+  },
+  "selected_part_pin": {
+    "commit": "8c4199fd6455246b98a6fd4b7a6d0f708b9afc70",
+    "path": "data/geography/part-10.json",
+    "git_blob_oid": "84b4cf537b801c7f6d3840173c49b7e4293a139d",
+    "bytes": 5144571,
+    "sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+  },
+  "method": "Literal three-record array of complete individually reviewed target/consumed/selected feature pairs. No clipping, simplification, coordinate transform or scientific predicate.",
+  "targets": [
+    {
+      "target_id": "gb:IDN:ADM2:22746128B78411617556279",
+      "name": "Banggai Laut",
+      "owner_index": 23087,
+      "source_sid": 36281,
+      "source_family_ordinal": 21,
+      "selected_part_ordinal": 973,
+      "framework_parent": "framework:province:central-sulawesi:d906ed232e1a",
+      "source_reference_year": "2020",
+      "requested_cells": 3290,
+      "intervals": 1490,
+      "classes": {
+        "land": 2096,
+        "source-relative": 1194
+      },
+      "source_patterns": {
+        "repair:land:36281": 573,
+        "repair:land:36234,36281": 1377,
+        "repair:land:36250,36281": 146,
+        "physical:source-relative:36234,36281": 424,
+        "physical:source-relative:36281": 738,
+        "physical:source-relative:36250,36281": 32
+      },
+      "original_stage_descriptor": {
+        "bytes": 59087,
+        "sha256": "6c24cf5c1c78a71f25ba2f038e94468ec356d2a95cbcadc8316837b6063d7575",
+        "git_blob_oid": "5c01cf08acbb2d9329106ee438aab52c4e7604fa"
+      },
+      "consumed_feature_sha256": "e065e92110d9f161405718d8c9879225389004f2805c792cce32d9ead53947d2",
+      "selected_feature_sha256": "32a95cbf772dfd00adf860a6aebddd40fd8c634a9d470d200cc40f0495e84ed1",
+      "complete_feature_semantic_equality_preserved": true
+    },
+    {
+      "target_id": "gb:IDN:ADM2:22746128B48169474795911",
+      "name": "Banggai",
+      "owner_index": 22909,
+      "source_sid": 36279,
+      "source_family_ordinal": 19,
+      "selected_part_ordinal": 971,
+      "framework_parent": "framework:province:central-sulawesi:d906ed232e1a",
+      "source_reference_year": "2020",
+      "requested_cells": 1635,
+      "intervals": 813,
+      "classes": {
+        "land": 1120,
+        "source-relative": 515
+      },
+      "source_patterns": {
+        "repair:land:36234,36279": 753,
+        "repair:land:36279": 367,
+        "physical:source-relative:36234,36279": 231,
+        "physical:source-relative:36279": 284
+      },
+      "original_stage_descriptor": {
+        "bytes": 44497,
+        "sha256": "5b4c3dfaff406f20e4eac36dfc0b28daa201599b5bfc6b1c756485659456abaa",
+        "git_blob_oid": "cd4cec3fe76da0cb2d5db774c97d63d20b7387f1"
+      },
+      "consumed_feature_sha256": "36d8c0ec2bd08439aad2a1ca9d186f0a2f0553239e3e46b40fc7d077c9eb3992",
+      "selected_feature_sha256": "9e768cac0a9c8eadb92661717fd97c622c8776d9c2465cd620163edc3b21feb3",
+      "complete_feature_semantic_equality_preserved": true
+    },
+    {
+      "target_id": "gb:IDN:ADM2:22746128B78864950196660",
+      "name": "Maluku Tenggara Barat",
+      "owner_index": 23089,
+      "source_sid": 36582,
+      "source_family_ordinal": 322,
+      "selected_part_ordinal": 1269,
+      "framework_parent": "framework:province:maluku:f39da568968f",
+      "source_reference_year": "2020",
+      "requested_cells": 6309,
+      "intervals": 2675,
+      "classes": {
+        "land": 4688,
+        "source-relative": 1621
+      },
+      "source_patterns": {
+        "repair:land:36582": 991,
+        "repair:land:36249,36582": 3697,
+        "physical:source-relative:36582": 680,
+        "physical:source-relative:36249,36582": 941
+      },
+      "original_stage_descriptor": {
+        "bytes": 104045,
+        "sha256": "854fa3bcc68a8f089dc7f898028b2895c2ab7ec7c5562bdad51c28ed0be5b33e",
+        "git_blob_oid": "dd9a7b82110f0267d9c09d74c0cd9b19a238b66d"
+      },
+      "consumed_feature_sha256": "1797bf8c27920c8279783dfb58a793ea10797f2d0c554db71066b0b18f456c79",
+      "selected_feature_sha256": "6d6a28e87fb4e38650936d50b0ec37616c600e8dbe9da9c5a84fef7cbd830131",
+      "complete_feature_semantic_equality_preserved": true
+    }
+  ],
+  "requested_intervals": {
+    "bytes": 315793,
+    "sha256": "e144e39f88581ce8d8c004809479b632b03ff363b4b7838fda97b9fc98f2b9c5",
+    "records": 4978,
+    "cells": 11234,
+    "repair_land_labels": 7904,
+    "physical_source_relative_labels": 3330
+  },
+  "preserved_limits": [
+    "All178 Banggai Laut North Maluku SID observations unchanged without parent clearance",
+    "All labels are requests, not measured physical support or classification",
+    "Other Maluku targets and61 inland-water labels unchanged; ring-held Tojo Una-Una and Morowali excluded",
+    "No prior other-cohort scientific clearance transfers",
+    "Physical positive support, water/exterior, checked query/unknowns and all ambiguity/hierarchy witnesses remain unmeasured",
+    "No new authority qualification, current owner-zero or acceptance credit"
+  ],
+  "operating_scope": "Metadata assembly and immutable data publication only; no scientific producer or compute reservation"
+}
