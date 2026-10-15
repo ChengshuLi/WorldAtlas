@@ -15,6 +15,9 @@ export function requirePlainExecution({boundedHeap=false}={}) {
     throw Error('Native preparation requires the reviewed plain Node launch without loaders/preloads');
 }
 
+// Carry only reservation policy between genuine grants, never OS/RSS observations.
+const allowanceContexts = new WeakMap();
+
 // Current operational admission, independent of literal historical receipts.
 // OS availability is already net of resident parent/concurrent memory. Reserve
 // only additional planned concurrent growth and explicit operating headroom for
@@ -31,11 +34,23 @@ export function preparationAllowance({availableBytes=process.availableMemory(),c
   if (!Number.isSafeInteger(rssLimitBytes)) throw Error('Invalid current preparation resource observations');
   rssBytes??=rssLimitBytes;phaseBytes??=rssLimitBytes;
   if (![phaseBytes,rssBytes].every(n=>Number.isSafeInteger(n)&&n>0)||phaseBytes>rssLimitBytes||rssBytes>rssLimitBytes) throw Error('Requested preparation allowance exceeds current memory admission');
-  return Object.freeze({phaseBytes,rssBytes});
+  const allowance = Object.freeze({phaseBytes,rssBytes});
+  allowanceContexts.set(allowance, {headroomBytes, concurrentReservedBytes});
+  return allowance;
 }
 export function preparationRequestAllowance(value){
   if(!value||typeof value!=='object'||Array.isArray(value)||Object.keys(value).sort().join(',')!=='phaseBytes,rssBytes'||![value.phaseBytes,value.rssBytes].every(n=>Number.isSafeInteger(n)&&n>0))throw Error('Explicit finite preparation request allowance required');
-  return preparationAllowance({phaseBytes:value.phaseBytes,rssBytes:value.rssBytes});
+  const context = allowanceContexts.get(value);
+  const currentReserved = Number(process.env.WORLDATLAS_CONCURRENT_RESERVED_BYTES ?? 0);
+  if (!Number.isSafeInteger(currentReserved) || currentReserved < 0) throw Error('Invalid current preparation resource observations');
+  // Keep the admitted explicit headroom policy, preserving the direct API's
+  // explicit-option precedence. Undefined still uses fresh environment/default.
+  // A new concurrent reservation can tighten the prior reservation floor.
+  const reservations = context ? {
+    concurrentReservedBytes: Math.max(context.concurrentReservedBytes, currentReserved),
+    ...(context.headroomBytes === undefined ? {} : {headroomBytes: context.headroomBytes})
+  } : {};
+  return preparationAllowance({...reservations, phaseBytes:value.phaseBytes,rssBytes:value.rssBytes});
 }
 export function candidateBudget(inputs, {reserveBytes = 131072, reserveDescriptors = 16, allowance} = {}) {
   // An automatic budget is admitted once at this entry, not through two
