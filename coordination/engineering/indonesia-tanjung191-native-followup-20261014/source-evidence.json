@@ -1,0 +1,257 @@
+{
+  "version": 1,
+  "kind": "source-target-native-evidence-v1",
+  "catalogue": {
+    "commit": "ecb837c599544ff8462b50f43a678d60c80fa5f6",
+    "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+    "mode": "100644",
+    "git_blob_oid": "09afab19371f0814da61e79e5f310c5fb2405b6d",
+    "bytes": 403376,
+    "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9"
+  },
+  "families": [
+    {
+      "source_id": "gb:IDN:ADM2",
+      "parts": [
+        {
+          "commit": "ecb837c599544ff8462b50f43a678d60c80fa5f6",
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IDN-ADM2-000.bin.gz",
+          "mode": "100644",
+          "git_blob_oid": "d918c74989043677364ff43f9fbec3d1f0d3a3af",
+          "bytes": 3051391,
+          "sha256": "ef394916ba97454b5592e66eba1df67199731ce7d9636cc3968843801ae904a8",
+          "decoded_bytes": 11002896,
+          "decoded_sha256": "146653d488331086ddc43d159a261b01ea6dd08c7ed422e34a9886c3c690430c"
+        }
+      ]
+    }
+  ],
+  "physical_evidence": {
+    "commit": "e8df8f25c7c2a808a92cb986f804be844bfb7ba5",
+    "path": "coordination/engineering/indonesia-riau-current-cells-20261014/evidence/physical-support.json",
+    "mode": "100644",
+    "git_blob_oid": "83e203f56034c9777622936723c1edd87c8b887f",
+    "bytes": 1797357,
+    "sha256": "37fcbba4d60c81225471007005dea086b1e2c38a3739602d4590b9ae46200f6a"
+  },
+  "physical_input": {
+    "commit": "e8df8f25c7c2a808a92cb986f804be844bfb7ba5",
+    "path": "coordination/engineering/indonesia-riau-current-cells-20261014/evidence/original-stage-inputs.json",
+    "mode": "100644",
+    "git_blob_oid": "0858c2e036c4180004ccaca2a878b5558e6ebbdc",
+    "bytes": 279046,
+    "sha256": "7d6d1d88866b6a1ce8ee282100a6c972d3732d301e08df4a56d6bdf14317fcff"
+  },
+  "physical_reproduction": {
+    "commit": "ecb837c599544ff8462b50f43a678d60c80fa5f6",
+    "path": "coordination/engineering/source-target-native-delivery-20261014/evidence/physical-reproduction.py",
+    "mode": "100644",
+    "git_blob_oid": "73e005238c929a901185abb8321c419e7cd9f688",
+    "bytes": 5450,
+    "sha256": "05af43d7d7722e8d7bb201f5876a43d9c7f9a2d0f4ea39e467229351a35c9bc3"
+  },
+  "owner_roster": {
+    "commit": "ecb837c599544ff8462b50f43a678d60c80fa5f6",
+    "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/owners.json.gz",
+    "mode": "100644",
+    "git_blob_oid": "9c44513df64995d417dd3832ae604c703e84a506",
+    "bytes": 2663523,
+    "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+    "decoded_bytes": 11096191,
+    "decoded_sha256": "a8086008b7a072dd86483720a2a166785229753422769dbbe0749497d870f428"
+  },
+  "native_contract": {
+    "size": 262166,
+    "coordinateBits": 19,
+    "method": "native-linear-evenodd-first-owner-v1",
+    "native_latitudes": {
+      "root": "repository",
+      "role": "immutable-normative-rule-input",
+      "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+      "commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+      "bytes": 1851757,
+      "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+      "decoded_bytes": 2097328,
+      "decoded_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+    },
+    "hierarchy_sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+    "original_assets": {
+      "bounds": {
+        "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+        "path": "data/canonical-grid/bounds.json.gz",
+        "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+        "role": "original-identity-parent-camera-context"
+      },
+      "province_membership": {
+        "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+        "path": "data/canonical-grid/province-membership.bin.gz",
+        "sha256": "01f42b69ca969090d10c42d6a1311215a19ce436b0f3e720f7f873f4a18f90da",
+        "role": "original-identity-crosswalk"
+      }
+    }
+  },
+  "native_latitudes": {
+    "commit": "ecb837c599544ff8462b50f43a678d60c80fa5f6",
+    "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+    "mode": "100644",
+    "git_blob_oid": "de6905e162dc031b1b93248fae91190c39c4ad53",
+    "bytes": 1851757,
+    "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+    "decoded_bytes": 2097328,
+    "decoded_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+  },
+  "base_reference": {
+    "footprints_sha256": "2deeff1457ff9238cb3dbe599e9a858dcce29d8ba88e2a66abe2785ddec0aed9",
+    "hierarchy_sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+    "id": "geography:review:dbb133d7b123bacd1d38253c467891bff656d011000a9f11d369ac9262302bfb"
+  },
+  "targets": [
+    {
+      "id": "gb:IDN:ADM2:22746128B73074683492420",
+      "pixelIndex": 23055,
+      "source_family": "gb:IDN:ADM2",
+      "base_geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                104.4593,
+                0.8849
+              ],
+              [
+                104.4522,
+                0.8874
+              ],
+              [
+                104.4249,
+                0.8735
+              ],
+              [
+                104.4672,
+                0.8591
+              ],
+              [
+                104.4833,
+                0.8737
+              ],
+              [
+                104.469,
+                0.8782
+              ],
+              [
+                104.4593,
+                0.8849
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                104.4738,
+                0.9787
+              ],
+              [
+                104.4149,
+                0.9782
+              ],
+              [
+                104.4141,
+                0.9571
+              ],
+              [
+                104.4262,
+                0.9535
+              ],
+              [
+                104.4466,
+                0.9343
+              ],
+              [
+                104.4376,
+                0.9255
+              ],
+              [
+                104.439,
+                0.9061
+              ],
+              [
+                104.4512,
+                0.8979
+              ],
+              [
+                104.4708,
+                0.8951
+              ],
+              [
+                104.4839,
+                0.8764
+              ],
+              [
+                104.4913,
+                0.872
+              ],
+              [
+                104.4794,
+                0.8661
+              ],
+              [
+                104.477,
+                0.8538
+              ],
+              [
+                104.4972,
+                0.8391
+              ],
+              [
+                104.5137,
+                0.8436
+              ],
+              [
+                104.521,
+                0.8583
+              ],
+              [
+                104.5317,
+                0.8619
+              ],
+              [
+                104.5381,
+                0.8966
+              ],
+              [
+                104.553,
+                0.9222
+              ],
+              [
+                104.528,
+                0.9448
+              ],
+              [
+                104.5131,
+                0.9724
+              ],
+              [
+                104.4991,
+                0.9894
+              ],
+              [
+                104.4762,
+                0.989
+              ],
+              [
+                104.4738,
+                0.9787
+              ]
+            ]
+          ]
+        ]
+      },
+      "source_receipt_sha256": "37fcbba4d60c81225471007005dea086b1e2c38a3739602d4590b9ae46200f6a",
+      "coverage_classes": [
+        "mapped_land_support"
+      ],
+      "territorial_exclusions": []
+    }
+  ]
+}
