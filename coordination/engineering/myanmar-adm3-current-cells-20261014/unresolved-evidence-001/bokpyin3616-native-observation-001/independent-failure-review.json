@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "reviewer": "/root/authority_binding_review",
+  "status": "stock-refusal-preserved-shared-subset-reporting-gap",
+  "execution_head": "b9b111196554d3e04cc2a8b6c6a5e737d13a063e",
+  "failure": {
+    "exit_code": 1,
+    "error": "Proposed native cells lack unique source-target coverage",
+    "authority_products": false,
+    "external_seconds": 1.54,
+    "peak_rss_bytes": 227688448,
+    "allowance": {
+      "phaseBytes": 536870912,
+      "rssBytes": 536870912
+    },
+    "compute_released": true
+  },
+  "evidence": {
+    "admission.json": {
+      "bytes": 364,
+      "sha256": "566311dfaa6a22893016852caa7dd014066d28c89f9d0952415f951c6d21ee72"
+    },
+    "terminal.json": {
+      "bytes": 268,
+      "sha256": "dd9746d9df2827d86f473bfe73f34a6b3b1cbe77955a95df9abbc5acca617274"
+    },
+    "stdout.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr.txt": {
+      "bytes": 834,
+      "sha256": "41caf69f45c7e896b83d950be7ea3d4932814c5b29083453b1b48465a4860498"
+    }
+  },
+  "diagnosis": "Generic failure only proves at least one proposed run lacks a single encompassing same-owner allowed span. It does not identify which cells or whether source uniqueness, own source/coverage membership, territorial exclusion, exact ties or interval segmentation caused the refusal. No rejected subset or responsible premise can be recovered from the empty stdout and generic stderr.",
+  "existing_api": {
+    "implementation": "src/native-grid.js:216 deriveSourceTargetNativeDelta",
+    "reexports": [
+      "src/effective-footprint.js",
+      "src/native-runtime.js",
+      "scripts/additive-gap-repair.mjs"
+    ],
+    "result": "Returns allowed rows after existing source-member/coverage/exclusion/tie rules. This is an API, not a located immutable-input subset-publication CLI.",
+    "stock_caller": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs:901 consumes allowed.rows; line930 throws before constructor products.",
+    "entry": "scripts/prepare-delivery-handoff.mjs nativeAuthority invokes constructOriginalAuthority all-or-nothing, then publishes only complete products. No partial/subset flag in its strict config/CLI contract."
+  },
+  "search_scope": "Existing scripts/src/docs plus selected-neighbor implementation and relevant tests; no documented stock subset-export route or second production caller found in this bounded search.",
+  "minimal_general_gap": {
+    "proposal": "Expose a generic candidate-screen result through the accepted shared constructor/entry, reusing its immutable input loading, complete-family/owner/stage reconciliation, native scans, resource accounting and owner-specific residual/class guards. Do not create a coastal wrapper or call the exported API with hand-assembled weaker inputs.",
+    "output": "Exact proposed-owner tuple intersection with allowed rows, minus residual hits and class failures; exact disjoint complement as held/rejected runs. Preserve input/code/operating bindings and raw witness custody. Label screening separately from qualified authority.",
+    "mandatory": "Complete every requested block/owner before publishing subset; unknown/malformed witness or failed source authentication still abort. Retain all454 Kaw residual components, ties and foreign vetoes. No fail-open catch, dropped predicate or interval endpoint sampling.",
+    "scope_control": "First output need only explain the exact supported-versus-held partition. Per-premise reason labels require actual existing scan evidence; generic error cannot supply them. Pure integer intersection/difference of computed rows is sufficient for partitioning; interval containment failure alone does not diagnose individual centres.",
+    "subsequent": "A nonempty screened proposal can then use the unchanged stock authority constructor with exact immutable inputs and fresh admission. No physical/source-producer replay or repeated binary-search constructor calls are justified."
+  },
+  "limits": [
+    "No native/geometry/source operator executed by this review; no supported cell count inferred.",
+    "Independent Kawthoung attempt remains separate and must actually check all454 residual components.",
+    "Original3616 proposal and all prior holds remain unchanged; no clearance or integration claim."
+  ]
+}
