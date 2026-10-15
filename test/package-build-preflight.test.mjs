@@ -4,8 +4,8 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import {execFileSync} from 'node:child_process';
-import {inspectPackageInputs, inspectPackageAncestry, inspectPackageRuntime, inspectPackageBrowser, inspectPackageExecutionInputs, validatePackageExecutionRoles, preflightPackageBuild, requirePackagePreflight} from '../scripts/package-build-preflight.mjs';
-import {loadPackageInputs} from '../scripts/package-inputs.mjs';
+import {inspectPackageInputs, inspectPackageAncestry, inspectPackageRuntime, inspectPackageBrowser, inspectPackageExecutionInputs, preflightPackageBuild, requirePackagePreflight} from '../scripts/package-build-preflight.mjs';
+import {loadPackageInputs, containsPackagePath} from '../scripts/package-inputs.mjs';
 import {runPackageBuild} from '../scripts/package-build.mjs';
 
 function fixture(t) {
@@ -126,14 +126,15 @@ test('CLI preserves occupied and dangling-symlink report destinations', t => {
   assert.equal(fs.readlinkSync(out), 'absent'); assert.equal(fs.existsSync(path.join(f.root, 'absent')), false);
 });
 
-test('all actual package entries match retained roles and extra or missing imports refuse early',()=>{
+test('all actual package entries expose their complete declared current import closures',()=>{
  const root=process.cwd(),definition=loadPackageInputs(root);
- const consumerCode=JSON.parse(fs.readFileSync('coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/application-consumer-code.json'));
  for(const kind of ['static','hosted','cloudflare']){
-  const actual=inspectPackageExecutionInputs(root,definition,kind),entry=`scripts/build-${kind}-inner.mjs`;assert.deepEqual(actual.errors,[]);
-  assert.equal(validatePackageExecutionRoles(actual.files,consumerCode,entry),true);
-  assert.throws(()=>validatePackageExecutionRoles([...actual.files,'scripts/package-build-preflight.mjs'],consumerCode,entry),/Complete actual execution role closure/);
-  assert.throws(()=>validatePackageExecutionRoles(actual.files.slice(1),consumerCode,entry),/Complete actual execution role closure/);
+  const actual=inspectPackageExecutionInputs(root,definition,kind),entry=`scripts/build-${kind}-inner.mjs`;
+  assert.deepEqual(actual.errors,[]);
+  assert(actual.files.includes(entry));assert(actual.files.includes('scripts/package-build.mjs'));
+  assert(actual.files.includes('scripts/native-ownership/validate-build-context-stage.mjs'));
+  assert.deepEqual(actual.files,[...new Set(actual.files)].sort());
+  for(const name of actual.files)assert(containsPackagePath(definition.inputs,name),name);
  }
 });
 

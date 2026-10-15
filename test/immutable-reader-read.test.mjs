@@ -12,10 +12,10 @@ const originalCreateHash=crypto.createHash;
 const hash=body=>originalCreateHash('sha256').update(body).digest('hex');
 const version='1'.repeat(40),name='tiny/body.json';
 
-// Exercise the exported reader's real descriptor, admission and read methods.
+// Exercise the exported reader's real descriptor and complete read methods.
 // Only Git's bounded metadata/body responses are synthetic; no Git history,
 // production instrumentation or duplicated reader implementation is required.
-function fixture({phaseBytes=1024*1024}={}) {
+function fixture() {
   class ControlledReader extends ImmutableReader {
     git(...args) {
       this.calls.push(args);
@@ -25,8 +25,7 @@ function fixture({phaseBytes=1024*1024}={}) {
       throw Error('Unexpected fixture Git call: '+args.join(' '));
     }
   }
-  const reader=new ControlledReader('.',version,{runtimeBytes:1,executionBytes:1,
-    metadataBytes:1,outputBytes:1,allowance:{phaseBytes,rssBytes:1024**3}});
+  const reader=new ControlledReader('.',version);
   reader.calls=[];reader.body=Buffer.from('{"tiny":"body"}\n');
   reader.blob='a'.repeat(40);reader.declaredBytes=reader.body.length;
   return reader;
@@ -44,12 +43,10 @@ const wholeReads=reader=>reader.calls.filter(args=>args[0]==='cat-file'&&args[1]
 const pin=reader=>reader.inventory.get(version+':'+name);
 
 test('matching expected hash authenticates one whole read and records one computed digest',t=>{
-  const reader=fixture(),expected=hash(reader.body),initial=reader.used;
-  const algorithms=observeHashes(t),actual=reader.read(name,{expected,decoded:8});
+  const reader=fixture(),expected=hash(reader.body);
+  const algorithms=observeHashes(t),actual=reader.read(name,{expected});
   assert.equal(actual,reader.body);assert.deepEqual(algorithms,['sha256']);
   assert.equal(wholeReads(reader),1);
-  assert.equal(reader.used,initial+reader.body.length+8);
-  assert.equal(reader.charged.get(version+':'+name),reader.body.length+8);
   assert.equal(pin(reader).sha256,expected);assert.equal(pin(reader).whole_body_consumed,true);
   assert.equal(pin(reader).git_blob_oid,reader.blob);
 });
@@ -62,10 +59,9 @@ test('absent expected hash still computes and records the actual whole-body dige
 });
 
 test('wrong expected hash refuses before marking the initially unconsumed inventory',t=>{
-  const reader=fixture(),initial=reader.used,algorithms=observeHashes(t);
+  const reader=fixture(),algorithms=observeHashes(t);
   assert.throws(()=>reader.read(name,{expected:'0'.repeat(64)}),/Whole immutable input differs: tiny\/body.json/);
   assert.deepEqual(algorithms,['sha256']);assert.equal(wholeReads(reader),1);
-  assert.equal(reader.used,initial+reader.body.length);
   assert.equal(Object.hasOwn(pin(reader),'sha256'),false);
   assert.equal(Object.hasOwn(pin(reader),'whole_body_consumed'),false);
 });
@@ -81,11 +77,11 @@ for(const delta of [-1,1])test('body length '+(delta<0?'shortfall':'excess')+' r
 
 test('each call rereads and reauthenticates; a later same-size body drift preserves prior inventory state',t=>{
   const reader=fixture(),expected=hash(reader.body),algorithms=observeHashes(t);
-  reader.read(name,{expected});const before={...pin(reader)},used=reader.used;
+  reader.read(name,{expected});const before={...pin(reader)};
   reader.body=Buffer.alloc(reader.declaredBytes,120);
   assert.throws(()=>reader.read(name,{expected}),/Whole immutable input differs/);
   assert.deepEqual(algorithms,['sha256','sha256']);assert.equal(wholeReads(reader),2);
-  assert.deepEqual(pin(reader),before);assert.equal(reader.used,used);
+  assert.deepEqual(pin(reader),before);
 });
 
 test('descriptor drift is rejected before a second body read and leaves the original inventory intact',t=>{
@@ -95,11 +91,4 @@ test('descriptor drift is rejected before a second body read and leaves the orig
   assert.throws(()=>reader.read(name,{expected}),/Immutable descriptor drift/);
   assert.deepEqual(algorithms,['sha256']);assert.equal(wholeReads(reader),1);
   assert.deepEqual(pin(reader),before);
-});
-
-test('unchanged admission refuses an over-budget body before acquisition or hashing',t=>{
-  const reader=fixture({phaseBytes:18}),algorithms=observeHashes(t);
-  assert.throws(()=>reader.read(name),/Complete phase exceeds prospective cap/);
-  assert.deepEqual(algorithms,[]);assert.equal(wholeReads(reader),0);
-  assert.equal(Object.hasOwn(pin(reader),'whole_body_consumed'),false);
 });

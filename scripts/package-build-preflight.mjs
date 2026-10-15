@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {preflightPackageBuild} from './package-build.mjs';
-export {inspectPackageInputs, inspectPackageAncestry, inspectPackageExecutionInputs, validatePackageExecutionRoles, inspectPackageRuntime, inspectPackageBrowser, preflightPackageBuild, requirePackagePreflight} from './package-build.mjs';
+export {inspectPackageInputs, inspectPackageAncestry, inspectPackageExecutionInputs, inspectPackageRuntime, inspectPackageBrowser, preflightPackageBuild, requirePackagePreflight} from './package-build.mjs';
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const options = {}, args = process.argv.slice(2);

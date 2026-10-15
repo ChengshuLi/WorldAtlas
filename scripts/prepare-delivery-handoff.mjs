@@ -904,9 +904,8 @@ function appendPackageReadPaths(original, paths) {
 // still checks every registry/ledger/rebind/patch/envelope join and package role.
 export function resolveFinalizeConfig(config, reader) {
   if (!Object.hasOwn(config, 'composition')) return config;
-  const keys = ['version', 'selector', 'package_inputs', 'composition', 'rebind',
-    'preparation_allowance', 'new_prefix', 'sidecar_output'];
-  need(config.version === 1 && same(Object.keys(config).filter(key => key !== 'restored_read_roles').sort(), keys.sort()),
+  const keys = ['version', 'selector', 'package_inputs', 'composition', 'rebind', 'new_prefix', 'sidecar_output'];
+  need(config.version === 1 && same(Object.keys(config).filter(key => !['restored_read_roles', 'preparation_allowance'].includes(key)).sort(), keys.sort()),
     'Compact finalization requires exact locators and cannot mix full pins or an existing sidecar');
   need(config.composition?.path && path.posix.basename(config.composition.path) === 'selected-ledger.json',
     'Modern composition requires the committed selected-ledger.json product');

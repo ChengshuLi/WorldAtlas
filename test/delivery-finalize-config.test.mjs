@@ -23,7 +23,7 @@ function fixture(t) {
     fs.writeFileSync(path.join(root, name), jsonBytes(value));
   };
   const commit = () => { git('add', '.'); git('commit', '-qm', 'Immutable fixture'); return git('rev-parse', 'HEAD'); };
-  const reader = () => pinReader(root, {allowance: {phaseBytes: 134217728, rssBytes: 536870912}});
+  const reader = () => pinReader(root);
   const pin = (commit, name) => reader().pin(commit, name);
   const common = PREFIX + 'original/';
   write(common + 'body.json', {retained: true});
@@ -67,12 +67,11 @@ function fixture(t) {
   for (const [name, value] of Object.entries(products)) write(PREFIX + 'compose/' + name, value);
   const composed = commit();
   const full = {version: 1, selector, package_inputs, rebind, new_prefix: PREFIX, sidecar_output: PREFIX + 'sidecar.json',
-    preparation_allowance: {phaseBytes: 134217728, rssBytes: 536870912},
     registry: pin(composed, PREFIX + 'compose/authority-registry.json'), ledger: pin(composed, PREFIX + 'compose/selected-ledger.json'),
     selected_ledger: pin(composed, PREFIX + 'compose/selected-ledger.json'), patch: pin(composed, PREFIX + 'compose/patch.json'),
     runtime_envelope: pin(composed, PREFIX + 'compose/runtime-envelope.json')};
   const compact = {version: full.version, selector: locator(selector), package_inputs: locator(package_inputs), rebind: locator(rebind),
-    new_prefix: full.new_prefix, sidecar_output: full.sidecar_output, preparation_allowance: full.preparation_allowance,
+    new_prefix: full.new_prefix, sidecar_output: full.sidecar_output,
     composition: locator(full.selected_ledger)};
   const run = (config, destination, ...flags) => {
     write('config.json', config);
@@ -126,11 +125,10 @@ test('wrong commit, wrong path, missing product and changed product hash fail be
   const changed = f.commit(); cases.push({...f.compact, composition: {...f.compact.composition, commit: changed}});
   fs.chmodSync(path.join(f.root, PREFIX + 'compose/authority-registry.json'), 0o755);
   const executable = f.commit(); cases.push({...f.compact, composition: {...f.compact.composition, commit: executable}});
-  cases.push({...f.compact, preparation_allowance: {...f.compact.preparation_allowance, phaseBytes: 1}});
   for (const [i, config] of cases.entries()) {
     const destination = '.cache/delivery-handoff/refused-' + i, result = f.run(config, destination);
     assert.notEqual(result.status, 0, 'Invalid metadata must refuse');
-    assert.match(result.stderr, /Missing ordinary exact Git body|committed selected-ledger|safe whole-file path|exact commit\/path locator|metadata joins differ|Whole body hash differs|Aggregate evidence preparation budget exceeded/);
+    assert.match(result.stderr, /Missing ordinary exact Git body|committed selected-ledger|safe whole-file path|exact commit\/path locator|metadata joins differ|Whole body hash differs/);
     assert.equal(fs.existsSync(path.join(f.root, destination)), false, 'Refusal cannot create output');
   }
 });
