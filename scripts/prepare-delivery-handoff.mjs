@@ -701,7 +701,7 @@ export function composeAuthorities(config, reader) {
   return {'authority-registry.json': jsonBytes(registry), 'composed-original-ledger.json': jsonBytes(ledger)};
 }
 
-export function packageProjection(config, reader) {
+export function packageProjection(config, reader, acceptedRegistry = null) {
   const registry = reader.json(config.registry), ledger = reader.json(config.ledger);
   const normalized = normaliseRetainedRepairLedger(ledger, registry);
   const roles = new Map();
@@ -713,8 +713,23 @@ export function packageProjection(config, reader) {
     if (!roles.get(pin.path).roles.includes(role)) roles.get(pin.path).roles.push(role);
   }
   need(safe(config.new_prefix.slice(0, -1)) && config.new_prefix.endsWith('/'), 'Explicit new authority prefix required');
+  // Finalize supplies the registry authenticated through the original selector.
+  // Standalone package and initial legacy finalization retain prefix selection.
+  let incoming = registry.entries.filter(e => e.source_authority.path.startsWith(config.new_prefix));
+  if (acceptedRegistry !== null) {
+    need(acceptedRegistry?.version === 1 && acceptedRegistry.kind === 'retained-rule-authority-registry-v1'
+      && Array.isArray(acceptedRegistry.entries) && acceptedRegistry.entries.length > 0,
+    'Complete accepted authority registry required');
+    const inherited = new Set();
+    for (const entry of acceptedRegistry.entries) {
+      need(hex(entry?.authority_sha256, 64) && !inherited.has(entry.authority_sha256), 'Duplicate or invalid accepted authority identity');
+      inherited.add(entry.authority_sha256);
+      need(same(normalized.authorities.get(entry.authority_sha256) ?? null, entry), 'Inherited authority removed or changed');
+    }
+    incoming = registry.entries.filter(entry => !inherited.has(entry.authority_sha256));
+  }
   let added = 0;
-  for (const entry of registry.entries.filter(e => e.source_authority.path.startsWith(config.new_prefix))) {
+  for (const entry of incoming) {
     added++; add(entry.rule_preimage, 'authority rule preimage'); add(entry.source_authority, 'authority binding');
     const binding = reader.json(entry.source_authority);
     if (binding.kind === 'source-target-native-custody-v1') {
@@ -825,17 +840,29 @@ export function finalizeDelivery(config, reader) {
   need(typeof config.new_prefix === 'string' && config.new_prefix.endsWith('/')
     && safe(config.new_prefix.slice(0, -1)), 'Exact owned output prefix required');
   const originalSelector = reader.read(config.selector), selection = JSON.parse(originalSelector);
-  let generatedSidecar;
+  let generatedSidecar, prior, acceptedRegistry = null;
+  if (selection.additive_release !== undefined || config.sidecar_output !== undefined) {
+    const hook = selection.additive_release;
+    need(hook && safe(hook.path), 'Original cumulative selector hook required');
+    const priorPin = reader.pin(config.selector.commit, hook.path);
+    need(priorPin.bytes === hook.bytes && priorPin.sha256 === hook.sha256, 'Original selected sidecar differs');
+    prior = reader.json(priorPin);
+    const base = {...selection}; delete base.additive_release;
+    need(prior.version === 2 && prior.kind === 'retained-native-additive-selection-v2' && same(prior.base_selection, base),
+      'Original selected base differs');
+    const pin = prior.authority_registry;
+    need(pin && Number.isSafeInteger(pin.bytes) && pin.bytes > 0 && typeof reader.budget?.add === 'function',
+      'Complete accepted registry pin and shared preparation budget required');
+    // Retain parse, canonical comparison and identity-map carry before parsing.
+    // The reader independently charges/authenticates the complete encoded body.
+    for (let i = 0; i < 12; i++) reader.budget.add({bytes: pin.bytes});
+    acceptedRegistry = reader.json(pin);
+  }
   if (config.sidecar_output !== undefined) {
     need(!config.sidecar && safe(config.sidecar_output) && path.posix.dirname(config.sidecar_output) + '/' === config.new_prefix
       && !['ownership-selection.json', 'package-inputs.json', 'package-roles.json', 'selected-delivery-expectations.json', 'preparation.json', 'restored-read-roles']
         .includes(path.posix.basename(config.sidecar_output)) && config.patch && config.runtime_envelope,
     'Fresh flat owned sidecar output and committed patch/envelope required');
-    const hook = selection.additive_release, priorPin = reader.pin(config.selector.commit, hook?.path);
-    need(priorPin.bytes === hook.bytes && priorPin.sha256 === hook.sha256, 'Original selected sidecar differs');
-    const prior = reader.json(priorPin), base = {...selection}; delete base.additive_release;
-    need(prior.version === 2 && prior.kind === 'retained-native-additive-selection-v2' && same(prior.base_selection, base),
-      'Original selected base differs');
     generatedSidecar = jsonBytes({...prior, authority_registry: config.registry, runtime_envelope: config.runtime_envelope,
       logical_asset_map: {...prior.logical_asset_map, ledger: config.selected_ledger, patch: config.patch}});
     // This is a generated output identity, never a fabricated future input pin.
@@ -877,7 +904,7 @@ export function finalizeDelivery(config, reader) {
   }
   const selector = finalizedSelection(originalSelector, sidecar, config.sidecar);
   const outputs = packageProjection({...config, outer_roles: [...Object.values(assets), sidecar.runtime_envelope,
-    ...(!generatedSidecar ? [config.sidecar] : [])]}, reader);
+    ...(!generatedSidecar ? [config.sidecar] : [])]}, reader, acceptedRegistry);
   const projection = JSON.parse(outputs['package-roles.json']);
   if (generatedSidecar) {
     projection.paths.push({...config.sidecar, roles: ['generated final sidecar']});
