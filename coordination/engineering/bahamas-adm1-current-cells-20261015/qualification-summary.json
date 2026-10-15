@@ -1,0 +1,88 @@
+{
+  "version": 1,
+  "kind": "actual-original-source-target-native-qualification-summary",
+  "accepted_selection_baseline": "866c42b854910f17a80427dac19b2c850cd68093",
+  "original_candidate_patch_commit": "0b7a0a7b361dcdd9eb107571b5dee5125bd2ea69",
+  "input_commit": "446a9a0050d6b96c520e2a94358b6228d1d00605",
+  "groups": [
+    {
+      "id": "land30",
+      "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-land30-authority-001",
+      "qualified_cells": 34304,
+      "components": 30,
+      "rule_sha256": "7e9c316e4f086cd8c1b0db60053b8c4f636c8499dd7a66037545b7220306683a",
+      "actual_observation": {
+        "elapsed_seconds": 7.059182999999999,
+        "charged_phase_bytes": 313943153,
+        "allowance": {
+          "phaseBytes": 536870912,
+          "rssBytes": 536870912
+        },
+        "normalized_node_lifetime_peak_rss_bytes": 295649280,
+        "qualified_cells": 34304,
+        "limits": [
+          "Original source/physical producers are not replayed.",
+          "Constructor qualification is not actual current-owner-zero or final selected-output acceptance."
+        ]
+      },
+      "actual_exit": {
+        "exit_code": 0,
+        "started_utc": "2026-10-15T04:54:11.050569+00:00",
+        "ended_utc": "2026-10-15T04:54:19.426172+00:00",
+        "elapsed_seconds": 8.374905833,
+        "config_sha256": "2f0c4106c72152daf36f84c4006eaaf468fdcaeb44c7c94960ad76a45ef8be45",
+        "complete_prospective_bytes": 424837868,
+        "bound_note": "Reuses complete diagnostic bound including unused diagnostic-trace cushion; authority outputs remain within the same original4MiB reserve.",
+        "phase_rss_request_bytes": 536870912,
+        "operating_limit": "120-second standard OS alarm; no external peak or aggregate process-tree enforcement claimed"
+      }
+    },
+    {
+      "id": "mixed2",
+      "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-mixed2-authority-001",
+      "qualified_cells": 4262,
+      "components": 2,
+      "rule_sha256": "7148b990af2574e8ee2de005ca61ad47cf16617cca1eea0f14e7d8e9e276bfc6",
+      "actual_observation": {
+        "elapsed_seconds": 6.577856709,
+        "charged_phase_bytes": 307647889,
+        "allowance": {
+          "phaseBytes": 536870912,
+          "rssBytes": 536870912
+        },
+        "normalized_node_lifetime_peak_rss_bytes": 252133376,
+        "qualified_cells": 4262,
+        "limits": [
+          "Original source/physical producers are not replayed.",
+          "Constructor qualification is not actual current-owner-zero or final selected-output acceptance."
+        ]
+      },
+      "actual_exit": {
+        "exit_code": 0,
+        "started_utc": "2026-10-15T04:54:19.432385+00:00",
+        "ended_utc": "2026-10-15T04:54:27.198865+00:00",
+        "elapsed_seconds": 7.766481749999999,
+        "config_sha256": "efb9edfc88a980e2d05aa3a4c66ed6d6831407e3c6fe12c9b298930b32eaf488",
+        "complete_prospective_bytes": 432222400,
+        "bound_note": "Reuses complete diagnostic bound including unused diagnostic-trace cushion; authority outputs remain within the same original4MiB reserve.",
+        "phase_rss_request_bytes": 536870912,
+        "operating_limit": "120-second standard OS alarm; no external peak or aggregate process-tree enforcement claimed"
+      }
+    }
+  ],
+  "qualified_cells": 38566,
+  "source_owners": 32,
+  "qualified_original_class_cells": {
+    "land": 38559,
+    "inland_water": 7
+  },
+  "diagnostic_held_cells": 0,
+  "accepted_repair_credit": 0,
+  "source_and_physical_producer_replays": 0,
+  "limits": [
+    "Actual source/native qualification is not current-owner-zero, selected conservation, integration or acceptance.",
+    "All nine whole-target physical issues, all32 exterior-context geometries, original metadata anomaly, parent/reference limits remain. Their native veto effects are empty only for these exact tested centres.",
+    "Country-contact observations remain scoped to retained applicable source families; no jurisdiction, global source absence or positive NE coverage is inferred.",
+    "The initially combined768MiB diagnostic was refused before scientific reads. Two complete whole-owner requests were separately admitted; each charged all complete source/physical/roster/latitude inputs."
+  ]
+}

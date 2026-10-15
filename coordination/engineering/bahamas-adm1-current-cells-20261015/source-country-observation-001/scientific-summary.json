@@ -1,0 +1,1198 @@
+{
+  "version": 1,
+  "kind": "derived-public-scientific-observation-summary",
+  "derivation": "A publication summary of exact retained source/country result and distinct review. This is not the raw result, a new scientific execution or a qualification artifact. Original bytes/hashes remain unchanged.",
+  "issue": "https://github.com/ChengshuLi/WorldAtlas/issues/1947",
+  "programme": {
+    "commit": "b73fdbb1b0e243b773514ea46aaced496a63028f",
+    "method_path": "src/native-grid.js",
+    "method_sha256": "7c93720e68fb3a9d584bcd9ba5c7f111b836d99eb3d133b86fdd6d72efe50d48",
+    "selected_interval_vintage": "eef3694c364471482633129ef7968a2bdd3b7128",
+    "latitude_rule": "Exact ideal-rational native longitude and complete retained normative latitude array; no projection, fitting or latitude regeneration."
+  },
+  "scope": {
+    "whole_BHS_original_features": 32,
+    "whole_foreign_original_features": 3473,
+    "foreign_families": [
+      "gb:CUB:ADM1",
+      "gb:CUB:ADM2",
+      "gb:USA:ADM1",
+      "gb:USA:ADM2"
+    ],
+    "whole_NE_country_features": 258,
+    "ledger_members": 3763,
+    "selected_BHS": 32,
+    "selected_foreign": 14,
+    "selected_country_references": 4,
+    "selected_reference_codes": [
+      "BHS",
+      "CUB",
+      "USA",
+      "UMI"
+    ],
+    "planned_sequential_witness_calls": 50,
+    "stock_scan_blocks_per_call": 3,
+    "maximum_stock_polygon_scans": 150,
+    "full_geometry_parts_retained": true,
+    "physical_support_operator": null,
+    "requested_cells": 38566,
+    "requested_rows": 3831,
+    "requested_intervals": 12482,
+    "original_BHS_owners": 32,
+    "foreign_absence_scope": "Only retained CUB ADM1/ADM2 and USA ADM1/ADM2 originals plus the whole258 NE reference collection/vintage; not all368 original families or global national/legal approval."
+  },
+  "observations": {
+    "own_original_interior": 38566,
+    "other_BHS_original_contacts": 0,
+    "foreign_original_contacts_in_retained_scope": 0,
+    "foreign_NE_reference_contacts": 0,
+    "boundary_line_point_contacts": 0,
+    "own_NE_BHS_interior": 9467,
+    "own_NE_BHS_interior_inherited_queue_classes": {
+      "land": 9460,
+      "inland-water": 7
+    },
+    "only_own_NE_BHS_interior_missing": 29099,
+    "unknown_applicable_scope_cells": 0,
+    "inherited_queue_classes": {
+      "land": 38559,
+      "inland-water": 7
+    },
+    "exhaustive_partitions": [
+      {
+        "flags": [
+          "own-reference-interior-missing"
+        ],
+        "scope": "completed-conservative-applicable-retained-scope",
+        "cells": 29099,
+        "inherited_queue_physical_classes": {
+          "\"land\"": 29099
+        }
+      },
+      {
+        "flags": [],
+        "scope": "completed-conservative-applicable-retained-scope",
+        "cells": 9467,
+        "inherited_queue_physical_classes": {
+          "\"land\"": 9460,
+          "\"inland-water\"": 7
+        }
+      }
+    ],
+    "NE_missing_meaning": "A reference-data observation, not automatic veto, foreign-country membership or qualification. No physical classification follows from inherited queue labels."
+  },
+  "scope_interpretation": {
+    "all50_whole_literal_operands_completed": true,
+    "all3763_original_members_bound_and_original_ordinals_complete": true,
+    "all32_BHS_originals_queried_at_all_requested_centres": true,
+    "nonselected_foreign_originals": 3459,
+    "nonselected_NE_references": 254,
+    "conditional_exclusion_basis": "Previously independently checked complete coordinate-envelope disjointness, conditional on each actual own-original interior without boundary/line/point effect. Every requested centre satisfies the condition; selected contacts are always retained.",
+    "explicit_zero_hit_products": "All14 selected foreign originals and three foreign NE references have completed zero-hit outputs/work, rather than missing results."
+  },
+  "preserved_context": {
+    "Grand_Cay": {
+      "owner": 9932,
+      "requested_cells": 188,
+      "own_source_interior": 188,
+      "own_NE_interior_missing": 188,
+      "limit": "Whole NE BHS reference omission remains explicit; no country assignment follows."
+    },
+    "Biminis": {
+      "owner": 9929,
+      "requested_cells": 585,
+      "own_source_interior": 585,
+      "own_NE_interior": 217,
+      "own_NE_interior_missing": 368,
+      "foreign_original_or_reference_contacts": 0,
+      "limit": "Whole original geometry retained; envelope candidates are not actual contacts."
+    },
+    "source_metadata_anomaly": "Original BHS metadata records boundarySource Haiti GeoPortal, licenseSource httpshttps and sourceURL //haiti.caribbeangeoportal.com/datasets/caribgeoportal. These literal anomalies are preserved, not corrected or upgraded to Bahamas official authority.",
+    "original_BHS_vintage": "09-09-2017 to24-08-2020",
+    "original_BHS_license": "Creative Commons Attribution4.0 International (CC BY4.0)",
+    "parents": "Corrected Biminis/Ragged parent bindings and open semantic review remain unchanged."
+  },
+  "source_attribution": {
+    "BHS_original": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BHS/ADM1/geoBoundaries-BHS-ADM1.geojson",
+    "foreign_original_products": "geoBoundaries CUB ADM1/ADM2 (recorded ODbL1.0), USA ADM1/ADM2 (recorded Public Domain); exact consumed bodies and hashes in immutable input bindings.",
+    "country_reference": "Whole retained Natural Earth country collection, decoded SHA256239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255; exact original identities remain ADM0_A3,ISO_A3,ADMIN,ordinal. UMI dependency and USA sovereignty are distinct."
+  },
+  "public_supporting_data": {
+    "cell_observations": {
+      "record_name": "bahamas-current-package-1947/actual-authority-inputs-001/source-country-cell-observations.jsonl",
+      "bytes": 18450011,
+      "sha256": "e4f22d9d9c435d8257e0ec4d0076c0f50199f58f8007f7d2c550c947709ee073"
+    },
+    "whole_target_physical_support": {
+      "record_name": "bahamas-current-package-1947/actual-authority-inputs-001/whole-target-support.json",
+      "bytes": 7129342,
+      "sha256": "3aec57bafa96e0d627864e58b510dae8ec71e84a9e6fc79b06f636251d8c0453",
+      "scope": "Separate source-relative whole32 physical result. Source/country review does not independently grant its support/qualification.",
+      "distinct_physical_review": {
+        "record_name": "bahamas-current-package-1947/physical-001/review/independent-actual-result-review.json",
+        "bytes": 159600,
+        "sha256": "ffa1ebed7925ad08c406adab0a00e2b91c592c02a835bc9149680f63aab60a54"
+      }
+    }
+  },
+  "original_exact_records": [
+    {
+      "record_name": "bahamas-current-package-1947/native-source-country-preparation/.cache/native-grid-candidates/bhs-source-country-001/result.json",
+      "bytes": 49723,
+      "sha256": "d929da6d46b682d28e6a8ee9571541c893d4af654398c79deec44f29e96d9c63"
+    },
+    {
+      "record_name": "bahamas-current-package-1947/native-source-country-preparation/plan-stricter960.json",
+      "bytes": 11157,
+      "sha256": "4715bef4c92e18fe3544b01f7995e34fff376f635c5fcaf7a7e2bba6eaa413cc"
+    },
+    {
+      "record_name": "bahamas-current-package-1947/native-source-country-preparation/actual-invocation-002.js.txt",
+      "bytes": 16281,
+      "sha256": "ab83d586e40bb541f75a5f8f011dd5f0c8dc7070810debf45244671786d84e29"
+    },
+    {
+      "record_name": "bahamas-current-package-1947/native-source-country-preparation/input-pins.json",
+      "bytes": 10237,
+      "sha256": "1b1d491be5842d781c256d4b5e73d8b2b7b6b17c189a1a6a37fcd6304696b095"
+    },
+    {
+      "record_name": "bahamas-current-package-1947/native-source-country-preparation/operand-ledger.json",
+      "bytes": 2247168,
+      "sha256": "6eee18e6e423cba87ec0d466efe7d15b176f7c6d9daa74a93e286b1d2a00f0dd"
+    },
+    {
+      "record_name": "bahamas-current-package-1947/native-source-country-preparation/interval-provenance.json",
+      "bytes": 1373078,
+      "sha256": "3d132cbc003d823279396fc9cef113f9c777c17c711d57347cb7bb68fab83fdb"
+    },
+    {
+      "record_name": "bahamas-current-package-1947/native-source-country-preparation/requested-rows.json",
+      "bytes": 321442,
+      "sha256": "3f5dae63d532153dc7f3cf45d410fc5bed3823655c5b528934baf9189170f4bb"
+    },
+    {
+      "record_name": "bahamas-current-package-1947/native-source-country-preparation/static-resource-schedule.json",
+      "bytes": 48776,
+      "sha256": "5fc53bc81e63a865993eb3498272e969840fea85e8b6b8a784a99320f324a754"
+    },
+    {
+      "record_name": "bahamas-current-package-1947/native-source-country-preparation/independent-review/review.md",
+      "bytes": 4059,
+      "sha256": "4fc695d60c93eb310b4ad546f1362f6ad32c96cc142b4a0695308c39207fd6f6"
+    },
+    {
+      "record_name": "bahamas-current-package-1947/native-source-country-preparation/independent-review/review.json",
+      "bytes": 8203,
+      "sha256": "11c660cb3e590dc9a4fa0c0c4bd52a28d393640987f1dc0e1caf589da152ccca"
+    },
+    {
+      "record_name": "bahamas-current-package-1947/native-source-country-preparation/independent-review/static-input-checks.json",
+      "bytes": 29324,
+      "sha256": "43ad4136b7c0a6d7663361136d0e89cfd90c638fd015ad8f9ca8737a66d27fe7"
+    },
+    {
+      "record_name": "bahamas-current-package-1947/native-source-country-preparation/independent-review/actual-review.md",
+      "bytes": 4454,
+      "sha256": "8412b59e19fc9038aa684efed5eaf9aebd6d960b9503ef3c7dc19eeb54b306e8"
+    },
+    {
+      "record_name": "bahamas-current-package-1947/native-source-country-preparation/independent-review/actual-review.json",
+      "bytes": 9884,
+      "sha256": "c2730941a271b1951160f99411dbbb4c0909b0a630b3fce38f0f986b092ac4a4"
+    },
+    {
+      "record_name": "bahamas-current-package-1947/native-source-country-preparation/independent-review/actual-result-checks.json",
+      "bytes": 3219,
+      "sha256": "4e2fafff94ef98964d39b3e225e49da838b6e5983b17a9eaf6ff8bfc6e77ef7a"
+    }
+  ],
+  "immutable_input_bindings": [
+    {
+      "commit": "b73fdbb1b0e243b773514ea46aaced496a63028f",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-BHS-ADM1-000.bin.gz",
+      "git_blob_oid": "8751156d0d1a445249d378a9041de2b2d282a8bd",
+      "bytes": 192293,
+      "sha256": "441cd71cd67ff73714d1ca664be887283e566bf073dfe7923ffd25002b99977d",
+      "decoded_bytes": 915204,
+      "decoded_sha256": "1e511249ca9108a7c3dcb0e71b6ca2580cf5e28da857e5af9f16f82b71ec2c64"
+    },
+    {
+      "commit": "eef3694c364471482633129ef7968a2bdd3b7128",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CUB-ADM1-000.bin.gz",
+      "git_blob_oid": "ad8a2807c098b067c847f06360550d39222aa138",
+      "bytes": 171156,
+      "sha256": "ce8ea8b4edbd8c70a8c9eafe0e5c36c53051278e6f5ea56cce8cda87d2ab2492",
+      "decoded_bytes": 557992,
+      "decoded_sha256": "c146dae6fe44c3d28e0025df1b4fa348caea41de6c688586144d02577e255ecf"
+    },
+    {
+      "commit": "eef3694c364471482633129ef7968a2bdd3b7128",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CUB-ADM2-000.bin.gz",
+      "git_blob_oid": "9707bfe65fccdddef9d8e3a19183587885d28cad",
+      "bytes": 280212,
+      "sha256": "08a99180bc79433b33b79b1d1b78ab27a2ecdef68ef04e6f0871267e2842c405",
+      "decoded_bytes": 922009,
+      "decoded_sha256": "1673cb709da1d112b9e81f4a0c105ccfb6c9edcf3f72c392b28069b74d801d45"
+    },
+    {
+      "commit": "eef3694c364471482633129ef7968a2bdd3b7128",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-USA-ADM1-000.bin.gz",
+      "git_blob_oid": "f482da25b1b259e9726dd6aade4b8a1a381f3e3f",
+      "bytes": 1702347,
+      "sha256": "a1059264c0f20ad40a50fb51a19c49182bfd9fb012c591a1a6e8a971340ed43b",
+      "decoded_bytes": 5469814,
+      "decoded_sha256": "9d7a32244a5c3c2868d039355db2fdd9eb903ef255cfda128decd20bedc0dfbe"
+    },
+    {
+      "commit": "eef3694c364471482633129ef7968a2bdd3b7128",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-USA-ADM2-000.bin.gz",
+      "git_blob_oid": "05f3069c9ef0686e6ff2e74753ea855bc0077f98",
+      "bytes": 2476897,
+      "sha256": "fe2128f4a5c164c9a9f58a6321af446782f6a689e4d5d9452e5967047c1958c9",
+      "decoded_bytes": 7938450,
+      "decoded_sha256": "16249e8d795aaded6a72910a8c72115a073814b25ee902d61ccc9a9490c6641a"
+    },
+    {
+      "bytes": 4719659,
+      "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+      "decoded_bytes": 13287234,
+      "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255",
+      "commit": "eef3694c364471482633129ef7968a2bdd3b7128",
+      "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+      "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz"
+    },
+    {
+      "bytes": 1851757,
+      "commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+      "decoded_bytes": 2097328,
+      "decoded_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23",
+      "git_blob_oid": "de6905e162dc031b1b93248fae91190c39c4ad53",
+      "mode": "100644",
+      "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+      "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147"
+    },
+    {
+      "bytes": 106822,
+      "sha256": "bd1ef781774408c373dd36dee26546a196ae4d3fb5a2fe693ca7613389191864",
+      "record_name": "bahamas-current-package-1947/source-stage/whole32-identity-joins.json"
+    },
+    {
+      "bytes": 101402,
+      "sha256": "778986fd3738cec2384aacbff8a77381ed49ed730098b5fa5836311a1bd8c70c",
+      "record_name": "bahamas-current-package-1947/source-stage/whole32-parent-context.json"
+    },
+    {
+      "bytes": 2350442,
+      "sha256": "10348d6cc032e0f6df463b167aeaebc9c25916196194c724c3bb7e923137e28f",
+      "record_name": "bahamas-current-package-1947/source-stage/whole32-target-stage-inputs.json"
+    },
+    {
+      "bytes": 5163,
+      "sha256": "f5a5a83a384a221127464760dbffd51c65d56c609feacf9fa5531fc40395aea2",
+      "record_name": "bahamas-current-package-1947/source-stage/route-diagnosis/static-input-scope-and-existing-native-route.json"
+    },
+    {
+      "bytes": 10015,
+      "sha256": "3eb0b6d85df2b547f27cb6dc3661e1edb463d9ccc89885312caa3b73ebfb4079",
+      "record_name": "bahamas-current-package-1947/source-stage/route-diagnosis/static-foreign-original-product-envelopes.json"
+    },
+    {
+      "bytes": 24437,
+      "sha256": "f3b42fdd8eada0d43a4a23494cb286f2d247b4286ccd931f57c6a9f0999cfb87",
+      "record_name": "bahamas-current-package-1947/source-stage/route-diagnosis/static-country-and-foreign-scope.json"
+    },
+    {
+      "bytes": 1338,
+      "sha256": "b66732450b7ce2f39550058ea1073036c4bf3419f86ca3a58f105aba0bfed0c4",
+      "record_name": "bahamas-current-package-1947/source-stage/route-diagnosis/reference-source-registry.json"
+    },
+    {
+      "bytes": 72890,
+      "sha256": "dc35c2509fd17045f6fbe368aa3dcfda9008f3a24f335a834b51692261daaa33",
+      "record_name": "bahamas-current-package-1947/intervals/current-reconciliation-001/result.json"
+    },
+    {
+      "bytes": 733,
+      "sha256": "a84d188f1f5d6a3fcf73fe8e201ee6928a0ffe7046ba1fdb80e64957ab1d75ca",
+      "record_name": "bahamas-current-package-1947/intervals/current-reconciliation-001/remaining-block-026.json.gz"
+    },
+    {
+      "bytes": 63981,
+      "sha256": "bd0868a7bcad6a2a25a4dac5dc0a4dd5b4a4697fc27c62a671edeefa61fb17fd",
+      "record_name": "bahamas-current-package-1947/intervals/current-reconciliation-001/remaining-block-027.json.gz"
+    },
+    {
+      "bytes": 1589,
+      "sha256": "e5a2b49abb43696279efcb49ad556cf0f240f766622a01ef4dd5181194128441",
+      "record_name": "bahamas-current-package-1947/intervals/current-reconciliation-001/remaining-block-028.json.gz"
+    },
+    {
+      "bytes": 321442,
+      "sha256": "3f5dae63d532153dc7f3cf45d410fc5bed3823655c5b528934baf9189170f4bb",
+      "record_name": "bahamas-current-package-1947/native-source-country-preparation/requested-rows.json"
+    },
+    {
+      "bytes": 1373078,
+      "sha256": "3d132cbc003d823279396fc9cef113f9c777c17c711d57347cb7bb68fab83fdb",
+      "record_name": "bahamas-current-package-1947/native-source-country-preparation/interval-provenance.json"
+    },
+    {
+      "bytes": 2247168,
+      "sha256": "6eee18e6e423cba87ec0d466efe7d15b176f7c6d9daa74a93e286b1d2a00f0dd",
+      "record_name": "bahamas-current-package-1947/native-source-country-preparation/operand-ledger.json"
+    },
+    {
+      "bytes": 48776,
+      "sha256": "5fc53bc81e63a865993eb3498272e969840fea85e8b6b8a784a99320f324a754",
+      "record_name": "bahamas-current-package-1947/native-source-country-preparation/static-resource-schedule.json"
+    }
+  ],
+  "accepted_code_bindings": [
+    {
+      "commit": "b73fdbb1b0e243b773514ea46aaced496a63028f",
+      "git_blob_oid": "318d842ee999da746956968c9d7e58f9e00cb9e4",
+      "bytes": 1417,
+      "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3",
+      "path": "package.json"
+    },
+    {
+      "commit": "b73fdbb1b0e243b773514ea46aaced496a63028f",
+      "git_blob_oid": "736eb39fc9ee6cfd94a4524fa332d9852ea9b635",
+      "bytes": 36232,
+      "sha256": "7c93720e68fb3a9d584bcd9ba5c7f111b836d99eb3d133b86fdd6d72efe50d48",
+      "path": "src/native-grid.js"
+    },
+    {
+      "commit": "b73fdbb1b0e243b773514ea46aaced496a63028f",
+      "git_blob_oid": "7b6b996c295a18d3b4d52a2c1f3e23384b025f70",
+      "bytes": 9849,
+      "sha256": "227b982fac966fff5e55483c62ecb181defd55194b2946e31b7606574013f676",
+      "path": "scripts/native-ownership/native-preparation-guards.mjs"
+    }
+  ],
+  "operand_result_bindings": [
+    {
+      "name": "operand-001.json",
+      "source_id": "gb:BHS:ADM1:57655419B62229097939124",
+      "bytes": 66752,
+      "sha256": "ce732de736bc183f148ec54fe51d922fd81959edbb962685569f4e0a728beda4",
+      "counts": {
+        "cells": 1595,
+        "interior": 1595,
+        "boundary": 0,
+        "line": 0,
+        "point": 0
+      },
+      "original_ordinal": 0,
+      "role": "original-BHS-source"
+    },
+    {
+      "name": "operand-002.json",
+      "source_id": "gb:BHS:ADM1:57655419B82083755348588",
+      "bytes": 25337,
+      "sha256": "1952278cbd5f4592c16ebe5a2225fed19a57b35af10decf0d5e222021bbfb2e6",
+      "counts": {
+        "cells": 585,
+        "interior": 585,
+        "boundary": 0,
+        "line": 0,
+        "point": 0
+      },
+      "original_ordinal": 1,
+      "role": "original-BHS-source"
+    },
+    {
+      "name": "operand-003.json",
+      "source_id": "gb:BHS:ADM1:57655419B63031142172255",
+      "bytes": 78354,
+      "sha256": "92de3460d80951c5d5827ee212754070f736dc05897c38d43818409f88dd4cb7",
+      "counts": {
+        "cells": 1878,
+        "interior": 1878,
+        "boundary": 0,
+        "line": 0,
+        "point": 0
+      },
+      "original_ordinal": 2,
+      "role": "original-BHS-source"
+    },
+    {
+      "name": "operand-004.json",
+      "source_id": "gb:BHS:ADM1:57655419B62023626616016",
+      "bytes": 49162,
+      "sha256": "da50b54155457ef1bfaa01762bb196c294035f5b8c5f447c32df43c543a498e7",
+      "counts": {
+        "cells": 1166,
+        "interior": 1166,
+        "boundary": 0,
+        "line": 0,
+        "point": 0
+      },
+      "original_ordinal": 3,
+      "role": "original-BHS-source"
+    },
+    {
+      "name": "operand-005.json",
+      "source_id": "gb:BHS:ADM1:57655419B31009871091546",
+      "bytes": 23941,
+      "sha256": "0a836e4f821852194e0969da9302dd8894c61296d2eb95e848d8a697ab0c5def",
+      "counts": {
+        "cells": 551,
+        "interior": 551,
+        "boundary": 0,
+        "line": 0,
+        "point": 0
+      },
+      "original_ordinal": 4,
+      "role": "original-BHS-source"
+    },
+    {
+      "name": "operand-006.json",
+      "source_id": "gb:BHS:ADM1:57655419B6063467597350",
+      "bytes": 185129,
+      "sha256": "33b4157658fc6d624694a33e29bcd9493d673439cd6cf3208581306cc8046faf",
+      "counts": {
+        "cells": 4482,
+        "interior": 4482,
+        "boundary": 0,
+        "line": 0,
+        "point": 0
+      },
+      "original_ordinal": 5,
+      "role": "original-BHS-source"
+    },
+    {
+      "name": "operand-007.json",
+      "source_id": "gb:BHS:ADM1:57655419B10554343974074",
+      "bytes": 103044,
+      "sha256": "9181a593e5d7e10d9bbfb45b04dc420edb79aad4a8c6ec277f7e24555de2044f",
+      "counts": {
+        "cells": 2480,
+        "interior": 2480,
+        "boundary": 0,
+        "line": 0,
+        "point": 0
+      },
+      "original_ordinal": 6,
+      "role": "original-BHS-source"
+    },
+    {
+      "name": "operand-008.json",
+      "source_id": "gb:BHS:ADM1:57655419B18095522454644",
+      "bytes": 11885,
+      "sha256": "282eb805daa069f5c01e0b488ac102643a96864407c50826eeb7100a5e508314",
+      "counts": {
+        "cells": 257,
+        "interior": 257,
+        "boundary": 0,
+        "line": 0,
+        "point": 0
+      },
+      "original_ordinal": 7,
+      "role": "original-BHS-source"
+    },
+    {
+      "name": "operand-009.json",
+      "source_id": "gb:BHS:ADM1:57655419B78426284582077",
+      "bytes": 2730,
+      "sha256": "d4ffcfb9878a53c61b344af4575e051845cd60f3e6104f71bb3ec39c7730a92c",
+      "counts": {
+        "cells": 34,
+        "interior": 34,
+        "boundary": 0,
+        "line": 0,
+        "point": 0
+      },
+      "original_ordinal": 8,
+      "role": "original-BHS-source"
+    },
+    {
+      "name": "operand-010.json",
+      "source_id": "gb:BHS:ADM1:57655419B45053914770402",
+      "bytes": 37680,
+      "sha256": "68e775246a66705e0552805f7d1eb5f4a9fa6bc7f6bd152498bfecbd5281a2b5",
+      "counts": {
+        "cells": 886,
+        "interior": 886,
+        "boundary": 0,
+        "line": 0,
+        "point": 0
+      },
+      "original_ordinal": 9,
+      "role": "original-BHS-source"
+    },
+    {
+      "name": "operand-011.json",
+      "source_id": "gb:BHS:ADM1:57655419B55305756041974",
+      "bytes": 76348,
+      "sha256": "c8a6b13b22970ffe61410ad16ddf99b12d9a44aa8fbee82c896ad2d61795a118",
+      "counts": {
+        "cells": 1829,
+        "interior": 1829,
+        "boundary": 0,
+        "line": 0,
+        "point": 0
+      },
+      "original_ordinal": 10,
+      "role": "original-BHS-source"
+    },
+    {
+      "name": "operand-012.json",
+      "source_id": "gb:BHS:ADM1:57655419B87015583910143",
+      "bytes": 153644,
+      "sha256": "e6b9ffe11ceb79666480978123f4733d305d8b02806711cd4e811e0afa58882f",
+      "counts": {
+        "cells": 3714,
+        "interior": 3714,
+        "boundary": 0,
+        "line": 0,
+        "point": 0
+      },
+      "original_ordinal": 11,
+      "role": "original-BHS-source"
+    },
+    {
+      "name": "operand-013.json",
+      "source_id": "gb:BHS:ADM1:57655419B94344627065554",
+      "bytes": 9054,
+      "sha256": "de2acbcde774cd2c04f6dd0efe6c1862cb0134058f0ee5f957b8282be27ccbda",
+      "counts": {
+        "cells": 188,
+        "interior": 188,
+        "boundary": 0,
+        "line": 0,
+        "point": 0
+      },
+      "original_ordinal": 12,
+      "role": "original-BHS-source"
+    },
+    {
+      "name": "operand-014.json",
+      "source_id": "gb:BHS:ADM1:57655419B64917905581576",
+      "bytes": 7941,
+      "sha256": "eb555cd4c689eb2a1e220771149c9015d719d18d70674bffa791405b1096ed86",
+      "counts": {
+        "cells": 161,
+        "interior": 161,
+        "boundary": 0,
+        "line": 0,
+        "point": 0
+      },
+      "original_ordinal": 13,
+      "role": "original-BHS-source"
+    },
+    {
+      "name": "operand-015.json",
+      "source_id": "gb:BHS:ADM1:57655419B91019969534321",
+      "bytes": 66881,
+      "sha256": "22c5d6c8e2a913f1a2bccf02dc72e8ead46677e03fb9ca5629e304bcc164d250",
+      "counts": {
+        "cells": 1598,
+        "interior": 1598,
+        "boundary": 0,
+        "line": 0,
+        "point": 0
+      },
+      "original_ordinal": 14,
+      "role": "original-BHS-source"
+    },
+    {
+      "name": "operand-016.json",
+      "source_id": "gb:BHS:ADM1:57655419B81962321006014",
+      "bytes": 31774,
+      "sha256": "5c6c23c299eddc0423b8dff45e6f48339236a1f1d71758eea1a684f0b1513ad3",
+      "counts": {
+        "cells": 742,
+        "interior": 742,
+        "boundary": 0,
+        "line": 0,
+        "point": 0
+      },
+      "original_ordinal": 15,
+      "role": "original-BHS-source"
+    },
+    {
+      "name": "operand-017.json",
+      "source_id": "gb:BHS:ADM1:57655419B2318826838910",
+      "bytes": 81640,
+      "sha256": "db7957c27a70403e1988184c8809b763b805ec5b42f9850dd5727dde63c2078a",
+      "counts": {
+        "cells": 1958,
+        "interior": 1958,
+        "boundary": 0,
+        "line": 0,
+        "point": 0
+      },
+      "original_ordinal": 16,
+      "role": "original-BHS-source"
+    },
+    {
+      "name": "operand-018.json",
+      "source_id": "gb:BHS:ADM1:57655419B49483307836090",
+      "bytes": 41249,
+      "sha256": "8552c36aa40d94b19d30044b0ccac87ce37d10739b60f628a2fe2603d602ccb4",
+      "counts": {
+        "cells": 973,
+        "interior": 973,
+        "boundary": 0,
+        "line": 0,
+        "point": 0
+      },
+      "original_ordinal": 17,
+      "role": "original-BHS-source"
+    },
+    {
+      "name": "operand-019.json",
+      "source_id": "gb:BHS:ADM1:57655419B31239819863643",
+      "bytes": 11108,
+      "sha256": "4d245d32023eaca09043e40faa39afd8bdf2faf8f4550b0666aab8076f83d338",
+      "counts": {
+        "cells": 238,
+        "interior": 238,
+        "boundary": 0,
+        "line": 0,
+        "point": 0
+      },
+      "original_ordinal": 18,
+      "role": "original-BHS-source"
+    },
+    {
+      "name": "operand-020.json",
+      "source_id": "gb:BHS:ADM1:57655419B38120742943128",
+      "bytes": 11019,
+      "sha256": "2f85be1103646b75e334a77e453b21c69eb2d2802b3057bfc22709b6b3f60c51",
+      "counts": {
+        "cells": 236,
+        "interior": 236,
+        "boundary": 0,
+        "line": 0,
+        "point": 0
+      },
+      "original_ordinal": 19,
+      "role": "original-BHS-source"
+    },
+    {
+      "name": "operand-021.json",
+      "source_id": "gb:BHS:ADM1:57655419B75676267470758",
+      "bytes": 28824,
+      "sha256": "8b3ed5fa1e5a09e364473d645388578a10ae8591750097da5f2dae9aa3d67482",
+      "counts": {
+        "cells": 670,
+        "interior": 670,
+        "boundary": 0,
+        "line": 0,
+        "point": 0
+      },
+      "original_ordinal": 20,
+      "role": "original-BHS-source"
+    },
+    {
+      "name": "operand-022.json",
+      "source_id": "gb:BHS:ADM1:57655419B79428110843392",
+      "bytes": 65236,
+      "sha256": "a8fda3413b1be2f2173428db07867a27a294220b04e06617c7c400d79ef0e01a",
+      "counts": {
+        "cells": 1558,
+        "interior": 1558,
+        "boundary": 0,
+        "line": 0,
+        "point": 0
+      },
+      "original_ordinal": 21,
+      "role": "original-BHS-source"
+    },
+    {
+      "name": "operand-023.json",
+      "source_id": "gb:BHS:ADM1:57655419B63159467904865",
+      "bytes": 50358,
+      "sha256": "6ee1613af7e86ec1abc529f058eb648a228ac3c615adab7c16b063c6062cb889",
+      "counts": {
+        "cells": 1195,
+        "interior": 1195,
+        "boundary": 0,
+        "line": 0,
+        "point": 0
+      },
+      "original_ordinal": 22,
+      "role": "original-BHS-source"
+    },
+    {
+      "name": "operand-024.json",
+      "source_id": "gb:BHS:ADM1:57655419B2538538242492",
+      "bytes": 35549,
+      "sha256": "04071b17f8e027823f927a903408812b47c1a248dea7bf691697f1de13ac6271",
+      "counts": {
+        "cells": 834,
+        "interior": 834,
+        "boundary": 0,
+        "line": 0,
+        "point": 0
+      },
+      "original_ordinal": 23,
+      "role": "original-BHS-source"
+    },
+    {
+      "name": "operand-025.json",
+      "source_id": "gb:BHS:ADM1:57655419B98686837957667",
+      "bytes": 57815,
+      "sha256": "dafe3c75d3c6c6f5286839f94879dcc9af546866cf5ef5a73b3b99af145568da",
+      "counts": {
+        "cells": 1377,
+        "interior": 1377,
+        "boundary": 0,
+        "line": 0,
+        "point": 0
+      },
+      "original_ordinal": 24,
+      "role": "original-BHS-source"
+    },
+    {
+      "name": "operand-026.json",
+      "source_id": "gb:BHS:ADM1:57655419B42503330785161",
+      "bytes": 8033,
+      "sha256": "9379bd83743c408fb7c7081089c30a74fce73c6a34d1fe1850e51cea11925044",
+      "counts": {
+        "cells": 163,
+        "interior": 163,
+        "boundary": 0,
+        "line": 0,
+        "point": 0
+      },
+      "original_ordinal": 25,
+      "role": "original-BHS-source"
+    },
+    {
+      "name": "operand-027.json",
+      "source_id": "gb:BHS:ADM1:57655419B6447054147513",
+      "bytes": 13813,
+      "sha256": "dc0a4154bf0243309b1f31267f1d11ae3e8677b6579df6a3f97b3c7f8285e045",
+      "counts": {
+        "cells": 304,
+        "interior": 304,
+        "boundary": 0,
+        "line": 0,
+        "point": 0
+      },
+      "original_ordinal": 26,
+      "role": "original-BHS-source"
+    },
+    {
+      "name": "operand-028.json",
+      "source_id": "gb:BHS:ADM1:57655419B39711376309473",
+      "bytes": 30999,
+      "sha256": "1e2c59c20c38df39d5709bc6268fa974d7de4e4ea1d97e25ad19dabeb0fe3122",
+      "counts": {
+        "cells": 723,
+        "interior": 723,
+        "boundary": 0,
+        "line": 0,
+        "point": 0
+      },
+      "original_ordinal": 27,
+      "role": "original-BHS-source"
+    },
+    {
+      "name": "operand-029.json",
+      "source_id": "gb:BHS:ADM1:57655419B29435673895959",
+      "bytes": 136219,
+      "sha256": "93bbe880bf275eba8f05ff8426de0b8a9e123835cba92ef275fed732e06e9707",
+      "counts": {
+        "cells": 3289,
+        "interior": 3289,
+        "boundary": 0,
+        "line": 0,
+        "point": 0
+      },
+      "original_ordinal": 28,
+      "role": "original-BHS-source"
+    },
+    {
+      "name": "operand-030.json",
+      "source_id": "gb:BHS:ADM1:57655419B57652232258076",
+      "bytes": 15987,
+      "sha256": "72f1a0e5dfaa1ee36c65bec5e7618f0d52111f73e5e68375dfe8feb9a5b26991",
+      "counts": {
+        "cells": 357,
+        "interior": 357,
+        "boundary": 0,
+        "line": 0,
+        "point": 0
+      },
+      "original_ordinal": 29,
+      "role": "original-BHS-source"
+    },
+    {
+      "name": "operand-031.json",
+      "source_id": "gb:BHS:ADM1:57655419B1305095208594",
+      "bytes": 6956,
+      "sha256": "8cc30142497cd06f9c7b5b9a820d6ec1ceb6c11f6490ddbcfd874de0e04371e2",
+      "counts": {
+        "cells": 137,
+        "interior": 137,
+        "boundary": 0,
+        "line": 0,
+        "point": 0
+      },
+      "original_ordinal": 30,
+      "role": "original-BHS-source"
+    },
+    {
+      "name": "operand-032.json",
+      "source_id": "gb:BHS:ADM1:57655419B65085412826087",
+      "bytes": 100098,
+      "sha256": "bfd09f9625cf4dec891f4c46dd24a8b291f3d62529715c1913363247b3c10902",
+      "counts": {
+        "cells": 2408,
+        "interior": 2408,
+        "boundary": 0,
+        "line": 0,
+        "point": 0
+      },
+      "original_ordinal": 31,
+      "role": "original-BHS-source"
+    },
+    {
+      "name": "operand-033.json",
+      "source_id": "gb:CUB:ADM1:62585838B94185778840180",
+      "bytes": 1274,
+      "sha256": "b3071d8782a3052f3e97e0c6ae3ad459eafa858fcf297cc678ab50cac468aa06",
+      "counts": {
+        "cells": 0,
+        "interior": 0,
+        "boundary": 0,
+        "line": 0,
+        "point": 0
+      },
+      "original_ordinal": 2,
+      "role": "foreign-original-source"
+    },
+    {
+      "name": "operand-034.json",
+      "source_id": "gb:CUB:ADM1:62585838B76057111414661",
+      "bytes": 1276,
+      "sha256": "11ae66b74af8d7f85d1e5f4b451ccdda1a133261743fd3095ad75dbebe55e711",
+      "counts": {
+        "cells": 0,
+        "interior": 0,
+        "boundary": 0,
+        "line": 0,
+        "point": 0
+      },
+      "original_ordinal": 13,
+      "role": "foreign-original-source"
+    },
+    {
+      "name": "operand-035.json",
+      "source_id": "gb:CUB:ADM2:75667366B58223785748914",
+      "bytes": 1268,
+      "sha256": "bcb0aab33ca5c1f3cbc8d162faefdd69ec27ddf43290749fe5a97cd3723e41b1",
+      "counts": {
+        "cells": 0,
+        "interior": 0,
+        "boundary": 0,
+        "line": 0,
+        "point": 0
+      },
+      "original_ordinal": 15,
+      "role": "foreign-original-source"
+    },
+    {
+      "name": "operand-036.json",
+      "source_id": "gb:CUB:ADM2:75667366B39202767563909",
+      "bytes": 1264,
+      "sha256": "57da0c14413470411412095da463e109eed0b319632af96d269d933fc9225024",
+      "counts": {
+        "cells": 0,
+        "interior": 0,
+        "boundary": 0,
+        "line": 0,
+        "point": 0
+      },
+      "original_ordinal": 17,
+      "role": "foreign-original-source"
+    },
+    {
+      "name": "operand-037.json",
+      "source_id": "gb:CUB:ADM2:75667366B87842371437689",
+      "bytes": 1268,
+      "sha256": "284bfaaa5bd1f198ac8b258b6f53342d1292008533e66a23efa03f0afc5194f3",
+      "counts": {
+        "cells": 0,
+        "interior": 0,
+        "boundary": 0,
+        "line": 0,
+        "point": 0
+      },
+      "original_ordinal": 31,
+      "role": "foreign-original-source"
+    },
+    {
+      "name": "operand-038.json",
+      "source_id": "gb:CUB:ADM2:75667366B5928073683426",
+      "bytes": 1261,
+      "sha256": "a520f4e5fe906b6b8b486eef3d28b760717e59884385dd7e4b3f92e1d79478ef",
+      "counts": {
+        "cells": 0,
+        "interior": 0,
+        "boundary": 0,
+        "line": 0,
+        "point": 0
+      },
+      "original_ordinal": 58,
+      "role": "foreign-original-source"
+    },
+    {
+      "name": "operand-039.json",
+      "source_id": "gb:CUB:ADM2:75667366B5141529927700",
+      "bytes": 1261,
+      "sha256": "bb5b99b91f5650e8c3dd6989f0ef75fe511103be569d69843019ec3ae89df384",
+      "counts": {
+        "cells": 0,
+        "interior": 0,
+        "boundary": 0,
+        "line": 0,
+        "point": 0
+      },
+      "original_ordinal": 94,
+      "role": "foreign-original-source"
+    },
+    {
+      "name": "operand-040.json",
+      "source_id": "gb:CUB:ADM2:75667366B7074170291446",
+      "bytes": 1263,
+      "sha256": "741269ecd80835dffe55f392ba95675e59506e365546e244aa87de9f095f8c02",
+      "counts": {
+        "cells": 0,
+        "interior": 0,
+        "boundary": 0,
+        "line": 0,
+        "point": 0
+      },
+      "original_ordinal": 107,
+      "role": "foreign-original-source"
+    },
+    {
+      "name": "operand-041.json",
+      "source_id": "gb:CUB:ADM2:75667366B38669823996593",
+      "bytes": 1257,
+      "sha256": "e2a1834ebbe052676854c17d86f25c614daa1eed8e7cb78fbf67c958c1be4ccf",
+      "counts": {
+        "cells": 0,
+        "interior": 0,
+        "boundary": 0,
+        "line": 0,
+        "point": 0
+      },
+      "original_ordinal": 120,
+      "role": "foreign-original-source"
+    },
+    {
+      "name": "operand-042.json",
+      "source_id": "gb:CUB:ADM2:75667366B79362742658144",
+      "bytes": 1257,
+      "sha256": "441c1b5d358b784844a412c1668fa6e489c3c5bb4a04ccc5bbae453c385bd9b9",
+      "counts": {
+        "cells": 0,
+        "interior": 0,
+        "boundary": 0,
+        "line": 0,
+        "point": 0
+      },
+      "original_ordinal": 151,
+      "role": "foreign-original-source"
+    },
+    {
+      "name": "operand-043.json",
+      "source_id": "gb:USA:ADM1:66186276B65591139260314",
+      "bytes": 1289,
+      "sha256": "dfc2352921f5ce243f2e301737fee95ff42d7b074b16b318074dd3643d2b5849",
+      "counts": {
+        "cells": 0,
+        "interior": 0,
+        "boundary": 0,
+        "line": 0,
+        "point": 0
+      },
+      "original_ordinal": 9,
+      "role": "foreign-original-source"
+    },
+    {
+      "name": "operand-044.json",
+      "source_id": "gb:USA:ADM2:52423323B57626365826979",
+      "bytes": 1259,
+      "sha256": "e88bf1778ef1b9bfe6448236b4e40c38649805906f65c9b1ae13c6f6a4cce684",
+      "counts": {
+        "cells": 0,
+        "interior": 0,
+        "boundary": 0,
+        "line": 0,
+        "point": 0
+      },
+      "original_ordinal": 1871,
+      "role": "foreign-original-source"
+    },
+    {
+      "name": "operand-045.json",
+      "source_id": "gb:USA:ADM2:52423323B12945765623889",
+      "bytes": 1268,
+      "sha256": "2872aeb5d04e08045967b1aae236d0964fcdb3b946b294d6233ccff086725af6",
+      "counts": {
+        "cells": 0,
+        "interior": 0,
+        "boundary": 0,
+        "line": 0,
+        "point": 0
+      },
+      "original_ordinal": 1893,
+      "role": "foreign-original-source"
+    },
+    {
+      "name": "operand-046.json",
+      "source_id": "gb:USA:ADM2:52423323B83657020181819",
+      "bytes": 1269,
+      "sha256": "f3005f49d29aa44efd7cc68012499c13f0ff93132d3b81c98b5f1fb45e9cc59a",
+      "counts": {
+        "cells": 0,
+        "interior": 0,
+        "boundary": 0,
+        "line": 0,
+        "point": 0
+      },
+      "original_ordinal": 2298,
+      "role": "foreign-original-source"
+    },
+    {
+      "name": "operand-047.json",
+      "source_id": "NE:134:CUB",
+      "bytes": 1298,
+      "sha256": "0605582f7a47af000225fbaeccd9d1a531e274b62929157c7abefd3225132d6b",
+      "counts": {
+        "cells": 0,
+        "interior": 0,
+        "boundary": 0,
+        "line": 0,
+        "point": 0
+      },
+      "original_ordinal": 134,
+      "role": "NE-country-reference"
+    },
+    {
+      "name": "operand-048.json",
+      "source_id": "NE:154:USA",
+      "bytes": 1341,
+      "sha256": "d4b5c93daaee2f4c48484d86f3ef02d766236225b54388e34342ee284ac93213",
+      "counts": {
+        "cells": 0,
+        "interior": 0,
+        "boundary": 0,
+        "line": 0,
+        "point": 0
+      },
+      "original_ordinal": 154,
+      "role": "NE-country-reference"
+    },
+    {
+      "name": "operand-049.json",
+      "source_id": "NE:186:BHS",
+      "bytes": 389456,
+      "sha256": "40b180ec73cb8ec54b47000dbacc9181b48db2ed05279ddf1530a2695637e866",
+      "counts": {
+        "cells": 9467,
+        "interior": 9467,
+        "boundary": 0,
+        "line": 0,
+        "point": 0
+      },
+      "original_ordinal": 186,
+      "role": "NE-country-reference"
+    },
+    {
+      "name": "operand-050.json",
+      "source_id": "NE:204:UMI",
+      "bytes": 1311,
+      "sha256": "0a469866be8fad08b84da8956976a83c48a1b4e4a25854ba661deb838245f0fd",
+      "counts": {
+        "cells": 0,
+        "interior": 0,
+        "boundary": 0,
+        "line": 0,
+        "point": 0
+      },
+      "original_ordinal": 204,
+      "role": "NE-country-reference"
+    }
+  ],
+  "actual_operating_observation": {
+    "successful_attempt": 3,
+    "exit": 0,
+    "actual_calls": 50,
+    "elapsed_ms": 1408.509125,
+    "Node_lifetime_peak_bytes": 417923072,
+    "phase_and_RSS_limit_bytes": 1006632960,
+    "complete_prospective_budget_bytes": 960680078,
+    "output_bytes": 20535433,
+    "largest_output_file_bytes": 18450011,
+    "runtime_recorded_identity": {
+      "bytes": 121304480,
+      "sha256": "743cbaf12bd9323937b85f6297d8182b086526510c9f9c5875fa74d2aad9072d",
+      "version": "v24.19.0"
+    },
+    "limit": "Recorded internal child-process elapsed/normalized Node peak; no external or aggregate process-tree peak. No runtime rehash during publication preparation.",
+    "prior_attempts": "Attempt1 initial1GiB preflight refusal; attempt2 nested-headroom admission refusal; both before scientific input/native work. Exact logs/exit records preserved.",
+    "attempt_records": [
+      {
+        "record_name": "bahamas-current-package-1947/native-source-country-preparation/actual-001.stdout.log",
+        "bytes": 244,
+        "sha256": "a3d1c04eb30383de6954c7910afea46ce481b7c4109331d0c6cc2952183d1b64"
+      },
+      {
+        "record_name": "bahamas-current-package-1947/native-source-country-preparation/actual-001.stderr.log",
+        "bytes": 432,
+        "sha256": "6723794c6901ab9668731f429238b5a0eaf43c9a6e174998337db2e9d2f36567"
+      },
+      {
+        "record_name": "bahamas-current-package-1947/native-source-country-preparation/actual-002.stdout.log",
+        "bytes": 244,
+        "sha256": "b9368f91ff9c8f11a3fa25506c796f13363392356d4df3b0b032301dbca4cb97"
+      },
+      {
+        "record_name": "bahamas-current-package-1947/native-source-country-preparation/actual-002.stderr.log",
+        "bytes": 930,
+        "sha256": "132821d4d9be77f13f2be38add56673d620b06db6505710f708eab0622c5a4d9"
+      },
+      {
+        "record_name": "bahamas-current-package-1947/native-source-country-preparation/actual-003.stdout.log",
+        "bytes": 567,
+        "sha256": "97bc2953fe6c9f1b374a17c201b03fb9be3fb1bc914b0dd6a014341c29e703a0"
+      },
+      {
+        "record_name": "bahamas-current-package-1947/native-source-country-preparation/actual-003.stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "record_name": "bahamas-current-package-1947/native-source-country-preparation/actual-001-exit.json",
+        "bytes": 110,
+        "sha256": "e9b9ffc91e20e7813b0489424514b1170a8800d446089715619a07a9b96e3fa6"
+      },
+      {
+        "record_name": "bahamas-current-package-1947/native-source-country-preparation/actual-002-exit.json",
+        "bytes": 182,
+        "sha256": "ac2e3d2fae23347b87157541ae6a9a897d795c911a430c60bba3a985da777b93"
+      },
+      {
+        "record_name": "bahamas-current-package-1947/native-source-country-preparation/actual-003-exit.json",
+        "bytes": 215,
+        "sha256": "8b85711505f5fd5fab964df3332b9194bcda46562be87d5e71babfdfa9e7b9b2"
+      }
+    ]
+  },
+  "limits": [
+    "No physical support, scientific qualification, current-owner-zero authority, source/topology approval, assignment or repair credit granted by this observation/review.",
+    "No all368-family/global-original absence or legal national ownership inferred.",
+    "Raw result.limits retains inherited pre-execution preparation sentences; actual50 operand products and actual003 EXIT0 establish completed observation. Original raw bytes remain unchanged."
+  ],
+  "qualified_cells": 0,
+  "accepted_repair_credit": 0
+}

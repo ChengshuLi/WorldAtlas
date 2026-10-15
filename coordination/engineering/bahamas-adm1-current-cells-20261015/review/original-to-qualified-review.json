@@ -1,0 +1,1095 @@
+{
+  "version": 1,
+  "reviewer": "vn235_physical_input_review (distinct reviewer)",
+  "reviewed_utc": "2026-10-15T04:58:39.862191+00:00",
+  "decision": "PASS exact original-to-diagnostic-to-constructor qualification38566; downstream current-owner-zero and selected acceptance pending",
+  "scope": "One substantive read-only scientific result review; no native/source/GSHHG rerun, runtime rehash, tests, config packets or repo writes.",
+  "original_scope": {
+    "requested_cells": 38566,
+    "requested_rows": 3831,
+    "requested_intervals": 12482,
+    "owners": 32,
+    "semantic_classes": {
+      "mapped_land_support": 38559,
+      "mapped_inland_water_support": 7
+    },
+    "complete_physical_results": 32,
+    "physical_issues": 9,
+    "physical_exterior_contexts": 32,
+    "retained_physical_witnesses": 41
+  },
+  "independent_checks": [
+    "Original candidate keys and all32 exact owner/source/parent joins match both whole-owner requests. Canonical base geometries equal original measured selected targets.",
+    "Actual diagnostic requested/supported/decision rows and qualified constructor ledger rows equal the original exact scoped keys with no duplicate, missing, extra or reassigned cell.",
+    "All38559land+7water semantic class rows match original requested labels and target declarations; native qualification establishes the declared class support under the stock operator.",
+    "Both groups retain complete original family, whole32 stage and physical body, all9issues/32exterior witnesses. Grouping removes no input body or witness and creates no borrowed coverage.",
+    "Automatic source-evidence fields preserve scientific payload exactly; only four standard baseline fields derive from selector866c42b854910f17a80427dac19b2c850cd68093. Actual physical helper58ef8173 is bound; archived reproduction stays descriptive.",
+    "Same446a9a input pairs and same config hashes feed diagnostics and constructors. All actual quartet hashes, rule preimage/binding, component identities and ledger coverage reconcile.",
+    "Country-proof reuse remains descriptive, machine_consumed_role:false, and limited to the unchanged38566 owner/source keys or literal subsets; no automatic future-proof reuse."
+  ],
+  "groups": {
+    "land30": {
+      "owners": [
+        9902,
+        9903,
+        9904,
+        9905,
+        9906,
+        9908,
+        9909,
+        9910,
+        9911,
+        9912,
+        9913,
+        9915,
+        9916,
+        9917,
+        9918,
+        9919,
+        9920,
+        9921,
+        9922,
+        9923,
+        9924,
+        9925,
+        9926,
+        9927,
+        9928,
+        9929,
+        9930,
+        9931,
+        9932,
+        9933
+      ],
+      "cells": 34304,
+      "semantic_classes": {
+        "mapped_land_support": 34304
+      },
+      "targets": [
+        {
+          "owner": 9902,
+          "source_id": "gb:BHS:ADM1:57655419B10554343974074",
+          "source_index": 3088,
+          "semantic_classes": {
+            "mapped_land_support": 2480
+          },
+          "canonical_parent_id": "framework:province:central-andros:f69353e75c51"
+        },
+        {
+          "owner": 9903,
+          "source_id": "gb:BHS:ADM1:57655419B1305095208594",
+          "source_index": 3112,
+          "semantic_classes": {
+            "mapped_land_support": 137
+          },
+          "canonical_parent_id": "framework:province:spanish-wells:671814fe3fed"
+        },
+        {
+          "owner": 9904,
+          "source_id": "gb:BHS:ADM1:57655419B18095522454644",
+          "source_index": 3089,
+          "semantic_classes": {
+            "mapped_land_support": 257
+          },
+          "canonical_parent_id": "framework:province:central-eleuthera:06fd2d2d04d4"
+        },
+        {
+          "owner": 9905,
+          "source_id": "gb:BHS:ADM1:57655419B2318826838910",
+          "source_index": 3098,
+          "semantic_classes": {
+            "mapped_land_support": 1958
+          },
+          "canonical_parent_id": "framework:province:long-island:c109cd0e9c59"
+        },
+        {
+          "owner": 9906,
+          "source_id": "gb:BHS:ADM1:57655419B2538538242492",
+          "source_index": 3105,
+          "semantic_classes": {
+            "mapped_land_support": 834
+          },
+          "canonical_parent_id": "framework:province:north-eleuthera:b67b41adb767"
+        },
+        {
+          "owner": 9908,
+          "source_id": "gb:BHS:ADM1:57655419B31009871091546",
+          "source_index": 3086,
+          "semantic_classes": {
+            "mapped_land_support": 551
+          },
+          "canonical_parent_id": "framework:province:cat-island:b39f1f2401e1"
+        },
+        {
+          "owner": 9909,
+          "source_id": "gb:BHS:ADM1:57655419B31239819863643",
+          "source_index": 3100,
+          "semantic_classes": {
+            "mapped_land_support": 238
+          },
+          "canonical_parent_id": "framework:province:mayaguana:d1aa43e2d941"
+        },
+        {
+          "owner": 9910,
+          "source_id": "gb:BHS:ADM1:57655419B38120742943128",
+          "source_index": 3101,
+          "semantic_classes": {
+            "mapped_land_support": 236
+          },
+          "canonical_parent_id": "framework:province:moore-s-island:fa17e9a3942d"
+        },
+        {
+          "owner": 9911,
+          "source_id": "gb:BHS:ADM1:57655419B39711376309473",
+          "source_index": 3109,
+          "semantic_classes": {
+            "mapped_land_support": 723
+          },
+          "canonical_parent_id": "framework:province:south-abaco:728dd08b2e76"
+        },
+        {
+          "owner": 9912,
+          "source_id": "gb:BHS:ADM1:57655419B42503330785161",
+          "source_index": 3107,
+          "semantic_classes": {
+            "mapped_land_support": 163
+          },
+          "canonical_parent_id": "framework:province:rum-cay:d0c117758005"
+        },
+        {
+          "owner": 9913,
+          "source_id": "gb:BHS:ADM1:57655419B45053914770402",
+          "source_index": 3091,
+          "semantic_classes": {
+            "mapped_land_support": 886
+          },
+          "canonical_parent_id": "framework:province:crooked-island:967c80c9a355"
+        },
+        {
+          "owner": 9915,
+          "source_id": "gb:BHS:ADM1:57655419B55305756041974",
+          "source_index": 3092,
+          "semantic_classes": {
+            "mapped_land_support": 1829
+          },
+          "canonical_parent_id": "framework:province:east-grand-bahama:e16c6255204e"
+        },
+        {
+          "owner": 9916,
+          "source_id": "gb:BHS:ADM1:57655419B57652232258076",
+          "source_index": 3111,
+          "semantic_classes": {
+            "mapped_land_support": 357
+          },
+          "canonical_parent_id": "framework:province:south-eleuthera:e593524d2351"
+        },
+        {
+          "owner": 9917,
+          "source_id": "gb:BHS:ADM1:57655419B6063467597350",
+          "source_index": 3087,
+          "semantic_classes": {
+            "mapped_land_support": 4482
+          },
+          "canonical_parent_id": "framework:province:central-abaco:fa0579b18932"
+        },
+        {
+          "owner": 9918,
+          "source_id": "gb:BHS:ADM1:57655419B62023626616016",
+          "source_index": 3085,
+          "semantic_classes": {
+            "mapped_land_support": 1166
+          },
+          "canonical_parent_id": "framework:province:black-point:4f9658aa67ac"
+        },
+        {
+          "owner": 9919,
+          "source_id": "gb:BHS:ADM1:57655419B62229097939124",
+          "source_index": 3082,
+          "semantic_classes": {
+            "mapped_land_support": 1595
+          },
+          "canonical_parent_id": "framework:province:acklins:51914297927f"
+        },
+        {
+          "owner": 9920,
+          "source_id": "gb:BHS:ADM1:57655419B63031142172255",
+          "source_index": 3084,
+          "semantic_classes": {
+            "mapped_land_support": 1878
+          },
+          "canonical_parent_id": "framework:province:berry-islands:65ce2c04cab0"
+        },
+        {
+          "owner": 9921,
+          "source_id": "gb:BHS:ADM1:57655419B63159467904865",
+          "source_index": 3104,
+          "semantic_classes": {
+            "mapped_land_support": 1195
+          },
+          "canonical_parent_id": "framework:province:north-andros:b32f94bffc93"
+        },
+        {
+          "owner": 9922,
+          "source_id": "gb:BHS:ADM1:57655419B6447054147513",
+          "source_index": 3108,
+          "semantic_classes": {
+            "mapped_land_support": 304
+          },
+          "canonical_parent_id": "framework:province:san-salvador:d67bfb392349"
+        },
+        {
+          "owner": 9923,
+          "source_id": "gb:BHS:ADM1:57655419B64917905581576",
+          "source_index": 3095,
+          "semantic_classes": {
+            "mapped_land_support": 161
+          },
+          "canonical_parent_id": "framework:province:harbour-island:d07e4fc33438"
+        },
+        {
+          "owner": 9924,
+          "source_id": "gb:BHS:ADM1:57655419B65085412826087",
+          "source_index": 3113,
+          "semantic_classes": {
+            "mapped_land_support": 2408
+          },
+          "canonical_parent_id": "framework:province:west-grand-bahama:49a23238eea7"
+        },
+        {
+          "owner": 9925,
+          "source_id": "gb:BHS:ADM1:57655419B75676267470758",
+          "source_index": 3102,
+          "semantic_classes": {
+            "mapped_land_support": 670
+          },
+          "canonical_parent_id": "framework:province:new-providence:461547b304d6"
+        },
+        {
+          "owner": 9926,
+          "source_id": "gb:BHS:ADM1:57655419B78426284582077",
+          "source_index": 3090,
+          "semantic_classes": {
+            "mapped_land_support": 34
+          },
+          "canonical_parent_id": "framework:province:city-of-freeport:284913970797"
+        },
+        {
+          "owner": 9927,
+          "source_id": "gb:BHS:ADM1:57655419B79428110843392",
+          "source_index": 3103,
+          "semantic_classes": {
+            "mapped_land_support": 1558
+          },
+          "canonical_parent_id": "framework:province:north-abaco:6fc2875f7560"
+        },
+        {
+          "owner": 9928,
+          "source_id": "gb:BHS:ADM1:57655419B81962321006014",
+          "source_index": 3097,
+          "semantic_classes": {
+            "mapped_land_support": 742
+          },
+          "canonical_parent_id": "framework:province:inagua:cc009d0e6666"
+        },
+        {
+          "owner": 9929,
+          "source_id": "gb:BHS:ADM1:57655419B82083755348588",
+          "source_index": 3083,
+          "semantic_classes": {
+            "mapped_land_support": 585
+          },
+          "canonical_parent_id": "atlas:macro-review:province:7cc9e26ddd379ee7"
+        },
+        {
+          "owner": 9930,
+          "source_id": "gb:BHS:ADM1:57655419B87015583910143",
+          "source_index": 3093,
+          "semantic_classes": {
+            "mapped_land_support": 3714
+          },
+          "canonical_parent_id": "framework:province:exuma:c7af1fb263e0"
+        },
+        {
+          "owner": 9931,
+          "source_id": "gb:BHS:ADM1:57655419B91019969534321",
+          "source_index": 3096,
+          "semantic_classes": {
+            "mapped_land_support": 1598
+          },
+          "canonical_parent_id": "framework:province:hope-town:780e96202197"
+        },
+        {
+          "owner": 9932,
+          "source_id": "gb:BHS:ADM1:57655419B94344627065554",
+          "source_index": 3094,
+          "semantic_classes": {
+            "mapped_land_support": 188
+          },
+          "canonical_parent_id": "framework:province:grand-cay:83861011ce8d"
+        },
+        {
+          "owner": 9933,
+          "source_id": "gb:BHS:ADM1:57655419B98686837957667",
+          "source_index": 3106,
+          "semantic_classes": {
+            "mapped_land_support": 1377
+          },
+          "canonical_parent_id": "atlas:macro-review:province:1196e7d9826a7cf7"
+        }
+      ],
+      "immutable_input_pins": {
+        "native_patch": {
+          "bytes": 298397,
+          "commit": "446a9a0050d6b96c520e2a94358b6228d1d00605",
+          "git_blob_oid": "67bc6baf1e750a7181a12c7882ecdfd0948e109a",
+          "mode": "100644",
+          "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-inputs-002/land30-native-patch.json",
+          "sha256": "6f2231f2383f5f6fd3106d0aafcf1c87c6635463c731e5f81c028350515d93c0"
+        },
+        "source_evidence": {
+          "bytes": 584697,
+          "commit": "446a9a0050d6b96c520e2a94358b6228d1d00605",
+          "git_blob_oid": "4d8a170a14f8f6413d9898075982edcb0407d98f",
+          "mode": "100644",
+          "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-inputs-002/land30-source-evidence.json",
+          "sha256": "ca4ac9bb4f7b823a8f18df43bdf103fd68647106008ed1652175943f0a71cb4d"
+        }
+      },
+      "rule_sha256": "7e9c316e4f086cd8c1b0db60053b8c4f636c8499dd7a66037545b7220306683a",
+      "authority_products": [
+        {
+          "record": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-land30-authority-001/authority-binding.json",
+          "bytes": 755,
+          "sha256": "e217c1077539f12d1b3fc796cba4794bfbc3136ca7733b4a65935f6dc78f3418",
+          "commit": "eeef732ee402e6fb48973601a2e70f7ff11c1210"
+        },
+        {
+          "record": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-land30-authority-001/constructor-result.json",
+          "bytes": 396223,
+          "sha256": "4c4bf45c6bc5937011a9ea51ae57f5d93e0fd6d3523344c0ae18f5d21b49b988",
+          "commit": "eeef732ee402e6fb48973601a2e70f7ff11c1210"
+        },
+        {
+          "record": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-land30-authority-001/original-rule-preimage.json",
+          "bytes": 752,
+          "sha256": "7e9c316e4f086cd8c1b0db60053b8c4f636c8499dd7a66037545b7220306683a",
+          "commit": "eeef732ee402e6fb48973601a2e70f7ff11c1210"
+        },
+        {
+          "record": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-land30-authority-001/preparation.json",
+          "bytes": 502,
+          "sha256": "7b727705bf1e6c4e97adb22ab5a3626fd3b18472a21d11ffbf3a8a824af2704e",
+          "commit": "eeef732ee402e6fb48973601a2e70f7ff11c1210"
+        }
+      ],
+      "diagnostic_result": {
+        "record": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-land30-authority-001/native-diagnostic.json",
+        "bytes": 1089389,
+        "sha256": "5cc68c6b6f0346679d5dcc59f5206fbef13863d3f18fa82dff9a675822b56f81",
+        "commit": "eeef732ee402e6fb48973601a2e70f7ff11c1210"
+      },
+      "operating": {
+        "diagnostic": {
+          "exit": {
+            "exit_code": 0,
+            "started_utc": "2026-10-15T04:52:49.428687+00:00",
+            "ended_utc": "2026-10-15T04:52:56.826648+00:00",
+            "elapsed_seconds": 7.39728725,
+            "config_sha256": "2f0c4106c72152daf36f84c4006eaaf468fdcaeb44c7c94960ad76a45ef8be45",
+            "complete_prospective_bytes": 424837868,
+            "phase_rss_request_bytes": 536870912,
+            "operating_limit": "120-second standard OS alarm; no external peak or aggregate process-tree enforcement claimed"
+          },
+          "observation": {
+            "elapsed_seconds": 6.106112625,
+            "charged_phase_bytes": 332010751,
+            "allowance": {
+              "phaseBytes": 536870912,
+              "rssBytes": 536870912
+            },
+            "normalized_node_lifetime_peak_rss_bytes": 289800192,
+            "requested_cells": 34304,
+            "supported_cells": 34304,
+            "held_cells": 0,
+            "limits": [
+              "Original source/physical producers are not replayed.",
+              "Diagnostic screening produces no authority, current-owner-zero or selected-output acceptance."
+            ]
+          }
+        },
+        "authority": {
+          "exit": {
+            "exit_code": 0,
+            "started_utc": "2026-10-15T04:54:11.050569+00:00",
+            "ended_utc": "2026-10-15T04:54:19.426172+00:00",
+            "elapsed_seconds": 8.374905833,
+            "config_sha256": "2f0c4106c72152daf36f84c4006eaaf468fdcaeb44c7c94960ad76a45ef8be45",
+            "complete_prospective_bytes": 424837868,
+            "bound_note": "Reuses complete diagnostic bound including unused diagnostic-trace cushion; authority outputs remain within the same original4MiB reserve.",
+            "phase_rss_request_bytes": 536870912,
+            "operating_limit": "120-second standard OS alarm; no external peak or aggregate process-tree enforcement claimed"
+          },
+          "observation": {
+            "elapsed_seconds": 7.059182999999999,
+            "charged_phase_bytes": 313943153,
+            "allowance": {
+              "phaseBytes": 536870912,
+              "rssBytes": 536870912
+            },
+            "normalized_node_lifetime_peak_rss_bytes": 295649280,
+            "qualified_cells": 34304,
+            "limits": [
+              "Original source/physical producers are not replayed.",
+              "Constructor qualification is not actual current-owner-zero or final selected-output acceptance."
+            ]
+          }
+        }
+      },
+      "retained_physical_witnesses_for_group_owners": 36
+    },
+    "mixed2": {
+      "owners": [
+        9907,
+        9914
+      ],
+      "cells": 4262,
+      "semantic_classes": {
+        "mapped_land_support": 4255,
+        "mapped_inland_water_support": 7
+      },
+      "targets": [
+        {
+          "owner": 9907,
+          "source_id": "gb:BHS:ADM1:57655419B29435673895959",
+          "source_index": 3110,
+          "semantic_classes": {
+            "mapped_land_support": 3283,
+            "mapped_inland_water_support": 6
+          },
+          "canonical_parent_id": "framework:province:south-andros:4a64949a15a0"
+        },
+        {
+          "owner": 9914,
+          "source_id": "gb:BHS:ADM1:57655419B49483307836090",
+          "source_index": 3099,
+          "semantic_classes": {
+            "mapped_land_support": 972,
+            "mapped_inland_water_support": 1
+          },
+          "canonical_parent_id": "framework:province:mangrove-cay:7bcfb0f019c9"
+        }
+      ],
+      "immutable_input_pins": {
+        "native_patch": {
+          "bytes": 31447,
+          "commit": "446a9a0050d6b96c520e2a94358b6228d1d00605",
+          "git_blob_oid": "803f67031f6082607d3a472c9509be1514765866",
+          "mode": "100644",
+          "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-inputs-002/mixed2-native-patch.json",
+          "sha256": "4d2a0d70e032cd60899443467e69b10739a6482325598a8235d6c5c902f35aeb"
+        },
+        "source_evidence": {
+          "bytes": 64739,
+          "commit": "446a9a0050d6b96c520e2a94358b6228d1d00605",
+          "git_blob_oid": "2bdfcf717c28c0f9e1b50b5eca0567a361c67346",
+          "mode": "100644",
+          "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-inputs-002/mixed2-source-evidence.json",
+          "sha256": "8cb7bb5199d035c8d8ede3fac55393f1cbaaeb3a5a8a6d25c77ecb133c4c16df"
+        }
+      },
+      "rule_sha256": "7148b990af2574e8ee2de005ca61ad47cf16617cca1eea0f14e7d8e9e276bfc6",
+      "authority_products": [
+        {
+          "record": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-mixed2-authority-001/authority-binding.json",
+          "bytes": 753,
+          "sha256": "b0f2cf6bfc9d13d84ccf73b6ab0df9a2ad082cddc2e44c75af8d5fffd1cf63e8",
+          "commit": "eeef732ee402e6fb48973601a2e70f7ff11c1210"
+        },
+        {
+          "record": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-mixed2-authority-001/constructor-result.json",
+          "bytes": 38149,
+          "sha256": "3727d4f1b97fe66d08473cd3b34714895c06f6e27828bd0eb2bedbc25a4b7590",
+          "commit": "eeef732ee402e6fb48973601a2e70f7ff11c1210"
+        },
+        {
+          "record": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-mixed2-authority-001/original-rule-preimage.json",
+          "bytes": 750,
+          "sha256": "7148b990af2574e8ee2de005ca61ad47cf16617cca1eea0f14e7d8e9e276bfc6",
+          "commit": "eeef732ee402e6fb48973601a2e70f7ff11c1210"
+        },
+        {
+          "record": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-mixed2-authority-001/preparation.json",
+          "bytes": 501,
+          "sha256": "5b023fa2dd00550620beacda6599c227dae02ec7ac8510f22b88c824f25e35b1",
+          "commit": "eeef732ee402e6fb48973601a2e70f7ff11c1210"
+        }
+      ],
+      "diagnostic_result": {
+        "record": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-mixed2-authority-001/native-diagnostic.json",
+        "bytes": 116730,
+        "sha256": "78a2992fb4f4d0841425ea4ccc5d8ebb7472220965a537d7ea8440c7c0e03ca9",
+        "commit": "eeef732ee402e6fb48973601a2e70f7ff11c1210"
+      },
+      "operating": {
+        "diagnostic": {
+          "exit": {
+            "exit_code": 0,
+            "started_utc": "2026-10-15T04:52:56.831666+00:00",
+            "ended_utc": "2026-10-15T04:53:03.514995+00:00",
+            "elapsed_seconds": 6.683335209,
+            "config_sha256": "efb9edfc88a980e2d05aa3a4c66ed6d6831407e3c6fe12c9b298930b32eaf488",
+            "complete_prospective_bytes": 432222400,
+            "phase_rss_request_bytes": 536870912,
+            "operating_limit": "120-second standard OS alarm; no external peak or aggregate process-tree enforcement claimed"
+          },
+          "observation": {
+            "elapsed_seconds": 5.552058292000001,
+            "charged_phase_bytes": 309896211,
+            "allowance": {
+              "phaseBytes": 536870912,
+              "rssBytes": 536870912
+            },
+            "normalized_node_lifetime_peak_rss_bytes": 228048896,
+            "requested_cells": 4262,
+            "supported_cells": 4262,
+            "held_cells": 0,
+            "limits": [
+              "Original source/physical producers are not replayed.",
+              "Diagnostic screening produces no authority, current-owner-zero or selected-output acceptance."
+            ]
+          }
+        },
+        "authority": {
+          "exit": {
+            "exit_code": 0,
+            "started_utc": "2026-10-15T04:54:19.432385+00:00",
+            "ended_utc": "2026-10-15T04:54:27.198865+00:00",
+            "elapsed_seconds": 7.766481749999999,
+            "config_sha256": "efb9edfc88a980e2d05aa3a4c66ed6d6831407e3c6fe12c9b298930b32eaf488",
+            "complete_prospective_bytes": 432222400,
+            "bound_note": "Reuses complete diagnostic bound including unused diagnostic-trace cushion; authority outputs remain within the same original4MiB reserve.",
+            "phase_rss_request_bytes": 536870912,
+            "operating_limit": "120-second standard OS alarm; no external peak or aggregate process-tree enforcement claimed"
+          },
+          "observation": {
+            "elapsed_seconds": 6.577856709,
+            "charged_phase_bytes": 307647889,
+            "allowance": {
+              "phaseBytes": 536870912,
+              "rssBytes": 536870912
+            },
+            "normalized_node_lifetime_peak_rss_bytes": 252133376,
+            "qualified_cells": 4262,
+            "limits": [
+              "Original source/physical producers are not replayed.",
+              "Constructor qualification is not actual current-owner-zero or final selected-output acceptance."
+            ]
+          }
+        }
+      },
+      "retained_physical_witnesses_for_group_owners": 5
+    }
+  },
+  "all32_component_ids_unique": true,
+  "exact_union_equals_original38566": true,
+  "physical_witness_scope": [
+    {
+      "target": "gb:BHS:ADM1:57655419B62229097939124",
+      "role": "outside_mapped_L1_context",
+      "geometry_type": "MultiPolygon"
+    },
+    {
+      "target": "gb:BHS:ADM1:57655419B82083755348588",
+      "role": "outside_mapped_L1_context",
+      "geometry_type": "MultiPolygon"
+    },
+    {
+      "target": "gb:BHS:ADM1:57655419B63031142172255",
+      "role": "outside_mapped_L1_context",
+      "geometry_type": "MultiPolygon"
+    },
+    {
+      "target": "gb:BHS:ADM1:57655419B62023626616016",
+      "role": "outside_mapped_L1_context",
+      "geometry_type": "MultiPolygon"
+    },
+    {
+      "target": "gb:BHS:ADM1:57655419B31009871091546",
+      "role": "outside_mapped_L1_context",
+      "geometry_type": "MultiPolygon"
+    },
+    {
+      "target": "gb:BHS:ADM1:57655419B6063467597350",
+      "role": "outside_mapped_L1_context",
+      "geometry_type": "MultiPolygon"
+    },
+    {
+      "target": "gb:BHS:ADM1:57655419B10554343974074",
+      "role": "outside_mapped_L1_context",
+      "geometry_type": "MultiPolygon"
+    },
+    {
+      "target": "gb:BHS:ADM1:57655419B18095522454644",
+      "role": "outside_mapped_L1_context",
+      "geometry_type": "MultiPolygon"
+    },
+    {
+      "target": "gb:BHS:ADM1:57655419B78426284582077",
+      "role": "outside_mapped_L1_context",
+      "geometry_type": "MultiPolygon"
+    },
+    {
+      "target": "gb:BHS:ADM1:57655419B45053914770402",
+      "role": "outside_mapped_L1_context",
+      "geometry_type": "MultiPolygon"
+    },
+    {
+      "target": "gb:BHS:ADM1:57655419B55305756041974",
+      "role": "outside_mapped_L1_context",
+      "geometry_type": "MultiPolygon"
+    },
+    {
+      "target": "gb:BHS:ADM1:57655419B55305756041974",
+      "role": "contradictory_land_water_support",
+      "geometry_type": "MultiLineString"
+    },
+    {
+      "target": "gb:BHS:ADM1:57655419B87015583910143",
+      "role": "outside_mapped_L1_context",
+      "geometry_type": "MultiPolygon"
+    },
+    {
+      "target": "gb:BHS:ADM1:57655419B94344627065554",
+      "role": "outside_mapped_L1_context",
+      "geometry_type": "MultiPolygon"
+    },
+    {
+      "target": "gb:BHS:ADM1:57655419B64917905581576",
+      "role": "outside_mapped_L1_context",
+      "geometry_type": "MultiPolygon"
+    },
+    {
+      "target": "gb:BHS:ADM1:57655419B91019969534321",
+      "role": "outside_mapped_L1_context",
+      "geometry_type": "MultiPolygon"
+    },
+    {
+      "target": "gb:BHS:ADM1:57655419B91019969534321",
+      "role": "contradictory_land_water_support",
+      "geometry_type": "MultiLineString"
+    },
+    {
+      "target": "gb:BHS:ADM1:57655419B81962321006014",
+      "role": "outside_mapped_L1_context",
+      "geometry_type": "MultiPolygon"
+    },
+    {
+      "target": "gb:BHS:ADM1:57655419B2318826838910",
+      "role": "outside_mapped_L1_context",
+      "geometry_type": "MultiPolygon"
+    },
+    {
+      "target": "gb:BHS:ADM1:57655419B49483307836090",
+      "role": "outside_mapped_L1_context",
+      "geometry_type": "MultiPolygon"
+    },
+    {
+      "target": "gb:BHS:ADM1:57655419B49483307836090",
+      "role": "contradictory_land_water_support",
+      "geometry_type": "MultiLineString"
+    },
+    {
+      "target": "gb:BHS:ADM1:57655419B31239819863643",
+      "role": "outside_mapped_L1_context",
+      "geometry_type": "MultiPolygon"
+    },
+    {
+      "target": "gb:BHS:ADM1:57655419B31239819863643",
+      "role": "missing_reconstruction",
+      "geometry_type": "MultiPolygon"
+    },
+    {
+      "target": "gb:BHS:ADM1:57655419B31239819863643",
+      "role": "extra_reconstruction",
+      "geometry_type": "MultiPolygon"
+    },
+    {
+      "target": "gb:BHS:ADM1:57655419B38120742943128",
+      "role": "outside_mapped_L1_context",
+      "geometry_type": "MultiPolygon"
+    },
+    {
+      "target": "gb:BHS:ADM1:57655419B75676267470758",
+      "role": "outside_mapped_L1_context",
+      "geometry_type": "MultiPolygon"
+    },
+    {
+      "target": "gb:BHS:ADM1:57655419B79428110843392",
+      "role": "outside_mapped_L1_context",
+      "geometry_type": "MultiPolygon"
+    },
+    {
+      "target": "gb:BHS:ADM1:57655419B63159467904865",
+      "role": "outside_mapped_L1_context",
+      "geometry_type": "MultiPolygon"
+    },
+    {
+      "target": "gb:BHS:ADM1:57655419B2538538242492",
+      "role": "outside_mapped_L1_context",
+      "geometry_type": "MultiPolygon"
+    },
+    {
+      "target": "gb:BHS:ADM1:57655419B98686837957667",
+      "role": "outside_mapped_L1_context",
+      "geometry_type": "MultiPolygon"
+    },
+    {
+      "target": "gb:BHS:ADM1:57655419B42503330785161",
+      "role": "outside_mapped_L1_context",
+      "geometry_type": "MultiPolygon"
+    },
+    {
+      "target": "gb:BHS:ADM1:57655419B6447054147513",
+      "role": "outside_mapped_L1_context",
+      "geometry_type": "MultiPolygon"
+    },
+    {
+      "target": "gb:BHS:ADM1:57655419B39711376309473",
+      "role": "outside_mapped_L1_context",
+      "geometry_type": "MultiPolygon"
+    },
+    {
+      "target": "gb:BHS:ADM1:57655419B29435673895959",
+      "role": "outside_mapped_L1_context",
+      "geometry_type": "MultiPolygon"
+    },
+    {
+      "target": "gb:BHS:ADM1:57655419B29435673895959",
+      "role": "contradictory_land_water_support",
+      "geometry_type": "GeometryCollection"
+    },
+    {
+      "target": "gb:BHS:ADM1:57655419B29435673895959",
+      "role": "L2-outside-L1",
+      "geometry_type": "MultiPolygon"
+    },
+    {
+      "target": "gb:BHS:ADM1:57655419B57652232258076",
+      "role": "outside_mapped_L1_context",
+      "geometry_type": "MultiPolygon"
+    },
+    {
+      "target": "gb:BHS:ADM1:57655419B57652232258076",
+      "role": "missing_reconstruction",
+      "geometry_type": "MultiPolygon"
+    },
+    {
+      "target": "gb:BHS:ADM1:57655419B57652232258076",
+      "role": "extra_reconstruction",
+      "geometry_type": "MultiPolygon"
+    },
+    {
+      "target": "gb:BHS:ADM1:57655419B1305095208594",
+      "role": "outside_mapped_L1_context",
+      "geometry_type": "MultiPolygon"
+    },
+    {
+      "target": "gb:BHS:ADM1:57655419B65085412826087",
+      "role": "outside_mapped_L1_context",
+      "geometry_type": "MultiPolygon"
+    }
+  ],
+  "preserved_source_country_limits": {
+    "own_original_interiors": 38566,
+    "own_NE_interiors": 9467,
+    "own_NE_interior_missing": 29099,
+    "meaning": "The29099 missing observations remain reference-data limits, not automatic veto or legal-country/physical inference.",
+    "scope": "Retained CUB ADM1/ADM2 +USA ADM1/ADM2 originals and whole258 NE collection/vintage; no all368/global-original or jurisdiction approval.",
+    "Grand_Cay": "188 own-NE missing retained.",
+    "Biminis": "585 keys;368 own-NE missing retained; corrected parent and whole source geometry unchanged.",
+    "source_metadata": "Haiti GeoPortal/httpshttps anomaly, CC BY4/vintage and open semantic/parent limits preserved."
+  },
+  "retained_review_records": [
+    {
+      "record": "bahamas-current-package-1947/native-source-country-preparation/independent-review/actual-review.json",
+      "bytes": 9884,
+      "sha256": "c2730941a271b1951160f99411dbbb4c0909b0a630b3fce38f0f986b092ac4a4"
+    },
+    {
+      "record": "bahamas-current-package-1947/qualifier-static-resource-001/scientificreuse-review.json",
+      "bytes": 13121,
+      "sha256": "66368e90d073d11f208caeae1ab07912fb43c7ead8baf8bd16cc290e9bc2ec25"
+    },
+    {
+      "record": "bahamas-current-package-1947/physical-001/review/independent-actual-result-review.json",
+      "bytes": 159600,
+      "sha256": "ffa1ebed7925ad08c406adab0a00e2b91c592c02a835bc9149680f63aab60a54"
+    }
+  ],
+  "limitations": [
+    "Qualified means source/physical/class applicability at requested native centres under the unchanged numerical rule, not whole-parent/continuous geometry approval or jurisdiction/NE coverage certification.",
+    "All measured physical issues, exterior context, historical-source accuracy/vintage and semantic limits remain retained.",
+    "Actual current-owner-zero, current selection conservation and final selected-output acceptance are downstream normal delivery obligations. Constructor qualification grants zero accepted repair credit by itself.",
+    "Operating values are internal Node child-process observations and boundary limits; no external or aggregate process-tree peak claim.",
+    "Actual diagnostic and authority products are pinned to published commit eeef732ee402e6fb48973601a2e70f7ff11c1210 with exact mode/OID/bytes/SHA bindings. Scientific input pairs remain446a9a0050d6b96c520e2a94358b6228d1d00605."
+  ],
+  "qualified_native_cells": 38566,
+  "accepted_repair_credit": 0,
+  "published_actual_commit": "eeef732ee402e6fb48973601a2e70f7ff11c1210",
+  "published_original_product_bindings": [
+    {
+      "commit": "eeef732ee402e6fb48973601a2e70f7ff11c1210",
+      "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-land30-authority-001/actual-exit.json",
+      "mode": "100644",
+      "git_blob_oid": "9dff9f875695e92b1957848f4e980ef08be1a1ae",
+      "bytes": 604,
+      "sha256": "8b2714058b2cedffae6a6f7c410cc6774bd3c3f58351c54a7a8ae4e6ac6322c5"
+    },
+    {
+      "commit": "eeef732ee402e6fb48973601a2e70f7ff11c1210",
+      "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-land30-authority-001/actual-stdout.json",
+      "mode": "100644",
+      "git_blob_oid": "3d9d1f101b8b7a410e21cc48f36ad2456c1e3916",
+      "bytes": 594,
+      "sha256": "622668a83d1e53243d90565d53a5015fed9f96c3f53d8df91427de8e1df1a401"
+    },
+    {
+      "commit": "eeef732ee402e6fb48973601a2e70f7ff11c1210",
+      "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-land30-authority-001/authority-binding.json",
+      "mode": "100644",
+      "git_blob_oid": "5d2dab9ed43b8b47cb525425b5fe86cfe2163b64",
+      "bytes": 755,
+      "sha256": "e217c1077539f12d1b3fc796cba4794bfbc3136ca7733b4a65935f6dc78f3418"
+    },
+    {
+      "commit": "eeef732ee402e6fb48973601a2e70f7ff11c1210",
+      "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-land30-authority-001/config.json",
+      "mode": "100644",
+      "git_blob_oid": "307416310737add07f202c8cf8ac08364f92a74f",
+      "bytes": 454,
+      "sha256": "2f0c4106c72152daf36f84c4006eaaf468fdcaeb44c7c94960ad76a45ef8be45"
+    },
+    {
+      "commit": "eeef732ee402e6fb48973601a2e70f7ff11c1210",
+      "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-land30-authority-001/constructor-result.json",
+      "mode": "100644",
+      "git_blob_oid": "1d8a187babbc28f59ce901ffdf60614dadb6136c",
+      "bytes": 396223,
+      "sha256": "4c4bf45c6bc5937011a9ea51ae57f5d93e0fd6d3523344c0ae18f5d21b49b988"
+    },
+    {
+      "commit": "eeef732ee402e6fb48973601a2e70f7ff11c1210",
+      "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-land30-authority-001/diagnostic-exit.json",
+      "mode": "100644",
+      "git_blob_oid": "553b312d293151d4737e188ede6e0e9b2cd4ff2a",
+      "bytes": 445,
+      "sha256": "3795b7bd511e4859afaaefdb4d1e342df9d4b012c30cb315adaededab121a3ad"
+    },
+    {
+      "commit": "eeef732ee402e6fb48973601a2e70f7ff11c1210",
+      "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-land30-authority-001/diagnostic-stdout.json",
+      "mode": "100644",
+      "git_blob_oid": "0a7d2cf6a975646fab6e9525df5e163b09ca665c",
+      "bytes": 627,
+      "sha256": "23ce2f75bb11d79b7b74a99d34aa56a5985e71301d99cb3d59500ce4d6783ddc"
+    },
+    {
+      "commit": "eeef732ee402e6fb48973601a2e70f7ff11c1210",
+      "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-land30-authority-001/native-diagnostic.json",
+      "mode": "100644",
+      "git_blob_oid": "28e3525ce89efb35ab57b02d03b9326e60f9309f",
+      "bytes": 1089389,
+      "sha256": "5cc68c6b6f0346679d5dcc59f5206fbef13863d3f18fa82dff9a675822b56f81"
+    },
+    {
+      "commit": "eeef732ee402e6fb48973601a2e70f7ff11c1210",
+      "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-land30-authority-001/original-rule-preimage.json",
+      "mode": "100644",
+      "git_blob_oid": "7229d3230fb210bab30f8d34f8f656d9ecd44573",
+      "bytes": 752,
+      "sha256": "7e9c316e4f086cd8c1b0db60053b8c4f636c8499dd7a66037545b7220306683a"
+    },
+    {
+      "commit": "eeef732ee402e6fb48973601a2e70f7ff11c1210",
+      "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-land30-authority-001/preparation.json",
+      "mode": "100644",
+      "git_blob_oid": "fd3e28280b36b45d2b7dfa57bcf683cf1a19e210",
+      "bytes": 502,
+      "sha256": "7b727705bf1e6c4e97adb22ab5a3626fd3b18472a21d11ffbf3a8a824af2704e"
+    },
+    {
+      "commit": "eeef732ee402e6fb48973601a2e70f7ff11c1210",
+      "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-mixed2-authority-001/actual-exit.json",
+      "mode": "100644",
+      "git_blob_oid": "113076b6d3593786b5f9669a757eb17159bb38c7",
+      "bytes": 610,
+      "sha256": "161e67871d9b099b0655b8167c2a6e20a84af76ebeed25077672d019816303e5"
+    },
+    {
+      "commit": "eeef732ee402e6fb48973601a2e70f7ff11c1210",
+      "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-mixed2-authority-001/actual-stdout.json",
+      "mode": "100644",
+      "git_blob_oid": "c9ae84b0d2c864c601993da08186361ded86a08e",
+      "bytes": 587,
+      "sha256": "352c9335c268f7c6ca00edaae00c6ca55532586a2930585d332867dbf3bf38c9"
+    },
+    {
+      "commit": "eeef732ee402e6fb48973601a2e70f7ff11c1210",
+      "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-mixed2-authority-001/authority-binding.json",
+      "mode": "100644",
+      "git_blob_oid": "c88676ee5a9f4284b9410518c4f7c090cc6b21f7",
+      "bytes": 753,
+      "sha256": "b0f2cf6bfc9d13d84ccf73b6ab0df9a2ad082cddc2e44c75af8d5fffd1cf63e8"
+    },
+    {
+      "commit": "eeef732ee402e6fb48973601a2e70f7ff11c1210",
+      "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-mixed2-authority-001/config.json",
+      "mode": "100644",
+      "git_blob_oid": "cd830a8c4ce66e6f773ac20b0eeeeef127bbd7d7",
+      "bytes": 454,
+      "sha256": "efb9edfc88a980e2d05aa3a4c66ed6d6831407e3c6fe12c9b298930b32eaf488"
+    },
+    {
+      "commit": "eeef732ee402e6fb48973601a2e70f7ff11c1210",
+      "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-mixed2-authority-001/constructor-result.json",
+      "mode": "100644",
+      "git_blob_oid": "6891e21a0ac19136a8815bcea4dc4d23b2f1b05b",
+      "bytes": 38149,
+      "sha256": "3727d4f1b97fe66d08473cd3b34714895c06f6e27828bd0eb2bedbc25a4b7590"
+    },
+    {
+      "commit": "eeef732ee402e6fb48973601a2e70f7ff11c1210",
+      "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-mixed2-authority-001/diagnostic-exit.json",
+      "mode": "100644",
+      "git_blob_oid": "c32cd8c43f6069db04cd7c9d69f14d77094f4269",
+      "bytes": 446,
+      "sha256": "bcb05398169dcbc5a9423bd9aa5106081cdf45a883999cefd8a06237ef482ac2"
+    },
+    {
+      "commit": "eeef732ee402e6fb48973601a2e70f7ff11c1210",
+      "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-mixed2-authority-001/diagnostic-stdout.json",
+      "mode": "100644",
+      "git_blob_oid": "2ba20642f6c92a9a2d1b407ba8a81cd926e22965",
+      "bytes": 631,
+      "sha256": "4fd201a35521f997a6dc040277ec479f28862840440857c2a691a731391ef768"
+    },
+    {
+      "commit": "eeef732ee402e6fb48973601a2e70f7ff11c1210",
+      "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-mixed2-authority-001/native-diagnostic.json",
+      "mode": "100644",
+      "git_blob_oid": "6495a39954241461a2cde8e2e04114b0156a8d3f",
+      "bytes": 116730,
+      "sha256": "78a2992fb4f4d0841425ea4ccc5d8ebb7472220965a537d7ea8440c7c0e03ca9"
+    },
+    {
+      "commit": "eeef732ee402e6fb48973601a2e70f7ff11c1210",
+      "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-mixed2-authority-001/original-rule-preimage.json",
+      "mode": "100644",
+      "git_blob_oid": "22fd736b7b1599ffc3cb8e0938baccc0cf735383",
+      "bytes": 750,
+      "sha256": "7148b990af2574e8ee2de005ca61ad47cf16617cca1eea0f14e7d8e9e276bfc6"
+    },
+    {
+      "commit": "eeef732ee402e6fb48973601a2e70f7ff11c1210",
+      "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-mixed2-authority-001/preparation.json",
+      "mode": "100644",
+      "git_blob_oid": "723378a5ff65d40ca415956c4bc2c3d9412dad6b",
+      "bytes": 501,
+      "sha256": "5b023fa2dd00550620beacda6599c227dae02ec7ac8510f22b88c824f25e35b1"
+    }
+  ],
+  "published_qualification_summary": {
+    "commit": "eeef732ee402e6fb48973601a2e70f7ff11c1210",
+    "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/qualification-summary.json",
+    "bytes": 4291,
+    "sha256": "c18921f4b981a2ca04c697b2e5211546c9f531bcc82c4d850022921ce6fdf94e",
+    "body": {
+      "version": 1,
+      "kind": "actual-original-source-target-native-qualification-summary",
+      "accepted_selection_baseline": "866c42b854910f17a80427dac19b2c850cd68093",
+      "original_candidate_patch_commit": "0b7a0a7b361dcdd9eb107571b5dee5125bd2ea69",
+      "input_commit": "446a9a0050d6b96c520e2a94358b6228d1d00605",
+      "groups": [
+        {
+          "id": "land30",
+          "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-land30-authority-001",
+          "qualified_cells": 34304,
+          "components": 30,
+          "rule_sha256": "7e9c316e4f086cd8c1b0db60053b8c4f636c8499dd7a66037545b7220306683a",
+          "actual_observation": {
+            "elapsed_seconds": 7.059182999999999,
+            "charged_phase_bytes": 313943153,
+            "allowance": {
+              "phaseBytes": 536870912,
+              "rssBytes": 536870912
+            },
+            "normalized_node_lifetime_peak_rss_bytes": 295649280,
+            "qualified_cells": 34304,
+            "limits": [
+              "Original source/physical producers are not replayed.",
+              "Constructor qualification is not actual current-owner-zero or final selected-output acceptance."
+            ]
+          },
+          "actual_exit": {
+            "exit_code": 0,
+            "started_utc": "2026-10-15T04:54:11.050569+00:00",
+            "ended_utc": "2026-10-15T04:54:19.426172+00:00",
+            "elapsed_seconds": 8.374905833,
+            "config_sha256": "2f0c4106c72152daf36f84c4006eaaf468fdcaeb44c7c94960ad76a45ef8be45",
+            "complete_prospective_bytes": 424837868,
+            "bound_note": "Reuses complete diagnostic bound including unused diagnostic-trace cushion; authority outputs remain within the same original4MiB reserve.",
+            "phase_rss_request_bytes": 536870912,
+            "operating_limit": "120-second standard OS alarm; no external peak or aggregate process-tree enforcement claimed"
+          }
+        },
+        {
+          "id": "mixed2",
+          "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-mixed2-authority-001",
+          "qualified_cells": 4262,
+          "components": 2,
+          "rule_sha256": "7148b990af2574e8ee2de005ca61ad47cf16617cca1eea0f14e7d8e9e276bfc6",
+          "actual_observation": {
+            "elapsed_seconds": 6.577856709,
+            "charged_phase_bytes": 307647889,
+            "allowance": {
+              "phaseBytes": 536870912,
+              "rssBytes": 536870912
+            },
+            "normalized_node_lifetime_peak_rss_bytes": 252133376,
+            "qualified_cells": 4262,
+            "limits": [
+              "Original source/physical producers are not replayed.",
+              "Constructor qualification is not actual current-owner-zero or final selected-output acceptance."
+            ]
+          },
+          "actual_exit": {
+            "exit_code": 0,
+            "started_utc": "2026-10-15T04:54:19.432385+00:00",
+            "ended_utc": "2026-10-15T04:54:27.198865+00:00",
+            "elapsed_seconds": 7.766481749999999,
+            "config_sha256": "efb9edfc88a980e2d05aa3a4c66ed6d6831407e3c6fe12c9b298930b32eaf488",
+            "complete_prospective_bytes": 432222400,
+            "bound_note": "Reuses complete diagnostic bound including unused diagnostic-trace cushion; authority outputs remain within the same original4MiB reserve.",
+            "phase_rss_request_bytes": 536870912,
+            "operating_limit": "120-second standard OS alarm; no external peak or aggregate process-tree enforcement claimed"
+          }
+        }
+      ],
+      "qualified_cells": 38566,
+      "source_owners": 32,
+      "qualified_original_class_cells": {
+        "land": 38559,
+        "inland_water": 7
+      },
+      "diagnostic_held_cells": 0,
+      "accepted_repair_credit": 0,
+      "source_and_physical_producer_replays": 0,
+      "limits": [
+        "Actual source/native qualification is not current-owner-zero, selected conservation, integration or acceptance.",
+        "All nine whole-target physical issues, all32 exterior-context geometries, original metadata anomaly, parent/reference limits remain. Their native veto effects are empty only for these exact tested centres.",
+        "Country-contact observations remain scoped to retained applicable source families; no jurisdiction, global source absence or positive NE coverage is inferred.",
+        "The initially combined768MiB diagnostic was refused before scientific reads. Two complete whole-owner requests were separately admitted; each charged all complete source/physical/roster/latitude inputs."
+      ]
+    }
+  }
+}

@@ -1,0 +1,4232 @@
+{
+  "version": 1,
+  "reviewed_utc": "2026-10-15T04:17:30.554142+00:00",
+  "reviewer": "/root/cambodia_control_review",
+  "decision": "ACCEPT actual saved whole32 source-relative physical result evidence; no result/schema/query-omission defect found. Preserve all9 measured issues and all32 exterior-context holds. No cell qualification or repair credit.",
+  "scope": "One substantive original-to-actual-output review. Prior input/config/runtime attestations reused; no new scientific execution.",
+  "products": [
+    {
+      "path": "bahamas-current-package-1947/physical-001/actual-products/whole-target-support.json",
+      "bytes": 7129342,
+      "sha256": "3aec57bafa96e0d627864e58b510dae8ec71e84a9e6fc79b06f636251d8c0453"
+    },
+    {
+      "path": "bahamas-current-package-1947/physical-001/actual-products/execution-receipt.json",
+      "bytes": 123324,
+      "sha256": "d1ede9937f778d29144f932272559a313ac239eac3c90205d7f9f9213ea30404"
+    },
+    {
+      "path": "bahamas-current-package-1947/physical-001/actual-products/preparation.json",
+      "bytes": 546,
+      "sha256": "91ffb55dc3177def1dcbbea41035fa5fd96f3d3c02aed966653e6c9bcd1a32aa"
+    }
+  ],
+  "original_stage": {
+    "commit": "7cd7f93f94ddefe12b22188a5a4357cf38d06bda",
+    "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/source-stage/whole32-target-stage-inputs.json",
+    "targets": 32,
+    "order_exact": true,
+    "prior_independent_input_review": {
+      "path": "bahamas-current-package-1947/source-stage/review/independent-input-review.json",
+      "bytes": 25251,
+      "sha256": "854e95a17761a665c94019a8e771efbc674120b96f6d55e3865d3548f69a320b"
+    }
+  },
+  "independent_query_completeness": {
+    "support": {
+      "path": "bahamas-current-package-1947/physical-001/review/streaming-query-roster-review.json",
+      "bytes": 20668,
+      "sha256": "c5d661cf6221d2f6cbd4f7ffd3ba16e0f9031402374978a597d4a4f50d9272c9"
+    },
+    "full_metadata_rows_streamed": 188612,
+    "unique_metadata_ids": 188612,
+    "complete_metadata_fragments": 18,
+    "selected_bbox_ids": 2146,
+    "ancestor_closure_ids": 2146,
+    "selected_levels": {
+      "1": 2143,
+      "2": 3
+    },
+    "missing_ancestors": 0,
+    "cycles": 0,
+    "selected_metadata_geometry_issues": 0,
+    "actual_queries": 2993,
+    "independently_expected_queries": 2993,
+    "per_target_missing_or_extra": 0,
+    "method": "Compared all actual query sourceID/periodic-frame pairs against literal complete immutable metadata bounds and original whole consumed-target coordinate extrema. Retained compact ID/level/container map; no native member or geometry decode/predicate.",
+    "review_process_peak_bytes": 77414400,
+    "additional_stream_peak_growth_bytes": 2244608,
+    "stream_elapsed_seconds": 3.1779945000307634
+  },
+  "actual_query_semantics": {
+    "checked": 2993,
+    "offset0": 2993,
+    "source_covers_candidate_true": 0,
+    "candidate_covers_source_true": 56,
+    "intersects_true": 1372,
+    "disjoint_true": 1621,
+    "witnesses": {
+      "disjoint-after-explicit-predicate": 1621,
+      "complete-operation-pointset": 1316,
+      "complete-source-record-reconstruction": 56
+    },
+    "checked_internally": [
+      "Unique per-target sourceID/frame pairs and exact unique source_id_queries join",
+      "All four predicate fields actual booleans and logically consistent",
+      "Correct witness precedence and exact query field roster",
+      "All1316 complete-operation witness geometries nonempty, finite coordinate pairs, recognized primitives and closed polygon rings",
+      "All seven support classes and all three hierarchy operation keys retained",
+      "Every nonempty residual/conflict/hierarchy operation has exactly matching complete issue.geometry; no missing/extra/duplicate reason",
+      "All32 results are exact original stage targets in original order"
+    ],
+    "geometry_object_checks": 1640,
+    "limit": "Direct report/source metadata/schema review, not independent GEOS predicate or polygon-equivalence recomputation."
+  },
+  "physical_findings": {
+    "issue_free_targets": 26,
+    "targets_with_issues": 6,
+    "issues": 9,
+    "nonempty_mapped_land_targets": 32,
+    "nonempty_mapped_inland_water_targets": 4,
+    "nonempty_exterior_context_targets": 32,
+    "water_target_names": [
+      "East Grand Bahama",
+      "Hope Town",
+      "Mangrove Cay",
+      "South Andros"
+    ],
+    "nonempty_hierarchy_operations": [
+      {
+        "target": "gb:BHS:ADM1:57655419B29435673895959",
+        "name": "South Andros",
+        "operation": "L2-outside-L1"
+      }
+    ],
+    "meaning": "Issue-free refers only to residual/conflict issue arrays. Every target also has nonempty exterior context, which is not positive land/water and remains an independent native-cell exclusion. Positive mapped water polygons do not prove the7 frozen water-labelled centres."
+  },
+  "issues": [
+    {
+      "target": "gb:BHS:ADM1:57655419B55305756041974",
+      "name": "East Grand Bahama",
+      "owner_index": 9915,
+      "reason": "contradictory_land_water_support",
+      "geometry": {
+        "type": "MultiLineString",
+        "structurally_nonempty": true,
+        "nonempty_leaf_types": {
+          "MultiLineString": 1
+        },
+        "declared_dimensions": [
+          1
+        ],
+        "positions": 12,
+        "multipart_members": 6,
+        "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+      },
+      "issue_geometry_pointer": "/results/10/issues/0/geometry",
+      "support_geometry_pointer": "/results/10/support/contradictory_land_water_support",
+      "issue_equals_full_support_operation": true
+    },
+    {
+      "target": "gb:BHS:ADM1:57655419B91019969534321",
+      "name": "Hope Town",
+      "owner_index": 9931,
+      "reason": "contradictory_land_water_support",
+      "geometry": {
+        "type": "MultiLineString",
+        "structurally_nonempty": true,
+        "nonempty_leaf_types": {
+          "MultiLineString": 1
+        },
+        "declared_dimensions": [
+          1
+        ],
+        "positions": 8,
+        "multipart_members": 4,
+        "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+      },
+      "issue_geometry_pointer": "/results/14/issues/0/geometry",
+      "support_geometry_pointer": "/results/14/support/contradictory_land_water_support",
+      "issue_equals_full_support_operation": true
+    },
+    {
+      "target": "gb:BHS:ADM1:57655419B49483307836090",
+      "name": "Mangrove Cay",
+      "owner_index": 9914,
+      "reason": "contradictory_land_water_support",
+      "geometry": {
+        "type": "MultiLineString",
+        "structurally_nonempty": true,
+        "nonempty_leaf_types": {
+          "MultiLineString": 1
+        },
+        "declared_dimensions": [
+          1
+        ],
+        "positions": 10,
+        "multipart_members": 5,
+        "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+      },
+      "issue_geometry_pointer": "/results/17/issues/0/geometry",
+      "support_geometry_pointer": "/results/17/support/contradictory_land_water_support",
+      "issue_equals_full_support_operation": true
+    },
+    {
+      "target": "gb:BHS:ADM1:57655419B31239819863643",
+      "name": "Mayaguana",
+      "owner_index": 9909,
+      "reason": "missing_reconstruction",
+      "geometry": {
+        "type": "MultiPolygon",
+        "structurally_nonempty": true,
+        "nonempty_leaf_types": {
+          "MultiPolygon": 1
+        },
+        "declared_dimensions": [
+          2
+        ],
+        "positions": 99,
+        "multipart_members": 23,
+        "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+      },
+      "issue_geometry_pointer": "/results/18/issues/0/geometry",
+      "support_geometry_pointer": "/results/18/support/missing_reconstruction",
+      "issue_equals_full_support_operation": true
+    },
+    {
+      "target": "gb:BHS:ADM1:57655419B31239819863643",
+      "name": "Mayaguana",
+      "owner_index": 9909,
+      "reason": "extra_reconstruction",
+      "geometry": {
+        "type": "MultiPolygon",
+        "structurally_nonempty": true,
+        "nonempty_leaf_types": {
+          "MultiPolygon": 1
+        },
+        "declared_dimensions": [
+          2
+        ],
+        "positions": 107,
+        "multipart_members": 26,
+        "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+      },
+      "issue_geometry_pointer": "/results/18/issues/1/geometry",
+      "support_geometry_pointer": "/results/18/support/extra_reconstruction",
+      "issue_equals_full_support_operation": true
+    },
+    {
+      "target": "gb:BHS:ADM1:57655419B29435673895959",
+      "name": "South Andros",
+      "owner_index": 9907,
+      "reason": "contradictory_land_water_support",
+      "geometry": {
+        "type": "GeometryCollection",
+        "structurally_nonempty": true,
+        "nonempty_leaf_types": {
+          "Polygon": 2,
+          "LineString": 34
+        },
+        "declared_dimensions": [
+          1,
+          2
+        ],
+        "positions": 76,
+        "multipart_members": null,
+        "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+      },
+      "issue_geometry_pointer": "/results/28/issues/0/geometry",
+      "support_geometry_pointer": "/results/28/support/contradictory_land_water_support",
+      "issue_equals_full_support_operation": true
+    },
+    {
+      "target": "gb:BHS:ADM1:57655419B29435673895959",
+      "name": "South Andros",
+      "owner_index": 9907,
+      "reason": "L2-outside-L1",
+      "geometry": {
+        "type": "MultiPolygon",
+        "structurally_nonempty": true,
+        "nonempty_leaf_types": {
+          "MultiPolygon": 1
+        },
+        "declared_dimensions": [
+          2
+        ],
+        "positions": 12,
+        "multipart_members": 3,
+        "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+      },
+      "issue_geometry_pointer": "/results/28/issues/1/geometry",
+      "support_geometry_pointer": "/results/28/support/hierarchy_disagreements/L2-outside-L1",
+      "issue_equals_full_support_operation": true
+    },
+    {
+      "target": "gb:BHS:ADM1:57655419B57652232258076",
+      "name": "South Eleuthera",
+      "owner_index": 9916,
+      "reason": "missing_reconstruction",
+      "geometry": {
+        "type": "MultiPolygon",
+        "structurally_nonempty": true,
+        "nonempty_leaf_types": {
+          "MultiPolygon": 1
+        },
+        "declared_dimensions": [
+          2
+        ],
+        "positions": 180,
+        "multipart_members": 42,
+        "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+      },
+      "issue_geometry_pointer": "/results/29/issues/0/geometry",
+      "support_geometry_pointer": "/results/29/support/missing_reconstruction",
+      "issue_equals_full_support_operation": true
+    },
+    {
+      "target": "gb:BHS:ADM1:57655419B57652232258076",
+      "name": "South Eleuthera",
+      "owner_index": 9916,
+      "reason": "extra_reconstruction",
+      "geometry": {
+        "type": "MultiPolygon",
+        "structurally_nonempty": true,
+        "nonempty_leaf_types": {
+          "MultiPolygon": 1
+        },
+        "declared_dimensions": [
+          2
+        ],
+        "positions": 143,
+        "multipart_members": 35,
+        "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+      },
+      "issue_geometry_pointer": "/results/29/issues/1/geometry",
+      "support_geometry_pointer": "/results/29/support/extra_reconstruction",
+      "issue_equals_full_support_operation": true
+    }
+  ],
+  "frozen_water_label_context": {
+    "source": {
+      "path": "bahamas-current-package-1947/authority-input-draft/frozen-category-rows.proposal.json",
+      "bytes": 1650507,
+      "sha256": "e29ff444618ca163a3da8c7a0b9639fbf8f58c0b5a744c21ac647a3e89063dee"
+    },
+    "labelled_cells": 7,
+    "South_Andros": 6,
+    "Mangrove_Cay": 1,
+    "rows": [
+      {
+        "owner_index": 9907,
+        "target": "gb:BHS:ADM1:57655419B29435673895959",
+        "y": 113056,
+        "start": 74436,
+        "end": 74437,
+        "frozen_label": "inland-water",
+        "qualification": "not established by this physical result review"
+      },
+      {
+        "owner_index": 9907,
+        "target": "gb:BHS:ADM1:57655419B29435673895959",
+        "y": 113057,
+        "start": 74435,
+        "end": 74436,
+        "frozen_label": "inland-water",
+        "qualification": "not established by this physical result review"
+      },
+      {
+        "owner_index": 9907,
+        "target": "gb:BHS:ADM1:57655419B29435673895959",
+        "y": 113059,
+        "start": 74434,
+        "end": 74435,
+        "frozen_label": "inland-water",
+        "qualification": "not established by this physical result review"
+      },
+      {
+        "owner_index": 9907,
+        "target": "gb:BHS:ADM1:57655419B29435673895959",
+        "y": 113060,
+        "start": 74433,
+        "end": 74434,
+        "frozen_label": "inland-water",
+        "qualification": "not established by this physical result review"
+      },
+      {
+        "owner_index": 9907,
+        "target": "gb:BHS:ADM1:57655419B29435673895959",
+        "y": 113065,
+        "start": 74430,
+        "end": 74431,
+        "frozen_label": "inland-water",
+        "qualification": "not established by this physical result review"
+      },
+      {
+        "owner_index": 9907,
+        "target": "gb:BHS:ADM1:57655419B29435673895959",
+        "y": 113072,
+        "start": 74429,
+        "end": 74430,
+        "frozen_label": "inland-water",
+        "qualification": "not established by this physical result review"
+      },
+      {
+        "owner_index": 9914,
+        "target": "gb:BHS:ADM1:57655419B49483307836090",
+        "y": 113069,
+        "start": 74423,
+        "end": 74424,
+        "frozen_label": "inland-water",
+        "qualification": "not established by this physical result review"
+      }
+    ],
+    "limit": "Literal existing proposal-label context only. No centre/row/owner/source operator or coverage classification was run; labels are not new qualification."
+  },
+  "existing_consumer_next_steps": [
+    {
+      "step": "Publish actual complete physical result and receipt through existing custody path; bind the actual whole-target-support JSON as physical_evidence and all target.source_receipt_sha256 values to its3aec57bafa96e0d627864e58b510dae8ec71e84a9e6fc79b06f636251d8c0453 SHA256. Keep whole32 physical_input, original physical_reproduction and full source-family/owner/selected provenance.",
+      "code_reference": "selected-neighbor-prevention.mjs:671-676,743-752"
+    },
+    {
+      "step": "Use only actually positive mapped_land_support/mapped_inland_water_support class geometries. Preserve declared frozen class rows, including SouthAndros6/Mangrove1 inland-water labels, for exact class-support checking; do not infer cell eligibility from32/26target counts or union water into land.",
+      "code_reference": "selected-neighbor-prevention.mjs:761-768,793-801,932-979"
+    },
+    {
+      "step": "Feed all original residual/conflict/hierarchy witnesses and all32 outside_mapped_L1_context geometries unchanged to the existing constructor. Its exact witnessCellEffects examines complete polygon interiors/boundaries and line/point primitives at requested centres; zero effect must be an actual authenticated consumer result, never assumed from line dimension or tiny coordinates.",
+      "code_reference": "selected-neighbor-prevention.mjs:575-625,898-919,973-979; src/native-grid.js:367-634"
+    },
+    {
+      "step": "EastGrand/HopeTown/Mangrove/SouthAndros are general-conflict owners. Preserve complete query relations in periodic frame0; supply explicit class rows when choosing mixed classes and genuine territorial_exclusions array as required by the existing typed evidence contract. This review does not supply territorial facts or authorize an inferred empty exclusion.",
+      "code_reference": "selected-neighbor-prevention.mjs:544-573,753-755,877-881"
+    },
+    {
+      "step": "Mayaguana andSouthEleuthera retain complete missing+extra polygonal witnesses; do not dismiss near-coincident numeric coordinates or introduce tolerance. Exact native requested-cell testing can establish zero effect for a candidate subset without erasing whole-source issues.",
+      "code_reference": "selected-neighbor-prevention.mjs:615-624,898-919,973-979"
+    },
+    {
+      "step": "Keep all remainders and source/country/semantic/date/licensing limits. Existing native diagnostic/authority operation needs separate complete reviewed typed inputs and fresh finite admission. Only actual constructor/current-owner-zero/conservation/selected acceptance can establish repair credit.",
+      "code_reference": "existing generic source-target-native authority contract; prior route diagnosis retained"
+    }
+  ],
+  "operating_context_only": {
+    "exit": 0,
+    "producer_elapsed_seconds": 13.745790916960686,
+    "saved_peak_rss_bytes": 362266624,
+    "child_phase_rss_bytes": 536870912,
+    "known_full_bound_prospective_bytes_parent_reported": 376276691,
+    "guards": "Unchanged cooperative boundary checks; not hard live RSS, process-tree supervision or preemption inside GEOS.",
+    "earlier_no_science_failures_preserved": true,
+    "timing_reconciliation": {
+      "path": "bahamas-current-package-1947/physical-001/timing-reconciliation.json",
+      "bytes": 455,
+      "sha256": "13c16869c4051b6e94aa7d5ed179ac4c97ed27b00462c195bc43e784319d291c"
+    },
+    "timing_meaning": "Existing BHS exit precedes IDN admission by26.5000219345s; no overlap established. This creates no corruption or rerun basis. Unchanged runtime/code attestation not repeated."
+  },
+  "retained_limits": [
+    "All9 issues remain literal and material; lower dimension is not zero effect on boundary-sensitive native centres.",
+    "All32 exterior-context polygons remain independent exclusions, including26 issue-free targets.",
+    "Four water-support targets do not imply all four are water-labelled candidates or that any of7 frozen water cells is covered; exact class checks pending.",
+    "GrandCay/Biminis original source coverage gaps, metadata malformed attribution, open semantic context and represented-year/physical observation-date limits remain.",
+    "No country assignment, native geometry operation, native centre scan, authority qualification, cell clearance or new repair credit."
+  ],
+  "rows": [
+    {
+      "index": 0,
+      "target": "gb:BHS:ADM1:57655419B62229097939124",
+      "name": "Acklins",
+      "owner_index": 9919,
+      "queries": 73,
+      "metadata_levels": {
+        "1": 73
+      },
+      "witnesses": {
+        "disjoint-after-explicit-predicate": 45,
+        "complete-operation-pointset": 28
+      },
+      "query_metadata_roster_exact": true,
+      "support": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 2234,
+          "multipart_members": 61,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 2272,
+          "multipart_members": 155,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        }
+      },
+      "issues": [],
+      "exterior_pointer": "/results/0/support/outside_mapped_L1_context"
+    },
+    {
+      "index": 1,
+      "target": "gb:BHS:ADM1:57655419B82083755348588",
+      "name": "Biminis",
+      "owner_index": 9929,
+      "queries": 418,
+      "metadata_levels": {
+        "1": 418
+      },
+      "witnesses": {
+        "disjoint-after-explicit-predicate": 392,
+        "complete-operation-pointset": 25,
+        "complete-source-record-reconstruction": 1
+      },
+      "query_metadata_roster_exact": true,
+      "support": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 642,
+          "multipart_members": 31,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 850,
+          "multipart_members": 128,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        }
+      },
+      "issues": [],
+      "exterior_pointer": "/results/1/support/outside_mapped_L1_context"
+    },
+    {
+      "index": 2,
+      "target": "gb:BHS:ADM1:57655419B63031142172255",
+      "name": "Berry Islands",
+      "owner_index": 9920,
+      "queries": 69,
+      "metadata_levels": {
+        "1": 69
+      },
+      "witnesses": {
+        "disjoint-after-explicit-predicate": 14,
+        "complete-operation-pointset": 55
+      },
+      "query_metadata_roster_exact": true,
+      "support": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 1489,
+          "multipart_members": 73,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 1601,
+          "multipart_members": 183,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        }
+      },
+      "issues": [],
+      "exterior_pointer": "/results/2/support/outside_mapped_L1_context"
+    },
+    {
+      "index": 3,
+      "target": "gb:BHS:ADM1:57655419B62023626616016",
+      "name": "Black Point",
+      "owner_index": 9918,
+      "queries": 73,
+      "metadata_levels": {
+        "1": 73
+      },
+      "witnesses": {
+        "disjoint-after-explicit-predicate": 17,
+        "complete-operation-pointset": 56
+      },
+      "query_metadata_roster_exact": true,
+      "support": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 1257,
+          "multipart_members": 81,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 1404,
+          "multipart_members": 149,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        }
+      },
+      "issues": [],
+      "exterior_pointer": "/results/3/support/outside_mapped_L1_context"
+    },
+    {
+      "index": 4,
+      "target": "gb:BHS:ADM1:57655419B31009871091546",
+      "name": "Cat Island",
+      "owner_index": 9908,
+      "queries": 9,
+      "metadata_levels": {
+        "1": 9
+      },
+      "witnesses": {
+        "disjoint-after-explicit-predicate": 7,
+        "complete-operation-pointset": 2
+      },
+      "query_metadata_roster_exact": true,
+      "support": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 908,
+          "multipart_members": 5,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 924,
+          "multipart_members": 41,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        }
+      },
+      "issues": [],
+      "exterior_pointer": "/results/4/support/outside_mapped_L1_context"
+    },
+    {
+      "index": 5,
+      "target": "gb:BHS:ADM1:57655419B6063467597350",
+      "name": "Central Abaco",
+      "owner_index": 9917,
+      "queries": 368,
+      "metadata_levels": {
+        "1": 368
+      },
+      "witnesses": {
+        "disjoint-after-explicit-predicate": 147,
+        "complete-operation-pointset": 219,
+        "complete-source-record-reconstruction": 2
+      },
+      "query_metadata_roster_exact": true,
+      "support": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 7567,
+          "multipart_members": 395,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 7699,
+          "multipart_members": 796,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        }
+      },
+      "issues": [],
+      "exterior_pointer": "/results/5/support/outside_mapped_L1_context"
+    },
+    {
+      "index": 6,
+      "target": "gb:BHS:ADM1:57655419B10554343974074",
+      "name": "Central Andros",
+      "owner_index": 9902,
+      "queries": 40,
+      "metadata_levels": {
+        "1": 40
+      },
+      "witnesses": {
+        "disjoint-after-explicit-predicate": 8,
+        "complete-operation-pointset": 32
+      },
+      "query_metadata_roster_exact": true,
+      "support": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 2886,
+          "multipart_members": 61,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 2921,
+          "multipart_members": 209,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        }
+      },
+      "issues": [],
+      "exterior_pointer": "/results/6/support/outside_mapped_L1_context"
+    },
+    {
+      "index": 7,
+      "target": "gb:BHS:ADM1:57655419B18095522454644",
+      "name": "Central Eleuthera",
+      "owner_index": 9904,
+      "queries": 9,
+      "metadata_levels": {
+        "1": 9
+      },
+      "witnesses": {
+        "disjoint-after-explicit-predicate": 6,
+        "complete-operation-pointset": 3
+      },
+      "query_metadata_roster_exact": true,
+      "support": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 467,
+          "multipart_members": 4,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 519,
+          "multipart_members": 90,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        }
+      },
+      "issues": [],
+      "exterior_pointer": "/results/7/support/outside_mapped_L1_context"
+    },
+    {
+      "index": 8,
+      "target": "gb:BHS:ADM1:57655419B78426284582077",
+      "name": "City of Freeport",
+      "owner_index": 9926,
+      "queries": 2,
+      "metadata_levels": {
+        "1": 2
+      },
+      "witnesses": {
+        "disjoint-after-explicit-predicate": 1,
+        "complete-operation-pointset": 1
+      },
+      "query_metadata_roster_exact": true,
+      "support": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "Polygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 79,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 83,
+          "multipart_members": 10,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        }
+      },
+      "issues": [],
+      "exterior_pointer": "/results/8/support/outside_mapped_L1_context"
+    },
+    {
+      "index": 9,
+      "target": "gb:BHS:ADM1:57655419B45053914770402",
+      "name": "Crooked Island",
+      "owner_index": 9913,
+      "queries": 69,
+      "metadata_levels": {
+        "1": 69
+      },
+      "witnesses": {
+        "disjoint-after-explicit-predicate": 36,
+        "complete-operation-pointset": 25,
+        "complete-source-record-reconstruction": 8
+      },
+      "query_metadata_roster_exact": true,
+      "support": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 1729,
+          "multipart_members": 43,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 1834,
+          "multipart_members": 68,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        }
+      },
+      "issues": [],
+      "exterior_pointer": "/results/9/support/outside_mapped_L1_context"
+    },
+    {
+      "index": 10,
+      "target": "gb:BHS:ADM1:57655419B55305756041974",
+      "name": "East Grand Bahama",
+      "owner_index": 9915,
+      "queries": 117,
+      "metadata_levels": {
+        "1": 116,
+        "2": 1
+      },
+      "witnesses": {
+        "disjoint-after-explicit-predicate": 43,
+        "complete-operation-pointset": 67,
+        "complete-source-record-reconstruction": 7
+      },
+      "query_metadata_roster_exact": true,
+      "support": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 3061,
+          "multipart_members": 133,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "mapped_inland_water_support": {
+          "type": "Polygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "Polygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 7,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 3136,
+          "multipart_members": 249,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "Polygon",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "contradictory_land_water_support": {
+          "type": "MultiLineString",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiLineString": 1
+          },
+          "declared_dimensions": [
+            1
+          ],
+          "positions": 12,
+          "multipart_members": 6,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        }
+      },
+      "issues": [
+        {
+          "target": "gb:BHS:ADM1:57655419B55305756041974",
+          "name": "East Grand Bahama",
+          "owner_index": 9915,
+          "reason": "contradictory_land_water_support",
+          "geometry": {
+            "type": "MultiLineString",
+            "structurally_nonempty": true,
+            "nonempty_leaf_types": {
+              "MultiLineString": 1
+            },
+            "declared_dimensions": [
+              1
+            ],
+            "positions": 12,
+            "multipart_members": 6,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "issue_geometry_pointer": "/results/10/issues/0/geometry",
+          "support_geometry_pointer": "/results/10/support/contradictory_land_water_support",
+          "issue_equals_full_support_operation": true
+        }
+      ],
+      "exterior_pointer": "/results/10/support/outside_mapped_L1_context"
+    },
+    {
+      "index": 11,
+      "target": "gb:BHS:ADM1:57655419B87015583910143",
+      "name": "Exuma",
+      "owner_index": 9930,
+      "queries": 303,
+      "metadata_levels": {
+        "1": 303
+      },
+      "witnesses": {
+        "disjoint-after-explicit-predicate": 125,
+        "complete-operation-pointset": 172,
+        "complete-source-record-reconstruction": 6
+      },
+      "query_metadata_roster_exact": true,
+      "support": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 4685,
+          "multipart_members": 219,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 5539,
+          "multipart_members": 598,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        }
+      },
+      "issues": [],
+      "exterior_pointer": "/results/11/support/outside_mapped_L1_context"
+    },
+    {
+      "index": 12,
+      "target": "gb:BHS:ADM1:57655419B94344627065554",
+      "name": "Grand Cay",
+      "owner_index": 9932,
+      "queries": 26,
+      "metadata_levels": {
+        "1": 26
+      },
+      "witnesses": {
+        "disjoint-after-explicit-predicate": 9,
+        "complete-operation-pointset": 17
+      },
+      "query_metadata_roster_exact": true,
+      "support": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 285,
+          "multipart_members": 20,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 282,
+          "multipart_members": 41,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        }
+      },
+      "issues": [],
+      "exterior_pointer": "/results/12/support/outside_mapped_L1_context"
+    },
+    {
+      "index": 13,
+      "target": "gb:BHS:ADM1:57655419B64917905581576",
+      "name": "Harbour Island",
+      "owner_index": 9923,
+      "queries": 3,
+      "metadata_levels": {
+        "1": 3
+      },
+      "witnesses": {
+        "disjoint-after-explicit-predicate": 2,
+        "complete-operation-pointset": 1
+      },
+      "query_metadata_roster_exact": true,
+      "support": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "Polygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 94,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 121,
+          "multipart_members": 12,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        }
+      },
+      "issues": [],
+      "exterior_pointer": "/results/13/support/outside_mapped_L1_context"
+    },
+    {
+      "index": 14,
+      "target": "gb:BHS:ADM1:57655419B91019969534321",
+      "name": "Hope Town",
+      "owner_index": 9931,
+      "queries": 559,
+      "metadata_levels": {
+        "1": 557,
+        "2": 2
+      },
+      "witnesses": {
+        "disjoint-after-explicit-predicate": 481,
+        "complete-operation-pointset": 76,
+        "complete-source-record-reconstruction": 2
+      },
+      "query_metadata_roster_exact": true,
+      "support": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 1634,
+          "multipart_members": 99,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "mapped_inland_water_support": {
+          "type": "Polygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "Polygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 5,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 1723,
+          "multipart_members": 178,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "Polygon",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "contradictory_land_water_support": {
+          "type": "MultiLineString",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiLineString": 1
+          },
+          "declared_dimensions": [
+            1
+          ],
+          "positions": 8,
+          "multipart_members": 4,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        }
+      },
+      "issues": [
+        {
+          "target": "gb:BHS:ADM1:57655419B91019969534321",
+          "name": "Hope Town",
+          "owner_index": 9931,
+          "reason": "contradictory_land_water_support",
+          "geometry": {
+            "type": "MultiLineString",
+            "structurally_nonempty": true,
+            "nonempty_leaf_types": {
+              "MultiLineString": 1
+            },
+            "declared_dimensions": [
+              1
+            ],
+            "positions": 8,
+            "multipart_members": 4,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "issue_geometry_pointer": "/results/14/issues/0/geometry",
+          "support_geometry_pointer": "/results/14/support/contradictory_land_water_support",
+          "issue_equals_full_support_operation": true
+        }
+      ],
+      "exterior_pointer": "/results/14/support/outside_mapped_L1_context"
+    },
+    {
+      "index": 15,
+      "target": "gb:BHS:ADM1:57655419B81962321006014",
+      "name": "Inagua",
+      "owner_index": 9928,
+      "queries": 5,
+      "metadata_levels": {
+        "1": 5
+      },
+      "witnesses": {
+        "disjoint-after-explicit-predicate": 2,
+        "complete-operation-pointset": 3
+      },
+      "query_metadata_roster_exact": true,
+      "support": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 1195,
+          "multipart_members": 4,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 1338,
+          "multipart_members": 198,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        }
+      },
+      "issues": [],
+      "exterior_pointer": "/results/15/support/outside_mapped_L1_context"
+    },
+    {
+      "index": 16,
+      "target": "gb:BHS:ADM1:57655419B2318826838910",
+      "name": "Long Island",
+      "owner_index": 9905,
+      "queries": 36,
+      "metadata_levels": {
+        "1": 36
+      },
+      "witnesses": {
+        "disjoint-after-explicit-predicate": 15,
+        "complete-operation-pointset": 21
+      },
+      "query_metadata_roster_exact": true,
+      "support": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 2542,
+          "multipart_members": 44,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 2610,
+          "multipart_members": 300,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        }
+      },
+      "issues": [],
+      "exterior_pointer": "/results/16/support/outside_mapped_L1_context"
+    },
+    {
+      "index": 17,
+      "target": "gb:BHS:ADM1:57655419B49483307836090",
+      "name": "Mangrove Cay",
+      "owner_index": 9914,
+      "queries": 26,
+      "metadata_levels": {
+        "1": 25,
+        "2": 1
+      },
+      "witnesses": {
+        "disjoint-after-explicit-predicate": 21,
+        "complete-operation-pointset": 5
+      },
+      "query_metadata_roster_exact": true,
+      "support": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 1301,
+          "multipart_members": 27,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "mapped_inland_water_support": {
+          "type": "Polygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "Polygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 7,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 1286,
+          "multipart_members": 93,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "Polygon",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "contradictory_land_water_support": {
+          "type": "MultiLineString",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiLineString": 1
+          },
+          "declared_dimensions": [
+            1
+          ],
+          "positions": 10,
+          "multipart_members": 5,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        }
+      },
+      "issues": [
+        {
+          "target": "gb:BHS:ADM1:57655419B49483307836090",
+          "name": "Mangrove Cay",
+          "owner_index": 9914,
+          "reason": "contradictory_land_water_support",
+          "geometry": {
+            "type": "MultiLineString",
+            "structurally_nonempty": true,
+            "nonempty_leaf_types": {
+              "MultiLineString": 1
+            },
+            "declared_dimensions": [
+              1
+            ],
+            "positions": 10,
+            "multipart_members": 5,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "issue_geometry_pointer": "/results/17/issues/0/geometry",
+          "support_geometry_pointer": "/results/17/support/contradictory_land_water_support",
+          "issue_equals_full_support_operation": true
+        }
+      ],
+      "exterior_pointer": "/results/17/support/outside_mapped_L1_context"
+    },
+    {
+      "index": 18,
+      "target": "gb:BHS:ADM1:57655419B31239819863643",
+      "name": "Mayaguana",
+      "owner_index": 9909,
+      "queries": 6,
+      "metadata_levels": {
+        "1": 6
+      },
+      "witnesses": {
+        "disjoint-after-explicit-predicate": 1,
+        "complete-operation-pointset": 5
+      },
+      "query_metadata_roster_exact": true,
+      "support": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 477,
+          "multipart_members": 11,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 496,
+          "multipart_members": 26,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          }
+        },
+        "missing_reconstruction": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 99,
+          "multipart_members": 23,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "extra_reconstruction": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 107,
+          "multipart_members": 26,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        }
+      },
+      "issues": [
+        {
+          "target": "gb:BHS:ADM1:57655419B31239819863643",
+          "name": "Mayaguana",
+          "owner_index": 9909,
+          "reason": "missing_reconstruction",
+          "geometry": {
+            "type": "MultiPolygon",
+            "structurally_nonempty": true,
+            "nonempty_leaf_types": {
+              "MultiPolygon": 1
+            },
+            "declared_dimensions": [
+              2
+            ],
+            "positions": 99,
+            "multipart_members": 23,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "issue_geometry_pointer": "/results/18/issues/0/geometry",
+          "support_geometry_pointer": "/results/18/support/missing_reconstruction",
+          "issue_equals_full_support_operation": true
+        },
+        {
+          "target": "gb:BHS:ADM1:57655419B31239819863643",
+          "name": "Mayaguana",
+          "owner_index": 9909,
+          "reason": "extra_reconstruction",
+          "geometry": {
+            "type": "MultiPolygon",
+            "structurally_nonempty": true,
+            "nonempty_leaf_types": {
+              "MultiPolygon": 1
+            },
+            "declared_dimensions": [
+              2
+            ],
+            "positions": 107,
+            "multipart_members": 26,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "issue_geometry_pointer": "/results/18/issues/1/geometry",
+          "support_geometry_pointer": "/results/18/support/extra_reconstruction",
+          "issue_equals_full_support_operation": true
+        }
+      ],
+      "exterior_pointer": "/results/18/support/outside_mapped_L1_context"
+    },
+    {
+      "index": 19,
+      "target": "gb:BHS:ADM1:57655419B38120742943128",
+      "name": "Moore's Island",
+      "owner_index": 9910,
+      "queries": 15,
+      "metadata_levels": {
+        "1": 15
+      },
+      "witnesses": {
+        "disjoint-after-explicit-predicate": 4,
+        "complete-operation-pointset": 10,
+        "complete-source-record-reconstruction": 1
+      },
+      "query_metadata_roster_exact": true,
+      "support": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 260,
+          "multipart_members": 12,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 285,
+          "multipart_members": 23,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        }
+      },
+      "issues": [],
+      "exterior_pointer": "/results/19/support/outside_mapped_L1_context"
+    },
+    {
+      "index": 20,
+      "target": "gb:BHS:ADM1:57655419B75676267470758",
+      "name": "New Providence",
+      "owner_index": 9925,
+      "queries": 29,
+      "metadata_levels": {
+        "1": 29
+      },
+      "witnesses": {
+        "disjoint-after-explicit-predicate": 5,
+        "complete-operation-pointset": 24
+      },
+      "query_metadata_roster_exact": true,
+      "support": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 993,
+          "multipart_members": 27,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 1126,
+          "multipart_members": 178,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        }
+      },
+      "issues": [],
+      "exterior_pointer": "/results/20/support/outside_mapped_L1_context"
+    },
+    {
+      "index": 21,
+      "target": "gb:BHS:ADM1:57655419B79428110843392",
+      "name": "North Abaco",
+      "owner_index": 9927,
+      "queries": 108,
+      "metadata_levels": {
+        "1": 107,
+        "2": 1
+      },
+      "witnesses": {
+        "disjoint-after-explicit-predicate": 57,
+        "complete-operation-pointset": 51
+      },
+      "query_metadata_roster_exact": true,
+      "support": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 1800,
+          "multipart_members": 63,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 1978,
+          "multipart_members": 276,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        }
+      },
+      "issues": [],
+      "exterior_pointer": "/results/21/support/outside_mapped_L1_context"
+    },
+    {
+      "index": 22,
+      "target": "gb:BHS:ADM1:57655419B63159467904865",
+      "name": "North Andros",
+      "owner_index": 9921,
+      "queries": 101,
+      "metadata_levels": {
+        "1": 101
+      },
+      "witnesses": {
+        "disjoint-after-explicit-predicate": 18,
+        "complete-operation-pointset": 64,
+        "complete-source-record-reconstruction": 19
+      },
+      "query_metadata_roster_exact": true,
+      "support": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 4887,
+          "multipart_members": 104,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 5371,
+          "multipart_members": 222,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        }
+      },
+      "issues": [],
+      "exterior_pointer": "/results/22/support/outside_mapped_L1_context"
+    },
+    {
+      "index": 23,
+      "target": "gb:BHS:ADM1:57655419B2538538242492",
+      "name": "North Eleuthera",
+      "owner_index": 9906,
+      "queries": 28,
+      "metadata_levels": {
+        "1": 28
+      },
+      "witnesses": {
+        "disjoint-after-explicit-predicate": 8,
+        "complete-operation-pointset": 20
+      },
+      "query_metadata_roster_exact": true,
+      "support": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 1197,
+          "multipart_members": 25,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 1237,
+          "multipart_members": 133,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        }
+      },
+      "issues": [],
+      "exterior_pointer": "/results/23/support/outside_mapped_L1_context"
+    },
+    {
+      "index": 24,
+      "target": "gb:BHS:ADM1:57655419B98686837957667",
+      "name": "Ragged Island",
+      "owner_index": 9933,
+      "queries": 129,
+      "metadata_levels": {
+        "1": 129
+      },
+      "witnesses": {
+        "disjoint-after-explicit-predicate": 55,
+        "complete-operation-pointset": 74
+      },
+      "query_metadata_roster_exact": true,
+      "support": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 1278,
+          "multipart_members": 79,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 1415,
+          "multipart_members": 237,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        }
+      },
+      "issues": [],
+      "exterior_pointer": "/results/24/support/outside_mapped_L1_context"
+    },
+    {
+      "index": 25,
+      "target": "gb:BHS:ADM1:57655419B42503330785161",
+      "name": "Rum Cay",
+      "owner_index": 9912,
+      "queries": 9,
+      "metadata_levels": {
+        "1": 9
+      },
+      "witnesses": {
+        "disjoint-after-explicit-predicate": 4,
+        "complete-operation-pointset": 5
+      },
+      "query_metadata_roster_exact": true,
+      "support": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 266,
+          "multipart_members": 6,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 303,
+          "multipart_members": 23,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        }
+      },
+      "issues": [],
+      "exterior_pointer": "/results/25/support/outside_mapped_L1_context"
+    },
+    {
+      "index": 26,
+      "target": "gb:BHS:ADM1:57655419B6447054147513",
+      "name": "San Salvador",
+      "owner_index": 9922,
+      "queries": 12,
+      "metadata_levels": {
+        "1": 12
+      },
+      "witnesses": {
+        "disjoint-after-explicit-predicate": 6,
+        "complete-operation-pointset": 6
+      },
+      "query_metadata_roster_exact": true,
+      "support": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 311,
+          "multipart_members": 7,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 304,
+          "multipart_members": 29,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        }
+      },
+      "issues": [],
+      "exterior_pointer": "/results/26/support/outside_mapped_L1_context"
+    },
+    {
+      "index": 27,
+      "target": "gb:BHS:ADM1:57655419B39711376309473",
+      "name": "South Abaco",
+      "owner_index": 9911,
+      "queries": 41,
+      "metadata_levels": {
+        "1": 41
+      },
+      "witnesses": {
+        "disjoint-after-explicit-predicate": 23,
+        "complete-operation-pointset": 16,
+        "complete-source-record-reconstruction": 2
+      },
+      "query_metadata_roster_exact": true,
+      "support": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 1212,
+          "multipart_members": 30,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 1248,
+          "multipart_members": 148,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        }
+      },
+      "issues": [],
+      "exterior_pointer": "/results/27/support/outside_mapped_L1_context"
+    },
+    {
+      "index": 28,
+      "target": "gb:BHS:ADM1:57655419B29435673895959",
+      "name": "South Andros",
+      "owner_index": 9907,
+      "queries": 178,
+      "metadata_levels": {
+        "1": 177,
+        "2": 1
+      },
+      "witnesses": {
+        "disjoint-after-explicit-predicate": 48,
+        "complete-operation-pointset": 126,
+        "complete-source-record-reconstruction": 4
+      },
+      "query_metadata_roster_exact": true,
+      "support": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 5506,
+          "multipart_members": 182,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "mapped_inland_water_support": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 58,
+          "multipart_members": 7,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 5878,
+          "multipart_members": 558,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "MultiPolygon",
+            "structurally_nonempty": true,
+            "nonempty_leaf_types": {
+              "MultiPolygon": 1
+            },
+            "declared_dimensions": [
+              2
+            ],
+            "positions": 12,
+            "multipart_members": 3,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "Polygon": 2,
+            "LineString": 34
+          },
+          "declared_dimensions": [
+            1,
+            2
+          ],
+          "positions": 76,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        }
+      },
+      "issues": [
+        {
+          "target": "gb:BHS:ADM1:57655419B29435673895959",
+          "name": "South Andros",
+          "owner_index": 9907,
+          "reason": "contradictory_land_water_support",
+          "geometry": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": true,
+            "nonempty_leaf_types": {
+              "Polygon": 2,
+              "LineString": 34
+            },
+            "declared_dimensions": [
+              1,
+              2
+            ],
+            "positions": 76,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "issue_geometry_pointer": "/results/28/issues/0/geometry",
+          "support_geometry_pointer": "/results/28/support/contradictory_land_water_support",
+          "issue_equals_full_support_operation": true
+        },
+        {
+          "target": "gb:BHS:ADM1:57655419B29435673895959",
+          "name": "South Andros",
+          "owner_index": 9907,
+          "reason": "L2-outside-L1",
+          "geometry": {
+            "type": "MultiPolygon",
+            "structurally_nonempty": true,
+            "nonempty_leaf_types": {
+              "MultiPolygon": 1
+            },
+            "declared_dimensions": [
+              2
+            ],
+            "positions": 12,
+            "multipart_members": 3,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "issue_geometry_pointer": "/results/28/issues/1/geometry",
+          "support_geometry_pointer": "/results/28/support/hierarchy_disagreements/L2-outside-L1",
+          "issue_equals_full_support_operation": true
+        }
+      ],
+      "exterior_pointer": "/results/28/support/outside_mapped_L1_context"
+    },
+    {
+      "index": 29,
+      "target": "gb:BHS:ADM1:57655419B57652232258076",
+      "name": "South Eleuthera",
+      "owner_index": 9916,
+      "queries": 6,
+      "metadata_levels": {
+        "1": 6
+      },
+      "witnesses": {
+        "disjoint-after-explicit-predicate": 2,
+        "complete-operation-pointset": 4
+      },
+      "query_metadata_roster_exact": true,
+      "support": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 695,
+          "multipart_members": 7,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 717,
+          "multipart_members": 46,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          }
+        },
+        "missing_reconstruction": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 180,
+          "multipart_members": 42,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "extra_reconstruction": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 143,
+          "multipart_members": 35,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        }
+      },
+      "issues": [
+        {
+          "target": "gb:BHS:ADM1:57655419B57652232258076",
+          "name": "South Eleuthera",
+          "owner_index": 9916,
+          "reason": "missing_reconstruction",
+          "geometry": {
+            "type": "MultiPolygon",
+            "structurally_nonempty": true,
+            "nonempty_leaf_types": {
+              "MultiPolygon": 1
+            },
+            "declared_dimensions": [
+              2
+            ],
+            "positions": 180,
+            "multipart_members": 42,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "issue_geometry_pointer": "/results/29/issues/0/geometry",
+          "support_geometry_pointer": "/results/29/support/missing_reconstruction",
+          "issue_equals_full_support_operation": true
+        },
+        {
+          "target": "gb:BHS:ADM1:57655419B57652232258076",
+          "name": "South Eleuthera",
+          "owner_index": 9916,
+          "reason": "extra_reconstruction",
+          "geometry": {
+            "type": "MultiPolygon",
+            "structurally_nonempty": true,
+            "nonempty_leaf_types": {
+              "MultiPolygon": 1
+            },
+            "declared_dimensions": [
+              2
+            ],
+            "positions": 143,
+            "multipart_members": 35,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "issue_geometry_pointer": "/results/29/issues/1/geometry",
+          "support_geometry_pointer": "/results/29/support/extra_reconstruction",
+          "issue_equals_full_support_operation": true
+        }
+      ],
+      "exterior_pointer": "/results/29/support/outside_mapped_L1_context"
+    },
+    {
+      "index": 30,
+      "target": "gb:BHS:ADM1:57655419B1305095208594",
+      "name": "Spanish Wells",
+      "owner_index": 9903,
+      "queries": 4,
+      "metadata_levels": {
+        "1": 4
+      },
+      "witnesses": {
+        "disjoint-after-explicit-predicate": 1,
+        "complete-operation-pointset": 3
+      },
+      "query_metadata_roster_exact": true,
+      "support": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 105,
+          "multipart_members": 3,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 126,
+          "multipart_members": 22,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        }
+      },
+      "issues": [],
+      "exterior_pointer": "/results/30/support/outside_mapped_L1_context"
+    },
+    {
+      "index": 31,
+      "target": "gb:BHS:ADM1:57655419B65085412826087",
+      "name": "West Grand Bahama",
+      "owner_index": 9924,
+      "queries": 122,
+      "metadata_levels": {
+        "1": 122
+      },
+      "witnesses": {
+        "disjoint-after-explicit-predicate": 18,
+        "complete-operation-pointset": 100,
+        "complete-source-record-reconstruction": 4
+      },
+      "query_metadata_roster_exact": true,
+      "support": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 3316,
+          "multipart_members": 151,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "structurally_nonempty": true,
+          "nonempty_leaf_types": {
+            "MultiPolygon": 1
+          },
+          "declared_dimensions": [
+            2
+          ],
+          "positions": 3669,
+          "multipart_members": 353,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "structurally_nonempty": false,
+            "nonempty_leaf_types": {},
+            "declared_dimensions": [],
+            "positions": 0,
+            "multipart_members": null,
+            "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "structurally_nonempty": false,
+          "nonempty_leaf_types": {},
+          "declared_dimensions": [],
+          "positions": 0,
+          "multipart_members": null,
+          "limit": "JSON-declared dimension/nonemptiness; no area, topology or geometric equivalence recomputed."
+        }
+      },
+      "issues": [],
+      "exterior_pointer": "/results/31/support/outside_mapped_L1_context"
+    }
+  ],
+  "operations": "Read-only actual JSON/source metadata streaming/code contract review. No producer, native/GSHHG body or geometry decode, GEOS predicate, repair classifier, runtime probe, code/config edit or result replacement."
+}

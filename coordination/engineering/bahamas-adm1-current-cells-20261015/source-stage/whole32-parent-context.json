@@ -1,0 +1,1413 @@
+{
+  "parents_and_ancestors": [
+    {
+      "id": "atlas:macro-review:province:1196e7d9826a7cf7",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 1,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "macro_correction_version": 1,
+        "membership_correction": "Bimini and Ragged Island are named Bahamian archipelago units. Correct inherited Florida/Cuba area matches to Bahamas within the Caribbean convention; no country-owner renderer or dated evidence is changed.",
+        "previous_group_id": "framework:province:ragged-island:03e7b020641b",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_approved": false,
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected its continent introduction and level 3/4 table. It places Bermuda in the Caribbean \"for convenience\"; Netherlands Antilles lists Bonaire and Curaçao; LEE is named Leeward Is. and lists individual northern island groups. This botanical recording convention is not physical geography certification.",
+              "title": "Brummitt, WGSRPD second edition (2001)",
+              "url": "https://raw.githubusercontent.com/tdwg/wgsrpd/52da7828aba9d461dd133c27b3bd7a4407161f54/109-488-1-ED/2nd%20Edition/TDWG_geo2.pdf"
+            }
+          ],
+          "rationale": "Inspected actual 1 location members and 0 child groups. Current role: Named source administrative unit grouped within this geographic area. Bahamas: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city.",
+          "remaining_reasons": [
+            "Lower-tier source footprints, dates and functional/local purposes require review; this record does not approve all member locations.",
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ]
+        },
+        "source": "gb:BHS:ADM1",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Ragged Island",
+      "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+    },
+    {
+      "id": "atlas:macro-review:province:7cc9e26ddd379ee7",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 1,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "macro_correction_version": 1,
+        "membership_correction": "Bimini and Ragged Island are named Bahamian archipelago units. Correct inherited Florida/Cuba area matches to Bahamas within the Caribbean convention; no country-owner renderer or dated evidence is changed.",
+        "previous_group_id": "framework:province:biminis:104e19cadad4",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_approved": false,
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected its continent introduction and level 3/4 table. It places Bermuda in the Caribbean \"for convenience\"; Netherlands Antilles lists Bonaire and Curaçao; LEE is named Leeward Is. and lists individual northern island groups. This botanical recording convention is not physical geography certification.",
+              "title": "Brummitt, WGSRPD second edition (2001)",
+              "url": "https://raw.githubusercontent.com/tdwg/wgsrpd/52da7828aba9d461dd133c27b3bd7a4407161f54/109-488-1-ED/2nd%20Edition/TDWG_geo2.pdf"
+            }
+          ],
+          "rationale": "Inspected actual 1 location members and 0 child groups. Current role: Named source administrative unit grouped within this geographic area. Bahamas: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city.",
+          "remaining_reasons": [
+            "Lower-tier source footprints, dates and functional/local purposes require review; this record does not approve all member locations.",
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ]
+        },
+        "source": "gb:BHS:ADM1",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Biminis",
+      "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+    },
+    {
+      "id": "framework:area:bahamas:1b4f84b30e9a",
+      "level": "area",
+      "metadata": {
+        "basis": "WGSRPD level 3 geographic area; source calls these botanical countries",
+        "child_count": 32,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "More than 20 provinces: review area scale",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected its continent introduction and level 3/4 table. It places Bermuda in the Caribbean \"for convenience\"; Netherlands Antilles lists Bonaire and Curaçao; LEE is named Leeward Is. and lists individual northern island groups. This botanical recording convention is not physical geography certification.",
+              "title": "Brummitt, WGSRPD second edition (2001)",
+              "url": "https://raw.githubusercontent.com/tdwg/wgsrpd/52da7828aba9d461dd133c27b3bd7a4407161f54/109-488-1-ED/2nd%20Edition/TDWG_geo2.pdf"
+            }
+          ],
+          "rationale": "Inspected actual 32 location members and 32 child groups. Current role: WGSRPD level 3 geographic area; source calls these botanical countries. Bahamas: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city.",
+          "remaining_reasons": [
+            "Lower-tier source footprints, dates and functional/local purposes require review; this record does not approve all member locations.",
+            "More than 20 provinces: review area scale",
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ]
+        },
+        "source": "Brummitt (2001), WGSRPD 2nd ed.; TDWG / Royal Botanic Gardens, Kew",
+        "source_url": "https://github.com/tdwg/wgsrpd"
+      },
+      "name": "Bahamas",
+      "parent_id": "framework:region:caribbean:ebd25dd0ca4c"
+    },
+    {
+      "id": "framework:continent:north-america:1ca27616f338",
+      "level": "continent",
+      "metadata": {
+        "basis": "Antarctica excluded",
+        "child_count": 3,
+        "framework_status": "atlas-defined",
+        "kind": "geographic",
+        "macro_boundary_review": {
+          "boundary_status": "open",
+          "convention": "North American mainland, Greenland and associated Arctic/North Atlantic islands, Central American isthmus north of the Darien divide, and Caribbean archipelagos. Bermuda is North Atlantic, outside the Caribbean subcontinent. Clipperton is a separately declared eastern-Pacific association. Mexico is wholly North American under this continental convention.",
+          "convention_status": "documented",
+          "definition_method": "Explicit stable geographic/archipelago reporting convention; exact membership represented by whole-location parent chains. No political owner field is used.",
+          "descendant_completion": "not implied by own convention/boundary review",
+          "evidence_file": "macro-boundary-decisions",
+          "semantic_status": "open",
+          "source_ids": [
+            "north-america",
+            "continental-boundaries",
+            "panama",
+            "bermuda",
+            "clipperton"
+          ]
+        },
+        "review_reasons": [],
+        "semantic_review": {
+          "action": "retain",
+          "boundary_status": "open",
+          "convention_status": "documented",
+          "descendant_completion": "not implied by own convention/boundary review",
+          "evidence": [
+            {
+              "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+              "source_sha256": "2df07d20d9546ade9575e883438f4ebb33f63f881ed19ab2d739917bbd9f56d4",
+              "title": "north-america",
+              "url": "https://education.nationalgeographic.org/resource/north-america-physical-geography/"
+            },
+            {
+              "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+              "source_sha256": "18a3cd875968521f60021bf283297875db419cf724e2e6d7bba03bfecae98a52",
+              "title": "continental-boundaries",
+              "url": "https://en.wikipedia.org/wiki/Boundaries_between_the_continents"
+            },
+            {
+              "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+              "source_sha256": "d33b33d6031c21e2f1b66efd4ce4567d6dfd5c4b18eddb5835f909eaa5440ef3",
+              "title": "panama",
+              "url": "https://en.wikipedia.org/wiki/Isthmus_of_Panama"
+            },
+            {
+              "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+              "source_sha256": "59a98a577681cc66bc5780ae0716bff6bdf45ae6ba45cb4a31008cb49f9e7e53",
+              "title": "bermuda",
+              "url": "https://en.wikipedia.org/wiki/Bermuda"
+            },
+            {
+              "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+              "source_sha256": "5fff2f4c1e038438ca8784e689cf6ad0b8196f7e695652d02c71ec5a0649e4a6",
+              "title": "clipperton",
+              "url": "https://en.wikipedia.org/wiki/Clipperton_Island"
+            }
+          ],
+          "rationale": "North American mainland, Greenland and associated Arctic/North Atlantic islands, Central American isthmus north of the Darien divide, and Caribbean archipelagos. Bermuda is North Atlantic, outside the Caribbean subcontinent. Clipperton is a separately declared eastern-Pacific association. Mexico is wholly North American under this continental convention.",
+          "remaining_reasons": [
+            "Exact physical segment, pending geographic association, named-island crosswalk or source omission remains open; see macro-boundary-decisions."
+          ],
+          "semantic_status": "open"
+        },
+        "source": "Atlas six-continent convention",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19"
+      },
+      "name": "North America",
+      "parent_id": null
+    },
+    {
+      "id": "framework:province:acklins:51914297927f",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 1,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected its continent introduction and level 3/4 table. It places Bermuda in the Caribbean \"for convenience\"; Netherlands Antilles lists Bonaire and Curaçao; LEE is named Leeward Is. and lists individual northern island groups. This botanical recording convention is not physical geography certification.",
+              "title": "Brummitt, WGSRPD second edition (2001)",
+              "url": "https://raw.githubusercontent.com/tdwg/wgsrpd/52da7828aba9d461dd133c27b3bd7a4407161f54/109-488-1-ED/2nd%20Edition/TDWG_geo2.pdf"
+            }
+          ],
+          "rationale": "Inspected actual 1 location members and 0 child groups. Current role: Named source administrative unit grouped within this geographic area. Bahamas: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city.",
+          "remaining_reasons": [
+            "Lower-tier source footprints, dates and functional/local purposes require review; this record does not approve all member locations.",
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ]
+        },
+        "source": "gb:BHS:ADM1",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Acklins",
+      "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+    },
+    {
+      "id": "framework:province:berry-islands:65ce2c04cab0",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 1,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected its continent introduction and level 3/4 table. It places Bermuda in the Caribbean \"for convenience\"; Netherlands Antilles lists Bonaire and Curaçao; LEE is named Leeward Is. and lists individual northern island groups. This botanical recording convention is not physical geography certification.",
+              "title": "Brummitt, WGSRPD second edition (2001)",
+              "url": "https://raw.githubusercontent.com/tdwg/wgsrpd/52da7828aba9d461dd133c27b3bd7a4407161f54/109-488-1-ED/2nd%20Edition/TDWG_geo2.pdf"
+            }
+          ],
+          "rationale": "Inspected actual 1 location members and 0 child groups. Current role: Named source administrative unit grouped within this geographic area. Bahamas: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city.",
+          "remaining_reasons": [
+            "Lower-tier source footprints, dates and functional/local purposes require review; this record does not approve all member locations.",
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ]
+        },
+        "source": "gb:BHS:ADM1",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Berry Islands",
+      "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+    },
+    {
+      "id": "framework:province:black-point:4f9658aa67ac",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 1,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected its continent introduction and level 3/4 table. It places Bermuda in the Caribbean \"for convenience\"; Netherlands Antilles lists Bonaire and Curaçao; LEE is named Leeward Is. and lists individual northern island groups. This botanical recording convention is not physical geography certification.",
+              "title": "Brummitt, WGSRPD second edition (2001)",
+              "url": "https://raw.githubusercontent.com/tdwg/wgsrpd/52da7828aba9d461dd133c27b3bd7a4407161f54/109-488-1-ED/2nd%20Edition/TDWG_geo2.pdf"
+            }
+          ],
+          "rationale": "Inspected actual 1 location members and 0 child groups. Current role: Named source administrative unit grouped within this geographic area. Bahamas: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city.",
+          "remaining_reasons": [
+            "Lower-tier source footprints, dates and functional/local purposes require review; this record does not approve all member locations.",
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ]
+        },
+        "source": "gb:BHS:ADM1",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Black Point",
+      "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+    },
+    {
+      "id": "framework:province:cat-island:b39f1f2401e1",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 1,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected its continent introduction and level 3/4 table. It places Bermuda in the Caribbean \"for convenience\"; Netherlands Antilles lists Bonaire and Curaçao; LEE is named Leeward Is. and lists individual northern island groups. This botanical recording convention is not physical geography certification.",
+              "title": "Brummitt, WGSRPD second edition (2001)",
+              "url": "https://raw.githubusercontent.com/tdwg/wgsrpd/52da7828aba9d461dd133c27b3bd7a4407161f54/109-488-1-ED/2nd%20Edition/TDWG_geo2.pdf"
+            }
+          ],
+          "rationale": "Inspected actual 1 location members and 0 child groups. Current role: Named source administrative unit grouped within this geographic area. Bahamas: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city.",
+          "remaining_reasons": [
+            "Lower-tier source footprints, dates and functional/local purposes require review; this record does not approve all member locations.",
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ]
+        },
+        "source": "gb:BHS:ADM1",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Cat Island",
+      "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+    },
+    {
+      "id": "framework:province:central-abaco:fa0579b18932",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 1,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected its continent introduction and level 3/4 table. It places Bermuda in the Caribbean \"for convenience\"; Netherlands Antilles lists Bonaire and Curaçao; LEE is named Leeward Is. and lists individual northern island groups. This botanical recording convention is not physical geography certification.",
+              "title": "Brummitt, WGSRPD second edition (2001)",
+              "url": "https://raw.githubusercontent.com/tdwg/wgsrpd/52da7828aba9d461dd133c27b3bd7a4407161f54/109-488-1-ED/2nd%20Edition/TDWG_geo2.pdf"
+            }
+          ],
+          "rationale": "Inspected actual 1 location members and 0 child groups. Current role: Named source administrative unit grouped within this geographic area. Bahamas: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city.",
+          "remaining_reasons": [
+            "Lower-tier source footprints, dates and functional/local purposes require review; this record does not approve all member locations.",
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ]
+        },
+        "source": "gb:BHS:ADM1",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Central Abaco",
+      "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+    },
+    {
+      "id": "framework:province:central-andros:f69353e75c51",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 1,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected its continent introduction and level 3/4 table. It places Bermuda in the Caribbean \"for convenience\"; Netherlands Antilles lists Bonaire and Curaçao; LEE is named Leeward Is. and lists individual northern island groups. This botanical recording convention is not physical geography certification.",
+              "title": "Brummitt, WGSRPD second edition (2001)",
+              "url": "https://raw.githubusercontent.com/tdwg/wgsrpd/52da7828aba9d461dd133c27b3bd7a4407161f54/109-488-1-ED/2nd%20Edition/TDWG_geo2.pdf"
+            }
+          ],
+          "rationale": "Inspected actual 1 location members and 0 child groups. Current role: Named source administrative unit grouped within this geographic area. Bahamas: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city.",
+          "remaining_reasons": [
+            "Lower-tier source footprints, dates and functional/local purposes require review; this record does not approve all member locations.",
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ]
+        },
+        "source": "gb:BHS:ADM1",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Central Andros",
+      "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+    },
+    {
+      "id": "framework:province:central-eleuthera:06fd2d2d04d4",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 1,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected its continent introduction and level 3/4 table. It places Bermuda in the Caribbean \"for convenience\"; Netherlands Antilles lists Bonaire and Curaçao; LEE is named Leeward Is. and lists individual northern island groups. This botanical recording convention is not physical geography certification.",
+              "title": "Brummitt, WGSRPD second edition (2001)",
+              "url": "https://raw.githubusercontent.com/tdwg/wgsrpd/52da7828aba9d461dd133c27b3bd7a4407161f54/109-488-1-ED/2nd%20Edition/TDWG_geo2.pdf"
+            }
+          ],
+          "rationale": "Inspected actual 1 location members and 0 child groups. Current role: Named source administrative unit grouped within this geographic area. Bahamas: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city.",
+          "remaining_reasons": [
+            "Lower-tier source footprints, dates and functional/local purposes require review; this record does not approve all member locations.",
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ]
+        },
+        "source": "gb:BHS:ADM1",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Central Eleuthera",
+      "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+    },
+    {
+      "id": "framework:province:city-of-freeport:284913970797",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 1,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected its continent introduction and level 3/4 table. It places Bermuda in the Caribbean \"for convenience\"; Netherlands Antilles lists Bonaire and Curaçao; LEE is named Leeward Is. and lists individual northern island groups. This botanical recording convention is not physical geography certification.",
+              "title": "Brummitt, WGSRPD second edition (2001)",
+              "url": "https://raw.githubusercontent.com/tdwg/wgsrpd/52da7828aba9d461dd133c27b3bd7a4407161f54/109-488-1-ED/2nd%20Edition/TDWG_geo2.pdf"
+            }
+          ],
+          "rationale": "Inspected actual 1 location members and 0 child groups. Current role: Named source administrative unit grouped within this geographic area. Bahamas: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city.",
+          "remaining_reasons": [
+            "Lower-tier source footprints, dates and functional/local purposes require review; this record does not approve all member locations.",
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ]
+        },
+        "source": "gb:BHS:ADM1",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "City of Freeport",
+      "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+    },
+    {
+      "id": "framework:province:crooked-island:967c80c9a355",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 1,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected its continent introduction and level 3/4 table. It places Bermuda in the Caribbean \"for convenience\"; Netherlands Antilles lists Bonaire and Curaçao; LEE is named Leeward Is. and lists individual northern island groups. This botanical recording convention is not physical geography certification.",
+              "title": "Brummitt, WGSRPD second edition (2001)",
+              "url": "https://raw.githubusercontent.com/tdwg/wgsrpd/52da7828aba9d461dd133c27b3bd7a4407161f54/109-488-1-ED/2nd%20Edition/TDWG_geo2.pdf"
+            }
+          ],
+          "rationale": "Inspected actual 1 location members and 0 child groups. Current role: Named source administrative unit grouped within this geographic area. Bahamas: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city.",
+          "remaining_reasons": [
+            "Lower-tier source footprints, dates and functional/local purposes require review; this record does not approve all member locations.",
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ]
+        },
+        "source": "gb:BHS:ADM1",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Crooked Island",
+      "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+    },
+    {
+      "id": "framework:province:east-grand-bahama:e16c6255204e",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 1,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected its continent introduction and level 3/4 table. It places Bermuda in the Caribbean \"for convenience\"; Netherlands Antilles lists Bonaire and Curaçao; LEE is named Leeward Is. and lists individual northern island groups. This botanical recording convention is not physical geography certification.",
+              "title": "Brummitt, WGSRPD second edition (2001)",
+              "url": "https://raw.githubusercontent.com/tdwg/wgsrpd/52da7828aba9d461dd133c27b3bd7a4407161f54/109-488-1-ED/2nd%20Edition/TDWG_geo2.pdf"
+            }
+          ],
+          "rationale": "Inspected actual 1 location members and 0 child groups. Current role: Named source administrative unit grouped within this geographic area. Bahamas: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city.",
+          "remaining_reasons": [
+            "Lower-tier source footprints, dates and functional/local purposes require review; this record does not approve all member locations.",
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ]
+        },
+        "source": "gb:BHS:ADM1",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "East Grand Bahama",
+      "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+    },
+    {
+      "id": "framework:province:exuma:c7af1fb263e0",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 1,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected its continent introduction and level 3/4 table. It places Bermuda in the Caribbean \"for convenience\"; Netherlands Antilles lists Bonaire and Curaçao; LEE is named Leeward Is. and lists individual northern island groups. This botanical recording convention is not physical geography certification.",
+              "title": "Brummitt, WGSRPD second edition (2001)",
+              "url": "https://raw.githubusercontent.com/tdwg/wgsrpd/52da7828aba9d461dd133c27b3bd7a4407161f54/109-488-1-ED/2nd%20Edition/TDWG_geo2.pdf"
+            }
+          ],
+          "rationale": "Inspected actual 1 location members and 0 child groups. Current role: Named source administrative unit grouped within this geographic area. Bahamas: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city.",
+          "remaining_reasons": [
+            "Lower-tier source footprints, dates and functional/local purposes require review; this record does not approve all member locations.",
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ]
+        },
+        "source": "gb:BHS:ADM1",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Exuma",
+      "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+    },
+    {
+      "id": "framework:province:grand-cay:83861011ce8d",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 1,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected its continent introduction and level 3/4 table. It places Bermuda in the Caribbean \"for convenience\"; Netherlands Antilles lists Bonaire and Curaçao; LEE is named Leeward Is. and lists individual northern island groups. This botanical recording convention is not physical geography certification.",
+              "title": "Brummitt, WGSRPD second edition (2001)",
+              "url": "https://raw.githubusercontent.com/tdwg/wgsrpd/52da7828aba9d461dd133c27b3bd7a4407161f54/109-488-1-ED/2nd%20Edition/TDWG_geo2.pdf"
+            }
+          ],
+          "rationale": "Inspected actual 1 location members and 0 child groups. Current role: Named source administrative unit grouped within this geographic area. Bahamas: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city.",
+          "remaining_reasons": [
+            "Lower-tier source footprints, dates and functional/local purposes require review; this record does not approve all member locations.",
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ]
+        },
+        "source": "gb:BHS:ADM1",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Grand Cay",
+      "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+    },
+    {
+      "id": "framework:province:harbour-island:d07e4fc33438",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 1,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected its continent introduction and level 3/4 table. It places Bermuda in the Caribbean \"for convenience\"; Netherlands Antilles lists Bonaire and Curaçao; LEE is named Leeward Is. and lists individual northern island groups. This botanical recording convention is not physical geography certification.",
+              "title": "Brummitt, WGSRPD second edition (2001)",
+              "url": "https://raw.githubusercontent.com/tdwg/wgsrpd/52da7828aba9d461dd133c27b3bd7a4407161f54/109-488-1-ED/2nd%20Edition/TDWG_geo2.pdf"
+            }
+          ],
+          "rationale": "Inspected actual 1 location members and 0 child groups. Current role: Named source administrative unit grouped within this geographic area. Bahamas: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city.",
+          "remaining_reasons": [
+            "Lower-tier source footprints, dates and functional/local purposes require review; this record does not approve all member locations.",
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ]
+        },
+        "source": "gb:BHS:ADM1",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Harbour Island",
+      "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+    },
+    {
+      "id": "framework:province:hope-town:780e96202197",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 1,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected its continent introduction and level 3/4 table. It places Bermuda in the Caribbean \"for convenience\"; Netherlands Antilles lists Bonaire and Curaçao; LEE is named Leeward Is. and lists individual northern island groups. This botanical recording convention is not physical geography certification.",
+              "title": "Brummitt, WGSRPD second edition (2001)",
+              "url": "https://raw.githubusercontent.com/tdwg/wgsrpd/52da7828aba9d461dd133c27b3bd7a4407161f54/109-488-1-ED/2nd%20Edition/TDWG_geo2.pdf"
+            }
+          ],
+          "rationale": "Inspected actual 1 location members and 0 child groups. Current role: Named source administrative unit grouped within this geographic area. Bahamas: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city.",
+          "remaining_reasons": [
+            "Lower-tier source footprints, dates and functional/local purposes require review; this record does not approve all member locations.",
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ]
+        },
+        "source": "gb:BHS:ADM1",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Hope Town",
+      "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+    },
+    {
+      "id": "framework:province:inagua:cc009d0e6666",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 1,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected its continent introduction and level 3/4 table. It places Bermuda in the Caribbean \"for convenience\"; Netherlands Antilles lists Bonaire and Curaçao; LEE is named Leeward Is. and lists individual northern island groups. This botanical recording convention is not physical geography certification.",
+              "title": "Brummitt, WGSRPD second edition (2001)",
+              "url": "https://raw.githubusercontent.com/tdwg/wgsrpd/52da7828aba9d461dd133c27b3bd7a4407161f54/109-488-1-ED/2nd%20Edition/TDWG_geo2.pdf"
+            }
+          ],
+          "rationale": "Inspected actual 1 location members and 0 child groups. Current role: Named source administrative unit grouped within this geographic area. Bahamas: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city.",
+          "remaining_reasons": [
+            "Lower-tier source footprints, dates and functional/local purposes require review; this record does not approve all member locations.",
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ]
+        },
+        "source": "gb:BHS:ADM1",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Inagua",
+      "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+    },
+    {
+      "id": "framework:province:long-island:c109cd0e9c59",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 1,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected its continent introduction and level 3/4 table. It places Bermuda in the Caribbean \"for convenience\"; Netherlands Antilles lists Bonaire and Curaçao; LEE is named Leeward Is. and lists individual northern island groups. This botanical recording convention is not physical geography certification.",
+              "title": "Brummitt, WGSRPD second edition (2001)",
+              "url": "https://raw.githubusercontent.com/tdwg/wgsrpd/52da7828aba9d461dd133c27b3bd7a4407161f54/109-488-1-ED/2nd%20Edition/TDWG_geo2.pdf"
+            }
+          ],
+          "rationale": "Inspected actual 1 location members and 0 child groups. Current role: Named source administrative unit grouped within this geographic area. Bahamas: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city.",
+          "remaining_reasons": [
+            "Lower-tier source footprints, dates and functional/local purposes require review; this record does not approve all member locations.",
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ]
+        },
+        "source": "gb:BHS:ADM1",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Long Island",
+      "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+    },
+    {
+      "id": "framework:province:mangrove-cay:7bcfb0f019c9",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 1,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected its continent introduction and level 3/4 table. It places Bermuda in the Caribbean \"for convenience\"; Netherlands Antilles lists Bonaire and Curaçao; LEE is named Leeward Is. and lists individual northern island groups. This botanical recording convention is not physical geography certification.",
+              "title": "Brummitt, WGSRPD second edition (2001)",
+              "url": "https://raw.githubusercontent.com/tdwg/wgsrpd/52da7828aba9d461dd133c27b3bd7a4407161f54/109-488-1-ED/2nd%20Edition/TDWG_geo2.pdf"
+            }
+          ],
+          "rationale": "Inspected actual 1 location members and 0 child groups. Current role: Named source administrative unit grouped within this geographic area. Bahamas: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city.",
+          "remaining_reasons": [
+            "Lower-tier source footprints, dates and functional/local purposes require review; this record does not approve all member locations.",
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ]
+        },
+        "source": "gb:BHS:ADM1",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Mangrove Cay",
+      "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+    },
+    {
+      "id": "framework:province:mayaguana:d1aa43e2d941",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 1,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected its continent introduction and level 3/4 table. It places Bermuda in the Caribbean \"for convenience\"; Netherlands Antilles lists Bonaire and Curaçao; LEE is named Leeward Is. and lists individual northern island groups. This botanical recording convention is not physical geography certification.",
+              "title": "Brummitt, WGSRPD second edition (2001)",
+              "url": "https://raw.githubusercontent.com/tdwg/wgsrpd/52da7828aba9d461dd133c27b3bd7a4407161f54/109-488-1-ED/2nd%20Edition/TDWG_geo2.pdf"
+            }
+          ],
+          "rationale": "Inspected actual 1 location members and 0 child groups. Current role: Named source administrative unit grouped within this geographic area. Bahamas: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city.",
+          "remaining_reasons": [
+            "Lower-tier source footprints, dates and functional/local purposes require review; this record does not approve all member locations.",
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ]
+        },
+        "source": "gb:BHS:ADM1",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Mayaguana",
+      "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+    },
+    {
+      "id": "framework:province:moore-s-island:fa17e9a3942d",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 1,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected its continent introduction and level 3/4 table. It places Bermuda in the Caribbean \"for convenience\"; Netherlands Antilles lists Bonaire and Curaçao; LEE is named Leeward Is. and lists individual northern island groups. This botanical recording convention is not physical geography certification.",
+              "title": "Brummitt, WGSRPD second edition (2001)",
+              "url": "https://raw.githubusercontent.com/tdwg/wgsrpd/52da7828aba9d461dd133c27b3bd7a4407161f54/109-488-1-ED/2nd%20Edition/TDWG_geo2.pdf"
+            }
+          ],
+          "rationale": "Inspected actual 1 location members and 0 child groups. Current role: Named source administrative unit grouped within this geographic area. Bahamas: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city.",
+          "remaining_reasons": [
+            "Lower-tier source footprints, dates and functional/local purposes require review; this record does not approve all member locations.",
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ]
+        },
+        "source": "gb:BHS:ADM1",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Moore's Island",
+      "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+    },
+    {
+      "id": "framework:province:new-providence:461547b304d6",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 1,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected its continent introduction and level 3/4 table. It places Bermuda in the Caribbean \"for convenience\"; Netherlands Antilles lists Bonaire and Curaçao; LEE is named Leeward Is. and lists individual northern island groups. This botanical recording convention is not physical geography certification.",
+              "title": "Brummitt, WGSRPD second edition (2001)",
+              "url": "https://raw.githubusercontent.com/tdwg/wgsrpd/52da7828aba9d461dd133c27b3bd7a4407161f54/109-488-1-ED/2nd%20Edition/TDWG_geo2.pdf"
+            }
+          ],
+          "rationale": "Inspected actual 1 location members and 0 child groups. Current role: Named source administrative unit grouped within this geographic area. Bahamas: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city.",
+          "remaining_reasons": [
+            "Lower-tier source footprints, dates and functional/local purposes require review; this record does not approve all member locations.",
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ]
+        },
+        "source": "gb:BHS:ADM1",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "New Providence",
+      "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+    },
+    {
+      "id": "framework:province:north-abaco:6fc2875f7560",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 1,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected its continent introduction and level 3/4 table. It places Bermuda in the Caribbean \"for convenience\"; Netherlands Antilles lists Bonaire and Curaçao; LEE is named Leeward Is. and lists individual northern island groups. This botanical recording convention is not physical geography certification.",
+              "title": "Brummitt, WGSRPD second edition (2001)",
+              "url": "https://raw.githubusercontent.com/tdwg/wgsrpd/52da7828aba9d461dd133c27b3bd7a4407161f54/109-488-1-ED/2nd%20Edition/TDWG_geo2.pdf"
+            }
+          ],
+          "rationale": "Inspected actual 1 location members and 0 child groups. Current role: Named source administrative unit grouped within this geographic area. Bahamas: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city.",
+          "remaining_reasons": [
+            "Lower-tier source footprints, dates and functional/local purposes require review; this record does not approve all member locations.",
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ]
+        },
+        "source": "gb:BHS:ADM1",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "North Abaco",
+      "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+    },
+    {
+      "id": "framework:province:north-andros:b32f94bffc93",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 1,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected its continent introduction and level 3/4 table. It places Bermuda in the Caribbean \"for convenience\"; Netherlands Antilles lists Bonaire and Curaçao; LEE is named Leeward Is. and lists individual northern island groups. This botanical recording convention is not physical geography certification.",
+              "title": "Brummitt, WGSRPD second edition (2001)",
+              "url": "https://raw.githubusercontent.com/tdwg/wgsrpd/52da7828aba9d461dd133c27b3bd7a4407161f54/109-488-1-ED/2nd%20Edition/TDWG_geo2.pdf"
+            }
+          ],
+          "rationale": "Inspected actual 1 location members and 0 child groups. Current role: Named source administrative unit grouped within this geographic area. Bahamas: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city.",
+          "remaining_reasons": [
+            "Lower-tier source footprints, dates and functional/local purposes require review; this record does not approve all member locations.",
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ]
+        },
+        "source": "gb:BHS:ADM1",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "North Andros",
+      "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+    },
+    {
+      "id": "framework:province:north-eleuthera:b67b41adb767",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 1,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected its continent introduction and level 3/4 table. It places Bermuda in the Caribbean \"for convenience\"; Netherlands Antilles lists Bonaire and Curaçao; LEE is named Leeward Is. and lists individual northern island groups. This botanical recording convention is not physical geography certification.",
+              "title": "Brummitt, WGSRPD second edition (2001)",
+              "url": "https://raw.githubusercontent.com/tdwg/wgsrpd/52da7828aba9d461dd133c27b3bd7a4407161f54/109-488-1-ED/2nd%20Edition/TDWG_geo2.pdf"
+            }
+          ],
+          "rationale": "Inspected actual 1 location members and 0 child groups. Current role: Named source administrative unit grouped within this geographic area. Bahamas: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city.",
+          "remaining_reasons": [
+            "Lower-tier source footprints, dates and functional/local purposes require review; this record does not approve all member locations.",
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ]
+        },
+        "source": "gb:BHS:ADM1",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "North Eleuthera",
+      "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+    },
+    {
+      "id": "framework:province:rum-cay:d0c117758005",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 1,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected its continent introduction and level 3/4 table. It places Bermuda in the Caribbean \"for convenience\"; Netherlands Antilles lists Bonaire and Curaçao; LEE is named Leeward Is. and lists individual northern island groups. This botanical recording convention is not physical geography certification.",
+              "title": "Brummitt, WGSRPD second edition (2001)",
+              "url": "https://raw.githubusercontent.com/tdwg/wgsrpd/52da7828aba9d461dd133c27b3bd7a4407161f54/109-488-1-ED/2nd%20Edition/TDWG_geo2.pdf"
+            }
+          ],
+          "rationale": "Inspected actual 1 location members and 0 child groups. Current role: Named source administrative unit grouped within this geographic area. Bahamas: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city.",
+          "remaining_reasons": [
+            "Lower-tier source footprints, dates and functional/local purposes require review; this record does not approve all member locations.",
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ]
+        },
+        "source": "gb:BHS:ADM1",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Rum Cay",
+      "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+    },
+    {
+      "id": "framework:province:san-salvador:d67bfb392349",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 1,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected its continent introduction and level 3/4 table. It places Bermuda in the Caribbean \"for convenience\"; Netherlands Antilles lists Bonaire and Curaçao; LEE is named Leeward Is. and lists individual northern island groups. This botanical recording convention is not physical geography certification.",
+              "title": "Brummitt, WGSRPD second edition (2001)",
+              "url": "https://raw.githubusercontent.com/tdwg/wgsrpd/52da7828aba9d461dd133c27b3bd7a4407161f54/109-488-1-ED/2nd%20Edition/TDWG_geo2.pdf"
+            }
+          ],
+          "rationale": "Inspected actual 1 location members and 0 child groups. Current role: Named source administrative unit grouped within this geographic area. Bahamas: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city.",
+          "remaining_reasons": [
+            "Lower-tier source footprints, dates and functional/local purposes require review; this record does not approve all member locations.",
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ]
+        },
+        "source": "gb:BHS:ADM1",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "San Salvador",
+      "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+    },
+    {
+      "id": "framework:province:south-abaco:728dd08b2e76",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 1,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected its continent introduction and level 3/4 table. It places Bermuda in the Caribbean \"for convenience\"; Netherlands Antilles lists Bonaire and Curaçao; LEE is named Leeward Is. and lists individual northern island groups. This botanical recording convention is not physical geography certification.",
+              "title": "Brummitt, WGSRPD second edition (2001)",
+              "url": "https://raw.githubusercontent.com/tdwg/wgsrpd/52da7828aba9d461dd133c27b3bd7a4407161f54/109-488-1-ED/2nd%20Edition/TDWG_geo2.pdf"
+            }
+          ],
+          "rationale": "Inspected actual 1 location members and 0 child groups. Current role: Named source administrative unit grouped within this geographic area. Bahamas: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city.",
+          "remaining_reasons": [
+            "Lower-tier source footprints, dates and functional/local purposes require review; this record does not approve all member locations.",
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ]
+        },
+        "source": "gb:BHS:ADM1",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "South Abaco",
+      "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+    },
+    {
+      "id": "framework:province:south-andros:4a64949a15a0",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 1,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected its continent introduction and level 3/4 table. It places Bermuda in the Caribbean \"for convenience\"; Netherlands Antilles lists Bonaire and Curaçao; LEE is named Leeward Is. and lists individual northern island groups. This botanical recording convention is not physical geography certification.",
+              "title": "Brummitt, WGSRPD second edition (2001)",
+              "url": "https://raw.githubusercontent.com/tdwg/wgsrpd/52da7828aba9d461dd133c27b3bd7a4407161f54/109-488-1-ED/2nd%20Edition/TDWG_geo2.pdf"
+            }
+          ],
+          "rationale": "Inspected actual 1 location members and 0 child groups. Current role: Named source administrative unit grouped within this geographic area. Bahamas: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city.",
+          "remaining_reasons": [
+            "Lower-tier source footprints, dates and functional/local purposes require review; this record does not approve all member locations.",
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ]
+        },
+        "source": "gb:BHS:ADM1",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "South Andros",
+      "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+    },
+    {
+      "id": "framework:province:south-eleuthera:e593524d2351",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 1,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected its continent introduction and level 3/4 table. It places Bermuda in the Caribbean \"for convenience\"; Netherlands Antilles lists Bonaire and Curaçao; LEE is named Leeward Is. and lists individual northern island groups. This botanical recording convention is not physical geography certification.",
+              "title": "Brummitt, WGSRPD second edition (2001)",
+              "url": "https://raw.githubusercontent.com/tdwg/wgsrpd/52da7828aba9d461dd133c27b3bd7a4407161f54/109-488-1-ED/2nd%20Edition/TDWG_geo2.pdf"
+            }
+          ],
+          "rationale": "Inspected actual 1 location members and 0 child groups. Current role: Named source administrative unit grouped within this geographic area. Bahamas: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city.",
+          "remaining_reasons": [
+            "Lower-tier source footprints, dates and functional/local purposes require review; this record does not approve all member locations.",
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ]
+        },
+        "source": "gb:BHS:ADM1",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "South Eleuthera",
+      "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+    },
+    {
+      "id": "framework:province:spanish-wells:671814fe3fed",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 1,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected its continent introduction and level 3/4 table. It places Bermuda in the Caribbean \"for convenience\"; Netherlands Antilles lists Bonaire and Curaçao; LEE is named Leeward Is. and lists individual northern island groups. This botanical recording convention is not physical geography certification.",
+              "title": "Brummitt, WGSRPD second edition (2001)",
+              "url": "https://raw.githubusercontent.com/tdwg/wgsrpd/52da7828aba9d461dd133c27b3bd7a4407161f54/109-488-1-ED/2nd%20Edition/TDWG_geo2.pdf"
+            }
+          ],
+          "rationale": "Inspected actual 1 location members and 0 child groups. Current role: Named source administrative unit grouped within this geographic area. Bahamas: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city.",
+          "remaining_reasons": [
+            "Lower-tier source footprints, dates and functional/local purposes require review; this record does not approve all member locations.",
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ]
+        },
+        "source": "gb:BHS:ADM1",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Spanish Wells",
+      "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+    },
+    {
+      "id": "framework:province:west-grand-bahama:49a23238eea7",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 1,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected its continent introduction and level 3/4 table. It places Bermuda in the Caribbean \"for convenience\"; Netherlands Antilles lists Bonaire and Curaçao; LEE is named Leeward Is. and lists individual northern island groups. This botanical recording convention is not physical geography certification.",
+              "title": "Brummitt, WGSRPD second edition (2001)",
+              "url": "https://raw.githubusercontent.com/tdwg/wgsrpd/52da7828aba9d461dd133c27b3bd7a4407161f54/109-488-1-ED/2nd%20Edition/TDWG_geo2.pdf"
+            }
+          ],
+          "rationale": "Inspected actual 1 location members and 0 child groups. Current role: Named source administrative unit grouped within this geographic area. Bahamas: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city.",
+          "remaining_reasons": [
+            "Lower-tier source footprints, dates and functional/local purposes require review; this record does not approve all member locations.",
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ]
+        },
+        "source": "gb:BHS:ADM1",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "West Grand Bahama",
+      "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+    },
+    {
+      "id": "framework:region:caribbean:ebd25dd0ca4c",
+      "level": "region",
+      "metadata": {
+        "basis": "WGSRPD level 2 geographic region; independent of political ownership",
+        "child_count": 17,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected its continent introduction and level 3/4 table. It places Bermuda in the Caribbean \"for convenience\"; Netherlands Antilles lists Bonaire and Curaçao; LEE is named Leeward Is. and lists individual northern island groups. This botanical recording convention is not physical geography certification.",
+              "title": "Brummitt, WGSRPD second edition (2001)",
+              "url": "https://raw.githubusercontent.com/tdwg/wgsrpd/52da7828aba9d461dd133c27b3bd7a4407161f54/109-488-1-ED/2nd%20Edition/TDWG_geo2.pdf"
+            },
+            {
+              "inspected_fact": "The introductory geography states Bermuda lies isolated in the western Atlantic at 32°19′ N, 64°46′ W, nearest Cape Hatteras, North Carolina; it is often mistaken as Caribbean but lies over 1,200 km north of the nearest Caribbean island. This directly contradicts botanical convenience grouping.",
+              "sha256": "f104b5df79de4f908998f96b4c9c4ee87824ac82c27cf13dcc6f3a2fcb3820d4",
+              "title": "Bermuda Government Department of Planning, State of the Environment",
+              "url": "https://planning.gov.bm/wp-content/uploads/2018/11/State-of-the-Environment.pdf"
+            },
+            {
+              "inspected_fact": "The page explicitly dates Curaçao and St Maarten becoming autonomous countries, and Bonaire/St Eustatius/Saba becoming special municipalities, to10 October 2010. A 2026 geographic label Netherlands Antilles should not imply the dissolved political entity.",
+              "sha256": "a8726474bd62ddecffc9db872b0823d68f1c62758e85ed097eedcc503e382690",
+              "title": "Government of the Netherlands, Caribbean parts of the Kingdom",
+              "url": "https://www.government.nl/topics/caribbean-parts-of-the-kingdom"
+            },
+            {
+              "inspected_fact": "Text identifies municipality reference established bylaw1304/1976 and 2010 provincial reform creating Artemisa/Mayabeque; source 2017 units still require full coast/vintage review.",
+              "sha256": "bee7cc26f1986998a9f3c4b3879ad3b6678cdd73e091c152286db63c6f9e7def",
+              "title": "Administrative taxonomy of Cuba (secondary)",
+              "url": "https://en.wikipedia.org/wiki/Municipalities_of_Cuba"
+            },
+            {
+              "inspected_fact": "Distinguishes municipalities, municipal districts and special Distrito Nacional; administrative names do not by themselves certify city envelopes or 2026coverage.",
+              "sha256": "2e4f45ea1f164ab16d45a52df68c4e07108f5d117a8c6736b21835d356f3cb34",
+              "title": "Administrative taxonomy of Dominican Republic (secondary)",
+              "url": "https://en.wikipedia.org/wiki/Municipalities_of_the_Dominican_Republic"
+            },
+            {
+              "inspected_fact": "Actual JSON enumerates34 communes, including Fort-de-France, Le Lamentin and Le Marin; atlas currently has one Martinique location.",
+              "sha256": "2d46807cc7c300a550d101c263a279b9c1b6ad22079e18536f7890213745c1d0",
+              "title": "French official geographic API, Martinique communes",
+              "url": "https://geo.api.gouv.fr/departements/972/communes?fields=nom,code&format=json"
+            },
+            {
+              "inspected_fact": "Actual JSON enumerates32 communes; atlas currently has one Guadeloupe location with six land components. New commune-plus-island coverage needs dated licensed boundaries, not arbitrary subdivisions.",
+              "sha256": "574ac999349079239d6d88f9a5b078c75770ad83e820b07f8afb93e44e5b03b7",
+              "title": "French official geographic API, Guadeloupe communes",
+              "url": "https://geo.api.gouv.fr/departements/971/communes?fields=nom,code&format=json"
+            },
+            {
+              "inspected_fact": "Lists named arrondissements and department relationships; these are coarser than communes and need district/local-purpose review.",
+              "sha256": "d6609f4ea9506c84dcb1ce0f573a85599a6eb699385070cc91b5d73dcb1039cf",
+              "title": "Administrative taxonomy of Haiti (secondary)",
+              "url": "https://en.wikipedia.org/wiki/Arrondissements_of_Haiti"
+            },
+            {
+              "inspected_fact": "Lists municipalities grouped by department and distinguishes elected municipal mayors from department governors; offshore Bay Islands remain Caribbean by geography.",
+              "sha256": "8659da13328da90225a47785aeea2ec8ab2ddd11422304662f06fef765510978",
+              "title": "Administrative taxonomy of Honduras (secondary)",
+              "url": "https://en.wikipedia.org/wiki/Municipalities_of_Honduras"
+            },
+            {
+              "inspected_fact": "Lists14 parishes; parish territories are meaningful small local references, while municipal Kingston/StAndrew relationships require distinct settlement/admin interpretation.",
+              "sha256": "23ce61add4b71c178a2caf3383bbcf5c09742d007a6b0fbbda3fe2dc4821aa1e",
+              "title": "Administrative taxonomy of Jamaica (secondary)",
+              "url": "https://en.wikipedia.org/wiki/Parishes_of_Jamaica"
+            },
+            {
+              "inspected_fact": "Lists named municipalities with department/autonomous-region context; Corn Island is a separately represented Caribbean island, not mainland region assignment by owner.",
+              "sha256": "e76ad0edfc8514695867c77d159b88476415d9f6040a8ad0a2809f232b08bc83",
+              "title": "Administrative taxonomy of Nicaragua (secondary)",
+              "url": "https://en.wikipedia.org/wiki/Municipalities_of_Nicaragua"
+            },
+            {
+              "inspected_fact": "The official page distinguishes counties and county equivalents, including Alaska boroughs/census areas, independent cities, Louisiana parishes and District of Columbia. It also documents economic-census-specific combinations; no automatic city aggregation follows from ADM number.",
+              "sha256": "9e203dd32c1a05fca06fb10d7e17781b67df5d5ac07b4b882c16ae29598aa75d",
+              "title": "US Census Bureau geographic levels",
+              "url": "https://www.census.gov/programs-surveys/economic-census/guidance-geographies/levels.html"
+            },
+            {
+              "inspected_fact": "Official page records finalized adoption of Connecticut’s nine Councils of Governments as county-equivalent geographic units and links the planning-region crosswalk/map. The atlas retains eight2018 counties, so that geometry must be explicitly vintage reference, not current administration.",
+              "sha256": "94cbd1b88f58a2e3cc74eb844ca5fa3d5278f195e732fb571e0bb97503174db2",
+              "title": "US Census Bureau county-equivalent changes in2020s",
+              "url": "https://www.census.gov/programs-surveys/geography/technical-documentation/county-changes/2020.html"
+            }
+          ],
+          "rationale": "Inspected actual 551 location members and 18 child groups. Current role: WGSRPD level 2 geographic region; independent of political ownership. Anguilla: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city. Antigua and Barbuda: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city. Aruba: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city. Bahamas: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city. Bajo Nuevo Bank (Petrel Is.): Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city. Barbados: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city. Bermuda: A coherent small island territory is a defensible location role; area must leave Caribbean botanical convenience grouping. Published environment report has parish land-use information, but no new parish subdivision is implied. British Virgin Islands: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city. Caribbean Netherlands: Bonaire is a named island/special municipality; retain geography independently of ownership and remove misleading Netherlands Antilles area label. Cayman Islands: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city. Colombia: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city. Cuba: Named local references and source vintages were inspected, with independent secondary taxonomy corroboration; actual current groups and every member ID are inventoried, but primary dated boundaries/local-purpose checks remain open. Curaçao: Whole-island local territory is plausible; retain separate polity identity and review settlement/footprint role. Replace dissolved political area label with the source’s exact geographic components. Dominica: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city. Dominican Republic: Named local references and source vintages were inspected, with independent secondary taxonomy corroboration; actual current groups and every member ID are inventoried, but primary dated boundaries/local-purpose checks remain open. France: Martinique and Guadeloupe are whole-department locations while ordinary local municipalities exist; this is a concrete granularity mismatch. Clipperton is a named remote atoll exception, independent from French political affiliation. Grenada: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city. Haiti: Named local references and source vintages were inspected, with independent secondary taxonomy corroboration; actual current groups and every member ID are inventoried, but primary dated boundaries/local-purpose checks remain open. Honduras: Named local references and source vintages were inspected, with independent secondary taxonomy corroboration; actual current groups and every member ID are inventoried, but primary dated boundaries/local-purpose checks remain open. Jamaica: Named local references and source vintages were inspected, with independent secondary taxonomy corroboration; actual current groups and every member ID are inventoried, but primary dated boundaries/local-purpose checks remain open. Montserrat: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city. Netherlands: Saba and St Eustatius are named island/special-municipality locations in Caribbean geography; political Netherlands must not move them to Europe. Nicaragua: Named local references and source vintages were inspected, with independent secondary taxonomy corroboration; actual current groups and every member ID are inventoried, but primary dated boundaries/local-purpose checks remain open. Puerto Rico: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city. Saint Barthelemy: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city. Saint Kitts and Nevis: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city. Saint Lucia: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city. Saint Martin: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city. Saint Vincent and the Grenadines: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city. Serranilla Bank: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city. Sint Maarten: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city. Trinidad and Tobago: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city. Turks and Caicos Islands: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city. US Naval Base Guantanamo Bay: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city. United States Minor Outlying Islands: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city. United States Virgin Islands: Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city. United States of America: County-equivalent local reference is defensible, but2018 vintage differs from modern Connecticut; county-based city aggregation and Alaska’s ecologically clipped census areas still need functional/local review. Venezuela (Bolivarian Republic of): Named remote-island/local source reference inspected in actual metadata; full subordinate-island membership, coastline retention, local settlement purpose and dated official-source crosswalk remain unverified. A whole territory is not automatically a coherent city.",
+          "remaining_reasons": [
+            "Lower-tier source footprints, dates and functional/local purposes require review; this record does not approve all member locations.",
+            "Previous reference grouping retained; semantic tier review outstanding",
+            "Macro boundaries must follow documented physical/cultural geography rather than political-owner assignment; actual membership is inspected but not independently certified everywhere."
+          ]
+        },
+        "source": "Brummitt (2001), WGSRPD 2nd ed.; TDWG / Royal Botanic Gardens, Kew",
+        "source_url": "https://github.com/tdwg/wgsrpd"
+      },
+      "name": "Caribbean",
+      "parent_id": "framework:subcontinent:caribbean:ee91c3316485"
+    },
+    {
+      "id": "framework:subcontinent:caribbean:ee91c3316485",
+      "level": "subcontinent",
+      "metadata": {
+        "basis": "Stable geographic framework, not dated political membership",
+        "child_count": 1,
+        "framework_status": "atlas-defined",
+        "kind": "geographic",
+        "macro_boundary_review": {
+          "boundary_status": "supported-convention",
+          "convention": "Caribbean/West Indian and Bahamian archipelagos, including islands whose present owners are continental South American states. Excludes Bermuda, already corrected into the North Atlantic mainland-associated branch. Bahamas are an explicit West Indian archipelago convention.",
+          "convention_status": "documented",
+          "definition_method": "Explicit stable geographic/archipelago reporting convention; exact membership represented by whole-location parent chains. No political owner field is used.",
+          "descendant_completion": "not implied by own convention/boundary review",
+          "evidence_file": "macro-boundary-decisions",
+          "semantic_status": "open",
+          "source_ids": [
+            "north-america",
+            "bermuda",
+            "continental-boundaries",
+            "caribbean"
+          ]
+        },
+        "review_reasons": [],
+        "semantic_review": {
+          "action": "retain",
+          "boundary_status": "supported",
+          "convention_status": "documented",
+          "descendant_completion": "not implied by own convention/boundary review",
+          "evidence": [
+            {
+              "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+              "source_sha256": "2df07d20d9546ade9575e883438f4ebb33f63f881ed19ab2d739917bbd9f56d4",
+              "title": "north-america",
+              "url": "https://education.nationalgeographic.org/resource/north-america-physical-geography/"
+            },
+            {
+              "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+              "source_sha256": "59a98a577681cc66bc5780ae0716bff6bdf45ae6ba45cb4a31008cb49f9e7e53",
+              "title": "bermuda",
+              "url": "https://en.wikipedia.org/wiki/Bermuda"
+            },
+            {
+              "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+              "source_sha256": "18a3cd875968521f60021bf283297875db419cf724e2e6d7bba03bfecae98a52",
+              "title": "continental-boundaries",
+              "url": "https://en.wikipedia.org/wiki/Boundaries_between_the_continents"
+            },
+            {
+              "inspected_fact": "The inspected geographic discussion distinguishes the Caribbean sea/island region, Greater/Lesser Antilles and Bahamas/West Indies conventions; Bermuda is independently checked as North Atlantic.",
+              "source_sha256": "072a8dd3d605cf36439a6af56846355f770e419e4e465b914e82bbefe05ec070",
+              "title": "caribbean",
+              "url": "https://en.wikipedia.org/wiki/Caribbean"
+            }
+          ],
+          "rationale": "Caribbean/West Indian and Bahamian archipelagos, including islands whose present owners are continental South American states. Excludes Bermuda, already corrected into the North Atlantic mainland-associated branch. Bahamas are an explicit West Indian archipelago convention.",
+          "remaining_reasons": [],
+          "semantic_status": "open"
+        },
+        "source": "Atlas geographic macro-groups",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19"
+      },
+      "name": "Caribbean",
+      "parent_id": "framework:continent:north-america:1ca27616f338"
+    }
+  ],
+  "limit": "Preserved hierarchy and semantic open statuses; no administrative vintage/current sovereignty approval inferred."
+}

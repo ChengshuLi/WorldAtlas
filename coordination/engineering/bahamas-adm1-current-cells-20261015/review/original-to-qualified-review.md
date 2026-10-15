@@ -1,0 +1,24 @@
+# Independent original-to-qualified Bahamas scientific review
+
+**PASS: the actual stock constructor qualifies exactly38,566 original requested native centres, across32 original source owners:38,559 declared land and7 declared water.** This is constructor qualification; current-owner-zero, current-selection conservation and final selected-output acceptance remain downstream normal delivery obligations. Accepted repair credit remains0 at this stage.
+
+Reviewer: `vn235_physical_input_review`, 2026-10-15. One substantive original→actual diagnostic→actual qualification review; no native/source/GSHHG rerun, runtime rehash, new tests/config packets or repository writes.
+
+The two requests bind the same exact immutable source-evidence/native-patch pairs at446a9a0050d6b96c520e2a94358b6228d1d00605 for both diagnostics and constructors. Actual outputs are published unchanged at **eeef732ee402e6fb48973601a2e70f7ff11c1210**, under `coordination/engineering/bahamas-adm1-current-cells-20261015/native-land30-authority-001/` and `native-mixed2-authority-001/`. Exact20 original product mode/OID/byte/SHA bindings are retained in the accompanying JSON, including the authority quartets, raw configs/observations/exits and diagnostics. No future commit is inferred.
+
+Independently joined the original12,482 intervals/3,831 rows and all32 source-index/owner/parent joins to the actual source evidence and outputs. Canonical base geometries match the original measured selected targets. Whole-owner groups are disjoint and exhaustive:
+
+- **land30:**30 owners,34,304 cells, all34,304 declared mapped-land support.
+- **mixed2:**owners9907/9914 (South Andros/Mangrove Cay),4,262 cells:4,255 mapped-land and7 mapped-inland-water support.
+
+Every actual diagnostic requested/supported/decision key equals its original scoped request; held rows/cells are empty and first failure is null. Every constructor ledger's native rows equals that same exact original scope, with no missing, extra, duplicate or reassigned key. The32 component IDs are unique and match their exact target/evidence binding. Native rows total34,304+4,262=**38,566**, preserving the original38,559/7 class map rather than manufacturing classes from a combined support union.
+
+Both requests retain the complete32-target stage, complete original BHS family and unchanged whole physical result SHA256`3aec57bafa96e0d627864e58b510dae8ec71e84a9e6fc79b06f636251d8c0453`. All **41 physical witnesses remain**:32 exterior contexts and9 measured issues (36 belonging to land30 owners,5 to mixed2 owners). No physical body, issue or exterior witness was dropped to obtain qualification; applicability is established only at the requested centres. Original whole-source physical/hierarchy findings persist and are not whole-parent clearance.
+
+Automatic source evidence preserves every scientific payload field exactly; only the four normal baseline fields are derived from selected baseline866c42b854910f17a80427dac19b2c850cd68093. The actual executed physical helper `scripts/qualify-source-cohort.py` SHA256`58ef81739b264085b2997be7baa3df03ba6bb673f91a160176efd79b71fec081` is retained separately from archived reproduction provenance. The complete normative latitude contract and unchanged native numerical/boundary semantics remain bound.
+
+Foreign-contact evidence reuse is descriptive (`machine_consumed_role:false`) and limited to the identical tested38,566 owner/source keys or literal unchanged subsets. The previously reviewed50-operand/full3763-member observation remains bound. Its **29,099 own-NE-interior-missing observations remain unchanged**; they are not automatic vetoes, foreign-country membership or positive NE coverage. No all368-family/global-original absence or jurisdiction approval is asserted. Grand Cay188/Biminis368 NE omissions, whole Biminis geometry, Haiti GeoPortal/`httpshttps` metadata anomalies, CC BY4/vintage, corrected Biminis/Ragged parents and open semantic limits persist.
+
+Both stock authority calls exited0 using fresh512MiB allowances. Recorded land30 operation:7.059183s, Node peak295,649,280B, charged phase313,943,153B. Mixed2:6.577856709s, Node peak252,133,376B, charged phase307,647,889B. Outer elapsed/exit records are preserved separately. These are internal child-process observations with boundary limits, not external or aggregate process-tree measurements.
+
+Rule hashes are `7e9c316e4f086cd8c1b0db60053b8c4f636c8499dd7a66037545b7220306683a` (land30) and `7148b990af2574e8ee2de005ca61ad47cf16617cca1eea0f14e7d8e9e276bfc6` (mixed2). The actual quartet contains `original-rule-preimage.json`, `authority-binding.json`, `constructor-result.json` and `preparation.json`; qualification rows are taken from the real constructor ledger, with no invented authority product. This review supports proceeding through normal delivery; it does not substitute for actual current-owner-zero or selected acceptance.
