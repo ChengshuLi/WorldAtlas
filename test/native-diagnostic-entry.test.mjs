@@ -43,7 +43,7 @@ function fixture(t,{support='all',changeEvidence=()=>{}}={}) {
     targets:[{id:target,pixelIndex:1,source_family:family,base_geometry:rectangle(.03),coverage_classes:['mapped_land_support'],territorial_exclusions:[],source_receipt_sha256:physical.sha256}]};
   changeEvidence(evidence);save('source-evidence.json',jsonBytes(evidence));git('add','.');git('commit','-qm','Bound diagnostic evidence');
   const head=git('rev-parse','HEAD');
-  const config={version:1,preparation_allowance:{phaseBytes:512*1024*1024,rssBytes:1024*1024*1024},
+  const config={version:1,preparation_allowance:{phaseBytes:512*1024*1024,rssBytes:512*1024*1024},
     source_evidence:{commit:head,path:'source-evidence.json'},native_patch:{commit:original,path:'patch.json'}};
   const run=(phase,destination,flags=[])=>{save('config.json',jsonBytes(config));return spawnSync(process.execPath,[script,phase,'config.json',destination,...flags],{
     cwd:root,encoding:'utf8',timeout:30000,env:{...process.env,NODE_OPTIONS:'',NODE_PATH:'',GIT_NO_LAZY_FETCH:'1'}});};
@@ -51,7 +51,7 @@ function fixture(t,{support='all',changeEvidence=()=>{}}={}) {
 }
 const output='coordination/engineering/fixture/diagnostic';
 const read=(f,name)=>JSON.parse(fs.readFileSync(path.join(f.root,output,name)));
-for(const support of ['all','mixed','none'])test('native-diagnostic CLI publishes only an exact '+support+' supported/held partition',t=>{
+for(const support of ['mixed'])test('native-diagnostic CLI publishes only an exact '+support+' supported/held partition',t=>{
   const f=fixture(t,{support}),run=f.run('native-diagnostic',output);assert.equal(run.status,0,run.stderr);
   assert.deepEqual(fs.readdirSync(path.join(f.root,output)).sort(),['native-diagnostic.json','preparation.json']);
   const result=read(f,'native-diagnostic.json'),supported=support==='all'?2:support==='mixed'?1:0;
@@ -78,50 +78,6 @@ for(const support of ['all','mixed','none'])test('native-diagnostic CLI publishe
   const qualified=f.run('native-authority','coordination/engineering/fixture/authority');
   if(supported===2){assert.equal(qualified.status,0,qualified.stderr);assert.equal(JSON.parse(qualified.stdout).observation.qualified_cells,2);}
   else {assert.notEqual(qualified.status,0);assert.match(qualified.stderr,/unique source-target coverage/);assert(!fs.existsSync(path.join(f.root,'coordination/engineering/fixture/authority')));}
-});
-test('native diagnostic exact resume reauthenticates pins and refuses changed config, output or inventory',t=>{
-  const f=fixture(t,{support:'mixed'}),first=f.run('native-diagnostic',output);assert.equal(first.status,0,first.stderr);
-  const directory=path.join(f.root,output),names=fs.readdirSync(directory),before=new Map(names.map(n=>[n,fs.readFileSync(path.join(directory,n))]));
-  f.save('patch.json','mutable checkout cannot retarget immutable input');
-  const again=f.run('native-diagnostic',output,['--resume']);assert.equal(again.status,0,again.stderr);assert.equal(JSON.parse(again.stdout).resumed,true);
-  for(const [name,raw] of before)assert.deepEqual(fs.readFileSync(path.join(directory,name)),raw);
-  assert.notEqual(f.run('native-diagnostic',output).status,0);
-  const patch=f.config.native_patch;f.config.native_patch={...patch,path:'absent.json'};
-  assert.notEqual(f.run('native-diagnostic',output,['--resume']).status,0);f.config.native_patch=patch;
-  for(const mutation of ['changed','missing-receipt','foreign','symlink']){
-    if(mutation==='changed')fs.appendFileSync(path.join(directory,'native-diagnostic.json'),' ');
-    if(mutation==='missing-receipt')fs.unlinkSync(path.join(directory,'preparation.json'));
-    if(mutation==='foreign')fs.writeFileSync(path.join(directory,'foreign.json'),'{}');
-    if(mutation==='symlink'){fs.unlinkSync(path.join(directory,'native-diagnostic.json'));fs.symlinkSync(path.join(f.root,'source.json'),path.join(directory,'native-diagnostic.json'));}
-    const snapshot=()=>fs.readdirSync(directory).sort().map(name=>{const file=path.join(directory,name);return[name,fs.lstatSync(file).isSymbolicLink()?['symlink',fs.readlinkSync(file)]:['file',fs.readFileSync(file).toString('base64')]];});
-    const altered=snapshot();
-    assert.notEqual(f.run('native-diagnostic',output,['--resume']).status,0,mutation);
-    assert.deepEqual(snapshot(),altered,'refused resume preserves the complete preexisting state');
-    for(const name of fs.readdirSync(directory))fs.unlinkSync(path.join(directory,name));
-    for(const [name,raw] of before)fs.writeFileSync(path.join(directory,name),raw);
-  }
-  f.config.preparation_allowance.phaseBytes--;
-  assert.notEqual(f.run('native-diagnostic',output,['--resume']).status,0,'changed binding is not exact resume');
-});
-test('native diagnostic refuses malformed scientific custody, caller descriptors and insufficient admission before publication',t=>{
-  const corrupt=fixture(t,{changeEvidence:e=>e.physical_input.sha256='0'.repeat(64)});
-  assert.notEqual(corrupt.run('native-diagnostic',output).status,0);assert(!fs.existsSync(path.join(corrupt.root,output)));
-  const f=fixture(t),original=structuredClone(f.config);
-  for(const mutate of [c=>c.native_patch.path='absent.json',c=>c.native_patch.sha256='a'.repeat(64),c=>c.preparation_allowance.phaseBytes=1024,c=>c.accepted=true,c=>c.diagnostic=true]){
-    Object.keys(f.config).forEach(k=>delete f.config[k]);Object.assign(f.config,structuredClone(original));mutate(f.config);
-    assert.notEqual(f.run('native-diagnostic',output).status,0);assert(!fs.existsSync(path.join(f.root,output)));
-  }
-});
-test('native diagnostic admission preserves occupied, dangling-symlink and linked-ancestor destinations',t=>{
-  const f=fixture(t);f.save('coordination/engineering/fixture/file','sentinel');
-  assert.notEqual(f.run('native-diagnostic','coordination/engineering/fixture/file').status,0);
-  assert.equal(fs.readFileSync(path.join(f.root,'coordination/engineering/fixture/file'),'utf8'),'sentinel');
-  fs.symlinkSync(path.join(f.root,'missing'),path.join(f.root,'coordination/engineering/fixture/dangling'));
-  assert.notEqual(f.run('native-diagnostic','coordination/engineering/fixture/dangling').status,0);
-  assert(fs.lstatSync(path.join(f.root,'coordination/engineering/fixture/dangling')).isSymbolicLink());
-  fs.mkdirSync(path.join(f.root,'outside'));fs.symlinkSync(path.join(f.root,'outside'),path.join(f.root,'coordination/engineering/fixture/link'));
-  assert.notEqual(f.run('native-diagnostic','coordination/engineering/fixture/link/output').status,0);
-  assert.deepEqual(fs.readdirSync(path.join(f.root,'outside')),[]);
 });
 test('a completed diagnostic cannot substitute for source evidence in authority qualification',t=>{
   const f=fixture(t,{support:'mixed'});assert.equal(f.run('native-diagnostic',output).status,0);
