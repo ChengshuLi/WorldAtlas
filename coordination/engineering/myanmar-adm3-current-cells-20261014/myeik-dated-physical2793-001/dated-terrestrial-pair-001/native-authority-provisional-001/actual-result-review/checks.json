@@ -1,0 +1,1315 @@
+{
+  "reviewer": "/root/myeik_repair_scope_review",
+  "status": "LOCAL/PROVISIONAL native source qualification only",
+  "method": "One bounded read-only actual-result review and integer/byte identity comparison; no scientific, native, test or constructor rerun.",
+  "execution": {
+    "command": [
+      "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "scripts/prepare-delivery-handoff.mjs",
+      "native-authority",
+      ".cache/myeik2-native-authority-config.json",
+      ".cache/delivery-handoff/myeik2-shared-native-authority-001"
+    ],
+    "cwd": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/019691611b258742619f49634549be315e3d03bee8ced03f3317fe9f0e793ba4/work",
+    "executing_commit": "dbcb4de35c05365c860ae4ba725cac346f2b73a7",
+    "accepted_correction_base": "3449c224e65ed3b8910c6ab37886bcdfc4952c7f",
+    "reviewed_semantic_donor": "e2e1f97831c2c5f999f22887909778d46eebe393",
+    "status": "local reviewed-unmerged shared semantic tree; no accepted semantic equivalence or selected delivery claimed",
+    "config_sha256": "769466543e42ae8d79b17840e284620790a841e4aa0ae8061771db25ce2b2208",
+    "started_utc": "2026-10-15T18:04:58.245812+00:00",
+    "exit_code": 0,
+    "elapsed_seconds": 13.223296291999999,
+    "ended_utc": "2026-10-15T18:05:11.471113+00:00",
+    "destination_exists": true,
+    "native_map_repair_or_adoption_credit": 0
+  },
+  "input_pin_count": 15,
+  "input_encoded_bytes": 24713327,
+  "input_all_whole_encoded_identities_verified_in_existing_shared_store": true,
+  "decoded_inputs_replayed": false,
+  "executing_commit_parent_verified": "3449c224e65ed3b8910c6ab37886bcdfc4952c7f",
+  "executing_code_bodies_verified": [
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "bytes": 162130,
+      "sha256": "bf63f33386d421640f2f80ee859388e2068c09ccc7bf309bc3c23d3a05f5381f",
+      "expectation": "exact reviewed VN donor whole body",
+      "git_blob_oid": "4a335c223eab17a827975d27bc2c50252b8f7491"
+    },
+    {
+      "path": "scripts/delivery-handoff-advance.mjs",
+      "bytes": 62528,
+      "sha256": "1424e734094bc28968b8ef496d306fcc3245369b991a769bb1071ee8eacc0e73",
+      "expectation": "exact reviewed VN donor whole body",
+      "git_blob_oid": "94f638470cad222b94468a01114a38f85fa558e5"
+    },
+    {
+      "path": "scripts/prepare-delivery-handoff.mjs",
+      "bytes": 103076,
+      "sha256": "9af68fbf30be170dd79d3fb83db58c6bc1bdcc74315ab1c1f28155efee228ed8",
+      "expectation": "normal three-way VN+c64 function composition",
+      "git_blob_oid": "2c3e811fa221976212e81c795acaf6c34b57c401"
+    },
+    {
+      "path": "src/native-grid.js",
+      "bytes": 37995,
+      "sha256": "78c1e2bc2df944f11b2b638645d20defa82511a1cb17debbf865921945b14740",
+      "expectation": "exact reviewed VN donor whole body",
+      "git_blob_oid": "1f3dc7193b2f791c8deb1ca34a182a3f402d7b5d"
+    },
+    {
+      "path": "test/dated-centre-authority.test.mjs",
+      "bytes": 23057,
+      "sha256": "59994da74897d43292e3b7177f89a3be5068fbddd1531130cc13ba2624069be4",
+      "expectation": "exact reviewed VN donor whole body",
+      "git_blob_oid": "4d6e4fddead11da655efd8d888e6f3776f9abd34"
+    }
+  ],
+  "exact_requested_rows": [
+    {
+      "y": 122215,
+      "runs": [
+        [
+          202763,
+          202764,
+          30271
+        ]
+      ]
+    },
+    {
+      "y": 122216,
+      "runs": [
+        [
+          202763,
+          202764,
+          30271
+        ]
+      ]
+    }
+  ],
+  "one_component_id": "source-target:8eaf07e5a739a7606b8a54b40f3d32f542b286dc321322d5c43287ebb45e1ac7",
+  "exact_qualified_cells": 2,
+  "extra_or_borrowed_keys": 0,
+  "physical_context_hits": [
+    {
+      "kind": "interior",
+      "pixelIndex": 30271,
+      "resolution": "superseded-by-adopted-dated-terrestrial-centre",
+      "role": "outside_mapped_L1_context",
+      "source_id": "gb:MMR:ADM3:66882298B62167174305830",
+      "x": 202763,
+      "y": 122215
+    },
+    {
+      "kind": "interior",
+      "pixelIndex": 30271,
+      "resolution": "superseded-by-adopted-dated-terrestrial-centre",
+      "role": "outside_mapped_L1_context",
+      "source_id": "gb:MMR:ADM3:66882298B62167174305830",
+      "x": 202763,
+      "y": 122216
+    }
+  ],
+  "full_physical_evidence_pin_retained": {
+    "bytes": 2175760,
+    "commit": "b413bc5c660142f7dd22f76a11ce411b78e812c4",
+    "git_blob_oid": "cd57433a828ce72ec711c740786e822c48344738",
+    "mode": "100644",
+    "path": "coordination/engineering/source-target-native-delivery-20261014/evidence/physical-support.json",
+    "sha256": "c13f3ca095f875c8fd18d02ebb3ebd771620e11fa411fabfa115901414db6338"
+  },
+  "full_physical_input_pin_retained": {
+    "bytes": 340778,
+    "commit": "b413bc5c660142f7dd22f76a11ce411b78e812c4",
+    "git_blob_oid": "49a68a0076e687b09804648ee3029c1ddf18125a",
+    "mode": "100644",
+    "path": "coordination/engineering/source-target-native-delivery-20261014/evidence/original-stage-inputs.json",
+    "sha256": "f6b617fdbf5cedc183a09e0f62341fe455f9f9ad23ed9cd3aa93dc90e8a8fad2"
+  },
+  "full_physical_reproduction_pin_retained": {
+    "bytes": 5450,
+    "commit": "b413bc5c660142f7dd22f76a11ce411b78e812c4",
+    "git_blob_oid": "73e005238c929a901185abb8321c419e7cd9f688",
+    "mode": "100644",
+    "path": "coordination/engineering/source-target-native-delivery-20261014/evidence/physical-reproduction.py",
+    "sha256": "05af43d7d7722e8d7bb201f5876a43d9c7f9a2d0f4ea39e467229351a35c9bc3"
+  },
+  "whole_original_country_family_retained": [
+    {
+      "parts": [
+        {
+          "bytes": 1396414,
+          "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+          "decoded_bytes": 4205367,
+          "decoded_sha256": "94c0c9af839094257d13a6fe6590feddb2dcb04540d87e58b656c9f000fb92a2",
+          "git_blob_oid": "6a91fcb22b44ae00401a0068a6c3e62bfed62374",
+          "mode": "100644",
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz",
+          "sha256": "57de50a588f418601412bb7a34cc2f43a3fd6d7d6f16635cb41b95e5ae505db6"
+        }
+      ],
+      "source_id": "gb:MMR:ADM3"
+    }
+  ],
+  "typed_adoption_review_frames_retained": [
+    {
+      "id": "adoption",
+      "role": "adoption",
+      "pin": {
+        "commit": "08ed829d2c698f55481bc4f3011223a55e88412d",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/myeik-dated-physical2793-001/dated-terrestrial-pair-001/adopted-terrestrial-body-pair.json",
+        "mode": "100644",
+        "git_blob_oid": "236790f8adaaf69da1229e1fc09a22ec6315c564",
+        "bytes": 6678,
+        "sha256": "9056e545d7dd567ef6c878d46822b79758d9123d34c52509fd4b58e7564dd822"
+      }
+    },
+    {
+      "id": "review",
+      "role": "review",
+      "pin": {
+        "commit": "08ed829d2c698f55481bc4f3011223a55e88412d",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/myeik-dated-physical2793-001/dated-terrestrial-pair-001/developed-pair-substantive-review.json",
+        "mode": "100644",
+        "git_blob_oid": "4d826ef680ad9c5a8c12b894aeeb9f163199f4b6",
+        "bytes": 9788,
+        "sha256": "7b594c73ab8f3705371b1b7a0d3f07115991ae8375636f688bc3e8e6ca4eda73"
+      }
+    },
+    {
+      "id": "observation",
+      "role": "observation",
+      "pin": {
+        "commit": "af05531ab877884ef0fea7f5e7f4a5616540c8a7",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/myeik-dated-physical2793-001/actual-native-blocks-001/S2A_47PMP_20200105_0_L2A/native-observations.json",
+        "mode": "100644",
+        "git_blob_oid": "2b3c49f8fe189dce1adc9376727d521918e541d1",
+        "bytes": 13113508,
+        "sha256": "54679419579293e030dbd90b5cad885e79522098af9f3e09f55cfd72f95c6c94"
+      }
+    },
+    {
+      "id": "rgb",
+      "role": "frame",
+      "pin": {
+        "commit": "08ed829d2c698f55481bc4f3011223a55e88412d",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/myeik-dated-physical2793-001/dated-terrestrial-pair-001/actual-native-blocks-001/S2A_47PMP_20200105_0_L2A/block-06-03/rgb-native.png",
+        "mode": "100644",
+        "git_blob_oid": "26bd392d0a4d8e67e7d50b443e51e485f48d8987",
+        "bytes": 1393737,
+        "sha256": "20f13d1d60c0b8b536169e5647d0164a9ad3c09322ffeed6b807d958840590fd"
+      },
+      "observation": "observation",
+      "block_pointer": "/blocks/32",
+      "display_pointer": "/blocks/32/displays/0",
+      "channels": "rgb",
+      "display_base": "coordination/engineering/myanmar-adm3-current-cells-20261014/myeik-dated-physical2793-001/dated-terrestrial-pair-001/actual-native-blocks-001"
+    },
+    {
+      "id": "nir-red-green",
+      "role": "frame",
+      "pin": {
+        "commit": "08ed829d2c698f55481bc4f3011223a55e88412d",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/myeik-dated-physical2793-001/dated-terrestrial-pair-001/actual-native-blocks-001/S2A_47PMP_20200105_0_L2A/block-06-03/nir-red-green-native.png",
+        "mode": "100644",
+        "git_blob_oid": "40a29028c536c103f86e31d0985c3a3455cb78dc",
+        "bytes": 1332044,
+        "sha256": "cef3199b463a4fdbcf6b5f2d2c0c8ec8b19c25b040a4427a092910a2b562e4ac"
+      },
+      "observation": "observation",
+      "block_pointer": "/blocks/32",
+      "display_pointer": "/blocks/32/displays/2",
+      "channels": "nir-red-green",
+      "display_base": "coordination/engineering/myanmar-adm3-current-cells-20261014/myeik-dated-physical2793-001/dated-terrestrial-pair-001/actual-native-blocks-001"
+    }
+  ],
+  "config": {
+    "path": ".cache/mmr-myeik-dated-interface-preparation-001/stock-bound-inputs-001/native-authority-config.json",
+    "bytes": 551,
+    "sha256": "769466543e42ae8d79b17840e284620790a841e4aa0ae8061771db25ce2b2208",
+    "git_blob_oid": "ac7757d3c9549f49458eaf22628ca69f9a728cc5"
+  },
+  "output_quartet": [
+    {
+      "path": ".cache/mmr-myeik-dated-interface-preparation-001/actual-stock-native-authority-001/complete-output/authority-binding.json",
+      "bytes": 875,
+      "sha256": "9147b88ae3bcf0f804fbc54cb5a0077d9b5fd7289635f4bc7e3d167a9224256b",
+      "git_blob_oid": "b6cae3126ffa81eb2a53c6d3e1f8ca876e3fd981"
+    },
+    {
+      "path": ".cache/mmr-myeik-dated-interface-preparation-001/actual-stock-native-authority-001/complete-output/constructor-result.json",
+      "bytes": 12717,
+      "sha256": "4eb631396ce0cf15df7bb57bfff4c284a6f919e3557a2424bf16040848d98231",
+      "git_blob_oid": "ae030ad6542e09bf98d1de2f5bc8eea751394327"
+    },
+    {
+      "path": ".cache/mmr-myeik-dated-interface-preparation-001/actual-stock-native-authority-001/complete-output/original-rule-preimage.json",
+      "bytes": 872,
+      "sha256": "a910bddf77cf9fcdd82854560f12c89bf615dd3628a8312f4be6cb96f3fa1528",
+      "git_blob_oid": "b58694be39f166218109837a9600c9fe08437c4d"
+    },
+    {
+      "path": ".cache/mmr-myeik-dated-interface-preparation-001/actual-stock-native-authority-001/complete-output/preparation.json",
+      "bytes": 501,
+      "sha256": "7d41fa826b99f4c274864f3ea075f8511d7316260479088d6bbdaf86559129b1",
+      "git_blob_oid": "6c11ad84f386775e814978950a6739f35318271f"
+    }
+  ],
+  "reported_internal_elapsed_seconds": 12.520528166,
+  "operating_limits": [
+    "External elapsed13.223296292seconds and internal reported12.520528166seconds are distinct clocks.",
+    "No peakRSS, process-tree peak, termination guard enforcement or measured allocation trace is present in this execution/quartet; none is independently established by this review.",
+    "Execution slot was released normally after copying outputs; immutable commit was read from existing shared object store without fetch.",
+    "Accepted semantic-code equivalence, actual current-owner-zero, conservation and selected delivery remain unestablished.",
+    "No map/repair credit, native acceptance or new physical-answer count."
+  ],
+  "findings": [],
+  "physical_witness_retention_review": {
+    "whole_result_targets": 5,
+    "selected_whole_member": "gb:MMR:ADM3:66882298B62167174305830",
+    "selected_original_issues": [],
+    "selected_query_relation_count": 725,
+    "selected_query_status_counts": {
+      "checked": 725
+    },
+    "complete_support_roles": [
+      "mapped_land_support",
+      "mapped_inland_water_support",
+      "outside_mapped_L1_context",
+      "hierarchy_disagreements",
+      "missing_reconstruction",
+      "extra_reconstruction",
+      "contradictory_land_water_support"
+    ],
+    "source_member": {
+      "member_name": "gshhs_f.b",
+      "member_sha256": "af9215d58ebc525b2d09654a89959829f09e6edc457f3666759cded37be4ecf6"
+    },
+    "historical_scope": "Diagnostic original GSHHG source-relative support for whole consumed targets; heterogeneous observation dates and physical authority limits retained.",
+    "previous_actual_witness_result_reused": ".cache/mmr-myeik6564-existing-export-observation-001/actual-observation-003.json",
+    "previous_actual_pair_contact_checks": [
+      {
+        "role": "mapped_land_support",
+        "pointer": "/results/0/support/mapped_land_support",
+        "pair_contacts": []
+      },
+      {
+        "role": "mapped_inland_water_support",
+        "pointer": "/results/0/support/mapped_inland_water_support",
+        "pair_contacts": []
+      },
+      {
+        "role": "outside_mapped_L1_context",
+        "pointer": "/results/0/support/outside_mapped_L1_context",
+        "pair_contacts": [
+          [
+            122215,
+            202763,
+            0
+          ],
+          [
+            122216,
+            202763,
+            0
+          ]
+        ]
+      },
+      {
+        "role": "missing_reconstruction",
+        "pointer": "/results/0/support/missing_reconstruction",
+        "pair_contacts": []
+      },
+      {
+        "role": "extra_reconstruction",
+        "pointer": "/results/0/support/extra_reconstruction",
+        "pair_contacts": []
+      },
+      {
+        "role": "contradictory_land_water_support",
+        "pointer": "/results/0/support/contradictory_land_water_support",
+        "pair_contacts": []
+      },
+      {
+        "role": "L2-outside-L1",
+        "pointer": "/results/0/support/hierarchy_disagreements/L2-outside-L1",
+        "pair_contacts": []
+      },
+      {
+        "role": "L3-outside-L2",
+        "pointer": "/results/0/support/hierarchy_disagreements/L3-outside-L2",
+        "pair_contacts": []
+      },
+      {
+        "role": "L4-outside-L3",
+        "pointer": "/results/0/support/hierarchy_disagreements/L4-outside-L3",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/0/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/1/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/2/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/3/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/4/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/5/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/6/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/7/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/8/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/9/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/10/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/11/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/12/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/13/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/14/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/15/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/16/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/17/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/18/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/19/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/20/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/21/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/22/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/24/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/25/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/26/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/27/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/28/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/29/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/31/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/32/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/33/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/34/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/36/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/37/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/39/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/40/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/41/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/42/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/43/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/44/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/45/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/46/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/47/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/48/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/49/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/50/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/51/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/52/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/53/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/54/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/55/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/56/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/57/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/58/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/59/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/60/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/61/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/62/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/63/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/64/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/65/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/66/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/67/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/68/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/69/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/70/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/71/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/72/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/73/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/74/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/75/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/76/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/77/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/78/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/79/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/80/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/81/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/82/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/83/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/84/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/85/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/86/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/87/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/88/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/89/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/90/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/91/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/93/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/94/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/95/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/96/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/98/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/100/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/101/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/102/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/105/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/106/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/107/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/108/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/109/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/110/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/111/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/112/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/113/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/115/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/116/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/118/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/119/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/120/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/122/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/123/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/124/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/126/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/127/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/128/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/131/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/135/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/138/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/142/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/145/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/163/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/166/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/173/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/175/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/190/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/204/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/208/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/217/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/219/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/225/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/229/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/238/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/250/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/256/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/259/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/270/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/272/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/276/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/295/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/302/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/303/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/314/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/324/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/333/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/341/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/342/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/344/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/349/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/350/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/355/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/366/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/385/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/404/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/417/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/426/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/434/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/440/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/442/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/444/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/445/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/457/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/460/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/462/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/470/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/471/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/476/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/488/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/494/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/511/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/521/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/525/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/529/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/538/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/544/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/548/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/549/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/573/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/577/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/595/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/609/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/611/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/618/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/623/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/629/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/633/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/653/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/668/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/674/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/714/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/715/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/716/witness_geometry",
+        "pair_contacts": []
+      },
+      {
+        "role": "query-witness",
+        "pointer": "/results/0/query_relations/718/witness_geometry",
+        "pair_contacts": []
+      }
+    ],
+    "negative_retention": "Exact donor code retains source/member/role before any precedence resolution. Non-exterior residual hits enter residualHits independently; mapped-water contacts enter waterHits and veto typed centres even without exterior. Exterior supersession requires interior plus an exact source-matched centre and no water hit. Original source/tie/territorial decisions remain consumed before supersession; later residual guard rejects co-located true negatives. This is a reading of executing exact donor bytes, not a rerun of adverse controls."
+  }
+}

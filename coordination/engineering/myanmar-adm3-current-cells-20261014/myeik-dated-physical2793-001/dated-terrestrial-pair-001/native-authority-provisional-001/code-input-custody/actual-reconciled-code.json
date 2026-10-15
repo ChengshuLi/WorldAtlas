@@ -1,0 +1,37 @@
+{
+  "accepted_correction_base": "3449c224e65ed3b8910c6ab37886bcdfc4952c7f",
+  "semantic_donor": "e2e1f97831c2c5f999f22887909778d46eebe393",
+  "method": "git cherry-pick --no-commit; normal automatic three-way merge; no manual source edit",
+  "files": [
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "bytes": 162130,
+      "sha256": "bf63f33386d421640f2f80ee859388e2068c09ccc7bf309bc3c23d3a05f5381f",
+      "expectation": "exact reviewed VN donor whole body"
+    },
+    {
+      "path": "scripts/delivery-handoff-advance.mjs",
+      "bytes": 62528,
+      "sha256": "1424e734094bc28968b8ef496d306fcc3245369b991a769bb1071ee8eacc0e73",
+      "expectation": "exact reviewed VN donor whole body"
+    },
+    {
+      "path": "scripts/prepare-delivery-handoff.mjs",
+      "bytes": 103076,
+      "sha256": "9af68fbf30be170dd79d3fb83db58c6bc1bdcc74315ab1c1f28155efee228ed8",
+      "expectation": "normal three-way VN+c64 function composition"
+    },
+    {
+      "path": "src/native-grid.js",
+      "bytes": 37995,
+      "sha256": "78c1e2bc2df944f11b2b638645d20defa82511a1cb17debbf865921945b14740",
+      "expectation": "exact reviewed VN donor whole body"
+    },
+    {
+      "path": "test/dated-centre-authority.test.mjs",
+      "bytes": 23057,
+      "sha256": "59994da74897d43292e3b7177f89a3be5068fbddd1531130cc13ba2624069be4",
+      "expectation": "exact reviewed VN donor whole body"
+    }
+  ]
+}

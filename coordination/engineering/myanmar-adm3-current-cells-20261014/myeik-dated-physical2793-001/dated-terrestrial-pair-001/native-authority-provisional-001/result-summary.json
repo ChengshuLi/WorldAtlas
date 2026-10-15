@@ -1,0 +1,101 @@
+{
+  "executing_commit": "dbcb4de35c05365c860ae4ba725cac346f2b73a7",
+  "status": "LOCAL/PROVISIONAL: reviewed shared semantics, not yet accepted semantic byte equivalence",
+  "qualified_original_keys": [
+    {
+      "owner": 30271,
+      "y": 122215,
+      "x": 202763
+    },
+    {
+      "owner": 30271,
+      "y": 122216,
+      "x": 202763
+    }
+  ],
+  "qualified_cells": 2,
+  "components": 1,
+  "requested_keys_equal_qualified_keys": true,
+  "physical_context_hits": [
+    {
+      "kind": "interior",
+      "pixelIndex": 30271,
+      "resolution": "superseded-by-adopted-dated-terrestrial-centre",
+      "role": "outside_mapped_L1_context",
+      "source_id": "gb:MMR:ADM3:66882298B62167174305830",
+      "x": 202763,
+      "y": 122215
+    },
+    {
+      "kind": "interior",
+      "pixelIndex": 30271,
+      "resolution": "superseded-by-adopted-dated-terrestrial-centre",
+      "role": "outside_mapped_L1_context",
+      "source_id": "gb:MMR:ADM3:66882298B62167174305830",
+      "x": 202763,
+      "y": 122216
+    }
+  ],
+  "exact_code_identities": [
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "bytes": 162130,
+      "sha256": "bf63f33386d421640f2f80ee859388e2068c09ccc7bf309bc3c23d3a05f5381f",
+      "expectation": "exact reviewed VN donor whole body",
+      "git_blob_oid": "4a335c223eab17a827975d27bc2c50252b8f7491"
+    },
+    {
+      "path": "scripts/delivery-handoff-advance.mjs",
+      "bytes": 62528,
+      "sha256": "1424e734094bc28968b8ef496d306fcc3245369b991a769bb1071ee8eacc0e73",
+      "expectation": "exact reviewed VN donor whole body",
+      "git_blob_oid": "94f638470cad222b94468a01114a38f85fa558e5"
+    },
+    {
+      "path": "scripts/prepare-delivery-handoff.mjs",
+      "bytes": 103076,
+      "sha256": "9af68fbf30be170dd79d3fb83db58c6bc1bdcc74315ab1c1f28155efee228ed8",
+      "expectation": "normal three-way VN+c64 function composition",
+      "git_blob_oid": "2c3e811fa221976212e81c795acaf6c34b57c401"
+    },
+    {
+      "path": "src/native-grid.js",
+      "bytes": 37995,
+      "sha256": "78c1e2bc2df944f11b2b638645d20defa82511a1cb17debbf865921945b14740",
+      "expectation": "exact reviewed VN donor whole body",
+      "git_blob_oid": "1f3dc7193b2f791c8deb1ca34a182a3f402d7b5d"
+    },
+    {
+      "path": "test/dated-centre-authority.test.mjs",
+      "bytes": 23057,
+      "sha256": "59994da74897d43292e3b7177f89a3be5068fbddd1531130cc13ba2624069be4",
+      "expectation": "exact reviewed VN donor whole body",
+      "git_blob_oid": "4d6e4fddead11da655efd8d888e6f3776f9abd34"
+    }
+  ],
+  "files": [
+    {
+      "path": "complete-output/authority-binding.json",
+      "bytes": 875,
+      "sha256": "9147b88ae3bcf0f804fbc54cb5a0077d9b5fd7289635f4bc7e3d167a9224256b"
+    },
+    {
+      "path": "complete-output/constructor-result.json",
+      "bytes": 12717,
+      "sha256": "4eb631396ce0cf15df7bb57bfff4c284a6f919e3557a2424bf16040848d98231"
+    },
+    {
+      "path": "complete-output/original-rule-preimage.json",
+      "bytes": 872,
+      "sha256": "a910bddf77cf9fcdd82854560f12c89bf615dd3628a8312f4be6cb96f3fa1528"
+    },
+    {
+      "path": "complete-output/preparation.json",
+      "bytes": 501,
+      "sha256": "7d41fa826b99f4c274864f3ea075f8511d7316260479088d6bbdaf86559129b1"
+    }
+  ],
+  "current_owner_zero_established": false,
+  "conservation_or_selected_delivery_established": false,
+  "accepted_native_map_or_repair_credit": 0
+}
