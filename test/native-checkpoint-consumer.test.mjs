@@ -380,8 +380,8 @@ async function trustedFixture(t,{incompleteNative=false}={}){
  const rootRow={id:'fixture',accepted_head:accepted,selected_commit:selected,selection_sha256:valueSha(selection),execution_commit:one,execution_code_sha256:valueSha(execution_code),runtime_sha256:valueSha(runtime),facts:pin('accepted/facts.json'),certificate:{...pin('accepted/certificate.json.gz'),decoded_bytes:valueBytes(full).length,decoded_sha256:valueSha(full)},publication:pin('accepted/publication.json'),custody:pin('accepted/custody.json'),routes:pin('accepted/routes.json')};
  save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',checkpoints:[rootRow]});commit();
  const api=await import(pathToFileURL(path.join(root,MODULE))),native={...await import(pathToFileURL(path.join(root,'scripts/check-effective-geographic-regression.mjs'))),...await import(pathToFileURL(path.join(root,'scripts/selected-checkpoint-native.mjs')))};
- const reader=new native.ImmutableReader(root,selected,{allowance:{phaseBytes:512*1024**2,rssBytes:512*1024**2}}),budget={shared:reader.budget,carriedBytes:1024};
- return {api,native,reader,budget,selected,root,git,save,commit,pin,ledger,patch,sidecar,envelope,selection,rootRow};
+ const reader=new native.ImmutableReader(root,selected);
+ return {api,native,reader,selected,root,git,save,commit,pin,ledger,patch,sidecar,envelope,selection,rootRow};
 }
 
 function candidateProducts(f,{ledger=f.ledger,patch=f.patch}={}){
@@ -395,10 +395,10 @@ function candidateProducts(f,{ledger=f.ledger,patch=f.patch}={}){
 }
 
 async function nativeTransition(f,candidate=f.selected){
- const qualified=f.api.qualifyCheckpoint({reader:f.reader,budget:f.budget});
+ const qualified=f.api.qualifyCheckpoint({reader:f.reader});
  assert.equal(qualified.available,true);
- const reader=new f.native.ImmutableReader(f.root,candidate,{allowance:f.reader.allowance,budget:f.reader.budget});
- const transition=f.api.qualifyTransition({state:qualified.state,reader,budget:f.budget});
+ const reader=new f.native.ImmutableReader(f.root,candidate,{invocation:f.reader.invocation});
+ const transition=f.api.qualifyTransition({state:qualified.state,reader});
  return {transition,reader};
 }
 
@@ -406,27 +406,25 @@ test('actual native consumer authenticates zero delta without a full selection o
  const f=await trustedFixture(t),{transition,reader}=await nativeTransition(f);
  assert.equal(transition.available,true);assert.deepEqual(transition.changedNativeRows,[]);
  const inventory=[...f.reader.inventory,...reader.inventory];
- const report=await f.native.compareSelectedCheckpointNative({transition,budget:f.budget});
+ const report=await f.native.compareSelectedCheckpointNative({transition});
  assert.equal(report.status,'no-new-native-loss');assert.equal(report.affected_rows,0);
  assert.equal(report.lost_or_reassigned_cells,0);assert.deepEqual(report.intervals,[]);
  assert.deepEqual(report.native_row_scope.shared_base_acquired_rows,[]);
  assert.deepEqual([...f.reader.inventory,...reader.inventory],inventory);
- assert.ok(report.phases[0].retained_phase_bytes<=f.reader.allowance.phaseBytes);
  assert.equal(report.checkpoint_custody.shared_base.accepted_checkpoint.checkpoint_id,'fixture');
  f.api.releaseCheckpoint(transition.baseline);
 });
 
-test('actual native consumer rejects forged, foreign-budget and expired zero-delta transitions',async t=>{
+test('actual native consumer rejects forged, foreign-invocation and expired zero-delta transitions',async t=>{
  const f=await trustedFixture(t),{transition}=await nativeTransition(f);
  for(const fake of [{...transition},JSON.parse(JSON.stringify(transition)),{available:true,changedNativeRows:[]}]){
-  const carry=f.budget.carriedBytes;
-  await assert.rejects(f.native.compareSelectedCheckpointNative({transition:fake,budget:f.budget}),/private qualified selected transition/);
-  assert.equal(f.budget.carriedBytes,carry);
+  await assert.rejects(f.native.compareSelectedCheckpointNative({transition:fake}),/private qualified selected transition/);
  }
- await assert.rejects(f.native.compareSelectedCheckpointNative({transition,budget:{...f.budget}}),/Foreign, expired or independently budgeted/);
+ const foreignReader=new f.native.ImmutableReader(f.root,f.selected);
+ assert.throws(()=>f.api.qualifyTransition({state:transition.baseline,reader:foreignReader}),/Foreign or expired checkpoint invocation/);
  assert.throws(()=>transition.changedNativeRows.push(1),TypeError);
  f.api.releaseCheckpoint(transition.baseline);
- await assert.rejects(f.native.compareSelectedCheckpointNative({transition,budget:f.budget}),/private qualified selected transition/);
+ await assert.rejects(f.native.compareSelectedCheckpointNative({transition}),/private qualified selected transition/);
 });
 
 test('actual unchanged native rows cannot hide missing complete ledger exceptions',async t=>{
@@ -441,22 +439,16 @@ test('actual changed transport bytes with unchanged declarations require explici
  const {transition}=await nativeTransition(f,candidate);
  assert.equal(transition.available,false);assert.equal(transition.cold,'candidate');
  assert.match(transition.reason,/routing|input/i);
- await assert.rejects(f.native.compareSelectedCheckpointNative({transition,budget:f.budget}),/private qualified selected transition/);
+ await assert.rejects(f.native.compareSelectedCheckpointNative({transition}),/private qualified selected transition/);
  f.api.releaseCheckpoint(transition.baseline);
-});
-
-test('actual native consumer admits caller carry before returning an empty success',async t=>{
- const f=await trustedFixture(t),{transition}=await nativeTransition(f);
- f.budget.carriedBytes+=f.reader.allowance.phaseBytes;
- await assert.rejects(f.native.compareSelectedCheckpointNative({transition,budget:f.budget}),/exceeds current allowance/);
 });
 
 
 test('actual visibility projection authenticates the selected whole normative latitude table',async t=>{
- const f=await trustedFixture(t),qualified=f.api.qualifyCheckpoint({reader:f.reader,budget:f.budget});
+ const f=await trustedFixture(t),qualified=f.api.qualifyCheckpoint({reader:f.reader});
  assert.equal(qualified.available,true);
- const result=f.api.projectVisibilityLatitudes({state:qualified.state,budget:f.budget});
+ const result=f.api.projectVisibilityLatitudes({state:qualified.state});
  assert.deepEqual([...result],[...nativeRowLatitudes(4)]);
  assert.ok([...f.reader.inventory.values()].some(p=>p.path==='data/latitudes.f64le.gz'&&p.whole_body_consumed));
- assert.throws(()=>f.api.projectVisibilityLatitudes({state:structuredClone(qualified.state),budget:f.budget}),/private qualified/);
+ assert.throws(()=>f.api.projectVisibilityLatitudes({state:structuredClone(qualified.state)}),/private qualified/);
 });

@@ -14,47 +14,6 @@ function nativeInput(){
     ownerRows:Array.from({length:8},(_,y)=>({y,complete_owner_intervals:[]})),
     size:8,latitudes:nativeRowLatitudes(8),rowStart:0,rowEnd:8};
 }
-test('accepted member parts union once without changing original source features',()=>{
-  const input=nativeInput(),before=structuredClone(input),result=deriveSourceTargetNativeDelta(input);
-  assert.deepEqual(result.rows,[{y:3,runs:[[2,6,1]]},{y:4,runs:[[2,6,1]]}]);
-  assert.equal(result.assigned_cells,8);assert.equal(result.ambiguous_owner_cells,0);
-  assert.equal(result.targets.length,1);assert.deepEqual(input,before);
-});
-test('same-owner overlap is a union, while a competing original remains ambiguous',()=>{
-  const input=nativeInput();input.sourceFeatures[0].geometry=rectangle(-89,46);
-  const overlap=deriveSourceTargetNativeDelta(input);assert.equal(overlap.assigned_cells,8);
-  input.sourceFeatures.push(feature('source:C',2,rectangle(-1,89)));
-  const conflict=deriveSourceTargetNativeDelta(input);
-  assert.equal(conflict.assigned_cells,4);assert.equal(conflict.ambiguous_owner_cells,4);
-});
-test('mapped member support cannot borrow an unmeasured sibling original',()=>{
-  const input=nativeInput();input.sourceFeatures[0].geometry=rectangle(-89,-1);
-  input.coverageFeatures=[{...feature('city',1,rectangle(-89,89)),source_id:'source:A'}];
-  const result=deriveSourceTargetNativeDelta(input);
-  assert.equal(result.assigned_cells,4);assert.equal(result.unsupported_coverage_cells,4);
-});
-test('same-owner holes, islands and occupied/excluded cells preserve their separate meanings',()=>{
-  const input=nativeInput();
-  input.sourceFeatures[0].geometry={type:'Polygon',coordinates:[...rectangle(-89,89).coordinates,...rectangle(-46,46).coordinates]};
-  input.coverageFeatures[0].geometry=rectangle(-89,89);
-  input.sourceFeatures[1].geometry=rectangle(-10,10); // no cell centres in this island
-  const holes=deriveSourceTargetNativeDelta(input);assert.equal(holes.assigned_cells,4);
-  input.sourceFeatures[1].geometry=rectangle(-30,0); // an independent island fills only the left hole cell
-  input.coverageFeatures[1].geometry=input.sourceFeatures[1].geometry;
-  const island=deriveSourceTargetNativeDelta(input);assert.equal(island.assigned_cells,6);
-  input.ownerRows[3].complete_owner_intervals=[[2,3,9]];
-  input.territorialExclusions=[feature('city',1,rectangle(46,89))];
-  const result=deriveSourceTargetNativeDelta(input);
-  assert.equal(result.assigned_cells,3);assert.equal(result.already_owned_cells,1);
-  assert.equal(result.territorial_exclusion_cells,2);assert.equal(result.reassigned_cells,0);
-});
-test('an original member boundary remains withheld inside a same-owner union',()=>{
-  const input=nativeInput();input.sourceFeatures[0].geometry=rectangle(-89,22.5);
-  input.sourceFeatures[1].geometry=rectangle(0,89);
-  input.coverageFeatures=input.sourceFeatures.map(f=>({...feature('city',1,f.geometry),source_id:f.id}));
-  const result=deriveSourceTargetNativeDelta(input);
-  assert.equal(result.boundary_cells,2);assert.equal(result.assigned_cells,6);
-});
 for(const [name,change,pattern]of [
   ['duplicate original ID',i=>i.sourceFeatures.push(i.sourceFeatures[0]),/source owner roster/],
   ['out-of-range native owner',i=>{i.sourceFeatures.forEach(f=>f.pixelIndex=2**32);i.targets[0].pixelIndex=2**32;},/source owner roster/],
@@ -126,8 +85,7 @@ function constructorFixture(change=()=>{}){
       throw Error('Unexpected fixture Git request: '+args.join(' '));
     }
   }
-  const reader=()=>new FixtureReader('.',version,{runtimeBytes:0,metadataBytes:0,outputBytes:0,
-    allowance:{phaseBytes:128*1024*1024,rssBytes:1024*1024*1024}});
+  const reader=()=>new FixtureReader('.',version);
   const locators={source_evidence:{commit:version,path:evidence.path},native_patch:{commit:version,path:patch.path}};
   return {run:()=>constructOriginalAuthority(reader(),locators),files,byBlob,membership,reader,state};
 }

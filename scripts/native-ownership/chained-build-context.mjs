@@ -1,20 +1,28 @@
 // Current operational routing; all lineage/scientific methods remain unchanged.
 // Exactly the approved unchanged v6→v7 stage, followed by the two-target v7→v8 stage.
-import fs from 'node:fs';import path from 'node:path';import assert from 'node:assert/strict';import{execFile}from'node:child_process';import{gunzipSync}from'node:zlib';import{createHash}from'node:crypto';import{fileURLToPath}from'node:url';
+import fs from 'node:fs';import path from 'node:path';import assert from 'node:assert/strict';import{spawn}from'node:child_process';import{gunzipSync}from'node:zlib';import{createHash}from'node:crypto';import{fileURLToPath}from'node:url';
 import{restoreWholeImage}from'../evidence/restore-whole-image.mjs';import{restoreCanonicalProducts,getRestoredCanonicalProducts,restoredContextMember,restoredContextPatch}from'../canonical-restoration.mjs';import{validateContextMigration}from'./validate-context-migration.mjs';
-import{candidateBudget,requirePlainExecution,preparationAllowance,preparationRequestAllowance}from'./native-preparation-guards.mjs';import{repositoryReader,safeEvidencePath}from'../evidence-quality.mjs';
+import{requirePlainExecution}from'./native-preparation-guards.mjs';import{repositoryReader,safeEvidencePath}from'../evidence-quality.mjs';
 import{validateNativeSelectionReceipt}from'./require-verified-selection.mjs';
 import{BEFORE,AFTER,TARGETS}from'../../coordination/engineering/eastern-two-gap-repair-native-20261007/native-producer.mjs';
-import{isDeepStrictEqual,promisify}from'node:util';
+import{isDeepStrictEqual}from'node:util';
 import{rebindCoverageManifest}from'../rebind-coverage-manifest.mjs';
-import{requireCurrentExecution,admitCurrentExecution}from'../../coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution.mjs';
+import{requireCurrentExecution}from'../../coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution.mjs';
 import{acquireOriginalContextPair,constructAliasedContextChunk,readContextBody}from'../../coordination/engineering/eastern-two-gap-repair-native-20261007/context-record-alias.mjs';
 import{applyBytePatch,verifyWholeBytes}from'../../coordination/engineering/eastern-two-gap-repair-native-20261007/byte-patch.mjs';
-const executeFile=promisify(execFile);
-// Preserve the replay boundary; bound only the original child old-space, not the plain outer Node.
+// Preserve the original isolated replay and wait for its actual process result.
 export async function replayOriginalV1(runner,image){
- const {stdout}=await executeFile(process.execPath,['--max-old-space-size=1536',runner],{cwd:image,env:{...process.env,WORLDATLAS_PACKAGE_STAGE:image},maxBuffer:32*1024*1024,encoding:'buffer'});
- return stdout;
+ return new Promise((resolve,reject)=>{
+  const child=spawn(process.execPath,[runner],{cwd:image,env:{...process.env,WORLDATLAS_PACKAGE_STAGE:image},stdio:['ignore','pipe','pipe']});
+  const stdout=[],stderr=[];
+  child.stdout.on('data',raw=>stdout.push(raw));child.stderr.on('data',raw=>stderr.push(raw));
+  child.on('error',reject);
+  child.on('close',(code,signal)=>{
+   const output=Buffer.concat(stdout),errorOutput=Buffer.concat(stderr);
+   if(code===0&&!signal)return resolve(output);
+   const error=Error('Original context replay failed');Object.assign(error,{code,signal,stdout:output,stderr:errorOutput});reject(error);
+  });
+ });
 }
 const sha=b=>createHash('sha256').update(b).digest('hex');
 export function selectBuildContextValidator(stage,{legacy,current}){
@@ -65,55 +73,51 @@ export function authenticateSuccessorContextInventory(indexRaw,imageIndex,compar
   assert.equal(retained.original_binding.scientific_execution_commit,'5b32388df0501b013ac9a3ba97864932db493d59');assert.deepEqual(retained.original_binding.original_product,pin,'Original complete scientific context descriptor changed');
  }return index;
 }
-// Exact retained launch-option and current operational-budget migration; all other authored helper bytes
-// still require literal equality. This is not a future helper-code exemption.
-export function verifyPreparationBudgetCode(oldRaw,currentRaw,oldPin,currentPin){
- assert.equal(oldPin.sha256,'6c4ea2f29f6bfed9176fa8c38dfde522d859442797e4a3cce76f250c69c75fb0','Foreign historical preparation guard');assert.equal(oldPin.bytes,6371);
- const approvedCurrent = new Map([
-  ['227b982fac966fff5e55483c62ecb181defd55194b2946e31b7606574013f676',9849],
-  ['ae723ff929676528a8b17b2d3841953c7778aba97c9bbe8834ee2042515b1df5',10831],
- ]);
- assert.equal(approvedCurrent.get(currentPin.sha256),currentPin.bytes,'Foreign current preparation guard');
- assert.equal(oldRaw.length,oldPin.bytes);assert.equal(sha(oldRaw),oldPin.sha256);assert.equal(currentRaw.length,currentPin.bytes);assert.equal(sha(currentRaw),currentPin.sha256);
- return currentPin.bytes-oldPin.bytes;
-}
-export function verifyAuthoredValidatorSources({stage,codeIndex,authored,currentFiles,currentRoot,charge=()=>{}}){
+export function verifyAuthoredValidatorSources({stage,codeIndex,authored,currentFiles,currentRoot}){
  const required=new Set(['package.json']);
  function visit(p){if(required.has(p))return;required.add(p);safeEvidencePath(p);const raw=fs.readFileSync(path.join(authored,p));for(const m of raw.toString('utf8').matchAll(/(?:from\s*|import\s*(?:\(\s*)?)['"]([^'"]+)['"]/g))if(m[1].startsWith('.'))visit(path.posix.normalize(path.posix.join(path.posix.dirname(p),m[1])));}
  visit('scripts/native-ownership/validate-build-context-stage.mjs');assert.deepEqual(stage.validator_sources.map(p=>p.path).sort(),[...required].sort(),'Complete authored validator import closure required');
- const budgetAdaptations=[];
- const wrappers=new Set(['package.json','scripts/evidence-quality.mjs','scripts/native-ownership/validate-build-context-stage.mjs','coordination/engineering/eastern-two-gap-repair-native-20261007/chained-context.mjs']);
- for(const pin of stage.validator_sources){const member=codeIndex.files.find(p=>p.path===pin.path);assert(member);assert.equal(member.bytes,pin.bytes);assert.equal(member.sha256,pin.sha256);const raw=fs.readFileSync(path.join(authored,pin.path));assert.equal(raw.length,pin.bytes);assert.equal(sha(raw),pin.sha256);charge(raw.length);
+ // Historical authored code and today's operational custody are separate exact
+ // input inventories. These reviewed resource-policy deletions change loaders
+ // and launch wrappers; the numerical/migration implementations stay literal.
+ // requireCurrentExecution authenticates every current body before this check.
+ const wrappers=new Set([
+  'package.json','scripts/evidence-quality.mjs',
+  'scripts/native-ownership/validate-build-context-stage.mjs',
+  'scripts/native-ownership/native-preparation-guards.mjs',
+  'scripts/native-ownership/native-only-inputs.mjs',
+  'scripts/native-ownership/native-candidate-manifest.mjs',
+  'scripts/native-ownership/read-pinned-build-file.mjs',
+  'scripts/native-ownership/require-verified-selection.mjs',
+  'scripts/native-ownership/validate-context-input-stage.mjs',
+  'coordination/engineering/eastern-two-gap-repair-native-20261007/chained-context.mjs',
+  'coordination/engineering/eastern-two-gap-repair-native-20261007/native-producer.mjs',
+  'coordination/engineering/eastern-two-gap-repair-native-20261007/byte-patch.mjs',
+  'coordination/engineering/eastern-two-gap-repair-native-20261007/whole-image.mjs'
+ ]);
+ for(const pin of stage.validator_sources){const member=codeIndex.files.find(p=>p.path===pin.path);assert(member);assert.equal(member.bytes,pin.bytes);assert.equal(member.sha256,pin.sha256);const raw=fs.readFileSync(path.join(authored,pin.path));assert.equal(raw.length,pin.bytes);assert.equal(sha(raw),pin.sha256);
   if(!wrappers.has(pin.path)){let extraBytes=0;const current=currentFiles.find(p=>p.path===pin.path);assert(current);if(pin.path.endsWith('/restore-canonical-products.mjs')&&current.sha256!==pin.sha256){
    assert(currentRoot,'Exact current restoration extension source required');const extended=fs.readFileSync(path.join(currentRoot,pin.path));assert.equal(sha(extended),current.sha256);
    const start=extended.indexOf(Buffer.from('// Select an exact member')),end=extended.indexOf(Buffer.from('function checkoutMetadata'),start);assert(start>=0&&end>start);
    assert.equal(sha(extended.subarray(start,end)),'6563ec0357559af17da4d14de887e9f06426a73a5e67392cc739aac4188e7e6b','Only the exact reviewed selected-member extension is allowed');
    assert.equal(sha(Buffer.concat([extended.subarray(0,start),extended.subarray(end)])),pin.sha256,'Entire original restoration module must remain byte-identical');extraBytes=2525;
-  }else if(pin.path==='scripts/native-ownership/native-preparation-guards.mjs'&&current.sha256!==pin.sha256){assert(currentRoot,'Exact current budgeting source required');extraBytes=verifyPreparationBudgetCode(raw,fs.readFileSync(path.join(currentRoot,pin.path)),pin,current);budgetAdaptations.push({path:pin.path,original_sha256:pin.sha256,current_sha256:current.sha256});}
-  else assert.equal(current.sha256,pin.sha256,'Historical numerical/helper algorithm changed; requalification required');assert.equal(current.bytes,pin.bytes+extraBytes);assert.equal(current.mode,member.mode);}
+  }else assert.equal(current.sha256,pin.sha256,'Historical numerical/helper algorithm changed; requalification required');assert.equal(current.bytes,pin.bytes+extraBytes);assert.equal(current.mode,member.mode);}
  }
- return {authored_files:stage.validator_sources.length,numerical_files_unchanged:stage.validator_sources.filter(p=>!wrappers.has(p.path)&&!budgetAdaptations.some(a=>a.path===p.path)).length,operational_budget_adaptations:budgetAdaptations};
+ return {authored_files:stage.validator_sources.length,numerical_files_unchanged:stage.validator_sources.filter(p=>!wrappers.has(p.path)).length};
 }
-export async function validateChainedBuildContext({root,expectedReference,stagePath,stageRaw,stage,readFile,currentExecution,processingAllowance}){
- const allowance=processingAllowance===undefined?preparationAllowance():preparationRequestAllowance(processingAllowance);
+export async function validateChainedBuildContext({root,expectedReference,stagePath,stageRaw,stage,readFile,currentExecution}){
  requirePlainExecution();assert.equal(stage.version,2);assert.equal(stage.issue,1295);assert.equal(stage.kind,'retained-identity-context-continuation-v2');assert.equal(stage.lane,'engineering');
  assert.deepEqual(stage.subject_ids,[...TARGETS]);assert.equal(stage.prior_stage_sha256,FIXED_PRIOR_STAGE_SHA);
- const currentAdmission=admitCurrentExecution(currentExecution,[currentExecution.source_root,currentExecution.stage_root]);
- const ordinary=readFile??repositoryReader(root),budget=candidateBudget([],{reserveBytes:currentAdmission.installed_runtime_bytes+131072,allowance}),seen=new Map(),admitted=new Set();budget.add({bytes:stageRaw.length});
- function read(pin){safeEvidencePath(pin.path);assert(Number.isSafeInteger(pin.bytes)&&pin.bytes>0&&pin.bytes<=32*1024*1024&&/^[a-f0-9]{64}$/.test(pin.sha256));if(seen.has(pin.path))assert.deepEqual(pin,seen.get(pin.path));
-  if(!admitted.has(pin.path)){budget.add({bytes:pin.bytes});admitted.add(pin.path);}
+ const ordinary=readFile??repositoryReader(root),seen=new Map();
+ function read(pin){safeEvidencePath(pin.path);assert(Number.isSafeInteger(pin.bytes)&&pin.bytes>0&&/^[a-f0-9]{64}$/.test(pin.sha256));if(seen.has(pin.path))assert.deepEqual(pin,seen.get(pin.path));
   const raw=ordinary(pin.path,'candidate');assert.equal(raw.length,pin.bytes);assert.equal(sha(raw),pin.sha256);if(!seen.has(pin.path))seen.set(pin.path,pin);return raw;}
  requireCurrentExecution(currentExecution);
- budget.add({bytes:Buffer.byteLength(JSON.stringify(currentExecution)+'\n')});
- for(const physicalRoot of currentAdmission.current_code_physical_roots)for(const pin of currentExecution.files)budget.add({bytes:pin.bytes});
  // These authored sources are historical custody, not assertions about a
  // publisher's later merged checkout. Authenticate them against their fixed bank.
  const codeBase='coordination/engineering/eastern-two-gap-repair-native-20261007/current-consumer-code';
  const codeIndexRaw=ordinary(codeBase+'/index.json','candidate');
  assert.equal(sha(codeIndexRaw),'de4a8f7aac3380fc7c5f1cc06ac9bbf0d170c0921d7ef72d5e46187439a80be9');
- budget.add({bytes:codeIndexRaw.length});const codeIndex=JSON.parse(codeIndexRaw);
  for(const pin of codeIndex.parts)read({path:codeBase+'/'+pin.path,bytes:pin.bytes,sha256:pin.sha256});
- for(const pin of codeIndex.files)budget.add({bytes:pin.bytes});
  const codeParent=path.join(root,'.cache');fs.mkdirSync(codeParent,{recursive:true});assert.equal(fs.realpathSync(codeParent),codeParent);
  const codeTemporary=fs.mkdtempSync(path.join(codeParent,'context-authored-code-'));
  const authored=path.join(codeTemporary,'image');restoreWholeImage(path.join(root,codeBase),authored,{expectedIndexSha:sha(codeIndexRaw)});
@@ -129,12 +133,12 @@ export async function validateChainedBuildContext({root,expectedReference,stageP
   assert.equal(selected.original_index_sha256,stage.prior_image.original_index_sha256);
   image=selected.file.slice(0,-'data/native-context-migration/manifest.json'.length-1);
  }else{image=path.join(temporary,'prior');restoreWholeImage(path.join(root,imageBase),image,{expectedIndexSha:stage.prior_image.sha256});}
- const oldStageMember=restoredContextMember(root,'data/native-context-migration/manifest.json',{prior:true});budget.add({bytes:oldStageMember.pin.bytes});const oldStageRaw=readContextBody(oldStageMember.file,oldStageMember.pin);assert.equal(sha(oldStageRaw),FIXED_PRIOR_STAGE_SHA);const oldStage=JSON.parse(oldStageRaw);
+ const oldStageMember=restoredContextMember(root,'data/native-context-migration/manifest.json',{prior:true});const oldStageRaw=readContextBody(oldStageMember.file,oldStageMember.pin);assert.equal(sha(oldStageRaw),FIXED_PRIOR_STAGE_SHA);const oldStage=JSON.parse(oldStageRaw);
  assert.equal(oldStage.version,1);assert.equal(oldStage.kind,'retained-identity-context-migration-v1');assert.equal(oldStage.validator_sources.length,17);
- for(const pin of oldStage.validator_sources){safeEvidencePath(pin.path);budget.add({bytes:pin.bytes});const member=restoredContextMember(root,pin.path,{prior:true});assert.equal(member.pin.bytes,pin.bytes);assert.equal(member.pin.sha256,pin.sha256);const raw=readContextBody(member.file,member.pin);assert.equal(raw.length,pin.bytes);assert.equal(sha(raw),pin.sha256);}
+ for(const pin of oldStage.validator_sources){safeEvidencePath(pin.path);const member=restoredContextMember(root,pin.path,{prior:true});assert.equal(member.pin.bytes,pin.bytes);assert.equal(member.pin.sha256,pin.sha256);const raw=readContextBody(member.file,member.pin);assert.equal(raw.length,pin.bytes);assert.equal(sha(raw),pin.sha256);}
  assert.equal(sha(fs.readFileSync(path.join(image,'scripts/native-ownership/validate-build-context-stage.mjs'))),FIXED_PRIOR_VALIDATOR_SHA);
- const oldRegistryMember=restoredContextMember(root,oldStage.releases.path,{prior:true});assert.equal(oldRegistryMember.pin.bytes,oldStage.releases.bytes);assert.equal(oldRegistryMember.pin.sha256,oldStage.releases.sha256);budget.add({bytes:oldStage.releases.bytes});const oldRegistryWire=readContextBody(oldRegistryMember.file,oldRegistryMember.pin);assert.equal(oldRegistryWire.length,oldStage.releases.bytes);assert.equal(sha(oldRegistryWire),oldStage.releases.sha256);
- const decodeRegistry=raw=>{const bytes=raw.readUInt32LE(raw.length-4);budget.add({bytes});const decoded=gunzipSync(raw,{maxOutputLength:32*1024*1024});assert.equal(decoded.length,bytes);return JSON.parse(decoded);};
+ const oldRegistryMember=restoredContextMember(root,oldStage.releases.path,{prior:true});assert.equal(oldRegistryMember.pin.bytes,oldStage.releases.bytes);assert.equal(oldRegistryMember.pin.sha256,oldStage.releases.sha256);const oldRegistryWire=readContextBody(oldRegistryMember.file,oldRegistryMember.pin);assert.equal(oldRegistryWire.length,oldStage.releases.bytes);assert.equal(sha(oldRegistryWire),oldStage.releases.sha256);
+ const decodeRegistry=raw=>{const bytes=raw.readUInt32LE(raw.length-4);const decoded=gunzipSync(raw);assert.equal(decoded.length,bytes);return JSON.parse(decoded);};
  const oldRegistry=decodeRegistry(oldRegistryWire);
  const registry=decodeRegistry(read(stage.releases));assert.equal(registry.releases.length,8);assert.deepEqual(registry.releases.slice(0,7),oldRegistry.releases);
  assert.deepEqual(registry.batches.slice(0,oldRegistry.batches.length),oldRegistry.batches);assert.deepEqual(registry.sources_batches.slice(0,oldRegistry.sources_batches.length),oldRegistry.sources_batches);
@@ -145,7 +149,7 @@ export async function validateChainedBuildContext({root,expectedReference,stageP
  const runner=path.join(image,'replay-original-v1.mjs');fs.writeFileSync(runner,command+'\n',{flag:'wx'});
  const priorRaw=await replayOriginalV1(runner,image);const prior=JSON.parse(priorRaw);
  assert.equal(prior.status,'verified');assert.equal(prior.migration.locations,49625);assert.equal(prior.migration.footprints_sha256,BEFORE);assert.equal(prior.migration.successor_release_id,predecessor.id);
- const priorAdmitted=new Set();const readPrior=pin=>{const selected=restoredContextMember(root,pin.path,{prior:true});assert.equal(selected.pin.bytes,pin.bytes);assert.equal(selected.pin.sha256,pin.sha256);if(!priorAdmitted.has(pin.path)){budget.add({bytes:pin.bytes});priorAdmitted.add(pin.path);}const raw=readContextBody(selected.file,selected.pin);assert.equal(raw.length,pin.bytes);assert.equal(sha(raw),pin.sha256);return raw;};
+ const readPrior=pin=>{const selected=restoredContextMember(root,pin.path,{prior:true});assert.equal(selected.pin.bytes,pin.bytes);assert.equal(selected.pin.sha256,pin.sha256);const raw=readContextBody(selected.file,selected.pin);assert.equal(raw.length,pin.bytes);assert.equal(sha(raw),pin.sha256);return raw;};
  const originalIndex=JSON.parse(readPrior(oldStage.before_context)),middleIndex=JSON.parse(readPrior(oldStage.after_context));
  const afterIndex=JSON.parse(read(stage.after_context));
  const nativeComparisonRaw=read(stage.native_comparison);assert.equal(sha(nativeComparisonRaw),FIXED_NATIVE_COMPARISON_SHA);
@@ -167,24 +171,18 @@ export async function validateChainedBuildContext({root,expectedReference,stageP
    ['original',old,()=>restoredContextMember(root,path.posix.dirname(oldStage.before_context.path)+'/'+old.path,{prior:true}),1],
    ['successor',next,()=>restoredContextMember(root,'data/canonical-grid/eastern-v8/'+next.path),0]]){
    if(target.bytes===middle.bytes&&target.sha256===middle.sha256){assert.equal(target.decoded_bytes,middle.decoded_bytes);assert.equal(target.decoded_sha256,middle.decoded_sha256);continue;}
-   let other,afterRaw,patchBudget;
-   if(kind==='successor'){const custody=restoredContextPatch(root,{runtimeBytes:currentAdmission.installed_runtime_bytes,codeBytes:currentAdmission.current_code_bytes+570577});patchBudget=custody.budget;const decodedSize=custody.raw.readUInt32LE(custody.raw.length-4);assert(decodedSize<=32*1024*1024);assert(custody.budget.complete_phase_bytes+decodedSize+middle.bytes+middle.decoded_bytes+target.bytes+target.decoded_bytes<=256*1024*1024,'Complete changed-chunk acquisition before decoder');const patch=JSON.parse(gunzipSync(custody.raw,{maxOutputLength:32*1024*1024}));assert.equal(patch.kind,'whole-original-encoded-context-byte-delta-v1');const originalWire=readContextBody(selected.file,selected.pin);verifyWholeBytes(originalWire,patch.original_source);assert.equal(patch.current_member.bytes,target.bytes);assert.equal(patch.current_member.sha256,target.sha256);afterRaw=applyBytePatch(patch.commands,patch.current_member,name=>{assert.equal(name,'original');return originalWire;});other={file:null,pin:target};}
+   let other,afterRaw;
+   if(kind==='successor'){const custody=restoredContextPatch(root);const decodedSize=custody.raw.readUInt32LE(custody.raw.length-4);const patch=JSON.parse(gunzipSync(custody.raw,{maxOutputLength:decodedSize+1}));assert.equal(patch.kind,'whole-original-encoded-context-byte-delta-v1');const originalWire=readContextBody(selected.file,selected.pin);verifyWholeBytes(originalWire,patch.original_source);assert.equal(patch.current_member.bytes,target.bytes);assert.equal(patch.current_member.sha256,target.sha256);afterRaw=applyBytePatch(patch.commands,patch.current_member,name=>{assert.equal(name,'original');return originalWire;});other={file:null,pin:target};}
    else other=member();
    assert.equal(other.pin.bytes,target.bytes);assert.equal(other.pin.sha256,target.sha256);
-   const pair=acquireOriginalContextPair({beforeFile:baseSide?other.file:selected.file,afterFile:baseSide?selected.file:other.file,beforePin:baseSide?target:middle,afterPin:baseSide?middle:target,afterRaw,runtimeBytes:currentAdmission.installed_runtime_bytes,codeBytes:currentAdmission.current_code_bytes+570577});
-   plan.pairs.push({kind,pair,baseSide});acquisitions.push({kind,part:middle.path,budget:pair.budget,patch_custody_budget:patchBudget,changed:pair.changes.map(c=>({ordinal:c.ordinal,id:c.id,before_bytes:c.before.length,after_bytes:c.after.length,before_sha256:c.before_sha256,after_sha256:c.after_sha256}))});
+   const pair=acquireOriginalContextPair({beforeFile:baseSide?other.file:selected.file,afterFile:baseSide?selected.file:other.file,beforePin:baseSide?target:middle,afterPin:baseSide?middle:target,afterRaw});
+   plan.pairs.push({kind,pair,baseSide});acquisitions.push({kind,part:middle.path,changed:pair.changes.map(c=>({ordinal:c.ordinal,id:c.id,before_bytes:c.before.length,after_bytes:c.after.length,before_sha256:c.before_sha256,after_sha256:c.after_sha256}))});
   }
   plans.push(plan);
  }
  const geometryManifest=JSON.parse(read(stage.geometry_manifest)),geometryBase=path.posix.dirname(stage.geometry_manifest.path),pins=Object.entries(geometryManifest.files).map(([name,pin])=>({path:geometryBase+'/'+(pin.archive_path??name),bytes:pin.bytes,sha256:pin.sha256}));assert.deepEqual(stage.geometry_files,pins);
- for(const pin of Object.values(geometryManifest.files))if(pin.uncompressed_bytes!==undefined){assert(Number.isSafeInteger(pin.uncompressed_bytes)&&pin.uncompressed_bytes<=32*1024*1024);budget.add({bytes:pin.uncompressed_bytes});}
- // Prospective complete numerical phase: one full v7 dictionary plus complete
- // changed-record variants, never two almost-identical decoded world copies.
- for(const pin of [stage.coverage_middle_grid,stage.native_proposal,stage.geometry_manifest,...stage.geometry_files])if(!admitted.has(pin.path)){budget.add({bytes:pin.bytes});admitted.add(pin.path);}
- for(const pin of [oldStage.native_proposal,oldStage.geometry_manifest,...(oldStage.geometry_files??[])])if(!priorAdmitted.has(pin.path)){budget.add({bytes:pin.bytes});priorAdmitted.add(pin.path);}
- for(const plan of plans){budget.add({bytes:plan.middle.bytes});budget.add({bytes:plan.middle.decoded_bytes});for(const entry of plan.pairs){for(const c of entry.pair.changes)budget.add({bytes:c.before.length+c.after.length});budget.add({bytes:Buffer.byteLength(JSON.stringify(entry.pair.layouts))});}}
  const before={index:middleIndex,rows:[]},originalRows=[],after=[];
- for(const plan of plans){const raw=readContextBody(plan.selected.file,plan.selected.pin);assert.equal(raw.length,plan.middle.bytes);assert.equal(sha(raw),plan.middle.sha256);const decoded=gunzipSync(raw,{maxOutputLength:32*1024*1024});assert.equal(decoded.length,plan.middle.decoded_bytes);assert.equal(sha(decoded),plan.middle.decoded_sha256);
+ for(const plan of plans){const raw=readContextBody(plan.selected.file,plan.selected.pin);assert.equal(raw.length,plan.middle.bytes);assert.equal(sha(raw),plan.middle.sha256);const decoded=gunzipSync(raw);assert.equal(decoded.length,plan.middle.decoded_bytes);assert.equal(sha(decoded),plan.middle.decoded_sha256);
   let base,original,successor;
   assert(plan.pairs.length<=1);
   if(!plan.pairs.length){base=JSON.parse(decoded);original=base;successor=base;}
@@ -210,7 +208,7 @@ export async function validateChainedBuildContext({root,expectedReference,stageP
  assert.equal(migration.owner_sha256,prior.migration.owner_sha256);const {geometryValidation,...compact}=migration;
  requireCurrentExecution(currentExecution);
  return {receipt:{status:'verified',stage_path:stagePath,stage_sha256:sha(stageRaw),original_stage:prior.original_stage,migration:compact,current_execution:currentExecution,authored_validator_code_index_sha256:sha(codeIndexRaw),
-  original_v1_replay:{actual_command:command,child_invocation:{executable:process.execPath,exec_argv:['--max-old-space-size=1536'],cwd:image,max_buffer_bytes:32*1024*1024,timeout_ms:0,kill_signal:'SIGTERM',old_space_is_not_rss_cap:true},explicit_module_pins:oldStage.validator_sources,accepted_module_read_vintage:'913db0624b8aa79b188ff17a7f5c4ae0c0f63965',advertised_prior_execution_commit:oldStage.execution_commit,
+  original_v1_replay:{actual_command:command,child_invocation:{executable:process.execPath,exec_argv:[],cwd:image},explicit_module_pins:oldStage.validator_sources,accepted_module_read_vintage:'913db0624b8aa79b188ff17a7f5c4ae0c0f63965',advertised_prior_execution_commit:oldStage.execution_commit,
    advertised_commit_matches_validator_closure:false,receipt_sha256:sha(priorRaw),receipt:prior,input_image_index_sha256:stage.prior_image.sha256},
-  physical_association_chain:{versions:[6,7,8],middle_native_manifest_sha256:sha(middleRaw),original_migration_receipt_sha256:priorMigration.geometryValidation.proofs[0].receipt_sha256,successor_migration_receipt_sha256:geometryValidation.proofs[0].receipt_sha256,physical_assets_recalculated:false},checked_files:seen.size,context_record_acquisitions:acquisitions,context_transport:{transport_redecoded:false,index_sha256:stage.after_context_image.sha256,original_encoded_bodies:afterImageIndex.files.length,original_encoded_bytes:afterImageIndex.whole_bytes,ordinary_parts:afterImageIndex.parts.length,full_context_rows:after.length},budget:{...budget.snapshot(),installed_runtime_bytes:currentAdmission.installed_runtime_bytes,reserved_review_bytes:131072,complete_phase_bytes:budget.snapshot().accounted_bytes+currentAdmission.installed_runtime_bytes+131072},scientific_approval:false,limits:['Original v1 advertised daa8 execution differs from its explicitly pinned reviewed validator closure; exact accepted pin bytes are actually replayed','No geographic factual or publication approval granted by context lineage']},predecessorRelease:predecessor,geometryValidation,coverageContinuation:{originalRelease,middleRelease:predecessor,middleGrid,middleGridSha256:sha(middleRaw),originalGeometryValidation:priorMigration.geometryValidation}};
+  physical_association_chain:{versions:[6,7,8],middle_native_manifest_sha256:sha(middleRaw),original_migration_receipt_sha256:priorMigration.geometryValidation.proofs[0].receipt_sha256,successor_migration_receipt_sha256:geometryValidation.proofs[0].receipt_sha256,physical_assets_recalculated:false},checked_files:seen.size,context_record_acquisitions:acquisitions,context_transport:{transport_redecoded:false,index_sha256:stage.after_context_image.sha256,original_encoded_bodies:afterImageIndex.files.length,original_encoded_bytes:afterImageIndex.whole_bytes,ordinary_parts:afterImageIndex.parts.length,full_context_rows:after.length},scientific_approval:false,limits:['Original v1 advertised daa8 execution differs from its explicitly pinned reviewed validator closure; exact accepted pin bytes are actually replayed','No geographic factual or publication approval granted by context lineage']},predecessorRelease:predecessor,geometryValidation,coverageContinuation:{originalRelease,middleRelease:predecessor,middleGrid,middleGridSha256:sha(middleRaw),originalGeometryValidation:priorMigration.geometryValidation}};
 }

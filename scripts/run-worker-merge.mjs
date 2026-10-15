@@ -38,7 +38,6 @@ rawAPI.recovery = (...args) => recovery.run(true, () => recover(...args));
 const transport = gitBlobTransport(rawAPI, {repo, token: process.env.GH_TOKEN, directory: process.cwd(),
   onFetch: row => console.log(JSON.stringify({phase, immutable_transport: row}))});
 const api = transport.api, options = {api, repo, number, expectedHead: input.expected_head, policy: loadEvidencePolicy(),
-  prepareFallback: process.env.PREPARE_FALLBACK === 'true',
   integrationRequestId: input.request_id + (process.env.GITHUB_RUN_ID ? `-${process.env.GITHUB_RUN_ID}` : '')};
 let result = {accepted: false, request_id: input.request_id, pr_number: number, phase};
 try {
@@ -69,7 +68,7 @@ try {
     const state = await prepareIntegration(options);
     result = {...result, accepted: Boolean(state.replayed), ...(state.replayed ? {merge_commit: state.pr.merge_commit_sha} : {}), status: state.replayed ? 'already-merged' : 'testing',
       tested_base: state.base, tested_candidate: state.candidate, reviewed_head: input.expected_head, profile: state.profile, geography_software: state.geography_software, test_selection: state.test_selection ?? 'complete', expectations_path: state.expectations_path,
-      candidate_refresh_attempts: state.candidate_refresh_attempts, candidate_ref: state.candidate_ref};
+      candidate_ref: state.candidate_ref};
     // Only validated commit IDs and owned ref identifiers become job outputs.
     fs.appendFileSync(process.env.GITHUB_OUTPUT, `geography_software=${state.geography_software === true}\ncandidate_ref=${state.candidate_ref ?? ''}\ncandidate=${state.candidate ?? ''}\nbase=${state.base ?? ''}\nprofile=${state.profile ?? 'evidence'}\nshards=${JSON.stringify(state.shards ?? (state.profile === 'full' ? [0,1,2] : [0]))}\ntest_selection=${state.test_selection ?? 'complete'}\nexpectations_path=${state.expectations_path ?? ''}\n`);
   } else {

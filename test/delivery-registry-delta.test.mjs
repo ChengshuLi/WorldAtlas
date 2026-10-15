@@ -7,9 +7,8 @@ import {jsonBytes, digest, finalizeDelivery, packageProjection} from '../scripts
 const BASE = '1'.repeat(40), SOURCE = '2'.repeat(40), NEXT = '3'.repeat(40);
 const OWNED = 'coordination/engineering/joint-delta/';
 function fixture({count = 7, generated = true, cumulative = true} = {}) {
-  const records = new Map(), charges = [], reads = [], parsed = [];
+  const records = new Map(), reads = [];
   const reader = {
-    budget: {add(item) { assert.ok(Number.isSafeInteger(item.bytes) && item.bytes >= 0); charges.push(item.bytes); }},
     add(name, value, commit = NEXT) {
       const raw = Buffer.isBuffer(value) ? value : jsonBytes(value);
       const pin = {commit, path: name, mode: '100644', bytes: raw.length, sha256: digest(raw),
@@ -22,7 +21,7 @@ function fixture({count = 7, generated = true, cumulative = true} = {}) {
       const {roles, ...identity} = pin; // Projection annotations are not part of immutable identity.
       assert.deepEqual(identity, actual.pin, 'Changed whole original pin'); reads.push(pin.path); return actual.raw;
     },
-    json(pin) { parsed.push(pin.path); return JSON.parse(reader.read(pin)); },
+    json(pin) { return JSON.parse(reader.read(pin)); },
     hasPath(commit, name) { return records.has(commit + ':' + name); },
     git(...args) { assert.deepEqual(args, ['rev-parse', 'HEAD']); return Buffer.from(NEXT); }
   };
@@ -101,7 +100,7 @@ function fixture({count = 7, generated = true, cumulative = true} = {}) {
       base_selection: base, authority_registry: config.registry, logical_asset_map: assets, runtime_envelope: config.runtime_envelope});
   };
   setRegistry([old.entry, ...additions.map(value => value.entry)]);
-  return {reader, config, old, additions, originals, priorRegistry, priorSidecar, accepted, setRegistry, charges, reads, parsed, base};
+  return {reader, config, old, additions, originals, priorRegistry, priorSidecar, accepted, setRegistry, reads, base};
 }
 
 for (const generated of [true, false]) test('cumulative finalizer discovers seven original-prefix authorities, preserving original custody (' + generated + ')', () => {
@@ -114,7 +113,6 @@ for (const generated of [true, false]) test('cumulative finalizer discovers seve
   f.originals.forEach((pin, i) => assert.deepEqual(f.reader.read(pin), before[i]));
   assert.equal(JSON.parse(output['selected-delivery-expectations.json']).cumulative_native_cells, 8);
   assert.deepEqual(JSON.parse(output['package-inputs.json']).inputs.slice(0, 2), ['public/', '.github/package-inputs.json']);
-  assert.equal(f.charges.filter(bytes => bytes === f.priorRegistry.bytes).length, 12);
   const again = finalizeDelivery(f.config, f.reader);
   for (const name of Object.keys(output)) assert.deepEqual(again[name], output[name]);
 });
@@ -163,7 +161,7 @@ test('duplicate or invalid accepted identities and a forged accepted registry bi
   assert.throws(() => finalizeDelivery(f.config, f.reader), /Changed whole original pin/);
 });
 
-test('wrong selector hook, prior base, prebuilt base and unavailable parse allowance refuse before publication', () => {
+test('wrong selector hook, prior base and prebuilt base refuse before publication', () => {
   const badHook = fixture(); badHook.config.selector = badHook.reader.add('data/ownership-selection.json',
     {...badHook.reader.json(badHook.config.selector), additive_release: {path: badHook.priorSidecar.path, bytes: 1, sha256: 'f'.repeat(64)}}, BASE);
   assert.throws(() => finalizeDelivery(badHook.config, badHook.reader), /Original selected sidecar differs/);
@@ -175,22 +173,12 @@ test('wrong selector hook, prior base, prebuilt base and unavailable parse allow
   const prebuilt = fixture({generated: false}); prebuilt.config.sidecar = prebuilt.reader.add(prebuilt.config.sidecar.path,
     {...prebuilt.reader.json(prebuilt.config.sidecar), base_selection: {...prebuilt.base, release_id: 'wrong'}});
   assert.throws(() => finalizeDelivery(prebuilt.config, prebuilt.reader), /preserve.*base/);
-  const budget = fixture(); budget.reader.budget.add = () => { throw Error('Control: parse allowance unavailable'); };
-  assert.throws(() => finalizeDelivery(budget.config, budget.reader), /parse allowance unavailable/);
-  assert.ok(!budget.parsed.includes(budget.priorRegistry.path));
+
 });
 
-test('caller config cannot replace the accepted registry and missing originals stage without a restoration list', () => {
+test('caller config cannot replace the accepted registry or silently restore missing original roles', () => {
   const f = fixture(); f.config.accepted_registry = {version: 1, entries: []}; f.config.new_authorities = [];
   assert.equal(JSON.parse(finalizeDelivery(f.config, f.reader)['package-roles.json']).new_authorities, 7);
   delete f.config.restored_read_roles;
-  const outputs = finalizeDelivery(f.config, f.reader);
-  const projection = JSON.parse(outputs['package-roles.json']);
-  assert.equal(projection.new_authorities, 7);
-  const staged = Object.keys(outputs).filter(name => name.startsWith('restored-read-roles/'));
-  assert.equal(staged.length, 28);
-  for (const name of staged) {
-    const pin = projection.paths.find(value => value.path === name.slice('restored-read-roles/'.length));
-    assert.ok(pin); assert.deepEqual(outputs[name], f.reader.read(pin));
-  }
+  assert.throws(() => finalizeDelivery(f.config, f.reader), /accepted path identity/);
 });

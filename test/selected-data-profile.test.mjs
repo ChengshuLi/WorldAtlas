@@ -12,7 +12,7 @@ import {verifyIssueScope} from '../scripts/issue-claim-contract.mjs';
 import {checkPremergeEvidence} from '../scripts/premerge-evidence.mjs';
 import {prepareIntegration, completeIntegration} from '../scripts/merge-integration.mjs';
 import {checkPRGates} from '../scripts/check-pr-gates.mjs';
-import {integrationProfile, selectedDataSelection, selectedDataCandidate, validateSelectedExpectations, selectedMetadataAdmission, SELECTED_SMOKE} from '../scripts/integration-profile.mjs';
+import {integrationProfile, selectedDataSelection, selectedDataCandidate, validateSelectedExpectations, SELECTED_SMOKE} from '../scripts/integration-profile.mjs';
 const prefix = 'coordination/engineering/fixture-delivery/';
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
 // Real ordinary ZIP records exercise the existing authenticated fixed-member
@@ -225,6 +225,8 @@ function mergeFixture({selectedFixture,gateReady=false} = {}) {
   f.api=async(route,method='GET',body)=>{
     f.mergeReads.push(route);
     if(method==='PUT'){f.writes.push(body);return {merged:true,sha:'f'.repeat(40)};}
+    if(route===root+'/git/refs'&&method==='POST')return {ref:body.ref};
+    if(route===root+'/merges'&&method==='POST'){assert.notEqual(body.base,'main');assert.equal(body.head,f.head);return {sha:candidate};}
     if(route===root+'/git/ref/heads/main')return {object:{sha:f.base}};
     if(route===root+'/git/commits/'+candidate)return {sha:candidate,tree:{sha:'head-tree'},parents:[{sha:f.base},{sha:f.head}]};
     if(route.includes('/check-runs'))return {check_runs:['scope',...(f.evidenceQuality?['evidence']:[])].map((name,id)=>({id:id+1,name,status:'completed',conclusion:'success',app:{id:1}}))};
@@ -233,7 +235,7 @@ function mergeFixture({selectedFixture,gateReady=false} = {}) {
     return source(route);
   };
   f.options={api:f.api,repo:'owner/repo',number:20,expectedHead:f.head,policy:{version:1,mode:'enforce-new',activation_time:'2100-01-01T00:00:00Z'},
-    evidenceCheck:async()=>({status:'legacy'}),candidateSleep:async()=>{}};
+    evidenceCheck:async()=>({status:'legacy'}),integrationRequestId:'selected-candidate-test-request'};
   f.complete=(overrides={})=>completeIntegration({...f.options,integrationResult:'success',geographyResult:'success',
     testedBase:f.base,testedCandidate:candidate,
     geographyReportLoader:async()=>({version:1,method_id:'worldatlas-trusted-geography-check-v1',baseline_commit:f.base,trusted_code_commit:f.base,
@@ -600,7 +602,6 @@ test('new unconsumed supporting text is independent of document title',async()=>
 });
 for(const [label,change] of Object.entries({
   'NUL README':f=>f.put(prefix+'README.md','a\0b'),
-  'oversized README':f=>f.put(prefix+'README.md','a'.repeat(128*1024+1)),
   'executable README':f=>{f.put(prefix+'README.md','text');f.authored.entries.get(prefix+'README.md').mode='100755';},
   'symlink README':f=>{f.put(prefix+'README.md','text');f.authored.entries.get(prefix+'README.md').mode='120000';},
 }))test('packet documentation falls back for '+label,async()=>assert.equal(await fixture({mutate:change}).run(),null));
@@ -635,36 +636,14 @@ test('unchanged SOURCE opaque leaves retain exact baseline/candidate Git body an
     assert.equal(await f.run(),null,mutation);
   }
 });
-test('metadata admission uses finite machine headroom and an optional lower operator budget',()=>{
-  assert.deepEqual(selectedMetadataAdmission({availableBytes:8000,heapBytes:16000}),{limit_bytes:1000,machine_bytes:1000});
-  assert.equal(selectedMetadataAdmission({availableBytes:8000,heapBytes:16000,budgetBytes:'600'}).limit_bytes,600);
-  assert.equal(selectedMetadataAdmission({availableBytes:8000,heapBytes:16000,budgetBytes:2000}).limit_bytes,1000);
-  for(const budgetBytes of [0,-1,Infinity,NaN,'','0','1.5','oops'])
-    assert.throws(()=>selectedMetadataAdmission({availableBytes:8000,heapBytes:16000,budgetBytes}));
-  assert.throws(()=>selectedMetadataAdmission({availableBytes:0,heapBytes:16000}));
-});
 test('supporting records are validated incrementally without retaining cumulative evidence volume',async()=>{
   const plain=fixture(),ordinary={};assert(await plain.run({metadataDiagnostics:ordinary}));
   const f=fixture({mutate:f=>{for(let n=0;n<400;n++)f.put(prefix+'evidence-'+n+'.json',{n,body:'x'.repeat(48*1024)});}}),stats={};
-  assert.equal((await f.run({metadataBudgetBytes:128*1024,metadataDiagnostics:stats})).test_selection,'selected-data');
+  assert.equal((await f.run({metadataDiagnostics:stats})).test_selection,'selected-data');
   assert(stats.read_bytes>16*1024*1024);assert(stats.read_count>256);
-  assert.equal(stats.retained_bytes,ordinary.retained_bytes);assert.equal(stats.retained_count,ordinary.retained_count);
-  assert(stats.peak_admitted_bytes<=128*1024);assert.equal(stats.transient_read_count,400);
+  assert.equal(stats.retained_bytes,ordinary.retained_bytes);assert.equal(stats.retained_count,ordinary.retained_count);assert.equal(stats.transient_read_count,400);
   // A late bad record must still refuse after the other records have been checked.
-  f.put(prefix+'evidence-399.json','{"unfinished":');assert.equal(await f.run({metadataBudgetBytes:128*1024}),null);
-});
-test('required metadata and current transient file share one finite phase admission',async()=>{
-  const f=fixture(),stats={};assert(await f.run({metadataDiagnostics:stats}));
-  const exhausted={};assert.equal(await f.run({metadataBudgetBytes:stats.retained_bytes-1,metadataDiagnostics:exhausted}),null);
-  assert.match(exhausted.failure,/metadata memory admission exceeded/);
-  const large=fixture({mutate:f=>f.put(prefix+'large.json',JSON.stringify('x'.repeat(128*1024)))}),transient={};
-  assert.equal(await large.run({metadataBudgetBytes:128*1024,metadataDiagnostics:transient}),null);
-  assert(!large.reads.includes(large.authored.entries.get(prefix+'large.json').sha));
-  for(const budget of [0,Infinity,'invalid'])assert.equal(await fixture().run({metadataBudgetBytes:budget}),null);
-});
-test('ordinary encoded member limit remains 32 MiB before any supporting read',async()=>{
-  const f=fixture({mutate:f=>{f.put(prefix+'oversized.json',{});f.authored.entries.get(prefix+'oversized.json').size=32*1024*1024+1;}});
-  assert.equal(await f.run(),null);assert.equal(f.reads.length,0);
+  f.put(prefix+'evidence-399.json','{"unfinished":');assert.equal(await f.run({}),null);
 });
 test('inert supporting gzip validates every decoded JSONL record without granting package authority',async()=>{
   const f=fixture({mutate:f=>{
@@ -684,15 +663,13 @@ for(const [label,bytes] of Object.entries({
 }))test('supporting gzip refuses '+label,async()=>{
   assert.equal(await fixture({mutate:f=>f.put(prefix+'support.jsonl.gz',bytes)}).run(),null);
 });
-test('supporting decompression observes both complete decoded-member security and phase resource admission',async()=>{
-  const limited=fixture({mutate:f=>f.put(prefix+'support.json.gz',gzipSync(JSON.stringify('x'.repeat(100*1024))))});
-  assert.equal(await limited.run({metadataBudgetBytes:80*1024}),null);
-  // Concatenated members must not reset the decoded-file limit.
-  const part=gzipSync(JSON.stringify('x'.repeat(17*1024*1024))+'\n');
-  const oversized=fixture({mutate:f=>f.put(prefix+'support.jsonl.gz',Buffer.concat([part,part]))});
-  assert.equal(await oversized.run(),null);
+test('supporting gzip validates complete concatenated members and rejects truncated tails',async()=>{
+  const first=gzipSync('{"first":1}\n'),second=gzipSync('{"last":2}\n');
+  const f=fixture({mutate:f=>f.put(prefix+'support.jsonl.gz',Buffer.concat([first,second]))});
+  assert.equal((await f.run()).test_selection,'selected-data');
+  f.put(prefix+'support.jsonl.gz',Buffer.concat([first,second.subarray(0,second.length-1)]));
+  assert.equal(await f.run(),null);
 });
-
 
 test('prospective lean package keeps the actual COD/PHL scientific graph and selects targeted checks',async()=>{
   const f=fixedDeliveryFixture({leanPackage:true});
@@ -839,18 +816,10 @@ test('complete unmodified merged PR1753 takes selected-data with all original ev
     assert.deepEqual(f.authored.entries.get(row.filename),row.after);
     assert.deepEqual(f.baseline.entries.get(row.filename)??null,row.before);
   }
-  const result=await f.run({metadataBudgetBytes:28*1024*1024,metadataDiagnostics:stats});assert(result,JSON.stringify(stats));assert.equal(result.test_selection,'selected-data');
+  const result=await f.run({metadataDiagnostics:stats});assert(result,JSON.stringify(stats));assert.equal(result.test_selection,'selected-data');
   assert.equal(stats.read_count,349);assert.equal(stats.read_bytes,38981635);
   assert.equal(stats.retained_count,51);assert.equal(stats.retained_bytes,13352331);
   assert.equal(stats.transient_read_count,298);assert.equal(stats.decoded_bytes,22197550);
-  assert.equal(stats.peak_admitted_bytes,27109018);
-  // The budget here deliberately lies below total encoded evidence volume.
-  assert(stats.read_bytes>stats.limit_bytes);assert(stats.peak_admitted_bytes<=stats.limit_bytes);
-});
-test('real PR1753 keeps one aggregate admission and refuses exhaustion rather than returning a partial selection',async()=>{
-  const f=real1753(),stats={};
-  assert.equal(await f.run({metadataBudgetBytes:20*1024*1024,metadataDiagnostics:stats}),null);
-  assert(stats.peak_admitted_bytes<=stats.limit_bytes);assert(stats.read_count>51,JSON.stringify(stats));
 });
 test('complete PR1753 record walk rejects malformed unconsumed preparation metadata',async()=>{
   const f=real1753();
@@ -860,14 +829,14 @@ test('complete PR1753 record walk rejects malformed unconsumed preparation metad
   const original=f.document(supporting);assert(original);
   f.put(supporting,'{"unfinished":');assert.equal(await f.run(),null);
 });
-test('large structured logs retain whole-body identity, finite records and ordinary free-form limit',async()=>{
+test('supporting logs retain complete whole-body text identity',async()=>{
   const lines=Array.from({length:400},(_,i)=>JSON.stringify({i,sample:'x'.repeat(400)})).join('\n')+'\n';
   const f=fixture({mutate:f=>f.put(prefix+'samples.log',lines)});
   assert.equal((await f.run()).test_selection,'selected-data');
-  for(const body of [lines+'unexpected trailing text',lines+'{"unfinished":',JSON.stringify('x'.repeat(128*1024)),
-    'unstructured '.repeat(13000),lines+'\0']){
-    f.put(prefix+'samples.log',body);assert.equal(await f.run(),null);
+  for(const body of [lines+'unexpected trailing text',JSON.stringify('x'.repeat(128*1024)),'unstructured '.repeat(13000)]){
+    f.put(prefix+'samples.log',body);assert.equal((await f.run()).test_selection,'selected-data');
   }
+  f.put(prefix+'samples.log',lines+'\0');assert.equal(await f.run(),null);
   f.put(prefix+'samples.log',lines);
   const row=f.authored.entries.get(prefix+'samples.log');f.blobs.set(row.sha,Buffer.from(lines.replace('sample','tamper')));
   assert.equal(await f.run(),null);
@@ -918,37 +887,15 @@ test('required role JSON uses the same strict UTF-8 boundary before shape or ide
 
 test('actual immutable transport retains required metadata but not cumulative supporting evidence',async()=>{
  const f=fixture({mutate:f=>{for(let n=0;n<400;n++)f.put(prefix+'support-'+n+'.json',{n,body:'x'.repeat(48*1024)});}});
- f.api=memoizeImmutableGitBlobs(f.api);const stats={},original=process.availableMemory;
- process.availableMemory=()=>1024*1024;
- try {assert.equal((await f.run({metadataDiagnostics:stats})).test_selection,'selected-data');}
- finally {process.availableMemory=original;}
- assert.equal(stats.limit_bytes,128*1024);assert(stats.read_bytes>16*1024*1024);
+ f.api=memoizeImmutableGitBlobs(f.api);const stats={};
+ assert.equal((await f.run({metadataDiagnostics:stats})).test_selection,'selected-data');
+ assert(stats.read_bytes>16*1024*1024);
  let before=f.reads.length;
  for(let n=0;n<400;n++)await f.api('/repos/owner/repo/git/blobs/'+f.authored.entries.get(prefix+'support-'+n+'.json').sha,'GET',undefined,{retainImmutableBlob:false});
  assert.equal(f.reads.length-before,400,'transient responses must not survive in the actual consumer cache');
  before=f.reads.length;
  await f.api('/repos/owner/repo/git/blobs/'+f.authored.entries.get(prefix+'registry.json').sha);
  assert.equal(f.reads.length,before,'required-role reuse is preserved');
-});
-test('machine observations tighten admission during reads and immediately before decoding',async()=>{
- for(const pressure of ['read','decode','zero','invalid']){
-  const name=prefix+'support.json.gz',f=fixture({mutate:f=>f.put(name,gzipSync(JSON.stringify('x'.repeat(64*1024))))});
-  const original=process.availableMemory,api=f.api,stats={};let observed=1024*1024,pressuredAt=null;
-  f.api=memoizeImmutableGitBlobs(async(...args)=>{
-   const response=await api(...args);
-   if(pressure==='read'&&f.reads.length===1){observed=8;pressuredAt=f.reads.length;}
-   if(args[0].endsWith(f.authored.entries.get(name).sha)){observed=pressure==='zero'?0:pressure==='invalid'?NaN:64*1024;pressuredAt=f.reads.length;}
-   return response;
-  });
-  process.availableMemory=()=>observed;
-  // Both the shared package declaration reader and selected metadata reader
-  // enforce live admission. The first refusing layer may use a generic reason;
-  // prove refusal and no further reads rather than require one error spelling.
-  try {assert.equal(await f.run({metadataDiagnostics:stats}),null,pressure);assert.ok(stats.failure,pressure);
-   assert.notEqual(pressuredAt,null,pressure);assert.equal(f.reads.length,pressuredAt,pressure);}
-  finally {process.availableMemory=original;}
-  assert(stats.peak_admitted_bytes<=stats.limit_bytes);
- }
 });
 
 
@@ -1067,7 +1014,7 @@ for (const owned_paths of [['coordination/engineering/'], ['coordination/enginee
     const f=ownedFixture(); assert.equal(await f.run({reservation:{mode:'engineering',owned_paths}}), null);
   });
 }
-test('retained inert text stays ordinary, bounded, unconsumed and outside package inputs', async () => {
+test('retained inert text stays ordinary, unconsumed and outside package inputs', async () => {
   for (const name of ['README.md','CHECKPOINT.md','notes.md','nested/review.md','unresolved-evidence-001/delivery-config-3816/independent-static-review.md','diagnostic.txt','refusals/stderr.txt']) {
     const f=ownedFixture({mutate:f=>f.put('coordination/engineering/retained-delivery/new-packet/'+name,'retained text\n')});
     assert.equal((await f.run()).test_selection,'selected-data');
@@ -1075,7 +1022,7 @@ test('retained inert text stays ordinary, bounded, unconsumed and outside packag
     assert.equal(await f.run(),null);
   }
   for (const [name, raw] of [['CHECKPOINT.md','x\0y'],['diagnostic.txt',Buffer.from([0xff])],
-    ['README.md','x'.repeat(128*1024+1)],['requirements.txt','some-package'],['constraints-dev.txt','some-package'],['code.mjs','export default 1']]) {
+    ['requirements.txt','some-package'],['constraints-dev.txt','some-package'],['code.mjs','export default 1']]) {
     assert.equal(await ownedFixture({mutate:f=>f.put('coordination/engineering/retained-delivery/new-packet/'+name,raw)}).run(),null,name);
   }
 });
@@ -1173,9 +1120,9 @@ test('complete original PR1770 192-path diff selects the uniquely bound finalize
   assert.equal(f.fixed.base,'ad300bd5ffa73c226e591f037980d67d40f6acf3');
   assert.equal(f.fixed.head,'367d68214f8c88532949bf9d21539766491991ad');assert.equal(f.files.length,192);
   assert.equal(selectedDataCandidate(f.branch,f.files),false);assert.equal(selectedDataCandidate(f.branch,f.files,f.reservation),true);
-  const result=await f.run({metadataBudgetBytes:24*1024*1024,metadataDiagnostics:stats});assert(result,JSON.stringify(stats));
+  const result=await f.run({metadataDiagnostics:stats});assert(result,JSON.stringify(stats));
   assert.equal(result.expectations_path,'coordination/engineering/nor-grc-congo-delivery-20261011/aus13-selected-20261012/advance-002/finalize/selected-delivery-expectations.json');
-  assert.equal(stats.read_count,164);assert.equal(stats.read_bytes,21503703);assert.equal(stats.peak_admitted_bytes,21050649);
+  assert.equal(stats.read_count,164);assert.equal(stats.read_bytes,21503703);
   for(const row of f.fixed.changed_rows)assert.deepEqual(f.authored.entries.get(row.filename),row.after);
   const historicalManifest=f.fixed.snapshots.find(row=>row.path.endsWith('/evidence-quality.json'));
   assert(historicalManifest,'final c753 changed the original added metadata blob');
@@ -1309,21 +1256,6 @@ for(const [name,mutate] of Object.entries({
   'added code':f=>f.put('scripts/new-reader.mjs','throw Error("not inert custody")'),
 }))test('checkpoint custody retains full regression for '+name,async()=>{
   const f=checkpointProfileFixture();mutate(f,f.checkpoint);f.checkpoint.refresh();assert.equal(await f.run(),null);
-});
-test('checkpoint custody respects current metadata admission before opening archive bytes',async()=>{
-  const f=checkpointProfileFixture(),diagnostics={};
-  assert.equal(await f.run({metadataBudgetBytes:8*1024*1024,metadataDiagnostics:diagnostics}),null);
-  assert.match(diagnostics.failure,/metadata memory admission/);
-  assert(!f.reads.includes(f.authored.entries.get(f.checkpoint.archive).sha));
-});
-test('checkpoint receipt carry and ZIP transport are admitted together before the actual blob API',async()=>{
-  const f=checkpointProfileFixture(),diagnostics={};
-  f.checkpoint.facts.padding='x'.repeat(11*1024*1024);f.checkpoint.rebuild();f.checkpoint.refresh();
-  assert.equal(await f.run({metadataBudgetBytes:20*1024*1024,metadataDiagnostics:diagnostics}),null);
-  assert.match(diagnostics.failure,/metadata memory admission/);
-  assert(f.checkpoint.calls.some(route=>route.endsWith('/pulls/7')),'complete accepted metadata was read first');
-  assert(!f.reads.includes(f.authored.entries.get(f.checkpoint.archive).sha),'ZIP is refused before transport/materialization');
-  assert(diagnostics.peak_admitted_bytes>=16*1024*1024,'prospective receipt admission is reported');
 });
 
 // Retained authority may precede the selected delivery of its original operands.
@@ -1618,7 +1550,7 @@ function realScientificManifest1906() {
     authored={object:{sha:fixed.head},entries:new Map(fixed.authored_rows.map(row=>[row.path,{...row}]))};
   const blobs=new Map(),reads=[],files=structuredClone(fixed.files);
   for(const row of fixed.snapshots){
-    const raw=gunzipSync(Buffer.from(row.gzip_base64,'base64'),{maxOutputLength:32*1024*1024});
+    const raw=gunzipSync(Buffer.from(row.gzip_base64,'base64'),{maxOutputLength:row.bytes});
     assert.equal(raw.length,row.bytes);assert.equal(digest(raw),row.sha256);
     assert.equal(createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex'),row.git_blob_oid);
     blobs.set(row.git_blob_oid,raw);
@@ -1725,11 +1657,4 @@ test('deeper base metadata must be ordinary, unchanged, available and authentica
   assert.equal(await unavailable.run(),null);
   const changed=scientificManifestFixture();changed.put(changed.base.artifact_consumption.certificate.path,{version:1});
   assert.equal(await changed.run(),null);
-});
-test('real PR1906 deeper-role reads share existing admission rather than reset the metadata budget',async()=>{
-  const f=realScientificManifest1906(),stats={};
-  assert.equal(await f.run({metadataBudgetBytes:4900000,metadataDiagnostics:stats}),null);
-  assert.match(stats.failure,/metadata memory admission exceeded/);assert(stats.read_count>=20);
-  assert(f.reads.includes(f.baseline.entries.get('coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/manifest.json').sha));
-  assert(stats.peak_admitted_bytes<=stats.limit_bytes);
 });

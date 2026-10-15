@@ -5,7 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
-import {createAcquisition, prefetchSelectedGeography} from '../scripts/geography-prefetch.mjs';
+import {createAcquisition, prefetchSelectedGeography, githubTree} from '../scripts/geography-prefetch.mjs';
 
 const digest = b => createHash('sha256').update(b).digest('hex');
 const bytes = value => Buffer.from(typeof value === 'string' ? value : JSON.stringify(value));
@@ -54,7 +54,10 @@ function fixture() {
   }
   const baseline = commit(bankFiles()), candidate = commit(bankFiles(true));
   // Commit/tree metadata is present; all file objects are genuinely missing.
-  for (const {type, body} of objects.values()) git(destination, ['hash-object', '-w', '-t', type, '--stdin'], body);
+  function importMetadata() {
+    for (const {type, body} of objects.values()) git(destination, ['hash-object', '-w', '-t', type, '--stdin'], body);
+  }
+  importMetadata();
   const batches = [];
   const execute = (command, args, options) => {
     assert.equal(options.env.GIT_NO_LAZY_FETCH, '1');
@@ -68,7 +71,7 @@ function fixture() {
     return execFileSync(command, args, options);
   };
   const acquisition = options => createAcquisition({repo: destination, loadTree: async root => [...maps.values()].find(value => value.sha === root), execute, token: 'fixture-secret', ...options});
-  return {directory, origin, destination, baseline, candidate, maps, bodies, batches, git, acquisition, bankFiles, commit,
+  return {directory, origin, destination, baseline, candidate, maps, bodies, batches, git, acquisition, bankFiles, commit, importMetadata, execute,
     close() { fs.rmSync(directory, {recursive: true, force: true}); }};
 }
 
@@ -126,23 +129,87 @@ test('wrong tree, mode, size, OID and hash are not accepted as scoped completion
   } finally { f.close(); }
 });
 
-test('duplicate OIDs cannot bypass the independent declaration-count limit', async () => {
+for (const transport of [false, true]) test(`complete ${transport ? 'fragment-transport' : 'direct-native'} and source rosters authenticate every declared path`, async () => {
   const f = fixture(); try {
-    const a = f.acquisition({limits: {member: 100000, total: 100000, entries: 2}});
-    await a.descriptor(f.baseline, 'data/ownership-selection.json');
-    await a.descriptor(f.baseline, 'data/ownership-selection.json');
-    await assert.rejects(a.descriptor(f.baseline, 'data/ownership-selection.json'), /declaration limit/);
-    assert.equal(a.stats.unique_objects, 1); assert.equal(f.batches.length, 0);
+    const files = f.bankFiles(), native = {rows: [[0, 2, 1]]}, nativePin = {bytes: bytes(native).length, sha256: digest(bytes(native))};
+    const source = {features: [{id: 'target', points: [1, 2]}]}, sourcePin = {bytes: bytes(source).length, sha256: digest(bytes(source))};
+    const parts = [], sources = [];
+    for (let i = 0; i < 513; i++) {
+      const nativePath = `native/${transport ? 'fragment' : 'run'}-${i}.json`, sourcePath = `data/source-${i}.json`;
+      files[nativePath] = native; files[sourcePath] = source;
+      parts.push({path: path.posix.basename(nativePath), ...nativePin});
+      sources.push({path: sourcePath, ...sourcePin});
+    }
+    if (transport) {
+      const index = {parts}; files['native/index.json'] = index;
+      files['native/manifest.json'] = {parts: [{path: 'absent-run.bin', bytes: 1, sha256: '0'.repeat(64)}],
+        native_asset_transport: {kind: 'ordered-exact-original-byte-fragments',
+          index: {path: 'native/index.json', bytes: bytes(index).length, sha256: digest(bytes(index))}}};
+    } else files['native/manifest.json'] = {parts};
+    files['source-bank.json'].unchanged_files = sources;
+    files['data/ownership-selection.json'].sha256 = digest(bytes(files['native/manifest.json']));
+    files['data/ownership-selection.json'].selected_geography = {
+      ...files['data/ownership-selection.json'].selected_geography,
+      bytes: bytes(files['source-bank.json']).length, sha256: digest(bytes(files['source-bank.json']))};
+    const head = f.commit(files); f.importMetadata();
+    const paths = [], bodyReads = [];
+    const a = f.acquisition({execute(command, args, options) {
+      if (args.includes('ls-tree')) paths.push(args.at(-1));
+      if (args.includes('blob')) bodyReads.push(args.at(-1));
+      return f.execute(command, args, options);
+    }});
+    const result = await prefetchSelectedGeography(a, head, head);
+    assert.equal(result.status, 'scoped-prefetch-completed');
+    assert.equal(result.declarations, transport ? 1031 : 1030);
+    assert.equal(result.unique_objects, transport ? 7 : 6);
+    const expectedPaths = ['data/ownership-selection.json', 'native/manifest.json', 'source-bank.json', 'data/world-index.json',
+      ...parts.map(p => 'native/' + p.path), ...sources.map(p => p.path), ...(transport ? ['native/index.json'] : [])];
+    assert.deepEqual(paths.sort(), expectedPaths.sort());
+    assert.equal(bodyReads.length, result.unique_objects);
+    assert.equal(new Set(bodyReads).size, bodyReads.length);
+    assert.equal(new Set(f.batches.flat()).size, f.batches.flat().length);
+    for (const name of [`native/${transport ? 'fragment' : 'run'}-0.json`, `native/${transport ? 'fragment' : 'run'}-512.json`, 'data/source-0.json', 'data/source-512.json']) {
+      const expected = name.startsWith('native/') ? native : source;
+      assert.deepEqual(JSON.parse(f.git(f.destination, ['show', head + ':' + name])), expected);
+    }
   } finally { f.close(); }
 });
 
-test('member, entry and aggregate admission precede any object fetch', async () => {
+test('whole large objects retain exact byte, Git OID and declared-hash authentication', async () => {
   const f = fixture(); try {
-    for (const limits of [{member: 1, total: 100000, entries: 512}, {member: 100000, total: 1, entries: 512}, {member: 100000, total: 100000, entries: 0}]) {
-      await assert.rejects(prefetchSelectedGeography(f.acquisition({limits}), f.baseline, f.candidate), /oversized|limit/);
-      assert.equal(f.batches.length, 0);
-    }
+    const raw = 'x'.repeat(33 * 1024 * 1024), head = f.commit({'large.bin': raw}); f.importMetadata();
+    const a = f.acquisition(), row = await a.descriptor(head, 'large.bin', {bytes: Buffer.byteLength(raw), sha256: digest(raw)});
+    const acquired = a.acquire([row]);
+    assert.equal(acquired.length, Buffer.byteLength(raw)); assert.equal(digest(acquired), digest(raw));
+    assert.equal(a.stats.verified_import_bytes, Buffer.byteLength(raw));
+    const wrong = await a.descriptor(head, 'large.bin', {sha256: '0'.repeat(64)});
+    assert.throws(() => a.acquire([wrong]), /declared hash/);
   } finally { f.close(); }
+});
+
+test('all immutable tree identities are loaded and duplicate metadata paths still fail', async () => {
+  const f = fixture(); try {
+    const commits = Array.from({length: 9}, (_, i) => f.commit({'input.json': {i}})); f.importMetadata();
+    const a = f.acquisition();
+    for (let i = 0; i < commits.length; i++) {
+      const value = await a.json(commits[i], 'input.json'); assert.deepEqual(value, {i});
+    }
+    const original = f.maps.get(f.baseline);
+    await assert.rejects(f.acquisition({loadTree: async () => ({...original, tree: [...original.tree, original.tree[0]]})}).tree(f.baseline), /Duplicate tree metadata paths/);
+  } finally { f.close(); }
+});
+
+test('GitHub metadata preserves a complete response and propagates malformed responses', async () => {
+  const originalFetch = globalThis.fetch;
+  try {
+    const value = {sha: 'a'.repeat(40), truncated: false, tree: [], note: 'x'.repeat(33 * 1024 * 1024)};
+    globalThis.fetch = async () => new Response(JSON.stringify(value));
+    assert.deepEqual(await githubTree(value.sha), value);
+    globalThis.fetch = async () => new Response('{');
+    await assert.rejects(githubTree(value.sha), SyntaxError);
+    globalThis.fetch = async () => new Response('unavailable', {status: 503});
+    await assert.rejects(githubTree(value.sha), /metadata unavailable/);
+  } finally { globalThis.fetch = originalFetch; }
 });
 
 test('failed transport remains unavailable and redacts subprocess errors', async () => {

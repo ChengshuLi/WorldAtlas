@@ -33,7 +33,7 @@ for(const part of report.parts){
  if(part.first_owner!==next||!/^part-[0-9]+\.json\.gz$/.test(part.path))throw Error('Incomplete source-stage part inventory');
  const encoded=fs.readFileSync(path.join(directory(first),part.path));
  assert.equal(encoded.length,part.bytes);assert.equal(digest(encoded),part.sha256);
- const raw=gunzipSync(encoded,{maxOutputLength:32*1024*1024});
+ const raw=gunzipSync(encoded,{maxOutputLength:part.uncompressed_bytes+1});
  assert.equal(raw.length,part.uncompressed_bytes);assert.equal(digest(raw),part.uncompressed_sha256);
  const values=JSON.parse(raw);assert.equal(values.length,part.owners);
  for(const feature of values){assert.equal(feature.pixelIndex,next++);features.push(feature);}

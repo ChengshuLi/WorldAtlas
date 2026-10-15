@@ -1,0 +1,36 @@
+{
+  "kind": "actual-checkpoint-before-after",
+  "source_baseline": "4aa52927bf61765cc462a2d0824fa5bce83df919",
+  "old_source_sha256": "87f5ea46aeffe303c1cd2a4a94474c8990db40b5e47f5142cd217adc924493e0",
+  "new_source_sha256": "cff9557a1e79e32c01dff763cdb306fdcb756619b191f283901739ae9b0bf84a",
+  "fixture_source_sha256": "24974bfdb21a28bf97c61897a4f45b037d42165a0687baa379913c55f5e50c4b",
+  "runner_source_sha256": "d5ff572f2f451e7a990c6539115abe68fd295d96a3753e849e695c67b7ff75bd",
+  "semantic_output_sha256": "12e9af7ca1a1181a0595370f34644d0bc6ca03537e077adf92b95a1b5cfe94ed",
+  "semantic_output_bytes": 21255,
+  "semantic_bytes_equal": true,
+  "genuine_caller_buffer_bytes": 65536,
+  "complete_original_patch_sha256s": [
+    "4554fa8c9e9d704dc715984ca56b5841aaf8c97033d941c385377effb44e5dea"
+  ],
+  "complete_metadata_charge_before": 10544297,
+  "complete_metadata_charge_after": 10534070,
+  "exact_retired_charge_bytes": 10227,
+  "provenance_before": {
+    "accepted_head": "d2d214280183ad231b568abe5259cc6f45298ead",
+    "execution_commit": "59ce26dc81acaaadcbfe37a5b92a9453b54dda62",
+    "historical_selected_commit": "1c50058675ae7b454e45a0bc679a1ec2c4390961",
+    "checkpoint_id": "fixture",
+    "trusted_catalogue_commit": "20367a0efb91105c102364b39374bf0031e2585a"
+  },
+  "provenance_after": {
+    "accepted_head": "d2d214280183ad231b568abe5259cc6f45298ead",
+    "execution_commit": "59ce26dc81acaaadcbfe37a5b92a9453b54dda62",
+    "historical_selected_commit": "1c50058675ae7b454e45a0bc679a1ec2c4390961",
+    "checkpoint_id": "fixture",
+    "trusted_catalogue_commit": "bceb5efcad376be22c0d336e7d2a15f6d0ac9761"
+  },
+  "limits": [
+    "Synthetic ordinary-Git source/native fixture with one genuinely qualified cell, not Indonesia science or a production refusal replay.",
+    "Distinct execution provenance and actual phase byte accounting are retained separately; no RSS or speedup saving is inferred."
+  ]
+}

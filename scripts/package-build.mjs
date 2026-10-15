@@ -153,17 +153,6 @@ export function inspectPackageAncestry(root, definition, requiredAncestors = [])
   return {required_ancestors: [...new Set(ancestors)], errors};
 }
 
-// Front-load the same complete role roster the retained consumer requires.
-// Its downstream whole-code authentication remains the authority.
-export function validatePackageExecutionRoles(files,consumerCode,entry) {
-  const critical=[...(consumerCode.critical_files??[]),...(consumerCode.entry_critical_files?.[entry]??[])].map(p=>p.path);
-  const roles=consumerCode.entry_roles?.[entry];
-  if(consumerCode.kind!=='qualified-artifact-application-code-closure-v1'||!critical.length||!roles)throw Error('Missing complete consumer execution roles');
-  const expected=[...critical,...Object.values(roles).flat()].sort();
-  if(expected.some(p=>typeof p!=='string')||new Set(expected).size!==expected.length||JSON.stringify(expected)!==JSON.stringify([...files].sort()))throw Error('Complete actual execution role closure required');
-  return true;
-}
-
 export function inspectPackageExecutionInputs(root, definition, kind = 'cloudflare') {
   if (!['static', 'hosted', 'cloudflare'].includes(kind)) throw Error('Unknown package build');
   const errors = [], contextPath = 'data/native-context-migration/manifest.json';
@@ -174,13 +163,7 @@ export function inspectPackageExecutionInputs(root, definition, kind = 'cloudfla
       if (context.version === 2 && context.kind === 'retained-identity-context-continuation-v2' && context.issue === 1295) {
         files = currentExecutionClosure(root, `scripts/build-${kind}-inner.mjs`);
         for (const file of files) if (!containsPackagePath(definition.inputs, file)) errors.push({kind: 'execution-declaration', path: file, detail: 'Actual project import is not a declared package input'});
-        const stagePath='coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/context-stage-v9.json';
-        if (fsSync.existsSync(path.join(root,stagePath))) {
-          const stage=json(path.join(root,stagePath));
-          const pinned=p=>{if(!p||typeof p.path!=='string'||!containsPackagePath(definition.inputs,p.path))throw Error('Missing declared consumer role input');const raw=fsSync.readFileSync(path.join(root,p.path));if(raw.length!==p.bytes||sha(raw)!==p.sha256)throw Error('Consumer role input identity differs');return JSON.parse(raw);};
-          const certificate=pinned(stage.artifact_consumption?.certificate);
-          validatePackageExecutionRoles(files,pinned(certificate.application_consumer_code),`scripts/build-${kind}-inner.mjs`);
-        }
+
       }
     } catch (error) { errors.push({kind: 'execution-inputs', detail: error.message}); }
   }

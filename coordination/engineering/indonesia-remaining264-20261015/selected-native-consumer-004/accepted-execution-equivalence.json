@@ -1,0 +1,723 @@
+{
+  "version": 1,
+  "kind": "actual-accepted-execution-equivalence",
+  "pr_number": 2008,
+  "accepted_commit": "3449c224e65ed3b8910c6ab37886bcdfc4952c7f",
+  "actual_pr_head": "c64eba9c382969ae77e793b252f8d010010daad7",
+  "published_provisional_head": "8a695004f741901954976527134b81653b523384",
+  "delivery_pr_number": 2013,
+  "executing_commit": "bd9c3a831ee7d4084f8541c8dffc1a9a1bbf053c",
+  "execution_acceptance_at_launch": "reviewed-unmerged",
+  "merged_at": "2026-10-15T17:53:12Z",
+  "merged_pr_receipt": {
+    "bytes": 25286,
+    "sha256": "7de802dcbbdb38a4a3695d91b1cb2d246a89e16770fea77229850975cb9172ba",
+    "hash_kind": "file-bytes"
+  },
+  "verified_whole_execution_and_authority_pins": [
+    {
+      "path": "scripts/run-geographic-check.py",
+      "mode": "100644",
+      "git_blob_oid": "292d903883f532209a0fc124ed5a8094cdbb59b9",
+      "bytes": 30772,
+      "sha256": "f42f93dbb9be8f29c4b711aa85980a1bb13103c2cbd6a4a1c3ee11e2c7f20e1b",
+      "executing_commit": "bd9c3a831ee7d4084f8541c8dffc1a9a1bbf053c",
+      "accepted_commit": "3449c224e65ed3b8910c6ab37886bcdfc4952c7f"
+    },
+    {
+      "path": "scripts/check-effective-geographic-regression.mjs",
+      "mode": "100644",
+      "git_blob_oid": "f10e0f795c047f6a85e607be84e057d09a4f3ef5",
+      "bytes": 77588,
+      "sha256": "a800152549981ef1f40fb5632bf7c2af1cba6825b56584ebe59e69aade40450d",
+      "executing_commit": "bd9c3a831ee7d4084f8541c8dffc1a9a1bbf053c",
+      "accepted_commit": "3449c224e65ed3b8910c6ab37886bcdfc4952c7f"
+    },
+    {
+      "path": "scripts/selected-checkpoint-native.mjs",
+      "mode": "100644",
+      "git_blob_oid": "583025be008ddf34da8d4a3180e3a084bf9b8603",
+      "bytes": 7564,
+      "sha256": "ff99c3db5060bc3e80ef0e894fed98efe588ee75d1578eddd4cc47aed33d112a",
+      "executing_commit": "bd9c3a831ee7d4084f8541c8dffc1a9a1bbf053c",
+      "accepted_commit": "3449c224e65ed3b8910c6ab37886bcdfc4952c7f"
+    },
+    {
+      "path": "src/native-grid.js",
+      "mode": "100644",
+      "git_blob_oid": "709702031f53f739adc9c7e1a31e347b68de1e7f",
+      "bytes": 37284,
+      "sha256": "d339ae45b48ef23ef3c3e54da01fb00378c4ba76315305c129fc677b67833c3f",
+      "executing_commit": "bd9c3a831ee7d4084f8541c8dffc1a9a1bbf053c",
+      "accepted_commit": "3449c224e65ed3b8910c6ab37886bcdfc4952c7f"
+    },
+    {
+      "path": "src/ownership-codec.js",
+      "mode": "100644",
+      "git_blob_oid": "03eacc9bcb1bff03723a93c248ea6de5f2fed5e4",
+      "bytes": 2948,
+      "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d",
+      "executing_commit": "bd9c3a831ee7d4084f8541c8dffc1a9a1bbf053c",
+      "accepted_commit": "3449c224e65ed3b8910c6ab37886bcdfc4952c7f"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "mode": "100644",
+      "git_blob_oid": "339ad050249d5da5ec1aeabb7946a4f216a68c7d",
+      "bytes": 159937,
+      "sha256": "c65f88b927c0b12650f874b6517fd6ecfd5ae5a567eaae02553a4ac5f1b4a043",
+      "executing_commit": "bd9c3a831ee7d4084f8541c8dffc1a9a1bbf053c",
+      "accepted_commit": "3449c224e65ed3b8910c6ab37886bcdfc4952c7f"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs",
+      "mode": "100644",
+      "git_blob_oid": "8756f96b872979369149fd43764e9482adf1f42d",
+      "bytes": 77356,
+      "sha256": "be025b83cb6a887c2d2c4056273030d16a96bdb07ff02bd3fcf45cb9a64833dd",
+      "executing_commit": "bd9c3a831ee7d4084f8541c8dffc1a9a1bbf053c",
+      "accepted_commit": "3449c224e65ed3b8910c6ab37886bcdfc4952c7f"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs",
+      "mode": "100644",
+      "git_blob_oid": "cc4ccf3a20043d1a207ce0e78a0c297150cd8274",
+      "bytes": 12749,
+      "sha256": "4bda93a0b3e094ecff8aa594856b8873ab4371292897f76298eb4aab5107f144",
+      "executing_commit": "bd9c3a831ee7d4084f8541c8dffc1a9a1bbf053c",
+      "accepted_commit": "3449c224e65ed3b8910c6ab37886bcdfc4952c7f"
+    },
+    {
+      "path": "scripts/accepted-selected-checkpoint.mjs",
+      "mode": "100644",
+      "git_blob_oid": "37fb1efb0c3e045012c881b9fbe5e1912e616f50",
+      "bytes": 9995,
+      "sha256": "aa5590ad4cfac5d98d3052ac095068a0134380ab1ac293e63145eb27ca65e65f",
+      "executing_commit": "bd9c3a831ee7d4084f8541c8dffc1a9a1bbf053c",
+      "accepted_commit": "3449c224e65ed3b8910c6ab37886bcdfc4952c7f"
+    },
+    {
+      "path": "scripts/check-handoff-scope.mjs",
+      "mode": "100644",
+      "git_blob_oid": "47ebc13dce54bc3e7a8318c72c7265b08599dc07",
+      "bytes": 8179,
+      "sha256": "f2b4e03701182058fdd6864cac9ff65b270899914d7c030fb42d053fd400f693",
+      "executing_commit": "bd9c3a831ee7d4084f8541c8dffc1a9a1bbf053c",
+      "accepted_commit": "3449c224e65ed3b8910c6ab37886bcdfc4952c7f"
+    },
+    {
+      "path": "scripts/evidence-policy.mjs",
+      "mode": "100644",
+      "git_blob_oid": "b8d0468592c1c5f30dd1415a223f03bde98d0e2c",
+      "bytes": 2483,
+      "sha256": "684ad01c51c0626bafe4715c9ab5b46eeb901ee54bc9dcb6f439ef505f0f55b2",
+      "executing_commit": "bd9c3a831ee7d4084f8541c8dffc1a9a1bbf053c",
+      "accepted_commit": "3449c224e65ed3b8910c6ab37886bcdfc4952c7f"
+    },
+    {
+      "path": "scripts/evidence-quality.mjs",
+      "mode": "100644",
+      "git_blob_oid": "3f8980f573af0a9fb48b763ed875026f0ce99199",
+      "bytes": 28506,
+      "sha256": "8950701f659808b0f1aa527d1d79dbdaa06921abd601bef80a6b030963eb0d97",
+      "executing_commit": "bd9c3a831ee7d4084f8541c8dffc1a9a1bbf053c",
+      "accepted_commit": "3449c224e65ed3b8910c6ab37886bcdfc4952c7f"
+    },
+    {
+      "path": "scripts/geographic-report-artifact.mjs",
+      "mode": "100644",
+      "git_blob_oid": "38b53b3171d0f9c4b21ad48c409a78b4375cb335",
+      "bytes": 26756,
+      "sha256": "d44944326735fedfeef77093a00d7a4ee722d24cc8140d641aee40fecbb942a5",
+      "executing_commit": "bd9c3a831ee7d4084f8541c8dffc1a9a1bbf053c",
+      "accepted_commit": "3449c224e65ed3b8910c6ab37886bcdfc4952c7f"
+    },
+    {
+      "path": "scripts/github-quota.mjs",
+      "mode": "100644",
+      "git_blob_oid": "65664b0cefc19b556f93160d9bd99330ce785191",
+      "bytes": 3378,
+      "sha256": "ba8503e32145f5563857f1015fb1516b1e65dcc451164a39930867e3a8d032b2",
+      "executing_commit": "bd9c3a831ee7d4084f8541c8dffc1a9a1bbf053c",
+      "accepted_commit": "3449c224e65ed3b8910c6ab37886bcdfc4952c7f"
+    },
+    {
+      "path": "scripts/github-snapshots.mjs",
+      "mode": "100644",
+      "git_blob_oid": "77e10cc1dbad90d27312fbf1b9582326d74af8f0",
+      "bytes": 1595,
+      "sha256": "eaf2ca029adae4319ff6b0f1ce9ba75b7f965aeeab7fa7fe72548fa888f22afe",
+      "executing_commit": "bd9c3a831ee7d4084f8541c8dffc1a9a1bbf053c",
+      "accepted_commit": "3449c224e65ed3b8910c6ab37886bcdfc4952c7f"
+    },
+    {
+      "path": "scripts/integration-proof.mjs",
+      "mode": "100644",
+      "git_blob_oid": "078c4ba55dff74b5cbb53c89893a00b126d58700",
+      "bytes": 889,
+      "sha256": "f08e03c81efa756d36126812cfe415118cace433a1477cc25fdb60def19572ec",
+      "executing_commit": "bd9c3a831ee7d4084f8541c8dffc1a9a1bbf053c",
+      "accepted_commit": "3449c224e65ed3b8910c6ab37886bcdfc4952c7f"
+    },
+    {
+      "path": "scripts/issue-claim-contract.mjs",
+      "mode": "100644",
+      "git_blob_oid": "7526d17b41d0fbc1dba09f7dd4d14a9ba3693602",
+      "bytes": 22495,
+      "sha256": "890262c61c4c285732df52da55df7f0f78b2fbd339bcb68b2de2561814d2123f",
+      "executing_commit": "bd9c3a831ee7d4084f8541c8dffc1a9a1bbf053c",
+      "accepted_commit": "3449c224e65ed3b8910c6ab37886bcdfc4952c7f"
+    },
+    {
+      "path": "scripts/job-deadline.mjs",
+      "mode": "100644",
+      "git_blob_oid": "d9e300300ae2683ba5eca2c0424dac12af3da50f",
+      "bytes": 7840,
+      "sha256": "4f81c4448e6256f3841766744852cc9f8eddf2c929857a3cb85dd09f77815314",
+      "executing_commit": "bd9c3a831ee7d4084f8541c8dffc1a9a1bbf053c",
+      "accepted_commit": "3449c224e65ed3b8910c6ab37886bcdfc4952c7f"
+    },
+    {
+      "path": "scripts/research-import-gate.mjs",
+      "mode": "100644",
+      "git_blob_oid": "85387d9f8647c0d4374f1d1d43e02797c471fd7e",
+      "bytes": 335,
+      "sha256": "0079ee16f5cf1068a09be8d5b416ed6a22e33c33b0605b203cc213f4f6198905",
+      "executing_commit": "bd9c3a831ee7d4084f8541c8dffc1a9a1bbf053c",
+      "accepted_commit": "3449c224e65ed3b8910c6ab37886bcdfc4952c7f"
+    },
+    {
+      "path": "scripts/worker-result.mjs",
+      "mode": "100644",
+      "git_blob_oid": "b2b414668ed1b4ff059237263fe2f4f8874be180",
+      "bytes": 1913,
+      "sha256": "21757f7bebf64513389c0bb97e9f79f556f145bafbb4ceae9d4889e68a43883f",
+      "executing_commit": "bd9c3a831ee7d4084f8541c8dffc1a9a1bbf053c",
+      "accepted_commit": "3449c224e65ed3b8910c6ab37886bcdfc4952c7f"
+    },
+    {
+      "path": "src/regional-import-gate.js",
+      "mode": "100644",
+      "git_blob_oid": "b6eabfb3da75ad8d0aa3ff6a5c7a0493773f0ead",
+      "bytes": 7292,
+      "sha256": "83215f326c85b6f95c21f5560c7f0477c581b1e37a1a4f52de4ef39741dabf7d",
+      "executing_commit": "bd9c3a831ee7d4084f8541c8dffc1a9a1bbf053c",
+      "accepted_commit": "3449c224e65ed3b8910c6ab37886bcdfc4952c7f"
+    },
+    {
+      "path": "scripts/geographic_checkpoint_products.py",
+      "mode": "100644",
+      "git_blob_oid": "10ca8af99e286798e28871907935aa9e27fd52ce",
+      "bytes": 6191,
+      "sha256": "d7d3a19233ae2b1b5b94d9226f4420d241b3dfbbebc825f56bad3b2a86838152",
+      "executing_commit": "bd9c3a831ee7d4084f8541c8dffc1a9a1bbf053c",
+      "accepted_commit": "3449c224e65ed3b8910c6ab37886bcdfc4952c7f"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json",
+      "mode": "100644",
+      "git_blob_oid": "08c1f42ab8d9e9f894e64c8d1f0eee11a973dfe7",
+      "bytes": 252214,
+      "sha256": "633bf569788c97c2aa52c27c4cb919c7dd1021eb1cd78fc7b326fc7369d475a8",
+      "executing_commit": "bd9c3a831ee7d4084f8541c8dffc1a9a1bbf053c",
+      "accepted_commit": "3449c224e65ed3b8910c6ab37886bcdfc4952c7f"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/accepted-checkpoints.json",
+      "mode": "100644",
+      "git_blob_oid": "cc4b4207ab56336955576383611f65b6493c3358",
+      "bytes": 10854,
+      "sha256": "3d953ff2889bb048719ea7751bb1eeb6dde9749413c5b59e84dc42071a274474",
+      "executing_commit": "bd9c3a831ee7d4084f8541c8dffc1a9a1bbf053c",
+      "accepted_commit": "3449c224e65ed3b8910c6ab37886bcdfc4952c7f"
+    }
+  ],
+  "executing_policy": {
+    "pin": {
+      "bytes": 252214,
+      "commit": "bd9c3a831ee7d4084f8541c8dffc1a9a1bbf053c",
+      "git_blob_oid": "08c1f42ab8d9e9f894e64c8d1f0eee11a973dfe7",
+      "mode": "100644",
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json",
+      "sha256": "633bf569788c97c2aa52c27c4cb919c7dd1021eb1cd78fc7b326fc7369d475a8",
+      "whole_body_consumed": true
+    },
+    "actual_body_sha256": "633bf569788c97c2aa52c27c4cb919c7dd1021eb1cd78fc7b326fc7369d475a8"
+  },
+  "canonical_data_base": "8c68e8c47657c50199068fda24b3b821d7fcd2e0",
+  "native_baseline": "4aa52927bf61765cc462a2d0824fa5bce83df919",
+  "native_candidate": "c6d5c278b55050b09ec97dc1cbf9ed39f26e243b",
+  "data_identity": [
+    {
+      "path": ".github/package-inputs.json",
+      "base": {
+        "path": ".github/package-inputs.json",
+        "mode": "100644",
+        "git_blob_oid": "caf18fec30e3cd94876cb651aa94b7dac03db33d",
+        "bytes": 135930,
+        "sha256": "d6ed085b542f9b47440d1cfb6c0d0d5a5cbe8fe7b5e549420c9368de4af21b30"
+      },
+      "canonical": {
+        "path": ".github/package-inputs.json",
+        "mode": "100644",
+        "git_blob_oid": "5fc534806620bc7c3723a2e8661aaeb10631bf2a",
+        "bytes": 139508,
+        "sha256": "811532900dfba273e5e617abd3dbe5daf6c3494e05f9fa541010f60ece006f8a"
+      }
+    },
+    {
+      "path": "coordination/engineering/indonesia-remaining19590-20261015/native-qualified19116-001/foreign2924/authority-binding.json",
+      "base": null,
+      "canonical": {
+        "path": "coordination/engineering/indonesia-remaining19590-20261015/native-qualified19116-001/foreign2924/authority-binding.json",
+        "mode": "100644",
+        "git_blob_oid": "b411a99b240f393e72702ba85b524032b2abed3f",
+        "bytes": 778,
+        "sha256": "31941305580be2501ac183efd8fed9e67bbe7d43ff27b93d5354e9cc7d6c742b"
+      }
+    },
+    {
+      "path": "coordination/engineering/indonesia-remaining19590-20261015/native-qualified19116-001/foreign2924/original-rule-preimage.json",
+      "base": null,
+      "canonical": {
+        "path": "coordination/engineering/indonesia-remaining19590-20261015/native-qualified19116-001/foreign2924/original-rule-preimage.json",
+        "mode": "100644",
+        "git_blob_oid": "43d11b64dbe3db69f69f324a50ee553fc5a536b9",
+        "bytes": 775,
+        "sha256": "5b494e9c4d1468169584dd9d3c97cfa6bd3aa6e406af34a62356e4bd0e6d106f"
+      }
+    },
+    {
+      "path": "coordination/engineering/indonesia-remaining19590-20261015/native-qualified19116-001/land10216/authority-binding.json",
+      "base": null,
+      "canonical": {
+        "path": "coordination/engineering/indonesia-remaining19590-20261015/native-qualified19116-001/land10216/authority-binding.json",
+        "mode": "100644",
+        "git_blob_oid": "5d713c236e9f0a9d6d40aa42b2f1ce68d3e1978d",
+        "bytes": 774,
+        "sha256": "e70919e78bb98510bb2fd4f330113faab2a2f3ec0253228ed0452f1487c81c89"
+      }
+    },
+    {
+      "path": "coordination/engineering/indonesia-remaining19590-20261015/native-qualified19116-001/land10216/original-rule-preimage.json",
+      "base": null,
+      "canonical": {
+        "path": "coordination/engineering/indonesia-remaining19590-20261015/native-qualified19116-001/land10216/original-rule-preimage.json",
+        "mode": "100644",
+        "git_blob_oid": "fd9618844e467bfce3d78e919b406d3c0d96ee3b",
+        "bytes": 771,
+        "sha256": "0c55e14ec3f56ba1a957317ca7d6ad259c4e38294ba32e582233caca0241ba1c"
+      }
+    },
+    {
+      "path": "coordination/engineering/indonesia-remaining19590-20261015/native-qualified19116-001/mixed5976/authority-binding.json",
+      "base": null,
+      "canonical": {
+        "path": "coordination/engineering/indonesia-remaining19590-20261015/native-qualified19116-001/mixed5976/authority-binding.json",
+        "mode": "100644",
+        "git_blob_oid": "6bada8954b4f7c324a7b95dfad88d0a07b08c546",
+        "bytes": 774,
+        "sha256": "bb398c692bfd05cda8bcbf16e7de700a4d6898930d9ea55d2b62b3bd60d76131"
+      }
+    },
+    {
+      "path": "coordination/engineering/indonesia-remaining19590-20261015/native-qualified19116-001/mixed5976/original-rule-preimage.json",
+      "base": null,
+      "canonical": {
+        "path": "coordination/engineering/indonesia-remaining19590-20261015/native-qualified19116-001/mixed5976/original-rule-preimage.json",
+        "mode": "100644",
+        "git_blob_oid": "52d99f1fee50f361e831c48d4afc842577bbc816",
+        "bytes": 771,
+        "sha256": "5c60871508acea3e5fa966fb2943e968e97e2cba8190fef71829c70d2c232fe6"
+      }
+    },
+    {
+      "path": "coordination/engineering/indonesia-remaining19590-20261015/native19590-input-001/foreign2924/candidate-native-patch.json",
+      "base": null,
+      "canonical": {
+        "path": "coordination/engineering/indonesia-remaining19590-20261015/native19590-input-001/foreign2924/candidate-native-patch.json",
+        "mode": "100644",
+        "git_blob_oid": "0ec3580d349077671b418c2623be38119d4bc5d0",
+        "bytes": 48763,
+        "sha256": "d587e76269e073897119b69b823e1a0f5bc11550b364db9d2ea002383e5b01c3"
+      }
+    },
+    {
+      "path": "coordination/engineering/indonesia-remaining19590-20261015/native19590-input-001/foreign2924/source-evidence.json",
+      "base": null,
+      "canonical": {
+        "path": "coordination/engineering/indonesia-remaining19590-20261015/native19590-input-001/foreign2924/source-evidence.json",
+        "mode": "100644",
+        "git_blob_oid": "0ac7b59e6af8619ef26ee7092bc948a8cda550e3",
+        "bytes": 823733,
+        "sha256": "c787683fda85076517667ed0249ecf65cc5ff80205b327d7c0cb3db95a1f4d07"
+      }
+    },
+    {
+      "path": "coordination/engineering/indonesia-remaining19590-20261015/native19590-input-001/land10216/candidate-native-patch.json",
+      "base": null,
+      "canonical": {
+        "path": "coordination/engineering/indonesia-remaining19590-20261015/native19590-input-001/land10216/candidate-native-patch.json",
+        "mode": "100644",
+        "git_blob_oid": "1587972916af485ffcb97b429c60a3dbf13f615b",
+        "bytes": 139418,
+        "sha256": "f7da495c3e6a8cc330bae742a86509fbad0da3de0fad9b7df89b9a04920969f8"
+      }
+    },
+    {
+      "path": "coordination/engineering/indonesia-remaining19590-20261015/native19590-input-001/land10216/source-evidence.json",
+      "base": null,
+      "canonical": {
+        "path": "coordination/engineering/indonesia-remaining19590-20261015/native19590-input-001/land10216/source-evidence.json",
+        "mode": "100644",
+        "git_blob_oid": "d32707fa148d16ec29153802def95e1f0ca0f2ce",
+        "bytes": 56845,
+        "sha256": "6d040dae70321f42f250f40631cb2cd17021934b71936576bc8dc4d91b97da48"
+      }
+    },
+    {
+      "path": "coordination/engineering/indonesia-remaining19590-20261015/native19590-input-001/mixed5976/candidate-native-patch.json",
+      "base": null,
+      "canonical": {
+        "path": "coordination/engineering/indonesia-remaining19590-20261015/native19590-input-001/mixed5976/candidate-native-patch.json",
+        "mode": "100644",
+        "git_blob_oid": "163fcb2598aec6d21fb874733015236ba38cf206",
+        "bytes": 66979,
+        "sha256": "0940495d90a2aaa5b59f5ee0adf9caaa316bfdbbbe2d6cf1759d947c518cdea4"
+      }
+    },
+    {
+      "path": "coordination/engineering/indonesia-remaining19590-20261015/native19590-input-001/mixed5976/source-evidence.json",
+      "base": null,
+      "canonical": {
+        "path": "coordination/engineering/indonesia-remaining19590-20261015/native19590-input-001/mixed5976/source-evidence.json",
+        "mode": "100644",
+        "git_blob_oid": "97ab8455bbbbace7997e4cd44712b25502c9d423",
+        "bytes": 126387,
+        "sha256": "a0703a87657f49e04dce22bbd466e7197745611db7d758e088419fdbc995c327"
+      }
+    },
+    {
+      "path": "coordination/engineering/indonesia-remaining19590-20261015/whole-physical-input-001/original-stage-inputs.json",
+      "base": null,
+      "canonical": {
+        "path": "coordination/engineering/indonesia-remaining19590-20261015/whole-physical-input-001/original-stage-inputs.json",
+        "mode": "100644",
+        "git_blob_oid": "875703e15e27cfbee83807b74d72ea697ab61d54",
+        "bytes": 1208176,
+        "sha256": "0beb70730f81ff50cc72de445ae036eb43ff668b74b9790a9193a25f47c6e5f4"
+      }
+    },
+    {
+      "path": "coordination/engineering/indonesia-remaining19590-20261015/whole-physical-result-001/whole-target-support.json",
+      "base": null,
+      "canonical": {
+        "path": "coordination/engineering/indonesia-remaining19590-20261015/whole-physical-result-001/whole-target-support.json",
+        "mode": "100644",
+        "git_blob_oid": "042ee2afee23057bd2dc3d2ce025cea8de7de6c1",
+        "bytes": 4245327,
+        "sha256": "9556cc79ae09c88f499be6c05400c5cc417fd6f5d795138cd8fed2664016fe4e"
+      }
+    },
+    {
+      "path": "coordination/engineering/indonesia-remaining264-20261015/combined120726-composition-001/authority-registry.json",
+      "base": null,
+      "canonical": {
+        "path": "coordination/engineering/indonesia-remaining264-20261015/combined120726-composition-001/authority-registry.json",
+        "mode": "100644",
+        "git_blob_oid": "bb0d817844d2f5a2d691ea8b0e33935847fb6380",
+        "bytes": 78053,
+        "sha256": "74d545be6be0c13bc1a4ea8a64055888c0edf2eacf062d4a42200258057c4cf0"
+      }
+    },
+    {
+      "path": "coordination/engineering/indonesia-remaining264-20261015/combined120726-composition-001/compose-config.json",
+      "base": null,
+      "canonical": {
+        "path": "coordination/engineering/indonesia-remaining264-20261015/combined120726-composition-001/compose-config.json",
+        "mode": "100644",
+        "git_blob_oid": "a6320a74b57cbc8edbba2948f821cf773d2292fe",
+        "bytes": 9352,
+        "sha256": "7b5c974a18db7175c1d9d5d86297643ec3c033af597db5ea0c34fc4bd85d04b1"
+      }
+    },
+    {
+      "path": "coordination/engineering/indonesia-remaining264-20261015/combined120726-composition-001/compose-operating.json",
+      "base": null,
+      "canonical": {
+        "path": "coordination/engineering/indonesia-remaining264-20261015/combined120726-composition-001/compose-operating.json",
+        "mode": "100644",
+        "git_blob_oid": "2a9c8ad62759e32f4f26c75f8a852402d6df999d",
+        "bytes": 1259,
+        "sha256": "c1fdbfff0daad4737a58bc3e26178126b8d9b87831969da1da7c15cf79f4a539"
+      }
+    },
+    {
+      "path": "coordination/engineering/indonesia-remaining264-20261015/combined120726-composition-001/compose-time.txt",
+      "base": null,
+      "canonical": {
+        "path": "coordination/engineering/indonesia-remaining264-20261015/combined120726-composition-001/compose-time.txt",
+        "mode": "100644",
+        "git_blob_oid": "92fa213df7cfffe7e43986caf619d8749afb1613",
+        "bytes": 777,
+        "sha256": "7fe2a29f60031663cea599616909eb8d1715eff0af6ab60392068e253e27d037"
+      }
+    },
+    {
+      "path": "coordination/engineering/indonesia-remaining264-20261015/combined120726-composition-001/finalize-config.json",
+      "base": null,
+      "canonical": {
+        "path": "coordination/engineering/indonesia-remaining264-20261015/combined120726-composition-001/finalize-config.json",
+        "mode": "100644",
+        "git_blob_oid": "79162cb88195965365ea6f1e6589cefdcb4b8ff3",
+        "bytes": 967,
+        "sha256": "871f71b19bd77460dc07264ea279e57de2002cbbacad8ce81fa9c7a46209c502"
+      }
+    },
+    {
+      "path": "coordination/engineering/indonesia-remaining264-20261015/combined120726-composition-001/finalize-external-time.txt",
+      "base": null,
+      "canonical": {
+        "path": "coordination/engineering/indonesia-remaining264-20261015/combined120726-composition-001/finalize-external-time.txt",
+        "mode": "100644",
+        "git_blob_oid": "2a59b25b450c08cc042fd77287448ff33001f29c",
+        "bytes": 777,
+        "sha256": "76a2360c264f3432c81c75ac962f376f5a5d2604bce968452f723e40293e6c4f"
+      }
+    },
+    {
+      "path": "coordination/engineering/indonesia-remaining264-20261015/combined120726-composition-001/finalize-operating.json",
+      "base": null,
+      "canonical": {
+        "path": "coordination/engineering/indonesia-remaining264-20261015/combined120726-composition-001/finalize-operating.json",
+        "mode": "100644",
+        "git_blob_oid": "da846aad9aea225cfce7850fd3b900a904dfae18",
+        "bytes": 1259,
+        "sha256": "cc467e1ce080323fc1b8e82adec3d0d9f6b23cd29f648ceba8a6d9d9e412a005"
+      }
+    },
+    {
+      "path": "coordination/engineering/indonesia-remaining264-20261015/combined120726-composition-001/finalizer-preparation.json",
+      "base": null,
+      "canonical": {
+        "path": "coordination/engineering/indonesia-remaining264-20261015/combined120726-composition-001/finalizer-preparation.json",
+        "mode": "100644",
+        "git_blob_oid": "5d73ea940324e996d25e876a4de267c027a74bed",
+        "bytes": 3975,
+        "sha256": "d201ea25e8176ab35949b11f5f68c7a1fe40acd9e112a1f048305b8b008931c6"
+      }
+    },
+    {
+      "path": "coordination/engineering/indonesia-remaining264-20261015/combined120726-composition-001/patch.json",
+      "base": null,
+      "canonical": {
+        "path": "coordination/engineering/indonesia-remaining264-20261015/combined120726-composition-001/patch.json",
+        "mode": "100644",
+        "git_blob_oid": "143f36c6b079031cf5204ce860babc1a5fbab664",
+        "bytes": 2628477,
+        "sha256": "c883e825ad47f65248d43d3acb96afcdf471c85c92b790ad69412c1c3879e717"
+      }
+    },
+    {
+      "path": "coordination/engineering/indonesia-remaining264-20261015/combined120726-composition-001/preparation.json",
+      "base": null,
+      "canonical": {
+        "path": "coordination/engineering/indonesia-remaining264-20261015/combined120726-composition-001/preparation.json",
+        "mode": "100644",
+        "git_blob_oid": "63a58b4d19de1b45769b05afacb1841175f6c9bb",
+        "bytes": 596,
+        "sha256": "a7b83a0468cc45804b0ea646cd9d01c13256fd80a71f70aefe397bc803c18545"
+      }
+    },
+    {
+      "path": "coordination/engineering/indonesia-remaining264-20261015/combined120726-composition-001/runtime-envelope.json",
+      "base": null,
+      "canonical": {
+        "path": "coordination/engineering/indonesia-remaining264-20261015/combined120726-composition-001/runtime-envelope.json",
+        "mode": "100644",
+        "git_blob_oid": "ffc1ecd628f5a93a1322ac8a06945d520e73bcbe",
+        "bytes": 1388,
+        "sha256": "77f00d5b6037c6ed099354ebe610fc235243a598a1f8bd56dd4aad51b0c81b3c"
+      }
+    },
+    {
+      "path": "coordination/engineering/indonesia-remaining264-20261015/combined120726-composition-001/selected-ledger.json",
+      "base": null,
+      "canonical": {
+        "path": "coordination/engineering/indonesia-remaining264-20261015/combined120726-composition-001/selected-ledger.json",
+        "mode": "100644",
+        "git_blob_oid": "674d66f3bcff78dd31cc5a6634d83b979b6e3407",
+        "bytes": 6514622,
+        "sha256": "3bbb2f7ea6c69c35beb149c415a8b4f7ad40f680f19cd348dd080422dcd8c8e0"
+      }
+    },
+    {
+      "path": "coordination/engineering/indonesia-remaining264-20261015/native-whole-owner-authority-001/land263/authority-binding.json",
+      "base": null,
+      "canonical": {
+        "path": "coordination/engineering/indonesia-remaining264-20261015/native-whole-owner-authority-001/land263/authority-binding.json",
+        "mode": "100644",
+        "git_blob_oid": "e67e5facb17b7fdc2f61ee8fa841e7ecd524e3a9",
+        "bytes": 790,
+        "sha256": "1d75c5cd34f19abbbd3adc539f9678b819ec339f30926ffcd12d2de03bb42c2d"
+      }
+    },
+    {
+      "path": "coordination/engineering/indonesia-remaining264-20261015/native-whole-owner-authority-001/land263/original-rule-preimage.json",
+      "base": null,
+      "canonical": {
+        "path": "coordination/engineering/indonesia-remaining264-20261015/native-whole-owner-authority-001/land263/original-rule-preimage.json",
+        "mode": "100644",
+        "git_blob_oid": "228ebf125fb625c11aa95959ca1876495442ee70",
+        "bytes": 787,
+        "sha256": "66f9f04e49892bfe62acd20bd187a13d76271a88afaa5584f9913da3a3149fd5"
+      }
+    },
+    {
+      "path": "coordination/engineering/indonesia-remaining264-20261015/native-whole-owner-authority-001/maluku1518/authority-binding.json",
+      "base": null,
+      "canonical": {
+        "path": "coordination/engineering/indonesia-remaining264-20261015/native-whole-owner-authority-001/maluku1518/authority-binding.json",
+        "mode": "100644",
+        "git_blob_oid": "1181994f67ef9a1da0adb35496dba5aec842271d",
+        "bytes": 793,
+        "sha256": "93088b40eb8d21af4027c71b16826b0f739daf4f13768dbd82ac96275bc193bb"
+      }
+    },
+    {
+      "path": "coordination/engineering/indonesia-remaining264-20261015/native-whole-owner-authority-001/maluku1518/original-rule-preimage.json",
+      "base": null,
+      "canonical": {
+        "path": "coordination/engineering/indonesia-remaining264-20261015/native-whole-owner-authority-001/maluku1518/original-rule-preimage.json",
+        "mode": "100644",
+        "git_blob_oid": "ff2e2af9e78f8ae0e5fc4dbcdf606872b3234a8c",
+        "bytes": 790,
+        "sha256": "e120fc9c221ddc2fe36b1a93039d5d18708f143534b795a5db5f122b89542524"
+      }
+    },
+    {
+      "path": "coordination/engineering/indonesia-remaining264-20261015/native-whole-owner-partition-001/land263/candidate-native-patch.json",
+      "base": null,
+      "canonical": {
+        "path": "coordination/engineering/indonesia-remaining264-20261015/native-whole-owner-partition-001/land263/candidate-native-patch.json",
+        "mode": "100644",
+        "git_blob_oid": "07acd319fbd6e2f36fde45942d5f61d3d85e8db4",
+        "bytes": 1181961,
+        "sha256": "0506027bb76a3c09718916b8deada75ede14b0f179ff6628199dfd3ab540c190"
+      }
+    },
+    {
+      "path": "coordination/engineering/indonesia-remaining264-20261015/native-whole-owner-partition-001/land263/source-evidence.json",
+      "base": null,
+      "canonical": {
+        "path": "coordination/engineering/indonesia-remaining264-20261015/native-whole-owner-partition-001/land263/source-evidence.json",
+        "mode": "100644",
+        "git_blob_oid": "9f02465edb1715b23a20e279fc0eb5a2cb3c7d6e",
+        "bytes": 616923,
+        "sha256": "be3d4596038b37ddfa07e7d9edef2efa1833eddcf3f86dd809a10e8a113adee1"
+      }
+    },
+    {
+      "path": "coordination/engineering/indonesia-remaining264-20261015/native-whole-owner-partition-001/maluku1518/candidate-native-patch.json",
+      "base": null,
+      "canonical": {
+        "path": "coordination/engineering/indonesia-remaining264-20261015/native-whole-owner-partition-001/maluku1518/candidate-native-patch.json",
+        "mode": "100644",
+        "git_blob_oid": "f847564a44b7d56c3bd6d812f6a42157b7b1f2eb",
+        "bytes": 22517,
+        "sha256": "2d834143bbbb09f2939160d8295739409c9528c2e4057e33108621e2b40cee3b"
+      }
+    },
+    {
+      "path": "coordination/engineering/indonesia-remaining264-20261015/native-whole-owner-partition-001/maluku1518/source-evidence.json",
+      "base": null,
+      "canonical": {
+        "path": "coordination/engineering/indonesia-remaining264-20261015/native-whole-owner-partition-001/maluku1518/source-evidence.json",
+        "mode": "100644",
+        "git_blob_oid": "058ed64c5db6b98fd59feb5d1692b686dfa0c62a",
+        "bytes": 41620,
+        "sha256": "452ecc0f5e84d5fdd6c694ed305409fd6554ef8fd29046785040c64a81ea30c2"
+      }
+    },
+    {
+      "path": "coordination/engineering/indonesia-remaining264-20261015/ownership-selection-v2.json",
+      "base": null,
+      "canonical": {
+        "path": "coordination/engineering/indonesia-remaining264-20261015/ownership-selection-v2.json",
+        "mode": "100644",
+        "git_blob_oid": "e90ba3494cdc6de753e76e452e01924b8d287005",
+        "bytes": 3497,
+        "sha256": "f37efea26e654b942eb5b04045b0adc12a7f8c01fe899637d3a2d4152635c6f9"
+      }
+    },
+    {
+      "path": "coordination/engineering/indonesia-remaining264-20261015/package-roles.json",
+      "base": null,
+      "canonical": {
+        "path": "coordination/engineering/indonesia-remaining264-20261015/package-roles.json",
+        "mode": "100644",
+        "git_blob_oid": "ecf9b7b7efe1a75b9c1cea5ee33084b75f1af0f2",
+        "bytes": 18937,
+        "sha256": "4e06f4ee2addc1d7524119d971029dc0b7cf45caab8881c48da814f9bef0b618"
+      }
+    },
+    {
+      "path": "coordination/engineering/indonesia-remaining264-20261015/selected-delivery-expectations.json",
+      "base": null,
+      "canonical": {
+        "path": "coordination/engineering/indonesia-remaining264-20261015/selected-delivery-expectations.json",
+        "mode": "100644",
+        "git_blob_oid": "c8a238aa18016484e2c9802e6924b2c430fdabb3",
+        "bytes": 298096,
+        "sha256": "ff4dd1c29033772b686034e317e3b8241cc4b5af47b48f0c95cb227804802e89"
+      }
+    },
+    {
+      "path": "coordination/engineering/indonesia-remaining264-20261015/whole-physical-input-001/original-stage-inputs.json",
+      "base": null,
+      "canonical": {
+        "path": "coordination/engineering/indonesia-remaining264-20261015/whole-physical-input-001/original-stage-inputs.json",
+        "mode": "100644",
+        "git_blob_oid": "9509673635d9e5ed79026226a0660157b3c37721",
+        "bytes": 6202641,
+        "sha256": "9a8a12606803e0fdbec54ecb99d17e1f0223fd06abdd83b7fb0bcebac3c7e73d"
+      }
+    },
+    {
+      "path": "coordination/engineering/indonesia-remaining264-20261015/whole-physical-result-001/whole-target-support.json",
+      "base": null,
+      "canonical": {
+        "path": "coordination/engineering/indonesia-remaining264-20261015/whole-physical-result-001/whole-target-support.json",
+        "mode": "100644",
+        "git_blob_oid": "5f72d0005102c5a8f40ce71b2412acabb939d102",
+        "bytes": 27291222,
+        "sha256": "a3b08dc7e079abd3d61bdd8a1ee3b1bb1f70d34eeed68a9f41e5379805a42e26"
+      }
+    },
+    {
+      "path": "data/ownership-selection.json",
+      "base": {
+        "path": "data/ownership-selection.json",
+        "mode": "100644",
+        "git_blob_oid": "9554d8e59a281fabeedc825e6f781fd17522ee19",
+        "bytes": 1598,
+        "sha256": "e60efb4a763648793bdf3fc5ea7e1bc540e2befa08bbbac68081d1f44fc6bae0"
+      },
+      "canonical": {
+        "path": "data/ownership-selection.json",
+        "mode": "100644",
+        "git_blob_oid": "1c48a838d1071321ae3161f1948732ee80e28050",
+        "bytes": 1567,
+        "sha256": "bf755abedaac856e43194dc1d49af7a421cbbfa38041c871b6accb009033d72d"
+      }
+    }
+  ],
+  "native_result_sha256": "8d6923727b729fb02ab87f4344997a4bc91eec6e1186b2712a6e04527024652d",
+  "accepted_checkpoint": false,
+  "new_accepted_credit": 0,
+  "limits": [
+    "Actual native execution identity and reviewed-unmerged launch status remain unchanged.",
+    "All 24 accepted code/authority whole pins equal actual executed bd9 pins. All 41 current accepted data preimages equal original8c68, and their installed bodies equal native candidatec6d.",
+    "This establishes adoption equivalence and byte custody only. Original source/scientific limitations, emitted-package/picker, exact-final-head review, integration and acceptance obligations remain."
+  ]
+}

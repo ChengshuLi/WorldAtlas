@@ -29,7 +29,7 @@ test('physical resume authenticates complete original products and inputs withou
  const receipt={version:1,binding,outputs:Object.fromEntries(Object.entries(products).map(([name,raw])=>[name,{bytes:raw.length,sha256:hash(raw)}]))};
  for(const [name,raw]of Object.entries(products))fs.writeFileSync(path.join(directory,name),raw);
  fs.writeFileSync(path.join(directory,'preparation.json'),jsonBytes(receipt));
- let reads=0;const reader={read:p=>{assert.deepEqual(p,{...pin,mode:'100644'});reads++;return Buffer.from('{}');},budget:{add(){}}};
+ let reads=0;const reader={read:p=>{assert.deepEqual(p,{...pin,mode:'100644'});reads++;return Buffer.from('{}');}};
  resumeSource(root,destination,config,binding,reader);assert.equal(reads,1);
  fs.writeFileSync(path.join(directory,'whole-target-support.json'),json({results:[]}));
  assert.throws(()=>resumeSource(root,destination,config,binding,reader),/product changed/);

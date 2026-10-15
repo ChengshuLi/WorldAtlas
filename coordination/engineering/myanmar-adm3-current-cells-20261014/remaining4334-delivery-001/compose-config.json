@@ -1,0 +1,86 @@
+{
+  "version": 1,
+  "selector": {
+    "commit": "9f40f4d0a345328e9f1e11525e444e83144e94ba",
+    "path": "data/ownership-selection.json",
+    "mode": "100644",
+    "git_blob_oid": "14d834ed51eba529ce2af9f339a972ae96c277d1",
+    "bytes": 1571,
+    "sha256": "42fe12620d432f8c91dcb46ca9a2bad1fffbe9b67c4b2380e1787361650d80d4"
+  },
+  "effective_release_id": "geography:myanmar4334-delivery-20261015",
+  "authorities": [
+    {
+      "rule_preimage": {
+        "commit": "4d67519c32f5787b18f6fe9deab1721231547c93",
+        "mode": "100644",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/remaining7479-whole-physical-001/native-authority-001/north-block26-27/original-rule-preimage.json",
+        "git_blob_oid": "36983399bd5b6d95b9704a263fafe1a69547e4da",
+        "bytes": 855,
+        "sha256": "1162a43e18d3a9d07ff59f55c0ba88f4a3900ba575c846650ef5cedeca428d86"
+      },
+      "source_authority": {
+        "commit": "4d67519c32f5787b18f6fe9deab1721231547c93",
+        "mode": "100644",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/remaining7479-whole-physical-001/native-authority-001/north-block26-27/authority-binding.json",
+        "git_blob_oid": "f842507bc9ede2c13a14f1e452c79285733b48f2",
+        "bytes": 858,
+        "sha256": "85fbb6d7a731469b502c5844c89946321ba0074a5933af6d31c5bfcfa6c911b1"
+      },
+      "ledger": {
+        "commit": "4d67519c32f5787b18f6fe9deab1721231547c93",
+        "mode": "100644",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/remaining7479-whole-physical-001/native-authority-001/north-block26-27/constructor-result.json",
+        "git_blob_oid": "1f60e0869a37add6df6e9e5878aebd7c8ff6c229",
+        "bytes": 69472,
+        "sha256": "8e12ae7b50a221f1b9050156c70ad907dc694f1b9706f6c3cab8bf34ab9ea327"
+      },
+      "native_patch": {
+        "commit": "dae32c775ffdebe7dd425a23def7d802107bb6ed",
+        "mode": "100644",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/remaining7479-whole-physical-001/supported-native-input-001/north-block26-27/native-patch.json",
+        "git_blob_oid": "3e2ec167e5fd9a213aaa927a7f551623073a099c",
+        "bytes": 6479,
+        "sha256": "9831bd370c79489c7a4eb289f7a53cbcddbdf1f311ffa5b54f82d65056c22536"
+      }
+    },
+    {
+      "rule_preimage": {
+        "commit": "4d67519c32f5787b18f6fe9deab1721231547c93",
+        "mode": "100644",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/remaining7479-whole-physical-001/native-authority-001/south-block28-29/original-rule-preimage.json",
+        "git_blob_oid": "f0c66ce48a8b7301dc0c9ad3d61d599ee0ab0a24",
+        "bytes": 857,
+        "sha256": "42e39ca579b611cd8babee401fe4fd645b0bfe86b45fb29e808db9ea4709350f"
+      },
+      "source_authority": {
+        "commit": "4d67519c32f5787b18f6fe9deab1721231547c93",
+        "mode": "100644",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/remaining7479-whole-physical-001/native-authority-001/south-block28-29/authority-binding.json",
+        "git_blob_oid": "9a9e8676d77cffb305580c69bf1af46b5b023bde",
+        "bytes": 860,
+        "sha256": "c72237f1308d393b576e23d59405cbd998b05f6b99f8a3721c82f750882d32ef"
+      },
+      "ledger": {
+        "commit": "4d67519c32f5787b18f6fe9deab1721231547c93",
+        "mode": "100644",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/remaining7479-whole-physical-001/native-authority-001/south-block28-29/constructor-result.json",
+        "git_blob_oid": "72a0a2222581719be8b590bd33670e72b7257f1f",
+        "bytes": 158031,
+        "sha256": "f9b37e0cdd729648fd724fb50ff255b0e52653f1c863dc9ea197d49dd5e76df7"
+      },
+      "native_patch": {
+        "commit": "dae32c775ffdebe7dd425a23def7d802107bb6ed",
+        "mode": "100644",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/remaining7479-whole-physical-001/supported-native-input-001/south-block28-29/native-patch.json",
+        "git_blob_oid": "e809238640e87941e7954ceebb9b460dd8f02928",
+        "bytes": 62337,
+        "sha256": "f2e6432028308754c2cd36b4ea038883796c124d150d5d79d58d797b4c380ee9"
+      }
+    }
+  ],
+  "preparation_allowance": {
+    "phaseBytes": 738197504,
+    "rssBytes": 738197504
+  }
+}

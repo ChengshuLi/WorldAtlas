@@ -7,7 +7,6 @@ import {fileURLToPath} from 'node:url';
 import {execFileSync, spawnSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {gzipSync} from 'node:zlib';
-import {candidateBudget} from '../scripts/native-ownership/native-preparation-guards.mjs';
 import {digest, jsonBytes, pinReader, sourceEvidence} from '../scripts/prepare-delivery-handoff.mjs';
 
 const helper = fileURLToPath(new URL('../scripts/prepare-delivery-handoff.mjs', import.meta.url));
@@ -18,7 +17,7 @@ const withoutBaseline = value => Object.fromEntries(Object.entries(value).filter
 const locator = pin => ({commit: pin.commit, path: pin.path});
 function memoryReader() {
   const bodies = new Map(), pins = new Map(), reads = [];
-  const reader = {budget: candidateBudget([], {reserveBytes: 0, reserveDescriptors: 0}), bodies, pins, reads,
+  const reader = {bodies, pins, reads,
     add(name, value, version = commit) {
       const raw = Buffer.isBuffer(value) ? value : jsonBytes(value);
       const pin = {commit: version, path: name, mode: '100644', bytes: raw.length, sha256: digest(raw),
@@ -106,6 +105,21 @@ test('derivation copies the literal six-field manifest contract separately from 
   assert.equal(f.reader.reads.some(name => name.startsWith('human-supplied/')), false);
   f.config.source_evidence = actual;
   assert.deepEqual(await result(f), actual, 'already canonical fields are accepted literally');
+});
+
+test('v2 derivation authenticates and retains the exact dated-support pin with unchanged scientific claims', async () => {
+  const f = fixture(), support = f.reader.add(prefix + 'dated-support.json', {version: 1,
+    kind: 'adopted-dated-native-centre-land-support-v1', provenance: [], records: []});
+  Object.assign(f.config.source_evidence, {version: 2, kind: 'source-target-native-evidence-v2', dated_land_support: support});
+  const originalConfig = structuredClone(f.config), actual = await result(f);
+  assert.deepEqual(withoutBaseline(actual), originalConfig.source_evidence);
+  assert.deepEqual(actual.dated_land_support, support);
+  assert.ok(f.reader.reads.includes(support.path));
+  assert.deepEqual(f.config, originalConfig);
+  f.config.source_evidence.dated_land_support = {...support, sha256: '0'.repeat(64)};
+  await assert.rejects(sourceEvidence(f.config, f.reader), /Whole pin identity differs/);
+  delete f.config.source_evidence.dated_land_support;
+  await assert.rejects(sourceEvidence(f.config, f.reader));
 });
 
 test('every supplied baseline difference refuses, including the original nested descriptor contamination', async t => {

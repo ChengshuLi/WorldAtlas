@@ -7,8 +7,7 @@ import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {gunzipSync} from 'node:zlib';
-import {candidateBudget} from './native-ownership/native-preparation-guards.mjs';
-import {locate, prepareDeliveryRoleStaging} from './delivery-handoff-advance.mjs';
+import {locate} from './delivery-handoff-advance.mjs';
 import {validatePackageInputs} from './package-inputs.mjs';
 import {baselineFiles, validateEvidence} from './evidence-quality.mjs';
 import {composeRetainedLedgers} from '../coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs';
@@ -26,16 +25,20 @@ const safe = name => typeof name === 'string' && /^[a-zA-Z0-9_./-]+$/.test(name)
 const unique = values => Array.isArray(values) && values.length > 0 && values.every(v => typeof v === 'string' && v) && new Set(values).size === values.length;
 const environment = () => ({...process.env, GIT_NO_LAZY_FETCH: '1', GIT_CONFIG_NOSYSTEM: '1', GIT_CONFIG_GLOBAL: '/dev/null', GIT_TERMINAL_PROMPT: '0'});
 
-export function pinReader(root, {allowance} = {}) {
-  const budget = candidateBudget([], {reserveBytes: 0, reserveDescriptors: 0, ...(allowance ? {allowance} : {})}), cache = new Map();
-  const git = (...args) => execFileSync('git', args, {cwd: root, env: environment(), maxBuffer: 33554433});
+export function pinReader(root) {
+  const cache = new Map();
+  const git = (...args) => {
+    const options={cwd:root,env:environment(),maxBuffer:Infinity};
+    if(args[0]==='cat-file'&&args[1]==='blob') options.maxBuffer=Number(git('cat-file','-s',args[2]))+1;
+    return execFileSync('git',args,options);
+  };
   function descriptor(commit, name) {
     need(hex(commit, 40) && safe(name), 'Exact commit and safe whole-file path required');
     const line = git('ls-tree', '-z', commit, '--', name).toString();
     const match = /^100644 blob ([a-f0-9]{40})\t([^\0]+)\0$/.exec(line);
     need(match && match[2] === name, 'Missing ordinary exact Git body: ' + name);
     const size = Number(git('cat-file', '-s', match[1]).toString());
-    need(Number.isSafeInteger(size) && size >= 0 && size <= 33554432, 'Whole body cap: ' + name);
+    need(Number.isSafeInteger(size) && size >= 0, 'Invalid whole body size: ' + name);
     return {path: name, commit, mode: '100644', git_blob_oid: match[1], bytes: size};
   }
   function read(pin) {
@@ -43,7 +46,6 @@ export function pinReader(root, {allowance} = {}) {
     need(pin.mode === actual.mode && (pin.git_blob_oid ?? pin.blob) === actual.git_blob_oid
       && pin.bytes === actual.bytes && hex(pin.sha256, 64), 'Whole pin identity differs: ' + pin.path);
     if (!cache.has(actual.git_blob_oid)) {
-      budget.add(actual);
       const raw = git('cat-file', 'blob', actual.git_blob_oid);
       need(raw.length === actual.bytes, 'Whole body length changed');
       cache.set(actual.git_blob_oid, raw);
@@ -52,13 +54,13 @@ export function pinReader(root, {allowance} = {}) {
     need(digest(raw) === pin.sha256, 'Whole body hash differs: ' + pin.path);
     return raw;
   }
-  return {git, read, json: pin => JSON.parse(read(pin)), budget,
+  return {git, read, descriptor, json: pin => JSON.parse(read(pin)),
     hasPath(commit, name) {
       need(hex(commit, 40) && safe(name), 'Exact commit and safe whole-file path required');
       return git('ls-tree', '-z', commit, '--', name).length > 0;
     },
     pin(commit, name) { const p = descriptor(commit, name);
-      if (!cache.has(p.git_blob_oid)) { budget.add(p); cache.set(p.git_blob_oid, git('cat-file', 'blob', p.git_blob_oid)); }
+      if (!cache.has(p.git_blob_oid)) { cache.set(p.git_blob_oid, git('cat-file', 'blob', p.git_blob_oid)); }
       return {...p, sha256: digest(cache.get(p.git_blob_oid))}; }};
 }
 
@@ -66,7 +68,7 @@ function ordinary(root, relative) {
   need(safe(relative), 'Unsafe input path');
   const filename = path.join(root, relative);
   const stat = fs.lstatSync(filename);
-  need(stat.isFile() && fs.realpathSync(filename) === filename && stat.size <= 33554432, 'Require bounded ordinary input: ' + relative);
+  need(stat.isFile() && fs.realpathSync(filename) === filename, 'Require ordinary input: ' + relative);
   return fs.readFileSync(filename);
 }
 
@@ -86,50 +88,21 @@ function admitDestination(root, destination, resume) {
 // Equivalent to the shared new-vintage writer for this JS metadata adapter:
 // validate whole destination before mutation, exclusive creation, receipt last.
 // Resume means checking every immutable byte; partial output is never repaired.
-export function admitPublication(root, destination, products, binding, resume = false, sharedBudget = null) {
+export function admitPublication(root, destination, products, binding, resume = false) {
   const target = admitDestination(root, destination, resume);
-  const budget = sharedBudget ?? candidateBudget([], {reserveBytes: 0, reserveDescriptors: 0});
-  const names = new Set(Object.keys(products));
-  for (const name of names) {
-    const parts = name.split('/');
-    for (let i = 1; i < parts.length; i++)
-      need(!names.has(parts.slice(0, i).join('/')), 'Product file/directory collision');
-  }
-  const staged = [], stagingPrefix = 'restored-read-roles/';
-  const rolePins = products['package-roles.json'] ? JSON.parse(products['package-roles.json']).paths : [];
   for (const [name, raw] of Object.entries(products)) {
-    need(safe(name) && name !== 'preparation.json' && Buffer.isBuffer(raw), 'Safe unique product filenames required');
-    if (name.includes('/')) {
-      need(name.startsWith(stagingPrefix) && Array.isArray(rolePins), 'Only derived original roles may use nested output paths');
-      const matches = rolePins.filter(pin => pin.path === name.slice(stagingPrefix.length));
-      need(matches.length === 1, 'Staged body must have one authenticated package role');
-      staged.push({pin: matches[0], body: raw});
-    } else budget.add({bytes: raw.length});
+    need(safe(name) && !name.includes('/') && name !== 'preparation.json' && Buffer.isBuffer(raw),
+      'Safe flat product filenames required');
   }
-  const publishRoles = staged.length ? prepareDeliveryRoleStaging(root, destination + '/restored-read-roles', staged,
-    {limits: {total: staged.reduce((sum, entry) => sum + entry.body.length, 0)}, budget}) : null;
   need(Object.keys(products).length > 0, 'No empty completion');
   const outputs = Object.fromEntries(Object.entries(products).map(([name, raw]) => [name, {bytes: raw.length, sha256: digest(raw)}]));
   const receipt = jsonBytes({version: 1, binding, outputs});
-  budget.add({bytes: receipt.length});
   const inspectExisting = () => {
     admitDestination(root, destination, resume);
     if (!fs.existsSync(target)) return false;
-    const expected = new Set([...Object.keys(products), 'preparation.json']);
-    for (const name of Object.keys(products)) {
-      const parts = name.split('/');
-      for (let i = 1; i < parts.length; i++) expected.add(parts.slice(0, i).join('/') + '/');
-    }
-    const found = [];
-    const walk = relative => {
-      for (const name of fs.readdirSync(path.join(target, relative))) {
-        const item = relative + name, stat = fs.lstatSync(path.join(target, item));
-        need(!stat.isSymbolicLink() && (stat.isFile() || stat.isDirectory()), 'Nonordinary resumed output');
-        if (stat.isDirectory()) { found.push(item + '/'); walk(item + '/'); } else found.push(item);
-      }
-    };
-    walk('');
-    need(same(found.sort(), [...expected].sort()), 'Incomplete or foreign resumed output inventory');
+    const expected = [...Object.keys(products), 'preparation.json'].sort();
+    const found = fs.readdirSync(target).sort();
+    need(same(found, expected), 'Incomplete or foreign resumed output inventory');
     for (const [name, raw] of Object.entries({...products, 'preparation.json': receipt}))
       need(ordinary(root, destination + '/' + name).equals(raw), 'Resumed bytes/binding changed: ' + name);
     return true;
@@ -144,16 +117,15 @@ export function admitPublication(root, destination, products, binding, resume = 
     if (inspectExisting()) return {destination, resumed: true, binding};
     fs.mkdirSync(path.dirname(target), {recursive: true});
     fs.mkdirSync(target);
-    for (const [name, raw] of Object.entries(products)) if (!name.includes('/'))
+    for (const [name, raw] of Object.entries(products))
       fs.writeFileSync(path.join(target, name), raw, {flag: 'wx'});
-    if (publishRoles) publishRoles();
     fs.writeFileSync(path.join(target, 'preparation.json'), receipt, {flag: 'wx'});
     return {destination, resumed: false, binding};
   };
 }
 
-export function publish(root, destination, products, binding, resume = false, sharedBudget = null) {
-  return admitPublication(root, destination, products, binding, resume, sharedBudget)();
+export function publish(root, destination, products, binding, resume = false) {
+  return admitPublication(root, destination, products, binding, resume)();
 }
 
 // These are producer fields, not guesses from names: additive-gap-repair counts
@@ -198,7 +170,7 @@ export function prepareEvidence(config, reader) {
     const descriptor = pin => ({path: pin.path, commit: d.baseline_commit,
       bytes: pin.bytes, sha256: pin.sha256, hash_kind: 'file-bytes'});
     const metadata = pin => {
-      for (let i = 0; i < 12; i++) reader.budget.add({bytes: pin.bytes});
+
       return reader.json(pin);
     };
     const selected = commit => {
@@ -240,7 +212,7 @@ export function prepareEvidence(config, reader) {
     need(d.pins === undefined || same(d.pins, baseline.pins), 'Issue baseline pins differ from actual accepted baseline');
     const names = reader.git('diff', '--name-only', '--diff-filter=ACMRT', '-z', d.baseline_commit, d.candidate_commit, '--')
       .toString().split('\0').filter(name => name && name !== d.manifest_path);
-    need(names.length + baseline.files.length <= 512 && new Set(names).size === names.length, 'Bounded unique delivery outputs required');
+    need(new Set(names).size === names.length, 'Unique delivery outputs required');
     const outputs = names.map(name => {
       const pin = reader.pin(d.candidate_commit, name); reader.read(pin);
       const {commit, ...file} = descriptor(pin); return file;
@@ -341,22 +313,6 @@ export function requestProfile(template, group, config, reader) {
   }
   need(config.compatibility === undefined && template.operating_profile === 'source-native-v2',
     'New issuance requires an admitted source-native-v2 template; historical v1 must be explicit compatibility');
-  const requested = group.requested_resources ?? config.requested_resources;
-  const allowance = requested?.processing_allowance, limits = requested?.operating_limits;
-  const keys = ['rss_bytes', 'wall_seconds', 'output_bytes', 'retained_bytes', 'log_bytes', 'monitor_bytes', 'receipt_bytes'];
-  need(allowance && same(Object.keys(allowance).sort(), ['phaseBytes', 'rssBytes'])
-    && limits && same(Object.keys(limits).sort(), keys.sort())
-    && [...Object.values(allowance), ...Object.values(limits)].every(v => Number.isSafeInteger(v) && v > 0)
-    && Number.isSafeInteger(limits.wall_seconds * 1000), 'Explicit positive finite requested reader/operating configuration required');
-  need(allowance.phaseBytes <= limits.rss_bytes && allowance.rssBytes <= limits.rss_bytes
-    && Number.isSafeInteger(template.output_reserve) && template.output_reserve >= 131072
-    && template.output_reserve <= allowance.phaseBytes && Number.isSafeInteger(template.output_reserve + 131072)
-    && limits.output_bytes >= template.output_reserve + 131072
-    && Number.isSafeInteger(limits.output_bytes + limits.receipt_bytes)
-    && limits.output_bytes + limits.receipt_bytes <= limits.retained_bytes
-    && limits.log_bytes <= limits.retained_bytes && limits.log_bytes <= limits.rss_bytes
-    && limits.monitor_bytes <= limits.retained_bytes && limits.monitor_bytes <= limits.rss_bytes
-    && limits.receipt_bytes <= limits.rss_bytes, 'Requested reader/output/log/monitor resources exceed issued finite bounds');
   const support = template.operating_runtime?.support_code;
   need(same(support?.map(p => p.path), ['scripts/local-workspace.mjs', 'scripts/worker-identity.mjs']), 'Complete ordered v2 support-code pins required');
   const head = reader.git('rev-parse', 'HEAD').toString().trim();
@@ -365,7 +321,8 @@ export function requestProfile(template, group, config, reader) {
     const actual = reader.pin(head, pin.path);
     need(pin.bytes === actual.bytes && pin.sha256 === actual.sha256, 'New v2 template code differs from actual HEAD: ' + pin.path);
   }
-  return {...template, processing_allowance: allowance, operating_limits: limits};
+  const {processing_allowance,operating_limits,output_reserve,...request}=template;
+  return request;
 }
 
 export function prepareRequests(config, reader) {
@@ -398,7 +355,7 @@ export function prepareRequests(config, reader) {
     index.push({id: group.id, handoff: pin, component_ids: ordered, template: group.template, request: name,
       method_resource_sha256: digest(jsonBytes({profile: rule.profile, geometry_scope: rule.geometry_scope,
         administrative_products: rule.administrative_products, target_banks: rule.target_banks,
-        output_reserve: template.output_reserve, processing_allowance: template.processing_allowance, operating_limits: template.operating_limits, operating_runtime: template.operating_runtime})),
+        operating_runtime: template.operating_runtime})),
       next: 'Commit the request, run the existing supervisor separately, then retain real terminal products.'});
   }
   const scopes = index.flatMap(row => row.component_ids);
@@ -421,10 +378,9 @@ function qualifyTerminal(terminal, requestRaw, publicationRaw, request) {
 }
 
 function readInventory(raw, descriptor, reader) {
-  need(Number.isSafeInteger(descriptor.uncompressed_bytes) && descriptor.uncompressed_bytes > 0 && descriptor.uncompressed_bytes <= 33554432,
-    'Nonempty bounded decoded inventory required');
-  reader.budget.add({bytes: descriptor.uncompressed_bytes});
-  const decoded = gunzipSync(raw, {maxOutputLength: 33554432});
+  need(Number.isSafeInteger(descriptor.uncompressed_bytes) && descriptor.uncompressed_bytes > 0,
+    'Nonempty decoded inventory identity required');
+  const decoded = gunzipSync(raw, {maxOutputLength: descriptor.uncompressed_bytes});
   need(decoded.length === descriptor.uncompressed_bytes && digest(decoded) === descriptor.uncompressed_sha256, 'Actual decoded inventory differs');
   const lines = decoded.toString('utf8').split('\n'); need(lines.pop() === '' && lines.length && lines.every(Boolean), 'Incomplete/empty inventory JSONL');
   const rows = lines.map(line => JSON.parse(line)); need(unique(rows.map(row => row.component_id)), 'Duplicate/missing inventory identity'); return rows;
@@ -520,27 +476,22 @@ function localRebindJoin(request, terminal, publication, products, reader) {
   need(stdout.request_sha256 === terminal.request_sha256 && stdout.publication_sha256 === terminal.publication_sha256
     && stdout.execution_commit === terminal.execution_commit && stdout.result_sha256 === digest(products['result.json'])
     && publication.outputs.result.sha256 === stdout.result_sha256, 'Rebind actual stdout/product join differs');
-  need(Number.isSafeInteger(terminal.lifetime_rss_bytes) && terminal.lifetime_rss_bytes > 0 && terminal.lifetime_rss_bytes <= request.limits.rss_bytes
-    && Number.isFinite(terminal.elapsed_seconds) && terminal.elapsed_seconds >= 0 && terminal.elapsed_seconds <= request.limits.wall_seconds,
-  'Rebind actual terminal exceeds issued operating bounds');
+  need(Number.isFinite(terminal.elapsed_seconds) && terminal.elapsed_seconds >= 0, 'Invalid rebind elapsed observation');
 }
 
 export function retainProducts(config, root, reader, readLocal = ordinary) {
   const requestRaw = reader.read(config.request), request = JSON.parse(requestRaw);
-  const terminalRaw = readLocal(root, config.terminal), terminal = JSON.parse(terminalRaw); reader.budget.add({bytes: terminalRaw.length});
-  const publicationRaw = readLocal(root, config.output + '/publication.json'), publication = JSON.parse(publicationRaw); reader.budget.add({bytes: publicationRaw.length});
-  qualifyTerminal(terminal, requestRaw, publicationRaw, request);
+  const terminalRaw = readLocal(root, config.terminal), terminal = JSON.parse(terminalRaw); const publicationRaw = readLocal(root, config.output + '/publication.json'), publication = JSON.parse(publicationRaw); qualifyTerminal(terminal, requestRaw, publicationRaw, request);
   const rows = publication.outputs ? Object.values(publication.outputs) : publication.complete === true
     ? [{path: 'facts.json', ...publication.facts}, {path: 'inventory.jsonl.gz', ...publication.inventory}, ...(publication.assets ?? [])] : [];
   need(rows.length && new Set(rows.map(p => p.path)).size === rows.length, 'Missing/duplicate publication output inventory');
   const outputs = {'request.json': requestRaw, 'terminal.json': terminalRaw, 'publication.json': publicationRaw};
   for (const row of rows) {
     need(safe(row.path) && !row.path.includes('/') && !Object.hasOwn(outputs, row.path), 'Unsafe/duplicate publication path');
-    const raw = readLocal(root, config.output + '/' + row.path); reader.budget.add({bytes: raw.length});
-    need(raw.length === row.bytes && digest(raw) === row.sha256, 'Incomplete actual publication output: ' + row.path);
+    const raw = readLocal(root, config.output + '/' + row.path); need(raw.length === row.bytes && digest(raw) === row.sha256, 'Incomplete actual publication output: ' + row.path);
     if (row.uncompressed_bytes !== undefined) {
-      need(Number.isSafeInteger(row.uncompressed_bytes) && row.uncompressed_bytes <= 33554432, 'Decoded output cap');
-      reader.budget.add({bytes: row.uncompressed_bytes}); const decoded = gunzipSync(raw, {maxOutputLength: 33554432});
+      need(Number.isSafeInteger(row.uncompressed_bytes) && row.uncompressed_bytes > 0, 'Invalid decoded output identity');
+      const decoded = gunzipSync(raw, {maxOutputLength: row.uncompressed_bytes});
       need(decoded.length === row.uncompressed_bytes && digest(decoded) === row.uncompressed_sha256, 'Decoded output differs');
     }
     outputs[row.path] = raw;
@@ -555,7 +506,7 @@ export function retainProducts(config, root, reader, readLocal = ordinary) {
     const custodyNames = {code_source: 'code-source.json', issued_plan: 'issued-plan.json', stderr: 'stderr.log', stdout: 'stdout.json'};
     need(config.custody && same(Object.keys(config.custody).sort(), Object.keys(custodyNames).sort()), 'Complete real rebind execution custody required');
     for (const [role, name] of Object.entries(custodyNames)) {
-      const raw = readLocal(root, config.custody[role]); reader.budget.add({bytes: raw.length}); outputs[name] = raw;
+      const raw = readLocal(root, config.custody[role]); outputs[name] = raw;
     }
     localRebindJoin(request, terminal, publication, outputs, reader);
   } else need(facts.request?.sha256 === digest(requestRaw) && facts.request.bytes === requestRaw.length
@@ -618,7 +569,7 @@ export function rebindCustody(config, reader, certificate = false) {
   const expected = {version: 1, kind: 'native-additive-current-bank-rebind-operating-v1',
     execution_commit: terminal.execution_commit, request_sha256: config.request.sha256, publication_sha256: config.publication.sha256,
     exit_code: terminal.exit_code, signal: terminal.signal, owned_processes_remaining: terminal.owned_processes_remaining,
-    lifetime_rss_bytes: terminal.lifetime_rss_bytes, elapsed_seconds: terminal.elapsed_seconds, execution_custody: config.execution_custody};
+    ...(Object.hasOwn(terminal,'lifetime_rss_bytes')?{lifetime_rss_bytes:terminal.lifetime_rss_bytes}:{}), elapsed_seconds: terminal.elapsed_seconds, execution_custody: config.execution_custody};
   const operating = certificate ? reader.json(config.operating) : expected;
   need(same(operating, expected), 'Operating proof differs from exact genuine terminal/custody');
   need(publication.execution_commit === request.execution_commit && publication.request_sha256 === config.request.sha256,
@@ -657,17 +608,6 @@ export function composeAuthorities(config, reader) {
       && same(sidecar.base_selection, base), 'Original selected base differs');
     const assets = sidecar.logical_asset_map;
     need(assets && same(Object.keys(assets).sort(), ['base_manifest', 'ledger', 'owner_roster', 'patch']), 'Complete prior logical assets required');
-    let inputBytes = [config.selector, sidecarPin, assets.base_manifest, sidecar.authority_registry, assets.ledger, assets.patch, sidecar.runtime_envelope,
-      ...authorities.flatMap(value => authorityFields.map(key => value[key]))].reduce((n, p) => n + p.bytes, 0);
-    // Parsing, literal row copies, interval union and encoded products share the
-    // same preparation allowance. Reserve their carry before opening large bodies.
-    const checkCarry = (outputBytes = 0) => {
-      need(Number.isSafeInteger(inputBytes) && inputBytes > 0, 'Complete composition input sizes required');
-      const usage = reader.budget.snapshot();
-      need(Number.isSafeInteger(usage.accounted_bytes + 12 * inputBytes + outputBytes)
-        && usage.accounted_bytes + 12 * inputBytes + outputBytes <= usage.limit_bytes, 'Aggregate composition carry exceeds preparation allowance');
-    };
-    checkCarry();
     const priorRegistry = reader.json(sidecar.authority_registry), priorLedger = reader.json(assets.ledger);
     const priorPatch = reader.json(assets.patch), wrapped = reader.json(sidecar.runtime_envelope);
     const envelope = wrapped.additiveRelease ?? wrapped;
@@ -704,12 +644,11 @@ export function composeAuthorities(config, reader) {
         && entry.rule_sha256 === digest(jsonBytes(preimage)) && constructed.rule_sha256 === entry.rule_sha256 && unique(constructed.component_ids)
         && same(constructed.component_ids, constructed.ledger_rows?.map(row => row.component_id)),
       'Committed modern constructor scope/rule/patch differs');
-      inputBytes += binding.source_evidence.bytes; checkCarry();
+
       const evidence = reader.json(binding.source_evidence);
       need(same(evidence.base_reference, envelope.base_reference) && same(evidence.native_contract, contract)
         && assets.base_manifest.sha256 === selection.sha256 && assets.owner_roster.sha256 === manifest.original_assets?.bounds?.sha256,
       'Modern source changes the selected native baseline/contract');
-      checkCarry();
       need(!authorityIds.has(entry.authority_sha256), 'Modern authority is already selected or duplicated');
       authorityIds.add(entry.authority_sha256);
       entries.push(entry);
@@ -779,7 +718,6 @@ export function composeAuthorities(config, reader) {
       patch: {...envelope.patch, bytes: patchRaw.length, sha256: digest(patchRaw)}};
     const products = {'authority-registry.json': jsonBytes(registry), 'selected-ledger.json': ledgerRaw, 'patch.json': patchRaw,
       'runtime-envelope.json': jsonBytes(wrapped.additiveRelease ? {...wrapped, reference_release: effective, additiveRelease: nextEnvelope} : nextEnvelope)};
-    checkCarry(Object.values(products).reduce((n, raw) => n + raw.length, 0));
     return products;
   }
   const registries = config.registries.map(p => reader.json(p));
@@ -841,7 +779,8 @@ export function packageProjection(config, reader, acceptedRegistry = null) {
         && same(preimage, {...binding, kind: 'source-target-native-rule-v1'}), 'Source-target authority inputs differ');
       add(binding.source_evidence, 'original source evidence'); add(binding.native_patch, 'original native patch');
       const evidence = reader.json(binding.source_evidence);
-      need(evidence.version === 1 && evidence.kind === 'source-target-native-evidence-v1'
+      need((evidence.version === 1 && evidence.kind === 'source-target-native-evidence-v1'
+        || evidence.version === 2 && evidence.kind === 'source-target-native-evidence-v2')
         && Array.isArray(evidence.targets) && evidence.targets.length > 0
         && Array.isArray(evidence.families) && evidence.families.length > 0, 'Missing source-target evidence roles');
       // Closed whole-body read roles of qualifySourceTargetNativeAuthority. Its
@@ -849,6 +788,27 @@ export function packageProjection(config, reader, acceptedRegistry = null) {
       // operands/native contracts are not a recursive package declaration.
       for (const role of ['catalogue', 'physical_input', 'physical_reproduction', 'physical_evidence', 'native_latitudes', 'owner_roster'])
         add(evidence[role], 'source-target ' + role);
+      if (evidence.version === 2) {
+        const pin = evidence.dated_land_support;
+        add(pin, 'source-target dated land support');
+        let raw = reader.read(pin);
+        if (pin.decoded_bytes !== undefined) {
+          need(Number.isSafeInteger(pin.decoded_bytes) && pin.decoded_bytes > 0
+            && hex(pin.decoded_sha256, 64), 'Decoded dated support identity required');
+          raw = gunzipSync(raw, {maxOutputLength: pin.decoded_bytes});
+          need(raw.length === pin.decoded_bytes && digest(raw) === pin.decoded_sha256,
+            'Decoded dated support identity differs');
+        }
+        const support = JSON.parse(raw);
+        need(support.version === 1 && support.kind === 'adopted-dated-native-centre-land-support-v1'
+          && Array.isArray(support.provenance) && support.provenance.length > 0,
+        'Missing dated support provenance roles');
+        for (const provenance of support.provenance) {
+          need(['adoption', 'review', 'observation', 'frame'].includes(provenance?.role),
+            'Unknown dated support provenance role');
+          add(provenance.pin, 'source-target dated ' + provenance.role);
+        }
+      }
       for (const family of evidence.families) {
         need(typeof family.source_id === 'string' && family.source_id && Array.isArray(family.parts)
           && family.parts.length > 0, 'Missing complete source family roles');
@@ -944,9 +904,8 @@ function appendPackageReadPaths(original, paths) {
 // still checks every registry/ledger/rebind/patch/envelope join and package role.
 export function resolveFinalizeConfig(config, reader) {
   if (!Object.hasOwn(config, 'composition')) return config;
-  const keys = ['version', 'selector', 'package_inputs', 'composition', 'rebind',
-    'preparation_allowance', 'new_prefix', 'sidecar_output'];
-  need(config.version === 1 && same(Object.keys(config).filter(key => key !== 'restored_read_roles').sort(), keys.sort()),
+  const keys = ['version', 'selector', 'package_inputs', 'composition', 'rebind', 'new_prefix', 'sidecar_output'];
+  need(config.version === 1 && same(Object.keys(config).filter(key => !['restored_read_roles', 'preparation_allowance'].includes(key)).sort(), keys.sort()),
     'Compact finalization requires exact locators and cannot mix full pins or an existing sidecar');
   need(config.composition?.path && path.posix.basename(config.composition.path) === 'selected-ledger.json',
     'Modern composition requires the committed selected-ledger.json product');
@@ -974,16 +933,15 @@ export function finalizeDelivery(config, reader) {
     need(prior.version === 2 && prior.kind === 'retained-native-additive-selection-v2' && same(prior.base_selection, base),
       'Original selected base differs');
     const pin = prior.authority_registry;
-    need(pin && Number.isSafeInteger(pin.bytes) && pin.bytes > 0 && typeof reader.budget?.add === 'function',
-      'Complete accepted registry pin and shared preparation budget required');
-    // Retain parse, canonical comparison and identity-map carry before parsing.
-    // The reader independently charges/authenticates the complete encoded body.
-    for (let i = 0; i < 12; i++) reader.budget.add({bytes: pin.bytes});
+    need(pin && Number.isSafeInteger(pin.bytes) && pin.bytes > 0 ,
+      'Complete accepted registry pin required');
+    // Authenticate the complete accepted registry before parsing.
+
     acceptedRegistry = reader.json(pin);
   }
   if (config.sidecar_output !== undefined) {
     need(!config.sidecar && safe(config.sidecar_output) && path.posix.dirname(config.sidecar_output) + '/' === config.new_prefix
-      && !['ownership-selection.json', 'package-inputs.json', 'package-roles.json', 'selected-delivery-expectations.json', 'preparation.json', 'restored-read-roles']
+      && !['ownership-selection.json', 'package-inputs.json', 'package-roles.json', 'selected-delivery-expectations.json', 'preparation.json']
         .includes(path.posix.basename(config.sidecar_output)) && config.patch && config.runtime_envelope,
     'Fresh flat owned sidecar output and committed patch/envelope required');
     generatedSidecar = jsonBytes({...prior, authority_registry: config.registry, runtime_envelope: config.runtime_envelope,
@@ -1040,9 +998,9 @@ export function finalizeDelivery(config, reader) {
   validatePackageInputs(baselinePackage);
   const covered = name => baselinePackage.inputs.some(p => p === name || p.endsWith('/') && name.startsWith(p));
   // This is a closed consumed-role traversal, never caller-granted write scope.
-  // Missing original roles are staged from their authenticated immutable bodies.
-  // Existing committed restoration descriptors remain exact readback checks;
-  // ordinary issue/PR guards separately authorize adoption into the repository.
+  // Absent historical roles require an exact committed restoration snapshot.
+  // Finalization never emits a second copy of original role bodies.
+  // Ordinary issue/PR guards separately authorize adoption into the repository.
   const restored = config.restored_read_roles;
   if (restored) need(same(Object.keys(restored).sort(), ['commit', 'paths'])
     && hex(restored.commit, 40) && unique(restored.paths) && restored.paths.every(safe)
@@ -1054,9 +1012,7 @@ export function finalizeDelivery(config, reader) {
   for (const pin of projection.paths.filter(p => !p.path.startsWith(config.new_prefix) || covered(p.path))) {
     try {
       const missing = typeof reader.hasPath === 'function' && !reader.hasPath(config.package_inputs.commit, pin.path);
-      if (missing && !restored) {
-        outputs['restored-read-roles/' + pin.path] = reader.read(pin);
-      } else if (missing && requested.has(pin.path)) {
+      if (missing && requested.has(pin.path)) {
         const snapshot = reader.pin(restored.commit, pin.path);
         need(identity(snapshot, pin), 'Restored snapshot differs from original consumed role');
         matched.add(pin.path);
@@ -1117,7 +1073,7 @@ export function resumeSource(root, destination, config, binding, reader) {
     const raw = products[pin.path.slice(destination.length + 1)];
     need(raw && raw.length === pin.bytes && digest(raw) === pin.sha256, 'Source original execution product differs');
   }
-  return publish(root, destination, products, binding, true, reader.budget);
+  return publish(root, destination, products, binding, true);
 }
 
 // The source probe has one data-configured scientific implementation. Admission
@@ -1125,34 +1081,19 @@ export function resumeSource(root, destination, config, binding, reader) {
 export async function sourceCohort(config, reader, root, destination, phase = 'source') {
   need(['source', 'physical'].includes(phase), 'Unknown scientific delivery phase');
   const phaseConfig = config[phase];
-  need(same(Object.keys(config).filter(key => key !== 'preparation_allowance').sort(),
-    ['processing_allowance', 'runtime_inventory', phase, 'version'].sort())
-    && config.version === 1 && phaseConfig?.version === 1,
-    'Explicit source configuration, runtime inventory and child allowance required');
-  if (Object.hasOwn(config, 'preparation_allowance')) need(config.preparation_allowance
-    && same(Object.keys(config.preparation_allowance).sort(), ['phaseBytes', 'rssBytes'])
-    && Object.values(config.preparation_allowance).every(value => Number.isSafeInteger(value) && value > 0),
-  'Explicit parent preparation allowance must remain finite and positive');
-  need(same(Object.keys(config.processing_allowance ?? {}).sort(), ['phaseBytes', 'rssBytes']), 'Explicit source processing allowance required');
+  need(same(Object.keys(config).filter(key => !['preparation_allowance','processing_allowance'].includes(key)).sort(),
+    ['runtime_inventory', phase, 'version'].sort()) && config.version === 1 && phaseConfig?.version === 1,
+    'Explicit source configuration and runtime inventory required');
   const runtime = config.runtime_inventory;
   need(runtime && same(Object.keys(runtime).sort(), ['files', 'python']) && Array.isArray(runtime.files)
-    && runtime.files.length > 0 && runtime.files.length <= 512 && unique(runtime.files.map(pin => pin.path))
+    && runtime.files.length > 0 && unique(runtime.files.map(pin => pin.path))
     && runtime.python?.bytes > 0 && runtime.files.some(pin => same(pin, runtime.python)), 'Complete pinned source runtime inventory required');
-  const {processingAllowance} = await import('./check-effective-geographic-regression.mjs');
-  const allowance = processingAllowance({...config.processing_allowance, currentRssBytes: 0});
-  let runtimeBytes = 0;
   for (const pin of runtime.files) {
     need(pin && same(Object.keys(pin).sort(), ['bytes', 'path', 'sha256']) && path.isAbsolute(pin.path)
       && Number.isSafeInteger(pin.bytes) && pin.bytes >= 0 && hex(pin.sha256, 64), 'Ordinary installed runtime pin required');
-    runtimeBytes += pin.bytes;
-    need(Number.isSafeInteger(runtimeBytes) && runtimeBytes < allowance.phaseBytes, 'Runtime inventory exceeds source allowance');
   }
   const helper = fileURLToPath(new URL('./qualify-source-cohort.py', import.meta.url));
   const helperRaw = fs.readFileSync(helper), sourceRaw = jsonBytes(phaseConfig);
-  const entryRaw = fs.readFileSync(fileURLToPath(import.meta.url));
-  const executionReserve = helperRaw.length + entryRaw.length + sourceRaw.length + phaseConfig.resources.output_bytes;
-  need(Number.isSafeInteger(executionReserve) && executionReserve > 0
-    && runtimeBytes + executionReserve < allowance.phaseBytes, 'Source execution/output reserve exceeds allowance');
   const runtimeIdentity = pin => {
     const resolved = fs.realpathSync(pin.path), before = fs.statSync(resolved);
     need(before.isFile() && before.size === pin.bytes, 'Installed source runtime size differs');
@@ -1165,17 +1106,6 @@ export async function sourceCohort(config, reader, root, destination, phase = 's
       && ['dev', 'ino', 'size', 'mtimeMs', 'ctimeMs'].every(key => before[key] === after[key]), 'Installed source runtime identity differs');
     return {path: pin.path, resolved, bytes, sha256: pin.sha256};
   };
-  // The Node parent already owns a freshly admitted candidate budget. Reserve
-  // the child's declared output before execution, rather than discovering a
-  // mismatched manual parent cap after successful scientific work.
-  const outputReserve = phaseConfig.resources.output_bytes;
-  need(Number.isSafeInteger(outputReserve) && outputReserve > 0, 'Complete source output reserve required');
-  const parentBudget = reader.budget.snapshot();
-  const prospective = parentBudget.accounted_bytes + parentBudget.reserved_review_bytes + outputReserve;
-  need(Number.isSafeInteger(prospective) && prospective <= parentBudget.limit_bytes,
-    'Source output reserve exceeds parent preparation budget');
-  // Publication charges the actual products once; this aggregate check is not
-  // an ordinary-file charge or a second permanently retained output copy.
   const identities = runtime.files.map(runtimeIdentity);
   const stagingParent = '.cache/delivery-handoff';
   admitDestination(root, stagingParent + '/source-staging', false);
@@ -1201,9 +1131,7 @@ export async function sourceCohort(config, reader, root, destination, phase = 's
   let completed = false;
   try {
     const sourceFile = path.join(staging, 'source-config.json'), admissionFile = path.join(staging, 'admission.json');
-    const admission = {version: 1, observed_unix_seconds: Date.now() / 1000, allowance,
-      runtime_inventory_bytes: runtimeBytes, execution_reserve_bytes: executionReserve,
-      program_sha256: digest(helperRaw), config_sha256: digest(sourceRaw), runtime_files: runtime.files};
+    const admission = {version: 1, program_sha256: digest(helperRaw), config_sha256: digest(sourceRaw), runtime_files: runtime.files};
     fs.writeFileSync(sourceFile, sourceRaw, {flag: 'wx'});
     fs.writeFileSync(admissionFile, jsonBytes(admission), {flag: 'wx'});
     const output = path.join(staging, 'products'), started = performance.now();
@@ -1217,12 +1145,10 @@ export async function sourceCohort(config, reader, root, destination, phase = 's
     const names = phase === 'source' ? sourceProducts : physicalProducts;
     need(same(fs.readdirSync(output).sort(), [...names].sort()), 'Incomplete or foreign source output inventory');
     const products = Object.fromEntries(names.map(name => [name, ordinary(root, path.relative(root, path.join(output, name)))]));
-    const total = Object.values(products).reduce((n, raw) => n + raw.length, 0);
-    need(total <= phaseConfig.resources.output_bytes, 'Complete source output reserve exceeded');
     completed = true;
     return {products, retained_staging: path.relative(root, staging),
       discard_staging: discardStaging,
-      observation: {elapsed_seconds: (performance.now() - started) / 1000, allowance,
+      observation: {elapsed_seconds: (performance.now() - started) / 1000,
       runtime_inventory: identities, limits: ['Scientific checks are cooperative boundaries, not hard process-tree enforcement.',
         phase === 'physical' ? 'Original physical source-relative support is not native, owner-zero, factual or selected-output acceptance.'
           : 'Source prerequisites are not physical, native, owner-zero or selected-output acceptance.']}};
@@ -1233,7 +1159,7 @@ export async function sourceCohort(config, reader, root, destination, phase = 's
 // This is not a completed outer publication or an automatic replay/resume route.
 export function publishCompletedSource(root, destination, result, binding, resume, reader) {
   let publication;
-  try { publication = publish(root, destination, result.products, binding, resume, reader.budget); }
+  try { publication = publish(root, destination, result.products, binding, resume); }
   catch (error) {
     throw new Error(error.message + '; completed producer staging retained at ' + result.retained_staging
       + '; outer publication incomplete', {cause: error});
@@ -1249,8 +1175,11 @@ export function publishCompletedSource(root, destination, result, binding, resum
 // claims stay explicit; this metadata preparation does not qualify their support.
 // In particular, the normative manifest descriptor is not a Git custody pin.
 export async function sourceEvidence(config, reader) {
-  need(config.version === 1 && config.source_evidence?.version === 1
-    && config.source_evidence.kind === 'source-target-native-evidence-v1', 'Explicit ordinary source evidence required');
+  need(config.version === 1 && (config.source_evidence?.version === 1
+    && config.source_evidence.kind === 'source-target-native-evidence-v1'
+    || config.source_evidence?.version === 2 && config.source_evidence.kind === 'source-target-native-evidence-v2'),
+  'Explicit ordinary source evidence required');
+  if (config.source_evidence.version === 2) reader.read(config.source_evidence.dated_land_support);
   const {locate} = await import('./delivery-handoff-advance.mjs');
   const selectorPin = locate(reader, config.selector);
   need(selectorPin.path === 'data/ownership-selection.json', 'Original accepted selector locator required');
@@ -1296,9 +1225,8 @@ export async function sourceEvidence(config, reader) {
   // metadata into the literal normative contract or replaying native science.
   for (const [role, pin] of Object.entries({native_latitudes, owner_roster: assets.owner_roster})) {
     const raw = reader.read(pin);
-    need(Number.isSafeInteger(pin.decoded_bytes) && pin.decoded_bytes > 0 && pin.decoded_bytes <= 33554432
+    need(Number.isSafeInteger(pin.decoded_bytes) && pin.decoded_bytes > 0
       && hex(pin.decoded_sha256, 64), 'Bounded decoded baseline identity required: ' + role);
-    reader.budget.add({bytes: pin.decoded_bytes});
     const decoded = gunzipSync(raw, {maxOutputLength: pin.decoded_bytes});
     need(decoded.length === pin.decoded_bytes && digest(decoded) === pin.decoded_sha256,
       'Decoded baseline identity differs: ' + role);
@@ -1313,11 +1241,14 @@ export async function sourceEvidence(config, reader) {
 // Execute the existing modern constructor or its admitted read-only diagnostic,
 // rather than authoring a country wrapper. Only qualification emits authority.
 export async function nativeAuthority(config, reader, root, diagnostic = false) {
-  need(typeof diagnostic === 'boolean' && same(Object.keys(config).sort(), ['native_patch', 'preparation_allowance', 'source_evidence', 'version'])
-    && config.version === 1 && config.preparation_allowance, 'Explicit native-authority inputs and allowance required');
+  need(typeof diagnostic === 'boolean' && same(Object.keys(config).filter(k=>k!=='preparation_allowance').sort(), ['native_patch', 'source_evidence', 'version'])
+    && config.version === 1, 'Explicit native-authority inputs required');
   const flow = await import('./delivery-handoff-advance.mjs');
   const inputs = {source_evidence: config.source_evidence, native_patch: config.native_patch};
-  const pins = Object.fromEntries(Object.entries(inputs).map(([role, locator]) => [role, flow.locate(reader, locator)]));
+  const pins = diagnostic
+    ? Object.fromEntries(Object.entries(inputs).map(([role, locator]) => [role, flow.locate(reader, locator)])) : null;
+  if (!diagnostic) for (const locator of Object.values(inputs))
+    reader.descriptor(locator?.commit, locator?.path);
   const authorityReader = flow.deliveryAuthorityReader(root, reader);
   const started = performance.now();
   let result, products;
@@ -1326,11 +1257,9 @@ export async function nativeAuthority(config, reader, root, diagnostic = false) 
     const binding = {version: 1, kind: 'source-target-native-custody-v1', ...pins};
     const preimage = {...binding, kind: 'source-target-native-rule-v1'};
     result = diagnoseSourceTargetNativeAuthority(authorityReader, preimage, binding);
-    authorityReader.checkMemory();
     products = {'native-diagnostic.json': jsonBytes(result)};
   } else {
     result = flow.constructOriginalAuthority(authorityReader, inputs);
-    authorityReader.checkMemory();
     need(Array.isArray(result.ledger_rows) && result.ledger_rows.length > 0
       && same(result.component_ids, result.ledger_rows.map(row => row.component_id)), 'Complete modern constructor rows required');
     products = {...result.products, 'constructor-result.json': jsonBytes({version: 1,
@@ -1338,13 +1267,7 @@ export async function nativeAuthority(config, reader, root, diagnostic = false) 
       component_ids: result.component_ids, rule_sha256: result.rule_sha256, ledger_rows: result.ledger_rows,
       limitations: result.limitations})};
   }
-  const bytes = Object.values(products).reduce((n, raw) => n + raw.length, 0);
-  need(bytes <= authorityReader.outputBytes && Object.values(products).every(raw => raw.length <= 33554432),
-    'Native complete output exceeds existing reserve');
-  reader.budget.add({bytes});
   return {products, observation: {elapsed_seconds: (performance.now() - started) / 1000,
-    charged_phase_bytes: authorityReader.used, allowance: authorityReader.allowance,
-    normalized_node_lifetime_peak_rss_bytes: process.resourceUsage().maxRSS * 1024,
     ...(diagnostic ? {requested_cells: result.requested_cells, supported_cells: result.supported_cells, held_cells: result.held_cells}
       : {qualified_cells: result.ledger_rows.reduce((n, row) => n + row.native_cells, 0)}),
     limits: ['Original source/physical producers are not replayed.', diagnostic
@@ -1359,16 +1282,15 @@ async function main(args) {
       'Use materialize CONFIG DESTINATION [--resume]');
     need(!process.execArgv.length && !process.env.NODE_OPTIONS?.trim() && !process.env.NODE_PATH?.trim(), 'Plain Node launch required');
     const root = fs.realpathSync(process.cwd()), raw = ordinary(root, configFile), config = JSON.parse(raw);
-    need(config.version === 1 && config.preparation_allowance, 'Explicit finite materialization configuration required');
-    const reader = pinReader(root, {allowance: config.preparation_allowance}); reader.budget.add({bytes: raw.length});
-    const flow = await import('./delivery-handoff-advance.mjs');
+    need(config.version === 1, 'Explicit materialization configuration required');
+    const reader = pinReader(root); const flow = await import('./delivery-handoff-advance.mjs');
     const pin = flow.locate(reader, config.recipe_index), index = reader.json(pin), plan = index.acquisition_plan;
     need(index.version === 1 && plan?.products?.length, 'Completed recipe index with acquisition plan required');
     const products = {'materialized-inputs.json': jsonBytes({version: 1, kind: 'authenticated-delivery-inputs',
       recipe_index: pin, identities: [...new Set(plan.products.map(p => p.identity))], status: 'complete'})};
-    const publishComplete = admitPublication(root, destination, products, {phase, config_sha256: digest(raw)}, flags.includes('--resume'), reader.budget);
+    const publishComplete = admitPublication(root, destination, products, {phase, config_sha256: digest(raw)}, flags.includes('--resume'));
     const started = performance.now();
-    const result = await flow.acquireDeliveryInputs(plan, root, {budget: reader.budget, token: '', execute: flow.deliveryAcquisitionExecute()});
+    const result = await flow.acquireDeliveryInputs(plan, root, {token: '', execute: flow.deliveryAcquisitionExecute()});
     console.log(JSON.stringify({...publishComplete(), acquisition: result, acquisition_ms: performance.now() - started}));
     return;
   }
@@ -1376,8 +1298,8 @@ async function main(args) {
     'Use prepare-delivery-handoff.mjs requests|native-requests|retain|rebind-operating|rebind-certificate|compose|package|finalize|evidence|source|physical|source-evidence|native-authority|native-diagnostic CONFIG DESTINATION [--resume]');
   need(!process.execArgv.length && !process.env.NODE_OPTIONS?.trim() && !process.env.NODE_PATH?.trim(), 'Plain Node launch required');
   const root = fs.realpathSync(process.cwd()); admitDestination(root, destination, flags.includes('--resume'));
-  const raw = ordinary(root, configFile), config = JSON.parse(raw), reader = pinReader(root, {allowance: config.preparation_allowance});
-  reader.budget.add({bytes: raw.length}); need(config.version === 1, 'Versioned preparation config required');
+  const raw = ordinary(root, configFile), config = JSON.parse(raw), reader = pinReader(root);
+  need(config.version === 1, 'Versioned preparation config required');
   const binding = ['source','physical'].includes(phase) ? sourceBinding(raw,phase) : {phase, config_sha256: digest(raw)};
   if (['source','physical'].includes(phase) && flags.includes('--resume') && fs.existsSync(path.join(root, destination))) {
     console.log(JSON.stringify(resumeSource(root, destination, config, binding, reader))); return;
@@ -1398,6 +1320,6 @@ async function main(args) {
   if (phase === 'package') outputs = packageProjection(config, reader);
   if (phase === 'finalize') outputs = finalizeDelivery(config, reader);
   if (phase === 'evidence') outputs = prepareEvidence(config, reader);
-  console.log(JSON.stringify({...publish(root, destination, outputs, binding, flags.includes('--resume'), reader.budget), ...(observation ? {observation} : {})}));
+  console.log(JSON.stringify({...publish(root, destination, outputs, binding, flags.includes('--resume')), ...(observation ? {observation} : {})}));
 }
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) main(process.argv.slice(2)).catch(error => { console.error(error.message); process.exitCode = 1; });

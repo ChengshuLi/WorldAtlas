@@ -35,7 +35,6 @@ for(const [name,mutate] of [
  ['missing member',j=>j.files.pop()],
  ['duplicate member',j=>j.files[1].path=j.files[0].path],
  ['noncontiguous part',j=>j.parts[0].offset=1],
- ['whole cap',j=>j.whole_bytes=257*1024*1024],
  ['invalid decoded hash',j=>j.parts[0].decoded_sha256='0'.repeat(64)],
  ['invalid member hash',j=>j.files[0].sha256='0'.repeat(64)],
  ['invalid whole hash',j=>j.whole_sha256='0'.repeat(64)],
@@ -45,10 +44,6 @@ for(const [name,mutate] of [
 ])test(`rebound ${name} index fails before destination creation`,t=>{
  const f=fixture(t);f.change(mutate);
  assert.throws(()=>restoreWholeImage(f.wire,f.out,{expectedIndexSha:f.pin()}));assert(!fs.existsSync(f.out));
-});
-test('complete aggregate admission precedes opening any part',t=>{
- const f=fixture(t);f.change(j=>j.whole_bytes=257*1024*1024);fs.unlinkSync(path.join(f.wire,f.index.parts[0].path));
- assert.throws(()=>restoreWholeImage(f.wire,f.out,{expectedIndexSha:f.pin()}),/Bounded original fixed image/);assert(!fs.existsSync(f.out));
 });
 test('empty original image stays valid',t=>{
  const root=fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(),'worldatlas-image-empty-')));t.after(()=>fs.rmSync(root,{recursive:true,force:true}));

@@ -110,10 +110,10 @@ test('prior-evidence subject rosters use their selected commit and preserve sour
 });
 test('historical versions do not widen remote descriptors or tree reads',async()=>{
  const f=fixture(),r=remoteFixture(f);await checkPremergeEvidence({...f,api:r.api,repo:'test/repo'});
- // Initial manifest loading has its own candidate/base reader; the evidence reader adds four distinct commits.
- assert.equal(r.calls.filter(x=>x.includes('/git/commits/')).length,6);
- assert.equal(r.calls.filter(x=>x.endsWith('/git/commits/'+evaluation)).length,2);
- assert.equal(r.calls.filter(x=>x.includes('/git/trees/')).length,6);
+ // Initial manifest loading needs only candidate; the evidence reader authenticates four distinct commits.
+ assert.equal(r.calls.filter(x=>x.includes('/git/commits/')).length,5);
+ assert.equal(r.calls.filter(x=>x.endsWith('/git/commits/'+evaluation)).length,1);
+ assert.equal(r.calls.filter(x=>x.includes('/git/trees/')).length,5);
  const g=fixture();for(let i=0;i<511;i++)g.manifest.baseline.files.push(desc(`extra-${i}`,Buffer.from('x'),old));
  const oversized=remoteFixture(g);await assert.rejects(()=>checkPremergeEvidence({...g,api:oversized.api,repo:'test/repo'}),/oversized evidence inventory/);
  assert.equal(oversized.calls.filter(x=>x.includes('/compare/')).length,0);

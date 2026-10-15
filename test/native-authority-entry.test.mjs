@@ -6,7 +6,7 @@ import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {execFileSync, spawnSync} from 'node:child_process';
 import {nativeRowLatitudes} from '../src/native-grid.js';
-import {pinReader} from '../scripts/prepare-delivery-handoff.mjs';
+import {pinReader,nativeAuthority} from '../scripts/prepare-delivery-handoff.mjs';
 const rectangle=(left,right,bottom=-40,top=40)=>({type:'Polygon',coordinates:[[[left,bottom],[right,bottom],[right,top],[left,top],[left,bottom]]]});
 const version='a'.repeat(40),family='gb:TST:ADM2',a=family+':A',b=family+':B',c=family+':C';
 const size=262166,latitudes=nativeRowLatitudes(size),latitudeBytes=Buffer.alloc(size*8);
@@ -72,7 +72,7 @@ function gitFixture(t) {
   }};rewrite(evidence);
   save('source-evidence.json',JSON.stringify(evidence));git('add','.');git('commit','-m','Bound modern evidence');
   const head=git('rev-parse','HEAD'),reader=pinReader(root);
-  const config={version:1,preparation_allowance:{phaseBytes:512*1024*1024,rssBytes:1024*1024*1024},
+  const config={version:1,
     source_evidence:{commit:head,path:'source-evidence.json'},native_patch:{commit:original,path:'patch.json'}};
   const script=new URL('../scripts/prepare-delivery-handoff.mjs',import.meta.url).pathname;
   const run=(destination,flags=[])=>{save('config.json',JSON.stringify(config));return spawnSync(process.execPath,[script,'native-authority','config.json',destination,...flags],{cwd:root,encoding:'utf8',env:{...process.env,NODE_OPTIONS:'',NODE_PATH:'',GIT_NO_LAZY_FETCH:'1'}});};
@@ -95,14 +95,70 @@ test('plain Node native-authority entry publishes genuine complete constructor p
   fs.appendFileSync(path.join(output,'constructor-result.json'),' ');
   assert.notEqual(f.run(destination,['--resume']).status,0,'changed result cannot be adopted');
 });
-test('native-authority entry refuses missing pins, handwritten descriptors, symlink destination and undersized admission before publishing',t=>{
-  for(const mutation of ['missing','handwritten','resources','unknown']){
+test('native-authority leaves whole input discovery to the unchanged constructor',async t=>{
+  const f=gitFixture(t);
+  let outerReads=0;
+  for(const name of ['pin','read']){
+    const original=f.reader[name];
+    f.reader[name]=(...args)=>{outerReads++;return original(...args);};
+  }
+  const direct=await nativeAuthority(f.config,f.reader,f.root);
+  assert.equal(outerReads,0,'authority must not retain a second outer copy of constructor inputs');
+  const result=JSON.parse(direct.products['constructor-result.json']);
+  assert.equal(result.ledger_rows.length,1);
+  assert.equal(result.ledger_rows[0].target_id,'city');
+  assert.equal(result.ledger_rows[0].native_cells,1);
+});
+test('native-authority constructor refuses malformed or mutated committed scientific inputs before publication',t=>{
+  for(const mutation of ['malformed-evidence','changed-physical-hash','changed-patch-owner','executable-evidence','executable-patch','unsafe-source-path']){
+    const f=gitFixture(t),destination='coordination/engineering/fixture/'+mutation;
+    const executable=mutation==='executable-evidence'?'source-evidence.json':mutation==='executable-patch'?'patch.json':null;
+    if(executable){
+      fs.chmodSync(path.join(f.root,executable),0o755);
+    }else if(mutation==='unsafe-source-path'){
+      f.save('source evidence.json',fs.readFileSync(path.join(f.root,'source-evidence.json')));
+      f.config.source_evidence.path='source evidence.json';
+    }else if(mutation==='changed-patch-owner'){
+      const patch=JSON.parse(fs.readFileSync(path.join(f.root,'patch.json')));
+      patch.rows[0].runs[0][2]=3;f.save('patch.json',JSON.stringify(patch));
+    }else{
+      const evidence=JSON.parse(fs.readFileSync(path.join(f.root,'source-evidence.json')));
+      if(mutation==='changed-physical-hash')evidence.physical_evidence.sha256='0'.repeat(64);
+      f.save('source-evidence.json',mutation==='malformed-evidence'?'{':JSON.stringify(evidence));
+    }
+    f.git('add','.');
+    if(executable)f.git('update-index','--chmod=+x',executable);
+    f.git('commit','-m','Alter one actually consumed scientific input');
+    const head=f.git('rev-parse','HEAD');
+    if(executable)assert.match(f.git('ls-tree',head,'--',executable),/^100755 blob /);
+    f.config[mutation==='changed-patch-owner'||mutation==='executable-patch'?'native_patch':'source_evidence'].commit=head;
+    const run=f.run(destination);assert.notEqual(run.status,0,mutation);
+    const expected={
+      'malformed-evidence':/JSON/,
+      'changed-physical-hash':/Whole immutable input differs: physical\.json/,
+      'changed-patch-owner':/Foreign or conflicting proposed source-target interval/,
+      'executable-evidence':/Missing ordinary exact Git body: source-evidence\.json/,
+      'executable-patch':/Missing ordinary exact Git body: patch\.json/,
+      'unsafe-source-path':/Exact commit and safe whole-file path required/
+    }[mutation];
+    assert.doesNotMatch(run.stderr,/ERR_MODULE_NOT_FOUND|Cannot find (?:module|package)/,mutation+' must reach its intended input boundary');
+    assert.match(run.stderr,expected,mutation);
+    assert.equal(fs.existsSync(path.join(f.root,destination)),false,mutation+' must not publish authority');
+  }
+});
+test('native-authority entry refuses missing pins, handwritten descriptors, and symlink destination before publishing',t=>{
+  for(const mutation of ['missing','handwritten','unknown']){
     const f=gitFixture(t),destination='coordination/engineering/fixture/'+mutation;
     if(mutation==='missing')f.config.native_patch.path='missing.json';
     if(mutation==='handwritten')f.config.native_patch.sha256='1'.repeat(64);
-    if(mutation==='resources')f.config.preparation_allowance.phaseBytes=1024;
     if(mutation==='unknown')f.config.accepted=true;
-    assert.notEqual(f.run(destination).status,0,mutation);assert.equal(fs.existsSync(path.join(f.root,destination)),false);
+    const run=f.run(destination);assert.notEqual(run.status,0,mutation);
+    const expected={missing:/Missing ordinary exact Git body: missing\.json/,
+      handwritten:/Supply exact commit\/path locators only/,
+      unknown:/Explicit native-authority inputs required/}[mutation];
+    assert.doesNotMatch(run.stderr,/ERR_MODULE_NOT_FOUND|Cannot find (?:module|package)/,mutation+' must reach its intended boundary');
+    assert.match(run.stderr,expected,mutation);
+    assert.equal(fs.existsSync(path.join(f.root,destination)),false);
   }
   const f=gitFixture(t);fs.mkdirSync(path.join(f.root,'coordination/engineering'),{recursive:true});fs.symlinkSync(os.tmpdir(),path.join(f.root,'coordination/engineering/link'));
   assert.notEqual(f.run('coordination/engineering/link/authority').status,0);

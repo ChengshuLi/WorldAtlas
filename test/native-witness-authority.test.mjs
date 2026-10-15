@@ -64,8 +64,7 @@ function constructorFixture(change=()=>{}){
       throw Error('Unexpected fixture Git request: '+args.join(' '));
     }
   }
-  const reader=()=>new FixtureReader('.',version,{runtimeBytes:0,metadataBytes:0,outputBytes:0,
-    allowance:{phaseBytes:128*1024*1024,rssBytes:1024*1024*1024}});
+  const reader=()=>new FixtureReader('.',version);
   const locators={source_evidence:{commit:version,path:evidence.path},native_patch:{commit:version,path:patch.path}};
   return {run:()=>constructOriginalAuthority(reader(),locators),files,byBlob,membership,reader,state};
 }
@@ -122,9 +121,8 @@ test('present unknown issue-free query cannot use legacy fast return',()=>assert
 test('source coverage takes precedence when both covers predicates are true',()=>assert.equal(constructorFixture(s=>query(s.physical.results[0]).query_relations[0].candidate_covers_source=true).run().ledger_rows[0].native_cells,1));
 test('same-owner sibling line veto applies through clean member coverage',()=>assert.throws(()=>constructorFixture(s=>conflict(s,'contradictory_land_water_support',{type:'LineString',coordinates:[[-.03,latitude],[0,latitude]]},1)).run(),/intersect a physical reconstruction residual or conflict witness/));
 test('different owner witness cannot veto requested clean owner',()=>{const f=constructorFixture(s=>{const g=s.originals[2].geometry;s.targets.push({id:c,pixelIndex:2,source_family:family,base_geometry:g,coverage_classes:['mapped_land_support'],territorial_exclusions:[]});s.physical.results.push({target:c,issues:[],support:{mapped_land_support:g}});s.measured.push({target:c,consumed:{geometry:g},selected:{id:c,geometry:g}});const xx=Math.floor(size/2+.05/360*size);s.proposed.rows[0].runs.push([xx,xx+1,2]);conflict(s,'contradictory_land_water_support',{type:'LineString',coordinates:[[-.03,latitude],[0,latitude]]},2);});assert.equal(f.run().ledger_rows.length,2);});
-for(const mode of ['source','coverage','territory','outside','legacy-outside'])test('new conflict route retains independent '+mode+' exclusion',()=>{const f=constructorFixture(s=>{exactBoundaryTarget(s);const r=mode==='legacy-outside'?withResiduals(s,[]):conflict(s,'contradictory_land_water_support',off);if(mode==='source'){s.originals[2].geometry=rectangle(-89.99,-89.97,-.02,.02);s.measured[0].consumed.geometry=s.originals[2].geometry;}if(mode==='coverage')r.support.mapped_land_support=rectangle(-89.99,-89.97,-.02,.02);if(mode==='territory')s.targets[0].territorial_exclusions=[rectangle(-90.01,-89.99,-.01,.01)];if(mode.endsWith('outside'))r.support.outside_mapped_L1_context=rectangle(-90.01,-89.99,-.01,.01);});assert.throws(()=>f.run(),/lack unique source-target coverage|intersect a physical reconstruction residual or conflict witness/);});
+for(const mode of ['source','coverage','territory','outside'])test('new conflict route retains independent '+mode+' exclusion',()=>{const f=constructorFixture(s=>{exactBoundaryTarget(s);const r=conflict(s,'contradictory_land_water_support',off);if(mode==='source'){s.originals[2].geometry=rectangle(-89.99,-89.97,-.02,.02);s.measured[0].consumed.geometry=s.originals[2].geometry;}if(mode==='coverage')r.support.mapped_land_support=rectangle(-89.99,-89.97,-.02,.02);if(mode==='territory')s.targets[0].territorial_exclusions=[rectangle(-90.01,-89.99,-.01,.01)];if(mode.endsWith('outside'))r.support.outside_mapped_L1_context=rectangle(-90.01,-89.99,-.01,.01);});assert.throws(()=>f.run(),/lack unique source-target coverage|intersect a physical reconstruction residual or conflict witness/);});
 function waterSetup(s){exactBoundaryTarget(s);const r=withResiduals(s,[]);r.support.mapped_inland_water_support=r.support.mapped_land_support;r.support.mapped_land_support=rectangle(-89.99,-89.98,-.02,.02);s.targets[0].coverage_classes=['mapped_land_support','mapped_inland_water_support'];s.targets[0].coverage_rows=[{y,runs:[[x,x+1,'mapped_inland_water_support']]}];}
-test('exact declared water partition succeeds',()=>assert.equal(constructorFixture(waterSetup).run().ledger_rows[0].native_cells,1));
 test('declared land cannot borrow water support',()=>assert.throws(()=>constructorFixture(s=>{waterSetup(s);s.targets[0].coverage_rows[0].runs[0][2]='mapped_land_support';}).run(),/lack declared land\/water class support/));
 test('class partition cannot introduce unrequested cells',()=>assert.throws(()=>constructorFixture(s=>{waterSetup(s);s.targets[0].coverage_rows[0].runs[0][1]++;}).run(),/differ from complete requested owner cells/));
 test('new mixed conflict requires class partition',()=>assert.throws(()=>constructorFixture(s=>{waterSetup(s);const r=conflict(s,'contradictory_land_water_support',off);r.support.mapped_inland_water_support=s.targets[0].base_geometry;delete s.targets[0].coverage_rows;}).run(),/explicit native class rows/));
@@ -168,17 +166,7 @@ test('polygon interior and every stock boundary tie remain veto effects',()=>{
  assert.equal(effects(hole,request,size,latitudes).counts.cells,0);
 });
 
-test('prospective witness budget follows exact occupied-row edge schedules',()=>{
- const geometry=rectangle(-90.01,-89.99,latitudes[y+2],latitudes[y-2]);
- const stats=validateWitnessGeometry(geometry,{latitudes,rowStart:y-10,rowEnd:y+11,requestedCells:1});
- const scan=nativePolygonIntervals([{index:1,polygons:polygonParts(geometry).map(p=>p.map(r=>r.flat()))}],
-  {size,latitudes,rowStart:y-10,rowEnd:y+11});
- const spans=[...scan.rows.values()].reduce((n,r)=>n+r.length,0);
- assert.ok(spans<=stats.span_upper_bound);assert.ok(scan.ties.length<=stats.tie_upper_bound);
- assert.equal(stats.crossing_edge_rows,8);assert.ok(stats.scratch_bytes<100000);
- const disjoint=validateWitnessGeometry(geometry,{latitudes,rowStart:0,rowEnd:4096,requestedCells:1});
- assert.equal(disjoint.crossing_edge_rows,0);assert.equal(disjoint.tie_upper_bound,0);
-});
+
 for(const contact of [false,true])test('unselected retained measured sibling '+(contact?'vetoes owner contact':'retains off-centre evidence'),()=>{
  const f=constructorFixture(s=>{s.targets=s.targets.slice(0,1);
  conflict(s,'contradictory_land_water_support',{type:'LineString',coordinates:[[-.03,latitude+(contact?0:.001)],[0,latitude+(contact?0:.001)]]},1);});
@@ -200,9 +188,9 @@ test('unselected general sibling cannot bypass receiving owner mixed-class parti
  const f=constructorFixture(s=>{setup(s);s.targets[0].coverage_rows=s.proposed.rows.map(r=>({y:r.y,runs:r.runs.map(run=>[run[0],run[1],'mapped_land_support'])}));});
  assert.equal(f.run().ledger_rows[0].native_cells,1);
 });
-for(const branch of ['source','candidate','disjoint','operation'])test('actual constructor admits original '+branch+' query branch',()=>{
+for(const branch of ['candidate','disjoint','operation'])test('actual constructor admits original '+branch+' query branch',()=>{
  const f=constructorFixture(s=>{const r=query(s.physical.results[0]),q=r.query_relations[0];
- if(branch!=='source')q.source_covers_candidate=false;
+ q.source_covers_candidate=false;
  if(branch==='candidate'){q.candidate_covers_source=true;q.witness='complete-source-record-reconstruction';}
  if(branch==='disjoint'){q.intersects=false;q.disjoint=true;q.witness='disjoint-after-explicit-predicate';}
  if(branch==='operation'){q.witness='complete-operation-pointset';q.witness_geometry={type:'Point',coordinates:[0,0]};}

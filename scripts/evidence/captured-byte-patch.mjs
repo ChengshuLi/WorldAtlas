@@ -1,16 +1,15 @@
 import assert from 'node:assert/strict';
 import {gunzipSync} from 'node:zlib';
 import {createHash} from 'node:crypto';
-import {BYTE_CAP,byteSha,verifyWholeBytes} from '../../coordination/engineering/eastern-two-gap-repair-native-20261007/byte-patch.mjs';
+import {byteSha,verifyWholeBytes} from '../../coordination/engineering/eastern-two-gap-repair-native-20261007/byte-patch.mjs';
 const hash=value=>typeof value==='string'&&/^[a-f0-9]{64}$/.test(value);
-const PHASE_CAP=256*1024*1024;
 function binding(name,resolved){
  assert(resolved&&typeof resolved.read==='function');
  const d=resolved.declaration;assert(d&&d.object===name);
  const row=[d.path,d.object,d.mode,d.encoded_bytes,d.encoded_sha256,d.decoded_bytes,d.decoded_sha256];
  assert(typeof row[0]==='string'&&row[0].length>0);
  assert(['100644','100755'].includes(row[2]));
- for(const i of [3,5])assert(Number.isSafeInteger(row[i])&&row[i]>=0&&row[i]<=BYTE_CAP);
+ for(const i of [3,5])assert(Number.isSafeInteger(row[i])&&row[i]>=0);
  assert(hash(row[4])&&hash(row[6]));return row;
 }
 // Only ordinary JSON data may describe executable copy operations. Accessors,
@@ -28,17 +27,17 @@ function commandData(command){
  return command;
 }
 // Each call owns fresh private decoded bodies, never a successful verdict cache.
-// Admit the complete unique input/output phase before opening any source.
+// Authenticate the complete unique input/output layout before opening sources.
 export function applyEncodedBytePatch(commands,target,resolveSource){
  assert.equal(typeof resolveSource,'function');assert(Array.isArray(commands)&&commands.length>0);
  const expected={bytes:target.bytes,sha256:target.sha256,mode:target.mode};
- assert(Number.isSafeInteger(expected.bytes)&&expected.bytes>=0&&expected.bytes<=BYTE_CAP);
+ assert(Number.isSafeInteger(expected.bytes)&&expected.bytes>=0);
  assert(hash(expected.sha256)&&['100644','100755'].includes(expected.mode));
  const commandCount=commands.length;assert.equal(Object.getPrototypeOf(commands),Array.prototype);
  const commandAt=ordinal=>{const d=Object.getOwnPropertyDescriptor(commands,String(ordinal));assert(d&&Object.hasOwn(d,'value')&&d.enumerable,'Ordinary dense command data required');return commandData(d.value);};
- let phase=2*expected.bytes,output=0,metadataBytes=0;
+ let output=0;
  const layout=createHash('sha256'),planned=new Map(),captured=new Map();
- const addCommand=row=>{const raw=JSON.stringify(row)+'\n';metadataBytes+=Buffer.byteLength(raw);phase+=Buffer.byteLength(raw);assert(metadataBytes<=BYTE_CAP&&Number.isSafeInteger(phase)&&phase<=PHASE_CAP,'Complete captured input/output phase exceeds cap');layout.update(raw);};
+ const addCommand=row=>{const raw=JSON.stringify(row)+'\n';layout.update(raw);};
  const currentLayout=()=>{assert.equal(commands.length,commandCount,'Command count changed');const digest=createHash('sha256');for(let ordinal=0;ordinal<commandCount;ordinal++)digest.update(JSON.stringify(commandAt(ordinal))+'\n');return digest.digest('hex');};
  for(let ordinal=0;ordinal<commandCount;ordinal++){
   const command=commandAt(ordinal);
@@ -50,7 +49,6 @@ export function applyEncodedBytePatch(commands,target,resolveSource){
    assert(length<=expected.bytes-output,'Copy exceeds exact remaining output before lookup');
    if(!planned.has(name)){
     const resolved=resolveSource(name),row=binding(name,resolved);
-    phase+=row[3]+row[5]+Buffer.byteLength(name);assert(Number.isSafeInteger(phase)&&phase<=PHASE_CAP,'Complete captured input/output phase exceeds cap');
     planned.set(name,{binding:row,read:resolved.read});
    }
    const size=planned.get(name).binding[5];assert(offset<=size&&length<=size-offset,'Escaped source copy range');
@@ -79,7 +77,7 @@ export function applyEncodedBytePatch(commands,target,resolveSource){
  // view object for every tiny copy and concatenating a second output buffer.
  // The original whole-target verifier remains mandatory; no partial result escapes.
  try {
-  // Capture all admitted inputs before allocating the complete target. Encoded
+  // Capture all authenticated inputs before allocating the complete target. Encoded
   // local loader frames finish before output allocation. Copy commands
   // consume only these private immutable captures, never a repeated resolver.
   for(const name of planned.keys())source(name);

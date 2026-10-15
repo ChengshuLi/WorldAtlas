@@ -23,7 +23,7 @@ function fixture(t) {
     fs.writeFileSync(path.join(root, name), jsonBytes(value));
   };
   const commit = () => { git('add', '.'); git('commit', '-qm', 'Immutable fixture'); return git('rev-parse', 'HEAD'); };
-  const reader = () => pinReader(root, {allowance: {phaseBytes: 134217728, rssBytes: 536870912}});
+  const reader = () => pinReader(root);
   const pin = (commit, name) => reader().pin(commit, name);
   const common = PREFIX + 'original/';
   write(common + 'body.json', {retained: true});
@@ -67,12 +67,11 @@ function fixture(t) {
   for (const [name, value] of Object.entries(products)) write(PREFIX + 'compose/' + name, value);
   const composed = commit();
   const full = {version: 1, selector, package_inputs, rebind, new_prefix: PREFIX, sidecar_output: PREFIX + 'sidecar.json',
-    preparation_allowance: {phaseBytes: 134217728, rssBytes: 536870912},
     registry: pin(composed, PREFIX + 'compose/authority-registry.json'), ledger: pin(composed, PREFIX + 'compose/selected-ledger.json'),
     selected_ledger: pin(composed, PREFIX + 'compose/selected-ledger.json'), patch: pin(composed, PREFIX + 'compose/patch.json'),
     runtime_envelope: pin(composed, PREFIX + 'compose/runtime-envelope.json')};
   const compact = {version: full.version, selector: locator(selector), package_inputs: locator(package_inputs), rebind: locator(rebind),
-    new_prefix: full.new_prefix, sidecar_output: full.sidecar_output, preparation_allowance: full.preparation_allowance,
+    new_prefix: full.new_prefix, sidecar_output: full.sidecar_output,
     composition: locator(full.selected_ledger)};
   const run = (config, destination, ...flags) => {
     write('config.json', config);
@@ -126,11 +125,10 @@ test('wrong commit, wrong path, missing product and changed product hash fail be
   const changed = f.commit(); cases.push({...f.compact, composition: {...f.compact.composition, commit: changed}});
   fs.chmodSync(path.join(f.root, PREFIX + 'compose/authority-registry.json'), 0o755);
   const executable = f.commit(); cases.push({...f.compact, composition: {...f.compact.composition, commit: executable}});
-  cases.push({...f.compact, preparation_allowance: {...f.compact.preparation_allowance, phaseBytes: 1}});
   for (const [i, config] of cases.entries()) {
     const destination = '.cache/delivery-handoff/refused-' + i, result = f.run(config, destination);
     assert.notEqual(result.status, 0, 'Invalid metadata must refuse');
-    assert.match(result.stderr, /Missing ordinary exact Git body|committed selected-ledger|safe whole-file path|exact commit\/path locator|metadata joins differ|Whole body hash differs|Aggregate evidence preparation budget exceeded/);
+    assert.match(result.stderr, /Missing ordinary exact Git body|committed selected-ledger|safe whole-file path|exact commit\/path locator|metadata joins differ|Whole body hash differs/);
     assert.equal(fs.existsSync(path.join(f.root, destination)), false, 'Refusal cannot create output');
   }
 });
@@ -204,3 +202,42 @@ test('delivery finalizer satisfies actual append-only selected-data classifier a
   assert.equal(await f.run(),null,'the same globally sorted input set must not pass the accepted-prefix classifier');
 });
 }
+
+test('canonical originals remain in the candidate while absent historical roles require explicit exact restoration', t => {
+  const f = fixture(t), read = () => pinReader(f.root), config = {...f.full,
+    new_prefix: PREFIX + 'compose/', sidecar_output: PREFIX + 'compose/sidecar.json'};
+  const original = read().json(config.registry).entries[0].rule_preimage;
+  const filename = path.join(f.root, original.path), raw = fs.readFileSync(filename);
+  const retained = f.run(config, '.cache/delivery-handoff/canonical');
+  assert.equal(retained.status, 0, retained.stderr);
+  const products = JSON.parse(fs.readFileSync(path.join(f.root, '.cache/delivery-handoff/canonical/preparation.json'))).outputs;
+  assert.ok(Object.keys(products).every(name => !name.includes('/')));
+  assert.deepEqual(fs.readFileSync(filename), raw);
+
+  // This snapshot intentionally lacks one required original. The candidate then
+  // restores its exact canonical path, without a second local-output copy.
+  fs.unlinkSync(filename);
+  const missing = f.commit();
+  config.package_inputs = read().pin(missing, '.github/package-inputs.json');
+  fs.writeFileSync(filename, raw, {flag: 'wx'});
+  const restored = f.commit();
+  config.restored_read_roles = {commit: restored, paths: [original.path]};
+  const result = f.run(config, '.cache/delivery-handoff/restored');
+  assert.equal(result.status, 0, result.stderr);
+  const receipt = JSON.parse(fs.readFileSync(path.join(f.root, '.cache/delivery-handoff/restored/preparation.json')));
+  assert.ok(Object.keys(receipt.outputs).every(name => !name.includes('/')));
+  assert.deepEqual(fs.readFileSync(filename), raw);
+
+  const withoutSnapshot = {...config}; delete withoutSnapshot.restored_read_roles;
+  const refused = f.run(withoutSnapshot, '.cache/delivery-handoff/missing-snapshot');
+  assert.notEqual(refused.status, 0); assert.match(refused.stderr, /accepted path identity/);
+  assert.equal(fs.existsSync(path.join(f.root, '.cache/delivery-handoff/missing-snapshot')), false);
+  assert.deepEqual(fs.readFileSync(filename), raw);
+  f.write(original.path, {retained: false});
+  const changed = f.commit(), changedRaw = fs.readFileSync(filename);
+  config.restored_read_roles = {commit: changed, paths: [original.path]};
+  const divergent = f.run(config, '.cache/delivery-handoff/changed-snapshot');
+  assert.notEqual(divergent.status, 0); assert.match(divergent.stderr, /Restored snapshot differs/);
+  assert.equal(fs.existsSync(path.join(f.root, '.cache/delivery-handoff/changed-snapshot')), false);
+  assert.deepEqual(fs.readFileSync(filename), changedRaw);
+});

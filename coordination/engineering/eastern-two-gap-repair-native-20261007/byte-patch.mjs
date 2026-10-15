@@ -4,19 +4,18 @@
 // That source was uncommitted review preparation, not an accepted scientific run.
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
-export const BYTE_CAP = 32 * 1024 * 1024;
 export const byteSha = body => createHash('sha256').update(body).digest('hex');
 const hash = value => typeof value === 'string' && /^[a-f0-9]{64}$/.test(value);
 export function verifyWholeBytes(body, pin) {
   assert(Buffer.isBuffer(body));
-  assert(Number.isSafeInteger(pin.bytes) && pin.bytes >= 0 && pin.bytes <= BYTE_CAP);
+  assert(Number.isSafeInteger(pin.bytes) && pin.bytes >= 0);
   assert(hash(pin.sha256) && ['100644','100755'].includes(pin.mode));
   assert.equal(body.length,pin.bytes);assert.equal(byteSha(body),pin.sha256);
   return body;
 }
 export function applyBytePatch(commands, target, source) {
   assert(Array.isArray(commands) && commands.length > 0);
-  assert(Number.isSafeInteger(target.bytes) && target.bytes >= 0 && target.bytes <= BYTE_CAP);
+  assert(Number.isSafeInteger(target.bytes) && target.bytes >= 0);
   assert(hash(target.sha256) && ['100644','100755'].includes(target.mode));
   const pieces=[];let bytes=0;
   for(const command of commands) {
@@ -29,7 +28,7 @@ export function applyBytePatch(commands, target, source) {
       assert(typeof name==='string' && name.length>0);
       assert(Number.isSafeInteger(offset) && Number.isSafeInteger(length) && offset>=0 && length>0);
       assert(length<=target.bytes-bytes,'Copy exceeds exact remaining output before lookup');
-      const original=source(name);assert(Buffer.isBuffer(original) && original.length<=BYTE_CAP);
+      const original=source(name);assert(Buffer.isBuffer(original));
       assert(offset<=original.length && length<=original.length-offset,'Escaped source copy range');
       chunk=original.subarray(offset,offset+length);
     }else {

@@ -7,9 +7,9 @@ import {createHash} from 'node:crypto';
 import {authenticateOriginalPackageOutput, requireOriginalPackageOutput,
   requirePackageAssemblyExecution, issuePackageAssemblyExecution,retainSelectedPackageInputs} from '../coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs';
 import {requireCurrentPackageAssembly, integrationTestFiles} from '../scripts/run-integration-tests.mjs';
-import {admitAssemblyAtlasMetadata,createPackageAssemblyScratch,packageAssemblyInvocation,findOriginalPackage,acceptedSelectedPackageInputs} from '../scripts/assemble-selected-package.mjs';
+import {createPackageAssemblyScratch,packageAssemblyInvocation,findOriginalPackage,acceptedSelectedPackageInputs} from '../scripts/assemble-selected-package.mjs';
 import {execFileSync,spawnSync} from 'node:child_process';
-import {inspectPackageExecutionInputs,validatePackageExecutionRoles} from '../scripts/package-build.mjs';
+import {inspectPackageExecutionInputs} from '../scripts/package-build.mjs';
 import {loadPackageInputs} from '../scripts/package-inputs.mjs';
 import {ImmutableReader} from '../scripts/check-effective-geographic-regression.mjs';
 import {nativeRowLatitudes} from '../src/native-grid.js';
@@ -137,13 +137,6 @@ test('consumer reduction binds actual current head and trusted assembly receipt 
   assert.throws(()=>requireCurrentPackageAssembly({directory:root,expected:write(receipt)}),/same-head/);
 });
 
-test('actual emitted atlas admission follows observed size and shared memory rather than a control-receipt cap',()=>{
-  const observed=10547753;
-  assert.equal(admitAssemblyAtlasMetadata(observed,{phaseBytes:2*observed}),observed);
-  assert.throws(()=>admitAssemblyAtlasMetadata(observed,{phaseBytes:2*observed-1}),/current metadata allocation/);
-  for(const bytes of [0,-1,NaN,Number.MAX_SAFE_INTEGER+1])assert.throws(()=>admitAssemblyAtlasMetadata(bytes,{phaseBytes:Infinity}));
-});
-
 test('explicit hosted proof cannot silently report normal fallback success',t=>{
   const temporary=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-proof-invocation-'));
   t.after(()=>fs.rmSync(temporary,{recursive:true,force:true}));
@@ -235,7 +228,7 @@ test('private assembly admission uses actual declared inputs and rejects legacy 
   globalThis.fetch=async()=>new Response(f.log());
   const token=await authenticate(manifest.source);
   process.argv[1]=path.join(f.root,'scripts/assemble-selected-package.mjs');
-  const issue=original=>issuePackageAssemblyExecution({original,source:f.root,stage,executingRoot:f.root,inheritedMetadata:[null,null,null,null,null]});
+  const issue=original=>issuePackageAssemblyExecution({original,source:f.root,stage,executingRoot:f.root});
   assert.doesNotThrow(()=>requirePackageAssemblyExecution(issue(token)));
   for(const name of ['test/incidental.test.mjs','scripts/observer.mjs','.github/workflows/unrelated.yml']){
     s.write(name,'unconsumed observer');s.commit();assert.doesNotThrow(()=>requirePackageAssemblyExecution(issue(token)),name);
@@ -537,7 +530,7 @@ test('discovery and actual private execution admit32 leaves including a later ac
   assert.equal((await findOriginalPackage({api,repo:f.repo,current,originalRunId:17})).origin.head,f.sourceHead);
   const stage=fs.mkdtempSync(path.join(f.root,'stage-'));process.argv[1]=path.join(f.root,'scripts/assemble-selected-package.mjs');
   const issue=()=>issuePackageAssemblyExecution({original:token,source:f.root,stage,executingRoot:f.root,
-    inheritedMetadata:[null,null,null,null,null],acceptedInputs:current.accepted_selected_inputs});
+    acceptedInputs:current.accepted_selected_inputs});
   assert.doesNotThrow(()=>requirePackageAssemblyExecution(issue()),'Preliminary execution admission grants no publication capability');
   const invariant=fs.readFileSync(path.join(f.root,'dist/client/a.bin'),'utf8');
   for(const value of ['new or changed executable code','new code with refreshed arbitrary pin metadata']){
@@ -596,8 +589,7 @@ function detachedSourceFixture({invalid=false}={}){
       throw Error('Unexpected bounded fixture Git request: '+args.join(' '));
     }
   }
-  const reader=()=>new FixtureReader('.',version,{runtimeBytes:0,metadataBytes:0,outputBytes:0,
-    allowance:{phaseBytes:128*1048576,rssBytes:1024*1048576}});
+  const reader=()=>new FixtureReader('.',version);
   const accepted={commit:version,files:[helper,unreferenced].map(p=>({path:p.path,mode:p.mode,oid:p.git_blob_oid,bytes:p.bytes}))};
   const definition={version:1,inputs:['.github/package-inputs.json','data/ownership-selection.json'],
     optional_inputs:[],verification_paths:[],generated_outputs:['dist/']},producer={kind:'immediate-cloudflare-build-v1',workflows:[]},
@@ -610,13 +602,12 @@ function detachedSourceFixture({invalid=false}={}){
 
 test('detached typed SOURCE success retains only requested exact descriptors before final admission',()=>{
   const f=detachedSourceFixture(),parent=f.reader(),child=f.reader(),retained=new Map();
-  parent.captureSelectedInputs=(inputs,admit)=>retainSelectedPackageInputs(f.accepted.files,inputs,retained,admit);
+  parent.captureSelectedInputs=inputs=>retainSelectedPackageInputs(f.accepted.files,inputs,retained);
   const proof=readRetainedRegistryAuthority(child,f.entry,parent);
   assert.equal(proof.kind,'authenticated-registry-source-custody-v1');
   assert.ok(retained.has(f.helper.path),'Actual child SOURCE read must reach the final package gate');
   assert.equal(retained.has(f.unreferenced.path),false,'Pin-shaped arbitrary metadata is not typed reachability');
-  assert.equal(parent.inventory.size,0,'No wholesale child inventory merge');
-  assert.ok(parent.metadataBytes>0);assert.equal(parent.used,parent.metadataBytes);
+  assert(parent.inventory.size>0,'Complete successful child input custody survives');
   assert.doesNotThrow(()=>admitPackageInputTransition(f.before,f.current([f.helper.path]),
     {acceptedInputs:f.accepted,typedInputs:[...retained.values()]}));
   assert.throws(()=>admitPackageInputTransition(f.before,f.current([f.helper.path,f.unreferenced.path]),
@@ -626,45 +617,36 @@ test('detached typed SOURCE success retains only requested exact descriptors bef
   assert.equal(ordinary.captureSelectedInputs,undefined);
 });
 
-test('failed detached SOURCE validation or descriptor budget cannot retain admission evidence',()=>{
+test('failed detached SOURCE validation cannot retain admission evidence',()=>{
   const f=detachedSourceFixture({invalid:true}),parent=f.reader(),retained=new Map();
-  parent.captureSelectedInputs=(inputs,admit)=>retainSelectedPackageInputs(f.accepted.files,inputs,retained,admit);
+  parent.captureSelectedInputs=inputs=>retainSelectedPackageInputs(f.accepted.files,inputs,retained);
   assert.throws(()=>readRetainedRegistryAuthority(f.reader(),f.entry,parent));
-  assert.equal(retained.size,0);assert.equal(parent.metadataBytes,0);
-  const valid=detachedSourceFixture(),small=valid.reader(),pending=new Map();small.used=small.phaseLimit;
-  small.captureSelectedInputs=(inputs,admit)=>retainSelectedPackageInputs(valid.accepted.files,inputs,pending,admit);
-  assert.throws(()=>readRetainedRegistryAuthority(valid.reader(),valid.entry,small),/retention exceeds authority or parent phase/);
-  assert.equal(pending.size,0);assert.equal(small.metadataBytes,0);
+  assert.equal(retained.size,0);assert.equal(parent.inventory.size,0);
+
 });
 
 
-test('shared selected-input admission preserves actual builder roles and refuses output-writer imports',t=>{
-  const root=fs.realpathSync(process.cwd()),definition=loadPackageInputs(root),
-    prefix='coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/',
-    rolesPath=prefix+'qualified-artifacts/application-consumer-code.json',
-    roles=JSON.parse(fs.readFileSync(path.join(root,rolesPath))),files=new Set();
+test('shared selected-input admission covers actual builders and refuses undeclared imports',t=>{
+  const root=fs.realpathSync(process.cwd()),definition=loadPackageInputs(root),files=new Set();
   for(const kind of ['static','hosted','cloudflare']){
     const actual=inspectPackageExecutionInputs(root,definition,kind);
-    assert.deepEqual(actual.errors,[],'Actual '+kind+' preflight must reach its unchanged pinned role guard');
-    assert.equal(validatePackageExecutionRoles(actual.files,roles,`scripts/build-${kind}-inner.mjs`),true);
+    assert.deepEqual(actual.errors,[],'Actual '+kind+' preflight must include its complete current import closure');
     assert(!actual.files.includes('scripts/package-output-artifact.mjs'));
     assert(!actual.files.includes('scripts/package-node-runtime.mjs'));
     for(const name of actual.files)files.add(name);
   }
   const fixture=fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(),'atlas-output-role-closure-')));
   t.after(()=>fs.rmSync(fixture,{recursive:true,force:true}));
-  for(const name of ['data/native-context-migration/manifest.json',prefix+'context-stage-v9.json',
-    prefix+'qualified-artifacts/consumption-certificate.json',rolesPath,
-    'scripts/package-output-artifact.mjs','scripts/package-node-runtime.mjs'])files.add(name);
+  files.add('data/native-context-migration/manifest.json');
   for(const name of files){const dest=path.join(fixture,name);fs.mkdirSync(path.dirname(dest),{recursive:true});
     fs.copyFileSync(path.join(root,name),dest,fs.constants.COPYFILE_EXCL);}
+  fs.writeFileSync(path.join(fixture,'undeclared-fixture.mjs'),'export const fixture=true;\n');
   fs.appendFileSync(path.join(fixture,'coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs'),
-    "\nimport '../../../scripts/package-output-artifact.mjs';\n");
+    "\nimport '../../../undeclared-fixture.mjs';\n");
   for(const kind of ['static','hosted','cloudflare']){
     const rejected=inspectPackageExecutionInputs(fixture,definition,kind);
-    assert(rejected.files.includes('scripts/package-output-artifact.mjs'));
-    assert(rejected.files.includes('scripts/package-node-runtime.mjs'));
-    assert(rejected.errors.some(error=>error.kind==='execution-inputs'&&error.detail==='Complete actual execution role closure required'),
-      'The real '+kind+' entry must refuse reintroduced incidental output/runtime code');
+    assert(rejected.files.includes('undeclared-fixture.mjs'));
+    assert(rejected.errors.some(error=>error.kind==='execution-declaration'&&error.path==='undeclared-fixture.mjs'),
+      'The real '+kind+' entry must refuse undeclared imports');
   }
 });

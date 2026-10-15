@@ -47,7 +47,6 @@ Recovery selects the retained legacy manifest by running the ordinary build with
 
 Cold changed-geography preparation remains slow and whole-process memory measurements vary substantially. Incremental source authentication limits each serialization buffer to one feature; it does not bound total geometry or grid memory. Original geographic approval/certificates retain their existing meaning. Independent exact-head review, bounded evidence packaging, normal queue checks and a separately authorized verified delivery are required. No live facts were read back or mutated in this offline validation. Genuine source gaps and uncertain physical-water questions remain open for the global source audit and coordinated factual repairs.
 
-Current selected-reader and native-preparation memory grants use actual reported
-resources and finite safety headroom. See [PROCESSING_MEMORY_ADMISSION.md](PROCESSING_MEMORY_ADMISSION.md)
-for concurrent-growth reservations, complete-phase/RSS limits and existing explicit
-preparation arguments.
+Selected readers and native preparation use ordinary runtime/OS memory behavior.
+See [PROCESSING_MEMORY_ADMISSION.md](PROCESSING_MEMORY_ADMISSION.md). Scientific
+checks, immutable input identity and complete-output acceptance remain required.

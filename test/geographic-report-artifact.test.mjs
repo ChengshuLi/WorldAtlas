@@ -455,7 +455,9 @@ test('actual fresh software archive binds candidate code without impersonating a
 function queueCompletionFixture(f = freshQueueTransport()) {
   const {repo, head, baseline: base} = f.options, candidate = f.commit.sha;
   const root = `/repos/${repo}`, original = f.loadOptions.api;
-  f.calls = []; f.writes = [];
+  const integrationRequestId = 'queue-report-fixture-0001';
+  const reference = `worldatlas-integration/pr-2-${integrationRequestId}`;
+  f.calls = []; f.writes = []; f.preparationWrites = [];
   f.issue = {number: 1, state: 'open', created_at: '2020-01-01T00:00:00Z',
     labels: ['type:engineering', 'kind:work-item', 'status:ready'],
     body: '<!-- worldatlas-work:v1\n' + JSON.stringify({mode: 'engineering', max_prs: 1,
@@ -468,6 +470,17 @@ function queueCompletionFixture(f = freshQueueTransport()) {
   f.integrated = structuredClone(f.authored); f.baseline = [];
   f.api = async (route, method = 'GET', body) => {
     f.calls.push(route); const name = route.split('?')[0];
+    if (method === 'POST' && name === root + '/git/refs') {
+      assert.deepEqual(body, {ref: `refs/heads/${reference}`, sha: base});
+      f.preparationWrites.push(name);
+      return {ref: body.ref, object: {sha: base}};
+    }
+    if (method === 'POST' && name === root + '/merges') {
+      assert.deepEqual(body, {base: reference, head,
+        commit_message: `WorldAtlas isolated integration PR2 request ${integrationRequestId}`});
+      f.preparationWrites.push(name);
+      return {sha: candidate};
+    }
     if (method === 'PUT') {f.writes.push(body); return {merged: true, sha: 'f'.repeat(40)};}
     if (name === root + '/pulls/2') return structuredClone(f.pr);
     if (name === root + '/issues/1') return structuredClone(f.issue);
@@ -486,7 +499,7 @@ function queueCompletionFixture(f = freshQueueTransport()) {
     return original(route, method, body);
   };
   f.api.jobLogRedirect = original.jobLogRedirect; f.api.artifactRedirect = original.artifactRedirect;
-  f.mergeOptions = () => ({api: f.api, repo, number: 2, expectedHead: head,
+  f.mergeOptions = () => ({api: f.api, repo, number: 2, expectedHead: head, integrationRequestId,
     policy: {version: 1, mode: 'enforce-new', activation_time: '2100-01-01T00:00:00Z'},
     evidenceCheck: async () => {assert.notEqual(f.review, 'withdrawn', 'Fresh exact-head review is required'); return {status: 'legacy'};}});
   f.load = ({api = f.api} = {}) => loadGeographicReport({...f.loadOptions, api});
@@ -499,6 +512,7 @@ function queueCompletionFixture(f = freshQueueTransport()) {
 test('authenticated main queue reuses successful prepared tree comparison without recursive final reads', async () => {
   const f = queueCompletionFixture();
   await prepareIntegration(f.mergeOptions());
+  assert.deepEqual(f.preparationWrites, [`/repos/${f.options.repo}/git/refs`, `/repos/${f.options.repo}/merges`]);
   assert.equal(f.treeReads().length, 2, 'Preparation still compares both complete trees');
   f.calls.length = 0;
   const result = await f.complete();
@@ -624,6 +638,7 @@ test('reviewed focused test-only prepare completes through authenticated queue c
     const f=queueCompletionFixture(),name='test/native-diagnostic-entry.test.mjs';
     f.files=[{filename:name,status:'modified'}];f.authored[0].path=name;f.integrated=structuredClone(f.authored);
     const prepared=await prepareIntegration(f.mergeOptions());
+    assert.deepEqual(f.preparationWrites,[`/repos/${f.options.repo}/git/refs`,`/repos/${f.options.repo}/merges`]);
     assert.equal(prepared.profile,'evidence');assert.equal(prepared.geography_software,false);
     assert.equal(f.treeReads().length,2);f.calls.length=0;
     if(failure==='review')f.review='withdrawn';

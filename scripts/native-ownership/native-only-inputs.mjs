@@ -10,7 +10,6 @@ export async function loadNativeSourceInputs(repo,commit,{readFile}={}){
    throw Error('Unsafe native input path');
   if(readFile){
    const raw=Buffer.from(readFile(name,commit));
-   if(raw.length>32*1024*1024)throw Error('Original exceeds per-file byte budget');
    files.set(name,{path:name,bytes:raw.length,sha256:digest(raw)});return raw;
   }
   const tree=execFileSync('git',['-C',repo,'ls-tree','-z',commit,'--',name],{encoding:'utf8'});
@@ -18,12 +17,12 @@ export async function loadNativeSourceInputs(repo,commit,{readFile}={}){
   if(tree.slice(tree.indexOf('\t')+1)!==name+'\0')throw Error('Original path differs');
   const blob=tree.split(' ')[2].split('\t')[0];
   const length=Number(execFileSync('git',['-C',repo,'cat-file','-s',blob],{encoding:'utf8'}));
-  if(!Number.isSafeInteger(length)||length<0||length>32*1024*1024)throw Error('Original exceeds per-file byte budget');
-  const raw=execFileSync('git',['-C',repo,'cat-file','blob',blob],{maxBuffer:32*1024*1024});
+  if(!Number.isSafeInteger(length)||length<0)throw Error('Invalid original byte length');
+  const raw=execFileSync('git',['-C',repo,'cat-file','blob',blob],{maxBuffer:length+1});
   if(raw.length!==length)throw Error('Original read incomplete');
   files.set(name,{path:name,bytes:raw.length,sha256:digest(raw)});return raw;
  }
- const json=raw=>JSON.parse(raw[0]===31&&raw[1]===139?gunzipSync(raw,{maxOutputLength:32*1024*1024}):raw);
+ const json=raw=>JSON.parse(raw[0]===31&&raw[1]===139?gunzipSync(raw):raw);
  const manifestRaw=read('data/canonical-grid/manifest.json'),manifest=json(manifestRaw);
  if(manifest.version!==2||manifest.size!==262166||manifest.coordinateBits!==19)
   throw Error('Unsupported original canonical convention');
@@ -38,7 +37,7 @@ export async function loadNativeSourceInputs(repo,commit,{readFile}={}){
   throw Error('Invalid original province registry');
  const membershipRaw=read('data/canonical-grid/'+manifest.province_membership.path);
  if(digest(membershipRaw)!==manifest.province_membership.sha256)throw Error('Original province bytes differ');
- const membership=gunzipSync(membershipRaw,{maxOutputLength:32*1024*1024});
+ const membership=gunzipSync(membershipRaw,{maxOutputLength:(bounds.length+1)*4+1});
  if(membership.length!==(bounds.length+1)*4||membership.readUInt32LE(0)!==0)
   throw Error('Original province membership accounting differs');
  for(const owner of bounds)if(!Number.isInteger(owner.province_index)||owner.province_index<1||

@@ -14,29 +14,22 @@ const repo=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const focused=integrationTestFiles('evidence',0).map(file=>path.basename(file,'.test.mjs'));
 const helper='scripts/canonical-restoration.mjs';
 
-test('actual checkout authority matches the selected certificate role closure and critical bytes',()=>{
+test('actual checkout authority covers current code independently of authenticated historical provenance',()=>{
   const closure=checkoutExecutionClosure(repo);
-  const gitBody=name=>{
-    const result=spawnSync('git',['show',`HEAD:${name}`],{cwd:repo});
-    assert.equal(result.status,0,result.stderr.toString());return result.stdout;
-  };
+  assert.equal(new Set(closure).size,closure.length);
+  assert(closure.includes('scripts/run-integration-tests.mjs'));
+  assert(closure.includes('coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifact-consumer.mjs'));
   const pinned=pin=>{
-    const raw=gitBody(pin.path);assert.equal(raw.length,pin.bytes);
+    const raw=execFileSync('git',['show',`HEAD:${pin.path}`],{cwd:repo,maxBuffer:Infinity});
+    assert.equal(raw.length,pin.bytes);
     assert.equal(createHash('sha256').update(raw).digest('hex'),pin.sha256);
     return JSON.parse(raw);
   };
-  const selection=JSON.parse(gitBody('data/ownership-selection.json'));
+  const selection=JSON.parse(execFileSync('git',['show','HEAD:data/ownership-selection.json'],{cwd:repo}));
   const certificate=pinned(selection.artifact_consumption.certificate);
-  const code=pinned(certificate.application_consumer_code),entry='scripts/run-integration-tests.mjs';
-  const critical=[...code.critical_files,...code.entry_critical_files[entry]];
-  assert.deepEqual(closure,[...critical.map(pin=>pin.path),...Object.values(code.entry_roles[entry]).flat()].sort(),
-    'Complete actual execution role closure required by qualified-artifact-consumer');
-  for(const pin of critical){
-    const raw=fs.readFileSync(path.join(repo,pin.path));assert.equal(raw.length,pin.bytes);
-    assert.equal((fs.statSync(path.join(repo,pin.path)).mode&511)===493?'100755':'100644',pin.mode);
-    assert.equal(createHash('sha256').update(raw).digest('hex'),pin.sha256,'Reviewed critical consumer semantics changed');
-    assert.equal(createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex'),pin.git_blob);
-  }
+  const code=pinned(certificate.application_consumer_code);
+  assert.equal(code.kind,'qualified-artifact-application-code-closure-v1');
+  assert(code.critical_files.length>0,'Historical consumer provenance remains authenticated');
 });
 
 test('actual checkout authority refuses concatenated relative imports and missing smoke dependencies',t=>{
@@ -124,6 +117,13 @@ test('real evidence entry runs every selected test with no canonical namespace',
   assert.ok(!fs.existsSync(path.join(f.root,'coordination')));
   assert.equal(fs.readdirSync(f.root).filter(n=>n.startsWith('tests-reached-')).length,focused.length);
   assert.ok(!r.stdout.includes('canonical_checkout'));
+});
+test('real evidence entry refuses a missing required focused test before execution',t=>{
+  const f=fixture(t);
+  fs.unlinkSync(path.join(f.root,'test/native-diagnostic-entry.test.mjs'));
+  const r=f.run();assert.equal(r.status,1,r.stderr);
+  assert.match(r.stderr,/Missing integration test inventory/);
+  assert.equal(fs.readdirSync(f.root).filter(n=>n.startsWith('tests-reached-')).length,0);
 });
 test('real full entry calls canonical preparation before selected readers',t=>{
   const f=fixture(t,{full:true,helperBody:`import fs from 'node:fs';

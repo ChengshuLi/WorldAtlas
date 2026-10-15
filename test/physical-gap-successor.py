@@ -314,6 +314,8 @@ class SuccessorReuseControls(unittest.TestCase):
 
         count = 2048
         expand(self.old, self.old_files, count)
+        # Reuse consumes original outputs; do not synthesize successor tile products.
+        self.new['tiles'][0]['outputs'] = []
         expand(self.new, self.new_files, count)
         plan = build_reuse_plan(self.old, self.new, self.old_files, self.new_files)
         self.assertEqual(plan['tile_decision_count'], count)

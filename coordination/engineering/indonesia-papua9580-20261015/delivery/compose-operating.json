@@ -1,21 +1,20 @@
 {
-  "at_utc": "2026-10-15T09:33:07.960811+00:00",
-  "completed_utc": "2026-10-15T09:33:09.131271+00:00",
   "exit_code": 0,
-  "elapsed_seconds": 1.170310458051972,
-  "deadline_seconds": 120,
-  "deadline_terminated": false,
-  "direct_child_lifetime_peak_rss_bytes": 257376256,
-  "phase_request_bytes": 536870912,
-  "prospective_bytes": 410872189,
-  "headroom_bytes": 572882944,
-  "concurrent_reserved_bytes": 0,
-  "accepted_base": "9f40f4d0a345328e9f1e11525e444e83144e94ba",
-  "original_quartet": "1cad8d1957a2a06db89e884dcb03aa0f85deac0f",
-  "original_native_patch": "370caa99104e548cf170ef4ce38d6b6f855fec3d",
-  "child_exited": true,
-  "reservation_released": true,
-  "source_physical_or_native_qualification_replayed": false,
-  "acceptance_claim": false,
-  "original_local_operating_sha256": "6c494b8218042c52356e25b94447f241d09ef1d10d5e831d6771871c8daf0fdc"
+  "started_at": "2026-10-15T18:41:48.128645+00:00",
+  "ended_at": "2026-10-15T18:41:49.613703+00:00",
+  "elapsed_seconds": 1.4849790000589564,
+  "actual_code_commit": "832191562d92440474acf5678de5f3ae2ec20369",
+  "repo": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/267133ee5fd33696ea7c63ec50cf78bebfb3c92f9a18ca0fb1c4db8be3e0c49e/review",
+  "command": [
+    "/usr/bin/time",
+    "-l",
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "scripts/prepare-delivery-handoff.mjs",
+    "compose",
+    ".cache/papua9580-after2013-config/compose.json",
+    ".cache/delivery-handoff/papua9580-after2013-compose-001"
+  ],
+  "output": ".cache/delivery-handoff/papua9580-after2013-compose-001",
+  "memory_flags": false,
+  "source_producer_replay": false
 }

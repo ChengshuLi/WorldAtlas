@@ -9,7 +9,6 @@ explicit immutable whole-file pins, never a cache.
 """
 import argparse
 import collections
-import gc
 import gzip
 import hashlib
 import io
@@ -18,14 +17,10 @@ import json
 import os
 from pathlib import Path
 import re
-import resource
 import subprocess
 import sys
 import time
 
-MAX_FILE = 32 * 1024 * 1024
-MAX_INPUT = 256 * 1024 * 1024
-MAX_OUTPUT = 16 * 1024 * 1024
 GRID = 262166
 FAMILY_INDICES = dict(zip(
     ['gb:IDN:ADM1', 'gb:IDN:ADM2', 'gb:MYS:ADM1', 'gb:MYS:ADM2',
@@ -49,8 +44,8 @@ def exact_map(rows, key):
     return result
 
 
-def positive_int(value, limit=None):
-    return type(value) is int and value > 0 and (limit is None or value <= limit)
+def positive_int(value):
+    return type(value) is int and value > 0
 
 
 def safe_path(value):
@@ -72,9 +67,9 @@ def validate_config(config):
         need(re.fullmatch('[a-f0-9]{40}', pin.get('commit', '')) and
              re.fullmatch('[a-f0-9]{40}', pin.get('git_blob_oid', '')) and
              re.fullmatch('[a-f0-9]{64}', pin.get('sha256', '')) and
-             positive_int(pin.get('bytes'), MAX_FILE), 'Invalid whole input pin')
+             positive_int(pin.get('bytes')), 'Invalid whole input pin')
         if name.endswith('.gz'):
-            need(positive_int(pin.get('decoded_bytes'), MAX_FILE) and
+            need(positive_int(pin.get('decoded_bytes')) and
                  re.fullmatch('[a-f0-9]{64}', pin.get('decoded_sha256', '')), 'Decoded pin required')
     roles = config['roles']
     for role in ('catalogue', 'roster', 'lineage', 'selector', 'latitudes', 'countries', 'country_registry', 'decisions'):
@@ -105,10 +100,6 @@ def validate_config(config):
     need(set(config['expected_counts']) == {'repair', 'physical'} and
          all(type(n) is int and n >= 0 for n in config['expected_counts'].values()) and
          sum(config['expected_counts'].values()) > 0 and positive_int(config['expected_segments']), 'Nonempty exact selector counts required')
-    resources = config['resources']
-    for name, limit in [('input_bytes', MAX_INPUT), ('output_bytes', MAX_OUTPUT), ('deadline_seconds', 180)]:
-        need(positive_int(resources.get(name), limit), 'Invalid finite resource limit: ' + name)
-    need(sum(p['bytes'] + p.get('decoded_bytes', 0) for p in pins.values()) <= resources['input_bytes'], 'Declared complete input budget exceeded')
     physical = config['physical_reproducer']
     need(physical.get('path') in pins and physical == pins[physical['path']], 'Pinned physical reproducer required')
     need(set(config['runtime']) == {'python', 'numpy', 'shapely', 'geos'} and
@@ -150,19 +141,11 @@ def selector_segments(selector, config):
     return rows, counts
 
 
-def peak():
-    value = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
-    return value if sys.platform == 'darwin' else value * 1024
-
-
-def ordinary_bytes(filename, limit=MAX_FILE):
+def ordinary_bytes(filename):
     filename = Path(filename).absolute()
     need(all(not p.is_symlink() for p in [filename, *filename.parents]), 'Symlink in input path')
-    need(filename.is_file() and filename.stat().st_size <= limit, 'Bounded ordinary file required')
-    with filename.open('rb') as handle:
-        raw = handle.read(limit + 1)
-    need(len(raw) <= limit, 'File exceeded bounded read')
-    return raw
+    need(filename.is_file(), 'Ordinary file required')
+    return filename.read_bytes()
 
 
 def runtime_paths():
@@ -198,19 +181,16 @@ def runtime_paths():
 
 def verify_runtime(admission):
     files = admission['runtime_files']
-    need(isinstance(files, list) and 0 < len(files) <= 512, 'Bounded runtime file inventory required')
+    need(isinstance(files, list) and files, 'Complete runtime file inventory required')
     pins = exact_map(files, 'path')
     resolved = {str(Path(name).resolve()) for name in pins}
     need(len(resolved) == len(pins), 'Duplicate resolved runtime file')
     missing = sorted(set(runtime_paths()) - resolved)
     need(not missing, 'Loaded runtime file omitted from admission inventory: ' + ', '.join(missing))
-    total = 0
     for name, pin in pins.items():
         need(Path(name).is_absolute(), 'Absolute runtime file path required')
         raw = ordinary_bytes(Path(name).resolve())
         need(len(raw) == pin['bytes'] and sha(raw) == pin['sha256'], 'Loaded runtime file drift: ' + name)
-        total += len(raw)
-    need(total == admission['runtime_inventory_bytes'], 'Runtime inventory total differs')
 
 
 def run(repo, config_path, admission_path, output, publication_prefix):
@@ -221,13 +201,9 @@ def run(repo, config_path, admission_path, output, publication_prefix):
     config = json.loads(config_raw)
     pins = validate_config(config)
     admission = json.loads(ordinary_bytes(admission_path))
-    need(0 <= time.time() - admission['observed_unix_seconds'] < 60, 'Fresh admission expired or future dated')
+    need(admission.get('version') == 1, 'Unsupported source execution identity')
     need(admission['program_sha256'] == sha(ordinary_bytes(__file__)) and
          admission['config_sha256'] == sha(config_raw), 'Admitted source program/config drift')
-    for field in ('runtime_inventory_bytes', 'execution_reserve_bytes'):
-        need(type(admission[field]) is int and admission[field] >= 0, 'Invalid admission resource inventory')
-    for field in ('rssBytes', 'phaseBytes'):
-        need(positive_int(admission['allowance'][field]), 'Invalid admission allowance')
     OUT = Path(output).absolute()
     need(all(not p.is_symlink() for p in [OUT, *OUT.parents]), 'Symlink in output path')
     need(not OUT.exists() and OUT.parent.is_dir(), 'Require fresh output directory and existing ordinary parent')
@@ -237,26 +213,11 @@ def run(repo, config_path, admission_path, output, publication_prefix):
     EXPECTED = {t['owner']: t for t in config['targets']}
     OWNERS = set(EXPECTED)
     roles = config['roles']
-    LIMIT, PHASE_LIMIT = admission['allowance']['rssBytes'], admission['allowance']['phaseBytes']
-    INPUT_LIMIT = config['resources']['input_bytes']
-    DEADLINE_SECONDS = config['resources']['deadline_seconds']
-    OUTPUT_LIMIT = config['resources']['output_bytes']
     inputs, products = {}, {}
     env = {**os.environ, 'GIT_NO_LAZY_FETCH': '1', 'GIT_NO_REPLACE_OBJECTS': '1',
            'GIT_TERMINAL_PROMPT': '0', 'GIT_CONFIG_NOSYSTEM': '1', 'GIT_CONFIG_GLOBAL': '/dev/null'}
     def git(*args):
         return subprocess.check_output(['git', '-c', 'protocol.allow=never', '-C', str(repo), *args], env=env)
-    def check_memory():
-        need(peak() < LIMIT, 'Source qualification exceeded fresh RSS allowance at check boundary')
-        need(time.monotonic() - start < DEADLINE_SECONDS, 'Source qualification exceeded finite deadline at check boundary')
-        charged = sum(p['bytes'] + p.get('decoded_bytes', 0) for p in inputs.values())
-        need(charged <= INPUT_LIMIT, 'Combined encoded/decoded input cap exceeded')
-        need(charged + admission['runtime_inventory_bytes'] + admission['execution_reserve_bytes'] < PHASE_LIMIT,
-             'Complete charged phase exceeded fresh allowance')
-    check_memory()
-    declared = sum(p['bytes'] + p.get('decoded_bytes', 0) for p in pins.values())
-    need(declared + admission['runtime_inventory_bytes'] + admission['execution_reserve_bytes'] < PHASE_LIMIT,
-         'Declared complete phase exceeds fresh allowance')
     import numpy as np
     import shapely
     from shapely.geometry import shape
@@ -277,16 +238,15 @@ def run(repo, config_path, admission_path, output, publication_prefix):
         body = raw
         if name.endswith('.gz'):
             with gzip.GzipFile(fileobj=io.BytesIO(raw)) as stream:
-                body = stream.read(MAX_FILE + 1)
-            need(len(body) == pin['decoded_bytes'] <= MAX_FILE and sha(body) == pin['decoded_sha256'], 'Pinned decoded input differs')
+                body = stream.read(pin['decoded_bytes'] + 1)
+            need(len(body) == pin['decoded_bytes'] and sha(body) == pin['decoded_sha256'], 'Pinned decoded input differs')
         inputs[name] = dict(pin)
-        check_memory()
         return body
     def jread(name, scientific=True):
         return json.loads(read(name, scientific))
     def publish(name, body):
         raw = (json.dumps(body, ensure_ascii=False, separators=(',', ':'), allow_nan=False) + '\n').encode()
-        need(name not in products and len(raw) + sum(len(r) for r in products.values()) <= OUTPUT_LIMIT, 'Cumulative source output cap exceeded')
+        need(name not in products, 'Duplicate source output product')
         products[name] = raw
         return {'path': publication_prefix + '/' + name, 'bytes': len(raw), 'sha256': sha(raw)}
     def holes(geometry):
@@ -299,7 +259,6 @@ def run(repo, config_path, admission_path, output, publication_prefix):
     roster = exact_map([r for r in full_roster if r['family_index'] in family_indices], 'source_id')
     need(len({r['source_index'] for r in roster.values()}) == len(roster), 'Duplicate source index')
     del full_roster
-    gc.collect()
     lineage = jread(roles['lineage'])
     locations = exact_map([r for r in lineage['locations'] if r['index'] in OWNERS], 'index')
     assert len(locations) == len(OWNERS)
@@ -311,7 +270,6 @@ def run(repo, config_path, admission_path, output, publication_prefix):
         assert loc['province_id'] == EXPECTED[owner]['parent_id'] and loc['source_atoms'] == [loc['id']]
         assert lineage['reverse'][loc['id']] == [owner] and roster[loc['id']]['owners'] == [owner]
     del lineage
-    gc.collect()
     target_ids = {r['id'] for r in locations.values()}
     selected = {}
     for part_path in roles['geography']:
@@ -330,7 +288,6 @@ def run(repo, config_path, admission_path, output, publication_prefix):
         assert meta['reference_year']==EXPECTED[owner]['reference_year'] and meta['source_role']==EXPECTED[owner]['source_role']
         assert props['parent_id']==EXPECTED[owner]['parent_id']
     del part
-    gc.collect()
 
     selector = jread(roles['selector'], scientific=False)
     segments, counts = selector_segments(selector, config)
@@ -385,13 +342,11 @@ def run(repo, config_path, admission_path, output, publication_prefix):
                 assert feature['properties']['shapeGroup']==target['shape_group'] and feature['properties']['shapeType']==target['shape_type']
                 source_targets[ident] = feature
                 source_target_geometries[ident] = geometry
-            check_memory()
         complete_families.append({'source_family': family, 'features': len(ids), 'original_bytes': len(body),
                                  'original_sha256': sha(body), 'ordered_ids_match': True,
                                  'represented_year': record['source_represented_year_claim'],
                                  'recorded_license': record['recorded_license'], 'invalid_features': invalid})
         del body, pieces, product, geometry
-        gc.collect()
         print('complete source', family, len(ids), flush=True)
     assert set(source_targets) == target_ids
     assert all(roster[locations[c[2]]['id']]['source_index'] in a for c,a in zip(cells,actual)), 'Candidate lacks direct target source membership'
@@ -424,7 +379,6 @@ def run(repo, config_path, admission_path, output, publication_prefix):
                 competing.append({'code': code, 'name': properties.get('ADMIN'), 'cells': n,
                                   'interval_witnesses': [{'x': cells[i][0], 'y': cells[i][1]} for i in np.flatnonzero(hits)]})
     del country_product, geometry
-    gc.collect()
     # Preserve any competitor witnesses for withholding; do not erase successful source observations.
     foreign_hits = np.zeros(len(cells), dtype=bool)
     for rival in competing:
@@ -437,7 +391,6 @@ def run(repo, config_path, admission_path, output, publication_prefix):
     decisions = jread(roles['decisions'])
     review = [r for r in decisions['location_review'] if target_ids.intersection(r.get('ids', []))]
     del decisions
-    gc.collect()
     target_results = []
     stages = []
     for owner, loc in sorted(locations.items()):
@@ -484,7 +437,6 @@ def run(repo, config_path, admission_path, output, publication_prefix):
         'physical_source_status': 'Not executed; complete original GSHHG hierarchy required',
         'territorial_exclusions': 'No target holes or recorded topology/display repair; all complete-source/country competitor witnesses are retained and foreign/reference cases withheld. This is not global territorial adjudication.',
         'native_patch_status': 'Not produced', 'cumulative_write_status': 'Not authorized', 'repaired_credit': 0}))
-    check_memory()
     outputs.append(publish('source-qualification.json', {'version': 1, 'issue': config['issue'], 'worker_id': WORKER,
         'scientific_input_commit': BASE, 'base_commit': CURRENT_BASE, 'method': 'Shared Indonesia source-cohort qualification: complete original-family custody, exact raw source identities, independent Shapely covers at authenticated native centres, all retained reference-country coverage, original/current geometry and lineage checks.',
         'runtime': {'python': sys.version, 'shapely': shapely.__version__, 'geos': shapely.geos_version_string,
@@ -497,24 +449,24 @@ def run(repo, config_path, admission_path, output, publication_prefix):
         'targets': target_results, 'existing_location_review': review,
         'source_prerequisite_repair_candidates': sum(r['source_reference_eligible_repair_cells'] for r in target_results), 'physical_interpretation_held_cells': counts['physical'],
         'native_authority_qualified_cells': 0, 'repaired_credit': 0,
-        'limits': ['Source qualifications alone do not prove current physical support or grant territorial/semantic/historical approval.',
+        'limits': ['Runtime inventory covers executables, loaded modules and package libraries, not a hermetic OS-loader/system-library closure.',
+                   'Source qualifications alone do not prove current physical support or grant territorial/semantic/historical approval.',
                    'Exact accepted-patch interval subtraction is preparation only; actual current-owner zero and selected-reader conservation remain pending.',
                    'Absence from a coarse country coastline does not establish competing-country ownership; the accepted reconciler preserved non-overlapping coastline coverage.',
                    'Complete GSHHG hierarchy interpretation, admitted native constructor/operator and actual selected-reader conservation remain pending.',
                    'All direct target identities preserve their semantically open framework parent; no official-parent or territorial adjudication claim is made. Foreign/reference witnesses and all physical holds remain separate.'],
         'inputs': list(inputs.values()), 'preparation_outputs': outputs,
-        'elapsed_seconds': time.monotonic()-start, 'peak_rss_bytes': peak(), 'fresh_admission': admission, 'boundary_rss_limit_bytes': LIMIT, 'boundary_deadline_seconds': DEADLINE_SECONDS, 'operating_limits': ['Checks occur at code/feature boundaries; no live RSS supervisor, hard timeout, process-tree containment or enforced output/log stream cap is claimed.', 'Complete raw/decoded input cap is 256 MiB; output writers cap cumulative JSON products at 16 MiB; parsed/native expansion remains data-dependent.', 'Runtime inventory covers executable, loaded file-backed Python/extension modules and package-bundled NumPy/GEOS libraries; OS loader/system libraries are not a hermetic runtime closure.']}))
+        'elapsed_seconds': time.monotonic()-start, 'fresh_admission': admission}))
     publish('execution-receipt.json', {'version': 1, 'issue': config['issue'], 'worker_id': WORKER,
         'complete': True, 'program': {'path': 'scripts/qualify-source-cohort.py', 'sha256': sha(Path(__file__).read_bytes())},
-        'outputs': outputs, 'elapsed_seconds': time.monotonic()-start, 'peak_rss_bytes': peak(),
+        'outputs': outputs, 'elapsed_seconds': time.monotonic()-start,
         'source_prerequisite_repair_candidates': sum(r['source_reference_eligible_repair_cells'] for r in target_results), 'physical_interpretation_held_cells': counts['physical'],
         'native_authority_qualified_cells': 0, 'repaired_credit': 0})
-    check_memory()
     need(set(inputs) == set(pins), 'Declared input inventory contains unconsumed files')
     verify_runtime(admission)
     need(all(not p.is_symlink() for p in [OUT, *OUT.parents]) and not OUT.exists(), 'Output destination changed during computation')
     OUT.mkdir()
-    # Products stay in memory until all computation/admission succeeds. Receipt is
+    # Products are written only after complete computation succeeds. Receipt is
     # written last; interrupted publication cannot look like a complete run.
     for name, raw in products.items():
         with (OUT / name).open('xb') as handle:
@@ -573,11 +525,10 @@ def selected_physical_metadata(parts, read_decoded, bounds, expected_count):
     return retained
 
 
-def physical_native_member(index, read_decoded, check):
+def physical_native_member(index, read_decoded):
     """One complete native body; never retain all pieces plus a second join."""
     size = index['member_bytes']
     need(type(size) is int and size > 0, 'Invalid complete native member size')
-    # Caller admits the complete allocation before this function is entered.
     native = bytearray(size)
     at = 0
     for ordinal, part in enumerate(index['parts']):
@@ -587,7 +538,6 @@ def physical_native_member(index, read_decoded, check):
         native[at:at+len(raw)] = raw
         at += len(raw)
         del raw
-        check()
     need(at == size and sha(native) == index['member_sha256'], 'Complete original native member differs')
     return native
 
@@ -609,15 +559,10 @@ def run_physical(repo, config_path, admission_path, output, publication_prefix):
     need(set(roles) == {'stages', 'transport', 'native_index', 'comparison'} and
          all(name in pins for name in roles.values()), 'Complete physical roles required')
     prefixes = {key: safe_path(config[key]).rstrip('/')+'/' for key in ('metadata_prefix','native_prefix')}
-    resources = config['resources']
-    need(all(positive_int(resources[key]) for key in ('input_bytes','output_bytes','deadline_seconds')),
-         'Explicit finite physical input/output/time allowances required')
     admission = json.loads(ordinary_bytes(admission_path))
-    need(0 <= time.time()-admission['observed_unix_seconds'] < 60, 'Fresh physical admission expired')
+    need(admission.get('version') == 1, 'Unsupported physical execution identity')
     need(admission['program_sha256'] == sha(ordinary_bytes(__file__)) and
          admission['config_sha256'] == sha(raw_config), 'Physical program/config drift')
-    need(all(positive_int(admission['allowance'][key]) for key in ('rssBytes','phaseBytes')),
-         'Invalid physical allowance')
     need(config['runtime'] == {'python':sys.version,'numpy':np.__version__,
          'shapely':shapely.__version__,'geos':shapely.geos_version_string}, 'Physical runtime differs')
     target=Path(output).absolute()
@@ -627,18 +572,11 @@ def run_physical(repo, config_path, admission_path, output, publication_prefix):
     consumed = {}
     env = {**os.environ,'GIT_NO_LAZY_FETCH':'1','GIT_NO_REPLACE_OBJECTS':'1',
            'GIT_TERMINAL_PROMPT':'0','GIT_CONFIG_NOSYSTEM':'1','GIT_CONFIG_GLOBAL':'/dev/null'}
-    def check():
-        need(peak() < admission['allowance']['rssBytes'], 'Physical RSS allowance exceeded at boundary')
-        need(time.monotonic()-started < resources['deadline_seconds'], 'Physical deadline exceeded at boundary')
-        charged=sum(p['bytes']+p.get('decoded_bytes',0) for p in consumed.values())
-        need(charged <= resources['input_bytes'], 'Complete physical input inventory exceeds allowance')
-        need(charged+admission['runtime_inventory_bytes']+admission['execution_reserve_bytes']
-             < admission['allowance']['phaseBytes'], 'Complete physical charged phase exceeds allowance')
     def read(name):
         safe_path(name)
         need(name in pins, 'Unpinned physical input: '+name)
         pin = pins[name]
-        need(re.fullmatch('[a-f0-9]{40}',pin['commit']) and positive_int(pin['bytes'],MAX_FILE)
+        need(re.fullmatch('[a-f0-9]{40}',pin['commit']) and positive_int(pin['bytes'])
              and re.fullmatch('[a-f0-9]{64}',pin['sha256']), 'Invalid immutable physical pin')
         command=['git','-c','protocol.allow=never','-C',str(repo)]
         need(subprocess.check_output(command+['cat-file','-t',pin['commit']],env=env).strip()==b'commit',
@@ -652,7 +590,6 @@ def run_physical(repo, config_path, admission_path, output, publication_prefix):
         raw=subprocess.check_output(command+['cat-file','blob',oid],env=env)
         need(len(raw)==pin['bytes'] and sha(raw)==pin['sha256'],'Physical input hash differs')
         consumed[name]=pin
-        check()
         return raw
     def decoded(part,prefix):
         pin=pins.get(prefix+part['path'])
@@ -660,13 +597,12 @@ def run_physical(repo, config_path, admission_path, output, publication_prefix):
              and pin.get('decoded_sha256')==part['uncompressed_sha256'], 'Physical decoded admission pin differs')
         raw=read(prefix+part['path'])
         need(len(raw)==part['bytes'] and sha(raw)==part['sha256'],'Physical fragment encoded binding differs')
-        need(positive_int(part['uncompressed_bytes'],MAX_FILE),'Bounded decoded physical fragment required')
+        need(positive_int(part['uncompressed_bytes']),'Positive decoded physical fragment length required')
         with gzip.GzipFile(fileobj=io.BytesIO(raw)) as stream:
             body=stream.read(part['uncompressed_bytes']+1)
         need(len(body)==part['uncompressed_bytes'] and sha(body)==part['uncompressed_sha256'],
              'Physical fragment decoded binding differs')
         return body
-    check()
     stages=json.loads(read(roles['stages']))
     need(isinstance(stages,list) and stages and len({s['target'] for s in stages})==len(stages),
          'Nonempty unique physical target cohort required')
@@ -676,12 +612,9 @@ def run_physical(repo, config_path, admission_path, output, publication_prefix):
     need(parts and len({p['path'] for p in parts})==len(parts),'Complete unique metadata fragments required')
     metas=selected_physical_metadata(parts,lambda p:decoded(p,prefixes['metadata_prefix']),
                                     [g.bounds for g in candidates],transport['complete_sources'])
-    gc.collect();check()
     index=json.loads(read(roles['native_index']))
     need(index['record_count']==transport['complete_sources'],'Native/metadata complete record counts differ')
-    need(index['member_bytes']+admission['runtime_inventory_bytes']+admission['execution_reserve_bytes']
-         < admission['allowance']['phaseBytes'],'Complete native body exceeds physical phase allowance')
-    native=physical_native_member(index,lambda p:decoded(p,prefixes['native_prefix']),check)
+    native=physical_native_member(index,lambda p:decoded(p,prefixes['native_prefix']))
     helper=read(roles['comparison'])
     need(sha(helper)==PHYSICAL_COMPARISON_SHA,'Physical comparison method differs from preserved original')
     comparison=types.ModuleType('comparison')
@@ -695,9 +628,7 @@ def run_physical(repo, config_path, admission_path, output, publication_prefix):
         need(meta['decoded_pointset_binary64_sha256']==m['decoded_pointset_binary64_sha256'],'Physical decoded pointset differs')
         actual[ident]=meta;geometries[ident]=g
         del meta
-        check()
     del native,metas
-    gc.collect();check()
     def intersects(a,b):
         return not(a[2]<b[0] or a[0]>b[2] or a[3]<b[1] or a[1]>b[3])
     chains={}
@@ -734,27 +665,24 @@ def run_physical(repo, config_path, admission_path, output, publication_prefix):
       if not g.is_empty:issues.append({'reason':key,'geometry':mapping(g)})
      results.append({'target':stage['target'],'source_id_queries':sorted(set(q['source_id'] for q in queries)),'query_relations':queries,'issues':issues,'support':{k:({kk:mapping(vv) for kk,vv in v.items()} if isinstance(v,dict) else mapping(v)) for k,v in support.items()}})
      print('target',stage['target'],'issues',len(issues),flush=True)
-    check()
     need(set(consumed)==set(pins),'Physical input inventory contains unconsumed files')
     verify_runtime(admission)
     result={'results':results,'source_member':index,'source_metadata_receipts':parts,
             'runtime':{'shapely':shapely.__version__,'geos':shapely.geos_version_string},
             'elapsed_seconds':time.monotonic()-started,
-            'maximum_rss_kib':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
             'scope':'Diagnostic original GSHHG source-relative support for whole consumed targets; heterogeneous observation dates and physical authority limits retained.'}
     body=(json.dumps(result)+'\n').encode()
     receipt={'version':1,'complete':True,'program':{'path':'scripts/qualify-source-cohort.py','sha256':sha(ordinary_bytes(__file__))},
              'outputs':[{'path':publication_prefix+'/whole-target-support.json','bytes':len(body),'sha256':sha(body)}],
-             'inputs':list(consumed.values()),'fresh_admission':admission,'peak_rss_bytes':peak(),
+             'inputs':list(consumed.values()),'fresh_admission':admission,
              'elapsed_seconds':time.monotonic()-started,
-             'limits':['Physical source-relative evidence only; no native selection, factual approval or repaired credit.',
-                       'RSS/time checks occur at code boundaries, not a live process-tree supervisor.']}
+             'limits':['Runtime inventory covers executables, loaded modules and package libraries, not a hermetic OS-loader/system-library closure.',
+                       'Physical source-relative evidence only; no native selection, factual approval or repaired credit.']}
     receipt_raw=(json.dumps(receipt)+'\n').encode()
-    need(len(body)+len(receipt_raw)<=resources['output_bytes'],'Complete physical output exceeds allowance')
     target=Path(output).absolute()
     need(not target.exists() and target.parent.is_dir() and all(not p.is_symlink() for p in [target,*target.parents]),
          'Fresh ordinary physical output destination required')
-    check();target.mkdir()
+    target.mkdir()
     for name,raw in [('whole-target-support.json',body),('execution-receipt.json',receipt_raw)]:
         with (target/name).open('xb') as stream:stream.write(raw)
     return {'complete':True,'products':['whole-target-support.json','execution-receipt.json'],'repaired_credit':0}

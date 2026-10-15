@@ -60,8 +60,8 @@ function firstAtOrBelow(latitudes,value,start,end){
 export function nativePolygonIntervals(index,{size,rowStart,rowEnd,latitudes}){
   if(!Number.isSafeInteger(size)||size<2||size>2**31||
      !Number.isInteger(rowStart)||!Number.isInteger(rowEnd)||rowStart<0||rowEnd>size||
-     rowStart>=rowEnd||rowEnd-rowStart>4096||latitudes?.length!==size)
-    throw Error('Require explicit latitude table and at most4096 native rows');
+     rowStart>=rowEnd||latitudes?.length!==size)
+    throw Error('Require explicit latitude table and valid native row bounds');
   for(let y=0;y<size;y++)if(!Number.isFinite(latitudes[y])||Math.abs(latitudes[y])>=90||
     y&&latitudes[y]>=latitudes[y-1])throw Error('Invalid decreasing native latitude table');
   const rows=new Map(),ties=[];let previousOwner=0;
@@ -214,7 +214,8 @@ export function nativeOnlyComponent(row, hashValue) {
   return true;
 }
 export function deriveSourceTargetNativeDelta({targets, sourceFeatures, coverageFeatures,
-  territorialExclusions = [], ownerRows, size, latitudes, rowStart, rowEnd, diagnosticRows, coverageFeatureGroups}) {
+  territorialExclusions = [], ownerRows, size, latitudes, rowStart, rowEnd, diagnosticRows, coverageFeatureGroups,
+  coverageCentres, coverageCentreGroups}) {
   require(Array.isArray(targets) && targets.length > 0, 'Missing source targets');
   const targetByOwner = new Map(), targetById = new Map();
   for (const target of targets) {
@@ -238,8 +239,20 @@ export function deriveSourceTargetNativeDelta({targets, sourceFeatures, coverage
   }
   for (const target of targets) require(sourceOwners.get(target.pixelIndex) === target.id,
     'Source target differs from complete source owner roster');
-  const validateCoverage = features => {
-    require(Array.isArray(features) && features.length > 0, 'Missing reviewed coverage');
+  const validateCentres = centres => {
+    require(Array.isArray(centres), 'Invalid reviewed centre coverage');const seen=new Set();
+    for(const point of centres){
+      exactKeys(point,['source_id','pixelIndex','y','x'],'Reviewed coverage centre');
+      const source=sourceIds.get(point.source_id),key=point.pixelIndex+':'+point.y+':'+point.x;
+      require(source&&targetByOwner.get(point.pixelIndex)?.id===source.id&&source.owner===point.pixelIndex
+        &&Number.isSafeInteger(point.y)&&point.y>=rowStart&&point.y<rowEnd
+        &&Number.isSafeInteger(point.x)&&point.x>=0&&point.x<size&&!seen.has(key),
+      'Coverage centre lacks exact original source membership');seen.add(key);
+    }
+  };
+  if(coverageCentres!==undefined)validateCentres(coverageCentres);
+  const validateCoverage = (features,centres) => {
+    require(Array.isArray(features) && (features.length > 0 || centres?.length > 0), 'Missing reviewed coverage');
     for (const feature of [...features, ...territorialExclusions])
       require(targetByOwner.get(feature.pixelIndex)?.id === feature.id, 'Foreign coverage or exclusion target');
     for (const feature of features) {
@@ -248,11 +261,16 @@ export function deriveSourceTargetNativeDelta({targets, sourceFeatures, coverage
         'Coverage lacks exact original source membership');
     }
   };
-  validateCoverage(coverageFeatures);
+  validateCoverage(coverageFeatures,coverageCentres);
   if (coverageFeatureGroups !== undefined) {
     require(Array.isArray(coverageFeatureGroups), 'Invalid additional coverage groups');
-    for (const features of coverageFeatureGroups) validateCoverage(features);
-  }
+    require(coverageCentreGroups===undefined||Array.isArray(coverageCentreGroups)
+      &&coverageCentreGroups.length===coverageFeatureGroups.length,'Invalid centre coverage groups');
+    for (const [i,features] of coverageFeatureGroups.entries()) {
+      const centres=coverageCentreGroups?.[i];if(centres!==undefined)validateCentres(centres);
+      validateCoverage(features,centres);
+    }
+  } else require(coverageCentreGroups===undefined,'Centre groups require coverage groups');
   const options = {size, latitudes, rowStart, rowEnd};
   const scan = (features, masks = false) => {
     if (!features.length) return {rows:new Map(),ties:[]};
@@ -280,7 +298,17 @@ export function deriveSourceTargetNativeDelta({targets, sourceFeatures, coverage
     const id=feature.source_id??feature.id;
     return {id,pixelIndex:sourceIds.get(id).index,geometry:feature.geometry};
   }),true));
-  let coverage=scanCoverage(coverageFeatures);
+  // Exact adopted centres add positive spans only. The unchanged decision below
+  // still requires the same active original member and every negative guard.
+  const withCentres=(coverage,centres=[])=>{
+    for(const point of centres){
+      const spans=coverage.rows.get(point.y)??[];
+      spans.push({start:point.x,end:point.x+1,owner:point.pixelIndex,source_id:point.source_id});
+      coverage.rows.set(point.y,spans);
+    }
+    return coverage;
+  };
+  let coverage=withCentres(scanCoverage(coverageFeatures),coverageCentres);
   const excluded=scan(territorialExclusions,true);
   const current = new Map();
   for (const row of ownerRows) {
@@ -379,15 +407,15 @@ export function deriveSourceTargetNativeDelta({targets, sourceFeatures, coverage
   // Drop the combined mask before sequential class scans; no cross-call state.
   coverage=null;
   result.coverage_groups=[];
-  for (const features of coverageFeatureGroups)
-    result.coverage_groups.push(evaluate(scanCoverage(features),undefined));
+  for (const [i,features] of coverageFeatureGroups.entries())
+    result.coverage_groups.push(evaluate(withCentres(scanCoverage(features),coverageCentreGroups?.[i]),undefined));
   return result;
 }
 
 // Private exact-witness arithmetic has no shared mutable policy state.
 export const {witnessCellEffects, validateWitnessGeometry} = (() => {
 // Exact candidate-cell witness operator. The caller authenticates the passed stock scanner,
-// admits the complete geometry/runtime/scan/output phase and supplies a deadline.
+// supplies the complete geometry and requested native rows.
 // This function establishes cell effects only, never scientific qualification.
 const BLOCK_ROWS = 4096;
 const VIEW = new DataView(new ArrayBuffer(8));
@@ -616,40 +644,11 @@ function witnessCellEffects(geometry, {size, latitudes, requestedRows, nativePol
 }
 
 // Validation retains every recognized primitive, including empty and mixed parts.
-// Statistics permit the caller to reserve the full flattened/scan scratch phase.
-function validateWitnessGeometry(geometry, options) {
+function validateWitnessGeometry(geometry) {
   const p = primitives(geometry);
-  const stats = {parts:p.parts, vertices:p.vertices, polygons:p.polygons.length,
+  return {parts:p.parts, vertices:p.vertices, polygons:p.polygons.length,
     segments:p.segments.length, points:p.points.length,
     empty:p.polygons.length+p.segments.length+p.points.length===0};
-  if(options){
-    const {latitudes,rowStart,rowEnd,requestedCells=0}=options;
-    require(Number.isInteger(rowStart)&&Number.isInteger(rowEnd)&&rowStart>=0
-      &&rowEnd<=latitudes.length&&rowEnd>rowStart&&rowEnd-rowStart<=4096
-      &&Number.isSafeInteger(requestedCells)&&requestedCells>=0,'Invalid witness scratch admission extent');
-    // The caller already authenticates/validates the normative decreasing table.
-    // These schedules exactly match stock half-open crossings; tie bounds remain
-    // inclusive. No polygon predicate is executed to establish admission.
-    const first=value=>{let lo=rowStart,hi=rowEnd;while(lo<hi){const mid=Math.floor((lo+hi)/2);
-      if(latitudes[mid]>value)lo=mid+1;else hi=mid;}return lo;};
-    let crossings=0,lowerTies=0,edges=0;
-    for(const polygon of p.polygons)for(const ring of polygon)
-      for(let i=0;i<ring.length-2;i+=2){
-        edges++;const low=Math.min(ring[i+1],ring[i+3]),high=Math.max(ring[i+1],ring[i+3]);
-        const end=first(low),start=first(high);
-        if(low!==high)crossings+=Math.max(0,end-start);
-        if(end<rowEnd&&latitudes[end]===low)lowerTies++;
-      }
-    const spans=Math.ceil(crossings/2),ties=crossings+lowerTies;
-    // Edges, exact dyadic arithmetic, flattened coordinates and active columns;
-    // all retained stock rows/ties; complete helper hit/kind/output inventory.
-    const scratch=p.vertices*1024+p.parts*128+(spans+ties)*192
-      +(rowEnd-rowStart)*128+requestedCells*1024+4096;
-    require(Number.isSafeInteger(scratch),'Nonfinite witness scratch admission');
-    Object.assign(stats,{edges,crossing_edge_rows:crossings,span_upper_bound:spans,
-      tie_upper_bound:ties,scratch_bytes:scratch});
-  }
-  return stats;
 }
 
 return {witnessCellEffects, validateWitnessGeometry};

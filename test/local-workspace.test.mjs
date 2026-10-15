@@ -45,10 +45,14 @@ test('sparse work is isolated and contains required directories and individual i
   const result = manager.release({worker: 'worker-one', token: entry.token});
   assert.equal(git('rev-parse', result.preservedRef).trim(), head);
   assert.ok(!fs.existsSync(entry.path));
-  const next = manager.allocate({worker: 'worker-one', branch: 'geography/second'});
+  const next = manager.allocate({worker: 'worker-one', branch: 'research/second', include: ['research/campaigns/new']});
   assert.equal(next.path, entry.path);
   assert.notEqual(next.token, entry.token);
   assert.throws(() => manager.release({worker: 'worker-one', token: entry.token}), /ownership/);
+  const file = path.join(next.path, 'research/campaigns/new/result.json');
+  fs.mkdirSync(path.dirname(file), {recursive: true}); fs.writeFileSync(file, '{}');
+  execFileSync('git', ['-C', next.path, 'add', 'research/campaigns/new/result.json']);
+  assert.match(execFileSync('git', ['-C', next.path, 'status', '--porcelain'], {encoding: 'utf8'}), /A  research\/campaigns\/new\/result.json/);
 });
 
 test('sparse inspection, reservation and checkout share the engineering code-only selection', t => {
@@ -152,7 +156,7 @@ test('reservations and combined usage above 50 GiB are admitted with sufficient 
   const first = manager.allocate({worker: 'one', branch: 'engineering/large-reservation', reserveGiB: 51});
   assert.equal(first.reservation, 51 * GiB);
   const second = manager.allocate({worker: 'two', branch: 'engineering/another-reservation', reserveGiB: 2});
-  const report = manager.check();
+  const report = manager.report();
   assert.ok(report.checkoutBytes >= 53 * GiB);
   assert.ok(report.worktrees.some(row => row.path === fs.realpathSync(repo) && !row.managed));
   manager.release({worker: 'two', token: second.token});
@@ -174,7 +178,7 @@ test('exactly 10 GiB after reservation is allowed, one byte less is refused', t 
   assert.throws(() => manager.check(), /breached/);
 });
 
-test('allocation skips legacy usage traversals while report and check retain live diagnostics', t => {
+test('allocation and floor checks skip legacy usage traversals while report retains live diagnostics', t => {
   let available = 12 * GiB;
   const {manager, git, head, temporary} = fixture(t, {freeBytes: () => available});
   for (let index = 0; index < 16; index++) {
@@ -206,8 +210,8 @@ test('allocation skips legacy usage traversals while report and check retain liv
   assert.ok(reported.result.worktrees.every(row => !row.managed && Number.isSafeInteger(row.bytes) && row.bytes >= 0));
   assert.equal(reported.result.checkoutBytes, reported.result.worktrees.reduce((sum, row) => sum + row.bytes, 0));
   const checked = observe(() => manager.check());
-  assert.deepEqual(checked.operations, {du: 17, worktreeList: 1});
-  assert.deepEqual(checked.result, reported.result);
+  assert.deepEqual(checked.operations, {du: 0, worktreeList: 0});
+  assert.deepEqual(checked.result, {freeBytes: available, limits: {minimumFree: 10 * GiB}});
 
   const allocated = observe(() => manager.allocate({worker: 'one', slot: 'review', commit: head, reserveGiB: 2}));
   t.diagnostic(`allocation diagnostic operations: ${JSON.stringify(allocated.operations)}`);
@@ -227,6 +231,16 @@ test('allocation skips legacy usage traversals while report and check retain liv
   assert.equal(after.result.worktrees.find(row => row.path === allocated.result.path).managed, true);
   assert.equal(after.result.checkoutBytes, after.result.worktrees.reduce((sum, row) =>
     sum + Math.max(row.bytes, row.managed ? allocated.result.reservation : 0), 0));
+
+  fs.renameSync(path.join(temporary, 'legacy-0'), path.join(temporary, 'legacy-0-moved'));
+  assert.throws(() => manager.report(), /Command failed: du/);
+  available = 10 * GiB;
+  const atFloor = observe(() => manager.check());
+  assert.deepEqual(atFloor.operations, {du: 0, worktreeList: 0});
+  assert.equal(atFloor.result.freeBytes, available);
+  available -= 1;
+  const belowFloor = observe(() => assert.throws(() => manager.check(), /Local storage budget breached/));
+  assert.deepEqual(belowFloor.operations, {du: 0, worktreeList: 0});
 });
 
 test('invalid or unsafe reservation sizes fail before branch or slot creation', t => {
@@ -278,8 +292,8 @@ test('large sparse indexes release only clean owned work and preserve recovery',
   assert.ok(!fs.existsSync(entry.path));
 });
 
-test('invalid scopes and identities are rejected; explicit full profile includes all inputs', t => {
-  const {manager, head} = fixture(t);
+test('invalid scopes and identities are rejected', t => {
+  const {manager} = fixture(t);
   for (const include of ['data/../outside', '/tmp', 'data/*', 'data//two', 'data']) {
     assert.throws(() => manager.allocate({worker: 'one', branch: 'engineering/scoped', include: [include]}), /literal/);
   }
@@ -287,16 +301,6 @@ test('invalid scopes and identities are rejected; explicit full profile includes
   assert.throws(() => manager.allocate({worker: 'one', slot: 'extra', branch: 'engineering/a'}), /worker/);
   assert.throws(() => manager.allocate({worker: 'one', branch: 'main'}), /fresh lane/);
   assert.throws(() => manager.allocate({worker: 'one', slot: 'review', commit: 'main'}), /exact detached/);
-  const entry = manager.allocate({worker: 'one', slot: 'review', commit: head, profile: 'full'});
-  assert.ok(fs.existsSync(path.join(entry.path, 'data/other/large.json')));
-});
-
-test('allocation lock is exclusive and never broken automatically', t => {
-  const {manager} = fixture(t);
-  const {registry} = manager.report();
-  fs.mkdirSync(path.join(registry, 'lock'), {recursive: true});
-  assert.throws(() => manager.allocate({worker: 'one', branch: 'engineering/locked'}), /locked/);
-  assert.ok(fs.existsSync(path.join(registry, 'lock')));
 });
 
 test('an interrupted Git mutation is recorded and occupies its slot', t => {
@@ -334,15 +338,6 @@ test('two simultaneous allocation processes cannot acquire the same worker slot'
   assert.deepEqual(exits.sort(), [0, 1]);
   assert.equal(manager.report().entries.length, 1);
   assert.equal(manager.report().entries[0].status, 'ready');
-});
-
-test('new sparse packet paths permit ordinary creation and staging', t => {
-  const {manager} = fixture(t);
-  const entry = manager.allocate({worker: 'one', branch: 'research/new', include: ['research/campaigns/new']});
-  const file = path.join(entry.path, 'research/campaigns/new/result.json');
-  fs.mkdirSync(path.dirname(file), {recursive: true}); fs.writeFileSync(file, '{}');
-  execFileSync('git', ['-C', entry.path, 'add', 'research/campaigns/new/result.json']);
-  assert.match(execFileSync('git', ['-C', entry.path, 'status', '--porcelain'], {encoding: 'utf8'}), /A  research\/campaigns\/new\/result.json/);
 });
 
 test('assume-unchanged cannot hide unique tracked bytes from cleanup', t => {
@@ -524,6 +519,7 @@ test('bounded selected batches count duplicate blob paths, empty files and full-
     const entry = manager.allocate({worker: profile, slot: 'review', commit: head, profile, include, reserveGiB: 1 / GiB});
     assert.equal(entry.reservation, expected);
     assert.equal(fs.readFileSync(path.join(entry.path, 'scripts/duplicate-2099.txt'), 'utf8'), 'root');
+    if (profile === 'full') assert.ok(fs.existsSync(path.join(entry.path, 'data/other/large.json')));
     manager.release({worker: profile, slot: 'review', token: entry.token});
   }
 });

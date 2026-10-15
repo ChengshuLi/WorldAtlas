@@ -18,12 +18,9 @@ const sha = raw => createHash('sha256').update(raw).digest('hex');
 const commit = value => /^[a-f0-9]{40}$/.test(value ?? '');
 const hash = value => /^[a-f0-9]{64}$/.test(value ?? '');
 const positive = value => Number.isSafeInteger(value) && value > 0;
-const MAX_METADATA = 8 * 1024 * 1024;
-// Content sizes are admitted from actual inventories and available disk, not a
-// fixed package-size allowance. These metadata bounds do not change deployment limits.
-// Content is streamed with one 1 MiB buffer. No whole package is held in memory.
-export const PACKAGE_OUTPUT_LIMITS = Object.freeze({files: 20000, member_bytes: Number.MAX_SAFE_INTEGER,
-  total_bytes: Number.MAX_SAFE_INTEGER, metadata_bytes: MAX_METADATA});
+// Preserve the existing Cloudflare output file-count contract. Content hashing
+// streams complete members and does not impose an application-memory ceiling.
+export const PACKAGE_OUTPUT_LIMITS = Object.freeze({files: 20000});
 const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 
 function ordinary(root, relative, directory = false) {
@@ -44,14 +41,14 @@ function ordinary(root, relative, directory = false) {
   return at;
 }
 
-export function streamedPackageFile(root, relative, maximum = PACKAGE_OUTPUT_LIMITS.member_bytes) {
+export function streamedPackageFile(root, relative) {
   need(safePackagePath(relative) && !relative.endsWith('/'), 'Safe ordinary package path required');
-  return streamedOrdinaryFile(root, relative, maximum);
+  return streamedOrdinaryFile(root, relative);
 }
 
-function streamedOrdinaryFile(root, relative, maximum = PACKAGE_OUTPUT_LIMITS.member_bytes) {
+function streamedOrdinaryFile(root, relative) {
   const file = ordinary(root, relative), before = fs.lstatSync(file);
-  need(Number.isSafeInteger(before.size) && before.size >= 0 && before.size <= maximum, 'Package member exceeds admitted bytes');
+  need(Number.isSafeInteger(before.size) && before.size >= 0, 'Invalid whole package member size');
   const fd = fs.openSync(file, fs.constants.O_RDONLY | fs.constants.O_NOFOLLOW), digest = createHash('sha256');
   const buffer = Buffer.alloc(1024 * 1024); let bytes = 0;
   try {
@@ -79,7 +76,7 @@ export function inventoryPackageOutput(root) {
       else {
         need(stat.isFile() && result.length < PACKAGE_OUTPUT_LIMITS.files, 'Unsupported or excessive output inventory');
         const row = streamedPackageFile(root, child); total += row.bytes;
-        need(total <= PACKAGE_OUTPUT_LIMITS.total_bytes, 'Package output exceeds transport admission'); result.push(row);
+        need(Number.isSafeInteger(total),'Package output total is not an exact integer');result.push(row);
       }
     }
   };
@@ -94,14 +91,18 @@ export function inventoryPackageOutput(root) {
   return {files: result, bytes: total};
 }
 
-const git = (root, args) => execFileSync('git', ['-C', root, ...args], {encoding: 'utf8',
-  maxBuffer: 32 * 1024 * 1024, env: {...process.env, GIT_NO_LAZY_FETCH: '1', GIT_TERMINAL_PROMPT: '0'}});
+function capturePackageCommand(executable,args,{input,env}={}) {
+  return execFileSync(executable,args,{input,env,encoding:'utf8',maxBuffer:Infinity});
+}
+
+const git = (root, args) => capturePackageCommand('git',['-C',root,...args],
+  {env:{...process.env,GIT_NO_LAZY_FETCH:'1',GIT_TERMINAL_PROMPT:'0'}});
 export function committedPackageInputs(root, definition = loadPackageInputs(root), head = 'HEAD') {
   const rows = git(root, ['ls-tree', '-rz', '--full-tree', head]).split('\0').filter(Boolean).map(line => {
     const tab = line.indexOf('\t'), [mode, type, oid] = line.slice(0, tab).split(' ');
     return {path: line.slice(tab + 1), mode, type, oid};
   }).filter(row => containsPackagePath(definition.inputs, row.path));
-  need(rows.length > 0 && rows.length <= 20000 && rows.every(row => row.type === 'blob' &&
+  need(rows.length > 0 && rows.every(row => row.type === 'blob' &&
     ['100644','100755'].includes(row.mode) && commit(row.oid)), 'Complete ordinary package source tree required');
   for (const name of definition.inputs) need(definition.optional_inputs.includes(name) ||
     rows.some(row => containsPackagePath([name], row.path)), 'Declared input absent from original tree');
@@ -110,7 +111,7 @@ export function committedPackageInputs(root, definition = loadPackageInputs(root
 
 function readJSON(root, relative) {
   const file = ordinary(root, relative), stat = fs.statSync(file);
-  need(stat.size > 0 && stat.size <= MAX_METADATA, 'Bounded whole package metadata required');
+  need(Number.isSafeInteger(stat.size)&&stat.size>0,'Invalid whole package metadata size');
   return JSON.parse(fs.readFileSync(file));
 }
 
@@ -153,8 +154,9 @@ export function resolvePackagePythonExecutable(expectedSha256) {
 function packagePythonIdentity(args,input,expectedExecutable) {
   try {
     const python=resolvePackagePythonExecutable(expectedExecutable);
-    const result=JSON.parse(execFileSync(python.executable,['-I','-S','-B',fileURLToPath(new URL('./package-python-runtime.py',import.meta.url)),...args],
-      {input,encoding:'utf8',maxBuffer:MAX_METADATA,env:{...process.env,PYTHONDONTWRITEBYTECODE:'1'}}));
+    const executionRoot=path.dirname(path.dirname(fileURLToPath(import.meta.url)));
+    const result=JSON.parse(capturePackageCommand(python.executable,['-I','-S','-B',fileURLToPath(new URL('./package-python-runtime.py',import.meta.url)),...args],
+      {input,env:{...process.env,PYTHONDONTWRITEBYTECODE:'1'}}));
     need(result.valid===true||result.executable_sha256===python.sha256,'Python reported executable differs from independently observed bytes');
     return result;
   } catch(error) {
@@ -272,10 +274,10 @@ export function createPackageOutputManifest(root = process.cwd()) {
   const {installed_runtime,...manifestSource}=source;
   const manifest = {version: 1, kind: 'original-cloudflare-package-output', source:manifestSource,
     runtime: {installed: installed_runtime, node: process.version, versions: process.versions, platform: process.platform, arch: process.arch,
-      dependencies: streamedPackageFile(root, 'package-lock.json', MAX_METADATA).sha256,
+      dependencies: streamedPackageFile(root, 'package-lock.json').sha256,
       python: {version:receipt.preflight.runtime?.python?.version??null,imports:receipt.preflight.runtime?.python?.imports??[]}},
     configuration: packageBuildConfiguration(), output,
-    original_build_receipt: streamedPackageFile(root, '.cache/package-input-build.json', MAX_METADATA),
+    original_build_receipt: streamedPackageFile(root, '.cache/package-input-build.json'),
     semantics: 'Original full package output, retained without claiming a fresh build when reused.'};
   validatePackageOutputManifest(manifest);
   return manifest;
@@ -284,7 +286,7 @@ export function createPackageOutputManifest(root = process.cwd()) {
 export function validatePackageOutputManifest(value) {
   need(value?.version === 1 && value.kind === 'original-cloudflare-package-output' &&
     commit(value.source?.head) && commit(value.source?.tree) && hash(value.source?.input_definition_sha256) &&
-    Array.isArray(value.source.files) && value.source.files.length > 0 && value.source.files.length <= 20000,
+    Array.isArray(value.source.files) && value.source.files.length > 0,
     'Invalid original package identity');
   validatePackageInputs(value.source.definition);
   // Absence preserves legacy history; transition admission requires this new
@@ -307,17 +309,15 @@ export function validatePackageOutputManifest(value) {
       'Duplicate or invalid original package input'); sources.add(row.path);
   }
   need(Array.isArray(value.output?.files) && value.output.files.length > 0 &&
-    value.output.files.length <= PACKAGE_OUTPUT_LIMITS.files && positive(value.output.bytes) &&
-    value.output.bytes <= PACKAGE_OUTPUT_LIMITS.total_bytes, 'Invalid original output inventory');
+    value.output.files.length <= PACKAGE_OUTPUT_LIMITS.files && positive(value.output.bytes), 'Invalid original output inventory');
   const outputs = new Set(); let bytes = 0;
   for (const row of value.output.files) {
     need(safePackagePath(row.path) && /^dist\/(client|cloudflare)\//.test(row.path) && !outputs.has(row.path) &&
-      Number.isSafeInteger(row.bytes) && row.bytes >= 0 && row.bytes <= PACKAGE_OUTPUT_LIMITS.member_bytes && hash(row.sha256),
-      'Duplicate, unsafe or oversized original output'); outputs.add(row.path); bytes += row.bytes;
+      Number.isSafeInteger(row.bytes) && row.bytes >= 0 && hash(row.sha256),
+      'Duplicate, unsafe or malformed original output'); outputs.add(row.path); bytes += row.bytes;
   }
   need(bytes === value.output.bytes && ['dist/client/atlas-geography.json','dist/cloudflare/index.js',
     'dist/cloudflare/wrangler.json'].every(name => outputs.has(name)), 'Incomplete original package inventory');
-  need(Buffer.byteLength(JSON.stringify(value)) <= MAX_METADATA, 'Original package metadata exceeds admission');
   return value;
 }
 
