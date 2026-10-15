@@ -180,25 +180,43 @@ function currentSource(){
     files:committedPackageInputs(root,definition),producer:committedPackageProducer(root)};
 }
 
+function packageAssemblyPhaseMarker(started){
+  let previous=started;
+  return phase=>{
+    const now=performance.now();
+    console.error('[selected-package-phase] '+JSON.stringify({phase,
+      phase_seconds:(now-previous)/1000,elapsed_seconds:(now-started)/1000}));
+    previous=now;
+  };
+}
+
 export async function assembleSelectedPackage({api,repo,expectedHead,originalRunId,trustedBase}){
-  const started=performance.now(),current=currentSource();need(current.head===expectedHead,'Actual selected head changed');
-  const found=await findOriginalPackage({api,repo,current,originalRunId,trustedBase});if(!found)return {assembled:false,reason:'No applicable retained original output in bounded recent-result search'};
+  const started=performance.now(),completePhase=packageAssemblyPhaseMarker(started);
+  const current=currentSource();need(current.head===expectedHead,'Actual selected head changed');
+  completePhase('current-source');
+  const found=await findOriginalPackage({api,repo,current,originalRunId,trustedBase});
+  completePhase('original-discovery');
+  if(!found)return {assembled:false,reason:'No applicable retained original output in bounded recent-result search'};
   if(trustedBase!==undefined)current.accepted_selected_inputs=found.accepted_selected_inputs;
   await verifyPackageDependencies(path.join(root,'node_modules'));
   admitDisk(found.origin.artifact_bytes,'the actual authenticated original archive');
   const scratch=await createPackageAssemblyScratch(root);
+  completePhase('dependencies-and-scratch');
   let committed=false,preserveScratch=false;
   try{
     const archive=path.join(scratch,'original.zip'),originalRoot=path.join(scratch,'original');
     await downloadOriginal(api,repo,found.origin,archive);
+    completePhase('archive-download');
     const pythonArgs=['-I','-S','-B',path.join(root,'scripts/extract-package-output.py')];
     // Authenticate and consume the archive once through the extractor's held descriptor.
     execFileSync('python3',[...pythonArgs,archive,originalRoot,found.origin.artifact_digest,found.receipt.package_output_manifest_sha256,String(found.receipt.package_output_manifest_bytes)],{stdio:'pipe',maxBuffer:1048576});
+    completePhase('archive-extraction');
     const manifestRaw=fs.readFileSync(path.join(originalRoot,'.cache/package-output-manifest.json')),manifest=validatePackageOutputManifest(JSON.parse(manifestRaw));
     for(const key of ['head','tree','definition','files','producer','selection'])need(same(manifest.source[key],found.source[key]),'Retained manifest differs from original immutable source: '+key);
     need(manifest.runtime.installed?.version===2&&manifest.runtime.installed.python?.parser,
       'Version 2 original installed parser evidence required; legacy aggregate evidence requires a full build');
     const original=await authenticateOriginalPackageOutput({api,repo,origin:found.origin,root:originalRoot,manifestRaw});
+    completePhase('original-output-authentication');
     const installed=installedPackageIdentity(root,declaredPackagePythonRoots(root),{expectedParser:manifest.runtime.installed.python.parser,expectedExecutable:manifest.runtime.installed.python.executable_sha256});
     const differences=installedPackageDifferences(manifest.runtime.installed,installed);
     const recordAndRequireRuntime=()=>{
@@ -234,6 +252,7 @@ export async function assembleSelectedPackage({api,repo,expectedHead,originalRun
     const atlas=JSON.parse(fs.readFileSync(atlasPath));need(atlas.additiveRelease?.base_reference,'Original additive base descriptor missing');
     const execution=issuePackageAssemblyExecution({original,source:root,stage,executingRoot:root,
       inheritedMetadata:[current,found.source,manifest,atlas,{runtime}],acceptedInputs:current.accepted_selected_inputs});
+    completePhase('runtime-and-source-loading');
     const publication=await preparePackageSelectedAdditive({root:stage,originalPackage:original,assemblyExecution:execution,
       selectedGrid:{sha256:current.selection.sha256},geographicRelease:atlas.additiveRelease.base_reference});
     need(publication,'Genuine current additive publication required');
@@ -258,8 +277,10 @@ export async function assembleSelectedPackage({api,repo,expectedHead,originalRun
     fs.renameSync(path.join(stage,'dist'),path.join(stage,'client'));
     fs.mkdirSync(path.join(stage,'dist'));fs.renameSync(path.join(stage,'client'),path.join(stage,'dist/client'));
     fs.renameSync(path.join(originalRoot,'dist/cloudflare'),path.join(stage,'dist/cloudflare'));
+    completePhase('additive-assembly');
     for(const pin of manifest.output.files)if(!mutable.has(pin.path))need(same(streamedPackageFile(stage,pin.path),pin),'Invariant output changed during assembly');
     requirePackageAssemblyExecution(execution);
+    completePhase('final-checks');
     const assembly={kind:'retained-original-output-plus-current-additive',origin:found.origin,
       original_manifest_sha256:hash(manifestRaw),runtime_identity_version:2,transition,current_execution:execution,
       original_base_context_retained:true,base_restoration_invoked:false,invariant_build_invoked:false,
@@ -289,6 +310,7 @@ export async function assembleSelectedPackage({api,repo,expectedHead,originalRun
       throw error;
     }
     committed=true;
+    completePhase('output-publication');
     return {assembled:true,receipt_sha256:hash(receiptRaw),origin:found.origin,elapsed_seconds:assembly.elapsed_seconds,
       reused_output_files:manifest.output.files.length-mutable.size,current_additive_assets:4};
   }finally{

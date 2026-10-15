@@ -4,10 +4,11 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
+import {runInNewContext} from 'node:vm';
 import {authenticateOriginalPackageOutput, requireOriginalPackageOutput,
   requirePackageAssemblyExecution, issuePackageAssemblyExecution,retainSelectedPackageInputs} from '../coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs';
 import {requireCurrentPackageAssembly, integrationTestFiles} from '../scripts/run-integration-tests.mjs';
-import {admitAssemblyAtlasMetadata,createPackageAssemblyScratch,packageAssemblyInvocation,findOriginalPackage,acceptedSelectedPackageInputs} from '../scripts/assemble-selected-package.mjs';
+import {admitAssemblyAtlasMetadata,createPackageAssemblyScratch,packageAssemblyInvocation,findOriginalPackage,acceptedSelectedPackageInputs,assembleSelectedPackage} from '../scripts/assemble-selected-package.mjs';
 import {execFileSync,spawnSync} from 'node:child_process';
 import {inspectPackageExecutionInputs,validatePackageExecutionRoles} from '../scripts/package-build.mjs';
 import {loadPackageInputs} from '../scripts/package-inputs.mjs';
@@ -17,6 +18,42 @@ import {readRetainedRegistryAuthority,valueBytes,valueSha} from '../coordination
 import {admitPackageInputTransition,committedPackageInputs,committedPackageProducer} from '../scripts/package-output-artifact.mjs';
 
 const sha=raw=>createHash('sha256').update(raw).digest('hex');
+
+test('assembly phase diagnostics account for monotonic time on stderr only',()=>{
+  const source=fs.readFileSync(new URL('../scripts/assemble-selected-package.mjs',import.meta.url),'utf8');
+  const helper=source.match(/^function packageAssemblyPhaseMarker\(started\)\{[\s\S]*?^\}/m)?.[0];
+  assert.ok(helper,'Exercise the actual private completion marker without an assembly replay');
+  const ticks=[1250,2250,2250],lines=[],prefix='[selected-package-phase] ';
+  const mark=runInNewContext('('+helper+')',{
+    performance:{now:()=>ticks.shift()},console:{error:line=>lines.push(line)}
+  })(1000);
+  for(const phase of ['current-source','original-discovery','archive-download'])mark(phase);
+  assert.ok(lines.every(line=>line.startsWith(prefix)));
+  assert.deepEqual(lines.map(line=>JSON.parse(line.slice(prefix.length))),[
+    {phase:'current-source',phase_seconds:0.25,elapsed_seconds:0.25},
+    {phase:'original-discovery',phase_seconds:1,elapsed_seconds:1.25},
+    {phase:'archive-download',phase_seconds:0,elapsed_seconds:1.25}
+  ]);
+});
+
+test('actual assembly phase markers cover no-original fallback and failed discovery',async()=>{
+  const root=fs.realpathSync(new URL('../',import.meta.url));
+  const expectedHead=execFileSync('git',['-C',root,'rev-parse','HEAD'],{encoding:'utf8'}).trim();
+  const lines=[],previous=console.error,prefix='[selected-package-phase] ';
+  console.error=line=>lines.push(line);
+  try{
+    const calls=[],api=async route=>{calls.push(route);return {workflow_runs:[]};};
+    assert.deepEqual(await assembleSelectedPackage({api,repo:'ChengshuLi/WorldAtlas',expectedHead}),
+      {assembled:false,reason:'No applicable retained original output in bounded recent-result search'});
+    assert.equal(calls.length,2);assert.ok(calls.every(route=>route.includes('/actions/workflows/')));
+    assert.deepEqual(lines.map(line=>JSON.parse(line.slice(prefix.length)).phase),['current-source','original-discovery']);
+    lines.length=0;
+    await assert.rejects(assembleSelectedPackage({api:async()=>{throw Error('discovery offline');},
+      repo:'ChengshuLi/WorldAtlas',expectedHead}),/discovery offline/);
+    assert.deepEqual(lines.map(line=>JSON.parse(line.slice(prefix.length)).phase),['current-source']);
+  }finally{console.error=previous;}
+});
+
 function original(t,{worker=false}={}){
   const root=fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(),'atlas-original-package-')));
   t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
