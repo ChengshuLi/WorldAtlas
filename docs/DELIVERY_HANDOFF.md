@@ -707,3 +707,69 @@ The existing early `--resume` response remains unchanged.
 ## Derived selected-delivery evidence
 
 The existing `evidence` phase also accepts `delivery` instead of a full `template`: supply `version:1`, exact `baseline_commit`/`candidate_commit`, the owned `manifest_path`, `issue`, `worker_id`, exact `subject_ids`, original `qualified_constructor_pins` (`{id,pin}`), complete restoration-only `sources` with matching `id`/`original_pin`, and explicit `limits`. It derives the four actual ancestor selector/package/selected-ledger/registry baseline pins and the immutable candidate diff's whole-byte outputs, excluding the manifest itself. Every authenticated full constructor row/component roster must cover the exact added ledger rows without omission or duplication. Unmerged original constructors remain cited with their full pins; they cannot stand in for ancestor baseline hashes. Optional `pins` must exactly match the derived issue baseline map. Source citation terms, uncertainties, original authority metadata and any supplied `validation` controls remain explicit; omitted controls are not called passed. This mode permits `metric_sources:[]`, while supplied measurements and the original template path keep their existing typed contracts. It does not replace original source/native qualification or current-owner, conservation, scientific review, exact-head and integration gates. The byte inventory is limited reporting, not new scientific approval.
+
+## Continue locally through the final evidence commit
+
+An already-qualified modern delivery needs three actual local snapshots, but
+not three pushes or separate operator waits. Run the existing commands and
+ordinary scoped commits in one fail-fast shell sequence:
+
+1. Run `compose CONFIG OWNED_COMPOSE_DIRECTORY` and commit its four sibling
+   products. Retain the ordinary preparation receipt for exact resume; the next
+   phase does not require it to be committed. Capture the actual local SHA with
+   `compose_commit=$(git rev-parse HEAD)`.
+2. For `finalize`, supply `version: 1` and exact `{commit, path}` locators for `selector`,
+   `package_inputs`, `rebind` and `composition`; the last names the emitted
+   `selected-ledger.json` at `$compose_commit`. Keep `new_prefix`,
+   `sidecar_output` and explicit `preparation_allowance: {phaseBytes, rssBytes}`
+   under the existing current resource admission.
+   The compact route derives the fixed sibling pins; do not mix it with explicit
+   derived product pins. Existing explicit configurations remain supported.
+3. Run `finalize CONFIG .cache/delivery-handoff/final-UNIQUE` and use the existing
+   [canonical staging/adoption contract](#configurations-and-explicit-commit-boundaries),
+   including any [original-path restorations](#inherited-package-read-roles-and-exact-local-staging).
+   Finish intended candidate changes and commit the installed canonical tree.
+   Capture `candidate_commit=$(git rev-parse HEAD)`. Run applicable checks at
+   their ordinary working-tree or exact-commit boundaries.
+4. Set `delivery.candidate_commit` in the existing evidence config to that SHA;
+   retain the actual accepted baseline and explicit source citations, subjects
+   and limits. Run `evidence CONFIG .cache/delivery-handoff/evidence-UNIQUE`,
+   adopt its `evidence-quality.json`, then commit only the declared manifest.
+
+The two SHAs can be passed by ordinary JSON serialization in the same shell.
+Local Git bodies are sufficient; readers keep lazy fetching disabled. Keep the
+generated evidence config and staging receipt local: evidence inventories the
+preceding canonical snapshot and excludes only the manifest itself. Further
+candidate edits require a new snapshot and refreshed evidence, without replaying
+unchanged science.
+
+Publish once after all three local commits. With the expected owned branch in
+`branch`, retain and verify the actual final head:
+
+```sh
+final_head=$(git rev-parse HEAD)
+git push origin "$final_head:refs/heads/$branch"
+test "$(git ls-remote origin "refs/heads/$branch" | cut -f1)" = "$final_head"
+```
+
+Do not amend, flatten or rebase the pinned snapshots after deriving their
+consumers. Preserve their ancestor chain and existing immutable-origin retention
+requirements; a later integration squash does not establish retention. The
+existing final exact-body fallback still needs its target, body and ancestry
+checks. Normal substantive independent review covers the exact published final
+head, followed by the existing integration flow.
+
+On interruption, retain completed commits and staging, inspect actual Git state,
+and use exact `--resume` with the unchanged configuration where applicable.
+Changed or partial output still refuses; do not reset, overwrite or blindly
+repeat the sequence. Existing commits and receipts provide recovery without a
+new controller or journal.
+
+In retained [MBD PR #1952](https://github.com/ChengshuLi/WorldAtlas/pull/1952),
+the three stage publishers completed remote branch readback before exiting:
+2026-10-15 04:39:18.907867Z, 04:46:46.809726Z and 04:50:26.217678Z.
+The next finalizer admission was at 04:41:47.362Z. Local committed objects could
+have fed the next steps without the intermediate remote readbacks. Separate
+evidence-helper start and final-GET durations were not retained, so these records
+do not establish minutes saved. Record subsequent adoption with the existing
+delivery receipts; this sequence adds no reporting gate.

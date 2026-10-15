@@ -8,6 +8,7 @@ import {fileURLToPath} from 'node:url';
 export const GiB = 1024 ** 3;
 export const policy = {minimumFree: 10 * GiB};
 const support = ['docs', 'scripts', 'test', 'src', 'hosted', 'drizzle', '.github', '.agents', 'coordination/templates'];
+const engineeringCode = name => name.startsWith('coordination/engineering/') && /\.(?:mjs|js|cjs|py|sh)$/.test(name);
 const id = value => typeof value === 'string' && /^[a-zA-Z0-9][a-zA-Z0-9._-]{0,127}$/.test(value);
 const safeInclude = value => typeof value === 'string' && /^(data|research|coordination)\/[a-zA-Z0-9_./-]+$/.test(value)
   && value.split('/').every(part => part && part !== '.' && part !== '..');
@@ -108,7 +109,6 @@ export function workspaceManager(repo, {limits = policy, freeBytes} = {}) {
     return {root, registry, freeBytes: availableBytes(), checkoutBytes, limits, entries: value.entries, worktrees: inventory};
   };
   const inputInventory = (head, profile, include) => {
-    const selected = [...support, ...include];
     requireCommit(head);
     // Check metadata without blob reads before ls-tree can attempt to recover a
     // missing tree. Unknown descendants mean no complete selected inventory.
@@ -121,10 +121,20 @@ export function workspaceManager(repo, {limits = policy, freeBytes} = {}) {
       const separator = line.indexOf('\t');
       const [mode, type, oid] = line.slice(0, separator).split(' ');
       if (separator < 0 || !/^[0-7]{6}$/.test(mode) || !/^[a-f0-9]{40,64}$/.test(oid)) throw Error('Unknown tree entry');
-      return {type, oid, name: line.slice(separator + 1)};
+      return {mode, type, oid, name: line.slice(separator + 1)};
     });
+    // Shared entry points import retained engineering helpers. Include code, not
+    // their adjacent scientific inputs/products, without parsing or running it.
+    const code = profile === 'sparse' ? tree.filter(({name}) => engineeringCode(name)) : [];
+    for (const {name, mode, type} of code) {
+      if (!safeInclude(name) || type !== 'blob' || !['100644', '100755'].includes(mode)) {
+        throw Error(`Engineering support code needs an ordinary file and safe literal path: ${name}`);
+      }
+    }
+    const selected = [...support, ...include];
+    const codePaths = new Set(code.map(({name}) => name));
     const inputs = tree.filter(({name}) => profile === 'full' || !name.includes('/')
-      || selected.some(prefix => name === prefix || name.startsWith(prefix + '/')));
+      || codePaths.has(name) || selected.some(prefix => name === prefix || name.startsWith(prefix + '/')));
     for (const {type} of inputs) {
       if (type === 'commit') throw Error('Submodule inputs need a separate bounded plan');
       if (type !== 'blob') throw Error('Unknown input type');
@@ -161,7 +171,9 @@ export function workspaceManager(repo, {limits = policy, freeBytes} = {}) {
         if (!Number.isSafeInteger(estimated)) throw Error('Reserve and selected inputs must represent a safe finite byte count');
       }
     }
-    return {tree, inputs, estimated, missing: [...missing.values()]};
+    const sparsePatterns = [...selected.map(prefix => `/${prefix}${tree.some(({name}) => name.startsWith(prefix + '/')) ? '/' : ''}`),
+      ...codePaths.values().map(name => `/${name}`)];
+    return {inputs, sparsePatterns, estimated, missing: [...missing.values()]};
   };
   const inspect = ({commit, profile = 'sparse', include = []}) => {
     if (!/^[a-f0-9]{40}$/.test(commit ?? '')) throw Error('Inspection needs an exact locally available 40-character commit');
@@ -185,8 +197,7 @@ export function workspaceManager(repo, {limits = policy, freeBytes} = {}) {
     if (fs.existsSync(destination)) throw Error('Unregistered checkout directory exists; inspect instead of overwriting');
     if (slot === 'work') git('fetch', 'origin', 'main');
     const head = slot === 'work' ? git('rev-parse', '--verify', 'origin/main').trim() : commit;
-    const selected = [...support, ...include];
-    const {tree, estimated, missing} = inputInventory(head, profile, include);
+    const {sparsePatterns, estimated, missing} = inputInventory(head, profile, include);
     if (missing.length) throw Error(`Unknown input size; selected blobs must be available locally. Run inspect --commit ${head} with this same profile/include scope to list missing paths/OIDs.`);
     const reservation = Math.max(Math.ceil(reserveGiB * GiB), estimated);
     if (!Number.isSafeInteger(reservation)) throw Error('Reserve and selected inputs must represent a safe finite byte count');
@@ -199,7 +210,7 @@ export function workspaceManager(repo, {limits = policy, freeBytes} = {}) {
     git('worktree', 'add', '--no-checkout', ...(slot === 'work' ? ['-b', branch] : ['--detach']), destination, head);
     if (profile === 'sparse') {
       execFileSync('git', ['-C', destination, 'sparse-checkout', 'set', '--no-cone', '--stdin'], {
-        input: ['/*', '!/*/', ...selected.map(prefix => `/${prefix}${tree.some(({name}) => name.startsWith(prefix + '/')) ? '/' : ''}`)].join('\n') + '\n', encoding: 'utf8', env: noLazyFetch});
+        input: ['/*', '!/*/', ...sparsePatterns].join('\n') + '\n', encoding: 'utf8', env: noLazyFetch});
     }
     execFileSync('git', ['-C', destination, 'read-tree', '-mu', 'HEAD'], {env: noLazyFetch});
     entry.status = 'ready';

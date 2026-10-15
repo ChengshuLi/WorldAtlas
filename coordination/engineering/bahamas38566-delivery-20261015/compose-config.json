@@ -1,0 +1,86 @@
+{
+  "version": 1,
+  "selector": {
+    "commit": "ead6b7e5f17e1479c2399f49984efe3d556228c6",
+    "path": "data/ownership-selection.json",
+    "mode": "100644",
+    "git_blob_oid": "5355253d6ae7e2e2078ed15141bcd06e4b327daf",
+    "bytes": 1571,
+    "sha256": "0df2f7e39d9a2dda33022a51be38a972028d97f2b4920494c22f7b7ac17ac97f"
+  },
+  "effective_release_id": "geography:bahamas38566-delivery-20261015",
+  "authorities": [
+    {
+      "rule_preimage": {
+        "commit": "eeef732ee402e6fb48973601a2e70f7ff11c1210",
+        "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-land30-authority-001/original-rule-preimage.json",
+        "mode": "100644",
+        "git_blob_oid": "7229d3230fb210bab30f8d34f8f656d9ecd44573",
+        "bytes": 752,
+        "sha256": "7e9c316e4f086cd8c1b0db60053b8c4f636c8499dd7a66037545b7220306683a"
+      },
+      "source_authority": {
+        "commit": "eeef732ee402e6fb48973601a2e70f7ff11c1210",
+        "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-land30-authority-001/authority-binding.json",
+        "mode": "100644",
+        "git_blob_oid": "5d2dab9ed43b8b47cb525425b5fe86cfe2163b64",
+        "bytes": 755,
+        "sha256": "e217c1077539f12d1b3fc796cba4794bfbc3136ca7733b4a65935f6dc78f3418"
+      },
+      "ledger": {
+        "commit": "eeef732ee402e6fb48973601a2e70f7ff11c1210",
+        "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-land30-authority-001/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "1d8a187babbc28f59ce901ffdf60614dadb6136c",
+        "bytes": 396223,
+        "sha256": "4c4bf45c6bc5937011a9ea51ae57f5d93e0fd6d3523344c0ae18f5d21b49b988"
+      },
+      "native_patch": {
+        "commit": "446a9a0050d6b96c520e2a94358b6228d1d00605",
+        "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-inputs-002/land30-native-patch.json",
+        "mode": "100644",
+        "git_blob_oid": "67bc6baf1e750a7181a12c7882ecdfd0948e109a",
+        "bytes": 298397,
+        "sha256": "6f2231f2383f5f6fd3106d0aafcf1c87c6635463c731e5f81c028350515d93c0"
+      }
+    },
+    {
+      "rule_preimage": {
+        "commit": "eeef732ee402e6fb48973601a2e70f7ff11c1210",
+        "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-mixed2-authority-001/original-rule-preimage.json",
+        "mode": "100644",
+        "git_blob_oid": "22fd736b7b1599ffc3cb8e0938baccc0cf735383",
+        "bytes": 750,
+        "sha256": "7148b990af2574e8ee2de005ca61ad47cf16617cca1eea0f14e7d8e9e276bfc6"
+      },
+      "source_authority": {
+        "commit": "eeef732ee402e6fb48973601a2e70f7ff11c1210",
+        "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-mixed2-authority-001/authority-binding.json",
+        "mode": "100644",
+        "git_blob_oid": "c88676ee5a9f4284b9410518c4f7c090cc6b21f7",
+        "bytes": 753,
+        "sha256": "b0f2cf6bfc9d13d84ccf73b6ab0df9a2ad082cddc2e44c75af8d5fffd1cf63e8"
+      },
+      "ledger": {
+        "commit": "eeef732ee402e6fb48973601a2e70f7ff11c1210",
+        "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-mixed2-authority-001/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "6891e21a0ac19136a8815bcea4dc4d23b2f1b05b",
+        "bytes": 38149,
+        "sha256": "3727d4f1b97fe66d08473cd3b34714895c06f6e27828bd0eb2bedbc25a4b7590"
+      },
+      "native_patch": {
+        "commit": "446a9a0050d6b96c520e2a94358b6228d1d00605",
+        "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-inputs-002/mixed2-native-patch.json",
+        "mode": "100644",
+        "git_blob_oid": "803f67031f6082607d3a472c9509be1514765866",
+        "bytes": 31447,
+        "sha256": "4d2a0d70e032cd60899443467e69b10739a6482325598a8235d6c5c902f35aeb"
+      }
+    }
+  ],
+  "preparation_allowance": {
+    "phaseBytes": 536870912,
+    "rssBytes": 536870912
+  }
+}

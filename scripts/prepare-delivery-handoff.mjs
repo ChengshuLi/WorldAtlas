@@ -9,7 +9,7 @@ import {fileURLToPath} from 'node:url';
 import {gunzipSync} from 'node:zlib';
 import {candidateBudget} from './native-ownership/native-preparation-guards.mjs';
 import {scientificOperationSummary} from './native-ownership/scientific-operation-summary.mjs';
-import {prepareDeliveryRoleStaging} from './delivery-handoff-advance.mjs';
+import {locate, prepareDeliveryRoleStaging} from './delivery-handoff-advance.mjs';
 import {validatePackageInputs} from './package-inputs.mjs';
 import {baselineFiles, validateEvidence} from './evidence-quality.mjs';
 import {composeRetainedLedgers} from '../coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs';
@@ -940,7 +940,27 @@ function appendPackageReadPaths(original, paths) {
   return validatePackageInputs({...original, inputs: [...original.inputs, ...additions]});
 }
 
+// The modern composer emits these four flat products at one real commit.
+// Resolve their ordinary whole-file identities once; the existing finalizer
+// still checks every registry/ledger/rebind/patch/envelope join and package role.
+export function resolveFinalizeConfig(config, reader) {
+  if (!Object.hasOwn(config, 'composition')) return config;
+  const keys = ['version', 'selector', 'package_inputs', 'composition', 'rebind',
+    'preparation_allowance', 'new_prefix', 'sidecar_output'];
+  need(config.version === 1 && same(Object.keys(config).filter(key => key !== 'restored_read_roles').sort(), keys.sort()),
+    'Compact finalization requires exact locators and cannot mix full pins or an existing sidecar');
+  need(config.composition?.path && path.posix.basename(config.composition.path) === 'selected-ledger.json',
+    'Modern composition requires the committed selected-ledger.json product');
+  const selected = locate(reader, config.composition), prefix = path.posix.dirname(selected.path);
+  const sibling = name => locate(reader, {commit: selected.commit, path: prefix + '/' + name});
+  const {composition, ...original} = config;
+  return {...original, selector: locate(reader, config.selector), package_inputs: locate(reader, config.package_inputs),
+    rebind: locate(reader, config.rebind), registry: sibling('authority-registry.json'),
+    ledger: selected, selected_ledger: selected, patch: sibling('patch.json'), runtime_envelope: sibling('runtime-envelope.json')};
+}
+
 export function finalizeDelivery(config, reader) {
+  config = resolveFinalizeConfig(config, reader);
   need(typeof config.new_prefix === 'string' && config.new_prefix.endsWith('/')
     && safe(config.new_prefix.slice(0, -1)), 'Exact owned output prefix required');
   const originalSelector = reader.read(config.selector), selection = JSON.parse(originalSelector);

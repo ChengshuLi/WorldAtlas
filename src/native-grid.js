@@ -214,7 +214,7 @@ export function nativeOnlyComponent(row, hashValue) {
   return true;
 }
 export function deriveSourceTargetNativeDelta({targets, sourceFeatures, coverageFeatures,
-  territorialExclusions = [], ownerRows, size, latitudes, rowStart, rowEnd, diagnosticRows}) {
+  territorialExclusions = [], ownerRows, size, latitudes, rowStart, rowEnd, diagnosticRows, coverageFeatureGroups}) {
   require(Array.isArray(targets) && targets.length > 0, 'Missing source targets');
   const targetByOwner = new Map(), targetById = new Map();
   for (const target of targets) {
@@ -238,13 +238,20 @@ export function deriveSourceTargetNativeDelta({targets, sourceFeatures, coverage
   }
   for (const target of targets) require(sourceOwners.get(target.pixelIndex) === target.id,
     'Source target differs from complete source owner roster');
-  require(Array.isArray(coverageFeatures) && coverageFeatures.length > 0, 'Missing reviewed coverage');
-  for (const feature of [...coverageFeatures, ...territorialExclusions])
-    require(targetByOwner.get(feature.pixelIndex)?.id === feature.id, 'Foreign coverage or exclusion target');
-  for (const feature of coverageFeatures) {
-    const source=sourceIds.get(feature.source_id ?? feature.id);
-    require(source?.owner===feature.pixelIndex && source.id===feature.id,
-      'Coverage lacks exact original source membership');
+  const validateCoverage = features => {
+    require(Array.isArray(features) && features.length > 0, 'Missing reviewed coverage');
+    for (const feature of [...features, ...territorialExclusions])
+      require(targetByOwner.get(feature.pixelIndex)?.id === feature.id, 'Foreign coverage or exclusion target');
+    for (const feature of features) {
+      const source=sourceIds.get(feature.source_id ?? feature.id);
+      require(source?.owner===feature.pixelIndex && source.id===feature.id,
+        'Coverage lacks exact original source membership');
+    }
+  };
+  validateCoverage(coverageFeatures);
+  if (coverageFeatureGroups !== undefined) {
+    require(Array.isArray(coverageFeatureGroups), 'Invalid additional coverage groups');
+    for (const features of coverageFeatureGroups) validateCoverage(features);
   }
   const options = {size, latitudes, rowStart, rowEnd};
   const scan = (features, masks = false) => {
@@ -268,18 +275,13 @@ export function deriveSourceTargetNativeDelta({targets, sourceFeatures, coverage
     }
     return result;
   };
-  const sources=remap(scan(sourceFeatures.map(feature=>({...feature,pixelIndex:sourceIds.get(feature.id).index})))),
-    coverage=remap(scan(coverageFeatures.map(feature=>{
-      const id=feature.source_id??feature.id;
-      return {id,pixelIndex:sourceIds.get(id).index,geometry:feature.geometry};
-    }),true)), excluded=scan(territorialExclusions,true);
-  // Exact boundary cells require the existing boundary adjudication; withholding
-  // them here must not silently choose whichever source happened to come first.
-  const ties = new Map();
-  for (const tie of [...sources.ties, ...coverage.ties, ...excluded.ties]) {
-    const spans = ties.get(tie.y) ?? [];
-    spans.push([tie.start ?? tie.x, tie.end ?? tie.x + 1]); ties.set(tie.y, spans);
-  }
+  const sources=remap(scan(sourceFeatures.map(feature=>({...feature,pixelIndex:sourceIds.get(feature.id).index}))));
+  const scanCoverage = features => remap(scan(features.map(feature=>{
+    const id=feature.source_id??feature.id;
+    return {id,pixelIndex:sourceIds.get(id).index,geometry:feature.geometry};
+  }),true));
+  let coverage=scanCoverage(coverageFeatures);
+  const excluded=scan(territorialExclusions,true);
   const current = new Map();
   for (const row of ownerRows) {
     require(Number.isSafeInteger(row.y) && row.y >= rowStart && row.y < rowEnd
@@ -293,74 +295,93 @@ export function deriveSourceTargetNativeDelta({targets, sourceFeatures, coverage
     current.set(row.y, row.complete_owner_intervals);
   }
   require(current.size === rowEnd - rowStart, 'Missing complete current native row extent');
-  // Optional observations are restricted to complete, nonoverlapping requested
-  // intervals. They share the scans and decision order below; no second geometry
-  // operator or alternate coverage policy is used.
-  const requested = new Map(), diagnostic = [];
-  if (diagnosticRows !== undefined) {
-    require(Array.isArray(diagnosticRows), 'Invalid native diagnostic request');
-    let previousY = -1;
-    for (const row of diagnosticRows) {
-      require(Number.isSafeInteger(row.y) && row.y >= rowStart && row.y < rowEnd
-        && row.y > previousY && Array.isArray(row.runs), 'Invalid native diagnostic row');
-      previousY = row.y; let end = 0;
-      for (const run of row.runs) {
-        require(Array.isArray(run) && run.length === 3 && run.every(Number.isSafeInteger)
-          && run[0] >= end && run[1] > run[0] && run[1] <= size && targetByOwner.has(run[2]),
-        'Invalid native diagnostic interval'); end = run[1];
-      }
-      requested.set(row.y, row.runs);
+  // Only this invocation shares complete source/exclusion scans and current rows.
+  // Each coverage retains its own member mask, boundary ties and decision order.
+  const evaluate = (coverage, diagnosticRows) => {
+    // Exact boundary cells require the existing boundary adjudication; withholding
+    // them here must not silently choose whichever source happened to come first.
+    const ties = new Map();
+    for (const tie of [...sources.ties, ...coverage.ties, ...excluded.ties]) {
+      const spans = ties.get(tie.y) ?? [];
+      spans.push([tie.start ?? tie.x, tie.end ?? tie.x + 1]); ties.set(tie.y, spans);
     }
-  }
-  const counts = {assigned_cells: 0, already_owned_cells: 0, ambiguous_owner_cells: 0,
-    unsupported_coverage_cells: 0, territorial_exclusion_cells: 0, boundary_cells: 0};
-  const rows = [], perTarget = new Map(targets.map(target => [target.id, 0]));
-  for (let y = rowStart; y < rowEnd; y++) {
-    const source = sources.rows.get(y) ?? [], support = coverage.rows.get(y) ?? [];
-    const holes = excluded.rows.get(y) ?? [], owned = current.get(y), boundary = ties.get(y) ?? [];
-    const cuts = new Set();
-    for (const run of requested.get(y) ?? []) { cuts.add(run[0]); cuts.add(run[1]); }
-    for (const run of [...source, ...support, ...holes]) { cuts.add(run.start); cuts.add(run.end); }
-    for (const run of [...owned, ...boundary]) { cuts.add(run[0]); cuts.add(run[1]); }
-    const points = [...cuts].sort((a, b) => a - b), runs = [], trace = [];
-    const decide = start => {
-      const owners = new Set(source.filter(run => run.start <= start && start < run.end).map(run => run.owner));
-      if (![...owners].some(owner => targetByOwner.has(owner))) return {reason: 'no-target-source-domain'};
-      if (owned.some(run => run[0] <= start && start < run[1])) return {reason: 'already_owned_cells'};
-      if (boundary.some(run => run[0] <= start && start < run[1])) return {reason: 'boundary_cells'};
-      if (owners.size !== 1) return {reason: 'ambiguous_owner_cells'};
-      const owner = [...owners][0];
-      if (holes.some(run => run.owner === owner && run.start <= start && start < run.end))
-        return {reason: 'territorial_exclusion_cells'};
-      const activeMembers = new Set(source.filter(run => run.owner === owner && run.start <= start && start < run.end).map(run => run.source_id));
-      if (!support.some(run => run.owner === owner && activeMembers.has(run.source_id) && run.start <= start && start < run.end))
-        return {reason: 'unsupported_coverage_cells'};
-      return {reason: 'assigned_cells', owner};
-    };
-    for (let i = 0; i + 1 < points.length; i++) {
-      const start = points[i], end = points[i + 1], decision = decide(start), count = end - start;
-      const request = (requested.get(y) ?? []).find(run => run[0] <= start && start < run[1]);
-      if (request) {
-        const reason = decision.reason === 'assigned_cells' && decision.owner !== request[2]
-          ? 'source-target-owner-mismatch' : decision.reason;
-        const previous = trace.at(-1);
-        if (previous && previous[1] === start && previous[2] === request[2] && previous[3] === reason) previous[1] = end;
-        else trace.push([start, end, request[2], reason]);
+    // Optional observations are restricted to complete, nonoverlapping requested
+    // intervals. They share the scans and decision order below; no second geometry
+    // operator or alternate coverage policy is used.
+    const requested = new Map(), diagnostic = [];
+    if (diagnosticRows !== undefined) {
+      require(Array.isArray(diagnosticRows), 'Invalid native diagnostic request');
+      let previousY = -1;
+      for (const row of diagnosticRows) {
+        require(Number.isSafeInteger(row.y) && row.y >= rowStart && row.y < rowEnd
+          && row.y > previousY && Array.isArray(row.runs), 'Invalid native diagnostic row');
+        previousY = row.y; let end = 0;
+        for (const run of row.runs) {
+          require(Array.isArray(run) && run.length === 3 && run.every(Number.isSafeInteger)
+            && run[0] >= end && run[1] > run[0] && run[1] <= size && targetByOwner.has(run[2]),
+          'Invalid native diagnostic interval'); end = run[1];
+        }
+        requested.set(row.y, row.runs);
       }
-      if (decision.reason === 'no-target-source-domain') continue;
-      if (decision.reason !== 'assigned_cells') { counts[decision.reason] += count; continue; }
-      const owner = decision.owner, target = targetByOwner.get(owner);
-      const previous = runs.at(-1);
-      if (previous && previous[1] === start && previous[2] === owner) previous[1] = end;
-      else runs.push([start, end, owner]);
-      counts.assigned_cells += count; perTarget.set(target.id, perTarget.get(target.id) + count);
     }
-    if (runs.length) rows.push({y, runs});
-    if (trace.length) diagnostic.push({y, runs: trace});
-  }
-  return {rows, ...counts, removed_cells: 0, reassigned_cells: 0,
-    targets: targets.map(target => ({...target, native_cells: perTarget.get(target.id)})),
-    ...(diagnosticRows === undefined ? {} : {diagnostic_rows: diagnostic})};
+    const counts = {assigned_cells: 0, already_owned_cells: 0, ambiguous_owner_cells: 0,
+      unsupported_coverage_cells: 0, territorial_exclusion_cells: 0, boundary_cells: 0};
+    const rows = [], perTarget = new Map(targets.map(target => [target.id, 0]));
+    for (let y = rowStart; y < rowEnd; y++) {
+      const source = sources.rows.get(y) ?? [], support = coverage.rows.get(y) ?? [];
+      const holes = excluded.rows.get(y) ?? [], owned = current.get(y), boundary = ties.get(y) ?? [];
+      const cuts = new Set();
+      for (const run of requested.get(y) ?? []) { cuts.add(run[0]); cuts.add(run[1]); }
+      for (const run of [...source, ...support, ...holes]) { cuts.add(run.start); cuts.add(run.end); }
+      for (const run of [...owned, ...boundary]) { cuts.add(run[0]); cuts.add(run[1]); }
+      const points = [...cuts].sort((a, b) => a - b), runs = [], trace = [];
+      const decide = start => {
+        const owners = new Set(source.filter(run => run.start <= start && start < run.end).map(run => run.owner));
+        if (![...owners].some(owner => targetByOwner.has(owner))) return {reason: 'no-target-source-domain'};
+        if (owned.some(run => run[0] <= start && start < run[1])) return {reason: 'already_owned_cells'};
+        if (boundary.some(run => run[0] <= start && start < run[1])) return {reason: 'boundary_cells'};
+        if (owners.size !== 1) return {reason: 'ambiguous_owner_cells'};
+        const owner = [...owners][0];
+        if (holes.some(run => run.owner === owner && run.start <= start && start < run.end))
+          return {reason: 'territorial_exclusion_cells'};
+        const activeMembers = new Set(source.filter(run => run.owner === owner && run.start <= start && start < run.end).map(run => run.source_id));
+        if (!support.some(run => run.owner === owner && activeMembers.has(run.source_id) && run.start <= start && start < run.end))
+          return {reason: 'unsupported_coverage_cells'};
+        return {reason: 'assigned_cells', owner};
+      };
+      for (let i = 0; i + 1 < points.length; i++) {
+        const start = points[i], end = points[i + 1], decision = decide(start), count = end - start;
+        const request = (requested.get(y) ?? []).find(run => run[0] <= start && start < run[1]);
+        if (request) {
+          const reason = decision.reason === 'assigned_cells' && decision.owner !== request[2]
+            ? 'source-target-owner-mismatch' : decision.reason;
+          const previous = trace.at(-1);
+          if (previous && previous[1] === start && previous[2] === request[2] && previous[3] === reason) previous[1] = end;
+          else trace.push([start, end, request[2], reason]);
+        }
+        if (decision.reason === 'no-target-source-domain') continue;
+        if (decision.reason !== 'assigned_cells') { counts[decision.reason] += count; continue; }
+        const owner = decision.owner, target = targetByOwner.get(owner);
+        const previous = runs.at(-1);
+        if (previous && previous[1] === start && previous[2] === owner) previous[1] = end;
+        else runs.push([start, end, owner]);
+        counts.assigned_cells += count; perTarget.set(target.id, perTarget.get(target.id) + count);
+      }
+      if (runs.length) rows.push({y, runs});
+      if (trace.length) diagnostic.push({y, runs: trace});
+    }
+    return {rows, ...counts, removed_cells: 0, reassigned_cells: 0,
+      targets: targets.map(target => ({...target, native_cells: perTarget.get(target.id)})),
+      ...(diagnosticRows === undefined ? {} : {diagnostic_rows: diagnostic})};
+  };
+  const result=evaluate(coverage,diagnosticRows);
+  if (coverageFeatureGroups === undefined) return result;
+  // Drop the combined mask before sequential class scans; no cross-call state.
+  coverage=null;
+  result.coverage_groups=[];
+  for (const features of coverageFeatureGroups)
+    result.coverage_groups.push(evaluate(scanCoverage(features),undefined));
+  return result;
 }
 
 // Private exact-witness arithmetic has no shared mutable policy state.

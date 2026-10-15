@@ -1,5 +1,5 @@
 import {nativeRuntimeIndex} from './native-grid.js';
-export {nativeRuntimeIndex,polygonParts,nativeOnlyComponent,deriveSourceTargetNativeDelta} from './native-grid.js';
+export {nativeRuntimeIndex} from './native-grid.js';
 // Native geometry input for location ownership. Camera projection is separate;
 // this adapter does not change geographic facts or stable source identities.
 import {compileNativeOwnership} from '../scripts/native-ownership/compile-native-ownership.mjs';

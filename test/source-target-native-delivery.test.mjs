@@ -1,7 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {deriveSourceTargetNativeDelta} from '../scripts/additive-gap-repair.mjs';
-import {nativeRowLatitudes} from '../src/native-grid.js';
+import {deriveSourceTargetNativeDelta,nativeRowLatitudes} from '../src/native-grid.js';
 const polygon = (left, right) => ({type:'Polygon', coordinates:[[[left,-40],[right,-40],[right,40],[left,40],[left,-40]]]});
 const feature = (id, pixelIndex, geometry) => ({id,pixelIndex,geometry});
 function inputs() {
