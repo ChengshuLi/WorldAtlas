@@ -1018,7 +1018,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
     'General physical conflict qualification requires explicit territorial exclusions');
   }
   const bounds=selected.flatMap(target=>coordinateBounds(datedCentres.some(p=>p.source_id===target.id)
-   ?target.base_geometry:target.coverage_geometry));
+   ?originals.get(target.id).geometry:target.coverage_geometry));
   const intersects=(a,b)=>a[0]<=b[2]&&b[0]<=a[2]&&a[1]<=b[3]&&b[1]<=a[3];
   const sourceFeatures=product.features.filter(feature=>coordinateBounds(feature.geometry).some(part=>bounds.some(box=>intersects(part,box))))
    .map(feature=>{const id=family.source_id+':'+feature.properties.shapeID;
