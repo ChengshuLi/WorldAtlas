@@ -1,0 +1,848 @@
+{
+  "version": 1,
+  "issue": 1935,
+  "lane": "engineering",
+  "worker_id": "01a13bc1-4be7-7458-80e5-955cb1d6a00c",
+  "subject_ids": [
+    "gb:MMR:ADM3:66882298B30308301468052",
+    "gb:MMR:ADM3:66882298B86598910616989",
+    "gb:VNM:ADM2:81297802B11536853186467",
+    "gb:VNM:ADM2:81297802B1284717956892",
+    "gb:VNM:ADM2:81297802B35904575630157",
+    "gb:VNM:ADM2:81297802B37103290877054",
+    "gb:VNM:ADM2:81297802B55643895945103",
+    "gb:VNM:ADM2:81297802B69562638547328"
+  ],
+  "subject_ids_sha256": "f7eaa8883dbdab294c47f14f95f9e198a8d498746c392fa5f354286f445c567f",
+  "baseline": {
+    "commit": "73edb1d13f416266930327e559296fcc17f90c02",
+    "files": [
+      {
+        "path": "data/ownership-selection.json",
+        "bytes": 1567,
+        "sha256": "0a9cc770af514ad9972b3d6d33a35a38c782552a21f24f544f80bcae32a8d02c",
+        "hash_kind": "file-bytes",
+        "role": "accepted-selected-baseline"
+      },
+      {
+        "path": ".github/package-inputs.json",
+        "bytes": 120070,
+        "sha256": "ea264581c1cdd1917c028f9e107b95692b4410544da4ec43c3872f2b69b18c0e",
+        "hash_kind": "file-bytes",
+        "role": "accepted-selected-baseline"
+      },
+      {
+        "path": "coordination/engineering/shared-country-repairs-20261014/delivery/selected-ledger.json",
+        "bytes": 2423010,
+        "sha256": "ad7e7d2a8bfa60b8d3b8820a8f3be7970e6a768cc6fe990ceba353948752ecf0",
+        "hash_kind": "file-bytes",
+        "role": "accepted-selected-baseline"
+      },
+      {
+        "path": "coordination/engineering/shared-country-repairs-20261014/delivery/authority-registry.json",
+        "bytes": 54841,
+        "sha256": "bcf388a577b8e72f16fe735e80f3b1f706bfe6ce9826417183d5381bd6a70e14",
+        "hash_kind": "file-bytes",
+        "role": "accepted-selected-baseline"
+      }
+    ],
+    "pins": {
+      "baseline_selector": "0a9cc770af514ad9972b3d6d33a35a38c782552a21f24f544f80bcae32a8d02c",
+      "baseline_package_inputs": "ea264581c1cdd1917c028f9e107b95692b4410544da4ec43c3872f2b69b18c0e",
+      "baseline_selected_ledger": "ad7e7d2a8bfa60b8d3b8820a8f3be7970e6a768cc6fe990ceba353948752ecf0",
+      "baseline_authority_registry": "bcf388a577b8e72f16fe735e80f3b1f706bfe6ce9826417183d5381bd6a70e14"
+    },
+    "pin_files": {
+      "baseline_selector": "data/ownership-selection.json",
+      "baseline_package_inputs": ".github/package-inputs.json",
+      "baseline_selected_ledger": "coordination/engineering/shared-country-repairs-20261014/delivery/selected-ledger.json",
+      "baseline_authority_registry": "coordination/engineering/shared-country-repairs-20261014/delivery/authority-registry.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "tanintharyi6",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/5aa5fd41f4f5381cecd90fd40063bde9ac8089bc/coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/tanintharyi6-authority-001/constructor-result.json",
+      "role": "Retained complete constructor and unchanged original source/native authority",
+      "vintage": "5aa5fd41f4f5381cecd90fd40063bde9ac8089bc",
+      "retrieved_at": "2026-10-15T00:52:29.374584+00:00",
+      "retrieval_note": "Local immutable Git metadata read only. Original upstream acquisition remains in source evidence.",
+      "license": {
+        "status": "unknown",
+        "terms": "Underlying original source terms and uncertainties remain unchanged; no new license determination."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Complete ordinary body OID 3dc2ac5729ca1ca3db6815b6ad512433135daf31; exact quartet pins in original_authorities.",
+      "limit": "Retained qualification does not establish selected native current ownership, country reference completion, legal boundary or release approval.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "kawthoung3718",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/1273586d3232e85a68f264e1ac95602a771543d0/coordination/engineering/myanmar-vietnam-current-cells-20261015/kawthoung-contract-repair/authority-001/constructor-result.json",
+      "role": "Retained complete constructor and unchanged original source/native authority",
+      "vintage": "1273586d3232e85a68f264e1ac95602a771543d0",
+      "retrieved_at": "2026-10-15T00:52:29.374584+00:00",
+      "retrieval_note": "Corrected qualification retained by immutable local Git read; historical prior quartet/transport status retained separately.",
+      "license": {
+        "status": "unknown",
+        "terms": "Underlying original source terms and uncertainties remain unchanged; no new license determination."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Read complete corrected constructor OID 7b81c6cd503b57a493ec74b9177f3a08ed9a5ba9; corrected source469433d7a8c5515e9dfc59b64852e384efba93e1:coordination/engineering/myanmar-vietnam-current-cells-20261015/kawthoung-contract-repair/source-evidence.json; original native patch b1301fa07270bcf0d91be48a6d49445c307562cf unchanged. Actual observation pinned in original_authorities.",
+      "limit": "Retained qualification does not establish selected native current ownership, country reference completion, legal boundary or release approval.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "quephong49",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/f63792b84bb34c029fda175b9411d840cd62992d/coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/que-phong/authority/constructor-result.json",
+      "role": "Retained complete constructor and unchanged original source/native authority",
+      "vintage": "f63792b84bb34c029fda175b9411d840cd62992d",
+      "retrieved_at": "2026-10-15T00:52:29.374584+00:00",
+      "retrieval_note": "Local immutable Git metadata read only. Original upstream acquisition remains in source evidence.",
+      "license": {
+        "status": "unknown",
+        "terms": "Underlying original source terms and uncertainties remain unchanged; no new license determination."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Complete ordinary body OID 9dfd653c614dae235e095ca3a3d16c6afe6b9d79; exact quartet pins in original_authorities.",
+      "limit": "Retained qualification does not establish selected native current ownership, country reference completion, legal boundary or release approval.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "inland295",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/f5920a2c5b2edf62c32a4b59461442ed82364f72/coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next557/inland295/authority/constructor-result.json",
+      "role": "Retained complete constructor and unchanged original source/native authority",
+      "vintage": "f5920a2c5b2edf62c32a4b59461442ed82364f72",
+      "retrieved_at": "2026-10-15T00:52:29.374584+00:00",
+      "retrieval_note": "Local immutable Git metadata read only. Original upstream acquisition remains in source evidence.",
+      "license": {
+        "status": "unknown",
+        "terms": "Underlying original source terms and uncertainties remain unchanged; no new license determination."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Complete ordinary body OID 53042d775add4ff89430709e480063344b07fc38; exact quartet pins in original_authorities.",
+      "limit": "Retained qualification does not establish selected native current ownership, country reference completion, legal boundary or release approval.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "mongcai262",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/110674c559b0c5f8d8b56db7c31f11653c291988/coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next557/mongcai262/authority/constructor-result.json",
+      "role": "Retained complete constructor and unchanged original source/native authority",
+      "vintage": "110674c559b0c5f8d8b56db7c31f11653c291988",
+      "retrieved_at": "2026-10-15T00:52:29.374584+00:00",
+      "retrieval_note": "Local immutable Git metadata read only. Original upstream acquisition remains in source evidence.",
+      "license": {
+        "status": "unknown",
+        "terms": "Underlying original source terms and uncertainties remain unchanged; no new license determination."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Complete ordinary body OID df25d4ab04e84af8097281061843486243417303; exact quartet pins in original_authorities.",
+      "limit": "Retained qualification does not establish selected native current ownership, country reference completion, legal boundary or release approval.",
+      "temporal_status": "reference"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "coordination/engineering/myanmar-vietnam-current-cells-20261015/composition/authority-registry.json",
+      "bytes": 59737,
+      "sha256": "8db91d11509bff489386e725f2c6adecf4fc69c41532b57f88e9080682ddd046",
+      "hash_kind": "file-bytes",
+      "role": "actual-composition-output"
+    },
+    {
+      "path": "coordination/engineering/myanmar-vietnam-current-cells-20261015/composition/selected-ledger.json",
+      "bytes": 2515585,
+      "sha256": "06d6810daa7377897f14f330df79c28b94dbedf0ce88427ba2589948b0e4aaee",
+      "hash_kind": "file-bytes",
+      "role": "actual-composition-output"
+    },
+    {
+      "path": "coordination/engineering/myanmar-vietnam-current-cells-20261015/composition/patch.json",
+      "bytes": 775818,
+      "sha256": "6b239273bbf9eea29f06fb5f900e6263068c2eae0ec9af771f82c6ff04856c84",
+      "hash_kind": "file-bytes",
+      "role": "actual-composition-output"
+    },
+    {
+      "path": "coordination/engineering/myanmar-vietnam-current-cells-20261015/composition/runtime-envelope.json",
+      "bytes": 1385,
+      "sha256": "b709697d856579986ed9733f1593cb5c3d3d9d9ff66c4d2888b9a71b3334d369",
+      "hash_kind": "file-bytes",
+      "role": "actual-composition-output"
+    },
+    {
+      "path": "coordination/engineering/myanmar-vietnam-current-cells-20261015/ownership-selection-v2.json",
+      "bytes": 3448,
+      "sha256": "3d43247ec6aae7543dcc903fb9b94469316038f86c40a431ad4bc6d49d22ceeb",
+      "hash_kind": "file-bytes",
+      "role": "canonical-selected-delivery-output"
+    },
+    {
+      "path": "coordination/engineering/myanmar-vietnam-current-cells-20261015/selected-delivery-expectations.json",
+      "bytes": 121865,
+      "sha256": "d3fa40f3d9a0912b7cc611f6a5c375bce22f2b4d5818229563f3ff512e72af13",
+      "hash_kind": "file-bytes",
+      "role": "canonical-selected-delivery-output"
+    },
+    {
+      "path": "data/ownership-selection.json",
+      "bytes": 1574,
+      "sha256": "f28a419836f741e7102850ed0897d37fbe9640bf91792f45294746b9b8639a2e",
+      "hash_kind": "file-bytes",
+      "role": "canonical-selected-delivery-output"
+    },
+    {
+      "path": ".github/package-inputs.json",
+      "bytes": 124045,
+      "sha256": "fac8bea6c67effe66e306de46746b74cba7e8fb6fc4d53ffc80cfd79e02bf89b",
+      "hash_kind": "file-bytes",
+      "role": "canonical-selected-delivery-output"
+    },
+    {
+      "path": "coordination/engineering/myanmar-vietnam-current-cells-20261015/finalize-config.json",
+      "bytes": 2859,
+      "sha256": "592a87714e07c3dee04aabd9cd6851691c16ff077091ae2a75e9b11f81cb06e5",
+      "hash_kind": "file-bytes",
+      "role": "canonical-selected-delivery-output"
+    },
+    {
+      "path": "coordination/engineering/myanmar-vietnam-current-cells-20261015/compose-config.json",
+      "bytes": 7839,
+      "sha256": "ae8315d6affdacff4106cdd29910cb7e4c5f472a48f9f2cf3e2a109d14d77e1a",
+      "hash_kind": "file-bytes",
+      "role": "canonical-selected-delivery-output"
+    },
+    {
+      "path": "coordination/engineering/myanmar-vietnam-current-cells-20261015/delivery-observation.json",
+      "bytes": 1884,
+      "sha256": "c9f2663132d2204a126e4dd861e4b6951f777f9b94e9971ad9fa272a09d25060",
+      "hash_kind": "file-bytes",
+      "role": "canonical-selected-delivery-output"
+    }
+  ],
+  "methods": [
+    {
+      "id": "retained-five-authority-delivery",
+      "kind": "code",
+      "description": "Reuse five unchanged original complete constructor quartets and prior independent reviews for eight targets/4330 cells. Use accepted existing compose/finalize methods; new products remain pending.",
+      "software": "Accepted WorldAtlas scripts/prepare-delivery-handoff.mjs at73edb1d13f416266930327e559296fcc17f90c02; exact actual configs and outputs retained.",
+      "units": "whole-file bytes, SHA-256, immutable Git commit/OID and exact component identities"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "cumulative-native-cells",
+      "value": 71339,
+      "unit": "native cells",
+      "vintage": "current",
+      "evaluation_commit": "73edb1d13f416266930327e559296fcc17f90c02",
+      "input_sha256": "6b239273bbf9eea29f06fb5f900e6263068c2eae0ec9af771f82c6ff04856c84"
+    },
+    {
+      "id": "composed-ledger-rows",
+      "value": 270,
+      "unit": "ledger rows",
+      "vintage": "current",
+      "evaluation_commit": "73edb1d13f416266930327e559296fcc17f90c02",
+      "input_sha256": "06d6810daa7377897f14f330df79c28b94dbedf0ce88427ba2589948b0e4aaee"
+    },
+    {
+      "id": "composed-authority-entries",
+      "value": 62,
+      "unit": "authority entries",
+      "vintage": "current",
+      "evaluation_commit": "73edb1d13f416266930327e559296fcc17f90c02",
+      "input_sha256": "8db91d11509bff489386e725f2c6adecf4fc69c41532b57f88e9080682ddd046"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "cumulative-native-cells",
+      "value": 71339,
+      "unit": "native cells"
+    },
+    {
+      "metric_id": "composed-ledger-rows",
+      "value": 270,
+      "unit": "ledger rows"
+    },
+    {
+      "metric_id": "composed-authority-entries",
+      "value": 62,
+      "unit": "authority entries"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "cumulative-native-cells",
+      "path": "coordination/engineering/myanmar-vietnam-current-cells-20261015/delivery-observation.json",
+      "json_pointer": "/cumulative_native_cells"
+    },
+    {
+      "metric_id": "composed-ledger-rows",
+      "path": "coordination/engineering/myanmar-vietnam-current-cells-20261015/delivery-observation.json",
+      "json_pointer": "/ledger_rows"
+    },
+    {
+      "metric_id": "composed-authority-entries",
+      "path": "coordination/engineering/myanmar-vietnam-current-cells-20261015/delivery-observation.json",
+      "json_pointer": "/authority_entries"
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "Five retained authority groups composed to71339 cumulative cells,62 authorities and270ledger rows atfb726f; actual stock finalizer succeeded and canonical sidecar/expectations adopted. Selected current-owner/class/location/conservation/emitted checks, exact-head review and integration remain pending; new accepted credit0.",
+      "status": "unresolved",
+      "source_ids": [
+        "tanintharyi6",
+        "kawthoung3718",
+        "quephong49",
+        "inland295",
+        "mongcai262"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "partial",
+    "implementation": "proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "node scripts/prepare-delivery-handoff.mjs native-authority coordination/engineering/myanmar-vietnam-current-cells-20261015/kawthoung-contract-repair/native-authority-config.json coordination/engineering/myanmar-vietnam-current-cells-20261015/kawthoung-contract-repair/authority-001",
+    "node scripts/prepare-delivery-handoff.mjs compose coordination/engineering/myanmar-vietnam-current-cells-20261015/compose-config.json coordination/engineering/myanmar-vietnam-current-cells-20261015/composition",
+    "node scripts/prepare-delivery-handoff.mjs finalize coordination/engineering/myanmar-vietnam-current-cells-20261015/finalize-config.json .cache/delivery-handoff/4330-final-001"
+  ],
+  "claims": {
+    "proposed_cells": 4330,
+    "source_groups": 5,
+    "receiving_components": 8,
+    "new_accepted_cells": 0,
+    "current_owner_zero": false,
+    "accepted_baseline_cells": 67009,
+    "cumulative_proposed_cells": 71339,
+    "status": "finalized-selected-consumer-pending",
+    "composed_cells": 71339
+  },
+  "original_country_issues": [
+    1880,
+    1881
+  ],
+  "original_authorities": [
+    {
+      "id": "tanintharyi6",
+      "original_quartet": {
+        "ledger": {
+          "bytes": 15463,
+          "commit": "5aa5fd41f4f5381cecd90fd40063bde9ac8089bc",
+          "git_blob_oid": "3dc2ac5729ca1ca3db6815b6ad512433135daf31",
+          "mode": "100644",
+          "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/tanintharyi6-authority-001/constructor-result.json",
+          "sha256": "134f193ed66d83246415bca5316d0d83861a3339ddbd0864c9820682e8fb703b"
+        },
+        "native_patch": {
+          "bytes": 231,
+          "commit": "b5a3893944d84f462cfe8173d6fd590825473b4d",
+          "git_blob_oid": "b76ea96991ecc304d23ff2fcab63e64b1daf4384",
+          "mode": "100644",
+          "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/tanintharyi6-source-preparation/candidate-native-patch.json",
+          "sha256": "027c7060650a0975c7ccb15e854ae916d059ca279b7ca5f0197ed6d0b4313e0b"
+        },
+        "rule_preimage": {
+          "bytes": 821,
+          "commit": "5aa5fd41f4f5381cecd90fd40063bde9ac8089bc",
+          "git_blob_oid": "a10baf093799f24188a192bd61d1392309da1384",
+          "mode": "100644",
+          "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/tanintharyi6-authority-001/original-rule-preimage.json",
+          "sha256": "df1fa48c7cf8adda34812812a005957aa71b0b39e1645575419e1e4878baf23d"
+        },
+        "source_authority": {
+          "bytes": 824,
+          "commit": "5aa5fd41f4f5381cecd90fd40063bde9ac8089bc",
+          "git_blob_oid": "55ceee3778cd9e4e3cb4692ccaf0bcbb79045d27",
+          "mode": "100644",
+          "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/tanintharyi6-authority-001/authority-binding.json",
+          "sha256": "94ea39e9befaeeee9eb2258b384f45997b02228ba298618b34b6d3171b41945a"
+        }
+      },
+      "source_evidence": {
+        "commit": "b5a3893944d84f462cfe8173d6fd590825473b4d",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/tanintharyi6-source-preparation/source-evidence.json"
+      },
+      "subjects": [
+        {
+          "target_id": "gb:MMR:ADM3:66882298B30308301468052",
+          "pixelIndex": 30149,
+          "component_id": "source-target:a2e4fc9a73e9b59fb4ba92360774f2a9fea5215a28eeb2a0db0ca23e7bd09ff5",
+          "native_cells": 6,
+          "disposition": "assigned"
+        }
+      ],
+      "review_and_operating": {
+        "actual_operating_observations": {
+          "admission.json": {
+            "bytes": 364,
+            "commit": "5585b47a083e11b060b186db17a8420a0cf49c17",
+            "git_blob_oid": "6bae032b44113880dc002468051e22d4e29dec93",
+            "mode": "100644",
+            "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/tanintharyi6-native-observation-001/admission.json",
+            "sha256": "caa34fccf5c3d8fdbe9eb31565b4ed7c5310f62eb3c032629408a3326a4d1165"
+          },
+          "stderr.txt": {
+            "bytes": 777,
+            "commit": "5585b47a083e11b060b186db17a8420a0cf49c17",
+            "git_blob_oid": "4c17710b8f8cd77ef688419dc95d8f9e6c59c1a2",
+            "mode": "100644",
+            "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/tanintharyi6-native-observation-001/stderr.txt",
+            "sha256": "1d252f64ef031fc56ff39fb1d05979b95d958195b394172c5d6a3cc9b089c6a7"
+          },
+          "stdout.txt": {
+            "bytes": 640,
+            "commit": "5585b47a083e11b060b186db17a8420a0cf49c17",
+            "git_blob_oid": "a005e67bac8fcf364e389ef4b5f57b661714922b",
+            "mode": "100644",
+            "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/tanintharyi6-native-observation-001/stdout.txt",
+            "sha256": "42eb02faacefc50bcab06b1e04215ecad7f1fc5ab67a9291220d8a3f652eb5df"
+          },
+          "terminal.json": {
+            "bytes": 166,
+            "commit": "5585b47a083e11b060b186db17a8420a0cf49c17",
+            "git_blob_oid": "a15c1b497477cc2869da772a9d10ade2a2c7f0b6",
+            "mode": "100644",
+            "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/tanintharyi6-native-observation-001/terminal.json",
+            "sha256": "74f4e65bcabe9bff34d205677af4939c7099f16351542273d5e769ad3703f374"
+          }
+        },
+        "actual_result_review": {
+          "bytes": 2816,
+          "commit": "5585b47a083e11b060b186db17a8420a0cf49c17",
+          "git_blob_oid": "c5f9d611d4070672b7710fc61073f7657936b201",
+          "mode": "100644",
+          "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/tanintharyi6-native-observation-001/independent-result-review.json",
+          "sha256": "aea72de5853bb0b63f9e51da68409e366b60d646b156ac644e7e3ad50dfd2d84"
+        },
+        "group_index": 0,
+        "id": "tanintharyi6",
+        "review_limits": "Retain the complete original review and operating observations by reference. Constructor qualification is not current-owner-zero, final selected-output acceptance, whole-parent clearance or legal boundary authority."
+      }
+    },
+    {
+      "id": "kawthoung3718",
+      "original_quartet": {
+        "ledger": {
+          "commit": "1273586d3232e85a68f264e1ac95602a771543d0",
+          "path": "coordination/engineering/myanmar-vietnam-current-cells-20261015/kawthoung-contract-repair/authority-001/constructor-result.json",
+          "git_blob_oid": "7b81c6cd503b57a493ec74b9177f3a08ed9a5ba9",
+          "mode": "100644",
+          "bytes": 43336,
+          "sha256": "f837207916cf437f75971368656fae59a08242adcc4220a968f835ae7f637c0e"
+        },
+        "native_patch": {
+          "bytes": 36641,
+          "commit": "b1301fa07270bcf0d91be48a6d49445c307562cf",
+          "git_blob_oid": "d3c0141b71d95bc56b0469140a7b393e44307993",
+          "mode": "100644",
+          "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/coastal-candidate-cell-preparation-001/kawthoung/parent-sid-narrow/candidate-native-patch.json",
+          "sha256": "a34b7ac2663f8d2b104d3dbdcabe7f98c823aeb0394cc9d7b1a8224ac9d8d30e"
+        },
+        "rule_preimage": {
+          "commit": "1273586d3232e85a68f264e1ac95602a771543d0",
+          "path": "coordination/engineering/myanmar-vietnam-current-cells-20261015/kawthoung-contract-repair/authority-001/original-rule-preimage.json",
+          "git_blob_oid": "9fc56027ff40f9d3e774da9614e5bdddcc94647a",
+          "mode": "100644",
+          "bytes": 831,
+          "sha256": "b87202ede6b08c0dc108db64ca6a08d9ef1485c1a3284a54ddba2c16db53a710"
+        },
+        "source_authority": {
+          "commit": "1273586d3232e85a68f264e1ac95602a771543d0",
+          "path": "coordination/engineering/myanmar-vietnam-current-cells-20261015/kawthoung-contract-repair/authority-001/authority-binding.json",
+          "git_blob_oid": "20d0994e2c69485f19c1ea77da3a48d76c07edf4",
+          "mode": "100644",
+          "bytes": 834,
+          "sha256": "d5cf4182c0b1fccf1c8208d8895a61807453e82a8261efdc29d3e9ec857eeb5b"
+        }
+      },
+      "source_evidence": {
+        "commit": "469433d7a8c5515e9dfc59b64852e384efba93e1",
+        "path": "coordination/engineering/myanmar-vietnam-current-cells-20261015/kawthoung-contract-repair/source-evidence.json"
+      },
+      "subjects": [
+        {
+          "target_id": "gb:MMR:ADM3:66882298B86598910616989",
+          "pixelIndex": 30361,
+          "component_id": "source-target:a7112a8cb1e004fdbcc35602d8d3862332523574c0118ede1e92bedf89833a8d",
+          "native_cells": 3718,
+          "disposition": "assigned"
+        }
+      ],
+      "historical_authority_quartet": {
+        "ledger": {
+          "bytes": 43380,
+          "commit": "8d7ece7395e65a72ed07fdfc3edf68d3af0828d4",
+          "git_blob_oid": "1fd381cf21141e880012accc27521085a434e7b5",
+          "mode": "100644",
+          "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/kawthoung3718-authority-001/constructor-result.json",
+          "sha256": "aa8e27ef9112d7d0bd8c52a0599d878f09ac90a5f4f8d8cb59620ef0987799b6"
+        },
+        "native_patch": {
+          "bytes": 36641,
+          "commit": "b1301fa07270bcf0d91be48a6d49445c307562cf",
+          "git_blob_oid": "d3c0141b71d95bc56b0469140a7b393e44307993",
+          "mode": "100644",
+          "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/coastal-candidate-cell-preparation-001/kawthoung/parent-sid-narrow/candidate-native-patch.json",
+          "sha256": "a34b7ac2663f8d2b104d3dbdcabe7f98c823aeb0394cc9d7b1a8224ac9d8d30e"
+        },
+        "rule_preimage": {
+          "bytes": 875,
+          "commit": "8d7ece7395e65a72ed07fdfc3edf68d3af0828d4",
+          "git_blob_oid": "ca1e05b68dbe763d5b69990d92ed4f24698f457e",
+          "mode": "100644",
+          "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/kawthoung3718-authority-001/original-rule-preimage.json",
+          "sha256": "8aee9ee2a75e942a3bfc75fbfd45983b4f2d3d4a38a67c7c79f4a252019db151"
+        },
+        "source_authority": {
+          "bytes": 878,
+          "commit": "8d7ece7395e65a72ed07fdfc3edf68d3af0828d4",
+          "git_blob_oid": "652c3864769b1308cf4f9d2a31ac79ab2a88b831",
+          "mode": "100644",
+          "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/kawthoung3718-authority-001/authority-binding.json",
+          "sha256": "4ccb913cc1391bd65b38512aefff907d323a6eaaf987176e7392260aa7526a78"
+        }
+      },
+      "historical_review_and_operating": {
+        "actual_operating_observations": {
+          "admission.json": {
+            "bytes": 364,
+            "commit": "5585b47a083e11b060b186db17a8420a0cf49c17",
+            "git_blob_oid": "bdbc9b71e6b7e91cc059e8d0c395557f9b2e7fdd",
+            "mode": "100644",
+            "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/kawthoung3718-native-observation-001/admission.json",
+            "sha256": "ed733f4fd7ffd4fcc35a2fdeaf46e9dbda2c01bb8ccecd00b1a6d970d4e206d7"
+          },
+          "stderr.txt": {
+            "bytes": 777,
+            "commit": "5585b47a083e11b060b186db17a8420a0cf49c17",
+            "git_blob_oid": "168912d48428d2eed56d178a4100b09e922ad21a",
+            "mode": "100644",
+            "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/kawthoung3718-native-observation-001/stderr.txt",
+            "sha256": "6a0dd85f087b0a9f201936ad382b94f5e95987859207670cda0ace97ab485efe"
+          },
+          "stdout.txt": {
+            "bytes": 644,
+            "commit": "5585b47a083e11b060b186db17a8420a0cf49c17",
+            "git_blob_oid": "cef9f3b604dce57c08d9ecd3432573d788c7b52b",
+            "mode": "100644",
+            "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/kawthoung3718-native-observation-001/stdout.txt",
+            "sha256": "4cda1d4b07934937493a5790d2671c94aeecfab402bf862e0a5a6f34c1078efc"
+          },
+          "terminal.json": {
+            "bytes": 592,
+            "commit": "5585b47a083e11b060b186db17a8420a0cf49c17",
+            "git_blob_oid": "8bc52e5c3e1c94be151db2772d24cd918740d505",
+            "mode": "100644",
+            "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/kawthoung3718-native-observation-001/terminal.json",
+            "sha256": "9301a3ac90b06b8d4a05ad4aa91e638be7fce8b468647d42f51694c6a3e1a3c9"
+          }
+        },
+        "actual_result_review": {
+          "bytes": 4242,
+          "commit": "5585b47a083e11b060b186db17a8420a0cf49c17",
+          "git_blob_oid": "166178b197e5748636a40364acc76eaa89b994f4",
+          "mode": "100644",
+          "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/kawthoung3718-native-observation-001/independent-result-review.json",
+          "sha256": "17bf12bc887b3c8d70d2948cf4adc18e991dfbf016daaf0501e0b68b3ee3929e"
+        },
+        "group_index": 1,
+        "id": "kawthoung3718",
+        "review_limits": "Retain the complete original review and operating observations by reference. Constructor qualification is not current-owner-zero, final selected-output acceptance, whole-parent clearance or legal boundary authority."
+      },
+      "review_and_operating": {
+        "actual_operating_observation": {
+          "commit": "1273586d3232e85a68f264e1ac95602a771543d0",
+          "path": "coordination/engineering/myanmar-vietnam-current-cells-20261015/kawthoung-contract-repair/operating-observation.json",
+          "git_blob_oid": "ff8c75ad1d324fc34e36f642ab9811c5a3b5df02",
+          "mode": "100644",
+          "bytes": 642,
+          "sha256": "f59eddaa8d31df99f1735190a2c7df688f3023451f02448f50e5c931c5d6e360"
+        },
+        "actual_execution_time": {
+          "commit": "1273586d3232e85a68f264e1ac95602a771543d0",
+          "path": "coordination/engineering/myanmar-vietnam-current-cells-20261015/kawthoung-contract-repair/execution-time.txt",
+          "git_blob_oid": "19d2bf4bf02302d2141439df7abc69afa236e768",
+          "mode": "100644",
+          "bytes": 777,
+          "sha256": "b6c257c892feeb4e6a60e12d598f92fd446043e5fe8261ada87d4b3f26b1c485"
+        },
+        "actual_result_review": {
+          "reviewer": "/root/authority_binding_review",
+          "result_commit": "1273586d3232e85a68f264e1ac95602a771543d0",
+          "result_sha256": "f837207916cf437f75971368656fae59a08242adcc4220a968f835ae7f637c0e",
+          "status": "accepted-with-limits-new-original-quartet-ready-for-composition"
+        },
+        "numeric_exit_status": 0,
+        "limits": "Current corrected stock qualification has known exit0; earlier numeric transport unknown is historical only. Existing whole physical375queries/454residuals and country-referenceUNKNOWN persist.",
+        "normalized_node_lifetime_peak_rss_bytes": 219709440,
+        "external_darwin_peak_rss_bytes": 224641024
+      }
+    },
+    {
+      "id": "quephong49",
+      "original_quartet": {
+        "ledger": {
+          "bytes": 5056,
+          "commit": "f63792b84bb34c029fda175b9411d840cd62992d",
+          "git_blob_oid": "9dfd653c614dae235e095ca3a3d16c6afe6b9d79",
+          "mode": "100644",
+          "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/que-phong/authority/constructor-result.json",
+          "sha256": "8811fe000867f53cc714321c7c286c9e504ad042af0d66987c903b23c710fb38"
+        },
+        "native_patch": {
+          "bytes": 2652,
+          "commit": "2855587c4ae012b64a546f8c4c9a915b3021cd3e",
+          "git_blob_oid": "a028070229d4f9cb3de8ab3789cbdd68e41df1ed",
+          "mode": "100644",
+          "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/que-phong/native-patch.json",
+          "sha256": "a8bd2263d1a2edb677feb2871995fe646ffcf97584925a795837950a78072b5d"
+        },
+        "rule_preimage": {
+          "bytes": 748,
+          "commit": "f63792b84bb34c029fda175b9411d840cd62992d",
+          "git_blob_oid": "525e680277ef7c6d56d62bbf0c46f211f9b75416",
+          "mode": "100644",
+          "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/que-phong/authority/original-rule-preimage.json",
+          "sha256": "090c4123404b1851d0588540043b2b1e68b48df5c1ed7ef081fe8d06cb3ccd7a"
+        },
+        "source_authority": {
+          "bytes": 751,
+          "commit": "f63792b84bb34c029fda175b9411d840cd62992d",
+          "git_blob_oid": "f40970eafd96d364aeef36b79f2d42202a109f24",
+          "mode": "100644",
+          "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/que-phong/authority/authority-binding.json",
+          "sha256": "8f82dcf4c713f9172832ff9ba570d159e3eec3494434e62c67a60000792f514c"
+        }
+      },
+      "source_evidence": {
+        "commit": "080dc9fd9954f7ce4780509e778a5a842474ce27",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/que-phong/source-evidence.json"
+      },
+      "subjects": [
+        {
+          "target_id": "gb:VNM:ADM2:81297802B37103290877054",
+          "pixelIndex": 48348,
+          "component_id": "source-target:08a80cb36cae129f48de36c3926e67ded2383c1e78fb47c069c3ed5445706b6e",
+          "native_cells": 49,
+          "disposition": "assigned"
+        }
+      ],
+      "review_and_operating": {
+        "actual_operating_observation": {
+          "bytes": 709,
+          "commit": "f63792b84bb34c029fda175b9411d840cd62992d",
+          "git_blob_oid": "32214f9a8040d12f23b4cb2bd8d75a38d1c7936a",
+          "mode": "100644",
+          "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/que-phong/authority/operating-observation.json",
+          "sha256": "fae581e325bc331ac4961a100c3f94a986baa9b745231cfaf9d652349ea1def3"
+        },
+        "actual_result_review": {
+          "bytes": 4269,
+          "commit": "f63792b84bb34c029fda175b9411d840cd62992d",
+          "git_blob_oid": "0b92d74960c5739cd8f0b72c7b360234bb490561",
+          "mode": "100644",
+          "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/que-phong/authority/independent-result-review.md",
+          "sha256": "c4ecbac70227c2fa41cd24101ef3a6a995b48886561fc023f4ddd1fd56c26c8c"
+        },
+        "group_index": 2,
+        "id": "quephong49",
+        "operating_limits": [
+          "Original source/physical producers are not replayed.",
+          "Constructor qualification is not actual current-owner-zero or final selected-output acceptance."
+        ],
+        "review_limits": "Retain the complete original review by reference; no source/physical/native predicate replay or repeated original input review. Current-owner-zero, cumulative conservation and selected-output acceptance remain pending."
+      }
+    },
+    {
+      "id": "inland295",
+      "original_quartet": {
+        "ledger": {
+          "bytes": 25376,
+          "commit": "f5920a2c5b2edf62c32a4b59461442ed82364f72",
+          "git_blob_oid": "53042d775add4ff89430709e480063344b07fc38",
+          "mode": "100644",
+          "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next557/inland295/authority/constructor-result.json",
+          "sha256": "d4d784dd767b4c9c41750cecf6c0e5bc4a0adb9eec04948b90ceabb5bcece13f"
+        },
+        "native_patch": {
+          "bytes": 6963,
+          "commit": "d7c0d03bc0fee59aa9e46ed2d171036faf3da63b",
+          "git_blob_oid": "1060e64ad63b85e85d4639213a57194cb3f3d76b",
+          "mode": "100644",
+          "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next557/inland295/native-patch.json",
+          "sha256": "f10398725cd4e4d7960f791efe6e89a35e75eee736ea1c7e89043226b206ccd4"
+        },
+        "rule_preimage": {
+          "bytes": 764,
+          "commit": "f5920a2c5b2edf62c32a4b59461442ed82364f72",
+          "git_blob_oid": "ec5493ee821e37089ed33a4089bb3d71cb5a76b1",
+          "mode": "100644",
+          "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next557/inland295/authority/original-rule-preimage.json",
+          "sha256": "a16ff4bb561e8fc4a75c2d600ec58dffef7ffa9f6fd4f9d17324a111b1e1c683"
+        },
+        "source_authority": {
+          "bytes": 767,
+          "commit": "f5920a2c5b2edf62c32a4b59461442ed82364f72",
+          "git_blob_oid": "f3f36dd656d0521c3e88b6ccc6ee691b6950a539",
+          "mode": "100644",
+          "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next557/inland295/authority/authority-binding.json",
+          "sha256": "6bbabaf99962cbd868240136e2784c91ff8ce90cf74295724710f709c5e247ca"
+        }
+      },
+      "source_evidence": {
+        "commit": "d7c0d03bc0fee59aa9e46ed2d171036faf3da63b",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next557/inland295/source-evidence.json"
+      },
+      "subjects": [
+        {
+          "target_id": "gb:VNM:ADM2:81297802B55643895945103",
+          "pixelIndex": 48479,
+          "component_id": "source-target:859c5d8d5d8a8bd274856b6e9d65dfe617569d09dd98d30bc19be3e5b7d46ccc",
+          "native_cells": 44,
+          "disposition": "assigned"
+        },
+        {
+          "target_id": "gb:VNM:ADM2:81297802B35904575630157",
+          "pixelIndex": 48336,
+          "component_id": "source-target:a6bbf5b8894ee26a9dbe57f1b01ccd688d9012756f828f14a9e39ced7a6a980c",
+          "native_cells": 49,
+          "disposition": "assigned"
+        },
+        {
+          "target_id": "gb:VNM:ADM2:81297802B11536853186467",
+          "pixelIndex": 48156,
+          "component_id": "source-target:c3d1ed09f8a6d50be7ad4cfcd9305a1289930a7b81a5dc9909d96193f6c73c64",
+          "native_cells": 72,
+          "disposition": "assigned"
+        },
+        {
+          "target_id": "gb:VNM:ADM2:81297802B1284717956892",
+          "pixelIndex": 48168,
+          "component_id": "source-target:ee13cb58db31635e1bf9b0309dfea4a5e728c58ebb0ad7a42d273f5589fe9cde",
+          "native_cells": 130,
+          "disposition": "assigned"
+        }
+      ],
+      "review_and_operating": {
+        "actual_operating_observation": {
+          "bytes": 567,
+          "commit": "f5920a2c5b2edf62c32a4b59461442ed82364f72",
+          "git_blob_oid": "c17e3bd56ba3359d059aa90705ce38cccfae029e",
+          "mode": "100644",
+          "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next557/inland295/authority/operating-observation.json",
+          "sha256": "7a20274a7bc98f109e6d0ff50274f015334f46faba8bc72fc58fabd5cc4001e6"
+        },
+        "actual_result_review": {
+          "bytes": 3805,
+          "commit": "f5920a2c5b2edf62c32a4b59461442ed82364f72",
+          "git_blob_oid": "460b72974044c5a403477135be00540c745f7b21",
+          "mode": "100644",
+          "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next557/inland295/authority/independent-result-review.md",
+          "sha256": "84a05cf43ef28f00b690693526d9515a9286b27a5c3761b4645601574b08c25c"
+        },
+        "group_index": 3,
+        "id": "inland295",
+        "operating_limits": [
+          "Original source/physical producers are not replayed.",
+          "Constructor qualification is not actual current-owner-zero or final selected-output acceptance."
+        ],
+        "review_limits": "Retain the complete original review by reference; no source/physical/native predicate replay or repeated original input review. Current-owner-zero, cumulative conservation and selected-output acceptance remain pending."
+      }
+    },
+    {
+      "id": "mongcai262",
+      "original_quartet": {
+        "ledger": {
+          "bytes": 6973,
+          "commit": "110674c559b0c5f8d8b56db7c31f11653c291988",
+          "git_blob_oid": "df25d4ab04e84af8097281061843486243417303",
+          "mode": "100644",
+          "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next557/mongcai262/authority/constructor-result.json",
+          "sha256": "b02e0d0e09fa7d749a171bcd283cd61b437e4294a1816360a4777e37914c660c"
+        },
+        "native_patch": {
+          "bytes": 3597,
+          "commit": "f5920a2c5b2edf62c32a4b59461442ed82364f72",
+          "git_blob_oid": "c7dae03db652f1e07d6a74e4a36b1bd3b9491ee4",
+          "mode": "100644",
+          "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next557/mongcai262/native-patch.json",
+          "sha256": "ac9bcc9464770a2ba325809d2610b56d51935d37f8d6e34680decddf9e3371ef"
+        },
+        "rule_preimage": {
+          "bytes": 766,
+          "commit": "110674c559b0c5f8d8b56db7c31f11653c291988",
+          "git_blob_oid": "bdf73f12dfd013025a7f2af22543b822605c6d0b",
+          "mode": "100644",
+          "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next557/mongcai262/authority/original-rule-preimage.json",
+          "sha256": "d011aeb3307a4afb90a899baa2b71a1e480ca842bca5f53280ccd5388fe964e6"
+        },
+        "source_authority": {
+          "bytes": 769,
+          "commit": "110674c559b0c5f8d8b56db7c31f11653c291988",
+          "git_blob_oid": "c08469da9f31761d8cca87b6bba25982dcf65896",
+          "mode": "100644",
+          "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next557/mongcai262/authority/authority-binding.json",
+          "sha256": "d3d699a45b8c8011f172fce4a8a2d095016889b4290c0115cf266f8101ccc1f9"
+        }
+      },
+      "source_evidence": {
+        "commit": "f5920a2c5b2edf62c32a4b59461442ed82364f72",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next557/mongcai262/source-evidence.json"
+      },
+      "subjects": [
+        {
+          "target_id": "gb:VNM:ADM2:81297802B69562638547328",
+          "pixelIndex": 48578,
+          "component_id": "source-target:7daed36a12133dd7c1dd1b6b29ee3d24506f5bc1ee3c7c112ecdce074745e305",
+          "native_cells": 262,
+          "disposition": "assigned"
+        }
+      ],
+      "review_and_operating": {
+        "actual_operating_observation": {
+          "bytes": 567,
+          "commit": "110674c559b0c5f8d8b56db7c31f11653c291988",
+          "git_blob_oid": "d2b80d5bde1673aba1c0b24e79b3a65193473c61",
+          "mode": "100644",
+          "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next557/mongcai262/authority/operating-observation.json",
+          "sha256": "d0fbcc5ee412599074bfaf565af0f274565375b048842ec9d56a1632998b059b"
+        },
+        "actual_result_review": {
+          "bytes": 4033,
+          "commit": "110674c559b0c5f8d8b56db7c31f11653c291988",
+          "git_blob_oid": "19338e39f098634ed7c4a879379fef0826ee12a1",
+          "mode": "100644",
+          "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next557/mongcai262/authority/independent-result-review.md",
+          "sha256": "7bcc7968a15e8fb9850b80b2b0311e95a21a7f41dcc19864060c83c096c80055"
+        },
+        "group_index": 4,
+        "id": "mongcai262",
+        "operating_limits": [
+          "Original source/physical producers are not replayed.",
+          "Constructor qualification is not actual current-owner-zero or final selected-output acceptance."
+        ],
+        "review_limits": "Original actual result review retained by its immutable locator. No review, qualification, source or physical/native operator replay. Current-owner-zero, cumulative conservation, selected output and final delivery acceptance remain pending."
+      }
+    }
+  ],
+  "limits": [
+    "Original source/geography/physical/native/witness/custody/license and operating limitations remain bound unchanged.",
+    "Myanmar country-reference status remains UNKNOWN. Corrected Kawthoung qualification numeric exit0 is known at1273586; prior transport-unknown is historical only. Retained375 physical queries/454 residual witnesses are not a whole-country or whole-parent certificate.",
+    "Tanintharyi50+5 held cells remain outside the6-cell patch. Bokpyin3616 refusal remains unchanged and outside this delivery.",
+    "All original Myanmar/Vietnam relative, source-conflict, border, parent and water holds remain held. No whole-parent/legal boundary, current government hierarchy, public release or publication approval is claimed.",
+    "No original producer, qualifier, constructor or original independent review is replayed. Actual changed composition outputs and final selected consumer require their normal reviews.",
+    "The earlier Mong Cai344 excluded-cell limit is historical and superseded by the current606-cell refinement context; it is not the current excluded total. Original unchanged review text is retained as historical custody, not silently rewritten."
+  ],
+  "composition_commit": "fb726f466d69f73b91ad12138397d627af612ae3"
+}
