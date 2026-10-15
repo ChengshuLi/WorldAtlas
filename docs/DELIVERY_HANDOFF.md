@@ -474,9 +474,16 @@ universal country classifier. Its complete IDN/MYS/PNG/TLS competitor-family
 roster and native grid remain fixed. A different scientific method requires
 separate review, rather than an arbitrary smaller family list in configuration.
 
-The version-1 config contains `source`, `runtime_inventory`,
-`processing_allowance` and `preparation_allowance`. The two allowances contain
-positive `phaseBytes`/`rssBytes`; fresh resource admission can refuse them.
+The version-1 config contains `source`, `runtime_inventory` and the child
+`processing_allowance` with positive `phaseBytes`/`rssBytes`. Omit the optional
+parent `preparation_allowance` to use the existing finite fresh Node admission;
+there is no second manually chosen cap to synchronize with the child. Explicit
+parent limits remain supported and enforced. The declared complete output reserve
+is admitted before the child starts. Actual parent RSS and aggregate metadata
+checks remain active through publication; child resource limits remain separate.
+This is a declared-output preflight, not a guarantee against later memory or I/O
+changes. Actual products and the final preparation receipt are charged once at
+publication; the preflight does not retain a duplicate aggregate charge.
 `source` supplies exact scientific/current Git commits, complete whole-file
 input pins and fixed-role paths; all target owner/ID/name/source-index/parent
 and original metadata expectations; exact candidate-selector counts and its
@@ -538,6 +545,22 @@ retroactively change an earlier mixed-code PR's CI profile. Source-only completi
 actual selected-consumer conservation, final package output and delivery timing
 remain distinct claims.
 
+### Read-only native coverage diagnostic
+
+`node scripts/prepare-delivery-handoff.mjs native-diagnostic CONFIG DESTINATION [--resume]`
+uses the same configuration and immutable input locators as `native-authority`.
+It evaluates the existing authenticated source-target predicates and reports exact
+requested, supported and held cells with reasons. Malformed or untrusted custody
+still aborts. Outputs are only `native-diagnostic.json` and the ordinary
+`preparation.json` receipt; no authority, ledger or qualification is emitted.
+Exit status zero means screening completed, even if every requested cell is held.
+Supported cells still require the unchanged qualification and delivery checks.
+
+Use this entry to investigate an existing coverage refusal without creating a
+bespoke producer or changing its predicates. It does not run source or physical
+producers. Exact `--resume` repeats screening and verifies unchanged product bytes
+through the existing safe publication path; timing observations can differ.
+
 ### Subsequent batch preparation
 
 For an unchanged accepted command, change the scientific input pins/configuration,
@@ -565,8 +588,10 @@ uses the same admitted runtime, private staging, exclusive publication and resum
 path as `source`, with a distinct physical phase in the shared Python helper.
 It does not extend the Indonesia source classifier or create native authority.
 
-The outer version-1 configuration has `physical`, `runtime_inventory`,
-`processing_allowance` and `preparation_allowance`. `physical` contains exact
+The outer version-1 configuration has `physical`, `runtime_inventory` and
+`processing_allowance`; omit optional `preparation_allowance` for fresh automatic
+Node admission as described above. Explicit intentional parent limits remain
+enforced and output reserve is checked before the child starts. `physical` contains exact
 ordinary immutable `inputs` pins (commit, path, Git blob, bytes, SHA-256; compressed
 pins additionally declare decoded bytes/SHA-256), `roles` for `stages`,
 `transport`, `native_index` and `comparison`, and the metadata/native repository

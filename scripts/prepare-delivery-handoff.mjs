@@ -1002,9 +1002,14 @@ export function resumeSource(root, destination, config, binding, reader) {
 export async function sourceCohort(config, reader, root, destination, phase = 'source') {
   need(['source', 'physical'].includes(phase), 'Unknown scientific delivery phase');
   const phaseConfig = config[phase];
-  need(same(Object.keys(config).sort(), ['preparation_allowance', 'processing_allowance', 'runtime_inventory', phase, 'version'].sort())
-    && config.version === 1 && config.preparation_allowance && phaseConfig?.version === 1,
-    'Explicit source configuration, runtime inventory and allowances required');
+  need(same(Object.keys(config).filter(key => key !== 'preparation_allowance').sort(),
+    ['processing_allowance', 'runtime_inventory', phase, 'version'].sort())
+    && config.version === 1 && phaseConfig?.version === 1,
+    'Explicit source configuration, runtime inventory and child allowance required');
+  if (Object.hasOwn(config, 'preparation_allowance')) need(config.preparation_allowance
+    && same(Object.keys(config.preparation_allowance).sort(), ['phaseBytes', 'rssBytes'])
+    && Object.values(config.preparation_allowance).every(value => Number.isSafeInteger(value) && value > 0),
+  'Explicit parent preparation allowance must remain finite and positive');
   need(same(Object.keys(config.processing_allowance ?? {}).sort(), ['phaseBytes', 'rssBytes']), 'Explicit source processing allowance required');
   const runtime = config.runtime_inventory;
   need(runtime && same(Object.keys(runtime).sort(), ['files', 'python']) && Array.isArray(runtime.files)
@@ -1037,6 +1042,17 @@ export async function sourceCohort(config, reader, root, destination, phase = 's
       && ['dev', 'ino', 'size', 'mtimeMs', 'ctimeMs'].every(key => before[key] === after[key]), 'Installed source runtime identity differs');
     return {path: pin.path, resolved, bytes, sha256: pin.sha256};
   };
+  // The Node parent already owns a freshly admitted candidate budget. Reserve
+  // the child's declared output before execution, rather than discovering a
+  // mismatched manual parent cap after successful scientific work.
+  const outputReserve = phaseConfig.resources.output_bytes;
+  need(Number.isSafeInteger(outputReserve) && outputReserve > 0, 'Complete source output reserve required');
+  const parentBudget = reader.budget.snapshot();
+  const prospective = parentBudget.accounted_bytes + parentBudget.reserved_review_bytes + outputReserve;
+  need(Number.isSafeInteger(prospective) && prospective <= parentBudget.limit_bytes,
+    'Source output reserve exceeds parent preparation budget');
+  // Publication charges the actual products once; this aggregate check is not
+  // an ordinary-file charge or a second permanently retained output copy.
   const identities = runtime.files.map(runtimeIdentity);
   const stagingParent = '.cache/delivery-handoff';
   admitDestination(root, stagingParent + '/source-staging', false);
@@ -1069,23 +1085,34 @@ export async function sourceCohort(config, reader, root, destination, phase = 's
   } finally { fs.rmSync(staging, {recursive: true, force: true}); }
 }
 
-// Execute the existing modern constructor, rather than authoring a new country
-// wrapper. This is qualification, not the metadata-only compose phase.
-export async function nativeAuthority(config, reader, root) {
-  need(same(Object.keys(config).sort(), ['native_patch', 'preparation_allowance', 'source_evidence', 'version'])
+// Execute the existing modern constructor or its admitted read-only diagnostic,
+// rather than authoring a country wrapper. Only qualification emits authority.
+export async function nativeAuthority(config, reader, root, diagnostic = false) {
+  need(typeof diagnostic === 'boolean' && same(Object.keys(config).sort(), ['native_patch', 'preparation_allowance', 'source_evidence', 'version'])
     && config.version === 1 && config.preparation_allowance, 'Explicit native-authority inputs and allowance required');
   const flow = await import('./delivery-handoff-advance.mjs');
   const inputs = {source_evidence: config.source_evidence, native_patch: config.native_patch};
-  for (const locator of Object.values(inputs)) flow.locate(reader, locator);
+  const pins = Object.fromEntries(Object.entries(inputs).map(([role, locator]) => [role, flow.locate(reader, locator)]));
   const authorityReader = flow.deliveryAuthorityReader(root, reader);
-  const started = performance.now(), result = flow.constructOriginalAuthority(authorityReader, inputs);
-  authorityReader.checkMemory();
-  need(Array.isArray(result.ledger_rows) && result.ledger_rows.length > 0
-    && same(result.component_ids, result.ledger_rows.map(row => row.component_id)), 'Complete modern constructor rows required');
-  const products = {...result.products, 'constructor-result.json': jsonBytes({version: 1,
-    kind: 'existing-source-target-native-constructor-result', inputs,
-    component_ids: result.component_ids, rule_sha256: result.rule_sha256, ledger_rows: result.ledger_rows,
-    limitations: result.limitations})};
+  const started = performance.now();
+  let result, products;
+  if (diagnostic) {
+    const {diagnoseSourceTargetNativeAuthority} = await import('../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs');
+    const binding = {version: 1, kind: 'source-target-native-custody-v1', ...pins};
+    const preimage = {...binding, kind: 'source-target-native-rule-v1'};
+    result = diagnoseSourceTargetNativeAuthority(authorityReader, preimage, binding);
+    authorityReader.checkMemory();
+    products = {'native-diagnostic.json': jsonBytes(result)};
+  } else {
+    result = flow.constructOriginalAuthority(authorityReader, inputs);
+    authorityReader.checkMemory();
+    need(Array.isArray(result.ledger_rows) && result.ledger_rows.length > 0
+      && same(result.component_ids, result.ledger_rows.map(row => row.component_id)), 'Complete modern constructor rows required');
+    products = {...result.products, 'constructor-result.json': jsonBytes({version: 1,
+      kind: 'existing-source-target-native-constructor-result', inputs,
+      component_ids: result.component_ids, rule_sha256: result.rule_sha256, ledger_rows: result.ledger_rows,
+      limitations: result.limitations})};
+  }
   const bytes = Object.values(products).reduce((n, raw) => n + raw.length, 0);
   need(bytes <= authorityReader.outputBytes && Object.values(products).every(raw => raw.length <= 33554432),
     'Native complete output exceeds existing reserve');
@@ -1093,9 +1120,11 @@ export async function nativeAuthority(config, reader, root) {
   return {products, observation: {elapsed_seconds: (performance.now() - started) / 1000,
     charged_phase_bytes: authorityReader.used, allowance: authorityReader.allowance,
     normalized_node_lifetime_peak_rss_bytes: process.resourceUsage().maxRSS * 1024,
-    qualified_cells: result.ledger_rows.reduce((n, row) => n + row.native_cells, 0),
-    limits: ['Original source/physical producers are not replayed.',
-      'Constructor qualification is not actual current-owner-zero or final selected-output acceptance.']}};
+    ...(diagnostic ? {requested_cells: result.requested_cells, supported_cells: result.supported_cells, held_cells: result.held_cells}
+      : {qualified_cells: result.ledger_rows.reduce((n, row) => n + row.native_cells, 0)}),
+    limits: ['Original source/physical producers are not replayed.', diagnostic
+      ? 'Diagnostic screening produces no authority, current-owner-zero or selected-output acceptance.'
+      : 'Constructor qualification is not actual current-owner-zero or final selected-output acceptance.']}};
 }
 
 async function main(args) {
@@ -1118,8 +1147,8 @@ async function main(args) {
     console.log(JSON.stringify({...publishComplete(), acquisition: result, acquisition_ms: performance.now() - started}));
     return;
   }
-  need(['source', 'physical', 'native-authority', 'requests', 'native-requests', 'retain', 'rebind-operating', 'rebind-certificate', 'compose', 'package', 'finalize', 'evidence'].includes(phase) && configFile && destination && flags.every(f => f === '--resume') && flags.length <= 1,
-    'Use prepare-delivery-handoff.mjs requests|native-requests|retain|rebind-operating|rebind-certificate|compose|package|finalize|evidence|source|physical|native-authority CONFIG DESTINATION [--resume]');
+  need(['source', 'physical', 'native-authority', 'native-diagnostic', 'requests', 'native-requests', 'retain', 'rebind-operating', 'rebind-certificate', 'compose', 'package', 'finalize', 'evidence'].includes(phase) && configFile && destination && flags.every(f => f === '--resume') && flags.length <= 1,
+    'Use prepare-delivery-handoff.mjs requests|native-requests|retain|rebind-operating|rebind-certificate|compose|package|finalize|evidence|source|physical|native-authority|native-diagnostic CONFIG DESTINATION [--resume]');
   need(!process.execArgv.length && !process.env.NODE_OPTIONS?.trim() && !process.env.NODE_PATH?.trim(), 'Plain Node launch required');
   const root = fs.realpathSync(process.cwd()); admitDestination(root, destination, flags.includes('--resume'));
   const raw = ordinary(root, configFile), config = JSON.parse(raw), reader = pinReader(root, {allowance: config.preparation_allowance});
@@ -1130,7 +1159,7 @@ async function main(args) {
   }
   let outputs, observation;
   if (['source','physical'].includes(phase)) { const result = await sourceCohort(config, reader, root, destination, phase); outputs = result.products; observation = result.observation; }
-  if (phase === 'native-authority') { const result = await nativeAuthority(config, reader, root); outputs = result.products; observation = result.observation; }
+  if (['native-authority','native-diagnostic'].includes(phase)) { const result = await nativeAuthority(config, reader, root, phase === 'native-diagnostic'); outputs = result.products; observation = result.observation; }
   if (phase === 'requests') outputs = prepareRequests(config, reader);
   if (phase === 'native-requests') outputs = nativeRequests(config, reader);
   if (phase.startsWith('rebind-')) outputs = rebindCustody(config, reader, phase === 'rebind-certificate');
