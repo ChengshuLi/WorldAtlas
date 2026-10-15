@@ -51,6 +51,95 @@ test('sparse work is isolated and contains required directories and individual i
   assert.throws(() => manager.release({worker: 'worker-one', token: entry.token}), /ownership/);
 });
 
+test('sparse inspection, reservation and checkout share the engineering code-only selection', t => {
+  const {repo, git, manager} = fixture(t);
+  const files = {
+    'package.json': '{"type":"module"}',
+    'scripts/cold-entry.mjs': "import {answer} from '../coordination/engineering/shared/nested/helper.mjs'; console.log(answer());",
+    'coordination/engineering/shared/nested/helper.mjs': "import {base} from '../base.js'; export const answer = () => base + 2;",
+    'coordination/engineering/shared/base.js': "import {answer} from './nested/helper.mjs'; export const base = 40; export const cycle = () => answer();",
+    'coordination/engineering/shared/runtime.cjs': 'module.exports = 42;',
+    'coordination/engineering/shared/producer.py': 'print(42)\n',
+    'coordination/engineering/shared/runner.sh': '#!/bin/sh\nexit 0\n',
+    'coordination/engineering/shared/catalogue.json': '{"not":"automatic input"}',
+    'coordination/engineering/shared/nested/large.json.gz': Buffer.alloc(1024 * 1024, 7),
+    'research/geography/unrelated/reproduce.py': 'print("explicit scope")\n',
+    'data/unrelated/reproduce.mjs': 'throw Error("explicit scope");'
+  };
+  for (const [name, body] of Object.entries(files)) {
+    fs.mkdirSync(path.dirname(path.join(repo, name)), {recursive: true});
+    fs.writeFileSync(path.join(repo, name), body);
+  }
+  fs.chmodSync(path.join(repo, 'coordination/engineering/shared/runner.sh'), 0o755);
+  git('add', '.'); git('commit', '-m', 'shared engineering imports and excluded products');
+  const head = git('rev-parse', 'HEAD').trim(), scope = {commit: head, include: ['data/one.json', 'coordination/engineering/new-owned-output']};
+  const inventory = manager.inspect(scope);
+  const selected = inventory.inputs.map(row => row.path).sort();
+  const expectedCode = Object.keys(files).filter(name => /\.(mjs|js|cjs|py|sh)$/.test(name) && name.startsWith('coordination/engineering/'));
+  assert.deepEqual(selected.filter(name => name.startsWith('coordination/engineering/')), expectedCode.sort());
+  const entry = manager.allocate({worker: 'code-only', slot: 'review', ...scope, reserveGiB: 1 / GiB});
+  assert.equal(entry.reservation, inventory.selectedBytes);
+  assert.equal(inventory.selectedBytes, inventory.inputs.reduce((sum, row) => sum + fs.statSync(path.join(entry.path, row.path)).size, 0));
+  const materialized = execFileSync('git', ['-C', entry.path, 'ls-files', '-t', '-z'], {encoding: 'utf8'})
+    .split('\0').filter(row => row && row[0] !== 'S').map(row => row.slice(2)).sort();
+  assert.deepEqual(materialized, selected);
+  assert.equal(execFileSync(process.execPath, ['scripts/cold-entry.mjs'], {cwd: entry.path, encoding: 'utf8'}).trim(), '42');
+  for (const name of ['coordination/engineering/shared/catalogue.json', 'coordination/engineering/shared/nested/large.json.gz',
+    'research/geography/unrelated/reproduce.py', 'data/unrelated/reproduce.mjs']) {
+    assert.ok(!fs.existsSync(path.join(entry.path, name)), name);
+  }
+  manager.release({worker: 'code-only', slot: 'review', token: entry.token});
+});
+
+test('cold stock delivery and selected-check entries resolve imports before ordinary input refusal', t => {
+  const {repo, git, manager} = fixture(t);
+  // Real entry/helper bytes, not substitute implementations or a dependency parser.
+  const files = ['scripts/prepare-delivery-handoff.mjs', 'scripts/delivery-handoff-advance.mjs',
+    'scripts/check-effective-geographic-regression.mjs', 'scripts/evidence-quality.mjs',
+    'scripts/geography-prefetch.mjs', 'scripts/native-ownership/native-preparation-guards.mjs',
+    'scripts/package-inputs.mjs', 'scripts/run-geographic-check.py', 'src/native-grid.js', 'src/ownership-codec.js',
+    'coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs',
+    'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs'];
+  for (const name of files) {
+    fs.mkdirSync(path.dirname(path.join(repo, name)), {recursive: true});
+    fs.writeFileSync(path.join(repo, name), fs.readFileSync(new URL('../' + name, import.meta.url)));
+  }
+  fs.writeFileSync(path.join(repo, 'package.json'), '{"type":"module"}');
+  git('add', '.'); git('commit', '-m', 'actual stock entry fixture');
+  const entry = manager.allocate({worker: 'stock-entry', slot: 'review', commit: git('rev-parse', 'HEAD').trim()});
+  for (const [name, expected] of [['scripts/prepare-delivery-handoff.mjs', /Use prepare-delivery-handoff\.mjs/],
+    ['scripts/check-effective-geographic-regression.mjs', /Require immutable input commit/]]) {
+    const result = spawnSync(process.execPath, [name], {cwd: entry.path, encoding: 'utf8', timeout: 10000,
+      env: {PATH: process.env.PATH, HOME: repo, GIT_NO_LAZY_FETCH: '1'}});
+    assert.equal(result.error, undefined);
+    assert.equal(result.status, 1, result.stderr);
+    assert.match(result.stderr, expected);
+    assert.doesNotMatch(result.stderr, /ERR_MODULE_NOT_FOUND|Cannot find module/);
+  }
+  assert.ok(!fs.existsSync(path.join(entry.path, 'data')));
+  assert.ok(!fs.existsSync(path.join(entry.path, '.cache')));
+  manager.release({worker: 'stock-entry', slot: 'review', token: entry.token});
+});
+
+test('automatic engineering code rejects unsafe sparse patterns and nonordinary modes before allocation', t => {
+  for (const [name, mode] of [['coordination/engineering/unsafe/[glob].mjs', '100644'],
+    ['coordination/engineering/unsafe/new\nline.py', '100644'],
+    ['coordination/engineering/unsafe/symlink.mjs', '120000'],
+    ['coordination/engineering/unsafe/submodule.mjs', '160000']]) {
+    const {repo, git, manager, head} = fixture(t);
+    const oid = mode === '160000' ? head : git('rev-parse', 'HEAD:README.md').trim();
+    execFileSync('git', ['-C', repo, 'update-index', '-z', '--index-info'], {input: `${mode} ${oid}\t${name}\0`});
+    git('commit', '-m', 'unsafe automatic code fixture');
+    const commit = git('rev-parse', 'HEAD').trim(), before = git('worktree', 'list', '--porcelain');
+    assert.throws(() => manager.inspect({commit}), /ordinary file and safe literal path/);
+    assert.throws(() => manager.allocate({worker: 'unsafe-code', branch: 'engineering/unsafe-code'}), /ordinary file and safe literal path/);
+    assert.equal(git('worktree', 'list', '--porcelain'), before);
+    assert.throws(() => git('rev-parse', '--verify', 'engineering/unsafe-code'));
+    assert.deepEqual(manager.report().entries, []);
+    assert.ok(!fs.existsSync(path.join(manager.report().registry, 'state.json')));
+  }
+});
+
 test('low disk prevents allocation without creating a branch or reservation', t => {
   const {manager, git} = fixture(t, {freeBytes: () => 10 * GiB});
   assert.throws(() => manager.allocate({worker: 'one', branch: 'engineering/no-space'}), /headroom/);
@@ -369,6 +458,26 @@ test('actual promisor clone rejects missing root, support and explicitly selecte
   }
 });
 
+test('missing automatic engineering code is inventoried and refuses author allocation without lazy fetch', t => {
+  const name = 'coordination/engineering/shared/nested/helper.mjs';
+  const {run, manager, git, checkUnfetched} = partialFixture(t, [name, 'data/other/large.json'], {configureSource: ({repo, git}) => {
+    fs.mkdirSync(path.dirname(path.join(repo, name)), {recursive: true});
+    fs.writeFileSync(path.join(repo, name), 'export const required = true;');
+    git('add', name); git('commit', '-m', 'missing shared code');
+  }});
+  const inventory = JSON.parse(run({}, 'inspect'));
+  assert.equal(inventory.selectedBytes, null);
+  assert.deepEqual(inventory.missing.flatMap(row => row.paths), [name]);
+  const before = git('worktree', 'list', '--porcelain');
+  assert.throws(() => run({slot: 'work', commit: undefined, branch: 'engineering/missing-code'}),
+    error => /Unknown input size/.test(error.stderr));
+  assert.equal(git('worktree', 'list', '--porcelain'), before);
+  assert.throws(() => git('rev-parse', '--verify', 'engineering/missing-code'));
+  assert.deepEqual(manager.report().entries, []);
+  assert.ok(!fs.existsSync(path.join(manager.report().registry, 'state.json')));
+  checkUnfetched(true);
+});
+
 test('author allocation refreshes main but missing selected blobs create no branch, reservation or checkout', t => {
   const {run, manager, git, checkUnfetched} = partialFixture(t, 'scripts/tool.mjs');
   const before = git('worktree', 'list', '--porcelain');
@@ -547,11 +656,31 @@ test('old-Git promisor fatal is avoided even when every selected blob is absent'
   checkUnfetched();
 });
 
+// Build an actually incomplete object store regardless of Git's packing policy.
+// Only synthetic fixture objects are rewritten; retain commit-graph metadata.
+function removeFixtureObject(repo, git, missing) {
+  const rows = git('cat-file', '--batch-all-objects', '--batch-check=%(objectname) %(objecttype)')
+    .trim().split('\n').map(row => row.split(' '));
+  assert.ok(rows.some(([oid]) => oid === missing));
+  const retained = rows.filter(([oid]) => oid !== missing).map(([oid, type]) => ({oid, type,
+    bytes: execFileSync('git', ['-C', repo, 'cat-file', type, oid])}));
+  const objects = path.join(repo, '.git/objects');
+  for (const name of fs.readdirSync(objects)) {
+    if (name !== 'info') fs.rmSync(path.join(objects, name), {recursive: true, force: true});
+  }
+  for (const {oid, type, bytes} of retained) {
+    assert.equal(execFileSync('git', ['-C', repo, 'hash-object', '-w', '-t', type, '--stdin'],
+      {input: bytes, encoding: 'utf8'}).trim(), oid);
+  }
+  assert.notEqual(spawnSync('git', ['-C', repo, 'cat-file', '-e', missing],
+    {env: {...process.env, GIT_NO_LAZY_FETCH: '1'}}).status, 0);
+}
+
 test('unavailable exact commit fails without fetching or claiming a complete selected inventory', t => {
   const {repo, git, manager, head} = fixture(t);
+  git('repack', '-ad');
   git('commit-graph', 'write', '--reachable');
-  const object = path.join(repo, '.git/objects', head.slice(0, 2), head.slice(2));
-  fs.unlinkSync(object);
+  removeFixtureObject(repo, git, head);
   const trace = path.join(repo, 'commit-inspection.trace');
   const before = fs.readdirSync(path.join(repo, '.git/objects'), {recursive: true}).sort();
   const result = spawnSync(process.execPath, [new URL('../scripts/local-workspace.mjs', import.meta.url).pathname,
@@ -600,7 +729,8 @@ test('missing root and descendant tree metadata are classified before any blob s
   for (const treePath of ['', 'scripts', 'data/other']) {
     const {repo, git, manager, head} = fixture(t);
     const oid = git('rev-parse', treePath ? `HEAD:${treePath}` : 'HEAD^{tree}').trim();
-    fs.unlinkSync(path.join(repo, '.git/objects', oid.slice(0, 2), oid.slice(2)));
+    git('repack', '-ad');
+    removeFixtureObject(repo, git, oid);
     const trace = path.join(repo, 'tree-inspection.trace');
     const refs = git('show-ref');
     const before = fs.readdirSync(path.join(repo, '.git/objects'), {recursive: true}).sort();

@@ -35,6 +35,13 @@ publisher work branch remains subject to its normal claim/operation protocol.
 
 Sparse checkout is the default. It includes root files, documentation, scripts,
 tests, application/backend code, workflow configuration and evidence templates.
+It also includes ordinary `.mjs`, `.js`, `.cjs`, `.py` and `.sh` source files
+under `coordination/engineering/`, including nested helpers used by shared entry
+points. The same exact-tree code selection is inspected, sized and materialized;
+missing code blobs still require coordinated acquisition before allocation.
+Adjacent catalogues, scientific inputs, outputs and archived evidence are not
+included by this code-only category. It is not a complete scientific dependency
+closure or permission to run a producer.
 Explicitly include every required packet, original source, manifest and data input
 as literal `data/`, `research/` or `coordination/` paths. Include new owned packet
 paths too. Scope is a storage choice, not permission to omit required evidence or
