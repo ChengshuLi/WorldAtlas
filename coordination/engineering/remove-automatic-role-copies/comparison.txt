@@ -1,0 +1,11 @@
+Actual finalize CLI comparison, accepted base 8c68e8c47657c50199068fda24b3b821d7fcd2e0 versus deletion working tree.
+Fixture: unchanged actual Git-based test/delivery-finalize-config.test.mjs fixture, same committed input configuration.
+All outputs and the complete preparation receipt are whole-byte identical. No scientific producer was run.
+{"destination":".cache/delivery-handoff/after","resumed":false,"binding":{"phase":"finalize","config_sha256":"7464ea3d2f579b3422a8d6cfb5ed38b6cf43121817b3726412bd08144390338a"}}
+ownership-selection.json: 385 bytes, sha256 e04c85f1e8912d0f17d7e85858212179bf6e5657937dcd67df94217c9c0b9f87
+package-inputs.json: 826 bytes, sha256 df0228d5f8121c43da3a1e43d4ec8b9b29d72fc7b9fbdeef71cb91044dd59201
+package-roles.json: 3468 bytes, sha256 18d17000f3066838610d38fba3cba9132b385f351398d5308bac4db8094cd059
+selected-delivery-expectations.json: 643 bytes, sha256 d2d71634f82fb5f8638ae0d7112c7ae5ff14e657b6e62e8ea252055e57d2850e
+sidecar.json: 2091 bytes, sha256 2461bd5bc6291fb5c087825f1cfd8f7cbf3d156da065cc8fc6fddd8dbab08efd
+The earlier output tree was preserved; the candidate was emitted into a fresh sibling destination.
+Authenticated all 12 committed fixture files against their immutable Git blobs after both finalizations; no tracked original changed.
