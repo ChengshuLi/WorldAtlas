@@ -108,7 +108,7 @@ for(const [name,g]of [
  ['collection',{type:'GeometryCollection',geometries:[{type:'Point',coordinates:[-90,latitude]}]}],
  ['hierarchy',{type:'Polygon',coordinates:[[[-90,latitude],[-90.01,.01],[-89.99,.01],[-90,latitude]]]}],
 ])test('actual constructor vetoes '+name+' contact',()=>assert.throws(()=>constructorFixture(s=>{exactBoundaryTarget(s);conflict(s,name==='hierarchy'?'L2-outside-L1':'contradictory_land_water_support',g);}).run(),/intersect a physical reconstruction residual or conflict witness/));
-test('off-centre conflict preserves original witnesses and positive evidence',()=>{const f=constructorFixture(s=>{exactBoundaryTarget(s);const r=conflict(s,'contradictory_land_water_support',off);const g=rectangle(-89.99,-89.98,.001,.002);r.support.hierarchy_disagreements['L2-outside-L1']=g;r.issues.push({reason:'L2-outside-L1',geometry:g});});assert.equal(f.run().ledger_rows[0].native_cells,1);assert.equal(f.state.physical.results[0].issues.length,2);});
+test('off-centre conflict preserves original witnesses and positive evidence',()=>{const f=constructorFixture(s=>{exactBoundaryTarget(s);const r=conflict(s,'contradictory_land_water_support',off);const g=rectangle(-89.99,-89.98,.001,.002);r.support.hierarchy_disagreements['L2-outside-L1']=g;r.issues.push({reason:'L2-outside-L1',geometry:g});});assert.equal(f.run().ledger_rows[0].native_cells,1);assert.equal(f.state.physical.results[0].issues.length,2);assert.deepEqual(f.state.targets[0].territorial_exclusions,[]);});
 for(const [name,change,pattern]of [
  ['unknown query',r=>r.query_relations[0].status='unknown',/Unknown or missing/],
  ['missing query',r=>delete r.query_relations,/query roster/],
@@ -216,5 +216,5 @@ test('missing source identity and duplicate source frame refuse zero-contact aut
 for(const mode of ['missing','null'])test('new general conflict refuses '+mode+' territorial context',()=>{
  assert.throws(()=>constructorFixture(s=>{exactBoundaryTarget(s);conflict(s,'contradictory_land_water_support',off);
  if(mode==='missing')delete s.targets[0].territorial_exclusions;else s.targets[0].territorial_exclusions=null;
- }).run(),/requires explicit territorial exclusions/);
+ }).run(),/requires a supplied territorial_exclusions array; \[\] supplies no additional geometries, not foreign-territory clearance/);
 });
