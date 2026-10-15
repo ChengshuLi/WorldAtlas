@@ -545,6 +545,22 @@ retroactively change an earlier mixed-code PR's CI profile. Source-only completi
 actual selected-consumer conservation, final package output and delivery timing
 remain distinct claims.
 
+### Read-only native coverage diagnostic
+
+`node scripts/prepare-delivery-handoff.mjs native-diagnostic CONFIG DESTINATION [--resume]`
+uses the same configuration and immutable input locators as `native-authority`.
+It evaluates the existing authenticated source-target predicates and reports exact
+requested, supported and held cells with reasons. Malformed or untrusted custody
+still aborts. Outputs are only `native-diagnostic.json` and the ordinary
+`preparation.json` receipt; no authority, ledger or qualification is emitted.
+Exit status zero means screening completed, even if every requested cell is held.
+Supported cells still require the unchanged qualification and delivery checks.
+
+Use this entry to investigate an existing coverage refusal without creating a
+bespoke producer or changing its predicates. It does not run source or physical
+producers. Exact `--resume` repeats screening and verifies unchanged product bytes
+through the existing safe publication path; timing observations can differ.
+
 ### Subsequent batch preparation
 
 For an unchanged accepted command, change the scientific input pins/configuration,
