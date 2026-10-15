@@ -1,0 +1,2852 @@
+{
+  "kind": "distinct-scientific-input-review",
+  "decision": "accepted-with-limits",
+  "scope": "Prepared ordinary source-evidence inputs only; no helper, native, geometry-engine or scientific replay; no native disposition, resource admission, territorial truth, or accepted-cell credit.",
+  "groups": [
+    {
+      "group": "north-block26-27",
+      "owners": 28,
+      "keys": 3102,
+      "config_bytes": 14959737,
+      "config_sha256": "b9dfb956c956e79dc3a217dfab652b0397a2573aad0197ef3b1df974c15e1f3f",
+      "patch_sha256": "0e8641316983b5f59c4da7fc4b963ee0bb6ded320726113ec4f2988c9eb35de9",
+      "physical_issue_targets": 0
+    },
+    {
+      "group": "south-block28-29",
+      "owners": 44,
+      "keys": 4377,
+      "config_bytes": 19749132,
+      "config_sha256": "a53e8a36002696fcb7b47970090dfbb0ddec173c0809bb11aba94753400e1586",
+      "patch_sha256": "7e161d192c7d80d97e6d38192a2c82b8fd57ba2e9805045d88343ffe07c5947f",
+      "physical_issue_targets": 14
+    }
+  ],
+  "source_scope": {
+    "mmr_adm3_features": 330,
+    "foreign_complete_products": 11,
+    "foreign_features": 11261,
+    "reference_countries": [
+      "BGD",
+      "CHN",
+      "IND",
+      "LAO",
+      "THA"
+    ],
+    "registry_unique": 203,
+    "per_target_copies": 455,
+    "combined_foreign_and_reference_features": 11266,
+    "mmr_vintage": {
+      "advertised_feature_count": 330,
+      "cohort": "administrative-registry",
+      "feature_count": 330,
+      "key": "gb:MMR:ADM3",
+      "metadata_sha256": "47544cecee2a593c22b8af18fc26182f3db9558626b3af2dc677e01de23dafb0",
+      "original_bytes": 4205367,
+      "original_metadata_file": "data/administrative-sources.json",
+      "original_sha256": "94c0c9af839094257d13a6fe6590feddb2dcb04540d87e58b656c9f000fb92a2",
+      "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM3/geoBoundaries-MMR-ADM3_simplified.geojson",
+      "recorded_license": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+      "source_represented_year_claim": "2019"
+    },
+    "selected_metadata_locator_note": "Selected metadata names unsuffixed geoBoundaries9469f09MMRADM3.geojson. Actual preserved consumed source is the catalogue-pinned *_simplified.geojson bytes SHA94c0c9af...; full selected base geometry is independently bound to accepted f606 part15 and the unchanged stage. Those are distinct geometry roles, not interchangeable URL evidence."
+  },
+  "vintages": [
+    {
+      "key": "gb:BGD:ADM1",
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BGD/ADM1/geoBoundaries-BGD-ADM1_simplified.geojson",
+      "source_represented_year_claim": "2015",
+      "recorded_license": "CC0 1.0 Universal (CC0 1.0) Public Domain Dedication",
+      "metadata_sha256": "0b218ce0312b0c2f6d2f0289a445d6edd2ff3cf916da855983c86d0f3841cf55",
+      "original_metadata_file": "data/administrative-sources.json",
+      "original_sha256": "bb91b74c7a7d8a690122b916f5e2f99606d2ce2f18ff938f49d80f15b4ba6aea"
+    },
+    {
+      "key": "gb:BGD:ADM2",
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BGD/ADM2/geoBoundaries-BGD-ADM2_simplified.geojson",
+      "source_represented_year_claim": "2020",
+      "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "metadata_sha256": "95e07f718876ca48da23f1ebe91333643081647654b0a9d0c9cdfec2a19c83ba",
+      "original_metadata_file": "data/administrative-sources.json",
+      "original_sha256": "7dbdb186f3b8af10417147a99859196fcd89c619fb5c6ac3804251fb6b449b6a"
+    },
+    {
+      "key": "gb:CHN:ADM1",
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CHN/ADM1/geoBoundaries-CHN-ADM1_simplified.geojson",
+      "source_represented_year_claim": "2019",
+      "recorded_license": "Public Domain",
+      "metadata_sha256": "df10c7b79297bd3b71ca8d5f36f61f3396d94c2abee48a85938471c0e2e5bded",
+      "original_metadata_file": "data/administrative-sources.json",
+      "original_sha256": "bc4afc7eacf4351ae5b3ae7a612327987ce1123cb5deb8574fb49107091c6623"
+    },
+    {
+      "key": "gb:CHN:ADM2",
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CHN/ADM2/geoBoundaries-CHN-ADM2_simplified.geojson",
+      "source_represented_year_claim": "2017",
+      "recorded_license": "Open Data Commons Public Domain Dedication and License (PDDL) v1.0",
+      "metadata_sha256": "8e0fe68dd0039176daf107bbccf68b6e8b4ba39f8f5b4f06f1bd20fc64037e2a",
+      "original_metadata_file": "data/administrative-sources.json",
+      "original_sha256": "8c7dfa8e40842f9162453d9b0b614276a48bf635559ba371c7982cb288e7b303"
+    },
+    {
+      "key": "gb:IND:ADM1",
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IND/ADM1/geoBoundaries-IND-ADM1_simplified.geojson",
+      "source_represented_year_claim": "2011",
+      "recorded_license": "Creative Commons Attribution 2.5 India (CC BY 2.5 IN)",
+      "metadata_sha256": "a7c6dfef4bd15f029d82c471cb15b9264b2c05eba684f662d0d4aa594839f64c",
+      "original_metadata_file": "data/administrative-sources.json",
+      "original_sha256": "4c63fe43294a391e8f2de4e9f86f3edb60f8688275b9fee90c61fb2aa0c26061"
+    },
+    {
+      "key": "gb:IND:ADM2",
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IND/ADM2/geoBoundaries-IND-ADM2_simplified.geojson",
+      "source_represented_year_claim": "2021",
+      "recorded_license": "Open Data Commons Open Database License 1.0",
+      "metadata_sha256": "ffc08d561c824fe44ba3dfd6726908d1135237d2ecfddd7e348fbae7b81b4a27",
+      "original_metadata_file": "data/administrative-sources.json",
+      "original_sha256": "d68db39cd3e2d0892af268e2b0454166368ce3b5b8a78fcda63069ec92a641db"
+    },
+    {
+      "key": "gb:LAO:ADM1",
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/LAO/ADM1/geoBoundaries-LAO-ADM1_simplified.geojson",
+      "source_represented_year_claim": "2017",
+      "recorded_license": "Open Data Commons Open Database License 1.0",
+      "metadata_sha256": "cc5cda381736a1e6956172e1bff543a320bd6c1a8491c6d4d58385dc66680394",
+      "original_metadata_file": "data/administrative-sources.json",
+      "original_sha256": "152d7d9f680d84c31214fe327e4d102a330d61f222329701ec8ea00a8d2dfb55"
+    },
+    {
+      "key": "gb:LAO:ADM2",
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/LAO/ADM2/geoBoundaries-LAO-ADM2_simplified.geojson",
+      "source_represented_year_claim": "2019",
+      "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "metadata_sha256": "90f337012d72e859d66bef842657f18ad3fb518c5e6b53a394cef5f689c1fef8",
+      "original_metadata_file": "data/administrative-sources.json",
+      "original_sha256": "a433001f30fd6caa368c3ca44ecc5b739250350601bb4159be6968dcc947e25e"
+    },
+    {
+      "key": "gb:THA:ADM1",
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/THA/ADM1/geoBoundaries-THA-ADM1_simplified.geojson",
+      "source_represented_year_claim": "2017",
+      "recorded_license": "Open Data Commons Open Database License 1.0",
+      "metadata_sha256": "1c55ad46837740175c07118abb3d8537a33fd476b770ebda3c573ec89b4d11fc",
+      "original_metadata_file": "data/administrative-sources.json",
+      "original_sha256": "841f1250cac868fa966b2089863f01e9c9b4dc9b7fb0d9d6dce9a495e32b32a0"
+    },
+    {
+      "key": "gb:THA:ADM2",
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/THA/ADM2/geoBoundaries-THA-ADM2_simplified.geojson",
+      "source_represented_year_claim": "2019",
+      "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "metadata_sha256": "3adc5206c519649bc075cba28dc8761846b75dcaaf73154d271f7642227748ee",
+      "original_metadata_file": "data/administrative-sources.json",
+      "original_sha256": "faae0d9d6fe56b489a9cb3bd5b8fe100025aad99ec554bf7a9f49cbe2216bf10"
+    },
+    {
+      "key": "gb:IND:ADM3",
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IND/ADM3/geoBoundaries-IND-ADM3_simplified.geojson",
+      "source_represented_year_claim": "2018",
+      "recorded_license": "Open Data Commons Open Database License 1.0",
+      "metadata_sha256": "df90173ff564d1848427608474a14eb8856927c8b22fb7d6fb7fa7d267e232c0",
+      "original_metadata_file": "data/global-sources/IND-ADM3-metadata.json",
+      "original_sha256": "4ea6807d0a0c5aac0b46ee8e31ed7c30fbec273b44345bba1e4a2bb5f299f5fb"
+    }
+  ],
+  "checks": [
+    {
+      "check": "file custody retained-source-catalogue.json",
+      "pass": true
+    },
+    {
+      "check": "immutable tree retained-source-catalogue.json",
+      "pass": true,
+      "detail": "100644 blob 09afab19371f0814da61e79e5f310c5fb2405b6d\tcoordination/engineering/original-geography-source-corpus-20261006/catalogue.json"
+    },
+    {
+      "check": "catalogue matches retained original authority",
+      "pass": true
+    },
+    {
+      "check": "file custody original-mmr-adm3.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "immutable tree original-mmr-adm3.bin.gz",
+      "pass": true,
+      "detail": "100644 blob 6a91fcb22b44ae00401a0068a6c3e62bfed62374\tcoordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz"
+    },
+    {
+      "check": "decoded custody original-mmr-adm3.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "full MMR source330",
+      "pass": true
+    },
+    {
+      "check": "whole72 consumed equal exact original sources",
+      "pass": true
+    },
+    {
+      "check": "complete product declaration gb:BGD:ADM1",
+      "pass": true
+    },
+    {
+      "check": "catalogue part coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-BGD-ADM1-000.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "file custody gb-BGD-ADM1-000.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "immutable tree gb-BGD-ADM1-000.bin.gz",
+      "pass": true,
+      "detail": "100644 blob 43dd400349466007c7d5c326441b0482fff01264\tcoordination/engineering/original-geography-source-corpus-20261006/payloads/gb-BGD-ADM1-000.bin.gz"
+    },
+    {
+      "check": "decoded custody gb-BGD-ADM1-000.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "whole raw source stream gb:BGD:ADM1",
+      "pass": true
+    },
+    {
+      "check": "full feature count gb:BGD:ADM1",
+      "pass": true
+    },
+    {
+      "check": "complete product declaration gb:BGD:ADM2",
+      "pass": true
+    },
+    {
+      "check": "catalogue part coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-BGD-ADM2-000.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "file custody gb-BGD-ADM2-000.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "immutable tree gb-BGD-ADM2-000.bin.gz",
+      "pass": true,
+      "detail": "100644 blob 8a47542f7f97ffe6321104c9bab0d545b90ae2d5\tcoordination/engineering/original-geography-source-corpus-20261006/payloads/gb-BGD-ADM2-000.bin.gz"
+    },
+    {
+      "check": "decoded custody gb-BGD-ADM2-000.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "whole raw source stream gb:BGD:ADM2",
+      "pass": true
+    },
+    {
+      "check": "full feature count gb:BGD:ADM2",
+      "pass": true
+    },
+    {
+      "check": "complete product declaration gb:CHN:ADM1",
+      "pass": true
+    },
+    {
+      "check": "catalogue part coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHN-ADM1-000.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "file custody gb-CHN-ADM1-000.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "immutable tree gb-CHN-ADM1-000.bin.gz",
+      "pass": true,
+      "detail": "100644 blob 29edaa5770af7af9b72432cc407ca296bbde6e15\tcoordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHN-ADM1-000.bin.gz"
+    },
+    {
+      "check": "decoded custody gb-CHN-ADM1-000.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "whole raw source stream gb:CHN:ADM1",
+      "pass": true
+    },
+    {
+      "check": "full feature count gb:CHN:ADM1",
+      "pass": true
+    },
+    {
+      "check": "complete product declaration gb:CHN:ADM2",
+      "pass": true
+    },
+    {
+      "check": "catalogue part coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHN-ADM2-000.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "file custody gb-CHN-ADM2-000.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "immutable tree gb-CHN-ADM2-000.bin.gz",
+      "pass": true,
+      "detail": "100644 blob 48bb210799d1ae8dae4fa23d4e74f9b2a15f4e87\tcoordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHN-ADM2-000.bin.gz"
+    },
+    {
+      "check": "decoded custody gb-CHN-ADM2-000.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "whole raw source stream gb:CHN:ADM2",
+      "pass": true
+    },
+    {
+      "check": "full feature count gb:CHN:ADM2",
+      "pass": true
+    },
+    {
+      "check": "complete product declaration gb:IND:ADM1",
+      "pass": true
+    },
+    {
+      "check": "catalogue part coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM1-000.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "file custody gb-IND-ADM1-000.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "immutable tree gb-IND-ADM1-000.bin.gz",
+      "pass": true,
+      "detail": "100644 blob 6c717053e0e9893cbe32ee9e09e4cba76760798a\tcoordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM1-000.bin.gz"
+    },
+    {
+      "check": "decoded custody gb-IND-ADM1-000.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "whole raw source stream gb:IND:ADM1",
+      "pass": true
+    },
+    {
+      "check": "full feature count gb:IND:ADM1",
+      "pass": true
+    },
+    {
+      "check": "complete product declaration gb:IND:ADM2",
+      "pass": true
+    },
+    {
+      "check": "catalogue part coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM2-000.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "file custody gb-IND-ADM2-000.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "immutable tree gb-IND-ADM2-000.bin.gz",
+      "pass": true,
+      "detail": "100644 blob f83550dbf455bd63e04872ba218b56e27c6ef106\tcoordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM2-000.bin.gz"
+    },
+    {
+      "check": "decoded custody gb-IND-ADM2-000.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "whole raw source stream gb:IND:ADM2",
+      "pass": true
+    },
+    {
+      "check": "full feature count gb:IND:ADM2",
+      "pass": true
+    },
+    {
+      "check": "complete product declaration gb:LAO:ADM1",
+      "pass": true
+    },
+    {
+      "check": "catalogue part coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-LAO-ADM1-000.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "file custody gb-LAO-ADM1-000.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "immutable tree gb-LAO-ADM1-000.bin.gz",
+      "pass": true,
+      "detail": "100644 blob 35a36eb8b83d3401b0bdfe697e6f7069624cfe18\tcoordination/engineering/original-geography-source-corpus-20261006/payloads/gb-LAO-ADM1-000.bin.gz"
+    },
+    {
+      "check": "decoded custody gb-LAO-ADM1-000.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "whole raw source stream gb:LAO:ADM1",
+      "pass": true
+    },
+    {
+      "check": "full feature count gb:LAO:ADM1",
+      "pass": true
+    },
+    {
+      "check": "complete product declaration gb:LAO:ADM2",
+      "pass": true
+    },
+    {
+      "check": "catalogue part coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-LAO-ADM2-000.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "file custody gb-LAO-ADM2-000.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "immutable tree gb-LAO-ADM2-000.bin.gz",
+      "pass": true,
+      "detail": "100644 blob 8b130c0925274f49eaf3408501c5ef4bd4420614\tcoordination/engineering/original-geography-source-corpus-20261006/payloads/gb-LAO-ADM2-000.bin.gz"
+    },
+    {
+      "check": "decoded custody gb-LAO-ADM2-000.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "whole raw source stream gb:LAO:ADM2",
+      "pass": true
+    },
+    {
+      "check": "full feature count gb:LAO:ADM2",
+      "pass": true
+    },
+    {
+      "check": "complete product declaration gb:THA:ADM1",
+      "pass": true
+    },
+    {
+      "check": "catalogue part coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-THA-ADM1-000.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "file custody gb-THA-ADM1-000.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "immutable tree gb-THA-ADM1-000.bin.gz",
+      "pass": true,
+      "detail": "100644 blob 697f84f9e9831d64a1a0a085df383663e1e3c932\tcoordination/engineering/original-geography-source-corpus-20261006/payloads/gb-THA-ADM1-000.bin.gz"
+    },
+    {
+      "check": "decoded custody gb-THA-ADM1-000.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "whole raw source stream gb:THA:ADM1",
+      "pass": true
+    },
+    {
+      "check": "full feature count gb:THA:ADM1",
+      "pass": true
+    },
+    {
+      "check": "complete product declaration gb:THA:ADM2",
+      "pass": true
+    },
+    {
+      "check": "catalogue part coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-THA-ADM2-000.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "file custody gb-THA-ADM2-000.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "immutable tree gb-THA-ADM2-000.bin.gz",
+      "pass": true,
+      "detail": "100644 blob d43e07ca9416bf37067112b43950af9c10ce8ea6\tcoordination/engineering/original-geography-source-corpus-20261006/payloads/gb-THA-ADM2-000.bin.gz"
+    },
+    {
+      "check": "decoded custody gb-THA-ADM2-000.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "whole raw source stream gb:THA:ADM2",
+      "pass": true
+    },
+    {
+      "check": "full feature count gb:THA:ADM2",
+      "pass": true
+    },
+    {
+      "check": "complete product declaration gb:IND:ADM3",
+      "pass": true
+    },
+    {
+      "check": "catalogue part coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "file custody gb-IND-ADM3-000.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "immutable tree gb-IND-ADM3-000.bin.gz",
+      "pass": true,
+      "detail": "100644 blob 51f650c7d70584f42cbc4f77ecf8a38547447ecf\tcoordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz"
+    },
+    {
+      "check": "decoded custody gb-IND-ADM3-000.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "catalogue part coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "file custody gb-IND-ADM3-001.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "immutable tree gb-IND-ADM3-001.bin.gz",
+      "pass": true,
+      "detail": "100644 blob 31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6\tcoordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz"
+    },
+    {
+      "check": "decoded custody gb-IND-ADM3-001.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "whole raw source stream gb:IND:ADM3",
+      "pass": true
+    },
+    {
+      "check": "full feature count gb:IND:ADM3",
+      "pass": true
+    },
+    {
+      "check": "file custody reference-countries.geojson.gz",
+      "pass": true
+    },
+    {
+      "check": "immutable tree reference-countries.geojson.gz",
+      "pass": true,
+      "detail": "100644 blob 235bf73f0890fa97c82d1471f840296f17cfcfca\tdata/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz"
+    },
+    {
+      "check": "decoded custody reference-countries.geojson.gz",
+      "pass": true
+    },
+    {
+      "check": "complete foreign product/feature scope",
+      "pass": true,
+      "detail": "11,261 full administrative source features + five complete reference-country features = 11,266 combined candidates; the plan field uses the combined count."
+    },
+    {
+      "check": "five complete reference countries",
+      "pass": true
+    },
+    {
+      "check": "registry203unique",
+      "pass": true
+    },
+    {
+      "check": "registry literal full geometry and custody equal original",
+      "pass": true
+    },
+    {
+      "check": "file custody actual-whole-target-support.json",
+      "pass": true
+    },
+    {
+      "check": "immutable tree actual-whole-target-support.json",
+      "pass": true,
+      "detail": "100644 blob 908e8c9d8157e84188e5d64c528fa40479aa9215\tcoordination/engineering/myanmar-adm3-current-cells-20261014/remaining7479-whole-physical-001/physical-result-001/whole-target-support.json"
+    },
+    {
+      "check": "same reviewed physical bytes",
+      "pass": true
+    },
+    {
+      "check": "file custody selected72-whole-original-stage-inputs.json",
+      "pass": true
+    },
+    {
+      "check": "immutable tree selected72-whole-original-stage-inputs.json",
+      "pass": true,
+      "detail": "100644 blob 9b05e3bdb59305458adb4a6318abddaa16792545\tcoordination/engineering/myanmar-adm3-current-cells-20261014/remaining7479-whole-physical-001/original-stage-inputs.json"
+    },
+    {
+      "check": "file custody qualify-source-cohort.py",
+      "pass": true
+    },
+    {
+      "check": "immutable tree qualify-source-cohort.py",
+      "pass": true,
+      "detail": "100644 blob 4dea98fd3d75a70327f1f1313619c44eb113971f\tscripts/qualify-source-cohort.py"
+    },
+    {
+      "check": "72 unique owners and targets",
+      "pass": true
+    },
+    {
+      "check": "same owner/source family/selected whole base geometry",
+      "pass": true
+    },
+    {
+      "check": "all target receipts exact full physical body",
+      "pass": true
+    },
+    {
+      "check": "full physical targets/queries retained",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B10368150445219",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B10368150445219",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B13890402968202",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B13890402968202",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B15199869857953",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B15199869857953",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B17749520756313",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B17749520756313",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B1975009216242",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B1975009216242",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B20724664356365",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B20724664356365",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B21056101662842",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B21056101662842",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B22679639113229",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B22679639113229",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B29413471910170",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B29413471910170",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B29817786092146",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B29817786092146",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B34211436690128",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B34211436690128",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B34348354141761",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B34348354141761",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B35396935405838",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B35396935405838",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B42133100015884",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B42133100015884",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B44324373263157",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B44324373263157",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B45954578024958",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B45954578024958",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B47048273457297",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B47048273457297",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B58400642266296",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B58400642266296",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B59193658756261",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B59193658756261",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B59325512969250",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B59325512969250",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B60976321477453",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B60976321477453",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B63943979787937",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B63943979787937",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B6984635080223",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B6984635080223",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B72647689440603",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B72647689440603",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B72712470803341",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B72712470803341",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B80362939759062",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B80362939759062",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B89556704578744",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B89556704578744",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B9190211902717",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B9190211902717",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B13905773583964",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B13905773583964",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B20948488348117",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B20948488348117",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B21195914889348",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B21195914889348",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B22649797942784",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B22649797942784",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B23940339796351",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B23940339796351",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B24871755522741",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B24871755522741",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B26691855709091",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B26691855709091",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B28068937388118",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B28068937388118",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B28699089666182",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B28699089666182",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B29412764358741",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B29412764358741",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B30035671122346",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B30035671122346",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B32460181384532",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B32460181384532",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B33396458700604",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B33396458700604",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B36196103316909",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B36196103316909",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B40918846263989",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B40918846263989",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B41675327542424",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B41675327542424",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B45439994111599",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B45439994111599",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B46374660355499",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B46374660355499",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B46397740219200",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B46397740219200",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B47304075793437",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B47304075793437",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B48286505509820",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B48286505509820",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B48301856519721",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B48301856519721",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B50654546091874",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B50654546091874",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B51516707971749",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B51516707971749",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B52510382995497",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B52510382995497",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B54341055682393",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B54341055682393",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B55371715094402",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B55371715094402",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B563703845722",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B563703845722",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B56545181758026",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B56545181758026",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B57686651613256",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B57686651613256",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B59879554977018",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B59879554977018",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B65618262001870",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B65618262001870",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B66473456791866",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B66473456791866",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B66538175578783",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B66538175578783",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B67010796182523",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B67010796182523",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B73191723482857",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B73191723482857",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B74112724053029",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B74112724053029",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B80414211212402",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B80414211212402",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B84564180686688",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B84564180686688",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B85150336292626",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B85150336292626",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B9277012619903",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B9277012619903",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B96066491873241",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B96066491873241",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B98818104227605",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B98818104227605",
+      "pass": true
+    },
+    {
+      "check": "whole-veto copies gb:MMR:ADM3:66882298B99723166439324",
+      "pass": true
+    },
+    {
+      "check": "conservative consumed-envelope retrieval gb:MMR:ADM3:66882298B99723166439324",
+      "pass": true
+    },
+    {
+      "check": "registry precisely union of whole-target veto selections",
+      "pass": true
+    },
+    {
+      "check": "selected base envelope has no omitted additional retained rival",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "group published bytes north-block26-27",
+      "pass": true
+    },
+    {
+      "check": "only targets partitioned north-block26-27",
+      "pass": true,
+      "detail": "Both current group common fields are identical. Superseded oversize all72 draft retains an unpublished physical pin and256MiB nominal allowance; final groups bind the identical reviewed bytes at e9b1b869 and a nominal512MiB pending allowance."
+    },
+    {
+      "check": "whole-owner exact group north-block26-27",
+      "pass": true
+    },
+    {
+      "check": "actual first-request-block geographic rule north-block26-27",
+      "pass": true
+    },
+    {
+      "check": "group published bytes south-block28-29",
+      "pass": true
+    },
+    {
+      "check": "only targets partitioned south-block28-29",
+      "pass": true,
+      "detail": "Both current group common fields are identical. Superseded oversize all72 draft retains an unpublished physical pin and256MiB nominal allowance; final groups bind the identical reviewed bytes at e9b1b869 and a nominal512MiB pending allowance."
+    },
+    {
+      "check": "whole-owner exact group south-block28-29",
+      "pass": true
+    },
+    {
+      "check": "actual first-request-block geographic rule south-block28-29",
+      "pass": true
+    },
+    {
+      "check": "patch exact7479 union",
+      "pass": true
+    },
+    {
+      "check": "ordinary per-file limit genuine",
+      "pass": true
+    },
+    {
+      "check": "28parents128children and sourceflags fully retained by same whole stage pin",
+      "pass": true
+    },
+    {
+      "check": "all72 target payloads unchanged in literal partition",
+      "pass": true
+    },
+    {
+      "check": "all source flags retained unchanged through full stage pin",
+      "pass": true,
+      "detail": "36 flagged selected stage targets remain whole; prior input review authenticated28parents/128children with45 flagged context children and the exact exclusion of210 SOURCE-held request keys. Same stage bytes/pin carry these fields into each group."
+    }
+  ],
+  "bindings": [
+    {
+      "local": ".cache/mmr-unattempted-repair-bulk-001/retained-source-catalogue.json",
+      "bytes": 403376,
+      "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+      "git_blob_oid": "09afab19371f0814da61e79e5f310c5fb2405b6d",
+      "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json"
+    },
+    {
+      "local": ".cache/mmr-unattempted-repair-bulk-001/original-mmr-adm3.bin.gz",
+      "bytes": 1396414,
+      "sha256": "57de50a588f418601412bb7a34cc2f43a3fd6d7d6f16635cb41b95e5ae505db6",
+      "git_blob_oid": "6a91fcb22b44ae00401a0068a6c3e62bfed62374",
+      "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz"
+    },
+    {
+      "local": ".cache/mmr7479-native-preparation-001/gb-BGD-ADM1-000.bin.gz",
+      "bytes": 33218,
+      "sha256": "77da64f82264ceb232482415d950ba870b339b1953a8d22afe19baf06dab5495",
+      "git_blob_oid": "43dd400349466007c7d5c326441b0482fff01264",
+      "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-BGD-ADM1-000.bin.gz"
+    },
+    {
+      "local": ".cache/mmr7479-native-preparation-001/gb-BGD-ADM2-000.bin.gz",
+      "bytes": 545583,
+      "sha256": "a64c10d89fe83c0ea9517aa0a3f977edc8ff0597c41d867f9c006f9ad2eec611",
+      "git_blob_oid": "8a47542f7f97ffe6321104c9bab0d545b90ae2d5",
+      "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-BGD-ADM2-000.bin.gz"
+    },
+    {
+      "local": ".cache/mmr7479-native-preparation-001/gb-CHN-ADM1-000.bin.gz",
+      "bytes": 77377,
+      "sha256": "ef7d65847af732f6e61430d6357a4909252f98771d9b00413d38bc3cb4eb767d",
+      "git_blob_oid": "29edaa5770af7af9b72432cc407ca296bbde6e15",
+      "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHN-ADM1-000.bin.gz"
+    },
+    {
+      "local": ".cache/mmr7479-native-preparation-001/gb-CHN-ADM2-000.bin.gz",
+      "bytes": 2096437,
+      "sha256": "7bcd6bb51042f63c2f4f1717b25d701874cfcd6f12eb79dc36cdff29f3b62f30",
+      "git_blob_oid": "48bb210799d1ae8dae4fa23d4e74f9b2a15f4e87",
+      "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHN-ADM2-000.bin.gz"
+    },
+    {
+      "local": ".cache/mmr7479-native-preparation-001/gb-IND-ADM1-000.bin.gz",
+      "bytes": 2009868,
+      "sha256": "4a716fa04288d6742b1f43031ea90a26998c86becb1389f46acd3200b3acb1e0",
+      "git_blob_oid": "6c717053e0e9893cbe32ee9e09e4cba76760798a",
+      "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM1-000.bin.gz"
+    },
+    {
+      "local": ".cache/mmr7479-native-preparation-001/gb-IND-ADM2-000.bin.gz",
+      "bytes": 2210535,
+      "sha256": "fb067b600f7bf557064674af536aa7b727fddf74121e46763ae1eec121524c94",
+      "git_blob_oid": "f83550dbf455bd63e04872ba218b56e27c6ef106",
+      "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM2-000.bin.gz"
+    },
+    {
+      "local": ".cache/mmr7479-native-preparation-001/gb-LAO-ADM1-000.bin.gz",
+      "bytes": 136573,
+      "sha256": "83a51a0eb283d4e6bb3fc7b8eab6365c92539ed0a3a029c4de8a02e8aaa24519",
+      "git_blob_oid": "35a36eb8b83d3401b0bdfe697e6f7069624cfe18",
+      "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-LAO-ADM1-000.bin.gz"
+    },
+    {
+      "local": ".cache/mmr7479-native-preparation-001/gb-LAO-ADM2-000.bin.gz",
+      "bytes": 415901,
+      "sha256": "386b63fd1829ce9228006934b32e740280cd53eb0eaae5c40c0beca8dd5ccae3",
+      "git_blob_oid": "8b130c0925274f49eaf3408501c5ef4bd4420614",
+      "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-LAO-ADM2-000.bin.gz"
+    },
+    {
+      "local": ".cache/mmr7479-native-preparation-001/gb-THA-ADM1-000.bin.gz",
+      "bytes": 314966,
+      "sha256": "a0cbbd57b5fb847d36c418051c9e838bee5d9a4c06805a13495612d2cd9cf8e9",
+      "git_blob_oid": "697f84f9e9831d64a1a0a085df383663e1e3c932",
+      "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-THA-ADM1-000.bin.gz"
+    },
+    {
+      "local": ".cache/mmr7479-native-preparation-001/gb-THA-ADM2-000.bin.gz",
+      "bytes": 2688274,
+      "sha256": "9ecb1bca78b481b24ed1e94d6a3c4230cde4b1c02c3618a45c784a77e6bcd4ed",
+      "git_blob_oid": "d43e07ca9416bf37067112b43950af9c10ce8ea6",
+      "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-THA-ADM2-000.bin.gz"
+    },
+    {
+      "local": ".cache/mmr7479-native-preparation-001/gb-IND-ADM3-000.bin.gz",
+      "bytes": 11542134,
+      "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+      "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+      "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz"
+    },
+    {
+      "local": ".cache/mmr7479-native-preparation-001/gb-IND-ADM3-001.bin.gz",
+      "bytes": 2253028,
+      "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+      "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+      "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz"
+    },
+    {
+      "local": ".cache/mmr7479-native-preparation-001/reference-countries.geojson.gz",
+      "bytes": 4719659,
+      "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+      "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+      "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+      "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz"
+    },
+    {
+      "local": ".cache/mmr7479-native-preparation-001/actual-whole-target-support.json",
+      "bytes": 2090876,
+      "sha256": "2b404937f2f6629905c208e97718f766a01ee8bded8d0f5b1b3bb694cc9947f9",
+      "git_blob_oid": "908e8c9d8157e84188e5d64c528fa40479aa9215",
+      "commit": "e9b1b8696557d673583460d27e790087a2f60809",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/remaining7479-whole-physical-001/physical-result-001/whole-target-support.json"
+    },
+    {
+      "local": ".cache/mmr-unattempted-repair-bulk-001/selected72-whole-original-stage-inputs.json",
+      "bytes": 1063861,
+      "sha256": "de4fc9a0c00cd74817afb314f77740ea02ee7bcf3566c2fe1d38c4bde52a2d97",
+      "git_blob_oid": "9b05e3bdb59305458adb4a6318abddaa16792545",
+      "commit": "68cd14edf82d22aed380d57afe5cde0a3ebe318b",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/remaining7479-whole-physical-001/original-stage-inputs.json"
+    },
+    {
+      "local": ".cache/mmr-bulk-physical-preparation-001/accepted-f6068aaf/scripts/qualify-source-cohort.py",
+      "bytes": 48543,
+      "sha256": "58ef81739b264085b2997be7baa3df03ba6bb673f91a160176efd79b71fec081",
+      "git_blob_oid": "4dea98fd3d75a70327f1f1313619c44eb113971f",
+      "commit": "596c3449500601e2f82d6052f5d0b9513dd72bfd",
+      "path": "scripts/qualify-source-cohort.py"
+    }
+  ],
+  "target_retrieval_checks": [
+    {
+      "target": "gb:MMR:ADM3:66882298B10368150445219",
+      "owner": 30078,
+      "request_cells": 291,
+      "veto_count": 13,
+      "consumed_envelope": [
+        92.6021043200001,
+        20.708088533000012,
+        93.64342371000008,
+        22.155073646000044
+      ],
+      "selected_envelope": [
+        92.6021,
+        20.7091,
+        93.6434,
+        22.15
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B13890402968202",
+      "owner": 30088,
+      "request_cells": 79,
+      "veto_count": 5,
+      "consumed_envelope": [
+        98.55833499300012,
+        23.45930752600005,
+        98.89085943900002,
+        23.836862546000084
+      ],
+      "selected_envelope": [
+        98.5583,
+        23.4593,
+        98.88509017041245,
+        23.8309
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B15199869857953",
+      "owner": 30092,
+      "request_cells": 323,
+      "veto_count": 13,
+      "consumed_envelope": [
+        97.31275623200007,
+        27.31037129000005,
+        98.38140587100007,
+        28.545538862000022
+      ],
+      "selected_envelope": [
+        97.3128,
+        27.3104,
+        98.3798,
+        28.5426
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B17749520756313",
+      "owner": 30101,
+      "request_cells": 19,
+      "veto_count": 14,
+      "consumed_envelope": [
+        96.88879305500018,
+        26.710371098000167,
+        97.7612310580001,
+        27.981130351
+      ],
+      "selected_envelope": [
+        96.8888,
+        26.7104,
+        97.7612,
+        27.9811
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B1975009216242",
+      "owner": 30106,
+      "request_cells": 131,
+      "veto_count": 5,
+      "consumed_envelope": [
+        99.02692520700006,
+        21.70112791800005,
+        99.9964634230001,
+        22.162689066000162
+      ],
+      "selected_envelope": [
+        99.0269,
+        21.7093,
+        99.9965,
+        22.1627
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B20724664356365",
+      "owner": 30109,
+      "request_cells": 94,
+      "veto_count": 4,
+      "consumed_envelope": [
+        98.92895412100003,
+        22.3340123630001,
+        99.38370541700006,
+        22.797950525000065
+      ],
+      "selected_envelope": [
+        98.9354,
+        22.3364,
+        99.3837,
+        22.7912
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B21056101662842",
+      "owner": 30112,
+      "request_cells": 200,
+      "veto_count": 7,
+      "consumed_envelope": [
+        97.91648717200006,
+        26.70679949900008,
+        98.76588836400005,
+        27.66732185500003
+      ],
+      "selected_envelope": [
+        97.9169,
+        26.7076,
+        98.7659,
+        27.6673
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B22679639113229",
+      "owner": 30118,
+      "request_cells": 148,
+      "veto_count": 3,
+      "consumed_envelope": [
+        98.51775856600003,
+        22.13896200900003,
+        99.27736473500005,
+        22.891115005000117
+      ],
+      "selected_envelope": [
+        98.5185,
+        22.139,
+        99.2765,
+        22.8911
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B29413471910170",
+      "owner": 30145,
+      "request_cells": 77,
+      "veto_count": 26,
+      "consumed_envelope": [
+        95.00797630100003,
+        25.757425323000074,
+        95.91236337200004,
+        26.70132226500004
+      ],
+      "selected_envelope": [
+        95.008,
+        25.7574,
+        95.9103,
+        26.7013
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B29817786092146",
+      "owner": 30146,
+      "request_cells": 126,
+      "veto_count": 14,
+      "consumed_envelope": [
+        93.09198427500003,
+        22.085902036000093,
+        93.54139713100005,
+        23.072739027000043
+      ],
+      "selected_envelope": [
+        93.0925,
+        22.0859,
+        93.5414,
+        23.0727
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B34211436690128",
+      "owner": 30164,
+      "request_cells": 33,
+      "veto_count": 5,
+      "consumed_envelope": [
+        98.12887180500006,
+        26.027489983000088,
+        98.78136091300003,
+        26.85028478400009
+      ],
+      "selected_envelope": [
+        98.1298,
+        26.0275,
+        98.7814,
+        26.8503
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B34348354141761",
+      "owner": 30165,
+      "request_cells": 90,
+      "veto_count": 19,
+      "consumed_envelope": [
+        93.32565966800011,
+        23.487233705000076,
+        94.15302636300004,
+        24.10597674800006
+      ],
+      "selected_envelope": [
+        93.3257,
+        23.4872,
+        94.153,
+        24.0916
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B35396935405838",
+      "owner": 30175,
+      "request_cells": 8,
+      "veto_count": 23,
+      "consumed_envelope": [
+        94.577699969,
+        24.873743079000057,
+        95.23745947500007,
+        25.740633809000027
+      ],
+      "selected_envelope": [
+        94.5777,
+        24.8744,
+        95.2374,
+        25.7406
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B42133100015884",
+      "owner": 30191,
+      "request_cells": 166,
+      "veto_count": 6,
+      "consumed_envelope": [
+        97.2555866190001,
+        24.72566669600005,
+        98.18750436000002,
+        25.72548586199999
+      ],
+      "selected_envelope": [
+        97.2653,
+        24.7257,
+        98.18100866983373,
+        25.7255
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B44324373263157",
+      "owner": 30197,
+      "request_cells": 2,
+      "veto_count": 6,
+      "consumed_envelope": [
+        93.01470809800009,
+        21.233137723000016,
+        94.01750445200007,
+        22.23018950400004
+      ],
+      "selected_envelope": [
+        93.0156,
+        21.2331,
+        94.0175,
+        22.2283
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B45954578024958",
+      "owner": 30209,
+      "request_cells": 44,
+      "veto_count": 6,
+      "consumed_envelope": [
+        97.83241785400008,
+        23.670544648000046,
+        98.59431172600003,
+        24.130537284000056
+      ],
+      "selected_envelope": [
+        97.8333,
+        23.6722,
+        98.5943,
+        24.1305
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B47048273457297",
+      "owner": 30220,
+      "request_cells": 129,
+      "veto_count": 3,
+      "consumed_envelope": [
+        98.52617126600003,
+        22.7111108250001,
+        99.2145233350001,
+        23.18755343000005
+      ],
+      "selected_envelope": [
+        98.5269,
+        22.7111,
+        99.2145,
+        23.18418953265045
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B58400642266296",
+      "owner": 30258,
+      "request_cells": 126,
+      "veto_count": 5,
+      "consumed_envelope": [
+        96.97464527900004,
+        23.633245377000044,
+        97.75218672900006,
+        24.203980483000034
+      ],
+      "selected_envelope": [
+        96.9746,
+        23.6341,
+        97.7522,
+        24.204
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B59193658756261",
+      "owner": 30260,
+      "request_cells": 6,
+      "veto_count": 8,
+      "consumed_envelope": [
+        95.99385990800005,
+        25.70001799500006,
+        97.28688284400008,
+        27.10688946800011
+      ],
+      "selected_envelope": [
+        96.001,
+        25.701,
+        97.2869,
+        27.106
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B59325512969250",
+      "owner": 30261,
+      "request_cells": 49,
+      "veto_count": 6,
+      "consumed_envelope": [
+        97.17017942000018,
+        24.162086447,
+        97.76954563000007,
+        24.90497679300019
+      ],
+      "selected_envelope": [
+        97.1721,
+        24.1621,
+        97.7695,
+        24.8883
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B60976321477453",
+      "owner": 30268,
+      "request_cells": 141,
+      "veto_count": 5,
+      "consumed_envelope": [
+        99.02535071000008,
+        22.739324075000077,
+        99.56572167500012,
+        23.13669836800003
+      ],
+      "selected_envelope": [
+        99.0254,
+        22.7397,
+        99.5657,
+        23.129623
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B63943979787937",
+      "owner": 30286,
+      "request_cells": 220,
+      "veto_count": 7,
+      "consumed_envelope": [
+        97.94085652700005,
+        25.54796812500009,
+        98.75679769200008,
+        26.509819977000085
+      ],
+      "selected_envelope": [
+        97.9431,
+        25.5501,
+        98.7568,
+        26.5098
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B6984635080223",
+      "owner": 30316,
+      "request_cells": 32,
+      "veto_count": 7,
+      "consumed_envelope": [
+        93.38823740200009,
+        23.123675274000032,
+        94.03659573800006,
+        23.62195211900009
+      ],
+      "selected_envelope": [
+        93.3882,
+        23.1237,
+        94.0366,
+        23.6168
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B72647689440603",
+      "owner": 30323,
+      "request_cells": 63,
+      "veto_count": 21,
+      "consumed_envelope": [
+        94.12806425100003,
+        23.645108685,
+        94.64038998100004,
+        24.73014308200006
+      ],
+      "selected_envelope": [
+        94.1281,
+        23.6451,
+        94.6404,
+        24.7301
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B72712470803341",
+      "owner": 30324,
+      "request_cells": 46,
+      "veto_count": 4,
+      "consumed_envelope": [
+        98.43138926500009,
+        22.953553994000075,
+        98.94505999200001,
+        23.488015897000047
+      ],
+      "selected_envelope": [
+        98.4314,
+        22.9544,
+        98.9439,
+        23.487351789149674
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B80362939759062",
+      "owner": 30341,
+      "request_cells": 46,
+      "veto_count": 7,
+      "consumed_envelope": [
+        93.339866494,
+        22.786043765000063,
+        94.02549703000004,
+        23.36918333500002
+      ],
+      "selected_envelope": [
+        93.3399,
+        22.786,
+        94.0237,
+        23.3688
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B89556704578744",
+      "owner": 30371,
+      "request_cells": 332,
+      "veto_count": 37,
+      "consumed_envelope": [
+        95.43274160600005,
+        26.461977993000055,
+        97.06658535800004,
+        27.37204735800003
+      ],
+      "selected_envelope": [
+        95.4327,
+        26.4667,
+        97.0666,
+        27.372
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B9190211902717",
+      "owner": 30377,
+      "request_cells": 81,
+      "veto_count": 6,
+      "consumed_envelope": [
+        98.40007919800003,
+        23.74979146400007,
+        98.89921092800003,
+        24.15575202
+      ],
+      "selected_envelope": [
+        98.4001,
+        23.7498,
+        98.8992,
+        24.1489
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B13905773583964",
+      "owner": 30089,
+      "request_cells": 2,
+      "veto_count": 2,
+      "consumed_envelope": [
+        96.11486278300006,
+        16.80462613700009,
+        96.14635057300008,
+        16.84127560300006
+      ],
+      "selected_envelope": [
+        96.1149,
+        16.8046,
+        96.1464,
+        16.8413
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B20948488348117",
+      "owner": 30111,
+      "request_cells": 70,
+      "veto_count": 8,
+      "consumed_envelope": [
+        97.35932352600005,
+        16.517084187000098,
+        98.01141574600005,
+        17.70524656000003
+      ],
+      "selected_envelope": [
+        97.3678,
+        16.5171,
+        98.0084,
+        17.7052
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B21195914889348",
+      "owner": 30113,
+      "request_cells": 133,
+      "veto_count": 15,
+      "consumed_envelope": [
+        99.43802820941748,
+        20.317030992000106,
+        100.64942603100008,
+        21.047088408000047
+      ],
+      "selected_envelope": [
+        99.4387,
+        20.317,
+        100.64792229758704,
+        21.0471
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B22649797942784",
+      "owner": 30117,
+      "request_cells": 6,
+      "veto_count": 2,
+      "consumed_envelope": [
+        97.58108931300008,
+        15.96451206899998,
+        97.86687416400005,
+        16.393319924
+      ],
+      "selected_envelope": [
+        97.5811,
+        15.9645,
+        97.8669,
+        16.3933
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B23940339796351",
+      "owner": 30121,
+      "request_cells": 23,
+      "veto_count": 2,
+      "consumed_envelope": [
+        96.48165469900003,
+        17.11340877700007,
+        96.98232696900006,
+        17.392673321000117
+      ],
+      "selected_envelope": [
+        96.4848,
+        17.1138,
+        96.9823,
+        17.3868
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B24871755522741",
+      "owner": 30124,
+      "request_cells": 48,
+      "veto_count": 2,
+      "consumed_envelope": [
+        96.37537548500005,
+        16.82168437000009,
+        96.92519922000008,
+        17.191231819000063
+      ],
+      "selected_envelope": [
+        96.376,
+        16.8217,
+        96.9252,
+        17.1861
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B26691855709091",
+      "owner": 30130,
+      "request_cells": 40,
+      "veto_count": 2,
+      "consumed_envelope": [
+        96.05850113800005,
+        16.591974268000097,
+        96.24481961300009,
+        16.768902078000036
+      ],
+      "selected_envelope": [
+        96.0585,
+        16.592,
+        96.2441,
+        16.7689
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B28068937388118",
+      "owner": 30136,
+      "request_cells": 139,
+      "veto_count": 12,
+      "consumed_envelope": [
+        99.99707855100009,
+        20.962065877000068,
+        101.16989157400008,
+        21.778119990000032
+      ],
+      "selected_envelope": [
+        99.9971,
+        20.9621,
+        101.1697,
+        21.769895152033214
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B28699089666182",
+      "owner": 30141,
+      "request_cells": 113,
+      "veto_count": 2,
+      "consumed_envelope": [
+        95.88346996100002,
+        16.309397093000097,
+        96.32780314700007,
+        16.54878774100006
+      ],
+      "selected_envelope": [
+        95.8887,
+        16.3215,
+        96.3243,
+        16.5488
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B29412764358741",
+      "owner": 30144,
+      "request_cells": 91,
+      "veto_count": 2,
+      "consumed_envelope": [
+        96.10655215700007,
+        16.78228418000016,
+        96.1288159370001,
+        16.822089480000123
+      ],
+      "selected_envelope": [
+        96.1066,
+        16.7823,
+        96.1274,
+        16.8221
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B30035671122346",
+      "owner": 30148,
+      "request_cells": 15,
+      "veto_count": 2,
+      "consumed_envelope": [
+        96.868285009,
+        17.236561982000097,
+        97.21622789100005,
+        17.624975133000053
+      ],
+      "selected_envelope": [
+        96.8683,
+        17.2366,
+        97.2162,
+        17.6243
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B32460181384532",
+      "owner": 30152,
+      "request_cells": 58,
+      "veto_count": 3,
+      "consumed_envelope": [
+        98.2048214360002,
+        13.27261872000005,
+        98.66292415000007,
+        14.042436621000064
+      ],
+      "selected_envelope": [
+        98.2048,
+        13.2911,
+        98.6629,
+        14.0424
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B33396458700604",
+      "owner": 30159,
+      "request_cells": 10,
+      "veto_count": 2,
+      "consumed_envelope": [
+        96.21633244400002,
+        16.670809099000053,
+        96.4347403090001,
+        16.973813634000056
+      ],
+      "selected_envelope": [
+        96.2163,
+        16.6726,
+        96.4347,
+        16.9738
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B36196103316909",
+      "owner": 30177,
+      "request_cells": 40,
+      "veto_count": 2,
+      "consumed_envelope": [
+        93.3504130730002,
+        14.044257853000126,
+        93.64418827200024,
+        14.906136731000228
+      ],
+      "selected_envelope": [
+        93.3504,
+        14.0449,
+        93.6409,
+        14.9061
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B40918846263989",
+      "owner": 30187,
+      "request_cells": 2,
+      "veto_count": 2,
+      "consumed_envelope": [
+        96.39472340100005,
+        16.553388494000053,
+        96.79002213700004,
+        16.87160681500004
+      ],
+      "selected_envelope": [
+        96.3947,
+        16.5534,
+        96.782,
+        16.8716
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B41675327542424",
+      "owner": 30189,
+      "request_cells": 1,
+      "veto_count": 2,
+      "consumed_envelope": [
+        96.09912198100008,
+        16.831131399000054,
+        96.14130296600005,
+        16.863154914000077
+      ],
+      "selected_envelope": [
+        96.0991,
+        16.8311,
+        96.1408,
+        16.8632
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B45439994111599",
+      "owner": 30202,
+      "request_cells": 372,
+      "veto_count": 2,
+      "consumed_envelope": [
+        97.60132320900004,
+        16.348200263000056,
+        97.70449877600011,
+        16.606656524000133
+      ],
+      "selected_envelope": [
+        97.6116,
+        16.3482,
+        97.7042,
+        16.6028
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B46374660355499",
+      "owner": 30213,
+      "request_cells": 348,
+      "veto_count": 3,
+      "consumed_envelope": [
+        97.22069339300013,
+        16.49831129500023,
+        97.61964582800005,
+        16.816975395000163
+      ],
+      "selected_envelope": [
+        97.2207,
+        16.5071,
+        97.6188,
+        16.8161
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B46397740219200",
+      "owner": 30214,
+      "request_cells": 2,
+      "veto_count": 2,
+      "consumed_envelope": [
+        96.3765891,
+        16.755011474000113,
+        96.83746435500004,
+        16.999002202000057
+      ],
+      "selected_envelope": [
+        96.3788,
+        16.756,
+        96.8375,
+        16.999
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B47304075793437",
+      "owner": 30221,
+      "request_cells": 26,
+      "veto_count": 2,
+      "consumed_envelope": [
+        96.13561224200004,
+        16.765398808000075,
+        96.17589287400007,
+        16.77768666700008
+      ],
+      "selected_envelope": [
+        96.1356,
+        16.7665,
+        96.1759,
+        16.7777
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B48286505509820",
+      "owner": 30226,
+      "request_cells": 82,
+      "veto_count": 2,
+      "consumed_envelope": [
+        97.55722633000006,
+        15.611249849000085,
+        97.88503162500005,
+        16.093592042000026
+      ],
+      "selected_envelope": [
+        97.5572,
+        15.6112,
+        97.885,
+        16.0936
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B48301856519721",
+      "owner": 30227,
+      "request_cells": 788,
+      "veto_count": 4,
+      "consumed_envelope": [
+        97.76262640200031,
+        14.108611346,
+        98.43916790800012,
+        15.10485434500011
+      ],
+      "selected_envelope": [
+        97.784,
+        14.118,
+        98.43896642182581,
+        15.1049
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B50654546091874",
+      "owner": 30233,
+      "request_cells": 76,
+      "veto_count": 3,
+      "consumed_envelope": [
+        97.14267137300001,
+        16.751122107000093,
+        97.53766597999999,
+        17.208343130000102
+      ],
+      "selected_envelope": [
+        97.1427,
+        16.7511,
+        97.5377,
+        17.2071
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B51516707971749",
+      "owner": 30238,
+      "request_cells": 43,
+      "veto_count": 2,
+      "consumed_envelope": [
+        96.16420888700011,
+        16.766131230000013,
+        96.19656380000002,
+        16.781009623000042
+      ],
+      "selected_envelope": [
+        96.1642,
+        16.7665,
+        96.1844,
+        16.781
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B52510382995497",
+      "owner": 30241,
+      "request_cells": 11,
+      "veto_count": 4,
+      "consumed_envelope": [
+        96.94488263500004,
+        16.911622710000106,
+        97.50974439400007,
+        17.717759930000042
+      ],
+      "selected_envelope": [
+        96.9449,
+        16.9116,
+        97.5035,
+        17.7138
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B54341055682393",
+      "owner": 30246,
+      "request_cells": 20,
+      "veto_count": 2,
+      "consumed_envelope": [
+        95.99424552027158,
+        16.82382852800005,
+        96.1143265570001,
+        16.936771458000138
+      ],
+      "selected_envelope": [
+        95.9942,
+        16.825,
+        96.1104,
+        16.9368
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B55371715094402",
+      "owner": 30248,
+      "request_cells": 10,
+      "veto_count": 3,
+      "consumed_envelope": [
+        97.65674542,
+        16.120996320000035,
+        98.12876914300008,
+        16.56044459800008
+      ],
+      "selected_envelope": [
+        97.6588,
+        16.1222,
+        98.1282,
+        16.5604
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B563703845722",
+      "owner": 30252,
+      "request_cells": 13,
+      "veto_count": 2,
+      "consumed_envelope": [
+        96.242817626,
+        16.476721679000075,
+        96.68666147600001,
+        16.730070051000045
+      ],
+      "selected_envelope": [
+        96.2428,
+        16.4767,
+        96.6766,
+        16.7301
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B56545181758026",
+      "owner": 30253,
+      "request_cells": 15,
+      "veto_count": 2,
+      "consumed_envelope": [
+        96.2340293710001,
+        16.802632988886273,
+        96.36832969800007,
+        16.95353640100008
+      ],
+      "selected_envelope": [
+        96.234,
+        16.8026,
+        96.3683,
+        16.9535
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B57686651613256",
+      "owner": 30255,
+      "request_cells": 164,
+      "veto_count": 2,
+      "consumed_envelope": [
+        97.43601999500005,
+        16.197390053000024,
+        97.61067373400022,
+        16.51087002299998
+      ],
+      "selected_envelope": [
+        97.436,
+        16.1974,
+        97.6107,
+        16.5109
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B59879554977018",
+      "owner": 30263,
+      "request_cells": 4,
+      "veto_count": 10,
+      "consumed_envelope": [
+        98.16301931000005,
+        16.039883921000108,
+        98.92170008000006,
+        17.09211446900005
+      ],
+      "selected_envelope": [
+        98.163,
+        16.039968965517243,
+        98.91910067114094,
+        17.0899
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B65618262001870",
+      "owner": 30292,
+      "request_cells": 1,
+      "veto_count": 9,
+      "consumed_envelope": [
+        97.63910594200006,
+        19.57240556600006,
+        98.62696899761077,
+        20.597877604000047
+      ],
+      "selected_envelope": [
+        97.6393,
+        19.5748,
+        98.627,
+        20.5979
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B66473456791866",
+      "owner": 30297,
+      "request_cells": 7,
+      "veto_count": 2,
+      "consumed_envelope": [
+        96.07953363100009,
+        16.748158947000057,
+        96.1298218580001,
+        16.78490624300004
+      ],
+      "selected_envelope": [
+        96.0932,
+        16.7486,
+        96.1298,
+        16.7831
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B66538175578783",
+      "owner": 30298,
+      "request_cells": 164,
+      "veto_count": 4,
+      "consumed_envelope": [
+        99.66211060500007,
+        21.270782859000036,
+        100.23812284600005,
+        21.822771194000023
+      ],
+      "selected_envelope": [
+        99.6621,
+        21.2708,
+        100.237,
+        21.8228
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B67010796182523",
+      "owner": 30299,
+      "request_cells": 16,
+      "veto_count": 2,
+      "consumed_envelope": [
+        96.11952217500003,
+        16.773718297000094,
+        96.13692806600001,
+        16.797932261000014
+      ],
+      "selected_envelope": [
+        96.1205,
+        16.7737,
+        96.1364,
+        16.7979
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B73191723482857",
+      "owner": 30327,
+      "request_cells": 428,
+      "veto_count": 5,
+      "consumed_envelope": [
+        97.6427942320001,
+        14.87754955000009,
+        98.23501895500011,
+        15.67807133
+      ],
+      "selected_envelope": [
+        97.6428,
+        14.8806,
+        98.2304,
+        15.6781
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B74112724053029",
+      "owner": 30329,
+      "request_cells": 40,
+      "veto_count": 2,
+      "consumed_envelope": [
+        95.8264857660001,
+        16.413811841000058,
+        96.274412124,
+        16.667948026000023
+      ],
+      "selected_envelope": [
+        95.8267,
+        16.4138,
+        96.2744,
+        16.6641
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B80414211212402",
+      "owner": 30342,
+      "request_cells": 828,
+      "veto_count": 2,
+      "consumed_envelope": [
+        97.90198977000024,
+        13.536158964000382,
+        98.22724266100022,
+        14.220061930000206
+      ],
+      "selected_envelope": [
+        97.9033,
+        13.5548,
+        98.2272,
+        14.2187
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B84564180686688",
+      "owner": 30354,
+      "request_cells": 1,
+      "veto_count": 9,
+      "consumed_envelope": [
+        98.98831270756544,
+        20.064164388375904,
+        99.68089492847932,
+        20.99794446023433
+      ],
+      "selected_envelope": [
+        98.9883,
+        20.06701504431951,
+        99.6809,
+        20.9979
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B85150336292626",
+      "owner": 30356,
+      "request_cells": 9,
+      "veto_count": 2,
+      "consumed_envelope": [
+        96.17845924800004,
+        16.771548101000032,
+        96.20189412200007,
+        16.810232291000048
+      ],
+      "selected_envelope": [
+        96.1785,
+        16.7715,
+        96.2019,
+        16.8102
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B9277012619903",
+      "owner": 30380,
+      "request_cells": 19,
+      "veto_count": 12,
+      "consumed_envelope": [
+        98.17461627400027,
+        13.291396119000098,
+        99.2090272610001,
+        14.603453226000184
+      ],
+      "selected_envelope": [
+        98.1746,
+        13.2914,
+        99.20896119402985,
+        14.603302570828959
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B96066491873241",
+      "owner": 30393,
+      "request_cells": 6,
+      "veto_count": 6,
+      "consumed_envelope": [
+        92.34508893300003,
+        20.582940759000067,
+        92.75065050900007,
+        21.382488527000042
+      ],
+      "selected_envelope": [
+        92.3451,
+        20.5867,
+        92.7507,
+        21.3825
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B98818104227605",
+      "owner": 30402,
+      "request_cells": 83,
+      "veto_count": 6,
+      "consumed_envelope": [
+        92.17274709800023,
+        20.45216612300004,
+        92.6543862260001,
+        21.47963283900009
+      ],
+      "selected_envelope": [
+        92.17277873485868,
+        20.4524,
+        92.6544,
+        21.4796
+      ]
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B99723166439324",
+      "owner": 30403,
+      "request_cells": 10,
+      "veto_count": 2,
+      "consumed_envelope": [
+        96.18889356300008,
+        16.772455952000143,
+        96.23733000764548,
+        16.817129101000038
+      ],
+      "selected_envelope": [
+        96.1889,
+        16.7731,
+        96.2373,
+        16.8161
+      ]
+    }
+  ],
+  "limits": [
+    "This review independently checks metadata, exact integer request sets, coordinate-envelope retrieval and literal full geometry custody. Prior distinct physical input/result reviews establish the unchanged stage and complete physical body; source provenance is not territorial qualification.",
+    "The full physical body retains all24 issues across14 targets and31 exterior witnesses; mapped_land_support is the requested positive class only, not deletion of other physical support classes or adverse issues.",
+    "Native diagnostic configs intentionally retain null source_evidence/native_patch commits and null preparation_allowance until actual metadata products and ordinary resource admission. They are not runnable/admitted by this review.",
+    "The geographic partition solves an actual32MiB config-file bound. Shared readers/runtime/output/diagnostic union still require complete phase admission; two configs are not two granted resource envelopes.",
+    "Natural Earth reference custody is the exact retained full source at f7c3583, not a researched country-date adjudication. geoBoundaries source represented years/URLs are recorded vintage claims, not newly verified primary territorial facts."
+  ],
+  "reviewer": "Delegated same agent as earlier physical-input/result review; distinct examination, not another review principal.",
+  "planning_metadata_notes": [
+    "plan.json pending_only_source_evidence_input still describes the earlier unpublished physical pin; actual final group configs correctly bind e9b1b869/.../physical-result-001 with verified byte hash and Git blob.",
+    "Native diagnostic config pending.json files intentionally have null immutable product commits and null allowance. This review applies to source-evidence preparation inputs, not executable native configs."
+  ],
+  "request_proof_reuse": {
+    "prior_review": ".cache/mmr7479-physical-input-review-001/scientificinputreview.json",
+    "sha256": "e5d25688bc387f8d928f472fc9367f995b9b05884f628d6040d31210ae0d38a3",
+    "scope": "Prior independent original frozen26\u201330 tuple joins:39315original\u221231498accepted=7817;\u2212128earlierattempt keys\u2212210SOURCEflag keys=7479land. Current full union is exactly those original owner(y,x) tuples, preserving inherited block/source/physical interval association without recomputing source/geometry predicates."
+  },
+  "review_inputs": [
+    {
+      "path": ".cache/mmr7479-native-preparation-001/group-plan.json",
+      "bytes": 3272,
+      "sha256": "d02c8b87aef062b6063710c92872b6a7233f064da142df0d6e4478b0e71d8a4a"
+    },
+    {
+      "path": ".cache/mmr7479-native-preparation-001/territorial-veto-custody.json",
+      "bytes": 399184,
+      "sha256": "1d6e06d357fa83cbad17d24f247d7e7f89413ff1e996a47d51b355cd05660718"
+    },
+    {
+      "path": ".cache/mmr7479-native-preparation-001/whole-veto-feature-registry.json",
+      "bytes": 2763142,
+      "sha256": "56504b394f8c58c888b2aed48a63f8c43dacf7082758bd926ee2c858de757b3e"
+    },
+    {
+      "path": ".cache/mmr7479-native-preparation-001/whole-foreign-source-input-locators.json",
+      "bytes": 6329,
+      "sha256": "ecf4780c162984191cc98544d0d9e7307e4636916adc3ab9057534a28b239c00"
+    },
+    {
+      "path": ".cache/mmr7479-native-preparation-001/north-block26-27-source-evidence-config.json",
+      "bytes": 14959737,
+      "sha256": "b9dfb956c956e79dc3a217dfab652b0397a2573aad0197ef3b1df974c15e1f3f"
+    },
+    {
+      "path": ".cache/mmr7479-native-preparation-001/north-block26-27-candidate-native-patch.json",
+      "bytes": 73249,
+      "sha256": "0e8641316983b5f59c4da7fc4b963ee0bb6ded320726113ec4f2988c9eb35de9"
+    },
+    {
+      "path": ".cache/mmr7479-native-preparation-001/north-block26-27-native-diagnostic-config.pending.json",
+      "bytes": 428,
+      "sha256": "7fc3217d18561f26b46d826aa6a7f77d07f6ced6cc8278a13b00fcb8265a7f5d"
+    },
+    {
+      "path": ".cache/mmr7479-native-preparation-001/south-block28-29-source-evidence-config.json",
+      "bytes": 19749132,
+      "sha256": "a53e8a36002696fcb7b47970090dfbb0ddec173c0809bb11aba94753400e1586"
+    },
+    {
+      "path": ".cache/mmr7479-native-preparation-001/south-block28-29-candidate-native-patch.json",
+      "bytes": 72347,
+      "sha256": "7e161d192c7d80d97e6d38192a2c82b8fd57ba2e9805045d88343ffe07c5947f"
+    },
+    {
+      "path": ".cache/mmr7479-native-preparation-001/south-block28-29-native-diagnostic-config.pending.json",
+      "bytes": 428,
+      "sha256": "b91560703a287204866bc41a0668e643db2c9c30144d697b3c4c94e87d643c59"
+    }
+  ],
+  "substantive_source_review": {
+    "crs": "All12 complete administrative source-family streams, including MMRADM3, declare OGC:CRS84; the complete Natural Earth reference collection declares the same CRS84. No axis reorder, reprojection or coordinate normalization was introduced.",
+    "source_headers": [
+      {
+        "source_family": "gb:BGD:ADM1",
+        "header_before_features": "{\n\"type\": \"FeatureCollection\",\n\"crs\": { \"type\": \"name\", \"properties\": { \"name\": \"urn:ogc:def:crs:OGC:1.3:CRS84\" } },\n"
+      },
+      {
+        "source_family": "gb:BGD:ADM2",
+        "header_before_features": "{\n\"type\": \"FeatureCollection\",\n\"crs\": { \"type\": \"name\", \"properties\": { \"name\": \"urn:ogc:def:crs:OGC:1.3:CRS84\" } },\n"
+      },
+      {
+        "source_family": "gb:CHN:ADM1",
+        "header_before_features": "{\n\"type\": \"FeatureCollection\",\n\"crs\": { \"type\": \"name\", \"properties\": { \"name\": \"urn:ogc:def:crs:OGC:1.3:CRS84\" } },\n"
+      },
+      {
+        "source_family": "gb:CHN:ADM2",
+        "header_before_features": "{\n\"type\": \"FeatureCollection\",\n\"crs\": { \"type\": \"name\", \"properties\": { \"name\": \"urn:ogc:def:crs:OGC:1.3:CRS84\" } },\n"
+      },
+      {
+        "source_family": "gb:IND:ADM1",
+        "header_before_features": "{\n\"type\": \"FeatureCollection\",\n\"crs\": { \"type\": \"name\", \"properties\": { \"name\": \"urn:ogc:def:crs:OGC:1.3:CRS84\" } },\n"
+      },
+      {
+        "source_family": "gb:IND:ADM2",
+        "header_before_features": "{\n\"type\": \"FeatureCollection\",\n\"crs\": { \"type\": \"name\", \"properties\": { \"name\": \"urn:ogc:def:crs:OGC:1.3:CRS84\" } },\n"
+      },
+      {
+        "source_family": "gb:LAO:ADM1",
+        "header_before_features": "{\n\"type\": \"FeatureCollection\",\n\"crs\": { \"type\": \"name\", \"properties\": { \"name\": \"urn:ogc:def:crs:OGC:1.3:CRS84\" } },\n"
+      },
+      {
+        "source_family": "gb:LAO:ADM2",
+        "header_before_features": "{\n\"type\": \"FeatureCollection\",\n\"crs\": { \"type\": \"name\", \"properties\": { \"name\": \"urn:ogc:def:crs:OGC:1.3:CRS84\" } },\n"
+      },
+      {
+        "source_family": "gb:THA:ADM1",
+        "header_before_features": "{\n\"type\": \"FeatureCollection\",\n\"crs\": { \"type\": \"name\", \"properties\": { \"name\": \"urn:ogc:def:crs:OGC:1.3:CRS84\" } },\n"
+      },
+      {
+        "source_family": "gb:THA:ADM2",
+        "header_before_features": "{\n\"type\": \"FeatureCollection\",\n\"crs\": { \"type\": \"name\", \"properties\": { \"name\": \"urn:ogc:def:crs:OGC:1.3:CRS84\" } },\n"
+      },
+      {
+        "source_family": "gb:IND:ADM3",
+        "header_before_features": "{\n\"type\": \"FeatureCollection\",\n\"crs\": { \"type\": \"name\", \"properties\": { \"name\": \"urn:ogc:def:crs:OGC:1.3:CRS84\" } },\n"
+      },
+      {
+        "source_family": "gb:MMR:ADM3",
+        "header_before_features": "{\n\"type\": \"FeatureCollection\",\n\"crs\": { \"type\": \"name\", \"properties\": { \"name\": \"urn:ogc:def:crs:OGC:1.3:CRS84\" } },\n"
+      }
+    ],
+    "vintage_meaning": "MMRADM3 recorded2019; neighbor administrative products carry2011\u20132021 represented-year claims. They are mixed-vintage territorial competitors, not one synchronized country-border edition. Full retained bodies are used as conservative veto inputs, so no vintage mismatch is being used to excuse an adverse witness.",
+    "license_meaning": "The exact original catalogue retains each product\u2019s recorded license and metadata digest; full original license spellings and consumed URLs appear in vintages. This records custody, not a new license finding or factual border qualification.",
+    "territorial_meaning": "Reference-country features retain original sovereign/country labels but have no newly established common effective date or independently reconciled Myanmar allocation. Envelope overlap is retrieval only, and all whole selected foreign/reference geometries remain possible vetoes. No exception to their native territorial veto has been created.",
+    "actual_ambiguity": "The selected metadata URL is unsuffixed MMRADM3.geojson, while the preserved consumed original is the catalogue-pinned simplified stream. Review keeps consumed original versus accepted selected base roles distinct; identity is established by exact body, not URL equivalence."
+  },
+  "bookkeeping_correction": {
+    "initial_review_assertion_failures": 3,
+    "source_or_config_mutation": false,
+    "explanation": [
+      "Initial expected11266administrativefeatures was wrong: complete products contain11261admin+5reference=11266combined. Every source\u2019s feature count already matched its immutable catalogue.",
+      "Initial cross-draft common-field equality expectation was wrong: the old oversize draft had256MiB nominal allowance and unpublished physical pin; both final groups intentionally have512MiB nominal allowance and exact published e9b1 physical pin. No source/target geometry difference exists."
+    ],
+    "exact_final_versus_old_oversize_draft_differences": {
+      "preparation_allowance": {
+        "before": {
+          "phaseBytes": 268435456,
+          "rssBytes": 268435456
+        },
+        "after": {
+          "phaseBytes": 536870912,
+          "rssBytes": 536870912
+        }
+      },
+      "physical_evidence.commit": {
+        "before": null,
+        "after": "e9b1b8696557d673583460d27e790087a2f60809"
+      },
+      "physical_evidence.git_blob_oid": {
+        "before": null,
+        "after": "908e8c9d8157e84188e5d64c528fa40479aa9215"
+      },
+      "physical_evidence.path": {
+        "before": "coordination/engineering/myanmar-adm3-current-cells-20261014/remaining7479-whole-physical-001/whole-target-support.json",
+        "after": "coordination/engineering/myanmar-adm3-current-cells-20261014/remaining7479-whole-physical-001/physical-result-001/whole-target-support.json"
+      }
+    },
+    "unchanged_physical_bytes": 2090876,
+    "unchanged_physical_sha256": "2b404937f2f6629905c208e97718f766a01ee8bded8d0f5b1b3bb694cc9947f9",
+    "author_confirmation": "Author myanmar_remaining_repair_bulk explicitly confirmed all three bookkeeping interpretations; no helper/science invocation by author.",
+    "review_method_correction": "Only count semantics and exact common-field before/after differences were closed; no source/geometry/helper/native replay and no underlying scientific acceptance rule relaxed."
+  },
+  "prospective_parent_simplification": "No additional pre-native mechanical validation checklist or replacement gate is required by this note; constructor-enforced details need not be replayed. This closes the already-completed input review and its three bookkeeping interpretations."
+}
