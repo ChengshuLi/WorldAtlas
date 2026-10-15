@@ -329,6 +329,7 @@ const REGISTERED_ARTIFACT_REVIEW_GETS=Object.freeze({
   'fb271c9853da87165b62b65c1fbe6755bf87416552117ef759e608f7641e4184':Object.freeze({review_id:6092465135,github_user_id:6732996,issue:1520,releaseCatalogue:true,entryProfiles:true,cloudflareProfile:true}),
   'e25ebb5dd01f0f07ffe95d59c66baa308bd271e855f0d62cd203afd59e4ab569':Object.freeze({review_id:6092997716,github_user_id:6732996,issue:1520,releaseCatalogue:true,entryProfiles:true,cloudflareProfile:true}),
   '70dd3701cf76cb41086b1a8b4526b5d577edf2fb18ff8b0df1ff8685f76937ec':Object.freeze({review_id:6093311808,github_user_id:6732996,issue:1520,releaseCatalogue:true,entryProfiles:true,cloudflareProfile:true}),
+  '9835d0795e3c4175ac49867a97d3523097507c374989eed5d5491be64a0ddc0b':Object.freeze({review_id:6185604321,github_user_id:6732996,issue:1520,releaseCatalogue:true,entryProfiles:true,cloudflareProfile:true}),
   'e256a2cfed615401714463f95c2ae8a88c8f0d79212a4a8d40097d00ca46f444':Object.freeze({review_id:6093669328,github_user_id:6732996,issue:1520,releaseCatalogue:true,entryProfiles:true,cloudflareProfile:true})
 });
 // Validate the complete ordered installer catalogue as immutable provenance.
@@ -396,6 +397,86 @@ export function validateArtifactSourceMetadata(certificate,code,qualification,{e
   demand(Array.isArray(qualification.original_source_and_qualification_publications)&&qualification.original_source_and_qualification_publications.length>0&&Array.isArray(qualification.complete_operating_custody)&&qualification.complete_operating_custody.length>0,'Missing complete original source/operating custody');
   return {source_critical_roles:complete.size,entry_profiles:profiles,original_phases:phases.length,candidate_code_executed:false};
 }
+// A code-authority successor is not a new scientific base. Keep the complete
+// persisted records; derive this comparison only from authenticated metadata.
+const ARTIFACT_CERTIFICATE_KEYS='added_native_cells,after_footprints_sha256,application_consumer_code,application_inputs,author_worker_id,before_footprints_sha256,complete_locations,geometry_application_representation,issue,kind,limits,native_comparison,native_manifest_sha256,predecessor_registry,qualification_custody,qualification_inventory,registry,release_product_catalogue,selected_artifact_bindings,source_policy,steps,subjects,unchanged_complete_records,version'.split(',').sort();
+export function scientificArtifactIdentity(certificate,code) {
+  demand(certificate&&same(Object.keys(certificate).sort(),ARTIFACT_CERTIFICATE_KEYS),'Unsupported scientific certificate schema');
+  demand(code?.kind==='qualified-artifact-application-code-closure-v1'&&code.version===1
+    &&same(Object.keys(code).sort(),['critical_files','entry_critical_files','entry_roles','kind','semantics','version'])
+    &&Array.isArray(code.critical_files)&&code.entry_critical_files&&code.entry_roles,'Unsupported application code topology');
+  const critical=new Map();
+  const topology=p=>{
+    demand(p&&safe(p.path)&&['100644','100755'].includes(p.mode)&&hash(p.sha256)&&Number.isSafeInteger(p.bytes)&&p.bytes>0,'Incomplete critical code pin');
+    const old=critical.get(p.path);demand(!old||same(old,p),'Ambiguous critical code pin');critical.set(p.path,p);
+    return {path:p.path,mode:p.mode};
+  };
+  const roles={...code,critical_files:code.critical_files.map(topology),entry_critical_files:Object.fromEntries(Object.entries(code.entry_critical_files).map(([entry,pins])=>{
+    demand(Array.isArray(pins),'Incomplete entry critical topology');return [entry,pins.map(topology)];
+  }))};
+  const inventory=certificate.application_consumer_code;
+  demand(inventory&&safe(inventory.path)&&!critical.has(inventory.path),'Ambiguous code inventory role');
+  const excluded=new Map([...critical,[inventory.path,inventory]]),seen=new Set(),inputs=[];
+  demand(Array.isArray(certificate.application_inputs),'Missing complete application inventory');
+  for(const pin of certificate.application_inputs){
+    if(excluded.has(pin.path)){
+      demand(!seen.has(pin.path)&&same(pin,excluded.get(pin.path)),'Application code inventory pin differs');seen.add(pin.path);
+    }else inputs.push(pin);
+  }
+  demand(seen.size===excluded.size,'Incomplete application code input roster');
+  const {author_worker_id,application_consumer_code,application_inputs,...science}=certificate;
+  return {science:{...science,application_inputs:inputs},code_topology:roles};
+}
+export function scientificNativeBase(selection) {
+  demand(selection&&typeof selection==='object'&&!Array.isArray(selection),'Missing scientific base');
+  const keys=['version','method','manifest_path','sha256','release_id',...(Object.hasOwn(selection,'selected_geography')?['selected_geography']:[]),...(Object.hasOwn(selection,'artifact_consumption')?['artifact_consumption']:[])].sort();
+  demand(same(Object.keys(selection).sort(),keys)&&selection.version===1&&selection.method===NATIVE_GRID_METHOD
+    &&safe(selection.manifest_path)&&hash(selection.sha256)&&typeof selection.release_id==='string','Unsupported scientific base fields');
+  const {artifact_consumption,...science}=selection;
+  return science;
+}
+export function requireCurrentArtifactBase(snapshot,historicalBase) {
+  const accepted=selectedSnapshots.get(snapshot);
+  demand(accepted&&snapshot.reader instanceof ImmutableReader&&accepted.reader===snapshot.reader&&accepted.readerVersion===snapshot.reader.version
+    &&accepted.selection===JSON.stringify(snapshot.selection)&&accepted.manifest===JSON.stringify(snapshot.manifest)
+    &&accepted.artifactConsumption&&accepted.artifactConsumption===snapshot.artifactConsumption,'Require privately authenticated current artifact authority');
+  const {additive_release,...current}=snapshot.selection;
+  demand(historicalBase?.artifact_consumption&&current.artifact_consumption
+    &&same(scientificNativeBase(historicalBase),scientificNativeBase(current)),'Scientific base identity changed');
+  return accepted.artifactConsumption;
+}
+export function requireScientificArtifactSuccession(snapshot,historicalBase,historicalVersion) {
+  const current=requireCurrentArtifactBase(snapshot,historicalBase),reader=snapshot.reader;
+  demand(commit(historicalVersion),'Exact historical artifact execution required');
+  const hook=historicalBase.artifact_consumption;
+  demand(same(Object.keys(hook).sort(),['certificate','review']),'Unsupported historical artifact hook');
+  const pin=hook.certificate;
+  const read=pin=>{
+    demand(pin&&same(Object.keys(pin).sort(),['bytes','mode','path','sha256'])&&pin.mode==='100644'&&safe(pin.path)
+      &&hash(pin.sha256)&&Number.isSafeInteger(pin.bytes)&&pin.bytes>0&&pin.bytes<=FILE,'Incomplete historical artifact pin');
+    const actual=reader.descriptor(pin.path,historicalVersion);
+    demand(actual.mode===pin.mode&&actual.bytes===pin.bytes,'Historical artifact mode/size differs');
+    // Reserve complete raw, parsed and comparison representations before reads.
+    demand(reader.used+8*pin.bytes<=reader.phaseLimit,'Historical artifact identity exceeds phase');reader.used+=7*pin.bytes;reader.admit(actual);
+    return reader.json(pin.path,{version:historicalVersion,expected:pin.sha256});
+  };
+  const certificate=read(pin),review=read(hook.review),registration=REGISTERED_ARTIFACT_REVIEW_GETS[hook.review.sha256];
+  // A retired review remains historical custody, never current authority.
+  demand(registration&&review.id===registration.review_id&&review.user?.id===registration.github_user_id
+    &&typeof review.body==='string','Missing registered historical artifact authority');
+  const block=review.body.match(/<!-- worldatlas-qualified-artifact-consumption:v1\s*([\s\S]*?)\s*-->/);
+  demand(block,'Missing historical typed artifact review');const accepted=JSON.parse(block[1]);
+  demand(accepted.version===1&&accepted.issue===registration.issue&&accepted.decision==='accept-qualified-artifact-consumption'
+    &&accepted.certificate_sha256===pin.sha256&&accepted.certificate_bytes===pin.bytes
+    &&accepted.native_manifest_sha256===historicalBase.sha256&&certificate.native_manifest_sha256===historicalBase.sha256
+    &&accepted.source_policy_sha256===certificate.source_policy?.sha256
+    &&accepted.qualification_inventory_sha256===certificate.qualification_inventory?.sha256
+    &&accepted.application_consumer_code_sha256===certificate.application_consumer_code?.sha256,'Historical typed artifact authority differs');
+  const code=read(certificate.application_consumer_code);
+  demand(same(scientificArtifactIdentity(certificate,code),scientificArtifactIdentity(current.certificate,current.code_inventory)),
+    'Historical/current scientific certificate or code topology differs');
+}
+
 export function readArtifactConsumption(reader,selection,manifest) {
   const hook=selection.artifact_consumption;if(hook===undefined)return null;
   demand(hook&&same(Object.keys(hook).sort(),['certificate','review']),'Unsupported artifact-consumption selector');
@@ -428,7 +509,7 @@ export function readArtifactConsumption(reader,selection,manifest) {
   for(const p of [codePin,qualificationPin]){demand(p&&safe(p.path)&&p.mode==='100644'&&hash(p.sha256)&&Number.isSafeInteger(p.bytes)&&p.bytes>0&&p.bytes<=FILE,'Incomplete source custody metadata pin');const d=reader.descriptor(p.path);demand(d.mode===p.mode&&d.bytes===p.bytes,'Source custody metadata mode/size differs');reader.admit(d,p.decoded_bytes??0);}
   const code=reader.json(codePin.path,{expected:codePin.sha256}),qualification=readArtifactGzip(reader,qualificationPin);
   const sourceCustody=validateArtifactSourceMetadata(certificate,code,qualification,{entryProfiles:registration.entryProfiles===true,cloudflareProfile:registration.cloudflareProfile===true});
-  return freezeJson({releaseCatalogue,sourceCustody,certificate_pin:hook.certificate,review_pin:hook.review,certificate,review_id:review.id,limits:accepted.limits,
+  return freezeJson({releaseCatalogue,sourceCustody,certificate_pin:hook.certificate,review_pin:hook.review,certificate,code_inventory:code,review_id:review.id,limits:accepted.limits,
     scope:'Once-qualified immutable artifact provenance only. This gate independently consumes actual selected native/source products; no source authority, activation or production approval.'});
 }
 
@@ -471,7 +552,7 @@ function loadBaseSelection(reader) {
   const snapshot={selection,manifest,owners,image,receiptProvenance,artifactConsumption,metadataBytes:decoded.length+Buffer.byteLength(JSON.stringify(manifest))+(image instanceof StockImage?Buffer.byteLength(JSON.stringify(image.map))+Buffer.byteLength(JSON.stringify(image.index)):image?Buffer.byteLength(JSON.stringify(image.index)):0),acquisition_buffer_bytes:rawBounds.length+decoded.length,reader};
   if(artifactConsumption)snapshot.metadataBytes+=Buffer.byteLength(JSON.stringify(artifactConsumption));
   freezeJson(manifest);freezeJson(owners);
-  selectedSnapshots.set(snapshot,{selection:JSON.stringify(selection),manifest:JSON.stringify(manifest),reader,readerVersion:reader.version,manifestObject:manifest,ownerObject:owners,assets:{
+  selectedSnapshots.set(snapshot,{artifactConsumption,selection:JSON.stringify(selection),manifest:JSON.stringify(manifest),reader,readerVersion:reader.version,manifestObject:manifest,ownerObject:owners,assets:{
     base_manifest:{mode:reader.inventory.get(reader.version+':'+selection.manifest_path).mode,bytes:reader.inventory.get(reader.version+':'+selection.manifest_path).bytes,sha256:selection.sha256},
     owner_roster:{mode:reader.inventory.get(bounds.commit+':'+bounds.path).mode,bytes:rawBounds.length,sha256:sha(rawBounds),decoded_bytes:decoded.length,decoded_sha256:sha(decoded)}
   }});

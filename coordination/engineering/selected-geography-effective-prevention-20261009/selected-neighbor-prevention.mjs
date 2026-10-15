@@ -5,7 +5,7 @@ import fs from 'node:fs';
 import {fileURLToPath} from 'node:url';
 import {execFileSync} from 'node:child_process';
 import {gunzipSync} from 'node:zlib';
-import {processingAllowance, ImmutableReader, SelectedGeometrySources, NativeAssetImage, selectedBaseAssetAlias, selectedGeometrySourceAlias} from '../../../scripts/check-effective-geographic-regression.mjs';
+import {processingAllowance, ImmutableReader, SelectedGeometrySources, NativeAssetImage, selectedBaseAssetAlias, selectedGeometrySourceAlias, requireCurrentArtifactBase, requireScientificArtifactSuccession} from '../../../scripts/check-effective-geographic-regression.mjs';
 import {nativeOnlyComponent, deriveSourceTargetNativeDelta, nativePolygonIntervals, polygonParts, witnessCellEffects, validateWitnessGeometry} from '../../../src/native-grid.js';
 import {unshuffleOwnershipBytes} from '../../../src/ownership-codec.js';
 const FILE=33554432, SLOT=512;
@@ -1316,18 +1316,22 @@ export function validateCurrentRebindLimits(limits) {
  currentRebindLogLimits(limits);return limits;
 }
 
-export function verifyCurrentRebindProducts({certificate,request,facts,publication,operating,result,baseSelection,registry,originalRows,originalPatches,size,expectedCode,bodyPins,acquired,executionCustody,currentPhaseLimit=processingAllowance().phaseBytes}) {
+export function verifyCurrentRebindProducts({certificate,request,facts,publication,operating,result,baseSelection,registry,originalRows,originalPatches,size,expectedCode,bodyPins,acquired,executionCustody,snapshot,currentPhaseLimit=processingAllowance().phaseBytes}) {
  for(const [name,body]of Object.entries({request,facts,publication,operating,result}))demand(body&&bodyPins[name]?.sha256===valueSha(body)&&bodyPins[name]?.bytes===valueBytes(body).length,'Whole canonical rebind product bytes differ: '+name);
  rebindKeys(certificate,'version,kind,execution_commit,base_selection,authority_registry_sha256,request,facts,publication,operating,result','Foreign current rebind certificate');
- demand(certificate.version===1&&/^[a-f0-9]{40}$/.test(certificate.execution_commit)&&certificate.execution_commit===request.execution_commit&&certificate.kind==='qualified-native-additive-current-bank-rebind-v1'&&same(certificate.base_selection,baseSelection)&&certificate.authority_registry_sha256===valueSha(registry),'Stale current rebind certificate');
+ demand(certificate.version===1&&/^[a-f0-9]{40}$/.test(certificate.execution_commit)&&certificate.execution_commit===request.execution_commit&&certificate.kind==='qualified-native-additive-current-bank-rebind-v1'&&same(certificate.base_selection,request.base_selection)&&certificate.authority_registry_sha256===valueSha(registry),'Stale current rebind certificate');
+ if(!same(certificate.base_selection,baseSelection)){
+  requireScientificArtifactSuccession(snapshot,certificate.base_selection,certificate.execution_commit);
+  demand(same(baseSelection,nativeBaseSelection(snapshot.selection)),'Current rebind argument differs from authenticated selection');
+ }
  rebindKeys(request,'version,kind,execution_commit,executed_code,base_selection,authority_registry_sha256,original_rows,original_patch_sha256s,current_targets,current_rows,acquisition,execution,size,limits','Foreign issued rebind request');
- demand(request.version===1&&request.kind==='issued-native-additive-current-bank-rebind-v1'&&/^[a-f0-9]{40}$/.test(request.execution_commit)&&same(request.executed_code,expectedCode)&&same(request.base_selection,baseSelection)&&request.authority_registry_sha256===valueSha(registry)&&same(request.original_rows,originalRows)&&same(request.original_patch_sha256s,originalPatches.map(valueSha))&&request.size===size,'Issued rebind changes original authority, current base or trusted method');
+ demand(request.version===1&&request.kind==='issued-native-additive-current-bank-rebind-v1'&&/^[a-f0-9]{40}$/.test(request.execution_commit)&&same(request.executed_code,expectedCode)&&same(request.base_selection,certificate.base_selection)&&request.authority_registry_sha256===valueSha(registry)&&same(request.original_rows,originalRows)&&same(request.original_patch_sha256s,originalPatches.map(valueSha))&&request.size===size,'Issued rebind changes original authority, current base or trusted method');
  validateCurrentRebindLimits(request.limits);
  demand(acquired&&same(acquired.base_selection,baseSelection)&&same(acquired.current_targets,request.current_targets)&&same(acquired.current_rows,request.current_rows),'Current operands differ from independently acquired selected bodies');
  rebindKeys(request.acquisition,'version,kind,target_sources,source_inputs,native_inputs,predecessor_proof,predecessor_rows,manifest_sha256','Incomplete current rebind acquisition custody');
  demand(request.acquisition.version===1&&request.acquisition.kind==='complete-selected-rebind-inputs-v1'&&same(currentRebindAcquisitionIdentity(request.acquisition),currentRebindAcquisitionIdentity(acquired.acquisition)),'Issued acquisition is not the complete independently consumed source/native roster');
  demand(Array.isArray(acquired.acquisition_phases)&&acquired.acquisition_phases.length>0&&acquired.acquisition_phases.every(p=>Number.isSafeInteger(p.complete_phase_bytes)&&p.complete_phase_bytes>0&&p.complete_phase_bytes<=currentPhaseLimit&&Number.isSafeInteger(p.descriptors)&&p.descriptors>0&&p.descriptors<=request.limits.descriptors),'Independent acquisition exceeds consumer bounds');
- const expected=currentRebindResult({baseSelection,registry,originalRows,originalPatches,currentTargets:request.current_targets,currentRows:request.current_rows,size});
+ const expected=currentRebindResult({baseSelection:request.base_selection,registry,originalRows,originalPatches,currentTargets:request.current_targets,currentRows:request.current_rows,size});
  demand(same(result,expected),'Complete current rebind result/inverse differs');
  rebindKeys(facts,'version,kind,execution_commit,request_sha256,result_sha256,complete_phase_bytes,descriptors,acquisition_sha256,acquisition_phases','Foreign rebind facts');
  demand(facts.version===1&&facts.kind==='native-additive-current-bank-rebind-facts-v1'&&facts.execution_commit===request.execution_commit&&facts.request_sha256===bodyPins.request.sha256&&facts.result_sha256===bodyPins.result.sha256&&Number.isSafeInteger(facts.complete_phase_bytes)&&facts.complete_phase_bytes>0&&facts.complete_phase_bytes<=request.limits.complete_phase_bytes&&Number.isSafeInteger(facts.descriptors)&&facts.descriptors>0&&facts.descriptors<=request.limits.descriptors,'Rebind facts do not bind actual request/result/admission');
@@ -1573,7 +1577,7 @@ export function readCurrentRebindCustody(reader,pin,{baseSelection,registry,orig
  }
  const identityScratch=2*(valueBytes(bodies.request.acquisition.native_inputs).length+valueBytes(acquired.acquisition.native_inputs).length);
  demand(Number.isSafeInteger(identityScratch)&&identityScratch<=FILE&&reader.used+identityScratch<=reader.phaseLimit,'Complete native identity comparison scratch exceeds phase');reader.used+=identityScratch;
- const result=verifyCurrentRebindProducts({certificate,...bodies,baseSelection,registry,originalRows,originalPatches,size,expectedCode,acquired,executionCustody,currentPhaseLimit:reader.phaseLimit,bodyPins:Object.fromEntries(roster.map(({name,p})=>[name,p]))});
+ const result=verifyCurrentRebindProducts({certificate,...bodies,baseSelection,registry,originalRows,originalPatches,size,expectedCode,acquired,executionCustody,snapshot,currentPhaseLimit:reader.phaseLimit,bodyPins:Object.fromEntries(roster.map(({name,p})=>[name,p]))});
  // A sequential phase must never hide an earlier complete acquisition peak.
  retainCurrentRebindPhasePeak(reader,priorPhaseBytes,outputPhaseBytes,acquired.acquisition_phases);
  return result;
@@ -1589,7 +1593,8 @@ export function readSelectedAdditive(snapshot) {
  const sidecar=reader.json(hook.path,{expected:hook.sha256});
  demand(sidecar?.version===2&&sidecar.kind==='retained-native-additive-selection-v2'&&Object.keys(sidecar).sort().join(',')==='authority_registry,base_selection,kind,logical_asset_map,runtime_envelope,version','Unsupported committed additive sidecar');
  const baseSelection=nativeBaseSelection(selection);
- demand(same(sidecar.base_selection,baseSelection),'Stale/foreign actual native base selection');
+ const unchangedBase=same(sidecar.base_selection,baseSelection);
+ if(!unchangedBase)requireCurrentArtifactBase(snapshot,sidecar.base_selection);
  const whole=({p,alias,role})=>{
   pinCheck(p);let version=p.commit;try{reader.git('cat-file','-e',version+'^{commit}');}catch{version=reader.version;}
   const actual=reader.descriptor(p.path,version);demand(actual.mode===p.mode&&actual.git_blob_oid===p.git_blob_oid&&actual.bytes===p.bytes,'Selected additive ordinary whole identity differs');
@@ -1688,6 +1693,9 @@ export function readSelectedAdditive(snapshot) {
   rebind=readCurrentRebindCustody(reader,named.ledger.current_rebind,{baseSelection,registry:legacyRegistry,originalRows:[...normalized.rows.values()].filter(row=>row.representation!=='native-cells'),originalPatches:proofs.filter(p=>p.original_pins.source_evidence===undefined).flatMap(p=>p.native_proof.native_patches),size:manifest.size,snapshot,carriedMetadataBytes:2*valueBytes({sidecar,admitted,envelope,named,proofs,patch}).length});
   demand(same(named.ledger.current_targets,rebind.current_targets),'Ledger current target pointsets differ from complete qualified rebind result');
  }else demand(!Object.hasOwn(named.ledger,'current_targets'),'Current targets require complete rebind custody');
+ // A changed operational authority must join the same literal historical base
+ // that the archived execution authenticated, never a caller-invented alias.
+ if(!unchangedBase)demand(rebind&&same(sidecar.base_selection,rebind.base_selection),'Changed authority requires exact retained rebind base');
  const expectedByRow=new Map();
  for(const original of originalPatches){
   demand(rebind||same(original.base_reference,envelope.base_reference),'Original delta requires an actual qualified current-bank rebind');
