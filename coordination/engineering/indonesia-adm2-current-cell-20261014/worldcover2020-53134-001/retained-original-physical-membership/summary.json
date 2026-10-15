@@ -1,0 +1,100 @@
+{
+  "kind": "original-source-relative-retained-land-exterior-observation",
+  "original_class": "source-relative",
+  "selected_classification": null,
+  "owners": 161,
+  "original_cells": 53134,
+  "original_intervals": 27306,
+  "membership_calls": 322,
+  "validated_empty_operands": 1127,
+  "stock_polygon_scan_blocks": 354,
+  "operation_totals": {
+    "mapped_land_support": {
+      "cells": 0,
+      "interior": 0,
+      "boundary": 0,
+      "line": 0,
+      "point": 0
+    },
+    "mapped_inland_water_support": {
+      "cells": 0,
+      "interior": 0,
+      "boundary": 0,
+      "line": 0,
+      "point": 0
+    },
+    "outside_mapped_L1_context": {
+      "cells": 53134,
+      "interior": 53134,
+      "boundary": 0,
+      "line": 0,
+      "point": 0
+    },
+    "missing_reconstruction": {
+      "cells": 0,
+      "interior": 0,
+      "boundary": 0,
+      "line": 0,
+      "point": 0
+    },
+    "extra_reconstruction": {
+      "cells": 0,
+      "interior": 0,
+      "boundary": 0,
+      "line": 0,
+      "point": 0
+    },
+    "contradictory_land_water_support": {
+      "cells": 0,
+      "interior": 0,
+      "boundary": 0,
+      "line": 0,
+      "point": 0
+    },
+    "L2-outside-L1": {
+      "cells": 0,
+      "interior": 0,
+      "boundary": 0,
+      "line": 0,
+      "point": 0
+    },
+    "L3-outside-L2": {
+      "cells": 0,
+      "interior": 0,
+      "boundary": 0,
+      "line": 0,
+      "point": 0
+    },
+    "L4-outside-L3": {
+      "cells": 0,
+      "interior": 0,
+      "boundary": 0,
+      "line": 0,
+      "point": 0
+    }
+  },
+  "elapsed_seconds": 1.015792042,
+  "emitted_inventory": [
+    {
+      "path": "owner-observations.jsonl",
+      "bytes": 2665508
+    }
+  ],
+  "planning_statistics": {
+    "path": "planning-result-001/resource-metadata.json",
+    "bytes": 1359623,
+    "sha256": "4790d67158baf960ac4600b78364eea4e7d609f5234b65f0800e1f955e0fe411"
+  },
+  "complete_observation_bound_bytes": 621018082,
+  "requested_phase_bytes": 621018082,
+  "requested_rss_bytes": 621018082,
+  "authority_qualified_cells": 0,
+  "accepted_repair_credit": 0,
+  "adopted_review_dispositions": null,
+  "limits": [
+    "Independent labelled pointset contacts; overlaps and all exact contact kinds retained, no exclusive or complement class inferred.",
+    "Seven zero effects derive only from actual complete accepted-validator emptiness; their membership was not run and no stock work was fabricated.",
+    "Frozen original source-relative meaning, whole geometries, original owner/SID/ordinal custody and producer/frame/vintage/licence limits remain.",
+    "No source/physical producer replay, authority/native qualification, owner-zero proof, joint consumer, Git mutation, publication or adoption."
+  ]
+}

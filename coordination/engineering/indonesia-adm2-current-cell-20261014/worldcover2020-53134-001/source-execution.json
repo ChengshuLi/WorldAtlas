@@ -1,0 +1,50 @@
+{
+  "kind": "actual-worldcover-source-execution-receipt",
+  "attempt": 2,
+  "exit_code": 0,
+  "started_utc": "2026-10-15T22:10:37.232510+00:00",
+  "ended_utc": "2026-10-15T22:19:44.049055+00:00",
+  "elapsed_seconds": 546.8195197919849,
+  "observed_process_peak_rss_bytes": 404127744,
+  "complete": true,
+  "requested_count": 53134,
+  "observed_count": 53134,
+  "tile_count": 57,
+  "block_count": 2445,
+  "new_blocks": 2445,
+  "reused_blocks": 0,
+  "status_counts": {
+    "valid-native-value": 53134
+  },
+  "literal_value_counts": {
+    "80": 15125,
+    "60": 4167,
+    "10": 15549,
+    "40": 416,
+    "30": 4865,
+    "95": 11671,
+    "20": 196,
+    "50": 925,
+    "90": 220
+  },
+  "errors": [],
+  "unobserved_count": 0,
+  "source_report": {
+    "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/source-observations.json",
+    "bytes": 48698093,
+    "sha256": "be2838576b96c4172c986c17b94243740579179ec127701cef99d24d2b6cb86f"
+  },
+  "plan_sha256": "c290b53ddc43b3bf7289445a4f50fa9f5e7805be65b989d8bddd753631128ef9",
+  "reader_sha256": "797c7072d87912de826add9057a04ad366e286b69dd938c7d53d6b1cee063153",
+  "stdout": "attempt-002.stdout.jsonl",
+  "stderr": "attempt-002.stderr.log",
+  "transport": "Public HTTP COG range reads in ordinary escalated network execution; first sandbox DNS attempt failed before source bytes.",
+  "limits": [
+    "Native product predictions and masks only; not geographic answers, authority or acceptance.",
+    "No absent tile, invalid value or nodata interpreted as ocean.",
+    "Annual2020 model class is not instantaneous stage or territorial ownership.",
+    "No whole remote source hash, InputQuality layer, image interpretation or new classification claimed."
+  ],
+  "answered_review_credit": 0,
+  "repair_credit": 0
+}

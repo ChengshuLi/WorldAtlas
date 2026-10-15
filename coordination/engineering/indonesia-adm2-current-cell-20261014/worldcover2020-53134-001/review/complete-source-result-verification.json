@@ -1,0 +1,1112 @@
+{
+  "reviewer": "/root/remaining474_malinau_mahakam105",
+  "status": "PASS_WITH_SCIENTIFIC_INTERPRETATION_LIMITS",
+  "source_report": {
+    "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/source-observations.json",
+    "bytes": 48698093,
+    "sha256": "be2838576b96c4172c986c17b94243740579179ec127701cef99d24d2b6cb86f"
+  },
+  "exact_original_keys": 53134,
+  "owners": 161,
+  "nominal_tiles": 57,
+  "actual_opened_tiles": 57,
+  "actual_missing_tiles": 0,
+  "outside_native_frame_keys": 0,
+  "actual_status_counts": {
+    "valid-native-value": 53134
+  },
+  "literal_model_class_counts": {
+    "80": 15125,
+    "10": 15549,
+    "50": 925,
+    "60": 4167,
+    "30": 4865,
+    "40": 416,
+    "90": 220,
+    "95": 11671,
+    "20": 196
+  },
+  "contexts_with_invalid_neighbour_masks": 0,
+  "original_fields_native_coordinates_status_mismatches": 0,
+  "representative_saved_arrays_checked": 64,
+  "sample_checks": [
+    {
+      "reason": "tile:N06E093",
+      "point_index": 0,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/N06E093/block-34-24.npz"
+    },
+    {
+      "reason": "class:80",
+      "point_index": 0,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/N06E093/block-34-24.npz"
+    },
+    {
+      "reason": "class:10",
+      "point_index": 1,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/N06E093/block-34-24.npz"
+    },
+    {
+      "reason": "mixed:10",
+      "point_index": 10,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/N06E093/block-34-24.npz"
+    },
+    {
+      "reason": "tile:N03E093",
+      "point_index": 15,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/N03E093/block-01-27.npz"
+    },
+    {
+      "reason": "class:50",
+      "point_index": 15,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/N03E093/block-01-27.npz"
+    },
+    {
+      "reason": "mixed:50",
+      "point_index": 15,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/N03E093/block-01-27.npz"
+    },
+    {
+      "reason": "class:60",
+      "point_index": 25,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/N03E093/block-01-27.npz"
+    },
+    {
+      "reason": "mixed:60",
+      "point_index": 25,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/N03E093/block-01-27.npz"
+    },
+    {
+      "reason": "mixed:80",
+      "point_index": 32,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/N03E093/block-01-26.npz"
+    },
+    {
+      "reason": "class:30",
+      "point_index": 117,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/N03E093/block-02-27.npz"
+    },
+    {
+      "reason": "mixed:30",
+      "point_index": 272,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/N03E093/block-03-25.npz"
+    },
+    {
+      "reason": "class:40",
+      "point_index": 286,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/N03E093/block-03-24.npz"
+    },
+    {
+      "reason": "mixed:40",
+      "point_index": 286,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/N03E093/block-03-24.npz"
+    },
+    {
+      "reason": "tile:N03E126",
+      "point_index": 687,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/N03E126/block-05-06.npz"
+    },
+    {
+      "reason": "class:90",
+      "point_index": 836,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/N03E126/block-05-06.npz"
+    },
+    {
+      "reason": "mixed:90",
+      "point_index": 836,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/N03E126/block-05-06.npz"
+    },
+    {
+      "reason": "tile:N03E096",
+      "point_index": 966,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/N03E096/block-08-09.npz"
+    },
+    {
+      "reason": "class:95",
+      "point_index": 1067,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/N03E126/block-13-12.npz"
+    },
+    {
+      "reason": "tile:N03E123",
+      "point_index": 1095,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/N03E123/block-14-29.npz"
+    },
+    {
+      "reason": "mixed:95",
+      "point_index": 1185,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/N03E126/block-15-13.npz"
+    },
+    {
+      "reason": "tile:N03E117",
+      "point_index": 2211,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/N03E117/block-26-09.npz"
+    },
+    {
+      "reason": "tile:N03E099",
+      "point_index": 3644,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/N03E099/block-31-05.npz"
+    },
+    {
+      "reason": "tile:N00E096",
+      "point_index": 4127,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/N00E096/block-00-15.npz"
+    },
+    {
+      "reason": "tile:N00E093",
+      "point_index": 4128,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/N00E093/block-00-28.npz"
+    },
+    {
+      "reason": "class:20",
+      "point_index": 4255,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/N00E093/block-01-32.npz"
+    },
+    {
+      "reason": "mixed:20",
+      "point_index": 4255,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/N00E093/block-01-32.npz"
+    },
+    {
+      "reason": "tile:N00E099",
+      "point_index": 4331,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/N00E099/block-03-12.npz"
+    },
+    {
+      "reason": "tile:N00E117",
+      "point_index": 5114,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/N00E117/block-06-11.npz"
+    },
+    {
+      "reason": "tile:N00E123",
+      "point_index": 7513,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/N00E123/block-16-21.npz"
+    },
+    {
+      "reason": "tile:N00E102",
+      "point_index": 7960,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/N00E102/block-18-02.npz"
+    },
+    {
+      "reason": "tile:N00E120",
+      "point_index": 8147,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/N00E120/block-19-10.npz"
+    },
+    {
+      "reason": "tile:N00E132",
+      "point_index": 10002,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/N00E132/block-24-26.npz"
+    },
+    {
+      "reason": "tile:N00E108",
+      "point_index": 10257,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/N00E108/block-24-11.npz"
+    },
+    {
+      "reason": "tile:S03E096",
+      "point_index": 13291,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/S03E096/block-00-28.npz"
+    },
+    {
+      "reason": "tile:S03E117",
+      "point_index": 13292,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/S03E117/block-00-31.npz"
+    },
+    {
+      "reason": "tile:S03E120",
+      "point_index": 13294,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/S03E120/block-00-01.npz"
+    },
+    {
+      "reason": "tile:S03E102",
+      "point_index": 13296,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/S03E102/block-00-21.npz"
+    },
+    {
+      "reason": "tile:S03E108",
+      "point_index": 13621,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/S03E108/block-00-13.npz"
+    },
+    {
+      "reason": "tile:S03E099",
+      "point_index": 14120,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/S03E099/block-01-08.npz"
+    },
+    {
+      "reason": "tile:S03E135",
+      "point_index": 15155,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/S03E135/block-04-03.npz"
+    },
+    {
+      "reason": "tile:S03E132",
+      "point_index": 15347,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/S03E132/block-05-00.npz"
+    },
+    {
+      "reason": "tile:S03E129",
+      "point_index": 15724,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/S03E129/block-07-34.npz"
+    },
+    {
+      "reason": "tile:S03E123",
+      "point_index": 17336,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/S03E123/block-13-01.npz"
+    },
+    {
+      "reason": "tile:S03E126",
+      "point_index": 17926,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/S03E126/block-16-34.npz"
+    },
+    {
+      "reason": "tile:S03E105",
+      "point_index": 18337,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/S03E105/block-17-10.npz"
+    },
+    {
+      "reason": "tile:S03E138",
+      "point_index": 18581,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/S03E138/block-18-08.npz"
+    },
+    {
+      "reason": "tile:S03E114",
+      "point_index": 18641,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/S03E114/block-18-29.npz"
+    },
+    {
+      "reason": "tile:S03E111",
+      "point_index": 24232,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/S03E111/block-33-08.npz"
+    },
+    {
+      "reason": "tile:S06E099",
+      "point_index": 25187,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/S06E099/block-00-16.npz"
+    },
+    {
+      "reason": "tile:S06E105",
+      "point_index": 25188,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/S06E105/block-00-19.npz"
+    },
+    {
+      "reason": "tile:S06E126",
+      "point_index": 25195,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/S06E126/block-00-24.npz"
+    },
+    {
+      "reason": "tile:S06E114",
+      "point_index": 25207,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/S06E114/block-00-25.npz"
+    },
+    {
+      "reason": "tile:S06E111",
+      "point_index": 25278,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/S06E111/block-00-24.npz"
+    },
+    {
+      "reason": "tile:S06E120",
+      "point_index": 25279,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/S06E120/block-00-12.npz"
+    },
+    {
+      "reason": "tile:S06E108",
+      "point_index": 25323,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/S06E108/block-00-30.npz"
+    },
+    {
+      "reason": "tile:S06E129",
+      "point_index": 25454,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/S06E129/block-00-16.npz"
+    },
+    {
+      "reason": "tile:S06E102",
+      "point_index": 28905,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/S06E102/block-06-01.npz"
+    },
+    {
+      "reason": "tile:S06E117",
+      "point_index": 28937,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/S06E117/block-06-29.npz"
+    },
+    {
+      "reason": "tile:S06E123",
+      "point_index": 29946,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/S06E123/block-11-00.npz"
+    },
+    {
+      "reason": "tile:S06E132",
+      "point_index": 30673,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/S06E132/block-15-34.npz"
+    },
+    {
+      "reason": "tile:S06E135",
+      "point_index": 30918,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/S06E135/block-16-00.npz"
+    },
+    {
+      "reason": "tile:S06E138",
+      "point_index": 35755,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/S06E138/block-29-00.npz"
+    },
+    {
+      "reason": "tile:S09E123",
+      "point_index": 37714,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/S09E123/block-00-12.npz"
+    },
+    {
+      "reason": "tile:S09E105",
+      "point_index": 37716,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/S09E105/block-00-19.npz"
+    },
+    {
+      "reason": "tile:S09E120",
+      "point_index": 37734,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/S09E120/block-00-06.npz"
+    },
+    {
+      "reason": "tile:S09E138",
+      "point_index": 37738,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/S09E138/block-00-03.npz"
+    },
+    {
+      "reason": "tile:S09E108",
+      "point_index": 38062,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/S09E108/block-02-02.npz"
+    },
+    {
+      "reason": "tile:S09E114",
+      "point_index": 38554,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/S09E114/block-05-20.npz"
+    },
+    {
+      "reason": "tile:S09E117",
+      "point_index": 38681,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/S09E117/block-06-21.npz"
+    },
+    {
+      "reason": "tile:S09E111",
+      "point_index": 38972,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/S09E111/block-07-03.npz"
+    },
+    {
+      "reason": "tile:S12E114",
+      "point_index": 51427,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/S12E114/block-00-34.npz"
+    },
+    {
+      "reason": "tile:S12E117",
+      "point_index": 51430,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/S12E117/block-01-00.npz"
+    },
+    {
+      "reason": "tile:S12E120",
+      "point_index": 51448,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/S12E120/block-05-01.npz"
+    },
+    {
+      "reason": "tile:S12E123",
+      "point_index": 51629,
+      "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/S12E123/block-09-21.npz"
+    }
+  ],
+  "sources": [
+    {
+      "tile": "N00E093",
+      "points": 320,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:30:59 GMT",
+        "etag": "\"0e194b15c38ceb52b6d1d5e57bca8fab\"",
+        "accept-ranges": "bytes",
+        "content-length": "2385315"
+      }
+    },
+    {
+      "tile": "N00E096",
+      "points": 3921,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:30:59 GMT",
+        "etag": "\"af3035f621b00f6eee7cc211cea108e4-3\"",
+        "accept-ranges": "bytes",
+        "content-length": "17837035"
+      }
+    },
+    {
+      "tile": "N00E099",
+      "points": 203,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:30:59 GMT",
+        "etag": "\"f9bcfe2909b19e6cb106e8ae7687ce46-6\"",
+        "accept-ranges": "bytes",
+        "content-length": "46558454"
+      }
+    },
+    {
+      "tile": "N00E102",
+      "points": 256,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:31:00 GMT",
+        "etag": "\"7600c1a2baf651bfe40d54b2d904c41d-6\"",
+        "accept-ranges": "bytes",
+        "content-length": "42791583"
+      }
+    },
+    {
+      "tile": "N00E108",
+      "points": 151,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:31:00 GMT",
+        "etag": "\"b8fa6c00e0fc91faa5759e2f4b9d0fb9-3\"",
+        "accept-ranges": "bytes",
+        "content-length": "21047109"
+      }
+    },
+    {
+      "tile": "N00E117",
+      "points": 1813,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:31:01 GMT",
+        "etag": "\"ba822f95d8ebabdce99725239fb2d8fb-2\"",
+        "accept-ranges": "bytes",
+        "content-length": "15046857"
+      }
+    },
+    {
+      "tile": "N00E120",
+      "points": 1783,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:31:01 GMT",
+        "etag": "\"a53613c2f3b936372130353720382f5a-2\"",
+        "accept-ranges": "bytes",
+        "content-length": "10499053"
+      }
+    },
+    {
+      "tile": "N00E123",
+      "points": 500,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:31:01 GMT",
+        "etag": "\"c0208e11771f1d0261355896f63508a7\"",
+        "accept-ranges": "bytes",
+        "content-length": "8183621"
+      }
+    },
+    {
+      "tile": "N00E132",
+      "points": 217,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:31:02 GMT",
+        "etag": "\"d39b1e12f4c5c7cf0520223b075e0695\"",
+        "accept-ranges": "bytes",
+        "content-length": "2028383"
+      }
+    },
+    {
+      "tile": "N03E093",
+      "points": 932,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:31:12 GMT",
+        "etag": "\"4999711bfd1d188560862343ab72f162\"",
+        "accept-ranges": "bytes",
+        "content-length": "6727716"
+      }
+    },
+    {
+      "tile": "N03E096",
+      "points": 310,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:31:12 GMT",
+        "etag": "\"7b9e6e5d6d4c9f48fb47e449608f0aab-4\"",
+        "accept-ranges": "bytes",
+        "content-length": "26884454"
+      }
+    },
+    {
+      "tile": "N03E099",
+      "points": 32,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:31:12 GMT",
+        "etag": "\"fba688f6382803decb0e5aec1537cb8a-4\"",
+        "accept-ranges": "bytes",
+        "content-length": "26315121"
+      }
+    },
+    {
+      "tile": "N03E117",
+      "points": 717,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:31:13 GMT",
+        "etag": "\"76582e676e3d01686d69971294d2e8bf-3\"",
+        "accept-ranges": "bytes",
+        "content-length": "18052364"
+      }
+    },
+    {
+      "tile": "N03E123",
+      "points": 1483,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:31:13 GMT",
+        "etag": "\"7934e0f26e548e7ecf6e1b4643e16303\"",
+        "accept-ranges": "bytes",
+        "content-length": "4019600"
+      }
+    },
+    {
+      "tile": "N03E126",
+      "points": 638,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:31:13 GMT",
+        "etag": "\"5e776ee1c4ea204e5daf54cfe78a1ccb\"",
+        "accept-ranges": "bytes",
+        "content-length": "2599828"
+      }
+    },
+    {
+      "tile": "N06E093",
+      "points": 15,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:31:31 GMT",
+        "etag": "\"0fe43d797b1fd24522b51e07027aacad\"",
+        "accept-ranges": "bytes",
+        "content-length": "3031008"
+      }
+    },
+    {
+      "tile": "S03E096",
+      "points": 1190,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:41:52 GMT",
+        "etag": "\"417f454948a53331958371abd62a169a\"",
+        "accept-ranges": "bytes",
+        "content-length": "3041720"
+      }
+    },
+    {
+      "tile": "S03E099",
+      "points": 1366,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:41:52 GMT",
+        "etag": "\"ec32407f09df0b09b66a93d77e07c6e0-3\"",
+        "accept-ranges": "bytes",
+        "content-length": "24295031"
+      }
+    },
+    {
+      "tile": "S03E102",
+      "points": 1688,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:41:52 GMT",
+        "etag": "\"9e1ff30d4541021305d222770b051c6e-6\"",
+        "accept-ranges": "bytes",
+        "content-length": "45052363"
+      }
+    },
+    {
+      "tile": "S03E105",
+      "points": 1533,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:41:52 GMT",
+        "etag": "\"9004f345512a286ca7744bdb5c8db04f-3\"",
+        "accept-ranges": "bytes",
+        "content-length": "21400154"
+      }
+    },
+    {
+      "tile": "S03E108",
+      "points": 1216,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:41:52 GMT",
+        "etag": "\"89829c64997eec880ec14940f5e91c45-4\"",
+        "accept-ranges": "bytes",
+        "content-length": "28514593"
+      }
+    },
+    {
+      "tile": "S03E111",
+      "points": 29,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:41:53 GMT",
+        "etag": "\"d874c18dd0ace760c33241e6f6aa1a3b-5\"",
+        "accept-ranges": "bytes",
+        "content-length": "38226979"
+      }
+    },
+    {
+      "tile": "S03E114",
+      "points": 364,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:41:53 GMT",
+        "etag": "\"bc41593c33fe4fa13ce2147c49e02044-6\"",
+        "accept-ranges": "bytes",
+        "content-length": "47198046"
+      }
+    },
+    {
+      "tile": "S03E117",
+      "points": 1346,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:41:53 GMT",
+        "etag": "\"fbf221d4ed0145f17f41e4919267969a-3\"",
+        "accept-ranges": "bytes",
+        "content-length": "18179314"
+      }
+    },
+    {
+      "tile": "S03E120",
+      "points": 794,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:41:53 GMT",
+        "etag": "\"3dde565c15988d459df2bc1459979b07-3\"",
+        "accept-ranges": "bytes",
+        "content-length": "21076591"
+      }
+    },
+    {
+      "tile": "S03E123",
+      "points": 352,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:41:53 GMT",
+        "etag": "\"104440ee6695a6f71d19acdd5c3c5faa\"",
+        "accept-ranges": "bytes",
+        "content-length": "5384412"
+      }
+    },
+    {
+      "tile": "S03E126",
+      "points": 309,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:41:54 GMT",
+        "etag": "\"c6a2e5a8fe6d7200bf3de0d349d3483a\"",
+        "accept-ranges": "bytes",
+        "content-length": "4886408"
+      }
+    },
+    {
+      "tile": "S03E129",
+      "points": 651,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:41:54 GMT",
+        "etag": "\"b8c1f77622761736a38b8700ca6b4f2b\"",
+        "accept-ranges": "bytes",
+        "content-length": "7694709"
+      }
+    },
+    {
+      "tile": "S03E132",
+      "points": 51,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:41:54 GMT",
+        "etag": "\"dd8c9165078945a3c893fb36d5ac80ae-2\"",
+        "accept-ranges": "bytes",
+        "content-length": "13123675"
+      }
+    },
+    {
+      "tile": "S03E135",
+      "points": 732,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:41:54 GMT",
+        "etag": "\"4157fdb373341b85a976777ecab61552\"",
+        "accept-ranges": "bytes",
+        "content-length": "7992268"
+      }
+    },
+    {
+      "tile": "S03E138",
+      "points": 275,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:41:54 GMT",
+        "etag": "\"67cedffe9dab43d3d6f3042436db2e1b\"",
+        "accept-ranges": "bytes",
+        "content-length": "5741873"
+      }
+    },
+    {
+      "tile": "S06E099",
+      "points": 663,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:42:03 GMT",
+        "etag": "\"3556b4ce51ce03207244ed36d14f94d0\"",
+        "accept-ranges": "bytes",
+        "content-length": "3125138"
+      }
+    },
+    {
+      "tile": "S06E102",
+      "points": 306,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:42:03 GMT",
+        "etag": "\"ca564b2eb44e568492b369a67ae7165d-5\"",
+        "accept-ranges": "bytes",
+        "content-length": "37068845"
+      }
+    },
+    {
+      "tile": "S06E105",
+      "points": 1746,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:42:03 GMT",
+        "etag": "\"2a8c822834deaa20404691528d404fd0-5\"",
+        "accept-ranges": "bytes",
+        "content-length": "40000488"
+      }
+    },
+    {
+      "tile": "S06E108",
+      "points": 929,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:42:03 GMT",
+        "etag": "\"d259b7ead0e0b8fc74a09f55dfdfd600\"",
+        "accept-ranges": "bytes",
+        "content-length": "3222072"
+      }
+    },
+    {
+      "tile": "S06E111",
+      "points": 153,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:42:03 GMT",
+        "etag": "\"4e0da6c9acaff3f49f39f8628d362e14-2\"",
+        "accept-ranges": "bytes",
+        "content-length": "14509966"
+      }
+    },
+    {
+      "tile": "S06E114",
+      "points": 1353,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:42:03 GMT",
+        "etag": "\"a961ddc66f7f48cfd6f324e30b51a4b4-3\"",
+        "accept-ranges": "bytes",
+        "content-length": "21629622"
+      }
+    },
+    {
+      "tile": "S06E117",
+      "points": 538,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:42:04 GMT",
+        "etag": "\"c0f8a214a15aaf833a7ea56f64ca66e3-3\"",
+        "accept-ranges": "bytes",
+        "content-length": "20193380"
+      }
+    },
+    {
+      "tile": "S06E120",
+      "points": 2681,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:42:04 GMT",
+        "etag": "\"72f4fe8120c8370b034475ffc9fb0e0b-4\"",
+        "accept-ranges": "bytes",
+        "content-length": "27924754"
+      }
+    },
+    {
+      "tile": "S06E123",
+      "points": 1376,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:42:04 GMT",
+        "etag": "\"63f5440f641f8a68bddaec1818a3cd4b\"",
+        "accept-ranges": "bytes",
+        "content-length": "3393039"
+      }
+    },
+    {
+      "tile": "S06E126",
+      "points": 1146,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:42:04 GMT",
+        "etag": "\"6dadcd4e57fa28a68d4c960a9e98465e\"",
+        "accept-ranges": "bytes",
+        "content-length": "7551251"
+      }
+    },
+    {
+      "tile": "S06E129",
+      "points": 893,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:42:04 GMT",
+        "etag": "\"df49d6f1acd5349681578dcd62bb856b\"",
+        "accept-ranges": "bytes",
+        "content-length": "4610928"
+      }
+    },
+    {
+      "tile": "S06E132",
+      "points": 7,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:42:04 GMT",
+        "etag": "\"dcc8ae050f705a2053a10fcdd9635f9a\"",
+        "accept-ranges": "bytes",
+        "content-length": "6975532"
+      }
+    },
+    {
+      "tile": "S06E135",
+      "points": 648,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:42:04 GMT",
+        "etag": "\"575661eab0e5c03b7bce741c89c09bcf-3\"",
+        "accept-ranges": "bytes",
+        "content-length": "17249145"
+      }
+    },
+    {
+      "tile": "S06E138",
+      "points": 88,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:42:04 GMT",
+        "etag": "\"82898817d552f953e173c5f56e3db3e4-4\"",
+        "accept-ranges": "bytes",
+        "content-length": "25330397"
+      }
+    },
+    {
+      "tile": "S09E105",
+      "points": 551,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:42:15 GMT",
+        "etag": "\"8678e8470a2949af45f9e7af5550a040-5\"",
+        "accept-ranges": "bytes",
+        "content-length": "39224255"
+      }
+    },
+    {
+      "tile": "S09E108",
+      "points": 700,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:42:16 GMT",
+        "etag": "\"57f9fe37cf5011ff8903dadaea3b1065-6\"",
+        "accept-ranges": "bytes",
+        "content-length": "48900031"
+      }
+    },
+    {
+      "tile": "S09E111",
+      "points": 703,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:42:16 GMT",
+        "etag": "\"d84ae5380c7ea1edc790181385249896-8\"",
+        "accept-ranges": "bytes",
+        "content-length": "60655006"
+      }
+    },
+    {
+      "tile": "S09E114",
+      "points": 2815,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:42:17 GMT",
+        "etag": "\"fa55190aca622cbc9160551c368921ac-3\"",
+        "accept-ranges": "bytes",
+        "content-length": "19990201"
+      }
+    },
+    {
+      "tile": "S09E117",
+      "points": 4544,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:42:17 GMT",
+        "etag": "\"30d853a8d8719826efc90b6745accce5-2\"",
+        "accept-ranges": "bytes",
+        "content-length": "13715590"
+      }
+    },
+    {
+      "tile": "S09E120",
+      "points": 2736,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:42:17 GMT",
+        "etag": "\"165b9b0004f6e523d0004ddec1b292e2-2\"",
+        "accept-ranges": "bytes",
+        "content-length": "11315110"
+      }
+    },
+    {
+      "tile": "S09E123",
+      "points": 1352,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:42:17 GMT",
+        "etag": "\"4747bc8698fa0c7b7c7a1805de675b27-2\"",
+        "accept-ranges": "bytes",
+        "content-length": "12314782"
+      }
+    },
+    {
+      "tile": "S09E138",
+      "points": 312,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:42:18 GMT",
+        "etag": "\"da695e484008c15a1b4ed8f481a141ff-5\"",
+        "accept-ranges": "bytes",
+        "content-length": "39117092"
+      }
+    },
+    {
+      "tile": "S12E114",
+      "points": 3,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:42:31 GMT",
+        "etag": "\"5ad25cb8b94c73fd096e6820031e5cca\"",
+        "accept-ranges": "bytes",
+        "content-length": "2066906"
+      }
+    },
+    {
+      "tile": "S12E117",
+      "points": 198,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:42:31 GMT",
+        "etag": "\"73812c9f2b1f41dc0b0b7763738bcc31\"",
+        "accept-ranges": "bytes",
+        "content-length": "6642633"
+      }
+    },
+    {
+      "tile": "S12E120",
+      "points": 1065,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:42:31 GMT",
+        "etag": "\"3994549d7c47fecef0b5aab0f85b33eb\"",
+        "accept-ranges": "bytes",
+        "content-length": "7982946"
+      }
+    },
+    {
+      "tile": "S12E123",
+      "points": 441,
+      "nodata": 0.0,
+      "mask_flags": "([<MaskFlags.nodata: 8>],)",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:42:31 GMT",
+        "etag": "\"6e99967a17f5090e77d9803551cfb74b-3\"",
+        "accept-ranges": "bytes",
+        "content-length": "24798642"
+      }
+    }
+  ],
+  "reader_started_utc": "2026-10-15T22:10:37.232510+00:00",
+  "reader_ended_utc": "2026-10-15T22:19:44.049055+00:00",
+  "reader_elapsed_seconds": 546.8195197919849,
+  "reader_runtime": {
+    "python": "3.12.14 (main, Aug 25 2026, 13:50:33) [Clang 22.1.3 ]",
+    "rasterio": "1.4.3",
+    "gdal": "3.9.3",
+    "numpy": "2.3.5"
+  },
+  "new_answer_or_repair_credit": 0,
+  "no_source_read_or_remote_acquisition_by_reviewer": true,
+  "limits": [
+    "The first tile additionally had all16 arrays/320 centres checked in the prior retained review.",
+    "This verifies original centres/native categorical observations, not the whole Atlas cell or ground-truth/ownership.",
+    "HEAD URL/ETag/size/header plus retained window hashes are partial-source custody, not whole-TIFF cryptographic acquisition.",
+    "Annual2020 model surface descriptions require separate bounded interpretation; shore/river/canopy/territorial questions can remain open."
+  ]
+}

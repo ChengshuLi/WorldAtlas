@@ -1,0 +1,137 @@
+{
+  "kind": "normal-original-relative-observation-admission",
+  "admission_inputs": {
+    "availableBytes": 1805926400,
+    "currentRssBytes": 51642368,
+    "phaseBytes": 621018082,
+    "rssBytes": 621018082,
+    "headroomBytes": 572882944,
+    "concurrentReservedBytes": 0
+  },
+  "complete_observation_bound_bytes": 621018082,
+  "requested_phase_bytes": 621018082,
+  "requested_rss_bytes": 621018082,
+  "config": {
+    "kind": "one-original-relative-land-exterior-observation",
+    "repository": "/Users/chengshuli/world-atlas-workspace/WorldAtlas",
+    "code_root": "../../idn-101610-local-delivery-preparation-001/accepted-b0b40-code",
+    "accepted_code_commit": "b0b40a84269eb51404c661aaa39acdc375e2dcb3",
+    "runtime_bytes": 121304480,
+    "closure_bytes": 616777,
+    "caller_bytes": 13202,
+    "execution_reserve_bytes": 8189727,
+    "metadata_bytes": 8388608,
+    "owner_output_and_serialization_bytes": 67108864,
+    "streamed_disk_cap_bytes": 134217728,
+    "deadline_seconds": 600,
+    "local": {
+      "scope_plan": {
+        "path": "../land-exterior53134-plan.json",
+        "bytes": 38063,
+        "sha256": "76b6599e1ed40e959c9f2f9c3c29e0597ecf537217e30e307c968bfc33979b0d"
+      },
+      "code_inventory": {
+        "path": "../../idn-101610-local-delivery-preparation-001/accepted-b0b40-code-inventory.json",
+        "bytes": 11790,
+        "sha256": "776f991fff19df4f78192f22d864b97fa4dd4d0aa461d7f78426c5d1c400782f"
+      },
+      "request": {
+        "path": "../../idn-physical-review-largest-group-001/native-requested-rows-by-owner.json",
+        "bytes": 1391401,
+        "sha256": "a36345fffd4f96d5d7f9901448a5711b454532747119a0583145c69e63cdedcb"
+      },
+      "original_custody": {
+        "path": "../../idn-physical-review-largest-group-001/original-relative72699-request.json",
+        "bytes": 3077000,
+        "sha256": "bb97b8d460b8d5bb531e28e4d468436a3334ca315d675fdcb5a2a89aa0ccf6b2"
+      },
+      "joins": {
+        "path": "../../idn-physical-review-largest-group-001/whole-report-stage-target-joins.json",
+        "bytes": 150018,
+        "sha256": "58d2e5e2043e08e791f6253f20bcf538b9a51da4a677388d0199ba90bca88d1f"
+      }
+    },
+    "inputs": {
+      "physical": {
+        "commit": "18a6e392539eddb02ac3fa58dd3102254ca49b12",
+        "mode": "100644",
+        "path": "coordination/engineering/indonesia-remaining264-20261015/whole-physical-result-001/whole-target-support.json",
+        "git_blob_oid": "5f72d0005102c5a8f40ce71b2412acabb939d102",
+        "bytes": 27291222,
+        "sha256": "a3b08dc7e079abd3d61bdd8a1ee3b1bb1f70d34eeed68a9f41e5379805a42e26"
+      },
+      "original_stage": {
+        "commit": "2301c2eff7b99f567a014d7c02214a0c8485b838",
+        "mode": "100644",
+        "path": "coordination/engineering/indonesia-remaining264-20261015/whole-physical-input-001/original-stage-inputs.json",
+        "bytes": 6202641,
+        "git_blob_oid": "9509673635d9e5ed79026226a0660157b3c37721",
+        "sha256": "9a8a12606803e0fdbec54ecb99d17e1f0223fd06abdd83b7fb0bcebac3c7e73d"
+      },
+      "original_context": {
+        "commit": "2301c2eff7b99f567a014d7c02214a0c8485b838",
+        "mode": "100644",
+        "path": "coordination/engineering/indonesia-remaining264-20261015/whole-physical-input-001/whole-original-context.json",
+        "bytes": 6211647,
+        "git_blob_oid": "b1f701d8711cb27df1dc7512422e3c08eae60d18",
+        "sha256": "61f937bc951780fbd0797c6a7a44a20f8c246e0b62e418efc407ba7922b6af26"
+      },
+      "latitudes": {
+        "commit": "5ab660cb68821e6b719f1b86819069ecac419ce1",
+        "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+        "mode": "100644",
+        "git_blob_oid": "de6905e162dc031b1b93248fae91190c39c4ad53",
+        "bytes": 1851757,
+        "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+        "decoded_bytes": 2097328,
+        "decoded_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+      }
+    },
+    "planning_statistics": {
+      "path": "planning-result-001/resource-metadata.json",
+      "bytes": 1359623,
+      "sha256": "4790d67158baf960ac4600b78364eea4e7d609f5234b65f0800e1f955e0fe411"
+    },
+    "planning_receipt": {
+      "path": "planning-execution-001.json",
+      "bytes": 2931,
+      "sha256": "7a1c5781fda4c66694b9c789a60079ea212e2b9c7109547d9ab395f04e954430"
+    },
+    "actual_max_membership_scratch_bytes": 10168576,
+    "scope": {
+      "owners": 161,
+      "original_cells": 53134,
+      "original_intervals": 27306,
+      "owner_blocks": 177,
+      "membership_calls": 322,
+      "empty_validations": 1127,
+      "stock_polygon_scan_blocks": 354
+    },
+    "stage_context_role": "unchanged immutable provenance pins only; no added body read",
+    "config_bytes": 4377,
+    "complete_observation_bound_bytes": 621018082,
+    "observation_phase_bytes": 621018082,
+    "headroom_bytes": 572882944,
+    "concurrent_reserved_bytes": 0
+  },
+  "whole_input_inventory": [
+    {
+      "commit": "18a6e392539eddb02ac3fa58dd3102254ca49b12",
+      "path": "coordination/engineering/indonesia-remaining264-20261015/whole-physical-result-001/whole-target-support.json",
+      "mode": "100644",
+      "git_blob_oid": "5f72d0005102c5a8f40ce71b2412acabb939d102",
+      "bytes": 27291222,
+      "sha256": "a3b08dc7e079abd3d61bdd8a1ee3b1bb1f70d34eeed68a9f41e5379805a42e26",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "5ab660cb68821e6b719f1b86819069ecac419ce1",
+      "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+      "mode": "100644",
+      "git_blob_oid": "de6905e162dc031b1b93248fae91190c39c4ad53",
+      "bytes": 1851757,
+      "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+      "whole_body_consumed": true
+    }
+  ]
+}

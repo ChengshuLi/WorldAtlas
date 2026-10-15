@@ -1,0 +1,1212 @@
+{
+  "at_utc": "2026-10-15T15:26:31.245559+00:00",
+  "completed_utc": "2026-10-15T15:26:32.879836+00:00",
+  "command": [
+    "/usr/bin/time",
+    "-l",
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-source-review-followup-001/land-exterior53134-preparation/observe-land-exterior.mjs",
+    "--observe-land-exterior",
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-source-review-followup-001/land-exterior53134-preparation/observation-config.json",
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-source-review-followup-001/land-exterior53134-preparation/observation-result-001"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 1.6341938331024721,
+  "deadline_seconds": 600,
+  "deadline_terminated": false,
+  "darwin_time_l_peak_rss_bytes": 344915968,
+  "executing_task_files": [
+    {
+      "path": "observe-land-exterior.mjs",
+      "bytes": 13202,
+      "sha256": "262605bba53ae7c9c7c5cdcbbc143e96673afc42ed8ad14b423483774f63438a"
+    },
+    {
+      "path": "observation-config.json",
+      "bytes": 4377,
+      "sha256": "ce8b17861acf5f18d69d7b39a2e0967c01efdeee352e16daad13a1a05cb77fe0"
+    }
+  ],
+  "requested_phase_bytes": 621018082,
+  "requested_rss_bytes": 621018082,
+  "complete_observation_bound_bytes": 621018082,
+  "headroom_bytes": 572882944,
+  "concurrent_reserved_bytes": 0,
+  "actual_stdout_records": [
+    {
+      "kind": "observation-normal-admission-inputs",
+      "complete_observation_bound_bytes": 621018082,
+      "requested_phase_bytes": 621018082,
+      "requested_rss_bytes": 621018082,
+      "admission_inputs": {
+        "availableBytes": 1805926400,
+        "currentRssBytes": 51642368,
+        "phaseBytes": 621018082,
+        "rssBytes": 621018082,
+        "headroomBytes": 572882944,
+        "concurrentReservedBytes": 0
+      }
+    },
+    {
+      "owner": 22700,
+      "requested_cells": 757,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22701,
+      "requested_cells": 255,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22702,
+      "requested_cells": 228,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22703,
+      "requested_cells": 794,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22709,
+      "requested_cells": 139,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22713,
+      "requested_cells": 281,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22714,
+      "requested_cells": 98,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22715,
+      "requested_cells": 159,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22717,
+      "requested_cells": 27,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22718,
+      "requested_cells": 1163,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22722,
+      "requested_cells": 433,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22724,
+      "requested_cells": 1881,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22730,
+      "requested_cells": 59,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22735,
+      "requested_cells": 975,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22736,
+      "requested_cells": 146,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22740,
+      "requested_cells": 31,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22741,
+      "requested_cells": 20,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22744,
+      "requested_cells": 290,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22745,
+      "requested_cells": 62,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22750,
+      "requested_cells": 109,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22753,
+      "requested_cells": 24,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22754,
+      "requested_cells": 54,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22759,
+      "requested_cells": 658,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22761,
+      "requested_cells": 108,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22762,
+      "requested_cells": 588,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22764,
+      "requested_cells": 49,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22766,
+      "requested_cells": 526,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22773,
+      "requested_cells": 418,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22774,
+      "requested_cells": 67,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22775,
+      "requested_cells": 574,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22776,
+      "requested_cells": 511,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22778,
+      "requested_cells": 259,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22782,
+      "requested_cells": 135,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22784,
+      "requested_cells": 6,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22789,
+      "requested_cells": 275,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22790,
+      "requested_cells": 7,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22791,
+      "requested_cells": 224,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22793,
+      "requested_cells": 2376,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22795,
+      "requested_cells": 1483,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22812,
+      "requested_cells": 259,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22815,
+      "requested_cells": 1173,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22817,
+      "requested_cells": 12,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22818,
+      "requested_cells": 229,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22820,
+      "requested_cells": 161,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22826,
+      "requested_cells": 1017,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22827,
+      "requested_cells": 1,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22832,
+      "requested_cells": 88,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22834,
+      "requested_cells": 186,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22835,
+      "requested_cells": 905,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22838,
+      "requested_cells": 10,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22841,
+      "requested_cells": 9,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22846,
+      "requested_cells": 6,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22850,
+      "requested_cells": 898,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22851,
+      "requested_cells": 421,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22854,
+      "requested_cells": 81,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22858,
+      "requested_cells": 230,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22861,
+      "requested_cells": 24,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22867,
+      "requested_cells": 108,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22872,
+      "requested_cells": 773,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22877,
+      "requested_cells": 2,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22881,
+      "requested_cells": 296,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22885,
+      "requested_cells": 1,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22886,
+      "requested_cells": 1,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22892,
+      "requested_cells": 638,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22893,
+      "requested_cells": 250,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22894,
+      "requested_cells": 1683,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22895,
+      "requested_cells": 13,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22896,
+      "requested_cells": 2,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22902,
+      "requested_cells": 45,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22912,
+      "requested_cells": 4,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22913,
+      "requested_cells": 70,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22914,
+      "requested_cells": 109,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22915,
+      "requested_cells": 58,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22919,
+      "requested_cells": 438,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22923,
+      "requested_cells": 706,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22924,
+      "requested_cells": 228,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22940,
+      "requested_cells": 46,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22949,
+      "requested_cells": 403,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22951,
+      "requested_cells": 137,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22954,
+      "requested_cells": 13,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22958,
+      "requested_cells": 150,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22961,
+      "requested_cells": 36,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22966,
+      "requested_cells": 138,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22967,
+      "requested_cells": 577,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22970,
+      "requested_cells": 233,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22972,
+      "requested_cells": 448,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22973,
+      "requested_cells": 52,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22974,
+      "requested_cells": 805,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22980,
+      "requested_cells": 256,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22982,
+      "requested_cells": 180,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22986,
+      "requested_cells": 22,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22987,
+      "requested_cells": 477,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22988,
+      "requested_cells": 276,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22992,
+      "requested_cells": 88,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22997,
+      "requested_cells": 834,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 22998,
+      "requested_cells": 422,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23000,
+      "requested_cells": 19,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23003,
+      "requested_cells": 127,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23010,
+      "requested_cells": 245,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23014,
+      "requested_cells": 273,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23020,
+      "requested_cells": 88,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23021,
+      "requested_cells": 284,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23023,
+      "requested_cells": 9,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23026,
+      "requested_cells": 497,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23034,
+      "requested_cells": 577,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23036,
+      "requested_cells": 1568,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23037,
+      "requested_cells": 833,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23039,
+      "requested_cells": 4,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23042,
+      "requested_cells": 24,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23043,
+      "requested_cells": 127,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23046,
+      "requested_cells": 99,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23054,
+      "requested_cells": 103,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23059,
+      "requested_cells": 13,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23060,
+      "requested_cells": 668,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23061,
+      "requested_cells": 32,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23067,
+      "requested_cells": 110,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23072,
+      "requested_cells": 83,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23073,
+      "requested_cells": 34,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23075,
+      "requested_cells": 355,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23077,
+      "requested_cells": 9,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23081,
+      "requested_cells": 52,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23082,
+      "requested_cells": 211,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23086,
+      "requested_cells": 151,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23091,
+      "requested_cells": 19,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23095,
+      "requested_cells": 357,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23099,
+      "requested_cells": 894,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23102,
+      "requested_cells": 108,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23104,
+      "requested_cells": 37,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23105,
+      "requested_cells": 62,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23118,
+      "requested_cells": 39,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23121,
+      "requested_cells": 1432,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23125,
+      "requested_cells": 10,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23127,
+      "requested_cells": 1274,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23128,
+      "requested_cells": 432,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23130,
+      "requested_cells": 1939,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23131,
+      "requested_cells": 913,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23136,
+      "requested_cells": 46,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23139,
+      "requested_cells": 206,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23145,
+      "requested_cells": 8,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23157,
+      "requested_cells": 370,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23159,
+      "requested_cells": 347,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23162,
+      "requested_cells": 785,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23163,
+      "requested_cells": 42,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23164,
+      "requested_cells": 86,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23167,
+      "requested_cells": 5,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23168,
+      "requested_cells": 1085,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23172,
+      "requested_cells": 84,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23176,
+      "requested_cells": 84,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23177,
+      "requested_cells": 306,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23178,
+      "requested_cells": 6,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23180,
+      "requested_cells": 105,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23181,
+      "requested_cells": 30,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23182,
+      "requested_cells": 58,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23185,
+      "requested_cells": 365,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23186,
+      "requested_cells": 32,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23187,
+      "requested_cells": 152,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23194,
+      "requested_cells": 59,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23195,
+      "requested_cells": 65,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23197,
+      "requested_cells": 1128,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23199,
+      "requested_cells": 69,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "owner": 23202,
+      "requested_cells": 523,
+      "completed_labels": 9,
+      "membership_calls": 2,
+      "validated_empty_operands": 7
+    },
+    {
+      "status": "observation-completed",
+      "owners": 161,
+      "original_cells": 53134,
+      "original_intervals": 27306,
+      "membership_calls": 322,
+      "validated_empty_operands": 1127,
+      "stock_polygon_scan_blocks": 354,
+      "emitted_disk_bytes": 2674111,
+      "complete_observation_bound_bytes": 621018082
+    }
+  ],
+  "emitted_inventory": [
+    {
+      "path": "observation-result-001/admission.json",
+      "bytes": 5893,
+      "sha256": "bb027ca83bc4271738ae2c650d120c4d1fc3b857663740a07dda06ac3545ae2c"
+    },
+    {
+      "path": "observation-result-001/owner-observations.jsonl",
+      "bytes": 2665508,
+      "sha256": "95b6e1db151d8f6ff7218b621aca0cc4211d5307e18209614fcca8e862e1a2b5"
+    },
+    {
+      "path": "observation-result-001/summary.json",
+      "bytes": 2710,
+      "sha256": "2a0667ea7f3bc5d0326359eba0e5fe171d5ef22b9ced69b95c3073bccedb85ac"
+    }
+  ],
+  "source_or_physical_producer_replayed": false,
+  "joint_consumer_executed": false,
+  "shared_git_mutation": false,
+  "public_action": false,
+  "child_exited": true,
+  "reservation_released": true
+}

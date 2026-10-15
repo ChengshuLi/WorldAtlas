@@ -1,0 +1,62 @@
+{
+  "reviewer": "/root/remaining474_malinau_mahakam105",
+  "status": "PASS_ADOPTION_OUTPUT_BINDING",
+  "root_actual_adopted_utc": "2026-10-15T22:34:13.738545+00:00",
+  "approved_to_adopted_scientific_row_changes": 0,
+  "allowed_changes": [
+    "proposed_bounded_answer renamed adopted_bounded_answer",
+    "completed_question_credit_proposed renamed completed_question_credit",
+    "credit_scope updated to Root-adopted bounded source-year facet"
+  ],
+  "exact_original_keys": 53134,
+  "exact_adopted_key_union": 36760,
+  "specific_residual_keys": 16374,
+  "intervals": {
+    "whole": 16490,
+    "partial": 2573,
+    "none": 8243,
+    "total": 27306
+  },
+  "outside_known_union": 97086,
+  "global_unanswered_claimed": false,
+  "original_denominator": 133846,
+  "authority_or_repair_credit": 0,
+  "public_alternate_source_lookup_bindings": [
+    {
+      "public_file": "source-observations.json.gz",
+      "decoded_bytes": 48698093,
+      "decoded_sha256": "be2838576b96c4172c986c17b94243740579179ec127701cef99d24d2b6cb86f",
+      "point_index_lookup": "observations by unchanged point_index"
+    },
+    {
+      "public_file": "source-association/per-original-key-ownership-joins.jsonl.gz",
+      "decoded_bytes": 57216746,
+      "decoded_sha256": "19bb010fef5be08d327b541ac02420a2a8d5e22832edb8b2aeadd83a17720fb8",
+      "point_index_lookup": "unchanged point_index"
+    }
+  ],
+  "prior_scientific_review_reused": "physical-location-proposal-review.md SHA8dedb3d6c9b872090adc10af5888c2a793a8437c3b01f3c0418de7b8cb8e3cb4",
+  "new_source_native_or_scientific_execution": false,
+  "bindings": [
+    {
+      "file": "adopted-physical-interpretations.json.gz",
+      "bytes": 4659894,
+      "sha256": "30c9f349a8dc4b3e653695ec0e03fe36a257b556a06e0a1fe5880dbc328f7617"
+    },
+    {
+      "file": "known-exact-adopted-physical-keyset36760.json.gz",
+      "bytes": 107590,
+      "sha256": "2136b36c27e498b84e8e2c80fb1aabb94726debb8a975bdf9afcccaf63a0fb9f"
+    },
+    {
+      "file": "exact-original-accounting.json",
+      "bytes": 8912330,
+      "sha256": "b05b000399665bf6c99ae69d5cec90617aa7df5cd6a04c093c62c20dbf612ba2"
+    },
+    {
+      "file": "proposed-physical-location-dispositions.jsonl.gz",
+      "bytes": 4673679,
+      "sha256": "91f1dd7a50dd66fbc971d42347e7d8dfa0c0acff98c6067aee23d6e15f573433"
+    }
+  ]
+}
