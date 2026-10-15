@@ -5,6 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {spawn, spawnSync} from 'node:child_process';
+import {inspectPackageInputs, inspectPackageExecutionInputs, materializePackageInputs} from '../scripts/package-build.mjs';
 
 const helper = fileURLToPath(new URL('../scripts/acquire-ci-checkout.py', import.meta.url));
 const realGit = spawnSync('which', ['git'], {encoding: 'utf8'}).stdout.trim();
@@ -12,6 +13,9 @@ const token = 'fixture-secret-only-checkout-1787';
 const base64Token = Buffer.from('x-access-token:' + token).toString('base64');
 const fixtureEnv = {...process.env, GIT_CONFIG_NOSYSTEM: '1', GIT_CONFIG_GLOBAL: os.devNull,
   PYTHONDONTWRITEBYTECODE: '1', INTEGRATION_PROFILE: '', INTEGRATION_TEST_SELECTION: ''};
+const packageDefinition = {version: 1, inputs: ['.github/package-inputs.json', 'file.txt',
+  'research/geography/required/body.txt', 'coordination/engineering/required/body.txt',
+  'data/geography/required/body.txt'], optional_inputs: [], verification_paths: [], generated_outputs: []};
 function command(executable, args, options = {}) {
   const result = spawnSync(executable, args, {encoding: 'utf8', env: fixtureEnv, ...options});
   assert.equal(result.status, 0, result.stderr || result.error?.message);
@@ -32,6 +36,7 @@ function fixture(t, mode = 'success') {
   fs.writeFileSync(path.join(source, 'execute.sh'), '#!/bin/sh\nexit 0\n', {mode: 0o755});
   fs.symlinkSync('file.txt', path.join(source, 'link'));
   for (const [name, text] of Object.entries({
+    '.github/package-inputs.json': JSON.stringify(packageDefinition) + '\n',
     'data/regional-review/source-only/body.txt': 'unconsumed regional source-only bytes\n',
     'research/campaigns/source-only/body.txt': 'unconsumed historical campaign bytes\n',
     'research/geography/required/body.txt': 'required original scientific source bytes\n',
@@ -125,9 +130,9 @@ test('real Git checkout preserves exact tree, modes, symlinks and detached ident
   f.clean(); noSecrets(result);
 });
 
-test('complete software profile excludes only source-only files and blobs while preserving exact tree and all regression inputs', t => {
+for (const selection of ['complete', 'selected-data']) test(`${selection} software profile excludes only source-only files and blobs while preserving exact tree and required inputs`, async t => {
   const f = fixture(t);
-  Object.assign(f.env, {INTEGRATION_PROFILE: 'full', INTEGRATION_TEST_SELECTION: 'complete'});
+  Object.assign(f.env, {INTEGRATION_PROFILE: 'full', INTEGRATION_TEST_SELECTION: selection});
   const result = f.run();
   assert.equal(result.status, 0, result.stdout + result.stderr);
   assert.equal(command(realGit, ['-C', f.workspace, 'rev-parse', 'HEAD']), f.sha);
@@ -152,6 +157,58 @@ test('complete software profile excludes only source-only files and blobs while 
   assert.ok(f.rows().every(row => !row.token && !row.gh && row.global === os.devNull));
   assert.ok(!fs.existsSync(f.sentinel));
   assert.doesNotMatch(fs.readFileSync(path.join(f.workspace, '.git/config'), 'utf8'), /extraheader|credential|AUTHORIZATION|fixture-secret|insteadOf/);
+  assert.equal(f.events(result).at(-1).source_only_omitted, true);
+  assert.deepEqual(inspectPackageInputs(f.workspace, packageDefinition).errors, []);
+  const destination = path.join(f.directory, 'package-stage');
+  const materialized = await materializePackageInputs({source: f.workspace, destination, definition: packageDefinition});
+  assert.deepEqual(materialized.map(row => row.path).sort(), [...packageDefinition.inputs].sort());
+  for (const name of packageDefinition.inputs) assert.deepEqual(fs.readFileSync(path.join(destination, name)), fs.readFileSync(path.join(f.source, name)), name);
+  f.clean(); noSecrets(result);
+});
+
+for (const name of ['data/regional-review/source-only/body.txt', 'research/campaigns/source-only/body.txt']) {
+  test(`selected-data future required input ${name} fails existing package admission and fallback materialization`, async t => {
+    const f = fixture(t), definition = {...packageDefinition, inputs: [...packageDefinition.inputs, name]};
+    fs.writeFileSync(path.join(f.source, '.github/package-inputs.json'), JSON.stringify(definition) + '\n');
+    f.git(['add', '.']); f.git(['commit', '--quiet', '-m', 'require source-only input']);
+    const sha = f.git(['rev-parse', 'HEAD']), tree = f.git(['rev-parse', 'HEAD^{tree}']);
+    Object.assign(f.env, {INTEGRATION_PROFILE: 'full', INTEGRATION_TEST_SELECTION: 'selected-data'});
+    const result = f.run(['--sha', sha, '--tree', tree]);
+    assert.equal(result.status, 0, result.stdout + result.stderr);
+    const inspection = inspectPackageInputs(f.workspace, definition);
+    assert.ok(inspection.errors.some(row => row.kind === 'materialized-input' && row.path === name));
+    assert.ok(inspection.missing_objects.includes(f.git(['rev-parse', `${sha}:${name}`])));
+    const destination = path.join(f.directory, 'package-stage');
+    await assert.rejects(materializePackageInputs({source: f.workspace, destination, definition}),
+      error => error.code === 'ENOENT' || /Declared package input missing/.test(error.message));
+    assert.ok(!fs.existsSync(path.join(destination, name)));
+    assert.ok(!fs.existsSync(path.join(f.workspace, name)));
+    f.clean(); noSecrets(result);
+  });
+}
+
+test('selected-data future execution import from an omitted namespace fails the actual closure reader', t => {
+  const f = fixture(t), required = 'research/campaigns/source-only/required.mjs';
+  const bodies = {
+    'package.json': '{"type":"module"}\n',
+    'data/native-context-migration/manifest.json': JSON.stringify({version: 2, kind: 'retained-identity-context-continuation-v2', issue: 1295}),
+    'scripts/native-ownership/validate-build-context-stage.mjs': 'export {};\n',
+    'coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution.mjs': 'export {};\n',
+    'scripts/package-build.mjs': 'export {};\n',
+    'scripts/build-cloudflare-inner.mjs': `import '../${required}';\n`,
+    [required]: 'export const required = true;\n'
+  };
+  const definition = {...packageDefinition, inputs: [...packageDefinition.inputs, ...Object.keys(bodies)]};
+  for (const [name, raw] of Object.entries({...bodies, '.github/package-inputs.json': JSON.stringify(definition)})) {
+    fs.mkdirSync(path.dirname(path.join(f.source, name)), {recursive: true}); fs.writeFileSync(path.join(f.source, name), raw);
+  }
+  f.git(['add', '.']); f.git(['commit', '--quiet', '-m', 'require source-only executing input']);
+  assert.deepEqual(inspectPackageExecutionInputs(f.source, definition).errors, []);
+  Object.assign(f.env, {INTEGRATION_PROFILE: 'full', INTEGRATION_TEST_SELECTION: 'selected-data'});
+  const result = f.run(['--sha', f.git(['rev-parse', 'HEAD']), '--tree', f.git(['rev-parse', 'HEAD^{tree}'])]);
+  assert.equal(result.status, 0, result.stdout + result.stderr);
+  const inspection = inspectPackageExecutionInputs(f.workspace, definition);
+  assert.ok(inspection.errors.some(row => row.kind === 'execution-inputs' && row.detail.includes(required)));
   f.clean(); noSecrets(result);
 });
 
@@ -175,14 +232,16 @@ test('sparse software acquisition preserves explicit complete historical commit 
   f.clean(); noSecrets(result);
 });
 
-for (const [profile, selection] of [['full', 'selected-data'], ['full', 'selected-output'], ['evidence', 'complete']]) {
-  test(`non-complete software route ${profile}/${selection} retains complete checkout`, t => {
+for (const [profile, selection] of [['full', 'selected-output'], ['full', 'unknown'], ['full', ''],
+  ['evidence', 'complete'], ['evidence', 'selected-data'], ['', 'selected-data']]) {
+  test(`other route ${profile}/${selection} retains complete checkout`, t => {
     const f = fixture(t); Object.assign(f.env, {INTEGRATION_PROFILE: profile, INTEGRATION_TEST_SELECTION: selection});
     const result = f.run(); assert.equal(result.status, 0, result.stdout + result.stderr);
     assert.ok(fs.existsSync(path.join(f.workspace, 'data/regional-review/source-only/body.txt')));
     assert.ok(fs.existsSync(path.join(f.workspace, 'research/campaigns/source-only/body.txt')));
     assert.ok(!f.rows().some(row => row.args.includes('--filter=blob:none')));
     assert.ok(f.rows().filter(row => !row.fetch).every(row => !row.auth));
+    assert.equal(f.events(result).at(-1).source_only_omitted, false);
     f.clean(); noSecrets(result);
   });
 }
@@ -209,9 +268,9 @@ test('one command failure stops after one fetch without publishing or leaking Gi
   assert.deepEqual(fs.readdirSync(f.workspace), []); f.clean(); noSecrets(result);
 });
 
-for(const mode of ['hang','materialize-hang']) test(`SIGTERM cancels ${mode} process group, cleans it and performs no second fetch`, async t => {
+for(const selection of ['complete','selected-data']) for(const mode of ['hang','materialize-hang']) test(`SIGTERM cancels ${selection} ${mode} process group, cleans it and performs no second fetch`, async t => {
   const f = fixture(t, mode);
-  Object.assign(f.env,{INTEGRATION_PROFILE:'full',INTEGRATION_TEST_SELECTION:'complete'});
+  Object.assign(f.env,{INTEGRATION_PROFILE:'full',INTEGRATION_TEST_SELECTION:selection});
   const child = spawn('python3', f.args(), {env: f.env});
   let stdout = '', stderr = '';
   child.stdout.on('data', value => { stdout += value; }); child.stderr.on('data', value => { stderr += value; });
