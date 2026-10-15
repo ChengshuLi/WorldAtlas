@@ -1,0 +1,34 @@
+{
+  "at_utc": "2026-10-15T09:19:29.816772+00:00",
+  "completed_utc": "2026-10-15T09:19:31.330241+00:00",
+  "exit_code": 0,
+  "elapsed_seconds": 1.513030832982622,
+  "deadline_seconds": 120,
+  "deadline_terminated": false,
+  "direct_child_lifetime_peak_rss_bytes": 324288512,
+  "actual_node": {
+    "bytes": 121304480,
+    "sha256": "3c9448363b9976bf3d9e8f4d320397975800131b42c7b1be342dadc05871dd25"
+  },
+  "config_sha256": "6d6ffa09f43f99a1b97ee1e07b1e423204e06a62fcb6f413c1b922777c70225a",
+  "requested_allowance": {
+    "phaseBytes": 671088640,
+    "rssBytes": 671088640
+  },
+  "prospective_stock_declared_bytes": 348846365,
+  "complete_code_conservative_bytes": 349460147,
+  "headroom_bytes": 572882944,
+  "concurrent_reserved_bytes": 0,
+  "input_commit": "370caa99104e548cf170ef4ce38d6b6f855fec3d",
+  "accepted_code_equivalent_commit": "10dae570272af35a5d682b2ce3c9b6db387153ea",
+  "executing_code_commit": "f6068aaf855b26e746afba0c030f0f1dc62df0c7",
+  "requested_repair_cells": 9580,
+  "original_relative_held": 8898,
+  "child_exited": true,
+  "reservation_released": true,
+  "source_or_physical_replayed": false,
+  "authority_or_acceptance_claim": false,
+  "denied_cleanup_retried": false,
+  "original_local_operating_sha256": "9f06c4df444f99e3a8aa06573221bd4f906efc78c501d6a85d26ff6f98ce3bc0",
+  "projection": "Only command, cwd and actual_node.path machine fields omitted."
+}

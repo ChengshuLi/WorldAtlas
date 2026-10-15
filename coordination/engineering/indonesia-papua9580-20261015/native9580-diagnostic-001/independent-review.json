@@ -1,0 +1,64 @@
+{
+  "status": "ACTUAL_FULL_CANDIDATE_DIAGNOSTIC_ACCEPTED_ALL9580_SUPPORTED_NO_HELD",
+  "reviewer": "/root/tanjung62_result_review_sol",
+  "configured_model": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "high",
+    "basis": "Explicit delegated configuration; runtime identity not independently exposed."
+  },
+  "result": {
+    "bytes": 423200,
+    "sha256": "15f4e67f8b8908b9176ebaafdad14607c9c893802aee627ea793804039b93001",
+    "requested": 9580,
+    "supported": 9580,
+    "held": 0,
+    "first_failure": null,
+    "owner_counts": {
+      "23184": 2563,
+      "23090": 1235,
+      "22906": 1840,
+      "23169": 1985,
+      "22705": 1217,
+      "22743": 740
+    },
+    "requested_rows": 1696,
+    "original_requested_spans": 4054,
+    "supported_spans": 3602,
+    "supported_span_note": "Output may coalesce adjacent equal-owner intervals; exact full per-cell tuples independently agree.",
+    "rule_sha256": "db0a72fed747461b1f8e3b37a75b371e4b081be4cdc83a20cda112c7ebd53251"
+  },
+  "bindings": {
+    "input_pair_commit": "370caa99104e548cf170ef4ce38d6b6f855fec3d",
+    "source_evidence_sha256": "c4ef6e068497273ea6cc05c706847dd6d8f2776efba018dd5418214d0eb793ac",
+    "native_patch_sha256": "428c8a506a6a029d17fb19d1c8795675ce6789be03b634151094ec42ae5b3958",
+    "config_sha256": "6d6ffa09f43f99a1b97ee1e07b1e423204e06a62fcb6f413c1b922777c70225a",
+    "accepted_code_equivalent_commit": "10dae570272af35a5d682b2ce3c9b6db387153ea",
+    "executing_code_commit": "f6068aaf855b26e746afba0c030f0f1dc62df0c7"
+  },
+  "substantive_result": "The actual stock operator returned assigned_cells for every exact original requested tuple. It did not hold any9580 candidate, including Kaimana1985 and its two original cross-parent centres. This is an actual source/positive-class/witness/native screening observation for this precise pair; no witness was removed or footprint-wide inference substituted. All8898 original relative cells stay excluded.",
+  "operating_observation": {
+    "numeric_exit": 0,
+    "external_elapsed_seconds": 1.513030832982622,
+    "internal_elapsed_seconds": 1.261192958,
+    "actual_lifetime_peak_rss_bytes": 324288512,
+    "stock_final_reader_charge_bytes": 336841693,
+    "prospective_stock_ledger_peak_bytes": 348846365,
+    "phase_rss_requested_bytes": 671088640,
+    "output_bytes": 423200,
+    "output_cap_bytes": 4194304,
+    "fresh_call": true,
+    "limits": "Captured single call; final reader used charge differs from prospective peak scratch charge. Actual ordinary allowance/resumed=false and owned complete receipt observed; no new admission or capacity prediction was issued by reviewer."
+  },
+  "validation_summary": {
+    "checks_passed": 25,
+    "scope": "Whole raw result+receipt, actual370c immutable pair/config/rule/preimage, exact original9580 requested/supported/decision partition, excluded8898relative, exact6owner counts, stdout reader/admission allowance/operating limits. Prior76 scientific-input review/common physical/code custody reused; no producer/native/scientific execution by reviewer."
+  },
+  "findings": [],
+  "next_action": "Proceed with ONE ordinary stock native-authority call on the SAME immutable370c source/patch pair and existing final config. All9580 diagnostic rows passed, so no filtered patch is needed. Review actual constructor products afterward; no authority or repair credit is granted here.",
+  "preserved_limits": [
+    "All original full physical Kaimana contradiction/hierarchy/water, six exterior contexts and all455 queries remain pinned and preserved. Cell screening success does not certify whole geometries or erase physical issues.",
+    "Original2020 source/licence/CRS84/heterogeneous dates/open semantics/territorial and source-framework parent limits remain, including Wondama low overlaps. No official parent, geographic boundary, legal or history certificate.",
+    "Current accepted-base owner-zero, constructor/component identity, uniqueness/conservation, selected-reader integration and ordinary acceptance remain actual later checks. Diagnostic output grants no authority, current-owner-zero proof, accepted repair credit, import, publication or whole-source clearance.",
+    "No source/physical/native run, spatial predicate or contact prediction was performed by this reviewer. This review checks actual captured results and their preserved evidence."
+  ]
+}

@@ -1,0 +1,123 @@
+{
+  "status": "ACTUAL_ORIGINAL_NATIVE_AUTHORITY_CONSTRUCTOR_ACCEPTED9580_CELLS_SIX_COMPONENTS",
+  "reviewer": "/root/tanjung62_result_review_sol",
+  "configured_model": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "high",
+    "basis": "Explicit delegated configuration; runtime identity is not independently exposed."
+  },
+  "original_quartet_ready": true,
+  "outputs": {
+    "authority-binding.json": {
+      "bytes": 742,
+      "sha256": "c85c614a946cb17bd08a504dd2ec4dffa8e362aebb852e604154e7a9f0420771"
+    },
+    "constructor-result.json": {
+      "bytes": 166787,
+      "sha256": "eb95ea5f1395eaf7f2b00acabda42aa9f91a8189ccc1e8cb951316d200567ba7"
+    },
+    "original-rule-preimage.json": {
+      "bytes": 739,
+      "sha256": "db0a72fed747461b1f8e3b37a75b371e4b081be4cdc83a20cda112c7ebd53251"
+    }
+  },
+  "input_pair_commit": "370caa99104e548cf170ef4ce38d6b6f855fec3d",
+  "rule_sha256": "db0a72fed747461b1f8e3b37a75b371e4b081be4cdc83a20cda112c7ebd53251",
+  "config_sha256": "6d6ffa09f43f99a1b97ee1e07b1e423204e06a62fcb6f413c1b922777c70225a",
+  "ledger_components": [
+    {
+      "owner": 23090,
+      "target": "gb:IDN:ADM2:22746128B79106566109504",
+      "component_id": "source-target:1a0b2c2d950762adf662868bfe36cc08d116e3e9c5100df6cc8bab7877189bd8",
+      "native_cells": 1235,
+      "native_rows": 420,
+      "original_native_spans": 613,
+      "base_geometry_sha256": "00d5af2ebe04e5a2b2b04800a2135fcb61393526ac2f590ca40f949e4fdf761b",
+      "source_receipt_sha256": "aa9384e344c08e6c71644182f91b2c466a7d054aa5db2b78073362f01fe463ab"
+    },
+    {
+      "owner": 23184,
+      "target": "gb:IDN:ADM2:22746128B96094928872069",
+      "component_id": "source-target:5c1b0f83e80e8ca8be46aca840dca76481bc3ccad8fc14998034a27f205ef572",
+      "native_cells": 2563,
+      "native_rows": 274,
+      "original_native_spans": 825,
+      "base_geometry_sha256": "6a5c26d7d11100ae0e26f1630f1f6760c61a44dcd8f2158b3c7b6db66117470e",
+      "source_receipt_sha256": "aa9384e344c08e6c71644182f91b2c466a7d054aa5db2b78073362f01fe463ab"
+    },
+    {
+      "owner": 22705,
+      "target": "gb:IDN:ADM2:22746128B11480476919105",
+      "component_id": "source-target:696f9ee398600c415fda048e4db735d77a92e257dd02a02b57328b0d1aabee38",
+      "native_cells": 1217,
+      "native_rows": 231,
+      "original_native_spans": 561,
+      "base_geometry_sha256": "833a102049433deaa394f8bff467c22bf71de1060904169e12be82885a3112eb",
+      "source_receipt_sha256": "aa9384e344c08e6c71644182f91b2c466a7d054aa5db2b78073362f01fe463ab"
+    },
+    {
+      "owner": 22743,
+      "target": "gb:IDN:ADM2:22746128B19254678251292",
+      "component_id": "source-target:7c064f6c879718d3ae10c5e9cf21cd3a2b5211b4f827aa14b4c008c2999998da",
+      "native_cells": 740,
+      "native_rows": 206,
+      "original_native_spans": 362,
+      "base_geometry_sha256": "76168a389f5718f10270e946db39dd9313a419d84fc90d3d2686a51797d8917f",
+      "source_receipt_sha256": "aa9384e344c08e6c71644182f91b2c466a7d054aa5db2b78073362f01fe463ab"
+    },
+    {
+      "owner": 23169,
+      "target": "gb:IDN:ADM2:22746128B93097528927367",
+      "component_id": "source-target:9bcfb2cd3d0ed735468af1a4fa7938f2ebb1588de562deac89b8546d463cde20",
+      "native_cells": 1985,
+      "native_rows": 507,
+      "original_native_spans": 959,
+      "base_geometry_sha256": "bd2b4211674d69366a094787bc31faf300e50ebb4985cf83c035956b6de0b398",
+      "source_receipt_sha256": "aa9384e344c08e6c71644182f91b2c466a7d054aa5db2b78073362f01fe463ab"
+    },
+    {
+      "owner": 22906,
+      "target": "gb:IDN:ADM2:22746128B47515282892276",
+      "component_id": "source-target:e2b5ffe3c833c1ecd4361fcc933a19ed6751942c7c6fc015004c655f85c2f0a3",
+      "native_cells": 1840,
+      "native_rows": 409,
+      "original_native_spans": 734,
+      "base_geometry_sha256": "e89d198316450091935c6f4a7cb990825109cb61c2a3435a38122963c4a8f957",
+      "source_receipt_sha256": "aa9384e344c08e6c71644182f91b2c466a7d054aa5db2b78073362f01fe463ab"
+    }
+  ],
+  "totals": {
+    "components": 6,
+    "qualified_native_cells": 9580,
+    "original_relative_cells_excluded": 8898,
+    "original_requested_spans": 4054,
+    "all_original_native_tuples_preserved": true
+  },
+  "substantive_conclusion": "Actual unchanged stock constructor qualified the complete original9580 tuples into six literal native components. Full selected base geometries, canonical component identities, source receipts, original370c rule/binding and complete native rows remain exact. These authority products are ready for original-quartet preservation and ordinary compose/finalize; they do not themselves establish current-owner-zero, selected-reader acceptance or accepted repair credit.",
+  "operating_observation": {
+    "numeric_exit": 0,
+    "internal_elapsed_seconds": 1.40648925,
+    "external_elapsed_seconds": 1.6669112920062616,
+    "stock_reader_charge_bytes": 331704221,
+    "normalized_node_lifetime_peak_rss_bytes": 286408704,
+    "external_time_l_peak_rss_bytes": 286638080,
+    "requested_phase_rss_bytes": 671088640,
+    "products_bytes_excluding_preparation": 168268,
+    "output_cap_bytes": 4194304,
+    "limits": "Captured fresh resumed=false call and actual allowance/complete output receipt; RSS readings are distinct observations, not summed process-tree containment or a future capacity prediction."
+  },
+  "validation_summary": {
+    "checks_passed": 76,
+    "scope": "Actual whole quartet hashes/preparation/config; original rule and custody binding equality; exact6 component identity/geometry/source-receipt/native rows/cell/owner conservation; original9580 and held8898 partition; literal binary64 native-bound endpoints and captured operating records. Prior76 input and25 diagnostic reviews reused; no scientific/native/GIS producer rerun or spatial predicate.",
+    "local_source_patch_still_match_original_immutable_pair": true
+  },
+  "findings": [],
+  "next_action": "Preserve the complete exact original quartet and full operating evidence, then ordinary compose/finalize against actual current base and subsequent selected-reader/conservation acceptance. No new filtered candidate or authority rerun is needed from this review.",
+  "preserved_limits": [
+    "All complete Kaimana physical contradiction/hierarchy/water and six exterior contexts/all455 query records remain pinned in370c input. Requested-centre qualification does not erase whole-source issues or certify parent/boundary/territory.",
+    "Original2020/CRS84/licence declarations, mixed physical dates, open semantic reviews, Wondama low overlaps, source/framework parent distinctions and historical operating failures remain.",
+    "Kaimana two cross-parent centres remain originalowner23169/SIDs; no broad parent or territorial adjudication follows. All8898 original relative cells remain unqualified and excluded.",
+    "Actual current accepted-base owner-zero, component identity/uniqueness in composition, conservation, selected-output/reader acceptance and ordinary integration remain later actual checks. No accepted repair credit, geographic clearance, import or publication approval is granted here.",
+    "Only read-only artifact/JSON/Git metadata and literal endpoint data checks were performed; reviewer did not execute source, physical or native science."
+  ]
+}
