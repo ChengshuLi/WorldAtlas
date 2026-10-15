@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "reviewer": "/root/authority_binding_review",
+  "created_at": "2026-10-15T00:02:21.769670+00:00",
+  "status": "scientific-inputs-ready-for-finite-attempt-subject-to-fresh-admission",
+  "bindings": {
+    "physical-config.json": {
+      "commit": "9a42898815b6b6dfca5632c5d01fe50c6c2f6978",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/coastal1928-preparation-001/physical-config.json",
+      "bytes": 121357,
+      "sha256": "3a9542fbcde6d7e71ae78bacd2d9e73298de2f7cc6830ce62901588f753f56ec"
+    },
+    "readiness-custody.json": {
+      "commit": "9a42898815b6b6dfca5632c5d01fe50c6c2f6978",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/coastal1928-preparation-001/readiness-custody.json",
+      "bytes": 7124,
+      "sha256": "f3611ab6ab11a234b5a69943c56f4075bae9b154797d2ea4c6fd6a1bb93d43e4"
+    }
+  },
+  "findings": [],
+  "accepted_method_identity": [
+    {
+      "bytes": 48543,
+      "path": "scripts/qualify-source-cohort.py",
+      "sha256": "58ef81739b264085b2997be7baa3df03ba6bb673f91a160176efd79b71fec081"
+    },
+    {
+      "bytes": 87314,
+      "path": "scripts/prepare-delivery-handoff.mjs",
+      "sha256": "f91c2919d09d4bcae8a0e7c07100ab699f7ea01144acc99ca181c9c8f0c3d458"
+    }
+  ],
+  "accepted_adopted_head": "2c9eb56df69240b91e50a7ffbcc8eeae498ee34f",
+  "whole_targets": [
+    "gb:MMR:ADM3:66882298B82483484204646",
+    "gb:MMR:ADM3:66882298B86598910616989"
+  ],
+  "stage": {
+    "bytes": 168107,
+    "commit": "2c9eb56df69240b91e50a7ffbcc8eeae498ee34f",
+    "git_blob_oid": "f527a460fc0fb388bb8010c07816ba6b0bb6749b",
+    "mode": "100644",
+    "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/kawthoung/original-stage-inputs.json",
+    "sha256": "8375890ae28d4d7cd534447e976fc7448a3b040cce840717c46b2c81a133a6ba"
+  },
+  "checks": {
+    "whole_encoded_inputs_authenticated": 25,
+    "original_common_source_pins_preserved": 24,
+    "metadata_parts": 18,
+    "native_fragments": 3,
+    "runtime_files_authenticated": 388,
+    "runtime_inventory_equals_actual_cli_inventory": true,
+    "runtime_bytes": 35120510,
+    "stage_bytes_equal_original004_whole_two_targets": true,
+    "country_exception_or_feature_partition": false
+  },
+  "accounting": {
+    "candidate_grant": {
+      "phaseBytes": 671088640,
+      "rssBytes": 671088640
+    },
+    "charged_encoded_plus_declared_decoded": 305251466,
+    "complete_native_body": 95809336,
+    "decoded_metadata": 123347986,
+    "decoded_native": 95809336,
+    "encoded_inputs": 86094144,
+    "execution_reserve_bytes": 33701386,
+    "known_prospective_charged_phase": 374073362,
+    "largest_decoded_native_fragment": 33554432,
+    "output_reserve_bytes": 33554432,
+    "remaining_grant_after_known_charge": 297015278,
+    "runtime_bytes": 35120510,
+    "runtime_files": 388,
+    "selected_metadata_records_retained_prior_inventory": 719,
+    "selected_native_points_retained_prior_inventory": 1200220,
+    "selected_native_record_bytes_retained_prior_inventory": 9633396,
+    "target_coordinates_retained_prior_inventory": 3874
+  },
+  "archived_nonconsumed_producer": [
+    {
+      "bytes": 5450,
+      "commit": "09ac43d945203fc877d3a30104f775960e711d65",
+      "git_blob_oid": "73e005238c929a901185abb8321c419e7cd9f688",
+      "mode": "100644",
+      "path": "coordination/engineering/source-target-native-delivery-20261014/evidence/physical-reproduction.py",
+      "sha256": "05af43d7d7722e8d7bb201f5876a43d9c7f9a2d0f4ea39e467229351a35c9bc3"
+    }
+  ],
+  "resource_interpretation": "Author-selected finite640MiBphase/RSSceiling; known374073362B leaves297015278B for uncertain expansion. This is not a measured coastal requirement or proven fit. No historical Hpapun/DaNang peak substitution.180sdeadline and32MiBoutput ceiling may refuse.",
+  "review_method": [
+    "Offline byte/hash/blob authentication of25 encoded immutable inputs; exact original-stage and24 common-pin comparison. No metadata/native decompression.",
+    "Whole-byte authentication of388 installed runtime files and Python executable; final inventory equals supplied actualCLI inventory.",
+    "Final config/clarified sidecar equal committed bytes; accepted method identity authenticated without repeating unchanged code review."
+  ],
+  "limits": [
+    "Fresh normal resource admission and peer coordination required before launch; preparation is not reservation.",
+    "Decoded hashes/sizes remain declared immutable descriptors for stock runtime verification. No source decoding, GIS, GEOS, native or physical execution in this review.",
+    "All original border/source/water/relative holds remain; no reclassification.",
+    "No physical support result, native qualification, border clearance, current-owner-zero, conservation or acceptance claim."
+  ]
+}
