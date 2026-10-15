@@ -1,0 +1,2994 @@
+{
+  "source_features": 32,
+  "selected_targets": 32,
+  "lineage_locations": 32,
+  "roster_features": 32,
+  "owner_roster_rows_checked": 32,
+  "conclusion": "Actual exact raw source/target/lineage/reverse/native-owner parent joins all agree; cardinality is observed after row-level checks, not inferred from32counts.",
+  "joins": [
+    {
+      "original_ordinal": 0,
+      "source_index": 3082,
+      "source_family_index": 34,
+      "owner_index": 9919,
+      "id": "gb:BHS:ADM1:57655419B62229097939124",
+      "name": "Acklins",
+      "shapeISO": "BS-AK",
+      "original_shape_id": "57655419B62229097939124",
+      "canonical_parent_id": "framework:province:acklins:51914297927f",
+      "original_owner_parent_id": "framework:province:acklins:51914297927f",
+      "parent_chain": [
+        {
+          "id": "framework:province:acklins:51914297927f",
+          "name": "Acklins",
+          "level": "province",
+          "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+        },
+        {
+          "id": "framework:area:bahamas:1b4f84b30e9a",
+          "name": "Bahamas",
+          "level": "area",
+          "parent_id": "framework:region:caribbean:ebd25dd0ca4c"
+        },
+        {
+          "id": "framework:region:caribbean:ebd25dd0ca4c",
+          "name": "Caribbean",
+          "level": "region",
+          "parent_id": "framework:subcontinent:caribbean:ee91c3316485"
+        },
+        {
+          "id": "framework:subcontinent:caribbean:ee91c3316485",
+          "name": "Caribbean",
+          "level": "subcontinent",
+          "parent_id": "framework:continent:north-america:1ca27616f338"
+        },
+        {
+          "id": "framework:continent:north-america:1ca27616f338",
+          "name": "North America",
+          "level": "continent",
+          "parent_id": null
+        }
+      ],
+      "source_metadata": {
+        "source_id": "gb:BHS:ADM1",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BHS/ADM1/geoBoundaries-BHS-ADM1.geojson",
+        "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+        "reference_year": "09-09-2017 to 24-08-2020",
+        "administrative_level": "ADM1",
+        "parent_source_level": "ADM1",
+        "source_role": "Districts",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "hierarchy_source": "gb:BHS:ADM1",
+        "hierarchy_overlap": 0.951252,
+        "original_geometry_sha256": null,
+        "topology_reconciled": null,
+        "topology_conflicts": null,
+        "topology_note": null,
+        "residual_overlap_repair": null,
+        "display_geometry_repaired": null,
+        "framework_match": {
+          "source": "Natural Earth",
+          "id": "BHS-5036",
+          "overlap": 0.86353
+        },
+        "regional_match": {
+          "reference_iso": "BHS",
+          "source_id": "BHS-5036",
+          "overlap": 0.86353,
+          "method": "reference-territory-constrained overlap"
+        },
+        "semantic_review": {
+          "status": "open",
+          "continent": "North America",
+          "decision_index": 0,
+          "evidence_file": "geographic-decisions"
+        }
+      },
+      "parent_correction_metadata": {},
+      "exact_checks": {
+        "ordinal": true,
+        "roster_owners": true,
+        "reverse_join": true,
+        "canonical_original_id": true,
+        "canonical_name": true,
+        "lineage_name": true,
+        "owner_id": true,
+        "owner_parent": true,
+        "lineage_parent": true,
+        "source_type": true,
+        "parent_exists": true
+      }
+    },
+    {
+      "original_ordinal": 1,
+      "source_index": 3083,
+      "source_family_index": 34,
+      "owner_index": 9929,
+      "id": "gb:BHS:ADM1:57655419B82083755348588",
+      "name": "Biminis",
+      "shapeISO": "BS-BI",
+      "original_shape_id": "57655419B82083755348588",
+      "canonical_parent_id": "atlas:macro-review:province:7cc9e26ddd379ee7",
+      "original_owner_parent_id": "atlas:macro-review:province:7cc9e26ddd379ee7",
+      "parent_chain": [
+        {
+          "id": "atlas:macro-review:province:7cc9e26ddd379ee7",
+          "name": "Biminis",
+          "level": "province",
+          "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+        },
+        {
+          "id": "framework:area:bahamas:1b4f84b30e9a",
+          "name": "Bahamas",
+          "level": "area",
+          "parent_id": "framework:region:caribbean:ebd25dd0ca4c"
+        },
+        {
+          "id": "framework:region:caribbean:ebd25dd0ca4c",
+          "name": "Caribbean",
+          "level": "region",
+          "parent_id": "framework:subcontinent:caribbean:ee91c3316485"
+        },
+        {
+          "id": "framework:subcontinent:caribbean:ee91c3316485",
+          "name": "Caribbean",
+          "level": "subcontinent",
+          "parent_id": "framework:continent:north-america:1ca27616f338"
+        },
+        {
+          "id": "framework:continent:north-america:1ca27616f338",
+          "name": "North America",
+          "level": "continent",
+          "parent_id": null
+        }
+      ],
+      "source_metadata": {
+        "source_id": "gb:BHS:ADM1",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BHS/ADM1/geoBoundaries-BHS-ADM1.geojson",
+        "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+        "reference_year": "09-09-2017 to 24-08-2020",
+        "administrative_level": "ADM1",
+        "parent_source_level": "ADM1",
+        "source_role": "Districts",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "hierarchy_source": "gb:BHS:ADM1",
+        "hierarchy_overlap": 0.770699,
+        "original_geometry_sha256": null,
+        "topology_reconciled": null,
+        "topology_conflicts": null,
+        "topology_note": null,
+        "residual_overlap_repair": null,
+        "display_geometry_repaired": null,
+        "framework_match": {
+          "source": "Natural Earth",
+          "id": "BHS-5039",
+          "overlap": 0.771699
+        },
+        "regional_match": {
+          "reference_iso": "BHS",
+          "source_id": "BHS-5039",
+          "overlap": 0.771699,
+          "method": "reference-territory-constrained overlap"
+        },
+        "semantic_review": {
+          "status": "open",
+          "continent": "North America",
+          "decision_index": 669,
+          "evidence_file": "geographic-decisions"
+        }
+      },
+      "parent_correction_metadata": {
+        "previous_group_id": "framework:province:biminis:104e19cadad4",
+        "membership_correction": "Bimini and Ragged Island are named Bahamian archipelago units. Correct inherited Florida/Cuba area matches to Bahamas within the Caribbean convention; no country-owner renderer or dated evidence is changed.",
+        "macro_correction_version": 1
+      },
+      "exact_checks": {
+        "ordinal": true,
+        "roster_owners": true,
+        "reverse_join": true,
+        "canonical_original_id": true,
+        "canonical_name": true,
+        "lineage_name": true,
+        "owner_id": true,
+        "owner_parent": true,
+        "lineage_parent": true,
+        "source_type": true,
+        "parent_exists": true
+      }
+    },
+    {
+      "original_ordinal": 2,
+      "source_index": 3084,
+      "source_family_index": 34,
+      "owner_index": 9920,
+      "id": "gb:BHS:ADM1:57655419B63031142172255",
+      "name": "Berry Islands",
+      "shapeISO": "BS-BY",
+      "original_shape_id": "57655419B63031142172255",
+      "canonical_parent_id": "framework:province:berry-islands:65ce2c04cab0",
+      "original_owner_parent_id": "framework:province:berry-islands:65ce2c04cab0",
+      "parent_chain": [
+        {
+          "id": "framework:province:berry-islands:65ce2c04cab0",
+          "name": "Berry Islands",
+          "level": "province",
+          "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+        },
+        {
+          "id": "framework:area:bahamas:1b4f84b30e9a",
+          "name": "Bahamas",
+          "level": "area",
+          "parent_id": "framework:region:caribbean:ebd25dd0ca4c"
+        },
+        {
+          "id": "framework:region:caribbean:ebd25dd0ca4c",
+          "name": "Caribbean",
+          "level": "region",
+          "parent_id": "framework:subcontinent:caribbean:ee91c3316485"
+        },
+        {
+          "id": "framework:subcontinent:caribbean:ee91c3316485",
+          "name": "Caribbean",
+          "level": "subcontinent",
+          "parent_id": "framework:continent:north-america:1ca27616f338"
+        },
+        {
+          "id": "framework:continent:north-america:1ca27616f338",
+          "name": "North America",
+          "level": "continent",
+          "parent_id": null
+        }
+      ],
+      "source_metadata": {
+        "source_id": "gb:BHS:ADM1",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BHS/ADM1/geoBoundaries-BHS-ADM1.geojson",
+        "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+        "reference_year": "09-09-2017 to 24-08-2020",
+        "administrative_level": "ADM1",
+        "parent_source_level": "ADM1",
+        "source_role": "Districts",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "hierarchy_source": "gb:BHS:ADM1",
+        "hierarchy_overlap": 0.861098,
+        "original_geometry_sha256": null,
+        "topology_reconciled": null,
+        "topology_conflicts": null,
+        "topology_note": null,
+        "residual_overlap_repair": null,
+        "display_geometry_repaired": null,
+        "framework_match": {
+          "source": "Natural Earth",
+          "id": "BHS-5018",
+          "overlap": 0.598483
+        },
+        "regional_match": {
+          "reference_iso": "BHS",
+          "source_id": "BHS-5018",
+          "overlap": 0.598483,
+          "method": "reference-territory-constrained overlap"
+        },
+        "semantic_review": {
+          "status": "open",
+          "continent": "North America",
+          "decision_index": 1,
+          "evidence_file": "geographic-decisions"
+        }
+      },
+      "parent_correction_metadata": {},
+      "exact_checks": {
+        "ordinal": true,
+        "roster_owners": true,
+        "reverse_join": true,
+        "canonical_original_id": true,
+        "canonical_name": true,
+        "lineage_name": true,
+        "owner_id": true,
+        "owner_parent": true,
+        "lineage_parent": true,
+        "source_type": true,
+        "parent_exists": true
+      }
+    },
+    {
+      "original_ordinal": 3,
+      "source_index": 3085,
+      "source_family_index": 34,
+      "owner_index": 9918,
+      "id": "gb:BHS:ADM1:57655419B62023626616016",
+      "name": "Black Point",
+      "shapeISO": "BS-BP",
+      "original_shape_id": "57655419B62023626616016",
+      "canonical_parent_id": "framework:province:black-point:4f9658aa67ac",
+      "original_owner_parent_id": "framework:province:black-point:4f9658aa67ac",
+      "parent_chain": [
+        {
+          "id": "framework:province:black-point:4f9658aa67ac",
+          "name": "Black Point",
+          "level": "province",
+          "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+        },
+        {
+          "id": "framework:area:bahamas:1b4f84b30e9a",
+          "name": "Bahamas",
+          "level": "area",
+          "parent_id": "framework:region:caribbean:ebd25dd0ca4c"
+        },
+        {
+          "id": "framework:region:caribbean:ebd25dd0ca4c",
+          "name": "Caribbean",
+          "level": "region",
+          "parent_id": "framework:subcontinent:caribbean:ee91c3316485"
+        },
+        {
+          "id": "framework:subcontinent:caribbean:ee91c3316485",
+          "name": "Caribbean",
+          "level": "subcontinent",
+          "parent_id": "framework:continent:north-america:1ca27616f338"
+        },
+        {
+          "id": "framework:continent:north-america:1ca27616f338",
+          "name": "North America",
+          "level": "continent",
+          "parent_id": null
+        }
+      ],
+      "source_metadata": {
+        "source_id": "gb:BHS:ADM1",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BHS/ADM1/geoBoundaries-BHS-ADM1.geojson",
+        "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+        "reference_year": "09-09-2017 to 24-08-2020",
+        "administrative_level": "ADM1",
+        "parent_source_level": "ADM1",
+        "source_role": "Districts",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "hierarchy_source": "gb:BHS:ADM1",
+        "hierarchy_overlap": 0.857614,
+        "original_geometry_sha256": null,
+        "topology_reconciled": null,
+        "topology_conflicts": null,
+        "topology_note": null,
+        "residual_overlap_repair": null,
+        "display_geometry_repaired": null,
+        "framework_match": {
+          "source": "Natural Earth",
+          "id": "BHS-5023",
+          "overlap": 0.509739
+        },
+        "regional_match": {
+          "reference_iso": "BHS",
+          "source_id": "BHS-5023",
+          "overlap": 0.509739,
+          "method": "reference-territory-constrained overlap"
+        },
+        "semantic_review": {
+          "status": "open",
+          "continent": "North America",
+          "decision_index": 2,
+          "evidence_file": "geographic-decisions"
+        }
+      },
+      "parent_correction_metadata": {},
+      "exact_checks": {
+        "ordinal": true,
+        "roster_owners": true,
+        "reverse_join": true,
+        "canonical_original_id": true,
+        "canonical_name": true,
+        "lineage_name": true,
+        "owner_id": true,
+        "owner_parent": true,
+        "lineage_parent": true,
+        "source_type": true,
+        "parent_exists": true
+      }
+    },
+    {
+      "original_ordinal": 4,
+      "source_index": 3086,
+      "source_family_index": 34,
+      "owner_index": 9908,
+      "id": "gb:BHS:ADM1:57655419B31009871091546",
+      "name": "Cat Island",
+      "shapeISO": "BS-CI",
+      "original_shape_id": "57655419B31009871091546",
+      "canonical_parent_id": "framework:province:cat-island:b39f1f2401e1",
+      "original_owner_parent_id": "framework:province:cat-island:b39f1f2401e1",
+      "parent_chain": [
+        {
+          "id": "framework:province:cat-island:b39f1f2401e1",
+          "name": "Cat Island",
+          "level": "province",
+          "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+        },
+        {
+          "id": "framework:area:bahamas:1b4f84b30e9a",
+          "name": "Bahamas",
+          "level": "area",
+          "parent_id": "framework:region:caribbean:ebd25dd0ca4c"
+        },
+        {
+          "id": "framework:region:caribbean:ebd25dd0ca4c",
+          "name": "Caribbean",
+          "level": "region",
+          "parent_id": "framework:subcontinent:caribbean:ee91c3316485"
+        },
+        {
+          "id": "framework:subcontinent:caribbean:ee91c3316485",
+          "name": "Caribbean",
+          "level": "subcontinent",
+          "parent_id": "framework:continent:north-america:1ca27616f338"
+        },
+        {
+          "id": "framework:continent:north-america:1ca27616f338",
+          "name": "North America",
+          "level": "continent",
+          "parent_id": null
+        }
+      ],
+      "source_metadata": {
+        "source_id": "gb:BHS:ADM1",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BHS/ADM1/geoBoundaries-BHS-ADM1.geojson",
+        "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+        "reference_year": "09-09-2017 to 24-08-2020",
+        "administrative_level": "ADM1",
+        "parent_source_level": "ADM1",
+        "source_role": "Districts",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "hierarchy_source": "gb:BHS:ADM1",
+        "hierarchy_overlap": 0.973767,
+        "original_geometry_sha256": null,
+        "topology_reconciled": null,
+        "topology_conflicts": null,
+        "topology_note": null,
+        "residual_overlap_repair": null,
+        "display_geometry_repaired": null,
+        "framework_match": {
+          "source": "Natural Earth",
+          "id": "BHS-5030",
+          "overlap": 0.914999
+        },
+        "regional_match": {
+          "reference_iso": "BHS",
+          "source_id": "BHS-5030",
+          "overlap": 0.914999,
+          "method": "reference-territory-constrained overlap"
+        },
+        "semantic_review": {
+          "status": "open",
+          "continent": "North America",
+          "decision_index": 3,
+          "evidence_file": "geographic-decisions"
+        }
+      },
+      "parent_correction_metadata": {},
+      "exact_checks": {
+        "ordinal": true,
+        "roster_owners": true,
+        "reverse_join": true,
+        "canonical_original_id": true,
+        "canonical_name": true,
+        "lineage_name": true,
+        "owner_id": true,
+        "owner_parent": true,
+        "lineage_parent": true,
+        "source_type": true,
+        "parent_exists": true
+      }
+    },
+    {
+      "original_ordinal": 5,
+      "source_index": 3087,
+      "source_family_index": 34,
+      "owner_index": 9917,
+      "id": "gb:BHS:ADM1:57655419B6063467597350",
+      "name": "Central Abaco",
+      "shapeISO": "BS-CO",
+      "original_shape_id": "57655419B6063467597350",
+      "canonical_parent_id": "framework:province:central-abaco:fa0579b18932",
+      "original_owner_parent_id": "framework:province:central-abaco:fa0579b18932",
+      "parent_chain": [
+        {
+          "id": "framework:province:central-abaco:fa0579b18932",
+          "name": "Central Abaco",
+          "level": "province",
+          "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+        },
+        {
+          "id": "framework:area:bahamas:1b4f84b30e9a",
+          "name": "Bahamas",
+          "level": "area",
+          "parent_id": "framework:region:caribbean:ebd25dd0ca4c"
+        },
+        {
+          "id": "framework:region:caribbean:ebd25dd0ca4c",
+          "name": "Caribbean",
+          "level": "region",
+          "parent_id": "framework:subcontinent:caribbean:ee91c3316485"
+        },
+        {
+          "id": "framework:subcontinent:caribbean:ee91c3316485",
+          "name": "Caribbean",
+          "level": "subcontinent",
+          "parent_id": "framework:continent:north-america:1ca27616f338"
+        },
+        {
+          "id": "framework:continent:north-america:1ca27616f338",
+          "name": "North America",
+          "level": "continent",
+          "parent_id": null
+        }
+      ],
+      "source_metadata": {
+        "source_id": "gb:BHS:ADM1",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BHS/ADM1/geoBoundaries-BHS-ADM1.geojson",
+        "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+        "reference_year": "09-09-2017 to 24-08-2020",
+        "administrative_level": "ADM1",
+        "parent_source_level": "ADM1",
+        "source_role": "Districts",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "hierarchy_source": "gb:BHS:ADM1",
+        "hierarchy_overlap": 0.938375,
+        "original_geometry_sha256": null,
+        "topology_reconciled": null,
+        "topology_conflicts": null,
+        "topology_note": null,
+        "residual_overlap_repair": null,
+        "display_geometry_repaired": null,
+        "framework_match": {
+          "source": "Natural Earth",
+          "id": "BHS-5015",
+          "overlap": 0.725301
+        },
+        "regional_match": {
+          "reference_iso": "BHS",
+          "source_id": "BHS-5015",
+          "overlap": 0.725301,
+          "method": "reference-territory-constrained overlap"
+        },
+        "semantic_review": {
+          "status": "open",
+          "continent": "North America",
+          "decision_index": 4,
+          "evidence_file": "geographic-decisions"
+        }
+      },
+      "parent_correction_metadata": {},
+      "exact_checks": {
+        "ordinal": true,
+        "roster_owners": true,
+        "reverse_join": true,
+        "canonical_original_id": true,
+        "canonical_name": true,
+        "lineage_name": true,
+        "owner_id": true,
+        "owner_parent": true,
+        "lineage_parent": true,
+        "source_type": true,
+        "parent_exists": true
+      }
+    },
+    {
+      "original_ordinal": 6,
+      "source_index": 3088,
+      "source_family_index": 34,
+      "owner_index": 9902,
+      "id": "gb:BHS:ADM1:57655419B10554343974074",
+      "name": "Central Andros",
+      "shapeISO": "BS-CS",
+      "original_shape_id": "57655419B10554343974074",
+      "canonical_parent_id": "framework:province:central-andros:f69353e75c51",
+      "original_owner_parent_id": "framework:province:central-andros:f69353e75c51",
+      "parent_chain": [
+        {
+          "id": "framework:province:central-andros:f69353e75c51",
+          "name": "Central Andros",
+          "level": "province",
+          "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+        },
+        {
+          "id": "framework:area:bahamas:1b4f84b30e9a",
+          "name": "Bahamas",
+          "level": "area",
+          "parent_id": "framework:region:caribbean:ebd25dd0ca4c"
+        },
+        {
+          "id": "framework:region:caribbean:ebd25dd0ca4c",
+          "name": "Caribbean",
+          "level": "region",
+          "parent_id": "framework:subcontinent:caribbean:ee91c3316485"
+        },
+        {
+          "id": "framework:subcontinent:caribbean:ee91c3316485",
+          "name": "Caribbean",
+          "level": "subcontinent",
+          "parent_id": "framework:continent:north-america:1ca27616f338"
+        },
+        {
+          "id": "framework:continent:north-america:1ca27616f338",
+          "name": "North America",
+          "level": "continent",
+          "parent_id": null
+        }
+      ],
+      "source_metadata": {
+        "source_id": "gb:BHS:ADM1",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BHS/ADM1/geoBoundaries-BHS-ADM1.geojson",
+        "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+        "reference_year": "09-09-2017 to 24-08-2020",
+        "administrative_level": "ADM1",
+        "parent_source_level": "ADM1",
+        "source_role": "Districts",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "hierarchy_source": "gb:BHS:ADM1",
+        "hierarchy_overlap": 0.970058,
+        "original_geometry_sha256": null,
+        "topology_reconciled": null,
+        "topology_conflicts": null,
+        "topology_note": null,
+        "residual_overlap_repair": null,
+        "display_geometry_repaired": null,
+        "framework_match": {
+          "source": "Natural Earth",
+          "id": "BHS-5020",
+          "overlap": 0.823285
+        },
+        "regional_match": {
+          "reference_iso": "BHS",
+          "source_id": "BHS-5020",
+          "overlap": 0.823285,
+          "method": "reference-territory-constrained overlap"
+        },
+        "semantic_review": {
+          "status": "open",
+          "continent": "North America",
+          "decision_index": 5,
+          "evidence_file": "geographic-decisions"
+        }
+      },
+      "parent_correction_metadata": {},
+      "exact_checks": {
+        "ordinal": true,
+        "roster_owners": true,
+        "reverse_join": true,
+        "canonical_original_id": true,
+        "canonical_name": true,
+        "lineage_name": true,
+        "owner_id": true,
+        "owner_parent": true,
+        "lineage_parent": true,
+        "source_type": true,
+        "parent_exists": true
+      }
+    },
+    {
+      "original_ordinal": 7,
+      "source_index": 3089,
+      "source_family_index": 34,
+      "owner_index": 9904,
+      "id": "gb:BHS:ADM1:57655419B18095522454644",
+      "name": "Central Eleuthera",
+      "shapeISO": "BS-CE",
+      "original_shape_id": "57655419B18095522454644",
+      "canonical_parent_id": "framework:province:central-eleuthera:06fd2d2d04d4",
+      "original_owner_parent_id": "framework:province:central-eleuthera:06fd2d2d04d4",
+      "parent_chain": [
+        {
+          "id": "framework:province:central-eleuthera:06fd2d2d04d4",
+          "name": "Central Eleuthera",
+          "level": "province",
+          "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+        },
+        {
+          "id": "framework:area:bahamas:1b4f84b30e9a",
+          "name": "Bahamas",
+          "level": "area",
+          "parent_id": "framework:region:caribbean:ebd25dd0ca4c"
+        },
+        {
+          "id": "framework:region:caribbean:ebd25dd0ca4c",
+          "name": "Caribbean",
+          "level": "region",
+          "parent_id": "framework:subcontinent:caribbean:ee91c3316485"
+        },
+        {
+          "id": "framework:subcontinent:caribbean:ee91c3316485",
+          "name": "Caribbean",
+          "level": "subcontinent",
+          "parent_id": "framework:continent:north-america:1ca27616f338"
+        },
+        {
+          "id": "framework:continent:north-america:1ca27616f338",
+          "name": "North America",
+          "level": "continent",
+          "parent_id": null
+        }
+      ],
+      "source_metadata": {
+        "source_id": "gb:BHS:ADM1",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BHS/ADM1/geoBoundaries-BHS-ADM1.geojson",
+        "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+        "reference_year": "09-09-2017 to 24-08-2020",
+        "administrative_level": "ADM1",
+        "parent_source_level": "ADM1",
+        "source_role": "Districts",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "hierarchy_source": "gb:BHS:ADM1",
+        "hierarchy_overlap": 0.942171,
+        "original_geometry_sha256": null,
+        "topology_reconciled": null,
+        "topology_conflicts": null,
+        "topology_note": null,
+        "residual_overlap_repair": null,
+        "display_geometry_repaired": null,
+        "framework_match": {
+          "source": "Natural Earth",
+          "id": "BHS-5028",
+          "overlap": 0.973742
+        },
+        "regional_match": {
+          "reference_iso": "BHS",
+          "source_id": "BHS-5028",
+          "overlap": 0.973742,
+          "method": "reference-territory-constrained overlap"
+        },
+        "semantic_review": {
+          "status": "open",
+          "continent": "North America",
+          "decision_index": 6,
+          "evidence_file": "geographic-decisions"
+        }
+      },
+      "parent_correction_metadata": {},
+      "exact_checks": {
+        "ordinal": true,
+        "roster_owners": true,
+        "reverse_join": true,
+        "canonical_original_id": true,
+        "canonical_name": true,
+        "lineage_name": true,
+        "owner_id": true,
+        "owner_parent": true,
+        "lineage_parent": true,
+        "source_type": true,
+        "parent_exists": true
+      }
+    },
+    {
+      "original_ordinal": 8,
+      "source_index": 3090,
+      "source_family_index": 34,
+      "owner_index": 9926,
+      "id": "gb:BHS:ADM1:57655419B78426284582077",
+      "name": "City of Freeport",
+      "shapeISO": "BS-FP",
+      "original_shape_id": "57655419B78426284582077",
+      "canonical_parent_id": "framework:province:city-of-freeport:284913970797",
+      "original_owner_parent_id": "framework:province:city-of-freeport:284913970797",
+      "parent_chain": [
+        {
+          "id": "framework:province:city-of-freeport:284913970797",
+          "name": "City of Freeport",
+          "level": "province",
+          "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+        },
+        {
+          "id": "framework:area:bahamas:1b4f84b30e9a",
+          "name": "Bahamas",
+          "level": "area",
+          "parent_id": "framework:region:caribbean:ebd25dd0ca4c"
+        },
+        {
+          "id": "framework:region:caribbean:ebd25dd0ca4c",
+          "name": "Caribbean",
+          "level": "region",
+          "parent_id": "framework:subcontinent:caribbean:ee91c3316485"
+        },
+        {
+          "id": "framework:subcontinent:caribbean:ee91c3316485",
+          "name": "Caribbean",
+          "level": "subcontinent",
+          "parent_id": "framework:continent:north-america:1ca27616f338"
+        },
+        {
+          "id": "framework:continent:north-america:1ca27616f338",
+          "name": "North America",
+          "level": "continent",
+          "parent_id": null
+        }
+      ],
+      "source_metadata": {
+        "source_id": "gb:BHS:ADM1",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BHS/ADM1/geoBoundaries-BHS-ADM1.geojson",
+        "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+        "reference_year": "09-09-2017 to 24-08-2020",
+        "administrative_level": "ADM1",
+        "parent_source_level": "ADM1",
+        "source_role": "Districts",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "hierarchy_source": "gb:BHS:ADM1",
+        "hierarchy_overlap": 0.994531,
+        "original_geometry_sha256": null,
+        "topology_reconciled": null,
+        "topology_conflicts": null,
+        "topology_note": null,
+        "residual_overlap_repair": null,
+        "display_geometry_repaired": null,
+        "framework_match": {
+          "source": "Natural Earth",
+          "id": "BHS-5010",
+          "overlap": 0.528597
+        },
+        "regional_match": {
+          "reference_iso": "BHS",
+          "source_id": "BHS-5010",
+          "overlap": 0.528597,
+          "method": "reference-territory-constrained overlap"
+        },
+        "semantic_review": {
+          "status": "open",
+          "continent": "North America",
+          "decision_index": 7,
+          "evidence_file": "geographic-decisions"
+        }
+      },
+      "parent_correction_metadata": {},
+      "exact_checks": {
+        "ordinal": true,
+        "roster_owners": true,
+        "reverse_join": true,
+        "canonical_original_id": true,
+        "canonical_name": true,
+        "lineage_name": true,
+        "owner_id": true,
+        "owner_parent": true,
+        "lineage_parent": true,
+        "source_type": true,
+        "parent_exists": true
+      }
+    },
+    {
+      "original_ordinal": 9,
+      "source_index": 3091,
+      "source_family_index": 34,
+      "owner_index": 9913,
+      "id": "gb:BHS:ADM1:57655419B45053914770402",
+      "name": "Crooked Island",
+      "shapeISO": "BS-CK",
+      "original_shape_id": "57655419B45053914770402",
+      "canonical_parent_id": "framework:province:crooked-island:967c80c9a355",
+      "original_owner_parent_id": "framework:province:crooked-island:967c80c9a355",
+      "parent_chain": [
+        {
+          "id": "framework:province:crooked-island:967c80c9a355",
+          "name": "Crooked Island",
+          "level": "province",
+          "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+        },
+        {
+          "id": "framework:area:bahamas:1b4f84b30e9a",
+          "name": "Bahamas",
+          "level": "area",
+          "parent_id": "framework:region:caribbean:ebd25dd0ca4c"
+        },
+        {
+          "id": "framework:region:caribbean:ebd25dd0ca4c",
+          "name": "Caribbean",
+          "level": "region",
+          "parent_id": "framework:subcontinent:caribbean:ee91c3316485"
+        },
+        {
+          "id": "framework:subcontinent:caribbean:ee91c3316485",
+          "name": "Caribbean",
+          "level": "subcontinent",
+          "parent_id": "framework:continent:north-america:1ca27616f338"
+        },
+        {
+          "id": "framework:continent:north-america:1ca27616f338",
+          "name": "North America",
+          "level": "continent",
+          "parent_id": null
+        }
+      ],
+      "source_metadata": {
+        "source_id": "gb:BHS:ADM1",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BHS/ADM1/geoBoundaries-BHS-ADM1.geojson",
+        "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+        "reference_year": "09-09-2017 to 24-08-2020",
+        "administrative_level": "ADM1",
+        "parent_source_level": "ADM1",
+        "source_role": "Districts",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "hierarchy_source": "gb:BHS:ADM1",
+        "hierarchy_overlap": 0.968941,
+        "original_geometry_sha256": null,
+        "topology_reconciled": null,
+        "topology_conflicts": null,
+        "topology_note": null,
+        "residual_overlap_repair": null,
+        "display_geometry_repaired": null,
+        "framework_match": {
+          "source": "Natural Earth",
+          "id": "BHS-5035",
+          "overlap": 0.917742
+        },
+        "regional_match": {
+          "reference_iso": "BHS",
+          "source_id": "BHS-5035",
+          "overlap": 0.917742,
+          "method": "reference-territory-constrained overlap"
+        },
+        "semantic_review": {
+          "status": "open",
+          "continent": "North America",
+          "decision_index": 8,
+          "evidence_file": "geographic-decisions"
+        }
+      },
+      "parent_correction_metadata": {},
+      "exact_checks": {
+        "ordinal": true,
+        "roster_owners": true,
+        "reverse_join": true,
+        "canonical_original_id": true,
+        "canonical_name": true,
+        "lineage_name": true,
+        "owner_id": true,
+        "owner_parent": true,
+        "lineage_parent": true,
+        "source_type": true,
+        "parent_exists": true
+      }
+    },
+    {
+      "original_ordinal": 10,
+      "source_index": 3092,
+      "source_family_index": 34,
+      "owner_index": 9915,
+      "id": "gb:BHS:ADM1:57655419B55305756041974",
+      "name": "East Grand Bahama",
+      "shapeISO": "BS-EG",
+      "original_shape_id": "57655419B55305756041974",
+      "canonical_parent_id": "framework:province:east-grand-bahama:e16c6255204e",
+      "original_owner_parent_id": "framework:province:east-grand-bahama:e16c6255204e",
+      "parent_chain": [
+        {
+          "id": "framework:province:east-grand-bahama:e16c6255204e",
+          "name": "East Grand Bahama",
+          "level": "province",
+          "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+        },
+        {
+          "id": "framework:area:bahamas:1b4f84b30e9a",
+          "name": "Bahamas",
+          "level": "area",
+          "parent_id": "framework:region:caribbean:ebd25dd0ca4c"
+        },
+        {
+          "id": "framework:region:caribbean:ebd25dd0ca4c",
+          "name": "Caribbean",
+          "level": "region",
+          "parent_id": "framework:subcontinent:caribbean:ee91c3316485"
+        },
+        {
+          "id": "framework:subcontinent:caribbean:ee91c3316485",
+          "name": "Caribbean",
+          "level": "subcontinent",
+          "parent_id": "framework:continent:north-america:1ca27616f338"
+        },
+        {
+          "id": "framework:continent:north-america:1ca27616f338",
+          "name": "North America",
+          "level": "continent",
+          "parent_id": null
+        }
+      ],
+      "source_metadata": {
+        "source_id": "gb:BHS:ADM1",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BHS/ADM1/geoBoundaries-BHS-ADM1.geojson",
+        "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+        "reference_year": "09-09-2017 to 24-08-2020",
+        "administrative_level": "ADM1",
+        "parent_source_level": "ADM1",
+        "source_role": "Districts",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "hierarchy_source": "gb:BHS:ADM1",
+        "hierarchy_overlap": 0.965047,
+        "original_geometry_sha256": null,
+        "topology_reconciled": null,
+        "topology_conflicts": null,
+        "topology_note": null,
+        "residual_overlap_repair": null,
+        "display_geometry_repaired": null,
+        "framework_match": {
+          "source": "Natural Earth",
+          "id": "BHS-5012",
+          "overlap": 0.833974
+        },
+        "regional_match": {
+          "reference_iso": "BHS",
+          "source_id": "BHS-5012",
+          "overlap": 0.833974,
+          "method": "reference-territory-constrained overlap"
+        },
+        "semantic_review": {
+          "status": "open",
+          "continent": "North America",
+          "decision_index": 9,
+          "evidence_file": "geographic-decisions"
+        }
+      },
+      "parent_correction_metadata": {},
+      "exact_checks": {
+        "ordinal": true,
+        "roster_owners": true,
+        "reverse_join": true,
+        "canonical_original_id": true,
+        "canonical_name": true,
+        "lineage_name": true,
+        "owner_id": true,
+        "owner_parent": true,
+        "lineage_parent": true,
+        "source_type": true,
+        "parent_exists": true
+      }
+    },
+    {
+      "original_ordinal": 11,
+      "source_index": 3093,
+      "source_family_index": 34,
+      "owner_index": 9930,
+      "id": "gb:BHS:ADM1:57655419B87015583910143",
+      "name": "Exuma",
+      "shapeISO": "BS-EX",
+      "original_shape_id": "57655419B87015583910143",
+      "canonical_parent_id": "framework:province:exuma:c7af1fb263e0",
+      "original_owner_parent_id": "framework:province:exuma:c7af1fb263e0",
+      "parent_chain": [
+        {
+          "id": "framework:province:exuma:c7af1fb263e0",
+          "name": "Exuma",
+          "level": "province",
+          "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+        },
+        {
+          "id": "framework:area:bahamas:1b4f84b30e9a",
+          "name": "Bahamas",
+          "level": "area",
+          "parent_id": "framework:region:caribbean:ebd25dd0ca4c"
+        },
+        {
+          "id": "framework:region:caribbean:ebd25dd0ca4c",
+          "name": "Caribbean",
+          "level": "region",
+          "parent_id": "framework:subcontinent:caribbean:ee91c3316485"
+        },
+        {
+          "id": "framework:subcontinent:caribbean:ee91c3316485",
+          "name": "Caribbean",
+          "level": "subcontinent",
+          "parent_id": "framework:continent:north-america:1ca27616f338"
+        },
+        {
+          "id": "framework:continent:north-america:1ca27616f338",
+          "name": "North America",
+          "level": "continent",
+          "parent_id": null
+        }
+      ],
+      "source_metadata": {
+        "source_id": "gb:BHS:ADM1",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BHS/ADM1/geoBoundaries-BHS-ADM1.geojson",
+        "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+        "reference_year": "09-09-2017 to 24-08-2020",
+        "administrative_level": "ADM1",
+        "parent_source_level": "ADM1",
+        "source_role": "Districts",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "hierarchy_source": "gb:BHS:ADM1",
+        "hierarchy_overlap": 0.925772,
+        "original_geometry_sha256": null,
+        "topology_reconciled": null,
+        "topology_conflicts": null,
+        "topology_note": null,
+        "residual_overlap_repair": null,
+        "display_geometry_repaired": null,
+        "framework_match": {
+          "source": "Natural Earth",
+          "id": "BHS-5024",
+          "overlap": 0.690861
+        },
+        "regional_match": {
+          "reference_iso": "BHS",
+          "source_id": "BHS-5024",
+          "overlap": 0.690861,
+          "method": "reference-territory-constrained overlap"
+        },
+        "semantic_review": {
+          "status": "open",
+          "continent": "North America",
+          "decision_index": 10,
+          "evidence_file": "geographic-decisions"
+        }
+      },
+      "parent_correction_metadata": {},
+      "exact_checks": {
+        "ordinal": true,
+        "roster_owners": true,
+        "reverse_join": true,
+        "canonical_original_id": true,
+        "canonical_name": true,
+        "lineage_name": true,
+        "owner_id": true,
+        "owner_parent": true,
+        "lineage_parent": true,
+        "source_type": true,
+        "parent_exists": true
+      }
+    },
+    {
+      "original_ordinal": 12,
+      "source_index": 3094,
+      "source_family_index": 34,
+      "owner_index": 9932,
+      "id": "gb:BHS:ADM1:57655419B94344627065554",
+      "name": "Grand Cay",
+      "shapeISO": "BS-GC",
+      "original_shape_id": "57655419B94344627065554",
+      "canonical_parent_id": "framework:province:grand-cay:83861011ce8d",
+      "original_owner_parent_id": "framework:province:grand-cay:83861011ce8d",
+      "parent_chain": [
+        {
+          "id": "framework:province:grand-cay:83861011ce8d",
+          "name": "Grand Cay",
+          "level": "province",
+          "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+        },
+        {
+          "id": "framework:area:bahamas:1b4f84b30e9a",
+          "name": "Bahamas",
+          "level": "area",
+          "parent_id": "framework:region:caribbean:ebd25dd0ca4c"
+        },
+        {
+          "id": "framework:region:caribbean:ebd25dd0ca4c",
+          "name": "Caribbean",
+          "level": "region",
+          "parent_id": "framework:subcontinent:caribbean:ee91c3316485"
+        },
+        {
+          "id": "framework:subcontinent:caribbean:ee91c3316485",
+          "name": "Caribbean",
+          "level": "subcontinent",
+          "parent_id": "framework:continent:north-america:1ca27616f338"
+        },
+        {
+          "id": "framework:continent:north-america:1ca27616f338",
+          "name": "North America",
+          "level": "continent",
+          "parent_id": null
+        }
+      ],
+      "source_metadata": {
+        "source_id": "gb:BHS:ADM1",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BHS/ADM1/geoBoundaries-BHS-ADM1.geojson",
+        "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+        "reference_year": "09-09-2017 to 24-08-2020",
+        "administrative_level": "ADM1",
+        "parent_source_level": "ADM1",
+        "source_role": "Districts",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "hierarchy_source": "gb:BHS:ADM1",
+        "hierarchy_overlap": 0.826961,
+        "original_geometry_sha256": null,
+        "topology_reconciled": null,
+        "topology_conflicts": null,
+        "topology_note": null,
+        "residual_overlap_repair": null,
+        "display_geometry_repaired": null,
+        "framework_match": {
+          "source": "Natural Earth",
+          "id": null,
+          "overlap": 0
+        },
+        "regional_match": {
+          "reference_iso": "BHS",
+          "source_id": null,
+          "overlap": 0,
+          "method": "reference-territory-constrained overlap"
+        },
+        "semantic_review": {
+          "status": "open",
+          "continent": "North America",
+          "decision_index": 11,
+          "evidence_file": "geographic-decisions"
+        }
+      },
+      "parent_correction_metadata": {},
+      "exact_checks": {
+        "ordinal": true,
+        "roster_owners": true,
+        "reverse_join": true,
+        "canonical_original_id": true,
+        "canonical_name": true,
+        "lineage_name": true,
+        "owner_id": true,
+        "owner_parent": true,
+        "lineage_parent": true,
+        "source_type": true,
+        "parent_exists": true
+      }
+    },
+    {
+      "original_ordinal": 13,
+      "source_index": 3095,
+      "source_family_index": 34,
+      "owner_index": 9923,
+      "id": "gb:BHS:ADM1:57655419B64917905581576",
+      "name": "Harbour Island",
+      "shapeISO": "BS-HI",
+      "original_shape_id": "57655419B64917905581576",
+      "canonical_parent_id": "framework:province:harbour-island:d07e4fc33438",
+      "original_owner_parent_id": "framework:province:harbour-island:d07e4fc33438",
+      "parent_chain": [
+        {
+          "id": "framework:province:harbour-island:d07e4fc33438",
+          "name": "Harbour Island",
+          "level": "province",
+          "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+        },
+        {
+          "id": "framework:area:bahamas:1b4f84b30e9a",
+          "name": "Bahamas",
+          "level": "area",
+          "parent_id": "framework:region:caribbean:ebd25dd0ca4c"
+        },
+        {
+          "id": "framework:region:caribbean:ebd25dd0ca4c",
+          "name": "Caribbean",
+          "level": "region",
+          "parent_id": "framework:subcontinent:caribbean:ee91c3316485"
+        },
+        {
+          "id": "framework:subcontinent:caribbean:ee91c3316485",
+          "name": "Caribbean",
+          "level": "subcontinent",
+          "parent_id": "framework:continent:north-america:1ca27616f338"
+        },
+        {
+          "id": "framework:continent:north-america:1ca27616f338",
+          "name": "North America",
+          "level": "continent",
+          "parent_id": null
+        }
+      ],
+      "source_metadata": {
+        "source_id": "gb:BHS:ADM1",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BHS/ADM1/geoBoundaries-BHS-ADM1.geojson",
+        "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+        "reference_year": "09-09-2017 to 24-08-2020",
+        "administrative_level": "ADM1",
+        "parent_source_level": "ADM1",
+        "source_role": "Districts",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "hierarchy_source": "gb:BHS:ADM1",
+        "hierarchy_overlap": 0.998833,
+        "original_geometry_sha256": null,
+        "topology_reconciled": null,
+        "topology_conflicts": null,
+        "topology_note": null,
+        "residual_overlap_repair": null,
+        "display_geometry_repaired": null,
+        "framework_match": {
+          "source": "Natural Earth",
+          "id": "BHS-5026",
+          "overlap": 0.819933
+        },
+        "regional_match": {
+          "reference_iso": "BHS",
+          "source_id": "BHS-5026",
+          "overlap": 0.819933,
+          "method": "reference-territory-constrained overlap"
+        },
+        "semantic_review": {
+          "status": "open",
+          "continent": "North America",
+          "decision_index": 12,
+          "evidence_file": "geographic-decisions"
+        }
+      },
+      "parent_correction_metadata": {},
+      "exact_checks": {
+        "ordinal": true,
+        "roster_owners": true,
+        "reverse_join": true,
+        "canonical_original_id": true,
+        "canonical_name": true,
+        "lineage_name": true,
+        "owner_id": true,
+        "owner_parent": true,
+        "lineage_parent": true,
+        "source_type": true,
+        "parent_exists": true
+      }
+    },
+    {
+      "original_ordinal": 14,
+      "source_index": 3096,
+      "source_family_index": 34,
+      "owner_index": 9931,
+      "id": "gb:BHS:ADM1:57655419B91019969534321",
+      "name": "Hope Town",
+      "shapeISO": "BS-HT",
+      "original_shape_id": "57655419B91019969534321",
+      "canonical_parent_id": "framework:province:hope-town:780e96202197",
+      "original_owner_parent_id": "framework:province:hope-town:780e96202197",
+      "parent_chain": [
+        {
+          "id": "framework:province:hope-town:780e96202197",
+          "name": "Hope Town",
+          "level": "province",
+          "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+        },
+        {
+          "id": "framework:area:bahamas:1b4f84b30e9a",
+          "name": "Bahamas",
+          "level": "area",
+          "parent_id": "framework:region:caribbean:ebd25dd0ca4c"
+        },
+        {
+          "id": "framework:region:caribbean:ebd25dd0ca4c",
+          "name": "Caribbean",
+          "level": "region",
+          "parent_id": "framework:subcontinent:caribbean:ee91c3316485"
+        },
+        {
+          "id": "framework:subcontinent:caribbean:ee91c3316485",
+          "name": "Caribbean",
+          "level": "subcontinent",
+          "parent_id": "framework:continent:north-america:1ca27616f338"
+        },
+        {
+          "id": "framework:continent:north-america:1ca27616f338",
+          "name": "North America",
+          "level": "continent",
+          "parent_id": null
+        }
+      ],
+      "source_metadata": {
+        "source_id": "gb:BHS:ADM1",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BHS/ADM1/geoBoundaries-BHS-ADM1.geojson",
+        "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+        "reference_year": "09-09-2017 to 24-08-2020",
+        "administrative_level": "ADM1",
+        "parent_source_level": "ADM1",
+        "source_role": "Districts",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "hierarchy_source": "gb:BHS:ADM1",
+        "hierarchy_overlap": 0.642227,
+        "original_geometry_sha256": null,
+        "topology_reconciled": null,
+        "topology_conflicts": null,
+        "topology_note": null,
+        "residual_overlap_repair": null,
+        "display_geometry_repaired": null,
+        "framework_match": {
+          "source": "Natural Earth",
+          "id": null,
+          "overlap": 0
+        },
+        "regional_match": {
+          "reference_iso": "BHS",
+          "source_id": null,
+          "overlap": 0.0,
+          "method": "reference-territory-constrained overlap"
+        },
+        "semantic_review": {
+          "status": "open",
+          "continent": "North America",
+          "decision_index": 13,
+          "evidence_file": "geographic-decisions"
+        }
+      },
+      "parent_correction_metadata": {},
+      "exact_checks": {
+        "ordinal": true,
+        "roster_owners": true,
+        "reverse_join": true,
+        "canonical_original_id": true,
+        "canonical_name": true,
+        "lineage_name": true,
+        "owner_id": true,
+        "owner_parent": true,
+        "lineage_parent": true,
+        "source_type": true,
+        "parent_exists": true
+      }
+    },
+    {
+      "original_ordinal": 15,
+      "source_index": 3097,
+      "source_family_index": 34,
+      "owner_index": 9928,
+      "id": "gb:BHS:ADM1:57655419B81962321006014",
+      "name": "Inagua",
+      "shapeISO": "BS-IN",
+      "original_shape_id": "57655419B81962321006014",
+      "canonical_parent_id": "framework:province:inagua:cc009d0e6666",
+      "original_owner_parent_id": "framework:province:inagua:cc009d0e6666",
+      "parent_chain": [
+        {
+          "id": "framework:province:inagua:cc009d0e6666",
+          "name": "Inagua",
+          "level": "province",
+          "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+        },
+        {
+          "id": "framework:area:bahamas:1b4f84b30e9a",
+          "name": "Bahamas",
+          "level": "area",
+          "parent_id": "framework:region:caribbean:ebd25dd0ca4c"
+        },
+        {
+          "id": "framework:region:caribbean:ebd25dd0ca4c",
+          "name": "Caribbean",
+          "level": "region",
+          "parent_id": "framework:subcontinent:caribbean:ee91c3316485"
+        },
+        {
+          "id": "framework:subcontinent:caribbean:ee91c3316485",
+          "name": "Caribbean",
+          "level": "subcontinent",
+          "parent_id": "framework:continent:north-america:1ca27616f338"
+        },
+        {
+          "id": "framework:continent:north-america:1ca27616f338",
+          "name": "North America",
+          "level": "continent",
+          "parent_id": null
+        }
+      ],
+      "source_metadata": {
+        "source_id": "gb:BHS:ADM1",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BHS/ADM1/geoBoundaries-BHS-ADM1.geojson",
+        "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+        "reference_year": "09-09-2017 to 24-08-2020",
+        "administrative_level": "ADM1",
+        "parent_source_level": "ADM1",
+        "source_role": "Districts",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "hierarchy_source": "gb:BHS:ADM1",
+        "hierarchy_overlap": 0.991511,
+        "original_geometry_sha256": null,
+        "topology_reconciled": null,
+        "topology_conflicts": null,
+        "topology_note": null,
+        "residual_overlap_repair": null,
+        "display_geometry_repaired": null,
+        "framework_match": {
+          "source": "Natural Earth",
+          "id": "BHS-5038",
+          "overlap": 0.989476
+        },
+        "regional_match": {
+          "reference_iso": "BHS",
+          "source_id": "BHS-5038",
+          "overlap": 0.989476,
+          "method": "reference-territory-constrained overlap"
+        },
+        "semantic_review": {
+          "status": "open",
+          "continent": "North America",
+          "decision_index": 14,
+          "evidence_file": "geographic-decisions"
+        }
+      },
+      "parent_correction_metadata": {},
+      "exact_checks": {
+        "ordinal": true,
+        "roster_owners": true,
+        "reverse_join": true,
+        "canonical_original_id": true,
+        "canonical_name": true,
+        "lineage_name": true,
+        "owner_id": true,
+        "owner_parent": true,
+        "lineage_parent": true,
+        "source_type": true,
+        "parent_exists": true
+      }
+    },
+    {
+      "original_ordinal": 16,
+      "source_index": 3098,
+      "source_family_index": 34,
+      "owner_index": 9905,
+      "id": "gb:BHS:ADM1:57655419B2318826838910",
+      "name": "Long Island",
+      "shapeISO": "BS-LI",
+      "original_shape_id": "57655419B2318826838910",
+      "canonical_parent_id": "framework:province:long-island:c109cd0e9c59",
+      "original_owner_parent_id": "framework:province:long-island:c109cd0e9c59",
+      "parent_chain": [
+        {
+          "id": "framework:province:long-island:c109cd0e9c59",
+          "name": "Long Island",
+          "level": "province",
+          "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+        },
+        {
+          "id": "framework:area:bahamas:1b4f84b30e9a",
+          "name": "Bahamas",
+          "level": "area",
+          "parent_id": "framework:region:caribbean:ebd25dd0ca4c"
+        },
+        {
+          "id": "framework:region:caribbean:ebd25dd0ca4c",
+          "name": "Caribbean",
+          "level": "region",
+          "parent_id": "framework:subcontinent:caribbean:ee91c3316485"
+        },
+        {
+          "id": "framework:subcontinent:caribbean:ee91c3316485",
+          "name": "Caribbean",
+          "level": "subcontinent",
+          "parent_id": "framework:continent:north-america:1ca27616f338"
+        },
+        {
+          "id": "framework:continent:north-america:1ca27616f338",
+          "name": "North America",
+          "level": "continent",
+          "parent_id": null
+        }
+      ],
+      "source_metadata": {
+        "source_id": "gb:BHS:ADM1",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BHS/ADM1/geoBoundaries-BHS-ADM1.geojson",
+        "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+        "reference_year": "09-09-2017 to 24-08-2020",
+        "administrative_level": "ADM1",
+        "parent_source_level": "ADM1",
+        "source_role": "Districts",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "hierarchy_source": "gb:BHS:ADM1",
+        "hierarchy_overlap": 0.947875,
+        "original_geometry_sha256": null,
+        "topology_reconciled": null,
+        "topology_conflicts": null,
+        "topology_note": null,
+        "residual_overlap_repair": null,
+        "display_geometry_repaired": null,
+        "framework_match": {
+          "source": "Natural Earth",
+          "id": "BHS-5033",
+          "overlap": 0.85649
+        },
+        "regional_match": {
+          "reference_iso": "BHS",
+          "source_id": "BHS-5033",
+          "overlap": 0.85649,
+          "method": "reference-territory-constrained overlap"
+        },
+        "semantic_review": {
+          "status": "open",
+          "continent": "North America",
+          "decision_index": 15,
+          "evidence_file": "geographic-decisions"
+        }
+      },
+      "parent_correction_metadata": {},
+      "exact_checks": {
+        "ordinal": true,
+        "roster_owners": true,
+        "reverse_join": true,
+        "canonical_original_id": true,
+        "canonical_name": true,
+        "lineage_name": true,
+        "owner_id": true,
+        "owner_parent": true,
+        "lineage_parent": true,
+        "source_type": true,
+        "parent_exists": true
+      }
+    },
+    {
+      "original_ordinal": 17,
+      "source_index": 3099,
+      "source_family_index": 34,
+      "owner_index": 9914,
+      "id": "gb:BHS:ADM1:57655419B49483307836090",
+      "name": "Mangrove Cay",
+      "shapeISO": "BS-MC",
+      "original_shape_id": "57655419B49483307836090",
+      "canonical_parent_id": "framework:province:mangrove-cay:7bcfb0f019c9",
+      "original_owner_parent_id": "framework:province:mangrove-cay:7bcfb0f019c9",
+      "parent_chain": [
+        {
+          "id": "framework:province:mangrove-cay:7bcfb0f019c9",
+          "name": "Mangrove Cay",
+          "level": "province",
+          "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+        },
+        {
+          "id": "framework:area:bahamas:1b4f84b30e9a",
+          "name": "Bahamas",
+          "level": "area",
+          "parent_id": "framework:region:caribbean:ebd25dd0ca4c"
+        },
+        {
+          "id": "framework:region:caribbean:ebd25dd0ca4c",
+          "name": "Caribbean",
+          "level": "region",
+          "parent_id": "framework:subcontinent:caribbean:ee91c3316485"
+        },
+        {
+          "id": "framework:subcontinent:caribbean:ee91c3316485",
+          "name": "Caribbean",
+          "level": "subcontinent",
+          "parent_id": "framework:continent:north-america:1ca27616f338"
+        },
+        {
+          "id": "framework:continent:north-america:1ca27616f338",
+          "name": "North America",
+          "level": "continent",
+          "parent_id": null
+        }
+      ],
+      "source_metadata": {
+        "source_id": "gb:BHS:ADM1",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BHS/ADM1/geoBoundaries-BHS-ADM1.geojson",
+        "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+        "reference_year": "09-09-2017 to 24-08-2020",
+        "administrative_level": "ADM1",
+        "parent_source_level": "ADM1",
+        "source_role": "Districts",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "hierarchy_source": "gb:BHS:ADM1",
+        "hierarchy_overlap": 0.963802,
+        "original_geometry_sha256": null,
+        "topology_reconciled": null,
+        "topology_conflicts": null,
+        "topology_note": null,
+        "residual_overlap_repair": null,
+        "display_geometry_repaired": null,
+        "framework_match": {
+          "source": "Natural Earth",
+          "id": "BHS-5021",
+          "overlap": 0.796428
+        },
+        "regional_match": {
+          "reference_iso": "BHS",
+          "source_id": "BHS-5021",
+          "overlap": 0.796428,
+          "method": "reference-territory-constrained overlap"
+        },
+        "semantic_review": {
+          "status": "open",
+          "continent": "North America",
+          "decision_index": 16,
+          "evidence_file": "geographic-decisions"
+        }
+      },
+      "parent_correction_metadata": {},
+      "exact_checks": {
+        "ordinal": true,
+        "roster_owners": true,
+        "reverse_join": true,
+        "canonical_original_id": true,
+        "canonical_name": true,
+        "lineage_name": true,
+        "owner_id": true,
+        "owner_parent": true,
+        "lineage_parent": true,
+        "source_type": true,
+        "parent_exists": true
+      }
+    },
+    {
+      "original_ordinal": 18,
+      "source_index": 3100,
+      "source_family_index": 34,
+      "owner_index": 9909,
+      "id": "gb:BHS:ADM1:57655419B31239819863643",
+      "name": "Mayaguana",
+      "shapeISO": "BS-MG",
+      "original_shape_id": "57655419B31239819863643",
+      "canonical_parent_id": "framework:province:mayaguana:d1aa43e2d941",
+      "original_owner_parent_id": "framework:province:mayaguana:d1aa43e2d941",
+      "parent_chain": [
+        {
+          "id": "framework:province:mayaguana:d1aa43e2d941",
+          "name": "Mayaguana",
+          "level": "province",
+          "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+        },
+        {
+          "id": "framework:area:bahamas:1b4f84b30e9a",
+          "name": "Bahamas",
+          "level": "area",
+          "parent_id": "framework:region:caribbean:ebd25dd0ca4c"
+        },
+        {
+          "id": "framework:region:caribbean:ebd25dd0ca4c",
+          "name": "Caribbean",
+          "level": "region",
+          "parent_id": "framework:subcontinent:caribbean:ee91c3316485"
+        },
+        {
+          "id": "framework:subcontinent:caribbean:ee91c3316485",
+          "name": "Caribbean",
+          "level": "subcontinent",
+          "parent_id": "framework:continent:north-america:1ca27616f338"
+        },
+        {
+          "id": "framework:continent:north-america:1ca27616f338",
+          "name": "North America",
+          "level": "continent",
+          "parent_id": null
+        }
+      ],
+      "source_metadata": {
+        "source_id": "gb:BHS:ADM1",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BHS/ADM1/geoBoundaries-BHS-ADM1.geojson",
+        "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+        "reference_year": "09-09-2017 to 24-08-2020",
+        "administrative_level": "ADM1",
+        "parent_source_level": "ADM1",
+        "source_role": "Districts",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "hierarchy_source": "gb:BHS:ADM1",
+        "hierarchy_overlap": 0.976471,
+        "original_geometry_sha256": null,
+        "topology_reconciled": null,
+        "topology_conflicts": null,
+        "topology_note": null,
+        "residual_overlap_repair": null,
+        "display_geometry_repaired": null,
+        "framework_match": {
+          "source": "Natural Earth",
+          "id": "BHS-5037",
+          "overlap": 0.910896
+        },
+        "regional_match": {
+          "reference_iso": "BHS",
+          "source_id": "BHS-5037",
+          "overlap": 0.910896,
+          "method": "reference-territory-constrained overlap"
+        },
+        "semantic_review": {
+          "status": "open",
+          "continent": "North America",
+          "decision_index": 17,
+          "evidence_file": "geographic-decisions"
+        }
+      },
+      "parent_correction_metadata": {},
+      "exact_checks": {
+        "ordinal": true,
+        "roster_owners": true,
+        "reverse_join": true,
+        "canonical_original_id": true,
+        "canonical_name": true,
+        "lineage_name": true,
+        "owner_id": true,
+        "owner_parent": true,
+        "lineage_parent": true,
+        "source_type": true,
+        "parent_exists": true
+      }
+    },
+    {
+      "original_ordinal": 19,
+      "source_index": 3101,
+      "source_family_index": 34,
+      "owner_index": 9910,
+      "id": "gb:BHS:ADM1:57655419B38120742943128",
+      "name": "Moore's Island",
+      "shapeISO": "BS-MI",
+      "original_shape_id": "57655419B38120742943128",
+      "canonical_parent_id": "framework:province:moore-s-island:fa17e9a3942d",
+      "original_owner_parent_id": "framework:province:moore-s-island:fa17e9a3942d",
+      "parent_chain": [
+        {
+          "id": "framework:province:moore-s-island:fa17e9a3942d",
+          "name": "Moore's Island",
+          "level": "province",
+          "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+        },
+        {
+          "id": "framework:area:bahamas:1b4f84b30e9a",
+          "name": "Bahamas",
+          "level": "area",
+          "parent_id": "framework:region:caribbean:ebd25dd0ca4c"
+        },
+        {
+          "id": "framework:region:caribbean:ebd25dd0ca4c",
+          "name": "Caribbean",
+          "level": "region",
+          "parent_id": "framework:subcontinent:caribbean:ee91c3316485"
+        },
+        {
+          "id": "framework:subcontinent:caribbean:ee91c3316485",
+          "name": "Caribbean",
+          "level": "subcontinent",
+          "parent_id": "framework:continent:north-america:1ca27616f338"
+        },
+        {
+          "id": "framework:continent:north-america:1ca27616f338",
+          "name": "North America",
+          "level": "continent",
+          "parent_id": null
+        }
+      ],
+      "source_metadata": {
+        "source_id": "gb:BHS:ADM1",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BHS/ADM1/geoBoundaries-BHS-ADM1.geojson",
+        "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+        "reference_year": "09-09-2017 to 24-08-2020",
+        "administrative_level": "ADM1",
+        "parent_source_level": "ADM1",
+        "source_role": "Districts",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "hierarchy_source": "gb:BHS:ADM1",
+        "hierarchy_overlap": 0.964838,
+        "original_geometry_sha256": null,
+        "topology_reconciled": null,
+        "topology_conflicts": null,
+        "topology_note": null,
+        "residual_overlap_repair": null,
+        "display_geometry_repaired": null,
+        "framework_match": {
+          "source": "Natural Earth",
+          "id": "BHS-5017",
+          "overlap": 0.755233
+        },
+        "regional_match": {
+          "reference_iso": "BHS",
+          "source_id": "BHS-5017",
+          "overlap": 0.755233,
+          "method": "reference-territory-constrained overlap"
+        },
+        "semantic_review": {
+          "status": "open",
+          "continent": "North America",
+          "decision_index": 18,
+          "evidence_file": "geographic-decisions"
+        }
+      },
+      "parent_correction_metadata": {},
+      "exact_checks": {
+        "ordinal": true,
+        "roster_owners": true,
+        "reverse_join": true,
+        "canonical_original_id": true,
+        "canonical_name": true,
+        "lineage_name": true,
+        "owner_id": true,
+        "owner_parent": true,
+        "lineage_parent": true,
+        "source_type": true,
+        "parent_exists": true
+      }
+    },
+    {
+      "original_ordinal": 20,
+      "source_index": 3102,
+      "source_family_index": 34,
+      "owner_index": 9925,
+      "id": "gb:BHS:ADM1:57655419B75676267470758",
+      "name": "New Providence",
+      "shapeISO": "BS-NP",
+      "original_shape_id": "57655419B75676267470758",
+      "canonical_parent_id": "framework:province:new-providence:461547b304d6",
+      "original_owner_parent_id": "framework:province:new-providence:461547b304d6",
+      "parent_chain": [
+        {
+          "id": "framework:province:new-providence:461547b304d6",
+          "name": "New Providence",
+          "level": "province",
+          "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+        },
+        {
+          "id": "framework:area:bahamas:1b4f84b30e9a",
+          "name": "Bahamas",
+          "level": "area",
+          "parent_id": "framework:region:caribbean:ebd25dd0ca4c"
+        },
+        {
+          "id": "framework:region:caribbean:ebd25dd0ca4c",
+          "name": "Caribbean",
+          "level": "region",
+          "parent_id": "framework:subcontinent:caribbean:ee91c3316485"
+        },
+        {
+          "id": "framework:subcontinent:caribbean:ee91c3316485",
+          "name": "Caribbean",
+          "level": "subcontinent",
+          "parent_id": "framework:continent:north-america:1ca27616f338"
+        },
+        {
+          "id": "framework:continent:north-america:1ca27616f338",
+          "name": "North America",
+          "level": "continent",
+          "parent_id": null
+        }
+      ],
+      "source_metadata": {
+        "source_id": "gb:BHS:ADM1",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BHS/ADM1/geoBoundaries-BHS-ADM1.geojson",
+        "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+        "reference_year": "09-09-2017 to 24-08-2020",
+        "administrative_level": "ADM1",
+        "parent_source_level": "ADM1",
+        "source_role": "Districts",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "hierarchy_source": "gb:BHS:ADM1",
+        "hierarchy_overlap": 0.97752,
+        "original_geometry_sha256": null,
+        "topology_reconciled": null,
+        "topology_conflicts": null,
+        "topology_note": null,
+        "residual_overlap_repair": null,
+        "display_geometry_repaired": null,
+        "framework_match": {
+          "source": "Natural Earth",
+          "id": "BHS-5009",
+          "overlap": 0.7679
+        },
+        "regional_match": {
+          "reference_iso": "BHS",
+          "source_id": "BHS-5009",
+          "overlap": 0.7679,
+          "method": "reference-territory-constrained overlap"
+        },
+        "semantic_review": {
+          "status": "open",
+          "continent": "North America",
+          "decision_index": 19,
+          "evidence_file": "geographic-decisions"
+        }
+      },
+      "parent_correction_metadata": {},
+      "exact_checks": {
+        "ordinal": true,
+        "roster_owners": true,
+        "reverse_join": true,
+        "canonical_original_id": true,
+        "canonical_name": true,
+        "lineage_name": true,
+        "owner_id": true,
+        "owner_parent": true,
+        "lineage_parent": true,
+        "source_type": true,
+        "parent_exists": true
+      }
+    },
+    {
+      "original_ordinal": 21,
+      "source_index": 3103,
+      "source_family_index": 34,
+      "owner_index": 9927,
+      "id": "gb:BHS:ADM1:57655419B79428110843392",
+      "name": "North Abaco",
+      "shapeISO": "BS-NO",
+      "original_shape_id": "57655419B79428110843392",
+      "canonical_parent_id": "framework:province:north-abaco:6fc2875f7560",
+      "original_owner_parent_id": "framework:province:north-abaco:6fc2875f7560",
+      "parent_chain": [
+        {
+          "id": "framework:province:north-abaco:6fc2875f7560",
+          "name": "North Abaco",
+          "level": "province",
+          "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+        },
+        {
+          "id": "framework:area:bahamas:1b4f84b30e9a",
+          "name": "Bahamas",
+          "level": "area",
+          "parent_id": "framework:region:caribbean:ebd25dd0ca4c"
+        },
+        {
+          "id": "framework:region:caribbean:ebd25dd0ca4c",
+          "name": "Caribbean",
+          "level": "region",
+          "parent_id": "framework:subcontinent:caribbean:ee91c3316485"
+        },
+        {
+          "id": "framework:subcontinent:caribbean:ee91c3316485",
+          "name": "Caribbean",
+          "level": "subcontinent",
+          "parent_id": "framework:continent:north-america:1ca27616f338"
+        },
+        {
+          "id": "framework:continent:north-america:1ca27616f338",
+          "name": "North America",
+          "level": "continent",
+          "parent_id": null
+        }
+      ],
+      "source_metadata": {
+        "source_id": "gb:BHS:ADM1",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BHS/ADM1/geoBoundaries-BHS-ADM1.geojson",
+        "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+        "reference_year": "09-09-2017 to 24-08-2020",
+        "administrative_level": "ADM1",
+        "parent_source_level": "ADM1",
+        "source_role": "Districts",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "hierarchy_source": "gb:BHS:ADM1",
+        "hierarchy_overlap": 0.944186,
+        "original_geometry_sha256": null,
+        "topology_reconciled": null,
+        "topology_conflicts": null,
+        "topology_note": null,
+        "residual_overlap_repair": null,
+        "display_geometry_repaired": null,
+        "framework_match": {
+          "source": "Natural Earth",
+          "id": "BHS-5014",
+          "overlap": 0.798161
+        },
+        "regional_match": {
+          "reference_iso": "BHS",
+          "source_id": "BHS-5014",
+          "overlap": 0.798161,
+          "method": "reference-territory-constrained overlap"
+        },
+        "semantic_review": {
+          "status": "open",
+          "continent": "North America",
+          "decision_index": 20,
+          "evidence_file": "geographic-decisions"
+        }
+      },
+      "parent_correction_metadata": {},
+      "exact_checks": {
+        "ordinal": true,
+        "roster_owners": true,
+        "reverse_join": true,
+        "canonical_original_id": true,
+        "canonical_name": true,
+        "lineage_name": true,
+        "owner_id": true,
+        "owner_parent": true,
+        "lineage_parent": true,
+        "source_type": true,
+        "parent_exists": true
+      }
+    },
+    {
+      "original_ordinal": 22,
+      "source_index": 3104,
+      "source_family_index": 34,
+      "owner_index": 9921,
+      "id": "gb:BHS:ADM1:57655419B63159467904865",
+      "name": "North Andros",
+      "shapeISO": "BS-NS",
+      "original_shape_id": "57655419B63159467904865",
+      "canonical_parent_id": "framework:province:north-andros:b32f94bffc93",
+      "original_owner_parent_id": "framework:province:north-andros:b32f94bffc93",
+      "parent_chain": [
+        {
+          "id": "framework:province:north-andros:b32f94bffc93",
+          "name": "North Andros",
+          "level": "province",
+          "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+        },
+        {
+          "id": "framework:area:bahamas:1b4f84b30e9a",
+          "name": "Bahamas",
+          "level": "area",
+          "parent_id": "framework:region:caribbean:ebd25dd0ca4c"
+        },
+        {
+          "id": "framework:region:caribbean:ebd25dd0ca4c",
+          "name": "Caribbean",
+          "level": "region",
+          "parent_id": "framework:subcontinent:caribbean:ee91c3316485"
+        },
+        {
+          "id": "framework:subcontinent:caribbean:ee91c3316485",
+          "name": "Caribbean",
+          "level": "subcontinent",
+          "parent_id": "framework:continent:north-america:1ca27616f338"
+        },
+        {
+          "id": "framework:continent:north-america:1ca27616f338",
+          "name": "North America",
+          "level": "continent",
+          "parent_id": null
+        }
+      ],
+      "source_metadata": {
+        "source_id": "gb:BHS:ADM1",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BHS/ADM1/geoBoundaries-BHS-ADM1.geojson",
+        "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+        "reference_year": "09-09-2017 to 24-08-2020",
+        "administrative_level": "ADM1",
+        "parent_source_level": "ADM1",
+        "source_role": "Districts",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "hierarchy_source": "gb:BHS:ADM1",
+        "hierarchy_overlap": 0.989199,
+        "original_geometry_sha256": null,
+        "topology_reconciled": null,
+        "topology_conflicts": null,
+        "topology_note": null,
+        "residual_overlap_repair": null,
+        "display_geometry_repaired": null,
+        "framework_match": {
+          "source": "Natural Earth",
+          "id": "BHS-5019",
+          "overlap": 0.827865
+        },
+        "regional_match": {
+          "reference_iso": "BHS",
+          "source_id": "BHS-5019",
+          "overlap": 0.827865,
+          "method": "reference-territory-constrained overlap"
+        },
+        "semantic_review": {
+          "status": "open",
+          "continent": "North America",
+          "decision_index": 21,
+          "evidence_file": "geographic-decisions"
+        }
+      },
+      "parent_correction_metadata": {},
+      "exact_checks": {
+        "ordinal": true,
+        "roster_owners": true,
+        "reverse_join": true,
+        "canonical_original_id": true,
+        "canonical_name": true,
+        "lineage_name": true,
+        "owner_id": true,
+        "owner_parent": true,
+        "lineage_parent": true,
+        "source_type": true,
+        "parent_exists": true
+      }
+    },
+    {
+      "original_ordinal": 23,
+      "source_index": 3105,
+      "source_family_index": 34,
+      "owner_index": 9906,
+      "id": "gb:BHS:ADM1:57655419B2538538242492",
+      "name": "North Eleuthera",
+      "shapeISO": "BS-NE",
+      "original_shape_id": "57655419B2538538242492",
+      "canonical_parent_id": "framework:province:north-eleuthera:b67b41adb767",
+      "original_owner_parent_id": "framework:province:north-eleuthera:b67b41adb767",
+      "parent_chain": [
+        {
+          "id": "framework:province:north-eleuthera:b67b41adb767",
+          "name": "North Eleuthera",
+          "level": "province",
+          "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+        },
+        {
+          "id": "framework:area:bahamas:1b4f84b30e9a",
+          "name": "Bahamas",
+          "level": "area",
+          "parent_id": "framework:region:caribbean:ebd25dd0ca4c"
+        },
+        {
+          "id": "framework:region:caribbean:ebd25dd0ca4c",
+          "name": "Caribbean",
+          "level": "region",
+          "parent_id": "framework:subcontinent:caribbean:ee91c3316485"
+        },
+        {
+          "id": "framework:subcontinent:caribbean:ee91c3316485",
+          "name": "Caribbean",
+          "level": "subcontinent",
+          "parent_id": "framework:continent:north-america:1ca27616f338"
+        },
+        {
+          "id": "framework:continent:north-america:1ca27616f338",
+          "name": "North America",
+          "level": "continent",
+          "parent_id": null
+        }
+      ],
+      "source_metadata": {
+        "source_id": "gb:BHS:ADM1",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BHS/ADM1/geoBoundaries-BHS-ADM1.geojson",
+        "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+        "reference_year": "09-09-2017 to 24-08-2020",
+        "administrative_level": "ADM1",
+        "parent_source_level": "ADM1",
+        "source_role": "Districts",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "hierarchy_source": "gb:BHS:ADM1",
+        "hierarchy_overlap": 0.941984,
+        "original_geometry_sha256": null,
+        "topology_reconciled": null,
+        "topology_conflicts": null,
+        "topology_note": null,
+        "residual_overlap_repair": null,
+        "display_geometry_repaired": null,
+        "framework_match": {
+          "source": "Natural Earth",
+          "id": "BHS-5027",
+          "overlap": 0.756507
+        },
+        "regional_match": {
+          "reference_iso": "BHS",
+          "source_id": "BHS-5027",
+          "overlap": 0.756507,
+          "method": "reference-territory-constrained overlap"
+        },
+        "semantic_review": {
+          "status": "open",
+          "continent": "North America",
+          "decision_index": 22,
+          "evidence_file": "geographic-decisions"
+        }
+      },
+      "parent_correction_metadata": {},
+      "exact_checks": {
+        "ordinal": true,
+        "roster_owners": true,
+        "reverse_join": true,
+        "canonical_original_id": true,
+        "canonical_name": true,
+        "lineage_name": true,
+        "owner_id": true,
+        "owner_parent": true,
+        "lineage_parent": true,
+        "source_type": true,
+        "parent_exists": true
+      }
+    },
+    {
+      "original_ordinal": 24,
+      "source_index": 3106,
+      "source_family_index": 34,
+      "owner_index": 9933,
+      "id": "gb:BHS:ADM1:57655419B98686837957667",
+      "name": "Ragged Island",
+      "shapeISO": "BS-RI",
+      "original_shape_id": "57655419B98686837957667",
+      "canonical_parent_id": "atlas:macro-review:province:1196e7d9826a7cf7",
+      "original_owner_parent_id": "atlas:macro-review:province:1196e7d9826a7cf7",
+      "parent_chain": [
+        {
+          "id": "atlas:macro-review:province:1196e7d9826a7cf7",
+          "name": "Ragged Island",
+          "level": "province",
+          "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+        },
+        {
+          "id": "framework:area:bahamas:1b4f84b30e9a",
+          "name": "Bahamas",
+          "level": "area",
+          "parent_id": "framework:region:caribbean:ebd25dd0ca4c"
+        },
+        {
+          "id": "framework:region:caribbean:ebd25dd0ca4c",
+          "name": "Caribbean",
+          "level": "region",
+          "parent_id": "framework:subcontinent:caribbean:ee91c3316485"
+        },
+        {
+          "id": "framework:subcontinent:caribbean:ee91c3316485",
+          "name": "Caribbean",
+          "level": "subcontinent",
+          "parent_id": "framework:continent:north-america:1ca27616f338"
+        },
+        {
+          "id": "framework:continent:north-america:1ca27616f338",
+          "name": "North America",
+          "level": "continent",
+          "parent_id": null
+        }
+      ],
+      "source_metadata": {
+        "source_id": "gb:BHS:ADM1",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BHS/ADM1/geoBoundaries-BHS-ADM1.geojson",
+        "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+        "reference_year": "09-09-2017 to 24-08-2020",
+        "administrative_level": "ADM1",
+        "parent_source_level": "ADM1",
+        "source_role": "Districts",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "hierarchy_source": "gb:BHS:ADM1",
+        "hierarchy_overlap": 0.873628,
+        "original_geometry_sha256": null,
+        "topology_reconciled": null,
+        "topology_conflicts": null,
+        "topology_note": null,
+        "residual_overlap_repair": null,
+        "display_geometry_repaired": null,
+        "framework_match": {
+          "source": "Natural Earth",
+          "id": "BHS-5034",
+          "overlap": 0.749988
+        },
+        "regional_match": {
+          "reference_iso": "BHS",
+          "source_id": "BHS-5034",
+          "overlap": 0.749988,
+          "method": "reference-territory-constrained overlap"
+        },
+        "semantic_review": {
+          "status": "open",
+          "continent": "North America",
+          "decision_index": 670,
+          "evidence_file": "geographic-decisions"
+        }
+      },
+      "parent_correction_metadata": {
+        "previous_group_id": "framework:province:ragged-island:03e7b020641b",
+        "membership_correction": "Bimini and Ragged Island are named Bahamian archipelago units. Correct inherited Florida/Cuba area matches to Bahamas within the Caribbean convention; no country-owner renderer or dated evidence is changed.",
+        "macro_correction_version": 1
+      },
+      "exact_checks": {
+        "ordinal": true,
+        "roster_owners": true,
+        "reverse_join": true,
+        "canonical_original_id": true,
+        "canonical_name": true,
+        "lineage_name": true,
+        "owner_id": true,
+        "owner_parent": true,
+        "lineage_parent": true,
+        "source_type": true,
+        "parent_exists": true
+      }
+    },
+    {
+      "original_ordinal": 25,
+      "source_index": 3107,
+      "source_family_index": 34,
+      "owner_index": 9912,
+      "id": "gb:BHS:ADM1:57655419B42503330785161",
+      "name": "Rum Cay",
+      "shapeISO": "BS-RC",
+      "original_shape_id": "57655419B42503330785161",
+      "canonical_parent_id": "framework:province:rum-cay:d0c117758005",
+      "original_owner_parent_id": "framework:province:rum-cay:d0c117758005",
+      "parent_chain": [
+        {
+          "id": "framework:province:rum-cay:d0c117758005",
+          "name": "Rum Cay",
+          "level": "province",
+          "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+        },
+        {
+          "id": "framework:area:bahamas:1b4f84b30e9a",
+          "name": "Bahamas",
+          "level": "area",
+          "parent_id": "framework:region:caribbean:ebd25dd0ca4c"
+        },
+        {
+          "id": "framework:region:caribbean:ebd25dd0ca4c",
+          "name": "Caribbean",
+          "level": "region",
+          "parent_id": "framework:subcontinent:caribbean:ee91c3316485"
+        },
+        {
+          "id": "framework:subcontinent:caribbean:ee91c3316485",
+          "name": "Caribbean",
+          "level": "subcontinent",
+          "parent_id": "framework:continent:north-america:1ca27616f338"
+        },
+        {
+          "id": "framework:continent:north-america:1ca27616f338",
+          "name": "North America",
+          "level": "continent",
+          "parent_id": null
+        }
+      ],
+      "source_metadata": {
+        "source_id": "gb:BHS:ADM1",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BHS/ADM1/geoBoundaries-BHS-ADM1.geojson",
+        "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+        "reference_year": "09-09-2017 to 24-08-2020",
+        "administrative_level": "ADM1",
+        "parent_source_level": "ADM1",
+        "source_role": "Districts",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "hierarchy_source": "gb:BHS:ADM1",
+        "hierarchy_overlap": 0.96459,
+        "original_geometry_sha256": null,
+        "topology_reconciled": null,
+        "topology_conflicts": null,
+        "topology_note": null,
+        "residual_overlap_repair": null,
+        "display_geometry_repaired": null,
+        "framework_match": {
+          "source": "Natural Earth",
+          "id": "BHS-5032",
+          "overlap": 0.760849
+        },
+        "regional_match": {
+          "reference_iso": "BHS",
+          "source_id": "BHS-5032",
+          "overlap": 0.760849,
+          "method": "reference-territory-constrained overlap"
+        },
+        "semantic_review": {
+          "status": "open",
+          "continent": "North America",
+          "decision_index": 23,
+          "evidence_file": "geographic-decisions"
+        }
+      },
+      "parent_correction_metadata": {},
+      "exact_checks": {
+        "ordinal": true,
+        "roster_owners": true,
+        "reverse_join": true,
+        "canonical_original_id": true,
+        "canonical_name": true,
+        "lineage_name": true,
+        "owner_id": true,
+        "owner_parent": true,
+        "lineage_parent": true,
+        "source_type": true,
+        "parent_exists": true
+      }
+    },
+    {
+      "original_ordinal": 26,
+      "source_index": 3108,
+      "source_family_index": 34,
+      "owner_index": 9922,
+      "id": "gb:BHS:ADM1:57655419B6447054147513",
+      "name": "San Salvador",
+      "shapeISO": "BS-SS",
+      "original_shape_id": "57655419B6447054147513",
+      "canonical_parent_id": "framework:province:san-salvador:d67bfb392349",
+      "original_owner_parent_id": "framework:province:san-salvador:d67bfb392349",
+      "parent_chain": [
+        {
+          "id": "framework:province:san-salvador:d67bfb392349",
+          "name": "San Salvador",
+          "level": "province",
+          "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+        },
+        {
+          "id": "framework:area:bahamas:1b4f84b30e9a",
+          "name": "Bahamas",
+          "level": "area",
+          "parent_id": "framework:region:caribbean:ebd25dd0ca4c"
+        },
+        {
+          "id": "framework:region:caribbean:ebd25dd0ca4c",
+          "name": "Caribbean",
+          "level": "region",
+          "parent_id": "framework:subcontinent:caribbean:ee91c3316485"
+        },
+        {
+          "id": "framework:subcontinent:caribbean:ee91c3316485",
+          "name": "Caribbean",
+          "level": "subcontinent",
+          "parent_id": "framework:continent:north-america:1ca27616f338"
+        },
+        {
+          "id": "framework:continent:north-america:1ca27616f338",
+          "name": "North America",
+          "level": "continent",
+          "parent_id": null
+        }
+      ],
+      "source_metadata": {
+        "source_id": "gb:BHS:ADM1",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BHS/ADM1/geoBoundaries-BHS-ADM1.geojson",
+        "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+        "reference_year": "09-09-2017 to 24-08-2020",
+        "administrative_level": "ADM1",
+        "parent_source_level": "ADM1",
+        "source_role": "Districts",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "hierarchy_source": "gb:BHS:ADM1",
+        "hierarchy_overlap": 0.970387,
+        "original_geometry_sha256": null,
+        "topology_reconciled": null,
+        "topology_conflicts": null,
+        "topology_note": null,
+        "residual_overlap_repair": null,
+        "display_geometry_repaired": null,
+        "framework_match": {
+          "source": "Natural Earth",
+          "id": "BHS-5031",
+          "overlap": 0.903642
+        },
+        "regional_match": {
+          "reference_iso": "BHS",
+          "source_id": "BHS-5031",
+          "overlap": 0.903642,
+          "method": "reference-territory-constrained overlap"
+        },
+        "semantic_review": {
+          "status": "open",
+          "continent": "North America",
+          "decision_index": 24,
+          "evidence_file": "geographic-decisions"
+        }
+      },
+      "parent_correction_metadata": {},
+      "exact_checks": {
+        "ordinal": true,
+        "roster_owners": true,
+        "reverse_join": true,
+        "canonical_original_id": true,
+        "canonical_name": true,
+        "lineage_name": true,
+        "owner_id": true,
+        "owner_parent": true,
+        "lineage_parent": true,
+        "source_type": true,
+        "parent_exists": true
+      }
+    },
+    {
+      "original_ordinal": 27,
+      "source_index": 3109,
+      "source_family_index": 34,
+      "owner_index": 9911,
+      "id": "gb:BHS:ADM1:57655419B39711376309473",
+      "name": "South Abaco",
+      "shapeISO": "BS-SO",
+      "original_shape_id": "57655419B39711376309473",
+      "canonical_parent_id": "framework:province:south-abaco:728dd08b2e76",
+      "original_owner_parent_id": "framework:province:south-abaco:728dd08b2e76",
+      "parent_chain": [
+        {
+          "id": "framework:province:south-abaco:728dd08b2e76",
+          "name": "South Abaco",
+          "level": "province",
+          "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+        },
+        {
+          "id": "framework:area:bahamas:1b4f84b30e9a",
+          "name": "Bahamas",
+          "level": "area",
+          "parent_id": "framework:region:caribbean:ebd25dd0ca4c"
+        },
+        {
+          "id": "framework:region:caribbean:ebd25dd0ca4c",
+          "name": "Caribbean",
+          "level": "region",
+          "parent_id": "framework:subcontinent:caribbean:ee91c3316485"
+        },
+        {
+          "id": "framework:subcontinent:caribbean:ee91c3316485",
+          "name": "Caribbean",
+          "level": "subcontinent",
+          "parent_id": "framework:continent:north-america:1ca27616f338"
+        },
+        {
+          "id": "framework:continent:north-america:1ca27616f338",
+          "name": "North America",
+          "level": "continent",
+          "parent_id": null
+        }
+      ],
+      "source_metadata": {
+        "source_id": "gb:BHS:ADM1",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BHS/ADM1/geoBoundaries-BHS-ADM1.geojson",
+        "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+        "reference_year": "09-09-2017 to 24-08-2020",
+        "administrative_level": "ADM1",
+        "parent_source_level": "ADM1",
+        "source_role": "Districts",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "hierarchy_source": "gb:BHS:ADM1",
+        "hierarchy_overlap": 0.982795,
+        "original_geometry_sha256": null,
+        "topology_reconciled": null,
+        "topology_conflicts": null,
+        "topology_note": null,
+        "residual_overlap_repair": null,
+        "display_geometry_repaired": null,
+        "framework_match": {
+          "source": "Natural Earth",
+          "id": "BHS-5016",
+          "overlap": 0.866674
+        },
+        "regional_match": {
+          "reference_iso": "BHS",
+          "source_id": "BHS-5016",
+          "overlap": 0.866674,
+          "method": "reference-territory-constrained overlap"
+        },
+        "semantic_review": {
+          "status": "open",
+          "continent": "North America",
+          "decision_index": 25,
+          "evidence_file": "geographic-decisions"
+        }
+      },
+      "parent_correction_metadata": {},
+      "exact_checks": {
+        "ordinal": true,
+        "roster_owners": true,
+        "reverse_join": true,
+        "canonical_original_id": true,
+        "canonical_name": true,
+        "lineage_name": true,
+        "owner_id": true,
+        "owner_parent": true,
+        "lineage_parent": true,
+        "source_type": true,
+        "parent_exists": true
+      }
+    },
+    {
+      "original_ordinal": 28,
+      "source_index": 3110,
+      "source_family_index": 34,
+      "owner_index": 9907,
+      "id": "gb:BHS:ADM1:57655419B29435673895959",
+      "name": "South Andros",
+      "shapeISO": "BS-SA",
+      "original_shape_id": "57655419B29435673895959",
+      "canonical_parent_id": "framework:province:south-andros:4a64949a15a0",
+      "original_owner_parent_id": "framework:province:south-andros:4a64949a15a0",
+      "parent_chain": [
+        {
+          "id": "framework:province:south-andros:4a64949a15a0",
+          "name": "South Andros",
+          "level": "province",
+          "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+        },
+        {
+          "id": "framework:area:bahamas:1b4f84b30e9a",
+          "name": "Bahamas",
+          "level": "area",
+          "parent_id": "framework:region:caribbean:ebd25dd0ca4c"
+        },
+        {
+          "id": "framework:region:caribbean:ebd25dd0ca4c",
+          "name": "Caribbean",
+          "level": "region",
+          "parent_id": "framework:subcontinent:caribbean:ee91c3316485"
+        },
+        {
+          "id": "framework:subcontinent:caribbean:ee91c3316485",
+          "name": "Caribbean",
+          "level": "subcontinent",
+          "parent_id": "framework:continent:north-america:1ca27616f338"
+        },
+        {
+          "id": "framework:continent:north-america:1ca27616f338",
+          "name": "North America",
+          "level": "continent",
+          "parent_id": null
+        }
+      ],
+      "source_metadata": {
+        "source_id": "gb:BHS:ADM1",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BHS/ADM1/geoBoundaries-BHS-ADM1.geojson",
+        "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+        "reference_year": "09-09-2017 to 24-08-2020",
+        "administrative_level": "ADM1",
+        "parent_source_level": "ADM1",
+        "source_role": "Districts",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "hierarchy_source": "gb:BHS:ADM1",
+        "hierarchy_overlap": 0.971672,
+        "original_geometry_sha256": null,
+        "topology_reconciled": null,
+        "topology_conflicts": null,
+        "topology_note": null,
+        "residual_overlap_repair": null,
+        "display_geometry_repaired": null,
+        "framework_match": {
+          "source": "Natural Earth",
+          "id": "BHS-5022",
+          "overlap": 0.846318
+        },
+        "regional_match": {
+          "reference_iso": "BHS",
+          "source_id": "BHS-5022",
+          "overlap": 0.846318,
+          "method": "reference-territory-constrained overlap"
+        },
+        "semantic_review": {
+          "status": "open",
+          "continent": "North America",
+          "decision_index": 26,
+          "evidence_file": "geographic-decisions"
+        }
+      },
+      "parent_correction_metadata": {},
+      "exact_checks": {
+        "ordinal": true,
+        "roster_owners": true,
+        "reverse_join": true,
+        "canonical_original_id": true,
+        "canonical_name": true,
+        "lineage_name": true,
+        "owner_id": true,
+        "owner_parent": true,
+        "lineage_parent": true,
+        "source_type": true,
+        "parent_exists": true
+      }
+    },
+    {
+      "original_ordinal": 29,
+      "source_index": 3111,
+      "source_family_index": 34,
+      "owner_index": 9916,
+      "id": "gb:BHS:ADM1:57655419B57652232258076",
+      "name": "South Eleuthera",
+      "shapeISO": "BS-SE",
+      "original_shape_id": "57655419B57652232258076",
+      "canonical_parent_id": "framework:province:south-eleuthera:e593524d2351",
+      "original_owner_parent_id": "framework:province:south-eleuthera:e593524d2351",
+      "parent_chain": [
+        {
+          "id": "framework:province:south-eleuthera:e593524d2351",
+          "name": "South Eleuthera",
+          "level": "province",
+          "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+        },
+        {
+          "id": "framework:area:bahamas:1b4f84b30e9a",
+          "name": "Bahamas",
+          "level": "area",
+          "parent_id": "framework:region:caribbean:ebd25dd0ca4c"
+        },
+        {
+          "id": "framework:region:caribbean:ebd25dd0ca4c",
+          "name": "Caribbean",
+          "level": "region",
+          "parent_id": "framework:subcontinent:caribbean:ee91c3316485"
+        },
+        {
+          "id": "framework:subcontinent:caribbean:ee91c3316485",
+          "name": "Caribbean",
+          "level": "subcontinent",
+          "parent_id": "framework:continent:north-america:1ca27616f338"
+        },
+        {
+          "id": "framework:continent:north-america:1ca27616f338",
+          "name": "North America",
+          "level": "continent",
+          "parent_id": null
+        }
+      ],
+      "source_metadata": {
+        "source_id": "gb:BHS:ADM1",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BHS/ADM1/geoBoundaries-BHS-ADM1.geojson",
+        "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+        "reference_year": "09-09-2017 to 24-08-2020",
+        "administrative_level": "ADM1",
+        "parent_source_level": "ADM1",
+        "source_role": "Districts",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "hierarchy_source": "gb:BHS:ADM1",
+        "hierarchy_overlap": 0.952187,
+        "original_geometry_sha256": null,
+        "topology_reconciled": null,
+        "topology_conflicts": null,
+        "topology_note": null,
+        "residual_overlap_repair": null,
+        "display_geometry_repaired": null,
+        "framework_match": {
+          "source": "Natural Earth",
+          "id": "BHS-5029",
+          "overlap": 0.777807
+        },
+        "regional_match": {
+          "reference_iso": "BHS",
+          "source_id": "BHS-5029",
+          "overlap": 0.777807,
+          "method": "reference-territory-constrained overlap"
+        },
+        "semantic_review": {
+          "status": "open",
+          "continent": "North America",
+          "decision_index": 27,
+          "evidence_file": "geographic-decisions"
+        }
+      },
+      "parent_correction_metadata": {},
+      "exact_checks": {
+        "ordinal": true,
+        "roster_owners": true,
+        "reverse_join": true,
+        "canonical_original_id": true,
+        "canonical_name": true,
+        "lineage_name": true,
+        "owner_id": true,
+        "owner_parent": true,
+        "lineage_parent": true,
+        "source_type": true,
+        "parent_exists": true
+      }
+    },
+    {
+      "original_ordinal": 30,
+      "source_index": 3112,
+      "source_family_index": 34,
+      "owner_index": 9903,
+      "id": "gb:BHS:ADM1:57655419B1305095208594",
+      "name": "Spanish Wells",
+      "shapeISO": "BS-SW",
+      "original_shape_id": "57655419B1305095208594",
+      "canonical_parent_id": "framework:province:spanish-wells:671814fe3fed",
+      "original_owner_parent_id": "framework:province:spanish-wells:671814fe3fed",
+      "parent_chain": [
+        {
+          "id": "framework:province:spanish-wells:671814fe3fed",
+          "name": "Spanish Wells",
+          "level": "province",
+          "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+        },
+        {
+          "id": "framework:area:bahamas:1b4f84b30e9a",
+          "name": "Bahamas",
+          "level": "area",
+          "parent_id": "framework:region:caribbean:ebd25dd0ca4c"
+        },
+        {
+          "id": "framework:region:caribbean:ebd25dd0ca4c",
+          "name": "Caribbean",
+          "level": "region",
+          "parent_id": "framework:subcontinent:caribbean:ee91c3316485"
+        },
+        {
+          "id": "framework:subcontinent:caribbean:ee91c3316485",
+          "name": "Caribbean",
+          "level": "subcontinent",
+          "parent_id": "framework:continent:north-america:1ca27616f338"
+        },
+        {
+          "id": "framework:continent:north-america:1ca27616f338",
+          "name": "North America",
+          "level": "continent",
+          "parent_id": null
+        }
+      ],
+      "source_metadata": {
+        "source_id": "gb:BHS:ADM1",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BHS/ADM1/geoBoundaries-BHS-ADM1.geojson",
+        "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+        "reference_year": "09-09-2017 to 24-08-2020",
+        "administrative_level": "ADM1",
+        "parent_source_level": "ADM1",
+        "source_role": "Districts",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "hierarchy_source": "gb:BHS:ADM1",
+        "hierarchy_overlap": 0.767487,
+        "original_geometry_sha256": null,
+        "topology_reconciled": null,
+        "topology_conflicts": null,
+        "topology_note": null,
+        "residual_overlap_repair": null,
+        "display_geometry_repaired": null,
+        "framework_match": {
+          "source": "Natural Earth",
+          "id": "BHS-5025",
+          "overlap": 0.770178
+        },
+        "regional_match": {
+          "reference_iso": "BHS",
+          "source_id": "BHS-5025",
+          "overlap": 0.770178,
+          "method": "reference-territory-constrained overlap"
+        },
+        "semantic_review": {
+          "status": "open",
+          "continent": "North America",
+          "decision_index": 28,
+          "evidence_file": "geographic-decisions"
+        }
+      },
+      "parent_correction_metadata": {},
+      "exact_checks": {
+        "ordinal": true,
+        "roster_owners": true,
+        "reverse_join": true,
+        "canonical_original_id": true,
+        "canonical_name": true,
+        "lineage_name": true,
+        "owner_id": true,
+        "owner_parent": true,
+        "lineage_parent": true,
+        "source_type": true,
+        "parent_exists": true
+      }
+    },
+    {
+      "original_ordinal": 31,
+      "source_index": 3113,
+      "source_family_index": 34,
+      "owner_index": 9924,
+      "id": "gb:BHS:ADM1:57655419B65085412826087",
+      "name": "West Grand Bahama",
+      "shapeISO": "BS-WG",
+      "original_shape_id": "57655419B65085412826087",
+      "canonical_parent_id": "framework:province:west-grand-bahama:49a23238eea7",
+      "original_owner_parent_id": "framework:province:west-grand-bahama:49a23238eea7",
+      "parent_chain": [
+        {
+          "id": "framework:province:west-grand-bahama:49a23238eea7",
+          "name": "West Grand Bahama",
+          "level": "province",
+          "parent_id": "framework:area:bahamas:1b4f84b30e9a"
+        },
+        {
+          "id": "framework:area:bahamas:1b4f84b30e9a",
+          "name": "Bahamas",
+          "level": "area",
+          "parent_id": "framework:region:caribbean:ebd25dd0ca4c"
+        },
+        {
+          "id": "framework:region:caribbean:ebd25dd0ca4c",
+          "name": "Caribbean",
+          "level": "region",
+          "parent_id": "framework:subcontinent:caribbean:ee91c3316485"
+        },
+        {
+          "id": "framework:subcontinent:caribbean:ee91c3316485",
+          "name": "Caribbean",
+          "level": "subcontinent",
+          "parent_id": "framework:continent:north-america:1ca27616f338"
+        },
+        {
+          "id": "framework:continent:north-america:1ca27616f338",
+          "name": "North America",
+          "level": "continent",
+          "parent_id": null
+        }
+      ],
+      "source_metadata": {
+        "source_id": "gb:BHS:ADM1",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BHS/ADM1/geoBoundaries-BHS-ADM1.geojson",
+        "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+        "reference_year": "09-09-2017 to 24-08-2020",
+        "administrative_level": "ADM1",
+        "parent_source_level": "ADM1",
+        "source_role": "Districts",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "hierarchy_source": "gb:BHS:ADM1",
+        "hierarchy_overlap": 0.965588,
+        "original_geometry_sha256": null,
+        "topology_reconciled": null,
+        "topology_conflicts": null,
+        "topology_note": null,
+        "residual_overlap_repair": null,
+        "display_geometry_repaired": null,
+        "framework_match": {
+          "source": "Natural Earth",
+          "id": "BHS-5011",
+          "overlap": 0.935548
+        },
+        "regional_match": {
+          "reference_iso": "BHS",
+          "source_id": "BHS-5011",
+          "overlap": 0.935548,
+          "method": "reference-territory-constrained overlap"
+        },
+        "semantic_review": {
+          "status": "open",
+          "continent": "North America",
+          "decision_index": 29,
+          "evidence_file": "geographic-decisions"
+        }
+      },
+      "parent_correction_metadata": {},
+      "exact_checks": {
+        "ordinal": true,
+        "roster_owners": true,
+        "reverse_join": true,
+        "canonical_original_id": true,
+        "canonical_name": true,
+        "lineage_name": true,
+        "owner_id": true,
+        "owner_parent": true,
+        "lineage_parent": true,
+        "source_type": true,
+        "parent_exists": true
+      }
+    }
+  ]
+}
