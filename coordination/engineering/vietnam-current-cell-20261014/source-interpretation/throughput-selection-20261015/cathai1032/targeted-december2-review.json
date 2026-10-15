@@ -1,0 +1,113 @@
+{
+  "kind": "independent-targeted-actual-physical-location-addendum",
+  "reviewer": "vn_decision_review",
+  "scope": "Only original Cát Hải indices706 and713; no redo or condition on the821 adopted first-January answers.",
+  "status": "actual source-result reviewed; root adoption of713 pending",
+  "source_directory": "targeted-december2-001",
+  "actual_observations": "targeted-december2-001/native-window-observations.json",
+  "actual_execution_receipt": "targeted-december2-001/window-execution-receipt.json",
+  "execution": "Root observed EXIT0;2.611469s;91947008B process-lifetime peak RSS under536870912B; compute released.",
+  "evidence_views": [
+    "targeted-december2-001/cathai2-rgb-native.png",
+    "targeted-december2-001/cathai2-rgb-centres.png",
+    "targeted-december2-001/cathai2-nir-red-green-native.png",
+    "targeted-december2-001/cathai2-nir-red-green-centres.png"
+  ],
+  "records": [
+    {
+      "original_plan_index": 706,
+      "display_label": 1,
+      "original_key": {
+        "owner": 48500,
+        "y": 115615,
+        "x": 208982
+      },
+      "longitude": 106.96970621667185,
+      "latitude": 20.769214347751273,
+      "acquisition_datetime": "2020-12-31T03:32:14.812000Z",
+      "disposition": "unanswered_exact_surface_question",
+      "claim": "Visible narrow pale/dark coastal transition; exact emerged shore material or narrow structure versus water/mixed surface remains unresolved.",
+      "quality_observations": {
+        "red": {
+          "value": 948,
+          "valid_mask": 255
+        },
+        "green": {
+          "value": 924,
+          "valid_mask": 255
+        },
+        "blue": {
+          "value": 760,
+          "valid_mask": 255
+        },
+        "nir": {
+          "value": 1019,
+          "valid_mask": 255
+        },
+        "scl": {
+          "value": 2,
+          "valid_mask": 255
+        }
+      },
+      "native_10m_subpixel": {
+        "row": 12.350223068555351,
+        "col": 11.268493462950573
+      },
+      "remaining_missing_fact": "Finer independently registered shore/structure placement at this exact centre. No third same-resolution date is requested."
+    },
+    {
+      "original_plan_index": 713,
+      "display_label": 2,
+      "original_key": {
+        "owner": 48500,
+        "y": 115616,
+        "x": 208983
+      },
+      "longitude": 106.97107939244603,
+      "latitude": 20.767930400503072,
+      "acquisition_datetime": "2020-12-31T03:32:14.812000Z",
+      "disposition": "proposed_answered_bounded_physical_location",
+      "claim": "Vegetation-bearing coastal-fringe location continuous with the larger terrain body on31December2020; wetness, inundation, mixed-pixel ground and exact emerged-side assignment remain unspecified.",
+      "quality_observations": {
+        "red": {
+          "value": 760,
+          "valid_mask": 255
+        },
+        "green": {
+          "value": 795,
+          "valid_mask": 255
+        },
+        "blue": {
+          "value": 487,
+          "valid_mask": 255
+        },
+        "nir": {
+          "value": 1910,
+          "valid_mask": 255
+        },
+        "scl": {
+          "value": 6,
+          "valid_mask": 255
+        }
+      },
+      "native_10m_subpixel": {
+        "row": 26.39152494329028,
+        "col": 25.741422545164824
+      }
+    }
+  ],
+  "counts": {
+    "exact_keys": 2,
+    "proposed_new_bounded_answers": 1,
+    "unanswered": 1,
+    "already_adopted821_changed": 0
+  },
+  "scientific_basis": "Human interpretation of the actual existing native/marked RGB/NIR and source observations. At713, native vegetation-bearing morphology supports the coastal-fringe locality despite separate coarser SCL6. At706, visible shore transition remains exact-side/mixed-surface ambiguity. Neither SCL nor a reflectance threshold decides the disposition.",
+  "limits": [
+    "713 is a dated vegetated-coastal-locality answer, not a dry-ground or whole150m-cell land answer; flooded/wet vegetation and native mixed pixels remain possible.",
+    "706 legacy baseline02.14 SCL2 is not automatically cloud shadow; native valid masks do not prove cloud-free ground.",
+    "No forced cross-date agreement, third-date request, source/raster/native replay, transformation, resampling or new acquisition.",
+    "No annual water permanence, exact legal shoreline, named component, authority, ownership, source-parent clearance, repair, hold change or package completion.",
+    "The821 adopted answers and124 outside-context keys are untouched; root owns adoption and final original accounting."
+  ]
+}

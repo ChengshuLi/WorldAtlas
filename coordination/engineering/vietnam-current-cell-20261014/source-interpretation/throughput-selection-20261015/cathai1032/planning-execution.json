@@ -1,0 +1,30 @@
+{
+  "started_utc": "2026-10-15T14:06:12.192342+00:00",
+  "ended_utc": "2026-10-15T14:06:12.615075+00:00",
+  "seconds": 0.42274920805357397,
+  "observed_lifetime_peak_rss_bytes": 62226432,
+  "admission": {
+    "available": 1227636736,
+    "headroomBytes": 572882944,
+    "currentRssCreditBytes": 0,
+    "concurrentReservedBytes": 0,
+    "allowance": {
+      "phaseBytes": 536870912,
+      "rssBytes": 536870912
+    }
+  },
+  "cost": {
+    "existing_reader_numpy": 90300286,
+    "python": 18058560,
+    "node_preflight": 121304480,
+    "accepted_admission_code": 304941,
+    "input": 1032842,
+    "parse_carry_reserve": 67108864,
+    "projection_arrays": 8388608,
+    "other_runtime": 25165824,
+    "outputs": 16777216,
+    "other_expansion": 67108864
+  },
+  "prospective_total": 415550485,
+  "method": "ExistingGDALcoordinate API forsource-pixelplanning; no rasterorphysicalpredicate"
+}

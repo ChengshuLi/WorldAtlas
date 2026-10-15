@@ -1,0 +1,55 @@
+{
+  "kind": "first-suitable-date-observation-handoff",
+  "owner": 48500,
+  "original_context": 1156,
+  "actually_observed_keys": 1032,
+  "outside_footprint_context_keys_retained": 124,
+  "source_dates_read": [
+    "2020-01-31T03:32:07.183Z"
+  ],
+  "second_date_reads": 0,
+  "status": "Actual source child exited0; no physical-answer adoption yet",
+  "observation": {
+    "path": "first-january-blocks-001/S2B_48QYJ_20200131_0_L2A/native-observations.json",
+    "bytes": 5451433,
+    "sha256": "d2e2d5e58b76f4592183c5153576c633a1fd39aefd627765abcd471bb60599b2"
+  },
+  "execution": {
+    "path": "first-january-blocks-001/execution-receipt.json",
+    "bytes": 3030,
+    "sha256": "5885a1249edd08ac257c2842de1710d698b48814f6b59cd6767219f42d1712f9"
+  },
+  "plan": {
+    "path": "native-block-plan.json",
+    "bytes": 714093,
+    "sha256": "3ef7c4ff58d54f9d2b246a172a93220d02ed24b0d32343fab7e829c7f647f225"
+  },
+  "original_input": {
+    "path": "input.json",
+    "bytes": 1032842,
+    "sha256": "836ac2aa463c33d125e91a912977131d80c57311e84f826c7d33cc67764a1a8d"
+  },
+  "seconds": 31.448153209057637,
+  "peak_process_lifetime_rss_bytes": 210141184,
+  "allowance": {
+    "phaseBytes": 805306368,
+    "rssBytes": 805306368
+  },
+  "remote_window_reads": {
+    "data": 25,
+    "mask": 25
+  },
+  "local_saved_window_reuse": {
+    "data": 15,
+    "mask": 15
+  },
+  "evidence_path_base": "throughput-selection-20261015/ (native asset output paths may reference earlier Van Don files; new displays and point observations are Cat Hai)",
+  "source_attribution": "ESA/Copernicus Sentinel-2 L2A via Element84/AWS sentinel-cogs; exact URL/frame/processing-baseline/window/mask data retained in observation",
+  "limits": [
+    "Original124 outside-footprint keys remain unobserved and earn0completioncredit.",
+    "No source classifier, physical producer, authority, ownership, repair-selection or parent/source-vintage clearance.",
+    "Additional-date acquisition only for a specific actual unresolved subset where it could change the answer.",
+    "Source masks/SCL are observations, not an automatic physical class.",
+    "Partial native windows do not hash whole remote COG objects."
+  ]
+}

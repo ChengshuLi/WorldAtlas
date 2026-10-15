@@ -1,0 +1,915 @@
+{
+  "item": "S2A_48QYJ_20201231_0_L2A",
+  "acquisition_datetime": "2020-12-31T03:32:14.812000Z",
+  "properties": {
+    "created": "2022-11-06T06:27:07.274Z",
+    "platform": "sentinel-2a",
+    "constellation": "sentinel-2",
+    "instruments": [
+      "msi"
+    ],
+    "eo:cloud_cover": 9.062919,
+    "proj:epsg": 32648,
+    "mgrs:utm_zone": 48,
+    "mgrs:latitude_band": "Q",
+    "mgrs:grid_square": "YJ",
+    "grid:code": "MGRS-48QYJ",
+    "view:sun_azimuth": 154.829130811445,
+    "view:sun_elevation": 41.5473334351965,
+    "s2:degraded_msi_data_percentage": 0,
+    "s2:nodata_pixel_percentage": 0,
+    "s2:saturated_defective_pixel_percentage": 0,
+    "s2:dark_features_percentage": 1.969463,
+    "s2:cloud_shadow_percentage": 0.131814,
+    "s2:vegetation_percentage": 40.321597,
+    "s2:not_vegetated_percentage": 3.021105,
+    "s2:water_percentage": 39.080936,
+    "s2:unclassified_percentage": 6.407965,
+    "s2:medium_proba_clouds_percentage": 1.96568,
+    "s2:high_proba_clouds_percentage": 0.132962,
+    "s2:thin_cirrus_percentage": 6.964277,
+    "s2:snow_ice_percentage": 0.0042,
+    "s2:product_type": "S2MSI2A",
+    "s2:processing_baseline": "02.14",
+    "s2:product_uri": "S2A_MSIL2A_20201231T032141_N0214_R118_T48QYJ_20201231T060419.SAFE",
+    "s2:generation_time": "2020-12-31T06:04:19.000000Z",
+    "s2:datatake_id": "GS2A_20201231T032141_028858_N02.14",
+    "s2:datatake_type": "INS-NOBS",
+    "s2:datastrip_id": "S2A_OPER_MSI_L2A_DS_VGS1_20201231T060419_S20201231T032135_N02.14",
+    "s2:granule_id": "S2A_OPER_MSI_L2A_TL_VGS1_20201231T060419_A028858_T48QYJ_N02.14",
+    "s2:reflectance_conversion_factor": 1.03408088986915,
+    "datetime": "2020-12-31T03:32:14.812000Z",
+    "s2:sequence": "0",
+    "earthsearch:s3_path": "s3://sentinel-cogs/sentinel-s2-l2a-cogs/48/Q/YJ/2020/12/S2A_48QYJ_20201231_0_L2A",
+    "earthsearch:payload_id": "roda-sentinel2/workflow-sentinel2-to-stac/75f604464e7e97e922855b13295c6e97",
+    "earthsearch:boa_offset_applied": false,
+    "processing:software": {
+      "sentinel2-to-stac": "0.1.0"
+    },
+    "updated": "2022-11-06T06:27:07.274Z"
+  },
+  "groups": {
+    "cathai2": {
+      "bbox": [
+        106.96870621667185,
+        20.76693040050307,
+        106.97207939244603,
+        20.770214347751274
+      ],
+      "centres": [
+        {
+          "owner": 48500,
+          "y": 115615,
+          "x": 208982,
+          "longitude": 106.96970621667185,
+          "latitude": 20.769214347751273,
+          "original_plan_index": 706
+        },
+        {
+          "owner": 48500,
+          "y": 115616,
+          "x": 208983,
+          "longitude": 106.97107939244603,
+          "latitude": 20.767930400503072,
+          "original_plan_index": 713
+        }
+      ],
+      "assets": {
+        "red": {
+          "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/Q/YJ/2020/12/S2A_48QYJ_20201231_0_L2A/B04.tif",
+          "source_shape": [
+            10980,
+            10980
+          ],
+          "source_transform": [
+            10.0,
+            0.0,
+            699960.0,
+            0.0,
+            -10.0,
+            2400000.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "source_blocks": [
+            [
+              1024,
+              1024
+            ]
+          ],
+          "crs": "EPSG:32648",
+          "window": [
+            498,
+            10202,
+            37,
+            38
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            704940.0,
+            0.0,
+            -10.0,
+            2297980.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "dtype": "uint16",
+          "nodata": 0.0,
+          "valid_pixel_count": 1406,
+          "total_pixels": 1406,
+          "source_raster_bands": [
+            {
+              "nodata": 0,
+              "data_type": "uint16",
+              "bits_per_sample": 15,
+              "spatial_resolution": 10,
+              "scale": 0.0001,
+              "offset": 0
+            }
+          ],
+          "samples": [
+            {
+              "owner": 48500,
+              "y": 115615,
+              "x": 208982,
+              "local_pixel_row": 12,
+              "local_pixel_col": 11,
+              "subpixel_row": 12.350223068555351,
+              "subpixel_col": 11.268493462950573,
+              "value": 948,
+              "valid_mask": 255,
+              "neighbourhood": [
+                [
+                  879,
+                  984,
+                  959
+                ],
+                [
+                  874,
+                  948,
+                  997
+                ],
+                [
+                  819,
+                  857,
+                  874
+                ]
+              ],
+              "neighbour_masks": [
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ]
+              ]
+            },
+            {
+              "owner": 48500,
+              "y": 115616,
+              "x": 208983,
+              "local_pixel_row": 26,
+              "local_pixel_col": 25,
+              "subpixel_row": 26.39152494329028,
+              "subpixel_col": 25.741422545164824,
+              "value": 760,
+              "valid_mask": 255,
+              "neighbourhood": [
+                [
+                  883,
+                  747,
+                  847
+                ],
+                [
+                  771,
+                  760,
+                  915
+                ],
+                [
+                  694,
+                  742,
+                  836
+                ]
+              ],
+              "neighbour_masks": [
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ]
+              ]
+            }
+          ],
+          "output": {
+            "name": "cathai2-red.tif",
+            "bytes": 3235,
+            "sha256": "12ae2d5dfa23583c5d5a649a9cfe7174388362b289a1a4dc57618411b63ead16"
+          }
+        },
+        "green": {
+          "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/Q/YJ/2020/12/S2A_48QYJ_20201231_0_L2A/B03.tif",
+          "source_shape": [
+            10980,
+            10980
+          ],
+          "source_transform": [
+            10.0,
+            0.0,
+            699960.0,
+            0.0,
+            -10.0,
+            2400000.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "source_blocks": [
+            [
+              1024,
+              1024
+            ]
+          ],
+          "crs": "EPSG:32648",
+          "window": [
+            498,
+            10202,
+            37,
+            38
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            704940.0,
+            0.0,
+            -10.0,
+            2297980.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "dtype": "uint16",
+          "nodata": 0.0,
+          "valid_pixel_count": 1406,
+          "total_pixels": 1406,
+          "source_raster_bands": [
+            {
+              "nodata": 0,
+              "data_type": "uint16",
+              "bits_per_sample": 15,
+              "spatial_resolution": 10,
+              "scale": 0.0001,
+              "offset": 0
+            }
+          ],
+          "samples": [
+            {
+              "owner": 48500,
+              "y": 115615,
+              "x": 208982,
+              "local_pixel_row": 12,
+              "local_pixel_col": 11,
+              "subpixel_row": 12.350223068555351,
+              "subpixel_col": 11.268493462950573,
+              "value": 924,
+              "valid_mask": 255,
+              "neighbourhood": [
+                [
+                  869,
+                  924,
+                  861
+                ],
+                [
+                  832,
+                  924,
+                  899
+                ],
+                [
+                  840,
+                  824,
+                  856
+                ]
+              ],
+              "neighbour_masks": [
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ]
+              ]
+            },
+            {
+              "owner": 48500,
+              "y": 115616,
+              "x": 208983,
+              "local_pixel_row": 26,
+              "local_pixel_col": 25,
+              "subpixel_row": 26.39152494329028,
+              "subpixel_col": 25.741422545164824,
+              "value": 795,
+              "valid_mask": 255,
+              "neighbourhood": [
+                [
+                  762,
+                  748,
+                  771
+                ],
+                [
+                  735,
+                  795,
+                  796
+                ],
+                [
+                  749,
+                  750,
+                  776
+                ]
+              ],
+              "neighbour_masks": [
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ]
+              ]
+            }
+          ],
+          "output": {
+            "name": "cathai2-green.tif",
+            "bytes": 3185,
+            "sha256": "3ab7cb4de8643892426fd11b4b884d8d51e4f5b416193b2cd1be1377a069d46f"
+          }
+        },
+        "blue": {
+          "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/Q/YJ/2020/12/S2A_48QYJ_20201231_0_L2A/B02.tif",
+          "source_shape": [
+            10980,
+            10980
+          ],
+          "source_transform": [
+            10.0,
+            0.0,
+            699960.0,
+            0.0,
+            -10.0,
+            2400000.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "source_blocks": [
+            [
+              1024,
+              1024
+            ]
+          ],
+          "crs": "EPSG:32648",
+          "window": [
+            498,
+            10202,
+            37,
+            38
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            704940.0,
+            0.0,
+            -10.0,
+            2297980.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "dtype": "uint16",
+          "nodata": 0.0,
+          "valid_pixel_count": 1406,
+          "total_pixels": 1406,
+          "source_raster_bands": [
+            {
+              "nodata": 0,
+              "data_type": "uint16",
+              "bits_per_sample": 15,
+              "spatial_resolution": 10,
+              "scale": 0.0001,
+              "offset": 0
+            }
+          ],
+          "samples": [
+            {
+              "owner": 48500,
+              "y": 115615,
+              "x": 208982,
+              "local_pixel_row": 12,
+              "local_pixel_col": 11,
+              "subpixel_row": 12.350223068555351,
+              "subpixel_col": 11.268493462950573,
+              "value": 760,
+              "valid_mask": 255,
+              "neighbourhood": [
+                [
+                  686,
+                  763,
+                  683
+                ],
+                [
+                  605,
+                  760,
+                  766
+                ],
+                [
+                  581,
+                  645,
+                  648
+                ]
+              ],
+              "neighbour_masks": [
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ]
+              ]
+            },
+            {
+              "owner": 48500,
+              "y": 115616,
+              "x": 208983,
+              "local_pixel_row": 26,
+              "local_pixel_col": 25,
+              "subpixel_row": 26.39152494329028,
+              "subpixel_col": 25.741422545164824,
+              "value": 487,
+              "valid_mask": 255,
+              "neighbourhood": [
+                [
+                  476,
+                  421,
+                  543
+                ],
+                [
+                  515,
+                  487,
+                  558
+                ],
+                [
+                  501,
+                  522,
+                  579
+                ]
+              ],
+              "neighbour_masks": [
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ]
+              ]
+            }
+          ],
+          "output": {
+            "name": "cathai2-blue.tif",
+            "bytes": 3171,
+            "sha256": "375e8c4398d910b8ca0181ac2e5926a693dff39939d7c3d8df05efef4c5fa215"
+          }
+        },
+        "nir": {
+          "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/Q/YJ/2020/12/S2A_48QYJ_20201231_0_L2A/B08.tif",
+          "source_shape": [
+            10980,
+            10980
+          ],
+          "source_transform": [
+            10.0,
+            0.0,
+            699960.0,
+            0.0,
+            -10.0,
+            2400000.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "source_blocks": [
+            [
+              1024,
+              1024
+            ]
+          ],
+          "crs": "EPSG:32648",
+          "window": [
+            498,
+            10202,
+            37,
+            38
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            704940.0,
+            0.0,
+            -10.0,
+            2297980.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "dtype": "uint16",
+          "nodata": 0.0,
+          "valid_pixel_count": 1406,
+          "total_pixels": 1406,
+          "source_raster_bands": [
+            {
+              "nodata": 0,
+              "data_type": "uint16",
+              "bits_per_sample": 15,
+              "spatial_resolution": 10,
+              "scale": 0.0001,
+              "offset": 0
+            }
+          ],
+          "samples": [
+            {
+              "owner": 48500,
+              "y": 115615,
+              "x": 208982,
+              "local_pixel_row": 12,
+              "local_pixel_col": 11,
+              "subpixel_row": 12.350223068555351,
+              "subpixel_col": 11.268493462950573,
+              "value": 1019,
+              "valid_mask": 255,
+              "neighbourhood": [
+                [
+                  984,
+                  1124,
+                  1410
+                ],
+                [
+                  780,
+                  1019,
+                  1196
+                ],
+                [
+                  608,
+                  850,
+                  910
+                ]
+              ],
+              "neighbour_masks": [
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ]
+              ]
+            },
+            {
+              "owner": 48500,
+              "y": 115616,
+              "x": 208983,
+              "local_pixel_row": 26,
+              "local_pixel_col": 25,
+              "subpixel_row": 26.39152494329028,
+              "subpixel_col": 25.741422545164824,
+              "value": 1910,
+              "valid_mask": 255,
+              "neighbourhood": [
+                [
+                  2052,
+                  1930,
+                  1532
+                ],
+                [
+                  1512,
+                  1910,
+                  1898
+                ],
+                [
+                  786,
+                  1178,
+                  1382
+                ]
+              ],
+              "neighbour_masks": [
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ]
+              ]
+            }
+          ],
+          "output": {
+            "name": "cathai2-nir.tif",
+            "bytes": 3403,
+            "sha256": "ee89eaf58bbe8a0e23723e2a4b9a2aa7a870023154cb6f34ff840b6bfe09b560"
+          }
+        },
+        "scl": {
+          "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/Q/YJ/2020/12/S2A_48QYJ_20201231_0_L2A/SCL.tif",
+          "source_shape": [
+            5490,
+            5490
+          ],
+          "source_transform": [
+            20.0,
+            0.0,
+            699960.0,
+            0.0,
+            -20.0,
+            2400000.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "source_blocks": [
+            [
+              512,
+              512
+            ]
+          ],
+          "crs": "EPSG:32648",
+          "window": [
+            249,
+            5101,
+            19,
+            19
+          ],
+          "transform": [
+            20.0,
+            0.0,
+            704940.0,
+            0.0,
+            -20.0,
+            2297980.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "dtype": "uint8",
+          "nodata": 0.0,
+          "valid_pixel_count": 361,
+          "total_pixels": 361,
+          "source_raster_bands": [
+            {
+              "nodata": 0,
+              "data_type": "uint8",
+              "spatial_resolution": 20
+            }
+          ],
+          "samples": [
+            {
+              "owner": 48500,
+              "y": 115615,
+              "x": 208982,
+              "local_pixel_row": 6,
+              "local_pixel_col": 5,
+              "subpixel_row": 6.175111534277676,
+              "subpixel_col": 5.634246731475287,
+              "value": 2,
+              "valid_mask": 255,
+              "neighbourhood": [
+                [
+                  2,
+                  2,
+                  2
+                ],
+                [
+                  6,
+                  2,
+                  2
+                ],
+                [
+                  6,
+                  2,
+                  2
+                ]
+              ],
+              "neighbour_masks": [
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ]
+              ]
+            },
+            {
+              "owner": 48500,
+              "y": 115616,
+              "x": 208983,
+              "local_pixel_row": 13,
+              "local_pixel_col": 12,
+              "subpixel_row": 13.19576247164514,
+              "subpixel_col": 12.870711272582412,
+              "value": 6,
+              "valid_mask": 255,
+              "neighbourhood": [
+                [
+                  6,
+                  6,
+                  7
+                ],
+                [
+                  6,
+                  6,
+                  6
+                ],
+                [
+                  6,
+                  6,
+                  6
+                ]
+              ],
+              "neighbour_masks": [
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ]
+              ]
+            }
+          ],
+          "output": {
+            "name": "cathai2-scl.tif",
+            "bytes": 1211,
+            "sha256": "1efd7329e1a4a7ae9148f05094a63745c24cfe561a3ee93ace47e88d3765e4d3"
+          }
+        }
+      },
+      "scene_classification_counts": {
+        "2": 42,
+        "4": 104,
+        "5": 8,
+        "6": 179,
+        "7": 28
+      }
+    }
+  },
+  "outputs": [
+    {
+      "name": "cathai2-blue-source-mask.tif",
+      "bytes": 1164,
+      "sha256": "b9bc46b283e7f5c4220a345a8433dbdd42e1ed95a7264e2ca298dc17c2c6c898"
+    },
+    {
+      "name": "cathai2-blue.tif",
+      "bytes": 3171,
+      "sha256": "375e8c4398d910b8ca0181ac2e5926a693dff39939d7c3d8df05efef4c5fa215"
+    },
+    {
+      "name": "cathai2-green-source-mask.tif",
+      "bytes": 1164,
+      "sha256": "ff44d7b0903f78173b576956876ecc77cc14c5c94c2b648af5b56740224616bc"
+    },
+    {
+      "name": "cathai2-green.tif",
+      "bytes": 3185,
+      "sha256": "3ab7cb4de8643892426fd11b4b884d8d51e4f5b416193b2cd1be1377a069d46f"
+    },
+    {
+      "name": "cathai2-nir-source-mask.tif",
+      "bytes": 1164,
+      "sha256": "6bec12f2443c576f80f8de3af95666e65016c73b6d18e696a028bcbd5377ad7c"
+    },
+    {
+      "name": "cathai2-nir.tif",
+      "bytes": 3403,
+      "sha256": "ee89eaf58bbe8a0e23723e2a4b9a2aa7a870023154cb6f34ff840b6bfe09b560"
+    },
+    {
+      "name": "cathai2-red-source-mask.tif",
+      "bytes": 1164,
+      "sha256": "d152fb0dac438811ed6c30ed9e8e7ff37295225d47c6fae80f93c221c521bb78"
+    },
+    {
+      "name": "cathai2-red.tif",
+      "bytes": 3235,
+      "sha256": "12ae2d5dfa23583c5d5a649a9cfe7174388362b289a1a4dc57618411b63ead16"
+    },
+    {
+      "name": "cathai2-scl-source-mask.tif",
+      "bytes": 1158,
+      "sha256": "b550dfcddd3c7bb7fa1b55c613e54b14e9530bc84de76d4d10ca21e19cd88246"
+    },
+    {
+      "name": "cathai2-scl.tif",
+      "bytes": 1211,
+      "sha256": "1efd7329e1a4a7ae9148f05094a63745c24cfe561a3ee93ace47e88d3765e4d3"
+    }
+  ],
+  "display": {
+    "channels": [
+      "RGB",
+      "NIR-red-green"
+    ],
+    "stretch": "Fixed DN0..3000 to0..255, display only; no thresholds/classification/resampling"
+  },
+  "limits": [
+    "Raw native integer windows only; full remote COG objects not downloaded or whole-file authenticated.",
+    "Native10m reflectance and native20m SCL kept separately; SCL is a model mask, not independent water truth.",
+    "Original centres unchanged. No fitted shift, shoreline, cell classification, annual persistence, legal authority or hold clearance.",
+    "Range reads use existing GDAL with finite HTTP timeouts/cache; no aggregate network-byte enforcement claim."
+  ]
+}
