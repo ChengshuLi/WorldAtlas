@@ -1,0 +1,529 @@
+{
+  "version": 1,
+  "reviewer": "/root/next1005_review_cont",
+  "disposition": "PASS completed three-whole-original physical observation with limits; not native qualification or acceptance",
+  "scope": "Read actual JSON/code/receipts and original reviewed input bytes; structural branch, witness and custody checks only. No predicates, imports, source/native/GSHHG producer, network or replay.",
+  "actual_result": {
+    "artifact_name": "whole-target-support.json",
+    "bytes": 1230468,
+    "sha256": "dd0f871ade7d4f1802524f4ff7bc52312766c615ebe37f77dba7d21fdac53604"
+  },
+  "actual_receipt": {
+    "artifact_name": "execution-receipt.json",
+    "bytes": 123763,
+    "sha256": "fb7488f1c3e16666897abbf4e1d6bfcd9657efa6bdfd758b69063a0896b35ee4"
+  },
+  "actual_preparation": {
+    "artifact_name": "preparation.json",
+    "bytes": 546,
+    "sha256": "1295bdcec68805d0f78aed11fe8cc11ce466f3d7725ecaf047893be7055723d5"
+  },
+  "prior_input_reviews": [
+    {
+      "artifact_name": "independent-combined-input-review.json",
+      "bytes": 7272,
+      "sha256": "e976d42a3543c1e3a9b7c23137b56bbc9e36856a841c242da4cff6309a8bf245"
+    },
+    {
+      "artifact_name": "independent-final-pin-config-review.json",
+      "bytes": 3065,
+      "sha256": "124bf8f3c7788f0a2dab833b871ffadd435670f28a1d6bb8e9831e5e913d2e95"
+    }
+  ],
+  "preexecution_expectations": {
+    "artifact_name": "actual-result-review-expectations.json",
+    "bytes": 5094,
+    "sha256": "397c588893e7778a292ba78ccc437e176119380e0bfd029c72252d83fc28dc81"
+  },
+  "operating_evidence": [
+    {
+      "artifact_name": "physical-stdout-001.log",
+      "bytes": 186268,
+      "sha256": "e5620fd101714c0d006b9e3a2edb5519cb61376e38f6df47ca52b934e7ecfd5d"
+    },
+    {
+      "artifact_name": "physical-time-001.log",
+      "bytes": 777,
+      "sha256": "618fd471916cb87e3d0a334977bb4014bf105510cc21418e2773660c4ba02297"
+    },
+    {
+      "artifact_name": "fresh-admission-001.json",
+      "bytes": 571,
+      "sha256": "ceacaca6398daf085fec198c3f6a1e0c47e9f1afa8cdfd372dd2c68f44d48335"
+    },
+    {
+      "artifact_name": "executing-code-closure.json",
+      "bytes": 3944,
+      "sha256": "b446ccf91537eb7a4b1791591a5333489db51e72d5bb1bf701379128a7c9f5b7"
+    }
+  ],
+  "targets": [
+    {
+      "target": "gb:IDN:ADM2:22746128B78411617556279",
+      "queries": 137,
+      "checked": 137,
+      "unknown": 0,
+      "periodic_offsets": [
+        0
+      ],
+      "branches": {
+        "disjoint-after-explicit-predicate": 81,
+        "complete-operation-pointset": 56
+      },
+      "operation_witness_types": {
+        "MultiPolygon": 21,
+        "Polygon": 35
+      },
+      "issues": [],
+      "support_structural_observations": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "nonempty": true,
+          "sha256": "67d19c282fd708a4638dfa4ff4608c9c209f4562bbc0e86ec834cfa57ad18a08"
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "nonempty": false,
+          "sha256": "8c9d0294a6a29b13b238c387607c61c4aa50bb15300089c01846536d010c4455"
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "nonempty": true,
+          "sha256": "9c2a28aaa9a7227b53a5b891c50216b1a5d27459af47fdbf71e8c80b7d03e185"
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "nonempty": false,
+          "sha256": "36b71e85a763d7806f1dc3a0e281a440938aea7799ac7e989f532ff032c61b02"
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "nonempty": false,
+          "sha256": "36b71e85a763d7806f1dc3a0e281a440938aea7799ac7e989f532ff032c61b02"
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "nonempty": false,
+          "sha256": "8c9d0294a6a29b13b238c387607c61c4aa50bb15300089c01846536d010c4455"
+        }
+      }
+    },
+    {
+      "target": "gb:IDN:ADM2:22746128B48169474795911",
+      "queries": 112,
+      "checked": 112,
+      "unknown": 0,
+      "periodic_offsets": [
+        0
+      ],
+      "branches": {
+        "complete-operation-pointset": 3,
+        "disjoint-after-explicit-predicate": 108,
+        "complete-source-record-reconstruction": 1
+      },
+      "operation_witness_types": {
+        "MultiPolygon": 1,
+        "Polygon": 2
+      },
+      "issues": [],
+      "support_structural_observations": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "nonempty": true,
+          "sha256": "4481fb960a073d865d1a8a195f67f04f07f75f02822123dcd353570e45499f81"
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "nonempty": false,
+          "sha256": "8c9d0294a6a29b13b238c387607c61c4aa50bb15300089c01846536d010c4455"
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "nonempty": true,
+          "sha256": "1701c5e3ba941231e4f226b5e5cbd368442e82562453e4cba7a47ebb9165d08c"
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "nonempty": false,
+          "sha256": "36b71e85a763d7806f1dc3a0e281a440938aea7799ac7e989f532ff032c61b02"
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "nonempty": false,
+          "sha256": "36b71e85a763d7806f1dc3a0e281a440938aea7799ac7e989f532ff032c61b02"
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "nonempty": false,
+          "sha256": "8c9d0294a6a29b13b238c387607c61c4aa50bb15300089c01846536d010c4455"
+        }
+      }
+    },
+    {
+      "target": "gb:IDN:ADM2:22746128B78864950196660",
+      "queries": 96,
+      "checked": 96,
+      "unknown": 0,
+      "periodic_offsets": [
+        0
+      ],
+      "branches": {
+        "disjoint-after-explicit-predicate": 32,
+        "complete-operation-pointset": 62,
+        "complete-source-record-reconstruction": 2
+      },
+      "operation_witness_types": {
+        "MultiPolygon": 14,
+        "Polygon": 48
+      },
+      "issues": [],
+      "support_structural_observations": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "nonempty": true,
+          "sha256": "2c8a21185e60567c895ca623181728f168fbd00778810f6ce77c686d5741dbd5"
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "nonempty": false,
+          "sha256": "8c9d0294a6a29b13b238c387607c61c4aa50bb15300089c01846536d010c4455"
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "nonempty": true,
+          "sha256": "017a999d6cf9340c9778399c35245b10591082352301e84c5248e00e0c3f2e4b"
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "nonempty": false,
+          "sha256": "36b71e85a763d7806f1dc3a0e281a440938aea7799ac7e989f532ff032c61b02"
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "nonempty": false,
+          "sha256": "36b71e85a763d7806f1dc3a0e281a440938aea7799ac7e989f532ff032c61b02"
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "nonempty": false,
+          "sha256": "8c9d0294a6a29b13b238c387607c61c4aa50bb15300089c01846536d010c4455"
+        }
+      }
+    }
+  ],
+  "aggregate_query_branch_counts": {
+    "disjoint-after-explicit-predicate": 221,
+    "complete-operation-pointset": 121,
+    "complete-source-record-reconstruction": 3
+  },
+  "operating": {
+    "reported_process_exit": 0,
+    "exit_evidence": "Main direct completed-execution report plus complete actual publication receipt/stdout, no reviewer execution",
+    "producer_elapsed_seconds": 4.962046958971769,
+    "python_receipt_elapsed_seconds": 4.985633125063032,
+    "node_phase_elapsed_seconds": 5.283632542,
+    "external_seconds": 5.72,
+    "time_l_peak_rss_bytes": 319668224,
+    "fresh_child_phase_rss_bytes": 671088640,
+    "raw_maximum_rss_kib_field": 319668224,
+    "raw_maximum_rss_field_limit": "Producer field name says kib but Darwin ru_maxrss reports bytes; external time-l and receipt agree319668224 bytes. No extra1024 scaling applied.",
+    "rss_deadline_limit": "Checks occur at code boundaries; not a live aggregate process-tree supervisor."
+  },
+  "checks_passed": 68,
+  "checks": [
+    {
+      "check": "same reviewed final config and original stage",
+      "pass": true
+    },
+    {
+      "check": "actual whole raw output bytes and hash",
+      "pass": true
+    },
+    {
+      "check": "publication output binding execution-receipt.json",
+      "pass": true
+    },
+    {
+      "check": "publication output binding whole-target-support.json",
+      "pass": true
+    },
+    {
+      "check": "complete physical publication receipt",
+      "pass": true
+    },
+    {
+      "check": "exact output receipt binding",
+      "pass": true
+    },
+    {
+      "check": "exact original25 consumed scientific pins",
+      "pass": true
+    },
+    {
+      "check": "executed closure body coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs",
+      "pass": true
+    },
+    {
+      "check": "executed closure body coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "pass": true
+    },
+    {
+      "check": "executed closure body package.json",
+      "pass": true
+    },
+    {
+      "check": "executed closure body scripts/check-effective-geographic-regression.mjs",
+      "pass": true
+    },
+    {
+      "check": "executed closure body scripts/delivery-handoff-advance.mjs",
+      "pass": true
+    },
+    {
+      "check": "executed closure body scripts/evidence-quality.mjs",
+      "pass": true
+    },
+    {
+      "check": "executed closure body scripts/geography-prefetch.mjs",
+      "pass": true
+    },
+    {
+      "check": "executed closure body scripts/native-ownership/native-preparation-guards.mjs",
+      "pass": true
+    },
+    {
+      "check": "executed closure body scripts/package-inputs.mjs",
+      "pass": true
+    },
+    {
+      "check": "executed closure body scripts/prepare-delivery-handoff.mjs",
+      "pass": true
+    },
+    {
+      "check": "executed closure body src/native-grid.js",
+      "pass": true
+    },
+    {
+      "check": "executed closure body src/ownership-codec.js",
+      "pass": true
+    },
+    {
+      "check": "executed closure body scripts/qualify-source-cohort.py",
+      "pass": true
+    },
+    {
+      "check": "exact accepted2347 reference execution closure",
+      "pass": true
+    },
+    {
+      "check": "preparation stdout program config entry exact",
+      "pass": true
+    },
+    {
+      "check": "fresh child phase config program and allowance exact",
+      "pass": true
+    },
+    {
+      "check": "runtime388 consumed exactly installed descriptors",
+      "pass": true
+    },
+    {
+      "check": "fresh ordinary preflight separate child no concurrent reservation",
+      "pass": true
+    },
+    {
+      "check": "stdout runtime independently same descriptors",
+      "pass": true
+    },
+    {
+      "check": "actual measured lifetime peak under fresh child request",
+      "pass": true
+    },
+    {
+      "check": "actual finite operation and publication elapsed within120 seconds",
+      "pass": true
+    },
+    {
+      "check": "18 complete distinct metadata fragment receipts",
+      "pass": true
+    },
+    {
+      "check": "whole encoded decoded fragment receipt sources-000.jsonl.gz",
+      "pass": true
+    },
+    {
+      "check": "whole encoded decoded fragment receipt sources-001.jsonl.gz",
+      "pass": true
+    },
+    {
+      "check": "whole encoded decoded fragment receipt sources-002.jsonl.gz",
+      "pass": true
+    },
+    {
+      "check": "whole encoded decoded fragment receipt sources-003.jsonl.gz",
+      "pass": true
+    },
+    {
+      "check": "whole encoded decoded fragment receipt sources-004.jsonl.gz",
+      "pass": true
+    },
+    {
+      "check": "whole encoded decoded fragment receipt sources-005.jsonl.gz",
+      "pass": true
+    },
+    {
+      "check": "whole encoded decoded fragment receipt sources-006.jsonl.gz",
+      "pass": true
+    },
+    {
+      "check": "whole encoded decoded fragment receipt sources-007.jsonl.gz",
+      "pass": true
+    },
+    {
+      "check": "whole encoded decoded fragment receipt sources-008.jsonl.gz",
+      "pass": true
+    },
+    {
+      "check": "whole encoded decoded fragment receipt sources-009.jsonl.gz",
+      "pass": true
+    },
+    {
+      "check": "whole encoded decoded fragment receipt sources-010.jsonl.gz",
+      "pass": true
+    },
+    {
+      "check": "whole encoded decoded fragment receipt sources-011.jsonl.gz",
+      "pass": true
+    },
+    {
+      "check": "whole encoded decoded fragment receipt sources-012.jsonl.gz",
+      "pass": true
+    },
+    {
+      "check": "whole encoded decoded fragment receipt sources-013.jsonl.gz",
+      "pass": true
+    },
+    {
+      "check": "whole encoded decoded fragment receipt sources-014.jsonl.gz",
+      "pass": true
+    },
+    {
+      "check": "whole encoded decoded fragment receipt sources-015.jsonl.gz",
+      "pass": true
+    },
+    {
+      "check": "whole encoded decoded fragment receipt sources-016.jsonl.gz",
+      "pass": true
+    },
+    {
+      "check": "whole encoded decoded fragment receipt sources-017.jsonl.gz",
+      "pass": true
+    },
+    {
+      "check": "whole encoded decoded fragment receipt native-00.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "whole encoded decoded fragment receipt native-01.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "whole encoded decoded fragment receipt native-02.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "complete95809336 native member and188612 metadata records retained",
+      "pass": true
+    },
+    {
+      "check": "exact three original target identities and order",
+      "pass": true
+    },
+    {
+      "check": "gb:IDN:ADM2:22746128B78411617556279 exact distinct query roster",
+      "pass": true
+    },
+    {
+      "check": "gb:IDN:ADM2:22746128B78411617556279 all checked branches exact precedence with full nonempty operation witnesses",
+      "pass": true
+    },
+    {
+      "check": "gb:IDN:ADM2:22746128B78411617556279 all support fields and no issue",
+      "pass": true
+    },
+    {
+      "check": "gb:IDN:ADM2:22746128B78411617556279 positive land and exterior retained water empty",
+      "pass": true
+    },
+    {
+      "check": "gb:IDN:ADM2:22746128B78411617556279 actual reconstruction contradiction and hierarchy empty",
+      "pass": true
+    },
+    {
+      "check": "gb:IDN:ADM2:22746128B48169474795911 exact distinct query roster",
+      "pass": true
+    },
+    {
+      "check": "gb:IDN:ADM2:22746128B48169474795911 all checked branches exact precedence with full nonempty operation witnesses",
+      "pass": true
+    },
+    {
+      "check": "gb:IDN:ADM2:22746128B48169474795911 all support fields and no issue",
+      "pass": true
+    },
+    {
+      "check": "gb:IDN:ADM2:22746128B48169474795911 positive land and exterior retained water empty",
+      "pass": true
+    },
+    {
+      "check": "gb:IDN:ADM2:22746128B48169474795911 actual reconstruction contradiction and hierarchy empty",
+      "pass": true
+    },
+    {
+      "check": "gb:IDN:ADM2:22746128B78864950196660 exact distinct query roster",
+      "pass": true
+    },
+    {
+      "check": "gb:IDN:ADM2:22746128B78864950196660 all checked branches exact precedence with full nonempty operation witnesses",
+      "pass": true
+    },
+    {
+      "check": "gb:IDN:ADM2:22746128B78864950196660 all support fields and no issue",
+      "pass": true
+    },
+    {
+      "check": "gb:IDN:ADM2:22746128B78864950196660 positive land and exterior retained water empty",
+      "pass": true
+    },
+    {
+      "check": "gb:IDN:ADM2:22746128B78864950196660 actual reconstruction contradiction and hierarchy empty",
+      "pass": true
+    },
+    {
+      "check": "all345 checked queries retained without unknown or semantic relabel",
+      "pass": true
+    }
+  ],
+  "consequential_limits": [
+    "All three whole original targets have actual nonempty mapped land AND nonempty exterior. Zero issues does not establish that all11234 requested centres lie on mapped land or avoid exterior.",
+    "Original7904 repair/land plus3330 physical/source-relative labels remain unchanged requests. No relative class promotion, native clearance or positive-centre partition was executed by this review.",
+    "All178 North Maluku cross-parent Banggai Laut observations, other-country/source/ring/water holds and original source2020/heterogeneous physical observation dates remain retained; no whole-parent or legal-border certificate.",
+    "345 selected periodic-frame0 query relations are checked; complete188612 metadata/native custody authentication is not188612 geometry predicates.",
+    "Whole-source reconstruction/hierarchy witnesses are retained as actual output; no native constructor, source qualification, component uniqueness, current owner-zero, selected conservation, final head or integration acceptance follows."
+  ],
+  "qualified_cells": 0,
+  "accepted_cells": 0,
+  "review_operating": {
+    "elapsed_seconds": 0.06176475,
+    "peak_rss_bytes": 25346048,
+    "science_replay": false,
+    "network": false,
+    "git_mutations": false,
+    "reservation_bytes": 0
+  },
+  "publication_projection": {
+    "original_review_bytes": 17774,
+    "original_review_sha256": "43c9aefa938163f3ec88a66942b6badaebeae30f559e109b37891f1f0f477200",
+    "only_transformation": "Local artifact path fields replaced with logical basenames; scientific and operating checks, raw body hashes, review disposition and limits retained."
+  }
+}

@@ -1,0 +1,11 @@
+# Actual three-target whole physical result
+
+The accepted2347 physical entry/helper completed one call for the complete original/current selected Banggai Laut, Banggai and Maluku Tenggara Barat targets. The original stage is `33652df79381b6164334c0c72873666d999cd3a5`. All 25 complete scientific input pins and 388 installed runtime file identities were authenticated by the existing entry. Actual CLI exit0; outer method5.283632542 seconds/external5.72 seconds; time-l peak319,668,224 bytes below the fresh640 MiB child allowance.
+
+`whole-target-support.json` is the exact complete actual scientific body: 1,230,468 bytes, SHA256 `dd0f871ade7d4f1802524f4ff7bc52312766c615ebe37f77dba7d21fdac53604`. All target support geometry, exterior/water, query relations and reconstruction/contradictory/hierarchy witnesses remain intact. No native-centre qualification, current-owner-zero, legal certificate or accepted credit is inferred. All original labels and holds remain until actual later stock proof and review.
+
+`public-execution-observation.json` preserves every scientific input/output pin and observed operating result. It omits 388 private installed-runtime path records and records the exact whole original receipt hash/bytes. The original full receipt/config/runtime inventory remain unchanged locally. This derivative is not the original execution receipt or a remote auto-resume artifact. `original-publication-binding.json` retains the genuine original config and output hashes; `scientific-phase-config.json` is only the complete scientific phase object, excluding private outer runtime paths.
+
+Independent actual-result review passed with limits (68 checks), original review SHA256 `43c9aefa938163f3ec88a66942b6badaebeae30f559e109b37891f1f0f477200`. All 345 source queries are checked: 221 disjoint, 121 complete operation and three source coverage. All three targets retain nonempty mapped land and nonempty exterior, with empty water/reconstruction/contradiction/hierarchy operands. These observations do not prove that every requested centre has mapped-land support. Source-relative labels remain held and native qualification remains unperformed.
+
+The raw body's `maximum_rss_kib` field carries Darwin bytes despite its name; the original value is retained unchanged and reconciled against genuine receipt/time-l observations. Do not multiply it by 1,024.
