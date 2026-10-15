@@ -1,0 +1,131 @@
+{
+  "status": "substantive prepublication input review passed; actual publication and physical admission pending",
+  "reviewer": "/root/vn235_physical_input_review",
+  "preparation_author": "/root/vn235_missing_physical_inputs",
+  "record_basis": "Preserves completed independent read-only checks; no checks rerun while writing this record.",
+  "findings": [],
+  "stage": {
+    "local_file": "whole-target-stage-inputs.json",
+    "bytes": 280465,
+    "sha256": "307048eecf7b7dd7540c8fccf372c9a936fad23f02170afa28eadc81f7e25b2a",
+    "git_blob_oid": "172fc8bb9c9934eb642f80f7bd138a43411a790f",
+    "actual_commit": null,
+    "publication_status": "not assigned or predicted in this prepublication review"
+  },
+  "original_cell_source": {
+    "commit": "a9c2d4122eed9d08cd3f213d3f5157039c8823bb",
+    "path": "coordination/engineering/vietnam-current-cell-20261014/evidence/source-qualification/cells.json.gz",
+    "git_blob_oid": "48db686a6726c3dc719a722f0260b81e159b988d",
+    "bytes": 232506,
+    "sha256": "a85502406c50a52f012802a42f0e7a37480703ebe876aeaf212cfe96bfd65a2b",
+    "decoded_bytes": 19639757,
+    "decoded_sha256": "e079e92f47b95039bf29d639af7c5eb55e8616e6907f46667a60b4656b8944a5",
+    "source_rows": 40525,
+    "selected_complete_owner_rows": 235,
+    "repair_rows": 235,
+    "separate_physical_context_rows": 0,
+    "empty_direct_flag_rows": 0,
+    "countries": {"CHN": 212, "KHM": 23},
+    "sorted_compact_owner_x_y_json_sha256": "d43b22eb34a828c641ae73d4fb519d088c0bb3edac219fe06abcf7750dcf9640"
+  },
+  "owner_counts": [
+    {"owner": 48495, "name": "Tra Linh", "rows": 1},
+    {"owner": 48249, "name": "Thach An", "rows": 6},
+    {"owner": 48382, "name": "Trung Khanh", "rows": 6},
+    {"owner": 48503, "name": "Ha Quang", "rows": 14},
+    {"owner": 48231, "name": "Loc Binh", "rows": 22},
+    {"owner": 48575, "name": "Tan Chau", "rows": 23},
+    {"owner": 48634, "name": "Bao Lac", "rows": 27},
+    {"owner": 48410, "name": "Phuc Hoa", "rows": 33},
+    {"owner": 48473, "name": "Trang Dinh", "rows": 51},
+    {"owner": 48254, "name": "Meo Vac", "rows": 52}
+  ],
+  "whole_geometry_sources": {
+    "consumed_family_commit": "9431af7bce2729274500f6733843ebd5b1315117",
+    "consumed_family_path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-VNM-ADM2-000.bin.gz",
+    "consumed_family_features": 708,
+    "consumed_family_sha256": "8fa769599000ab536b18b4a9d18c71fe0fecbe134d4443e36e6b2797b41273a8",
+    "canonical_selected_commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+    "canonical_selected_paths": ["data/geography/part-27.json", "data/geography/part-28.json"],
+    "exact_whole_consumed_matches": 10,
+    "exact_whole_selected_matches": 10,
+    "cutoff_or_new_border": false
+  },
+  "completed_checks": {
+    "235_unique_exact_original_keys": true,
+    "235_original_literal_objects_and_byte_spans_exact": true,
+    "ten_canonical_stage_bindings_exact": true,
+    "ten_owner_lineage_reverse_roster_joins_exact": true,
+    "ten_original_full_target_and_direct931_partitions_exact": true,
+    "ten_custodian_parent_rows_and_chronology_exact": true,
+    "actual_hash_bound_workbook_codes_names_parents_read": true,
+    "original_adverse_relative_water_country_hold_context_retained": true,
+    "all_four_complete_retained_physical_bodies_read": true,
+    "24_nonstage_descriptors_equal_next351": true,
+    "24_immutable_paths_oids_types_sizes_resolve": true,
+    "388_runtime_inventory_exact_reuse": true,
+    "accepted2347_helper_and_entry_body_hashes_exact": true,
+    "all13_author_checkpoint_artifact_hashes_exact_when_reviewed": true
+  },
+  "custodian_workbook": {
+    "path": "downloads/custodian-population-VNM_AdminBoundaries_TabularData.xlsx",
+    "bytes": 63347,
+    "sha256": "dac10333af8476d70ad63e0e7e72c562744b02fd853eaa5a73de4dff5486225b",
+    "DATE": "2019-10-01T00:00:00",
+    "VALIDON": "2020-01-03T00:00:00",
+    "VALIDTO": null,
+    "scope": "2023 workbook/catalogue chronology and original ADM2 2020/ADM1 2008 represented-year claims remain distinct; blank VALIDTO does not prove present applicability."
+  },
+  "retained_physical_nonduplication": {
+    "complete_bank_record_counts": [116, 1, 5, 23],
+    "unique_completed_targets": 145,
+    "selected_target_overlap": 0,
+    "completed957_rerun": false
+  },
+  "accepted_method": {
+    "commit": "2347ff09c3e07fb196422668c6b54e9504e1d860",
+    "helper_path": "scripts/qualify-source-cohort.py",
+    "helper_sha256": "58ef81739b264085b2997be7baa3df03ba6bb673f91a160176efd79b71fec081",
+    "entry_path": "scripts/prepare-delivery-handoff.mjs",
+    "entry_sha256": "f91c2919d09d4bcae8a0e7c07100ab699f7ea01144acc99ca181c9c8f0c3d458",
+    "prospective_unique_pins": 25,
+    "unchanged_nonstage_pins": 24,
+    "reused_runtime_files": 388,
+    "runtime_rehashed_or_probed": false
+  },
+  "prospective_accounting": {
+    "encoded_input_bytes": 86206502,
+    "decoded_input_bytes": 219157322,
+    "logical_input_bytes": 305363824,
+    "runtime_file_bytes": 35120510,
+    "python_executable_bytes": 18058560,
+    "output_reserve_bytes": 33554432,
+    "listed_inventory_bytes": 392097326,
+    "metadata_records": 188612,
+    "complete_native_member_bytes": 95809336,
+    "processing_phase_and_rss_bytes": 671088640,
+    "preparation_phase_and_rss_bytes": 536870912,
+    "fresh_resource_admission": false,
+    "demonstrated_geos_peak": false
+  },
+  "remaining_before_call": [
+    "Root publishes the exact reviewed stage and supplies its actual immutable commit; no future commit pin is asserted.",
+    "Focused confirmation binds descriptor/config to that actual commit and exact stage bytes.",
+    "Fresh normal finite resource/runtime admission through the accepted shared entry."
+  ],
+  "actual_result_review_required": [
+    "Complete actual body and accepted execution/preparation receipt tied to the published stage/config.",
+    "Whole-member query selection and tested source relations, positive requested-class and complete land/water/exterior witnesses.",
+    "L1-L4 hierarchy, adverse reconstruction/issues/contradiction and residual/exterior support preserved."
+  ],
+  "scientific_executions": 0,
+  "qualification_or_assignment_approved": false,
+  "territorial_clearance": false,
+  "limits": [
+    "Physical input readiness closes no current physical-result gap until a genuine result is acquired and reviewed.",
+    "Positive physical evidence cannot reconcile CHN212/KHM23 foreign-reference contacts or authorize ownership assignment.",
+    "Applicable dated territorial/local-course/scope controls tied to the original centres remain independently required.",
+    "No new inventory, executable wrapper, native/GEOS/GSHHG operation, fetch or registry mutation occurred in this review.",
+    "These two reviewer files are later additions outside the author's original13-artifact checkpoint roster."
+  ]
+}

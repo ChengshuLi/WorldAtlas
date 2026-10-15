@@ -1,0 +1,84 @@
+{
+  "status": "data-only preparation complete; independent review and actual immutable stage publication pending",
+  "targets": 10,
+  "original_cells": 235,
+  "countries": {
+    "CHN": 212,
+    "KHM": 23
+  },
+  "stage_bytes": 280465,
+  "stage_sha256": "307048eecf7b7dd7540c8fccf372c9a936fad23f02170afa28eadc81f7e25b2a",
+  "actual_stage_commit": "UNASSIGNED",
+  "new_whole_stage_records": 10,
+  "reused_nonstage_physical_pins": 24,
+  "reused_runtime_files": 388,
+  "new_or_repeated_scientific_executions": 0,
+  "new_qualified": 0,
+  "files": [
+    {
+      "file": "README.md",
+      "bytes": 5226,
+      "sha256": "817be128755a9747b0e2f15c10ba06266acd165495bc53f6745c3899d29b9e4a"
+    },
+    {
+      "file": "finite-input-accounting.json",
+      "bytes": 3483,
+      "sha256": "1b28d9468b34113d468cce515d2d53a72b77021f13065b98fc57a29682d7d046"
+    },
+    {
+      "file": "original-cell-partition.json",
+      "bytes": 75789,
+      "sha256": "2230d09ca4298017d62f07ca7cb2a7b3728b1fae33b01f65fe4a17337e07b564"
+    },
+    {
+      "file": "original-owner-cells.literal.json",
+      "bytes": 110695,
+      "sha256": "70ee62afb3fce6d82dbe4b61d3267b1c729a74cc739b7a44651dfafdab90f950"
+    },
+    {
+      "file": "preparation-checks.json",
+      "bytes": 764,
+      "sha256": "e5bd24ed1324c8a3b9be8694f2e4bc14f8c3361c05366433a2b0e1cb65b75e79"
+    },
+    {
+      "file": "proposed-config-unassigned.json",
+      "bytes": 140254,
+      "sha256": "3a739da5214866c36db01a36bb4591351ef25f9b08460083c3b6db0f7830dc2f"
+    },
+    {
+      "file": "retained-pin-object-checks.json",
+      "bytes": 9473,
+      "sha256": "bddb6e2e67aa0ab346ecb1118820841783f97985cecf3d74373044d2587bc6f4"
+    },
+    {
+      "file": "retained-result-nonduplication.json",
+      "bytes": 2392,
+      "sha256": "119360a4b7196d1339039acf12fc595c325faf9203a80d3de9597b07baf4f0f8"
+    },
+    {
+      "file": "reused-input-bindings.json",
+      "bytes": 13521,
+      "sha256": "1a58135e907667f6dda9350ecf5daa811af270a628b44fa09127754d99a5caa2"
+    },
+    {
+      "file": "scientific-review-prerequisites.json",
+      "bytes": 5161,
+      "sha256": "ad658600baa3bedb7efa488b15673db73ee401aabe26f3b52659827eae08a0d9"
+    },
+    {
+      "file": "stage-publication-pending.json",
+      "bytes": 959,
+      "sha256": "8ca8a195ffb7d0ac9e0d27f1f3b99372de58a1b8091df2fd10ec55d1b625a540"
+    },
+    {
+      "file": "whole-owner-source-country-context.json",
+      "bytes": 152123,
+      "sha256": "a4d98e1fcd1a19eedfadf8ea51f83b7cadf77c86fef81a7a99c3f5bb832e3a45"
+    },
+    {
+      "file": "whole-target-stage-inputs.json",
+      "bytes": 280465,
+      "sha256": "307048eecf7b7dd7540c8fccf372c9a936fad23f02170afa28eadc81f7e25b2a"
+    }
+  ]
+}

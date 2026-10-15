@@ -1,0 +1,17 @@
+{
+  "status": "data-only; stage is not committed or executable",
+  "actual_source_stage_immutable_commit": "UNASSIGNED",
+  "proposed_stage_pin": {
+    "commit": "UNASSIGNED",
+    "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/missing235/original-stage-inputs.json",
+    "git_blob_oid": "172fc8bb9c9934eb642f80f7bd138a43411a790f",
+    "bytes": 280465,
+    "sha256": "307048eecf7b7dd7540c8fccf372c9a936fad23f02170afa28eadc81f7e25b2a"
+  },
+  "local_stage": {
+    "path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/repair-package/reference1588/missing235-physical-preparation/whole-target-stage-inputs.json",
+    "bytes": 280465,
+    "sha256": "307048eecf7b7dd7540c8fccf372c9a936fad23f02170afa28eadc81f7e25b2a"
+  },
+  "action": "Root must commit these exact reviewed stage bytes, replace UNASSIGNED with the actual commit and verify its commit:path bytes before any call. No future commit is asserted."
+}

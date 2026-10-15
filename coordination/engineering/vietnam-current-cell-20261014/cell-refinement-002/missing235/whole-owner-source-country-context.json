@@ -1,0 +1,4831 @@
+{
+  "status": "all original identity/adverse/relative/date context retained; no territorial inference",
+  "targets": [
+    {
+      "owner_partition": {
+        "owner": 48495,
+        "name": "Tra Linh",
+        "target": "gb:VNM:ADM2:81297802B5716614329371",
+        "country": "CHN",
+        "direct_cells": 1,
+        "complete_original_repair": 1,
+        "complete_original_physical_context": 0,
+        "physical_status": "no_acquired_whole_target_physical",
+        "physical_binding": null,
+        "actual_query_count": null,
+        "issues": null,
+        "actual_source_ids": [
+          "gb:VNM:ADM1:63759600B11108179203280",
+          "gb:VNM:ADM2:81297802B5716614329371"
+        ],
+        "old_ADM1_observed": 1,
+        "old_ADM1_absent": 0,
+        "exact_native_keys": [
+          [
+            48495,
+            208469,
+            113934
+          ]
+        ],
+        "missing_positive_fact": "A primary dated applicable boundary/territorial or maritime-scope control, tied to these exact native centres, that reconciles their recorded foreign reference-country observation; source identity/parent and positive physical land do not establish country side.",
+        "additional_missing_positive_fact": "Actual complete original whole-target physical query/support/issue witness and accepted receipt; no existing116/new29target result found. This is an additional physical gap, not a reason to rerun completed957."
+      },
+      "canonical_lineage": {
+        "id": "gb:VNM:ADM2:81297802B5716614329371",
+        "index": 48495,
+        "bounds": [
+          208429.32521277777,
+          113934.48059787609,
+          208608.32633166664,
+          114102.98633770645
+        ],
+        "province_id": "framework:province:cao-bang:0fa69cf1ed2b",
+        "province_index": 1170,
+        "name": "Tra Linh",
+        "reference_owner": "Viet Nam",
+        "source_id": "gb:VNM:ADM2",
+        "source_atoms": [
+          "gb:VNM:ADM2:81297802B5716614329371"
+        ]
+      },
+      "immutable_owner_roster_row": {
+        "id": "gb:VNM:ADM2:81297802B5716614329371",
+        "index": 48495,
+        "bounds": [
+          208429.32521277777,
+          113934.48059787609,
+          208608.32633166664,
+          114102.98633770645
+        ],
+        "province_id": "framework:province:cao-bang:0fa69cf1ed2b",
+        "province_index": 1170
+      },
+      "reverse_source_atom_owners": [
+        48495
+      ],
+      "source_roster_records": [
+        {
+          "source_index": 65105,
+          "family_index": 353,
+          "source_id": "gb:VNM:ADM1:63759600B11108179203280",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Cao Bằng",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 65773,
+          "family_index": 354,
+          "source_id": "gb:VNM:ADM2:81297802B5716614329371",
+          "ordinal": 617,
+          "owners": [
+            48495
+          ],
+          "name": "Tra Linh",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "original_family_ordinal_zero_based": 617,
+      "selected_geography_part": "part-28.json",
+      "whole_consumed_feature_value_sha256": "a9b1efebf074826981b90c5812acbd8a7254cde9ae00e7aa9685512c91bb9455",
+      "whole_selected_feature_value_sha256": "27bac3ebfa4ecb335469934982f8b7e49381215e2a47f857fc24057b288034a5",
+      "whole_original_target_context": {
+        "owner": 48495,
+        "id": "gb:VNM:ADM2:81297802B5716614329371",
+        "name": "Tra Linh",
+        "province_id": "framework:province:cao-bang:0fa69cf1ed2b",
+        "repair_cells": 1,
+        "physical_cells": 0,
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "repair_direct_flags": {
+          "foreign-reference-country": 1
+        },
+        "all_direct_flags": {
+          "foreign-reference-country": 1
+        },
+        "foreign_countries": {
+          "CHN": 1
+        },
+        "foreign_sources": {},
+        "actual_sources": [
+          "gb:VNM:ADM1:63759600B11108179203280",
+          "gb:VNM:ADM2:81297802B5716614329371"
+        ],
+        "source_atoms": [
+          "gb:VNM:ADM2:81297802B5716614329371"
+        ],
+        "metadata": {
+          "administrative_level": "ADM2",
+          "coverage_version": 1,
+          "framework_match": {
+            "id": "VNM-511",
+            "overlap": 0.901424,
+            "source": "Natural Earth"
+          },
+          "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+          "geographic_area_code": "VIE",
+          "geographic_match": "largest source overlap",
+          "geographic_overlap": 1.0,
+          "geographic_region_code": 41,
+          "granularity_version": 3,
+          "hierarchy_overlap": 0.976672,
+          "hierarchy_source": "gb:VNM:ADM1",
+          "hierarchy_version": 4,
+          "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+          "original_geometry_sha256": "7c6e87d4a0d12df51c07c7af1ce0c0ff0d38c582e15b047fcfa52f1a3b219778",
+          "original_id": "81297802B5716614329371",
+          "parent_match": "Named source administrative unit grouped within this geographic area",
+          "parent_source_level": "ADM1",
+          "reference_owner_id": "owner:Q881",
+          "reference_polity": "Vietnam",
+          "reference_polity_evidence": {
+            "classification": "Sovereign country",
+            "note": null,
+            "reference_territory": "Vietnam",
+            "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+            "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+            "uncertainty": false
+          },
+          "reference_polity_status": "reference",
+          "reference_version": 3,
+          "reference_year": "2020",
+          "regional_match": {
+            "method": "reference-territory-constrained overlap",
+            "overlap": 0.901424,
+            "reference_iso": "VNM",
+            "source_id": "VNM-511"
+          },
+          "remote_version": 1,
+          "representative_point": [
+            106.33561508646392,
+            22.80585
+          ],
+          "selection_reason": "Named District territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+          "semantic_review": {
+            "continent": "Asia",
+            "decision_index": 725,
+            "evidence_file": "geographic-decisions",
+            "status": "open"
+          },
+          "semantic_version": 1,
+          "source_id": "gb:VNM:ADM2",
+          "source_name": "geoBoundaries gbOpen",
+          "source_role": "District",
+          "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/VNM/ADM2/geoBoundaries-VNM-ADM2.geojson",
+          "topology_conflicts": 1,
+          "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+          "topology_reconciled": true,
+          "topology_version": 1
+        },
+        "direct_samples": [
+          {
+            "accepted_geometry_covers": false,
+            "accepted_hole_covers": false,
+            "actual_sids": [
+              65105,
+              65773
+            ],
+            "country_boundary_ids": [],
+            "covering_owners": [
+              48495
+            ],
+            "declared_sids": [
+              65105,
+              65773
+            ],
+            "flags": [
+              "foreign-reference-country"
+            ],
+            "hold_reasons": [
+              "foreign-reference-country"
+            ],
+            "owner": 48495,
+            "package": "repair-evaluation",
+            "physical": "land",
+            "qualified": false,
+            "reference_countries": [
+              "CHN"
+            ],
+            "source_boundary_ids": [],
+            "territorial_hold_reasons": [
+              "foreign-reference-country"
+            ],
+            "x": 208469,
+            "y": 113934
+          }
+        ],
+        "investigation_class": "reference-only",
+        "retained_source_parent_coverage": [
+          {
+            "sources": [
+              "gb:VNM:ADM1:63759600B11108179203280 Cao Bằng"
+            ],
+            "cells": 1
+          }
+        ],
+        "repair_source_parent_coverage": [
+          {
+            "sources": [
+              "gb:VNM:ADM1:63759600B11108179203280 Cao Bằng"
+            ],
+            "cells": 1
+          }
+        ],
+        "direct_source_parent_coverage": [
+          {
+            "sources": [
+              "gb:VNM:ADM1:63759600B11108179203280 Cao Bằng"
+            ],
+            "cells": 1
+          }
+        ],
+        "all_package_declared_actual_correspondence": {
+          "True": 1
+        },
+        "sample_fields": {
+          "hierarchy_overlap": 0.976672,
+          "framework_match": {
+            "id": "VNM-511",
+            "overlap": 0.901424,
+            "source": "Natural Earth"
+          },
+          "topology_conflicts": 1,
+          "topology_reconciled": true,
+          "original_geometry_sha256": "7c6e87d4a0d12df51c07c7af1ce0c0ff0d38c582e15b047fcfa52f1a3b219778"
+        },
+        "original_features": [
+          {
+            "properties": {
+              "shapeName": "Tra Linh",
+              "shapeISO": "",
+              "shapeID": "81297802B5716614329371",
+              "shapeGroup": "VNM",
+              "shapeType": "ADM2"
+            },
+            "geometry_type": "Polygon"
+          }
+        ]
+      },
+      "custodian_explicit_parent_evidence": {
+        "owner": 48495,
+        "id": "gb:VNM:ADM2:81297802B5716614329371",
+        "name": "Tra Linh",
+        "repair_cells": 1,
+        "physical_cells": 0,
+        "gbOpen_record": 618,
+        "humanitarian_record": 133,
+        "original_archive_identity_limit": "Existing nine-decimal coordinate-ring correspondence only; not geometry-byte equality or cell tolerance.",
+        "join_key": "Literal custodian ADM2_PCODE equality; no prefix inference or spatial predicates.",
+        "custodian_adm2_row": {
+          "excel_row": 619,
+          "ADM2_EN": "Tra Linh",
+          "ADM2_VI": "Huyện Trà Lĩnh",
+          "ADM2_PCODE": "VN20309",
+          "ADM2_REF": null,
+          "ADM2ALT1_EN": null,
+          "ADM2ALT2_EN": null,
+          "ADM2ALT1_VI": null,
+          "ADM2ALT2_VI": null,
+          "ADM1_EN": "Cao Bang",
+          "ADM1_VI": "Cao Bằng",
+          "ADM1_PCODE": "VN203",
+          "ADM0_EN": "Viet Nam",
+          "ADM0_VI": "Việt Nam",
+          "ADM0_PCODE": "VN",
+          "DATE": "2019-10-01T00:00:00",
+          "VALIDON": "2020-01-03T00:00:00",
+          "VALIDTO": null,
+          "AREA_SQKM": 259.9388427734375
+        },
+        "custodian_adm1_row": {
+          "excel_row": 15,
+          "ADM1_EN": "Cao Bang",
+          "ADM1_VI": "Cao Bằng",
+          "ADM1_PCODE": "VN203",
+          "ADM1_REF": null,
+          "ADM1ALT1_EN": null,
+          "ADM1ALT2_EN": null,
+          "ADM1ALT1_VI": null,
+          "ADM1ALT2_VI": null,
+          "ADM0_EN": "Viet Nam",
+          "ADM0_VI": "Việt Nam",
+          "ADM0_PCODE": "VN",
+          "DATE": "2019-10-01T00:00:00",
+          "VALIDON": "2020-01-03T00:00:00",
+          "VALIDTO": null,
+          "AREA_SQKM": 6730.70166015625
+        },
+        "source_code_parent_relationship_explicit": true,
+        "qualified_cells": 0,
+        "country_side_conclusion": null
+      }
+    },
+    {
+      "owner_partition": {
+        "owner": 48249,
+        "name": "Thach An",
+        "target": "gb:VNM:ADM2:81297802B24341511138047",
+        "country": "CHN",
+        "direct_cells": 6,
+        "complete_original_repair": 6,
+        "complete_original_physical_context": 0,
+        "physical_status": "no_acquired_whole_target_physical",
+        "physical_binding": null,
+        "actual_query_count": null,
+        "issues": null,
+        "actual_source_ids": [
+          "gb:VNM:ADM1:63759600B11108179203280",
+          "gb:VNM:ADM2:81297802B24341511138047"
+        ],
+        "old_ADM1_observed": 6,
+        "old_ADM1_absent": 0,
+        "exact_native_keys": [
+          [
+            48249,
+            208689,
+            114307
+          ],
+          [
+            48249,
+            208689,
+            114314
+          ],
+          [
+            48249,
+            208688,
+            114316
+          ],
+          [
+            48249,
+            208687,
+            114317
+          ],
+          [
+            48249,
+            208687,
+            114318
+          ],
+          [
+            48249,
+            208686,
+            114319
+          ]
+        ],
+        "missing_positive_fact": "A primary dated applicable boundary/territorial or maritime-scope control, tied to these exact native centres, that reconciles their recorded foreign reference-country observation; source identity/parent and positive physical land do not establish country side.",
+        "additional_missing_positive_fact": "Actual complete original whole-target physical query/support/issue witness and accepted receipt; no existing116/new29target result found. This is an additional physical gap, not a reason to rerun completed957."
+      },
+      "canonical_lineage": {
+        "id": "gb:VNM:ADM2:81297802B24341511138047",
+        "index": 48249,
+        "bounds": [
+          208346.16033166667,
+          114179.1344384413,
+          208690.8357977778,
+          114372.14597241377
+        ],
+        "province_id": "framework:province:cao-bang:0fa69cf1ed2b",
+        "province_index": 1170,
+        "name": "Thach An",
+        "reference_owner": "Viet Nam",
+        "source_id": "gb:VNM:ADM2",
+        "source_atoms": [
+          "gb:VNM:ADM2:81297802B24341511138047"
+        ]
+      },
+      "immutable_owner_roster_row": {
+        "id": "gb:VNM:ADM2:81297802B24341511138047",
+        "index": 48249,
+        "bounds": [
+          208346.16033166667,
+          114179.1344384413,
+          208690.8357977778,
+          114372.14597241377
+        ],
+        "province_id": "framework:province:cao-bang:0fa69cf1ed2b",
+        "province_index": 1170
+      },
+      "reverse_source_atom_owners": [
+        48249
+      ],
+      "source_roster_records": [
+        {
+          "source_index": 65105,
+          "family_index": 353,
+          "source_id": "gb:VNM:ADM1:63759600B11108179203280",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Cao Bằng",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 65713,
+          "family_index": 354,
+          "source_id": "gb:VNM:ADM2:81297802B24341511138047",
+          "ordinal": 557,
+          "owners": [
+            48249
+          ],
+          "name": "Thach An",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "original_family_ordinal_zero_based": 557,
+      "selected_geography_part": "part-28.json",
+      "whole_consumed_feature_value_sha256": "4196d86e5e9767684db7f2fbd1be329bb80190cc7408255cbc2dee9a52156055",
+      "whole_selected_feature_value_sha256": "034f334f3e555248f5afdc40cb142b225656e6e1d99a39a8e397e148e40f3839",
+      "whole_original_target_context": {
+        "owner": 48249,
+        "id": "gb:VNM:ADM2:81297802B24341511138047",
+        "name": "Thach An",
+        "province_id": "framework:province:cao-bang:0fa69cf1ed2b",
+        "repair_cells": 6,
+        "physical_cells": 0,
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "repair_direct_flags": {
+          "foreign-reference-country": 6
+        },
+        "all_direct_flags": {
+          "foreign-reference-country": 6
+        },
+        "foreign_countries": {
+          "CHN": 6
+        },
+        "foreign_sources": {},
+        "actual_sources": [
+          "gb:VNM:ADM1:63759600B11108179203280",
+          "gb:VNM:ADM2:81297802B24341511138047"
+        ],
+        "source_atoms": [
+          "gb:VNM:ADM2:81297802B24341511138047"
+        ],
+        "metadata": {
+          "administrative_level": "ADM2",
+          "coverage_version": 1,
+          "framework_match": {
+            "id": "VNM-511",
+            "overlap": 0.873573,
+            "source": "Natural Earth"
+          },
+          "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+          "geographic_area_code": "VIE",
+          "geographic_match": "largest source overlap",
+          "geographic_overlap": 0.99597,
+          "geographic_region_code": 41,
+          "granularity_version": 3,
+          "hierarchy_overlap": 0.985577,
+          "hierarchy_source": "gb:VNM:ADM1",
+          "hierarchy_version": 4,
+          "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+          "original_id": "81297802B24341511138047",
+          "parent_match": "Named source administrative unit grouped within this geographic area",
+          "parent_source_level": "ADM1",
+          "reference_owner_id": "owner:Q881",
+          "reference_polity": "Vietnam",
+          "reference_polity_evidence": {
+            "classification": "Sovereign country",
+            "note": null,
+            "reference_territory": "Vietnam",
+            "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+            "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+            "uncertainty": false
+          },
+          "reference_polity_status": "reference",
+          "reference_version": 3,
+          "reference_year": "2020",
+          "regional_match": {
+            "method": "reference-territory-constrained overlap",
+            "overlap": 0.873573,
+            "reference_iso": "VNM",
+            "source_id": "VNM-511"
+          },
+          "remote_version": 1,
+          "representative_point": [
+            106.32258108725446,
+            22.479599999999998
+          ],
+          "selection_reason": "Named District territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+          "semantic_review": {
+            "continent": "Asia",
+            "decision_index": 725,
+            "evidence_file": "geographic-decisions",
+            "status": "open"
+          },
+          "semantic_version": 1,
+          "source_id": "gb:VNM:ADM2",
+          "source_name": "geoBoundaries gbOpen",
+          "source_role": "District",
+          "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/VNM/ADM2/geoBoundaries-VNM-ADM2.geojson",
+          "topology_version": 1
+        },
+        "direct_samples": [
+          {
+            "accepted_geometry_covers": false,
+            "accepted_hole_covers": false,
+            "actual_sids": [
+              65105,
+              65713
+            ],
+            "country_boundary_ids": [],
+            "covering_owners": [
+              48249
+            ],
+            "declared_sids": [
+              65105,
+              65713
+            ],
+            "flags": [
+              "foreign-reference-country"
+            ],
+            "hold_reasons": [
+              "foreign-reference-country"
+            ],
+            "owner": 48249,
+            "package": "repair-evaluation",
+            "physical": "land",
+            "qualified": false,
+            "reference_countries": [
+              "CHN"
+            ],
+            "source_boundary_ids": [],
+            "territorial_hold_reasons": [
+              "foreign-reference-country"
+            ],
+            "x": 208689,
+            "y": 114307
+          },
+          {
+            "accepted_geometry_covers": false,
+            "accepted_hole_covers": false,
+            "actual_sids": [
+              65105,
+              65713
+            ],
+            "country_boundary_ids": [],
+            "covering_owners": [
+              48249
+            ],
+            "declared_sids": [
+              65105,
+              65713
+            ],
+            "flags": [
+              "foreign-reference-country"
+            ],
+            "hold_reasons": [
+              "foreign-reference-country"
+            ],
+            "owner": 48249,
+            "package": "repair-evaluation",
+            "physical": "land",
+            "qualified": false,
+            "reference_countries": [
+              "CHN"
+            ],
+            "source_boundary_ids": [],
+            "territorial_hold_reasons": [
+              "foreign-reference-country"
+            ],
+            "x": 208689,
+            "y": 114314
+          }
+        ],
+        "investigation_class": "reference-only",
+        "retained_source_parent_coverage": [
+          {
+            "sources": [
+              "gb:VNM:ADM1:63759600B11108179203280 Cao Bằng"
+            ],
+            "cells": 6
+          }
+        ],
+        "repair_source_parent_coverage": [
+          {
+            "sources": [
+              "gb:VNM:ADM1:63759600B11108179203280 Cao Bằng"
+            ],
+            "cells": 6
+          }
+        ],
+        "direct_source_parent_coverage": [
+          {
+            "sources": [
+              "gb:VNM:ADM1:63759600B11108179203280 Cao Bằng"
+            ],
+            "cells": 6
+          }
+        ],
+        "all_package_declared_actual_correspondence": {
+          "True": 6
+        },
+        "sample_fields": {
+          "hierarchy_overlap": 0.985577,
+          "framework_match": {
+            "id": "VNM-511",
+            "overlap": 0.873573,
+            "source": "Natural Earth"
+          },
+          "topology_conflicts": null,
+          "topology_reconciled": null,
+          "original_geometry_sha256": null
+        },
+        "original_features": [
+          {
+            "properties": {
+              "shapeName": "Thach An",
+              "shapeISO": "",
+              "shapeID": "81297802B24341511138047",
+              "shapeGroup": "VNM",
+              "shapeType": "ADM2"
+            },
+            "geometry_type": "Polygon"
+          }
+        ]
+      },
+      "custodian_explicit_parent_evidence": {
+        "owner": 48249,
+        "id": "gb:VNM:ADM2:81297802B24341511138047",
+        "name": "Thach An",
+        "repair_cells": 6,
+        "physical_cells": 0,
+        "gbOpen_record": 558,
+        "humanitarian_record": 140,
+        "original_archive_identity_limit": "Existing nine-decimal coordinate-ring correspondence only; not geometry-byte equality or cell tolerance.",
+        "join_key": "Literal custodian ADM2_PCODE equality; no prefix inference or spatial predicates.",
+        "custodian_adm2_row": {
+          "excel_row": 559,
+          "ADM2_EN": "Thach An",
+          "ADM2_VI": "Huyện Thạch An",
+          "ADM2_PCODE": "VN20321",
+          "ADM2_REF": null,
+          "ADM2ALT1_EN": null,
+          "ADM2ALT2_EN": null,
+          "ADM2ALT1_VI": null,
+          "ADM2ALT2_VI": null,
+          "ADM1_EN": "Cao Bang",
+          "ADM1_VI": "Cao Bằng",
+          "ADM1_PCODE": "VN203",
+          "ADM0_EN": "Viet Nam",
+          "ADM0_VI": "Việt Nam",
+          "ADM0_PCODE": "VN",
+          "DATE": "2019-10-01T00:00:00",
+          "VALIDON": "2020-01-03T00:00:00",
+          "VALIDTO": null,
+          "AREA_SQKM": 682.8615112304688
+        },
+        "custodian_adm1_row": {
+          "excel_row": 15,
+          "ADM1_EN": "Cao Bang",
+          "ADM1_VI": "Cao Bằng",
+          "ADM1_PCODE": "VN203",
+          "ADM1_REF": null,
+          "ADM1ALT1_EN": null,
+          "ADM1ALT2_EN": null,
+          "ADM1ALT1_VI": null,
+          "ADM1ALT2_VI": null,
+          "ADM0_EN": "Viet Nam",
+          "ADM0_VI": "Việt Nam",
+          "ADM0_PCODE": "VN",
+          "DATE": "2019-10-01T00:00:00",
+          "VALIDON": "2020-01-03T00:00:00",
+          "VALIDTO": null,
+          "AREA_SQKM": 6730.70166015625
+        },
+        "source_code_parent_relationship_explicit": true,
+        "qualified_cells": 0,
+        "country_side_conclusion": null
+      }
+    },
+    {
+      "owner_partition": {
+        "owner": 48382,
+        "name": "Trung Khanh",
+        "target": "gb:VNM:ADM2:81297802B42277751936117",
+        "country": "CHN",
+        "direct_cells": 6,
+        "complete_original_repair": 6,
+        "complete_original_physical_context": 0,
+        "physical_status": "no_acquired_whole_target_physical",
+        "physical_binding": null,
+        "actual_query_count": null,
+        "issues": null,
+        "actual_source_ids": [
+          "gb:VNM:ADM1:63759600B11108179203280",
+          "gb:VNM:ADM2:81297802B42277751936117"
+        ],
+        "old_ADM1_observed": 6,
+        "old_ADM1_absent": 0,
+        "exact_native_keys": [
+          [
+            48382,
+            208683,
+            113926
+          ],
+          [
+            48382,
+            208684,
+            113926
+          ],
+          [
+            48382,
+            208685,
+            113926
+          ],
+          [
+            48382,
+            208686,
+            113926
+          ],
+          [
+            48382,
+            208686,
+            113927
+          ],
+          [
+            48382,
+            208687,
+            113927
+          ]
+        ],
+        "missing_positive_fact": "A primary dated applicable boundary/territorial or maritime-scope control, tied to these exact native centres, that reconciles their recorded foreign reference-country observation; source identity/parent and positive physical land do not establish country side.",
+        "additional_missing_positive_fact": "Actual complete original whole-target physical query/support/issue witness and accepted receipt; no existing116/new29target result found. This is an additional physical gap, not a reason to rerun completed957."
+      },
+      "canonical_lineage": {
+        "id": "gb:VNM:ADM2:81297802B42277751936117",
+        "index": 48382,
+        "bounds": [
+          208573.2252172222,
+          113907.75452402324,
+          208813.1799311111,
+          114099.82878345846
+        ],
+        "province_id": "framework:province:cao-bang:0fa69cf1ed2b",
+        "province_index": 1170,
+        "name": "Trung Khanh",
+        "reference_owner": "Viet Nam",
+        "source_id": "gb:VNM:ADM2",
+        "source_atoms": [
+          "gb:VNM:ADM2:81297802B42277751936117"
+        ]
+      },
+      "immutable_owner_roster_row": {
+        "id": "gb:VNM:ADM2:81297802B42277751936117",
+        "index": 48382,
+        "bounds": [
+          208573.2252172222,
+          113907.75452402324,
+          208813.1799311111,
+          114099.82878345846
+        ],
+        "province_id": "framework:province:cao-bang:0fa69cf1ed2b",
+        "province_index": 1170
+      },
+      "reverse_source_atom_owners": [
+        48382
+      ],
+      "source_roster_records": [
+        {
+          "source_index": 65105,
+          "family_index": 353,
+          "source_id": "gb:VNM:ADM1:63759600B11108179203280",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Cao Bằng",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 65787,
+          "family_index": 354,
+          "source_id": "gb:VNM:ADM2:81297802B42277751936117",
+          "ordinal": 631,
+          "owners": [
+            48382
+          ],
+          "name": "Trung Khanh",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "original_family_ordinal_zero_based": 631,
+      "selected_geography_part": "part-28.json",
+      "whole_consumed_feature_value_sha256": "01d713e9832197e8c187accb43d69cc70626d0cd41919ac6a90b4245cf4a987b",
+      "whole_selected_feature_value_sha256": "67b2e7ef02c1178a14bb184e49ddc58ff00884326aa6d9ebc60e66a84c350878",
+      "whole_original_target_context": {
+        "owner": 48382,
+        "id": "gb:VNM:ADM2:81297802B42277751936117",
+        "name": "Trung Khanh",
+        "province_id": "framework:province:cao-bang:0fa69cf1ed2b",
+        "repair_cells": 6,
+        "physical_cells": 0,
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "repair_direct_flags": {
+          "foreign-reference-country": 6
+        },
+        "all_direct_flags": {
+          "foreign-reference-country": 6
+        },
+        "foreign_countries": {
+          "CHN": 6
+        },
+        "foreign_sources": {},
+        "actual_sources": [
+          "gb:VNM:ADM1:63759600B11108179203280",
+          "gb:VNM:ADM2:81297802B42277751936117"
+        ],
+        "source_atoms": [
+          "gb:VNM:ADM2:81297802B42277751936117"
+        ],
+        "metadata": {
+          "administrative_level": "ADM2",
+          "coverage_version": 1,
+          "framework_match": {
+            "id": "VNM-511",
+            "overlap": 0.870695,
+            "source": "Natural Earth"
+          },
+          "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+          "geographic_area_code": "VIE",
+          "geographic_match": "largest source overlap",
+          "geographic_overlap": 0.89681,
+          "geographic_region_code": 41,
+          "granularity_version": 3,
+          "hierarchy_overlap": 0.928278,
+          "hierarchy_source": "gb:VNM:ADM1",
+          "hierarchy_version": 4,
+          "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+          "original_geometry_sha256": "37eb6201bc803ff4419634defbfb0993571541aed6952c795af6c721b35024fe",
+          "original_id": "81297802B42277751936117",
+          "parent_match": "Named source administrative unit grouped within this geographic area",
+          "parent_source_level": "ADM1",
+          "reference_owner_id": "owner:Q881",
+          "reference_polity": "Vietnam",
+          "reference_polity_evidence": {
+            "classification": "Sovereign country",
+            "note": null,
+            "reference_territory": "Vietnam",
+            "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+            "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+            "uncertainty": false
+          },
+          "reference_polity_status": "reference",
+          "reference_version": 3,
+          "reference_year": "2020",
+          "regional_match": {
+            "method": "reference-territory-constrained overlap",
+            "overlap": 0.870695,
+            "reference_iso": "VNM",
+            "source_id": "VNM-511"
+          },
+          "remote_version": 1,
+          "representative_point": [
+            106.58445843098218,
+            22.824550000000002
+          ],
+          "selection_reason": "Named District territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+          "semantic_review": {
+            "continent": "Asia",
+            "decision_index": 726,
+            "evidence_file": "geographic-decisions",
+            "status": "open"
+          },
+          "semantic_version": 1,
+          "source_id": "gb:VNM:ADM2",
+          "source_name": "geoBoundaries gbOpen",
+          "source_role": "District",
+          "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/VNM/ADM2/geoBoundaries-VNM-ADM2.geojson",
+          "topology_conflicts": 2,
+          "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+          "topology_reconciled": true,
+          "topology_version": 1
+        },
+        "direct_samples": [
+          {
+            "accepted_geometry_covers": false,
+            "accepted_hole_covers": false,
+            "actual_sids": [
+              65105,
+              65787
+            ],
+            "country_boundary_ids": [],
+            "covering_owners": [
+              48382
+            ],
+            "declared_sids": [
+              65105,
+              65787
+            ],
+            "flags": [
+              "foreign-reference-country"
+            ],
+            "hold_reasons": [
+              "foreign-reference-country"
+            ],
+            "owner": 48382,
+            "package": "repair-evaluation",
+            "physical": "land",
+            "qualified": false,
+            "reference_countries": [
+              "CHN"
+            ],
+            "source_boundary_ids": [],
+            "territorial_hold_reasons": [
+              "foreign-reference-country"
+            ],
+            "x": 208683,
+            "y": 113926
+          },
+          {
+            "accepted_geometry_covers": false,
+            "accepted_hole_covers": false,
+            "actual_sids": [
+              65105,
+              65787
+            ],
+            "country_boundary_ids": [],
+            "covering_owners": [
+              48382
+            ],
+            "declared_sids": [
+              65105,
+              65787
+            ],
+            "flags": [
+              "foreign-reference-country"
+            ],
+            "hold_reasons": [
+              "foreign-reference-country"
+            ],
+            "owner": 48382,
+            "package": "repair-evaluation",
+            "physical": "land",
+            "qualified": false,
+            "reference_countries": [
+              "CHN"
+            ],
+            "source_boundary_ids": [],
+            "territorial_hold_reasons": [
+              "foreign-reference-country"
+            ],
+            "x": 208684,
+            "y": 113926
+          }
+        ],
+        "investigation_class": "reference-only",
+        "retained_source_parent_coverage": [
+          {
+            "sources": [
+              "gb:VNM:ADM1:63759600B11108179203280 Cao Bằng"
+            ],
+            "cells": 6
+          }
+        ],
+        "repair_source_parent_coverage": [
+          {
+            "sources": [
+              "gb:VNM:ADM1:63759600B11108179203280 Cao Bằng"
+            ],
+            "cells": 6
+          }
+        ],
+        "direct_source_parent_coverage": [
+          {
+            "sources": [
+              "gb:VNM:ADM1:63759600B11108179203280 Cao Bằng"
+            ],
+            "cells": 6
+          }
+        ],
+        "all_package_declared_actual_correspondence": {
+          "True": 6
+        },
+        "sample_fields": {
+          "hierarchy_overlap": 0.928278,
+          "framework_match": {
+            "id": "VNM-511",
+            "overlap": 0.870695,
+            "source": "Natural Earth"
+          },
+          "topology_conflicts": 2,
+          "topology_reconciled": true,
+          "original_geometry_sha256": "37eb6201bc803ff4419634defbfb0993571541aed6952c795af6c721b35024fe"
+        },
+        "original_features": [
+          {
+            "properties": {
+              "shapeName": "Trung Khanh",
+              "shapeISO": "",
+              "shapeID": "81297802B42277751936117",
+              "shapeGroup": "VNM",
+              "shapeType": "ADM2"
+            },
+            "geometry_type": "Polygon"
+          }
+        ]
+      },
+      "custodian_explicit_parent_evidence": {
+        "owner": 48382,
+        "id": "gb:VNM:ADM2:81297802B42277751936117",
+        "name": "Trung Khanh",
+        "repair_cells": 6,
+        "physical_cells": 0,
+        "gbOpen_record": 632,
+        "humanitarian_record": 134,
+        "original_archive_identity_limit": "Existing nine-decimal coordinate-ring correspondence only; not geometry-byte equality or cell tolerance.",
+        "join_key": "Literal custodian ADM2_PCODE equality; no prefix inference or spatial predicates.",
+        "custodian_adm2_row": {
+          "excel_row": 633,
+          "ADM2_EN": "Trung Khanh",
+          "ADM2_VI": "Huyện Trùng Khánh",
+          "ADM2_PCODE": "VN20311",
+          "ADM2_REF": null,
+          "ADM2ALT1_EN": null,
+          "ADM2ALT2_EN": null,
+          "ADM2ALT1_VI": null,
+          "ADM2ALT2_VI": null,
+          "ADM1_EN": "Cao Bang",
+          "ADM1_VI": "Cao Bằng",
+          "ADM1_PCODE": "VN203",
+          "ADM0_EN": "Viet Nam",
+          "ADM0_VI": "Việt Nam",
+          "ADM0_PCODE": "VN",
+          "DATE": "2019-10-01T00:00:00",
+          "VALIDON": "2020-01-03T00:00:00",
+          "VALIDTO": null,
+          "AREA_SQKM": 472.0259094238281
+        },
+        "custodian_adm1_row": {
+          "excel_row": 15,
+          "ADM1_EN": "Cao Bang",
+          "ADM1_VI": "Cao Bằng",
+          "ADM1_PCODE": "VN203",
+          "ADM1_REF": null,
+          "ADM1ALT1_EN": null,
+          "ADM1ALT2_EN": null,
+          "ADM1ALT1_VI": null,
+          "ADM1ALT2_VI": null,
+          "ADM0_EN": "Viet Nam",
+          "ADM0_VI": "Việt Nam",
+          "ADM0_PCODE": "VN",
+          "DATE": "2019-10-01T00:00:00",
+          "VALIDON": "2020-01-03T00:00:00",
+          "VALIDTO": null,
+          "AREA_SQKM": 6730.70166015625
+        },
+        "source_code_parent_relationship_explicit": true,
+        "qualified_cells": 0,
+        "country_side_conclusion": null
+      }
+    },
+    {
+      "owner_partition": {
+        "owner": 48503,
+        "name": "Ha Quang",
+        "target": "gb:VNM:ADM2:81297802B58374178577075",
+        "country": "CHN",
+        "direct_cells": 14,
+        "complete_original_repair": 14,
+        "complete_original_physical_context": 0,
+        "physical_status": "no_acquired_whole_target_physical",
+        "physical_binding": null,
+        "actual_query_count": null,
+        "issues": null,
+        "actual_source_ids": [
+          "gb:VNM:ADM1:63759600B11108179203280",
+          "gb:VNM:ADM2:81297802B58374178577075"
+        ],
+        "old_ADM1_observed": 14,
+        "old_ADM1_absent": 0,
+        "exact_native_keys": [
+          [
+            48503,
+            208433,
+            113889
+          ],
+          [
+            48503,
+            208434,
+            113889
+          ],
+          [
+            48503,
+            208435,
+            113890
+          ],
+          [
+            48503,
+            208440,
+            113896
+          ],
+          [
+            48503,
+            208463,
+            113927
+          ],
+          [
+            48503,
+            208464,
+            113928
+          ],
+          [
+            48503,
+            208465,
+            113928
+          ],
+          [
+            48503,
+            208465,
+            113929
+          ],
+          [
+            48503,
+            208465,
+            113930
+          ],
+          [
+            48503,
+            208466,
+            113930
+          ],
+          [
+            48503,
+            208466,
+            113931
+          ],
+          [
+            48503,
+            208467,
+            113931
+          ],
+          [
+            48503,
+            208467,
+            113932
+          ],
+          [
+            48503,
+            208468,
+            113933
+          ]
+        ],
+        "missing_positive_fact": "A primary dated applicable boundary/territorial or maritime-scope control, tied to these exact native centres, that reconciles their recorded foreign reference-country observation; source identity/parent and positive physical land do not establish country side.",
+        "additional_missing_positive_fact": "Actual complete original whole-target physical query/support/issue witness and accepted receipt; no existing116/new29target result found. This is an additional physical gap, not a reason to rerun completed957."
+      },
+      "canonical_lineage": {
+        "id": "gb:VNM:ADM2:81297802B58374178577075",
+        "index": 48503,
+        "bounds": [
+          208244.35253499998,
+          113879.04423479337,
+          208469.37835166667,
+          114031.28710668853
+        ],
+        "province_id": "framework:province:cao-bang:0fa69cf1ed2b",
+        "province_index": 1170,
+        "name": "Ha Quang",
+        "reference_owner": "Viet Nam",
+        "source_id": "gb:VNM:ADM2",
+        "source_atoms": [
+          "gb:VNM:ADM2:81297802B58374178577075"
+        ]
+      },
+      "immutable_owner_roster_row": {
+        "id": "gb:VNM:ADM2:81297802B58374178577075",
+        "index": 48503,
+        "bounds": [
+          208244.35253499998,
+          113879.04423479337,
+          208469.37835166667,
+          114031.28710668853
+        ],
+        "province_id": "framework:province:cao-bang:0fa69cf1ed2b",
+        "province_index": 1170
+      },
+      "reverse_source_atom_owners": [
+        48503
+      ],
+      "source_roster_records": [
+        {
+          "source_index": 65105,
+          "family_index": 353,
+          "source_id": "gb:VNM:ADM1:63759600B11108179203280",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Cao Bằng",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 65383,
+          "family_index": 354,
+          "source_id": "gb:VNM:ADM2:81297802B58374178577075",
+          "ordinal": 227,
+          "owners": [
+            48503
+          ],
+          "name": "Ha Quang",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "original_family_ordinal_zero_based": 227,
+      "selected_geography_part": "part-27.json",
+      "whole_consumed_feature_value_sha256": "ed954ab77fa1eb6e26a757d8d447250c2afb4795d876b7177db6503661f89582",
+      "whole_selected_feature_value_sha256": "c9d3453bc64d6a327c04a8e99623a66a4d1bbf5eaab25b99311af44141b444ce",
+      "whole_original_target_context": {
+        "owner": 48503,
+        "id": "gb:VNM:ADM2:81297802B58374178577075",
+        "name": "Ha Quang",
+        "province_id": "framework:province:cao-bang:0fa69cf1ed2b",
+        "repair_cells": 14,
+        "physical_cells": 0,
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "repair_direct_flags": {
+          "foreign-reference-country": 14
+        },
+        "all_direct_flags": {
+          "foreign-reference-country": 14
+        },
+        "foreign_countries": {
+          "CHN": 14
+        },
+        "foreign_sources": {},
+        "actual_sources": [
+          "gb:VNM:ADM1:63759600B11108179203280",
+          "gb:VNM:ADM2:81297802B58374178577075"
+        ],
+        "source_atoms": [
+          "gb:VNM:ADM2:81297802B58374178577075"
+        ],
+        "metadata": {
+          "administrative_level": "ADM2",
+          "coverage_version": 1,
+          "framework_match": {
+            "id": "VNM-511",
+            "overlap": 0.89989,
+            "source": "Natural Earth"
+          },
+          "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+          "geographic_area_code": "VIE",
+          "geographic_match": "largest source overlap",
+          "geographic_overlap": 0.93064,
+          "geographic_region_code": 41,
+          "granularity_version": 3,
+          "hierarchy_overlap": 0.959131,
+          "hierarchy_source": "gb:VNM:ADM1",
+          "hierarchy_version": 4,
+          "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+          "original_geometry_sha256": "633005ca913136773591493ab7ac3bf2b7fc024f46da9568dd4641ff039441b0",
+          "original_id": "81297802B58374178577075",
+          "parent_match": "Named source administrative unit grouped within this geographic area",
+          "parent_source_level": "ADM1",
+          "reference_owner_id": "owner:Q881",
+          "reference_polity": "Vietnam",
+          "reference_polity_evidence": {
+            "classification": "Sovereign country",
+            "note": null,
+            "reference_territory": "Vietnam",
+            "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+            "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+            "uncertainty": false
+          },
+          "reference_polity_status": "reference",
+          "reference_version": 3,
+          "reference_year": "2020",
+          "regional_match": {
+            "method": "reference-territory-constrained overlap",
+            "overlap": 0.89989,
+            "reference_iso": "VNM",
+            "source_id": "VNM-511"
+          },
+          "remote_version": 1,
+          "representative_point": [
+            106.11143700593018,
+            22.87675
+          ],
+          "selection_reason": "Named District territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+          "semantic_review": {
+            "continent": "Asia",
+            "decision_index": 725,
+            "evidence_file": "geographic-decisions",
+            "status": "open"
+          },
+          "semantic_version": 1,
+          "source_id": "gb:VNM:ADM2",
+          "source_name": "geoBoundaries gbOpen",
+          "source_role": "District",
+          "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/VNM/ADM2/geoBoundaries-VNM-ADM2.geojson",
+          "topology_conflicts": 2,
+          "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+          "topology_reconciled": true,
+          "topology_version": 1
+        },
+        "direct_samples": [
+          {
+            "accepted_geometry_covers": false,
+            "accepted_hole_covers": false,
+            "actual_sids": [
+              65105,
+              65383
+            ],
+            "country_boundary_ids": [],
+            "covering_owners": [
+              48503
+            ],
+            "declared_sids": [
+              65105,
+              65383
+            ],
+            "flags": [
+              "foreign-reference-country"
+            ],
+            "hold_reasons": [
+              "foreign-reference-country"
+            ],
+            "owner": 48503,
+            "package": "repair-evaluation",
+            "physical": "land",
+            "qualified": false,
+            "reference_countries": [
+              "CHN"
+            ],
+            "source_boundary_ids": [],
+            "territorial_hold_reasons": [
+              "foreign-reference-country"
+            ],
+            "x": 208433,
+            "y": 113889
+          },
+          {
+            "accepted_geometry_covers": false,
+            "accepted_hole_covers": false,
+            "actual_sids": [
+              65105,
+              65383
+            ],
+            "country_boundary_ids": [],
+            "covering_owners": [
+              48503
+            ],
+            "declared_sids": [
+              65105,
+              65383
+            ],
+            "flags": [
+              "foreign-reference-country"
+            ],
+            "hold_reasons": [
+              "foreign-reference-country"
+            ],
+            "owner": 48503,
+            "package": "repair-evaluation",
+            "physical": "land",
+            "qualified": false,
+            "reference_countries": [
+              "CHN"
+            ],
+            "source_boundary_ids": [],
+            "territorial_hold_reasons": [
+              "foreign-reference-country"
+            ],
+            "x": 208434,
+            "y": 113889
+          }
+        ],
+        "investigation_class": "reference-only",
+        "retained_source_parent_coverage": [
+          {
+            "sources": [
+              "gb:VNM:ADM1:63759600B11108179203280 Cao Bằng"
+            ],
+            "cells": 14
+          }
+        ],
+        "repair_source_parent_coverage": [
+          {
+            "sources": [
+              "gb:VNM:ADM1:63759600B11108179203280 Cao Bằng"
+            ],
+            "cells": 14
+          }
+        ],
+        "direct_source_parent_coverage": [
+          {
+            "sources": [
+              "gb:VNM:ADM1:63759600B11108179203280 Cao Bằng"
+            ],
+            "cells": 14
+          }
+        ],
+        "all_package_declared_actual_correspondence": {
+          "True": 14
+        },
+        "sample_fields": {
+          "hierarchy_overlap": 0.959131,
+          "framework_match": {
+            "id": "VNM-511",
+            "overlap": 0.89989,
+            "source": "Natural Earth"
+          },
+          "topology_conflicts": 2,
+          "topology_reconciled": true,
+          "original_geometry_sha256": "633005ca913136773591493ab7ac3bf2b7fc024f46da9568dd4641ff039441b0"
+        },
+        "original_features": [
+          {
+            "properties": {
+              "shapeName": "Ha Quang",
+              "shapeISO": "",
+              "shapeID": "81297802B58374178577075",
+              "shapeGroup": "VNM",
+              "shapeType": "ADM2"
+            },
+            "geometry_type": "Polygon"
+          }
+        ]
+      },
+      "custodian_explicit_parent_evidence": {
+        "owner": 48503,
+        "id": "gb:VNM:ADM2:81297802B58374178577075",
+        "name": "Ha Quang",
+        "repair_cells": 14,
+        "physical_cells": 0,
+        "gbOpen_record": 228,
+        "humanitarian_record": 131,
+        "original_archive_identity_limit": "Existing nine-decimal coordinate-ring correspondence only; not geometry-byte equality or cell tolerance.",
+        "join_key": "Literal custodian ADM2_PCODE equality; no prefix inference or spatial predicates.",
+        "custodian_adm2_row": {
+          "excel_row": 229,
+          "ADM2_EN": "Ha Quang",
+          "ADM2_VI": "Huyện Hà Quảng",
+          "ADM2_PCODE": "VN20305",
+          "ADM2_REF": null,
+          "ADM2ALT1_EN": null,
+          "ADM2ALT2_EN": null,
+          "ADM2ALT1_VI": null,
+          "ADM2ALT2_VI": null,
+          "ADM1_EN": "Cao Bang",
+          "ADM1_VI": "Cao Bằng",
+          "ADM1_PCODE": "VN203",
+          "ADM0_EN": "Viet Nam",
+          "ADM0_VI": "Việt Nam",
+          "ADM0_PCODE": "VN",
+          "DATE": "2019-10-01T00:00:00",
+          "VALIDON": "2020-01-03T00:00:00",
+          "VALIDTO": null,
+          "AREA_SQKM": 456.414306640625
+        },
+        "custodian_adm1_row": {
+          "excel_row": 15,
+          "ADM1_EN": "Cao Bang",
+          "ADM1_VI": "Cao Bằng",
+          "ADM1_PCODE": "VN203",
+          "ADM1_REF": null,
+          "ADM1ALT1_EN": null,
+          "ADM1ALT2_EN": null,
+          "ADM1ALT1_VI": null,
+          "ADM1ALT2_VI": null,
+          "ADM0_EN": "Viet Nam",
+          "ADM0_VI": "Việt Nam",
+          "ADM0_PCODE": "VN",
+          "DATE": "2019-10-01T00:00:00",
+          "VALIDON": "2020-01-03T00:00:00",
+          "VALIDTO": null,
+          "AREA_SQKM": 6730.70166015625
+        },
+        "source_code_parent_relationship_explicit": true,
+        "qualified_cells": 0,
+        "country_side_conclusion": null
+      }
+    },
+    {
+      "owner_partition": {
+        "owner": 48231,
+        "name": "Loc Binh",
+        "target": "gb:VNM:ADM2:81297802B22471082550929",
+        "country": "CHN",
+        "direct_cells": 22,
+        "complete_original_repair": 22,
+        "complete_original_physical_context": 0,
+        "physical_status": "no_acquired_whole_target_physical",
+        "physical_binding": null,
+        "actual_query_count": null,
+        "issues": null,
+        "actual_source_ids": [
+          "gb:VNM:ADM1:63759600B58815535609509",
+          "gb:VNM:ADM2:81297802B22471082550929"
+        ],
+        "old_ADM1_observed": 22,
+        "old_ADM1_absent": 0,
+        "exact_native_keys": [
+          [
+            48231,
+            209030,
+            114796
+          ],
+          [
+            48231,
+            209031,
+            114796
+          ],
+          [
+            48231,
+            209032,
+            114796
+          ],
+          [
+            48231,
+            209033,
+            114796
+          ],
+          [
+            48231,
+            209034,
+            114796
+          ],
+          [
+            48231,
+            209033,
+            114797
+          ],
+          [
+            48231,
+            209034,
+            114797
+          ],
+          [
+            48231,
+            209035,
+            114797
+          ],
+          [
+            48231,
+            209036,
+            114797
+          ],
+          [
+            48231,
+            209037,
+            114797
+          ],
+          [
+            48231,
+            209037,
+            114798
+          ],
+          [
+            48231,
+            209038,
+            114798
+          ],
+          [
+            48231,
+            209039,
+            114798
+          ],
+          [
+            48231,
+            209040,
+            114799
+          ],
+          [
+            48231,
+            209043,
+            114800
+          ],
+          [
+            48231,
+            209046,
+            114801
+          ],
+          [
+            48231,
+            209049,
+            114802
+          ],
+          [
+            48231,
+            209072,
+            114810
+          ],
+          [
+            48231,
+            209091,
+            114822
+          ],
+          [
+            48231,
+            209092,
+            114823
+          ],
+          [
+            48231,
+            209104,
+            114836
+          ],
+          [
+            48231,
+            209105,
+            114837
+          ]
+        ],
+        "missing_positive_fact": "A primary dated applicable boundary/territorial or maritime-scope control, tied to these exact native centres, that reconciles their recorded foreign reference-country observation; source identity/parent and positive physical land do not establish country side.",
+        "additional_missing_positive_fact": "Actual complete original whole-target physical query/support/issue witness and accepted receipt; no existing116/new29target result found. This is an additional physical gap, not a reason to rerun completed957."
+      },
+      "canonical_lineage": {
+        "id": "gb:VNM:ADM2:81297802B22471082550929",
+        "index": 48231,
+        "bounds": [
+          208824.54045777777,
+          114759.19688422,
+          209141.6884938889,
+          115053.38277151341
+        ],
+        "province_id": "framework:province:lang-son:51be4e74f403",
+        "province_index": 2638,
+        "name": "Loc Binh",
+        "reference_owner": "Viet Nam",
+        "source_id": "gb:VNM:ADM2",
+        "source_atoms": [
+          "gb:VNM:ADM2:81297802B22471082550929"
+        ]
+      },
+      "immutable_owner_roster_row": {
+        "id": "gb:VNM:ADM2:81297802B22471082550929",
+        "index": 48231,
+        "bounds": [
+          208824.54045777777,
+          114759.19688422,
+          209141.6884938889,
+          115053.38277151341
+        ],
+        "province_id": "framework:province:lang-son:51be4e74f403",
+        "province_index": 2638
+      },
+      "reverse_source_atom_owners": [
+        48231
+      ],
+      "source_roster_records": [
+        {
+          "source_index": 65129,
+          "family_index": 353,
+          "source_id": "gb:VNM:ADM1:63759600B58815535609509",
+          "ordinal": 37,
+          "owners": [],
+          "name": "Lạng Sơn",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 65489,
+          "family_index": 354,
+          "source_id": "gb:VNM:ADM2:81297802B22471082550929",
+          "ordinal": 333,
+          "owners": [
+            48231
+          ],
+          "name": "Loc Binh",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "original_family_ordinal_zero_based": 333,
+      "selected_geography_part": "part-28.json",
+      "whole_consumed_feature_value_sha256": "06407343f34c53af7b19453c1cedd39bf6167bf86d73767a8fb7745fe1d23331",
+      "whole_selected_feature_value_sha256": "c11b9c38062292085f3af5cb2d5b9337227ada04529d6819b61d4f55dcac5670",
+      "whole_original_target_context": {
+        "owner": 48231,
+        "id": "gb:VNM:ADM2:81297802B22471082550929",
+        "name": "Loc Binh",
+        "province_id": "framework:province:lang-son:51be4e74f403",
+        "repair_cells": 22,
+        "physical_cells": 0,
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "repair_direct_flags": {
+          "foreign-reference-country": 22
+        },
+        "all_direct_flags": {
+          "foreign-reference-country": 22
+        },
+        "foreign_countries": {
+          "CHN": 22
+        },
+        "foreign_sources": {},
+        "actual_sources": [
+          "gb:VNM:ADM1:63759600B58815535609509",
+          "gb:VNM:ADM2:81297802B22471082550929"
+        ],
+        "source_atoms": [
+          "gb:VNM:ADM2:81297802B22471082550929"
+        ],
+        "metadata": {
+          "administrative_level": "ADM2",
+          "coverage_version": 1,
+          "framework_match": {
+            "id": "VNM-454",
+            "overlap": 0.912731,
+            "source": "Natural Earth"
+          },
+          "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+          "geographic_area_code": "VIE",
+          "geographic_match": "largest source overlap",
+          "geographic_overlap": 1.0,
+          "geographic_region_code": 41,
+          "granularity_version": 3,
+          "hierarchy_overlap": 0.924959,
+          "hierarchy_source": "gb:VNM:ADM1",
+          "hierarchy_version": 4,
+          "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+          "original_geometry_sha256": "6c0a49f9cbc924cfee4ec6a6c679b57394f46f5b027027748ed7412cb36aa7f4",
+          "original_id": "81297802B22471082550929",
+          "parent_match": "Named source administrative unit grouped within this geographic area",
+          "parent_source_level": "ADM1",
+          "reference_owner_id": "owner:Q881",
+          "reference_polity": "Vietnam",
+          "reference_polity_evidence": {
+            "classification": "Sovereign country",
+            "note": null,
+            "reference_territory": "Vietnam",
+            "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+            "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+            "uncertainty": false
+          },
+          "reference_polity_status": "reference",
+          "reference_version": 3,
+          "reference_year": "2020",
+          "regional_match": {
+            "method": "reference-territory-constrained overlap",
+            "overlap": 0.912731,
+            "reference_iso": "VNM",
+            "source_id": "VNM-454"
+          },
+          "remote_version": 1,
+          "representative_point": [
+            106.9094015629849,
+            21.67715
+          ],
+          "selection_reason": "Named District territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+          "semantic_review": {
+            "continent": "Asia",
+            "decision_index": 1411,
+            "evidence_file": "geographic-decisions",
+            "status": "open"
+          },
+          "semantic_version": 1,
+          "source_id": "gb:VNM:ADM2",
+          "source_name": "geoBoundaries gbOpen",
+          "source_role": "District",
+          "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/VNM/ADM2/geoBoundaries-VNM-ADM2.geojson",
+          "topology_conflicts": 1,
+          "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+          "topology_reconciled": true,
+          "topology_version": 1
+        },
+        "direct_samples": [
+          {
+            "accepted_geometry_covers": false,
+            "accepted_hole_covers": false,
+            "actual_sids": [
+              65129,
+              65489
+            ],
+            "country_boundary_ids": [],
+            "covering_owners": [
+              48231
+            ],
+            "declared_sids": [
+              65129,
+              65489
+            ],
+            "flags": [
+              "foreign-reference-country"
+            ],
+            "hold_reasons": [
+              "foreign-reference-country"
+            ],
+            "owner": 48231,
+            "package": "repair-evaluation",
+            "physical": "land",
+            "qualified": false,
+            "reference_countries": [
+              "CHN"
+            ],
+            "source_boundary_ids": [],
+            "territorial_hold_reasons": [
+              "foreign-reference-country"
+            ],
+            "x": 209030,
+            "y": 114796
+          },
+          {
+            "accepted_geometry_covers": false,
+            "accepted_hole_covers": false,
+            "actual_sids": [
+              65129,
+              65489
+            ],
+            "country_boundary_ids": [],
+            "covering_owners": [
+              48231
+            ],
+            "declared_sids": [
+              65129,
+              65489
+            ],
+            "flags": [
+              "foreign-reference-country"
+            ],
+            "hold_reasons": [
+              "foreign-reference-country"
+            ],
+            "owner": 48231,
+            "package": "repair-evaluation",
+            "physical": "land",
+            "qualified": false,
+            "reference_countries": [
+              "CHN"
+            ],
+            "source_boundary_ids": [],
+            "territorial_hold_reasons": [
+              "foreign-reference-country"
+            ],
+            "x": 209031,
+            "y": 114796
+          }
+        ],
+        "investigation_class": "reference-only",
+        "retained_source_parent_coverage": [
+          {
+            "sources": [
+              "gb:VNM:ADM1:63759600B58815535609509 Lạng Sơn"
+            ],
+            "cells": 22
+          }
+        ],
+        "repair_source_parent_coverage": [
+          {
+            "sources": [
+              "gb:VNM:ADM1:63759600B58815535609509 Lạng Sơn"
+            ],
+            "cells": 22
+          }
+        ],
+        "direct_source_parent_coverage": [
+          {
+            "sources": [
+              "gb:VNM:ADM1:63759600B58815535609509 Lạng Sơn"
+            ],
+            "cells": 22
+          }
+        ],
+        "all_package_declared_actual_correspondence": {
+          "True": 22
+        },
+        "sample_fields": {
+          "hierarchy_overlap": 0.924959,
+          "framework_match": {
+            "id": "VNM-454",
+            "overlap": 0.912731,
+            "source": "Natural Earth"
+          },
+          "topology_conflicts": 1,
+          "topology_reconciled": true,
+          "original_geometry_sha256": "6c0a49f9cbc924cfee4ec6a6c679b57394f46f5b027027748ed7412cb36aa7f4"
+        },
+        "original_features": [
+          {
+            "properties": {
+              "shapeName": "Loc Binh",
+              "shapeISO": "",
+              "shapeID": "81297802B22471082550929",
+              "shapeGroup": "VNM",
+              "shapeType": "ADM2"
+            },
+            "geometry_type": "Polygon"
+          }
+        ]
+      },
+      "custodian_explicit_parent_evidence": {
+        "owner": 48231,
+        "id": "gb:VNM:ADM2:81297802B22471082550929",
+        "name": "Loc Binh",
+        "repair_cells": 22,
+        "physical_cells": 0,
+        "gbOpen_record": 334,
+        "humanitarian_record": 165,
+        "original_archive_identity_limit": "Existing nine-decimal coordinate-ring correspondence only; not geometry-byte equality or cell tolerance.",
+        "join_key": "Literal custodian ADM2_PCODE equality; no prefix inference or spatial predicates.",
+        "custodian_adm2_row": {
+          "excel_row": 335,
+          "ADM2_EN": "Loc Binh",
+          "ADM2_VI": "Huyện Lộc Bình",
+          "ADM2_PCODE": "VN20915",
+          "ADM2_REF": null,
+          "ADM2ALT1_EN": null,
+          "ADM2ALT2_EN": null,
+          "ADM2ALT1_VI": null,
+          "ADM2ALT2_VI": null,
+          "ADM1_EN": "Lang Son",
+          "ADM1_VI": "Lạng Sơn",
+          "ADM1_PCODE": "VN209",
+          "ADM0_EN": "Viet Nam",
+          "ADM0_VI": "Việt Nam",
+          "ADM0_PCODE": "VN",
+          "DATE": "2019-10-01T00:00:00",
+          "VALIDON": "2020-01-03T00:00:00",
+          "VALIDTO": null,
+          "AREA_SQKM": 996.5242919921875
+        },
+        "custodian_adm1_row": {
+          "excel_row": 38,
+          "ADM1_EN": "Lang Son",
+          "ADM1_VI": "Lạng Sơn",
+          "ADM1_PCODE": "VN209",
+          "ADM1_REF": null,
+          "ADM1ALT1_EN": null,
+          "ADM1ALT2_EN": null,
+          "ADM1ALT1_VI": null,
+          "ADM1ALT2_VI": null,
+          "ADM0_EN": "Viet Nam",
+          "ADM0_VI": "Việt Nam",
+          "ADM0_PCODE": "VN",
+          "DATE": "2019-10-01T00:00:00",
+          "VALIDON": "2020-01-03T00:00:00",
+          "VALIDTO": null,
+          "AREA_SQKM": 8333.6689453125
+        },
+        "source_code_parent_relationship_explicit": true,
+        "qualified_cells": 0,
+        "country_side_conclusion": null
+      }
+    },
+    {
+      "owner_partition": {
+        "owner": 48575,
+        "name": "Tan Chau",
+        "target": "gb:VNM:ADM2:81297802B68440719308655",
+        "country": "KHM",
+        "direct_cells": 23,
+        "complete_original_repair": 23,
+        "complete_original_physical_context": 0,
+        "physical_status": "no_acquired_whole_target_physical",
+        "physical_binding": null,
+        "actual_query_count": null,
+        "issues": null,
+        "actual_source_ids": [
+          "gb:VNM:ADM1:63759600B24834630697040",
+          "gb:VNM:ADM2:81297802B68440719308655"
+        ],
+        "old_ADM1_observed": 15,
+        "old_ADM1_absent": 8,
+        "exact_native_keys": [
+          [
+            48575,
+            208456,
+            122483
+          ],
+          [
+            48575,
+            208457,
+            122483
+          ],
+          [
+            48575,
+            208458,
+            122483
+          ],
+          [
+            48575,
+            208460,
+            122484
+          ],
+          [
+            48575,
+            208461,
+            122484
+          ],
+          [
+            48575,
+            208463,
+            122485
+          ],
+          [
+            48575,
+            208464,
+            122485
+          ],
+          [
+            48575,
+            208466,
+            122486
+          ],
+          [
+            48575,
+            208470,
+            122488
+          ],
+          [
+            48575,
+            208471,
+            122492
+          ],
+          [
+            48575,
+            208472,
+            122496
+          ],
+          [
+            48575,
+            208472,
+            122497
+          ],
+          [
+            48575,
+            208474,
+            122500
+          ],
+          [
+            48575,
+            208475,
+            122501
+          ],
+          [
+            48575,
+            208477,
+            122502
+          ],
+          [
+            48575,
+            208478,
+            122503
+          ],
+          [
+            48575,
+            208479,
+            122504
+          ],
+          [
+            48575,
+            208480,
+            122505
+          ],
+          [
+            48575,
+            208481,
+            122506
+          ],
+          [
+            48575,
+            208484,
+            122508
+          ],
+          [
+            48575,
+            208485,
+            122509
+          ],
+          [
+            48575,
+            208486,
+            122510
+          ],
+          [
+            48575,
+            208492,
+            122515
+          ]
+        ],
+        "missing_positive_fact": "A primary dated applicable boundary/territorial or maritime-scope control, tied to these exact native centres, that reconciles their recorded foreign reference-country observation; source identity/parent and positive physical land do not establish country side.",
+        "additional_missing_positive_fact": "Actual complete original whole-target physical query/support/issue witness and accepted receipt; no existing116/new29target result found. This is an additional physical gap, not a reason to rerun completed957."
+      },
+      "canonical_lineage": {
+        "id": "gb:VNM:ADM2:81297802B68440719308655",
+        "index": 48575,
+        "bounds": [
+          208356.13720444444,
+          122463.12214082245,
+          208634.90705111108,
+          122719.95736870299
+        ],
+        "province_id": "framework:province:tay-ninh:ce04ab3eb69e",
+        "province_index": 4536,
+        "name": "Tan Chau",
+        "reference_owner": "Viet Nam",
+        "source_id": "gb:VNM:ADM2",
+        "source_atoms": [
+          "gb:VNM:ADM2:81297802B68440719308655"
+        ]
+      },
+      "immutable_owner_roster_row": {
+        "id": "gb:VNM:ADM2:81297802B68440719308655",
+        "index": 48575,
+        "bounds": [
+          208356.13720444444,
+          122463.12214082245,
+          208634.90705111108,
+          122719.95736870299
+        ],
+        "province_id": "framework:province:tay-ninh:ce04ab3eb69e",
+        "province_index": 4536
+      },
+      "reverse_source_atom_owners": [
+        48575
+      ],
+      "source_roster_records": [
+        {
+          "source_index": 65145,
+          "family_index": 353,
+          "source_id": "gb:VNM:ADM1:63759600B24834630697040",
+          "ordinal": 53,
+          "owners": [],
+          "name": "Tây Ninh",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 65688,
+          "family_index": 354,
+          "source_id": "gb:VNM:ADM2:81297802B68440719308655",
+          "ordinal": 532,
+          "owners": [
+            48575
+          ],
+          "name": "Tan Chau",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "original_family_ordinal_zero_based": 532,
+      "selected_geography_part": "part-28.json",
+      "whole_consumed_feature_value_sha256": "42d783cf14093b953848fb8718644d1ce9a59fdc552cf1056ae85d2ee524d3a8",
+      "whole_selected_feature_value_sha256": "e5ef96b540b33f9b39663e5655c119aa38e7e7f947059e2f0b515be7a01e1a5e",
+      "whole_original_target_context": {
+        "owner": 48575,
+        "id": "gb:VNM:ADM2:81297802B68440719308655",
+        "name": "Tan Chau",
+        "province_id": "framework:province:tay-ninh:ce04ab3eb69e",
+        "repair_cells": 23,
+        "physical_cells": 0,
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "repair_direct_flags": {
+          "foreign-reference-country": 23
+        },
+        "all_direct_flags": {
+          "foreign-reference-country": 23
+        },
+        "foreign_countries": {
+          "KHM": 23
+        },
+        "foreign_sources": {},
+        "actual_sources": [
+          "gb:VNM:ADM1:63759600B24834630697040",
+          "gb:VNM:ADM2:81297802B68440719308655"
+        ],
+        "source_atoms": [
+          "gb:VNM:ADM2:81297802B68440719308655"
+        ],
+        "metadata": {
+          "administrative_level": "ADM2",
+          "coverage_version": 1,
+          "framework_match": {
+            "id": "VNM-444",
+            "overlap": 0.967412,
+            "source": "Natural Earth"
+          },
+          "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+          "geographic_area_code": "VIE",
+          "geographic_match": "largest source overlap",
+          "geographic_overlap": 0.99151,
+          "geographic_region_code": 41,
+          "granularity_version": 3,
+          "hierarchy_overlap": 0.983282,
+          "hierarchy_source": "gb:VNM:ADM1",
+          "hierarchy_version": 4,
+          "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+          "original_geometry_sha256": "e196060e5d8400bb31c6ce3cc0ba4370db1317b413424fa94b7b0aac23793f88",
+          "original_id": "81297802B68440719308655",
+          "parent_match": "Named source administrative unit grouped within this geographic area",
+          "parent_source_level": "ADM1",
+          "reference_owner_id": "owner:Q881",
+          "reference_polity": "Vietnam",
+          "reference_polity_evidence": {
+            "classification": "Sovereign country",
+            "note": null,
+            "reference_territory": "Vietnam",
+            "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+            "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+            "uncertainty": false
+          },
+          "reference_polity_status": "reference",
+          "reference_version": 3,
+          "reference_year": "2020",
+          "regional_match": {
+            "method": "reference-territory-constrained overlap",
+            "overlap": 0.967412,
+            "reference_iso": "VNM",
+            "source_id": "VNM-444"
+          },
+          "remote_version": 1,
+          "representative_point": [
+            106.30030979133227,
+            11.59095
+          ],
+          "selection_reason": "Named District territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+          "semantic_review": {
+            "continent": "Asia",
+            "decision_index": 2214,
+            "evidence_file": "geographic-decisions",
+            "status": "open"
+          },
+          "semantic_version": 1,
+          "source_id": "gb:VNM:ADM2",
+          "source_name": "geoBoundaries gbOpen",
+          "source_role": "District",
+          "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/VNM/ADM2/geoBoundaries-VNM-ADM2.geojson",
+          "topology_conflicts": 1,
+          "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+          "topology_reconciled": true,
+          "topology_version": 1
+        },
+        "direct_samples": [
+          {
+            "accepted_geometry_covers": false,
+            "accepted_hole_covers": false,
+            "actual_sids": [
+              65688
+            ],
+            "country_boundary_ids": [],
+            "covering_owners": [
+              48575
+            ],
+            "declared_sids": [
+              65688
+            ],
+            "flags": [
+              "foreign-reference-country"
+            ],
+            "hold_reasons": [
+              "foreign-reference-country"
+            ],
+            "owner": 48575,
+            "package": "repair-evaluation",
+            "physical": "land",
+            "qualified": false,
+            "reference_countries": [
+              "KHM"
+            ],
+            "source_boundary_ids": [],
+            "territorial_hold_reasons": [
+              "foreign-reference-country"
+            ],
+            "x": 208456,
+            "y": 122483
+          },
+          {
+            "accepted_geometry_covers": false,
+            "accepted_hole_covers": false,
+            "actual_sids": [
+              65688
+            ],
+            "country_boundary_ids": [],
+            "covering_owners": [
+              48575
+            ],
+            "declared_sids": [
+              65688
+            ],
+            "flags": [
+              "foreign-reference-country"
+            ],
+            "hold_reasons": [
+              "foreign-reference-country"
+            ],
+            "owner": 48575,
+            "package": "repair-evaluation",
+            "physical": "land",
+            "qualified": false,
+            "reference_countries": [
+              "KHM"
+            ],
+            "source_boundary_ids": [],
+            "territorial_hold_reasons": [
+              "foreign-reference-country"
+            ],
+            "x": 208457,
+            "y": 122483
+          }
+        ],
+        "investigation_class": "reference-only",
+        "retained_source_parent_coverage": [
+          {
+            "sources": [],
+            "cells": 8
+          },
+          {
+            "sources": [
+              "gb:VNM:ADM1:63759600B24834630697040 Tây Ninh"
+            ],
+            "cells": 15
+          }
+        ],
+        "repair_source_parent_coverage": [
+          {
+            "sources": [],
+            "cells": 8
+          },
+          {
+            "sources": [
+              "gb:VNM:ADM1:63759600B24834630697040 Tây Ninh"
+            ],
+            "cells": 15
+          }
+        ],
+        "direct_source_parent_coverage": [
+          {
+            "sources": [],
+            "cells": 8
+          },
+          {
+            "sources": [
+              "gb:VNM:ADM1:63759600B24834630697040 Tây Ninh"
+            ],
+            "cells": 15
+          }
+        ],
+        "all_package_declared_actual_correspondence": {
+          "True": 23
+        },
+        "sample_fields": {
+          "hierarchy_overlap": 0.983282,
+          "framework_match": {
+            "id": "VNM-444",
+            "overlap": 0.967412,
+            "source": "Natural Earth"
+          },
+          "topology_conflicts": 1,
+          "topology_reconciled": true,
+          "original_geometry_sha256": "e196060e5d8400bb31c6ce3cc0ba4370db1317b413424fa94b7b0aac23793f88"
+        },
+        "original_features": [
+          {
+            "properties": {
+              "shapeName": "Tan Chau",
+              "shapeISO": "",
+              "shapeID": "81297802B68440719308655",
+              "shapeGroup": "VNM",
+              "shapeType": "ADM2"
+            },
+            "geometry_type": "Polygon"
+          }
+        ]
+      },
+      "custodian_explicit_parent_evidence": {
+        "owner": 48575,
+        "id": "gb:VNM:ADM2:81297802B68440719308655",
+        "name": "Tan Chau",
+        "repair_cells": 23,
+        "physical_cells": 0,
+        "gbOpen_record": 533,
+        "humanitarian_record": 532,
+        "original_archive_identity_limit": "Existing nine-decimal coordinate-ring correspondence only; not geometry-byte equality or cell tolerance.",
+        "join_key": "Literal custodian ADM2_PCODE equality; no prefix inference or spatial predicates.",
+        "custodian_adm2_row": {
+          "excel_row": 534,
+          "ADM2_EN": "Tan Chau",
+          "ADM2_VI": "Huyện Tân Châu",
+          "ADM2_PCODE": "VN70905",
+          "ADM2_REF": null,
+          "ADM2ALT1_EN": null,
+          "ADM2ALT2_EN": null,
+          "ADM2ALT1_VI": null,
+          "ADM2ALT2_VI": null,
+          "ADM1_EN": "Tay Ninh",
+          "ADM1_VI": "Tây Ninh",
+          "ADM1_PCODE": "VN709",
+          "ADM0_EN": "Viet Nam",
+          "ADM0_VI": "Việt Nam",
+          "ADM0_PCODE": "VN",
+          "DATE": "2019-10-01T00:00:00",
+          "VALIDON": "2020-01-03T00:00:00",
+          "VALIDTO": null,
+          "AREA_SQKM": 1107.703857421875
+        },
+        "custodian_adm1_row": {
+          "excel_row": 54,
+          "ADM1_EN": "Tay Ninh",
+          "ADM1_VI": "Tây Ninh",
+          "ADM1_PCODE": "VN709",
+          "ADM1_REF": null,
+          "ADM1ALT1_EN": null,
+          "ADM1ALT2_EN": null,
+          "ADM1ALT1_VI": null,
+          "ADM1ALT2_VI": null,
+          "ADM0_EN": "Viet Nam",
+          "ADM0_VI": "Việt Nam",
+          "ADM0_PCODE": "VN",
+          "DATE": "2019-10-01T00:00:00",
+          "VALIDON": "2020-01-03T00:00:00",
+          "VALIDTO": null,
+          "AREA_SQKM": 4039.89208984375
+        },
+        "source_code_parent_relationship_explicit": true,
+        "qualified_cells": 0,
+        "country_side_conclusion": null
+      }
+    },
+    {
+      "owner_partition": {
+        "owner": 48634,
+        "name": "Bao Lac",
+        "target": "gb:VNM:ADM2:81297802B7761745227660",
+        "country": "CHN",
+        "direct_cells": 27,
+        "complete_original_repair": 27,
+        "complete_original_physical_context": 0,
+        "physical_status": "no_acquired_whole_target_physical",
+        "physical_binding": null,
+        "actual_query_count": null,
+        "issues": null,
+        "actual_source_ids": [
+          "gb:VNM:ADM1:63759600B11108179203280",
+          "gb:VNM:ADM2:81297802B7761745227660"
+        ],
+        "old_ADM1_observed": 27,
+        "old_ADM1_absent": 0,
+        "exact_native_keys": [
+          [
+            48634,
+            208177,
+            113912
+          ],
+          [
+            48634,
+            208178,
+            113913
+          ],
+          [
+            48634,
+            208179,
+            113913
+          ],
+          [
+            48634,
+            208178,
+            113914
+          ],
+          [
+            48634,
+            208179,
+            113914
+          ],
+          [
+            48634,
+            208180,
+            113914
+          ],
+          [
+            48634,
+            208179,
+            113915
+          ],
+          [
+            48634,
+            208180,
+            113915
+          ],
+          [
+            48634,
+            208181,
+            113915
+          ],
+          [
+            48634,
+            208179,
+            113916
+          ],
+          [
+            48634,
+            208180,
+            113916
+          ],
+          [
+            48634,
+            208181,
+            113916
+          ],
+          [
+            48634,
+            208182,
+            113916
+          ],
+          [
+            48634,
+            208180,
+            113917
+          ],
+          [
+            48634,
+            208181,
+            113917
+          ],
+          [
+            48634,
+            208182,
+            113917
+          ],
+          [
+            48634,
+            208183,
+            113917
+          ],
+          [
+            48634,
+            208180,
+            113918
+          ],
+          [
+            48634,
+            208181,
+            113918
+          ],
+          [
+            48634,
+            208182,
+            113918
+          ],
+          [
+            48634,
+            208183,
+            113918
+          ],
+          [
+            48634,
+            208181,
+            113919
+          ],
+          [
+            48634,
+            208182,
+            113919
+          ],
+          [
+            48634,
+            208183,
+            113919
+          ],
+          [
+            48634,
+            208181,
+            113920
+          ],
+          [
+            48634,
+            208182,
+            113920
+          ],
+          [
+            48634,
+            208182,
+            113921
+          ]
+        ],
+        "missing_positive_fact": "A primary dated applicable boundary/territorial or maritime-scope control, tied to these exact native centres, that reconciles their recorded foreign reference-country observation; source identity/parent and positive physical land do not establish country side.",
+        "additional_missing_positive_fact": "Actual complete original whole-target physical query/support/issue witness and accepted receipt; no existing116/new29target result found. This is an additional physical gap, not a reason to rerun completed957."
+      },
+      "canonical_lineage": {
+        "id": "gb:VNM:ADM2:81297802B7761745227660",
+        "index": 48634,
+        "bounds": [
+          207945.19199944445,
+          113802.28738363877,
+          208190.0987377778,
+          114120.8247876638
+        ],
+        "province_id": "framework:province:cao-bang:0fa69cf1ed2b",
+        "province_index": 1170,
+        "name": "Bao Lac",
+        "reference_owner": "Viet Nam",
+        "source_id": "gb:VNM:ADM2",
+        "source_atoms": [
+          "gb:VNM:ADM2:81297802B7761745227660"
+        ]
+      },
+      "immutable_owner_roster_row": {
+        "id": "gb:VNM:ADM2:81297802B7761745227660",
+        "index": 48634,
+        "bounds": [
+          207945.19199944445,
+          113802.28738363877,
+          208190.0987377778,
+          114120.8247876638
+        ],
+        "province_id": "framework:province:cao-bang:0fa69cf1ed2b",
+        "province_index": 1170
+      },
+      "reverse_source_atom_owners": [
+        48634
+      ],
+      "source_roster_records": [
+        {
+          "source_index": 65105,
+          "family_index": 353,
+          "source_id": "gb:VNM:ADM1:63759600B11108179203280",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Cao Bằng",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 65193,
+          "family_index": 354,
+          "source_id": "gb:VNM:ADM2:81297802B7761745227660",
+          "ordinal": 37,
+          "owners": [
+            48634
+          ],
+          "name": "Bao Lac",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "original_family_ordinal_zero_based": 37,
+      "selected_geography_part": "part-27.json",
+      "whole_consumed_feature_value_sha256": "2b168342566a79a1010d2eb74873a8bfeccb5d87dd0f07d564fefdf043cafb2c",
+      "whole_selected_feature_value_sha256": "cea1aaa20aabd4e35b2eae5ffdc86e430d5e3787b818e8e550ffa5336019765d",
+      "whole_original_target_context": {
+        "owner": 48634,
+        "id": "gb:VNM:ADM2:81297802B7761745227660",
+        "name": "Bao Lac",
+        "province_id": "framework:province:cao-bang:0fa69cf1ed2b",
+        "repair_cells": 27,
+        "physical_cells": 0,
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "repair_direct_flags": {
+          "foreign-reference-country": 27
+        },
+        "all_direct_flags": {
+          "foreign-reference-country": 27
+        },
+        "foreign_countries": {
+          "CHN": 27
+        },
+        "foreign_sources": {},
+        "actual_sources": [
+          "gb:VNM:ADM1:63759600B11108179203280",
+          "gb:VNM:ADM2:81297802B7761745227660"
+        ],
+        "source_atoms": [
+          "gb:VNM:ADM2:81297802B7761745227660"
+        ],
+        "metadata": {
+          "administrative_level": "ADM2",
+          "coverage_version": 1,
+          "framework_match": {
+            "id": "VNM-511",
+            "overlap": 0.903578,
+            "source": "Natural Earth"
+          },
+          "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+          "geographic_area_code": "VIE",
+          "geographic_match": "largest source overlap",
+          "geographic_overlap": 0.97747,
+          "geographic_region_code": 41,
+          "granularity_version": 3,
+          "hierarchy_overlap": 0.993257,
+          "hierarchy_source": "gb:VNM:ADM1",
+          "hierarchy_version": 4,
+          "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+          "original_geometry_sha256": "0d144f475f4664591336987aa939c0d974faa5d75576963dece74551af956e1f",
+          "original_id": "81297802B7761745227660",
+          "parent_match": "Named source administrative unit grouped within this geographic area",
+          "parent_source_level": "ADM1",
+          "reference_owner_id": "owner:Q881",
+          "reference_polity": "Vietnam",
+          "reference_polity_evidence": {
+            "classification": "Sovereign country",
+            "note": null,
+            "reference_territory": "Vietnam",
+            "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+            "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+            "uncertainty": false
+          },
+          "reference_polity_status": "reference",
+          "reference_version": 3,
+          "reference_year": "2020",
+          "regional_match": {
+            "method": "reference-territory-constrained overlap",
+            "overlap": 0.903578,
+            "reference_iso": "VNM",
+            "source_id": "VNM-511"
+          },
+          "remote_version": 1,
+          "representative_point": [
+            105.7475031371651,
+            22.8801
+          ],
+          "selection_reason": "Named District territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+          "semantic_review": {
+            "continent": "Asia",
+            "decision_index": 725,
+            "evidence_file": "geographic-decisions",
+            "status": "open"
+          },
+          "semantic_version": 1,
+          "source_id": "gb:VNM:ADM2",
+          "source_name": "geoBoundaries gbOpen",
+          "source_role": "District",
+          "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/VNM/ADM2/geoBoundaries-VNM-ADM2.geojson",
+          "topology_conflicts": 1,
+          "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+          "topology_reconciled": true,
+          "topology_version": 1
+        },
+        "direct_samples": [
+          {
+            "accepted_geometry_covers": false,
+            "accepted_hole_covers": false,
+            "actual_sids": [
+              65105,
+              65193
+            ],
+            "country_boundary_ids": [],
+            "covering_owners": [
+              48634
+            ],
+            "declared_sids": [
+              65105,
+              65193
+            ],
+            "flags": [
+              "foreign-reference-country"
+            ],
+            "hold_reasons": [
+              "foreign-reference-country"
+            ],
+            "owner": 48634,
+            "package": "repair-evaluation",
+            "physical": "land",
+            "qualified": false,
+            "reference_countries": [
+              "CHN"
+            ],
+            "source_boundary_ids": [],
+            "territorial_hold_reasons": [
+              "foreign-reference-country"
+            ],
+            "x": 208177,
+            "y": 113912
+          },
+          {
+            "accepted_geometry_covers": false,
+            "accepted_hole_covers": false,
+            "actual_sids": [
+              65105,
+              65193
+            ],
+            "country_boundary_ids": [],
+            "covering_owners": [
+              48634
+            ],
+            "declared_sids": [
+              65105,
+              65193
+            ],
+            "flags": [
+              "foreign-reference-country"
+            ],
+            "hold_reasons": [
+              "foreign-reference-country"
+            ],
+            "owner": 48634,
+            "package": "repair-evaluation",
+            "physical": "land",
+            "qualified": false,
+            "reference_countries": [
+              "CHN"
+            ],
+            "source_boundary_ids": [],
+            "territorial_hold_reasons": [
+              "foreign-reference-country"
+            ],
+            "x": 208178,
+            "y": 113913
+          }
+        ],
+        "investigation_class": "reference-only",
+        "retained_source_parent_coverage": [
+          {
+            "sources": [
+              "gb:VNM:ADM1:63759600B11108179203280 Cao Bằng"
+            ],
+            "cells": 27
+          }
+        ],
+        "repair_source_parent_coverage": [
+          {
+            "sources": [
+              "gb:VNM:ADM1:63759600B11108179203280 Cao Bằng"
+            ],
+            "cells": 27
+          }
+        ],
+        "direct_source_parent_coverage": [
+          {
+            "sources": [
+              "gb:VNM:ADM1:63759600B11108179203280 Cao Bằng"
+            ],
+            "cells": 27
+          }
+        ],
+        "all_package_declared_actual_correspondence": {
+          "True": 27
+        },
+        "sample_fields": {
+          "hierarchy_overlap": 0.993257,
+          "framework_match": {
+            "id": "VNM-511",
+            "overlap": 0.903578,
+            "source": "Natural Earth"
+          },
+          "topology_conflicts": 1,
+          "topology_reconciled": true,
+          "original_geometry_sha256": "0d144f475f4664591336987aa939c0d974faa5d75576963dece74551af956e1f"
+        },
+        "original_features": [
+          {
+            "properties": {
+              "shapeName": "Bao Lac",
+              "shapeISO": "",
+              "shapeID": "81297802B7761745227660",
+              "shapeGroup": "VNM",
+              "shapeType": "ADM2"
+            },
+            "geometry_type": "Polygon"
+          }
+        ]
+      },
+      "custodian_explicit_parent_evidence": {
+        "owner": 48634,
+        "id": "gb:VNM:ADM2:81297802B7761745227660",
+        "name": "Bao Lac",
+        "repair_cells": 27,
+        "physical_cells": 0,
+        "gbOpen_record": 38,
+        "humanitarian_record": 129,
+        "original_archive_identity_limit": "Existing nine-decimal coordinate-ring correspondence only; not geometry-byte equality or cell tolerance.",
+        "join_key": "Literal custodian ADM2_PCODE equality; no prefix inference or spatial predicates.",
+        "custodian_adm2_row": {
+          "excel_row": 39,
+          "ADM2_EN": "Bao Lac",
+          "ADM2_VI": "Huyện Bảo Lạc",
+          "ADM2_PCODE": "VN20303",
+          "ADM2_REF": null,
+          "ADM2ALT1_EN": null,
+          "ADM2ALT2_EN": null,
+          "ADM2ALT1_VI": null,
+          "ADM2ALT2_VI": null,
+          "ADM1_EN": "Cao Bang",
+          "ADM1_VI": "Cao Bằng",
+          "ADM1_PCODE": "VN203",
+          "ADM0_EN": "Viet Nam",
+          "ADM0_VI": "Việt Nam",
+          "ADM0_PCODE": "VN",
+          "DATE": "2019-10-01T00:00:00",
+          "VALIDON": "2020-01-03T00:00:00",
+          "VALIDTO": null,
+          "AREA_SQKM": 923.9563598632812
+        },
+        "custodian_adm1_row": {
+          "excel_row": 15,
+          "ADM1_EN": "Cao Bang",
+          "ADM1_VI": "Cao Bằng",
+          "ADM1_PCODE": "VN203",
+          "ADM1_REF": null,
+          "ADM1ALT1_EN": null,
+          "ADM1ALT2_EN": null,
+          "ADM1ALT1_VI": null,
+          "ADM1ALT2_VI": null,
+          "ADM0_EN": "Viet Nam",
+          "ADM0_VI": "Việt Nam",
+          "ADM0_PCODE": "VN",
+          "DATE": "2019-10-01T00:00:00",
+          "VALIDON": "2020-01-03T00:00:00",
+          "VALIDTO": null,
+          "AREA_SQKM": 6730.70166015625
+        },
+        "source_code_parent_relationship_explicit": true,
+        "qualified_cells": 0,
+        "country_side_conclusion": null
+      }
+    },
+    {
+      "owner_partition": {
+        "owner": 48410,
+        "name": "Phuc Hoa",
+        "target": "gb:VNM:ADM2:81297802B46332855119377",
+        "country": "CHN",
+        "direct_cells": 33,
+        "complete_original_repair": 33,
+        "complete_original_physical_context": 0,
+        "physical_status": "no_acquired_whole_target_physical",
+        "physical_binding": null,
+        "actual_query_count": null,
+        "issues": null,
+        "actual_source_ids": [
+          "gb:VNM:ADM1:63759600B11108179203280",
+          "gb:VNM:ADM2:81297802B46332855119377"
+        ],
+        "old_ADM1_observed": 33,
+        "old_ADM1_absent": 0,
+        "exact_native_keys": [
+          [
+            48410,
+            208718,
+            114192
+          ],
+          [
+            48410,
+            208719,
+            114192
+          ],
+          [
+            48410,
+            208718,
+            114193
+          ],
+          [
+            48410,
+            208719,
+            114193
+          ],
+          [
+            48410,
+            208720,
+            114193
+          ],
+          [
+            48410,
+            208718,
+            114194
+          ],
+          [
+            48410,
+            208719,
+            114194
+          ],
+          [
+            48410,
+            208720,
+            114194
+          ],
+          [
+            48410,
+            208718,
+            114195
+          ],
+          [
+            48410,
+            208719,
+            114195
+          ],
+          [
+            48410,
+            208720,
+            114195
+          ],
+          [
+            48410,
+            208718,
+            114196
+          ],
+          [
+            48410,
+            208719,
+            114196
+          ],
+          [
+            48410,
+            208720,
+            114196
+          ],
+          [
+            48410,
+            208718,
+            114197
+          ],
+          [
+            48410,
+            208716,
+            114206
+          ],
+          [
+            48410,
+            208716,
+            114207
+          ],
+          [
+            48410,
+            208716,
+            114208
+          ],
+          [
+            48410,
+            208716,
+            114209
+          ],
+          [
+            48410,
+            208716,
+            114210
+          ],
+          [
+            48410,
+            208716,
+            114211
+          ],
+          [
+            48410,
+            208715,
+            114213
+          ],
+          [
+            48410,
+            208715,
+            114214
+          ],
+          [
+            48410,
+            208715,
+            114215
+          ],
+          [
+            48410,
+            208702,
+            114280
+          ],
+          [
+            48410,
+            208687,
+            114289
+          ],
+          [
+            48410,
+            208687,
+            114290
+          ],
+          [
+            48410,
+            208687,
+            114291
+          ],
+          [
+            48410,
+            208687,
+            114292
+          ],
+          [
+            48410,
+            208688,
+            114292
+          ],
+          [
+            48410,
+            208686,
+            114293
+          ],
+          [
+            48410,
+            208687,
+            114293
+          ],
+          [
+            48410,
+            208686,
+            114294
+          ]
+        ],
+        "missing_positive_fact": "A primary dated applicable boundary/territorial or maritime-scope control, tied to these exact native centres, that reconciles their recorded foreign reference-country observation; source identity/parent and positive physical land do not establish country side.",
+        "additional_missing_positive_fact": "Actual complete original whole-target physical query/support/issue witness and accepted receipt; no existing116/new29target result found. This is an additional physical gap, not a reason to rerun completed957."
+      },
+      "canonical_lineage": {
+        "id": "gb:VNM:ADM2:81297802B46332855119377",
+        "index": 48410,
+        "bounds": [
+          208568.127545,
+          114122.24542272786,
+          208720.1110011111,
+          114297.39350876237
+        ],
+        "province_id": "framework:province:cao-bang:0fa69cf1ed2b",
+        "province_index": 1170,
+        "name": "Phuc Hoa",
+        "reference_owner": "Viet Nam",
+        "source_id": "gb:VNM:ADM2",
+        "source_atoms": [
+          "gb:VNM:ADM2:81297802B46332855119377"
+        ]
+      },
+      "immutable_owner_roster_row": {
+        "id": "gb:VNM:ADM2:81297802B46332855119377",
+        "index": 48410,
+        "bounds": [
+          208568.127545,
+          114122.24542272786,
+          208720.1110011111,
+          114297.39350876237
+        ],
+        "province_id": "framework:province:cao-bang:0fa69cf1ed2b",
+        "province_index": 1170
+      },
+      "reverse_source_atom_owners": [
+        48410
+      ],
+      "source_roster_records": [
+        {
+          "source_index": 65105,
+          "family_index": 353,
+          "source_id": "gb:VNM:ADM1:63759600B11108179203280",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Cao Bằng",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 65611,
+          "family_index": 354,
+          "source_id": "gb:VNM:ADM2:81297802B46332855119377",
+          "ordinal": 455,
+          "owners": [
+            48410
+          ],
+          "name": "Phuc Hoa",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "original_family_ordinal_zero_based": 455,
+      "selected_geography_part": "part-28.json",
+      "whole_consumed_feature_value_sha256": "96bdc63797a111e629bddbfc5da4d668b3a5a236044acb1b25d55ecc96066043",
+      "whole_selected_feature_value_sha256": "e6b3c0d6ad64c450fccc8e64ca36232ef2270b91a8882ce2effb9c38915421ba",
+      "whole_original_target_context": {
+        "owner": 48410,
+        "id": "gb:VNM:ADM2:81297802B46332855119377",
+        "name": "Phuc Hoa",
+        "province_id": "framework:province:cao-bang:0fa69cf1ed2b",
+        "repair_cells": 33,
+        "physical_cells": 0,
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "repair_direct_flags": {
+          "foreign-reference-country": 33
+        },
+        "all_direct_flags": {
+          "foreign-reference-country": 33
+        },
+        "foreign_countries": {
+          "CHN": 33
+        },
+        "foreign_sources": {},
+        "actual_sources": [
+          "gb:VNM:ADM1:63759600B11108179203280",
+          "gb:VNM:ADM2:81297802B46332855119377"
+        ],
+        "source_atoms": [
+          "gb:VNM:ADM2:81297802B46332855119377"
+        ],
+        "metadata": {
+          "administrative_level": "ADM2",
+          "coverage_version": 1,
+          "framework_match": {
+            "id": "VNM-511",
+            "overlap": 0.771805,
+            "source": "Natural Earth"
+          },
+          "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+          "geographic_area_code": "VIE",
+          "geographic_match": "largest source overlap",
+          "geographic_overlap": 0.97581,
+          "geographic_region_code": 41,
+          "granularity_version": 3,
+          "hierarchy_overlap": 1.0,
+          "hierarchy_source": "gb:VNM:ADM1",
+          "hierarchy_version": 4,
+          "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+          "original_id": "81297802B46332855119377",
+          "parent_match": "Named source administrative unit grouped within this geographic area",
+          "parent_source_level": "ADM1",
+          "reference_owner_id": "owner:Q881",
+          "reference_polity": "Vietnam",
+          "reference_polity_evidence": {
+            "classification": "Sovereign country",
+            "note": null,
+            "reference_territory": "Vietnam",
+            "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+            "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+            "uncertainty": false
+          },
+          "reference_polity_status": "reference",
+          "reference_version": 3,
+          "reference_year": "2020",
+          "regional_match": {
+            "method": "reference-territory-constrained overlap",
+            "overlap": 0.771805,
+            "reference_iso": "VNM",
+            "source_id": "VNM-511"
+          },
+          "remote_version": 1,
+          "representative_point": [
+            106.51154821128452,
+            22.558500000000002
+          ],
+          "selection_reason": "Named District territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+          "semantic_review": {
+            "continent": "Asia",
+            "decision_index": 725,
+            "evidence_file": "geographic-decisions",
+            "status": "open"
+          },
+          "semantic_version": 1,
+          "source_id": "gb:VNM:ADM2",
+          "source_name": "geoBoundaries gbOpen",
+          "source_role": "District",
+          "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/VNM/ADM2/geoBoundaries-VNM-ADM2.geojson",
+          "topology_version": 1
+        },
+        "direct_samples": [
+          {
+            "accepted_geometry_covers": false,
+            "accepted_hole_covers": false,
+            "actual_sids": [
+              65105,
+              65611
+            ],
+            "country_boundary_ids": [],
+            "covering_owners": [
+              48410
+            ],
+            "declared_sids": [
+              65105,
+              65611
+            ],
+            "flags": [
+              "foreign-reference-country"
+            ],
+            "hold_reasons": [
+              "foreign-reference-country"
+            ],
+            "owner": 48410,
+            "package": "repair-evaluation",
+            "physical": "land",
+            "qualified": false,
+            "reference_countries": [
+              "CHN"
+            ],
+            "source_boundary_ids": [],
+            "territorial_hold_reasons": [
+              "foreign-reference-country"
+            ],
+            "x": 208718,
+            "y": 114192
+          },
+          {
+            "accepted_geometry_covers": false,
+            "accepted_hole_covers": false,
+            "actual_sids": [
+              65105,
+              65611
+            ],
+            "country_boundary_ids": [],
+            "covering_owners": [
+              48410
+            ],
+            "declared_sids": [
+              65105,
+              65611
+            ],
+            "flags": [
+              "foreign-reference-country"
+            ],
+            "hold_reasons": [
+              "foreign-reference-country"
+            ],
+            "owner": 48410,
+            "package": "repair-evaluation",
+            "physical": "land",
+            "qualified": false,
+            "reference_countries": [
+              "CHN"
+            ],
+            "source_boundary_ids": [],
+            "territorial_hold_reasons": [
+              "foreign-reference-country"
+            ],
+            "x": 208719,
+            "y": 114192
+          }
+        ],
+        "investigation_class": "reference-only",
+        "retained_source_parent_coverage": [
+          {
+            "sources": [
+              "gb:VNM:ADM1:63759600B11108179203280 Cao Bằng"
+            ],
+            "cells": 33
+          }
+        ],
+        "repair_source_parent_coverage": [
+          {
+            "sources": [
+              "gb:VNM:ADM1:63759600B11108179203280 Cao Bằng"
+            ],
+            "cells": 33
+          }
+        ],
+        "direct_source_parent_coverage": [
+          {
+            "sources": [
+              "gb:VNM:ADM1:63759600B11108179203280 Cao Bằng"
+            ],
+            "cells": 33
+          }
+        ],
+        "all_package_declared_actual_correspondence": {
+          "True": 33
+        },
+        "sample_fields": {
+          "hierarchy_overlap": 1.0,
+          "framework_match": {
+            "id": "VNM-511",
+            "overlap": 0.771805,
+            "source": "Natural Earth"
+          },
+          "topology_conflicts": null,
+          "topology_reconciled": null,
+          "original_geometry_sha256": null
+        },
+        "original_features": [
+          {
+            "properties": {
+              "shapeName": "Phuc Hoa",
+              "shapeISO": "",
+              "shapeID": "81297802B46332855119377",
+              "shapeGroup": "VNM",
+              "shapeType": "ADM2"
+            },
+            "geometry_type": "Polygon"
+          }
+        ]
+      },
+      "custodian_explicit_parent_evidence": {
+        "owner": 48410,
+        "id": "gb:VNM:ADM2:81297802B46332855119377",
+        "name": "Phuc Hoa",
+        "repair_cells": 33,
+        "physical_cells": 0,
+        "gbOpen_record": 456,
+        "humanitarian_record": 138,
+        "original_archive_identity_limit": "Existing nine-decimal coordinate-ring correspondence only; not geometry-byte equality or cell tolerance.",
+        "join_key": "Literal custodian ADM2_PCODE equality; no prefix inference or spatial predicates.",
+        "custodian_adm2_row": {
+          "excel_row": 457,
+          "ADM2_EN": "Phuc Hoa",
+          "ADM2_VI": "Huyện Phục Hòa",
+          "ADM2_PCODE": "VN20318",
+          "ADM2_REF": null,
+          "ADM2ALT1_EN": null,
+          "ADM2ALT2_EN": null,
+          "ADM2ALT1_VI": null,
+          "ADM2ALT2_VI": null,
+          "ADM1_EN": "Cao Bang",
+          "ADM1_VI": "Cao Bằng",
+          "ADM1_PCODE": "VN203",
+          "ADM0_EN": "Viet Nam",
+          "ADM0_VI": "Việt Nam",
+          "ADM0_PCODE": "VN",
+          "DATE": "2019-10-01T00:00:00",
+          "VALIDON": "2020-01-03T00:00:00",
+          "VALIDTO": null,
+          "AREA_SQKM": 253.6318969726562
+        },
+        "custodian_adm1_row": {
+          "excel_row": 15,
+          "ADM1_EN": "Cao Bang",
+          "ADM1_VI": "Cao Bằng",
+          "ADM1_PCODE": "VN203",
+          "ADM1_REF": null,
+          "ADM1ALT1_EN": null,
+          "ADM1ALT2_EN": null,
+          "ADM1ALT1_VI": null,
+          "ADM1ALT2_VI": null,
+          "ADM0_EN": "Viet Nam",
+          "ADM0_VI": "Việt Nam",
+          "ADM0_PCODE": "VN",
+          "DATE": "2019-10-01T00:00:00",
+          "VALIDON": "2020-01-03T00:00:00",
+          "VALIDTO": null,
+          "AREA_SQKM": 6730.70166015625
+        },
+        "source_code_parent_relationship_explicit": true,
+        "qualified_cells": 0,
+        "country_side_conclusion": null
+      }
+    },
+    {
+      "owner_partition": {
+        "owner": 48473,
+        "name": "Trang Dinh",
+        "target": "gb:VNM:ADM2:81297802B55237865359696",
+        "country": "CHN",
+        "direct_cells": 51,
+        "complete_original_repair": 51,
+        "complete_original_physical_context": 0,
+        "physical_status": "no_acquired_whole_target_physical",
+        "physical_binding": null,
+        "actual_query_count": null,
+        "issues": null,
+        "actual_source_ids": [
+          "gb:VNM:ADM1:63759600B11108179203280",
+          "gb:VNM:ADM1:63759600B58815535609509",
+          "gb:VNM:ADM2:81297802B55237865359696"
+        ],
+        "old_ADM1_observed": 51,
+        "old_ADM1_absent": 0,
+        "exact_native_keys": [
+          [
+            48473,
+            208686,
+            114322
+          ],
+          [
+            48473,
+            208687,
+            114323
+          ],
+          [
+            48473,
+            208687,
+            114324
+          ],
+          [
+            48473,
+            208689,
+            114328
+          ],
+          [
+            48473,
+            208690,
+            114330
+          ],
+          [
+            48473,
+            208691,
+            114332
+          ],
+          [
+            48473,
+            208694,
+            114335
+          ],
+          [
+            48473,
+            208703,
+            114350
+          ],
+          [
+            48473,
+            208703,
+            114351
+          ],
+          [
+            48473,
+            208704,
+            114351
+          ],
+          [
+            48473,
+            208703,
+            114352
+          ],
+          [
+            48473,
+            208704,
+            114352
+          ],
+          [
+            48473,
+            208703,
+            114353
+          ],
+          [
+            48473,
+            208703,
+            114354
+          ],
+          [
+            48473,
+            208695,
+            114380
+          ],
+          [
+            48473,
+            208694,
+            114381
+          ],
+          [
+            48473,
+            208695,
+            114381
+          ],
+          [
+            48473,
+            208693,
+            114382
+          ],
+          [
+            48473,
+            208694,
+            114382
+          ],
+          [
+            48473,
+            208695,
+            114382
+          ],
+          [
+            48473,
+            208696,
+            114382
+          ],
+          [
+            48473,
+            208704,
+            114382
+          ],
+          [
+            48473,
+            208693,
+            114383
+          ],
+          [
+            48473,
+            208694,
+            114383
+          ],
+          [
+            48473,
+            208695,
+            114383
+          ],
+          [
+            48473,
+            208696,
+            114383
+          ],
+          [
+            48473,
+            208697,
+            114383
+          ],
+          [
+            48473,
+            208703,
+            114383
+          ],
+          [
+            48473,
+            208704,
+            114383
+          ],
+          [
+            48473,
+            208705,
+            114383
+          ],
+          [
+            48473,
+            208764,
+            114418
+          ],
+          [
+            48473,
+            208764,
+            114419
+          ],
+          [
+            48473,
+            208764,
+            114420
+          ],
+          [
+            48473,
+            208777,
+            114446
+          ],
+          [
+            48473,
+            208777,
+            114447
+          ],
+          [
+            48473,
+            208778,
+            114448
+          ],
+          [
+            48473,
+            208778,
+            114449
+          ],
+          [
+            48473,
+            208778,
+            114450
+          ],
+          [
+            48473,
+            208778,
+            114451
+          ],
+          [
+            48473,
+            208778,
+            114452
+          ],
+          [
+            48473,
+            208779,
+            114456
+          ],
+          [
+            48473,
+            208780,
+            114458
+          ],
+          [
+            48473,
+            208780,
+            114459
+          ],
+          [
+            48473,
+            208780,
+            114460
+          ],
+          [
+            48473,
+            208780,
+            114461
+          ],
+          [
+            48473,
+            208785,
+            114469
+          ],
+          [
+            48473,
+            208787,
+            114476
+          ],
+          [
+            48473,
+            208787,
+            114477
+          ],
+          [
+            48473,
+            208787,
+            114478
+          ],
+          [
+            48473,
+            208787,
+            114479
+          ],
+          [
+            48473,
+            208784,
+            114488
+          ]
+        ],
+        "missing_positive_fact": "A primary dated applicable boundary/territorial or maritime-scope control, tied to these exact native centres, that reconciles their recorded foreign reference-country observation; source identity/parent and positive physical land do not establish country side.",
+        "additional_missing_positive_fact": "Actual complete original whole-target physical query/support/issue witness and accepted receipt; no existing116/new29target result found. This is an additional physical gap, not a reason to rerun completed957."
+      },
+      "canonical_lineage": {
+        "id": "gb:VNM:ADM2:81297802B55237865359696",
+        "index": 48473,
+        "bounds": [
+          208410.90076888888,
+          114289.82876970455,
+          208787.91004166665,
+          114537.69631393501
+        ],
+        "province_id": "framework:province:lang-son:51be4e74f403",
+        "province_index": 2638,
+        "name": "Trang Dinh",
+        "reference_owner": "Viet Nam",
+        "source_id": "gb:VNM:ADM2",
+        "source_atoms": [
+          "gb:VNM:ADM2:81297802B55237865359696"
+        ]
+      },
+      "immutable_owner_roster_row": {
+        "id": "gb:VNM:ADM2:81297802B55237865359696",
+        "index": 48473,
+        "bounds": [
+          208410.90076888888,
+          114289.82876970455,
+          208787.91004166665,
+          114537.69631393501
+        ],
+        "province_id": "framework:province:lang-son:51be4e74f403",
+        "province_index": 2638
+      },
+      "reverse_source_atom_owners": [
+        48473
+      ],
+      "source_roster_records": [
+        {
+          "source_index": 65105,
+          "family_index": 353,
+          "source_id": "gb:VNM:ADM1:63759600B11108179203280",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Cao Bằng",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 65129,
+          "family_index": 353,
+          "source_id": "gb:VNM:ADM1:63759600B58815535609509",
+          "ordinal": 37,
+          "owners": [],
+          "name": "Lạng Sơn",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 65782,
+          "family_index": 354,
+          "source_id": "gb:VNM:ADM2:81297802B55237865359696",
+          "ordinal": 626,
+          "owners": [
+            48473
+          ],
+          "name": "Trang Dinh",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "original_family_ordinal_zero_based": 626,
+      "selected_geography_part": "part-28.json",
+      "whole_consumed_feature_value_sha256": "38e1cb09bc469321cc1d38ef7e9822eb5f2f7b11d617a0c9c5b38b2a4385056e",
+      "whole_selected_feature_value_sha256": "14dc4a507a0ce3bc162848a4cb5afda3e3e8c1285a87bb6c9b7aff1b563e21c1",
+      "whole_original_target_context": {
+        "owner": 48473,
+        "id": "gb:VNM:ADM2:81297802B55237865359696",
+        "name": "Trang Dinh",
+        "province_id": "framework:province:lang-son:51be4e74f403",
+        "repair_cells": 51,
+        "physical_cells": 0,
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "repair_direct_flags": {
+          "foreign-reference-country": 51
+        },
+        "all_direct_flags": {
+          "foreign-reference-country": 51
+        },
+        "foreign_countries": {
+          "CHN": 51
+        },
+        "foreign_sources": {},
+        "actual_sources": [
+          "gb:VNM:ADM1:63759600B11108179203280",
+          "gb:VNM:ADM1:63759600B58815535609509",
+          "gb:VNM:ADM2:81297802B55237865359696"
+        ],
+        "source_atoms": [
+          "gb:VNM:ADM2:81297802B55237865359696"
+        ],
+        "metadata": {
+          "administrative_level": "ADM2",
+          "coverage_version": 1,
+          "framework_match": {
+            "id": "VNM-454",
+            "overlap": 0.844992,
+            "source": "Natural Earth"
+          },
+          "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+          "geographic_area_code": "VIE",
+          "geographic_match": "largest source overlap",
+          "geographic_overlap": 0.88606,
+          "geographic_region_code": 41,
+          "granularity_version": 3,
+          "hierarchy_overlap": 0.859192,
+          "hierarchy_source": "gb:VNM:ADM1",
+          "hierarchy_version": 4,
+          "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+          "original_geometry_sha256": "5d63d37b0deebacb853b344220ddaf43f67f3b77b6a24a12d17c6ffce1862c8f",
+          "original_id": "81297802B55237865359696",
+          "parent_match": "Named source administrative unit grouped within this geographic area",
+          "parent_source_level": "ADM1",
+          "reference_owner_id": "owner:Q881",
+          "reference_polity": "Vietnam",
+          "reference_polity_evidence": {
+            "classification": "Sovereign country",
+            "note": null,
+            "reference_territory": "Vietnam",
+            "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+            "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+            "uncertainty": false
+          },
+          "reference_polity_status": "reference",
+          "reference_version": 3,
+          "reference_year": "2020",
+          "regional_match": {
+            "method": "reference-territory-constrained overlap",
+            "overlap": 0.844992,
+            "reference_iso": "VNM",
+            "source_id": "VNM-454"
+          },
+          "remote_version": 1,
+          "representative_point": [
+            106.43789370472578,
+            22.30075
+          ],
+          "selection_reason": "Named District territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+          "semantic_review": {
+            "continent": "Asia",
+            "decision_index": 1411,
+            "evidence_file": "geographic-decisions",
+            "status": "open"
+          },
+          "semantic_version": 1,
+          "source_id": "gb:VNM:ADM2",
+          "source_name": "geoBoundaries gbOpen",
+          "source_role": "District",
+          "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/VNM/ADM2/geoBoundaries-VNM-ADM2.geojson",
+          "topology_conflicts": 1,
+          "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+          "topology_reconciled": true,
+          "topology_version": 1
+        },
+        "direct_samples": [
+          {
+            "accepted_geometry_covers": false,
+            "accepted_hole_covers": false,
+            "actual_sids": [
+              65105,
+              65782
+            ],
+            "country_boundary_ids": [],
+            "covering_owners": [
+              48473
+            ],
+            "declared_sids": [
+              65105,
+              65782
+            ],
+            "flags": [
+              "foreign-reference-country"
+            ],
+            "hold_reasons": [
+              "foreign-reference-country"
+            ],
+            "owner": 48473,
+            "package": "repair-evaluation",
+            "physical": "land",
+            "qualified": false,
+            "reference_countries": [
+              "CHN"
+            ],
+            "source_boundary_ids": [],
+            "territorial_hold_reasons": [
+              "foreign-reference-country"
+            ],
+            "x": 208686,
+            "y": 114322
+          },
+          {
+            "accepted_geometry_covers": false,
+            "accepted_hole_covers": false,
+            "actual_sids": [
+              65105,
+              65782
+            ],
+            "country_boundary_ids": [],
+            "covering_owners": [
+              48473
+            ],
+            "declared_sids": [
+              65105,
+              65782
+            ],
+            "flags": [
+              "foreign-reference-country"
+            ],
+            "hold_reasons": [
+              "foreign-reference-country"
+            ],
+            "owner": 48473,
+            "package": "repair-evaluation",
+            "physical": "land",
+            "qualified": false,
+            "reference_countries": [
+              "CHN"
+            ],
+            "source_boundary_ids": [],
+            "territorial_hold_reasons": [
+              "foreign-reference-country"
+            ],
+            "x": 208687,
+            "y": 114323
+          }
+        ],
+        "investigation_class": "reference-only",
+        "retained_source_parent_coverage": [
+          {
+            "sources": [
+              "gb:VNM:ADM1:63759600B11108179203280 Cao Bằng"
+            ],
+            "cells": 7
+          },
+          {
+            "sources": [
+              "gb:VNM:ADM1:63759600B58815535609509 Lạng Sơn"
+            ],
+            "cells": 44
+          }
+        ],
+        "repair_source_parent_coverage": [
+          {
+            "sources": [
+              "gb:VNM:ADM1:63759600B11108179203280 Cao Bằng"
+            ],
+            "cells": 7
+          },
+          {
+            "sources": [
+              "gb:VNM:ADM1:63759600B58815535609509 Lạng Sơn"
+            ],
+            "cells": 44
+          }
+        ],
+        "direct_source_parent_coverage": [
+          {
+            "sources": [
+              "gb:VNM:ADM1:63759600B11108179203280 Cao Bằng"
+            ],
+            "cells": 7
+          },
+          {
+            "sources": [
+              "gb:VNM:ADM1:63759600B58815535609509 Lạng Sơn"
+            ],
+            "cells": 44
+          }
+        ],
+        "all_package_declared_actual_correspondence": {
+          "True": 51
+        },
+        "sample_fields": {
+          "hierarchy_overlap": 0.859192,
+          "framework_match": {
+            "id": "VNM-454",
+            "overlap": 0.844992,
+            "source": "Natural Earth"
+          },
+          "topology_conflicts": 1,
+          "topology_reconciled": true,
+          "original_geometry_sha256": "5d63d37b0deebacb853b344220ddaf43f67f3b77b6a24a12d17c6ffce1862c8f"
+        },
+        "original_features": [
+          {
+            "properties": {
+              "shapeName": "Trang Dinh",
+              "shapeISO": "",
+              "shapeID": "81297802B55237865359696",
+              "shapeGroup": "VNM",
+              "shapeType": "ADM2"
+            },
+            "geometry_type": "Polygon"
+          }
+        ]
+      },
+      "custodian_explicit_parent_evidence": {
+        "owner": 48473,
+        "id": "gb:VNM:ADM2:81297802B55237865359696",
+        "name": "Trang Dinh",
+        "repair_cells": 51,
+        "physical_cells": 0,
+        "gbOpen_record": 627,
+        "humanitarian_record": 159,
+        "original_archive_identity_limit": "Existing nine-decimal coordinate-ring correspondence only; not geometry-byte equality or cell tolerance.",
+        "join_key": "Literal custodian ADM2_PCODE equality; no prefix inference or spatial predicates.",
+        "custodian_adm2_row": {
+          "excel_row": 628,
+          "ADM2_EN": "Trang Dinh",
+          "ADM2_VI": "Huyện Tràng Định",
+          "ADM2_PCODE": "VN20903",
+          "ADM2_REF": null,
+          "ADM2ALT1_EN": null,
+          "ADM2ALT2_EN": null,
+          "ADM2ALT1_VI": null,
+          "ADM2ALT2_VI": null,
+          "ADM1_EN": "Lang Son",
+          "ADM1_VI": "Lạng Sơn",
+          "ADM1_PCODE": "VN209",
+          "ADM0_EN": "Viet Nam",
+          "ADM0_VI": "Việt Nam",
+          "ADM0_PCODE": "VN",
+          "DATE": "2019-10-01T00:00:00",
+          "VALIDON": "2020-01-03T00:00:00",
+          "VALIDTO": null,
+          "AREA_SQKM": 1022.3974609375
+        },
+        "custodian_adm1_row": {
+          "excel_row": 38,
+          "ADM1_EN": "Lang Son",
+          "ADM1_VI": "Lạng Sơn",
+          "ADM1_PCODE": "VN209",
+          "ADM1_REF": null,
+          "ADM1ALT1_EN": null,
+          "ADM1ALT2_EN": null,
+          "ADM1ALT1_VI": null,
+          "ADM1ALT2_VI": null,
+          "ADM0_EN": "Viet Nam",
+          "ADM0_VI": "Việt Nam",
+          "ADM0_PCODE": "VN",
+          "DATE": "2019-10-01T00:00:00",
+          "VALIDON": "2020-01-03T00:00:00",
+          "VALIDTO": null,
+          "AREA_SQKM": 8333.6689453125
+        },
+        "source_code_parent_relationship_explicit": true,
+        "qualified_cells": 0,
+        "country_side_conclusion": null
+      }
+    },
+    {
+      "owner_partition": {
+        "owner": 48254,
+        "name": "Meo Vac",
+        "target": "gb:VNM:ADM2:81297802B2489932619372",
+        "country": "CHN",
+        "direct_cells": 52,
+        "complete_original_repair": 52,
+        "complete_original_physical_context": 0,
+        "physical_status": "no_acquired_whole_target_physical",
+        "physical_binding": null,
+        "actual_query_count": null,
+        "issues": null,
+        "actual_source_ids": [
+          "gb:VNM:ADM1:63759600B80209413202681",
+          "gb:VNM:ADM2:81297802B2489932619372"
+        ],
+        "old_ADM1_observed": 41,
+        "old_ADM1_absent": 11,
+        "exact_native_keys": [
+          [
+            48254,
+            207828,
+            113614
+          ],
+          [
+            48254,
+            207829,
+            113614
+          ],
+          [
+            48254,
+            207827,
+            113615
+          ],
+          [
+            48254,
+            207852,
+            113634
+          ],
+          [
+            48254,
+            207879,
+            113647
+          ],
+          [
+            48254,
+            207880,
+            113648
+          ],
+          [
+            48254,
+            207881,
+            113649
+          ],
+          [
+            48254,
+            207882,
+            113650
+          ],
+          [
+            48254,
+            207883,
+            113651
+          ],
+          [
+            48254,
+            207883,
+            113652
+          ],
+          [
+            48254,
+            207884,
+            113652
+          ],
+          [
+            48254,
+            207884,
+            113653
+          ],
+          [
+            48254,
+            207885,
+            113654
+          ],
+          [
+            48254,
+            207886,
+            113655
+          ],
+          [
+            48254,
+            207890,
+            113660
+          ],
+          [
+            48254,
+            207891,
+            113660
+          ],
+          [
+            48254,
+            207892,
+            113660
+          ],
+          [
+            48254,
+            207893,
+            113660
+          ],
+          [
+            48254,
+            207894,
+            113660
+          ],
+          [
+            48254,
+            207891,
+            113661
+          ],
+          [
+            48254,
+            207892,
+            113661
+          ],
+          [
+            48254,
+            207893,
+            113661
+          ],
+          [
+            48254,
+            207894,
+            113661
+          ],
+          [
+            48254,
+            207892,
+            113662
+          ],
+          [
+            48254,
+            207893,
+            113662
+          ],
+          [
+            48254,
+            207894,
+            113662
+          ],
+          [
+            48254,
+            207895,
+            113662
+          ],
+          [
+            48254,
+            207893,
+            113663
+          ],
+          [
+            48254,
+            207894,
+            113663
+          ],
+          [
+            48254,
+            207895,
+            113663
+          ],
+          [
+            48254,
+            207894,
+            113664
+          ],
+          [
+            48254,
+            207895,
+            113664
+          ],
+          [
+            48254,
+            207896,
+            113664
+          ],
+          [
+            48254,
+            207895,
+            113665
+          ],
+          [
+            48254,
+            207896,
+            113665
+          ],
+          [
+            48254,
+            207897,
+            113665
+          ],
+          [
+            48254,
+            207896,
+            113666
+          ],
+          [
+            48254,
+            207897,
+            113666
+          ],
+          [
+            48254,
+            207908,
+            113694
+          ],
+          [
+            48254,
+            207909,
+            113696
+          ],
+          [
+            48254,
+            207910,
+            113697
+          ],
+          [
+            48254,
+            207910,
+            113698
+          ],
+          [
+            48254,
+            207911,
+            113698
+          ],
+          [
+            48254,
+            207911,
+            113699
+          ],
+          [
+            48254,
+            207912,
+            113699
+          ],
+          [
+            48254,
+            207911,
+            113700
+          ],
+          [
+            48254,
+            207912,
+            113700
+          ],
+          [
+            48254,
+            207911,
+            113701
+          ],
+          [
+            48254,
+            207912,
+            113701
+          ],
+          [
+            48254,
+            207912,
+            113702
+          ],
+          [
+            48254,
+            207912,
+            113703
+          ],
+          [
+            48254,
+            207962,
+            113736
+          ]
+        ],
+        "missing_positive_fact": "A primary dated applicable boundary/territorial or maritime-scope control, tied to these exact native centres, that reconciles their recorded foreign reference-country observation; source identity/parent and positive physical land do not establish country side.",
+        "additional_missing_positive_fact": "Actual complete original whole-target physical query/support/issue witness and accepted receipt; no existing116/new29target result found. This is an additional physical gap, not a reason to rerun completed957."
+      },
+      "canonical_lineage": {
+        "id": "gb:VNM:ADM2:81297802B2489932619372",
+        "index": 48254,
+        "bounds": [
+          207766.7006477778,
+          113614.19664116298,
+          207972.18333689586,
+          113873.50692852591
+        ],
+        "province_id": "framework:province:ha-giang:cd4984a1bf20",
+        "province_index": 1944,
+        "name": "Meo Vac",
+        "reference_owner": "Viet Nam",
+        "source_id": "gb:VNM:ADM2",
+        "source_atoms": [
+          "gb:VNM:ADM2:81297802B2489932619372"
+        ]
+      },
+      "immutable_owner_roster_row": {
+        "id": "gb:VNM:ADM2:81297802B2489932619372",
+        "index": 48254,
+        "bounds": [
+          207766.7006477778,
+          113614.19664116298,
+          207972.18333689586,
+          113873.50692852591
+        ],
+        "province_id": "framework:province:ha-giang:cd4984a1bf20",
+        "province_index": 1944
+      },
+      "reverse_source_atom_owners": [
+        48254
+      ],
+      "source_roster_records": [
+        {
+          "source_index": 65114,
+          "family_index": 353,
+          "source_id": "gb:VNM:ADM1:63759600B80209413202681",
+          "ordinal": 22,
+          "owners": [],
+          "name": "Hà Giang",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 65513,
+          "family_index": 354,
+          "source_id": "gb:VNM:ADM2:81297802B2489932619372",
+          "ordinal": 357,
+          "owners": [
+            48254
+          ],
+          "name": "Meo Vac",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "original_family_ordinal_zero_based": 357,
+      "selected_geography_part": "part-28.json",
+      "whole_consumed_feature_value_sha256": "551cefdd449a01693da20f3d7ffb4a0a78656d294412169bf85d51f287c68b0c",
+      "whole_selected_feature_value_sha256": "128cb3c646c39aa7dc834ee15b4983d214cd00d96089acd6b227637ce23a7b47",
+      "whole_original_target_context": {
+        "owner": 48254,
+        "id": "gb:VNM:ADM2:81297802B2489932619372",
+        "name": "Meo Vac",
+        "province_id": "framework:province:ha-giang:cd4984a1bf20",
+        "repair_cells": 52,
+        "physical_cells": 0,
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "repair_direct_flags": {
+          "foreign-reference-country": 52
+        },
+        "all_direct_flags": {
+          "foreign-reference-country": 52
+        },
+        "foreign_countries": {
+          "CHN": 52
+        },
+        "foreign_sources": {},
+        "actual_sources": [
+          "gb:VNM:ADM1:63759600B80209413202681",
+          "gb:VNM:ADM2:81297802B2489932619372"
+        ],
+        "source_atoms": [
+          "gb:VNM:ADM2:81297802B2489932619372"
+        ],
+        "metadata": {
+          "administrative_level": "ADM2",
+          "coverage_version": 1,
+          "framework_match": {
+            "id": "VNM-512",
+            "overlap": 0.839623,
+            "source": "Natural Earth"
+          },
+          "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+          "geographic_area_code": "VIE",
+          "geographic_match": "largest source overlap",
+          "geographic_overlap": 0.79638,
+          "geographic_region_code": 41,
+          "granularity_version": 3,
+          "hierarchy_overlap": 0.960642,
+          "hierarchy_source": "gb:VNM:ADM1",
+          "hierarchy_version": 4,
+          "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+          "original_geometry_sha256": "93cbb880374014338a24187801e2f396897efef9337a6cb13b6f437a95f78492",
+          "original_id": "81297802B2489932619372",
+          "parent_match": "Named source administrative unit grouped within this geographic area",
+          "parent_source_level": "ADM1",
+          "reference_owner_id": "owner:Q881",
+          "reference_polity": "Vietnam",
+          "reference_polity_evidence": {
+            "classification": "Sovereign country",
+            "note": null,
+            "reference_territory": "Vietnam",
+            "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+            "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+            "uncertainty": false
+          },
+          "reference_polity_status": "reference",
+          "reference_version": 3,
+          "reference_year": "2020",
+          "regional_match": {
+            "method": "reference-territory-constrained overlap",
+            "overlap": 0.839623,
+            "reference_iso": "VNM",
+            "source_id": "VNM-512"
+          },
+          "remote_version": 1,
+          "representative_point": [
+            105.44169810635242,
+            23.14815
+          ],
+          "selection_reason": "Named District territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+          "semantic_review": {
+            "continent": "Asia",
+            "decision_index": 1012,
+            "evidence_file": "geographic-decisions",
+            "status": "open"
+          },
+          "semantic_version": 1,
+          "source_id": "gb:VNM:ADM2",
+          "source_name": "geoBoundaries gbOpen",
+          "source_role": "District",
+          "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/VNM/ADM2/geoBoundaries-VNM-ADM2.geojson",
+          "topology_conflicts": 2,
+          "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+          "topology_reconciled": true,
+          "topology_version": 1
+        },
+        "direct_samples": [
+          {
+            "accepted_geometry_covers": false,
+            "accepted_hole_covers": false,
+            "actual_sids": [
+              65513
+            ],
+            "country_boundary_ids": [],
+            "covering_owners": [
+              48254
+            ],
+            "declared_sids": [
+              65513
+            ],
+            "flags": [
+              "foreign-reference-country"
+            ],
+            "hold_reasons": [
+              "foreign-reference-country"
+            ],
+            "owner": 48254,
+            "package": "repair-evaluation",
+            "physical": "land",
+            "qualified": false,
+            "reference_countries": [
+              "CHN"
+            ],
+            "source_boundary_ids": [],
+            "territorial_hold_reasons": [
+              "foreign-reference-country"
+            ],
+            "x": 207828,
+            "y": 113614
+          },
+          {
+            "accepted_geometry_covers": false,
+            "accepted_hole_covers": false,
+            "actual_sids": [
+              65513
+            ],
+            "country_boundary_ids": [],
+            "covering_owners": [
+              48254
+            ],
+            "declared_sids": [
+              65513
+            ],
+            "flags": [
+              "foreign-reference-country"
+            ],
+            "hold_reasons": [
+              "foreign-reference-country"
+            ],
+            "owner": 48254,
+            "package": "repair-evaluation",
+            "physical": "land",
+            "qualified": false,
+            "reference_countries": [
+              "CHN"
+            ],
+            "source_boundary_ids": [],
+            "territorial_hold_reasons": [
+              "foreign-reference-country"
+            ],
+            "x": 207829,
+            "y": 113614
+          }
+        ],
+        "investigation_class": "reference-only",
+        "retained_source_parent_coverage": [
+          {
+            "sources": [],
+            "cells": 11
+          },
+          {
+            "sources": [
+              "gb:VNM:ADM1:63759600B80209413202681 Hà Giang"
+            ],
+            "cells": 41
+          }
+        ],
+        "repair_source_parent_coverage": [
+          {
+            "sources": [],
+            "cells": 11
+          },
+          {
+            "sources": [
+              "gb:VNM:ADM1:63759600B80209413202681 Hà Giang"
+            ],
+            "cells": 41
+          }
+        ],
+        "direct_source_parent_coverage": [
+          {
+            "sources": [],
+            "cells": 11
+          },
+          {
+            "sources": [
+              "gb:VNM:ADM1:63759600B80209413202681 Hà Giang"
+            ],
+            "cells": 41
+          }
+        ],
+        "all_package_declared_actual_correspondence": {
+          "True": 52
+        },
+        "sample_fields": {
+          "hierarchy_overlap": 0.960642,
+          "framework_match": {
+            "id": "VNM-512",
+            "overlap": 0.839623,
+            "source": "Natural Earth"
+          },
+          "topology_conflicts": 2,
+          "topology_reconciled": true,
+          "original_geometry_sha256": "93cbb880374014338a24187801e2f396897efef9337a6cb13b6f437a95f78492"
+        },
+        "original_features": [
+          {
+            "properties": {
+              "shapeName": "Meo Vac",
+              "shapeISO": "",
+              "shapeID": "81297802B2489932619372",
+              "shapeGroup": "VNM",
+              "shapeType": "ADM2"
+            },
+            "geometry_type": "Polygon"
+          }
+        ]
+      },
+      "custodian_explicit_parent_evidence": {
+        "owner": 48254,
+        "id": "gb:VNM:ADM2:81297802B2489932619372",
+        "name": "Meo Vac",
+        "repair_cells": 52,
+        "physical_cells": 0,
+        "gbOpen_record": 358,
+        "humanitarian_record": 119,
+        "original_archive_identity_limit": "Existing nine-decimal coordinate-ring correspondence only; not geometry-byte equality or cell tolerance.",
+        "join_key": "Literal custodian ADM2_PCODE equality; no prefix inference or spatial predicates.",
+        "custodian_adm2_row": {
+          "excel_row": 359,
+          "ADM2_EN": "Meo Vac",
+          "ADM2_VI": "Huyện Mèo Vạc",
+          "ADM2_PCODE": "VN20105",
+          "ADM2_REF": null,
+          "ADM2ALT1_EN": null,
+          "ADM2ALT2_EN": null,
+          "ADM2ALT1_VI": null,
+          "ADM2ALT2_VI": null,
+          "ADM1_EN": "Ha Giang",
+          "ADM1_VI": "Hà Giang",
+          "ADM1_PCODE": "VN201",
+          "ADM0_EN": "Viet Nam",
+          "ADM0_VI": "Việt Nam",
+          "ADM0_PCODE": "VN",
+          "DATE": "2019-10-01T00:00:00",
+          "VALIDON": "2020-01-03T00:00:00",
+          "VALIDTO": null,
+          "AREA_SQKM": 575.5982055664062
+        },
+        "custodian_adm1_row": {
+          "excel_row": 23,
+          "ADM1_EN": "Ha Giang",
+          "ADM1_VI": "Hà Giang",
+          "ADM1_PCODE": "VN201",
+          "ADM1_REF": null,
+          "ADM1ALT1_EN": null,
+          "ADM1ALT2_EN": null,
+          "ADM1ALT1_VI": null,
+          "ADM1ALT2_VI": null,
+          "ADM0_EN": "Viet Nam",
+          "ADM0_VI": "Việt Nam",
+          "ADM0_PCODE": "VN",
+          "DATE": "2019-10-01T00:00:00",
+          "VALIDON": "2020-01-03T00:00:00",
+          "VALIDTO": null,
+          "AREA_SQKM": 7955.7919921875
+        },
+        "source_code_parent_relationship_explicit": true,
+        "qualified_cells": 0,
+        "country_side_conclusion": null
+      }
+    }
+  ],
+  "whole_source_family_counts": {
+    "gb:VNM:ADM2": 708,
+    "gb:VNM:ADM1": 64
+  },
+  "complete_source_roster_rows": 73567,
+  "original_all_five_family_inventory": [
+    {
+      "feature_count": 34,
+      "key": "gb:CHN:ADM1",
+      "original_bytes": 263343,
+      "original_sha256": "bc4afc7eacf4351ae5b3ae7a612327987ce1123cb5deb8574fb49107091c6623",
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CHN/ADM1/geoBoundaries-CHN-ADM1_simplified.geojson",
+      "recorded_license": "Public Domain",
+      "source_represented_year_claim": "2019"
+    },
+    {
+      "feature_count": 25,
+      "key": "gb:KHM:ADM1",
+      "original_bytes": 410282,
+      "original_sha256": "2bf6228f8f60a2daa542dfade2ac04f0ee6758e5b718cdf31dff2157b39309d0",
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/KHM/ADM1/geoBoundaries-KHM-ADM1_simplified.geojson",
+      "recorded_license": "Open Data Commons Open Database License 1.0",
+      "source_represented_year_claim": "2017"
+    },
+    {
+      "feature_count": 18,
+      "key": "gb:LAO:ADM1",
+      "original_bytes": 453270,
+      "original_sha256": "152d7d9f680d84c31214fe327e4d102a330d61f222329701ec8ea00a8d2dfb55",
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/LAO/ADM1/geoBoundaries-LAO-ADM1_simplified.geojson",
+      "recorded_license": "Open Data Commons Open Database License 1.0",
+      "source_represented_year_claim": "2017"
+    },
+    {
+      "feature_count": 64,
+      "key": "gb:VNM:ADM1",
+      "original_bytes": 536751,
+      "original_sha256": "010bff8d3244064bc8001033ba79acc1215a1fb6e568f6f8a90da7ecec2c2fc5",
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/VNM/ADM1/geoBoundaries-VNM-ADM1_simplified.geojson",
+      "recorded_license": "Public Domain",
+      "source_represented_year_claim": "2008"
+    },
+    {
+      "feature_count": 708,
+      "key": "gb:VNM:ADM2",
+      "original_bytes": 5273788,
+      "original_sha256": "2dff75b58e71f736ca9fd6ef7c859be40c6f9a9b7ae5cd0806b36fe8cfa4c4f6",
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/VNM/ADM2/geoBoundaries-VNM-ADM2_simplified.geojson",
+      "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "source_represented_year_claim": "2020"
+    }
+  ],
+  "original_country_inventory": {
+    "features": 258,
+    "invalid_features": [
+      "EGY"
+    ]
+  },
+  "original_source_method": "All 849 original features of five complete families and every retained Natural Earth country polygon tested with Shapely covered_by at authenticated native centres. Original geometry, no repair/buffer. Cohort holds apply to whole current-location owner across both packages. Country absence alone is not a veto.",
+  "original_disposition_limits": [
+    "Qualified means bounded additive source-fit eligibility to existing owner, subject to separate current-owner-zero and physical witness validation; it is not new regional semantic approval or proof of a repaired delivery.",
+    "All 24880 source-relative cells remain physical-interpretation holds: original source coverage alone does not distinguish river, coast, ocean or vintage mismatch. No blanket ocean inference.",
+    "Hoang Sa and Truong Sa are explicitly held as disputed-territory research regardless of positive source coverage. Natural Earth is a retained display convention, not a sovereignty adjudication.",
+    "All direct conflict flags hold the complete current-location owner cohort in both packages. Other cells of that cohort are not independently asserted wrong.",
+    "VNM ADM2 represented-year claim 2020 and ADM1 2008 are retained source claims, not independently verified current administrative boundaries.",
+    "Existing source review and aggregate-member semantic questions remain open, including Da Nang. The seven source atoms authenticate existing lineage only."
+  ],
+  "custodian_chronology": {
+    "resource_created": "2019-09-30T12:48:12.216990",
+    "resource_last_modified": "2023-04-04T20:12:53.829355",
+    "workbook_core_created": "2023-03-30T15:01:09Z",
+    "observed_row_DATE": [
+      "2019-10-01T00:00:00"
+    ],
+    "observed_row_VALIDON": [
+      "2020-01-03T00:00:00"
+    ],
+    "observed_row_VALIDTO": [
+      "None"
+    ],
+    "scope": "Native row dates and later workbook/catalogue timestamps are distinct. Null VALIDTO does not independently prove continued legal validity. Not the absent108965-byte2020XLSX."
+  },
+  "custodian_workbook": {
+    "path": "downloads/custodian-population-VNM_AdminBoundaries_TabularData.xlsx",
+    "bytes": 63347,
+    "sha256": "dac10333af8476d70ad63e0e7e72c562744b02fd853eaa5a73de4dff5486225b"
+  },
+  "custodian_resource_metadata": {
+    "alt_url": "https://data.humdata.org/dataset/bf6858bf-a5a8-403b-8380-f78cd72c9fee/resource/1d945376-c714-46e3-b9fa-290684c64691/download/",
+    "cache_last_updated": null,
+    "cache_url": null,
+    "created": "2019-09-30T12:48:12.216990",
+    "datastore_active": false,
+    "description": "Viet Nam administrative level 0-2 ITOS tabular data",
+    "download_url": "https://data.humdata.org/dataset/bf6858bf-a5a8-403b-8380-f78cd72c9fee/resource/1d945376-c714-46e3-b9fa-290684c64691/download/vnm_adminboundaries_tabulardata.xlsx",
+    "format": "XLSX",
+    "fs_check_info": "[{\"state\": \"processing\", \"message\": \"The processing of the file structure check has started\", \"timestamp\": \"2023-04-04T20:12:53.732333\"}, {\"state\": \"success\", \"message\": \"Hxl Proxy data received successfully\", \"timestamp\": \"2023-04-04T20:12:55.554016\", \"hxl_proxy_response\": {\"url_or_filename\": \"https://data.humdata.org/dataset/bf6858bf-a5a8-403b-8380-f78cd72c9fee/resource/1d945376-c714-46e3-b9fa-290684c64691/download/vnm_adminboundaries_tabulardata.xlsx\", \"format\": \"XLSX\", \"sheets\": [{\"name\": \"ADM0\", \"is_hidden\": false, \"nrows\": 2, \"ncols\": 12, \"has_merged_cells\": false, \"is_hxlated\": false, \"header_hash\": \"2dfd8d0f2f9f0fda93b51c86863c4534\", \"hashtag_hash\": null}, {\"name\": \"ADM1\", \"is_hidden\": false, \"nrows\": 64, \"ncols\": 15, \"has_merged_cells\": false, \"is_hxlated\": false, \"header_hash\": \"b97ff303313ec3ac322fd8071c4d8104\", \"hashtag_hash\": null}, {\"name\": \"ADM2\", \"is_hidden\": false, \"nrows\": 709, \"ncols\": 18, \"has_merged_cells\": false, \"is_hxlated\": false, \"header_hash\": \"c082377c68fdd1691148e623a6b30873\", \"hashtag_hash\": null}]}}]",
+    "hash": "",
+    "hdx_rel_url": "/dataset/bf6858bf-a5a8-403b-8380-f78cd72c9fee/resource/1d945376-c714-46e3-b9fa-290684c64691/download/vnm_adminboundaries_tabulardata.xlsx",
+    "id": "1d945376-c714-46e3-b9fa-290684c64691",
+    "last_modified": "2023-04-04T20:12:53.829355",
+    "metadata_modified": "2025-04-08T19:02:48.184984",
+    "microdata": false,
+    "mimetype": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    "mimetype_inner": null,
+    "name": "VNM_AdminBoundaries_TabularData.xlsx",
+    "originalHash": -1303588084,
+    "p_coded": true,
+    "package_id": "bf6858bf-a5a8-403b-8380-f78cd72c9fee",
+    "position": 6,
+    "resource_type": "file.upload",
+    "size": 63347,
+    "state": "active",
+    "url": "https://data.humdata.org/dataset/bf6858bf-a5a8-403b-8380-f78cd72c9fee/resource/1d945376-c714-46e3-b9fa-290684c64691/download/vnm_adminboundaries_tabulardata.xlsx",
+    "url_type": "upload"
+  },
+  "all2411_owner_context_binding": {
+    "path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/repair-package/reference1588/targets.json",
+    "bytes": 198455,
+    "sha256": "03cd8f8ce3a3b6d331dc25afb261eddc71c4a4adc6b715713a58a4cc14f3a5c2"
+  },
+  "all2411_original_observations_source": {
+    "bytes": 232506,
+    "commit": "a9c2d4122eed9d08cd3f213d3f5157039c8823bb",
+    "decoded_bytes": 19639757,
+    "decoded_sha256": "e079e92f47b95039bf29d639af7c5eb55e8616e6907f46667a60b4656b8944a5",
+    "file": "source-qualification-cells.json.gz",
+    "git_blob_oid": "48db686a6726c3dc719a722f0260b81e159b988d",
+    "path": "coordination/engineering/vietnam-current-cell-20261014/evidence/source-qualification/cells.json.gz",
+    "sha256": "a85502406c50a52f012802a42f0e7a37480703ebe876aeaf212cfe96bfd65a2b"
+  },
+  "direct931audit_binding": {
+    "path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/repair-package/reference1588/direct931-causal-physical-audit/audit.json",
+    "bytes": 1252458,
+    "sha256": "21b2b4dc42e65cc3190eb455d28231223099ffdf53cdb96109881094063dc270"
+  },
+  "no_cutoff_geometry": true,
+  "new_country_side_conclusion": null,
+  "new_qualified": 0
+}

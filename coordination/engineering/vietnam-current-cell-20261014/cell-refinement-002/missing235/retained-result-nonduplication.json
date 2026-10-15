@@ -1,0 +1,44 @@
+{
+  "status": "exact target lookup complete; no missing235 target has retained physical result",
+  "banks": [
+    {
+      "path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/repair-package/physical185/run-inputs/physical-support.json",
+      "bytes": 5163680,
+      "sha256": "27dab6a4e81455bcab9143bb9cfa6bb13d2505ae9b6dfbb20526a3254989e33b",
+      "complete_result_records": 116,
+      "matching_missing235_targets": 0
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/b516a693506d065f08d8984390ca7e530077d358a0739e0a661a1199da76763a/work/.cache/delivery-handoff/quephong49-physical-002/whole-target-support.json",
+      "bytes": 22199,
+      "sha256": "31701e6f28114770f49de65a52b8570c7a723c4c662409bf0660dc7b3612d424",
+      "complete_result_records": 1,
+      "matching_missing235_targets": 0
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/b516a693506d065f08d8984390ca7e530077d358a0739e0a661a1199da76763a/work/.cache/delivery-handoff/next557-physical-002/whole-target-support.json",
+      "bytes": 240095,
+      "sha256": "ac86cd6687663e237db1473830d14e5151b0b5df6a1aeae7e997a2ac6bfbc0a3",
+      "complete_result_records": 5,
+      "matching_missing235_targets": 0
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/b516a693506d065f08d8984390ca7e530077d358a0739e0a661a1199da76763a/work/.cache/delivery-handoff/next351-physical-001/whole-target-support.json",
+      "bytes": 324148,
+      "sha256": "0b0247438ee15cf8f56f28060d4ee3152d66ccbae81c22afb5e8cd75339eeb78",
+      "complete_result_records": 23,
+      "matching_missing235_targets": 0
+    }
+  ],
+  "unique_retained_result_targets": 145,
+  "original_result_targets": 116,
+  "new_result_targets": 29,
+  "missing235_target_intersection": 0,
+  "source_causal_audit": {
+    "path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/repair-package/reference1588/direct931-causal-physical-audit/audit.json",
+    "bytes": 1252458,
+    "sha256": "21b2b4dc42e65cc3190eb455d28231223099ffdf53cdb96109881094063dc270"
+  },
+  "new_completed957_reused_or_rerun": false,
+  "limits": "Absence is scoped to complete original116 and the complete acquired new29 result banks. Original per-cell physical=land is not a whole-target result."
+}

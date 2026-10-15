@@ -1,0 +1,79 @@
+{
+  "status": "prospective data-only; blocked for actual immutable stage publication and scientific review",
+  "config": {
+    "path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/repair-package/reference1588/missing235-physical-preparation/proposed-config-unassigned.json",
+    "bytes": 140254,
+    "sha256": "3a739da5214866c36db01a36bb4591351ef25f9b08460083c3b6db0f7830dc2f"
+  },
+  "stage": {
+    "commit": "UNASSIGNED",
+    "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/missing235/original-stage-inputs.json",
+    "git_blob_oid": "172fc8bb9c9934eb642f80f7bd138a43411a790f",
+    "bytes": 280465,
+    "sha256": "307048eecf7b7dd7540c8fccf372c9a936fad23f02170afa28eadc81f7e25b2a"
+  },
+  "accepted_shared_method_commit": "2347ff09c3e07fb196422668c6b54e9504e1d860",
+  "accepted_shared_method_bodies": [
+    {
+      "path": "scripts/qualify-source-cohort.py",
+      "commit": "2347ff09c3e07fb196422668c6b54e9504e1d860",
+      "bytes": 48543,
+      "sha256": "58ef81739b264085b2997be7baa3df03ba6bb673f91a160176efd79b71fec081",
+      "current_author_copy_equal": true
+    },
+    {
+      "path": "scripts/prepare-delivery-handoff.mjs",
+      "commit": "2347ff09c3e07fb196422668c6b54e9504e1d860",
+      "bytes": 87314,
+      "sha256": "f91c2919d09d4bcae8a0e7c07100ab699f7ea01144acc99ca181c9c8f0c3d458",
+      "current_author_copy_equal": true
+    }
+  ],
+  "unique_pins": 25,
+  "reused_nonstage_pins": 24,
+  "reused_metadata_fragments": 18,
+  "complete_metadata_records": 188612,
+  "metadata_encoded_bytes": 20251612,
+  "metadata_decoded_bytes": 123347986,
+  "native_chunks": 3,
+  "complete_native_member_bytes": 95809336,
+  "encoded_input_bytes": 86206502,
+  "decoded_input_bytes": 219157322,
+  "logical_input_bytes": 305363824,
+  "reused_runtime_files": 388,
+  "reused_runtime_file_bytes": 35120510,
+  "python_executable_bytes": 18058560,
+  "output_reserve_bytes": 33554432,
+  "inventory_plus_runtime_output_bytes": 392097326,
+  "processing_allowance": {
+    "phaseBytes": 671088640,
+    "rssBytes": 671088640
+  },
+  "preparation_allowance": {
+    "phaseBytes": 536870912,
+    "rssBytes": 536870912
+  },
+  "resources": {
+    "deadline_seconds": 120,
+    "input_bytes": 400000000,
+    "output_bytes": 33554432
+  },
+  "runtime_inventory_source": {
+    "path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/repair-package/next-physical351/config.json",
+    "bytes": 140278,
+    "sha256": "da96276e01064c477ba6e33a831114d7733b10692a7e3b29d16c09455db8334b"
+  },
+  "runtime_rehashed": false,
+  "runtime_new_inventory_or_import_probe": false,
+  "actual_physical_calls": 0,
+  "native_qualification_calls": 0,
+  "new_qualified": 0,
+  "limits": [
+    "All original188612 metadata records and95809336 native-member bytes remain charged for an eventual whole-target call. Ten targets do not reduce this inventory.",
+    "24 original nonstage pins, comparison method, transport, index,18 metadata and3 native chunks are reused unchanged. No new metadata/native source acquisition.",
+    "The exact existing388 runtime inventory is reused unchanged; actual shared entry must authenticate it fresh.",
+    "640MiB phase/RSS and512MiB preparation are finite cooperative allowances from the accepted next351 pattern, not a bound on GEOS peak.",
+    "UNASSIGNED is deliberate non-executable pending publication; no invented/future commit.",
+    "No current consumer, owner-zero, conservation or qualification proof is claimed."
+  ]
+}
