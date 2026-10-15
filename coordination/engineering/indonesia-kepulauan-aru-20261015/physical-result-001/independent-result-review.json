@@ -1,0 +1,335 @@
+{
+  "version": 1,
+  "reviewer": "/root/delivery11622_config_review",
+  "kind": "ONE_SUBSTANTIVE_ACTUAL_ARU_WHOLE_PHYSICAL_RESULT_REVIEW",
+  "disposition": "ACCEPTED WITH LIMITS AS COMPLETED PHYSICAL OBSERVATION WITH RETAINED CONTRADICTION",
+  "check_count": 30,
+  "checks": [
+    {
+      "check": "exact959385B result02acba",
+      "pass": true
+    },
+    {
+      "check": "complete123777B executionreceipt78587",
+      "pass": true
+    },
+    {
+      "check": "exact3publishedactualoutputs no partialfiles",
+      "pass": true
+    },
+    {
+      "check": "actual completion nativeunrun physical binding exact",
+      "pass": true
+    },
+    {
+      "check": "actual whole completedoutput execution-receipt.json",
+      "pass": true
+    },
+    {
+      "check": "actual whole completedoutput whole-target-support.json",
+      "pass": true
+    },
+    {
+      "check": "reused complete original52proof unchanged",
+      "pass": true
+    },
+    {
+      "check": "whole originalAru exact3996stagebinding/frame11786context retained",
+      "pass": true
+    },
+    {
+      "check": "all25consumedscientificpins exact actual request noextra",
+      "pass": true
+    },
+    {
+      "check": "all238query stateschecked nounknown errors",
+      "pass": true
+    },
+    {
+      "check": "238unique sourcequeryrecords noomissions",
+      "pass": true
+    },
+    {
+      "check": "all238established relation precedence/booleans/witness semantics",
+      "pass": true
+    },
+    {
+      "check": "exact114disjoint75completeoperation49complete-source witnesses",
+      "pass": true
+    },
+    {
+      "check": "all75complete operationgeometries finite and retained",
+      "pass": true
+    },
+    {
+      "check": "oneexact contradictionissue fullyequals retainedsupport",
+      "pass": true
+    },
+    {
+      "check": "actual21line segments42finitepositions noareaapproximation",
+      "pass": true
+    },
+    {
+      "check": "positive mappedland274parts9369positions",
+      "pass": true
+    },
+    {
+      "check": "positive mappedinlandwater2parts30positions retained",
+      "pass": true
+    },
+    {
+      "check": "outsideL1shorelinecontext283parts8676positions retained",
+      "pass": true
+    },
+    {
+      "check": "missingextra reconstructionexplicitlyempty",
+      "pass": true
+    },
+    {
+      "check": "all3hierarchydisagreementpointsetsexplicitlyempty",
+      "pass": true
+    },
+    {
+      "check": "whole18metadata receipts exactconsumedencodeddecoded identities",
+      "pass": true
+    },
+    {
+      "check": "full188612native recordmember95809336bytes retained",
+      "pass": true
+    },
+    {
+      "check": "actual unchangedmethod and comparisonreceipt identities",
+      "pass": true
+    },
+    {
+      "check": "inner canonical physicalconfig actuallybound",
+      "pass": true
+    },
+    {
+      "check": "runtime388actualreceipt35120510 no rehash/import",
+      "pass": true
+    },
+    {
+      "check": "actualfresh512MiB childouterordinaryadmission",
+      "pass": true
+    },
+    {
+      "check": "actual301056000Bpeak and5.18sobservedwithinrequest",
+      "pass": true
+    },
+    {
+      "check": "inputscope27water6326relativeunchanged not5460land",
+      "pass": true
+    },
+    {
+      "check": "ordinary acceptedroute requires mixedclass partition and explicitterritorialexclusions",
+      "pass": true
+    }
+  ],
+  "failures": [],
+  "result": {
+    "bytes": 959385,
+    "sha256": "02acba9509c36ee1877110799c3a21e0bfb20d9de99c33ef4bf96b6b193d18b3"
+  },
+  "execution_receipt": {
+    "bytes": 123777,
+    "sha256": "78587aa2c30b2c182c8bf9fb91d62c143839e49b8c3f2918d43f2829883dd8b5",
+    "complete": true
+  },
+  "original_identity": {
+    "target_id": "gb:IDN:ADM2:22746128B17511076551422",
+    "owner": 22734,
+    "source_SID": 36413,
+    "source_parent_SID": 36249,
+    "source_parent_id": "gb:IDN:ADM1:65028918B48178230554278",
+    "selected_frame": "atlas:macro-foundation:province:maluku-aru",
+    "source_family_records": 519,
+    "source_family_ordinal": 153,
+    "selected_part_records": 1500,
+    "selected_part_ordinal": 1105,
+    "whole_owner_roster_records": 49625,
+    "whole_source_roster_records": 73567
+  },
+  "original_request_scope": {
+    "context_cells": 11786,
+    "repair_total": 5460,
+    "repair_land_requests": 5433,
+    "repair_inland_water_requests": 27,
+    "physical_relative_held": 6326,
+    "interval_records": 4671,
+    "repair_intervals": 2433,
+    "relative_intervals": 2238,
+    "actual_intervalpacket_sha256": "6d77f2fc77b6ee6d7c79ec780f9b904984721ad71fdfeece52023e232cc63863",
+    "all_original_intervals_sha256_canonical": "6d77f2fc77b6ee6d7c79ec780f9b904984721ad71fdfeece52023e232cc63863",
+    "patterns": [
+      {
+        "category": "repair",
+        "class": "land",
+        "source_SIDs": [
+          36413
+        ],
+        "cells": 1218
+      },
+      {
+        "category": "repair",
+        "class": "land",
+        "source_SIDs": [
+          36249,
+          36413
+        ],
+        "cells": 4215
+      },
+      {
+        "category": "repair",
+        "class": "inland-water",
+        "source_SIDs": [
+          36249,
+          36413
+        ],
+        "cells": 27
+      },
+      {
+        "category": "physical",
+        "class": "source-relative",
+        "source_SIDs": [
+          36413
+        ],
+        "cells": 1353
+      },
+      {
+        "category": "physical",
+        "class": "source-relative",
+        "source_SIDs": [
+          36249,
+          36413
+        ],
+        "cells": 4973
+      }
+    ]
+  },
+  "actual_scientific_observations": {
+    "target_id": "gb:IDN:ADM2:22746128B17511076551422",
+    "whole_targets": 1,
+    "checked_queries": 238,
+    "unknown_queries": 0,
+    "query_witness_counts": {
+      "disjoint-after-explicit-predicate": 114,
+      "complete-operation-pointset": 75,
+      "complete-source-record-reconstruction": 49
+    },
+    "issues": [
+      "contradictory_land_water_support"
+    ],
+    "contradiction_geometry": {
+      "type": "MultiLineString",
+      "empty": false,
+      "parts": 21,
+      "positions": 42,
+      "canonical_geometry_sha256": "5d454b30e8bfd9c85f5beaeaaf7e34056d0b1c35cb1b650d7f8edaadc089ffd1"
+    },
+    "whole_support": {
+      "mapped_land_support": {
+        "type": "MultiPolygon",
+        "empty": false,
+        "parts": 274,
+        "positions": 9369,
+        "canonical_geometry_sha256": "11b02aa4ee2b2c78a3ca07e8cc8491b6604ca52dd7693cf821dd36d595124a85"
+      },
+      "mapped_inland_water_support": {
+        "type": "MultiPolygon",
+        "empty": false,
+        "parts": 2,
+        "positions": 30,
+        "canonical_geometry_sha256": "bb85db7ff395c244f79fe67cc8794b6f2b0c7d5b2fd273c9b99f339a77064396"
+      },
+      "outside_mapped_L1_context": {
+        "type": "MultiPolygon",
+        "empty": false,
+        "parts": 283,
+        "positions": 8676,
+        "canonical_geometry_sha256": "cba0eca758e9e1d6b8af0701f2dbb81b9609e967e0e1dc22178bc47b33682375"
+      },
+      "hierarchy_disagreements": {
+        "L2-outside-L1": {
+          "type": "Polygon",
+          "empty": true,
+          "parts": 0,
+          "positions": 0,
+          "canonical_geometry_sha256": "36b71e85a763d7806f1dc3a0e281a440938aea7799ac7e989f532ff032c61b02"
+        },
+        "L3-outside-L2": {
+          "type": "GeometryCollection",
+          "empty": true,
+          "parts": 0,
+          "positions": 0,
+          "canonical_geometry_sha256": "8c9d0294a6a29b13b238c387607c61c4aa50bb15300089c01846536d010c4455"
+        },
+        "L4-outside-L3": {
+          "type": "GeometryCollection",
+          "empty": true,
+          "parts": 0,
+          "positions": 0,
+          "canonical_geometry_sha256": "8c9d0294a6a29b13b238c387607c61c4aa50bb15300089c01846536d010c4455"
+        }
+      },
+      "missing_reconstruction": {
+        "type": "Polygon",
+        "empty": true,
+        "parts": 0,
+        "positions": 0,
+        "canonical_geometry_sha256": "36b71e85a763d7806f1dc3a0e281a440938aea7799ac7e989f532ff032c61b02"
+      },
+      "extra_reconstruction": {
+        "type": "Polygon",
+        "empty": true,
+        "parts": 0,
+        "positions": 0,
+        "canonical_geometry_sha256": "36b71e85a763d7806f1dc3a0e281a440938aea7799ac7e989f532ff032c61b02"
+      },
+      "contradictory_land_water_support": {
+        "type": "MultiLineString",
+        "empty": false,
+        "parts": 21,
+        "positions": 42,
+        "canonical_geometry_sha256": "5d454b30e8bfd9c85f5beaeaaf7e34056d0b1c35cb1b650d7f8edaadc089ffd1"
+      }
+    },
+    "all5460repair_requests_unqualified": true,
+    "relative6326held": true
+  },
+  "witness_inventory": {
+    "path": "idn-aru11786-actual-physical-review-001/actual-witness-inventory.json",
+    "bytes": 28435,
+    "sha256": "0707b7b04c8c7ef717639fea30746021bc94e96da0cffccbc5b377b4c9713b8b"
+  },
+  "actual_operating": {
+    "accepted_execution_code": "866c42b854910f17a80427dac19b2c850cd68093",
+    "current061fdoes_not_relabel_executedcode": true,
+    "outerconfig_sha256": "cb0118d4d0039c867d86cc6dc197bb7a2b51c64d6134dc8204f0993f5a5af18d",
+    "innerphysicalconfig_sha256": "f73df57a02e711203ea5a45f3b2ac1d4cfcf176b080378143b59b926353dbb77",
+    "preflight_at_utc": "2026-10-15T05:15:11.212Z",
+    "child_admission_unix_seconds": 1792041331.906,
+    "phase_RSS_child_and_parent_bytes": 536870912,
+    "known_child_charge_bytes": 374109318,
+    "parent_prospective_superset_bytes": 442912568,
+    "actual_internal_producer_seconds": 4.55935583403334,
+    "actual_external_seconds": 5.18,
+    "Darwin_peak_rss_bytes": 301056000,
+    "process_tree_RSS_not_measured": true
+  },
+  "next_supported_ordinary_route": [
+    "Preserve the exact full actual body plus completeexecutionreceipt and original3996stage11786context. Retain the sole21segmentMultiLineString intact and every238query record; neither blanketclearance nor wholecohortrejection follows merely from a nonempty lowerdimensional witness.",
+    "Prepare immutable typed ordinarysource evidence/fulloriginalnative request for the actual5433land+27inland-water repair cells, leaving6326relative held. For this mixed target, accepted coverage_rows must partition the completeownerpatch exactly into mapped_land_support/mapped_inland_water_support classes; there is no permission to promote27water toland or6326relative torepair.",
+    "The retained contradiction enters accepted general-conflict handling. Existing reader expressly requires an explicit territorial_exclusions array for that owner, grounded in real retained territorial/foreign context. Current original packet supplies no independent foreign-veto inventory; do not invent emptyveto or claim territorialabsence. This is a concrete typed-input prerequisite before conflict qualification/diagnosis.",
+    "After complete grounded typedclass/veto inputs and fresh normaladmission, use existing ordinary native-diagnostic or native-authority, not a country wrapper or new predicate. Exact accepted line/point/polygon witness incidence and positive source/selected/declaredland-water support/exterior/tie/uniqueowner tests must evaluate each requestedcentre. Preserve actual diagnostic reasons/refusals or successfulproducts; zero witnesscontacts alone would not qualify cells.",
+    "No physical/source replay is needed for unchanged evidence. Actual native resultreview, latestselected currentownerzero/cumulativeconservation/emittedchecks and coordinated ordinaryintegration remain later requirements."
+  ],
+  "limits": [
+    "Completed full wholeoriginal source-relative physical observation is valid with the reported contradiction, not an unqualified or issue-free result. All238queries are checked; originaloperation/source-record shortcuts retain established semantics. Nativecentre support,21linecontacts and27watercell qualification were not evaluated by this review.",
+    "Mapped land274parts, mappedinlandwater2parts and outsideL1context283parts are nonempty; hierarchy/missing/extra pointsets empty. L1 means GSHHG shoreline landcontext, not the named administrativeparent. No present landabsence, source/legal boundary or wholeparent certification follows from these observations.",
+    "Exact full519source/selectedfeature, owner22734/SID36413/sourceparent36249/atlasAruframe and full11786context remain retained. Original5433land/27water classes and6326relative holds remain unchanged; inputlabels are requests, not nativequalification.",
+    "Original referenceyear2020, heterogeneousGSHHG/source observationdates, selectedmodified geometry, rights/licensing uncertainties and framework/referencepolity limits remain unchanged. No independent foreign-veto inventory or emptyforeign conflicts is supplied by currentpacket.",
+    "Actual fresh512MiB admission and301056000Bprocesspeak are distinct from completeprospective charges and hard aggregate/liveprocess-tree enforcement. maximum_rss_kib is raw Darwin ru_maxrss bytes here; do not multiplyby1024. Cooperative boundarychecks and original executionlimits retained.",
+    "One actualscientificresult review reuses52originalproof; no source/geometry/native helper imports, physical/source/scanner replay, newcontrolbenchmark, network/fetch/Git/publicmutation or reservation. All5460repair cells remain native-unqualified,6326relative held, no currentownerzero/acceptance/credit claimed."
+  ]
+}
