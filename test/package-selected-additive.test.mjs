@@ -7,7 +7,7 @@ import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {ImmutableReader} from '../scripts/check-effective-geographic-regression.mjs';
 import {readBoundPublicationAssets,retainSelectedPackageInputs,publishPackageSelectedAdditive,
-  prepareOrdinaryPublicationDirectory,requirePackageAssemblyExecution}
+  prepareOrdinaryPublicationDirectory,requirePackageAssemblyExecution,bindPackageImmutableCommits}
   from '../coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs';
 
 const sha=raw=>createHash('sha256').update(raw).digest('hex');
@@ -70,4 +70,20 @@ test('publication requires private capabilities and ordinary output ancestors wi
   fs.unlinkSync(path.join(f.root,'dist'));
   const destination=prepareOrdinaryPublicationDirectory(f.root,'dist/additive-repairs');
   assert.equal(fs.realpathSync(destination),destination);assert.ok(fs.lstatSync(destination).isDirectory());
+});
+
+
+test('historical programme reads use the original Git version and preserve the live helper', t => {
+  const f = fixture(t), name = 'physical-reproducer.py', oldBody = Buffer.from('# original physical producer\n');
+  const git = (...args) => execFileSync('git', ['-C', f.root, ...args], {encoding: 'utf8'}).trim();
+  fs.writeFileSync(path.join(f.root, name), oldBody); git('add', name); git('commit', '-qm', 'Original programme');
+  const original = git('rev-parse', 'HEAD');
+  const live = Buffer.from('# current live helper\n'); fs.writeFileSync(path.join(f.root, name), live);
+  git('add', name); git('commit', '-qm', 'Current programme'); const current = git('rev-parse', 'HEAD');
+  const reader = new ImmutableReader(f.root, current), fetched = bindPackageImmutableCommits(reader, path => path === name);
+  assert.deepEqual(reader.read(name, {version: original, expected: sha(oldBody)}), oldBody);
+  assert.deepEqual(reader.read(name, {expected: sha(live)}), live);
+  assert.deepEqual(fetched, []); assert.deepEqual(fs.readFileSync(path.join(f.root, name)), live);
+  assert.throws(() => reader.read(name, {version: original, expected: sha(live)}), /Whole immutable input differs/);
+  assert.throws(() => reader.read('asset-0.json', {version: original}), /Undeclared additive package/);
 });

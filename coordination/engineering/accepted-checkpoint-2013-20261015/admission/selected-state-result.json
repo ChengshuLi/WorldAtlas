@@ -1,0 +1,126 @@
+{
+  "available": true,
+  "executing_commit": "832191562d92440474acf5678de5f3ae2ec20369",
+  "selected_commit": "832191562d92440474acf5678de5f3ae2ec20369",
+  "accepted_execution": {
+    "kind": "accepted-selected-checkpoint-artifact-v1",
+    "accepted_head": "832191562d92440474acf5678de5f3ae2ec20369",
+    "reviewed_head": "6af0e9d589777881b5cdabe80d85eb7e24b354f8",
+    "request_id": "idn120726-6af0e9-20261015-001",
+    "pr_number": 2013,
+    "execution_commit": "3449c224e65ed3b8910c6ab37886bcdfc4952c7f",
+    "historical_selected_commit": "518009e719e30d24d38dbbce629b0fecdebcce76",
+    "source": {
+      "run_id": 38782724077,
+      "run_attempt": 1,
+      "head": "6af0e9d589777881b5cdabe80d85eb7e24b354f8",
+      "baseline": "3449c224e65ed3b8910c6ab37886bcdfc4952c7f",
+      "candidate_commit": "518009e719e30d24d38dbbce629b0fecdebcce76",
+      "workflow_path": ".github/workflows/worker-merge.yml",
+      "event": "workflow_dispatch",
+      "workflow_head": "3449c224e65ed3b8910c6ab37886bcdfc4952c7f",
+      "tree": "0904fcc90d529391b40ddd3fe296313bdca175f7",
+      "job_id": 116587211211,
+      "artifact_name": "geography-idn120726-6af0e9-20261015-001-1",
+      "artifact_id": 11995849096,
+      "artifact_bytes": 7692445,
+      "artifact_digest": "443a0719600fff20a96ff8b2fe02fe7bd21529c503970d1316cadab70d6dcd6e",
+      "report_sha256": "20d26f0cf40754fff018d2d4b8919747c86dc5265a9cf427dfc0a3f940e72326",
+      "report_bytes": 290962
+    },
+    "report_sha256": "20d26f0cf40754fff018d2d4b8919747c86dc5265a9cf427dfc0a3f940e72326",
+    "trusted_catalogue_commit": "832191562d92440474acf5678de5f3ae2ec20369"
+  },
+  "selection": {
+    "additive_release": {
+      "path": "coordination/engineering/indonesia-remaining264-20261015/ownership-selection-v2.json",
+      "bytes": 3497,
+      "sha256": "f37efea26e654b942eb5b04045b0adc12a7f8c01fe899637d3a2d4152635c6f9"
+    },
+    "artifact_consumption": {
+      "certificate": {
+        "bytes": 68158,
+        "mode": "100644",
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/consumption-certificate.json",
+        "sha256": "26b505e3131a2513badc45d1552bcf603c24c565bdfb21b0f623fe4e6c7d4070"
+      },
+      "review": {
+        "bytes": 7379,
+        "mode": "100644",
+        "path": "coordination/engineering/additive-native-activation-20261009/independent-native-consumption-wrapper-self-pin-review.json",
+        "sha256": "87ab56e1354dd8a8fda532bfa008436abd35c6c506f0e0685eaa2f2f07f59a8a"
+      }
+    },
+    "manifest_path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/manifest.json",
+    "method": "native-linear-evenodd-first-owner-v1",
+    "release_id": "geography:review:dbb133d7b123bacd1d38253c467891bff656d011000a9f11d369ac9262302bfb",
+    "selected_geography": {
+      "version": 1,
+      "kind": "complete-world-index-with-exact-encoded-overrides",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography-bank.json",
+      "bytes": 14656,
+      "sha256": "3750f72a48bb9fd498ca129e20e299904239bfe1b4191919fbc89b636234c776"
+    },
+    "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+    "version": 1
+  },
+  "baseSelection": {
+    "artifact_consumption": {
+      "certificate": {
+        "bytes": 68158,
+        "mode": "100644",
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/consumption-certificate.json",
+        "sha256": "26b505e3131a2513badc45d1552bcf603c24c565bdfb21b0f623fe4e6c7d4070"
+      },
+      "review": {
+        "bytes": 7379,
+        "mode": "100644",
+        "path": "coordination/engineering/additive-native-activation-20261009/independent-native-consumption-wrapper-self-pin-review.json",
+        "sha256": "87ab56e1354dd8a8fda532bfa008436abd35c6c506f0e0685eaa2f2f07f59a8a"
+      }
+    },
+    "manifest_path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/manifest.json",
+    "method": "native-linear-evenodd-first-owner-v1",
+    "release_id": "geography:review:dbb133d7b123bacd1d38253c467891bff656d011000a9f11d369ac9262302bfb",
+    "selected_geography": {
+      "version": 1,
+      "kind": "complete-world-index-with-exact-encoded-overrides",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography-bank.json",
+      "bytes": 14656,
+      "sha256": "3750f72a48bb9fd498ca129e20e299904239bfe1b4191919fbc89b636234c776"
+    },
+    "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+    "version": 1
+  },
+  "certificate_entries": 49625,
+  "authority_count": 81,
+  "ledger_rows": 684,
+  "patch_rows": 21553,
+  "source_qualification_replayed": false,
+  "native_qualification_replayed": false,
+  "candidate_transition_executed": false,
+  "canonical_repository_changed": false,
+  "original_runtime": [
+    {
+      "bytes": 126595440,
+      "mode": 511,
+      "path": "/opt/hostedtoolcache/node/24.21.0/x64/bin/node",
+      "sha256": "7fde7b8afa198da66257f42ee2001d874c7355631e6d1579a5fb5ef1f246df4c",
+      "version": "v24.21.0"
+    },
+    {
+      "bytes": 17752,
+      "mode": 511,
+      "path": "/opt/hostedtoolcache/Python/3.12.15/x64/bin/python3.12",
+      "sha256": "53dab24bf9e0e9c490088a53d71770b6f027b057678b313648e75f7fc87a675e",
+      "version": null
+    },
+    {
+      "bytes": 4576040,
+      "mode": 493,
+      "path": "/usr/bin/git",
+      "sha256": "d4d2ba562243015206d4248edfec871a74786499292d00ed072dbca2f5ae8073",
+      "version": null
+    }
+  ]
+}
