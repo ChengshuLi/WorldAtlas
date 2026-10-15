@@ -1,0 +1,107 @@
+{
+  "version": 1,
+  "status": "ACTUAL_NATIVE_RESULT_ACCEPT_WITH_LIMITS",
+  "reviewer": "/root/geography_pruning_exact_astra",
+  "baseline": "4aa52927bf61765cc462a2d0824fa5bce83df919",
+  "candidate": "c6d5c278b55050b09ec97dc1cbf9ed39f26e243b",
+  "executing_commit": "bd9c3a831ee7d4084f8541c8dffc1a9a1bbf053c",
+  "execution_acceptance_at_launch": "reviewed-unmerged",
+  "observed_result": {
+    "joint_mode": "authenticated-checkpoint-append-v1",
+    "exit_code": 0,
+    "native_status": "no-new-native-loss",
+    "lost_or_reassigned_cells": 0,
+    "interval_count": 0,
+    "changed_rows": 10509,
+    "shared_base_reused_rows": 111,
+    "shared_base_acquired_rows": 10398,
+    "witnesses": 293,
+    "baseline_cumulative_additive_cells": 149632,
+    "candidate_cumulative_additive_cells": 270358,
+    "added_cells": 120726,
+    "original_quartet_cells": [
+      100092,
+      1518,
+      10216,
+      5976,
+      2924
+    ],
+    "baseline_ledger_rows": 391,
+    "candidate_ledger_rows": 684,
+    "new_components": 293,
+    "certificate_owners": 49625,
+    "certificate_sources": 36,
+    "route_entries": 638,
+    "predecessor_route_entries": 609
+  },
+  "verified": {
+    "all_four_emitted_file_byte_hash_pins": true,
+    "publication_acknowledgement_facts_routes_certificate_links": true,
+    "certificate_complete_decoded_hash": true,
+    "native_result_canonical_hash": true,
+    "actual_git_selectors_equal_report_facts_routes_certificate": true,
+    "candidate_bindings_equal_actual_products": true,
+    "all_original_quartet_whole_pins_checked": true,
+    "candidate_cell_delta_equals_five_original_quartets": true,
+    "old_cell_owners_ledger_registry_and_rebind_preserved": true,
+    "all293_witnesses_unique_complete_original_component_hash_owner_and_point_matches": true,
+    "all293_witnesses_previous_owner_zero_reported": true,
+    "changed_row_scope_exact_from_patch_difference": true,
+    "reused_acquired_rows_disjoint_complete": true,
+    "complete638_route_roster_derived_from_predecessor_actual_inventory_manifest_and_certificate": true,
+    "635_current_routes_match_exact_git_presence_absence_identity": true,
+    "3_preserved_historical_code_routes_match_whole_policy_roles_and_baseline_inventory": true,
+    "execution22_code_and2_authority_whole_pins_checked": true,
+    "complete_policy_and_consumed_locator_hashes_plus_unconsumed_archive_git_descriptor": true
+  },
+  "hashlinks": {
+    "native_result_sha256": "8d6923727b729fb02ab87f4344997a4bc91eec6e1186b2712a6e04527024652d",
+    "candidate_bindings": {
+      "ledger_sha256": "3bbb2f7ea6c69c35beb149c415a8b4f7ad40f680f19cd348dd080422dcd8c8e0",
+      "manifest_sha256": "8b8f5f6f96b4f85b91929764edc2f5cf37530f0245cca066a9399de0de0ed35e",
+      "patch_sha256": "c883e825ad47f65248d43d3acb96afcdf471c85c92b790ad69412c1c3879e717",
+      "registry_sha256": "74d545be6be0c13bc1a4ea8a64055888c0edf2eacf062d4a42200258057c4cf0"
+    },
+    "products": [
+      {
+        "path": "joint-products-004/checkpoint-routes.json",
+        "bytes": 241092,
+        "sha256": "57a8779fd6b37f32b862c8f25de7a897389ed57fa2fe8c499f639ca04646f6d4"
+      },
+      {
+        "path": "joint-products-004/derived-certificate.json.gz",
+        "bytes": 7517512,
+        "sha256": "303fafaffda65da95deb1b100f83bd1d9b1c0651f8a25948807a97ebfa9c07ef"
+      },
+      {
+        "path": "joint-products-004/derived-facts.json",
+        "bytes": 466555,
+        "sha256": "3459dacf5e08e70483ab1e13fd39f26968950e1365625806f360e0baf7840755"
+      },
+      {
+        "path": "joint-products-004/derived-publication.json",
+        "bytes": 660,
+        "sha256": "9e063348cd87c94edc781d57e1e9e6ec40fee9ea984d5dcc88b059639c9b383f"
+      }
+    ],
+    "certificate_decoded_sha256": "2f0d84f98bad8e6b18345d69cb042c32d171d2613397a00477b343d462685e2a"
+  },
+  "findings": [],
+  "remaining_limits": [
+    "Native base owner-zero for all additions is established by the actual trusted consumer's qualified complete-base projection and overlap rejection; this review matches all emitted witnesses and original tuples but does not independently rerun/decode the scientific native base.",
+    "Execution was reviewed-unmerged PR2008 bd9 at launch. Adoption requires parent verification of actual merge and code/policy equivalence; this review grants no accepted delivery credit.",
+    "All derived products explicitly remain accepted_checkpoint=false and validation_stage=native-passed. Actual emitted application package, picker, CI/integration and final acceptance are still pending.",
+    "Frozen bd9 accepted-derived reader requires facts.runtime.length===3, while these local products truthfully carry four runtime identities. This only limits future re-admission of this local checkpoint artifact. The current joint entry qualifies the predecessor, compares the candidate, then writes and returns these products without re-admitting them. They are not being registered as an accepted checkpoint; normal Linux delivery validation and emitted package remain the applicable route. This is not a current delivery gate or requested code fix.",
+    "Original source-vintage, rights, CRS, framework, sovereignty and held-scope limitations remain; no science was rerun."
+  ],
+  "activity": "Read-only local product parsing, exact tuple comparisons, SHA256 checks and immutable Git metadata/code reads. No scientific predicate/producer rerun, Git writes/fetch, checkout changes or publication.",
+  "action_status": {
+    "denied": [],
+    "uncertain": [],
+    "pending": [
+      "merge/code-policy equivalence adoption",
+      "emitted application package and picker",
+      "integration and final acceptance"
+    ]
+  }
+}

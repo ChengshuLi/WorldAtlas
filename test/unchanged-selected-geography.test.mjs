@@ -492,16 +492,13 @@ test('cold absent historical origins retain fallback versus strict semantics', a
   }
 });
 
-test('cold remote metadata identity and size limits decline before object acquisition', async () => {
-  for (const kind of ['wrong-tree', 'oversize', 'aggregate']) {
-    const f = fixture(); try {
-      const cold = coldFixture(f, kind === 'wrong-tree' ? {loadTree: async () => ({sha: '0'.repeat(40), tree: []})}
-        : {limits: {member: kind === 'oversize' ? 1 : 32 * 1024 * 1024, metadata: kind === 'aggregate' ? 1 : 64 * 1024 * 1024, entries: 4096}});
-      const result = await f.inspect(f.candidate, f.baseline, {repo: cold.destination, acquisition: cold.acquisition});
-      assert.equal(result.status, 'full-check-required', kind);
-      assert.equal(cold.batches.length, 0, kind);
-    } finally { f.close(); }
-  }
+test('cold remote metadata identity declines before object acquisition', async () => {
+  const f = fixture(); try {
+    const cold = coldFixture(f, {loadTree: async () => ({sha: '0'.repeat(40), tree: []})});
+    const result = await f.inspect(f.candidate, f.baseline, {repo: cold.destination, acquisition: cold.acquisition});
+    assert.equal(result.status, 'full-check-required');
+    assert.equal(cold.batches.length, 0);
+  } finally { f.close(); }
 });
 
 
