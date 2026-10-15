@@ -8,8 +8,6 @@ import {DatabaseSync} from 'node:sqlite';
 import {decodeDerived} from '../src/derived-records.js';
 import {decodeReferences} from '../src/reference-records.js';
 import {derivedRecordsAt} from '../derived.mjs';
-import {resolveAttributes} from '../src/attributes.js';
-import {resolveTemporal} from '../src/temporal.js';
 import {snapshot} from '../database.mjs';
 import {temporalCatalog} from '../temporal.mjs';
 import {runtimeOwnershipBucket,runtimeOwnershipData} from '../src/runtime-ownership.js';
@@ -155,7 +153,7 @@ test('actual prepared historical records match independent compact-table interpr
 
 const staticRoot=fs.existsSync(path.join(root,'dist/client/atlas-geography.json'))?path.join(root,'dist/client'):path.join(root,'dist');
 const haveStatic=fs.existsSync(path.join(staticRoot,'atlas-geography.json'))&&fs.existsSync(path.join(staticRoot,'ownership-runtime/index.json'));
-test('static and server exports resolve every active location identically, with examples on and off',{skip:!haveStatic&&!process.env.ATLAS_REQUIRE_STATIC?'full static export not built':false},()=>{
+test('static and server exports preserve complete state and attribute inputs, with examples on and off',{skip:!haveStatic&&!process.env.ATLAS_REQUIRE_STATIC?'full static export not built':false},()=>{
  assert.ok(haveStatic,'A complete static build is required for publication');
  const manifest=read(path.join(staticRoot,'atlas-geography.json'));
  const reference={...manifest,features:manifest.parts.flatMap(p=>read(path.join(staticRoot,p))),temporal:{...manifest.temporal,entities:manifest.entityParts.flatMap(p=>read(path.join(staticRoot,p))),history:manifest.temporalHistoryParts.flatMap(p=>read(path.join(staticRoot,p)))}};
@@ -182,11 +180,10 @@ test('static and server exports resolve every active location identically, with 
     assert.equal(staticOwnerFingerprint,preparedOwnerFingerprint,`Actual static temporal transport preserves prepared source values at ${year}`);
     const exported={states:selectedStates(history.states,year,examples),attributes:[...staticOwners,...referenceRecords,...(history.attributes||[]).filter(r=>r.valid_from<=year&&r.valid_to>year&&(!r.is_example||examples))]};
     assert.deepEqual(server.polities,[],'Normal Political mode has no independent source polygon layer');
-    const serverTemporal=resolveTemporal(serverReference,year,examples),staticTemporal=resolveTemporal(reference,year,examples);
-    const resolve=(features,state,temporal)=>[...resolveAttributes(features,year,{states:state.states,records:state.attributes,temporal,examples}).values()];
-    const actual=resolve(serverTemporal.features,server,serverTemporal),expected=resolve(staticTemporal.features,exported,staticTemporal);
-    assert.equal(actual.length,expected.length,`active locations at ${year}/${examples}`);
-    assert.equal(fingerprint(actual),fingerprint(expected),`all resolved fields/provenance at ${year}/${examples}`);
+    // Catalog inputs were compared above. Compare the remaining complete inputs
+    // instead of running the same resolvers twice and hiding lower-priority drift.
+    assert.equal(fingerprint(server.states),fingerprint(exported.states),`all snapshot states/provenance at ${year}/${examples}`);
+    assert.equal(fingerprint(server.attributes),fingerprint(exported.attributes),`all snapshot attributes/provenance at ${year}/${examples}`);
    }
   }
  }finally{db.close();}

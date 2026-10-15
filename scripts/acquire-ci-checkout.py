@@ -2,6 +2,7 @@
 """Acquire one exact CI Git tree; no candidate code or persistent authentication."""
 import argparse
 import base64
+import hashlib
 import json
 import os
 import re
@@ -94,7 +95,7 @@ class Supervisor:
                 pass
             raise AcquisitionError('process-cleanup-failed')
 
-    def run(self, argv, cwd, env, phase, accepted=(0,), cleanup=False):
+    def run(self, argv, cwd, env, phase, accepted=(0,), cleanup=False, output_limit=8192, strip_output=True):
         if self.cancelled and not cleanup:
             raise AcquisitionError('cancelled')
         start = time.monotonic()
@@ -121,7 +122,7 @@ class Supervisor:
                         continue
                     if key.data == 'stdout':
                         output.extend(chunk)
-                        if len(output) > 8192:
+                        if len(output) > output_limit:
                             failure = 'unexpected-command-output'
                             break
                     else:
@@ -160,7 +161,8 @@ class Supervisor:
                         phase_seconds=round(time.monotonic() - start, 3), exit_code=child.returncode)
             if failure:
                 raise AcquisitionError(failure)
-            return bytes(output).decode('utf-8', errors='strict').strip()
+            text = bytes(output).decode('utf-8', errors='strict')
+            return text.strip() if strip_output else text
         finally:
             try:
                 if child.pid in self.unresolved_groups:
@@ -171,7 +173,40 @@ class Supervisor:
                 child.stderr.close()
 
 
-def acquire(repository, sha, tree, workspace, token=None, git_executable=None, emit=None, regression=False):
+def research_package_patterns(definition):
+    # Reuse package-inputs.mjs's packagePathRequired role/path semantics.
+    # This retention boundary grants no package role; the real package reader
+    # still validates the complete definition and every required materialized input.
+    inputs = definition.get('inputs') if isinstance(definition, dict) else None
+    verification = definition.get('verification_paths') if isinstance(definition, dict) else None
+    if (not isinstance(definition, dict) or definition.get('version') != 1
+            or not isinstance(inputs, list) or not inputs or not isinstance(verification, list)):
+        raise AcquisitionError('invalid-package-inputs')
+    paths = inputs + verification
+    for name in paths:
+        if (not isinstance(name, str) or not re.fullmatch(r'[A-Za-z0-9_./-]+', name)
+                or name.startswith('/') or any(part in ('', '.', '..') for part in (name[:-1] if name.endswith('/') else name).split('/'))):
+            raise AcquisitionError('invalid-package-inputs')
+    prefix = 'research/geography/'
+    if any(name.endswith('/') and prefix.startswith(name) for name in paths):
+        return []
+    retained = [name for name in paths if name.startswith(prefix)]
+    directories = set()
+    for name in retained:
+        parent = name.rstrip('/') if name.endswith('/') else name.rsplit('/', 1)[0]
+        while parent != prefix.rstrip('/'):
+            directories.add(parent + '/')
+            parent = parent.rsplit('/', 1)[0]
+    patterns = ['!/' + prefix + '*']
+    for directory in sorted(directories, key=lambda name: (name.count('/'), name)):
+        patterns.append('/' + directory)
+        if not any(name.endswith('/') and directory.startswith(name) for name in retained):
+            patterns.append('!/' + directory + '*')
+    patterns.extend('/' + name for name in retained if not name.endswith('/'))
+    return patterns
+
+
+def acquire(repository, sha, tree, workspace, token=None, git_executable=None, emit=None, regression=False, selected_data=False):
     """git_executable is a library-only fault-injection seam, never a CLI option."""
     supplied_token = os.environ.pop('WORLDATLAS_CHECKOUT_TOKEN', None)
     token = supplied_token if token is None else token
@@ -234,9 +269,25 @@ def acquire(repository, sha, tree, workspace, token=None, git_executable=None, e
             actual_tree = supervisor.run(common + ['rev-parse', '--verify', sha + '^{tree}'], staging, env, 'verify-tree')
             if commit != sha or actual_tree != tree:
                 raise AcquisitionError('git-identity-mismatch')
-            # Only this supervised materialization may fetch selected promised
-            # blobs. It inherits transient auth, never candidate code or filters.
+            # Only the supervised declaration read and materialization may fetch
+            # promised blobs, with transient auth and no candidate code or filters.
             materialize_env = dict(fetch_env, GIT_NO_LAZY_FETCH='0') if regression else env
+            if regression and selected_data:
+                name = '.github/package-inputs.json'
+                row = supervisor.run(common + ['ls-tree', sha, '--', name], staging, env, 'package-inputs')
+                match = re.fullmatch(r'100644 blob ([a-f0-9]{40})\t' + re.escape(name), row)
+                if not match:
+                    raise AcquisitionError('invalid-package-inputs')
+                # Existing selected-package metadata admits ordinary bodies up
+                # to 8 MiB. Never print the body or execute candidate validation.
+                raw = supervisor.run(common + ['cat-file', 'blob', match[1]], staging, materialize_env,
+                                     'package-inputs', output_limit=8 * 1024 * 1024, strip_output=False)
+                body = raw.encode('utf-8')
+                if hashlib.sha1(b'blob ' + str(len(body)).encode() + b'\0' + body).hexdigest() != match[1]:
+                    raise AcquisitionError('git-identity-mismatch')
+                patterns = research_package_patterns(json.loads(raw))
+                with (staging / '.git/info/sparse-checkout').open('a', encoding='utf-8') as output:
+                    output.write('\n'.join(patterns) + '\n')
             supervisor.run(common + ['checkout', '--detach', '--force', '--progress', sha],
                            staging, materialize_env, 'materialize')
         finally:
@@ -295,7 +346,8 @@ def main():
     try:
         acquire(args.repository, args.sha, args.tree, args.workspace,
                 regression=os.environ.get('INTEGRATION_PROFILE') == 'full' and
-                os.environ.get('INTEGRATION_TEST_SELECTION') in ('complete', 'selected-data'))
+                os.environ.get('INTEGRATION_TEST_SELECTION') in ('complete', 'selected-data'),
+                selected_data=os.environ.get('INTEGRATION_TEST_SELECTION') == 'selected-data')
     except AcquisitionError as error:
         print(json.dumps({'event': 'acquisition-failed', 'reason': error.category}), flush=True)
         return 130 if error.category == 'cancelled' else 1
