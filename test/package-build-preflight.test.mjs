@@ -135,7 +135,8 @@ test('all actual package entries expose their complete declared current import c
   const actual=inspectPackageExecutionInputs(root,definition,kind),entry=`scripts/build-${kind}-inner.mjs`;
   assert.deepEqual(actual.errors,[]);
   assert(actual.files.includes(entry));assert(actual.files.includes('scripts/package-build.mjs'));
-  assert(actual.files.includes('scripts/native-ownership/validate-build-context-stage.mjs'));
+  assert(actual.files.includes('scripts/package-current-additive.mjs'));
+  assert(!actual.files.includes('scripts/native-ownership/validate-build-context-stage.mjs'));
   assert.deepEqual(actual.files,[...new Set(actual.files)].sort());
   for(const name of actual.files)assert(containsPackagePath(definition.inputs,name),name);
  }

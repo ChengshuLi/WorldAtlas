@@ -2,6 +2,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
+import {isDeepStrictEqual} from 'node:util';
 import {gzipSync} from 'node:zlib';
 import {loadOwnershipAssets} from '../src/ownership-assets.js';
 import {shuffleOwnershipBytes, unshuffleOwnershipBytes} from '../src/ownership-codec.js';
@@ -100,7 +101,8 @@ export async function packagePreparedStartupOwnership({manifest,manifestSha,sour
   }
   if(words!==manifest.runWords)throw Error('Prepared startup run stream is incomplete');
   const latitude=index.pixelMap.native_latitudes;
-  if(!latitude||!pins.has(latitude.transport_path)||pins.get(latitude.transport_path).sha256!==manifest.native_latitudes?.sha256||latitude.sha256!==manifest.native_latitudes.sha256)throw Error('Prepared startup native latitude differs');
+  if(!isDeepStrictEqual(latitude,{...manifest.native_latitudes,transport_path:'native-v1/native-row-latitudes.f64le.gz'})||!pins.has(latitude.transport_path)||pins.get(latitude.transport_path).sha256!==latitude.sha256)throw Error('Prepared startup native latitude differs');
+  if(index.pixelMap.canonical_grid_sha256!==undefined&&index.pixelMap.canonical_grid_sha256!==manifestSha)throw Error('Prepared startup canonical grid identity differs');
   // Authenticate every current and retained compatibility URL before writing.
   const bodies=[];
   for(const pin of index.files){

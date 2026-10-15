@@ -70,3 +70,18 @@ test('prepared startup accepts exact versioned rows without rebinding predecesso
  part.path=versioned;part.bytes++;await f.write();
  await assert.rejects(packagePreparedStartupOwnership({...f,destination:f.destination+'-changed'}),/row identity differs/);
 });
+
+test('prepared startup binds complete selected latitude and optional canonical identity before writing',async t=>{
+ const f=await fixture(t),latitude={...f.index.pixelMap.native_latitudes};
+ for(const [key,value]of [['bytes',0],['decoded_bytes',0],['decoded_sha256','0'.repeat(64)],['transport_path','foreign-latitude.gz'],['commit','0'.repeat(40)]]){
+  f.index.pixelMap.native_latitudes={...latitude,[key]:value};await f.write();
+  await assert.rejects(packagePreparedStartupOwnership(f),/native latitude differs/);
+  await assert.rejects(fs.stat(f.destination),{code:'ENOENT'});
+ }
+ f.index.pixelMap.native_latitudes=latitude;
+ f.index.pixelMap.canonical_grid_sha256='c'.repeat(64);await f.write();
+ await assert.rejects(packagePreparedStartupOwnership(f),/canonical grid identity differs/);
+ await assert.rejects(fs.stat(f.destination),{code:'ENOENT'});
+ f.index.pixelMap.canonical_grid_sha256=f.manifestSha;await f.write();
+ await packagePreparedStartupOwnership(f);
+});
