@@ -7,7 +7,6 @@ import {fileURLToPath} from 'node:url';
 import {execFileSync, spawnSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {gzipSync} from 'node:zlib';
-import {candidateBudget} from '../scripts/native-ownership/native-preparation-guards.mjs';
 import {digest, jsonBytes, pinReader, sourceEvidence} from '../scripts/prepare-delivery-handoff.mjs';
 
 const helper = fileURLToPath(new URL('../scripts/prepare-delivery-handoff.mjs', import.meta.url));
@@ -18,7 +17,7 @@ const withoutBaseline = value => Object.fromEntries(Object.entries(value).filter
 const locator = pin => ({commit: pin.commit, path: pin.path});
 function memoryReader() {
   const bodies = new Map(), pins = new Map(), reads = [];
-  const reader = {budget: candidateBudget([], {reserveBytes: 0, reserveDescriptors: 0}), bodies, pins, reads,
+  const reader = {bodies, pins, reads,
     add(name, value, version = commit) {
       const raw = Buffer.isBuffer(value) ? value : jsonBytes(value);
       const pin = {commit: version, path: name, mode: '100644', bytes: raw.length, sha256: digest(raw),

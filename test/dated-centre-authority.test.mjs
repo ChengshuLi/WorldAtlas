@@ -105,8 +105,7 @@ function fixture({legacy=false,displayPrefix='',change=()=>{},changeSupport=()=>
    throw Error('Unexpected fixture Git request: '+args.join(' '));
   }
  }
- const reader=()=>new FixtureReader('.',version,{runtimeBytes:0,metadataBytes:0,outputBytes:16*1024*1024,
-  allowance:{phaseBytes:192*1024*1024,rssBytes:1024*1024*1024}});
+ const reader=()=>new FixtureReader('.',version);
  return {run:(inputReader=reader())=>constructOriginalAuthority(inputReader,{
   source_evidence:{commit:version,path:evidence.path},native_patch:{commit:version,path:patch.path}}),
   reader,files,byBlob,state,support,adoption,review,observation};
@@ -120,7 +119,9 @@ function positive(result){
  return row;
 }
 test('actual constructor consumes dated-only land at exactly one native centre and retains v1 mapped support',()=>{
- const dated=fixture();const before=clone(dated.state);positive(dated.run());assert.deepEqual(dated.state,before);
+ const dated=fixture(),reader=dated.reader();const before=clone(dated.state);positive(dated.run(reader));assert.deepEqual(dated.state,before);
+ for(const frame of dated.support.provenance.filter(p=>p.role==='frame'))
+  assert.equal(reader.inventory.get(version+':'+frame.pin.path).whole_body_consumed,true);
  positive(fixture({change:s=>s.adoption.records[0].answer_dates=['2020-01-31']}).run());
  positive(fixture({displayPrefix:'remaining-december/'}).run());
  positive(fixture({legacy:true}).run());
@@ -141,6 +142,9 @@ test('coherent caller replacement cannot turn reader.version or arbitrary pins i
  const tampered=fixture(),entry=tampered.files.get(version+':'+tampered.observation.path);
  tampered.byBlob.set(entry.pin.git_blob_oid,Buffer.from('changed consumed observation'));
  assert.throws(()=>tampered.run(),/whole|identity|differ|body/i);
+ const missing=fixture(),frame=missing.support.provenance.find(p=>p.id==='rgb').pin;
+ missing.byBlob.set(frame.git_blob_oid,Buffer.from('invalid PNG body'));
+ assert.throws(()=>missing.run(),/whole|identity|body/i);
 });
 
 test('adoption, review, observation and native frame joins are substantive consumed records',()=>{
@@ -205,42 +209,6 @@ test('water, special and unresolved records do not become dated land or inland-w
  assert.throws(()=>fixture({change:s=>s.targets[0].coverage_classes=['mapped_inland_water_support']}).run(),/land|water|coverage|support/i);
 });
 
-test('whole encoded frames retain their buffer charge and cap while legacy inputs retain sixfold scratch',()=>{
- const legacyPaths=['source-evidence.json','patch.json',
-  'coordination/engineering/original-geography-source-corpus-20261006/catalogue.json',
-  'physical.json','measured.json','physical.py','latitudes.f64le','owners.json','original-source.json'];
- const legacy=fixture({legacy:true}),legacyReader=legacy.reader();positive(legacy.run(legacyReader));
- const total=(f,paths)=>paths.reduce((n,p)=>n+f.files.get(version+':'+p).pin.bytes,0);
- assert.deepEqual([...legacyReader.charged.keys()].sort(),legacyPaths.map(p=>version+':'+p).sort());
- // Every old input still retains its admitted encoded bytes plus the same
- // sixfold scratch, including the native latitude table and source JSON.
- assert.equal(legacyReader.used,legacyReader.outputBytes+7*total(legacy,legacyPaths));
-
- const dated=fixture(),reader=dated.reader(),frame=dated.support.provenance.find(p=>p.id==='rgb').pin;
- let beforeFrame;
- const admit=reader.admit.bind(reader);
- reader.admit=(pin,decoded)=>{
-  if(pin.path===frame.path&&!reader.charged.has(pin.commit+':'+pin.path))beforeFrame=reader.used-frame.bytes;
-  return admit(pin,decoded);
- };
- positive(dated.run(reader));assert.ok(Number.isSafeInteger(beforeFrame));
- const framePaths=dated.support.provenance.filter(p=>p.role==='frame').map(p=>p.pin.path);
- const datedJson=[...legacyPaths,prefix+'/dated-land-support.json',dated.adoption.path,dated.review.path,dated.observation.path];
- assert.deepEqual([...reader.charged.keys()].sort(),[...datedJson,...framePaths].map(p=>version+':'+p).sort());
- assert.equal(reader.used,reader.outputBytes+7*total(dated,datedJson)+2*total(dated,framePaths));
- for(const path of framePaths)assert.equal(reader.inventory.get(version+':'+path).whole_body_consumed,true);
-
- // The actual complete PNG is one byte beyond the remaining temporary buffer
- // allowance. Fail before admitting/opening it; no image decoding is involved.
- const limited=dated.reader();limited.allowance.phaseBytes=beforeFrame+frame.bytes-1;
- assert.throws(()=>dated.run(limited),/Dated encoded frame buffer exceeds phase/);
- assert.equal(limited.used,beforeFrame);
- assert.equal(limited.charged.has(version+':'+frame.path),false);
- assert.equal(limited.inventory.get(version+':'+frame.path).whole_body_consumed,undefined);
- const missing=fixture(),missingFrame=missing.support.provenance.find(p=>p.id==='rgb').pin;
- missing.byBlob.set(missingFrame.git_blob_oid,Buffer.from('invalid PNG body'));
- assert.throws(()=>missing.run(),/whole|identity|body/i);
-});
 
 function physicalVeto(state,reason){
  const result=state.physical.results[0],geometry=rectangle(-90.02,-89.98);

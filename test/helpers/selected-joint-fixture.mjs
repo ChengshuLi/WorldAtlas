@@ -96,6 +96,6 @@ export async function trustedFixture(t,{incompleteNative=false,nativeOnly=false}
  save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',checkpoints:[rootRow]});commit();
  const api=await import(pathToFileURL(path.join(root,MODULE))),native=await import(pathToFileURL(path.join(root,'scripts/check-effective-geographic-regression.mjs')));
  const joint=await import(pathToFileURL(path.join(root, PREFIX+'selected-joint-entry.mjs')));
- const reader=new native.ImmutableReader(root,selected,{allowance:{phaseBytes:512*1024**2,rssBytes:512*1024**2}}),budget={shared:reader.budget,carriedBytes:1024};
- return {api,native,joint,reader,budget,selected,root,git,save,commit,pin,ledger,patch,sidecar,envelope,selection,rootRow};
+ const reader=new native.ImmutableReader(root,selected);
+ return {api,native,joint,reader,selected,root,git,save,commit,pin,ledger,patch,sidecar,envelope,selection,rootRow};
 }

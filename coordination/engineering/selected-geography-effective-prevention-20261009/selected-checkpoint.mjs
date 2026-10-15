@@ -10,10 +10,9 @@ import {nativeOnlyComponent} from '../../../src/native-grid.js';
 import {unshuffleOwnershipBytes} from '../../../src/ownership-codec.js';
 import {valueBytes, valueSha, coordinateBounds, nativeBaseSelection,
   normaliseRetainedRepairLedger, readRetainedRegistryAuthority, validateSupportedProgrammeCatalogue,
-  CURRENT_REBIND_CODE, verifyCurrentRebindExecution, validateCurrentRebindLimits,
+  CURRENT_REBIND_CODE, verifyCurrentRebindExecution,
   currentRebindResult, currentRebindAcquisitionIdentity, retainedArcticNativeRows} from './selected-neighbor-prevention.mjs';
 
-const FILE = 33554432;
 const ROOT = fileURLToPath(new URL('../../../', import.meta.url));
 const MODULE = 'coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs';
 const CATALOGUE = 'coordination/engineering/selected-checkpoint-reuse-20261012/accepted-checkpoints.json';
@@ -42,7 +41,7 @@ function acceptedExecutablePaths(session,inventory,facts,policy) {
   const identity=p=>valueSha([p.path,p.bytes,p.sha256]);
   const bodies=new Set(roles.map(identity));
   const paths=new Set(inventory.filter(p=>hash(p.sha256)&&bodies.has(identity(p))).map(p=>p.path));
-  retain(session,[...paths]);return paths;
+  return paths;
 }
 const same = (a,b) => a === undefined || b === undefined ? a === b : valueSha(a) === valueSha(b);
 const hash = x => typeof x === 'string' && /^[a-f0-9]{64}$/.test(x);
@@ -53,58 +52,18 @@ const keys = (x, expected, message) => demand(x && same(Object.keys(x).sort(), e
 const unavailable = (reason, baseline) => Object.freeze({available:false, reason, cold:baseline ? 'candidate' : 'baseline-and-candidate', ...(baseline ? {baseline} : {})});
 const supported = (ok, message) => { if (!ok) { const error = Error(message); error.reuseUnavailable = true; throw error; } };
 
-// The current complete allowance and one shared reader budget belong to this
-// invocation. A historical peak is never permission for a current allocation.
-function budgetCheck(reader, budget, session) {
-  demand(reader instanceof ImmutableReader && budget && budget.shared === reader.budget,
-    'Checkpoint requires the actual shared immutable-reader budget');
-  demand(Number.isSafeInteger(budget.carriedBytes) && budget.carriedBytes >= 0,
-    'Explicit complete caller-carried bytes required');
-  demand(reader.runtimeBytes >= fs.statSync(process.execPath).size,
-    'Checkpoint runtime undercharge');
-  if (session) {
-    demand(!session.closed && budget === session.budget && reader.budget === session.reader.budget
-      && reader.allowance === session.reader.allowance && reader.repo === session.reader.repo,
-    'Foreign, expired or independently budgeted checkpoint invocation');
-    demand(reader.used >= session.floor && budget.carriedBytes >= session.callerCarry,
-      'Checkpoint live-state budget was reset or undercharged');
-    const additionalCarry=budget.carriedBytes-session.callerCarry;
-    demand(reader.used+additionalCarry<=reader.phaseLimit,
-      'External carried-state increase exceeds current allowance before projection reuse');
-    reader.used+=additionalCarry;
-    session.floor=Math.max(session.floor,reader.used);
-    session.callerCarry=budget.carriedBytes;
-  }
-  reader.checkMemory();
-}
-function charge(session, reader, bytes) {
-  demand(Number.isSafeInteger(bytes) && bytes >= 0 && reader.used + bytes <= reader.phaseLimit,
-    'Complete checkpoint input/output/carry exceeds current allowance before allocation');
-  reader.used += bytes;
-  session.floor = Math.max(session.floor, reader.used);
-}
-function beginFrame(session, reader, extra = 0) {
-  budgetCheck(reader, session.budget, session);
-  reader.metadataBytes = session.initialMetadata + session.budget.carriedBytes + session.residentBytes;
-  reader.outputBytes = session.initialOutput;
-  reader.phase();
-  session.floor = reader.used;
-  charge(session, reader, extra);
-}
-function retain(session, value) {
-  // A conservative seven-byte representation allowance follows the existing
-  // current-rebind output frame. Pin sizes reserve this before parsing.
-  const bytes = 7 * valueBytes(value).length;
-  demand(Number.isSafeInteger(bytes), 'Invalid retained checkpoint size');
-  session.residentBytes += bytes;
-  return bytes;
+// Qualified handles and projections belong to one live immutable-reader invocation.
+function sessionCheck(reader, session) {
+  demand(reader instanceof ImmutableReader, 'Checkpoint requires an immutable reader');
+  if (session) demand(!session.closed && reader.invocation === session.invocation
+    && reader.repo === session.repo, 'Foreign or expired checkpoint invocation');
 }
 function pin(p) {
   demand(p && commit(p.commit) && safe(p.path) && ['100644','100755'].includes(p.mode)
     && /^[a-f0-9]{40}$/.test(p.git_blob_oid) && Number.isSafeInteger(p.bytes)
-    && p.bytes > 0 && p.bytes <= FILE && hash(p.sha256), 'Incomplete immutable checkpoint pin');
+    && p.bytes >= 0 && hash(p.sha256), 'Incomplete immutable checkpoint pin');
   if (p.decoded_bytes !== undefined) demand(Number.isSafeInteger(p.decoded_bytes)
-    && p.decoded_bytes > 0 && p.decoded_bytes <= FILE && hash(p.decoded_sha256),
+    && p.decoded_bytes > 0 && hash(p.decoded_sha256),
   'Incomplete whole decoded checkpoint pin');
 }
 function resolvePin(reader, p) {
@@ -118,8 +77,8 @@ function resolvePin(reader, p) {
 }
 function readBody(session, reader, p, {json = true} = {}) {
   const {version} = resolvePin(reader, p), decoded = p.decoded_bytes ?? 0;
-  charge(session, reader, (json ? 7 : 1) * (decoded || p.bytes));
-  const encoded = reader.read(p.path, {version, expected:p.sha256, decoded});
+
+  const encoded = reader.read(p.path, {version, expected:p.sha256});
   let body = encoded;
   if (decoded) {
     demand(encoded.length >= 18 && encoded.readUInt32LE(encoded.length-4) === decoded,
@@ -128,7 +87,7 @@ function readBody(session, reader, p, {json = true} = {}) {
     demand(body.length === decoded && sha(body) === p.decoded_sha256,
       'Checkpoint whole decoded output is corrupt');
   }
-  session.floor = reader.used;
+
   return json ? JSON.parse(body) : body;
 }
 function localPin(reader, name, version = reader.version, expected) {
@@ -136,23 +95,19 @@ function localPin(reader, name, version = reader.version, expected) {
   return {...actual, sha256:expected ?? sha(reader.read(name, {version}))};
 }
 function readNamed(session, reader, name, expected) {
-  const p = reader.descriptor(name);
-  charge(session,reader,7*p.bytes);
   const body = reader.read(name,{expected});
   if (name===PROGRAMME_POLICY && reader.version===session.trusted && !session.executingPolicy) {
-    charge(session,reader,2*body.length);
+
     session.executingPolicy=freeze({pin:{...reader.inventory.get(reader.version+':'+name)},body:body.toString('utf8')});
-    retain(session,session.executingPolicy);
+
   }
-  session.floor = reader.used;
+
   return JSON.parse(body);
 }
 function rootCatalogue(session, reader, {accepted = false} = {}) {
   const trusted = reader.git('-C',ROOT,'rev-parse', '--verify', 'HEAD').toString().trim();
   // Do not derive trust from reader.version or a caller-supplied trusted SHA.
-  const executing = new ImmutableReader(ROOT, trusted, {runtimeBytes:reader.runtimeBytes,
-    executionBytes:reader.executionBytes, budget:reader.budget, allowance:reader.allowance,
-    gitExecutable:reader.gitExecutable});
+  const executing = new ImmutableReader(ROOT, trusted, {invocation:reader.invocation, gitExecutable:reader.gitExecutable});
   executing.inventory=reader.inventory; // one invocation's complete archived custody survives the child
   demand(executing.git('rev-parse','HEAD').toString().trim() === trusted,
     'Checkpoint repo differs from the actual trusted execution checkout');
@@ -169,7 +124,7 @@ function rootCatalogue(session, reader, {accepted = false} = {}) {
   for (const name of [...expectedPaths, ...(accepted ? ACCEPTED_CODE : [])]) {
     const actual = executing.descriptor(name), local = path.join(ROOT,name);
     demand(actual.mode === '100644', 'Checkpoint method identity differs');
-    charge(session, reader, 2 * actual.bytes);
+
     const bytes = fs.readFileSync(local);
     demand(bytes.length === actual.bytes && bytes.equals(executing.read(name)),
       'Unrecognized/changed executing checkpoint method');
@@ -279,21 +234,19 @@ function rebindProducts(session, reader, ledger) {
 function newState(session, data, privateData) {
   freeze(data); states.set(data,{session,...privateData}); session.handles.add(data); return data;
 }
-function getState(state, reader, budget) {
+function getState(state, reader) {
   const proof = states.get(state);
   demand(proof && !proof.session.closed, 'Missing private qualified selected checkpoint');
-  budgetCheck(reader ?? proof.reader,budget ?? proof.session.budget,proof.session);
+  sessionCheck(reader ?? proof.reader,proof.session);
   return proof;
 }
 
-/** budget = {shared: reader.budget, carriedBytes: complete caller live bytes}.
- * Reader.version is the actual baseline, not the historical execution commit.
+/** Reader.version is the actual baseline, not the historical execution commit.
  * Unsupported reuse returns a cold-path decision. Corrupt custody throws. */
-export function qualifyCheckpoint({reader,checkpointId,budget}) {
-  budgetCheck(reader,budget);
-  const session = {reader,budget,callerCarry:budget.carriedBytes,closed:false,handles:new Set(),residentBytes:0,
-    initialMetadata:reader.metadataBytes,initialOutput:reader.outputBytes,floor:reader.used};
-  charge(session,reader,budget.carriedBytes);
+export function qualifyCheckpoint({reader,checkpointId}) {
+  sessionCheck(reader);
+  const session = {reader,invocation:reader.invocation,repo:reader.repo,closed:false,handles:new Set()};
+
   try {
     const {catalogue,trusted,archiveReader} = rootCatalogue(session,reader);
     session.trusted=trusted;
@@ -414,7 +367,7 @@ function acceptedRebindCheck(selected,rebind,authorities,size,owners) {
     && same(selected.patch.rows,mergePatchRows([...authorities.values()].flatMap(proof=>proof.patches),size,owners)),
   'Accepted checkpoint rebind/native selection differs');
 }
-function finishCheckpoint(session,reader,{data,routes,rebind,selected,root,oldAuthorities,carriedCertificate=false}) {
+function finishCheckpoint(session,reader,{data,routes,rebind,selected,root,oldAuthorities}) {
   // Every authority patch remains live, including native-only bodies. Only
   // the historical rebind denominator excludes native-only source custody.
   const originalPatches = [...oldAuthorities.values()].flatMap(p => p.patches);
@@ -422,10 +375,6 @@ function finishCheckpoint(session,reader,{data,routes,rebind,selected,root,oldAu
   const nativeRows = new Map(rebind.request.current_rows.map(p => [p.y,p]));
   for (const row of rebind.request.acquisition.predecessor_rows) nativeRows.set(row.y,row);
   demand(same(legacyPatchHashes,rebind.request.original_patch_sha256s), 'Accepted complete original patch denominator differs');
-  if (carriedCertificate) {
-    const {certificate,...newData}=data;
-    retain(session,{data:newData,rebind,originalPatches});
-  } else retain(session,{data,routes,rebind,originalPatches});
   const state = newState(session,data,{reader,routes,rebind,oldAuthorities,selected,root,
     nativeRows,sourceTargets:new Map(rebind.request.current_targets.map(p => [p.target_id,p]))});
   return Object.freeze({available:true,state});
@@ -434,18 +383,15 @@ function finishCheckpoint(session,reader,{data,routes,rebind,selected,root,oldAu
 // The accepted report is authority only after the transport module has verified
 // the existing bot merge receipt, actual merged tree, trusted job and archive.
 // Keep the legacy synchronous entry independent of this optional async boundary.
-export async function qualifyAcceptedCheckpoint({reader,acceptedHandle,budget}) {
-  budgetCheck(reader,budget);
-  const session={reader,budget,callerCarry:budget.carriedBytes,closed:false,handles:new Set(),residentBytes:0,
-    initialMetadata:reader.metadataBytes,initialOutput:reader.outputBytes,floor:reader.used};
-  charge(session,reader,budget.carriedBytes);
+export async function qualifyAcceptedCheckpoint({reader,acceptedHandle}) {
+  sessionCheck(reader);
+  const session = {reader,invocation:reader.invocation,repo:reader.repo,closed:false,handles:new Set()};
+
   try {
     const {trusted,archiveReader}=rootCatalogue(session,reader,{accepted:true});
     session.trusted=trusted;
     const {readAcceptedCheckpoint}=await import('../../../scripts/accepted-selected-checkpoint.mjs');
     const accepted=readAcceptedCheckpoint(acceptedHandle);
-    demand(Number.isSafeInteger(accepted.admitted_bytes) && accepted.admitted_bytes>0
-      && budget.carriedBytes>=accepted.admitted_bytes, 'Accepted archive complete live carry is undercharged');
     // An accepted selector may precede the actual baseline by ordinary additive
     // deliveries. Admit the genuine historical tree, then qualify the existing
     // append-only transition; never relabel its certificate as today's selector.
@@ -460,16 +406,14 @@ export async function qualifyAcceptedCheckpoint({reader,acceptedHandle,budget}) 
     }
     demand(reader.git('rev-parse',origin+'^{tree}').toString().trim()===accepted.source.tree,
       'Accepted historical checkpoint tree differs from authenticated merge');
-    const historical=new ImmutableReader(reader.repo,origin,{runtimeBytes:reader.runtimeBytes,
-      executionBytes:reader.executionBytes,metadataBytes:reader.metadataBytes,outputBytes:reader.outputBytes,
-      gitExecutable:reader.gitExecutable,budget:reader.budget,allowance:reader.allowance});
+    const historical=new ImmutableReader(reader.repo,origin,{invocation:reader.invocation,gitExecutable:reader.gitExecutable});
     historical.inventory=reader.inventory;
     const qualified=admitDerivedCheckpoint(session,historical,archiveReader,accepted);
-    const transition=qualifyTransition({state:qualified.state,reader,budget});
+    const transition=qualifyTransition({state:qualified.state,reader});
     if (!transition.available) { session.closed=true; return unavailable(transition.reason); }
     // Every newly consumed baseline route must survive the NEXT transition too.
     // The existing census includes complete inherited present/absent routes.
-    states.get(transition.candidate).routes=checkpointRouteCensus({transition,budget}).routes;
+    states.get(transition.candidate).routes=checkpointRouteCensus({transition}).routes;
     return Object.freeze({available:true,state:transition.candidate});
   } catch (error) {
     session.closed=true;
@@ -522,7 +466,7 @@ function admitTrustedDerivedSeed(session,reader,archiveReader,root,catalogue) {
   // This internal view is not a fabricated geographic report or acceptance
   // receipt. The only authority is the already authenticated trusted catalogue.
   const report={gate_status:'passed',selected_native_report:joint.native};
-  retain(session,{certificate:products['derived-certificate.json.gz'],routes:products['checkpoint-routes.json'].routes});
+
   return admitDerivedCheckpoint(session,reader,archiveReader,{seedRoot:root,products,member_pins:members,report,
     source:{executing_commit:root.execution_commit,baseline:facts.baseline_commit,candidate_commit:root.selected_commit}});
 }
@@ -614,11 +558,11 @@ function admitDerivedCheckpoint(session,reader,archiveReader,accepted) {
       'Duplicate accepted reader inventory identity');
     for (const p of inventory) {
       demand(commit(p.commit) && safe(p.path) && ['100644','100755'].includes(p.mode)
-        && /^[a-f0-9]{40}$/.test(p.git_blob_oid) && Number.isSafeInteger(p.bytes) && p.bytes>=0 && p.bytes<=FILE,
+        && /^[a-f0-9]{40}$/.test(p.git_blob_oid) && Number.isSafeInteger(p.bytes) && p.bytes>=0,
       'Incomplete accepted reader descriptor');
       if (p.whole_body_consumed) demand(p.whole_body_consumed===true && hash(p.sha256)
         && (p.decoded_bytes===undefined || Number.isSafeInteger(p.decoded_bytes) && p.decoded_bytes>=0
-          && p.decoded_bytes<=FILE && hash(p.decoded_sha256)), 'Incomplete accepted consumed-body identity');
+          && hash(p.decoded_sha256)), 'Incomplete accepted consumed-body identity');
       else demand(p.whole_body_consumed===undefined && (p.sha256===undefined || hash(p.sha256)),
         'Ambiguous accepted body-consumption identity');
     }
@@ -654,7 +598,7 @@ function admitDerivedCheckpoint(session,reader,archiveReader,accepted) {
     keys(policy,'pin,body','Missing exact accepted programme policy body');
     demand(same(policy.pin,policyPins[0]) && typeof policy.body==='string'
       && Buffer.byteLength(policy.body)===policy.pin.bytes, 'Accepted programme policy identity differs');
-    charge(session,reader,8*policy.pin.bytes);
+
     demand(sha(Buffer.from(policy.body))===policy.pin.sha256, 'Accepted original programme policy body differs');
     priorPolicy=validateSupportedProgrammeCatalogue(JSON.parse(policy.body));
   }
@@ -677,13 +621,13 @@ function admitDerivedCheckpoint(session,reader,archiveReader,accepted) {
     selection:selected.selection,baseSelection:nativeBaseSelection(selected.selection),certificate,
     additions,ledger:selected.ledger,registry:selected.registry,patch:selected.patch,manifest};
   // accepted products already belong to the explicitly carried transport
-  // allowance. Retain only newly acquired state/patch products, not a resolver.
-  return finishCheckpoint(session,reader,{data,routes:census.routes,rebind,selected,root:null,oldAuthorities,carriedCertificate:true});
+  // Retain newly acquired state/patch products without duplicating a resolver.
+  return finishCheckpoint(session,reader,{data,routes:census.routes,rebind,selected,root:null,oldAuthorities});
 }
 
 /** Exact already-consumed executing policy, for durable successor custody. */
-export function checkpointExecutingPolicy({transition,budget}) {
-  authenticateTransition({transition,budget});
+export function checkpointExecutingPolicy({transition}) {
+  authenticateTransition({transition});
   const session=transitions.get(transition);
   demand(session.executingPolicy, 'Missing consumed executing programme policy');
   return session.executingPolicy;
@@ -705,44 +649,40 @@ function validRoute(p) {
 }
 /** Complete candidate routing, including inherited unchanged bodies/absences.
  * Caller arrays, changed-owner lists and locator JSON cannot restrict the scope. */
-export function checkpointRouteCensus({transition,budget}) {
-  const genuine=authenticateTransition({transition,budget});
+export function checkpointRouteCensus({transition}) {
+  const genuine=authenticateTransition({transition});
   const before=states.get(genuine.baseline), after=states.get(genuine.candidate), {session,reader}=after;
   const predecessor=before.routes.map(p=>p.path);
   const names=scientificRoutePaths(predecessor,[...reader.inventory.values()],genuine.candidate.manifest,
     genuine.candidate.certificate,genuine.candidate.selection);
-  // Every new ls-tree row is either absent or one ordinary file; reserve its
-  // path, full identity, both route-name arrays and canonical output copies.
-  const reserve=7*(names.reduce((n,name)=>n+2*Buffer.byteLength(name)+192,0)
-    +valueBytes(genuine.candidate.selection).length+1024);
-  beginFrame(session,reader,reserve);
+
   const old=new Map(before.routes.map(p=>[p.path,p.tree]));
   const routes=names.map(name=>({path:name,tree:old.has(name) && name!==PROGRAMME_POLICY
     ? old.get(name) : treeRoute(reader,name)}));
   demand(routes.every(validRoute), 'Unsupported scientific route entry');
   const result=freeze({version:1,kind:'selected-checkpoint-scientific-routes-v1',candidate_commit:reader.version,
     candidate_selection:genuine.candidate.selection,predecessor_paths:[...predecessor].sort(),routes});
-  demand(7*valueBytes(result).length<=reserve, 'Complete route output exceeded prospective admission');
-  retain(session,result); beginFrame(session,reader); return result;
+
+  return result;
 }
 
 /** Read the selected normative latitude bytes for the actual native consumer.
  * Historical checkpoint traversal does not apply new-repair eligibility. */
-export function projectVisibilityLatitudes({state,budget}) {
-  const {session,reader}=getState(state,undefined,budget), p=state.manifest.native_latitudes;
+export function projectVisibilityLatitudes({state}) {
+  const {session,reader}=getState(state), p=state.manifest.native_latitudes;
   demand(p?.root==='repository'&&p.decoded_bytes===state.manifest.size*8,'Missing normative visibility latitude input');
-  beginFrame(session,reader,4*p.decoded_bytes);
+
   let version=p.commit;try{reader.git('cat-file','-e',version+'^{commit}');}catch{version=reader.version;}
   const encoded=reader.read(p.path,{version,expected:p.sha256,decoded:p.decoded_bytes});
   const latitudes=decodeVisibilityLatitudes(encoded,p,state.manifest.size);
-  session.residentBytes+=latitudes.byteLength;
+
   return latitudes;
 }
 
 /** Projects exact whole original features, never certificate boxes. Pass a prior
  * projection explicitly as reuse to share identical pointsets across vintages. */
-export function projectSourceFeatures({state,ids,budget,reuse}) {
-  const proof = getState(state,undefined,budget), {session,reader} = proof;
+export function projectSourceFeatures({state,ids,reuse}) {
+  const proof = getState(state), {session,reader} = proof;
   demand(Array.isArray(ids) && new Set(ids).size === ids.length && ids.every(id => typeof id === 'string'), 'Incomplete source projection scope');
   const byId = new Map(state.certificate.entries.map(row => [row[0],row]));
   demand(ids.every(id => byId.has(id)), 'Foreign source projection owner');
@@ -756,7 +696,7 @@ export function projectSourceFeatures({state,ids,budget,reuse}) {
   const features = [], inverse = [], inputs = [], actualInputs = [], wanted = new Set(ids);
   const names = state.certificate.inputs.filter(input => ids.some(id => byId.get(id)[4] === input.path));
   for (const input of names) {
-    beginFrame(session,reader);
+
     const collection = readBody(session,reader,input.source);
     demand(collection.type === 'FeatureCollection' && Array.isArray(collection.features), 'Missing whole source collection');
     const rows = state.certificate.entries.filter(row => row[4] === input.path);
@@ -768,15 +708,15 @@ export function projectSourceFeatures({state,ids,budget,reuse}) {
       'Complete source ordinal/owner/parent/feature/geometry differs');
       features.push(f); inverse.push({id:row[0],source:row[4],ordinal:row[5],whole_source_sha256:input.whole_body_sha256,
         whole_feature_sha256:row[6],geometry_sha256:row[7]});
-      retain(session,f);
+
     }
     inputs.push(input);
     const {version}=resolvePin(reader,input.source); actualInputs.push({...reader.inventory.get(version+':'+input.source.path)});
   }
   demand(features.length === ids.length, 'Source projection omitted requested features');
-  const result = freeze({features,inverse,inputs,custody:{actual_inputs:actualInputs},state_binding:state.certificate.binding,complete_phase_bytes:reader.used});
+  const result = freeze({features,inverse,inputs,custody:{actual_inputs:actualInputs},state_binding:state.certificate.binding});
   projections.set(result,{session,kind:'source',ids:Object.freeze([...ids]),sourceIdentity:state.certificate.binding.sources});
-  retain(session,{inverse,inputs,actualInputs}); beginFrame(session,reader);
+
   return result;
 }
 
@@ -784,16 +724,16 @@ function nativeContext(proof) {
   const {session,reader} = proof, state = proof.state;
   if (proof.nativeContext) return proof.nativeContext;
   supported(state.manifest.native_asset_transport, 'Unsupported legacy native transport');
-  beginFrame(session,reader);
+
   const image = new NativeAssetImage(reader,state.manifest,state.selection.manifest_path);
-  retain(session,{index:image.index});
+
   proof.nativeContext = {image,table:null,inputInventory:new Map()}; return proof.nativeContext;
 }
 function nativeAsset(proof, pin, context) {
   const {session,reader} = proof, state = proof.state;
   const name = path.posix.join(path.posix.dirname(state.selection.manifest_path),pin.path);
   const ordinary = treeRoute(reader,name).length > 0;
-  charge(session,reader,(ordinary ? 3 : 4)*pin.decoded_bytes+pin.bytes);
+
   const encoded = ordinary ? reader.read(name,{expected:pin.sha256,decoded:pin.decoded_bytes}) : context.image.logical(name,pin);
   demand(encoded.length === pin.bytes && sha(encoded) === pin.sha256, 'Whole native encoded body differs');
   const raw = gunzipSync(encoded,{maxOutputLength:pin.decoded_bytes});
@@ -801,15 +741,16 @@ function nativeAsset(proof, pin, context) {
   const words = unshuffleOwnershipBytes(raw,pin.words), canonical = Buffer.alloc(words.byteLength);
   for (let i=0;i<words.length;i++) canonical.writeUInt32LE(words[i],i*4);
   demand(sha(canonical) === pin.decoded_sha256, 'Whole native canonical words differ');
-  for (const key of reader.charged.keys()) {
+  for (const key of reader.inventory.keys()) {
     const p=reader.inventory.get(key); if (p?.whole_body_consumed) context.inputInventory.set(key,{...p});
   }
-  session.floor = reader.used; return words;
+
+  return words;
 }
 /** Complete native intervals. Genuine accepted whole rows are reused only under
  * identical manifest/domain/owner and all present/absent native routes. */
-export function projectNativeRows({state,rows,budget}) {
-  const proof = getState(state,undefined,budget), {session,reader} = proof;
+export function projectNativeRows({state,rows}) {
+  const proof = getState(state), {session,reader} = proof;
   proof.state = state;
   demand(Array.isArray(rows) && rows.every((y,i) => Number.isSafeInteger(y) && y >= 0 && y < state.manifest.size && (!i || rows[i-1] < y)),
     'Duplicate, incomplete or foreign native row scope');
@@ -819,12 +760,13 @@ export function projectNativeRows({state,rows,budget}) {
     if (!context.table) {
       const pins = manifest.parts.filter(p => p.kind === 'rows');
       supported(pins.length === 1, 'Unsupported split native row table');
-      beginFrame(session,reader); context.table = nativeAsset(proof,pins[0],context);
+      context.table = nativeAsset(proof,pins[0],context);
       demand(context.table.length === manifest.size*2, 'Incomplete whole native row table');
       let offset = 0;
       for (let y=0;y<manifest.size;y++) { demand(context.table[y*2] === offset, 'Native row partition omitted a range'); offset += context.table[y*2+1]; }
       demand(offset*2 === manifest.runWords, 'Native row partition omits complete runs');
-      session.residentBytes += context.table.byteLength; inputs.push(pins[0]);
+
+inputs.push(pins[0]);
     }
     const table = context.table, groups = new Map();
     for (const y of missing) {
@@ -833,7 +775,7 @@ export function projectNativeRows({state,rows,budget}) {
       if (!groups.has(key)) groups.set(key,{parts,rows:[]}); groups.get(key).rows.push({y,start,end});
     }
     for (const group of groups.values()) {
-      beginFrame(session,reader,group.rows.reduce((n,r) => n+table[r.y*2+1]*48+128,0));
+
       const bodies = new Map(group.parts.map(p => [p.path,nativeAsset(proof,p,context)]));
       for (const {y,start,end} of group.rows) {
         const runs = [];
@@ -843,7 +785,7 @@ export function projectNativeRows({state,rows,budget}) {
         }
         demand(runs.length === table[y*2+1], 'Incomplete containing native interval range');
         const row = freeze({y,runs}); completeRows([row],manifest.size,state.certificate.entries.length);
-        proof.nativeRows.set(y,row); retain(session,row);
+        proof.nativeRows.set(y,row);
       }
       inputs.push(...group.parts);
     }
@@ -853,9 +795,9 @@ export function projectNativeRows({state,rows,budget}) {
       owners_sha256:state.certificate.binding.owners_sha256},inputs,
     custody:{accepted_checkpoint:state.accepted_execution,new_whole_inputs:[...(proof.nativeContext?.inputInventory.values()??[])],
       retained_native_inputs:proof.rebind.request.acquisition.native_inputs},
-    reused_rows:rows.filter(y => !missing.includes(y)),acquired_rows:missing,complete_phase_bytes:reader.used});
-  projections.set(result,{session,kind:'native',rows}); retain(session,{requested_rows:rows,inputs});
-  beginFrame(session,reader); return result;
+    reused_rows:rows.filter(y => !missing.includes(y)),acquired_rows:missing});
+  projections.set(result,{session,kind:'native',rows});
+  return result;
 }
 
 export function releaseCheckpoint(state) {
@@ -883,14 +825,10 @@ function mergePatchRows(patches, size, ownerCount) {
   });
 }
 function appendAuthority(session, reader, entry) {
-  // The original helper owns its own sequential temporary frames. Its metadata
-  // includes the entire joint caller state, never a fresh independent budget.
-  const child = new ImmutableReader(reader.repo,reader.version,{runtimeBytes:reader.runtimeBytes,
-    executionBytes:reader.executionBytes,metadataBytes:session.initialMetadata+session.budget.carriedBytes+session.residentBytes,
-    outputBytes:session.initialOutput,gitExecutable:reader.gitExecutable,budget:reader.budget,allowance:reader.allowance});
+  const child = new ImmutableReader(reader.repo,reader.version,{invocation:reader.invocation,gitExecutable:reader.gitExecutable});
   child.inventory=reader.inventory; // retain actual appended-producer inputs without reopening them
   const proof = readRetainedRegistryAuthority(child,entry);
-  session.floor = reader.used;
+
   return {entry,nativeOnly:proof.original_pins.source_evidence!==undefined,patches:proof.native_proof.native_patches,ledger:proof.original_ledger,
     contract:proof.native_proof.native_contract,source_scope_ids:proof.source_scope_ids};
 }
@@ -925,20 +863,16 @@ function expectedNativeAcquisition(proof, neededRows) {
     }
     return {logical_path:name,asset,custody};
   });
-  session.floor=reader.used;
+
   return {inputs,scopes:[{kind:'complete-current-native-row-table'},...[...groups.values()].map(g => ({kind:'complete-current-native-window-group',rows:g.rows,parts:g.parts.map(p => p.path)}))]};
 }
 function authenticateProducerExecution(session,reader,products,bodyPins) {
   const {certificate,request,facts,publication,operating}=products;
   const expectedCode=CURRENT_REBIND_CODE.map(name => { const p=reader.descriptor(name,certificate.execution_commit); return {path:name,bytes:p.bytes,sha256:sha(reader.read(name,{version:certificate.execution_commit}))}; });
   demand(same(request.executed_code,expectedCode),'Original producer execution vector differs');
-  // Reuse the accepted producer's exact required/optional bounded contract.
-  // Its complete limits remain bound to the authenticated original issued plan.
-  validateCurrentRebindLimits(request.limits);
-  demand(request.limits.output_bytes<=FILE, 'Invalid original producer resource contract');
-  keys(facts,'version,kind,execution_commit,request_sha256,result_sha256,complete_phase_bytes,descriptors,acquisition_sha256,acquisition_phases','Unknown producer facts');
+  keys(facts,'version,kind,execution_commit,request_sha256,result_sha256,acquisition_sha256,acquisition_phases'+['complete_phase_bytes','descriptors'].filter(k=>Object.hasOwn(facts,k)).map(k=>','+k).join(''),'Unknown producer facts');
   keys(publication,'version,kind,execution_commit,request_sha256,outputs','Unknown producer publication');
-  keys(operating,'version,kind,execution_commit,request_sha256,publication_sha256,exit_code,signal,owned_processes_remaining,lifetime_rss_bytes,elapsed_seconds,execution_custody','Unknown producer operating proof');
+  keys(operating,'version,kind,execution_commit,request_sha256,publication_sha256,exit_code,signal,owned_processes_remaining,elapsed_seconds,execution_custody'+(Object.hasOwn(operating,'lifetime_rss_bytes')?',lifetime_rss_bytes':''),'Unknown producer operating proof');
   const custody={};
   for (const name of ['code_source','terminal','stderr','stdout','issued_plan'])
     custody[name]=readBody(session,reader,operating.execution_custody[name],{json:false});
@@ -952,7 +886,7 @@ function qualifyProjectedRebind(proof, selected, authorities, products) {
   const bodyPins=Object.fromEntries(['request','facts','publication','operating','result'].map(name => [name,certificate[name]]));
   for (const [name,body] of Object.entries({request,facts,publication,operating,result}))
     demand(valueSha(body)===bodyPins[name].sha256 && valueBytes(body).length===bodyPins[name].bytes,'Whole canonical producer output differs');
-  keys(request,'version,kind,execution_commit,executed_code,base_selection,authority_registry_sha256,original_rows,original_patch_sha256s,current_targets,current_rows,acquisition,execution,size,limits','Unknown current producer request');
+  keys(request,'version,kind,execution_commit,executed_code,base_selection,authority_registry_sha256,original_rows,original_patch_sha256s,current_targets,current_rows,acquisition,execution,size'+(Object.hasOwn(request,'limits')?',limits':''),'Unknown current producer request');
   demand(certificate.version===1 && certificate.kind==='qualified-native-additive-current-bank-rebind-v1'
     && request.version===1 && request.kind==='issued-native-additive-current-bank-rebind-v1'
     && certificate.execution_commit===request.execution_commit && same(certificate.base_selection,base)
@@ -967,7 +901,7 @@ function qualifyProjectedRebind(proof, selected, authorities, products) {
   const owners=new Map(state.certificate.entries.map(row => [row[0],row]));
   const targets=[...new Set(originalRows.map(row => row.target_id))].sort();
   const newTargets=targets.filter(id => !proof.sourceTargets.has(id));
-  const projected=projectSourceFeatures({state,ids:newTargets,budget:session.budget});
+  const projected=projectSourceFeatures({state,ids:newTargets});
   for (const feature of projected.features) {
     const id=feature.id??feature.properties.id,row=owners.get(id);
     proof.sourceTargets.set(id,freeze({target_id:id,pixelIndex:row[1],geometry:feature.geometry,geometry_sha256:row[7]}));
@@ -983,7 +917,7 @@ function qualifyProjectedRebind(proof, selected, authorities, products) {
   const sourceInputs=state.certificate.inputs.filter(p => targetSources.some(t => t.path===p.path));
   const candidateRows=[...new Set(originalPatches.flatMap(p => p.rows.map(row => row.y)))].sort((a,b) => a-b);
   const needed=[...new Set(candidateRows.concat(request.acquisition.predecessor_rows.map(row => row.y)))].sort((a,b) => a-b);
-  const native=projectNativeRows({state,rows:needed,budget:session.budget});
+  const native=projectNativeRows({state,rows:needed});
   const currentRows=native.rows.filter(row => candidateRows.includes(row.y));
   const nativeAcquisition=expectedNativeAcquisition(proof,needed);
   const acquisition={version:1,kind:'complete-selected-rebind-inputs-v1',target_sources:request.acquisition.target_sources,
@@ -1001,15 +935,10 @@ function qualifyProjectedRebind(proof, selected, authorities, products) {
   scopes.push(...nativeAcquisition.scopes);
   demand(Array.isArray(facts.acquisition_phases) && facts.acquisition_phases.length===scopes.length
     && facts.acquisition_phases.every((p,i) => { const {complete_phase_bytes,descriptors,...scope}=p;
-      return same(scope,scopes[i]) && Number.isSafeInteger(complete_phase_bytes) && complete_phase_bytes>0
-        && complete_phase_bytes<=request.limits.complete_phase_bytes && Number.isSafeInteger(descriptors)
-        && descriptors>0 && descriptors<=request.limits.descriptors; }), 'Original producer complete acquisition scope or admission differs');
+      return same(scope,scopes[i]); }), 'Original producer complete acquisition scope or admission differs');
   demand(facts.version===1 && facts.kind==='native-additive-current-bank-rebind-facts-v1'
     && facts.execution_commit===request.execution_commit && facts.request_sha256===bodyPins.request.sha256
-    && facts.result_sha256===bodyPins.result.sha256 && facts.acquisition_sha256===valueSha(request.acquisition)
-    && Number.isSafeInteger(facts.complete_phase_bytes) && facts.complete_phase_bytes>0
-    && facts.complete_phase_bytes<=request.limits.complete_phase_bytes && Number.isSafeInteger(facts.descriptors)
-    && facts.descriptors>0 && facts.descriptors<=request.limits.descriptors,
+    && facts.result_sha256===bodyPins.result.sha256 && facts.acquisition_sha256===valueSha(request.acquisition),
   'Original producer facts are not bound to actual complete products');
   demand(publication.version===1 && publication.kind==='native-additive-current-bank-rebind-publication-v1'
     && publication.execution_commit===request.execution_commit && publication.request_sha256===bodyPins.request.sha256
@@ -1024,14 +953,13 @@ function qualifyProjectedRebind(proof, selected, authorities, products) {
 }
 
 // Full proof wrappers and expectedAdded's original-row aliases are temporary.
-// Keep their reservation until this complete frame has returned or unwound; only
-// original per-authority patches survive, exactly as for accepted seed entries.
-function qualifyAppendedAuthorities(session,reader,state,selected,prior,addedEntries,oldRows,temporary) {
+// Retain original per-authority patches, exactly as for accepted seed entries.
+function qualifyAppendedAuthorities(session,reader,state,selected,prior,addedEntries,oldRows) {
   const authorities=new Map(prior);
   const expectedAdded=new Map();
   for (const entry of addedEntries) {
     demand(entry.policy_id==='retained-source-literal-additions' && entry.policy_version===1, 'Unsupported appended source policy');
-    const proof=appendAuthority(session,reader,entry); temporary.bytes+=retain(session,proof); authorities.set(entry.authority_sha256,proof);
+    const proof=appendAuthority(session,reader,entry); authorities.set(entry.authority_sha256,proof);
     const contract=Object.fromEntries(['size','coordinateBits','method','native_latitudes','hierarchy_sha256','original_assets'].map(k => [k,state.manifest[k]]));
     demand(same(proof.contract,contract) && (same(proof.ledger.parent_inventory,state.ledger.parent_inventory) || proof.nativeOnly && proof.ledger.parent_inventory===undefined),
       'Appended producer changed native contract or complete original source denominator');
@@ -1059,10 +987,10 @@ function qualifyAppendedAuthorities(session,reader,state,selected,prior,addedEnt
 
 /** Exhaustive actual append-only transition. Never reacquires a full selection.
  * A valid baseline remains usable when an unsupported candidate needs cold work. */
-export function qualifyTransition({state,reader,budget}) {
-  const baseProof=getState(state,reader,budget), {session}=baseProof;
+export function qualifyTransition({state,reader}) {
+  const baseProof=getState(state,reader), {session}=baseProof;
   try {
-    beginFrame(session,reader);
+
     const selected=readSelection(session,reader);
     supported(same(nativeBaseSelection(selected.selection),state.baseSelection), 'Selected native/source/domain/owner base changed');
     supported(sameScientificRoutes(reader,baseProof.routes,session.executablePaths), 'Selected input or present/absent route changed');
@@ -1076,18 +1004,8 @@ export function qualifyTransition({state,reader,budget}) {
     for (const entry of state.registry.entries) demand(same(entry,selected.registry.entries.find(p => p.authority_sha256===entry.authority_sha256)),
       'Old original authority removed/rebound');
     const addedEntries=selected.registry.entries.filter(entry => !authorities.has(entry.authority_sha256));
-    retain(session,selected);
-    const temporary={bytes:0};
-    try {
-      authorities=qualifyAppendedAuthorities(session,reader,state,selected,authorities,addedEntries,oldRows,temporary);
-    } finally {
-      // The helper frame and its aliases have ended. This retires only the
-      // reservation we created, including on failure, without resetting shared
-      // reader usage, charged inputs, floor or caller carry. The next ordinary
-      // phase carries the compact live state and still enforces current RSS.
-      session.residentBytes-=temporary.bytes;
-    }
-    for (const entry of addedEntries) retain(session,authorities.get(entry.authority_sha256));
+
+    authorities=qualifyAppendedAuthorities(session,reader,state,selected,authorities,addedEntries,oldRows);
     const patches=selected.registry.entries.flatMap(entry => authorities.get(entry.authority_sha256).patches);
     const expectedPatch=mergePatchRows(patches,state.manifest.size,state.certificate.entries.length);
     demand(same(selected.patch.rows,expectedPatch),'Candidate patch omitted, invented or reassigned original native intervals');
@@ -1103,7 +1021,7 @@ export function qualifyTransition({state,reader,budget}) {
     if (same(legacyRegistry(selected.registry,authorities),legacyRegistry(state.registry,baseProof.oldAuthorities))
       && same(selected.ledger.current_rebind,state.ledger.current_rebind)) currentTargets=baseProof.rebind.request.current_targets;
     else {
-      const products=rebindProducts(session,reader,selected.ledger); retain(session,products);
+      const products=rebindProducts(session,reader,selected.ledger);
       currentTargets=qualifyProjectedRebind(operandProof,selected,authorities,products).currentTargets;
       operandProof.rebind=products;
     }
@@ -1124,7 +1042,7 @@ export function qualifyTransition({state,reader,budget}) {
     const oldNative=new Map(state.patch.rows.map(row => [row.y,row.runs])), newNative=new Map(selected.patch.rows.map(row => [row.y,row.runs]));
     const changedNativeRows=[...new Set([...oldNative.keys(),...newNative.keys()])].sort((a,b) => a-b)
       .filter(y => !same(oldNative.get(y)??[],newNative.get(y)??[]));
-    retain(session,{entries:certificate.entries.filter(row => changed.has(row[0])),additions,changedNativeRows});
+
     const transition=freeze({available:true,baseline:state,candidate,changedIds,changedNativeRows});
     transitions.set(transition,session); return transition;
   } catch (error) {
@@ -1136,11 +1054,11 @@ export function qualifyTransition({state,reader,budget}) {
 /** Consumer admission of the complete internally derived two-vintage scope.
  * Genuine state handles inside a caller-created wrapper do not authenticate its
  * changed-owner/neighbor plan. This is constant-time, not a repeated scan. */
-export function authenticateTransition({transition,budget}) {
+export function authenticateTransition({transition}) {
   const session=transitions.get(transition);
   demand(session && !session.closed, 'Missing private qualified selected transition');
-  demand(getState(transition.baseline,undefined,budget).session===session
-    && getState(transition.candidate,undefined,budget).session===session,
+  demand(getState(transition.baseline).session===session
+    && getState(transition.candidate).session===session,
   'Foreign transition state or invocation');
   return transition;
 }

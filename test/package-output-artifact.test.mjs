@@ -6,7 +6,7 @@ import os from 'node:os';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {createPackageOutputManifest, snapshotPackageOutputSource, inventoryPackageOutput, validatePackageOutputManifest,
-  verifyPackageOutput, streamedPackageFile, PACKAGE_OUTPUT_LIMITS, installedPackageIdentity, admitPackageInputTransition, admitPackageOutputTransition, committedPackageInputs, committedPackageProducer, packageWorkflowExecution} from '../scripts/package-output-artifact.mjs';
+  verifyPackageOutput, streamedPackageFile, installedPackageIdentity, admitPackageInputTransition, admitPackageOutputTransition, committedPackageInputs, committedPackageProducer, packageWorkflowExecution} from '../scripts/package-output-artifact.mjs';
 
 import {compareSelectedPackageOutput,compareSelectedPackageReadback,normalizeDeclarationReadAccounting} from '../scripts/compare-selected-package-output.mjs';
 
@@ -73,7 +73,7 @@ test('malformed output rosters, duplicate paths, traversal and byte accounting f
     value => { value.output.files[0].path = 'dist/client/../../escape'; },
     value => { value.output.files[0].sha256 = '0'; },
     value => { value.output.bytes++; },
-    value => { value.output.files[0].bytes = PACKAGE_OUTPUT_LIMITS.member_bytes + 1; },
+    value => { value.output.files[0].bytes = Number.MAX_SAFE_INTEGER + 1; },
     value => { value.source.files.push(value.source.files[0]); },
     value => { value.source.producer.workflows[0].oid='broken'; },
     value => { delete value.source.producer.workflows; },
@@ -93,10 +93,9 @@ test('failed, stale and assembled receipts cannot mint original full output', t 
     assert.throws(() => createPackageOutputManifest(root)); }
 });
 
-test('unknown output roots and oversized members fail before complete body allocation', t => {
+test('unknown output roots fail before complete custody', t => {
   const {root, write} = fixture(t); write('dist/unknown', 'unexpected');
   assert.throws(() => inventoryPackageOutput(root), /roots/); fs.unlinkSync(path.join(root,'dist/unknown'));
-  assert.throws(() => streamedPackageFile(root,'dist/client/assets/a.js',4), /admitted bytes/);
 });
 
  test('pre-build source snapshot rejects dirty consumed inputs', t => {

@@ -23,7 +23,7 @@ export function nativeCandidateManifest({original, originalSha256, baselineCommi
     latitude.root === 'repository' && latitude.role === 'immutable-normative-rule-input' &&
     latitude.commit === evaluationCommit && hash(latitude.sha256) &&
     latitude.decoded_sha256 === NATIVE_CANONICAL_LATITUDE_SHA256 && latitude.decoded_bytes === original.size * 8 &&
-    Number.isSafeInteger(latitude.bytes) && latitude.bytes > 0 && latitude.bytes <= 32 * 1024 * 1024,
+    Number.isSafeInteger(latitude.bytes) && latitude.bytes > 0,
     'Missing exact normative latitude bytes');
   requireValue(compiled?.method === NATIVE_GRID_METHOD && compiled.version === 2 &&
     compiled.size === original.size && compiled.coordinateBits === original.coordinateBits &&
@@ -39,8 +39,7 @@ export function nativeCandidateManifest({original, originalSha256, baselineCommi
         part.words <= 1048576 && (kind !== 'runs' || part.words % 2 === 0) &&
         part.path === `native-v1/ownership/${kind}-${offset}.bin.gz` && !seen.has(part.path) &&
         part.encoding === 'byte-shuffle' && hash(part.sha256) && hash(part.decoded_sha256) &&
-        part.decoded_bytes === part.words * 4 && Number.isInteger(part.bytes) && part.bytes > 0 &&
-        part.bytes <= 32 * 1024 * 1024, 'Unsafe or incomplete candidate part proof');
+        part.decoded_bytes === part.words * 4 && Number.isInteger(part.bytes) && part.bytes > 0, 'Unsafe or incomplete candidate part proof');
       seen.add(part.path); offset += part.words;
     }
     requireValue(offset === (kind === 'rows' ? original.size * 2 : compiled.runWords), 'Incomplete candidate parts');

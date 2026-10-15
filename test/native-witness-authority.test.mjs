@@ -167,17 +167,7 @@ test('polygon interior and every stock boundary tie remain veto effects',()=>{
  assert.equal(effects(hole,request,size,latitudes).counts.cells,0);
 });
 
-test('prospective witness budget follows exact occupied-row edge schedules',()=>{
- const geometry=rectangle(-90.01,-89.99,latitudes[y+2],latitudes[y-2]);
- const stats=validateWitnessGeometry(geometry,{latitudes,rowStart:y-10,rowEnd:y+11,requestedCells:1});
- const scan=nativePolygonIntervals([{index:1,polygons:polygonParts(geometry).map(p=>p.map(r=>r.flat()))}],
-  {size,latitudes,rowStart:y-10,rowEnd:y+11});
- const spans=[...scan.rows.values()].reduce((n,r)=>n+r.length,0);
- assert.ok(spans<=stats.span_upper_bound);assert.ok(scan.ties.length<=stats.tie_upper_bound);
- assert.equal(stats.crossing_edge_rows,8);assert.ok(stats.scratch_bytes<100000);
- const disjoint=validateWitnessGeometry(geometry,{latitudes,rowStart:0,rowEnd:4096,requestedCells:1});
- assert.equal(disjoint.crossing_edge_rows,0);assert.equal(disjoint.tie_upper_bound,0);
-});
+
 for(const contact of [false,true])test('unselected retained measured sibling '+(contact?'vetoes owner contact':'retains off-centre evidence'),()=>{
  const f=constructorFixture(s=>{s.targets=s.targets.slice(0,1);
  conflict(s,'contradictory_land_water_support',{type:'LineString',coordinates:[[-.03,latitude+(contact?0:.001)],[0,latitude+(contact?0:.001)]]},1);});

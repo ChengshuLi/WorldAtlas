@@ -21,19 +21,20 @@ test('declaration uses literal paths, precise directory membership and approved 
 });
 
 
-test('package declarations use actual metadata memory rather than historical batch count',async()=>{
+test('complete package declarations retain exact whole immutable blob identity',async()=>{
   const value={version:1,inputs:['.github/package-inputs.json',...Array.from({length:4096},(_,i)=>`coordination/engineering/scaled-selected/role-${i}.json`)],optional_inputs:[],verification_paths:[],generated_outputs:['dist/']};
-  const raw=Buffer.from(JSON.stringify(value)),budget=raw.length;
+  const raw=Buffer.from(JSON.stringify(value));
   assert.ok(raw.length>128*1024);
-  assert.equal(validatePackageInputs(value,{maximumBytes:budget}),value);
-  assert.throws(()=>validatePackageInputs(value,{maximumBytes:budget-1}),/memory admission/);
+  assert.equal(validatePackageInputs(value),value);
   assert.throws(()=>validatePackageInputs({...value,inputs:[...value.inputs,value.inputs[1]]}),/Invalid package inputs/);
   assert.throws(()=>validatePackageInputs({...value,inputs:[...value.inputs,'coordination/engineering/scaled-selected/']}),/Overlapping/);
   const {createHash}=await import('node:crypto');
   const blob={type:'file',encoding:'base64',path:'.github/package-inputs.json',size:raw.length,content:raw.toString('base64'),sha:createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex')};
   assert.deepEqual(await readPackageInputs({route:'/repo',base:'main',api:async()=>blob}),value);
-  await assert.rejects(readPackageInputs({route:'/repo',base:'main',api:async()=>({...blob,size:Number.MAX_SAFE_INTEGER})}),/unavailable/);
-  await assert.rejects(readPackageInputs({route:'/repo',base:'main',maximumBytes:128,api:async()=>({...blob,size:1,content:'A'.repeat(1024)})}),/Encoded package metadata/);
+  await assert.rejects(readPackageInputs({route:'/repo',base:'main',api:async()=>({...blob,size:Number.MAX_SAFE_INTEGER})}),/bytes changed/);
+  await assert.rejects(readPackageInputs({route:'/repo',base:'main',api:async()=>({...blob,content:Buffer.from('changed complete body').toString('base64')})}),/bytes changed/);
+  await assert.rejects(readPackageInputs({route:'/repo',base:'main',api:async()=>({...blob,sha:'0'.repeat(40)})}),/bytes changed/);
+  await assert.rejects(readPackageInputs({route:'/repo',base:'main',api:async()=>({...blob,type:'dir'})}),/unavailable/);
 });
 
 

@@ -6,16 +6,15 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {execFileSync, spawnSync} from 'node:child_process';
 import {gzipSync} from 'node:zlib';
-import {candidateBudget} from '../scripts/native-ownership/native-preparation-guards.mjs';
 import {renderClaim} from '../scripts/issue-claim-contract.mjs';
 import {subjectsHash} from '../scripts/evidence-quality.mjs';
 import {jsonBytes, digest, pinReader, publish, admitPublication, prepareRequests, retainProducts, nativeRequests,
   composeAuthorities, packageProjection, rebindCustody, requestProfile, finalizedSelection, finalizedPackageInputs, finalizeDelivery, prepareEvidence} from '../scripts/prepare-delivery-handoff.mjs';
 
 const commit = 'a'.repeat(40), prefix = 'coordination/engineering/control/';
-function memoryReader({admit = true} = {}) {
+function memoryReader() {
   const bodies = new Map(), pins = new Map(); let ordinal = 0;
-  const reader = {budget: admit ? candidateBudget([], {reserveBytes: 0, reserveDescriptors: 0}) : null,
+  const reader = {
     add(name, value) { const raw = Buffer.isBuffer(value) ? value : jsonBytes(value); const pin = {path: name, commit,
       mode: '100644', blob: (++ordinal).toString(16).padStart(40, '0'), bytes: raw.length, sha256: digest(raw)};
       bodies.set(pin.sha256, raw); pins.set(name, pin); return pin; },
@@ -82,14 +81,6 @@ test('writer resumes only exact complete bytes and rejects collisions, dangling 
   assert.throws(() => publish(root, '.cache/delivery-handoff/../escape', products, {}), /fresh owned/);
 });
 
-test('combined read/output budget fails before creating destination', t => {
-  const root = directory(t), budget = candidateBudget([], {reserveBytes: 0, reserveDescriptors: 0,
-    allowance: {phaseBytes: 256 * 1048576, rssBytes: 1024 * 1048576}});
-  let remaining = budget.snapshot().limit_bytes;
-  while (remaining) { const bytes = Math.min(32 * 1048576, remaining); budget.add({bytes}); remaining -= bytes; }
-  assert.throws(() => publish(root, '.cache/delivery-handoff/overflow', {'x.json': jsonBytes({})}, {}, false, budget), /Aggregate/);
-  assert.equal(fs.existsSync(path.join(root, '.cache')), false);
-});
 
 function terminalFixture(root) {
   const {reader, request} = requestsFixture(); const requestPin = reader.add(prefix + 'source-request.json', request);
@@ -188,28 +179,17 @@ test('rebind commit phases require complete custody and publication-matching res
   assert.throws(() => rebindCustody({...config, result: r.add(prefix + 'wrong-result.json', {wrong: true})}, r), /output pin differs/);
 });
 
-test('new request issuance requires explicit finite v2 profiles and actual HEAD support/code pins', () => {
+test('new request issuance authenticates v2 actual HEAD support/code pins', () => {
   const reader = memoryReader(), code = reader.add('scripts/operator.mjs', Buffer.from('code'));
   const support = ['scripts/local-workspace.mjs', 'scripts/worker-identity.mjs'].map(p => reader.add(p, Buffer.from('support')));
   const template = {operating_profile: 'source-native-v2', output_reserve: 131072, executed_code: [code], operating_runtime: {supervisor: code, support_code: support}};
   reader.git = () => Buffer.from(commit); reader.pin = (c, p) => [code, ...support].find(x => x.path === p);
-  const requested_resources = {processing_allowance: {phaseBytes: 600000000, rssBytes: 700000000}, operating_limits:
-    {rss_bytes: 800000000, wall_seconds: 1400, output_bytes: 2000000, retained_bytes: 3000000, log_bytes: 100000, monitor_bytes: 100000, receipt_bytes: 10000}};
-  const issued = requestProfile(template, {}, {requested_resources}, reader);
-  assert.deepEqual(issued.processing_allowance, requested_resources.processing_allowance); assert.equal(issued.operating_limits.wall_seconds, 1400);
+  const issued = requestProfile(template, {}, {}, reader);
+  assert.equal(issued.operating_profile, 'source-native-v2');
+  assert.equal(Object.hasOwn(issued,'output_reserve'),false);
   assert.throws(() => requestProfile({...template, operating_profile: undefined}, {}, {}, reader), /v2/);
-  assert.throws(() => requestProfile(template, {}, {}, reader), /Explicit/);
-  for (const mutate of [x => x.operating_limits.rss_bytes = Infinity, x => x.operating_limits.wall_seconds = 0,
-    x => x.processing_allowance.phaseBytes = 900000000, x => x.processing_allowance.phaseBytes = 131071, x => x.operating_limits.output_bytes = 1,
-    x => x.operating_limits.retained_bytes = 1, x => x.operating_limits.log_bytes = 900000000,
-    x => x.operating_limits.monitor_bytes = 900000000, x => x.operating_limits.receipt_bytes = 900000000]) {
-    const bad = structuredClone(requested_resources); mutate(bad); assert.throws(() => requestProfile(template, {}, {requested_resources: bad}, reader));
-  }
-  for (const output_reserve of [1000, Number.MAX_SAFE_INTEGER]) {
-    assert.throws(() => requestProfile({...template, output_reserve}, {}, {requested_resources}, reader), /finite bounds/);
-  }
   const drift = structuredClone(template); drift.operating_runtime.support_code[0].sha256 = '0'.repeat(64);
-  assert.throws(() => requestProfile(drift, {}, {requested_resources}, reader), /actual HEAD/);
+  assert.throws(() => requestProfile(drift, {}, {}, reader), /actual HEAD/);
 });
 
 test('coherent SOURCE inventory changes and native preparation facts omissions are rejected against pinned scope/targets', t => {
@@ -951,16 +931,12 @@ test('late modern composition refuses scope, source-contract, patch and occupied
   }
 });
 
-test('modern composition accepts compatible mapped members and refuses omitted parsed metadata carry', t => {
+test('modern composition accepts compatible mapped members', t => {
   const f = modernCompositionFixture(t);
   const compatible = f.makeAppend(s => s.source.targets.push({...s.source.targets[0], id: 'source:B'}));
   const accepted = f.run('compose', '.cache/delivery-handoff/compatible-members', [], compatible);
   assert.equal(accepted.status, 0, accepted.stderr);
-  const large = f.makeAppend(s => { s.source.retained_metadata = 'x'.repeat(2 * 1024 * 1024); });
-  const config = {...large, preparation_allowance: {phaseBytes: 4 * 1024 * 1024, rssBytes: 256 * 1024 * 1024}};
-  const destination = '.cache/delivery-handoff/refused-metadata-carry', result = f.run('compose', destination, [], config);
-  assert.notEqual(result.status, 0); assert.match(result.stderr, /composition carry exceeds/);
-  assert.equal(fs.existsSync(path.join(f.root, destination)), false);
+
 });
 
 test('generated sidecar refuses foreign/colliding outputs and changed release joins before publication', t => {
@@ -1064,20 +1040,6 @@ test('multiple modern originals reject mixed/empty groups, duplicate authorities
   refusal(badPin, /hash differs/);
 });
 
-test('multiple modern source-evidence carry is aggregate rather than reset per original', t => {
-  const f = modernCompositionFixture(t);
-  const first = f.makeAppend(s => { s.source.retained_metadata = 'a'.repeat(256 * 1024); }, f.owned + 'large-first/');
-  const second = f.makeAppend(s => { secondModernDelta(s); s.source.retained_metadata = 'b'.repeat(256 * 1024); }, f.owned + 'large-second/');
-  const preparation_allowance = {phaseBytes: 5 * 1024 * 1024, rssBytes: 256 * 1024 * 1024};
-  for (const [ordinal, original] of [first, second].entries()) {
-    const run = f.run('compose', '.cache/delivery-handoff/single-budget-' + ordinal, [], {...original, preparation_allowance});
-    assert.equal(run.status, 0, run.stderr);
-  }
-  const config = {...modernGroups(f.config, [first, second]), preparation_allowance};
-  const destination = '.cache/delivery-handoff/multiple-budget-refused', result = f.run('compose', destination, [], config);
-  assert.notEqual(result.status, 0); assert.match(result.stderr, /composition carry exceeds/);
-  assert.equal(fs.existsSync(path.join(f.root, destination)), false);
-});
 
 test('publication refuses nested original-role copies before creating output', t => {
   const root = directory(t), raw = jsonBytes({original: true});

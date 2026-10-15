@@ -13,15 +13,15 @@ const N='coordination/engineering/arctic-three-retained-land-fit-repair-native-2
 const sha=b=>createHash('sha256').update(b).digest('hex');
 function body(root,pin,{retainedIndex=false}={}){
  assert(!path.isAbsolute(pin.path)&&pin.path.split('/').every(s=>s&&s!=='.'&&s!=='..'));
- assert(Number.isSafeInteger(pin.bytes)&&pin.bytes<=32*1024*1024);
+ assert(Number.isSafeInteger(pin.bytes)&&pin.bytes>=0);
  const file=path.join(root,pin.path);for(let p=file;;p=path.dirname(p)){assert(!fs.lstatSync(p).isSymbolicLink());if(p===path.dirname(p))break}
- const before=fs.lstatSync(file);assert(before.isFile()&&(before.mode&511)===420&&before.size<=32*1024*1024);if(!retainedIndex)assert.equal(before.size,pin.bytes);
+ const before=fs.lstatSync(file);assert(before.isFile()&&(before.mode&511)===420);if(!retainedIndex)assert.equal(before.size,pin.bytes);
  const fd=fs.openSync(file,fs.constants.O_RDONLY|fs.constants.O_NOFOLLOW);let raw;
  try{for(const k of ['dev','ino','size','mode','mtimeMs','ctimeMs'])assert.equal(before[k],fs.fstatSync(fd)[k]);raw=fs.readFileSync(fd);for(const k of ['dev','ino','size','mode','mtimeMs','ctimeMs'])assert.equal(before[k],fs.fstatSync(fd)[k]);}finally{fs.closeSync(fd)}
  const after=fs.lstatSync(file);for(const k of ['dev','ino','size','mode','mtimeMs','ctimeMs'])assert.equal(before[k],after[k]);if(!retainedIndex)assert.equal(sha(raw),pin.sha256);return raw;
 }
 function write(root,relative,raw){
- assert(!path.isAbsolute(relative)&&relative.split('/').every(s=>s&&s!=='.'&&s!=='..'));assert(raw.length<=32*1024*1024);const file=path.join(root,relative);
+ assert(!path.isAbsolute(relative)&&relative.split('/').every(s=>s&&s!=='.'&&s!=='..'));const file=path.join(root,relative);
  for(let p=path.dirname(file);;p=path.dirname(p)){try{const stat=fs.lstatSync(p);assert(stat.isDirectory()&&!stat.isSymbolicLink());}catch(error){if(error.code!=='ENOENT')throw error;}if(p===path.dirname(p))break}
  fs.mkdirSync(path.dirname(file),{recursive:true});const temporary=file+'.n2-install';for(const target of [temporary,file]){let existing;try{existing=fs.lstatSync(target)}catch(error){if(error.code!=='ENOENT')throw error;}if(target===temporary)assert(!existing,'Fresh installer temporary entry required');else if(existing)assert(existing.isFile()&&!existing.isSymbolicLink()&&(existing.mode&511)===420);} fs.writeFileSync(temporary,raw,{flag:'wx',mode:0o644});fs.renameSync(temporary,file);assert.equal(sha(fs.readFileSync(file)),sha(raw));
 }
@@ -34,7 +34,7 @@ export function authenticateReleaseProducts(root, registry, products) {
 }
 export function authenticateSelectedGeometry(root,pin) {
  assert.equal(pin.logical_path,'data/geography/part-29.json');
- assert(Number.isSafeInteger(pin.decoded_bytes)&&pin.decoded_bytes>0&&pin.decoded_bytes<=32*1024*1024);
+ assert(Number.isSafeInteger(pin.decoded_bytes)&&pin.decoded_bytes>0);
  assert(/^[a-f0-9]{64}$/.test(pin.decoded_sha256));
  const raw=body(root,pin),geometry=gunzipSync(raw,{maxOutputLength:pin.decoded_bytes});
  assert.equal(geometry.length,pin.decoded_bytes);assert.equal(sha(geometry),pin.decoded_sha256);
@@ -69,8 +69,7 @@ export async function installV9Stage({root,stage,context}){
  const proposed=artifact?success.selectedGeometry:{path:N+'/selected-geography/part-29.json.gz',bytes:3399520,sha256:'5f76a01a2c43eeccb3a202507faf593f56157fe38bd89f541be3b64145bdb1a8',decoded_bytes:12932723,decoded_sha256:'4eca02f85d5e3a0974a96a38d59e46b0b71b41d2513dcf20ab27eb17fd5a0b4c'};
  if(artifact)assert.equal(proposed.logical_path,'data/geography/part-29.json');
  const oldPins=[{path:'data/pixel-audit.json',bytes:14323438,sha256:'a49773818f963c15c27b52a0cad7be6dabcb6dddf9523bdbc253118e177c9cd8'},{path:'data/geography/part-29.json',bytes:12932407,sha256:'c34114912dc620dce0821e251877470b5a83385ab3bf1284408f077b78bbdec8'},{path:'data/granularity-audit.json',bytes:10365238,sha256:'dec8c12a40a8f6d59ba5924cf52262c6831151f741f73863d3118bf5f9ff19c5'}];
- // Actual normal-package union: no invented scientific aggregate limit. All
- // ordinary members retain32MiB cap; input/decode/output costs are reported.
+ // Authenticate the complete ordinary input union before replacing any output.
  const retainedPins=[{path:'data/prepared-evidence/index.json',bytes:14987,sha256:'b233282e4ea3f3e51658f6f1a272e995ddf93823c9f74759e1a353261c3baa5e'},{path:'data/reference-attributes/index.json',bytes:36740,sha256:'e21a5361d7ab74f8c9a909b681c6eda0d0c6c1e1becf36154bcf5b4b2215c356'}];
  const retained=retainedPins.map((pin,i)=>authenticateRetainedIndex(root,pin,{context,kind:i===0?'prepared-evidence':'reference-attributes'}));
  const retainedIndices=retained.map(value=>value.original);
@@ -117,5 +116,5 @@ export async function installV9Stage({root,stage,context}){
  for(let i=0;i<retainedPins.length;i++){write(root,'.cache/n2-preserved-v8/'+retainedPins[i].path,retained[i].originalRaw);write(root,retainedPins[i].path,Buffer.from(JSON.stringify(continuedIndices[i])+'\n'));}
  write(root,'data/geography/part-29.json',geometry);write(root,'data/pixel-audit.json',pixel);write(root,'data/granularity-audit.json',Buffer.from(JSON.stringify(audit)+'\n'));
  for(let i=0;i<releases.length;i++)write(root,'data/geographic-releases/'+releases[i].path,body(root,releasePins[i]));
- return {kind:artifact?'ephemeral-after-qualified-artifact-consumption':'ephemeral-after-three-live-validations',native_parts:56,old_native_urls_preserved:true,release_products:343,additional_release_installation_encoded_read_bytes:releasePins.reduce((sum,pin)=>sum+2*pin.bytes,0),old_global_bodies_preserved:oldPins.map(p=>({...p,path:'.cache/n2-preserved-v8/'+p.path})),scientific_producers_invoked:false,normal_package_aggregate_cap_invented:false};
+ return {kind:artifact?'ephemeral-after-qualified-artifact-consumption':'ephemeral-after-three-live-validations',native_parts:56,old_native_urls_preserved:true,release_products:343,old_global_bodies_preserved:oldPins.map(p=>({...p,path:'.cache/n2-preserved-v8/'+p.path})),scientific_producers_invoked:false};
 }
