@@ -598,7 +598,12 @@ for (const mixed of [false, true]) test('real finalizer supports ' + (mixed ? 'm
   const inputs = JSON.parse(products('package-inputs.json'));
   assert.deepEqual(inputs.inputs.slice(0, f.originalPackage.inputs.length), f.originalPackage.inputs);
   for (const key of ['optional_inputs', 'verification_paths', 'generated_outputs', 'retained_policy']) assert.deepEqual(inputs[key], f.originalPackage[key]);
-  for (const name of [...f.consumed, ...Object.values(f.assets).map(p => p.path)]) assert.ok(inputs.inputs.includes(name), name);
+  const custody = JSON.parse(products('package-roles.json')).paths.map(p => p.path);
+  for (const name of [...f.consumed, ...Object.values(f.assets).map(p => p.path)]) assert.ok(custody.includes(name), name);
+  const sidecar = f.r.json(f.config.sidecar);
+  const current = [f.config.sidecar, sidecar.runtime_envelope, ...Object.values(f.assets)].map(p => p.path).sort();
+  assert.deepEqual(inputs.inputs.slice(f.originalPackage.inputs.length), current);
+  for (const name of f.consumed) assert.ok(!inputs.inputs.includes(name), name);
   assert.ok(!inputs.inputs.includes(f.incidental)); assert.ok(!inputs.inputs.some(name => name.endsWith('selected-delivery-expectations.json')));
   const selected = JSON.parse(products('ownership-selection.json')), original = {...selected}; delete original.additive_release;
   assert.equal(JSON.stringify(original), JSON.stringify(JSON.parse(f.originalSelector)));
