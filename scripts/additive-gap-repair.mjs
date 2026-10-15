@@ -13,7 +13,6 @@ import {ImmutableReader, loadSelection} from './check-effective-geographic-regre
 import {nativePolygonIntervals} from '../src/native-grid.js';
 import {nativeRuntimeIndex} from '../src/native-runtime.js';
 import {unshuffleOwnershipBytes} from '../src/ownership-codec.js';
-export {deriveSourceTargetNativeDelta} from '../src/effective-footprint.js';
 export const ADDITIVE_PROPOSAL_VERSION='unactivated-additive-native-release-v1';
 export const ADDITIVE_BATCH_PROPOSAL_VERSION='unactivated-additive-native-batch-v1';
 export const SOURCE_PREMISES_VERSION='retained-land-source-premises-v1';
