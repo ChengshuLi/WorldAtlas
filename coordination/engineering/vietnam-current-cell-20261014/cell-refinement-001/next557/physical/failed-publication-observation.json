@@ -1,0 +1,17 @@
+{
+  "status": "failed outer preparation publication envelope; no published scientific result retained",
+  "exit_code": 1,
+  "external_elapsed_seconds": 5.68,
+  "external_child_lifetime_peak_rss_bytes": 392691712,
+  "old_preparation_allowance_bytes": 268435456,
+  "processing_allowance_bytes": 671088640,
+  "failure": "Current preparation RSS allowance exceeded",
+  "code_basis": "candidateBudget check occurs at initial config admission and publication budget.add. Runtime/sourceCohort execution uses no outer budget checks between; child failure would report Command failed. sourceCohort finally deletes its private staging before main publish attempts outer budget admission. No destination or staging remains.",
+  "scientific_credit": 0,
+  "correction": "Only outer preparation request increases to512MiB and is freshly admitted by existing accepted preparationAllowance; Python640MiB, inputs, scientific methods and guards unchanged. No retained completed557result is available to resume; corrected fresh vintage is necessary.",
+  "limits": [
+    "No live outer Node peak number available; external time-l peak can be the Python child and is not relabelled Node.",
+    "Actual supported guard remains intact; no memory credit, cap bypass or new wrapper.",
+    "Original001config and stderr preserved, no repeated successful/published QuePhong target."
+  ]
+}
