@@ -118,10 +118,9 @@ test('retained consumer roster keeps current coverage and GPU/Canvas tests',()=>
   assert(!full.includes('test/canonical-compact-repack.test.mjs'));
   assert(!full.includes('test/context-input-stage.test.mjs'));
   assert(full.includes('test/prepared-parity.test.mjs'));
-  assert(full.includes('test/compact-context-inputs.test.mjs'));
-  assert(full.includes('test/reference-context.test.mjs'));
-  assert(full.includes('test/runtime-ownership.test.mjs'));
-  assert(full.includes('test/compact-ownership.test.mjs'));
+  const complete=[0,1,2].flatMap(shard=>integrationTestFiles('full',shard,'complete'));
+  for(const name of ['compact-context-inputs','reference-context','runtime-ownership','compact-ownership'])
+    assert(complete.includes(`test/${name}.test.mjs`));
   assert.throws(()=>integrationTestFiles('full',1,'selected-output'));
   assert.throws(()=>requireCurrentPackageAssembly({expected:null}),/Trusted current/);
 });
