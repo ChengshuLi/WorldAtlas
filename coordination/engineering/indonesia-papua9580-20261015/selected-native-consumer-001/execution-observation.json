@@ -1,0 +1,61 @@
+{
+  "at_utc": "2026-10-15T20:29:49.447410+00:00",
+  "completed_utc": "2026-10-15T20:31:43.698832+00:00",
+  "command": [
+    "/usr/bin/time",
+    "-l",
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/267133ee5fd33696ea7c63ec50cf78bebfb3c92f9a18ca0fb1c4db8be3e0c49e/review/coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs",
+    "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/267133ee5fd33696ea7c63ec50cf78bebfb3c92f9a18ca0fb1c4db8be3e0c49e/review",
+    "181e66c68218003764b688f51eed60ed9cbb42c9",
+    "f9c1abc4acba3e2dd6be2e1f157839532924fd78",
+    "c7815ff68a745b73295f44af32a5c23316e3420c",
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task/following-country-delivery-papua9580/after2025-execution-001/joint-products-001",
+    "/Users/chengshuli/.cache/worldatlas-python-envs/requirements-a911b499659c266373447ffef081b16be803c5b5b2cd22889cc5c7a22811c0ae-python-3.12.14-macos-arm64/bin/python"
+  ],
+  "actual_trusted_checkout": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/267133ee5fd33696ea7c63ec50cf78bebfb3c92f9a18ca0fb1c4db8be3e0c49e/review",
+  "actual_trusted_head": "181e66c68218003764b688f51eed60ed9cbb42c9",
+  "execution_acceptance_at_launch": "reviewed-unmerged",
+  "baseline": "f9c1abc4acba3e2dd6be2e1f157839532924fd78",
+  "candidate": "c7815ff68a745b73295f44af32a5c23316e3420c",
+  "exit_code": 0,
+  "elapsed_seconds": 114.23723566695116,
+  "deadline_seconds": null,
+  "deadline_terminated": false,
+  "cancellation_requested": false,
+  "direct_child_lifetime_peak_rss_bytes": 890683392,
+  "actual_parent_python": "/Users/chengshuli/.cache/worldatlas-python-envs/requirements-a911b499659c266373447ffef081b16be803c5b5b2cd22889cc5c7a22811c0ae-python-3.12.14-macos-arm64/bin/python",
+  "application_memory_policy_configured": false,
+  "numeric_phase_or_rss_override": false,
+  "credential_source": "existing gh auth token",
+  "existing_credential_available": true,
+  "credentials_created_or_changed": false,
+  "child_exited": true,
+  "reservation_released": true,
+  "emitted_inventory": [
+    {
+      "path": "joint-products-001/checkpoint-routes.json",
+      "bytes": 293055,
+      "sha256": "74a1e34d16f5b4b314cf947b8578283303e5df94e5c1ec1ab1837c2ba759787f"
+    },
+    {
+      "path": "joint-products-001/derived-certificate.json.gz",
+      "bytes": 7517534,
+      "sha256": "dd5f3d35801a3e39f09ae519fd1a22deaed6de6d7a2afba91ee911a937c09f36"
+    },
+    {
+      "path": "joint-products-001/derived-facts.json",
+      "bytes": 501572,
+      "sha256": "b6144c5e959fdf51f5e5d022ca6b756b9a94ac1f0d80cdcf79acf3a0887d9dbb"
+    },
+    {
+      "path": "joint-products-001/derived-publication.json",
+      "bytes": 660,
+      "sha256": "dd6f06e9020a43072dc2580cc07ed5ebfc959ba526cd1a0560b3a29adeacbc43"
+    }
+  ],
+  "joint_mode": "authenticated-checkpoint-append-v1",
+  "reuse_unavailable": null,
+  "native_status": "no-new-native-loss",
+  "public_action": false
+}
