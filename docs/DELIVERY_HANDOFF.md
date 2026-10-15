@@ -149,6 +149,15 @@ No proposed input is called accepted merely because a hash matches.
    together with the selector/package/expectations. Its output identity has no
    invented commit. The modern composed `selected-ledger.json` pin serves as both
    `ledger` and `selected_ledger`; retain its actual `current_rebind` as `rebind`.
+   With an original cumulative selector, finalize authenticates its sidecar and
+   accepted registry, requires every inherited authority entry unchanged, and
+   packages the exact added registry entries regardless of their original paths.
+   Original rule/binding files need no receiving-prefix copies or preliminary
+   input checkpoint. Their original paths still require exact accepted identities
+   or committed, issue-authorized restorations; `new_prefix` continues to constrain
+   owned outputs. The complete accepted registry receives a retained 12x metadata
+   carry charge before parsing. Standalone `package` and initial legacy finalize
+   without an additive hook retain their existing prefix selection.
    It only replaces `additive_release` in the selector, preserving an already-final
    body's bytes. Keep the entire accepted package list verbatim as the prefix;
    append only genuinely new owned paths in stable sorted order. Existing paths
