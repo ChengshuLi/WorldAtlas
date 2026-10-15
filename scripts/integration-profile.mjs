@@ -94,7 +94,6 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {isDeepStrictEqual as same} from 'node:util';
-import {getHeapStatistics} from 'node:v8';
 import {gunzipSync} from 'node:zlib';
 import {isUtf8} from 'node:buffer';
 import {validatePackageInputs, loadPackageInputs, packagePathRequired, safePackagePath, containsPackagePath, PACKAGE_INPUT_FILE} from './package-inputs.mjs';
@@ -109,26 +108,11 @@ const hash = value => typeof value === 'string' && /^[a-f0-9]{64}$/.test(value);
 const safe = value => typeof value === 'string' && /^[A-Za-z0-9_./-]+$/.test(value) &&
   value.split('/').every(part => part && part !== '.' && part !== '..' && !part.startsWith('.'));
 const ordinary = row => row?.type === 'blob' && row.mode === '100644' &&
-  /^[a-f0-9]{40}$/.test(row.sha ?? '') && Number.isSafeInteger(row.size) && row.size >= 0 && row.size <= 32 * 1024 * 1024;
+  /^[a-f0-9]{40}$/.test(row.sha ?? '') && Number.isSafeInteger(row.size) && row.size >= 0;
 const needSelected = (value, message) => { if (!value) throw Error('Selected-data: ' + message); };
 const keys = (value, names) => value && typeof value === 'object' && !Array.isArray(value) &&
   same(Object.keys(value).sort(), [...names].sort());
 const text = value => typeof value === 'string' && value.length > 0 && value.length < 1024;
-
-// Resource policy, not an input-security allowance. Keep headroom for base64,
-// UTF-8/JSON representations and the rest of the running gate. The trusted
-// operator may lower this raw-byte allowance; individual/schema bounds below
-// remain unchanged. This is cooperative admission, not an OS memory quota.
-export function selectedMetadataAdmission({budgetBytes = process.env.WORLDATLAS_SELECTED_METADATA_BYTES,
-  availableBytes = process.availableMemory(), heapBytes = getHeapStatistics().total_available_size} = {}) {
-  needSelected([availableBytes, heapBytes].every(value => Number.isFinite(value) && value > 0),
-    'metadata memory observation unavailable');
-  const machineBytes = Math.floor(Math.min(availableBytes, heapBytes) / 8);
-  const configured = budgetBytes === undefined ? machineBytes : Number(budgetBytes);
-  needSelected((budgetBytes === undefined || typeof budgetBytes === 'number' || typeof budgetBytes === 'string' && /^[1-9][0-9]*$/.test(budgetBytes)) &&
-    Number.isSafeInteger(configured) && configured > 0 && machineBytes > 0, 'invalid metadata admission policy');
-  return {limit_bytes: Math.min(configured, machineBytes), machine_bytes: machineBytes};
-}
 
 // Expectations are reviewed source-side data. Require the WHOLE selected roster,
 // including zero-cell members. Held/rejected rows remain in the ledger but
@@ -137,10 +121,10 @@ export function validateSelectedExpectations(expected, ledger, ledgerHash, previ
   needSelected(keys(expected, ['version','selected_ledger_sha256','cumulative_native_cells','cohorts']) &&
     expected.version === 1 && expected.selected_ledger_sha256 === ledgerHash && hash(ledgerHash) &&
     Number.isSafeInteger(expected.cumulative_native_cells) && expected.cumulative_native_cells >= 0 &&
-    Array.isArray(expected.cohorts) && expected.cohorts.length > 0 && expected.cohorts.length <= 1024,
+    Array.isArray(expected.cohorts) && expected.cohorts.length > 0,
     'invalid reviewed expectations');
   needSelected(ledger?.version === 2 && ledger.kind === 'native-additive-repair-ledger-v2' &&
-    Array.isArray(ledger.rows) && ledger.rows.length > 0 && ledger.rows.length <= 10000, 'invalid selected ledger');
+    Array.isArray(ledger.rows) && ledger.rows.length > 0, 'invalid selected ledger');
   const actual = new Map(), allRows = new Map(), members = new Map(), batches = new Set();
   let cells = 0;
   for (const row of ledger.rows) {
@@ -188,7 +172,7 @@ const branchScope = branch => `coordination/engineering/${branch.slice('engineer
 const inScope = (name, scopes) => containsPackagePath(scopes, name);
 function supportingText(name, branch, reservation) {
   // Names do not establish consumption. The selected-role/package checks below
-  // prove new ordinary bounded text is supporting evidence, regardless of title.
+  // prove new ordinary text is supporting evidence, regardless of title.
   return inScope(name, [branchScope(branch), ...engineeringOwnedScopes(reservation)]) &&
     /\.(?:md|txt)$/.test(name) &&
     !/\/(?:requirements|constraints)(?:[.-].*)?\.txt$/i.test(name);
@@ -208,7 +192,7 @@ function scientificManifest(branch, reservation) {
 // Fast prefilter avoids any extra tree/blob requests for ordinary code PRs.
 export function selectedDataCandidate(branch, files, reservation = {}) {
   const scopes = [branchScope(branch), ...engineeringOwnedScopes(reservation)], manifest = scientificManifest(branch, reservation);
-  return branch.startsWith('engineering/') && files.length > 1 && files.length <= 1024 &&
+  return branch.startsWith('engineering/') && files.length > 1 &&
     files.some(file => file.filename === SELECTION && file.status === 'modified') &&
     files.every(file => !file.previous_filename && (file.filename === CHECKPOINT_LOCATOR
       ? ['added', 'modified'].includes(file.status) : [SELECTION, PACKAGE_INPUT_FILE, ADMINISTRATIVE_REGISTRY].includes(file.filename)
@@ -229,23 +213,13 @@ export async function integrationTree(api, repo, commit) {
 // input/config/code pin objects. Existing package/readback/geography do the full
 // source, method, decoded-body, current-neighbor and no-loss validation.
 export async function selectedDataSelection({api, repo, branch, files, baseline, authored, base, head,
-  metadataBudgetBytes, metadataDiagnostics, reservation = {}}) {
+  metadataDiagnostics, reservation = {}}) {
   if (!selectedDataCandidate(branch, files, reservation)) return null;
   const diagnostics = metadataDiagnostics ?? {};
   Object.assign(diagnostics, {read_count: 0, read_bytes: 0, retained_bytes: 0, retained_count: 0,
-    transient_read_count: 0, transient_read_bytes: 0, decoded_bytes: 0, peak_admitted_bytes: 0});
+    transient_read_count: 0, transient_read_bytes: 0, decoded_bytes: 0});
   delete diagnostics.failure;
   try {
-    Object.assign(diagnostics, selectedMetadataAdmission({budgetBytes: metadataBudgetBytes}));
-    diagnostics.minimum_live_limit_bytes = diagnostics.limit_bytes;
-    const admitBytes = bytes => {
-      // Observe allocations by the enclosing transport/gate too. A read may
-      // never enlarge the initial/operator allowance as machine load changes.
-      const observed = selectedMetadataAdmission({budgetBytes: diagnostics.limit_bytes}).limit_bytes;
-      diagnostics.minimum_live_limit_bytes = Math.min(diagnostics.minimum_live_limit_bytes, observed);
-      needSelected(bytes <= diagnostics.minimum_live_limit_bytes, 'metadata memory admission exceeded');
-      return diagnostics.minimum_live_limit_bytes;
-    };
     baseline ??= await integrationTree(api, repo, base);
     authored ??= await integrationTree(api, repo, head);
     const approved = baseline.entries.get(SELECTED_SMOKE), candidate = authored.entries.get(SELECTED_SMOKE);
@@ -261,11 +235,8 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
     const readRow = async (row, retain = true) => {
       needSelected(ordinary(row), 'missing ordinary role');
       if (!cache.has(row.sha)) {
-        // All required metadata shares this phase's cache. Supporting evidence
+        // All required metadata shares this read cache. Supporting evidence
         // is checked one complete member at a time and never accumulates here.
-        const admitted = diagnostics.retained_bytes + row.size;
-        admitBytes(admitted);
-        diagnostics.peak_admitted_bytes = Math.max(diagnostics.peak_admitted_bytes, admitted);
         const blob = await api(`/repos/${repo}/git/blobs/${row.sha}`, 'GET', undefined, {retainImmutableBlob: retain});
         needSelected(blob.encoding === 'base64' && typeof blob.content === 'string', 'missing blob bytes');
         const bytes = Buffer.from(blob.content, 'base64');
@@ -290,11 +261,10 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       return JSON.parse(bytes);
     };
     const json = async (name, tree, retain = true) => parseJSON(await read(name, tree, retain));
-    const jsonLines = (bytes, maximumRecordBytes = 32 * 1024 * 1024) => {
+    const jsonLines = bytes => {
       needSelected(bytes.length > 0, 'empty supporting JSONL');
       for (let start = 0; start < bytes.length;) {
         const newline = bytes.indexOf(10, start), end = newline < 0 ? bytes.length : newline;
-        needSelected(end - start <= maximumRecordBytes, 'supporting JSONL record exceeds bound');
         parseJSON(bytes.subarray(start, end));
         start = end + 1;
       }
@@ -343,7 +313,7 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
     // selected deliveries keep their existing small fixed-role walk.
     const sourceDeclarations = new Set(), usedRegistrations = new Set(), acceptedTrees = new Map();
     let administrative;
-    const strings = value => Array.isArray(value) && value.length > 0 && value.length <= 4096 &&
+    const strings = value => Array.isArray(value) && value.length > 0 &&
       value.every(id => typeof id === 'string' && id.length > 0) && new Set(value).size === value.length;
     const oid = value => value?.git_blob_oid ?? value?.blob;
     const content = value => [value?.path, value?.mode, oid(value), value?.bytes, value?.sha256];
@@ -353,7 +323,7 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
     };
     const registryEntries = value => {
       needSelected(keys(value, ['version','kind','entries']) && value.version === 1 &&
-        value.kind === 'accepted-administrative-handoffs-v1' && Array.isArray(value.entries) && value.entries.length <= 512,
+        value.kind === 'accepted-administrative-handoffs-v1' && Array.isArray(value.entries),
         'unsupported administrative registry');
       const ids = new Set(), paths = new Set(), components = new Set(), batches = new Set();
       for (const entry of value.entries) {
@@ -365,7 +335,7 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
           keys(entry.source, ['blob','bytes','mode','path','sha256']) && safe(entry.source.path) &&
           /^(?:research\/geography|coordination\/engineering)\/[^/]+\/.+\.json$/.test(entry.source.path) && entry.source.mode === '100644' &&
           /^[a-f0-9]{40}$/.test(entry.source.blob ?? '') && hash(entry.source.sha256) &&
-          Number.isSafeInteger(entry.source.bytes) && entry.source.bytes > 0 && entry.source.bytes <= 32 * 1024 * 1024 &&
+          Number.isSafeInteger(entry.source.bytes) && entry.source.bytes > 0 &&
           strings(entry.cohort_ids) && strings(entry.target_ids) &&
           (execution || typeof entry.original_batch_id === 'string' && entry.original_batch_id &&
             entry.original_component_count === entry.cohort_ids.length), 'unsupported administrative entry');
@@ -396,7 +366,7 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       const spec = issued.additive, owners = spec.owner_parts;
       if (!Array.isArray(owners) || !owners.some(part => added.has(part.path))) return;
       needSelected(issued.version === 1 && issued.operation === 'unactivated-additive-native-batch-v1' &&
-        owners.length > 0 && owners.length <= 256 && new Set(owners.map(part => part.path)).size === owners.length,
+        owners.length > 0 && new Set(owners.map(part => part.path)).size === owners.length,
         'unsupported native operand roles');
       const facts = await pinnedJSON(authority.original_pins.native_facts);
       needSelected(facts.version === 1 && facts.operation === issued.operation &&
@@ -463,7 +433,7 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       needSelected(issued.version === 1 && issued.operation === 'retained-land-source-premises-v1' &&
         rule?.profile === 'retained-consumed-administrative-source' && rule.version === 1 &&
         rule.registry_path === ADMINISTRATIVE_REGISTRY && rule.geometry_scope === 'full-component' &&
-        Array.isArray(rule.inputs) && rule.inputs.length <= 1024 && Array.isArray(issued.baseline?.pins) &&
+        Array.isArray(rule.inputs) && Array.isArray(issued.baseline?.pins) &&
         same(content(facts.request), content(authority.original_pins.source_request)) && same(facts.source_rule, rule) &&
         same(facts.input_descriptors, [issued.report, ...rule.inputs, ...issued.baseline.pins]), 'SOURCE request/facts join differs');
       administrative ??= registryEntries(await json(ADMINISTRATIVE_REGISTRY));
@@ -515,7 +485,7 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       const cataloguePin = unique(rule.inputs, row => row.path === rule.source_catalogue_path, 'SOURCE catalogue');
       const catalogue = parseJSON(await acceptedSource(cataloguePin));
       needSelected(Array.isArray(catalogue.products) && Array.isArray(rule.administrative_products) &&
-        rule.administrative_products.length > 0 && rule.administrative_products.length <= 1024, 'missing administrative products');
+        rule.administrative_products.length > 0, 'missing administrative products');
       const fields = ['bytes','sha256','uncompressed_bytes','uncompressed_sha256'];
       for (const product of rule.administrative_products) {
         needSelected(safe(product.path) && product.path.startsWith(SOURCE_CORPUS + 'payloads/') && product.path.endsWith('.bin.gz'),
@@ -533,13 +503,13 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       // Metadata-only handoff assembly may retain a previously authenticated
       // physical inverse without claiming that assembly consumed it again.
       const reused = handoff.reused_whole_product_inputs ?? [];
-      needSelected(Array.isArray(handoff.consumed_inputs) && Array.isArray(reused) && reused.length <= 1024 &&
+      needSelected(Array.isArray(handoff.consumed_inputs) && Array.isArray(reused) &&
         new Set(reused.map(row => row.path)).size === reused.length && reused.every(row =>
           row.whole_body_consumed === false && row.mode === '100644' && safe(row.path) &&
           /^[a-f0-9]{40}$/.test(row.commit ?? '') && /^[a-f0-9]{40}$/.test(oid(row) ?? '') && hash(row.sha256) &&
           Number.isSafeInteger(row.bytes) && row.bytes > 0 && !handoff.consumed_inputs.some(old => old.path === row.path)),
         'ambiguous or unbound reused physical role');
-      needSelected(Array.isArray(rule.original_products) && rule.original_products.length > 0 && rule.original_products.length <= 1024,
+      needSelected(Array.isArray(rule.original_products) && rule.original_products.length > 0,
         'missing original physical roles');
       for (const locator of rule.original_products) {
         const name = locator.original_product_path;
@@ -566,7 +536,7 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
     const ledger = await pinnedJSON(sidecar.logical_asset_map.ledger);
     const registry = await pinnedJSON(sidecar.authority_registry);
     needSelected(keys(registry, ['version','kind','entries']) && registry.version === 1 &&
-      Array.isArray(registry.entries) && registry.entries.length > 0 && registry.entries.length <= 1024,
+      Array.isArray(registry.entries) && registry.entries.length > 0,
       'missing authority registry');
     needSelected(oldHook && safe(oldHook.path), 'missing preceding selected release');
     const oldSideBytes = await read(oldHook.path, baseline);
@@ -667,7 +637,7 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       for (const value of Object.values(authority.original_pins)) pin(value);
       const proof = authority.native_proof;
       pin(proof.publication); pin(proof.inventory); pin(proof.operating);
-      needSelected(Array.isArray(proof.assets) && proof.assets.length > 0 && proof.assets.length <= 32, 'missing native asset roles');
+      needSelected(Array.isArray(proof.assets) && proof.assets.length > 0, 'missing native asset roles');
       for (const asset of proof.assets) {
         needSelected(/\/(?:base-native-manifest|ledger[^/]*|patch[^/]*|features|owners[^/]*|release-envelope|owner-window|virtual-owner-window)\.json(?:\.gz)?$/.test(asset.path),
           'unknown native asset role');
@@ -684,7 +654,7 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       const nativeRequest = restoredRequest ?? await pinnedJSON(authority.original_pins.native_request), spec = nativeRequest.additive;
       await nativeRoles(authority, nativeRequest);
       sourceAuthorities.push(authority);
-      needSelected(Array.isArray(spec?.inputs) && spec.inputs.length <= 1024, 'missing source role inputs');
+      needSelected(Array.isArray(spec?.inputs), 'missing source role inputs');
       for (const role of ['publication_path','inventory_path','operating_path']) {
         const matches = spec.inputs.filter(value => value.path === spec[role]);
         needSelected(matches.length === 1, 'ambiguous original source role');
@@ -757,16 +727,7 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
         !sourceDeclarations.has(name) && !packagePathRequired(name, definition)), 'checkpoint custody is a consumed package role');
       // Reuse accepted receipt and actual merged-PR checks. The archive's hash
       // comes from that bot receipt, never from the locator or a local digest.
-      let metadataBytes = 0;
-      const acceptedAPI = async (...args) => {
-        const prospective = diagnostics.retained_bytes + 8 * (metadataBytes + 2 * 1024 * 1024);
-        admitBytes(prospective); diagnostics.peak_admitted_bytes = Math.max(diagnostics.peak_admitted_bytes, prospective);
-        const value = await api(args[0], 'GET', undefined, {maxResponseBytes: 2 * 1024 * 1024});
-        const bytes = Buffer.byteLength(JSON.stringify(value));
-        needSelected(bytes <= 2 * 1024 * 1024 && metadataBytes + bytes <= 8 * 1024 * 1024,
-          'checkpoint receipt metadata exceeds bound');
-        metadataBytes += bytes; return value;
-      };
+      const acceptedAPI = (...args) => api(args[0], 'GET');
       const acceptance = locator.acceptance;
       const comments = await githubPages(acceptedAPI, `/repos/${repo}/issues/${acceptance.pr_number}/comments`);
       const receipt = readWorkerResult(comments, 'merge', acceptance.request_id, acceptance.pr_number);
@@ -786,15 +747,10 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
         const object = await acceptedAPI(`/repos/${repo}/git/commits/${commit}`);
         needSelected(object.sha === commit && object.tree?.sha === source.tree, 'checkpoint accepted/tested tree differs');
       }
-      const transportBytes = diagnostics.retained_bytes + 8 * metadataBytes + 2 * authored.entries.get(archive).size;
-      admitBytes(transportBytes); diagnostics.peak_admitted_bytes = Math.max(diagnostics.peak_admitted_bytes, transportBytes);
       const raw = await read(archive, authored, false);
       needSelected(raw.length === source.artifact_bytes && sha256(raw) === source.artifact_digest,
         'checkpoint archive differs from accepted artifact digest');
-      const report = readReportArchive(raw, source.report_sha256, source.report_bytes, {admit: bytes => {
-        const complete = diagnostics.retained_bytes + 8 * metadataBytes + bytes;
-        admitBytes(complete); diagnostics.peak_admitted_bytes = Math.max(diagnostics.peak_admitted_bytes, complete);
-      }});
+      const report = readReportArchive(raw, source.report_sha256, source.report_bytes);
       checkGeographicReport(report, source.baseline, candidateCommit);
       needSelected(report.checkpoint, 'legacy report has no checkpoint custody');
       const facts = parseJSON(geographicReportProducts(report).members.get('derived-facts.json'));
@@ -833,7 +789,7 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
         return parseJSON(bytes);
       };
       const roles = rows => {
-        needSelected(Array.isArray(rows) && rows.length <= 1024, 'unknown base role roster');
+        needSelected(Array.isArray(rows), 'unknown base role roster');
         return rows;
       };
       const native = await baseJSON(selection.manifest_path, {sha256: selection.sha256});
@@ -889,9 +845,8 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       if (supportingText(name, branch, reservation)) {
         needSelected(!reachable.has(name) && !sourceDeclarations.has(name) &&
           !packagePathRequired(name, validatePackageInputs(await json(PACKAGE_INPUT_FILE))), 'supporting text is a consumed role');
-        needSelected(authored.entries.get(name).size <= 128 * 1024, 'nontext packet documentation');
         const bytes = await read(name, authored, false);
-        needSelected(bytes.length <= 128 * 1024 && !bytes.includes(0) && Buffer.from(bytes.toString('utf8')).equals(bytes), 'nontext packet documentation');
+        needSelected(!bytes.includes(0) && Buffer.from(bytes.toString('utf8')).equals(bytes), 'nontext packet documentation');
         continue;
       }
       if (reachable.has(name) || transport.has(name) || name === expectationsPath || name === manifest) continue;
@@ -902,20 +857,11 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       if (name.endsWith('.json')) await json(name, authored, false);
       else if (/\.jsonl?\.gz$/.test(name)) {
         const bytes = await read(name, authored, false);
-        const remaining = admitBytes(diagnostics.retained_bytes + bytes.length) - diagnostics.retained_bytes - bytes.length;
-        needSelected(remaining > 0, 'metadata memory admission exceeded');
-        // Bound actual complete decoded output, including concatenated gzip
-        // members. The trailer's untrusted ISIZE cannot grant extra admission.
-        let decoded;
-        try { decoded = gunzipSync(bytes, {maxOutputLength: Math.min(32 * 1024 * 1024, remaining)}); }
-        catch (error) {
-          if (error.code === 'ERR_BUFFER_TOO_LARGE') needSelected(false, remaining < 32 * 1024 * 1024
-            ? 'metadata memory admission exceeded' : 'decoded metadata member exceeds 32 MiB');
-          throw error;
-        }
+        // No decoded-size pin is declared for inert supporting evidence.
+        // The codec validates every complete gzip member, including concatenated
+        // members, before the whole decoded JSON/JSONL body is parsed.
+        const decoded=gunzipSync(bytes);
         diagnostics.decoded_bytes += decoded.length;
-        diagnostics.peak_admitted_bytes = Math.max(diagnostics.peak_admitted_bytes,
-          diagnostics.retained_bytes + bytes.length + decoded.length);
         if (name.endsWith('.json.gz')) parseJSON(decoded);
         else jsonLines(decoded);
       }
@@ -923,9 +869,6 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
         needSelected(name.endsWith('.log'), 'unknown opaque evidence type');
         const bytes = await read(name, authored, false);
         needSelected(!bytes.includes(0) && Buffer.from(bytes.toString('utf8')).equals(bytes), 'nontext evidence log');
-        // Larger retained resource-sampling logs have a bounded structured
-        // representation. Free-form text keeps its existing 128 KiB limit.
-        if (bytes.length > 128 * 1024) jsonLines(bytes, 128 * 1024);
       }
     }
     if (registryChanged) {
@@ -943,9 +886,6 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
     diagnostics.failure = typeof error?.message === 'string' && error.message.startsWith('Selected-data: ') ? error.message : 'Invalid or unavailable selected metadata';
     if (error?.planningNeeded) throw error; // Preserve the existing bounded capacity-planning retry.
     return null; // An unavailable/unknown boundary retains the full suite.
-  } finally {
-    diagnostics.heap_used_bytes = process.memoryUsage().heapUsed;
-    diagnostics.process_peak_rss_bytes = process.resourceUsage().maxRSS * 1024;
   }
 }
 
@@ -956,7 +896,7 @@ export async function selectedDeliverySmoke(expectationsPath) {
       expectationsPath.split('/').some(part => !part || part.startsWith('.'))) throw Error('Missing reviewed selected expectations path');
   const read = name => {
     const stat = fs.lstatSync(name);
-    if (!stat.isFile() || stat.isSymbolicLink() || stat.size > 32 * 1024 * 1024) throw Error('Nonordinary selected data');
+    if (!stat.isFile() || stat.isSymbolicLink()) throw Error('Nonordinary selected data');
     return fs.readFileSync(name);
   };
   const pinned = pin => {

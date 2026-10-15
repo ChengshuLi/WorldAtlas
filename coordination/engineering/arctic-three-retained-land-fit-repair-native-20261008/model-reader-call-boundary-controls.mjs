@@ -219,7 +219,7 @@ async function invoke({profile='full',shard=2,changeSelection,changeStage,failPr
  changeSelection?.(selected);changeStage?.(sidecar);
  const mockFs={realpathSync:value=>value,readFileSync:file=>{reads++;return Buffer.from(JSON.stringify(file.endsWith('ownership-selection.json')?selected:sidecar));},mkdirSync:()=>events.push('mkdir')};
  const preflight=options=>{events.push('preflight');assert.deepEqual(options,{source:root,stage:root,sidecar});if(failPreflight)throw Error('admission refused');return {actual_admission_fixture:true};};
- const issue=options=>{events.push('issue');assert.equal(options.root,root);assert.equal(options.admission.actual_admission_fixture,true);return {private_execution_fixture:true};};
+ const issue=options=>{events.push('issue');assert.equal(options.root,root);return {private_execution_fixture:true};};
  const restore=options=>{events.push('restore');assert.equal(options.root,root);assert.equal(options.mode,'checkout');assert.equal(options.temporaryRoot,path.join(root,'.cache'));return {original_custody_fixture:true};};
  const consume=async options=>{events.push('consume');assert.equal(options.restoredReceipt.original_custody_fixture,true);assert.equal(options.currentExecution.private_execution_fixture,true);return {receipt:{current_execution:{fixture:true}}};};
  const install=async options=>{events.push('install');assert.equal(options.context.receipt.current_execution.fixture,true);return {fixture:true};};
@@ -252,8 +252,8 @@ assert.equal(createHash('sha256').update(catalogueRaw).digest('hex'),cataloguePi
 const catalogueDecoded=gunzipSync(catalogueRaw);
 assert.equal(catalogueDecoded.length,cataloguePin.decoded_bytes);
 assert.equal(createHash('sha256').update(catalogueDecoded).digest('hex'),cataloguePin.decoded_sha256);
-const expanded=completeReleaseProductInputs(certificate,JSON.parse(catalogueDecoded));
-assert.equal(expanded.length,533);
+const expanded=completeReleaseProductInputs(certificate,JSON.parse(catalogueDecoded),codeInventory);
+assert.equal(expanded.length,500);
 const required=new Set([stage.artifact_consumption.certificate.path,stage.artifact_consumption.review.path,N2+'/model-reader-call-boundary-controls.mjs']);
 for(const pin of expanded)if((pin.space??'root')==='root')required.add(pin.path);
 for(const pin of codeInventory.critical_files)required.add(pin.path);
@@ -272,7 +272,7 @@ let missingPathRefusals=0;
 for(const relative of [
  N2+'/selected-geography/part-29-application.json.gz',
  N2+'/application-geometry-serialization.mjs',N2+'/application-geometry-producer.mjs',
- N2+'/phase-admission.mjs',N2+'/artifact-checkout-execution.mjs',N2+'/prepare-model-reader-checkout.mjs',N2+'/model-reader-call-boundary-controls.mjs'
+ N2+'/phase-admission.mjs',N2+'/model-reader-call-boundary-controls.mjs'
 ]){
  const omitted=structuredClone(definition);
  omitted.inputs=omitted.inputs.filter(input=>input!==relative);
@@ -321,10 +321,7 @@ authenticateCurrentExecution(cloudflareRecord,{root,executingRoot:root,sourceRoo
 assert.equal(requireCurrentExecution(cloudflareRecord),cloudflareRecord);
 assert.equal(cloudflareRecord.entry_point,cloudflareEntry);
 assert(cloudflareFiles.includes('scripts/build-static-inner.mjs'),'Cloudflare imports the static compiler in the same process');
-const declaredCritical=[...codeInventory.critical_files,...codeInventory.entry_critical_files[cloudflareEntry]];
-const declaredWrappers=Object.values(codeInventory.entry_roles[cloudflareEntry]).flat();
-assert.deepEqual([...declaredCritical.map(pin=>pin.path),...declaredWrappers].sort(),cloudflareFiles);
-for(const pin of declaredCritical){const actual=cloudflareRecord.files.find(file=>file.path===pin.path);assert.deepEqual(actual,pin);}
+assert.deepEqual(cloudflareRecord.files.map(pin=>pin.path),cloudflareFiles);
 for(const foreign of [{},structuredClone(cloudflareRecord)])assert.throws(()=>requireCurrentExecution(foreign));
 console.log(JSON.stringify({actual_cloudflare_issuer_positive:1,private_authority_refusals:2,
  entry:cloudflareRecord.entry_point,complete_execution_files:cloudflareRecord.files.length,

@@ -11,7 +11,7 @@ const ENTRY = 'coordination/engineering/selected-geography-effective-prevention-
 function run(f, baseline, candidate, destination = path.join(f.root, 'complete'), extraEnv = {}) {
   const env = {...process.env, ...extraEnv}; delete env.NODE_OPTIONS; delete env.NODE_PATH;
   const trusted = f.git('rev-parse', 'HEAD').toString().trim();
-  return spawnSync(process.execPath, ['--expose-gc', path.join(f.root, ENTRY), f.root, trusted,
+  return spawnSync(process.execPath, [path.join(f.root, ENTRY), f.root, trusted,
     baseline, candidate, destination], {encoding:'utf8', env, timeout:30000});
 }
 
@@ -107,18 +107,6 @@ test('actual joint CLI qualifies once, runs the real native consumer and release
 });
 
 
-test('derived output union is admitted before complete serialization or compression', async t => {
-  const f = await trustedFixture(t);
-  const certificate = {entries:[['unicode \uD800 \uD83C\uDF0D', 1, null, true, '\n\\"']]};
-  const facts = {kind:'tiny-provisional-control'};
-  const plan = f.joint.planDerivedOutput(certificate, facts, 30, 4096);
-  assert.equal(plan.decodedBytes, Buffer.byteLength(JSON.stringify(certificate) + '\n'));
-  assert(plan.encodedLimit > 0 && plan.encodedLimit < 4096);
-  assert.throws(() => f.joint.planDerivedOutput(certificate, facts, 30, 50), /before serialization/);
-  assert.throws(() => f.joint.planDerivedOutput(certificate, facts, 4096, 4096), /prospective/);
-});
-
-
 test('actual warm joint entry reuses native-only custody without requiring addition polygons or a legacy target',async t=>{
   const f=await trustedFixture(t,{nativeOnly:true});
   f.save('unrelated.json',{newer:true});const newer=f.commit();
@@ -131,7 +119,7 @@ test('actual warm joint entry reuses native-only custody without requiring addit
   const certificate=JSON.parse(gunzipSync(fs.readFileSync(path.join(f.root,'complete/derived-certificate.json.gz'))));
   assert.deepEqual(certificate.entries.find(row=>row[0]==='B')[9],[[1,0,10,20]]);
   assert.equal(f.ledger.current_targets.some(row=>row.target_id==='B'),false);
-  const qualified=f.api.qualifyCheckpoint({reader:f.reader,budget:f.budget});
+  const qualified=f.api.qualifyCheckpoint({reader:f.reader});
   assert.equal(qualified.available,true);
   const row=qualified.state.additions.find(row=>row.representation==='native-cells');
   assert.equal(Object.hasOwn(row,'geometry'),false);

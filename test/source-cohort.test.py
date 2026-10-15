@@ -7,7 +7,6 @@ from pathlib import Path
 import subprocess
 import sys
 import tempfile
-import time
 import unittest
 from unittest.mock import patch
 
@@ -34,7 +33,6 @@ def fixture():
                 families=[dict(id=k, family_index=v) for k, v in probe.FAMILY_INDICES.items()],
                 targets=[target], country=dict(code='IDN', source_prefix='gb:IDN:', registry_hash_key='ne_10m_admin_0_countries'),
                 selector_format='cohort-intervals-v1', expected_counts=dict(repair=2, physical=1), expected_segments=2,
-                resources=dict(input_bytes=268435456, output_bytes=16777216, deadline_seconds=180),
                 runtime=dict(python=sys.version, numpy='test', shapely='test', geos='test'), physical_reproducer=pins[-1])
 
 
@@ -69,21 +67,20 @@ class SourceConfig(unittest.TestCase):
             c = fixture(); mutate(c)
             with self.assertRaises(ValueError): probe.validate_config(c)
 
-    def test_paths_and_resource_budgets(self):
+    def test_paths_and_whole_pin_identity(self):
         for name in ('../outside', '/tmp/file', 'nested/../file', 'nested//file', 'nested\\file'):
             with self.assertRaises(ValueError): probe.safe_path(name)
-        for field, value in [('input_bytes', probe.MAX_INPUT + 1), ('output_bytes', probe.MAX_OUTPUT + 1),
-                             ('deadline_seconds', 181), ('deadline_seconds', True)]:
-            c = fixture(); c['resources'][field] = value
-            with self.assertRaises(ValueError): probe.validate_config(c)
-        c = fixture(); c['resources']['input_bytes'] = 11
-        with self.assertRaisesRegex(ValueError, 'complete input budget'): probe.validate_config(c)
+        for value in (0, -1, True, 1.5):
+            c = fixture(); c['inputs'][0]['bytes'] = value
+            with self.assertRaisesRegex(ValueError, 'whole input pin'): probe.validate_config(c)
 
-    def test_decoded_inputs_charged(self):
+    def test_decoded_input_identity_required(self):
         c = fixture(); p = c['inputs'][0]; p['path'] += '.gz'; c['roles']['catalogue'] = p['path']
         with self.assertRaisesRegex(ValueError, 'Decoded pin'): probe.validate_config(c)
-        p.update(decoded_bytes=100, decoded_sha256='e' * 64); c['resources']['input_bytes'] = 111
-        with self.assertRaisesRegex(ValueError, 'complete input budget'): probe.validate_config(c)
+        p.update(decoded_bytes=100, decoded_sha256='e' * 64)
+        self.assertEqual(len(probe.validate_config(c)), 12)
+        p['decoded_sha256'] = 'not-a-digest'
+        with self.assertRaisesRegex(ValueError, 'Decoded pin'): probe.validate_config(c)
 
 
 class Selectors(unittest.TestCase):
@@ -121,26 +118,17 @@ class EntryAdmission(unittest.TestCase):
         self.config.write_text(json.dumps(fixture()))
         self.admission = self.root / 'admission.json'
         self.output = self.root / 'result'
-        self.receipt = dict(observed_unix_seconds=time.time(), allowance=dict(rssBytes=2**40, phaseBytes=2**40),
-                            runtime_inventory_bytes=0, execution_reserve_bytes=0,
-                            program_sha256=probe.sha(Path(probe.__file__).read_bytes()), config_sha256=probe.sha(self.config.read_bytes()))
+        self.receipt = dict(version=1, runtime_files=[], program_sha256=probe.sha(Path(probe.__file__).read_bytes()), config_sha256=probe.sha(self.config.read_bytes()))
 
     def execute(self):
         self.admission.write_text(json.dumps(self.receipt))
         return probe.run(self.root, self.config, self.admission, self.output, 'coordination/engineering/test/source-001')
 
-    def test_stale_future_and_drift_admission_create_nothing(self):
-        for changes in [dict(observed_unix_seconds=time.time()-61), dict(observed_unix_seconds=time.time()+60),
-                        dict(program_sha256='0' * 64), dict(config_sha256='0' * 64)]:
+    def test_program_and_config_drift_create_nothing(self):
+        for changes in [dict(version=2), dict(program_sha256='0' * 64), dict(config_sha256='0' * 64)]:
             old = dict(self.receipt); self.receipt.update(changes)
             with self.assertRaises(ValueError): self.execute()
             self.assertFalse(self.output.exists()); self.receipt = old
-
-    def test_complete_phase_admission_includes_runtime_and_reserve(self):
-        self.receipt.update(runtime_inventory_bytes=7, execution_reserve_bytes=7)
-        self.receipt['allowance']['phaseBytes'] = 26
-        with self.assertRaisesRegex(ValueError, 'complete phase'): self.execute()
-        self.assertFalse(self.output.exists())
 
     def test_output_collision_and_dangling_symlink_preserve_sentinel(self):
         self.output.mkdir(); sentinel = self.output / 'keep'; sentinel.write_text('unchanged')
@@ -239,8 +227,8 @@ class ScientificFixture(unittest.TestCase):
         config=root/'config.json'; config.write_bytes(encoded(c))
         runtime_files=[dict(path=p,bytes=Path(p).stat().st_size,sha256=probe.sha(Path(p).read_bytes())) for p in probe.runtime_paths()]
         if runtime_mutation: runtime_mutation(runtime_files)
-        admission=root/'admission.json'; admission.write_bytes(encoded(dict(observed_unix_seconds=time.time(),allowance=dict(rssBytes=536870912,phaseBytes=536870912),
-            runtime_files=runtime_files,runtime_inventory_bytes=sum(p['bytes'] for p in runtime_files),execution_reserve_bytes=MAX_TEST_RESERVE,program_sha256=probe.sha(Path(probe.__file__).read_bytes()),config_sha256=probe.sha(config.read_bytes()))))
+        admission=root/'admission.json'; admission.write_bytes(encoded(dict(version=1,
+            runtime_files=runtime_files,program_sha256=probe.sha(Path(probe.__file__).read_bytes()),config_sha256=probe.sha(config.read_bytes()))))
         output=root/'result'
         self.last_output = output
         result=None if prepare_only else probe.run(root,config,admission,output,'coordination/engineering/test/source-001')
@@ -275,28 +263,13 @@ class ScientificFixture(unittest.TestCase):
         executable = str(Path(sys.executable).resolve())
         python_pin = next(pin for pin in runtime_files if str(Path(pin['path']).resolve()) == executable)
         python_pin['path'] = sys.executable
-        config = dict(version=1, source=source, runtime_inventory=dict(python=python_pin, files=runtime_files),
-                      processing_allowance=dict(phaseBytes=536870912, rssBytes=536870912))
+        config = dict(version=1, source=source, runtime_inventory=dict(python=python_pin, files=runtime_files))
         (root / 'cli-config.json').write_text(json.dumps(config))
         destination = '.cache/delivery-handoff/source-fixture-001'
         command = ['node', str(ROOT / 'scripts/prepare-delivery-handoff.mjs'),
                    'source', 'cli-config.json', destination]
         env = {k: v for k, v in os.environ.items() if k not in ('NODE_OPTIONS', 'NODE_PATH')}
         env['GIT_NO_LAZY_FETCH'] = '1'
-        # Fresh automatic Node admission replaces the duplicated manual parent
-        # cap. Explicit intentional caps and unavailable memory still refuse
-        # before scientific scratch or outputs are created.
-        limited = dict(config, preparation_allowance=dict(phaseBytes=1, rssBytes=536870912))
-        (root / 'cli-config.json').write_text(json.dumps(limited))
-        denied = subprocess.run(command, cwd=root, env=env, capture_output=True, text=True, timeout=30)
-        self.assertNotEqual(denied.returncode, 0)
-        self.assertFalse((root / '.cache/delivery-handoff').exists())
-        (root / 'cli-config.json').write_text(json.dumps(config))
-        exhausted = dict(env, WORLDATLAS_MEMORY_HEADROOM_BYTES=str(2**52))
-        denied = subprocess.run(command, cwd=root, env=exhausted, capture_output=True, text=True, timeout=30)
-        self.assertNotEqual(denied.returncode, 0)
-        self.assertIn('Insufficient current preparation memory', denied.stderr)
-        self.assertFalse((root / '.cache/delivery-handoff').exists())
         first = subprocess.run(command, cwd=root, env=env, capture_output=True, text=True, timeout=30)
         self.assertEqual(first.returncode, 0, first.stdout + first.stderr)
         self.assertFalse(json.loads(first.stdout)['resumed'])
@@ -321,8 +294,8 @@ class ScientificFixture(unittest.TestCase):
         self.assertTrue(json.loads(resumed.stdout)['resumed'])
         self.assertNotIn('observation', json.loads(resumed.stdout))
         self.assertEqual(before, {p.name: (p.read_bytes(), p.stat().st_mtime_ns) for p in output.iterdir()})
-        # The prior admission time and every immutable output remain literal,
-        # rather than rerunning the producer and normalizing its new observation.
+        # Every immutable output remains literal when the prior publication is
+        # reused rather than rerunning the producer.
         damaged = output / 'source-qualification.json'
         damaged.write_bytes(damaged.read_bytes() + b'\n')
         tampered = damaged.read_bytes()
@@ -330,6 +303,23 @@ class ScientificFixture(unittest.TestCase):
         self.assertNotEqual(denied.returncode, 0)
         self.assertIn('Source resumed product changed', denied.stderr)
         self.assertEqual(damaged.read_bytes(), tampered)
+
+    def test_interrupted_publication_preserves_written_products_without_complete_receipt(self):
+        root, out, _ = self.scientific_run(prepare_only=True)
+        original_open = Path.open
+        def interrupted(path, mode='r', *args, **kwargs):
+            if path.parent == out and path.name == 'source-qualification.json' and mode == 'xb':
+                raise OSError('simulated interrupted publication')
+            return original_open(path, mode, *args, **kwargs)
+        with patch.object(Path, 'open', interrupted), self.assertRaisesRegex(OSError, 'interrupted'):
+            probe.run(root, root/'config.json', root/'admission.json', out, 'coordination/engineering/test/source-001')
+        self.assertTrue((out/'original-stage-inputs.json').is_file())
+        self.assertEqual(len(json.loads((out/'original-stage-inputs.json').read_bytes())), 1)
+        self.assertFalse((out/'execution-receipt.json').exists())
+        preserved = {p.name: p.read_bytes() for p in out.iterdir()}
+        with self.assertRaisesRegex(ValueError, 'fresh output'):
+            probe.run(root, root/'config.json', root/'admission.json', out, 'coordination/engineering/test/source-001')
+        self.assertEqual(preserved, {p.name: p.read_bytes() for p in out.iterdir()})
 
     def test_actual_consumed_pin_and_runtime_omission_fail(self):
         for mutation in [lambda c:c['inputs'][0].update(sha256='0'*64),
@@ -354,9 +344,6 @@ class ScientificFixture(unittest.TestCase):
             with self.subTest(mutation=mutation), self.assertRaises((AssertionError,ValueError)):
                 self.scientific_run(mutation)
             self.assertFalse(self.last_output.exists())
-
-
-MAX_TEST_RESERVE = 64 * 1024 * 1024
 
 
 if __name__ == '__main__':

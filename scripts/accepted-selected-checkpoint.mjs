@@ -20,7 +20,6 @@ export const ACCEPTED_CHECKPOINT_CODE = Object.freeze([
   'scripts/issue-claim-contract.mjs', 'scripts/job-deadline.mjs', 'scripts/research-import-gate.mjs',
   'scripts/worker-result.mjs', 'src/regional-import-gate.js'
 ]);
-const METADATA = 8 * 1024 * 1024, PAGE = 2 * 1024 * 1024, PHASE = 256 * 1024 * 1024;
 const need = (ok, message) => { if (!ok) throw Error(message); };
 const commit = value => typeof value === 'string' && /^[a-f0-9]{40}$/.test(value);
 const unavailable = reason => Object.freeze({available: false, reason});
@@ -31,43 +30,15 @@ const freeze = value => {
   return value;
 };
 
-// Reuse the repository API/provenance client with a bounded JSON response body.
-// Artifact/log redirects are still owned by its authenticated fixed-host helpers.
 export function acceptedCheckpointAPI(token, {fetchImpl = fetch} = {}) {
-  return githubAPI(token, {conditionalReads: false, fetchImpl: async (url, init) => {
-    const response = await fetchImpl(url, init);
-    if (!response.body || response.status === 302) return response;
-    let bytes = 0;
-    const body = response.body.pipeThrough(new TransformStream({transform(chunk, controller) {
-      bytes += chunk.length;
-      if (bytes > PAGE) throw Error('Accepted checkpoint metadata response exceeds bounded page');
-      controller.enqueue(chunk);
-    }}));
-    return new Response(body, {status: response.status, statusText: response.statusText, headers: response.headers});
-  }});
+  return githubAPI(token, {conditionalReads: false, fetchImpl});
 }
 
-export async function acquireAcceptedCheckpoint({api, repo, locator, token, retainedArchive, admit, fetchImpl = fetch}) {
+export async function acquireAcceptedCheckpoint({api, repo, locator, token, retainedArchive, fetchImpl = fetch}) {
   need(/^[-\w.]+\/[-\w.]+$/.test(repo ?? '') && locator && Number.isSafeInteger(locator.pr_number) && locator.pr_number > 0 &&
-    /^[-a-zA-Z0-9]{16,100}$/.test(locator.request_id ?? '') && commit(locator.head) && typeof admit === 'function',
-    'Invalid accepted checkpoint locator or missing current resource admission');
-  const client = api ?? acceptedCheckpointAPI(token, {fetchImpl});
-  let metadataBytes = 0, metadataReserve = 8 * PAGE, transportBytes = 0;
-  const admitTransport = bytes => {
-    transportBytes = Math.max(transportBytes, bytes);
-    need(metadataReserve + transportBytes <= PHASE, 'Accepted checkpoint complete metadata/product phase exceeds limit');
-    admit(metadataReserve + transportBytes);
-  };
-  admitTransport(0);
-  api = Object.assign(async (...args) => {
-    metadataReserve = 8 * (metadataBytes + PAGE);
-    admitTransport(0);
-    const value = await client(...args);
-    const size = Buffer.byteLength(JSON.stringify(value));
-    metadataBytes += size;
-    need(size <= PAGE && metadataBytes <= METADATA, 'Accepted checkpoint metadata inventory exceeds bounded phase');
-    return value;
-  }, {artifactRedirect: client.artifactRedirect, jobLogRedirect: client.jobLogRedirect});
+    /^[-a-zA-Z0-9]{16,100}$/.test(locator.request_id ?? '') && commit(locator.head),
+    'Invalid accepted checkpoint locator');
+  api = api ?? acceptedCheckpointAPI(token, {fetchImpl});
   const comments = await githubPages(api, `/repos/${repo}/issues/${locator.pr_number}/comments`);
   const receipt = readWorkerResult(comments, 'merge', locator.request_id, locator.pr_number);
   if (!receipt || !receipt.accepted) return unavailable('No accepted merge receipt for checkpoint locator');
@@ -87,8 +58,6 @@ export async function acquireAcceptedCheckpoint({api, repo, locator, token, reta
     receipt.geography.candidate_commit === source.candidate_commit && source.head === locator.head &&
     commit(receipt.tested_candidate), 'Accepted checkpoint receipt/source identities differ');
   await validateGeographyOrigin({api, repo, number: locator.pr_number, source});
-  // Metadata admission reserves one bounded in-flight response. Keep these
-  // reads serial so simultaneous pages cannot exceed that prospective reserve.
   const acceptedCommit = await api(`/repos/${repo}/git/commits/${receipt.merge_commit}`);
   const testedCommit = await api(`/repos/${repo}/git/commits/${receipt.tested_candidate}`);
   need(acceptedCommit.sha === receipt.merge_commit && testedCommit.sha === receipt.tested_candidate &&
@@ -97,7 +66,7 @@ export async function acquireAcceptedCheckpoint({api, repo, locator, token, reta
   let report;
   try {
     report = await loadGeographicReport({api, repo, runId: source.run_id, artifactName: source.artifact_name,
-      expectedHash: source.report_sha256, source, token, retainedArchive, admit: admitTransport, fetchImpl});
+      expectedHash: source.report_sha256, source, token, retainedArchive, fetchImpl});
   } catch (error) {
     if (error.geographyUnavailable) return unavailable(error.message);
     throw error;
@@ -114,7 +83,7 @@ export async function acquireAcceptedCheckpoint({api, repo, locator, token, reta
   const handle = Object.freeze({});
   archives.set(handle, artifact.archive_bytes);
   custody.set(handle, freeze({receipt, source, report, products, member_pins: report.checkpoint.members,
-    archive_origin: artifact.archive_origin, admitted_bytes: metadataReserve + transportBytes}));
+    archive_origin: artifact.archive_origin}));
   return Object.freeze({available: true, handle});
 }
 
@@ -145,7 +114,7 @@ export function validateAcceptedCheckpointLocator(value) {
 // Its final locator appears only after the exact accepted ZIP has been written.
 export function retainAcceptedCheckpoint(handle, {repo, directory}) {
   const proof = readAcceptedCheckpoint(handle), bytes = archives.get(handle);
-  need(Buffer.isBuffer(bytes) && bytes.length === proof.source.artifact_bytes && bytes.length <= 32 * 1024 * 1024 &&
+  need(Buffer.isBuffer(bytes) && bytes.length === proof.source.artifact_bytes &&
     reportHash(bytes) === proof.source.artifact_digest, 'Exact accepted artifact unavailable for ordinary retained copy');
   need(/^coordination\/engineering\/[a-z0-9][a-z0-9-]{0,63}\/[a-zA-Z0-9_-][a-zA-Z0-9_.-]{0,99}$/.test(directory ?? ''),
     'Retained checkpoint needs a fresh batch-owned evidence directory');
@@ -171,9 +140,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
     'Use accepted-selected-checkpoint.mjs owner/repo PR REQUEST_ID HEAD coordination/engineering/BATCH/FRESH_DIRECTORY');
   const token = process.env.GH_TOKEN ?? execFileSync('gh', ['auth', 'token'], {encoding: 'utf8', timeout: 20000, maxBuffer: 16384}).trim();
   const result = await acquireAcceptedCheckpoint({repo: repository,
-    locator: {pr_number: Number(number), request_id, head}, token,
-    admit: bytes => need(Number.isSafeInteger(bytes) && bytes <= Math.min(256 * 1024 * 1024, Math.floor(process.availableMemory() / 4)),
-      'Current memory cannot admit complete retained checkpoint transport')});
+    locator: {pr_number: Number(number), request_id, head}, token});
   need(result.available, result.reason);
   try { console.log(JSON.stringify(retainAcceptedCheckpoint(result.handle, {repo: process.cwd(), directory}))); }
   finally { releaseAcceptedCheckpoint(result.handle); }

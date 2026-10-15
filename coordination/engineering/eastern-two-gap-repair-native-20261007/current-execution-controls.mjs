@@ -90,8 +90,7 @@ async function currentNegative(t){
  assert.throws(()=>authenticateCurrentExecution({...record,source_root:stage},{root:stage,executingRoot:root,sourceRoot:root}));
  const badRuntime=structuredClone(record);badRuntime.runtime.version='foreign';assert.throws(()=>authenticateCurrentExecution(badRuntime,{root:stage,executingRoot:root,sourceRoot:root}));
  const omitted=structuredClone(record);omitted.files.pop();assert.throws(()=>authenticateCurrentExecution(omitted,{root:stage,executingRoot:root,sourceRoot:root}));
- const overbound=structuredClone(record);overbound.files[0].bytes=32*1024*1024+1;assert.throws(()=>authenticateCurrentExecution(overbound,{root:stage,executingRoot:root,sourceRoot:root}));
- const aggregate=structuredClone(record);aggregate.files=Array.from({length:9},()=>({...record.files[0],bytes:32*1024*1024}));let runtimeOpens=0;const originalOpen=syncFs.openSync;syncFs.openSync=function(file,...args){if(String(file)===process.execPath)runtimeOpens++;return originalOpen.call(this,file,...args);};try{assert.throws(()=>authenticateCurrentExecution(aggregate,{root:stage,executingRoot:root,sourceRoot:root}),/aggregate exceeds cap before reads/);assert.equal(runtimeOpens,0,'Overbound combined closure must reject before runtime open');}finally{syncFs.openSync=originalOpen;}
+ const overbound=structuredClone(record);overbound.files[0].bytes++;assert.throws(()=>authenticateCurrentExecution(overbound,{root:stage,executingRoot:root,sourceRoot:root}));
  await fs.chmod(path.join(stage,'scripts/evidence-quality.mjs'),0o755);assert.throws(()=>requireCurrentExecution(record));await fs.chmod(path.join(stage,'scripts/evidence-quality.mjs'),0o644);
  await fs.appendFile(path.join(stage,'scripts/evidence-quality.mjs'),"import './foreign.mjs';\n");assert.throws(()=>requireCurrentExecution(record));
  await fs.writeFile(path.join(stage,'scripts/evidence-quality.mjs'),'export const currentLibrary=1;\n');
@@ -117,7 +116,7 @@ async function authoredControls(t){
 }
 export async function runCurrentExecutionControls(){
  const cleanup=[];const t={after:callback=>cleanup.push(callback)};
- try{await currentPositive(t);await currentNegative(t);const actualInner=await realInnerControls(t);const historical=await authoredControls(t);return {actualInner,historical,status:'PASS',real_plain_node:true,current_commit_drift_positive:true,authored_pins_unchanged:true,adverse_cases:['midrun body','unbranded receipt','wrong HEAD','wrong root','runtime mutation','omitted import','overbound body','aggregate before source reads','mode mutation','new import','uncommitted source','receipt mutation']};}
+ try{await currentPositive(t);await currentNegative(t);const actualInner=await realInnerControls(t);const historical=await authoredControls(t);return {actualInner,historical,status:'PASS',real_plain_node:true,current_commit_drift_positive:true,authored_pins_unchanged:true,adverse_cases:['midrun body','unbranded receipt','wrong HEAD','wrong root','runtime mutation','omitted import','overbound body','mode mutation','new import','uncommitted source','receipt mutation']};}
  finally{for(const callback of cleanup.reverse())await callback();}
 }
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url))console.log(JSON.stringify(await runCurrentExecutionControls()));

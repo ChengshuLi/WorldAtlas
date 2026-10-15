@@ -3,7 +3,6 @@
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import {getHeapStatistics} from 'node:v8';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 
@@ -18,9 +17,6 @@ const safe = value => typeof value === 'string' && value.length > 0 && !/[\\\x00
 const queueWorkflow = '.github/workflows/worker-merge.yml';
 const authorWorkflow = '.github/workflows/merge-integration-checks.yml';
 const reportName = 'native-normal-built-output.json';
-// This established job-log metadata admission is independent of output size.
-// The observed full integration log is 533 KiB; retain the original 8 MiB cap.
-const maxLog = 8 * 1048576;
 const queueSteps = [
   'Build the combined application once before asset-dependent tests',
   'Read back qualified native build outputs when selected',
@@ -77,7 +73,7 @@ async function producerFor(run, repo, expectedHead, expectedPullRequest, api) {
     pullRequest: pr.number, linkage, artifactName: `native-built-output-regression-${pr.number}-${expectedHead}`};
 }
 
-async function delivery(redirect, fetchImpl, maximum, destination) {
+async function delivery(redirect, fetchImpl, expectedBytes, destination) {
   need(redirect?.status === 302, 'Native readback delivery redirect unavailable');
   let url;
   try { url = new URL(redirect.headers.get('location')); } catch { throw Error('Invalid native readback delivery'); }
@@ -90,7 +86,7 @@ async function delivery(redirect, fetchImpl, maximum, destination) {
   try {
     for await (const chunk of response.body) {
       bytes += chunk.length;
-      need(bytes <= maximum, 'Native readback delivery exceeds admitted bytes');
+      need(expectedBytes===undefined||bytes<=expectedBytes,'Native readback delivery exceeds exact receipt bytes');
       checksum.update(chunk);
       if (fd === null) chunks.push(Buffer.from(chunk));
       else { let offset = 0; while (offset < chunk.length) offset += fs.writeSync(fd, chunk, offset, chunk.length - offset); }
@@ -120,12 +116,12 @@ function receipts(raw) {
 }
 
 // Fixed member names, no extractall, no network, and no inherited credentials.
-// The archive is authenticated before this subprocess starts. Decoded admission
-// comes from its actual roster and available memory/disk, not a package-size cap.
+// The archive is authenticated before this subprocess starts. Inflation stays
+// bound to exact complete member sizes and available destination disk.
 const extract = String.raw`
 import hashlib, os, shutil, stat, struct, sys, zipfile
-archive, target, expected_bytes, expected_hash, budget, allow_smoke = sys.argv[1:]
-expected_bytes, budget = int(expected_bytes), int(budget)
+archive, target, expected_bytes, expected_hash, allow_smoke = sys.argv[1:]
+expected_bytes = int(expected_bytes)
 def need(ok, message):
     if not ok: raise ValueError(message)
 with zipfile.ZipFile(archive) as package:
@@ -172,10 +168,10 @@ with zipfile.ZipFile(archive) as package:
         need(not member.is_dir() and not member.flag_bits & 1
              and stat.S_IFMT(member.external_attr >> 16) in (0, stat.S_IFREG)
              and member.compress_type in (zipfile.ZIP_STORED, zipfile.ZIP_DEFLATED)
-             and 0 < member.file_size <= budget, 'Nonordinary or unadmitted native archive member')
+             and 0 < member.file_size, 'Nonordinary native archive member')
         decoded += member.file_size
-    need(decoded <= budget and shutil.disk_usage(os.path.dirname(target)).free >= decoded,
-         'Insufficient resources for actual decoded native archive')
+    need(shutil.disk_usage(os.path.dirname(target)).free >= decoded,
+         'Insufficient disk for actual decoded native archive')
     need(package.getinfo('native-normal-built-output.json').file_size == expected_bytes,
          'Native report decoded bytes differ from actual job receipt')
     for member in members:
@@ -238,7 +234,7 @@ export async function loadSelectedPackageReadback({api, repo, runId, attempt, ex
     return rows[0].number;
   });
   need(stepNumbers.every((number, index) => index === 0 || number > stepNumbers[index - 1]), 'Native readback step order differs');
-  const log = await delivery(await api.jobLogRedirect(`/repos/${repo}/actions/jobs/${job.id}/logs`), fetchImpl, maxLog);
+  const log = await delivery(await api.jobLogRedirect(`/repos/${repo}/actions/jobs/${job.id}/logs`), fetchImpl);
   const receipt = receipts(log.raw);
   if (producer.artifactName) need(receipt.artifact_name === producer.artifactName &&
     receipt.lines.filter(line => line === authorReceipt).length === 1,
@@ -251,11 +247,6 @@ export async function loadSelectedPackageReadback({api, repo, runId, attempt, ex
   const artifactDigest = artifact.digest.slice(7);
   need(receipt.lines.filter(line => line === `SHA256 digest of uploaded artifact zip is ${artifactDigest}`).length === 1,
     'Missing or ambiguous actual native archive digest');
-  const heap = getHeapStatistics();
-  // Reserve eight times the encoded metadata for JSON strings, object graphs,
-  // archive-directory parsing and comparison; leave the rest to the caller.
-  const budget = Math.floor(Math.min(process.availableMemory?.() ?? os.freemem(), heap.heap_size_limit - heap.used_heap_size) / 8);
-  need(receipt.report.bytes <= budget && receipt.artifact_bytes <= budget, 'Insufficient memory for actual native metadata');
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'worldatlas-readback-'));
   try {
     const disk = fs.statfsSync(directory);
@@ -264,8 +255,8 @@ export async function loadSelectedPackageReadback({api, repo, runId, attempt, ex
     const downloaded = await delivery(await api.artifactRedirect(`/repos/${repo}/actions/artifacts/${artifact.id}/zip`),
       fetchImpl, receipt.artifact_bytes, archive);
     need(downloaded.bytes === receipt.artifact_bytes && downloaded.sha256 === artifactDigest, 'Native archive bytes or digest differ');
-    execFileSync('python3', ['-I', '-S', '-B', '-c', extract, archive, target, String(receipt.report.bytes), receipt.report.sha256, String(budget), producer.smoke ? 'yes' : 'no'],
-      {env: {PATH: '/usr/bin:/bin', LANG: 'C.UTF-8'}, timeout: 120000, maxBuffer: 1048576, stdio: ['ignore', 'pipe', 'pipe']});
+    execFileSync('python3', ['-I', '-S', '-B', '-c', extract, archive, target, String(receipt.report.bytes), receipt.report.sha256, producer.smoke ? 'yes' : 'no'],
+      {env: {PATH: '/usr/bin:/bin', LANG: 'C.UTF-8'}, timeout: 120000, stdio: ['ignore', 'ignore', 'pipe']});
     const raw = fs.readFileSync(target);
     need(raw.length === receipt.report.bytes && hash(raw) === receipt.report.sha256, 'Extracted native readback changed');
     const report = JSON.parse(new TextDecoder('utf-8', {fatal: true}).decode(raw));

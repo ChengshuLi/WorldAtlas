@@ -13,7 +13,6 @@ import * as originalRestoration from '../coordination/engineering/eastern-two-ga
 export {originalRestoration};
 
 const sha = raw => createHash('sha256').update(raw).digest('hex');
-const CAP = 32 * 1024 * 1024;
 const canonicalIndex = 'b82b195d94530d9b1f48153f7e47616f8b841cb1438ddf59994ba4869a1d7876';
 const priorIndex = 'ca1ab5fc3ef24470bcb79412f1d47a88281c6df0931461c5eb356079b75986fe';
 const originalCanonicalTransport = '3a343812f25b02f4472dbe5338a72e9541e4de180b916e0cf8bbc9a00464f097';
@@ -35,7 +34,7 @@ function ordinary(root, relative) {
   return current;
 }
 function read(root, pin) {
-  assert(Number.isSafeInteger(pin.bytes) && pin.bytes >= 0 && pin.bytes <= CAP);
+  assert(Number.isSafeInteger(pin.bytes) && pin.bytes >= 0);
   const file = ordinary(root, pin.path), stat = fs.lstatSync(file);
   assert(stat.isFile() && stat.size === pin.bytes);
   if(pin.mode!==undefined)assert.equal((stat.mode&0o111)?'100755':'100644',pin.mode,'Whole file mode differs');
@@ -97,7 +96,6 @@ function restoreByteDerivedObjects(canonical,prior,map,old,images) {
   const priorPaths=new Map(old.logical_targets.map(p=>[p.path,p]));
   assert.equal(priorPaths.size,old.logical_targets.length);
   const relationRaw=imageRead(prior,'world-byte-relations.json');
-  assert(relationRaw.length<=CAP);
   const relations=JSON.parse(relationRaw).all_original_world_files;
   const expectedWorld=old.logical_targets.filter(p=>p.path.startsWith('data/geography/part-'));
   assert.equal(relations.length,expectedWorld.length);
@@ -107,8 +105,8 @@ function restoreByteDerivedObjects(canonical,prior,map,old,images) {
     assert.deepEqual(relation.original_whole_binding,expected);
     assert.equal(relation.original_object,expected.object);
     const wire=read(prior,{path:relation.patch_path,bytes:relation.patch_encoded_bytes,sha256:relation.patch_encoded_sha256,mode:'100644'});
-    assert(Number.isSafeInteger(relation.patch_decoded_bytes)&&relation.patch_decoded_bytes<=CAP);
-    const decoded=gunzipSync(wire,{maxOutputLength:CAP});
+    assert(Number.isSafeInteger(relation.patch_decoded_bytes));
+    const decoded=gunzipSync(wire,{maxOutputLength:relation.patch_decoded_bytes+1});
     assert.equal(decoded.length,relation.patch_decoded_bytes);assert.equal(sha(decoded),relation.patch_decoded_sha256);
     const patch=JSON.parse(decoded);
     for(const key of ['path','bytes','sha256','mode'])assert.equal(patch[key],expected[key]);
@@ -126,23 +124,22 @@ function restoreByteDerivedObjects(canonical,prior,map,old,images) {
     // Fresh private authenticated source captures are released after each patch.
   }
   const planWire=imageRead(canonical,'current-context-byte-patch.json.gz');
-  assert(planWire.length<=CAP);
-  const plan=JSON.parse(gunzipSync(planWire,{maxOutputLength:CAP}));
+  const plan=JSON.parse(gunzipSync(planWire));
   const original=priorPaths.get(plan.original_source.path);assert.deepEqual(plan.original_source,original);
   const beforeWire=read(prior,{...original,path:original.object});
   assert.equal(plan.kind,'whole-original-encoded-context-byte-delta-v1');
   verifyWholeBytes(beforeWire,plan.original_source);
-  const before=gunzipSync(beforeWire,{maxOutputLength:CAP});
+  const before=gunzipSync(beforeWire);
   assert.equal(sha(before),plan.before_decoded_sha256);
   const changedWire=applyBytePatch(plan.commands,plan.current_member,name=>{assert.equal(name,'original');return beforeWire;});
-  const after=gunzipSync(changedWire,{maxOutputLength:CAP});
+  const after=gunzipSync(changedWire);
   assert.equal(sha(after),plan.after_decoded_sha256);
   assert.equal(after.length,plan.current_member.original_binding.original_product.decoded_bytes);
   const targets=new Map(map.logical_targets.map(p=>[p.target,p]));
   const contextPin=targets.get('data/canonical-grid/eastern-v8/context-transport/index.json');assert(contextPin);
   const contextIndex=JSON.parse(read(canonical,{...contextPin,path:contextPin.object}));
   assert.equal(contextIndex.files.length,34);assert.equal(new Set(contextIndex.files.map(p=>p.path)).size,34);
-  assert(Number.isSafeInteger(contextIndex.whole_bytes)&&contextIndex.whole_bytes<=CAP);
+  assert(Number.isSafeInteger(contextIndex.whole_bytes));
   const originalByHash=new Map(old.logical_targets.map(p=>[p.sha256,p]));let offset=0,changes=0;
   const members=contextIndex.files.map(pin=>{
     assert.equal(pin.offset,offset);assert(pin.mode==='100644');let encoded;
@@ -152,19 +149,19 @@ function restoreByteDerivedObjects(canonical,prior,map,old,images) {
   });
   assert.equal(changes,1);assert.equal(offset,contextIndex.whole_bytes);
   const whole=Buffer.concat(members,offset);assert.equal(sha(whole),contextIndex.whole_sha256);
-  const outerPlan=JSON.parse(gunzipSync(imageRead(canonical,'current-context-outer-byte-patches.json.gz'),{maxOutputLength:CAP}));
+  const outerPlan=JSON.parse(gunzipSync(imageRead(canonical,'current-context-outer-byte-patches.json.gz')));
   assert.equal(outerPlan.kind,'whole-context-outer-encoded-byte-deltas-v1');
   assert.equal(outerPlan.whole_sha256,contextIndex.whole_sha256);
   assert.equal(outerPlan.whole_bytes,whole.length);
   assert.equal(outerPlan.parts.length,contextIndex.parts.length);
   offset=0;let partIndex=0;
   for(const part of contextIndex.parts) {
-    assert.equal(part.offset,offset);assert(Number.isSafeInteger(part.decoded_bytes)&&part.decoded_bytes>0&&part.decoded_bytes<=16*1024*1024);
+    assert.equal(part.offset,offset);assert(Number.isSafeInteger(part.decoded_bytes)&&part.decoded_bytes>0);
     const decoded=whole.subarray(offset,offset+part.decoded_bytes);assert.equal(decoded.length,part.decoded_bytes);
     assert.equal(sha(decoded),part.decoded_sha256);offset+=decoded.length;
     const patch=outerPlan.parts[partIndex++];assert.deepEqual(patch.part,part);
     const encoded=applyBytePatch(patch.commands,{...part,mode:'100644'},name=>{assert.equal(name,'whole');return whole;});
-    assert(gunzipSync(encoded,{maxOutputLength:CAP}).equals(decoded));
+    assert(gunzipSync(encoded,{maxOutputLength:part.decoded_bytes+1}).equals(decoded));
     const target=targets.get('data/canonical-grid/eastern-v8/context-transport/'+part.path);assert(target);
     assert.equal(encoded.length,part.bytes);assert.equal(sha(encoded),part.sha256);
     writeExactObject(canonical,{...target,path:target.object},encoded);
@@ -336,18 +333,15 @@ export function restoredContextMember(root,name,{prior=false}={}) {
     original_index_sha256:prior?originalPriorIndex:canonicalIndex,complete_inverse_preserved:true};
 }
 
-export function restoredContextPatch(root,{runtimeBytes,codeBytes}) {
+export function restoredContextPatch(root) {
   const saved=restored.get(root);assert(saved,'Complete canonical inverse must precede patch selection');
-  const base=namespace+'/canonical-products',indexBytes=fs.statSync(ordinary(root,base+'/index.json')).size;assert(Number.isSafeInteger(runtimeBytes+codeBytes+indexBytes+131072)&&runtimeBytes+codeBytes+indexBytes+131072<=256*1024*1024,'Bounded authenticated index-discovery phase');
+  const base=namespace+'/canonical-products',indexBytes=fs.statSync(ordinary(root,base+'/index.json')).size;
   const indexRaw=read(root,{path:base+'/index.json',sha256:canonicalIndex,bytes:indexBytes,mode:'100644'});
   const index=JSON.parse(indexRaw),member=index.files.find(p=>p.path==='current-context-byte-patch.json.gz');assert(member&&member.mode==='100644');
   const parts=index.parts.filter(p=>p.offset<member.offset+member.bytes&&p.offset+p.decoded_bytes>member.offset);
-  let total=runtimeBytes+codeBytes+131072+indexRaw.length+member.bytes;
-  for(const p of parts)total+=p.bytes+p.decoded_bytes;
-  assert(Number.isSafeInteger(total)&&total<=256*1024*1024,'Complete patch acquisition budget before source opens');
-  const pieces=[];for(const p of parts){const encoded=read(root,{...p,path:base+'/'+p.path,mode:'100644'}),decoded=gunzipSync(encoded,{maxOutputLength:CAP});assert.equal(decoded.length,p.decoded_bytes);assert.equal(sha(decoded),p.decoded_sha256);pieces.push(decoded.subarray(Math.max(0,member.offset-p.offset),Math.min(decoded.length,member.offset+member.bytes-p.offset)));}
+  const pieces=[];for(const p of parts){const encoded=read(root,{...p,path:base+'/'+p.path,mode:'100644'}),decoded=gunzipSync(encoded,{maxOutputLength:p.decoded_bytes+1});assert.equal(decoded.length,p.decoded_bytes);assert.equal(sha(decoded),p.decoded_sha256);pieces.push(decoded.subarray(Math.max(0,member.offset-p.offset),Math.min(decoded.length,member.offset+member.bytes-p.offset)));}
   const raw=Buffer.concat(pieces);assert.equal(raw.length,member.bytes);assert.equal(sha(raw),member.sha256);
-  return {raw,pin:member,budget:{complete_phase_bytes:total,installed_runtime_bytes:runtimeBytes,source_parts:parts.map(p=>({...p,path:base+'/'+p.path}))}};
+  return {raw,pin:member,source_parts:parts.map(p=>({...p,path:base+'/'+p.path}))};
 }
 
 function checkoutMetadata(root,relative) {

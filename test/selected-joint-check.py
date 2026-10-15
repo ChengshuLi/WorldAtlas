@@ -49,8 +49,7 @@ class JointRouting(unittest.TestCase):
         with no_polygons(), mock.patch.object(G.subprocess, 'check_output', return_value=raw(value)) as launch:
             self.assertEqual(G.selected_joint(ROOT, BASE, NEXT), value)
         self.assertEqual(launch.call_count, 1)
-        self.assertEqual(launch.call_args.args[0][1], '--expose-gc')
-        self.assertTrue(launch.call_args.args[0][2].endswith('/selected-joint-entry.mjs'))
+        self.assertTrue(launch.call_args.args[0][1].endswith('/selected-joint-entry.mjs'))
         del value['reuse_unavailable']
         with mock.patch.object(G.subprocess, 'check_output', return_value=raw(value)):
             with self.assertRaisesRegex(ValueError, 'fallback omitted'):
@@ -91,7 +90,7 @@ class JointRouting(unittest.TestCase):
         value = self.issued(mode='authenticated-checkpoint-append-v1', native=native())
         with mock.patch.object(G.subprocess, 'check_output', return_value=raw(value)) as child:
             G.selected_joint(ROOT, BASE, NEXT, trusted=NEXT)
-        self.assertEqual(child.call_args.args[0][3:7], [str(ROOT), NEXT, BASE, NEXT])
+        self.assertEqual(child.call_args.args[0][2:6], [str(ROOT), NEXT, BASE, NEXT])
 
 
 class InspectRouting(unittest.TestCase):
