@@ -30,8 +30,35 @@ const sha = body => createHash('sha256').update(body).digest('hex');
 // selected scientific vintage. Keep its archived census entry, but do not make
 // accepted programme additions look like changed source/native input bytes.
 const PROGRAMME_POLICY = 'coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json';
-const sameScientificRoutes = (reader,routes,executablePaths) => routes.every(p => p.path === PROGRAMME_POLICY
-  || executablePaths.has(p.path) || treeRoute(reader,p.path) === p.tree);
+// A certificate names both the logical source and the physical body it consumed.
+// An exact encoded override does not read the shadowed ordinary logical file.
+// Keep its archived census row, but do not replay accepted science for that inert
+// route. Any actual physical use, including by another authority, keeps it bound.
+function maskedLogicalSources(certificate,physicalPaths) {
+  const physical = new Set([...physicalPaths,...certificate.inputs.map(input => input.source.path)]);
+  return new Set(certificate.inputs.filter(input => input.source.kind === 'selected-exact-encoded-override'
+    && input.source.logical_path === input.path && input.source.path !== input.path
+    && !physical.has(input.path)).map(input => input.path));
+}
+function bindPhysicalLogicalSources(reader,certificate,inventory) {
+  const logical = new Set(certificate.inputs.filter(input => input.source.kind === 'selected-exact-encoded-override'
+    && input.source.logical_path === input.path && input.source.path !== input.path).map(input => input.path));
+  // An inherited physical use must remain visible in the successor's existing
+  // actual descriptor inventory, even though its accepted body is not reread.
+  // Otherwise a later derived checkpoint could mistake that path for inert.
+  for (const p of inventory) if (logical.has(p.path)) {
+    let version = p.commit;
+    try { reader.git('cat-file','-e',version+'^{commit}'); } catch { version = reader.version; }
+    const actual = reader.descriptor(p.path,version);
+    demand(actual.mode === p.mode && actual.git_blob_oid === p.git_blob_oid && actual.bytes === p.bytes,
+      'Accepted physical logical-source identity changed');
+  }
+  return new Set(inventory.map(p => p.path));
+}
+const sameScientificRoutes = (reader,routes,executablePaths,masked = new Set()) => routes.every(p => p.path === PROGRAMME_POLICY
+  || executablePaths.has(p.path) || masked.has(p.path) || treeRoute(reader,p.path) === p.tree);
+const currentMaskedRoutes = (reader,routes,masked) => routes.map(p => masked.has(p.path)
+  ? {...p,tree:treeRoute(reader,p.path)} : p);
 // Older route censuses excluded .mjs/.py but also retained executable .js.
 // Keep the complete archived census. Identify code by its authenticated executed
 // role and whole bytes, never by an extension, changed-file list or new hashes.
@@ -306,14 +333,16 @@ export function qualifyCheckpoint({reader,checkpointId}) {
         'Trusted producer policy no longer preserves accepted eligibility');
     }
     session.executablePaths=acceptedExecutablePaths(session,retained.inventory,facts,priorPolicy);
-    supported(sameScientificRoutes(reader,routes,session.executablePaths), 'Accepted checkpoint input or routing alternative changed');
+    const physicalPaths = bindPhysicalLogicalSources(reader,certificate,retained.inventory);
+    const masked = maskedLogicalSources(certificate,physicalPaths);
+    supported(sameScientificRoutes(reader,routes,session.executablePaths,masked), 'Accepted checkpoint input or routing alternative changed');
     // All genuine old complete records remain in the state, including exceptions.
     const data = {version:1,kind:'verified-selected-state-v1',selected_commit:reader.version,
       accepted_execution:{accepted_head:root.accepted_head,execution_commit:root.execution_commit,
         historical_selected_commit:root.selected_commit,checkpoint_id:root.id,trusted_catalogue_commit:trusted},
       selection:selected.selection,baseSelection:nativeBaseSelection(selected.selection),certificate,
       additions,ledger:selected.ledger,registry:selected.registry,patch:selected.patch,manifest};
-    return finishCheckpoint(session,reader,{data,routes,rebind,selected,root,oldAuthorities});
+    return finishCheckpoint(session,reader,{data,routes:currentMaskedRoutes(reader,routes,masked),physicalPaths,rebind,selected,root,oldAuthorities});
   } catch (error) {
     session.closed = true;
     if (error.reuseUnavailable) return unavailable(error.message);
@@ -367,7 +396,7 @@ function acceptedRebindCheck(selected,rebind,authorities,size,owners) {
     && same(selected.patch.rows,mergePatchRows([...authorities.values()].flatMap(proof=>proof.patches),size,owners)),
   'Accepted checkpoint rebind/native selection differs');
 }
-function finishCheckpoint(session,reader,{data,routes,rebind,selected,root,oldAuthorities}) {
+function finishCheckpoint(session,reader,{data,routes,physicalPaths,rebind,selected,root,oldAuthorities}) {
   // Every authority patch remains live, including native-only bodies. Only
   // the historical rebind denominator excludes native-only source custody.
   const originalPatches = [...oldAuthorities.values()].flatMap(p => p.patches);
@@ -375,7 +404,7 @@ function finishCheckpoint(session,reader,{data,routes,rebind,selected,root,oldAu
   const nativeRows = new Map(rebind.request.current_rows.map(p => [p.y,p]));
   for (const row of rebind.request.acquisition.predecessor_rows) nativeRows.set(row.y,row);
   demand(same(legacyPatchHashes,rebind.request.original_patch_sha256s), 'Accepted complete original patch denominator differs');
-  const state = newState(session,data,{reader,routes,rebind,oldAuthorities,selected,root,
+  const state = newState(session,data,{reader,routes,physicalPaths,rebind,oldAuthorities,selected,root,
     nativeRows,sourceTargets:new Map(rebind.request.current_targets.map(p => [p.target_id,p]))});
   return Object.freeze({available:true,state});
 }
@@ -609,7 +638,9 @@ function admitDerivedCheckpoint(session,reader,archiveReader,accepted) {
       'Trusted producer policy no longer preserves accepted eligibility');
   }
   session.executablePaths=acceptedExecutablePaths(session,Object.values(inventories).flat(),facts,priorPolicy);
-  supported(sameScientificRoutes(reader,census.routes,session.executablePaths), 'Accepted checkpoint input or routing alternative changed');
+  const physicalPaths = bindPhysicalLogicalSources(reader,certificate,Object.values(inventories).flat());
+  const masked = maskedLogicalSources(certificate,physicalPaths);
+  supported(sameScientificRoutes(reader,census.routes,session.executablePaths,masked), 'Accepted checkpoint input or routing alternative changed');
   const data={version:1,kind:'verified-selected-state-v1',selected_commit:reader.version,
     accepted_execution:seedRoot?{kind:'trusted-main-derived-selected-checkpoint-v1',checkpoint_id:seedRoot.id,
       accepted_head:seedRoot.accepted_head,execution_commit:facts.executing_commit,
@@ -622,7 +653,7 @@ function admitDerivedCheckpoint(session,reader,archiveReader,accepted) {
     additions,ledger:selected.ledger,registry:selected.registry,patch:selected.patch,manifest};
   // accepted products already belong to the explicitly carried transport
   // Retain newly acquired state/patch products without duplicating a resolver.
-  return finishCheckpoint(session,reader,{data,routes:census.routes,rebind,selected,root:null,oldAuthorities});
+  return finishCheckpoint(session,reader,{data,routes:currentMaskedRoutes(reader,census.routes,masked),physicalPaths,rebind,selected,root:null,oldAuthorities});
 }
 
 /** Exact already-consumed executing policy, for durable successor custody. */
@@ -656,7 +687,9 @@ export function checkpointRouteCensus({transition}) {
   const names=scientificRoutePaths(predecessor,[...reader.inventory.values()],genuine.candidate.manifest,
     genuine.candidate.certificate,genuine.candidate.selection);
 
-  const old=new Map(before.routes.map(p=>[p.path,p.tree]));
+  // The admitted candidate already refreshed any unconsumed masked logical
+  // routes. Preserve those current bindings if a new authority now reads them.
+  const old=new Map(after.routes.map(p=>[p.path,p.tree]));
   const routes=names.map(name=>({path:name,tree:old.has(name) && name!==PROGRAMME_POLICY
     ? old.get(name) : treeRoute(reader,name)}));
   demand(routes.every(validRoute), 'Unsupported scientific route entry');
@@ -993,7 +1026,8 @@ export function qualifyTransition({state,reader}) {
 
     const selected=readSelection(session,reader);
     supported(same(nativeBaseSelection(selected.selection),state.baseSelection), 'Selected native/source/domain/owner base changed');
-    supported(sameScientificRoutes(reader,baseProof.routes,session.executablePaths), 'Selected input or present/absent route changed');
+    const masked = maskedLogicalSources(state.certificate,baseProof.physicalPaths);
+    supported(sameScientificRoutes(reader,baseProof.routes,session.executablePaths,masked), 'Selected input or present/absent route changed');
     for (const role of ['base_manifest','owner_roster'])
       supported(same(selected.sidecar.logical_asset_map[role],baseProof.selected.sidecar.logical_asset_map[role]), 'Selected original manifest/owner alias changed');
     demand(same(selected.ledger.parent_inventory,state.ledger.parent_inventory), 'Complete original source/scope denominator changed');
@@ -1012,7 +1046,12 @@ export function qualifyTransition({state,reader}) {
     for (const entry of addedEntries) for (const row of authorities.get(entry.authority_sha256).patches.flatMap(p => p.rows))
       for (const run of row.runs) for (const old of state.patch.rows.find(p => p.y===row.y)?.runs??[])
         demand(run[1]<=old[0] || run[0]>=old[1], 'New native assignment overlaps a previously selected owner');
-    const proof={...baseProof,reader,state,nativeRows:new Map(baseProof.nativeRows),sourceTargets:new Map(baseProof.sourceTargets),nativeContext:null};
+    // Rebase only genuinely inert logical rows. Newly qualified authorities may
+    // consume that ordinary file; retain their physical paths so the exemption
+    // cannot survive into another transition. No archived census is rewritten.
+    const physicalPaths = new Set([...baseProof.physicalPaths,...[...reader.inventory.values()].map(p => p.path)]);
+    const proof={...baseProof,reader,state,routes:currentMaskedRoutes(reader,baseProof.routes,masked),physicalPaths,
+      nativeRows:new Map(baseProof.nativeRows),sourceTargets:new Map(baseProof.sourceTargets),nativeContext:null};
     // Projection authority is still the genuine baseline, while its operands
     // use this candidate's identical base routes. No SelectedSnapshot is forged.
     const operandState=newState(session,{...state,selected_commit:reader.version},{...proof});
@@ -1037,7 +1076,8 @@ export function qualifyTransition({state,reader}) {
     const {certificate,changedIds}=deriveCoordinateDelta({certificate:state.certificate,oldAdditions:state.additions,additions,selection:selected.selection});
     const candidate=newState(session,{...state,selected_commit:reader.version,selection:selected.selection,certificate,
       additions,ledger:selected.ledger,registry:selected.registry,patch:selected.patch},
-      {...operandProof,selected,oldAuthorities:authorities});
+      {...operandProof,selected,oldAuthorities:authorities,
+        physicalPaths:new Set([...physicalPaths,...[...reader.inventory.values()].map(p => p.path)])});
     const changed=new Set(changedIds);
     const oldNative=new Map(state.patch.rows.map(row => [row.y,row.runs])), newNative=new Map(selected.patch.rows.map(row => [row.y,row.runs]));
     const changedNativeRows=[...new Set([...oldNative.keys(),...newNative.keys()])].sort((a,b) => a-b)
