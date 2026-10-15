@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "preparation_allowance": {
+    "phaseBytes": 536870912,
+    "rssBytes": 536870912
+  },
+  "selector": {
+    "commit": "866c42b854910f17a80427dac19b2c850cd68093",
+    "path": "data/ownership-selection.json",
+    "mode": "100644",
+    "git_blob_oid": "61ec26cc66d9b80ce68107fae55d3aa056d52db3",
+    "bytes": 1572,
+    "sha256": "ec6f0ba88b2d0f66eaf66586a93200b3b4348e298ba6973943ccc2231b9fff94"
+  },
+  "effective_release_id": "geography:indonesia-mbd2145-native-followup-20261015",
+  "authorities": [
+    {
+      "rule_preimage": {
+        "commit": "0ead73dfbf9edbaa963a18ca593caeed408190f9",
+        "path": "coordination/engineering/indonesia-maluku-barat-daya-20261015/native2145-authority-001/original-rule-preimage.json",
+        "mode": "100644",
+        "bytes": 744,
+        "sha256": "60b0ad252c466c218c5e602ea83c1e631b2c87c672e77f1448284e6a5b7192c8",
+        "git_blob_oid": "544bc11e417fe659e272b7f2af93b683a4ca903e"
+      },
+      "source_authority": {
+        "commit": "0ead73dfbf9edbaa963a18ca593caeed408190f9",
+        "path": "coordination/engineering/indonesia-maluku-barat-daya-20261015/native2145-authority-001/authority-binding.json",
+        "mode": "100644",
+        "bytes": 747,
+        "sha256": "e7a73d29917720eebe5b3d6d6c03f1404a43f4658b50170c99e7153f0772cfa3",
+        "git_blob_oid": "46f9ba272225b99091b14b43730823f8c06f612d"
+      },
+      "ledger": {
+        "commit": "0ead73dfbf9edbaa963a18ca593caeed408190f9",
+        "path": "coordination/engineering/indonesia-maluku-barat-daya-20261015/native2145-authority-001/constructor-result.json",
+        "mode": "100644",
+        "bytes": 41309,
+        "sha256": "2673a393155b4e89498daa831b737fd9a0121569081a8b87b2c0c5d3434ed1ba",
+        "git_blob_oid": "bee97ba0b9baed5440cf00b87b5df509dc80dcba"
+      },
+      "native_patch": {
+        "bytes": 32351,
+        "commit": "ebbdc8c1f8b77457d34a03a0fe290e42cb9941cc",
+        "git_blob_oid": "fe13e1d35e144c6a88812c6839984a96b3b9d3a4",
+        "mode": "100644",
+        "path": "coordination/engineering/indonesia-maluku-barat-daya-20261015/native2145-input-001/native-patch.json",
+        "sha256": "e161a1029a1308df77c9001535be84212e2720dfac5da4621e6be5ff5a3c98cb"
+      }
+    }
+  ]
+}
