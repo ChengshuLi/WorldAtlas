@@ -47,19 +47,19 @@ test('every location has exactly all six hierarchy levels',()=>{
   assert.equal(london.properties.metadata.source_member_ids.length,33);
 });
 test('seed is idempotent and missing history stays missing',()=>{
-  seedDatabase(db); assert.ok(db.prepare('SELECT count(*) n FROM locations').get().n>20000);
-  for (const year of [-3000,-1,1,1444,2026]) assert.equal(snapshot(db,year).states.length,0);
-  assert.throws(()=>snapshot(db,0),/Year must/);
-});
-test('retired source history stays stored while active geography and snapshots exclude it',()=>{
   const retired=JSON.parse(fs.readFileSync('data/topology-report.json')).retired.find(r=>r.name==='Xianggang');assert.ok(retired);
   const active='atlas:territory:HKG';
+  importRecords(db,{states:[retired.id,active].map(location_id=>({location_id,valid_from:1900,valid_to:1901,owner:'Visibility fixture',source:'Preserved source-history visibility fixture'}))});
+  const stored=()=>db.prepare('SELECT * FROM states WHERE valid_from=1900 AND location_id IN (?,?) ORDER BY id').all(retired.id,active);
+  const original=stored();assert.equal(original.length,2);
+  seedDatabase(db); assert.ok(db.prepare('SELECT count(*) n FROM locations').get().n>20000);
+  assert.deepEqual(stored(),original,'the complete seed chain preserves imported active and retired history');
   assert.equal(db.prepare('SELECT active FROM locations WHERE id=?').get(retired.id).active,0);
   assert.equal(db.prepare('SELECT active FROM locations WHERE id=?').get(active).active,1);
-  importRecords(db,{states:[retired.id,active].map(location_id=>({location_id,valid_from:1900,valid_to:1901,owner:'Visibility fixture',source:'Preserved source-history visibility fixture'}))});
-  assert.equal(db.prepare('SELECT count(*) n FROM states WHERE valid_from=1900 AND location_id IN (?,?)').get(retired.id,active).n,2);
   const ids=new Set(geography(db).features.map(f=>f.id));assert.ok(!ids.has(retired.id));assert.ok(ids.has(active));
   const states=snapshot(db,1900).states;assert.ok(!states.some(s=>s.location_id===retired.id));assert.ok(states.some(s=>s.location_id===active&&s.owner==='Visibility fixture'));
+  for (const year of [-3000,-1,1,1444,2026]) assert.equal(snapshot(db,year).states.length,0);
+  assert.throws(()=>snapshot(db,0),/Year must/);
 });
 test('example intervals are opt-in and end-exclusive, including ownership changes',()=>{
   const owner=(year)=>snapshot(db,year,true).states.find(s=>s.location_id==='atlas:city:GBR-Greater London')?.owner;
