@@ -1,0 +1,132 @@
+{
+  "kind": "independent-additional-primary-custody-review",
+  "reviewer": "/root/consumer_adaptation",
+  "reviewed_utc": "2026-10-15T00:20:38.510112+00:00",
+  "outcome": "accepted-for-preservation-with-source-and-applicability-limits",
+  "borneo_inventory_sha256": "621b9aa3da3db00b583d82a816824f7c81699ba43c525174bef7a117edab92fe",
+  "timor_outcome_sha256": "ebb221bdeebee0551abd20db8660547d3e47a185e55103238983eada304ae779",
+  "c500_listed_files_verified": 8,
+  "new_original_count": 3,
+  "new_original_bytes": 1027899,
+  "observed_bindings": {
+    "kemhan_issuing_page": "https://www.kemhan.go.id/strahan/2022/09/01/perbatasan-wilayah-darat-indonesia-dengan-3-negara.html",
+    "kemhan_actual_img_src": "https://www.kemhan.go.id/strahan/wp-content/uploads/2022/09/BATAS-DARAT-INDONESIA.png",
+    "balibo_original_url": "https://bobonaro.gov.tl/municipality-post-administrative/bailbo/",
+    "balibo_original_sha256": "691343ee7ed9d37da49ceb7b1b7af60c1f2ac4b841ce0af5fd5b30a1ef46a04c",
+    "balibo_response_200_html": true,
+    "balibo_literal_sucos": [
+      "Balibo Vila",
+      "Batugade",
+      "Cowa",
+      "Leohito",
+      "Leolima",
+      "Sanirin"
+    ],
+    "fatumean_normalized_official_page_shortcode_link": "https://sestatal.gov.tl/wp-content/uploads/2015/11/0502_Fatumean.pdf",
+    "fatumean_locator_limit": "The observed official-page [fusion_imageframe] shortcode is a normalized readback, distinct from original HTTP bytes; no PDF body was acquired."
+  },
+  "kemhan_visual_observation": "National three-neighbour overview: RI–Malaysia, RI–PNG and RI–RDTL. RI–Malaysia panel states2,062km and generic UTM/WGS84. No C500/C600 labels, segment coordinates, sector survey epoch/zone/accuracy, agreed annex or exact-locus correspondence is supplied. Generic annotation is not imputed to missing survey evidence.",
+  "retained_file_hashes": [
+    {
+      "packet": "c500-annex-primary-001",
+      "path": "README.md",
+      "bytes": 4833,
+      "sha256": "b809dc1bd819c8ff876093d190eb1c4c1947a26f05c8c4b9c8aff765fc1809e1"
+    },
+    {
+      "packet": "c500-annex-primary-001",
+      "path": "kemhan-boundary-category-web-read.json",
+      "bytes": 7110,
+      "sha256": "b2fca57f37f2baa37ee1770354e00dca33df873bad07ac413d662d80cf1741ca"
+    },
+    {
+      "packet": "c500-annex-primary-001",
+      "path": "kemhan-land-boundaries-2022.html",
+      "bytes": 53691,
+      "sha256": "91c494ce1376b284caa750cb580e09f312270b99b3e915ac2451bdbcf238e98e"
+    },
+    {
+      "packet": "c500-annex-primary-001",
+      "path": "kemhan-land-boundaries-2022.png",
+      "bytes": 930404,
+      "sha256": "7179387488cb6a751e66b4fd78f06f7c3c493a99ad0334d33a539b3b21649335"
+    },
+    {
+      "packet": "c500-annex-primary-001",
+      "path": "kemhan-land-boundaries-web-read.json",
+      "bytes": 4929,
+      "sha256": "3894981ab90b319f5e386685fcf96265d6d2de1350d12e58a260bb1305b06fb6"
+    },
+    {
+      "packet": "c500-annex-primary-001",
+      "path": "kemhan-sector-search-web-read.json",
+      "bytes": 263,
+      "sha256": "0811eb67314244772a61077a55ff5b8ee311b8bce44b69ff5198a3f267b3c95f"
+    },
+    {
+      "packet": "c500-annex-primary-001",
+      "path": "new-public-routes-web-read.json",
+      "bytes": 531,
+      "sha256": "30b4808814f1659f4f2b032a565f292b9433421bb43858bdf290b58fefe4b585"
+    },
+    {
+      "packet": "c500-annex-primary-001",
+      "path": "payload-inventory.json",
+      "bytes": 2568,
+      "sha256": "621b9aa3da3db00b583d82a816824f7c81699ba43c525174bef7a117edab92fe"
+    },
+    {
+      "packet": "c500-annex-primary-001",
+      "path": "retained-announcement-inspection.json",
+      "bytes": 589,
+      "sha256": "5bc0a304c550efbec6b3f0713a7ee1ef4338d5b263a8893f5b8f87819edbc6f5"
+    },
+    {
+      "packet": "timor-png-next-primary-001",
+      "path": "balibo-official-headers.txt",
+      "bytes": 432,
+      "sha256": "8ba8e81c5dd337cadaf451a84fda707a5d3532fd027524a15538f0674b671db9"
+    },
+    {
+      "packet": "timor-png-next-primary-001",
+      "path": "balibo-official-original.html",
+      "bytes": 43804,
+      "sha256": "691343ee7ed9d37da49ceb7b1b7af60c1f2ac4b841ce0af5fd5b30a1ef46a04c"
+    },
+    {
+      "packet": "timor-png-next-primary-001",
+      "path": "fatumean-census2015-headers.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "packet": "timor-png-next-primary-001",
+      "path": "outcome.json",
+      "bytes": 5441,
+      "sha256": "ebb221bdeebee0551abd20db8660547d3e47a185e55103238983eada304ae779"
+    },
+    {
+      "packet": "timor-png-next-primary-001",
+      "path": "primary-web-readbacks.json",
+      "bytes": 26535,
+      "sha256": "b6ec568878a6e9a049ee5f87f0d3961837a36564dde323a280a9056a12c51b23"
+    }
+  ],
+  "private_path_findings": [],
+  "original_bodies_modified": false,
+  "new_fetches": 0,
+  "image_duplicates_created": 0,
+  "scientific_execution": false,
+  "UN_retry": false,
+  "held_cells": 27,
+  "qualified_cells": 0,
+  "accepted_cells": 0,
+  "limits": [
+    "No signed2019 C500–C600 MoU, annex map or marker schedule; sector-to-frozen-locus applicability remains unproved.",
+    "Balibo six-suco identity cross-reference supplies no boundary, datum, accuracy,2020 effectivity or source-stable-ID correspondence.",
+    "Fatumean actualPDF remains absent: prior web502 and ordinaryDNS exit6/emptyheaders/noPDF are acquisition failures, not map contents.",
+    "Complete Permendagri80/2018 map/text,2005AnnexB/2013addendum detailed line and competent FlyRiver agreed thalweg chart/datum remain missing.",
+    "All recorded route failures, prior missing attachment/link observations, and UN-denial/no-retry restrictions remain preserved. This review did not retry them or independently resolve their availability.",
+    "Hash/source custody and overview annotations do not certify international/legal boundaries, GPS/native centres, ownership or clearance. All27 cells remain held."
+  ]
+}

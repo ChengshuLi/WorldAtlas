@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- jQuery 3.5.1 -->
+<script src="/module/web/web/js/jquery.min.js"></script>
+
+<!-- Bootstrap 3.3.7 -->
+<link rel="stylesheet" href="/module/web/web/theme/default/bootstrap.min.css">
+<script src="/module/web/web/js/bootstrap.min.js"></script>
+
+<!-- FontAwesome 4.2 -->
+<link rel="stylesheet" href="/module/web/web/theme/default/font-awesome.min.css">
+
+<!-- jQuery UI -->
+<link rel="stylesheet" href="/module/web/web/theme/default/jquery-ui.css">
+<script src="/module/web/web/js/jquery-ui.js"></script>
+
+<!-- Moment JS -->
+<script src="/module/web/web/js/moment.min.js"></script>
+<script src="/module/web/web/js/moment-with-locales.min.js"></script>
+
+<!-- Owl Carousel 2.3.4 -->
+<link rel="stylesheet" href="/module/web/web/theme/default/owl.carousel.min.css">
+<script src="/module/web/web/js/owl.carousel.min.js"></script>
+
+<!-- Evo Calendar -->
+<link rel="stylesheet" href="/module/web/web/theme/default/evo-calendar.min.css">
+<script src="/module/web/web/js/evo-calendar.min.js"></script>
+
+<!-- Mark.js -->
+<script src="/module/web/web/js/jquery.mark.min.js"></script>
+
+<!-- Chart.js -->
+<script src="/module/web/web/js/chart.min.js"></script>
+
+<!-- Splide JS -->
+<link rel="stylesheet" href="/module/web/web/theme/default/splide.min.css">
+<script src="/module/web/web/js/splide.min.js"></script>
+
+
+<SCRIPT LANGUAGE="javascript" TYPE="text/javascript" SRC="https://sriaman.sarawak.gov.my/moonlight/js/min/moonlight.js"></SCRIPT><script src="https://sriaman.sarawak.gov.my/web/web/js/module.js"></script><link rel="stylesheet" type="text/css" href="https://sriaman.sarawak.gov.my/web/web/default/share.css" /><script type="text/javascript" language="javascript">
+/* All Javascript that need to print by PHP put here. Pure Javascript put in web/js/module.js */
+lbl_field_required='This field is compulsory.';/*For validate_form() function.*/
+lbl_ajax_error='Fail to load required records, please contact administrator if the problem is persistent.';/*For validate_form() function.*/
+</script>
+
+<meta name="description" content="Portal Rasmi Pentadbiran Bahagian Sri Aman<quillbot-extension-portal></quillbot-extension-portal>">
+<meta name="keywords" content="Portal Rasmi Pentadbiran Bahagian Sri Aman">
+
+<html>
+	<head>
+		<!-- <link rel="stylesheet" type="text/css" href="http://10.18.4.76/projects/dynamicweb/engine/v10/branches/module/web/web/theme/default/share.css"> -->
+		<link rel="SHORTCUT ICON" href="/web/attachment/show/?docid=TGllTzVNRjBHM1lpM1VMVU9EMEFzQT09OjodNvm7QfzJTK3eO_4dpM6T">
+		<title>
+			Peta Bahagian Sri Aman - Portal Rasmi Pentadbiran Bahagian Sri Aman		</title>
+	</head>
+	<body class="hold-transition" onLoad="if (window.runOnLoad){runOnLoad()}">
+		 
+  
+ <div id='divAjaxError' class='nowLoading' style="display:none" >
+	<table width=100% cellpadding=1 cellspacing=0 border=0>
+	<tr>
+		<td align="right"><img alt='icon' src='https://sriaman.sarawak.gov.my/k/warning.gif' border='0' style='vertical-align:middle;'  /></td>
+		<td><strong>AJAX Error</strong><br/>Sorry, failed to load required information. Please contact your system administrator.</td>
+		<td width=1% valign=top>
+			<a href="javascript:hideItSimple('divAjaxError')">
+				<img alt='icon' src='https://sriaman.sarawak.gov.my/k/close.png' border='0' style='vertical-align:middle;'  />			</a>
+		</td>
+	</tr>
+	<tr>
+		<td colspan=3 align=right valugb=bottom>
+			<a href="javascript:hideItSimple('divAjaxError')">Close</a>
+		</td>
+	</tr>
+	</table>
+</div>
+
+<!-- Ajax loader -->
+<div id='divLoading' class='nowLoading' style="display:none" >
+	<div class="ajaxDivLoader">
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+	</div>
+</div>
+
+<style>
+	.nowLoading {
+		color: #333;
+		display: none;
+		position: absolute;
+		top: 30%;
+		left: 35%;
+		width: 240px;
+		height: 95px;
+		padding: 10px;
+		border: 1px solid #D1CAA3;
+		background-color: #F9F2AA;
+		text-align: center;
+		overflow: auto;
+		z-index:8080;
+		filter: progid:DXImageTransform.Microsoft.Shadow(color=gray,direction=135,Strength=5), alpha(opacity=90);
+		-moz-opacity: .09;
+		opacity: .90;
+	}
+
+    .ajaxDivLoader{
+        position: relative;
+        z-index: 9999;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        /* background: rgba(0, 0, 0, 0.3); */
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+        justify-content: center;
+		height:350px;
+    }
+
+    .ajaxDivLoader span {
+        display: block;
+        width: 15px;
+        height: 30px;
+        margin-right: 10px;
+        border-radius: 5px;
+        animation-name: redirect-ajaxDivLoader;
+        animation-duration: 0.4s;
+        animation-direction: alternate;
+        animation-iteration-count: infinite;
+        animation-timing-function: cubic-bezier(.19, .97, 1, 1);
+    }
+
+            .ajaxDivLoader span:nth-of-type(1) {
+            background: #9ec8f4;
+        }
+        .ajaxDivLoader span:nth-of-type(2) {
+            animation-delay: 0.2s;
+            background: #88beee;
+        }
+        .ajaxDivLoader span:nth-of-type(3) {
+            animation-delay: 0.3s;
+            background: #6ba3fb;
+        }
+        .ajaxDivLoader span:nth-of-type(4) {
+            animation-delay: 0.4s;
+            background: #3573ea;
+        }
+        .ajaxDivLoader span:nth-of-type(5) {
+            animation-delay: 0.5s;
+            background: #0048d0;
+        }
+        .ajaxDivLoader span:nth-of-type(6) {
+            animation-delay: 0.6s;
+            background: #0003c8;
+        }
+
+    
+    /* .ajaxDivLoader span:nth-of-type(1) {
+        background: #fba2a2;
+    }
+    .ajaxDivLoader span:nth-of-type(2) {
+        animation-delay: 0.2s;
+        background: #ff7979;
+    }
+    .ajaxDivLoader span:nth-of-type(3) {
+        animation-delay: 0.3s;
+        background:#ed6464;
+    }
+    .ajaxDivLoader span:nth-of-type(4) {
+        animation-delay: 0.4s;
+        background:#ed4343;
+    }
+    .ajaxDivLoader span:nth-of-type(5) {
+        animation-delay: 0.5s;
+        background:#e92323;
+    }
+    .ajaxDivLoader span:nth-of-type(6) {
+        animation-delay: 0.6s;
+        background:#eb0000;
+    } */
+
+    @keyframes redirect-ajaxDivLoader {
+        0% {
+            height: 30px;
+        }
+        100% {
+            height: 150px;
+        }
+    }
+</style>
+
+<!-- Full page loader -->
+<div class="full-page-loader" style="display:none;">
+    <div class="loader">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</div>
+
+<style>
+    .full-page-loader .loader{
+        position: fixed;
+        z-index: 9999;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: rgba(0, 0, 0, 0.3);
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .full-page-loader .loader span {
+        display: block;
+        width: 15px;
+        height: 30px;
+        margin-right: 10px;
+        border-radius: 5px;
+        animation-name: redirect-loader;
+        animation-duration: 0.4s;
+        animation-direction: alternate;
+        animation-iteration-count: infinite;
+        animation-timing-function: cubic-bezier(.19, .97, 1, 1);
+    }
+    
+            .full-page-loader .loader span:nth-of-type(1) {
+            background: #9ec8f4;
+        }
+        .full-page-loader .loader span:nth-of-type(2) {
+            animation-delay: 0.2s;
+            background: #88beee;
+        }
+        .full-page-loader .loader span:nth-of-type(3) {
+            animation-delay: 0.3s;
+            background: #6ba3fb;
+        }
+        .full-page-loader .loader span:nth-of-type(4) {
+            animation-delay: 0.4s;
+            background: #3573ea;
+        }
+        .full-page-loader .loader span:nth-of-type(5) {
+            animation-delay: 0.5s;
+            background: #0048d0;
+        }
+        .full-page-loader .loader span:nth-of-type(6) {
+            animation-delay: 0.6s;
+            background: #0003c8;
+        }
+
+    
+    /* .full-page-loader .loader span:nth-of-type(1) {
+        background: #fba2a2;
+    }
+    .full-page-loader .loader span:nth-of-type(2) {
+        animation-delay: 0.2s;
+        background: #ff7979;
+    }
+    .full-page-loader .loader span:nth-of-type(3) {
+        animation-delay: 0.3s;
+        background:#ed6464;
+    }
+    .full-page-loader .loader span:nth-of-type(4) {
+        animation-delay: 0.4s;
+        background:#ed4343;
+    }
+    .full-page-loader .loader span:nth-of-type(5) {
+        animation-delay: 0.5s;
+        background:#e92323;
+    }
+    .full-page-loader .loader span:nth-of-type(6) {
+        animation-delay: 0.6s;
+        background:#eb0000;
+    } */
+
+    @keyframes redirect-loader {
+        0% {
+            height: 30px;
+        }
+        100% {
+            height: 150px;
+        }
+    }
+</style>		
+		<div class="wrapper">
+			
+            			
+			<div class="content-wrapper">
+				
+
+
+<div class="template_theme_detect" data-template="template1_">
+	<h1 style="display: none;"></h1>
+	<form splwpk-feedback-form = "splwpk-feedback-form"><input type='hidden' name='moonlight_token_71460' value='189Lzo'/></form>
+	<a href="/web/subpage/staffcontact_view/85,114,99,218,219" style="display:none;" splwpk-publicising = "splwpk-publicising" timestamp="2026-10-15 08:10:21" ></a>
+
+	<!-- The Top Header and Menu -->
+
+<div id="template1_header">	
+	<header>
+		<!-- Top Header contains login register search and light dark mode -->
+		<div class="template1-header">
+			<div class="container">
+				<div id="header-wrapper" style="z-index: 1;position: relative;">
+
+					<!-- <div class="register-box">
+						<span class="swkid"><img src="/module/web/web/theme/default/res/template1/sarawakid.png">Sarawak ID</span><a class="login-btn" href="https://sarawakid.sarawak.gov.my/web/ssov1/login/">Login</a>|<a class="register-btn" href="https://sarawakid.sarawak.gov.my/web/ssov1/signup/">Register</a></div>
+					</div> -->
+						
+					<div class="second-box" style="float:left;" splwpk-multilang="splwpk-multilang" splwpk-w3c="splwpk-w3c">	
+						<div class="login-button" style="float: left; font-size:12px;">	
+														
+						</div>	
+					
+						<select id="lang" name="lang" onchange="javascript:window.location.href = '/web/share/set_lang/'+this.value;">
+														<option value="en"
+														>
+							EN							</option>
+														<option value="bm"
+							 selected 							>
+							BM							</option>
+													</select>
+						<!-- Language option End -->
+
+						<!-- Light Dark Mode Switch -->	
+						<label class="switch" id="template1_switch">
+							<input class="toggle-me" type="checkbox">
+							<span class="slider round"></span>
+						</label>
+						<!-- Light Dark Mode Switch End -->	
+					
+						<!-- Search Form -->
+						<div class="forms-content">
+							<!--form class="is-search-form " action="#" method="get" role="search"-->
+							<form  splwpk-search-function="splwpk-search-function" splwpk-advanced-search-function="splwpk-advanced-search-function" class="is-search-form " id="searchform" action="/web/subpage/search_result_gs/" method="POST" role="search"><input type='hidden' name='moonlight_token_71460' value='189Lzo'/>
+								<input type="search" name="search_value" value="" class="is-search-input fill_inited" placeholder="Type To Search" autocomplete="off">
+								<button type="submit" class="is-search-submit"><span class="glyphicon glyphicon-search"></span></button>
+							</form>
+						</div>
+						<!-- Search Form End -->
+				
+					
+					</div>
+
+					<!--div id="swkid_plugin" style="float:left; margin-left:15px;"></div-->
+										<div id="spass_plugin" style="float:left;  margin-left:15px;"></div>
+					
+				</div>
+			</div>
+		</div>
+		<!-- Top Header contains login register search and light dark mode End -->
+		
+		
+		<!-- Main Menu -->
+		<div class="template1-secondary-header">
+			<div class="container">
+				<div class="col-md-3">
+					<img alt="image" class="normal logo" style="max-width:200px; margin-top:15px; margin-bottom:15px;" src="/web/attachment/show/?docid=TFhSMzZpV2tOOGZ5ZFdkczlWVE04QT09Ojq81vp39XQXRTofn9NCI5hi">
+					<img alt="image" class="dark logo" style="max-width:200px; margin-top:15px; margin-bottom:15px;" src="/web/attachment/show/?docid=cjJNSlgvRUs5eGlGcis5NHBXYjVhdz09OjqH62lThmoFn6_roBk_UqRh">
+				</div>
+				
+				<div class="col-md-9">				
+					<nav class="navbar navbar-expand main-nav">
+					
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon">☰</span>
+						</button>
+						
+						
+						<div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">					
+						
+						<!-- 29.9.2020 Close Button -->
+						<button class="closenav navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon">X</span>
+						</button>	
+						<!-- 29.9.2020 End Close Button -->						
+						
+							<ul class="navbar-nav align-self-end" id="primary-nav">
+								<li class="nav-item dropdown menu-0"><a class="nav-link" target="_self" href="https://sriaman.sarawak.gov.my/web/home/index/" splwpk-news=splwpk-news timestamp='2026-10-15 08:10:21' >Laman Utama</a></li><li class="nav-item dropdown menu-1"><a class="nav-link dropdown-toggle" data-toggle="dropdown"  timestamp='2026-10-15 08:10:21' >Kenali Sri Aman<span class="caret"></span></a><ul class="dropdown-menu drop-1"><li><a target="_self" href="https://sriaman.sarawak.gov.my/web/subpage/webpage_view/142" splwpk-about-us=splwpk-about-us timestamp='2026-10-15 08:10:21' >Latar Belakang</a></li><li><a target="_self" href="https://sriaman.sarawak.gov.my/web/subpage/webpage_view/187"  timestamp='2026-10-15 08:10:21' >Sejarah</a></li><li><a target="_self" href="https://sriaman.sarawak.gov.my/web/subpage/webpage_view/137"  timestamp='2026-10-15 08:10:21' >Peta Bahagian</a></li><li><a target="_self" href="https://sriaman.sarawak.gov.my/web/subpage/webpage_view/135"  timestamp='2026-10-15 08:10:21' >Demografi Bahagian</a></li><li><a target="_self" href="https://sriaman.sarawak.gov.my/web/subpage/webpage_view/136"  timestamp='2026-10-15 08:10:21' >Pentadbiran Politik</a></li><li><a target="_self" href="https://sriaman.sarawak.gov.my/web/subpage/webpage_view/149"  timestamp='2026-10-15 08:10:21' >Tarikan Pelancongan</a></li><li><a target="_self" href="https://sriaman.sarawak.gov.my/web/subpage/webpage_view/186"  timestamp='2026-10-15 08:10:21' >Tempat Penginapan</a></li></ul></li><li class="nav-item dropdown menu-2"><a class="nav-link dropdown-toggle" data-toggle="dropdown"  timestamp='2026-10-15 08:10:21' >Pentadbiran Bahagian<span class="caret"></span></a><ul class="dropdown-menu drop-1"><li class="dropdown-submenu sub-2 "><a class="submenu">Pejabat Residen <span class="caret"></span></a><ul class="dropdown-menu drop-2"><li><a target="_self" href="https://sriaman.sarawak.gov.my/web/subpage/webpage_view/125" splwpk-about-us=splwpk-about-us timestamp='2026-10-15 08:10:21' >Perutusan Residen</a></li><li><a target="_self" href="https://sriaman.sarawak.gov.my/web/subpage/webpage_view/134"  timestamp='2026-10-15 08:10:21' >Visi dan Misi (Rangka Kerja Strategik)</a></li><li><a target="_self" href="https://sriaman.sarawak.gov.my/web/subpage/webpage_view/185"  timestamp='2026-10-15 08:10:21' >R&amp;DO Scorecard</a></li><li><a target="_self" href="https://sriaman.sarawak.gov.my/web/subpage/webpage_view/145"  timestamp='2026-10-15 08:10:21' >Peranan dan Fungsi Pentadbiran Bahagian</a></li><li><a target="_self" href="https://sriaman.sarawak.gov.my/web/subpage/webpage_view/156"  timestamp='2026-10-15 08:10:21' >Carta Organisasi</a></li><li><a target="_self" href="https://sriaman.sarawak.gov.my/web/subpage/webpage_view/184"  timestamp='2026-10-15 08:10:21' >Pencapaian Tahunan</a></li></ul></li><li><a target="_self" href="https://sriaman.sarawak.gov.my/web/home/index/sriamando"  timestamp='2026-10-15 08:10:21' >Pejabat Daerah     Sri Aman</a></li><li><a target="_self" href="https://sriaman.sarawak.gov.my/web/home/index/lubokantudo"  timestamp='2026-10-15 08:10:21' >Pejabat Daerah Lubok Antu  </a></li><li><a target="_self" href="https://sriaman.sarawak.gov.my/web/home/index/pantudo"  timestamp='2026-10-15 08:10:21' >Pejabat Daerah Pantu     </a></li><li><a target="_self" href="https://sriaman.sarawak.gov.my/web/home/index/linggado"  timestamp='2026-10-15 08:10:21' >Pejabat Daerah Lingga         </a></li></ul></li><li class="nav-item dropdown menu-3"><a class="nav-link dropdown-toggle" data-toggle="dropdown"  timestamp='2026-10-15 08:10:21' >Perkhidmatan Kami<span class="caret"></span></a><ul class="dropdown-menu drop-1"><li class="dropdown-submenu sub-2 "><a class="submenu">Pejabat Residen<span class="caret"></span></a><ul class="dropdown-menu drop-2"><li><a target="_self" href="https://sriaman.sarawak.gov.my/web/subpage/webpage_view/140"  timestamp='2026-10-15 08:10:21' >Lesen Sabung Ayam</a></li><li><a target="_self" href="https://sriaman.sarawak.gov.my/web/subpage/webpage_view/141"  timestamp='2026-10-15 08:10:21' >Lesen Pungutan Awam</a></li><li><a target="_self" href="https://sriaman.sarawak.gov.my/web/subpage/webpage_view/138"  timestamp='2026-10-15 08:10:21' >Lesen Perkahwinan Khas Bukan Islam</a></li></ul></li><li class="dropdown-submenu sub-2 "><a class="submenu">Pejabat Daerah <span class="caret"></span></a><ul class="dropdown-menu drop-2"><li><a target="_self" href="https://sriaman.sarawak.gov.my/web/subpage/webpage_view/116"  timestamp='2026-10-15 08:10:21' >Probet</a></li><li><a target="_self" href="https://sriaman.sarawak.gov.my/web/subpage/webpage_view/21/sriamando"  timestamp='2026-10-15 08:10:21' >Proses Pendaftaran Perniagaan</a></li><li><a target="_self" href="https://sriaman.sarawak.gov.my/web/subpage/webpage_view/17/sriamando"  timestamp='2026-10-15 08:10:21' >Pendaftaran Anak Angkat</a></li><li><a target="_self" href="https://ekasih.icu.gov.my/ekasih/Semakan/Pages/CarianAwam.aspx"  timestamp='2026-10-15 08:10:21' >Semakan Ekasih</a></li></ul></li><li><a target="_self" href="https://sriaman.sarawak.gov.my/web/subpage/webpage_view/233" splwpk-client-charter=splwpk-client-charter timestamp='2026-10-15 08:10:21' >Piagam Pelanggan</a></li><li><a target="_self" href="https://sriaman.sarawak.gov.my/web/subpage/client_charter_list/" splwpk-client-charter=splwpk-client-charter timestamp='2026-10-15 08:10:21' >Pencapaian Piagam Pelanggan</a></li><li><a target="_self" href="https://sriaman.sarawak.gov.my/web/subpage/service_statistic_list"  timestamp='2026-10-15 08:10:21' >Transaksi Talian Statistik</a></li><li><a target="_self" href="https://talikhidmat.sarawak.gov.my/talikhidmat/web/home/index/"  timestamp='2026-10-15 08:10:21' >Talikhidmat</a></li><li><a target="_self" href="https://erecruitment.sarawak.gov.my" splwpk-online-services=splwpk-online-services timestamp='2026-10-15 08:10:21' >Erecruitment</a></li><li><a target="_self" href="http://sspi2.imi.gov.my/"  timestamp='2026-10-15 08:10:21' >Semakan Imigresen </a></li><li><a target="_self" href="https://sriaman.sarawak.gov.my/web/subpage/webpage_list/1209" splwpk-procurement=splwpk-procurement timestamp='2026-10-15 08:10:21' >Tender</a></li></ul></li><li class="nav-item dropdown menu-4"><a class="nav-link dropdown-toggle" data-toggle="dropdown" splwpk-contact-details=splwpk-contact-details timestamp='2026-10-15 08:10:21' >Hubungi Kami<span class="caret"></span></a><ul class="dropdown-menu drop-1"><li><a target="_self" href="https://sriaman.sarawak.gov.my/web/subpage/webpage_view/132"  timestamp='2026-10-15 08:10:21' >Alamat</a></li><li class="dropdown-submenu sub-2 "><a class="submenu">Direktori Staff<span class="caret"></span></a><ul class="dropdown-menu drop-2"><li><a target="_self" href="https://sriaman.sarawak.gov.my/web/subpage/staffcontact_view/85"  timestamp='2026-10-15 08:10:21' >Pejabat Residen Sri Aman</a></li><li><a target="_self" href="https://sriaman.sarawak.gov.my/web/subpage/staffcontact_view/114"  timestamp='2026-10-15 08:10:21' >Pejabat Daerah Sri Aman</a></li><li><a target="_self" href="https://sriaman.sarawak.gov.my/web/subpage/staffcontact_view/99"  timestamp='2026-10-15 08:10:21' >Pejabat Daerah Lubok Antu</a></li><li><a target="_self" href="https://sriaman.sarawak.gov.my/web/subpage/staffcontact_view/219"  timestamp='2026-10-15 08:10:21' >Pejabat Daerah Pantu</a></li><li><a target="_self" href="https://sriaman.sarawak.gov.my/web/subpage/staffcontact_view/218"  timestamp='2026-10-15 08:10:21' >Pejabat Daerah Lingga</a></li></ul></li><li><a target="_self" href="https://sriaman.sarawak.gov.my/web/subpage/faq_view/" splwpk-faq=splwpk-faq timestamp='2026-10-15 08:10:21' >FAQs</a></li><li><a target="_self" href="https://sriaman.sarawak.gov.my/web/subpage/webpage_view/226"  timestamp='2026-10-15 08:10:21' >Temenggong</a></li></ul></li><li class="nav-item dropdown menu-5"><a class="nav-link dropdown-toggle" data-toggle="dropdown"  timestamp='2026-10-15 08:10:21' >Galeri<span class="caret"></span></a><ul class="dropdown-menu drop-1"><li><a target="_self" href="https://sriaman.sarawak.gov.my/web/subpage/webpage_view/129"  timestamp='2026-10-15 08:10:21' >Data Terbuka</a></li><li><a target="_self" href="https://sriaman.sarawak.gov.my/web/subpage/video_list"  timestamp='2026-10-15 08:10:21' >Galeri Video</a></li><li><a target="_self" href="https://sriaman.sarawak.gov.my/web/subpage/photo_gallery_list"  timestamp='2026-10-15 08:10:21' >Galeri Foto</a></li><li><a target="_self" href="https://sriaman.sarawak.gov.my/web/subpage/webpage_view/150" splwpk-publication=splwpk-publication timestamp='2026-10-15 08:10:21' >Penerbitan</a></li><li><a target="_self" href="https://sriaman.sarawak.gov.my/web/subpage/event_list/" splwpk-electronic-archive=splwpk-electronic-archive timestamp='2026-10-15 08:10:21' >Acara</a></li></ul></li><li class="nav-item dropdown menu-6"><a class="nav-link" target="_self" href="https://sriaman.sarawak.gov.my/web/subpage/download_list/"  timestamp='2026-10-15 08:10:21' >Muat Turun</a></li><li class="nav-item dropdown menu-7"><a class="nav-link" target="_self" href=""  timestamp='2026-10-15 08:10:21' ></a></li>		
+							</ul>
+						</div>
+					</nav>	
+				</div>
+			</div>
+		</div>
+	</header>
+	
+</div>
+</div>
+	
+<style>
+	#template1_switch{
+		margin: 5px 10px;
+	}
+
+	#template1_header select#lang{
+		margin-top:3px;
+	}
+
+	#template1_header #swkid_plugin{
+		position: relative;
+		z-index: 1000 !important;
+	}
+
+	#template1_header #swkid_plugin.before-login{
+		margin-top:3px;
+	}
+
+	#template1_header .login-button{
+		margin-top:3px;
+	}
+
+	.seg_icon {
+	    width: auto;
+	    height: 32px;
+	    width: 32px;
+	}
+	
+	@media (max-width: 991px) {
+		#template1_header #navbarNavDropdown.collapse.in{
+			z-index:1;
+		}
+		
+			}
+
+	@media (max-width: 896px) {
+
+			/* #template1_header .second-box{
+			margin-top: 10px;
+		} */
+	
+		#template1_header .login-button button{
+			margin: auto;
+		}
+
+		#template1_header .register-box{
+			margin-left: 15px;
+		}
+	}
+
+	@media (max-width: 768px) {
+		#template1_header .switch{
+			width:65px;
+		
+		}
+
+		#template1_header .slider:before{
+			bottom:5px;
+		}
+
+		.template1-secondary-header button.navbar-toggler{
+			margin-top: 150px;
+		}
+
+		#template1_header .second-box{
+			width: 100%;
+		}
+
+		#template1_header #swkid_plugin.before-login{
+			margin-top:15px;
+		}
+
+		#template1_header #swkid_plugin.after-login div{
+			justify-content: end;
+			width: 100%;
+		}
+
+		#template1_header #swkid_plugin.after-login{
+			/* z-index: 1000 !important; */
+			position: relative;
+			float: unset !important;
+			top: -69px;
+		}
+
+			}
+
+	
+	@media (max-width: 575px) {
+		#template1_header #swkid_plugin.before-login .swkid-wrapper{
+			padding: 0;
+		}
+
+		#template1_header #swkid_plugin.before-login .swkid-hidden-xs{
+			display: flex !important;
+		}
+	}
+</style>
+
+<script src="https://sarawakid.sarawak.gov.my/web/share/swkid_plugin/?lang=en"></script> 
+	
+<script type="text/javascript">
+	$(function() {
+		$('#primary-nav').moreMenu();
+
+		$('.submenu').click(function() { // when a .dropdow-submenu .submenu is clicked
+			// $('.submenu').not(this).parent().removeClass('active')
+			$(this).parent().toggleClass('active')
+		})
+	});
+
+	swkid_sso_init({ 
+	
+		client_id:'sriaman_dweb10_web',
+		// state:'',
+		state:'305401792023021',
+		response_type:'code',
+		redirect_uri:'https://sriaman.sarawak.gov.my/web/home/index/',
+		logout_redirect_uri:'https://sriaman.sarawak.gov.my/web/home/member_logout/',
+		logout_uri:'https://sriaman.sarawak.gov.my/web/home/index/',
+		overwrite_login_function:'',		
+		// style:'icon-text-old',
+		// style:'icon-only',
+		// style:'text-only',
+		// style:'icon-full-text',
+		style:'icon-text',
+		// style:'logo-full-text',
+		// profile_listing_style:'simple',
+		//profile_listing_style:'details',
+		profile_listing_style:'seg',
+		myworkspace_newtab:'off',
+		payment_newtab:'off',
+		// profile_listing_email:'on',
+		// profile_listing_email:'off',
+		icon_width:'35',
+		position:'top-right',
+		misc_param:'test12344123!)@))%(!&%)(*$#)^Y%)!($&)!@(#*)!@&)%!<>?M}{:||test12344123test12344123test12344123test12344123test12344123test12344123test12344123test12344123test12344123test12344123test12344123test12344123test12344123test12344123test12344123test12344123test12344123test12344123test12344123test12344123test12344123test12344123test12344123',
+		// hide_header:'on',
+		// hide_login_extra_link:'on',
+		permission:'on',
+		// sub_login_app_name:'Testing APP',
+		login_method:'swkid_login',
+		// login_method:'swknet_login',
+		force_login_btn:'off',
+		servicelisting_uri: "https://sriaman.sarawak.gov.my/web/subpage/display_nature_list/"
+	});
+
+	function swkid_callback(swkid_response){
+		var short_name = swkid_response['usr_short_name'];
+		var login_by = swkid_response['login_by'];
+		var swkid_login_status = swkid_response['swkid_login_status'];
+		
+		if(swkid_login_status=='before_swkid_login'){
+			/*Do your thing when Sarawak ID is not login, in this case, this function will force logout your website*/
+			// alert('walao, belum login');
+
+			$('#swkid_plugin').addClass('before-login');
+			$('#swkid_plugin').removeClass('after-login');
+		}else{
+			/*Do your thing when Sarawak ID is login, in this case do nothing since your website already login*/
+			// alert('walao, dah login');
+			$('#swkid_plugin').addClass('after-login');
+			$('#swkid_plugin').removeClass('before-login');
+		}
+	}
+</script>
+<div id="top" class="thetop">
+	<div class="container" style="width:100%; padding:0;">
+			<div class="">
+																									<img alt="" class="header-image" src="/web/attachment/show/?docid=RC9sMjhZVlBNNWQxWlo4Zkw5K2NsQT09Ojp3XhBimI9HWJ7gRRKyY3SJ">
+																										
+			
+							<div class="container">
+					<div class="top-page">
+						<div class="page_title">
+							<h2>Peta Bahagian Sri Aman</h2>
+						</div>
+					</div>
+				</div>
+					</div>
+	</div>
+</div>
+
+<div class="template_theme_detect" data-template="template_subpage_">
+<div class="template_subpage_view" id="subpage_webpage_view">
+	<div class="adicontainer">
+		
+		<div class="pageheader">
+			<div class="adirow">
+				<div class="adicol-1">
+
+				</div>
+			</div>
+		</div>
+		
+		<input type="hidden" class="text" name="id" id="id" value="3" >		
+		<div class="container">
+			&nbsp;
+			<div class="section1">
+				<!-- <div class="adirow" style="justify-content: end;">
+					<div class="adicol-12">
+						<div class="section-content list-content-back">
+													<a href="https://sriaman.sarawak.gov.my/web/subpage/webpage_list/" class="back-to-listing"><< Back to Listing</a>
+												</div>
+					</div>
+				</div> -->
+				<div class="list-title">
+													<div class="adicol-1">
+									<div class="section-content box">
+										<div class="list-title"><h2 >Peta Bahagian Sri Aman</h2></div>
+										<!-- <div class="list-sub" style="margin-top:50px;"><h5>15 Jan 2018</h5></div> -->
+										<br>
+										<div class="list-content" style="overflow:auto;"><p style="text-align: center;"><img alt="" src="https://sriaman.sarawak.gov.my/admin/file_manager/download/?id=525" style="width: 800px; height: 566px;" /></p>
+</div>
+									</div>
+								</div>
+									</div>
+			</div>
+			&nbsp;
+		</div>
+	</div>
+</div>
+</div>	
+<div class="template_theme_detect" data-template="template_subpage_">	
+	<div id="template_subpage_useful_link" class="all-logos grey quicks row all-small">
+			
+			<div class="container small-bottom">
+									<div class="col-md-12">			
+						<h3 class="subtitle">Pautan Berguna</h3>
+					</div>
+							</div>	
+			
+			<div class="col-md-12 align-center bg">			
+				
+				<div class="container small-bottom">
+				
+					<div class="subpage_myCarousel5 carousel carousel-fade carousel-showothers slide" id="subpage-useful-link-carousel-tilenav5" data-interval="false">
+						
+						<div class="carousel-inner">
+																								<div class="item active">
+																		<a class="uqlinks" href="https://www.malaysia.gov.my/" target="_blank">
+											<div class="qicons">
+																									<img alt="" src="/web/attachment/show/?docid=VUVqTjVVTzVQVVd3czZXSGV5Z3FzZz09OjrS_hSIqqF4bCMrjMjYqY2c">
+																							</div>
+										</a>
+									</div>
+																								<div class="item">
+																		<a class="uqlinks" href="https://www.sarawak.gov.my/" target="_blank">
+											<div class="qicons">
+																									<img alt="" src="/web/attachment/show/?docid=S29EdjRhQ1RhYVBRR0Zmc1FDMWg1QT09OjpnRvrxElrZFpiXz59U1SkA">
+																							</div>
+										</a>
+									</div>
+																								<div class="item">
+																		<a class="uqlinks" href="https://cm.sarawak.gov.my/" target="_blank">
+											<div class="qicons">
+																									<img alt="" src="/web/attachment/show/?docid=cnRIVUFXN0dYZ2c0MDJzWGYxVHVYQT09OjoRmDhn4nISPZQLdfffjDQG">
+																							</div>
+										</a>
+									</div>
+																								<div class="item">
+																		<a class="uqlinks" href="https://ss.sarawak.gov.my/" target="_blank">
+											<div class="qicons">
+																									<img alt="" src="/web/attachment/show/?docid=UVN0Rkl4Y1ZtODlkcUZmUldDMVpIUT09OjruceGmWOJdyY8FS6agDOYO">
+																							</div>
+										</a>
+									</div>
+																								<div class="item">
+																		<a class="uqlinks" href="https://data.sarawak.gov.my/" target="_blank">
+											<div class="qicons">
+																									<img alt="" src="/web/attachment/show/?docid=dW5vT0xzNDN5eEg1NlR3WEc3SlZMZz09OjrRpUkh4lQpcW3oyz50IURK">
+																							</div>
+										</a>
+									</div>
+																								<div class="item">
+																		<a class="uqlinks" href="https://talikhidmat.sarawak.gov.my/talikhidmat/web/home/index/" target="_blank">
+											<div class="qicons">
+																									<img alt="" src="/module/admin/web/theme/default/res/default_icons/talikhidmat.png">
+																							</div>
+										</a>
+									</div>
+																								<div class="item">
+																		<a class="uqlinks" href="https://erecruitment.sarawak.gov.my" target="_blank">
+											<div class="qicons">
+																									<img alt="" src="/module/admin/web/theme/default/res/default_icons/website.png">
+																							</div>
+										</a>
+									</div>
+																								<div class="item">
+																		<a class="uqlinks" href="https://ekasih.icu.gov.my/Pages/Default.aspx" target="_blank">
+											<div class="qicons">
+																									<img alt="" src="/module/admin/web/theme/default/res/default_icons/website.png">
+																							</div>
+										</a>
+									</div>
+																								<div class="item">
+																		<a class="uqlinks" href="https://fim.sarawak.gov.my/login.php?redirect=%2Fadmin%2F" target="_blank">
+											<div class="qicons">
+																									<img alt="" src="/module/admin/web/theme/default/res/default_icons/website.png">
+																							</div>
+										</a>
+									</div>
+																								<div class="item">
+																		<a class="uqlinks" href="https://erndo2.sarawak.gov.my/erndo/" target="_blank">
+											<div class="qicons">
+																									<img alt="" src="/module/admin/web/theme/default/res/default_icons/website.png">
+																							</div>
+										</a>
+									</div>
+													</div>
+						
+							<a class="left carousel-control" href="#subpage-useful-link-carousel-tilenav5" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+							<a class="right carousel-control" href="#subpage-useful-link-carousel-tilenav5" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
+					</div>	
+
+				</div>
+
+			</div>
+	</div>
+</div>
+
+<script>
+	var v_id = '5';
+	var slider_speed = ('5' * 1000);
+	$('.subpage_myCarousel' + v_id).carousel({
+		interval: slider_speed
+	});
+
+	var showothers_item = '.subpage_myCarousel' + v_id + '.carousel-showothers .item';
+	$(showothers_item).each(function(){
+		var itemToClone = $(this);
+
+		for (var i=1;i<4;i++) { /* for the 4 in a row function */
+		itemToClone = itemToClone.next();
+
+		// wrap around if at end of item collection
+		if (!itemToClone.length) {
+			itemToClone = $(this).siblings(':first');
+		}
+
+		// grab item, clone, add marker class, add to collection
+		itemToClone.children(':first-child').clone()
+			.addClass("cloneditem-"+(i))
+			.appendTo($(this));
+		}
+	});
+
+</script>
+
+
+<style>
+	#template5_footer footer{
+		background: url(/module/web/web/theme/default/res/template5/footer-bg.jpg) no-repeat left center;
+		padding: 20px 0;
+		width: 100%;
+		background-size: cover;
+	}
+</style>	
+
+<div class="template_theme_detect" data-template="template5_">	
+<div id="template5_footer">
+	<footer>
+		<div class="row small-top-bottom">
+			<div class="container">
+				<div class="col-md-4 small-left-right" style="color:white;">
+					<p class="cp">
+						<p>HAKCIPTA TERPELIHARA &copy; 2026</p>
+
+<p>Pentadbiran Bahagian Sri Aman<quillbot-extension-portal></quillbot-extension-portal></p>
+					</p>
+					<p >
+					Last Updated On 05 Oct 2026					</p>
+					
+					<div class="finfo">
+						MASA OPERASI :<br />
+Isnin hingga Khamis<br />
+8:00am to 1:00pm<br />
+2:00pm to 5:00pm<br />
+<br />
+Jumaat<br />
+8:00am to 11:45am<br />
+2:15pm to 5:00pm<br />
+<br />
+Sabtu, Ahad dan Cuti Umum<br />
+Pejabat ditutup<quillbot-extension-portal></quillbot-extension-portal>					</div>
+				</div>
+				
+								
+				<div class="col-md-4 small-left-right links">
+					<div class="row footer-logo-row">
+						<div class="all-logo">
+								<a href="https://premier.sarawak.gov.my" target="_blank">
+									<img alt="image" src="/module/web/web/theme/default/res/default_icons/cm_default.png">
+								</a>		
+						</div>	
+						<div class="all-logo">
+								<a href="https://sarawak.gov.my" target="_blank">
+									<img alt="image" src="/module/web/web/theme/default/res/default_icons/sarawak_hornbill_default.png">
+								</a>
+						</div>	
+						<div class="all-logo">
+								<a href="https://www.malaysia.gov.my" target="_blank">
+									<img alt="image" src="/module/web/web/theme/default/res/default_icons/federal_logo_default.png">
+								</a>
+						</div>
+					</div>			
+						
+					<div class="finfo">
+						PEJABAT RESIDEN BAHAGIAN SRI AMAN<br />
+JALAN ASTANA,<br />
+95000 SRI AMAN, SARAWAK<br />
+TEL:083-322 705 / 083-322 011<br />
+FAX: 083-320 568<quillbot-extension-portal></quillbot-extension-portal>					</div>	
+				</div>
+				
+				<div class="col-md-4 small-left-right sub-newsletter">
+					<form id="subscribe_form" method="POST" action="/web/subpage/newsletter_subscription_form/"><input type='hidden' name='moonlight_token_71460' value='189Lzo'/>	
+						<label>Subscribe Newsletter</label>
+						<input type="text" id="subscriber_email" placeholder=" Your Email" name="subscriber_email">
+						<input type="submit" id="subscribe_submit_btn" value="Subscribe">
+					</form>
+					
+					<div class="b-links">
+						<div><a href="https://gamma.malaysia.gov.my/appdetails/914" splwpk-mobile-apps="splwpk-mobile-apps">Sarawak Gov App</a></div>
+						<div class="gamma">
+							<img alt="image" src="/module/web/web/theme/default/res/default_icons/sarawak_flag.png">
+							<img alt="image" src="/module/web/web/theme/default/res/default_icons/gamma_qr.png">
+						</div>
+					</div>
+				</div>
+				
+			</div>
+			
+			<div class="container f-btm">
+								<div class="col-md-8 small-left-right b-links menu-list">
+																										<a target="_self" href="https://sriaman.sarawak.gov.my/web/subpage/webpage_view/2/sriamando"   >Penafian</a>
+																																							<a target="_self" href="https://sriaman.sarawak.gov.my/web/subpage/webpage_view/130"   >Terma Dan Syarat</a>
+																																							<a target="_self" href="https://sriaman.sarawak.gov.my/web/subpage/webpage_view/3/sriamando" splwpk-privacy-policy="splwpk-privacy-policy" timestamp='2026-10-15 08:10:21' >Dasar Privasi</a>
+																																							<a target="_self" href="https://sriaman.sarawak.gov.my/web/subpage/webpage_view/61/lubokantudo"   >W3C Disability Access</a>
+																																							<a target="_self" href="https://sriaman.sarawak.gov.my/web/subpage/webpage_view/56/lubokantudo"   >Hak Cipta Terpelihara</a>
+																																							<a target="_self" href="https://sriaman.sarawak.gov.my/web/subpage/sitemap/" splwpk-sitemap="splwpk-sitemap" timestamp='2026-10-15 08:10:21' >Peta Laman</a>
+																																							<a target="_self" href="https://sriaman.sarawak.gov.my/web/subpage/feedback_form/" splwpk-feedback-form="splwpk-feedback-form" timestamp='2026-10-15 08:10:21' >Maklumbalas</a>
+																						</div>
+				
+				<div class="col-md-4 small-left-right social">					
+					<div class="visitor">Visitor Counter: <span>9252276</span></div>					
+				</div>
+			</div>
+		</div>
+	</footer>
+	
+	<button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fa fa-angle-up" aria-hidden="true"></i></button>
+	
+	<div class="custom_section_right">
+
+		
+					<div class="hotline" id="esidemenu">
+				<a href="javascript:void(0);" class="side-label sidemenuhover">		
+					<img alt="image" class="sidemenu-icon" src=""><span class="slideout"><span>Imbas untuk Telefon Bimbit</span>
+				</a>
+				<div class="side-content" style="right:178px;">
+					<img alt="image" src="/../moonlight/plugin/phpqrcode/moonlight_qrcode.php?
+						data=https://sriaman.sarawak.gov.my/web/home/index/">				</div>
+			</div>
+		
+				
+		
+				<div class="calendar">
+		  <!-- Trigger the modal with a button -->
+		  <a class="sidemenuhover" data-toggle="modal" data-target="#CalendarModal3"><img alt="image" class="sidemenu-icon" src="">
+		  <span class="slideout">Kalendar</span></a>
+
+		  <!-- Modal -->
+		  <div class="modal fade" id="CalendarModal3" role="dialog">
+			<div class="modal-dialog">
+			
+			  <!-- Modal content-->
+			  <div class="modal-content">
+				<div class="modal-body">
+				  <div class="calendar" id="calendar3"></div>
+				  <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+				</div>
+			  </div>
+			  
+			</div>
+		  </div>		
+		</div>
+		
+				
+		
+						<div class="poll">
+				<!-- Trigger the modal with a button -->
+				<a class="sidemenuhover" data-toggle="modal" data-target="#PollModal3" splwpk-online-e-participation="splwpk-online-e-participation" timestamp="2026-08-17 15:48:06"><img alt="image" class="sidemenu-icon" src="">
+				<span class="slideout">Undian</span>
+				</a>
+
+				<!-- Modal -->
+				<div class="modal fade" id="PollModal3" role="dialog">
+					<div class="modal-dialog">
+					
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-body">
+						<h5 style="margin-bottom:20px;">Poll</h5>
+					
+							
+															<form id="frm_data_2" method="POST" enctype="multipart/form-data" action="https://sriaman.sarawak.gov.my/web/subpage/poll/"><input type='hidden' name='moonlight_token_71460' value='189Lzo'/>
+								<h4 style="font-weight:bold;">Apakah saluran capaian perkhidmatan yang digemari anda?																	</h4>
+																													<span>
+											<input type="radio" onclick="setPollId(5, 2);" name="question[2]" value="5">
+											<label>Laman Sesawang</label>
+										</span>
+																																																																													<span>
+											<input type="radio" onclick="setPollId(6, 2);" name="question[2]" value="6">
+											<label>Media sosial (Facebook / X / Instagram )</label>
+										</span>
+																																																										<span>
+											<input type="radio" onclick="setPollId(7, 2);" name="question[2]" value="7">
+											<label>Aplikasi Mobil</label>
+										</span>
+																																															<div class="ssubmit col-md-12" style="margin-bottom:50px;">		
+										<input class="btn-links" type="button" onclick="submitPoll_sidemenu(this.form);" value="Vote">
+										<input class="btn-links" type="button" value="Result" 
+										onclick="window.location.href = 'https://sriaman.sarawak.gov.my/web/subpage/poll_result/&id=2';">
+									</div>
+								</form>
+							
+							<a href="https://sriaman.sarawak.gov.my/web/subpage/poll_result/archive" splwpk-online-e-participation="splwpk-online-e-participation" timestamp="2026-08-17 15:46:41">Archived</a>
+													<button type="button" class="close" data-dismiss="modal">&times;</button>
+						</div>
+					</div>
+					
+					</div>
+				</div>
+				
+				</div>
+		
+				
+		
+				<div class="pop-announcements">
+		<!-- Trigger the modal with a button -->
+		  <a class="sidemenuhover" data-toggle="modal" data-target="#AnnouncementModal3"><img alt="image" class="sidemenu-icon" src="">
+		  <span class="slideout">Pengumuman</span>
+		  </a>
+
+		  <!-- Modal -->
+		  <div class="modal fade" id="AnnouncementModal3" role="dialog">
+			<div class="modal-dialog">
+			
+			  <!-- Modal content-->
+			  <div class="modal-content">
+				<div class="modal-body sidemenu-announcement" splwpk-broadcast="splwpk-broadcast" timestamp="2026-08-17 15:34:39">
+									<h5>Program Sarawakku Sayang Bahagian Sri Aman</h5>
+					<div class="img-empty"><img alt="image" src="/web/attachment/show/?docid=ZHhzQ0t1OW5lTmlYdjNpQ0JzSGw2dz09OjoEuxYAlZVNBeKRV3ltX2Fp"></div>
+				  	<div timestamp=""><img alt="" src="https://sriaman.sarawak.gov.my/admin/file_manager/download/?id=1371" style="height:1280px; width:998px" /></div>
+									
+					<button type="button" class="close" data-dismiss="modal">&times;</button> 
+				</div>
+			  </div>
+			  
+			</div>
+		  </div>
+		
+		</div>
+
+				
+		
+	</div>
+	<!-- Custom Side Menu to show Mobile QR code End -->
+</div>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function(e){
+		var id = '3';
+		var footer_calendar = '#calendar' + id;
+		var current_lang = 'bm';
+		// console.log(current_lang)
+		// console.log(footer_calendar)
+
+		var v_event_json_encoded = JSON.parse('false');
+		// console.log(v_event_json_encoded)
+
+		if(v_event_json_encoded != '' && v_event_json_encoded != false){
+			var v_events = [];
+			v_event_json_encoded.forEach((i)=>{
+				var v_event_start_date = moment(i.event_start_date).format("M/D/YYYY");
+				var v_event_end_date = moment(i.event_end_date).format("M/D/YYYY");
+				var v_event_start_date_standard_format = moment(i.event_start_date).format("D MMM YYYY");
+				var v_event_end_date_standard_format = moment(i.event_end_date).format("D MMM YYYY");
+				var v_event_id = parseInt(i.id);
+				var v_event_title = i.kwd_title;
+				var v_color = 'blue';
+				var v_event_date_text = 'Event Date';
+				// console.log(v_event_start_date)
+				v_events.push({
+					id: v_event_id,
+					name: v_event_title, 
+					date: [v_event_start_date, v_event_end_date],
+					color: v_color,
+					type: "event",
+					description: v_event_date_text + ": " + v_event_start_date_standard_format + " - " + v_event_end_date_standard_format
+				});
+			})
+
+			// console.log(v_events)
+
+			$(footer_calendar).evoCalendar({
+				"calendarEvents": v_events,
+				'selectDate':  moment(),
+				'language': current_lang
+			});
+
+
+			$(footer_calendar).on('selectEvent', function(event, activeEvent) {
+				// console.log(activeEvent.id)
+				window.location.href = "/web/subpage/event_view/" + activeEvent.id;
+			});
+
+			$(footer_calendar).on('selectDate', function(event, activeEvent) {
+				$(footer_calendar).evoCalendar('toggleEventList',true);
+			});
+		}else{
+			$(footer_calendar).evoCalendar({'language': current_lang});
+
+			$(footer_calendar).on('selectDate', function(event, activeEvent) {
+				$(footer_calendar).evoCalendar('toggleEventList',true);
+			});
+		}
+	});
+
+	vGlobalPollId="";
+	vGlobalQid="";
+	function setPollId(vPollId, vQid){
+		window.vGlobalPollID = vPollId;
+		window.vGlobalQid = vQid;
+	}
+
+	function getCookie(cname) {
+		let name = cname + "=";
+		let decodedCookie = decodeURIComponent(document.cookie);
+		let ca = decodedCookie.split(';');
+		for(let i = 0; i <ca.length; i++) {
+			let c = ca[i];
+			while (c.charAt(0) == ' ') {
+			c = c.substring(1);
+			}
+			if (c.indexOf(name) == 0) {
+			return c.substring(name.length, c.length);
+			}
+		}
+		return "";
+	}
+
+	function submitPoll_sidemenu(form){
+		// alert('Your vote has been submitted');
+		// console.log(form.id)
+
+		var option_checked = false;
+		$("#" + form.id + " input[type=radio]").each(function(){
+			// console.log($(this));
+			if($(this).is(":checked")){
+				option_checked = true;
+			}
+		});
+
+		var ques_cookie = getCookie('poll_'+ form.id);
+		if(option_checked == true && ques_cookie == ''){
+			alert('Your vote has been submitted');
+			$("#" + form.id).submit();
+		}else if(ques_cookie != '' ){
+			alert('You\'ve voted for this poll, please come again after a week.');
+		}else if(option_checked != true ){
+			alert('Please select an option to vote');
+		}
+
+		// v_url = 'https://sriaman.sarawak.gov.my/web/subpage/poll_result/';
+		// window.location.href = v_url+'&id=' + vGlobalPollID;
+	}
+
+	var v_id = '3';
+	var subscribe_form = '#subscribe_form' + v_id;
+	$('#subscribe_submit_btn'+ v_id).click(function(e) {
+		e.preventDefault();
+		var email = $('#subscriber_email').val();
+		if(email == ''){
+			alert('Please enter your Email');
+		}else{
+			var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+			if(!re.test(email)) {
+				alert("Please enter valid Email.");
+				return false;
+			}else{
+				$(subscribe_form).submit();
+			}
+		}
+		return false;
+	});
+</script>
+				</div>
+			
+			<footer class="main-footer">
+							</footer>
+		</div>
+		
+		<SCRIPT LANGUAGE="javascript" TYPE="text/javascript" SRC="https://sriaman.sarawak.gov.my//moonlight/plugin/shortcut/shortcuts.js"></SCRIPT><SCRIPT LANGUAGE="javascript" TYPE="text/javascript">j_lbl_field_required="This field is required.";</SCRIPT>	</body>
+</html>
+
+<!-- purpose is for mobile login view  -->
+<div class="modal fade" id="login_modal">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="padding:5px 5px;">
+                <span aria-hidden="true">&times;</span>
+            </button>
+			<div id="modal_body_login"></div>
+		</div>
+	</div>
+</div>
+
+<script src="https://sriaman.sarawak.gov.my/web/web/js/custom.js"></script>
+<script>
+	$(document).ready(function () {
+		init_color_theme('blue','/');	});
+
+	function open_login_modal(){
+		console.log('fsfd');
+		var url = "https://sriaman.sarawak.gov.my/web/share/login/"+'?view=mobile';
+		makeGETRequest( url, 'modal_body_login');
+	}
+</script>
+
+<script>
+	// show loader when page redirect
+	window.onbeforeunload = function (event) {
+		$('.full-page-loader').show();
+	};
+</script>
+
+
+
+
+<script src="https://sarawakpass.sarawak.gov.my/swkpass_plugin.js"></script>
+<script language="javascript">
+
+
+window.addEventListener('load',()=>{
+	swkpassAvatarDropDownItemAppend({
+			'my_payment':{
+				'icon':'https://service.sarawak.gov.my/web/module/web/web/theme/web/res/icon_svg/icon_payment.svg',
+				'label':'Payment',
+				'link': 'https://service.sarawak.gov.my/web/pub/public/enq_n_pay/?l=en'
+			},
+			'my_service':{
+				'icon':'https://service.sarawak.gov.my/web/module/web/web/theme/web/res/icon_svg/icon_service.svg',
+				'label':'Services',
+				'link': 'https://sarawak.gov.my/web/home/p_display_nature_list/16/?lang=en'
+			}
+		});
+	
+	swkpassInit({
+		client_id: 'sriaman_dweb10_web',
+		state: '1792023021',
+		redirect_uri: 'https://sriaman.sarawak.gov.my/web/home/index/?oauth2_auth%26spass',
+		position: 'top_right',//top_left,top_right,bottom_left,bottom_right
+		lang: 'en', //en,bm
+		main_elem_id: 'spass_plugin', //the main element id that the button will be populate
+		//ui_mode: 'login_button', //login_button,avatar_dropdown
+		ui_mode: 'login_button', //login_button,avatar_dropdown
+		///user_full_name: '',
+		user_full_name: '',
+		///user_name: '',
+		user_name: '',
+		// overwrite_login_function: 'spass_overlap_login',
+		logout_redirect_uri: 'https://sriaman.sarawak.gov.my/web/home/member_logout/',
+		corp_name: '',
+		corp_profile_uri: '',
+		corp_profile_redirect_uri: '',
+	});
+
+});	
+
+</script>

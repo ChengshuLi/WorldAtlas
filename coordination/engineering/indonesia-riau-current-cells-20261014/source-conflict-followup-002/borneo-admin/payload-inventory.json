@@ -1,0 +1,121 @@
+{
+  "kind": "borneo-next-public-primary001-payload-inventory",
+  "observed_utc": "2026-10-15T00:13:30.173982+00:00",
+  "complete_new_original_body_count": 5,
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 6195,
+      "sha256": "f86b2c3ebf9fe953a88eb43a0f49e59e7bf20c48a94b1ad455aef7125eab4e23",
+      "source_url": null,
+      "kind": "review-or-normalized-web-readback",
+      "scientific_use": "illustrative-context-or-acquisition-status-only-no-owner-proof"
+    },
+    {
+      "path": "public-issuing-route-read.json",
+      "bytes": 25197,
+      "sha256": "a678a3975398466a1d1788335af210ff1863e7f4f199925b4892934b55c424a2",
+      "source_url": null,
+      "kind": "review-or-normalized-web-readback",
+      "scientific_use": "illustrative-context-or-acquisition-status-only-no-owner-proof"
+    },
+    {
+      "path": "public-leaf-route-read.json",
+      "bytes": 6167,
+      "sha256": "0d12e56cb25aebc4b466f6f17f7a61577be1a720ee3f5c737c55347767446427",
+      "source_url": null,
+      "kind": "review-or-normalized-web-readback",
+      "scientific_use": "illustrative-context-or-acquisition-status-only-no-owner-proof"
+    },
+    {
+      "path": "public-map-route-read.json",
+      "bytes": 14361,
+      "sha256": "eadbe87f251c5b386cc5d668c7521fdc744252b0c01c04092b4f00e6a5e70377",
+      "source_url": null,
+      "kind": "review-or-normalized-web-readback",
+      "scientific_use": "illustrative-context-or-acquisition-status-only-no-owner-proof"
+    },
+    {
+      "path": "serian-explicit-route-read.json",
+      "bytes": 14353,
+      "sha256": "0f1b25938041fd675bb83412fb21f6d5e70fe3f30281a813538c9b23519456a2",
+      "source_url": null,
+      "kind": "review-or-normalized-web-readback",
+      "scientific_use": "illustrative-context-or-acquisition-status-only-no-owner-proof"
+    },
+    {
+      "path": "serian-profile-first-image-original",
+      "bytes": 355046,
+      "sha256": "f00803bb2c455bfa35c12b4e223d758b08ddf6d3d8d0bab8249be30568fcee41",
+      "source_url": "https://serian.sarawak.gov.my/admin/file_manager/download/?id=1897",
+      "kind": "complete-downloaded-public-primary-original",
+      "scientific_use": "illustrative-context-or-acquisition-status-only-no-owner-proof"
+    },
+    {
+      "path": "serian-profile-map-original",
+      "bytes": 322290,
+      "sha256": "3af3f825758e0afdcaf558f9d2c29b268cde169191074e5ff3321acc06acf6a1",
+      "source_url": "https://serian.sarawak.gov.my/admin/file_manager/download/?id=1895",
+      "kind": "complete-downloaded-public-primary-original",
+      "scientific_use": "illustrative-context-or-acquisition-status-only-no-owner-proof"
+    },
+    {
+      "path": "serian-profile-page.html",
+      "bytes": 60437,
+      "sha256": "463655c2bb6ad9dace7b53216bf7abe1d68a9b3723261d03e6def626a7d24fa8",
+      "source_url": "https://serian.sarawak.gov.my/web/subpage/webpage_view/174",
+      "kind": "complete-downloaded-public-primary-original",
+      "scientific_use": "illustrative-context-or-acquisition-status-only-no-owner-proof"
+    },
+    {
+      "path": "serian-profile-read.json",
+      "bytes": 10916,
+      "sha256": "9cdec75afdf3665832efe9ad4c04ef9f8fd0886663a3840406c51c174b771d22",
+      "source_url": null,
+      "kind": "review-or-normalized-web-readback",
+      "scientific_use": "illustrative-context-or-acquisition-status-only-no-owner-proof"
+    },
+    {
+      "path": "sri-aman-map-page.html",
+      "bytes": 50165,
+      "sha256": "fbd31d470e98540c86502df5a2dc09320aa696cd179007ab581e4e7fea2a973c",
+      "source_url": "https://sriaman.sarawak.gov.my/web/subpage/webpage_view/137",
+      "kind": "complete-downloaded-public-primary-original",
+      "scientific_use": "illustrative-context-or-acquisition-status-only-no-owner-proof"
+    },
+    {
+      "path": "sri-aman-public-map-original",
+      "bytes": 899241,
+      "sha256": "f58e566f9d9105ef4df012f39cc452d0058ec5fc4df790e6bfc6dd66359a5915",
+      "source_url": "https://sriaman.sarawak.gov.my/admin/file_manager/download/?id=525",
+      "kind": "complete-downloaded-public-primary-original",
+      "scientific_use": "illustrative-context-or-acquisition-status-only-no-owner-proof"
+    }
+  ],
+  "qualified_cells": 0,
+  "owner_decided_cells": 0,
+  "held_cells": 21,
+  "required_plan_bodies_acquired": {
+    "MP7/125": false,
+    "MP2/125": false,
+    "MP12/125": false
+  },
+  "denials": [],
+  "concrete_access_failures": [
+    {
+      "target": "https://sag.sarawak.gov.my/",
+      "status": "web400-timeout",
+      "outcome": "no-root-body-acquired"
+    },
+    {
+      "target": "https://www.data.gov.my/data/ms_MY/dataset?_organization_limit=0&organization=sarawak-state-government",
+      "status": "HTTP403",
+      "outcome": "no-dataset-body-acquired"
+    },
+    {
+      "target": "https://serian.sarawak.gov.my/",
+      "status": "initial-internal-fetch-error",
+      "outcome": "explicit-official-home-route-succeeded-and-profile-bodies-acquired"
+    }
+  ]
+}

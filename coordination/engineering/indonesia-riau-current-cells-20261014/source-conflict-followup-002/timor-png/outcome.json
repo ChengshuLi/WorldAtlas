@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "scope": "Next bounded primary-source continuation for five Timor and one PNG source-conflict centres. No cell clearance, repo/Git write, native/GIS/raster/source replay, or heavy work.",
+  "newly_acquired_original": {
+    "source_url": "https://bobonaro.gov.tl/municipality-post-administrative/bailbo/",
+    "linked_from": "https://bobonaro.gov.tl/",
+    "file": "balibo-official-original.html",
+    "bytes": 43804,
+    "sha256": "691343ee7ed9d37da49ceb7b1b7af60c1f2ac4b841ce0af5fd5b30a1ef46a04c",
+    "http_status": 200,
+    "response_headers": "balibo-official-headers.txt",
+    "response_date_utc": "2026-10-15T00:12:09Z",
+    "concrete_fact": "Official Bobonaro municipal post page lists Balibo Vila, Batugade, Cowa, Leohito, Leolima and Sanirin as Balibo's six sucos.",
+    "use": "Administrative identity cross-reference only for Belu/Balibo pair. Page supplies no coordinates, boundary map, datum, accuracy, historical 2020 effectivity or source-stable-ID mapping."
+  },
+  "newly_observed_specific_map": {
+    "authority": "Ministério da Administração Estatal, Timor-Leste",
+    "official_page": "https://estatal.gov.tl/pt/posto-administrativo-fatumean/",
+    "exact_published_map_url": "https://sestatal.gov.tl/wp-content/uploads/2015/11/0502_Fatumean.pdf",
+    "label": "Mapa de Fatumean (censos de 2015)",
+    "locator_provenance": "Actual link and literal WordPress shortcode in official Ministry page, retained in primary-web-readbacks.json; not a guessed host/path.",
+    "web_reader_result": "502 Bad Gateway",
+    "ordinary_https_attempt": {
+      "max_seconds": 25,
+      "max_bytes": 2097152,
+      "exit_code": 6,
+      "error": "Could not resolve host: sestatal.gov.tl",
+      "pdf_exists": false,
+      "response_headers_bytes": 0,
+      "classification": "availability failure; not automatic approval denial"
+    },
+    "scope": "2015 census administrative map potentially relevant to source-vintage/admin join if body becomes publicly available. Content, georeferencing, international-line authority and centre intersection remain unknown. It is not substituted for 2005 AnnexB/2013 addendum.",
+    "no_retry": "No identical map retry after DNS failure this continuation."
+  },
+  "missing_exact_bodies": [
+    {
+      "body": "Complete Permendagri80/2018 BN1330 Belu–Malaka boundary text and incorporated map annex",
+      "target": "https://peraturan.go.id/files/bn1330-2018.pdf",
+      "prior_status": "Approved actual40-second HTTPS attempt exited28, connection timeout,0bytes/0headers/noPDF; not repeated.",
+      "new_route_status": "JDIH Kemendagri returned502 and JDIHN web read InternalError; no authenticated new full-body mirror found."
+    },
+    {
+      "body": "2005 AnnexB detailed land-boundary map sheets/approximate turning points and actual21June2013 land-boundary addendum/maps",
+      "new_route_status": "Already inspected official GFTM rosters link only retained29-page2005PDF and name2013addendum without body link. New TreatyRoom Kemlu read InternalError. No complete relevant newly published body located."
+    },
+    {
+      "body": "Competent IDN–PNG Fly River boundary survey/chart and datum/epoch plus contemporaneous Merauke/LakeMurray administrative mapping",
+      "status": "FullPNGChapter85Act/treaty retained previously but does not supply full agreed thalweg survey/chart/datum. This bounded continuation acquired no new PNG survey body."
+    }
+  ],
+  "additional_availability": [
+    {
+      "url": "https://www.jornal.gov.tl/?q=node%2F6605",
+      "result": "TimeoutError in web reader",
+      "use": "No body; no legal effect or owner inferred."
+    },
+    {
+      "url": "https://treaty.kemlu.go.id/",
+      "result": "web reader InternalError; no usable body"
+    },
+    {
+      "url": "https://jdih.kemendagri.go.id/",
+      "result": "502 Bad Gateway"
+    },
+    {
+      "url": "https://jdihn.go.id/",
+      "result": "web reader InternalError"
+    }
+  ],
+  "forbidden_retry_preserved": {
+    "target": "https://www.un.org/depts/los/LEGISLATIONANDTREATIES/PDFFILES/TREATIES/AUS-IDN1973PNG.pdf",
+    "status": "Two earlier automatic approval denials before execution, separate earlier web403, no localUNfile; details in ../acquisition-blockers.json.",
+    "disposition": "No retry, alternate-download, bypass or acquisition this continuation."
+  },
+  "disposition": {
+    "cleared_cells": 0,
+    "held_cells": 6,
+    "balibo_next": "Need applicable complete line/survey at both exact centres and source2020 administrative stable-ID compatibility; six-suco roster alone supplies neither.",
+    "fatumean_next": "Obtain actual linked2015map through a newly authenticated available official publication; inspect original map datum/scale/line/vintage before any exact centre comparison. Complete treaty line still independently needed.",
+    "tilomar_next": "Need full applicable2005/2013 definitive/approximate line including turning points and post-2013Belu/Malaka exact map; treaty chord locator alone cannot resolve.",
+    "png_next": "Need competent agreed FlyRiver thalweg survey/chart and dated administrative evidence; cannot use straight141E or infer side from retained treaty labels.",
+    "prior_source_review": "Earlier corrected15-point treaty transcription/centres independently reviewed; this newHTML/map locator is not represented as independently reviewed.",
+    "delivery": "PR1931 and all scientific repository data unchanged."
+  }
+}

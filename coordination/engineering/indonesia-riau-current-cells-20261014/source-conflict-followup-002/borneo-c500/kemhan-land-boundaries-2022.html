@@ -1,0 +1,857 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="profile" href="http://gmpg.org/xfn/11">
+        <link rel="pingback" href="https://www.kemhan.go.id/strahan/xmlrpc.php">
+        <title>Direktorat Jenderal Strategi Pertahanan Kemhan RI</title>
+        <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Direktorat Strategi Pertahanan Kemhan RI &raquo; Perbatasan Wilayah Darat Indonesia dengan 3 Negara Umpan Komentar" href="https://www.kemhan.go.id/strahan/2022/09/01/perbatasan-wilayah-darat-indonesia-dengan-3-negara.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/svg\/","svgExt":".svg","source":{"wpemoji":"https:\/\/www.kemhan.go.id\/strahan\/wp-includes\/js\/wp-emoji.js?ver=5.4","twemoji":"https:\/\/www.kemhan.go.id\/strahan\/wp-includes\/js\/twemoji.js?ver=5.4"}};
+			/**
+ * @output wp-includes/js/wp-emoji-loader.js
+ */
+
+( function( window, document, settings ) {
+	var src, ready, ii, tests;
+
+	// Create a canvas element for testing native browser support of emoji.
+	var canvas = document.createElement( 'canvas' );
+	var context = canvas.getContext && canvas.getContext( '2d' );
+
+	/**
+	 * Checks if two sets of Emoji characters render the same visually.
+	 *
+	 * @since 4.9.0
+	 *
+	 * @private
+	 *
+	 * @param {number[]} set1 Set of Emoji character codes.
+	 * @param {number[]} set2 Set of Emoji character codes.
+	 *
+	 * @return {boolean} True if the two sets render the same.
+	 */
+	function emojiSetsRenderIdentically( set1, set2 ) {
+		var stringFromCharCode = String.fromCharCode;
+
+		// Cleanup from previous test.
+		context.clearRect( 0, 0, canvas.width, canvas.height );
+		context.fillText( stringFromCharCode.apply( this, set1 ), 0, 0 );
+		var rendered1 = canvas.toDataURL();
+
+		// Cleanup from previous test.
+		context.clearRect( 0, 0, canvas.width, canvas.height );
+		context.fillText( stringFromCharCode.apply( this, set2 ), 0, 0 );
+		var rendered2 = canvas.toDataURL();
+
+		return rendered1 === rendered2;
+	}
+
+	/**
+	 * Detects if the browser supports rendering emoji or flag emoji.
+	 *
+	 * Flag emoji are a single glyph made of two characters, so some browsers
+	 * (notably, Firefox OS X) don't support them.
+	 *
+	 * @since 4.2.0
+	 *
+	 * @private
+	 *
+	 * @param {string} type Whether to test for support of "flag" or "emoji".
+	 *
+	 * @return {boolean} True if the browser can render emoji, false if it cannot.
+	 */
+	function browserSupportsEmoji( type ) {
+		var isIdentical;
+
+		if ( ! context || ! context.fillText ) {
+			return false;
+		}
+
+		/*
+		 * Chrome on OS X added native emoji rendering in M41. Unfortunately,
+		 * it doesn't work when the font is bolder than 500 weight. So, we
+		 * check for bold rendering support to avoid invisible emoji in Chrome.
+		 */
+		context.textBaseline = 'top';
+		context.font = '600 32px Arial';
+
+		switch ( type ) {
+			case 'flag':
+				/*
+				 * Test for Transgender flag compatibility. This flag is shortlisted for the Emoji 13 spec,
+				 * but has landed in Twemoji early, so we can add support for it, too.
+				 *
+				 * To test for support, we try to render it, and compare the rendering to how it would look if
+				 * the browser doesn't render it correctly (white flag emoji + transgender symbol).
+				 */
+				isIdentical = emojiSetsRenderIdentically(
+					[ 0x1F3F3, 0xFE0F, 0x200D, 0x26A7, 0xFE0F ],
+					[ 0x1F3F3, 0xFE0F, 0x200B, 0x26A7, 0xFE0F ]
+				);
+
+				if ( isIdentical ) {
+					return false;
+				}
+
+				/*
+				 * Test for UN flag compatibility. This is the least supported of the letter locale flags,
+				 * so gives us an easy test for full support.
+				 *
+				 * To test for support, we try to render it, and compare the rendering to how it would look if
+				 * the browser doesn't render it correctly ([U] + [N]).
+				 */
+				isIdentical = emojiSetsRenderIdentically(
+					[ 0xD83C, 0xDDFA, 0xD83C, 0xDDF3 ],
+					[ 0xD83C, 0xDDFA, 0x200B, 0xD83C, 0xDDF3 ]
+				);
+
+				if ( isIdentical ) {
+					return false;
+				}
+
+				/*
+				 * Test for English flag compatibility. England is a country in the United Kingdom, it
+				 * does not have a two letter locale code but rather an five letter sub-division code.
+				 *
+				 * To test for support, we try to render it, and compare the rendering to how it would look if
+				 * the browser doesn't render it correctly (black flag emoji + [G] + [B] + [E] + [N] + [G]).
+				 */
+				isIdentical = emojiSetsRenderIdentically(
+					[ 0xD83C, 0xDFF4, 0xDB40, 0xDC67, 0xDB40, 0xDC62, 0xDB40, 0xDC65, 0xDB40, 0xDC6E, 0xDB40, 0xDC67, 0xDB40, 0xDC7F ],
+					[ 0xD83C, 0xDFF4, 0x200B, 0xDB40, 0xDC67, 0x200B, 0xDB40, 0xDC62, 0x200B, 0xDB40, 0xDC65, 0x200B, 0xDB40, 0xDC6E, 0x200B, 0xDB40, 0xDC67, 0x200B, 0xDB40, 0xDC7F ]
+				);
+
+				return ! isIdentical;
+			case 'emoji':
+				/*
+				 * Love is love.
+				 *
+				 * To test for Emoji 12 support, try to render a new emoji: men holding hands, with different skin
+				 * tone modifiers.
+				 *
+				 * When updating this test for future Emoji releases, ensure that individual emoji that make up the
+				 * sequence come from older emoji standards.
+				 */
+				isIdentical = emojiSetsRenderIdentically(
+					[0xD83D, 0xDC68, 0xD83C, 0xDFFE, 0x200D, 0xD83E, 0xDD1D, 0x200D, 0xD83D, 0xDC68, 0xD83C, 0xDFFC],
+					[0xD83D, 0xDC68, 0xD83C, 0xDFFE, 0x200B, 0xD83E, 0xDD1D, 0x200B, 0xD83D, 0xDC68, 0xD83C, 0xDFFC]
+				);
+
+				return ! isIdentical;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Adds a script to the head of the document.
+	 *
+	 * @ignore
+	 *
+	 * @since 4.2.0
+	 *
+	 * @param {Object} src The url where the script is located.
+	 * @return {void}
+	 */
+	function addScript( src ) {
+		var script = document.createElement( 'script' );
+
+		script.src = src;
+		script.defer = script.type = 'text/javascript';
+		document.getElementsByTagName( 'head' )[0].appendChild( script );
+	}
+
+	tests = Array( 'flag', 'emoji' );
+
+	settings.supports = {
+		everything: true,
+		everythingExceptFlag: true
+	};
+
+	/*
+	 * Tests the browser support for flag emojis and other emojis, and adjusts the
+	 * support settings accordingly.
+	 */
+	for( ii = 0; ii < tests.length; ii++ ) {
+		settings.supports[ tests[ ii ] ] = browserSupportsEmoji( tests[ ii ] );
+
+		settings.supports.everything = settings.supports.everything && settings.supports[ tests[ ii ] ];
+
+		if ( 'flag' !== tests[ ii ] ) {
+			settings.supports.everythingExceptFlag = settings.supports.everythingExceptFlag && settings.supports[ tests[ ii ] ];
+		}
+	}
+
+	settings.supports.everythingExceptFlag = settings.supports.everythingExceptFlag && ! settings.supports.flag;
+
+	// Sets DOMReady to false and assigns a ready function to settings.
+	settings.DOMReady = false;
+	settings.readyCallback = function() {
+		settings.DOMReady = true;
+	};
+
+	// When the browser can not render everything we need to load a polyfill.
+	if ( ! settings.supports.everything ) {
+		ready = function() {
+			settings.readyCallback();
+		};
+
+		/*
+		 * Cross-browser version of adding a dom ready event.
+		 */
+		if ( document.addEventListener ) {
+			document.addEventListener( 'DOMContentLoaded', ready, false );
+			window.addEventListener( 'load', ready, false );
+		} else {
+			window.attachEvent( 'onload', ready );
+			document.attachEvent( 'onreadystatechange', function() {
+				if ( 'complete' === document.readyState ) {
+					settings.readyCallback();
+				}
+			} );
+		}
+
+		src = settings.source || {};
+
+		if ( src.concatemoji ) {
+			addScript( src.concatemoji );
+		} else if ( src.wpemoji && src.twemoji ) {
+			addScript( src.twemoji );
+			addScript( src.wpemoji );
+		}
+	}
+
+} )( window, document, window._wpemojiSettings );
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='wp-block-library-css'  href='https://www.kemhan.go.id/strahan/wp-includes/css/dist/block-library/style.css?ver=5.4' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-banners-css-css'  href='https://www.kemhan.go.id/strahan/wp-content/plugins/custom-banners/assets/css/wp-banners.css?ver=5.4' type='text/css' media='all' />
+<link rel='stylesheet' id='videojs-css'  href='https://www.kemhan.go.id/strahan/wp-content/plugins/videojs-html5-player/videojs/video-js.css?ver=5.4' type='text/css' media='all' />
+<link rel='stylesheet' id='videojs-style-css'  href='https://www.kemhan.go.id/strahan/wp-content/plugins/videojs-html5-player/videojs-html5-player.css?ver=5.4' type='text/css' media='all' />
+<link rel='stylesheet' id='style-css'  href='https://www.kemhan.go.id/strahan/wp-content/themes/strahan/style.css?ver=5.4' type='text/css' media='all' />
+<link rel='stylesheet' id='main-css'  href='https://www.kemhan.go.id/strahan/wp-content/themes/strahan/css/main.min.css?ver=5.4' type='text/css' media='all' />
+<link rel='stylesheet' id='theme-css'  href='https://www.kemhan.go.id/strahan/wp-content/themes/strahan/css/theme.min.css?ver=5.4' type='text/css' media='all' />
+<link rel='stylesheet' id='bxslider-css'  href='https://www.kemhan.go.id/strahan/wp-content/themes/strahan/css/jquery.bxslider.min.css?ver=5.4' type='text/css' media='all' />
+<link rel='stylesheet' id='font-awesome-css'  href='https://www.kemhan.go.id/strahan/wp-content/themes/strahan/css/font-awesome.min.css?ver=5.4' type='text/css' media='all' />
+<link rel='stylesheet' id='owl-carousel-css'  href='https://www.kemhan.go.id/strahan/wp-content/themes/strahan/css/owl.carousel.min.css?ver=5.4' type='text/css' media='all' />
+<link rel='stylesheet' id='owl-theme-css'  href='https://www.kemhan.go.id/strahan/wp-content/themes/strahan/css/owl.theme.min.css?ver=5.4' type='text/css' media='all' />
+<link rel='stylesheet' id='zozo-tabs-css'  href='https://www.kemhan.go.id/strahan/wp-content/themes/strahan/css/zozo.tabs.min.css?ver=5.4' type='text/css' media='all' />
+<link rel='stylesheet' id='fotorama-css'  href='https://www.kemhan.go.id/strahan/wp-content/themes/strahan/css/fotorama.css?ver=5.4' type='text/css' media='all' />
+<link rel='stylesheet' id='demo-css'  href='https://www.kemhan.go.id/strahan/wp-content/themes/strahan/css/demo.css?ver=5.4' type='text/css' media='all' />
+<link rel='stylesheet' id='basic_modal-css'  href='https://www.kemhan.go.id/strahan/wp-content/themes/strahan/js/modal/css/basic.css?ver=5.4' type='text/css' media='all' />
+<link rel='stylesheet' id='res-css'  href='https://www.kemhan.go.id/strahan/wp-content/themes/strahan/css/res.css?ver=5.4' type='text/css' media='all' />
+<script type='text/javascript' src='https://www.kemhan.go.id/strahan/wp-includes/js/jquery/jquery.js?ver=1.12.4-wp'></script>
+<script type='text/javascript' src='https://www.kemhan.go.id/strahan/wp-includes/js/jquery/jquery-migrate.js?ver=1.4.1'></script>
+<script type='text/javascript' src='https://www.kemhan.go.id/strahan/wp-content/themes/strahan/js/jquery.min.js?ver=5.4'></script>
+<script type='text/javascript' src='https://www.kemhan.go.id/strahan/wp-content/themes/strahan/js/jquery.bxslider.js?ver=5.4'></script>
+<script type='text/javascript' src='https://www.kemhan.go.id/strahan/wp-content/themes/strahan/js/owl.carousel.js?ver=5.4'></script>
+<script type='text/javascript' src='https://www.kemhan.go.id/strahan/wp-content/themes/strahan/js/zozo.tabs.min.js?ver=5.4'></script>
+<script type='text/javascript' src='https://www.kemhan.go.id/strahan/wp-content/themes/strahan/js/fotorama.js?ver=5.4'></script>
+<script type='text/javascript' src='https://www.kemhan.go.id/strahan/wp-content/themes/strahan/js/main.js?ver=5.4'></script>
+<script type='text/javascript' src='https://www.kemhan.go.id/strahan/wp-content/themes/strahan/js/modal/js/jquery.simplemodal.js?ver=5.4'></script>
+<script type='text/javascript' src='https://www.kemhan.go.id/strahan/wp-content/themes/strahan/js/modal/js/basic.js?ver=5.4'></script>
+<script type='text/javascript' src='https://www.kemhan.go.id/strahan/wp-content/themes/strahan/js/accordion.js?ver=5.4'></script>
+<link rel='https://api.w.org/' href='https://www.kemhan.go.id/strahan/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.kemhan.go.id/strahan/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.kemhan.go.id/strahan/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Perbatasan Maritim Indonesia dengan 10 Negara' href='https://www.kemhan.go.id/strahan/2022/09/01/perbatasan-maritim-indonesia-dengan-10-negara.html' />
+<link rel='next' title='Dislokasi Pasukan TNI pada OPPD' href='https://www.kemhan.go.id/strahan/2022/09/01/dislokasi-pasukan-tni-pada-oppd.html' />
+<link rel="canonical" href="https://www.kemhan.go.id/strahan/2022/09/01/perbatasan-wilayah-darat-indonesia-dengan-3-negara.html" />
+<link rel='shortlink' href='https://www.kemhan.go.id/strahan/?p=10663' />
+<link rel="alternate" type="application/json+oembed" href="https://www.kemhan.go.id/strahan/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.kemhan.go.id%2Fstrahan%2F2022%2F09%2F01%2Fperbatasan-wilayah-darat-indonesia-dengan-3-negara.html" />
+<style type="text/css" media="screen"></style><!-- This site is embedding videos using the Videojs HTML5 Player plugin v1.1.0 - http://wphowto.net/videojs-html5-player-for-wordpress-757 --><link rel="icon" href="https://www.kemhan.go.id/strahan/wp-content/uploads/2022/01/cropped-Kemhan-new-ico-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://www.kemhan.go.id/strahan/wp-content/uploads/2022/01/cropped-Kemhan-new-ico-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://www.kemhan.go.id/strahan/wp-content/uploads/2022/01/cropped-Kemhan-new-ico-180x180.png" />
+<meta name="msapplication-TileImage" content="https://www.kemhan.go.id/strahan/wp-content/uploads/2022/01/cropped-Kemhan-new-ico-270x270.png" />
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-147641250-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-147641250-1'); //user rizqi
+          gtag('config', 'UA-147736933-1'); //user web.kemhanri@gmail.com
+        </script>
+</head>
+    
+    <body class="post-template-default single single-post postid-10663 single-format-standard">
+        <div class="out-box">
+            
+             <ul class="menu-sub-mob">
+            <div class="big-pad"><li id="menu-item-4236" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-4236"><a href="#">TENTANG STRAHAN</a>
+<ul class="sub-menu">
+	<li id="menu-item-8755" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8755"><a href="https://www.kemhan.go.id/strahan/pimpinan-strahan">STRUKTUR PIMPINAN</a></li>
+	<li id="menu-item-4922" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-4922"><a href="#">STRUKTUR ORGANISASI</a>
+	<ul class="sub-menu">
+		<li id="menu-item-8754" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8754"><a href="https://www.kemhan.go.id/strahan/setditjen">SETDITJEN</a></li>
+		<li id="menu-item-4950" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4950"><a href="https://www.kemhan.go.id/strahan/ditjakstra">DITJAKSTRAHAN</a></li>
+		<li id="menu-item-4946" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4946"><a href="https://www.kemhan.go.id/strahan/ditrah">DITRAHKOMHAN</a></li>
+		<li id="menu-item-4948" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4948"><a href="https://www.kemhan.go.id/strahan/ditkersin">DITKERSINHAN</a></li>
+		<li id="menu-item-4947" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4947"><a href="https://www.kemhan.go.id/strahan/ditwilhan">DITWILHAN</a></li>
+	</ul>
+</li>
+	<li id="menu-item-10231" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10231"><a href="https://www.kemhan.go.id/strahan/profil-ditjen-strahan">PROFIL DITJEN STRAHAN</a></li>
+	<li id="menu-item-10339" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10339"><a href="https://www.kemhan.go.id/strahan/jam-pimpinan">JAM PIMPINAN</a></li>
+	<li id="menu-item-4919" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4919"><a href="https://www.kemhan.go.id/strahan/tugsas-fungsi">TUGAS &#038; FUNGSI</a></li>
+	<li id="menu-item-4918" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4918"><a href="https://www.kemhan.go.id/strahan/sejarah-2">SEJARAH</a></li>
+	<li id="menu-item-5083" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5083"><a href="https://www.kemhan.go.id/strahan/faq">FAQ</a></li>
+	<li id="menu-item-10688" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10688"><a href="https://www.kemhan.go.id/strahan/dwp-ditjen-strahan">DWP DITJEN STRAHAN</a></li>
+</ul>
+</li>
+<li id="menu-item-4884" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-4884"><a href="#">BERITA DAN MEDIA</a>
+<ul class="sub-menu">
+	<li id="menu-item-4237" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-4237"><a href="https://www.kemhan.go.id/strahan/category/berita">BERITA DIREKTORAT</a>
+	<ul class="sub-menu">
+		<li id="menu-item-4885" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-4885"><a href="https://www.kemhan.go.id/strahan/category/berita/kegiatan-ditjen-strahan">KEGIATAN DITJEN STRAHAN</a></li>
+		<li id="menu-item-5202" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-5202"><a href="https://www.kemhan.go.id/strahan/category/berita/kegiatan-setditjen-strahan">KEGIATAN SETDITJEN STRAHAN</a></li>
+		<li id="menu-item-5203" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-5203"><a href="https://www.kemhan.go.id/strahan/category/berita/kegiatan-ditjenjakstra">KEGIATAN DITJAKSTRAHAN</a></li>
+		<li id="menu-item-5205" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-5205"><a href="https://www.kemhan.go.id/strahan/category/berita/kegiatan-ditkersin">KEGIATAN DITKERSINHAN</a></li>
+		<li id="menu-item-5207" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-5207"><a href="https://www.kemhan.go.id/strahan/category/berita/kegiatan-ditrah">KEGIATAN DITRAHKOMHAN</a></li>
+		<li id="menu-item-5206" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-5206"><a href="https://www.kemhan.go.id/strahan/category/berita/kegiatan-ditwilhan">KEGIATAN DITWILHAN</a></li>
+	</ul>
+</li>
+	<li id="menu-item-6628" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-6628"><a href="https://www.kemhan.go.id/strahan/category/berita/bela-negara">BELA NEGARA</a></li>
+	<li id="menu-item-4811" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-4811"><a href="https://www.kemhan.go.id/strahan/category/artikel">ARTIKEL</a></li>
+	<li id="menu-item-6568" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-6568"><a href="#">GALERI</a>
+	<ul class="sub-menu">
+		<li id="menu-item-6567" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-6567"><a href="https://www.kemhan.go.id/strahan/category/foto">FOTO</a></li>
+		<li id="menu-item-6569" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-6569"><a href="https://www.kemhan.go.id/strahan/category/video">VIDEO</a></li>
+	</ul>
+</li>
+</ul>
+</li>
+<li id="menu-item-5183" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor menu-item-has-children menu-item-5183"><a href="https://www.kemhan.go.id/strahan/category/produk-strategi-hanneg">PRODUK STRATEGI HANNEG</a>
+<ul class="sub-menu">
+	<li id="menu-item-5210" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-5210"><a href="https://www.kemhan.go.id/strahan/category/produk-strategi-hanneg/produk-kebijakan-strategi-hanneg">KEBIJAKAN STRATEGI HANNEG</a></li>
+	<li id="menu-item-5209" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-5209"><a href="https://www.kemhan.go.id/strahan/category/produk-strategi-hanneg/hasil-kajian-strahan">HASIL KAJIAN STRAHAN</a></li>
+	<li id="menu-item-5211" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-5211"><a href="https://www.kemhan.go.id/strahan/category/produk-strategi-hanneg/kerjasama-bilateral">KERJASAMA BILATERAL</a></li>
+	<li id="menu-item-5213" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-5213"><a href="https://www.kemhan.go.id/strahan/category/produk-strategi-hanneg/perbatasan">PERBATASAN</a></li>
+	<li id="menu-item-5212" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-5212"><a href="https://www.kemhan.go.id/strahan/category/produk-strategi-hanneg/pengarahan">PENGERAHAN</a></li>
+	<li id="menu-item-5214" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-5214"><a href="https://www.kemhan.go.id/strahan/category/produk-strategi-hanneg/produk-hukum">PRODUK HUKUM</a></li>
+</ul>
+</li>
+</div></ul>            
+        					<div class="mini-header">
+                    <div class="wrap">
+                        <a href="https://www.kemhan.go.id/strahan"><img src="https://www.kemhan.go.id/strahan/wp-content/themes/strahan/images/logo.png"    style=" padding-bottom:0.50px 10px;"></a>
+                        <a href="https://www.kemhan.go.id/strahan"><h1 style="font-size:24px;  padding-bottom:1px; ">KEMENTERIAN PERTAHANAN REPUBLIK INDONESIA</h1></a><sub>
+						<a href="https://www.kemhan.go.id/strahan"> <h1 style="font-size:15px; padding:0px 30px;">Direktorat Jenderal Strategi Pertahanan Kemhan RI</h1> </a>	
+					 
+						  
+                        <div class="clear"></div>
+                    </div>
+                </div>
+			            
+
+             <div class="nav-mobile">
+                <ul>
+                    <li>
+                        <a class="triger" href="#"><i class="fa fa-bars"></i></i></a>
+                    </li>
+                </ul>
+            </div>
+
+            
+
+            <script type="text/javascript">
+                        $(".triger").click(function(){
+                            $(".menu-sub-mob").slideToggle();
+                        });
+                    </script>
+                    <script type="text/javascript">
+                        $('.nav-mobile ul li a').click(function(){
+                            $(this).find('i').toggleClass('fa-bars fa-times')
+                        });
+                    </script>
+
+            <div class="navigation-top">
+                <div class="wrap">
+                    <div class="col-80">
+                        <nav class="navigation-menus">
+                        
+                       <ul id="primary-menu" class="nav-menu"><li id="menu-item"> <a class="mini-h" href="https://www.kemhan.go.id/strahan"><i class="fa fa-home fa-lg"></i></a></li><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-4236"><a href="#">TENTANG STRAHAN</a>
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8755"><a href="https://www.kemhan.go.id/strahan/pimpinan-strahan">STRUKTUR PIMPINAN</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-4922"><a href="#">STRUKTUR ORGANISASI</a>
+	<ul class="sub-menu">
+		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8754"><a href="https://www.kemhan.go.id/strahan/setditjen">SETDITJEN</a></li>
+		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4950"><a href="https://www.kemhan.go.id/strahan/ditjakstra">DITJAKSTRAHAN</a></li>
+		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4946"><a href="https://www.kemhan.go.id/strahan/ditrah">DITRAHKOMHAN</a></li>
+		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4948"><a href="https://www.kemhan.go.id/strahan/ditkersin">DITKERSINHAN</a></li>
+		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4947"><a href="https://www.kemhan.go.id/strahan/ditwilhan">DITWILHAN</a></li>
+	</ul>
+</li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10231"><a href="https://www.kemhan.go.id/strahan/profil-ditjen-strahan">PROFIL DITJEN STRAHAN</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10339"><a href="https://www.kemhan.go.id/strahan/jam-pimpinan">JAM PIMPINAN</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4919"><a href="https://www.kemhan.go.id/strahan/tugsas-fungsi">TUGAS &#038; FUNGSI</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4918"><a href="https://www.kemhan.go.id/strahan/sejarah-2">SEJARAH</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5083"><a href="https://www.kemhan.go.id/strahan/faq">FAQ</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10688"><a href="https://www.kemhan.go.id/strahan/dwp-ditjen-strahan">DWP DITJEN STRAHAN</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-4884"><a href="#">BERITA DAN MEDIA</a>
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-4237"><a href="https://www.kemhan.go.id/strahan/category/berita">BERITA DIREKTORAT</a>
+	<ul class="sub-menu">
+		<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-4885"><a href="https://www.kemhan.go.id/strahan/category/berita/kegiatan-ditjen-strahan">KEGIATAN DITJEN STRAHAN</a></li>
+		<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-5202"><a href="https://www.kemhan.go.id/strahan/category/berita/kegiatan-setditjen-strahan">KEGIATAN SETDITJEN STRAHAN</a></li>
+		<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-5203"><a href="https://www.kemhan.go.id/strahan/category/berita/kegiatan-ditjenjakstra">KEGIATAN DITJAKSTRAHAN</a></li>
+		<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-5205"><a href="https://www.kemhan.go.id/strahan/category/berita/kegiatan-ditkersin">KEGIATAN DITKERSINHAN</a></li>
+		<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-5207"><a href="https://www.kemhan.go.id/strahan/category/berita/kegiatan-ditrah">KEGIATAN DITRAHKOMHAN</a></li>
+		<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-5206"><a href="https://www.kemhan.go.id/strahan/category/berita/kegiatan-ditwilhan">KEGIATAN DITWILHAN</a></li>
+	</ul>
+</li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-6628"><a href="https://www.kemhan.go.id/strahan/category/berita/bela-negara">BELA NEGARA</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-4811"><a href="https://www.kemhan.go.id/strahan/category/artikel">ARTIKEL</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-6568"><a href="#">GALERI</a>
+	<ul class="sub-menu">
+		<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-6567"><a href="https://www.kemhan.go.id/strahan/category/foto">FOTO</a></li>
+		<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-6569"><a href="https://www.kemhan.go.id/strahan/category/video">VIDEO</a></li>
+	</ul>
+</li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor menu-item-has-children menu-item-5183"><a href="https://www.kemhan.go.id/strahan/category/produk-strategi-hanneg">PRODUK STRATEGI HANNEG</a>
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-5210"><a href="https://www.kemhan.go.id/strahan/category/produk-strategi-hanneg/produk-kebijakan-strategi-hanneg">KEBIJAKAN STRATEGI HANNEG</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-5209"><a href="https://www.kemhan.go.id/strahan/category/produk-strategi-hanneg/hasil-kajian-strahan">HASIL KAJIAN STRAHAN</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-5211"><a href="https://www.kemhan.go.id/strahan/category/produk-strategi-hanneg/kerjasama-bilateral">KERJASAMA BILATERAL</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-5213"><a href="https://www.kemhan.go.id/strahan/category/produk-strategi-hanneg/perbatasan">PERBATASAN</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-5212"><a href="https://www.kemhan.go.id/strahan/category/produk-strategi-hanneg/pengarahan">PENGERAHAN</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-5214"><a href="https://www.kemhan.go.id/strahan/category/produk-strategi-hanneg/produk-hukum">PRODUK HUKUM</a></li>
+</ul>
+</li>
+</ul>                       
+                         <!--<ul>
+                                <li class="par-menu"><a class="mini-h" href="https://www.kemhan.go.id/strahan"><i class="fa fa-home fa-lg"></i></a></li>
+                                <li class="par-menu"><a href="#">|</a></li>
+                                <li class="par-menu">
+                                    <a class="h-v" href="#">KEMENTERIAN PERTAHANAN</a>
+                                    <ul class="sub-m">
+                                        <li class="sub-menu">
+                                            <a href="https://www.kemhan.go.id/strahan/tentang-kami/ ">TENTANG KAMI  <span class="arrw">></span></a>
+                                            <ul class="sub-m-t">
+                                                <li class="sub-menu-two">
+                                                    <a href="https://www.kemhan.go.id/strahan/pimpinan/">PIMPINAN <span class="arrw">></span></a>
+                                                    <ul class="sub-m-tr">
+                                                        <li class="sub-menu-tree">
+                                                            <a href="https://www.kemhan.go.id/strahan/menham/">MENHAM</a>
+                                                        </li>
+                                                        <li class="sub-menu-tree">
+                                                            <a href="https://www.kemhan.go.id/strahan/sekjen/">SEKJEN</a>
+                                                        </li>
+                                                        <li class="sub-menu-tree">
+                                                            <a href="https://www.kemhan.go.id/strahan/irjen/">IRJEN</a>
+                                                        </li>
+                                                        <li class="sub-menu-tree">
+                                                            <a href="https://www.kemhan.go.id/strahan/rektor-unham/">REKTOR UNHAM</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li class="sub-menu-two">
+                                                    <a href="https://www.kemhan.go.id/strahan/visi-dan-misi/">VISI & MISI</a>
+                                                </li>
+                                                <li class="sub-menu-two">
+                                                    <a href="https://www.kemhan.go.id/strahan/tugas-dan-fungsi/">TUGAS & FUNGSI</a>
+                                                </li>
+                                                <li class="sub-menu-two">
+                                                    <a href="https://www.kemhan.go.id/strahan/sejarah/">SEJARAH</a>
+                                                </li>
+                                                <li class="sub-menu-two">
+                                                    <a href="https://www.kemhan.go.id/strahan/arti-logo-kemhan/">ARTI lOGO KEMHAM</a>
+                                                </li>
+                                                <li class="sub-menu-two">
+                                                    <a href="https://www.kemhan.go.id/strahan/lokasi/">LOKASI</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="sub-menu">
+                                            <a href="#">ORGANISASI  <span class="arrw">></span></a>
+                                            <ul class="sub-m-t">
+                                                 <li class="sub-menu-two"><a href="http://www.kemhan.go.id/" target="_blank">SETJEN</a></li>
+                                                 <li class="sub-menu-two"><a href="http://itjen.kemhan.go.id/" target="_blank">ITJEN</a></li>
+                                                 <li class="sub-menu-two"><a href="http://strahan.kemhan.go.id/" target="_blank">DITJEN STRAHAN</a></li>
+                                                 <li class="sub-menu-two"><a href="http://renhan.kemhan.go.id/" target="_blank">DITJEN RENHAN</a></li>
+                                                 <li class="sub-menu-two"><a href="http://pothan.kemhan.go.id/" target="_blank">DITJEN POTHAN</a></li>
+                                                 <li class="sub-menu-two"><a href="http://kuathan.kemhan.go.id/" target="_blank">DITJEN KUATHAN</a></li>
+                                                 <li class="sub-menu-two"><a href="http://ranahan.kemhan.go.id/" target="_blank">BARANAHAN</a></li>
+                                                 <li class="sub-menu-two"><a href="http://www.balitbang.kemhan.go.id/" target="_blank">BALITBANG</a></li>
+                                                 <li class="sub-menu-two"><a href="http://www.badiklat.kemhan.go.id/" target="_blank">BADIKLAT</a></li>
+                                                 <li class="sub-menu-two"><a href="http://idu.ac.id//" target="_blank">UNHAN</a></li>
+                                                 <li class="sub-menu-two"><a href="http://pusdatin.kemhan.go.id/" target="_blank">PUSDATIN</a></li>
+                                                 <li class="sub-menu-two"><a href="http://pusku.kemhan.go.id/" target="_blank">PUSKU</a></li>
+                                                 <li class="sub-menu-two"><a href="http://puskompublik.kemhan.go.id/" target="_blank">PUSKOM PUBLIK</a></li>
+                                                 <li class="sub-menu-two"><a href="http://pusrehab.kemhan.go.id/" target="_blank">PUSREHAB</a></li>
+                                            </ul>
+                                            
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="par-menu">
+                                    <a class="h-v" href="#">BERITA DAN MEDIA</a>
+                                    <ul class="sub-m">
+                                        <li class="sub-menu">
+                                            <a href="https://www.kemhan.go.id/strahan/category/berita">BERITA</a>
+                                        </li>
+                                        <li class="sub-menu">
+                                            <a href="https://www.kemhan.go.id/strahan/category/foto">FOTO</a>
+                                        </li>
+                                        <li class="sub-menu">
+                                            <a href="https://www.kemhan.go.id/strahan/category/video">VIDEO</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="par-menu">
+                                    <a class="h-v" href="#">PUBLIKASI</a>
+                                    <ul class="sub-m">
+                                        <li class="sub-menu">
+                                            <a href="#">REGULASI <span class="arrw">></span></a>
+                                            <ul class="sub-m-t">
+                                                <li class="sub-menu-two"><a href="#">Undang-undang</a></li>
+                                                <li class="sub-menu-two"><a href="isi-peraturan.html">Peraturan Pemerintah</a></li>
+                                                <li class="sub-menu-two"><a href="#">Peraturan Presiden</a></li>
+                                                <li class="sub-menu-two"><a href="#">Keputusan Presiden</a></li>
+                                                <li class="sub-menu-two"><a href="#">Intruksi Presiden</a></li>
+                                                <li class="sub-menu-two"><a href="#">Peraturan Mentri Pertahanan</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="sub-menu">
+                                            <a href="#">BUKU PUTIH</a>
+                                        </li>
+                                        <li class="sub-menu">
+                                            <a href="https://www.kemhan.go.id/strahan/category/kebijakan-pertahanan">KEBIJAKAN PERTAHANAN <span class="arrw">></span></a>
+                                            <ul class="sub-m-t">
+                                            	                        
+                                   <li class="sub-menu-two"><a href="#">No Content</a></li>
+                        
+                               		                                                
+                                                
+                                            </ul>
+                                        </li>
+                                        <li class="sub-menu">
+                                            <a href="https://www.kemhan.go.id/strahan/category/majalah">MAJALAH</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="par-menu"><a href="#">|</a></li>
+                            </ul>-->
+                        </nav>
+                    </div>
+                    <div class="col-20">
+                        <div class="inner-pad">
+                            <form class="search-top" action="https://www.kemhan.go.id/strahan/" method="get" id="searchform">
+                                <input type="text" name="s" placeholder="Cari" value="">
+                            </form>
+                            <div class="r-float">
+                                <!--
+                                <a href="#">ID</a>
+                                <p class="mini-sparator"></p>
+                                <a href="#">EN</a>
+                                -->
+                            </div>
+                        <div class="clear"></div>
+                        </div>
+                    </div>
+
+                    <div class="clear"></div>
+                </div>
+            </div>
+            <div class="sec-menus">
+                <div class="wrap">
+                    <ul>
+                        <li style="width: 170.797;"><a href="https://ppid.kemhan.go.id/" target="_blank"><img src="https://www.kemhan.go.id/strahan/wp-content/themes/strahan/images/icon-PPID.jpg"></a></li>
+                        <li style="width: 170.797;"><a href="https://mail.kemhan.go.id/" target="_blank"><img src="https://www.kemhan.go.id/strahan/wp-content/themes/strahan/images/icon-WEBMAIL.jpg"></a></li>
+						<!--<li style="width: 170.797;"><a href="https://www.kemhan.go.id/jdih/"><img src="https://www.kemhan.go.id/strahan/wp-content/themes/strahan/images/JDIH.jpg"></a></li>-->
+                        <!--<li style="width: 170.797;"><a href="http://192.168.34.51/perpus2017" target="_blank"><img src="https://www.kemhan.go.id/strahan/wp-content/themes/strahan/images/icon-perpustakaan.jpg"></a></li>-->
+						<li style="width: 170.797;"><a href="http://192.168.32.2/perpustra2022" target="_blank"><img src="https://www.kemhan.go.id/strahan/wp-content/themes/strahan/images/icon-perpustakaan.jpg"></a></li>
+						<!--<li style="width: 170.797;"><a href="" ><img src="https://www.kemhan.go.id/strahan/wp-content/themes/strahan/images/icon-blank.jpg"></a></li>
+                        <li style="width: 170;"><a href="" target="_blank"><img src="https://www.kemhan.go.id/strahan/wp-content/themes/strahan/images/icon-blank.jpg"></a></li>-->
+                        <div class="clear"></div>
+                    </ul>
+                </div>
+            </div>
+            
+
+           
+<div class="content">
+    <div class="wrap">
+        <div class="bg-w article">
+            <div class="def-page article">
+            
+                        <h2>Perbatasan Wilayah Darat Indonesia dengan 3 Negara</h2>
+            <small>Kamis, 1 September 2022</small><br/><br/>
+            
+            <p><a href="https://www.kemhan.go.id/strahan/2022/09/01/perbatasan-wilayah-darat-indonesia-dengan-3-negara.html/batas-darat-indonesia" rel="attachment wp-att-10664"><img class="alignnone size-full wp-image-10664" src="https://www.kemhan.go.id/strahan/wp-content/uploads/2022/09/BATAS-DARAT-INDONESIA.png" alt="" width="813" height="586" /></a></p>
+                        
+                                    
+
+            <br /><br />
+<!--
+            <ul class="list-art">
+			            </ul>
+-->
+            </div>
+            <br/>
+      
+        </div>
+    </div>
+</div>
+             <!--
+             <div class="ftr-mob">
+                <ul class="men-mob">
+                    <li><a href="#">MENU UTAMA</a></li>
+                    <li><a href="#">TAUTAN</a></li>
+                    <li><a href="#">KONTAK</a></li>
+                    <div class="clear"></div>
+                </ul>
+
+                <ul class="men-sta">
+                    <h3>STATISTIK</h3>
+                    <li style="color:#FFF;"><h2 class="widgettitle">Statistik Pengunjung</h2>
+<ul><li><label>Todays Visits: </label>268</li><li><label>Last 7 Days Visits: </label>17.738</li><li><label>Last 30 Days Visits: </label>54.977</li><li><label>Total Visits: </label>3.731.711</li></ul></li>                    <div class="clear"></div>
+                </ul>
+            </div>
+            -->
+            
+            <div class="footer">
+                <div class="wrap">
+                    <div class="col-20">
+                        <div class="ftr">
+                            <h4>MENU UTAMA</h4>
+                            <div class="menu-menu-utama-footer-container"><ul id="menu-menu-utama-footer" class="menu"><li id="menu-item-2799" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-2799"><a href="https://www.kemhan.go.id/strahan">Beranda</a></li>
+<li id="menu-item-4893" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-4893"><a href="https://www.kemhan.go.id/strahan/category/berita">Berita</a></li>
+</ul></div>                        </div>
+                    </div>
+                    
+                    <div class="col-20">
+                        <div class="ftr">
+                            <h4>TAUTAN</h4>
+                            <div class="menu-menu-tautan-footer-container"><ul id="menu-menu-tautan-footer" class="menu"><li id="menu-item-4894" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4894"><a href="http://kemhan.go.id">KEMHAN RI</a></li>
+<li id="menu-item-2802" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2802"><a target="_blank" rel="noopener noreferrer" href="http://www.tni.mil.id/">MABES TNI</a></li>
+<li id="menu-item-2803" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2803"><a target="_blank" rel="noopener noreferrer" href="http://www.tniad.mil.id/">TNI AD</a></li>
+<li id="menu-item-2804" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2804"><a target="_blank" rel="noopener noreferrer" href="http://www.tnial.mil.id/">TNI AL</a></li>
+<li id="menu-item-2805" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2805"><a target="_blank" rel="noopener noreferrer" href="http://www.tni-au.mil.id/">TNI AU</a></li>
+</ul></div>                        </div>
+                    </div>
+                    
+                    <div class="col-40 h-m">
+                        <div class="ftr">
+                            <h4>INFORMASI KONTAK</h4>
+                            			<div class="textwidget"><ul>
+                                <li>
+<a href="#">
+Kementerian Pertahanan Republik Indonesia<br>
+Direktorat Strategi Pertahanan<br/>
+Gedung Ahmad Yani<BR>
+Jl.Medan Merdeka Barat No. 13-14 Jakarta Pusat, 10110<br/>
+                                KOTAK POS 2005 JAKARTA 10020<br/>
+                                Telp. 021-3828548 <br/> strahan@kemhan.go.id<br/></a>
+</li>
+</ul></div>
+		                        </div>
+                    </div>
+
+                    <div class="col-20">
+                        <div class="ftr">
+                            <h4>STATISTIK</h4>
+                            <ul>
+                               <li style="color:#FFF;"><h2 class="widgettitle">Statistik Pengunjung</h2>
+<ul><li><label>Todays Visits: </label>268</li><li><label>Last 7 Days Visits: </label>17.738</li><li><label>Last 30 Days Visits: </label>54.977</li><li><label>Total Visits: </label>3.731.711</li></ul></li>                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="col-40 show-s-m">
+                        <div class="ftr">
+                           <h4>INFORMASI KONTAK</h4>
+                           			<div class="textwidget"><ul>
+                                <li>
+<a href="#">
+Kementerian Pertahanan Republik Indonesia<br>
+Direktorat Strategi Pertahanan<br/>
+Gedung Ahmad Yani<BR>
+Jl.Medan Merdeka Barat No. 13-14 Jakarta Pusat, 10110<br/>
+                                KOTAK POS 2005 JAKARTA 10020<br/>
+                                Telp. 021-3828548 <br/> strahan@kemhan.go.id<br/></a>
+</li>
+</ul></div>
+		
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+
+            <p class="ftr-bttm">Hak Cipta © Kementerian Pertahanan Republik Indonesia</p>
+
+        </div>
+
+<script type='text/javascript' src='https://www.kemhan.go.id/strahan/wp-content/plugins/custom-banners/assets/js/jquery.cycle2.min.js?ver=5.4'></script>
+<script type='text/javascript' src='https://www.kemhan.go.id/strahan/wp-content/plugins/custom-banners/assets/js/custom-banners.js?ver=5.4'></script>
+<script type='text/javascript' src='https://www.kemhan.go.id/strahan/wp-content/plugins/videojs-html5-player/videojs/video.js?ver=1.1.0'></script>
+<script type='text/javascript' src='https://www.kemhan.go.id/strahan/wp-includes/js/wp-embed.js?ver=5.4'></script>
+ <script>
+        jQuery(document).ready(function ($) {
+            /* jQuery activation and setting options for first tabs*/
+            $("#tabbed-nav").zozoTabs({
+                position: "top-left",
+                theme: "flat-alizarin",
+                spaced: true,
+                rounded: false,
+                animation: {
+                    easing: "easeInOutExpo",
+                    duration: 600,
+                    effects: "fade"
+                },
+                size:"large",
+                responsive: true, 
+            });
+        });
+    </script>
+
+    
+
+        <script type="text/javascript">
+           $(document).ready(function() {
+              $("#owl-gall").owlCarousel({
+                responsive: true,
+                responsiveRefreshRate : 200,
+                responsiveBaseWidth: window,
+                 items : 2,
+                itemsCustom : false,
+                itemsDesktop : [1199,4],
+                itemsDesktopSmall : [980,3],
+                itemsTablet: [768,2],
+                itemsTabletSmall: false,
+                itemsMobile : [479,1],
+                singleItem : false,
+                itemsScaleUp : false,
+                navigation : true,
+                rewindNav : true,
+                scrollPerPage : false,
+                //Mouse Events
+                dragBeforeAnimFinish : true,
+                mouseDrag : true,
+                touchDrag : true,//Pagination
+                pagination : false,
+                paginationNumbers: false,
+                stagePadding: 50,
+ 
+              });    
+            });
+        </script>
+
+        <script type="text/javascript">
+           $(document).ready(function() {
+              $("#owl-gall2").owlCarousel({
+                stagePadding: 50,
+                responsive: true,
+                responsiveRefreshRate : 200,
+                responsiveBaseWidth: window,
+                 items : 2,
+                itemsCustom : false,
+                itemsDesktop : [1199,4],
+                itemsDesktopSmall : [980,3],
+                itemsTablet: [768,2],
+                itemsTabletSmall: false,
+                itemsMobile : [479,1],
+                singleItem : false,
+                itemsScaleUp : false,
+                navigation : true,
+                navigationText : ["<",">"],
+                rewindNav : true,
+                scrollPerPage : false,
+                //Mouse Events
+                dragBeforeAnimFinish : true,
+                mouseDrag : true,
+                touchDrag : true,//Pagination
+    pagination : false,
+    paginationNumbers: false,
+ 
+              });    
+            });
+        </script>
+
+        <script type="text/javascript">
+           $(document).ready(function() {
+              $("#owl-banner").owlCarousel({
+                responsive: true,
+                responsiveRefreshRate : 200,
+                responsiveBaseWidth: window,
+                 items : 5,
+                itemsCustom : false,
+                itemsDesktop : [1199,4],
+                itemsDesktopSmall : [980,3],
+                itemsTablet: [768,2],
+                itemsTabletSmall: false,
+                itemsMobile : [479,1],
+                singleItem : false,
+                itemsScaleUp : false,
+                navigation : false,
+                navigationText : ["<",">"],
+                rewindNav : true,
+                scrollPerPage : true,
+                //Mouse Events
+                dragBeforeAnimFinish : true,
+                mouseDrag : true,
+                touchDrag : true,//Pagination
+    pagination : false,
+    paginationNumbers: false,
+    //Autoplay
+    autoPlay : true,
+    stopOnHover : true,
+ 
+              });    
+            });
+        </script>
+
+         <script type="text/javascript">
+           $(document).ready(function() {
+              $(".mag").owlCarousel({
+                responsive: true,
+                responsiveRefreshRate : 200,
+                responsiveBaseWidth: window,
+                items : 5,
+                itemsCustom : false,
+                itemsDesktop : [1199,4],
+                itemsDesktopSmall : [980,3],
+                itemsTablet: [768,2],
+                itemsTabletSmall: false,
+                itemsMobile : [479,1],
+                singleItem : false,
+                itemsScaleUp : false,
+                navigation : true,
+                navigationText : ["<",">"],
+                rewindNav : true,
+                scrollPerPage : true,
+                //Mouse Events
+                dragBeforeAnimFinish : true,
+                mouseDrag : true,
+                touchDrag : true,//Pagination
+                pagination : false,
+                paginationNumbers: false,
+                //Autoplay
+                autoPlay : true,
+                stopOnHover : true,
+ 
+              });    
+            });
+        </script>
+</body>
+</html>

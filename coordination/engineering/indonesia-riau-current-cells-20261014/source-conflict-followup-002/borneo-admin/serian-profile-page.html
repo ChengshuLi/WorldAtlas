@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- jQuery 3.5.1 -->
+<script src="/module/web/web/js/jquery.min.js"></script>
+
+<!-- Bootstrap 3.3.7 -->
+<link rel="stylesheet" href="/module/web/web/theme/default/bootstrap.min.css">
+<script src="/module/web/web/js/bootstrap.min.js"></script>
+
+<!-- FontAwesome 4.2 -->
+<link rel="stylesheet" href="/module/web/web/theme/default/font-awesome.min.css">
+
+<!-- jQuery UI -->
+<link rel="stylesheet" href="/module/web/web/theme/default/jquery-ui.css">
+<script src="/module/web/web/js/jquery-ui.js"></script>
+
+<!-- Moment JS -->
+<script src="/module/web/web/js/moment.min.js"></script>
+<script src="/module/web/web/js/moment-with-locales.min.js"></script>
+
+<!-- Owl Carousel 2.3.4 -->
+<link rel="stylesheet" href="/module/web/web/theme/default/owl.carousel.min.css">
+<script src="/module/web/web/js/owl.carousel.min.js"></script>
+
+<!-- Evo Calendar -->
+<link rel="stylesheet" href="/module/web/web/theme/default/evo-calendar.min.css">
+<script src="/module/web/web/js/evo-calendar.min.js"></script>
+
+<!-- Mark.js -->
+<script src="/module/web/web/js/jquery.mark.min.js"></script>
+
+<!-- Chart.js -->
+<script src="/module/web/web/js/chart.min.js"></script>
+
+<!-- Splide JS -->
+<link rel="stylesheet" href="/module/web/web/theme/default/splide.min.css">
+<script src="/module/web/web/js/splide.min.js"></script>
+
+
+<SCRIPT LANGUAGE="javascript" TYPE="text/javascript" SRC="https://serian.sarawak.gov.my/moonlight/js/min/moonlight.js"></SCRIPT><script src="https://serian.sarawak.gov.my/web/web/js/module.js"></script><link rel="stylesheet" type="text/css" href="https://serian.sarawak.gov.my/web/web/default/share.css" /><script type="text/javascript" language="javascript">
+/* All Javascript that need to print by PHP put here. Pure Javascript put in web/js/module.js */
+lbl_field_required='This field is compulsory.';/*For validate_form() function.*/
+lbl_ajax_error='Fail to load required records, please contact administrator if the problem is persistent.';/*For validate_form() function.*/
+</script>
+
+<meta name="description" content="k&nbsp;<quillbot-extension-portal></quillbot-extension-portal>">
+<meta name="keywords" content="k">
+
+<html>
+	<head>
+		<!-- <link rel="stylesheet" type="text/css" href="http://10.18.4.76/projects/dynamicweb/engine/v10/branches/module/web/web/theme/default/share.css"> -->
+		<link rel="SHORTCUT ICON" href="/web/attachment/show/?docid=cGZSanR1cS92TGhoZFBxUGNjOFVLUT09OjoI-6Nbbc1eRI0Qray0cDl8">
+		<title>
+			Profil Bahagian Serian - Laman Web Pentadbiran Bahagian Serian		</title>
+	</head>
+	<body class="hold-transition" onLoad="if (window.runOnLoad){runOnLoad()}">
+		 
+  
+ <div id='divAjaxError' class='nowLoading' style="display:none" >
+	<table width=100% cellpadding=1 cellspacing=0 border=0>
+	<tr>
+		<td align="right"><img alt='icon' src='https://serian.sarawak.gov.my/k/warning.gif' border='0' style='vertical-align:middle;'  /></td>
+		<td><strong>AJAX Error</strong><br/>Sorry, failed to load required information. Please contact your system administrator.</td>
+		<td width=1% valign=top>
+			<a href="javascript:hideItSimple('divAjaxError')">
+				<img alt='icon' src='https://serian.sarawak.gov.my/k/close.png' border='0' style='vertical-align:middle;'  />			</a>
+		</td>
+	</tr>
+	<tr>
+		<td colspan=3 align=right valugb=bottom>
+			<a href="javascript:hideItSimple('divAjaxError')">Close</a>
+		</td>
+	</tr>
+	</table>
+</div>
+
+<!-- Ajax loader -->
+<div id='divLoading' class='nowLoading' style="display:none" >
+	<div class="ajaxDivLoader">
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+	</div>
+</div>
+
+<style>
+	.nowLoading {
+		color: #333;
+		display: none;
+		position: absolute;
+		top: 30%;
+		left: 35%;
+		width: 240px;
+		height: 95px;
+		padding: 10px;
+		border: 1px solid #D1CAA3;
+		background-color: #F9F2AA;
+		text-align: center;
+		overflow: auto;
+		z-index:8080;
+		filter: progid:DXImageTransform.Microsoft.Shadow(color=gray,direction=135,Strength=5), alpha(opacity=90);
+		-moz-opacity: .09;
+		opacity: .90;
+	}
+
+    .ajaxDivLoader{
+        position: relative;
+        z-index: 9999;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        /* background: rgba(0, 0, 0, 0.3); */
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+        justify-content: center;
+		height:350px;
+    }
+
+    .ajaxDivLoader span {
+        display: block;
+        width: 15px;
+        height: 30px;
+        margin-right: 10px;
+        border-radius: 5px;
+        animation-name: redirect-ajaxDivLoader;
+        animation-duration: 0.4s;
+        animation-direction: alternate;
+        animation-iteration-count: infinite;
+        animation-timing-function: cubic-bezier(.19, .97, 1, 1);
+    }
+
+            .ajaxDivLoader span:nth-of-type(1) {
+            background: #fdffba;
+        }
+        .ajaxDivLoader span:nth-of-type(2) {
+            animation-delay: 0.2s;
+            background: #fff99e;
+        }
+        .ajaxDivLoader span:nth-of-type(3) {
+            animation-delay: 0.3s;
+            background: #f4e888;
+        }
+        .ajaxDivLoader span:nth-of-type(4) {
+            animation-delay: 0.4s;
+            background: #fbf056;
+        }
+        .ajaxDivLoader span:nth-of-type(5) {
+            animation-delay: 0.5s;
+            background: #fffc18;
+        }
+        .ajaxDivLoader span:nth-of-type(6) {
+            animation-delay: 0.6s;
+            background: #eae605;
+        }
+
+    
+    /* .ajaxDivLoader span:nth-of-type(1) {
+        background: #fba2a2;
+    }
+    .ajaxDivLoader span:nth-of-type(2) {
+        animation-delay: 0.2s;
+        background: #ff7979;
+    }
+    .ajaxDivLoader span:nth-of-type(3) {
+        animation-delay: 0.3s;
+        background:#ed6464;
+    }
+    .ajaxDivLoader span:nth-of-type(4) {
+        animation-delay: 0.4s;
+        background:#ed4343;
+    }
+    .ajaxDivLoader span:nth-of-type(5) {
+        animation-delay: 0.5s;
+        background:#e92323;
+    }
+    .ajaxDivLoader span:nth-of-type(6) {
+        animation-delay: 0.6s;
+        background:#eb0000;
+    } */
+
+    @keyframes redirect-ajaxDivLoader {
+        0% {
+            height: 30px;
+        }
+        100% {
+            height: 150px;
+        }
+    }
+</style>
+
+<!-- Full page loader -->
+<div class="full-page-loader" style="display:none;">
+    <div class="loader">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</div>
+
+<style>
+    .full-page-loader .loader{
+        position: fixed;
+        z-index: 9999;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: rgba(0, 0, 0, 0.3);
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .full-page-loader .loader span {
+        display: block;
+        width: 15px;
+        height: 30px;
+        margin-right: 10px;
+        border-radius: 5px;
+        animation-name: redirect-loader;
+        animation-duration: 0.4s;
+        animation-direction: alternate;
+        animation-iteration-count: infinite;
+        animation-timing-function: cubic-bezier(.19, .97, 1, 1);
+    }
+    
+            .full-page-loader .loader span:nth-of-type(1) {
+            background: #fdffba;
+        }
+        .full-page-loader .loader span:nth-of-type(2) {
+            animation-delay: 0.2s;
+            background: #fff99e;
+        }
+        .full-page-loader .loader span:nth-of-type(3) {
+            animation-delay: 0.3s;
+            background: #f4e888;
+        }
+        .full-page-loader .loader span:nth-of-type(4) {
+            animation-delay: 0.4s;
+            background: #fbf056;
+        }
+        .full-page-loader .loader span:nth-of-type(5) {
+            animation-delay: 0.5s;
+            background: #fffc18;
+        }
+        .full-page-loader .loader span:nth-of-type(6) {
+            animation-delay: 0.6s;
+            background: #eae605;
+        }
+
+    
+    /* .full-page-loader .loader span:nth-of-type(1) {
+        background: #fba2a2;
+    }
+    .full-page-loader .loader span:nth-of-type(2) {
+        animation-delay: 0.2s;
+        background: #ff7979;
+    }
+    .full-page-loader .loader span:nth-of-type(3) {
+        animation-delay: 0.3s;
+        background:#ed6464;
+    }
+    .full-page-loader .loader span:nth-of-type(4) {
+        animation-delay: 0.4s;
+        background:#ed4343;
+    }
+    .full-page-loader .loader span:nth-of-type(5) {
+        animation-delay: 0.5s;
+        background:#e92323;
+    }
+    .full-page-loader .loader span:nth-of-type(6) {
+        animation-delay: 0.6s;
+        background:#eb0000;
+    } */
+
+    @keyframes redirect-loader {
+        0% {
+            height: 30px;
+        }
+        100% {
+            height: 150px;
+        }
+    }
+</style>		
+		<div class="wrapper">
+			
+            			
+			<div class="content-wrapper">
+				
+
+
+<div class="template_theme_detect" data-template="template5_">	
+<h1 style="display: none;"></h1>
+<form splwpk-feedback-form = "splwpk-feedback-form"><input type='hidden' name='moonlight_token_74550' value='189QeL'/></form>
+<a href="/web/subpage/staffcontact_view/152,110,163,215" style="display:none;" splwpk-publicising = "splwpk-publicising" timestamp="2026-10-15 08:11:38" ></a>
+
+<div id="template5_header">
+	<header>
+		<!-- Top Header contains login register search and light dark mode -->
+		<div class="top-header">
+			<div class="container">
+				<div id="header-wrapper">
+
+					<!-- Sarawak ID Login Register -->
+						<!-- <div class="register-box">
+							<span class="swkid"><img alt="image" src="/module/web/web/theme/default/res/template5/sarawakid.png">Sarawak ID</span>
+							<a class="login-btn" href="https://sarawakid.sarawak.gov.my/web/ssov1/login/">Login</a>|<a class="register-btn" href="https://sarawakid.sarawak.gov.my/web/ssov1/signup/">Register</a>
+						</div> -->
+					<!-- Sarawak ID Login Register End -->	
+
+					<div class="second-box" style="float:left;font-size:15px;" splwpk-multilang="splwpk-multilang" splwpk-w3c="splwpk-w3c">
+
+						<div class="login-button">	
+														
+						</div>
+					
+						<!-- Language option -->
+						<select id="lang" name="lang" onchange="javascript:window.location.href = '/web/share/set_lang/'+this.value;">
+														<option value="bm"
+							 selected 							>
+							BM							</option>
+													</select>
+						<!-- Language option End -->
+
+						<!-- Light Dark Mode Switch -->	
+						<label class="switch" style="margin: 3px 10px 0">
+							<input class="toggle-me" type="checkbox">
+							<span class="slider round"></span>
+						</label>
+						<!-- Light Dark Mode Switch End -->	
+					</div>	
+
+					<!-- Search Form -->
+					<div class="forms-content">
+						<form splwpk-search-function="splwpk-search-function" splwpk-advanced-search-function="splwpk-advanced-search-function" class="is-search-form" role="search" action="/web/subpage/search_result_gs/" method="POST"><input type='hidden' name='moonlight_token_74550' value='189QeL'/>
+							<input class="is-search-input fill_inited" value="" name="search_value" type="search" placeholder="Type To Search"/>
+							<button type="submit" class="is-search-submit"><span class="glyphicon glyphicon-search"></span></button>
+						</form>
+					</div>
+					<!-- Search Form End -->
+
+					<!--div id="swkid_plugin" style="float:left;"></div-->
+										<div id="spass_plugin" style="float:left;"></div>
+					
+				</div>
+			</div>
+		</div>
+		<!-- Top Header contains login register search and light dark mode End -->
+		
+		
+		<!-- Main Menu -->
+		<div class="secondary-header">
+			<div class="container">
+				<div class="col-md-3">
+				<!-- 30.9.2020 -->
+					<img alt="image" style="max-width:200px;" class="normal logo" src="/web/attachment/show/?docid=dmpNQXBxbzFkNFZoc0cveURHeElvUT09OjoEK3unQEP8Qr5mVpFLWVto">
+					<img alt="image" style="max-width:200px;"  class="dark logo" src="/web/attachment/show/?docid=">
+				<!-- 30.9.2020 End -->
+				</div>
+				
+				<div class="col-md-9">				
+					<nav id="mySidenav" class="navbar navbar-expand main-nav sidenav">
+					
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon">☰</span>
+						</button>
+						
+						
+						<div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">						
+						
+						<!-- 30.9.2020 Close Button -->
+						<button class="closenav navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon">X</span>
+						</button>	
+						<!-- 30.9.2020 End Close Button -->							
+						
+							<ul class="navbar-nav align-self-end" id="primary-nav">
+								<li class="nav-item dropdown menu-0"><a class="nav-link" target="_self" href="https://serian.sarawak.gov.my/web/home/index/"  timestamp='2026-10-15 08:11:38' >Laman Utama</a></li><li class="nav-item dropdown menu-1"><a class="nav-link dropdown-toggle" data-toggle="dropdown"  timestamp='2026-10-15 08:11:38' >Mengenai Kami<span class="caret"></span></a><ul class="dropdown-menu drop-1"><li><a target="_self" href="https://serian.sarawak.gov.my/web/subpage/webpage_view/302"  timestamp='2026-07-09 14:53:20'>Perutusan Residen</a></li><li class="dropdown-submenu sub-2 "><a class="submenu">Bahagian Serian<span class="caret"></span></a><ul class="dropdown-menu drop-2"><li><a target="_self" href="https://serian.sarawak.gov.my/web/subpage/webpage_view/174"  timestamp='2026-10-15 08:11:38' >Profail Bahagian</a></li><li><a target="_self" href="https://serian.sarawak.gov.my/web/subpage/webpage_view/211"  timestamp='2026-06-16 11:16:04'>Ahli Parlimen dan ADUN</a></li><li><a target="_self" href="https://serian.sarawak.gov.my/web/subpage/webpage_view/312"  timestamp='2026-10-15 08:11:38' >Produk Pelancongan</a></li></ul></li><li><a target="_self" href="https://serian.sarawak.gov.my/web/subpage/webpage_view/315" splwpk-client-charter=splwpk-client-charter timestamp='2026-10-15 08:11:38' >Piagam Pelanggan</a></li><li><a target="_self" href="https://serian.sarawak.gov.my/web/subpage/webpage_view/230"  timestamp='2025-11-19 15:29:54'>Nilai - Nilai Bersama</a></li><li><a target="_self" href="https://serian.sarawak.gov.my/web/subpage/webpage_view/374"  timestamp='2026-10-15 08:11:38' >Sudut SACSES</a></li><li><a target="_self" href="https://serian.sarawak.gov.my/web/subpage/webpage_view/275"  timestamp='2025-11-19 15:53:32'>Dasar Kualiti</a></li><li><a target="_self" href="https://serian.sarawak.gov.my/web/subpage/staffcontact_list" splwpk-contact-details=splwpk-contact-details timestamp='2026-10-15 08:11:38' >Direktori Pegawai / Kakitangan</a></li><li class="dropdown-submenu sub-2 "><a class="submenu">Lokasi Pejabat<span class="caret"></span></a><ul class="dropdown-menu drop-2"><li><a target="_self" href="https://serian.sarawak.gov.my/web/subpage/webpage_view/270"  timestamp='2024-08-07 15:11:57'>Pejabat Residen Bahagian Serian</a></li><li><a target="_self" href="https://serian.sarawak.gov.my/web/subpage/webpage_view/218"  timestamp='2025-07-08 11:58:39'>Pejabat Daerah Serian</a></li><li><a target="_self" href="https://serian.sarawak.gov.my/web/subpage/webpage_view/219"  timestamp='2024-08-05 12:36:01'>Pejabat Daerah Tebedu</a></li><li><a target="_self" href="https://serian.sarawak.gov.my/web/subpage/webpage_view/220"  timestamp='2024-08-05 12:54:28'>Pejabat Daerah Siburan</a></li><li><a target="_self" href="https://serian.sarawak.gov.my/web/subpage/webpage_view/273"  timestamp='2026-10-15 08:11:38' >Pejabat Daerah Kecil Balai Ringin</a></li></ul></li><li><a target="_self" href="https://serian.sarawak.gov.my/web/subpage/webpage_view/259" splwpk-publication=splwpk-publication timestamp='2026-10-15 08:11:38' >Dasar Kerajaan</a></li></ul></li><li class="nav-item dropdown menu-2"><a class="nav-link dropdown-toggle" data-toggle="dropdown"  timestamp='2026-10-15 08:11:38' >Pentadbiran Bahagian<span class="caret"></span></a><ul class="dropdown-menu drop-1"><li><a target="_self" href="https://serian.sarawak.gov.my/web/home/index/serianro"  timestamp='2026-10-15 08:11:38' >Pejabat Residen Serian</a></li><li><a target="_self" href="https://serian.sarawak.gov.my/web/home/index/seriando"  timestamp='2026-10-15 08:11:38' >Pejabat Daerah Serian  </a></li><li><a target="_self" href="https://serian.sarawak.gov.my/web/home/index/tebedudo"  timestamp='2026-10-15 08:11:38' >Pejabat Daerah Tebedu     </a></li><li><a target="_self" href="https://serian.sarawak.gov.my/web/home/index/Siburando"  timestamp='2026-10-15 08:11:38' >Pejabat Daerah Siburan         </a></li><li class="dropdown-submenu sub-2 "><a class="submenu">Greater Kuching Coordinated Development Agency (GKCDA)<span class="caret"></span></a><ul class="dropdown-menu drop-2"><li><a target="_self" href="https://serian.sarawak.gov.my/web/subpage/webpage_view/306"  timestamp='2026-10-15 08:11:38' >Perutusan Pengerusi GKCDA</a></li><li><a target="_self" href="https://serian.sarawak.gov.my/web/subpage/webpage_view/307"  timestamp='2026-10-15 08:11:38' >Mengenai GKCDA</a></li><li><a target="_self" href="https://serian.sarawak.gov.my/web/subpage/webpage_view/316"  timestamp='2026-10-15 08:11:38' >Kawasan Pembangunan GKCDA</a></li><li><a target="_self" href="https://serian.sarawak.gov.my/web/subpage/webpage_view/309"  timestamp='2026-10-15 08:11:38' >Struktur Ogranisasi</a></li><li><a target="_self" href="https://serian.sarawak.gov.my/web/subpage/webpage_view/321"  timestamp='2026-10-15 08:11:38' >Lawatan Tapak Projek (2024)</a></li><li><a target="_self" href="https://serian.sarawak.gov.my/web/subpage/webpage_view/339"  timestamp='2026-10-15 08:11:38' >Lawatan Tapak Projek (2025)</a></li><li><a target="_self" href="https://serian.sarawak.gov.my/web/subpage/webpage_view/372"  timestamp='2026-10-15 08:11:38' >Lawatan Tapak Projek (2026)</a></li><li><a target="_self" href="https://serian.sarawak.gov.my/web/subpage/webpage_view/319"  timestamp='2026-10-15 08:11:38' >Hubungi Kami</a></li></ul></li></ul></li><li class="nav-item dropdown menu-3"><a class="nav-link dropdown-toggle" data-toggle="dropdown"  timestamp='2026-10-15 08:11:38' >Perkhidmatan Kami<span class="caret"></span></a><ul class="dropdown-menu drop-1"><li class="dropdown-submenu sub-2 "><a class="submenu">Pejabat Residen<span class="caret"></span></a><ul class="dropdown-menu drop-2"><li><a target="_self" href="https://serian.sarawak.gov.my/web/subpage/webpage_view/165/serianro"  timestamp='2026-10-15 08:11:38' >Lesen Perkahwinan Khas Bukan Islam</a></li><li><a target="_self" href="https://serian.sarawak.gov.my/web/subpage/webpage_view/167/serianro"  timestamp=''>Lesen Pungutan Awam</a></li><li><a target="_self" href="https://serian.sarawak.gov.my/web/subpage/webpage_view/172/serianro"  timestamp='2026-10-15 08:11:38' >Lesen Sabung Ayam</a></li></ul></li><li class="dropdown-submenu sub-2 "><a class="submenu">Pejabat Daerah<span class="caret"></span></a><ul class="dropdown-menu drop-2"><li><a target="_self" href="https://serian.sarawak.gov.my/web/subpage/webpage_view/147/seriando"  timestamp=''>Program Bantuan Rumah (PBR)</a></li><li><a target="_self" href="https://serian.sarawak.gov.my/web/subpage/webpage_view/145/seriando"  timestamp=''>E-Kasih</a></li><li><a target="_self" href="https://serian.sarawak.gov.my/web/subpage/webpage_view/56/seriando"  timestamp=''>Akuan Sumpah</a></li><li><a target="_self" href="https://serian.sarawak.gov.my/web/subpage/webpage_view/57/seriando"  timestamp=''>Pendaftaran Surat Perjanjian</a></li><li><a target="_self" href="https://serian.sarawak.gov.my/web/subpage/webpage_view/51/seriando"  timestamp=''>Pendaftaran Probet</a></li><li><a target="_self" href="https://serian.sarawak.gov.my/web/subpage/webpage_view/52/seriando"  timestamp=''>Pendaftaran Anak Angkat</a></li><li><a target="_self" href="https://serian.sarawak.gov.my/web/subpage/webpage_view/54/seriando"  timestamp=''>Senjata Api &amp; Peluru</a></li><li><a target="_self" href="https://serian.sarawak.gov.my/web/subpage/webpage_view/58/seriando"  timestamp=''>Mahkamah Bumiputera</a></li><li><a target="_self" href="https://serian.sarawak.gov.my/web/subpage/webpage_view/53/seriando"  timestamp=''>Pendaftaran Nama Perniagaan</a></li></ul></li><li><a target="_self" href="https://serian.sarawak.gov.my/web/subpage/webpage_view/169"  timestamp='2026-10-12 11:33:33'>Pengesahan Dokumen</a></li><li><a target="_self" href="https://serian.sarawak.gov.my/web/subpage/faq_view/" splwpk-faq=splwpk-faq timestamp='2026-10-15 08:11:38' >Soalan Lazim  (FAQ)</a></li><li class="dropdown-submenu sub-2 "><a class="submenu">Perkhidmatan Atas Talian<span class="caret"></span></a><ul class="dropdown-menu drop-2"><li><a target="_self" href="https://erndo2.sarawak.gov.my/erndo/"  timestamp='2026-10-15 08:11:38' >Pencarian Nama Perniagaan</a></li><li><a target="_self" href="https://erndo2.sarawak.gov.my/erndo/"  timestamp='2026-10-15 08:11:38' >Permohonan Anak Angkat</a></li><li><a target="_self" href="https://erndo2.sarawak.gov.my/erndo/"  timestamp='2026-10-15 08:11:38' >Pendaftaran Probet</a></li></ul></li></ul></li><li class="nav-item dropdown menu-4"><a class="nav-link dropdown-toggle" data-toggle="dropdown"  timestamp='2026-10-15 08:11:38' >JKKK Bahagian Serian<span class="caret"></span></a><ul class="dropdown-menu drop-1"><li><a target="_self" href="https://serian.sarawak.gov.my/web/subpage/webpage_view/343"  timestamp='2026-10-15 08:11:38' >Ketua Masyarakat Bahagian Serian</a></li><li><a target="_self" href="https://serian.sarawak.gov.my/web/subpage/webpage_view/342"  timestamp='2026-10-15 08:11:38' >JKKK Daerah Serian</a></li><li><a target="_self" href="https://serian.sarawak.gov.my/web/subpage/webpage_view/344"  timestamp='2026-10-15 08:11:38' >JKKK Daerah Tebedu</a></li><li><a target="_self" href="https://serian.sarawak.gov.my/web/subpage/webpage_view/346"  timestamp='2026-10-15 08:11:38' >JKKK Daerah Siburan</a></li><li><a target="_self" href="https://serian.sarawak.gov.my/web/subpage/webpage_view/345"  timestamp='2026-10-15 08:11:38' >JKKK DAERAH KECIL BALAI RINGIN</a></li></ul></li><li class="nav-item dropdown menu-5"><a class="nav-link dropdown-toggle" data-toggle="dropdown"  timestamp='2026-10-15 08:11:38' >Muat Turun<span class="caret"></span></a><ul class="dropdown-menu drop-1"><li><a target="_self" href="https://serian.sarawak.gov.my/web/subpage/download_list/1083"  timestamp='2026-10-15 08:11:38' >Borang - Borang</a></li><li><a target="_self" href="https://serian.sarawak.gov.my/web/subpage/download_list/1179"  timestamp='2026-10-15 08:11:38' >Senarai Semak</a></li><li><a target="_self" href="https://serian.sarawak.gov.my/web/subpage/download_list/1180"  timestamp='2026-10-15 08:11:38' >Borang Kaji Selidik</a></li><li><a target="_self" href="https://serian.sarawak.gov.my/web/subpage/download_list/"  timestamp='2026-10-15 08:11:38' >Dasar Kerajaan</a></li></ul></li><li class="nav-item dropdown menu-6"><a class="nav-link" target="_self" href="https://serian.sarawak.gov.my/web/subpage/photo_gallery_list/"  timestamp='2026-10-15 08:11:38' >Galeri Foto</a></li><li class="nav-item dropdown menu-7"><a class="nav-link" target="_self" href="https://serian.sarawak.gov.my/web/subpage/video_list/"  timestamp='2026-10-15 08:11:38' >Galeri Video</a></li><li class="nav-item dropdown menu-8"><a class="nav-link" target="_self" href="https://serian.sarawak.gov.my/web/subpage/newspaper_cutting_list/" splwpk-news=splwpk-news timestamp='2026-10-15 08:11:38' >Keratan Akhbar</a></li><li class="nav-item dropdown menu-9"><a class="nav-link dropdown-toggle" data-toggle="dropdown" splwpk-elecronic-archive=splwpk-elecronic-archive timestamp='2026-10-15 08:11:38' >Statistik<span class="caret"></span></a><ul class="dropdown-menu drop-1"><li><a target="_self" href="https://serian.sarawak.gov.my/web/subpage/service_statistic_list" splwpk-online-services=splwpk-online-services timestamp='2026-10-15 08:11:38' >Perkhidmatan Atas Talian</a></li></ul></li><li class="nav-item dropdown menu-10"><a class="nav-link" target="_self" href="https://serian.sarawak.gov.my/web/subpage/webpage_view/305" splwpk-procurement=splwpk-procurement timestamp='2026-10-15 08:11:38' >Tender</a></li><li class="nav-item dropdown menu-11"><a class="nav-link" target="_self" href=""  timestamp='2026-10-15 08:11:38' ></a></li>							</ul>
+						</div>
+					</nav>	
+				</div>
+			</div>
+		</div>
+	</header>
+	
+</div>
+</div>
+
+<style>
+	/* #template5_header .navbar-nav{
+		display:flex;
+		text-align: center;
+	}
+
+	@media (max-width: 991px) {
+		#template5_header .mm-menu{
+			display: none !important;
+		}
+
+		#template5_header .navbar-nav{
+			display:block;
+		}
+	} */
+
+	#template5_header #swkid_plugin.before-login{
+		margin-top:4px;
+	}
+
+	#template5_header .login-button{
+		margin:0px 3px 0px 0px;
+	}
+
+	.seg_icon {
+	    width: auto;
+	    height: 32px;
+	    width: 32px;
+	}
+
+	@media (max-width: 991px) {
+		#template5_header #swkid_plugin.after-login div{
+			justify-content: end;
+			width: fit-content;
+		}
+
+		#template5_header #swkid_plugin.after-login{
+			/* z-index: 1000 !important; */
+			position: relative;
+			float: unset !important;
+			display: flex;
+    		justify-content: end;
+		}
+	}
+
+	@media (max-width: 768px) {
+		#template5_header #swkid_plugin.before-login{
+			margin-top:10px;
+		}
+	}
+
+	@media (max-width: 576px) {
+		#template5_header .second-box{
+			margin-top:10px;
+			margin-left:0;
+			width:100%;
+		}
+
+		#template5_header .register-box{
+			margin-left:15px;
+		}
+
+		
+		#template5_header #swkid_plugin.before-login .swkid-wrapper{
+			padding: 0;
+		}
+
+		#template5_header #swkid_plugin.before-login .swkid-hidden-xs{
+			display: flex !important;
+		}
+	}
+</style>
+
+<script src="https://sarawakid.sarawak.gov.my/web/share/swkid_plugin/?lang=en"></script> 
+
+<script type="text/javascript">
+	$(function() {
+		$('#primary-nav').moreMenu();
+
+		$('.submenu').click(function() { // when a .dropdow-submenu .submenu is clicked
+			// $('.submenu').not(this).parent().removeClass('active')
+			$(this).parent().toggleClass('active')
+		})
+	});
+
+	swkid_sso_init({ 
+		client_id:'serian_dweb10_web',
+		// state:'',
+		state:'305401792023038',
+		response_type:'code',
+		redirect_uri:'https://serian.sarawak.gov.my/web/home/index/',
+		logout_redirect_uri:'https://serian.sarawak.gov.my/web/home/member_logout/',
+		logout_uri:'https://serian.sarawak.gov.my/web/home/index/',
+		overwrite_login_function:'',		
+		// style:'icon-text-old',
+		// style:'icon-only',
+		// style:'text-only',
+		// style:'icon-full-text',
+		style:'icon-text',
+		// style:'logo-full-text',
+		// profile_listing_style:'simple',
+		//profile_listing_style:'details',
+		profile_listing_style:'seg',
+		myworkspace_newtab:'off',
+		payment_newtab:'off',
+		// profile_listing_email:'on',
+		// profile_listing_email:'off',
+		icon_width:'35',
+		position:'top-right',
+		misc_param:'test12344123!)@))%(!&%)(*$#)^Y%)!($&)!@(#*)!@&)%!<>?M}{:||test12344123test12344123test12344123test12344123test12344123test12344123test12344123test12344123test12344123test12344123test12344123test12344123test12344123test12344123test12344123test12344123test12344123test12344123test12344123test12344123test12344123test12344123test12344123',
+		// hide_header:'on',
+		// hide_login_extra_link:'on',
+		permission:'on',
+		// sub_login_app_name:'Testing APP',
+		login_method:'swkid_login',
+		// login_method:'swknet_login',
+		force_login_btn:'off',
+		servicelisting_uri: "https://serian.sarawak.gov.my/web/subpage/display_nature_list/"
+	});
+
+	function swkid_callback(swkid_response){
+		var short_name = swkid_response['usr_short_name'];
+		var login_by = swkid_response['login_by'];
+		var swkid_login_status = swkid_response['swkid_login_status'];
+		
+		if(swkid_login_status=='before_swkid_login'){
+			/*Do your thing when Sarawak ID is not login, in this case, this function will force logout your website*/
+			// alert('walao, belum login');
+
+			$('#swkid_plugin').addClass('before-login');
+			$('#swkid_plugin').removeClass('after-login');
+		}else{
+			/*Do your thing when Sarawak ID is login, in this case do nothing since your website already login*/
+			// alert('walao, dah login');
+			$('#swkid_plugin').addClass('after-login');
+			$('#swkid_plugin').removeClass('before-login');
+		}
+	}
+</script>
+	
+<div id="top" class="thetop">
+	<div class="container" style="width:100%; padding:0;">
+			<div class="">
+																									<img alt="" class="header-image" src="/web/attachment/show/?docid=NVJuM3pZRDBZelQ3dXlBTnlsTlhTZz09OjoN78sQ3JaZrGr_JPr_e7M-">
+																										
+			
+					</div>
+	</div>
+</div>
+
+<div class="template_theme_detect" data-template="template_subpage_">
+<div class="template_subpage_view" id="subpage_webpage_view">
+	<div class="adicontainer">
+		
+		<div class="pageheader">
+			<div class="adirow">
+				<div class="adicol-1">
+
+				</div>
+			</div>
+		</div>
+		
+		<input type="hidden" class="text" name="id" id="id" value="5" >		
+		<div class="container">
+			&nbsp;
+			<div class="section1">
+				<!-- <div class="adirow" style="justify-content: end;">
+					<div class="adicol-12">
+						<div class="section-content list-content-back">
+													<a href="https://serian.sarawak.gov.my/web/subpage/webpage_list/" class="back-to-listing"><< Back to Listing</a>
+												</div>
+					</div>
+				</div> -->
+				<div class="list-title">
+													<div class="adicol-1">
+									<div class="section-content box">
+										<div class="list-title"><h2 >Profil Bahagian Serian</h2></div>
+										<!-- <div class="list-sub" style="margin-top:50px;"><h5>29 Jul 2024</h5></div> -->
+										<br>
+										<div class="list-content" style="overflow:auto;"><table border="0" cellpadding="1" cellspacing="1" height="" width="">
+	<tbody>
+		<tr>
+			<td style="vertical-align: top; text-align: center;"><img alt="" src="https://serian.sarawak.gov.my/admin/file_manager/download/?id=1897" style="width: 700px; height: 403px;" />
+			<div style="text-align: left;"><img src="/web/attachment/show/?docid=SmsvWURnM0k4cUs0SzFKQitielY3QT09Ojo6bRjoGh5xKl9UNPKi3GkG" style="border-width: 0px; border-style: solid; width: 700px; height: 384px;" /><br />
+			<br />
+			<span style="font-size:16pt;"><span style="font-size:13pt;"><img alt="" src="https://serian.sarawak.gov.my/admin/file_manager/download/?id=1895" style="width: 700px; height: 384px;" /></span></span></div>
+			</td>
+			<td style="text-align: center;">
+			<div style="margin-left: 40px;"><br />
+			&nbsp;</div>
+			</td>
+			<td style="text-align: justify; vertical-align: top;">
+			<div style="margin-left: 40px;"><span style="font-size:12pt;"><span style="font-family:arial,helvetica,sans-serif;">Daerah Serian adalah salah satu daripada empat daerah di Bahagian Samarahan selepas Samarahan diistiharkan sebagai Bahagian pada 01 Januari 1987. Ia dikenali sebagai Daerah Sadong pada penubuhannya dalam tahun 1901 yang beribu pejabat di Simunjan. Pada bulan Februari 1955 Serian (Upper Sadong) dan Simunjan (Lower Sadong) telah dipisahkan dan masing-masing menjadi Daerah penuh. Pegawai Daerah yang pertama semasa pemerintahan penjajahan ialah Mr. H.R. Harbow manakala simunjan masih kekal di bawah Bahagian Samarahan.&nbsp;</span></span><br />
+			&nbsp;</div>
+
+			<p style="margin-left: 40px;"><span style="font-size:12pt;"><span style="font-family:arial,helvetica,sans-serif;">Serian telah diisytihar sebagai Bahagian ke-12 dalam Negeri Sarawak pada <strong>11 April 2015</strong>. Pengisytiharan itu dibuat sendiri oleh <strong>YAB Datuk Patinggi Tan Sri (Dr) Haji Adenan Bin Haji Satem, Ketua Menteri Sarawak</strong> semasa merasmikan Pesta Birumuh Serian 2015 di Kompleks Sukan Serian. <span style="letter-spacing: 0.01pt; font-style: italic;">&ldquo;Serian would become the first predominantly-Bidayuh division&rdquo;<span style="letter-spacing: 0.01pt;"> </span>- <span style="color:#0000FF;">The Borneo Post, 12 April 2015</span></span></span></span><br />
+			&nbsp;</p>
+
+			<div style="margin-left: 40px;"><span style="font-size:12pt;"><span style="font-family:arial,helvetica,sans-serif;">Bahagian Serian telah <strong>digazet</strong> sebagai Bahagian pada <strong>1 Ogos 2015</strong> merangkumi <strong>Daerah Serian</strong>, <strong>Daerah Tebedu</strong> dan <strong>Daerah Kecil Siburan</strong> seluas <strong>2,405 km persegi.</strong>&nbsp;Pada ketika itu, Pejabat Daerah Serian dan Pejabat Daerah Tebedu diketuai oleh Pegawai Daerah manakala Pejabat Daerah Kecil Siburan diketuai oleh Pegawai Tadbir Sarawak (SAO).</span></span><br />
+			<br />
+			<br />
+			<br />
+			&nbsp;</div>
+
+			<div style="margin-left: 80px;">&nbsp;</div>
+
+			<div style="margin-left: 40px;"><img alt="" height="395" src="https://serian.sarawak.gov.my/admin/file_manager/download/?id=1894" width="653" /><br />
+			<br />
+			<br />
+			<img alt="" height="316" src="https://serian.sarawak.gov.my/admin/file_manager/download/?id=1889" width="653" /></div>
+			</td>
+			<td style="text-align: center;"><br />
+			&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="vertical-align: top; text-align: center;">
+			<div><br />
+			<br />
+			<span style="font-size:14pt;"><span style="color:#0000CD;"><strong>PENGWUJUDAN DAERAH SIBURAN DAN DAERAH KECIL BALAI RINGIN</strong></span></span><br />
+			<br />
+			<br />
+			<span style="font-size:12pt;"><span style="font-family:arial,helvetica,sans-serif;"><em>&ldquo;The government has decided to upgrade Siburan sub-district to a district. That means Siburan will have all the necessary prerequisites and infrastructure for a district. With this announcement, Serian Division now has three districts namely Serian, Tebedu and Siburan, with Balai Ringin as the sub-district.&rdquo; - Borneo Post, 28 November 2021.</em><br />
+			<br />
+			<em>YAB Datuk Patinggi Tan Sri (Dr) Abang Haji Abdul Rahman Zohari Bin Tun Datuk Abang Haji Openg on 27th November 2021 officially announced the elevation of Siburan as a district while Balai Ringin is Sarawak&rsquo;s newest sub-district. The announcement was made during the launch of Serian Division&rsquo;s Sarawak Government Administrative Complex.</em></span></span></div>
+			</td>
+			<td style="text-align: center;">
+			<div style="margin-left: 40px;">&nbsp;</div>
+			</td>
+			<td style="vertical-align: top; text-align: justify;">
+			<div style="margin-left: 40px; text-align: center;"><br />
+			<span style="font-size:12pt;"><span style="font-family:arial,helvetica,sans-serif;"><em>&ldquo;The changes in administrative boundaries through the creation of new divisions, districts and sub-districts are to meet the increased expectations of the rakyat in the provision of service delivery and the implementation of programmes and projects.&rdquo; - Winding Up Speech by YAB Chief Minister 17th Sitting of Dewan Undangan Negeri, 29 April 2015.</em></span></span><br />
+			&nbsp;</div>
+
+			<div style="margin-left: 40px; text-align: center;">&nbsp;</div>
+
+			<div style="text-align: center;"><img border="0" height="204" src="/web/attachment/show/?docid=SGE3UmJZUmVCRmk0VWRRUWtqWjRaZz09OjpZ4e1AC3R-s9mLL7kMZe0D" width="655" /></div>
+			</td>
+			<td style="text-align: center;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<div style="text-align: center;"><img alt="" height="280" src="https://serian.sarawak.gov.my/admin/file_manager/download/?id=1898" width="1356" /></div>
+
+<table border="0" cellpadding="1" cellspacing="1" style="width:100%;">
+	<tbody>
+		<tr>
+			<td style="text-align: center;"><img alt="" height="385" src="https://serian.sarawak.gov.my/admin/file_manager/download/?id=1899" width="675" /></td>
+			<td style="text-align: center;"><img alt="" height="372" src="https://serian.sarawak.gov.my/admin/file_manager/download/?id=1900" width="665" /></td>
+		</tr>
+		<tr>
+			<td style="text-align: center;">&nbsp;</td>
+			<td style="text-align: center;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="text-align: center;"><img alt="" src="https://serian.sarawak.gov.my/admin/file_manager/download/?id=1901" style="width: 675px; height: 385px;" /></td>
+			<td style="text-align: center;"><img alt="" height="371" src="https://serian.sarawak.gov.my/admin/file_manager/download/?id=1907" width="674" /></td>
+		</tr>
+		<tr>
+			<td style="text-align: center;">&nbsp;</td>
+			<td style="text-align: center;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="text-align: center;"><img alt="" src="https://serian.sarawak.gov.my/admin/file_manager/download/?id=1906" style="width: 684px; height: 385px;" /></td>
+			<td style="text-align: center;"><img alt="" height="370" src="https://serian.sarawak.gov.my/admin/file_manager/download/?id=1905" width="659" /></td>
+		</tr>
+		<tr>
+			<td style="text-align: center;">&nbsp;</td>
+			<td style="text-align: center;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="text-align: center;"><img alt="" src="https://serian.sarawak.gov.my/admin/file_manager/download/?id=1911" style="width: 675px; height: 381px;" /></td>
+			<td style="text-align: center;"><img alt="" src="https://serian.sarawak.gov.my/admin/file_manager/download/?id=1912" style="width: 675px; height: 381px;" /></td>
+		</tr>
+		<tr>
+			<td style="text-align: center;">&nbsp;</td>
+			<td style="text-align: center;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="text-align: center;"><img alt="" src="https://serian.sarawak.gov.my/admin/file_manager/download/?id=1902" style="width: 684px; height: 385px;" /></td>
+			<td style="text-align: center;"><img alt="" src="https://serian.sarawak.gov.my/admin/file_manager/download/?id=1903" style="width: 684px; height: 385px;" /></td>
+		</tr>
+		<tr>
+			<td style="text-align: center;">&nbsp;</td>
+			<td style="text-align: center;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td colspan="2" style="text-align: center;"><img alt="" height="210" src="https://serian.sarawak.gov.my/admin/file_manager/download/?id=1910" width="1372" /></td>
+		</tr>
+		<tr>
+			<td style="text-align: center;">&nbsp;</td>
+			<td style="text-align: center;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="text-align: center;">&nbsp;</td>
+			<td style="text-align: center;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+									</div>
+								</div>
+									</div>
+			</div>
+			&nbsp;
+		</div>
+	</div>
+</div>
+</div>	
+<div class="template_theme_detect" data-template="template_subpage_">	
+	<div id="template_subpage_useful_link" class="all-logos grey quicks row all-small">
+			
+			<div class="container small-bottom">
+									<div class="col-md-12">			
+						<h3 class="subtitle">Pautan Berguna</h3>
+					</div>
+							</div>	
+			
+			<div class="col-md-12 align-center bg">			
+				
+				<div class="container small-bottom">
+				
+					<div class="subpage_myCarousel4 carousel carousel-fade carousel-showothers slide" id="subpage-useful-link-carousel-tilenav4" data-interval="false">
+						
+						<div class="carousel-inner">
+																								<div class="item active">
+																		<a class="uqlinks" href="http://scstp.sarawaknet.gov.my/modules/web/" target="_blank">
+											<div class="qicons">
+																									<img alt="" src="/module/web/web/theme/default/res/default_icons/module_default_img.jpg">
+																							</div>
+										</a>
+									</div>
+																								<div class="item">
+																		<a class="uqlinks" href="http://appnet5.sarawaknet.gov.my/cti/index.jsp" target="_blank">
+											<div class="qicons">
+																									<img alt="" src="/module/web/web/theme/default/res/default_icons/module_default_img.jpg">
+																							</div>
+										</a>
+									</div>
+																								<div class="item">
+																		<a class="uqlinks" href="http://www.spa.gov.my/" target="_blank">
+											<div class="qicons">
+																									<img alt="" src="/module/web/web/theme/default/res/default_icons/module_default_img.jpg">
+																							</div>
+										</a>
+									</div>
+																								<div class="item">
+																		<a class="uqlinks" href="http://www.spr.gov.my/" target="_blank">
+											<div class="qicons">
+																									<img alt="" src="/module/web/web/theme/default/res/default_icons/module_default_img.jpg">
+																							</div>
+										</a>
+									</div>
+																								<div class="item">
+																		<a class="uqlinks" href="https://paybills.sarawak.gov.my/paybillsmalaysia/index_gov.html" target="_blank">
+											<div class="qicons">
+																									<img alt="" src="/web/attachment/show/?docid=RFV3dGZRdU9wWExvcnA0ZDRpOFlDQT09OjqC3ZKKV4f2OkcMZ3Hiyf1B">
+																							</div>
+										</a>
+									</div>
+																								<div class="item">
+																		<a class="uqlinks" href="https://premier.sarawak.gov.my" target="_blank">
+											<div class="qicons">
+																									<img alt="" src="/web/attachment/show/?docid=dS9xYkI1RHZxcW5pdkJ1Q3pPbnJwQT09OjrJVls2WQr1HzkoEJjFuyS-">
+																							</div>
+										</a>
+									</div>
+																								<div class="item">
+																		<a class="uqlinks" href="https://www.sarawak.gov.my/" target="_blank">
+											<div class="qicons">
+																									<img alt="" src="/web/attachment/show/?docid=N0R2bHJuMGdvRnV4K3dGMDNlMVU4UT09Ojo7YkMxGdEPpOVoFtNVnPmU">
+																							</div>
+										</a>
+									</div>
+																								<div class="item">
+																		<a class="uqlinks" href="https://www.malaysia.gov.my/" target="_blank">
+											<div class="qicons">
+																									<img alt="" src="/web/attachment/show/?docid=SmZiWFVrdjBlREJPUFhkTkJ6TDFIUT09Ojq5t7eBQP63t9IowA_utrz9">
+																							</div>
+										</a>
+									</div>
+																								<div class="item">
+																		<a class="uqlinks" href="https://serian.sarawak.gov.my/web/subpage/webpage_view/185" target="_blank">
+											<div class="qicons">
+																									<img alt="" src="/module/admin/web/theme/default/res/default_icons/directory.png">
+																							</div>
+										</a>
+									</div>
+																								<div class="item">
+																		<a class="uqlinks" href="https://erecruitment.sarawak.gov.my" target="_blank">
+											<div class="qicons">
+																									<img alt="" src="/web/attachment/show/?docid=ZFI0N3Q3QnBKYmlYcmdvbmZNb3pVQT09OjroEL9iq03z-IXjcVCli0Jw">
+																							</div>
+										</a>
+									</div>
+													</div>
+						
+							<a class="left carousel-control" href="#subpage-useful-link-carousel-tilenav4" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+							<a class="right carousel-control" href="#subpage-useful-link-carousel-tilenav4" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
+					</div>	
+
+				</div>
+
+			</div>
+	</div>
+</div>
+
+<script>
+	var v_id = '4';
+	var slider_speed = ('5' * 1000);
+	$('.subpage_myCarousel' + v_id).carousel({
+		interval: slider_speed
+	});
+
+	var showothers_item = '.subpage_myCarousel' + v_id + '.carousel-showothers .item';
+	$(showothers_item).each(function(){
+		var itemToClone = $(this);
+
+		for (var i=1;i<4;i++) { /* for the 4 in a row function */
+		itemToClone = itemToClone.next();
+
+		// wrap around if at end of item collection
+		if (!itemToClone.length) {
+			itemToClone = $(this).siblings(':first');
+		}
+
+		// grab item, clone, add marker class, add to collection
+		itemToClone.children(':first-child').clone()
+			.addClass("cloneditem-"+(i))
+			.appendTo($(this));
+		}
+	});
+
+</script>
+
+
+<style>
+	#template5_footer footer{
+		background: url(/module/web/web/theme/default/res/template5/footer-bg.jpg) no-repeat left center;
+		padding: 20px 0;
+		width: 100%;
+		background-size: cover;
+	}
+</style>	
+
+<div class="template_theme_detect" data-template="template5_">	
+<div id="template5_footer">
+	<footer>
+		<div class="row small-top-bottom">
+			<div class="container">
+				<div class="col-md-4 small-left-right" style="color:white;">
+					<p class="cp">
+						Hakcipta Terpelihara &copy; 2020 Pentadbiran Bahagian Serian<quillbot-extension-portal></quillbot-extension-portal>					</p>
+					<p >
+					Last Updated On 14 Oct 2026					</p>
+					
+					<div class="finfo">
+						Masa Operasi<br />
+<br />
+Isnin - Khamis<br />
+8.00am hingga 1.00pm &amp; 2.00pm hingga 5.00pm<br />
+<br />
+Jumaat<br />
+8.00am hingga 11.45pm &amp; 2.15pm hingga 5.00pm<br />
+<br />
+Saturday, Sunday &amp; Public Holidays<br />
+Close<quillbot-extension-portal></quillbot-extension-portal>					</div>
+				</div>
+				
+								
+				<div class="col-md-4 small-left-right links">
+					<div class="row footer-logo-row">
+						<div class="all-logo">
+								<a href="https://premier.sarawak.gov.my" target="_blank">
+									<img alt="image" src="/module/web/web/theme/default/res/default_icons/cm_default.png">
+								</a>		
+						</div>	
+						<div class="all-logo">
+								<a href="https://sarawak.gov.my" target="_blank">
+									<img alt="image" src="/module/web/web/theme/default/res/default_icons/sarawak_hornbill_default.png">
+								</a>
+						</div>	
+						<div class="all-logo">
+								<a href="https://www.malaysia.gov.my" target="_blank">
+									<img alt="image" src="/module/web/web/theme/default/res/default_icons/federal_logo_default.png">
+								</a>
+						</div>
+					</div>			
+						
+					<div class="finfo">
+						PENTADBIRAN BAHAGIAN SERIAN<br />
+TINGKAT 4 DAN 5, PUSAT PENTADBIRAN KERAJAAN SARAWAK (BAHAGIAN SERIAN)<br />
+JALAN PENGARAH RAHUN DEBAK,<br />
+94700 SERIAN, SARAWAK<br />
+<br />
+TEL: 082-892000 / 082-892027<br />
+FAX: 082-892029<br />
+EMAIL: serianro@sarawak.gov.my<quillbot-extension-portal></quillbot-extension-portal>					</div>	
+				</div>
+				
+				<div class="col-md-4 small-left-right sub-newsletter">
+					<form id="subscribe_form" method="POST" action="/web/subpage/newsletter_subscription_form/"><input type='hidden' name='moonlight_token_74550' value='189QeL'/>	
+						<label>Subscribe Newsletter</label>
+						<input type="text" id="subscriber_email" placeholder=" Your Email" name="subscriber_email">
+						<input type="submit" id="subscribe_submit_btn" value="Subscribe">
+					</form>
+					
+					<div class="b-links">
+						<div><a href="https://gamma.malaysia.gov.my/appdetails/914" splwpk-mobile-apps="splwpk-mobile-apps">Sarawak Gov App</a></div>
+						<div class="gamma">
+							<img alt="image" src="/module/web/web/theme/default/res/default_icons/sarawak_flag.png">
+							<img alt="image" src="/module/web/web/theme/default/res/default_icons/gamma_qr.png">
+						</div>
+					</div>
+				</div>
+				
+			</div>
+			
+			<div class="container f-btm">
+								<div class="col-md-8 small-left-right b-links menu-list">
+																										<a target="_self" href="https://serian.sarawak.gov.my/web/subpage/site_statistic/" splwpk-online-e-participation="splwpk-online-e-participation" timestamp='2026-10-15 08:11:39' >Statistik Pelawat Laman Web</a>
+																																							<a target="_self" href="https://serian.sarawak.gov.my/web/subpage/webpage_view/177" splwpk-privacy-policy="splwpk-privacy-policy" timestamp='2026-10-15 08:11:39' >Polisi Privasi</a>
+																																							<a target="_self" href="https://serian.sarawak.gov.my/web/subpage/webpage_view/178"   >Terma dan Syarat</a>
+																																							<a target="_self" href="https://talikhidmat.sarawak.gov.my/talikhidmat/" splwpk-online-e-participation="splwpk-online-e-participation" timestamp='2026-10-15 08:11:39' >Tali Khidmat</a>
+																																							<a target="_self" href="https://serian.sarawak.gov.my/web/subpage/webpage_view/32/seriando"   >Keselamatan</a>
+																																							<a target="_self" href="https://serian.sarawak.gov.my/web/subpage/webpage_view/110/seriando" splwpk-faq="splwpk-faq" timestamp='2026-10-15 08:11:39' >Soalan Lazim</a>
+																																							<a target="_self" href="https://serian.sarawak.gov.my/web/subpage/webpage_view/181"   >Penafian</a>
+																																							<a target="_self" href="https://serian.sarawak.gov.my/web/subpage/feedback_form/" splwpk-online-e-participation="splwpk-online-e-participation" timestamp='2026-10-15 08:11:39' >Aduan &amp; Maklum Balas</a>
+																																							<a target="_self" href="https://serian.sarawak.gov.my/web/subpage/sitemap" splwpk-sitemap="splwpk-sitemap" timestamp='2026-10-15 08:11:39' >Peta Laman</a>
+																						</div>
+				
+				<div class="col-md-4 small-left-right social">					
+					<div class="visitor">Visitor Counter: <span>10588403</span></div>					
+				</div>
+			</div>
+		</div>
+	</footer>
+	
+	<button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fa fa-angle-up" aria-hidden="true"></i></button>
+	
+	<div class="custom_section_right">
+
+		
+					<div class="hotline" id="esidemenu">
+				<a href="javascript:void(0);" class="side-label sidemenuhover">		
+					<img alt="image" class="sidemenu-icon" src=""><span class="slideout"><span>Imbas untuk Telefon Bimbit</span>
+				</a>
+				<div class="side-content" style="right:178px;">
+					<img alt="image" src="/../moonlight/plugin/phpqrcode/moonlight_qrcode.php?
+						data=https://serian.sarawak.gov.my/web/home/index/">				</div>
+			</div>
+		
+				
+		
+				<div class="calendar">
+		  <!-- Trigger the modal with a button -->
+		  <a class="sidemenuhover" data-toggle="modal" data-target="#CalendarModal5"><img alt="image" class="sidemenu-icon" src="">
+		  <span class="slideout">Kalendar</span></a>
+
+		  <!-- Modal -->
+		  <div class="modal fade" id="CalendarModal5" role="dialog">
+			<div class="modal-dialog">
+			
+			  <!-- Modal content-->
+			  <div class="modal-content">
+				<div class="modal-body">
+				  <div class="calendar" id="calendar5"></div>
+				  <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+				</div>
+			  </div>
+			  
+			</div>
+		  </div>		
+		</div>
+		
+				
+		
+						<div class="poll">
+				<!-- Trigger the modal with a button -->
+				<a class="sidemenuhover" data-toggle="modal" data-target="#PollModal5" splwpk-online-e-participation="splwpk-online-e-participation" timestamp="2026-07-20 10:44:53"><img alt="image" class="sidemenu-icon" src="">
+				<span class="slideout">Undian</span>
+				</a>
+
+				<!-- Modal -->
+				<div class="modal fade" id="PollModal5" role="dialog">
+					<div class="modal-dialog">
+					
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-body">
+						<h5 style="margin-bottom:20px;">Poll</h5>
+					
+							
+															<form id="frm_data_5" method="POST" enctype="multipart/form-data" action="https://serian.sarawak.gov.my/web/subpage/poll/"><input type='hidden' name='moonlight_token_74550' value='189QeL'/>
+								<h4 style="font-weight:bold;">Nyatakan pendapat anda mengenai perkhidmatan atas talian yang disediakan?																	</h4>
+																																																																																																									<span>
+											<input type="radio" onclick="setPollId(75, 5);" name="question[5]" value="75">
+											<label>Cemerlang</label>
+										</span>
+																																																																													<span>
+											<input type="radio" onclick="setPollId(76, 5);" name="question[5]" value="76">
+											<label>Baik</label>
+										</span>
+																																																																																																<span>
+											<input type="radio" onclick="setPollId(77, 5);" name="question[5]" value="77">
+											<label>Memuaskan</label>
+										</span>
+																																																																													<span>
+											<input type="radio" onclick="setPollId(78, 5);" name="question[5]" value="78">
+											<label>Perlu Penambahbaikan</label>
+										</span>
+																																																																		<div class="ssubmit col-md-12" style="margin-bottom:50px;">		
+										<input class="btn-links" type="button" onclick="submitPoll_sidemenu(this.form);" value="Vote">
+										<input class="btn-links" type="button" value="Result" 
+										onclick="window.location.href = 'https://serian.sarawak.gov.my/web/subpage/poll_result/&id=5';">
+									</div>
+								</form>
+							
+							<a href="https://serian.sarawak.gov.my/web/subpage/poll_result/archive" splwpk-online-e-participation="splwpk-online-e-participation" timestamp="2026-07-20 09:41:08">Archived</a>
+													<button type="button" class="close" data-dismiss="modal">&times;</button>
+						</div>
+					</div>
+					
+					</div>
+				</div>
+				
+				</div>
+		
+				
+		
+					<div class="slinks">
+			<a class="sidelinks sidemenuhover" target="_blank" href="https://serian.sarawak.gov.my/web/subpage/announcement_list/" splwpk-broadcast="splwpk-broadcast" timestamp="2026-10-15 08:11:39">
+									<img alt="image" class="sidemenu-icon" src="/module/admin/web/theme/default/res/default_icons/announcement.png">
+								<span class="slideout">Pengumuman</span>
+			</a>
+		</div>
+				
+		
+	</div>
+	<!-- Custom Side Menu to show Mobile QR code End -->
+</div>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function(e){
+		var id = '5';
+		var footer_calendar = '#calendar' + id;
+		var current_lang = 'bm';
+		// console.log(current_lang)
+		// console.log(footer_calendar)
+
+		var v_event_json_encoded = JSON.parse('false');
+		// console.log(v_event_json_encoded)
+
+		if(v_event_json_encoded != '' && v_event_json_encoded != false){
+			var v_events = [];
+			v_event_json_encoded.forEach((i)=>{
+				var v_event_start_date = moment(i.event_start_date).format("M/D/YYYY");
+				var v_event_end_date = moment(i.event_end_date).format("M/D/YYYY");
+				var v_event_start_date_standard_format = moment(i.event_start_date).format("D MMM YYYY");
+				var v_event_end_date_standard_format = moment(i.event_end_date).format("D MMM YYYY");
+				var v_event_id = parseInt(i.id);
+				var v_event_title = i.kwd_title;
+				var v_color = 'yellow';
+				var v_event_date_text = 'Event Date';
+				// console.log(v_event_start_date)
+				v_events.push({
+					id: v_event_id,
+					name: v_event_title, 
+					date: [v_event_start_date, v_event_end_date],
+					color: v_color,
+					type: "event",
+					description: v_event_date_text + ": " + v_event_start_date_standard_format + " - " + v_event_end_date_standard_format
+				});
+			})
+
+			// console.log(v_events)
+
+			$(footer_calendar).evoCalendar({
+				"calendarEvents": v_events,
+				'selectDate':  moment(),
+				'language': current_lang
+			});
+
+
+			$(footer_calendar).on('selectEvent', function(event, activeEvent) {
+				// console.log(activeEvent.id)
+				window.location.href = "/web/subpage/event_view/" + activeEvent.id;
+			});
+
+			$(footer_calendar).on('selectDate', function(event, activeEvent) {
+				$(footer_calendar).evoCalendar('toggleEventList',true);
+			});
+		}else{
+			$(footer_calendar).evoCalendar({'language': current_lang});
+
+			$(footer_calendar).on('selectDate', function(event, activeEvent) {
+				$(footer_calendar).evoCalendar('toggleEventList',true);
+			});
+		}
+	});
+
+	vGlobalPollId="";
+	vGlobalQid="";
+	function setPollId(vPollId, vQid){
+		window.vGlobalPollID = vPollId;
+		window.vGlobalQid = vQid;
+	}
+
+	function getCookie(cname) {
+		let name = cname + "=";
+		let decodedCookie = decodeURIComponent(document.cookie);
+		let ca = decodedCookie.split(';');
+		for(let i = 0; i <ca.length; i++) {
+			let c = ca[i];
+			while (c.charAt(0) == ' ') {
+			c = c.substring(1);
+			}
+			if (c.indexOf(name) == 0) {
+			return c.substring(name.length, c.length);
+			}
+		}
+		return "";
+	}
+
+	function submitPoll_sidemenu(form){
+		// alert('Your vote has been submitted');
+		// console.log(form.id)
+
+		var option_checked = false;
+		$("#" + form.id + " input[type=radio]").each(function(){
+			// console.log($(this));
+			if($(this).is(":checked")){
+				option_checked = true;
+			}
+		});
+
+		var ques_cookie = getCookie('poll_'+ form.id);
+		if(option_checked == true && ques_cookie == ''){
+			alert('Your vote has been submitted');
+			$("#" + form.id).submit();
+		}else if(ques_cookie != '' ){
+			alert('You\'ve voted for this poll, please come again after a week.');
+		}else if(option_checked != true ){
+			alert('Please select an option to vote');
+		}
+
+		// v_url = 'https://serian.sarawak.gov.my/web/subpage/poll_result/';
+		// window.location.href = v_url+'&id=' + vGlobalPollID;
+	}
+
+	var v_id = '5';
+	var subscribe_form = '#subscribe_form' + v_id;
+	$('#subscribe_submit_btn'+ v_id).click(function(e) {
+		e.preventDefault();
+		var email = $('#subscriber_email').val();
+		if(email == ''){
+			alert('Please enter your Email');
+		}else{
+			var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+			if(!re.test(email)) {
+				alert("Please enter valid Email.");
+				return false;
+			}else{
+				$(subscribe_form).submit();
+			}
+		}
+		return false;
+	});
+</script>
+				</div>
+			
+			<footer class="main-footer">
+							</footer>
+		</div>
+		
+		<SCRIPT LANGUAGE="javascript" TYPE="text/javascript" SRC="https://serian.sarawak.gov.my//moonlight/plugin/shortcut/shortcuts.js"></SCRIPT><SCRIPT LANGUAGE="javascript" TYPE="text/javascript">j_lbl_field_required="This field is required.";</SCRIPT>	</body>
+</html>
+
+<!-- purpose is for mobile login view  -->
+<div class="modal fade" id="login_modal">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="padding:5px 5px;">
+                <span aria-hidden="true">&times;</span>
+            </button>
+			<div id="modal_body_login"></div>
+		</div>
+	</div>
+</div>
+
+<script src="https://serian.sarawak.gov.my/web/web/js/custom.js"></script>
+<script>
+	$(document).ready(function () {
+		init_color_theme('yellow','/');	});
+
+	function open_login_modal(){
+		console.log('fsfd');
+		var url = "https://serian.sarawak.gov.my/web/share/login/"+'?view=mobile';
+		makeGETRequest( url, 'modal_body_login');
+	}
+</script>
+
+<script>
+	// show loader when page redirect
+	window.onbeforeunload = function (event) {
+		$('.full-page-loader').show();
+	};
+</script>
+
+
+
+
+<script src="https://sarawakpass.sarawak.gov.my/swkpass_plugin.js"></script>
+<script language="javascript">
+
+
+window.addEventListener('load',()=>{
+	swkpassAvatarDropDownItemAppend({
+			'my_payment':{
+				'icon':'https://service.sarawak.gov.my/web/module/web/web/theme/web/res/icon_svg/icon_payment.svg',
+				'label':'Payment',
+				'link': 'https://service.sarawak.gov.my/web/pub/public/enq_n_pay/?l=en'
+			},
+			'my_service':{
+				'icon':'https://service.sarawak.gov.my/web/module/web/web/theme/web/res/icon_svg/icon_service.svg',
+				'label':'Services',
+				'link': 'https://sarawak.gov.my/web/home/p_display_nature_list/16/?lang=en'
+			}
+		});
+	
+	swkpassInit({
+		client_id: 'serian_dweb10_web',
+		state: '1792023099',
+		redirect_uri: 'https://serian.sarawak.gov.my/web/home/index/?oauth2_auth%26spass',
+		position: 'top_right',//top_left,top_right,bottom_left,bottom_right
+		lang: 'en', //en,bm
+		main_elem_id: 'spass_plugin', //the main element id that the button will be populate
+		//ui_mode: 'login_button', //login_button,avatar_dropdown
+		ui_mode: 'login_button', //login_button,avatar_dropdown
+		///user_full_name: '',
+		user_full_name: '',
+		///user_name: '',
+		user_name: '',
+		// overwrite_login_function: 'spass_overlap_login',
+		logout_redirect_uri: 'https://serian.sarawak.gov.my/web/home/member_logout/',
+		corp_name: '',
+		corp_profile_uri: '',
+		corp_profile_redirect_uri: '',
+	});
+
+});	
+
+</script>
