@@ -13,7 +13,7 @@ import {integrationTree} from './integration-profile.mjs';
 import {loadPackageInputs, readPackageInputs, containsPackagePath} from './package-inputs.mjs';
 import {inspectPackageRuntime, verifyPackageDependencies} from './package-build.mjs';
 import {committedPackageInputs, committedPackageProducer, PACKAGE_PRODUCER_WORKFLOWS, PACKAGE_PRODUCER_KIND, packageBuildConfiguration,
-  validatePackageOutputManifest, admitPackageOutputTransition, streamedPackageFile, installedPackageIdentity, installedPackageDifferences, declaredPackagePythonRoots} from './package-output-artifact.mjs';
+  validatePackageOutputManifest, admitPackageInputTransition, admitPackageOutputTransition, inertSelectedPackageInput, streamedPackageFile, installedPackageIdentity, installedPackageDifferences, declaredPackagePythonRoots} from './package-output-artifact.mjs';
 import {authenticateOriginalPackageOutput, readOriginalPackageInventory, issuePackageAssemblyExecution, preparePackageSelectedAdditive,
   publishPackageSelectedAdditive, packageSelectedPublicationInventory, requirePackageAssemblyExecution}
   from '../coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs';
@@ -49,12 +49,26 @@ async function blobJSON(api,repo,tree,name){
   return JSON.parse(raw);
 }
 function sourceCompatible(before,current){
-  const {inputs:oldInputs,...oldPolicy}=before.definition,{inputs:newInputs,...newPolicy}=current.definition;
-  if(!same(oldPolicy,newPolicy)||!same(oldInputs,newInputs.slice(0,oldInputs.length)))return false;
-  const {additive_release:oldHook,...oldBase}=before.selection,{additive_release:newHook,...newBase}=current.selection;
-  if(!oldHook||!newHook||!same(oldBase,newBase))return false;
-  const now=new Map(current.files.map(row=>[row.path,row]));
-  return before.files.every(row=>now.has(row.path)&&(['.github/package-inputs.json','data/ownership-selection.json'].includes(row.path)||same(row,now.get(row.path))));
+  try{admitPackageInputTransition(before,current,{acceptedInputs:current.accepted_selected_inputs,preliminary:true});return true;}
+  catch{return false;}
+}
+
+// This is the bootstrap's actual trusted PR/combined-candidate base, not the
+// originating package head. Read only tree metadata for explicit retained leaves;
+// the existing private selected reader authenticates their typed consumption.
+export async function acceptedSelectedPackageInputs({api,repo,base,current}){
+  need(/^[a-f0-9]{40}$/.test(base??''),'Exact trusted selected base required');
+  const tree=await integrationTree(api,repo,base);
+  need(tree.object.sha===base,'Trusted selected base commit differs');
+  const files=[];
+  for(const name of current.definition.inputs){
+    if(name.endsWith('/')||inertSelectedPackageInput(name))continue;
+    const row=tree.entries.get(name);
+    if(row?.type==='blob'&&row.mode==='100644'&&/^[a-f0-9]{40}$/.test(row.sha??'')&&
+      Number.isSafeInteger(row.size)&&row.size>=0&&row.size<=32*1048576)
+      files.push({path:name,mode:row.mode,oid:row.sha,bytes:row.size});
+  }
+  return {commit:base,files};
 }
 
 export async function findOriginalPackage({api,repo,current,originalRunId}){
@@ -149,8 +163,9 @@ function currentSource(){
     files:committedPackageInputs(root,definition),producer:committedPackageProducer(root)};
 }
 
-export async function assembleSelectedPackage({api,repo,expectedHead,originalRunId}){
+export async function assembleSelectedPackage({api,repo,expectedHead,originalRunId,trustedBase}){
   const started=performance.now(),current=currentSource();need(current.head===expectedHead,'Actual selected head changed');
+  if(trustedBase!==undefined)current.accepted_selected_inputs=await acceptedSelectedPackageInputs({api,repo,base:trustedBase,current});
   const found=await findOriginalPackage({api,repo,current,originalRunId});if(!found)return {assembled:false,reason:'No applicable retained original output in bounded recent-result search'};
   await verifyPackageDependencies(path.join(root,'node_modules'));
   admitDisk(found.origin.artifact_bytes,'the actual authenticated original archive');
@@ -202,12 +217,12 @@ export async function assembleSelectedPackage({api,repo,expectedHead,originalRun
     admitAssemblyAtlasMetadata(atlasPin.bytes);
     const atlas=JSON.parse(fs.readFileSync(atlasPath));need(atlas.additiveRelease?.base_reference,'Original additive base descriptor missing');
     const execution=issuePackageAssemblyExecution({original,source:root,stage,executingRoot:root,
-      inheritedMetadata:[current,found.source,manifest,atlas,{runtime}]});
+      inheritedMetadata:[current,found.source,manifest,atlas,{runtime}],acceptedInputs:current.accepted_selected_inputs});
     const publication=await preparePackageSelectedAdditive({root:stage,originalPackage:original,assemblyExecution:execution,
       selectedGrid:{sha256:current.selection.sha256},geographicRelease:atlas.additiveRelease.base_reference});
     need(publication,'Genuine current additive publication required');
     const consumed=packageSelectedPublicationInventory(publication,{root:stage});
-    const transition=admitPackageOutputTransition(manifest,current);
+    const transition=admitPackageOutputTransition(manifest,current,{acceptedInputs:current.accepted_selected_inputs,typedInputs:consumed});
     const oldAssets=['base_manifest','ledger','owner_roster','patch'].map(role=>atlas.additiveRelease[role]);
     need(oldAssets.every(pin=>/^additive-repairs\/[A-Za-z0-9_.-]+$/.test(pin?.path??''))&&new Set(oldAssets.map(pin=>pin.path)).size===4,'Original four public additive assets required');
     for(const pin of oldAssets)need(same(streamedPackageFile(originalRoot,'dist/client/'+pin.path),{path:'dist/client/'+pin.path,bytes:pin.bytes,sha256:pin.sha256}),'Original additive output differs');
@@ -283,7 +298,9 @@ export function packageAssemblyInvocation(event, environment = process.env) {
       'Exact original package run identity required');
     originalRunId=Number(event.inputs.original_run_id);
   }
-  return {proofMode,expectedHead,originalRunId};
+  const trustedBase=environment.SELECTED_PACKAGE_TRUSTED_BASE;
+  need(trustedBase===undefined||/^[a-f0-9]{40}$/.test(trustedBase),'Exact trusted selected base required');
+  return {proofMode,expectedHead,originalRunId,...(trustedBase===undefined?{}:{trustedBase})};
 }
 
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
@@ -292,8 +309,8 @@ if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.ur
     need(process.argv.length===2&&process.env.GH_TOKEN&&process.env.GITHUB_REPOSITORY&&process.env.GITHUB_EVENT_PATH,'Trusted selected-data CI invocation required');
     const event=JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH,'utf8'));
     const api=githubAPI(process.env.GH_TOKEN,{conditionalReads:false});delete process.env.GH_TOKEN;delete process.env.GITHUB_TOKEN;
-    const {proofMode,expectedHead,originalRunId}=packageAssemblyInvocation(event);
-    result=await assembleSelectedPackage({api,repo:process.env.GITHUB_REPOSITORY,expectedHead,originalRunId});
+    const {proofMode,expectedHead,originalRunId,trustedBase}=packageAssemblyInvocation(event);
+    result=await assembleSelectedPackage({api,repo:process.env.GITHUB_REPOSITORY,expectedHead,originalRunId,trustedBase});
     if(proofMode)need(result.assembled,'Actual assembly required; fallback cannot establish equivalence');
   }catch(error){if(process.env.GITHUB_EVENT_NAME==='workflow_dispatch'&&process.env.GITHUB_WORKFLOW==='Selected package equivalence proof')process.exitCode=1;result={assembled:false,reason:String(error.message).replace(/https?:\/\/\S+/g,'[delivery address]').slice(0,600)};}
   console.log(JSON.stringify(result));

@@ -6,7 +6,7 @@ import os from 'node:os';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {createPackageOutputManifest, snapshotPackageOutputSource, inventoryPackageOutput, validatePackageOutputManifest,
-  verifyPackageOutput, streamedPackageFile, PACKAGE_OUTPUT_LIMITS, installedPackageIdentity, admitPackageOutputTransition, committedPackageInputs, committedPackageProducer, packageWorkflowExecution} from '../scripts/package-output-artifact.mjs';
+  verifyPackageOutput, streamedPackageFile, PACKAGE_OUTPUT_LIMITS, installedPackageIdentity, admitPackageInputTransition, admitPackageOutputTransition, committedPackageInputs, committedPackageProducer, packageWorkflowExecution} from '../scripts/package-output-artifact.mjs';
 
 import {compareSelectedPackageOutput,compareSelectedPackageReadback,normalizeDeclarationReadAccounting} from '../scripts/compare-selected-package-output.mjs';
 
@@ -128,7 +128,7 @@ test('original-to-current admission covers base, producer workflow, optional and
   assert.throws(()=>admitPackageOutputTransition(original,absent),/New selected declaration is absent/);
   const executable=structuredClone(current);executable.definition.inputs.push('coordination/engineering/new/helper.mjs');
   executable.files.push({path:'coordination/engineering/new/helper.mjs',mode:'100644',oid:'e'.repeat(40)});
-  assert.throws(()=>admitPackageOutputTransition(original,executable),/explicit inert selected data/);
+  assert.throws(()=>admitPackageOutputTransition(original,executable),/not unchanged on trusted base/);
 });
 
 test('actual ZIP extraction preserves exact complete bytes and rejects hostile archives before publishing', t => {
@@ -185,9 +185,9 @@ test('installed identity detects dependency body substitution under unchanged lo
 });
 
 
-test('changed-declaration full-output comparison authenticates both sources and the actual current delta',t=>{
+for(const retainedCode of [false,true])test('changed-declaration full/readback comparison authenticates '+(retainedCode?'retained typed code':'inert data')+' and the actual current delta',t=>{
   const source=fixture(t),full=fixture(t),assembled=fixture(t);
-  const declaration='.github/package-inputs.json',added='coordination/engineering/next/selected.json';
+  const declaration='.github/package-inputs.json',added=retainedCode?'scripts/accepted-source.py':'coordination/engineering/next/selected.json';
   const definition=JSON.parse(fs.readFileSync(path.join(source.root,declaration)));
   const commit=()=>source.git('-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-qm','selection');
   source.write('data/ownership-selection.json',{version:1,additive_release:{state:'original'}});
@@ -206,7 +206,12 @@ test('changed-declaration full-output comparison authenticates both sources and 
   source.write('.cache/package-output-source.json',snapshotPackageOutputSource(source.root));
   const manifest=createPackageOutputManifest(source.root),originalManifest=path.join(source.root,'.cache/original.json');
   source.write('.cache/original.json',manifest);const manifestSha=hash(fs.readFileSync(originalManifest));
-  source.write(declaration,{...definition,inputs:[...definition.inputs,added]});source.write(added,{selected:true});
+  let trustedBase,acceptedInputs;
+  if(retainedCode){
+    source.write(added,'accepted source code');source.git('add',added);commit();trustedBase=source.git('rev-parse','HEAD');
+    acceptedInputs={commit:trustedBase,files:[{path:added,mode:'100644',oid:source.git('rev-parse','HEAD:'+added),bytes:fs.statSync(path.join(source.root,added)).size}]};
+  }
+  source.write(declaration,{...definition,inputs:[...definition.inputs,added]});if(!retainedCode)source.write(added,{selected:true});
   source.write('data/ownership-selection.json',{version:1,additive_release:{state:'current'}});
   source.git('add',declaration,added,'data/ownership-selection.json');commit();
   const currentHead=source.git('rev-parse','HEAD'),current=snapshotPackageOutputSource(source.root);
@@ -217,12 +222,19 @@ test('changed-declaration full-output comparison authenticates both sources and 
       origin:{head:originalHead},original_manifest_sha256:manifestSha,
       current_execution:{source_commit:currentHead,source_tree:current.tree},
       original_base_context_retained:true,base_restoration_invoked:false,invariant_build_invoked:false,
-      transition:admitPackageOutputTransition(manifest,current),current_selected_inputs:[pin]}};
+      transition:admitPackageOutputTransition(manifest,current,{acceptedInputs,typedInputs:[pin]}),current_selected_inputs:[pin]}};
   const originalAtlas=atlas(originalHead,descriptor(originalHead)),currentAtlas=atlas(currentHead,descriptor(currentHead));
   const reset=()=>{full.write('dist/client/atlas-geography.json',currentAtlas);
     assembled.write('dist/client/atlas-geography.json',originalAtlas);assembled.write('.cache/package-input-build.json',receipt);};
-  const args={full:full.root,assembled:assembled.root,originalHead,currentHead,sourceRoot:source.root,originalManifest};
+  const args={full:full.root,assembled:assembled.root,originalHead,currentHead,sourceRoot:source.root,originalManifest,trustedBase};
   reset();assert.equal(compareSelectedPackageOutput(args).exact_byte_files,3);
+  if(retainedCode){
+    assert.throws(()=>compareSelectedPackageOutput({...args,trustedBase:undefined}),/Exact trusted comparison base/);
+    assert.throws(()=>compareSelectedPackageOutput({...args,trustedBase:originalHead}),/Ordinary unchanged trusted comparison input/);
+    const forged=structuredClone(receipt);forged.assembly.transition.accepted_selected_inputs.commit=currentHead;
+    assembled.write('.cache/package-input-build.json',forged);
+    assert.throws(()=>compareSelectedPackageOutput(args),/Assembly delta transition differs/);reset();
+  }
   const fullInventory=inventoryPackageOutput(full.root).files;
   const client=fullInventory.filter(row=>row.path.startsWith('dist/client/')).map(row=>({...row,path:row.path.slice('dist/client/'.length)}));
   const readback={version:1,kind:'ordinary-cloudflare-built-output-readback',head:currentHead,
@@ -230,6 +242,7 @@ test('changed-declaration full-output comparison authenticates both sources and 
     worker_bundle_files:fullInventory.filter(row=>row.path.startsWith('dist/cloudflare/')).map(row=>({...row,path:row.path.slice('dist/cloudflare/'.length)})),
     nativeContextInputStage:structuredClone(currentAtlas.nativeContextInputStage)};
   assert.equal(compareSelectedPackageReadback({...args,readback}).atlas_exact_after_authenticated_provenance,true);
+  if(retainedCode)assert.throws(()=>compareSelectedPackageReadback({...args,readback,trustedBase:undefined}),/Exact trusted comparison base/);
   for(const mutate of [value=>value.head=originalHead,value=>value.static_assets.files.pop(),
     value=>value.static_assets.files.push(value.static_assets.files[0]),value=>value.static_assets.files[0].sha256='0'.repeat(64),
     value=>value.worker_bundle_files[0].bytes++,value=>value.nativeContextInputStage.consumed_input_bytes.encoded++,
@@ -443,4 +456,88 @@ test('capture logs actual workflow-file commit and ref independently of source c
   const worker='.github/workflows/worker-merge.yml';
   assert.deepEqual(packageWorkflowExecution({...env,GITHUB_WORKFLOW_REF:'ChengshuLi/WorldAtlas/'+worker+'@refs/heads/main',
     GITHUB_REF:'refs/heads/main',GITHUB_EVENT_NAME:'workflow_dispatch'}),{sha:'b'.repeat(40),path:worker,ref:'refs/heads/main'});
+});
+
+
+// Same32 appended paths as accepted b73 versus the actual1939 trusted baseline.
+// Contents below are bounded synthetic controls, not replayed scientific data.
+const retainedAssemblyAdditions = [
+  "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/coastal-candidate-cell-preparation-001/kawthoung/parent-sid-narrow/candidate-native-patch.json",
+  "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/coastal1928-physical-001/whole-target-support.json",
+  "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/kawthoung/original-stage-inputs.json",
+  "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/tanintharyi6-authority-001/authority-binding.json",
+  "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/tanintharyi6-authority-001/original-rule-preimage.json",
+  "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/tanintharyi6-source-preparation/candidate-native-patch.json",
+  "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/tanintharyi6-source-preparation/source-evidence.json",
+  "coordination/engineering/myanmar-vietnam-current-cells-20261015/composition/authority-registry.json",
+  "coordination/engineering/myanmar-vietnam-current-cells-20261015/composition/patch.json",
+  "coordination/engineering/myanmar-vietnam-current-cells-20261015/composition/runtime-envelope.json",
+  "coordination/engineering/myanmar-vietnam-current-cells-20261015/composition/selected-ledger.json",
+  "coordination/engineering/myanmar-vietnam-current-cells-20261015/kawthoung-contract-repair/authority-001/authority-binding.json",
+  "coordination/engineering/myanmar-vietnam-current-cells-20261015/kawthoung-contract-repair/authority-001/original-rule-preimage.json",
+  "coordination/engineering/myanmar-vietnam-current-cells-20261015/kawthoung-contract-repair/source-evidence.json",
+  "coordination/engineering/myanmar-vietnam-current-cells-20261015/ownership-selection-v2.json",
+  "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next557/inland295/authority/authority-binding.json",
+  "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next557/inland295/authority/original-rule-preimage.json",
+  "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next557/inland295/native-patch.json",
+  "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next557/inland295/source-evidence.json",
+  "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next557/mongcai262/authority/authority-binding.json",
+  "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next557/mongcai262/authority/original-rule-preimage.json",
+  "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next557/mongcai262/native-patch.json",
+  "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next557/mongcai262/source-evidence.json",
+  "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next557/original-stage-inputs.json",
+  "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next557/physical/whole-target-support.json",
+  "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/que-phong/authority/authority-binding.json",
+  "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/que-phong/authority/original-rule-preimage.json",
+  "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/que-phong/native-patch.json",
+  "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/que-phong/original-stage-inputs.json",
+  "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/que-phong/physical/whole-target-support.json",
+  "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/que-phong/source-evidence.json",
+  "scripts/qualify-source-cohort.py"
+];
+test('all32 selected appends retain unchanged typed code across original/trusted baseline vintages', t => {
+  const f=fixture(t),original=createPackageOutputManifest(f.root);
+  original.source.selection={version:1,base:'fixed',additive_release:{path:'coordination/engineering/old/release.json'}};
+  const name='scripts/qualify-source-cohort.py',raw=Buffer.from('accepted source-only implementation\n');
+  f.write(name,raw.toString());f.git('add',name);f.git('-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-qm','accepted source-only role');
+  const acceptedHead=f.git('rev-parse','HEAD'),oid=f.git('rev-parse',acceptedHead+':'+name);
+  assert.notEqual(acceptedHead,original.source.head,'Accepted role may postdate the original package');
+  const acceptedInputs={commit:acceptedHead,files:[{path:name,mode:'100644',oid,bytes:raw.length}]};
+  const typedInputs=[{commit:acceptedHead,path:name,mode:'100644',git_blob_oid:oid,bytes:raw.length,sha256:hash(raw),whole_body_consumed:true}];
+  const current=structuredClone(original.source);current.head='f'.repeat(40);
+  current.selection.additive_release={path:'coordination/engineering/new/release.json'};
+  current.definition.inputs.push(...retainedAssemblyAdditions);
+  current.files.push(...retainedAssemblyAdditions.map(path=>({path,mode:'100644',oid:path===name?oid:'1'.repeat(40)})));
+  assert.doesNotThrow(()=>admitPackageInputTransition(original.source,current,{acceptedInputs,preliminary:true}));
+  assert.throws(()=>admitPackageOutputTransition(original,current,{acceptedInputs}),/authenticated typed consumption/);
+  const result=admitPackageOutputTransition(original,current,{acceptedInputs,typedInputs});
+  assert.equal(result.added_selected_inputs.length,32);
+  assert.deepEqual(result.accepted_selected_inputs,acceptedInputs);
+  const opaque=structuredClone(typedInputs);delete opaque[0].sha256;delete opaque[0].whole_body_consumed;
+  assert.doesNotThrow(()=>admitPackageOutputTransition(original,current,{acceptedInputs,typedInputs:opaque}),
+    'Existing exact opaque descriptor roles do not require a new whole-body read');
+  for(const mutate of [
+    value=>{value.options.acceptedInputs.files=[];},
+    value=>{value.current.files.find(row=>row.path===name).oid='2'.repeat(40);},
+    value=>{value.current.files.find(row=>row.path===name).mode='100755';},
+    value=>{value.current.files.find(row=>row.path===name).mode='120000';},
+    value=>{value.options.typedInputs=[];},
+    value=>{value.options.typedInputs[0].git_blob_oid='2'.repeat(40);},
+    value=>{value.options.typedInputs[0].bytes++;},
+    value=>{value.options.typedInputs[0].mode='100755';},
+    value=>{value.current.files=value.current.files.filter(row=>row.path!==name);},
+  ]){
+    const value={current:structuredClone(current),options:structuredClone({acceptedInputs,typedInputs})};mutate(value);
+    assert.throws(()=>admitPackageOutputTransition(original,value.current,value.options));
+  }
+  const unrelated=structuredClone(current),other='scripts/unreferenced-reader.py';
+  unrelated.definition.inputs.push(other);unrelated.files.push({path:other,mode:'100644',oid});
+  const acceptedExtra=structuredClone(acceptedInputs);acceptedExtra.files.push({...acceptedExtra.files[0],path:other});
+  assert.throws(()=>admitPackageOutputTransition(original,unrelated,{acceptedInputs:acceptedExtra,typedInputs}),/authenticated typed consumption/,
+    'Unchanged code and arbitrary pin-shaped metadata do not establish a typed reader role');
+  for(const unsafe of ['scripts/new-reader.py','scripts/../escape.py','scripts/readers/']){
+    const changed=structuredClone(current);changed.definition.inputs.push(unsafe);
+    changed.files.push({path:unsafe,mode:'100644',oid});
+    assert.throws(()=>admitPackageOutputTransition(original,changed,{acceptedInputs,typedInputs}));
+  }
 });
