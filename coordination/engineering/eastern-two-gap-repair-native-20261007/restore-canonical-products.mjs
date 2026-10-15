@@ -121,7 +121,9 @@ function restoreByteDerivedObjects(canonical,prior,map,old,images) {
         assert.equal(body.length,declaration.decoded_bytes);assert.equal(sha(body),declaration.decoded_sha256);
         sourceBodies.set(name,body);
       }
-      const body=sourceBodies.get(name);assert.equal(body.length,declaration.decoded_bytes);assert.equal(sha(body),declaration.decoded_sha256);
+      // This private decoded buffer was authenticated once above; the fixed
+      // patch reader only takes views and concatenates into a fresh target.
+      const body=sourceBodies.get(name);assert.equal(body.length,declaration.decoded_bytes);
       return body;
     };
     const body=applyBytePatch(patch.commands,expected,source);
