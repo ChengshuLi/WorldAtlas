@@ -125,10 +125,28 @@ test('base advances before or during final validation are retryable without bran
   const b=fixture();b.advanceOnRead=2;await assert.rejects(b.complete(),/resubmit unchanged head/);
   assert.equal(a.writes.length+b.writes.length,0);
 });
+test('the final queue validates its real candidate without redundant author checks', async () => {
+  const f=fixture();f.checks=[];
+  const prepared=await prepareIntegration(f.options());
+  assert.equal(prepared.candidate,f.candidate);
+  const result=await f.complete();
+  assert.equal(result.accepted,true);assert.equal(f.writes.length,1);
+  assert(f.evidenceReads>=3,'actual queue evidence checks still execute');
+});
+test('missing author checks cannot hide failed current checks or current evidence', async () => {
+  for(const failure of ['checks','evidence']) {
+    const f=fixture();f.checks=[];
+    if(failure==='checks')f.checks=[{id:1,name:'external-validation',app:{id:2},status:'in_progress',conclusion:null}];
+    else f.staleReview=true;
+    await assert.rejects(prepareIntegration(f.options()),failure==='checks'?/pending or failed/:/exact-head review/);
+    await assert.rejects(f.complete(),failure==='checks'?/pending or failed/:/exact-head review/);
+    assert.equal(f.writes.length,0);
+  }
+});
 test('latest failed or pending check replaces old success', () => {
   const good={id:1,name:'scope',app:{id:1},status:'completed',conclusion:'success'};
-  assert.throws(()=>checkCurrentChecks([good,{...good,id:2,conclusion:'failure'}]),/trusted scope/);
-  assert.throws(()=>checkCurrentChecks([good,{...good,id:2,status:'in_progress',conclusion:null}]),/trusted scope/);
+  assert.throws(()=>checkCurrentChecks([good,{...good,id:2,conclusion:'failure'}]),/pending or failed/);
+  assert.throws(()=>checkCurrentChecks([good,{...good,id:2,status:'in_progress',conclusion:null}]),/pending or failed/);
 });
 test('workflow separates untrusted candidate tests from write credentials and serializes the lifecycle', () => {
   const yaml=fs.readFileSync(new URL('../.github/workflows/worker-merge.yml',import.meta.url),'utf8');
@@ -413,7 +431,7 @@ test('owned preparation rechecks every mutable PR and issue authority before tre
       if(change==='merged'){f.pr.merged=true;f.pr.merge_commit_sha=sha('f');}
     });
     await assert.rejects(prepareIntegration(f.options()),error=>{
-      assert.match(error.message,/head changed|scope\/body changed|repository PRs|inventory|open GitHub issue|trusted scope|status|exact-head review|contract or ownership|base advanced|PR merged/);
+      assert.match(error.message,/head changed|scope\/body changed|repository PRs|inventory|open GitHub issue|pending or failed|status|exact-head review|contract or ownership|base advanced|PR merged/);
       if(change==='main'||change==='pr-base') {
         assert.equal(error.candidateDiagnostics.expected_base,sha('b'));
         assert.equal(error.candidateDiagnostics.reason,'base-advanced');
@@ -743,7 +761,7 @@ test('post-create revalidation rechecks changed authority while caching only imm
    await api('/repos/owner/repo/git/blobs/'+oid);
    if(f.staleReview)throw Error('Missing independent exact-head review');return {status:'legacy'};
   };
-  await assert.rejects(prepareIntegration(options),changed==='scope'?/open GitHub issue/:changed==='check'?/trusted scope/:changed==='review'?/exact-head review/:/head changed/);
+  await assert.rejects(prepareIntegration(options),changed==='scope'?/open GitHub issue/:changed==='check'?/pending or failed/:changed==='review'?/exact-head review/:/head changed/);
   assert.equal(blobs,1);assert.equal(f.writes.length,0);assert.equal(f.refs.size,0);
  }
 });
