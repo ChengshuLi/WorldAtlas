@@ -1,11 +1,10 @@
 import {collectGeographicApproval, bindingHash} from './geographic-adjudication-api.mjs';
 import {integrationProfile, selectedDataCandidate, selectedDataSelection, candidateGeographyCode} from './integration-profile.mjs';
 import {FOCUSED_INTEGRATION_TESTS} from './run-integration-tests.mjs';
-import {githubPages, verifyIssueScope, workSpec} from './issue-claim-contract.mjs';
+import {githubPages, verifyIssueScope} from './issue-claim-contract.mjs';
 import {validateIssuePRBody, validateLanePaths} from './check-handoff-scope.mjs';
 import {checkPremergeEvidence} from './premerge-evidence.mjs';
 import {memoizeImmutableGitBlobs} from './immutable-git-blobs.mjs';
-import {evidenceRequirement} from './evidence-policy.mjs';
 import {checkGeographicReport, geographicReportProducts, preparedQueueSource} from './geographic-report-artifact.mjs';
 import {QUEUE_WORKFLOW_PATH} from './integration-proof.mjs';
 
@@ -13,15 +12,13 @@ const need = (condition, message) => { if (!condition) throw Error(message); };
 const root = repo => `/repos/${repo}`;
 
 
-export function checkCurrentChecks(checks, {evidenceRequired = false} = {}) {
+// The final queue validates current scope and evidence directly. Author check
+// names do not add authority; any checks that do exist must still be settled.
+export function checkCurrentChecks(checks) {
   const latest = new Map();
   for (const check of checks) {
     const key = `${check.app?.id}:${check.name}`;
     if (!latest.has(key) || latest.get(key).id < check.id) latest.set(key, check);
-  }
-  for (const name of ['scope', ...(evidenceRequired ? ['evidence'] : [])]) {
-    const check = [...latest.values()].filter(row => row.name === name).sort((a,b) => b.id-a.id)[0];
-    need(check?.status === 'completed' && check.conclusion === 'success', `Current head must pass trusted ${name} check`);
   }
   need([...latest.values()].every(row => row.status === 'completed' && ['success','skipped','neutral'].includes(row.conclusion)),
     'Current checks are pending or failed; submit only ready PRs');
@@ -192,9 +189,7 @@ export async function inspectMerge({api, repo, number, expectedHead, policy, evi
     new Set(files.map(file => file.filename)).size === files.length, 'Incomplete PR file inventory');
   validateLanePaths(pr.head.ref, files.flatMap(file => [file.filename, ...(file.previous_filename ? [file.previous_filename] : [])]),
     {ownedPaths: reservation.owned_paths});
-  const requirement = evidenceRequirement(issue, workSpec(issue.body), policy, pr.head.ref);
-  checkCurrentChecks(await githubPages(api, `${root(repo)}/commits/${expectedHead}/check-runs`),
-    {evidenceRequired: policy.mode === 'enforce-new' && requirement.required});
+  checkCurrentChecks(await githubPages(api, `${root(repo)}/commits/${expectedHead}/check-runs`));
   const statuses = await api(`${root(repo)}/commits/${expectedHead}/status`);
   need(!statuses.statuses?.length || statuses.state === 'success', 'Commit status is pending or failed');
   const evidence = await evidenceCheck({api, repo, pr, issue, reservation, files, policy});
@@ -327,8 +322,7 @@ export async function completeIntegration(options) {
     currentPR.state === 'open' && !currentPR.draft && currentPR.base.ref === 'main' && currentIssue.body === state.issue.body,
     'Head/body or issue contract changed during integration review');
   verifyIssueScope({branch: currentPR.head.ref, issue: currentIssue});
-  checkCurrentChecks(await githubPages(options.api, `${root(options.repo)}/commits/${state.pr.head.sha}/check-runs`),
-    {evidenceRequired: options.policy.mode === 'enforce-new' && evidenceRequirement(currentIssue, workSpec(currentIssue.body), options.policy, currentPR.head.ref).required});
+  checkCurrentChecks(await githubPages(options.api, `${root(options.repo)}/commits/${state.pr.head.sha}/check-runs`));
   const freshStatuses = await options.api(`${root(options.repo)}/commits/${state.pr.head.sha}/status`);
   need(!freshStatuses.statuses?.length || freshStatuses.state === 'success', 'Commit statuses changed during final review');
   if (waterPass) {
