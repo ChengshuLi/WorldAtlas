@@ -1,0 +1,77 @@
+{
+  "status": "PASS: actual stage/config binding and accepted entry static API",
+  "reviewer": "/root/vn235_physical_input_review",
+  "substantive_input_review_reused": "../repair-package/reference1588/missing235-physical-preparation/review/independent-input-review.json",
+  "findings": [],
+  "actual_stage": {
+    "commit": "5eb6885f18a9d267161f2bd9dd236fd676e7cbbe",
+    "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-002/missing235/whole-target-stage-inputs.json",
+    "bytes": 280465,
+    "sha256": "307048eecf7b7dd7540c8fccf372c9a936fad23f02170afa28eadc81f7e25b2a",
+    "git_blob_oid": "172fc8bb9c9934eb642f80f7bd138a43411a790f",
+    "actual_git_bytes_read": true,
+    "exact_prior_scientific_review_match": true,
+    "lazy_fetch_disabled_and_all_protocols_denied": true
+  },
+  "candidate": {
+    "file": "config-bound-5eb6885.json",
+    "bytes": 140292,
+    "sha256": "86268fade21ac8e1c74e4da67f60c3379fbc493ceb5dfb7437c38b787ec5ce4c",
+    "literal_changed_leaves": ["/physical/inputs/0/commit", "/physical/inputs/0/path", "/physical/roles/stages"],
+    "other24_physical_descriptors_unchanged": true,
+    "runtime388_exactly_unchanged": true,
+    "resource_requests_unchanged": true,
+    "new_class_context_output_keys": false
+  },
+  "accepted_code": {
+    "commit": "b73fdbb1b0e243b773514ea46aaced496a63028f",
+    "entry_path": "scripts/prepare-delivery-handoff.mjs",
+    "entry_bytes": 93442,
+    "entry_sha256": "b658f0e435d1b19566870c6e4b098dbb69c910e3e14ccf1c3e4bb0f484ff4eb6",
+    "helper_path": "scripts/qualify-source-cohort.py",
+    "helper_bytes": 48543,
+    "helper_sha256": "58ef81739b264085b2997be7baa3df03ba6bb673f91a160176efd79b71fec081",
+    "helper_byte_equal_accepted2347": true,
+    "entry_changes_reviewed_by_literal_diff": true,
+    "physical_scientific_producer_changed": false
+  },
+  "static_entry_checks": {
+    "plain_node_cli": true,
+    "safe_contained_output_and_ordinary_ancestors": true,
+    "fresh_output_or_explicit_exact_resume": true,
+    "finite_child_execution_and_complete_output_reserve": true,
+    "full_output_reserve_checked_against_parent_before_runtime_hashing_staging_child": true,
+    "complete_actual_output_total_checked": true,
+    "exclusive_publication_and_receipt_last": true
+  },
+  "launch": {
+    "argv": ["node", "scripts/prepare-delivery-handoff.mjs", "physical", ".cache/missing235-physical-config-001.json", ".cache/delivery-handoff/missing235-physical-001"],
+    "destination_freshness": "parent-reported; actual entry must enforce at dispatch",
+    "fresh_slot_inspected_by_reviewer": false
+  },
+  "accounting": {
+    "logical_scientific_input_bytes": 305363824,
+    "unique_runtime_bytes_including_python_once": 35120510,
+    "output_reserve_bytes": 33554432,
+    "deduplicated_logical_input_runtime_output_bytes": 374038766,
+    "historical_conservative_listed_bytes": 392097326,
+    "historical_conservative_note": "Adds the Python executable separately although the388-file runtime inventory already includes it once.",
+    "child_runtime_plus_execution_reserve_bytes": 68827614,
+    "parent_outer_config_plus_full_output_reserve_bytes": 33694724,
+    "child_phase_and_rss_request_bytes": 671088640,
+    "parent_phase_and_rss_request_bytes": 536870912,
+    "root_planned_headroom_bytes": 572882944,
+    "root_planned_concurrent_reserved_bytes": 0,
+    "fresh_admission_granted_by_this_review": false
+  },
+  "science_or_inventory_replay": false,
+  "runtime_probe_or_fresh_authentication": false,
+  "launch_performed": false,
+  "territorial_clearance_or_assignment": false,
+  "limits": [
+    "Actual entry/root must enforce fresh storage/session/resource admission, runtime authentication and output freshness.",
+    "Static binding/API PASS does not guarantee GEOS peak or hard process-tree supervision.",
+    "Actual complete physical query/relation/witness/issue/hierarchy/receipt review remains pending.",
+    "All235 foreign-reference territorial/legal/source holds remain unchanged."
+  ]
+}
