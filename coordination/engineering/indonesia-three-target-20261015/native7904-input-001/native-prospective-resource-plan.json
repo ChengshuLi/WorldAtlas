@@ -1,0 +1,349 @@
+{
+  "version": 1,
+  "worker": "/root/native7904_preparation",
+  "kind": "metadata-only-complete-prospective-7904-native-authority-plan",
+  "requested_cells": 7904,
+  "relative_held": 3330,
+  "source_evidence": {
+    "bytes": 68466,
+    "sha256": "0ce97154c7f09550938c2c199abc4d6a3ae5205fc006907faa2c99dde8c21f1d",
+    "git_blob_oid": "1a1086fb69d5d9764bbbf7759680dd5dc2940840"
+  },
+  "native_patch": {
+    "bytes": 309598,
+    "sha256": "11a42c236e8684c5f025793e7c40fc32a0b71b68a382fab69b17f23332e14bcb",
+    "git_blob_oid": "48ce23d1208e035ff01cd42044d9f55cf2de9d99"
+  },
+  "independent_input_review": {
+    "bytes": 11756,
+    "sha256": "f72cf1fbed5a3bf0a2cb78acbdebe56dfd748f795db787a2ce81906f48953749",
+    "git_blob_oid": "0c48fcc3160502c2d871d59cc3609eaf4f39e1c4"
+  },
+  "complete_family_features": 519,
+  "bbox_possible_complete_source_features": [
+    "22746128B48169474795911",
+    "22746128B2571336805106",
+    "22746128B78411617556279",
+    "22746128B78864950196660",
+    "22746128B96188894812390",
+    "22746128B20933115656615"
+  ],
+  "accepted_code_commit": "b73fdbb1b0e243b773514ea46aaced496a63028f",
+  "accepted_code_modules": 12,
+  "accepted_code_bytes": 532527,
+  "accepted_code_receipt": "following-country-delivery-11622/accepted-code-closure.json",
+  "stock_reader": {
+    "runtime": 121304480,
+    "output": 4194304,
+    "metadata_including_outer_pair_and_config": 8770768,
+    "encoded": 9834747,
+    "decoded": 24196415,
+    "full_6x_parse": 158786946,
+    "total": 327087660
+  },
+  "blocks": [
+    {
+      "block": 32,
+      "rowStart": 131072,
+      "rowEnd": 135168,
+      "requested_rows": 689,
+      "requested_cells": 3216,
+      "hit_inventory": 617472,
+      "whole_exterior_witnesses": [
+        {
+          "owner": 23087,
+          "operation": "outside_mapped_L1_context",
+          "parts": 1,
+          "vertices": 2995,
+          "edges": 2695,
+          "crossing_edge_rows": 2690,
+          "span_upper_bound": 1345,
+          "tie_upper_bound": 2690,
+          "scratch_bytes": 6516416
+        },
+        {
+          "owner": 22909,
+          "operation": "outside_mapped_L1_context",
+          "parts": 1,
+          "vertices": 2038,
+          "edges": 1865,
+          "crossing_edge_rows": 1424,
+          "span_upper_bound": 712,
+          "tie_upper_bound": 1424,
+          "scratch_bytes": 4172416
+        },
+        {
+          "owner": 23089,
+          "operation": "outside_mapped_L1_context",
+          "parts": 1,
+          "vertices": 5864,
+          "edges": 5299,
+          "crossing_edge_rows": 0,
+          "span_upper_bound": 0,
+          "tie_upper_bound": 0,
+          "scratch_bytes": 6533248
+        }
+      ],
+      "source_scans": [
+        {
+          "shapeID": "22746128B48169474795911",
+          "parts": 1,
+          "vertices": 994,
+          "edges": 977,
+          "crossing_edge_rows": 2992,
+          "span_upper_bound": 1496,
+          "tie_upper_bound": 2992,
+          "scratch_bytes": 2408064
+        },
+        {
+          "shapeID": "22746128B2571336805106",
+          "parts": 1,
+          "vertices": 1091,
+          "edges": 1089,
+          "crossing_edge_rows": 2734,
+          "span_upper_bound": 1367,
+          "tie_upper_bound": 2734,
+          "scratch_bytes": 2433088
+        },
+        {
+          "shapeID": "22746128B78411617556279",
+          "parts": 1,
+          "vertices": 1420,
+          "edges": 1341,
+          "crossing_edge_rows": 3322,
+          "span_upper_bound": 1661,
+          "tie_upper_bound": 3322,
+          "scratch_bytes": 2939328
+        },
+        {
+          "shapeID": "22746128B78864950196660",
+          "parts": 1,
+          "vertices": 2449,
+          "edges": 2363,
+          "crossing_edge_rows": 0,
+          "span_upper_bound": 0,
+          "tie_upper_bound": 0,
+          "scratch_bytes": 3036288
+        },
+        {
+          "shapeID": "22746128B96188894812390",
+          "parts": 1,
+          "vertices": 989,
+          "edges": 974,
+          "crossing_edge_rows": 3018,
+          "span_upper_bound": 1509,
+          "tie_upper_bound": 3018,
+          "scratch_bytes": 2410432
+        },
+        {
+          "shapeID": "22746128B20933115656615",
+          "parts": 1,
+          "vertices": 2388,
+          "edges": 2282,
+          "crossing_edge_rows": 5112,
+          "span_upper_bound": 2556,
+          "tie_upper_bound": 5112,
+          "scratch_bytes": 4446080
+        }
+      ],
+      "coverage_scans": [
+        {
+          "target": "gb:IDN:ADM2:22746128B78411617556279",
+          "parts": 1,
+          "vertices": 2899,
+          "edges": 2796,
+          "crossing_edge_rows": 2960,
+          "span_upper_bound": 1480,
+          "tie_upper_bound": 2960,
+          "scratch_bytes": 4349568
+        },
+        {
+          "target": "gb:IDN:ADM2:22746128B48169474795911",
+          "parts": 1,
+          "vertices": 2295,
+          "edges": 2282,
+          "crossing_edge_rows": 2998,
+          "span_upper_bound": 1499,
+          "tie_upper_bound": 2998,
+          "scratch_bytes": 3742016
+        },
+        {
+          "target": "gb:IDN:ADM2:22746128B78864950196660",
+          "parts": 1,
+          "vertices": 5569,
+          "edges": 5472,
+          "crossing_edge_rows": 0,
+          "span_upper_bound": 0,
+          "tie_upper_bound": 0,
+          "scratch_bytes": 6231168
+        }
+      ],
+      "positive_scan_extra_reserve": 63992064,
+      "class_scan_extra": 0,
+      "complete_extra_live_scan_superset": 71142784
+    },
+    {
+      "block": 33,
+      "rowStart": 135168,
+      "rowEnd": 139264,
+      "requested_rows": 788,
+      "requested_cells": 4688,
+      "hit_inventory": 900096,
+      "whole_exterior_witnesses": [
+        {
+          "owner": 23087,
+          "operation": "outside_mapped_L1_context",
+          "parts": 1,
+          "vertices": 2995,
+          "edges": 2695,
+          "crossing_edge_rows": 0,
+          "span_upper_bound": 0,
+          "tie_upper_bound": 0,
+          "scratch_bytes": 3595392
+        },
+        {
+          "owner": 22909,
+          "operation": "outside_mapped_L1_context",
+          "parts": 1,
+          "vertices": 2038,
+          "edges": 1865,
+          "crossing_edge_rows": 0,
+          "span_upper_bound": 0,
+          "tie_upper_bound": 0,
+          "scratch_bytes": 2615424
+        },
+        {
+          "owner": 23089,
+          "operation": "outside_mapped_L1_context",
+          "parts": 1,
+          "vertices": 5864,
+          "edges": 5299,
+          "crossing_edge_rows": 4914,
+          "span_upper_bound": 2457,
+          "tie_upper_bound": 4914,
+          "scratch_bytes": 12748992
+        }
+      ],
+      "source_scans": [
+        {
+          "shapeID": "22746128B48169474795911",
+          "parts": 1,
+          "vertices": 994,
+          "edges": 977,
+          "crossing_edge_rows": 0,
+          "span_upper_bound": 0,
+          "tie_upper_bound": 0,
+          "scratch_bytes": 1546368
+        },
+        {
+          "shapeID": "22746128B2571336805106",
+          "parts": 1,
+          "vertices": 1091,
+          "edges": 1089,
+          "crossing_edge_rows": 0,
+          "span_upper_bound": 0,
+          "tie_upper_bound": 0,
+          "scratch_bytes": 1645696
+        },
+        {
+          "shapeID": "22746128B78411617556279",
+          "parts": 1,
+          "vertices": 1420,
+          "edges": 1341,
+          "crossing_edge_rows": 0,
+          "span_upper_bound": 0,
+          "tie_upper_bound": 0,
+          "scratch_bytes": 1982592
+        },
+        {
+          "shapeID": "22746128B78864950196660",
+          "parts": 1,
+          "vertices": 2449,
+          "edges": 2363,
+          "crossing_edge_rows": 6120,
+          "span_upper_bound": 3060,
+          "tie_upper_bound": 6120,
+          "scratch_bytes": 4798848
+        },
+        {
+          "shapeID": "22746128B96188894812390",
+          "parts": 1,
+          "vertices": 989,
+          "edges": 974,
+          "crossing_edge_rows": 0,
+          "span_upper_bound": 0,
+          "tie_upper_bound": 0,
+          "scratch_bytes": 1541248
+        },
+        {
+          "shapeID": "22746128B20933115656615",
+          "parts": 1,
+          "vertices": 2388,
+          "edges": 2282,
+          "crossing_edge_rows": 0,
+          "span_upper_bound": 0,
+          "tie_upper_bound": 0,
+          "scratch_bytes": 2973824
+        }
+      ],
+      "coverage_scans": [
+        {
+          "target": "gb:IDN:ADM2:22746128B78411617556279",
+          "parts": 1,
+          "vertices": 2899,
+          "edges": 2796,
+          "crossing_edge_rows": 0,
+          "span_upper_bound": 0,
+          "tie_upper_bound": 0,
+          "scratch_bytes": 3497088
+        },
+        {
+          "target": "gb:IDN:ADM2:22746128B48169474795911",
+          "parts": 1,
+          "vertices": 2295,
+          "edges": 2282,
+          "crossing_edge_rows": 0,
+          "span_upper_bound": 0,
+          "tie_upper_bound": 0,
+          "scratch_bytes": 2878592
+        },
+        {
+          "target": "gb:IDN:ADM2:22746128B78864950196660",
+          "parts": 1,
+          "vertices": 5569,
+          "edges": 5472,
+          "crossing_edge_rows": 5872,
+          "span_upper_bound": 2936,
+          "tie_upper_bound": 5872,
+          "scratch_bytes": 7922304
+        }
+      ],
+      "positive_scan_extra_reserve": 57573120,
+      "class_scan_extra": 0,
+      "complete_extra_live_scan_superset": 71222208
+    }
+  ],
+  "components": {
+    "stock_fixed_full_reader": 327087660,
+    "complete_extra_live_scan_superset": 71222208,
+    "accepted_code_closure_source_parse_compile_12x": 6390324,
+    "outer_config_parse_12x4096": 49152,
+    "unchanged_full_output_logs_OS_receipts_superset": 128940960
+  },
+  "complete_prospective_bytes": 533690304,
+  "proposed_phase_rss_request_bytes": 536870912,
+  "remaining_under_proposed_request": 3180608,
+  "session_headroom_bytes": 572882944,
+  "fresh_admission": false,
+  "stock_output_reserve_bytes": 4194304,
+  "config_reserve_bytes": 4096,
+  "ordinary_deadline_seconds": 120,
+  "external_reserve_basis": "bintan-input-checkpoint-001/complete-prospective-resource-plan.json; unchanged complete output/log/OS reserve128940960",
+  "limits": [
+    "Metadata scheduling only; no helper import, polygon scanner, point predicate, source/GSHHG/physical replay or constructor executed.",
+    "All full geometries, complete family and decoded bodies retained; no clipping or per-target parse reset.",
+    "Positive-domain reserve is twice full source plus coverage scratch; added to maximum exterior scratch and full hit inventory conservatively.",
+    "Prospective arithmetic is neither observed peak nor a resource grant. Runtime/OS identity, exact config and executing closure must be rechecked before Main fresh admission.",
+    "Actual immutable publication and shared-local custody remain required. No qualification/current-owner-zero/accepted credit."
+  ]
+}

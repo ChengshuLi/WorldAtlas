@@ -1,0 +1,310 @@
+{
+  "version": 1,
+  "reviewer": "/root/next1005_review_cont",
+  "disposition": "PASS typed original land-request inputs with limits; execution custody prerequisites remain listed",
+  "source_evidence": {
+    "path": "idn-three-target11234-native-preparation-001/actual-physical-followup-001/source-evidence.json",
+    "bytes": 68466,
+    "sha256": "0ce97154c7f09550938c2c199abc4d6a3ae5205fc006907faa2c99dde8c21f1d"
+  },
+  "candidate_patch": {
+    "path": "idn-three-target11234-native-preparation-001/actual-physical-followup-001/combined7904-candidate-native-patch.json",
+    "bytes": 309598,
+    "sha256": "11a42c236e8684c5f025793e7c40fc32a0b71b68a382fab69b17f23332e14bcb"
+  },
+  "physical_review_reused": {
+    "path": "idn-three-target11234-physical-preparation-001/independent-actual-physical-result-review.json",
+    "bytes": 17774,
+    "sha256": "43c9aefa938163f3ec88a66942b6badaebeae30f559e109b37891f1f0f477200"
+  },
+  "whole_stage_review_reused": {
+    "path": "idn-three-target11234-physical-preparation-001/independent-combined-input-review.json",
+    "bytes": 7272,
+    "sha256": "e976d42a3543c1e3a9b7c23137b56bbc9e36856a841c242da4cff6309a8bf245"
+  },
+  "owner_roster_join": {
+    "path": "idn-three-target11234-native-preparation-001/whole-owner-roster-joins.json",
+    "bytes": 2080,
+    "sha256": "43187d6e0adf5d58748a4a6aea5394c0a80876b1d6734f31e022f39bbb4d9a6c"
+  },
+  "source_sid_join_reused": {
+    "path": "idn-three-target11234-native-preparation-001/whole-source-SID-roster-joins.json",
+    "bytes": 2818,
+    "sha256": "0825f6549d52450b9ff4d570d758e27142ae44788268f4f8068f3c578c5e3162"
+  },
+  "expected_owner_cells": {
+    "23087": 2096,
+    "22909": 1120,
+    "23089": 4688
+  },
+  "component_ids": [
+    "source-target:95cbce2a2c42c917e104fb1b2fd298eb289730d053cb413331fb52b3deb6a607",
+    "source-target:708004e993e182b0c65eee86fd5c544630e798726fc58f618bc0932de6894750",
+    "source-target:65220b14681e3416b5de12f476087383af9934840a5a510d03315d3eeec40d93"
+  ],
+  "collision_results": [
+    {
+      "label": "accepted67009",
+      "ledger_pin": {
+        "commit": "5f25fc64206e86fa25c0ef104f3ab11bda2d1703",
+        "path": "coordination/engineering/shared-country-repairs-20261014/delivery/selected-ledger.json",
+        "mode": "100644",
+        "git_blob_oid": "558cd2d7ac39a3beac1b45af1e748f804395da82",
+        "bytes": 2423010,
+        "sha256": "ad7e7d2a8bfa60b8d3b8820a8f3be7970e6a768cc6fe990ceba353948752ecf0"
+      },
+      "overlay_pin": {
+        "commit": "5f25fc64206e86fa25c0ef104f3ab11bda2d1703",
+        "path": "coordination/engineering/shared-country-repairs-20261014/delivery/patch.json",
+        "mode": "100644",
+        "git_blob_oid": "75c4b0d908120def95900052f2a34915e84b6d33",
+        "bytes": 736047,
+        "sha256": "bea10a485ebbfbbf0791b35a55f052061acb4b05da1dd7d0c77d604b97786a87"
+      },
+      "component_id_collisions": [],
+      "overlap_cells": 0,
+      "limit": "Metadata overlay only; not base-native owner-zero or final selected-state binding."
+    },
+    {
+      "label": "proposed71339",
+      "ledger_pin": {
+        "commit": "fb726f466d69f73b91ad12138397d627af612ae3",
+        "path": "coordination/engineering/myanmar-vietnam-current-cells-20261015/composition/selected-ledger.json",
+        "mode": "100644",
+        "git_blob_oid": "3c8498beeb48b9430753f793b7772819fc846d60",
+        "bytes": 2515585,
+        "sha256": "06d6810daa7377897f14f330df79c28b94dbedf0ce88427ba2589948b0e4aaee"
+      },
+      "overlay_pin": {
+        "commit": "fb726f466d69f73b91ad12138397d627af612ae3",
+        "path": "coordination/engineering/myanmar-vietnam-current-cells-20261015/composition/patch.json",
+        "mode": "100644",
+        "git_blob_oid": "785bf1dabbb54088b8dcfa027ce84935316a6a20",
+        "bytes": 775818,
+        "sha256": "6b239273bbf9eea29f06fb5f900e6263068c2eae0ec9af771f82c6ff04856c84"
+      },
+      "component_id_collisions": [],
+      "overlap_cells": 0,
+      "limit": "Metadata overlay only; not base-native owner-zero or final selected-state binding."
+    }
+  ],
+  "checks": [
+    {
+      "check": "exact source evidence bytes and SHA",
+      "passed": true
+    },
+    {
+      "check": "exact candidate patch bytes and SHA",
+      "passed": true
+    },
+    {
+      "check": "existing typed schema with no new flags",
+      "passed": true
+    },
+    {
+      "check": "unchanged accepted 654 common contract catalogue",
+      "passed": true
+    },
+    {
+      "check": "unchanged accepted 654 common contract families",
+      "passed": true
+    },
+    {
+      "check": "unchanged accepted 654 common contract owner_roster",
+      "passed": true
+    },
+    {
+      "check": "unchanged accepted 654 common contract native_contract",
+      "passed": true
+    },
+    {
+      "check": "unchanged accepted 654 common contract native_latitudes",
+      "passed": true
+    },
+    {
+      "check": "unchanged accepted 654 common contract base_reference",
+      "passed": true
+    },
+    {
+      "check": "completed physical review and exact raw hash reused",
+      "passed": true
+    },
+    {
+      "check": "actual physical e564 and original stage 33652",
+      "passed": true
+    },
+    {
+      "check": "actual accepted 2347 reproducer",
+      "passed": true
+    },
+    {
+      "check": "whole local immutable body coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+      "passed": true
+    },
+    {
+      "check": "whole local immutable body coordination/engineering/indonesia-three-target-20261015/three-whole-original-stage-inputs.json",
+      "passed": true
+    },
+    {
+      "check": "whole local immutable body scripts/qualify-source-cohort.py",
+      "passed": true
+    },
+    {
+      "check": "complete original 519-feature catalogue and lineage",
+      "passed": true
+    },
+    {
+      "check": "whole local immutable body coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/owners.json.gz",
+      "passed": true
+    },
+    {
+      "check": "whole owner roster decoded custody",
+      "passed": true
+    },
+    {
+      "check": "complete original 49625-owner roster",
+      "passed": true
+    },
+    {
+      "check": "exact three original targets in original order",
+      "passed": true
+    },
+    {
+      "check": "exact target fields and no invented exclusions gb:IDN:ADM2:22746128B78411617556279",
+      "passed": true
+    },
+    {
+      "check": "whole selected base geometry unchanged gb:IDN:ADM2:22746128B78411617556279",
+      "passed": true
+    },
+    {
+      "check": "original owner roster identity and framework parent gb:IDN:ADM2:22746128B78411617556279",
+      "passed": true
+    },
+    {
+      "check": "original family receipt and requested stock coverage gb:IDN:ADM2:22746128B78411617556279",
+      "passed": true
+    },
+    {
+      "check": "exact target fields and no invented exclusions gb:IDN:ADM2:22746128B48169474795911",
+      "passed": true
+    },
+    {
+      "check": "whole selected base geometry unchanged gb:IDN:ADM2:22746128B48169474795911",
+      "passed": true
+    },
+    {
+      "check": "original owner roster identity and framework parent gb:IDN:ADM2:22746128B48169474795911",
+      "passed": true
+    },
+    {
+      "check": "original family receipt and requested stock coverage gb:IDN:ADM2:22746128B48169474795911",
+      "passed": true
+    },
+    {
+      "check": "exact target fields and no invented exclusions gb:IDN:ADM2:22746128B78864950196660",
+      "passed": true
+    },
+    {
+      "check": "whole selected base geometry unchanged gb:IDN:ADM2:22746128B78864950196660",
+      "passed": true
+    },
+    {
+      "check": "original owner roster identity and framework parent gb:IDN:ADM2:22746128B78864950196660",
+      "passed": true
+    },
+    {
+      "check": "original family receipt and requested stock coverage gb:IDN:ADM2:22746128B78864950196660",
+      "passed": true
+    },
+    {
+      "check": "exact frozen land spans; no merge clip added or reassigned span",
+      "passed": true
+    },
+    {
+      "check": "exact 7904 unique land requests per owner",
+      "passed": true
+    },
+    {
+      "check": "all 3330 relative cells excluded without class promotion",
+      "passed": true
+    },
+    {
+      "check": "original North Maluku cross-parent context preserved",
+      "passed": true
+    },
+    {
+      "check": "three distinct component identities from actual source evidence SHA",
+      "passed": true
+    },
+    {
+      "check": "whole local immutable body coordination/engineering/shared-country-repairs-20261014/delivery/selected-ledger.json",
+      "passed": true
+    },
+    {
+      "check": "whole local immutable body coordination/engineering/shared-country-repairs-20261014/delivery/patch.json",
+      "passed": true
+    },
+    {
+      "check": "accepted67009 no component identity collision",
+      "passed": true
+    },
+    {
+      "check": "accepted67009 additive overlay has zero request overlap",
+      "passed": true
+    },
+    {
+      "check": "whole local immutable body coordination/engineering/myanmar-vietnam-current-cells-20261015/composition/selected-ledger.json",
+      "passed": true
+    },
+    {
+      "check": "whole local immutable body coordination/engineering/myanmar-vietnam-current-cells-20261015/composition/patch.json",
+      "passed": true
+    },
+    {
+      "check": "proposed71339 no component identity collision",
+      "passed": true
+    },
+    {
+      "check": "proposed71339 additive overlay has zero request overlap",
+      "passed": true
+    }
+  ],
+  "checks_passed": 45,
+  "local_read_gaps": [
+    {
+      "pin": {
+        "commit": "e564183176a531ba03372f497026c1de4e5224da",
+        "path": "coordination/engineering/indonesia-three-target-20261015/physical-result-001/whole-target-support.json",
+        "mode": "100644",
+        "git_blob_oid": "dd24d462c8abf1b9c8c67584b595bf82a7ff7b7a",
+        "bytes": 1230468,
+        "sha256": "dd0f871ade7d4f1802524f4ff7bc52312766c615ebe37f77dba7d21fdac53604"
+      },
+      "action": "read-only local cat-file",
+      "status": "missing; not fetched",
+      "exit_code": 128
+    }
+  ],
+  "qualification": "UNRUN; request is not a support claim",
+  "qualified_cells": 0,
+  "accepted_cells": 0,
+  "pending": [
+    "Actual source-evidence and patch publication; Main must warm every missing exact immutable operand before execution.",
+    "Final accepted native entry/import/resource compatibility and fresh ordinary finite admission.",
+    "Actual stock constructor must prove every requested centre against positive land, empty water, exterior and all original witnesses or refuse.",
+    "Actual result review, current-owner-zero, accepted predecessor conservation, final head and ordinary integration."
+  ],
+  "limits": [
+    "One ordinary source-target authority request; no added flags, territorial-exclusions array, source certificate or class promotion.",
+    "All 345 checked physical query records and full original witnesses/vintage/operating limits remain in the immutable full physical pin. Reused 68-check review did not replay predicates.",
+    "All three physical records have nonempty land AND exterior; zero issues does not prove these 7904 centres land.",
+    "3330 relative cells excluded; 146 cross-parent land requests remain for stock proof/refusal, and 32 relative cross-parent cells remain held. Other ring, water and border holds unchanged.",
+    "Original 519-feature family and normative native contract reused without changing bytes or source authority. Metadata component derivation does not qualify cells.",
+    "No scientific module import, predicate, native/source/GSHHG producer, fetch, repository mutation or reservation."
+  ],
+  "review_operating": {
+    "elapsed_seconds": 1.915902125,
+    "peak_rss_bytes": 159137792
+  }
+}
