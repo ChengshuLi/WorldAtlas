@@ -35,16 +35,17 @@ function fixture({missingOrigin = false, splitBaseline = false, rebind = true, m
   const files = {}, commits = new Map();
   const put = (name, value) => { files[name] = body(value); return name; };
   function commit(values = files, parent, modes = {}) {
-    // Git writes the same complete fixture tree in one process. Reset this
-    // private ref so an omitted parent always creates a root, including repeats.
-    const stream = [Buffer.from('reset refs/heads/fixture\n\ncommit refs/heads/fixture\nmark :1\n'
+    // Git writes the complete fixture tree in one process. The import-only ref
+    // is removed before returning; ordinary fixture refs and HEAD stay untouched.
+    const reference = 'refs/test-fixture-import';
+    const stream = [Buffer.from(`commit ${reference}\nmark :1\n`
       + 'committer fixture <fixture@example.invalid> 0 +0000\ndata 8\nfixture\n'
       + (parent ? `from ${parent}\n` : '') + 'deleteall\n')];
     for (const [name, value] of Object.entries(values)) {
       const raw = body(value);
       stream.push(Buffer.from(`M ${modes[name] ?? '100644'} inline ${JSON.stringify(name)}\ndata ${raw.length}\n`), raw, Buffer.from('\n'));
     }
-    stream.push(Buffer.from('\nget-mark :1\ndone\n'));
+    stream.push(Buffer.from(`\nget-mark :1\nreset ${reference}\n\ndone\n`));
     const id = git(['fast-import', '--quiet', '--force'], Buffer.concat(stream));
     commits.set(id, {...values}); return id;
   }
