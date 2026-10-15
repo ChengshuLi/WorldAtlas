@@ -143,25 +143,93 @@ rows=json.loads(sys.argv[2]);mode=sys.argv[3]
 with zipfile.ZipFile(sys.argv[1],'w',compression=zipfile.ZIP_DEFLATED) as z:
  for name,body in rows.items():
   if mode=='missing' and name=='dist/client/assets/a.js': continue
+  if mode=='missing-manifest' and name=='.cache/package-output-manifest.json': continue
+  if mode=='manifest-symlink' and name=='.cache/package-output-manifest.json':
+   info=zipfile.ZipInfo(name);info.create_system=3;info.external_attr=(stat.S_IFLNK|0o777)<<16;z.writestr(info,base64.b64decode(body));continue
   if mode=='symlink' and name=='dist/client/assets/a.js':
    info=zipfile.ZipInfo(name);info.create_system=3;info.external_attr=(stat.S_IFLNK|0o777)<<16;z.writestr(info,b'actual emitted bytes');continue
   z.writestr(name,base64.b64decode(body) if mode!='corrupt' or name!='dist/client/assets/a.js' else b'actual emittEd bytes')
  if mode=='extra': z.writestr('dist/client/extra.json',b'{}')
  if mode=='traversal': z.writestr('../sentinel',b'changed')
  if mode=='duplicate': z.writestr('dist/client/assets/a.js',b'actual emitted bytes')
+ if mode=='duplicate-manifest': z.writestr('.cache/package-output-manifest.json',base64.b64decode(rows['.cache/package-output-manifest.json']))
 `;
   const extractor=path.resolve('scripts/extract-package-output.py');
   fs.writeFileSync(path.join(root,'sentinel'),'original');
-  for(const mode of ['valid','missing','symlink','corrupt','extra','traversal','duplicate']){
+  for(const mode of ['valid','missing','symlink','corrupt','extra','traversal','duplicate','missing-manifest','manifest-symlink','duplicate-manifest']){
     const archive=path.join(root,mode+'.zip'),target=path.join(root,'extracted-'+mode);
     execFileSync('python3',['-c',writer,archive,JSON.stringify(expected),mode],{stdio:'pipe'});
-    const args=[extractor,archive,manifestPath,target,hash(fs.readFileSync(archive))];
+    const args=[extractor,archive,target,hash(fs.readFileSync(archive)),hash(fs.readFileSync(manifestPath)),String(fs.statSync(manifestPath).size)];
     if(mode==='valid'){
       execFileSync('python3',args,{stdio:'pipe'});assert.equal(verifyPackageOutput(target,manifest),true);
       assert.throws(()=>execFileSync('python3',args,{stdio:'pipe'}));
       assert.equal(verifyPackageOutput(target,manifest),true);
     }else {assert.throws(()=>execFileSync('python3',args,{stdio:'pipe'}));assert.equal(fs.existsSync(target),false);}
     assert.equal(fs.readFileSync(path.join(root,'sentinel'),'utf8'),'original');
+  }
+  const valid=path.join(root,'valid.zip'),archiveRaw=fs.readFileSync(valid),manifestRaw=fs.readFileSync(manifestPath);
+  // The real CLI must reject both independent identities before creating output.
+  for(const [archiveHash,manifestHash,manifestBytes]of [
+    ['0'.repeat(64),hash(manifestRaw),manifestRaw.length],
+    [hash(archiveRaw),'0'.repeat(64),manifestRaw.length],
+    [hash(archiveRaw),hash(manifestRaw),manifestRaw.length+1],
+  ]){
+    const target=path.join(root,'bad-authority');
+    assert.throws(()=>execFileSync('python3',[extractor,valid,target,archiveHash,manifestHash,String(manifestBytes)],{stdio:'pipe'}));
+    assert.equal(fs.existsSync(target),false);
+  }
+  const probe=`import hashlib,os,pathlib,runpy,sys,zipfile
+extractor,archive,target,archive_hash,manifest_hash,manifest_bytes,mode=sys.argv[1:]
+module=runpy.run_path(extractor)
+original=pathlib.Path(archive).read_bytes()
+original_zip=zipfile.ZipFile
+original_hash=hashlib.sha256
+observations=[]
+class ObservedHash:
+ def __init__(self,body=b''):
+  self.hash=original_hash(body);self.bytes=len(body);observations.append(self)
+ def update(self,body): self.bytes+=len(body);self.hash.update(body)
+ def hexdigest(self): return self.hash.hexdigest()
+def write_same_byte():
+ before=os.stat(archive)
+ with open(archive,'r+b') as output:
+  first=output.read(1);output.seek(0);output.write(first)
+ os.utime(archive,ns=(before.st_atime_ns,before.st_mtime_ns))
+class AlteredZip(original_zip):
+ def __init__(self,*args,**kwargs):
+  if mode=='replace-after-hash':
+   os.rename(archive,archive+'.retained');pathlib.Path(archive).write_bytes(original)
+  elif mode=='rewrite-after-hash': write_same_byte()
+  self.mutated=False
+  super().__init__(*args,**kwargs)
+ def open(self,name,*args,**kwargs):
+  result=super().open(name,*args,**kwargs)
+  member=name.filename if hasattr(name,'filename') else name
+  if mode=='write-during-extraction' and member.startswith('dist/') and not self.mutated:
+   self.mutated=True;write_same_byte()
+  return result
+hashlib.sha256=ObservedHash
+zipfile.ZipFile=AlteredZip
+try:
+ result=module['extract'](archive,target,archive_hash,manifest_hash,manifest_bytes)
+ assert mode=='unchanged', 'Mutation passed consumption'
+ assert result['files']>0
+except ValueError as error:
+ assert mode!='unchanged', str(error)
+ assert 'Archive identity changed during consumption' in str(error), str(error)
+ assert not pathlib.Path(target).exists(), 'Failed consumption retained output'
+assert pathlib.Path(archive).read_bytes()==original
+if mode=='replace-after-hash': assert pathlib.Path(archive+'.retained').read_bytes()==original
+passes=[item for item in observations if item.hexdigest()==archive_hash]
+assert len(passes)==1 and passes[0].bytes==len(original), 'Archive was not authenticated exactly once'
+print(mode+': one authenticated archive pass; mutation/cleanup controls passed')
+`;
+  for(const mode of ['unchanged','replace-after-hash','rewrite-after-hash','write-during-extraction']){
+    const archive=path.join(root,mode+'.zip'),target=path.join(root,mode+'-output');fs.writeFileSync(archive,archiveRaw);
+    const result=execFileSync('python3',['-I','-S','-B','-c',probe,extractor,archive,target,hash(archiveRaw),hash(manifestRaw),String(manifestRaw.length),mode],{encoding:'utf8'});
+    assert.match(result,/one authenticated archive pass/);
+    if(mode==='unchanged')assert.equal(verifyPackageOutput(target,manifest),true);
+    else assert.equal(fs.existsSync(target),false);
   }
 });
 

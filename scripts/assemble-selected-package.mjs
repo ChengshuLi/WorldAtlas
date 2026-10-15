@@ -126,7 +126,7 @@ export async function findOriginalPackage({api,repo,current,originalRunId}){
             files:all.filter(row=>containsPackagePath(definition.inputs,row.path)),
             selection:await blobJSON(api,repo,tree,'data/ownership-selection.json')};
           if(!sourceCompatible(source,current))continue;
-          return {source,origin};
+          return {source,origin,receipt};
         }catch(error){
           console.warn(`Skipped original package producer ${run.id}/${attempt}: ${String(error.message).replace(/https?:\/\/\S+/g,'[delivery address]').slice(0,300)}`);
         }
@@ -145,10 +145,10 @@ async function downloadOriginal(api,repo,origin,destination){
   need(url.protocol==='https:'&&!url.username&&!url.password&&url.hostname.endsWith('.blob.core.windows.net'),'Unsupported original output delivery');
   const delivery=await fetch(url,{redirect:'error',signal:AbortSignal.timeout(120000)});
   need(delivery.ok&&delivery.body,'Original output delivery failed');
-  const fd=fs.openSync(destination,'wx',0o600),digest=createHash('sha256');let bytes=0;
-  try{for await(const chunk of delivery.body){bytes+=chunk.length;need(bytes<=origin.artifact_bytes,'Original archive exceeds authenticated bytes');digest.update(chunk);fs.writeSync(fd,chunk);}}
+  const fd=fs.openSync(destination,'wx',0o600);let bytes=0;
+  try{for await(const chunk of delivery.body){bytes+=chunk.length;need(bytes<=origin.artifact_bytes,'Original archive exceeds authenticated bytes');fs.writeSync(fd,chunk);}}
   finally{fs.closeSync(fd);}
-  need(bytes===origin.artifact_bytes&&digest.digest('hex')===origin.artifact_digest,'Original output archive differs');
+  need(bytes===origin.artifact_bytes,'Original output archive length differs');
 }
 
 function currentSource(){
@@ -172,16 +172,15 @@ export async function assembleSelectedPackage({api,repo,expectedHead,originalRun
   const scratch=await createPackageAssemblyScratch(root);
   let committed=false,preserveScratch=false;
   try{
-    const archive=path.join(scratch,'original.zip'),manifestFile=path.join(scratch,'manifest.json');
+    const archive=path.join(scratch,'original.zip'),originalRoot=path.join(scratch,'original');
     await downloadOriginal(api,repo,found.origin,archive);
     const pythonArgs=['-I','-S','-B',path.join(root,'scripts/extract-package-output.py')];
-    execFileSync('python3',[...pythonArgs,'--manifest',archive,manifestFile,found.origin.artifact_digest],{stdio:'pipe',maxBuffer:1048576});
-    const manifestRaw=fs.readFileSync(manifestFile),manifest=validatePackageOutputManifest(JSON.parse(manifestRaw));
+    // Authenticate and consume the archive once through the extractor's held descriptor.
+    execFileSync('python3',[...pythonArgs,archive,originalRoot,found.origin.artifact_digest,found.receipt.package_output_manifest_sha256,String(found.receipt.package_output_manifest_bytes)],{stdio:'pipe',maxBuffer:1048576});
+    const manifestRaw=fs.readFileSync(path.join(originalRoot,'.cache/package-output-manifest.json')),manifest=validatePackageOutputManifest(JSON.parse(manifestRaw));
     for(const key of ['head','tree','definition','files','producer','selection'])need(same(manifest.source[key],found.source[key]),'Retained manifest differs from original immutable source: '+key);
     need(manifest.runtime.installed?.version===2&&manifest.runtime.installed.python?.parser,
       'Version 2 original installed parser evidence required; legacy aggregate evidence requires a full build');
-    const originalRoot=path.join(scratch,'original');
-    execFileSync('python3',[...pythonArgs,archive,manifestFile,originalRoot,found.origin.artifact_digest],{stdio:'pipe',maxBuffer:1048576});
     const original=await authenticateOriginalPackageOutput({api,repo,origin:found.origin,root:originalRoot,manifestRaw});
     const installed=installedPackageIdentity(root,declaredPackagePythonRoots(root),{expectedParser:manifest.runtime.installed.python.parser,expectedExecutable:manifest.runtime.installed.python.executable_sha256});
     const differences=installedPackageDifferences(manifest.runtime.installed,installed);
