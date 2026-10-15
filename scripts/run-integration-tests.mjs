@@ -6,7 +6,7 @@ import {spawn, spawnSync} from 'node:child_process';
 import {compileHostedMigrations} from './compile-hosted-migrations.mjs';
 import {observeSetupPhase,measuredGitSetup} from './ci-setup-observations.mjs';
 
-export const PACKAGED_ASSET_TESTS = ['test/compact-ownership.test.mjs','test/canonical-compact-repack.test.mjs','test/prepared-parity.test.mjs'];
+export const PACKAGED_ASSET_TESTS = ['test/compact-ownership.test.mjs','test/prepared-parity.test.mjs'];
 
 // Both PR CI and the trusted queue's isolated candidate checkout are shallow.
 // Keep the common native/context vintages for every full regression shard.

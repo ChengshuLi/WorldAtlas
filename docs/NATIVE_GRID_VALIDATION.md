@@ -34,7 +34,7 @@ After the explicit native build:
 node test/native-build-binding.mjs
 node test/native-world-context.mjs
 node --test test/native-materialization-gate.test.mjs test/select-build-ownership.test.mjs
-node --test test/native-renderer.test.mjs test/native-dated-browser.test.mjs test/context-input-stage.test.mjs
+node --test test/native-renderer.test.mjs test/native-dated-browser.test.mjs test/compact-context-inputs.test.mjs
 ```
 
 The binding readback compares every packaged row/run word to the registered candidate; authenticates every original native footprint; verifies original IDs and parents; checks normative latitude bytes; preserves the complete original physical-class manifest, source limits and asset bytes except its ownership association; and verifies the retained prepared-evidence index. It also confirms the original legacy grid remains selectable with its original digest. The world context control duplicates an existing native vertex and requires every output word and original owner mapping to remain identical. This representation control is not a factual repair.
