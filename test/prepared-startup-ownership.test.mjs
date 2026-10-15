@@ -16,7 +16,7 @@ async function fixture(t){
   const manifestSha='a'.repeat(64),row=native.parts.find(part=>part.kind==='rows');
   const payloads=new Map([[row.path,Buffer.from('row')],['ownership-vintages/'+manifestSha+'/native-v1/ownership/startup-runs-0.bin.gz',Buffer.from('runs')],['native-v1/native-row-latitudes.f64le.gz',Buffer.from('latitudes')],['native-v1/ownership/startup-runs-0.bin.gz',Buffer.from('previous public URL')]]);
   const manifest={...native,parts:[{...row,sha256:hash(payloads.get(row.path))}],native_latitudes:{...native.native_latitudes,sha256:hash(payloads.get('native-v1/native-row-latitudes.f64le.gz'))}};
-  const parts=[manifest.parts[0],{kind:'runs',path:[...payloads.keys()][1],offset:0,words:manifest.runWords,encoding:'byte-shuffle',sha256:hash(Buffer.from('runs')),decoded_sha256:'b'.repeat(64)}];
+  const parts=[{...manifest.parts[0]},{kind:'runs',path:[...payloads.keys()][1],offset:0,words:manifest.runWords,encoding:'byte-shuffle',sha256:hash(Buffer.from('runs')),decoded_sha256:'b'.repeat(64)}];
   const pixelMap=Object.fromEntries(['version','coordinateBits','size','runWords','method','footprints_sha256','hierarchy_sha256','geographic_release'].map(key=>[key,manifest[key]]));
   pixelMap.parts=parts;pixelMap.native_latitudes={...manifest.native_latitudes,transport_path:'native-v1/native-row-latitudes.f64le.gz'};
   const files=[];for(const [relative,raw]of payloads){await fs.mkdir(path.dirname(path.join(source,relative)),{recursive:true});await fs.writeFile(path.join(source,relative),raw);files.push({path:relative,bytes:raw.length,sha256:hash(raw)});}
@@ -49,4 +49,24 @@ test('prepared startup refuses unsafe paths and source or destination links with
  f.index.files[0]=current;await f.write();await fs.unlink(path.join(f.source,current.path));await fs.symlink(outside,path.join(f.source,current.path));
  await assert.rejects(packagePreparedStartupOwnership(f),/nonordinary/);
  assert.equal(await fs.readFile(outside,'utf8'),'retained');
+});
+
+// New reviewed banks may change row offsets. Their original source pins stay
+// exact while the deployment address moves to that selected manifest vintage.
+test('prepared startup accepts exact versioned rows without rebinding predecessor URLs',async t=>{
+ const f=await fixture(t),part=f.index.pixelMap.parts.find(pin=>pin.kind==='rows');
+ const original=part.path,versioned='ownership-vintages/'+f.manifestSha+'/'+original;
+ const bytes=f.payloads.get(original);
+ await fs.mkdir(path.dirname(path.join(f.source,versioned)),{recursive:true});
+ await fs.writeFile(path.join(f.source,versioned),bytes);
+ f.index.files.push({path:versioned,bytes:bytes.length,sha256:hash(bytes)});
+ part.path=versioned;await f.write();
+ const result=await packagePreparedStartupOwnership(f);
+ assert.equal(result.pixelMap.parts.find(pin=>pin.kind==='rows').path,versioned);
+ assert.deepEqual(await fs.readFile(path.join(f.destination,original)),bytes);
+ assert.deepEqual(await fs.readFile(path.join(f.destination,versioned)),bytes);
+ part.path='ownership-vintages/'+'c'.repeat(64)+'/'+original;await f.write();
+ await assert.rejects(packagePreparedStartupOwnership({...f,destination:f.destination+'-foreign'}),/row identity differs/);
+ part.path=versioned;part.bytes++;await f.write();
+ await assert.rejects(packagePreparedStartupOwnership({...f,destination:f.destination+'-changed'}),/row identity differs/);
 });

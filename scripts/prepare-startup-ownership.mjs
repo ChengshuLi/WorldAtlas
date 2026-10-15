@@ -76,12 +76,12 @@ async function previousBank(source) {
     actual.some(pin => /^native-v1\/ownership\/startup-runs-/.test(pin.path)), 'Incomplete previous startup compatibility bank');
   return index;
 }
-async function addFile(bank, source, pin) {
-  deploymentPath(pin.path);
+async function addFile(bank, source, pin, targetPath = pin.path) {
+  deploymentPath(targetPath);
   const bytes = await read(path.join(source, pin.path), pin);
-  const target = path.join(bank, pin.path);
+  const target = path.join(bank, targetPath);
   if (await stat(target)) {
-    need((await read(target)).equals(bytes), 'Immutable startup URL would be rebound: ' + pin.path);
+    need((await read(target)).equals(bytes), 'Immutable startup URL would be rebound: ' + targetPath);
     return;
   }
   await fs.mkdir(path.dirname(target), {recursive: true});
@@ -144,10 +144,14 @@ export async function prepareStartupOwnership({output, previous = defaultPreviou
     const packaged = await packageVersionedStartupOwnership({manifest: selected.manifest, manifestSha: selected.sha256,
       manifestPath: path.resolve(selected.manifestPath), source, destination: generated});
     const latitude = await packageNativeLatitudes({manifest: selected.manifest, expectedReference: reference, destination: generated});
-    for (const part of selected.manifest.parts.filter(part => part.kind === 'rows')) await addFile(bank, source, part);
+    const prefix = 'ownership-vintages/' + selected.sha256 + '/';
+    for (const part of selected.manifest.parts.filter(part => part.kind === 'rows')) await addFile(bank, source, part, prefix + part.path);
     for (const pin of packaged.outputs) await addFile(bank, generated, pin);
     await addFile(bank, generated, latitude.receipt);
-    const pixelMap = {...packaged.pixelMap, native_latitudes: latitude.native_latitudes, canonical_grid_sha256: selected.sha256};
+    const pixelMap = {...packaged.pixelMap,
+      parts: packaged.pixelMap.parts.map(part => part.kind === 'rows' ? {...part, path: prefix + part.path} : part),
+      native_latitudes: latitude.native_latitudes,
+      canonical_grid_sha256: selected.sha256};
     const files = await inventory(bank); // Authenticate all retained and new outputs before completion.
     const index = {version: 1, native_manifest_sha256: selected.sha256, release_id: reference.id,
       footprints_sha256: reference.footprints_sha256, hierarchy_sha256: reference.hierarchy_sha256, pixelMap, files};

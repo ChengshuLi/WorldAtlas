@@ -44,6 +44,9 @@ explicit reviewed candidate may be supplied with `--manifest REPOSITORY_PATH
 --sha256 WHOLE_MANIFEST_SHA256`; `--previous DIRECTORY` selects its predecessor.
 The command uses the existing native packers and exact-fragment restorer. It does
 not compile geography, alter source products or replace current-startup in place.
+Successor row and run transports use the selected manifest's existing
+`ownership-vintages/<sha256>/` namespace; retained predecessor URLs keep their
+original bytes. The fixed normative latitude-rule URL remains unchanged.
 The completed index is written last; failed attempts cannot become a valid bank.
 
 Review and commit the completed bank with its matching selection, current base

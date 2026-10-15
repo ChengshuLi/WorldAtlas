@@ -85,8 +85,11 @@ export async function packagePreparedStartupOwnership({manifest,manifestSha,sour
   if(JSON.stringify(actual.sort())!==JSON.stringify([...pins.keys()].sort()))throw Error('Prepared startup roster omits or invents a member');
   const parts=index.pixelMap.parts;
   if(!Array.isArray(parts)||parts.length<2||new Set(parts.map(pin=>pin.path)).size!==parts.length)throw Error('Incomplete prepared startup ownership parts');
-  const rows=manifest.parts.filter(pin=>pin.kind==='rows');
-  if(JSON.stringify(parts.filter(pin=>pin.kind==='rows'))!==JSON.stringify(rows))throw Error('Prepared startup row identity differs');
+  const rows=manifest.parts.filter(pin=>pin.kind==='rows'),preparedRows=parts.filter(pin=>pin.kind==='rows');
+  const prefix='ownership-vintages/'+manifestSha+'/';
+  if(preparedRows.length!==rows.length||preparedRows.some((pin,i)=>
+    (pin.path!==rows[i].path&&pin.path!==prefix+rows[i].path)||
+    JSON.stringify({...pin,path:rows[i].path})!==JSON.stringify(rows[i])))throw Error('Prepared startup row identity differs');
   let words=0;
   for(const part of parts){
     const pin=pins.get(part.path);

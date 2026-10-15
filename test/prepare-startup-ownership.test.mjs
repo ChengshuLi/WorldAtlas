@@ -5,7 +5,7 @@ import path from 'node:path';
 import os from 'node:os';
 import {spawnSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
-import {gzipSync} from 'node:zlib';
+import {gzipSync, gunzipSync} from 'node:zlib';
 import {fileURLToPath, pathToFileURL} from 'node:url';
 
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -21,6 +21,7 @@ async function syntheticPreparation() {
     const {packageStartupOwnership, packagePreparedStartupOwnership} = await import('../scripts/package-startup-ownership.mjs');
     const {packageNativeLatitudes} = await import('../scripts/package-native-latitudes.mjs');
     const {loadOwnershipAssets} = await import('../src/ownership-assets.js');
+    const {loadNativeLatitudes} = await import('../src/native-latitudes.js');
     const reference = {id: 'geography:synthetic-startup-preparation', footprints_sha256: '3'.repeat(64), hierarchy_sha256: '4'.repeat(64)};
     const selected = JSON.parse(await fs.readFile('data/ownership-selection.json'));
     const native = JSON.parse(await fs.readFile(selected.manifest_path));
@@ -75,6 +76,13 @@ async function syntheticPreparation() {
     await fs.copyFile(path.join(previous, oldRun.path), path.join(previous, oldVintage));
     // Deliberately distinct compatibility bytes must survive a current repack.
     await fs.writeFile(path.join(previous, oldRun.path), gzipSync(shuffleOwnershipBytes(Uint32Array.of(12, 2 ** 19 + 18)), {level: 9}));
+    const previousRows = new Uint32Array(rows);
+    previousRows[1] = 0; previousRows[2] = 0; previousRows[3] = 1;
+    const previousRowBytes = gzipSync(shuffleOwnershipBytes(previousRows), {level: 9});
+    await fs.writeFile(path.join(previous, parts[0].path), previousRowBytes);
+    const previousRow = {...parts[0], bytes: previousRowBytes.length, sha256: sha(previousRowBytes),
+      decoded_sha256: sha(Buffer.from(previousRows.buffer))};
+    assert.notEqual(previousRow.sha256, parts[0].sha256);
     async function inventory(directory, relative = '') {
       const pins = [];
       for (const entry of await fs.readdir(path.join(directory, relative), {withFileTypes: true})) {
@@ -88,7 +96,7 @@ async function syntheticPreparation() {
     await fs.writeFile(path.join(previous, 'index.json'), JSON.stringify({version: 1, native_manifest_sha256: 'f'.repeat(64),
       release_id: reference.id, footprints_sha256: reference.footprints_sha256, hierarchy_sha256: reference.hierarchy_sha256,
       pixelMap: {...old.pixelMap, native_latitudes: latitude.native_latitudes,
-        parts: old.pixelMap.parts.map(part => part.kind === 'runs' ? {...part, path: oldVintage} : part)}, files: oldFiles}));
+        parts: old.pixelMap.parts.map(part => part.kind === 'runs' ? {...part, path: oldVintage} : previousRow)}, files: oldFiles}));
     // Only synthetic selection/qualification lookup is mocked. Packers and restore are real.
     mock.module(pathToFileURL(path.resolve('scripts/select-build-ownership.mjs')).href, {namedExports: {
       readBuildOwnershipSelection: async () => ({manifestPath, expectedSha256: sha(manifestBytes), requireNative: true, releaseId: reference.id}),
@@ -105,12 +113,19 @@ async function syntheticPreparation() {
     const output = path.join(root, 'prepared');
     const first = await prepareStartupOwnership({output, previous});
     for (const pin of oldFiles) assert.equal(sha(await fs.readFile(path.join(output, pin.path))), pin.sha256);
+    const prefix = 'ownership-vintages/' + sha(manifestBytes) + '/';
+    assert.equal(first.pixelMap.parts.find(part => part.kind === 'rows').path, prefix + parts[0].path);
+    assert.equal(first.pixelMap.native_latitudes.transport_path, latitude.native_latitudes.transport_path);
+    const consumer = path.join(root, 'consumer');
     const consumed = await packagePreparedStartupOwnership({manifest, manifestSha: sha(manifestBytes),
-      source: output, destination: path.join(root, 'consumer')});
+      source: output, destination: consumer});
     assert.deepEqual(consumed.pixelMap, first.pixelMap);
-    const decoded = await loadOwnershipAssets(first.pixelMap, async url => new Response(await fs.readFile(path.join(output, url.slice(2)))),
+    const decoded = await loadOwnershipAssets(consumed.pixelMap, async url => new Response(await fs.readFile(path.join(consumer, url.slice(2)))),
       {requireNative: true, expectedReference: reference});
     assert.deepEqual(decoded.rows, rows); assert.deepEqual(decoded.runs, runs);
+    const latitudes = await loadNativeLatitudes(consumed.pixelMap, reference,
+      async url => new Response(await fs.readFile(path.join(consumer, url.slice(2)))));
+    assert.equal(latitudes.length, rows.length / 2);
     for (const [name, bytes] of originals) assert.deepEqual(await fs.readFile(path.join(source, name)), bytes);
     await assert.rejects(prepareStartupOwnership({output, previous}), /fresh/);
     for (const part of parts) await fs.unlink(path.join(source, part.path));
@@ -119,19 +134,32 @@ async function syntheticPreparation() {
     assert.deepEqual(second, first);
     for (const part of parts) await absent(path.join(source, part.path));
     const conflicting = path.join(root, 'conflicting-rows');
-    await fs.cp(previous, conflicting, {recursive: true});
+    await fs.cp(output, conflicting, {recursive: true});
     const oldIndex = JSON.parse(await fs.readFile(path.join(conflicting, 'index.json')));
     const changedRows = new Uint32Array(rows);
     changedRows[1] = 0; changedRows[2] = 0; changedRows[3] = 1;
     const changedBytes = gzipSync(shuffleOwnershipBytes(changedRows), {level: 9});
-    await fs.writeFile(path.join(conflicting, parts[0].path), changedBytes);
-    Object.assign(oldIndex.files.find(pin => pin.path === parts[0].path), {bytes: changedBytes.length, sha256: sha(changedBytes)});
+    await fs.writeFile(path.join(conflicting, prefix + parts[0].path), changedBytes);
+    Object.assign(oldIndex.files.find(pin => pin.path === prefix + parts[0].path), {bytes: changedBytes.length, sha256: sha(changedBytes)});
     Object.assign(oldIndex.pixelMap.parts.find(pin => pin.kind === 'rows'), {bytes: changedBytes.length,
       sha256: sha(changedBytes), decoded_sha256: sha(Buffer.from(changedRows.buffer))});
     await fs.writeFile(path.join(conflicting, 'index.json'), JSON.stringify(oldIndex));
     const rebound = path.join(root, 'rebound');
     await assert.rejects(prepareStartupOwnership({output: rebound, previous: conflicting}), /Immutable startup URL would be rebound/);
     await absent(rebound);
+    const conflictingLatitude = path.join(root, 'conflicting-latitude');
+    await fs.cp(previous, conflictingLatitude, {recursive: true});
+    const latitudeIndex = JSON.parse(await fs.readFile(path.join(conflictingLatitude, 'index.json')));
+    const latitudePath = latitude.native_latitudes.transport_path;
+    const changedLatitude = gzipSync(gunzipSync(await fs.readFile(path.join(conflictingLatitude, latitudePath))), {level: 1});
+    assert.notEqual(sha(changedLatitude), latitude.native_latitudes.sha256);
+    await fs.writeFile(path.join(conflictingLatitude, latitudePath), changedLatitude);
+    Object.assign(latitudeIndex.files.find(pin => pin.path === latitudePath), {bytes: changedLatitude.length, sha256: sha(changedLatitude)});
+    Object.assign(latitudeIndex.pixelMap.native_latitudes, {bytes: changedLatitude.length, sha256: sha(changedLatitude)});
+    await fs.writeFile(path.join(conflictingLatitude, 'index.json'), JSON.stringify(latitudeIndex));
+    const reboundLatitude = path.join(root, 'rebound-latitude');
+    await assert.rejects(prepareStartupOwnership({output: reboundLatitude, previous: conflictingLatitude}), /Immutable startup URL would be rebound/);
+    await absent(reboundLatitude);
     const retainedFile = path.join(previous, oldRun.path), retainedBytes = await fs.readFile(retainedFile);
     await fs.writeFile(retainedFile, Buffer.from('corrupted previous URL'));
     const badPrevious = path.join(root, 'bad-previous');
