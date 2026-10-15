@@ -1,0 +1,648 @@
+{
+  "version": 1,
+  "kind": "source-target-native-evidence-v1",
+  "catalogue": {
+    "commit": "5ab660cb68821e6b719f1b86819069ecac419ce1",
+    "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+    "mode": "100644",
+    "git_blob_oid": "09afab19371f0814da61e79e5f310c5fb2405b6d",
+    "bytes": 403376,
+    "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9"
+  },
+  "families": [
+    {
+      "source_id": "gb:IDN:ADM2",
+      "parts": [
+        {
+          "commit": "5ab660cb68821e6b719f1b86819069ecac419ce1",
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IDN-ADM2-000.bin.gz",
+          "mode": "100644",
+          "git_blob_oid": "d918c74989043677364ff43f9fbec3d1f0d3a3af",
+          "bytes": 3051391,
+          "sha256": "ef394916ba97454b5592e66eba1df67199731ce7d9636cc3968843801ae904a8",
+          "decoded_bytes": 11002896,
+          "decoded_sha256": "146653d488331086ddc43d159a261b01ea6dd08c7ed422e34a9886c3c690430c"
+        }
+      ]
+    }
+  ],
+  "physical_evidence": {
+    "commit": "4dd34392ee78de635e902570c20416924600fe6c",
+    "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/physical/whole-target-support.json",
+    "mode": "100644",
+    "git_blob_oid": "9bbc3cfee5a301a9e0cf25583b4e573c5a5c690f",
+    "bytes": 2542871,
+    "sha256": "3a96fe9ab659f2f144a2ad435ab0057dd78de617878b6d6be485241699c134d2"
+  },
+  "physical_input": {
+    "commit": "5ab660cb68821e6b719f1b86819069ecac419ce1",
+    "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/source-investigation-v1/retained-results/original-stage-inputs.json.gz",
+    "mode": "100644",
+    "git_blob_oid": "aafe5621ab2ea5ec3e4bea99e33e5154eef14784",
+    "bytes": 145789,
+    "sha256": "5ba78f2788b88afdd182c4ed9b5b1061b4a4abfb6f40761cf3ac53f76050f4fe",
+    "decoded_bytes": 484667,
+    "decoded_sha256": "7456114f07ad58b5bac3fcb352a5d47219084ab486f688bf9ff0744cb32e5ace"
+  },
+  "physical_reproduction": {
+    "commit": "5ab660cb68821e6b719f1b86819069ecac419ce1",
+    "path": "coordination/engineering/source-target-native-delivery-20261014/evidence/physical-reproduction.py",
+    "mode": "100644",
+    "git_blob_oid": "73e005238c929a901185abb8321c419e7cd9f688",
+    "bytes": 5450,
+    "sha256": "05af43d7d7722e8d7bb201f5876a43d9c7f9a2d0f4ea39e467229351a35c9bc3"
+  },
+  "owner_roster": {
+    "commit": "5ab660cb68821e6b719f1b86819069ecac419ce1",
+    "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/owners.json.gz",
+    "mode": "100644",
+    "git_blob_oid": "9c44513df64995d417dd3832ae604c703e84a506",
+    "bytes": 2663523,
+    "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+    "decoded_bytes": 11096191,
+    "decoded_sha256": "a8086008b7a072dd86483720a2a166785229753422769dbbe0749497d870f428"
+  },
+  "native_contract": {
+    "size": 262166,
+    "coordinateBits": 19,
+    "method": "native-linear-evenodd-first-owner-v1",
+    "native_latitudes": {
+      "root": "repository",
+      "role": "immutable-normative-rule-input",
+      "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+      "commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+      "bytes": 1851757,
+      "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+      "decoded_bytes": 2097328,
+      "decoded_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+    },
+    "hierarchy_sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+    "original_assets": {
+      "bounds": {
+        "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+        "path": "data/canonical-grid/bounds.json.gz",
+        "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+        "role": "original-identity-parent-camera-context"
+      },
+      "province_membership": {
+        "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+        "path": "data/canonical-grid/province-membership.bin.gz",
+        "sha256": "01f42b69ca969090d10c42d6a1311215a19ce436b0f3e720f7f873f4a18f90da",
+        "role": "original-identity-crosswalk"
+      }
+    }
+  },
+  "native_latitudes": {
+    "commit": "5ab660cb68821e6b719f1b86819069ecac419ce1",
+    "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+    "mode": "100644",
+    "git_blob_oid": "de6905e162dc031b1b93248fae91190c39c4ad53",
+    "bytes": 1851757,
+    "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+    "decoded_bytes": 2097328,
+    "decoded_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+  },
+  "base_reference": {
+    "footprints_sha256": "2deeff1457ff9238cb3dbe599e9a858dcce29d8ba88e2a66abe2785ddec0aed9",
+    "hierarchy_sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+    "id": "geography:review:dbb133d7b123bacd1d38253c467891bff656d011000a9f11d369ac9262302bfb"
+  },
+  "targets": [
+    {
+      "id": "gb:IDN:ADM2:22746128B36781349389855",
+      "pixelIndex": 22837,
+      "source_family": "gb:IDN:ADM2",
+      "base_geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                127.4056,
+                0.481
+              ],
+              [
+                127.3858,
+                0.4709
+              ],
+              [
+                127.3825,
+                0.4501
+              ],
+              [
+                127.399,
+                0.4331
+              ],
+              [
+                127.4205,
+                0.4328
+              ],
+              [
+                127.4392,
+                0.4474
+              ],
+              [
+                127.4354,
+                0.4592
+              ],
+              [
+                127.4186,
+                0.4792
+              ],
+              [
+                127.4056,
+                0.481
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                127.3278,
+                0.867
+              ],
+              [
+                127.3021,
+                0.841
+              ],
+              [
+                127.2954,
+                0.8246
+              ],
+              [
+                127.2927,
+                0.7976
+              ],
+              [
+                127.3056,
+                0.7657
+              ],
+              [
+                127.3148,
+                0.7571
+              ],
+              [
+                127.3381,
+                0.7532
+              ],
+              [
+                127.3704,
+                0.7601
+              ],
+              [
+                127.3865,
+                0.777
+              ],
+              [
+                127.3886,
+                0.8289
+              ],
+              [
+                127.3795,
+                0.8393
+              ],
+              [
+                127.3411,
+                0.8636
+              ],
+              [
+                127.3278,
+                0.867
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                127.3153,
+                0.9132
+              ],
+              [
+                127.3054,
+                0.9028
+              ],
+              [
+                127.3144,
+                0.8824
+              ],
+              [
+                127.3314,
+                0.892
+              ],
+              [
+                127.3153,
+                0.9132
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                126.3855,
+                1.3481
+              ],
+              [
+                126.3676,
+                1.3452
+              ],
+              [
+                126.3577,
+                1.331
+              ],
+              [
+                126.3766,
+                1.312
+              ],
+              [
+                126.3864,
+                1.2924
+              ],
+              [
+                126.3984,
+                1.2862
+              ],
+              [
+                126.399,
+                1.3166
+              ],
+              [
+                126.415,
+                1.3272
+              ],
+              [
+                126.4106,
+                1.3389
+              ],
+              [
+                126.3855,
+                1.3481
+              ]
+            ]
+          ]
+        ]
+      },
+      "source_receipt_sha256": "3a96fe9ab659f2f144a2ad435ab0057dd78de617878b6d6be485241699c134d2",
+      "coverage_classes": [
+        "mapped_land_support"
+      ]
+    },
+    {
+      "id": "gb:IDN:ADM2:22746128B67952855762127",
+      "pixelIndex": 23018,
+      "source_family": "gb:IDN:ADM2",
+      "base_geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                128.1827,
+                2.3663
+              ],
+              [
+                128.1784,
+                2.3871
+              ],
+              [
+                128.1665,
+                2.4127
+              ],
+              [
+                128.1548,
+                2.4066
+              ],
+              [
+                128.1435,
+                2.3894
+              ],
+              [
+                128.1451,
+                2.3755
+              ],
+              [
+                128.131,
+                2.352
+              ],
+              [
+                128.1249,
+                2.3335
+              ],
+              [
+                128.1392,
+                2.2993
+              ],
+              [
+                128.1609,
+                2.2877
+              ],
+              [
+                128.1784,
+                2.2908
+              ],
+              [
+                128.188,
+                2.3065
+              ],
+              [
+                128.1768,
+                2.3147
+              ],
+              [
+                128.1823,
+                2.3396
+              ],
+              [
+                128.1827,
+                2.3663
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                128.5937,
+                2.6125
+              ],
+              [
+                128.5826,
+                2.6344
+              ],
+              [
+                128.5602,
+                2.6419
+              ],
+              [
+                128.5434,
+                2.6153
+              ],
+              [
+                128.5463,
+                2.6063
+              ],
+              [
+                128.5197,
+                2.5762
+              ],
+              [
+                128.4839,
+                2.5853
+              ],
+              [
+                128.4612,
+                2.5956
+              ],
+              [
+                128.4335,
+                2.5731
+              ],
+              [
+                128.4162,
+                2.5347
+              ],
+              [
+                128.3974,
+                2.5262
+              ],
+              [
+                128.3493,
+                2.4945
+              ],
+              [
+                128.3528,
+                2.4885
+              ],
+              [
+                128.3232,
+                2.4716
+              ],
+              [
+                128.2936,
+                2.4274
+              ],
+              [
+                128.2988,
+                2.4126
+              ],
+              [
+                128.287,
+                2.3901
+              ],
+              [
+                128.2847,
+                2.3722
+              ],
+              [
+                128.2516,
+                2.3352
+              ],
+              [
+                128.2415,
+                2.3185
+              ],
+              [
+                128.2192,
+                2.3065
+              ],
+              [
+                128.197,
+                2.2788
+              ],
+              [
+                128.2224,
+                2.2771
+              ],
+              [
+                128.2352,
+                2.2519
+              ],
+              [
+                128.2493,
+                2.2476
+              ],
+              [
+                128.2452,
+                2.2151
+              ],
+              [
+                128.2482,
+                2.1739
+              ],
+              [
+                128.2436,
+                2.1631
+              ],
+              [
+                128.2482,
+                2.143
+              ],
+              [
+                128.246,
+                2.1237
+              ],
+              [
+                128.2534,
+                2.0936
+              ],
+              [
+                128.2703,
+                2.0823
+              ],
+              [
+                128.2789,
+                2.0876
+              ],
+              [
+                128.2932,
+                2.0544
+              ],
+              [
+                128.278,
+                2.006
+              ],
+              [
+                128.2925,
+                2.0088
+              ],
+              [
+                128.2996,
+                2.0356
+              ],
+              [
+                128.3457,
+                2.0376
+              ],
+              [
+                128.3965,
+                2.0563
+              ],
+              [
+                128.4464,
+                2.0613
+              ],
+              [
+                128.4707,
+                2.0545
+              ],
+              [
+                128.4888,
+                2.0624
+              ],
+              [
+                128.5051,
+                2.0592
+              ],
+              [
+                128.5219,
+                2.0688
+              ],
+              [
+                128.5516,
+                2.105
+              ],
+              [
+                128.5737,
+                2.1067
+              ],
+              [
+                128.5795,
+                2.1167
+              ],
+              [
+                128.575,
+                2.1371
+              ],
+              [
+                128.5843,
+                2.1491
+              ],
+              [
+                128.5933,
+                2.175
+              ],
+              [
+                128.6247,
+                2.2179
+              ],
+              [
+                128.622,
+                2.2308
+              ],
+              [
+                128.6301,
+                2.26
+              ],
+              [
+                128.6539,
+                2.3117
+              ],
+              [
+                128.6413,
+                2.3322
+              ],
+              [
+                128.6498,
+                2.3675
+              ],
+              [
+                128.6653,
+                2.3795
+              ],
+              [
+                128.6637,
+                2.3912
+              ],
+              [
+                128.6881,
+                2.4116
+              ],
+              [
+                128.6929,
+                2.4276
+              ],
+              [
+                128.6927,
+                2.4611
+              ],
+              [
+                128.6879,
+                2.5018
+              ],
+              [
+                128.6733,
+                2.4986
+              ],
+              [
+                128.6613,
+                2.5215
+              ],
+              [
+                128.6361,
+                2.5431
+              ],
+              [
+                128.6307,
+                2.5634
+              ],
+              [
+                128.6144,
+                2.5665
+              ],
+              [
+                128.6114,
+                2.5816
+              ],
+              [
+                128.5937,
+                2.6125
+              ]
+            ]
+          ]
+        ]
+      },
+      "source_receipt_sha256": "3a96fe9ab659f2f144a2ad435ab0057dd78de617878b6d6be485241699c134d2",
+      "coverage_classes": [
+        "mapped_land_support"
+      ]
+    }
+  ]
+}

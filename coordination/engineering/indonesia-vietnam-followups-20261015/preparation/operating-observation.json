@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "kind": "actual-stock-metadata-composition-and-finalization-observation",
+  "code_commit": "b73fdbb1b0e243b773514ea46aaced496a63028f",
+  "compose": {
+    "exit_code": 0,
+    "external_seconds": 2.18,
+    "external_darwin_peak_rss_bytes": 187809792,
+    "full_prospective_bytes": 434772408,
+    "fresh_admission": {
+      "at_utc": "2026-10-15T02:01:56.233Z",
+      "availableBytes": 1390362624,
+      "observed_preflight_rss": 51494912,
+      "currentRssBytes": 0,
+      "concurrentReservedBytes": 0,
+      "headroomBytes": 572882944,
+      "phaseBytes": 536870912,
+      "rssBytes": 536870912,
+      "complete_prospective_bytes": 434772408,
+      "code_commit": "b73fdbb1b0e243b773514ea46aaced496a63028f",
+      "config_sha256": "aa0f60232083ba83c81cf9dca2594e8c286c6fd6f21c66459abd71697208afa3",
+      "allowance": {
+        "phaseBytes": 536870912,
+        "rssBytes": 536870912
+      },
+      "admitted": true
+    }
+  },
+  "finalize": {
+    "exit_code": 0,
+    "external_seconds": 6.87,
+    "external_darwin_peak_rss_bytes": 268550144,
+    "full_prospective_bytes": 604954422,
+    "fresh_admission": {
+      "at_utc": "2026-10-15T02:04:35.615Z",
+      "availableBytes": 1254834176,
+      "observed_preflight_rss": 50921472,
+      "currentRssBytes": 0,
+      "concurrentReservedBytes": 0,
+      "headroomBytes": 572882944,
+      "phaseBytes": 671088640,
+      "rssBytes": 671088640,
+      "complete_prospective_bytes": 604954422,
+      "code_commit": "b73fdbb1b0e243b773514ea46aaced496a63028f",
+      "config_sha256": "689996fb22cfe210a41a8a8b4e33b72cc43c36ff6a625b3b554805514ecef570",
+      "allowance": {
+        "phaseBytes": 671088640,
+        "rssBytes": 671088640
+      },
+      "admitted": true
+    }
+  },
+  "candidate": {
+    "inherited_cells": 71339,
+    "incoming_cells": 11622,
+    "cumulative_cells": 82961,
+    "authorities": 67,
+    "components": 296,
+    "automatic_original_restoration_paths": 24
+  },
+  "limits": [
+    "Metadata-only accepted stock methods; original scientific qualification reused.",
+    "No source/GSHHG/native-constructor replay or new qualification.",
+    "Current selected owner-zero/conservation and trusted emitted checks remain queue requirements; no acceptance before merge.",
+    "OS timing and process peak observations are not a process-tree memory theorem."
+  ]
+}

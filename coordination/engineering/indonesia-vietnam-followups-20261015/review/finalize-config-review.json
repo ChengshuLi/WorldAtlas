@@ -1,0 +1,579 @@
+{
+  "version": 1,
+  "reviewer": "/root/delivery11622_config_review",
+  "disposition": "PASS WITH LIMITS",
+  "config_sha256": "689996fb22cfe210a41a8a8b4e33b72cc43c36ff6a625b3b554805514ecef570",
+  "actual_product_sizes": {
+    "authority-registry.json": 64529,
+    "selected-ledger.json": 2726316,
+    "patch.json": 860023,
+    "runtime-envelope.json": 1396
+  },
+  "original_roles": {
+    "unique_paths": 49,
+    "whole_bytes": 44806416,
+    "actual_b73_automatic_restoration_paths": 24,
+    "restoration_bytes": 7295033,
+    "largest_restoration_bytes": 3477581
+  },
+  "prospective_complete_bytes": 604954422,
+  "request_bytes": 671088640,
+  "remaining_bytes": 66134218,
+  "checks": [
+    {
+      "check": "config exact3206/SHA",
+      "pass": true
+    },
+    {
+      "check": "version1 exact standard config keys/no manual roles",
+      "pass": true
+    },
+    {
+      "check": "actual b73 selector/package exact inherited",
+      "pass": true
+    },
+    {
+      "check": "rebind original inherited exact",
+      "pass": true
+    },
+    {
+      "check": "ledger and selected_ledger one original product",
+      "pass": true
+    },
+    {
+      "check": "one canonical sidecar/newprefix",
+      "pass": true
+    },
+    {
+      "check": "data/ownership-selection.json commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "data/ownership-selection.json wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": ".github/package-inputs.json commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": ".github/package-inputs.json wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-certificate-001/certificate.json commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-certificate-001/certificate.json wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/indonesia-vietnam-followups-20261015/delivery/authority-registry.json commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/indonesia-vietnam-followups-20261015/delivery/authority-registry.json wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "registry exact reviewed actual output at original committed f63",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/indonesia-vietnam-followups-20261015/delivery/selected-ledger.json commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/indonesia-vietnam-followups-20261015/delivery/selected-ledger.json wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "ledger exact reviewed actual output at original committed f63",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/indonesia-vietnam-followups-20261015/delivery/patch.json commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/indonesia-vietnam-followups-20261015/delivery/patch.json wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "patch exact reviewed actual output at original committed f63",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/indonesia-vietnam-followups-20261015/delivery/runtime-envelope.json commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/indonesia-vietnam-followups-20261015/delivery/runtime-envelope.json wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "runtime_envelope exact reviewed actual output at original committed f63",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/indonesia-maluku-followup-20261015/maluku654/authority/original-rule-preimage.json commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/indonesia-maluku-followup-20261015/maluku654/authority/original-rule-preimage.json wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/indonesia-maluku-followup-20261015/maluku654/authority/authority-binding.json commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/indonesia-maluku-followup-20261015/maluku654/authority/authority-binding.json wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/indonesia-maluku-followup-20261015/maluku654/candidate-native-patch.json commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/indonesia-maluku-followup-20261015/maluku654/candidate-native-patch.json wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/indonesia-maluku-followup-20261015/maluku654/source-evidence.json commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/indonesia-maluku-followup-20261015/maluku654/source-evidence.json wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/indonesia-adm2-current-cell-20261014/source-investigation-v1/retained-results/original-stage-inputs.json.gz commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/indonesia-adm2-current-cell-20261014/source-investigation-v1/retained-results/original-stage-inputs.json.gz wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/source-target-native-delivery-20261014/evidence/physical-reproduction.py commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/source-target-native-delivery-20261014/evidence/physical-reproduction.py wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/physical/whole-target-support.json commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/physical/whole-target-support.json wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/owners.json.gz commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/owners.json.gz wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IDN-ADM2-000.bin.gz commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IDN-ADM2-000.bin.gz wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/clean309/authority/original-rule-preimage.json commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/clean309/authority/original-rule-preimage.json wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/clean309/authority/authority-binding.json commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/clean309/authority/authority-binding.json wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/clean309/native-patch.json commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/clean309/native-patch.json wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/clean309/source-evidence.json commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/clean309/source-evidence.json wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/original-stage-inputs.json commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/original-stage-inputs.json wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "scripts/qualify-source-cohort.py commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "scripts/qualify-source-cohort.py wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/physical/whole-target-support.json commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/physical/whole-target-support.json wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-VNM-ADM2-000.bin.gz commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-VNM-ADM2-000.bin.gz wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "data/world-index.json commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "data/world-index.json wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "data/semantic-report.json commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "data/semantic-report.json wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "data/geography/part-27.json commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "data/geography/part-27.json wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "data/geography/part-28.json commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "data/geography/part-28.json wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/botrach41/authority/original-rule-preimage.json commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/botrach41/authority/original-rule-preimage.json wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/botrach41/authority/authority-binding.json commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/botrach41/authority/authority-binding.json wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/botrach41/native-patch.json commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/botrach41/native-patch.json wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/botrach41/source-evidence.json commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/botrach41/source-evidence.json wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/anphu1/authority/original-rule-preimage.json commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/anphu1/authority/original-rule-preimage.json wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/anphu1/authority/authority-binding.json commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/anphu1/authority/authority-binding.json wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/anphu1/native-patch.json commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/anphu1/native-patch.json wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/anphu1/source-evidence.json commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/anphu1/source-evidence.json wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/indonesia-raja-ampat-20261015/native10617-authority-001/original-rule-preimage.json commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/indonesia-raja-ampat-20261015/native10617-authority-001/original-rule-preimage.json wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/indonesia-raja-ampat-20261015/native10617-authority-001/authority-binding.json commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/indonesia-raja-ampat-20261015/native10617-authority-001/authority-binding.json wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/indonesia-raja-ampat-20261015/native10617-input-001/candidate-native-patch.json commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/indonesia-raja-ampat-20261015/native10617-input-001/candidate-native-patch.json wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/indonesia-raja-ampat-20261015/native10617-input-001/source-evidence.json commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/indonesia-raja-ampat-20261015/native10617-input-001/source-evidence.json wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/indonesia-raja-ampat-20261015/whole-physical-input-001/original-stage-inputs.json commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/indonesia-raja-ampat-20261015/whole-physical-input-001/original-stage-inputs.json wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/indonesia-raja-ampat-20261015/physical-result-001/whole-target-support.json commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/indonesia-raja-ampat-20261015/physical-result-001/whole-target-support.json wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/base-native-manifest.json commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/base-native-manifest.json wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-certificate-001/certificate.json commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-certificate-001/certificate.json wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-001/request.json commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-001/request.json wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-001/facts.json commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-001/facts.json wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-001/publication.json commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-001/publication.json wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-001/result.json commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-001/result.json wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-operating-001/operating.json commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-operating-001/operating.json wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-001/code-source.json commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-001/code-source.json wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-001/issued-plan.json commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-001/issued-plan.json wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-001/stderr.log commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-001/stderr.log wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-001/stdout.json commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-001/stdout.json wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-001/terminal.json commit/path/OID",
+      "pass": true
+    },
+    {
+      "check": "coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-001/terminal.json wholebytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "49 exact unique whole original roles",
+      "pass": true
+    },
+    {
+      "check": "no samepath source conflicts",
+      "pass": true
+    },
+    {
+      "check": "automatic24 restorations exact actual b73 delta",
+      "pass": true
+    },
+    {
+      "check": "automatic restoration fullbytes/largest unchanged",
+      "pass": true
+    },
+    {
+      "check": "604954422 complete budget arithmetic",
+      "pass": true
+    },
+    {
+      "check": "640MiB exact request covers complete budget",
+      "pass": true
+    },
+    {
+      "check": "all actual committed products under planned bounds",
+      "pass": true
+    },
+    {
+      "check": "whole original roles+products/current metadata fits cache bound",
+      "pass": true
+    },
+    {
+      "check": "restoration7x aggregate and3x largest fully covered",
+      "pass": true
+    },
+    {
+      "check": "all weighted parse schedule accounted12x",
+      "pass": true
+    },
+    {
+      "check": "actual ledger3x fits parse schedule",
+      "pass": true
+    },
+    {
+      "check": "new actual registry/patch/envelope fits parse schedule",
+      "pass": true
+    },
+    {
+      "check": "exact b73 package/selector/sidecar parse covered",
+      "pass": true
+    },
+    {
+      "check": "actual code and config within unchanged1MiB/32768 budget",
+      "pass": true
+    },
+    {
+      "check": "whole Node24 runtime121304480 unchanged",
+      "pass": true
+    }
+  ],
+  "check_count": 137,
+  "failures": [],
+  "limits": [
+    "Read-only exact retained-input/config/budget review; no machinery import/replay, source/native operation, fetch or Git mutation.",
+    "Fresh actual admission remains required before execution. Five generated flat outputs must satisfy structural bounds on actual completion.",
+    "This review establishes neither current-owner-zero nor final selected-reader conservation or acceptance."
+  ]
+}
