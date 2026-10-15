@@ -8,7 +8,6 @@ import {validateContextMigration} from '../../../scripts/native-ownership/valida
 import {requireValidatedGeometryMigrations} from '../../../scripts/prepare-geographic-release.mjs';
 import {validateNativeSelectionReceipt} from '../../../scripts/native-ownership/require-verified-selection.mjs';
 import {rebindCoverageManifest} from '../../../scripts/rebind-coverage-manifest.mjs';
-import {candidateBudget} from '../../../scripts/native-ownership/native-preparation-guards.mjs';
 const hash=raw=>createHash('sha256').update(raw).digest('hex');
 const IDS=['atlas:physical:CAN-15:NWT','atlas:physical:CAN-25:NUN'];
 const BEFORE='b9a3c8bf375217dba3a50d1a022ec7e4ac6c6f1cdedff22845da953c805b7433';
@@ -29,34 +28,33 @@ function ordinary(root,pin){
  const file=path.join(root,pin.path);for(let p=file;;p=path.dirname(p)){assert(!fs.lstatSync(p).isSymbolicLink());if(p===path.dirname(p))break}
  const stat=fs.lstatSync(file);assert(stat.isFile()&&(stat.mode&511)===420);assert.equal(stat.size,pin.bytes);return {file,stat};
 }
-// Called BEFORE actual runtime authentication/body reads. Metadata stage is separately pinned.
-export function reserveArcticContinuation({root,stageRaw,stage,declaredOriginalInputs}){
+// Authenticate the complete continuation metadata and its ordinary source inventory.
+export function authenticateArcticContinuationInputs({root,stage,declaredOriginalInputs}){
  assert.equal(stage.version,3);assert.equal(stage.issue,1520);assert.equal(stage.kind,'arctic-retained-land-context-continuation-v3');
  assert.deepEqual(stage.subjects,IDS);assert.equal(stage.before_footprints_sha256,BEFORE);assert.equal(stage.after_footprints_sha256,AFTER);
- const budget=candidateBudget([],{reserveBytes:262144,reserveDescriptors:16});
- budget.add({bytes:stageRaw.length});const pins=new Map();
+ const pins=new Map();
  for(const name of NAMED){const pin=stage[name];
   if(declaredOriginalInputs&&['priorStage','priorRegistry','priorNativeManifest'].includes(name)){
    const original=declaredOriginalInputs.find(p=>p.space==='root'&&p.path===pin.path);assert(original,'Complete authenticated catalogue original member required');
    for(const key of ['bytes','sha256','decoded_bytes','decoded_sha256'])assert.equal(original[key],pin[key],'Original catalogue/pin mismatch');
   }else ordinary(root,pin);assert.equal(typeof pin.sha256,'string');assert(/^[a-f0-9]{64}$/.test(pin.sha256));
-  const prior=pins.get(pin.path);if(prior)assert.deepEqual(prior,pin);else{pins.set(pin.path,pin);budget.add({bytes:pin.bytes});if(pin.decoded_bytes!==undefined)budget.add({bytes:pin.decoded_bytes});}}
- const snapshot=budget.snapshot();return {pins,reservedBytes:snapshot.accounted_bytes+262144,reservedDescriptors:pins.size+16};
+  const prior=pins.get(pin.path);if(prior)assert.deepEqual(prior,pin);else{pins.set(pin.path,pin);}}
+ return {pins};
 }
-function reader(root,reserved){
- return pin=>{assert.deepEqual(reserved.pins.get(pin.path),pin);const {file,stat}=ordinary(root,pin);const fd=fs.openSync(file,fs.constants.O_RDONLY|fs.constants.O_NOFOLLOW);let raw;
+function reader(root,inventory){
+ return pin=>{assert.deepEqual(inventory.pins.get(pin.path),pin);const {file,stat}=ordinary(root,pin);const fd=fs.openSync(file,fs.constants.O_RDONLY|fs.constants.O_NOFOLLOW);let raw;
   try{raw=fs.readFileSync(fd);const held=fs.fstatSync(fd),after=fs.lstatSync(file);for(const k of ['dev','ino','size','mode','mtimeMs','ctimeMs'])assert.equal(stat[k],held[k]),assert.equal(stat[k],after[k]);}finally{fs.closeSync(fd)}
   assert.equal(raw.length,pin.bytes);assert.equal(hash(raw),pin.sha256);return raw;};
 }
 function registry(read,pin){const raw=read(pin);assert.equal(raw.readUInt32LE(raw.length-4),pin.decoded_bytes);const decoded=gunzipSync(raw,{maxOutputLength:pin.decoded_bytes});assert.equal(decoded.length,pin.decoded_bytes);assert.equal(hash(decoded),pin.decoded_sha256);return JSON.parse(decoded);}
-export async function validateArcticBuildContext({root,stageRaw,stage,currentExecution,reservation,predecessorReference}){
- const reserved=reserveArcticContinuation({root,stageRaw,stage});assert.equal(reserved.reservedBytes,reservation.reservedBytes);assert.equal(reserved.reservedDescriptors,reservation.reservedDescriptors);
- const read=reader(root,reserved);const priorRaw=read(stage.priorStage);assert.equal(hash(priorRaw),PRIOR_STAGE);const priorStage=JSON.parse(priorRaw);
+export async function validateArcticBuildContext({root,stageRaw,stage,currentExecution,predecessorReference}){
+ const inventory=authenticateArcticContinuationInputs({root,stage});
+ const read=reader(root,inventory);const priorRaw=read(stage.priorStage);assert.equal(hash(priorRaw),PRIOR_STAGE);const priorStage=JSON.parse(priorRaw);
  // predecessorReference is the complete independently read old normal release;
  // the original validator compares it to its authenticated registry, no author boolean.
  assert.equal(predecessorReference.version,8);assert.equal(predecessorReference.footprints_sha256,BEFORE);
  // This performs the ORIGINAL actual 17-module child and both original full migrations.
- const prior=await validateChainedBuildContext({root,expectedReference:predecessorReference,stagePath:stage.priorStage.path,stageRaw:priorRaw,stage:priorStage,currentExecution,retainContextForContinuation:true,registryContinuation:stage.registryContinuation,continuationReservedBytes:reserved.reservedBytes,continuationReservedDescriptors:reserved.reservedDescriptors});
+ const prior=await validateChainedBuildContext({root,expectedReference:predecessorReference,stagePath:stage.priorStage.path,stageRaw:priorRaw,stage:priorStage,currentExecution,retainContextForContinuation:true,registryContinuation:stage.registryContinuation});
  const originalRegistry=registry(read,stage.priorRegistry),nextRegistry=registry(read,stage.registry);
  assert.deepEqual(nextRegistry.releases.slice(0,-1),originalRegistry.releases);assert.deepEqual(nextRegistry.batches.slice(0,originalRegistry.batches.length),originalRegistry.batches);
  for(const key of ['memberships_batches','sources_batches'])assert.deepEqual(nextRegistry[key].slice(0,originalRegistry[key].length),originalRegistry[key]);
@@ -74,7 +72,7 @@ export async function validateArcticBuildContext({root,stageRaw,stage,currentExe
  // The original general validator issues the third LIVE brand; no compact receipt substitute.
  const migration=validateContextMigration({original:saved.rows,migrated:after,candidates:Object.fromEntries(changed.map(row=>[row.id,row.geometry])),predecessorRelease:predecessor,release,migrationManifestFile:path.join(root,stage.geometryManifest.path)});
  const results=[prior.coverageContinuation.originalGeometryValidation,prior.geometryValidation,migration.geometryValidation];assert.equal(new Set(results).size,3);for(const result of results)requireValidatedGeometryMigrations(result);
- const {geometryValidation,...compact}=migration;const result={receipt:{status:'verified',stage_sha256:hash(stageRaw),stage_path:stage.path,migration:compact,prior_context:prior.receipt,physical_association_chain:{versions:[6,7,8,9],physical_assets_recalculated:false},continuation_reservation:reserved.reservedBytes,scientific_approval:false},geometryValidation,predecessorRelease:predecessor,coverageContinuation:{...prior.coverageContinuation,predecessorGeometryValidation:prior.geometryValidation,predecessorGrid:priorNative,predecessorGridSha256:hash(priorNativeRaw),predecessorRelease:predecessor},sourceAssociations:[{release:predecessor,changed_ids:prior.receipt.migration.changed_ids},{release,changed_ids:compact.changed_ids}]};
+ const {geometryValidation,...compact}=migration;const result={receipt:{status:'verified',stage_sha256:hash(stageRaw),stage_path:stage.path,migration:compact,prior_context:prior.receipt,physical_association_chain:{versions:[6,7,8,9],physical_assets_recalculated:false},scientific_approval:false},geometryValidation,predecessorRelease:predecessor,coverageContinuation:{...prior.coverageContinuation,predecessorGeometryValidation:prior.geometryValidation,predecessorGrid:priorNative,predecessorGridSha256:hash(priorNativeRaw),predecessorRelease:predecessor},sourceAssociations:[{release:predecessor,changed_ids:prior.receipt.migration.changed_ids},{release,changed_ids:compact.changed_ids}]};
  validatedContinuations.set(result,Object.freeze({receipt_sha256:hash(JSON.stringify(result.receipt)),manifest_sha256:hash(nativeRaw),release_id:release.id,stage_sha256:hash(stageRaw)}));
  return result;
 }

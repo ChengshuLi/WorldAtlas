@@ -41,166 +41,6 @@ def digest(value):
     return hashlib.sha256(value).hexdigest()
 
 
-def available_memory(read_text=None, sysconf=None):
-    """Kernel available memory, intersected with each known cgroup ceiling."""
-    read_text = read_text or (lambda path: Path(path).read_text())
-    sysconf = sysconf or os.sysconf
-    def optional(path):
-        try:
-            return read_text(path)
-        except OSError:
-            return None
-    def counters(text):
-        return {parts[0].rstrip(':'): int(parts[1]) for line in (text or '').splitlines()
-                if len(parts := line.split()) >= 2 and parts[1].isdigit()}
-    memory = counters(optional('/proc/meminfo'))
-    if 'MemAvailable' in memory:
-        host = {'kind': 'linux-MemAvailable', 'bytes': memory['MemAvailable'] * 1024}
-    else:
-        host = {'kind': 'available-physical-pages-fallback',
-                'bytes': sysconf('SC_AVPHYS_PAGES') * sysconf('SC_PAGE_SIZE')}
-    available, constraints = host['bytes'], []
-    for base, limit_name, current_name, stat_name, prefix in (
-        ('/sys/fs/cgroup', 'memory.max', 'memory.current', 'memory.stat', ''),
-        ('/sys/fs/cgroup/memory', 'memory.limit_in_bytes', 'memory.usage_in_bytes', 'memory.stat', 'total_')):
-        limit_raw = optional(base + '/' + limit_name)
-        if limit_raw is None or limit_raw.strip() == 'max':
-            continue
-        current_raw = optional(base + '/' + current_name)
-        need(limit_raw.strip().isdigit() and current_raw is not None and current_raw.strip().isdigit(),
-             'Malformed cgroup memory ceiling/current usage')
-        limit, current = int(limit_raw), int(current_raw)
-        stats = counters(optional(base + '/' + stat_name))
-        get = lambda name: stats.get(prefix + name, stats.get(name, 0))
-        inactive = get('inactive_file')
-        # Do not promise reclaim of anonymous/shared, dirty, or writeback pages.
-        file_bytes = get('file') if not prefix else get('cache')
-        reclaimable = max(0, min(inactive, max(0, file_bytes - get('shmem')), current)
-                          - get('file_dirty') - get('file_writeback') - get('dirty') - get('writeback'))
-        headroom = max(0, min(limit, limit - current + reclaimable))
-        constraints.append({'path': base, 'limit_bytes': limit, 'current_bytes': current,
-                            'clean_inactive_file_bytes': reclaimable, 'available_bytes': headroom})
-        available = min(available, headroom)
-    return {'host': host, 'cgroups': constraints, 'available_bytes': max(0, available)}
-
-
-def object_nodes(value, excluded=lambda identity: False):
-    """Owned Python object bytes; no traversal into unrelated module globals."""
-    nodes, pending = {}, [value]
-    while pending:
-        item = pending.pop()
-        identity = id(item)
-        if identity in nodes or excluded(identity):
-            continue
-        nodes[identity] = sys.getsizeof(item)
-        if isinstance(item, dict):
-            pending.extend(item.keys()); pending.extend(item.values())
-        elif isinstance(item, (list, tuple, set, frozenset)):
-            pending.extend(item)
-        elif isinstance(item, types.CodeType):
-            pending.extend(getattr(item, field) for field in (*CODE_FIELDS, 'co_filename') if hasattr(item, field))
-        elif isinstance(item, PurePosixPath):
-            for cls in type(item).__mro__:
-                for slot in getattr(cls, '__slots__', ()):
-                    if slot not in ('__weakref__', '__dict__'):
-                        try: pending.append(object.__getattribute__(item, slot))
-                        except AttributeError: pass
-    return nodes
-
-
-class Budget:
-    """One physical additional-allocation budget, with scoped peak accounting."""
-    def __init__(self, maximum=None):
-        self.source = available_memory() if maximum is None else {'kind': 'explicit-physical-bytes', 'bytes': maximum}
-        if maximum is None:
-            # Leave half of the kernel's available headroom for the caller and
-            # concurrent work. Object expansion is charged below, not again here.
-            maximum = self.source['available_bytes'] // 2
-        self.maximum, self.used, self.scopes = maximum, 0, []
-        self.retained_ids = set()
-        self.operation, self.peak_charged = 'initialize budget', 0
-        need(type(maximum) is int and maximum > 0, self.diagnostic(0, 'initialize budget'))
-        self.admit(0, 'initialize budget')
-        self.virtual_base = None
-        if sys.platform == 'linux':
-            self.virtual_base = int(Path('/proc/self/statm').read_text().split()[0]) * os.sysconf('SC_PAGE_SIZE')
-
-    def bookkeeping(self):
-        return sys.getsizeof(self.retained_ids) + len(self.retained_ids) * sys.getsizeof(id(self))
-
-    def scoped_bytes(self):
-        return sum(scope['bytes'] + sys.getsizeof(scope['nodes']) +
-                   len(scope['nodes']) * (sys.getsizeof(id(self)) + sys.getsizeof(0)) for scope in self.scopes)
-
-    def diagnostic(self, size, operation):
-        return 'Installed Python physical-memory admission: ' + json.dumps({
-            'operation': str(operation)[:320], 'capacity_bytes': self.maximum,
-            'baseline_virtual_bytes': getattr(self, 'virtual_base', None),
-            'allocation_ceiling_bytes': getattr(self, 'allocation_ceiling', None),
-            'retained_bytes': self.used, 'scoped_bytes': self.scoped_bytes(),
-            'bookkeeping_bytes': self.bookkeeping(), 'working_bytes': size,
-            'capacity_source': self.source}, sort_keys=True, separators=(',', ':'))
-
-    def admit(self, size, operation='metadata working set'):
-        need(type(size) is int and size >= 0, 'Invalid physical-memory working-set charge')
-        self.operation = operation
-        total = self.used + self.scoped_bytes() + self.bookkeeping() + size
-        self.peak_charged = max(self.peak_charged, total)
-        if total > self.maximum:
-            raise ValueError(self.diagnostic(size, operation))
-
-    def retain(self, value):
-        nodes = object_nodes(value, self.retained_ids.__contains__)
-        # Ownership of shared members moves to the retained result; it is never
-        # charged both as a live member-map object and as retained evidence.
-        for scope in self.scopes:
-            for identity in nodes:
-                scope['bytes'] -= scope['nodes'].pop(identity, 0)
-        self.used += sum(nodes.values())
-        self.retained_ids.update(nodes)
-        self.admit(0, 'retain evidence row/container')
-
-    @contextmanager
-    def scoped(self, value, operation):
-        nodes = object_nodes(value, lambda identity: identity in self.retained_ids or
-                             any(identity in scope['nodes'] for scope in self.scopes))
-        scope = {'nodes': nodes, 'bytes': sum(nodes.values())}
-        self.scopes.append(scope)
-        try:
-            self.admit(0, operation)
-            yield
-        finally:
-            self.scopes.pop()
-
-
-@contextmanager
-def allocation_limit(budget):
-    # The ceiling is fixed at budget creation, not reset from an ever-growing
-    # per-file process size. It covers parser/import metadata, marshal/compile,
-    # canonical encodings, final digests, validation and output serialization.
-    if sys.platform != 'linux':
-        yield
-        return
-    import resource
-    soft, hard = resource.getrlimit(resource.RLIMIT_AS)
-    allowed = budget.virtual_base + budget.maximum
-    if soft != resource.RLIM_INFINITY:
-        allowed = min(allowed, soft)
-    if hard != resource.RLIM_INFINITY:
-        allowed = min(allowed, hard)
-    budget.allocation_ceiling = allowed
-    failure = None
-    resource.setrlimit(resource.RLIMIT_AS, (allowed, hard))
-    try:
-        yield
-    except MemoryError as error:
-        failure = error
-    finally:
-        resource.setrlimit(resource.RLIMIT_AS, (soft, hard))
-    if failure is not None:
-        raise ValueError(budget.diagnostic(0, 'OS allocation limit during ' + budget.operation)) from failure
-
-
 def ordinary(path):
     path = Path(path)
     need(path.absolute() == path.resolve(strict=True), 'Installed Python member has a linked ancestor')
@@ -209,14 +49,10 @@ def ordinary(path):
     return info
 
 
-def read_file(path, budget, body=False):
+def read_file(path, body=False):
     path = Path(path)
     before = ordinary(path)
     block = min(CHUNK, max(1, before.st_size))
-    if body:
-        budget.admit(2 * before.st_size + block, 'read/join body: ' + str(path))
-    else:
-        budget.admit(2 * block, 'stream file hash: ' + str(path))
     checksum, chunks, size = hashlib.sha256(), [], 0
     fd = os.open(path, os.O_RDONLY | getattr(os, 'O_NOFOLLOW', 0))
     try:
@@ -299,18 +135,15 @@ def cache_source(file, members):
     return source, optimization
 
 
-def file_identity(distribution, logical, file, members, budget):
+def file_identity(distribution, logical, file, members):
     binding = cache_source(file, members)
-    if binding:
-        budget.admit(2 * (ordinary(file).st_size + ordinary(binding[0]).st_size) + CHUNK,
-                     'read source/cache pair: ' + str(file))
-    raw, body = read_file(file, budget, body=binding is not None)
+    raw, body = read_file(file, body=binding is not None)
     effective = dict(raw, kind='exact')
     row = {'distribution': distribution, 'path': logical, 'raw': raw, 'effective': effective}
     if binding:
         source, optimization = binding
         source_logical = members[source]
-        source_raw, source_body = read_file(source, budget, body=True)
+        source_raw, source_body = read_file(source, body=True)
         need(len(body) >= 16 and body[:4] == importlib.util.MAGIC_NUMBER, 'Invalid source-backed cache magic/header')
         flags = int.from_bytes(body[4:8], 'little')
         need(flags in (0, 1, 3), 'Invalid source-backed cache invalidation flags')
@@ -325,21 +158,15 @@ def file_identity(distribution, logical, file, members, budget):
             header = {'kind': 'timestamp', 'timestamp': timestamp, 'source_bytes': source_bytes,
                       'matches_source': timestamp == int(source.stat().st_mtime) & 0xffffffff and
                       source_bytes == len(source_body) & 0xffffffff}
-        with budget.scoped((source_body, body), 'source/cache buffers: ' + str(file)):
-            stream = io.BytesIO(body[16:])
-            cached = marshal.load(stream)
-            need(stream.read(1) == b'' and isinstance(cached, types.CodeType), 'Incomplete or non-code source-backed cache')
-            physical = str(source)
-            need(cached.co_filename == physical, 'Cached filename differs from actual source')
-            current = compile(source_body, physical, 'exec', dont_inherit=True, optimize=optimization)
-            with budget.scoped((cached, current, stream), 'decoded/fresh code: ' + str(file)):
-                budget.admit(0, 'canonical cached code: ' + str(file))
-                observed = canonical_code(cached, physical, source_logical)
-                with budget.scoped(observed, 'retained cached canonical bytes: ' + str(file)):
-                    budget.admit(0, 'canonical fresh code: ' + str(file))
-                    expected = canonical_code(current, physical, source_logical)
-                    budget.admit(sys.getsizeof(expected), 'canonical comparison: ' + str(file))
-                    need(observed == expected, 'Cached executable code differs from fresh source compilation')
+        stream = io.BytesIO(body[16:])
+        cached = marshal.load(stream)
+        need(stream.read(1) == b'' and isinstance(cached, types.CodeType), 'Incomplete or non-code source-backed cache')
+        physical = str(source)
+        need(cached.co_filename == physical, 'Cached filename differs from actual source')
+        current = compile(source_body, physical, 'exec', dont_inherit=True, optimize=optimization)
+        observed = canonical_code(cached, physical, source_logical)
+        expected = canonical_code(current, physical, source_logical)
+        need(observed == expected, 'Cached executable code differs from fresh source compilation')
         del cached, current, stream, observed
         effective = {'kind': 'verified-source-backed-pyc-v1', 'bytes': len(expected),
                      'sha256': digest(expected), 'mode': raw['mode'], 'source': source_logical,
@@ -347,7 +174,6 @@ def file_identity(distribution, logical, file, members, budget):
         row.update(effective=effective, normalization={'physical_filename': physical,
                    'header_hex': body[:16].hex(), 'header': header})
         del expected, source_body, body
-    budget.retain(row)
     return row
 
 
@@ -364,7 +190,7 @@ def explicit_site_paths():
     configuration = environment / 'pyvenv.cfg'
     prefixes = [Path(sys.prefix).absolute()]
     if configuration.is_file():
-        _, configuration_bytes = read_file(configuration, Budget(), body=True)
+        _, configuration_bytes = read_file(configuration, body=True)
         settings = {}
         for line in configuration_bytes.decode('utf-8').splitlines():
             if '=' in line:
@@ -447,18 +273,17 @@ def discover_parser():
     return provider, members
 
 
-def parser_inventory(members, budget):
+def parser_inventory(members):
     inventory = []
     for file, logical in sorted(members.items(), key=lambda item: item[1]):
-        raw, _ = read_file(file, budget)
+        raw, _ = read_file(file)
         row = {'distribution': 'identity-parser', 'path': logical,
                'raw': raw, 'effective': dict(raw, kind='exact')}
         binding = cache_source(file, members) if file.parent.name == '__pycache__' else None
         if binding:
             source, _ = binding
-            source_raw, _ = read_file(source, budget)
+            source_raw, _ = read_file(source)
             row['effective'] = {'kind': 'unread-source-cache-v1', 'source': members[source], 'source_sha256': source_raw['sha256']}
-        budget.retain(row)
         inventory.append(row)
     return inventory
 
@@ -517,36 +342,34 @@ def require_expected_parser(provider, inventory, expected):
          'Requirement parser differs from authenticated original before import')
 
 
-def implementation_parser(budget, expected_parser=None):
+def implementation_parser(expected_parser=None):
     # Nothing from packaging or pip has executed when this roster is collected
     # and compared. A modified parser cannot forge stdout and exit before checks.
     if expected_parser is not None:
         validate_expected_parser(expected_parser)
     provider, members = discover_parser()
-    with budget.scoped(members, 'parser member map'):
-        inventory = parser_inventory(members, budget)
-        if expected_parser is not None:
-            require_expected_parser(provider, inventory, expected_parser)
-        package = importlib.import_module(provider)
-        requirements = importlib.import_module(provider + '.requirements')
-        markers = importlib.import_module(provider + '.markers')
-        utils = importlib.import_module(provider + '.utils')
-        # SourceFileLoader consults only the private empty prefix, never installed
-        # source caches. Verify every actually loaded parser source was inventoried.
-        for name, module in list(sys.modules.items()):
-            if name in ('packaging', 'pip') or name.startswith(('packaging.', 'pip.')):
-                file = Path(module.__file__)
-                ordinary(file)
-                need(file.suffix == '.py' and isinstance(module.__loader__, importlib.machinery.SourceFileLoader) and
-                     Path(module.__cached__).is_relative_to(Path(sys.pycache_prefix)), 'Requirement parser did not execute ordinary source')
-                need(file in members, 'Executed requirement parser module is outside the hashed implementation')
-        identity = {'provider': provider, 'version': getattr(package, '__version__', None),
-                    'files': len(inventory), 'sha256': digest(encoded(parser_effective_rows(inventory))),
-                    'raw_sha256': digest(encoded(raw_rows(inventory))), 'inventory': inventory}
-        if expected_parser is not None:
-            need(identity['version'] == expected_parser['version'], 'Expected parser implementation version differs')
-        budget.retain(identity)
-        return requirements.Requirement, markers.default_environment(), utils.canonicalize_name, identity
+    inventory = parser_inventory(members)
+    if expected_parser is not None:
+        require_expected_parser(provider, inventory, expected_parser)
+    package = importlib.import_module(provider)
+    requirements = importlib.import_module(provider + '.requirements')
+    markers = importlib.import_module(provider + '.markers')
+    utils = importlib.import_module(provider + '.utils')
+    # SourceFileLoader consults only the private empty prefix, never installed
+    # source caches. Verify every actually loaded parser source was inventoried.
+    for name, module in list(sys.modules.items()):
+        if name in ('packaging', 'pip') or name.startswith(('packaging.', 'pip.')):
+            file = Path(module.__file__)
+            ordinary(file)
+            need(file.suffix == '.py' and isinstance(module.__loader__, importlib.machinery.SourceFileLoader) and
+                 Path(module.__cached__).is_relative_to(Path(sys.pycache_prefix)), 'Requirement parser did not execute ordinary source')
+            need(file in members, 'Executed requirement parser module is outside the hashed implementation')
+    identity = {'provider': provider, 'version': getattr(package, '__version__', None),
+                'files': len(inventory), 'sha256': digest(encoded(parser_effective_rows(inventory))),
+                'raw_sha256': digest(encoded(raw_rows(inventory))), 'inventory': inventory}
+    if expected_parser is not None:
+        need(identity['version'] == expected_parser['version'], 'Expected parser implementation version differs')
+    return requirements.Requirement, markers.default_environment(), utils.canonicalize_name, identity
 
 
 def require_import_ownership(names, root, members):
@@ -577,7 +400,7 @@ def require_import_ownership(names, root, members):
                  'Declared Python namespace merges an unowned import root: ' + name)
 
 
-def distribution_members(distribution, budget):
+def distribution_members(distribution):
     root = Path(distribution.locate_file('')).absolute()
     need(root == root.resolve(strict=True) and root.is_dir(), 'Ordinary installed distribution root required')
     records = distribution.files
@@ -635,21 +458,13 @@ def distribution_members(distribution, budget):
     return members
 
 
-def installed_identity(roots=None, *, distribution_finder=importlib.metadata.distribution, metadata_bytes=None, expected_parser=None):
+def installed_identity(roots=None, *, distribution_finder=importlib.metadata.distribution, expected_parser=None):
     with source_only_parser():
-        return _installed_identity(roots, distribution_finder=distribution_finder, metadata_bytes=metadata_bytes, expected_parser=expected_parser)
+        return _measure_identity(roots, distribution_finder, expected_parser)
 
 
-def _installed_identity(roots=None, *, distribution_finder=importlib.metadata.distribution, metadata_bytes=None, expected_parser=None):
-    budget = Budget(metadata_bytes)
-    with allocation_limit(budget):
-        return _measure_identity(roots, distribution_finder, expected_parser, budget)
-
-
-def _measure_identity(roots, distribution_finder, expected_parser, budget):
-    if expected_parser is not None:
-        budget.retain(expected_parser)
-    Requirement, environment, normalize, parser = implementation_parser(budget, expected_parser)
+def _measure_identity(roots, distribution_finder, expected_parser):
+    Requirement, environment, normalize, parser = implementation_parser(expected_parser)
     roots = list(DEFAULT_ROOTS) if roots is None else roots
     need(isinstance(roots, list) and roots, 'At least one declared Python root required')
     requirements = []
@@ -702,25 +517,20 @@ def _measure_identity(roots, distribution_finder, expected_parser, budget):
                 include(requirement)
     inventory, resolved = [], []
     for name, distribution in sorted(distributions.items()):
-        members = distribution_members(distribution, budget)
+        members = distribution_members(distribution)
         resolved.append({'name': name, 'version': distribution.version, 'extras': sorted(active[name])})
-        with budget.scoped(members, 'distribution member map: ' + name):
-            for file, logical in sorted(members.items(), key=lambda item: item[1]):
-                inventory.append(file_identity(name, logical, file, members, budget))
+        for file, logical in sorted(members.items(), key=lambda item: item[1]):
+            inventory.append(file_identity(name, logical, file, members))
         del members
-    executable, _ = read_file(Path(sys.executable).resolve(), budget)
+    executable, _ = read_file(Path(sys.executable).resolve())
     interpreter = {'implementation': sys.implementation.name, 'version': sys.version, 'cache_tag': sys.implementation.cache_tag,
                    'optimization': sys.flags.optimize, 'magic_number': importlib.util.MAGIC_NUMBER.hex(), 'executable': executable}
-    for value in (inventory, resolved, declared, interpreter):
-        budget.retain(value)
-    budget.admit(0, 'final effective/raw identity serialization')
     semantic = {'version': VERSION, 'interpreter': interpreter, 'roots': declared, 'distributions': resolved,
                 'parser': {key: parser[key] for key in ('provider', 'version', 'sha256')}, 'inventory': effective_rows(inventory)}
     return {'version': VERSION, 'executable_sha256': executable['sha256'], 'interpreter': interpreter,
             'roots': declared, 'distributions': resolved, 'files': len(inventory), 'sha256': digest(encoded(semantic)),
             'raw_sha256': digest(encoded(raw_rows(inventory))),
             'inventory': inventory, 'parser': parser}
-
 
 
 def raw_rows(inventory):
@@ -963,22 +773,17 @@ def execute_package_source(mode, arguments):
             sys.argv = old_argv
 
 
-def read_json_input(budget):
-    chunks, size = [], 0
+def read_json_input():
+    chunks = []
     while chunk := sys.stdin.buffer.read(CHUNK):
-        size += len(chunk)
-        budget.admit(2 * size + CHUNK, 'read/join JSON input')
         chunks.append(chunk)
     raw = b''.join(chunks)
     del chunks
-    budget.admit(len(raw), 'decode JSON input bytes/text')
     text = raw.decode('utf-8')
-    budget.admit(sys.getsizeof(raw) + sys.getsizeof(text), 'parse JSON input bytes/text')
     return json.loads(text)
 
 
-def write_json(value, budget):
-    budget.admit(0, 'serialize JSON output')
+def write_json(value):
     for fragment in json.JSONEncoder(ensure_ascii=True, separators=(',', ':')).iterencode(value):
         sys.stdout.write(fragment)
     sys.stdout.write('\n')
@@ -998,31 +803,23 @@ def main():
         print(json.dumps(probe_imports(json.loads(sys.argv[2])), separators=(',', ':')))
         return
     if sys.argv[1:] == ['--validate']:
-        budget = Budget()
-        with allocation_limit(budget):
-            value = read_json_input(budget)
-            budget.retain(value)
-            budget.admit(0, 'validate serialized identity')
-            result = validate_identity(value)
-            write_json(result, budget)
+        value = read_json_input()
+        result = validate_identity(value)
+        write_json(result)
         return
     arguments = sys.argv[1:]
     has_expected_parser = '--expected-parser' in arguments
     if has_expected_parser:
         arguments.remove('--expected-parser')
     need(len(arguments) <= 1, 'Use package-python-runtime.py [JSON_ROOTS] [--expected-parser] or --validate')
-    budget = Budget()
-    with allocation_limit(budget), source_only_parser():
-        expected_parser = read_json_input(budget) if has_expected_parser else None
+    with source_only_parser():
+        expected_parser = read_json_input() if has_expected_parser else None
         if has_expected_parser:
             need(isinstance(expected_parser, dict), 'Authenticated expected parser object required')
         roots = json.loads(arguments[0]) if arguments else None
-        result = _measure_identity(roots, importlib.metadata.distribution, expected_parser, budget)
-        budget.retain(result)
-        budget.admit(0, 'validate completed identity')
+        result = _measure_identity(roots, importlib.metadata.distribution, expected_parser)
         validate_identity(result)
-        write_json(result, budget)
-
+        write_json(result)
 
 
 if __name__ == '__main__':

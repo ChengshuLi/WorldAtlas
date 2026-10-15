@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {deriveSourceTargetNativeDelta,nativeRowLatitudes,nativePolygonIntervals,polygonParts,witnessCellEffects,validateWitnessGeometry} from '../src/native-grid.js';
 import {ImmutableReader} from '../scripts/check-effective-geographic-regression.mjs';
-import {qualifySourceTargetNativeAuthority,diagnoseSourceTargetNativeAuthority} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {qualifySourceTargetNativeAuthority,diagnoseSourceTargetNativeAuthority,readRetainedRegistryAuthority,valueBytes,valueSha} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 
 const rectangle=(left,right,bottom=-40,top=40)=>({type:'Polygon',coordinates:[[[left,bottom],[right,bottom],[right,top],[left,top],[left,bottom]]]});
 const feature=(id,pixelIndex,geometry,target_id)=>({id,pixelIndex,geometry,...(target_id?{target_id}:{})});
@@ -64,8 +64,7 @@ function constructorFixture(change=()=>{}){
       throw Error('Unexpected fixture Git request: '+args.join(' '));
     }
   }
-  const reader=()=>new FixtureReader('.',version,{runtimeBytes:0,metadataBytes:0,outputBytes:16*1024*1024,
-    allowance:{phaseBytes:128*1024*1024,rssBytes:1024*1024*1024}});
+  const reader=options=>new FixtureReader('.',version,options);
   const locators={source_evidence:{commit:version,path:evidence.path},native_patch:{commit:version,path:patch.path}};
   const operands={source_evidence:files.get(evidence.path).pin,native_patch:files.get(patch.path).pin};
   const preimage={version:1,kind:'source-target-native-rule-v1',...operands};
@@ -189,12 +188,29 @@ test('a contiguous request spanning a real veto has exact permitted flanks and h
  const d=deriveSourceTargetNativeDelta(v);
  assert.deepEqual(d.diagnostic_rows,[{y:3,runs:[[2,3,1,'assigned_cells'],[3,4,1,'territorial_exclusion_cells'],[4,6,1,'assigned_cells']]}]);
 });
-test('diagnostic refuses output and trace budgets rather than returning unaccounted observations',()=>{
- const f=constructorFixture(),r=f.reader();r.outputBytes=1;
- assert.throws(()=>diagnoseSourceTargetNativeAuthority(r,f.preimage,f.binding),/output exceeds allowance/);
- const g=constructorFixture(),tight=g.reader();
- // Immutable inputs still fit, but prospective retained trace must also fit.
- const used=g.reader();qualifySourceTargetNativeAuthority(used,g.preimage,g.binding);
- tight.allowance.phaseBytes=used.used+100;
- assert.throws(()=>diagnoseSourceTargetNativeAuthority(tight,g.preimage,g.binding),/exceeds phase|exceeds allowance/);
+test('complete diagnostic retains whole consumed-input custody and rejects body drift',()=>{
+ const f=constructorFixture(),reader=f.reader();
+ const result=diagnoseSourceTargetNativeAuthority(reader,f.preimage,f.binding);
+ assertPartition(result);
+ const consumed=[...reader.inventory.values()].filter(pin=>pin.whole_body_consumed===true);
+ assert.ok(consumed.some(pin=>pin.path===f.binding.source_evidence.path));
+ assert.ok(consumed.some(pin=>pin.path==='original-source.json'));
+ assert.ok(consumed.every(pin=>pin.bytes===f.files.get(pin.path).raw.length
+  &&pin.sha256===digest(f.files.get(pin.path).raw)));
+ const pinBody=(path,value)=>{
+  const raw=valueBytes(value),pin={commit:version,path,mode:'100644',git_blob_oid:blob(raw),bytes:raw.length,sha256:digest(raw)};
+  f.files.set(path,{raw,pin});f.byBlob.set(pin.git_blob_oid,raw);return pin;
+ };
+ const original={policy_id:'retained-source-literal-additions',policy_version:1,
+  rule_sha256:valueSha(f.preimage),rule_preimage:pinBody('rule.json',f.preimage),source_authority:pinBody('binding.json',f.binding)};
+ const child=f.reader(),observer=f.reader({invocation:child.invocation});
+ const unused=pinBody('unused.json',{unconsumed:true});child.descriptor(unused.path);
+ readRetainedRegistryAuthority(child,{...original,authority_sha256:valueSha(original)},observer);
+ const retained=[...observer.inventory.values()];
+ assert.ok(retained.some(pin=>pin.path==='original-source.json'));
+ assert.ok(retained.every(pin=>pin.whole_body_consumed===true));
+ assert.equal(retained.some(pin=>pin.path==='unused.json'),false);
+ const g=constructorFixture(),pin=g.binding.source_evidence;
+ g.byBlob.set(pin.git_blob_oid,Buffer.alloc(pin.bytes,32));
+ assert.throws(()=>g.diagnose(),/hash|identity|body|differs|SHA/i);
 });

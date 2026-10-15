@@ -91,8 +91,8 @@ async function trustedFixture(t,{incompleteNative=false,codeRoutes=false,nativeA
  const rootRow={id:'fixture',accepted_head:accepted,selected_commit:selected,selection_sha256:valueSha(selection),execution_commit:one,execution_code_sha256:valueSha(execution_code),runtime_sha256:valueSha(runtime),facts:pin('accepted/facts.json'),certificate:{...pin('accepted/certificate.json.gz'),decoded_bytes:valueBytes(full).length,decoded_sha256:valueSha(full)},publication:pin('accepted/publication.json'),custody:pin('accepted/custody.json'),routes:pin('accepted/routes.json')};
  save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',checkpoints:[rootRow]});commit();
  const api=await import(pathToFileURL(path.join(root,MODULE))),native=await import(pathToFileURL(path.join(root,'scripts/check-effective-geographic-regression.mjs')));
- const reader=new native.ImmutableReader(root,selected,{allowance:{phaseBytes:512*1024**2,rssBytes:512*1024**2}}),budget={shared:reader.budget,carriedBytes:1024};
- return {api,native,reader,budget,selected,root,git,save,commit,pin,ledger,patch,sidecar,envelope,selection,rootRow,manifest,features,registry};
+ const reader=new native.ImmutableReader(root,selected);
+ return {api,native,reader,selected,root,git,save,commit,pin,ledger,patch,sidecar,envelope,selection,rootRow,manifest,features,registry};
 }
 
 // Genuine pinned source/native qualification, followed by the public private-state
@@ -131,7 +131,7 @@ async function appendNativeAuthority(f,{owner=0,name='appended',mutateEvidence=(
  f.save(name+'/binding.json',{version:1,kind:'source-target-native-custody-v1',...operands});const authority=f.commit();
  const entry={policy_id:'retained-source-literal-additions',policy_version:1,rule_preimage:f.pin(name+'/rule.json',authority),
   rule_sha256:f.pin(name+'/rule.json',authority).sha256,source_authority:f.pin(name+'/binding.json',authority)};entry.authority_sha256=valueSha(entry);
- const reader=new f.native.ImmutableReader(f.root,authority,{allowance:f.reader.allowance});
+ const reader=new f.native.ImmutableReader(f.root,authority);
  const {readRetainedRegistryAuthority}=await import(pathToFileURL(path.join(f.root,CODE[1])));
  const proof=readRetainedRegistryAuthority(reader,entry);
  assert(Object.isFrozen(proof));assert.strictEqual(proof.source_rows,proof.original_ledger.rows);

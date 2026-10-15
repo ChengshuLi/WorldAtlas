@@ -9,8 +9,6 @@ import io
 import json
 import pathlib
 
-FILE = 32 * 1024 * 1024
-PHASE = 256 * 1024 * 1024
 MEMBERS = ('derived-certificate.json.gz', 'derived-facts.json', 'derived-publication.json',
            'checkpoint-routes.json')
 OPTIONAL = ('operating.json',)
@@ -49,7 +47,7 @@ def _matches(pin, name, descriptors):
             ('decoded_bytes', 'decoded_sha256') if name.endswith('.gz') else ())))
 
 
-def retain_checkpoint_products(source, destination, issued, *, allowance=PHASE):
+def retain_checkpoint_products(source, destination, issued):
     """Read the whole authenticated child set and publish copies exclusively.
 
     Caller has completed the actual native consumer. The descriptor is returned
@@ -60,14 +58,12 @@ def retain_checkpoint_products(source, destination, issued, *, allowance=PHASE):
     names = set(p.name for p in source.iterdir())
     if not set(MEMBERS) <= names or names - set((*MEMBERS, *OPTIONAL)):
         raise ValueError('Incomplete or extra checkpoint product roster')
-    if type(allowance) is not int or not 0 < allowance <= PHASE:
-        raise ValueError('Invalid complete checkpoint transport allowance')
-    total, sizes = 0, {}
+    sizes = {}
     for name in sorted(names):
         target = source / name
         stat = target.lstat()
-        if target.is_symlink() or not target.is_file() or stat.st_mode & 0o777 != 0o644 or not 0 < stat.st_size <= FILE:
-            raise ValueError('Nonordinary or oversized checkpoint product')
+        if target.is_symlink() or not target.is_file() or stat.st_mode & 0o777 != 0o644 or stat.st_size <= 0:
+            raise ValueError('Nonordinary or empty checkpoint product')
         # Reserve encoded copies, parsing/live objects, and worst-case bounded
         # gzip output before opening it. The exact gzip size is checked next.
         decoded = 0
@@ -75,17 +71,14 @@ def retain_checkpoint_products(source, destination, issued, *, allowance=PHASE):
             with target.open('rb') as stream:
                 stream.seek(-4, 2)
                 decoded = int.from_bytes(stream.read(4), 'little')
-            if not 0 < decoded <= FILE:
+            if decoded <= 0:
                 raise ValueError('Checkpoint gzip decoded size exceeds file limit')
         sizes[name] = (stat.st_size, decoded)
-        total += stat.st_size + 8 * (decoded or stat.st_size)
-    if total > allowance:
-        raise ValueError('Complete checkpoint transport exceeds current allowance')
     bodies, descriptors = {}, {}
     for name in sorted(names):
         target = source / name
         with target.open('rb') as stream:
-            body = stream.read(FILE + 1)
+            body = stream.read(sizes[name][0] + 1)
         if len(body) != sizes[name][0]:
             raise ValueError('Checkpoint product changed beyond admitted size')
         row = {'name': name, 'bytes': len(body), 'sha256': _sha(body)}
@@ -98,9 +91,6 @@ def retain_checkpoint_products(source, destination, issued, *, allowance=PHASE):
                 raise ValueError('Checkpoint gzip exceeds decoded file limit')
             row.update(decoded_bytes=len(decoded), decoded_sha256=_sha(decoded))
         bodies[name], descriptors[name] = body, row
-    actual = sum(row['bytes'] + 8 * row.get('decoded_bytes', row['bytes']) for row in descriptors.values())
-    if actual > total or actual > allowance:
-        raise ValueError('Checkpoint products changed after union admission')
     derived = _json(bodies['derived-publication.json'])
     facts = _json(bodies['derived-facts.json'])
     native = issued.get('native', {})
@@ -123,7 +113,7 @@ def retain_checkpoint_products(source, destination, issued, *, allowance=PHASE):
     if facts.get('native_result_sha256') != _sha(inverse_bytes):
         raise ValueError('Checkpoint native result does not bind derived products')
     admit_checkpoint_destination(destination)
-    for name in sorted(names):
+    for name in sorted(names - {'derived-publication.json'}) + ['derived-publication.json']:
         # Preserve both ordinary and dangling-symlink collision targets. A
         # failed partial write cannot publish a descriptor or final root report.
         with (destination / name).open('xb') as stream:

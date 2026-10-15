@@ -6,14 +6,13 @@ import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 const ENTRY = 'scripts/run-integration-tests.mjs';
-const CAP = 32 * 1024 * 1024;
 const authenticated = new WeakMap();
 const sha = raw => createHash('sha256').update(raw).digest('hex');
 const same = (a,b) => ['dev','ino','mode','size','mtimeMs','ctimeMs'].forEach(k=>assert.equal(a[k],b[k]));
 function ordinary(file, installed=false) {
   for(let p=file;;p=path.dirname(p)){assert(!fs.lstatSync(p).isSymbolicLink());if(p===path.dirname(p))break;}
   const stat=fs.lstatSync(file);assert(stat.isFile());
-  assert(Number.isSafeInteger(stat.size)&&stat.size>0&&(installed||stat.size<=CAP));
+  assert(Number.isSafeInteger(stat.size)&&stat.size>0);
   if(installed){assert.equal(fs.realpathSync(file),file);assert((stat.mode&73)!==0,'Installed executable requires execution permission');}
   else assert([420,493].includes(stat.mode&511));return stat;
 }
@@ -40,24 +39,22 @@ export function checkoutExecutionClosure(root) {
   const names=new Set(['package.json']);ordinary(path.join(root,'package.json'));
   function visit(relative){
     assert(!path.isAbsolute(relative)&&!relative.includes('\\')&&relative.split('/').every(p=>p&&p!=='.'&&p!=='..'));
-    if(names.has(relative))return;names.add(relative);assert(names.size<=512);
+    if(names.has(relative))return;names.add(relative);
     const {raw}=body(path.join(root,relative),{raw:true});
     for(const match of raw.toString('utf8').matchAll(/(?:from\s*|import\s*(?:\(\s*)?)['"]([^'"]+)['"]/g))
       if(match[1].startsWith('.'))visit(path.posix.normalize(path.posix.join(path.posix.dirname(relative),match[1])));
   }
   visit(ENTRY);return [...names].sort();
 }
-export function issueCheckoutExecution({root,admission}) {
+export function issueCheckoutExecution({root}) {
   actualEntry(root);
-  assert.equal(admission?.kind,'qualified-artifact-normal-package-stat-admission');
-  assert.equal(admission.numerical_aggregate_cap_applied,false);
   assert(['darwin','linux'].includes(process.platform),'Declared checkout Git implementation required');
   // macOS /usr/bin/git is a launcher. Execute and authenticate the full
   // installed implementation directly; no PATH or launcher dispatch is used.
   const tool=fs.realpathSync(process.platform==='darwin'
     ? '/Library/Developer/CommandLineTools/usr/bin/git' : '/usr/bin/git');
   const toolPin=authenticateInstalledCheckoutExecutable(tool);
-  const git=args=>execFileSync(tool,['-C',root,...args],{encoding:'utf8',maxBuffer:CAP}).trim();
+  const git=args=>execFileSync(tool,['-C',root,...args],{encoding:'utf8',maxBuffer:Infinity}).trim();
   const commit=git(['rev-parse','HEAD']),tree=git(['rev-parse','HEAD^{tree}']);
   assert(/^[a-f0-9]{40}$/.test(commit)&&/^[a-f0-9]{40}$/.test(tree));
   const files=checkoutExecutionClosure(root).map(relative=>{
@@ -69,7 +66,7 @@ export function issueCheckoutExecution({root,admission}) {
   const executable=fs.realpathSync(process.execPath),runtime=authenticateInstalledCheckoutExecutable(executable);
   const record={version:1,issue:1520,kind:'model-reader-checkout-execution',entry_point:ENTRY,profile:process.env.INTEGRATION_PROFILE,shard:Number(process.env.INTEGRATION_SHARD),
     source_root:root,stage_root:root,source_commit:commit,source_tree:tree,
-    runtime:{executable,...runtime},tool:{executable:tool,...toolPin},files,admission};
+    runtime:{executable,...runtime},tool:{executable:tool,...toolPin},files};
   assert.equal(git(['rev-parse','HEAD']),commit);assert.deepEqual(authenticateInstalledCheckoutExecutable(tool),toolPin);
   authenticated.set(record,{root,fingerprint:sha(JSON.stringify(record))});return record;
 }

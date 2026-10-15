@@ -7,7 +7,7 @@ import {gunzipSync, gzipSync} from 'node:zlib';
 import {validateNativeSelectionReceipt} from './native-ownership/require-verified-selection.mjs';
 import verifiedCandidates from './native-ownership/verified-candidates.json' with {type:'json'};
 import {canonicalValue, footprintValueSha256, polygonParts, additiveReleaseFootprintDigest} from '../src/effective-footprint.js';
-import {candidateBudget, preparationAllowance, preparationRequestAllowance, committedPreparationFiles, createNativeCandidateOutput, requirePlainExecution} from './native-ownership/native-preparation-guards.mjs';
+import {committedPreparationFiles, createNativeCandidateOutput, requirePlainExecution} from './native-ownership/native-preparation-guards.mjs';
 
 import {ImmutableReader, loadSelection} from './check-effective-geographic-regression.mjs';
 import {nativePolygonIntervals} from '../src/native-grid.js';
@@ -241,7 +241,7 @@ export function originalAdministrativeTargetHash({sourceScope,target,kind,expect
   const binding=matches[0],encoded=binding[kind+'_bytes_base64'];
   if(binding[kind+'_sha256']!==expected||typeof encoded!=='string')return false;
   const bytes=Buffer.from(encoded,'base64');
-  if(bytes.length===0||bytes.length>32*1024*1024||sha(bytes)!==expected)return false;
+  if(bytes.length===0||sha(bytes)!==expected)return false;
   try{return JSON.stringify(canonicalValue(JSON.parse(bytes)))===JSON.stringify(canonicalValue(value));}
   catch{return false;}
 }
@@ -257,40 +257,18 @@ export function originalAdministrativeCandidateHash({sourceScope,componentId,can
   if(matches?.length!==1)return false;
   const binding=matches[0],encoded=binding[kind+'_bytes_base64'];
   const derivedKey=kind==='feature'?'derived_js_canonical_sha256':'derived_js_geometry_canonical_sha256';
-  if(binding[kind+'_sha256']!==expected||binding[derivedKey]!==derived||typeof encoded!=='string'
-    ||encoded.length>Math.ceil(32*1024*1024/3)*4)return false;
+  if(binding[kind+'_sha256']!==expected||binding[derivedKey]!==derived||typeof encoded!=='string')return false;
   const bytes=Buffer.from(encoded,'base64');
-  if(bytes.length===0||bytes.length>32*1024*1024||sha(bytes)!==expected)return false;
+  if(bytes.length===0||sha(bytes)!==expected)return false;
   try{return JSON.stringify(canonicalValue(JSON.parse(bytes)))===JSON.stringify(canonicalValue(candidate));}
   catch{return false;}
-}
-
-// The request phase already charges the containing scope bytes. Charge every
-// newly decoded preimage plus parsed/canonical scratch to that SAME budget,
-// before any alias decode. Repeated native case checks retain their charges.
-export function admitAdministrativeOriginalPreimages(sourceScope,budget,{products=true,componentIds}={}) {
-  demand(budget&&typeof budget.add==='function','Missing original preimage phase budget');
-  const candidates=sourceScope.original_candidate_canonical_bindings??[];
-  const administrative=products?(sourceScope.original_administrative_canonical_bindings??[]):[];
-  demand(Array.isArray(candidates)&&Array.isArray(administrative),'Invalid original canonical binding roster');
-  const encoded=[];
-  for(const row of candidates)if(row.geometry_bytes_base64!==undefined&&(!componentIds||componentIds.includes(row.component_id)))encoded.push(row.geometry_bytes_base64);
-  for(const row of administrative)encoded.push(row.feature_bytes_base64,row.geometry_bytes_base64);
-  demand(encoded.length<=512,'Original preimage descriptor limit exceeded');
-  for(const value of encoded){
-    demand(typeof value==='string'&&value.length>0&&value.length<=Math.ceil(32*1024*1024/3)*4,
-      'Incomplete or oversized original administrative preimage');
-    const bytes=Math.floor(value.length*3/4)-(value.endsWith('==')?2:value.endsWith('=')?1:0);
-    demand(bytes>0&&bytes<=32*1024*1024,'Original preimage decoded byte limit exceeded');
-    for(let i=0;i<3;i++)budget.add({bytes});
-  }
 }
 
 // Aliases bind an ordinal of an already authenticated COMPLETE source product.
 // The old SHA must be proven by its whole original preimage, not by reformatting
 // numbers or accepting a hash declaration. Both complete parsed values must match.
 export function originalAdministrativeProductFeatures({sourceScope,pin,body}) {
-  demand(Buffer.isBuffer(body)&&body.length>0&&body.length<=32*1024*1024,'Original administrative product exceeds byte bounds');
+  demand(Buffer.isBuffer(body)&&body.length>0,'Invalid original administrative product body');
   const collection=JSON.parse(body);
   demand(collection.type==='FeatureCollection'&&Array.isArray(collection.features),'Incomplete original administrative product');
   const aliases=sourceScope.original_administrative_canonical_bindings??[];
@@ -306,10 +284,10 @@ export function originalAdministrativeProductFeatures({sourceScope,pin,body}) {
     const feature=collection.features[ordinal],original={};
     for(const kind of ['feature','geometry']){
       const expected=binding[kind+'_sha256'],encoded=binding[kind+'_bytes_base64'];
-      demand(hex(expected)&&typeof encoded==='string'&&encoded.length<=Math.ceil(32*1024*1024/3)*4,
-        'Incomplete or oversized original administrative preimage');
+      demand(hex(expected)&&typeof encoded==='string',
+        'Incomplete original administrative preimage');
       const bytes=Buffer.from(encoded,'base64');
-      demand(bytes.length>0&&bytes.length<=32*1024*1024&&sha(bytes)===expected,'Original administrative preimage hash differs');
+      demand(bytes.length>0&&sha(bytes)===expected,'Original administrative preimage hash differs');
       const value=kind==='feature'?feature:feature.geometry;
       demand(JSON.stringify(canonicalValue(JSON.parse(bytes)))===JSON.stringify(canonicalValue(value)),
         'Original administrative preimage complete value differs');
@@ -759,7 +737,7 @@ export function restoreGroupedInventoryRow(row, children) {
   return original;
 }
 
-function pinCost(pin) {
+function validatePin(pin) {
   if(pin?.kind === 'completed-inventory-body'){
     demand(safe(pin.path) && /^\.cache\/native-grid-candidates\/[A-Za-z0-9_-]+\/(publication\.json|facts\.json|inventory\.jsonl\.gz)$/.test(pin.path)
       && pin.mode==='100644' && hex(pin.sha256), 'Invalid complete inventory body');
@@ -769,13 +747,12 @@ function pinCost(pin) {
       && hex(pin.uncompressed_sha256) && /^(components|sources)-[0-9]{3}\.jsonl\.gz$/.test(pin.original_product_path), 'Invalid whole report product binding');
   } else demand(/^[a-f0-9]{40}$/.test(pin?.commit ?? '') && safe(pin.path) && ['100644','100755'].includes(pin.mode)
     && /^[a-f0-9]{40}$/.test(pin.blob ?? '') && hex(pin.sha256), 'Missing whole immutable input descriptor');
-  demand(Number.isSafeInteger(pin.bytes) && pin.bytes >= 0 && pin.bytes <= 32*1024*1024, 'Ordinary input exceeds cap');
+  demand(Number.isSafeInteger(pin.bytes) && pin.bytes >= 0, 'Invalid ordinary input byte length');
   if (pin.uncompressed_bytes !== undefined) demand(Number.isSafeInteger(pin.uncompressed_bytes)
-    && pin.uncompressed_bytes >= 0 && pin.uncompressed_bytes <= 32*1024*1024 && hex(pin.uncompressed_sha256), 'Decoded whole input exceeds cap');
-  return [{bytes: pin.bytes}, ...(pin.uncompressed_bytes === undefined ? [] : [{bytes:pin.uncompressed_bytes}])];
+    && pin.uncompressed_bytes >= 0 && hex(pin.uncompressed_sha256), 'Invalid decoded whole input descriptor');
 }
 function readPin(repo, pin) {
-  pinCost(pin);
+  validatePin(pin);
   if(pin.kind === 'original-report-product' || pin.kind === 'completed-inventory-body'){
     const file=path.join(fs.realpathSync(repo),pin.path);
     let current=fs.realpathSync(repo);
@@ -798,7 +775,7 @@ function readPin(repo, pin) {
   demand(tree === `${pin.mode} blob ${pin.blob}\t${pin.path}\0`, 'Immutable input mode/blob differs');
   const bytes = Number(execFileSync('git',['-C',repo,'cat-file','-s',pin.blob],{encoding:'utf8'}));
   demand(bytes === pin.bytes, 'Immutable input length differs');
-  const raw = execFileSync('git',['-C',repo,'cat-file','blob',pin.blob],{maxBuffer:32*1024*1024});
+  const raw = execFileSync('git',['-C',repo,'cat-file','blob',pin.blob],{maxBuffer:pin.bytes+1});
   demand(sha(raw) === pin.sha256, 'Whole encoded input changed');
   if (pin.uncompressed_bytes === undefined) return raw;
   const decoded = gunzipSync(raw,{maxOutputLength:pin.uncompressed_bytes+1});
@@ -895,7 +872,7 @@ export function requireCurrentAdministrativeTargetBank(resolver,name,expected) {
     'Current encoded administrative target inverse differs');
   return source;
 }
-export function readCurrentBaselineResolutions(repo,baseline,{request,report,project,installedModules,runtimeBytes,outputReserve,allowance}) {
+export function readCurrentBaselineResolutions(repo,baseline,{request}) {
   demand(baseline?.version===2&&baseline.kind==='current-selected-native-baseline-v1'
     &&Object.keys(baseline).sort().join(',')==='kind,pins,version'
     &&Array.isArray(baseline.pins)&&baseline.pins.length===1,'Missing explicit current baseline declaration');
@@ -904,19 +881,8 @@ export function readCurrentBaselineResolutions(repo,baseline,{request,report,pro
   const tree=execFileSync('git',['-C',repo,'ls-tree','-z','HEAD','--',pin.path],{encoding:'utf8'});
   demand(tree===`${pin.mode} blob ${pin.blob}\t${pin.path}\0`,'Stale executing current selected baseline');
   const selectedRaw=readPin(repo,pin),selected=JSON.parse(selectedRaw);
-  const codeBytes=[...project,...installedModules].reduce((sum,p)=>sum+p.bytes,0);
-  // Request/report objects and their serialized custody remain live throughout
-  // acquisition; future whole source containers have not yet been opened.
-  const carriedBytes=2*(canonical(request).length+canonical(report).length)+selectedRaw.length;
   const head=execFileSync('git',['-C',repo,'rev-parse','HEAD'],{encoding:'utf8'}).trim();
-  const reader=new ImmutableReader(repo,head,{allowance,runtimeBytes,executionBytes:codeBytes,
-    metadataBytes:8*1024*1024+carriedBytes,outputBytes:outputReserve});
-  const admit=reader.admit.bind(reader),carriedDescriptors=project.length+installedModules.length+2;
-  reader.admit=(descriptor,decoded=0)=>{
-    demand(reader.charged.has(descriptor.commit+':'+descriptor.path)||reader.charged.size+carriedDescriptors<512,
-      'Current selected phase plus carried descriptors exceeds cap');
-    return admit(descriptor,decoded);
-  };
+  const reader=new ImmutableReader(repo,head);
   const snapshot=loadSelection(reader);
   demand(snapshot&&snapshot.selection.method==='native-linear-evenodd-first-owner-v1'
     &&snapshot.manifest.accounting.owners===49625&&snapshot.owners.length===49625
@@ -938,8 +904,7 @@ export function readCurrentBaselineResolutions(repo,baseline,{request,report,pro
     manifest_sha256:snapshot.selection.sha256,source_map_sha256:snapshot.selection.selected_geography?.sha256??null,
     baseline_pin:{...pin},source_bindings:snapshot.geometrySources.sources.map(source=>({...source})),
     prior_additive:prior?{sidecar:prior.sidecar,ledger:prior.ledger,registry:prior.registry,patch:prior.patch}:null,
-    phases:snapshot.acquisitionPhases,input_inventory:[...reader.inventory.values()].map(p=>({...p})),
-    carried_request_report_bytes:carriedBytes,executing_code_bytes:codeBytes};
+    phases:snapshot.acquisitionPhases,input_inventory:[...reader.inventory.values()].map(p=>({...p}))};
   // This authenticated baseline is not a new per-component resolution/approval.
   // Existing complete inventory reconciliation continues using the V8 route.
   const resolutions=new Map();resolutionBrands.add(resolutions);currentBaselineViews.set(resolutions,custody);
@@ -965,7 +930,7 @@ function readInventoryChildren(repo, request, report, {project,runtimeSha,runtim
       && expected.facts.kind==='completed-inventory-body' && expected.inventory.kind==='completed-inventory-body'
       && [expected.publication,expected.facts,expected.inventory].every(pin=>path.dirname(pin.path)===expected.destination),
       'Foreign or reordered child stage binding');
-    pinCost(expected.request);
+    validatePin(expected.request);
     const publication=JSON.parse(readPin(repo,expected.publication));
     demand(publication.version===1 && publication.complete===true
       && ['bytes','sha256'].every(key=>publication.facts[key]===expected.facts[key])
@@ -1040,7 +1005,7 @@ function countySourcePremiseStage(repo,request) {
   demand(publication.status==='complete'&&publication.outputs.some(pin=>pin.path===rule.cases_path
     &&pin.bytes===get(rule.cases_path).pin.bytes&&pin.sha256===get(rule.cases_path).pin.sha256),'County predecessor whole publication mismatch');
   demand(operating.exit_code===0&&operating.natural_terminal===true&&operating.owned_processes_absent_after_run===true
-    &&operating.stop_reason===null&&operating.peak_sampled_group_rss_bytes<=operating.rss_cap_bytes,'Unqualified original county predecessor');
+    &&operating.stop_reason===null,'Unqualified original county predecessor');
   const reported=JSON.parse(operating.stdout);
   demand(reported.published_outputs.some(pin=>pin.path===rule.cases_path&&pin.sha256===get(rule.cases_path).pin.sha256)
     &&reported.component_count===rule.expected_ids.length,'County operating receipt belongs to other output');
@@ -1049,7 +1014,6 @@ function countySourcePremiseStage(repo,request) {
   // All original source files are consumed as whole authenticated bodies.
   for(const pin of measurement.inputs.files){const value=get(pin.path);demand(value.body.length===pin.bytes&&sha(value.body)===pin.sha256,'Original county input differs');}
   const admission=json(rule.admission_path);
-  demand(admission.status==='PASS'&&admission.complete_phase_bytes<=admission.cap_bytes,'Original county source admission incomplete');
   demand(equal(rule.original_code,admission.project_code),'Incomplete original county execution-code roster');
   for(const pin of rule.original_code){const value=get(pin.path);demand(value.body.length===pin.bytes&&sha(value.body)===pin.sha256,'Original county code differs');}
   const candidates=json(rule.candidate_path).features,originalTargets=json(rule.original_targets_path).features;
@@ -1113,7 +1077,7 @@ function countySourcePremiseStage(repo,request) {
       'No cells assigned; complete selected native owner and combined-candidate exclusions remain required.']}};
 }
 
-// Uses the existing source-premises stage, whole readPin admission and output
+// Uses the existing source-premises stage, whole readPin authentication and output
 // publication. expected_ids is a complete phase roster, never an allowlist of
 // positive cells. cohort_ids preserves the complete ordered cohort across phases.
 const RETAINED_ADMINISTRATIVE_HANDOFF=[{"role":"payloads_path","original_head":"2bbc1ce28a5c6995be10a70e79b4f872b94e69e5","accepted_merged_head":"361ae58a2e5dfb2ad9596dfef0c255fdd3c4a9f5","path":"research/geography/melanesia-gap-batch-37ed51b2-20261009/vintages/native-payloads-110-001/native-payloads-110.json","mode":"100644","blob":"fafbcedd32ce49c97e280a99ba705007e814c5d7","bytes":349724,"sha256":"1f7bec65878449856747f82801a816685727f83ddb1144350583344b032b9831"},{"role":"outcomes_path","original_head":"2bbc1ce28a5c6995be10a70e79b4f872b94e69e5","accepted_merged_head":"361ae58a2e5dfb2ad9596dfef0c255fdd3c4a9f5","path":"research/geography/melanesia-gap-batch-37ed51b2-20261009/vintages/batch-outcomes-363-002/batch-outcomes-363-v2.json","mode":"100644","blob":"1df73e14af6d424293b1bf37a9b41f07d9d3b120","bytes":1050202,"sha256":"e19ac2c7b9bb408845558facdd0b4457af73015ff93691f75d27d54c2ce05f21"},{"role":"simplified_comparison_path","original_head":"2bbc1ce28a5c6995be10a70e79b4f872b94e69e5","accepted_merged_head":"361ae58a2e5dfb2ad9596dfef0c255fdd3c4a9f5","path":"research/geography/melanesia-gap-batch-37ed51b2-20261009/vintages/source-comparison-capture-001/batch-source-comparisons.json","mode":"100644","blob":"f5141071e57b93ba1f87c11956ba34c40bcf18d5","bytes":1703412,"sha256":"ac8cdc651035ccc2cb1ca643f9baebac08b1112420cfb95859b3f6f926573029"},{"role":"generalized_comparison_path","original_head":"2bbc1ce28a5c6995be10a70e79b4f872b94e69e5","accepted_merged_head":"361ae58a2e5dfb2ad9596dfef0c255fdd3c4a9f5","path":"research/geography/melanesia-gap-batch-37ed51b2-20261009/vintages/ncl-targeted-source-match-029-001/ncl-source-matches-029.json","mode":"100644","blob":"7f52f83f171090273435b0fef5ec83374fdde890","bytes":73731,"sha256":"cd8adf21f59c2f8a8ed6c07f616862b778bde3bb47bf9e5b24fd19e68f62f659"},{"role":"remainders_path","original_head":"2bbc1ce28a5c6995be10a70e79b4f872b94e69e5","accepted_merged_head":"361ae58a2e5dfb2ad9596dfef0c255fdd3c4a9f5","path":"research/geography/melanesia-gap-batch-37ed51b2-20261009/vintages/source-remainders-084-001/source-remainders-084.json","mode":"100644","blob":"aea04a1a855260afb2cca8cd4402f3d8fcd46991","bytes":109916,"sha256":"9372e82622369f29e4374d92d12c50944dce60f4468b7842ace4f41cf3f4873d"}];
@@ -1127,7 +1091,7 @@ export function registeredAdministrativeHandoff(registry,rule) {
   demand(registry?.version===1&&registry.kind==='accepted-administrative-handoffs-v1'&&Object.keys(registry).sort().join(',')==='entries,kind,version'&&Array.isArray(registry.entries),'Unsupported administrative handoff registry');
   const batches=new Set(),components=new Set(),sources=new Set(),ids=new Set();
   const strings=value=>Array.isArray(value)&&value.length>0&&value.every(id=>typeof id==='string'&&id)&&new Set(value).size===value.length;
-  demand(registry.entries.length>0&&registry.entries.length<=512,'Incomplete registry entries');
+  demand(registry.entries.length>0,'Incomplete registry entries');
   for(const entry of registry.entries){
     const execution=entry.format===EXECUTION_COHORT_FORMAT;
     const keys=execution?'accepted_source_commit,cohort_ids,format,id,source,target_ids'
@@ -1137,7 +1101,7 @@ export function registeredAdministrativeHandoff(registry,rule) {
       &&/^[a-f0-9]{40}$/.test(entry.accepted_source_commit??'')
       &&Object.keys(entry.source??{}).sort().join(',')==='blob,bytes,mode,path,sha256'
       &&safe(entry.source.path)&&entry.source.mode==='100644'&&/^[a-f0-9]{40}$/.test(entry.source.blob??'')&&hex(entry.source.sha256)
-      &&Number.isSafeInteger(entry.source.bytes)&&entry.source.bytes>0&&entry.source.bytes<=32*1024*1024
+      &&Number.isSafeInteger(entry.source.bytes)&&entry.source.bytes>0
       &&strings(entry.cohort_ids)&&strings(entry.target_ids)
       &&(execution||typeof entry.original_batch_id==='string'&&entry.original_batch_id
         &&entry.original_component_count===entry.cohort_ids.length),'Incomplete registry entry');
@@ -1218,7 +1182,7 @@ function administrativeHandoffFor(rule) {
   demand(matches.length===1,'Unknown/ambiguous accepted administrative batch roster');return matches[0];
 }
 
-function administrativeSourcePremiseStage(repo,request,report,budget) {
+function administrativeSourcePremiseStage(repo,request,report) {
   const rule=request.source_rule,profile='retained-consumed-administrative-source';
   demand(rule?.profile===profile&&rule.version===1&&Array.isArray(rule.expected_ids)
     &&rule.expected_ids.length>0&&new Set(rule.expected_ids).size===rule.expected_ids.length
@@ -1247,7 +1211,6 @@ function administrativeSourcePremiseStage(repo,request,report,budget) {
       'Administrative comparison/outcome is outside the accepted original handoff');
   }
   const json=name=>JSON.parse(get(name).body),scope=json(rule.cases_path);
-  admitAdministrativeOriginalPreimages(scope,budget,{componentIds:rule.expected_ids});
   const views327=registration?registeredAdministrativeViews(scope,registration):(jsonl327?retainedAdministrative327Views({scope,geometryScope,operands:[...bodies.values()]}):null);
   const payloads=views327?.payloads??json(rule.payloads_path).additive_payloads,outcomes=views327?.outcomes??json(rule.outcomes_path).cases;
   const gb=views327?.gb??json(rule.simplified_comparison_path).cases,ncl=views327?.ncl??json(rule.generalized_comparison_path).cases;
@@ -1367,8 +1330,8 @@ function administrativeSourcePremiseStage(repo,request,report,budget) {
       'Current source-file equality is not selected-bank geometry applicability. Genuine current snapshot/rebind, full native/neighbor conservation and activation remain required.'])}};
 }
 
-function sourcePremiseStage(repo,request,report,budget) {
-  if(request.source_rule?.profile==='retained-consumed-administrative-source')return administrativeSourcePremiseStage(repo,request,report,budget);
+function sourcePremiseStage(repo,request,report) {
+  if(request.source_rule?.profile==='retained-consumed-administrative-source')return administrativeSourcePremiseStage(repo,request,report);
   if(request.source_rule?.profile==='retained-USA-ADM2-counties-2018')return countySourcePremiseStage(repo,request);
   const rule=request.source_rule;
   demand(rule?.version===1&&Array.isArray(rule.inputs)&&rule.inputs.length===12&&Array.isArray(rule.expected_ids)
@@ -1456,7 +1419,7 @@ function additiveProposalStage(repo,request) {
   const candidateIndex=nativeRuntimeIndex([{id:target.id,pixelIndex:owner.index,geometry:selected.candidate}]);
   const coordinates=polygonParts(selected.candidate).flat(2),max=Math.max(...coordinates.map(point=>point[1])),min=Math.min(...coordinates.map(point=>point[1]));
   const first=Math.max(0,latitudes.findIndex(value=>value<=max)-1),stop=latitudes.findIndex(value=>value<min),end=stop<0?size:Math.min(size,stop+1);
-  demand(first>=0&&end>first&&end-first<=4096,'Candidate requires another bounded whole-row window');
+  demand(first>=0&&end>first,'Invalid whole-row candidate window');
   const native=nativePolygonIntervals(candidateIndex,{size,latitudes,rowStart:first,rowEnd:end}),containers=[];
   for(const body of spec.owner_parts){
     const descriptor=manifest.parts.find(part=>part.path===body.manifest_path),entry=get(body.path);
@@ -1572,8 +1535,8 @@ export function validateAdministrativeNativeCase({selected,sourceCase,sourceScop
   return premises;
 }
 
-function additiveBatchProposalStage(repo,request,resolutions,budget) {
-  if(request.additive?.source_profile==='retained-consumed-administrative-source')return administrativeBatchProposalStage(repo,request,resolutions,budget);
+function additiveBatchProposalStage(repo,request,resolutions) {
+  if(request.additive?.source_profile==='retained-consumed-administrative-source')return administrativeBatchProposalStage(repo,request,resolutions);
   return countyBatchProposalStage(repo,request);
 }
 function countyBatchProposalStage(repo,request) {
@@ -1615,7 +1578,7 @@ function countyBatchProposalStage(repo,request) {
     demand(sourceCase.geometry_validity.candidate.valid===true&&sourceCase.geometry_validity.candidate.empty===false,'Invalid original batch primitive');
     const coordinates=polygonParts(selected.candidate).flat(2),max=Math.max(...coordinates.map(point=>point[1])),min=Math.min(...coordinates.map(point=>point[1]));
     const first=Math.max(0,latitudes.findIndex(value=>value<=max)-1),stop=latitudes.findIndex(value=>value<min),end=stop<0?size:Math.min(size,stop+1);
-    demand(first>=0&&end>first&&end-first<=4096,'Batch candidate requires another bounded row phase');
+    demand(first>=0&&end>first,'Invalid batch candidate row interval');
     const index=nativeRuntimeIndex([{id:target.id,pixelIndex:owner.index,geometry:selected.candidate}]);
     const native=nativePolygonIntervals(index,{size,latitudes,rowStart:first,rowEnd:end});
     const rows=[];for(let y=first;y<end;y++){wantedRows.add(y);rows.push({y,runs:(native.rows.get(y)??[]).map(span=>[span.start,span.end,owner.index])});}
@@ -1690,7 +1653,7 @@ function countyBatchProposalStage(repo,request) {
 }
 
 
-function requireAdministrativeSourceBaseline(repo,{issued,request,resolutions,budget}) {
+function requireAdministrativeSourceBaseline(repo,{issued,request,resolutions}) {
   const equal=(a,b)=>JSON.stringify(canonicalValue(a))===JSON.stringify(canonicalValue(b));
   if(equal(issued.baseline,request.baseline))return;
   const current=currentBaselineViews.get(resolutions);
@@ -1705,11 +1668,6 @@ function requireAdministrativeSourceBaseline(repo,{issued,request,resolutions,bu
   const old=issued.baseline.pins[0],now=request.baseline.pins[0];
   demand(old.kind===undefined&&old.path==='data/ownership-selection.json'
     &&equal(now,current.baseline_pin),'Current native selector custody differs');
-  demand(budget&&typeof budget.add==='function','Missing historical selector prospective admission');
-  for(const item of pinCost(old))budget.add(item);
-  // Complete encoded body plus parsed/canonical scratch remain charged;
-  // use separate member-sized entries, preserving the stock per-member cap.
-  for(let i=0;i<3;i++)budget.add({bytes:old.bytes});
   const historical=JSON.parse(readPin(repo,old));
   demand(['method','manifest_path','sha256','release_id'].every(key=>historical[key]===current.selection[key])
     &&equal(historical.selected_geography,current.selection.selected_geography),
@@ -1728,7 +1686,7 @@ function requireAdministrativeSourceBaseline(repo,{issued,request,resolutions,bu
   }
 }
 
-function administrativeBatchProposalStage(repo,request,resolutions,budget) {
+function administrativeBatchProposalStage(repo,request,resolutions) {
   const spec=request.additive,inputs=new Map(),equal=(a,b)=>JSON.stringify(canonicalValue(a))===JSON.stringify(canonicalValue(b));
   for(const pin of spec.inputs){demand(!inputs.has(pin.path),'Duplicate batch operand');inputs.set(pin.path,{pin,body:readPin(repo,pin)});}
   const get=name=>{if(!inputs.has(name)){const pin=request.baseline.pins.find(pin=>pin.path===name);demand(pin,'Missing complete batch operand');inputs.set(name,{pin,body:readPin(repo,pin)});}return inputs.get(name);};
@@ -1742,7 +1700,7 @@ function administrativeBatchProposalStage(repo,request,resolutions,budget) {
     &&equal(facts.executed_code,issued.executed_code)&&equal(facts.input_descriptors,[issued.report,...issued.source_rule.inputs,...issued.baseline.pins])
     &&equal(facts.runtime,spec.source_runtime)&&equal(facts.installed_modules,issued.installed_modules)
     &&equal(facts.parent,request.parent),'Batch predecessor closure/vintage differs');
-  requireAdministrativeSourceBaseline(repo,{issued,request,resolutions,budget});
+  requireAdministrativeSourceBaseline(repo,{issued,request,resolutions});
   demand(operating.qualified===true&&operating.execution_commit===facts.execution_commit&&operating.exit?.code===0
     &&operating.exit.signal===null&&operating.owned_processes_remaining?.length===0&&operating.refusal===null
     &&operating.request_sha256===facts.request.sha256&&operating.destination===issued.destination,'Unqualified batch source execution');
@@ -1771,14 +1729,13 @@ function administrativeBatchProposalStage(repo,request,resolutions,budget) {
       &&target.properties.parent_id===owner.province_id&&footprintValueSha256(target.geometry)===selected.target_geometry_sha256,'Stale batch target/owner join');
     const casePin=selected.source_case?.source;demand(casePin&&spec.inputs.some(pin=>equal(pin,casePin)),'Original full batch case omitted');
     const sourceScope=json(casePin.path),sourceCase=sourceScope.candidate_source_native_bindings[selected.source_case.ordinal];
-    admitAdministrativeOriginalPreimages(sourceScope,budget,{products:false,componentIds:[selected.component_id]});
     demand(sourceCase?.component_id===selected.component_id&&sha(canonical(sourceCase))===selected.source_case.row_sha256,'Original batch case drift');
     validateAdministrativeNativeCase({selected,sourceCase,sourceScope,target,owner,geometryScope:facts.geometry_scope});
     if(!selected.source_compatible)continue;
     demand(polygonParts(selected.candidate).length>0,'Empty administrative native primitive');
     const coordinates=polygonParts(selected.candidate).flat(2),max=Math.max(...coordinates.map(point=>point[1])),min=Math.min(...coordinates.map(point=>point[1]));
     const first=Math.max(0,latitudes.findIndex(value=>value<=max)-1),stop=latitudes.findIndex(value=>value<min),end=stop<0?size:Math.min(size,stop+1);
-    demand(first>=0&&end>first&&end-first<=4096,'Batch candidate requires another bounded row phase');
+    demand(first>=0&&end>first,'Invalid batch candidate row interval');
     const index=nativeRuntimeIndex([{id:target.id,pixelIndex:owner.index,geometry:selected.candidate}]);
     const native=nativePolygonIntervals(index,{size,latitudes,rowStart:first,rowEnd:end});
     const rows=[];for(let y=first;y<end;y++){wantedRows.add(y);rows.push({y,runs:(native.rows.get(y)??[]).map(span=>[span.start,span.end,owner.index])});}
@@ -1854,53 +1811,9 @@ function administrativeBatchProposalStage(repo,request,resolutions,budget) {
 }
 
 // One genuine detached whole-shard acquisition per invocation. The parent
-// report supplies the complete denominator; an independently frozen scope
-// supplies exact selected IDs/ordered feature hashes. No all-world JSON lives
-// in this process. Parent joining is a subsequent bounded custody operation.
-// A same-runtime external supervisor is charged during every child phase too.
-// Historical requests without this new binding retain their original budget.
-export function externalOperatingReserve(request, requestBytes) {
-  const operating=request.operating_runtime;if(operating===undefined)return 0;
-  demand(operating.version===1&&operating.platform==='linux'&&Array.isArray(operating.runtime)
-    &&operating.runtime.map(p=>p.role).join(',')==='git,node,process-inspector,time','Incomplete operating runtime');
-  demand(operating.runtime.every(p=>typeof p.path==='string'&&path.isAbsolute(p.path)&&hex(p.sha256)
-    &&Number.isSafeInteger(p.bytes)&&p.bytes>0&&p.mode===0o755)
-    &&new Set(operating.runtime.map(p=>p.path)).size===4,'Invalid operating runtime pins');
-  const supervisor=operating.supervisor;
-  demand(supervisor?.path==='coordination/engineering/melanesia363-additive-delivery-20261010/supervise-source-native-linux.mjs'
-    &&Number.isSafeInteger(supervisor.bytes)&&supervisor.bytes>0&&supervisor.bytes<=131072&&hex(supervisor.sha256)
-    &&Number.isSafeInteger(requestBytes)&&requestBytes>0&&requestBytes<=131072,'Invalid operating supervisor/request binding');
-  // Node is already charged by the scientific child. The rest is the external
-  // executable closure, parent request/code, and bounded raw monitoring output.
-  let operatingOutputs=13*1024*1024;
-  if(request.operating_profile==='source-native-v2'){
-    const l=request.operating_limits;
-    demand(l&&Object.keys(l).sort().join(',')==='log_bytes,monitor_bytes,output_bytes,receipt_bytes,retained_bytes,rss_bytes,wall_seconds'
-      &&Object.values(l).every(n=>Number.isSafeInteger(n)&&n>0)&&Number.isSafeInteger(l.wall_seconds*1000),'Complete finite source/native operating limits required');
-    demand(Number.isSafeInteger(l.output_bytes+l.receipt_bytes)&&l.output_bytes+l.receipt_bytes<=l.retained_bytes&&l.log_bytes<=l.retained_bytes&&l.monitor_bytes<=l.retained_bytes
-      &&l.log_bytes<=l.rss_bytes&&l.monitor_bytes<=l.rss_bytes&&l.receipt_bytes<=l.rss_bytes
-      &&Number.isSafeInteger(request.output_reserve+131072)&&l.output_bytes>=request.output_reserve+131072,'Source/native output/operating reserve differs');
-    demand(request.processing_allowance?.phaseBytes<=l.rss_bytes&&request.processing_allowance?.rssBytes<=l.rss_bytes,'Source/native reader exceeds issued group allowance');
-    const names=['scripts/local-workspace.mjs','scripts/worker-identity.mjs'];demand(Array.isArray(operating.support_code)&&JSON.stringify(operating.support_code.map(p=>p.path))===JSON.stringify(names)&&operating.support_code.every(p=>Number.isSafeInteger(p.bytes)&&p.bytes>0&&p.bytes<=32*1024*1024&&hex(p.sha256)),'Complete source/native operating support pins required');
-    operatingOutputs=l.log_bytes+l.monitor_bytes+l.receipt_bytes+2*operating.support_code.reduce((n,p)=>n+p.bytes,0);demand(Number.isSafeInteger(operatingOutputs),'Source/native operating reserve overflow');
-  }else demand(request.operating_profile===undefined&&request.operating_limits===undefined&&request.processing_allowance===undefined&&operating.support_code===undefined,'Foreign historical operating profile');
-  return operating.runtime.filter(p=>p.role!=='node').reduce((n,p)=>n+p.bytes,0)
-    +supervisor.bytes+requestBytes+operatingOutputs;
-}
-
-export function inventoryResourceAdmission(request,bootstrapAllowance=preparationAllowance()){
-  const allowance=request.processing_allowance===undefined
-    ?(request.operating_runtime?preparationAllowance({phaseBytes:256*1024*1024,rssBytes:1024**3}):bootstrapAllowance)
-    :preparationRequestAllowance(request.processing_allowance);
-  const outputReserve = request.output_reserve;
-  demand(Number.isSafeInteger(outputReserve) && outputReserve >= 131072 && outputReserve <= allowance.phaseBytes, 'Explicit admitted output reserve required');
-  if(request.operating_runtime&&request.operating_profile===undefined)demand(outputReserve<=96*1024*1024,'Literal historical output reserve exceeded');
-  return {allowance,outputReserve};
-}
-
+// report supplies the complete denominator and exact selected IDs/feature hashes.
 export function inventoryCommand({repo, commit, requestPin, destination}) {
-  requirePlainExecution({boundedHeap:true});
-  const bootstrapAllowance=preparationAllowance();
+  requirePlainExecution();
   const sourceRoot = admitInventoryDestination(repo,destination);
   demand(execFileSync('git',['-C',sourceRoot,'rev-parse','HEAD'],{encoding:'utf8'}).trim() === commit,
     'Executing immutable head differs');
@@ -1915,38 +1828,26 @@ export function inventoryCommand({repo, commit, requestPin, destination}) {
     'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs',
     'node_modules/@noble/hashes/package.json'];
   const projectNames = codeNames.filter(name=>!name.startsWith('node_modules/')).concat('package-lock.json');
-  const projectSizes = projectNames.map(name=>({bytes:fs.lstatSync(path.join(sourceRoot,name)).size}));
-  candidateBudget([...projectSizes,...pinCost(requestPin)],{reserveBytes:runtimeStat.size+131072,allowance:bootstrapAllowance});
   const project = committedPreparationFiles(sourceRoot,commit,projectNames);
-  const requestBudget = candidateBudget([...project, ...pinCost(requestPin)],{reserveBytes:runtimeStat.size+131072,allowance:bootstrapAllowance});
   const request = JSON.parse(readPin(sourceRoot,requestPin));
-  const operatingReserve=externalOperatingReserve(request,requestPin.bytes);
-  if(request.operating_profile==='source-native-v2')demand(process.execArgv.length===0,'Current source/native profile requires plain Node launch');
-  demand(!process.execArgv.length || (request.operation===SOURCE_PREMISES_VERSION
-    &&request.source_rule?.profile==='retained-consumed-administrative-source')
-    ||(request.operation===ADDITIVE_BATCH_PROPOSAL_VERSION
-    &&request.additive?.source_profile==='retained-consumed-administrative-source'),
-    'Bounded heap profile is limited to administrative source/native stages');
   demand(request.version === 1 && [INVENTORY_VERSION,GROUP_JOIN_VERSION,COMPLETE_JOIN_VERSION,SOURCE_PREMISES_VERSION,ADDITIVE_PROPOSAL_VERSION,ADDITIVE_BATCH_PROPOSAL_VERSION].includes(request.operation)
     && JSON.stringify(canonicalValue(request.executed_code)) === JSON.stringify(canonicalValue(project)),
     'Foreign request operation/head');
   demand(typeof destination === 'string' && destination === request.destination
     && (request.operation!==INVENTORY_VERSION || Array.isArray(request.expected_ids) || request.scope === 'whole-original-report-shard'), 'Foreign output/scope');
-  const {allowance,outputReserve}=inventoryResourceAdmission(request,bootstrapAllowance);
   const dependencyNames = ['package.json','sha2.js','_md.js','_u64.js','utils.js'].map(name=>'node_modules/@noble/hashes/'+name);
   demand(Array.isArray(request.installed_modules) && request.installed_modules.length === dependencyNames.length
     && request.installed_modules.every((pin,i)=>pin.path === dependencyNames[i] && hex(pin.sha256)
-      && Number.isSafeInteger(pin.bytes) && pin.bytes <= 32*1024*1024), 'Complete actual installed import closure required');
+      && Number.isSafeInteger(pin.bytes)), 'Complete actual installed import closure required');
   const verifyModules = () => request.installed_modules.forEach(pin=>{
     const file = path.join(sourceRoot,pin.path), stat = fs.lstatSync(file);
     demand(stat.isFile() && !stat.isSymbolicLink() && fs.realpathSync(file) === file && stat.size === pin.bytes && sha(fs.readFileSync(file)) === pin.sha256,
       'Actual installed module drift');
   });
   const stagePins=[ADDITIVE_PROPOSAL_VERSION,ADDITIVE_BATCH_PROPOSAL_VERSION].includes(request.operation)?request.additive?.inputs:request.operation===SOURCE_PREMISES_VERSION?request.source_rule?.inputs:request.operation===INVENTORY_VERSION?[request.source]:request.children?.flatMap(child=>[child.publication,child.facts,child.inventory]);
-  demand(Array.isArray(stagePins) && stagePins.length>0 && stagePins.length<=213, 'Missing complete child body roster');
+  demand(Array.isArray(stagePins) && stagePins.length>0, 'Missing complete child body roster');
   const baselinePins=[INVENTORY_VERSION,SOURCE_PREMISES_VERSION,ADDITIVE_PROPOSAL_VERSION,ADDITIVE_BATCH_PROPOSAL_VERSION].includes(request.operation)?(request.baseline?.pins??[]):[];
-  const inputs = [...project,...request.installed_modules,...pinCost(requestPin),...pinCost(request.report),...stagePins.flatMap(pinCost),...baselinePins.flatMap(pinCost)];
-  const budget = candidateBudget(inputs,{reserveBytes:runtimeStat.size+outputReserve+131072+operatingReserve,allowance});
+  for(const pin of [requestPin,request.report,...stagePins,...baselinePins])validatePin(pin);
   const runtimeRead=()=>{
     const before=fs.lstatSync(process.execPath);
     demand(before.isFile() && !before.isSymbolicLink() && before.size===runtimeStat.size
@@ -1979,18 +1880,17 @@ export function inventoryCommand({repo, commit, requestPin, destination}) {
     ||(request.operation===ADDITIVE_BATCH_PROPOSAL_VERSION&&request.additive?.source_profile==='retained-consumed-administrative-source'),
     'Current baseline route is limited to administrative source/native stages');
   const resolutions=baselinePins.length?(currentBaseline
-    ?readCurrentBaselineResolutions(sourceRoot,request.baseline,{request,report,project,installedModules:request.installed_modules,runtimeBytes:runtimeStat.size,outputReserve:outputReserve+operatingReserve,allowance})
+    ?readCurrentBaselineResolutions(sourceRoot,request.baseline,{request})
     :readBaselineResolutions(sourceRoot,request.baseline)):undefined;
   const baselineCustody=currentBaselineViews.get(resolutions);
-  if(baselineCustody)budget.add({bytes:2*canonical(baselineCustody).length});
   let result;
   if(request.operation===ADDITIVE_BATCH_PROPOSAL_VERSION){
-    demand(resolutions,'Complete selected-bank reconciliation required');result=additiveBatchProposalStage(sourceRoot,request,resolutions,budget);
+    demand(resolutions,'Complete selected-bank reconciliation required');result=additiveBatchProposalStage(sourceRoot,request,resolutions);
   }else if(request.operation===ADDITIVE_PROPOSAL_VERSION){
     demand(resolutions,'Complete selected-bank reconciliation required');result=additiveProposalStage(sourceRoot,request);
   }else if(request.operation===SOURCE_PREMISES_VERSION){
     demand(resolutions,'Complete selected-bank reconciliation required');
-    result=sourcePremiseStage(sourceRoot,request,report,budget);
+    result=sourcePremiseStage(sourceRoot,request,report);
   }else if(request.operation===INVENTORY_VERSION){
   demand(/^components-[0-9]{3}\.jsonl\.gz$/.test(request.original_product_path), 'Only complete original component shards accepted');
   const product = report.products.find(pin=>pin.path === request.original_product_path);
@@ -2014,17 +1914,15 @@ export function inventoryCommand({repo, commit, requestPin, destination}) {
   const facts = canonical({...result.facts,execution_commit:commit,executed_code:project,request:requestPin,
     input_descriptors:[request.report,...stagePins,...baselinePins],baseline:request.baseline??null,
     ...(baselineCustody?{baseline_acquisition:baselineCustody}:{}),runtime:{bytes:runtimeStat.size,sha256:runtimeSha},
-    installed_modules:request.installed_modules, admission:budget.snapshot(), request_admission:requestBudget.snapshot()});
-  demand(body.length <= 32*1024*1024 && encoded.length <= 32*1024*1024 && body.length+encoded.length+facts.length+(result.assets??[]).reduce((n,asset)=>n+asset.body.length+(asset.decoded_bytes??0),0) <= outputReserve,
-    'Complete outputs exceed prospective reserve');
+    installed_modules:request.installed_modules});
   demand(runtimeRead() === runtimeSha, 'Installed runtime drift');
   verifyModules();
   committedPreparationFiles(sourceRoot,commit,project.map(pin=>pin.path));
-  for(const asset of result.assets??[])demand(/^[a-z0-9-]+\.json(?:\.gz)?$/.test(asset.name)&&asset.body.length<=32*1024*1024,'Foreign/oversized release asset');
+  for(const asset of result.assets??[])demand(/^[a-z0-9-]+\.json(?:\.gz)?$/.test(asset.name),'Foreign release asset');
   const output = createNativeCandidateOutput(sourceRoot,destination);
   fs.writeFileSync(path.join(output,'inventory.jsonl.gz'),encoded,{flag:'wx'});
   fs.writeFileSync(path.join(output,'facts.json'),facts,{flag:'wx'});
-  for(const asset of result.assets??[]){demand(/^[a-z0-9-]+\.json(?:\.gz)?$/.test(asset.name)&&asset.body.length<=32*1024*1024,'Foreign/oversized release asset');fs.writeFileSync(path.join(output,asset.name),asset.body,{flag:'wx'});}
+  for(const asset of result.assets??[]){demand(/^[a-z0-9-]+\.json(?:\.gz)?$/.test(asset.name),'Foreign release asset');fs.writeFileSync(path.join(output,asset.name),asset.body,{flag:'wx'});}
   const publication = {version:1,complete:true,...(result.assets?{assets:result.assets.map(asset=>({path:asset.name,bytes:asset.body.length,sha256:sha(asset.body),...(asset.decoded_bytes?{uncompressed_bytes:asset.decoded_bytes,uncompressed_sha256:asset.decoded_sha256}:{})}))}:{}),facts:{bytes:facts.length,sha256:sha(facts)},
     inventory:{bytes:encoded.length,sha256:sha(encoded),uncompressed_bytes:body.length,uncompressed_sha256:sha(body)}};
   fs.writeFileSync(path.join(output,'publication.json'),canonical(publication),{flag:'wx'});

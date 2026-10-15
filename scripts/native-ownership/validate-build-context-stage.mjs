@@ -1,4 +1,4 @@
-// Mandatory original lineage plus a separately bounded explicit geometry migration.
+// Mandatory original lineage plus an explicit geometry migration.
 // This validates a build input; it never grants geographic or factual approval.
 import fs from 'node:fs';
 import path from 'node:path';
@@ -6,7 +6,6 @@ import assert from 'node:assert/strict';
 import {gunzipSync} from 'node:zlib';
 import {validateContextInputStage,CONTEXT_STAGE_PATH} from './validate-context-input-stage.mjs';
 import {validateContextMigration} from './validate-context-migration.mjs';
-import {candidateBudget,preparationAllowance,preparationRequestAllowance} from './native-preparation-guards.mjs';
 import {readPinnedBuildFile} from './read-pinned-build-file.mjs';
 import {repositoryReader,safeEvidencePath,sha256} from '../evidence-quality.mjs';
 import {validateChainedBuildContext} from './chained-build-context.mjs';
@@ -23,26 +22,25 @@ export const BUILD_CONTEXT_VALIDATOR_SOURCES=[
 ];
 const fail=(ok,message)=>{if(!ok)throw Error(message);};
 export async function validateBuildContextStage({root=process.cwd(),expectedReference,
- stagePath=BUILD_CONTEXT_STAGE_PATH,readFile,currentExecution,processingAllowance}={}) {
- const allowance=processingAllowance===undefined?preparationAllowance():preparationRequestAllowance(processingAllowance);
+ stagePath=BUILD_CONTEXT_STAGE_PATH,readFile,currentExecution}={}) {
  safeEvidencePath(stagePath);
  if(!fs.existsSync(path.join(root,stagePath))&&!readFile){
   const receipt=await validateContextInputStage({root,expectedReference});
   return {receipt};
  }
  const ordinary=readFile??repositoryReader(root),stageRaw=ordinary(stagePath,'candidate'),stage=JSON.parse(stageRaw);
- if(stage.version===2)return validateChainedBuildContext({root,expectedReference,stagePath,stageRaw,stage,readFile,currentExecution,processingAllowance:allowance});
+ if(stage.version===2)return validateChainedBuildContext({root,expectedReference,stagePath,stageRaw,stage,readFile,currentExecution});
  fail(stage.version===1&&Number.isSafeInteger(stage.issue)&&stage.issue>0&&stage.lane==='engineering'&&stage.kind==='retained-identity-context-migration-v1'&&!stage.input_stages,
   'Unsupported build context migration stage');
  fail(stage.original_stage?.path===CONTEXT_STAGE_PATH,'Wrong mandatory original context stage');
  assert.deepEqual(stage.validator_sources.map(p=>p.path).sort(),[...BUILD_CONTEXT_VALIDATOR_SOURCES].sort(),
   'Incomplete or duplicate migrated context validator closure');
- const budget=candidateBudget([],{allowance}),checked=new Map();budget.add({bytes:stageRaw.length});
+ const checked=new Map();
  const read=pin=>{
   safeEvidencePath(pin?.path);fail(Number.isSafeInteger(pin.bytes)&&pin.bytes>=0&&/^[a-f0-9]{64}$/.test(pin.sha256??''),'Invalid context stage byte pin');
   if(checked.has(pin.path)){assert.deepEqual(checked.get(pin.path),pin,'Conflicting context stage pin');return ordinary(pin.path,'candidate');}
   const raw=ordinary(pin.path,'candidate');fail(raw.length===pin.bytes&&sha256(raw)===pin.sha256,'Context migration input bytes differ: '+pin.path);
-  budget.add({bytes:raw.length});checked.set(pin.path,pin);return raw;
+  checked.set(pin.path,pin);return raw;
  };
  for(const pin of stage.validator_sources)read(pin);
  const originalManifest=JSON.parse(read(stage.original_stage));
@@ -55,7 +53,7 @@ export async function validateBuildContextStage({root=process.cwd(),expectedRefe
    'Invalid or duplicate original context snapshot override');
   aliases.set(key,alias);read({path:alias.path,bytes:alias.bytes,sha256:alias.sha256});
  }
- const registry=JSON.parse(gunzipSync(read(stage.releases),{maxOutputLength:32*1024*1024}));
+ const registry=JSON.parse(gunzipSync(read(stage.releases)));
  const predecessor=registry.releases.at(-2),release=registry.releases.at(-1);
  fail(predecessor?.id===stage.predecessor_release_id&&release?.id===stage.successor_release_id,
   'Wrong actual context migration release chain');
@@ -73,7 +71,7 @@ export async function validateBuildContextStage({root=process.cwd(),expectedRefe
  fail(registryPin&&stage.predecessor_registry.path===registryPin.snapshot_path&&stage.predecessor_registry.bytes===registryPin.bytes&&
   stage.predecessor_registry.sha256===registryPin.sha256&&registryPin.sha256===originalPointer.sha256,
   'Unbound original release registry');
- const originalRegistry=JSON.parse(gunzipSync(read(stage.predecessor_registry),{maxOutputLength:32*1024*1024}));
+ const originalRegistry=JSON.parse(gunzipSync(read(stage.predecessor_registry)));
  assert.equal(registry.version,originalRegistry.version);assert.equal(registry.original_catalog_sha256,originalRegistry.original_catalog_sha256);
  assert.deepEqual(registry.releases.slice(0,-1),originalRegistry.releases,'Original release records changed');
  assert.deepEqual(registry.batches.slice(0,originalRegistry.batches.length),originalRegistry.batches,'Original release batch records changed');
@@ -94,7 +92,7 @@ export async function validateBuildContextStage({root=process.cwd(),expectedRefe
     assert.deepEqual(descriptor,reusableParts.find(original=>original.path===part.path),'Reused context part differs from its complete original descriptor');
     partPath=path.posix.dirname(stage.before_context.path)+'/'+part.path;
    }
-   const raw=read({path:partPath,bytes:part.bytes,sha256:part.sha256}),decoded=gunzipSync(raw,{maxOutputLength:32*1024*1024});
+   const raw=read({path:partPath,bytes:part.bytes,sha256:part.sha256}),decoded=gunzipSync(raw,{maxOutputLength:part.uncompressed_bytes+1});
    fail(decoded.length===part.uncompressed_bytes&&sha256(decoded)===part.uncompressed_sha256,'Context decoded bytes differ');
    features.push(...JSON.parse(decoded));
   }
@@ -105,7 +103,7 @@ export async function validateBuildContextStage({root=process.cwd(),expectedRefe
  assert.equal(before.inputs.footprints_sha256,originalReceipt.footprints_sha256);assert.equal(before.inputs.owner_sha256,originalReceipt.owner_sha256);
  const geometryManifest=JSON.parse(read(stage.geometry_manifest)),base=path.posix.dirname(stage.geometry_manifest.path);
  const geometryPins=Object.entries(geometryManifest.files).map(([name,pin])=>({path:path.posix.normalize(base+'/'+(pin.archive_path??name)),bytes:pin.bytes,sha256:pin.sha256}));
- assert.deepEqual(stage.geometry_files,geometryPins,'Incomplete geometry proof file budget');
+ assert.deepEqual(stage.geometry_files,geometryPins,'Incomplete geometry proof file inventory');
  for(const pin of geometryPins)read(pin);
  const migration=validateContextMigration({original:before.features,migrated:after.features,candidates,
   predecessorRelease:predecessor,release,migrationManifestFile:path.join(root,stage.geometry_manifest.path)});
@@ -113,6 +111,6 @@ export async function validateBuildContextStage({root=process.cwd(),expectedRefe
  assert.equal(migration.owner_sha256,originalReceipt.owner_sha256);
  const {geometryValidation,...migrationReceipt}=migration;
  return {receipt:{status:'verified',stage_path:stagePath,stage_sha256:sha256(stageRaw),original_stage:originalReceipt,
-   migration:migrationReceipt,checked_files:checked.size,budget:budget.snapshot(),scientific_approval:false},
+   migration:migrationReceipt,checked_files:checked.size,scientific_approval:false},
    predecessorRelease:predecessor,geometryValidation};
 }

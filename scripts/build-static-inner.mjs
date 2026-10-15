@@ -75,10 +75,10 @@ if(sidecarRaw){
     const {consumeQualifiedArcticArtifacts}=await import('../coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifact-consumer.mjs');
     continuedContext=await consumeQualifiedArcticArtifacts({root:process.cwd(),stage:contextStage,selection:JSON.parse(await fs.readFile('data/ownership-selection.json')),restoredReceipt:restoredCanonical,currentExecution});
   }else{
-    const admission=preflightArcticPackage({root:process.cwd(),stageRaw:sidecarRaw,stage:contextStage,priorImage:restoredCanonical.priorImage});
+    const admission=preflightArcticPackage({root:process.cwd(),stage:contextStage,priorImage:restoredCanonical.priorImage});
     const execution=readPackageCurrentExecution(process.cwd());
     const priorRegistry=JSON.parse(gunzipSync(await fs.readFile(contextStage.priorRegistry.path)));
-    continuedContext=await validateArcticBuildContext({root:process.cwd(),stageRaw:sidecarRaw,stage:contextStage,currentExecution:execution,reservation:admission.reservation,predecessorReference:priorRegistry.releases.at(-1)});
+    continuedContext=await validateArcticBuildContext({root:process.cwd(),stageRaw:sidecarRaw,stage:contextStage,currentExecution:execution,predecessorReference:priorRegistry.releases.at(-1)});
     releaseBuildContextBaselines(continuedContext);
   }
   continuedContext.installation=await installV9Stage({root:process.cwd(),stage:contextStage,context:continuedContext});

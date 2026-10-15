@@ -4,7 +4,7 @@ import test from 'node:test';
 
 // Part of the normal test/*.test.mjs inventory. Unlike a deliberately limited
 // standalone pure-Python check, CI must execute the real Git/GEOS controls.
-test('source-cohort admission, scientific predicates and immutable outputs', () => {
+test('source-cohort identity, scientific predicates and immutable outputs', () => {
   const result = spawnSync(process.env.WORLDATLAS_TEST_PYTHON ?? process.env.PYTHON ?? 'python3',
     ['-I', '-B', 'test/source-cohort.test.py'], {
       cwd: new URL('..', import.meta.url), encoding: 'utf8', timeout: 60000, maxBuffer: 2 * 1024 * 1024,

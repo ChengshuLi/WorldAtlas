@@ -2,9 +2,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
-import {ImmutableReader,loadSelection,processingAllowance} from '../../../scripts/check-effective-geographic-regression.mjs';
+import {ImmutableReader,loadSelection} from '../../../scripts/check-effective-geographic-regression.mjs';
 import {loadPackageInputs,containsPackagePath,admitPackageInputTransition} from '../../../scripts/package-inputs.mjs';
-import {valueBytes,valueSha} from '../selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {valueSha} from '../selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 
 const demand=(v,m)=>{if(!v)throw Error(m);};
 const publications=new WeakMap();
@@ -18,23 +18,20 @@ const ordinary=name=>{
 };
 
 // A selected reader deliberately freezes its accepted descriptors. A new copy
-// frame reauthenticates the four already accepted pins while charging every
-// retained selection/view/descriptor byte. Returned bytes grant no authority.
+// reauthenticates the four already accepted whole pins. Returned bytes grant
+// no authority.
 export function readBoundPublicationAssets(reader,roster,declared) {
   demand(roster.length===4&&new Set(roster.map(p=>p.pin.path)).size===4,'Four distinct bound publication bodies required');
-  const copy=new ImmutableReader(reader.repo,reader.version,{
-    runtimeBytes:reader.runtimeBytes,executionBytes:reader.executionBytes,
-    metadataBytes:reader.metadataBytes+2*valueBytes([...reader.inventory.values()]).length,
-    outputBytes:reader.outputBytes,gitExecutable:reader.gitExecutable,allowance:reader.allowance});
+  const copy=new ImmutableReader(reader.repo,reader.version,{gitExecutable:reader.gitExecutable,invocation:reader.invocation});
   const actual=roster.map(({pin})=>{
     demand(declared(pin.path),'Undeclared additive publication body');
     let version=pin.commit;try{copy.git('cat-file','-e',version+'^{commit}');}catch{version=copy.version;}
     const p=copy.descriptor(pin.path,version);
     demand(p.mode===pin.mode&&p.git_blob_oid===pin.git_blob_oid&&p.bytes===pin.bytes,'Additive publication whole custody differs');
-    copy.admit(p,pin.decoded_bytes??0);return {pin,version};
+    return {pin,version};
   });
-  const bodies=actual.map(({pin,version})=>copy.read(pin.path,{version,expected:pin.sha256,decoded:pin.decoded_bytes??0}));
-  return {bodies,input_inventory:structuredClone([...reader.inventory.values(),...copy.inventory.values()]),complete_phase_bytes:copy.used};
+  const bodies=actual.map(({pin,version})=>copy.read(pin.path,{version,expected:pin.sha256}));
+  return {bodies,input_inventory:structuredClone([...reader.inventory.values(),...copy.inventory.values()])};
 }
 
 // Acquire only a genuinely requested missing immutable tree. This does not
@@ -45,7 +42,6 @@ export function bindPackageImmutableCommits(reader,declared){
   demand(declared(name),'Undeclared additive package source/code payload: '+name);
   demand(typeof version==='string'&&/^[a-f0-9]{40}$/.test(version),'Exact immutable package source version required');
   if(!available.has(version)){
-   demand(available.size<32,'Bounded package immutable source versions exceeded');
    try{reader.git('cat-file','-e',version+'^{commit}');}
    catch{reader.git('fetch','--quiet','--depth=1','--filter=blob:none','--no-tags','--no-write-fetch-head','origin',version);fetched.push(version);}
    reader.git('cat-file','-e',version+'^{commit}');available.add(version);
@@ -57,12 +53,10 @@ export function bindPackageImmutableCommits(reader,declared){
 
 // The already-authenticated trusted-base descriptors bound the only names this
 // observer may carry. Actual detached readers invoke it only after typed success.
-export function retainSelectedPackageInputs(expected, inputs, retained, admit) {
+export function retainSelectedPackageInputs(expected, inputs, retained) {
   for(const pin of inputs){
     const accepted=expected.find(row=>row.path===pin.path);
-    if(!accepted||retained.has(pin.path)||accepted.mode!==pin.mode||accepted.oid!==pin.git_blob_oid||accepted.bytes!==pin.bytes)continue;
-    // Reserve the complete copied descriptor and map-key carry before retaining.
-    admit(2*valueBytes({path:pin.path,pin}).length);
+    if(!accepted||pin.whole_body_consumed!==true||!/^[a-f0-9]{64}$/.test(pin.sha256??'')||retained.has(pin.path)||accepted.mode!==pin.mode||accepted.oid!==pin.git_blob_oid||accepted.bytes!==pin.bytes)continue;
     retained.set(pin.path,{...pin});
   }
 }
@@ -73,13 +67,13 @@ export function retainSelectedPackageInputs(expected, inputs, retained, admit) {
 export async function preparePackageSelectedAdditive({root,currentExecution,consumedContext,restoredReceipt,selectedGrid,geographicRelease,originalPackage,assemblyExecution}) {
   const selectionPath=path.resolve(root,'data/ownership-selection.json');
   let stat;try{stat=ordinary(selectionPath);}catch(error){if(error.code==='ENOENT')return null;throw error;}
-  demand(stat.size<=131072,'Bounded selection metadata required');
+  demand(Number.isSafeInteger(stat.size)&&stat.size>0,'Invalid whole selection metadata size');
   const selectionFd=fs.openSync(selectionPath,fs.constants.O_RDONLY|fs.constants.O_NOFOLLOW);
   let selectionRaw;
   try{
     const buffer=Buffer.alloc(stat.size+1);let offset=0;
     while(offset<buffer.length){const count=fs.readSync(selectionFd,buffer,offset,buffer.length-offset,null);if(!count)break;offset+=count;}
-    demand(offset===stat.size,'Whole bounded selection length changed');selectionRaw=buffer.subarray(0,offset);
+    demand(offset===stat.size,'Whole selection length changed');selectionRaw=buffer.subarray(0,offset);
     const held=fs.fstatSync(selectionFd),end=ordinary(selectionPath);
     for(const key of ['dev','ino','size','mode','mtimeMs','ctimeMs'])demand(stat[key]===held[key]&&held[key]===end[key],'Selection whole identity changed');
   }finally{fs.closeSync(selectionFd);}
@@ -104,23 +98,17 @@ export async function preparePackageSelectedAdditive({root,currentExecution,cons
   demand(execution.stage_root===fs.realpathSync(root),'Additive bridge belongs to another package stage');
   const definition=loadPackageInputs(root);
   const git=process.platform==='darwin'?'/Library/Developer/CommandLineTools/usr/bin/git':'/usr/bin/git';
-  const gitStat=ordinary(git),executionBytes=2*execution.files.reduce((n,p)=>n+p.bytes,0);
-  // Literal original restorer saved state is {receipt,map,old,membershipImage}.
-  // The whole member sizes come from its pinned canonical/prior indexes; the
-  // membership index is retained whole. Index helpers themselves have returned.
+  const gitStat=ordinary(git);
+  // Retain the exact accepted original restoration identity. Its canonical,
+  // prior and membership indexes remain separate immutable sources.
   if(!assembling)demand(restoredReceipt.issue===1295&&restoredReceipt.canonical_index_sha256==='b82b195d94530d9b1f48153f7e47616f8b841cb1438ddf59994ba4869a1d7876'
     &&restoredReceipt.prior_index_sha256==='ca1ab5fc3ef24470bcb79412f1d47a88281c6df0931461c5eb356079b75986fe'
     &&restoredReceipt.new_release_memberships?.index_sha256==='9e21c69da2d4eb68ff66a586c3efa716a71224ce9344338fb2c9da1b2d62989c',
-    'Different inherited restoration requires an explicit complete carry catalogue');
-  const inheritedBytes=assembling?execution.inherited_metadata_bytes:
-    2*(461664+95064+235002+valueBytes(restoredReceipt).length+valueBytes(consumedContext).length+valueBytes(consumed).length);
-  const metadataBytes=8*1048576+inheritedBytes+2*valueBytes(execution).length;
+    'Different inherited restoration requires explicit original source identities');
   const selectedInputs=new Map();
   const pending=assembling?currentAssemblies.get(execution).transition.accepted_selected_inputs?.files??[]:[];
-  const reader=new ImmutableReader(execution.source_root,execution.source_commit,{
-    runtimeBytes:execution.runtime.bytes+gitStat.size,executionBytes,
-    metadataBytes,outputBytes:0,gitExecutable:git,...(assembling?{allowance:execution.allowance}:{})});
-  if(pending.length)reader.captureSelectedInputs=(inputs,admit)=>retainSelectedPackageInputs(pending,inputs,selectedInputs,admit);
+  const reader=new ImmutableReader(execution.source_root,execution.source_commit,{gitExecutable:git});
+  if(pending.length)reader.captureSelectedInputs=inputs=>retainSelectedPackageInputs(pending,inputs,selectedInputs);
   bindPackageImmutableCommits(reader,name=>containsPackagePath(definition.inputs,name)||execution.files.some(p=>p.path===name));
   const wholeRead=reader.read.bind(reader);
   reader.read=(name,options)=>{
@@ -147,9 +135,6 @@ export async function preparePackageSelectedAdditive({root,currentExecution,cons
     demand(/^additive-repairs\/[A-Za-z0-9_.-]+$/.test(logical.path),'Unsafe additive public asset path');
   }
   demand(new Set(roster.map(p=>p.logical.path)).size===4,'Four distinct additive public assets required');
-  const outputBytes=roster.reduce((n,p)=>n+p.pin.bytes,0);demand(Number.isSafeInteger(outputBytes)&&outputBytes>0&&outputBytes<=reader.phaseLimit,'Complete additive publication exceeds current admitted allowance');
-  reader.outputBytes=outputBytes;
-  reader.metadataBytes+=snapshot.metadataBytes+2*valueBytes(view).length;reader.phase();
   const copied=readBoundPublicationAssets(reader,roster,name=>containsPackagePath(definition.inputs,name)||execution.files.some(p=>p.path===name));
   const bodies=copied.bodies,inputInventory=[...copied.input_inventory,...selectedInputs.values()];
   if(assembling){
@@ -160,8 +145,7 @@ export async function preparePackageSelectedAdditive({root,currentExecution,cons
   const gitEnd=ordinary(git);for(const k of ['dev','ino','size','mode','mtimeMs','ctimeMs'])demand(gitEnd[k]===gitStat[k],'Git program pathname drift');
   demand(createHash('sha256').update(fs.readFileSync(git)).digest('hex')===gitHash,'Whole executing Git program drift');
   const token=Object.freeze({additiveRelease:envelope,reference_release:envelope.effective_reference});
-  publications.set(token,{root:fs.realpathSync(root),roster,bodies,gitHash,inheritedBytes,outputBytes,
-    input_inventory:inputInventory,complete_phase_bytes:copied.complete_phase_bytes});
+  publications.set(token,{root:fs.realpathSync(root),roster,bodies,gitHash,input_inventory:inputInventory});
   return token;
 }
 
@@ -181,7 +165,7 @@ export function publishPackageSelectedAdditive(token,{root,destination='dist'}) 
   if(token===null)return null;
   const retained=publications.get(token);demand(retained&&retained.root===fs.realpathSync(root),'Privately authenticated package additive publication required');
   demand(destination==='dist','Stock public destination required');
-  // Bodies were whole authenticated and admitted before application allocation.
+  // Bodies were whole authenticated before application allocation.
   // No new source reads or authority parsing occur during this publication.
   for(let i=0;i<retained.roster.length;i++){
     const name=path.resolve(root,destination,retained.roster[i].logical.path);
@@ -203,10 +187,10 @@ const assemblyCommit = value => /^[a-f0-9]{40}$/.test(value ?? '');
 const assemblyDigest = value => /^[a-f0-9]{64}$/.test(value ?? '');
 const assemblyPositive = value => Number.isSafeInteger(value) && value > 0;
 
-function assemblyFile(root, relative, maximum = Number.MAX_SAFE_INTEGER) {
+function assemblyFile(root, relative) {
   demand(assemblySafe(relative),'Safe assembly member required');
   const file = path.resolve(root,relative), stat = ordinary(file);
-  demand(stat.size <= maximum,'Assembly member exceeds admitted bytes');
+  demand(Number.isSafeInteger(stat.size)&&stat.size>=0,'Invalid whole assembly member size');
   const fd=fs.openSync(file,fs.constants.O_RDONLY|fs.constants.O_NOFOLLOW), hash=createHash('sha256');
   const buffer=Buffer.alloc(1048576);let bytes=0;
   try {
@@ -227,7 +211,7 @@ async function assemblyJobLog(api,repo,job) {
   const response=await fetch(url,{redirect:'error',signal:AbortSignal.timeout(30000)});
   demand(response.ok&&response.body,'Original job log download failed');
   const chunks=[];let bytes=0;
-  for await(const chunk of response.body){bytes+=chunk.length;demand(bytes<=8*1048576,'Original package job log exceeds admission');chunks.push(Buffer.from(chunk));}
+  for await(const chunk of response.body){bytes+=chunk.length;chunks.push(Buffer.from(chunk));}
   return Buffer.concat(chunks,bytes).toString('utf8').split(/\r?\n/).map(line=>line.replace(/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d\.\d+Z /,''));
 }
 
@@ -283,7 +267,6 @@ export async function readOriginalPackageInventory({api,repo,origin}) {
     (pullRequest?receipts[0].original_head===workflowHead:true)&&
     (origin.head===undefined||receipts[0].original_head===origin.head)&&
     assemblyDigest(receipts[0].package_output_manifest_sha256)&&assemblyPositive(receipts[0].package_output_manifest_bytes)&&
-    receipts[0].package_output_manifest_bytes<=8*1048576&&
     uploads.length===1&&uploads[0]===`Artifact ${artifactName} has been successfully uploaded! Final size is ${origin.artifact_bytes} bytes. Artifact ID is ${origin.artifact_id}`,
     'Missing or ambiguous actual original package upload receipt');
   const executed=receipts[0].executed_workflow;
@@ -300,8 +283,8 @@ export async function readOriginalPackageInventory({api,repo,origin}) {
 // client. It authenticates the actual originating producer and log, rather than
 // accepting a caller-supplied success flag or a copied context certificate.
 export async function authenticateOriginalPackageOutput({api,repo,origin,root,manifestRaw}) {
-  demand(assemblyCommit(origin?.head)&&Buffer.isBuffer(manifestRaw)&&manifestRaw.length>0&&manifestRaw.length<=8*1048576,
-    'Bounded original package manifest and exact source head required');
+  demand(assemblyCommit(origin?.head)&&Buffer.isBuffer(manifestRaw)&&manifestRaw.length>0,
+    'Whole original package manifest and exact source head required');
   const receipt=await readOriginalPackageInventory({api,repo,origin});
   demand(receipt.package_output_manifest_sha256===assemblyHash(manifestRaw)&&receipt.package_output_manifest_bytes===manifestRaw.length,
     'Original package inventory differs from retained manifest');
@@ -352,17 +335,17 @@ export function requireOriginalPackageOutput(token) {
 
 const currentAssemblies=new WeakMap();
 function assemblyGit(root,args,input) {
-  return execFileSync('git',['-C',root,...args],{encoding:'utf8',input,maxBuffer:32*1048576,
+  return execFileSync('git',['-C',root,...args],{input,encoding:'utf8',maxBuffer:Infinity,
     env:{...process.env,GIT_NO_LAZY_FETCH:'1',GIT_TERMINAL_PROMPT:'0'}});
 }
+
 function assemblyCode(source,executingRoot) {
-  const names=new Set(),files=[];let admitted=0;
+  const names=new Set(),files=[];
   const visit=name=>{
     demand(assemblySafe(name),'Safe assembly code path required');if(names.has(name))return;names.add(name);
-    demand(names.size<=512,'Assembly code closure exceeds admission');
-    const stat=ordinary(path.join(executingRoot,name));admitted+=2*stat.size;
-    demand(stat.size<=32*1048576&&admitted<=32*1048576,'Assembly code bytes exceed admission');
+    const stat=ordinary(path.join(executingRoot,name));
     const raw=fs.readFileSync(path.join(executingRoot,name)),mode=stat.mode&0o111?'100755':'100644';
+    demand(raw.length===stat.size,'Whole assembly code length changed');
     const oid=createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex');
     demand(assemblyGit(source,['ls-tree','HEAD','--',name]).trim()===`${mode} blob ${oid}\t${name}`,'Executing assembly code differs from current source');
     files.push({path:name,mode,bytes:raw.length,sha256:assemblyHash(raw),git_blob:oid});
@@ -375,8 +358,9 @@ function assemblyCode(source,executingRoot) {
 function assemblySourceAdmission(original,source,acceptedInputs) {
   const before=requireOriginalPackageOutput(original).manifest.source,definition=loadPackageInputs(source);
   const read=name=>{
-    const file=path.join(source,name),stat=ordinary(file);demand(stat.size<=8*1048576,'Bounded assembly source metadata required');
-    const raw=fs.readFileSync(file),oid=createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex');
+    const file=path.join(source,name),stat=ordinary(file);
+    const raw=fs.readFileSync(file);demand(raw.length===stat.size,'Whole assembly metadata length changed');
+    const oid=createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex');
     demand(assemblyGit(source,['ls-tree','HEAD','--',name]).trim()===`100644 blob ${oid}\t${name}`,'Assembly metadata differs from actual Git source');return JSON.parse(raw);
   };
   demand(assemblySame(read('.github/package-inputs.json'),definition),'Current package definition drift');
@@ -402,23 +386,19 @@ function assemblySourceAdmission(original,source,acceptedInputs) {
 
 // Separate from package-issued full-build execution: this authenticates only the
 // actual small assembly programme and its immutable current source identities.
-export function issuePackageAssemblyExecution({original,source,stage,executingRoot,inheritedMetadata,acceptedInputs}) {
+export function issuePackageAssemblyExecution({original,source,stage,executingRoot,acceptedInputs}) {
   requireOriginalPackageOutput(original);
-  demand(Array.isArray(inheritedMetadata)&&inheritedMetadata.length===5,'Complete assembly metadata frame required');
-  const metadataBytes=2*valueBytes(inheritedMetadata).length;
   demand(process.execArgv.length===0&&!process.env.NODE_OPTIONS?.trim()&&!process.env.NODE_PATH?.trim(),'Plain assembly Node execution required');
   source=fs.realpathSync(source);stage=fs.realpathSync(stage);executingRoot=fs.realpathSync(executingRoot);
   const admittedSource=assemblySourceAdmission(original,source,acceptedInputs);
   demand(path.resolve(process.argv[1])===path.join(executingRoot,'scripts/assemble-selected-package.mjs'),'Actual assembly driver required');
   const files=assemblyCode(source,executingRoot), executable=fs.realpathSync(process.execPath);
-  const allowance=processingAllowance(),runtimeStat=ordinary(executable);
-  demand(runtimeStat.size+files.reduce((n,row)=>n+2*row.bytes,0)+metadataBytes+16*1048576<=allowance.phaseBytes&&process.memoryUsage().rss<allowance.rssBytes,'Complete assembly execution exceeds current resource admission');
-  const runtime={...assemblyFile(path.dirname(executable),path.basename(executable),allowance.phaseBytes),
+  const runtime={...assemblyFile(path.dirname(executable),path.basename(executable)),
     executable,version:process.version,versions:process.versions,platform:process.platform,arch:process.arch};
   delete runtime.path;
   const record=Object.freeze({kind:'current-selected-package-assembly',source_root:source,
     source_commit:assemblyGit(source,['rev-parse','HEAD']).trim(),source_tree:assemblyGit(source,['rev-parse','HEAD^{tree}']).trim(),
-    stage_root:stage,entry_point:'scripts/assemble-selected-package.mjs',files,runtime,allowance,original,inherited_metadata_bytes:metadataBytes});
+    stage_root:stage,entry_point:'scripts/assemble-selected-package.mjs',files,runtime,original});
   currentAssemblies.set(record,{executingRoot,fingerprint:valueSha(record),source:admittedSource.current,transition:structuredClone(admittedSource.transition),acceptedInputs:structuredClone(acceptedInputs)});return record;
 }
 export function requirePackageAssemblyExecution(record) {
@@ -427,7 +407,7 @@ export function requirePackageAssemblyExecution(record) {
   demand(assemblyGit(record.source_root,['rev-parse','HEAD']).trim()===record.source_commit&&
     assemblyGit(record.source_root,['rev-parse','HEAD^{tree}']).trim()===record.source_tree,'Assembly source changed');
   demand(assemblySame(assemblyCode(record.source_root,held.executingRoot),record.files),'Assembly code changed');
-  const runtime=assemblyFile(path.dirname(record.runtime.executable),path.basename(record.runtime.executable),record.allowance.phaseBytes);
+  const runtime=assemblyFile(path.dirname(record.runtime.executable),path.basename(record.runtime.executable));
   demand(runtime.bytes===record.runtime.bytes&&runtime.sha256===record.runtime.sha256&&record.runtime.version===process.version,'Assembly runtime changed');
   return record;
 }

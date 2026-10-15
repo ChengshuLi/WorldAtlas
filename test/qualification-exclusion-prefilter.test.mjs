@@ -80,9 +80,7 @@ function constructorFixture(change=()=>{},implementation=engine){
       throw Error('Unexpected fixture Git request: '+args.join(' '));
     }
   }
-  // Carry the existing diagnostic's actual 4 MiB output reserve as well.
-  const reader=()=>new FixtureReader('.',version,{runtimeBytes:0,metadataBytes:0,outputBytes:4*1024*1024,
-    allowance:{phaseBytes:128*1024*1024,rssBytes:1024*1024*1024}});
+  const reader=()=>new FixtureReader('.',version);
   const locators={source_evidence:{commit:version,path:evidence.path},native_patch:{commit:version,path:patch.path}};
   const runDiagnostic=()=>{
     const binding={version:1,kind:'source-target-native-custody-v1',source_evidence:evidence,native_patch:patch};
