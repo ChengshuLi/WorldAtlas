@@ -180,22 +180,22 @@ test('adoption, review, observation and native frame joins are substantive consu
  ])assert.throws(()=>fixture({changeSupport}).run(),/dated|adopt|review|observ|frame|centre|native|contract|whole|input|body/i);
 });
 
-test('dated original member remains bound to complete accepted aggregate membership',()=>{
- const aggregateId=family+':AGG';
- const aggregate=s=>{
+const aggregateId=family+':AGG';
+function aggregateMembers(s){
   const geometry={type:'MultiPolygon',coordinates:s.originals.map(f=>f.geometry.coordinates)};
   s.roster=[{id:aggregateId,index:1}];s.targets[0].target_id=aggregateId;s.targets[0].base_geometry=geometry;
   s.measured[0].selected={id:aggregateId,geometry};
   s.membership={lineage:{changes:[{id:aggregateId,replaces:[sourceId,siblingId]}]},
    accepted:{type:'FeatureCollection',features:[{type:'Feature',id:aggregateId,
     properties:{metadata:{source_member_ids:[sourceId,siblingId]}},geometry}]}};
- };
- const accepted=fixture({change:aggregate}).run();
+}
+test('dated original member remains bound to complete accepted aggregate membership',()=>{
+ const accepted=fixture({change:aggregateMembers}).run();
  assert.equal(accepted.ledger_rows[0].target_id,aggregateId);
  assert.deepEqual(accepted.ledger_rows[0].native_rows,[{y,runs:[[x,x+1,1]]}]);
- assert.throws(()=>fixture({change:s=>{aggregate(s);s.membership.lineage.changes[0].replaces=[sourceId];}}).run(),/member|mapping/i);
- assert.throws(()=>fixture({change:aggregate,changeSupport:s=>s.records[0].source_id=siblingId}).run(),/exact requested source member/i);
- assert.throws(()=>fixture({change:aggregate,changeSupport:s=>s.records[0].pixelIndex=2}).run(),/source member|land class|centre/i);
+ assert.throws(()=>fixture({change:s=>{aggregateMembers(s);s.membership.lineage.changes[0].replaces=[sourceId];}}).run(),/member|mapping/i);
+ assert.throws(()=>fixture({change:aggregateMembers,changeSupport:s=>s.records[0].source_id=siblingId}).run(),/exact requested source member/i);
+ assert.throws(()=>fixture({change:aggregateMembers,changeSupport:s=>s.records[0].pixelIndex=2}).run(),/source member|land class|centre/i);
 });
 
 test('water, special and unresolved records do not become dated land or inland-water permission',()=>{
@@ -207,6 +207,21 @@ test('water, special and unresolved records do not become dated land or inland-w
   a=>a.actual_answer=''
  ])assert.throws(()=>fixture({change:s=>mutate(s.adoption.records[0])}).run(),/adopt|land|terrestr|answer|unresolved|dated/i);
  assert.throws(()=>fixture({change:s=>s.targets[0].coverage_classes=['mapped_inland_water_support']}).run(),/land|water|coverage|support/i);
+ positive(fixture({legacy:true,change:s=>{
+  s.targets[0].coverage_classes=['mapped_inland_water_support'];
+  s.physical.results[0].support.mapped_land_support=empty();
+  s.physical.results[0].support.mapped_inland_water_support=s.originals[0].geometry;
+ }}).run());
+ // A neighboring non-dated water-class cell remains legitimate in v2 too.
+ // Only the exact authenticated dated-LAND key acquires the water veto.
+ const mixed=fixture({change:s=>{
+  s.targets[0].coverage_classes=['mapped_land_support','mapped_inland_water_support'];
+  s.targets[0].coverage_rows=[{y,runs:[[x,x+1,'mapped_land_support'],[x+1,x+2,'mapped_inland_water_support']]}];
+  s.physical.results[0].support.mapped_inland_water_support=rectangle(longitude+180/size,longitude+540/size);
+  s.proposed.rows[0].runs[0][1]=x+2;
+ }}).run();
+ assert.equal(mixed.ledger_rows[0].native_cells,2);
+ assert.deepEqual(mixed.ledger_rows[0].native_rows,[{y,runs:[[x,x+2,1]]}]);
 });
 
 
@@ -224,6 +239,66 @@ function physicalVeto(state,reason){
    source_covers_candidate:true,candidate_covers_source:false,intersects:true,disjoint:false,witness:'complete-candidate-reconstruction'}];
  }
 }
+
+test('authenticated same-member land supersedes only old exterior interior context',()=>{
+ const exterior=s=>physicalVeto(s,'outside_mapped_L1_context');
+ const supported=fixture({change:exterior}),before=clone(supported.state);
+ const result=supported.run();positive(result);assert.deepEqual(supported.state,before);
+ assert.deepEqual(result.physical_context_hits,[{source_id:sourceId,pixelIndex:1,
+  role:'outside_mapped_L1_context',y,x,kind:'interior',resolution:'superseded-by-adopted-dated-terrestrial-centre'}]);
+ // Keep nonempty mapped land in the v1 control: the refusal must come from
+ // unsuperseded exterior, not from a missing positive coverage operand.
+ assert.throws(()=>fixture({legacy:true,change:s=>{
+  exterior(s);s.physical.results[0].support.mapped_land_support=s.originals[0].geometry;
+ }}).run(),/residual|conflict|witness/i);
+ assert.throws(()=>fixture({change:s=>{
+  exterior(s);s.physical.results[0].support.mapped_inland_water_support=rectangle(-90.01,-89.99);
+ }}).run(),/residual|conflict|witness/i);
+ assert.throws(()=>fixture({change:s=>{
+  s.physical.results[0].support.outside_mapped_L1_context=empty();
+  s.physical.results[0].support.mapped_inland_water_support=rectangle(-90.01,-89.99);
+ }}).run(),/residual|conflict|witness/i);
+ assert.throws(()=>fixture({change:s=>{
+  exterior(s);s.physical.results[0].support.unknown_context=rectangle(-90.01,-89.99);
+ }}).run(),/physical|operation|roster|unknown/i);
+});
+
+test('exterior boundary, line and point contacts remain vetoes beside an interior contact',()=>{
+ const contacts=[
+  rectangle(longitude,longitude+.02),
+  {type:'LineString',coordinates:[[longitude,latitude-.01],[longitude,latitude+.01]]},
+  {type:'Point',coordinates:[longitude,latitude]},
+  {type:'GeometryCollection',geometries:[rectangle(-90.02,-89.98),{type:'Point',coordinates:[longitude,latitude]}]}
+ ];
+ for(const geometry of contacts)assert.throws(()=>fixture({change:s=>{
+  physicalVeto(s,'outside_mapped_L1_context');s.physical.results[0].support.outside_mapped_L1_context=geometry;
+ }}).run(),/residual|conflict|witness/i,geometry.type);
+});
+
+test('same-owner siblings cannot lend dated authority across original members',()=>{
+ const shared=s=>{
+  s.originals[1].geometry=clone(s.originals[0].geometry);aggregateMembers(s);
+  s.measured.push({target:siblingId,consumed:{geometry:s.originals[1].geometry},
+   selected:{id:aggregateId,geometry:s.targets[0].base_geometry}});
+  s.physical.results.push({target:siblingId,issues:[],support:{mapped_land_support:empty()}});
+ };
+ const sameMember=fixture({change:s=>{physicalVeto(s,'outside_mapped_L1_context');shared(s);}}).run();
+ assert.equal(sameMember.ledger_rows[0].target_id,aggregateId);
+ assert.deepEqual(sameMember.ledger_rows[0].native_rows,[{y,runs:[[x,x+1,1]]}]);
+ assert.throws(()=>fixture({change:s=>{
+  physicalVeto(s,'outside_mapped_L1_context');shared(s);
+  s.physical.results[1].support.outside_mapped_L1_context=rectangle(-90.02,-89.98);
+ }}).run(),/residual|conflict|witness/i);
+ const wrongMember=s=>{
+  shared(s);s.targets.push({...clone(s.targets[0]),id:siblingId});
+  s.physical.results[0].support.mapped_land_support=s.originals[0].geometry;
+ };
+ const memberB=fixture({change:wrongMember,changeSupport:s=>s.records[0].source_id=siblingId}).run();
+ assert.deepEqual(memberB.ledger_rows[0].native_rows,[{y,runs:[[x,x+1,1]]}]);
+ assert.throws(()=>fixture({change:s=>{
+  wrongMember(s);s.physical.results[0].support.outside_mapped_L1_context=rectangle(-90.02,-89.98);
+ },changeSupport:s=>s.records[0].source_id=siblingId}).run(),/residual|conflict|witness/i);
+});
 test('complete original member retains competitor and territory vetoes outside selected base',()=>{
  // Keep the original source's reviewed component outside the selected base.
  // The complete member must still bring a competitor there into the scan.
@@ -243,9 +318,11 @@ test('complete original member retains competitor and territory vetoes outside s
  }}).run(),/unique source-target coverage/i);
 });
 
-test('new positive does not bypass physical, exterior, source-domain, competitor, territory or tie vetoes',()=>{
- for(const reason of ['missing_reconstruction','extra_reconstruction','contradictory_land_water_support','L2-outside-L1','outside_mapped_L1_context'])
-  assert.throws(()=>fixture({change:s=>physicalVeto(s,reason)}).run(),/residual|conflict|witness/i,reason);
+test('new positive does not bypass non-context physical, source-domain, competitor, territory or tie vetoes',()=>{
+ for(const reason of ['missing_reconstruction','extra_reconstruction','contradictory_land_water_support','L2-outside-L1','L3-outside-L2','L4-outside-L3'])
+  assert.throws(()=>fixture({change:s=>{
+   physicalVeto(s,reason);s.physical.results[0].support.outside_mapped_L1_context=rectangle(-90.02,-89.98);
+  }}).run(),/residual|conflict|witness/i,reason);
  for(const change of [
   s=>{const g=rectangle(-89.99,-89.9);s.originals[0].geometry=g;s.targets[0].base_geometry=g;s.measured[0]={target:sourceId,consumed:{geometry:g},selected:{id:sourceId,geometry:g}};},
   s=>s.originals[1].geometry=rectangle(-90.01,-89.99),
