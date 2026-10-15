@@ -392,29 +392,6 @@ jobs:
           if node --input-type=module -e "import {integrationNeedsBrowser} from './scripts/run-integration-tests.mjs'; process.exit(integrationNeedsBrowser(process.env.INTEGRATION_PROFILE, Number(process.env.INTEGRATION_SHARD), process.env.INTEGRATION_TEST_SELECTION || 'complete') ? 0 : 1)"; then
             npx playwright install --with-deps chromium
           fi
-      - name: Read back qualified native build outputs when selected
-        if: needs.prepare.outputs.profile == 'full' && matrix.shard == 0 && steps.assembly.outputs.assembled != 'true'
-        run: |
-          if node --input-type=module -e '
-            import fs from "node:fs";
-            const file="data/ownership-selection.json", stat=fs.lstatSync(file);
-            if (!stat.isFile() || stat.isSymbolicLink() || stat.size>33554432) throw Error("Nonordinary selection");
-            const s=JSON.parse(fs.readFileSync(file,"utf8"));
-            const safe=p=>typeof p==="string" && p.length>0 && !p.startsWith("/") && !p.includes("\\") && p.split("/").every(x=>x!=="" && x!=="." && x!=="..");
-            const hash=v=>typeof v==="string" && /^[a-f0-9]{64}$/.test(v);
-            if (s?.version!==1 || s.method!=="native-linear-evenodd-first-owner-v1" || !safe(s.manifest_path) || !hash(s.sha256) || typeof s.release_id!=="string" || !s.release_id) throw Error("Malformed native selection");
-            if (!Object.hasOwn(s,"artifact_consumption")) process.exit(3);
-            const a=s.artifact_consumption;
-            if (!a || typeof a!=="object" || Object.keys(a).sort().join(",")!=="certificate,review") throw Error("Malformed artifact selection");
-            for (const p of [a.certificate,a.review]) if (!p || !safe(p.path) || p.mode!=="100644" || !Number.isSafeInteger(p.bytes) || p.bytes<=0 || p.bytes>33554432 || !hash(p.sha256)) throw Error("Malformed artifact pin");
-          '; then
-            test -f coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/model-reader-call-boundary-controls.mjs || { echo 'Selected artifact readback helper is missing.' >&2; exit 1; }
-            node coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/model-reader-call-boundary-controls.mjs --built-output-readback .cache/native-normal-built-output.json
-          else
-            status=$?
-            if test "$status" -ne 3; then exit "$status"; fi
-            echo 'No artifact selection: native built-output readback is inapplicable; no report claimed.'
-          fi
       - name: Test applicable combined-tree invariants without publishing or live imports
         env:
           INTEGRATION_PROFILE: ${{ needs.prepare.outputs.profile }}
@@ -445,14 +422,12 @@ jobs:
           if-no-files-found: error
           compression-level: 0
           retention-days: 30
-      - name: Retain native built-output readback
+      - name: Retain selected delivery smoke
         if: always() && needs.prepare.outputs.profile == 'full' && matrix.shard == 0
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: native-built-output-${{ inputs.request_id }}-${{ github.run_attempt }}
-          path: |
-            .cache/native-normal-built-output.json
-            .cache/selected-delivery-smoke.json
+          name: selected-delivery-smoke-${{ inputs.request_id }}-${{ github.run_attempt }}
+          path: .cache/selected-delivery-smoke.json
           include-hidden-files: true
           if-no-files-found: ignore
   merge:

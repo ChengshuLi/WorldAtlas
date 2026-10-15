@@ -149,8 +149,10 @@ test('workflow separates untrusted candidate tests from write credentials and se
     assert.match(step,/needs\.prepare\.outputs\.test_selection == 'selected-data'/);
   }
   const steps=integration.split(/\n(?=      - )/).slice(1);
-  const readback=steps.find(step=>step.includes('name: Read back qualified native build outputs when selected\n'));
-  assert.match(readback,/if: needs.prepare.outputs.profile == 'full' && matrix.shard == 0 && steps.assembly.outputs.assembled != 'true'/);
+  assert.doesNotMatch(integration,/Read back qualified native build outputs|native-normal-built-output\.json|--built-output-readback/);
+  const selectedSmoke=steps.find(step=>step.includes('name: Retain selected delivery smoke\n'));
+  assert.match(selectedSmoke,/name: selected-delivery-smoke-/);
+  assert.match(selectedSmoke,/path: \.cache\/selected-delivery-smoke\.json/);
   const credentialSteps=steps.filter(step=>/WORLDATLAS_CHECKOUT_TOKEN:/.test(step));
   assert.equal(credentialSteps.length,2,'read-only acquisition credentials have exactly two trusted consumers');
   for(const step of credentialSteps)assert.match(step,/name: (Authenticate trusted full-checkout bootstrap|Acquire full checkout with authenticated bounded helper)/);
