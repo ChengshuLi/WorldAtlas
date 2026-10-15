@@ -108,6 +108,21 @@ test('derivation copies the literal six-field manifest contract separately from 
   assert.deepEqual(await result(f), actual, 'already canonical fields are accepted literally');
 });
 
+test('v2 derivation authenticates and retains the exact dated-support pin with unchanged scientific claims', async () => {
+  const f = fixture(), support = f.reader.add(prefix + 'dated-support.json', {version: 1,
+    kind: 'adopted-dated-native-centre-land-support-v1', provenance: [], records: []});
+  Object.assign(f.config.source_evidence, {version: 2, kind: 'source-target-native-evidence-v2', dated_land_support: support});
+  const originalConfig = structuredClone(f.config), actual = await result(f);
+  assert.deepEqual(withoutBaseline(actual), originalConfig.source_evidence);
+  assert.deepEqual(actual.dated_land_support, support);
+  assert.ok(f.reader.reads.includes(support.path));
+  assert.deepEqual(f.config, originalConfig);
+  f.config.source_evidence.dated_land_support = {...support, sha256: '0'.repeat(64)};
+  await assert.rejects(sourceEvidence(f.config, f.reader), /Whole pin identity differs/);
+  delete f.config.source_evidence.dated_land_support;
+  await assert.rejects(sourceEvidence(f.config, f.reader));
+});
+
 test('every supplied baseline difference refuses, including the original nested descriptor contamination', async t => {
   const changes = {
     'Git mode inside normative latitudes': e => { e.native_contract.native_latitudes.mode = '100644'; },
