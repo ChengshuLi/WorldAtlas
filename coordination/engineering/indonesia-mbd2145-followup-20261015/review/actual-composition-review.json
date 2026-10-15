@@ -1,0 +1,298 @@
+{
+  "version": 1,
+  "reviewer": "/root/delivery11622_config_review",
+  "kind": "ACTUAL_MBD2145_COMPOSITION_SCIENTIFIC_CONTRIBUTION_AND_PREFIX_PRESERVATION_REVIEW",
+  "disposition": "PASS WITH LIMITS",
+  "check_count": 46,
+  "checks": [
+    {
+      "check": "actual original fullbody data/ownership-selection.json",
+      "pass": true
+    },
+    {
+      "check": "actual accepted866 selector sidecar identity",
+      "pass": true
+    },
+    {
+      "check": "actual original fullbody coordination/engineering/indonesia-myanmar-followups-20261015/delivery/authority-registry.json",
+      "pass": true
+    },
+    {
+      "check": "actual original fullbody coordination/engineering/indonesia-myanmar-followups-20261015/delivery/selected-ledger.json",
+      "pass": true
+    },
+    {
+      "check": "actual original fullbody coordination/engineering/indonesia-myanmar-followups-20261015/delivery/patch.json",
+      "pass": true
+    },
+    {
+      "check": "actual original fullbody coordination/engineering/indonesia-myanmar-followups-20261015/delivery/runtime-envelope.json",
+      "pass": true
+    },
+    {
+      "check": "actual original fullbody coordination/engineering/indonesia-maluku-barat-daya-20261015/native2145-authority-001/original-rule-preimage.json",
+      "pass": true
+    },
+    {
+      "check": "actual original fullbody coordination/engineering/indonesia-maluku-barat-daya-20261015/native2145-authority-001/authority-binding.json",
+      "pass": true
+    },
+    {
+      "check": "actual original fullbody coordination/engineering/indonesia-maluku-barat-daya-20261015/native2145-authority-001/constructor-result.json",
+      "pass": true
+    },
+    {
+      "check": "actual original fullbody coordination/engineering/indonesia-maluku-barat-daya-20261015/native2145-input-001/native-patch.json",
+      "pass": true
+    },
+    {
+      "check": "actual original fullbody coordination/engineering/indonesia-maluku-barat-daya-20261015/native2145-input-001/source-evidence.json",
+      "pass": true
+    },
+    {
+      "check": "full original0ead constructor and publishedtypedsource exact reviewed identities",
+      "pass": true
+    },
+    {
+      "check": "reuse completed native23typed23 without requalification",
+      "pass": true
+    },
+    {
+      "check": "actual303literalrows71authorityentries unique",
+      "pass": true
+    },
+    {
+      "check": "all302old literalrows/native_rows exactly preserved",
+      "pass": true
+    },
+    {
+      "check": "all70oldregistryentries exactly preserved",
+      "pass": true
+    },
+    {
+      "check": "inherited originalrow/registryrelative order preserved",
+      "pass": true
+    },
+    {
+      "check": "allinheritedledgerwrappermetadata preserved",
+      "pass": true
+    },
+    {
+      "check": "full literal current_rebind preserved",
+      "pass": true
+    },
+    {
+      "check": "full literal parent_inventory preserved",
+      "pass": true
+    },
+    {
+      "check": "full literal current_targets preserved",
+      "pass": true
+    },
+    {
+      "check": "scope_ids full303roworder bound",
+      "pass": true
+    },
+    {
+      "check": "original registrykind/version preserved",
+      "pass": true
+    },
+    {
+      "check": "one exact original newauthority no aliases/extras",
+      "pass": true
+    },
+    {
+      "check": "one exact original2145constructor row no omissions/extras",
+      "pass": true
+    },
+    {
+      "check": "full originalrule/binding/nativepatch pins preserved",
+      "pass": true
+    },
+    {
+      "check": "full basegeometry/sourcephysical receipt/class exact retained",
+      "pass": true
+    },
+    {
+      "check": "accepted99127 unique native tuples and owners",
+      "pass": true
+    },
+    {
+      "check": "originalMBD2145 unique native tuples and owners",
+      "pass": true
+    },
+    {
+      "check": "actual101272 unique native tuples and owners",
+      "pass": true
+    },
+    {
+      "check": "full original523native rows unmodified947spans",
+      "pass": true
+    },
+    {
+      "check": "new2145 fully predecessor-disjoint at native coordinates",
+      "pass": true
+    },
+    {
+      "check": "actual fullpatch exactly99127old+2145original noextras",
+      "pass": true
+    },
+    {
+      "check": "all99127priorpatch tupleowners preserved",
+      "pass": true
+    },
+    {
+      "check": "all2013relativeholds excluded by exact originalpatch binding",
+      "pass": true
+    },
+    {
+      "check": "actual registry ledger patch hashlinks exact",
+      "pass": true
+    },
+    {
+      "check": "runtimeenvelope exact actualledger/patch descriptors",
+      "pass": true
+    },
+    {
+      "check": "base/effectivereference retained and exact ownedrelease",
+      "pass": true
+    },
+    {
+      "check": "allotherpatchmetadata literal preserved",
+      "pass": true
+    },
+    {
+      "check": "alloriginalenvelopebase/roster/kind/version preserved",
+      "pass": true
+    },
+    {
+      "check": "actualcomplete productreceipt authority-registry.json",
+      "pass": true
+    },
+    {
+      "check": "actualcomplete productreceipt patch.json",
+      "pass": true
+    },
+    {
+      "check": "actualcomplete productreceipt runtime-envelope.json",
+      "pass": true
+    },
+    {
+      "check": "actualcomplete productreceipt selected-ledger.json",
+      "pass": true
+    },
+    {
+      "check": "exact4products+completion no outscopefiles",
+      "pass": true
+    },
+    {
+      "check": "actual completedmetadata compose1.13s227246080peak",
+      "pass": true
+    }
+  ],
+  "failures": [],
+  "accepted_predecessor": "866c42b854910f17a80427dac19b2c850cd68093",
+  "actual_products": {
+    "authority-registry.json": {
+      "bytes": 68311,
+      "sha256": "31b2b028900abb2809d30c66a6d6bf827f62e5e5870d1101459cd2989d683fc1"
+    },
+    "patch.json": {
+      "bytes": 1046268,
+      "sha256": "2ab200984d0fa56bebc6cecdda70565d4eb983c2de53af64994d9b9504c647ce"
+    },
+    "runtime-envelope.json": {
+      "bytes": 1390,
+      "sha256": "3f40a7a16223c727601477a1b37291f913010a9bd3ada912c026e0760f81cc1d"
+    },
+    "selected-ledger.json": {
+      "bytes": 3001805,
+      "sha256": "198bee149a2b84d2e62c771807e1353e45b8a01caee560c81aeb17e64032f86a"
+    }
+  },
+  "scope": {
+    "inherited_cells": 99127,
+    "new_unaccepted_cells": 2145,
+    "composed_cells": 101272,
+    "inherited_authorities": 70,
+    "new_authorities": 1,
+    "composed_authorities": 71,
+    "inherited_literal_rows": 302,
+    "new_components": 1,
+    "composed_literal_rows": 303,
+    "inherited_inactive_rows": 8,
+    "selected_members_expected_later": 295,
+    "relative_MBD_holds_unchanged": 2013
+  },
+  "original_quartet": {
+    "rule_preimage": {
+      "commit": "0ead73dfbf9edbaa963a18ca593caeed408190f9",
+      "path": "coordination/engineering/indonesia-maluku-barat-daya-20261015/native2145-authority-001/original-rule-preimage.json",
+      "mode": "100644",
+      "bytes": 744,
+      "sha256": "60b0ad252c466c218c5e602ea83c1e631b2c87c672e77f1448284e6a5b7192c8",
+      "git_blob_oid": "544bc11e417fe659e272b7f2af93b683a4ca903e"
+    },
+    "source_authority": {
+      "commit": "0ead73dfbf9edbaa963a18ca593caeed408190f9",
+      "path": "coordination/engineering/indonesia-maluku-barat-daya-20261015/native2145-authority-001/authority-binding.json",
+      "mode": "100644",
+      "bytes": 747,
+      "sha256": "e7a73d29917720eebe5b3d6d6c03f1404a43f4658b50170c99e7153f0772cfa3",
+      "git_blob_oid": "46f9ba272225b99091b14b43730823f8c06f612d"
+    },
+    "ledger": {
+      "commit": "0ead73dfbf9edbaa963a18ca593caeed408190f9",
+      "path": "coordination/engineering/indonesia-maluku-barat-daya-20261015/native2145-authority-001/constructor-result.json",
+      "mode": "100644",
+      "bytes": 41309,
+      "sha256": "2673a393155b4e89498daa831b737fd9a0121569081a8b87b2c0c5d3434ed1ba",
+      "git_blob_oid": "bee97ba0b9baed5440cf00b87b5df509dc80dcba"
+    },
+    "native_patch": {
+      "bytes": 32351,
+      "commit": "ebbdc8c1f8b77457d34a03a0fe290e42cb9941cc",
+      "git_blob_oid": "fe13e1d35e144c6a88812c6839984a96b3b9d3a4",
+      "mode": "100644",
+      "path": "coordination/engineering/indonesia-maluku-barat-daya-20261015/native2145-input-001/native-patch.json",
+      "sha256": "e161a1029a1308df77c9001535be84212e2720dfac5da4621e6be5ff5a3c98cb"
+    }
+  },
+  "original_source_evidence": {
+    "bytes": 11841,
+    "commit": "ebbdc8c1f8b77457d34a03a0fe290e42cb9941cc",
+    "git_blob_oid": "c1470a363a59cce14971a9a3946ef96cf2b73cdc",
+    "mode": "100644",
+    "path": "coordination/engineering/indonesia-maluku-barat-daya-20261015/native2145-input-001/source-evidence.json",
+    "sha256": "bdd1a97c454ec4a8603712b46b1ccc63ab4b3b68648b15e808276d3a95838aaa"
+  },
+  "new_component": {
+    "component_id": "source-target:e13744f844282997ea0d3105df875fa9c8d02b1bad25527ed7e368c79c8910cb",
+    "target_id": "gb:IDN:ADM2:22746128B88480653802061",
+    "owner": 23148,
+    "cells": 2145,
+    "authority_sha256": "4e3af1b8dae9cdb53363b02d3e94e998643ac6a812715ff94daea775ecef70b6",
+    "rule_sha256": "60b0ad252c466c218c5e602ea83c1e631b2c87c672e77f1448284e6a5b7192c8",
+    "original_constructor_row_sha256": "7c2cc8de64050bdefdb99293041e0a4330a8cd51f47bdf2430ec411b92afc64b",
+    "selected_row_sha256": "84b3a5d627c5b3b896432592136cb227fddbf87d8115582b412bc92f7647fae7",
+    "native_rows_sha256": "6cf6637eb108d664d25778feacf14ef99561d1f3364e2e81ede03889f86ccd4f"
+  },
+  "original_constructor_limits": [
+    "Physical interpretation and semantic reconciliation are retained reviewed source evidence; actual current owner-zero is checked by native consumers.",
+    "Witness exclusion applies only to requested native centres. Original whole-source physical/hierarchy issues and historical source/resource limits remain retained; no whole-parent certification or acceptance is inferred."
+  ],
+  "reused_reviews": [
+    "MBDactualnative23checks",
+    "MBDtypedinput23checks",
+    "MBDactualwholephysical148checks",
+    "MBDoriginal63+76source/inputcontrols"
+  ],
+  "limitations": [
+    "Actual metadata composition preserves every accepted99127tuple/owner,70registryentries and302literalrows/native_rows, inherited rebind/parent/current_targets and all original evidence custody. One exact original2145cell component is appended with no overlap or extras. No constructor, source, physical or geometric operator was replayed.",
+    "MBDall2013relative holds and original4158context remain unchanged. Full519sourcefamily,62wholephysicalqueries, positive land/nonempty247partsexterior and all original water/reconstruction/conflict/hierarchy witnesses remain bound; no whole-parent/legal/territorial certification.",
+    "b65 has no independent explicit foreign-veto geometry inventory; omitted optional fields are not foreign-clearance or empty-conflict claims. Original dates, licensing/source rights, source-relative semantics and operating/cooperativeRSS limits remain retained.",
+    "Recorded Bahamas exit precedes original MBDphysicalpreflight by26.500022s; no overlap. General aggregate live process-treeRSS was not measured; process peaks are not aggregate memory safety claims.",
+    "2145remain unaccepted in this proposed101272cell composition. Current-owner-zero, selected-reader/conservation/emitted checks and coordinated integration remain future queue requirements. Canonical actualfinalizer and finalexacthead review remain separate.",
+    "One new actualscientific contribution/preservation review only, no unchanged config/release/budget attestations repeated, no scientifichelper imports/execution, fetch/network/Git mutation/publication or reservation. Public report contains no private-machine paths."
+  ]
+}
