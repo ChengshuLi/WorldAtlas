@@ -1,0 +1,21 @@
+{
+  "exit_code": 0,
+  "started_at": "2026-10-15T19:03:05.754198+00:00",
+  "ended_at": "2026-10-15T19:03:29.716333+00:00",
+  "elapsed_seconds": 23.961543250000002,
+  "actual_code_commit": "c428e7dcd806836081dcbd852509205145330077",
+  "composition_commit": "5224b2d3b5e3c03ca82ce30c91c6c550eb11634c",
+  "command": [
+    "/usr/bin/time",
+    "-l",
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "scripts/prepare-delivery-handoff.mjs",
+    "finalize",
+    ".cache/papua9580-after2013-config/finalize.json",
+    ".cache/delivery-handoff/papua9580-after2013-finalize-002"
+  ],
+  "output": ".cache/delivery-handoff/papua9580-after2013-finalize-002",
+  "memory_flags": false,
+  "source_producer_replay": false,
+  "code_accepted": false
+}

@@ -583,7 +583,8 @@ function constructOriginalAuthority(reader, inputs) {
     const preimage = {...binding,kind:'source-target-native-rule-v1'};
     const proof = qualifySourceTargetNativeAuthority(reader,preimage,binding);
     return {products:{'original-rule-preimage.json':valueBytes(preimage),'authority-binding.json':valueBytes(binding)},
-      component_ids:proof.source_scope_ids,ledger_rows:proof.original_ledger.rows,rule_sha256:valueSha(preimage),limitations:proof.limitations};
+      component_ids:proof.source_scope_ids,ledger_rows:proof.original_ledger.rows,rule_sha256:valueSha(preimage),limitations:proof.limitations,
+      ...(Object.hasOwn(proof,'physical_context_hits') ? {physical_context_hits:proof.physical_context_hits} : {})};
   }
   const binding = deriveOriginalBinding(reader, inputs);
   const custody = readOriginalRuleAuthority(reader, binding.original_pins, binding.source_output_aliases ?? []);
