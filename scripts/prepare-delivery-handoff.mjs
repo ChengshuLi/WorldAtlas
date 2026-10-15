@@ -245,14 +245,31 @@ export function prepareEvidence(config, reader) {
       const pin = reader.pin(d.candidate_commit, name); reader.read(pin);
       const {commit, ...file} = descriptor(pin); return file;
     });
-    const ids = new Set();
+    const ids = new Set(), boundComponents = new Set();
     for (const original of d.qualified_constructor_pins) {
       need(typeof original.id === 'string' && original.id && !ids.has(original.id), 'Unique original constructor references required');
-      ids.add(original.id); reader.read(original.pin);
+      ids.add(original.id);
+      const constructed = metadata(original.pin);
+      need(constructed.version === 1 && unique(constructed.component_ids) && Array.isArray(constructed.ledger_rows)
+        && same(constructed.component_ids, constructed.ledger_rows.map(row => row.component_id))
+        && hex(constructed.rule_sha256, 64), 'Complete original constructor rows required');
+      for (const row of constructed.ledger_rows) {
+        const selected = current.get(row.component_id);
+        need(selected && !prior.has(row.component_id) && !boundComponents.has(row.component_id), 'Original constructor scope differs');
+        const {authority_sha256, rule_sha256, ...literal} = selected;
+        need(hex(authority_sha256, 64) && rule_sha256 === constructed.rule_sha256 && same(literal, row),
+          'Original constructor row differs from actual added row');
+        boundComponents.add(row.component_id);
+      }
       const source = d.sources.filter(source => source.id === original.id);
       need(source.length === 1 && source[0].retention === 'restoration-only'
         && same(source[0].original_pin, original.pin), 'Complete original checkpoint citation required');
     }
+    need(boundComponents.size === after.rows.length - before.rows.length, 'Incomplete original constructor coverage');
+    if (d.original_authorities !== undefined) need(Array.isArray(d.original_authorities)
+      && d.original_authorities.length === ids.size && new Set(d.original_authorities.map(row => row.id)).size === ids.size
+      && d.original_authorities.every(row => ids.has(row.id) && same(row.original_authority?.ledger,
+        d.qualified_constructor_pins.find(original => original.id === row.id).pin)), 'Original authority inventory differs');
     manifest = {version: 1, issue: d.issue, lane: 'engineering', worker_id: d.worker_id,
       subject_ids: d.subject_ids, subject_ids_sha256: digest(Buffer.from(JSON.stringify([...d.subject_ids].sort()))),
       baseline, sources: d.sources, outputs, methods: [{id: 'retained-selected-delivery', kind: 'code',
