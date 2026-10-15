@@ -245,7 +245,7 @@ export function workspaceManager(repo, {limits = policy, freeBytes} = {}) {
     return {released: true, path: entry.path, preservedRef, head};
   });
   const check = () => {
-    const usage = report();
+    const usage = {freeBytes: availableBytes(), limits};
     if (usage.freeBytes < limits.minimumFree) throw Error('Local storage budget breached; stop new generation/installations and inspect report');
     return usage;
   };
