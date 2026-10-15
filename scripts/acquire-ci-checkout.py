@@ -325,6 +325,7 @@ def acquire(repository, sha, tree, workspace, token=None, git_executable=None, e
                 retained = coordination_execution_paths(execution_tree) + [expectations_path]
                 patterns = package_namespace_patterns(definition, 'research/geography/', [expectations_path])
                 patterns += package_namespace_patterns(definition, 'coordination/engineering/', retained)
+                patterns += package_namespace_patterns(definition, 'data/')
                 with (staging / '.git/info/sparse-checkout').open('a', encoding='utf-8') as output:
                     output.write('\n'.join(patterns) + '\n')
             supervisor.run(common + ['checkout', '--detach', '--force', '--progress', sha],
