@@ -116,8 +116,10 @@ export class ImmutableReader {
   read(name,{version=this.version,expected,decoded=0}={}) {
     const pin=this.descriptor(name,version);this.admit(pin,decoded);
     const body=this.git('cat-file','blob',pin.git_blob_oid);
-    demand(body.length===pin.bytes&&(!expected||sha(body)===expected),'Whole immutable input differs: '+name);
-    pin.sha256=sha(body);pin.whole_body_consumed=true;
+    demand(body.length===pin.bytes,'Whole immutable input differs: '+name);
+    const actualSha=sha(body);
+    demand(!expected||actualSha===expected,'Whole immutable input differs: '+name);
+    pin.sha256=actualSha;pin.whole_body_consumed=true;
     return body;
   }
   json(name,options){return JSON.parse(this.read(name,options));}
