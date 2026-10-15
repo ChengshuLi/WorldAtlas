@@ -1,0 +1,1619 @@
+{
+  "status": "Positive literal whole-operand/provenance review with limits; no input identity defect found.",
+  "findings": [],
+  "checks": {
+    "bound_input:whole-original-operands.json": true,
+    "bound_input:README.md": true,
+    "bound_input:whole-target-stage-inputs.json": true,
+    "output:operand-locators.json": true,
+    "output:whole-new-operands.json": true,
+    "output:all1175-original-owner-observations.json.gz": true,
+    "decoded_output:all1175-original-owner-observations.json.gz": true,
+    "output:territorial-exclusions-field-plan.json": true,
+    "10_operands_6_new_4_reused": true,
+    "local_probe:48db686a6726c3dc719a722f0260b81e159b988d": true,
+    "commit_path:48db686a6726c3dc719a722f0260b81e159b988d": true,
+    "original_raw_identity:48db686a6726c3dc719a722f0260b81e159b988d": true,
+    "original_decoded_identity:48db686a6726c3dc719a722f0260b81e159b988d": true,
+    "local_probe:111ddb76caaccd1398ac01c460e2305d8a8082d6": true,
+    "commit_path:111ddb76caaccd1398ac01c460e2305d8a8082d6": true,
+    "original_raw_identity:111ddb76caaccd1398ac01c460e2305d8a8082d6": true,
+    "local_probe:e6e380ec13cd4bcc1d24399a76bfa85ca5805b26": true,
+    "commit_path:e6e380ec13cd4bcc1d24399a76bfa85ca5805b26": true,
+    "original_raw_identity:e6e380ec13cd4bcc1d24399a76bfa85ca5805b26": true,
+    "original_decoded_identity:e6e380ec13cd4bcc1d24399a76bfa85ca5805b26": true,
+    "local_probe:235bf73f0890fa97c82d1471f840296f17cfcfca": true,
+    "commit_path:235bf73f0890fa97c82d1471f840296f17cfcfca": true,
+    "original_raw_identity:235bf73f0890fa97c82d1471f840296f17cfcfca": true,
+    "original_decoded_identity:235bf73f0890fa97c82d1471f840296f17cfcfca": true,
+    "local_probe:ee0644104a3958d0c1bc0eed80b7fe6e3f4e2a45": true,
+    "commit_path:ee0644104a3958d0c1bc0eed80b7fe6e3f4e2a45": true,
+    "original_raw_identity:ee0644104a3958d0c1bc0eed80b7fe6e3f4e2a45": true,
+    "local_probe:29edaa5770af7af9b72432cc407ca296bbde6e15": true,
+    "commit_path:29edaa5770af7af9b72432cc407ca296bbde6e15": true,
+    "original_raw_identity:29edaa5770af7af9b72432cc407ca296bbde6e15": true,
+    "original_decoded_identity:29edaa5770af7af9b72432cc407ca296bbde6e15": true,
+    "local_probe:ba647ab28479e8fff85bb8721ebc99390a881b76": true,
+    "commit_path:ba647ab28479e8fff85bb8721ebc99390a881b76": true,
+    "original_raw_identity:ba647ab28479e8fff85bb8721ebc99390a881b76": true,
+    "original_decoded_identity:ba647ab28479e8fff85bb8721ebc99390a881b76": true,
+    "local_probe:35a36eb8b83d3401b0bdfe697e6f7069624cfe18": true,
+    "commit_path:35a36eb8b83d3401b0bdfe697e6f7069624cfe18": true,
+    "original_raw_identity:35a36eb8b83d3401b0bdfe697e6f7069624cfe18": true,
+    "original_decoded_identity:35a36eb8b83d3401b0bdfe697e6f7069624cfe18": true,
+    "local_probe:6ce239e0543eb49b944cee4d9fc45c28541f0130": true,
+    "commit_path:6ce239e0543eb49b944cee4d9fc45c28541f0130": true,
+    "original_raw_identity:6ce239e0543eb49b944cee4d9fc45c28541f0130": true,
+    "original_decoded_identity:6ce239e0543eb49b944cee4d9fc45c28541f0130": true,
+    "local_probe:d6351672b369b2e6919b10b7c959b3b709a3040e": true,
+    "commit_path:d6351672b369b2e6919b10b7c959b3b709a3040e": true,
+    "original_raw_identity:d6351672b369b2e6919b10b7c959b3b709a3040e": true,
+    "original_decoded_identity:d6351672b369b2e6919b10b7c959b3b709a3040e": true,
+    "complete_original_bank_roster_reference": true,
+    "original_country_convention_result_join": true,
+    "original_context_source_pin": true,
+    "operand_data_file:gb:CHN:ADM1:43563684B59914390554750": true,
+    "operand_pin_in_verified_bodies:gb:CHN:ADM1:43563684B59914390554750": true,
+    "whole_original_feature_geometry:gb:CHN:ADM1:43563684B59914390554750": true,
+    "new_exact_operand:gb:CHN:ADM1:43563684B59914390554750": true,
+    "literal_source_identity:gb:CHN:ADM1:43563684B59914390554750": true,
+    "original_family_metadata:gb:CHN:ADM1:43563684B59914390554750": true,
+    "operand_data_file:gb:CHN:ADM1:43563684B84540832148656": true,
+    "operand_pin_in_verified_bodies:gb:CHN:ADM1:43563684B84540832148656": true,
+    "whole_original_feature_geometry:gb:CHN:ADM1:43563684B84540832148656": true,
+    "reused_exact557_operand:gb:CHN:ADM1:43563684B84540832148656": true,
+    "literal_source_identity:gb:CHN:ADM1:43563684B84540832148656": true,
+    "original_family_metadata:gb:CHN:ADM1:43563684B84540832148656": true,
+    "operand_data_file:gb:KHM:ADM1:37992800B528078583451": true,
+    "operand_pin_in_verified_bodies:gb:KHM:ADM1:37992800B528078583451": true,
+    "whole_original_feature_geometry:gb:KHM:ADM1:37992800B528078583451": true,
+    "new_exact_operand:gb:KHM:ADM1:37992800B528078583451": true,
+    "literal_source_identity:gb:KHM:ADM1:37992800B528078583451": true,
+    "original_family_metadata:gb:KHM:ADM1:37992800B528078583451": true,
+    "operand_data_file:gb:KHM:ADM1:37992800B57023840568534": true,
+    "operand_pin_in_verified_bodies:gb:KHM:ADM1:37992800B57023840568534": true,
+    "whole_original_feature_geometry:gb:KHM:ADM1:37992800B57023840568534": true,
+    "new_exact_operand:gb:KHM:ADM1:37992800B57023840568534": true,
+    "literal_source_identity:gb:KHM:ADM1:37992800B57023840568534": true,
+    "original_family_metadata:gb:KHM:ADM1:37992800B57023840568534": true,
+    "operand_data_file:gb:LAO:ADM1:31783359B64397225362620": true,
+    "operand_pin_in_verified_bodies:gb:LAO:ADM1:31783359B64397225362620": true,
+    "whole_original_feature_geometry:gb:LAO:ADM1:31783359B64397225362620": true,
+    "new_exact_operand:gb:LAO:ADM1:31783359B64397225362620": true,
+    "literal_source_identity:gb:LAO:ADM1:31783359B64397225362620": true,
+    "original_family_metadata:gb:LAO:ADM1:31783359B64397225362620": true,
+    "operand_data_file:gb:LAO:ADM1:31783359B8999899719232": true,
+    "operand_pin_in_verified_bodies:gb:LAO:ADM1:31783359B8999899719232": true,
+    "whole_original_feature_geometry:gb:LAO:ADM1:31783359B8999899719232": true,
+    "new_exact_operand:gb:LAO:ADM1:31783359B8999899719232": true,
+    "literal_source_identity:gb:LAO:ADM1:31783359B8999899719232": true,
+    "original_family_metadata:gb:LAO:ADM1:31783359B8999899719232": true,
+    "operand_data_file:retained-country-reference:ADM0_A3:CHN": true,
+    "operand_pin_in_verified_bodies:retained-country-reference:ADM0_A3:CHN": true,
+    "whole_original_feature_geometry:retained-country-reference:ADM0_A3:CHN": true,
+    "reused_exact557_operand:retained-country-reference:ADM0_A3:CHN": true,
+    "unique_literal_reference_identity:retained-country-reference:ADM0_A3:CHN": true,
+    "operand_data_file:retained-country-reference:ADM0_A3:KHM": true,
+    "operand_pin_in_verified_bodies:retained-country-reference:ADM0_A3:KHM": true,
+    "whole_original_feature_geometry:retained-country-reference:ADM0_A3:KHM": true,
+    "new_exact_operand:retained-country-reference:ADM0_A3:KHM": true,
+    "unique_literal_reference_identity:retained-country-reference:ADM0_A3:KHM": true,
+    "operand_data_file:retained-country-reference:ADM0_A3:LAO": true,
+    "operand_pin_in_verified_bodies:retained-country-reference:ADM0_A3:LAO": true,
+    "whole_original_feature_geometry:retained-country-reference:ADM0_A3:LAO": true,
+    "reused_exact557_operand:retained-country-reference:ADM0_A3:LAO": true,
+    "unique_literal_reference_identity:retained-country-reference:ADM0_A3:LAO": true,
+    "operand_data_file:retained-country-reference:ADM0_A3:VNM": true,
+    "operand_pin_in_verified_bodies:retained-country-reference:ADM0_A3:VNM": true,
+    "whole_original_feature_geometry:retained-country-reference:ADM0_A3:VNM": true,
+    "reused_exact557_operand:retained-country-reference:ADM0_A3:VNM": true,
+    "unique_literal_reference_identity:retained-country-reference:ADM0_A3:VNM": true,
+    "positive_VNM_context_present": true,
+    "exact23_unique_scope": true,
+    "field_plan_schema": true,
+    "all_original_context:Xin Man": true,
+    "original_context_package_and_class:Xin Man": true,
+    "original_adverse_and_flag_counts:Xin Man": true,
+    "candidate_count:Xin Man": true,
+    "literal_source_rows:Xin Man": true,
+    "recorded_foreign_source_reference:Xin Man": true,
+    "foreign_source_country_metadata:Xin Man:gb:CHN:ADM1:43563684B84540832148656": true,
+    "all_recorded_source_country_provenance:Xin Man": true,
+    "reference_scope_only_recorded_or_explicit_metadata:Xin Man": true,
+    "whole_field_plan_order:Xin Man": true,
+    "VNM_never_territorial_exclusion:Xin Man": true,
+    "bound_patch_stage:Xin Man:native-patch57.json": true,
+    "bound_patch_stage:Xin Man:whole-target-stage-inputs.json": true,
+    "exact_original_land_patch:Xin Man": true,
+    "whole_positive_original_stage:Xin Man": true,
+    "selected_metadata_and_retained_hash:Xin Man": true,
+    "distinct_source_vintages_preserved:Xin Man": true,
+    "reference_counts_preserved:Xin Man": true,
+    "all_original_context:Nam Giang": true,
+    "original_context_package_and_class:Nam Giang": true,
+    "original_adverse_and_flag_counts:Nam Giang": true,
+    "candidate_count:Nam Giang": true,
+    "literal_source_rows:Nam Giang": true,
+    "recorded_foreign_source_reference:Nam Giang": true,
+    "foreign_source_country_metadata:Nam Giang:gb:LAO:ADM1:31783359B64397225362620": true,
+    "all_recorded_source_country_provenance:Nam Giang": true,
+    "reference_scope_only_recorded_or_explicit_metadata:Nam Giang": true,
+    "whole_field_plan_order:Nam Giang": true,
+    "VNM_never_territorial_exclusion:Nam Giang": true,
+    "bound_patch_stage:Nam Giang:native-patch37.json": true,
+    "bound_patch_stage:Nam Giang:whole-target-stage-inputs.json": true,
+    "exact_original_land_patch:Nam Giang": true,
+    "whole_positive_original_stage:Nam Giang": true,
+    "selected_metadata_and_retained_hash:Nam Giang": true,
+    "distinct_source_vintages_preserved:Nam Giang": true,
+    "reference_counts_preserved:Nam Giang": true,
+    "all_original_context:Ha Lang": true,
+    "original_context_package_and_class:Ha Lang": true,
+    "original_adverse_and_flag_counts:Ha Lang": true,
+    "candidate_count:Ha Lang": true,
+    "literal_source_rows:Ha Lang": true,
+    "recorded_foreign_source_reference:Ha Lang": true,
+    "foreign_source_country_metadata:Ha Lang:gb:CHN:ADM1:43563684B59914390554750": true,
+    "all_recorded_source_country_provenance:Ha Lang": true,
+    "reference_scope_only_recorded_or_explicit_metadata:Ha Lang": true,
+    "whole_field_plan_order:Ha Lang": true,
+    "VNM_never_territorial_exclusion:Ha Lang": true,
+    "bound_patch_stage:Ha Lang:native-patch34.json": true,
+    "bound_patch_stage:Ha Lang:whole-target-stage-inputs.json": true,
+    "exact_original_land_patch:Ha Lang": true,
+    "whole_positive_original_stage:Ha Lang": true,
+    "selected_metadata_and_retained_hash:Ha Lang": true,
+    "distinct_source_vintages_preserved:Ha Lang": true,
+    "reference_counts_preserved:Ha Lang": true,
+    "all_original_context:Dak Glei": true,
+    "original_context_package_and_class:Dak Glei": true,
+    "original_adverse_and_flag_counts:Dak Glei": true,
+    "candidate_count:Dak Glei": true,
+    "literal_source_rows:Dak Glei": true,
+    "recorded_foreign_source_reference:Dak Glei": true,
+    "foreign_source_country_metadata:Dak Glei:gb:LAO:ADM1:31783359B8999899719232": true,
+    "all_recorded_source_country_provenance:Dak Glei": true,
+    "reference_scope_only_recorded_or_explicit_metadata:Dak Glei": true,
+    "whole_field_plan_order:Dak Glei": true,
+    "VNM_never_territorial_exclusion:Dak Glei": true,
+    "bound_patch_stage:Dak Glei:native-patch3.json": true,
+    "bound_patch_stage:Dak Glei:whole-target-stage-inputs.json": true,
+    "exact_original_land_patch:Dak Glei": true,
+    "whole_positive_original_stage:Dak Glei": true,
+    "selected_metadata_and_retained_hash:Dak Glei": true,
+    "distinct_source_vintages_preserved:Dak Glei": true,
+    "reference_counts_preserved:Dak Glei": true,
+    "all_original_context:Vi Xuyen": true,
+    "original_context_package_and_class:Vi Xuyen": true,
+    "original_adverse_and_flag_counts:Vi Xuyen": true,
+    "candidate_count:Vi Xuyen": true,
+    "literal_source_rows:Vi Xuyen": true,
+    "recorded_foreign_source_reference:Vi Xuyen": true,
+    "foreign_source_country_metadata:Vi Xuyen:gb:CHN:ADM1:43563684B84540832148656": true,
+    "all_recorded_source_country_provenance:Vi Xuyen": true,
+    "reference_scope_only_recorded_or_explicit_metadata:Vi Xuyen": true,
+    "whole_field_plan_order:Vi Xuyen": true,
+    "VNM_never_territorial_exclusion:Vi Xuyen": true,
+    "bound_patch_stage:Vi Xuyen:native-patch2.json": true,
+    "bound_patch_stage:Vi Xuyen:whole-target-stage-inputs.json": true,
+    "exact_original_land_patch:Vi Xuyen": true,
+    "whole_positive_original_stage:Vi Xuyen": true,
+    "selected_metadata_and_retained_hash:Vi Xuyen": true,
+    "distinct_source_vintages_preserved:Vi Xuyen": true,
+    "reference_counts_preserved:Vi Xuyen": true,
+    "all_original_context:An Phu": true,
+    "original_context_package_and_class:An Phu": true,
+    "original_adverse_and_flag_counts:An Phu": true,
+    "candidate_count:An Phu": true,
+    "literal_source_rows:An Phu": true,
+    "recorded_foreign_source_reference:An Phu": true,
+    "foreign_source_country_metadata:An Phu:gb:KHM:ADM1:37992800B57023840568534": true,
+    "all_recorded_source_country_provenance:An Phu": true,
+    "reference_scope_only_recorded_or_explicit_metadata:An Phu": true,
+    "whole_field_plan_order:An Phu": true,
+    "VNM_never_territorial_exclusion:An Phu": true,
+    "bound_patch_stage:An Phu:native-patch1.json": true,
+    "bound_patch_stage:An Phu:whole-target-stage-inputs.json": true,
+    "exact_original_land_patch:An Phu": true,
+    "whole_positive_original_stage:An Phu": true,
+    "selected_metadata_and_retained_hash:An Phu": true,
+    "distinct_source_vintages_preserved:An Phu": true,
+    "reference_counts_preserved:An Phu": true,
+    "all_original_context:Ben Cau": true,
+    "original_context_package_and_class:Ben Cau": true,
+    "original_adverse_and_flag_counts:Ben Cau": true,
+    "candidate_count:Ben Cau": true,
+    "literal_source_rows:Ben Cau": true,
+    "recorded_foreign_source_reference:Ben Cau": true,
+    "foreign_source_country_metadata:Ben Cau:gb:KHM:ADM1:37992800B528078583451": true,
+    "all_recorded_source_country_provenance:Ben Cau": true,
+    "reference_scope_only_recorded_or_explicit_metadata:Ben Cau": true,
+    "whole_field_plan_order:Ben Cau": true,
+    "VNM_never_territorial_exclusion:Ben Cau": true,
+    "bound_patch_stage:Ben Cau:native-patch1.json": true,
+    "bound_patch_stage:Ben Cau:whole-target-stage-inputs.json": true,
+    "exact_original_land_patch:Ben Cau": true,
+    "whole_positive_original_stage:Ben Cau": true,
+    "selected_metadata_and_retained_hash:Ben Cau": true,
+    "distinct_source_vintages_preserved:Ben Cau": true,
+    "reference_counts_preserved:Ben Cau": true,
+    "all_original_context:Bo Trach": true,
+    "original_context_package_and_class:Bo Trach": true,
+    "original_adverse_and_flag_counts:Bo Trach": true,
+    "candidate_count:Bo Trach": true,
+    "literal_source_rows:Bo Trach": true,
+    "recorded_foreign_source_reference:Bo Trach": true,
+    "all_recorded_source_country_provenance:Bo Trach": true,
+    "reference_scope_only_recorded_or_explicit_metadata:Bo Trach": true,
+    "whole_field_plan_order:Bo Trach": true,
+    "VNM_never_territorial_exclusion:Bo Trach": true,
+    "bound_patch_stage:Bo Trach:native-patch41.json": true,
+    "bound_patch_stage:Bo Trach:whole-target-stage-inputs.json": true,
+    "exact_original_land_patch:Bo Trach": true,
+    "whole_positive_original_stage:Bo Trach": true,
+    "selected_metadata_and_retained_hash:Bo Trach": true,
+    "distinct_source_vintages_preserved:Bo Trach": true,
+    "reference_counts_preserved:Bo Trach": true,
+    "all_original_context:Binh Lieu": true,
+    "original_context_package_and_class:Binh Lieu": true,
+    "original_adverse_and_flag_counts:Binh Lieu": true,
+    "candidate_count:Binh Lieu": true,
+    "literal_source_rows:Binh Lieu": true,
+    "recorded_foreign_source_reference:Binh Lieu": true,
+    "all_recorded_source_country_provenance:Binh Lieu": true,
+    "reference_scope_only_recorded_or_explicit_metadata:Binh Lieu": true,
+    "whole_field_plan_order:Binh Lieu": true,
+    "VNM_never_territorial_exclusion:Binh Lieu": true,
+    "bound_patch_stage:Binh Lieu:candidate-native-patch.json": true,
+    "bound_patch_stage:Binh Lieu:original-stage-inputs.json": true,
+    "exact_original_land_patch:Binh Lieu": true,
+    "whole_positive_original_stage:Binh Lieu": true,
+    "selected_metadata_and_retained_hash:Binh Lieu": true,
+    "distinct_source_vintages_preserved:Binh Lieu": true,
+    "reference_counts_preserved:Binh Lieu": true,
+    "all_original_context:Nam Po": true,
+    "original_context_package_and_class:Nam Po": true,
+    "original_adverse_and_flag_counts:Nam Po": true,
+    "candidate_count:Nam Po": true,
+    "literal_source_rows:Nam Po": true,
+    "recorded_foreign_source_reference:Nam Po": true,
+    "all_recorded_source_country_provenance:Nam Po": true,
+    "reference_scope_only_recorded_or_explicit_metadata:Nam Po": true,
+    "whole_field_plan_order:Nam Po": true,
+    "VNM_never_territorial_exclusion:Nam Po": true,
+    "bound_patch_stage:Nam Po:native-patch38.json": true,
+    "bound_patch_stage:Nam Po:whole-target-stage-inputs.json": true,
+    "exact_original_land_patch:Nam Po": true,
+    "whole_positive_original_stage:Nam Po": true,
+    "selected_metadata_and_retained_hash:Nam Po": true,
+    "distinct_source_vintages_preserved:Nam Po": true,
+    "reference_counts_preserved:Nam Po": true,
+    "all_original_context:Tan Bien": true,
+    "original_context_package_and_class:Tan Bien": true,
+    "original_adverse_and_flag_counts:Tan Bien": true,
+    "candidate_count:Tan Bien": true,
+    "literal_source_rows:Tan Bien": true,
+    "recorded_foreign_source_reference:Tan Bien": true,
+    "all_recorded_source_country_provenance:Tan Bien": true,
+    "reference_scope_only_recorded_or_explicit_metadata:Tan Bien": true,
+    "whole_field_plan_order:Tan Bien": true,
+    "VNM_never_territorial_exclusion:Tan Bien": true,
+    "bound_patch_stage:Tan Bien:native-patch26.json": true,
+    "bound_patch_stage:Tan Bien:whole-target-stage-inputs.json": true,
+    "exact_original_land_patch:Tan Bien": true,
+    "whole_positive_original_stage:Tan Bien": true,
+    "selected_metadata_and_retained_hash:Tan Bien": true,
+    "distinct_source_vintages_preserved:Tan Bien": true,
+    "reference_counts_preserved:Tan Bien": true,
+    "all_original_context:Muong Lat": true,
+    "original_context_package_and_class:Muong Lat": true,
+    "original_adverse_and_flag_counts:Muong Lat": true,
+    "candidate_count:Muong Lat": true,
+    "literal_source_rows:Muong Lat": true,
+    "recorded_foreign_source_reference:Muong Lat": true,
+    "all_recorded_source_country_provenance:Muong Lat": true,
+    "reference_scope_only_recorded_or_explicit_metadata:Muong Lat": true,
+    "whole_field_plan_order:Muong Lat": true,
+    "VNM_never_territorial_exclusion:Muong Lat": true,
+    "bound_patch_stage:Muong Lat:native-patch18.json": true,
+    "bound_patch_stage:Muong Lat:whole-target-stage-inputs.json": true,
+    "exact_original_land_patch:Muong Lat": true,
+    "whole_positive_original_stage:Muong Lat": true,
+    "selected_metadata_and_retained_hash:Muong Lat": true,
+    "distinct_source_vintages_preserved:Muong Lat": true,
+    "reference_counts_preserved:Muong Lat": true,
+    "all_original_context:Thuong Xuan": true,
+    "original_context_package_and_class:Thuong Xuan": true,
+    "original_adverse_and_flag_counts:Thuong Xuan": true,
+    "candidate_count:Thuong Xuan": true,
+    "literal_source_rows:Thuong Xuan": true,
+    "recorded_foreign_source_reference:Thuong Xuan": true,
+    "all_recorded_source_country_provenance:Thuong Xuan": true,
+    "reference_scope_only_recorded_or_explicit_metadata:Thuong Xuan": true,
+    "whole_field_plan_order:Thuong Xuan": true,
+    "VNM_never_territorial_exclusion:Thuong Xuan": true,
+    "bound_patch_stage:Thuong Xuan:candidate-native-patch.json": true,
+    "bound_patch_stage:Thuong Xuan:original-stage-inputs.json": true,
+    "exact_original_land_patch:Thuong Xuan": true,
+    "whole_positive_original_stage:Thuong Xuan": true,
+    "selected_metadata_and_retained_hash:Thuong Xuan": true,
+    "distinct_source_vintages_preserved:Thuong Xuan": true,
+    "reference_counts_preserved:Thuong Xuan": true,
+    "all_original_context:Ky Son": true,
+    "original_context_package_and_class:Ky Son": true,
+    "original_adverse_and_flag_counts:Ky Son": true,
+    "candidate_count:Ky Son": true,
+    "literal_source_rows:Ky Son": true,
+    "recorded_foreign_source_reference:Ky Son": true,
+    "all_recorded_source_country_provenance:Ky Son": true,
+    "reference_scope_only_recorded_or_explicit_metadata:Ky Son": true,
+    "whole_field_plan_order:Ky Son": true,
+    "VNM_never_territorial_exclusion:Ky Son": true,
+    "bound_patch_stage:Ky Son:native-patch8.json": true,
+    "bound_patch_stage:Ky Son:whole-target-stage-inputs.json": true,
+    "exact_original_land_patch:Ky Son": true,
+    "whole_positive_original_stage:Ky Son": true,
+    "selected_metadata_and_retained_hash:Ky Son": true,
+    "distinct_source_vintages_preserved:Ky Son": true,
+    "reference_counts_preserved:Ky Son": true,
+    "all_original_context:Quan Son": true,
+    "original_context_package_and_class:Quan Son": true,
+    "original_adverse_and_flag_counts:Quan Son": true,
+    "candidate_count:Quan Son": true,
+    "literal_source_rows:Quan Son": true,
+    "recorded_foreign_source_reference:Quan Son": true,
+    "all_recorded_source_country_provenance:Quan Son": true,
+    "reference_scope_only_recorded_or_explicit_metadata:Quan Son": true,
+    "whole_field_plan_order:Quan Son": true,
+    "VNM_never_territorial_exclusion:Quan Son": true,
+    "bound_patch_stage:Quan Son:native-patch7.json": true,
+    "bound_patch_stage:Quan Son:whole-target-stage-inputs.json": true,
+    "exact_original_land_patch:Quan Son": true,
+    "whole_positive_original_stage:Quan Son": true,
+    "selected_metadata_and_retained_hash:Quan Son": true,
+    "distinct_source_vintages_preserved:Quan Son": true,
+    "reference_counts_preserved:Quan Son": true,
+    "all_original_context:A Luoi": true,
+    "original_context_package_and_class:A Luoi": true,
+    "original_adverse_and_flag_counts:A Luoi": true,
+    "candidate_count:A Luoi": true,
+    "literal_source_rows:A Luoi": true,
+    "recorded_foreign_source_reference:A Luoi": true,
+    "all_recorded_source_country_provenance:A Luoi": true,
+    "reference_scope_only_recorded_or_explicit_metadata:A Luoi": true,
+    "whole_field_plan_order:A Luoi": true,
+    "VNM_never_territorial_exclusion:A Luoi": true,
+    "bound_patch_stage:A Luoi:native-patch6.json": true,
+    "bound_patch_stage:A Luoi:whole-target-stage-inputs.json": true,
+    "exact_original_land_patch:A Luoi": true,
+    "whole_positive_original_stage:A Luoi": true,
+    "selected_metadata_and_retained_hash:A Luoi": true,
+    "distinct_source_vintages_preserved:A Luoi": true,
+    "reference_counts_preserved:A Luoi": true,
+    "all_original_context:Van Lang": true,
+    "original_context_package_and_class:Van Lang": true,
+    "original_adverse_and_flag_counts:Van Lang": true,
+    "candidate_count:Van Lang": true,
+    "literal_source_rows:Van Lang": true,
+    "recorded_foreign_source_reference:Van Lang": true,
+    "all_recorded_source_country_provenance:Van Lang": true,
+    "reference_scope_only_recorded_or_explicit_metadata:Van Lang": true,
+    "whole_field_plan_order:Van Lang": true,
+    "VNM_never_territorial_exclusion:Van Lang": true,
+    "bound_patch_stage:Van Lang:candidate-native-patch.json": true,
+    "bound_patch_stage:Van Lang:original-stage-inputs.json": true,
+    "exact_original_land_patch:Van Lang": true,
+    "whole_positive_original_stage:Van Lang": true,
+    "selected_metadata_and_retained_hash:Van Lang": true,
+    "distinct_source_vintages_preserved:Van Lang": true,
+    "reference_counts_preserved:Van Lang": true,
+    "all_original_context:Cao Loc": true,
+    "original_context_package_and_class:Cao Loc": true,
+    "original_adverse_and_flag_counts:Cao Loc": true,
+    "candidate_count:Cao Loc": true,
+    "literal_source_rows:Cao Loc": true,
+    "recorded_foreign_source_reference:Cao Loc": true,
+    "all_recorded_source_country_provenance:Cao Loc": true,
+    "reference_scope_only_recorded_or_explicit_metadata:Cao Loc": true,
+    "whole_field_plan_order:Cao Loc": true,
+    "VNM_never_territorial_exclusion:Cao Loc": true,
+    "bound_patch_stage:Cao Loc:candidate-native-patch.json": true,
+    "bound_patch_stage:Cao Loc:original-stage-inputs.json": true,
+    "exact_original_land_patch:Cao Loc": true,
+    "whole_positive_original_stage:Cao Loc": true,
+    "selected_metadata_and_retained_hash:Cao Loc": true,
+    "distinct_source_vintages_preserved:Cao Loc": true,
+    "reference_counts_preserved:Cao Loc": true,
+    "all_original_context:Nam Nhun": true,
+    "original_context_package_and_class:Nam Nhun": true,
+    "original_adverse_and_flag_counts:Nam Nhun": true,
+    "candidate_count:Nam Nhun": true,
+    "literal_source_rows:Nam Nhun": true,
+    "recorded_foreign_source_reference:Nam Nhun": true,
+    "all_recorded_source_country_provenance:Nam Nhun": true,
+    "reference_scope_only_recorded_or_explicit_metadata:Nam Nhun": true,
+    "whole_field_plan_order:Nam Nhun": true,
+    "VNM_never_territorial_exclusion:Nam Nhun": true,
+    "bound_patch_stage:Nam Nhun:native-patch3.json": true,
+    "bound_patch_stage:Nam Nhun:whole-target-stage-inputs.json": true,
+    "exact_original_land_patch:Nam Nhun": true,
+    "whole_positive_original_stage:Nam Nhun": true,
+    "selected_metadata_and_retained_hash:Nam Nhun": true,
+    "distinct_source_vintages_preserved:Nam Nhun": true,
+    "reference_counts_preserved:Nam Nhun": true,
+    "all_original_context:Lao Cai": true,
+    "original_context_package_and_class:Lao Cai": true,
+    "original_adverse_and_flag_counts:Lao Cai": true,
+    "candidate_count:Lao Cai": true,
+    "literal_source_rows:Lao Cai": true,
+    "recorded_foreign_source_reference:Lao Cai": true,
+    "all_recorded_source_country_provenance:Lao Cai": true,
+    "reference_scope_only_recorded_or_explicit_metadata:Lao Cai": true,
+    "whole_field_plan_order:Lao Cai": true,
+    "VNM_never_territorial_exclusion:Lao Cai": true,
+    "bound_patch_stage:Lao Cai:native-patch3.json": true,
+    "bound_patch_stage:Lao Cai:whole-target-stage-inputs.json": true,
+    "exact_original_land_patch:Lao Cai": true,
+    "whole_positive_original_stage:Lao Cai": true,
+    "selected_metadata_and_retained_hash:Lao Cai": true,
+    "distinct_source_vintages_preserved:Lao Cai": true,
+    "reference_counts_preserved:Lao Cai": true,
+    "all_original_context:Tuy Duc": true,
+    "original_context_package_and_class:Tuy Duc": true,
+    "original_adverse_and_flag_counts:Tuy Duc": true,
+    "candidate_count:Tuy Duc": true,
+    "literal_source_rows:Tuy Duc": true,
+    "recorded_foreign_source_reference:Tuy Duc": true,
+    "all_recorded_source_country_provenance:Tuy Duc": true,
+    "reference_scope_only_recorded_or_explicit_metadata:Tuy Duc": true,
+    "whole_field_plan_order:Tuy Duc": true,
+    "VNM_never_territorial_exclusion:Tuy Duc": true,
+    "bound_patch_stage:Tuy Duc:native-patch2.json": true,
+    "bound_patch_stage:Tuy Duc:whole-target-stage-inputs.json": true,
+    "exact_original_land_patch:Tuy Duc": true,
+    "whole_positive_original_stage:Tuy Duc": true,
+    "selected_metadata_and_retained_hash:Tuy Duc": true,
+    "distinct_source_vintages_preserved:Tuy Duc": true,
+    "reference_counts_preserved:Tuy Duc": true,
+    "all_original_context:Dinh Lap": true,
+    "original_context_package_and_class:Dinh Lap": true,
+    "original_adverse_and_flag_counts:Dinh Lap": true,
+    "candidate_count:Dinh Lap": true,
+    "literal_source_rows:Dinh Lap": true,
+    "recorded_foreign_source_reference:Dinh Lap": true,
+    "all_recorded_source_country_provenance:Dinh Lap": true,
+    "reference_scope_only_recorded_or_explicit_metadata:Dinh Lap": true,
+    "whole_field_plan_order:Dinh Lap": true,
+    "VNM_never_territorial_exclusion:Dinh Lap": true,
+    "bound_patch_stage:Dinh Lap:candidate-native-patch.json": true,
+    "bound_patch_stage:Dinh Lap:original-stage-inputs.json": true,
+    "exact_original_land_patch:Dinh Lap": true,
+    "whole_positive_original_stage:Dinh Lap": true,
+    "selected_metadata_and_retained_hash:Dinh Lap": true,
+    "distinct_source_vintages_preserved:Dinh Lap": true,
+    "reference_counts_preserved:Dinh Lap": true,
+    "all_original_context:Vu Quang": true,
+    "original_context_package_and_class:Vu Quang": true,
+    "original_adverse_and_flag_counts:Vu Quang": true,
+    "candidate_count:Vu Quang": true,
+    "literal_source_rows:Vu Quang": true,
+    "recorded_foreign_source_reference:Vu Quang": true,
+    "all_recorded_source_country_provenance:Vu Quang": true,
+    "reference_scope_only_recorded_or_explicit_metadata:Vu Quang": true,
+    "whole_field_plan_order:Vu Quang": true,
+    "VNM_never_territorial_exclusion:Vu Quang": true,
+    "bound_patch_stage:Vu Quang:candidate-native-patch.json": true,
+    "bound_patch_stage:Vu Quang:original-stage-inputs.json": true,
+    "exact_original_land_patch:Vu Quang": true,
+    "whole_positive_original_stage:Vu Quang": true,
+    "selected_metadata_and_retained_hash:Vu Quang": true,
+    "distinct_source_vintages_preserved:Vu Quang": true,
+    "reference_counts_preserved:Vu Quang": true,
+    "all1175_original_records_unique_indices": true,
+    "exact351_unique_candidate_keys": true,
+    "1175_classes_and_821adverse_preserved": true,
+    "BenCau_precise_metadata_extension": true,
+    "all_packet_files_unchanged": true,
+    "exact_operand_pin_all_fields:gb:CHN:ADM1:43563684B59914390554750": true,
+    "exact_operand_pin_all_fields:gb:CHN:ADM1:43563684B84540832148656": true,
+    "exact_operand_pin_all_fields:gb:KHM:ADM1:37992800B528078583451": true,
+    "exact_operand_pin_all_fields:gb:KHM:ADM1:37992800B57023840568534": true,
+    "exact_operand_pin_all_fields:gb:LAO:ADM1:31783359B64397225362620": true,
+    "exact_operand_pin_all_fields:gb:LAO:ADM1:31783359B8999899719232": true,
+    "exact_operand_pin_all_fields:retained-country-reference:ADM0_A3:CHN": true,
+    "exact_operand_pin_all_fields:retained-country-reference:ADM0_A3:KHM": true,
+    "exact_operand_pin_all_fields:retained-country-reference:ADM0_A3:LAO": true,
+    "exact_operand_pin_all_fields:retained-country-reference:ADM0_A3:VNM": true,
+    "exact_field_plan_target_identity:Xin Man": true,
+    "no_nonland_or_relative_key_emitted:Xin Man": true,
+    "exact_field_plan_target_identity:Nam Giang": true,
+    "no_nonland_or_relative_key_emitted:Nam Giang": true,
+    "exact_field_plan_target_identity:Ha Lang": true,
+    "no_nonland_or_relative_key_emitted:Ha Lang": true,
+    "exact_field_plan_target_identity:Dak Glei": true,
+    "no_nonland_or_relative_key_emitted:Dak Glei": true,
+    "exact_field_plan_target_identity:Vi Xuyen": true,
+    "no_nonland_or_relative_key_emitted:Vi Xuyen": true,
+    "exact_field_plan_target_identity:An Phu": true,
+    "no_nonland_or_relative_key_emitted:An Phu": true,
+    "exact_field_plan_target_identity:Ben Cau": true,
+    "no_nonland_or_relative_key_emitted:Ben Cau": true,
+    "exact_field_plan_target_identity:Bo Trach": true,
+    "no_nonland_or_relative_key_emitted:Bo Trach": true,
+    "exact_field_plan_target_identity:Binh Lieu": true,
+    "no_nonland_or_relative_key_emitted:Binh Lieu": true,
+    "exact_field_plan_target_identity:Nam Po": true,
+    "no_nonland_or_relative_key_emitted:Nam Po": true,
+    "exact_field_plan_target_identity:Tan Bien": true,
+    "no_nonland_or_relative_key_emitted:Tan Bien": true,
+    "exact_field_plan_target_identity:Muong Lat": true,
+    "no_nonland_or_relative_key_emitted:Muong Lat": true,
+    "exact_field_plan_target_identity:Thuong Xuan": true,
+    "no_nonland_or_relative_key_emitted:Thuong Xuan": true,
+    "exact_field_plan_target_identity:Ky Son": true,
+    "no_nonland_or_relative_key_emitted:Ky Son": true,
+    "exact_field_plan_target_identity:Quan Son": true,
+    "no_nonland_or_relative_key_emitted:Quan Son": true,
+    "exact_field_plan_target_identity:A Luoi": true,
+    "no_nonland_or_relative_key_emitted:A Luoi": true,
+    "exact_field_plan_target_identity:Van Lang": true,
+    "no_nonland_or_relative_key_emitted:Van Lang": true,
+    "exact_field_plan_target_identity:Cao Loc": true,
+    "no_nonland_or_relative_key_emitted:Cao Loc": true,
+    "exact_field_plan_target_identity:Nam Nhun": true,
+    "no_nonland_or_relative_key_emitted:Nam Nhun": true,
+    "exact_field_plan_target_identity:Lao Cai": true,
+    "no_nonland_or_relative_key_emitted:Lao Cai": true,
+    "exact_field_plan_target_identity:Tuy Duc": true,
+    "no_nonland_or_relative_key_emitted:Tuy Duc": true,
+    "exact_field_plan_target_identity:Dinh Lap": true,
+    "no_nonland_or_relative_key_emitted:Dinh Lap": true,
+    "exact_field_plan_target_identity:Vu Quang": true,
+    "no_nonland_or_relative_key_emitted:Vu Quang": true
+  },
+  "reviewed_inputs": [
+    {
+      "path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/repair-package/next351-source-veto-readiness/source-veto-readiness.json",
+      "bytes": 161098,
+      "sha256": "28e72200646e3901f3d6a5818d292e12e5c25570219eeb2642c4b5962fca1db1"
+    },
+    {
+      "path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/repair-package/next351-source-veto-readiness/operand-locators.json",
+      "bytes": 17496,
+      "sha256": "58efd06228cba9ae6488b629d2da15c0c71cdd3330a511d20d72bfaeb1ad3687"
+    },
+    {
+      "path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/repair-package/next351-source-veto-readiness/whole-new-operands.json",
+      "bytes": 122427,
+      "sha256": "ca425cc2deb929e871bffbab0f485ce0af589082a3bccf333e2f0894f3756102"
+    },
+    {
+      "path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/repair-package/next351-source-veto-readiness/territorial-exclusions-field-plan.json",
+      "bytes": 9560,
+      "sha256": "0aaa49dc0645a0ae4594f01ccc9d203bbd32ace139e70a27edc9e575d56aa99a"
+    },
+    {
+      "path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/repair-package/next351-source-veto-readiness/all1175-original-owner-observations.json.gz",
+      "bytes": 12532,
+      "sha256": "2707876b6bca9edbf517a1349487e5dc3a30a52619d54f1cace2821e2a819a20"
+    },
+    {
+      "path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/repair-package/next351-source-veto-readiness/README.md",
+      "bytes": 4431,
+      "sha256": "6654ba619ebf806f3fdeae7b92163ce017e967f80ff1a0da1f1b1545a71737cf"
+    },
+    {
+      "path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/repair-package/next351-source-veto-readiness/checks.json",
+      "bytes": 65520,
+      "sha256": "9d5720b59c3e14a788034e198f29a42538f0a6877987b9991d6c2db8c8188d3b"
+    }
+  ],
+  "original_git_receipts": [
+    {
+      "bytes": 232506,
+      "commit": "a9c2d4122eed9d08cd3f213d3f5157039c8823bb",
+      "decoded_bytes": 19639757,
+      "decoded_sha256": "e079e92f47b95039bf29d639af7c5eb55e8616e6907f46667a60b4656b8944a5",
+      "file": "source-qualification-cells.json.gz",
+      "git_blob_oid": "48db686a6726c3dc719a722f0260b81e159b988d",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/evidence/source-qualification/cells.json.gz",
+      "sha256": "a85502406c50a52f012802a42f0e7a37480703ebe876aeaf212cfe96bfd65a2b",
+      "actual_decoded_bytes": 19639757,
+      "actual_decoded_sha256": "e079e92f47b95039bf29d639af7c5eb55e8616e6907f46667a60b4656b8944a5"
+    },
+    {
+      "bytes": 670769,
+      "commit": "a9c2d4122eed9d08cd3f213d3f5157039c8823bb",
+      "file": "source-qualification-result.json",
+      "git_blob_oid": "111ddb76caaccd1398ac01c460e2305d8a8082d6",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/evidence/source-qualification/result.json",
+      "sha256": "ca8c7c3a6df5a1b74e58ea0111f51c2df7c1e85ee7a8466a811b2d61051e196b",
+      "actual_decoded_bytes": 670769,
+      "actual_decoded_sha256": "ca8c7c3a6df5a1b74e58ea0111f51c2df7c1e85ee7a8466a811b2d61051e196b"
+    },
+    {
+      "bytes": 1844315,
+      "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+      "decoded_bytes": 13496995,
+      "decoded_sha256": "7fa99cbf064121e0130b66758c212ae22b2a7be5649f2e250e9cda89a9bd595e",
+      "git_blob_oid": "e6e380ec13cd4bcc1d24399a76bfa85ca5805b26",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz",
+      "sha256": "87f2d47e104b3af640351e747d8300d0068a1be23caab9e80558c3f8914eb4aa",
+      "actual_decoded_bytes": 13496995,
+      "actual_decoded_sha256": "7fa99cbf064121e0130b66758c212ae22b2a7be5649f2e250e9cda89a9bd595e"
+    },
+    {
+      "bytes": 4719659,
+      "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+      "decoded_bytes": 13287234,
+      "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255",
+      "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+      "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+      "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+      "actual_decoded_bytes": 13287234,
+      "actual_decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+    },
+    {
+      "bytes": 1338,
+      "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+      "git_blob_oid": "ee0644104a3958d0c1bc0eed80b7fe6e3f4e2a45",
+      "path": "data/sources.json",
+      "sha256": "b66732450b7ce2f39550058ea1073036c4bf3419f86ca3a58f105aba0bfed0c4",
+      "actual_decoded_bytes": 1338,
+      "actual_decoded_sha256": "b66732450b7ce2f39550058ea1073036c4bf3419f86ca3a58f105aba0bfed0c4"
+    },
+    {
+      "bytes": 77377,
+      "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+      "decoded_bytes": 263343,
+      "decoded_sha256": "bc4afc7eacf4351ae5b3ae7a612327987ce1123cb5deb8574fb49107091c6623",
+      "git_blob_oid": "29edaa5770af7af9b72432cc407ca296bbde6e15",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHN-ADM1-000.bin.gz",
+      "sha256": "ef7d65847af732f6e61430d6357a4909252f98771d9b00413d38bc3cb4eb767d",
+      "actual_decoded_bytes": 263343,
+      "actual_decoded_sha256": "bc4afc7eacf4351ae5b3ae7a612327987ce1123cb5deb8574fb49107091c6623"
+    },
+    {
+      "bytes": 124214,
+      "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+      "decoded_bytes": 410282,
+      "decoded_sha256": "2bf6228f8f60a2daa542dfade2ac04f0ee6758e5b718cdf31dff2157b39309d0",
+      "git_blob_oid": "ba647ab28479e8fff85bb8721ebc99390a881b76",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-KHM-ADM1-000.bin.gz",
+      "sha256": "6ebce9da7145572c968052542fb5da2c460b1925f6a32dbb97faf56ca3a2d046",
+      "actual_decoded_bytes": 410282,
+      "actual_decoded_sha256": "2bf6228f8f60a2daa542dfade2ac04f0ee6758e5b718cdf31dff2157b39309d0"
+    },
+    {
+      "bytes": 136573,
+      "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+      "decoded_bytes": 453270,
+      "decoded_sha256": "152d7d9f680d84c31214fe327e4d102a330d61f222329701ec8ea00a8d2dfb55",
+      "git_blob_oid": "35a36eb8b83d3401b0bdfe697e6f7069624cfe18",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-LAO-ADM1-000.bin.gz",
+      "sha256": "83a51a0eb283d4e6bb3fc7b8eab6365c92539ed0a3a029c4de8a02e8aaa24519",
+      "actual_decoded_bytes": 453270,
+      "actual_decoded_sha256": "152d7d9f680d84c31214fe327e4d102a330d61f222329701ec8ea00a8d2dfb55"
+    },
+    {
+      "bytes": 201064,
+      "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+      "decoded_bytes": 536751,
+      "decoded_sha256": "010bff8d3244064bc8001033ba79acc1215a1fb6e568f6f8a90da7ecec2c2fc5",
+      "git_blob_oid": "6ce239e0543eb49b944cee4d9fc45c28541f0130",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-VNM-ADM1-000.bin.gz",
+      "sha256": "4b45b67591b65e311ab3b864f0157243c1e90d98568f5afc0f40d3641fdc00ac",
+      "actual_decoded_bytes": 536751,
+      "actual_decoded_sha256": "010bff8d3244064bc8001033ba79acc1215a1fb6e568f6f8a90da7ecec2c2fc5"
+    },
+    {
+      "bytes": 1624579,
+      "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+      "decoded_bytes": 5273788,
+      "decoded_sha256": "2dff75b58e71f736ca9fd6ef7c859be40c6f9a9b7ae5cd0806b36fe8cfa4c4f6",
+      "git_blob_oid": "d6351672b369b2e6919b10b7c959b3b709a3040e",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-VNM-ADM2-000.bin.gz",
+      "sha256": "8fa769599000ab536b18b4a9d18c71fe0fecbe134d4443e36e6b2797b41273a8",
+      "actual_decoded_bytes": 5273788,
+      "actual_decoded_sha256": "2dff75b58e71f736ca9fd6ef7c859be40c6f9a9b7ae5cd0806b36fe8cfa4c4f6"
+    }
+  ],
+  "operand_reviews": [
+    {
+      "operand_id": "gb:CHN:ADM1:43563684B59914390554750",
+      "identity": {
+        "source_index": 15317,
+        "family_index": 61,
+        "source_id": "gb:CHN:ADM1:43563684B59914390554750",
+        "ordinal": 2,
+        "owners": [],
+        "name": "Guangxi Zhuang Autonomous Region",
+        "geometry_status": "raw-native-supported",
+        "shapeGroup": "CHN"
+      },
+      "original_pin": {
+        "bytes": 77377,
+        "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+        "decoded_bytes": 263343,
+        "decoded_sha256": "bc4afc7eacf4351ae5b3ae7a612327987ce1123cb5deb8574fb49107091c6623",
+        "git_blob_oid": "29edaa5770af7af9b72432cc407ca296bbde6e15",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHN-ADM1-000.bin.gz",
+        "sha256": "ef7d65847af732f6e61430d6357a4909252f98771d9b00413d38bc3cb4eb767d"
+      },
+      "original_pointer": "/features/2",
+      "data_file": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/repair-package/next351-source-veto-readiness/whole-new-operands.json",
+      "reused": false,
+      "whole_feature_value_sha256": "1d7cc6d4e1eaa1434b792b50d803be8e7a60437f4f05228e3e788ce464580d15",
+      "whole_geometry_value_sha256": "6b64e44835d5106ea1975fc40bb740d55fbeb666eb59e7195a7be255990646a9",
+      "whole_original_value_equal": true
+    },
+    {
+      "operand_id": "gb:CHN:ADM1:43563684B84540832148656",
+      "identity": {
+        "source_index": 15319,
+        "family_index": 61,
+        "source_id": "gb:CHN:ADM1:43563684B84540832148656",
+        "ordinal": 4,
+        "owners": [],
+        "name": "Yunnan Province",
+        "geometry_status": "raw-native-supported",
+        "shapeGroup": "CHN"
+      },
+      "original_pin": {
+        "bytes": 77377,
+        "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+        "decoded_bytes": 263343,
+        "decoded_sha256": "bc4afc7eacf4351ae5b3ae7a612327987ce1123cb5deb8574fb49107091c6623",
+        "git_blob_oid": "29edaa5770af7af9b72432cc407ca296bbde6e15",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHN-ADM1-000.bin.gz",
+        "sha256": "ef7d65847af732f6e61430d6357a4909252f98771d9b00413d38bc3cb4eb767d"
+      },
+      "original_pointer": "/features/4",
+      "data_file": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/repair-package/next557-source-veto-readiness/whole-original-operands.json",
+      "reused": true,
+      "whole_feature_value_sha256": "45c6c9c158c56d51d12e686d9a348bb14b7432e0cebaab9ad8cf178f2754484c",
+      "whole_geometry_value_sha256": "5cef5a3b17767e21600e4534e5d8f6c25137adc372d546d238b12f7f90cc136a",
+      "whole_original_value_equal": true
+    },
+    {
+      "operand_id": "gb:KHM:ADM1:37992800B528078583451",
+      "identity": {
+        "source_index": 40831,
+        "family_index": 178,
+        "source_id": "gb:KHM:ADM1:37992800B528078583451",
+        "ordinal": 21,
+        "owners": [],
+        "name": "Svay Rieng",
+        "geometry_status": "raw-native-supported",
+        "shapeGroup": "KHM"
+      },
+      "original_pin": {
+        "bytes": 124214,
+        "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+        "decoded_bytes": 410282,
+        "decoded_sha256": "2bf6228f8f60a2daa542dfade2ac04f0ee6758e5b718cdf31dff2157b39309d0",
+        "git_blob_oid": "ba647ab28479e8fff85bb8721ebc99390a881b76",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-KHM-ADM1-000.bin.gz",
+        "sha256": "6ebce9da7145572c968052542fb5da2c460b1925f6a32dbb97faf56ca3a2d046"
+      },
+      "original_pointer": "/features/21",
+      "data_file": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/repair-package/next351-source-veto-readiness/whole-new-operands.json",
+      "reused": false,
+      "whole_feature_value_sha256": "579e9e1c2e4cec7dc33da2f76d3c60b949e95a331db07d76f2dd2d586cd1f38c",
+      "whole_geometry_value_sha256": "c3f48677d88e56ce0b51db8963edda8919f0ed4929fbeb1b9b0c581b8f10eb4e",
+      "whole_original_value_equal": true
+    },
+    {
+      "operand_id": "gb:KHM:ADM1:37992800B57023840568534",
+      "identity": {
+        "source_index": 40818,
+        "family_index": 178,
+        "source_id": "gb:KHM:ADM1:37992800B57023840568534",
+        "ordinal": 8,
+        "owners": [],
+        "name": "Kandal",
+        "geometry_status": "raw-native-supported",
+        "shapeGroup": "KHM"
+      },
+      "original_pin": {
+        "bytes": 124214,
+        "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+        "decoded_bytes": 410282,
+        "decoded_sha256": "2bf6228f8f60a2daa542dfade2ac04f0ee6758e5b718cdf31dff2157b39309d0",
+        "git_blob_oid": "ba647ab28479e8fff85bb8721ebc99390a881b76",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-KHM-ADM1-000.bin.gz",
+        "sha256": "6ebce9da7145572c968052542fb5da2c460b1925f6a32dbb97faf56ca3a2d046"
+      },
+      "original_pointer": "/features/8",
+      "data_file": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/repair-package/next351-source-veto-readiness/whole-new-operands.json",
+      "reused": false,
+      "whole_feature_value_sha256": "f36f2200856c42a506367b5fd37d74f7874ad390252230ef29e3d8ec89b3d4c8",
+      "whole_geometry_value_sha256": "3b9df1632e072d0ffa617c63c732933e31366c4174a97c10695980a37a94bcd8",
+      "whole_original_value_equal": true
+    },
+    {
+      "operand_id": "gb:LAO:ADM1:31783359B64397225362620",
+      "identity": {
+        "source_index": 41316,
+        "family_index": 185,
+        "source_id": "gb:LAO:ADM1:31783359B64397225362620",
+        "ordinal": 16,
+        "owners": [],
+        "name": "Xekong",
+        "geometry_status": "raw-native-supported",
+        "shapeGroup": "LAO"
+      },
+      "original_pin": {
+        "bytes": 136573,
+        "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+        "decoded_bytes": 453270,
+        "decoded_sha256": "152d7d9f680d84c31214fe327e4d102a330d61f222329701ec8ea00a8d2dfb55",
+        "git_blob_oid": "35a36eb8b83d3401b0bdfe697e6f7069624cfe18",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-LAO-ADM1-000.bin.gz",
+        "sha256": "83a51a0eb283d4e6bb3fc7b8eab6365c92539ed0a3a029c4de8a02e8aaa24519"
+      },
+      "original_pointer": "/features/16",
+      "data_file": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/repair-package/next351-source-veto-readiness/whole-new-operands.json",
+      "reused": false,
+      "whole_feature_value_sha256": "3c027fa6401eefa90aade1dc4a69f6a14c6988f01bdd6f692c29888a32f9c25e",
+      "whole_geometry_value_sha256": "85ece86320f3492546357db6e0ac0faaefc767174c159a5e751295a8bd80ffb2",
+      "whole_original_value_equal": true
+    },
+    {
+      "operand_id": "gb:LAO:ADM1:31783359B8999899719232",
+      "identity": {
+        "source_index": 41301,
+        "family_index": 185,
+        "source_id": "gb:LAO:ADM1:31783359B8999899719232",
+        "ordinal": 1,
+        "owners": [],
+        "name": "Attapeu",
+        "geometry_status": "raw-native-supported",
+        "shapeGroup": "LAO"
+      },
+      "original_pin": {
+        "bytes": 136573,
+        "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+        "decoded_bytes": 453270,
+        "decoded_sha256": "152d7d9f680d84c31214fe327e4d102a330d61f222329701ec8ea00a8d2dfb55",
+        "git_blob_oid": "35a36eb8b83d3401b0bdfe697e6f7069624cfe18",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-LAO-ADM1-000.bin.gz",
+        "sha256": "83a51a0eb283d4e6bb3fc7b8eab6365c92539ed0a3a029c4de8a02e8aaa24519"
+      },
+      "original_pointer": "/features/1",
+      "data_file": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/repair-package/next351-source-veto-readiness/whole-new-operands.json",
+      "reused": false,
+      "whole_feature_value_sha256": "49d3d1b3e3793585134b0989c8197d2c77007d653f2b6abf2bfca0a24045c4f4",
+      "whole_geometry_value_sha256": "cf85cdb0a0aec0214420d931d4ff1b60f2e86c4dc94114869e3b04ad4c30b6cf",
+      "whole_original_value_equal": true
+    },
+    {
+      "operand_id": "retained-country-reference:ADM0_A3:CHN",
+      "identity": {
+        "ADM0_A3": "CHN",
+        "ADMIN": "China",
+        "NE_ID": 1159320471,
+        "SOV_A3": "CH1",
+        "feature_index_zero_based": 9
+      },
+      "original_pin": {
+        "bytes": 4719659,
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "decoded_bytes": 13287234,
+        "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255",
+        "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+        "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+        "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075"
+      },
+      "original_pointer": "/features/9",
+      "data_file": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/repair-package/next557-source-veto-readiness/whole-original-operands.json",
+      "reused": true,
+      "whole_feature_value_sha256": "e02bdefd9650561562410d4f2ee00bd26cf7a556bb5ac8b507c7c2cbbe8d1c19",
+      "whole_geometry_value_sha256": "f9cdae82bc95c8c46a1ab97c6583a04fccbe647239f6b3c6d5df39d3ea162977",
+      "whole_original_value_equal": true
+    },
+    {
+      "operand_id": "retained-country-reference:ADM0_A3:KHM",
+      "identity": {
+        "ADM0_A3": "KHM",
+        "ADMIN": "Cambodia",
+        "NE_ID": 1159320979,
+        "SOV_A3": "KHM",
+        "feature_index_zero_based": 56
+      },
+      "original_pin": {
+        "bytes": 4719659,
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "decoded_bytes": 13287234,
+        "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255",
+        "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+        "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+        "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075"
+      },
+      "original_pointer": "/features/56",
+      "data_file": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/repair-package/next351-source-veto-readiness/whole-new-operands.json",
+      "reused": false,
+      "whole_feature_value_sha256": "17706c5246d154418cff4be9276d5ab9d07c3a7b78fc48ab558773a0e578c0a4",
+      "whole_geometry_value_sha256": "3b3cf953a1b6484f8b0c70fe973d70b66700e74b12b3a65cffa75e63ce386821",
+      "whole_original_value_equal": true
+    },
+    {
+      "operand_id": "retained-country-reference:ADM0_A3:LAO",
+      "identity": {
+        "ADM0_A3": "LAO",
+        "ADMIN": "Laos",
+        "NE_ID": 1159321011,
+        "SOV_A3": "LAO",
+        "feature_index_zero_based": 67
+      },
+      "original_pin": {
+        "bytes": 4719659,
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "decoded_bytes": 13287234,
+        "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255",
+        "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+        "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+        "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075"
+      },
+      "original_pointer": "/features/67",
+      "data_file": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/repair-package/next557-source-veto-readiness/whole-original-operands.json",
+      "reused": true,
+      "whole_feature_value_sha256": "b5fc396108a572ad017249126f9d853d977784164e79547595a8eaf77651721b",
+      "whole_geometry_value_sha256": "c155618f52e8d3a8b0225287e35f121b739d29661fd207f691f7c608d7d62a31",
+      "whole_original_value_equal": true
+    },
+    {
+      "operand_id": "retained-country-reference:ADM0_A3:VNM",
+      "identity": {
+        "ADM0_A3": "VNM",
+        "ADMIN": "Vietnam",
+        "NE_ID": 1159321417,
+        "SOV_A3": "VNM",
+        "feature_index_zero_based": 55
+      },
+      "original_pin": {
+        "bytes": 4719659,
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "decoded_bytes": 13287234,
+        "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255",
+        "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+        "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+        "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075"
+      },
+      "original_pointer": "/features/55",
+      "data_file": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/repair-package/next557-source-veto-readiness/whole-original-operands.json",
+      "reused": true,
+      "whole_feature_value_sha256": "c88619d25d8d2b89d5af419306e41cc8434a89e8374932b337680a6d5c94371d",
+      "whole_geometry_value_sha256": "9cdf95309e8fb3c3469a83fddc01ac51eb1dbf327db174dcaeae6a4e858137ed",
+      "whole_original_value_equal": true
+    }
+  ],
+  "target_reviews": [
+    {
+      "name": "Xin Man",
+      "owner": 48439,
+      "target_id": "gb:VNM:ADM2:81297802B50713424689894",
+      "candidate_land": 57,
+      "whole_original_context": 103,
+      "adverse": 46,
+      "package_counts": {
+        "repair-evaluation": 103
+      },
+      "physical_string_counts": {
+        "land": 103
+      },
+      "observed_foreign_sources": [
+        "gb:CHN:ADM1:43563684B84540832148656"
+      ],
+      "observed_foreign_reference_countries": [
+        "CHN"
+      ],
+      "metadata_country_context": [
+        "CHN"
+      ],
+      "ordered_operand_ids": [
+        "gb:CHN:ADM1:43563684B84540832148656",
+        "retained-country-reference:ADM0_A3:CHN"
+      ],
+      "full_context_and_whole_stage_preserved": true,
+      "scope": "Recorded original owner context plus explicit source-country metadata only; no new spatial/contact or country-side result."
+    },
+    {
+      "name": "Nam Giang",
+      "owner": 48596,
+      "target_id": "gb:VNM:ADM2:81297802B72423367852086",
+      "candidate_land": 37,
+      "whole_original_context": 43,
+      "adverse": 6,
+      "package_counts": {
+        "repair-evaluation": 43
+      },
+      "physical_string_counts": {
+        "land": 43
+      },
+      "observed_foreign_sources": [
+        "gb:LAO:ADM1:31783359B64397225362620"
+      ],
+      "observed_foreign_reference_countries": [
+        "LAO"
+      ],
+      "metadata_country_context": [
+        "LAO"
+      ],
+      "ordered_operand_ids": [
+        "gb:LAO:ADM1:31783359B64397225362620",
+        "retained-country-reference:ADM0_A3:LAO"
+      ],
+      "full_context_and_whole_stage_preserved": true,
+      "scope": "Recorded original owner context plus explicit source-country metadata only; no new spatial/contact or country-side result."
+    },
+    {
+      "name": "Ha Lang",
+      "owner": 48619,
+      "target_id": "gb:VNM:ADM2:81297802B75623207701482",
+      "candidate_land": 34,
+      "whole_original_context": 228,
+      "adverse": 194,
+      "package_counts": {
+        "repair-evaluation": 228
+      },
+      "physical_string_counts": {
+        "land": 228
+      },
+      "observed_foreign_sources": [
+        "gb:CHN:ADM1:43563684B59914390554750"
+      ],
+      "observed_foreign_reference_countries": [
+        "CHN"
+      ],
+      "metadata_country_context": [
+        "CHN"
+      ],
+      "ordered_operand_ids": [
+        "gb:CHN:ADM1:43563684B59914390554750",
+        "retained-country-reference:ADM0_A3:CHN"
+      ],
+      "full_context_and_whole_stage_preserved": true,
+      "scope": "Recorded original owner context plus explicit source-country metadata only; no new spatial/contact or country-side result."
+    },
+    {
+      "name": "Dak Glei",
+      "owner": 48212,
+      "target_id": "gb:VNM:ADM2:81297802B20367953633835",
+      "candidate_land": 3,
+      "whole_original_context": 46,
+      "adverse": 43,
+      "package_counts": {
+        "repair-evaluation": 46
+      },
+      "physical_string_counts": {
+        "land": 46
+      },
+      "observed_foreign_sources": [
+        "gb:LAO:ADM1:31783359B8999899719232"
+      ],
+      "observed_foreign_reference_countries": [
+        "LAO"
+      ],
+      "metadata_country_context": [
+        "LAO"
+      ],
+      "ordered_operand_ids": [
+        "gb:LAO:ADM1:31783359B8999899719232",
+        "retained-country-reference:ADM0_A3:LAO"
+      ],
+      "full_context_and_whole_stage_preserved": true,
+      "scope": "Recorded original owner context plus explicit source-country metadata only; no new spatial/contact or country-side result."
+    },
+    {
+      "name": "Vi Xuyen",
+      "owner": 48535,
+      "target_id": "gb:VNM:ADM2:81297802B6357673458882",
+      "candidate_land": 2,
+      "whole_original_context": 68,
+      "adverse": 66,
+      "package_counts": {
+        "repair-evaluation": 68
+      },
+      "physical_string_counts": {
+        "land": 68
+      },
+      "observed_foreign_sources": [
+        "gb:CHN:ADM1:43563684B84540832148656"
+      ],
+      "observed_foreign_reference_countries": [
+        "CHN"
+      ],
+      "metadata_country_context": [
+        "CHN"
+      ],
+      "ordered_operand_ids": [
+        "gb:CHN:ADM1:43563684B84540832148656",
+        "retained-country-reference:ADM0_A3:CHN"
+      ],
+      "full_context_and_whole_stage_preserved": true,
+      "scope": "Recorded original owner context plus explicit source-country metadata only; no new spatial/contact or country-side result."
+    },
+    {
+      "name": "An Phu",
+      "owner": 48373,
+      "target_id": "gb:VNM:ADM2:81297802B41294306698552",
+      "candidate_land": 1,
+      "whole_original_context": 14,
+      "adverse": 13,
+      "package_counts": {
+        "repair-evaluation": 14
+      },
+      "physical_string_counts": {
+        "inland-water": 12,
+        "land": 2
+      },
+      "observed_foreign_sources": [
+        "gb:KHM:ADM1:37992800B57023840568534"
+      ],
+      "observed_foreign_reference_countries": [
+        "KHM"
+      ],
+      "metadata_country_context": [
+        "KHM"
+      ],
+      "ordered_operand_ids": [
+        "gb:KHM:ADM1:37992800B57023840568534",
+        "retained-country-reference:ADM0_A3:KHM"
+      ],
+      "full_context_and_whole_stage_preserved": true,
+      "scope": "Recorded original owner context plus explicit source-country metadata only; no new spatial/contact or country-side result."
+    },
+    {
+      "name": "Ben Cau",
+      "owner": 48516,
+      "target_id": "gb:VNM:ADM2:81297802B61263365113672",
+      "candidate_land": 1,
+      "whole_original_context": 2,
+      "adverse": 1,
+      "package_counts": {
+        "repair-evaluation": 2
+      },
+      "physical_string_counts": {
+        "land": 2
+      },
+      "observed_foreign_sources": [
+        "gb:KHM:ADM1:37992800B528078583451"
+      ],
+      "observed_foreign_reference_countries": [],
+      "metadata_country_context": [
+        "KHM"
+      ],
+      "ordered_operand_ids": [
+        "gb:KHM:ADM1:37992800B528078583451",
+        "retained-country-reference:ADM0_A3:KHM"
+      ],
+      "full_context_and_whole_stage_preserved": true,
+      "scope": "Recorded original owner context plus explicit source-country metadata only; no new spatial/contact or country-side result."
+    },
+    {
+      "name": "Bo Trach",
+      "owner": 48532,
+      "target_id": "gb:VNM:ADM2:81297802B63375818356773",
+      "candidate_land": 41,
+      "whole_original_context": 45,
+      "adverse": 1,
+      "package_counts": {
+        "physical-interpretation": 3,
+        "repair-evaluation": 42
+      },
+      "physical_string_counts": {
+        "land": 42,
+        "source-relative": 3
+      },
+      "observed_foreign_sources": [],
+      "observed_foreign_reference_countries": [
+        "LAO"
+      ],
+      "metadata_country_context": [],
+      "ordered_operand_ids": [
+        "retained-country-reference:ADM0_A3:LAO"
+      ],
+      "full_context_and_whole_stage_preserved": true,
+      "scope": "Recorded original owner context plus explicit source-country metadata only; no new spatial/contact or country-side result."
+    },
+    {
+      "name": "Binh Lieu",
+      "owner": 48460,
+      "target_id": "gb:VNM:ADM2:81297802B53696601888295",
+      "candidate_land": 41,
+      "whole_original_context": 46,
+      "adverse": 5,
+      "package_counts": {
+        "repair-evaluation": 46
+      },
+      "physical_string_counts": {
+        "land": 46
+      },
+      "observed_foreign_sources": [],
+      "observed_foreign_reference_countries": [
+        "CHN"
+      ],
+      "metadata_country_context": [],
+      "ordered_operand_ids": [
+        "retained-country-reference:ADM0_A3:CHN"
+      ],
+      "full_context_and_whole_stage_preserved": true,
+      "scope": "Recorded original owner context plus explicit source-country metadata only; no new spatial/contact or country-side result."
+    },
+    {
+      "name": "Nam Po",
+      "owner": 48365,
+      "target_id": "gb:VNM:ADM2:81297802B39086824409595",
+      "candidate_land": 38,
+      "whole_original_context": 52,
+      "adverse": 14,
+      "package_counts": {
+        "repair-evaluation": 52
+      },
+      "physical_string_counts": {
+        "land": 52
+      },
+      "observed_foreign_sources": [],
+      "observed_foreign_reference_countries": [
+        "LAO"
+      ],
+      "metadata_country_context": [],
+      "ordered_operand_ids": [
+        "retained-country-reference:ADM0_A3:LAO"
+      ],
+      "full_context_and_whole_stage_preserved": true,
+      "scope": "Recorded original owner context plus explicit source-country metadata only; no new spatial/contact or country-side result."
+    },
+    {
+      "name": "Tan Bien",
+      "owner": 48352,
+      "target_id": "gb:VNM:ADM2:81297802B37342354446447",
+      "candidate_land": 26,
+      "whole_original_context": 27,
+      "adverse": 1,
+      "package_counts": {
+        "repair-evaluation": 27
+      },
+      "physical_string_counts": {
+        "land": 27
+      },
+      "observed_foreign_sources": [],
+      "observed_foreign_reference_countries": [
+        "KHM"
+      ],
+      "metadata_country_context": [],
+      "ordered_operand_ids": [
+        "retained-country-reference:ADM0_A3:KHM"
+      ],
+      "full_context_and_whole_stage_preserved": true,
+      "scope": "Recorded original owner context plus explicit source-country metadata only; no new spatial/contact or country-side result."
+    },
+    {
+      "name": "Muong Lat",
+      "owner": 48597,
+      "target_id": "gb:VNM:ADM2:81297802B72565329345275",
+      "candidate_land": 18,
+      "whole_original_context": 53,
+      "adverse": 35,
+      "package_counts": {
+        "repair-evaluation": 53
+      },
+      "physical_string_counts": {
+        "land": 53
+      },
+      "observed_foreign_sources": [],
+      "observed_foreign_reference_countries": [
+        "LAO"
+      ],
+      "metadata_country_context": [],
+      "ordered_operand_ids": [
+        "retained-country-reference:ADM0_A3:LAO"
+      ],
+      "full_context_and_whole_stage_preserved": true,
+      "scope": "Recorded original owner context plus explicit source-country metadata only; no new spatial/contact or country-side result."
+    },
+    {
+      "name": "Thuong Xuan",
+      "owner": 48599,
+      "target_id": "gb:VNM:ADM2:81297802B72882386082996",
+      "candidate_land": 13,
+      "whole_original_context": 16,
+      "adverse": 3,
+      "package_counts": {
+        "repair-evaluation": 16
+      },
+      "physical_string_counts": {
+        "land": 16
+      },
+      "observed_foreign_sources": [],
+      "observed_foreign_reference_countries": [
+        "LAO"
+      ],
+      "metadata_country_context": [],
+      "ordered_operand_ids": [
+        "retained-country-reference:ADM0_A3:LAO"
+      ],
+      "full_context_and_whole_stage_preserved": true,
+      "scope": "Recorded original owner context plus explicit source-country metadata only; no new spatial/contact or country-side result."
+    },
+    {
+      "name": "Ky Son",
+      "owner": 48268,
+      "target_id": "gb:VNM:ADM2:81297802B2701886719052",
+      "candidate_land": 8,
+      "whole_original_context": 11,
+      "adverse": 3,
+      "package_counts": {
+        "repair-evaluation": 11
+      },
+      "physical_string_counts": {
+        "land": 11
+      },
+      "observed_foreign_sources": [],
+      "observed_foreign_reference_countries": [
+        "LAO"
+      ],
+      "metadata_country_context": [],
+      "ordered_operand_ids": [
+        "retained-country-reference:ADM0_A3:LAO"
+      ],
+      "full_context_and_whole_stage_preserved": true,
+      "scope": "Recorded original owner context plus explicit source-country metadata only; no new spatial/contact or country-side result."
+    },
+    {
+      "name": "Quan Son",
+      "owner": 48661,
+      "target_id": "gb:VNM:ADM2:81297802B81765499113898",
+      "candidate_land": 7,
+      "whole_original_context": 16,
+      "adverse": 9,
+      "package_counts": {
+        "repair-evaluation": 16
+      },
+      "physical_string_counts": {
+        "land": 16
+      },
+      "observed_foreign_sources": [],
+      "observed_foreign_reference_countries": [
+        "LAO"
+      ],
+      "metadata_country_context": [],
+      "ordered_operand_ids": [
+        "retained-country-reference:ADM0_A3:LAO"
+      ],
+      "full_context_and_whole_stage_preserved": true,
+      "scope": "Recorded original owner context plus explicit source-country metadata only; no new spatial/contact or country-side result."
+    },
+    {
+      "name": "A Luoi",
+      "owner": 48757,
+      "target_id": "gb:VNM:ADM2:81297802B94706269623038",
+      "candidate_land": 6,
+      "whole_original_context": 8,
+      "adverse": 2,
+      "package_counts": {
+        "repair-evaluation": 8
+      },
+      "physical_string_counts": {
+        "land": 8
+      },
+      "observed_foreign_sources": [],
+      "observed_foreign_reference_countries": [
+        "LAO"
+      ],
+      "metadata_country_context": [],
+      "ordered_operand_ids": [
+        "retained-country-reference:ADM0_A3:LAO"
+      ],
+      "full_context_and_whole_stage_preserved": true,
+      "scope": "Recorded original owner context plus explicit source-country metadata only; no new spatial/contact or country-side result."
+    },
+    {
+      "name": "Van Lang",
+      "owner": 48681,
+      "target_id": "gb:VNM:ADM2:81297802B84784766195181",
+      "candidate_land": 4,
+      "whole_original_context": 125,
+      "adverse": 121,
+      "package_counts": {
+        "repair-evaluation": 125
+      },
+      "physical_string_counts": {
+        "land": 125
+      },
+      "observed_foreign_sources": [],
+      "observed_foreign_reference_countries": [
+        "CHN"
+      ],
+      "metadata_country_context": [],
+      "ordered_operand_ids": [
+        "retained-country-reference:ADM0_A3:CHN"
+      ],
+      "full_context_and_whole_stage_preserved": true,
+      "scope": "Recorded original owner context plus explicit source-country metadata only; no new spatial/contact or country-side result."
+    },
+    {
+      "name": "Cao Loc",
+      "owner": 48756,
+      "target_id": "gb:VNM:ADM2:81297802B94679881937971",
+      "candidate_land": 4,
+      "whole_original_context": 82,
+      "adverse": 78,
+      "package_counts": {
+        "repair-evaluation": 82
+      },
+      "physical_string_counts": {
+        "land": 82
+      },
+      "observed_foreign_sources": [],
+      "observed_foreign_reference_countries": [
+        "CHN"
+      ],
+      "metadata_country_context": [],
+      "ordered_operand_ids": [
+        "retained-country-reference:ADM0_A3:CHN"
+      ],
+      "full_context_and_whole_stage_preserved": true,
+      "scope": "Recorded original owner context plus explicit source-country metadata only; no new spatial/contact or country-side result."
+    },
+    {
+      "name": "Nam Nhun",
+      "owner": 48183,
+      "target_id": "gb:VNM:ADM2:81297802B14703404520131",
+      "candidate_land": 3,
+      "whole_original_context": 115,
+      "adverse": 112,
+      "package_counts": {
+        "repair-evaluation": 115
+      },
+      "physical_string_counts": {
+        "land": 115
+      },
+      "observed_foreign_sources": [],
+      "observed_foreign_reference_countries": [
+        "CHN"
+      ],
+      "metadata_country_context": [],
+      "ordered_operand_ids": [
+        "retained-country-reference:ADM0_A3:CHN"
+      ],
+      "full_context_and_whole_stage_preserved": true,
+      "scope": "Recorded original owner context plus explicit source-country metadata only; no new spatial/contact or country-side result."
+    },
+    {
+      "name": "Lao Cai",
+      "owner": 48308,
+      "target_id": "gb:VNM:ADM2:81297802B32838967164839",
+      "candidate_land": 3,
+      "whole_original_context": 18,
+      "adverse": 15,
+      "package_counts": {
+        "repair-evaluation": 18
+      },
+      "physical_string_counts": {
+        "land": 18
+      },
+      "observed_foreign_sources": [],
+      "observed_foreign_reference_countries": [
+        "CHN"
+      ],
+      "metadata_country_context": [],
+      "ordered_operand_ids": [
+        "retained-country-reference:ADM0_A3:CHN"
+      ],
+      "full_context_and_whole_stage_preserved": true,
+      "scope": "Recorded original owner context plus explicit source-country metadata only; no new spatial/contact or country-side result."
+    },
+    {
+      "name": "Tuy Duc",
+      "owner": 48181,
+      "target_id": "gb:VNM:ADM2:81297802B14510014839166",
+      "candidate_land": 2,
+      "whole_original_context": 5,
+      "adverse": 3,
+      "package_counts": {
+        "repair-evaluation": 5
+      },
+      "physical_string_counts": {
+        "land": 5
+      },
+      "observed_foreign_sources": [],
+      "observed_foreign_reference_countries": [
+        "KHM"
+      ],
+      "metadata_country_context": [],
+      "ordered_operand_ids": [
+        "retained-country-reference:ADM0_A3:KHM"
+      ],
+      "full_context_and_whole_stage_preserved": true,
+      "scope": "Recorded original owner context plus explicit source-country metadata only; no new spatial/contact or country-side result."
+    },
+    {
+      "name": "Dinh Lap",
+      "owner": 48600,
+      "target_id": "gb:VNM:ADM2:81297802B72919536287172",
+      "candidate_land": 1,
+      "whole_original_context": 48,
+      "adverse": 47,
+      "package_counts": {
+        "repair-evaluation": 48
+      },
+      "physical_string_counts": {
+        "land": 48
+      },
+      "observed_foreign_sources": [],
+      "observed_foreign_reference_countries": [
+        "CHN"
+      ],
+      "metadata_country_context": [],
+      "ordered_operand_ids": [
+        "retained-country-reference:ADM0_A3:CHN"
+      ],
+      "full_context_and_whole_stage_preserved": true,
+      "scope": "Recorded original owner context plus explicit source-country metadata only; no new spatial/contact or country-side result."
+    },
+    {
+      "name": "Vu Quang",
+      "owner": 48556,
+      "target_id": "gb:VNM:ADM2:81297802B66107700635107",
+      "candidate_land": 1,
+      "whole_original_context": 4,
+      "adverse": 3,
+      "package_counts": {
+        "repair-evaluation": 4
+      },
+      "physical_string_counts": {
+        "land": 4
+      },
+      "observed_foreign_sources": [],
+      "observed_foreign_reference_countries": [
+        "LAO"
+      ],
+      "metadata_country_context": [],
+      "ordered_operand_ids": [
+        "retained-country-reference:ADM0_A3:LAO"
+      ],
+      "full_context_and_whole_stage_preserved": true,
+      "scope": "Recorded original owner context plus explicit source-country metadata only; no new spatial/contact or country-side result."
+    }
+  ],
+  "totals": {
+    "records": 1175,
+    "adverse": 821,
+    "package:repair-evaluation": 1172,
+    "class:land": 1160,
+    "class:inland-water": 12,
+    "package:physical-interpretation": 3,
+    "class:source-relative": 3,
+    "candidate_land": 351,
+    "targets": 23,
+    "whole_operands": 10,
+    "new_operands": 6,
+    "reused_operands": 4
+  },
+  "retained_boundary_record_counts": {
+    "source_boundary_record": 0,
+    "country_boundary_record": 0
+  },
+  "BenCau_reference_basis": "No observed KHM country-reference hit; complete original Svay Rieng source has literal shapeGroup=KHM. This is source-country metadata provenance only, not inferred coverage/contact/country side.",
+  "execution": {
+    "read_only_local_git_with_protocol_allow_never": true,
+    "source_payload_copies": 0,
+    "geometry_predicates": 0,
+    "spatial_scans": 0,
+    "reprojections": 0,
+    "scientific_producers": 0,
+    "new_wrappers": 0,
+    "country_side_assignments": 0,
+    "new_qualifications": 0
+  },
+  "limits": [
+    "Original recorded context and explicit source-country metadata only; not an exhaustive newly discovered whole-source spatial applicability set.",
+    "Whole foreign source/reference operands are prepared inputs; no contact/veto/native qualification is inferred.",
+    "Positive VNM reference remains context, never exclusion.",
+    "All original821 adverse,12 inland-water and3 source-relative observations preserve their literal classes/flags/holds/historical false qualification.",
+    "Old ADM1 coverage absence, blank reference context, mixed source years and custodian/date limits are not new gates or whole-owner clearance.",
+    "Actual physical result review, typed native receipt assembly, accepted native effects/current owner-zero/selected consumption/conservation remain distinct subsequent results."
+  ]
+}
