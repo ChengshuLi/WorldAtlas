@@ -26,7 +26,7 @@ function addition(id,target,index,base,x){const geometry=polygon(x);return {comp
 // This is a fresh miniature trusted repository, not a test-only authority hook.
 // The real entry reads its ordinary committed catalogue and products exactly as
 // production does. Candidate edits never control that executing catalogue.
-async function trustedFixture(t,{incompleteNative=false,codeRoutes=false,nativeAppend=false}={}){
+async function trustedFixture(t,{incompleteNative=false,codeRoutes=false,nativeAppend=false,sourceOverride=false,physicalLogicalSource=false,overrideLogicalPath='data/source.json'}={}){
  const root=fs.mkdtempSync(path.join(process.cwd(),'.checkpoint-test-'));
  t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
  const git=(...a)=>execFileSync('git',['-c','core.hooksPath=/dev/null','-c','user.name=Checkpoint fixture','-c','user.email=checkpoint@example.invalid','-C',root,...a],{env:{...process.env,GIT_CONFIG_NOSYSTEM:'1',GIT_CONFIG_GLOBAL:'/dev/null',GIT_NO_LAZY_FETCH:'1'},maxBuffer:33554433,stdio:['ignore','pipe','pipe']});
@@ -34,6 +34,7 @@ async function trustedFixture(t,{incompleteNative=false,codeRoutes=false,nativeA
  const commit=()=>{git('add','.');git('commit','-qm','Checkpoint fixture');return git('rev-parse','HEAD').toString().trim();};
  git('init','-q');if(codeRoutes)save('data/scientific.js',{fixture:'scientific input, not executed code'});save(PROGRAMME,fs.readFileSync(PROGRAMME));for(const name of CODE)save(name,fs.readFileSync(name));save('package.json',{type:'module'});
  const {features,certificate}=fixtures(), source={type:'FeatureCollection',features};save('data/source.json',source);
+ if(sourceOverride)save('data/selected-source.json.gz',gzipSync(valueBytes(source)));
  const reference={id:'geography:fixture',hierarchy_sha256:'a'.repeat(64),footprints_sha256:'b'.repeat(64)};
  const encode=(name,kind,values)=>{const words=Uint32Array.from(values),canonical=Buffer.from(words.buffer),encoded=gzipSync(shuffleOwnershipBytes(words));save('data/'+name,encoded);return {path:name,kind,offset:0,bytes:encoded.length,sha256:sha(encoded),decoded_bytes:canonical.length,decoded_sha256:sha(canonical),words:words.length,encoding:'byte-shuffle'};};
  const size=nativeAppend?262166:4,coordinateBits=Math.ceil(Math.log2(size));
@@ -77,17 +78,19 @@ async function trustedFixture(t,{incompleteNative=false,codeRoutes=false,nativeA
  const envelope={version:2,kind:'retained-native-base-plus-delta-v2',base_reference:reference,effective_reference:effective,...assets};save('data/envelope.json',envelope);const eight=commit();
  const sidecar={version:2,kind:'retained-native-additive-selection-v2',base_selection:baseSelection,authority_registry:pin('data/registry.json',four),logical_asset_map:assets,runtime_envelope:pin('data/envelope.json',eight)};save('data/sidecar.json',sidecar);const nine=commit();
  const selection={...baseSelection,additive_release:{path:'data/sidecar.json',bytes:pin('data/sidecar.json',nine).bytes,sha256:pin('data/sidecar.json',nine).sha256}};save('data/ownership-selection.json',selection);const selected=commit();
- const sourcePin={...pin('data/source.json',one),kind:'ordinary-immutable-git-source'};
+ const sourcePin=sourceOverride?{...pin('data/selected-source.json.gz',one),kind:'selected-exact-encoded-override',
+  logical_path:overrideLogicalPath,encoding:'gzip',decoded_bytes:valueBytes(source).length,decoded_sha256:valueSha(source)}
+  :{...pin('data/source.json',one),kind:'ordinary-immutable-git-source'};
  const additions=normalized.map(row=>({...row,base_geometry:target.geometry,base_geometry_sha256:target.geometry_sha256}));
  const derived=deriveCoordinateDelta({certificate,oldAdditions:[],additions,selection}).certificate;
- const full={...derived,binding:{...derived.binding,release:reference,sources:[sourcePin]},inputs:[{path:'data/source.json',source:sourcePin,whole_body_sha256:sourcePin.sha256,bytes:sourcePin.bytes}]};
+ const full={...derived,binding:{...derived.binding,release:reference,sources:[sourcePin]},inputs:[{path:'data/source.json',source:sourcePin,whole_body_sha256:sourcePin.decoded_sha256??sourcePin.sha256,bytes:sourcePin.decoded_bytes??sourcePin.bytes}]};
  const execution_code=CODE.map(name=>pin(name,one)),runtime=[{path:process.execPath,bytes:fs.statSync(process.execPath).size,sha256:'f'.repeat(64)}];
  const facts={version:1,kind:'trusted-selected-coordinate-stage-v1',candidate_code_executed:false,selected_commit:selected,executing_commit:one,execution_code,runtime,binding:full.binding,complete_owners:3,complete_sources:1};
  const compressed=gzipSync(valueBytes(full));save('accepted/certificate.json.gz',compressed);save('accepted/facts.json',facts);
  const publication={version:1,kind:facts.kind,complete:true,facts:{path:'facts.json',bytes:valueBytes(facts).length,sha256:valueSha(facts)},certificate:{path:'certificate.json.gz',bytes:compressed.length,sha256:sha(compressed),decoded_bytes:valueBytes(full).length,decoded_sha256:valueSha(full)}};save('accepted/publication.json',publication);
- const inventory=[...(codeRoutes?['src/native-grid.js','data/scientific.js']:[]),PROGRAMME,'data/source.json','data/manifest.json','data/owners.json','data/registry.json','data/ledger.json','data/patch.json','data/sidecar.json','data/envelope.json','data/native/rows.bin.gz','data/native/runs.bin.gz'].map(name=>pin(name,selected));
+ const inventory=[...(codeRoutes?['src/native-grid.js','data/scientific.js']:[]),PROGRAMME,...(sourceOverride?['data/selected-source.json.gz',...(physicalLogicalSource?['data/source.json']:[])]:['data/source.json']),'data/manifest.json','data/owners.json','data/registry.json','data/ledger.json','data/patch.json','data/sidecar.json','data/envelope.json','data/native/rows.bin.gz','data/native/runs.bin.gz'].map(name=>pin(name,selected));
  save('accepted/custody.json',{complete_cold_custody:[{facts,publication,effective_additions:additions,inventory}]});
- save('accepted/routes.json',inventory.map(p=>p.path).sort().map(name=>({path:name,tree:git('ls-tree','-z',selected,'--',name).toString()})));const accepted=commit();
+ save('accepted/routes.json',[...new Set([...inventory.map(p=>p.path),'data/source.json'])].sort().map(name=>({path:name,tree:git('ls-tree','-z',selected,'--',name).toString()})));const accepted=commit();
  const rootRow={id:'fixture',accepted_head:accepted,selected_commit:selected,selection_sha256:valueSha(selection),execution_commit:one,execution_code_sha256:valueSha(execution_code),runtime_sha256:valueSha(runtime),facts:pin('accepted/facts.json'),certificate:{...pin('accepted/certificate.json.gz'),decoded_bytes:valueBytes(full).length,decoded_sha256:valueSha(full)},publication:pin('accepted/publication.json'),custody:pin('accepted/custody.json'),routes:pin('accepted/routes.json')};
  save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',checkpoints:[rootRow]});commit();
  const api=await import(pathToFileURL(path.join(root,MODULE))),native=await import(pathToFileURL(path.join(root,'scripts/check-effective-geographic-regression.mjs')));
@@ -98,7 +101,7 @@ async function trustedFixture(t,{incompleteNative=false,codeRoutes=false,nativeA
 // Genuine pinned source/native qualification, followed by the public private-state
 // admission and transition. The full lattice is a two-MiB normative input, while
 // the proposed and projected repair is one cell; no research result is invented.
-async function appendNativeAuthority(f,{owner=0,name='appended',mutateEvidence=()=>{},mutateLedger=()=>{},mutatePatch=()=>{},duplicateAuthority=false}={}) {
+async function appendNativeAuthority(f,{owner=0,name='appended',mutateEvidence=()=>{},mutateLedger=()=>{},mutatePatch=()=>{},duplicateAuthority=false,membershipPath='data/geography/part-0.json'}={}) {
  const family='gb:TST:ADM2',feature=f.features[owner],target=family+':'+feature.id;
  const latitudes=nativeRowLatitudes(f.manifest.size),y=latitudes.findIndex(v=>v<.1);
  const x=Math.floor((owner+.1+180)/360*f.manifest.size);
@@ -110,9 +113,9 @@ async function appendNativeAuthority(f,{owner=0,name='appended',mutateEvidence=(
  f.save(name+'/physical.json',{results:[{target,issues:[],support:{mapped_land_support:feature.geometry}}]});
  f.save(name+'/measured.json',[{target,consumed:{geometry:feature.geometry},selected:{id:feature.id,geometry:feature.geometry}}]);
  f.save(name+'/physical.py',Buffer.from('# immutable bounded fixture\n'));
- f.save('data/world-index.json',{parts:['geography/part-0.json']});
+ f.save('data/world-index.json',{parts:[membershipPath.slice('data/'.length)]});
  f.save('data/semantic-report.json',{changes:f.features.map(p=>({id:p.id,replaces:[family+':'+p.id]}))});
- f.save('data/geography/part-0.json',{type:'FeatureCollection',features:f.features.map(p=>({...p,
+ f.save(membershipPath,{type:'FeatureCollection',features:f.features.map(p=>({...p,
   properties:{...p.properties,metadata:{source_member_ids:[family+':'+p.id]}}}))});
  f.save(name+'/native-patch.json',{rows:[{y,runs:[[x,x+1,owner+1]]}]});const originals=f.commit();
  const evidence={version:1,kind:'source-target-native-evidence-v1',
@@ -124,7 +127,7 @@ async function appendNativeAuthority(f,{owner=0,name='appended',mutateEvidence=(
   base_reference:f.envelope.base_reference,families:[{source_id:family,parts:[f.pin(name+'/source.json',originals)]}],
   targets:[{id:target,target_id:feature.id,pixelIndex:owner+1,source_family:family,base_geometry:feature.geometry,
    source_receipt_sha256:f.pin(name+'/physical.json',originals).sha256,coverage_classes:['mapped_land_support']}],
-  source_membership:{index:f.pin('data/world-index.json',originals),lineage:f.pin('data/semantic-report.json',originals),parts:[f.pin('data/geography/part-0.json',originals)]}};
+  source_membership:{index:f.pin('data/world-index.json',originals),lineage:f.pin('data/semantic-report.json',originals),parts:[f.pin(membershipPath,originals)]}};
  mutateEvidence(evidence);f.save(name+'/evidence.json',evidence);const ev=f.commit();
  const operands={source_evidence:f.pin(name+'/evidence.json',ev),native_patch:f.pin(name+'/native-patch.json',originals)};
  f.save(name+'/rule.json',{version:1,kind:'source-target-native-rule-v1',...operands});
