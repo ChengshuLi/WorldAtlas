@@ -1658,3 +1658,54 @@ test('deeper base metadata must be ordinary, unchanged, available and authentica
   const changed=scientificManifestFixture();changed.put(changed.base.artifact_consumption.certificate.path,{version:1});
   assert.equal(await changed.run(),null);
 });
+
+
+function historicalProducerRoleFixture({mutatePin = () => {}, mixedRole = false, unavailableTree = false} = {}) {
+  let original, live;
+  const f = sourceTargetRoleFixture({retainedRoles: true, mutateRoles: ({f, roles}) => {
+    const oldPath = roles.physical_reproduction.path;
+    f.authored.entries.delete(oldPath); f.baseline.entries.delete(oldPath);
+    live = f.put('scripts/qualify-source-cohort.py', '# current accepted helper\n', true);
+    const raw = Buffer.from('# original physical producer\n'), oid = createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex');
+    f.blobs.set(oid, raw);
+    original = {path: live.path, commit: '4'.repeat(40), mode: '100644', git_blob_oid: oid, bytes: raw.length, sha256: digest(raw)};
+    roles.physical_reproduction = {...original}; mutatePin(roles.physical_reproduction);
+    if (mixedRole) roles.physical_input = {...original};
+  }});
+  const ordinaryAPI = f.api;
+  f.api = async route => {
+    if (route.endsWith('/git/commits/' + original.commit)) return {sha: original.commit, tree: {sha: 'historical-producer-tree'}};
+    if (route.endsWith('/git/trees/historical-producer-tree?recursive=1')) return {truncated: unavailableTree, tree: [
+      {path: original.path, mode: original.mode, type: 'blob', sha: original.git_blob_oid, size: original.bytes}]};
+    return ordinaryAPI(route);
+  };
+  return {...f, original, live};
+}
+
+test('historical physical reproduction authenticates original Git bytes while current code stays unchanged', async () => {
+  const f = historicalProducerRoleFixture(), before = {...f.authored.entries.get(f.live.path)}, diagnostics = {};
+  assert.equal((await f.run({metadataDiagnostics: diagnostics}))?.test_selection, 'selected-data', diagnostics.failure);
+  assert(f.reads.includes(f.original.git_blob_oid), 'whole original programme bytes must be read');
+  assert.deepEqual(f.authored.entries.get(f.live.path), before);
+  assert.equal(f.files.some(file => file.filename === f.live.path), false);
+});
+
+test('historical physical reproduction cannot bypass original pin, data or current-code guards', async () => {
+  for (const mutatePin of [pin => pin.sha256 = 'f'.repeat(64), pin => pin.git_blob_oid = 'f'.repeat(40),
+    pin => pin.bytes++, pin => pin.mode = '100755', pin => pin.commit = '5'.repeat(40)])
+    assert.equal(await historicalProducerRoleFixture({mutatePin}).run(), null);
+  assert.equal(await historicalProducerRoleFixture({mixedRole: true}).run(), null);
+  const changed = historicalProducerRoleFixture();
+  changed.put(changed.live.path, '# changed current executable\n');
+  assert.equal(await changed.run(), null, 'even a silently omitted changed-file entry cannot use historical custody');
+  changed.files.push({filename: changed.live.path, status: 'modified'});
+  assert.equal(await changed.run(), null, 'an actual current software change retains full routing');
+});
+
+
+test('historical physical reproduction cannot use an unavailable complete original tree', async () => {
+  const f = historicalProducerRoleFixture({unavailableTree: true}), diagnostics = {};
+  assert.equal(await f.run({metadataDiagnostics: diagnostics}), null);
+  assert.match(diagnostics.failure, /incomplete tree inventory/);
+  assert.equal(f.reads.includes(f.original.git_blob_oid), false, 'no unbound historical body read');
+});
