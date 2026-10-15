@@ -1,0 +1,26 @@
+# Móng Cái262: independent typed native-input review
+
+**Static input review passed with limits.** No schema/source/owner/base/physical/class/veto join defect was found. These are concrete reviewed draft bytes; no future publication pin, fresh admission or constructor outcome is asserted.
+
+| Reviewed draft | Bytes | SHA256 |
+| --- | ---: | --- |
+| native-source-evidence-mongcai262-proposed.json | 331381 | `f8b58368a246dfc8ea642a79f82796280a93c894dacae941f891ab353759f6db` |
+| native-patch-mongcai262.json | 3597 | `ac9bcc9464770a2ba325809d2610b56d51935d37f8d6e34680decddf9e3371ef` |
+
+The evidence-v1 target is exactly `gb:VNM:ADM2:81297802B69562638547328`, owner48578, family `gb:VNM:ADM2`. Its ordered/nonoverlapping patch expands to exactly262 original unflagged land observations (66 rows/97 spans). Coverage classes are exactly `[mapped_land_support]`; coverage rows differ from the patch only by replacing owner48578 with that class. No adverse or source-relative record enters the patch.
+
+Eleven immutable descriptor bodies were independently checked with safe local missing-object probes, `protocol.allow=never`, exact commit:path→mode/blob resolution, Git blob identity, raw size/SHA256 and declared decoded size/SHA256. Catalogue, original owner/native/base context and entire708-feature VNM ADM2 family match the accepted Que Phong context. Membership retains the same full world index, semantic lineage and part28, adding the original full part27. Both canonical part bodies were authenticated independently. No new data-source payload was copied or fetched.
+
+Móng Cái joins the unique complete original family feature at ordinal365 / SID65521 and direct original owner48578, without a conflicting aggregation. Its selected full canonical feature is unique across the two parts. Target base geometry equals that canonical geometry and the measured whole-stage selected geometry; the consumed feature equals the entire original member. The native lattice, normative latitude descriptor, historical base/hierarchy identity and original owner-asset hash joins match. No geometry was clipped or transformed.
+
+The physical descriptor resolves to actual1838eadd248d4ddd430f23764ff90149d58aa7c5 `.../next557/physical/whole-target-support.json`,240095 bytes, SHA256 `ac86cd6687663e237db1473830d14e5151b0b5df6a1aeae7e997a2ac6bfbc0a3`, blob554f8afbda49521882135553f110c73515ce7b57. The target source-receipt hash binds this entire actual five-target body. Complete source-member, metadata, runtime, query/support/residual/hierarchy context remains in the referenced body. Physical input is the actual c1e652a five-target stage161126 bytes / SHA256 `baaa6a314770cca7b4eb09462fda642d2cc492c9f22d1e10331596b3b688004d`; it equals the reviewed complete stage. Reproduction points to the accepted2347ff09 helper48543 bytes / SHA256 `58ef81739b264085b2997be7baa3df03ba6bb673f91a160176efd79b71fec081`. No helper was run.
+
+Móng Cái has83 distinct checked source/offset relations, all offset0. No source reports covering its whole candidate. Both actual mapped-land support and outside-mapped-L1 context retain nonempty serialized coordinate arrays; all0issues and original witness bodies remain preserved. **Zero issues is not whole-target land coverage or proof for every requested centre.** The declared mapped-land class is the class the constructor must prove.
+
+The sole territorial exclusion equals the entire already independently authenticated CHN country-reference geometry, `/features/9` of original blob235bf73f0890fa97c82d1471f840296f17cfcfca; geometry SHA256 `f9cdae82bc95c8c46a1ab97c6583a04fccbe647239f6b3c6d5df39d3ea162977`. Positive VNM country context is not an exclusion. Applicability remains recorded original owner context; no new exhaustive contact inventory or legal/country-side finding follows.
+
+All1,318 original owner observations equal the retained bank values and indices:498 repair observations (262 requested/236 adverse) and820 separate source-relative observations (94 adverse). Original physical strings, source IDs, reference absences, flags, holds and qualified=false remain unchanged. Source-vintage and custodian/date limitations remain independently applicable.
+
+Read-only inspection of the accepted stock `qualifySourceTargetNativeAuthority` body, SHA256 `dc7241616985ec84e9bb02c1f986a4e720550ed2f0441cd74c76323372d19f3f`, lines630–951 and residual handling575–625, confirms that nonempty exterior remains an independent requested-centre residual exclusion even with0issues. Complete source-family/accepted-owner reconciliation, positive declared-class support, territorial exclusion, residual/conflict and tie checks must establish every requested centre or refuse/hold. This introduces no whole-owner exterior gate and predicts no pass/refusal.
+
+No geometry predicate, spatial/native scan, projection, producer, executable wrapper, country assignment or qualification was performed. Actual stock execution, fresh resource/method admission, current-owner-zero, selected consumption and conservation evidence remain subsequent work. Drafts, complete stage and original owner-context inputs were unchanged during review. Exact receipts and 97 static checks are in `independent-native-input-review-mongcai262.json`.
