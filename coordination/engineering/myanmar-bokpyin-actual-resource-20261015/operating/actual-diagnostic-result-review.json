@@ -1,0 +1,42 @@
+{
+  "reviewer": "/root/authority_binding_review",
+  "status": "diagnostic-result-accepted-with-limits;3591supported-subset-ready-for-separate-stock-qualification",
+  "output": {
+    "bytes": 129319,
+    "sha256": "6a169db11590c0562c4ad66d4d9ff1f88acccc45bf7c498e4279ebdad9f5803b"
+  },
+  "checks": [
+    "Closed two-file publication;preparation output size/hash and exact final config binding verified.",
+    "Both immutable original pins authenticated bytes/hash/mode/blob; sourcec264 and patchb130.",
+    "Requested rows literal original patch equality; native contract literal corrected source equality; canonical rule hash reproduced.",
+    "Every requested cell occurs once in decision trace; supported+held disjoint exact union with original3616. Owner30350 only; canonical row/run ordering and no overlaps.",
+    "First held original input run exactly matches first_failure; no residual/class failure reason displaced in actual trace."
+  ],
+  "counts": {
+    "requested": 3616,
+    "supported": 3591,
+    "held": 25,
+    "decision_rows": 519,
+    "supported_rows": 517,
+    "held_rows": 16
+  },
+  "reason_cells": {
+    "assigned_cells": 3591,
+    "territorial_exclusion_cells": 25
+  },
+  "first_failure": {
+    "y": 122799,
+    "run": [
+      203404,
+      203405,
+      30350
+    ],
+    "predicate": "unique-source-target-coverage"
+  },
+  "limits": [
+    "Diagnostic screening yields zero authority.3591 requires actual separate stock qualifier before authority claim;25held retained exactly.",
+    "Unchanged original full330source,477query physical,all3territorialveto/class and unknown-reference limits reused from prior input/method reviews; no predicate replay.",
+    "Execution exit0/fresh512MiB is parent-reported; this review independently verifies published products, not unsupplied terminal metadata.",
+    "Current-owner-zero,conservation/integration/release remain pending; no old refusal overwritten."
+  ]
+}

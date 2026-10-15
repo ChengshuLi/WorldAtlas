@@ -1,0 +1,228 @@
+{
+  "status": "Exact supported-row data subset; independent full diagnostic result review passed; no qualification yet.",
+  "diagnostic": {
+    "path": "coordination/engineering/myanmar-bokpyin-actual-resource-20261015/diagnostic-001/native-diagnostic.json",
+    "bytes": 129319,
+    "sha256": "6a169db11590c0562c4ad66d4d9ff1f88acccc45bf7c498e4279ebdad9f5803b",
+    "kind": "source-target-native-diagnostic-v1",
+    "rule_sha256": "6a0e09b20f4f1a910d8f0445f5ce994be9abf0be945b6ad0f83f77c2316cbb85",
+    "commit": "482d6f606d5f8b5a085d7aa2aa182af7ec9a75a1"
+  },
+  "original_native_patch": {
+    "bytes": 35827,
+    "commit": "b1301fa07270bcf0d91be48a6d49445c307562cf",
+    "git_blob_oid": "8578b8af5fa3eb0892c0cee7e5b24915dc9c02c6",
+    "mode": "100644",
+    "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/coastal-candidate-cell-preparation-001/bokpyin/parent-sid-narrow/candidate-native-patch.json",
+    "sha256": "e4d91372be68cc43b382d8f712346fc4cffd694e5f95a3cff3a95644f235317a"
+  },
+  "source_evidence_unchanged": {
+    "bytes": 119802,
+    "commit": "c26422bdbf41f369cc7b73cf60cb79376de2c5b2",
+    "git_blob_oid": "6e641f70d0425194ba7e577b7339cb3072142018",
+    "mode": "100644",
+    "path": "coordination/engineering/myanmar-bokpyin-diagnostic-20261015/inputs/source-evidence.json",
+    "sha256": "ed64d3f47ba305b8d336bc0e84a888cdea7c9add8fd8a95536470eec676b239b"
+  },
+  "candidate_native_patch": {
+    "path": "candidate-native-patch.json",
+    "bytes": 35431,
+    "sha256": "df574bfa3b24327868d27e00c6cf3ee0adcdca6003c8f90e2814a0d3d70fda06",
+    "git_blob_oid": "5239a0c76681fcf304d0139293931b390564236b"
+  },
+  "derivation": "Exact stocksupported_rows copied as complete rows value by literal JSON value splice. Originalprefix/suffix bytes and everyotherheader/fieldpreserved. Original3616patch untouched.",
+  "checks": {
+    "original_requested_exact_tuple_equality": true,
+    "supported_exact_tuple_subset": true,
+    "held_exact_tuple_complement": true,
+    "supported_held_disjoint": true,
+    "no_duplicate_tuples": true,
+    "original_cells": 3616,
+    "supported_cells": 3591,
+    "held_cells": 25,
+    "supported_row_count": 517,
+    "held_row_count": 16,
+    "supported_run_count": 1093,
+    "held_run_count": 16,
+    "unchanged_non_rows_fields": {}
+  },
+  "held_rows": [
+    {
+      "runs": [
+        [
+          203404,
+          203405,
+          30350
+        ]
+      ],
+      "y": 122799
+    },
+    {
+      "runs": [
+        [
+          203377,
+          203378,
+          30350
+        ]
+      ],
+      "y": 122852
+    },
+    {
+      "runs": [
+        [
+          203178,
+          203179,
+          30350
+        ]
+      ],
+      "y": 123084
+    },
+    {
+      "runs": [
+        [
+          203178,
+          203179,
+          30350
+        ]
+      ],
+      "y": 123085
+    },
+    {
+      "runs": [
+        [
+          203178,
+          203179,
+          30350
+        ]
+      ],
+      "y": 123086
+    },
+    {
+      "runs": [
+        [
+          203179,
+          203181,
+          30350
+        ]
+      ],
+      "y": 123091
+    },
+    {
+      "runs": [
+        [
+          203179,
+          203181,
+          30350
+        ]
+      ],
+      "y": 123092
+    },
+    {
+      "runs": [
+        [
+          203179,
+          203181,
+          30350
+        ]
+      ],
+      "y": 123093
+    },
+    {
+      "runs": [
+        [
+          203179,
+          203181,
+          30350
+        ]
+      ],
+      "y": 123094
+    },
+    {
+      "runs": [
+        [
+          203179,
+          203181,
+          30350
+        ]
+      ],
+      "y": 123095
+    },
+    {
+      "runs": [
+        [
+          203179,
+          203181,
+          30350
+        ]
+      ],
+      "y": 123096
+    },
+    {
+      "runs": [
+        [
+          203179,
+          203181,
+          30350
+        ]
+      ],
+      "y": 123097
+    },
+    {
+      "runs": [
+        [
+          203179,
+          203181,
+          30350
+        ]
+      ],
+      "y": 123098
+    },
+    {
+      "runs": [
+        [
+          203179,
+          203181,
+          30350
+        ]
+      ],
+      "y": 123099
+    },
+    {
+      "runs": [
+        [
+          203179,
+          203180,
+          30350
+        ]
+      ],
+      "y": 123100
+    },
+    {
+      "runs": [
+        [
+          203179,
+          203180,
+          30350
+        ]
+      ],
+      "y": 123101
+    }
+  ],
+  "first_failure": {
+    "predicate": "unique-source-target-coverage",
+    "run": [
+      203404,
+      203405,
+      30350
+    ],
+    "y": 122799
+  },
+  "limits": [
+    "Diagnostic support is not nativeauthority or deliveryacceptance.",
+    "Fullc264source/wholephysical/477queries/foreigncontext unmodified; no inputcontexttrim.",
+    "25diagnosticheldcells remainheld; otheroriginal4targetonly+5foreignconflicts remainexcluded.",
+    "No science/native/producer execution,Gitmutation/fetch or qualification attempted.",
+    "No futureimmutablecommit or configlocator invented; root assigns publication locator after review."
+  ],
+  "held_reason": "All25 held cells remain territorial_exclusion_cells in immutable original diagnostic."
+}
