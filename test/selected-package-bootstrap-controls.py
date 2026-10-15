@@ -531,17 +531,20 @@ class WorkerWorkflowBootstrapTests(WorkflowBootstrapFixture, unittest.TestCase):
         order=['Authenticate selected package installer inputs','npm ci','pip install',
           'Assemble unchanged base with current selected output','Snapshot original final-worker package inputs',
           'Build the combined application once before asset-dependent tests','Inventory original final-worker package output',
-          'Install browser dependencies only for tests that use Playwright','Read back qualified native build outputs when selected',
+          'Install browser dependencies only for tests that use Playwright',
           'Test applicable combined-tree invariants without publishing or live imports','Retain original final-worker package output']
         positions=[self.integration.index(name) for name in order]
         self.assertEqual(positions,sorted(positions))
         for name in [order[4],order[5],order[6],order[-1]]:
             step=self.integration.split('- name: '+name,1)[1].split('      - ',1)[0]
             self.assertIn("steps.assembly.outputs.assembled != 'true'",step)
-        for name in [order[7],order[9]]:
+        for name in [order[7],order[8]]:
             step=self.integration.split('- name: '+name,1)[1].split('      - ',1)[0]
             self.assertIn("steps.assembly.outputs.assembled == 'true' && 'selected-output' || needs.prepare.outputs.test_selection",step)
-        tests=self.integration.split('- name: '+order[9],1)[1].split('      - ',1)[0]
+        build=self.integration.split('- name: '+order[5],1)[1].split('      - ',1)[0]
+        self.assertIn('run: npm run build:cloudflare',build)
+        self.assertEqual(self.integration.count('npm run build:cloudflare'),1)
+        tests=self.integration.split('- name: '+order[8],1)[1].split('      - ',1)[0]
         self.assertIn('SELECTED_PACKAGE_ASSEMBLY_SHA256: ${{ steps.assembly.outputs.assembly_sha256 }}',tests)
         self.assertIn('= selected-output',tests);self.assertIn('selectedDeliverySmoke',tests)
         browser=self.integration.split('- name: '+order[7],1)[1].split('      - ',1)[0]
@@ -549,8 +552,6 @@ class WorkerWorkflowBootstrapTests(WorkflowBootstrapFixture, unittest.TestCase):
         self.assertIn('if test "$INTEGRATION_TEST_SELECTION" = selected-output; then',tests)
         self.assertIn('requireCurrentPackageAssembly()',tests)
         self.assertIn('elif test "$INTEGRATION_TEST_SELECTION" != selected-data; then\n            node scripts/run-integration-tests.mjs',tests)
-        native=self.integration.split('- name: '+order[8],1)[1].split('      - ',1)[0]
-        self.assertIn("steps.assembly.outputs.assembled != 'true'",native)
         self.assertIn('SELECTED_PACKAGE_CANDIDATE: ${{ needs.prepare.outputs.candidate }}',self.integration)
         self.assertNotIn('continue-on-error:',self.integration)
         permissions=self.integration.split('    permissions:',1)[1].split('    steps:',1)[0]
