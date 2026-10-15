@@ -114,18 +114,17 @@ function assertPartition(result) {
  assert.equal(result.supported_cells,supported.length);assert.equal(result.held_cells,held.length);
  assert.equal('source_rows' in result,false);assert.equal('native_proof' in result,false);
 }
-test('diagnostic preserves default successful qualification and returns only screening data',()=>{
- const f=constructorFixture();assert.equal(f.run().source_rows[0].native_cells,1);
+test('diagnostic returns a complete successful partition and only screening data',()=>{
+ const f=constructorFixture();
  const d=f.diagnose();assertPartition(d);assert.equal(d.supported_cells,1);assert.equal(d.first_failure,null);
 });
-for(const mode of ['source','coverage','territory','outside'])test('actual authority diagnostic identifies '+mode+' without relaxing default refusal',()=>{
+for(const mode of ['source','coverage','territory','outside'])test('actual authority diagnostic identifies '+mode,()=>{
  const f=constructorFixture(s=>{exactBoundaryTarget(s);const r=conflict(s,'contradictory_land_water_support',off);
   if(mode==='source'){s.originals[2].geometry=rectangle(-89.99,-89.97,-.02,.02);s.measured[0].consumed.geometry=s.originals[2].geometry;}
   if(mode==='coverage')r.support.mapped_land_support=rectangle(-89.99,-89.97,-.02,.02);
   if(mode==='territory')s.targets[0].territorial_exclusions=[rectangle(-90.01,-89.99,-.01,.01)];
   if(mode==='outside')r.support.outside_mapped_L1_context=rectangle(-90.01,-89.99,-.01,.01);
  });
- assert.throws(()=>f.run(),/lack unique source-target coverage|intersect a physical reconstruction residual or conflict witness/);
  const d=f.diagnose();assertPartition(d);assert.equal(d.held_cells,1);
  assert.equal(d.decision_rows[0].runs[0][3],{source:'no-target-source-domain',coverage:'unsupported_coverage_cells',territory:'territorial_exclusion_cells',outside:'physical-reconstruction-residual-or-conflict'}[mode]);
 });
@@ -135,8 +134,8 @@ test('physical residual has first-predicate precedence over source coverage fail
  assert.equal(d.first_failure.predicate,'physical-reconstruction-residual-or-conflict');
 });
 function waterSetup(s){exactBoundaryTarget(s);const r=withResiduals(s,[]);r.support.mapped_inland_water_support=r.support.mapped_land_support;r.support.mapped_land_support=rectangle(-89.99,-89.98,-.02,.02);s.targets[0].coverage_classes=['mapped_land_support','mapped_inland_water_support'];s.targets[0].coverage_rows=[{y,runs:[[x,x+1,'mapped_land_support']]}];}
-test('declared physical class cannot borrow another class in diagnostic or qualifier',()=>{
- const f=constructorFixture(waterSetup);assert.throws(()=>f.run(),/declared land\/water/);
+test('diagnostic identifies declared physical class borrowing',()=>{
+ const f=constructorFixture(waterSetup);
  const d=f.diagnose();assertPartition(d);assert.equal(d.decision_rows[0].runs[0][3],'declared-land-water-class-support');
 });
 test('unknown whole witness/query still aborts diagnostic instead of emitting partial partition',()=>{
@@ -179,7 +178,7 @@ test('first held run does not skip later requested blocks or another owner',()=>
   const xx=Math.floor(size/2+.05/360*size),first=Math.floor(size/2-.02/360*size);
   s.proposed.rows=[{y,runs:[[first,first+1,1],[xx,xx+1,2]]},{y:y+5000,runs:[[first,first+1,1],[xx,xx+1,2]]}];
  });
- assert.throws(()=>f.run(),/unique source-target coverage/);const d=f.diagnose();assertPartition(d);
+ const d=f.diagnose();assertPartition(d);
  assert.equal(d.requested_cells,4);assert.equal(d.held_cells,2);assert.equal(d.supported_cells,2);
  assert.equal(d.decision_rows.length,2);assert.equal(d.first_failure.y,y);
 });

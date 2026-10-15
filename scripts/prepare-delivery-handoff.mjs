@@ -52,7 +52,7 @@ export function pinReader(root, {allowance} = {}) {
     need(digest(raw) === pin.sha256, 'Whole body hash differs: ' + pin.path);
     return raw;
   }
-  return {git, read, json: pin => JSON.parse(read(pin)), budget,
+  return {git, read, descriptor, json: pin => JSON.parse(read(pin)), budget,
     hasPath(commit, name) {
       need(hex(commit, 40) && safe(name), 'Exact commit and safe whole-file path required');
       return git('ls-tree', '-z', commit, '--', name).length > 0;
@@ -1317,7 +1317,10 @@ export async function nativeAuthority(config, reader, root, diagnostic = false) 
     && config.version === 1 && config.preparation_allowance, 'Explicit native-authority inputs and allowance required');
   const flow = await import('./delivery-handoff-advance.mjs');
   const inputs = {source_evidence: config.source_evidence, native_patch: config.native_patch};
-  const pins = Object.fromEntries(Object.entries(inputs).map(([role, locator]) => [role, flow.locate(reader, locator)]));
+  const pins = diagnostic
+    ? Object.fromEntries(Object.entries(inputs).map(([role, locator]) => [role, flow.locate(reader, locator)])) : null;
+  if (!diagnostic) for (const locator of Object.values(inputs))
+    reader.descriptor(locator?.commit, locator?.path);
   const authorityReader = flow.deliveryAuthorityReader(root, reader);
   const started = performance.now();
   let result, products;

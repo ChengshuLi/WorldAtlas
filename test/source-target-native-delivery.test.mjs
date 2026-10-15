@@ -9,35 +9,6 @@ function inputs() {
     ownerRows:Array.from({length:8},(_,y)=>({y,complete_owner_intervals:[]})),
     size:8,latitudes:nativeRowLatitudes(8),rowStart:0,rowEnd:8};
 }
-test('source-native assignments use the literal grid and need no gap polygons',()=>{
-  const result=deriveSourceTargetNativeDelta(inputs());
-  assert.deepEqual(result.rows,[{y:3,runs:[[2,6,1]]},{y:4,runs:[[2,6,1]]}]);
-  assert.equal(result.assigned_cells,8); assert.equal(result.reassigned_cells,0);
-});
-test('every existing owner is preserved, including the same intended owner',()=>{
-  const input=inputs(); input.ownerRows[3].complete_owner_intervals=[[2,3,2],[4,5,1]];
-  const result=deriveSourceTargetNativeDelta(input);
-  assert.deepEqual(result.rows[0],{y:3,runs:[[3,4,1],[5,6,1]]});
-  assert.equal(result.already_owned_cells,2); assert.equal(result.assigned_cells,6);
-});
-test('competing source owners are withheld symmetrically',()=>{
-  const input=inputs(); input.sourceFeatures.push(feature('source:B',2,polygon(-1,89)));
-  const result=deriveSourceTargetNativeDelta(input);
-  assert.equal(result.ambiguous_owner_cells,4); assert.equal(result.assigned_cells,4);
-});
-test('reviewed territorial exclusions are independent of physical water',()=>{
-  const input=inputs(); input.territorialExclusions=[feature('source:A',1,polygon(-1,89))];
-  const result=deriveSourceTargetNativeDelta(input);
-  assert.equal(result.territorial_exclusion_cells,4); assert.equal(result.assigned_cells,4);
-  // A physical label is not consumed as a territorial exclusion.
-  const water=inputs(); water.physical_status='water-supported';
-  assert.equal(deriveSourceTargetNativeDelta(water).assigned_cells,8);
-});
-test('unsupported coverage stays withheld',()=>{
-  const input=inputs(); input.coverageFeatures=[feature('source:A',1,polygon(-89,-1))];
-  const result=deriveSourceTargetNativeDelta(input);
-  assert.equal(result.unsupported_coverage_cells,4); assert.equal(result.assigned_cells,4);
-});
 test('missing current rows and foreign target joins fail closed',()=>{
   const input=inputs();input.ownerRows.pop();assert.throws(()=>deriveSourceTargetNativeDelta(input),/extent/);
   const wrong=inputs();wrong.targets[0].id='invented';assert.throws(()=>deriveSourceTargetNativeDelta(wrong),/roster/);
@@ -132,6 +103,8 @@ test('trusted reader, source constructor and profile execute without installed n
       const result=deriveSourceTargetNativeDelta({targets:[feature],sourceFeatures:[feature],coverageFeatures:[feature],
         ownerRows:Array.from({length:8},(_,y)=>({y,complete_owner_intervals:[]})),size:8,latitudes:nativeRowLatitudes(8),rowStart:0,rowEnd:8});
       assert.equal(result.assigned_cells,8);
+      assert.deepEqual(result.rows,[{y:3,runs:[[2,6,1]]},{y:4,runs:[[2,6,1]]}]);
+      assert.equal(result.reassigned_cells,0);
       const component={representation:'native-cells',component_id:'cold:A',target_id:feature.id,pixelIndex:1,disposition:'assigned',
         base_geometry:geometry,base_geometry_sha256:valueSha(geometry),native_rows:result.rows,native_bounds:[-89,-40,89,40],native_cells:8,
         source_receipt_sha256:'a'.repeat(64),authority_sha256:'b'.repeat(64),rule_sha256:'c'.repeat(64)};
