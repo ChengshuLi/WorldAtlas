@@ -1,0 +1,104 @@
+{
+  "version": 1,
+  "status": "3724-constructor-qualified-not-current-owner-zero-or-accepted",
+  "candidate_cells": 3724,
+  "groups": [
+    {
+      "rule_preimage": {
+        "commit": "5aa5fd41f4f5381cecd90fd40063bde9ac8089bc",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/tanintharyi6-authority-001/original-rule-preimage.json",
+        "mode": "100644",
+        "git_blob_oid": "a10baf093799f24188a192bd61d1392309da1384",
+        "bytes": 821,
+        "sha256": "df1fa48c7cf8adda34812812a005957aa71b0b39e1645575419e1e4878baf23d"
+      },
+      "source_authority": {
+        "commit": "5aa5fd41f4f5381cecd90fd40063bde9ac8089bc",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/tanintharyi6-authority-001/authority-binding.json",
+        "mode": "100644",
+        "git_blob_oid": "55ceee3778cd9e4e3cb4692ccaf0bcbb79045d27",
+        "bytes": 824,
+        "sha256": "94ea39e9befaeeee9eb2258b384f45997b02228ba298618b34b6d3171b41945a"
+      },
+      "ledger": {
+        "commit": "5aa5fd41f4f5381cecd90fd40063bde9ac8089bc",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/tanintharyi6-authority-001/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "3dc2ac5729ca1ca3db6815b6ad512433135daf31",
+        "bytes": 15463,
+        "sha256": "134f193ed66d83246415bca5316d0d83861a3339ddbd0864c9820682e8fb703b"
+      },
+      "native_patch": {
+        "commit": "b5a3893944d84f462cfe8173d6fd590825473b4d",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/tanintharyi6-source-preparation/candidate-native-patch.json",
+        "mode": "100644",
+        "git_blob_oid": "b76ea96991ecc304d23ff2fcab63e64b1daf4384",
+        "bytes": 231,
+        "sha256": "027c7060650a0975c7ccb15e854ae916d059ca279b7ca5f0197ed6d0b4313e0b"
+      }
+    },
+    {
+      "rule_preimage": {
+        "commit": "8d7ece7395e65a72ed07fdfc3edf68d3af0828d4",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/kawthoung3718-authority-001/original-rule-preimage.json",
+        "mode": "100644",
+        "git_blob_oid": "ca1e05b68dbe763d5b69990d92ed4f24698f457e",
+        "bytes": 875,
+        "sha256": "8aee9ee2a75e942a3bfc75fbfd45983b4f2d3d4a38a67c7c79f4a252019db151"
+      },
+      "source_authority": {
+        "commit": "8d7ece7395e65a72ed07fdfc3edf68d3af0828d4",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/kawthoung3718-authority-001/authority-binding.json",
+        "mode": "100644",
+        "git_blob_oid": "652c3864769b1308cf4f9d2a31ac79ab2a88b831",
+        "bytes": 878,
+        "sha256": "4ccb913cc1391bd65b38512aefff907d323a6eaaf987176e7392260aa7526a78"
+      },
+      "ledger": {
+        "commit": "8d7ece7395e65a72ed07fdfc3edf68d3af0828d4",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/kawthoung3718-authority-001/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "1fd381cf21141e880012accc27521085a434e7b5",
+        "bytes": 43380,
+        "sha256": "aa8e27ef9112d7d0bd8c52a0599d878f09ac90a5f4f8d8cb59620ef0987799b6"
+      },
+      "native_patch": {
+        "commit": "b1301fa07270bcf0d91be48a6d49445c307562cf",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/coastal-candidate-cell-preparation-001/kawthoung/parent-sid-narrow/candidate-native-patch.json",
+        "mode": "100644",
+        "git_blob_oid": "d3c0141b71d95bc56b0469140a7b393e44307993",
+        "bytes": 36641,
+        "sha256": "a34b7ac2663f8d2b104d3dbdcabe7f98c823aeb0394cc9d7b1a8224ac9d8d30e"
+      }
+    }
+  ],
+  "cohorts": {
+    "Tanintharyi": 6,
+    "Kawthoung": 3718
+  },
+  "accepted_baseline": {
+    "commit": "8c4199fd6455246b98a6fd4b7a6d0f708b9afc70",
+    "accepted_cumulative_cells": 67009,
+    "Myanmar_original39315_package_accepted": 24183,
+    "basis": "Root verified actual1931merge;2596append nowaccepted. No duplicate monitor."
+  },
+  "held": {
+    "Bokpyin_proposed3616": "Stock combined coverage refused; supported subset unknown until an accepted shared partition route exposes it. No repeated probes.",
+    "coastal_target_only": 4,
+    "coastal_foreign_owner_conflicts": 5,
+    "coastal_relative": 4844,
+    "Tanintharyi_referenceTHA": 50,
+    "Tanintharyi_foreign_owner_conflicts": 5
+  },
+  "reviews": {
+    "Tanintharyi": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/tanintharyi6-native-observation-001/independent-result-review.json",
+    "Kawthoung": "independent-result-review.json"
+  },
+  "delivery": "Rootcoordinated futurebatch aftercurrentmachinery acceptance; no tinyPR, competingdispatch or changes toaccepted1931. Composeonceagainstlatestacceptedmain and preserveall67009 acceptedcells.",
+  "limits": [
+    "Kawretainsall375queries/all454originalpolygonresiduals, exactlandclass,fullsource330family andthreewholeforeignvetoes. CountryreferenceflagsremainUNKNOWN.",
+    "Kaw numerictool exitstatusunknown becauseexec transportdisconnected; authenticatedcompletepublication/time-lterminalconfirmcompletion, no retry.",
+    "Current-owner-zero, cumulative conservation, finalreadback/exact-head review andintegration acceptance pending.",
+    "No physical/source producer replay, new countrywrapper, legalborder orwholeparentcontainmentclaim."
+  ]
+}
