@@ -1,0 +1,19 @@
+# Nha Trang: adopted physical interpretation for 20 original centres
+
+Refs #1881, original `gb-VNM-ADM2--physical-interpretation` package. This checkpoint preserves one substantive original-purpose disposition: the unchanged20 centres identify two small-island land locations visible on16July2020. The northern six correspond geographically to NGA Hòn Câu/Hon Ho and the southern fourteen to Hòn Dung/Hon Dun. The independent combined-source review and explicit adoption are in `nha-trang20/`.
+
+This answers a bounded coast/local-source interpretation question. It changes no selection, repair authority, territorial decision, hold or global counter. Nine contiguous key runs enumerate20 centres; they are not nine completed original queue segments. It does not certify a whole150m cell, exact shoreline, annual water absence or uninterrupted legal administrative membership. The approved map/legal-component chain supports stronger claims; it is not an unmet prerequisite for this limited physical interpretation.
+
+## Actual evidence and attribution
+
+Sentinel-2B/Copernicus imagery acquired **2020-07-16T03:24:37.394Z**, item `S2B_49PCP_20200716_0_L2A`. Public Element84/AWS COG conversion: https://registry.opendata.aws/sentinel-2-l2a-cogs/ . Exact scene metadata and asset URLs are preserved. Native10m B02/B03/B04/B08 and native20m SCL windows retain original pixel values, georeference and source tags. No imagery resampling occurred. Display PNGs apply fixed DN0–3000 scaling only; centre marks are display overlays. SCL and WorldCover are model evidence, not physical or legal truth.
+
+These are bounded derivatives of public Copernicus Sentinel data (2020), with source attribution retained. Full remote COG objects were not downloaded or whole-file authenticated. The original33-centre/two-window operation exited0 on15October2026,11:26:35UTC; this checkpoint preserves only its20-centre Nha Trang subset and the unaltered whole-operation receipt. It does not claim to preserve the unrelated13-centre imagery or the entire interpreter/runtime closure. No executable reproduction copy is delivered.
+
+NGA names: https://geonames.nga.mil/geon-ags/rest/services/RESEARCH/GIS_OUTPUT/MapServer/0 . Exact returned public name records and query receipt are retained. Names identify point locations, not ADM2 polygons. Primary documentary context: https://nhatrang-travel.com/gioi-thieu/don-vi-hanh-chinh/gioi-thieu-tong-quan-nha-trang.html (published3July2020), and Government Decision1396/QĐ-TTg,25September2012: https://vanban.chinhphu.vn/default.aspx?docid=163853&pageid=27160 . Source summaries preserve purpose and limits; full articles are not republished.
+
+Separate complete nominal2020 Khánh Hòa parent source: `parent-source-provenance.json` preserves the immutable provider commit/path/URL, full15,320,736-byte SHA256 and acquisition scope. The20 original records retain the already completed whole-parent membership result (all inside). This checkpoint does not relabel that supporting numerical result as a new execution or claim to ship its entire runtime. The original complete membership output SHA256 is `e0d7cb24e2caf3ae8a2d4a10c6e122d3a0efd357e8c96762a8229d45bf31f3b5`; its private execution record remains preserved. Direct dated imagery/name evidence is the physical basis.
+
+The earlier dated-image review identifies a then-missing documentary context. The later combined-source disposition review explicitly supersedes that open physical-interpretation question for this limited20-centre scope while retaining the stronger legal/shoreline questions.
+
+`inventory.json` identifies every delivered file by whole bytes/SHA256. It describes the preserved evidence subset, not an authority or accepted runtime-input manifest. All pre-existing original source geometry and hold selectors remain unchanged.

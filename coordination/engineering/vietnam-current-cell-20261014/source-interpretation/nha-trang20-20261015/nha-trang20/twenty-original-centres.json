@@ -1,0 +1,986 @@
+{
+  "purpose": "Retained-output subset and scalar advertised-bounds comparison only; no new source/native/raster/geometry operation",
+  "inputs": [
+    "../advertised-wms-capabilities.xml",
+    "../../point-results.json",
+    "../../reviewed-source-interpretations-by-original-interval.json"
+  ],
+  "original_owner": 48569,
+  "original_target": "gb:VNM:ADM2:81297802B68033195953544",
+  "advertised_current_state_layer": "sdd_htsdd_tpnhatrang",
+  "advertised_lat_lon_bounds": {
+    "minx": 109.11151123046875,
+    "miny": 12.140701293945312,
+    "maxx": 109.34764099121094,
+    "maxy": 12.379629135131836
+  },
+  "count": 20,
+  "centres": [
+    {
+      "owner": 48569,
+      "target": "gb:VNM:ADM2:81297802B68033195953544",
+      "name": "Nha Trang",
+      "y": 122067,
+      "x": 210730,
+      "longitude": 109.37001746984737,
+      "latitude": 12.284647722728815,
+      "class_code": 60,
+      "valid_mask": 255,
+      "neighbourhood_codes": [
+        [
+          60,
+          60,
+          60
+        ],
+        [
+          60,
+          60,
+          60
+        ],
+        [
+          60,
+          60,
+          60
+        ]
+      ],
+      "neighbourhood_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "class_label": "bare or sparse vegetation",
+      "parent_2020_membership": "inside",
+      "advertised_extent_relation": "east of current-state maxx"
+    },
+    {
+      "owner": 48569,
+      "target": "gb:VNM:ADM2:81297802B68033195953544",
+      "name": "Nha Trang",
+      "y": 122068,
+      "x": 210729,
+      "longitude": 109.36864429407325,
+      "latitude": 12.28330598566083,
+      "class_code": 60,
+      "valid_mask": 255,
+      "neighbourhood_codes": [
+        [
+          80,
+          60,
+          60
+        ],
+        [
+          60,
+          60,
+          60
+        ],
+        [
+          60,
+          60,
+          60
+        ]
+      ],
+      "neighbourhood_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "class_label": "bare or sparse vegetation",
+      "parent_2020_membership": "inside",
+      "advertised_extent_relation": "east of current-state maxx"
+    },
+    {
+      "owner": 48569,
+      "target": "gb:VNM:ADM2:81297802B68033195953544",
+      "name": "Nha Trang",
+      "y": 122068,
+      "x": 210730,
+      "longitude": 109.37001746984737,
+      "latitude": 12.28330598566083,
+      "class_code": 60,
+      "valid_mask": 255,
+      "neighbourhood_codes": [
+        [
+          60,
+          60,
+          60
+        ],
+        [
+          60,
+          60,
+          60
+        ],
+        [
+          60,
+          60,
+          60
+        ]
+      ],
+      "neighbourhood_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "class_label": "bare or sparse vegetation",
+      "parent_2020_membership": "inside",
+      "advertised_extent_relation": "east of current-state maxx"
+    },
+    {
+      "owner": 48569,
+      "target": "gb:VNM:ADM2:81297802B68033195953544",
+      "name": "Nha Trang",
+      "y": 122069,
+      "x": 210729,
+      "longitude": 109.36864429407325,
+      "latitude": 12.28196424175164,
+      "class_code": 60,
+      "valid_mask": 255,
+      "neighbourhood_codes": [
+        [
+          60,
+          60,
+          60
+        ],
+        [
+          60,
+          60,
+          60
+        ],
+        [
+          60,
+          60,
+          60
+        ]
+      ],
+      "neighbourhood_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "class_label": "bare or sparse vegetation",
+      "parent_2020_membership": "inside",
+      "advertised_extent_relation": "east of current-state maxx"
+    },
+    {
+      "owner": 48569,
+      "target": "gb:VNM:ADM2:81297802B68033195953544",
+      "name": "Nha Trang",
+      "y": 122069,
+      "x": 210730,
+      "longitude": 109.37001746984737,
+      "latitude": 12.28196424175164,
+      "class_code": 10,
+      "valid_mask": 255,
+      "neighbourhood_codes": [
+        [
+          30,
+          30,
+          30
+        ],
+        [
+          10,
+          10,
+          30
+        ],
+        [
+          10,
+          10,
+          30
+        ]
+      ],
+      "neighbourhood_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "class_label": "tree cover",
+      "parent_2020_membership": "inside",
+      "advertised_extent_relation": "east of current-state maxx"
+    },
+    {
+      "owner": 48569,
+      "target": "gb:VNM:ADM2:81297802B68033195953544",
+      "name": "Nha Trang",
+      "y": 122070,
+      "x": 210730,
+      "longitude": 109.37001746984737,
+      "latitude": 12.280622491001939,
+      "class_code": 60,
+      "valid_mask": 255,
+      "neighbourhood_codes": [
+        [
+          30,
+          30,
+          30
+        ],
+        [
+          60,
+          60,
+          60
+        ],
+        [
+          60,
+          60,
+          60
+        ]
+      ],
+      "neighbourhood_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "class_label": "bare or sparse vegetation",
+      "parent_2020_membership": "inside",
+      "advertised_extent_relation": "east of current-state maxx"
+    },
+    {
+      "owner": 48569,
+      "target": "gb:VNM:ADM2:81297802B68033195953544",
+      "name": "Nha Trang",
+      "y": 122075,
+      "x": 210723,
+      "longitude": 109.36040523942847,
+      "latitude": 12.273913634670373,
+      "class_code": 60,
+      "valid_mask": 255,
+      "neighbourhood_codes": [
+        [
+          60,
+          60,
+          60
+        ],
+        [
+          60,
+          60,
+          60
+        ],
+        [
+          60,
+          60,
+          60
+        ]
+      ],
+      "neighbourhood_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "class_label": "bare or sparse vegetation",
+      "parent_2020_membership": "inside",
+      "advertised_extent_relation": "east of current-state maxx"
+    },
+    {
+      "owner": 48569,
+      "target": "gb:VNM:ADM2:81297802B68033195953544",
+      "name": "Nha Trang",
+      "y": 122075,
+      "x": 210724,
+      "longitude": 109.3617784152026,
+      "latitude": 12.273913634670373,
+      "class_code": 60,
+      "valid_mask": 255,
+      "neighbourhood_codes": [
+        [
+          60,
+          80,
+          80
+        ],
+        [
+          60,
+          60,
+          60
+        ],
+        [
+          60,
+          60,
+          60
+        ]
+      ],
+      "neighbourhood_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "class_label": "bare or sparse vegetation",
+      "parent_2020_membership": "inside",
+      "advertised_extent_relation": "east of current-state maxx"
+    },
+    {
+      "owner": 48569,
+      "target": "gb:VNM:ADM2:81297802B68033195953544",
+      "name": "Nha Trang",
+      "y": 122076,
+      "x": 210722,
+      "longitude": 109.35903206365435,
+      "latitude": 12.272571842892349,
+      "class_code": 10,
+      "valid_mask": 255,
+      "neighbourhood_codes": [
+        [
+          10,
+          10,
+          10
+        ],
+        [
+          10,
+          10,
+          10
+        ],
+        [
+          10,
+          10,
+          10
+        ]
+      ],
+      "neighbourhood_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "class_label": "tree cover",
+      "parent_2020_membership": "inside",
+      "advertised_extent_relation": "east of current-state maxx"
+    },
+    {
+      "owner": 48569,
+      "target": "gb:VNM:ADM2:81297802B68033195953544",
+      "name": "Nha Trang",
+      "y": 122076,
+      "x": 210723,
+      "longitude": 109.36040523942847,
+      "latitude": 12.272571842892349,
+      "class_code": 60,
+      "valid_mask": 255,
+      "neighbourhood_codes": [
+        [
+          60,
+          60,
+          60
+        ],
+        [
+          10,
+          60,
+          60
+        ],
+        [
+          10,
+          10,
+          60
+        ]
+      ],
+      "neighbourhood_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "class_label": "bare or sparse vegetation",
+      "parent_2020_membership": "inside",
+      "advertised_extent_relation": "east of current-state maxx"
+    },
+    {
+      "owner": 48569,
+      "target": "gb:VNM:ADM2:81297802B68033195953544",
+      "name": "Nha Trang",
+      "y": 122076,
+      "x": 210724,
+      "longitude": 109.3617784152026,
+      "latitude": 12.272571842892349,
+      "class_code": 30,
+      "valid_mask": 255,
+      "neighbourhood_codes": [
+        [
+          30,
+          30,
+          30
+        ],
+        [
+          10,
+          30,
+          30
+        ],
+        [
+          10,
+          10,
+          10
+        ]
+      ],
+      "neighbourhood_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "class_label": "grassland",
+      "parent_2020_membership": "inside",
+      "advertised_extent_relation": "east of current-state maxx"
+    },
+    {
+      "owner": 48569,
+      "target": "gb:VNM:ADM2:81297802B68033195953544",
+      "name": "Nha Trang",
+      "y": 122076,
+      "x": 210725,
+      "longitude": 109.36315159097671,
+      "latitude": 12.272571842892349,
+      "class_code": 60,
+      "valid_mask": 255,
+      "neighbourhood_codes": [
+        [
+          60,
+          60,
+          60
+        ],
+        [
+          60,
+          60,
+          60
+        ],
+        [
+          60,
+          60,
+          60
+        ]
+      ],
+      "neighbourhood_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "class_label": "bare or sparse vegetation",
+      "parent_2020_membership": "inside",
+      "advertised_extent_relation": "east of current-state maxx"
+    },
+    {
+      "owner": 48569,
+      "target": "gb:VNM:ADM2:81297802B68033195953544",
+      "name": "Nha Trang",
+      "y": 122077,
+      "x": 210722,
+      "longitude": 109.35903206365435,
+      "latitude": 12.27123004427873,
+      "class_code": 10,
+      "valid_mask": 255,
+      "neighbourhood_codes": [
+        [
+          10,
+          10,
+          10
+        ],
+        [
+          10,
+          10,
+          10
+        ],
+        [
+          10,
+          10,
+          10
+        ]
+      ],
+      "neighbourhood_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "class_label": "tree cover",
+      "parent_2020_membership": "inside",
+      "advertised_extent_relation": "east of current-state maxx"
+    },
+    {
+      "owner": 48569,
+      "target": "gb:VNM:ADM2:81297802B68033195953544",
+      "name": "Nha Trang",
+      "y": 122077,
+      "x": 210723,
+      "longitude": 109.36040523942847,
+      "latitude": 12.27123004427873,
+      "class_code": 10,
+      "valid_mask": 255,
+      "neighbourhood_codes": [
+        [
+          10,
+          10,
+          10
+        ],
+        [
+          10,
+          10,
+          10
+        ],
+        [
+          10,
+          10,
+          10
+        ]
+      ],
+      "neighbourhood_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "class_label": "tree cover",
+      "parent_2020_membership": "inside",
+      "advertised_extent_relation": "east of current-state maxx"
+    },
+    {
+      "owner": 48569,
+      "target": "gb:VNM:ADM2:81297802B68033195953544",
+      "name": "Nha Trang",
+      "y": 122077,
+      "x": 210724,
+      "longitude": 109.3617784152026,
+      "latitude": 12.27123004427873,
+      "class_code": 10,
+      "valid_mask": 255,
+      "neighbourhood_codes": [
+        [
+          10,
+          10,
+          10
+        ],
+        [
+          10,
+          10,
+          10
+        ],
+        [
+          10,
+          10,
+          10
+        ]
+      ],
+      "neighbourhood_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "class_label": "tree cover",
+      "parent_2020_membership": "inside",
+      "advertised_extent_relation": "east of current-state maxx"
+    },
+    {
+      "owner": 48569,
+      "target": "gb:VNM:ADM2:81297802B68033195953544",
+      "name": "Nha Trang",
+      "y": 122078,
+      "x": 210722,
+      "longitude": 109.35903206365435,
+      "latitude": 12.269888238830205,
+      "class_code": 10,
+      "valid_mask": 255,
+      "neighbourhood_codes": [
+        [
+          10,
+          10,
+          10
+        ],
+        [
+          10,
+          10,
+          10
+        ],
+        [
+          10,
+          10,
+          10
+        ]
+      ],
+      "neighbourhood_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "class_label": "tree cover",
+      "parent_2020_membership": "inside",
+      "advertised_extent_relation": "east of current-state maxx"
+    },
+    {
+      "owner": 48569,
+      "target": "gb:VNM:ADM2:81297802B68033195953544",
+      "name": "Nha Trang",
+      "y": 122078,
+      "x": 210723,
+      "longitude": 109.36040523942847,
+      "latitude": 12.269888238830205,
+      "class_code": 10,
+      "valid_mask": 255,
+      "neighbourhood_codes": [
+        [
+          10,
+          10,
+          10
+        ],
+        [
+          10,
+          10,
+          10
+        ],
+        [
+          10,
+          10,
+          10
+        ]
+      ],
+      "neighbourhood_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "class_label": "tree cover",
+      "parent_2020_membership": "inside",
+      "advertised_extent_relation": "east of current-state maxx"
+    },
+    {
+      "owner": 48569,
+      "target": "gb:VNM:ADM2:81297802B68033195953544",
+      "name": "Nha Trang",
+      "y": 122078,
+      "x": 210724,
+      "longitude": 109.3617784152026,
+      "latitude": 12.269888238830205,
+      "class_code": 10,
+      "valid_mask": 255,
+      "neighbourhood_codes": [
+        [
+          10,
+          10,
+          60
+        ],
+        [
+          10,
+          10,
+          10
+        ],
+        [
+          10,
+          10,
+          10
+        ]
+      ],
+      "neighbourhood_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "class_label": "tree cover",
+      "parent_2020_membership": "inside",
+      "advertised_extent_relation": "east of current-state maxx"
+    },
+    {
+      "owner": 48569,
+      "target": "gb:VNM:ADM2:81297802B68033195953544",
+      "name": "Nha Trang",
+      "y": 122079,
+      "x": 210723,
+      "longitude": 109.36040523942847,
+      "latitude": 12.268546426547486,
+      "class_code": 10,
+      "valid_mask": 255,
+      "neighbourhood_codes": [
+        [
+          10,
+          10,
+          10
+        ],
+        [
+          10,
+          10,
+          10
+        ],
+        [
+          10,
+          10,
+          10
+        ]
+      ],
+      "neighbourhood_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "class_label": "tree cover",
+      "parent_2020_membership": "inside",
+      "advertised_extent_relation": "east of current-state maxx"
+    },
+    {
+      "owner": 48569,
+      "target": "gb:VNM:ADM2:81297802B68033195953544",
+      "name": "Nha Trang",
+      "y": 122079,
+      "x": 210724,
+      "longitude": 109.3617784152026,
+      "latitude": 12.268546426547486,
+      "class_code": 60,
+      "valid_mask": 255,
+      "neighbourhood_codes": [
+        [
+          30,
+          60,
+          60
+        ],
+        [
+          30,
+          60,
+          60
+        ],
+        [
+          30,
+          60,
+          60
+        ]
+      ],
+      "neighbourhood_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "class_label": "bare or sparse vegetation",
+      "parent_2020_membership": "inside",
+      "advertised_extent_relation": "east of current-state maxx"
+    }
+  ],
+  "limits": [
+    "BBOX overlap is not polygon containment or verified source coverage.",
+    "WorldCover categories are source predictions, not dry-land or shoreline authority.",
+    "Parent membership is the retained independent administrative result; no old-parent per-key transition is inferred.",
+    "All original holds remain; no classification promotion or repair credit."
+  ]
+}
