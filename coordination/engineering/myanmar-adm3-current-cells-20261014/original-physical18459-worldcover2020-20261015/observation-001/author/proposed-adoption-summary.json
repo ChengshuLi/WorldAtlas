@@ -1,0 +1,1201 @@
+{
+  "kind": "authored-bounded-annual2020-physical-body-location-proposals",
+  "original_package": "gb-MMR-ADM3--physical-interpretation",
+  "original18459": 18459,
+  "known_previous_adopted_answers": 2237,
+  "source_observed_complement": 16222,
+  "new_proposed_answers": 12767,
+  "open_questions": 3455,
+  "categories": {
+    "annual2020-source-supported-specific-cover-body-location": 7261,
+    "annual2020-source-supported-water-body-location": 5506,
+    "unresolved-wetland-intertidal-body-relation": 2230,
+    "unresolved-water-wet-cover-edge-location": 1221,
+    "unresolved-native-context-coverage": 4
+  },
+  "literal_class_counts": {
+    "10": 6548,
+    "80": 6121,
+    "95": 2154,
+    "30": 240,
+    "60": 452,
+    "50": 74,
+    "40": 554,
+    "90": 76,
+    "20": 3
+  },
+  "answer_file": {
+    "path": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/authored-interpretation-001/proposed-annual-body-location-answers.jsonl.gz",
+    "bytes": 1138636,
+    "sha256": "36ee8af2aee01a969554cba9d52e03e6553e2ca2a68d7ab800ad45f610906a88",
+    "decoded_bytes": 53055778,
+    "decoded_sha256": "a6f54144dd9cc829e9635a06540647f82e525ad285d7119d11aa3361e8bdf13e",
+    "keys": 12767
+  },
+  "open_question_file": {
+    "path": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/authored-interpretation-001/open-physical-questions.jsonl.gz",
+    "bytes": 367278,
+    "sha256": "ffd37d3a840c82dd488dc75fce9c4d2c951dc5b4aaf6f32209ea6e0bfc5c140a",
+    "decoded_bytes": 13838664,
+    "decoded_sha256": "08e0dc05d5dfa55886eb3794f196ec4e16855d130d27fef04e7c752b8397ca28",
+    "keys": 3455
+  },
+  "association_input": {
+    "path": "retained-private:.cache/worker5-mmr-body-location-association-001/physical-remaining16222-associations.jsonl",
+    "bytes": 21741929,
+    "sha256": "8e27de8a72a7ea649992a656778e65b6f980583d92c0a5065729115f36de08c7"
+  },
+  "source_report": {
+    "path": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/source-observations.json",
+    "bytes": 110009,
+    "sha256": "12c49030b9e082d7381965b907c93a5f979d11d217b40b53ede5447c705e03ec"
+  },
+  "owner_groups": [
+    {
+      "owner": 30271,
+      "name": "Kyunsu",
+      "source_ADM3_member": {
+        "source_index": 45111,
+        "feature_ordinal": 140,
+        "source_id": "gb:MMR:ADM3:66882298B62167174305830",
+        "feature_name": "Kyunsu",
+        "feature_geometry_pointer": "/features/140/geometry"
+      },
+      "observed": 3471,
+      "proposed_answers": 2986,
+      "categories": {
+        "annual2020-source-supported-specific-cover-body-location": 2047,
+        "annual2020-source-supported-water-body-location": 939,
+        "unresolved-wetland-intertidal-body-relation": 156,
+        "unresolved-water-wet-cover-edge-location": 326,
+        "unresolved-native-context-coverage": 3
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 0
+    },
+    {
+      "owner": 30350,
+      "name": "Bokpyin",
+      "source_ADM3_member": {
+        "source_index": 45117,
+        "feature_ordinal": 146,
+        "source_id": "gb:MMR:ADM3:66882298B82483484204646",
+        "feature_name": "Bokpyin",
+        "feature_geometry_pointer": "/features/146/geometry"
+      },
+      "observed": 2163,
+      "proposed_answers": 1544,
+      "categories": {
+        "unresolved-wetland-intertidal-body-relation": 454,
+        "annual2020-source-supported-specific-cover-body-location": 1223,
+        "annual2020-source-supported-water-body-location": 321,
+        "unresolved-water-wet-cover-edge-location": 165
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 3
+    },
+    {
+      "owner": 30361,
+      "name": "Kawthoung",
+      "source_ADM3_member": {
+        "source_index": 45110,
+        "feature_ordinal": 139,
+        "source_id": "gb:MMR:ADM3:66882298B86598910616989",
+        "feature_name": "Kawthoung",
+        "feature_geometry_pointer": "/features/139/geometry"
+      },
+      "observed": 2679,
+      "proposed_answers": 2339,
+      "categories": {
+        "annual2020-source-supported-specific-cover-body-location": 1771,
+        "unresolved-wetland-intertidal-body-relation": 135,
+        "unresolved-water-wet-cover-edge-location": 205,
+        "annual2020-source-supported-water-body-location": 568
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 2
+    },
+    {
+      "owner": 30177,
+      "name": "Cocokyun",
+      "source_ADM3_member": {
+        "source_index": 45061,
+        "feature_ordinal": 90,
+        "source_id": "gb:MMR:ADM3:66882298B36196103316909",
+        "feature_name": "Cocokyun",
+        "feature_geometry_pointer": "/features/90/geometry"
+      },
+      "observed": 173,
+      "proposed_answers": 162,
+      "categories": {
+        "annual2020-source-supported-water-body-location": 113,
+        "unresolved-water-wet-cover-edge-location": 11,
+        "annual2020-source-supported-specific-cover-body-location": 49
+      },
+      "foreign_reference_keys": 39,
+      "source_ADM2_exterior_keys": 0
+    },
+    {
+      "owner": 30327,
+      "name": "Ye",
+      "source_ADM3_member": {
+        "source_index": 45093,
+        "feature_ordinal": 122,
+        "source_id": "gb:MMR:ADM3:66882298B73191723482857",
+        "feature_name": "Ye",
+        "feature_geometry_pointer": "/features/122/geometry"
+      },
+      "observed": 187,
+      "proposed_answers": 155,
+      "categories": {
+        "unresolved-native-context-coverage": 1,
+        "annual2020-source-supported-specific-cover-body-location": 47,
+        "annual2020-source-supported-water-body-location": 108,
+        "unresolved-wetland-intertidal-body-relation": 16,
+        "unresolved-water-wet-cover-edge-location": 15
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 0
+    },
+    {
+      "owner": 30227,
+      "name": "Yebyu",
+      "source_ADM3_member": {
+        "source_index": 45129,
+        "feature_ordinal": 158,
+        "source_id": "gb:MMR:ADM3:66882298B48301856519721",
+        "feature_name": "Yebyu",
+        "feature_geometry_pointer": "/features/158/geometry"
+      },
+      "observed": 188,
+      "proposed_answers": 162,
+      "categories": {
+        "annual2020-source-supported-water-body-location": 109,
+        "annual2020-source-supported-specific-cover-body-location": 53,
+        "unresolved-water-wet-cover-edge-location": 20,
+        "unresolved-wetland-intertidal-body-relation": 6
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 3
+    },
+    {
+      "owner": 30342,
+      "name": "Launglon",
+      "source_ADM3_member": {
+        "source_index": 45116,
+        "feature_ordinal": 145,
+        "source_id": "gb:MMR:ADM3:66882298B80414211212402",
+        "feature_name": "Launglon",
+        "feature_geometry_pointer": "/features/145/geometry"
+      },
+      "observed": 778,
+      "proposed_answers": 578,
+      "categories": {
+        "annual2020-source-supported-water-body-location": 206,
+        "unresolved-wetland-intertidal-body-relation": 151,
+        "annual2020-source-supported-specific-cover-body-location": 372,
+        "unresolved-water-wet-cover-edge-location": 49
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 0
+    },
+    {
+      "owner": 30152,
+      "name": "Thayetchaung",
+      "source_ADM3_member": {
+        "source_index": 45131,
+        "feature_ordinal": 160,
+        "source_id": "gb:MMR:ADM3:66882298B32460181384532",
+        "feature_name": "Thayetchaung",
+        "feature_geometry_pointer": "/features/160/geometry"
+      },
+      "observed": 179,
+      "proposed_answers": 126,
+      "categories": {
+        "annual2020-source-supported-specific-cover-body-location": 100,
+        "annual2020-source-supported-water-body-location": 26,
+        "unresolved-water-wet-cover-edge-location": 19,
+        "unresolved-wetland-intertidal-body-relation": 34
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 0
+    },
+    {
+      "owner": 30185,
+      "name": "Palaw",
+      "source_ADM3_member": {
+        "source_index": 45127,
+        "feature_ordinal": 156,
+        "source_id": "gb:MMR:ADM3:66882298B40667774005147",
+        "feature_name": "Palaw",
+        "feature_geometry_pointer": "/features/156/geometry"
+      },
+      "observed": 835,
+      "proposed_answers": 567,
+      "categories": {
+        "unresolved-wetland-intertidal-body-relation": 209,
+        "annual2020-source-supported-water-body-location": 163,
+        "unresolved-water-wet-cover-edge-location": 59,
+        "annual2020-source-supported-specific-cover-body-location": 404
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 0
+    },
+    {
+      "owner": 30179,
+      "name": "Myeik",
+      "source_ADM3_member": {
+        "source_index": 45121,
+        "feature_ordinal": 150,
+        "source_id": "gb:MMR:ADM3:66882298B36911639137507",
+        "feature_name": "Myeik",
+        "feature_geometry_pointer": "/features/150/geometry"
+      },
+      "observed": 23,
+      "proposed_answers": 11,
+      "categories": {
+        "unresolved-wetland-intertidal-body-relation": 9,
+        "unresolved-water-wet-cover-edge-location": 3,
+        "annual2020-source-supported-water-body-location": 6,
+        "annual2020-source-supported-specific-cover-body-location": 5
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 0
+    },
+    {
+      "owner": 30303,
+      "name": "Gwa",
+      "source_ADM3_member": {
+        "source_index": 45075,
+        "feature_ordinal": 104,
+        "source_id": "gb:MMR:ADM3:66882298B67553323255828",
+        "feature_name": "Gwa",
+        "feature_geometry_pointer": "/features/104/geometry"
+      },
+      "observed": 53,
+      "proposed_answers": 47,
+      "categories": {
+        "annual2020-source-supported-water-body-location": 28,
+        "annual2020-source-supported-specific-cover-body-location": 19,
+        "unresolved-water-wet-cover-edge-location": 4,
+        "unresolved-wetland-intertidal-body-relation": 2
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 0
+    },
+    {
+      "owner": 30336,
+      "name": "Thabaung",
+      "source_ADM3_member": {
+        "source_index": 45020,
+        "feature_ordinal": 49,
+        "source_id": "gb:MMR:ADM3:66882298B78974611272668",
+        "feature_name": "Thabaung",
+        "feature_geometry_pointer": "/features/49/geometry"
+      },
+      "observed": 132,
+      "proposed_answers": 100,
+      "categories": {
+        "annual2020-source-supported-specific-cover-body-location": 46,
+        "annual2020-source-supported-water-body-location": 54,
+        "unresolved-water-wet-cover-edge-location": 15,
+        "unresolved-wetland-intertidal-body-relation": 17
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 2
+    },
+    {
+      "owner": 30399,
+      "name": "Pathein",
+      "source_ADM3_member": {
+        "source_index": 45078,
+        "feature_ordinal": 107,
+        "source_id": "gb:MMR:ADM3:66882298B98470543554215",
+        "feature_name": "Pathein",
+        "feature_geometry_pointer": "/features/107/geometry"
+      },
+      "observed": 67,
+      "proposed_answers": 54,
+      "categories": {
+        "unresolved-water-wet-cover-edge-location": 10,
+        "annual2020-source-supported-specific-cover-body-location": 34,
+        "annual2020-source-supported-water-body-location": 20,
+        "unresolved-wetland-intertidal-body-relation": 3
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 0
+    },
+    {
+      "owner": 30114,
+      "name": "Ngapudaw",
+      "source_ADM3_member": {
+        "source_index": 45022,
+        "feature_ordinal": 51,
+        "source_id": "gb:MMR:ADM3:66882298B21473836197235",
+        "feature_name": "Ngapudaw",
+        "feature_geometry_pointer": "/features/51/geometry"
+      },
+      "observed": 351,
+      "proposed_answers": 209,
+      "categories": {
+        "annual2020-source-supported-specific-cover-body-location": 69,
+        "unresolved-water-wet-cover-edge-location": 21,
+        "annual2020-source-supported-water-body-location": 140,
+        "unresolved-wetland-intertidal-body-relation": 121
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 1
+    },
+    {
+      "owner": 30274,
+      "name": "Dedaye",
+      "source_ADM3_member": {
+        "source_index": 45031,
+        "feature_ordinal": 60,
+        "source_id": "gb:MMR:ADM3:66882298B62732217443925",
+        "feature_name": "Dedaye",
+        "feature_geometry_pointer": "/features/60/geometry"
+      },
+      "observed": 119,
+      "proposed_answers": 62,
+      "categories": {
+        "annual2020-source-supported-specific-cover-body-location": 53,
+        "unresolved-water-wet-cover-edge-location": 20,
+        "annual2020-source-supported-water-body-location": 9,
+        "unresolved-wetland-intertidal-body-relation": 37
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 11
+    },
+    {
+      "owner": 30272,
+      "name": "Pyapon",
+      "source_ADM3_member": {
+        "source_index": 45034,
+        "feature_ordinal": 63,
+        "source_id": "gb:MMR:ADM3:66882298B62212267926712",
+        "feature_name": "Pyapon",
+        "feature_geometry_pointer": "/features/63/geometry"
+      },
+      "observed": 314,
+      "proposed_answers": 222,
+      "categories": {
+        "annual2020-source-supported-water-body-location": 181,
+        "unresolved-water-wet-cover-edge-location": 17,
+        "unresolved-wetland-intertidal-body-relation": 75,
+        "annual2020-source-supported-specific-cover-body-location": 41
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 3
+    },
+    {
+      "owner": 30228,
+      "name": "Bogale",
+      "source_ADM3_member": {
+        "source_index": 45023,
+        "feature_ordinal": 52,
+        "source_id": "gb:MMR:ADM3:66882298B48553142968450",
+        "feature_name": "Bogale",
+        "feature_geometry_pointer": "/features/52/geometry"
+      },
+      "observed": 40,
+      "proposed_answers": 15,
+      "categories": {
+        "annual2020-source-supported-water-body-location": 10,
+        "unresolved-wetland-intertidal-body-relation": 21,
+        "annual2020-source-supported-specific-cover-body-location": 5,
+        "unresolved-water-wet-cover-edge-location": 4
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 0
+    },
+    {
+      "owner": 30215,
+      "name": "Labutta",
+      "source_ADM3_member": {
+        "source_index": 44987,
+        "feature_ordinal": 16,
+        "source_id": "gb:MMR:ADM3:66882298B46433982831447",
+        "feature_name": "Labutta",
+        "feature_geometry_pointer": "/features/16/geometry"
+      },
+      "observed": 158,
+      "proposed_answers": 123,
+      "categories": {
+        "annual2020-source-supported-specific-cover-body-location": 28,
+        "unresolved-water-wet-cover-edge-location": 10,
+        "annual2020-source-supported-water-body-location": 95,
+        "unresolved-wetland-intertidal-body-relation": 25
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 0
+    },
+    {
+      "owner": 30121,
+      "name": "Thanatpin",
+      "source_ADM3_member": {
+        "source_index": 45006,
+        "feature_ordinal": 35,
+        "source_id": "gb:MMR:ADM3:66882298B23940339796351",
+        "feature_name": "Thanatpin",
+        "feature_geometry_pointer": "/features/35/geometry"
+      },
+      "observed": 37,
+      "proposed_answers": 35,
+      "categories": {
+        "annual2020-source-supported-water-body-location": 33,
+        "unresolved-water-wet-cover-edge-location": 2,
+        "annual2020-source-supported-specific-cover-body-location": 2
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 0
+    },
+    {
+      "owner": 30148,
+      "name": "Kyaikto",
+      "source_ADM3_member": {
+        "source_index": 45123,
+        "feature_ordinal": 152,
+        "source_id": "gb:MMR:ADM3:66882298B30035671122346",
+        "feature_name": "Kyaikto",
+        "feature_geometry_pointer": "/features/152/geometry"
+      },
+      "observed": 30,
+      "proposed_answers": 28,
+      "categories": {
+        "annual2020-source-supported-water-body-location": 12,
+        "unresolved-water-wet-cover-edge-location": 2,
+        "annual2020-source-supported-specific-cover-body-location": 16
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 5
+    },
+    {
+      "owner": 30241,
+      "name": "Bilin",
+      "source_ADM3_member": {
+        "source_index": 45097,
+        "feature_ordinal": 126,
+        "source_id": "gb:MMR:ADM3:66882298B52510382995497",
+        "feature_name": "Bilin",
+        "feature_geometry_pointer": "/features/126/geometry"
+      },
+      "observed": 148,
+      "proposed_answers": 146,
+      "categories": {
+        "annual2020-source-supported-specific-cover-body-location": 33,
+        "annual2020-source-supported-water-body-location": 113,
+        "unresolved-water-wet-cover-edge-location": 2
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 0
+    },
+    {
+      "owner": 30124,
+      "name": "Kawa",
+      "source_ADM3_member": {
+        "source_index": 45013,
+        "feature_ordinal": 42,
+        "source_id": "gb:MMR:ADM3:66882298B24871755522741",
+        "feature_name": "Kawa",
+        "feature_geometry_pointer": "/features/42/geometry"
+      },
+      "observed": 58,
+      "proposed_answers": 57,
+      "categories": {
+        "annual2020-source-supported-water-body-location": 55,
+        "annual2020-source-supported-specific-cover-body-location": 2,
+        "unresolved-wetland-intertidal-body-relation": 1
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 0
+    },
+    {
+      "owner": 30233,
+      "name": "Thaton",
+      "source_ADM3_member": {
+        "source_index": 45092,
+        "feature_ordinal": 121,
+        "source_id": "gb:MMR:ADM3:66882298B50654546091874",
+        "feature_name": "Thaton",
+        "feature_geometry_pointer": "/features/121/geometry"
+      },
+      "observed": 86,
+      "proposed_answers": 60,
+      "categories": {
+        "annual2020-source-supported-water-body-location": 22,
+        "annual2020-source-supported-specific-cover-body-location": 38,
+        "unresolved-wetland-intertidal-body-relation": 20,
+        "unresolved-water-wet-cover-edge-location": 6
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 6
+    },
+    {
+      "owner": 30214,
+      "name": "Kayan",
+      "source_ADM3_member": {
+        "source_index": 44991,
+        "feature_ordinal": 20,
+        "source_id": "gb:MMR:ADM3:66882298B46397740219200",
+        "feature_name": "Kayan",
+        "feature_geometry_pointer": "/features/20/geometry"
+      },
+      "observed": 116,
+      "proposed_answers": 115,
+      "categories": {
+        "annual2020-source-supported-water-body-location": 115,
+        "unresolved-water-wet-cover-edge-location": 1
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 0
+    },
+    {
+      "owner": 30403,
+      "name": "Thaketa",
+      "source_ADM3_member": {
+        "source_index": 45048,
+        "feature_ordinal": 77,
+        "source_id": "gb:MMR:ADM3:66882298B99723166439324",
+        "feature_name": "Thaketa",
+        "feature_geometry_pointer": "/features/77/geometry"
+      },
+      "observed": 5,
+      "proposed_answers": 2,
+      "categories": {
+        "unresolved-water-wet-cover-edge-location": 3,
+        "annual2020-source-supported-water-body-location": 1,
+        "annual2020-source-supported-specific-cover-body-location": 1
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 0
+    },
+    {
+      "owner": 30159,
+      "name": "Thanlyin",
+      "source_ADM3_member": {
+        "source_index": 45064,
+        "feature_ordinal": 93,
+        "source_id": "gb:MMR:ADM3:66882298B33396458700604",
+        "feature_name": "Thanlyin",
+        "feature_geometry_pointer": "/features/93/geometry"
+      },
+      "observed": 9,
+      "proposed_answers": 8,
+      "categories": {
+        "annual2020-source-supported-water-body-location": 2,
+        "annual2020-source-supported-specific-cover-body-location": 6,
+        "unresolved-water-wet-cover-edge-location": 1
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 0
+    },
+    {
+      "owner": 30297,
+      "name": "Seikgyikanaungto",
+      "source_ADM3_member": {
+        "source_index": 45084,
+        "feature_ordinal": 113,
+        "source_id": "gb:MMR:ADM3:66882298B66473456791866",
+        "feature_name": "Seikgyikanaungto",
+        "feature_geometry_pointer": "/features/113/geometry"
+      },
+      "observed": 2,
+      "proposed_answers": 2,
+      "categories": {
+        "annual2020-source-supported-water-body-location": 2
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 0
+    },
+    {
+      "owner": 30187,
+      "name": "Thongwa",
+      "source_ADM3_member": {
+        "source_index": 44978,
+        "feature_ordinal": 7,
+        "source_id": "gb:MMR:ADM3:66882298B40918846263989",
+        "feature_name": "Thongwa",
+        "feature_geometry_pointer": "/features/7/geometry"
+      },
+      "observed": 1,
+      "proposed_answers": 1,
+      "categories": {
+        "annual2020-source-supported-specific-cover-body-location": 1
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 0
+    },
+    {
+      "owner": 30353,
+      "name": "Pazundaung",
+      "source_ADM3_member": {
+        "source_index": 45024,
+        "feature_ordinal": 53,
+        "source_id": "gb:MMR:ADM3:66882298B8454750486674",
+        "feature_name": "Pazundaung",
+        "feature_geometry_pointer": "/features/53/geometry"
+      },
+      "observed": 1,
+      "proposed_answers": 1,
+      "categories": {
+        "annual2020-source-supported-specific-cover-body-location": 1
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 0
+    },
+    {
+      "owner": 30238,
+      "name": "Botahtaung",
+      "source_ADM3_member": {
+        "source_index": 45036,
+        "feature_ordinal": 65,
+        "source_id": "gb:MMR:ADM3:66882298B51516707971749",
+        "feature_name": "Botahtaung",
+        "feature_geometry_pointer": "/features/65/geometry"
+      },
+      "observed": 14,
+      "proposed_answers": 14,
+      "categories": {
+        "annual2020-source-supported-specific-cover-body-location": 14
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 0
+    },
+    {
+      "owner": 30130,
+      "name": "Dala",
+      "source_ADM3_member": {
+        "source_index": 45098,
+        "feature_ordinal": 127,
+        "source_id": "gb:MMR:ADM3:66882298B26691855709091",
+        "feature_name": "Dala",
+        "feature_geometry_pointer": "/features/127/geometry"
+      },
+      "observed": 25,
+      "proposed_answers": 20,
+      "categories": {
+        "annual2020-source-supported-water-body-location": 9,
+        "annual2020-source-supported-specific-cover-body-location": 11,
+        "unresolved-water-wet-cover-edge-location": 5
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 0
+    },
+    {
+      "owner": 30213,
+      "name": "Paung",
+      "source_ADM3_member": {
+        "source_index": 45120,
+        "feature_ordinal": 149,
+        "source_id": "gb:MMR:ADM3:66882298B46374660355499",
+        "feature_name": "Paung",
+        "feature_geometry_pointer": "/features/149/geometry"
+      },
+      "observed": 330,
+      "proposed_answers": 305,
+      "categories": {
+        "annual2020-source-supported-water-body-location": 156,
+        "annual2020-source-supported-specific-cover-body-location": 149,
+        "unresolved-water-wet-cover-edge-location": 24,
+        "unresolved-wetland-intertidal-body-relation": 1
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 0
+    },
+    {
+      "owner": 30202,
+      "name": "Mawlamyine",
+      "source_ADM3_member": {
+        "source_index": 45103,
+        "feature_ordinal": 132,
+        "source_id": "gb:MMR:ADM3:66882298B45439994111599",
+        "feature_name": "Mawlamyine",
+        "feature_geometry_pointer": "/features/132/geometry"
+      },
+      "observed": 105,
+      "proposed_answers": 93,
+      "categories": {
+        "annual2020-source-supported-water-body-location": 19,
+        "unresolved-water-wet-cover-edge-location": 3,
+        "annual2020-source-supported-specific-cover-body-location": 74,
+        "unresolved-wetland-intertidal-body-relation": 9
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 0
+    },
+    {
+      "owner": 30111,
+      "name": "Hpa-An",
+      "source_ADM3_member": {
+        "source_index": 45134,
+        "feature_ordinal": 163,
+        "source_id": "gb:MMR:ADM3:66882298B20948488348117",
+        "feature_name": "Hpa-An",
+        "feature_geometry_pointer": "/features/163/geometry"
+      },
+      "observed": 13,
+      "proposed_answers": 13,
+      "categories": {
+        "annual2020-source-supported-specific-cover-body-location": 10,
+        "annual2020-source-supported-water-body-location": 3
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 0
+    },
+    {
+      "owner": 30248,
+      "name": "Kyaikmaraw",
+      "source_ADM3_member": {
+        "source_index": 45126,
+        "feature_ordinal": 155,
+        "source_id": "gb:MMR:ADM3:66882298B55371715094402",
+        "feature_name": "Kyaikmaraw",
+        "feature_geometry_pointer": "/features/155/geometry"
+      },
+      "observed": 12,
+      "proposed_answers": 12,
+      "categories": {
+        "annual2020-source-supported-specific-cover-body-location": 12
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 0
+    },
+    {
+      "owner": 30252,
+      "name": "Kyauktan",
+      "source_ADM3_member": {
+        "source_index": 44979,
+        "feature_ordinal": 8,
+        "source_id": "gb:MMR:ADM3:66882298B563703845722",
+        "feature_name": "Kyauktan",
+        "feature_geometry_pointer": "/features/8/geometry"
+      },
+      "observed": 31,
+      "proposed_answers": 27,
+      "categories": {
+        "annual2020-source-supported-water-body-location": 3,
+        "unresolved-water-wet-cover-edge-location": 3,
+        "annual2020-source-supported-specific-cover-body-location": 24,
+        "unresolved-wetland-intertidal-body-relation": 1
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 22
+    },
+    {
+      "owner": 30255,
+      "name": "Chaungzon",
+      "source_ADM3_member": {
+        "source_index": 45096,
+        "feature_ordinal": 125,
+        "source_id": "gb:MMR:ADM3:66882298B57686651613256",
+        "feature_name": "Chaungzon",
+        "feature_geometry_pointer": "/features/125/geometry"
+      },
+      "observed": 142,
+      "proposed_answers": 65,
+      "categories": {
+        "annual2020-source-supported-specific-cover-body-location": 55,
+        "annual2020-source-supported-water-body-location": 10,
+        "unresolved-wetland-intertidal-body-relation": 72,
+        "unresolved-water-wet-cover-edge-location": 5
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 0
+    },
+    {
+      "owner": 30141,
+      "name": "Kungyangon",
+      "source_ADM3_member": {
+        "source_index": 45028,
+        "feature_ordinal": 57,
+        "source_id": "gb:MMR:ADM3:66882298B28699089666182",
+        "feature_name": "Kungyangon",
+        "feature_geometry_pointer": "/features/57/geometry"
+      },
+      "observed": 149,
+      "proposed_answers": 63,
+      "categories": {
+        "unresolved-wetland-intertidal-body-relation": 79,
+        "annual2020-source-supported-specific-cover-body-location": 14,
+        "annual2020-source-supported-water-body-location": 49,
+        "unresolved-water-wet-cover-edge-location": 7
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 0
+    },
+    {
+      "owner": 30117,
+      "name": "Mudon",
+      "source_ADM3_member": {
+        "source_index": 45130,
+        "feature_ordinal": 159,
+        "source_id": "gb:MMR:ADM3:66882298B22649797942784",
+        "feature_name": "Mudon",
+        "feature_geometry_pointer": "/features/159/geometry"
+      },
+      "observed": 14,
+      "proposed_answers": 14,
+      "categories": {
+        "annual2020-source-supported-specific-cover-body-location": 6,
+        "annual2020-source-supported-water-body-location": 8
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 0
+    },
+    {
+      "owner": 30226,
+      "name": "Thanbyuzayat",
+      "source_ADM3_member": {
+        "source_index": 45135,
+        "feature_ordinal": 164,
+        "source_id": "gb:MMR:ADM3:66882298B48286505509820",
+        "feature_name": "Thanbyuzayat",
+        "feature_geometry_pointer": "/features/164/geometry"
+      },
+      "observed": 32,
+      "proposed_answers": 30,
+      "categories": {
+        "annual2020-source-supported-specific-cover-body-location": 21,
+        "annual2020-source-supported-water-body-location": 9,
+        "unresolved-water-wet-cover-edge-location": 1,
+        "unresolved-wetland-intertidal-body-relation": 1
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 0
+    },
+    {
+      "owner": 30402,
+      "name": "Maungdaw",
+      "source_ADM3_member": {
+        "source_index": 45198,
+        "feature_ordinal": 227,
+        "source_id": "gb:MMR:ADM3:66882298B98818104227605",
+        "feature_name": "Maungdaw",
+        "feature_geometry_pointer": "/features/227/geometry"
+      },
+      "observed": 80,
+      "proposed_answers": 57,
+      "categories": {
+        "annual2020-source-supported-water-body-location": 54,
+        "annual2020-source-supported-specific-cover-body-location": 3,
+        "unresolved-wetland-intertidal-body-relation": 20,
+        "unresolved-water-wet-cover-edge-location": 3
+      },
+      "foreign_reference_keys": 17,
+      "source_ADM2_exterior_keys": 0
+    },
+    {
+      "owner": 30332,
+      "name": "Rathedaung",
+      "source_ADM3_member": {
+        "source_index": 45150,
+        "feature_ordinal": 179,
+        "source_id": "gb:MMR:ADM3:66882298B77467059166323",
+        "feature_name": "Rathedaung",
+        "feature_geometry_pointer": "/features/179/geometry"
+      },
+      "observed": 107,
+      "proposed_answers": 99,
+      "categories": {
+        "annual2020-source-supported-specific-cover-body-location": 53,
+        "annual2020-source-supported-water-body-location": 46,
+        "unresolved-water-wet-cover-edge-location": 5,
+        "unresolved-wetland-intertidal-body-relation": 3
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 7
+    },
+    {
+      "owner": 30287,
+      "name": "Sittwe",
+      "source_ADM3_member": {
+        "source_index": 45156,
+        "feature_ordinal": 185,
+        "source_id": "gb:MMR:ADM3:66882298B64895356281796",
+        "feature_name": "Sittwe",
+        "feature_geometry_pointer": "/features/185/geometry"
+      },
+      "observed": 43,
+      "proposed_answers": 36,
+      "categories": {
+        "annual2020-source-supported-specific-cover-body-location": 13,
+        "unresolved-wetland-intertidal-body-relation": 1,
+        "unresolved-water-wet-cover-edge-location": 6,
+        "annual2020-source-supported-water-body-location": 23
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 0
+    },
+    {
+      "owner": 30104,
+      "name": "Ponnagyun",
+      "source_ADM3_member": {
+        "source_index": 45169,
+        "feature_ordinal": 198,
+        "source_id": "gb:MMR:ADM3:66882298B19696970616392",
+        "feature_name": "Ponnagyun",
+        "feature_geometry_pointer": "/features/198/geometry"
+      },
+      "observed": 5,
+      "proposed_answers": 4,
+      "categories": {
+        "annual2020-source-supported-water-body-location": 4,
+        "unresolved-water-wet-cover-edge-location": 1
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 0
+    },
+    {
+      "owner": 30322,
+      "name": "Pauktaw",
+      "source_ADM3_member": {
+        "source_index": 45146,
+        "feature_ordinal": 175,
+        "source_id": "gb:MMR:ADM3:66882298B72213195308331",
+        "feature_name": "Pauktaw",
+        "feature_geometry_pointer": "/features/175/geometry"
+      },
+      "observed": 401,
+      "proposed_answers": 292,
+      "categories": {
+        "annual2020-source-supported-specific-cover-body-location": 39,
+        "unresolved-water-wet-cover-edge-location": 31,
+        "annual2020-source-supported-water-body-location": 253,
+        "unresolved-wetland-intertidal-body-relation": 78
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 0
+    },
+    {
+      "owner": 30224,
+      "name": "Mrauk-U",
+      "source_ADM3_member": {
+        "source_index": 45168,
+        "feature_ordinal": 197,
+        "source_id": "gb:MMR:ADM3:66882298B47520460749969",
+        "feature_name": "Mrauk-U",
+        "feature_geometry_pointer": "/features/197/geometry"
+      },
+      "observed": 60,
+      "proposed_answers": 51,
+      "categories": {
+        "annual2020-source-supported-specific-cover-body-location": 35,
+        "annual2020-source-supported-water-body-location": 16,
+        "unresolved-water-wet-cover-edge-location": 9
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 0
+    },
+    {
+      "owner": 30340,
+      "name": "Myebon",
+      "source_ADM3_member": {
+        "source_index": 45138,
+        "feature_ordinal": 167,
+        "source_id": "gb:MMR:ADM3:66882298B80264177521474",
+        "feature_name": "Myebon",
+        "feature_geometry_pointer": "/features/167/geometry"
+      },
+      "observed": 601,
+      "proposed_answers": 410,
+      "categories": {
+        "annual2020-source-supported-specific-cover-body-location": 24,
+        "unresolved-wetland-intertidal-body-relation": 158,
+        "annual2020-source-supported-water-body-location": 386,
+        "unresolved-water-wet-cover-edge-location": 33
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 2
+    },
+    {
+      "owner": 30123,
+      "name": "Minbya",
+      "source_ADM3_member": {
+        "source_index": 45159,
+        "feature_ordinal": 188,
+        "source_id": "gb:MMR:ADM3:66882298B24588945269730",
+        "feature_name": "Minbya",
+        "feature_geometry_pointer": "/features/188/geometry"
+      },
+      "observed": 7,
+      "proposed_answers": 5,
+      "categories": {
+        "annual2020-source-supported-water-body-location": 4,
+        "annual2020-source-supported-specific-cover-body-location": 1,
+        "unresolved-water-wet-cover-edge-location": 2
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 0
+    },
+    {
+      "owner": 30392,
+      "name": "Ann",
+      "source_ADM3_member": {
+        "source_index": 45145,
+        "feature_ordinal": 174,
+        "source_id": "gb:MMR:ADM3:66882298B95740508814243",
+        "feature_name": "Ann",
+        "feature_geometry_pointer": "/features/174/geometry"
+      },
+      "observed": 47,
+      "proposed_answers": 35,
+      "categories": {
+        "annual2020-source-supported-water-body-location": 35,
+        "unresolved-water-wet-cover-edge-location": 3,
+        "unresolved-wetland-intertidal-body-relation": 9
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 0
+    },
+    {
+      "owner": 30100,
+      "name": "Kyaukpyu",
+      "source_ADM3_member": {
+        "source_index": 45005,
+        "feature_ordinal": 34,
+        "source_id": "gb:MMR:ADM3:66882298B17691670471295",
+        "feature_name": "Kyaukpyu",
+        "feature_geometry_pointer": "/features/34/geometry"
+      },
+      "observed": 576,
+      "proposed_answers": 488,
+      "categories": {
+        "annual2020-source-supported-water-body-location": 440,
+        "unresolved-wetland-intertidal-body-relation": 65,
+        "annual2020-source-supported-specific-cover-body-location": 48,
+        "unresolved-water-wet-cover-edge-location": 23
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 0
+    },
+    {
+      "owner": 30129,
+      "name": "Ramree",
+      "source_ADM3_member": {
+        "source_index": 44994,
+        "feature_ordinal": 23,
+        "source_id": "gb:MMR:ADM3:66882298B25907056324587",
+        "feature_name": "Ramree",
+        "feature_geometry_pointer": "/features/23/geometry"
+      },
+      "observed": 226,
+      "proposed_answers": 149,
+      "categories": {
+        "unresolved-wetland-intertidal-body-relation": 60,
+        "annual2020-source-supported-water-body-location": 110,
+        "unresolved-water-wet-cover-edge-location": 17,
+        "annual2020-source-supported-specific-cover-body-location": 39
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 0
+    },
+    {
+      "owner": 30232,
+      "name": "Toungup",
+      "source_ADM3_member": {
+        "source_index": 45001,
+        "feature_ordinal": 30,
+        "source_id": "gb:MMR:ADM3:66882298B50609184171545",
+        "feature_name": "Toungup",
+        "feature_geometry_pointer": "/features/30/geometry"
+      },
+      "observed": 311,
+      "proposed_answers": 129,
+      "categories": {
+        "annual2020-source-supported-water-body-location": 114,
+        "unresolved-water-wet-cover-edge-location": 17,
+        "unresolved-wetland-intertidal-body-relation": 165,
+        "annual2020-source-supported-specific-cover-body-location": 15
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 1
+    },
+    {
+      "owner": 30081,
+      "name": "Munaung",
+      "source_ADM3_member": {
+        "source_index": 45038,
+        "feature_ordinal": 67,
+        "source_id": "gb:MMR:ADM3:66882298B12562394642113",
+        "feature_name": "Munaung",
+        "feature_geometry_pointer": "/features/67/geometry"
+      },
+      "observed": 280,
+      "proposed_answers": 267,
+      "categories": {
+        "annual2020-source-supported-specific-cover-body-location": 46,
+        "unresolved-water-wet-cover-edge-location": 9,
+        "annual2020-source-supported-water-body-location": 221,
+        "unresolved-wetland-intertidal-body-relation": 4
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 0
+    },
+    {
+      "owner": 30107,
+      "name": "Thandwe",
+      "source_ADM3_member": {
+        "source_index": 45025,
+        "feature_ordinal": 54,
+        "source_id": "gb:MMR:ADM3:66882298B19990050947650",
+        "feature_name": "Thandwe",
+        "feature_geometry_pointer": "/features/54/geometry"
+      },
+      "observed": 208,
+      "proposed_answers": 172,
+      "categories": {
+        "annual2020-source-supported-specific-cover-body-location": 89,
+        "unresolved-water-wet-cover-edge-location": 24,
+        "unresolved-wetland-intertidal-body-relation": 12,
+        "annual2020-source-supported-water-body-location": 83
+      },
+      "foreign_reference_keys": 0,
+      "source_ADM2_exterior_keys": 0
+    }
+  ],
+  "source_point_files": [
+    {
+      "path": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N09E096/point-observations.jsonl",
+      "bytes": 20217583,
+      "sha256": "a3c536442d5455cc061c1b180f35283634f76ec9933e2fcc8b40ecdfe8a7047a"
+    },
+    {
+      "path": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E093/point-observations.jsonl",
+      "bytes": 527684,
+      "sha256": "2ebcee54ce2ce80f456ff97bb086c8926838c4023dc15723de44ed069ae2de25"
+    },
+    {
+      "path": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/point-observations.jsonl",
+      "bytes": 11843040,
+      "sha256": "9ea8304d08610ba0950fdaf3c3a9f6bf5fcf597e8a1723d0f9b85c4c3181d2a1"
+    },
+    {
+      "path": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/point-observations.jsonl",
+      "bytes": 3540809,
+      "sha256": "fffd9998b1f03c0ba3ed83a01f7efd516127567635d5dae3daf10580cd10574c"
+    },
+    {
+      "path": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/point-observations.jsonl",
+      "bytes": 4723270,
+      "sha256": "dc1e4f55e76a1af942911bb56c49aa8955cfbcf94ca8e7d835099d365050f92b"
+    },
+    {
+      "path": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E090/point-observations.jsonl",
+      "bytes": 1116961,
+      "sha256": "130894a2e252ffa90a0c3afa121257c0318ff5ff5ec394fbe176f190e4bd2086"
+    },
+    {
+      "path": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/point-observations.jsonl",
+      "bytes": 7785176,
+      "sha256": "61cf2a4798deae93b9d54df77f0566714d7582c468a1948418b262f8ff57f1f8"
+    }
+  ],
+  "scope_judgment": "Same substantiated narrower annual-source/body-location scope as IDN92541 precedent; actual class/masks/fullcontext and positiveoriginalsourcebody association all matter. This transparent evidence grouping is not confidence/majority classification or a universal claim mixed contexts cannot be answered.",
+  "completed_or_adopted_count": 0,
+  "independent_review": "pending",
+  "Main_adoption": "pending",
+  "repair_or_native_credit": 0,
+  "global_historical_completed_total": null,
+  "all_source_territorial_parent_holds_unchanged": true
+}

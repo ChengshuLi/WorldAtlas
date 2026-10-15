@@ -1,0 +1,3074 @@
+[
+  {
+    "category": "annual2020-source-supported-water-body-location",
+    "class": 80,
+    "point_index": 0,
+    "original_key": {
+      "owner": 30402,
+      "y": 115459,
+      "x": 198282
+    },
+    "original_package": "gb-MMR-ADM3--physical-interpretation",
+    "original_record_unchanged": {
+      "original_block": 28,
+      "original_record_ordinal": 0,
+      "original_owners": [
+        30402
+      ],
+      "original_SIDs": [
+        2713,
+        44892,
+        44937,
+        45198
+      ],
+      "original_class": "source-relative",
+      "original_interval": [
+        115459,
+        198282,
+        198283,
+        [
+          30402
+        ],
+        [
+          2713,
+          44892,
+          44937,
+          45198
+        ],
+        "source-relative"
+      ]
+    },
+    "unchanged_centre": {
+      "longitude": 92.27672543350394,
+      "latitude": 20.969376144935925,
+      "ideal_longitude_numerator": 24191820,
+      "ideal_longitude_denominator": 262166
+    },
+    "source_year": 2020,
+    "source_product": "ESA WorldCover2020v100 Map",
+    "source_observation": {
+      "coverage_status": "valid-native-value",
+      "class_code": 80,
+      "valid_mask": 255,
+      "nodata_match": false,
+      "neighbourhood_complete": true,
+      "neighbourhood_codes": [
+        [
+          80,
+          80,
+          80
+        ],
+        [
+          80,
+          80,
+          80
+        ],
+        [
+          80,
+          80,
+          80
+        ]
+      ],
+      "neighbourhood_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "centre_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E090/new-block-00-26.npz",
+      "source_object_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:32:50 GMT",
+        "etag": "\"7dfd32e1ec18f32bdc130e5dd1ea6994\"",
+        "accept-ranges": "bytes",
+        "content-length": "6325118"
+      }
+    },
+    "source_point_reference": {
+      "path": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E090/point-observations.jsonl",
+      "jsonl_line_zero_based": 0,
+      "source_point_index": 0
+    },
+    "tile": "N18E090",
+    "native_row": 367,
+    "native_col": 27320,
+    "positive_original_source_body_association": {
+      "original_key": {
+        "owner": 30402,
+        "y": 115459,
+        "x": 198282
+      },
+      "original_package": "gb-MMR-ADM3--physical-interpretation",
+      "original_interval_pointer": "/packages/2/rows/0",
+      "source_sids": [
+        2713,
+        44892,
+        44937,
+        45198
+      ],
+      "owner_name": "Maungdaw",
+      "framework_province_id": "framework:province:maungdaw:b1591a4daf84",
+      "original_owner_source_atom": "gb:MMR:ADM3:66882298B98818104227605",
+      "source_ADM3_member": {
+        "source_index": 45198,
+        "feature_ordinal": 227,
+        "source_id": "gb:MMR:ADM3:66882298B98818104227605",
+        "feature_name": "Maungdaw",
+        "feature_geometry_pointer": "/features/227/geometry"
+      },
+      "owner_complete_source_polygon_parts": [
+        {
+          "part_ordinal": 0,
+          "source_geometry_pointer": "/features/227/geometry",
+          "contact": "interior",
+          "observation_pointer": "/operations/429"
+        }
+      ],
+      "whole_ADM2_source_contacts": [
+        {
+          "source_index": 44937,
+          "contact": "interior",
+          "source_geometry_pointer": "/features/40/geometry",
+          "observation_pointer": "/operations/471"
+        }
+      ],
+      "outside_all_whole_ADM2_source_features": false,
+      "other_original_source_sids": [
+        2713,
+        44892,
+        44937
+      ],
+      "foreign_original_source_sids": [
+        2713
+      ],
+      "other_SID_observation_note": "Original source-candidate references are preserved. ADM1/foreign geometry is not newly observed in this association operation.",
+      "normative_centre": {
+        "latitude": 20.969376144935925,
+        "longitude_numerator": 24191820,
+        "longitude_denominator": 262166
+      },
+      "remaining_after_known2237_adopted_answers": true
+    },
+    "specific_annual_source_fact": "The annual2020 WorldCover v100 Map supports a modeled persistent-water body at this unchanged original-source-associated native location. It does not identify sea/river/lake,fresh/saltwater,bank/thalweg,tide or jurisdiction.",
+    "proposed_bounded_answer": true,
+    "proposed_answer": "The annual2020 WorldCover v100 Map supports a modeled persistent-water body at this unchanged original-source-associated native location. It does not identify sea/river/lake,fresh/saltwater,bank/thalweg,tide or jurisdiction.",
+    "remaining_physical_question": null,
+    "separate_unadopted_questions": [
+      "Annual2020 modeled source at the containing10m-scale pixel,not independent instantaneous/groundtruth or wholeAtlas-cell coverage.",
+      "Original2019 source-version body association is affirmative; not current/legal ownership,territorial clearance,source2019shoreline equivalence or native/repair authority.",
+      "Water kind,exact river/sea association,shore/bank/thalweg,tide and jurisdiction remain separate where consequential.",
+      "Recorded foreign/coarse source references remain explicit and unadopted; no territorial hold is removed."
+    ],
+    "retained_native_observation": null,
+    "status": "AUTHOR-PROPOSED; independent review and Main adoption pending",
+    "authority_or_repair_credit": 0
+  },
+  {
+    "category": "annual2020-source-supported-specific-cover-body-location",
+    "class": 60,
+    "point_index": 3,
+    "original_key": {
+      "owner": 30402,
+      "y": 115462,
+      "x": 198282
+    },
+    "original_package": "gb-MMR-ADM3--physical-interpretation",
+    "original_record_unchanged": {
+      "original_block": 28,
+      "original_record_ordinal": 3,
+      "original_owners": [
+        30402
+      ],
+      "original_SIDs": [
+        2713,
+        44892,
+        44937,
+        45198
+      ],
+      "original_class": "source-relative",
+      "original_interval": [
+        115462,
+        198282,
+        198283,
+        [
+          30402
+        ],
+        [
+          2713,
+          44892,
+          44937,
+          45198
+        ],
+        "source-relative"
+      ]
+    },
+    "unchanged_centre": {
+      "longitude": 92.27672543350394,
+      "latitude": 20.965529396857583,
+      "ideal_longitude_numerator": 24191820,
+      "ideal_longitude_denominator": 262166
+    },
+    "source_year": 2020,
+    "source_product": "ESA WorldCover2020v100 Map",
+    "source_observation": {
+      "coverage_status": "valid-native-value",
+      "class_code": 60,
+      "valid_mask": 255,
+      "nodata_match": false,
+      "neighbourhood_complete": true,
+      "neighbourhood_codes": [
+        [
+          60,
+          60,
+          60
+        ],
+        [
+          60,
+          60,
+          60
+        ],
+        [
+          60,
+          60,
+          60
+        ]
+      ],
+      "neighbourhood_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "centre_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E090/new-block-00-26.npz",
+      "source_object_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:32:50 GMT",
+        "etag": "\"7dfd32e1ec18f32bdc130e5dd1ea6994\"",
+        "accept-ranges": "bytes",
+        "content-length": "6325118"
+      }
+    },
+    "source_point_reference": {
+      "path": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E090/point-observations.jsonl",
+      "jsonl_line_zero_based": 3,
+      "source_point_index": 3
+    },
+    "tile": "N18E090",
+    "native_row": 413,
+    "native_col": 27320,
+    "positive_original_source_body_association": {
+      "original_key": {
+        "owner": 30402,
+        "y": 115462,
+        "x": 198282
+      },
+      "original_package": "gb-MMR-ADM3--physical-interpretation",
+      "original_interval_pointer": "/packages/2/rows/3",
+      "source_sids": [
+        2713,
+        44892,
+        44937,
+        45198
+      ],
+      "owner_name": "Maungdaw",
+      "framework_province_id": "framework:province:maungdaw:b1591a4daf84",
+      "original_owner_source_atom": "gb:MMR:ADM3:66882298B98818104227605",
+      "source_ADM3_member": {
+        "source_index": 45198,
+        "feature_ordinal": 227,
+        "source_id": "gb:MMR:ADM3:66882298B98818104227605",
+        "feature_name": "Maungdaw",
+        "feature_geometry_pointer": "/features/227/geometry"
+      },
+      "owner_complete_source_polygon_parts": [
+        {
+          "part_ordinal": 0,
+          "source_geometry_pointer": "/features/227/geometry",
+          "contact": "interior",
+          "observation_pointer": "/operations/429"
+        }
+      ],
+      "whole_ADM2_source_contacts": [
+        {
+          "source_index": 44937,
+          "contact": "interior",
+          "source_geometry_pointer": "/features/40/geometry",
+          "observation_pointer": "/operations/471"
+        }
+      ],
+      "outside_all_whole_ADM2_source_features": false,
+      "other_original_source_sids": [
+        2713,
+        44892,
+        44937
+      ],
+      "foreign_original_source_sids": [
+        2713
+      ],
+      "other_SID_observation_note": "Original source-candidate references are preserved. ADM1/foreign geometry is not newly observed in this association operation.",
+      "normative_centre": {
+        "latitude": 20.965529396857583,
+        "longitude_numerator": 24191820,
+        "longitude_denominator": 262166
+      },
+      "remaining_after_known2237_adopted_answers": true
+    },
+    "specific_annual_source_fact": "The annual2020 WorldCover v100 Map supports modeled bare or sparse vegetation at this unchanged original-source-associated native location. This source-specific annual cover facet does not establish dry ground,material type or independent groundtruth.",
+    "proposed_bounded_answer": true,
+    "proposed_answer": "The annual2020 WorldCover v100 Map supports modeled bare or sparse vegetation at this unchanged original-source-associated native location. This source-specific annual cover facet does not establish dry ground,material type or independent groundtruth.",
+    "remaining_physical_question": null,
+    "separate_unadopted_questions": [
+      "Annual2020 modeled source at the containing10m-scale pixel,not independent instantaneous/groundtruth or wholeAtlas-cell coverage.",
+      "Original2019 source-version body association is affirmative; not current/legal ownership,territorial clearance,source2019shoreline equivalence or native/repair authority.",
+      "Recorded foreign/coarse source references remain explicit and unadopted; no territorial hold is removed."
+    ],
+    "retained_native_observation": null,
+    "status": "AUTHOR-PROPOSED; independent review and Main adoption pending",
+    "authority_or_repair_credit": 0
+  },
+  {
+    "category": "annual2020-source-supported-specific-cover-body-location",
+    "class": 10,
+    "point_index": 41,
+    "original_key": {
+      "owner": 30402,
+      "y": 115659,
+      "x": 198366
+    },
+    "original_package": "gb-MMR-ADM3--physical-interpretation",
+    "original_record_unchanged": {
+      "original_block": 28,
+      "original_record_ordinal": 32,
+      "original_owners": [
+        30402
+      ],
+      "original_SIDs": [
+        44892,
+        44937,
+        45198
+      ],
+      "original_class": "source-relative",
+      "original_interval": [
+        115659,
+        198366,
+        198367,
+        [
+          30402
+        ],
+        [
+          44892,
+          44937,
+          45198
+        ],
+        "source-relative"
+      ]
+    },
+    "unchanged_centre": {
+      "longitude": 92.39207219853074,
+      "latitude": 20.71271035418036,
+      "ideal_longitude_numerator": 24222060,
+      "ideal_longitude_denominator": 262166
+    },
+    "source_year": 2020,
+    "source_product": "ESA WorldCover2020v100 Map",
+    "source_observation": {
+      "coverage_status": "valid-native-value",
+      "class_code": 10,
+      "valid_mask": 255,
+      "nodata_match": false,
+      "neighbourhood_complete": true,
+      "neighbourhood_codes": [
+        [
+          10,
+          60,
+          60
+        ],
+        [
+          10,
+          10,
+          10
+        ],
+        [
+          60,
+          20,
+          20
+        ]
+      ],
+      "neighbourhood_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "centre_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E090/new-block-03-28.npz",
+      "source_object_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:32:50 GMT",
+        "etag": "\"7dfd32e1ec18f32bdc130e5dd1ea6994\"",
+        "accept-ranges": "bytes",
+        "content-length": "6325118"
+      }
+    },
+    "source_point_reference": {
+      "path": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E090/point-observations.jsonl",
+      "jsonl_line_zero_based": 41,
+      "source_point_index": 41
+    },
+    "tile": "N18E090",
+    "native_row": 3447,
+    "native_col": 28704,
+    "positive_original_source_body_association": {
+      "original_key": {
+        "owner": 30402,
+        "y": 115659,
+        "x": 198366
+      },
+      "original_package": "gb-MMR-ADM3--physical-interpretation",
+      "original_interval_pointer": "/packages/2/rows/32",
+      "source_sids": [
+        44892,
+        44937,
+        45198
+      ],
+      "owner_name": "Maungdaw",
+      "framework_province_id": "framework:province:maungdaw:b1591a4daf84",
+      "original_owner_source_atom": "gb:MMR:ADM3:66882298B98818104227605",
+      "source_ADM3_member": {
+        "source_index": 45198,
+        "feature_ordinal": 227,
+        "source_id": "gb:MMR:ADM3:66882298B98818104227605",
+        "feature_name": "Maungdaw",
+        "feature_geometry_pointer": "/features/227/geometry"
+      },
+      "owner_complete_source_polygon_parts": [
+        {
+          "part_ordinal": 0,
+          "source_geometry_pointer": "/features/227/geometry",
+          "contact": "interior",
+          "observation_pointer": "/operations/429"
+        }
+      ],
+      "whole_ADM2_source_contacts": [
+        {
+          "source_index": 44937,
+          "contact": "interior",
+          "source_geometry_pointer": "/features/40/geometry",
+          "observation_pointer": "/operations/471"
+        }
+      ],
+      "outside_all_whole_ADM2_source_features": false,
+      "other_original_source_sids": [
+        44892,
+        44937
+      ],
+      "foreign_original_source_sids": [],
+      "other_SID_observation_note": "Original source-candidate references are preserved. ADM1/foreign geometry is not newly observed in this association operation.",
+      "normative_centre": {
+        "latitude": 20.71271035418036,
+        "longitude_numerator": 24222060,
+        "longitude_denominator": 262166
+      },
+      "remaining_after_known2237_adopted_answers": true
+    },
+    "specific_annual_source_fact": "The annual2020 WorldCover v100 Map supports modeled tree canopy at this unchanged original-source-associated native location. Tree cover can include floodedforest; no dry-understorey or whole-cell claim.",
+    "proposed_bounded_answer": true,
+    "proposed_answer": "The annual2020 WorldCover v100 Map supports modeled tree canopy at this unchanged original-source-associated native location. Tree cover can include floodedforest; no dry-understorey or whole-cell claim.",
+    "remaining_physical_question": null,
+    "separate_unadopted_questions": [
+      "Annual2020 modeled source at the containing10m-scale pixel,not independent instantaneous/groundtruth or wholeAtlas-cell coverage.",
+      "Original2019 source-version body association is affirmative; not current/legal ownership,territorial clearance,source2019shoreline equivalence or native/repair authority.",
+      "Flooded understorey is not ruled out by tree canopy."
+    ],
+    "retained_native_observation": null,
+    "status": "AUTHOR-PROPOSED; independent review and Main adoption pending",
+    "authority_or_repair_credit": 0
+  },
+  {
+    "category": "annual2020-source-supported-specific-cover-body-location",
+    "class": 40,
+    "point_index": 67,
+    "original_key": {
+      "owner": 30332,
+      "y": 115730,
+      "x": 198576
+    },
+    "original_package": "gb-MMR-ADM3--physical-interpretation",
+    "original_record_unchanged": {
+      "original_block": 28,
+      "original_record_ordinal": 54,
+      "original_owners": [
+        30332
+      ],
+      "original_SIDs": [
+        44892,
+        44939,
+        45150
+      ],
+      "original_class": "source-relative",
+      "original_interval": [
+        115730,
+        198576,
+        198577,
+        [
+          30332
+        ],
+        [
+          44892,
+          44939,
+          45150
+        ],
+        "source-relative"
+      ]
+    },
+    "unchanged_centre": {
+      "longitude": 92.68043911109754,
+      "latitude": 20.621489027989305,
+      "ideal_longitude_numerator": 24297660,
+      "ideal_longitude_denominator": 262166
+    },
+    "source_year": 2020,
+    "source_product": "ESA WorldCover2020v100 Map",
+    "source_observation": {
+      "coverage_status": "valid-native-value",
+      "class_code": 40,
+      "valid_mask": 255,
+      "nodata_match": false,
+      "neighbourhood_complete": true,
+      "neighbourhood_codes": [
+        [
+          40,
+          40,
+          40
+        ],
+        [
+          40,
+          40,
+          40
+        ],
+        [
+          40,
+          40,
+          40
+        ]
+      ],
+      "neighbourhood_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "centre_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E090/new-block-04-31.npz",
+      "source_object_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:32:50 GMT",
+        "etag": "\"7dfd32e1ec18f32bdc130e5dd1ea6994\"",
+        "accept-ranges": "bytes",
+        "content-length": "6325118"
+      }
+    },
+    "source_point_reference": {
+      "path": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E090/point-observations.jsonl",
+      "jsonl_line_zero_based": 67,
+      "source_point_index": 67
+    },
+    "tile": "N18E090",
+    "native_row": 4542,
+    "native_col": 32165,
+    "positive_original_source_body_association": {
+      "original_key": {
+        "owner": 30332,
+        "y": 115730,
+        "x": 198576
+      },
+      "original_package": "gb-MMR-ADM3--physical-interpretation",
+      "original_interval_pointer": "/packages/2/rows/54",
+      "source_sids": [
+        44892,
+        44939,
+        45150
+      ],
+      "owner_name": "Rathedaung",
+      "framework_province_id": "framework:province:sittwe:26bd272501d4",
+      "original_owner_source_atom": "gb:MMR:ADM3:66882298B77467059166323",
+      "source_ADM3_member": {
+        "source_index": 45150,
+        "feature_ordinal": 179,
+        "source_id": "gb:MMR:ADM3:66882298B77467059166323",
+        "feature_name": "Rathedaung",
+        "feature_geometry_pointer": "/features/179/geometry"
+      },
+      "owner_complete_source_polygon_parts": [
+        {
+          "part_ordinal": 4,
+          "source_geometry_pointer": "/features/179/geometry/coordinates/4",
+          "contact": "interior",
+          "observation_pointer": "/operations/294"
+        }
+      ],
+      "whole_ADM2_source_contacts": [
+        {
+          "source_index": 44939,
+          "contact": "interior",
+          "source_geometry_pointer": "/features/42/geometry",
+          "observation_pointer": "/operations/473"
+        }
+      ],
+      "outside_all_whole_ADM2_source_features": false,
+      "other_original_source_sids": [
+        44892,
+        44939
+      ],
+      "foreign_original_source_sids": [],
+      "other_SID_observation_note": "Original source-candidate references are preserved. ADM1/foreign geometry is not newly observed in this association operation.",
+      "normative_centre": {
+        "latitude": 20.621489027989305,
+        "longitude_numerator": 24297660,
+        "longitude_denominator": 262166
+      },
+      "remaining_after_known2237_adopted_answers": true
+    },
+    "specific_annual_source_fact": "The annual2020 WorldCover v100 Map supports modeled cropland at this unchanged original-source-associated native location. This source-specific annual cover facet does not establish dry ground,material type or independent groundtruth.",
+    "proposed_bounded_answer": true,
+    "proposed_answer": "The annual2020 WorldCover v100 Map supports modeled cropland at this unchanged original-source-associated native location. This source-specific annual cover facet does not establish dry ground,material type or independent groundtruth.",
+    "remaining_physical_question": null,
+    "separate_unadopted_questions": [
+      "Annual2020 modeled source at the containing10m-scale pixel,not independent instantaneous/groundtruth or wholeAtlas-cell coverage.",
+      "Original2019 source-version body association is affirmative; not current/legal ownership,territorial clearance,source2019shoreline equivalence or native/repair authority.",
+      "Crop cover does not identify dry versus flooded agriculture."
+    ],
+    "retained_native_observation": null,
+    "status": "AUTHOR-PROPOSED; independent review and Main adoption pending",
+    "authority_or_repair_credit": 0
+  },
+  {
+    "category": "annual2020-source-supported-specific-cover-body-location",
+    "class": 30,
+    "point_index": 76,
+    "original_key": {
+      "owner": 30332,
+      "y": 115734,
+      "x": 198580
+    },
+    "original_package": "gb-MMR-ADM3--physical-interpretation",
+    "original_record_unchanged": {
+      "original_block": 28,
+      "original_record_ordinal": 62,
+      "original_owners": [
+        30332
+      ],
+      "original_SIDs": [
+        45150
+      ],
+      "original_class": "source-relative",
+      "original_interval": [
+        115734,
+        198580,
+        198581,
+        [
+          30332
+        ],
+        [
+          45150
+        ],
+        "source-relative"
+      ]
+    },
+    "unchanged_centre": {
+      "longitude": 92.68593181419408,
+      "latitude": 20.61634816927743,
+      "ideal_longitude_numerator": 24299100,
+      "ideal_longitude_denominator": 262166
+    },
+    "source_year": 2020,
+    "source_product": "ESA WorldCover2020v100 Map",
+    "source_observation": {
+      "coverage_status": "valid-native-value",
+      "class_code": 30,
+      "valid_mask": 255,
+      "nodata_match": false,
+      "neighbourhood_complete": true,
+      "neighbourhood_codes": [
+        [
+          40,
+          30,
+          30
+        ],
+        [
+          30,
+          30,
+          30
+        ],
+        [
+          30,
+          30,
+          30
+        ]
+      ],
+      "neighbourhood_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "centre_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E090/new-block-04-31.npz",
+      "source_object_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:32:50 GMT",
+        "etag": "\"7dfd32e1ec18f32bdc130e5dd1ea6994\"",
+        "accept-ranges": "bytes",
+        "content-length": "6325118"
+      }
+    },
+    "source_point_reference": {
+      "path": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E090/point-observations.jsonl",
+      "jsonl_line_zero_based": 76,
+      "source_point_index": 76
+    },
+    "tile": "N18E090",
+    "native_row": 4603,
+    "native_col": 32231,
+    "positive_original_source_body_association": {
+      "original_key": {
+        "owner": 30332,
+        "y": 115734,
+        "x": 198580
+      },
+      "original_package": "gb-MMR-ADM3--physical-interpretation",
+      "original_interval_pointer": "/packages/2/rows/62",
+      "source_sids": [
+        45150
+      ],
+      "owner_name": "Rathedaung",
+      "framework_province_id": "framework:province:sittwe:26bd272501d4",
+      "original_owner_source_atom": "gb:MMR:ADM3:66882298B77467059166323",
+      "source_ADM3_member": {
+        "source_index": 45150,
+        "feature_ordinal": 179,
+        "source_id": "gb:MMR:ADM3:66882298B77467059166323",
+        "feature_name": "Rathedaung",
+        "feature_geometry_pointer": "/features/179/geometry"
+      },
+      "owner_complete_source_polygon_parts": [
+        {
+          "part_ordinal": 4,
+          "source_geometry_pointer": "/features/179/geometry/coordinates/4",
+          "contact": "interior",
+          "observation_pointer": "/operations/294"
+        }
+      ],
+      "whole_ADM2_source_contacts": [],
+      "outside_all_whole_ADM2_source_features": true,
+      "other_original_source_sids": [],
+      "foreign_original_source_sids": [],
+      "other_SID_observation_note": "Original source-candidate references are preserved. ADM1/foreign geometry is not newly observed in this association operation.",
+      "normative_centre": {
+        "latitude": 20.61634816927743,
+        "longitude_numerator": 24299100,
+        "longitude_denominator": 262166
+      },
+      "remaining_after_known2237_adopted_answers": true
+    },
+    "specific_annual_source_fact": "The annual2020 WorldCover v100 Map supports modeled grassland at this unchanged original-source-associated native location. This source-specific annual cover facet does not establish dry ground,material type or independent groundtruth.",
+    "proposed_bounded_answer": true,
+    "proposed_answer": "The annual2020 WorldCover v100 Map supports modeled grassland at this unchanged original-source-associated native location. This source-specific annual cover facet does not establish dry ground,material type or independent groundtruth.",
+    "remaining_physical_question": null,
+    "separate_unadopted_questions": [
+      "Annual2020 modeled source at the containing10m-scale pixel,not independent instantaneous/groundtruth or wholeAtlas-cell coverage.",
+      "Original2019 source-version body association is affirmative; not current/legal ownership,territorial clearance,source2019shoreline equivalence or native/repair authority.",
+      "The actual originalADM3 sourcepart contains the point while no whole originalADM2 geometry does; parent/source-vintage interpretation stays open."
+    ],
+    "retained_native_observation": null,
+    "status": "AUTHOR-PROPOSED; independent review and Main adoption pending",
+    "authority_or_repair_credit": 0
+  },
+  {
+    "category": "annual2020-source-supported-specific-cover-body-location",
+    "class": 50,
+    "point_index": 2258,
+    "original_key": {
+      "owner": 30081,
+      "y": 117083,
+      "x": 199158
+    },
+    "original_package": "gb-MMR-ADM3--physical-interpretation",
+    "original_record_unchanged": {
+      "original_block": 28,
+      "original_record_ordinal": 1451,
+      "original_owners": [
+        30081
+      ],
+      "original_SIDs": [
+        44892,
+        44936,
+        45038
+      ],
+      "original_class": "source-relative",
+      "original_interval": [
+        117083,
+        199158,
+        199160,
+        [
+          30081
+        ],
+        [
+          44892,
+          44936,
+          45038
+        ],
+        "source-relative"
+      ]
+    },
+    "unchanged_centre": {
+      "longitude": 93.47962741163997,
+      "latitude": 18.87292644584784,
+      "ideal_longitude_numerator": 24507180,
+      "ideal_longitude_denominator": 262166
+    },
+    "source_year": 2020,
+    "source_product": "ESA WorldCover2020v100 Map",
+    "source_observation": {
+      "coverage_status": "valid-native-value",
+      "class_code": 50,
+      "valid_mask": 255,
+      "nodata_match": false,
+      "neighbourhood_complete": true,
+      "neighbourhood_codes": [
+        [
+          60,
+          50,
+          50
+        ],
+        [
+          60,
+          50,
+          50
+        ],
+        [
+          30,
+          50,
+          50
+        ]
+      ],
+      "neighbourhood_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "centre_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-24-05.npz",
+      "source_object_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:32:50 GMT",
+        "etag": "\"e14d75f1841701b9aeff148ba814fc0a-10\"",
+        "accept-ranges": "bytes",
+        "content-length": "83473716"
+      }
+    },
+    "source_point_reference": {
+      "path": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/point-observations.jsonl",
+      "jsonl_line_zero_based": 1885,
+      "source_point_index": 2258
+    },
+    "tile": "N18E093",
+    "native_row": 25524,
+    "native_col": 5755,
+    "positive_original_source_body_association": {
+      "original_key": {
+        "owner": 30081,
+        "y": 117083,
+        "x": 199158
+      },
+      "original_package": "gb-MMR-ADM3--physical-interpretation",
+      "original_interval_pointer": "/packages/2/rows/1451",
+      "source_sids": [
+        44892,
+        44936,
+        45038
+      ],
+      "owner_name": "Munaung",
+      "framework_province_id": "framework:province:kyaukpyu:901c624c7832",
+      "original_owner_source_atom": "gb:MMR:ADM3:66882298B12562394642113",
+      "source_ADM3_member": {
+        "source_index": 45038,
+        "feature_ordinal": 67,
+        "source_id": "gb:MMR:ADM3:66882298B12562394642113",
+        "feature_name": "Munaung",
+        "feature_geometry_pointer": "/features/67/geometry"
+      },
+      "owner_complete_source_polygon_parts": [
+        {
+          "part_ordinal": 2,
+          "source_geometry_pointer": "/features/67/geometry/coordinates/2",
+          "contact": "interior",
+          "observation_pointer": "/operations/2"
+        }
+      ],
+      "whole_ADM2_source_contacts": [
+        {
+          "source_index": 44936,
+          "contact": "interior",
+          "source_geometry_pointer": "/features/39/geometry",
+          "observation_pointer": "/operations/470"
+        }
+      ],
+      "outside_all_whole_ADM2_source_features": false,
+      "other_original_source_sids": [
+        44892,
+        44936
+      ],
+      "foreign_original_source_sids": [],
+      "other_SID_observation_note": "Original source-candidate references are preserved. ADM1/foreign geometry is not newly observed in this association operation.",
+      "normative_centre": {
+        "latitude": 18.87292644584784,
+        "longitude_numerator": 24507180,
+        "longitude_denominator": 262166
+      },
+      "remaining_after_known2237_adopted_answers": true
+    },
+    "specific_annual_source_fact": "The annual2020 WorldCover v100 Map supports modeled built-up cover at this unchanged original-source-associated native location. This source-specific annual cover facet does not establish dry ground,material type or independent groundtruth.",
+    "proposed_bounded_answer": true,
+    "proposed_answer": "The annual2020 WorldCover v100 Map supports modeled built-up cover at this unchanged original-source-associated native location. This source-specific annual cover facet does not establish dry ground,material type or independent groundtruth.",
+    "remaining_physical_question": null,
+    "separate_unadopted_questions": [
+      "Annual2020 modeled source at the containing10m-scale pixel,not independent instantaneous/groundtruth or wholeAtlas-cell coverage.",
+      "Original2019 source-version body association is affirmative; not current/legal ownership,territorial clearance,source2019shoreline equivalence or native/repair authority."
+    ],
+    "retained_native_observation": null,
+    "status": "AUTHOR-PROPOSED; independent review and Main adoption pending",
+    "authority_or_repair_credit": 0
+  },
+  {
+    "category": "annual2020-source-supported-specific-cover-body-location",
+    "class": 20,
+    "point_index": 3830,
+    "original_key": {
+      "owner": 30202,
+      "y": 118831,
+      "x": 202193
+    },
+    "original_package": "gb-MMR-ADM3--physical-interpretation",
+    "original_record_unchanged": {
+      "original_block": 29,
+      "original_record_ordinal": 2374,
+      "original_owners": [
+        30202
+      ],
+      "original_SIDs": [
+        44891,
+        44932,
+        45103
+      ],
+      "original_class": "source-relative",
+      "original_interval": [
+        118831,
+        202190,
+        202194,
+        [
+          30202
+        ],
+        [
+          44891,
+          44932,
+          45103
+        ],
+        "source-relative"
+      ]
+    },
+    "unchanged_centre": {
+      "longitude": 97.64721588611798,
+      "latitude": 16.586805762433887,
+      "ideal_longitude_numerator": 25599780,
+      "ideal_longitude_denominator": 262166
+    },
+    "source_year": 2020,
+    "source_product": "ESA WorldCover2020v100 Map",
+    "source_observation": {
+      "coverage_status": "valid-native-value",
+      "class_code": 20,
+      "valid_mask": 255,
+      "nodata_match": false,
+      "neighbourhood_complete": true,
+      "neighbourhood_codes": [
+        [
+          20,
+          20,
+          10
+        ],
+        [
+          20,
+          20,
+          10
+        ],
+        [
+          20,
+          20,
+          10
+        ]
+      ],
+      "neighbourhood_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "centre_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-16-19.npz",
+      "source_object_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:32:35 GMT",
+        "etag": "\"c0de21a1a10d8fe0814ea892dc4bb1f3-7\"",
+        "accept-ranges": "bytes",
+        "content-length": "58272433"
+      }
+    },
+    "source_point_reference": {
+      "path": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/point-observations.jsonl",
+      "jsonl_line_zero_based": 604,
+      "source_point_index": 3830
+    },
+    "tile": "N15E096",
+    "native_row": 16958,
+    "native_col": 19766,
+    "positive_original_source_body_association": {
+      "original_key": {
+        "owner": 30202,
+        "y": 118831,
+        "x": 202193
+      },
+      "original_package": "gb-MMR-ADM3--physical-interpretation",
+      "original_interval_pointer": "/packages/2/rows/2374",
+      "source_sids": [
+        44891,
+        44932,
+        45103
+      ],
+      "owner_name": "Mawlamyine",
+      "framework_province_id": "framework:province:mawlamyine:86e6c5e7a4d8",
+      "original_owner_source_atom": "gb:MMR:ADM3:66882298B45439994111599",
+      "source_ADM3_member": {
+        "source_index": 45103,
+        "feature_ordinal": 132,
+        "source_id": "gb:MMR:ADM3:66882298B45439994111599",
+        "feature_name": "Mawlamyine",
+        "feature_geometry_pointer": "/features/132/geometry"
+      },
+      "owner_complete_source_polygon_parts": [
+        {
+          "part_ordinal": 3,
+          "source_geometry_pointer": "/features/132/geometry/coordinates/3",
+          "contact": "interior",
+          "observation_pointer": "/operations/86"
+        }
+      ],
+      "whole_ADM2_source_contacts": [
+        {
+          "source_index": 44932,
+          "contact": "interior",
+          "source_geometry_pointer": "/features/35/geometry",
+          "observation_pointer": "/operations/466"
+        }
+      ],
+      "outside_all_whole_ADM2_source_features": false,
+      "other_original_source_sids": [
+        44891,
+        44932
+      ],
+      "foreign_original_source_sids": [],
+      "other_SID_observation_note": "Original source-candidate references are preserved. ADM1/foreign geometry is not newly observed in this association operation.",
+      "normative_centre": {
+        "latitude": 16.586805762433887,
+        "longitude_numerator": 25599780,
+        "longitude_denominator": 262166
+      },
+      "remaining_after_known2237_adopted_answers": true
+    },
+    "specific_annual_source_fact": "The annual2020 WorldCover v100 Map supports modeled shrubland at this unchanged original-source-associated native location. This source-specific annual cover facet does not establish dry ground,material type or independent groundtruth.",
+    "proposed_bounded_answer": true,
+    "proposed_answer": "The annual2020 WorldCover v100 Map supports modeled shrubland at this unchanged original-source-associated native location. This source-specific annual cover facet does not establish dry ground,material type or independent groundtruth.",
+    "remaining_physical_question": null,
+    "separate_unadopted_questions": [
+      "Annual2020 modeled source at the containing10m-scale pixel,not independent instantaneous/groundtruth or wholeAtlas-cell coverage.",
+      "Original2019 source-version body association is affirmative; not current/legal ownership,territorial clearance,source2019shoreline equivalence or native/repair authority."
+    ],
+    "retained_native_observation": null,
+    "status": "AUTHOR-PROPOSED; independent review and Main adoption pending",
+    "authority_or_repair_credit": 0
+  },
+  {
+    "category": "unresolved-wetland-intertidal-body-relation",
+    "class": 95,
+    "point_index": 4,
+    "original_key": {
+      "owner": 30402,
+      "y": 115474,
+      "x": 198283
+    },
+    "original_package": "gb-MMR-ADM3--physical-interpretation",
+    "original_record_unchanged": {
+      "original_block": 28,
+      "original_record_ordinal": 4,
+      "original_owners": [
+        30402
+      ],
+      "original_SIDs": [
+        2713,
+        44892,
+        44937,
+        45198
+      ],
+      "original_class": "source-relative",
+      "original_interval": [
+        115474,
+        198283,
+        198284,
+        [
+          30402
+        ],
+        [
+          2713,
+          44892,
+          44937,
+          45198
+        ],
+        "source-relative"
+      ]
+    },
+    "unchanged_centre": {
+      "longitude": 92.27809860927806,
+      "latitude": 20.950141415064095,
+      "ideal_longitude_numerator": 24192180,
+      "ideal_longitude_denominator": 262166
+    },
+    "source_year": 2020,
+    "source_product": "ESA WorldCover2020v100 Map",
+    "source_observation": {
+      "coverage_status": "valid-native-value",
+      "class_code": 95,
+      "valid_mask": 255,
+      "nodata_match": false,
+      "neighbourhood_complete": true,
+      "neighbourhood_codes": [
+        [
+          95,
+          95,
+          95
+        ],
+        [
+          95,
+          95,
+          95
+        ],
+        [
+          95,
+          95,
+          95
+        ]
+      ],
+      "neighbourhood_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "centre_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E090/new-block-00-26.npz",
+      "source_object_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:32:50 GMT",
+        "etag": "\"7dfd32e1ec18f32bdc130e5dd1ea6994\"",
+        "accept-ranges": "bytes",
+        "content-length": "6325118"
+      }
+    },
+    "source_point_reference": {
+      "path": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E090/point-observations.jsonl",
+      "jsonl_line_zero_based": 4,
+      "source_point_index": 4
+    },
+    "tile": "N18E090",
+    "native_row": 598,
+    "native_col": 27337,
+    "positive_original_source_body_association": {
+      "original_key": {
+        "owner": 30402,
+        "y": 115474,
+        "x": 198283
+      },
+      "original_package": "gb-MMR-ADM3--physical-interpretation",
+      "original_interval_pointer": "/packages/2/rows/4",
+      "source_sids": [
+        2713,
+        44892,
+        44937,
+        45198
+      ],
+      "owner_name": "Maungdaw",
+      "framework_province_id": "framework:province:maungdaw:b1591a4daf84",
+      "original_owner_source_atom": "gb:MMR:ADM3:66882298B98818104227605",
+      "source_ADM3_member": {
+        "source_index": 45198,
+        "feature_ordinal": 227,
+        "source_id": "gb:MMR:ADM3:66882298B98818104227605",
+        "feature_name": "Maungdaw",
+        "feature_geometry_pointer": "/features/227/geometry"
+      },
+      "owner_complete_source_polygon_parts": [
+        {
+          "part_ordinal": 0,
+          "source_geometry_pointer": "/features/227/geometry",
+          "contact": "interior",
+          "observation_pointer": "/operations/429"
+        }
+      ],
+      "whole_ADM2_source_contacts": [
+        {
+          "source_index": 44937,
+          "contact": "interior",
+          "source_geometry_pointer": "/features/40/geometry",
+          "observation_pointer": "/operations/471"
+        }
+      ],
+      "outside_all_whole_ADM2_source_features": false,
+      "other_original_source_sids": [
+        2713,
+        44892,
+        44937
+      ],
+      "foreign_original_source_sids": [
+        2713
+      ],
+      "other_SID_observation_note": "Original source-candidate references are preserved. ADM1/foreign geometry is not newly observed in this association operation.",
+      "normative_centre": {
+        "latitude": 20.950141415064095,
+        "longitude_numerator": 24192180,
+        "longitude_denominator": 262166
+      },
+      "remaining_after_known2237_adopted_answers": true
+    },
+    "specific_annual_source_fact": "The annual2020 WorldCover v100 Map indicates mangrove cover at this unchanged original-source-associated native location. Its intertidal water/ground relation remains unresolved here.",
+    "proposed_bounded_answer": false,
+    "proposed_answer": null,
+    "remaining_physical_question": "The annual wetland/mangrove cover is known,but its precise water/ground interface,inundation or tide-dependent body relation needs a more specific observation for this narrow adoption.",
+    "separate_unadopted_questions": [
+      "Annual2020 modeled source at the containing10m-scale pixel,not independent instantaneous/groundtruth or wholeAtlas-cell coverage.",
+      "Original2019 source-version body association is affirmative; not current/legal ownership,territorial clearance,source2019shoreline equivalence or native/repair authority.",
+      "Recorded foreign/coarse source references remain explicit and unadopted; no territorial hold is removed."
+    ],
+    "retained_native_observation": null,
+    "status": "OPEN SPECIFIC PHYSICAL QUESTION",
+    "authority_or_repair_credit": 0
+  },
+  {
+    "category": "unresolved-water-wet-cover-edge-location",
+    "class": 80,
+    "point_index": 19,
+    "original_key": {
+      "owner": 30402,
+      "y": 115509,
+      "x": 198308
+    },
+    "original_package": "gb-MMR-ADM3--physical-interpretation",
+    "original_record_unchanged": {
+      "original_block": 28,
+      "original_record_ordinal": 15,
+      "original_owners": [
+        30402
+      ],
+      "original_SIDs": [
+        44892,
+        44937,
+        45198
+      ],
+      "original_class": "source-relative",
+      "original_interval": [
+        115509,
+        198308,
+        198310,
+        [
+          30402
+        ],
+        [
+          44892,
+          44937,
+          45198
+        ],
+        "source-relative"
+      ]
+    },
+    "unchanged_centre": {
+      "longitude": 92.31242800363128,
+      "latitude": 20.905250766268157,
+      "ideal_longitude_numerator": 24201180,
+      "ideal_longitude_denominator": 262166
+    },
+    "source_year": 2020,
+    "source_product": "ESA WorldCover2020v100 Map",
+    "source_observation": {
+      "coverage_status": "valid-native-value",
+      "class_code": 80,
+      "valid_mask": 255,
+      "nodata_match": false,
+      "neighbourhood_complete": true,
+      "neighbourhood_codes": [
+        [
+          95,
+          80,
+          80
+        ],
+        [
+          95,
+          80,
+          80
+        ],
+        [
+          95,
+          80,
+          80
+        ]
+      ],
+      "neighbourhood_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "centre_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E090/new-block-01-27.npz",
+      "source_object_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:32:50 GMT",
+        "etag": "\"7dfd32e1ec18f32bdc130e5dd1ea6994\"",
+        "accept-ranges": "bytes",
+        "content-length": "6325118"
+      }
+    },
+    "source_point_reference": {
+      "path": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E090/point-observations.jsonl",
+      "jsonl_line_zero_based": 19,
+      "source_point_index": 19
+    },
+    "tile": "N18E090",
+    "native_row": 1136,
+    "native_col": 27749,
+    "positive_original_source_body_association": {
+      "original_key": {
+        "owner": 30402,
+        "y": 115509,
+        "x": 198308
+      },
+      "original_package": "gb-MMR-ADM3--physical-interpretation",
+      "original_interval_pointer": "/packages/2/rows/15",
+      "source_sids": [
+        44892,
+        44937,
+        45198
+      ],
+      "owner_name": "Maungdaw",
+      "framework_province_id": "framework:province:maungdaw:b1591a4daf84",
+      "original_owner_source_atom": "gb:MMR:ADM3:66882298B98818104227605",
+      "source_ADM3_member": {
+        "source_index": 45198,
+        "feature_ordinal": 227,
+        "source_id": "gb:MMR:ADM3:66882298B98818104227605",
+        "feature_name": "Maungdaw",
+        "feature_geometry_pointer": "/features/227/geometry"
+      },
+      "owner_complete_source_polygon_parts": [
+        {
+          "part_ordinal": 0,
+          "source_geometry_pointer": "/features/227/geometry",
+          "contact": "interior",
+          "observation_pointer": "/operations/429"
+        }
+      ],
+      "whole_ADM2_source_contacts": [
+        {
+          "source_index": 44937,
+          "contact": "interior",
+          "source_geometry_pointer": "/features/40/geometry",
+          "observation_pointer": "/operations/471"
+        }
+      ],
+      "outside_all_whole_ADM2_source_features": false,
+      "other_original_source_sids": [
+        44892,
+        44937
+      ],
+      "foreign_original_source_sids": [],
+      "other_SID_observation_note": "Original source-candidate references are preserved. ADM1/foreign geometry is not newly observed in this association operation.",
+      "normative_centre": {
+        "latitude": 20.905250766268157,
+        "longitude_numerator": 24201180,
+        "longitude_denominator": 262166
+      },
+      "remaining_after_known2237_adopted_answers": true
+    },
+    "specific_annual_source_fact": "The annual2020 WorldCover v100 Map supports a modeled persistent-water body at this unchanged original-source-associated native location. It does not identify sea/river/lake,fresh/saltwater,bank/thalweg,tide or jurisdiction.",
+    "proposed_bounded_answer": false,
+    "proposed_answer": null,
+    "remaining_physical_question": "Actual native context contains a water/wet-cover transition. A more precise bank/shore/mixed-pixel/registration body relation is needed for this narrow adoption.",
+    "separate_unadopted_questions": [
+      "Annual2020 modeled source at the containing10m-scale pixel,not independent instantaneous/groundtruth or wholeAtlas-cell coverage.",
+      "Original2019 source-version body association is affirmative; not current/legal ownership,territorial clearance,source2019shoreline equivalence or native/repair authority.",
+      "Water kind,exact river/sea association,shore/bank/thalweg,tide and jurisdiction remain separate where consequential."
+    ],
+    "retained_native_observation": null,
+    "status": "OPEN SPECIFIC PHYSICAL QUESTION",
+    "authority_or_repair_credit": 0
+  },
+  {
+    "category": "unresolved-water-wet-cover-edge-location",
+    "class": 40,
+    "point_index": 86,
+    "original_key": {
+      "owner": 30332,
+      "y": 115739,
+      "x": 198592
+    },
+    "original_package": "gb-MMR-ADM3--physical-interpretation",
+    "original_record_unchanged": {
+      "original_block": 28,
+      "original_record_ordinal": 72,
+      "original_owners": [
+        30332
+      ],
+      "original_SIDs": [
+        44892,
+        44939,
+        45150
+      ],
+      "original_class": "source-relative",
+      "original_interval": [
+        115739,
+        198592,
+        198593,
+        [
+          30332
+        ],
+        [
+          44892,
+          44939,
+          45150
+        ],
+        "source-relative"
+      ]
+    },
+    "unchanged_centre": {
+      "longitude": 92.70240992348357,
+      "latitude": 20.60992185186027,
+      "ideal_longitude_numerator": 24303420,
+      "ideal_longitude_denominator": 262166
+    },
+    "source_year": 2020,
+    "source_product": "ESA WorldCover2020v100 Map",
+    "source_observation": {
+      "coverage_status": "valid-native-value",
+      "class_code": 40,
+      "valid_mask": 255,
+      "nodata_match": false,
+      "neighbourhood_complete": true,
+      "neighbourhood_codes": [
+        [
+          80,
+          80,
+          80
+        ],
+        [
+          40,
+          40,
+          40
+        ],
+        [
+          60,
+          60,
+          60
+        ]
+      ],
+      "neighbourhood_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "centre_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E090/new-block-04-31.npz",
+      "source_object_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:32:50 GMT",
+        "etag": "\"7dfd32e1ec18f32bdc130e5dd1ea6994\"",
+        "accept-ranges": "bytes",
+        "content-length": "6325118"
+      }
+    },
+    "source_point_reference": {
+      "path": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E090/point-observations.jsonl",
+      "jsonl_line_zero_based": 86,
+      "source_point_index": 86
+    },
+    "tile": "N18E090",
+    "native_row": 4680,
+    "native_col": 32428,
+    "positive_original_source_body_association": {
+      "original_key": {
+        "owner": 30332,
+        "y": 115739,
+        "x": 198592
+      },
+      "original_package": "gb-MMR-ADM3--physical-interpretation",
+      "original_interval_pointer": "/packages/2/rows/72",
+      "source_sids": [
+        44892,
+        44939,
+        45150
+      ],
+      "owner_name": "Rathedaung",
+      "framework_province_id": "framework:province:sittwe:26bd272501d4",
+      "original_owner_source_atom": "gb:MMR:ADM3:66882298B77467059166323",
+      "source_ADM3_member": {
+        "source_index": 45150,
+        "feature_ordinal": 179,
+        "source_id": "gb:MMR:ADM3:66882298B77467059166323",
+        "feature_name": "Rathedaung",
+        "feature_geometry_pointer": "/features/179/geometry"
+      },
+      "owner_complete_source_polygon_parts": [
+        {
+          "part_ordinal": 3,
+          "source_geometry_pointer": "/features/179/geometry/coordinates/3",
+          "contact": "interior",
+          "observation_pointer": "/operations/293"
+        }
+      ],
+      "whole_ADM2_source_contacts": [
+        {
+          "source_index": 44939,
+          "contact": "interior",
+          "source_geometry_pointer": "/features/42/geometry",
+          "observation_pointer": "/operations/473"
+        }
+      ],
+      "outside_all_whole_ADM2_source_features": false,
+      "other_original_source_sids": [
+        44892,
+        44939
+      ],
+      "foreign_original_source_sids": [],
+      "other_SID_observation_note": "Original source-candidate references are preserved. ADM1/foreign geometry is not newly observed in this association operation.",
+      "normative_centre": {
+        "latitude": 20.60992185186027,
+        "longitude_numerator": 24303420,
+        "longitude_denominator": 262166
+      },
+      "remaining_after_known2237_adopted_answers": true
+    },
+    "specific_annual_source_fact": "The annual2020 WorldCover v100 Map supports modeled cropland at this unchanged original-source-associated native location. This source-specific annual cover facet does not establish dry ground,material type or independent groundtruth.",
+    "proposed_bounded_answer": false,
+    "proposed_answer": null,
+    "remaining_physical_question": "Actual native context contains a water/wet-cover transition. A more precise bank/shore/mixed-pixel/registration body relation is needed for this narrow adoption.",
+    "separate_unadopted_questions": [
+      "Annual2020 modeled source at the containing10m-scale pixel,not independent instantaneous/groundtruth or wholeAtlas-cell coverage.",
+      "Original2019 source-version body association is affirmative; not current/legal ownership,territorial clearance,source2019shoreline equivalence or native/repair authority.",
+      "Crop cover does not identify dry versus flooded agriculture."
+    ],
+    "retained_native_observation": null,
+    "status": "OPEN SPECIFIC PHYSICAL QUESTION",
+    "authority_or_repair_credit": 0
+  },
+  {
+    "category": "unresolved-water-wet-cover-edge-location",
+    "class": 10,
+    "point_index": 188,
+    "original_key": {
+      "owner": 30332,
+      "y": 115915,
+      "x": 198623
+    },
+    "original_package": "gb-MMR-ADM3--physical-interpretation",
+    "original_record_unchanged": {
+      "original_block": 28,
+      "original_record_ordinal": 168,
+      "original_owners": [
+        30332
+      ],
+      "original_SIDs": [
+        44892,
+        44939,
+        45150
+      ],
+      "original_class": "source-relative",
+      "original_interval": [
+        115915,
+        198623,
+        198624,
+        [
+          30332
+        ],
+        [
+          44892,
+          44939,
+          45150
+        ],
+        "source-relative"
+      ]
+    },
+    "unchanged_centre": {
+      "longitude": 92.74497837248157,
+      "latitude": 20.38354327563976,
+      "ideal_longitude_numerator": 24314580,
+      "ideal_longitude_denominator": 262166
+    },
+    "source_year": 2020,
+    "source_product": "ESA WorldCover2020v100 Map",
+    "source_observation": {
+      "coverage_status": "valid-native-value",
+      "class_code": 10,
+      "valid_mask": 255,
+      "nodata_match": false,
+      "neighbourhood_complete": true,
+      "neighbourhood_codes": [
+        [
+          80,
+          10,
+          10
+        ],
+        [
+          80,
+          10,
+          10
+        ],
+        [
+          80,
+          60,
+          10
+        ]
+      ],
+      "neighbourhood_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "centre_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E090/new-block-07-32.npz",
+      "source_object_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:32:50 GMT",
+        "etag": "\"7dfd32e1ec18f32bdc130e5dd1ea6994\"",
+        "accept-ranges": "bytes",
+        "content-length": "6325118"
+      }
+    },
+    "source_point_reference": {
+      "path": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E090/point-observations.jsonl",
+      "jsonl_line_zero_based": 131,
+      "source_point_index": 188
+    },
+    "tile": "N18E090",
+    "native_row": 7397,
+    "native_col": 32939,
+    "positive_original_source_body_association": {
+      "original_key": {
+        "owner": 30332,
+        "y": 115915,
+        "x": 198623
+      },
+      "original_package": "gb-MMR-ADM3--physical-interpretation",
+      "original_interval_pointer": "/packages/2/rows/168",
+      "source_sids": [
+        44892,
+        44939,
+        45150
+      ],
+      "owner_name": "Rathedaung",
+      "framework_province_id": "framework:province:sittwe:26bd272501d4",
+      "original_owner_source_atom": "gb:MMR:ADM3:66882298B77467059166323",
+      "source_ADM3_member": {
+        "source_index": 45150,
+        "feature_ordinal": 179,
+        "source_id": "gb:MMR:ADM3:66882298B77467059166323",
+        "feature_name": "Rathedaung",
+        "feature_geometry_pointer": "/features/179/geometry"
+      },
+      "owner_complete_source_polygon_parts": [
+        {
+          "part_ordinal": 0,
+          "source_geometry_pointer": "/features/179/geometry/coordinates/0",
+          "contact": "interior",
+          "observation_pointer": "/operations/290"
+        }
+      ],
+      "whole_ADM2_source_contacts": [
+        {
+          "source_index": 44939,
+          "contact": "interior",
+          "source_geometry_pointer": "/features/42/geometry",
+          "observation_pointer": "/operations/473"
+        }
+      ],
+      "outside_all_whole_ADM2_source_features": false,
+      "other_original_source_sids": [
+        44892,
+        44939
+      ],
+      "foreign_original_source_sids": [],
+      "other_SID_observation_note": "Original source-candidate references are preserved. ADM1/foreign geometry is not newly observed in this association operation.",
+      "normative_centre": {
+        "latitude": 20.38354327563976,
+        "longitude_numerator": 24314580,
+        "longitude_denominator": 262166
+      },
+      "remaining_after_known2237_adopted_answers": true
+    },
+    "specific_annual_source_fact": "The annual2020 WorldCover v100 Map supports modeled tree canopy at this unchanged original-source-associated native location. Tree cover can include floodedforest; no dry-understorey or whole-cell claim.",
+    "proposed_bounded_answer": false,
+    "proposed_answer": null,
+    "remaining_physical_question": "Actual native context contains a water/wet-cover transition. A more precise bank/shore/mixed-pixel/registration body relation is needed for this narrow adoption.",
+    "separate_unadopted_questions": [
+      "Annual2020 modeled source at the containing10m-scale pixel,not independent instantaneous/groundtruth or wholeAtlas-cell coverage.",
+      "Original2019 source-version body association is affirmative; not current/legal ownership,territorial clearance,source2019shoreline equivalence or native/repair authority.",
+      "Flooded understorey is not ruled out by tree canopy."
+    ],
+    "retained_native_observation": null,
+    "status": "OPEN SPECIFIC PHYSICAL QUESTION",
+    "authority_or_repair_credit": 0
+  },
+  {
+    "category": "unresolved-wetland-intertidal-body-relation",
+    "class": 90,
+    "point_index": 263,
+    "original_key": {
+      "owner": 30287,
+      "y": 116008,
+      "x": 198664
+    },
+    "original_package": "gb-MMR-ADM3--physical-interpretation",
+    "original_record_unchanged": {
+      "original_block": 28,
+      "original_record_ordinal": 220,
+      "original_owners": [
+        30287
+      ],
+      "original_SIDs": [
+        44892,
+        44939,
+        45156
+      ],
+      "original_class": "source-relative",
+      "original_interval": [
+        116008,
+        198663,
+        198665,
+        [
+          30287
+        ],
+        [
+          44892,
+          44939,
+          45156
+        ],
+        "source-relative"
+      ]
+    },
+    "unchanged_centre": {
+      "longitude": 92.80127857922082,
+      "latitude": 20.263788181974963,
+      "ideal_longitude_numerator": 24329340,
+      "ideal_longitude_denominator": 262166
+    },
+    "source_year": 2020,
+    "source_product": "ESA WorldCover2020v100 Map",
+    "source_observation": {
+      "coverage_status": "valid-native-value",
+      "class_code": 90,
+      "valid_mask": 255,
+      "nodata_match": false,
+      "neighbourhood_complete": true,
+      "neighbourhood_codes": [
+        [
+          40,
+          40,
+          90
+        ],
+        [
+          40,
+          90,
+          90
+        ],
+        [
+          90,
+          90,
+          90
+        ]
+      ],
+      "neighbourhood_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "centre_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E090/new-block-08-32.npz",
+      "source_object_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:32:50 GMT",
+        "etag": "\"7dfd32e1ec18f32bdc130e5dd1ea6994\"",
+        "accept-ranges": "bytes",
+        "content-length": "6325118"
+      }
+    },
+    "source_point_reference": {
+      "path": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E090/point-observations.jsonl",
+      "jsonl_line_zero_based": 188,
+      "source_point_index": 263
+    },
+    "tile": "N18E090",
+    "native_row": 8834,
+    "native_col": 33615,
+    "positive_original_source_body_association": {
+      "original_key": {
+        "owner": 30287,
+        "y": 116008,
+        "x": 198664
+      },
+      "original_package": "gb-MMR-ADM3--physical-interpretation",
+      "original_interval_pointer": "/packages/2/rows/220",
+      "source_sids": [
+        44892,
+        44939,
+        45156
+      ],
+      "owner_name": "Sittwe",
+      "framework_province_id": "framework:province:sittwe:26bd272501d4",
+      "original_owner_source_atom": "gb:MMR:ADM3:66882298B64895356281796",
+      "source_ADM3_member": {
+        "source_index": 45156,
+        "feature_ordinal": 185,
+        "source_id": "gb:MMR:ADM3:66882298B64895356281796",
+        "feature_name": "Sittwe",
+        "feature_geometry_pointer": "/features/185/geometry"
+      },
+      "owner_complete_source_polygon_parts": [
+        {
+          "part_ordinal": 0,
+          "source_geometry_pointer": "/features/185/geometry",
+          "contact": "interior",
+          "observation_pointer": "/operations/272"
+        }
+      ],
+      "whole_ADM2_source_contacts": [
+        {
+          "source_index": 44939,
+          "contact": "interior",
+          "source_geometry_pointer": "/features/42/geometry",
+          "observation_pointer": "/operations/473"
+        }
+      ],
+      "outside_all_whole_ADM2_source_features": false,
+      "other_original_source_sids": [
+        44892,
+        44939
+      ],
+      "foreign_original_source_sids": [],
+      "other_SID_observation_note": "Original source-candidate references are preserved. ADM1/foreign geometry is not newly observed in this association operation.",
+      "normative_centre": {
+        "latitude": 20.263788181974963,
+        "longitude_numerator": 24329340,
+        "longitude_denominator": 262166
+      },
+      "remaining_after_known2237_adopted_answers": true
+    },
+    "specific_annual_source_fact": "The annual2020 WorldCover v100 Map indicates herbaceous wetland at this unchanged original-source-associated native location. Inundation and exact water/ground relation remain unresolved here.",
+    "proposed_bounded_answer": false,
+    "proposed_answer": null,
+    "remaining_physical_question": "The annual wetland/mangrove cover is known,but its precise water/ground interface,inundation or tide-dependent body relation needs a more specific observation for this narrow adoption.",
+    "separate_unadopted_questions": [
+      "Annual2020 modeled source at the containing10m-scale pixel,not independent instantaneous/groundtruth or wholeAtlas-cell coverage.",
+      "Original2019 source-version body association is affirmative; not current/legal ownership,territorial clearance,source2019shoreline equivalence or native/repair authority."
+    ],
+    "retained_native_observation": null,
+    "status": "OPEN SPECIFIC PHYSICAL QUESTION",
+    "authority_or_repair_credit": 0
+  },
+  {
+    "category": "unresolved-water-wet-cover-edge-location",
+    "class": 60,
+    "point_index": 265,
+    "original_key": {
+      "owner": 30287,
+      "y": 116016,
+      "x": 198652
+    },
+    "original_package": "gb-MMR-ADM3--physical-interpretation",
+    "original_record_unchanged": {
+      "original_block": 28,
+      "original_record_ordinal": 222,
+      "original_owners": [
+        30287
+      ],
+      "original_SIDs": [
+        44892,
+        44939,
+        45156
+      ],
+      "original_class": "source-relative",
+      "original_interval": [
+        116016,
+        198652,
+        198653,
+        [
+          30287
+        ],
+        [
+          44892,
+          44939,
+          45156
+        ],
+        "source-relative"
+      ]
+    },
+    "unchanged_centre": {
+      "longitude": 92.78480046993127,
+      "latitude": 20.253482342247143,
+      "ideal_longitude_numerator": 24325020,
+      "ideal_longitude_denominator": 262166
+    },
+    "source_year": 2020,
+    "source_product": "ESA WorldCover2020v100 Map",
+    "source_observation": {
+      "coverage_status": "valid-native-value",
+      "class_code": 60,
+      "valid_mask": 255,
+      "nodata_match": false,
+      "neighbourhood_complete": true,
+      "neighbourhood_codes": [
+        [
+          80,
+          80,
+          60
+        ],
+        [
+          80,
+          60,
+          60
+        ],
+        [
+          80,
+          60,
+          60
+        ]
+      ],
+      "neighbourhood_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "centre_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E090/new-block-08-32.npz",
+      "source_object_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:32:50 GMT",
+        "etag": "\"7dfd32e1ec18f32bdc130e5dd1ea6994\"",
+        "accept-ranges": "bytes",
+        "content-length": "6325118"
+      }
+    },
+    "source_point_reference": {
+      "path": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E090/point-observations.jsonl",
+      "jsonl_line_zero_based": 190,
+      "source_point_index": 265
+    },
+    "tile": "N18E090",
+    "native_row": 8958,
+    "native_col": 33417,
+    "positive_original_source_body_association": {
+      "original_key": {
+        "owner": 30287,
+        "y": 116016,
+        "x": 198652
+      },
+      "original_package": "gb-MMR-ADM3--physical-interpretation",
+      "original_interval_pointer": "/packages/2/rows/222",
+      "source_sids": [
+        44892,
+        44939,
+        45156
+      ],
+      "owner_name": "Sittwe",
+      "framework_province_id": "framework:province:sittwe:26bd272501d4",
+      "original_owner_source_atom": "gb:MMR:ADM3:66882298B64895356281796",
+      "source_ADM3_member": {
+        "source_index": 45156,
+        "feature_ordinal": 185,
+        "source_id": "gb:MMR:ADM3:66882298B64895356281796",
+        "feature_name": "Sittwe",
+        "feature_geometry_pointer": "/features/185/geometry"
+      },
+      "owner_complete_source_polygon_parts": [
+        {
+          "part_ordinal": 0,
+          "source_geometry_pointer": "/features/185/geometry",
+          "contact": "interior",
+          "observation_pointer": "/operations/272"
+        }
+      ],
+      "whole_ADM2_source_contacts": [
+        {
+          "source_index": 44939,
+          "contact": "interior",
+          "source_geometry_pointer": "/features/42/geometry",
+          "observation_pointer": "/operations/473"
+        }
+      ],
+      "outside_all_whole_ADM2_source_features": false,
+      "other_original_source_sids": [
+        44892,
+        44939
+      ],
+      "foreign_original_source_sids": [],
+      "other_SID_observation_note": "Original source-candidate references are preserved. ADM1/foreign geometry is not newly observed in this association operation.",
+      "normative_centre": {
+        "latitude": 20.253482342247143,
+        "longitude_numerator": 24325020,
+        "longitude_denominator": 262166
+      },
+      "remaining_after_known2237_adopted_answers": true
+    },
+    "specific_annual_source_fact": "The annual2020 WorldCover v100 Map supports modeled bare or sparse vegetation at this unchanged original-source-associated native location. This source-specific annual cover facet does not establish dry ground,material type or independent groundtruth.",
+    "proposed_bounded_answer": false,
+    "proposed_answer": null,
+    "remaining_physical_question": "Actual native context contains a water/wet-cover transition. A more precise bank/shore/mixed-pixel/registration body relation is needed for this narrow adoption.",
+    "separate_unadopted_questions": [
+      "Annual2020 modeled source at the containing10m-scale pixel,not independent instantaneous/groundtruth or wholeAtlas-cell coverage.",
+      "Original2019 source-version body association is affirmative; not current/legal ownership,territorial clearance,source2019shoreline equivalence or native/repair authority."
+    ],
+    "retained_native_observation": null,
+    "status": "OPEN SPECIFIC PHYSICAL QUESTION",
+    "authority_or_repair_credit": 0
+  },
+  {
+    "category": "unresolved-water-wet-cover-edge-location",
+    "class": 50,
+    "point_index": 2533,
+    "original_key": {
+      "owner": 30129,
+      "y": 117177,
+      "x": 199530
+    },
+    "original_package": "gb-MMR-ADM3--physical-interpretation",
+    "original_record_unchanged": {
+      "original_block": 28,
+      "original_record_ordinal": 1592,
+      "original_owners": [
+        30129
+      ],
+      "original_SIDs": [
+        44892,
+        44936,
+        44994
+      ],
+      "original_class": "source-relative",
+      "original_interval": [
+        117177,
+        199530,
+        199531,
+        [
+          30129
+        ],
+        [
+          44892,
+          44936,
+          44994
+        ],
+        "source-relative"
+      ]
+    },
+    "unchanged_centre": {
+      "longitude": 93.99044879961554,
+      "latitude": 18.75074298108055,
+      "ideal_longitude_numerator": 24641100,
+      "ideal_longitude_denominator": 262166
+    },
+    "source_year": 2020,
+    "source_product": "ESA WorldCover2020v100 Map",
+    "source_observation": {
+      "coverage_status": "valid-native-value",
+      "class_code": 50,
+      "valid_mask": 255,
+      "nodata_match": false,
+      "neighbourhood_complete": true,
+      "neighbourhood_codes": [
+        [
+          80,
+          80,
+          80
+        ],
+        [
+          50,
+          50,
+          60
+        ],
+        [
+          50,
+          50,
+          60
+        ]
+      ],
+      "neighbourhood_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "centre_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-26-11.npz",
+      "source_object_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:32:50 GMT",
+        "etag": "\"e14d75f1841701b9aeff148ba814fc0a-10\"",
+        "accept-ranges": "bytes",
+        "content-length": "83473716"
+      }
+    },
+    "source_point_reference": {
+      "path": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/point-observations.jsonl",
+      "jsonl_line_zero_based": 2160,
+      "source_point_index": 2533
+    },
+    "tile": "N18E093",
+    "native_row": 26991,
+    "native_col": 11885,
+    "positive_original_source_body_association": {
+      "original_key": {
+        "owner": 30129,
+        "y": 117177,
+        "x": 199530
+      },
+      "original_package": "gb-MMR-ADM3--physical-interpretation",
+      "original_interval_pointer": "/packages/2/rows/1592",
+      "source_sids": [
+        44892,
+        44936,
+        44994
+      ],
+      "owner_name": "Ramree",
+      "framework_province_id": "framework:province:kyaukpyu:901c624c7832",
+      "original_owner_source_atom": "gb:MMR:ADM3:66882298B25907056324587",
+      "source_ADM3_member": {
+        "source_index": 44994,
+        "feature_ordinal": 23,
+        "source_id": "gb:MMR:ADM3:66882298B25907056324587",
+        "feature_name": "Ramree",
+        "feature_geometry_pointer": "/features/23/geometry"
+      },
+      "owner_complete_source_polygon_parts": [
+        {
+          "part_ordinal": 0,
+          "source_geometry_pointer": "/features/23/geometry/coordinates/0",
+          "contact": "interior",
+          "observation_pointer": "/operations/52"
+        }
+      ],
+      "whole_ADM2_source_contacts": [
+        {
+          "source_index": 44936,
+          "contact": "interior",
+          "source_geometry_pointer": "/features/39/geometry",
+          "observation_pointer": "/operations/470"
+        }
+      ],
+      "outside_all_whole_ADM2_source_features": false,
+      "other_original_source_sids": [
+        44892,
+        44936
+      ],
+      "foreign_original_source_sids": [],
+      "other_SID_observation_note": "Original source-candidate references are preserved. ADM1/foreign geometry is not newly observed in this association operation.",
+      "normative_centre": {
+        "latitude": 18.75074298108055,
+        "longitude_numerator": 24641100,
+        "longitude_denominator": 262166
+      },
+      "remaining_after_known2237_adopted_answers": true
+    },
+    "specific_annual_source_fact": "The annual2020 WorldCover v100 Map supports modeled built-up cover at this unchanged original-source-associated native location. This source-specific annual cover facet does not establish dry ground,material type or independent groundtruth.",
+    "proposed_bounded_answer": false,
+    "proposed_answer": null,
+    "remaining_physical_question": "Actual native context contains a water/wet-cover transition. A more precise bank/shore/mixed-pixel/registration body relation is needed for this narrow adoption.",
+    "separate_unadopted_questions": [
+      "Annual2020 modeled source at the containing10m-scale pixel,not independent instantaneous/groundtruth or wholeAtlas-cell coverage.",
+      "Original2019 source-version body association is affirmative; not current/legal ownership,territorial clearance,source2019shoreline equivalence or native/repair authority."
+    ],
+    "retained_native_observation": null,
+    "status": "OPEN SPECIFIC PHYSICAL QUESTION",
+    "authority_or_repair_credit": 0
+  },
+  {
+    "category": "unresolved-water-wet-cover-edge-location",
+    "class": 30,
+    "point_index": 2775,
+    "original_key": {
+      "owner": 30107,
+      "y": 117312,
+      "x": 199720
+    },
+    "original_package": "gb-MMR-ADM3--physical-interpretation",
+    "original_record_unchanged": {
+      "original_block": 28,
+      "original_record_ordinal": 1715,
+      "original_owners": [
+        30107
+      ],
+      "original_SIDs": [
+        44892,
+        44940,
+        45025
+      ],
+      "original_class": "source-relative",
+      "original_interval": [
+        117312,
+        199720,
+        199721,
+        [
+          30107
+        ],
+        [
+          44892,
+          44940,
+          45025
+        ],
+        "source-relative"
+      ]
+    },
+    "unchanged_centre": {
+      "longitude": 94.25135219669977,
+      "latitude": 18.575112007875592,
+      "ideal_longitude_numerator": 24709500,
+      "ideal_longitude_denominator": 262166
+    },
+    "source_year": 2020,
+    "source_product": "ESA WorldCover2020v100 Map",
+    "source_observation": {
+      "coverage_status": "valid-native-value",
+      "class_code": 30,
+      "valid_mask": 255,
+      "nodata_match": false,
+      "neighbourhood_complete": true,
+      "neighbourhood_codes": [
+        [
+          80,
+          30,
+          10
+        ],
+        [
+          80,
+          30,
+          30
+        ],
+        [
+          80,
+          60,
+          30
+        ]
+      ],
+      "neighbourhood_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "centre_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-28-14.npz",
+      "source_object_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:32:50 GMT",
+        "etag": "\"e14d75f1841701b9aeff148ba814fc0a-10\"",
+        "accept-ranges": "bytes",
+        "content-length": "83473716"
+      }
+    },
+    "source_point_reference": {
+      "path": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/point-observations.jsonl",
+      "jsonl_line_zero_based": 2402,
+      "source_point_index": 2775
+    },
+    "tile": "N18E093",
+    "native_row": 29098,
+    "native_col": 15016,
+    "positive_original_source_body_association": {
+      "original_key": {
+        "owner": 30107,
+        "y": 117312,
+        "x": 199720
+      },
+      "original_package": "gb-MMR-ADM3--physical-interpretation",
+      "original_interval_pointer": "/packages/2/rows/1715",
+      "source_sids": [
+        44892,
+        44940,
+        45025
+      ],
+      "owner_name": "Thandwe",
+      "framework_province_id": "framework:province:thandwe:0c34a2318ad9",
+      "original_owner_source_atom": "gb:MMR:ADM3:66882298B19990050947650",
+      "source_ADM3_member": {
+        "source_index": 45025,
+        "feature_ordinal": 54,
+        "source_id": "gb:MMR:ADM3:66882298B19990050947650",
+        "feature_name": "Thandwe",
+        "feature_geometry_pointer": "/features/54/geometry"
+      },
+      "owner_complete_source_polygon_parts": [
+        {
+          "part_ordinal": 2,
+          "source_geometry_pointer": "/features/54/geometry/coordinates/2",
+          "contact": "interior",
+          "observation_pointer": "/operations/29"
+        }
+      ],
+      "whole_ADM2_source_contacts": [
+        {
+          "source_index": 44940,
+          "contact": "interior",
+          "source_geometry_pointer": "/features/43/geometry",
+          "observation_pointer": "/operations/474"
+        }
+      ],
+      "outside_all_whole_ADM2_source_features": false,
+      "other_original_source_sids": [
+        44892,
+        44940
+      ],
+      "foreign_original_source_sids": [],
+      "other_SID_observation_note": "Original source-candidate references are preserved. ADM1/foreign geometry is not newly observed in this association operation.",
+      "normative_centre": {
+        "latitude": 18.575112007875592,
+        "longitude_numerator": 24709500,
+        "longitude_denominator": 262166
+      },
+      "remaining_after_known2237_adopted_answers": true
+    },
+    "specific_annual_source_fact": "The annual2020 WorldCover v100 Map supports modeled grassland at this unchanged original-source-associated native location. This source-specific annual cover facet does not establish dry ground,material type or independent groundtruth.",
+    "proposed_bounded_answer": false,
+    "proposed_answer": null,
+    "remaining_physical_question": "Actual native context contains a water/wet-cover transition. A more precise bank/shore/mixed-pixel/registration body relation is needed for this narrow adoption.",
+    "separate_unadopted_questions": [
+      "Annual2020 modeled source at the containing10m-scale pixel,not independent instantaneous/groundtruth or wholeAtlas-cell coverage.",
+      "Original2019 source-version body association is affirmative; not current/legal ownership,territorial clearance,source2019shoreline equivalence or native/repair authority."
+    ],
+    "retained_native_observation": null,
+    "status": "OPEN SPECIFIC PHYSICAL QUESTION",
+    "authority_or_repair_credit": 0
+  },
+  {
+    "category": "unresolved-water-wet-cover-edge-location",
+    "class": 20,
+    "point_index": 4184,
+    "original_key": {
+      "owner": 30213,
+      "y": 118893,
+      "x": 202155
+    },
+    "original_package": "gb-MMR-ADM3--physical-interpretation",
+    "original_record_unchanged": {
+      "original_block": 29,
+      "original_record_ordinal": 2502,
+      "original_owners": [
+        30213
+      ],
+      "original_SIDs": [
+        44891,
+        44933,
+        45120
+      ],
+      "original_class": "source-relative",
+      "original_interval": [
+        118893,
+        202150,
+        202156,
+        [
+          30213
+        ],
+        [
+          44891,
+          44933,
+          45120
+        ],
+        "source-relative"
+      ]
+    },
+    "unchanged_centre": {
+      "longitude": 97.59503520670108,
+      "latitude": 16.505194271997695,
+      "ideal_longitude_numerator": 25586100,
+      "ideal_longitude_denominator": 262166
+    },
+    "source_year": 2020,
+    "source_product": "ESA WorldCover2020v100 Map",
+    "source_observation": {
+      "coverage_status": "valid-native-value",
+      "class_code": 20,
+      "valid_mask": 255,
+      "nodata_match": false,
+      "neighbourhood_complete": true,
+      "neighbourhood_codes": [
+        [
+          20,
+          20,
+          80
+        ],
+        [
+          20,
+          20,
+          80
+        ],
+        [
+          20,
+          20,
+          80
+        ]
+      ],
+      "neighbourhood_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "centre_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-17-18.npz",
+      "source_object_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:32:35 GMT",
+        "etag": "\"c0de21a1a10d8fe0814ea892dc4bb1f3-7\"",
+        "accept-ranges": "bytes",
+        "content-length": "58272433"
+      }
+    },
+    "source_point_reference": {
+      "path": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/point-observations.jsonl",
+      "jsonl_line_zero_based": 953,
+      "source_point_index": 4184
+    },
+    "tile": "N15E096",
+    "native_row": 17937,
+    "native_col": 19140,
+    "positive_original_source_body_association": {
+      "original_key": {
+        "owner": 30213,
+        "y": 118893,
+        "x": 202155
+      },
+      "original_package": "gb-MMR-ADM3--physical-interpretation",
+      "original_interval_pointer": "/packages/2/rows/2502",
+      "source_sids": [
+        44891,
+        44933,
+        45120
+      ],
+      "owner_name": "Paung",
+      "framework_province_id": "framework:province:thaton:5b29afc4ccb5",
+      "original_owner_source_atom": "gb:MMR:ADM3:66882298B46374660355499",
+      "source_ADM3_member": {
+        "source_index": 45120,
+        "feature_ordinal": 149,
+        "source_id": "gb:MMR:ADM3:66882298B46374660355499",
+        "feature_name": "Paung",
+        "feature_geometry_pointer": "/features/149/geometry"
+      },
+      "owner_complete_source_polygon_parts": [
+        {
+          "part_ordinal": 1,
+          "source_geometry_pointer": "/features/149/geometry/coordinates/1",
+          "contact": "interior",
+          "observation_pointer": "/operations/90"
+        }
+      ],
+      "whole_ADM2_source_contacts": [
+        {
+          "source_index": 44933,
+          "contact": "interior",
+          "source_geometry_pointer": "/features/36/geometry",
+          "observation_pointer": "/operations/467"
+        }
+      ],
+      "outside_all_whole_ADM2_source_features": false,
+      "other_original_source_sids": [
+        44891,
+        44933
+      ],
+      "foreign_original_source_sids": [],
+      "other_SID_observation_note": "Original source-candidate references are preserved. ADM1/foreign geometry is not newly observed in this association operation.",
+      "normative_centre": {
+        "latitude": 16.505194271997695,
+        "longitude_numerator": 25586100,
+        "longitude_denominator": 262166
+      },
+      "remaining_after_known2237_adopted_answers": true
+    },
+    "specific_annual_source_fact": "The annual2020 WorldCover v100 Map supports modeled shrubland at this unchanged original-source-associated native location. This source-specific annual cover facet does not establish dry ground,material type or independent groundtruth.",
+    "proposed_bounded_answer": false,
+    "proposed_answer": null,
+    "remaining_physical_question": "Actual native context contains a water/wet-cover transition. A more precise bank/shore/mixed-pixel/registration body relation is needed for this narrow adoption.",
+    "separate_unadopted_questions": [
+      "Annual2020 modeled source at the containing10m-scale pixel,not independent instantaneous/groundtruth or wholeAtlas-cell coverage.",
+      "Original2019 source-version body association is affirmative; not current/legal ownership,territorial clearance,source2019shoreline equivalence or native/repair authority."
+    ],
+    "retained_native_observation": null,
+    "status": "OPEN SPECIFIC PHYSICAL QUESTION",
+    "authority_or_repair_credit": 0
+  },
+  {
+    "category": "unresolved-native-context-coverage",
+    "class": 60,
+    "point_index": 5726,
+    "original_key": {
+      "owner": 30327,
+      "y": 120032,
+      "x": 202298
+    },
+    "original_package": "gb-MMR-ADM3--physical-interpretation",
+    "original_record_unchanged": {
+      "original_block": 29,
+      "original_record_ordinal": 3246,
+      "original_owners": [
+        30327
+      ],
+      "original_SIDs": [
+        44891,
+        44932,
+        45093
+      ],
+      "original_class": "source-relative",
+      "original_interval": [
+        120032,
+        202298,
+        202299,
+        [
+          30327
+        ],
+        [
+          44891,
+          44932,
+          45093
+        ],
+        "source-relative"
+      ]
+    },
+    "unchanged_centre": {
+      "longitude": 97.7913993424014,
+      "latitude": 14.999938044092211,
+      "ideal_longitude_numerator": 25637580,
+      "ideal_longitude_denominator": 262166
+    },
+    "source_year": 2020,
+    "source_product": "ESA WorldCover2020v100 Map",
+    "source_observation": {
+      "coverage_status": "valid-native-value",
+      "class_code": 60,
+      "valid_mask": 255,
+      "nodata_match": false,
+      "neighbourhood_complete": false,
+      "neighbourhood_codes": null,
+      "neighbourhood_masks": null,
+      "centre_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-00-20.npz",
+      "source_object_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:32:16 GMT",
+        "etag": "\"de229d470bb0477e3f7f7bb1a82aa0d6-2\"",
+        "accept-ranges": "bytes",
+        "content-length": "11672438"
+      }
+    },
+    "source_point_reference": {
+      "path": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/point-observations.jsonl",
+      "jsonl_line_zero_based": 0,
+      "source_point_index": 5726
+    },
+    "tile": "N12E096",
+    "native_row": 0,
+    "native_col": 21496,
+    "positive_original_source_body_association": {
+      "original_key": {
+        "owner": 30327,
+        "y": 120032,
+        "x": 202298
+      },
+      "original_package": "gb-MMR-ADM3--physical-interpretation",
+      "original_interval_pointer": "/packages/2/rows/3246",
+      "source_sids": [
+        44891,
+        44932,
+        45093
+      ],
+      "owner_name": "Ye",
+      "framework_province_id": "framework:province:mawlamyine:86e6c5e7a4d8",
+      "original_owner_source_atom": "gb:MMR:ADM3:66882298B73191723482857",
+      "source_ADM3_member": {
+        "source_index": 45093,
+        "feature_ordinal": 122,
+        "source_id": "gb:MMR:ADM3:66882298B73191723482857",
+        "feature_name": "Ye",
+        "feature_geometry_pointer": "/features/122/geometry"
+      },
+      "owner_complete_source_polygon_parts": [
+        {
+          "part_ordinal": 4,
+          "source_geometry_pointer": "/features/122/geometry/coordinates/4",
+          "contact": "interior",
+          "observation_pointer": "/operations/289"
+        }
+      ],
+      "whole_ADM2_source_contacts": [
+        {
+          "source_index": 44932,
+          "contact": "interior",
+          "source_geometry_pointer": "/features/35/geometry",
+          "observation_pointer": "/operations/466"
+        }
+      ],
+      "outside_all_whole_ADM2_source_features": false,
+      "other_original_source_sids": [
+        44891,
+        44932
+      ],
+      "foreign_original_source_sids": [],
+      "other_SID_observation_note": "Original source-candidate references are preserved. ADM1/foreign geometry is not newly observed in this association operation.",
+      "normative_centre": {
+        "latitude": 14.999938044092211,
+        "longitude_numerator": 25637580,
+        "longitude_denominator": 262166
+      },
+      "remaining_after_known2237_adopted_answers": true
+    },
+    "specific_annual_source_fact": "The annual2020 WorldCover v100 Map supports modeled bare or sparse vegetation at this unchanged original-source-associated native location. This source-specific annual cover facet does not establish dry ground,material type or independent groundtruth.",
+    "proposed_bounded_answer": false,
+    "proposed_answer": null,
+    "remaining_physical_question": "Valid annual centre observation lacks complete actual same-tile3x3context; no cross-tile pixels or precise shore relation is invented.",
+    "separate_unadopted_questions": [
+      "Annual2020 modeled source at the containing10m-scale pixel,not independent instantaneous/groundtruth or wholeAtlas-cell coverage.",
+      "Original2019 source-version body association is affirmative; not current/legal ownership,territorial clearance,source2019shoreline equivalence or native/repair authority."
+    ],
+    "retained_native_observation": null,
+    "status": "OPEN SPECIFIC PHYSICAL QUESTION",
+    "authority_or_repair_credit": 0
+  },
+  {
+    "category": "unresolved-native-context-coverage",
+    "class": 10,
+    "point_index": 9790,
+    "original_key": {
+      "owner": 30271,
+      "y": 122279,
+      "x": 202270
+    },
+    "original_package": "gb-MMR-ADM3--physical-interpretation",
+    "original_record_unchanged": {
+      "original_block": 29,
+      "original_record_ordinal": 6026,
+      "original_owners": [
+        30271
+      ],
+      "original_SIDs": [
+        44893,
+        44955,
+        45111
+      ],
+      "original_class": "source-relative",
+      "original_interval": [
+        122279,
+        202270,
+        202272,
+        [
+          30271
+        ],
+        [
+          44893,
+          44955,
+          45111
+        ],
+        "source-relative"
+      ]
+    },
+    "unchanged_centre": {
+      "longitude": 97.75295042072577,
+      "latitude": 12.000047552752804,
+      "ideal_longitude_numerator": 25627500,
+      "ideal_longitude_denominator": 262166
+    },
+    "source_year": 2020,
+    "source_product": "ESA WorldCover2020v100 Map",
+    "source_observation": {
+      "coverage_status": "valid-native-value",
+      "class_code": 10,
+      "valid_mask": 255,
+      "nodata_match": false,
+      "neighbourhood_complete": false,
+      "neighbourhood_codes": null,
+      "neighbourhood_masks": null,
+      "centre_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-35-20.npz",
+      "source_object_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:32:16 GMT",
+        "etag": "\"de229d470bb0477e3f7f7bb1a82aa0d6-2\"",
+        "accept-ranges": "bytes",
+        "content-length": "11672438"
+      }
+    },
+    "source_point_reference": {
+      "path": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/point-observations.jsonl",
+      "jsonl_line_zero_based": 3891,
+      "source_point_index": 9790
+    },
+    "tile": "N12E096",
+    "native_row": 35999,
+    "native_col": 21035,
+    "positive_original_source_body_association": {
+      "original_key": {
+        "owner": 30271,
+        "y": 122279,
+        "x": 202270
+      },
+      "original_package": "gb-MMR-ADM3--physical-interpretation",
+      "original_interval_pointer": "/packages/2/rows/6026",
+      "source_sids": [
+        44893,
+        44955,
+        45111
+      ],
+      "owner_name": "Kyunsu",
+      "framework_province_id": "framework:province:myeik:2820a791707f",
+      "original_owner_source_atom": "gb:MMR:ADM3:66882298B62167174305830",
+      "source_ADM3_member": {
+        "source_index": 45111,
+        "feature_ordinal": 140,
+        "source_id": "gb:MMR:ADM3:66882298B62167174305830",
+        "feature_name": "Kyunsu",
+        "feature_geometry_pointer": "/features/140/geometry"
+      },
+      "owner_complete_source_polygon_parts": [
+        {
+          "part_ordinal": 26,
+          "source_geometry_pointer": "/features/140/geometry/coordinates/26",
+          "contact": "interior",
+          "observation_pointer": "/operations/168"
+        }
+      ],
+      "whole_ADM2_source_contacts": [
+        {
+          "source_index": 44955,
+          "contact": "interior",
+          "source_geometry_pointer": "/features/58/geometry",
+          "observation_pointer": "/operations/489"
+        }
+      ],
+      "outside_all_whole_ADM2_source_features": false,
+      "other_original_source_sids": [
+        44893,
+        44955
+      ],
+      "foreign_original_source_sids": [],
+      "other_SID_observation_note": "Original source-candidate references are preserved. ADM1/foreign geometry is not newly observed in this association operation.",
+      "normative_centre": {
+        "latitude": 12.000047552752804,
+        "longitude_numerator": 25627500,
+        "longitude_denominator": 262166
+      },
+      "remaining_after_known2237_adopted_answers": true
+    },
+    "specific_annual_source_fact": "The annual2020 WorldCover v100 Map supports modeled tree canopy at this unchanged original-source-associated native location. Tree cover can include floodedforest; no dry-understorey or whole-cell claim.",
+    "proposed_bounded_answer": false,
+    "proposed_answer": null,
+    "remaining_physical_question": "Valid annual centre observation lacks complete actual same-tile3x3context; no cross-tile pixels or precise shore relation is invented.",
+    "separate_unadopted_questions": [
+      "Annual2020 modeled source at the containing10m-scale pixel,not independent instantaneous/groundtruth or wholeAtlas-cell coverage.",
+      "Original2019 source-version body association is affirmative; not current/legal ownership,territorial clearance,source2019shoreline equivalence or native/repair authority.",
+      "Flooded understorey is not ruled out by tree canopy."
+    ],
+    "retained_native_observation": null,
+    "status": "OPEN SPECIFIC PHYSICAL QUESTION",
+    "authority_or_repair_credit": 0
+  },
+  {
+    "category": "unresolved-native-context-coverage",
+    "class": 80,
+    "point_index": 9791,
+    "original_key": {
+      "owner": 30271,
+      "y": 122279,
+      "x": 202271
+    },
+    "original_package": "gb-MMR-ADM3--physical-interpretation",
+    "original_record_unchanged": {
+      "original_block": 29,
+      "original_record_ordinal": 6026,
+      "original_owners": [
+        30271
+      ],
+      "original_SIDs": [
+        44893,
+        44955,
+        45111
+      ],
+      "original_class": "source-relative",
+      "original_interval": [
+        122279,
+        202270,
+        202272,
+        [
+          30271
+        ],
+        [
+          44893,
+          44955,
+          45111
+        ],
+        "source-relative"
+      ]
+    },
+    "unchanged_centre": {
+      "longitude": 97.75432359649989,
+      "latitude": 12.000047552752804,
+      "ideal_longitude_numerator": 25627860,
+      "ideal_longitude_denominator": 262166
+    },
+    "source_year": 2020,
+    "source_product": "ESA WorldCover2020v100 Map",
+    "source_observation": {
+      "coverage_status": "valid-native-value",
+      "class_code": 80,
+      "valid_mask": 255,
+      "nodata_match": false,
+      "neighbourhood_complete": false,
+      "neighbourhood_codes": null,
+      "neighbourhood_masks": null,
+      "centre_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-35-20.npz",
+      "source_object_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:32:16 GMT",
+        "etag": "\"de229d470bb0477e3f7f7bb1a82aa0d6-2\"",
+        "accept-ranges": "bytes",
+        "content-length": "11672438"
+      }
+    },
+    "source_point_reference": {
+      "path": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/point-observations.jsonl",
+      "jsonl_line_zero_based": 3892,
+      "source_point_index": 9791
+    },
+    "tile": "N12E096",
+    "native_row": 35999,
+    "native_col": 21051,
+    "positive_original_source_body_association": {
+      "original_key": {
+        "owner": 30271,
+        "y": 122279,
+        "x": 202271
+      },
+      "original_package": "gb-MMR-ADM3--physical-interpretation",
+      "original_interval_pointer": "/packages/2/rows/6026",
+      "source_sids": [
+        44893,
+        44955,
+        45111
+      ],
+      "owner_name": "Kyunsu",
+      "framework_province_id": "framework:province:myeik:2820a791707f",
+      "original_owner_source_atom": "gb:MMR:ADM3:66882298B62167174305830",
+      "source_ADM3_member": {
+        "source_index": 45111,
+        "feature_ordinal": 140,
+        "source_id": "gb:MMR:ADM3:66882298B62167174305830",
+        "feature_name": "Kyunsu",
+        "feature_geometry_pointer": "/features/140/geometry"
+      },
+      "owner_complete_source_polygon_parts": [
+        {
+          "part_ordinal": 26,
+          "source_geometry_pointer": "/features/140/geometry/coordinates/26",
+          "contact": "interior",
+          "observation_pointer": "/operations/168"
+        }
+      ],
+      "whole_ADM2_source_contacts": [
+        {
+          "source_index": 44955,
+          "contact": "interior",
+          "source_geometry_pointer": "/features/58/geometry",
+          "observation_pointer": "/operations/489"
+        }
+      ],
+      "outside_all_whole_ADM2_source_features": false,
+      "other_original_source_sids": [
+        44893,
+        44955
+      ],
+      "foreign_original_source_sids": [],
+      "other_SID_observation_note": "Original source-candidate references are preserved. ADM1/foreign geometry is not newly observed in this association operation.",
+      "normative_centre": {
+        "latitude": 12.000047552752804,
+        "longitude_numerator": 25627860,
+        "longitude_denominator": 262166
+      },
+      "remaining_after_known2237_adopted_answers": true
+    },
+    "specific_annual_source_fact": "The annual2020 WorldCover v100 Map supports a modeled persistent-water body at this unchanged original-source-associated native location. It does not identify sea/river/lake,fresh/saltwater,bank/thalweg,tide or jurisdiction.",
+    "proposed_bounded_answer": false,
+    "proposed_answer": null,
+    "remaining_physical_question": "Valid annual centre observation lacks complete actual same-tile3x3context; no cross-tile pixels or precise shore relation is invented.",
+    "separate_unadopted_questions": [
+      "Annual2020 modeled source at the containing10m-scale pixel,not independent instantaneous/groundtruth or wholeAtlas-cell coverage.",
+      "Original2019 source-version body association is affirmative; not current/legal ownership,territorial clearance,source2019shoreline equivalence or native/repair authority.",
+      "Water kind,exact river/sea association,shore/bank/thalweg,tide and jurisdiction remain separate where consequential."
+    ],
+    "retained_native_observation": null,
+    "status": "OPEN SPECIFIC PHYSICAL QUESTION",
+    "authority_or_repair_credit": 0
+  }
+]

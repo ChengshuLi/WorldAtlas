@@ -1,0 +1,533 @@
+{
+  "original_physical_cells": 18459,
+  "original_intervals": 9162,
+  "original_owners": 54,
+  "original_provinces": 18,
+  "known_adopted_completed": 2237,
+  "myeik_adopted": 2235,
+  "pmm_adopted": 2,
+  "remaining_known_complement": 16222,
+  "retained_native_observation_counts_in_remaining": {
+    "S2A_47PMP_20200105_0_L2A": 558,
+    "S2A_47PMM_20200125_0_L2A": 2105
+  },
+  "remaining_owners": [
+    {
+      "owner": 30081,
+      "name": "Munaung",
+      "province_id": "framework:province:kyaukpyu:901c624c7832",
+      "remaining_known_complement": 280,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B12562394642113"
+      ]
+    },
+    {
+      "owner": 30100,
+      "name": "Kyaukpyu",
+      "province_id": "framework:province:kyaukpyu:901c624c7832",
+      "remaining_known_complement": 576,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B17691670471295"
+      ]
+    },
+    {
+      "owner": 30104,
+      "name": "Ponnagyun",
+      "province_id": "framework:province:sittwe:26bd272501d4",
+      "remaining_known_complement": 5,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B19696970616392"
+      ]
+    },
+    {
+      "owner": 30107,
+      "name": "Thandwe",
+      "province_id": "framework:province:thandwe:0c34a2318ad9",
+      "remaining_known_complement": 208,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B19990050947650"
+      ]
+    },
+    {
+      "owner": 30111,
+      "name": "Hpa-An",
+      "province_id": "framework:province:hpa-an:3b606d253d82",
+      "remaining_known_complement": 13,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B20948488348117"
+      ]
+    },
+    {
+      "owner": 30114,
+      "name": "Ngapudaw",
+      "province_id": "framework:province:pathein:d694e613f350",
+      "remaining_known_complement": 351,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B21473836197235"
+      ]
+    },
+    {
+      "owner": 30117,
+      "name": "Mudon",
+      "province_id": "framework:province:mawlamyine:86e6c5e7a4d8",
+      "remaining_known_complement": 14,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B22649797942784"
+      ]
+    },
+    {
+      "owner": 30121,
+      "name": "Thanatpin",
+      "province_id": "framework:province:bago:8d0140c2c434",
+      "remaining_known_complement": 37,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B23940339796351"
+      ]
+    },
+    {
+      "owner": 30123,
+      "name": "Minbya",
+      "province_id": "framework:province:mrauk-u:69b555f3ae5a",
+      "remaining_known_complement": 7,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B24588945269730"
+      ]
+    },
+    {
+      "owner": 30124,
+      "name": "Kawa",
+      "province_id": "framework:province:bago:8d0140c2c434",
+      "remaining_known_complement": 58,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B24871755522741"
+      ]
+    },
+    {
+      "owner": 30129,
+      "name": "Ramree",
+      "province_id": "framework:province:kyaukpyu:901c624c7832",
+      "remaining_known_complement": 226,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B25907056324587"
+      ]
+    },
+    {
+      "owner": 30130,
+      "name": "Dala",
+      "province_id": "framework:province:yangon-south:51d86e5c4f5a",
+      "remaining_known_complement": 25,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B26691855709091"
+      ]
+    },
+    {
+      "owner": 30141,
+      "name": "Kungyangon",
+      "province_id": "framework:province:yangon-south:51d86e5c4f5a",
+      "remaining_known_complement": 149,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B28699089666182"
+      ]
+    },
+    {
+      "owner": 30148,
+      "name": "Kyaikto",
+      "province_id": "framework:province:thaton:5b29afc4ccb5",
+      "remaining_known_complement": 30,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B30035671122346"
+      ]
+    },
+    {
+      "owner": 30152,
+      "name": "Thayetchaung",
+      "province_id": "framework:province:dawei:260a377dc059",
+      "remaining_known_complement": 179,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B32460181384532"
+      ]
+    },
+    {
+      "owner": 30159,
+      "name": "Thanlyin",
+      "province_id": "framework:province:yangon-south:51d86e5c4f5a",
+      "remaining_known_complement": 9,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B33396458700604"
+      ]
+    },
+    {
+      "owner": 30177,
+      "name": "Cocokyun",
+      "province_id": "framework:province:yangon-south:eff008f2cdff",
+      "remaining_known_complement": 173,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B36196103316909"
+      ]
+    },
+    {
+      "owner": 30179,
+      "name": "Myeik",
+      "province_id": "framework:province:myeik:2820a791707f",
+      "remaining_known_complement": 23,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B36911639137507"
+      ]
+    },
+    {
+      "owner": 30185,
+      "name": "Palaw",
+      "province_id": "framework:province:myeik:2820a791707f",
+      "remaining_known_complement": 835,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B40667774005147"
+      ]
+    },
+    {
+      "owner": 30187,
+      "name": "Thongwa",
+      "province_id": "framework:province:yangon-south:51d86e5c4f5a",
+      "remaining_known_complement": 1,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B40918846263989"
+      ]
+    },
+    {
+      "owner": 30202,
+      "name": "Mawlamyine",
+      "province_id": "framework:province:mawlamyine:86e6c5e7a4d8",
+      "remaining_known_complement": 105,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B45439994111599"
+      ]
+    },
+    {
+      "owner": 30213,
+      "name": "Paung",
+      "province_id": "framework:province:thaton:5b29afc4ccb5",
+      "remaining_known_complement": 330,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B46374660355499"
+      ]
+    },
+    {
+      "owner": 30214,
+      "name": "Kayan",
+      "province_id": "framework:province:yangon-south:51d86e5c4f5a",
+      "remaining_known_complement": 116,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B46397740219200"
+      ]
+    },
+    {
+      "owner": 30215,
+      "name": "Labutta",
+      "province_id": "framework:province:labutta:e3180df7e500",
+      "remaining_known_complement": 158,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B46433982831447"
+      ]
+    },
+    {
+      "owner": 30224,
+      "name": "Mrauk-U",
+      "province_id": "framework:province:mrauk-u:69b555f3ae5a",
+      "remaining_known_complement": 60,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B47520460749969"
+      ]
+    },
+    {
+      "owner": 30226,
+      "name": "Thanbyuzayat",
+      "province_id": "framework:province:mawlamyine:86e6c5e7a4d8",
+      "remaining_known_complement": 32,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B48286505509820"
+      ]
+    },
+    {
+      "owner": 30227,
+      "name": "Yebyu",
+      "province_id": "framework:province:dawei:260a377dc059",
+      "remaining_known_complement": 188,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B48301856519721"
+      ]
+    },
+    {
+      "owner": 30228,
+      "name": "Bogale",
+      "province_id": "framework:province:pyapon:a99fc70716da",
+      "remaining_known_complement": 40,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B48553142968450"
+      ]
+    },
+    {
+      "owner": 30232,
+      "name": "Toungup",
+      "province_id": "framework:province:thandwe:0c34a2318ad9",
+      "remaining_known_complement": 311,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B50609184171545"
+      ]
+    },
+    {
+      "owner": 30233,
+      "name": "Thaton",
+      "province_id": "framework:province:thaton:5b29afc4ccb5",
+      "remaining_known_complement": 86,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B50654546091874"
+      ]
+    },
+    {
+      "owner": 30238,
+      "name": "Botahtaung",
+      "province_id": "framework:province:yangon-east:404fc9173862",
+      "remaining_known_complement": 14,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B51516707971749"
+      ]
+    },
+    {
+      "owner": 30241,
+      "name": "Bilin",
+      "province_id": "framework:province:thaton:5b29afc4ccb5",
+      "remaining_known_complement": 148,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B52510382995497"
+      ]
+    },
+    {
+      "owner": 30248,
+      "name": "Kyaikmaraw",
+      "province_id": "framework:province:mawlamyine:86e6c5e7a4d8",
+      "remaining_known_complement": 12,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B55371715094402"
+      ]
+    },
+    {
+      "owner": 30252,
+      "name": "Kyauktan",
+      "province_id": "framework:province:yangon-south:51d86e5c4f5a",
+      "remaining_known_complement": 31,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B563703845722"
+      ]
+    },
+    {
+      "owner": 30255,
+      "name": "Chaungzon",
+      "province_id": "framework:province:mawlamyine:86e6c5e7a4d8",
+      "remaining_known_complement": 142,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B57686651613256"
+      ]
+    },
+    {
+      "owner": 30271,
+      "name": "Kyunsu",
+      "province_id": "framework:province:myeik:2820a791707f",
+      "remaining_known_complement": 3471,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B62167174305830"
+      ]
+    },
+    {
+      "owner": 30272,
+      "name": "Pyapon",
+      "province_id": "framework:province:pyapon:a99fc70716da",
+      "remaining_known_complement": 314,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B62212267926712"
+      ]
+    },
+    {
+      "owner": 30274,
+      "name": "Dedaye",
+      "province_id": "framework:province:pyapon:a99fc70716da",
+      "remaining_known_complement": 119,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B62732217443925"
+      ]
+    },
+    {
+      "owner": 30287,
+      "name": "Sittwe",
+      "province_id": "framework:province:sittwe:26bd272501d4",
+      "remaining_known_complement": 43,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B64895356281796"
+      ]
+    },
+    {
+      "owner": 30297,
+      "name": "Seikgyikanaungto",
+      "province_id": "framework:province:yangon-south:51d86e5c4f5a",
+      "remaining_known_complement": 2,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B66473456791866"
+      ]
+    },
+    {
+      "owner": 30303,
+      "name": "Gwa",
+      "province_id": "framework:province:thandwe:0c34a2318ad9",
+      "remaining_known_complement": 53,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B67553323255828"
+      ]
+    },
+    {
+      "owner": 30322,
+      "name": "Pauktaw",
+      "province_id": "framework:province:sittwe:26bd272501d4",
+      "remaining_known_complement": 401,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B72213195308331"
+      ]
+    },
+    {
+      "owner": 30327,
+      "name": "Ye",
+      "province_id": "framework:province:mawlamyine:86e6c5e7a4d8",
+      "remaining_known_complement": 187,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B73191723482857"
+      ]
+    },
+    {
+      "owner": 30332,
+      "name": "Rathedaung",
+      "province_id": "framework:province:sittwe:26bd272501d4",
+      "remaining_known_complement": 107,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B77467059166323"
+      ]
+    },
+    {
+      "owner": 30336,
+      "name": "Thabaung",
+      "province_id": "framework:province:pathein:d694e613f350",
+      "remaining_known_complement": 132,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B78974611272668"
+      ]
+    },
+    {
+      "owner": 30340,
+      "name": "Myebon",
+      "province_id": "framework:province:mrauk-u:69b555f3ae5a",
+      "remaining_known_complement": 601,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B80264177521474"
+      ]
+    },
+    {
+      "owner": 30342,
+      "name": "Launglon",
+      "province_id": "framework:province:dawei:260a377dc059",
+      "remaining_known_complement": 778,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B80414211212402"
+      ]
+    },
+    {
+      "owner": 30350,
+      "name": "Bokpyin",
+      "province_id": "framework:province:kawthoung:25f2b1f750b9",
+      "remaining_known_complement": 2163,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B82483484204646"
+      ]
+    },
+    {
+      "owner": 30353,
+      "name": "Pazundaung",
+      "province_id": "framework:province:yangon-east:404fc9173862",
+      "remaining_known_complement": 1,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B8454750486674"
+      ]
+    },
+    {
+      "owner": 30361,
+      "name": "Kawthoung",
+      "province_id": "framework:province:kawthoung:25f2b1f750b9",
+      "remaining_known_complement": 2679,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B86598910616989"
+      ]
+    },
+    {
+      "owner": 30392,
+      "name": "Ann",
+      "province_id": "framework:province:kyaukpyu:901c624c7832",
+      "remaining_known_complement": 47,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B95740508814243"
+      ]
+    },
+    {
+      "owner": 30399,
+      "name": "Pathein",
+      "province_id": "framework:province:pathein:d694e613f350",
+      "remaining_known_complement": 67,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B98470543554215"
+      ]
+    },
+    {
+      "owner": 30402,
+      "name": "Maungdaw",
+      "province_id": "framework:province:maungdaw:b1591a4daf84",
+      "remaining_known_complement": 80,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B98818104227605"
+      ]
+    },
+    {
+      "owner": 30403,
+      "name": "Thaketa",
+      "province_id": "framework:province:yangon-east:404fc9173862",
+      "remaining_known_complement": 5,
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B99723166439324"
+      ]
+    }
+  ],
+  "remaining_provinces": {
+    "framework:province:maungdaw:b1591a4daf84": 80,
+    "framework:province:sittwe:26bd272501d4": 556,
+    "framework:province:mrauk-u:69b555f3ae5a": 668,
+    "framework:province:kyaukpyu:901c624c7832": 1129,
+    "framework:province:thandwe:0c34a2318ad9": 572,
+    "framework:province:pathein:d694e613f350": 550,
+    "framework:province:bago:8d0140c2c434": 95,
+    "framework:province:thaton:5b29afc4ccb5": 594,
+    "framework:province:yangon-south:51d86e5c4f5a": 333,
+    "framework:province:yangon-east:404fc9173862": 20,
+    "framework:province:mawlamyine:86e6c5e7a4d8": 492,
+    "framework:province:hpa-an:3b606d253d82": 13,
+    "framework:province:pyapon:a99fc70716da": 473,
+    "framework:province:labutta:e3180df7e500": 158,
+    "framework:province:yangon-south:eff008f2cdff": 173,
+    "framework:province:dawei:260a377dc059": 1145,
+    "framework:province:myeik:2820a791707f": 4329,
+    "framework:province:kawthoung:25f2b1f750b9": 4842
+  },
+  "historical_exhaustive_completed_keyset": "UNTRACKED; 16222 is the exact complement of known adopted2237, not a claimed exhaustive historical unresolved count",
+  "prior2944_open_questions": "Included; earlier adopted_unresolved is not completed water/location interpretation",
+  "current_native_ownership": "Not established by this metadata scope. original owner/source association is not native current-owner or affirmative source spatial membership.",
+  "original_input": {
+    "path": ".cache/mmr-original-physical-metadata-shortlist-001/retained-original-remaining-intervals.json.gz",
+    "bytes": 92904,
+    "sha256": "b12b9ed64ecb16fa2b5501648fa4ca91727793fa99ceadffb96d9623519c93aa"
+  },
+  "lineage_input": ".cache/mmr-source-conflict-disposition-next-001/lineage.json.gz",
+  "source_feature_roster": ".cache/mmr-source-conflict-disposition-next-001/source-feature-roster.json.gz",
+  "repair_remaining_existing_file": ".cache/mmr-myeik-dated-repair-followon-001/original-repair-remaining-001/remaining3483-intervals.json"
+}

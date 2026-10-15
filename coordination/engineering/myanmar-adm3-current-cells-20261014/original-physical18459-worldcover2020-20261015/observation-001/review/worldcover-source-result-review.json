@@ -1,0 +1,70 @@
+{
+  "verdict": "PASS with scientific limits",
+  "source_report": {
+    "path": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/source-observations.json",
+    "bytes": 110009,
+    "sha256": "12c49030b9e082d7381965b907c93a5f979d11d217b40b53ede5447c705e03ec"
+  },
+  "exact_keys_joined": 16222,
+  "owner_groups": 54,
+  "source_tiles": 7,
+  "new_blocks_bound_and_hashed": 587,
+  "actual_complete_contexts": 16218,
+  "edge_indices": [
+    5726,
+    9790,
+    9791,
+    9792
+  ],
+  "literal_classes": {
+    "10": 6548,
+    "80": 6121,
+    "95": 2154,
+    "30": 240,
+    "60": 452,
+    "50": 74,
+    "40": 554,
+    "90": 76,
+    "20": 3
+  },
+  "raw_NPZ_sample_indices": [
+    0,
+    112,
+    2967,
+    3098,
+    3830,
+    5726,
+    5732,
+    6004,
+    9790,
+    9791,
+    9792,
+    9793,
+    9799,
+    9820,
+    10083,
+    10183,
+    10184,
+    10185,
+    10277,
+    10366,
+    10741,
+    11034,
+    12215
+  ],
+  "raw_NPZ_arrays": 19,
+  "raw_NPZ_sample_count": 23,
+  "retained_context_counts": {
+    "none": 13559,
+    "S2A_47PMP_20200105_0_L2A": 558,
+    "S2A_47PMM_20200125_0_L2A": 2105
+  },
+  "source_calls": 0,
+  "source_kernel_reexecuted": false,
+  "repair_or_answer_credit": 0,
+  "limits": [
+    "All per-key source fields/joins and saved block hashes checked; raw numerical NPZ checks are selected, not exhaustive re-extraction.",
+    "Actual annual2020 model labels and valid masks do not independently establish current truth, dry substrate, tidal/bank/jurisdiction, legal ownership or repair.",
+    "All four real frame-edge contexts stay null/incomplete; no fabricated cross-tile samples."
+  ]
+}

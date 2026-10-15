@@ -1,0 +1,738 @@
+{
+  "original": {
+    "keys": 18459,
+    "single_owner_source_part_interior": 18459,
+    "source_ADM2_interior": 18390,
+    "foreign_SID_reference_retained": 56,
+    "outside_source_ADM2": 69
+  },
+  "known_completed_subtracted": 2237,
+  "current_remainder": {
+    "keys": 16222,
+    "single_owner_source_part_interior": 16222,
+    "source_ADM2_interior": 16154,
+    "foreign_SID_reference_retained": 56,
+    "outside_source_ADM2": 68
+  },
+  "source_feature_year_claim": 2019,
+  "source_version": "geoBoundaries gbOpen MMR ADM3/ADM2 recorded consumed9469f09; whole retained9431af7b source corpus",
+  "actual_observation": {
+    "operations": 505,
+    "elapsed_seconds": 2.762098959,
+    "rss_at_final_boundary": 239206400,
+    "maximum_operation_scratch_bytes": 29379200,
+    "all_contact_kinds": {
+      "interior": 36849
+    }
+  },
+  "remaining_owner_groups": [
+    {
+      "owner": 30271,
+      "name": "Kyunsu",
+      "province_id": "framework:province:myeik:2820a791707f",
+      "original": 5667,
+      "remaining": 3471
+    },
+    {
+      "owner": 30361,
+      "name": "Kawthoung",
+      "province_id": "framework:province:kawthoung:25f2b1f750b9",
+      "original": 2680,
+      "remaining": 2679,
+      "remaining_outside_source_ADM2": 2
+    },
+    {
+      "owner": 30350,
+      "name": "Bokpyin",
+      "province_id": "framework:province:kawthoung:25f2b1f750b9",
+      "original": 2164,
+      "remaining": 2163,
+      "remaining_outside_source_ADM2": 3
+    },
+    {
+      "owner": 30185,
+      "name": "Palaw",
+      "province_id": "framework:province:myeik:2820a791707f",
+      "original": 835,
+      "remaining": 835
+    },
+    {
+      "owner": 30342,
+      "name": "Launglon",
+      "province_id": "framework:province:dawei:260a377dc059",
+      "original": 778,
+      "remaining": 778
+    },
+    {
+      "owner": 30340,
+      "name": "Myebon",
+      "province_id": "framework:province:mrauk-u:69b555f3ae5a",
+      "original": 601,
+      "remaining": 601,
+      "remaining_outside_source_ADM2": 2
+    },
+    {
+      "owner": 30100,
+      "name": "Kyaukpyu",
+      "province_id": "framework:province:kyaukpyu:901c624c7832",
+      "original": 576,
+      "remaining": 576
+    },
+    {
+      "owner": 30322,
+      "name": "Pauktaw",
+      "province_id": "framework:province:sittwe:26bd272501d4",
+      "original": 401,
+      "remaining": 401
+    },
+    {
+      "owner": 30114,
+      "name": "Ngapudaw",
+      "province_id": "framework:province:pathein:d694e613f350",
+      "original": 351,
+      "remaining": 351,
+      "remaining_outside_source_ADM2": 1
+    },
+    {
+      "owner": 30213,
+      "name": "Paung",
+      "province_id": "framework:province:thaton:5b29afc4ccb5",
+      "original": 330,
+      "remaining": 330
+    },
+    {
+      "owner": 30272,
+      "name": "Pyapon",
+      "province_id": "framework:province:pyapon:a99fc70716da",
+      "original": 314,
+      "remaining": 314,
+      "remaining_outside_source_ADM2": 3
+    },
+    {
+      "owner": 30232,
+      "name": "Toungup",
+      "province_id": "framework:province:thandwe:0c34a2318ad9",
+      "original": 311,
+      "remaining": 311,
+      "remaining_outside_source_ADM2": 1
+    },
+    {
+      "owner": 30081,
+      "name": "Munaung",
+      "province_id": "framework:province:kyaukpyu:901c624c7832",
+      "original": 280,
+      "remaining": 280
+    },
+    {
+      "owner": 30129,
+      "name": "Ramree",
+      "province_id": "framework:province:kyaukpyu:901c624c7832",
+      "original": 226,
+      "remaining": 226
+    },
+    {
+      "owner": 30107,
+      "name": "Thandwe",
+      "province_id": "framework:province:thandwe:0c34a2318ad9",
+      "original": 208,
+      "remaining": 208
+    },
+    {
+      "owner": 30227,
+      "name": "Yebyu",
+      "province_id": "framework:province:dawei:260a377dc059",
+      "original": 188,
+      "remaining": 188,
+      "remaining_outside_source_ADM2": 3
+    },
+    {
+      "owner": 30327,
+      "name": "Ye",
+      "province_id": "framework:province:mawlamyine:86e6c5e7a4d8",
+      "original": 187,
+      "remaining": 187
+    },
+    {
+      "owner": 30152,
+      "name": "Thayetchaung",
+      "province_id": "framework:province:dawei:260a377dc059",
+      "original": 179,
+      "remaining": 179
+    },
+    {
+      "owner": 30177,
+      "name": "Cocokyun",
+      "province_id": "framework:province:yangon-south:eff008f2cdff",
+      "original": 173,
+      "remaining": 173
+    },
+    {
+      "owner": 30215,
+      "name": "Labutta",
+      "province_id": "framework:province:labutta:e3180df7e500",
+      "original": 158,
+      "remaining": 158
+    },
+    {
+      "owner": 30141,
+      "name": "Kungyangon",
+      "province_id": "framework:province:yangon-south:51d86e5c4f5a",
+      "original": 149,
+      "remaining": 149
+    },
+    {
+      "owner": 30241,
+      "name": "Bilin",
+      "province_id": "framework:province:thaton:5b29afc4ccb5",
+      "original": 148,
+      "remaining": 148
+    },
+    {
+      "owner": 30255,
+      "name": "Chaungzon",
+      "province_id": "framework:province:mawlamyine:86e6c5e7a4d8",
+      "original": 142,
+      "remaining": 142
+    },
+    {
+      "owner": 30336,
+      "name": "Thabaung",
+      "province_id": "framework:province:pathein:d694e613f350",
+      "original": 132,
+      "remaining": 132,
+      "remaining_outside_source_ADM2": 2
+    },
+    {
+      "owner": 30274,
+      "name": "Dedaye",
+      "province_id": "framework:province:pyapon:a99fc70716da",
+      "original": 119,
+      "remaining": 119,
+      "remaining_outside_source_ADM2": 11
+    },
+    {
+      "owner": 30214,
+      "name": "Kayan",
+      "province_id": "framework:province:yangon-south:51d86e5c4f5a",
+      "original": 116,
+      "remaining": 116
+    },
+    {
+      "owner": 30332,
+      "name": "Rathedaung",
+      "province_id": "framework:province:sittwe:26bd272501d4",
+      "original": 107,
+      "remaining": 107,
+      "remaining_outside_source_ADM2": 7
+    },
+    {
+      "owner": 30202,
+      "name": "Mawlamyine",
+      "province_id": "framework:province:mawlamyine:86e6c5e7a4d8",
+      "original": 105,
+      "remaining": 105
+    },
+    {
+      "owner": 30233,
+      "name": "Thaton",
+      "province_id": "framework:province:thaton:5b29afc4ccb5",
+      "original": 86,
+      "remaining": 86,
+      "remaining_outside_source_ADM2": 6
+    },
+    {
+      "owner": 30402,
+      "name": "Maungdaw",
+      "province_id": "framework:province:maungdaw:b1591a4daf84",
+      "original": 80,
+      "remaining": 80
+    },
+    {
+      "owner": 30399,
+      "name": "Pathein",
+      "province_id": "framework:province:pathein:d694e613f350",
+      "original": 67,
+      "remaining": 67
+    },
+    {
+      "owner": 30224,
+      "name": "Mrauk-U",
+      "province_id": "framework:province:mrauk-u:69b555f3ae5a",
+      "original": 60,
+      "remaining": 60
+    },
+    {
+      "owner": 30124,
+      "name": "Kawa",
+      "province_id": "framework:province:bago:8d0140c2c434",
+      "original": 58,
+      "remaining": 58
+    },
+    {
+      "owner": 30303,
+      "name": "Gwa",
+      "province_id": "framework:province:thandwe:0c34a2318ad9",
+      "original": 53,
+      "remaining": 53
+    },
+    {
+      "owner": 30392,
+      "name": "Ann",
+      "province_id": "framework:province:kyaukpyu:901c624c7832",
+      "original": 47,
+      "remaining": 47
+    },
+    {
+      "owner": 30287,
+      "name": "Sittwe",
+      "province_id": "framework:province:sittwe:26bd272501d4",
+      "original": 43,
+      "remaining": 43
+    },
+    {
+      "owner": 30228,
+      "name": "Bogale",
+      "province_id": "framework:province:pyapon:a99fc70716da",
+      "original": 40,
+      "remaining": 40
+    },
+    {
+      "owner": 30121,
+      "name": "Thanatpin",
+      "province_id": "framework:province:bago:8d0140c2c434",
+      "original": 37,
+      "remaining": 37
+    },
+    {
+      "owner": 30226,
+      "name": "Thanbyuzayat",
+      "province_id": "framework:province:mawlamyine:86e6c5e7a4d8",
+      "original": 32,
+      "remaining": 32
+    },
+    {
+      "owner": 30252,
+      "name": "Kyauktan",
+      "province_id": "framework:province:yangon-south:51d86e5c4f5a",
+      "original": 31,
+      "remaining": 31,
+      "remaining_outside_source_ADM2": 22
+    },
+    {
+      "owner": 30148,
+      "name": "Kyaikto",
+      "province_id": "framework:province:thaton:5b29afc4ccb5",
+      "original": 30,
+      "remaining": 30,
+      "remaining_outside_source_ADM2": 5
+    },
+    {
+      "owner": 30130,
+      "name": "Dala",
+      "province_id": "framework:province:yangon-south:51d86e5c4f5a",
+      "original": 25,
+      "remaining": 25
+    },
+    {
+      "owner": 30179,
+      "name": "Myeik",
+      "province_id": "framework:province:myeik:2820a791707f",
+      "original": 62,
+      "remaining": 23
+    },
+    {
+      "owner": 30238,
+      "name": "Botahtaung",
+      "province_id": "framework:province:yangon-east:404fc9173862",
+      "original": 14,
+      "remaining": 14
+    },
+    {
+      "owner": 30117,
+      "name": "Mudon",
+      "province_id": "framework:province:mawlamyine:86e6c5e7a4d8",
+      "original": 14,
+      "remaining": 14
+    },
+    {
+      "owner": 30111,
+      "name": "Hpa-An",
+      "province_id": "framework:province:hpa-an:3b606d253d82",
+      "original": 13,
+      "remaining": 13
+    },
+    {
+      "owner": 30248,
+      "name": "Kyaikmaraw",
+      "province_id": "framework:province:mawlamyine:86e6c5e7a4d8",
+      "original": 12,
+      "remaining": 12
+    },
+    {
+      "owner": 30159,
+      "name": "Thanlyin",
+      "province_id": "framework:province:yangon-south:51d86e5c4f5a",
+      "original": 9,
+      "remaining": 9
+    },
+    {
+      "owner": 30123,
+      "name": "Minbya",
+      "province_id": "framework:province:mrauk-u:69b555f3ae5a",
+      "original": 7,
+      "remaining": 7
+    },
+    {
+      "owner": 30104,
+      "name": "Ponnagyun",
+      "province_id": "framework:province:sittwe:26bd272501d4",
+      "original": 5,
+      "remaining": 5
+    },
+    {
+      "owner": 30403,
+      "name": "Thaketa",
+      "province_id": "framework:province:yangon-east:404fc9173862",
+      "original": 5,
+      "remaining": 5
+    },
+    {
+      "owner": 30297,
+      "name": "Seikgyikanaungto",
+      "province_id": "framework:province:yangon-south:51d86e5c4f5a",
+      "original": 2,
+      "remaining": 2
+    },
+    {
+      "owner": 30187,
+      "name": "Thongwa",
+      "province_id": "framework:province:yangon-south:51d86e5c4f5a",
+      "original": 1,
+      "remaining": 1
+    },
+    {
+      "owner": 30353,
+      "name": "Pazundaung",
+      "province_id": "framework:province:yangon-east:404fc9173862",
+      "original": 1,
+      "remaining": 1
+    }
+  ],
+  "largest_remaining_source_polygon_parts": [
+    {
+      "owner": 30350,
+      "owner_name": "Bokpyin",
+      "source_index": 45117,
+      "part_ordinal": 38,
+      "keys": 507
+    },
+    {
+      "owner": 30361,
+      "owner_name": "Kawthoung",
+      "source_index": 45110,
+      "part_ordinal": 51,
+      "keys": 386
+    },
+    {
+      "owner": 30361,
+      "owner_name": "Kawthoung",
+      "source_index": 45110,
+      "part_ordinal": 23,
+      "keys": 352
+    },
+    {
+      "owner": 30342,
+      "owner_name": "Launglon",
+      "source_index": 45116,
+      "part_ordinal": 7,
+      "keys": 326
+    },
+    {
+      "owner": 30271,
+      "owner_name": "Kyunsu",
+      "source_index": 45111,
+      "part_ordinal": 16,
+      "keys": 300
+    },
+    {
+      "owner": 30271,
+      "owner_name": "Kyunsu",
+      "source_index": 45111,
+      "part_ordinal": 6,
+      "keys": 289
+    },
+    {
+      "owner": 30081,
+      "owner_name": "Munaung",
+      "source_index": 45038,
+      "part_ordinal": 2,
+      "keys": 218
+    },
+    {
+      "owner": 30271,
+      "owner_name": "Kyunsu",
+      "source_index": 45111,
+      "part_ordinal": 96,
+      "keys": 212
+    },
+    {
+      "owner": 30185,
+      "owner_name": "Palaw",
+      "source_index": 45127,
+      "part_ordinal": 17,
+      "keys": 197
+    },
+    {
+      "owner": 30361,
+      "owner_name": "Kawthoung",
+      "source_index": 45110,
+      "part_ordinal": 14,
+      "keys": 185
+    },
+    {
+      "owner": 30107,
+      "owner_name": "Thandwe",
+      "source_index": 45025,
+      "part_ordinal": 2,
+      "keys": 182
+    },
+    {
+      "owner": 30152,
+      "owner_name": "Thayetchaung",
+      "source_index": 45131,
+      "part_ordinal": 0,
+      "keys": 179
+    },
+    {
+      "owner": 30322,
+      "owner_name": "Pauktaw",
+      "source_index": 45146,
+      "part_ordinal": 4,
+      "keys": 173
+    },
+    {
+      "owner": 30232,
+      "owner_name": "Toungup",
+      "source_index": 45001,
+      "part_ordinal": 4,
+      "keys": 170
+    },
+    {
+      "owner": 30271,
+      "owner_name": "Kyunsu",
+      "source_index": 45111,
+      "part_ordinal": 7,
+      "keys": 158
+    },
+    {
+      "owner": 30272,
+      "owner_name": "Pyapon",
+      "source_index": 45034,
+      "part_ordinal": 1,
+      "keys": 151
+    },
+    {
+      "owner": 30350,
+      "owner_name": "Bokpyin",
+      "source_index": 45117,
+      "part_ordinal": 23,
+      "keys": 150
+    },
+    {
+      "owner": 30241,
+      "owner_name": "Bilin",
+      "source_index": 45097,
+      "part_ordinal": 0,
+      "keys": 148
+    },
+    {
+      "owner": 30185,
+      "owner_name": "Palaw",
+      "source_index": 45127,
+      "part_ordinal": 15,
+      "keys": 148
+    },
+    {
+      "owner": 30350,
+      "owner_name": "Bokpyin",
+      "source_index": 45117,
+      "part_ordinal": 13,
+      "keys": 144
+    },
+    {
+      "owner": 30213,
+      "owner_name": "Paung",
+      "source_index": 45120,
+      "part_ordinal": 1,
+      "keys": 139
+    },
+    {
+      "owner": 30327,
+      "owner_name": "Ye",
+      "source_index": 45093,
+      "part_ordinal": 4,
+      "keys": 135
+    },
+    {
+      "owner": 30336,
+      "owner_name": "Thabaung",
+      "source_index": 45020,
+      "part_ordinal": 0,
+      "keys": 132
+    },
+    {
+      "owner": 30114,
+      "owner_name": "Ngapudaw",
+      "source_index": 45022,
+      "part_ordinal": 12,
+      "keys": 130
+    },
+    {
+      "owner": 30271,
+      "owner_name": "Kyunsu",
+      "source_index": 45111,
+      "part_ordinal": 21,
+      "keys": 124
+    },
+    {
+      "owner": 30141,
+      "owner_name": "Kungyangon",
+      "source_index": 45028,
+      "part_ordinal": 0,
+      "keys": 123
+    },
+    {
+      "owner": 30350,
+      "owner_name": "Bokpyin",
+      "source_index": 45117,
+      "part_ordinal": 9,
+      "keys": 122
+    },
+    {
+      "owner": 30361,
+      "owner_name": "Kawthoung",
+      "source_index": 45110,
+      "part_ordinal": 19,
+      "keys": 122
+    },
+    {
+      "owner": 30129,
+      "owner_name": "Ramree",
+      "source_index": 44994,
+      "part_ordinal": 2,
+      "keys": 118
+    },
+    {
+      "owner": 30342,
+      "owner_name": "Launglon",
+      "source_index": 45116,
+      "part_ordinal": 6,
+      "keys": 118
+    },
+    {
+      "owner": 30214,
+      "owner_name": "Kayan",
+      "source_index": 44991,
+      "part_ordinal": 0,
+      "keys": 116
+    },
+    {
+      "owner": 30271,
+      "owner_name": "Kyunsu",
+      "source_index": 45111,
+      "part_ordinal": 34,
+      "keys": 111
+    },
+    {
+      "owner": 30361,
+      "owner_name": "Kawthoung",
+      "source_index": 45110,
+      "part_ordinal": 20,
+      "keys": 110
+    },
+    {
+      "owner": 30100,
+      "owner_name": "Kyaukpyu",
+      "source_index": 45005,
+      "part_ordinal": 8,
+      "keys": 107
+    },
+    {
+      "owner": 30255,
+      "owner_name": "Chaungzon",
+      "source_index": 45096,
+      "part_ordinal": 1,
+      "keys": 107
+    },
+    {
+      "owner": 30227,
+      "owner_name": "Yebyu",
+      "source_index": 45129,
+      "part_ordinal": 5,
+      "keys": 107
+    },
+    {
+      "owner": 30350,
+      "owner_name": "Bokpyin",
+      "source_index": 45117,
+      "part_ordinal": 27,
+      "keys": 107
+    },
+    {
+      "owner": 30271,
+      "owner_name": "Kyunsu",
+      "source_index": 45111,
+      "part_ordinal": 19,
+      "keys": 102
+    },
+    {
+      "owner": 30322,
+      "owner_name": "Pauktaw",
+      "source_index": 45146,
+      "part_ordinal": 3,
+      "keys": 101
+    },
+    {
+      "owner": 30271,
+      "owner_name": "Kyunsu",
+      "source_index": 45111,
+      "part_ordinal": 59,
+      "keys": 101
+    }
+  ],
+  "remaining_foreign_reference_groups": [
+    {
+      "source_member": {
+        "source_index": 2713,
+        "family_index": 29,
+        "source_id": "gb:BGD:ADM1:32408957B94023193097291",
+        "ordinal": 0,
+        "owners": [],
+        "name": "Chittagong",
+        "geometry_status": "raw-native-supported"
+      },
+      "keys": 17
+    },
+    {
+      "source_member": {
+        "source_index": 66907,
+        "family_index": 367,
+        "source_id": "gb:IND:ADM3:7132399B69120942135341",
+        "ordinal": 161,
+        "owners": [],
+        "name": "Diglipur",
+        "geometry_status": "raw-native-supported"
+      },
+      "keys": 39
+    }
+  ],
+  "source_ADM2_mismatch_vs_original_SIDs": 0,
+  "new_physical_answer_credit": 0,
+  "native_or_repair_credit": 0,
+  "adequacy": "Every remainder key now has exact original owner/source shapeID/name/ordinal/SID and complete source polygon part point association, preserving all other original source references and ADM2 exterior facts. Source-part ordinals do not invent natural-body names or legal/physical facts. Join worker1 independently interpreted annualWorldCover2020 source observations for source-year-qualified surface answers; neither part identity nor source classifier value alone establishes coast/tide/2019 equivalence or ownership.",
+  "limits": [
+    "Source2019 represented-year claim only; complete raw selected source geometries are not universal legal/physical truth.",
+    "Every original active SID is retained, including foreign/coarse context; source observations do not reassign original owner.",
+    "Per-part point facts corroborate body/location association, never require rerunning completed source coverage or provide native/repair/territorial authority."
+  ]
+}

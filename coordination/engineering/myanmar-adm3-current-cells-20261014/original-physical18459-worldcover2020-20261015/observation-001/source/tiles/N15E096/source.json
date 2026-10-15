@@ -1,0 +1,71 @@
+{
+  "tile": "N15E096",
+  "url": "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v100/2020/map/ESA_WorldCover_10m_2020_v100_N15E096_Map.tif",
+  "status": "opened-native-cog",
+  "http": {
+    "status": 200,
+    "headers": {
+      "x-amz-id-2": "IXDSP2qa1cYAkMeQLC65cFhEeFQjK9HLWEn1zfaxx+d0XfbRIhc7nya8VWqzoxRwcIpxSeFcok0R70LTZQuk57E3ShxsM0dJ",
+      "x-amz-request-id": "7W93FWETE8RXWE72",
+      "Server": "AmazonS3",
+      "Date": "Thu, 15 Oct 2026 23:13:57 GMT",
+      "Last-Modified": "Tue, 25 Oct 2022 13:32:35 GMT",
+      "ETag": "\"c0de21a1a10d8fe0814ea892dc4bb1f3-7\"",
+      "x-amz-server-side-encryption": "AES256",
+      "Accept-Ranges": "bytes",
+      "Content-Length": "58272433",
+      "Content-Type": "image/tiff",
+      "Connection": "close"
+    }
+  },
+  "source_identity": {
+    "last-modified": "Tue, 25 Oct 2022 13:32:35 GMT",
+    "etag": "\"c0de21a1a10d8fe0814ea892dc4bb1f3-7\"",
+    "accept-ranges": "bytes",
+    "content-length": "58272433"
+  },
+  "crs": "EPSG:4326",
+  "transform": [
+    8.333333333333333e-05,
+    0.0,
+    96.0,
+    0.0,
+    -8.333333333333333e-05,
+    18.0,
+    0.0,
+    0.0,
+    1.0
+  ],
+  "shape": [
+    36000,
+    36000
+  ],
+  "block_shapes": [
+    [
+      1024,
+      1024
+    ]
+  ],
+  "nodata": 0.0,
+  "tags": {
+    "algorithm_version": "V1.0.0",
+    "copyright": "ESA WorldCover project 2020 / Contains modified Copernicus Sentinel data (2020) processed by ESA WorldCover consortium",
+    "creation_time": "2021-10-12 16:51:26.705020",
+    "legend": "10  Tree cover\n    20  Shrubland\n    30  Grassland\n    40  Cropland\n    50  Built-up\n    60  Bare/sparse vegetation\n    70  Snow and ice\n    80  Permanent water bodies\n    90  Herbaceous wetland\n    95  Mangroves\n    100 Moss and lichen\n    ",
+    "license": "CC-BY 4.0 - https://creativecommons.org/licenses/by/4.0/",
+    "OVR_RESAMPLING_ALG": "MODE",
+    "product_crs": "EPSG:4326",
+    "product_grid": "3x3 degree tiling grid",
+    "product_tile": "N15E096",
+    "product_type": "LandCover Map",
+    "product_version": "V1.0.0",
+    "reference": "https://esa-worldcover.org",
+    "time_end": "2020-12-31T23:59:59Z",
+    "time_start": "2020-01-01T00:00:00Z",
+    "title": "ESA WorldCover product at 10m resolution for year 2020",
+    "AREA_OR_POINT": "Area"
+  },
+  "mask_flags": "([<MaskFlags.nodata: 8>],)",
+  "keys": 1577,
+  "full_source_hash_claimed": false
+}

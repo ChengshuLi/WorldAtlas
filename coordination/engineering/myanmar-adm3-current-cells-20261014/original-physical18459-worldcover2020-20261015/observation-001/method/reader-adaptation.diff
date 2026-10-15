@@ -1,0 +1,36 @@
+--- /Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/read_points.py
++++ retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/read_points.py
+@@ -6,13 +6,14 @@
+ """
+ from pathlib import Path
+ import collections,datetime,hashlib,io,json,os,resource,sys,time,urllib.error,urllib.request
++sys.path.insert(0, 'configured-existing-runtime:worldcover-reader')
+ import numpy as np
+ import rasterio
+ from rasterio.windows import Window
+ ROOT=Path(__file__).resolve().parent
+ PLAN=ROOT/'point-plan.jsonl';CACHE=ROOT/'cache-inputs.json'
+-PLAN_SHA='53ce34ad1897ed61f7404729ed19dbed373dc1005b38055c4349559070294a8e'
+-CACHE_SHA='6f7a96239ba2f4d982bedb76b76b4833c6a609115f1e0d2ccee3882cd378137d'
++PLAN_SHA='fb3db9d02a72c066f8908826eb143adefa1b566277f9ac51ed11e630089d5f52'
++CACHE_SHA='e6662e31e4ac40c32034858d75713ee3d2704648c150d9a08db0bfd39d561396'
+ def sha(b):return hashlib.sha256(b).hexdigest()
+ def utc():return datetime.datetime.now(datetime.timezone.utc).isoformat()
+ def atomic_json(path,value):
+@@ -25,7 +26,7 @@
+ started=time.monotonic();began=utc();code_sha=sha(Path(__file__).read_bytes())
+ b=PLAN.read_bytes();assert sha(b)==PLAN_SHA;points=[json.loads(x) for x in b.splitlines()];del b
+ b=CACHE.read_bytes();assert sha(b)==CACHE_SHA;cache=json.loads(b);del b
+-assert len(points)==80712
++assert len(points)==16222
+ by_tile=collections.defaultdict(list)
+ for p in points:by_tile[p['tile']].append(p)
+ oldblocks={(r['tile'],*r['native_block']):r for r in cache['arrays']}
+@@ -148,6 +149,6 @@
+    print(json.dumps({'event':'tile-complete','tile':tile,'keys':len(members),'completed_keys':sum(counts.values())}),flush=True)
+   except Exception as e:
+    failure={'tile':tile,'error_type':type(e).__name__,'error':str(e),'time_utc':utc()};atomic_json(folder/'attempt-failure.json',failure);failures.append(failure);print(json.dumps({'event':'tile-failed',**failure}),flush=True);break
+-report={'kind':'original-physical-source-unread-worldcover-observations-not-answers','source_year':2020,'source_version':'v100','license':'CC BY4.0','attribution':'ESA WorldCover project2020 / Contains modified Copernicus Sentinel data(2020) processed by ESA WorldCover consortium','plan':filepin(PLAN),'cache_inputs':filepin(CACHE),'reader_sha256':code_sha,'started_utc':began,'ended_utc':utc(),'elapsed_seconds':time.monotonic()-started,'observed_process_peak_rss_bytes':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,'runtime':{'python':sys.version,'rasterio':rasterio.__version__,'gdal':rasterio.__gdal_version__,'numpy':np.__version__},'complete':not failures and sum(counts.values())==80712,'requested_keys':80712,'observed_keys':sum(counts.values()),'coverage_status_counts':dict(counts),'literal_class_counts':dict(values),'sources':sources,'tile_products':tile_products,'newly_read_native_blocks':newly_read_blocks,'reused_new_native_blocks':reused_new_blocks,'prior_saved_arrays_used':sorted(old_arrays_used),'failures':failures,'new_answers':0,'repair_credit':0,'limits':['Source predictions/validity only, not physical answers or territorial/nativeauthority/adoption.','No whole remoteTIFFhash or InputQuality claim.','Missing tile/nodata/invalid/outside are not ocean.','Four actual source-tile-edge contexts remain incomplete; no cross-tile fabrication.','Old point observations/point_indices were not reused for new keys; new values came from actual saved/new native arrays.']}
++report={'kind':'original-physical-source-unread-worldcover-observations-not-answers','source_year':2020,'source_version':'v100','license':'CC BY4.0','attribution':'ESA WorldCover project2020 / Contains modified Copernicus Sentinel data(2020) processed by ESA WorldCover consortium','plan':filepin(PLAN),'cache_inputs':filepin(CACHE),'reader_sha256':code_sha,'started_utc':began,'ended_utc':utc(),'elapsed_seconds':time.monotonic()-started,'observed_process_peak_rss_bytes':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,'runtime':{'python':sys.version,'rasterio':rasterio.__version__,'gdal':rasterio.__gdal_version__,'numpy':np.__version__},'complete':not failures and sum(counts.values())==16222,'requested_keys':16222,'observed_keys':sum(counts.values()),'coverage_status_counts':dict(counts),'literal_class_counts':dict(values),'sources':sources,'tile_products':tile_products,'newly_read_native_blocks':newly_read_blocks,'reused_new_native_blocks':reused_new_blocks,'prior_saved_arrays_used':sorted(old_arrays_used),'failures':failures,'new_answers':0,'repair_credit':0,'limits':['Source predictions/validity only, not physical answers or territorial/nativeauthority/adoption.','No whole remoteTIFFhash or InputQuality claim.','Missing tile/nodata/invalid/outside are not ocean.','Actual source-tile-edge contexts are reported perkey; no cross-tile fabrication.','Old point observations/point_indices were not reused for new keys; new values came from actual saved/new native arrays.']}
+ pin=atomic_json(ROOT/'source-observations.json',report);print(json.dumps({'event':'complete'if report['complete']else'incomplete','report':pin,'count':report['observed_keys'],'coverage_status_counts':dict(counts),'newly_read_native_blocks':newly_read_blocks,'reused_new_native_blocks':reused_new_blocks,'failures':failures}),flush=True)
+ sys.exit(0 if report['complete']else 1)
