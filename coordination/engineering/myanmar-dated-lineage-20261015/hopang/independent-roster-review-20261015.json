@@ -1,0 +1,37 @@
+{
+  "reviewer": "/root/authority_binding_review",
+  "date": "2026-10-15",
+  "disposition": "accepted-with-limits for independently verified roster transcription and nominal identity/history joins; MIC body not independently verified",
+  "inputs": [
+    {
+      "path": "hopang/panwai-pangwaun-addendum-20261015.json",
+      "bytes": 3554,
+      "sha256": "77e8dd4b5cff5aa279f7d001da16dac12fc468e7a0ca26d533b26d239780c397"
+    },
+    {
+      "path": "hopang/bilingual-roster-rows-20261015.json",
+      "bytes": 7106,
+      "sha256": "428d994ee7e584338cca8869ea791cdb56acb7e3f1d9fc79006e436b29a5f37d"
+    },
+    {
+      "path": "hopang/hopang-formation-split-roster-20261015.json",
+      "bytes": 5606,
+      "sha256": "bcb743732684b63d4f9dc40657c0b4c53b747a67489ad6408650eb5cac3ec59e"
+    }
+  ],
+  "verified": {
+    "workbook_sha256": "11fff1b1eca8b1ff3cad3b0a90e757a187ae0b9cdc396bac708136da36ccdda2",
+    "method": "stdlib ZIP/XML only; no macros. Compared all cells and header-mapped fields of3 township rows and5 formation/split rows to actual workbook. Header row1 for district,6 for township.",
+    "dates": "workbookPr has no date1904 flag. Serial40786=2011-08-31;41275=2013-01-01, all extracted date fields match. These are roster dates, not independently authenticated original-order effective dates.",
+    "bilingual": "Pangwaun / ပန်ဝိုင် in the same row283, Tsp_PcodeMMR015007, parentMMR015D006; Mongmao row266 and Hopang row245 have matching parent. This resolves transliteration at roster named-unit level.",
+    "history": "All3 retained owners have Change of District records200/21-74/U-1,2011-08-31; Hopang from literal Kunglon, other2 from Lashio. District rows65/66 and Matman/Narphan/Pangsang township rows265/277/282 consistently record split/transfer under No.930/2013 and serial41275. Six-member earlier scope is a retrospective roster inference, not a read original notification.",
+    "source_identity": "Read immutable5585b47a083e11b060b186db17a8420a0cf49c17 evidence-notes via offlineGit; exact owners30220/30268/30324 and shapeIDs, parent44965,129+141+46=316 match new addendum."
+  },
+  "namespace_limits": [
+    "MMR015D006 district is distinct from MMR015S501 Wa division and township codes.",
+    "Matman Tsp_PcodeMMR015024 differs from literal MYAINFO_TS_ID ASIMMR016004; preserve both namespaces, do not normalize or equate mechanically.",
+    "No geoBoundaries shapeID occurs in roster; name correspondence is not a Pcode-to-shape boundary crosswalk."
+  ],
+  "MIC_limit": "MIC10/2017 PDFp1/p7 existed only as author web-tool text; no retained PDF/text/image is available. Author confirmed screenshot payload was not visually inspected. This review cannot independently confirm2017 membership/date from the primary body; that part remains attributed prior author observation, not independently reviewed primary text. No new acquisition performed.",
+  "conclusion": "The earlier six-member scope cannot be inherited as the three-owner footprint. The authenticated retrospective roster supports named district membership and recorded split, with original instruments unseen. All316 remain held; no source/physical/foreign/topology/geometry/native/current-owner-zero or release clearance."
+}

@@ -1,0 +1,69 @@
+{
+  "status": "new-original-instrument-read; named-unit-parent support only; all 316 held",
+  "new_primary_instrument": {
+    "issuer": "Myanmar Investment Commission",
+    "notification": "10/2017",
+    "date": "2017-02-22",
+    "title": "Designation of Development Zone",
+    "url": "https://www.myanmartradeportal.gov.mm/uploads/legals/2018/6/10-2017%20(Designation%20of%20Development%20Zone%20(Myan)).pdf",
+    "custody": "Government trade portal PDF read through web PDF text; 17 pages; pages 1 and 7 inspected, screenshot requests also made. No local whole-byte acquisition or hash claimed.",
+    "page_one_based": 7,
+    "table": "Zone 1 / Shan State / Hopang District / entries 37–39",
+    "literal_named_units": [
+      "ဟိုပန်",
+      "မိုင်းမော",
+      "ပန်ဝိုင်"
+    ],
+    "reading": "Hopang District groups Hopang, Mongmao and Panwai townships. The next district heading is Matman with its separate three townships.",
+    "scope": "Investment tax-zone designation, not district formation or boundary delimitation; no shapeIDs, coordinates, annex polygons, or de facto control proof."
+  },
+  "new_authoritative_coding_context": {
+    "url": "https://themimu.info/sites/themimu.info/files/documents/MIMU_PCodesMajorChangesbetweenVersionV9.1and9.2_20Mar2020.pdf",
+    "date": "2020-03-20",
+    "page_one_based": 4,
+    "reading": "Hopang and Matman districts are reassigned to Wa Self-Administered Division in MIMU coding; Hopang district retains MMR015D006.",
+    "limit": "Coding hierarchy update based on GAD information; not original legal transfer instrument or geometry."
+  },
+  "retained_binding": {
+    "commit": "5585b47a083e11b060b186db17a8420a0cf49c17",
+    "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/primary-research-002/hopang/evidence-notes.json",
+    "parent": "framework:province:hopang:0da07191a98c",
+    "source_parent_sid": 44965,
+    "source_parent_id": "gb:MMR:ADM2:60261553B42594704122339"
+  },
+  "owner_applicability": [
+    {
+      "owner": 30220,
+      "id": "gb:MMR:ADM3:66882298B47048273457297",
+      "source_name": "Mongmao",
+      "cells": 129,
+      "outcome": "New official township list supports named Mongmao-to-Hopang District membership; source shape identity and selected boundaries remain separate proof obligations."
+    },
+    {
+      "owner": 30324,
+      "id": "gb:MMR:ADM3:66882298B72712470803341",
+      "source_name": "Hopang",
+      "cells": 46,
+      "outcome": "New official township list supports named Hopang-to-Hopang District membership, independently of retained 2019 GAD profile; no exact-cell clearance."
+    },
+    {
+      "owner": 30268,
+      "id": "gb:MMR:ADM3:66882298B60976321477453",
+      "source_name": "Pangwaun",
+      "cells": 141,
+      "outcome": "Official list says Panwai (ပန်ဝိုင်), not literal source name Pangwaun. Candidate correspondence is stronger in the exact three-township district context but no authoritative source-ID/alias crosswalk has been read; do not silently equate."
+    }
+  ],
+  "concrete_change": "The prior missing complete named township-to-district list is now supplied for the 2017 tax-zone instrument. It gives positive district membership support for the 175 cells carried by the two named matching owners; it does not establish their point-level ownership. Pangwaun/Panwai alias remains an explicit 141-cell identity gap.",
+  "still_held": 316,
+  "remaining_exact_gaps": [
+    "Authoritative alias/source identity bridge for Pangwaun to Panwai, rather than name resemblance or completeness inference.",
+    "Applicability from 2017 administrative list to the source vintage; no original district creation/transfer order inspected.",
+    "China reference/foreign overlap, selected topology conflicts and holes, full original physical and native positive predicates have not been resolved by this document."
+  ],
+  "execution_limits": [
+    "No geometry, source classifier, native authority, GSHHG or physical pass.",
+    "No downloads, Git fetch, shared tracked edits, authority proposal or clearance.",
+    "Wikipedia used only to discover the government instrument link; no claims adopted from its table."
+  ]
+}

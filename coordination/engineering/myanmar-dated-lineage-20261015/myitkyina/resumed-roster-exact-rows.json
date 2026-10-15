@@ -1,0 +1,2713 @@
+{
+  "version": 1,
+  "kind": "retained-mimu-roster-exact-rows",
+  "created_utc": "2026-10-15T01:54:37.633813+00:00",
+  "source_file": {
+    "path": "sources/MIMU-9.7-Jan2026-roster.xlsm",
+    "bytes": 2079584,
+    "sha256": "11fff1b1eca8b1ff3cad3b0a90e757a187ae0b9cdc396bac708136da36ccdda2",
+    "publisher_url": "https://themimu.info/sites/themimu.info/files/documents/Myanmar_PCodes_Release_9.7_Jan2026_StRgn_Dist_Tsp_Town_Ward_VT.xlsm",
+    "release": "January 2026 v9.7",
+    "publisher": "Myanmar Information Management Unit; row Source fields GAD",
+    "local_source_custody": "Existing retained file from /root/rakhine_2578_inputs; no acquisition by this worker"
+  },
+  "zip_entries": [
+    {
+      "path": "xl/workbook.xml",
+      "bytes": 4062,
+      "sha256": "f240c95104808269886f8dbfecf724b42647047779f369c7b4a82d910e2d36d1"
+    },
+    {
+      "path": "xl/_rels/workbook.xml.rels",
+      "bytes": 2239,
+      "sha256": "44d25912cb7f53aa76c24b6705bf484ece95b644a64bca48b7f447152f5fbd35"
+    },
+    {
+      "path": "xl/sharedStrings.xml",
+      "bytes": 1581760,
+      "sha256": "2c8b934efd4589bb3f608bf819854764c53db2ae77fa8e637e4d9eadaf207f5e"
+    },
+    {
+      "path": "xl/styles.xml",
+      "bytes": 91765,
+      "sha256": "80bceed2f1a5b67e256ef8b29a2667f40f72390893eae8663a0dd2a65ba08349"
+    },
+    {
+      "path": "xl/worksheets/sheet4.xml",
+      "bytes": 258003,
+      "sha256": "332270d75554e3bba320773fbadcf57d78e1bc692c5fa1339623001237a974f7"
+    },
+    {
+      "path": "xl/worksheets/sheet5.xml",
+      "bytes": 455250,
+      "sha256": "9168eb57f69e05e39ff7a39bce4693618160f0b9dc416c17cd2328c40c541605"
+    }
+  ],
+  "workbook_sheets": [
+    {
+      "name": "01_SR",
+      "sheetId": "10",
+      "{http://schemas.openxmlformats.org/officeDocument/2006/relationships}id": "rId1"
+    },
+    {
+      "name": "SAD_SAZ",
+      "sheetId": "11",
+      "{http://schemas.openxmlformats.org/officeDocument/2006/relationships}id": "rId2"
+    },
+    {
+      "name": "02_District",
+      "sheetId": "12",
+      "{http://schemas.openxmlformats.org/officeDocument/2006/relationships}id": "rId3"
+    },
+    {
+      "name": "03_Township",
+      "sheetId": "9",
+      "{http://schemas.openxmlformats.org/officeDocument/2006/relationships}id": "rId4"
+    },
+    {
+      "name": "04_Town",
+      "sheetId": "8",
+      "{http://schemas.openxmlformats.org/officeDocument/2006/relationships}id": "rId5"
+    },
+    {
+      "name": "_05_Ward",
+      "sheetId": "7",
+      "{http://schemas.openxmlformats.org/officeDocument/2006/relationships}id": "rId6"
+    },
+    {
+      "name": "_06-VillageTract",
+      "sheetId": "6",
+      "{http://schemas.openxmlformats.org/officeDocument/2006/relationships}id": "rId7"
+    },
+    {
+      "name": "Metadata",
+      "sheetId": "14",
+      "{http://schemas.openxmlformats.org/officeDocument/2006/relationships}id": "rId8"
+    }
+  ],
+  "selected_rows": {
+    "xl/worksheets/sheet4.xml": [
+      {
+        "row": 6,
+        "cells": [
+          {
+            "cell": "A6",
+            "value": "SR_Pcode",
+            "raw_v": "0",
+            "cell_type": "s",
+            "style": "26"
+          },
+          {
+            "cell": "B6",
+            "value": "SR_Name_Eng",
+            "raw_v": "20",
+            "cell_type": "s",
+            "style": "26"
+          },
+          {
+            "cell": "C6",
+            "value": "District/SAZ_Pcode",
+            "raw_v": "21",
+            "cell_type": "s",
+            "style": "26"
+          },
+          {
+            "cell": "D6",
+            "value": "District/SAZ_Name_Eng",
+            "raw_v": "22",
+            "cell_type": "s",
+            "style": "26"
+          },
+          {
+            "cell": "E6",
+            "value": "Tsp_Pcode",
+            "raw_v": "23",
+            "cell_type": "s",
+            "style": "26"
+          },
+          {
+            "cell": "F6",
+            "value": "Township_Name_Eng",
+            "raw_v": "24",
+            "cell_type": "s",
+            "style": "26"
+          },
+          {
+            "cell": "G6",
+            "value": "Township_Name_MMR",
+            "raw_v": "45802",
+            "cell_type": "s",
+            "style": "26"
+          },
+          {
+            "cell": "H6",
+            "value": "MYAINFO_TS_ID",
+            "raw_v": "45803",
+            "cell_type": "s",
+            "style": "27"
+          },
+          {
+            "cell": "I6",
+            "value": "Source",
+            "raw_v": "29",
+            "cell_type": "s",
+            "style": "27"
+          },
+          {
+            "cell": "J6",
+            "value": "Start_Date",
+            "raw_v": "30",
+            "cell_type": "s",
+            "style": "27"
+          },
+          {
+            "cell": "K6",
+            "value": "Modified_End_Date",
+            "raw_v": "31",
+            "cell_type": "s",
+            "style": "27"
+          },
+          {
+            "cell": "L6",
+            "value": "Notification",
+            "raw_v": "32",
+            "cell_type": "s",
+            "style": "27"
+          },
+          {
+            "cell": "M6",
+            "value": "Notification_modified",
+            "raw_v": "33",
+            "cell_type": "s",
+            "style": "27"
+          },
+          {
+            "cell": "N6",
+            "value": "GAD_Township_Status",
+            "raw_v": "45804",
+            "cell_type": "s",
+            "style": "27"
+          },
+          {
+            "cell": "O6",
+            "value": "Field_Township_Status",
+            "raw_v": "45805",
+            "cell_type": "s",
+            "style": "27"
+          },
+          {
+            "cell": "P6",
+            "value": "MIMU_Township_Mapping_Status",
+            "raw_v": "45806",
+            "cell_type": "s",
+            "style": "27"
+          },
+          {
+            "cell": "Q6",
+            "value": "Change_Type",
+            "raw_v": "34",
+            "cell_type": "s",
+            "style": "27"
+          },
+          {
+            "cell": "R6",
+            "value": "Remark",
+            "raw_v": "35",
+            "cell_type": "s",
+            "style": "27"
+          }
+        ]
+      },
+      {
+        "row": 71,
+        "cells": [
+          {
+            "cell": "A71",
+            "value": "MMR001",
+            "raw_v": "11008",
+            "cell_type": "s",
+            "style": "28"
+          },
+          {
+            "cell": "B71",
+            "value": "Kachin",
+            "raw_v": "11009",
+            "cell_type": "s",
+            "style": "28"
+          },
+          {
+            "cell": "C71",
+            "value": "MMR001D001",
+            "raw_v": "11136",
+            "cell_type": "s",
+            "style": "28"
+          },
+          {
+            "cell": "D71",
+            "value": "Myitkyina",
+            "raw_v": "11137",
+            "cell_type": "s",
+            "style": "28"
+          },
+          {
+            "cell": "E71",
+            "value": "MMR001005",
+            "raw_v": "11138",
+            "cell_type": "s",
+            "style": "28"
+          },
+          {
+            "cell": "F71",
+            "value": "Chipwi",
+            "raw_v": "11139",
+            "cell_type": "s",
+            "style": "28"
+          },
+          {
+            "cell": "G71",
+            "value": "ချီ​ဖွေ",
+            "raw_v": "45876",
+            "cell_type": "s",
+            "style": "29"
+          },
+          {
+            "cell": "H71",
+            "value": "ASIMMR001005",
+            "raw_v": "45877",
+            "cell_type": "s",
+            "style": "28"
+          },
+          {
+            "cell": "I71",
+            "value": "GAD",
+            "raw_v": "46",
+            "cell_type": "s",
+            "style": "28"
+          },
+          {
+            "cell": "J71",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "30"
+          },
+          {
+            "cell": "K71",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "31"
+          },
+          {
+            "cell": "L71",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "32"
+          },
+          {
+            "cell": "M71",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "32"
+          },
+          {
+            "cell": "N71",
+            "value": "Active",
+            "raw_v": "47",
+            "cell_type": "s",
+            "style": "32"
+          },
+          {
+            "cell": "O71",
+            "value": "N/A",
+            "raw_v": "48",
+            "cell_type": "s",
+            "style": "32"
+          },
+          {
+            "cell": "P71",
+            "value": "Active",
+            "raw_v": "47",
+            "cell_type": "s",
+            "style": "32"
+          },
+          {
+            "cell": "Q71",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "32"
+          },
+          {
+            "cell": "R71",
+            "value": "",
+            "raw_v": "28822",
+            "cell_type": "s",
+            "style": "28"
+          }
+        ]
+      },
+      {
+        "row": 73,
+        "cells": [
+          {
+            "cell": "A73",
+            "value": "MMR001",
+            "raw_v": "11008",
+            "cell_type": "s",
+            "style": "28"
+          },
+          {
+            "cell": "B73",
+            "value": "Kachin",
+            "raw_v": "11009",
+            "cell_type": "s",
+            "style": "28"
+          },
+          {
+            "cell": "C73",
+            "value": "MMR001D001",
+            "raw_v": "11136",
+            "cell_type": "s",
+            "style": "28"
+          },
+          {
+            "cell": "D73",
+            "value": "Myitkyina",
+            "raw_v": "11137",
+            "cell_type": "s",
+            "style": "28"
+          },
+          {
+            "cell": "E73",
+            "value": "MMR001003",
+            "raw_v": "11321",
+            "cell_type": "s",
+            "style": "28"
+          },
+          {
+            "cell": "F73",
+            "value": "Injangyang",
+            "raw_v": "11322",
+            "cell_type": "s",
+            "style": "28"
+          },
+          {
+            "cell": "G73",
+            "value": "အင်ဂျန်းယန်",
+            "raw_v": "45544",
+            "cell_type": "s",
+            "style": "29"
+          },
+          {
+            "cell": "H73",
+            "value": "ASIMMR001003",
+            "raw_v": "45879",
+            "cell_type": "s",
+            "style": "28"
+          },
+          {
+            "cell": "I73",
+            "value": "GAD",
+            "raw_v": "46",
+            "cell_type": "s",
+            "style": "28"
+          },
+          {
+            "cell": "J73",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "30"
+          },
+          {
+            "cell": "K73",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "31"
+          },
+          {
+            "cell": "L73",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "32"
+          },
+          {
+            "cell": "M73",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "32"
+          },
+          {
+            "cell": "N73",
+            "value": "Active",
+            "raw_v": "47",
+            "cell_type": "s",
+            "style": "32"
+          },
+          {
+            "cell": "O73",
+            "value": "N/A",
+            "raw_v": "48",
+            "cell_type": "s",
+            "style": "32"
+          },
+          {
+            "cell": "P73",
+            "value": "Active",
+            "raw_v": "47",
+            "cell_type": "s",
+            "style": "32"
+          },
+          {
+            "cell": "Q73",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "32"
+          },
+          {
+            "cell": "R73",
+            "value": "",
+            "raw_v": "28822",
+            "cell_type": "s",
+            "style": "28"
+          }
+        ]
+      },
+      {
+        "row": 80,
+        "cells": [
+          {
+            "cell": "A80",
+            "value": "MMR001",
+            "raw_v": "11008",
+            "cell_type": "s",
+            "style": "28"
+          },
+          {
+            "cell": "B80",
+            "value": "Kachin",
+            "raw_v": "11009",
+            "cell_type": "s",
+            "style": "28"
+          },
+          {
+            "cell": "C80",
+            "value": "MMR001D001",
+            "raw_v": "11136",
+            "cell_type": "s",
+            "style": "28"
+          },
+          {
+            "cell": "D80",
+            "value": "Myitkyina",
+            "raw_v": "11137",
+            "cell_type": "s",
+            "style": "28"
+          },
+          {
+            "cell": "E80",
+            "value": "MMR001001",
+            "raw_v": "12188",
+            "cell_type": "s",
+            "style": "28"
+          },
+          {
+            "cell": "F80",
+            "value": "Myitkyina",
+            "raw_v": "11137",
+            "cell_type": "s",
+            "style": "28"
+          },
+          {
+            "cell": "G80",
+            "value": "မြစ်ကြီးနား",
+            "raw_v": "45553",
+            "cell_type": "s",
+            "style": "29"
+          },
+          {
+            "cell": "H80",
+            "value": "ASIMMR001001",
+            "raw_v": "45886",
+            "cell_type": "s",
+            "style": "28"
+          },
+          {
+            "cell": "I80",
+            "value": "GAD",
+            "raw_v": "46",
+            "cell_type": "s",
+            "style": "28"
+          },
+          {
+            "cell": "J80",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "30"
+          },
+          {
+            "cell": "K80",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "31"
+          },
+          {
+            "cell": "L80",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "32"
+          },
+          {
+            "cell": "M80",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "32"
+          },
+          {
+            "cell": "N80",
+            "value": "Active",
+            "raw_v": "47",
+            "cell_type": "s",
+            "style": "32"
+          },
+          {
+            "cell": "O80",
+            "value": "N/A",
+            "raw_v": "48",
+            "cell_type": "s",
+            "style": "32"
+          },
+          {
+            "cell": "P80",
+            "value": "Active",
+            "raw_v": "47",
+            "cell_type": "s",
+            "style": "32"
+          },
+          {
+            "cell": "Q80",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "32"
+          },
+          {
+            "cell": "R80",
+            "value": "",
+            "raw_v": "28822",
+            "cell_type": "s",
+            "style": "28"
+          }
+        ]
+      },
+      {
+        "row": 85,
+        "cells": [
+          {
+            "cell": "A85",
+            "value": "MMR001",
+            "raw_v": "11008",
+            "cell_type": "s",
+            "style": "28"
+          },
+          {
+            "cell": "B85",
+            "value": "Kachin",
+            "raw_v": "11009",
+            "cell_type": "s",
+            "style": "28"
+          },
+          {
+            "cell": "C85",
+            "value": "MMR001D001",
+            "raw_v": "11136",
+            "cell_type": "s",
+            "style": "28"
+          },
+          {
+            "cell": "D85",
+            "value": "Myitkyina",
+            "raw_v": "11137",
+            "cell_type": "s",
+            "style": "28"
+          },
+          {
+            "cell": "E85",
+            "value": "MMR001004",
+            "raw_v": "12574",
+            "cell_type": "s",
+            "style": "28"
+          },
+          {
+            "cell": "F85",
+            "value": "Tanai",
+            "raw_v": "12575",
+            "cell_type": "s",
+            "style": "28"
+          },
+          {
+            "cell": "G85",
+            "value": "တနိုင်း",
+            "raw_v": "45559",
+            "cell_type": "s",
+            "style": "29"
+          },
+          {
+            "cell": "H85",
+            "value": "ASIMMR001004",
+            "raw_v": "45891",
+            "cell_type": "s",
+            "style": "28"
+          },
+          {
+            "cell": "I85",
+            "value": "GAD",
+            "raw_v": "46",
+            "cell_type": "s",
+            "style": "28"
+          },
+          {
+            "cell": "J85",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "30"
+          },
+          {
+            "cell": "K85",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "31"
+          },
+          {
+            "cell": "L85",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "32"
+          },
+          {
+            "cell": "M85",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "32"
+          },
+          {
+            "cell": "N85",
+            "value": "Active",
+            "raw_v": "47",
+            "cell_type": "s",
+            "style": "32"
+          },
+          {
+            "cell": "O85",
+            "value": "N/A",
+            "raw_v": "48",
+            "cell_type": "s",
+            "style": "32"
+          },
+          {
+            "cell": "P85",
+            "value": "Active",
+            "raw_v": "47",
+            "cell_type": "s",
+            "style": "32"
+          },
+          {
+            "cell": "Q85",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "32"
+          },
+          {
+            "cell": "R85",
+            "value": "",
+            "raw_v": "28822",
+            "cell_type": "s",
+            "style": "28"
+          }
+        ]
+      },
+      {
+        "row": 86,
+        "cells": [
+          {
+            "cell": "A86",
+            "value": "MMR001",
+            "raw_v": "11008",
+            "cell_type": "s",
+            "style": "28"
+          },
+          {
+            "cell": "B86",
+            "value": "Kachin",
+            "raw_v": "11009",
+            "cell_type": "s",
+            "style": "28"
+          },
+          {
+            "cell": "C86",
+            "value": "MMR001D001",
+            "raw_v": "11136",
+            "cell_type": "s",
+            "style": "28"
+          },
+          {
+            "cell": "D86",
+            "value": "Myitkyina",
+            "raw_v": "11137",
+            "cell_type": "s",
+            "style": "28"
+          },
+          {
+            "cell": "E86",
+            "value": "MMR001006",
+            "raw_v": "12624",
+            "cell_type": "s",
+            "style": "28"
+          },
+          {
+            "cell": "F86",
+            "value": "Tsawlaw",
+            "raw_v": "12625",
+            "cell_type": "s",
+            "style": "28"
+          },
+          {
+            "cell": "G86",
+            "value": "ဆော့လော်",
+            "raw_v": "45560",
+            "cell_type": "s",
+            "style": "29"
+          },
+          {
+            "cell": "H86",
+            "value": "ASIMMR001006",
+            "raw_v": "45892",
+            "cell_type": "s",
+            "style": "28"
+          },
+          {
+            "cell": "I86",
+            "value": "GAD",
+            "raw_v": "46",
+            "cell_type": "s",
+            "style": "28"
+          },
+          {
+            "cell": "J86",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "30"
+          },
+          {
+            "cell": "K86",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "31"
+          },
+          {
+            "cell": "L86",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "32"
+          },
+          {
+            "cell": "M86",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "32"
+          },
+          {
+            "cell": "N86",
+            "value": "Active",
+            "raw_v": "47",
+            "cell_type": "s",
+            "style": "32"
+          },
+          {
+            "cell": "O86",
+            "value": "N/A",
+            "raw_v": "48",
+            "cell_type": "s",
+            "style": "32"
+          },
+          {
+            "cell": "P86",
+            "value": "Active",
+            "raw_v": "47",
+            "cell_type": "s",
+            "style": "32"
+          },
+          {
+            "cell": "Q86",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "32"
+          },
+          {
+            "cell": "R86",
+            "value": "",
+            "raw_v": "28822",
+            "cell_type": "s",
+            "style": "28"
+          }
+        ]
+      },
+      {
+        "row": 87,
+        "cells": [
+          {
+            "cell": "A87",
+            "value": "MMR001",
+            "raw_v": "11008",
+            "cell_type": "s",
+            "style": "28"
+          },
+          {
+            "cell": "B87",
+            "value": "Kachin",
+            "raw_v": "11009",
+            "cell_type": "s",
+            "style": "28"
+          },
+          {
+            "cell": "C87",
+            "value": "MMR001D001",
+            "raw_v": "11136",
+            "cell_type": "s",
+            "style": "28"
+          },
+          {
+            "cell": "D87",
+            "value": "Myitkyina",
+            "raw_v": "11137",
+            "cell_type": "s",
+            "style": "28"
+          },
+          {
+            "cell": "E87",
+            "value": "MMR001002",
+            "raw_v": "12704",
+            "cell_type": "s",
+            "style": "28"
+          },
+          {
+            "cell": "F87",
+            "value": "Waingmaw",
+            "raw_v": "12705",
+            "cell_type": "s",
+            "style": "28"
+          },
+          {
+            "cell": "G87",
+            "value": "ဝိုင်းမော်",
+            "raw_v": "45561",
+            "cell_type": "s",
+            "style": "29"
+          },
+          {
+            "cell": "H87",
+            "value": "ASIMMR001002",
+            "raw_v": "45893",
+            "cell_type": "s",
+            "style": "28"
+          },
+          {
+            "cell": "I87",
+            "value": "GAD",
+            "raw_v": "46",
+            "cell_type": "s",
+            "style": "28"
+          },
+          {
+            "cell": "J87",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "30"
+          },
+          {
+            "cell": "K87",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "31"
+          },
+          {
+            "cell": "L87",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "32"
+          },
+          {
+            "cell": "M87",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "32"
+          },
+          {
+            "cell": "N87",
+            "value": "Active",
+            "raw_v": "47",
+            "cell_type": "s",
+            "style": "32"
+          },
+          {
+            "cell": "O87",
+            "value": "N/A",
+            "raw_v": "48",
+            "cell_type": "s",
+            "style": "32"
+          },
+          {
+            "cell": "P87",
+            "value": "Active",
+            "raw_v": "47",
+            "cell_type": "s",
+            "style": "32"
+          },
+          {
+            "cell": "Q87",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "32"
+          },
+          {
+            "cell": "R87",
+            "value": "",
+            "raw_v": "28822",
+            "cell_type": "s",
+            "style": "28"
+          }
+        ]
+      }
+    ],
+    "xl/worksheets/sheet5.xml": [
+      {
+        "row": 6,
+        "cells": [
+          {
+            "cell": "A6",
+            "value": "SR_Pcode",
+            "raw_v": "0",
+            "cell_type": "s",
+            "style": "41"
+          },
+          {
+            "cell": "B6",
+            "value": "SR_Name_Eng",
+            "raw_v": "20",
+            "cell_type": "s",
+            "style": "42"
+          },
+          {
+            "cell": "C6",
+            "value": "District/SAZ_Pcode",
+            "raw_v": "21",
+            "cell_type": "s",
+            "style": "42"
+          },
+          {
+            "cell": "D6",
+            "value": "District/SAZ_Name_Eng",
+            "raw_v": "22",
+            "cell_type": "s",
+            "style": "42"
+          },
+          {
+            "cell": "E6",
+            "value": "Tsp_Pcode",
+            "raw_v": "23",
+            "cell_type": "s",
+            "style": "42"
+          },
+          {
+            "cell": "F6",
+            "value": "Township_Name_Eng",
+            "raw_v": "24",
+            "cell_type": "s",
+            "style": "42"
+          },
+          {
+            "cell": "G6",
+            "value": "Town_Pcode",
+            "raw_v": "37218",
+            "cell_type": "s",
+            "style": "42"
+          },
+          {
+            "cell": "H6",
+            "value": "Town_Name_Eng",
+            "raw_v": "45498",
+            "cell_type": "s",
+            "style": "42"
+          },
+          {
+            "cell": "I6",
+            "value": "Town_Name_MMR",
+            "raw_v": "45499",
+            "cell_type": "s",
+            "style": "42"
+          },
+          {
+            "cell": "J6",
+            "value": "Longitude",
+            "raw_v": "27",
+            "cell_type": "s",
+            "style": "42"
+          },
+          {
+            "cell": "K6",
+            "value": "Latitude",
+            "raw_v": "28",
+            "cell_type": "s",
+            "style": "42"
+          },
+          {
+            "cell": "L6",
+            "value": "Source",
+            "raw_v": "29",
+            "cell_type": "s",
+            "style": "42"
+          },
+          {
+            "cell": "M6",
+            "value": "Start_Date",
+            "raw_v": "30",
+            "cell_type": "s",
+            "style": "42"
+          },
+          {
+            "cell": "N6",
+            "value": "Modified_End_Date",
+            "raw_v": "31",
+            "cell_type": "s",
+            "style": "42"
+          },
+          {
+            "cell": "O6",
+            "value": "Notification",
+            "raw_v": "32",
+            "cell_type": "s",
+            "style": "42"
+          },
+          {
+            "cell": "P6",
+            "value": "Notification_modified",
+            "raw_v": "33",
+            "cell_type": "s",
+            "style": "42"
+          },
+          {
+            "cell": "Q6",
+            "value": "GAD_Town_Status",
+            "raw_v": "45500",
+            "cell_type": "s",
+            "style": "42"
+          },
+          {
+            "cell": "R6",
+            "value": "Field_Town_Status",
+            "raw_v": "45501",
+            "cell_type": "s",
+            "style": "42"
+          },
+          {
+            "cell": "S6",
+            "value": "MIMU_Town_Mapping_Status",
+            "raw_v": "45502",
+            "cell_type": "s",
+            "style": "42"
+          },
+          {
+            "cell": "T6",
+            "value": "Change_Type",
+            "raw_v": "34",
+            "cell_type": "s",
+            "style": "42"
+          },
+          {
+            "cell": "U6",
+            "value": "Remark",
+            "raw_v": "35",
+            "cell_type": "s",
+            "style": "43"
+          }
+        ]
+      },
+      {
+        "row": 126,
+        "cells": [
+          {
+            "cell": "A126",
+            "value": "MMR001",
+            "raw_v": "11008",
+            "cell_type": "s",
+            "style": "44"
+          },
+          {
+            "cell": "B126",
+            "value": "Kachin",
+            "raw_v": "11009",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "C126",
+            "value": "MMR001D001",
+            "raw_v": "11136",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "D126",
+            "value": "Myitkyina",
+            "raw_v": "11137",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "E126",
+            "value": "MMR001005",
+            "raw_v": "11138",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "F126",
+            "value": "Chipwi",
+            "raw_v": "11139",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "G126",
+            "value": "MMR001005701",
+            "raw_v": "39022",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "H126",
+            "value": "Chipwi Town",
+            "raw_v": "39023",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "I126",
+            "value": "ချီဖွေ",
+            "raw_v": "45541",
+            "cell_type": "s",
+            "style": "46"
+          },
+          {
+            "cell": "J126",
+            "value": "98.129760000000005",
+            "raw_v": "98.129760000000005",
+            "cell_type": null,
+            "style": "47"
+          },
+          {
+            "cell": "K126",
+            "value": "25.88635",
+            "raw_v": "25.88635",
+            "cell_type": null,
+            "style": "47"
+          },
+          {
+            "cell": "L126",
+            "value": "GAD",
+            "raw_v": "46",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "M126",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "16"
+          },
+          {
+            "cell": "N126",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "16"
+          },
+          {
+            "cell": "O126",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "17"
+          },
+          {
+            "cell": "P126",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "17"
+          },
+          {
+            "cell": "Q126",
+            "value": "Active",
+            "raw_v": "47",
+            "cell_type": "s",
+            "style": "17"
+          },
+          {
+            "cell": "R126",
+            "value": "N/A",
+            "raw_v": "48",
+            "cell_type": "s",
+            "style": "17"
+          },
+          {
+            "cell": "S126",
+            "value": "Active",
+            "raw_v": "47",
+            "cell_type": "s",
+            "style": "17"
+          },
+          {
+            "cell": "T126",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "17"
+          },
+          {
+            "cell": "U126",
+            "value": "",
+            "raw_v": "28822",
+            "cell_type": "s",
+            "style": "48"
+          }
+        ]
+      },
+      {
+        "row": 127,
+        "cells": [
+          {
+            "cell": "A127",
+            "value": "MMR001",
+            "raw_v": "11008",
+            "cell_type": "s",
+            "style": "44"
+          },
+          {
+            "cell": "B127",
+            "value": "Kachin",
+            "raw_v": "11009",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "C127",
+            "value": "MMR001D001",
+            "raw_v": "11136",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "D127",
+            "value": "Myitkyina",
+            "raw_v": "11137",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "E127",
+            "value": "MMR001005",
+            "raw_v": "11138",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "F127",
+            "value": "Chipwi",
+            "raw_v": "11139",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "G127",
+            "value": "MMR001005702",
+            "raw_v": "39036",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "H127",
+            "value": "Pang War Town",
+            "raw_v": "39037",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "I127",
+            "value": "ပန်ဝါ",
+            "raw_v": "11200",
+            "cell_type": "s",
+            "style": "46"
+          },
+          {
+            "cell": "J127",
+            "value": "98.378630000000001",
+            "raw_v": "98.378630000000001",
+            "cell_type": null,
+            "style": "47"
+          },
+          {
+            "cell": "K127",
+            "value": "25.598659999999999",
+            "raw_v": "25.598659999999999",
+            "cell_type": null,
+            "style": "47"
+          },
+          {
+            "cell": "L127",
+            "value": "GAD",
+            "raw_v": "46",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "M127",
+            "value": "40548",
+            "raw_v": "40548",
+            "cell_type": null,
+            "style": "16"
+          },
+          {
+            "cell": "N127",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "16"
+          },
+          {
+            "cell": "O127",
+            "value": "200/24-66/U-1",
+            "raw_v": "11201",
+            "cell_type": "s",
+            "style": "17"
+          },
+          {
+            "cell": "P127",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "17"
+          },
+          {
+            "cell": "Q127",
+            "value": "Active",
+            "raw_v": "47",
+            "cell_type": "s",
+            "style": "17"
+          },
+          {
+            "cell": "R127",
+            "value": "N/A",
+            "raw_v": "48",
+            "cell_type": "s",
+            "style": "17"
+          },
+          {
+            "cell": "S127",
+            "value": "Active",
+            "raw_v": "47",
+            "cell_type": "s",
+            "style": "17"
+          },
+          {
+            "cell": "T127",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "17"
+          },
+          {
+            "cell": "U127",
+            "value": "",
+            "raw_v": "28822",
+            "cell_type": "s",
+            "style": "48"
+          }
+        ]
+      },
+      {
+        "row": 144,
+        "cells": [
+          {
+            "cell": "A144",
+            "value": "MMR001",
+            "raw_v": "11008",
+            "cell_type": "s",
+            "style": "44"
+          },
+          {
+            "cell": "B144",
+            "value": "Kachin",
+            "raw_v": "11009",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "C144",
+            "value": "MMR001D001",
+            "raw_v": "11136",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "D144",
+            "value": "Myitkyina",
+            "raw_v": "11137",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "E144",
+            "value": "MMR001001",
+            "raw_v": "12188",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "F144",
+            "value": "Myitkyina",
+            "raw_v": "11137",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "G144",
+            "value": "MMR001001701",
+            "raw_v": "39228",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "H144",
+            "value": "Myitkyina Town",
+            "raw_v": "39229",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "I144",
+            "value": "မြစ်ကြီးနား",
+            "raw_v": "45553",
+            "cell_type": "s",
+            "style": "46"
+          },
+          {
+            "cell": "J144",
+            "value": "97.390360000000001",
+            "raw_v": "97.390360000000001",
+            "cell_type": null,
+            "style": "47"
+          },
+          {
+            "cell": "K144",
+            "value": "25.38749",
+            "raw_v": "25.38749",
+            "cell_type": null,
+            "style": "47"
+          },
+          {
+            "cell": "L144",
+            "value": "GAD",
+            "raw_v": "46",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "M144",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "16"
+          },
+          {
+            "cell": "N144",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "16"
+          },
+          {
+            "cell": "O144",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "17"
+          },
+          {
+            "cell": "P144",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "17"
+          },
+          {
+            "cell": "Q144",
+            "value": "Active",
+            "raw_v": "47",
+            "cell_type": "s",
+            "style": "17"
+          },
+          {
+            "cell": "R144",
+            "value": "N/A",
+            "raw_v": "48",
+            "cell_type": "s",
+            "style": "17"
+          },
+          {
+            "cell": "S144",
+            "value": "Active",
+            "raw_v": "47",
+            "cell_type": "s",
+            "style": "17"
+          },
+          {
+            "cell": "T144",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "17"
+          },
+          {
+            "cell": "U144",
+            "value": "",
+            "raw_v": "28822",
+            "cell_type": "s",
+            "style": "48"
+          }
+        ]
+      },
+      {
+        "row": 145,
+        "cells": [
+          {
+            "cell": "A145",
+            "value": "MMR001",
+            "raw_v": "11008",
+            "cell_type": "s",
+            "style": "44"
+          },
+          {
+            "cell": "B145",
+            "value": "Kachin",
+            "raw_v": "11009",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "C145",
+            "value": "MMR001D001",
+            "raw_v": "11136",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "D145",
+            "value": "Myitkyina",
+            "raw_v": "11137",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "E145",
+            "value": "MMR001001",
+            "raw_v": "12188",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "F145",
+            "value": "Myitkyina",
+            "raw_v": "11137",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "G145",
+            "value": "MMR001001702",
+            "raw_v": "39306",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "H145",
+            "value": "Sinbo Town",
+            "raw_v": "39307",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "I145",
+            "value": "ဆင်ဘို",
+            "raw_v": "45554",
+            "cell_type": "s",
+            "style": "46"
+          },
+          {
+            "cell": "J145",
+            "value": "97.039169999999999",
+            "raw_v": "97.039169999999999",
+            "cell_type": null,
+            "style": "47"
+          },
+          {
+            "cell": "K145",
+            "value": "24.779229999999998",
+            "raw_v": "24.779229999999998",
+            "cell_type": null,
+            "style": "47"
+          },
+          {
+            "cell": "L145",
+            "value": "GAD",
+            "raw_v": "46",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "M145",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "16"
+          },
+          {
+            "cell": "N145",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "16"
+          },
+          {
+            "cell": "O145",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "17"
+          },
+          {
+            "cell": "P145",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "17"
+          },
+          {
+            "cell": "Q145",
+            "value": "Active",
+            "raw_v": "47",
+            "cell_type": "s",
+            "style": "17"
+          },
+          {
+            "cell": "R145",
+            "value": "N/A",
+            "raw_v": "48",
+            "cell_type": "s",
+            "style": "17"
+          },
+          {
+            "cell": "S145",
+            "value": "Active",
+            "raw_v": "47",
+            "cell_type": "s",
+            "style": "17"
+          },
+          {
+            "cell": "T145",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "17"
+          },
+          {
+            "cell": "U145",
+            "value": "",
+            "raw_v": "28822",
+            "cell_type": "s",
+            "style": "48"
+          }
+        ]
+      },
+      {
+        "row": 152,
+        "cells": [
+          {
+            "cell": "A152",
+            "value": "MMR001",
+            "raw_v": "11008",
+            "cell_type": "s",
+            "style": "44"
+          },
+          {
+            "cell": "B152",
+            "value": "Kachin",
+            "raw_v": "11009",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "C152",
+            "value": "MMR001D001",
+            "raw_v": "11136",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "D152",
+            "value": "Myitkyina",
+            "raw_v": "11137",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "E152",
+            "value": "MMR001004",
+            "raw_v": "12574",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "F152",
+            "value": "Tanai",
+            "raw_v": "12575",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "G152",
+            "value": "MMR001004702",
+            "raw_v": "39375",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "H152",
+            "value": "Shin Bway Yang Town",
+            "raw_v": "39376",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "I152",
+            "value": "ရှင်ဗွေယန်",
+            "raw_v": "45558",
+            "cell_type": "s",
+            "style": "46"
+          },
+          {
+            "cell": "J152",
+            "value": "96.209400000000002",
+            "raw_v": "96.209400000000002",
+            "cell_type": null,
+            "style": "47"
+          },
+          {
+            "cell": "K152",
+            "value": "26.694780000000002",
+            "raw_v": "26.694780000000002",
+            "cell_type": null,
+            "style": "47"
+          },
+          {
+            "cell": "L152",
+            "value": "GAD",
+            "raw_v": "46",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "M152",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "16"
+          },
+          {
+            "cell": "N152",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "16"
+          },
+          {
+            "cell": "O152",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "17"
+          },
+          {
+            "cell": "P152",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "17"
+          },
+          {
+            "cell": "Q152",
+            "value": "Active",
+            "raw_v": "47",
+            "cell_type": "s",
+            "style": "17"
+          },
+          {
+            "cell": "R152",
+            "value": "N/A",
+            "raw_v": "48",
+            "cell_type": "s",
+            "style": "17"
+          },
+          {
+            "cell": "S152",
+            "value": "Active",
+            "raw_v": "47",
+            "cell_type": "s",
+            "style": "17"
+          },
+          {
+            "cell": "T152",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "17"
+          },
+          {
+            "cell": "U152",
+            "value": "",
+            "raw_v": "28822",
+            "cell_type": "s",
+            "style": "48"
+          }
+        ]
+      },
+      {
+        "row": 153,
+        "cells": [
+          {
+            "cell": "A153",
+            "value": "MMR001",
+            "raw_v": "11008",
+            "cell_type": "s",
+            "style": "44"
+          },
+          {
+            "cell": "B153",
+            "value": "Kachin",
+            "raw_v": "11009",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "C153",
+            "value": "MMR001D001",
+            "raw_v": "11136",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "D153",
+            "value": "Myitkyina",
+            "raw_v": "11137",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "E153",
+            "value": "MMR001004",
+            "raw_v": "12574",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "F153",
+            "value": "Tanai",
+            "raw_v": "12575",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "G153",
+            "value": "MMR001004701",
+            "raw_v": "39381",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "H153",
+            "value": "Tanai Town",
+            "raw_v": "39382",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "I153",
+            "value": "တနိုင်း",
+            "raw_v": "45559",
+            "cell_type": "s",
+            "style": "46"
+          },
+          {
+            "cell": "J153",
+            "value": "96.716549999999998",
+            "raw_v": "96.716549999999998",
+            "cell_type": null,
+            "style": "47"
+          },
+          {
+            "cell": "K153",
+            "value": "26.357970000000002",
+            "raw_v": "26.357970000000002",
+            "cell_type": null,
+            "style": "47"
+          },
+          {
+            "cell": "L153",
+            "value": "GAD",
+            "raw_v": "46",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "M153",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "16"
+          },
+          {
+            "cell": "N153",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "16"
+          },
+          {
+            "cell": "O153",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "17"
+          },
+          {
+            "cell": "P153",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "17"
+          },
+          {
+            "cell": "Q153",
+            "value": "Active",
+            "raw_v": "47",
+            "cell_type": "s",
+            "style": "17"
+          },
+          {
+            "cell": "R153",
+            "value": "N/A",
+            "raw_v": "48",
+            "cell_type": "s",
+            "style": "17"
+          },
+          {
+            "cell": "S153",
+            "value": "Active",
+            "raw_v": "47",
+            "cell_type": "s",
+            "style": "17"
+          },
+          {
+            "cell": "T153",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "17"
+          },
+          {
+            "cell": "U153",
+            "value": "",
+            "raw_v": "28822",
+            "cell_type": "s",
+            "style": "48"
+          }
+        ]
+      },
+      {
+        "row": 154,
+        "cells": [
+          {
+            "cell": "A154",
+            "value": "MMR001",
+            "raw_v": "11008",
+            "cell_type": "s",
+            "style": "44"
+          },
+          {
+            "cell": "B154",
+            "value": "Kachin",
+            "raw_v": "11009",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "C154",
+            "value": "MMR001D001",
+            "raw_v": "11136",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "D154",
+            "value": "Myitkyina",
+            "raw_v": "11137",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "E154",
+            "value": "MMR001006",
+            "raw_v": "12624",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "F154",
+            "value": "Tsawlaw",
+            "raw_v": "12625",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "G154",
+            "value": "MMR001006701",
+            "raw_v": "39405",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "H154",
+            "value": "Tsawlaw Town",
+            "raw_v": "39406",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "I154",
+            "value": "ဆော့လော်",
+            "raw_v": "45560",
+            "cell_type": "s",
+            "style": "46"
+          },
+          {
+            "cell": "J154",
+            "value": "98.270486807500006",
+            "raw_v": "98.270486807500006",
+            "cell_type": null,
+            "style": "47"
+          },
+          {
+            "cell": "K154",
+            "value": "26.1541860735",
+            "raw_v": "26.1541860735",
+            "cell_type": null,
+            "style": "47"
+          },
+          {
+            "cell": "L154",
+            "value": "GAD",
+            "raw_v": "46",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "M154",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "16"
+          },
+          {
+            "cell": "N154",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "16"
+          },
+          {
+            "cell": "O154",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "17"
+          },
+          {
+            "cell": "P154",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "17"
+          },
+          {
+            "cell": "Q154",
+            "value": "Active",
+            "raw_v": "47",
+            "cell_type": "s",
+            "style": "17"
+          },
+          {
+            "cell": "R154",
+            "value": "N/A",
+            "raw_v": "48",
+            "cell_type": "s",
+            "style": "17"
+          },
+          {
+            "cell": "S154",
+            "value": "Active",
+            "raw_v": "47",
+            "cell_type": "s",
+            "style": "17"
+          },
+          {
+            "cell": "T154",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "17"
+          },
+          {
+            "cell": "U154",
+            "value": "",
+            "raw_v": "28822",
+            "cell_type": "s",
+            "style": "48"
+          }
+        ]
+      },
+      {
+        "row": 155,
+        "cells": [
+          {
+            "cell": "A155",
+            "value": "MMR001",
+            "raw_v": "11008",
+            "cell_type": "s",
+            "style": "44"
+          },
+          {
+            "cell": "B155",
+            "value": "Kachin",
+            "raw_v": "11009",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "C155",
+            "value": "MMR001D001",
+            "raw_v": "11136",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "D155",
+            "value": "Myitkyina",
+            "raw_v": "11137",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "E155",
+            "value": "MMR001002",
+            "raw_v": "12704",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "F155",
+            "value": "Waingmaw",
+            "raw_v": "12705",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "G155",
+            "value": "MMR001002703",
+            "raw_v": "39410",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "H155",
+            "value": "Kan Paik Ti Town",
+            "raw_v": "39411",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "I155",
+            "value": "ကန်ပိုက်တီ",
+            "raw_v": "12817",
+            "cell_type": "s",
+            "style": "46"
+          },
+          {
+            "cell": "J155",
+            "value": "98.11739",
+            "raw_v": "98.11739",
+            "cell_type": null,
+            "style": "47"
+          },
+          {
+            "cell": "K155",
+            "value": "25.403189999999999",
+            "raw_v": "25.403189999999999",
+            "cell_type": null,
+            "style": "47"
+          },
+          {
+            "cell": "L155",
+            "value": "GAD",
+            "raw_v": "46",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "M155",
+            "value": "40548",
+            "raw_v": "40548",
+            "cell_type": null,
+            "style": "16"
+          },
+          {
+            "cell": "N155",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "16"
+          },
+          {
+            "cell": "O155",
+            "value": "200/24-67/U-1",
+            "raw_v": "12818",
+            "cell_type": "s",
+            "style": "17"
+          },
+          {
+            "cell": "P155",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "17"
+          },
+          {
+            "cell": "Q155",
+            "value": "Active",
+            "raw_v": "47",
+            "cell_type": "s",
+            "style": "17"
+          },
+          {
+            "cell": "R155",
+            "value": "N/A",
+            "raw_v": "48",
+            "cell_type": "s",
+            "style": "17"
+          },
+          {
+            "cell": "S155",
+            "value": "Active",
+            "raw_v": "47",
+            "cell_type": "s",
+            "style": "17"
+          },
+          {
+            "cell": "T155",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "17"
+          },
+          {
+            "cell": "U155",
+            "value": "",
+            "raw_v": "28822",
+            "cell_type": "s",
+            "style": "48"
+          }
+        ]
+      },
+      {
+        "row": 156,
+        "cells": [
+          {
+            "cell": "A156",
+            "value": "MMR001",
+            "raw_v": "11008",
+            "cell_type": "s",
+            "style": "44"
+          },
+          {
+            "cell": "B156",
+            "value": "Kachin",
+            "raw_v": "11009",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "C156",
+            "value": "MMR001D001",
+            "raw_v": "11136",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "D156",
+            "value": "Myitkyina",
+            "raw_v": "11137",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "E156",
+            "value": "MMR001002",
+            "raw_v": "12704",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "F156",
+            "value": "Waingmaw",
+            "raw_v": "12705",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "G156",
+            "value": "MMR001002702",
+            "raw_v": "39415",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "H156",
+            "value": "Sadung Town",
+            "raw_v": "39416",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "I156",
+            "value": "ဆဒုံး",
+            "raw_v": "11783",
+            "cell_type": "s",
+            "style": "46"
+          },
+          {
+            "cell": "J156",
+            "value": "97.899960531600001",
+            "raw_v": "97.899960531600001",
+            "cell_type": null,
+            "style": "47"
+          },
+          {
+            "cell": "K156",
+            "value": "25.397088956000001",
+            "raw_v": "25.397088956000001",
+            "cell_type": null,
+            "style": "47"
+          },
+          {
+            "cell": "L156",
+            "value": "GAD",
+            "raw_v": "46",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "M156",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "16"
+          },
+          {
+            "cell": "N156",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "16"
+          },
+          {
+            "cell": "O156",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "17"
+          },
+          {
+            "cell": "P156",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "17"
+          },
+          {
+            "cell": "Q156",
+            "value": "Active",
+            "raw_v": "47",
+            "cell_type": "s",
+            "style": "17"
+          },
+          {
+            "cell": "R156",
+            "value": "N/A",
+            "raw_v": "48",
+            "cell_type": "s",
+            "style": "17"
+          },
+          {
+            "cell": "S156",
+            "value": "Active",
+            "raw_v": "47",
+            "cell_type": "s",
+            "style": "17"
+          },
+          {
+            "cell": "T156",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "17"
+          },
+          {
+            "cell": "U156",
+            "value": "",
+            "raw_v": "28822",
+            "cell_type": "s",
+            "style": "48"
+          }
+        ]
+      },
+      {
+        "row": 157,
+        "cells": [
+          {
+            "cell": "A157",
+            "value": "MMR001",
+            "raw_v": "11008",
+            "cell_type": "s",
+            "style": "44"
+          },
+          {
+            "cell": "B157",
+            "value": "Kachin",
+            "raw_v": "11009",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "C157",
+            "value": "MMR001D001",
+            "raw_v": "11136",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "D157",
+            "value": "Myitkyina",
+            "raw_v": "11137",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "E157",
+            "value": "MMR001002",
+            "raw_v": "12704",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "F157",
+            "value": "Waingmaw",
+            "raw_v": "12705",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "G157",
+            "value": "MMR001002701",
+            "raw_v": "39422",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "H157",
+            "value": "Waingmaw Town",
+            "raw_v": "39423",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "I157",
+            "value": "ဝိုင်းမော်",
+            "raw_v": "45561",
+            "cell_type": "s",
+            "style": "46"
+          },
+          {
+            "cell": "J157",
+            "value": "97.442809999999994",
+            "raw_v": "97.442809999999994",
+            "cell_type": null,
+            "style": "47"
+          },
+          {
+            "cell": "K157",
+            "value": "25.350989999999999",
+            "raw_v": "25.350989999999999",
+            "cell_type": null,
+            "style": "47"
+          },
+          {
+            "cell": "L157",
+            "value": "GAD",
+            "raw_v": "46",
+            "cell_type": "s",
+            "style": "45"
+          },
+          {
+            "cell": "M157",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "16"
+          },
+          {
+            "cell": "N157",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "16"
+          },
+          {
+            "cell": "O157",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "17"
+          },
+          {
+            "cell": "P157",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "17"
+          },
+          {
+            "cell": "Q157",
+            "value": "Active",
+            "raw_v": "47",
+            "cell_type": "s",
+            "style": "17"
+          },
+          {
+            "cell": "R157",
+            "value": "N/A",
+            "raw_v": "48",
+            "cell_type": "s",
+            "style": "17"
+          },
+          {
+            "cell": "S157",
+            "value": "Active",
+            "raw_v": "47",
+            "cell_type": "s",
+            "style": "17"
+          },
+          {
+            "cell": "T157",
+            "value": "",
+            "raw_v": "",
+            "cell_type": null,
+            "style": "17"
+          },
+          {
+            "cell": "U157",
+            "value": "",
+            "raw_v": "28822",
+            "cell_type": "s",
+            "style": "48"
+          }
+        ]
+      }
+    ]
+  },
+  "date_decoding": {
+    "workbookPr": {
+      "codeName": "ThisWorkbook",
+      "defaultThemeVersion": "124226"
+    },
+    "date1904": "absent; default false",
+    "cells": [
+      "M127",
+      "M155"
+    ],
+    "raw_serial": "40548",
+    "style_index": "16",
+    "cellXf": {
+      "numFmtId": "164",
+      "fontId": "5",
+      "fillId": "0",
+      "borderId": "7",
+      "xfId": "0",
+      "applyNumberFormat": "1",
+      "applyFont": "1",
+      "applyBorder": "1",
+      "applyAlignment": "1"
+    },
+    "numFmt": {
+      "numFmtId": "164",
+      "formatCode": "[$-409]d\\-mmm\\-yy;@"
+    },
+    "decoded_date": "2011-01-05",
+    "rule": "Excel default 1900 system, date serial >60: 1899-12-30 + days(serial)"
+  }
+}

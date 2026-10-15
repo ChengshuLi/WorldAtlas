@@ -1,0 +1,288 @@
+{
+  "kind": "dated-administrative-transition-owner-applicability",
+  "date_utc": "2026-10-15",
+  "status": "Positive named administrative transitions recorded; all89 land and80 source-relative candidates still held. No changes to acceptedPR1939 or other tracked files.",
+  "input": {
+    "path": "maungdaw/maungdaw-jan2026-notification-rows-004.json",
+    "bytes": 36744,
+    "sha256": "97e201e39d521a8e1f50255a7f04c1bb33a91cc061eecf61ff26b541d0f414d8",
+    "workbook": {
+      "path": "sources/MIMU-9.7-Jan2026-roster.xlsm",
+      "bytes": 2079584,
+      "sha256": "11fff1b1eca8b1ff3cad3b0a90e757a187ae0b9cdc396bac708136da36ccdda2",
+      "url": "https://themimu.info/sites/themimu.info/files/documents/Myanmar_PCodes_Release_9.7_Jan2026_StRgn_Dist_Tsp_Town_Ward_VT.xlsm",
+      "publisher": "MIMU",
+      "release": "9.7 January2026",
+      "acquisition": "Reused rakhine_2578_inputs already acquired file; no duplicate network acquisition."
+    },
+    "original_owner_inventory": {
+      "path": "maungdaw/retained-parent-inventory.json",
+      "sha256": "6b3a93b6a2007b98087235cc5f5ed5617ae2a1a26555b00099c3c4268f16a5ad"
+    }
+  },
+  "positive_new2019_transition": {
+    "notification_as_roster": "No. 304/2019",
+    "date_as_roster_decoded": "2019-09-23",
+    "literal_excel_serial": "43731",
+    "transitions": [
+      {
+        "predecessor": {
+          "part": "xl/worksheets/sheet7.xml",
+          "row": 8786,
+          "pcode": "MMR012009062",
+          "name": "Ka Nyin Tan (a) Myo Ma Ka Nyin Tan",
+          "status": "Inactive",
+          "change_type": "VTtoWard",
+          "notification_modified": "No. 304/2019",
+          "modified_end_serial": "43731",
+          "modified_end_decoded": "2019-09-23",
+          "literal_remark": "Reclassified VT to Ka Nyin Tan and Maung Ni Wards in Maungdaw Town"
+        },
+        "successors": [
+          {
+            "part": "xl/worksheets/sheet6.xml",
+            "row": 1737,
+            "pcode": "MMR012009701507",
+            "name": "Ka Nyin Tan Ward",
+            "notification": "No. 304/2019",
+            "start_serial": "43731",
+            "start_decoded": "2019-09-23"
+          },
+          {
+            "part": "xl/worksheets/sheet6.xml",
+            "row": 1740,
+            "pcode": "MMR012009701508",
+            "name": "Maung Ni Ward",
+            "notification": "No. 304/2019",
+            "start_serial": "43731",
+            "start_decoded": "2019-09-23"
+          }
+        ],
+        "explicit_township": "Maungdaw",
+        "explicit_tsp_pcode": "MMR012009",
+        "explicit_town": "Maungdaw Town",
+        "explicit_town_pcode": "MMR012009701"
+      },
+      {
+        "predecessor": {
+          "part": "xl/worksheets/sheet7.xml",
+          "row": 8816,
+          "pcode": "MMR012009063",
+          "name": "Myo Thu Gyi",
+          "status": "Inactive",
+          "change_type": "VTtoWard",
+          "notification_modified": "No. 304/2019",
+          "modified_end_serial": "43731",
+          "modified_end_decoded": "2019-09-23",
+          "literal_remark": "Reclassified VT to Myo Thu Gyi and Wai Thar Li Wards in Maungdaw Town"
+        },
+        "successors": [
+          {
+            "part": "xl/worksheets/sheet6.xml",
+            "row": 1745,
+            "pcode": "MMR012009701509",
+            "name": "Myo Thu Gyi Ward",
+            "notification": "No. 304/2019",
+            "start_serial": "43731",
+            "start_decoded": "2019-09-23"
+          },
+          {
+            "part": "xl/worksheets/sheet6.xml",
+            "row": 1747,
+            "pcode": "MMR012009701510",
+            "name": "Wai Thar Li Ward",
+            "notification": "No. 304/2019",
+            "start_serial": "43731",
+            "start_decoded": "2019-09-23"
+          }
+        ],
+        "explicit_township": "Maungdaw",
+        "explicit_tsp_pcode": "MMR012009",
+        "explicit_town": "Maungdaw Town",
+        "explicit_town_pcode": "MMR012009701"
+      },
+      {
+        "predecessor": {
+          "part": "xl/worksheets/sheet7.xml",
+          "row": 8817,
+          "pcode": "MMR012009061",
+          "name": "Myo U",
+          "status": "Inactive",
+          "change_type": "VTtoWard",
+          "notification_modified": "No. 304/2019",
+          "modified_end_serial": "43731",
+          "modified_end_decoded": "2019-09-23",
+          "literal_remark": "Reclassified VT to Myo U and Let Thar Wards in Maungdaw Town, Name changed from Aye Tar Li Yar ​as of notification no. 200/23-183/U-1 on 9 June 2010."
+        },
+        "successors": [
+          {
+            "part": "xl/worksheets/sheet6.xml",
+            "row": 1746,
+            "pcode": "MMR012009701511",
+            "name": "Myo U Ward",
+            "notification": "No. 304/2019",
+            "start_serial": "43731",
+            "start_decoded": "2019-09-23"
+          },
+          {
+            "part": "xl/worksheets/sheet6.xml",
+            "row": 1739,
+            "pcode": "MMR012009701512",
+            "name": "Let Thar Ward",
+            "notification": "No. 304/2019",
+            "start_serial": "43731",
+            "start_decoded": "2019-09-23"
+          }
+        ],
+        "explicit_township": "Maungdaw",
+        "explicit_tsp_pcode": "MMR012009",
+        "explicit_town": "Maungdaw Town",
+        "explicit_town_pcode": "MMR012009701"
+      }
+    ],
+    "independent_contemporary_crosscheck": {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/MIMU_PCodesMajorChangesbetweenVersionV9and9.1_24Jan2020_0.pdf",
+      "reference": "January2020 major changes, PDF page2 six ward Pcodes and page4 three predecessor tract Pcodes",
+      "exact_six_successor_pcodes_match": true,
+      "limit": "This contemporary PDF lists the units and transitions but not the notification/date; the Jan2026 roster provides retrospective dated fields."
+    }
+  },
+  "positive2016_transition_correspondence": {
+    "notification_as_roster": "No. 299/2016",
+    "date_as_roster_decoded": "2016-02-02",
+    "literal_excel_serial": "42402",
+    "transitions": [
+      {
+        "prior_tract": {
+          "part": "xl/worksheets/sheet7.xml",
+          "row": 8791,
+          "pcode": "MMR012009008",
+          "name": "Kha Maung Seik",
+          "status": "Inactive",
+          "change_type": "VTtoTown",
+          "notification_modified": "No. 299/2016",
+          "modified_end_date": "2016-02-02"
+        },
+        "successor_town": {
+          "part": "xl/worksheets/sheet5.xml",
+          "row": 288,
+          "pcode": "MMR012009703",
+          "name": "Kha Maung Seik Town",
+          "burmese": "ခမောင်းဆိပ်",
+          "status": "Active",
+          "notification": "No. 299/2016",
+          "start_date": "2016-02-02"
+        },
+        "ward_count_in_scoped_rows": 5,
+        "ward_row_locators": [
+          1732,
+          1733,
+          1734,
+          1735,
+          1736
+        ],
+        "all_ward_notification_and_start_match": true,
+        "explicit_tsp_pcode": "MMR012009",
+        "explicit_township": "Maungdaw"
+      },
+      {
+        "prior_tract": {
+          "part": "xl/worksheets/sheet7.xml",
+          "row": 8813,
+          "pcode": "MMR012009083",
+          "name": "Myin Hlut",
+          "status": "Inactive",
+          "change_type": "VTtoTown",
+          "notification_modified": "No. 299/2016",
+          "modified_end_date": "2016-02-02"
+        },
+        "successor_town": {
+          "part": "xl/worksheets/sheet5.xml",
+          "row": 290,
+          "pcode": "MMR012009704",
+          "name": "Myin Hlut Town",
+          "burmese": "မြင်းလွှတ်",
+          "status": "Active",
+          "notification": "No. 299/2016",
+          "start_date": "2016-02-02"
+        },
+        "ward_count_in_scoped_rows": 8,
+        "ward_row_locators": [
+          1749,
+          1750,
+          1751,
+          1752,
+          1753,
+          1754,
+          1755,
+          1756
+        ],
+        "all_ward_notification_and_start_match": true,
+        "explicit_tsp_pcode": "MMR012009",
+        "explicit_township": "Maungdaw"
+      }
+    ],
+    "contemporaneous_context": "Existing2019 GAD profile PDF page14 also records299/2016,2 February2016 for Kha Maung Seik5wards/Myin Hlut8wards. The2026 roster independently disambiguates both named towns and their separate Pcodes under the same notification.",
+    "original_order_text_read": false
+  },
+  "two_owner_bilingual_hierarchy_join": [
+    {
+      "roster_part": "xl/worksheets/sheet4.xml",
+      "roster_row": 178,
+      "roster_pcode": "MMR012009",
+      "roster_english": "Maungdaw",
+      "roster_burmese": "မောင်တော",
+      "retained_owner": 30402,
+      "retained_source_id": "gb:MMR:ADM3:66882298B98818104227605",
+      "source_sid": 45198,
+      "land_candidates": 83,
+      "relative_candidates": 80
+    },
+    {
+      "roster_part": "xl/worksheets/sheet4.xml",
+      "roster_row": 174,
+      "roster_pcode": "MMR012010",
+      "roster_english": "Buthidaung",
+      "roster_burmese": "ဘူးသီးတောင်",
+      "retained_owner": 30393,
+      "retained_source_id": "gb:MMR:ADM3:66882298B96066491873241",
+      "source_sid": 45114,
+      "land_candidates": 6,
+      "relative_candidates": 0
+    }
+  ],
+  "applicability_conclusion": "The dated tract-to-town and tract-to-ward chains expressly remain under Maungdaw TownshipMMR012009, which the bilingual township row uniquely joins nominally to retained owner30402. They support internal administrative lineage for that83-cell owner context. ButhidaungMMR012010 joins nominally to owner30393 under the same named district but its6 centres have no new tract-level placement here. No source shapeID-to-Pcode geometry identity is claimed.",
+  "taungpyo_limit": {
+    "town_part": "xl/worksheets/sheet5.xml",
+    "town_row": 291,
+    "town_pcode": "MMR012009702",
+    "english_literal": "Taungpyoletwea Town",
+    "ward_rows": [
+      1757,
+      1758,
+      1759,
+      1760,
+      1761
+    ],
+    "literal_result": "Town and five ward notification/start/end fields blank. No2013 number/date inserted from another narrative."
+  },
+  "bounded_original_instrument_followup": {
+    "target": "Original No.304/2019 notification and territorial schedule/map matching the six ward transition rows; original299/2016 ward/town annex remains separately needed.",
+    "queries": [
+      "Exact Burmese304/2019 token",
+      "304/2019 with Maungdaw",
+      "Maungdaw with23-9-2019"
+    ],
+    "result": "No original signed instrument/annex located. One secondary article gave a27 September2019 publication claim but no original-document link; not adopted as effective date or boundary evidence. A generic MoHA newspaper hit was not treated as the order. No guessed gazette URL or failed historical workbook retry.",
+    "secondary_discovery_only": "https://www.rohingyatoday.com/en/after-and-grabs-and-shuffling-and-dividing-maungdaw-village-wards-government-now-ignores",
+    "original_instrument_url": null
+  },
+  "vintage_and_scope_limits": [
+    "Compilation releasedJanuary2026, even though fields record2016/2019 dates. GADActive means the recorded administrative status, not current political control or exact territorial truth.",
+    "The consumed geoBoundaries family only declares2019, with no confirmed pre/post23 September2019 within-year cut. The dated roster cannot silently update that original footprint.",
+    "Paired tract/ward names and Pcodes establish recorded reclassification; no coordinates, polygon boundary, annex map, scale or datum used. Candidate-centre membership in each unit remains unknown.",
+    "No country/foreign-source exclusion, land/water hierarchy or native conservation established. All89 land and80relative held."
+  ],
+  "reuse_terms": "Workbook metadata: acknowledge MIMU as source; not for sale or commercial use; free use with attribution; no implied United Nations endorsement. No raw workbook Git publication.",
+  "method": "Reused existing local2.08MB primary roster with verifiedSHA; only ZIP/XML text metadata read, literal fields/row locators retained, no macros, new download, large body, runtime setup, GIS/classifier/native/source/GSHHG work or Git fetch."
+}

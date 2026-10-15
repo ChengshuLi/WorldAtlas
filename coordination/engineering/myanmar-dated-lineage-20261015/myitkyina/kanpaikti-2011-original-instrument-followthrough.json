@@ -1,0 +1,91 @@
+{
+  "version": 1,
+  "kind": "kanpaikti-2011-original-instrument-bounded-access-followthrough",
+  "created_utc": "2026-10-15T02:02:46.806893+00:00",
+  "scope": "Myitkyina425; Kanpaikti2011date/instrument identity only",
+  "existing_reviewed_factual_packet": {
+    "path": "myitkyina/resumed-positive-owner-applicability.json",
+    "bytes": 14749,
+    "sha256": "b171cf8a61c6471d76c6c99067407eefbff3753df050d74f30198a06d88c7b7f",
+    "review_path": "myitkyina/resumed-positive-owner-independent-review.json",
+    "review_bytes": 2555,
+    "review_sha256": "09dee7059ac0ba7f569fa19002b5d8c94f2c22f28689bd9e6a8307e14693c6fb",
+    "review_outcome": "ACCEPTED-WITH-LIMITS; read actual review for exact findings"
+  },
+  "question": {
+    "record_A": {
+      "source": "Retained GAD-sourced MIMU9.7January2026 workbook",
+      "locator": "04_Town!M155/O155; xl/worksheets/sheet5.xml",
+      "notification": "200/24-67/U-1",
+      "date_serial": "40548",
+      "decoded_date": "2011-01-05"
+    },
+    "record_B": {
+      "source": "MNA/GNLM2023-02-22 official retrospective history",
+      "url": "https://www.gnlm.com.mm/kanpaikti-town-in-waingmaw-township-changed-its-name-to-kanpaiti/",
+      "locator": "paragraph5, extracted line15",
+      "date": "2011-01-12",
+      "notification_id": "not reproduced"
+    },
+    "rule": "Do not assume the two dates describe the same instrument, issuing/publication/effective dates, or successive steps without the original record."
+  },
+  "actual_archive_access_results": [
+    {
+      "url": "http://www.moi.gov.mm/ppe/?q=books/pyantan",
+      "locator_source": "Published Gazette external catalogue link encountered during bounded discovery",
+      "observed_final_url": "https://www.moi.gov.mm/ppe/?q=books%2Fpyantan",
+      "outcome": "404NotFound on first read; no retry or guessed filename variants."
+    },
+    {
+      "url": "https://moi.gov.mm/ppd/pyantan",
+      "locator_source": "New currently published official Gazette catalogue address; observed in indexed bibliographic page",
+      "issuer": "Printing and Publishing Department, Ministry of Information",
+      "outcome": "Readable catalogue; extracted lines2–35 list2026Gazetteissues only; no2011issue or year-search link exposed in returned page. No claim that all department archives lack2011."
+    },
+    {
+      "url": "https://sarpaybeikman-pol.gov.mm/books/pyanthan-info",
+      "issuer": "Sarpay Beikman, official publisher catalogue",
+      "outcome": "Readable, shows latest2026Gazetteissues and a linked final page52. Followed that observed link once."
+    },
+    {
+      "url": "https://sarpaybeikman-pol.gov.mm/books/pyanthan-info?page=52",
+      "locator_source": "Catalogue final-page link35, not invented query variant",
+      "outcome": "Readable final indexed page; only3Gazetteentries:2016-12-02(volume69/50),2016-11-25(volume69/49),2016-11-18(volume69/48), extracted lines11–24. Pagination line41marks52current and line42has no next link.",
+      "complete_access_conclusion": "This publicly linked catalogue sequence ends at November2016 in its returned final page, so it does not expose aJanuary2011issue. Did not enumerate intermediate pages or infer missing original instruments."
+    },
+    {
+      "url": "https://eresource.nlm.gov.mm/metadata/library/125",
+      "issuer": "National Library of Myanmar e-resource catalogue",
+      "locator_source": "Indexed result titled Myanmar Gazette",
+      "outcome": "400Timeout fetching on first read; no retry. Search snippet mentioned1943December, not2011."
+    },
+    {
+      "url": "https://mlis.gov.mm/lsScPop.do?lawordSn=17851",
+      "issuer": "Myanmar Law Information System",
+      "locator_source": "Official indexed MoHA formation record returned during Kanpaikti search; target title not established",
+      "outcome": "Not accessible via webtool on first read. No notification body returned; not treated as a Kanpaikti instrument."
+    }
+  ],
+  "search_limit": {
+    "new_queries": [
+      "ကန်ပိုက်တီ +၂၀၁၁ +ဇန်နဝါရီ +အမိန့်",
+      "Kanpaikti +January +2011 +notification",
+      "၂၀၀/၂၄-၆၇",
+      "MyanmarGazette2011/officialgazette archive discovery",
+      "Official-domain bounded Gazette2011 and Kanpaikti2011 index checks"
+    ],
+    "result": "No original2011instrument or contemporaneous dated official notice located. Results largely repeated2023retrospective news or irrelevant items; no further broad search loop. Exact previously searched full200/24-67/U-1 query was not repeated.",
+    "not_done": [
+      "No blind archive filename/date variants",
+      "No local/browser downloads",
+      "No credentials/contact/outreach",
+      "No unofficial mirror newspaper issue acquisition",
+      "No repeated blocked URL",
+      "No scientific predicate/geometry/source classifier",
+      "No Git acquisition or tracked edit"
+    ]
+  },
+  "next_exact_artifact": "Original MoHA200/24-67/U-1 associated with2011-01-05 in the GAD-sourced roster, plus the separately reported MoHA2011-01-12 Kanpaikti organization notice and any annex; compare actual issuer/date/effective/ward-village-tract subject clauses. A contemporaneous official Gazette issue or department register entry reproducing either is sufficient for an instrument-identity step, but an accessible2011issue locator remains unavailable in the inspected public routes.",
+  "outcome": "Instrument/date identity unresolved after a bounded actual archive-access pass. Existing positive Kanpaikti-to-Waingmaw administrative affiliation is unchanged. All425cells held.",
+  "source_custody_limit": "Web extracted HTML/catalogue metadata only; no original notification/PDF bytes or source hash claimed."
+}

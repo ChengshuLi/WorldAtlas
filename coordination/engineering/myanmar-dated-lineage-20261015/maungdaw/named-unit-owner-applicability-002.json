@@ -1,0 +1,285 @@
+{
+  "kind": "positive-named-unit-to-retained-owner-applicability",
+  "date_utc": "2026-10-15",
+  "status": "Positive documentary administrative applicability established for specified named units only. All89 repair-land and80 source-relative candidates remain held. No tracked changes; PR1939 frozen.",
+  "input": {
+    "path": "maungdaw/retained-parent-inventory.json",
+    "bytes": 5625,
+    "sha256": "6b3a93b6a2007b98087235cc5f5ed5617ae2a1a26555b00099c3c4268f16a5ad",
+    "scientific_vintage": "f7c358326d776398bc1cffe84df81eac7033091c",
+    "retention_limit": "Untracked cache identified by path/hash, not falsely attributed to scientific-vintage commit."
+  },
+  "primary_roster": {
+    "url": "https://themimu.info/sites/themimu.info/files/documents/MIMU_PCodesMajorChangesbetweenVersionV9and9.1_24Jan2020_0.pdf",
+    "publisher": "Myanmar Information Management Unit",
+    "title": "Change History of MIMU Pcode Version9.0 vs9.1",
+    "document_date": "24 January2020 filename; January2020 version9.1",
+    "prior_release": "Version9 released September2019, explicitly identified on PDF page1.",
+    "locators": {
+      "new_wards": "PDF page2, section1.2; explicit heading Rakhine State, Maungdaw Township and Town column Maungdaw Town.",
+      "prior_tracts": "PDF page4, section2.3; Township column Maungdaw, named former village tracts and their original Pcodes."
+    },
+    "provenance": "PDF page1 says changes use latest GAD gazette plus field offices/government departments. Original gazette dates/order numbers for these rows are not supplied.",
+    "access": "Successful read-only web PDF text,6 pages. Catalogue size384.72KB. No local/browser download.",
+    "new_ward_rows": [
+      {
+        "pcode": "MMR012009701507",
+        "name": "Ka Nyin Tan",
+        "unit_kind": "Ward",
+        "explicit_town": "Maungdaw Town",
+        "explicit_township": "Maungdaw",
+        "explicit_region": "Rakhine"
+      },
+      {
+        "pcode": "MMR012009701512",
+        "name": "Let Thar",
+        "unit_kind": "Ward",
+        "explicit_town": "Maungdaw Town",
+        "explicit_township": "Maungdaw",
+        "explicit_region": "Rakhine"
+      },
+      {
+        "pcode": "MMR012009701508",
+        "name": "Maung Ni",
+        "unit_kind": "Ward",
+        "explicit_town": "Maungdaw Town",
+        "explicit_township": "Maungdaw",
+        "explicit_region": "Rakhine"
+      },
+      {
+        "pcode": "MMR012009701509",
+        "name": "Myo Thu Gyi",
+        "unit_kind": "Ward",
+        "explicit_town": "Maungdaw Town",
+        "explicit_township": "Maungdaw",
+        "explicit_region": "Rakhine"
+      },
+      {
+        "pcode": "MMR012009701511",
+        "name": "Myo U",
+        "unit_kind": "Ward",
+        "explicit_town": "Maungdaw Town",
+        "explicit_township": "Maungdaw",
+        "explicit_region": "Rakhine"
+      },
+      {
+        "pcode": "MMR012009701510",
+        "name": "Wai Thar Li",
+        "unit_kind": "Ward",
+        "explicit_town": "Maungdaw Town",
+        "explicit_township": "Maungdaw",
+        "explicit_region": "Rakhine"
+      }
+    ],
+    "predecessor_tract_rows": [
+      {
+        "pcode": "MMR012009062",
+        "name": "Ka Nyin Tan",
+        "unit_kind": "Village Tract",
+        "explicit_township": "Maungdaw",
+        "explicit_region": "Rakhine",
+        "recorded_conversion": "2 villages to 2 wards"
+      },
+      {
+        "pcode": "MMR012009063",
+        "name": "Myo Thu Gyi",
+        "unit_kind": "Village Tract",
+        "explicit_township": "Maungdaw",
+        "explicit_region": "Rakhine",
+        "recorded_conversion": "6 villages to 2 wards"
+      },
+      {
+        "pcode": "MMR012009061",
+        "name": "Myo U",
+        "unit_kind": "Village Tract",
+        "explicit_township": "Maungdaw",
+        "explicit_region": "Rakhine",
+        "recorded_conversion": "8 villages to 2 wards"
+      }
+    ]
+  },
+  "join": {
+    "method": "Deterministic attribute/hierarchy join of the roster explicit Township=Maungdaw and Region=Rakhine to the retained gb:MMR:ADM3 Maungdaw record within the complete two-child Maungdaw parent roster. No code-prefix inference needed to establish stated township.",
+    "match_count": 1,
+    "matched_owner": 30402,
+    "matched_original_source_id": "gb:MMR:ADM3:66882298B98818104227605",
+    "source_atoms": [
+      "gb:MMR:ADM3:66882298B98818104227605"
+    ],
+    "source_sid": 45198,
+    "parent_id": "framework:province:maungdaw:b1591a4daf84",
+    "parent_source_id": "gb:MMR:ADM2:60261553B63127450973926",
+    "parent_source_sid": 44937,
+    "region_source_id": "gb:MMR:ADM1:20573499B29373908448635",
+    "region_source_sid": 44892,
+    "recorded_vintage": "2019 MMR source family in original packet",
+    "direct_pcode_join_available_in_retained_owner_record": false,
+    "join_strength": "Explicit township/region names and administrative role concordance; not an exact Pcode field crosswalk or boundary equivalence. Town Maungdaw and District Maungdaw were not confused with the ADM3 township.",
+    "positive_conclusion": "The three predecessor tract records and six resulting ward records are administratively applicable to the Maungdaw Township owner30402 context across the recorded September2019-to-January2020 version transition. They are internal subdivision changes under a named Maungdaw Township; this documentary evidence does not assign them to Buthidaung owner30393 or establish any township footprint expansion.",
+    "limit_on_negative_conclusion": "No claim that the change-history excerpt exhausts every administrative or territorial change."
+  },
+  "candidate_owner_context": {
+    "owner30402": {
+      "source_id": "gb:MMR:ADM3:66882298B98818104227605",
+      "land_candidates": 83,
+      "relative_candidates_held": 80,
+      "source_sids": [
+        2713,
+        44892,
+        44937,
+        45198
+      ],
+      "land_foreign_BGD_ADM1_sid2713_occurrences": 46
+    },
+    "other_complete_child": {
+      "owner": 30393,
+      "name": "Buthidaung",
+      "source_id": "gb:MMR:ADM3:66882298B96066491873241",
+      "land_candidates": 6,
+      "land_foreign_BGD_ADM1_sid2713_occurrences": 6,
+      "applicability": "No Buthidaung named units appear in the selected Maungdaw roster section; its6 candidates are outside this specific named-unit join."
+    },
+    "exact_candidate_to_tract_or_ward_membership": "Not established; no geometry/point classification performed. Roster names/Pcodes do not label any of the89 native centres.",
+    "retained_centre_extents": [
+      {
+        "owner": 30393,
+        "kind": "land",
+        "cells": 6,
+        "intervals": 3,
+        "x_inclusive": [
+          198418,
+          198525
+        ],
+        "y_inclusive": [
+          115150,
+          115243
+        ],
+        "centre_envelope_degrees": {
+          "longitude": [
+            92.46347733878537,
+            92.61040714661704
+          ],
+          "latitude": [
+            21.246080975884983,
+            21.365058389499293
+          ]
+        },
+        "source_sids": [
+          2713,
+          44892,
+          44937,
+          45114
+        ],
+        "sid_occurrences": {
+          "2713": 6,
+          "44892": 6,
+          "44937": 6,
+          "45114": 6
+        }
+      },
+      {
+        "owner": 30402,
+        "kind": "land",
+        "cells": 83,
+        "intervals": 71,
+        "x_inclusive": [
+          198209,
+          198546
+        ],
+        "y_inclusive": [
+          115102,
+          115860
+        ],
+        "centre_envelope_degrees": {
+          "longitude": [
+            92.17648360199263,
+            92.63924383787372
+          ],
+          "latitude": [
+            20.454322477589,
+            21.426428330175092
+          ]
+        },
+        "source_sids": [
+          2713,
+          44892,
+          44937,
+          45198
+        ],
+        "sid_occurrences": {
+          "2713": 46,
+          "44892": 83,
+          "44937": 83,
+          "45198": 83
+        }
+      },
+      {
+        "owner": 30402,
+        "kind": "source-relative",
+        "cells": 80,
+        "intervals": 66,
+        "x_inclusive": [
+          198282,
+          198525
+        ],
+        "y_inclusive": [
+          115459,
+          115850
+        ],
+        "centre_envelope_degrees": {
+          "longitude": [
+            92.27672543350394,
+            92.61040714661704
+          ],
+          "latitude": [
+            20.467187924026508,
+            20.969376144935925
+          ]
+        },
+        "source_sids": [
+          2713,
+          44892,
+          44937,
+          45198
+        ],
+        "sid_occurrences": {
+          "2713": 17,
+          "44892": 80,
+          "44937": 80,
+          "45198": 80
+        }
+      }
+    ],
+    "territorial_clearance": false,
+    "promoted_cells": 0
+  },
+  "new_primary_method_and_provenance": {
+    "url": "https://themimu.info/sites/themimu.info/files/documents/Pcodes_Read_Me_9.2_20Mar2020.pdf",
+    "publisher": "MIMU",
+    "date": "March2020",
+    "pages": 5,
+    "locators": [
+      "PDF page1: version9 onward adds ChangeType, administrative Status, Notification Number, Modified Notification Number, Start Date, End/Modified Date.",
+      "PDF page4: releaseVIII in August2015 terminates sub-township level and designates24 places as town level; broad scheme context only.",
+      "PDF page5: source and use constraints."
+    ],
+    "fact": "A contemporary Pcode database can carry the original notification and validity fields needed for a stronger code-to-order join.",
+    "next_specific_artifact": "MIMU Version9 September2019 / Version9.1 January2020 original Maungdaw rows, including Status, Notification Number, Start Date and End/Modified Date; detailed change file explicitly named MIMU_PCode_ChangeHistory_Version9_to_Version9.1_23Jan2020.xlsx on major-changes PDF page4. No new workbook download performed.",
+    "source_vintage_limit": "Readme page5 source bullet says GAD December2018, while source footer says December2019. Both retained; no silent normalization.",
+    "constraints": "Operational humanitarian/development/peace purposes; products not for sale or commercial use; free use with attribution; no implied UN endorsement. These constraints are distinct from geoBoundaries CC BY4.0.",
+    "access": "Successful read-only web PDF text; catalogue348.16KB, no local download."
+  },
+  "other_small_document_read": {
+    "url": "https://themimu.info/sites/themimu.info/files/documents/MIMU_PCodesMajorChangesbetweenVersionV9.1and9.2_20Mar2020.pdf",
+    "pages": 6,
+    "access": "Successful read-only web PDF text; catalogue829.2KB.",
+    "limit": "Selected opening discusses Yangon/self-administered changes. No Maungdaw ownership inference drawn from it."
+  },
+  "not_established": [
+    "Original2013/2016 signed formation orders or their territorial annexes.",
+    "Direct Pcode in geoBoundaries source-owner attributes or a full source-family Pcode crosswalk.",
+    "Whole original Maungdaw/Buthidaung parent/footprint equality or relevant international boundary exclusions.",
+    "Exact native-centre membership in the named tracts or wards; no water/physical/native qualification."
+  ],
+  "method_limits": "Retained small metadata and bounded primary-document web reads only. No GIS, source classifier, native, GSHHG, raw source pass, large download, runtime creation or Git fetch."
+}

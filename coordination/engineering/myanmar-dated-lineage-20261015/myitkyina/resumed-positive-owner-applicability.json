@@ -1,0 +1,289 @@
+{
+  "version": 1,
+  "kind": "myitkyina-resumed-positive-administrative-applicability-addendum",
+  "created_utc": "2026-10-15T01:55:52.530702+00:00",
+  "parent": "framework:province:myitkyina:dfd6b0c4e1c6",
+  "candidate_cells": 425,
+  "disposition": "all425 held; no geometry, candidate owner qualification, boundary or sovereignty determination",
+  "preservation": "All previously published/local notes remain unchanged; this addendum supersedes only the earlier statement that no explicit Kanpaikti-to-Waingmaw parent evidence was available.",
+  "custody": {
+    "retained_candidate_context": {
+      "path": "Private retained auxiliary; not included in this source-only checkpoint; original SHA256 ccdfc0fc9bfe900d0f8eebeecfb5463a5e623927076f075de2d0ee08332e9283",
+      "bytes": 80475,
+      "sha256": "ccdfc0fc9bfe900d0f8eebeecfb5463a5e623927076f075de2d0ee08332e9283"
+    },
+    "exact_roster_rows": {
+      "path": "myitkyina/resumed-roster-exact-rows.json",
+      "bytes": 65624,
+      "sha256": "b283e30bb60113fc9000c06e38602d44c87896ea1e7aed3cc0ea675d0e836ee6"
+    },
+    "roster_file": {
+      "path": "sources/MIMU-9.7-Jan2026-roster.xlsm",
+      "bytes": 2079584,
+      "sha256": "11fff1b1eca8b1ff3cad3b0a90e757a187ae0b9cdc396bac708136da36ccdda2",
+      "publisher_url": "https://themimu.info/sites/themimu.info/files/documents/Myanmar_PCodes_Release_9.7_Jan2026_StRgn_Dist_Tsp_Town_Ward_VT.xlsm",
+      "release": "January 2026 v9.7",
+      "publisher": "Myanmar Information Management Unit; row Source fields GAD",
+      "local_source_custody": "Existing retained file from /root/rakhine_2578_inputs; no acquisition by this worker"
+    },
+    "web_sources": "Read-only web extracted HTML; source bodies were not locally downloaded or hashed."
+  },
+  "positive_result": {
+    "owner": 30191,
+    "original_id": "gb:MMR:ADM3:66882298B42133100015884",
+    "retained_name": "Waingmaw",
+    "target_source_sid": 45275,
+    "candidate_cells": 166,
+    "finding": "An official MNA account explicitly places Kanpaikti within Waingmaw, including its history as a sub-township and 2014 reconstitution as a town. The retained GAD-sourced MIMU roster independently assigns Kan Paik Ti Town to Waingmaw MMR001002. The prior concern that a separately published 2014 Kanpaikti census report by itself represented an independent ADM3 unit is no longer a sound administrative objection.",
+    "limit": "This establishes named administrative affiliation and lineage context. It does not prove complete 2019 polygon extent, the legal effect of any unpublished annex, source-ID equivalence, or ownership of any of the166 candidate centres."
+  },
+  "new_official_account": {
+    "primary_url": "https://www.gnlm.com.mm/kanpaikti-town-in-waingmaw-township-changed-its-name-to-kanpaiti/",
+    "title": "Kanpaikti town in Waingmaw Township changed its name to Kanpaiti",
+    "issuer": "Myanmar News Agency (MNA/KTZH), Global New Light of Myanmar",
+    "publication_date": "2023-02-22",
+    "access_date": "2026-10-15",
+    "medium": "Official news account of Ministry of Home Affairs actions, not an acquired operative notification/annex",
+    "support": [
+      {
+        "location": "article paragraph1, web extracted line11",
+        "quotation": "Kanpaikti town in Waingmaw Township of Myitkyina District of Kachin State",
+        "finding": "Explicit township/district parent; cites MoHA Notification110/2023 dated14February2023 for the rename to Kanpaiti."
+      },
+      {
+        "location": "article paragraph5, extracted line15",
+        "quotation": "12 January 2011",
+        "finding": "Reports MoHA organization into three wards and a sub-township containing one town, three wards, three village tracts and30villages; no2011instrument number reproduced."
+      },
+      {
+        "location": "article paragraph6, extracted line16",
+        "quotation": "22 May 2014",
+        "finding": "Reports reconstitution as a town, removing sub-township terminology to conform to ConstitutionSection51; no2014instrument number reproduced."
+      },
+      {
+        "location": "article paragraph7, extracted line17",
+        "finding": "Identifies former village affiliation with Wawtchone village tract in Waingmaw. The town area208.59square miles is context, not footprint proof."
+      }
+    ],
+    "parallel_official_publications": [
+      {
+        "url": "https://mdn.gov.mm/my/wiungmeaamiunyri-knpiukttii-miuaaa-knpiungttnny-miuaphc-amnnypeaanglai",
+        "issuer": "Myanmar Digital News, Ministry of Information",
+        "published": "2023-02-21",
+        "locators": "extracted lines24,29–30",
+        "status": "Burmese account agrees on parent and2011/2014dates; no independent notification image/annex."
+      },
+      {
+        "url": "https://www.myanmaritv.com/news/name-town-changed-kanpaikti-town-changed-kanpaiti",
+        "issuer": "Myanmar International TV",
+        "published": "2023-02-22",
+        "locators": "extracted lines38,41–42",
+        "status": "Parallel English account; not counted as an independent legal instrument."
+      }
+    ],
+    "scale_datum_map_extent": "Not supplied; this is an administrative history account.",
+    "license": "GNLM and MDN footer says all rights reserved; no report/map reuse license inferred."
+  },
+  "exact_retained_name_parent_joins": [
+    {
+      "owner": 30286,
+      "original_id": "gb:MMR:ADM3:66882298B63943979787937",
+      "retained_name": "Chipwi",
+      "candidate_cells": 220,
+      "source_sids": [
+        15319,
+        44886,
+        44912,
+        45270
+      ],
+      "roster_locator": "03_Township!C71:I71; N71; P71",
+      "tsp_pcode": "MMR001005",
+      "district_pcode": "MMR001D001",
+      "district_name": "Myitkyina",
+      "source_cell": "GAD",
+      "join_basis": "Exact retained English name and parent district name; roster supplies independent bilingual identity/Pcode. No gb-ID field in roster; this is an administrative name/parent join, not polygon or source-ID equivalence."
+    },
+    {
+      "owner": 30156,
+      "original_id": "gb:MMR:ADM3:66882298B33332446672250",
+      "retained_name": "Injangyang",
+      "candidate_cells": 0,
+      "source_sids": [],
+      "roster_locator": "03_Township!C73:I73; N73; P73",
+      "tsp_pcode": "MMR001003",
+      "district_pcode": "MMR001D001",
+      "district_name": "Myitkyina",
+      "source_cell": "GAD",
+      "join_basis": "Exact retained English name and parent district name; roster supplies independent bilingual identity/Pcode. No gb-ID field in roster; this is an administrative name/parent join, not polygon or source-ID equivalence."
+    },
+    {
+      "owner": 30207,
+      "original_id": "gb:MMR:ADM3:66882298B4579999731353",
+      "retained_name": "Myitkyina",
+      "candidate_cells": 0,
+      "source_sids": [],
+      "roster_locator": "03_Township!C80:I80; N80; P80",
+      "tsp_pcode": "MMR001001",
+      "district_pcode": "MMR001D001",
+      "district_name": "Myitkyina",
+      "source_cell": "GAD",
+      "join_basis": "Exact retained English name and parent district name; roster supplies independent bilingual identity/Pcode. No gb-ID field in roster; this is an administrative name/parent join, not polygon or source-ID equivalence."
+    },
+    {
+      "owner": 30260,
+      "original_id": "gb:MMR:ADM3:66882298B59193658756261",
+      "retained_name": "Tanai",
+      "candidate_cells": 6,
+      "source_sids": [
+        36798,
+        44886,
+        44912,
+        44992,
+        67629
+      ],
+      "roster_locator": "03_Township!C85:I85; N85; P85",
+      "tsp_pcode": "MMR001004",
+      "district_pcode": "MMR001D001",
+      "district_name": "Myitkyina",
+      "source_cell": "GAD",
+      "join_basis": "Exact retained English name and parent district name; roster supplies independent bilingual identity/Pcode. No gb-ID field in roster; this is an administrative name/parent join, not polygon or source-ID equivalence."
+    },
+    {
+      "owner": 30164,
+      "original_id": "gb:MMR:ADM3:66882298B34211436690128",
+      "retained_name": "Tsawlaw",
+      "candidate_cells": 33,
+      "source_sids": [
+        44886,
+        44912,
+        45277
+      ],
+      "roster_locator": "03_Township!C86:I86; N86; P86",
+      "tsp_pcode": "MMR001006",
+      "district_pcode": "MMR001D001",
+      "district_name": "Myitkyina",
+      "source_cell": "GAD",
+      "join_basis": "Exact retained English name and parent district name; roster supplies independent bilingual identity/Pcode. No gb-ID field in roster; this is an administrative name/parent join, not polygon or source-ID equivalence."
+    },
+    {
+      "owner": 30191,
+      "original_id": "gb:MMR:ADM3:66882298B42133100015884",
+      "retained_name": "Waingmaw",
+      "candidate_cells": 166,
+      "source_sids": [
+        15319,
+        44886,
+        44912,
+        45275
+      ],
+      "roster_locator": "03_Township!C87:I87; N87; P87",
+      "tsp_pcode": "MMR001002",
+      "district_pcode": "MMR001D001",
+      "district_name": "Myitkyina",
+      "source_cell": "GAD",
+      "join_basis": "Exact retained English name and parent district name; roster supplies independent bilingual identity/Pcode. No gb-ID field in roster; this is an administrative name/parent join, not polygon or source-ID equivalence."
+    }
+  ],
+  "new_roster_town_joins": [
+    {
+      "owner": 30286,
+      "original_id": "gb:MMR:ADM3:66882298B63943979787937",
+      "candidate_cells": 220,
+      "source_target_sid": 45270,
+      "locator": "04_Town!C127:Q127",
+      "town_pcode": "MMR001005702",
+      "town_english": "Pang War Town",
+      "town_myanmar": "ပန်ဝါ",
+      "parent_tsp_pcode": "MMR001005",
+      "parent_tsp_english": "Chipwi",
+      "source": "GAD",
+      "notification": "200/24-66/U-1",
+      "start_date_raw": "40548",
+      "start_date_decoded": "2011-01-05",
+      "finding": "Publisher-recorded town-to-Chipwi affiliation and exact notification/date metadata. Earlier Panwa notification ID was secondary-only; now independently present in retained publisher workbook.",
+      "limit": "The town record is not a Panwa sub-township boundary/nesting annex; no 220-cell coverage inference."
+    },
+    {
+      "owner": 30191,
+      "original_id": "gb:MMR:ADM3:66882298B42133100015884",
+      "candidate_cells": 166,
+      "source_target_sid": 45275,
+      "locator": "04_Town!C155:Q155",
+      "town_pcode": "MMR001002703",
+      "town_english": "Kan Paik Ti Town",
+      "town_myanmar": "ကန်ပိုက်တီ",
+      "parent_tsp_pcode": "MMR001002",
+      "parent_tsp_english": "Waingmaw",
+      "source": "GAD",
+      "notification": "200/24-67/U-1",
+      "start_date_raw": "40548",
+      "start_date_decoded": "2011-01-05",
+      "finding": "Explicit publisher row links town to Waingmaw and provides a newly precise instrument locator.",
+      "limit": "The roster has old Kanpaikti name despite2023official rename; do not treat the2026release as a complete current legal gazette or as a2019polygon edition."
+    },
+    {
+      "owner": 30191,
+      "locator": "04_Town!E156:I156",
+      "town_pcode": "MMR001002702",
+      "town_english": "Sadung Town",
+      "town_myanmar": "ဆဒုံး",
+      "parent_tsp_pcode": "MMR001002",
+      "parent_tsp_english": "Waingmaw",
+      "finding": "Positive town-parent record. Relation to2014census Hsadone Sub-Township is not assumed from spelling alone."
+    },
+    {
+      "owner": 30260,
+      "locator": "04_Town!E152:I152",
+      "town_pcode": "MMR001004702",
+      "town_english": "Shin Bway Yang Town",
+      "town_myanmar": "ရှင်ဗွေယန်",
+      "parent_tsp_pcode": "MMR001004",
+      "parent_tsp_english": "Tanai",
+      "finding": "Positive current town-parent record. No date or notification populated;2014Shinbwayyan census-unit extent not equated."
+    }
+  ],
+  "date_and_vintage_limits": {
+    "roster_2011_record": "04_Town!M155=40548 decodes to2011-01-05; O155=200/24-67/U-1. M127/O127 similarly pair2011-01-05 with200/24-66/U-1.",
+    "official_account_2011_record": "Official MNA/MDN reports formation2011-01-12 without an instrument number.",
+    "treatment": "Preserve both. They are not authenticated as the same instrument or the same stage of establishment; neither date replaces the other.",
+    "relevance_to_original2019": "The official account retrospectively identifies2011/2014events before the source reference year2019, but its2023publication is not contemporaneous2019source geometry. The2026roster matches retained namedtownship/parent affiliations but gives no township start/effective dates.",
+    "no_current_gazette_assumption": "2026roster still shows Kanpaikti while official2023account records Kanpaiti; spelling/currentness cannot be established solely by workbook release date."
+  },
+  "candidate_join_limits": {
+    "source_sid15319": "Unknown exact feature identity in available prior metadata; occurs8Waingmaw+40Chipwi candidates; no country inference from border-town description.",
+    "candidate_geography": "Use exact envelopes/SID patterns in retained candidate context only. No point-in-polygon, map registration, foreign-veto or coverage test performed.",
+    "full_cohort": "Tsawlaw33,Waingmaw166,Tanai6,Chipwi220 all held; zero qualification credit."
+  },
+  "remaining_precise_artifacts": [
+    {
+      "artifact": "MoHA instrument referenced by roster Notification200/24-67/U-1 with2011-01-05 date; separately MoHA2011-01-12 formation notification and annex",
+      "purpose": "Resolve dates/instrument identity and establish actual wards/tracts/boundaries."
+    },
+    {
+      "artifact": "MoHA2014-05-22 Kanpaikti reconstitution instrument and boundary/administrative annex",
+      "purpose": "Verify legal wording and retained footprint effect of sub-township-to-town conversion."
+    },
+    {
+      "artifact": "MoHA Notification110/2023 dated2023-02-14",
+      "purpose": "Verify exact operative rename and any scope clause; later than2019, no retroactive geometry inference."
+    },
+    {
+      "artifact": "MoHA200/24-66/U-1 dated2011-01-05 as recorded by MIMU, with original PangWar/Panwa annex",
+      "purpose": "Authenticate Chipwi town/sub-township scope rather than infer from current town table."
+    }
+  ],
+  "new_access_failures": [
+    {
+      "url": "https://kachinstate.gov.mm/page/174/",
+      "result": "400Timeout fetching on firstread; not retried."
+    }
+  ],
+  "operating_limits": {
+    "no_new_network_downloads": true,
+    "no_git_acquisition_or_mutation": true,
+    "no_scientific_operators": true,
+    "no_tracked_edits": true,
+    "no_old_cache_file_changes": true,
+    "primary_research_only": true
+  }
+}

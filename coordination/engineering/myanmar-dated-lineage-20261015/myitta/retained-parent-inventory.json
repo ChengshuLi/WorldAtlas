@@ -1,0 +1,289 @@
+{
+  "source_path": "Private retained auxiliary; not included in this source-only checkpoint; original SHA256 efec8d28b63befcb411b6d0d81063af6a962edbec9a1b3f08b86fc3b7bd44157",
+  "source_sha256": "efec8d28b63befcb411b6d0d81063af6a962edbec9a1b3f08b86fc3b7bd44157",
+  "scientific_vintage": "f7c358326d776398bc1cffe84df81eac7033091c",
+  "frozen_queue_vintage": "a61b6f9e7f88b1da380e3a834f89d7509132ed71",
+  "parent": {
+    "parent_id": "framework:province:dawei:260a377dc059",
+    "repair_land": 1693,
+    "repair_water": 0,
+    "repair_cells": 1693,
+    "relative": 1145,
+    "conflicts": 0,
+    "complete_child_count": 4,
+    "repair_owner_count": 4,
+    "repair_owners": [
+      30152,
+      30227,
+      30342,
+      30380
+    ],
+    "complete_children": [
+      {
+        "owner": 30152,
+        "id": "gb:MMR:ADM3:66882298B32460181384532",
+        "name": "Thayetchaung",
+        "province_id": "framework:province:dawei:260a377dc059",
+        "source_id": "gb:MMR:ADM3",
+        "source_atoms": [
+          "gb:MMR:ADM3:66882298B32460181384532"
+        ],
+        "remaining_counts": {
+          "repair-evaluation:land": 58,
+          "physical-interpretation:source-relative": 179
+        },
+        "accepted_removed_cells": 0,
+        "reserved_excluded_cells": 0,
+        "blocks": [
+          29
+        ],
+        "source_sids": [
+          44893,
+          44953,
+          45131
+        ],
+        "topology_fields": {
+          "topology_version": 1
+        },
+        "current_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 82,
+          "interior_rings": 0,
+          "bounds": [
+            98.2048,
+            13.2911,
+            98.6629,
+            14.0424
+          ]
+        },
+        "original_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 296,
+          "interior_rings": 0,
+          "bounds": [
+            98.2048214360002,
+            13.27261872000005,
+            98.66292415000007,
+            14.042436621000064
+          ]
+        }
+      },
+      {
+        "owner": 30227,
+        "id": "gb:MMR:ADM3:66882298B48301856519721",
+        "name": "Yebyu",
+        "province_id": "framework:province:dawei:260a377dc059",
+        "source_id": "gb:MMR:ADM3",
+        "source_atoms": [
+          "gb:MMR:ADM3:66882298B48301856519721"
+        ],
+        "remaining_counts": {
+          "repair-evaluation:land": 788,
+          "physical-interpretation:source-relative": 188
+        },
+        "accepted_removed_cells": 0,
+        "reserved_excluded_cells": 0,
+        "blocks": [
+          29
+        ],
+        "source_sids": [
+          44893,
+          44953,
+          45129
+        ],
+        "topology_fields": {
+          "topology_version": 1,
+          "topology_reconciled": true,
+          "topology_conflicts": 2,
+          "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+        },
+        "current_geometry": {
+          "type": "MultiPolygon",
+          "polygons": 3,
+          "coordinate_pairs": 202,
+          "interior_rings": 0,
+          "bounds": [
+            97.784,
+            14.118,
+            98.43896642182581,
+            15.1049
+          ]
+        },
+        "original_geometry": {
+          "type": "MultiPolygon",
+          "polygons": 6,
+          "coordinate_pairs": 534,
+          "interior_rings": 0,
+          "bounds": [
+            97.76262640200031,
+            14.108611346,
+            98.43916790800012,
+            15.10485434500011
+          ]
+        }
+      },
+      {
+        "owner": 30342,
+        "id": "gb:MMR:ADM3:66882298B80414211212402",
+        "name": "Launglon",
+        "province_id": "framework:province:dawei:260a377dc059",
+        "source_id": "gb:MMR:ADM3",
+        "source_atoms": [
+          "gb:MMR:ADM3:66882298B80414211212402"
+        ],
+        "remaining_counts": {
+          "repair-evaluation:land": 828,
+          "physical-interpretation:source-relative": 778
+        },
+        "accepted_removed_cells": 0,
+        "reserved_excluded_cells": 0,
+        "blocks": [
+          29
+        ],
+        "source_sids": [
+          44893,
+          44953,
+          45116
+        ],
+        "topology_fields": {
+          "topology_version": 1
+        },
+        "current_geometry": {
+          "type": "MultiPolygon",
+          "polygons": 4,
+          "coordinate_pairs": 79,
+          "interior_rings": 0,
+          "bounds": [
+            97.9033,
+            13.5548,
+            98.2272,
+            14.2187
+          ]
+        },
+        "original_geometry": {
+          "type": "MultiPolygon",
+          "polygons": 8,
+          "coordinate_pairs": 340,
+          "interior_rings": 0,
+          "bounds": [
+            97.90198977000024,
+            13.536158964000382,
+            98.22724266100022,
+            14.220061930000206
+          ]
+        }
+      },
+      {
+        "owner": 30380,
+        "id": "gb:MMR:ADM3:66882298B9277012619903",
+        "name": "Dawei",
+        "province_id": "framework:province:dawei:260a377dc059",
+        "source_id": "gb:MMR:ADM3",
+        "source_atoms": [
+          "gb:MMR:ADM3:66882298B9277012619903"
+        ],
+        "remaining_counts": {
+          "repair-evaluation:land": 19
+        },
+        "accepted_removed_cells": 0,
+        "reserved_excluded_cells": 0,
+        "blocks": [
+          29
+        ],
+        "source_sids": [
+          44893,
+          44953,
+          45125
+        ],
+        "topology_fields": {
+          "topology_version": 1,
+          "topology_reconciled": true,
+          "topology_conflicts": 6,
+          "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+        },
+        "current_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 381,
+          "interior_rings": 0,
+          "bounds": [
+            98.1746,
+            13.2914,
+            99.20896119402985,
+            14.603302570828959
+          ]
+        },
+        "original_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 562,
+          "interior_rings": 0,
+          "bounds": [
+            98.17461627400027,
+            13.291396119000098,
+            99.2090272610001,
+            14.603453226000184
+          ]
+        }
+      }
+    ],
+    "native_blocks": [
+      29
+    ],
+    "observed_source_families": [
+      "gb:MMR:ADM1",
+      "gb:MMR:ADM2",
+      "gb:MMR:ADM3"
+    ],
+    "source_region_features": [
+      {
+        "id": "gb:MMR:ADM1:20573499B47967485654923",
+        "name": "Tanitharyi"
+      }
+    ],
+    "source_parent_features": [
+      {
+        "source_index": 44953,
+        "family_index": 217,
+        "source_id": "gb:MMR:ADM2:60261553B72281625520368",
+        "ordinal": 56,
+        "owners": [],
+        "name": "Dawei",
+        "geometry_status": "raw-native-supported"
+      }
+    ],
+    "decisions": [
+      {
+        "ids": [
+          "gb:MMR:ADM3:66882298B80414211212402",
+          "gb:MMR:ADM3:66882298B9277012619903",
+          "gb:MMR:ADM3:66882298B48301856519721",
+          "gb:MMR:ADM3:66882298B32460181384532"
+        ],
+        "status": "open",
+        "rationale": "Current province Dawei (framework:province:dawei:260a377dc059); inspected exact source identifiers for 4 locations with actual role Township, source gb:MMR:ADM3, reference vintages 2019. Pinned cache contains 330 features; 4 of these location records have entirely matched declared-source member IDs. Source-ID correspondence does not independently approve local geographic purpose, original-footprint retention, administrative reforms or settlement/rank. Exact review stays open until those tests have sourced outcomes.",
+        "evidence": [
+          {
+            "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM3/geoBoundaries-MMR-ADM3.geojson",
+            "title": "Myanmar",
+            "inspected_fact": "Actual location source gb:MMR:ADM3; role Township; reference vintage 2019; license Creative Commons Attribution 4.0 (CC BY 4.0). Source feature/member identifiers were inspected separately from ADM-level labels."
+          }
+        ],
+        "province_id": "framework:province:dawei:260a377dc059",
+        "source_id": "gb:MMR:ADM3",
+        "actual_role": "Township",
+        "specific_reasons": []
+      }
+    ],
+    "prerequisites": [
+      "Complete original source-family membership, exact source/owner/parent joins and whole-footprint parent proof.",
+      "Accepted country/topology exclusions and all explicit holes; ancestry and nearest-bank proximity do not grant territorial authority.",
+      "Whole original GSHHG hierarchy or demonstrably applicable retained target interpretation; preserve all uncertainty/relative intervals.",
+      "Later actual delivery-base effective owner-zero and native authority/conservation."
+    ],
+    "land_only_rule_ceiling": 1693
+  },
+  "limits": "Retained inventory read only; no new qualification, original geometry parsing or spatial operation."
+}

@@ -1,0 +1,179 @@
+{
+  "parent_id": "framework:province:maungdaw:b1591a4daf84",
+  "repair_land": 89,
+  "repair_water": 0,
+  "repair_cells": 89,
+  "relative": 80,
+  "conflicts": 0,
+  "complete_child_count": 2,
+  "repair_owner_count": 2,
+  "repair_owners": [
+    30393,
+    30402
+  ],
+  "complete_children": [
+    {
+      "owner": 30393,
+      "id": "gb:MMR:ADM3:66882298B96066491873241",
+      "name": "Buthidaung",
+      "province_id": "framework:province:maungdaw:b1591a4daf84",
+      "source_id": "gb:MMR:ADM3",
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B96066491873241"
+      ],
+      "remaining_counts": {
+        "repair-evaluation:land": 6
+      },
+      "accepted_removed_cells": 0,
+      "reserved_excluded_cells": 0,
+      "blocks": [
+        28
+      ],
+      "source_sids": [
+        2713,
+        44892,
+        44937,
+        45114
+      ],
+      "topology_fields": {
+        "topology_version": 1,
+        "topology_reconciled": true,
+        "topology_conflicts": 1,
+        "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+      },
+      "current_geometry": {
+        "type": "Polygon",
+        "polygons": 1,
+        "coordinate_pairs": 128,
+        "interior_rings": 0,
+        "bounds": [
+          92.3451,
+          20.5867,
+          92.7507,
+          21.3825
+        ]
+      },
+      "original_geometry": {
+        "type": "Polygon",
+        "polygons": 1,
+        "coordinate_pairs": 413,
+        "interior_rings": 0,
+        "bounds": [
+          92.34508893300003,
+          20.582940759000067,
+          92.75065050900007,
+          21.382488527000042
+        ]
+      }
+    },
+    {
+      "owner": 30402,
+      "id": "gb:MMR:ADM3:66882298B98818104227605",
+      "name": "Maungdaw",
+      "province_id": "framework:province:maungdaw:b1591a4daf84",
+      "source_id": "gb:MMR:ADM3",
+      "source_atoms": [
+        "gb:MMR:ADM3:66882298B98818104227605"
+      ],
+      "remaining_counts": {
+        "repair-evaluation:land": 83,
+        "physical-interpretation:source-relative": 80
+      },
+      "accepted_removed_cells": 0,
+      "reserved_excluded_cells": 0,
+      "blocks": [
+        28
+      ],
+      "source_sids": [
+        2713,
+        44892,
+        44937,
+        45198
+      ],
+      "topology_fields": {
+        "topology_version": 1,
+        "topology_reconciled": true,
+        "topology_conflicts": 2,
+        "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+      },
+      "current_geometry": {
+        "type": "Polygon",
+        "polygons": 1,
+        "coordinate_pairs": 149,
+        "interior_rings": 0,
+        "bounds": [
+          92.17277873485868,
+          20.4524,
+          92.6544,
+          21.4796
+        ]
+      },
+      "original_geometry": {
+        "type": "Polygon",
+        "polygons": 1,
+        "coordinate_pairs": 371,
+        "interior_rings": 0,
+        "bounds": [
+          92.17274709800023,
+          20.45216612300004,
+          92.6543862260001,
+          21.47963283900009
+        ]
+      }
+    }
+  ],
+  "native_blocks": [
+    28
+  ],
+  "observed_source_families": [
+    "gb:BGD:ADM1",
+    "gb:MMR:ADM1",
+    "gb:MMR:ADM2",
+    "gb:MMR:ADM3"
+  ],
+  "source_region_features": [
+    {
+      "id": "gb:MMR:ADM1:20573499B29373908448635",
+      "name": "Rakhine"
+    }
+  ],
+  "source_parent_features": [
+    {
+      "source_index": 44937,
+      "family_index": 217,
+      "source_id": "gb:MMR:ADM2:60261553B63127450973926",
+      "ordinal": 40,
+      "owners": [],
+      "name": "Maungdaw",
+      "geometry_status": "raw-native-supported"
+    }
+  ],
+  "decisions": [
+    {
+      "ids": [
+        "gb:MMR:ADM3:66882298B96066491873241",
+        "gb:MMR:ADM3:66882298B98818104227605"
+      ],
+      "status": "open",
+      "rationale": "Current province Maungdaw (framework:province:maungdaw:b1591a4daf84); inspected exact source identifiers for 2 locations with actual role Township, source gb:MMR:ADM3, reference vintages 2019. Pinned cache contains 330 features; 2 of these location records have entirely matched declared-source member IDs. Source-ID correspondence does not independently approve local geographic purpose, original-footprint retention, administrative reforms or settlement/rank. Exact review stays open until those tests have sourced outcomes.",
+      "evidence": [
+        {
+          "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM3/geoBoundaries-MMR-ADM3.geojson",
+          "title": "Myanmar",
+          "inspected_fact": "Actual location source gb:MMR:ADM3; role Township; reference vintage 2019; license Creative Commons Attribution 4.0 (CC BY 4.0). Source feature/member identifiers were inspected separately from ADM-level labels."
+        }
+      ],
+      "province_id": "framework:province:maungdaw:b1591a4daf84",
+      "source_id": "gb:MMR:ADM3",
+      "actual_role": "Township",
+      "specific_reasons": []
+    }
+  ],
+  "prerequisites": [
+    "Complete original source-family membership, exact source/owner/parent joins and whole-footprint parent proof.",
+    "Accepted country/topology exclusions and all explicit holes; ancestry and nearest-bank proximity do not grant territorial authority.",
+    "Whole original GSHHG hierarchy or demonstrably applicable retained target interpretation; preserve all uncertainty/relative intervals.",
+    "Later actual delivery-base effective owner-zero and native authority/conservation."
+  ],
+  "land_only_rule_ceiling": 89
+}

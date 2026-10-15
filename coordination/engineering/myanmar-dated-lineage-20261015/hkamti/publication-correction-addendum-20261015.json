@@ -1,0 +1,28 @@
+{
+  "kind": "publication-custody-and-status-correction-addendum",
+  "date": "2026-10-15",
+  "original_packets_preserved": [
+    "roster-instrument-applicability-005.json",
+    "consumed-source-properties-crosswalk-limit-006.json"
+  ],
+  "corrections": [
+    {
+      "packet": "consumed-source-properties-crosswalk-limit-006.json",
+      "pointer": "/upstream_structural_receipt/sha256",
+      "previous_recorded_sha256": "710a5e8ca2eff11d603f7b0b5f20c392faf1ca095009a534e59f4f0deea73d6f",
+      "actual_final_sha256": "502ba3da96ebdc975298bd6ed9d02ba8611f9997e0995c88f67e4c1959f2a279",
+      "immutable_locator": "effe78d0ae0cbd8d3e6938e921f6d5da09104bd9:coordination/engineering/myanmar-bokpyin-diagnostic-20261015/operating/structural-counts.json",
+      "basis": "Independentreview records resource-only maxima append after earlier citation; exactthreepropertyrecords/sourcepinsunchanged. Local immutableGitbodyhashauthenticated; no sourceparse orscience."
+    },
+    {
+      "packet": "roster-instrument-applicability-005.json",
+      "pointer": "/crosswalk_status",
+      "completed_status": "Consumed three name/shapeID property records have been inspected: no Pcode, original-script or provider unit-key field. Current roster named-unit correspondence remains separate from geometry equivalence; property followup is complete, not awaiting."
+    }
+  ],
+  "review_basis": "independent-review.md",
+  "limits": [
+    "No originalpacket factualbody rewritten; this separate addendum resolves stale custody/status reporting.",
+    "No cellownership,sourcepolygoncrosswalk,territorialproof or holdclearing; all417held."
+  ]
+}

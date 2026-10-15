@@ -1,0 +1,47 @@
+{
+  "reviewer": "/root/rakhine_inventory",
+  "kind": "source-identity-crosswalk-negative-field-result",
+  "upstream_structural_receipt": {
+    "path": "effe78d0ae0cbd8d3e6938e921f6d5da09104bd9:coordination/engineering/myanmar-bokpyin-diagnostic-20261015/operating/structural-counts.json",
+    "sha256": "710a5e8ca2eff11d603f7b0b5f20c392faf1ca095009a534e59f4f0deea73d6f",
+    "author": "/root/runtime_inventory_simplification",
+    "scope": "Authorized original source parse piggyback; this followup reads property subset only,no geometry."
+  },
+  "source_family_pin": {
+    "bytes": 1396414,
+    "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+    "decoded_bytes": 4205367,
+    "decoded_sha256": "94c0c9af839094257d13a6fe6590feddb2dcb04540d87e58b656c9f000fb92a2",
+    "git_blob_oid": "6a91fcb22b44ae00401a0068a6c3e62bfed62374",
+    "mode": "100644",
+    "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz",
+    "sha256": "57de50a588f418601412bb7a34cc2f43a3fd6d7d6f16635cb41b95e5ae505db6"
+  },
+  "actual_properties": {
+    "66882298B89556704578744": {
+      "shapeName": "Nanyun",
+      "shapeISO": "",
+      "shapeID": "66882298B89556704578744",
+      "shapeGroup": "MMR",
+      "shapeType": "ADM3"
+    },
+    "66882298B29413471910170": {
+      "shapeName": "Lahe",
+      "shapeISO": "",
+      "shapeID": "66882298B29413471910170",
+      "shapeGroup": "MMR",
+      "shapeType": "ADM3"
+    },
+    "66882298B35396935405838": {
+      "shapeName": "Lay Shi",
+      "shapeISO": "",
+      "shapeID": "66882298B35396935405838",
+      "shapeGroup": "MMR",
+      "shapeType": "ADM3"
+    }
+  },
+  "positive_identity": "Exact three consumed shapeIDs and Englishnames match retained target/source roster. MIMU2026GADsourcedPcodes support named3townshipcontext separately.",
+  "concrete_limit": "Consumedsourceproperties contain onlyshapeName,shapeISO(empty),shapeID,shapeGroupMMR,shapeTypeADM3. No Pcode,originalBurmese,providerunitcode orsubtownshiprelation exists tojoin directly toMIMU. Thus directidentifiercrosswalk cannotbe produced fromtheseoriginalproperties. A documentedprovidername/Pcodecrosswalk or applicableoriginalunitinstrument is needed; neitherblankshapeISO norEnglishlabelassertsone.",
+  "next_specific_instrument": "ForLayshi8,use22Feb2018MoHA260/2018ward1/2transferannex to distinguish formerMowailutTown fromruralformerSubTownship; do notapplyentire4tractunittransfer. ForLahe77/Nanyun332,2011Thangpakwe200/24-75/U-1andDohi200/24-74/U-1constituentannexesremainexactlineageleads.",
+  "status": "All417held;current-reference3namedowner scopepositive,footprint/cellboundaryandterritorialproofunresolved."
+}

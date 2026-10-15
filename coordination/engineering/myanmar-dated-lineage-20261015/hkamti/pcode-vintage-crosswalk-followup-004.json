@@ -1,0 +1,49 @@
+{
+  "date_utc": "2026-10-15",
+  "status": "dated2019-administrative-scope-corroborated-exact-source-pcode-crosswalk-still-missing",
+  "documents": [
+    {
+      "url": "https://themimu.info/place-codes",
+      "readable_scope": "Catalogue and text only",
+      "facts": [
+        "December2019structure330townships,75districts,6selfadministeredzones/divisions containing18townships.",
+        "Pcodes provide standardized English transliterations and alternative names; MIMU revisions draw on Gazette,fieldwork/government information."
+      ],
+      "limit": "Currentcatalogueexposes9.7Jan2026XLSM; not substituted for actual2019roster."
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/MIMU_PCodesMajorChangesbetweenVersionV9and9.1_24Jan2020_0.pdf",
+      "pages": 6,
+      "locator": "PDF1",
+      "facts": [
+        "Version9releasedSeptember2019.",
+        "Version9.1changesbasedlatestGADgazetteandfield/governmentinformation.",
+        "Sagainglistedtwo newvillages inmajorchanges table,not a township formation entry."
+      ],
+      "limit": "Change-onlysummarydoesnotcontaincomplete3townshipPcode/subtownshiproster. Absence fromchange-table is not proof of unchanged full footprint orcompletechangehistory."
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/Administrative_Structure_2008Constitution_20Mar2020.pdf",
+      "pages": 2,
+      "locators": [
+        "PDF1countsasGADDecember2019",
+        "PDF2sectionf/h and concludingparagraph"
+      ],
+      "facts": [
+        "MIMUexplicitlyapplies2008ConstitutionstructurewithDecember2019GADcounts.",
+        "Townshipsselfadministeredzoneorganizeddirectlyaszone;zonesanddistrictsseparateinsideRegion.",
+        "StatesnumberofUnionTerritory,States,Regions,SelfAdministeredZones/DivisionandTownshipsremainstable;otherunitschange."
+      ],
+      "supported_conclusion": "Constitutionalzone hierarchy is explicitlyrepresentedbyMIMUfortheDecember2019referenceperiod,notonlyaconstitutionaldeclarationwithoutdatedapplication.",
+      "limit": "No names/Pcodes orboundarylines inthis2pagechart;notadirect IDcrosswalk."
+    }
+  ],
+  "retained_identity_limit": "Existing small retained source/owner inventory suppliesnames,shapeIDsandSIDs45193/45227/45016butnoPcodeororiginal-scriptproperties. DirectMIMU→geoBoundaries/2019MyanmarAnalyticsidentity mappingcannotbe manufacturedfromEnglishtransliteration. Askedparentforsmallretainedoriginalproperties ratherthanparsingwholecorpus.",
+  "new_actual_access_failure": {
+    "url": "https://documents.themimu.info/view/maps/?location=Sagaing&page=1&view=location",
+    "origin": "Actualiframe7onMIMUSagaingcatalogue",
+    "result": "403Forbiddenonce;no retry/download/permissioncard."
+  },
+  "remaining_exact_artifact": "ActualMIMUv9September2019orv9.1Jan2020Sagaing township/town/subtownshiprosterwithoriginal-scriptnames,officialPcodesandDonHee/Pansaung/Htanparkwayparentrelations;retainedoriginal2019sourcepropertiescarryingtheseidentifiersorproviderdocumentedcrosswalk.",
+  "no_scientific_clearance": "All417held;no geometry/native/classifier/source/GSHHGoperation,downloadortrackededit. Priorpacketsunchanged."
+}

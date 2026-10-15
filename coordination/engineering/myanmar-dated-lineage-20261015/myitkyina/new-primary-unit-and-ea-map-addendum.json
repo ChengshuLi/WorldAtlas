@@ -1,0 +1,262 @@
+{
+  "version": 1,
+  "kind": "bounded-primary-unit-and-map-lead-addendum",
+  "created_utc": "2026-10-15T01:40:09.198004+00:00",
+  "parent": "framework:province:myitkyina:dfd6b0c4e1c6",
+  "candidate_cells": 425,
+  "disposition": "all held; no source/owner qualification or boundary clearance",
+  "custody": {
+    "retained_context": {
+      "path": "Private retained auxiliary; not included in this source-only checkpoint; original SHA256 ccdfc0fc9bfe900d0f8eebeecfb5463a5e623927076f075de2d0ee08332e9283",
+      "bytes": 80475,
+      "sha256": "ccdfc0fc9bfe900d0f8eebeecfb5463a5e623927076f075de2d0ee08332e9283"
+    },
+    "old_notes_preserved": true,
+    "web_access": "read-only extracted PDF text; no local downloads or source-byte hashes; page images not inspected"
+  },
+  "candidate_summary": [
+    {
+      "owner": 30164,
+      "name": "Tsawlaw",
+      "cells": 33,
+      "intervals": 23,
+      "centre_envelope_degrees": {
+        "longitude": [
+          98.74575650542022,
+          98.77047366935454
+        ],
+        "latitude": [
+          26.573561678774066,
+          26.832400078848767
+        ]
+      },
+      "sid_patterns": [
+        {
+          "sids": [
+            44886,
+            44912,
+            45277
+          ],
+          "cells": 33
+        }
+      ]
+    },
+    {
+      "owner": 30191,
+      "name": "Waingmaw",
+      "cells": 166,
+      "intervals": 132,
+      "centre_envelope_degrees": {
+        "longitude": [
+          97.55933263657374,
+          98.15666409831937
+        ],
+        "latitude": [
+          24.752989629446294,
+          25.508841651577445
+        ]
+      },
+      "sid_patterns": [
+        {
+          "sids": [
+            15319,
+            44886,
+            44912,
+            45275
+          ],
+          "cells": 8
+        },
+        {
+          "sids": [
+            44886,
+            44912,
+            45275
+          ],
+          "cells": 158
+        }
+      ]
+    },
+    {
+      "owner": 30260,
+      "name": "Tanai",
+      "cells": 6,
+      "intervals": 5,
+      "centre_envelope_degrees": {
+        "longitude": [
+          97.07597476408074,
+          97.10481145533748
+        ],
+        "latitude": [
+          27.096760767297805,
+          27.106539972385434
+        ]
+      },
+      "sid_patterns": [
+        {
+          "sids": [
+            36798,
+            44886,
+            44912,
+            44992
+          ],
+          "cells": 1
+        },
+        {
+          "sids": [
+            36798,
+            44886,
+            44912,
+            44992,
+            67629
+          ],
+          "cells": 1
+        },
+        {
+          "sids": [
+            44886,
+            44912,
+            44992
+          ],
+          "cells": 3
+        },
+        {
+          "sids": [
+            44886,
+            44912,
+            44992,
+            67629
+          ],
+          "cells": 1
+        }
+      ]
+    },
+    {
+      "owner": 30286,
+      "name": "Chipwi",
+      "cells": 220,
+      "intervals": 149,
+      "centre_envelope_degrees": {
+        "longitude": [
+          98.36813316753506,
+          98.75536873583917
+        ],
+        "latitude": [
+          25.583177631655673,
+          26.507224308326563
+        ]
+      },
+      "sid_patterns": [
+        {
+          "sids": [
+            15319,
+            44886,
+            44912,
+            45270
+          ],
+          "cells": 40
+        },
+        {
+          "sids": [
+            44886,
+            44912,
+            45270
+          ],
+          "cells": 180
+        }
+      ]
+    }
+  ],
+  "new_primary_sources": [
+    {
+      "url": "https://myanmar.unfpa.org/sites/default/files/pub-pdf/Kachin%20State%20Census%20Report%20-%20ENGLISH.pdf",
+      "title": "2014 Myanmar Population and Housing Census, Kachin State, Volume 3-A",
+      "issuer": "Department of Population, Ministry of Immigration and Population",
+      "published": "May 2015",
+      "reference_date": "2014-03-29",
+      "pages": 172,
+      "support": [
+        {
+          "location": "PDF page 27 (zero-based P26), printed 16, Table A-1, extracted lines 760-771",
+          "quotation": "Myitkyina; Waingmaw; Ingyanyan; Tanaing; Chiphwe; Hsotlaw",
+          "finding": "Six township statistical rows sit under Myitkyina District, followed by five separately tabulated sub-townships."
+        },
+        {
+          "location": "PDF page 17 (P16), printed 6, section 1.2.2, lines 422-433; PDF page 18 (P17), printed 7, section 1.2.5, lines 465-469",
+          "finding": "EA mapping began June 2012. Toposheet-based township maps went to township immigration field offices; ward/village-tract sketches and pre-enumeration updates followed. Some Kachin areas instead used satellite-derived sketches."
+        }
+      ],
+      "positive_join": {
+        "owner_30191": "Exact Waingmaw name and Myitkyina District statistical affiliation corroborated.",
+        "other_owners": "Tsawlaw/Hsotlaw, Tanai/Tanaing and Chipwi/Chiphwe are plausible spelling counterparts, not authenticated ID crosswalks."
+      },
+      "not_provided": "No retained gb ID, 2019 source footprint, candidate coordinate registration, township/sub-township nesting, source SID country identity, boundary scale/datum or applicable survey sheet. Statistical units are not assumed equal to source polygon units."
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_Kanpaikti_2014_ENG.pdf",
+      "title": "Kanpaikti Sub-Township Report",
+      "issuer": "Department of Population, Ministry of Labour, Immigration and Population",
+      "published": "October 2017",
+      "reference_date": "2014-03-29",
+      "pages": 56,
+      "support": [
+        {
+          "location": "PDF page 18 (P17), printed 8, Table 1, lines 222-233",
+          "quotation": "Kanpaikti Sub-Township (Myitkyina District, Kachin State); Waw Shung(VT); Lawt Pun(VT); Zahkung(VT)",
+          "finding": "The report names three village tracts and three urban wards; its area is 540.2 square kilometres, attributed to Settlement and Land Record Department 2014-2015."
+        }
+      ],
+      "positive_join": "A concrete named village-tract roster for a future map join, within the retained parent district context.",
+      "not_provided": "No explicit Waingmaw parent, village-tract boundaries, township alias crosswalk, candidate-cell registration or map datum. Therefore no Waingmaw166 or Chipwi220 candidate assigned to Kanpaikti."
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/MIMU_PCodesMajorChangesbetweenVersionV9and9.1_24Jan2020_0.pdf",
+      "title": "MIMU PCode changes v9 to v9.1",
+      "location": "PDF page 1, lines 1-7",
+      "quotation": "Version 9, released in September 2019",
+      "finding": "A dated GAD-informed code-list revision context; no evidence that it is the retained polygon source vintage or an applicable Myitkyina formation notification."
+    }
+  ],
+  "new_precise_map_artifact": {
+    "family": "2012-2014 census township EA/toposheet map, ward/village-tract sketch maps and pre-enumeration updates",
+    "custodian_identified_by_primary_source": "respective Township Immigration field offices",
+    "named_join_targets": [
+      "Waingmaw",
+      "Kanpaikti",
+      "Waw Shung(VT)",
+      "Lawt Pun(VT)",
+      "Zahkung(VT)"
+    ],
+    "status": "Artifact family and office custody established; no individual sheet acquired or public locator established. Its topology and boundary authority remain unknown.",
+    "source": "https://myanmar.unfpa.org/sites/default/files/pub-pdf/Kachin%20State%20Census%20Report%20-%20ENGLISH.pdf",
+    "location": "PDF pages 17-18, printed 6-7, sections 1.2.2 and 1.2.5"
+  },
+  "exact_map_access_result": {
+    "url": "https://themimu.info/sites/themimu.info/files/documents/Tsp_Map_VL_Waingmaw_Kachin_MIMU154v03_02Jan2014_A1.pdf",
+    "nominal_id": "MIMU154v03",
+    "nominal_date": "02Jan2014",
+    "status": "404 on first new read; no retry",
+    "archive_url": "https://web.archive.org/web/20150921120935/http://www.themimu.info/sites/themimu.info/files/documents/Tsp_Map_VL_Waingmaw_Kachin_MIMU154v03_02Jan2014_A1.pdf",
+    "archive_status": "HTML Wayback wrapper only; no actual PDF text or pixels returned",
+    "scale_datum_extent": "not inspected; A1 filename is paper size, not scale"
+  },
+  "precise_but_unverified_instrument_lead": {
+    "identifier": "MoHA 200/24-66/U-1",
+    "date_as_secondary_locator": "5 January 2011",
+    "reported_subject": "Panwa village-to-town change",
+    "primary_status": "No original notification or annex found. Secondary reference resolves only to generic MIMU place-code catalogue; not adopted as evidence."
+  },
+  "remaining_specific_joins": [
+    "An original notification and annex establishing Panwa/Hsadone/Kanpaikti boundaries and township nesting at the retained 2019 source date.",
+    "An actual applicable map sheet with usable boundary line, datum/registration and unit IDs to connect the candidate envelopes to authoritative units.",
+    "Authenticated identity for source SID15319. It occurs in 8 Waingmaw and 40 Chipwi candidates, but retained metadata inspected did not identify its country; no new classification performed."
+  ],
+  "limits": {
+    "no_geometry_or_science": true,
+    "no_download_or_fetch": true,
+    "no_tracked_edits": true,
+    "no_old_note_mutation": true,
+    "no_sovereignty_adjudication": true,
+    "no_new_clearance": true
+  },
+  "outcome": "New positive unit/district corroboration and named village-tract map lead. No precise publicly readable formation annex or boundary sheet acquired. This bounded pass does not establish any candidate-cell owner."
+}

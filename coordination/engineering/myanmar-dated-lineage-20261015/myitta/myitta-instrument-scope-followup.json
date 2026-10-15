@@ -1,0 +1,84 @@
+{
+  "status": "authored-bounded-research-no-clearance",
+  "date": "2026-10-15",
+  "review_status": "not-independently-reviewed",
+  "selected_scope": "Tamu63 initial lead, then Dawei/Myitta instrument",
+  "new_scope_result": {
+    "Dawei_parent_land": 1693,
+    "Myitta_instrument_applicable_candidate_owner": 30380,
+    "owner_name": "Dawei",
+    "owner_land": 19,
+    "other_owners_land": 1674,
+    "conclusion": "The Myitta town instrument cannot justify the entire 1693-cell parent cohort. Its direct named township lead is Dawei owner30380, only19 retained land candidates; the other1674 belong to separate named townships. Even those19 are not joined to Myitta town by this metadata."
+  },
+  "retained_membership": {
+    "file": "myitta/retained-parent-inventory.json",
+    "sha256": "ca4955feafde6c6c65351ce5f13d6722b3d69ac41349f5b66f167ea7fee536a5",
+    "upstream": "Private retained auxiliary; not included in this source-only checkpoint; original SHA256 efec8d28b63befcb411b6d0d81063af6a962edbec9a1b3f08b86fc3b7bd44157",
+    "upstream_sha256": "efec8d28b63befcb411b6d0d81063af6a962edbec9a1b3f08b86fc3b7bd44157",
+    "children": [
+      {
+        "owner": 30152,
+        "name": "Thayetchaung",
+        "id": "gb:MMR:ADM3:66882298B32460181384532",
+        "land": 58,
+        "source_sids": [
+          44893,
+          44953,
+          45131
+        ]
+      },
+      {
+        "owner": 30227,
+        "name": "Yebyu",
+        "id": "gb:MMR:ADM3:66882298B48301856519721",
+        "land": 788,
+        "source_sids": [
+          44893,
+          44953,
+          45129
+        ]
+      },
+      {
+        "owner": 30342,
+        "name": "Launglon",
+        "id": "gb:MMR:ADM3:66882298B80414211212402",
+        "land": 828,
+        "source_sids": [
+          44893,
+          44953,
+          45116
+        ]
+      },
+      {
+        "owner": 30380,
+        "name": "Dawei",
+        "id": "gb:MMR:ADM3:66882298B9277012619903",
+        "land": 19,
+        "source_sids": [
+          44893,
+          44953,
+          45125
+        ]
+      }
+    ]
+  },
+  "specific_instrument": "1 April2014 MoHA file100/22-364/ဦး1, cited by existing GAD2019 PDFp15; original instrument NOT recovered by this pass. No transfer/annex asserted.",
+  "new_access_results": [
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_KhampatST_2014_ENG.pdf",
+      "discovery": "Actual link110 from Wikipedia Khampat references, not inferred parenthesized filename",
+      "result": "Web click HTTP403; body unavailable; no retry/download or facts adopted."
+    },
+    {
+      "url": "https://data.unhcr.org/en/documents/details/63658",
+      "result": "Primary UNHCR catalogue read: Voluntary Repatriation: Story from Myitta Town,17May2018,2.51MB. No administrative formation/transfer evidence in catalogue."
+    },
+    {
+      "url": "https://data.unhcr.org/en/documents/download/63658",
+      "result": "One web text fetch failed with Internal Error/OK. No local file or substantive report facts retained."
+    }
+  ],
+  "search_outcome": "English and Burmese specific instrument searches did not return the original order. Search results often ignored key terms; this is not evidence the order is absent or unavailable elsewhere. Wikipedia used only for discovery.",
+  "disposition": "No positive primary source-owner applicability join completed. All holds preserved. No scientific/operator/GIS/native/GSHHG pass, Git fetch, code edit or PR1939 change. Do not spend a geometry pass to compensate for missing documentary crosswalk."
+}

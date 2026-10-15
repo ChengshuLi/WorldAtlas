@@ -1,0 +1,76 @@
+{
+  "status": "new-authored-documentary-named-unit-join-not-cell-authority",
+  "date": "2026-10-15",
+  "review_status": "requires-independent-review-if-used",
+  "source_extract": {
+    "path": "common/other-cohort-roster-extract-20261015.json",
+    "sha256": "dd7e777881e88866604139a8ea25f3305748837e0ba359be007a8537f448bc8c",
+    "workbook_sha256": "11fff1b1eca8b1ff3cad3b0a90e757a187ae0b9cdc396bac708136da36ccdda2",
+    "release": "Jan2026; dates remain literal Excel serials in exact fields"
+  },
+  "exact_rows": [
+    {
+      "part": "xl/worksheets/sheet4.xml",
+      "row": 309,
+      "fields": {
+        "SR_Pcode": "MMR006",
+        "SR_Name_Eng": "Tanintharyi",
+        "District/SAZ_Pcode": "MMR006D001",
+        "District/SAZ_Name_Eng": "Dawei",
+        "Tsp_Pcode": "MMR006001",
+        "Township_Name_Eng": "Dawei",
+        "Township_Name_MMR": "ထားဝယ်",
+        "MYAINFO_TS_ID": "ASIMMR006001",
+        "Source": "GAD",
+        "Start_Date": "",
+        "Modified_End_Date": "",
+        "Notification": "",
+        "Notification_modified": "",
+        "GAD_Township_Status": "Active",
+        "Field_Township_Status": "N/A",
+        "MIMU_Township_Mapping_Status": "Active",
+        "Change_Type": "",
+        "Remark": ""
+      }
+    },
+    {
+      "part": "xl/worksheets/sheet5.xml",
+      "row": 477,
+      "fields": {
+        "SR_Pcode": "MMR006",
+        "SR_Name_Eng": "Tanintharyi",
+        "District/SAZ_Pcode": "MMR006D001",
+        "District/SAZ_Name_Eng": "Dawei",
+        "Tsp_Pcode": "MMR006001",
+        "Township_Name_Eng": "Dawei",
+        "Town_Pcode": "MMR006001702",
+        "Town_Name_Eng": "Myitta Town",
+        "Town_Name_MMR": "မေတ္တာ",
+        "Source": "GAD",
+        "Start_Date": "",
+        "Modified_End_Date": "",
+        "Notification": "",
+        "Notification_modified": "",
+        "GAD_Town_Status": "Active",
+        "Field_Town_Status": "N/A",
+        "MIMU_Town_Mapping_Status": "Active",
+        "Change_Type": "",
+        "Remark": ""
+      }
+    }
+  ],
+  "positive_join": "Jan2026 GAD-sourced roster explicitly nests Myitta Town MMR006001702 in Dawei Township MMR006001, Dawei District MMR006D001. Township row309 and town row477 agree. This is a named-unit roster join, not merely proximity or inferred ADM labels.",
+  "instrument_corroboration": {
+    "url": "https://www.gad.gov.mm/storage/localfacts/MtOGd4Xtp13mUQD6rO15zqCXV3clj0f529ysIjNb.pdf",
+    "evidence": "Official GAD search-index excerpt explicitly shows Myitta heading, Ministry of Home Affairs,1.4.2014 and100/22-364/ဦး1, corroborating the prior MIMU-hosted GAD citation.",
+    "body_access": "Direct web open unavailable; no downloaded bytes/hash/page or document-vintage claim.",
+    "original_order_obtained": false
+  },
+  "limits": [
+    "Jan2026 roster is later than consumed2019 source; blank Start_Date/Modified_End_Date/Notification/Notification_modified remain blank.",
+    "Roster does not establish retrospective2019 boundary or equivalence of town to2014 census subtownship.",
+    "Original MoHA instrument and annex remain unseen; no transfer schedule inferred.",
+    "Named Dawei township corresponds to retained owner30380 label, but no producer Pcode-to-geoBoundaries crosswalk or cell membership established. Scope only19 candidate context; other1674 excluded from this applicability inference."
+  ],
+  "preserved": "All candidate holds, original cache bodies and accepted1939 preserved; no geometry/operator/source/GSHHG run, Git fetch, macros or new acquisition."
+}

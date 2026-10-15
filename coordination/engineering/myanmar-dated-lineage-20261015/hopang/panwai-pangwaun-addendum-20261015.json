@@ -1,0 +1,72 @@
+{
+  "status": "direct bilingual named-unit bridge established; all316 held",
+  "prior_note_preserved": "evidence-notes.json",
+  "new_evidence": "bilingual-roster-rows-20261015.json",
+  "chain": [
+    "Original MIC10/2017 p7 lists ပန်ဝိုင် under Hopang District.",
+    "MIMU03_Township row283 directly pairs English Pangwaun with Burmese ပန်ဝိုင် and PcodeMMR015007 under HopangMMR015D006.",
+    "Retained immutable source inventory identifies owner30268 source name Pangwaun and shapeIDgb:MMR:ADM3:66882298B60976321477453. This is a nominal source identity join to the directly bilingual roster entry; the roster itself does not contain the geoBoundaries shapeID."
+  ],
+  "three_owner_scope": [
+    {
+      "owner": 30220,
+      "source_id": "gb:MMR:ADM3:66882298B47048273457297",
+      "source_name": "Mongmao",
+      "pcode": "MMR015008",
+      "burmese": "မိုင်းမော",
+      "roster_row": 266,
+      "cells": 129
+    },
+    {
+      "owner": 30268,
+      "source_id": "gb:MMR:ADM3:66882298B60976321477453",
+      "source_name": "Pangwaun",
+      "pcode": "MMR015007",
+      "burmese": "ပန်ဝိုင်",
+      "roster_row": 283,
+      "cells": 141
+    },
+    {
+      "owner": 30324,
+      "source_id": "gb:MMR:ADM3:66882298B72712470803341",
+      "source_name": "Hopang",
+      "pcode": "MMR015021",
+      "burmese": "ဟိုပန်",
+      "roster_row": 245,
+      "cells": 46
+    }
+  ],
+  "parent": "framework:province:hopang:0da07191a98c",
+  "source_parent_id": "gb:MMR:ADM2:60261553B42594704122339",
+  "source_parent_sid": 44965,
+  "retained_source_locator": {
+    "commit": "5585b47a083e11b060b186db17a8420a0cf49c17",
+    "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/primary-research-002/hopang/evidence-notes.json"
+  },
+  "new_formation_transfer_lead": {
+    "date_recorded": "2011-08-31",
+    "notification_modified": "200/21-74/U-1",
+    "source": "GAD as recorded by MIMU",
+    "rows": "All three township rows carry this date, notification and Change of District type.",
+    "previous_parents": {
+      "Hopang": "Kunglon (literal roster spelling)",
+      "Mongmao": "Lashio",
+      "Pangwaun": "Lashio"
+    },
+    "limit": "This is an authoritative roster record of a notification, not the original notification text. Original instrument and annex have not been inspected."
+  },
+  "applicability_outcome": "All three retained named township identities now have an explicit bilingual district-list correspondence, rather than inferred Panwai/Pangwaun spelling similarity. Official2017 table and Jan2026 roster recording2011 changes support the nominal hierarchy across the source-era context; neither proves invariant territorial geometry.",
+  "remaining_gaps": [
+    "Exact source shapeID-to-Pcode boundary equivalence is not asserted; source name join is explicit.",
+    "Original200/21-74/U-1 document/annex remains an exact new primary lead.",
+    "China foreign/reference clearance, selected topology cuts/holes, full physical/native positive checks remain unresolved."
+  ],
+  "held_cells": 316,
+  "authority_clearance": false,
+  "custody_limits": [
+    "Only one bounded 2.08MB published non-geometric roster acquired; no broad dataset acquisition.",
+    "Web spreadsheet reader rejected MIME; sandbox curl DNS failed; approved external curl read succeeded.",
+    "No macros executed, geometric predicates, native/source/GSHHG/physical passes, Git mutation or shared edits.",
+    "Existing cached note body preserved."
+  ]
+}

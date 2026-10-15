@@ -1,0 +1,203 @@
+{
+  "status": "positive-current-roster-identities-and-specific2018transfer-found-not-cell-clearance",
+  "workbook_reference": {
+    "path": "sources/MIMU-9.7-Jan2026-roster.xlsm",
+    "bytes": 2079584,
+    "sha256": "11fff1b1eca8b1ff3cad3b0a90e757a187ae0b9cdc396bac708136da36ccdda2",
+    "release": "9.7Jan2026",
+    "limits": "This is2026roster;datesblanknotbackdated. ZIP/XMLstandardlibraryread,nomacros orgeometry."
+  },
+  "township_rows_reference": "common/other-cohort-roster-extract-20261015.json",
+  "township_crosswalk": [
+    {
+      "source_sid": 45193,
+      "source_id": "gb:MMR:ADM3:66882298B29413471910170",
+      "retained_name": "Lahe",
+      "roster_name": "Lahe",
+      "pcode": "MMR005036",
+      "mmr": "လဟယ်",
+      "roster_parent": "MMR005S001"
+    },
+    {
+      "source_sid": 45227,
+      "source_id": "gb:MMR:ADM3:66882298B35396935405838",
+      "retained_name": "Lay Shi",
+      "roster_name": "Layshi",
+      "pcode": "MMR005035",
+      "mmr": "လေရှီး",
+      "roster_parent": "MMR005S001"
+    },
+    {
+      "source_sid": 45016,
+      "source_id": "gb:MMR:ADM3:66882298B89556704578744",
+      "retained_name": "Nanyun",
+      "roster_name": "Nanyun",
+      "pcode": "MMR005037",
+      "mmr": "နန်းယွန်း",
+      "roster_parent": "MMR005S001"
+    }
+  ],
+  "crosswalk_status": "Currentrosterpositive GADsourcednames/originalscript/Pcodes. Directkeycarriedbyconsumed2019sourcepropertiesawaitsseparatepiggyback;namecorrespondenceisnotgeometryequivalence.",
+  "exact_town_rows": [
+    {
+      "row": 327,
+      "township_pcode": "MMR005036",
+      "township": "Lahe",
+      "town_pcode": "MMR005036701",
+      "name_eng": "Lahe Town",
+      "name_mmr": "လဟယ်",
+      "source": "GAD",
+      "start_serial": "",
+      "modified_serial": "",
+      "notification": "",
+      "notification_modified": "",
+      "status": "Active",
+      "change": "",
+      "remark": ""
+    },
+    {
+      "row": 328,
+      "township_pcode": "MMR005036",
+      "township": "Lahe",
+      "town_pcode": "MMR005036702",
+      "name_eng": "Thangpakwe Town",
+      "name_mmr": "ထန်ပါခွေ",
+      "source": "GAD",
+      "start_serial": "40563",
+      "modified_serial": "",
+      "notification": "200/24-75/U-1",
+      "notification_modified": "",
+      "status": "Active",
+      "change": "",
+      "remark": ""
+    },
+    {
+      "row": 329,
+      "township_pcode": "MMR005035",
+      "township": "Layshi",
+      "town_pcode": "MMR005035701",
+      "name_eng": "Layshi Town",
+      "name_mmr": "လေရှီး",
+      "source": "GAD",
+      "start_serial": "",
+      "modified_serial": "",
+      "notification": "",
+      "notification_modified": "",
+      "status": "Active",
+      "change": "",
+      "remark": ""
+    },
+    {
+      "row": 330,
+      "township_pcode": "MMR005035",
+      "township": "Layshi",
+      "town_pcode": "MMR005035702",
+      "name_eng": "Mowailut Town",
+      "name_mmr": "မိုပိုင်းလွတ်",
+      "source": "GAD",
+      "start_serial": "40563",
+      "modified_serial": "43153",
+      "notification": "200/24-77/U-1",
+      "notification_modified": "No. 260/2018",
+      "status": "Inactive",
+      "change": "Change of Township",
+      "remark": "Moved to Homalin Town"
+    },
+    {
+      "row": 331,
+      "township_pcode": "MMR005035",
+      "township": "Layshi",
+      "town_pcode": "MMR005035703",
+      "name_eng": "Somra Town",
+      "name_mmr": "ဆွမ္မရာ",
+      "source": "GAD",
+      "start_serial": "41066",
+      "modified_serial": "",
+      "notification": "No. 960/2012",
+      "notification_modified": "",
+      "status": "Active",
+      "change": "",
+      "remark": ""
+    },
+    {
+      "row": 337,
+      "township_pcode": "MMR005037",
+      "township": "Nanyun",
+      "town_pcode": "MMR005037703",
+      "name_eng": "Dohi Town",
+      "name_mmr": "ဒုံဟီး",
+      "source": "GAD",
+      "start_serial": "40563",
+      "modified_serial": "",
+      "notification": "200/24-74/U-1",
+      "notification_modified": "",
+      "status": "Active",
+      "change": "",
+      "remark": ""
+    },
+    {
+      "row": 338,
+      "township_pcode": "MMR005037",
+      "township": "Nanyun",
+      "town_pcode": "MMR005037701",
+      "name_eng": "Namyung Town",
+      "name_mmr": "နန်းယွန်း",
+      "source": "GAD",
+      "start_serial": "",
+      "modified_serial": "",
+      "notification": "",
+      "notification_modified": "",
+      "status": "Active",
+      "change": "",
+      "remark": ""
+    },
+    {
+      "row": 339,
+      "township_pcode": "MMR005037",
+      "township": "Nanyun",
+      "town_pcode": "MMR005037702",
+      "name_eng": "Pansau Town",
+      "name_mmr": "ပန်ဆောင်",
+      "source": "GAD",
+      "start_serial": "",
+      "modified_serial": "",
+      "notification": "",
+      "notification_modified": "",
+      "status": "Active",
+      "change": "",
+      "remark": ""
+    }
+  ],
+  "serial_interpretation": {
+    "convention": "Excel1900systembase1899-12-30",
+    "40563": "2011-01-20",
+    "43153": "2018-02-22",
+    "41066": "2012-06-06"
+  },
+  "strongest_new_instrument": {
+    "number": "260/2018",
+    "date": "2018-02-22",
+    "publisher": "MinistryofHomeAffairs",
+    "effect_supported_by_roster": "FormerMowailutTownunderLayshiMMR005035702isinactive;ChangeofTownship,remarkMovedtoHomalinTown.",
+    "profile_corroboration": {
+      "url": "https://www.gad.gov.mm/storage/localfacts/bCPv7t9FTSIweAgPaIQJX5k3FPuYbyrnOZgTYUZt.pdf",
+      "vintage": "2025Apr–2026Mar",
+      "locator": "Searchindexedhistoryprintedpages2–3",
+      "access": "Searchindexexcerptread;directopenInternalErroronce,noretry. NooriginalPDFbytesacquired.",
+      "effect": "HistoryspecifiesMowailutwards1and2removedfromLayshiandaddedtoHomalinunder260/2018."
+    },
+    "dated2019_corroboration": {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Homalin_2019_MMR.pdf",
+      "pages": 60,
+      "vintage": "IntroductionstatesOct2018–Mar2019",
+      "locator": "PDF4(0basedP3),townarea table",
+      "fact": "MowailutlistedwithHomalinandShwePyiAyeasHomalin townareaunit.",
+      "limit": "Notoriginal260orderortransfermap."
+    },
+    "candidate_applicability": "Layshi8retainedcentre envelope94.7388–94.74295E/25.02578–25.03574N iswithinbroadformerMowailutarea context;townpoint94.787483/25.046708isnotwardpolygon. Cannotclassify8cellsinsideoroutsidetransferred2wardsorentireformer4tractsubtownshipfromthisroster.",
+    "exact_missing_body": "Original22Feb2018MoHANotification260/2018andward1/2schedule/map;original2011formation200/24-77/U-1names2wards+4tracts+12villages. DoNOTassumethatall4tractswere transferred."
+  },
+  "additional_new_leads": "ThangpakweTown200/24-75/U-1andDohiTown200/24-74/U-1dated20Jan2011;Somra6Jun2012No960/2012inrosterwhileGADprofilehistorycites200/24-83/U-1. Thesearepotentialmultipleinstrumentreferences,notequatedwithoutoriginalbody.",
+  "original_order_search_outcome": "Boundedexact260queriesrecoveredofficialGADprofileindexbutnottheoriginalnotification. SecondaryScribd9.2Mar2020mirrorleadnotacquiredorusedasprimaryproof.",
+  "outcome": "All417held. Current3ownerNagaunitidentitiespositive;wholeparent/constituentgeometry/countrytopology/physical/nativeacceptanceunresolved. NoPR1939change."
+}

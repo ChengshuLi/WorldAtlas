@@ -1,0 +1,136 @@
+{
+  "status": "substantive roster transition review passes within stated nominal scope; no territorial clearance",
+  "independent_method": "Decoded retained XLSM ZIP/XML shared strings and worksheet rows directly, compared every non-coordinate field of all35 packet rows against original workbook;35 exact matches,0 mismatches. No macros or geometry.",
+  "inputs": [
+    {
+      "path": "maungdaw/maungdaw-jan2026-notification-rows-004.json",
+      "bytes": 36744,
+      "sha256": "97e201e39d521a8e1f50255a7f04c1bb33a91cc061eecf61ff26b541d0f414d8"
+    },
+    {
+      "path": "maungdaw/dated-owner-transition-followthrough-005.json",
+      "bytes": 12440,
+      "sha256": "79ac10dcf68cbeb7c9bafe4e97a3ff636074c8da9a37f43fe5ca1ede734e6976"
+    },
+    {
+      "path": "maungdaw/retained-parent-inventory.json",
+      "bytes": 5625,
+      "sha256": "6b3a93b6a2007b98087235cc5f5ed5617ae2a1a26555b00099c3c4268f16a5ad"
+    }
+  ],
+  "workbook_sha256": "11fff1b1eca8b1ff3cad3b0a90e757a187ae0b9cdc396bac708136da36ccdda2",
+  "findings": [
+    {
+      "notification": "No.304/2019",
+      "date": "2019-09-23",
+      "literal_serial": "43731",
+      "finding": "Three predecessor village tracts explicitly become inactive VTtoWard records; their remarks name six active successor wards in Maungdaw Town. Predecessor Modified_End_Date/Notification_modified agree with successor Start_Date/Notification.",
+      "joins": [
+        {
+          "VT_row": 8786,
+          "VT": "MMR012009062",
+          "name": "Ka Nyin Tan (a) Myo Ma Ka Nyin Tan",
+          "successor_rows": [
+            1737,
+            1740
+          ],
+          "successor_codes": [
+            "MMR012009701507",
+            "MMR012009701508"
+          ],
+          "successor_names": [
+            "Ka Nyin Tan Ward",
+            "Maung Ni Ward"
+          ]
+        },
+        {
+          "VT_row": 8816,
+          "VT": "MMR012009063",
+          "name": "Myo Thu Gyi",
+          "successor_rows": [
+            1745,
+            1747
+          ],
+          "successor_codes": [
+            "MMR012009701509",
+            "MMR012009701510"
+          ],
+          "successor_names": [
+            "Myo Thu Gyi Ward",
+            "Wai Thar Li Ward"
+          ]
+        },
+        {
+          "VT_row": 8817,
+          "VT": "MMR012009061",
+          "name": "Myo U",
+          "successor_rows": [
+            1746,
+            1739
+          ],
+          "successor_codes": [
+            "MMR012009701511",
+            "MMR012009701512"
+          ],
+          "successor_names": [
+            "Myo U Ward",
+            "Let Thar Ward"
+          ]
+        }
+      ],
+      "implication": "This is explicit recorded reclassification and lineage inside Maungdaw TownshipMMR012009, not proof of township expansion or exact predecessor/successor polygon equality."
+    },
+    {
+      "notification": "No.299/2016",
+      "date": "2016-02-02",
+      "literal_serial": "42402",
+      "finding": "Inactive KhaMaungSeikVTMMR012009008 row8791 explicitly VTtoTown→KhaMaungSeikTownMMR012009703 row288 with five ward rows1732–1736; inactive MyinHlutVTMMR012009083 row8813 explicitly VTtoTown→MyinHlutTownMMR012009704 row290 with eight ward rows1749–1756. All corresponding start/end fields and notification fields match; all remain within MaungdawMMR012009.",
+      "implication": "Supports recorded town/ward formation lineage; does not authorize applying an uninspected territorial annex to held native centres."
+    },
+    {
+      "finding": "TaungpyoletweaTown row291 and five ward rows1757–1761 have blank dates/notification fields. The packet correctly avoids borrowing the2016 or2019 instrument for these rows."
+    },
+    {
+      "finding": "MyoU predecessor remark also retains earlier AyeTarLiYar name change under200/23-183/U-1 on9June2010. This is a separate recorded naming history, not the304/2019 event."
+    }
+  ],
+  "owner_applicability": {
+    "Maungdaw": {
+      "roster_row": 178,
+      "pcode": "MMR012009",
+      "owner": 30402,
+      "source_id": "gb:MMR:ADM3:66882298B98818104227605",
+      "sid": 45198,
+      "land_held": 83,
+      "relative_held": 80,
+      "conclusion": "Explicit named township hierarchy applies these internal transitions nominally to this retained source owner context."
+    },
+    "Buthidaung": {
+      "roster_row": 174,
+      "pcode": "MMR012010",
+      "owner": 30393,
+      "source_id": "gb:MMR:ADM3:66882298B96066491873241",
+      "sid": 45114,
+      "land_held": 6,
+      "conclusion": "Separate township in sameMaungdaw district; these Maungdaw-specific subordinate transitions do not establish placement of its sixcentres."
+    },
+    "join_limit": "Source inventory has no directPcode field; bilingual township names/region/role give nominal correspondence, not a proven source polygon crosswalk."
+  },
+  "vintage_limits": [
+    "Workbook isJan2026 compilation carrying retrospective2016/2019 records. No claim original signed orders were independently read.",
+    "Sourcefamily declares2019 without within-year cut;23September2019 cannot automatically be assumed included.",
+    "Inactive predecessor means recorded administrative class withdrawn, not physical land disappearance or loss of TownshipMaungdaw jurisdiction.",
+    "Originalsigned304/2019 and299/2016 territorial schedules/maps remain uninspected; any27September2019 publication claim cannot replace recorded23Septemberdate without original evidence."
+  ],
+  "remaining_scientific_limits": [
+    "No exact candidate-centre totract/ward membership established.",
+    "RetainedBGDsource overlaps/topology reconciliation and allrelativeholds remain unresolved.",
+    "No physical/native/foreignclearance, current-ownerzero or conservation result."
+  ],
+  "held_disposition": {
+    "land": 89,
+    "source_relative": 80,
+    "promoted": 0
+  },
+  "issues": []
+}
