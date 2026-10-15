@@ -13,7 +13,7 @@ import {verifyIssueScope} from '../scripts/issue-claim-contract.mjs';
 import {checkPremergeEvidence} from '../scripts/premerge-evidence.mjs';
 import {prepareIntegration, completeIntegration} from '../scripts/merge-integration.mjs';
 import {checkPRGates} from '../scripts/check-pr-gates.mjs';
-import {selectedDataSelection, selectedDataCandidate, validateSelectedExpectations, selectedMetadataAdmission, SELECTED_SMOKE} from '../scripts/integration-profile.mjs';
+import {integrationProfile, selectedDataSelection, selectedDataCandidate, validateSelectedExpectations, selectedMetadataAdmission, SELECTED_SMOKE} from '../scripts/integration-profile.mjs';
 const prefix = 'coordination/engineering/fixture-delivery/';
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
 // Real ordinary ZIP records exercise the existing authenticated fixed-member
@@ -972,6 +972,84 @@ function ownedFixture({mutate = () => {}} = {}) {
     baseline:f.baseline, authored:f.authored, reservation:f.reservation, ...options});
   return f;
 }
+function exactOwnedFixture() {
+  const f=ownedFixture();
+  f.ownedPaths=f.files.filter(row=>row.status==='added').map(row=>row.filename);
+  f.reservation={mode:'engineering',owned_paths:f.ownedPaths};
+  return f;
+}
+test('exact-file issue ownership reaches selected preparation and final gates without widening packet scope', async()=>{
+  const f=exactOwnedFixture();
+  assert.equal(selectedDataCandidate(f.branch,f.files,f.reservation),true);
+  assert.equal((await f.run()).test_selection,'selected-data');
+  assert.equal((await gateFixture(exactOwnedFixture()).select()).test_selection,'selected-data');
+  const final=mergeFixture({selectedFixture:exactOwnedFixture()});
+  assert.equal((await final.complete()).accepted,true);
+  assert.equal(final.writes.length,1);
+});
+test('exact-file issue ownership excludes prefix lookalikes, children and sibling files',async()=>{
+  for(const suffix of ['.extra.json','/child.json']) {
+    const f=exactOwnedFixture(), name=f.packetPrefix+'registry.json'+suffix;
+    f.put(name,{});f.files.push({filename:name,status:'added'});
+    assert.equal(selectedDataCandidate(f.branch,f.files,f.reservation),false);
+    assert.equal(await f.run(),null);
+    assert.equal(integrationProfile(f.branch,[{filename:name,status:'added'}],f.reservation),'full');
+  }
+  const f=exactOwnedFixture(), name=f.packetPrefix+'sibling.json';
+  f.put(name,{});f.files.push({filename:name,status:'added'});
+  assert.equal(await f.run(),null);
+  assert.equal(integrationProfile(f.branch,[{filename:name,status:'added'}],f.reservation),'full');
+});
+test('shared exact-file and directory scope matching preserves directory boundaries',async()=>{
+  const f=ownedFixture(), root='coordination/engineering/retained-delivery/new-packet/';
+  f.reservation.owned_paths=[root];
+  assert.equal((await f.run()).test_selection,'selected-data');
+  assert.equal(integrationProfile(f.branch,[{filename:root+'nested/receipt.json',status:'added'}],f.reservation),'evidence');
+  for(const name of [root.slice(0,-1)+'-sibling/receipt.json',root.slice(0,-1)+'.json']) {
+    assert.equal(selectedDataCandidate(f.branch,[{filename:'data/ownership-selection.json',status:'modified'},{filename:name,status:'added'}],f.reservation),false);
+    assert.equal(integrationProfile(f.branch,[{filename:name,status:'added'}],f.reservation),'full');
+  }
+  const exact=f.packetPrefix+'registry.json';
+  assert.equal(integrationProfile(f.branch,[{filename:exact,status:'added'}],{mode:'engineering',owned_paths:[exact]}),'full',
+    'exact selected-data ownership does not expand evidence-only routing');
+});
+test('exact-owned restored opaque role retains immutable identity and package consumer checks',async()=>{
+  const name='coordination/engineering/original-packet/exact-patch.json';
+  const f=fixture({mutate:f=>{
+    const patch=f.put(name,{opaque:true});
+    f.sidecarBody.logical_asset_map.patch=patch;
+    const side=f.put(prefix+'selection-sidecar.json',f.sidecarBody);
+    f.put('data/ownership-selection.json',{...f.base,additive_release:{path:side.path,bytes:side.bytes,sha256:side.sha256}});
+    f.definition.inputs=f.definition.inputs.filter(value=>value!==prefix+'patch.json');
+    f.definition.inputs.push(name);f.put('.github/package-inputs.json',f.definition);
+  }});
+  const reservation={mode:'engineering',owned_paths:[name]};
+  assert.equal((await f.run({reservation})).test_selection,'selected-data');
+  const original=f.authored.entries.get(name);
+  f.authored.entries.set(name,{...original,sha:'f'.repeat(40)});
+  assert.equal(await f.run({reservation}),null);
+  f.authored.entries.set(name,original);
+  const unrelated='coordination/engineering/original-packet/unconsumed.md';
+  f.put(unrelated,'support only');f.files.push({filename:unrelated,status:'added'});reservation.owned_paths.push(unrelated);
+  assert.equal((await f.run({reservation})).test_selection,'selected-data');
+  f.definition.inputs.push(unrelated);f.put('.github/package-inputs.json',f.definition);
+  assert.equal(await f.run({reservation}),null);
+});
+test('exact-file grants do not relax malformed, hidden, renamed, modified or executable data refusal',async()=>{
+  for(const owned of ['coordination/engineering/','coordination/engineering/retained-delivery/../escape.json','research/geography/foreign/receipt.json']) {
+    const f=exactOwnedFixture();f.reservation.owned_paths.push(owned);
+    assert.equal(await f.run(),null);
+  }
+  for(const mutate of [
+    (f,name)=>f.authored.entries.get(name).mode='100755',
+    (f,name)=>f.authored.entries.get(name).mode='120000',
+    (f,name)=>f.files.find(row=>row.filename===name).previous_filename='src/runtime.json',
+    (f,name)=>f.files.find(row=>row.filename===name).status='modified',
+  ]) {const f=exactOwnedFixture();mutate(f,f.packetPrefix+'registry.json');assert.equal(await f.run(),null);}
+  const f=exactOwnedFixture(), name=f.packetPrefix+'.hidden.json';
+  f.put(name,{});f.files.push({filename:name,status:'added'});f.reservation.owned_paths.push(name);
+  assert.equal(await f.run(),null);
+});
 test('retained nested delivery needs authenticated current issue scope through PR, prepare and cold final gates', async () => {
   const f = ownedFixture();
   assert.equal(selectedDataCandidate(f.branch, f.files), false);
@@ -996,7 +1074,7 @@ for (const [name, change] of Object.entries({
 });
 for (const owned_paths of [['coordination/engineering/'], ['coordination/engineering/retained-delivery/../'],
   ['coordination/engineering/other/'], ['coordination/engineering/retained-delivery/new-packet/registry.json']]) {
-  test('retained selected scope rejects unsafe/foreign/non-prefix ownership ' + owned_paths[0], async () => {
+  test('retained selected scope rejects unsafe/foreign/incomplete ownership ' + owned_paths[0], async () => {
     const f=ownedFixture(); assert.equal(await f.run({reservation:{mode:'engineering',owned_paths}}), null);
   });
 }
