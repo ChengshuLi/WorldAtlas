@@ -559,9 +559,12 @@ export function compareRepairLedgers(before,after) {
   return old.length;
 }
 
+function validateOwnerIntervals(runs,owners) {
+  let end=0;for(const r of runs){demand(Array.isArray(r)&&r.length===3&&r.every(Number.isSafeInteger)&&r[0]>=end&&r[1]>r[0]&&r[2]>0&&owners[r[2]-1],'Invalid complete owner interval');end=r[1];}
+}
+
 export function compareIntervals(before,after,{row,ownersBefore,ownersAfter}) {
-  const validate=(runs,owners)=>{let end=0;for(const r of runs){demand(Array.isArray(r)&&r.length===3&&r.every(Number.isSafeInteger)&&r[0]>=end&&r[1]>r[0]&&r[2]>0&&owners[r[2]-1],'Invalid complete owner interval');end=r[1];}};
-  validate(before,ownersBefore);validate(after,ownersAfter);
+  validateOwnerIntervals(before,ownersBefore);validateOwnerIntervals(after,ownersAfter);
   const losses=[];let j=0;
   for(const [start,end,owner]of before){let at=start;while(j<after.length&&after[j][1]<=at)j++;let k=j;while(at<end){const next=after[k];const stop=Math.min(end,next?(next[0]>at?next[0]:next[1]):end);demand(stop>at,'Nonadvancing owner interval');const actual=next&&next[0]<=at?ownersAfter[next[2]-1].id:null,expected=ownersBefore[owner-1].id;if(actual!==expected)losses.push({row,start:at,end:stop,previous_owner:expected,candidate_owner:actual});at=stop;if(next&&at>=next[1])k++;}}
   return losses;
@@ -803,18 +806,37 @@ export function inspectSelected(repo,baseline,candidate,{parentRuntimePath}={}) 
   const rosterKey=y=>JSON.stringify([nativeParts(before,oldRows,y).map(p=>p.path),nativeParts(after,newRows,y).map(p=>p.path)]);
   for(const y of affected){const key=rosterKey(y);if(pending.length&&key!==pendingKey){groups.push(pending);pending=[];}pending.push(y);pendingKey=key;}
   if(pending.length)groups.push(pending);
+  // Both snapshots have completed actual source/authority qualification. Reuse
+  // still performs fresh decoding and legality, never inherited acceptance.
+  const additiveOperands=view=>view?{patch:view.patch,legacy_native_rows:view.legacy_native_rows,
+    current_rebind:!!view.current_rebind,current_rows:view.current_rebind?.native.current_rows}:null;
+  const imageOperands=image=>image?{kind:image.constructor.name,directory:image.directory,index:image.index,map:image.map}:null;
+  const sameComparison=same(before.selection,after.selection)&&same(a,b)&&same(before.owners,after.owners)
+    &&same(imageOperands(before.image),imageOperands(after.image))
+    &&same(additiveOperands(before.additive),additiveOperands(after.additive));
+  // Each sidePlan probes actual ordinary presence and the complete containing
+  // inputs independently. Ignore only snapshot labels, preserving paths, modes,
+  // bodies, complete member pins, and their ordinary/transport routes.
+  const inputIdentity=list=>list.map(({pin})=>[pin.path,pin.mode,pin.git_blob_oid,pin.bytes]);
+  const planIdentity=plan=>({rows:plan.rows,pins:plan.pins,inputs:inputIdentity(plan.inputs),
+    members:plan.members.map(member=>({pin:member.pin,inputs:inputIdentity(member.inputs)})),intervals:plan.intervals});
   let checkedRows=0;
   for(const group of groups){
+    const reuse=sameComparison&&group.every(y=>oldRows[y*2]===newRows[y*2]&&oldRows[y*2+1]===newRows[y*2+1])
+      &&same(planIdentity(sidePlan(before,oldRows,group)),planIdentity(sidePlan(after,newRows,group)));
     // This frame returns compact complete intervals and custody only. All whole
     // baseline native/transport buffers are out of scope before candidate opens.
     const previous=acquireNativeRows(before,oldRows,group);validateNativeRowCarry(previous,before,group);
-    const next=acquireNativeRows(after,newRows,group,{carry:previous});
-    validateNativeRowCarry(previous,before,group);validateNativeRowCarry(next,after,group);
+    const next=reuse?null:acquireNativeRows(after,newRows,group,{carry:previous});
+    validateNativeRowCarry(previous,before,group);if(next)validateNativeRowCarry(next,after,group);
     const visibilityBefore=[],visibilityAfter=[];
     for(let k=0;k<group.length;k++){
-      const y=group[k],oldBase=projectedRow(previous,k),newBase=projectedRow(next,k),old=before.additive?selectedAdditiveRows(before.additive,y,oldBase):oldBase,current=after.additive?selectedAdditiveRows(after.additive,y,newBase):newBase;
+      const y=group[k],oldBase=projectedRow(previous,k),newBase=reuse?oldBase:projectedRow(next,k),old=before.additive?selectedAdditiveRows(before.additive,y,oldBase):oldBase,current=reuse?old:(after.additive?selectedAdditiveRows(after.additive,y,newBase):newBase);
       if(visibilityCandidates.length){visibilityBefore.push({y,runs:old});visibilityAfter.push({y,runs:current});}
-      for(const loss of compareIntervals(old,current,{row:y,ownersBefore:before.owners,ownersAfter:after.owners})){
+      // A proved identical effective row needs one owner/order validation and
+      // no interval self-comparison. Changed state retains the original path.
+      if(reuse)validateOwnerIntervals(old,before.owners);
+      else for(const loss of compareIntervals(old,current,{row:y,ownersBefore:before.owners,ownersAfter:after.owners})){
         lostCells+=loss.end-loss.start;losses.push(loss);
       }checkedRows++;
     }
@@ -823,7 +845,7 @@ export function inspectSelected(repo,baseline,candidate,{parentRuntimePath}={}) 
       for(const witness of repairVisibilityWitnesses({candidates:pending,size:a.size,latitudes:visibilityLatitudes,beforeRows:visibilityBefore,afterRows:visibilityAfter}))
         if(witness)visibilityWitnesses.set(witness.component_id,witness);
     }
-    phases.push({first_row:group[0],last_row:group.at(-1),rows:group.length,baseline:previous.custody,candidate:next.custody});
+    phases.push({first_row:group[0],last_row:group.at(-1),rows:group.length,baseline:previous.custody,candidate:reuse?{reused_baseline_acquisition:true,selection:after.selection.sha256,rows:group}:next.custody});
   }
   demand(checkedRows===affected.length&&groups.flat().every((y,i)=>y===affected[i]),'Incomplete affected native row comparison');
   demand(visibilityCandidates.every(row=>visibilityWitnesses.has(row.component_id)),'New gap repair has no actual changed map-cell witness');
