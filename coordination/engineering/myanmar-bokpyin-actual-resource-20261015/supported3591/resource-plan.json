@@ -1,0 +1,94 @@
+{
+  "status": "Actual immutable3591input/config bound; independent input review and fresh stock admission pending.",
+  "phase": "native-authority",
+  "accepted_code": "1b5e527c14cfcac58774316e3ce7042ce79652a6",
+  "source_evidence": {
+    "commit": "c26422bdbf41f369cc7b73cf60cb79376de2c5b2",
+    "path": "coordination/engineering/myanmar-bokpyin-diagnostic-20261015/inputs/source-evidence.json",
+    "bytes": 119802,
+    "sha256": "ed64d3f47ba305b8d336bc0e84a888cdea7c9add8fd8a95536470eec676b239b"
+  },
+  "actual_supported_patch": {
+    "local_path": ".cache/bok3591-supported-preparation-001/candidate-native-patch.json",
+    "bytes": 35431,
+    "sha256": "df574bfa3b24327868d27e00c6cf3ee0adcdca6003c8f90e2814a0d3d70fda06",
+    "git_blob_oid": "5239a0c76681fcf304d0139293931b390564236b",
+    "immutable_locator": null,
+    "counts": {
+      "cells": 3591,
+      "rows": 517,
+      "runs": 1093
+    }
+  },
+  "unchanged_evidence": {
+    "complete_source_records_parsed": 330,
+    "whole_source_features_scanned": 4,
+    "coverage_features": 1,
+    "territorial_exclusions": 3,
+    "scan_vertices": 18013,
+    "scan_rings": 313,
+    "source_geometry_or_scientific_inputs_changed": false
+  },
+  "configuration": {
+    "actual_path": null,
+    "actual_bytes": null,
+    "reference_config_bytes": 510,
+    "byte_delta_formula": "actual_config_bytes - 510; source remains exact c264 locator; patch descriptor raw bytes charged by actual35431; no future commit/path/pin fabricated"
+  },
+  "blocks": [
+    {
+      "block": 29,
+      "input_runtime_config_frame_bytes": 277822505,
+      "native_main_scan_bytes": 65338624,
+      "residual_witness_max_bytes": 7031488,
+      "hit_inventory_bytes_conservatively_old3616": 171840,
+      "diagnostic_trace_bytes": 0,
+      "simultaneous_subtotal": 343332969
+    },
+    {
+      "block": 30,
+      "input_runtime_config_frame_bytes": 277822505,
+      "native_main_scan_bytes": 64611712,
+      "residual_witness_max_bytes": 9280320,
+      "hit_inventory_bytes_conservatively_old3616": 522432,
+      "diagnostic_trace_bytes": 0,
+      "simultaneous_subtotal": 342956649
+    }
+  ],
+  "static_code_bytes": 531110,
+  "aggregate_constructor_output_cap_bytes_already_in_input_frame": 4194304,
+  "constructor_products": [
+    "original-rule-preimage.json",
+    "authority-binding.json",
+    "constructor-result.json"
+  ],
+  "constructor_output_accounting": "Existing4MiBoutputreserve retained; nativeAuthority requires sum of all3serializedoutputs <= this cap. Proof/ledger rows retain originalbase_geometry and exactsupportednative_rows. Serializer/graph/readback copies and headers remain inside unchanged128MiBoperatingcushion; do not add existingoutputreserve again.",
+  "unchanged_explicit_operating_policy_cushion_bytes": 134217728,
+  "phase_and_rss_request_bytes": 536870912,
+  "prospective_bytes_with_510_byte_reference_config": 478081807,
+  "new_diagnostic_trace_removed_bytes": 1933656,
+  "raw_patch_delta_bytes": -396,
+  "raw_patch_delta_charge_multiplier": 8,
+  "reuse_evidence": [
+    ".cache/bok-admission-diagnosis-003/exact-executed-operand-counts.json",
+    ".cache/bok3616-diagnostic-resource-001/code-evidence.json"
+  ],
+  "limits": [
+    "Full old3616hit/witness requested-cell bounds retained conservatively; actual3591subset cannot increase them.",
+    "Existing whole4096row windows and existing2x per-feature scan reserve retained.",
+    "Source/context/fourwholefeatures/all3exclusions unchanged; no source parse or new benchmark/native invocation.",
+    "128MiB is explicit operating policy cushion, not a measured hard process-tree limit.",
+    "Independent patch/config review, real immutable patch locator and fresh normal current-machine admission required before launch.",
+    "3591supported screening does not establish authority, owner-zero or selected acceptance;25remainheld."
+  ],
+  "margin_with_510_byte_reference_config": 58789105,
+  "actual_native_patch": {
+    "commit": "8caae2c4c89edf26376ac6c216203c404513d7aa",
+    "path": "coordination/engineering/myanmar-bokpyin-actual-resource-20261015/supported3591/native-patch.json"
+  },
+  "actual_config_bytes": 430,
+  "actual_config_sha256": "cd445869ededa7bb4765ef2d5035f1b23bdfbc3f6d64fc134c984b0a0da660f6",
+  "actual_config_path": "coordination/engineering/myanmar-bokpyin-actual-resource-20261015/supported3591/native-authority-config.json",
+  "actual_complete_prospective_bytes": 478081727,
+  "actual_margin_to_512MiB": 58789185
+}
