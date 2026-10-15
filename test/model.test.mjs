@@ -80,27 +80,12 @@ test('boundary versions require polygons and sources, and resolve by date',()=>{
   assert.throws(()=>importRecords(db,{boundaries:[row]}),/Overlapping/);
   for (const invalid of [{type:'Point',coordinates:[1,2]},{type:'Polygon',coordinates:[]},{type:'Polygon',coordinates:[[[0,0],[1,0],[1,1],[0,1]]]},{type:'Polygon',coordinates:[[[0,0],[181,0],[1,1],[0,0]]]}]) assert.throws(()=>validateGeometry(invalid));
 });
-test('unknown, zero population, and category colors have stable, distinct semantics',()=>{
-  assert.notEqual(populationColor(null,100),populationColor(0,100));
-  assert.notEqual(populationColor(0,100),populationColor(100,100));
-  assert.equal(categoryColor('England'),categoryColor('England'));
-  const owners=new Set(geography(db).features.map(f=>f.properties.reference_owner));
-  assert.equal(new Set([...owners].map(categoryColor)).size,owners.size,'modern owners must have distinct colors');
-});
 
 test('historical political records are dated, sourced, and do not extend into 2025',()=>{
   const medieval=snapshot(db,1444,false,true).polities;assert.ok(medieval.length>50);assert.ok(medieval.every(f=>f.properties.valid_from<=1444 && f.properties.valid_to>1444 && f.properties.source.includes('Cliopatria')));
   assert.equal(snapshot(db,2025).polities.length,0);assert.equal(snapshot(db,2026).polities.length,0);assert.ok(snapshot(db,-3000,false,true).polities.length>0);
 });
 
-test('both Huidong counties have complete, distinct geographical parents',()=>{
-  const data=geography(db), units=new Map(data.units.map(u=>[u.id,u]));
-  const huidong=data.features.filter(f=>f.properties.name==='Huidongxian');
-  assert.equal(huidong.length,2);
-  const chains=huidong.map(f=>{const out=[];for(let p=units.get(f.properties.parent_id);p;p=units.get(p.parent_id))out.push(p.name);return out;});
-  assert.ok(chains.some(c=>JSON.stringify(c)===JSON.stringify(['Liangshan Yi Autonomous Prefecture','Sichuan','Southwest China','Eastern Asia','Asia'])));
-  assert.ok(chains.some(c=>JSON.stringify(c)===JSON.stringify(['Huizhou','Guangdong','South China','Eastern Asia','Asia'])));
-});
 
 test('inserts and updates cannot skip hierarchy levels',()=>{
   const region=db.prepare("SELECT id FROM units WHERE level='region' LIMIT 1").get().id;
@@ -112,25 +97,28 @@ test('inserts and updates cannot skip hierarchy levels',()=>{
   assert.throws(()=>db.prepare("UPDATE units SET level='area' WHERE id=?").run(province),/immutable/);
 });
 
+test('post-reseed geography preserves owner colors, county parents, cross-owner regions, and city memberships',()=>{
+  const data=geography(db), units=new Map(data.units.map(u=>[u.id,u]));
+  assert.notEqual(populationColor(null,100),populationColor(0,100));
+  assert.notEqual(populationColor(0,100),populationColor(100,100));
+  assert.equal(categoryColor('England'),categoryColor('England'));
+  const owners=new Set(data.features.map(f=>f.properties.reference_owner));
+  assert.equal(new Set([...owners].map(categoryColor)).size,owners.size,'modern owners must have distinct colors');
 
+  const huidong=data.features.filter(f=>f.properties.name==='Huidongxian');
+  assert.equal(huidong.length,2);
+  const chains=huidong.map(f=>{const out=[];for(let p=units.get(f.properties.parent_id);p;p=units.get(p.parent_id))out.push(p.name);return out;});
+  assert.ok(chains.some(c=>JSON.stringify(c)===JSON.stringify(['Liangshan Yi Autonomous Prefecture','Sichuan','Southwest China','Eastern Asia','Asia'])));
+  assert.ok(chains.some(c=>JSON.stringify(c)===JSON.stringify(['Huizhou','Guangdong','South China','Eastern Asia','Asia'])));
 
-
-
-
-test('geographic regions cross ownership borders and subdivide large countries',()=>{
- const data=geography(db),units=new Map(data.units.map(u=>[u.id,u]));
  const region=f=>{let u=units.get(f.properties.parent_id);while(u.level!=='region')u=units.get(u.parent_id);return u;};
  const macau=data.features.find(f=>f.id==='atlas:territory:MAC');assert.equal(region(macau).name,'South China');assert.notEqual(region(macau).name,macau.properties.reference_owner);
  for(const owner of ['United States','Russia'])assert.ok(new Set(data.features.filter(f=>f.properties.reference_owner?.includes(owner)).map(f=>region(f).id)).size>1,owner);
  const sameRegion=data.features.filter(f=>region(f).id===region(macau).id);assert.ok(new Set(sameRegion.map(f=>f.properties.reference_owner)).size>1);
  const roma=data.features.find(f=>f.id==='atlas:location:ITA:SLL:1209');assert.ok(roma);assert.equal(units.get(roma.properties.parent_id).name,'Roma');assert.ok(!data.features.some(f=>f.properties.name==='Lazio'));assert.ok(roma.properties.metadata.search_aliases.includes('Rome'));
  const report=JSON.parse(fs.readFileSync('data/granularity-report.json'));assert.equal(report.selections.find(x=>x.boundaryISO==='DEU').boundaryType,'ADM3');
-});
 
-
-
-test('non-Latin municipalities remain distinct and city memberships contain all districts',()=>{
- const data=geography(db),byId=new Map(data.features.map(f=>[f.id,f]));
+ const byId=new Map(data.features.map(f=>[f.id,f]));
  for(const [id,name] of [['gb:TWN:ADM2:52511910B4802898208422','線西鄉'],['gb:TWN:ADM2:52511910B24462040337349','永靖鄉'],['gb:TWN:ADM2:52511910B36549244443661','泰安鄉'],['gb:TWN:ADM2:52511910B52234359951443','埔心鄉']])assert.equal(byId.get(id)?.properties.name,name);
  for(const [id,count] of [['atlas:city:KOR-11',25],['atlas:city:TWN-1166',12],['atlas:city:TWN-1167',29],['atlas:city:TWN-1156',38],['atlas:city:TWN-1164',7]]){
   const members=byId.get(id).properties.metadata.source_member_ids;assert.equal(members.length,count,id);
