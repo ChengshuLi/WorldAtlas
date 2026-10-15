@@ -1,0 +1,5242 @@
+{
+  "kind": "scientific-actual-result-review",
+  "outcome": "accepted-with-limits-for-retained-whole-physical-result",
+  "blocking_findings": [],
+  "reporting_findings": [
+    {
+      "kind": "inherited-output-unit-label-defect",
+      "location": "whole-target-support.json /maximum_rss_kib; accepted qualify-source-cohort.py:743",
+      "detail": "On this Darwin run the field named maximum_rss_kib stores raw resource.ru_maxrss BYTES. Value407420928 agrees with correctly named receipt.peak_rss_bytes and terminal.darwin_children_ru_maxrss_bytes. Treating that field asKiB would inflate memory1024fold.",
+      "scope": "Actualreporting label defect in acceptedunchanged producer; no measurement discrepancy or observedgeometric defect. Preserve original bytes and carry explicitplatform/unit qualification. Do not silently relabel originalresult."
+    }
+  ],
+  "snapshot_code": "f6068aaf855b26e746afba0c030f0f1dc62df0c7",
+  "input_stage": {
+    "bytes": 1063861,
+    "commit": "68cd14edf82d22aed380d57afe5cde0a3ebe318b",
+    "git_blob_oid": "9b05e3bdb59305458adb4a6318abddaa16792545",
+    "mode": "100644",
+    "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/remaining7479-whole-physical-001/original-stage-inputs.json",
+    "sha256": "de4fc9a0c00cd74817afb314f77740ea02ee7bcf3566c2fe1d38c4bde52a2d97"
+  },
+  "outputs": [
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/fa678ed92d9b60765f8935b6a7afd117bc7c744c96057999400c37180373dd2e/work/.cache/delivery-handoff/mmr7479-physical-001/whole-target-support.json",
+      "bytes": 2090876,
+      "sha256": "2b404937f2f6629905c208e97718f766a01ee8bded8d0f5b1b3bb694cc9947f9"
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/fa678ed92d9b60765f8935b6a7afd117bc7c744c96057999400c37180373dd2e/work/.cache/delivery-handoff/mmr7479-physical-001/execution-receipt.json",
+      "bytes": 122411,
+      "sha256": "d2c4a179c79ca298c651e672d5468e5bbbb2cd001d7df06ebfd87473ea0be645"
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/fa678ed92d9b60765f8935b6a7afd117bc7c744c96057999400c37180373dd2e/work/.cache/delivery-handoff/mmr7479-physical-001/preparation.json",
+      "bytes": 546,
+      "sha256": "eed6c3c4add9246f15a80b10854e6377967c30cca770e2c1843351cc2e93bc54"
+    }
+  ],
+  "execution_evidence": [
+    {
+      "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/mmr7479-physical-execution-001/terminal.json",
+      "bytes": 265,
+      "sha256": "013b547372e825da2448d951e65df242bed46594652979f82ab589dc405cce68"
+    },
+    {
+      "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/mmr7479-physical-execution-001/launch.json",
+      "bytes": 670,
+      "sha256": "cdafb06a2b442819749186ff4f09b1df5eb4d0ffab7d9405749eb9efe820f61f"
+    },
+    {
+      "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/mmr7479-physical-execution-001/stdout.log",
+      "bytes": 184121,
+      "sha256": "16ce51a67b8b0c97549197bf47cfba74e7dd6ed34de89ee0b4e6f25a1680ce5e"
+    },
+    {
+      "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/mmr7479-physical-execution-001/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "config": {
+    "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/fa678ed92d9b60765f8935b6a7afd117bc7c744c96057999400c37180373dd2e/work/.cache/mmr7479-physical-input-001/config.json",
+    "bytes": 139354,
+    "sha256": "dcfb1407a371874677994495c32a1d1a3d5000aa66e8df3da2a7a4054545849a"
+  },
+  "bindings": {
+    "outer_config_sha256": "dcfb1407a371874677994495c32a1d1a3d5000aa66e8df3da2a7a4054545849a",
+    "inner_physical_config_sha256": "391d4067249c43f91c1c235a477e1efb79d9ea9fd900afb43128de345aef332e",
+    "program_sha256": "58ef81739b264085b2997be7baa3df03ba6bb673f91a160176efd79b71fec081",
+    "entry_sha256": "fde6dc26b07dc1c4e5ce692dc99fd1379e3462f9feca648f4825b0c2132f1457",
+    "consumed_inputs": 25,
+    "common_physical_pins_unchanged": 24,
+    "runtime_files": 382,
+    "runtime_ordinary_bytes": 34906833,
+    "current_runtime_body_mismatches": 0,
+    "cached_accepted_code_files": 13,
+    "metadata_parts": 18,
+    "native_member_parts": 3,
+    "native_records": 188612,
+    "native_member_bytes": 95809336,
+    "native_member_sha256": "af9215d58ebc525b2d09654a89959829f09e6edc457f3666759cded37be4ecf6",
+    "reused_authenticated_custody_output": {
+      "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/mmr-coastal-candidate-cell-preparation-001/pinned-inputs/coastal1928-physical-001/whole-target-support.json",
+      "bytes": 1221619,
+      "sha256": "e7f8a3c3b9ff0184d8d5a909381d38f343bff0c05a93f0c7f2d6f82af71ecf4f"
+    }
+  },
+  "operating": {
+    "exit_code": 0,
+    "complete": true,
+    "compute_released": true,
+    "result_elapsed_seconds": 11.539506791974418,
+    "receipt_elapsed_seconds": 11.574297374929301,
+    "wrapper_elapsed_seconds": 11.76777125,
+    "external_elapsed_seconds": 12.187444083043374,
+    "darwin_child_lifetime_peak_bytes": 407420928,
+    "processing_allowance_bytes": 671088640,
+    "legacy_maximum_rss_kib_field_actual_Darwin_bytes": 407420928,
+    "output_total_receipt_and_support_bytes": 2213287
+  },
+  "counts": {
+    "targets": 72,
+    "requested_cells": 7479,
+    "checked_query_relations": 353,
+    "unknown_or_unchecked_relations": 0,
+    "query_witness_types": {
+      "complete-candidate-reconstruction": 41,
+      "disjoint-after-explicit-predicate": 217,
+      "complete-operation-pointset": 83,
+      "complete-source-record-reconstruction": 12
+    },
+    "issue_records": 24,
+    "issue_records_by_reason": {
+      "missing_reconstruction": 10,
+      "extra_reconstruction": 14
+    },
+    "issue_bearing_targets": 14,
+    "request_cells_associated_with_issue_bearing_targets": 654,
+    "zero_issue_targets": 58,
+    "request_cells_associated_with_zero_issue_targets": 6825,
+    "targets_with_nonempty_exterior": 31,
+    "request_cells_associated_with_nonempty_exterior_targets": 3842,
+    "targets_with_zero_issues_and_empty_exterior": 41,
+    "request_cells_associated_with_zero_issues_and_empty_exterior_targets": 3637
+  },
+  "checks": [
+    "Read every result/query/support/issue geometry and fullthreeoutputfiles as JSON; matched exactclosed inventory/preparation/output hashes andstdout/terminalcompletebindings.",
+    "Exact68cdstagebytes/Gitblobcontent agree with approved72wholefeatureinput;all72outputIDs/order agree withstage/roster andall7479request counts remain unchanged.",
+    "All25actualconsumed descriptors equal physicalconfiginputs;24retainedcommonpins unchanged;entire source_member/nativeindex and18metadatareceipts agree with priorauthenticated wholecustody result;all18metadata and3native fragment fields agree with config.",
+    "Acceptedf60613fileclosure rehashed;actualentry/program/comparison/code bindings preserved.382currentruntimefilebodies rehashed withzero discrepancies;config/admission/stdout inventory agreement,distinct outer/innerconfig hashes independently reproduced.",
+    "353/353uniquequeryrelations checked;per-targetsource_id_queries exactly matchrelations;predicatebooleans internallyconsistent;83complete-operationpointset witnesses nonempty and retained.",
+    "Allseven supportfields,threehierarchy supportfields andall24issuegeometries structurallyfinite/present. Each nonemptyreconstruction/contradiction/hierarchy support has anexactmatchingissue body;no issue witness dropped.",
+    "Independentlyderivedissue-target/exterior/requestcohort counts from actual72results andapprovedrequest/roster;no storedauthor summarycount trusted as proof.",
+    "Main-preserved exactthreeproducts in task2/.cache/mmr7479-physical-execution-001/products independently bytehash-matched reviewed original outputs; review survives owned-checkout cleanup."
+  ],
+  "per_target_results": [
+    {
+      "target": "gb:MMR:ADM3:66882298B10368150445219",
+      "owner": 30078,
+      "name": "Paletwa",
+      "requested_cells": 291,
+      "query_count": 2,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "coordinate_positions": 649,
+          "empty": false,
+          "components": 1
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/0"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B13890402968202",
+      "owner": 30088,
+      "name": "Laukkaing",
+      "requested_cells": 79,
+      "query_count": 1,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "coordinate_positions": 136,
+          "empty": false,
+          "components": 1
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/1"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B13905773583964",
+      "owner": 30089,
+      "name": "Kamaryut",
+      "requested_cells": 2,
+      "query_count": 1,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "coordinate_positions": 23,
+          "empty": false,
+          "components": 1
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/2"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B15199869857953",
+      "owner": 30092,
+      "name": "Nawngmun",
+      "requested_cells": 323,
+      "query_count": 1,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "coordinate_positions": 372,
+          "empty": false,
+          "components": 1
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/3"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B17749520756313",
+      "owner": 30101,
+      "name": "Puta-O",
+      "requested_cells": 19,
+      "query_count": 1,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "coordinate_positions": 419,
+          "empty": false,
+          "components": 1
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/4"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B1975009216242",
+      "owner": 30106,
+      "name": "Mongyang",
+      "requested_cells": 131,
+      "query_count": 1,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "coordinate_positions": 293,
+          "empty": false,
+          "components": 1
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/5"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B20724664356365",
+      "owner": 30109,
+      "name": "Narphan",
+      "requested_cells": 94,
+      "query_count": 1,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "coordinate_positions": 146,
+          "empty": false,
+          "components": 1
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/6"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B20948488348117",
+      "owner": 30111,
+      "name": "Hpa-An",
+      "requested_cells": 70,
+      "query_count": 19,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 525,
+          "empty": false,
+          "components": 3
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 28,
+          "empty": false,
+          "components": 2
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/7"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B21056101662842",
+      "owner": 30112,
+      "name": "Khaunglanhpu",
+      "requested_cells": 200,
+      "query_count": 1,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "coordinate_positions": 322,
+          "empty": false,
+          "components": 1
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/8"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B21195914889348",
+      "owner": 30113,
+      "name": "Tachileik",
+      "requested_cells": 133,
+      "query_count": 1,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "coordinate_positions": 356,
+          "empty": false,
+          "components": 1
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/9"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B22649797942784",
+      "owner": 30117,
+      "name": "Mudon",
+      "requested_cells": 6,
+      "query_count": 10,
+      "issues": [
+        {
+          "reason": "missing_reconstruction",
+          "pointer": "/results/10/issues/0",
+          "geometry_structure": {
+            "type": "MultiPolygon",
+            "coordinate_positions": 39,
+            "empty": false,
+            "components": 9
+          }
+        },
+        {
+          "reason": "extra_reconstruction",
+          "pointer": "/results/10/issues/1",
+          "geometry_structure": {
+            "type": "MultiPolygon",
+            "coordinate_positions": 18,
+            "empty": false,
+            "components": 4
+          }
+        }
+      ],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 271,
+          "empty": false,
+          "components": 3
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 182,
+          "empty": false,
+          "components": 7
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 39,
+          "empty": false,
+          "components": 9
+        },
+        "extra_reconstruction": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 18,
+          "empty": false,
+          "components": 4
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/10"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B22679639113229",
+      "owner": 30118,
+      "name": "Pangsang",
+      "requested_cells": 148,
+      "query_count": 1,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "coordinate_positions": 261,
+          "empty": false,
+          "components": 1
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/11"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B23940339796351",
+      "owner": 30121,
+      "name": "Thanatpin",
+      "requested_cells": 23,
+      "query_count": 3,
+      "issues": [
+        {
+          "reason": "extra_reconstruction",
+          "pointer": "/results/12/issues/0",
+          "geometry_structure": {
+            "type": "MultiPolygon",
+            "coordinate_positions": 20,
+            "empty": false,
+            "components": 5
+          }
+        }
+      ],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "coordinate_positions": 253,
+          "empty": false,
+          "components": 1
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 129,
+          "empty": false,
+          "components": 4
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 20,
+          "empty": false,
+          "components": 5
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/12"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B24871755522741",
+      "owner": 30124,
+      "name": "Kawa",
+      "requested_cells": 48,
+      "query_count": 2,
+      "issues": [
+        {
+          "reason": "missing_reconstruction",
+          "pointer": "/results/13/issues/0",
+          "geometry_structure": {
+            "type": "MultiPolygon",
+            "coordinate_positions": 65,
+            "empty": false,
+            "components": 16
+          }
+        },
+        {
+          "reason": "extra_reconstruction",
+          "pointer": "/results/13/issues/1",
+          "geometry_structure": {
+            "type": "MultiPolygon",
+            "coordinate_positions": 67,
+            "empty": false,
+            "components": 16
+          }
+        }
+      ],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 686,
+          "empty": false,
+          "components": 10
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 482,
+          "empty": false,
+          "components": 9
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 65,
+          "empty": false,
+          "components": 16
+        },
+        "extra_reconstruction": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 67,
+          "empty": false,
+          "components": 16
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/13"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B26691855709091",
+      "owner": 30130,
+      "name": "Dala",
+      "requested_cells": 40,
+      "query_count": 1,
+      "issues": [
+        {
+          "reason": "missing_reconstruction",
+          "pointer": "/results/14/issues/0",
+          "geometry_structure": {
+            "type": "MultiPolygon",
+            "coordinate_positions": 60,
+            "empty": false,
+            "components": 13
+          }
+        },
+        {
+          "reason": "extra_reconstruction",
+          "pointer": "/results/14/issues/1",
+          "geometry_structure": {
+            "type": "MultiPolygon",
+            "coordinate_positions": 20,
+            "empty": false,
+            "components": 5
+          }
+        }
+      ],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "coordinate_positions": 194,
+          "empty": false,
+          "components": 1
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 149,
+          "empty": false,
+          "components": 13
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 60,
+          "empty": false,
+          "components": 13
+        },
+        "extra_reconstruction": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 20,
+          "empty": false,
+          "components": 5
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/14"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B28068937388118",
+      "owner": 30136,
+      "name": "Mongyawng",
+      "requested_cells": 139,
+      "query_count": 1,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "coordinate_positions": 337,
+          "empty": false,
+          "components": 1
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/15"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B28699089666182",
+      "owner": 30141,
+      "name": "Kungyangon",
+      "requested_cells": 113,
+      "query_count": 2,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "coordinate_positions": 308,
+          "empty": false,
+          "components": 1
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 207,
+          "empty": false,
+          "components": 16
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/16"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B29412764358741",
+      "owner": 30144,
+      "name": "Kyeemyindaing",
+      "requested_cells": 91,
+      "query_count": 1,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 21,
+          "empty": false,
+          "components": 2
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 10,
+          "empty": false,
+          "components": 2
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/17"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B29413471910170",
+      "owner": 30145,
+      "name": "Lahe",
+      "requested_cells": 77,
+      "query_count": 1,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "coordinate_positions": 347,
+          "empty": false,
+          "components": 1
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/18"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B29817786092146",
+      "owner": 30146,
+      "name": "Thantlang",
+      "requested_cells": 126,
+      "query_count": 1,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "coordinate_positions": 391,
+          "empty": false,
+          "components": 1
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/19"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B30035671122346",
+      "owner": 30148,
+      "name": "Kyaikto",
+      "requested_cells": 15,
+      "query_count": 2,
+      "issues": [
+        {
+          "reason": "missing_reconstruction",
+          "pointer": "/results/20/issues/0",
+          "geometry_structure": {
+            "type": "MultiPolygon",
+            "coordinate_positions": 12,
+            "empty": false,
+            "components": 3
+          }
+        },
+        {
+          "reason": "extra_reconstruction",
+          "pointer": "/results/20/issues/1",
+          "geometry_structure": {
+            "type": "MultiPolygon",
+            "coordinate_positions": 25,
+            "empty": false,
+            "components": 6
+          }
+        }
+      ],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 419,
+          "empty": false,
+          "components": 5
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 299,
+          "empty": false,
+          "components": 2
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 12,
+          "empty": false,
+          "components": 3
+        },
+        "extra_reconstruction": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 25,
+          "empty": false,
+          "components": 6
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/20"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B32460181384532",
+      "owner": 30152,
+      "name": "Thayetchaung",
+      "requested_cells": 58,
+      "query_count": 31,
+      "issues": [
+        {
+          "reason": "missing_reconstruction",
+          "pointer": "/results/21/issues/0",
+          "geometry_structure": {
+            "type": "MultiPolygon",
+            "coordinate_positions": 108,
+            "empty": false,
+            "components": 26
+          }
+        },
+        {
+          "reason": "extra_reconstruction",
+          "pointer": "/results/21/issues/1",
+          "geometry_structure": {
+            "type": "MultiPolygon",
+            "coordinate_positions": 111,
+            "empty": false,
+            "components": 27
+          }
+        }
+      ],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 1077,
+          "empty": false,
+          "components": 10
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 957,
+          "empty": false,
+          "components": 23
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 108,
+          "empty": false,
+          "components": 26
+        },
+        "extra_reconstruction": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 111,
+          "empty": false,
+          "components": 27
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/21"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B33396458700604",
+      "owner": 30159,
+      "name": "Thanlyin",
+      "requested_cells": 10,
+      "query_count": 2,
+      "issues": [
+        {
+          "reason": "missing_reconstruction",
+          "pointer": "/results/22/issues/0",
+          "geometry_structure": {
+            "type": "MultiPolygon",
+            "coordinate_positions": 13,
+            "empty": false,
+            "components": 3
+          }
+        },
+        {
+          "reason": "extra_reconstruction",
+          "pointer": "/results/22/issues/1",
+          "geometry_structure": {
+            "type": "MultiPolygon",
+            "coordinate_positions": 36,
+            "empty": false,
+            "components": 8
+          }
+        }
+      ],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "coordinate_positions": 184,
+          "empty": false,
+          "components": 1
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 82,
+          "empty": false,
+          "components": 8
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 13,
+          "empty": false,
+          "components": 3
+        },
+        "extra_reconstruction": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 36,
+          "empty": false,
+          "components": 8
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/22"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B34211436690128",
+      "owner": 30164,
+      "name": "Tsawlaw",
+      "requested_cells": 33,
+      "query_count": 1,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "coordinate_positions": 252,
+          "empty": false,
+          "components": 1
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/23"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B34348354141761",
+      "owner": 30165,
+      "name": "Tonzang",
+      "requested_cells": 90,
+      "query_count": 1,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "coordinate_positions": 278,
+          "empty": false,
+          "components": 1
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/24"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B35396935405838",
+      "owner": 30175,
+      "name": "Lay Shi",
+      "requested_cells": 8,
+      "query_count": 1,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "coordinate_positions": 331,
+          "empty": false,
+          "components": 1
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/25"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B36196103316909",
+      "owner": 30177,
+      "name": "Cocokyun",
+      "requested_cells": 40,
+      "query_count": 15,
+      "issues": [
+        {
+          "reason": "extra_reconstruction",
+          "pointer": "/results/26/issues/0",
+          "geometry_structure": {
+            "type": "MultiPolygon",
+            "coordinate_positions": 14,
+            "empty": false,
+            "components": 3
+          }
+        }
+      ],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 84,
+          "empty": false,
+          "components": 5
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 102,
+          "empty": false,
+          "components": 2
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 14,
+          "empty": false,
+          "components": 3
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/26"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B40918846263989",
+      "owner": 30187,
+      "name": "Thongwa",
+      "requested_cells": 2,
+      "query_count": 1,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "coordinate_positions": 329,
+          "empty": false,
+          "components": 1
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 140,
+          "empty": false,
+          "components": 2
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/27"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B41675327542424",
+      "owner": 30189,
+      "name": "Hlaing",
+      "requested_cells": 1,
+      "query_count": 1,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "coordinate_positions": 26,
+          "empty": false,
+          "components": 1
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/28"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B42133100015884",
+      "owner": 30191,
+      "name": "Waingmaw",
+      "requested_cells": 166,
+      "query_count": 1,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "coordinate_positions": 389,
+          "empty": false,
+          "components": 1
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/29"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B44324373263157",
+      "owner": 30197,
+      "name": "Matupi",
+      "requested_cells": 2,
+      "query_count": 1,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "coordinate_positions": 608,
+          "empty": false,
+          "components": 1
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/30"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B45439994111599",
+      "owner": 30202,
+      "name": "Mawlamyine",
+      "requested_cells": 372,
+      "query_count": 18,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 407,
+          "empty": false,
+          "components": 13
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 353,
+          "empty": false,
+          "components": 17
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/31"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B45954578024958",
+      "owner": 30209,
+      "name": "Muse",
+      "requested_cells": 44,
+      "query_count": 1,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "coordinate_positions": 184,
+          "empty": false,
+          "components": 1
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/32"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B46374660355499",
+      "owner": 30213,
+      "name": "Paung",
+      "requested_cells": 348,
+      "query_count": 14,
+      "issues": [
+        {
+          "reason": "missing_reconstruction",
+          "pointer": "/results/33/issues/0",
+          "geometry_structure": {
+            "type": "MultiPolygon",
+            "coordinate_positions": 76,
+            "empty": false,
+            "components": 19
+          }
+        },
+        {
+          "reason": "extra_reconstruction",
+          "pointer": "/results/33/issues/1",
+          "geometry_structure": {
+            "type": "MultiPolygon",
+            "coordinate_positions": 44,
+            "empty": false,
+            "components": 11
+          }
+        }
+      ],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 547,
+          "empty": false,
+          "components": 7
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 506,
+          "empty": false,
+          "components": 12
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 76,
+          "empty": false,
+          "components": 19
+        },
+        "extra_reconstruction": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 44,
+          "empty": false,
+          "components": 11
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/33"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B46397740219200",
+      "owner": 30214,
+      "name": "Kayan",
+      "requested_cells": 2,
+      "query_count": 2,
+      "issues": [
+        {
+          "reason": "extra_reconstruction",
+          "pointer": "/results/34/issues/0",
+          "geometry_structure": {
+            "type": "MultiPolygon",
+            "coordinate_positions": 29,
+            "empty": false,
+            "components": 7
+          }
+        }
+      ],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 322,
+          "empty": false,
+          "components": 4
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 133,
+          "empty": false,
+          "components": 3
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 29,
+          "empty": false,
+          "components": 7
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/34"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B47048273457297",
+      "owner": 30220,
+      "name": "Mongmao",
+      "requested_cells": 129,
+      "query_count": 1,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "coordinate_positions": 259,
+          "empty": false,
+          "components": 1
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/35"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B47304075793437",
+      "owner": 30221,
+      "name": "Seikkan",
+      "requested_cells": 26,
+      "query_count": 1,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "coordinate_positions": 12,
+          "empty": false,
+          "components": 1
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/36"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B48286505509820",
+      "owner": 30226,
+      "name": "Thanbyuzayat",
+      "requested_cells": 82,
+      "query_count": 8,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 559,
+          "empty": false,
+          "components": 5
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 483,
+          "empty": false,
+          "components": 42
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/37"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B48301856519721",
+      "owner": 30227,
+      "name": "Yebyu",
+      "requested_cells": 788,
+      "query_count": 43,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 1218,
+          "empty": false,
+          "components": 8
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 916,
+          "empty": false,
+          "components": 67
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/38"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B50654546091874",
+      "owner": 30233,
+      "name": "Thaton",
+      "requested_cells": 76,
+      "query_count": 2,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 532,
+          "empty": false,
+          "components": 3
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 323,
+          "empty": false,
+          "components": 6
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/39"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B51516707971749",
+      "owner": 30238,
+      "name": "Botahtaung",
+      "requested_cells": 43,
+      "query_count": 1,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 38,
+          "empty": false,
+          "components": 3
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "Polygon",
+          "coordinate_positions": 32,
+          "empty": false,
+          "components": 1
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/40"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B52510382995497",
+      "owner": 30241,
+      "name": "Bilin",
+      "requested_cells": 11,
+      "query_count": 1,
+      "issues": [
+        {
+          "reason": "missing_reconstruction",
+          "pointer": "/results/41/issues/0",
+          "geometry_structure": {
+            "type": "MultiPolygon",
+            "coordinate_positions": 33,
+            "empty": false,
+            "components": 8
+          }
+        },
+        {
+          "reason": "extra_reconstruction",
+          "pointer": "/results/41/issues/1",
+          "geometry_structure": {
+            "type": "MultiPolygon",
+            "coordinate_positions": 28,
+            "empty": false,
+            "components": 7
+          }
+        }
+      ],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 539,
+          "empty": false,
+          "components": 2
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 245,
+          "empty": false,
+          "components": 7
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 33,
+          "empty": false,
+          "components": 8
+        },
+        "extra_reconstruction": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 28,
+          "empty": false,
+          "components": 7
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/41"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B54341055682393",
+      "owner": 30246,
+      "name": "Hlaingtharya",
+      "requested_cells": 20,
+      "query_count": 1,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "coordinate_positions": 52,
+          "empty": false,
+          "components": 1
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/42"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B55371715094402",
+      "owner": 30248,
+      "name": "Kyaikmaraw",
+      "requested_cells": 10,
+      "query_count": 5,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 271,
+          "empty": false,
+          "components": 4
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 102,
+          "empty": false,
+          "components": 4
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/43"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B563703845722",
+      "owner": 30252,
+      "name": "Kyauktan",
+      "requested_cells": 13,
+      "query_count": 1,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "coordinate_positions": 383,
+          "empty": false,
+          "components": 1
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 213,
+          "empty": false,
+          "components": 7
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/44"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B56545181758026",
+      "owner": 30253,
+      "name": "Dagon Myothit (Seikkan)",
+      "requested_cells": 15,
+      "query_count": 2,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "coordinate_positions": 57,
+          "empty": false,
+          "components": 1
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "Polygon",
+          "coordinate_positions": 10,
+          "empty": false,
+          "components": 1
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/45"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B57686651613256",
+      "owner": 30255,
+      "name": "Chaungzon",
+      "requested_cells": 164,
+      "query_count": 11,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 377,
+          "empty": false,
+          "components": 6
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 442,
+          "empty": false,
+          "components": 21
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/46"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B58400642266296",
+      "owner": 30258,
+      "name": "Mansi",
+      "requested_cells": 126,
+      "query_count": 1,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "coordinate_positions": 278,
+          "empty": false,
+          "components": 1
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/47"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B59193658756261",
+      "owner": 30260,
+      "name": "Tanai",
+      "requested_cells": 6,
+      "query_count": 1,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "coordinate_positions": 802,
+          "empty": false,
+          "components": 1
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/48"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B59325512969250",
+      "owner": 30261,
+      "name": "Momauk",
+      "requested_cells": 49,
+      "query_count": 1,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "coordinate_positions": 333,
+          "empty": false,
+          "components": 1
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/49"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B59879554977018",
+      "owner": 30263,
+      "name": "Myawaddy",
+      "requested_cells": 4,
+      "query_count": 1,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "coordinate_positions": 617,
+          "empty": false,
+          "components": 1
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/50"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B60976321477453",
+      "owner": 30268,
+      "name": "Pangwaun",
+      "requested_cells": 141,
+      "query_count": 1,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "coordinate_positions": 207,
+          "empty": false,
+          "components": 1
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/51"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B63943979787937",
+      "owner": 30286,
+      "name": "Chipwi",
+      "requested_cells": 220,
+      "query_count": 1,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "coordinate_positions": 355,
+          "empty": false,
+          "components": 1
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/52"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B65618262001870",
+      "owner": 30292,
+      "name": "Langkho",
+      "requested_cells": 1,
+      "query_count": 1,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "coordinate_positions": 440,
+          "empty": false,
+          "components": 1
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/53"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B66473456791866",
+      "owner": 30297,
+      "name": "Seikgyikanaungto",
+      "requested_cells": 7,
+      "query_count": 1,
+      "issues": [
+        {
+          "reason": "extra_reconstruction",
+          "pointer": "/results/54/issues/0",
+          "geometry_structure": {
+            "type": "MultiPolygon",
+            "coordinate_positions": 8,
+            "empty": false,
+            "components": 2
+          }
+        }
+      ],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "coordinate_positions": 36,
+          "empty": false,
+          "components": 1
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 26,
+          "empty": false,
+          "components": 2
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 8,
+          "empty": false,
+          "components": 2
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/54"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B66538175578783",
+      "owner": 30298,
+      "name": "Mongla",
+      "requested_cells": 164,
+      "query_count": 1,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "coordinate_positions": 210,
+          "empty": false,
+          "components": 1
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/55"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B67010796182523",
+      "owner": 30299,
+      "name": "Ahlone",
+      "requested_cells": 16,
+      "query_count": 1,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "coordinate_positions": 13,
+          "empty": false,
+          "components": 1
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/56"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B6984635080223",
+      "owner": 30316,
+      "name": "Tedim",
+      "requested_cells": 32,
+      "query_count": 1,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "coordinate_positions": 242,
+          "empty": false,
+          "components": 1
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/57"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B72647689440603",
+      "owner": 30323,
+      "name": "Tamu",
+      "requested_cells": 63,
+      "query_count": 1,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "coordinate_positions": 219,
+          "empty": false,
+          "components": 1
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/58"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B72712470803341",
+      "owner": 30324,
+      "name": "Hopang",
+      "requested_cells": 46,
+      "query_count": 1,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "coordinate_positions": 232,
+          "empty": false,
+          "components": 1
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/59"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B73191723482857",
+      "owner": 30327,
+      "name": "Ye",
+      "requested_cells": 428,
+      "query_count": 27,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 1204,
+          "empty": false,
+          "components": 16
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 1006,
+          "empty": false,
+          "components": 70
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/60"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B74112724053029",
+      "owner": 30329,
+      "name": "Kawhmu",
+      "requested_cells": 40,
+      "query_count": 1,
+      "issues": [
+        {
+          "reason": "missing_reconstruction",
+          "pointer": "/results/61/issues/0",
+          "geometry_structure": {
+            "type": "MultiPolygon",
+            "coordinate_positions": 37,
+            "empty": false,
+            "components": 7
+          }
+        },
+        {
+          "reason": "extra_reconstruction",
+          "pointer": "/results/61/issues/1",
+          "geometry_structure": {
+            "type": "MultiPolygon",
+            "coordinate_positions": 52,
+            "empty": false,
+            "components": 12
+          }
+        }
+      ],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 279,
+          "empty": false,
+          "components": 3
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 80,
+          "empty": false,
+          "components": 14
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 37,
+          "empty": false,
+          "components": 7
+        },
+        "extra_reconstruction": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 52,
+          "empty": false,
+          "components": 12
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/61"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B80362939759062",
+      "owner": 30341,
+      "name": "Falam",
+      "requested_cells": 46,
+      "query_count": 1,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "coordinate_positions": 267,
+          "empty": false,
+          "components": 1
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/62"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B80414211212402",
+      "owner": 30342,
+      "name": "Launglon",
+      "requested_cells": 828,
+      "query_count": 37,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 1610,
+          "empty": false,
+          "components": 28
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 1646,
+          "empty": false,
+          "components": 72
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/63"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B84564180686688",
+      "owner": 30354,
+      "name": "Monghsat",
+      "requested_cells": 1,
+      "query_count": 1,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "coordinate_positions": 385,
+          "empty": false,
+          "components": 1
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/64"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B85150336292626",
+      "owner": 30356,
+      "name": "Dawbon",
+      "requested_cells": 9,
+      "query_count": 1,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "coordinate_positions": 22,
+          "empty": false,
+          "components": 1
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/65"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B89556704578744",
+      "owner": 30371,
+      "name": "Nanyun",
+      "requested_cells": 332,
+      "query_count": 1,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "coordinate_positions": 467,
+          "empty": false,
+          "components": 1
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/66"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B9190211902717",
+      "owner": 30377,
+      "name": "Konkyan",
+      "requested_cells": 81,
+      "query_count": 1,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "coordinate_positions": 161,
+          "empty": false,
+          "components": 1
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/67"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B9277012619903",
+      "owner": 30380,
+      "name": "Dawei",
+      "requested_cells": 19,
+      "query_count": 35,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "coordinate_positions": 562,
+          "empty": false,
+          "components": 1
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/68"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B96066491873241",
+      "owner": 30393,
+      "name": "Buthidaung",
+      "requested_cells": 6,
+      "query_count": 5,
+      "issues": [
+        {
+          "reason": "missing_reconstruction",
+          "pointer": "/results/69/issues/0",
+          "geometry_structure": {
+            "type": "MultiPolygon",
+            "coordinate_positions": 92,
+            "empty": false,
+            "components": 22
+          }
+        },
+        {
+          "reason": "extra_reconstruction",
+          "pointer": "/results/69/issues/1",
+          "geometry_structure": {
+            "type": "MultiPolygon",
+            "coordinate_positions": 180,
+            "empty": false,
+            "components": 42
+          }
+        }
+      ],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 952,
+          "empty": false,
+          "components": 12
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 613,
+          "empty": false,
+          "components": 29
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 92,
+          "empty": false,
+          "components": 22
+        },
+        "extra_reconstruction": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 180,
+          "empty": false,
+          "components": 42
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/69"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B98818104227605",
+      "owner": 30402,
+      "name": "Maungdaw",
+      "requested_cells": 83,
+      "query_count": 8,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 1242,
+          "empty": false,
+          "components": 16
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 1022,
+          "empty": false,
+          "components": 40
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/70"
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B99723166439324",
+      "owner": 30403,
+      "name": "Thaketa",
+      "requested_cells": 10,
+      "query_count": 1,
+      "issues": [],
+      "support_structures": {
+        "mapped_land_support": {
+          "type": "Polygon",
+          "coordinate_positions": 43,
+          "empty": false,
+          "components": 1
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "outside_mapped_L1_context": {
+          "type": "Polygon",
+          "coordinate_positions": 9,
+          "empty": false,
+          "components": 1
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "coordinate_positions": 0,
+            "empty": true,
+            "components": 0
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "empty": true,
+          "components": 0
+        }
+      },
+      "result_pointer": "/results/71"
+    }
+  ],
+  "limits": [
+    "This reviews a retained physical result only. No requestednativecentre has been tested against the whole-target issue/exterior witnesses here;654 and3842 are TARGET-ASSOCIATED requestcounts,not affectedcentre counts or rejectioncredit. Zeroissues likewise grants no6825cellclearance.",
+    "Querycompleteness is full353storedquery roster/status/custody consistency under the unchanged accepted method; no independent GIS recomputation of sourceenvelope eligibility, pointsets, reconstruction, area or native centre applicability.",
+    "All72whole targets and everyissue/witness remain intact. Later source/country/parent applicability,exactnative witness/exclusion/physical checks,effectiveownerzero and conservation are separate.",
+    "Runtime382exactbodies and13cached acceptedcodefiles were reauthenticated read-only without importing them. Source/nativecompletebinary and18metadatafullbodies were not newlydecoded orreplayed; inputdescriptors/index/fragmentcustody matched the priorauthenticated complete retained sourcebody.",
+    "Stage68cdcontent hash/GitblobOID is independently checked from exactpreviouslyreviewed stagebytes. Commit/pathbinding is read from consumedreceipt/config; no newGit/network lookup,as instructed.",
+    "Measured407420928B is Darwin child lifetime peak,not simultaneous aggregateprocesstreeRSS. Receipt says boundary RSS/time checks,not liveprocesstreeenforcement. No stronger resourcegrant is inferred.",
+    "Inputreview and this resultreview are distinct examinations by the same delegated agent,not an independent secondprincipal orwholePRapproval."
+  ],
+  "preserved_output_copies": [
+    {
+      "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/mmr7479-physical-execution-001/products/whole-target-support.json",
+      "bytes": 2090876,
+      "sha256": "2b404937f2f6629905c208e97718f766a01ee8bded8d0f5b1b3bb694cc9947f9"
+    },
+    {
+      "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/mmr7479-physical-execution-001/products/execution-receipt.json",
+      "bytes": 122411,
+      "sha256": "d2c4a179c79ca298c651e672d5468e5bbbb2cd001d7df06ebfd87473ea0be645"
+    },
+    {
+      "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/mmr7479-physical-execution-001/products/preparation.json",
+      "bytes": 546,
+      "sha256": "eed6c3c4add9246f15a80b10854e6377967c30cca770e2c1843351cc2e93bc54"
+    }
+  ]
+}

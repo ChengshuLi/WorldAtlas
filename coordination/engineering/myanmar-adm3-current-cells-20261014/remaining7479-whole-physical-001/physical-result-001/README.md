@@ -1,0 +1,13 @@
+# First whole-original Myanmar 72-target physical observation
+
+This checkpoint preserves the first physical observation of 72 whole original Myanmar ADM3 targets for 7,479 still-unassigned original land candidates. The unchanged original/selected whole geometries, all rings and properties, 28 complete parents / 128 context children, source flags and withheld candidate keys remain bound by input commit `68cd14edf82d22aed380d57afe5cde0a3ebe318b`. No SOURCE classifier, previous completed physical target, or native qualification was replayed.
+
+The accepted f606 physical entry and helper were used with a separately authenticated current 382-file installed runtime. Original source attribution and observation-vintage limits in the input README remain applicable. This observation is relative to GSHHG physical support and is not legal, territorial, factual, owner-zero or selected-output approval.
+
+The finite call exited 0 at 2026-10-15T09:18:24.829597Z after 12.187444 seconds externally; producer time was 11.539507 seconds. Fresh stock child processing admission was 640 MiB and parent preparation admission 512 MiB, with explicit session headroom 572,882,944 bytes. Darwin child lifetime maximum RSS was 407,420,928 bytes. The 180-second cooperative deadline, 240-second OS alarm and 32 MiB complete-output limit were retained. The configured interpreter was launched without inherited macOS `__PYVENV_LAUNCHER__` contamination; no runtime installation or mutation was required.
+
+All 72 targets and all 353 query relations completed. Fifty-eight targets report no issues; fourteen retain ten missing-reconstruction and fourteen extra-reconstruction issues. Every original issue geometry and every mapped-land, inland-water, exterior, hierarchy and contradiction support member is preserved in the full raw body. Zero issues is not a native-centre proof, and nonzero issues alone do not establish that a requested centre is affected. Ordinary stock native checks must decide requested-centre support while retaining all witnesses and whole source/country exclusions.
+
+No native authority, current-owner-zero, conservation, selector modification, new accepted review disposition or repair credit is claimed by this checkpoint. The current accepted original-package accounting remains 90,354 / 230,737 repairs and the selected cumulative native total remains 145,298 until a later actual accepted append.
+
+The inherited raw body field `maximum_rss_kib` contains the Darwin raw byte value 407,420,928 despite its historical key label. The execution receipt `peak_rss_bytes` and external lifetime observation agree in bytes; this checkpoint does not multiply that raw value by 1,024 or claim a 397 GiB peak.
