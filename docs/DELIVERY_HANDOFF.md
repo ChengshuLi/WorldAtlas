@@ -154,7 +154,7 @@ No proposed input is called accepted merely because a hash matches.
    packages the exact added registry entries regardless of their original paths.
    Original rule/binding files need no receiving-prefix copies or preliminary
    input checkpoint. Their original paths still require exact accepted identities
-   or committed, issue-authorized restorations; `new_prefix` continues to constrain
+   or authenticated local staging for issue-authorized adoption; `new_prefix` continues to constrain
    owned outputs. The complete accepted registry receives a retained 12x metadata
    carry charge before parsing. Standalone `package` and initial legacy finalize
    without an additive hook retain their existing prefix selection.
