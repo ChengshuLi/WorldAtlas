@@ -1,0 +1,2237 @@
+{
+  "version": 1,
+  "reviewer": "/root/delivery11622_config_review",
+  "disposition": "PASS WITH LIMITS",
+  "check_count": 550,
+  "checks": [
+    {
+      "check": "actual finalizer receipt exact config hash/phase",
+      "pass": true
+    },
+    {
+      "check": "exact stage files no unexpected outputs",
+      "pass": true
+    },
+    {
+      "check": "actual receipt ownership-selection-v2.json bytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "actual receipt ownership-selection.json bytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "actual receipt package-inputs.json bytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "actual receipt package-roles.json bytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "actual receipt restored-read-roles/coordination/engineering/indonesia-anambas-natuna-20261015/anambas-natuna-whole-original-stage-inputs.json bytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "actual receipt restored-read-roles/coordination/engineering/indonesia-anambas-natuna-20261015/native4671-authority-001/authority-binding.json bytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "actual receipt restored-read-roles/coordination/engineering/indonesia-anambas-natuna-20261015/native4671-authority-001/original-rule-preimage.json bytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "actual receipt restored-read-roles/coordination/engineering/indonesia-anambas-natuna-20261015/native4671-input-001/native-patch.json bytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "actual receipt restored-read-roles/coordination/engineering/indonesia-anambas-natuna-20261015/native4671-input-001/source-evidence.json bytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "actual receipt restored-read-roles/coordination/engineering/indonesia-anambas-natuna-20261015/physical-result-001/whole-target-support.json bytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "actual receipt restored-read-roles/coordination/engineering/indonesia-three-target-20261015/native7904-authority-001/authority-binding.json bytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "actual receipt restored-read-roles/coordination/engineering/indonesia-three-target-20261015/native7904-authority-001/original-rule-preimage.json bytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "actual receipt restored-read-roles/coordination/engineering/indonesia-three-target-20261015/native7904-input-001/native-patch.json bytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "actual receipt restored-read-roles/coordination/engineering/indonesia-three-target-20261015/native7904-input-001/source-evidence.json bytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "actual receipt restored-read-roles/coordination/engineering/indonesia-three-target-20261015/physical-result-001/whole-target-support.json bytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "actual receipt restored-read-roles/coordination/engineering/indonesia-three-target-20261015/three-whole-original-stage-inputs.json bytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "actual receipt restored-read-roles/coordination/engineering/myanmar-bokpyin-actual-resource-20261015/supported3591/authority-001/authority-binding.json bytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "actual receipt restored-read-roles/coordination/engineering/myanmar-bokpyin-actual-resource-20261015/supported3591/authority-001/original-rule-preimage.json bytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "actual receipt restored-read-roles/coordination/engineering/myanmar-bokpyin-actual-resource-20261015/supported3591/native-patch.json bytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "actual receipt restored-read-roles/coordination/engineering/myanmar-bokpyin-diagnostic-20261015/inputs/source-evidence.json bytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "actual receipt selected-delivery-expectations.json bytes/SHA",
+      "pass": true
+    },
+    {
+      "check": "selector exactly one additive pointer change",
+      "pass": true
+    },
+    {
+      "check": "selector original insertion order retained",
+      "pass": true
+    },
+    {
+      "check": "selector exact ordinary formatting/insertion serialization",
+      "pass": true
+    },
+    {
+      "check": "sidecar inherited base_selection unchanged",
+      "pass": true
+    },
+    {
+      "check": "sidecar inherited kind unchanged",
+      "pass": true
+    },
+    {
+      "check": "sidecar inherited version unchanged",
+      "pass": true
+    },
+    {
+      "check": "sidecar exact committed registry/envelope",
+      "pass": true
+    },
+    {
+      "check": "sidecar exact actual ledger/patch logical pins",
+      "pass": true
+    },
+    {
+      "check": "sidecar original base manifest/roster pins unchanged",
+      "pass": true
+    },
+    {
+      "check": "package inherited input prefix literal",
+      "pass": true
+    },
+    {
+      "check": "all other package metadata literal preserved",
+      "pass": true
+    },
+    {
+      "check": "package unique paths no duplicate added declarations",
+      "pass": true
+    },
+    {
+      "check": "projection exactly36 original roles+4composition+1outer sidecar",
+      "pass": true
+    },
+    {
+      "check": "original projected fullpin coordination/engineering/indonesia-three-target-20261015/native7904-authority-001/original-rule-preimage.json",
+      "pass": true
+    },
+    {
+      "check": "original projected fullpin coordination/engineering/indonesia-three-target-20261015/native7904-authority-001/authority-binding.json",
+      "pass": true
+    },
+    {
+      "check": "original projected fullpin coordination/engineering/indonesia-three-target-20261015/native7904-input-001/native-patch.json",
+      "pass": true
+    },
+    {
+      "check": "original projected fullpin coordination/engineering/indonesia-three-target-20261015/native7904-input-001/source-evidence.json",
+      "pass": true
+    },
+    {
+      "check": "original projected fullpin coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+      "pass": true
+    },
+    {
+      "check": "original projected fullpin coordination/engineering/indonesia-three-target-20261015/three-whole-original-stage-inputs.json",
+      "pass": true
+    },
+    {
+      "check": "original projected fullpin scripts/qualify-source-cohort.py",
+      "pass": true
+    },
+    {
+      "check": "original projected fullpin coordination/engineering/indonesia-three-target-20261015/physical-result-001/whole-target-support.json",
+      "pass": true
+    },
+    {
+      "check": "original projected fullpin coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+      "pass": true
+    },
+    {
+      "check": "original projected fullpin coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/owners.json.gz",
+      "pass": true
+    },
+    {
+      "check": "original projected fullpin coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IDN-ADM2-000.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "original projected fullpin coordination/engineering/indonesia-anambas-natuna-20261015/native4671-authority-001/original-rule-preimage.json",
+      "pass": true
+    },
+    {
+      "check": "original projected fullpin coordination/engineering/indonesia-anambas-natuna-20261015/native4671-authority-001/authority-binding.json",
+      "pass": true
+    },
+    {
+      "check": "original projected fullpin coordination/engineering/indonesia-anambas-natuna-20261015/native4671-input-001/native-patch.json",
+      "pass": true
+    },
+    {
+      "check": "original projected fullpin coordination/engineering/indonesia-anambas-natuna-20261015/native4671-input-001/source-evidence.json",
+      "pass": true
+    },
+    {
+      "check": "original projected fullpin coordination/engineering/indonesia-anambas-natuna-20261015/anambas-natuna-whole-original-stage-inputs.json",
+      "pass": true
+    },
+    {
+      "check": "original projected fullpin coordination/engineering/indonesia-anambas-natuna-20261015/physical-result-001/whole-target-support.json",
+      "pass": true
+    },
+    {
+      "check": "original projected fullpin coordination/engineering/myanmar-bokpyin-actual-resource-20261015/supported3591/authority-001/original-rule-preimage.json",
+      "pass": true
+    },
+    {
+      "check": "original projected fullpin coordination/engineering/myanmar-bokpyin-actual-resource-20261015/supported3591/authority-001/authority-binding.json",
+      "pass": true
+    },
+    {
+      "check": "original projected fullpin coordination/engineering/myanmar-bokpyin-actual-resource-20261015/supported3591/native-patch.json",
+      "pass": true
+    },
+    {
+      "check": "original projected fullpin coordination/engineering/myanmar-bokpyin-diagnostic-20261015/inputs/source-evidence.json",
+      "pass": true
+    },
+    {
+      "check": "original projected fullpin coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/kawthoung/original-stage-inputs.json",
+      "pass": true
+    },
+    {
+      "check": "original projected fullpin coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/coastal1928-physical-001/whole-target-support.json",
+      "pass": true
+    },
+    {
+      "check": "original projected fullpin coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "original projected fullpin coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/base-native-manifest.json",
+      "pass": true
+    },
+    {
+      "check": "original projected fullpin coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-certificate-001/certificate.json",
+      "pass": true
+    },
+    {
+      "check": "original projected fullpin coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-001/request.json",
+      "pass": true
+    },
+    {
+      "check": "original projected fullpin coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-001/facts.json",
+      "pass": true
+    },
+    {
+      "check": "original projected fullpin coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-001/publication.json",
+      "pass": true
+    },
+    {
+      "check": "original projected fullpin coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-001/result.json",
+      "pass": true
+    },
+    {
+      "check": "original projected fullpin coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-operating-001/operating.json",
+      "pass": true
+    },
+    {
+      "check": "original projected fullpin coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-001/code-source.json",
+      "pass": true
+    },
+    {
+      "check": "original projected fullpin coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-001/issued-plan.json",
+      "pass": true
+    },
+    {
+      "check": "original projected fullpin coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-001/stderr.log",
+      "pass": true
+    },
+    {
+      "check": "original projected fullpin coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-001/stdout.json",
+      "pass": true
+    },
+    {
+      "check": "original projected fullpin coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-001/terminal.json",
+      "pass": true
+    },
+    {
+      "check": "new projected fullpin coordination/engineering/indonesia-myanmar-followups-20261015/delivery/authority-registry.json",
+      "pass": true
+    },
+    {
+      "check": "new projected fullpin coordination/engineering/indonesia-myanmar-followups-20261015/delivery/selected-ledger.json",
+      "pass": true
+    },
+    {
+      "check": "new projected fullpin coordination/engineering/indonesia-myanmar-followups-20261015/delivery/patch.json",
+      "pass": true
+    },
+    {
+      "check": "new projected fullpin coordination/engineering/indonesia-myanmar-followups-20261015/delivery/runtime-envelope.json",
+      "pass": true
+    },
+    {
+      "check": "new projected fullpin coordination/engineering/indonesia-myanmar-followups-20261015/ownership-selection-v2.json",
+      "pass": true
+    },
+    {
+      "check": "projection3newauthorities/no manualroleconfig",
+      "pass": true
+    },
+    {
+      "check": "package appended exactly missing projected roles in deterministic order",
+      "pass": true
+    },
+    {
+      "check": "exact16 restored roles and no extra files",
+      "pass": true
+    },
+    {
+      "check": "restored exact original coordination/engineering/myanmar-bokpyin-diagnostic-20261015/inputs/source-evidence.json",
+      "pass": true
+    },
+    {
+      "check": "restored exact original coordination/engineering/indonesia-three-target-20261015/three-whole-original-stage-inputs.json",
+      "pass": true
+    },
+    {
+      "check": "restored exact original coordination/engineering/indonesia-three-target-20261015/native7904-input-001/native-patch.json",
+      "pass": true
+    },
+    {
+      "check": "restored exact original coordination/engineering/indonesia-three-target-20261015/native7904-input-001/source-evidence.json",
+      "pass": true
+    },
+    {
+      "check": "restored exact original coordination/engineering/indonesia-three-target-20261015/physical-result-001/whole-target-support.json",
+      "pass": true
+    },
+    {
+      "check": "restored exact original coordination/engineering/indonesia-three-target-20261015/native7904-authority-001/original-rule-preimage.json",
+      "pass": true
+    },
+    {
+      "check": "restored exact original coordination/engineering/indonesia-three-target-20261015/native7904-authority-001/authority-binding.json",
+      "pass": true
+    },
+    {
+      "check": "restored exact original coordination/engineering/indonesia-anambas-natuna-20261015/anambas-natuna-whole-original-stage-inputs.json",
+      "pass": true
+    },
+    {
+      "check": "restored exact original coordination/engineering/indonesia-anambas-natuna-20261015/native4671-authority-001/original-rule-preimage.json",
+      "pass": true
+    },
+    {
+      "check": "restored exact original coordination/engineering/indonesia-anambas-natuna-20261015/native4671-authority-001/authority-binding.json",
+      "pass": true
+    },
+    {
+      "check": "restored exact original coordination/engineering/indonesia-anambas-natuna-20261015/native4671-input-001/native-patch.json",
+      "pass": true
+    },
+    {
+      "check": "restored exact original coordination/engineering/indonesia-anambas-natuna-20261015/native4671-input-001/source-evidence.json",
+      "pass": true
+    },
+    {
+      "check": "restored exact original coordination/engineering/indonesia-anambas-natuna-20261015/physical-result-001/whole-target-support.json",
+      "pass": true
+    },
+    {
+      "check": "restored exact original coordination/engineering/myanmar-bokpyin-actual-resource-20261015/supported3591/native-patch.json",
+      "pass": true
+    },
+    {
+      "check": "restored exact original coordination/engineering/myanmar-bokpyin-actual-resource-20261015/supported3591/authority-001/original-rule-preimage.json",
+      "pass": true
+    },
+    {
+      "check": "restored exact original coordination/engineering/myanmar-bokpyin-actual-resource-20261015/supported3591/authority-001/authority-binding.json",
+      "pass": true
+    },
+    {
+      "check": "restored total3003332 bytes",
+      "pass": true
+    },
+    {
+      "check": "one canonical expectation file",
+      "pass": true
+    },
+    {
+      "check": "expectation exact ledgerSHA/cell99127",
+      "pass": true
+    },
+    {
+      "check": "expectation all294 selected members once with8 inherited inactive exceptions retained in302-row ledger",
+      "pass": true
+    },
+    {
+      "check": "expectation70authority scopes exact",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 00b82ea8f3dc6686a6c8a685016defe4f5576fb4516012ea14c9ab17ac7fc8b9",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:c31b53ea6554bddaaf73ad9f2878c0baa6a1272a05b82531755033d1465a6f4f",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 030da868b23c051a64bccc61c15f07fa4508a143566fec08786328277da9df8f",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:ce4c1606178290c5df6623e15ce4408fe4c9d55577c62308a80ee1f7405a2d71",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 079cbf4ccd13424322b5892a7ca601a5253aa3815d296e01c4cbf023031e5377",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:65220b14681e3416b5de12f476087383af9934840a5a510d03315d3eeec40d93",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:708004e993e182b0c65eee86fd5c544630e798726fc58f618bc0932de6894750",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:95cbce2a2c42c917e104fb1b2fd298eb289730d053cb413331fb52b3deb6a607",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 08391a37e8fd22ea426e0e93743069bad4a0e29c3f75b35a84ca6b6e1879df29",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:26540ed79a8943b3526814485d5941d4e21ac6363019cc444354a945d5ac5b53",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 0a1ca501cfd4139019ce2a09667acddba6189f7cf53ecd92083d51febc7fe07d",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:1c86e594bc8dcf9ae546273d8eaa6a42eae6b492ca79c6898ec2c87f6c8a8683",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:f886f634038cb758b9a68f30e1a9e7216cb04d08058a232a44c59d1f6dabc8ea",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 0c4ff2d0d7bd95ac3d9503f12cff2d5604965874356f4b5860b2159f71611f74",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:ee36dce2cb93630b41450ee9cf0f099cb067fa78bd23d16b0f5db2e0d08eb7ed",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 108ce51e9f4b69feb63c8d4c3ec7de9afca06fe7b2ca5a04f760cf41f20b147c",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:6fd25496ae4a7635eef229d0cfd1eb8dc7d9c10c252d3255fe8d42d186e706d1",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 11090882ffa964f62681ecde94297d12f50380d6860bceba9f4277a2793fa36f",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:920d9c0c57598d71fac2181fdc6520caf1a3ef661bc798cd2562a6f495e162bd",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 18ed38eeb0cbad1676b1bd0f850d4750c9378f9ffac27300a2c78415204e5f92",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:8035141d15b09e07bce144e4e87af316241f7d7f5c41e220a480eeffb9494771",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 19aabb1446b773896c15ceeea76a6b3c7ec85896b4b55b0f63fe086c1931d664",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:ba75d7bb21cee36d42738d7da1be04d0d0a379d6a31852fde00ed35b800b4a55",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 1a167105591920e96109369989effb3d24d0bd5a1ba110d57545ce87cb536a6c",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:7daed36a12133dd7c1dd1b6b29ee3d24506f5bc1ee3c7c112ecdce074745e305",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 1c95b2435fca2d44b7c5e28a59c8e180c4a34dde2aacb9ab5579e3ff41005903",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:1e6775304d377bbcb519ad8721c8d4da5a5f0595bf2ca3e309d4a1a6b65401d3",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 20bf54ce9bfae9b35bcd735b4064550f52590290d1460903279b6caa4988eee8",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:768fe4b3068e570c2257750496a4d7dc8edd343958716fbe235bc21f48a28649",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 22175a4b54efacc703100c160165480e5bc2556ea8f3eceb0a1ba3445e2eb92f",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:1823bc93676bb57db1b85751dee537a7892037599c04fcbbc26130ed85add368",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 2c9cc24e114222c014ec2e86bfe9b74c0b68604def8f47b01b9a1650ad9dbbe5",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:378e0696c3bbbfb878b350c3778f5fcc71636c8ba744d6fcdc80db5c103dd1e0",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:40ff6c27299f25ec550f14fdaea3a3330a392b6b20ac272626ca8ba6bb693be2",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:43d754f07d968de82c5bccf46045d043f019dbe2a862bf16d72c9148f6084325",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:6a30b7a546e70447fefef322e57c2d11d81ecd0eb443167c84142c89d68feb32",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:ab37f4f206f283da9875ff721dd2401349f482762946b51d43db38cfc76c4b8c",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:c52f456d50f4cc48efb965913f8e733e78b6739af90c7db42bec565becb30148",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:ce492a40d28b19cadfab0b9a8f0077984f5fb05423d3148e8cd9fbdd5bac6966",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:d9f0c31495e8108b3cae6de0545f9dee365ebe8776d1f20ee45eaf3f1f8607bb",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 2f52f8825bdb8dbe9edebec6a30e01e3ecd211387e531b9706a525625d0f6983",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:8968b22d73907e3452f4102da4bd9b534f86b65a1fbb7b7e3482bf4365eabcbb",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 2f7a10c97be61461e2b25d8faebf42f702304b0a2f5a777900e531b98f6dc304",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:6434b01a19d91e8b121cc47a79753478e77e4d3e1650506105c00b318f84a47e",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 357e572f5cd211bd605823cfafacf05870ad327651e1d6dba49589ee3b08bff5",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:a7112a8cb1e004fdbcc35602d8d3862332523574c0118ede1e92bedf89833a8d",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 367ab72f93ce13f97019b89bd0fb7c7e8895d29c36ba1ff436a5b42336e8aef9",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:8fcf098be5391eb150b9bbe20c8b1bb22b18732047c8721de804a2c0f573741b",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 3c5a170dc056bf6afc912e88854604a19bd0530d361e6f900672100aed0ea378",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:1f9126266857fdc754c2ebd4a3b6d8b3175842882febe413a5e3ae074e1a2b93",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 41d2b9b4adafaff9df20fdffbee1e53b90c98d34884bb4540ff0f515ccf1f28c",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:859c5d8d5d8a8bd274856b6e9d65dfe617569d09dd98d30bc19be3e5b7d46ccc",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:a6bbf5b8894ee26a9dbe57f1b01ccd688d9012756f828f14a9e39ced7a6a980c",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:c3d1ed09f8a6d50be7ad4cfcd9305a1289930a7b81a5dc9909d96193f6c73c64",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:ee13cb58db31635e1bf9b0309dfea4a5e728c58ebb0ad7a42d273f5589fe9cde",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 4564ddf0f3eccf48dddf49cfd1b4586bbedba50b70ae74933f33405761921a45",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:4108f7235f6e2582f68409eee00f0f252a9e5aa501673eb5f8b651ee54f1df51",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:c47f3ee5c485866d3966f021e0c4fa9647899bcaa7faf61bc7667e17adc435fb",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 4619f3973def5d045cf63ef04d39417b3795bce8266572133fd164a0c48ce153",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:46e0f6b1de7155d2722cac7669ae89b1f8bda954c298884f5dc239ac5237de8a",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:51621e475e003e83e6b23203827a0b255ec5f7b4fe4af550148fb486c36695ca",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:c1d5e49737e17af6a5a2dcbc5467b7d3bad9d895115dbb7ef374ef76295c8e4d",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:d183bad00349d708a7d8ff8a052555c6a944b82ec9dd05eaca6469001556c6c7",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:df2cf8877fd9e127728b71547dd7d87368ba90db73d5484a0ad321446275551d",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 464bb5b847c6b0abcbbae17be2904988387b66292c0e344826a43b685ac03936",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:0490e58431949470602032aabab032bc20b32e38f2e74705e63ee2c37ee16a07",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:7db8df2e41af60ef6f5f5de963e97070cfea2d500225b061ca191e85cc08d882",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:97da0452499d074bc2acfcd26d2b16dcc409d13dcd3487c88818e683366de807",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:c4b517a90f05cceee501af2b3aab93b8042921f40c98696e991a54b2e8fb7930",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 465250d795784800e11cc2997e7f91f008e21d83e5d74b00bbc0bed56afaedb5",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:06cef66639bd7c0e6c1c0bc2be87ed905934432515635676efe40d65e7b8291f",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:fde70a28ab8aa35630f12472c193038d863769cb4d879b5040b90fbb402eb065",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 471bb16635d2b7044a6124e35738fe9f3c010fe320312e6de2b14c2c98b50f20",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:750b51e3ea792a2a7b3bce47d35e6721d735f4136892e3868ae1f718217f4f47",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 4724f18999028c453e85dea3e6c3940c53699573af22be507b3bfa7761a122fa",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:94d4cd339d6adca3fecd86682a700d3c85c7c67a8745996b1d878a875cb4c0bc",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 474321fe69810e96b6d8e6d9cbe6926203b49ca501c00318b42950f13fe89606",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:084682b4840b680c94ac8da43158832ca997db263ce737e519ff48384541af6c",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:228dd4d134a2fef876c566d6b9f13d13e567c3dc7cb77dcb60ae163db8404997",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:279e4508d13261e83f4e4e9661cb8090f48aad70fe8d51774517a04be7a05d50",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:353426183a7e387c709acf564ba153b06413ba96ed302abd39557f785a3ccbdd",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:3e9183d8641407d6de0fe0aaccc1273750c3651f742bfa7de7a8fc44008c1552",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:43dd5a681bb2923b176c4fee12df7ab2ff264f2873ee224ba9039ff59a5b87c9",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:523b637c281b82f3eeb5a89ebee66786a7097b1f6c9edb1fc40aa44639845b08",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:5f6ebc89f161cdab3289bdf43f5a4cd058ade28cee7774cf26cf4fe0044b259f",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:73754478d67b5a01f2997be377873e609f28591057f3b4b9d0ec881e9bf5e0ee",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:778b9276a078b779df75760784f4d61bce695473a24e2dd17cda56f0279e1759",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:7c4e9acee2468d307472c031cd7be193f279973979643ddfa18b11ba17330be9",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:838a1f035b0b2e95d965e5d473adab04dcb90a3fcc6371c3b079d2698999fe16",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:83d86e00317b59d2589d6d7d4d9dc1dd1f24a3c0bd59b8772b48b1e54474cd3b",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:8bb799252383b996064b6a390e2c9ba989430a9fc5d27fb5248150d59b09c911",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:b2a2d184b8f00fe27cb46991d0277cecaedb47a3a59e06c0e2c281ba193bee7a",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:baf491b9cf6362a577be108b9bc9a53afb3aab6381ee03d1d9fa8be2154d7cf9",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:d449dd794ae5a2c109ffabac449c4f713c1155e4f5485c205ec9de3055143c8b",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:d4844a64429206135b5b8d86705370dfe4c49e26f491a533d113449c30edd349",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:eede6016d729cbf204ec69a13e4f5b082ecdb479ac2482eae47a23bb38f3516d",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:effe019b6ed2834638d5961e847cd86339f0156132f3bdd2f48049f2f3c1a02c",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:fbd4551d43bc561b7b62d937bf569a3d93c4968993893069c9fdcf56bd9333fe",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 48d5dd69f5bb1a9cd4dc8beb0a23ab624edd49b747f5361b5312ee2fdbeab961",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:3a54ebc441386b0e672f9c812c6d859f53b6f18cb77e57267561bf1decc6e337",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:66ec154e2177eda49542e2a64f955fc945c2dbab3e6038651edde91ad1d1d7cd",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:8e32910c0fd94a6d3d5e4d36b345f29d038e11a67f48b2831ea3da0176e8b686",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:9a88c92d946236ea74998485e783003d7039602ed48955e0d03640d854631578",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:ea518938952efb1755f2b3523fb28a67bffc8af06597dc6bda8406725a0f02db",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 4a3657f9f1435054b7d95634d25533495516aaaa4a05cb9c7a87f879eb627479",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:0bdf2ee153bf92a00d854efb144310b2aa0fb0f1c9cbee883ee186240aed83bf",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:342f765f469621d4aa95daa0e7db7e51afe5d86eee2c435fa110ddc7ee39a181",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:a98bad0e3cc4c2b5d61836e64aa6277a14762e4c7dfba2814c7f28c89cb2eee0",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:da5add0c0b7b1622d62c5c2b0eb6cb1057a960ed99a5fc24ec44a73f79e7a8d7",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 52a51a6872b04481193e31d7ce0b6c9bd310ee51ddd049af1defe802499d383e",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:7db9414ce4819211a245fab57a9f620bfd8b8fce436cad548b22e48f4349a5bc",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 564d1bbe3b0acbf8bfbc43dd4769cf42ff1acb3cebddc40a1acf237cca93928a",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:0091db85844fd6cd98e7a59ed0dc5daeda21d2eaf50ca6cbb41d99f42e04a12a",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:0b37ffa1f3fbf11f68903006257bfa476e307f3f01fd74cb2b57c313ffcae6be",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:0ca7380314cbbd6a8a1dfe4ba337fdabf6ecb3a3f846c0723322c5185df3ed96",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:14b39674e169589556cd91e41ef850d1089e7ce996d0ed864262e7c38b860836",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:22f93a981f2de006bd102847005152f31f7ea1a209165fa1095e2a2e4df761c9",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:295ec9eaca2e26aaaa1963d7e686d25d324b0fe04304da79f7715adfe8c10b0a",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:2e9a51c8a0fc916d76a98c32aeba102bf232ec0539429bed4d43cf536322c96b",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:3ba1b220c224b5a80fc3f69ebd9cbb872d0a585a945dc372140ac2f4bcca3479",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:3c49b4cc09824937d9dd007e55bf9593e30f59b39dfb68fa7ff2775ea1046192",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:3e4b3ec48fffd599a8dcf0bae8ae1c0362e9524f96acf7ffddfdbc8574e0002e",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:438776937458cb8287c6c169a9f6cb7612f54bf0c0d959f6271d6611ba494bf2",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:4b4f8885d550d69dc6a2ed975163e1434c97f858bb2e90be56b9bb4c0c12e5a3",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:4de84885b1e8e09f872769ae35b8077b7e5d91d40c4c332dbf613992f85bce1e",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:5f75a6074f2581b829e3af0530636a3c059e2ffa45f337ac330493e5358eb39e",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:60ae40b1d54d063c90754569e732bc5912e174ec2f9f8bbf879e7f715739fbda",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:787556d7a02feedfe0a9f59b87d2da73f5eda4b5fd0a6d58db73b7501bbd9941",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:7cf6a1794e71a43d73bf18e7c3cd892ae8a009dfb6b38a59d9663cc2c52d653a",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:7e9f0261dad3a748694c91dd0abd9c3c302e513a5b1372f0601d59d2b83bd69e",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:8271eb22d7a1040ae1ca8f0541969f67d1126417801997447c386659f8ad1114",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:83006e96e81fbaa387db50a1bc194d120a58bea7cfeb2772579459941fe6f720",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:8743241afc3c9dfa2129814620c8e45ae3e639dcbe4bc5b5c7f8450e0454e542",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:8c68957b45190f126ee8bbce5980e82dd2e6ef0c3a84aeacad5fd892d3214a06",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:914f1644a26292ebaacc407e5024afe7f2c84a2fd77400ccb12a8ba028b0dd2e",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:9d89e9bc14c983973b2b657c086b332e47f50b75e0502764c81636ec12a18e78",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:9f6461220723b258a49369e64e29005abd314dcd42ff3486b31b5c8efde61db8",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:b409bd02a1106a198431c3bd08091c73a51c77ed62898bab1974026368e0516b",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:cb26cf79fb1a98114c4e11faa38b17e6b567826075304fec8944a75b65c088e3",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:d1db9daba1454cf8c00c328b87518a32bd3598b8975625d99f5199e09c8bf9f4",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:e12c203b2cf790903e8fc0b804a45e62266c8512b1c9ee218d181391b817596f",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:e1bb0279b0d2e46955837ee84ee8c7a54a0a639b19484730660e2181ed29131d",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:e92d8a0c9784f03d46297b62f1ac32b36a9304b580fa6d7eae97b9e912bd9ec2",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:ff8929a8fb21b2ea5375d05c15e638eb6e734bda76f053b85c01e425b80d17c9",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 6440004ed9ca5f83777aae34c4385576b4b71045beff23a3c02f0b8673b19fe9",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:a2e4fc9a73e9b59fb4ba92360774f2a9fea5215a28eeb2a0db0ca23e7bd09ff5",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 6541864a1474a34b0fdb15580367f1252a7b01085eea5f482f46b487c027367a",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:01648ecb35ddc372d53a272eb8350f1f72a889f3b7b0c47ec662eed78e6d07dd",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 6d96a3c6d5955fdc4bf25f21d55629af04b67a5930e2771d010e14774360b6f0",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:3ad5b5708983a0c6b48f370a238f08a56e562f05ab0c47484f065db3931c712a",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 6fe4dbe4ed0c05d9ef37248cd58a9ed2dda6f6b987498a7b8241ce9cf3547892",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:e800720b95dd8bb0aa4952624e7621dde1b053ea83c6df588a5afdb048bf407d",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 7c4b07b28bbdebc43efa4b1e2b5f6ae7ceac74dd28830c66e4981202bac41558",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:9b7d5477755d2307f881b42e2fce0de98b68b2ebf702183e7d4d16b296c7b8ea",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:cebfb84aae8af0e2534907a5a55f25e4f4acf41c36ce46563f9823e10597bc3f",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 843d644f229e116ab6ff3fdf2a8435f3eecfbc1d36b44f75a401e5f6d0f84f7b",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:307e87aee838533082007e29254811d809f22152127a05815195a9d98ad327da",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:6c21d4063b8f6febad1769f1e7f058e668ab8c018d93b770f560818e8db5af22",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 867c3de9451a33f756c7f52852a782bc0877757d5ea71818bf88da4263690d46",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:073d9a81648d56c1b63a4e495fbd0140c17659bedb5c9b211739642b438ee488",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:4d36c81ff35079341e6ec0d5a207ba3844e26f5d55c30c7205924dfd33b8dc18",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:5874689a46f7945e9dcc67cc3b0321d4e534572e4b4bd8a85f4a07c5005d1922",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:66e4f6c15eb17f53815844efc04e7cae9faf9118de313541d3a4be2ff1fcf0a2",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:70174bffffdbb4a421344d6c10d80b760972f9c5452daf0d7c26408fdf18bb53",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:777e7bc99320bf155684f99b0903c336f9a07862de4a7fa0ac8cde990d7d6ee5",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:8435dc6d973751bab55c4eff12c872ba331c3e005254ceb21b76933a8cc6207a",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:8fb2ed9360ba13f6b19f8bb6ee9a16099039d8b59c9f51eab0a442249f428e7d",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:9f130f023a510be6e4b2f9075ed99cf75c4f88053e93189dda3f0bd51080f14a",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:e76fd386dc9a23375537ede302f7f380a217fd4bbccd9536f856e8b4253a5ab8",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:ef7383db4412abe64b7e8d009679cffa4a3174d6da100c6de1fc37272aadeca9",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 86f38bfbbb56184247eb65415200ffe372727d83dffe95d8b6f2e634b1ae60e4",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:64621d74ca19d475b02d7c9144029019088f8734c068058fc5e8055d33426e15",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 87370192468f4447fd92b976b00f77ef6982d16479d5b47b04485eb8fa286e31",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:6c3451070347dc89ca02847789bffaff0ae9ad4c5bdeba6c54056d7912d71501",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 88e95a20f651d46e90e26b0665a329b9aa884a1afe6b93c45bef6dce15c5c7fa",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:b4f157a2dd71d807c03f52a1828827813bcf829c18b681d22bf8b4c72f09c029",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 88f6338e00c8c8266836990c59cf74d8ced37d1104db3d2e3ecf01976402a353",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:47f533a94718204a72389e0ee39b538ff230f219ec619de6aadfa8dd0997616f",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:5333b1363dbb396832c14da44a54e59bddf037cb92378e11d17efcc931220ce2",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:c6e5c097e7fec0a79402758c4b8787151660e2312015f92403b1d857bdae9ca8",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 8b3c05d744cae2880eb01b644df73ec2b013f4b142b1c38468530381e52096d5",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:78100df8c42f6c8a6c936102b110cad2820bd219a083981d1dbb961273cb1881",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 8ec1b392278d6a4ef8ef74ed88f8620d247ba25ec918fdcf2d4302f1b63d41e7",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:4ceb0de66be41e24e9e2f640442ec3ae3690a7d134d73cfbe2a6ac01edf098d4",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:d70ba927292a3f812f481885193f21b099328f0697ff13fea7585dac7a8118c2",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 90d8a8e4adaf0c727789ed58cdf0667fde826699a11f3be15f0ecefe8db66e7e",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:5234b8785cace7ed45cb21f3e42336bbb6c0b9484955a3b71326bd59e803f95b",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 9713f9b46cb58f116afef8106165cb94d4fafa9d754a9ac2b8935471a3a8d20a",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:327079327a1e08f3c08550fe027f8f17fa6571d78b40c92145d603b2faf2b6eb",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 98dc99d47750fb65efba6c940e5ce4a4af1856d6f83a03e4da1a0265c0e7d20c",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:242b207bc2519bbad19c8f4d0fe8f4190d3d93822ee3f7c4a8f7a0247677e243",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 999e3fd3a32c1a648f87ef38745b103cd75dadfb2f5ee8400dc10fc3fa130870",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:08a80cb36cae129f48de36c3926e67ded2383c1e78fb47c069c3ed5445706b6e",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 9b54ebd20ef8c6d4ffb7b8c4f9c30672a10343716df7bef5b41fef995bc3d659",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:25c06a332149470184798dff498a86d1205133b89134f38cda7cee8be83801f9",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:382b186149554364d18b7e6b045128ab414b41409425827797747b00c1244e14",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:5624e22c814e52d3e3f750dc755e4d5463434dca754237c2e1600153b34fe740",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:945d5a9b4461b154fb3adc793f6f148fffa03b1fd3dbf32bc417c274942cda0f",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:9fcdc5a551cc8f175f84b7d8d92126eeb0e33b400a2edc79f8e278e0b82a6476",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:ae74b0e26694017a6f1320501cba92add2e56212d8af4ad9533ed49ae296b21c",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:b155ffd0959d23f8f647a880dcf66839632894c09e31914dc10702bd669f0bf5",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:dee68340ba9e1f6a62acc29b0b97ecc6e860d321f8ef8c84292361304bd5e5e5",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:fea855599ed853fde8849380bb34d914e05e04d95f58ba731efe0231acdeb021",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 9c6060f177bcc713a35b041efe50cad99a01f916d7b97b9eeeea4a11d0891974",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:f55c8e22781c0c1c1fea7916b23d5e003f99ab05cd63fb4fb5a8c7fd6f39d018",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership 9dd3933ec910ef82147450aa7096bba0e5cbe4b39e261ac4e135ff62d92ef04e",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:1b2fd3c03c5db24c8f660afc78063cdf1e7b97ad7aa1651755f173c24762fbaf",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership a0c184deaa4b7687e048e232231d9ab7d2b35be125a934404145a6980796c453",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:cc8500298299eff6edf9663b563a6d06a73939d6eec1aaea93963fa165ae5ccd",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership a249763895c227348613052108ca1f22d5b27357e028f5bb048819fb4d37a6d6",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:02503ad88ce4a8ba68be7b197491e3610b557016bdca2b3ae5692514603930a6",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:040b81866ed44166ca5c08cebe436417e629b5eba0a263d9531288fc6416832d",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:20314a1f10831597e31b841d5ab43b93e8b4fc2b99960ca8c1cc8b1bba85d06f",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:270b5cc144fffa3af15d9538ecbb8665d52f98965fa9a61cb5be4b20a8c7243d",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:375e55e26bfc017ffc1cc2966705822a4577dc94b3cb02f3d30803ccd34b2b5a",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:3f1a462840f8fc7b9baff21c776d48f747f67ec7a71b4319218f2cf6c7aa5c50",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:43d1d39fd50e54e8dcda3f70ec1eece46918fb1a987e4acc3c0d5bd811b3fa4f",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:672f627ebc78de7674588907b30608503591f86e95e193142b800e547d18b377",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:7e72874be89ff9107dc87c86aafe0ee2cfc7430e5a9f1688bdf556b2b284ef3b",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:8c215cb7795d2616a7743a89e09a4f26fb1cd590fa6101e204348a4cf55212af",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:990ff8dc7d906a734266e2a3ea0151bd77b5ed700b6c4ab1e45da915cc4f9dee",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:abb4663da9c0480823953d8c8cccfe6d324a15bb1a92566503a85f4c7a79c4f6",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:cb03679e20a514e86009ca5a936e6ec74b22fc6f2266028555870124ed23d47f",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership a6511ece4a2e774ce0fdd2f49036ebe5277f57bfea5f7bed0237c3532974b9d3",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:1556c3bb1c20fc718d0e5d5d8dce2ce180b191fe63eaf492312db22550e8e737",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:e7830362e503492dae1922eb91157c0e3cc7a42043dc91eff29878eeb85aa902",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:ec9be2d5c5db2b304f0e71418b2b328ae508fed448cef29e6737c3c1121dc1ef",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:ed6ee8f77903a084a21fb78781debf60115e7d9ce616926fb0e3cf9dbacfda34",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership a8de1eae720d99a4f12551f47261aa655067e2f3d3d6efea776445765f0d1e2c",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:551ca58c3f9a9f37b506c4da3b2bf8641e479b36af76aa1936018d0e50e0d011",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership ad30afabcd8b821c7877705b4af34b806956a158de6c53fb10a90c1c435ac85f",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:add031b7195352292c8529323c8b99dd75002af629116b229e84be981893ca8d",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership ae900c8edf8f400a47398209d810416827ebaa2e7fb0ee20fb3305692784a9a9",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:8441fde5898d6f7db14840ed710f12785697897e45a863a5edd692e935866fc2",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:fb03e785463b4a99a605ca297b6dd2a2bb27f3352e108844ad5ca147d9fc622c",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership afc680b4bbc0ad06c183bf1aadc95d0f95ee53d41130e338dc8cb70929a454c5",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:a207016c2c38eebb7539f7f778ab83588c0fed4cd909656ec88ea9905e1205da",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership b2452e43ffdac972fabec1fffdeb618a6b8d89693dc8485b0311330ae07a241b",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:439efe4d179619e2af52b11f6121b89089e3c5bc04a3b826538a49c020751d96",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:49a50f08b97dc3b2cdacf24ea26f2f9dab08efeea2f607678e3b345e923e686a",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:682ac3bfa80c6bd3f80031260c6e4b23f827c574256a575633b41ec3fb5990ff",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:8b4f040c50710b1e13b23ce8767746087ceb9c37539384ac9996bbb22d12248f",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:9c05043b9ce9d8bb6c31c3e8763fa900830ec2da4f9dd90eb439a1c1bf602463",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:9e241d783e644cc7cd83b588c9091552c6a7dd37320bb35f93445045baeeb6b1",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:b42a80654bd16d0eb60a0fe8d837f758a9c5bc3a823e1d6245b36a5c540a122f",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:bcf957fce9a894f99974ce56ad88f7356753b6a13eedc9837651a60e45ce636f",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:e0af335dfb4cd3ededb72a6818ff0e1abd3e4ad6cae57ac537c90a9837dfb808",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:e2ec9c65e7a3779fd4c7161003a5f97170c8c71029fc9a98e58ffd4a6d5acce8",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:e5c59a19cac4eb9c64b7b36d0ec022638f2eeb2a46e4fde545285029a29b8ce2",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership b5f89a05415ad01d748022e6e374700a2234523a3fdba7a1b86e716bff04ed66",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:87e079a4cfe8bb992c326637cfc95c85c1c95e78a5aa07a4a333d537ae632500",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership c13718defb812a4b98359b79a631237a532a1833fec390dce24e79f4b68bb192",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:00e18c0687a87dd8f963f06a7316f4162967a4ed8f5f625a71055754ed0e89cf",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:017bc9cdfda493edb8074eb9d20439235476e399eca9277965fef6a0c6acc1e9",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:0298d806c72678bd131a48f80474ddc944b73688cc96bac6f3b456cd1fdf65da",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:07c90408a723150eb6567bb1b1a3afa65c56f0367b24cff13a6b736ebe7e4945",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:07f773b99c23622530a9a87f0b1724ac1690781e497b14d097b7e80ad3766900",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:090b324ed0d397f27d50120cb8e4d787b3e9bbd3fad315f84d9361cd617f88d6",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:09147e8bab0f14c01882a136ee171404ec6f5fd6ab870512496e00ccf73c7988",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:0e8ebf6843d1f0a313c3efb00caebaa6114024abd5896cdb49b43a8e87d25b7e",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:170ed92572d201714f5d310b3645c39b57b364fcecff81d48a7fce6680f8197b",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:1973a009fe3c06dc005b15a496a6f542b6b2078298b84f9f7e84e508d6e189dd",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:1ad2966968b577a92ea034c38f93049976657dbb82186e5d946ab9399dab1530",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:1e1d7a6df827b2fe7294d5813bdd5a9b833d0ca5618ce065674c8f63e55d1548",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:24ebcef30a8dd399cd3a1dcb88a7fef7ee1d800ec968b474cbdff16ee18cb4e4",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:282ddc3c4677bb89bb632351f19d33a151d2f3bdaf011cb91ed84b081853fcdf",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:2c718b560fd6503262fe581405be06c53092fa48b00e32adec3922f4764ac9a9",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:2c787a51cf3dde24e6ed7143c616dac4c904b8c170e22c00c597cdefcbea4779",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:315abb64c862921b2b85529133963cc13b4243601146273a0a9093f38ccc26da",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:32289480c04f57ff92d103200cb69922d0f9ef856baa80e182dd85f580b99715",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:3321134da62970fad1b3b841243d5587290c1f470eb4c1ec5421e3fdfd988bca",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:3481d35572e3512f05bbd2d6865e8f2eb7bc67d9fed6e8931bd2d6d58e652d20",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:38b5f1db4e35717a13bf580e869101c4ca9afe2f4de47235c10339dc08a299c2",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:3a518ce446fb683366983222449aab5ae6bec2675580f4bee1ef33cb17683577",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:3cc7b7471b9298aae2d0de7a7a67140fd4d4411c7e7566050cd4fbbfcf26c135",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:42a6862b8abbe9ab0d06a96b8452e5d9fd779ecca7c61074c19f19f44e9879e2",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:42f0c362f7106762d4c69eeebaeba1a2827df0f017d4983698c0c3c7e236a4f4",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:490fcae050e614c32957a24eefa255ab623f66fbcb6342f7bec8fa914ff393bf",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:4ddde34595dd6f19dd625f8ce825020856af2f010f28ec6eae012376ec006335",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:5756ae239cb2376aac6917fe4df40f3ec147739cf6b67949e380a7d9f18a9f74",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:591e021d9d5a9b1f719e378de964774e80cc4880907780910118e5e7f5f3869a",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:633d4db83f939468abc68d973999a4df3d117e9750a774c68f2370fc5a2fee7a",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:68363e0cfc99382481420acd1f7b09bcf80fa6dd8143fdd3e652941e902cda74",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:6aa6d095e09b5763496867083c7420678548f5b352a9d728423b8b1a31dff6e4",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:72c71a5d562c0aadef9966db47da816bcd2f9a1f24c9e85ff5b7e461ca043066",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:7580967fcfd02aacb281aa4b119677576b129ec15b09dc34c176190a0bb22db5",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:76ea9b020c03bd7f4ed17f274dc360087cf69ad83a6b8bd48c91742d51095b25",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:7969be9ef6740984689ba4888e0b917fc8576ac496c5fa31bc6514f6cee42f7a",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:79e2730552da7bd2ec57d4664ae6285b6827ec4e4b6521761d8957385aee1c81",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:85e67b30082a430814d5e2559d7e98a3f142e1380743431cc6a5c486d42eb69a",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:8ad146f15baf2df58012f04b486aa682335e0de135eccd5664351a82fcaee1b9",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:8dbec6f468494e7bad3241cc3b013d577e74965b3ed237408520cdc32e5b29da",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:97c4db54c8cf724391f4bf3e1ffbb3048296684a6c65cba7cec48a6b75082db6",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:9cc856be24e70b9c8a3b24400125fb504fdf7c68142c0b910c5f009d93e57e13",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:9d1166aad87b6c5999a911de4d8ffe8def28c0855328f10c6f44919dde9af683",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:9df2c168ca9df8068e98baf057a9f2181fc2d8887fff9df0fc3378b484de2431",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:9e2fdc12d62fa4ba09187cfa7b1a218d36e6813e2ec7f31f9e1f165f312896c7",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:9e614ed3b67583c0aa51b63274b3fa72ec255ef0c312b563d98203c2c43425a7",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:9f560d5db09b31c381d126b2e8899f2582eab59f962102d99d9feee172e66122",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:a288a28a4dd6b6ab255f4e9b159ef8233bc4076081004f4843032e2b6680bfc0",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:a2c19f34e9b9ccd07a13650ccbc9840149753836e7f893e0d0d721ac66ff428b",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:a5e25d2fd7fe96f153e036f7bb7ddfa5548be5213b1a8d4b16b87f6fcd9a5b0f",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:a7b69941eba6882b7704ddd7d90350a123d81ec215bd79bb623c1da985b371e4",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:aa30a4e9fb5875d00eb31c9616d9b1ca92ff8d452feb34a4af7e25fc23174307",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:adbd33f33faceb28f4eeba91e189cc4d3d848e1a5eb6ec25d7dd3222f2dc2b9c",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:b07d7591b62f7296fa14fd546a654fd9fc8fcb86234857862515a430f8fac291",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:b3122c37278d215e468111b341ad5870d9329a47ca464e050044a65c20a81e19",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:b78174e00bd726c904d9771d5c71625adc4d919bd8be156eba725c9587083a03",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:b8c1777fb3e6fb61be58e18e89b87e60cec7e6c97f2f10463f3a0a2e95b7daa5",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:b9ccbf6ed4b2a080056db82351c3e9bc0dc5c78269c192adb21d7f2ac3e64ed8",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:c335dadc873c12398c4fc1d6a56c3910ba04e1402ab91eb88a14affac85e187c",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:c55fff70b2b7a31579e2c10c58b2b7bc6e061087eda1a18f8fbeb824205f8966",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:c5c3d9293bda44e2320bc8d0dc2c519defed371a35c2b75cd3181a0b5007ec55",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:c5ed4f12d8574a10226845e1400cc915650fb24f1105ff5a40644bf9abdf3a90",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:c9169e5cae4a6df924b2f2ea2e4d9c755d88fcefd4643da06de6390f2cd3c59d",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:ce146a2484eba371feda7b989b9d118e221a4913556eb9e17fc4704d6933bdcc",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:d05c65d101385aee462e375e392758c973a0d28dae32f1c3ce104c7522f8944f",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:de891ff80690467d77494899bc02bee2f8694b8e25596e33fb4a44e04da56400",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:e15369eb605038379dab7153a528d50a9a91044af349c7eeffa6877ff7dbbcb4",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:e1967861278deb79172b7a2a5f381426e302dc0823f55d7911bd3c200a49ef96",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:e2716983253f5b13255be3f2a6b2122ae7fd5b90f9bbbbd10287f89f2228d609",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:e653087b451916f4e0ff7a54bf61830b81d2afbb5d044b78c72861de1db8fc08",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:edf3af35cf19de68bde7df30ca4a67e249a898d165694faf829d0af68ce42087",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:f342ee40d7a41c57e5abb07770ef3a9c694cabbccc03eddafe8b67be6b08dd18",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:f34985b63192173a0b71cfc4cb061b4236be3031efeb6dc1ec80320b9e8e5883",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:f5a8ee485ca5eb10eac100e98a64eece6e5c105a5773797a571a3b377083a507",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:f5f489049c34a8c5ec11556e6a4a09fd8b75c10995ec597adcc37ed816a521a7",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:fb1626c23f2f033681f22fd0c596e11310fa50f5169b62c3b3542cea065fead3",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership ca86028e04555f5b9a2cf90196590334d7ed97872fc691c92ba45b05aa012547",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:ec19d620a7a37c4066f4a4dcb639fda20602806054537b3998d8464d718539dc",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership d01dd0efeee6d56b745a6f6da2ef9e2a126313433de2efd09e7c009f278a98ab",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:395e7b4edcd0fb602094c6b16cfcc812cb215d36777971cd7655b9a9f3bee140",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:59fa6c9e236ea02a3fcad955055286bda0beb2acd2a40a3ab9d6cedc3762a0ea",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership d434ff41178c0fec18f6df4d607fbe995cbc3772ef2042928b4df0c5b8a8a96e",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:09a7b8ecd55a542d49ade7252d8dc245ef797948c178a49eb93173de390da965",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:4a34e6b70c0d6b974a490a19b30954eb96ce595a7237216dd1c987e2ff94fe1e",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership d4cb4dd209e736426eebb5a5e8baf7bcf380ba13ce242d248c2ba13a18254405",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:5eb203ea755668e2f35e8cf2881ef73a06e42508867f9f364e17dfb084af37f9",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership e389e96bb337821ce4df7fe0f666ad7fc4b3fbd5fe9b5e0afbd95caa607e71f2",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:b4ea950e7b79e142b8841a0f581ef40c5990364671424b9317ab8cc9b155cbd9",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:b9f966df09fdb73924bd8eb142addd2e526b6bda3883995858e668b8b6f7124f",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership e76e05d50d96a390e9a4c3b8e42fc4041b1be0ddf65bf988d2551dab9f209ee9",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:88714fd8cbdb4318117a68a0036374893fdaa0aa875d39844dd3f300fcd7c461",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership e7b30a8e8dbc87f0a526dd4b7b1b3c632896205a17e757d70c2a1d45f24a595e",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:0f132f659a1cd02c13cddb383b2d39a40134e249c0771a9b3dfc42b488755f35",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:19f523ffe4951aaa8802fe1731f7befd6f48acda3d3d313fcaa31281e304374e",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:64efd5aee39eeef3fd2373469acb69007b90bf8532265298ea247da595a05d99",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:693f67a95c8dc115e9a678b873cf00272dca011feb1e980233100e32dd4e5d60",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:6aeef9d450464698868d758f9032b7bf4d17b17813e931e380a08cbff1a95a3c",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:6e05d606a5ac09942295520893df259382c0634574213b6caea9c782076dae94",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:9d53e507a92cc13f65caf2dc51679708b3fee6e5b87a670c5d5179e40019dbbe",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:a02d1bc4b12eaeb786305a63ee523a14fb785ff72e1263d0ce3399b42d38568d",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:ae546e54d7ddf21a006459eeec529ac90f1b030b9797bed032d21f5885126a7d",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:c24dc1abe05ff8e61e1a6246bf0d7dd15b1201152989b26e80c6854b30abbae2",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:dc85692f522c0fedaaacd434b39520bb84001ba0355441458cbc3b82e6c38a0a",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:ea41656ef57f6a294406dba881c7d63e70460c1c060147692992137380cf7c8b",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof physical-component:ee9d9768fca9795b3d5be1b865c72fe5e9cd2fba30b7b670a4efced1d23c8c74",
+      "pass": true
+    },
+    {
+      "check": "scope exact row membership f6ceed4ad5379f5017f82fd55e31584959518879b188ffc2095dec2e398f0148",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:049339adb6844e47d59f37cf2136ffaae9540062c8ddfffc4ae24f6405a3072f",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:1446732708df08cc87ee43301df247de8e6392266aed36440d9dc2f04cde54be",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:25688de95347883b6753ade76c681c6a72dc774ecda48b8425e01810146892ec",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:6e4bae279c9ab405b5048fa135bff83862b6b3831c4ece2942a732f3d8c0ab7c",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:e7b79871dd8f3e21a658d94be59c8fdd6af69ff485b29e5ee3d29be58ee30878",
+      "pass": true
+    },
+    {
+      "check": "member exact target/disposition/proof source-target:f2be54f03f58e911b9a58bf5745df68b695256c53efc8c569e1a53bad8a997bc",
+      "pass": true
+    },
+    {
+      "check": "all five actual flat outputs under prospective bounds",
+      "pass": true
+    },
+    {
+      "check": "whole original immutable role coordination/engineering/indonesia-three-target-20261015/native7904-authority-001/original-rule-preimage.json",
+      "pass": true
+    },
+    {
+      "check": "original role committed path coordination/engineering/indonesia-three-target-20261015/native7904-authority-001/original-rule-preimage.json",
+      "pass": true
+    },
+    {
+      "check": "whole original immutable role coordination/engineering/indonesia-three-target-20261015/native7904-authority-001/authority-binding.json",
+      "pass": true
+    },
+    {
+      "check": "original role committed path coordination/engineering/indonesia-three-target-20261015/native7904-authority-001/authority-binding.json",
+      "pass": true
+    },
+    {
+      "check": "whole original immutable role coordination/engineering/indonesia-three-target-20261015/native7904-input-001/native-patch.json",
+      "pass": true
+    },
+    {
+      "check": "original role committed path coordination/engineering/indonesia-three-target-20261015/native7904-input-001/native-patch.json",
+      "pass": true
+    },
+    {
+      "check": "whole original immutable role coordination/engineering/indonesia-three-target-20261015/native7904-input-001/source-evidence.json",
+      "pass": true
+    },
+    {
+      "check": "original role committed path coordination/engineering/indonesia-three-target-20261015/native7904-input-001/source-evidence.json",
+      "pass": true
+    },
+    {
+      "check": "whole original immutable role coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+      "pass": true
+    },
+    {
+      "check": "original role committed path coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+      "pass": true
+    },
+    {
+      "check": "whole original immutable role coordination/engineering/indonesia-three-target-20261015/three-whole-original-stage-inputs.json",
+      "pass": true
+    },
+    {
+      "check": "original role committed path coordination/engineering/indonesia-three-target-20261015/three-whole-original-stage-inputs.json",
+      "pass": true
+    },
+    {
+      "check": "whole original immutable role scripts/qualify-source-cohort.py",
+      "pass": true
+    },
+    {
+      "check": "original role committed path scripts/qualify-source-cohort.py",
+      "pass": true
+    },
+    {
+      "check": "whole original immutable role coordination/engineering/indonesia-three-target-20261015/physical-result-001/whole-target-support.json",
+      "pass": true
+    },
+    {
+      "check": "original role committed path coordination/engineering/indonesia-three-target-20261015/physical-result-001/whole-target-support.json",
+      "pass": true
+    },
+    {
+      "check": "whole original immutable role coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+      "pass": true
+    },
+    {
+      "check": "original role committed path coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+      "pass": true
+    },
+    {
+      "check": "whole original immutable role coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/owners.json.gz",
+      "pass": true
+    },
+    {
+      "check": "original role committed path coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/owners.json.gz",
+      "pass": true
+    },
+    {
+      "check": "whole original immutable role coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IDN-ADM2-000.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "original role committed path coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IDN-ADM2-000.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "whole original immutable role coordination/engineering/indonesia-anambas-natuna-20261015/native4671-authority-001/original-rule-preimage.json",
+      "pass": true
+    },
+    {
+      "check": "original role committed path coordination/engineering/indonesia-anambas-natuna-20261015/native4671-authority-001/original-rule-preimage.json",
+      "pass": true
+    },
+    {
+      "check": "whole original immutable role coordination/engineering/indonesia-anambas-natuna-20261015/native4671-authority-001/authority-binding.json",
+      "pass": true
+    },
+    {
+      "check": "original role committed path coordination/engineering/indonesia-anambas-natuna-20261015/native4671-authority-001/authority-binding.json",
+      "pass": true
+    },
+    {
+      "check": "whole original immutable role coordination/engineering/indonesia-anambas-natuna-20261015/native4671-input-001/native-patch.json",
+      "pass": true
+    },
+    {
+      "check": "original role committed path coordination/engineering/indonesia-anambas-natuna-20261015/native4671-input-001/native-patch.json",
+      "pass": true
+    },
+    {
+      "check": "whole original immutable role coordination/engineering/indonesia-anambas-natuna-20261015/native4671-input-001/source-evidence.json",
+      "pass": true
+    },
+    {
+      "check": "original role committed path coordination/engineering/indonesia-anambas-natuna-20261015/native4671-input-001/source-evidence.json",
+      "pass": true
+    },
+    {
+      "check": "whole original immutable role coordination/engineering/indonesia-anambas-natuna-20261015/anambas-natuna-whole-original-stage-inputs.json",
+      "pass": true
+    },
+    {
+      "check": "original role committed path coordination/engineering/indonesia-anambas-natuna-20261015/anambas-natuna-whole-original-stage-inputs.json",
+      "pass": true
+    },
+    {
+      "check": "whole original immutable role coordination/engineering/indonesia-anambas-natuna-20261015/physical-result-001/whole-target-support.json",
+      "pass": true
+    },
+    {
+      "check": "original role committed path coordination/engineering/indonesia-anambas-natuna-20261015/physical-result-001/whole-target-support.json",
+      "pass": true
+    },
+    {
+      "check": "whole original immutable role coordination/engineering/myanmar-bokpyin-actual-resource-20261015/supported3591/authority-001/original-rule-preimage.json",
+      "pass": true
+    },
+    {
+      "check": "original role committed path coordination/engineering/myanmar-bokpyin-actual-resource-20261015/supported3591/authority-001/original-rule-preimage.json",
+      "pass": true
+    },
+    {
+      "check": "whole original immutable role coordination/engineering/myanmar-bokpyin-actual-resource-20261015/supported3591/authority-001/authority-binding.json",
+      "pass": true
+    },
+    {
+      "check": "original role committed path coordination/engineering/myanmar-bokpyin-actual-resource-20261015/supported3591/authority-001/authority-binding.json",
+      "pass": true
+    },
+    {
+      "check": "whole original immutable role coordination/engineering/myanmar-bokpyin-actual-resource-20261015/supported3591/native-patch.json",
+      "pass": true
+    },
+    {
+      "check": "original role committed path coordination/engineering/myanmar-bokpyin-actual-resource-20261015/supported3591/native-patch.json",
+      "pass": true
+    },
+    {
+      "check": "whole original immutable role coordination/engineering/myanmar-bokpyin-diagnostic-20261015/inputs/source-evidence.json",
+      "pass": true
+    },
+    {
+      "check": "original role committed path coordination/engineering/myanmar-bokpyin-diagnostic-20261015/inputs/source-evidence.json",
+      "pass": true
+    },
+    {
+      "check": "whole original immutable role coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/kawthoung/original-stage-inputs.json",
+      "pass": true
+    },
+    {
+      "check": "original role committed path coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/kawthoung/original-stage-inputs.json",
+      "pass": true
+    },
+    {
+      "check": "whole original immutable role coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/coastal1928-physical-001/whole-target-support.json",
+      "pass": true
+    },
+    {
+      "check": "original role committed path coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/coastal1928-physical-001/whole-target-support.json",
+      "pass": true
+    },
+    {
+      "check": "whole original immutable role coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "original role committed path coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "whole original immutable role coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/base-native-manifest.json",
+      "pass": true
+    },
+    {
+      "check": "original role committed path coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/base-native-manifest.json",
+      "pass": true
+    },
+    {
+      "check": "whole original immutable role coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-certificate-001/certificate.json",
+      "pass": true
+    },
+    {
+      "check": "original role committed path coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-certificate-001/certificate.json",
+      "pass": true
+    },
+    {
+      "check": "whole original immutable role coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-001/request.json",
+      "pass": true
+    },
+    {
+      "check": "original role committed path coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-001/request.json",
+      "pass": true
+    },
+    {
+      "check": "whole original immutable role coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-001/facts.json",
+      "pass": true
+    },
+    {
+      "check": "original role committed path coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-001/facts.json",
+      "pass": true
+    },
+    {
+      "check": "whole original immutable role coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-001/publication.json",
+      "pass": true
+    },
+    {
+      "check": "original role committed path coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-001/publication.json",
+      "pass": true
+    },
+    {
+      "check": "whole original immutable role coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-001/result.json",
+      "pass": true
+    },
+    {
+      "check": "original role committed path coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-001/result.json",
+      "pass": true
+    },
+    {
+      "check": "whole original immutable role coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-operating-001/operating.json",
+      "pass": true
+    },
+    {
+      "check": "original role committed path coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-operating-001/operating.json",
+      "pass": true
+    },
+    {
+      "check": "whole original immutable role coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-001/code-source.json",
+      "pass": true
+    },
+    {
+      "check": "original role committed path coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-001/code-source.json",
+      "pass": true
+    },
+    {
+      "check": "whole original immutable role coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-001/issued-plan.json",
+      "pass": true
+    },
+    {
+      "check": "original role committed path coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-001/issued-plan.json",
+      "pass": true
+    },
+    {
+      "check": "whole original immutable role coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-001/stderr.log",
+      "pass": true
+    },
+    {
+      "check": "original role committed path coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-001/stderr.log",
+      "pass": true
+    },
+    {
+      "check": "whole original immutable role coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-001/stdout.json",
+      "pass": true
+    },
+    {
+      "check": "original role committed path coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-001/stdout.json",
+      "pass": true
+    },
+    {
+      "check": "whole original immutable role coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-001/terminal.json",
+      "pass": true
+    },
+    {
+      "check": "original role committed path coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-001/terminal.json",
+      "pass": true
+    },
+    {
+      "check": "only ordinary selected-reader consumer queue checks remain pending",
+      "pass": true
+    },
+    {
+      "check": "restored bodies exact immutable Git objects",
+      "pass": true
+    },
+    {
+      "check": "exact22 staged files16restores5flat1completion",
+      "pass": true
+    },
+    {
+      "check": "canonical single sidecar",
+      "pass": true
+    },
+    {
+      "check": "actual config71check review remains unchanged",
+      "pass": true
+    },
+    {
+      "check": "actual composition95check review remains unchanged",
+      "pass": true
+    },
+    {
+      "check": "literal1245 package prefix intact",
+      "pass": true
+    },
+    {
+      "check": "all8inactive rows remain excluded only from consumer expectation",
+      "pass": true
+    },
+    {
+      "check": "no copied receiving-binding aliases in projection",
+      "pass": true
+    },
+    {
+      "check": "actual ordinary admission binds exact config/full plan",
+      "pass": true
+    },
+    {
+      "check": "actual nonresumed stdout binds complete receipt",
+      "pass": true
+    },
+    {
+      "check": "ordinary time receipt reported actual4.87s264306688peak",
+      "pass": true
+    }
+  ],
+  "failures": [],
+  "flat_output_bytes": {
+    "package_roles_projection": 15981,
+    "selected_delivery_expectations": 136742,
+    "package_inputs": 129646,
+    "selector": 1572,
+    "sidecar": 3429
+  },
+  "projected_paths": 41,
+  "original_roles": 36,
+  "restored_paths": 16,
+  "restored_bytes": 3003332,
+  "cumulative_cells": 99127,
+  "literal_ledger_components": 302,
+  "expectation_selected_members": 294,
+  "inherited_inactive_exceptions": 8,
+  "receipt_sha256": "8e648c3736413e68dfeea39913965ea9235e1ab0277d186c013a37eb1ae21417",
+  "limits": [
+    "Actual local finalizer outputs reviewed without replay. Candidate adoption and exact final-head binding remain separate.",
+    "Accepted expectation contract covers assigned/zero-cell rows:294 selected members;2 rejected and6 awaiting-evidence inherited rows remain literal in the302-row ledger. Already-covered paths need no duplicate package declaration.",
+    "Projection is fixed consumed-role metadata; actual selected-reader/package/consumer checks remain queue-owned and unclaimed here.",
+    "No new scientific qualification/current-owner-zero/acceptance claim. All8890relative and25Bok territorial holds remain outside delivery. Full original source/physical/veto/query limitations remain; original Bok before/after executing-code snapshot was not captured and is not replaced by config/code_base identity."
+  ],
+  "kind": "ACTUAL_FINALIZER_OUTPUT_REVIEW",
+  "composition_commit": "6cbe0b4382719f0c7f9c1be88cb6f9b7d230dc51",
+  "accepted_predecessor": "eef3694c364471482633129ef7968a2bdd3b7128",
+  "authority_scopes": 70,
+  "appended_package_declarations": 21,
+  "reused_actual_composition_review_sha256": "4b34f408d82f66be6f599598af957ae8bed94fe7417875164a5ef161ccd676fc"
+}

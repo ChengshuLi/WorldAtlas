@@ -184,7 +184,7 @@ async function main(){
     catch{git(sourceRoot,'fetch','--quiet','--depth=1','--filter=blob:none','--no-tags','--no-write-fetch-head','origin',originalHead);}
     for(const name of ['.github/package-inputs.json','data/ownership-selection.json'])execFileSync('git',['-C',sourceRoot,'show',originalHead+':'+name],
       {env:{...cleanEnvironment(),GIT_NO_LAZY_FETCH:'0'},stdio:'pipe',maxBuffer:8*1048576});
-    const comparison=compareSelectedPackageReadback({assembled:sourceRoot,sourceRoot,readback:readback.report,
+    const comparison=compareSelectedPackageReadback({assembled:sourceRoot,sourceRoot,readback:readback.report,trustedBase:frozen.accepted_commit,
       originalHead,currentHead:input.source_head,originalManifest:original.file});
     const implementationFiles=['scripts/run-selected-package-proof.mjs','scripts/compare-selected-package-output.mjs',
       'scripts/selected-package-bootstrap.py','scripts/selected-package-readback-proof.mjs','scripts/package-output-artifact.mjs','scripts/extract-package-output.py'];

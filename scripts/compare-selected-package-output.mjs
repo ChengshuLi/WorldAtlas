@@ -8,7 +8,7 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {inventoryPackageOutput, committedPackageInputs, committedPackageProducer,
-  admitPackageOutputTransition, validatePackageOutputManifest, streamedPackageFile} from './package-output-artifact.mjs';
+  admitPackageOutputTransition, inertSelectedPackageInput, validatePackageOutputManifest, streamedPackageFile} from './package-output-artifact.mjs';
 import {safePackagePath} from './package-inputs.mjs';
 const digest = raw => createHash('sha256').update(raw).digest('hex');
 
@@ -60,7 +60,7 @@ export function normalizeDeclarationReadAccounting(fullStage, assembledStage, cu
     current_declaration_bytes:currentDescriptor.bytes, unchanged_other_encoded_bytes:originalRemainder}};
 }
 
-function bindDeclarationTransition({sourceRoot,originalManifest,assembled,originalHead,currentHead,fullContext,assembledContext}) {
+function bindDeclarationTransition({sourceRoot,originalManifest,assembled,originalHead,currentHead,fullContext,assembledContext,trustedBase}) {
   assert.ok(sourceRoot&&originalManifest,'Actual Git source and authenticated original manifest required');
   const raw=fs.readFileSync(originalManifest),manifest=validatePackageOutputManifest(JSON.parse(raw));
   const original=sourceSnapshot(sourceRoot,originalHead),current=sourceSnapshot(sourceRoot,currentHead);
@@ -88,7 +88,22 @@ function bindDeclarationTransition({sourceRoot,originalManifest,assembled,origin
     if(!pins.has(key))current.verifyBody(pin);
     pins.set(key,pin);
   }
-  const transition=admitPackageOutputTransition(manifest,current.source);
+  const extra=current.source.definition.inputs.slice(manifest.source.definition.inputs.length)
+    .filter(name=>!inertSelectedPackageInput(name));
+  let acceptedInputs;
+  if(extra.length){
+    // Observer authority is supplied by its authenticated frozen invocation,
+    // never by a field asserted in the assembly receipt being inspected.
+    assert.match(trustedBase??'',/^[a-f0-9]{40}$/,'Exact trusted comparison base required');
+    acceptedInputs={commit:trustedBase,files:extra.map(name=>{
+      assert.ok(safePackagePath(name)&&!name.endsWith('/'));
+      const row=current.git('ls-tree','-l',trustedBase,'--',name).toString();
+      const match=/^100644 blob ([a-f0-9]{40})\s+(\d+)\t([^\n]+)\n$/.exec(row);
+      assert.ok(match&&match[3]===name,'Ordinary unchanged trusted comparison input required');
+      return {path:name,mode:'100644',oid:match[1],bytes:Number(match[2])};
+    })};
+  }
+  const transition=admitPackageOutputTransition(manifest,current.source,{acceptedInputs,typedInputs:assembly.current_selected_inputs});
   assert.deepEqual(assembly.transition,transition,'Assembly delta transition differs');
   for(const [context,snapshot] of [[fullContext,current],[assembledContext,original]]){
     assert.ok(Array.isArray(context.full_code_closure),'Full code closure required');
@@ -101,7 +116,7 @@ function bindDeclarationTransition({sourceRoot,originalManifest,assembled,origin
   fullContext.full_code_closure=fullContext.full_code_closure.map(row=>row.path==='.github/package-inputs.json'?original.descriptor:row);
   return {transition,originalDescriptor:original.descriptor,currentDescriptor:current.descriptor};
 }
-export function compareSelectedPackageOutput({full,assembled,originalHead,currentHead,sourceRoot,originalManifest}) {
+export function compareSelectedPackageOutput({full,assembled,originalHead,currentHead,sourceRoot,originalManifest,trustedBase}) {
   assert.match(originalHead,/^[a-f0-9]{40}$/);assert.match(currentHead,/^[a-f0-9]{40}$/);
   const before=inventoryPackageOutput(full),after=inventoryPackageOutput(assembled);
   assert.deepEqual(before.files.map(row=>row.path),after.files.map(row=>row.path),'Complete output member sets differ');
@@ -115,7 +130,7 @@ export function compareSelectedPackageOutput({full,assembled,originalHead,curren
   assert.equal(a.nativeContextInputStage?.current_execution?.source_head,currentHead,'Full output must record actual current build head');
   assert.equal(b.nativeContextInputStage?.current_execution?.source_head,originalHead,'Assembly must preserve original context head');
   const binding=bindDeclarationTransition({sourceRoot,originalManifest,assembled,originalHead,currentHead,
-    fullContext:a.nativeContextInputStage.current_execution,assembledContext:b.nativeContextInputStage.current_execution});
+    fullContext:a.nativeContextInputStage.current_execution,assembledContext:b.nativeContextInputStage.current_execution,trustedBase});
   // Only independently authenticated source head and declaration provenance may
   // differ. Only its exact encoded read delta is normalized; scientific bytes and all other fields match.
   const {normalized,accounting}=normalizeDeclarationReadAccounting(a.nativeContextInputStage,b.nativeContextInputStage,
@@ -134,7 +149,7 @@ export function compareSelectedPackageOutput({full,assembled,originalHead,curren
 // reference need not be downloaded or rebuilt merely to compare its bytes.
 // The caller must authenticate this existing readback through its run/job/log/
 // artifact chain. This function cannot issue original-package reuse authority.
-export function compareSelectedPackageReadback({assembled,readback,originalHead,currentHead,sourceRoot,originalManifest}) {
+export function compareSelectedPackageReadback({assembled,readback,originalHead,currentHead,sourceRoot,originalManifest,trustedBase}) {
   assert.equal(readback.kind,'ordinary-cloudflare-built-output-readback');
   assert.equal(readback.head,currentHead,'Full readback must belong to actual current source');
   assert.match(originalHead,/^[a-f0-9]{40}$/);assert.match(currentHead,/^[a-f0-9]{40}$/);
@@ -158,7 +173,7 @@ export function compareSelectedPackageReadback({assembled,readback,originalHead,
   assert.equal(readback.nativeContextInputStage?.current_execution?.source_head,currentHead);
   const originalCurrentStage=structuredClone(readback.nativeContextInputStage),normalizedStage=structuredClone(originalCurrentStage);
   const binding=bindDeclarationTransition({sourceRoot,originalManifest,assembled,originalHead,currentHead,
-    fullContext:normalizedStage.current_execution,assembledContext:atlas.nativeContextInputStage.current_execution});
+    fullContext:normalizedStage.current_execution,assembledContext:atlas.nativeContextInputStage.current_execution,trustedBase});
   const {normalized:accountedStage,accounting}=normalizeDeclarationReadAccounting(normalizedStage,atlas.nativeContextInputStage,
     binding.currentDescriptor,binding.originalDescriptor);
   accountedStage.current_execution.source_head=originalHead;
@@ -183,5 +198,5 @@ export function compareSelectedPackageReadback({assembled,readback,originalHead,
 }
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
   assert.equal(process.argv.length,8,'Usage: node scripts/compare-selected-package-output.mjs FULL_ROOT ASSEMBLED_ROOT ORIGINAL_HEAD CURRENT_HEAD SOURCE_REPO ORIGINAL_MANIFEST');
-  console.log(JSON.stringify(compareSelectedPackageOutput({full:process.argv[2],assembled:process.argv[3],originalHead:process.argv[4],currentHead:process.argv[5],sourceRoot:process.argv[6],originalManifest:process.argv[7]})));
+  console.log(JSON.stringify(compareSelectedPackageOutput({full:process.argv[2],assembled:process.argv[3],originalHead:process.argv[4],currentHead:process.argv[5],sourceRoot:process.argv[6],originalManifest:process.argv[7],trustedBase:process.env.SELECTED_PACKAGE_TRUSTED_BASE})));
 }

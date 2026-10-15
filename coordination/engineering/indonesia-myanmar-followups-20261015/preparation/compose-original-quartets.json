@@ -1,0 +1,120 @@
+{
+  "version": 1,
+  "preparation_allowance": {
+    "phaseBytes": 536870912,
+    "rssBytes": 536870912
+  },
+  "selector": {
+    "commit": "eef3694c364471482633129ef7968a2bdd3b7128",
+    "path": "data/ownership-selection.json",
+    "mode": "100644",
+    "git_blob_oid": "6969840ada42cb28d914c23da0959184a206b417",
+    "bytes": 1572,
+    "sha256": "daf118af55c14a5c8505db446b393fbf9514d594765c542a7b54c8500284da93"
+  },
+  "effective_release_id": "geography:indonesia-myanmar-native-followups-20261015-16166",
+  "authorities": [
+    {
+      "rule_preimage": {
+        "commit": "3b8a1c6cdc21ed74dd11ab7fa3cb2ce2160df528",
+        "path": "coordination/engineering/indonesia-three-target-20261015/native7904-authority-001/original-rule-preimage.json",
+        "mode": "100644",
+        "git_blob_oid": "e908bd016f9f9141e3511a850f29e22afc19998c",
+        "bytes": 735,
+        "sha256": "a75f062086b9b198ec67f3c4a2f4da55c02250bb3509aec1623484776fe0fba6"
+      },
+      "source_authority": {
+        "commit": "3b8a1c6cdc21ed74dd11ab7fa3cb2ce2160df528",
+        "path": "coordination/engineering/indonesia-three-target-20261015/native7904-authority-001/authority-binding.json",
+        "mode": "100644",
+        "git_blob_oid": "712ad5cb6645eff18485ce953b4e5acd39f139f5",
+        "bytes": 738,
+        "sha256": "cb9aa63e8295e5ebc61081a337700124a969fde8bc72a3d02775fc66392afbfb"
+      },
+      "ledger": {
+        "commit": "3b8a1c6cdc21ed74dd11ab7fa3cb2ce2160df528",
+        "path": "coordination/engineering/indonesia-three-target-20261015/native7904-authority-001/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "734699532c28e7ec71a538efd8875ac974444b2c",
+        "bytes": 118403,
+        "sha256": "bcbc5c44e558b9483e70a75e2da8066effa28e5d602de621fdebd6a2ccb8164c"
+      },
+      "native_patch": {
+        "bytes": 309598,
+        "commit": "01ff7cfe040a29652c0b9a22c8f608be75450ef2",
+        "git_blob_oid": "48ce23d1208e035ff01cd42044d9f55cf2de9d99",
+        "mode": "100644",
+        "path": "coordination/engineering/indonesia-three-target-20261015/native7904-input-001/native-patch.json",
+        "sha256": "11a42c236e8684c5f025793e7c40fc32a0b71b68a382fab69b17f23332e14bcb"
+      }
+    },
+    {
+      "rule_preimage": {
+        "commit": "338427e2d923483edc40711ecc2bdb80a337372c",
+        "path": "coordination/engineering/indonesia-anambas-natuna-20261015/native4671-authority-001/original-rule-preimage.json",
+        "mode": "100644",
+        "git_blob_oid": "4647c0e1ba7693ae571c62268883e901a50ba57d",
+        "bytes": 738,
+        "sha256": "804b2811207dfb27cc60935782c11d6d33a14ef8b2a588af35a1778c9e46fba3"
+      },
+      "source_authority": {
+        "commit": "338427e2d923483edc40711ecc2bdb80a337372c",
+        "path": "coordination/engineering/indonesia-anambas-natuna-20261015/native4671-authority-001/authority-binding.json",
+        "mode": "100644",
+        "git_blob_oid": "14931170f1758580f05423bbf16cd8be077b3b50",
+        "bytes": 741,
+        "sha256": "f93aad435110939fe3748b980acdddb7878fcdadcb1d7501f17c88b0671d71f3"
+      },
+      "ledger": {
+        "commit": "338427e2d923483edc40711ecc2bdb80a337372c",
+        "path": "coordination/engineering/indonesia-anambas-natuna-20261015/native4671-authority-001/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "338c6bcac66066ae9a4c311d06712adb5ec51740",
+        "bytes": 71653,
+        "sha256": "3d94cd835748c534a4b8619fa67b4a68cf78774f70931fb1d3c9b54a25149019"
+      },
+      "native_patch": {
+        "bytes": 61259,
+        "commit": "bc351f012ef8019e047814015890bf0cc98b0fa0",
+        "git_blob_oid": "3c8d5ae2d5b0cb1e7eddcdacc29f3f5cea73049d",
+        "mode": "100644",
+        "path": "coordination/engineering/indonesia-anambas-natuna-20261015/native4671-input-001/native-patch.json",
+        "sha256": "40d0886c3c0a2cca9ab2a043e614b2a55f544f5a13d2f7897c0b297724ddc63c"
+      }
+    },
+    {
+      "ledger": {
+        "bytes": 46725,
+        "commit": "5400b7599b7c2d3192c09b5966671e959c4a8f59",
+        "git_blob_oid": "b8d111f7b508fef85eb62f3414b5183f85592fd9",
+        "mode": "100644",
+        "path": "coordination/engineering/myanmar-bokpyin-actual-resource-20261015/supported3591/authority-001/constructor-result.json",
+        "sha256": "775e97ec0b8006811f69c8ee5b2f27266879a93961375ca51f0b97a0c1d301ac"
+      },
+      "native_patch": {
+        "bytes": 35431,
+        "commit": "8caae2c4c89edf26376ac6c216203c404513d7aa",
+        "git_blob_oid": "5239a0c76681fcf304d0139293931b390564236b",
+        "mode": "100644",
+        "path": "coordination/engineering/myanmar-bokpyin-actual-resource-20261015/supported3591/native-patch.json",
+        "sha256": "df574bfa3b24327868d27e00c6cf3ee0adcdca6003c8f90e2814a0d3d70fda06"
+      },
+      "rule_preimage": {
+        "bytes": 727,
+        "commit": "5400b7599b7c2d3192c09b5966671e959c4a8f59",
+        "git_blob_oid": "498455c278b88eeb392bdd8568b68931f8997371",
+        "mode": "100644",
+        "path": "coordination/engineering/myanmar-bokpyin-actual-resource-20261015/supported3591/authority-001/original-rule-preimage.json",
+        "sha256": "4971440de26d9b9c7fe83d44978e24a9293a0e07c08049be0772e343414e90f3"
+      },
+      "source_authority": {
+        "bytes": 730,
+        "commit": "5400b7599b7c2d3192c09b5966671e959c4a8f59",
+        "git_blob_oid": "347b8e3e76eddfd882004917798e6577c7ed9d4b",
+        "mode": "100644",
+        "path": "coordination/engineering/myanmar-bokpyin-actual-resource-20261015/supported3591/authority-001/authority-binding.json",
+        "sha256": "46a15d05ba1f0506207fd98637bb478707b06ee1aa427f9ef99c84f0efdfbbec"
+      }
+    }
+  ]
+}

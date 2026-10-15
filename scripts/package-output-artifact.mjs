@@ -6,7 +6,9 @@ import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import {installedNodeIdentity, effectiveNodeDependencyInventory, validateNodeIdentity} from './package-node-runtime.mjs';
-import {loadPackageInputs, validatePackageInputs, containsPackagePath, safePackagePath} from './package-inputs.mjs';
+import {loadPackageInputs, validatePackageInputs, containsPackagePath, safePackagePath, PACKAGE_PRODUCER_KIND, admitPackageInputTransition} from './package-inputs.mjs';
+
+export {PACKAGE_PRODUCER_KIND, inertSelectedPackageInput, admitPackageInputTransition} from './package-inputs.mjs';
 
 export const OUTPUT_MANIFEST = '.cache/package-output-manifest.json';
 export const OUTPUT_SOURCE = '.cache/package-output-source.json';
@@ -123,7 +125,6 @@ export function packageBuildConfiguration(env = process.env) {
 export const PACKAGE_PRODUCER_WORKFLOWS = [
   '.github/workflows/merge-integration-checks.yml', '.github/workflows/worker-merge.yml',
 ];
-export const PACKAGE_PRODUCER_KIND = 'immediate-cloudflare-build-v1';
 export function committedPackageProducer(root, head = 'HEAD') {
   const workflows = git(root, ['ls-tree', '-z', head, '--', ...PACKAGE_PRODUCER_WORKFLOWS]).split('\0').filter(Boolean).map(raw=>{
     const match = /^100644 blob ([a-f0-9]{40})\t(.+)$/.exec(raw);
@@ -358,36 +359,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
     original_head: manifest.source.head, executed_workflow:packageWorkflowExecution()}));
 }
 
-// Original producer -> current selection, independently of PR-base -> head
-// classification. New directory members and implicit optional inputs are never
-// waved through by an append-only package-definition change. Scientific readers
-// authenticate their own consumed inputs; a parent-only read inventory is not
-// the union of those readers and cannot gate inert declarations.
-export function admitPackageOutputTransition(original, current) {
-  validatePackageOutputManifest(original); validatePackageInputs(current.definition);
-  const before=original.source;
-  need(before.producer?.kind===PACKAGE_PRODUCER_KIND&&same(before.producer,current.producer),
-    'Immediate original build capture and unchanged producer workflow required');
-  const {inputs:oldInputs,...oldPolicy}=before.definition,{inputs:newInputs,...newPolicy}=current.definition;
-  need(same(oldPolicy,newPolicy)&&newInputs.length>=oldInputs.length&&same(oldInputs,newInputs.slice(0,oldInputs.length)),
-    'Package definition is not an append-only selected change');
-  const {additive_release:oldAdditive,...oldBase}=before.selection;
-  const {additive_release:newAdditive,...newBase}=current.selection;
-  need(same(oldBase,newBase)&&oldAdditive&&newAdditive,'Original invariant selection differs');
-  const oldFiles=new Map(before.files.map(row=>[row.path,row])),newFiles=new Map(current.files.map(row=>[row.path,row]));
-  need(newFiles.size===current.files.length,'Duplicate current input');
-  const exceptions=new Set(['.github/package-inputs.json','data/ownership-selection.json']);
-  for(const [name,row] of oldFiles) need(newFiles.has(name)&&(exceptions.has(name)||same(row,newFiles.get(name))),
-    'Original invariant package input changed: '+name);
-  const newDeclarations=newInputs.slice(oldInputs.length);
-  need(newDeclarations.every(name=>!name.endsWith('/')&&/^coordination\/engineering\/[^/]+\/.+\.(?:json|jsonl\.gz|json\.gz|log)$/.test(name)),
-    'New package declaration is not an explicit inert selected data file');
-  const added=[];
-  for(const [name,row] of newFiles)if(!oldFiles.has(name)){
-    need(row.mode==='100644'&&newDeclarations.includes(name),
-      'Unadmitted new invariant/directory/optional package input: '+name);added.push(name);
-  }
-  need(newDeclarations.every(name=>newFiles.has(name)), 'New selected declaration is absent');
-  return {original_head:before.head,current_head:current.head,invariant_files:oldFiles.size-exceptions.size,
-    added_selected_inputs:added.sort(),base_selection:oldBase};
+export function admitPackageOutputTransition(original, current, options) {
+  validatePackageOutputManifest(original);
+  return admitPackageInputTransition(original.source,current,options);
 }

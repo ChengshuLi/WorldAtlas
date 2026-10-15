@@ -61,3 +61,66 @@ export async function readPackageInputs({route, base, api, maximumBytes=packageI
 export function packagePathRequired(file, definition) {
   return containsPackagePath(definition.inputs, file) || containsPackagePath(definition.verification_paths, file);
 }
+
+// Original producer -> current selection, independently of PR-base -> head
+// classification. New directory members and implicit optional inputs are never
+// waved through by an append-only package-definition change. Scientific readers
+// authenticate their own consumed inputs; a parent-only read inventory is not
+// the union of those readers and cannot gate inert declarations.
+// Preliminary discovery/execution admission cannot publish anything. A retained
+// non-data leaf must also be reached by the existing private selected reader
+// before its publication token or final output transition is issued.
+export const PACKAGE_PRODUCER_KIND = 'immediate-cloudflare-build-v1';
+export const inertSelectedPackageInput = name => typeof name === 'string' &&
+  /^coordination\/engineering\/[^/]+\/.+\.(?:json|jsonl\.gz|json\.gz|log)$/.test(name);
+export function admitPackageInputTransition(before, current, {acceptedInputs, typedInputs, preliminary = false} = {}) {
+  const need=(ok,message)=>{if(!ok)throw Error(message);};
+  const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+  const commit=value=>/^[a-f0-9]{40}$/.test(value??'');
+  validatePackageInputs(before.definition); validatePackageInputs(current.definition);
+  need(before.producer?.kind===PACKAGE_PRODUCER_KIND&&same(before.producer,current.producer),
+    'Immediate original build capture and unchanged producer workflow required');
+  const {inputs:oldInputs,...oldPolicy}=before.definition,{inputs:newInputs,...newPolicy}=current.definition;
+  need(same(oldPolicy,newPolicy)&&newInputs.length>=oldInputs.length&&same(oldInputs,newInputs.slice(0,oldInputs.length)),
+    'Package definition is not an append-only selected change');
+  const {additive_release:oldAdditive,...oldBase}=before.selection;
+  const {additive_release:newAdditive,...newBase}=current.selection;
+  need(same(oldBase,newBase)&&oldAdditive&&newAdditive,'Original invariant selection differs');
+  const oldFiles=new Map(before.files.map(row=>[row.path,row])),newFiles=new Map(current.files.map(row=>[row.path,row]));
+  need(oldFiles.size===before.files.length&&oldFiles.size>0&&newFiles.size===current.files.length,'Duplicate or incomplete source input inventory');
+  const exceptions=new Set(['.github/package-inputs.json','data/ownership-selection.json']);
+  for(const [name,row] of oldFiles) need(newFiles.has(name)&&(exceptions.has(name)||same(row,newFiles.get(name))),
+    'Original invariant package input changed: '+name);
+  const newDeclarations=newInputs.slice(oldInputs.length),accepted=new Map(),retained=[];
+  if(acceptedInputs!==undefined){
+    need(commit(acceptedInputs?.commit)&&Array.isArray(acceptedInputs.files),'Exact trusted selected base required');
+    for(const row of acceptedInputs.files){
+      need(safePackagePath(row.path)&&!row.path.endsWith('/')&&row.mode==='100644'&&commit(row.oid)&&
+        Number.isSafeInteger(row.bytes)&&row.bytes>=0&&row.bytes<=32*1048576&&!accepted.has(row.path),
+        'Invalid accepted selected input descriptor');
+      accepted.set(row.path,row);
+    }
+  }
+  for(const name of newDeclarations){
+    const row=newFiles.get(name);
+    need(safePackagePath(name)&&!name.endsWith('/'),'New package declaration is not an explicit selected input file');
+    need(row,'New selected declaration is absent');
+    need(row.mode==='100644'&&commit(row.oid),'Ordinary explicit selected input required');
+    if(inertSelectedPackageInput(name))continue;
+    const original=accepted.get(name);
+    need(original&&original.mode===row.mode&&original.oid===row.oid,
+      'Selected code/source input is not unchanged on trusted base: '+name);
+    retained.push(original);
+    if(!preliminary)need(Array.isArray(typedInputs)&&typedInputs.some(pin=>pin.path===name&&pin.mode===row.mode&&
+      pin.git_blob_oid===row.oid&&pin.bytes===original.bytes&&commit(pin.commit)),
+      'Selected code/source input lacks authenticated typed consumption: '+name);
+  }
+  const added=[];
+  for(const [name,row] of newFiles)if(!oldFiles.has(name)){
+    need(row.mode==='100644'&&newDeclarations.includes(name),
+      'Unadmitted new invariant/directory/optional package input: '+name);added.push(name);
+  }
+  return {original_head:before.head,current_head:current.head,invariant_files:oldFiles.size-exceptions.size,
+    added_selected_inputs:added.sort(),base_selection:oldBase,
+    ...(retained.length?{accepted_selected_inputs:{commit:acceptedInputs.commit,files:retained}}:{})};
+}
