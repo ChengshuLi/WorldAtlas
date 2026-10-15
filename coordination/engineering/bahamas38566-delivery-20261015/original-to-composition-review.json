@@ -1,0 +1,332 @@
+{
+  "outcome": "accepted-original-to-actual-contribution-with-limits",
+  "review_scope": "Pure JSON/native integer tuple and immutable byte custody review; no geometry, qualification, source decode, consumer or science replay.",
+  "actual_config": {
+    "path": "coordination/engineering/bahamas38566-delivery-20261015/compose-config.json",
+    "bytes": 3955,
+    "sha256": "0c275c029b0b85afcac23f31e184da7eed33a0656bca3c1f59def0563654f66e"
+  },
+  "baseline_selector": {
+    "commit": "ead6b7e5f17e1479c2399f49984efe3d556228c6",
+    "path": "data/ownership-selection.json",
+    "mode": "100644",
+    "git_blob_oid": "5355253d6ae7e2e2078ed15141bcd06e4b327daf",
+    "bytes": 1571,
+    "sha256": "0df2f7e39d9a2dda33022a51be38a972028d97f2b4920494c22f7b7ac17ac97f"
+  },
+  "accepted_patch_cells_literal_same_owner": 101272,
+  "new_original_cells": 38566,
+  "actual_cumulative_cells": 139838,
+  "new_owners_components": 32,
+  "original_groups": [
+    {
+      "original_ledger": {
+        "commit": "eeef732ee402e6fb48973601a2e70f7ff11c1210",
+        "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-land30-authority-001/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "1d8a187babbc28f59ce901ffdf60614dadb6136c",
+        "bytes": 396223,
+        "sha256": "4c4bf45c6bc5937011a9ea51ae57f5d93e0fd6d3523344c0ae18f5d21b49b988"
+      },
+      "original_patch": {
+        "commit": "446a9a0050d6b96c520e2a94358b6228d1d00605",
+        "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-inputs-002/land30-native-patch.json",
+        "mode": "100644",
+        "git_blob_oid": "67bc6baf1e750a7181a12c7882ecdfd0948e109a",
+        "bytes": 298397,
+        "sha256": "6f2231f2383f5f6fd3106d0aafcf1c87c6635463c731e5f81c028350515d93c0"
+      },
+      "cells": 34304,
+      "owners": 30,
+      "component_ids": [
+        "source-target:00b71a67c70e8b6b9d877c83c4150b25047fa8689b1a8045c1e5b2ffbd841fbf",
+        "source-target:03c8f4f3adaece84689dd02c8a052b653df08cb99cc51d745b78d5b2e9a31731",
+        "source-target:11330f1cc8e5c938eb33ac60e1b1f4ca3deaa86d9b26ea4bcb333dd72deb03b6",
+        "source-target:132af60ff58ac4d4d4c162c4c421c482ac919b9e2eaebda1911aa566d61dec42",
+        "source-target:2495dbf77531803bf79541a76b8bf637bf564af2145e736177c28dc2f84cc322",
+        "source-target:33d23522dd1edb2619ad6683bdb4de95a8aa3ecb2e546cedbeb917a3e079a266",
+        "source-target:35f81147f927cd98cf6ee11b294cba2beab0b187d57aca95c3e67ed0c6d2a7b6",
+        "source-target:370884705acc5b283dc8b213f7de29b2e9e727e62d7ea45a6c658bd672a8edcb",
+        "source-target:38f973c6715faf15182e70bce8a214d3e0ebfd438ff513a5a88e80b208414675",
+        "source-target:4eca92282484bd411c54f66cb55ec5bdb26633bd56a0912ed7f80db230325a6a",
+        "source-target:55b430f2083b823fb0b8a14963eea1837e7ae3a642b4ac6bc72e8ed242823038",
+        "source-target:5f2c4886d5c5d268cfa88c921b00dce2dc03e71788fac221bd50eede91a13ab4",
+        "source-target:68a4170719878c44a6d04666caa88a6a8e43961911abe09e0787eb8ef4999c41",
+        "source-target:78522ce5562d3ec33f33e774d6224ff758568c822075827e414e33e22a0fd067",
+        "source-target:8063145c555af266e46e0777dcc1b6fcf29ae988f82b54a1f1805c152e7eea4a",
+        "source-target:95db38b9c94e711e373bccbb338d6d3f331aa8792a059df960d9ad43444dcf7f",
+        "source-target:98f5067d3ed6c0fb2c7f9a14d6fb835ec6e6cbaf57613d72835d832390607554",
+        "source-target:aad7c905c46c93d5df6d1ed80a9fd8da2febb4b4c2827716684e2388b67911f7",
+        "source-target:b1b06c90f5cadf4003b579b3c0e5cabd833771ec2b1e7f8b9dffb07d75cfb8b4",
+        "source-target:b2b94c43cf0054c4687cf9ead08324131e8087f81eff06f7028c358cb794de68",
+        "source-target:b6bd501d4ef3b42944a28a0e7b1f533bdc424768e14c6f1f8af3ac06192dde24",
+        "source-target:be33dbdbfd962d4ef5360698beda095bf389b05bc6ea35bcf9ab87c9d954c77f",
+        "source-target:d951d526d48757e94f6141cfbc7daedea48fab4f256acf24997f6cfa8afe6542",
+        "source-target:d993709ba6b3962e7b0dabadf2f2175885ab476f1fc60cdeae7cd2fb73a3fb99",
+        "source-target:dd6bc5ea0c71d5cbea66dc64fded5b11f107e422c15fe9fb866bc16f87bb18ad",
+        "source-target:e563a01fde97f73da71a9fc80fbf099ff6c4492fe861ea594ea31be40b0a6b71",
+        "source-target:f267b9b8924902a80bd3a4a8278f97b8d94d619fd227a42870740f14856b703c",
+        "source-target:fa655bfcd2c4b2123da11bca52ad690627045c7c4f74bf8d17a469a7793ed373",
+        "source-target:fad441fcaa271693be928e82b60bbc72dd32c6dbc6309a92591736d440073f5c",
+        "source-target:ff4486bfdcc3c6955426d6e49cc3a425fca6beaa60ad8796c3eacd28ad482f99"
+      ],
+      "coverage_metadata": {
+        "mapped_land_support": 34304
+      }
+    },
+    {
+      "original_ledger": {
+        "commit": "eeef732ee402e6fb48973601a2e70f7ff11c1210",
+        "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-mixed2-authority-001/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "6891e21a0ac19136a8815bcea4dc4d23b2f1b05b",
+        "bytes": 38149,
+        "sha256": "3727d4f1b97fe66d08473cd3b34714895c06f6e27828bd0eb2bedbc25a4b7590"
+      },
+      "original_patch": {
+        "commit": "446a9a0050d6b96c520e2a94358b6228d1d00605",
+        "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-inputs-002/mixed2-native-patch.json",
+        "mode": "100644",
+        "git_blob_oid": "803f67031f6082607d3a472c9509be1514765866",
+        "bytes": 31447,
+        "sha256": "4d2a0d70e032cd60899443467e69b10739a6482325598a8235d6c5c902f35aeb"
+      },
+      "cells": 4262,
+      "owners": 2,
+      "component_ids": [
+        "source-target:1f05bbcbffaa381e99d0d138829862d0a1b52a7bfe77ca052de48d9bd2a05637",
+        "source-target:b4416cba7aec688003e2481b6f84f4a9e4e04494c39f5b6d0d66adc99c5b6723"
+      ],
+      "coverage_metadata": {
+        "mapped_land_support": 4255,
+        "mapped_inland_water_support": 7
+      }
+    }
+  ],
+  "new_group_and_baseline_overlap_cells": 0,
+  "no_missing_or_extra_or_reassigned_actual_tuple": true,
+  "baseline_ledger_rows": 303,
+  "actual_ledger_rows": 335,
+  "baseline_rows_literal_retained": true,
+  "baseline_registry_entries": 71,
+  "actual_registry_entries": 73,
+  "baseline_registry_entries_literal_retained": true,
+  "inherited_fields": {
+    "current_rebind": {
+      "equal": true
+    },
+    "parent_inventory": {
+      "equal": true
+    },
+    "scope_ids": {
+      "baseline_count": 303,
+      "actual_count": 335,
+      "all_baseline_objects_literal_retained": true,
+      "equal": false
+    },
+    "current_targets": {
+      "baseline_count": 67,
+      "actual_count": 67,
+      "all_baseline_objects_literal_retained": true,
+      "equal": true
+    }
+  },
+  "new_declared_water_cells": 7,
+  "actual_products": {
+    "patch.json": {
+      "path": ".cache/delivery-handoff/bhs38566-compose-001/patch.json",
+      "bytes": 1362981,
+      "sha256": "f1c00973837121a1f03f4456dcad99d14f198b2ef3347486b406691650d89978"
+    },
+    "selected-ledger.json": {
+      "path": ".cache/delivery-handoff/bhs38566-compose-001/selected-ledger.json",
+      "bytes": 3439607,
+      "sha256": "c55be525143de96d5a022277b1b96f08888d8d996738d5df384b614e0889eaad"
+    },
+    "authority-registry.json": {
+      "path": ".cache/delivery-handoff/bhs38566-compose-001/authority-registry.json",
+      "bytes": 70211,
+      "sha256": "fce9c4f9ef382a174fd843d2d062dea9d8bb8cf5e4fc99f40b486d0515a382f0"
+    },
+    "runtime-envelope.json": {
+      "path": ".cache/delivery-handoff/bhs38566-compose-001/runtime-envelope.json",
+      "bytes": 1378,
+      "sha256": "0e76d360f02e39b5c630fe0809af7d9135e88761e416227bb14f9088579a109f"
+    },
+    "preparation.json": {
+      "path": ".cache/delivery-handoff/bhs38566-compose-001/preparation.json",
+      "bytes": 596,
+      "sha256": "02b40e3e9c55a94a7c9fe6d555f28e545c50f9c8bc02461a16101c03cae7fe16"
+    }
+  },
+  "authenticated_original_inputs": [
+    {
+      "commit": "ead6b7e5f17e1479c2399f49984efe3d556228c6",
+      "path": "data/ownership-selection.json",
+      "mode": "100644",
+      "git_blob_oid": "5355253d6ae7e2e2078ed15141bcd06e4b327daf",
+      "bytes": 1571,
+      "sha256": "0df2f7e39d9a2dda33022a51be38a972028d97f2b4920494c22f7b7ac17ac97f"
+    },
+    {
+      "path": "coordination/engineering/indonesia-mbd2145-followup-20261015/ownership-selection-v2.json",
+      "bytes": 3425,
+      "sha256": "df9ee38a46688ced32c3a053dc9d36b390585287159f51acdcbaf9e401247326",
+      "commit": "ead6b7e5f17e1479c2399f49984efe3d556228c6"
+    },
+    {
+      "bytes": 1046268,
+      "commit": "1d3d638749a0ff4ccab07496a0dcd84d490c478b",
+      "git_blob_oid": "aa0438c7bf67f31cc717097cfa0a1d04d24d819e",
+      "mode": "100644",
+      "path": "coordination/engineering/indonesia-mbd2145-followup-20261015/delivery/patch.json",
+      "sha256": "2ab200984d0fa56bebc6cecdda70565d4eb983c2de53af64994d9b9504c647ce"
+    },
+    {
+      "bytes": 3001805,
+      "commit": "1d3d638749a0ff4ccab07496a0dcd84d490c478b",
+      "git_blob_oid": "70c02f63b418003e6e16dfe251fe8b60a6baad07",
+      "mode": "100644",
+      "path": "coordination/engineering/indonesia-mbd2145-followup-20261015/delivery/selected-ledger.json",
+      "sha256": "198bee149a2b84d2e62c771807e1353e45b8a01caee560c81aeb17e64032f86a"
+    },
+    {
+      "bytes": 68311,
+      "commit": "1d3d638749a0ff4ccab07496a0dcd84d490c478b",
+      "git_blob_oid": "12da17486fe72f11f4380d03145f7fd7451aca5f",
+      "mode": "100644",
+      "path": "coordination/engineering/indonesia-mbd2145-followup-20261015/delivery/authority-registry.json",
+      "sha256": "31b2b028900abb2809d30c66a6d6bf827f62e5e5870d1101459cd2989d683fc1"
+    },
+    {
+      "bytes": 1390,
+      "commit": "1d3d638749a0ff4ccab07496a0dcd84d490c478b",
+      "git_blob_oid": "f1fe391a9e159294ebef5dac2c4f7eaf82d98ee0",
+      "mode": "100644",
+      "path": "coordination/engineering/indonesia-mbd2145-followup-20261015/delivery/runtime-envelope.json",
+      "sha256": "3f40a7a16223c727601477a1b37291f913010a9bd3ada912c026e0760f81cc1d"
+    },
+    {
+      "commit": "eeef732ee402e6fb48973601a2e70f7ff11c1210",
+      "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-land30-authority-001/original-rule-preimage.json",
+      "mode": "100644",
+      "git_blob_oid": "7229d3230fb210bab30f8d34f8f656d9ecd44573",
+      "bytes": 752,
+      "sha256": "7e9c316e4f086cd8c1b0db60053b8c4f636c8499dd7a66037545b7220306683a"
+    },
+    {
+      "commit": "eeef732ee402e6fb48973601a2e70f7ff11c1210",
+      "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-land30-authority-001/authority-binding.json",
+      "mode": "100644",
+      "git_blob_oid": "5d2dab9ed43b8b47cb525425b5fe86cfe2163b64",
+      "bytes": 755,
+      "sha256": "e217c1077539f12d1b3fc796cba4794bfbc3136ca7733b4a65935f6dc78f3418"
+    },
+    {
+      "commit": "eeef732ee402e6fb48973601a2e70f7ff11c1210",
+      "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-land30-authority-001/constructor-result.json",
+      "mode": "100644",
+      "git_blob_oid": "1d8a187babbc28f59ce901ffdf60614dadb6136c",
+      "bytes": 396223,
+      "sha256": "4c4bf45c6bc5937011a9ea51ae57f5d93e0fd6d3523344c0ae18f5d21b49b988"
+    },
+    {
+      "commit": "446a9a0050d6b96c520e2a94358b6228d1d00605",
+      "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-inputs-002/land30-native-patch.json",
+      "mode": "100644",
+      "git_blob_oid": "67bc6baf1e750a7181a12c7882ecdfd0948e109a",
+      "bytes": 298397,
+      "sha256": "6f2231f2383f5f6fd3106d0aafcf1c87c6635463c731e5f81c028350515d93c0"
+    },
+    {
+      "bytes": 584697,
+      "commit": "446a9a0050d6b96c520e2a94358b6228d1d00605",
+      "git_blob_oid": "4d8a170a14f8f6413d9898075982edcb0407d98f",
+      "mode": "100644",
+      "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-inputs-002/land30-source-evidence.json",
+      "sha256": "ca4ac9bb4f7b823a8f18df43bdf103fd68647106008ed1652175943f0a71cb4d"
+    },
+    {
+      "commit": "eeef732ee402e6fb48973601a2e70f7ff11c1210",
+      "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-mixed2-authority-001/original-rule-preimage.json",
+      "mode": "100644",
+      "git_blob_oid": "22fd736b7b1599ffc3cb8e0938baccc0cf735383",
+      "bytes": 750,
+      "sha256": "7148b990af2574e8ee2de005ca61ad47cf16617cca1eea0f14e7d8e9e276bfc6"
+    },
+    {
+      "commit": "eeef732ee402e6fb48973601a2e70f7ff11c1210",
+      "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-mixed2-authority-001/authority-binding.json",
+      "mode": "100644",
+      "git_blob_oid": "c88676ee5a9f4284b9410518c4f7c090cc6b21f7",
+      "bytes": 753,
+      "sha256": "b0f2cf6bfc9d13d84ccf73b6ab0df9a2ad082cddc2e44c75af8d5fffd1cf63e8"
+    },
+    {
+      "commit": "eeef732ee402e6fb48973601a2e70f7ff11c1210",
+      "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-mixed2-authority-001/constructor-result.json",
+      "mode": "100644",
+      "git_blob_oid": "6891e21a0ac19136a8815bcea4dc4d23b2f1b05b",
+      "bytes": 38149,
+      "sha256": "3727d4f1b97fe66d08473cd3b34714895c06f6e27828bd0eb2bedbc25a4b7590"
+    },
+    {
+      "commit": "446a9a0050d6b96c520e2a94358b6228d1d00605",
+      "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-inputs-002/mixed2-native-patch.json",
+      "mode": "100644",
+      "git_blob_oid": "803f67031f6082607d3a472c9509be1514765866",
+      "bytes": 31447,
+      "sha256": "4d2a0d70e032cd60899443467e69b10739a6482325598a8235d6c5c902f35aeb"
+    },
+    {
+      "bytes": 64739,
+      "commit": "446a9a0050d6b96c520e2a94358b6228d1d00605",
+      "git_blob_oid": "2bdfcf717c28c0f9e1b50b5eca0567a361c67346",
+      "mode": "100644",
+      "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-inputs-002/mixed2-source-evidence.json",
+      "sha256": "8cb7bb5199d035c8d8ede3fac55393f1cbaaeb3a5a8a6d25c77ecb133c4c16df"
+    }
+  ],
+  "limits": [
+    "Composition proposal only: no acceptance/current-owner-zero/current selected consumer assertion.",
+    "All inherited ledger records, dispositions, geometry payloads and hold text retained literally; no hold removal inferred.",
+    "Original source, territory, licensing, class and constructor limits remain. Seven water cells are original declared coverage, not new physical qualification.",
+    "BHS is outside original three-country denominator.",
+    "Current rebind and baseline target objects retained; new target publication/finalizer must be reviewed separately."
+  ],
+  "new_distinct_owner_ids": [
+    9902,
+    9903,
+    9904,
+    9905,
+    9906,
+    9907,
+    9908,
+    9909,
+    9910,
+    9911,
+    9912,
+    9913,
+    9914,
+    9915,
+    9916,
+    9917,
+    9918,
+    9919,
+    9920,
+    9921,
+    9922,
+    9923,
+    9924,
+    9925,
+    9926,
+    9927,
+    9928,
+    9929,
+    9930,
+    9931,
+    9932,
+    9933
+  ],
+  "original_new_component_scope_ids_all_retained": true
+}
