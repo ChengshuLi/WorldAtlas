@@ -62,7 +62,7 @@ function selectedWorkflowCommand(workflow='queue') {
 
 function fixture(t,{full=false,helperBody,selectedHelperBody,omitSelectedHelper=false,skip=false,selected=false,smokeBody}={}) {
   // This is a tiny actual runner boundary fixture, not a scientific restoration.
-  const sources=['scripts/run-integration-tests.mjs','scripts/integration-profile.mjs','scripts/package-inputs.mjs','scripts/compile-hosted-migrations.mjs','scripts/ci-setup-observations.mjs'];
+  const sources=['scripts/run-integration-tests.mjs','scripts/integration-profile.mjs','scripts/check-handoff-scope.mjs','scripts/package-inputs.mjs','scripts/compile-hosted-migrations.mjs','scripts/ci-setup-observations.mjs'];
   const bodies=sources.map(name=>{
     const p=path.join(repo,name),s=fs.lstatSync(p);
     assert.ok(s.isFile()&&!s.isSymbolicLink());

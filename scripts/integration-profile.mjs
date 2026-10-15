@@ -21,10 +21,13 @@ export const COORDINATION_PATHS = new Set([
 // Callers supply the current linked issue's validated lane and declared scope.
 // Candidate metadata is never an ownership source.
 function engineeringOwnedScopes(reservation) {
-  return reservation.mode === 'engineering' && Array.isArray(reservation.owned_paths)
-    ? reservation.owned_paths.filter(prefix => typeof prefix === 'string' &&
-      /^coordination\/engineering\/[^/]+\/(?:[^/]+\/)*$/.test(prefix) &&
-      prefix.slice(0, -1).split('/').every(part => /^[a-zA-Z0-9_.-]+$/.test(part) && part !== '.' && part !== '..')) : [];
+  if (reservation.mode !== 'engineering') return [];
+  try {
+    // Keep the issue's literal file/directory grants; a restored read role need
+    // not grant ownership of its whole original packet. Invalid scopes fail closed.
+    return validateEngineeringOwnedPaths(reservation.owned_paths)
+      .filter(owned => /^coordination\/engineering\/[^/]+\//.test(owned));
+  } catch { return []; }
 }
 export function integrationProfile(branch, files, reservation = {}) {
   const names = files.flatMap(file => [file.filename, ...(file.previous_filename ? [file.previous_filename] : [])]);
@@ -39,7 +42,9 @@ export function integrationProfile(branch, files, reservation = {}) {
     if (names.every(legacy)) return 'evidence';
     // A verified retained scope permits new packets, not edits to its existing
     // methods. Keep the original branch-matched policy above unchanged.
-    const scopes = engineeringOwnedScopes(reservation);
+    // Evidence-only packet routing keeps its existing directory-grant policy.
+    // Exact restored files are considered only by the full selected-data walk.
+    const scopes = engineeringOwnedScopes(reservation).filter(owned => owned.endsWith('/'));
     if (!scopes.length) return 'full';
     let definition;
     try { definition = loadPackageInputs(); } catch { return 'full'; }
@@ -49,7 +54,7 @@ export function integrationProfile(branch, files, reservation = {}) {
       if ([file.filename, ...(file.previous_filename ? [file.previous_filename] : [])].every(legacy)) return true;
       if (file.previous_filename || !safePackagePath(file.filename) || file.filename.split('/').some(part => part.startsWith('.')) ||
           file.mode !== undefined && !['100644', '100755'].includes(file.mode) || packagePathRequired(file.filename, definition)) return false;
-      return scopes.some(prefix => file.filename.startsWith(prefix) &&
+      return scopes.some(prefix => containsPackagePath([prefix], file.filename) &&
         (file.status === 'added' && packet(file.filename) || file.status === 'modified' && file.filename === prefix + 'evidence-quality.json'));
     })) return 'evidence';
   }
@@ -77,7 +82,8 @@ import {isDeepStrictEqual as same} from 'node:util';
 import {getHeapStatistics} from 'node:v8';
 import {gunzipSync} from 'node:zlib';
 import {isUtf8} from 'node:buffer';
-import {validatePackageInputs, loadPackageInputs, packagePathRequired, safePackagePath, PACKAGE_INPUT_FILE} from './package-inputs.mjs';
+import {validatePackageInputs, loadPackageInputs, packagePathRequired, safePackagePath, containsPackagePath, PACKAGE_INPUT_FILE} from './package-inputs.mjs';
+import {validateEngineeringOwnedPaths} from './check-handoff-scope.mjs';
 const SELECTION = 'data/ownership-selection.json';
 const CHECKPOINT_LOCATOR = 'data/selected-checkpoint.json';
 const ADMINISTRATIVE_REGISTRY = 'coordination/engineering/melanesia363-additive-delivery-20261010/accepted-administrative-handoffs.json';
@@ -164,7 +170,7 @@ export function validateSelectedExpectations(expected, ledger, ledgerHash, previ
 }
 
 const branchScope = branch => `coordination/engineering/${branch.slice('engineering/'.length)}/`;
-const inScope = (name, scopes) => scopes.some(prefix => name.startsWith(prefix));
+const inScope = (name, scopes) => containsPackagePath(scopes, name);
 function supportingText(name, branch, reservation) {
   // Names do not establish consumption. The selected-role/package checks below
   // prove new ordinary bounded text is supporting evidence, regardless of title.

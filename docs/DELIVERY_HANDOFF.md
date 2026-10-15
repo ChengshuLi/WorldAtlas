@@ -149,6 +149,15 @@ No proposed input is called accepted merely because a hash matches.
    together with the selector/package/expectations. Its output identity has no
    invented commit. The modern composed `selected-ledger.json` pin serves as both
    `ledger` and `selected_ledger`; retain its actual `current_rebind` as `rebind`.
+   With an original cumulative selector, finalize authenticates its sidecar and
+   accepted registry, requires every inherited authority entry unchanged, and
+   packages the exact added registry entries regardless of their original paths.
+   Original rule/binding files need no receiving-prefix copies or preliminary
+   input checkpoint. Their original paths still require exact accepted identities
+   or authenticated local staging for issue-authorized adoption; `new_prefix` continues to constrain
+   owned outputs. The complete accepted registry receives a retained 12x metadata
+   carry charge before parsing. Standalone `package` and initial legacy finalize
+   without an additive hook retain their existing prefix selection.
    It only replaces `additive_release` in the selector, preserving an already-final
    body's bytes. Keep the entire accepted package list verbatim as the prefix;
    append only genuinely new owned paths in stable sorted order. Existing paths
@@ -173,7 +182,7 @@ and `selected-delivery-expectations.json` once at the configured receiving
 commit that bundle under a `finalized/` directory. The delivery has one canonical,
 current-ledger-bound expectations file. A duplicate authoritative copy is not a
 prospective template and correctly retains full regression. This uses the existing
-staging/adoption contract; it adds no writer, automatic Git mutation or resume rule.
+staging/adoption contract; it performs no automatic Git mutation.
 
 Outputs use a fresh directory below `.cache/delivery-handoff/` or the caller's
 issue-owned `coordination/engineering/<job>/`. All products are admitted before
@@ -416,30 +425,36 @@ prepare templates with fresh candidate destinations and the admitted resource
 configuration; the driver does not silently rename historical requests or rerun
 operators. `destination_prefix` is used only by the existing greedy constructor.
 
-### Inherited package read roles and explicit historical restoration
+### Inherited package read roles and exact local staging
 
-Finalization derives its package read roles from the authenticated authority,
-original custody and current release metadata. An out-of-prefix role that exists
-at the accepted package baseline must have the exact ordinary mode, Git object,
-size and SHA-256 there. It need not already be listed in package inputs. Existing
-package declarations are preserved as a prefix; covered directory members are
-not redundantly appended. New output ownership is unchanged.
+Finalization derives package read roles from authenticated authority, original
+custody and current release metadata. An out-of-prefix role already present at
+the accepted package baseline must retain its exact ordinary mode, Git object,
+size and SHA-256. Existing package declarations remain an unchanged prefix;
+covered directory members are not redundantly appended.
 
-When an original consumed role is absent from that baseline, first reconcile its
-exact restoration write path in the ordinary issue scope and commit the
-unchanged original body. Then supply `restored_read_roles` in standalone finalize
-configuration:
-`{"commit":"<exact restoration commit>","paths":["<original role path>"]}`.
-The finalizer checks each role against its original custody and that committed
-snapshot; it does not restore files or grant write authority. Duplicate, unbound,
-changed, nonordinary, missing or accepted-path-overwriting entries fail. Original
-custody commits stay unchanged. All foreign-role identity failures are reported
-together so the complete scope can be reconciled before retrying. This descriptor
-is part of the immutable finalize input; changed input requires a fresh preparation
-destination rather than replacing an existing completed product.
+Absent original roles are emitted automatically beneath
+`restored-read-roles/<original repository path>` in the standard local
+`.cache/delivery-handoff/` finalization output. Their original pins remain in the
+existing `package-roles.json`; no duplicate authority or new manifest is created.
+Adopt these exact bodies at their original repository paths alongside the normal
+selector, package declaration and one canonical receiving expectation. Declare
+those exact write paths in the ordinary issue scope. The command never writes
+those repository paths or mutates Git. No manual restoration inventory or prior
+restoration commit is needed for a fresh invocation.
 
-Standalone preparation retains its existing receipt/configuration contract.
-Published legacy receipts remain supported by their existing consumers.
+The entire staged batch is checked before publication, including immutable body
+identities, finite byte allowance, collisions and ordinary paths. Completion is
+written last. Exact `--resume` checks all output files and directories, original
+body bytes and configuration; foreign, changed or incomplete output refuses.
+Changed accepted paths always refuse rather than being replaced.
+
+Existing `restored_read_roles` configuration remains an exact committed-snapshot
+readback: `{"commit":"<exact commit>","paths":["<original role path>"]}`.
+Duplicate, unbound, changed, nonordinary, missing or accepted-path-overwriting
+entries still fail. Original custody commits remain unchanged. Changed inputs
+require a fresh preparation destination, never replacement of completed output.
+Published legacy receipts retain their existing consumers.
 
 ## Reusable source and modern native entries
 

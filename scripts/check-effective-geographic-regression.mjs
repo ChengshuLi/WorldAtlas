@@ -52,7 +52,7 @@ export function selectedGeometrySourceAlias(snapshot) {
     &&resolver.bank.overrides.every(p=>resolver.replacements.get(p.logical_path)===p),'Selected source replacement roster drift');
   return resolver;
 }
-function runtimeIdentity(executable=process.execPath) {
+export function runtimeIdentity(executable=process.execPath) {
   const executablePath=fs.realpathSync(executable);
   if(installedRuntimes.has(executablePath))return installedRuntimes.get(executablePath);
   const stat=fs.statSync(executablePath);demand(stat.isFile()&&Number.isSafeInteger(stat.size)&&stat.size>0,'Invalid installed execution runtime');

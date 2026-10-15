@@ -8,6 +8,7 @@ import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {gunzipSync} from 'node:zlib';
 import {candidateBudget} from './native-ownership/native-preparation-guards.mjs';
+import {prepareDeliveryRoleStaging} from './delivery-handoff-advance.mjs';
 import {validatePackageInputs} from './package-inputs.mjs';
 import {baselineFiles, validateEvidence} from './evidence-quality.mjs';
 import {composeRetainedLedgers} from '../coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs';
@@ -88,10 +89,25 @@ function admitDestination(root, destination, resume) {
 export function admitPublication(root, destination, products, binding, resume = false, sharedBudget = null) {
   const target = admitDestination(root, destination, resume);
   const budget = sharedBudget ?? candidateBudget([], {reserveBytes: 0, reserveDescriptors: 0});
-  for (const [name, raw] of Object.entries(products)) {
-    need(safe(name) && !name.includes('/') && name !== 'preparation.json' && Buffer.isBuffer(raw), 'Plain unique product filenames required');
-    budget.add({bytes: raw.length});
+  const names = new Set(Object.keys(products));
+  for (const name of names) {
+    const parts = name.split('/');
+    for (let i = 1; i < parts.length; i++)
+      need(!names.has(parts.slice(0, i).join('/')), 'Product file/directory collision');
   }
+  const staged = [], stagingPrefix = 'restored-read-roles/';
+  const rolePins = products['package-roles.json'] ? JSON.parse(products['package-roles.json']).paths : [];
+  for (const [name, raw] of Object.entries(products)) {
+    need(safe(name) && name !== 'preparation.json' && Buffer.isBuffer(raw), 'Safe unique product filenames required');
+    if (name.includes('/')) {
+      need(name.startsWith(stagingPrefix) && Array.isArray(rolePins), 'Only derived original roles may use nested output paths');
+      const matches = rolePins.filter(pin => pin.path === name.slice(stagingPrefix.length));
+      need(matches.length === 1, 'Staged body must have one authenticated package role');
+      staged.push({pin: matches[0], body: raw});
+    } else budget.add({bytes: raw.length});
+  }
+  const publishRoles = staged.length ? prepareDeliveryRoleStaging(root, destination + '/restored-read-roles', staged,
+    {limits: {total: staged.reduce((sum, entry) => sum + entry.body.length, 0)}, budget}) : null;
   need(Object.keys(products).length > 0, 'No empty completion');
   const outputs = Object.fromEntries(Object.entries(products).map(([name, raw]) => [name, {bytes: raw.length, sha256: digest(raw)}]));
   const receipt = jsonBytes({version: 1, binding, outputs});
@@ -99,7 +115,21 @@ export function admitPublication(root, destination, products, binding, resume = 
   const inspectExisting = () => {
     admitDestination(root, destination, resume);
     if (!fs.existsSync(target)) return false;
-    need(same(fs.readdirSync(target).sort(), [...Object.keys(products), 'preparation.json'].sort()), 'Incomplete or foreign resumed output inventory');
+    const expected = new Set([...Object.keys(products), 'preparation.json']);
+    for (const name of Object.keys(products)) {
+      const parts = name.split('/');
+      for (let i = 1; i < parts.length; i++) expected.add(parts.slice(0, i).join('/') + '/');
+    }
+    const found = [];
+    const walk = relative => {
+      for (const name of fs.readdirSync(path.join(target, relative))) {
+        const item = relative + name, stat = fs.lstatSync(path.join(target, item));
+        need(!stat.isSymbolicLink() && (stat.isFile() || stat.isDirectory()), 'Nonordinary resumed output');
+        if (stat.isDirectory()) { found.push(item + '/'); walk(item + '/'); } else found.push(item);
+      }
+    };
+    walk('');
+    need(same(found.sort(), [...expected].sort()), 'Incomplete or foreign resumed output inventory');
     for (const [name, raw] of Object.entries({...products, 'preparation.json': receipt}))
       need(ordinary(root, destination + '/' + name).equals(raw), 'Resumed bytes/binding changed: ' + name);
     return true;
@@ -114,7 +144,10 @@ export function admitPublication(root, destination, products, binding, resume = 
     if (inspectExisting()) return {destination, resumed: true, binding};
     fs.mkdirSync(path.dirname(target), {recursive: true});
     fs.mkdirSync(target);
-    for (const [name, raw] of Object.entries({...products, 'preparation.json': receipt})) fs.writeFileSync(path.join(target, name), raw, {flag: 'wx'});
+    for (const [name, raw] of Object.entries(products)) if (!name.includes('/'))
+      fs.writeFileSync(path.join(target, name), raw, {flag: 'wx'});
+    if (publishRoles) publishRoles();
+    fs.writeFileSync(path.join(target, 'preparation.json'), receipt, {flag: 'wx'});
     return {destination, resumed: false, binding};
   };
 }
@@ -668,7 +701,7 @@ export function composeAuthorities(config, reader) {
   return {'authority-registry.json': jsonBytes(registry), 'composed-original-ledger.json': jsonBytes(ledger)};
 }
 
-export function packageProjection(config, reader) {
+export function packageProjection(config, reader, acceptedRegistry = null) {
   const registry = reader.json(config.registry), ledger = reader.json(config.ledger);
   const normalized = normaliseRetainedRepairLedger(ledger, registry);
   const roles = new Map();
@@ -680,8 +713,23 @@ export function packageProjection(config, reader) {
     if (!roles.get(pin.path).roles.includes(role)) roles.get(pin.path).roles.push(role);
   }
   need(safe(config.new_prefix.slice(0, -1)) && config.new_prefix.endsWith('/'), 'Explicit new authority prefix required');
+  // Finalize supplies the registry authenticated through the original selector.
+  // Standalone package and initial legacy finalization retain prefix selection.
+  let incoming = registry.entries.filter(e => e.source_authority.path.startsWith(config.new_prefix));
+  if (acceptedRegistry !== null) {
+    need(acceptedRegistry?.version === 1 && acceptedRegistry.kind === 'retained-rule-authority-registry-v1'
+      && Array.isArray(acceptedRegistry.entries) && acceptedRegistry.entries.length > 0,
+    'Complete accepted authority registry required');
+    const inherited = new Set();
+    for (const entry of acceptedRegistry.entries) {
+      need(hex(entry?.authority_sha256, 64) && !inherited.has(entry.authority_sha256), 'Duplicate or invalid accepted authority identity');
+      inherited.add(entry.authority_sha256);
+      need(same(normalized.authorities.get(entry.authority_sha256) ?? null, entry), 'Inherited authority removed or changed');
+    }
+    incoming = registry.entries.filter(entry => !inherited.has(entry.authority_sha256));
+  }
   let added = 0;
-  for (const entry of registry.entries.filter(e => e.source_authority.path.startsWith(config.new_prefix))) {
+  for (const entry of incoming) {
     added++; add(entry.rule_preimage, 'authority rule preimage'); add(entry.source_authority, 'authority binding');
     const binding = reader.json(entry.source_authority);
     if (binding.kind === 'source-target-native-custody-v1') {
@@ -792,17 +840,29 @@ export function finalizeDelivery(config, reader) {
   need(typeof config.new_prefix === 'string' && config.new_prefix.endsWith('/')
     && safe(config.new_prefix.slice(0, -1)), 'Exact owned output prefix required');
   const originalSelector = reader.read(config.selector), selection = JSON.parse(originalSelector);
-  let generatedSidecar;
-  if (config.sidecar_output !== undefined) {
-    need(!config.sidecar && safe(config.sidecar_output) && path.posix.dirname(config.sidecar_output) + '/' === config.new_prefix
-      && !['ownership-selection.json', 'package-inputs.json', 'package-roles.json', 'selected-delivery-expectations.json', 'preparation.json']
-        .includes(path.posix.basename(config.sidecar_output)) && config.patch && config.runtime_envelope,
-    'Fresh flat owned sidecar output and committed patch/envelope required');
-    const hook = selection.additive_release, priorPin = reader.pin(config.selector.commit, hook?.path);
+  let generatedSidecar, prior, acceptedRegistry = null;
+  if (selection.additive_release !== undefined || config.sidecar_output !== undefined) {
+    const hook = selection.additive_release;
+    need(hook && safe(hook.path), 'Original cumulative selector hook required');
+    const priorPin = reader.pin(config.selector.commit, hook.path);
     need(priorPin.bytes === hook.bytes && priorPin.sha256 === hook.sha256, 'Original selected sidecar differs');
-    const prior = reader.json(priorPin), base = {...selection}; delete base.additive_release;
+    prior = reader.json(priorPin);
+    const base = {...selection}; delete base.additive_release;
     need(prior.version === 2 && prior.kind === 'retained-native-additive-selection-v2' && same(prior.base_selection, base),
       'Original selected base differs');
+    const pin = prior.authority_registry;
+    need(pin && Number.isSafeInteger(pin.bytes) && pin.bytes > 0 && typeof reader.budget?.add === 'function',
+      'Complete accepted registry pin and shared preparation budget required');
+    // Retain parse, canonical comparison and identity-map carry before parsing.
+    // The reader independently charges/authenticates the complete encoded body.
+    for (let i = 0; i < 12; i++) reader.budget.add({bytes: pin.bytes});
+    acceptedRegistry = reader.json(pin);
+  }
+  if (config.sidecar_output !== undefined) {
+    need(!config.sidecar && safe(config.sidecar_output) && path.posix.dirname(config.sidecar_output) + '/' === config.new_prefix
+      && !['ownership-selection.json', 'package-inputs.json', 'package-roles.json', 'selected-delivery-expectations.json', 'preparation.json', 'restored-read-roles']
+        .includes(path.posix.basename(config.sidecar_output)) && config.patch && config.runtime_envelope,
+    'Fresh flat owned sidecar output and committed patch/envelope required');
     generatedSidecar = jsonBytes({...prior, authority_registry: config.registry, runtime_envelope: config.runtime_envelope,
       logical_asset_map: {...prior.logical_asset_map, ledger: config.selected_ledger, patch: config.patch}});
     // This is a generated output identity, never a fabricated future input pin.
@@ -844,7 +904,7 @@ export function finalizeDelivery(config, reader) {
   }
   const selector = finalizedSelection(originalSelector, sidecar, config.sidecar);
   const outputs = packageProjection({...config, outer_roles: [...Object.values(assets), sidecar.runtime_envelope,
-    ...(!generatedSidecar ? [config.sidecar] : [])]}, reader);
+    ...(!generatedSidecar ? [config.sidecar] : [])]}, reader, acceptedRegistry);
   const projection = JSON.parse(outputs['package-roles.json']);
   if (generatedSidecar) {
     projection.paths.push({...config.sidecar, roles: ['generated final sidecar']});
@@ -857,8 +917,9 @@ export function finalizeDelivery(config, reader) {
   validatePackageInputs(baselinePackage);
   const covered = name => baselinePackage.inputs.some(p => p === name || p.endsWith('/') && name.startsWith(p));
   // This is a closed consumed-role traversal, never caller-granted write scope.
-  // Restorations are reads of already committed, byte-identical original roles;
-  // ordinary issue/claim/PR guards separately authorize their actual writes.
+  // Missing original roles are staged from their authenticated immutable bodies.
+  // Existing committed restoration descriptors remain exact readback checks;
+  // ordinary issue/PR guards separately authorize adoption into the repository.
   const restored = config.restored_read_roles;
   if (restored) need(same(Object.keys(restored).sort(), ['commit', 'paths'])
     && hex(restored.commit, 40) && unique(restored.paths) && restored.paths.every(safe)
@@ -869,8 +930,10 @@ export function finalizeDelivery(config, reader) {
     && a.bytes === b.bytes && a.sha256 === b.sha256;
   for (const pin of projection.paths.filter(p => !p.path.startsWith(config.new_prefix) || covered(p.path))) {
     try {
-      const absent = requested.has(pin.path) && !reader.hasPath(config.package_inputs.commit, pin.path);
-      if (absent) {
+      const missing = typeof reader.hasPath === 'function' && !reader.hasPath(config.package_inputs.commit, pin.path);
+      if (missing && !restored) {
+        outputs['restored-read-roles/' + pin.path] = reader.read(pin);
+      } else if (missing && requested.has(pin.path)) {
         const snapshot = reader.pin(restored.commit, pin.path);
         need(identity(snapshot, pin), 'Restored snapshot differs from original consumed role');
         matched.add(pin.path);
