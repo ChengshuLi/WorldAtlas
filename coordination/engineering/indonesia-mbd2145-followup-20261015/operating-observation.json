@@ -1,0 +1,259 @@
+{
+  "version": 1,
+  "kind": "DERIVED_PUBLIC_METADATA_COMPOSE_FINALIZE_OPERATING_OBSERVATION",
+  "projection": "Derived public observation assembled from original raw local admission, stdout, time, code-inventory and resource-plan records. Literal two admission objects retained below. Only code inventory /code_root is omitted from its projected object; complete raw hash records identify originals. No raw private machine path is published.",
+  "original_raw_records": [
+    {
+      "name": "compose-admission-001.json",
+      "bytes": 597,
+      "sha256": "725fa606b94003fd356b50839c99945603f53c55db2a4b402da55e34000aaa3e",
+      "git_blob_oid": "d0c177f4fc914494da189faa3c807bb77fdabb22"
+    },
+    {
+      "name": "finalize-admission-001.json",
+      "bytes": 598,
+      "sha256": "bdace5e523f25baf7bb7794c55fc3f5c3853d2419bbb784d91702c0e7f1adecc",
+      "git_blob_oid": "8dc296ad00eae695c05453675d6f425318da9481"
+    },
+    {
+      "name": "compose-stdout-001.log",
+      "bytes": 191,
+      "sha256": "b0af12bbc173edc5094f133086114dc0ff4dd32fc4c62539d62ebe37933d87c8",
+      "git_blob_oid": "a90bb44900a13ddccf0d8a5b854fb96a018709a8"
+    },
+    {
+      "name": "finalize-stdout-001.log",
+      "bytes": 190,
+      "sha256": "4decc21e8be78960c72b260f059e5ba072fadab753c4eadc8af036c9d097397d",
+      "git_blob_oid": "76d009bf9df9b5c5a2965e7c9f2f235e1c7f2c0d"
+    },
+    {
+      "name": "compose-time-001.log",
+      "bytes": 777,
+      "sha256": "5de1b069c37ffbea52008eb586abcbb447648cdca230e49a9d115dccc40d6727",
+      "git_blob_oid": "433f2ea34de2d9b9a898837fb549382d05606e9a"
+    },
+    {
+      "name": "finalize-time-001.log",
+      "bytes": 777,
+      "sha256": "c3695217981ca74b3e39ae78c8a90138b9162d9bba81d05264a7681d327c10c3",
+      "git_blob_oid": "a96b8ae2fabaeb7c27c1f261f9eabb8ad0237250"
+    },
+    {
+      "name": "accepted-code-closure.json",
+      "bytes": 4614,
+      "sha256": "d29ddb81304aa78d0850f021a43d13c6bf84e065f9a43d12e914309c44e6489f",
+      "git_blob_oid": "f02dbdaa783738db225c5598a970d5ca153bb216"
+    },
+    {
+      "name": "complete-resource-plan.json",
+      "bytes": 17848,
+      "sha256": "1f01199a08d1788086e7e003ef40f9ede2f3fe46c363f17a5c0c36e17918d5ea",
+      "git_blob_oid": "7c4a9ab182b740ae3eabe5c5bdc893371c3705f2"
+    }
+  ],
+  "fresh_admissions": {
+    "compose": {
+      "at_utc": "2026-10-15T04:35:11.841Z",
+      "availableBytes": 1657651200,
+      "currentRssBytes": 51331072,
+      "concurrentReservedBytes": 0,
+      "headroomBytes": 572882944,
+      "phaseBytes": 536870912,
+      "rssBytes": 536870912,
+      "complete_prospective_bytes": 381883391,
+      "config_sha256": "a84712c1f3d25274eb769537f0f8aa99b28be79b79b7427ba2d333376e1aba48",
+      "code_commit": "866c42b854910f17a80427dac19b2c850cd68093",
+      "accepted_baseline": "866c42b854910f17a80427dac19b2c850cd68093",
+      "phase": "compose",
+      "allowance": {
+        "phaseBytes": 536870912,
+        "rssBytes": 536870912
+      },
+      "admitted": true
+    },
+    "finalize": {
+      "at_utc": "2026-10-15T04:41:47.362Z",
+      "availableBytes": 1269301248,
+      "currentRssBytes": 51200000,
+      "concurrentReservedBytes": 0,
+      "headroomBytes": 572882944,
+      "phaseBytes": 536870912,
+      "rssBytes": 536870912,
+      "complete_prospective_bytes": 463447060,
+      "config_sha256": "49e603a3a10c5a64325c1f84643eff9f0ad1299e3da2ab49af8283bbc440f4c5",
+      "code_commit": "866c42b854910f17a80427dac19b2c850cd68093",
+      "accepted_baseline": "866c42b854910f17a80427dac19b2c850cd68093",
+      "phase": "finalize",
+      "allowance": {
+        "phaseBytes": 536870912,
+        "rssBytes": 536870912
+      },
+      "admitted": true
+    }
+  },
+  "actual_metadata_operations": {
+    "compose": {
+      "numeric_exit_status": 0,
+      "external_elapsed_seconds": 1.13,
+      "Darwin_time_l_peak_rss_bytes": 227246080,
+      "config": {
+        "path": "coordination/engineering/indonesia-mbd2145-followup-20261015/delivery/compose-original-quartets.json",
+        "bytes": 2235,
+        "sha256": "a84712c1f3d25274eb769537f0f8aa99b28be79b79b7427ba2d333376e1aba48",
+        "git_blob_oid": "1fbe8415db5bd0494dacd055ed1461be8a02dbfd"
+      },
+      "stdout_sha256": "b0af12bbc173edc5094f133086114dc0ff4dd32fc4c62539d62ebe37933d87c8",
+      "time_sha256": "5de1b069c37ffbea52008eb586abcbb447648cdca230e49a9d115dccc40d6727"
+    },
+    "finalize": {
+      "numeric_exit_status": 0,
+      "external_elapsed_seconds": 3.52,
+      "Darwin_time_l_peak_rss_bytes": 225624064,
+      "config": {
+        "path": "coordination/engineering/indonesia-mbd2145-followup-20261015/delivery/finalize-config.json",
+        "bytes": 3200,
+        "sha256": "49e603a3a10c5a64325c1f84643eff9f0ad1299e3da2ab49af8283bbc440f4c5",
+        "git_blob_oid": "f2a58f32a100b6aa65de877dc1badb26b72c56e4"
+      },
+      "stdout_sha256": "4decc21e8be78960c72b260f059e5ba072fadab753c4eadc8af036c9d097397d",
+      "time_sha256": "c3695217981ca74b3e39ae78c8a90138b9162d9bba81d05264a7681d327c10c3",
+      "preparation": {
+        "path": "coordination/engineering/indonesia-mbd2145-followup-20261015/delivery/finalizer-preparation.json",
+        "bytes": 2068,
+        "sha256": "bed79122fbad86f3367e2d95300626dd5ab9f9784aab6673f0737d78d2459efa",
+        "git_blob_oid": "f744580007daf5d2251753d0462f13b03bd296c7"
+      }
+    }
+  },
+  "exit_status_basis": "Main operator reported actualEXIT0 for both; raw stdout/time and completed output inventories corroborate completion. This document preparer did not witness or invoke either process.",
+  "accepted_metadata_code_inventory": {
+    "commit": "866c42b854910f17a80427dac19b2c850cd68093",
+    "files": [
+      {
+        "commit": "866c42b854910f17a80427dac19b2c850cd68093",
+        "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs",
+        "mode": "100644",
+        "git_blob_oid": "d1c5a11a0d4aaf2b73f6d6c36b0ab59a67ac84e3",
+        "bytes": 2279,
+        "sha256": "f4d5480d23ba6ae097a559d066b2a244ce388ba81aa6c486331e731be23e1813"
+      },
+      {
+        "commit": "866c42b854910f17a80427dac19b2c850cd68093",
+        "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+        "mode": "100644",
+        "git_blob_oid": "d185cd1a78b466057021b357ff3b6e1b8ed2af24",
+        "bytes": 173800,
+        "sha256": "d99daf1cd379276b3225af09bd2bfb624d784419afa3abfe9652873965b57f97"
+      },
+      {
+        "commit": "866c42b854910f17a80427dac19b2c850cd68093",
+        "path": "package.json",
+        "mode": "100644",
+        "git_blob_oid": "318d842ee999da746956968c9d7e58f9e00cb9e4",
+        "bytes": 1417,
+        "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3"
+      },
+      {
+        "commit": "866c42b854910f17a80427dac19b2c850cd68093",
+        "path": "scripts/check-effective-geographic-regression.mjs",
+        "mode": "100644",
+        "git_blob_oid": "c4b80e760bbdbc0863f49741e9b2e9342d2f0818",
+        "bytes": 90037,
+        "sha256": "77ca0cdf4888d757a9fa40dbdc8388aa3bf9389c51b06dbdc498cf6b1412e7a0"
+      },
+      {
+        "commit": "866c42b854910f17a80427dac19b2c850cd68093",
+        "path": "scripts/delivery-handoff-advance.mjs",
+        "mode": "100644",
+        "git_blob_oid": "4a3c06ee6d7031b043e353d47ed8b2356aa5f52b",
+        "bytes": 77213,
+        "sha256": "c1cd1f53332aa507d2ba7bd1bebc6bb8bdedc60fbc4b6d3e49cca65c4485ac1b"
+      },
+      {
+        "commit": "866c42b854910f17a80427dac19b2c850cd68093",
+        "path": "scripts/evidence-quality.mjs",
+        "mode": "100644",
+        "git_blob_oid": "3f8980f573af0a9fb48b763ed875026f0ce99199",
+        "bytes": 28506,
+        "sha256": "8950701f659808b0f1aa527d1d79dbdaa06921abd601bef80a6b030963eb0d97"
+      },
+      {
+        "commit": "866c42b854910f17a80427dac19b2c850cd68093",
+        "path": "scripts/geography-prefetch.mjs",
+        "mode": "100644",
+        "git_blob_oid": "1c22d410b9f1337f635d998928ffe9cb94c12815",
+        "bytes": 13608,
+        "sha256": "19aba167eb32d5e7c08034a0e748db95e657d2ec0f10f8ee034cdeba9b2720a8"
+      },
+      {
+        "commit": "866c42b854910f17a80427dac19b2c850cd68093",
+        "path": "scripts/native-ownership/native-preparation-guards.mjs",
+        "mode": "100644",
+        "git_blob_oid": "7b6b996c295a18d3b4d52a2c1f3e23384b025f70",
+        "bytes": 9849,
+        "sha256": "227b982fac966fff5e55483c62ecb181defd55194b2946e31b7606574013f676"
+      },
+      {
+        "commit": "866c42b854910f17a80427dac19b2c850cd68093",
+        "path": "scripts/package-inputs.mjs",
+        "mode": "100644",
+        "git_blob_oid": "20ca54238e6709a81c551a277cc156e61a1611be",
+        "bytes": 8828,
+        "sha256": "e1502ce28061e6078b45f310241a944f8346195822ee83e03fb0a726191d5870"
+      },
+      {
+        "commit": "866c42b854910f17a80427dac19b2c850cd68093",
+        "path": "scripts/prepare-delivery-handoff.mjs",
+        "mode": "100644",
+        "git_blob_oid": "65805edd106cb41afca61560eea512428257b7aa",
+        "bytes": 107006,
+        "sha256": "5ad0dc382eb6d17999759f5399b2469c486deebda0e6fdb6401772fcb66a70c6"
+      },
+      {
+        "commit": "866c42b854910f17a80427dac19b2c850cd68093",
+        "path": "src/native-grid.js",
+        "mode": "100644",
+        "git_blob_oid": "736eb39fc9ee6cfd94a4524fa332d9852ea9b635",
+        "bytes": 36232,
+        "sha256": "7c93720e68fb3a9d584bcd9ba5c7f111b836d99eb3d133b86fdd6d72efe50d48"
+      },
+      {
+        "commit": "866c42b854910f17a80427dac19b2c850cd68093",
+        "path": "src/ownership-codec.js",
+        "mode": "100644",
+        "git_blob_oid": "03eacc9bcb1bff03723a93c248ea6de5f2fed5e4",
+        "bytes": 2948,
+        "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d"
+      }
+    ],
+    "bytes": 551723,
+    "modules": 12,
+    "different_from_completed_b434_cache": [
+      "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "scripts/package-inputs.mjs"
+    ],
+    "delta_note": "Accepted package bridge observation/custody propagation plus packageinputs; unchanged compose/finalize entry and scanner/output contracts.",
+    "prior_b434_cache_unchanged": true,
+    "no_execution_import_or_Gitmutation": true
+  },
+  "code_inventory_omitted_json_pointers": [
+    "/code_root"
+  ],
+  "actual_finalizer_expectation": {
+    "path": "coordination/engineering/indonesia-mbd2145-followup-20261015/selected-delivery-expectations.json",
+    "bytes": 137352,
+    "sha256": "1f9147baf326acb3573d6fbabd3efd73c7d83252c6398cb6bde8553e1021f5f9",
+    "git_blob_oid": "12ef33bd6389889f6a7603fde6799a4b6b610eb8",
+    "cumulative_native_cells": 101272,
+    "selected_members": 295
+  },
+  "restoration_scope": "Six byte-identical original paths staged automatically by existing stock finalizer. Stage path→original path mapping retained in local inventory; no caller-created scientific aliases, read-role grants or duplicate expectation.",
+  "science_boundary": "This is metadata composition/finalization only. Original scientific/native execution remains b434; source/physical/native producers were not replayed.",
+  "limits": [
+    "Measured per-process lifetime peaks and prospective admitted limits are distinct; no hard aggregate process-tree RSS containment is asserted.",
+    "Completed finalizer artifacts are candidate metadata, not actual current-owner-zero, selected/emitted-output conservation, scientific exact-head approval, integration or acceptance.",
+    "All101272candidate cells remain proposed; acceptedbaseline99127 and inherited70authorities/302literalrows, all originalholds and source/legal limitations remain binding.",
+    "Final immutable candidate/head scientific review covers finalization and original MBD contribution together; no new standalone final-output/config attestation gate is introduced."
+  ]
+}
