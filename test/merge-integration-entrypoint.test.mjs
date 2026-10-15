@@ -81,8 +81,8 @@ test('actual entry point logs the exact complete result when bot notification fa
   }
 });
 
-test('actual entry point saves stale/head/conflict/base diagnostics even when notification fails',()=>{
- for(const kind of ['stale','head','conflict','base']) {
+test('actual entry point saves owned-parent/head/conflict/base diagnostics when notification fails',()=>{
+ for(const kind of ['parents','head','conflict','base']) {
   const directory=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-merge-diagnostics-'));
   const sha=c=>c.repeat(40),head=sha('a'),base=sha('b'),candidate=sha('c');
   fs.mkdirSync(path.join(directory,'.github'));
@@ -91,26 +91,30 @@ test('actual entry point saves stale/head/conflict/base diagnostics even when no
   const issue={number:1,state:'open',created_at:'2020-01-01T00:00:00Z',labels:['type:engineering','kind:work-item','status:ready'],
     body:'<!-- worldatlas-work:v1\n'+JSON.stringify({mode:'engineering',max_prs:2,depends_on:[],scope:'code'})+'\n-->'};
   const pr={number:2,state:'open',draft:false,body:'Closes #1',title:'Repair',changed_files:1,
-    head:{sha:head,ref:'engineering/test',repo:{full_name:'owner/repo'}},base:{ref:'main',sha:base},mergeable:true,merge_commit_sha:candidate};
+    head:{sha:head,ref:'engineering/test',repo:{full_name:'owner/repo'}},base:{ref:'main',sha:base},merge_commit_sha:null};
   const routes={
     '/pulls/2':pr,'/issues/1':issue,'/issues/1/timeline':[],
     '/issues/1/comments':[{id:1,user:{login:'github-actions[bot]'},body:renderClaim({version:1,active:true,worker_id:'worker',claim_id:'nonce',branch:'engineering/test',expires_at:new Date(Date.now()+3600000).toISOString()})}],
     '/pulls/2/files':[{filename:'src/a.js',status:'modified'}],
     ['/commits/'+head+'/check-runs']:{check_runs:[{id:1,name:'scope',app:{id:1},status:'completed',conclusion:'success'}]},
     ['/commits/'+head+'/status']:{statuses:[]},'/git/ref/heads/main':{object:{sha:base}},
-    ['/git/commits/'+candidate]:{sha:candidate,parents:[{sha:sha('e')},{sha:head}]}
+    ['/git/commits/'+candidate]:{sha:candidate,tree:{sha:sha('f')},parents:[{sha:kind==='parents'?sha('e'):base},{sha:head}]}
   };
-  fs.writeFileSync(path.join(directory,'mock.mjs'),capacityShim+`const routes=${JSON.stringify(routes)};
-    const realSetTimeout=globalThis.setTimeout;globalThis.setTimeout=(fn,ms,...args)=>realSetTimeout(fn,ms===2000?0:ms,...args);
+  fs.writeFileSync(path.join(directory,'mock.mjs'),capacityShim+`import fs from 'node:fs';const routes=${JSON.stringify(routes)},refs=new Map();
     let prReads=0,baseReads=0;
     globalThis.fetch=async(url,options)=>{
-      const route=new URL(url).pathname.replace('/repos/owner/repo','');
-      if(route==='/pulls/2'&&++prReads===2) {
-        if('${kind}'==='head')routes[route].head.sha='d'.repeat(40);
-        if('${kind}'==='conflict')routes[route].mergeable=false;
+      const route=new URL(url).pathname.replace('/repos/owner/repo',''),body=options.body?JSON.parse(options.body):null;
+      if(route==='/git/refs'&&options.method==='POST'){refs.set(body.ref.replace('refs/heads/',''),body.sha);return Response.json({ref:body.ref},{status:201});}
+      if(route==='/merges'&&options.method==='POST'){
+        if(body.base==='main'||body.base==='engineering/test')throw Error('Protected branch update');
+        if('${kind}'==='conflict')return Response.json({},{status:409});
+        refs.set(body.base,'${candidate}');return Response.json({sha:'${candidate}'},{status:201});
       }
+      if(route.startsWith('/git/ref/heads/worldatlas-integration/'))return Response.json({object:{sha:refs.get(route.split('/git/ref/heads/')[1])}});
+      if(options.method==='DELETE'){refs.delete(route.split('/git/refs/heads/')[1]);fs.writeFileSync('remaining-refs.json',JSON.stringify([...refs]));return new Response(null,{status:204});}
+      if(route==='/pulls/2'&&++prReads===2&&'${kind}'==='head')routes[route].head.sha='d'.repeat(40);
       if(route==='/git/ref/heads/main'&&++baseReads===2&&'${kind}'==='base')routes[route].object.sha='d'.repeat(40);
-      return new Response(JSON.stringify(options.method==='POST'?{}:routes[route]??{}),{status:options.method==='POST'?403:200,headers:{'Content-Type':'application/json'}});
+      return Response.json(options.method==='POST'?{}:routes[route]??{},{status:options.method==='POST'?403:200});
     };`);
   try {
     const result=spawnSync(process.execPath,['--import',path.join(directory,'mock.mjs'),path.join(root,'scripts/run-worker-merge.mjs')],{
@@ -118,15 +122,17 @@ test('actual entry point saves stale/head/conflict/base diagnostics even when no
         GITHUB_EVENT_PATH:path.join(directory,'event.json'),GITHUB_OUTPUT:path.join(directory,'outputs'),GITHUB_STEP_SUMMARY:path.join(directory,'summary'),MERGE_PHASE:'prepare'}});
     const receipt=JSON.parse(fs.readFileSync(path.join(directory,'merge-result.json')));
     assert.notEqual(result.status,0);assert.match(result.stderr,/HTTP 403/);
-    assert.equal(receipt.retryable,kind==='stale'||kind==='base');
-    assert.equal(receipt.candidate_diagnostics.attempt,kind==='stale'?6:1);
-    assert.equal(receipt.candidate_diagnostics.expected_base,kind==='base'?sha('d'):base);
+    assert.equal(receipt.retryable,kind==='parents'||kind==='base');
+    assert.equal(receipt.candidate_diagnostics.expected_base,base);
     assert.equal(receipt.candidate_diagnostics.expected_head,head);
-    assert.equal(receipt.candidate_diagnostics.candidate,candidate);
-    assert.equal(receipt.candidate_diagnostics.reason,{stale:'stale-candidate',head:'head-changed',conflict:'conflict',base:'base-advanced'}[kind]);
-    assert.ok(receipt.candidate_diagnostics.observed_at);
-    if(kind==='stale')assert.deepEqual(receipt.candidate_diagnostics.actual_parents,[sha('e'),head]);
-    assert.match(fs.readFileSync(path.join(directory,'summary'),'utf8'),/stale|head changed|conflict|base advanced/);
+    assert.equal(receipt.candidate_diagnostics.candidate,kind==='conflict'?null:candidate);
+    if(kind==='parents')assert.deepEqual(receipt.candidate_diagnostics.actual_parents,[sha('e'),head]);
+    else {
+      assert.equal(receipt.candidate_diagnostics.reason,{head:'head-changed',conflict:'conflict',base:'base-advanced'}[kind]);
+      assert.ok(receipt.candidate_diagnostics.observed_at);
+    }
+    assert.deepEqual(JSON.parse(fs.readFileSync(path.join(directory,'remaining-refs.json'))),[]);
+    assert.match(fs.readFileSync(path.join(directory,'summary'),'utf8'),/exact current main|head changed|conflict|base advanced/);
   } finally {fs.rmSync(directory,{recursive:true,force:true});}
  }
 });
@@ -161,7 +167,7 @@ test('actual final entry point cleans only its owned ref and retains successful 
   }
 });
 
-test('actual fallback prepare cleans its confirmed ref when receipt notification is denied',()=>{
+test('actual owned prepare skips preview polling and cleans its ref when notification is denied',()=>{
   const directory=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-prepare-notify-cleanup-'));
   const sha=c=>c.repeat(40),head=sha('a'),base=sha('b'),candidate=sha('c'),owned=sha('e');
   fs.mkdirSync(path.join(directory,'.github'));
@@ -183,9 +189,10 @@ test('actual fallback prepare cleans its confirmed ref when receipt notification
     '/git/trees/combined':{truncated:false,tree:[{path:'src/a.js',sha:'blob',mode:'100644',type:'blob'}]}
   };
   fs.writeFileSync(path.join(directory,'mock.mjs'),capacityShim+`import fs from 'node:fs';const routes=${JSON.stringify(routes)},refs=new Map();
-    const originalSetTimeout=globalThis.setTimeout;globalThis.setTimeout=(fn,ms,...args)=>originalSetTimeout(fn,ms===2000?0:ms,...args);
+    const originalSetTimeout=globalThis.setTimeout;globalThis.setTimeout=(fn,ms,...args)=>{if(ms===2000)throw Error('Unexpected candidate polling sleep');return originalSetTimeout(fn,ms,...args);};
     globalThis.fetch=async(url,options)=>{
       const route=new URL(url).pathname.replace('/repos/owner/repo',''),body=options.body?JSON.parse(options.body):null;
+      if(route==='/git/commits/${candidate}')throw Error('Automatic preview must not be read');
       if(options.method==='PUT')throw Error('No PR merge authorized');
       if(route==='/git/refs'&&options.method==='POST'){refs.set(body.ref.replace('refs/heads/',''),body.sha);return Response.json({ref:body.ref},{status:201});}
       if(route==='/merges'&&options.method==='POST'){if(body.base==='main'||body.base==='engineering/test')throw Error('Protected branch update');refs.set(body.base,'${owned}');return Response.json({sha:'${owned}'},{status:201});}
@@ -197,7 +204,7 @@ test('actual fallback prepare cleans its confirmed ref when receipt notification
   try {
     const result=spawnSync(process.execPath,['--import',path.join(directory,'mock.mjs'),path.join(root,'scripts/run-worker-merge.mjs')],{
       cwd:directory,encoding:'utf8',env:{...process.env,GITHUB_ACTIONS:'false',GH_TOKEN:'synthetic-token',GITHUB_REPOSITORY:'owner/repo',GITHUB_REF:'refs/heads/main',GITHUB_RUN_ID:'1234',
-        GITHUB_EVENT_PATH:path.join(directory,'event.json'),GITHUB_OUTPUT:path.join(directory,'outputs'),GITHUB_STEP_SUMMARY:path.join(directory,'summary'),MERGE_PHASE:'prepare',PREPARE_FALLBACK:'true'}});
+        GITHUB_EVENT_PATH:path.join(directory,'event.json'),GITHUB_OUTPUT:path.join(directory,'outputs'),GITHUB_STEP_SUMMARY:path.join(directory,'summary'),MERGE_PHASE:'prepare'}});
     const receipt=JSON.parse(fs.readFileSync(path.join(directory,'merge-result.json')));
     assert.notEqual(result.status,0);assert.match(result.stderr,/POST.*HTTP 403/);
     assert.equal(receipt.accepted,false);assert.equal(receipt.status,'testing');assert.equal(receipt.tested_candidate,owned);

@@ -151,22 +151,17 @@ See [MERGE_QUEUE_CLIENT.md](MERGE_QUEUE_CLIENT.md) for direct dispatch, ordinary
 GitHub CLI observation, uncertain submissions, safe retries and explicit local
 workspace release. There is no custom merge-registration or observation client.
 
-Preparation refreshes GitHub's asynchronous candidate immediately after eligibility
-checks and verifies its parents before fetching complete trees. A stale or unavailable
-candidate is polled at most six times, with two-second waits and a 30-second polling
-deadline (in-flight API calls retain their existing timeout). A successful wait repeats
-authority validation. Changes to the reviewed head, PR scope, issue contract or
-ownership fail; actual main/PR-base advances require renewed preflight and evidence
-vintage validation. Rejections retain expected/actual commit IDs, observation time
-and attempt count. Worker commands and branch ownership do not change; no automatic
-rebases or conflict resolutions occur. This reduces stale-preview retries, not the
-need to validate a genuinely changed integration base. Independent PR checks remain
-parallel; each admitted merge run holds the native concurrency slot through its
-candidate tests and final merge. If the automatic preview stays stale, trusted
-preparation creates an owned disposable `worldatlas-integration/pr-N-REQUEST-RUN`
-branch at the exact main SHA and asks GitHub to merge the exact reviewed SHA there.
-It validates the resulting parents and reviewed tree before tests. This never edits
-main or worker branches and executes no candidate code with write credentials.
+After eligibility checks, trusted preparation creates an owned disposable
+`worldatlas-integration/pr-N-REQUEST-RUN` branch at the exact main SHA and asks
+GitHub to merge the exact reviewed SHA there. It verifies the returned commit
+identity, ordered parents and tree, then revalidates scope, checks, review, issue
+contract, head and both main/PR evidence bases before exposing the candidate.
+Head, scope or authority changes fail; base advances require renewed preflight
+and evidence vintage validation. It then compares complete authored/candidate
+trees for reviewed bytes before tests. This never edits main or worker branches,
+resolves conflicts automatically or executes candidate code with write credentials.
+Independent PR checks remain parallel; each admitted merge run holds the native
+concurrency slot through its candidate tests and final merge.
 The final job deletes only that exact owned ref at its expected SHA, including on
 test/merge rejection. Failed cleanup is recorded for operator inspection. Failed preparation notification
 also attempts exact-owned cleanup; an unconfirmed ref creation records its possible

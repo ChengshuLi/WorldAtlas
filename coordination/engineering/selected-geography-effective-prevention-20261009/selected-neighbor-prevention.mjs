@@ -887,7 +887,11 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
     const owner=reconcile(id,originals);
     return {id,target_id:owner.id,pixelIndex:owner.pixelIndex,geometry:feature.geometry};});
   const coverageFeatures=selected.map(target=>({id:target.target_id??target.id,source_id:target.id,pixelIndex:target.pixelIndex,geometry:target.coverage_geometry}));
-  const exclusions=selected.flatMap(target=>(target.territorial_exclusions??[]).map(geometry=>({id:target.target_id??target.id,pixelIndex:target.pixelIndex,geometry})));
+  let exclusions=selected.flatMap(target=>(target.territorial_exclusions??[]).map(geometry=>({id:target.target_id??target.id,pixelIndex:target.pixelIndex,geometry})));
+  // Qualification requires coverage; discard only whole exclusions proven
+  // disjoint from every complete coverage part. Keep diagnostic reasons intact.
+  if(!diagnostic)exclusions=exclusions.filter(feature=>coordinateBounds(feature.geometry)
+   .some(part=>bounds.some(box=>intersects(part,box))));
   const blocks=new Map();
   for(const row of proposed.rows)if(row.runs.some(run=>selectedOwners.has(run[2]))){
    const block=Math.floor(row.y/4096);const list=blocks.get(block)??[];list.push(row);blocks.set(block,list);
@@ -933,13 +937,21 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
       return {id:t.target_id??t.id,source_id:t.id,pixelIndex:t.pixelIndex,geometry};
      });
      if(features.length===0){classes.push({kind,empty:true});continue;}
-     const reserve=[...sourceFeatures,...features,...exclusions].reduce((n,f)=>n
-      +validateWitnessGeometry(f.geometry,{latitudes,rowStart,rowEnd}).scratch_bytes,0)*2;
+     classes.push({kind,group:coverageFeatureGroups.length});coverageFeatureGroups.push(features);
+    }
+   if(coverageFeatureGroups.length){
+    // Shared scans need one statistics traversal, while each retained class
+    // result keeps its complete existing reservation for the whole block.
+    const sharedReserve=[...sourceFeatures,...exclusions].reduce((n,f)=>n
+     +validateWitnessGeometry(f.geometry,{latitudes,rowStart,rowEnd}).scratch_bytes,0);
+    for(const features of coverageFeatureGroups){
+     const reserve=(sharedReserve+features.reduce((n,f)=>n
+      +validateWitnessGeometry(f.geometry,{latitudes,rowStart,rowEnd}).scratch_bytes,0))*2;
      demand(Number.isSafeInteger(reserve)&&reader.used+reserve<=reader.phaseLimit,
       'Complete declared physical class scan exceeds allowance');
      reader.used+=reserve;classReserve+=reserve;
-     classes.push({kind,group:coverageFeatureGroups.length});coverageFeatureGroups.push(features);
     }
+   }
    // Empty rows here derive the permitted source/coverage domain, not a claim
    // about actual ownership. Actual current owner zero is enforced separately
    // by selectedAdditiveRows and the emitted native patch application.

@@ -39,12 +39,23 @@ function fixture() {
     mergeable: true, merge_commit_sha: candidate};
   const claim = {version: 1, active: true, worker_id: 'worker', claim_id: 'nonce', branch:pr.head.ref,
     expires_at: new Date(Date.now()+3600000).toISOString()};
-  const f = {repo, pr, issue, head, base, candidate, claim, writes: [], mainReads: 0,
+  const f = {repo, pr, issue, head, base, candidate, claim, writes: [], mainReads: 0, calls: [], refs: new Map(),
     checks: [{id:1, name:'scope',app:{id:1},status:'completed',conclusion:'success'}],
     authored: [{path:'src/a.js',sha:'blob-a',mode:'100644',type:'blob'}],
     integrated: [{path:'src/a.js',sha:'blob-a',mode:'100644',type:'blob'}]};
   f.api = async (route, method='GET', body) => {
     const p=route.split('?')[0].replace('/repos/'+repo, '');
+    f.calls.push({route,method,body});
+    if(p==='/git/refs'&&method==='POST'){f.refs.set(body.ref.replace('refs/heads/',''),body.sha);return {ref:body.ref};}
+    if(p==='/merges'&&method==='POST'){
+      assert.notEqual(body.base,'main');assert.notEqual(body.base,f.pr.head.ref);assert.equal(body.head,head);
+      if(f.pr.mergeable===false)throw Error('GitHub POST failed (HTTP 409)');
+      f.refs.set(body.base,candidate);return {sha:candidate};
+    }
+    if(/\/git\/refs?\/heads\/worldatlas-integration\//.test(p)){
+      const ref=p.split(/\/git\/refs?\/heads\//)[1];
+      if(method==='DELETE'){f.refs.delete(ref);return null;}return {object:{sha:f.refs.get(ref)}};
+    }
     if (method==='PUT') {f.writes.push(body);return {merged:true,sha:sha('f')};}
     if (p==='/pulls/2') return structuredClone(f.pr);
     if (p==='/issues/1') return structuredClone(f.issue);
@@ -61,7 +72,7 @@ function fixture() {
     throw Error('Unexpected API '+method+' '+route);
   };
   f.options = () => ({api:f.api,repo,number:2,expectedHead:head,policy:{version:1,mode:'enforce-new',activation_time:'2100-01-01T00:00:00Z'},
-    candidateSleep:async()=>{},
+    integrationRequestId:'owned-candidate-test-request',
     evidenceCheck:async()=>{f.evidenceReads=(f.evidenceReads??0)+1;if(f.staleReview)throw Error('Missing independent exact-head review');return {status:'legacy'};}});
   f.complete = extra => completeIntegration({...f.options(),integrationResult:'success',geographyResult:'success',testedBase:base,testedCandidate:candidate,
     geographyReportLoader:async()=>({version:1,method_id:'worldatlas-trusted-geography-check-v1',
@@ -95,7 +106,7 @@ test('conflicts and non-conflicting changes to reviewed bytes require interventi
   await assert.rejects(prepareIntegration(b.options()),/changes reviewed bytes/);assert.equal(b.writes.length,0);
 });
 test('stale merge object and truncated inventories fail closed', async () => {
-  const a=fixture();a.parentBase=sha('e');await assert.rejects(prepareIntegration(a.options()),/bounded refresh/);
+  const a=fixture();a.parentBase=sha('e');await assert.rejects(prepareIntegration(a.options()),/exact current main/);
   const b=fixture();b.truncated=true;await assert.rejects(prepareIntegration(b.options()),/Incomplete integration tree/);
 });
 test('stale head, review or issue scope prohibit integration', async () => {
@@ -251,8 +262,6 @@ test('ordinary prepare never discovers author computation and skipped final work
   }
 });
 
-// Responses change independently, just as the asynchronously generated GitHub
-// merge candidate can lag unchanged reviewed PR metadata.
 function sequencePR(f, update) {
   const api=f.api; let reads=0;
   f.api=async(route,...rest)=>{
@@ -261,112 +270,68 @@ function sequencePR(f, update) {
     return api(route,...rest);
   };
 }
-test('late candidate fetch replaces initial stale metadata without branch writes',async()=>{
-  const f=fixture();sequencePR(f,(f,n)=>{f.pr.merge_commit_sha=n===1?sha('e'):f.candidate;});
-  const result=await prepareIntegration(f.options());
-  assert.equal(result.candidate,f.candidate);assert.equal(result.candidate_refresh_attempts,1);
-  assert.equal(f.writes.length,0);
-});
-test('stale parents and unavailable candidates converge with revalidated authority',async()=>{
-  for(const kind of ['stale','unavailable']) {
-    const f=fixture();sequencePR(f,(f,n)=>{
-      f.parentBase=n<4?sha('e'):f.base;
-      f.pr.merge_commit_sha=kind==='unavailable'&&n<4?null:f.candidate;
-    });
+test('owned preparation never reads an automatic preview or waits and uses two authority passes',async()=>{
+  for(const preview of [null,sha('d'),sha('c')]) {
+    const f=fixture();f.pr.merge_commit_sha=preview;
     const result=await prepareIntegration(f.options());
-    assert.equal(result.candidate_refresh_attempts,3);assert.equal(f.evidenceReads,2);
-    assert.equal(f.writes.length,0);
+    assert.equal(result.candidate,f.candidate);assert.equal(f.evidenceReads,2);
+    assert.equal(f.calls.length,18,'Two six-read authority passes, three owned creation calls and three tree reads');
+    assert.equal(f.calls.filter(row=>row.route.endsWith('/pulls/2')).length,2);
+    assert.equal(f.mainReads,2);assert.equal(f.calls.filter(row=>row.method==='POST').length,2);
+    assert.equal(f.calls.filter(row=>row.route.endsWith('/git/commits/'+f.candidate)).length,1);
+    assert(!f.calls.some(row=>row.route.endsWith('/git/commits/'+sha('d'))));
+    assert.equal(f.writes.length,0);assert.equal(f.refs.get(result.candidate_ref),f.candidate);
+    assert(!('candidate_refresh_attempts' in result));
   }
+  const source=fs.readFileSync(new URL('../scripts/merge-integration.mjs',import.meta.url),'utf8');
+  assert.doesNotMatch(source,/currentCandidate|candidateSleep|candidateNow|setTimeout/);
 });
-test('permanently stale candidates are bounded and retain exact IDs before tree work',async()=>{
-  const f=fixture();f.parentBase=sha('e');let prReads=0;
-  const api=f.api;f.api=async(route,...rest)=>{if(route.endsWith('/pulls/2'))prReads++;if(route.includes('/git/trees/'))throw Error('Tree fetched before parents passed');return api(route,...rest);};
-  await assert.rejects(prepareIntegration(f.options()),error=>{
-    assert.match(error.message,/bounded refresh/);
-    assert.equal(error.candidateDiagnostics.attempt,6);
-    assert.equal(error.candidateDiagnostics.expected_base,f.base);
-    assert.equal(error.candidateDiagnostics.expected_head,f.head);
-    assert.equal(error.candidateDiagnostics.candidate,f.candidate);
-    assert.deepEqual(error.candidateDiagnostics.actual_parents,[sha('e'),f.head]);return true;
-  });assert.equal(prReads,7);assert.equal(f.writes.length,0);
-});
-test('candidate polling stops at its deadline even before exhausting attempts',async()=>{
-  const f=fixture();f.pr.merge_commit_sha=null;let clock=0;
-  await assert.rejects(prepareIntegration({...f.options(),candidateNow:()=>clock,candidateSleep:async()=>{clock+=30000;}}),error=>{
-    assert.equal(error.candidateDiagnostics.attempt,2);assert.equal(error.candidateDiagnostics.reason,'candidate-unavailable');return true;
-  });
-});
-test('head/body changes and conflicts during refresh fail without integration or writes',async()=>{
-  for(const field of ['head','body','conflict']) {
-    const f=fixture();sequencePR(f,(f,n)=>{
-      if(n===1)f.pr.merge_commit_sha=null;
-      if(n===3) {if(field==='head')f.pr.head.sha=sha('e');else if(field==='body')f.pr.body='Refs #1';else f.pr.mergeable=false;}
+test('owned preparation rechecks every mutable PR and issue authority before trees and cleans rejection',async()=>{
+  for(const change of ['head','body','title','ref','repo','inventory','scope','checks','status','review','issue','main','pr-base','merged']) {
+    const f=isolatedFixture();sequencePR(f,(f,n)=>{
+      if(n!==2)return;
+      if(change==='head')f.pr.head.sha=sha('d');
+      if(change==='body')f.pr.body='Refs #1';
+      if(change==='title')f.pr.title='Changed title';
+      if(change==='ref')f.pr.head.ref='engineering/other';
+      if(change==='repo')f.pr.head.repo.full_name='other/repo';
+      if(change==='inventory')f.pr.changed_files=2;
+      if(change==='scope')f.issue.state='closed';
+      if(change==='checks')f.checks[0].conclusion='failure';
+      if(change==='status')f.failStatusOnRead=2;
+      if(change==='review')f.staleReview=true;
+      if(change==='issue')f.issue.body=f.issue.body.replace('code','changed');
+      if(change==='main')f.base=sha('d');
+      if(change==='pr-base')f.pr.base.sha=sha('d');
+      if(change==='merged'){f.pr.merged=true;f.pr.merge_commit_sha=sha('f');}
     });
     await assert.rejects(prepareIntegration(f.options()),error=>{
-      assert.match(error.message,/head changed|scope\/body changed|conflict/);
-      assert.equal(error.candidateDiagnostics.expected_head,f.head);
-      assert.equal(error.candidateDiagnostics.observed_head,field==='head'?sha('e'):f.head);
-      assert.equal(error.candidateDiagnostics.reason,{head:'head-changed',body:'pr-scope-changed',conflict:'conflict'}[field]);
-      assert.equal(error.candidateDiagnostics.attempt,2);assert.ok(error.candidateDiagnostics.observed_at);return true;
-    });
-    assert.equal(f.treeReads??0,0);assert.equal(f.writes.length,0);
-  }
-});
-test('main and evidence vintage advances are not silently adopted while refreshing',async()=>{
-  for(const change of ['main','pr-base']) {
-    const f=fixture();sequencePR(f,(f,n)=>{if(n===2){if(change==='main')f.base=sha('e');else f.pr.base.sha=sha('e');}});
-    await assert.rejects(prepareIntegration(f.options()),error=>{
-      assert.match(error.message,/base advanced/);assert.equal(error.candidateDiagnostics.reason,'base-advanced');return true;
-    });assert.equal(f.treeReads??0,0);assert.equal(f.writes.length,0);
-  }
-});
-test('scope/check/review and issue authority is rechecked after waiting',async()=>{
-  for(const change of ['scope','checks','review','issue']) {
-    const f=fixture();sequencePR(f,(f,n)=>{
-      f.parentBase=n<3?sha('e'):f.base;
-      if(n===4) {
-        if(change==='scope')f.issue.state='closed';
-        if(change==='checks')f.checks[0].conclusion='failure';
-        if(change==='review')f.staleReview=true;
-        if(change==='issue')f.issue.body=f.issue.body.replace('code','different');
+      assert.match(error.message,/head changed|scope\/body changed|repository PRs|inventory|open GitHub issue|trusted scope|status|exact-head review|contract or ownership|base advanced|PR merged/);
+      if(change==='main'||change==='pr-base') {
+        assert.equal(error.candidateDiagnostics.expected_base,sha('b'));
+        assert.equal(error.candidateDiagnostics.reason,'base-advanced');
       }
+      if(change==='head') {
+        assert.equal(error.candidateDiagnostics.expected_head,f.head);
+        assert.equal(error.candidateDiagnostics.observed_head,sha('d'));
+        assert.equal(error.candidateDiagnostics.candidate,f.synthetic);
+      }
+      return true;
     });
-    await assert.rejects(prepareIntegration(f.options()),/open GitHub issue|trusted scope|exact-head review|contract or ownership/);
-    assert.equal(f.treeReads??0,0);assert.equal(f.writes.length,0);
+    assert.equal(f.treeReads??0,0,change);assert.equal(f.writes.length,0,change);assert.equal(f.refs.size,0,change);
+    assert.equal(f.operations.filter(row=>row.method==='DELETE').length,1,change);
   }
 });
-
-test('only candidate-object 404 is refreshable; access failures stop immediately',async()=>{
-  const f=fixture(),api=f.api;let commitReads=0;
-  f.api=async(route,...rest)=>{
-    if(route.endsWith('/git/commits/'+f.candidate)&&++commitReads===1)throw Error(`GitHub GET ${route} failed (HTTP 404)`);
-    return api(route,...rest);
-  };
-  assert.equal((await prepareIntegration(f.options())).candidate_refresh_attempts,2);
-  const g=fixture(),gapi=g.api;
-  g.api=async(route,...rest)=>{if(route.endsWith('/git/commits/'+g.candidate))throw Error('GitHub GET failed (HTTP 403)');return gapi(route,...rest);};
-  await assert.rejects(prepareIntegration(g.options()),/HTTP 403/);assert.equal(g.writes.length,0);
-});
-
-test('post-wait main advance retains old expected and new observed base diagnostics',async()=>{
-  const f=fixture();sequencePR(f,(f,n)=>{f.parentBase=n<3?sha('e'):f.base;if(n===4)f.base=sha('d');});
-  await assert.rejects(prepareIntegration(f.options()),error=>{
-    assert.match(error.message,/base advanced during refresh validation/);
-    assert.equal(error.candidateDiagnostics.expected_base,sha('b'));
-    assert.equal(error.candidateDiagnostics.observed_base,sha('d'));
-    assert.equal(error.candidateDiagnostics.reason,'base-advanced');return true;
-  });assert.equal(f.treeReads??0,0);assert.equal(f.writes.length,0);
-});
-
-test('post-convergence head change retains the new head in rejection diagnostics',async()=>{
-  const f=fixture();sequencePR(f,(f,n)=>{f.parentBase=n<3?sha('e'):f.base;if(n===4)f.pr.head.sha=sha('d');});
-  await assert.rejects(prepareIntegration(f.options()),error=>{
-    assert.match(error.message,/head changed/);
-    assert.equal(error.candidateDiagnostics.expected_head,f.head);
-    assert.equal(error.candidateDiagnostics.observed_head,sha('d'));
-    assert.equal(error.candidateDiagnostics.expected_base,sha('b'));
-    assert.equal(error.candidateDiagnostics.reason,'head-changed');assert.equal(error.candidateDiagnostics.attempt,2);return true;
-  });assert.equal(f.treeReads??0,0);assert.equal(f.writes.length,0);
+test('owned candidate object failures are not retried and clean only the known ref',async()=>{
+  for(const status of [404,403]) {
+    const f=isolatedFixture(),api=f.api;let reads=0;
+    f.api=async(route,...rest)=>{
+      if(route.endsWith('/git/commits/'+f.synthetic)){reads++;throw Error(`GitHub GET failed (HTTP ${status})`);}
+      return api(route,...rest);
+    };
+    await assert.rejects(prepareIntegration(f.options()),new RegExp('HTTP '+status));
+    assert.equal(reads,1);assert.equal(f.refs.size,0);assert.equal(f.writes.length,0);
+  }
 });
 
 function isolatedFixture() {
@@ -388,29 +353,29 @@ function isolatedFixture() {
       if(method==='DELETE') {if(f.deleteDenied)throw Error('GitHub DELETE failed (HTTP 403)');f.refs.delete(ref);return null;}
       return {object:{sha:f.refChanged?sha('f'):f.refs.get(ref)}};
     }
-    if(route.endsWith('/git/commits/'+f.synthetic))return {sha:f.synthetic,tree:{sha:'integrated'},parents:[{sha:f.wrongSyntheticParent?sha('d'):f.base},{sha:f.head}]};
+    if(route.endsWith('/git/commits/'+f.synthetic))return {sha:f.wrongSyntheticIdentity?sha('f'):f.synthetic,tree:f.missingSyntheticTree?undefined:{sha:'integrated'},parents:[{sha:f.wrongSyntheticParent?sha('d'):f.base},{sha:f.head}]};
     return api(route,method,body);
   };
-  const options=f.options;f.options=()=>({...options(),prepareFallback:true,integrationRequestId:'isolated-candidate-test-request'});
+  const options=f.options;f.options=()=>({...options(),integrationRequestId:'isolated-candidate-test-request'});
   return f;
 }
-test('persistent automatic lag falls back to exact owned candidate without editing authored branches',async()=>{
+test('owned preparation ignores stale automatic preview without editing authored branches',async()=>{
   const f=isolatedFixture();f.parentBase=sha('d');
   const result=await prepareIntegration(f.options());
-  assert.equal(result.candidate,f.synthetic);assert.equal(result.candidate_refresh_attempts,6);
+  assert.equal(result.candidate,f.synthetic);assert.equal(f.evidenceReads,2);
   assert.equal(f.refs.get(result.candidate_ref),f.synthetic);assert.equal(result.pr.head.sha,f.head);
   assert.equal(f.writes.length,0);
   assert.equal((await cleanupCandidate(f.options(),result.candidate_ref,f.synthetic)).status,'deleted');
   assert.equal(f.refs.size,0);
 });
 test('isolated conflict or wrong parents is rejected and only the owned ref is deleted',async()=>{
-  for(const field of ['mergeConflict','wrongSyntheticParent']) {
+  for(const field of ['mergeConflict','wrongSyntheticParent','wrongSyntheticIdentity','missingSyntheticTree']) {
     const f=isolatedFixture();f[field]=true;
-    await assert.rejects(createCandidate(f.options(),{pr:f.pr,base:f.base}),/conflict|exact current main/);
+    await assert.rejects(createCandidate(f.options(),{pr:f.pr,base:f.base}),/conflict|exact current main|identity or tree unavailable/);
     assert.equal(f.refs.size,0);assert.equal(f.writes.length,0);
   }
 });
-test('fallback retains reviewed-byte and post-wait authority guards and cleans rejected candidates',async()=>{
+test('owned preparation retains reviewed-byte and authority guards and cleans rejected candidates',async()=>{
   const f=isolatedFixture();f.parentBase=sha('d');f.integrated[0].sha='unreviewed';
   await assert.rejects(prepareIntegration(f.options()),/changes reviewed bytes/);
   assert.equal(f.refs.size,0);assert.equal(f.writes.length,0);
@@ -468,6 +433,25 @@ test('unconfirmed ref creation identifies the resource without deleting a possib
     assert.match(error.message,/HTTP 403/);assert.equal(error.candidateCleanup.status,'creation-unconfirmed');
     assert.match(error.candidateCleanup.reference,/^worldatlas-integration\/pr-2-/);return true;
   });assert.equal(f.operations.some(row=>row.method==='DELETE'),false);assert.equal(f.writes.length,0);
+});
+
+test('lost owned creation or merge responses retain possible resources without deleting them',async()=>{
+  for(const phase of ['create','merge']) {
+    const f=isolatedFixture(),api=f.api;
+    f.api=async(route,method,...rest)=>{
+      const value=await api(route,method,...rest);
+      if(method==='POST'&&route.endsWith(phase==='create'?'/git/refs':'/merges'))throw Error('Lost response after remote write');
+      return value;
+    };
+    await assert.rejects(prepareIntegration(f.options()),error=>{
+      assert.match(error.message,/Lost response/);
+      assert.equal(error.candidateCleanup.status,phase==='create'?'creation-unconfirmed':'pending');
+      if(phase==='merge')assert.match(error.candidateCleanup.reason,/reference changed/);
+      return true;
+    });
+    assert.equal(f.refs.size,1);assert.equal([...f.refs.values()][0],phase==='create'?f.base:f.synthetic);
+    assert.equal(f.operations.some(row=>row.method==='DELETE'),false);assert.equal(f.writes.length,0);
+  }
 });
 
 function headCleanupFixture() {
@@ -633,28 +617,27 @@ test('known stale tested base or head rejects before expensive evidence/tree ins
 });
 
 
-test('candidate waiting rechecks changed scope/check/review/head after caching immutable evidence',async()=>{
+test('post-create revalidation rechecks changed authority while caching only immutable evidence',async()=>{
  for(const changed of ['scope','check','review','head']) {
-  const f=fixture(),origin=f.api,raw=Buffer.from('immutable evidence'),oid=createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex');
-  let candidates=0,blobs=0;
+  const f=isolatedFixture(),origin=f.api,raw=Buffer.from('immutable evidence'),oid=createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex');
+  let blobs=0;
   f.api=async(route,...rest)=>{
    if(route.endsWith('/git/blobs/'+oid)){blobs++;return {sha:oid,size:raw.length,encoding:'base64',content:raw.toString('base64')};}
    const value=await origin(route,...rest);
-   if(route.endsWith('/git/commits/'+f.candidate)&&++candidates===1)return {...value,parents:[{sha:sha('d')},{sha:f.head}]};
+   if(route.endsWith('/git/commits/'+f.synthetic)) {
+    if(changed==='scope')f.issue.state='closed';
+    if(changed==='check')f.checks[0].conclusion='failure';
+    if(changed==='review')f.staleReview=true;
+    if(changed==='head')f.pr.head.sha=sha('e');
+   }
    return value;
   };
   const options=f.options();options.evidenceCheck=async({api})=>{
    await api('/repos/owner/repo/git/blobs/'+oid);
    if(f.staleReview)throw Error('Missing independent exact-head review');return {status:'legacy'};
   };
-  options.candidateSleep=async()=>{
-   if(changed==='scope')f.issue.state='closed';
-   if(changed==='check')f.checks[0].conclusion='failure';
-   if(changed==='review')f.staleReview=true;
-   if(changed==='head')f.pr.head.sha=sha('e');
-  };
   await assert.rejects(prepareIntegration(options),changed==='scope'?/open GitHub issue/:changed==='check'?/trusted scope/:changed==='review'?/exact-head review/:/head changed/);
-  assert.equal(blobs,1);assert.equal(f.writes.length,0);
+  assert.equal(blobs,1);assert.equal(f.writes.length,0);assert.equal(f.refs.size,0);
  }
 });
 
