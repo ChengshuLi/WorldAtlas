@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "kind": "derived-public-completed-stock-native-operating-observation",
+  "code_commit": "b73fdbb1b0e243b773514ea46aaced496a63028f",
+  "input_commit": "bc351f012ef8019e047814015890bf0cc98b0fa0",
+  "exit_code": 0,
+  "elapsed_seconds": 1.3550267089999999,
+  "external_seconds": 1.61,
+  "external_darwin_peak_rss_bytes": 267862016,
+  "charged_phase_bytes": 321258001,
+  "allowance": {
+    "phaseBytes": 536870912,
+    "rssBytes": 536870912
+  },
+  "normalized_node_lifetime_peak_rss_bytes": 267812864,
+  "qualified_cells": 4671,
+  "source_relative_held": 5560,
+  "current_owner_zero": "UNRUN",
+  "new_accepted_cells": 0,
+  "fresh_normal_admission_passed": true,
+  "limits": [
+    "Original source/physical producers are not replayed.",
+    "Constructor qualification is not actual current-owner-zero or final selected-output acceptance."
+  ],
+  "derived_from_original_raw_observation": {
+    "bytes": 1429,
+    "sha256": "a40529fca5c691f6e040dc442cc11a4d2966999831c05f388c4467ee583c47b1",
+    "git_blob_oid": "c4caaec7945a9168e8b9543fc7fe9acdc90d7e5e"
+  },
+  "public_projection": "Original full observation is preserved locally. The private fresh-admission resource-observation object is omitted; actual grant, measured charge/peaks, success and all scientific limitations are unchanged."
+}
