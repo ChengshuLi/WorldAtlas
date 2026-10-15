@@ -765,7 +765,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
   const polygons=target.coverage_classes.flatMap(kind=>{const geometry=support.support[kind];coordinateBounds(geometry);
    return geometry.type==='Polygon'?[geometry.coordinates]:geometry.coordinates;});
   target.coverage_geometry={type:'MultiPolygon',coordinates:polygons};
-  coordinateBounds(target.base_geometry);coordinateBounds(target.coverage_geometry);
+  coordinateBounds(target.base_geometry);
   targets.set(target.id,target);
   const prior=resolvedTargets.get(ownerId);
   demand(!prior||prior.pixelIndex===target.pixelIndex&&prior.source_family===target.source_family
@@ -919,36 +919,39 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
      }finally{reader.used-=reserve;}
     }
    }
-   // Empty rows here derive the permitted source/coverage domain, not a claim
-   // about actual ownership. Actual current owner zero is enforced separately
-   // by selectedAdditiveRows and the emitted native patch application.
-   const allowed=deriveSourceTargetNativeDelta({targets:[...resolvedTargets.values()].filter(target=>target.source_family===family.source_id).map(({id,pixelIndex})=>({id,pixelIndex})),
-    sourceFeatures,coverageFeatures,territorialExclusions:exclusions,size:262166,latitudes,rowStart,rowEnd,
-    ...(diagnostic?{diagnosticRows:rows.map(row=>({y:row.y,runs:row.runs.filter(r=>selectedOwners.has(r[2]))})).filter(row=>row.runs.length)}:{}),
-    ownerRows:Array.from({length:rowEnd-rowStart},(_,i)=>({y:rowStart+i,complete_owner_intervals:[]}))});
-   const allowedRows=new Map(allowed.rows.map(row=>[row.y,row.runs]));
-   const decisionRows=diagnostic?new Map(allowed.diagnostic_rows.map(row=>[row.y,row.runs])):null;
-   const classAllowed=new Map();let classReserve=0;
+   // Class masks share the complete source/exclusion scan below, but retain
+   // independent member coverage and boundary adjudication. Keep the existing
+   // complete class reservations live until this block finishes.
+   const classes=[],coverageFeatureGroups=[];let classReserve=0;
    for(const kind of ['mapped_land_support','mapped_inland_water_support'])
     if(selected.some(t=>coverageRowsByOwner.has(t.pixelIndex))){
      if(selected.every(t=>t.coverage_classes.length===1&&t.coverage_classes[0]===kind)){
-      classAllowed.set(kind,allowedRows);continue;
+      classes.push({kind,combined:true});continue;
      }
      const features=selected.filter(t=>t.coverage_classes.includes(kind)).map(t=>{
       const geometry=physical.results.find(r=>r.target===t.id).support[kind];
-      coordinateBounds(geometry);return {id:t.target_id??t.id,source_id:t.id,pixelIndex:t.pixelIndex,geometry};
+      return {id:t.target_id??t.id,source_id:t.id,pixelIndex:t.pixelIndex,geometry};
      });
-     if(features.length===0){classAllowed.set(kind,new Map());continue;}
+     if(features.length===0){classes.push({kind,empty:true});continue;}
      const reserve=[...sourceFeatures,...features,...exclusions].reduce((n,f)=>n
       +validateWitnessGeometry(f.geometry,{latitudes,rowStart,rowEnd}).scratch_bytes,0)*2;
      demand(Number.isSafeInteger(reserve)&&reader.used+reserve<=reader.phaseLimit,
       'Complete declared physical class scan exceeds allowance');
      reader.used+=reserve;classReserve+=reserve;
-     const permitted=deriveSourceTargetNativeDelta({targets:[...resolvedTargets.values()].filter(t=>t.source_family===family.source_id).map(({id,pixelIndex})=>({id,pixelIndex})),
-      sourceFeatures,coverageFeatures:features,territorialExclusions:exclusions,size:262166,latitudes,rowStart,rowEnd,
-      ownerRows:Array.from({length:rowEnd-rowStart},(_,i)=>({y:rowStart+i,complete_owner_intervals:[]}))});
-     classAllowed.set(kind,new Map(permitted.rows.map(row=>[row.y,row.runs])));
+     classes.push({kind,group:coverageFeatureGroups.length});coverageFeatureGroups.push(features);
     }
+   // Empty rows here derive the permitted source/coverage domain, not a claim
+   // about actual ownership. Actual current owner zero is enforced separately
+   // by selectedAdditiveRows and the emitted native patch application.
+   const allowed=deriveSourceTargetNativeDelta({targets:[...resolvedTargets.values()].filter(target=>target.source_family===family.source_id).map(({id,pixelIndex})=>({id,pixelIndex})),
+    sourceFeatures,coverageFeatures,territorialExclusions:exclusions,size:262166,latitudes,rowStart,rowEnd,
+    ...(coverageFeatureGroups.length?{coverageFeatureGroups}:{}),
+    ...(diagnostic?{diagnosticRows:rows.map(row=>({y:row.y,runs:row.runs.filter(r=>selectedOwners.has(r[2]))})).filter(row=>row.runs.length)}:{}),
+    ownerRows:Array.from({length:rowEnd-rowStart},(_,i)=>({y:rowStart+i,complete_owner_intervals:[]}))});
+   const allowedRows=new Map(allowed.rows.map(row=>[row.y,row.runs]));
+   const decisionRows=diagnostic?new Map(allowed.diagnostic_rows.map(row=>[row.y,row.runs])):null;
+   const classAllowed=new Map(classes.map(item=>[item.kind,item.combined?allowedRows:item.empty?new Map()
+    :new Map(allowed.coverage_groups[item.group].rows.map(row=>[row.y,row.runs]))]));
    for(const row of rows)for(const run of row.runs)if(selectedOwners.has(run[2])){
     if(diagnostic){
      const cellReasons=[];
