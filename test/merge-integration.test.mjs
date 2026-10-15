@@ -193,6 +193,15 @@ test('only complete ordinary modified focused tests use the test-only lane', () 
       'scripts/native-ownership/chained-build-context.mjs','src/native-grid.js','test/unknown.test.mjs','docs/LOCAL_WORKSPACES.md'])
       assert.equal(integrationProfile('engineering/tests',[file,{filename,status:'modified'}],{},tree),'full');
   }
+  // These package-contract, asset-dependent and Python-helper tests are not
+  // executed by the exact focused Node roster, even with ordinary tree proof.
+  for(const filename of ['test/deployment-budget-scope.test.mjs','test/package-inputs.test.mjs',
+    'test/package-build.test.mjs','test/deployment-budget.test.mjs','test/pr-gates.test.mjs',
+    'test/canonical-compact-repack.test.mjs','test/source-cohort.test.py','test/physical-source-retention.test.py']) {
+    assert.ok(!files.some(file=>file.filename===filename));
+    const ordinary=new Map([[filename,{type:'blob',mode:'100644',sha:'1'.repeat(40)}]]);
+    assert.equal(integrationProfile('engineering/tests',[{filename,status:'modified'}],{},ordinary),'full');
+  }
   assert.equal(integrationProfile('engineering/tests',[],{},tree),'full');
 });
 
