@@ -1,0 +1,1154 @@
+{
+  "status": "ACTUAL_WHOLE_PHYSICAL_OBSERVATION_ACCEPTED_WITH_RETAINED_ISSUES_NO_CELL_CLEARANCE",
+  "reviewer": "/root/tanjung62_result_review_sol",
+  "configured_model": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "high",
+    "basis": "Explicit delegated configuration; runtime identity is not independently exposed."
+  },
+  "result_sha256": "aa9384e344c08e6c71644182f91b2c466a7d054aa5db2b78073362f01fe463ab",
+  "result_bytes": 2093799,
+  "scope": "Independent read-only actual physical002 result/receipt/query/witness review. Original83-check input review and unchanged common/runtime/code custody reused; no common-body rehash, producer rerun, scientific import or spatial/native/GIS predicate executed.",
+  "input_stage_commit": "9ea770d75388e89e11e766af41a8de6f1cd7db3a",
+  "accepted_code_commit": "10dae570272af35a5d682b2ce3c9b6db387153ea",
+  "executing_equivalent_code_commit": "f6068aaf855b26e746afba0c030f0f1dc62df0c7",
+  "targets": [
+    {
+      "owner": 23169,
+      "name": "Kaimana",
+      "target": "gb:IDN:ADM2:22746128B93097528927367",
+      "original_repair_land_candidates": 1985,
+      "original_relative_context": 2371,
+      "checked_queries": 126,
+      "source_ids": [
+        8,
+        1162,
+        1925,
+        2453,
+        3402,
+        4373,
+        4559,
+        5190,
+        5436,
+        5947,
+        6809,
+        10678,
+        13300,
+        13387,
+        15357,
+        17743,
+        17803,
+        18826,
+        21479,
+        23324,
+        25978,
+        27113,
+        28129,
+        29122,
+        31220,
+        33169,
+        33383,
+        36095,
+        36415,
+        37219,
+        39310,
+        39614,
+        44975,
+        46488,
+        48230,
+        48360,
+        49192,
+        50921,
+        51399,
+        53341,
+        53558,
+        53929,
+        55948,
+        56355,
+        56465,
+        56473,
+        58963,
+        60451,
+        62085,
+        62189,
+        62320,
+        64384,
+        65871,
+        66374,
+        66806,
+        68186,
+        73300,
+        79973,
+        82278,
+        87226,
+        87654,
+        88079,
+        91959,
+        92279,
+        93165,
+        98146,
+        98201,
+        98384,
+        99432,
+        103402,
+        104250,
+        104743,
+        105636,
+        105709,
+        106334,
+        106934,
+        111407,
+        112043,
+        112964,
+        113002,
+        113314,
+        114297,
+        119344,
+        120806,
+        121506,
+        127513,
+        129447,
+        130202,
+        131324,
+        131560,
+        132209,
+        132790,
+        133975,
+        138467,
+        143239,
+        143449,
+        151029,
+        151110,
+        153156,
+        153778,
+        153870,
+        154074,
+        154128,
+        154609,
+        155044,
+        155086,
+        155297,
+        155488,
+        156860,
+        157285,
+        163288,
+        164260,
+        164361,
+        165651,
+        165964,
+        170421,
+        171905,
+        172010,
+        172638,
+        173016,
+        173029,
+        173363,
+        173877,
+        178583,
+        179046,
+        183406
+      ],
+      "query_witness_counts": {
+        "complete-operation-pointset": 23,
+        "disjoint-after-explicit-predicate": 93,
+        "complete-source-record-reconstruction": 10
+      },
+      "query_offsets": [
+        0
+      ],
+      "issues": [
+        "contradictory_land_water_support",
+        "L2-outside-L1"
+      ],
+      "support_operands": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "empty_literal": false,
+          "coordinate_positions": 5651,
+          "direct_parts": 58,
+          "component_types": {
+            "MultiPolygon": 1
+          }
+        },
+        "mapped_inland_water_support": {
+          "type": "Polygon",
+          "empty_literal": false,
+          "coordinate_positions": 33,
+          "direct_parts": 1,
+          "component_types": {
+            "Polygon": 1
+          }
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "empty_literal": false,
+          "coordinate_positions": 5685,
+          "direct_parts": 205,
+          "component_types": {
+            "MultiPolygon": 1
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "empty_literal": true,
+          "coordinate_positions": 0,
+          "direct_parts": 0,
+          "component_types": {
+            "Polygon": 1
+          }
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "empty_literal": true,
+          "coordinate_positions": 0,
+          "direct_parts": 0,
+          "component_types": {
+            "Polygon": 1
+          }
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "empty_literal": false,
+          "coordinate_positions": 64,
+          "direct_parts": 31,
+          "component_types": {
+            "GeometryCollection": 1,
+            "Polygon": 1,
+            "LineString": 30
+          }
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "Polygon",
+            "empty_literal": false,
+            "coordinate_positions": 4,
+            "direct_parts": 1,
+            "component_types": {
+              "Polygon": 1
+            }
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "empty_literal": true,
+            "coordinate_positions": 0,
+            "direct_parts": 0,
+            "component_types": {
+              "GeometryCollection": 1
+            }
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "empty_literal": true,
+            "coordinate_positions": 0,
+            "direct_parts": 0,
+            "component_types": {
+              "GeometryCollection": 1
+            }
+          }
+        }
+      },
+      "stock_native_preparation": "Retain this complete target result, original/selected stage and all operands. Original land candidates may be prepared for actual native evaluation; no cell-level positive clearance established."
+    },
+    {
+      "owner": 23184,
+      "name": "Kepulauan Yapen",
+      "target": "gb:IDN:ADM2:22746128B96094928872069",
+      "original_repair_land_candidates": 2563,
+      "original_relative_context": 1159,
+      "checked_queries": 52,
+      "source_ids": [
+        8,
+        189,
+        1618,
+        3584,
+        4412,
+        6270,
+        7371,
+        10650,
+        11235,
+        16250,
+        19912,
+        21469,
+        25604,
+        26396,
+        28456,
+        28991,
+        34045,
+        34173,
+        36711,
+        39284,
+        40053,
+        46384,
+        47078,
+        50090,
+        50935,
+        54794,
+        58890,
+        62284,
+        62391,
+        62662,
+        79303,
+        81900,
+        82150,
+        82176,
+        84342,
+        88160,
+        93035,
+        99461,
+        103280,
+        103969,
+        104413,
+        105466,
+        110777,
+        111411,
+        114330,
+        119794,
+        120546,
+        121678,
+        121891,
+        131059,
+        143461,
+        163644
+      ],
+      "query_witness_counts": {
+        "disjoint-after-explicit-predicate": 20,
+        "complete-operation-pointset": 32
+      },
+      "query_offsets": [
+        0
+      ],
+      "issues": [],
+      "support_operands": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "empty_literal": false,
+          "coordinate_positions": 3390,
+          "direct_parts": 45,
+          "component_types": {
+            "MultiPolygon": 1
+          }
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "empty_literal": true,
+          "coordinate_positions": 0,
+          "direct_parts": 0,
+          "component_types": {
+            "GeometryCollection": 1
+          }
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "empty_literal": false,
+          "coordinate_positions": 3617,
+          "direct_parts": 351,
+          "component_types": {
+            "MultiPolygon": 1
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "empty_literal": true,
+          "coordinate_positions": 0,
+          "direct_parts": 0,
+          "component_types": {
+            "Polygon": 1
+          }
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "empty_literal": true,
+          "coordinate_positions": 0,
+          "direct_parts": 0,
+          "component_types": {
+            "Polygon": 1
+          }
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "empty_literal": true,
+          "coordinate_positions": 0,
+          "direct_parts": 0,
+          "component_types": {
+            "GeometryCollection": 1
+          }
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "empty_literal": true,
+            "coordinate_positions": 0,
+            "direct_parts": 0,
+            "component_types": {
+              "GeometryCollection": 1
+            }
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "empty_literal": true,
+            "coordinate_positions": 0,
+            "direct_parts": 0,
+            "component_types": {
+              "GeometryCollection": 1
+            }
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "empty_literal": true,
+            "coordinate_positions": 0,
+            "direct_parts": 0,
+            "component_types": {
+              "GeometryCollection": 1
+            }
+          }
+        }
+      },
+      "stock_native_preparation": "Retain this complete target result, original/selected stage and all operands. Original land candidates may be prepared for actual native evaluation; no cell-level positive clearance established."
+    },
+    {
+      "owner": 22906,
+      "name": "Teluk Wondama",
+      "target": "gb:IDN:ADM2:22746128B47515282892276",
+      "original_repair_land_candidates": 1840,
+      "original_relative_context": 1329,
+      "checked_queries": 68,
+      "source_ids": [
+        8,
+        1425,
+        1467,
+        2010,
+        5256,
+        7382,
+        8997,
+        11698,
+        15111,
+        17315,
+        22664,
+        25184,
+        25297,
+        28745,
+        30496,
+        30770,
+        32041,
+        33383,
+        34652,
+        38238,
+        40852,
+        41846,
+        48074,
+        48230,
+        48447,
+        48995,
+        49192,
+        52555,
+        55169,
+        56085,
+        56107,
+        57166,
+        58762,
+        60119,
+        63748,
+        63956,
+        64037,
+        64053,
+        64437,
+        65789,
+        66780,
+        72138,
+        73437,
+        79773,
+        86963,
+        98903,
+        104182,
+        104232,
+        104698,
+        105451,
+        105636,
+        106634,
+        110918,
+        112415,
+        112742,
+        113401,
+        119344,
+        122170,
+        128460,
+        130325,
+        130361,
+        132846,
+        133308,
+        141735,
+        152437,
+        153267,
+        155303,
+        170571
+      ],
+      "query_witness_counts": {
+        "complete-operation-pointset": 29,
+        "disjoint-after-explicit-predicate": 37,
+        "complete-source-record-reconstruction": 2
+      },
+      "query_offsets": [
+        0
+      ],
+      "issues": [],
+      "support_operands": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "empty_literal": false,
+          "coordinate_positions": 2412,
+          "direct_parts": 39,
+          "component_types": {
+            "MultiPolygon": 1
+          }
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "empty_literal": true,
+          "coordinate_positions": 0,
+          "direct_parts": 0,
+          "component_types": {
+            "GeometryCollection": 1
+          }
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "empty_literal": false,
+          "coordinate_positions": 2521,
+          "direct_parts": 178,
+          "component_types": {
+            "MultiPolygon": 1
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "empty_literal": true,
+          "coordinate_positions": 0,
+          "direct_parts": 0,
+          "component_types": {
+            "Polygon": 1
+          }
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "empty_literal": true,
+          "coordinate_positions": 0,
+          "direct_parts": 0,
+          "component_types": {
+            "Polygon": 1
+          }
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "empty_literal": true,
+          "coordinate_positions": 0,
+          "direct_parts": 0,
+          "component_types": {
+            "GeometryCollection": 1
+          }
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "empty_literal": true,
+            "coordinate_positions": 0,
+            "direct_parts": 0,
+            "component_types": {
+              "GeometryCollection": 1
+            }
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "empty_literal": true,
+            "coordinate_positions": 0,
+            "direct_parts": 0,
+            "component_types": {
+              "GeometryCollection": 1
+            }
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "empty_literal": true,
+            "coordinate_positions": 0,
+            "direct_parts": 0,
+            "component_types": {
+              "GeometryCollection": 1
+            }
+          }
+        }
+      },
+      "stock_native_preparation": "Retain this complete target result, original/selected stage and all operands. Original land candidates may be prepared for actual native evaluation; no cell-level positive clearance established."
+    },
+    {
+      "owner": 23090,
+      "name": "Fakfak",
+      "target": "gb:IDN:ADM2:22746128B79106566109504",
+      "original_repair_land_candidates": 1235,
+      "original_relative_context": 1788,
+      "checked_queries": 71,
+      "source_ids": [
+        8,
+        1656,
+        2207,
+        3461,
+        3469,
+        3910,
+        5094,
+        5159,
+        5446,
+        6809,
+        7311,
+        9022,
+        9125,
+        10028,
+        13387,
+        14420,
+        19763,
+        19975,
+        23324,
+        25782,
+        27113,
+        27392,
+        35318,
+        35354,
+        36089,
+        36095,
+        48360,
+        49545,
+        52649,
+        53341,
+        53957,
+        56473,
+        57374,
+        57414,
+        68186,
+        75923,
+        86075,
+        86702,
+        86780,
+        88130,
+        88414,
+        96861,
+        98785,
+        99447,
+        103402,
+        104743,
+        112625,
+        113116,
+        120526,
+        122004,
+        122145,
+        122407,
+        128764,
+        131459,
+        133356,
+        133372,
+        133640,
+        133975,
+        140729,
+        143899,
+        144620,
+        154404,
+        154589,
+        155118,
+        155333,
+        155488,
+        155594,
+        156236,
+        164932,
+        173029,
+        173197
+      ],
+      "query_witness_counts": {
+        "complete-operation-pointset": 13,
+        "disjoint-after-explicit-predicate": 47,
+        "complete-source-record-reconstruction": 11
+      },
+      "query_offsets": [
+        0
+      ],
+      "issues": [],
+      "support_operands": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "empty_literal": false,
+          "coordinate_positions": 2913,
+          "direct_parts": 52,
+          "component_types": {
+            "MultiPolygon": 1
+          }
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "empty_literal": true,
+          "coordinate_positions": 0,
+          "direct_parts": 0,
+          "component_types": {
+            "GeometryCollection": 1
+          }
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "empty_literal": false,
+          "coordinate_positions": 2845,
+          "direct_parts": 94,
+          "component_types": {
+            "MultiPolygon": 1
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "empty_literal": true,
+          "coordinate_positions": 0,
+          "direct_parts": 0,
+          "component_types": {
+            "Polygon": 1
+          }
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "empty_literal": true,
+          "coordinate_positions": 0,
+          "direct_parts": 0,
+          "component_types": {
+            "Polygon": 1
+          }
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "empty_literal": true,
+          "coordinate_positions": 0,
+          "direct_parts": 0,
+          "component_types": {
+            "GeometryCollection": 1
+          }
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "empty_literal": true,
+            "coordinate_positions": 0,
+            "direct_parts": 0,
+            "component_types": {
+              "GeometryCollection": 1
+            }
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "empty_literal": true,
+            "coordinate_positions": 0,
+            "direct_parts": 0,
+            "component_types": {
+              "GeometryCollection": 1
+            }
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "empty_literal": true,
+            "coordinate_positions": 0,
+            "direct_parts": 0,
+            "component_types": {
+              "GeometryCollection": 1
+            }
+          }
+        }
+      },
+      "stock_native_preparation": "Retain this complete target result, original/selected stage and all operands. Original land candidates may be prepared for actual native evaluation; no cell-level positive clearance established."
+    },
+    {
+      "owner": 22705,
+      "name": "Teluk Bintuni",
+      "target": "gb:IDN:ADM2:22746128B11480476919105",
+      "original_repair_land_candidates": 1217,
+      "original_relative_context": 943,
+      "checked_queries": 80,
+      "source_ids": [
+        8,
+        1178,
+        1467,
+        1656,
+        2615,
+        2867,
+        3075,
+        3469,
+        3493,
+        3643,
+        3834,
+        3910,
+        4097,
+        4786,
+        5159,
+        5231,
+        5446,
+        7055,
+        7097,
+        8997,
+        9022,
+        9763,
+        10028,
+        10359,
+        12943,
+        15360,
+        15480,
+        15807,
+        22724,
+        25184,
+        25782,
+        30770,
+        34126,
+        35354,
+        36089,
+        38280,
+        41846,
+        48074,
+        48995,
+        49545,
+        52555,
+        52649,
+        56085,
+        56107,
+        63956,
+        64037,
+        64437,
+        65789,
+        66780,
+        72138,
+        75923,
+        79379,
+        86075,
+        98785,
+        99447,
+        104182,
+        104232,
+        105028,
+        105451,
+        112625,
+        113116,
+        114386,
+        120422,
+        120526,
+        122145,
+        128146,
+        128764,
+        130325,
+        130361,
+        131459,
+        132573,
+        132846,
+        133308,
+        133640,
+        140214,
+        140729,
+        141735,
+        155594,
+        166026,
+        170571
+      ],
+      "query_witness_counts": {
+        "complete-operation-pointset": 22,
+        "disjoint-after-explicit-predicate": 54,
+        "complete-source-record-reconstruction": 4
+      },
+      "query_offsets": [
+        0
+      ],
+      "issues": [],
+      "support_operands": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "empty_literal": false,
+          "coordinate_positions": 5167,
+          "direct_parts": 61,
+          "component_types": {
+            "MultiPolygon": 1
+          }
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "empty_literal": true,
+          "coordinate_positions": 0,
+          "direct_parts": 0,
+          "component_types": {
+            "GeometryCollection": 1
+          }
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "empty_literal": false,
+          "coordinate_positions": 4974,
+          "direct_parts": 105,
+          "component_types": {
+            "MultiPolygon": 1
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "empty_literal": true,
+          "coordinate_positions": 0,
+          "direct_parts": 0,
+          "component_types": {
+            "Polygon": 1
+          }
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "empty_literal": true,
+          "coordinate_positions": 0,
+          "direct_parts": 0,
+          "component_types": {
+            "Polygon": 1
+          }
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "empty_literal": true,
+          "coordinate_positions": 0,
+          "direct_parts": 0,
+          "component_types": {
+            "GeometryCollection": 1
+          }
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "empty_literal": true,
+            "coordinate_positions": 0,
+            "direct_parts": 0,
+            "component_types": {
+              "GeometryCollection": 1
+            }
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "empty_literal": true,
+            "coordinate_positions": 0,
+            "direct_parts": 0,
+            "component_types": {
+              "GeometryCollection": 1
+            }
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "empty_literal": true,
+            "coordinate_positions": 0,
+            "direct_parts": 0,
+            "component_types": {
+              "GeometryCollection": 1
+            }
+          }
+        }
+      },
+      "stock_native_preparation": "Retain this complete target result, original/selected stage and all operands. Original land candidates may be prepared for actual native evaluation; no cell-level positive clearance established."
+    },
+    {
+      "owner": 22743,
+      "name": "Biak Numfor",
+      "target": "gb:IDN:ADM2:22746128B19254678251292",
+      "original_repair_land_candidates": 740,
+      "original_relative_context": 1308,
+      "checked_queries": 58,
+      "source_ids": [
+        8,
+        181,
+        677,
+        4098,
+        5914,
+        6321,
+        6546,
+        7742,
+        8328,
+        8502,
+        9315,
+        14948,
+        17620,
+        18983,
+        19666,
+        20409,
+        20693,
+        29701,
+        30952,
+        32569,
+        34364,
+        35134,
+        35175,
+        36891,
+        38592,
+        41264,
+        43342,
+        46700,
+        53610,
+        54230,
+        57130,
+        61962,
+        64714,
+        68309,
+        69057,
+        71562,
+        73023,
+        75290,
+        75698,
+        75737,
+        77545,
+        78459,
+        86512,
+        86652,
+        87513,
+        97710,
+        99329,
+        103805,
+        104700,
+        113021,
+        119767,
+        120374,
+        121769,
+        131609,
+        133061,
+        134308,
+        155845,
+        163094
+      ],
+      "query_witness_counts": {
+        "disjoint-after-explicit-predicate": 37,
+        "complete-operation-pointset": 19,
+        "complete-source-record-reconstruction": 2
+      },
+      "query_offsets": [
+        0
+      ],
+      "issues": [],
+      "support_operands": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "empty_literal": false,
+          "coordinate_positions": 1648,
+          "direct_parts": 36,
+          "component_types": {
+            "MultiPolygon": 1
+          }
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "empty_literal": true,
+          "coordinate_positions": 0,
+          "direct_parts": 0,
+          "component_types": {
+            "GeometryCollection": 1
+          }
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "empty_literal": false,
+          "coordinate_positions": 1746,
+          "direct_parts": 69,
+          "component_types": {
+            "MultiPolygon": 1
+          }
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "empty_literal": true,
+          "coordinate_positions": 0,
+          "direct_parts": 0,
+          "component_types": {
+            "Polygon": 1
+          }
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "empty_literal": true,
+          "coordinate_positions": 0,
+          "direct_parts": 0,
+          "component_types": {
+            "Polygon": 1
+          }
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "empty_literal": true,
+          "coordinate_positions": 0,
+          "direct_parts": 0,
+          "component_types": {
+            "GeometryCollection": 1
+          }
+        },
+        "hierarchy_disagreements": {
+          "L2-outside-L1": {
+            "type": "GeometryCollection",
+            "empty_literal": true,
+            "coordinate_positions": 0,
+            "direct_parts": 0,
+            "component_types": {
+              "GeometryCollection": 1
+            }
+          },
+          "L3-outside-L2": {
+            "type": "GeometryCollection",
+            "empty_literal": true,
+            "coordinate_positions": 0,
+            "direct_parts": 0,
+            "component_types": {
+              "GeometryCollection": 1
+            }
+          },
+          "L4-outside-L3": {
+            "type": "GeometryCollection",
+            "empty_literal": true,
+            "coordinate_positions": 0,
+            "direct_parts": 0,
+            "component_types": {
+              "GeometryCollection": 1
+            }
+          }
+        }
+      },
+      "stock_native_preparation": "Retain this complete target result, original/selected stage and all operands. Original land candidates may be prepared for actual native evaluation; no cell-level positive clearance established."
+    }
+  ],
+  "query_totals": {
+    "targets": 6,
+    "checked": 455,
+    "unknown": 0,
+    "periodic_nonzero": 0
+  },
+  "execution_observation": {
+    "numeric_exit": 0,
+    "external_elapsed_seconds": 5.586621291004121,
+    "Node_scientific_call_elapsed_seconds": 5.199463834,
+    "producer_elapsed_seconds": 5.006268790923059,
+    "producer_peak_rss_bytes": 280313856,
+    "external_time_l_peak_rss_bytes": 280985600,
+    "stock_declared_child_charge_bytes": 374078834,
+    "child_phase_rss_allowance_bytes": 671088640,
+    "separate_outer_allowance_bytes": 536870912,
+    "whole_output_product_bytes": 2217322,
+    "whole_output_reserve_bytes": 33554432,
+    "runtime_files": 387,
+    "runtime_bytes": 35019378,
+    "unit_note": "whole-target-support.maximum_rss_kib is a historical field name; Darwin raw ru_maxrss here is bytes, agrees with normalized child receipt280313856B, and must not be multiplied by1024.",
+    "limits": "Single captured successful observation; cooperative scientific checks and external direct-process measurements do not establish continuous aggregate process-tree memory containment or future-group performance."
+  },
+  "bootstrap_history": "001 numeric exit1 failed importing Shapely before scientific processing; empty stdout/no completed destination. Preserved failure, not a physical observation.002 uses configured venv supervisor; no production edit or environmental mutation is represented.",
+  "preparation_conclusion": "No blocker to honest stock native-input preparation for the9580 original land candidates using the full actual report. The5 issue-free targets contain7595 original land candidates, not7595 proven native positives. Kaimana1985 remains physically contested by complete contradiction and L2-outside-L1 witnesses; retain them and evaluate requested centres through actual stock native predicates.",
+  "required_remaining_work": [
+    "Retain all six complete target records, every source query/operand and immutable stage/report/method linkage. Kaimana contradiction1Polygon+30LineStrings and L2 polygon, every exterior, water and all empty operands remain verbatim.",
+    "Prepare exact original9580 land tuples with original owner/source identities and positive mapped-land hypothesis; keep8898 source-relative cells separate and unqualified. Preserve Kaimana cross-parent2 cells and all original labels/SIDs.",
+    "Actual stock native evaluation must determine positive class coverage, unique source/target and owner joins, boundary/ties, territorial operands and every physical witness contact. Generic physical observation/issue-free status/source flags cannot substitute.",
+    "Current-base owner-zero, component uniqueness, conservation, selected-reader acceptance and ordinary integration remain later actual checks. No repaired credit follows from this report."
+  ],
+  "scientific_blockers_to_positive_claims": [
+    "Kaimana has nonempty contradictory_land_water_support and L2-outside-L1 witnesses. No per-cell contact/clearance has been established.",
+    "All six have nonempty exterior geometry. Actual land-cell/exterior and boundary/tie contacts remain unknown without native evaluation."
+  ],
+  "findings": [],
+  "validation_summary": {
+    "result_and_binding_checks_passed": 80,
+    "checked_scope": "Whole raw output hashes/complete receipt, exact stage/config/consumed25/runtime387 linkage, six original target records, all455 query schemas/booleans/witness precedence/frames, literal full support geometry coordinates and exact issue witnesses, actual runtime/resource/history records.",
+    "unexecuted": "No independent reconstruction of the expected spatial query set, geometric truth, actual support or cell projection; query predicates are producer-reported checked observations under authenticated accepted code."
+  },
+  "limits": [
+    "All original2020 source/CRS84/licence declarations, open semantic review, territorial/framework limitations and historical failures remain. No source authenticity/legal/geographic clearance is newly granted.",
+    "Wondama retains hierarchy overlap0.619154/framework0.620845; issue-free physical operations do not certify administrative parentage, whole boundary or semantics.",
+    "Kaimana cross-parent source membership remains preserved and neither establishes territorial conflict nor clears it.",
+    "No native qualification, current-owner-zero proof, repair/scientific-final credit, authority, whole-source clearance, import or publication approval.",
+    "The complete actual receipt contains local runtime paths. Public-safe review omits those paths while whole raw evidence hashes retain custody."
+  ]
+}
