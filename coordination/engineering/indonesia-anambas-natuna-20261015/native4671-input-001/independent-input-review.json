@@ -1,0 +1,905 @@
+{
+  "version": 1,
+  "reviewer": "/root/native7904_preparation",
+  "status": "PASS_WITH_LIMITS",
+  "scope": "Distinct independent complete typed-input/source/owner/parent/interval/query-byte review; no native/source/GSHHG/physical replay or scientific module imported",
+  "canonical_inputs": {
+    "source-evidence.json": {
+      "bytes": 11106,
+      "sha256": "3e5c31d6335d6091d7c25ea8da8933d56aa0a8a00334e8a44ee89fa72eae076e",
+      "git_blob_oid": "c1d344267e53748a304034d04b372ffb488579af"
+    },
+    "candidate-native-patch.json": {
+      "bytes": 61259,
+      "sha256": "40d0886c3c0a2cca9ab2a043e614b2a55f544f5a13d2f7897c0b297724ddc63c",
+      "git_blob_oid": "3c8d5ae2d5b0cb1e7eddcdacc29f3f5cea73049d"
+    }
+  },
+  "check_count": 74,
+  "checks": [
+    {
+      "check": "Exact canonical typed source and patch descriptors",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Exact stock evidence top-level consumed operand roster",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Patch only original rows operand",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Unchanged accepted existing typed operand catalogue",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Unchanged accepted existing typed operand families",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Unchanged accepted existing typed operand owner_roster",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Unchanged accepted existing typed operand native_contract",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Unchanged accepted existing typed operand native_latitudes",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Unchanged accepted existing typed operand base_reference",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Shared exact Git path and body 7d68cf800811452540c70304da568d639fea8e94:coordination/engineering/indonesia-anambas-natuna-20261015/anambas-natuna-whole-original-stage-inputs.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Exactly two full original physical stages",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Local whole published body identity coordination/engineering/indonesia-anambas-natuna-20261015/physical-result-001/whole-target-support.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Physical report scope exactly original two targets",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Actual physical descriptor equals published seven-file checkpoint",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Local whole published body identity coordination/engineering/indonesia-anambas-natuna-20261015/physical-result-001/README.md",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Local whole published body identity coordination/engineering/indonesia-anambas-natuna-20261015/physical-result-001/independent-result-review.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Local whole published body identity coordination/engineering/indonesia-anambas-natuna-20261015/physical-result-001/original-publication-binding.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Local whole published body identity coordination/engineering/indonesia-anambas-natuna-20261015/physical-result-001/public-execution-observation.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Local whole published body identity coordination/engineering/indonesia-anambas-natuna-20261015/physical-result-001/scientific-phase-config.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Local whole published body identity coordination/engineering/indonesia-anambas-natuna-20261015/physical-result-001/time-l.log",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Shared exact Git path and body 2347ff09c3e07fb196422668c6b54e9504e1d860:scripts/qualify-source-cohort.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Exact accepted actual physical producer, not old substitute",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Shared exact Git path and body 2ec1f33cad4b02f2e9bc9e54072e65b5837257dc:coordination/engineering/indonesia-adm2-current-cell-20261014/source-investigation-v1/consumed-inputs/extraction/repair/block-031.json.gz",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Shared exact Git path and body 2ec1f33cad4b02f2e9bc9e54072e65b5837257dc:coordination/engineering/indonesia-adm2-current-cell-20261014/source-investigation-v1/consumed-inputs/extraction/repair/block-032.json.gz",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Shared exact Git path and body 2ec1f33cad4b02f2e9bc9e54072e65b5837257dc:coordination/engineering/indonesia-adm2-current-cell-20261014/source-investigation-v1/consumed-inputs/extraction/physical/block-031.json.gz",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Shared exact Git path and body 2ec1f33cad4b02f2e9bc9e54072e65b5837257dc:coordination/engineering/indonesia-adm2-current-cell-20261014/source-investigation-v1/consumed-inputs/extraction/physical/block-032.json.gz",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Entire original historical context retained",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Exactly original repair-land and physical-relative categories",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "anambas6619 original exact counts and SID/owner isolation",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "anambas6619 proposal intervals preserve original seven-column rows",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "natuna3612 original exact counts and SID/owner isolation",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "natuna3612 proposal intervals preserve original seven-column rows",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Candidate and held exact cell partition disjoint",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Every original land interval preserved without merge/clipping/new cells",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Complete proposed rows are canonical and nonoverlapping",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Targets have only actual stock source/identity/coverage operands, no hash salt or extra flags",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Shared exact Git path and body 5ab660cb68821e6b719f1b86819069ecac419ce1:coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IDN-ADM2-000.bin.gz",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Whole decoded identity 5ab660cb68821e6b719f1b86819069ecac419ce1:coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IDN-ADM2-000.bin.gz",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Full original ADM2 family of519, exact source CRS84 preserved",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Complete source family shape IDs unique",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "anambas6619 complete original source feature/ordinal and stage equality",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "anambas6619 selected base geometry and stock land operand unchanged",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "natuna3612 complete original source feature/ordinal and stage equality",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "natuna3612 selected base geometry and stock land operand unchanged",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Shared exact Git path and body 8c4199fd6455246b98a6fd4b7a6d0f708b9afc70:data/geography/part-10.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "anambas6619 unchanged whole selected feature/parent/metadata",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "natuna3612 unchanged whole selected feature/parent/metadata",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Shared exact Git path and body 5ab660cb68821e6b719f1b86819069ecac419ce1:coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Actual catalogue full family part descriptors and count",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Shared exact Git path and body 5ab660cb68821e6b719f1b86819069ecac419ce1:coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/owners.json.gz",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Whole decoded identity 5ab660cb68821e6b719f1b86819069ecac419ce1:coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/owners.json.gz",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Whole canonical owner roster49625 unique identities/order",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "anambas6619 original owner and parent exact",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "natuna3612 original owner and parent exact",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Shared exact Git path and body f7c358326d776398bc1cffe84df81eac7033091c:coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Whole decoded identity f7c358326d776398bc1cffe84df81eac7033091c:coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Complete source SID roster73567 unique/order",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "anambas6619 original SID full original-family ordinal/owner",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "natuna3612 original SID full original-family ordinal/owner",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Original parent SID36253 is ADM1 Riau Islands context, not legal certificate",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Shared exact Git path and body 5ab660cb68821e6b719f1b86819069ecac419ce1:coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Whole decoded identity 5ab660cb68821e6b719f1b86819069ecac419ce1:coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Whole normative native latitude table valid and contract bound",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "anambas6619 complete physical query roster",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "anambas6619 all retained original query semantics, booleans, precedence and pointsets complete",
+      "passed": true,
+      "detail": {
+        "disjoint-after-explicit-predicate": 72,
+        "complete-operation-pointset": 103,
+        "complete-source-record-reconstruction": 1
+      }
+    },
+    {
+      "check": "anambas6619 full seven support operands and hierarchy roster retained",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "anambas6619 nonempty land AND exterior retained; water/residual/hierarchy empty, not assumed blanket-clearance",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "natuna3612 complete physical query roster",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "natuna3612 all retained original query semantics, booleans, precedence and pointsets complete",
+      "passed": true,
+      "detail": {
+        "disjoint-after-explicit-predicate": 63,
+        "complete-operation-pointset": 42,
+        "complete-source-record-reconstruction": 11
+      }
+    },
+    {
+      "check": "natuna3612 full seven support operands and hierarchy roster retained",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "natuna3612 nonempty land AND exterior retained; water/residual/hierarchy empty, not assumed blanket-clearance",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Full292 checked original queries, no unknown label relaxation",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Honest unexecuted qualification/custody gates preserved README.md",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Honest unexecuted qualification/custody gates preserved honest-missing-inputs-and-gates.json",
+      "passed": true,
+      "detail": null
+    }
+  ],
+  "derived_candidate_cells": 4671,
+  "derived_relative_held": 5560,
+  "exact_patch_rows": 805,
+  "exact_original_land_spans": 1979,
+  "targets": [
+    {
+      "id": "gb:IDN:ADM2:22746128B99951880476592",
+      "owner": 23206,
+      "sid": 36412,
+      "ordinal": 152,
+      "land": 3031,
+      "held": 3588,
+      "short": "anambas6619",
+      "original_intervals": 2873,
+      "land_intervals": 1252,
+      "held_intervals": 1621,
+      "original_source_patterns": {
+        "repair:36253,36412:land": 2165,
+        "repair:36412:land": 866,
+        "physical:36253,36412:source-relative": 1921,
+        "physical:36412:source-relative": 1667
+      },
+      "physical_query_count": 176,
+      "physical_query_witness_counts": {
+        "disjoint-after-explicit-predicate": 72,
+        "complete-operation-pointset": 103,
+        "complete-source-record-reconstruction": 1
+      },
+      "complete_operation_geometry_types": {
+        "MultiPolygon": 40,
+        "Polygon": 63
+      },
+      "support_metadata": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "positions": 4047,
+          "polygons": 167,
+          "line_segments": 0,
+          "points": 0,
+          "sha256": "a675132560a52510c4775faa992a6d39c829318412085827dfaef5ea02cbc0d5"
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "positions": 0,
+          "polygons": 0,
+          "line_segments": 0,
+          "points": 0,
+          "sha256": "4fe7df6fe189137a5317d85787f190a2c75781cc8eee9f1c46433a2133a6d530"
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "positions": 4651,
+          "polygons": 329,
+          "line_segments": 0,
+          "points": 0,
+          "sha256": "82348294767a5c6edcc0d43f9c87efc08b819fd869a3873a31de258c75933c8c"
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "positions": 0,
+          "polygons": 0,
+          "line_segments": 0,
+          "points": 0,
+          "sha256": "d8b413ca7507013925c35460b30f60dae58308fcf1b28f2ed277779fd83ffd92"
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "positions": 0,
+          "polygons": 0,
+          "line_segments": 0,
+          "points": 0,
+          "sha256": "d8b413ca7507013925c35460b30f60dae58308fcf1b28f2ed277779fd83ffd92"
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "positions": 0,
+          "polygons": 0,
+          "line_segments": 0,
+          "points": 0,
+          "sha256": "4fe7df6fe189137a5317d85787f190a2c75781cc8eee9f1c46433a2133a6d530"
+        }
+      },
+      "hierarchy_metadata": {
+        "L2-outside-L1": {
+          "type": "GeometryCollection",
+          "positions": 0,
+          "polygons": 0,
+          "line_segments": 0,
+          "points": 0,
+          "sha256": "4fe7df6fe189137a5317d85787f190a2c75781cc8eee9f1c46433a2133a6d530"
+        },
+        "L3-outside-L2": {
+          "type": "GeometryCollection",
+          "positions": 0,
+          "polygons": 0,
+          "line_segments": 0,
+          "points": 0,
+          "sha256": "4fe7df6fe189137a5317d85787f190a2c75781cc8eee9f1c46433a2133a6d530"
+        },
+        "L4-outside-L3": {
+          "type": "GeometryCollection",
+          "positions": 0,
+          "polygons": 0,
+          "line_segments": 0,
+          "points": 0,
+          "sha256": "4fe7df6fe189137a5317d85787f190a2c75781cc8eee9f1c46433a2133a6d530"
+        }
+      }
+    },
+    {
+      "id": "gb:IDN:ADM2:22746128B6637644559706",
+      "owner": 23006,
+      "sid": 36623,
+      "ordinal": 363,
+      "land": 1640,
+      "held": 1972,
+      "short": "natuna3612",
+      "original_intervals": 1580,
+      "land_intervals": 727,
+      "held_intervals": 853,
+      "original_source_patterns": {
+        "repair:36623:land": 482,
+        "repair:36253,36623:land": 1158,
+        "physical:36623:source-relative": 680,
+        "physical:36253,36623:source-relative": 1292
+      },
+      "physical_query_count": 116,
+      "physical_query_witness_counts": {
+        "disjoint-after-explicit-predicate": 63,
+        "complete-operation-pointset": 42,
+        "complete-source-record-reconstruction": 11
+      },
+      "complete_operation_geometry_types": {
+        "MultiPolygon": 12,
+        "Polygon": 30
+      },
+      "support_metadata": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "positions": 2645,
+          "polygons": 79,
+          "line_segments": 0,
+          "points": 0,
+          "sha256": "0f74c728bfdae852273c04b4dcfcc8f9ce0a34d6336b4281f02b92dd54a9f858"
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "positions": 0,
+          "polygons": 0,
+          "line_segments": 0,
+          "points": 0,
+          "sha256": "4fe7df6fe189137a5317d85787f190a2c75781cc8eee9f1c46433a2133a6d530"
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "positions": 2985,
+          "polygons": 195,
+          "line_segments": 0,
+          "points": 0,
+          "sha256": "0433ec6d85ddfcf1379b4bef555de97098733106fc37390c8a57eb5cf71309c6"
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "positions": 0,
+          "polygons": 0,
+          "line_segments": 0,
+          "points": 0,
+          "sha256": "d8b413ca7507013925c35460b30f60dae58308fcf1b28f2ed277779fd83ffd92"
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "positions": 0,
+          "polygons": 0,
+          "line_segments": 0,
+          "points": 0,
+          "sha256": "d8b413ca7507013925c35460b30f60dae58308fcf1b28f2ed277779fd83ffd92"
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "positions": 0,
+          "polygons": 0,
+          "line_segments": 0,
+          "points": 0,
+          "sha256": "4fe7df6fe189137a5317d85787f190a2c75781cc8eee9f1c46433a2133a6d530"
+        }
+      },
+      "hierarchy_metadata": {
+        "L2-outside-L1": {
+          "type": "GeometryCollection",
+          "positions": 0,
+          "polygons": 0,
+          "line_segments": 0,
+          "points": 0,
+          "sha256": "4fe7df6fe189137a5317d85787f190a2c75781cc8eee9f1c46433a2133a6d530"
+        },
+        "L3-outside-L2": {
+          "type": "GeometryCollection",
+          "positions": 0,
+          "polygons": 0,
+          "line_segments": 0,
+          "points": 0,
+          "sha256": "4fe7df6fe189137a5317d85787f190a2c75781cc8eee9f1c46433a2133a6d530"
+        },
+        "L4-outside-L3": {
+          "type": "GeometryCollection",
+          "positions": 0,
+          "polygons": 0,
+          "line_segments": 0,
+          "points": 0,
+          "sha256": "4fe7df6fe189137a5317d85787f190a2c75781cc8eee9f1c46433a2133a6d530"
+        }
+      }
+    }
+  ],
+  "whole_input_custody": [
+    {
+      "commit": "7d68cf800811452540c70304da568d639fea8e94",
+      "path": "coordination/engineering/indonesia-anambas-natuna-20261015/anambas-natuna-whole-original-stage-inputs.json",
+      "git_blob_oid": "f335ce46d83885c050626288ec81d192eb76404f",
+      "bytes": 153434,
+      "sha256": "a9daf84f41ba1a4602b594eb8e4b1e4dee7f05f1bcfbeee347e1545d8162824c",
+      "exact_shared_git_path": true,
+      "exact_shared_git_blob": true,
+      "whole_local_body_checked": false
+    },
+    {
+      "commit": "593917b1bc5dcb68ea0ca58f6c338b86c47a99b9",
+      "path": "coordination/engineering/indonesia-anambas-natuna-20261015/physical-result-001/whole-target-support.json",
+      "git_blob_oid": "84f0f8aedfb0801afe5089d7c6c2132c168bbba9",
+      "bytes": 801734,
+      "sha256": "b1234cd5b320f4cc92feca4f1d59052c2b8171afe2d0516be8abdc72f01a82b5",
+      "exact_shared_git_path": false,
+      "exact_shared_git_blob": false,
+      "whole_local_body_checked": true
+    },
+    {
+      "commit": "593917b1bc5dcb68ea0ca58f6c338b86c47a99b9",
+      "path": "coordination/engineering/indonesia-anambas-natuna-20261015/physical-result-001/README.md",
+      "git_blob_oid": "ac838ef740b4cff47dbcb497d135fff5de49e26d",
+      "bytes": 3692,
+      "sha256": "1c87a2ce0d3ee855cd9837a17b205700cc06eec49e8d8eee2bc92028c1578e99",
+      "exact_shared_git_path": false,
+      "exact_shared_git_blob": false,
+      "whole_local_body_checked": true
+    },
+    {
+      "commit": "593917b1bc5dcb68ea0ca58f6c338b86c47a99b9",
+      "path": "coordination/engineering/indonesia-anambas-natuna-20261015/physical-result-001/independent-result-review.json",
+      "git_blob_oid": "6020e5e2ad69acc97b223fbbeda5476561fe2485",
+      "bytes": 16457,
+      "sha256": "42221e5d5ed1dcf7e719b6da50bc62560f5f3bc355d3bbf3c65b8cc0e0e6a442",
+      "exact_shared_git_path": false,
+      "exact_shared_git_blob": false,
+      "whole_local_body_checked": true
+    },
+    {
+      "commit": "593917b1bc5dcb68ea0ca58f6c338b86c47a99b9",
+      "path": "coordination/engineering/indonesia-anambas-natuna-20261015/physical-result-001/original-publication-binding.json",
+      "git_blob_oid": "8613fe097b7dea57c389a8c86ea93fa4a94b8510",
+      "bytes": 545,
+      "sha256": "6fe6ebfda5e0aa9e2d3d28ab20d8cebd138a2faf330c61cc421f38acf0686efe",
+      "exact_shared_git_path": false,
+      "exact_shared_git_blob": false,
+      "whole_local_body_checked": true
+    },
+    {
+      "commit": "593917b1bc5dcb68ea0ca58f6c338b86c47a99b9",
+      "path": "coordination/engineering/indonesia-anambas-natuna-20261015/physical-result-001/public-execution-observation.json",
+      "git_blob_oid": "e2562aea2e6b2f04eec5ebe2236ddf65f205fc41",
+      "bytes": 14039,
+      "sha256": "b1290bf6632d816737e0c1b4aa6be4d4d731608f2bc6edddf82ff2eb8e8dafbb",
+      "exact_shared_git_path": false,
+      "exact_shared_git_blob": false,
+      "whole_local_body_checked": true
+    },
+    {
+      "commit": "593917b1bc5dcb68ea0ca58f6c338b86c47a99b9",
+      "path": "coordination/engineering/indonesia-anambas-natuna-20261015/physical-result-001/scientific-phase-config.json",
+      "git_blob_oid": "a128c08737c9e501f27a4f627eb2b347e8ef65c7",
+      "bytes": 11067,
+      "sha256": "7df66fee3eb9af170589e32bde705c8d8872552e46c765a4962cf6feb9ddb37a",
+      "exact_shared_git_path": false,
+      "exact_shared_git_blob": false,
+      "whole_local_body_checked": true
+    },
+    {
+      "commit": "593917b1bc5dcb68ea0ca58f6c338b86c47a99b9",
+      "path": "coordination/engineering/indonesia-anambas-natuna-20261015/physical-result-001/time-l.log",
+      "git_blob_oid": "ecdb1e46b88e42158166c81029499fbb6ff53cbd",
+      "bytes": 777,
+      "sha256": "95e8716abb5400ed615e4f868d5825447ca361f487755021fb3c39265e7c4aa1",
+      "exact_shared_git_path": false,
+      "exact_shared_git_blob": false,
+      "whole_local_body_checked": true
+    },
+    {
+      "commit": "2347ff09c3e07fb196422668c6b54e9504e1d860",
+      "path": "scripts/qualify-source-cohort.py",
+      "git_blob_oid": "4dea98fd3d75a70327f1f1313619c44eb113971f",
+      "bytes": 48543,
+      "sha256": "58ef81739b264085b2997be7baa3df03ba6bb673f91a160176efd79b71fec081",
+      "exact_shared_git_path": true,
+      "exact_shared_git_blob": true,
+      "whole_local_body_checked": false
+    },
+    {
+      "commit": "2ec1f33cad4b02f2e9bc9e54072e65b5837257dc",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/source-investigation-v1/consumed-inputs/extraction/repair/block-031.json.gz",
+      "git_blob_oid": "12a6bad5bff24b19204b0e176339ce116150a055",
+      "bytes": 141173,
+      "sha256": "08df556a487bd24da8b8c25e0f02f71fc6ad0e4661cf7c00056e8b4f1f9de7f9",
+      "exact_shared_git_path": true,
+      "exact_shared_git_blob": true,
+      "whole_local_body_checked": false
+    },
+    {
+      "commit": "2ec1f33cad4b02f2e9bc9e54072e65b5837257dc",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/source-investigation-v1/consumed-inputs/extraction/repair/block-032.json.gz",
+      "git_blob_oid": "bbc4c7e3ea013c47918d8fa7a38be9c5accbc38d",
+      "bytes": 231217,
+      "sha256": "ff5a8e59b798f1cb61135369efadd8ad6a0eeafd9d40ed33764c7ebb12ae63a8",
+      "exact_shared_git_path": true,
+      "exact_shared_git_blob": true,
+      "whole_local_body_checked": false
+    },
+    {
+      "commit": "2ec1f33cad4b02f2e9bc9e54072e65b5837257dc",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/source-investigation-v1/consumed-inputs/extraction/physical/block-031.json.gz",
+      "git_blob_oid": "4c3a6609b36b20680b0b1e453b33f5182ea350ce",
+      "bytes": 109037,
+      "sha256": "4a36a26c565457a79a7079f71f028a31bb674dcdbf7b2e82d0ae647cbd827b47",
+      "exact_shared_git_path": true,
+      "exact_shared_git_blob": true,
+      "whole_local_body_checked": false
+    },
+    {
+      "commit": "2ec1f33cad4b02f2e9bc9e54072e65b5837257dc",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/source-investigation-v1/consumed-inputs/extraction/physical/block-032.json.gz",
+      "git_blob_oid": "0745ad217fe8625c89c936850e2aebfe582976d0",
+      "bytes": 198520,
+      "sha256": "d08e06fd93ba1fce7e63ef34e2222adc42a39c0b46796f4f2284755c607e8aa6",
+      "exact_shared_git_path": true,
+      "exact_shared_git_blob": true,
+      "whole_local_body_checked": false
+    },
+    {
+      "commit": "5ab660cb68821e6b719f1b86819069ecac419ce1",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IDN-ADM2-000.bin.gz",
+      "git_blob_oid": "d918c74989043677364ff43f9fbec3d1f0d3a3af",
+      "bytes": 3051391,
+      "sha256": "ef394916ba97454b5592e66eba1df67199731ce7d9636cc3968843801ae904a8",
+      "exact_shared_git_path": true,
+      "exact_shared_git_blob": true,
+      "whole_local_body_checked": false
+    },
+    {
+      "commit": "8c4199fd6455246b98a6fd4b7a6d0f708b9afc70",
+      "path": "data/geography/part-10.json",
+      "git_blob_oid": "84b4cf537b801c7f6d3840173c49b7e4293a139d",
+      "bytes": 5144571,
+      "sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2",
+      "exact_shared_git_path": true,
+      "exact_shared_git_blob": true,
+      "whole_local_body_checked": false
+    },
+    {
+      "commit": "5ab660cb68821e6b719f1b86819069ecac419ce1",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+      "git_blob_oid": "09afab19371f0814da61e79e5f310c5fb2405b6d",
+      "bytes": 403376,
+      "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+      "exact_shared_git_path": true,
+      "exact_shared_git_blob": true,
+      "whole_local_body_checked": false
+    },
+    {
+      "commit": "5ab660cb68821e6b719f1b86819069ecac419ce1",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/owners.json.gz",
+      "git_blob_oid": "9c44513df64995d417dd3832ae604c703e84a506",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "exact_shared_git_path": true,
+      "exact_shared_git_blob": true,
+      "whole_local_body_checked": false
+    },
+    {
+      "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz",
+      "git_blob_oid": "e6e380ec13cd4bcc1d24399a76bfa85ca5805b26",
+      "bytes": 1844315,
+      "sha256": "87f2d47e104b3af640351e747d8300d0068a1be23caab9e80558c3f8914eb4aa",
+      "exact_shared_git_path": true,
+      "exact_shared_git_blob": true,
+      "whole_local_body_checked": false
+    },
+    {
+      "commit": "5ab660cb68821e6b719f1b86819069ecac419ce1",
+      "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+      "git_blob_oid": "de6905e162dc031b1b93248fae91190c39c4ad53",
+      "bytes": 1851757,
+      "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+      "exact_shared_git_path": true,
+      "exact_shared_git_blob": true,
+      "whole_local_body_checked": false
+    }
+  ],
+  "missing_actual_pins": [
+    {
+      "commit": "593917b1bc5dcb68ea0ca58f6c338b86c47a99b9",
+      "path": "coordination/engineering/indonesia-anambas-natuna-20261015/physical-result-001/whole-target-support.json",
+      "git_blob_oid": "84f0f8aedfb0801afe5089d7c6c2132c168bbba9",
+      "bytes": 801734,
+      "sha256": "b1234cd5b320f4cc92feca4f1d59052c2b8171afe2d0516be8abdc72f01a82b5",
+      "exact_shared_git_path": false,
+      "exact_shared_git_blob": false,
+      "whole_local_body_checked": true
+    },
+    {
+      "commit": "593917b1bc5dcb68ea0ca58f6c338b86c47a99b9",
+      "path": "coordination/engineering/indonesia-anambas-natuna-20261015/physical-result-001/README.md",
+      "git_blob_oid": "ac838ef740b4cff47dbcb497d135fff5de49e26d",
+      "bytes": 3692,
+      "sha256": "1c87a2ce0d3ee855cd9837a17b205700cc06eec49e8d8eee2bc92028c1578e99",
+      "exact_shared_git_path": false,
+      "exact_shared_git_blob": false,
+      "whole_local_body_checked": true
+    },
+    {
+      "commit": "593917b1bc5dcb68ea0ca58f6c338b86c47a99b9",
+      "path": "coordination/engineering/indonesia-anambas-natuna-20261015/physical-result-001/independent-result-review.json",
+      "git_blob_oid": "6020e5e2ad69acc97b223fbbeda5476561fe2485",
+      "bytes": 16457,
+      "sha256": "42221e5d5ed1dcf7e719b6da50bc62560f5f3bc355d3bbf3c65b8cc0e0e6a442",
+      "exact_shared_git_path": false,
+      "exact_shared_git_blob": false,
+      "whole_local_body_checked": true
+    },
+    {
+      "commit": "593917b1bc5dcb68ea0ca58f6c338b86c47a99b9",
+      "path": "coordination/engineering/indonesia-anambas-natuna-20261015/physical-result-001/original-publication-binding.json",
+      "git_blob_oid": "8613fe097b7dea57c389a8c86ea93fa4a94b8510",
+      "bytes": 545,
+      "sha256": "6fe6ebfda5e0aa9e2d3d28ab20d8cebd138a2faf330c61cc421f38acf0686efe",
+      "exact_shared_git_path": false,
+      "exact_shared_git_blob": false,
+      "whole_local_body_checked": true
+    },
+    {
+      "commit": "593917b1bc5dcb68ea0ca58f6c338b86c47a99b9",
+      "path": "coordination/engineering/indonesia-anambas-natuna-20261015/physical-result-001/public-execution-observation.json",
+      "git_blob_oid": "e2562aea2e6b2f04eec5ebe2236ddf65f205fc41",
+      "bytes": 14039,
+      "sha256": "b1290bf6632d816737e0c1b4aa6be4d4d731608f2bc6edddf82ff2eb8e8dafbb",
+      "exact_shared_git_path": false,
+      "exact_shared_git_blob": false,
+      "whole_local_body_checked": true
+    },
+    {
+      "commit": "593917b1bc5dcb68ea0ca58f6c338b86c47a99b9",
+      "path": "coordination/engineering/indonesia-anambas-natuna-20261015/physical-result-001/scientific-phase-config.json",
+      "git_blob_oid": "a128c08737c9e501f27a4f627eb2b347e8ef65c7",
+      "bytes": 11067,
+      "sha256": "7df66fee3eb9af170589e32bde705c8d8872552e46c765a4962cf6feb9ddb37a",
+      "exact_shared_git_path": false,
+      "exact_shared_git_blob": false,
+      "whole_local_body_checked": true
+    },
+    {
+      "commit": "593917b1bc5dcb68ea0ca58f6c338b86c47a99b9",
+      "path": "coordination/engineering/indonesia-anambas-natuna-20261015/physical-result-001/time-l.log",
+      "git_blob_oid": "ecdb1e46b88e42158166c81029499fbb6ff53cbd",
+      "bytes": 777,
+      "sha256": "95e8716abb5400ed615e4f868d5825447ca361f487755021fb3c39265e7c4aa1",
+      "exact_shared_git_path": false,
+      "exact_shared_git_blob": false,
+      "whole_local_body_checked": true
+    },
+    {
+      "proposed_local_input": "source-evidence.json",
+      "bytes": 11106,
+      "sha256": "3e5c31d6335d6091d7c25ea8da8933d56aa0a8a00334e8a44ee89fa72eae076e",
+      "git_blob_oid": "c1d344267e53748a304034d04b372ffb488579af",
+      "immutable_commit": null,
+      "immutable_repository_path": null,
+      "reason": "Proposed exact source/patch not yet published; no locator invented"
+    },
+    {
+      "proposed_local_input": "candidate-native-patch.json",
+      "bytes": 61259,
+      "sha256": "40d0886c3c0a2cca9ab2a043e614b2a55f544f5a13d2f7897c0b297724ddc63c",
+      "git_blob_oid": "3c8d5ae2d5b0cb1e7eddcdacc29f3f5cea73049d",
+      "immutable_commit": null,
+      "immutable_repository_path": null,
+      "reason": "Proposed exact source/patch not yet published; no locator invented"
+    }
+  ],
+  "findings": [],
+  "blocking_scientific_input_defects": [],
+  "execution_readiness": "NOT EXECUTABLE: original physical published-path custody and actual source/patch publication plus resource/config/code/admission remain required",
+  "source_relative_limits": [
+    "Original whole family source CRS84 and selected geometry/parent records are preserved; this establishes identity, not maritime/legal/territorial certification.",
+    "Issue-free original physical result still has nonempty exterior. Stock native constructor must actually prove every requested centre in land, outside water/exterior, away from ties and all witnesses with unique original source coverage; none executed here.",
+    "Original source dates/reuse and actual physical operating/publication limits remain; existing review57 and preparer2024 do not substitute for this distinct review or future actual native result.",
+    "All5560 relatives held; no source class promotion, authority/current-owner-zero/conservation/acceptance credit or frozen11622 change.",
+    "Review reads immutable metadata and exact original intervals only; no geometry predicates, native scanner, scientific helper import, acquisition or publication."
+  ]
+}

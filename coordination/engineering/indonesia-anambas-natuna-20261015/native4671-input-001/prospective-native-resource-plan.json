@@ -1,0 +1,524 @@
+{
+  "version": 1,
+  "worker": "/root/native7904_preparation",
+  "kind": "metadata-only-complete-prospective-4671-native-authority-plan",
+  "requested_cells": 4671,
+  "relative_held": 5560,
+  "source_evidence": {
+    "bytes": 11106,
+    "sha256": "3e5c31d6335d6091d7c25ea8da8933d56aa0a8a00334e8a44ee89fa72eae076e",
+    "git_blob_oid": "c1d344267e53748a304034d04b372ffb488579af"
+  },
+  "native_patch": {
+    "bytes": 61259,
+    "sha256": "40d0886c3c0a2cca9ab2a043e614b2a55f544f5a13d2f7897c0b297724ddc63c",
+    "git_blob_oid": "3c8d5ae2d5b0cb1e7eddcdacc29f3f5cea73049d"
+  },
+  "independent_input_review": {
+    "bytes": 34875,
+    "sha256": "1678df3d35d82f940ec544e2de5f22d6f3f7a62007774d03b637cd2fd7fd0ac2",
+    "git_blob_oid": "194a66546a5f4df529a15d46924d7b963e7efca3"
+  },
+  "complete_family_features": 519,
+  "bbox_possible_complete_source_features": [
+    "22746128B99951880476592",
+    "22746128B6637644559706"
+  ],
+  "accepted_code_commit": "b73fdbb1b0e243b773514ea46aaced496a63028f",
+  "accepted_code_modules": 12,
+  "accepted_code_bytes": 532527,
+  "stock_reader": {
+    "runtime": 121304480,
+    "output": 4194304,
+    "metadata_including_outer_pair_and_config": 8465069,
+    "encoded": 9046123,
+    "decoded": 24196415,
+    "full_6x_parse": 154055202,
+    "total": 321261593
+  },
+  "whole_consumed_input_descriptors": [
+    {
+      "commit": "5ab660cb68821e6b719f1b86819069ecac419ce1",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+      "mode": "100644",
+      "git_blob_oid": "09afab19371f0814da61e79e5f310c5fb2405b6d",
+      "bytes": 403376,
+      "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9"
+    },
+    {
+      "commit": "7d68cf800811452540c70304da568d639fea8e94",
+      "path": "coordination/engineering/indonesia-anambas-natuna-20261015/anambas-natuna-whole-original-stage-inputs.json",
+      "mode": "100644",
+      "git_blob_oid": "f335ce46d83885c050626288ec81d192eb76404f",
+      "bytes": 153434,
+      "sha256": "a9daf84f41ba1a4602b594eb8e4b1e4dee7f05f1bcfbeee347e1545d8162824c"
+    },
+    {
+      "mode": "100644",
+      "commit": "2347ff09c3e07fb196422668c6b54e9504e1d860",
+      "path": "scripts/qualify-source-cohort.py",
+      "git_blob_oid": "4dea98fd3d75a70327f1f1313619c44eb113971f",
+      "bytes": 48543,
+      "sha256": "58ef81739b264085b2997be7baa3df03ba6bb673f91a160176efd79b71fec081"
+    },
+    {
+      "commit": "593917b1bc5dcb68ea0ca58f6c338b86c47a99b9",
+      "path": "coordination/engineering/indonesia-anambas-natuna-20261015/physical-result-001/whole-target-support.json",
+      "mode": "100644",
+      "git_blob_oid": "84f0f8aedfb0801afe5089d7c6c2132c168bbba9",
+      "bytes": 801734,
+      "sha256": "b1234cd5b320f4cc92feca4f1d59052c2b8171afe2d0516be8abdc72f01a82b5"
+    },
+    {
+      "commit": "5ab660cb68821e6b719f1b86819069ecac419ce1",
+      "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+      "mode": "100644",
+      "git_blob_oid": "de6905e162dc031b1b93248fae91190c39c4ad53",
+      "bytes": 1851757,
+      "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+      "decoded_bytes": 2097328,
+      "decoded_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+    },
+    {
+      "commit": "5ab660cb68821e6b719f1b86819069ecac419ce1",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/owners.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "9c44513df64995d417dd3832ae604c703e84a506",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "decoded_bytes": 11096191,
+      "decoded_sha256": "a8086008b7a072dd86483720a2a166785229753422769dbbe0749497d870f428"
+    },
+    {
+      "commit": "5ab660cb68821e6b719f1b86819069ecac419ce1",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IDN-ADM2-000.bin.gz",
+      "mode": "100644",
+      "git_blob_oid": "d918c74989043677364ff43f9fbec3d1f0d3a3af",
+      "bytes": 3051391,
+      "sha256": "ef394916ba97454b5592e66eba1df67199731ce7d9636cc3968843801ae904a8",
+      "decoded_bytes": 11002896,
+      "decoded_sha256": "146653d488331086ddc43d159a261b01ea6dd08c7ed422e34a9886c3c690430c"
+    },
+    {
+      "bytes": 11106,
+      "sha256": "3e5c31d6335d6091d7c25ea8da8933d56aa0a8a00334e8a44ee89fa72eae076e",
+      "git_blob_oid": "c1d344267e53748a304034d04b372ffb488579af"
+    },
+    {
+      "bytes": 61259,
+      "sha256": "40d0886c3c0a2cca9ab2a043e614b2a55f544f5a13d2f7897c0b297724ddc63c",
+      "git_blob_oid": "3c8d5ae2d5b0cb1e7eddcdacc29f3f5cea73049d"
+    }
+  ],
+  "blocks": [
+    {
+      "block": 31,
+      "rowStart": 126976,
+      "rowEnd": 131072,
+      "requested_rows": 805,
+      "requested_cells": 4671,
+      "hit_inventory": 896832,
+      "whole_exterior_witnesses": [
+        {
+          "owner": 23206,
+          "operation": "outside_mapped_L1_context",
+          "parts": 1,
+          "vertices": 4651,
+          "edges": 4321,
+          "crossing_edge_rows": 4758,
+          "span_upper_bound": 2379,
+          "tie_upper_bound": 4758,
+          "scratch_bytes": 9765184
+        },
+        {
+          "owner": 23006,
+          "operation": "outside_mapped_L1_context",
+          "parts": 1,
+          "vertices": 2985,
+          "edges": 2779,
+          "crossing_edge_rows": 3004,
+          "span_upper_bound": 1502,
+          "tie_upper_bound": 3004,
+          "scratch_bytes": 6129664
+        }
+      ],
+      "source_scans": [
+        {
+          "shapeID": "22746128B99951880476592",
+          "parts": 1,
+          "vertices": 2349,
+          "edges": 2189,
+          "crossing_edge_rows": 5032,
+          "span_upper_bound": 2516,
+          "tie_upper_bound": 5032,
+          "scratch_bytes": 4383104
+        },
+        {
+          "shapeID": "22746128B6637644559706",
+          "parts": 1,
+          "vertices": 1445,
+          "edges": 1357,
+          "crossing_edge_rows": 3444,
+          "span_upper_bound": 1722,
+          "tie_upper_bound": 3444,
+          "scratch_bytes": 3000064
+        }
+      ],
+      "coverage_scans": [
+        {
+          "target": "gb:IDN:ADM2:22746128B99951880476592",
+          "parts": 1,
+          "vertices": 4047,
+          "edges": 3880,
+          "crossing_edge_rows": 3862,
+          "span_upper_bound": 1931,
+          "tie_upper_bound": 3862,
+          "scratch_bytes": 5784896
+        },
+        {
+          "target": "gb:IDN:ADM2:22746128B6637644559706",
+          "parts": 1,
+          "vertices": 2645,
+          "edges": 2566,
+          "crossing_edge_rows": 2816,
+          "span_upper_bound": 1408,
+          "tie_upper_bound": 2816,
+          "scratch_bytes": 4048000
+        }
+      ],
+      "positive_scan_extra_reserve": 34432128,
+      "class_scan_extra": 0,
+      "complete_extra_live_scan_superset": 45094144
+    }
+  ],
+  "components": {
+    "stock_fixed_full_reader": 321261593,
+    "complete_extra_live_scan_superset": 45094144,
+    "accepted_code_closure_source_parse_compile_12x": 6390324,
+    "outer_config_parse_12x4096": 49152,
+    "unchanged_full_output_logs_OS_receipts_superset": 128940960
+  },
+  "complete_prospective_bytes": 501736173,
+  "proposed_phase_rss_request_bytes": 536870912,
+  "remaining_under_proposed_request": 35134739,
+  "session_headroom_bytes": 572882944,
+  "fresh_admission": false,
+  "stock_output_reserve_bytes": 4194304,
+  "config_reserve_bytes": 4096,
+  "ordinary_deadline_seconds": 120,
+  "external_reserve_basis": "Retained complete Bintan-method OS/runtime/output/log superset, unchanged128940960B; public components and actual installed binaries/dyld map inventory included below. Original private plan hash retained in projection.",
+  "external_reserve_components": {
+    "extra_full_stock_output_canonical_string_buffer_superset_6x4MiB": 25165824,
+    "two_full_regular_log_files_16MiB_each": 33554432,
+    "cache_image_nonLINKEDIT_page_union": 34045952,
+    "time_perl_libperl_dyld_whole_file_bytes": 8812448,
+    "git_shim_real_git_whole_file_bytes": 7177712,
+    "bash_whole_file_bytes": 1310224,
+    "publication_receipt_reserve": 1048576,
+    "external_observation_receipt_reserve": 1048576,
+    "OS_sharedLINKEDIT_stack_stdio_and_child_growth_reserve": 16777216
+  },
+  "structural_possible_output_bound": {
+    "worker": "/root/native7904_preparation",
+    "kind": "static-possible-success-output-shape-upper-bound-not-products",
+    "scope": "Only if unchanged stock constructor succeeds; no ledger/output object fabricated or executed",
+    "number_text_bytes_upper_bound": 32,
+    "original_rule_preimage_json_bound": 8192,
+    "authority_binding_json_bound": 8192,
+    "constructor_result_json_bound": 280415,
+    "stock_three_product_total_bound": 296799,
+    "preparation_receipt_additional_bound": 16384,
+    "three_products_plus_preparation_total_bound": 313183,
+    "stock_output_reserve_unchanged": 4194304,
+    "full_external_output_buffers_unchanged": 25165824,
+    "per_target_rows": [
+      {
+        "target_id": "gb:IDN:ADM2:22746128B99951880476592",
+        "owner": 23206,
+        "original_requested_rows": 411,
+        "original_requested_spans": 1252,
+        "row_structural_json_bytes_bound": 157957
+      },
+      {
+        "target_id": "gb:IDN:ADM2:22746128B6637644559706",
+        "owner": 23006,
+        "original_requested_rows": 475,
+        "original_requested_spans": 727,
+        "row_structural_json_bytes_bound": 109763
+      }
+    ],
+    "conditions": [
+      "Actual two immutable locator paths must match proposed config and complete config <=4096B.",
+      "Existing finite numeric fields use <=32B JSON text; original ASCII type/ID strings and full geometry keys/numbers counted.",
+      "Each owned native_rows list is bounded by exact original requested intervals; no qualified or current-owner claim is inferred.",
+      "Each pin/preimage/binding reserves8KiB; inputs reserve4KiB and full limitation list8KiB without discounting the4MiB stock cap.",
+      "Preparation publication receipt is separately reserved16KiB, within unchanged publication/observation reserves."
+    ]
+  },
+  "limits": [
+    "Metadata scheduling only; no helper import, polygon scanner, point predicate, source/GSHHG/physical replay or constructor executed.",
+    "All full geometries, complete family and decoded bodies retained; no clipping or per-target parse reset.",
+    "Positive-domain reserve is twice full source plus coverage scratch; added to maximum exterior scratch and full hit inventory conservatively.",
+    "Prospective arithmetic is neither observed peak nor a resource grant. Runtime/OS identity, exact config and executing closure must be rechecked before Main fresh admission.",
+    "Actual immutable publication and shared-local custody remain required. No qualification/current-owner-zero/accepted credit."
+  ],
+  "shared_current_runtime_OS_code_inventory": {
+    "bytes": 14993,
+    "sha256": "2538b4377b5ad2ce34d7783c08338f45a8a5a16e1990a80a7611340716c330ef",
+    "worker": "/root/resource_plan_cont",
+    "observed_utc": "2026-10-15T02:24:31.914857+00:00",
+    "status": "PASS static accepted code/runtime/OS identity; fresh launch admission remains required",
+    "Node24_binary": {
+      "bytes": 121304480,
+      "sha256": "743cbaf12bd9323937b85f6297d8182b086526510c9f9c5875fa74d2aad9072d",
+      "identity_unchanged_during_read": true
+    },
+    "no_grant_or_science": true
+  },
+  "runtime_OS_inventory_limit": "Reuses the distinct actual installed-binary/map hashes; recheck executing identities and current normal guard before any launch. It is not memory availability, phase admission or a live process-tree theorem.",
+  "projection": {
+    "kind": "explicit-derived-public-resource-observation",
+    "not_original_private_plan": true,
+    "original_private_plan_bytes": 10257,
+    "original_private_plan_sha256": "85a4812d79e647f0aed59e92b31e9e58b369098b47444225c80bf7bce76008ed",
+    "original_private_runtime_inventory_bytes": 14993,
+    "original_private_runtime_inventory_sha256": "2538b4377b5ad2ce34d7783c08338f45a8a5a16e1990a80a7611340716c330ef",
+    "omission_rule": "Only private machine path string fields omitted; original local bodies remain unchanged. Numerical operating accounting, existing source pins and all scientific data unchanged. Task-local reference pointers replaced by self-contained public inventory/output bound.",
+    "omitted_private_field_locations": [
+      "/shared_current_runtime_OS_code_inventory/Node24_binary/path",
+      "/shared_current_runtime_OS_code_inventory/Node24_binary/resolved",
+      "/runtime_inventory/code_root",
+      "/runtime_inventory/code/files/0/path",
+      "/runtime_inventory/code/files/0/resolved",
+      "/runtime_inventory/code/files/1/path",
+      "/runtime_inventory/code/files/1/resolved",
+      "/runtime_inventory/code/files/2/path",
+      "/runtime_inventory/code/files/2/resolved",
+      "/runtime_inventory/code/files/3/path",
+      "/runtime_inventory/code/files/3/resolved",
+      "/runtime_inventory/code/files/4/path",
+      "/runtime_inventory/code/files/4/resolved",
+      "/runtime_inventory/code/files/5/path",
+      "/runtime_inventory/code/files/5/resolved",
+      "/runtime_inventory/code/files/6/path",
+      "/runtime_inventory/code/files/6/resolved",
+      "/runtime_inventory/code/files/7/path",
+      "/runtime_inventory/code/files/7/resolved",
+      "/runtime_inventory/code/files/8/path",
+      "/runtime_inventory/code/files/8/resolved",
+      "/runtime_inventory/code/files/9/path",
+      "/runtime_inventory/code/files/9/resolved",
+      "/runtime_inventory/code/files/10/path",
+      "/runtime_inventory/code/files/10/resolved",
+      "/runtime_inventory/code/files/11/path",
+      "/runtime_inventory/code/files/11/resolved",
+      "/runtime_inventory/Node24_installed_binary/path",
+      "/runtime_inventory/Node24_installed_binary/resolved"
+    ]
+  },
+  "public_accepted_runtime_OS_code_inventory": {
+    "version": 1,
+    "worker": "/root/resource_plan_cont",
+    "observed_utc": "2026-10-15T02:24:31.914857+00:00",
+    "kind": "read-only-accepted-b73-native-launch-inventory",
+    "accepted_commit": "b73fdbb1b0e243b773514ea46aaced496a63028f",
+    "code": {
+      "files": [
+        {
+          "bytes": 2279,
+          "sha256": "f4d5480d23ba6ae097a559d066b2a244ce388ba81aa6c486331e731be23e1813",
+          "identity_unchanged_during_read": true,
+          "repository_path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs",
+          "git_blob_oid": "d1c5a11a0d4aaf2b73f6d6c36b0ab59a67ac84e3",
+          "matches_receipt": true,
+          "accepted_tree_matches": true
+        },
+        {
+          "bytes": 172622,
+          "sha256": "cb908b00406b1f834c8bbaa6439afbf9509dabece65965f3bd27ba87b0e2012e",
+          "identity_unchanged_during_read": true,
+          "repository_path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+          "git_blob_oid": "1edddbb257210a05a8c544db4466ba4a1ca44417",
+          "matches_receipt": true,
+          "accepted_tree_matches": true
+        },
+        {
+          "bytes": 1417,
+          "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3",
+          "identity_unchanged_during_read": true,
+          "repository_path": "package.json",
+          "git_blob_oid": "318d842ee999da746956968c9d7e58f9e00cb9e4",
+          "matches_receipt": true,
+          "accepted_tree_matches": true
+        },
+        {
+          "bytes": 90037,
+          "sha256": "77ca0cdf4888d757a9fa40dbdc8388aa3bf9389c51b06dbdc498cf6b1412e7a0",
+          "identity_unchanged_during_read": true,
+          "repository_path": "scripts/check-effective-geographic-regression.mjs",
+          "git_blob_oid": "c4b80e760bbdbc0863f49741e9b2e9342d2f0818",
+          "matches_receipt": true,
+          "accepted_tree_matches": true
+        },
+        {
+          "bytes": 77213,
+          "sha256": "c1cd1f53332aa507d2ba7bd1bebc6bb8bdedc60fbc4b6d3e49cca65c4485ac1b",
+          "identity_unchanged_during_read": true,
+          "repository_path": "scripts/delivery-handoff-advance.mjs",
+          "git_blob_oid": "4a3c06ee6d7031b043e353d47ed8b2356aa5f52b",
+          "matches_receipt": true,
+          "accepted_tree_matches": true
+        },
+        {
+          "bytes": 28506,
+          "sha256": "8950701f659808b0f1aa527d1d79dbdaa06921abd601bef80a6b030963eb0d97",
+          "identity_unchanged_during_read": true,
+          "repository_path": "scripts/evidence-quality.mjs",
+          "git_blob_oid": "3f8980f573af0a9fb48b763ed875026f0ce99199",
+          "matches_receipt": true,
+          "accepted_tree_matches": true
+        },
+        {
+          "bytes": 13608,
+          "sha256": "19aba167eb32d5e7c08034a0e748db95e657d2ec0f10f8ee034cdeba9b2720a8",
+          "identity_unchanged_during_read": true,
+          "repository_path": "scripts/geography-prefetch.mjs",
+          "git_blob_oid": "1c22d410b9f1337f635d998928ffe9cb94c12815",
+          "matches_receipt": true,
+          "accepted_tree_matches": true
+        },
+        {
+          "bytes": 9849,
+          "sha256": "227b982fac966fff5e55483c62ecb181defd55194b2946e31b7606574013f676",
+          "identity_unchanged_during_read": true,
+          "repository_path": "scripts/native-ownership/native-preparation-guards.mjs",
+          "git_blob_oid": "7b6b996c295a18d3b4d52a2c1f3e23384b025f70",
+          "matches_receipt": true,
+          "accepted_tree_matches": true
+        },
+        {
+          "bytes": 4374,
+          "sha256": "abf33286e28990c8e2a3a16a4372e2340d416833f39109007fc4e403dd619f40",
+          "identity_unchanged_during_read": true,
+          "repository_path": "scripts/package-inputs.mjs",
+          "git_blob_oid": "bb54feb3575cade2a2d8e4f7d7884e41bad44a0a",
+          "matches_receipt": true,
+          "accepted_tree_matches": true
+        },
+        {
+          "bytes": 93442,
+          "sha256": "b658f0e435d1b19566870c6e4b098dbb69c910e3e14ccf1c3e4bb0f484ff4eb6",
+          "identity_unchanged_during_read": true,
+          "repository_path": "scripts/prepare-delivery-handoff.mjs",
+          "git_blob_oid": "25e3f6116cc2cea0322f58d793892d727718ca37",
+          "matches_receipt": true,
+          "accepted_tree_matches": true
+        },
+        {
+          "bytes": 36232,
+          "sha256": "7c93720e68fb3a9d584bcd9ba5c7f111b836d99eb3d133b86fdd6d72efe50d48",
+          "identity_unchanged_during_read": true,
+          "repository_path": "src/native-grid.js",
+          "git_blob_oid": "736eb39fc9ee6cfd94a4524fa332d9852ea9b635",
+          "matches_receipt": true,
+          "accepted_tree_matches": true
+        },
+        {
+          "bytes": 2948,
+          "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d",
+          "identity_unchanged_during_read": true,
+          "repository_path": "src/ownership-codec.js",
+          "git_blob_oid": "03eacc9bcb1bff03723a93c248ea6de5f2fed5e4",
+          "matches_receipt": true,
+          "accepted_tree_matches": true
+        }
+      ],
+      "modules": 12,
+      "bytes": 532527,
+      "all_receipt_and_tree_match": true
+    },
+    "Node24_installed_binary": {
+      "bytes": 121304480,
+      "sha256": "743cbaf12bd9323937b85f6297d8182b086526510c9f9c5875fa74d2aad9072d",
+      "identity_unchanged_during_read": true
+    },
+    "installed_OS_launch_binaries": [
+      {
+        "path": "/usr/bin/time",
+        "resolved": "/usr/bin/time",
+        "bytes": 135248,
+        "sha256": "fc8c6dcfe9e6eba13390456e7f6875c0634c7a16784128c92c6dabf4f1159f36",
+        "identity_unchanged_during_read": true,
+        "matches_prior_complete_inventory": true
+      },
+      {
+        "path": "/usr/bin/perl",
+        "resolved": "/usr/bin/perl",
+        "bytes": 101840,
+        "sha256": "3a8725e326f5edf752519123e977f9b4c84264336b08bc4bd682da00b6fec82b",
+        "identity_unchanged_during_read": true,
+        "matches_prior_complete_inventory": true
+      },
+      {
+        "path": "/System/Library/Perl/5.34/darwin-thread-multi-2level/CORE/libperl.dylib",
+        "resolved": "/System/Library/Perl/5.34/darwin-thread-multi-2level/CORE/libperl.dylib",
+        "bytes": 6286032,
+        "sha256": "e4c6cc2b3101a27b58dca21ac9f83a2504b60ffd04cf0ab8c568be3cd2d6e10a",
+        "identity_unchanged_during_read": true,
+        "matches_prior_complete_inventory": true
+      },
+      {
+        "path": "/usr/lib/dyld",
+        "resolved": "/usr/lib/dyld",
+        "bytes": 2289328,
+        "sha256": "e371c8cb28c9459c20bf7ee7cc4ad3609a7fe57524d6c08453f718e80e1b35b4",
+        "identity_unchanged_during_read": true,
+        "matches_prior_complete_inventory": true
+      },
+      {
+        "path": "/usr/bin/git",
+        "resolved": "/usr/bin/git",
+        "bytes": 118864,
+        "sha256": "7588ceab299393618d6f8861502ac0588d1594025f301d9a61a898215b5571d3",
+        "identity_unchanged_during_read": true,
+        "matches_prior_complete_inventory": true
+      },
+      {
+        "path": "/Library/Developer/CommandLineTools/usr/bin/git",
+        "resolved": "/Library/Developer/CommandLineTools/usr/bin/git",
+        "bytes": 7058848,
+        "sha256": "4c5ca299b5311572b4f948d11efd7c66dcadf30950fbf260688ee32f4a63f6a4",
+        "identity_unchanged_during_read": true,
+        "matches_prior_complete_inventory": true
+      },
+      {
+        "path": "/bin/bash",
+        "resolved": "/bin/bash",
+        "bytes": 1310224,
+        "sha256": "b46e8d4eac541d79f77000550b4254b47599df8dd8c52cc5b0f37cca1c3b02d4",
+        "identity_unchanged_during_read": true,
+        "matches_prior_complete_inventory": true
+      }
+    ],
+    "dyld_map": {
+      "path": "/System/Volumes/Preboot/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_arm64e.map",
+      "resolved": "/System/Volumes/Preboot/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_arm64e.map",
+      "bytes": 1140220,
+      "sha256": "d70eaa779b63968fd623162fea760edd8163b1d66f69478758c7e083dd2c8481",
+      "identity_unchanged_during_read": true,
+      "matches_prior_complete_inventory": true
+    },
+    "reused_OS_cache_nonLINKEDIT_page_union_bytes": 34045952,
+    "reused_OS_loader_sharedLINKEDIT_stack_stdio_growth_bytes": 16777216,
+    "OS_union_basis": "Exact unchanged dyld map hash preserves previously derived nonLINKEDIT page union; inventory is a conservative metadata superset, not hermetic OS closure or measured RSS",
+    "environment_observations": {
+      "NODE_OPTIONS_set": false,
+      "NODE_PATH_set": false,
+      "WORLDATLAS_MEMORY_HEADROOM_BYTES_set": false,
+      "no_environment_secrets_recorded": true
+    },
+    "no_module_import_no_science_no_memory_grant": true,
+    "no_compute_reservation": true,
+    "status": "PASS static accepted code/runtime/OS identity; fresh launch admission remains required"
+  }
+}

@@ -1,0 +1,272 @@
+{
+  "version": 1,
+  "reviewer": "/root/resource_plan_cont",
+  "status": "PASS_WITH_LIMITS",
+  "reviewed_plan": {
+    "bytes": 10257,
+    "sha256": "85a4812d79e647f0aed59e92b31e9e58b369098b47444225c80bf7bce76008ed",
+    "git_blob_oid": "311a44b8674c1842ebbe4d45095a0f40cb86bf4a"
+  },
+  "reviewed_template": {
+    "bytes": 438,
+    "sha256": "27ceaed5d412126c27f681826300b4ac2cec516349d7b0e88974f145ee3850db",
+    "git_blob_oid": "5c08e1113f12db187c364c71aaeb75e028ae0c51"
+  },
+  "checks_passed": 30,
+  "checks": [
+    {
+      "check": "exact reviewed source body",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "exact reviewed patch body",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "distinct complete input review immutable identity reused",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "fresh distinct runtime OS inventory exact pin",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "accepted b73 complete code closure",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "fresh installed runtime OS source identities reused without duplicate hash",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "actual stock row scratch formula preserved",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "actual stock full parse reserve preserved",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "land-only requests do not invoke hidden class or membership branches",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "complete actual physical body pin",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "both physical rows remain checked and issue-free",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "whole encoded retained metadata coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "whole declared decoded metadata coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "full normative latitudes finite strictly decreasing",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "whole encoded retained metadata coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IDN-ADM2-000.bin.gz",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "whole declared decoded metadata coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IDN-ADM2-000.bin.gz",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "complete519 feature family retained",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "two complete source geometries derived from full519 metadata",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "independent full-block schedule matches each proposed operand",
+      "passed": true,
+      "detail": [
+        {
+          "block": 31,
+          "rowStart": 126976,
+          "rowEnd": 131072,
+          "requested_rows": 805,
+          "requested_cells": 4671,
+          "hit_inventory": 896832,
+          "whole_exterior_witnesses": [
+            {
+              "owner": 23206,
+              "operation": "outside_mapped_L1_context",
+              "parts": 1,
+              "vertices": 4651,
+              "edges": 4321,
+              "crossing_edge_rows": 4758,
+              "span_upper_bound": 2379,
+              "tie_upper_bound": 4758,
+              "scratch_bytes": 9765184
+            },
+            {
+              "owner": 23006,
+              "operation": "outside_mapped_L1_context",
+              "parts": 1,
+              "vertices": 2985,
+              "edges": 2779,
+              "crossing_edge_rows": 3004,
+              "span_upper_bound": 1502,
+              "tie_upper_bound": 3004,
+              "scratch_bytes": 6129664
+            }
+          ],
+          "source_scans": [
+            {
+              "shapeID": "22746128B99951880476592",
+              "parts": 1,
+              "vertices": 2349,
+              "edges": 2189,
+              "crossing_edge_rows": 5032,
+              "span_upper_bound": 2516,
+              "tie_upper_bound": 5032,
+              "scratch_bytes": 4383104
+            },
+            {
+              "shapeID": "22746128B6637644559706",
+              "parts": 1,
+              "vertices": 1445,
+              "edges": 1357,
+              "crossing_edge_rows": 3444,
+              "span_upper_bound": 1722,
+              "tie_upper_bound": 3444,
+              "scratch_bytes": 3000064
+            }
+          ],
+          "coverage_scans": [
+            {
+              "target": "gb:IDN:ADM2:22746128B99951880476592",
+              "parts": 1,
+              "vertices": 4047,
+              "edges": 3880,
+              "crossing_edge_rows": 3862,
+              "span_upper_bound": 1931,
+              "tie_upper_bound": 3862,
+              "scratch_bytes": 5784896
+            },
+            {
+              "target": "gb:IDN:ADM2:22746128B6637644559706",
+              "parts": 1,
+              "vertices": 2645,
+              "edges": 2566,
+              "crossing_edge_rows": 2816,
+              "span_upper_bound": 1408,
+              "tie_upper_bound": 2816,
+              "scratch_bytes": 4048000
+            }
+          ],
+          "positive_scan_extra_reserve": 34432128,
+          "class_scan_extra": 0,
+          "complete_extra_live_scan_superset": 45094144
+        }
+      ]
+    },
+    {
+      "check": "exact4671 rows/spans and single31block",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "complete fixed whole reader arithmetic",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "full unchanged output logs OS receipts superset",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "complete sum and request unchanged",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "nonexecutable template exact config schema and null commits",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "ordinary future exact40-hex commits fit4096 config reserve",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "whole success-shape output arithmetic reserve preserved",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "all original owned rows/spans represented in output shape bound",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "independent full literal row shape bounds include every accepted output field",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "independent complete success-shape output bound",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "plan issues no grant or scientific completion",
+      "passed": true,
+      "detail": null
+    }
+  ],
+  "independently_derived_components": {
+    "stock_fixed_full_reader": 321261593,
+    "complete_extra_live_scan_superset": 45094144,
+    "accepted_code_closure_source_parse_compile_12x": 6390324,
+    "outer_config_parse_12x4096": 49152,
+    "unchanged_full_output_logs_OS_receipts_superset": 128940960
+  },
+  "complete_prospective_bytes": 501736173,
+  "prospective_request_bytes": 536870912,
+  "remaining_bytes": 35134739,
+  "concrete_underbounds_found": [],
+  "pending": [
+    "Actual source/patch immutable publication and exact shared-local custody including593917 full physical body",
+    "Actual final ordinary relative config and fresh destination binding; template intentionally cannot execute",
+    "Main fresh normal phase/RSS admission with existing accepted guard and bounded OS/time/log controls",
+    "Actual constructor output/refusal plus independent result review; no acceptance/current-owner-zero implied"
+  ],
+  "limits": [
+    "Retained metadata read/parse/hash/latitude-edge scheduling only; no scanner, per-centre predicate, source/GSHHG/physical/native operator or helper import executed.",
+    "Full519 family parsed and retained, two full source geometries, both whole positive/exterior geometries and all declared bodies represented; no geometry clipping or subset parse discount.",
+    "Full8MiB metadata,4MiB output,6x parse,12x code/config and unchanged6x4MiB output/2x16MiB logs/full OS reserve are retained.",
+    "A prospective estimate is not a mathematical allocation theorem or resource grant; actual existing phase/RSS checks remain authoritative.",
+    "Reused distinct74-check input review and fresh b73 runtime/OS inventory; no repeated scientific joins or121MB Node hash."
+  ]
+}
