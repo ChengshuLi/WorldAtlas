@@ -169,7 +169,7 @@ export function inspectPackageExecutionInputs(root, definition, kind = 'cloudfla
   return {files,errors};
 }
 
-export function inspectPackageRuntime(root, {python = 'python3'} = {}) {
+export function inspectPackageNodeRuntime(root) {
   const errors = [], result = {node: {version: process.version, executable: process.execPath}, python: null, npm_packages: 0, optional_npm_omissions: []};
   if(process.env.NODE_OPTIONS?.trim()||process.env.NODE_PATH?.trim())errors.push({kind:'node-execution',detail:'Actual package issuer requires NODE_OPTIONS and NODE_PATH unset'});
   const attempt = (kind, run) => { try { run(); } catch (error) { errors.push({kind, detail: error.message}); } };
@@ -201,6 +201,12 @@ export function inspectPackageRuntime(root, {python = 'python3'} = {}) {
     }
     for (const name of Object.keys(installed.packages)) if (!lock.packages[name]) errors.push({kind: 'npm-lock', path: name, detail: 'Unlisted installed package'});
   });
+  return {...result, errors};
+}
+
+export function inspectPackageRuntime(root, {python = 'python3'} = {}) {
+  const {errors,...result}=inspectPackageNodeRuntime(root);
+  const attempt = (kind, run) => { try { run(); } catch (error) { errors.push({kind, detail: error.message}); } };
   attempt('python-runtime', () => {
     const requirements = fsSync.readFileSync(path.join(root, 'requirements.txt'), 'utf8');
     const modules = ['numpy', 'shapely', 'pyproj'].map(name => {

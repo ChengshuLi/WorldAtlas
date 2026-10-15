@@ -254,8 +254,7 @@ Historical author geography/package artifact readers remain available only where
 original provenance and accepted-checkpoint acquisition consume them. Original
 records preserve their actual head, workflow, candidate, attempt and checksum;
 they are never relabeled as current execution. New ordinary package originals
-come from the final queue. Explicit selected-package equivalence proof retains
-its accepted source, successful queue readback and current browser consumers.
+come from the final queue.
 
 Full-profile changes to checker/producer code or its dependencies run the exact
 combined candidate checker, with
@@ -533,7 +532,7 @@ are finalized, so a fast rejection cannot hide other already-started attempts.
 
 Ordinary delivery performs actual conservation, build/assembly and applicable
 regression on the single final composed candidate. Authenticated retained-output
-assembly still proves its actual original successful producer/readback and all
+assembly still authenticates its actual original successful producer and all
 unchanged output bytes; it does not transfer an author's regression claim.
 
 For unchanged-method selected deliveries, the setup profile remains `full` while
@@ -573,12 +572,12 @@ current main with the reviewed head, then runs one fresh geography conservation 
 and one actual package assembly or full Cloudflare build on that candidate. The
 generic emitted-asset smoke checks the complete selected roster, every additive
 patch cell with the actual picker/sampler and retained stable-owner controls.
-New full builds keep qualified native output readback. Authenticated assembly
-retains the successful original readback and verifies unchanged output bytes.
+New full builds capture the complete output inventory immediately after the
+genuine build. Authenticated assembly retains that original inventory and
+verifies unchanged output bytes.
 Ordinary selected data does not rerun unchanged-base unit/browser tests or restore
 canonical/model-reader/SQLite context solely for those tests. Software, content,
-unknown or base-changing work keeps full regression; explicit rollout proof keeps
-its current consumer tests.
+unknown or base-changing work keeps full regression.
 
 There are no automatic author jobs or prequeue check-name prerequisites. Existing
 failed/pending external checks and commit statuses still block admission. There is

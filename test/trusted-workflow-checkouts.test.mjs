@@ -209,18 +209,13 @@ fs.appendFileSync(process.env.FIXTURE_CALLS,JSON.stringify(call)+'\\n');
    assert.equal(workflowCondition(smoke.condition,context),branch.shard===0);
   }
  } finally {fs.rmSync(directory,{recursive:true,force:true});}
- const explicit=fs.readFileSync(path.join(root,'.github/workflows/selected-package-proof.yml'),'utf8');
- assert.match(explicit,/model-reader-call-boundary-controls\.mjs --built-output-readback \.cache\/native-normal-built-output\.json/);
 });
 
-test('automatic author compute is absent while final queue and explicit rollout keep current consumers',()=>{
+test('automatic author jobs are absent while final queue keeps current consumers',()=>{
  assert.equal(fs.existsSync(path.join(root,'.github/workflows/merge-integration-checks.yml')),false);
  const queue=fs.readFileSync(path.join(root,'.github/workflows/worker-merge.yml'),'utf8');
  assert.match(queue,/run: npm run build:cloudflare/);assert.match(queue,/node scripts\/run-integration-tests.mjs/);
  assert.doesNotMatch(queue,/proof_run|proof_attempt|GEOGRAPHY_PROOF|PROOF_RUN/);
- const explicit=fs.readFileSync(path.join(root,'.github/workflows/selected-package-proof.yml'),'utf8');
- assert.match(explicit,/npx playwright install --with-deps chromium/);
- assert.match(explicit,/INTEGRATION_TEST_SELECTION: selected-output/);assert.match(explicit,/node scripts\/run-integration-tests.mjs/);
  const site=fs.readFileSync(path.join(root,'.github/workflows/deployment-budget.yml'),'utf8');
  assert.match(site,/run: npm run build:hosted/);assert.match(site,/path: \.cache\/deployment-budget.json/);
 });
