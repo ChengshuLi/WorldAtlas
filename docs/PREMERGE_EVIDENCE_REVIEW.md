@@ -4,14 +4,19 @@ This is a preventive gate, not proof that every fact is true. Read `EVIDENCE_QUA
 
 ## Ordinary engineering and scientific evidence
 
-Ordinary code, documentation, tooling and tested delivery metadata use the actual
-Git diff, applicable tests and a substantive review comment naming the exact head
-and distinct reviewer. They need no `evidence_quality` declaration, synthetic
-scientific manifest, duplicated file/hash inventory, prose hashes or frozen review
-packet. The submitting operator reads the current head and review, resolves every
+All PRs use the actual Git diff, applicable tests and a substantive PR review
+or comment naming the exact head and distinct reviewer. Scientific work also
+requires substantive source, geometry and release review where applicable.
+Ordinary code, documentation, tooling and tested delivery metadata need no
+`evidence_quality` declaration or synthetic scientific manifest. Neither path
+requires a duplicate machine-format review receipt, file/hash inventory, prose
+hashes or frozen review packet. The submitting operator reads the current head and
+review, resolves every
 outstanding objection and verifies the actual acceptance claims before dispatching
-the standard integration workflow. There is no comment parser or automatic review
-approval for this path. Shared-account reviewers are distinct agents, not distinct
+the standard integration workflow. There is no general comment parser or automatic
+review approval; byte-check
+success does not establish independent review, and an arbitrary comment does not
+qualify. Shared-account reviewers are distinct agents, not distinct
 authenticated GitHub principals.
 
 Scientific source, geometry and release claims still need their actual supporting
@@ -143,44 +148,25 @@ A review sub-agent in the author's chat is permitted. It provides a separate exa
 
 Copy-ready task (replace placeholders):
 
-> Review PR URL at exact HEAD_SHA for ISSUE_URL. Read AGENTS.md, docs/WORKER_COORDINATION.md, docs/LOCAL_WORKSPACES.md, docs/AUTHOR_PREFLIGHT.md, docs/AUDIT_FAILURE_PREVENTION.md and docs/PREMERGE_EVIDENCE_REVIEW.md from current main, plus relevant lane/data contracts. Follow consequential claims through their actual inputs, computation, report/control writers and final evidence. Select independent bounded probes for applicable field/unit transfer, comparison products, writer safety, combined budgets and inherited/source claims; distinguish executed checks from unavailable full-source/GIS proof in the existing domain scope. Use API/blob inspection without a checkout when sufficient; when local execution is needed, use the managed sparse detached review slot, include all required inputs, check disk before reproduction, and release the slot when the review is durably posted. Inspect every changed file and renamed original, linked acceptance criteria, actual sources/methods/controls, evidence manifest MANIFEST_PATH, checks and identity/history/release preservation. Inspect author claims and CI evidence independently. Reuse applicable retained tests instead of repeating unchanged expensive executions or creating ceremonial control files; renew relevant review for changed inputs/behavior. Use a unique reviewer worker ID distinct from AUTHOR_WORKER_ID. Do not claim the issue or edit/merge/deploy/import. Report specific findings and actual validation limits. For ordinary engineering, post the substantive exact-head review as an ordinary comment. When a declared scientific manifest needs review, post the worldatlas-review:v1 receipt tied to the exact head and manifest hash; use accepted-with-limits only where policy permits it. If access or evidence prevents acceptance, report the blocker without fabricating a receipt.
+> Review PR URL at exact HEAD_SHA for ISSUE_URL. Read AGENTS.md, docs/WORKER_COORDINATION.md, docs/LOCAL_WORKSPACES.md, docs/AUTHOR_PREFLIGHT.md, docs/AUDIT_FAILURE_PREVENTION.md and docs/PREMERGE_EVIDENCE_REVIEW.md from current main, plus relevant lane/data contracts. Follow consequential claims through their actual inputs, computation, report/control writers and final evidence. Select independent bounded probes for applicable field/unit transfer, comparison products, writer safety, combined budgets and inherited/source claims; distinguish executed checks from unavailable full-source/GIS proof in the existing domain scope. Use API/blob inspection without a checkout when sufficient; when local execution is needed, use the managed sparse detached review slot, include all required inputs, check disk before reproduction, and release the slot when the review is durably posted. Inspect every changed file and renamed original, linked acceptance criteria, actual sources/methods/controls, evidence manifest MANIFEST_PATH, checks and identity/history/release preservation. Inspect author claims and CI evidence independently. Reuse applicable retained tests instead of repeating unchanged expensive executions or creating ceremonial control files; renew relevant review for changed inputs/behavior. Use a unique reviewer worker ID distinct from AUTHOR_WORKER_ID. Do not claim the issue or edit/merge/deploy/import. Report specific findings and actual validation limits. Post one substantive PR review or ordinary comment naming the exact head and distinct worker. For scientific work inspect the declared manifest, original inputs/results and applicable domains; retain every actual validation/source limit in the review. Use accepted-with-limits only where policy permits it. If access or evidence prevents acceptance, report the blocker without claiming approval.
 
-The author addresses findings and requests review of any updated head before using the normal merge queue. Authors reconcile the latest current-head review from every reviewer before submission; acceptance by one reviewer cannot override another reviewer's unresolved changes-requested receipt. A new head requires renewed relevant review of earlier objections, not merely reliance on their previous-head receipts becoming ineligible. Scoped resolution comments do not replace the required whole-PR acceptance. If no review sub-agent is available, ask another available worker on the PR. Record unavailable review/access on the linked issue; continue independent work within the existing owned scope if possible, otherwise leave a durable checkpoint and safely release or hand over. Do not ask the user to manually launch a reviewer when an available review agent can do it. No reviewer means no merge, not an exception or a self-review under another ID.
+The author addresses findings and requests review of any updated head before using the normal merge queue. Authors reconcile the latest current-head review from every reviewer before submission; acceptance by one reviewer cannot override another reviewer's unresolved objection. A new head requires renewed relevant review of earlier objections, not merely reliance on their previous-head reviews becoming ineligible. Scoped resolution comments do not replace the required whole-PR acceptance. If no review sub-agent is available, ask another available worker on the PR. Record unavailable review/access on the linked issue; continue independent work within the existing owned scope if possible, otherwise leave a durable checkpoint and safely release or hand over. Do not ask the user to manually launch a reviewer when an available review agent can do it. No reviewer means no merge, not an exception or a self-review under another ID.
 
-For a declared scientific manifest, post one `worldatlas-review:v1` JSON comment using the template below. Ordinary engineering uses the plain review described above. Repository owner/member/collaborator comments qualify. All workers may share one GitHub account: distinct worker IDs are cooperative accountability, not authenticated independent security principals. Never invent a second ID for self-review. Relevant geometry/release/identity changes and the issue's review_kind require substantive domain reviews even when the author labels a PR differently. Posting a receipt does not itself certify regional approval.
+The submitting operator verifies that the actual review is substantive, names the
+current head and a worker distinct from the author, covers the consequential
+implementation/source/geometry/release claims and retains applicable evidence
+limits. Resolve every reviewer's outstanding objection; a green byte-check job,
+arbitrary comment or stale-head review cannot substitute for that examination.
+Scientific manifests still bind original inputs and results mechanically. The
+standard queue rereads the head, checks, issue contract and scientific bytes before
+a SHA-guarded squash merge; it does not certify the operator's review judgment.
 
-```text
-<!-- worldatlas-review:v1
-{
-  "version": 1,
-  "pr_number": 123,
-  "head_sha": "REPLACE_WITH_CURRENT_40_CHARACTER_HEAD",
-  "manifest_sha256": "REPLACE_WITH_RAW_MANIFEST_FILE_SHA256",
-  "author_worker_id": "actual-author-worker",
-  "reviewer_worker_id": "distinct-review-worker",
-  "outcome": "accepted",
-  "limits": [],
-  "domains": {
-    "implementation": {"outcome": "accepted", "scope": "Describe actual inspected code/acceptance", "limits": []},
-    "source": {"outcome": "accepted-with-limits", "scope": "Describe citations/primary evidence checked", "limits": ["Actual limits"]},
-    "geometry": {"outcome": "accepted", "scope": "Describe methods/control/source support", "limits": []},
-    "release": {"outcome": "accepted", "scope": "Describe identity/history preservation and gates", "limits": []}
-  }
-}
--->
-```
-
-Before posting a scientific receipt, use the existing `validateReviewReceipt`
-from `scripts/premerge-evidence.mjs` with the actual final manifest/hash, exact
-head, current PR and required review domain. Top-level `outcome` is `accepted`;
-`accepted-with-limits` is a domain outcome, not a top-level replacement. Include
-every validator-generated limit verbatim in the top-level `limits` array,
-alongside the reviewer's additional qualifications. Reuse this existing schema
-and validator rather than inventing labels or paraphrasing required limits.
-A receipt-format rejection does not invalidate unchanged science, but the
-corrected receipt must pass the ordinary gate before integration.
-
-Only needed domains are required; do not claim a review you did not perform. The latest receipt from each worker for the current head is authoritative; any unresolved changes-requested outcome blocks. New commits invalidate reviews even if they only update main. The standard integration workflow rereads the head, current checks, issue contract, actual files/bytes and applicable scientific receipts before a SHA-guarded squash merge. It preserves the soft 1,000 non-test-line review target. No provider changes, token rotation, deployment or live import occurs as part of this gate.
+The separate physical-water exception in [GEOGRAPHIC_GAP_ADJUDICATION.md](GEOGRAPHIC_GAP_ADJUDICATION.md)
+retains its structured exact-dossier source decision, latest-decision checks and
+full review binding. Voluntary legacy partition review contracts likewise retain
+their recorded bindings. Those specialized approval records are not additional
+general PR-review receipts. Preserve historical comments and evidence unchanged.
+No provider changes, deployment or live import occurs as part of premerge review.
 
 ## Activation proof and limitations
 

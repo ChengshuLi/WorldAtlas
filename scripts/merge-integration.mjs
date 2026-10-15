@@ -196,7 +196,7 @@ export async function inspectMerge({api, repo, number, expectedHead, policy, evi
     {evidenceRequired: policy.mode === 'enforce-new' && requirement.required});
   const statuses = await api(`${root(repo)}/commits/${expectedHead}/status`);
   need(!statuses.statuses?.length || statuses.state === 'success', 'Commit status is pending or failed');
-  const evidence = await evidenceCheck({api, repo, pr, issue, reservation, files, policy, review: true});
+  const evidence = await evidenceCheck({api, repo, pr, issue, reservation, files, policy});
   const base = (await api(`${root(repo)}/git/ref/heads/main`)).object.sha;
   return {pr, issue, reservation, files, evidence, base};
 }
