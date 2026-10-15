@@ -1,0 +1,426 @@
+[
+  {
+    "parent_id": "framework:province:yangon-north:f18e96810078",
+    "repair_land": 20,
+    "repair_water": 0,
+    "repair_cells": 20,
+    "relative": 0,
+    "conflicts": 0,
+    "complete_child_count": 8,
+    "repair_owner_count": 1,
+    "repair_owners": [
+      30246
+    ],
+    "complete_children": [
+      {
+        "owner": 30183,
+        "id": "gb:MMR:ADM3:66882298B39726343497588",
+        "name": "Insein",
+        "province_id": "framework:province:yangon-north:f18e96810078",
+        "source_id": "gb:MMR:ADM3",
+        "source_atoms": [
+          "gb:MMR:ADM3:66882298B39726343497588"
+        ],
+        "remaining_counts": {},
+        "accepted_removed_cells": 0,
+        "reserved_excluded_cells": 0,
+        "blocks": [],
+        "source_sids": [],
+        "topology_fields": {
+          "topology_version": 1
+        },
+        "current_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 11,
+          "interior_rings": 0,
+          "bounds": [
+            96.0718,
+            16.8639,
+            96.1361,
+            16.9387
+          ]
+        },
+        "original_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 33,
+          "interior_rings": 0,
+          "bounds": [
+            96.07177442900006,
+            16.863864590000087,
+            96.13611229700011,
+            16.942202860000076
+          ]
+        }
+      },
+      {
+        "owner": 30246,
+        "id": "gb:MMR:ADM3:66882298B54341055682393",
+        "name": "Hlaingtharya",
+        "province_id": "framework:province:yangon-north:f18e96810078",
+        "source_id": "gb:MMR:ADM3",
+        "source_atoms": [
+          "gb:MMR:ADM3:66882298B54341055682393"
+        ],
+        "remaining_counts": {
+          "repair-evaluation:land": 20
+        },
+        "accepted_removed_cells": 0,
+        "reserved_excluded_cells": 0,
+        "blocks": [
+          28
+        ],
+        "source_sids": [
+          44895,
+          44957,
+          45101
+        ],
+        "topology_fields": {
+          "topology_version": 1,
+          "topology_reconciled": true,
+          "topology_conflicts": 1,
+          "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+        },
+        "current_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 21,
+          "interior_rings": 0,
+          "bounds": [
+            95.9942,
+            16.825,
+            96.1104,
+            16.9368
+          ]
+        },
+        "original_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 52,
+          "interior_rings": 0,
+          "bounds": [
+            95.99424552027158,
+            16.82382852800005,
+            96.1143265570001,
+            16.936771458000138
+          ]
+        }
+      },
+      {
+        "owner": 30269,
+        "id": "gb:MMR:ADM3:66882298B61286545202529",
+        "name": "Taikkyi",
+        "province_id": "framework:province:yangon-north:f18e96810078",
+        "source_id": "gb:MMR:ADM3",
+        "source_atoms": [
+          "gb:MMR:ADM3:66882298B61286545202529"
+        ],
+        "remaining_counts": {},
+        "accepted_removed_cells": 0,
+        "reserved_excluded_cells": 0,
+        "blocks": [],
+        "source_sids": [],
+        "topology_fields": {
+          "topology_version": 1
+        },
+        "current_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 88,
+          "interior_rings": 0,
+          "bounds": [
+            95.618,
+            17.1705,
+            96.1281,
+            17.7915
+          ]
+        },
+        "original_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 305,
+          "interior_rings": 0,
+          "bounds": [
+            95.61798874300008,
+            17.17053193000002,
+            96.12810297800009,
+            17.796958085000036
+          ]
+        }
+      },
+      {
+        "owner": 30277,
+        "id": "gb:MMR:ADM3:66882298B63229305376369",
+        "name": "Htantabin",
+        "province_id": "framework:province:yangon-north:f18e96810078",
+        "source_id": "gb:MMR:ADM3",
+        "source_atoms": [
+          "gb:MMR:ADM3:66882298B63229305376369"
+        ],
+        "remaining_counts": {},
+        "accepted_removed_cells": 0,
+        "reserved_excluded_cells": 0,
+        "blocks": [],
+        "source_sids": [],
+        "topology_fields": {
+          "topology_version": 1,
+          "topology_reconciled": true,
+          "topology_conflicts": 1,
+          "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+        },
+        "current_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 59,
+          "interior_rings": 0,
+          "bounds": [
+            95.7794,
+            16.8688,
+            96.0646,
+            17.2445
+          ]
+        },
+        "original_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 197,
+          "interior_rings": 0,
+          "bounds": [
+            95.77675891100009,
+            16.868807968871433,
+            96.0646307630001,
+            17.244519759000024
+          ]
+        }
+      },
+      {
+        "owner": 30278,
+        "id": "gb:MMR:ADM3:66882298B63293959945836",
+        "name": "Hmawbi",
+        "province_id": "framework:province:yangon-north:f18e96810078",
+        "source_id": "gb:MMR:ADM3",
+        "source_atoms": [
+          "gb:MMR:ADM3:66882298B63293959945836"
+        ],
+        "remaining_counts": {},
+        "accepted_removed_cells": 0,
+        "reserved_excluded_cells": 0,
+        "blocks": [],
+        "source_sids": [],
+        "topology_fields": {
+          "topology_version": 1
+        },
+        "current_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 48,
+          "interior_rings": 0,
+          "bounds": [
+            95.9042,
+            16.9826,
+            96.171,
+            17.2788
+          ]
+        },
+        "original_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 133,
+          "interior_rings": 0,
+          "bounds": [
+            95.90418053600006,
+            16.982629634000034,
+            96.17100639300006,
+            17.278785834000065
+          ]
+        }
+      },
+      {
+        "owner": 30289,
+        "id": "gb:MMR:ADM3:66882298B65350512294428",
+        "name": "Hlegu",
+        "province_id": "framework:province:yangon-north:f18e96810078",
+        "source_id": "gb:MMR:ADM3",
+        "source_atoms": [
+          "gb:MMR:ADM3:66882298B65350512294428"
+        ],
+        "remaining_counts": {},
+        "accepted_removed_cells": 0,
+        "reserved_excluded_cells": 0,
+        "blocks": [],
+        "source_sids": [],
+        "topology_fields": {
+          "topology_version": 1
+        },
+        "current_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 83,
+          "interior_rings": 0,
+          "bounds": [
+            96.0281,
+            16.9459,
+            96.4003,
+            17.641
+          ]
+        },
+        "original_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 320,
+          "interior_rings": 0,
+          "bounds": [
+            96.0281315120001,
+            16.941644136000033,
+            96.40351960800007,
+            17.641021393000077
+          ]
+        }
+      },
+      {
+        "owner": 30296,
+        "id": "gb:MMR:ADM3:66882298B66365018883830",
+        "name": "Mingaladon",
+        "province_id": "framework:province:yangon-north:f18e96810078",
+        "source_id": "gb:MMR:ADM3",
+        "source_atoms": [
+          "gb:MMR:ADM3:66882298B66365018883830"
+        ],
+        "remaining_counts": {},
+        "accepted_removed_cells": 0,
+        "reserved_excluded_cells": 0,
+        "blocks": [],
+        "source_sids": [],
+        "topology_fields": {
+          "topology_version": 1
+        },
+        "current_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 24,
+          "interior_rings": 0,
+          "bounds": [
+            96.0905,
+            16.8961,
+            96.1795,
+            17.0896
+          ]
+        },
+        "original_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 126,
+          "interior_rings": 0,
+          "bounds": [
+            96.09052803100009,
+            16.895154227000052,
+            96.18453819900013,
+            17.090069926000083
+          ]
+        }
+      },
+      {
+        "owner": 30345,
+        "id": "gb:MMR:ADM3:66882298B81098727977819",
+        "name": "Shwepyithar",
+        "province_id": "framework:province:yangon-north:f18e96810078",
+        "source_id": "gb:MMR:ADM3",
+        "source_atoms": [
+          "gb:MMR:ADM3:66882298B81098727977819"
+        ],
+        "remaining_counts": {},
+        "accepted_removed_cells": 0,
+        "reserved_excluded_cells": 0,
+        "blocks": [],
+        "source_sids": [],
+        "topology_fields": {
+          "topology_version": 1
+        },
+        "current_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 12,
+          "interior_rings": 0,
+          "bounds": [
+            96.0324,
+            16.9294,
+            96.1161,
+            17.0263
+          ]
+        },
+        "original_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 53,
+          "interior_rings": 0,
+          "bounds": [
+            96.0323576380001,
+            16.929433970000062,
+            96.11835232500005,
+            17.02634009100008
+          ]
+        }
+      }
+    ],
+    "native_blocks": [
+      28
+    ],
+    "observed_source_families": [
+      "gb:MMR:ADM1",
+      "gb:MMR:ADM2",
+      "gb:MMR:ADM3"
+    ],
+    "source_region_features": [
+      {
+        "id": "gb:MMR:ADM1:20573499B24734669936209",
+        "name": "Yangon"
+      }
+    ],
+    "source_parent_features": [
+      {
+        "source_index": 44957,
+        "family_index": 217,
+        "source_id": "gb:MMR:ADM2:60261553B66884558345744",
+        "ordinal": 60,
+        "owners": [],
+        "name": "Yangon (North)",
+        "geometry_status": "raw-native-supported"
+      }
+    ],
+    "decisions": [
+      {
+        "ids": [
+          "gb:MMR:ADM3:66882298B39726343497588",
+          "gb:MMR:ADM3:66882298B63293959945836",
+          "gb:MMR:ADM3:66882298B65350512294428",
+          "gb:MMR:ADM3:66882298B63229305376369",
+          "gb:MMR:ADM3:66882298B81098727977819",
+          "gb:MMR:ADM3:66882298B66365018883830",
+          "gb:MMR:ADM3:66882298B61286545202529",
+          "gb:MMR:ADM3:66882298B54341055682393"
+        ],
+        "status": "open",
+        "rationale": "Current province Yangon (North) (framework:province:yangon-north:f18e96810078); inspected exact source identifiers for 8 locations with actual role Township, source gb:MMR:ADM3, reference vintages 2019. Pinned cache contains 330 features; 8 of these location records have entirely matched declared-source member IDs. Source-ID correspondence does not independently approve local geographic purpose, original-footprint retention, administrative reforms or settlement/rank. Exact review stays open until those tests have sourced outcomes.",
+        "evidence": [
+          {
+            "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM3/geoBoundaries-MMR-ADM3.geojson",
+            "title": "Myanmar",
+            "inspected_fact": "Actual location source gb:MMR:ADM3; role Township; reference vintage 2019; license Creative Commons Attribution 4.0 (CC BY 4.0). Source feature/member identifiers were inspected separately from ADM-level labels."
+          }
+        ],
+        "province_id": "framework:province:yangon-north:f18e96810078",
+        "source_id": "gb:MMR:ADM3",
+        "actual_role": "Township",
+        "specific_reasons": []
+      }
+    ],
+    "prerequisites": [
+      "Complete original source-family membership, exact source/owner/parent joins and whole-footprint parent proof.",
+      "Accepted country/topology exclusions and all explicit holes; ancestry and nearest-bank proximity do not grant territorial authority.",
+      "Whole original GSHHG hierarchy or demonstrably applicable retained target interpretation; preserve all uncertainty/relative intervals.",
+      "Later actual delivery-base effective owner-zero and native authority/conservation."
+    ],
+    "land_only_rule_ceiling": 20
+  }
+]

@@ -1,0 +1,387 @@
+{
+  "packet": "mmr-langkho-loikaw-primary-boundary-001",
+  "completed_date_utc": "2026-10-15",
+  "research_dates_utc": [
+    "2026-10-14",
+    "2026-10-15"
+  ],
+  "status": "All 15 repair-land candidates remain held: Langkho 9 and Loikaw/Shadaw 6, separately. Documentary research only; no cell promotion, boundary adjudication or parent-wide equivalence.",
+  "scope": {
+    "parents": [
+      "framework:province:langkho:65589ae342bb",
+      "framework:province:loikaw:183a1e391266"
+    ],
+    "candidate_cells": 15,
+    "relative_cells": 0,
+    "source_conflict_cells": 0,
+    "repair_package": "gb-MMR-ADM3--repair-evaluation",
+    "read_only_actions": "Small retained inventory/interval and pinned latitude metadata reads; primary web document text. No downloaded local documents, new runtime, source producer, GIS, raster, native, GSHHG or tracked edits."
+  },
+  "custody": {
+    "scientific_vintage": "f7c358326d776398bc1cffe84df81eac7033091c",
+    "scientific_vintage_is_not_cache_retention_commit": true,
+    "input_inventory": {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/341d0bbaf81e47cd16ab58ca6d1ab75d5ac120cf732c677e081b12830ea3ef31/work/.cache/mmr-remaining-inventory-20261014-001/inventory.json",
+      "sha256": "efec8d28b63befcb411b6d0d81063af6a962edbec9a1b3f08b86fc3b7bd44157"
+    },
+    "input_intervals": {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/341d0bbaf81e47cd16ab58ca6d1ab75d5ac120cf732c677e081b12830ea3ef31/work/.cache/mmr-remaining-inventory-20261014-001/remaining-intervals.json.gz",
+      "sha256": "b12b9ed64ecb16fa2b5501648fa4ca91727793fa99ceadffb96d9623519c93aa"
+    },
+    "latitude_pin": {
+      "commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+      "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+      "decoded_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+    },
+    "longitude_formula": "(x+0.5)/262166*360-180",
+    "local_extracts": [
+      {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/mmr-langkho-loikaw-primary-boundary-001/retained-parent-inventory.json",
+        "sha256": "b71e5c179e31529ab84dbb64cd417503cf1bc497d400cb3b39c008f0a438f47b",
+        "bytes": 15591
+      },
+      {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/mmr-langkho-loikaw-primary-boundary-001/retained-interval-envelope.json",
+        "sha256": "a26e6b3757bdd3a8de1e185805f2b77bd67164e557db9aaf0057737cb7a488b5",
+        "bytes": 4841
+      }
+    ]
+  },
+  "cohorts": [
+    {
+      "parent_id": "framework:province:langkho:65589ae342bb",
+      "land_candidates": 9,
+      "complete_children": [
+        {
+          "owner": 30186,
+          "name": "Mawkmai",
+          "id": "gb:MMR:ADM3:66882298B40849713300247",
+          "remaining_counts": {}
+        },
+        {
+          "owner": 30292,
+          "name": "Langkho",
+          "id": "gb:MMR:ADM3:66882298B65618262001870",
+          "remaining_counts": {
+            "repair-evaluation:land": 9
+          }
+        },
+        {
+          "owner": 30301,
+          "name": "Mongnai",
+          "id": "gb:MMR:ADM3:66882298B6726893280031",
+          "remaining_counts": {}
+        },
+        {
+          "owner": 30381,
+          "name": "Mongpan",
+          "id": "gb:MMR:ADM3:66882298B93086807686764",
+          "remaining_counts": {}
+        }
+      ],
+      "source_parent_features": [
+        {
+          "source_index": 44950,
+          "family_index": 217,
+          "source_id": "gb:MMR:ADM2:60261553B57199101523672",
+          "ordinal": 53,
+          "owners": [],
+          "name": "Langkho",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "source_region_features": [
+        {
+          "id": "gb:MMR:ADM1:20573499B82952573339616",
+          "name": "Shan"
+        }
+      ],
+      "repair_owner": 30292,
+      "repair_source_id": "gb:MMR:ADM3:66882298B65618262001870",
+      "centre_envelope_degrees": {
+        "longitude": [
+          98.03445145442203,
+          98.5356606119787
+        ],
+        "latitude": [
+          19.645530196305927,
+          19.6959587827371
+        ]
+      },
+      "source_sids": [
+        44896,
+        44950,
+        45289
+      ],
+      "sid_occurrences": {
+        "44896": 9,
+        "44950": 9,
+        "45289": 9
+      },
+      "current_geometry_metadata": {
+        "type": "Polygon",
+        "polygons": 1,
+        "coordinate_pairs": 271,
+        "interior_rings": 2,
+        "bounds": [
+          97.6393,
+          19.5748,
+          98.627,
+          20.5979
+        ]
+      },
+      "original_geometry_metadata": {
+        "type": "Polygon",
+        "polygons": 1,
+        "coordinate_pairs": 440,
+        "interior_rings": 0,
+        "bounds": [
+          97.63910594200006,
+          19.57240556600006,
+          98.62696899761077,
+          20.597877604000047
+        ]
+      },
+      "topology_fields": {
+        "topology_version": 1,
+        "topology_reconciled": true,
+        "topology_conflicts": 4,
+        "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+      },
+      "foreign_reference_flags_observed": false,
+      "status": "held",
+      "cluster_distinction": "Eight cells in four western intervals at approximately98.034–98.039E/19.6455–19.6494N; one separate eastern cell at98.5356606119787E/19.6959587827371N. Do not treat the envelope as one compact cluster."
+    },
+    {
+      "parent_id": "framework:province:loikaw:183a1e391266",
+      "land_candidates": 6,
+      "complete_children": [
+        {
+          "owner": 30085,
+          "name": "Hpruso",
+          "id": "gb:MMR:ADM3:66882298B13513293373289",
+          "remaining_counts": {}
+        },
+        {
+          "owner": 30116,
+          "name": "Demoso",
+          "id": "gb:MMR:ADM3:66882298B21887991240008",
+          "remaining_counts": {}
+        },
+        {
+          "owner": 30231,
+          "name": "Loikaw",
+          "id": "gb:MMR:ADM3:66882298B50366352071932",
+          "remaining_counts": {}
+        },
+        {
+          "owner": 30374,
+          "name": "Shadaw",
+          "id": "gb:MMR:ADM3:66882298B91132834391640",
+          "remaining_counts": {
+            "repair-evaluation:land": 6
+          }
+        }
+      ],
+      "source_parent_features": [
+        {
+          "source_index": 44915,
+          "family_index": 217,
+          "source_id": "gb:MMR:ADM2:60261553B25125997749826",
+          "ordinal": 18,
+          "owners": [],
+          "name": "Loikaw",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "source_region_features": [
+        {
+          "id": "gb:MMR:ADM1:20573499B20332088310808",
+          "name": "Kayah"
+        }
+      ],
+      "repair_owner": 30374,
+      "repair_source_id": "gb:MMR:ADM3:66882298B91132834391640",
+      "centre_envelope_degrees": {
+        "longitude": [
+          97.82984826407693,
+          97.83671414294759
+        ],
+        "latitude": [
+          19.22467886696363,
+          19.227272046738623
+        ]
+      },
+      "source_sids": [
+        44887,
+        44915,
+        45221
+      ],
+      "sid_occurrences": {
+        "44887": 5,
+        "44915": 6,
+        "45221": 6
+      },
+      "current_geometry_metadata": {
+        "type": "Polygon",
+        "polygons": 1,
+        "coordinate_pairs": 152,
+        "interior_rings": 3,
+        "bounds": [
+          97.3972,
+          19.158,
+          97.8881,
+          19.9004
+        ]
+      },
+      "original_geometry_metadata": {
+        "type": "Polygon",
+        "polygons": 1,
+        "coordinate_pairs": 308,
+        "interior_rings": 0,
+        "bounds": [
+          97.397200609,
+          19.158014026000036,
+          97.88879112800007,
+          19.902334134000043
+        ]
+      },
+      "topology_fields": {
+        "topology_version": 1,
+        "topology_reconciled": true,
+        "topology_conflicts": 1,
+        "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+      },
+      "foreign_reference_flags_observed": false,
+      "status": "held",
+      "specific_source_mismatch": "At x202330,y116811 the row retains parent44915 and township45221 but not Kayah44887; the other five retain all three. This is a held source-lineage mismatch, not proof of foreign territory."
+    }
+  ],
+  "primary_documents": [
+    {
+      "key": "shadaw_gad",
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Shadaw_2019_MMR.pdf",
+      "title": "Shadaw Township regional information, GAD; MIMU filename 2019",
+      "publisher": "Myanmar General Administration Department; hosted by MIMU",
+      "access": "Successful read-only web PDF text, 41 pages. No local download.",
+      "vintage": {
+        "filename": 2019,
+        "cover": "January 2020, day blank/unread",
+        "reference_period": "Through September 2019, PDF page 9"
+      },
+      "facts": [
+        {
+          "pdf_pages": [
+            1,
+            9,
+            10
+          ],
+          "summary": "Cover places Shadaw Township in Loikaw District, Kayah. History cites 22 July 1972 letter 105/7/စိပ်1 for township formation with northern, southern, middle and Thanlwin east-bank groups; 15 July 1972 letter 103/52/စိပ်1 for four town wards; and 7 June 2010 letter 200/23-19/ဦး1 changing the township to four wards, three village tracts and 20 villages. Page 10 explicitly places about three-fifths of township east of Thanlwin. Its reported coordinate box is 19°10′–19°35′N, 97°27′–97°51′E; township area 834.19 square miles. These are profile statements, not territorial annexes."
+        }
+      ],
+      "limits": "No verified boundary map, scale, datum or georeferenced annex. The printed north bound differs from the retained original-source north bound; do not normalize them. Four historical group names becoming three tract names does not prove any east-bank exclusion. River-bank wording does not establish the six centre locations.",
+      "license": "No explicit document reuse license verified; short attributed factual paraphrase only."
+    },
+    {
+      "key": "langkho_district_gad_later",
+      "url": "https://www.shanstategovernment.com/wp-content/uploads/2022/11/2021-Oct-to-2022-July.pdf",
+      "catalogue_url": "https://www.shanstategovernment.com/%E1%80%9C%E1%80%84%E1%80%BA%E1%80%B8%E1%80%81%E1%80%B1%E1%80%B8%E1%80%99%E1%80%BC%E1%80%AD%E1%80%AF%E1%80%B7%E1%80%94%E1%80%9A%E1%80%BA/",
+      "title": "Langkho District regional information, October 2021–July 2022",
+      "publisher": "GAD district report publicly linked by Shan State Government",
+      "access": "Successful read-only web PDF text, 91 pages. Catalogue title is Langkho Township, but body is district report.",
+      "facts": [
+        {
+          "pdf_pages": [
+            2,
+            3
+          ],
+          "summary": "Report records Union Government meeting 29/2004 on 29 July 2004 separating Langkho, Mongnai, Mawkmai and Mongpan townships, with Homein and Kengtawng sub-townships, from Loilen District to form Langkho District. It then records MoHA Minister Office notification 332/2022 dated 30 April 2022 moving Mongnai Township and Kengtawng Town from Langkho to Nansang District. The remaining later district contains Langkho, Mawkmai, Mongpan and Homein Town."
+        }
+      ],
+      "limits": "Historical retrospective and post-2019 transfer evidence. The original 2004 decision and territorial annex were not acquired. The 2022 district cannot replace the frozen 2019 complete four-child roster. Neither decision reference locates the nine candidate centres. No map scale/datum verified.",
+      "license": "No explicit reuse license verified; short attributed factual paraphrase only."
+    },
+    {
+      "key": "langkho_dop",
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_Langkho_2014_ENG.pdf",
+      "title": "2014 Census, Linkhe` Township Report",
+      "publisher": "Department of Population, Ministry of Labour, Immigration and Population",
+      "access": "Successful read-only web text, 58 pages.",
+      "publication_date": "October 2017",
+      "reference_date": "29 March 2014 census night",
+      "facts": [
+        {
+          "pdf_pages": [
+            1,
+            3,
+            7,
+            10
+          ],
+          "summary": "Cover explicitly says Shan State, Linkhe` District, Linkhe` Township. Figures at a Glance reports 2,530.2 km², eight wards and 11 village tracts. Area footnote attributes the statistic to Settlement and Land Record Department, 2014–2015."
+        }
+      ],
+      "limits": "District/township naming and statistical area support vintage context, not original-footprint equality or any centre assignment. No document map geometry/scale/datum inspected.",
+      "license": "No explicit reuse license verified."
+    },
+    {
+      "key": "homein_dop",
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_HomeinST_2014_ENG.pdf",
+      "title": "2014 Census, Homane Sub-Township Report",
+      "publisher": "Department of Population, Ministry of Labour, Immigration and Population",
+      "access": "Successful read-only web text, 56 pages.",
+      "publication_date": "October 2017",
+      "reference_date": "29 March 2014 census night",
+      "facts": [
+        {
+          "pdf_pages": [
+            1,
+            3,
+            7,
+            10
+          ],
+          "summary": "Cover explicitly says Shan State, Linkhe` District, Homane Sub-Township. Figures at a Glance reports 1,533.3 km², three wards and three village tracts. Area footnote attributes the statistic to Settlement and Land Record Department, 2014–2015."
+        }
+      ],
+      "limits": "Separate report establishes a contemporaneous named subunit. It does not itself prove its original-source aggregation into owner30292 or locate either candidate cluster. No map scale/datum inspected.",
+      "license": "No explicit reuse license verified."
+    }
+  ],
+  "missing_artifacts": [
+    {
+      "cohort": "Langkho9",
+      "priority": "Original Union Government meeting 29/2004 decision of 29 July 2004, with applicable township/sub-township schedules and district map; original pre-2019 Langkho/Homein township territorial schedule/map.",
+      "specific_question": "Trace all four frozen source children and Homein to the consumed-vintage parent, and locate both the eight-cell western cluster and isolated eastern centre against valid administrative/exclusion boundaries.",
+      "later_context_only": "Original MoHA notification332/2022 schedule would authenticate the later Mongnai/Kengtawng transfer but cannot independently qualify the 2019 footprint."
+    },
+    {
+      "cohort": "Loikaw/Shadaw6",
+      "priority": "Original 22 July 1972 letter105/7/စိပ်1 and its township schedule/map, plus original 7 June 2010 letter200/23-19/ဦး1 and territorial annex/tract map. Town letter103/52/စိပ်1 of15 July1972 is a separate ward-formation lead.",
+      "specific_question": "Locate the compact 97.82985–97.83671E /19.22468–19.22727N cluster and all retained current exclusions, including three current holes. Resolve the single centre without Kayah ADM1 source membership; neither absent foreign flags nor the east-bank narrative supplies that proof."
+    }
+  ],
+  "actual_access_limits": [
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Langkho_2019_MMR.pdf",
+      "result": "One web open internal error; not retried. Shan MIMU catalogue confirms same exact link, 1.54MB, uploaded25 August2020; confirmation is not successful reading of its contents."
+    },
+    {
+      "url": "https://themimu.info/states_regions/kayah",
+      "result": "One web open 400/timeout; not retried."
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_Shadaw_2014_ENG.pdf",
+      "result": "One web open not accessible; no contents adopted, no retry."
+    },
+    {
+      "url": "https://www.shanstategovernment.com/wp-content/uploads/2022/11/%E1%80%99%E1%80%BB%E1%80%80%E1%80%BA%E1%80%94%E1%80%BE%E1%80%AC%E1%80%96%E1%80%AF%E1%80%B6%E1%80%B8.pdf",
+      "result": "One 404 for separate catalogue cover PDF. Successful district-report body was a distinct linked URL, not retry."
+    }
+  ],
+  "not_adopted": "Search returned secondary geographic society/Wikipedia reformatted accounts. Their text and KML were not used as primary proof or acquired. No generic Thai boundary treaty text was repeated because no profile annex tied these cells to a particular international boundary segment.",
+  "qualification_limits": [
+    "The local extracts retain exact source/owner/parent IDs, all complete children, source/current bounds and hole counts. Source membership and topology_reconciled flags are evidence of mapping lineage only.",
+    "Independent centre envelopes do not delineate a territorial polygon. Current interior-ring counts do not identify which individual candidate occupies any specific hole; no spatial geometry pass was performed.",
+    "No foreign source SID flags occur in these15 rows. Their absence does not clear country reference, explicit holes, administrative reforms, water hierarchy, original-footprint or effective-owner requirements.",
+    "All15 held; no new exception, clearance, acceptance, scientific or wrapper action."
+  ]
+}

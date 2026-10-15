@@ -1,0 +1,58 @@
+{
+  "kind": "primary-source-research-custody-index",
+  "status": "source-notes-only-no-new-clearance",
+  "retained_land_cells": 50,
+  "cohorts": {
+    "yangon-north": 20,
+    "monghsat": 15,
+    "langkho": 9,
+    "loikaw": 6
+  },
+  "files": [
+    {
+      "path": "yangon-north/evidence-notes.json",
+      "bytes": 6461,
+      "sha256": "010243cc58705dfa7bda65a138ab557318c2bac25594225f60abc000a4c7fe25"
+    },
+    {
+      "path": "yangon-north/retained-candidate-intervals.json",
+      "bytes": 643,
+      "sha256": "ccf5d2afb2c3106a016bdf13ec239957b0cae0e0417bbc839239a82f25825d15"
+    },
+    {
+      "path": "yangon-north/retained-parent-inventory.json",
+      "bytes": 12871,
+      "sha256": "b9d4c130517de76466e8c918e2378f3c5697144a4da19afd565e1e89bbfac119"
+    },
+    {
+      "path": "monghsat/notes.json",
+      "bytes": 22525,
+      "sha256": "13c55f69a5939830360a049aa62990a10278d39705af2d2c41bc79ef63b6b48f"
+    },
+    {
+      "path": "monghsat/retained-candidate-intervals.json",
+      "bytes": 10735,
+      "sha256": "421572bc1eca138c140ddea47c0425c143b58cc69f1074fd35fdbc53135eec47"
+    },
+    {
+      "path": "langkho-loikaw/notes.json",
+      "bytes": 17741,
+      "sha256": "de3c99a4980a21b30efbe5eca2bdc221fe59dfc6401ae40a3040b9ba186b8175"
+    },
+    {
+      "path": "langkho-loikaw/retained-interval-envelope.json",
+      "bytes": 4841,
+      "sha256": "a26e6b3757bdd3a8de1e185805f2b77bd67164e557db9aaf0057737cb7a488b5"
+    },
+    {
+      "path": "langkho-loikaw/retained-parent-inventory.json",
+      "bytes": 15591,
+      "sha256": "b71e5c179e31529ab84dbb64cd417503cf1bc497d400cb3b39c008f0a438f47b"
+    }
+  ],
+  "limits": [
+    "All50landcells held; primary order citations are leads pending actual instruments/maps and exact candidate joins.",
+    "No downloaded PDFs redistributed and no science/GIS/native/source/GSHHG processing in this source pass.",
+    "Later2020and2022administrative changes do not replace frozen source/parent vintages."
+  ]
+}

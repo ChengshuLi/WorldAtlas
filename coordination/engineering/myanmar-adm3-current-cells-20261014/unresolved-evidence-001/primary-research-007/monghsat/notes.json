@@ -1,0 +1,610 @@
+{
+  "task": "Monghsat15 bounded primary administrative instrument discovery",
+  "recorded_utc_date": "2026-10-15",
+  "status": "All 15 repair-land candidates held; no qualification, clearance, sovereignty decision, or accepted credit.",
+  "scientific_vintage": "f7c358326d776398bc1cffe84df81eac7033091c",
+  "frozen_queue_vintage": "a61b6f9e7f88b1da380e3a834f89d7509132ed71",
+  "retained_metadata": {
+    "file": ".cache/mmr-monghsat-primary-boundary-001/retained-candidate-intervals.json",
+    "bytes": 10735,
+    "sha256": "421572bc1eca138c140ddea47c0425c143b58cc69f1074fd35fdbc53135eec47",
+    "upstream_pins": {
+      "inventory_pin": {
+        "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/341d0bbaf81e47cd16ab58ca6d1ab75d5ac120cf732c677e081b12830ea3ef31/work/.cache/mmr-remaining-inventory-20261014-001/inventory.json",
+        "sha256": "efec8d28b63befcb411b6d0d81063af6a962edbec9a1b3f08b86fc3b7bd44157"
+      },
+      "interval_pin": {
+        "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/341d0bbaf81e47cd16ab58ca6d1ab75d5ac120cf732c677e081b12830ea3ef31/work/.cache/mmr-remaining-inventory-20261014-001/remaining-intervals.json.gz",
+        "sha256": "b12b9ed64ecb16fa2b5501648fa4ca91727793fa99ceadffb96d9623519c93aa"
+      },
+      "latitude_pin": {
+        "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/341d0bbaf81e47cd16ab58ca6d1ab75d5ac120cf732c677e081b12830ea3ef31/work/coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+        "decoded_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+      }
+    },
+    "parent": {
+      "parent_id": "framework:province:monghsat:6a0b26b82693",
+      "repair_land": 15,
+      "repair_water": 0,
+      "repair_cells": 15,
+      "relative": 0,
+      "conflicts": 0,
+      "complete_child_count": 2,
+      "repair_owner_count": 2,
+      "repair_owners": [
+        30170,
+        30354
+      ],
+      "complete_children": [
+        {
+          "owner": 30170,
+          "id": "gb:MMR:ADM3:66882298B34816344861267",
+          "name": "Mongton",
+          "province_id": "framework:province:monghsat:6a0b26b82693",
+          "source_id": "gb:MMR:ADM3",
+          "source_atoms": [
+            "gb:MMR:ADM3:66882298B34816344861267"
+          ],
+          "remaining_counts": {
+            "repair-evaluation:land": 14
+          },
+          "accepted_removed_cells": 0,
+          "reserved_excluded_cells": 0,
+          "blocks": [
+            28
+          ],
+          "source_sids": [
+            44896,
+            44963,
+            45219
+          ],
+          "topology_fields": {
+            "topology_version": 1,
+            "topology_reconciled": true,
+            "topology_conflicts": 5,
+            "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+          },
+          "current_geometry": {
+            "type": "Polygon",
+            "polygons": 1,
+            "coordinate_pairs": 226,
+            "interior_rings": 0,
+            "bounds": [
+              98.4899,
+              19.715174153787803,
+              99.2462,
+              20.7928
+            ]
+          },
+          "original_geometry": {
+            "type": "Polygon",
+            "polygons": 1,
+            "coordinate_pairs": 399,
+            "interior_rings": 0,
+            "bounds": [
+              98.48992878399324,
+              19.712865016103848,
+              99.24620226512252,
+              20.792811806973187
+            ]
+          }
+        },
+        {
+          "owner": 30354,
+          "id": "gb:MMR:ADM3:66882298B84564180686688",
+          "name": "Monghsat",
+          "province_id": "framework:province:monghsat:6a0b26b82693",
+          "source_id": "gb:MMR:ADM3",
+          "source_atoms": [
+            "gb:MMR:ADM3:66882298B84564180686688"
+          ],
+          "remaining_counts": {
+            "repair-evaluation:land": 1
+          },
+          "accepted_removed_cells": 0,
+          "reserved_excluded_cells": 0,
+          "blocks": [
+            28
+          ],
+          "source_sids": [
+            44896,
+            44963,
+            45262
+          ],
+          "topology_fields": {
+            "topology_version": 1,
+            "topology_reconciled": true,
+            "topology_conflicts": 3,
+            "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+          },
+          "current_geometry": {
+            "type": "MultiPolygon",
+            "polygons": 2,
+            "coordinate_pairs": 221,
+            "interior_rings": 1,
+            "bounds": [
+              98.9883,
+              20.06701504431951,
+              99.6809,
+              20.9979
+            ]
+          },
+          "original_geometry": {
+            "type": "Polygon",
+            "polygons": 1,
+            "coordinate_pairs": 385,
+            "interior_rings": 0,
+            "bounds": [
+              98.98831270756544,
+              20.064164388375904,
+              99.68089492847932,
+              20.99794446023433
+            ]
+          }
+        }
+      ],
+      "native_blocks": [
+        28
+      ],
+      "observed_source_families": [
+        "gb:MMR:ADM1",
+        "gb:MMR:ADM2",
+        "gb:MMR:ADM3"
+      ],
+      "source_region_features": [
+        {
+          "id": "gb:MMR:ADM1:20573499B82952573339616",
+          "name": "Shan"
+        }
+      ],
+      "source_parent_features": [
+        {
+          "source_index": 44963,
+          "family_index": 217,
+          "source_id": "gb:MMR:ADM2:60261553B30377978208155",
+          "ordinal": 66,
+          "owners": [],
+          "name": "Monghsat",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "decisions": [
+        {
+          "ids": [
+            "gb:MMR:ADM3:66882298B34816344861267",
+            "gb:MMR:ADM3:66882298B84564180686688"
+          ],
+          "status": "open",
+          "rationale": "Current province Monghsat (framework:province:monghsat:6a0b26b82693); inspected exact source identifiers for 2 locations with actual role Township, source gb:MMR:ADM3, reference vintages 2019. Pinned cache contains 330 features; 2 of these location records have entirely matched declared-source member IDs. Source-ID correspondence does not independently approve local geographic purpose, original-footprint retention, administrative reforms or settlement/rank. Exact review stays open until those tests have sourced outcomes.",
+          "evidence": [
+            {
+              "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM3/geoBoundaries-MMR-ADM3.geojson",
+              "title": "Myanmar",
+              "inspected_fact": "Actual location source gb:MMR:ADM3; role Township; reference vintage 2019; license Creative Commons Attribution 4.0 (CC BY 4.0). Source feature/member identifiers were inspected separately from ADM-level labels."
+            }
+          ],
+          "province_id": "framework:province:monghsat:6a0b26b82693",
+          "source_id": "gb:MMR:ADM3",
+          "actual_role": "Township",
+          "specific_reasons": []
+        }
+      ],
+      "prerequisites": [
+        "Complete original source-family membership, exact source/owner/parent joins and whole-footprint parent proof.",
+        "Accepted country/topology exclusions and all explicit holes; ancestry and nearest-bank proximity do not grant territorial authority.",
+        "Whole original GSHHG hierarchy or demonstrably applicable retained target interpretation; preserve all uncertainty/relative intervals.",
+        "Later actual delivery-base effective owner-zero and native authority/conservation."
+      ],
+      "land_only_rule_ceiling": 15
+    },
+    "candidate_groups": [
+      {
+        "owner": 30170,
+        "package_id": "gb-MMR-ADM3--repair-evaluation",
+        "cell_count": 14,
+        "interval_count": 9,
+        "x_inclusive": [
+          203210,
+          203211
+        ],
+        "y_inclusive": [
+          116189,
+          116197
+        ],
+        "centre_envelope_degrees": {
+          "longitude": [
+            99.04373564840597,
+            99.04510882418009
+          ],
+          "latitude": [
+            20.020130457667133,
+            20.030451703290915
+          ]
+        },
+        "source_sids": [
+          44896,
+          44963,
+          45219
+        ],
+        "all_owners": [
+          30170
+        ],
+        "retained_rows": [
+          [
+            116189,
+            203210,
+            203211,
+            [
+              30170
+            ],
+            [
+              44896,
+              44963,
+              45219
+            ],
+            "land"
+          ],
+          [
+            116190,
+            203210,
+            203212,
+            [
+              30170
+            ],
+            [
+              44896,
+              44963,
+              45219
+            ],
+            "land"
+          ],
+          [
+            116191,
+            203210,
+            203212,
+            [
+              30170
+            ],
+            [
+              44896,
+              44963,
+              45219
+            ],
+            "land"
+          ],
+          [
+            116192,
+            203210,
+            203212,
+            [
+              30170
+            ],
+            [
+              44896,
+              44963,
+              45219
+            ],
+            "land"
+          ],
+          [
+            116193,
+            203210,
+            203212,
+            [
+              30170
+            ],
+            [
+              44896,
+              44963,
+              45219
+            ],
+            "land"
+          ],
+          [
+            116194,
+            203210,
+            203212,
+            [
+              30170
+            ],
+            [
+              44896,
+              44963,
+              45219
+            ],
+            "land"
+          ],
+          [
+            116195,
+            203210,
+            203211,
+            [
+              30170
+            ],
+            [
+              44896,
+              44963,
+              45219
+            ],
+            "land"
+          ],
+          [
+            116196,
+            203210,
+            203211,
+            [
+              30170
+            ],
+            [
+              44896,
+              44963,
+              45219
+            ],
+            "land"
+          ],
+          [
+            116197,
+            203210,
+            203211,
+            [
+              30170
+            ],
+            [
+              44896,
+              44963,
+              45219
+            ],
+            "land"
+          ]
+        ]
+      },
+      {
+        "owner": 30354,
+        "package_id": "gb-MMR-ADM3--repair-evaluation",
+        "cell_count": 1,
+        "interval_count": 1,
+        "x_inclusive": [
+          203605,
+          203605
+        ],
+        "y_inclusive": [
+          115945,
+          115945
+        ],
+        "centre_envelope_degrees": {
+          "longitude": [
+            99.58614007918646,
+            99.58614007918646
+          ],
+          "latitude": [
+            20.344922732494055,
+            20.344922732494055
+          ]
+        },
+        "source_sids": [
+          44896,
+          44963,
+          45262
+        ],
+        "all_owners": [
+          30354
+        ],
+        "retained_rows": [
+          [
+            115945,
+            203605,
+            203606,
+            [
+              30354
+            ],
+            [
+              44896,
+              44963,
+              45262
+            ],
+            "land"
+          ]
+        ]
+      }
+    ]
+  },
+  "scope": {
+    "parent_id": "framework:province:monghsat:6a0b26b82693",
+    "complete_children": 2,
+    "repair_land": 15,
+    "separate_conflicts": 0,
+    "separate_relative": 0,
+    "foreign_context": "Only MMR ADM1/ADM2/ADM3 source SIDs occur in these retained candidates; no foreign owner or SID. GAD says Thailand borders both township reporting areas to the south, but no candidate-to-international-boundary registration is established.",
+    "topology_note": "Retained current geometry topology-conflict counts are distinct from the zero separate queue-conflict count. A hole is not evidence that the one Monghsat candidate lies in that hole."
+  },
+  "sources": [
+    {
+      "acquisition": "Read-only web PDF text; no source bytes downloaded or source hash asserted.",
+      "scale": "Not established; no map pixels inspected.",
+      "datum": "Not stated in the inspected text.",
+      "license": "No reuse license established in the inspected passages.",
+      "spatial_limit": "Administrative narrative/reporting extent is not an exact boundary annex or candidate-cell proof.",
+      "source_id": "gad-mongton-2019",
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Mongton_2019_MMR.pdf",
+      "publisher": "General Administration Department; MIMU mirror",
+      "pages": 77,
+      "document_date": "2019-09-30",
+      "locators": [
+        "PDF p1 cover",
+        "PDF p10 history",
+        "PDF pp11-12 geography/area/boundaries"
+      ],
+      "findings": [
+        {
+          "subject": "Mongton town formation; 3 wards and 6 village tracts in the cited historical account",
+          "date": "1972-08-04",
+          "reference_as_read": "၁၀၃/၅၇/စိတ်၁",
+          "normalized_numeric_reference": "103/57/စိတ်1",
+          "limit": "Town formation citation; not automatically a township territorial schedule."
+        },
+        {
+          "subject": "Ponparkyin administrative formation context; 5 wards and 3 village tracts",
+          "date": "2002-08-02",
+          "reference_as_read": "၁၀၀/၂၄-၁၆/ဦး၁",
+          "normalized_numeric_reference": "100/24-16/ဦး1",
+          "limit": "Original order and map absent; applicability to the 14-cell extent not proven."
+        },
+        {
+          "subject": "Mong Hta sub-township/town administrative history; 3 wards and 7 village tracts",
+          "dates": [
+            "2011-01-20",
+            "2014-05-22"
+          ],
+          "reference_as_read": "၂၀၀/၂၄-၇၂/ဦး၁",
+          "normalized_numeric_reference": "200/24-72/ဦး1",
+          "limit": "Profile cites the same reference for both dates. No original instrument or annex acquired; candidate membership not proven."
+        },
+        {
+          "subject": "Reported area",
+          "value": "Mongton 2503.03 sq mi; Ponparkyin 10.08 sq mi; Mong Hta 9.18 sq mi; overall 2522.29 sq mi",
+          "limit": "Table reporting categories and exact territorial nesting require original instruments."
+        },
+        {
+          "subject": "Named neighbours",
+          "value": "Monghsat east; Thailand south; Mongpan west; Mongpying north"
+        },
+        {
+          "subject": "Point coordinate",
+          "value": "20°17′51″N, 98°53′54″E",
+          "limit": "A point, not a full township boundary envelope."
+        }
+      ]
+    },
+    {
+      "acquisition": "Read-only web PDF text; no source bytes downloaded or source hash asserted.",
+      "scale": "Not established; no map pixels inspected.",
+      "datum": "Not stated in the inspected text.",
+      "license": "No reuse license established in the inspected passages.",
+      "spatial_limit": "Administrative narrative/reporting extent is not an exact boundary annex or candidate-cell proof.",
+      "source_id": "gad-monghsat-2019",
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Monghsat_2019_MMR.pdf",
+      "publisher": "General Administration Department; MIMU mirror",
+      "pages": 59,
+      "document_date": "2019-09-30",
+      "locators": [
+        "PDF p1 cover and p59 closing date",
+        "PDF p12 / printed p1 history",
+        "PDF pp13-14 geography/area/boundaries"
+      ],
+      "findings": [
+        {
+          "subject": "Monghsat township formation; 3 wards, 20 village tracts, 210 villages",
+          "date": "1972-08-04",
+          "reference_as_read": "၁၀၃/ ၅၇/စိတ်(၁)",
+          "normalized_numeric_reference": "103/57/စိတ်(1)"
+        },
+        {
+          "subject": "Mong Khat sub-township formation; 3 wards, 7 village tracts, 149 villages",
+          "notification_date": "2002-08-09",
+          "formation_date": "2002-10-01",
+          "reference_as_read": "၁၀၀/၂၂-၃၂၈/ဦး၁",
+          "normalized_numeric_reference": "100/22-328/ဦး1",
+          "limit": "Profile says later changed from sub-township to town, but the inspected passage supplies no later amendment reference/date. Original annex absent; one-cell membership not proven."
+        },
+        {
+          "subject": "Reported area",
+          "value": "1910.69 sq mi overall, including Mong Khat 4.23 sq mi"
+        },
+        {
+          "subject": "Stated coordinate range",
+          "value": "20°–21°N, 99°–99°35′E",
+          "candidate_comparison": "The retained one-cell centre is 99.58614007918646E, slightly east of 99°35′E (99.58333333333333E). This does not prove a territorial exclusion; the profile range is not a geometric boundary."
+        },
+        {
+          "subject": "Named neighbours",
+          "value": "Tachileik east; Thailand south; Mongton west; Kengtung north"
+        },
+        {
+          "subject": "Named drainage",
+          "value": "Nam Khat flows northeast to south into Thailand; Mae Hsum joins Nam Khat from the west; Nam Hsin separates Monghsat and Mongpying",
+          "limit": "No candidate-to-stream registration established."
+        }
+      ]
+    },
+    {
+      "acquisition": "Read-only web PDF text; no source bytes downloaded or source hash asserted.",
+      "scale": "Not established; no map pixels inspected.",
+      "datum": "Not stated in the inspected text.",
+      "license": "No reuse license established in the inspected passages.",
+      "spatial_limit": "Administrative narrative/reporting extent is not an exact boundary annex or candidate-cell proof.",
+      "source_id": "census-mongton-2014",
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_Mongton_2014_ENG.pdf",
+      "publisher": "Department of Population, Ministry of Labour, Immigration and Population; MIMU mirror",
+      "actual_title": "Minetung Township Report, Minesat District",
+      "pages": 58,
+      "publication_date": "2017-10",
+      "census_night": "2014-03-29",
+      "area_source_vintage": "Settlement and Land Record Department 2014–2015",
+      "locators": [
+        "PDF cover",
+        "PDF p7 area",
+        "PDF p10 source notes"
+      ],
+      "findings": [
+        "Area 3171.5 km². This reporting extent differs from the broader 2019 GAD area; no exact sub-township territorial reconciliation is provided."
+      ]
+    },
+    {
+      "acquisition": "Read-only web PDF text; no source bytes downloaded or source hash asserted.",
+      "scale": "Not established; no map pixels inspected.",
+      "datum": "Not stated in the inspected text.",
+      "license": "No reuse license established in the inspected passages.",
+      "spatial_limit": "Administrative narrative/reporting extent is not an exact boundary annex or candidate-cell proof.",
+      "source_id": "census-monghsat-2014",
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_Monghsat_2014_ENG.pdf",
+      "publisher": "Department of Population, Ministry of Labour, Immigration and Population; MIMU mirror",
+      "actual_title": "Minesat Township Report, Minesat District",
+      "pages": 58,
+      "publication_date": "2017-10",
+      "census_night": "2014-03-29",
+      "area_source_vintage": "Settlement and Land Record Department 2014–2015",
+      "locators": [
+        "PDF cover",
+        "PDF p7 area and administrative counts",
+        "PDF p10 source notes"
+      ],
+      "findings": [
+        "Area 3353.5 km²; 3 wards and 20 village tracts. The 2019 GAD report has a broader aggregate including Mong Khat. Exact candidate-level nesting is not established."
+      ]
+    }
+  ],
+  "bounded_discovery": {
+    "pdf_results": "All four new primary PDF text reads succeeded.",
+    "queries": [
+      "\"ပုံပါကျင်\" \"၁၀၀/၂၄-၁၆\"",
+      "\"မိုင်းခုတ်\" \"၁၀၀/၂၂-၃၂၈\""
+    ],
+    "result": "Exact-ID search returned irrelevant numeric matches and exposed no original order or annex. This is an access/discovery result, not a claim that the instruments or maps do not exist.",
+    "stopping_rule": "No further generic portal loop, treaty recap, failed-ref retry, download, or permission card."
+  },
+  "missing_artifacts": [
+    {
+      "artifact": "Original Ponparkyin MoHA 100/24-16/ဦး1 dated 2002-08-02 with territorial schedule and map",
+      "required_relation": "Register its applicable boundary to the Mongton 14-cell extent; do not assume the cluster belongs to Ponparkyin."
+    },
+    {
+      "artifact": "Original Mong Hta 200/24-72/ဦး1 instruments cited 2011-01-20 and 2014-05-22, with territorial schedule and map",
+      "required_relation": "Resolve administrative nesting and vintage relative to original MMR ADM3 2019; candidate applicability is unproven."
+    },
+    {
+      "artifact": "Original Mong Khat 100/22-328/ဦး1 dated 2002-08-09, formation effective 2002-10-01, plus later conversion-to-town amendment and map",
+      "required_relation": "Register the one-cell centre at 99.58614007918646E,20.344922732494055N to an applicable territorial boundary; do not assume it is in Mong Khat."
+    },
+    {
+      "artifact": "Original 1972-08-04 103/57/စိတ်(1) administrative instruments and any relevant territorial annex",
+      "required_relation": "Distinguish town creation from township extent and reconcile retained parent/child identities."
+    }
+  ],
+  "custody_and_limits": {
+    "new_downloaded_source_files": [],
+    "source_hashes": "None asserted because sources were read in the web tool without local source downloads. Retained local metadata file hashes are separate.",
+    "new_scientific_outputs": false,
+    "runtime_or_tracked_changes": false,
+    "qualification": "No qualification; all 15 held."
+  }
+}

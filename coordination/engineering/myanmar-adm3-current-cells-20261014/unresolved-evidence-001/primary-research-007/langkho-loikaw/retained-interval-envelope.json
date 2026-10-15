@@ -1,0 +1,229 @@
+{
+  "scientific_vintage": "f7c358326d776398bc1cffe84df81eac7033091c",
+  "inventory": {
+    "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/341d0bbaf81e47cd16ab58ca6d1ab75d5ac120cf732c677e081b12830ea3ef31/work/.cache/mmr-remaining-inventory-20261014-001/inventory.json",
+    "sha256": "efec8d28b63befcb411b6d0d81063af6a962edbec9a1b3f08b86fc3b7bd44157"
+  },
+  "intervals": {
+    "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/341d0bbaf81e47cd16ab58ca6d1ab75d5ac120cf732c677e081b12830ea3ef31/work/.cache/mmr-remaining-inventory-20261014-001/remaining-intervals.json.gz",
+    "sha256": "b12b9ed64ecb16fa2b5501648fa4ca91727793fa99ceadffb96d9623519c93aa"
+  },
+  "latitude_pin": {
+    "commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+    "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+    "decoded_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+  },
+  "longitude_formula": "(x+0.5)/262166*360-180",
+  "limit": "Independent extrema only; no source/geometry/GIS process or qualification.",
+  "children": [
+    {
+      "owner": 30292,
+      "name": "Langkho",
+      "id": "gb:MMR:ADM3:66882298B65618262001870",
+      "parent_id": "framework:province:langkho:65589ae342bb",
+      "package_id": "gb-MMR-ADM3--repair-evaluation",
+      "kind": [
+        "land"
+      ],
+      "cells": 9,
+      "intervals": 5,
+      "x_inclusive": [
+        202475,
+        202840
+      ],
+      "y_inclusive": [
+        116448,
+        116487
+      ],
+      "centre_envelope_degrees": {
+        "longitude": [
+          98.03445145442203,
+          98.5356606119787
+        ],
+        "latitude": [
+          19.645530196305927,
+          19.6959587827371
+        ]
+      },
+      "source_sids": [
+        44896,
+        44950,
+        45289
+      ],
+      "sid_occurrences": {
+        "44896": 9,
+        "44950": 9,
+        "45289": 9
+      },
+      "small_exact_rows": [
+        [
+          116448,
+          202840,
+          202841,
+          [
+            30292
+          ],
+          [
+            44896,
+            44950,
+            45289
+          ],
+          "land"
+        ],
+        [
+          116484,
+          202478,
+          202479,
+          [
+            30292
+          ],
+          [
+            44896,
+            44950,
+            45289
+          ],
+          "land"
+        ],
+        [
+          116485,
+          202477,
+          202479,
+          [
+            30292
+          ],
+          [
+            44896,
+            44950,
+            45289
+          ],
+          "land"
+        ],
+        [
+          116486,
+          202476,
+          202478,
+          [
+            30292
+          ],
+          [
+            44896,
+            44950,
+            45289
+          ],
+          "land"
+        ],
+        [
+          116487,
+          202475,
+          202478,
+          [
+            30292
+          ],
+          [
+            44896,
+            44950,
+            45289
+          ],
+          "land"
+        ]
+      ]
+    },
+    {
+      "owner": 30374,
+      "name": "Shadaw",
+      "id": "gb:MMR:ADM3:66882298B91132834391640",
+      "parent_id": "framework:province:loikaw:183a1e391266",
+      "package_id": "gb-MMR-ADM3--repair-evaluation",
+      "kind": [
+        "land"
+      ],
+      "cells": 6,
+      "intervals": 4,
+      "x_inclusive": [
+        202326,
+        202331
+      ],
+      "y_inclusive": [
+        116810,
+        116812
+      ],
+      "centre_envelope_degrees": {
+        "longitude": [
+          97.82984826407693,
+          97.83671414294759
+        ],
+        "latitude": [
+          19.22467886696363,
+          19.227272046738623
+        ]
+      },
+      "source_sids": [
+        44887,
+        44915,
+        45221
+      ],
+      "sid_occurrences": {
+        "44887": 5,
+        "44915": 6,
+        "45221": 6
+      },
+      "small_exact_rows": [
+        [
+          116810,
+          202326,
+          202329,
+          [
+            30374
+          ],
+          [
+            44887,
+            44915,
+            45221
+          ],
+          "land"
+        ],
+        [
+          116811,
+          202329,
+          202330,
+          [
+            30374
+          ],
+          [
+            44887,
+            44915,
+            45221
+          ],
+          "land"
+        ],
+        [
+          116811,
+          202330,
+          202331,
+          [
+            30374
+          ],
+          [
+            44915,
+            45221
+          ],
+          "land"
+        ],
+        [
+          116812,
+          202331,
+          202332,
+          [
+            30374
+          ],
+          [
+            44887,
+            44915,
+            45221
+          ],
+          "land"
+        ]
+      ]
+    }
+  ]
+}

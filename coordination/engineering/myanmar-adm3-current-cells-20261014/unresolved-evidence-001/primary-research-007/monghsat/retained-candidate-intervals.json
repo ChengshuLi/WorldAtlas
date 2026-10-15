@@ -1,0 +1,402 @@
+{
+  "scientific_vintage": "f7c358326d776398bc1cffe84df81eac7033091c",
+  "frozen_queue_vintage": "a61b6f9e7f88b1da380e3a834f89d7509132ed71",
+  "inventory_pin": {
+    "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/341d0bbaf81e47cd16ab58ca6d1ab75d5ac120cf732c677e081b12830ea3ef31/work/.cache/mmr-remaining-inventory-20261014-001/inventory.json",
+    "sha256": "efec8d28b63befcb411b6d0d81063af6a962edbec9a1b3f08b86fc3b7bd44157"
+  },
+  "interval_pin": {
+    "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/341d0bbaf81e47cd16ab58ca6d1ab75d5ac120cf732c677e081b12830ea3ef31/work/.cache/mmr-remaining-inventory-20261014-001/remaining-intervals.json.gz",
+    "sha256": "b12b9ed64ecb16fa2b5501648fa4ca91727793fa99ceadffb96d9623519c93aa"
+  },
+  "latitude_pin": {
+    "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/341d0bbaf81e47cd16ab58ca6d1ab75d5ac120cf732c677e081b12830ea3ef31/work/coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+    "decoded_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+  },
+  "parent": {
+    "parent_id": "framework:province:monghsat:6a0b26b82693",
+    "repair_land": 15,
+    "repair_water": 0,
+    "repair_cells": 15,
+    "relative": 0,
+    "conflicts": 0,
+    "complete_child_count": 2,
+    "repair_owner_count": 2,
+    "repair_owners": [
+      30170,
+      30354
+    ],
+    "complete_children": [
+      {
+        "owner": 30170,
+        "id": "gb:MMR:ADM3:66882298B34816344861267",
+        "name": "Mongton",
+        "province_id": "framework:province:monghsat:6a0b26b82693",
+        "source_id": "gb:MMR:ADM3",
+        "source_atoms": [
+          "gb:MMR:ADM3:66882298B34816344861267"
+        ],
+        "remaining_counts": {
+          "repair-evaluation:land": 14
+        },
+        "accepted_removed_cells": 0,
+        "reserved_excluded_cells": 0,
+        "blocks": [
+          28
+        ],
+        "source_sids": [
+          44896,
+          44963,
+          45219
+        ],
+        "topology_fields": {
+          "topology_version": 1,
+          "topology_reconciled": true,
+          "topology_conflicts": 5,
+          "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+        },
+        "current_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 226,
+          "interior_rings": 0,
+          "bounds": [
+            98.4899,
+            19.715174153787803,
+            99.2462,
+            20.7928
+          ]
+        },
+        "original_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 399,
+          "interior_rings": 0,
+          "bounds": [
+            98.48992878399324,
+            19.712865016103848,
+            99.24620226512252,
+            20.792811806973187
+          ]
+        }
+      },
+      {
+        "owner": 30354,
+        "id": "gb:MMR:ADM3:66882298B84564180686688",
+        "name": "Monghsat",
+        "province_id": "framework:province:monghsat:6a0b26b82693",
+        "source_id": "gb:MMR:ADM3",
+        "source_atoms": [
+          "gb:MMR:ADM3:66882298B84564180686688"
+        ],
+        "remaining_counts": {
+          "repair-evaluation:land": 1
+        },
+        "accepted_removed_cells": 0,
+        "reserved_excluded_cells": 0,
+        "blocks": [
+          28
+        ],
+        "source_sids": [
+          44896,
+          44963,
+          45262
+        ],
+        "topology_fields": {
+          "topology_version": 1,
+          "topology_reconciled": true,
+          "topology_conflicts": 3,
+          "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+        },
+        "current_geometry": {
+          "type": "MultiPolygon",
+          "polygons": 2,
+          "coordinate_pairs": 221,
+          "interior_rings": 1,
+          "bounds": [
+            98.9883,
+            20.06701504431951,
+            99.6809,
+            20.9979
+          ]
+        },
+        "original_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 385,
+          "interior_rings": 0,
+          "bounds": [
+            98.98831270756544,
+            20.064164388375904,
+            99.68089492847932,
+            20.99794446023433
+          ]
+        }
+      }
+    ],
+    "native_blocks": [
+      28
+    ],
+    "observed_source_families": [
+      "gb:MMR:ADM1",
+      "gb:MMR:ADM2",
+      "gb:MMR:ADM3"
+    ],
+    "source_region_features": [
+      {
+        "id": "gb:MMR:ADM1:20573499B82952573339616",
+        "name": "Shan"
+      }
+    ],
+    "source_parent_features": [
+      {
+        "source_index": 44963,
+        "family_index": 217,
+        "source_id": "gb:MMR:ADM2:60261553B30377978208155",
+        "ordinal": 66,
+        "owners": [],
+        "name": "Monghsat",
+        "geometry_status": "raw-native-supported"
+      }
+    ],
+    "decisions": [
+      {
+        "ids": [
+          "gb:MMR:ADM3:66882298B34816344861267",
+          "gb:MMR:ADM3:66882298B84564180686688"
+        ],
+        "status": "open",
+        "rationale": "Current province Monghsat (framework:province:monghsat:6a0b26b82693); inspected exact source identifiers for 2 locations with actual role Township, source gb:MMR:ADM3, reference vintages 2019. Pinned cache contains 330 features; 2 of these location records have entirely matched declared-source member IDs. Source-ID correspondence does not independently approve local geographic purpose, original-footprint retention, administrative reforms or settlement/rank. Exact review stays open until those tests have sourced outcomes.",
+        "evidence": [
+          {
+            "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM3/geoBoundaries-MMR-ADM3.geojson",
+            "title": "Myanmar",
+            "inspected_fact": "Actual location source gb:MMR:ADM3; role Township; reference vintage 2019; license Creative Commons Attribution 4.0 (CC BY 4.0). Source feature/member identifiers were inspected separately from ADM-level labels."
+          }
+        ],
+        "province_id": "framework:province:monghsat:6a0b26b82693",
+        "source_id": "gb:MMR:ADM3",
+        "actual_role": "Township",
+        "specific_reasons": []
+      }
+    ],
+    "prerequisites": [
+      "Complete original source-family membership, exact source/owner/parent joins and whole-footprint parent proof.",
+      "Accepted country/topology exclusions and all explicit holes; ancestry and nearest-bank proximity do not grant territorial authority.",
+      "Whole original GSHHG hierarchy or demonstrably applicable retained target interpretation; preserve all uncertainty/relative intervals.",
+      "Later actual delivery-base effective owner-zero and native authority/conservation."
+    ],
+    "land_only_rule_ceiling": 15
+  },
+  "groups": [
+    {
+      "owner": 30170,
+      "package_id": "gb-MMR-ADM3--repair-evaluation",
+      "cell_count": 14,
+      "interval_count": 9,
+      "x_inclusive": [
+        203210,
+        203211
+      ],
+      "y_inclusive": [
+        116189,
+        116197
+      ],
+      "centre_envelope_degrees": {
+        "longitude": [
+          99.04373564840597,
+          99.04510882418009
+        ],
+        "latitude": [
+          20.020130457667133,
+          20.030451703290915
+        ]
+      },
+      "source_sids": [
+        44896,
+        44963,
+        45219
+      ],
+      "all_owners": [
+        30170
+      ],
+      "retained_rows": [
+        [
+          116189,
+          203210,
+          203211,
+          [
+            30170
+          ],
+          [
+            44896,
+            44963,
+            45219
+          ],
+          "land"
+        ],
+        [
+          116190,
+          203210,
+          203212,
+          [
+            30170
+          ],
+          [
+            44896,
+            44963,
+            45219
+          ],
+          "land"
+        ],
+        [
+          116191,
+          203210,
+          203212,
+          [
+            30170
+          ],
+          [
+            44896,
+            44963,
+            45219
+          ],
+          "land"
+        ],
+        [
+          116192,
+          203210,
+          203212,
+          [
+            30170
+          ],
+          [
+            44896,
+            44963,
+            45219
+          ],
+          "land"
+        ],
+        [
+          116193,
+          203210,
+          203212,
+          [
+            30170
+          ],
+          [
+            44896,
+            44963,
+            45219
+          ],
+          "land"
+        ],
+        [
+          116194,
+          203210,
+          203212,
+          [
+            30170
+          ],
+          [
+            44896,
+            44963,
+            45219
+          ],
+          "land"
+        ],
+        [
+          116195,
+          203210,
+          203211,
+          [
+            30170
+          ],
+          [
+            44896,
+            44963,
+            45219
+          ],
+          "land"
+        ],
+        [
+          116196,
+          203210,
+          203211,
+          [
+            30170
+          ],
+          [
+            44896,
+            44963,
+            45219
+          ],
+          "land"
+        ],
+        [
+          116197,
+          203210,
+          203211,
+          [
+            30170
+          ],
+          [
+            44896,
+            44963,
+            45219
+          ],
+          "land"
+        ]
+      ]
+    },
+    {
+      "owner": 30354,
+      "package_id": "gb-MMR-ADM3--repair-evaluation",
+      "cell_count": 1,
+      "interval_count": 1,
+      "x_inclusive": [
+        203605,
+        203605
+      ],
+      "y_inclusive": [
+        115945,
+        115945
+      ],
+      "centre_envelope_degrees": {
+        "longitude": [
+          99.58614007918646,
+          99.58614007918646
+        ],
+        "latitude": [
+          20.344922732494055,
+          20.344922732494055
+        ]
+      },
+      "source_sids": [
+        44896,
+        44963,
+        45262
+      ],
+      "all_owners": [
+        30354
+      ],
+      "retained_rows": [
+        [
+          115945,
+          203605,
+          203606,
+          [
+            30354
+          ],
+          [
+            44896,
+            44963,
+            45262
+          ],
+          "land"
+        ]
+      ]
+    }
+  ],
+  "method": "Read-only retained interval metadata filter and exact pinned row-latitude byte lookup; no source/GIS/native producer. Independent coordinate extrema only."
+}

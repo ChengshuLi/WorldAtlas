@@ -1,0 +1,158 @@
+{
+  "kind": "bounded-primary-formation-research-not-clearance",
+  "date": "2026-10-15",
+  "parent_id": "framework:province:yangon-north:f18e96810078",
+  "scope": {
+    "land_held": 20,
+    "relative": 0,
+    "water": 0,
+    "conflict_package_cells": 0,
+    "complete_current_children": 8,
+    "only_repair_owner": 30246,
+    "native_block": 28,
+    "repair_rows": 8,
+    "native_extent_x_half_open_y_inclusive": [
+      201073,
+      201077,
+      118643,
+      118650
+    ]
+  },
+  "target": {
+    "owner": 30246,
+    "id": "gb:MMR:ADM3:66882298B54341055682393",
+    "name": "Hlaingtharya",
+    "province_id": "framework:province:yangon-north:f18e96810078",
+    "source_id": "gb:MMR:ADM3",
+    "source_atoms": [
+      "gb:MMR:ADM3:66882298B54341055682393"
+    ],
+    "remaining_counts": {
+      "repair-evaluation:land": 20
+    },
+    "accepted_removed_cells": 0,
+    "reserved_excluded_cells": 0,
+    "blocks": [
+      28
+    ],
+    "source_sids": [
+      44895,
+      44957,
+      45101
+    ],
+    "topology_fields": {
+      "topology_version": 1,
+      "topology_reconciled": true,
+      "topology_conflicts": 1,
+      "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+    },
+    "current_geometry": {
+      "type": "Polygon",
+      "polygons": 1,
+      "coordinate_pairs": 21,
+      "interior_rings": 0,
+      "bounds": [
+        95.9942,
+        16.825,
+        96.1104,
+        16.9368
+      ]
+    },
+    "original_geometry": {
+      "type": "Polygon",
+      "polygons": 1,
+      "coordinate_pairs": 52,
+      "interior_rings": 0,
+      "bounds": [
+        95.99424552027158,
+        16.82382852800005,
+        96.1143265570001,
+        16.936771458000138
+      ]
+    }
+  },
+  "source_join": {
+    "represented_year": 2019,
+    "consumed_revision": "9469f09",
+    "sids": [
+      44895,
+      44957,
+      45101
+    ],
+    "adm2_ordinal": 60,
+    "adm2_id": "gb:MMR:ADM2:60261553B66884558345744",
+    "region_id": "gb:MMR:ADM1:20573499B24734669936209",
+    "topology": "reconciledtrue1conflict; noactualacceptedcutwitnessgeometryread/generated."
+  },
+  "primary_findings": [
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Hlaingtharya_2019_MMR.pdf",
+      "provider": "GAD hostedMIMU",
+      "pdf_pages": 78,
+      "evidence_pages_1_based": [
+        12,
+        13,
+        14,
+        16,
+        19
+      ],
+      "represented_date": "September2019end",
+      "finding": "Actual2019profilehistoryshows13July1989formation/orderreference and30March1995amendmentreference. TextlosesfullinstrumentIDs; partial1989referencecontains2/306…2…8and1995contains2/306-2,butneitherisexactID. Profilelists20wards,9tracts,18villages; locatestownshipbetweenPanHlaingandHlaingrivers.",
+      "limit": "No notificationbody,signedscheduleorwardmapandno20candidatecelljoin. PartialIDsnotcompletedbyguess. Riverpositionnotbankownership/municipalterritoryproxy."
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_Hlinethaya_2014_ENG.pdf",
+      "provider": "DepartmentofPopulation hostedMIMU",
+      "pdf_pages": 59,
+      "publication_date": "2017-10",
+      "represented_date": "2014-03-29",
+      "evidence_pages_1_based": [
+        17,
+        18,
+        19
+      ],
+      "finding": "PrimaryreportidentifiesNorthDistrict,YangonRegion;20numberedwardsand9tracts:KaSin,ShanChaung,Nyaung,AhLel,OkeKanThaungKyar(YaeOkeKan),AhPyinPaDan,AhTwinPaDan,KuLarGyiSu,ShweLinBan. Area67.4km2creditsSettlementandLandRecordDepartment2014–2015.",
+      "limit": "Exactward/tractnamesforcensusonly; doesnotmap20candidatestoanamedward/tractorpost2020successor."
+    },
+    {
+      "url": "https://myanmar.unfpa.org/sites/default/files/pub-pdf/Yangon%20Region%20Census%20Report%20-%20ENGLISH.pdf",
+      "provider": "DepartmentofPopulation hostedUNFPA",
+      "evidence_page_1_based": 166,
+      "finding": "2014regionalcensusgroupsInsein,Mingaladon,Hmawby,Hlegu,Taikkyi,Htantabin,Shwepyitha,HlinethayaunderNorthYangon;correspondsbyeightnamestoretainedframeworkmembers.",
+      "limit": "Historicalrostercorroborationnotwhole2019parentgeometry/currentdistrictcontinuity."
+    }
+  ],
+  "new_exact_instrument_lead_not_primary_verified": {
+    "lead_source": "https://en.wikipedia.org/wiki/Hlaingthaya_Township",
+    "claimed_primary": "March2023GADHlaingTharyarEastprofile,referencelink131",
+    "claimed_instrument": "LegalNotification32/2020dated27January2020splittingEast/West",
+    "status": "Secondarytextonly.GADprimaryclickreturnedInternalError; noactualbodyread,noretry. ThisisnewmorespecificIDleadthanexistingPresidentOffice508(5)/12letter,butnotnewauthority."
+  },
+  "actual_access_failures": [
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Hlaingtharyar_2019_MMR.pdf",
+      "action": "Singleinferredfilenameopen",
+      "result": "InternalError,noretry. ThenfollowedactualWikipediareference157todifferentverifiedfilenameHlaingtharya,whichsucceeded."
+    },
+    {
+      "locator": "https://en.wikipedia.org/wiki/Hlaingthaya_Township reference131 (GADMarch2023Eastprofile)",
+      "action": "Singleprimaryreferenceclick",
+      "result": "InternalError; destinationURLnotshowninworkeroutput,soexacttargetURLnotinvented. Noretry/botbypass."
+    }
+  ],
+  "concrete_missing_artifacts": [
+    {
+      "artifact": "Readablefull13July1989formationand30March1995amendmentnotificationIDs,bodiesandward/tractschedule/map",
+      "purpose": "Determineoriginaltownshipterritoryandanyapplicabletransferaffecting20candidates."
+    },
+    {
+      "artifact": "Actual27January2020LegalNotification32/2020bodyandEast/Westallocationmap/schedule",
+      "purpose": "Ifcurrentauthorityrequired,join20candidatecentrestoverifiedsuccessorowner. Preserveconsumed2019identityuntiltargetvintagepolicyresolved. ExistingPresidentOffice508(5)/12researchnotrepeated."
+    },
+    {
+      "artifact": "Acceptedtopology1cutwitnessandexact20candidate→source/selected/wardjoin",
+      "purpose": "Specificapplicabilitymustbemeasured; compacturbanextent/zeroqueueconflictsdonotproveauthority."
+    }
+  ],
+  "custody": "Smallretainedmetadataandpublicwebtextonly;nomapdatum/scale/licenseestablished,noPDFrawbytes/hashes,downloads/cards/GIS/native/source/GSHHGoperation,Gitacquisition,runtimeinstallortrackededit. Allpreviouspacketspreserved.All20held."
+}

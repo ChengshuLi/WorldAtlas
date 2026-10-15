@@ -1,0 +1,500 @@
+[
+  {
+    "parent_id": "framework:province:langkho:65589ae342bb",
+    "repair_land": 9,
+    "repair_water": 0,
+    "repair_cells": 9,
+    "relative": 0,
+    "conflicts": 0,
+    "complete_child_count": 4,
+    "repair_owner_count": 1,
+    "repair_owners": [
+      30292
+    ],
+    "complete_children": [
+      {
+        "owner": 30186,
+        "id": "gb:MMR:ADM3:66882298B40849713300247",
+        "name": "Mawkmai",
+        "province_id": "framework:province:langkho:65589ae342bb",
+        "source_id": "gb:MMR:ADM3",
+        "source_atoms": [
+          "gb:MMR:ADM3:66882298B40849713300247"
+        ],
+        "remaining_counts": {},
+        "accepted_removed_cells": 0,
+        "reserved_excluded_cells": 0,
+        "blocks": [],
+        "source_sids": [],
+        "topology_fields": {
+          "topology_version": 1
+        },
+        "current_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 81,
+          "interior_rings": 0,
+          "bounds": [
+            97.3902,
+            19.6749,
+            97.8289,
+            20.5145
+          ]
+        },
+        "original_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 227,
+          "interior_rings": 0,
+          "bounds": [
+            97.388115004,
+            19.67491310600009,
+            97.82888823500008,
+            20.517117915
+          ]
+        }
+      },
+      {
+        "owner": 30292,
+        "id": "gb:MMR:ADM3:66882298B65618262001870",
+        "name": "Langkho",
+        "province_id": "framework:province:langkho:65589ae342bb",
+        "source_id": "gb:MMR:ADM3",
+        "source_atoms": [
+          "gb:MMR:ADM3:66882298B65618262001870"
+        ],
+        "remaining_counts": {
+          "repair-evaluation:land": 9
+        },
+        "accepted_removed_cells": 0,
+        "reserved_excluded_cells": 0,
+        "blocks": [
+          28
+        ],
+        "source_sids": [
+          44896,
+          44950,
+          45289
+        ],
+        "topology_fields": {
+          "topology_version": 1,
+          "topology_reconciled": true,
+          "topology_conflicts": 4,
+          "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+        },
+        "current_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 271,
+          "interior_rings": 2,
+          "bounds": [
+            97.6393,
+            19.5748,
+            98.627,
+            20.5979
+          ]
+        },
+        "original_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 440,
+          "interior_rings": 0,
+          "bounds": [
+            97.63910594200006,
+            19.57240556600006,
+            98.62696899761077,
+            20.597877604000047
+          ]
+        }
+      },
+      {
+        "owner": 30301,
+        "id": "gb:MMR:ADM3:66882298B6726893280031",
+        "name": "Mongnai",
+        "province_id": "framework:province:langkho:65589ae342bb",
+        "source_id": "gb:MMR:ADM3",
+        "source_atoms": [
+          "gb:MMR:ADM3:66882298B6726893280031"
+        ],
+        "remaining_counts": {},
+        "accepted_removed_cells": 0,
+        "reserved_excluded_cells": 0,
+        "blocks": [],
+        "source_sids": [],
+        "topology_fields": {
+          "topology_version": 1
+        },
+        "current_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 106,
+          "interior_rings": 0,
+          "bounds": [
+            97.6451,
+            20.4202,
+            98.6313,
+            20.9681
+          ]
+        },
+        "original_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 287,
+          "interior_rings": 0,
+          "bounds": [
+            97.63648021800005,
+            20.41537203900001,
+            98.63128414274988,
+            20.96813246000002
+          ]
+        }
+      },
+      {
+        "owner": 30381,
+        "id": "gb:MMR:ADM3:66882298B93086807686764",
+        "name": "Mongpan",
+        "province_id": "framework:province:langkho:65589ae342bb",
+        "source_id": "gb:MMR:ADM3",
+        "source_atoms": [
+          "gb:MMR:ADM3:66882298B93086807686764"
+        ],
+        "remaining_counts": {},
+        "accepted_removed_cells": 0,
+        "reserved_excluded_cells": 0,
+        "blocks": [],
+        "source_sids": [],
+        "topology_fields": {
+          "topology_version": 1
+        },
+        "current_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 68,
+          "interior_rings": 0,
+          "bounds": [
+            98.0334,
+            19.9707,
+            98.6974,
+            20.4961
+          ]
+        },
+        "original_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 213,
+          "interior_rings": 0,
+          "bounds": [
+            98.0334221460001,
+            19.97067402309593,
+            98.6985531697966,
+            20.497728218000088
+          ]
+        }
+      }
+    ],
+    "native_blocks": [
+      28
+    ],
+    "observed_source_families": [
+      "gb:MMR:ADM1",
+      "gb:MMR:ADM2",
+      "gb:MMR:ADM3"
+    ],
+    "source_region_features": [
+      {
+        "id": "gb:MMR:ADM1:20573499B82952573339616",
+        "name": "Shan"
+      }
+    ],
+    "source_parent_features": [
+      {
+        "source_index": 44950,
+        "family_index": 217,
+        "source_id": "gb:MMR:ADM2:60261553B57199101523672",
+        "ordinal": 53,
+        "owners": [],
+        "name": "Langkho",
+        "geometry_status": "raw-native-supported"
+      }
+    ],
+    "decisions": [
+      {
+        "ids": [
+          "gb:MMR:ADM3:66882298B6726893280031",
+          "gb:MMR:ADM3:66882298B40849713300247",
+          "gb:MMR:ADM3:66882298B93086807686764",
+          "gb:MMR:ADM3:66882298B65618262001870"
+        ],
+        "status": "open",
+        "rationale": "Current province Langkho (framework:province:langkho:65589ae342bb); inspected exact source identifiers for 4 locations with actual role Township, source gb:MMR:ADM3, reference vintages 2019. Pinned cache contains 330 features; 4 of these location records have entirely matched declared-source member IDs. Source-ID correspondence does not independently approve local geographic purpose, original-footprint retention, administrative reforms or settlement/rank. Exact review stays open until those tests have sourced outcomes.",
+        "evidence": [
+          {
+            "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM3/geoBoundaries-MMR-ADM3.geojson",
+            "title": "Myanmar",
+            "inspected_fact": "Actual location source gb:MMR:ADM3; role Township; reference vintage 2019; license Creative Commons Attribution 4.0 (CC BY 4.0). Source feature/member identifiers were inspected separately from ADM-level labels."
+          }
+        ],
+        "province_id": "framework:province:langkho:65589ae342bb",
+        "source_id": "gb:MMR:ADM3",
+        "actual_role": "Township",
+        "specific_reasons": []
+      }
+    ],
+    "prerequisites": [
+      "Complete original source-family membership, exact source/owner/parent joins and whole-footprint parent proof.",
+      "Accepted country/topology exclusions and all explicit holes; ancestry and nearest-bank proximity do not grant territorial authority.",
+      "Whole original GSHHG hierarchy or demonstrably applicable retained target interpretation; preserve all uncertainty/relative intervals.",
+      "Later actual delivery-base effective owner-zero and native authority/conservation."
+    ],
+    "land_only_rule_ceiling": 9
+  },
+  {
+    "parent_id": "framework:province:loikaw:183a1e391266",
+    "repair_land": 6,
+    "repair_water": 0,
+    "repair_cells": 6,
+    "relative": 0,
+    "conflicts": 0,
+    "complete_child_count": 4,
+    "repair_owner_count": 1,
+    "repair_owners": [
+      30374
+    ],
+    "complete_children": [
+      {
+        "owner": 30085,
+        "id": "gb:MMR:ADM3:66882298B13513293373289",
+        "name": "Hpruso",
+        "province_id": "framework:province:loikaw:183a1e391266",
+        "source_id": "gb:MMR:ADM3",
+        "source_atoms": [
+          "gb:MMR:ADM3:66882298B13513293373289"
+        ],
+        "remaining_counts": {},
+        "accepted_removed_cells": 0,
+        "reserved_excluded_cells": 0,
+        "blocks": [],
+        "source_sids": [],
+        "topology_fields": {
+          "topology_version": 1
+        },
+        "current_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 70,
+          "interior_rings": 0,
+          "bounds": [
+            96.8198,
+            19.0195,
+            97.3123,
+            19.5307
+          ]
+        },
+        "original_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 230,
+          "interior_rings": 0,
+          "bounds": [
+            96.8197801160001,
+            19.01953683200006,
+            97.3198371230001,
+            19.530729401000023
+          ]
+        }
+      },
+      {
+        "owner": 30116,
+        "id": "gb:MMR:ADM3:66882298B21887991240008",
+        "name": "Demoso",
+        "province_id": "framework:province:loikaw:183a1e391266",
+        "source_id": "gb:MMR:ADM3",
+        "source_atoms": [
+          "gb:MMR:ADM3:66882298B21887991240008"
+        ],
+        "remaining_counts": {},
+        "accepted_removed_cells": 0,
+        "reserved_excluded_cells": 0,
+        "blocks": [],
+        "source_sids": [],
+        "topology_fields": {
+          "topology_version": 1
+        },
+        "current_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 71,
+          "interior_rings": 0,
+          "bounds": [
+            96.8736,
+            19.2144,
+            97.4152,
+            19.715
+          ]
+        },
+        "original_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 213,
+          "interior_rings": 0,
+          "bounds": [
+            96.873132545,
+            19.20009078,
+            97.41523657900007,
+            19.715040243000036
+          ]
+        }
+      },
+      {
+        "owner": 30231,
+        "id": "gb:MMR:ADM3:66882298B50366352071932",
+        "name": "Loikaw",
+        "province_id": "framework:province:loikaw:183a1e391266",
+        "source_id": "gb:MMR:ADM3",
+        "source_atoms": [
+          "gb:MMR:ADM3:66882298B50366352071932"
+        ],
+        "remaining_counts": {},
+        "accepted_removed_cells": 0,
+        "reserved_excluded_cells": 0,
+        "blocks": [],
+        "source_sids": [],
+        "topology_fields": {
+          "topology_version": 1
+        },
+        "current_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 82,
+          "interior_rings": 0,
+          "bounds": [
+            97.1161,
+            19.24,
+            97.5291,
+            19.9967
+          ]
+        },
+        "original_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 260,
+          "interior_rings": 0,
+          "bounds": [
+            97.11609932700013,
+            19.239980257000088,
+            97.52908252100006,
+            19.99668734200004
+          ]
+        }
+      },
+      {
+        "owner": 30374,
+        "id": "gb:MMR:ADM3:66882298B91132834391640",
+        "name": "Shadaw",
+        "province_id": "framework:province:loikaw:183a1e391266",
+        "source_id": "gb:MMR:ADM3",
+        "source_atoms": [
+          "gb:MMR:ADM3:66882298B91132834391640"
+        ],
+        "remaining_counts": {
+          "repair-evaluation:land": 6
+        },
+        "accepted_removed_cells": 0,
+        "reserved_excluded_cells": 0,
+        "blocks": [
+          28
+        ],
+        "source_sids": [
+          44887,
+          44915,
+          45221
+        ],
+        "topology_fields": {
+          "topology_version": 1,
+          "topology_reconciled": true,
+          "topology_conflicts": 1,
+          "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+        },
+        "current_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 152,
+          "interior_rings": 3,
+          "bounds": [
+            97.3972,
+            19.158,
+            97.8881,
+            19.9004
+          ]
+        },
+        "original_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 308,
+          "interior_rings": 0,
+          "bounds": [
+            97.397200609,
+            19.158014026000036,
+            97.88879112800007,
+            19.902334134000043
+          ]
+        }
+      }
+    ],
+    "native_blocks": [
+      28
+    ],
+    "observed_source_families": [
+      "gb:MMR:ADM1",
+      "gb:MMR:ADM2",
+      "gb:MMR:ADM3"
+    ],
+    "source_region_features": [
+      {
+        "id": "gb:MMR:ADM1:20573499B20332088310808",
+        "name": "Kayah"
+      }
+    ],
+    "source_parent_features": [
+      {
+        "source_index": 44915,
+        "family_index": 217,
+        "source_id": "gb:MMR:ADM2:60261553B25125997749826",
+        "ordinal": 18,
+        "owners": [],
+        "name": "Loikaw",
+        "geometry_status": "raw-native-supported"
+      }
+    ],
+    "decisions": [
+      {
+        "ids": [
+          "gb:MMR:ADM3:66882298B13513293373289",
+          "gb:MMR:ADM3:66882298B91132834391640",
+          "gb:MMR:ADM3:66882298B21887991240008",
+          "gb:MMR:ADM3:66882298B50366352071932"
+        ],
+        "status": "open",
+        "rationale": "Current province Loikaw (framework:province:loikaw:183a1e391266); inspected exact source identifiers for 4 locations with actual role Township, source gb:MMR:ADM3, reference vintages 2019. Pinned cache contains 330 features; 4 of these location records have entirely matched declared-source member IDs. Source-ID correspondence does not independently approve local geographic purpose, original-footprint retention, administrative reforms or settlement/rank. Exact review stays open until those tests have sourced outcomes.",
+        "evidence": [
+          {
+            "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM3/geoBoundaries-MMR-ADM3.geojson",
+            "title": "Myanmar",
+            "inspected_fact": "Actual location source gb:MMR:ADM3; role Township; reference vintage 2019; license Creative Commons Attribution 4.0 (CC BY 4.0). Source feature/member identifiers were inspected separately from ADM-level labels."
+          }
+        ],
+        "province_id": "framework:province:loikaw:183a1e391266",
+        "source_id": "gb:MMR:ADM3",
+        "actual_role": "Township",
+        "specific_reasons": []
+      }
+    ],
+    "prerequisites": [
+      "Complete original source-family membership, exact source/owner/parent joins and whole-footprint parent proof.",
+      "Accepted country/topology exclusions and all explicit holes; ancestry and nearest-bank proximity do not grant territorial authority.",
+      "Whole original GSHHG hierarchy or demonstrably applicable retained target interpretation; preserve all uncertainty/relative intervals.",
+      "Later actual delivery-base effective owner-zero and native authority/conservation."
+    ],
+    "land_only_rule_ceiling": 6
+  }
+]
