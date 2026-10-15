@@ -9,6 +9,8 @@ import {authenticateOriginalPackageOutput, requireOriginalPackageOutput,
 import {requireCurrentPackageAssembly, integrationTestFiles} from '../scripts/run-integration-tests.mjs';
 import {admitAssemblyAtlasMetadata,createPackageAssemblyScratch,packageAssemblyInvocation,findOriginalPackage,acceptedSelectedPackageInputs} from '../scripts/assemble-selected-package.mjs';
 import {execFileSync,spawnSync} from 'node:child_process';
+import {inspectPackageExecutionInputs,validatePackageExecutionRoles} from '../scripts/package-build.mjs';
+import {loadPackageInputs} from '../scripts/package-inputs.mjs';
 import {ImmutableReader} from '../scripts/check-effective-geographic-regression.mjs';
 import {nativeRowLatitudes} from '../src/native-grid.js';
 import {readRetainedRegistryAuthority,valueBytes,valueSha} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
@@ -585,4 +587,36 @@ test('failed detached SOURCE validation or descriptor budget cannot retain admis
   small.captureSelectedInputs=(inputs,admit)=>retainSelectedPackageInputs(valid.accepted.files,inputs,pending,admit);
   assert.throws(()=>readRetainedRegistryAuthority(valid.reader(),valid.entry,small),/retention exceeds authority or parent phase/);
   assert.equal(pending.size,0);assert.equal(small.metadataBytes,0);
+});
+
+
+test('shared selected-input admission preserves actual builder roles and refuses output-writer imports',t=>{
+  const root=fs.realpathSync(process.cwd()),definition=loadPackageInputs(root),
+    prefix='coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/',
+    rolesPath=prefix+'qualified-artifacts/application-consumer-code.json',
+    roles=JSON.parse(fs.readFileSync(path.join(root,rolesPath))),files=new Set();
+  for(const kind of ['static','hosted','cloudflare']){
+    const actual=inspectPackageExecutionInputs(root,definition,kind);
+    assert.deepEqual(actual.errors,[],'Actual '+kind+' preflight must reach its unchanged pinned role guard');
+    assert.equal(validatePackageExecutionRoles(actual.files,roles,`scripts/build-${kind}-inner.mjs`),true);
+    assert(!actual.files.includes('scripts/package-output-artifact.mjs'));
+    assert(!actual.files.includes('scripts/package-node-runtime.mjs'));
+    for(const name of actual.files)files.add(name);
+  }
+  const fixture=fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(),'atlas-output-role-closure-')));
+  t.after(()=>fs.rmSync(fixture,{recursive:true,force:true}));
+  for(const name of ['data/native-context-migration/manifest.json',prefix+'context-stage-v9.json',
+    prefix+'qualified-artifacts/consumption-certificate.json',rolesPath,
+    'scripts/package-output-artifact.mjs','scripts/package-node-runtime.mjs'])files.add(name);
+  for(const name of files){const dest=path.join(fixture,name);fs.mkdirSync(path.dirname(dest),{recursive:true});
+    fs.copyFileSync(path.join(root,name),dest,fs.constants.COPYFILE_EXCL);}
+  fs.appendFileSync(path.join(fixture,'coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs'),
+    "\nimport '../../../scripts/package-output-artifact.mjs';\n");
+  for(const kind of ['static','hosted','cloudflare']){
+    const rejected=inspectPackageExecutionInputs(fixture,definition,kind);
+    assert(rejected.files.includes('scripts/package-output-artifact.mjs'));
+    assert(rejected.files.includes('scripts/package-node-runtime.mjs'));
+    assert(rejected.errors.some(error=>error.kind==='execution-inputs'&&error.detail==='Complete actual execution role closure required'),
+      'The real '+kind+' entry must refuse reintroduced incidental output/runtime code');
+  }
 });

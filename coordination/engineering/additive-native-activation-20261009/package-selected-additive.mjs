@@ -3,8 +3,7 @@ import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {ImmutableReader,loadSelection,processingAllowance} from '../../../scripts/check-effective-geographic-regression.mjs';
-import {loadPackageInputs,containsPackagePath} from '../../../scripts/package-inputs.mjs';
-import {admitPackageInputTransition} from '../../../scripts/package-output-artifact.mjs';
+import {loadPackageInputs,containsPackagePath,admitPackageInputTransition} from '../../../scripts/package-inputs.mjs';
 import {valueBytes,valueSha} from '../selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 
 const demand=(v,m)=>{if(!v)throw Error(m);};
