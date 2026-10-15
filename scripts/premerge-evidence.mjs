@@ -208,7 +208,7 @@ export async function checkPremergeEvidence({api, repo, pr, issue, reservation, 
     requirement = evidenceRequirement(issue, spec, policy, pr.head.ref);
     if (!requirement.required) return {status: 'not-required', ...requirement, head_sha: pr.head.sha, limits: ['No scientific manifest was checked; substantive exact-head review and applicable tests remain required']};
     need(files.length === pr.changed_files, 'Incomplete PR change inventory');
-    const initial = await remoteReader(api, repo, {candidate: pr.head.sha, base: pr.base.sha});
+    const initial = await remoteReader(api, repo, {candidate: pr.head.sha});
     const manifestBytes = await initial.load(requirement.manifestPath, 'candidate', 1024 * 1024);
     const manifest = JSON.parse(manifestBytes);
     need(Array.isArray(manifest.baseline?.files) && Array.isArray(manifest.sources) && Array.isArray(manifest.outputs) &&
