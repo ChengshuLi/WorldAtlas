@@ -33,10 +33,10 @@ export function loadPackageInputs(directory = root) {
   return validatePackageInputs(JSON.parse(fs.readFileSync(file,'utf8')));
 }
 
-export async function readPackageInputs({route, base, api}) {
+export async function readPackageInputs({route, base, api, maximumBytes = Infinity}) {
   const blob = await api(`${route}/contents/${PACKAGE_INPUT_FILE}?ref=${base}`);
   if (blob?.type !== 'file' || blob.encoding !== 'base64' || blob.path !== PACKAGE_INPUT_FILE ||
-      !/^[a-f0-9]{40}$/.test(blob.sha ?? '') || !Number.isSafeInteger(blob.size) || blob.size <= 0 || typeof blob.content !== 'string') throw Error('Package input definition unavailable');
+      !/^[a-f0-9]{40}$/.test(blob.sha ?? '') || !Number.isSafeInteger(blob.size) || blob.size <= 0 || blob.size > maximumBytes || typeof blob.content !== 'string') throw Error('Package input definition unavailable');
   const raw = Buffer.from(blob.content, 'base64');
   if (raw.length !== blob.size || createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex') !== blob.sha) throw Error('Package input definition bytes changed');
   return validatePackageInputs(JSON.parse(raw));
@@ -44,6 +44,48 @@ export async function readPackageInputs({route, base, api}) {
 
 export function packagePathRequired(file, definition) {
   return containsPackagePath(definition.inputs, file) || containsPackagePath(definition.verification_paths, file);
+}
+
+// Preserve the existing selected-data checkout boundary while the standard
+// checkout action owns transport and materialization. Preparation supplies the
+// authenticated complete candidate tree; package roles never authorize code.
+export function selectedDataCheckoutPatterns(definition, entries, expectationsPath) {
+  validatePackageInputs(definition);
+  if (!(entries instanceof Map) || !safePackagePath(expectationsPath) ||
+      !expectationsPath.endsWith('/selected-delivery-expectations.json') ||
+      entries.get(expectationsPath)?.type !== 'blob' || entries.get(expectationsPath)?.mode !== '100644')
+    throw Error('Invalid trusted selected expectations');
+  const suffix = /\.(?:mjs|js|cjs|py|sh|ts|tsx|jsx|html|css|sql|yml|yaml|c|h|cpp|hpp|wasm|bat|cmd|ps1)$/i;
+  const execution = [];
+  for (const [name, row] of entries) {
+    if (!name.startsWith('coordination/engineering/') ||
+        !(row.mode === '100755' || suffix.test(name) || name.endsWith('/package.json'))) continue;
+    if (!safePackagePath(name) || row.type !== 'blob' || !['100644','100755'].includes(row.mode))
+      throw Error('Nonordinary coordination execution input');
+    execution.push(name);
+  }
+  const patterns = ['/*','!/data/regional-review/','!/research/campaigns/'];
+  for (const prefix of ['research/geography/','coordination/engineering/','data/']) {
+    const paths = [...definition.inputs, ...definition.verification_paths, expectationsPath,
+      ...(prefix === 'coordination/engineering/' ? execution : [])];
+    if (paths.some(name => name.endsWith('/') && prefix.startsWith(name))) {
+      patterns.push('/' + prefix + '**'); continue;
+    }
+    const retained = paths.filter(name => name.startsWith(prefix)), directories = new Set();
+    for (const name of retained) {
+      let parent = name.endsWith('/') ? name.slice(0,-1) : name.slice(0,name.lastIndexOf('/'));
+      while (parent !== prefix.slice(0,-1)) {
+        directories.add(parent + '/'); parent = parent.slice(0,parent.lastIndexOf('/'));
+      }
+    }
+    patterns.push('!/' + prefix + '*');
+    for (const directory of [...directories].sort((a,b) => a.split('/').length-b.split('/').length || a.localeCompare(b,'en'))) {
+      patterns.push('/' + directory);
+      if (!retained.some(name => name.endsWith('/') && directory.startsWith(name))) patterns.push('!/' + directory + '*');
+    }
+    patterns.push(...retained.filter(name => !name.endsWith('/')).map(name => '/' + name));
+  }
+  return patterns;
 }
 
 // Original producer -> current selection, independently of PR-base -> head

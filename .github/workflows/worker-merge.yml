@@ -46,6 +46,8 @@ jobs:
       shards: ${{ steps.prepare.outputs.shards }}
       test_selection: ${{ steps.prepare.outputs.test_selection }}
       expectations_path: ${{ steps.prepare.outputs.expectations_path }}
+      candidate_tree: ${{ steps.prepare.outputs.candidate_tree }}
+      checkout_patterns: ${{ steps.prepare.outputs.checkout_patterns }}
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
@@ -140,136 +142,39 @@ jobs:
     steps:
       # Candidate code runs only in this isolated job, without write credentials,
       # repository secrets, persistent checkout authentication, or OIDC rights.
-      - name: Authenticate trusted full-checkout bootstrap
-        id: checkout_bootstrap
+      - name: Checkout exact candidate for application regression
         if: needs.prepare.outputs.profile == 'full'
-        env:
-          WORLDATLAS_CHECKOUT_TOKEN: ${{ github.token }}
-          CI_CHECKOUT_REPOSITORY: ${{ github.repository }}
-          CI_CHECKOUT_BASE: ${{ needs.prepare.outputs.base }}
-          CI_CHECKOUT_SHA: ${{ needs.prepare.outputs.candidate }}
-          CI_CHECKOUT_PR: ''
-          CI_CHECKOUT_HEAD_REF: ''
-        run: |
-          python3 -I -S -B - <<'CHECKOUT_BOOTSTRAP'
-          import base64, hashlib, json, os, pathlib, re, signal, tempfile, time, urllib.request
-          started = time.monotonic()
-          signal.signal(signal.SIGALRM, lambda *_: (_ for _ in ()).throw(TimeoutError()))
-          signal.setitimer(signal.ITIMER_REAL, 60)
-          def need(ok):
-              if not ok: raise ValueError('Invalid authenticated checkout metadata')
-          def oid(value): return isinstance(value, str) and re.fullmatch('[0-9a-f]{40}', value)
-          def object_hash(kind, raw): return hashlib.sha1((kind + ' ' + str(len(raw)) + '\0').encode() + raw).hexdigest()
-          class NoRedirect(urllib.request.HTTPRedirectHandler):
-              def redirect_request(self, *_): raise ValueError('API redirects are not checkout authority')
-          try:
-              repo, base, candidate = (os.environ[key] for key in ('CI_CHECKOUT_REPOSITORY', 'CI_CHECKOUT_BASE', 'CI_CHECKOUT_SHA'))
-              token = os.environ['WORLDATLAS_CHECKOUT_TOKEN']
-              need(repo == 'ChengshuLi/WorldAtlas' and oid(base) and oid(candidate) and bool(token))
-              consumed = 0
-              opener = urllib.request.build_opener(NoRedirect())
-              def api(route):
-                  global consumed
-                  remaining = 60 - (time.monotonic() - started)
-                  need(remaining > 0)
-                  request = urllib.request.Request('https://api.github.com/repos/' + repo + route,
-                      headers={'Authorization': 'Bearer ' + token, 'Accept': 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28'})
-                  with opener.open(request, timeout=min(20, remaining)) as response:
-                      need(response.status == 200)
-                      raw = response.read(2 * 1024 * 1024 + 1)
-                  consumed += len(raw)
-                  need(len(raw) <= 2 * 1024 * 1024 and consumed <= 8 * 1024 * 1024)
-                  value = json.loads(raw)
-                  need(isinstance(value, dict))
-                  return value
-              number = os.environ.get('CI_CHECKOUT_PR', '')
-              if number:
-                  need(re.fullmatch('[1-9][0-9]*', number))
-                  pr = api('/pulls/' + number)
-                  need(pr.get('number') == int(number) and pr.get('state') == 'open'
-                      and oid(pr['base']['sha']) and pr['base']['ref'] == 'main' and pr['base']['repo']['full_name'] == repo
-                      and pr['head']['sha'] == candidate and pr['head']['repo']['full_name'] == repo
-                      and pr['head']['ref'] == os.environ['CI_CHECKOUT_HEAD_REF'])
-              def commit(sha):
-                  value = api('/git/commits/' + sha)
-                  need(value.get('sha') == sha and oid(value.get('tree', {}).get('sha')))
-                  return value['tree']['sha']
-              candidate_tree, base_tree = commit(candidate), commit(base)
-              def tree(sha):
-                  value = api('/git/trees/' + sha)
-                  need(value.get('sha') == sha and value.get('truncated') is False and isinstance(value.get('tree'), list))
-                  entries, raw = {}, []
-                  kinds = {'040000': 'tree', '100644': 'blob', '100755': 'blob', '120000': 'blob', '160000': 'commit'}
-                  for row in value['tree']:
-                      name, mode, kind, child = (row.get(key) for key in ('path', 'mode', 'type', 'sha'))
-                      need(isinstance(name, str) and name not in ('', '.', '..') and '/' not in name and '\0' not in name
-                          and name not in entries and mode in kinds and kind == kinds[mode] and oid(child))
-                      encoded = name.encode('utf-8')
-                      entries[name] = row
-                      raw.append((encoded + (b'/' if kind == 'tree' else b'\0'), mode.lstrip('0').encode() + b' ' + encoded + b'\0' + bytes.fromhex(child)))
-                  need(object_hash('tree', b''.join(body for _, body in sorted(raw))) == sha)
-                  return entries
-              scripts = tree(base_tree).get('scripts')
-              helper = None
-              if scripts is not None:
-                  need(scripts['mode'] == '040000' and scripts['type'] == 'tree')
-                  helper = tree(scripts['sha']).get('acquire-ci-checkout.py')
-              mode, helper_path = 'legacy', ''
-              if helper is not None:
-                  need(helper['mode'] == '100644' and helper['type'] == 'blob')
-                  blob = api('/git/blobs/' + helper['sha'])
-                  need(blob.get('sha') == helper['sha'] and blob.get('encoding') == 'base64'
-                      and type(blob.get('size')) is int and 0 < blob['size'] <= 262144 and isinstance(blob.get('content'), str))
-                  raw = base64.b64decode(''.join(blob['content'].split()), validate=True)
-                  need(len(raw) == blob['size'] and object_hash('blob', raw) == helper['sha'])
-                  root = pathlib.Path(os.environ['RUNNER_TEMP'])
-                  need(root.is_dir() and not root.is_symlink() and str(root.resolve()) == str(root) and '\n' not in str(root))
-                  directory = pathlib.Path(tempfile.mkdtemp(prefix='worldatlas-checkout-bootstrap-', dir=root))
-                  helper_path = str(directory / 'acquire-ci-checkout.py')
-                  with open(helper_path, 'xb') as output:
-                      output.write(raw); output.flush(); os.fsync(output.fileno())
-                  mode = 'helper'
-              # Measure after the authenticated helper has actually reached durable disk.
-              elapsed = time.monotonic() - started
-              need(0 <= elapsed < 60)
-              with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as output:
-                  output.write(f'mode={mode}\nhelper={helper_path}\nsha={candidate}\ntree={candidate_tree}\nelapsed={elapsed:.6f}\n')
-          except Exception:
-              raise SystemExit('Trusted checkout bootstrap failed; no legacy fallback authorized')
-          finally:
-              signal.setitimer(signal.ITIMER_REAL, 0)
-          CHECKOUT_BOOTSTRAP
-      - name: Acquire full checkout with authenticated bounded helper
-        if: (needs.prepare.outputs.profile == 'full') && steps.checkout_bootstrap.outputs.mode == 'helper'
-        env:
-          WORLDATLAS_CHECKOUT_TOKEN: ${{ github.token }}
-          CI_CHECKOUT_HELPER: ${{ steps.checkout_bootstrap.outputs.helper }}
-          CI_CHECKOUT_SHA: ${{ steps.checkout_bootstrap.outputs.sha }}
-          CI_CHECKOUT_TREE: ${{ steps.checkout_bootstrap.outputs.tree }}
-          INTEGRATION_PROFILE: ${{ needs.prepare.outputs.profile }}
-          INTEGRATION_TEST_SELECTION: ${{ needs.prepare.outputs.test_selection }}
-          SELECTED_EXPECTATIONS_PATH: ${{ needs.prepare.outputs.expectations_path }}
-        run: |
-          python3 -I -S -B "$CI_CHECKOUT_HELPER" --repository ChengshuLi/WorldAtlas \
-            --sha "$CI_CHECKOUT_SHA" --tree "$CI_CHECKOUT_TREE" --workspace "$GITHUB_WORKSPACE"
-      - name: Legacy full checkout only for proven trusted-helper absence
-        if: (needs.prepare.outputs.profile == 'full') && steps.checkout_bootstrap.outputs.mode == 'legacy'
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
-          ref: ${{ steps.checkout_bootstrap.outputs.sha }}
+          ref: ${{ needs.prepare.outputs.candidate }}
           persist-credentials: false
+          fetch-depth: 1
+          sparse-checkout-cone-mode: false
+          sparse-checkout: ${{ needs.prepare.outputs.checkout_patterns }}
+          lfs: false
+          submodules: false
+          set-safe-directory: false
+        env:
+          GIT_CONFIG_NOSYSTEM: '1'
+          GIT_CONFIG_GLOBAL: /dev/null
+          GIT_TERMINAL_PROMPT: '0'
+          GIT_CONFIG_COUNT: '2'
+          GIT_CONFIG_KEY_0: core.hooksPath
+          GIT_CONFIG_VALUE_0: /dev/null
+          GIT_CONFIG_KEY_1: credential.helper
+          GIT_CONFIG_VALUE_1: ''
       - name: Checkout complete candidate for application regression
         if: needs.prepare.outputs.profile == 'full'
         env:
           CI_CHECKOUT_REPOSITORY: ${{ github.repository }}
-          CI_CHECKOUT_SHA: ${{ steps.checkout_bootstrap.outputs.sha }}
-          CI_CHECKOUT_TREE: ${{ steps.checkout_bootstrap.outputs.tree }}
+          CI_CHECKOUT_SHA: ${{ needs.prepare.outputs.candidate }}
+          CI_CHECKOUT_TREE: ${{ needs.prepare.outputs.candidate_tree }}
         run: |
           python3 -I -S -B - <<'CHECKOUT_VERIFY'
           import os, re, subprocess, urllib.parse
           sha, tree, repo = (os.environ[key] for key in ('CI_CHECKOUT_SHA', 'CI_CHECKOUT_TREE', 'CI_CHECKOUT_REPOSITORY'))
           assert re.fullmatch('[0-9a-f]{40}', sha) and re.fullmatch('[0-9a-f]{40}', tree) and repo == 'ChengshuLi/WorldAtlas'
-          assert not any(os.environ.get(key) for key in ('WORLDATLAS_CHECKOUT_TOKEN', 'GH_TOKEN', 'GITHUB_TOKEN'))
+          assert not any(os.environ.get(key) for key in ('WORLDATLAS_CHECKOUT_TOKEN', 'GH_TOKEN', 'GITHUB_TOKEN', 'INPUT_TOKEN'))
           env = dict(os.environ, GIT_NO_LAZY_FETCH='1', GIT_TERMINAL_PROMPT='0')
           def git(*args): return subprocess.check_output(['git', *args], env=env, timeout=20).decode().strip()
           assert git('rev-parse', '--verify', 'HEAD') == sha and git('rev-parse', '--verify', 'HEAD^{tree}') == tree
@@ -277,9 +182,16 @@ jobs:
           for item in git('config', '--local', '--null', '--list').split('\0'):
               if not item: continue
               key, _, value = item.partition('\n')
-              assert 'extraheader' not in key.lower() and not key.lower().startswith(('credential.', 'url.'))
+              assert 'extraheader' not in key.lower() and not key.lower().startswith(('credential.', 'url.', 'include'))
               if key.startswith('remote.') and key.endswith(('.url', '.pushurl')):
                   assert value in ('https://github.com/' + repo, 'https://github.com/' + repo + '.git')
+          temporary = os.environ.get('RUNNER_TEMP')
+          if temporary:
+              import pathlib
+              assert not list(pathlib.Path(temporary).glob('git-credentials-*.config'))
+          subprocess.run(['git', 'config', '--local', 'remote.origin.promisor', 'false'], env=env, check=True, timeout=20)
+          result = subprocess.run(['git', 'config', '--local', '--unset-all', 'remote.origin.partialclonefilter'], env=env, timeout=20)
+          assert result.returncode in (0, 5)
           print('Exact detached candidate commit/tree verified; checkout credentials absent')
           CHECKOUT_VERIFY
       - name: Checkout only focused-test inputs for evidence regression
