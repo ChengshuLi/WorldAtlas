@@ -925,6 +925,7 @@ test('generated sidecar refuses foreign/colliding outputs and changed release jo
     {...config, sidecar_output: 'coordination/engineering/foreign/sidecar.json'},
     {...config, sidecar_output: f.owned + 'preparation.json'},
     {...config, sidecar_output: f.owned + 'package-inputs.json'},
+    {...config, sidecar_output: f.owned + 'restored-read-roles'},
     {...config, sidecar_output: occupied},
     {...config, sidecar: f.r.pin(f.config.selector.commit, JSON.parse(f.accepted['ownership-selection.json']).additive_release.path)},
     {...config, patch: {...config.patch, sha256: '0'.repeat(64)}},
@@ -1062,4 +1063,15 @@ test('original role publication refuses unbound or corrupt roles before creating
     assert.throws(()=>publish(root,destination,products,{}),/authenticated package role|body differs|local delivery output tree/);
     assert.equal(fs.existsSync(path.join(root,destination)),false);
   }
+});
+
+
+test('complete publication namespace rejects flat staging-directory collision before mutation', t => {
+  const root=directory(t), raw=jsonBytes({original:true}), name='coordination/engineering/original/source.json';
+  const pin={commit,path:name,mode:'100644',bytes:raw.length,sha256:digest(raw),
+    git_blob_oid:execFileSync('git',['hash-object','--stdin'],{input:raw}).toString().trim()};
+  const products={'package-roles.json':jsonBytes({paths:[pin]}), 'restored-read-roles':jsonBytes({sidecar:true}),
+    ['restored-read-roles/'+name]:raw};
+  assert.throws(()=>publish(root,'.cache/delivery-handoff/collision',products,{}),/Product file\/directory collision/);
+  assert.equal(fs.existsSync(path.join(root,'.cache')),false);
 });

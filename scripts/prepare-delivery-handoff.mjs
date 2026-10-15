@@ -89,6 +89,12 @@ function admitDestination(root, destination, resume) {
 export function admitPublication(root, destination, products, binding, resume = false, sharedBudget = null) {
   const target = admitDestination(root, destination, resume);
   const budget = sharedBudget ?? candidateBudget([], {reserveBytes: 0, reserveDescriptors: 0});
+  const names = new Set(Object.keys(products));
+  for (const name of names) {
+    const parts = name.split('/');
+    for (let i = 1; i < parts.length; i++)
+      need(!names.has(parts.slice(0, i).join('/')), 'Product file/directory collision');
+  }
   const staged = [], stagingPrefix = 'restored-read-roles/';
   const rolePins = products['package-roles.json'] ? JSON.parse(products['package-roles.json']).paths : [];
   for (const [name, raw] of Object.entries(products)) {
@@ -822,7 +828,7 @@ export function finalizeDelivery(config, reader) {
   let generatedSidecar;
   if (config.sidecar_output !== undefined) {
     need(!config.sidecar && safe(config.sidecar_output) && path.posix.dirname(config.sidecar_output) + '/' === config.new_prefix
-      && !['ownership-selection.json', 'package-inputs.json', 'package-roles.json', 'selected-delivery-expectations.json', 'preparation.json']
+      && !['ownership-selection.json', 'package-inputs.json', 'package-roles.json', 'selected-delivery-expectations.json', 'preparation.json', 'restored-read-roles']
         .includes(path.posix.basename(config.sidecar_output)) && config.patch && config.runtime_envelope,
     'Fresh flat owned sidecar output and committed patch/envelope required');
     const hook = selection.additive_release, priorPin = reader.pin(config.selector.commit, hook?.path);
