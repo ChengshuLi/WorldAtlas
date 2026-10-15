@@ -1023,6 +1023,40 @@ function qualifyProjectedRebind(proof, selected, authorities, products) {
   return {currentTargets,originalRows,native};
 }
 
+// Full proof wrappers and expectedAdded's original-row aliases are temporary.
+// Keep their reservation until this complete frame has returned or unwound; only
+// original per-authority patches survive, exactly as for accepted seed entries.
+function qualifyAppendedAuthorities(session,reader,state,selected,prior,addedEntries,oldRows,temporary) {
+  const authorities=new Map(prior);
+  const expectedAdded=new Map();
+  for (const entry of addedEntries) {
+    demand(entry.policy_id==='retained-source-literal-additions' && entry.policy_version===1, 'Unsupported appended source policy');
+    const proof=appendAuthority(session,reader,entry); temporary.bytes+=retain(session,proof); authorities.set(entry.authority_sha256,proof);
+    const contract=Object.fromEntries(['size','coordinateBits','method','native_latitudes','hierarchy_sha256','original_assets'].map(k => [k,state.manifest[k]]));
+    demand(same(proof.contract,contract) && (same(proof.ledger.parent_inventory,state.ledger.parent_inventory) || proof.nativeOnly && proof.ledger.parent_inventory===undefined),
+      'Appended producer changed native contract or complete original source denominator');
+    if (proof.nativeOnly) demand(proof.patches.every(p=>same(p.base_reference,selected.envelope.base_reference)),
+      'Native source-target authority belongs to a different selected base');
+    for (const original of proof.ledger.rows) {
+      demand(!oldRows.has(original.component_id) && !expectedAdded.has(original.component_id), 'Appended producer repeats original component');
+      expectedAdded.set(original.component_id,{original,entry});
+    }
+  }
+  const addedRows=selected.ledger.rows.filter(row => !oldRows.has(row.component_id));
+  demand(addedRows.length===expectedAdded.size,'Candidate omitted/invented complete appended ledger scope');
+  for (const row of addedRows) {
+    const expected=expectedAdded.get(row.component_id), {authority_sha256,rule_sha256,...literal}=row;
+    demand(expected && authority_sha256===expected.entry.authority_sha256
+      && (rule_sha256===undefined || rule_sha256===expected.entry.rule_sha256) && same(literal,expected.original),
+    'Candidate changed original appended primitive or exception');
+  }
+  for (const entry of addedEntries) {
+    const {nativeOnly,patches}=authorities.get(entry.authority_sha256);
+    authorities.set(entry.authority_sha256,{entry,nativeOnly,patches});
+  }
+  return authorities;
+}
+
 /** Exhaustive actual append-only transition. Never reacquires a full selection.
  * A valid baseline remains usable when an unsupported candidate needs cold work. */
 export function qualifyTransition({state,reader,budget}) {
@@ -1038,33 +1072,22 @@ export function qualifyTransition({state,reader,budget}) {
     const oldRows=new Map(state.ledger.rows.map(row => [row.component_id,row]));
     for (const row of state.ledger.rows) demand(same(row,selected.ledger.rows.find(p => p.component_id===row.component_id)),
       'Old complete ledger primitive, exception or native assignment removed/rebound');
-    const authorities=new Map(baseProof.oldAuthorities);
+    let authorities=new Map(baseProof.oldAuthorities);
     for (const entry of state.registry.entries) demand(same(entry,selected.registry.entries.find(p => p.authority_sha256===entry.authority_sha256)),
       'Old original authority removed/rebound');
     const addedEntries=selected.registry.entries.filter(entry => !authorities.has(entry.authority_sha256));
     retain(session,selected);
-    const expectedAdded=new Map();
-    for (const entry of addedEntries) {
-      demand(entry.policy_id==='retained-source-literal-additions' && entry.policy_version===1, 'Unsupported appended source policy');
-      const proof=appendAuthority(session,reader,entry); retain(session,proof); authorities.set(entry.authority_sha256,proof);
-      const contract=Object.fromEntries(['size','coordinateBits','method','native_latitudes','hierarchy_sha256','original_assets'].map(k => [k,state.manifest[k]]));
-      demand(same(proof.contract,contract) && (same(proof.ledger.parent_inventory,state.ledger.parent_inventory) || proof.nativeOnly && proof.ledger.parent_inventory===undefined),
-        'Appended producer changed native contract or complete original source denominator');
-      if (proof.nativeOnly) demand(proof.patches.every(p=>same(p.base_reference,selected.envelope.base_reference)),
-        'Native source-target authority belongs to a different selected base');
-      for (const original of proof.ledger.rows) {
-        demand(!oldRows.has(original.component_id) && !expectedAdded.has(original.component_id), 'Appended producer repeats original component');
-        expectedAdded.set(original.component_id,{original,entry});
-      }
+    const temporary={bytes:0};
+    try {
+      authorities=qualifyAppendedAuthorities(session,reader,state,selected,authorities,addedEntries,oldRows,temporary);
+    } finally {
+      // The helper frame and its aliases have ended. This retires only the
+      // reservation we created, including on failure, without resetting shared
+      // reader usage, charged inputs, floor or caller carry. The next ordinary
+      // phase carries the compact live state and still enforces current RSS.
+      session.residentBytes-=temporary.bytes;
     }
-    const addedRows=selected.ledger.rows.filter(row => !oldRows.has(row.component_id));
-    demand(addedRows.length===expectedAdded.size,'Candidate omitted/invented complete appended ledger scope');
-    for (const row of addedRows) {
-      const expected=expectedAdded.get(row.component_id), {authority_sha256,rule_sha256,...literal}=row;
-      demand(expected && authority_sha256===expected.entry.authority_sha256
-        && (rule_sha256===undefined || rule_sha256===expected.entry.rule_sha256) && same(literal,expected.original),
-      'Candidate changed original appended primitive or exception');
-    }
+    for (const entry of addedEntries) retain(session,authorities.get(entry.authority_sha256));
     const patches=selected.registry.entries.flatMap(entry => authorities.get(entry.authority_sha256).patches);
     const expectedPatch=mergePatchRows(patches,state.manifest.size,state.certificate.entries.length);
     demand(same(selected.patch.rows,expectedPatch),'Candidate patch omitted, invented or reassigned original native intervals');
