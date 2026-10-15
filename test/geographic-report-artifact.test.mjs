@@ -526,6 +526,23 @@ test('authenticated main queue reuses successful prepared tree comparison withou
   assert.match(workflow, /GEOGRAPHY_CANDIDATE: \$\{\{ needs.prepare.outputs.candidate \}\}/);
 });
 
+test('prepared queue keeps focused coordination routing through final ordinary-tree verification', async () => {
+  const f = queueCompletionFixture();
+  f.files = [{filename:'scripts/merge-integration.mjs',status:'modified'},
+    {filename:'test/merge-integration.test.mjs',status:'modified'}];
+  f.pr.changed_files = f.files.length;
+  f.authored = f.files.map(file => ({path:file.filename,sha:'1'.repeat(40),mode:'100644',type:'blob'}));
+  f.integrated = structuredClone(f.authored);
+  const prepared = await prepareIntegration(f.mergeOptions());
+  assert.equal(prepared.profile,'evidence');
+  assert.equal(prepared.geography_software,false);
+  f.calls.length = 0;
+  const result = await f.complete();
+  assert.equal(result.accepted,true);
+  assert.equal(result.geography.trusted_code_commit,f.options.baseline);
+  assert.deepEqual(f.treeReads(),[`/repos/owner/repo/git/trees/${'2'.repeat(40)}?recursive=1`]);
+});
+
 test('authenticated custody never substitutes for candidate identity, ordered parents or exact source bindings', async () => {
   for (const field of ['candidate_commit', 'baseline', 'head', 'tree', 'workflow_path', 'event']) {
     const f = queueCompletionFixture(), geography = await f.load();
@@ -633,7 +650,7 @@ test('candidate software report requires explicit expected code identity and can
 });
 
 
-test('reviewed focused test-only prepare completes through authenticated queue custody without new tree reads', async () => {
+test('reviewed focused test-only prepare retains final ordinary-file proof through authenticated custody', async () => {
   for(const failure of [null,'integration','geography','review']) {
     const f=queueCompletionFixture(),name='test/native-diagnostic-entry.test.mjs';
     f.files=[{filename:name,status:'modified'}];f.authored[0].path=name;f.integrated=structuredClone(f.authored);
@@ -652,6 +669,7 @@ test('reviewed focused test-only prepare completes through authenticated queue c
       assert.equal(result.geography.trusted_code_commit,f.options.baseline);
       assert.equal(Object.hasOwn(result,'proof'),false);assert.equal(Object.hasOwn(result,'profile'),false);
     }
-    assert.deepEqual(f.treeReads(),[],'authenticated prepare path must not add recursive completion reads');
+    assert.deepEqual(f.treeReads(),failure ? [] : [`/repos/owner/repo/git/trees/${'2'.repeat(40)}?recursive=1`],
+      'Only successful final focused eligibility needs its ordinary authored entries');
   }
 });
