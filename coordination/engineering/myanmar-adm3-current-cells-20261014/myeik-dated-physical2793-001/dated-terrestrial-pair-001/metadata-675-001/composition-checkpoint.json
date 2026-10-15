@@ -1,0 +1,90 @@
+{
+  "commit": "63fb76d48ebf854fe03567a4be43f7f65eb711c3",
+  "actual_accepted_baseline": "675cf6285b8d1cdaed3a7d8915146e7d45ce9052",
+  "prior_cells": 281915,
+  "candidate_cells": 281917,
+  "prior_rows": 691,
+  "candidate_rows": 692,
+  "all_existing_rows_keyed_by_component_id_preserved_whole": true,
+  "added_original_keys": [
+    [
+      30271,
+      122215,
+      202763
+    ],
+    [
+      30271,
+      122216,
+      202763
+    ]
+  ],
+  "files": [
+    {
+      "commit": "63fb76d48ebf854fe03567a4be43f7f65eb711c3",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/myeik-dated-physical2793-001/dated-terrestrial-pair-001/composition-675-001/authority-registry.json",
+      "mode": "100644",
+      "git_blob_oid": "10c7d7f1169e22dbf379c71f58e775b549e2964e",
+      "bytes": 81071,
+      "sha256": "12fa5412aaf536d7b609cc59adb5c344d6b95a758a3fdfae01f2b3209386bc0e"
+    },
+    {
+      "commit": "63fb76d48ebf854fe03567a4be43f7f65eb711c3",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/myeik-dated-physical2793-001/dated-terrestrial-pair-001/composition-675-001/patch.json",
+      "mode": "100644",
+      "git_blob_oid": "4403bb40cc587dbe434586b7cd059eecf292d400",
+      "bytes": 2719593,
+      "sha256": "8cedad92e58479620be70b228f33fb625d01566df4f11b6865e9a0c10e47fbb1"
+    },
+    {
+      "commit": "63fb76d48ebf854fe03567a4be43f7f65eb711c3",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/myeik-dated-physical2793-001/dated-terrestrial-pair-001/composition-675-001/preparation.json",
+      "mode": "100644",
+      "git_blob_oid": "1fcf7f833c41b5fdcead6c1172051516f41c22ba",
+      "bytes": 596,
+      "sha256": "c30d8a214f2e094e11e9cbff86529e2bd3f99188d2df49c887286e1b5db6f807"
+    },
+    {
+      "commit": "63fb76d48ebf854fe03567a4be43f7f65eb711c3",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/myeik-dated-physical2793-001/dated-terrestrial-pair-001/composition-675-001/runtime-envelope.json",
+      "mode": "100644",
+      "git_blob_oid": "611e42810c4763c34f795163ae629b52406bc674",
+      "bytes": 1380,
+      "sha256": "4f894e35b31abbf4f9b2e5645d2163923ad86d287a8841a2d378b1efe653152d"
+    },
+    {
+      "commit": "63fb76d48ebf854fe03567a4be43f7f65eb711c3",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/myeik-dated-physical2793-001/dated-terrestrial-pair-001/composition-675-001/selected-ledger.json",
+      "mode": "100644",
+      "git_blob_oid": "46bb1b648be3f435fec03017681189aabbfbe5cf",
+      "bytes": 6727610,
+      "sha256": "14ee918bff23791df856eae431df0bc5a115f9cfac9ecc96db5589c9b645a31e"
+    },
+    {
+      "commit": "63fb76d48ebf854fe03567a4be43f7f65eb711c3",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/myeik-dated-physical2793-001/dated-terrestrial-pair-001/metadata-675-001/compose-config.json",
+      "mode": "100644",
+      "git_blob_oid": "a2e995adc5e15eb7b2bbf8857df063e6e1fc0c59",
+      "bytes": 2441,
+      "sha256": "e23c75baf65424bd57c5fc4983ffdefcf2039347c432b16d7fa7cae0d8085479"
+    },
+    {
+      "commit": "63fb76d48ebf854fe03567a4be43f7f65eb711c3",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/myeik-dated-physical2793-001/dated-terrestrial-pair-001/metadata-675-001/compose-execution.json",
+      "mode": "100644",
+      "git_blob_oid": "3b072acea8ff08bdea636c37eff479346f79b160",
+      "bytes": 726,
+      "sha256": "f0eb51bb5a4125b0241c488d2f717abc02012aa012e976f44b851adba0744a46"
+    },
+    {
+      "commit": "63fb76d48ebf854fe03567a4be43f7f65eb711c3",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/myeik-dated-physical2793-001/dated-terrestrial-pair-001/metadata-675-001/existing-consumer-code-675-comparison.json",
+      "mode": "100644",
+      "git_blob_oid": "ba991aea29fab11392ff26a3676616b81917ce34",
+      "bytes": 8088,
+      "sha256": "2a80843af94c19c71f5cc5892a036bbfebaf815f65a0f005503da59ef6a4685f"
+    }
+  ],
+  "original_qualification_reused": true,
+  "new_native_or_source_execution": false,
+  "postcheck_note": "Producer completed exit0 once. Initial adapter assumed appended array position and refused; stock canonical order inserts new component at456. Corrected complete component-ID equality joins all691prior rows without rerunning producer."
+}
