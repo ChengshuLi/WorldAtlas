@@ -1,0 +1,92 @@
+{
+  "version": 1,
+  "reviewer": "/root/authority_binding_review",
+  "status": "completed-observation-reviewed-with-target-specific-limits",
+  "execution_head": "d67b6b5f590375bcbed429bafa2afc5a590516c4",
+  "output_directory": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/fa678ed92d9b60765f8935b6a7afd117bc7c744c96057999400c37180373dd2e/work/coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/coastal1928-physical-001",
+  "outputs": {
+    "execution-receipt.json": {
+      "bytes": 123845,
+      "sha256": "999e573da38d843dfab5e6187a2306b9ddc4e0c13b1c020881d3e098bf4710b3"
+    },
+    "whole-target-support.json": {
+      "bytes": 1221619,
+      "sha256": "e7f8a3c3b9ff0184d8d5a909381d38f343bff0c05a93f0c7f2d6f82af71ecf4f"
+    }
+  },
+  "config_sha256": "3a9542fbcde6d7e71ae78bacd2d9e73298de2f7cc6830ce62901588f753f56ec",
+  "checks": {
+    "closed_three_file_inventory": true,
+    "receipt_inputs_equal_all25_reviewed_pins": true,
+    "runtime_files_equal388_reviewed_pins": true,
+    "metadata_receipts": 18,
+    "native_parts": 3,
+    "native_member_bytes": 95809336,
+    "native_record_count": 188612,
+    "whole_original_stage_preserved": true,
+    "all852_queries_checked": true,
+    "both_hierarchy_and_land_water_conflict_witnesses_structurally_empty": true
+  },
+  "rows": [
+    {
+      "target": "gb:MMR:ADM3:66882298B82483484204646",
+      "checked_queries": 477,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
+      "target": "gb:MMR:ADM3:66882298B86598910616989",
+      "checked_queries": 375,
+      "issue_count": 2,
+      "issues": [
+        {
+          "reason": "missing_reconstruction",
+          "geometry_type": "MultiPolygon",
+          "polygon_components": 229,
+          "rings": 229,
+          "ring_vertex_counts": {
+            "4": 211,
+            "5": 15,
+            "6": 2,
+            "7": 1
+          },
+          "pointer": "/results/1/support/missing_reconstruction"
+        },
+        {
+          "reason": "extra_reconstruction",
+          "geometry_type": "MultiPolygon",
+          "polygon_components": 225,
+          "rings": 225,
+          "ring_vertex_counts": {
+            "4": 209,
+            "5": 14,
+            "6": 2
+          },
+          "pointer": "/results/1/support/extra_reconstruction"
+        }
+      ]
+    }
+  ],
+  "bokpyin_disposition": "Completed clean whole-target physical observation reusable for its own candidate-specific support checks. Kawthoung issues do not invalidate this independent row. No candidate centres or administrative authority are cleared by this observation.",
+  "kawthoung_disposition": "Completed checked observation with nonempty reconstruction residuals retained. Both exact MultiPolygon witnesses (229 missing plus225 extra components,454 total) require candidate-specific conservative residual screening under an accepted operator. Preserve coordinates and rings, including all triangle and nontriangle components; do not collapse to lines, infer zero-area or apply tolerance. No unknown query; no clean-row designation.",
+  "operating": {
+    "exit_code": 0,
+    "compute_released": true,
+    "grant_bytes": 671088640,
+    "peak_rss_bytes": 414760960,
+    "raw_maximum_rss_kib_field": 414760960,
+    "raw_field_unit_limit": "Legacy name; Darwin value is bytes.",
+    "raw_elapsed_seconds": 5.043382541043684,
+    "helper_elapsed_seconds": 5.0640717500355095,
+    "entry_elapsed_seconds": 5.250638917,
+    "external_seconds": 5.57,
+    "limit": "Cooperative boundary checks, not continuous process-tree enforcement."
+  },
+  "limits": [
+    "JSON/byte/receipt review only; no geometry, source or native operation replay.",
+    "Physical source-relative observation preserves heterogeneous vintages and original authority limitations.",
+    "All source/border/water/relative holds remain until actual candidate-specific scientific and native qualification checks.",
+    "No current-owner-zero, conservation, delivery or acceptance claim."
+  ],
+  "findings": []
+}
