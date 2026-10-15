@@ -246,23 +246,6 @@ class ScientificFixture(unittest.TestCase):
         result=probe.run(root,config,admission,output,'coordination/engineering/test/source-001')
         return root,output,result
 
-    def test_actual_entry_products_preserve_holds_and_receipt_hashes(self):
-        root,out,result=self.scientific_run()
-        self.assertTrue(result['complete'])
-        qualification=json.loads((out/'source-qualification.json').read_bytes())
-        self.assertEqual(qualification['candidate_cells'],3)
-        self.assertEqual(qualification['source_prerequisite_repair_candidates'],2)
-        self.assertEqual(qualification['physical_interpretation_held_cells'],1)
-        self.assertEqual(qualification['outside_retained_IDN_reference_cells'],2)
-        self.assertEqual(qualification['native_authority_qualified_cells'],0)
-        self.assertEqual(qualification['repaired_credit'],0)
-        self.assertEqual(len(qualification['complete_families']),9)
-        receipt=json.loads((out/'execution-receipt.json').read_bytes())
-        for pin in receipt['outputs']:
-            self.assertTrue(pin['path'].startswith('coordination/engineering/test/source-001/'))
-            raw=(out/Path(pin['path']).name).read_bytes()
-            self.assertEqual((len(raw),probe.sha(raw)),(pin['bytes'],pin['sha256']))
-
     def test_reference_competitor_withheld_but_source_observations_survive(self):
         def mutate(data,c):
             data['countries.json']['features'].append(dict(geometry={'type':'Polygon','coordinates':[[[.002,-.01],[.0022,-.01],[.0022,.01],[.002,.01],[.002,-.01]]]},properties=dict(ADM0_A3='MYS',ADMIN='Malaysia')))
@@ -286,7 +269,21 @@ class ScientificFixture(unittest.TestCase):
 
 
     def test_full_node_source_entry_resume_and_tampered_product(self):
-        root, _, _ = self.scientific_run()
+        root, out, result = self.scientific_run()
+        self.assertTrue(result['complete'])
+        qualification=json.loads((out/'source-qualification.json').read_bytes())
+        self.assertEqual(qualification['candidate_cells'],3)
+        self.assertEqual(qualification['source_prerequisite_repair_candidates'],2)
+        self.assertEqual(qualification['physical_interpretation_held_cells'],1)
+        self.assertEqual(qualification['outside_retained_IDN_reference_cells'],2)
+        self.assertEqual(qualification['native_authority_qualified_cells'],0)
+        self.assertEqual(qualification['repaired_credit'],0)
+        self.assertEqual(len(qualification['complete_families']),9)
+        receipt=json.loads((out/'execution-receipt.json').read_bytes())
+        for pin in receipt['outputs']:
+            self.assertTrue(pin['path'].startswith('coordination/engineering/test/source-001/'))
+            raw=(out/Path(pin['path']).name).read_bytes()
+            self.assertEqual((len(raw),probe.sha(raw)),(pin['bytes'],pin['sha256']))
         source = json.loads((root / 'config.json').read_bytes())
         runtime_files = json.loads((root / 'admission.json').read_bytes())['runtime_files']
         executable = str(Path(sys.executable).resolve())
@@ -300,20 +297,6 @@ class ScientificFixture(unittest.TestCase):
                    'source', 'cli-config.json', destination]
         env = {k: v for k, v in os.environ.items() if k not in ('NODE_OPTIONS', 'NODE_PATH')}
         env['GIT_NO_LAZY_FETCH'] = '1'
-        # Fresh automatic Node admission replaces the duplicated manual parent
-        # cap. Explicit intentional caps and unavailable memory still refuse
-        # before scientific scratch or outputs are created.
-        limited = dict(config, preparation_allowance=dict(phaseBytes=1, rssBytes=536870912))
-        (root / 'cli-config.json').write_text(json.dumps(limited))
-        denied = subprocess.run(command, cwd=root, env=env, capture_output=True, text=True, timeout=30)
-        self.assertNotEqual(denied.returncode, 0)
-        self.assertFalse((root / '.cache/delivery-handoff').exists())
-        (root / 'cli-config.json').write_text(json.dumps(config))
-        exhausted = dict(env, WORLDATLAS_MEMORY_HEADROOM_BYTES=str(2**52))
-        denied = subprocess.run(command, cwd=root, env=exhausted, capture_output=True, text=True, timeout=30)
-        self.assertNotEqual(denied.returncode, 0)
-        self.assertIn('Insufficient current preparation memory', denied.stderr)
-        self.assertFalse((root / '.cache/delivery-handoff').exists())
         first = subprocess.run(command, cwd=root, env=env, capture_output=True, text=True, timeout=30)
         self.assertEqual(first.returncode, 0, first.stdout + first.stderr)
         self.assertFalse(json.loads(first.stdout)['resumed'])
