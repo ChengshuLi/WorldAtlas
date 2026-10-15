@@ -795,7 +795,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
   for(const item of data.provenance){
    demand(item&&typeof item.id==='string'&&item.id&&!provenance.has(item.id)
     &&['adoption','review','observation','frame'].includes(item.role)
-    &&keys(item,item.role==='frame'?'id,role,pin,observation,block_pointer,display_pointer,channels':'id,role,pin'),
+    &&keys(item,item.role==='frame'?'id,role,pin,observation,block_pointer,display_pointer,channels,display_base':'id,role,pin'),
    'Foreign or duplicate dated evidence role');
    pinCheck(item.pin);const identity=item.pin.commit+':'+item.pin.path;
    let content=loaded.get(identity);
@@ -863,9 +863,11 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
      const block=pointer(body,f.block_pointer),display=pointer(body,f.display_pointer);
      demand(Array.isArray(body.blocks)&&body.blocks.includes(block)&&same(block.block,o.physical_block)
       &&Array.isArray(block.indices)&&block.indices.includes(o.index)&&Array.isArray(block.displays)&&block.displays.includes(display)
-      &&typeof display.path==='string'&&display.path.startsWith(body.item+'/')
+      &&typeof display.path==='string'&&display.path.split('/').includes(body.item)
       &&display.path.endsWith('/'+f.channels+'-native.png')
-      &&f.pin.path===relative(observation.item.pin.path,display.path,2)
+      &&typeof f.display_base==='string'&&!f.display_base.includes('\\')
+      &&f.display_base.split('/').every(p=>p&&p!=='.'&&p!=='..')
+      &&f.pin.path===relative(f.display_base+'/_',display.path)
       &&display.bytes===f.pin.bytes&&display.sha256===f.pin.sha256,'Dated native frame registration differs');
     }
    }
