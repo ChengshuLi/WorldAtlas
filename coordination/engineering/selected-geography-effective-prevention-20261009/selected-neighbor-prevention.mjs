@@ -887,7 +887,11 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
     const owner=reconcile(id,originals);
     return {id,target_id:owner.id,pixelIndex:owner.pixelIndex,geometry:feature.geometry};});
   const coverageFeatures=selected.map(target=>({id:target.target_id??target.id,source_id:target.id,pixelIndex:target.pixelIndex,geometry:target.coverage_geometry}));
-  const exclusions=selected.flatMap(target=>(target.territorial_exclusions??[]).map(geometry=>({id:target.target_id??target.id,pixelIndex:target.pixelIndex,geometry})));
+  let exclusions=selected.flatMap(target=>(target.territorial_exclusions??[]).map(geometry=>({id:target.target_id??target.id,pixelIndex:target.pixelIndex,geometry})));
+  // Qualification requires coverage; discard only whole exclusions proven
+  // disjoint from every complete coverage part. Keep diagnostic reasons intact.
+  if(!diagnostic)exclusions=exclusions.filter(feature=>coordinateBounds(feature.geometry)
+   .some(part=>bounds.some(box=>intersects(part,box))));
   const blocks=new Map();
   for(const row of proposed.rows)if(row.runs.some(run=>selectedOwners.has(run[2]))){
    const block=Math.floor(row.y/4096);const list=blocks.get(block)??[];list.push(row);blocks.set(block,list);
