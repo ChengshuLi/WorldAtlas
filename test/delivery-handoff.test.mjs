@@ -343,13 +343,19 @@ test('finalization rejects coherent foreign sidecar/base/ledger/envelope binding
 });
 
 
-test('finalization appends authenticated inherited read roles without widening output ownership', () => {
+test('finalization retains historical custody but packages only the six current consumer bodies', () => {
   const {reader, config} = finalizationFixture({historical: true});
   const original = reader.json(config.package_inputs), result = finalizeDelivery(config, reader);
   const actual = JSON.parse(result['package-inputs.json']);
   assert.deepEqual(actual.inputs.slice(0, original.inputs.length), original.inputs);
-  assert.ok(actual.inputs.includes('coordination/engineering/accepted-original/custody.json'));
-  assert.ok(actual.inputs.includes('coordination/engineering/accepted-original/operating.json'));
+  const sidecar = reader.json(config.sidecar);
+  const current = [config.sidecar, sidecar.runtime_envelope, ...Object.values(sidecar.logical_asset_map)].map(p => p.path).sort();
+  assert.deepEqual(actual.inputs.slice(original.inputs.length), current);
+  const retained = JSON.parse(result['package-roles.json']).paths.map(p => p.path);
+  for (const name of ['custody.json', 'operating.json'].map(n => 'coordination/engineering/accepted-original/' + n)) {
+    assert.ok(retained.includes(name));
+    assert.ok(!actual.inputs.includes(name));
+  }
   assert.ok(Object.keys(result).every(name => !name.includes('/')));
   const foreign = reader.add('coordination/engineering/unbound/existing.json', {});
   assert.throws(() => finalizeDelivery({...config, outer_roles: [foreign]}, reader), /derived outer roles/);
@@ -384,7 +390,9 @@ test('finalization checks the independent Git package baseline, not the role sou
   restored.config.restored_read_roles = {commit: source, paths: [name]};
   restored.reader.hasPath = (c,p) => { assert.equal(c,absent); return actual.hasPath(c,p); };
   restored.reader.pin = (c,p) => p === name ? actual.pin(c,p) : originalPin(commit,p);
-  assert.ok(JSON.parse(finalizeDelivery(restored.config,restored.reader)['package-inputs.json']).inputs.includes(name));
+  const result = finalizeDelivery(restored.config,restored.reader);
+  assert.ok(JSON.parse(result['package-roles.json']).paths.some(pin => pin.path === name));
+  assert.ok(!JSON.parse(result['package-inputs.json']).inputs.includes(name));
   restored.config.restored_read_roles.commit = changed;
   assert.throws(()=>finalizeDelivery(restored.config,restored.reader), /Restored snapshot differs/);
   for (const baseline of [absent, changed]) {
@@ -412,7 +420,11 @@ test('finalization admits only an exact committed restoration of absent canonica
   };
   const f = setup(), output = finalizeDelivery(f.config,f.reader);
   const inputs = JSON.parse(output['package-inputs.json']).inputs;
-  for (const name of f.config.restored_read_roles.paths) assert.ok(inputs.includes(name));
+  const retained = JSON.parse(output['package-roles.json']).paths.map(pin => pin.path);
+  for (const name of f.config.restored_read_roles.paths) {
+    assert.ok(retained.includes(name));
+    assert.ok(!inputs.includes(name));
+  }
   for (const mutate of [
     f => f.config.restored_read_roles.paths.push(f.config.restored_read_roles.paths[0]),
     f => f.config.restored_read_roles.paths.push('coordination/engineering/unbound/existing.json'),
