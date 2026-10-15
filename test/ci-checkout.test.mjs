@@ -13,6 +13,7 @@ const token = 'fixture-secret-only-checkout-1787';
 const base64Token = Buffer.from('x-access-token:' + token).toString('base64');
 const fixtureEnv = {...process.env, GIT_CONFIG_NOSYSTEM: '1', GIT_CONFIG_GLOBAL: os.devNull,
   PYTHONDONTWRITEBYTECODE: '1', INTEGRATION_PROFILE: '', INTEGRATION_TEST_SELECTION: ''};
+const expectationsPath = 'coordination/engineering/current/selected-delivery-expectations.json';
 const packageDefinition = {version: 1, inputs: ['.github/package-inputs.json', 'file.txt',
   'research/geography/required/body.txt', 'coordination/engineering/required/body.txt',
   'data/geography/required/body.txt'], optional_inputs: [], verification_paths: [], generated_outputs: []};
@@ -37,6 +38,8 @@ function fixture(t, mode = 'success') {
   fs.symlinkSync('file.txt', path.join(source, 'link'));
   for (const [name, text] of Object.entries({
     '.github/package-inputs.json': JSON.stringify(packageDefinition) + '\n',
+    [expectationsPath]: '{"trusted":"exact expectations"}\n',
+    'coordination/engineering/unconsumed/payload.bin': 'unrelated archived payload bytes\n',
     'data/regional-review/source-only/body.txt': 'unconsumed regional source-only bytes\n',
     'research/campaigns/source-only/body.txt': 'unconsumed historical campaign bytes\n',
     'research/geography/required/body.txt': 'required original scientific source bytes\n',
@@ -92,7 +95,7 @@ if ischeckout and mode=='credential-leak':
 os.execv(${JSON.stringify(realGit)},[${JSON.stringify(realGit)},'-c',${JSON.stringify('url.file://')}+${JSON.stringify(source)}+'.insteadOf=https://github.com/ChengshuLi/WorldAtlas.git',*args])
 `, {mode: 0o755});
   const env = {...fixtureEnv, PATH: shim + path.delimiter + process.env.PATH,
-    WORLDATLAS_CHECKOUT_TOKEN: token, GH_TOKEN: 'unrelated-secret',
+    WORLDATLAS_CHECKOUT_TOKEN: token, GH_TOKEN: 'unrelated-secret', SELECTED_EXPECTATIONS_PATH: expectationsPath,
     GIT_CONFIG_GLOBAL: config, GIT_CONFIG_COUNT: '1', GIT_CONFIG_KEY_0: 'filter.malicious.smudge', GIT_CONFIG_VALUE_0: `touch ${sentinel}`};
   const args = (extra = []) => [helper, '--repository', 'ChengshuLi/WorldAtlas', '--sha', sha, '--tree', tree,
     '--workspace', workspace, ...extra];
@@ -131,7 +134,7 @@ test('real Git checkout preserves exact tree, modes, symlinks and detached ident
   f.clean(); noSecrets(result);
 });
 
-for (const selection of ['complete', 'selected-data']) test(`${selection} software profile excludes only source-only files and blobs while preserving exact tree and required inputs`, async t => {
+for (const selection of ['complete', 'selected-data']) test(`${selection} software profile preserves exact tree and required inputs while omitting its unconsumed namespaces`, async t => {
   const f = fixture(t);
   Object.assign(f.env, {INTEGRATION_PROFILE: 'full', INTEGRATION_TEST_SELECTION: selection});
   const result = f.run();
@@ -160,7 +163,9 @@ for (const selection of ['complete', 'selected-data']) test(`${selection} softwa
   assert.ok(!fs.existsSync(f.sentinel));
   assert.doesNotMatch(fs.readFileSync(path.join(f.workspace, '.git/config'), 'utf8'), /extraheader|credential|AUTHORIZATION|fixture-secret|insteadOf/);
   assert.equal(f.events(result).at(-1).source_only_omitted, true);
-  assert.equal(fs.existsSync(path.join(f.workspace, 'research/geography/unconsumed/body.txt')), selection === 'complete');
+  for (const name of ['research/geography/unconsumed/body.txt', 'coordination/engineering/unconsumed/payload.bin'])
+    assert.equal(fs.existsSync(path.join(f.workspace, name)), selection === 'complete', name);
+  assert.deepEqual(fs.readFileSync(path.join(f.workspace, expectationsPath)), fs.readFileSync(path.join(f.source, expectationsPath)));
   assert.deepEqual(inspectPackageInputs(f.workspace, packageDefinition).errors, []);
   const destination = path.join(f.directory, 'package-stage');
   const materialized = await materializePackageInputs({source: f.workspace, destination, definition: packageDefinition});
@@ -211,6 +216,124 @@ test('cold selected-data checkout retains declared research leaves, directories 
   assert.ok(!fs.existsSync(path.join(destination, 'research/geography/unconsumed/body.txt')));
   assert.equal(command(realGit, ['-C', f.workspace, 'config', '--get', 'remote.origin.promisor']), 'false');
   f.clean(); noSecrets(result);
+});
+
+test('cold selected-data checkout retains coordination execution files, exact roles and only trusted expectations', async t => {
+  const f = fixture(t), prefix = 'coordination/engineering/';
+  const directory = prefix + 'declared-directory/', verification = prefix + 'verified/record.json';
+  const definition = {...packageDefinition, inputs: [...packageDefinition.inputs, directory], verification_paths: [verification]};
+  const suffixes = ['mjs','js','cjs','py','sh','ts','tsx','jsx','html','css','sql','yml','yaml','c','h','cpp','hpp','wasm','bat','cmd','ps1'];
+  const bodies = {
+    '.github/package-inputs.json': JSON.stringify(definition),
+    [directory + 'nested/original.bin']: 'complete declared directory descendant',
+    [verification]: 'verification outside package inputs',
+    [prefix + 'required/body.txt-sibling']: 'omitted exact-file sibling',
+    [prefix + 'declared-directory-sibling/payload.bin']: 'omitted directory sibling',
+    [prefix + 'verified/unlisted.json']: 'omitted verification sibling',
+    [prefix + 'archive/package.json']: '{"type":"module"}',
+    [prefix + 'archive/command']: '#!/bin/sh\nexit 0\n',
+    [prefix + 'archive/selected-delivery-expectations.json']: 'untrusted alternate expectations',
+    [prefix + 'archive/large.zip']: 'unrelated cold archive'.repeat(20000),
+    ...Object.fromEntries(suffixes.map(suffix => [prefix + 'archive/helper.' + suffix, 'retained execution source: ' + suffix]))
+  };
+  for (const [name, raw] of Object.entries(bodies)) {
+    fs.mkdirSync(path.dirname(path.join(f.source, name)), {recursive: true}); fs.writeFileSync(path.join(f.source, name), raw);
+  }
+  fs.chmodSync(path.join(f.source, prefix + 'archive/command'), 0o755);
+  f.git(['add', '.']); f.git(['commit', '--quiet', '-m', 'coordination execution and role retention']);
+  const sha = f.git(['rev-parse', 'HEAD']), tree = f.git(['rev-parse', 'HEAD^{tree}']);
+  Object.assign(f.env, {INTEGRATION_PROFILE: 'full', INTEGRATION_TEST_SELECTION: 'selected-data'});
+  const result = f.run(['--sha', sha, '--tree', tree]);
+  assert.equal(result.status, 0, result.stdout + result.stderr);
+  assert.equal(command(realGit, ['-C', f.workspace, 'rev-parse', 'HEAD']), sha);
+  assert.equal(command(realGit, ['-C', f.workspace, 'rev-parse', 'HEAD^{tree}']), tree);
+  for (const name of [directory + 'nested/original.bin', verification, expectationsPath,
+    prefix + 'archive/package.json', prefix + 'archive/command', ...suffixes.map(suffix => prefix + 'archive/helper.' + suffix)])
+    assert.deepEqual(fs.readFileSync(path.join(f.workspace, name)), fs.readFileSync(path.join(f.source, name)), name);
+  assert.equal(fs.statSync(path.join(f.workspace, prefix + 'archive/command')).mode & 0o111, 0o111);
+  for (const name of [prefix + 'required/body.txt-sibling', prefix + 'declared-directory-sibling/payload.bin',
+    prefix + 'verified/unlisted.json', prefix + 'archive/selected-delivery-expectations.json', prefix + 'archive/large.zip']) {
+    assert.ok(!fs.existsSync(path.join(f.workspace, name)), name);
+    const oid = f.git(['rev-parse', `${sha}:${name}`]);
+    assert.notEqual(spawnSync(realGit, ['-C', f.workspace, 'cat-file', '-e', oid],
+      {env: {...fixtureEnv, GIT_NO_LAZY_FETCH: '1'}, timeout: 2000}).status, 0, 'omitted cold blob: ' + name);
+  }
+  assert.deepEqual(inspectPackageInputs(f.workspace, definition).errors, []);
+  const destination = path.join(f.directory, 'full-package-fallback');
+  await materializePackageInputs({source: f.workspace, destination, definition});
+  assert.deepEqual(fs.readFileSync(path.join(destination, directory + 'nested/original.bin')),
+    fs.readFileSync(path.join(f.source, directory + 'nested/original.bin')));
+  assert.ok(!fs.existsSync(path.join(destination, expectationsPath)), 'Smoke expectations need no package role');
+  f.clean(); noSecrets(result);
+});
+
+for (const role of ['inputs', 'verification_paths']) test(`selected-data ancestor coordination directory in ${role} retains complete history`, t => {
+  const f = fixture(t), definition = {...packageDefinition,
+    [role]: [...packageDefinition[role], 'coordination/']};
+  fs.writeFileSync(path.join(f.source, '.github/package-inputs.json'), JSON.stringify(definition));
+  f.git(['add', '.']); f.git(['commit', '--quiet', '-m', 'ancestor coordination declaration']);
+  Object.assign(f.env, {INTEGRATION_PROFILE: 'full', INTEGRATION_TEST_SELECTION: 'selected-data'});
+  const result = f.run(['--sha', f.git(['rev-parse', 'HEAD']), '--tree', f.git(['rev-parse', 'HEAD^{tree}'])]);
+  assert.equal(result.status, 0, result.stdout + result.stderr);
+  assert.deepEqual(fs.readFileSync(path.join(f.workspace, 'coordination/engineering/unconsumed/payload.bin')),
+    fs.readFileSync(path.join(f.source, 'coordination/engineering/unconsumed/payload.bin')));
+  assert.deepEqual(inspectPackageInputs(f.workspace, definition).errors, []);
+  f.clean(); noSecrets(result);
+});
+
+for (const unsafe of ['', '../selected-delivery-expectations.json', '/absolute/selected-delivery-expectations.json',
+  'coordination/engineering/../selected-delivery-expectations.json', 'coordination//selected-delivery-expectations.json',
+  'coordination/*/selected-delivery-expectations.json', 'coordination/current/other.json', expectationsPath + '/']) {
+  test(`selected-data unsafe trusted expectations ${JSON.stringify(unsafe)} fail closed`, t => {
+    const f = fixture(t);
+    Object.assign(f.env, {INTEGRATION_PROFILE: 'full', INTEGRATION_TEST_SELECTION: 'selected-data', SELECTED_EXPECTATIONS_PATH: unsafe});
+    const result = f.run();
+    assert.equal(result.status, 1, result.stdout + result.stderr); assert.match(result.stdout, /invalid-selected-expectations/);
+    assert.ok(!f.rows().some(row => row.checkout)); assert.deepEqual(fs.readdirSync(f.workspace), []);
+    f.clean(); noSecrets(result);
+  });
+}
+for (const mode of ['missing', 'symlink', 'directory', 'executable']) test(`selected-data ${mode} trusted expectations fail closed`, t => {
+  const f = fixture(t), file = path.join(f.source, expectationsPath);
+  fs.unlinkSync(file);
+  if (mode === 'symlink') fs.symlinkSync('../../../file.txt', file);
+  if (mode === 'directory') { fs.mkdirSync(file); fs.writeFileSync(path.join(file, 'body'), 'foreign directory'); }
+  if (mode === 'executable') fs.writeFileSync(file, '{}', {mode: 0o755});
+  f.git(['add', '.']); f.git(['commit', '--quiet', '-m', 'nonordinary expectations']);
+  Object.assign(f.env, {INTEGRATION_PROFILE: 'full', INTEGRATION_TEST_SELECTION: 'selected-data'});
+  const result = f.run(['--sha', f.git(['rev-parse', 'HEAD']), '--tree', f.git(['rev-parse', 'HEAD^{tree}'])]);
+  assert.equal(result.status, 1, result.stdout + result.stderr); assert.match(result.stdout, /invalid-selected-expectations/);
+  assert.ok(!f.rows().some(row => row.checkout)); assert.deepEqual(fs.readdirSync(f.workspace), []);
+  f.clean(); noSecrets(result);
+});
+
+test('selected-data retains an exact trusted expectations file in the filtered research namespace', t => {
+  const f = fixture(t), name = 'research/geography/current/selected-delivery-expectations.json';
+  fs.mkdirSync(path.dirname(path.join(f.source, name)), {recursive: true}); fs.writeFileSync(path.join(f.source, name), 'exact trusted research expectations');
+  f.git(['add', '.']); f.git(['commit', '--quiet', '-m', 'trusted research expectations']);
+  Object.assign(f.env, {INTEGRATION_PROFILE: 'full', INTEGRATION_TEST_SELECTION: 'selected-data', SELECTED_EXPECTATIONS_PATH: name});
+  const result = f.run(['--sha', f.git(['rev-parse', 'HEAD']), '--tree', f.git(['rev-parse', 'HEAD^{tree}'])]);
+  assert.equal(result.status, 0, result.stdout + result.stderr);
+  assert.equal(fs.readFileSync(path.join(f.workspace, name), 'utf8'), 'exact trusted research expectations');
+  assert.ok(!fs.existsSync(path.join(f.workspace, expectationsPath)), 'No implicit other expectations retention');
+  f.clean(); noSecrets(result);
+});
+
+test('selected-data refuses a nonordinary coordination execution source instead of silently omitting it', t => {
+  const f = fixture(t), name = 'coordination/engineering/archive/helper.mjs';
+  fs.mkdirSync(path.dirname(path.join(f.source, name)), {recursive: true}); fs.symlinkSync('../../../file.txt', path.join(f.source, name));
+  f.git(['add', '.']); f.git(['commit', '--quiet', '-m', 'nonordinary coordination source']);
+  Object.assign(f.env, {INTEGRATION_PROFILE: 'full', INTEGRATION_TEST_SELECTION: 'selected-data'});
+  const result = f.run(['--sha', f.git(['rev-parse', 'HEAD']), '--tree', f.git(['rev-parse', 'HEAD^{tree}'])]);
+  assert.equal(result.status, 1, result.stdout + result.stderr); assert.match(result.stdout, /nonordinary-coordination-execution-input/);
+  assert.ok(!f.rows().some(row => row.checkout)); assert.deepEqual(fs.readdirSync(f.workspace), []);
+  f.clean(); noSecrets(result);
+});
+
+test('trusted workflow passes the exact prepare expectations output to checkout', () => {
+  const workflow = fs.readFileSync(new URL('../.github/workflows/worker-merge.yml', import.meta.url), 'utf8');
+  const step = workflow.slice(workflow.indexOf('      - name: Acquire full checkout'), workflow.indexOf('      - name: Legacy full checkout'));
+  assert.match(step, /SELECTED_EXPECTATIONS_PATH: \$\{\{ needs\.prepare\.outputs\.expectations_path \}\}/);
 });
 
 test('selected-data declaration of the entire research namespace retains all its original bodies', t => {
@@ -273,8 +396,8 @@ for (const unsafe of ['../escape', '/absolute', 'research/geography/../escape',
   });
 }
 
-test('selected-data missing declared research input still fails real package admission and fallback materialization', async t => {
-  const f = fixture(t), required = 'research/geography/required/body.txt';
+for (const namespace of ['research/geography', 'coordination/engineering']) test(`selected-data missing declared ${namespace} input still fails real package admission and fallback materialization`, async t => {
+  const f = fixture(t), required = namespace + '/required/body.txt';
   fs.unlinkSync(path.join(f.source, required));
   f.git(['add', '.']); f.git(['commit', '--quiet', '-m', 'missing declared research input']);
   Object.assign(f.env, {INTEGRATION_PROFILE: 'full', INTEGRATION_TEST_SELECTION: 'selected-data'});
@@ -344,13 +467,13 @@ test('selected-data future execution import from an omitted namespace fails the 
   f.clean(); noSecrets(result);
 });
 
-test('sparse software acquisition preserves explicit complete historical commit fetch without later lazy hydration', t => {
+for (const selection of ['complete', 'selected-data']) test(`${selection} sparse acquisition preserves explicit complete historical commit fetch without later lazy hydration`, t => {
   const f = fixture(t), original = f.sha;
   fs.writeFileSync(path.join(f.source, 'file.txt'), 'new current software bytes\n');
   fs.writeFileSync(path.join(f.source, 'data/geography/required/body.txt'), 'new current application bytes\n');
   f.git(['add', '.']); f.git(['commit', '--quiet', '-m', 'current']);
   const current = f.git(['rev-parse', 'HEAD']), tree = f.git(['rev-parse', 'HEAD^{tree}']);
-  Object.assign(f.env, {INTEGRATION_PROFILE: 'full', INTEGRATION_TEST_SELECTION: 'complete'});
+  Object.assign(f.env, {INTEGRATION_PROFILE: 'full', INTEGRATION_TEST_SELECTION: selection});
   const result = f.run(['--sha', current, '--tree', tree]);
   assert.equal(result.status, 0, result.stdout + result.stderr);
   assert.notEqual(spawnSync(realGit, ['-C', f.workspace, 'cat-file', '-e', original + '^{commit}'],

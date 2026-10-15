@@ -173,7 +173,7 @@ class Supervisor:
                 child.stderr.close()
 
 
-def research_package_patterns(definition):
+def package_namespace_patterns(definition, prefix, extra=()):
     # Reuse package-inputs.mjs's packagePathRequired role/path semantics.
     # This retention boundary grants no package role; the real package reader
     # still validates the complete definition and every required materialized input.
@@ -182,12 +182,11 @@ def research_package_patterns(definition):
     if (not isinstance(definition, dict) or definition.get('version') != 1
             or not isinstance(inputs, list) or not inputs or not isinstance(verification, list)):
         raise AcquisitionError('invalid-package-inputs')
-    paths = inputs + verification
+    paths = inputs + verification + list(extra)
     for name in paths:
         if (not isinstance(name, str) or not re.fullmatch(r'[A-Za-z0-9_./-]+', name)
                 or name.startswith('/') or any(part in ('', '.', '..') for part in (name[:-1] if name.endswith('/') else name).split('/'))):
             raise AcquisitionError('invalid-package-inputs')
-    prefix = 'research/geography/'
     if any(name.endswith('/') and prefix.startswith(name) for name in paths):
         return []
     retained = [name for name in paths if name.startswith(prefix)]
@@ -206,7 +205,30 @@ def research_package_patterns(definition):
     return patterns
 
 
-def acquire(repository, sha, tree, workspace, token=None, git_executable=None, emit=None, regression=False, selected_data=False):
+COORDINATION_SOURCE_SUFFIXES = ('.mjs', '.js', '.cjs', '.py', '.sh', '.ts', '.tsx', '.jsx',
+                                '.html', '.css', '.sql', '.yml', '.yaml', '.c', '.h', '.cpp',
+                                '.hpp', '.wasm', '.bat', '.cmd', '.ps1')
+
+
+def coordination_execution_paths(raw):
+    retained = []
+    for row in raw.split('\0'):
+        if not row:
+            continue
+        match = re.fullmatch(r'([0-7]{6}) (blob|commit) ([a-f0-9]{40})\t(.+)', row)
+        if not match:
+            raise AcquisitionError('invalid-coordination-tree')
+        mode, kind, _oid, name = match.groups()
+        if (mode == '100755' or name.lower().endswith(COORDINATION_SOURCE_SUFFIXES)
+                or name.rsplit('/', 1)[-1] == 'package.json'):
+            if kind != 'blob' or mode not in ('100644', '100755'):
+                raise AcquisitionError('nonordinary-coordination-execution-input')
+            retained.append(name)
+    return retained
+
+
+def acquire(repository, sha, tree, workspace, token=None, git_executable=None, emit=None,
+            regression=False, selected_data=False, expectations_path=None):
     """git_executable is a library-only fault-injection seam, never a CLI option."""
     supplied_token = os.environ.pop('WORLDATLAS_CHECKOUT_TOKEN', None)
     token = supplied_token if token is None else token
@@ -285,7 +307,24 @@ def acquire(repository, sha, tree, workspace, token=None, git_executable=None, e
                 body = raw.encode('utf-8')
                 if hashlib.sha1(b'blob ' + str(len(body)).encode() + b'\0' + body).hexdigest() != match[1]:
                     raise AcquisitionError('git-identity-mismatch')
-                patterns = research_package_patterns(json.loads(raw))
+                definition = json.loads(raw)
+                # The classifier has already reviewed this exact file. It can be
+                # outside package roles because smoke reads it from the checkout.
+                if (not isinstance(expectations_path, str) or not re.fullmatch(
+                        r'[A-Za-z0-9_./-]+/selected-delivery-expectations\.json', expectations_path)
+                        or expectations_path.startswith('/')
+                        or any(part in ('', '.', '..') for part in expectations_path.split('/'))):
+                    raise AcquisitionError('invalid-selected-expectations')
+                expectation = supervisor.run(common + ['ls-tree', sha, '--', expectations_path],
+                                             staging, env, 'selected-expectations')
+                if not re.fullmatch(r'100644 blob [a-f0-9]{40}\t' + re.escape(expectations_path), expectation):
+                    raise AcquisitionError('invalid-selected-expectations')
+                execution_tree = supervisor.run(common + ['ls-tree', '-rz', sha, '--', 'coordination/engineering/'],
+                                               staging, env, 'coordination-tree', output_limit=16 * 1024 * 1024,
+                                               strip_output=False)
+                retained = coordination_execution_paths(execution_tree) + [expectations_path]
+                patterns = package_namespace_patterns(definition, 'research/geography/', [expectations_path])
+                patterns += package_namespace_patterns(definition, 'coordination/engineering/', retained)
                 with (staging / '.git/info/sparse-checkout').open('a', encoding='utf-8') as output:
                     output.write('\n'.join(patterns) + '\n')
             supervisor.run(common + ['checkout', '--detach', '--force', '--progress', sha],
@@ -347,7 +386,8 @@ def main():
         acquire(args.repository, args.sha, args.tree, args.workspace,
                 regression=os.environ.get('INTEGRATION_PROFILE') == 'full' and
                 os.environ.get('INTEGRATION_TEST_SELECTION') in ('complete', 'selected-data'),
-                selected_data=os.environ.get('INTEGRATION_TEST_SELECTION') == 'selected-data')
+                selected_data=os.environ.get('INTEGRATION_TEST_SELECTION') == 'selected-data',
+                expectations_path=os.environ.get('SELECTED_EXPECTATIONS_PATH'))
     except AcquisitionError as error:
         print(json.dumps({'event': 'acquisition-failed', 'reason': error.category}), flush=True)
         return 130 if error.category == 'cancelled' else 1
