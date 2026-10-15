@@ -8,14 +8,15 @@ import {createHash} from 'node:crypto';
 import {gzipSync,gunzipSync} from 'node:zlib';
 import {ImmutableReader,NativeAssetImage,SelectedGeometrySources,loadBaseSelection,loadSelection,inspectSelected,compareIntervals,compareRepairLedgers,readArtifactConsumption,validateReleaseCatalogue,validateArtifactSourceMetadata,loadNativeRowTable,acquireNativeRows,validateNativeRowCarry} from '../scripts/check-effective-geographic-regression.mjs';
 import {shuffleOwnershipBytes} from '../src/ownership-codec.js';
+import {nativeRowLatitudes} from '../src/native-grid.js';
 import {JOINT_CODE} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs';
-import {valueBytes,valueSha,readOriginalRuleAuthority,selectedCoordinateShard,joinSelectedCoordinateCertificate,acceptColdCoordinateCertificate,selectedAffectedPlan,possibleNeighbors,compareVersionedRepairLedgers} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {valueBytes,valueSha,readOriginalRuleAuthority,selectedCoordinateShard,joinSelectedCoordinateCertificate,acceptColdCoordinateCertificate,selectedAffectedPlan,possibleNeighbors,compareVersionedRepairLedgers,readRetainedRegistryAuthority} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 
 const sha=b=>createHash('sha256').update(b).digest('hex'),root=process.cwd();
 const retained=process.env.WORLDATLAS_PREVENTION_CONTROLS;
 if(retained){assert.equal(fs.realpathSync(path.dirname(retained)),path.dirname(retained));assert.equal(fs.existsSync(retained),false);assert.throws(()=>fs.lstatSync(retained),{code:'ENOENT'});fs.mkdirSync(retained);}
 let fixtureOrdinal=0;
-function fixture(){
+function fixture({size=4}={}){
  const repo=fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(),'selected-geography-fixture-')));
  const git=(...args)=>execFileSync('git',['-C',repo,...args],{stdio:['ignore','pipe','pipe']}).toString().trim();
  git('init');git('config','user.name','Fixture');git('config','user.email','fixture@example.invalid');
@@ -31,13 +32,15 @@ function fixture(){
  write('data/geographic-releases/current-manifest.json',{path:'release.json',sha256:sha(release)});
  const owners=[{index:1,id:'old-owner',province_id:'parent',province_index:1},{index:2,id:'other-owner',province_id:'parent',province_index:1}];
  const bounds=write('data/canonical-grid/bounds.json.gz',gzipSync(Buffer.from(JSON.stringify(owners))));
- const origin=commit();
+ const latitudeBytes=size===4?null:Buffer.alloc(size*8);
+ if(latitudeBytes){const latitudes=nativeRowLatitudes(size);latitudes.forEach((latitude,y)=>latitudeBytes.writeDoubleLE(latitude,y*8));write('original/latitudes.f64le',latitudeBytes);}
+ const origin=commit(),bits=Math.ceil(Math.log2(size));
  const part=(kind,words)=>{const raw=Buffer.from(words.buffer),encoded=gzipSync(shuffleOwnershipBytes(words)),name=`native-v1/ownership/${kind}-0.bin.gz`;write('data/canonical-grid/fixture/'+name,encoded);return {kind,offset:0,words:words.length,path:name,bytes:encoded.length,sha256:sha(encoded),decoded_bytes:raw.length,decoded_sha256:sha(raw),encoding:'byte-shuffle'};};
  const select=(intervals,{extraSelection={},indices=false,badRows=false,transport=false,releaseId='geography:review:fixture'}={})=>{
-  const rows=new Uint32Array(8),words=[];let cursor=0;
-  for(let y=0;y<4;y++){rows[y*2]=cursor;rows[y*2+1]=(intervals[y]??[]).length;for(const [start,end,owner]of intervals[y]??[]){words.push(owner*4+start,end-1);cursor++;}}
+  const rows=new Uint32Array(size*2),words=[];let cursor=0;
+  for(let y=0;y<size;y++){rows[y*2]=cursor;rows[y*2+1]=(intervals[y]??[]).length;for(const [start,end,owner]of intervals[y]??[]){words.push(owner*2**bits+start,end-1);cursor++;}}
   if(badRows)rows[2]++;
-  const manifest={version:2,method:'native-linear-evenodd-first-owner-v1',size:4,coordinateBits:2,runWords:words.length,parts:[part('rows',rows),part('runs',Uint32Array.from(words))],geographic_release:releaseId,bounds:{sha256:sha(bounds),decoded_bytes:Buffer.byteLength(JSON.stringify(owners))},original_assets:{bounds:{role:'original-identity-parent-camera-context',commit:origin,path:'data/canonical-grid/bounds.json.gz',sha256:sha(bounds)}},native_latitudes:{sha256:'1'.repeat(64)}};
+  const manifest={version:2,method:'native-linear-evenodd-first-owner-v1',size,coordinateBits:bits,runWords:words.length,parts:[part('rows',rows),part('runs',Uint32Array.from(words))],geographic_release:releaseId,bounds:{sha256:sha(bounds),decoded_bytes:Buffer.byteLength(JSON.stringify(owners))},original_assets:{bounds:{role:'original-identity-parent-camera-context',commit:origin,path:'data/canonical-grid/bounds.json.gz',sha256:sha(bounds)}},native_latitudes:latitudeBytes?{commit:origin,path:'original/latitudes.f64le',mode:'100644',git_blob_oid:createHash('sha1').update(Buffer.from('blob '+latitudeBytes.length+'\0')).update(latitudeBytes).digest('hex'),bytes:latitudeBytes.length,sha256:sha(latitudeBytes)}:{sha256:'1'.repeat(64)},...(latitudeBytes?{hierarchy_sha256:'a'.repeat(64)}:{})};
   const manifestPath=transport?'data/canonical-grid/transport/manifest.json':'data/canonical-grid/fixture/manifest.json';
   if(transport){
    let offset=0;const bodies=manifest.parts.map(p=>fs.readFileSync(path.join(repo,'data/canonical-grid/fixture',p.path)));
@@ -49,7 +52,7 @@ function fixture(){
   }
   const raw=write(manifestPath,manifest),digest=sha(raw);
   const products=[{path:'manifest.json',bytes:raw.length,sha256:digest},...manifest.parts];
-  const receipt={method:manifest.method,checked_rows:4,checked_cells:16,unchecked_cells:0,checked_runs:words.length/2,installation_ready:false,products,two_run_products:products.length,run_one_sha256:sha(Buffer.from(JSON.stringify(products))),run_two_sha256:sha(Buffer.from(JSON.stringify(products)))};
+  const receipt={method:manifest.method,checked_rows:size,checked_cells:size**2,unchecked_cells:0,checked_runs:words.length/2,installation_ready:false,products,two_run_products:products.length,run_one_sha256:sha(Buffer.from(JSON.stringify(products))),run_two_sha256:sha(Buffer.from(JSON.stringify(products)))};
   const receiptRaw=write('coordination/engineering/fixture/receipt.json',receipt),proofCommit=commit();
   write('scripts/native-ownership/verified-candidates.json',{version:1,candidates:{[digest]:{commit:proofCommit,path:'coordination/engineering/fixture/receipt.json',sha256:sha(receiptRaw),role:'reviewed-exhaustive-native-rule-comparison',installation_approval:false}}});
   write('data/ownership-selection.json',{version:1,method:manifest.method,manifest_path:manifestPath,sha256:digest,release_id:manifest.geographic_release,...extraSelection});
@@ -472,6 +475,104 @@ for(const [title,relative]of [['genuine Cloudflare authority retains complete 53
  }finally{f.cleanup();}
 });
 
+
+// Extend the existing immutable bank fixture with the genuine modern source
+// constructor and explicit ordinary selected-source/delta metadata. The complete
+// normative lattice is two MiB; only one source-supported cell is proposed.
+function additiveComparisonFixture({overlap=false,transport=false,empty=false,invalidOwner=false}={}){
+ const size=262166,f=fixture({size}),y=size/2,x=size/2;
+ // Issued JSON uses the accepted canonical bytes. Whole-body pins below still
+ // come from actual committed blobs, so semantic and encoded hashes agree only
+ // where the producer deliberately issues canonical JSON.
+ const write=(name,value)=>f.write(name,Buffer.isBuffer(value)?value:valueBytes(value));
+ const pin=(name,commit)=>{const raw=execFileSync('git',['-C',f.repo,'show',commit+':'+name]),[mode,,git_blob_oid]=f.git('ls-tree',commit,'--',name).split(/[ \t]/);return {commit,path:name,mode,git_blob_oid,bytes:raw.length,sha256:sha(raw)};};
+ const rectangle=(left,right)=>({type:'Polygon',coordinates:[[[left,-.02],[right,-.02],[right,.02],[left,.02],[left,-.02]]]});
+ const features=[{type:'Feature',id:'old-owner',properties:{parent_id:'parent',metadata:{source_member_ids:['gb:TST:ADM2:A']}},geometry:rectangle(-.02,.02)},
+  {type:'Feature',id:'other-owner',properties:{parent_id:'parent',metadata:{source_member_ids:['gb:TST:ADM2:B']}},geometry:rectangle(1,1.02)}];
+ const reference={id:'geography:review:fixture',hierarchy_sha256:'a'.repeat(64),footprints_sha256:'b'.repeat(64)};
+ write('data/geography/fixture.json',{type:'FeatureCollection',features});
+ const release=write('data/geographic-releases/release.json.gz',gzipSync(valueBytes({releases:[reference]})));
+ write('data/geographic-releases/current-manifest.json',{path:'release.json.gz',sha256:sha(release)});const sources=f.commit();
+ const intervals=[];intervals[y-2]=[[0,1,2]];if(!empty)intervals[y]=overlap?[[x,x+1,1]]:[[x-3,x-2,invalidOwner?3:1]];
+ const bank=f.select(intervals,{transport}),selection=JSON.parse(fs.readFileSync(path.join(f.repo,'data/ownership-selection.json'))),manifest=JSON.parse(fs.readFileSync(path.join(f.repo,selection.manifest_path)));
+ const boundsPin=pin('data/canonical-grid/bounds.json.gz',manifest.original_assets.bounds.commit);
+ const decoded=gunzipSync(fs.readFileSync(path.join(f.repo,boundsPin.path)));
+ const ownersPin={...boundsPin,decoded_bytes:decoded.length,decoded_sha256:sha(decoded)};
+ const family='gb:TST:ADM2',raw={type:'FeatureCollection',features:features.map((feature,i)=>({type:'Feature',properties:{shapeID:i?'B':'A'},geometry:feature.geometry}))};
+ write('original/source.json',raw);
+ write('coordination/engineering/original-geography-source-corpus-20261006/catalogue.json',{products:[{key:family,parts:[{path:'original/source.json',bytes:valueBytes(raw).length,sha256:valueSha(raw)}],feature_count:2,original_bytes:valueBytes(raw).length,original_sha256:valueSha(raw)}]});
+ write('original/physical.json',{results:[{target:family+':A',issues:[],support:{mapped_land_support:features[0].geometry}}]});
+ write('original/measured.json',[{target:family+':A',consumed:{geometry:features[0].geometry},selected:{id:'old-owner',geometry:features[0].geometry}}]);
+ write('original/physical.py',Buffer.from('# retained tiny constructor fixture\n'));
+ write('data/semantic-report.json',{changes:[{id:'old-owner',replaces:[family+':A']},{id:'other-owner',replaces:[family+':B']}]});
+ write('original/native-patch.json',{rows:[{y,runs:[[x,x+1,1]]}]});const originals=f.commit();
+ write('data/selected-source-bank.json',{version:1,kind:'complete-world-index-with-exact-encoded-overrides',release_id:reference.id,native_manifest_sha256:selection.sha256,footprints_sha256:reference.footprints_sha256,locations:2,world_index:pin('data/world-index.json',sources),unchanged_files:[pin('data/geography/fixture.json',sources)],overrides:[]});
+ const bankRaw=fs.readFileSync(path.join(f.repo,'data/selected-source-bank.json'));
+ selection.selected_geography={version:1,kind:'complete-world-index-with-exact-encoded-overrides',path:'data/selected-source-bank.json',bytes:bankRaw.length,sha256:sha(bankRaw)};
+ const evidence={version:1,kind:'source-target-native-evidence-v1',catalogue:pin('coordination/engineering/original-geography-source-corpus-20261006/catalogue.json',originals),
+  owner_roster:ownersPin,physical_evidence:pin('original/physical.json',originals),physical_input:pin('original/measured.json',originals),physical_reproduction:pin('original/physical.py',originals),native_latitudes:manifest.native_latitudes,
+  native_contract:Object.fromEntries(['size','coordinateBits','method','native_latitudes','hierarchy_sha256','original_assets'].map(k=>[k,manifest[k]])),base_reference:reference,
+  families:[{source_id:family,parts:[pin('original/source.json',originals)]}],targets:[{id:family+':A',target_id:'old-owner',pixelIndex:1,source_family:family,base_geometry:features[0].geometry,source_receipt_sha256:pin('original/physical.json',originals).sha256,coverage_classes:['mapped_land_support']}],
+  source_membership:{index:pin('data/world-index.json',originals),lineage:pin('data/semantic-report.json',originals),parts:[pin('data/geography/fixture.json',originals)]}};
+ write('original/evidence.json',evidence);const ev=f.commit(),operands={source_evidence:pin('original/evidence.json',ev),native_patch:pin('original/native-patch.json',originals)};
+ write('original/rule.json',{version:1,kind:'source-target-native-rule-v1',...operands});write('original/binding.json',{version:1,kind:'source-target-native-custody-v1',...operands});const authority=f.commit();
+ const entry={policy_id:'retained-source-literal-additions',policy_version:1,rule_preimage:pin('original/rule.json',authority),rule_sha256:pin('original/rule.json',authority).sha256,source_authority:pin('original/binding.json',authority)};entry.authority_sha256=valueSha(entry);
+ const proof=readRetainedRegistryAuthority(new ImmutableReader(f.repo,authority),entry),registry={version:1,kind:'retained-rule-authority-registry-v1',entries:[entry]};
+ const ledger={...proof.original_ledger,version:2,kind:'native-additive-repair-ledger-v2',authority_registry_sha256:valueSha(registry),rows:proof.original_ledger.rows.map(row=>({...row,authority_sha256:entry.authority_sha256}))};delete ledger.rule_sha256;
+ write('selected/registry.json',registry);write('selected/ledger.json',ledger);const l=f.commit();
+ const components=ledger.rows.filter(row=>['assigned','zero-cell'].includes(row.disposition)).map(row=>({...row,rule_sha256:entry.rule_sha256}));
+ const effective={...reference,footprints_sha256:valueSha({domain:'worldatlas-effective-native-footprints:v2',base_reference:reference,authority_registry_sha256:valueSha(registry),ledger_sha256:pin('selected/ledger.json',l).sha256,components})};
+ const patch={version:2,kind:'unassigned-native-cells-v1',authority_registry_sha256:valueSha(registry),ledger_sha256:pin('selected/ledger.json',l).sha256,base_reference:reference,effective_reference:effective,rows:proof.native_proof.native_patches.flatMap(patch=>patch.rows)};
+ write('selected/patch.json',patch);const p=f.commit(),assets={base_manifest:pin(selection.manifest_path,bank),owner_roster:ownersPin,ledger:pin('selected/ledger.json',l),patch:pin('selected/patch.json',p)};
+ write('selected/envelope.json',{version:2,kind:'retained-native-base-plus-delta-v2',base_reference:reference,effective_reference:effective,...assets});const e=f.commit();
+ write('selected/sidecar.json',{version:2,kind:'retained-native-additive-selection-v2',base_selection:selection,authority_registry:pin('selected/registry.json',l),logical_asset_map:assets,runtime_envelope:pin('selected/envelope.json',e)});const sc=f.commit(),side=pin('selected/sidecar.json',sc);
+ write('data/ownership-selection.json',{...selection,additive_release:{path:side.path,bytes:side.bytes,sha256:side.sha256}});const selected=f.commit();
+ return {...f,selected,y,x};
+}
+
+test('identical cold additive selections use one whole native acquisition and retain actual custody',()=>{
+ for(const options of [{transport:false},{transport:true},{empty:true}]){
+  const f=additiveComparisonFixture(options);try{
+   f.write('unrelated.json',{nongeographic:true});const candidate=f.commit();
+   const opens=[],read=ImmutableReader.prototype.read;
+   ImmutableReader.prototype.read=function(name,options){if(name.includes('/ownership/runs-')||name.includes('/bank/group/'))opens.push([this.version,name]);return read.call(this,name,options);};
+   let result;try{result=inspectSelected(f.repo,f.selected,candidate);}finally{ImmutableReader.prototype.read=read;}
+   assert.equal(result.affected_rows,1);assert.equal(result.phases.length,1);assert.equal(result.lost_or_reassigned_cells,0);
+   const phase=result.phases[0];assert.equal(phase.candidate.reused_baseline_acquisition,true);assert.equal(Object.hasOwn(phase,'baseline_carried_bytes'),false);
+   assert.deepEqual(phase.candidate.rows,[f.y]);assert.equal(phase.baseline.whole_inputs.length===0,!!options.empty);
+   if(!options.transport&&!options.empty)assert.equal(opens.filter(([,name])=>name.includes('/ownership/runs-')).length,1,'one complete ordinary run member, rather than baseline plus candidate');
+   if(options.transport)assert.equal(opens.filter(([commit])=>commit===f.selected).length-opens.filter(([commit])=>commit===candidate).length,phase.baseline.whole_inputs.length,'only baseline acquires the complete run-containing fragments after both row tables');
+   assert.ok(phase.baseline.whole_inputs.every(pin=>pin.commit===f.selected),'retain actual baseline snapshot custody');
+   assert.equal(opens.filter(([commit,name])=>commit===candidate&&name.includes('/ownership/runs-')).length,0);
+   assert.equal(result.additive_conservation.appended_authorities,0);
+  }finally{f.cleanup();}
+ }
+});
+
+test('new ordinary shadow of identical transport member retains separate actual acquisition',()=>{
+ const f=additiveComparisonFixture({transport:true});try{
+  const name='native-v1/ownership/runs-0.bin.gz';
+  f.write('data/canonical-grid/transport/'+name,fs.readFileSync(path.join(f.repo,'data/canonical-grid/fixture',name)));const candidate=f.commit();
+  const result=inspectSelected(f.repo,f.selected,candidate),phase=result.phases[0];
+  assert.equal(result.lost_or_reassigned_cells,0);assert.equal(phase.candidate.reused_baseline_acquisition,undefined);
+  assert.equal(phase.candidate.whole_inputs.length,1);assert.equal(phase.candidate.whole_inputs[0].path,'data/canonical-grid/transport/'+name);
+  assert.equal(phase.candidate.whole_inputs[0].commit,candidate);assert.equal(Object.hasOwn(phase,'baseline_carried_bytes'),false);
+ }finally{f.cleanup();}
+});
+
+test('identical cold additive selection still rejects same-owner native overlap',()=>{
+ const f=additiveComparisonFixture({overlap:true});try{
+  f.write('unrelated.json',{nongeographic:true});const candidate=f.commit();
+  assert.throws(()=>inspectSelected(f.repo,f.selected,candidate),/Selected additive delta overlaps preexisting assigned native cells/);
+ }finally{f.cleanup();}
+});
+
+test('identical cold additive selection still rejects an unregistered native owner',()=>{
+ const f=additiveComparisonFixture({invalidOwner:true});try{
+  f.write('unrelated.json',{nongeographic:true});const candidate=f.commit();
+  assert.throws(()=>inspectSelected(f.repo,f.selected,candidate),/Invalid complete owner interval/);
+ }finally{f.cleanup();}
+});
 
 test('separate authenticated native stages preserve all rows and relinquish containing buffers',()=>{
  const f=fixture();try{
