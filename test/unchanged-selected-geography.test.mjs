@@ -35,18 +35,18 @@ function fixture({missingOrigin = false, splitBaseline = false, rebind = true, m
   const files = {}, commits = new Map();
   const put = (name, value) => { files[name] = body(value); return name; };
   function commit(values = files, parent, modes = {}) {
-    const entries = Object.entries(values).map(([name, raw]) => [name, modes[name] ?? '100644', git(['hash-object', '-w', '--stdin'], body(raw))]);
-    function tree(prefix) {
-      const rows = [], children = new Set();
-      for (const [name, mode, oid] of entries.filter(([name]) => name.startsWith(prefix))) {
-        const rest = name.slice(prefix.length), slash = rest.indexOf('/');
-        if (slash < 0) rows.push(`${mode} blob ${oid}\t${rest}`);
-        else children.add(rest.slice(0, slash));
-      }
-      for (const child of children) rows.push(`040000 tree ${tree(prefix + child + '/')}\t${child}`);
-      return git(['mktree'], rows.sort().join('\n') + '\n');
+    // Git writes the complete fixture tree in one process. The import-only ref
+    // is removed before returning; ordinary fixture refs and HEAD stay untouched.
+    const reference = 'refs/test-fixture-import';
+    const stream = [Buffer.from(`commit ${reference}\nmark :1\n`
+      + 'committer fixture <fixture@example.invalid> 0 +0000\ndata 8\nfixture\n'
+      + (parent ? `from ${parent}\n` : '') + 'deleteall\n')];
+    for (const [name, value] of Object.entries(values)) {
+      const raw = body(value);
+      stream.push(Buffer.from(`M ${modes[name] ?? '100644'} inline ${JSON.stringify(name)}\ndata ${raw.length}\n`), raw, Buffer.from('\n'));
     }
-    const id = git(['commit-tree', tree(''), ...(parent ? ['-p', parent] : [])], 'fixture\n');
+    stream.push(Buffer.from(`\nget-mark :1\nreset ${reference}\n\ndone\n`));
+    const id = git(['fast-import', '--quiet', '--force'], Buffer.concat(stream));
     commits.set(id, {...values}); return id;
   }
   const pin = (name, at, extra = {}) => {

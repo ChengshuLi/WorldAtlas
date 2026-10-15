@@ -59,9 +59,9 @@ test('trusted preparation has PR comment permission while candidate tests remain
     assert.match(unsafe,forbidden);
 });
 
-test('native failed-job retries retain consumed artifacts without duplicate diagnostic result uploads',()=>{
+test('failed-job retries retain current smoke artifacts without duplicate diagnostic result uploads',()=>{
   const yaml=fs.readFileSync(path.join(root,'.github/workflows/worker-merge.yml'),'utf8');
-  assert(yaml.includes('name: native-built-output-${{ inputs.request_id }}-${{ github.run_attempt }}'));
+  assert(yaml.includes('name: selected-delivery-smoke-${{ inputs.request_id }}-${{ github.run_attempt }}'));
   assert.doesNotMatch(yaml,/path: merge-result\.json|name: merge-preflight-/);
   assert.doesNotMatch(yaml,/overwrite: true/);
 });

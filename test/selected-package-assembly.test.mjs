@@ -1,4 +1,4 @@
-import test from 'node:test';
+import nodeTest from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
@@ -16,6 +16,12 @@ import {nativeRowLatitudes} from '../src/native-grid.js';
 import {readRetainedRegistryAuthority,valueBytes,valueSha} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 import {admitPackageInputTransition,committedPackageInputs,committedPackageProducer} from '../scripts/package-output-artifact.mjs';
 
+// Private execution must run in a plain child, but only its requested probe.
+const probeName=process.argv[2];let probeRegistered=false;
+const test=(name,...args)=>{
+  if(probeName&&name!==probeName)return;
+  probeRegistered=true;return nodeTest(name,...args);
+};
 const sha=raw=>createHash('sha256').update(raw).digest('hex');
 function original(t,{worker=false}={}){
   const root=fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(),'atlas-original-package-')));
@@ -212,7 +218,7 @@ function sourceFixture(f){
 test('private assembly admission uses actual declared inputs and rejects legacy capture semantics',async t=>{
   // Exercise the actual plain-process guard instead of altering execArgv in the test.
   if(process.execArgv.length||process.env.NODE_OPTIONS?.trim()||process.env.NODE_PATH?.trim()){
-    execFileSync(process.execPath,[new URL(import.meta.url).pathname],{env:{...process.env,NODE_OPTIONS:'',NODE_PATH:'',NODE_TEST_CONTEXT:undefined},encoding:'utf8'});return;
+    execFileSync(process.execPath,[new URL(import.meta.url).pathname,t.name],{env:{...process.env,NODE_OPTIONS:'',NODE_PATH:'',NODE_TEST_CONTEXT:undefined},encoding:'utf8'});return;
   }
   const f=original(t),s=sourceFixture(f),manifest=JSON.parse(f.manifestRaw),oldFetch=globalThis.fetch,oldEntry=process.argv[1];
   const stage=fs.mkdtempSync(path.join(f.root,'stage-'));
@@ -504,7 +510,7 @@ test('trusted invocation carries the existing exact selected base without receip
 
 test('discovery and actual private execution admit32 leaves including a later accepted typed code candidate',async t=>{
   if(process.execArgv.length||process.env.NODE_OPTIONS?.trim()||process.env.NODE_PATH?.trim()){
-    execFileSync(process.execPath,[new URL(import.meta.url).pathname],{env:{...process.env,NODE_OPTIONS:'',NODE_PATH:'',NODE_TEST_CONTEXT:undefined},encoding:'utf8'});return;
+    execFileSync(process.execPath,[new URL(import.meta.url).pathname,t.name],{env:{...process.env,NODE_OPTIONS:'',NODE_PATH:'',NODE_TEST_CONTEXT:undefined},encoding:'utf8'});return;
   }
   const f=originalDiscovery(t),oldFetch=globalThis.fetch,oldEntry=process.argv[1];
   t.after(()=>{globalThis.fetch=oldFetch;process.argv[1]=oldEntry;});globalThis.fetch=async()=>new Response(f.log());
@@ -637,12 +643,11 @@ test('shared selected-input admission covers actual builders and refuses undecla
   }
   const fixture=fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(),'atlas-output-role-closure-')));
   t.after(()=>fs.rmSync(fixture,{recursive:true,force:true}));
-  files.add('data/native-context-migration/manifest.json');
   for(const name of files){const dest=path.join(fixture,name);fs.mkdirSync(path.dirname(dest),{recursive:true});
     fs.copyFileSync(path.join(root,name),dest,fs.constants.COPYFILE_EXCL);}
   fs.writeFileSync(path.join(fixture,'undeclared-fixture.mjs'),'export const fixture=true;\n');
-  fs.appendFileSync(path.join(fixture,'coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs'),
-    "\nimport '../../../undeclared-fixture.mjs';\n");
+  fs.appendFileSync(path.join(fixture,'scripts/package-current-additive.mjs'),
+    "\nimport '../undeclared-fixture.mjs';\n");
   for(const kind of ['static','hosted','cloudflare']){
     const rejected=inspectPackageExecutionInputs(fixture,definition,kind);
     assert(rejected.files.includes('undeclared-fixture.mjs'));
@@ -650,3 +655,5 @@ test('shared selected-input admission covers actual builders and refuses undecla
       'The real '+kind+' entry must refuse undeclared imports');
   }
 });
+
+if(probeName&&!probeRegistered)throw Error('Unknown private assembly probe: '+probeName);

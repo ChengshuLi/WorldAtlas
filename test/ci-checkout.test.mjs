@@ -46,6 +46,7 @@ function fixture(t, mode = 'success') {
     'research/geography/unconsumed/body.txt': 'unconsumed research body with distinct bytes\n',
     'coordination/engineering/required/body.txt': 'required archived engineering bytes\n',
     'data/geography/required/body.txt': 'required application bytes\n',
+    'data/unconsumed/body.txt': 'unrelated undeclared data bytes\n',
     'test/current.test.mjs': 'required current software test inventory\n'
   })) { fs.mkdirSync(path.dirname(path.join(source, name)), {recursive: true}); fs.writeFileSync(path.join(source, name), text); }
   git(['add', '.']); git(['commit', '--quiet', '-m', 'fixture']);
@@ -163,7 +164,8 @@ for (const selection of ['complete', 'selected-data']) test(`${selection} softwa
   assert.ok(!fs.existsSync(f.sentinel));
   assert.doesNotMatch(fs.readFileSync(path.join(f.workspace, '.git/config'), 'utf8'), /extraheader|credential|AUTHORIZATION|fixture-secret|insteadOf/);
   assert.equal(f.events(result).at(-1).source_only_omitted, true);
-  for (const name of ['research/geography/unconsumed/body.txt', 'coordination/engineering/unconsumed/payload.bin'])
+  for (const name of ['research/geography/unconsumed/body.txt', 'coordination/engineering/unconsumed/payload.bin',
+    'data/unconsumed/body.txt'])
     assert.equal(fs.existsSync(path.join(f.workspace, name)), selection === 'complete', name);
   assert.deepEqual(fs.readFileSync(path.join(f.workspace, expectationsPath)), fs.readFileSync(path.join(f.source, expectationsPath)));
   assert.deepEqual(inspectPackageInputs(f.workspace, packageDefinition).errors, []);
@@ -174,19 +176,21 @@ for (const selection of ['complete', 'selected-data']) test(`${selection} softwa
   f.clean(); noSecrets(result);
 });
 
-test('cold selected-data checkout retains declared research leaves, directories and verification paths without sibling blobs', async t => {
-  const f = fixture(t), directory = 'research/geography/declared-directory/';
-  const verification = 'research/geography/verified/record.txt';
+for (const namespace of ['research/geography', 'data']) test(`cold selected-data checkout retains declared ${namespace} leaves, directories and verification paths without sibling blobs`, async t => {
+  const f = fixture(t), directory = `${namespace}/declared-directory/`;
+  const verification = `${namespace}/verified/record.txt`;
+  const required = namespace === 'data' ? 'data/geography/required/body.txt' : `${namespace}/required/body.txt`;
+  const outside = namespace === 'data' ? 'data-other/body.txt' : `${namespace}-other/body.txt`;
   const definition = {...packageDefinition, description: 'retained metadata '.repeat(700),
     inputs: [...packageDefinition.inputs, directory], verification_paths: [verification]};
   const bodies = {
     '.github/package-inputs.json': JSON.stringify(definition) + '\n',
     [directory + 'nested/body.txt']: 'required directory descendant\n',
     [verification]: 'verification role original bytes\n',
-    'research/geography/required/body.txt-sibling': 'excluded exact-file prefix sibling\n',
-    'research/geography/declared-directory-sibling/body.txt': 'excluded directory prefix sibling\n',
-    'research/geography/verified/unlisted.txt': 'excluded verification sibling\n',
-    'research/geography-other/body.txt': 'outside research namespace remains\n'
+    [required + '-sibling']: 'excluded exact-file prefix sibling\n',
+    [`${namespace}/declared-directory-sibling/body.txt`]: 'excluded directory prefix sibling\n',
+    [`${namespace}/verified/unlisted.txt`]: 'excluded verification sibling\n',
+    [outside]: 'outside research namespace remains\n'
   };
   for (const [name, raw] of Object.entries(bodies)) {
     fs.mkdirSync(path.dirname(path.join(f.source, name)), {recursive: true}); fs.writeFileSync(path.join(f.source, name), raw);
@@ -197,11 +201,11 @@ test('cold selected-data checkout retains declared research leaves, directories 
   const result = f.run(['--sha', sha, '--tree', tree]);
   assert.equal(result.status, 0, result.stdout + result.stderr);
   assert.equal(command(realGit, ['-C', f.workspace, 'rev-parse', 'HEAD^{tree}']), tree);
-  for (const name of ['research/geography/required/body.txt', directory + 'nested/body.txt', verification,
-    'research/geography-other/body.txt', 'test/current.test.mjs'])
+  for (const name of [required, directory + 'nested/body.txt', verification,
+    outside, 'test/current.test.mjs'])
     assert.deepEqual(fs.readFileSync(path.join(f.workspace, name)), fs.readFileSync(path.join(f.source, name)), name);
-  for (const name of ['research/geography/unconsumed/body.txt', 'research/geography/required/body.txt-sibling',
-    'research/geography/declared-directory-sibling/body.txt', 'research/geography/verified/unlisted.txt']) {
+  for (const name of [`${namespace}/unconsumed/body.txt`, required + '-sibling',
+    `${namespace}/declared-directory-sibling/body.txt`, `${namespace}/verified/unlisted.txt`]) {
     assert.ok(!fs.existsSync(path.join(f.workspace, name)), name);
     const oid = f.git(['rev-parse', `${sha}:${name}`]);
     assert.notEqual(spawnSync(realGit, ['-C', f.workspace, 'cat-file', '-e', oid],
@@ -213,7 +217,7 @@ test('cold selected-data checkout retains declared research leaves, directories 
   const destination = path.join(f.directory, 'package-stage');
   const materialized = await materializePackageInputs({source: f.workspace, destination, definition});
   assert.ok(materialized.some(row => row.path === directory + 'nested/body.txt'));
-  assert.ok(!fs.existsSync(path.join(destination, 'research/geography/unconsumed/body.txt')));
+  assert.ok(!fs.existsSync(path.join(destination, `${namespace}/unconsumed/body.txt`)));
   assert.equal(command(realGit, ['-C', f.workspace, 'config', '--get', 'remote.origin.promisor']), 'false');
   f.clean(); noSecrets(result);
 });
@@ -381,6 +385,23 @@ for (const role of ['inputs', 'verification_paths']) test(`cold selected-data an
   f.clean(); noSecrets(result);
 });
 
+for (const role of ['inputs', 'verification_paths']) test(`cold selected-data data ancestor in ${role} retains every original descendant`, t => {
+  const f = fixture(t);
+  // A whole-data grant includes regional evidence as well as current assets.
+  const definition = {...packageDefinition,
+    inputs: role === 'inputs' ? [...packageDefinition.inputs.filter(name => !name.startsWith('data/')), 'data/']
+      : [...packageDefinition.inputs], verification_paths: role === 'verification_paths' ? ['data/'] : []};
+  fs.writeFileSync(path.join(f.source, '.github/package-inputs.json'), JSON.stringify(definition) + '\n');
+  f.git(['add', '.']); f.git(['commit', '--quiet', '-m', 'whole declared data namespace']);
+  Object.assign(f.env, {INTEGRATION_PROFILE: 'full', INTEGRATION_TEST_SELECTION: 'selected-data'});
+  const result = f.run(['--sha', f.git(['rev-parse', 'HEAD']), '--tree', f.git(['rev-parse', 'HEAD^{tree}'])]);
+  assert.equal(result.status, 0, result.stdout + result.stderr);
+  for (const name of ['data/geography/required/body.txt', 'data/unconsumed/body.txt', 'data/regional-review/source-only/body.txt'])
+    assert.deepEqual(fs.readFileSync(path.join(f.workspace, name)), fs.readFileSync(path.join(f.source, name)), name);
+  assert.deepEqual(inspectPackageInputs(f.workspace, definition).errors, []);
+  f.clean(); noSecrets(result);
+});
+
 for (const unsafe of ['../escape', '/absolute', 'research/geography/../escape',
   'research/geography//escape', 'research/geography/escape//', 'research/geography/*', 'research/geography/x\n/*']) {
   test(`selected-data unsafe package retention path ${JSON.stringify(unsafe)} refuses before checkout`, t => {
@@ -396,8 +417,8 @@ for (const unsafe of ['../escape', '/absolute', 'research/geography/../escape',
   });
 }
 
-for (const namespace of ['research/geography', 'coordination/engineering']) test(`selected-data missing declared ${namespace} input still fails real package admission and fallback materialization`, async t => {
-  const f = fixture(t), required = namespace + '/required/body.txt';
+for (const namespace of ['research/geography', 'coordination/engineering', 'data']) test(`selected-data missing declared ${namespace} input still fails real package admission and fallback materialization`, async t => {
+  const f = fixture(t), required = namespace === 'data' ? 'data/geography/required/body.txt' : namespace + '/required/body.txt';
   fs.unlinkSync(path.join(f.source, required));
   f.git(['add', '.']); f.git(['commit', '--quiet', '-m', 'missing declared research input']);
   Object.assign(f.env, {INTEGRATION_PROFILE: 'full', INTEGRATION_TEST_SELECTION: 'selected-data'});
@@ -421,7 +442,30 @@ test('selected-data symlink package declaration refuses before checkout', t => {
   assert.deepEqual(fs.readdirSync(f.workspace), []); f.clean(); noSecrets(result);
 });
 
-for (const name of ['data/regional-review/source-only/body.txt', 'research/campaigns/source-only/body.txt']) {
+test('selected-data explicit regional evidence declaration retains exact current input without undeclared siblings', async t => {
+  const f = fixture(t), name = 'data/regional-review/source-only/body.txt';
+  const sibling = 'data/regional-review/source-only/undeclared.txt';
+  const definition = {...packageDefinition, inputs: [...packageDefinition.inputs, name]};
+  fs.writeFileSync(path.join(f.source, sibling), 'undeclared cold regional evidence');
+  fs.writeFileSync(path.join(f.source, '.github/package-inputs.json'), JSON.stringify(definition) + '\n');
+  f.git(['add', '.']); f.git(['commit', '--quiet', '-m', 'require exact current regional evidence']);
+  const sha = f.git(['rev-parse', 'HEAD']), tree = f.git(['rev-parse', 'HEAD^{tree}']);
+  Object.assign(f.env, {INTEGRATION_PROFILE: 'full', INTEGRATION_TEST_SELECTION: 'selected-data'});
+  const result = f.run(['--sha', sha, '--tree', tree]);
+  assert.equal(result.status, 0, result.stdout + result.stderr);
+  assert.deepEqual(fs.readFileSync(path.join(f.workspace, name)), fs.readFileSync(path.join(f.source, name)));
+  assert.deepEqual(inspectPackageInputs(f.workspace, definition).errors, []);
+  const destination = path.join(f.directory, 'package-stage');
+  await materializePackageInputs({source: f.workspace, destination, definition});
+  assert.deepEqual(fs.readFileSync(path.join(destination, name)), fs.readFileSync(path.join(f.source, name)));
+  assert.ok(!fs.existsSync(path.join(f.workspace, sibling)));
+  assert.ok(!fs.existsSync(path.join(destination, sibling)));
+  assert.notEqual(spawnSync(realGit, ['-C', f.workspace, 'cat-file', '-e', f.git(['rev-parse', `${sha}:${sibling}`])],
+    {env: {...fixtureEnv, GIT_NO_LAZY_FETCH: '1'}, timeout: 2000}).status, 0);
+  f.clean(); noSecrets(result);
+});
+
+for (const name of ['research/campaigns/source-only/body.txt']) {
   test(`selected-data future required input ${name} fails existing package admission and fallback materialization`, async t => {
     const f = fixture(t), definition = {...packageDefinition, inputs: [...packageDefinition.inputs, name]};
     fs.writeFileSync(path.join(f.source, '.github/package-inputs.json'), JSON.stringify(definition) + '\n');

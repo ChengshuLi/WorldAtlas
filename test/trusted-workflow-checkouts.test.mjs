@@ -139,41 +139,6 @@ test('scope candidate includes the inputs of its nested actual-checkout probes',
   assert.match(missing.stdout + missing.stderr, /selected-checkpoint-reuse-20261012/);
 });
 
-for (const [workflow, expected] of [['worker-merge.yml', 1]]) {
-  test(`${workflow}: actual post-build readback refuses missing selected helper`, () => {
-    const source = fs.readFileSync(path.join(root, '.github/workflows', workflow), 'utf8');
-    const blocks = [...source.matchAll(/- name: Read back qualified native build outputs when selected\n        if: .+\n        run: \|\n((?:          .+\n)+)/g)];
-    assert.equal(blocks.length, expected);
-    const helper = 'coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/model-reader-call-boundary-controls.mjs';
-    const base = {version: 1, method: 'native-linear-evenodd-first-owner-v1', manifest_path: 'data/base.json', sha256: '1'.repeat(64), release_id: 'fixture-release'};
-    const pin = {path: 'data/pin.json', mode: '100644', bytes: 1, sha256: '2'.repeat(64)};
-    for (const block of blocks) {
-      const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'worldatlas-built-readback-routing-'));
-      try {
-        fs.mkdirSync(path.join(directory, 'data'));
-        const file = path.join(directory, 'data/ownership-selection.json'), calls = path.join(directory, 'calls.jsonl');
-        const invoke = env => spawnSync('/bin/bash', ['-e', '-o', 'pipefail', '-c', block[1].split('\n').map(row => row.slice(10)).join('\n')], {
-          cwd: directory, encoding: 'utf8', env: {PATH: path.dirname(process.execPath) + ':/usr/bin:/bin', ...env}
-        });
-        fs.writeFileSync(file, JSON.stringify(base));
-        let result = invoke();assert.equal(result.status, 0, result.stderr);assert.equal(fs.existsSync(calls), false);assert.match(result.stdout, /no report claimed/);
-        fs.writeFileSync(file, JSON.stringify({...base, artifact_consumption: {certificate: pin, review: pin}}));
-        result = invoke();assert.equal(result.status, 1);assert.equal(fs.existsSync(calls), false);assert.match(result.stderr, /helper is missing/);
-        fs.mkdirSync(path.dirname(path.join(directory, helper)), {recursive: true});
-        fs.writeFileSync(path.join(directory, helper), `import fs from 'node:fs'; fs.appendFileSync('calls.jsonl',JSON.stringify(process.argv.slice(2))+'\n'); process.exit(Number(process.env.FIXTURE_HELPER_EXIT||0));`.replace("+'\n'", "+'\\n'"));
-        result = invoke();assert.equal(result.status, 0, result.stderr);
-        assert.deepEqual(JSON.parse(fs.readFileSync(calls, 'utf8')), ['--built-output-readback', '.cache/native-normal-built-output.json']);
-        fs.unlinkSync(calls);result = invoke({FIXTURE_HELPER_EXIT: '23'});assert.equal(result.status, 23);fs.unlinkSync(calls);
-        for (const value of ['{malformed', JSON.stringify({...base, artifact_consumption: null}), JSON.stringify({...base, artifact_consumption: {certificate: {...pin, bytes: 33554433}, review: pin}})]) {
-          fs.writeFileSync(file, value);result = invoke();assert.notEqual(result.status, 0);assert.equal(fs.existsSync(calls), false);
-        }
-        fs.unlinkSync(file);result = invoke();assert.notEqual(result.status, 0);assert.equal(fs.existsSync(calls), false);
-      } finally { fs.rmSync(directory, {recursive: true, force: true}); }
-    }
-    assert.match(source, /path: (?:\|\n[\s\S]*?)?[^\n]*\.cache\/native-normal-built-output\.json/);
-  });
-}
-
 // Read the actual workflow declarations and shell bodies. These bounded controls
 // model the status-expression subset used here; hosted execution remains required.
 function queueWorkflow() {
@@ -208,6 +173,71 @@ function queueContext({profile='full',selection='complete'}={}){
    steps:{assembly:{outputs:{assembled:'false'}}}};
 }
 function packageStep(job,name){const found=job.steps.filter(step=>step.name===name);assert.equal(found.length,1,name);return found[0];}
+
+
+test('normal package workflow closes full, shard and assembly branches without historical readback', () => {
+ const {source,integration}=queueWorkflow();
+ assert.doesNotMatch(source,/Read back qualified native build outputs|native-normal-built-output\.json|--built-output-readback/);
+ const names=['Snapshot original final-worker package inputs',
+  'Build the combined application once before asset-dependent tests',
+  'Inventory original final-worker package output',
+  'Install browser dependencies only for tests that use Playwright',
+  'Test applicable combined-tree invariants without publishing or live imports'];
+ const routes=names.map(name=>packageStep(integration,name));
+ assert.deepEqual(integration.steps.filter(step=>names.includes(step.name)).map(step=>step.name),names);
+ const original=packageStep(integration,'Retain original final-worker package output');
+ const smoke=packageStep(integration,'Retain selected delivery smoke');
+ assert.match(smoke.text,/name: selected-delivery-smoke-\$\{\{ inputs\.request_id \}\}-\$\{\{ github\.run_attempt \}\}/);
+ assert.match(smoke.text,/path: \.cache\/selected-delivery-smoke\.json\n/);
+ const directory=fs.mkdtempSync(path.join(os.tmpdir(),'worldatlas-normal-package-route-'));
+ try {
+  const calls=path.join(directory,'calls.jsonl');
+  const recorder=`#!${process.execPath}
+const fs=require('node:fs'),path=require('node:path'),args=process.argv.slice(2);
+const programme=path.basename(process.argv[1]);let call;
+if(programme==='npm'&&args.join(' ')==='run build:cloudflare')call='build';
+else if(programme==='npx'&&args.join(' ')==='playwright install --with-deps chromium')call='browser-install';
+else if(programme==='node'){
+ if(args[0]==='scripts/package-output-artifact.mjs'){
+  if(args.length===1)call='inventory';else if(args.length===2&&args[1]==='--snapshot')call='snapshot';
+ }else if(args.length===1&&args[0]==='scripts/run-integration-tests.mjs')call='packaged-tests';
+ else if(args[0]==='--input-type=module'&&args[1]==='-e'&&args.length===3){
+  if(args[2].includes('integrationNeedsBrowser('))call='browser-check';
+  else if(args[2].includes('await selectedDeliverySmoke(process.env.SELECTED_EXPECTATIONS_PATH)'))call='selected-smoke';
+  else if(args[2].includes('package_assembly:requireCurrentPackageAssembly()'))call='assembly-admission';
+ }
+}
+if(!call)throw Error('Unexpected normal package command: '+programme+' '+JSON.stringify(args));
+fs.appendFileSync(process.env.FIXTURE_CALLS,JSON.stringify(call)+'\\n');
+`;
+  for(const name of ['node','npm','npx'])fs.writeFileSync(path.join(directory,name),recorder,{mode:0o755});
+  const cases=[
+   {selection:'complete',assembled:undefined,shard:0,expected:['snapshot','build','inventory','browser-check','browser-install','packaged-tests'],output:true},
+   {selection:'selected-data',assembled:'false',shard:0,expected:['snapshot','build','inventory','selected-smoke'],output:true},
+   {selection:'selected-data',assembled:'true',shard:0,expected:['selected-smoke','assembly-admission'],output:false},
+   ...[1,2].map(shard=>({selection:'complete',assembled:undefined,shard,expected:['browser-check','browser-install','packaged-tests'],output:false})),
+  ];
+  for(const branch of cases){
+   fs.rmSync(calls,{force:true});
+   const context=queueContext({selection:branch.selection});context.matrix.shard=branch.shard;
+   context.steps.assembly.outputs.assembled=branch.assembled;
+   const effective=branch.assembled==='true'?'selected-output':branch.selection;
+   for(const step of routes.filter(step=>workflowCondition(step.condition,context))){
+    const result=spawnSync('/bin/bash',['-e','-o','pipefail','-c',step.run],{cwd:directory,encoding:'utf8',
+     env:{PATH:directory,INTEGRATION_PROFILE:'full',INTEGRATION_SHARD:String(branch.shard),
+      INTEGRATION_TEST_SELECTION:effective,SELECTED_EXPECTATIONS_PATH:'current-expectations.json',FIXTURE_CALLS:calls}});
+    assert.equal(result.status,0,step.name+': '+result.stderr);
+   }
+   const actual=fs.readFileSync(calls,'utf8').trim().split('\n').map(JSON.parse);
+   assert.deepEqual(actual,branch.expected,JSON.stringify(branch));
+   assert.equal(workflowCondition(original.condition,context),branch.output);
+   assert.equal(workflowCondition(original.condition,context,{success:false}),false,'Failed checks cannot upload original output');
+   assert.equal(workflowCondition(smoke.condition,context),branch.shard===0);
+  }
+ } finally {fs.rmSync(directory,{recursive:true,force:true});}
+ const explicit=fs.readFileSync(path.join(root,'.github/workflows/selected-package-proof.yml'),'utf8');
+ assert.match(explicit,/model-reader-call-boundary-controls\.mjs --built-output-readback \.cache\/native-normal-built-output\.json/);
+});
 
 test('automatic author compute is absent while final queue and explicit rollout keep current consumers',()=>{
  const author=fs.readFileSync(path.join(root,'.github/workflows/merge-integration-checks.yml'),'utf8');

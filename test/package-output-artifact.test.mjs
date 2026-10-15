@@ -501,12 +501,15 @@ test('final queue captures genuine build output immediately and uploads only aft
     'No observer/test may intervene before original capture');
   const end=steps.findIndex(step=>step.name==='Retain original final-worker package output');
   for(const name of ['Install browser dependencies only for tests that use Playwright',
-    'Read back qualified native build outputs when selected',
     'Test applicable combined-tree invariants without publishing or live imports']){
     const control=steps.findIndex(step=>step.name===name);
     assert(control>at+1&&control<end,name+' must run between original capture and upload');
   }
   assert.match(steps[end].raw,/if: success\(\)/,'Failed checks cannot upload an original');
+  assert.doesNotMatch(workflow,/Read back qualified native build outputs|native-normal-built-output\.json|--built-output-readback/);
+  const selectedSmoke=steps.find(step=>step.name==='Retain selected delivery smoke');
+  assert.match(selectedSmoke.raw,/name: selected-delivery-smoke-/);
+  assert.match(selectedSmoke.raw,/path: \.cache\/selected-delivery-smoke\.json/);
 });
 
 test('capture logs actual workflow-file commit and ref independently of source checkout',()=>{

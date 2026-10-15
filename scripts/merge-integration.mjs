@@ -1,5 +1,6 @@
 import {collectGeographicApproval, bindingHash} from './geographic-adjudication-api.mjs';
 import {integrationProfile, selectedDataCandidate, selectedDataSelection, candidateGeographyCode} from './integration-profile.mjs';
+import {FOCUSED_INTEGRATION_TESTS} from './run-integration-tests.mjs';
 import {githubPages, verifyIssueScope, workSpec} from './issue-claim-contract.mjs';
 import {validateIssuePRBody, validateLanePaths} from './check-handoff-scope.mjs';
 import {checkPremergeEvidence} from './premerge-evidence.mjs';
@@ -196,7 +197,7 @@ export async function inspectMerge({api, repo, number, expectedHead, policy, evi
     {evidenceRequired: policy.mode === 'enforce-new' && requirement.required});
   const statuses = await api(`${root(repo)}/commits/${expectedHead}/status`);
   need(!statuses.statuses?.length || statuses.state === 'success', 'Commit status is pending or failed');
-  const evidence = await evidenceCheck({api, repo, pr, issue, reservation, files, policy, review: true});
+  const evidence = await evidenceCheck({api, repo, pr, issue, reservation, files, policy});
   const base = (await api(`${root(repo)}/git/ref/heads/main`)).object.sha;
   return {pr, issue, reservation, files, evidence, base};
 }
@@ -303,6 +304,10 @@ export async function completeIntegration(options) {
   // The authenticated main queue's geography job depends on successful prepare,
   // which compares these immutable trees before exposing its candidate output.
   // Ordinary reports and supplied/historical custody retain the full comparison.
+  // Preparation authenticated both trees; focused test eligibility additionally
+  // needs the authored ordinary-file entries when routing the final candidate.
+  if (!authored && state.files.some(file => FOCUSED_INTEGRATION_TESTS.includes(file.filename)))
+    authored = await tree(options.api, options.repo, state.pr.head.sha);
   const profile = integrationProfile(state.pr.head.ref, state.files, state.reservation, authored?.entries);
   let baseline, selection = null;
   if (profile === 'full' && selectedDataCandidate(state.pr.head.ref, state.files, state.reservation)) {

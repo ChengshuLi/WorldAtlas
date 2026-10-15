@@ -27,7 +27,8 @@ function body(root,p){
 const allowedEntries=new Set(['scripts/build-static-inner.mjs','scripts/build-hosted-inner.mjs','scripts/build-cloudflare-inner.mjs','coordination/engineering/eastern-two-gap-repair-native-20261007/integration-producer.mjs']);
 export function currentExecutionClosure(root,entry='scripts/build-static-inner.mjs'){
  assert(allowedEntries.has(entry),'Unsupported actual execution entry');
- const entries=[ENTRY,SELF,'scripts/package-build.mjs',entry];
+ const entries=[SELF,'scripts/package-build.mjs',entry];
+ if(entry==='coordination/engineering/eastern-two-gap-repair-native-20261007/integration-producer.mjs')entries.push(ENTRY);
  const names=new Set(['package.json','.github/package-inputs.json']);
  function visit(p){
   assert(safe(p));if(names.has(p))return;names.add(p);
@@ -77,7 +78,11 @@ export function issueCurrentExecution({source,stage,entry='scripts/build-static-
  const record={version:1,issue:1295,kind:'package-issued-current-execution',entry_point:entry,source_root:source,source_commit:commit,source_tree:tree,stage_root:stage,runtime:runtimeStat(),files};
  record.runtime=runtime();
  assert.equal(git(['rev-parse','HEAD']),commit,'Checkout changed while issuing execution binding');
- verifyFiles(stage,files,entry);return record;
+ verifyFiles(stage,files,entry);
+ // This issuer just authenticated the complete actual source, stage and runtime.
+ // Deserialized records still require the full external authentication below.
+ brands.set(record,{root:stage,executingRoot:source,fingerprint:fingerprint(record)});
+ return record;
 }
 export function authenticateCurrentExecution(record,{root,executingRoot=root,sourceRoot}){
  root=fs.realpathSync(root);executingRoot=fs.realpathSync(executingRoot);

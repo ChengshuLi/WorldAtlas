@@ -11,6 +11,7 @@ export const COORDINATION_PATHS = new Set([
   'scripts/worker-result.mjs', 'scripts/check-handoff-scope.mjs', 'scripts/check-linked-github-issue.mjs',
   'scripts/evidence-quality.mjs', 'scripts/evidence-policy.mjs', 'scripts/premerge-evidence.mjs',
   'scripts/check-pr-evidence.mjs', 'scripts/merge-integration.mjs', 'scripts/integration-proof.mjs',
+  'scripts/geographic-adjudication-api.mjs',
   'scripts/integration-profile.mjs',
   'scripts/classify-deployment-budget.mjs',
   '.github/workflows/deployment-budget.yml',
@@ -20,7 +21,7 @@ export const COORDINATION_PATHS = new Set([
   '.github/workflows/merge-integration-checks.yml', '.github/workflows/worker-merge.yml',
   '.github/evidence-policy.json'
 ]);
-// Only the actual focused runner inventory is eligible for this test-only route.
+// Only the actual focused runner inventory may accompany coordination changes.
 // A provider filename/status alone cannot establish an ordinary candidate file.
 const FOCUSED_TEST_PATHS = new Set(FOCUSED_INTEGRATION_TESTS);
 // Callers supply the current linked issue's validated lane and declared scope.
@@ -37,22 +38,20 @@ function engineeringOwnedScopes(reservation) {
 export function integrationProfile(branch, files, reservation = {}, authoredEntries) {
   const names = files.flatMap(file => [file.filename, ...(file.previous_filename ? [file.previous_filename] : [])]);
   if (!names.length) return 'full';
-  if (names.some(name => FOCUSED_TEST_PATHS.has(name))) {
-    // Intercept before generic coordination/doc/owned-packet rules: no fallback
-    // may turn a missing, renamed, deleted or mixed production change into this lane.
-    return branch.startsWith('engineering/') && authoredEntries instanceof Map &&
-      files.every(file => FOCUSED_TEST_PATHS.has(file.filename) && file.status === 'modified' &&
+  // Validate each focused test before composing it with the existing route.
+  const focused = files.filter(file => [file.filename, file.previous_filename].some(name => FOCUSED_TEST_PATHS.has(name)));
+  if (focused.length && !(branch.startsWith('engineering/') && authoredEntries instanceof Map &&
+      focused.every(file => FOCUSED_TEST_PATHS.has(file.filename) && file.status === 'modified' &&
         file.previous_filename === undefined && authoredEntries.get(file.filename)?.type === 'blob' &&
         authoredEntries.get(file.filename)?.mode === '100644' &&
-        /^[a-f0-9]{40}$/.test(authoredEntries.get(file.filename)?.sha ?? '')) ? 'evidence' : 'full';
-  }
+        /^[a-f0-9]{40}$/.test(authoredEntries.get(file.filename)?.sha ?? '')))) return 'full';
 
   if (branch.startsWith('geography/') && Array.isArray(reservation.owned_paths) &&
       names.every(name => reservation.owned_paths.some(prefix => name.startsWith(prefix)))) return 'evidence';
   const job = branch.split('/').slice(1).join('/');
   if (branch.startsWith('research/') && names.every(name => name.startsWith(`research/campaigns/${job}/`))) return 'evidence';
   if (branch.startsWith('engineering/')) {
-    const legacy = name => COORDINATION_PATHS.has(name) || (name.startsWith('docs/') && /\.(md|txt)$/.test(name)) ||
+    const legacy = name => COORDINATION_PATHS.has(name) || FOCUSED_TEST_PATHS.has(name) || (name.startsWith('docs/') && /\.(md|txt)$/.test(name)) ||
       name.startsWith(`coordination/engineering/${job}/`) || name === `coordination/engineering/${job}.json`;
     if (names.every(legacy)) return 'evidence';
     // A verified retained scope permits new packets, not edits to its existing

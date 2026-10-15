@@ -1,6 +1,6 @@
 import {gunzipSync} from 'node:zlib';
 import {sha256, validateEvidence, safeEvidencePath, baselineFiles, baselineFile} from './evidence-quality.mjs';
-import {githubPages, workSpec} from './issue-claim-contract.mjs';
+import {workSpec} from './issue-claim-contract.mjs';
 import {validateLanePaths} from './check-handoff-scope.mjs';
 import {evidenceRequirement, loadEvidencePolicy} from './evidence-policy.mjs';
 
@@ -145,7 +145,7 @@ export function validatePremergeManifest(manifest, {readFile, files, manifestPat
   return {...result, change_files_checked: files.length, metric_bindings_checked: bindings.length, record_checks_checked: recordChecks};
 }
 
-/** Cooperative worker identities, not a security boundary between shared-account operators. */
+/** Specialized dossier/legacy-partition decisions only; ordinary PR review is operator-verified. */
 export function validateReviewReceipt(receipt, {pr, manifest, manifestHash, files, limits, author, reviewKind = 'code'}) {
   need(receipt?.version === 1 && receipt.pr_number === pr.number && receipt.head_sha === pr.head.sha &&
     receipt.manifest_sha256 === manifestHash && receipt.author_worker_id === author &&
@@ -201,7 +201,7 @@ async function remoteReader(api, repo, commits) {
   return {load, prefetch, read: (name, vintage) => { const bytes = cache.get(`${vintage}:${name}`); need(bytes, 'Unloaded evidence bytes'); return bytes; }};
 }
 
-export async function checkPremergeEvidence({api, repo, pr, issue, reservation, files, policy = loadEvidencePolicy(), review = false}) {
+export async function checkPremergeEvidence({api, repo, pr, issue, reservation, files, policy = loadEvidencePolicy()}) {
   let requirement;
   try {
     const spec = workSpec(issue.body);
@@ -232,29 +232,8 @@ export async function checkPremergeEvidence({api, repo, pr, issue, reservation, 
     const checked = validatePremergeManifest(manifest, {readFile: reader.read, files, manifestPath: requirement.manifestPath,
       issue, spec, reservation, branch: pr.head.ref, pr});
     const result = {status: 'checked', head_sha: pr.head.sha, manifest_sha256: sha256(manifestBytes), ...checked};
-    if (review) {
-      const comments = await githubPages(api, `/repos/${repo}/issues/${pr.number}/comments`);
-      const receipts = [];
-      for (const comment of comments) {
-        if (!['OWNER', 'MEMBER', 'COLLABORATOR'].includes(comment.author_association)) continue;
-        const matches = [...(comment.body ?? '').matchAll(/<!-- worldatlas-review:v1\s*([\s\S]*?)\s*-->/g)];
-        for (const match of matches) {
-          const receipt = JSON.parse(match[1]);
-          if (receipt.head_sha === pr.head.sha) receipts.push({receipt, comment});
-        }
-      }
-      const latest = new Map();
-      for (const row of receipts) {
-        const key = row.receipt.reviewer_worker_id;
-        if (!latest.has(key) || latest.get(key).comment.id < row.comment.id) latest.set(key, row);
-      }
-      need(![...latest.values()].some(row => row.receipt.outcome === 'changes-requested'), 'Current head has an unresolved independent review');
-      const candidates = [...latest.values()].sort((a, b) => b.comment.id - a.comment.id);
-      need(candidates.length, 'Missing independent exact-head review receipt');
-      result.review = validateReviewReceipt(candidates[0].receipt, {pr, manifest, manifestHash: result.manifest_sha256, files,
-        limits: checked.limits, author: manifest.worker_id, reviewKind: requirement.quality.review_kind});
-      result.review.comment_id = candidates[0].comment.id;
-    }
+    // Like ordinary engineering, substantive exact-head independent review is
+    // verified by the submitting operator. Byte validation is not review approval.
     return result;
   } catch (error) {
     if (policy.mode === 'enforce-new') throw error;

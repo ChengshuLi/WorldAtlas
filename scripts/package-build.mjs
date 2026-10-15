@@ -5,7 +5,7 @@ import {fileURLToPath, pathToFileURL} from 'node:url';
 import {spawn, spawnSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {loadPackageInputs, validatePackageInputs, containsPackagePath} from './package-inputs.mjs';
-import {issueCurrentExecution,authenticateCurrentExecution,requireCurrentExecution,currentExecutionClosure} from '../coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution.mjs';
+import {issueCurrentExecution,requireCurrentExecution,currentExecutionClosure} from '../coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution.mjs';
 
 // One explicit startup policy for package production and selected consumers.
 // Site hooks, user/PYTHONPATH imports and ambient bytecode cannot run before
@@ -29,6 +29,7 @@ export function packagePythonProbeArgs(rows){
 export function createPackagePythonExecution(stage,{python,sourceHelper,env=process.env}={}) {
   if(!path.isAbsolute(python??'')||/[\r\n]/.test(process.execPath)||/\s/.test(process.execPath))throw Error('Exact executable paths required for current Python launcher');
   const base=fsSync.realpathSync(stage),helperPath=path.join(base,'scripts/package-python-runtime.py');
+  const identities=new Map(),identity=file=>{const resolved=fsSync.realpathSync(file),stat=fsSync.statSync(resolved);return {resolved,...Object.fromEntries(['dev','ino','size','mode','mtimeMs','ctimeMs'].map(key=>[key,stat[key]]))};};
   const pin=file=>{
     const actual=fsSync.realpathSync(file),stat=fsSync.statSync(actual);
     if(!stat.isFile())throw Error('Ordinary current execution tool required');
@@ -36,6 +37,7 @@ export function createPackagePythonExecution(stage,{python,sourceHelper,env=proc
     try{for(;;){const n=fsSync.readSync(fd,buffer,0,buffer.length,null);if(!n)break;bytes+=n;hash.update(buffer.subarray(0,n));}held=fsSync.fstatSync(fd);}finally{fsSync.closeSync(fd);}
     const after=fsSync.statSync(actual),fields=['dev','ino','size','mode','mtimeMs','ctimeMs'];
     if(bytes!==stat.size||fsSync.realpathSync(file)!==actual||fields.some(key=>stat[key]!==held[key]||stat[key]!==after[key]))throw Error('Current execution tool changed while reading');
+    if(!identities.has(file))identities.set(file,{resolved:actual,...Object.fromEntries(fields.map(key=>[key,stat[key]]))});
     return {path:file,resolved:actual,mode:stat.mode&0o777,bytes,sha256:hash.digest('hex')};
   };
   if(fsSync.realpathSync(helperPath)!==helperPath)throw Error('Declared Python helper must be ordinary');
@@ -50,12 +52,16 @@ export function createPackagePythonExecution(stage,{python,sourceHelper,env=proc
   const record={kind:'current-package-isolated-python-execution-v1',source_role:'scripts/package-build.mjs',
     attribution:'Current application execution policy; not a historical scientific invocation',
     interpreter,helper:{...helperPin,source:sourceHelper},node,launcher:launcherPin,startup:['-I','-S','-B'],argv_mode:'--run-cli'};
+  // Only four private same-process change detectors. Stat equality does not
+  // establish content identity; creation and final verify still hash every tool.
+  const check=()=>{for(const [file,expected]of identities)if(JSON.stringify(identity(file))!==JSON.stringify(expected))throw Error('Current Python execution tool changed');};
   const verify=()=>{
+    check();
     for(const expected of [interpreter,helperPin,node,launcherPin])if(JSON.stringify(pin(expected.path))!==JSON.stringify(expected))throw Error('Current Python execution tool changed');
     if(fsSync.realpathSync(launcher)!==launcher||!fsSync.lstatSync(launcher).isFile())throw Error('Current Python launcher replaced');
   };
-  verify();
-  return {env:{...env,PATH:directory+path.delimiter+(env.PATH??'')},record,verify};
+  check();
+  return {env:{...env,PATH:directory+path.delimiter+(env.PATH??'')},record,check,verify};
 }
 
 export function packagePythonSourceDescriptor(root,head) {
@@ -155,19 +161,12 @@ export function inspectPackageAncestry(root, definition, requiredAncestors = [])
 
 export function inspectPackageExecutionInputs(root, definition, kind = 'cloudflare') {
   if (!['static', 'hosted', 'cloudflare'].includes(kind)) throw Error('Unknown package build');
-  const errors = [], contextPath = 'data/native-context-migration/manifest.json';
-  let files = [];
-  if (containsPackagePath(definition.inputs, contextPath)) {
-    try {
-      const context = json(path.join(root, contextPath));
-      if (context.version === 2 && context.kind === 'retained-identity-context-continuation-v2' && context.issue === 1295) {
-        files = currentExecutionClosure(root, `scripts/build-${kind}-inner.mjs`);
-        for (const file of files) if (!containsPackagePath(definition.inputs, file)) errors.push({kind: 'execution-declaration', path: file, detail: 'Actual project import is not a declared package input'});
-
-      }
-    } catch (error) { errors.push({kind: 'execution-inputs', detail: error.message}); }
-  }
-  return {files, errors};
+  const errors = [];let files = [];
+  try {
+    files=currentExecutionClosure(root,`scripts/build-${kind}-inner.mjs`);
+    for(const file of files)if(!containsPackagePath(definition.inputs,file))errors.push({kind:'execution-declaration',path:file,detail:'Actual project import is not a declared package input'});
+  } catch(error){errors.push({kind:'execution-inputs',detail:error.message});}
+  return {files,errors};
 }
 
 export function inspectPackageRuntime(root, {python = 'python3'} = {}) {
@@ -345,21 +344,10 @@ export async function runPackageBuild(kind, {root = repository, execute, preflig
     delete env.WORLDATLAS_CURRENT_EXECUTION_PATH;
     delete env.WORLDATLAS_CURRENT_EXECUTION_SHA256;
     delete env.WORLDATLAS_PACKAGE_SOURCE_ROOT;
-    // Bind current checkout execution separately from immutable authored lineage.
-    const contextPath=path.join(stage,'data/native-context-migration/manifest.json');
-    const context=await fs.readFile(contextPath,'utf8').then(JSON.parse,error=>{if(error.code==='ENOENT')return null;throw error;});
+    // Current execution is independent of the historical producer/continuation.
     let currentExecution;
-    if(context?.version===2&&context.kind==='retained-identity-context-continuation-v2'&&context.issue===1295){
-      // Only the explicit successor sidecar adds a whole numerical-input
-      // admission before the first current execution/runtime authentication.
-      const successorSidecar=path.join(stage,'coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/context-stage-v9.json');
-      const successorStat=await fs.lstat(successorSidecar).catch(error=>{if(error.code==='ENOENT')return null;throw error;});
-      if(successorStat){
-        const {preflightOuterArcticPackage}=await import('../coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/arctic-package-preflight.mjs');
-        preflightOuterArcticPackage({source:root,stage,entry:entries[kind]});
-      }
+    if(containsPackagePath(definition.inputs,'data/ownership-selection.json')||containsPackagePath(definition.inputs,'data/native-context-migration/manifest.json')){
       currentExecution=issueCurrentExecution({source:root,stage,entry:entries[kind]});
-      authenticateCurrentExecution(currentExecution,{root:stage,executingRoot:root,sourceRoot:root});
       const raw=Buffer.from(JSON.stringify(currentExecution)+'\n');
       await fs.mkdir(path.join(stage,'.cache'),{recursive:true});
       await fs.writeFile(path.join(stage,'.cache/current-context-execution.json'),raw,{flag:'wx'});
@@ -372,7 +360,7 @@ export async function runPackageBuild(kind, {root = repository, execute, preflig
       child.on('error', reject);
       child.on('exit', (code, signal) => code === 0 ? resolve() : reject(Error(`Package ${kind} build failed (${signal ?? code}); prior outputs retained`)));
     }));
-    pythonExecution?.verify();
+    pythonExecution?.check();
     try{await run(path.join(stage, entries[kind]), {cwd: stage, env});}
     catch(error){
       try{pythonExecution?.verify();}catch(changed){throw new AggregateError([error,changed],'Build failed and current Python execution changed');}
