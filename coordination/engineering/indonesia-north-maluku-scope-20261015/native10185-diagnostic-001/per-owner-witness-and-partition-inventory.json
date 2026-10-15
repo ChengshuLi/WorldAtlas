@@ -1,0 +1,652 @@
+{
+  "scope": {
+    "targets": 8,
+    "requested_cells": 10185,
+    "supported_cells": 0,
+    "held_cells": 10185,
+    "requested_rows": 2202,
+    "held_rows": 2202,
+    "decision_rows": 2202,
+    "original_patch_spans": 4862,
+    "reason_counts": {
+      "physical-reconstruction-residual-or-conflict": 10185
+    },
+    "first_failure": {
+      "predicate": "physical-reconstruction-residual-or-conflict",
+      "run": [
+        224134,
+        224136,
+        22866
+      ],
+      "y": 129412
+    },
+    "original_selected_cells_preserved_as_reference": 11770,
+    "new_qualified_cells": 0,
+    "selected_owner_zero": "UNRUN",
+    "whole_original_queries_in_selected8targets": 490
+  },
+  "per_owner": [
+    {
+      "owner": 22769,
+      "target_id": "gb:IDN:ADM2:22746128B24002479708791",
+      "requested": 200,
+      "supported": 0,
+      "held": 200,
+      "reason": "physical-reconstruction-residual-or-conflict",
+      "sole_residual_veto_kind": "outside_mapped_L1_context",
+      "whole_original_support_summary": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 647,
+          "structurally_empty": false,
+          "sorted_compact_json_sha256_without_final_newline": "031e7e710c422e0785f2b82eaef2b7c3e933f4ee5b131b1eba31912422ffcab7"
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 350,
+          "structurally_empty": false,
+          "sorted_compact_json_sha256_without_final_newline": "bc0118bb7b85b595a53cc032fc2be5b6937f3f67eb989114dea936be5cd6a306"
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "1a38949e1137d71db7b75672549c92800743e343d6a311db21043c94a41105a2"
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "1a38949e1137d71db7b75672549c92800743e343d6a311db21043c94a41105a2"
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        "L2-outside-L1": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        "L3-outside-L2": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        "L4-outside-L3": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        }
+      },
+      "queries": 24,
+      "query_statuses": {
+        "checked": 24
+      },
+      "query_witness_kinds": {
+        "complete-operation-pointset": 6,
+        "disjoint-after-explicit-predicate": 18
+      },
+      "old_component_id": "source-target:378e0696c3bbbfb878b350c3778f5fcc71636c8ba744d6fcdc80db5c103dd1e0",
+      "old_selected_native_cells_preserved": 376,
+      "territorial_exclusions_original_count": 0
+    },
+    {
+      "owner": 22796,
+      "target_id": "gb:IDN:ADM2:22746128B2838702785556",
+      "requested": 6031,
+      "supported": 0,
+      "held": 6031,
+      "reason": "physical-reconstruction-residual-or-conflict",
+      "sole_residual_veto_kind": "outside_mapped_L1_context",
+      "whole_original_support_summary": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 9222,
+          "structurally_empty": false,
+          "sorted_compact_json_sha256_without_final_newline": "bb37a09844a8b1172941bb6f44edb8f668a0d6119e01d02c36d70ed90262d5cc"
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 9443,
+          "structurally_empty": false,
+          "sorted_compact_json_sha256_without_final_newline": "e77f9dcafd938c191f6ead5b351c8e93133f35b91cb8db72ce6f7412d860eb06"
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "1a38949e1137d71db7b75672549c92800743e343d6a311db21043c94a41105a2"
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "1a38949e1137d71db7b75672549c92800743e343d6a311db21043c94a41105a2"
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        "L2-outside-L1": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        "L3-outside-L2": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        "L4-outside-L3": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        }
+      },
+      "queries": 259,
+      "query_statuses": {
+        "checked": 259
+      },
+      "query_witness_kinds": {
+        "complete-operation-pointset": 131,
+        "disjoint-after-explicit-predicate": 113,
+        "complete-source-record-reconstruction": 15
+      },
+      "old_component_id": "source-target:d9f0c31495e8108b3cae6de0545f9dee365ebe8776d1f20ee45eaf3f1f8607bb",
+      "old_selected_native_cells_preserved": 5365,
+      "territorial_exclusions_original_count": 0
+    },
+    {
+      "owner": 22866,
+      "target_id": "gb:IDN:ADM2:22746128B41252486574655",
+      "requested": 731,
+      "supported": 0,
+      "held": 731,
+      "reason": "physical-reconstruction-residual-or-conflict",
+      "sole_residual_veto_kind": "outside_mapped_L1_context",
+      "whole_original_support_summary": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 2136,
+          "structurally_empty": false,
+          "sorted_compact_json_sha256_without_final_newline": "d0ba2892e05a0f26f0a6166f5a339e26641b33fafb957a743b2a4bbdd823c4d0"
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 2035,
+          "structurally_empty": false,
+          "sorted_compact_json_sha256_without_final_newline": "354e32499dc1d85246138e6be2667d4a422523d9a053caf02ee26e9ee839ba4a"
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "1a38949e1137d71db7b75672549c92800743e343d6a311db21043c94a41105a2"
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "1a38949e1137d71db7b75672549c92800743e343d6a311db21043c94a41105a2"
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        "L2-outside-L1": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        "L3-outside-L2": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        "L4-outside-L3": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        }
+      },
+      "queries": 43,
+      "query_statuses": {
+        "checked": 43
+      },
+      "query_witness_kinds": {
+        "disjoint-after-explicit-predicate": 20,
+        "complete-operation-pointset": 23
+      },
+      "old_component_id": "source-target:6a30b7a546e70447fefef322e57c2d11d81ecd0eb443167c84142c89d68feb32",
+      "old_selected_native_cells_preserved": 1176,
+      "territorial_exclusions_original_count": 0
+    },
+    {
+      "owner": 22898,
+      "target_id": "gb:IDN:ADM2:22746128B46636453933041",
+      "requested": 673,
+      "supported": 0,
+      "held": 673,
+      "reason": "physical-reconstruction-residual-or-conflict",
+      "sole_residual_veto_kind": "outside_mapped_L1_context",
+      "whole_original_support_summary": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 1908,
+          "structurally_empty": false,
+          "sorted_compact_json_sha256_without_final_newline": "24af888a0580cd2419f87d1ca9d07309c482fce7ef11b01381dc26ba0d451faa"
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 1453,
+          "structurally_empty": false,
+          "sorted_compact_json_sha256_without_final_newline": "a8888e7826663162aed4d703c265bc0b08c016caa7cc7ba0c47a711af9ee274d"
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "1a38949e1137d71db7b75672549c92800743e343d6a311db21043c94a41105a2"
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "1a38949e1137d71db7b75672549c92800743e343d6a311db21043c94a41105a2"
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        "L2-outside-L1": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        "L3-outside-L2": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        "L4-outside-L3": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        }
+      },
+      "queries": 27,
+      "query_statuses": {
+        "checked": 27
+      },
+      "query_witness_kinds": {
+        "complete-operation-pointset": 9,
+        "disjoint-after-explicit-predicate": 17,
+        "complete-source-record-reconstruction": 1
+      },
+      "old_component_id": "source-target:ce492a40d28b19cadfab0b9a8f0077984f5fb05423d3148e8cd9fbdd5bac6966",
+      "old_selected_native_cells_preserved": 1135,
+      "territorial_exclusions_original_count": 0
+    },
+    {
+      "owner": 22930,
+      "target_id": "gb:IDN:ADM2:22746128B52341022582766",
+      "requested": 290,
+      "supported": 0,
+      "held": 290,
+      "reason": "physical-reconstruction-residual-or-conflict",
+      "sole_residual_veto_kind": "outside_mapped_L1_context",
+      "whole_original_support_summary": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 1437,
+          "structurally_empty": false,
+          "sorted_compact_json_sha256_without_final_newline": "a23566cda17f1ba906b9eb0cd70ca883fd0942b9498c1392417768820cf69e6b"
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 995,
+          "structurally_empty": false,
+          "sorted_compact_json_sha256_without_final_newline": "3dba0b1e9b0531c1a5d2a77cd867755663546a3737a5fe62caf9da0f25f78c7f"
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "1a38949e1137d71db7b75672549c92800743e343d6a311db21043c94a41105a2"
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "1a38949e1137d71db7b75672549c92800743e343d6a311db21043c94a41105a2"
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        "L2-outside-L1": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        "L3-outside-L2": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        "L4-outside-L3": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        }
+      },
+      "queries": 38,
+      "query_statuses": {
+        "checked": 38
+      },
+      "query_witness_kinds": {
+        "disjoint-after-explicit-predicate": 23,
+        "complete-operation-pointset": 14,
+        "complete-source-record-reconstruction": 1
+      },
+      "old_component_id": "source-target:43d754f07d968de82c5bccf46045d043f019dbe2a862bf16d72c9148f6084325",
+      "old_selected_native_cells_preserved": 854,
+      "territorial_exclusions_original_count": 0
+    },
+    {
+      "owner": 23033,
+      "target_id": "gb:IDN:ADM2:22746128B70343351071090",
+      "requested": 1010,
+      "supported": 0,
+      "held": 1010,
+      "reason": "physical-reconstruction-residual-or-conflict",
+      "sole_residual_veto_kind": "outside_mapped_L1_context",
+      "whole_original_support_summary": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 2145,
+          "structurally_empty": false,
+          "sorted_compact_json_sha256_without_final_newline": "beadbb5c3efe715e67b93288f6b5b9b59d53b19f07c9a688afbb5c4284e1c05d"
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 2102,
+          "structurally_empty": false,
+          "sorted_compact_json_sha256_without_final_newline": "b66b527765e2839ebdc0534316f71e928613373101db05ccf510e31711181fde"
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "1a38949e1137d71db7b75672549c92800743e343d6a311db21043c94a41105a2"
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "1a38949e1137d71db7b75672549c92800743e343d6a311db21043c94a41105a2"
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        "L2-outside-L1": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        "L3-outside-L2": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        "L4-outside-L3": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        }
+      },
+      "queries": 37,
+      "query_statuses": {
+        "checked": 37
+      },
+      "query_witness_kinds": {
+        "disjoint-after-explicit-predicate": 26,
+        "complete-operation-pointset": 11
+      },
+      "old_component_id": "source-target:ab37f4f206f283da9875ff721dd2401349f482762946b51d43db38cfc76c4b8c",
+      "old_selected_native_cells_preserved": 698,
+      "territorial_exclusions_original_count": 0
+    },
+    {
+      "owner": 23108,
+      "target_id": "gb:IDN:ADM2:22746128B81791072961966",
+      "requested": 371,
+      "supported": 0,
+      "held": 371,
+      "reason": "physical-reconstruction-residual-or-conflict",
+      "sole_residual_veto_kind": "outside_mapped_L1_context",
+      "whole_original_support_summary": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 2019,
+          "structurally_empty": false,
+          "sorted_compact_json_sha256_without_final_newline": "638291959032cf8f4350fd6f24e7d632df6808d6cfef58f848fb4e835b51cdab"
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 2094,
+          "structurally_empty": false,
+          "sorted_compact_json_sha256_without_final_newline": "b3633b6204ab79d929e900bfec03c3fc31c39f6c72cc9cbb5b5de3ba4dd36ee3"
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "1a38949e1137d71db7b75672549c92800743e343d6a311db21043c94a41105a2"
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "1a38949e1137d71db7b75672549c92800743e343d6a311db21043c94a41105a2"
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        "L2-outside-L1": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        "L3-outside-L2": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        "L4-outside-L3": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        }
+      },
+      "queries": 18,
+      "query_statuses": {
+        "checked": 18
+      },
+      "query_witness_kinds": {
+        "complete-operation-pointset": 14,
+        "disjoint-after-explicit-predicate": 4
+      },
+      "old_component_id": "source-target:c52f456d50f4cc48efb965913f8e733e78b6739af90c7db42bec565becb30148",
+      "old_selected_native_cells_preserved": 1021,
+      "territorial_exclusions_original_count": 0
+    },
+    {
+      "owner": 23198,
+      "target_id": "gb:IDN:ADM2:22746128B98781354669228",
+      "requested": 879,
+      "supported": 0,
+      "held": 879,
+      "reason": "physical-reconstruction-residual-or-conflict",
+      "sole_residual_veto_kind": "outside_mapped_L1_context",
+      "whole_original_support_summary": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 2359,
+          "structurally_empty": false,
+          "sorted_compact_json_sha256_without_final_newline": "6be27be5bb51ce836a07a04a0bec5fb632e828088678505b12c7e88352b61d7b"
+        },
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "coordinate_positions": 2486,
+          "structurally_empty": false,
+          "sorted_compact_json_sha256_without_final_newline": "360cc89db75927e8f6dd8d2a316946052be29d77bda352a6a5410da4bc0cbad1"
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "1a38949e1137d71db7b75672549c92800743e343d6a311db21043c94a41105a2"
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "1a38949e1137d71db7b75672549c92800743e343d6a311db21043c94a41105a2"
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        "L2-outside-L1": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        "L3-outside-L2": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        "L4-outside-L3": {
+          "type": "GeometryCollection",
+          "coordinate_positions": 0,
+          "structurally_empty": true,
+          "sorted_compact_json_sha256_without_final_newline": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        }
+      },
+      "queries": 44,
+      "query_statuses": {
+        "checked": 44
+      },
+      "query_witness_kinds": {
+        "disjoint-after-explicit-predicate": 13,
+        "complete-operation-pointset": 31
+      },
+      "old_component_id": "source-target:40ff6c27299f25ec550f14fdaea3a3330a392b6b20ac272626ca8ba6bb693be2",
+      "old_selected_native_cells_preserved": 1145,
+      "territorial_exclusions_original_count": 0
+    }
+  ],
+  "causal_binding": {
+    "existing_accepted_code": "b43462432a3a45771b1264fa6b7202cc831f6cec:coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+    "line_references": [
+      "reconstructionResidualPointsets575-597: issuefree and no reconstruction/conflict/hierarchy observations returns only nonempty outside_mapped_L1_context",
+      "owner-specific residual construction743-759 and measured-sibling loop853-875",
+      "exact witness residualHits scanning896-918 and diagnostic reason precedence948-960",
+      "diagnostic partition and no-authority return991-1014"
+    ],
+    "interpretation": "Every one of the8selected targets has empty missing/extra/contradictory/hierarchy witnesses and no reportedissues. For this legacy issuefree branch the only residual pointset submitted to the actual native witness veto is that target's complete outside_mapped_L1_context geometry. No source_membership aggregation is declared, so unrelated same-owner measured sibling borrowing is not present. Thus all recorded physical-reconstruction-residual-or-conflict contacts are attributable to each owner's retained outside-L1 pointset, not a missing/extra/land-water conflict issue.",
+    "limitations": "This attribution follows exhaustive retained nonempty witness inventory and accepted code path, not a new predicate rerun. The output does not separately distinguish boundary contact from interior or preserve the lower-priority source-domain reason overridden by residual. Do not infer water, positive land support or legal border truth from the generic reason."
+  }
+}

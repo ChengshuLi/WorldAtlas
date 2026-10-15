@@ -1,0 +1,122 @@
+{
+  "version": 1,
+  "kind": "DERIVED_PUBLIC_DIAGNOSTIC_OPERATING_PROJECTION",
+  "not_original_raw_receipt": true,
+  "original_local_raws": {
+    "stdout": {
+      "bytes": 634,
+      "sha256": "aa44ef918daafa3260a2d973d8e3e066152ecdc7bb703e69f183b76db88d92a6",
+      "git_blob_oid": "3c8a938bac557b34b8d3acb3a7dbd4965d02b8a9"
+    },
+    "admission": {
+      "bytes": 659,
+      "sha256": "544865df367aeec6c5a9a902673d6bae058f60fa86e3b4fc249dd37e667465fb",
+      "git_blob_oid": "6a03138f3bb0c8b993a29014e4da1460e24d8317"
+    },
+    "preparation": {
+      "bytes": 267,
+      "sha256": "3d6cffd6efefeffaca5e747405b5fc9641921a572bd09400ab119c31394f1a5a",
+      "git_blob_oid": "2a60fe09719f8b3836fd726e7b21077f4a428457"
+    },
+    "exact_config": {
+      "bytes": 524,
+      "sha256": "b7f2f3564ddae517885b6e822849a7d82e2320e6e677caba6c462fe98b74612e",
+      "git_blob_oid": "d09ec1acb94022ab1db8ee7cd06bb3f8f058c93c"
+    },
+    "time": {
+      "bytes": 777,
+      "sha256": "e09c78abc8bef8fb6daf436c14b32c03161f03c9542cf984f6ce8bbc06716cff",
+      "git_blob_oid": "483c08eaf0329364a17ba6ee9ccfa42ec81175ae"
+    },
+    "prior_constructor_refusal_time": {
+      "bytes": 865,
+      "sha256": "ccbeaf418faef77cb44a9373774e4de35f7377806fca699cb19744f5882f5fc6",
+      "git_blob_oid": "6f3edadcf5297e325e392d6fe65da06458c476e4"
+    },
+    "independent_raw_local_review": {
+      "bytes": 42079,
+      "sha256": "c9733d22f5c6ddaa3959096f50cac42774bc542e80eaaa22abd4285c49c8c523",
+      "git_blob_oid": "e41f123742520857d7d9a9945521bfc3c4737ff3"
+    }
+  },
+  "projection_policy": "Selected actual scalar observations and phase binding copied below; original stdout destination and local source/output file locators omitted. Original raw stdout/admission/source locators stay unchanged locally. This is DERIVED and is not a stock completion/resume receipt. No private-machine runtime inventory or source archive is embedded.",
+  "binding": {
+    "phase": "native-diagnostic",
+    "config_sha256": "b7f2f3564ddae517885b6e822849a7d82e2320e6e677caba6c462fe98b74612e"
+  },
+  "actual_diagnostic_output": {
+    "file": "native-diagnostic.json",
+    "bytes": 641336,
+    "sha256": "a03f44f10546ca0b6b217a2f4d8f6785bdb55cf065ba00f2d5f82340337954e2",
+    "git_blob_oid": "5d0e962668cf70386d09baf2f856af5b3725ae27"
+  },
+  "actual_observation": {
+    "elapsed_seconds": 1.580576667,
+    "charged_phase_bytes": 343820627,
+    "allowance": {
+      "phaseBytes": 671088640,
+      "rssBytes": 671088640
+    },
+    "normalized_node_lifetime_peak_rss_bytes": 323059712,
+    "requested_cells": 10185,
+    "supported_cells": 0,
+    "held_cells": 10185,
+    "limits": [
+      "Original source/physical producers are not replayed.",
+      "Diagnostic screening produces no authority, current-owner-zero or selected-output acceptance."
+    ]
+  },
+  "actual_recorded_admission": {
+    "at_utc": "2026-10-15T04:18:48.210Z",
+    "availableBytes": 1226309632,
+    "currentRssBytes": 50855936,
+    "concurrentReservedBytes": 0,
+    "headroomBytes": 572882944,
+    "phaseBytes": 671088640,
+    "rssBytes": 671088640,
+    "complete_prospective_superset_bytes": 609571483,
+    "config_sha256": "b7f2f3564ddae517885b6e822849a7d82e2320e6e677caba6c462fe98b74612e",
+    "code_commit": "b43462432a3a45771b1264fa6b7202cc831f6cec",
+    "same_process_native": true,
+    "allowance": {
+      "phaseBytes": 671088640,
+      "rssBytes": 671088640
+    },
+    "admitted": true
+  },
+  "omitted_admission_fields": [
+    "peer_exit_confirmed_by_root (internal coordination text omitted; numerical observations retained)"
+  ],
+  "recorded_concurrency_limit": "concurrentReservedBytes0 is the recorded configured observation, not independent proof of all-other-worker absence or aggregate live RSS enforcement. Coordinator had confirmed peer release before launch.",
+  "external_time_l": {
+    "elapsed_seconds": 2.01,
+    "darwin_lifetime_peak_rss_bytes": 331972608,
+    "file": "diagnostic-time-001.log",
+    "limit": "Observed process lifetime resource statistic, not aggregate simultaneous process-tree supervision."
+  },
+  "prior_constructor": {
+    "exit_code": 1,
+    "external_seconds": 1.69,
+    "darwin_lifetime_peak_rss_bytes": 258359296,
+    "refusal": "Requested native cells intersect a physical reconstruction residual or conflict witness",
+    "file": "first-constructor-refusal-time-001.log",
+    "authority_emitted": false
+  },
+  "scientific_status": {
+    "requested_cells": 10185,
+    "supported_cells": 0,
+    "held_cells": 10185,
+    "new_qualified_cells": 0,
+    "new_accepted_cells": 0,
+    "current_owner_zero": "UNRUN",
+    "generic_reason_retained": "physical-reconstruction-residual-or-conflict",
+    "reviewed_cause": "For these8issuefree targets, sole nonempty residual-veto input is complete outside_mapped_L1_context; this diagnostic does not distinguish interior from boundary contacts or retain lower-priority source-domain reason."
+  },
+  "limits": [
+    "Native diagnostic screening only; no authority products, current-owner-zero, acceptance or whole-source clearance.",
+    "All original source, physical, query, witness and territorial limits remain retained.",
+    "All10185 remain held; original8/11770 and all other relative/water/border/territorial holds remain unchanged.",
+    "This projection does not rerun predicates, establish positive-land/source support, invent an authority or clear the outside-L1 witness.",
+    "Source/GSHHG/physical evidence and rights/date/operating limits remain retained; no method/country-fix/predicate relaxation or replay."
+  ]
+}
