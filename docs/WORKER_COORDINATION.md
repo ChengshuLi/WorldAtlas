@@ -509,8 +509,9 @@ same failure or rerun a long regression simply to retry a refused API operation.
 Wait until the recorded condition can change, then inspect the current canonical
 claim/request/head and retry only the required bounded operation. Permission
 errors and unknown transport outcomes are different; do not guess a reset or
-blindly replay writes. Existing queue capacity and job-deadline safeguards remain
-mandatory; no check or authority is waived by waiting.
+blindly replay writes. GitHub Actions job timeouts and bounded actual HTTP
+attempts remain mandatory; no check or authority is waived by waiting. There is no
+separate current-job metadata admission or authenticated job-clock protocol.
 
 Claim jobs retain `claim-result.json` even when a notification cannot be posted.
 A known quota refusal defers that doomed notification. `mutation_attempted` and
