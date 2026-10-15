@@ -10,7 +10,7 @@ import os from 'node:os';
 import path from 'node:path';
 import {FOCUSED_INTEGRATION_TESTS, integrationTestFiles, integrationNeedsBrowser, prepareIntegrationTests} from '../scripts/run-integration-tests.mjs';
 import {renderClaim, githubAPI} from '../scripts/issue-claim-contract.mjs';
-import {prepareIntegration, completeIntegration, checkCurrentChecks, integrationProfile, createCandidate, cleanupCandidate, cleanupMergedHead} from '../scripts/merge-integration.mjs';
+import {prepareIntegration, completeIntegration, checkCurrentChecks, integrationProfile, geographyRequired, createCandidate, cleanupCandidate, cleanupMergedHead} from '../scripts/merge-integration.mjs';
 
 const sha = letter => letter.repeat(40);
 test('only staging-test shards prepare the immutable migration derivative', () => {
@@ -239,6 +239,87 @@ test('ordinary modified focused tests compose with coordination while unknown se
     assert.equal(integrationProfile('engineering/tests',[{filename,status:'modified'}],{},ordinary),'full');
   }
   assert.equal(integrationProfile('engineering/tests',[],{},tree),'full');
+});
+
+test('geography omission derives only non-scientific control and validated focused-test changes', () => {
+  const ordinary = name => new Map([[name,{type:'blob',mode:'100644',sha:sha('a')}]]);
+  const required = (filename, extra = {}) => geographyRequired('engineering/controls',
+    [{filename,status:'modified',...extra}],{},ordinary(filename));
+  for (const name of ['scripts/merge-integration.mjs','scripts/run-worker-merge.mjs',
+    'scripts/integration-profile.mjs','scripts/prepare-delivery-handoff.mjs',...FOCUSED_INTEGRATION_TESTS])
+    assert.equal(required(name),false,name);
+  // Existing checkpoint/current-method and package roles remain mandatory,
+  // including shared helpers that otherwise qualify for focused regression.
+  for (const name of ['scripts/check-handoff-scope.mjs','scripts/evidence-policy.mjs',
+    'scripts/evidence-quality.mjs','scripts/integration-proof.mjs','scripts/issue-claim-contract.mjs',
+    'scripts/worker-result.mjs','scripts/classify-deployment-budget.mjs','scripts/local-workspace.mjs',
+    'src/native-grid.js','data/hierarchy.json','data/ownership-selection.json',
+    '.github/workflows/worker-merge.yml','.github/workflows/merge-integration-checks.yml',
+    '.github/evidence-policy.json','docs/WORKER_COORDINATION.md','docs/unknown.md',
+    'coordination/engineering/controls/source.json','test/unknown.test.mjs'])
+    assert.equal(required(name),true,name);
+  for (const status of ['added','removed','renamed','copied'])
+    assert.equal(required('test/merge-integration.test.mjs',{status}),true);
+  assert.equal(required('scripts/merge-integration.mjs',{previous_filename:'scripts/evidence-quality.mjs'}),true);
+  assert.equal(required('test/merge-integration.test.mjs',{previous_filename:'scripts/merge-integration.mjs'}),true);
+  assert.equal(geographyRequired('engineering/controls',[]),true);
+  assert.equal(geographyRequired('geography/controls',[{filename:'scripts/merge-integration.mjs'}]),true);
+});
+
+function controlFixture() {
+  const f=fixture(), original=f.api;
+  f.files=['scripts/merge-integration.mjs','test/merge-integration.test.mjs'].map(filename=>({filename,status:'modified'}));
+  f.pr.changed_files=f.files.length;
+  f.authored=f.files.map(file=>({path:file.filename,sha:sha('e'),mode:'100644',type:'blob'}));
+  f.integrated=structuredClone(f.authored);
+  f.api=(route,...args)=>route.split('?')[0].endsWith('/pulls/2/files') ? structuredClone(f.files) : original(route,...args);
+  return f;
+}
+
+test('actual prepare and complete omit unrelated geography without reading or fabricating a report', async () => {
+  const f=controlFixture(), prepared=await prepareIntegration(f.options());
+  assert.equal(prepared.profile,'evidence');assert.equal(prepared.geography_required,false);
+  const result=await f.complete({geographyResult:'skipped',geographyReportLoader:()=>{throw Error('Unrelated geography must not run');}});
+  assert.equal(result.accepted,true);assert.equal(f.writes.length,1);
+  assert.deepEqual(result.geography,{status:'not-applicable',reason:'non-geographic-controls'});
+  assert.equal(result.tested_base,f.base);assert.equal(result.tested_candidate,f.candidate);
+  assert.equal(result.reviewed_head,f.head);
+});
+
+test('omission never turns failed, cancelled or absent geography into success', async () => {
+  for (const geographyResult of [undefined,'failure','cancelled']) {
+    const f=controlFixture();await assert.rejects(f.complete({geographyResult}),/Trusted combined geography check/);
+    assert.equal(f.writes.length,0);
+  }
+  const f=controlFixture();await assert.rejects(f.complete({geographyReportLoader:undefined}),/Missing trusted geography report/);
+});
+
+test('final omission independently rechecks current method and ordinary focused-test applicability', async () => {
+  for (const kind of ['scientific','packet','test-mode','test-added','rename-origin']) {
+    const f=controlFixture();await prepareIntegration(f.options());
+    if(kind==='scientific')f.files[0].filename='scripts/evidence-quality.mjs';
+    if(kind==='packet')f.files[0].filename='coordination/engineering/test/source.json';
+    if(kind==='test-mode')f.authored[1].mode='120000';
+    if(kind==='test-added')f.files[1].status='added';
+    if(kind==='rename-origin')f.files[0].previous_filename='data/hierarchy.json';
+    await assert.rejects(f.complete({geographyResult:'skipped'}));assert.equal(f.writes.length,0,kind);
+  }
+});
+
+test('omitted geography retains exact candidate, review, statuses and both main guards', async () => {
+  for (const kind of ['head','early-base','late-base','parents','tree','truncated','review','status','integration']) {
+    const f=controlFixture(), options={geographyResult:'skipped'};
+    if(kind==='head')f.pr.head.sha=sha('d');
+    if(kind==='early-base')f.advanceOnRead=1;
+    if(kind==='late-base')f.advanceOnRead=3;
+    if(kind==='parents')f.parentBase=sha('d');
+    if(kind==='tree')f.integrated[0].sha=sha('d');
+    if(kind==='truncated')f.truncated=true;
+    if(kind==='review')f.staleReview=true;
+    if(kind==='status')f.failStatusOnRead=2;
+    if(kind==='integration')options.integrationResult='skipped';
+    await assert.rejects(f.complete(options));assert.equal(f.writes.length,0,kind);
+  }
 });
 
 test('actual review-receipt PR 2010 paths use the complete applicable focused inventory', () => {

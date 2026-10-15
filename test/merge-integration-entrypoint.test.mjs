@@ -234,6 +234,62 @@ test('native Actions concurrency holds the full existing lifecycle without custo
   for (const stage of ['prepare', 'integration', 'geography', 'merge']) assert.match(yaml, new RegExp('  ' + stage + ':\\n'));
 });
 
+test('actual queue entry points omit geography only for independently rechecked controls', () => {
+  for (const phase of ['prepare','merge']) {
+    const directory=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-control-geography-'));
+    const sha=c=>c.repeat(40), head=sha('a'),base=sha('b'),candidate=sha('c');
+    const files=['scripts/merge-integration.mjs','test/merge-integration.test.mjs'].map(filename=>({filename,status:'modified'}));
+    const rows=files.map(file=>({path:file.filename,sha:sha('e'),mode:'100644',type:'blob'}));
+    const issue={number:1,state:'open',created_at:'2020-01-01T00:00:00Z',labels:['type:engineering','kind:work-item','status:ready'],
+      body:'<!-- worldatlas-work:v1\n'+JSON.stringify({mode:'engineering',max_prs:1,depends_on:[],scope:'queue controls'})+'\n-->'};
+    const pr={number:2,state:'open',draft:false,body:'Closes #1',title:'Repair controls',changed_files:files.length,
+      head:{sha:head,ref:'engineering/controls',repo:{full_name:'owner/repo'}},base:{ref:'main',sha:base},mergeable:true};
+    const routes={
+      '/pulls/2':pr,'/issues/1':issue,'/pulls/2/files':files,
+      ['/commits/'+head+'/check-runs']:{check_runs:[{id:1,name:'scope',app:{id:1},status:'completed',conclusion:'success'}]},
+      ['/commits/'+head+'/status']:{statuses:[]},'/git/ref/heads/main':{object:{sha:base}},
+      ['/git/commits/'+head]:{tree:{sha:'authored'}},'/git/trees/authored':{truncated:false,tree:rows},
+      ['/git/commits/'+candidate]:{sha:candidate,tree:{sha:'integrated'},parents:[{sha:base},{sha:head}]},
+      '/git/trees/integrated':{truncated:false,tree:rows}
+    };
+    fs.mkdirSync(path.join(directory,'.github'));
+    fs.copyFileSync(path.join(root,'.github/evidence-policy.json'),path.join(directory,'.github/evidence-policy.json'));
+    fs.writeFileSync(path.join(directory,'event.json'),JSON.stringify({inputs:{pr_number:'2',expected_head:head,request_id:'control-geography-entrypoint'}}));
+    fs.writeFileSync(path.join(directory,'mock.mjs'),capacityShim+`import fs from 'node:fs';const routes=${JSON.stringify(routes)},refs=new Map();
+      globalThis.fetch=async(url,options)=>{
+        const route=new URL(url).pathname.replace('/repos/owner/repo',''),body=options.body?JSON.parse(options.body):null;
+        if(route==='/git/refs'&&options.method==='POST'){refs.set(body.ref.replace('refs/heads/',''),body.sha);return Response.json({ref:body.ref},{status:201});}
+        if(route==='/merges'&&options.method==='POST'){refs.set(body.base,'${candidate}');return Response.json({sha:'${candidate}'},{status:201});}
+        if(route.startsWith('/git/ref/heads/worldatlas-integration/'))return Response.json({object:{sha:refs.get(route.split('/git/ref/heads/')[1])}});
+        if(route==='/pulls/2/merge'&&options.method==='PUT'){fs.writeFileSync('merge-write.json',JSON.stringify(body));return Response.json({merged:true,sha:'${sha('f')}'});}
+        if(route==='/issues/2/comments'&&options.method==='POST')return Response.json({},{status:201});
+        if(!Object.hasOwn(routes,route))throw Error('Unexpected geography or external request: '+route);
+        return Response.json(routes[route]);
+      };`);
+    try {
+      const result=spawnSync(process.execPath,['--import',path.join(directory,'mock.mjs'),path.join(root,'scripts/run-worker-merge.mjs')],{
+        cwd:directory,encoding:'utf8',env:{...process.env,GITHUB_ACTIONS:'false',GH_TOKEN:'synthetic-token',
+          GITHUB_REPOSITORY:'owner/repo',GITHUB_REF:'refs/heads/main',GITHUB_EVENT_PATH:path.join(directory,'event.json'),
+          GITHUB_OUTPUT:path.join(directory,'outputs'),GITHUB_STEP_SUMMARY:path.join(directory,'summary'),MERGE_PHASE:phase,
+          INTEGRATION_RESULT:'success',GEOGRAPHY_RESULT:'skipped',TESTED_BASE:base,TESTED_CANDIDATE:candidate,CANDIDATE_REF:''}});
+      assert.equal(result.status,0,result.stderr);
+      const receipt=JSON.parse(fs.readFileSync(path.join(directory,'merge-result.json')));
+      if(phase==='prepare') {
+        assert.equal(receipt.geography_required,false);
+        assert.match(fs.readFileSync(path.join(directory,'outputs'),'utf8'),/^geography_required=false$/m);
+        assert.equal(fs.existsSync(path.join(directory,'merge-write.json')),false);
+      } else {
+        assert.equal(receipt.accepted,true);
+        assert.deepEqual(receipt.geography,{status:'not-applicable',reason:'non-geographic-controls'});
+        assert.equal(JSON.parse(fs.readFileSync(path.join(directory,'merge-write.json'))).sha,head);
+      }
+    } finally {fs.rmSync(directory,{recursive:true,force:true});}
+  }
+  const yaml=fs.readFileSync(path.join(root,'.github/workflows/worker-merge.yml'),'utf8');
+  assert.match(yaml,/geography_required: \$\{\{ steps\.prepare\.outputs\.geography_required \}\}/);
+  assert.match(yaml,/if: needs\.prepare\.outputs\.candidate != '' && needs\.prepare\.outputs\.geography_required != 'false'/);
+});
+
 test('actual final refusal reconciles a concurrent matching-head merge without redispatch', () => {
   const {result, receipt} = run({phase: 'merge', merged: false, integration: 'cancelled', mergeOnReconcile: true, commentFails: true});
   assert.equal(result.status, 0, result.stderr); assert.equal(receipt.accepted, true);

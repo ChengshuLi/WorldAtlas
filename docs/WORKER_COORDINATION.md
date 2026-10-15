@@ -582,9 +582,14 @@ unknown or base-changing work keeps full regression.
 There are no automatic author jobs or prequeue check-name prerequisites. Existing
 failed/pending external checks and commit statuses still block admission. There is
 no automatic author computation or regression proof to transfer. The final gate
-requires successful current queue integration and geography, the exact candidate
+requires successful current queue integration and applicable geography, the exact candidate
 parents/tree, current authority and independent review. Missing, skipped, failed
-or stale final checks prevent merge. Software, dependency and unknown changes
+or stale required final checks prevent merge. Only existing engineering coordination
+scripts and validated focused-test edits outside scientific/current-method and
+package input/verification roles omit the entire unrelated geography job. Final
+acceptance recomputes that scope and records the actual skipped job as not applicable;
+docs, workflow definitions, packets and ambiguous inputs retain geography.
+Software, dependency and unknown changes
 keep their complete CI route. The runner reports setup profile and actual test
 selection separately and rejects skipped tests. Hosted adoption and elapsed
 savings must be recorded when observed, not inferred from local controls or added
