@@ -100,11 +100,11 @@ test('the shared browser format rejects incomplete, duplicated, mismatched and u
 }));
 
 test('1000 locations and 9000 attributes use seven bounded indexed queries instead of claim pages',close(async db=>{
- const locations=Array.from({length:999},(_,i)=>({id:`L${String(i+1).padStart(4,'0')}`,kind:'location',name:'Location',parent_id:'z-province'}));for(let i=0;i<locations.length;i+=200)await importBatch(db,{entities:locations.slice(i,i+200)});
+ const locations=Array.from({length:999},(_,i)=>({id:`L${String(i+1).padStart(4,'0')}`,kind:'location',name:'Location',parent_id:'z-province'}));for(let i=0;i<locations.length;i+=250)await importBatch(db,{entities:locations.slice(i,i+250)});
  const values={owner:'owner A',population:100,culture:'culture A',religion:'religion A',rank:'town',topography:'flat',vegetation:'farmlands',climate:'oceanic',habitation:'inhabited'},claims=[];
  for(let i=0;i<1000;i++){const id=`L${String(i).padStart(4,'0')}`;for(const attribute of locationAttributes)claims.push(record(`${id}:${attribute}`,attribute,values[attribute],{location_id:id,...(['owner','culture','religion'].includes(attribute)?{category_id:`${attribute}:a`}:{})}));}
- for(let i=0;i<claims.length;i+=200)await importBatch(db,{records:claims.slice(i,i+200)});
- const names=Array.from({length:1000},(_,i)=>name(`name-${i}`,`L${String(i).padStart(4,'0')}`));for(let i=0;i<names.length;i+=200)await importBatch(db,{names:names.slice(i,i+200)});
+ for(let i=0;i<claims.length;i+=250)await importBatch(db,{records:claims.slice(i,i+250)});
+ const names=Array.from({length:1000},(_,i)=>name(`name-${i}`,`L${String(i).padStart(4,'0')}`));for(let i=0;i<names.length;i+=250)await importBatch(db,{names:names.slice(i,i+250)});
  db.calls=[];const start=performance.now(),page=await mapSnapshotPage(db,1000),elapsed=performance.now()-start;
  assert.equal(page.entities.length,1000);assert.equal(page.records.length,9000);assert.equal(page.names.length,1000);assert.equal(Object.keys(page.sources).length,1);assert.equal(db.calls.length,7);assert.equal(page.next_cursor,'L0999');const measuredQueries=db.calls.length;
  await assert.rejects(mapSnapshotPage(db,1000,{limit:1001}),error=>error.status===400);
@@ -118,7 +118,7 @@ test('1000 locations and 9000 attributes use seven bounded indexed queries inste
  assert.match(attributesPlan,/SEARCH r USING INDEX attributes_location_dates \(location_id=\? AND attribute=\? AND valid_from<\?\)/);assert.match(namesPlan,/SEARCH n USING INDEX names_entity_dates \(entity_id=\? AND valid_from<\?\)/);
  console.log(JSON.stringify({fixture:'1000-locations-9000-attributes',queries:measuredQueries,page_bytes:bytes,elapsed_ms:Math.round(elapsed*100)/100,attribute_index:'attributes_location_dates',name_index:'names_entity_dates'}));
  const aliases=[];for(let i=0;i<1000;i++)for(let a=0;a<5;a++)aliases.push(name(`alias-L${String(i).padStart(4,'0')}-${a}`,`L${String(i).padStart(4,'0')}`,{name:'A'.repeat(1000),role:'alias'}));
- for(let i=0;i<aliases.length;i+=200)await importBatch(db,{names:aliases.slice(i,i+200)});
+ for(let i=0;i<aliases.length;i+=250)await importBatch(db,{names:aliases.slice(i,i+250)});
  await assert.rejects(mapSnapshotPage(db,1000),error=>error.status===413&&error.retryable===true&&error.suggested_limit===500);
  const smaller=await mapSnapshotPage(db,1000,{limit:500});assert.equal(smaller.entities.length,500);assert.ok(Buffer.byteLength(JSON.stringify(smaller))<8*1024*1024);assert.equal(smaller.names.length,3000);
 }));
