@@ -1,0 +1,44 @@
+{
+  "original_key_count": 7,
+  "owner": 48624,
+  "source_sid": 65284,
+  "whole_original_intervals": [
+    [
+      115463,
+      209555,
+      209560
+    ],
+    [
+      115472,
+      209548,
+      209550
+    ]
+  ],
+  "initial_accounting": "7 adopted but unanswered questions;0 completed review credit until actual answer independently supported.",
+  "purpose": "Acquire dated physical pixels at all seven unchanged centres to address source-vintage/location question, retaining old positive/adverse/unplaced distinctions.",
+  "selected_scene": {
+    "id": "S2B_48QYJ_20200131_0_L2A",
+    "sensing_datetime": "2020-01-31T03:32:07.183000Z",
+    "epsg": 32648,
+    "processing_baseline": "02.13",
+    "whole_scene_cloud_percent": 6.976898
+  },
+  "selection_rule": "First returned scene in the existing supported catalogue sort by ascending whole-scene cloud cover within2020, before any pixels inspected. Duplicate same-acquisition processing item not independent date.",
+  "scope_bbox": [
+    107.741,
+    20.947,
+    107.768,
+    20.97
+  ],
+  "inputs": {
+    "original_seven_key_artifact_bytes": 46130,
+    "original_seven_key_artifact_sha256": "5b160fd97391a5001d9a0bb0a8bf2945a0a4fc343de51b2c2f2b10dd4caa4390"
+  },
+  "scope_limits": [
+    "Local validity/cloud/surface unknown before read.",
+    "Native10m reflectance and20m SCL; no fitted registration, shoreline or new classifier.",
+    "The older province/member mismatch, mapVN2000/WGS84 ambiguity, unmeasured source positional error and tidal uncertainty remain separate.",
+    "Source-relative/ownership holds and original data unchanged.",
+    "No authority or repair claim; meaningful answer required for completed reviewed cells."
+  ]
+}

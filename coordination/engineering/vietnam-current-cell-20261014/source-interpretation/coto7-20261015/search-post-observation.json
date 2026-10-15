@@ -1,0 +1,37 @@
+{
+  "started_utc": "2026-10-15T12:40:09.361060+00:00",
+  "ended_utc": "2026-10-15T12:40:09.620469+00:00",
+  "url": "https://earth-search.aws.element84.com/v1/search",
+  "method": "POST",
+  "query": {
+    "collections": [
+      "sentinel-2-l2a"
+    ],
+    "bbox": [
+      107.741,
+      20.947,
+      107.768,
+      20.97
+    ],
+    "datetime": "2020-01-01T00:00:00Z/2020-12-31T23:59:59Z",
+    "limit": 10,
+    "query": {
+      "eo:cloud_cover": {
+        "lt": 10
+      }
+    },
+    "sortby": [
+      {
+        "field": "properties.eo:cloud_cover",
+        "direction": "asc"
+      }
+    ]
+  },
+  "status": 200,
+  "content_type": "application/geo+json; charset=utf-8",
+  "bytes": 64821,
+  "sha256": "da7864dba817d66eba05ddeb10795c980a73a1d44c54b45b54d8b47d394ad1a7",
+  "seconds": 0.2595199580537155,
+  "returned": 3,
+  "scope": "Existing supported read-only STAC POST metadata search; no raster/native operation. Whole-scene cloud cover is not local validity or scientific agreement."
+}

@@ -1,0 +1,35 @@
+{
+  "started_utc": "2026-10-15T12:43:21.434272+00:00",
+  "ended_utc": "2026-10-15T12:43:24.490632+00:00",
+  "elapsed_seconds": 3.0563876669621095,
+  "observed_process_lifetime_peak_rss_bytes": 89554944,
+  "runtime": {
+    "python": "3.12.14 (main, Aug 25 2026, 13:50:33) [Clang 22.1.3 ]",
+    "rasterio": "1.4.3",
+    "gdal": "3.9.3",
+    "numpy": "2.3.5"
+  },
+  "source_item_sha256": "7d1da04f2f37d7e83911a0d0a36ec938374db1c7ccee1f4dc080191e03cf4574",
+  "admission": {
+    "available": 1638187008,
+    "headroomBytes": 572882944,
+    "currentRssCreditBytes": 0,
+    "concurrentReservedBytes": 0,
+    "allowance": {
+      "phaseBytes": 536870912,
+      "rssBytes": 536870912
+    }
+  },
+  "prospective_cost": {
+    "existing_reader_numpy_files": 90300286,
+    "python": 18058560,
+    "node_preflight": 121304480,
+    "accepted_admission_code": 304941,
+    "pillow_and_runtime_reserve": 25165824,
+    "decoded_source_blocks": 83886080,
+    "window_masks_arrays": 16777216,
+    "gdal_cache": 16777216,
+    "renders_and_outputs": 33554432,
+    "other_expansion": 67108864
+  }
+}

@@ -1,0 +1,2057 @@
+{
+  "item": "S2B_48QYJ_20200131_0_L2A",
+  "acquisition_datetime": "2020-01-31T03:32:07.183000Z",
+  "properties": {
+    "created": "2022-11-06T06:22:43.422Z",
+    "platform": "sentinel-2b",
+    "constellation": "sentinel-2",
+    "instruments": [
+      "msi"
+    ],
+    "eo:cloud_cover": 6.976898,
+    "proj:epsg": 32648,
+    "mgrs:utm_zone": 48,
+    "mgrs:latitude_band": "Q",
+    "mgrs:grid_square": "YJ",
+    "grid:code": "MGRS-48QYJ",
+    "view:sun_azimuth": 148.276763740132,
+    "view:sun_elevation": 45.2604151875653,
+    "s2:degraded_msi_data_percentage": 0,
+    "s2:nodata_pixel_percentage": 0,
+    "s2:saturated_defective_pixel_percentage": 0,
+    "s2:dark_features_percentage": 1.900657,
+    "s2:cloud_shadow_percentage": 0.378539,
+    "s2:vegetation_percentage": 43.102905,
+    "s2:not_vegetated_percentage": 3.669059,
+    "s2:water_percentage": 39.580178,
+    "s2:unclassified_percentage": 4.391694,
+    "s2:medium_proba_clouds_percentage": 2.258841,
+    "s2:high_proba_clouds_percentage": 4.717118,
+    "s2:thin_cirrus_percentage": 0.000939,
+    "s2:snow_ice_percentage": 7e-05,
+    "s2:product_type": "S2MSI2A",
+    "s2:processing_baseline": "02.13",
+    "s2:product_uri": "S2B_MSIL2A_20200131T031949_N0213_R118_T48QYJ_20200131T065419.SAFE",
+    "s2:generation_time": "2020-01-31T06:54:19.000000Z",
+    "s2:datatake_id": "GS2B_20200131T031949_015159_N02.13",
+    "s2:datatake_type": "INS-NOBS",
+    "s2:datastrip_id": "S2B_OPER_MSI_L2A_DS_EPAE_20200131T065419_S20200131T032052_N02.13",
+    "s2:granule_id": "S2B_OPER_MSI_L2A_TL_EPAE_20200131T065419_A015159_T48QYJ_N02.13",
+    "s2:reflectance_conversion_factor": 1.03147986316397,
+    "datetime": "2020-01-31T03:32:07.183000Z",
+    "s2:sequence": "0",
+    "earthsearch:s3_path": "s3://sentinel-cogs/sentinel-s2-l2a-cogs/48/Q/YJ/2020/1/S2B_48QYJ_20200131_0_L2A",
+    "earthsearch:payload_id": "roda-sentinel2/workflow-sentinel2-to-stac/226d72e682b03341f2c958218880f6bf",
+    "earthsearch:boa_offset_applied": false,
+    "processing:software": {
+      "sentinel2-to-stac": "0.1.0"
+    },
+    "updated": "2022-11-06T06:22:43.422Z"
+  },
+  "groups": {
+    "coto7": {
+      "bbox": [
+        107.741,
+        20.947,
+        107.768,
+        20.97
+      ],
+      "centres": [
+        {
+          "x": 209555,
+          "y": 115463,
+          "owner": 48624,
+          "longitude": 107.75653593524714,
+          "latitude": 20.964247125505665,
+          "worldcover_tile": "N18E105"
+        },
+        {
+          "x": 209556,
+          "y": 115463,
+          "owner": 48624,
+          "longitude": 107.75790911102126,
+          "latitude": 20.964247125505665,
+          "worldcover_tile": "N18E105"
+        },
+        {
+          "x": 209557,
+          "y": 115463,
+          "owner": 48624,
+          "longitude": 107.75928228679538,
+          "latitude": 20.964247125505665,
+          "worldcover_tile": "N18E105"
+        },
+        {
+          "x": 209558,
+          "y": 115463,
+          "owner": 48624,
+          "longitude": 107.7606554625695,
+          "latitude": 20.964247125505665,
+          "worldcover_tile": "N18E105"
+        },
+        {
+          "x": 209559,
+          "y": 115463,
+          "owner": 48624,
+          "longitude": 107.76202863834362,
+          "latitude": 20.964247125505665,
+          "worldcover_tile": "N18E105"
+        },
+        {
+          "x": 209548,
+          "y": 115472,
+          "owner": 48624,
+          "longitude": 107.74692370482825,
+          "latitude": 20.952706188614822,
+          "worldcover_tile": "N18E105"
+        },
+        {
+          "x": 209549,
+          "y": 115472,
+          "owner": 48624,
+          "longitude": 107.74829688060237,
+          "latitude": 20.952706188614822,
+          "worldcover_tile": "N18E105"
+        }
+      ],
+      "assets": {
+        "red": {
+          "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/Q/YJ/2020/1/S2B_48QYJ_20200131_0_L2A/B04.tif",
+          "source_shape": [
+            10980,
+            10980
+          ],
+          "source_transform": [
+            10.0,
+            0.0,
+            699960.0,
+            0.0,
+            -10.0,
+            2400000.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "source_blocks": [
+            [
+              1024,
+              1024
+            ]
+          ],
+          "crs": "EPSG:32648",
+          "window": [
+            8504,
+            7868,
+            287,
+            260
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            785000.0,
+            0.0,
+            -10.0,
+            2321320.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "dtype": "uint16",
+          "nodata": 0.0,
+          "valid_pixel_count": 74620,
+          "total_pixels": 74620,
+          "source_raster_bands": [
+            {
+              "nodata": 0,
+              "data_type": "uint16",
+              "bits_per_sample": 15,
+              "spatial_resolution": 10,
+              "scale": 0.0001,
+              "offset": 0
+            }
+          ],
+          "samples": [
+            {
+              "owner": 48624,
+              "y": 115463,
+              "x": 209555,
+              "local_pixel_row": 66,
+              "local_pixel_col": 163,
+              "subpixel_row": 66.09387065668125,
+              "subpixel_col": 163.4506007219752,
+              "value": 653,
+              "valid_mask": 255,
+              "neighbourhood": [
+                [
+                  649,
+                  645,
+                  697
+                ],
+                [
+                  691,
+                  653,
+                  801
+                ],
+                [
+                  742,
+                  663,
+                  857
+                ]
+              ],
+              "neighbour_masks": [
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ]
+              ]
+            },
+            {
+              "owner": 48624,
+              "y": 115463,
+              "x": 209556,
+              "local_pixel_row": 65,
+              "local_pixel_col": 177,
+              "subpixel_row": 65.84768970438745,
+              "subpixel_col": 177.73763668183528,
+              "value": 1410,
+              "valid_mask": 255,
+              "neighbourhood": [
+                [
+                  1402,
+                  1414,
+                  1528
+                ],
+                [
+                  1442,
+                  1410,
+                  1584
+                ],
+                [
+                  1396,
+                  1392,
+                  1566
+                ]
+              ],
+              "neighbour_masks": [
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ]
+              ]
+            },
+            {
+              "owner": 48624,
+              "y": 115463,
+              "x": 209557,
+              "local_pixel_row": 65,
+              "local_pixel_col": 192,
+              "subpixel_row": 65.60138574158191,
+              "subpixel_col": 192.02468498931557,
+              "value": 1388,
+              "valid_mask": 255,
+              "neighbourhood": [
+                [
+                  1504,
+                  1396,
+                  1424
+                ],
+                [
+                  1434,
+                  1388,
+                  1376
+                ],
+                [
+                  1306,
+                  1368,
+                  1314
+                ]
+              ],
+              "neighbour_masks": [
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ]
+              ]
+            },
+            {
+              "owner": 48624,
+              "y": 115463,
+              "x": 209558,
+              "local_pixel_row": 65,
+              "local_pixel_col": 206,
+              "subpixel_row": 65.35495876753703,
+              "subpixel_col": 206.3117456503096,
+              "value": 1324,
+              "valid_mask": 255,
+              "neighbourhood": [
+                [
+                  1328,
+                  1204,
+                  1182
+                ],
+                [
+                  1326,
+                  1324,
+                  1282
+                ],
+                [
+                  1230,
+                  1194,
+                  1234
+                ]
+              ],
+              "neighbour_masks": [
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ]
+              ]
+            },
+            {
+              "owner": 48624,
+              "y": 115463,
+              "x": 209559,
+              "local_pixel_row": 65,
+              "local_pixel_col": 220,
+              "subpixel_row": 65.10840878169984,
+              "subpixel_col": 220.59881867124932,
+              "value": 1478,
+              "valid_mask": 255,
+              "neighbourhood": [
+                [
+                  1528,
+                  1506,
+                  1578
+                ],
+                [
+                  1494,
+                  1478,
+                  1410
+                ],
+                [
+                  1370,
+                  1294,
+                  1208
+                ]
+              ],
+              "neighbour_masks": [
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ]
+              ]
+            },
+            {
+              "owner": 48624,
+              "y": 115472,
+              "x": 209548,
+              "local_pixel_row": 195,
+              "local_pixel_col": 65,
+              "subpixel_row": 195.64981526168413,
+              "subpixel_col": 65.63563024751784,
+              "value": 1466,
+              "valid_mask": 255,
+              "neighbourhood": [
+                [
+                  1420,
+                  1736,
+                  1058
+                ],
+                [
+                  1476,
+                  1466,
+                  982
+                ],
+                [
+                  1204,
+                  1086,
+                  828
+                ]
+              ],
+              "neighbour_masks": [
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ]
+              ]
+            },
+            {
+              "owner": 48624,
+              "y": 115472,
+              "x": 209549,
+              "local_pixel_row": 195,
+              "local_pixel_col": 79,
+              "subpixel_row": 195.40460545549286,
+              "subpixel_col": 79.92368028697092,
+              "value": 5572,
+              "valid_mask": 255,
+              "neighbourhood": [
+                [
+                  4908,
+                  5540,
+                  5860
+                ],
+                [
+                  4904,
+                  5572,
+                  5928
+                ],
+                [
+                  4936,
+                  5560,
+                  5928
+                ]
+              ],
+              "neighbour_masks": [
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ]
+              ]
+            }
+          ],
+          "output": {
+            "name": "coto7-red.tif",
+            "bytes": 110854,
+            "sha256": "e03f483dfb2d52340ea2d480f955fa6d51bcec90ea56b6c32eeb843cc110b70f"
+          }
+        },
+        "green": {
+          "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/Q/YJ/2020/1/S2B_48QYJ_20200131_0_L2A/B03.tif",
+          "source_shape": [
+            10980,
+            10980
+          ],
+          "source_transform": [
+            10.0,
+            0.0,
+            699960.0,
+            0.0,
+            -10.0,
+            2400000.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "source_blocks": [
+            [
+              1024,
+              1024
+            ]
+          ],
+          "crs": "EPSG:32648",
+          "window": [
+            8504,
+            7868,
+            287,
+            260
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            785000.0,
+            0.0,
+            -10.0,
+            2321320.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "dtype": "uint16",
+          "nodata": 0.0,
+          "valid_pixel_count": 74620,
+          "total_pixels": 74620,
+          "source_raster_bands": [
+            {
+              "nodata": 0,
+              "data_type": "uint16",
+              "bits_per_sample": 15,
+              "spatial_resolution": 10,
+              "scale": 0.0001,
+              "offset": 0
+            }
+          ],
+          "samples": [
+            {
+              "owner": 48624,
+              "y": 115463,
+              "x": 209555,
+              "local_pixel_row": 66,
+              "local_pixel_col": 163,
+              "subpixel_row": 66.09387065668125,
+              "subpixel_col": 163.4506007219752,
+              "value": 967,
+              "valid_mask": 255,
+              "neighbourhood": [
+                [
+                  1052,
+                  977,
+                  1098
+                ],
+                [
+                  1060,
+                  967,
+                  1164
+                ],
+                [
+                  1010,
+                  965,
+                  1232
+                ]
+              ],
+              "neighbour_masks": [
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ]
+              ]
+            },
+            {
+              "owner": 48624,
+              "y": 115463,
+              "x": 209556,
+              "local_pixel_row": 65,
+              "local_pixel_col": 177,
+              "subpixel_row": 65.84768970438745,
+              "subpixel_col": 177.73763668183528,
+              "value": 1622,
+              "valid_mask": 255,
+              "neighbourhood": [
+                [
+                  1698,
+                  1742,
+                  1826
+                ],
+                [
+                  1638,
+                  1622,
+                  1788
+                ],
+                [
+                  1616,
+                  1780,
+                  1846
+                ]
+              ],
+              "neighbour_masks": [
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ]
+              ]
+            },
+            {
+              "owner": 48624,
+              "y": 115463,
+              "x": 209557,
+              "local_pixel_row": 65,
+              "local_pixel_col": 192,
+              "subpixel_row": 65.60138574158191,
+              "subpixel_col": 192.02468498931557,
+              "value": 1642,
+              "valid_mask": 255,
+              "neighbourhood": [
+                [
+                  1660,
+                  1622,
+                  1550
+                ],
+                [
+                  1570,
+                  1642,
+                  1460
+                ],
+                [
+                  1450,
+                  1610,
+                  1438
+                ]
+              ],
+              "neighbour_masks": [
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ]
+              ]
+            },
+            {
+              "owner": 48624,
+              "y": 115463,
+              "x": 209558,
+              "local_pixel_row": 65,
+              "local_pixel_col": 206,
+              "subpixel_row": 65.35495876753703,
+              "subpixel_col": 206.3117456503096,
+              "value": 1394,
+              "valid_mask": 255,
+              "neighbourhood": [
+                [
+                  1380,
+                  1324,
+                  1332
+                ],
+                [
+                  1288,
+                  1394,
+                  1382
+                ],
+                [
+                  1210,
+                  1296,
+                  1296
+                ]
+              ],
+              "neighbour_masks": [
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ]
+              ]
+            },
+            {
+              "owner": 48624,
+              "y": 115463,
+              "x": 209559,
+              "local_pixel_row": 65,
+              "local_pixel_col": 220,
+              "subpixel_row": 65.10840878169984,
+              "subpixel_col": 220.59881867124932,
+              "value": 1716,
+              "valid_mask": 255,
+              "neighbourhood": [
+                [
+                  1672,
+                  1616,
+                  1622
+                ],
+                [
+                  1682,
+                  1716,
+                  1656
+                ],
+                [
+                  1568,
+                  1520,
+                  1488
+                ]
+              ],
+              "neighbour_masks": [
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ]
+              ]
+            },
+            {
+              "owner": 48624,
+              "y": 115472,
+              "x": 209548,
+              "local_pixel_row": 195,
+              "local_pixel_col": 65,
+              "subpixel_row": 195.64981526168413,
+              "subpixel_col": 65.63563024751784,
+              "value": 1598,
+              "valid_mask": 255,
+              "neighbourhood": [
+                [
+                  1524,
+                  1764,
+                  1432
+                ],
+                [
+                  1688,
+                  1598,
+                  1278
+                ],
+                [
+                  1474,
+                  1366,
+                  1088
+                ]
+              ],
+              "neighbour_masks": [
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ]
+              ]
+            },
+            {
+              "owner": 48624,
+              "y": 115472,
+              "x": 209549,
+              "local_pixel_row": 195,
+              "local_pixel_col": 79,
+              "subpixel_row": 195.40460545549286,
+              "subpixel_col": 79.92368028697092,
+              "value": 5860,
+              "valid_mask": 255,
+              "neighbourhood": [
+                [
+                  5380,
+                  5900,
+                  6284
+                ],
+                [
+                  5312,
+                  5860,
+                  6192
+                ],
+                [
+                  5484,
+                  5912,
+                  6136
+                ]
+              ],
+              "neighbour_masks": [
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ]
+              ]
+            }
+          ],
+          "output": {
+            "name": "coto7-green.tif",
+            "bytes": 109858,
+            "sha256": "e474c6e07a0dff0ff8eabfea1a6264a57326b964bbbab5bc300c1a1592298276"
+          }
+        },
+        "blue": {
+          "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/Q/YJ/2020/1/S2B_48QYJ_20200131_0_L2A/B02.tif",
+          "source_shape": [
+            10980,
+            10980
+          ],
+          "source_transform": [
+            10.0,
+            0.0,
+            699960.0,
+            0.0,
+            -10.0,
+            2400000.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "source_blocks": [
+            [
+              1024,
+              1024
+            ]
+          ],
+          "crs": "EPSG:32648",
+          "window": [
+            8504,
+            7868,
+            287,
+            260
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            785000.0,
+            0.0,
+            -10.0,
+            2321320.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "dtype": "uint16",
+          "nodata": 0.0,
+          "valid_pixel_count": 74620,
+          "total_pixels": 74620,
+          "source_raster_bands": [
+            {
+              "nodata": 0,
+              "data_type": "uint16",
+              "bits_per_sample": 15,
+              "spatial_resolution": 10,
+              "scale": 0.0001,
+              "offset": 0
+            }
+          ],
+          "samples": [
+            {
+              "owner": 48624,
+              "y": 115463,
+              "x": 209555,
+              "local_pixel_row": 66,
+              "local_pixel_col": 163,
+              "subpixel_row": 66.09387065668125,
+              "subpixel_col": 163.4506007219752,
+              "value": 1064,
+              "valid_mask": 255,
+              "neighbourhood": [
+                [
+                  928,
+                  974,
+                  1156
+                ],
+                [
+                  991,
+                  1064,
+                  1230
+                ],
+                [
+                  1050,
+                  1108,
+                  1238
+                ]
+              ],
+              "neighbour_masks": [
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ]
+              ]
+            },
+            {
+              "owner": 48624,
+              "y": 115463,
+              "x": 209556,
+              "local_pixel_row": 65,
+              "local_pixel_col": 177,
+              "subpixel_row": 65.84768970438745,
+              "subpixel_col": 177.73763668183528,
+              "value": 1738,
+              "valid_mask": 255,
+              "neighbourhood": [
+                [
+                  1604,
+                  1642,
+                  1844
+                ],
+                [
+                  1622,
+                  1738,
+                  1826
+                ],
+                [
+                  1792,
+                  1870,
+                  1748
+                ]
+              ],
+              "neighbour_masks": [
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ]
+              ]
+            },
+            {
+              "owner": 48624,
+              "y": 115463,
+              "x": 209557,
+              "local_pixel_row": 65,
+              "local_pixel_col": 192,
+              "subpixel_row": 65.60138574158191,
+              "subpixel_col": 192.02468498931557,
+              "value": 1548,
+              "valid_mask": 255,
+              "neighbourhood": [
+                [
+                  1598,
+                  1562,
+                  1334
+                ],
+                [
+                  1456,
+                  1548,
+                  1296
+                ],
+                [
+                  1388,
+                  1526,
+                  1288
+                ]
+              ],
+              "neighbour_masks": [
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ]
+              ]
+            },
+            {
+              "owner": 48624,
+              "y": 115463,
+              "x": 209558,
+              "local_pixel_row": 65,
+              "local_pixel_col": 206,
+              "subpixel_row": 65.35495876753703,
+              "subpixel_col": 206.3117456503096,
+              "value": 1316,
+              "valid_mask": 255,
+              "neighbourhood": [
+                [
+                  1190,
+                  1158,
+                  1192
+                ],
+                [
+                  1282,
+                  1316,
+                  1286
+                ],
+                [
+                  1092,
+                  1112,
+                  1148
+                ]
+              ],
+              "neighbour_masks": [
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ]
+              ]
+            },
+            {
+              "owner": 48624,
+              "y": 115463,
+              "x": 209559,
+              "local_pixel_row": 65,
+              "local_pixel_col": 220,
+              "subpixel_row": 65.10840878169984,
+              "subpixel_col": 220.59881867124932,
+              "value": 1592,
+              "valid_mask": 255,
+              "neighbourhood": [
+                [
+                  1442,
+                  1444,
+                  1404
+                ],
+                [
+                  1622,
+                  1592,
+                  1502
+                ],
+                [
+                  1560,
+                  1560,
+                  1508
+                ]
+              ],
+              "neighbour_masks": [
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ]
+              ]
+            },
+            {
+              "owner": 48624,
+              "y": 115472,
+              "x": 209548,
+              "local_pixel_row": 195,
+              "local_pixel_col": 65,
+              "subpixel_row": 195.64981526168413,
+              "subpixel_col": 65.63563024751784,
+              "value": 1524,
+              "valid_mask": 255,
+              "neighbourhood": [
+                [
+                  1388,
+                  1620,
+                  1384
+                ],
+                [
+                  1584,
+                  1524,
+                  1250
+                ],
+                [
+                  1428,
+                  1306,
+                  1124
+                ]
+              ],
+              "neighbour_masks": [
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ]
+              ]
+            },
+            {
+              "owner": 48624,
+              "y": 115472,
+              "x": 209549,
+              "local_pixel_row": 195,
+              "local_pixel_col": 79,
+              "subpixel_row": 195.40460545549286,
+              "subpixel_col": 79.92368028697092,
+              "value": 6156,
+              "valid_mask": 255,
+              "neighbourhood": [
+                [
+                  5704,
+                  6268,
+                  6504
+                ],
+                [
+                  5788,
+                  6156,
+                  6324
+                ],
+                [
+                  5888,
+                  6196,
+                  6412
+                ]
+              ],
+              "neighbour_masks": [
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ]
+              ]
+            }
+          ],
+          "output": {
+            "name": "coto7-blue.tif",
+            "bytes": 110376,
+            "sha256": "dd04d3a16d3ed6c7f97da57105b9b14e41f55d9e3d66b9539d278100a04a4679"
+          }
+        },
+        "nir": {
+          "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/Q/YJ/2020/1/S2B_48QYJ_20200131_0_L2A/B08.tif",
+          "source_shape": [
+            10980,
+            10980
+          ],
+          "source_transform": [
+            10.0,
+            0.0,
+            699960.0,
+            0.0,
+            -10.0,
+            2400000.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "source_blocks": [
+            [
+              1024,
+              1024
+            ]
+          ],
+          "crs": "EPSG:32648",
+          "window": [
+            8504,
+            7868,
+            287,
+            260
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            785000.0,
+            0.0,
+            -10.0,
+            2321320.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "dtype": "uint16",
+          "nodata": 0.0,
+          "valid_pixel_count": 74620,
+          "total_pixels": 74620,
+          "source_raster_bands": [
+            {
+              "nodata": 0,
+              "data_type": "uint16",
+              "bits_per_sample": 15,
+              "spatial_resolution": 10,
+              "scale": 0.0001,
+              "offset": 0
+            }
+          ],
+          "samples": [
+            {
+              "owner": 48624,
+              "y": 115463,
+              "x": 209555,
+              "local_pixel_row": 66,
+              "local_pixel_col": 163,
+              "subpixel_row": 66.09387065668125,
+              "subpixel_col": 163.4506007219752,
+              "value": 825,
+              "valid_mask": 255,
+              "neighbourhood": [
+                [
+                  512,
+                  667,
+                  1070
+                ],
+                [
+                  635,
+                  825,
+                  1314
+                ],
+                [
+                  801,
+                  1118,
+                  1614
+                ]
+              ],
+              "neighbour_masks": [
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ]
+              ]
+            },
+            {
+              "owner": 48624,
+              "y": 115463,
+              "x": 209556,
+              "local_pixel_row": 65,
+              "local_pixel_col": 177,
+              "subpixel_row": 65.84768970438745,
+              "subpixel_col": 177.73763668183528,
+              "value": 2354,
+              "valid_mask": 255,
+              "neighbourhood": [
+                [
+                  2508,
+                  2450,
+                  2508
+                ],
+                [
+                  2454,
+                  2354,
+                  2556
+                ],
+                [
+                  2462,
+                  2468,
+                  2552
+                ]
+              ],
+              "neighbour_masks": [
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ]
+              ]
+            },
+            {
+              "owner": 48624,
+              "y": 115463,
+              "x": 209557,
+              "local_pixel_row": 65,
+              "local_pixel_col": 192,
+              "subpixel_row": 65.60138574158191,
+              "subpixel_col": 192.02468498931557,
+              "value": 2348,
+              "valid_mask": 255,
+              "neighbourhood": [
+                [
+                  2312,
+                  2308,
+                  2240
+                ],
+                [
+                  2332,
+                  2348,
+                  2188
+                ],
+                [
+                  2420,
+                  2374,
+                  2192
+                ]
+              ],
+              "neighbour_masks": [
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ]
+              ]
+            },
+            {
+              "owner": 48624,
+              "y": 115463,
+              "x": 209558,
+              "local_pixel_row": 65,
+              "local_pixel_col": 206,
+              "subpixel_row": 65.35495876753703,
+              "subpixel_col": 206.3117456503096,
+              "value": 1938,
+              "valid_mask": 255,
+              "neighbourhood": [
+                [
+                  2062,
+                  1862,
+                  1546
+                ],
+                [
+                  1908,
+                  1938,
+                  1866
+                ],
+                [
+                  1918,
+                  1976,
+                  1980
+                ]
+              ],
+              "neighbour_masks": [
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ]
+              ]
+            },
+            {
+              "owner": 48624,
+              "y": 115463,
+              "x": 209559,
+              "local_pixel_row": 65,
+              "local_pixel_col": 220,
+              "subpixel_row": 65.10840878169984,
+              "subpixel_col": 220.59881867124932,
+              "value": 2010,
+              "valid_mask": 255,
+              "neighbourhood": [
+                [
+                  1808,
+                  1816,
+                  1892
+                ],
+                [
+                  1992,
+                  2010,
+                  1972
+                ],
+                [
+                  1998,
+                  1924,
+                  1792
+                ]
+              ],
+              "neighbour_masks": [
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ]
+              ]
+            },
+            {
+              "owner": 48624,
+              "y": 115472,
+              "x": 209548,
+              "local_pixel_row": 195,
+              "local_pixel_col": 65,
+              "subpixel_row": 195.64981526168413,
+              "subpixel_col": 65.63563024751784,
+              "value": 1654,
+              "valid_mask": 255,
+              "neighbourhood": [
+                [
+                  1492,
+                  1808,
+                  1392
+                ],
+                [
+                  1650,
+                  1654,
+                  1278
+                ],
+                [
+                  1482,
+                  1374,
+                  1362
+                ]
+              ],
+              "neighbour_masks": [
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ]
+              ]
+            },
+            {
+              "owner": 48624,
+              "y": 115472,
+              "x": 209549,
+              "local_pixel_row": 195,
+              "local_pixel_col": 79,
+              "subpixel_row": 195.40460545549286,
+              "subpixel_col": 79.92368028697092,
+              "value": 5700,
+              "valid_mask": 255,
+              "neighbourhood": [
+                [
+                  5104,
+                  5700,
+                  6068
+                ],
+                [
+                  5116,
+                  5700,
+                  5956
+                ],
+                [
+                  5356,
+                  5832,
+                  6032
+                ]
+              ],
+              "neighbour_masks": [
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ]
+              ]
+            }
+          ],
+          "output": {
+            "name": "coto7-nir.tif",
+            "bytes": 113068,
+            "sha256": "19be99cabaf4a1554cf3d4a848c5a42e3696285c41ec104500337b8ed78bd8c4"
+          }
+        },
+        "scl": {
+          "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/Q/YJ/2020/1/S2B_48QYJ_20200131_0_L2A/SCL.tif",
+          "source_shape": [
+            5490,
+            5490
+          ],
+          "source_transform": [
+            20.0,
+            0.0,
+            699960.0,
+            0.0,
+            -20.0,
+            2400000.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "source_blocks": [
+            [
+              512,
+              512
+            ]
+          ],
+          "crs": "EPSG:32648",
+          "window": [
+            4252,
+            3934,
+            144,
+            130
+          ],
+          "transform": [
+            20.0,
+            0.0,
+            785000.0,
+            0.0,
+            -20.0,
+            2321320.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "dtype": "uint8",
+          "nodata": 0.0,
+          "valid_pixel_count": 18720,
+          "total_pixels": 18720,
+          "source_raster_bands": [
+            {
+              "nodata": 0,
+              "data_type": "uint8",
+              "spatial_resolution": 20
+            }
+          ],
+          "samples": [
+            {
+              "owner": 48624,
+              "y": 115463,
+              "x": 209555,
+              "local_pixel_row": 33,
+              "local_pixel_col": 81,
+              "subpixel_row": 33.04693532834062,
+              "subpixel_col": 81.7253003609876,
+              "value": 6,
+              "valid_mask": 255,
+              "neighbourhood": [
+                [
+                  6,
+                  6,
+                  6
+                ],
+                [
+                  6,
+                  6,
+                  6
+                ],
+                [
+                  6,
+                  6,
+                  6
+                ]
+              ],
+              "neighbour_masks": [
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ]
+              ]
+            },
+            {
+              "owner": 48624,
+              "y": 115463,
+              "x": 209556,
+              "local_pixel_row": 32,
+              "local_pixel_col": 88,
+              "subpixel_row": 32.923844852193724,
+              "subpixel_col": 88.86881834091764,
+              "value": 7,
+              "valid_mask": 255,
+              "neighbourhood": [
+                [
+                  7,
+                  7,
+                  7
+                ],
+                [
+                  7,
+                  7,
+                  7
+                ],
+                [
+                  7,
+                  7,
+                  7
+                ]
+              ],
+              "neighbour_masks": [
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ]
+              ]
+            },
+            {
+              "owner": 48624,
+              "y": 115463,
+              "x": 209557,
+              "local_pixel_row": 32,
+              "local_pixel_col": 96,
+              "subpixel_row": 32.800692870790954,
+              "subpixel_col": 96.01234249465779,
+              "value": 7,
+              "valid_mask": 255,
+              "neighbourhood": [
+                [
+                  7,
+                  7,
+                  7
+                ],
+                [
+                  7,
+                  7,
+                  7
+                ],
+                [
+                  7,
+                  7,
+                  7
+                ]
+              ],
+              "neighbour_masks": [
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ]
+              ]
+            },
+            {
+              "owner": 48624,
+              "y": 115463,
+              "x": 209558,
+              "local_pixel_row": 32,
+              "local_pixel_col": 103,
+              "subpixel_row": 32.677479383768514,
+              "subpixel_col": 103.1558728251548,
+              "value": 7,
+              "valid_mask": 255,
+              "neighbourhood": [
+                [
+                  7,
+                  7,
+                  7
+                ],
+                [
+                  7,
+                  7,
+                  7
+                ],
+                [
+                  7,
+                  7,
+                  7
+                ]
+              ],
+              "neighbour_masks": [
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ]
+              ]
+            },
+            {
+              "owner": 48624,
+              "y": 115463,
+              "x": 209559,
+              "local_pixel_row": 32,
+              "local_pixel_col": 110,
+              "subpixel_row": 32.55420439084992,
+              "subpixel_col": 110.29940933562466,
+              "value": 7,
+              "valid_mask": 255,
+              "neighbourhood": [
+                [
+                  7,
+                  7,
+                  7
+                ],
+                [
+                  7,
+                  7,
+                  7
+                ],
+                [
+                  7,
+                  7,
+                  7
+                ]
+              ],
+              "neighbour_masks": [
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ]
+              ]
+            },
+            {
+              "owner": 48624,
+              "y": 115472,
+              "x": 209548,
+              "local_pixel_row": 97,
+              "local_pixel_col": 32,
+              "subpixel_row": 97.82490763084206,
+              "subpixel_col": 32.81781512375892,
+              "value": 6,
+              "valid_mask": 255,
+              "neighbourhood": [
+                [
+                  6,
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  6,
+                  2
+                ],
+                [
+                  6,
+                  7,
+                  2
+                ]
+              ],
+              "neighbour_masks": [
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ]
+              ]
+            },
+            {
+              "owner": 48624,
+              "y": 115472,
+              "x": 209549,
+              "local_pixel_row": 97,
+              "local_pixel_col": 39,
+              "subpixel_row": 97.70230272774643,
+              "subpixel_col": 39.96184014348546,
+              "value": 9,
+              "valid_mask": 255,
+              "neighbourhood": [
+                [
+                  9,
+                  9,
+                  9
+                ],
+                [
+                  9,
+                  9,
+                  9
+                ],
+                [
+                  9,
+                  9,
+                  9
+                ]
+              ],
+              "neighbour_masks": [
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ]
+              ]
+            }
+          ],
+          "output": {
+            "name": "coto7-scl.tif",
+            "bytes": 2344,
+            "sha256": "d729ab2c409e7b2108ae9e644ca4f4a091a313b79048f5c6d6b14b9385f578b3"
+          }
+        }
+      },
+      "scene_classification_counts": {
+        "2": 147,
+        "4": 330,
+        "5": 132,
+        "6": 13722,
+        "7": 3793,
+        "8": 465,
+        "9": 131
+      }
+    }
+  },
+  "outputs": [
+    {
+      "name": "coto7-blue.tif",
+      "bytes": 110376,
+      "sha256": "dd04d3a16d3ed6c7f97da57105b9b14e41f55d9e3d66b9539d278100a04a4679"
+    },
+    {
+      "name": "coto7-green.tif",
+      "bytes": 109858,
+      "sha256": "e474c6e07a0dff0ff8eabfea1a6264a57326b964bbbab5bc300c1a1592298276"
+    },
+    {
+      "name": "coto7-nir.tif",
+      "bytes": 113068,
+      "sha256": "19be99cabaf4a1554cf3d4a848c5a42e3696285c41ec104500337b8ed78bd8c4"
+    },
+    {
+      "name": "coto7-red.tif",
+      "bytes": 110854,
+      "sha256": "e03f483dfb2d52340ea2d480f955fa6d51bcec90ea56b6c32eeb843cc110b70f"
+    },
+    {
+      "name": "coto7-scl.tif",
+      "bytes": 2344,
+      "sha256": "d729ab2c409e7b2108ae9e644ca4f4a091a313b79048f5c6d6b14b9385f578b3"
+    }
+  ],
+  "display": {
+    "channels": [
+      "RGB",
+      "NIR-red-green"
+    ],
+    "stretch": "Fixed DN0..3000 to0..255, display only; no thresholds/classification/resampling"
+  },
+  "limits": [
+    "Raw native integer windows only; full remote COG objects not downloaded or whole-file authenticated.",
+    "Native10m reflectance and native20m SCL kept separately; SCL is a model mask, not independent water truth.",
+    "Original centres unchanged. No fitted shift, shoreline, cell classification, annual persistence, legal authority or hold clearance.",
+    "Range reads use existing GDAL with finite HTTP timeouts/cache; no aggregate network-byte enforcement claim."
+  ]
+}

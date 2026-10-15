@@ -1,0 +1,1359 @@
+{
+  "kind": "finite-original-key-evidence-decision-subset-no-qualification",
+  "reviewer": "/root/vn_original_decisions",
+  "date": "2026-10-15",
+  "key_order": [
+    "owner",
+    "y",
+    "x"
+  ],
+  "counts": {
+    "original_repair_remaining": 1786,
+    "original_physical_population": 24880,
+    "original_physical_segments": 9947,
+    "positive_location_evidence_subset": 2,
+    "explicit_adverse_control": 1,
+    "new_physical_dispositions_accepted": 0,
+    "new_qualified": 0,
+    "new_accepted": 0,
+    "repair_credit": 0,
+    "exact_keys_reviewed": 7,
+    "complete_original_intervals_reviewed": 2,
+    "other_keys_record_join_only_no_map_placement": 4
+  },
+  "input_bindings": {
+    "pilot": {
+      "path": "vietnam-next/island-holds/co-to/pilot-subset.json",
+      "bytes": 13335,
+      "sha256": "9663db4018d7d43a76b76f6ca930d0ba8024d6f346da104d8a2d36c798e3a672"
+    },
+    "original_source_records": {
+      "path": "vietnam-next/island-holds/co-to/exact-held-cells.json",
+      "bytes": 253604,
+      "sha256": "6c4c523334c8d9496c859d8894ba58ed5f22dea79ffe3845c6b9a0cb0e6ef335"
+    },
+    "exact_centres": {
+      "path": "vietnam-next/island-holds/co-to/exact-held-centres.json",
+      "bytes": 78426,
+      "sha256": "7d70e2f2d4254ddc63808e9981e1e2f1fadb1c8720df6eaa3853e483cd0f7c6d"
+    },
+    "native_observations": {
+      "path": "vietnam-next/physical/physical-only-4372/run-001/result.json",
+      "bytes": 1382506,
+      "sha256": "a5d0c0cb004476ed4e2e13228946fe4bd6ce5e290c80809821ee74678c209a55"
+    },
+    "worldcover_observations": {
+      "path": "vietnam-next/island-holds/worldcover/point-results.json",
+      "bytes": 3513749,
+      "sha256": "c67cdcf5817f61e9bed1ad7577a3d2e3712e539d8080f307d2d9cfb41d0d1cf9"
+    },
+    "source_location": {
+      "path": "vietnam-next/island-holds/source-location.json",
+      "bytes": 43855,
+      "sha256": "55413be955dde5823a0cc7af97c1f17a7365960169e8ab399b4ef40448b24fcf"
+    },
+    "map04": {
+      "path": "vietnam-next/island-holds/official-acquisition/co-to-plan-members/04.pdf",
+      "bytes": 1182760,
+      "sha256": "4df8a9c2a69f9e0d7ebf49ff40750cc54c3dd761fc02c0eb9af2a5cc458822a1"
+    },
+    "map04_georeference": {
+      "path": "vietnam-next/island-holds/co-to/map-inspection/04-georeference.json",
+      "bytes": 1024,
+      "sha256": "4fea11a3fec7f22f7e338e4d3b8e5d053c153cc14c52eef3acf08e48bca55488"
+    },
+    "map04_render": {
+      "path": "vietnam-next/island-holds/co-to/map-inspection/04-map.png",
+      "bytes": 1163316,
+      "sha256": "9f0934dbb33ace4557c3cb7b58fbec92ff53ad352b2df3980deea6c317606f2c"
+    },
+    "map04_south_crop": {
+      "path": "vietnam-next/island-holds/co-to/map-inspection/co-to-south.png",
+      "bytes": 53155,
+      "sha256": "cbc75157ba9412d4192738f50009625d6e77ee4fe8e7d68b5b4cefa799722a24"
+    }
+  },
+  "original_physical_binding": {
+    "archive": "vietnam-owned-cache-preserved-20261014.tar.gz",
+    "member": ".cache/vietnam-20261014/current-ownership/physical-interpretation/remaining.json.gz",
+    "bytes": 55982,
+    "sha256": "7010e1add5133d3ec4c2eae2d37968d3bcef41e9cc4f08883288cf56ffdd135d",
+    "commit": "a9c2d4122eed9d08cd3f213d3f5157039c8823bb",
+    "repository_path": "coordination/engineering/vietnam-current-cell-20261014/evidence/current-ownership/physical-interpretation/remaining.json.gz"
+  },
+  "original_full_source_binding": {
+    "archive": "vietnam-owned-cache-preserved-20261014.tar.gz",
+    "member": ".cache/vietnam-20261014/source-qualification/cells.json.gz",
+    "bytes": 232506,
+    "sha256": "a85502406c50a52f012802a42f0e7a37480703ebe876aeaf212cfe96bfd65a2b"
+  },
+  "join_checks": {
+    "original_physical_unique_owner_row_column_count": 24880,
+    "all_seven_exactly_in_original_frozen_intervals": true,
+    "all_seven_source_records_exactly_equal_full_original_qualification_records": true,
+    "all_seven_native_and_worldcover_and_exact_coordinates_joined": true,
+    "original_intervals_exact_full_key_coverage": true,
+    "retained_map_placements_or_visual_observations": 3,
+    "map_placement_claims_for_other_four": false,
+    "whole_source_geometry_replayed": false
+  },
+  "cells": [
+    {
+      "original_key": {
+        "owner": 48624,
+        "y": 115463,
+        "x": 209555
+      },
+      "target": "gb:VNM:ADM2:81297802B76384767601248",
+      "original_package": "gb-VNM-ADM2--physical-interpretation",
+      "original_frozen_interval_matches": [
+        [
+          115463,
+          209555,
+          209560,
+          [
+            48624
+          ],
+          [
+            65284
+          ],
+          "source-relative"
+        ]
+      ],
+      "original_source_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65284
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48624
+        ],
+        "declared_sids": [
+          65284
+        ],
+        "flags": [],
+        "hold_reasons": [
+          "source-relative-physical-interpretation-unresolved"
+        ],
+        "owner": 48624,
+        "package": "physical-interpretation",
+        "physical": "source-relative",
+        "qualified": false,
+        "reference_countries": [
+          "VNM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [],
+        "x": 209555,
+        "y": 115463
+      },
+      "exact_retained_centre": {
+        "x": 209555,
+        "y": 115463,
+        "owner": 48624,
+        "longitude": 107.75653593524714,
+        "latitude": 20.964247125505665,
+        "worldcover_tile": "N18E105"
+      },
+      "retained_native_observation": {
+        "target": "gb:VNM:ADM2:81297802B76384767601248",
+        "owner": 48624,
+        "x": 209555,
+        "y": 115463,
+        "membership": {
+          "mapped_land_support": {
+            "status": "outside",
+            "basis": "accepted-native-polygon-intervals"
+          },
+          "mapped_inland_water_support": {
+            "status": "outside",
+            "basis": "retained-explicit-empty-geometry"
+          }
+        },
+        "observed_effect": "outside_land"
+      },
+      "retained_worldcover_observation": {
+        "owner": 48624,
+        "name": "Co To",
+        "x": 209555,
+        "y": 115463,
+        "longitude": 107.75653593524714,
+        "latitude": 20.964247125505665,
+        "tile": "N18E105",
+        "expected_row": 429,
+        "expected_col": 33078,
+        "class_code": 80,
+        "valid_mask": 255,
+        "neighbourhood_complete": true,
+        "neighbourhood_codes": [
+          [
+            80,
+            80,
+            80
+          ],
+          [
+            80,
+            80,
+            80
+          ],
+          [
+            80,
+            80,
+            80
+          ]
+        ],
+        "neighbourhood_masks": [
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            255,
+            255,
+            255
+          ]
+        ]
+      },
+      "map_document_evidence": {
+        "coordinate_placement_reviewed": false,
+        "visual_placement_claim": null,
+        "reason": "No retained mapped coordinate placement or centre-specific official-map visual assessment is supplied for this key."
+      },
+      "evidence_assessment": "source-relative-physical-category-unresolved;observations-not-authority",
+      "actual_disposition": "retain-original-physical-interpretation-hold",
+      "qualified": false,
+      "accepted": false,
+      "repair_credit": 0,
+      "explicit_unresolved_question": "What physical source interpretation applies to this unchanged original2020ADM2 member centre given absent2008ADM1 membership and retained GSHHGmapped-land/water outside? Retained WorldCover class is an observation only; no exact official-map placement has been reviewed for this key.",
+      "source_vintage_context": {
+        "original_ADM2_represented_year": 2020,
+        "original_ADM1_represented_year": 2008,
+        "WorldCover_observation_year": 2020,
+        "official_map_approval": "2020-05-19",
+        "official_map_actual_shoreline_observation_date": "not established",
+        "GSHHG_version": "2.3.7",
+        "GSHHG_local_observation_date": "heterogeneous; exact component shoreline observation date unestablished"
+      },
+      "scientific_review_disposition_proposal": {
+        "type": "explicit-unresolved-source-interpretation-question",
+        "original_hold_preserved": true,
+        "root_adoption_receipt": "not supplied by this report"
+      }
+    },
+    {
+      "original_key": {
+        "owner": 48624,
+        "y": 115463,
+        "x": 209556
+      },
+      "target": "gb:VNM:ADM2:81297802B76384767601248",
+      "original_package": "gb-VNM-ADM2--physical-interpretation",
+      "original_frozen_interval_matches": [
+        [
+          115463,
+          209555,
+          209560,
+          [
+            48624
+          ],
+          [
+            65284
+          ],
+          "source-relative"
+        ]
+      ],
+      "original_source_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65284
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48624
+        ],
+        "declared_sids": [
+          65284
+        ],
+        "flags": [],
+        "hold_reasons": [
+          "source-relative-physical-interpretation-unresolved"
+        ],
+        "owner": 48624,
+        "package": "physical-interpretation",
+        "physical": "source-relative",
+        "qualified": false,
+        "reference_countries": [
+          "VNM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [],
+        "x": 209556,
+        "y": 115463
+      },
+      "exact_retained_centre": {
+        "x": 209556,
+        "y": 115463,
+        "owner": 48624,
+        "longitude": 107.75790911102126,
+        "latitude": 20.964247125505665,
+        "worldcover_tile": "N18E105"
+      },
+      "retained_native_observation": {
+        "target": "gb:VNM:ADM2:81297802B76384767601248",
+        "owner": 48624,
+        "x": 209556,
+        "y": 115463,
+        "membership": {
+          "mapped_land_support": {
+            "status": "outside",
+            "basis": "accepted-native-polygon-intervals"
+          },
+          "mapped_inland_water_support": {
+            "status": "outside",
+            "basis": "retained-explicit-empty-geometry"
+          }
+        },
+        "observed_effect": "outside_land"
+      },
+      "retained_worldcover_observation": {
+        "owner": 48624,
+        "name": "Co To",
+        "x": 209556,
+        "y": 115463,
+        "longitude": 107.75790911102126,
+        "latitude": 20.964247125505665,
+        "tile": "N18E105",
+        "expected_row": 429,
+        "expected_col": 33094,
+        "class_code": 10,
+        "valid_mask": 255,
+        "neighbourhood_complete": true,
+        "neighbourhood_codes": [
+          [
+            10,
+            10,
+            10
+          ],
+          [
+            10,
+            10,
+            10
+          ],
+          [
+            10,
+            10,
+            10
+          ]
+        ],
+        "neighbourhood_masks": [
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            255,
+            255,
+            255
+          ]
+        ]
+      },
+      "map_document_evidence": {
+        "coordinate_placement_reviewed": false,
+        "visual_placement_claim": null,
+        "reason": "No retained mapped coordinate placement or centre-specific official-map visual assessment is supplied for this key."
+      },
+      "evidence_assessment": "source-relative-physical-category-unresolved;observations-not-authority",
+      "actual_disposition": "retain-original-physical-interpretation-hold",
+      "qualified": false,
+      "accepted": false,
+      "repair_credit": 0,
+      "explicit_unresolved_question": "What physical source interpretation applies to this unchanged original2020ADM2 member centre given absent2008ADM1 membership and retained GSHHGmapped-land/water outside? Retained WorldCover class is an observation only; no exact official-map placement has been reviewed for this key.",
+      "source_vintage_context": {
+        "original_ADM2_represented_year": 2020,
+        "original_ADM1_represented_year": 2008,
+        "WorldCover_observation_year": 2020,
+        "official_map_approval": "2020-05-19",
+        "official_map_actual_shoreline_observation_date": "not established",
+        "GSHHG_version": "2.3.7",
+        "GSHHG_local_observation_date": "heterogeneous; exact component shoreline observation date unestablished"
+      },
+      "scientific_review_disposition_proposal": {
+        "type": "explicit-unresolved-source-interpretation-question",
+        "original_hold_preserved": true,
+        "root_adoption_receipt": "not supplied by this report"
+      }
+    },
+    {
+      "original_key": {
+        "owner": 48624,
+        "y": 115463,
+        "x": 209557
+      },
+      "target": "gb:VNM:ADM2:81297802B76384767601248",
+      "original_package": "gb-VNM-ADM2--physical-interpretation",
+      "original_frozen_interval_matches": [
+        [
+          115463,
+          209555,
+          209560,
+          [
+            48624
+          ],
+          [
+            65284
+          ],
+          "source-relative"
+        ]
+      ],
+      "original_source_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65284
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48624
+        ],
+        "declared_sids": [
+          65284
+        ],
+        "flags": [],
+        "hold_reasons": [
+          "source-relative-physical-interpretation-unresolved"
+        ],
+        "owner": 48624,
+        "package": "physical-interpretation",
+        "physical": "source-relative",
+        "qualified": false,
+        "reference_countries": [
+          "VNM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [],
+        "x": 209557,
+        "y": 115463
+      },
+      "exact_retained_centre": {
+        "x": 209557,
+        "y": 115463,
+        "owner": 48624,
+        "longitude": 107.75928228679538,
+        "latitude": 20.964247125505665,
+        "worldcover_tile": "N18E105"
+      },
+      "retained_native_observation": {
+        "target": "gb:VNM:ADM2:81297802B76384767601248",
+        "owner": 48624,
+        "x": 209557,
+        "y": 115463,
+        "membership": {
+          "mapped_land_support": {
+            "status": "outside",
+            "basis": "accepted-native-polygon-intervals"
+          },
+          "mapped_inland_water_support": {
+            "status": "outside",
+            "basis": "retained-explicit-empty-geometry"
+          }
+        },
+        "observed_effect": "outside_land"
+      },
+      "retained_worldcover_observation": {
+        "owner": 48624,
+        "name": "Co To",
+        "x": 209557,
+        "y": 115463,
+        "longitude": 107.75928228679538,
+        "latitude": 20.964247125505665,
+        "tile": "N18E105",
+        "expected_row": 429,
+        "expected_col": 33111,
+        "class_code": 10,
+        "valid_mask": 255,
+        "neighbourhood_complete": true,
+        "neighbourhood_codes": [
+          [
+            10,
+            10,
+            10
+          ],
+          [
+            10,
+            10,
+            10
+          ],
+          [
+            10,
+            10,
+            10
+          ]
+        ],
+        "neighbourhood_masks": [
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            255,
+            255,
+            255
+          ]
+        ]
+      },
+      "map_document_evidence": {
+        "coordinate_placement_reviewed": false,
+        "visual_placement_claim": null,
+        "reason": "No retained mapped coordinate placement or centre-specific official-map visual assessment is supplied for this key."
+      },
+      "evidence_assessment": "source-relative-physical-category-unresolved;observations-not-authority",
+      "actual_disposition": "retain-original-physical-interpretation-hold",
+      "qualified": false,
+      "accepted": false,
+      "repair_credit": 0,
+      "explicit_unresolved_question": "What physical source interpretation applies to this unchanged original2020ADM2 member centre given absent2008ADM1 membership and retained GSHHGmapped-land/water outside? Retained WorldCover class is an observation only; no exact official-map placement has been reviewed for this key.",
+      "source_vintage_context": {
+        "original_ADM2_represented_year": 2020,
+        "original_ADM1_represented_year": 2008,
+        "WorldCover_observation_year": 2020,
+        "official_map_approval": "2020-05-19",
+        "official_map_actual_shoreline_observation_date": "not established",
+        "GSHHG_version": "2.3.7",
+        "GSHHG_local_observation_date": "heterogeneous; exact component shoreline observation date unestablished"
+      },
+      "scientific_review_disposition_proposal": {
+        "type": "explicit-unresolved-source-interpretation-question",
+        "original_hold_preserved": true,
+        "root_adoption_receipt": "not supplied by this report"
+      }
+    },
+    {
+      "original_key": {
+        "owner": 48624,
+        "y": 115463,
+        "x": 209558
+      },
+      "target": "gb:VNM:ADM2:81297802B76384767601248",
+      "original_package": "gb-VNM-ADM2--physical-interpretation",
+      "original_frozen_interval_matches": [
+        [
+          115463,
+          209555,
+          209560,
+          [
+            48624
+          ],
+          [
+            65284
+          ],
+          "source-relative"
+        ]
+      ],
+      "original_source_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65284
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48624
+        ],
+        "declared_sids": [
+          65284
+        ],
+        "flags": [],
+        "hold_reasons": [
+          "source-relative-physical-interpretation-unresolved"
+        ],
+        "owner": 48624,
+        "package": "physical-interpretation",
+        "physical": "source-relative",
+        "qualified": false,
+        "reference_countries": [
+          "VNM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [],
+        "x": 209558,
+        "y": 115463
+      },
+      "exact_retained_centre": {
+        "x": 209558,
+        "y": 115463,
+        "owner": 48624,
+        "longitude": 107.7606554625695,
+        "latitude": 20.964247125505665,
+        "worldcover_tile": "N18E105"
+      },
+      "retained_native_observation": {
+        "target": "gb:VNM:ADM2:81297802B76384767601248",
+        "owner": 48624,
+        "x": 209558,
+        "y": 115463,
+        "membership": {
+          "mapped_land_support": {
+            "status": "outside",
+            "basis": "accepted-native-polygon-intervals"
+          },
+          "mapped_inland_water_support": {
+            "status": "outside",
+            "basis": "retained-explicit-empty-geometry"
+          }
+        },
+        "observed_effect": "outside_land"
+      },
+      "retained_worldcover_observation": {
+        "owner": 48624,
+        "name": "Co To",
+        "x": 209558,
+        "y": 115463,
+        "longitude": 107.7606554625695,
+        "latitude": 20.964247125505665,
+        "tile": "N18E105",
+        "expected_row": 429,
+        "expected_col": 33127,
+        "class_code": 50,
+        "valid_mask": 255,
+        "neighbourhood_complete": true,
+        "neighbourhood_codes": [
+          [
+            50,
+            60,
+            60
+          ],
+          [
+            50,
+            50,
+            50
+          ],
+          [
+            50,
+            50,
+            50
+          ]
+        ],
+        "neighbourhood_masks": [
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            255,
+            255,
+            255
+          ]
+        ]
+      },
+      "map_document_evidence": {
+        "sheet": "04.pdf",
+        "named_island": "Đảo Cô Tô (main Cô Tô island)",
+        "coordinate_placement": {
+          "method": "Visual PDF locator: existing embedded GPTS/LPTS control points projected with stated WGS84UTM48N and four-control affine fit; not scientific registration correction or candidate movement",
+          "pdf_point": [
+            1237.959345399975,
+            813.3430799682419
+          ],
+          "thumbnail_scale": 0.45,
+          "thumbnail_point": [
+            557.0817054299888,
+            1415.9956140142913
+          ],
+          "land_and_location_evidence_status": "pilot proposed; not qualified"
+        },
+        "retained_visual_observation": "Centre placement falls in pale land/emerged-island fill with onshore terrain/road context, not a marine conservation-zone fill. Human document inspection only; no extracted shoreline polygon/point-in-polygon qualification."
+      },
+      "evidence_assessment": "positive-terrestrial-location-evidence-for-further-review",
+      "actual_disposition": "retain-original-physical-interpretation-hold",
+      "qualified": false,
+      "accepted": false,
+      "repair_credit": 0,
+      "explicit_unresolved_question": "Does the original2020district centre represent emerged main-island terrestrial footprint in the mapped source vintage, and what source/shoreline registration or vintage difference explains positive2020map+WC observations against retained GSHHGoutside and absent2008ADM1 membership?",
+      "source_vintage_context": {
+        "original_ADM2_represented_year": 2020,
+        "original_ADM1_represented_year": 2008,
+        "WorldCover_observation_year": 2020,
+        "official_map_approval": "2020-05-19",
+        "official_map_actual_shoreline_observation_date": "not established",
+        "GSHHG_version": "2.3.7",
+        "GSHHG_local_observation_date": "heterogeneous; exact component shoreline observation date unestablished"
+      },
+      "scientific_review_disposition_proposal": {
+        "type": "explicit-unresolved-source-interpretation-question",
+        "original_hold_preserved": true,
+        "root_adoption_receipt": "not supplied by this report"
+      }
+    },
+    {
+      "original_key": {
+        "owner": 48624,
+        "y": 115463,
+        "x": 209559
+      },
+      "target": "gb:VNM:ADM2:81297802B76384767601248",
+      "original_package": "gb-VNM-ADM2--physical-interpretation",
+      "original_frozen_interval_matches": [
+        [
+          115463,
+          209555,
+          209560,
+          [
+            48624
+          ],
+          [
+            65284
+          ],
+          "source-relative"
+        ]
+      ],
+      "original_source_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65284
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48624
+        ],
+        "declared_sids": [
+          65284
+        ],
+        "flags": [],
+        "hold_reasons": [
+          "source-relative-physical-interpretation-unresolved"
+        ],
+        "owner": 48624,
+        "package": "physical-interpretation",
+        "physical": "source-relative",
+        "qualified": false,
+        "reference_countries": [
+          "VNM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [],
+        "x": 209559,
+        "y": 115463
+      },
+      "exact_retained_centre": {
+        "x": 209559,
+        "y": 115463,
+        "owner": 48624,
+        "longitude": 107.76202863834362,
+        "latitude": 20.964247125505665,
+        "worldcover_tile": "N18E105"
+      },
+      "retained_native_observation": {
+        "target": "gb:VNM:ADM2:81297802B76384767601248",
+        "owner": 48624,
+        "x": 209559,
+        "y": 115463,
+        "membership": {
+          "mapped_land_support": {
+            "status": "outside",
+            "basis": "accepted-native-polygon-intervals"
+          },
+          "mapped_inland_water_support": {
+            "status": "outside",
+            "basis": "retained-explicit-empty-geometry"
+          }
+        },
+        "observed_effect": "outside_land"
+      },
+      "retained_worldcover_observation": {
+        "owner": 48624,
+        "name": "Co To",
+        "x": 209559,
+        "y": 115463,
+        "longitude": 107.76202863834362,
+        "latitude": 20.964247125505665,
+        "tile": "N18E105",
+        "expected_row": 429,
+        "expected_col": 33144,
+        "class_code": 50,
+        "valid_mask": 255,
+        "neighbourhood_complete": true,
+        "neighbourhood_codes": [
+          [
+            50,
+            50,
+            50
+          ],
+          [
+            50,
+            50,
+            50
+          ],
+          [
+            50,
+            80,
+            80
+          ]
+        ],
+        "neighbourhood_masks": [
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            255,
+            255,
+            255
+          ]
+        ]
+      },
+      "map_document_evidence": {
+        "sheet": "04.pdf",
+        "named_island": "Đảo Cô Tô (main Cô Tô island)",
+        "coordinate_placement": {
+          "method": "Visual PDF locator: existing embedded GPTS/LPTS control points projected with stated WGS84UTM48N and four-control affine fit; not scientific registration correction or candidate movement",
+          "pdf_point": [
+            1254.1590806870408,
+            813.6228177275011
+          ],
+          "thumbnail_scale": 0.45,
+          "thumbnail_point": [
+            564.3715863091684,
+            1415.8697320226245
+          ],
+          "land_and_location_evidence_status": "pilot proposed; not qualified"
+        },
+        "retained_visual_observation": "Centre placement falls in pale land/emerged-island fill with onshore terrain/road context, not a marine conservation-zone fill. Human document inspection only; no extracted shoreline polygon/point-in-polygon qualification."
+      },
+      "evidence_assessment": "positive-terrestrial-location-evidence-for-further-review",
+      "actual_disposition": "retain-original-physical-interpretation-hold",
+      "qualified": false,
+      "accepted": false,
+      "repair_credit": 0,
+      "explicit_unresolved_question": "Does the original2020district centre represent emerged main-island terrestrial footprint in the mapped source vintage, and what source/shoreline registration or vintage difference explains positive2020map+WC observations against retained GSHHGoutside and absent2008ADM1 membership?",
+      "source_vintage_context": {
+        "original_ADM2_represented_year": 2020,
+        "original_ADM1_represented_year": 2008,
+        "WorldCover_observation_year": 2020,
+        "official_map_approval": "2020-05-19",
+        "official_map_actual_shoreline_observation_date": "not established",
+        "GSHHG_version": "2.3.7",
+        "GSHHG_local_observation_date": "heterogeneous; exact component shoreline observation date unestablished"
+      },
+      "scientific_review_disposition_proposal": {
+        "type": "explicit-unresolved-source-interpretation-question",
+        "original_hold_preserved": true,
+        "root_adoption_receipt": "not supplied by this report"
+      }
+    },
+    {
+      "original_key": {
+        "owner": 48624,
+        "y": 115472,
+        "x": 209548
+      },
+      "target": "gb:VNM:ADM2:81297802B76384767601248",
+      "original_package": "gb-VNM-ADM2--physical-interpretation",
+      "original_frozen_interval_matches": [
+        [
+          115472,
+          209548,
+          209550,
+          [
+            48624
+          ],
+          [
+            65284
+          ],
+          "source-relative"
+        ]
+      ],
+      "original_source_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65284
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48624
+        ],
+        "declared_sids": [
+          65284
+        ],
+        "flags": [],
+        "hold_reasons": [
+          "source-relative-physical-interpretation-unresolved"
+        ],
+        "owner": 48624,
+        "package": "physical-interpretation",
+        "physical": "source-relative",
+        "qualified": false,
+        "reference_countries": [
+          "VNM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [],
+        "x": 209548,
+        "y": 115472
+      },
+      "exact_retained_centre": {
+        "x": 209548,
+        "y": 115472,
+        "owner": 48624,
+        "longitude": 107.74692370482825,
+        "latitude": 20.952706188614822,
+        "worldcover_tile": "N18E105"
+      },
+      "retained_native_observation": {
+        "target": "gb:VNM:ADM2:81297802B76384767601248",
+        "owner": 48624,
+        "x": 209548,
+        "y": 115472,
+        "membership": {
+          "mapped_land_support": {
+            "status": "outside",
+            "basis": "accepted-native-polygon-intervals"
+          },
+          "mapped_inland_water_support": {
+            "status": "outside",
+            "basis": "retained-explicit-empty-geometry"
+          }
+        },
+        "observed_effect": "outside_land"
+      },
+      "retained_worldcover_observation": {
+        "owner": 48624,
+        "name": "Co To",
+        "x": 209548,
+        "y": 115472,
+        "longitude": 107.74692370482825,
+        "latitude": 20.952706188614822,
+        "tile": "N18E105",
+        "expected_row": 567,
+        "expected_col": 32963,
+        "class_code": 50,
+        "valid_mask": 255,
+        "neighbourhood_complete": true,
+        "neighbourhood_codes": [
+          [
+            80,
+            50,
+            50
+          ],
+          [
+            50,
+            50,
+            80
+          ],
+          [
+            50,
+            50,
+            10
+          ]
+        ],
+        "neighbourhood_masks": [
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            255,
+            255,
+            255
+          ]
+        ]
+      },
+      "map_document_evidence": {
+        "sheet": "04.pdf",
+        "retained_observation": "Class50centre appears exterior to depicted southern main-island shore; cause unresolved."
+      },
+      "evidence_assessment": "cross-source-disagreement-preserve-unknown",
+      "actual_disposition": "retain-original-physical-interpretation-hold",
+      "qualified": false,
+      "accepted": false,
+      "repair_credit": 0,
+      "explicit_unresolved_question": "Why does this unchanged centre have a valid2020built-up raster observation while the saved official2020map locator appears exterior to the southern Cô Tô shore: classification, registration, shoreline vintage or a specific structure? Physical category is unknown until that discrepancy is resolved.",
+      "source_vintage_context": {
+        "original_ADM2_represented_year": 2020,
+        "original_ADM1_represented_year": 2008,
+        "WorldCover_observation_year": 2020,
+        "official_map_approval": "2020-05-19",
+        "official_map_actual_shoreline_observation_date": "not established",
+        "GSHHG_version": "2.3.7",
+        "GSHHG_local_observation_date": "heterogeneous; exact component shoreline observation date unestablished"
+      },
+      "scientific_review_disposition_proposal": {
+        "type": "explicit-unresolved-source-interpretation-question",
+        "original_hold_preserved": true,
+        "root_adoption_receipt": "not supplied by this report"
+      }
+    },
+    {
+      "original_key": {
+        "owner": 48624,
+        "y": 115472,
+        "x": 209549
+      },
+      "target": "gb:VNM:ADM2:81297802B76384767601248",
+      "original_package": "gb-VNM-ADM2--physical-interpretation",
+      "original_frozen_interval_matches": [
+        [
+          115472,
+          209548,
+          209550,
+          [
+            48624
+          ],
+          [
+            65284
+          ],
+          "source-relative"
+        ]
+      ],
+      "original_source_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65284
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48624
+        ],
+        "declared_sids": [
+          65284
+        ],
+        "flags": [],
+        "hold_reasons": [
+          "source-relative-physical-interpretation-unresolved"
+        ],
+        "owner": 48624,
+        "package": "physical-interpretation",
+        "physical": "source-relative",
+        "qualified": false,
+        "reference_countries": [
+          "VNM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [],
+        "x": 209549,
+        "y": 115472
+      },
+      "exact_retained_centre": {
+        "x": 209549,
+        "y": 115472,
+        "owner": 48624,
+        "longitude": 107.74829688060237,
+        "latitude": 20.952706188614822,
+        "worldcover_tile": "N18E105"
+      },
+      "retained_native_observation": {
+        "target": "gb:VNM:ADM2:81297802B76384767601248",
+        "owner": 48624,
+        "x": 209549,
+        "y": 115472,
+        "membership": {
+          "mapped_land_support": {
+            "status": "outside",
+            "basis": "accepted-native-polygon-intervals"
+          },
+          "mapped_inland_water_support": {
+            "status": "outside",
+            "basis": "retained-explicit-empty-geometry"
+          }
+        },
+        "observed_effect": "outside_land"
+      },
+      "retained_worldcover_observation": {
+        "owner": 48624,
+        "name": "Co To",
+        "x": 209549,
+        "y": 115472,
+        "longitude": 107.74829688060237,
+        "latitude": 20.952706188614822,
+        "tile": "N18E105",
+        "expected_row": 567,
+        "expected_col": 32979,
+        "class_code": 80,
+        "valid_mask": 255,
+        "neighbourhood_complete": true,
+        "neighbourhood_codes": [
+          [
+            10,
+            10,
+            80
+          ],
+          [
+            60,
+            80,
+            80
+          ],
+          [
+            80,
+            80,
+            80
+          ]
+        ],
+        "neighbourhood_masks": [
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            255,
+            255,
+            255
+          ]
+        ]
+      },
+      "map_document_evidence": {
+        "coordinate_placement_reviewed": false,
+        "visual_placement_claim": null,
+        "reason": "No retained mapped coordinate placement or centre-specific official-map visual assessment is supplied for this key."
+      },
+      "evidence_assessment": "source-relative-physical-category-unresolved;observations-not-authority",
+      "actual_disposition": "retain-original-physical-interpretation-hold",
+      "qualified": false,
+      "accepted": false,
+      "repair_credit": 0,
+      "explicit_unresolved_question": "What physical source interpretation applies to this unchanged original2020ADM2 member centre given absent2008ADM1 membership and retained GSHHGmapped-land/water outside? Retained WorldCover class is an observation only; no exact official-map placement has been reviewed for this key.",
+      "source_vintage_context": {
+        "original_ADM2_represented_year": 2020,
+        "original_ADM1_represented_year": 2008,
+        "WorldCover_observation_year": 2020,
+        "official_map_approval": "2020-05-19",
+        "official_map_actual_shoreline_observation_date": "not established",
+        "GSHHG_version": "2.3.7",
+        "GSHHG_local_observation_date": "heterogeneous; exact component shoreline observation date unestablished"
+      },
+      "scientific_review_disposition_proposal": {
+        "type": "explicit-unresolved-source-interpretation-question",
+        "original_hold_preserved": true,
+        "root_adoption_receipt": "not supplied by this report"
+      }
+    }
+  ],
+  "retained_semantic_gates": {
+    "target_metadata_semantic_review": {
+      "continent": "Asia",
+      "decision_index": 1903,
+      "evidence_file": "geographic-decisions",
+      "status": "open"
+    },
+    "selected_parent_record": {
+      "id": "framework:province:quang-ninh:2ff0c77cb3e5",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 2,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "evidence": [
+            {
+              "inspected_fact": "Current declared purpose: Named source administrative unit grouped within this geographic area; exact current parent framework:area:vietnam:52cf854a517c. This declaration alone is not semantic approval.",
+              "title": "Natural Earth admin-1",
+              "url": "https://www.geoboundaries.org/"
+            },
+            {
+              "inspected_fact": "Actual location source gb:VNM:ADM2; role District; reference vintage 2020; license Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO). Source feature/member identifiers were inspected separately from ADM-level labels.",
+              "title": "Viet Nam",
+              "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/VNM/ADM2/geoBoundaries-VNM-ADM2.geojson"
+            }
+          ],
+          "rationale": "Actual member audit: 2 locations, roles {'District': 2}, source vintages {'2020': 2}. Current declared purpose is Named source administrative unit grouped within this geographic area. Name/source correspondence was checked where a pinned cache exists; that alone does not prove local-scale consistency or full original-parent correspondence.",
+          "remaining_reasons": [
+            "members have source parent overlap below 0.8; full-parent validation required",
+            "declared parent source lacks geoBoundaries canonical registry; investigate source-specific role",
+            "parent canonical role unknown or unavailable; no ADM-number tier inference",
+            "Exact members requiring stronger parent correspondence: gb:VNM:ADM2:81297802B76384767601248"
+          ]
+        },
+        "source": "Natural Earth admin-1",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Quảng Ninh",
+      "parent_id": "framework:area:vietnam:52cf854a517c"
+    },
+    "retained_source_review_records": [
+      {
+        "actual_role": "District",
+        "evidence": [
+          {
+            "inspected_fact": "Actual location source gb:VNM:ADM2; role District; reference vintage 2020; license Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO). Source feature/member identifiers were inspected separately from ADM-level labels.",
+            "title": "Viet Nam",
+            "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/VNM/ADM2/geoBoundaries-VNM-ADM2.geojson"
+          }
+        ],
+        "ids": [
+          "gb:VNM:ADM2:81297802B5756602808944",
+          "gb:VNM:ADM2:81297802B76384767601248"
+        ],
+        "province_id": "framework:province:quang-ninh:2ff0c77cb3e5",
+        "rationale": "Current province Quảng Ninh (framework:province:quang-ninh:2ff0c77cb3e5); inspected exact source identifiers for 2 locations with actual role District, source gb:VNM:ADM2, reference vintages 2020. Pinned cache contains 708 features; 2 of these location records have entirely matched declared-source member IDs. source parent overlap below 95% diagnostic. Source-ID correspondence does not independently approve local geographic purpose, original-footprint retention, administrative reforms or settlement/rank. Exact review stays open until those tests have sourced outcomes.",
+        "source_id": "gb:VNM:ADM2",
+        "specific_reasons": [
+          "source parent overlap below 95% diagnostic"
+        ],
+        "status": "open"
+      }
+    ]
+  },
+  "complete_source_vantage": {
+    "source_properties": {
+      "shapeName": "Co To",
+      "shapeISO": "",
+      "shapeID": "81297802B76384767601248",
+      "shapeGroup": "VNM",
+      "shapeType": "ADM2"
+    },
+    "raw_original_geometry_structure": {
+      "type": "MultiPolygon",
+      "polygon_components": 25,
+      "interior_rings": 0,
+      "stored_coordinate_pairs": 314,
+      "coordinate_extrema_lon_lat": [
+        107.73111615400006,
+        20.943693642000028,
+        108.02140664800004,
+        21.249075830000038
+      ]
+    },
+    "consumed_equals_complete_original_feature": true,
+    "physical_stage_consumed_equals_complete_original_feature": true,
+    "held_source_parent_coverage": [
+      {
+        "source_ids_and_names": [],
+        "cells": 366
+      },
+      {
+        "source_ids_and_names": [
+          "gb:VNM:ADM1:63759600B48704001246073 Quảng Ninh"
+        ],
+        "cells": 54
+      }
+    ],
+    "retained_physical_issues": []
+  },
+  "next_action": {
+    "type": "evidence-review-and-contract-gap-resolution-before-science",
+    "finite_cells": [
+      {
+        "owner": 48624,
+        "y": 115463,
+        "x": 209558
+      },
+      {
+        "owner": 48624,
+        "y": 115463,
+        "x": 209559
+      }
+    ],
+    "decision_requested": "Review the two saved document placements and dated Cô Tô/Quảng Ninh correspondence as positive evidence; retain physical eligibility until the existing source/physical consumer can admit the evidence without weakening its contract.",
+    "prerequisites": [
+      "Independent exact document-placement and legend review, preserving embeddedWGS84 versus printedVN2000 distinction and unmeasured registration/shoreline date limits.",
+      "Exact original-component/member and full-parent correspondence, including the open mixed CatHai/CoTo retained Quảng Ninh parent review; a name match does not close this.",
+      "Explain conflict with complete retained GSHHG mapped-land support; outside both supports is not a water classification.",
+      "Root identifies accepted evidence consumer/eligibility route and acceptance criteria before any native/GIS run.",
+      "For an actual scientific run: exact program+input pins, finite whole-target/query contract, complete decoded/live/output charge, call/work counts, fresh host admission and no concurrent charge conflict, bounded execution receipt, independent actual-result review.",
+      "After qualification only: fresh selected-owner-zero and conservation proof, exact original package join, reviewed acceptance and integration."
+    ],
+    "launch_authorized_by_this_report": false
+  },
+  "limits": [
+    "Read-only retained records, whole-source record equality and integer interval joins only; no new spatial predicate, raster read, GIS/native/source/GSHHG replay, fetch, allocator or repository edit.",
+    "Rendered map and crop were visually inspected; retained coordinate locator was reviewed as a document locator and was not independently recomputed or certified as a shoreline-registration method.",
+    "No new tolerance, source/parent waiver, country predicate, 3x3 threshold, universal nonwater-to-land rule or water classification.",
+    "All genuine source, parent, reference and territorial holds are preserved, including all physical235 holds and territorial102 holds.",
+    "Seven exactkeys completely cover two original intervals; three retained map visual/placement records only. Other24873physicalcells are outside this finite report. No current-owner-zero proof or accepted package completion."
+  ],
+  "original_review_criterion": "Classify each interval with a reusable source interpretation or an explicit unresolved question. Physical-mask disagreement alone does not reject a source-backed river/location assignment.",
+  "acceptance_separation": {
+    "scientific_question_review": "independent review requested",
+    "adopted_into_accepted_original_disposition_keyset": false,
+    "ownership_or_constructor_eligibility_accepted": false,
+    "global_physical_accepted_disposition_coverage": "UNTRACKED; not wholly unreviewed"
+  },
+  "complete_original_interval_questions": [
+    {
+      "original_interval": [
+        115463,
+        209555,
+        209560,
+        [
+          48624
+        ],
+        [
+          65284
+        ],
+        "source-relative"
+      ],
+      "cell_count": 5,
+      "question": "What source-vintage/physical interpretation explains all five originalADM2centres lying outside retainedGSHHGland/water and olderADM1membership? Two have retained positive main-island map placements; other three have no reviewed map placement. Neither those observations nor any WorldCover class supplies physical authority for the interval.",
+      "held": true
+    },
+    {
+      "original_interval": [
+        115472,
+        209548,
+        209550,
+        [
+          48624
+        ],
+        [
+          65284
+        ],
+        "source-relative"
+      ],
+      "cell_count": 2,
+      "question": "What physical footprint and source-vintage/registration interpretation explains these originalADM2centres outside retainedGSHHGland/water and olderADM1membership? First has class50versusmap-exterior disagreement; second has no reviewed map placement. Physical categories remain unknown.",
+      "held": true
+    }
+  ]
+}
