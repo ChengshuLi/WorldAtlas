@@ -656,11 +656,31 @@ test('old-Git promisor fatal is avoided even when every selected blob is absent'
   checkUnfetched();
 });
 
+// Build an actually incomplete object store regardless of Git's packing policy.
+// Only synthetic fixture objects are rewritten; retain commit-graph metadata.
+function removeFixtureObject(repo, git, missing) {
+  const rows = git('cat-file', '--batch-all-objects', '--batch-check=%(objectname) %(objecttype)')
+    .trim().split('\n').map(row => row.split(' '));
+  assert.ok(rows.some(([oid]) => oid === missing));
+  const retained = rows.filter(([oid]) => oid !== missing).map(([oid, type]) => ({oid, type,
+    bytes: execFileSync('git', ['-C', repo, 'cat-file', type, oid])}));
+  const objects = path.join(repo, '.git/objects');
+  for (const name of fs.readdirSync(objects)) {
+    if (name !== 'info') fs.rmSync(path.join(objects, name), {recursive: true, force: true});
+  }
+  for (const {oid, type, bytes} of retained) {
+    assert.equal(execFileSync('git', ['-C', repo, 'hash-object', '-w', '-t', type, '--stdin'],
+      {input: bytes, encoding: 'utf8'}).trim(), oid);
+  }
+  assert.notEqual(spawnSync('git', ['-C', repo, 'cat-file', '-e', missing],
+    {env: {...process.env, GIT_NO_LAZY_FETCH: '1'}}).status, 0);
+}
+
 test('unavailable exact commit fails without fetching or claiming a complete selected inventory', t => {
   const {repo, git, manager, head} = fixture(t);
+  git('repack', '-ad');
   git('commit-graph', 'write', '--reachable');
-  const object = path.join(repo, '.git/objects', head.slice(0, 2), head.slice(2));
-  fs.unlinkSync(object);
+  removeFixtureObject(repo, git, head);
   const trace = path.join(repo, 'commit-inspection.trace');
   const before = fs.readdirSync(path.join(repo, '.git/objects'), {recursive: true}).sort();
   const result = spawnSync(process.execPath, [new URL('../scripts/local-workspace.mjs', import.meta.url).pathname,
@@ -709,7 +729,8 @@ test('missing root and descendant tree metadata are classified before any blob s
   for (const treePath of ['', 'scripts', 'data/other']) {
     const {repo, git, manager, head} = fixture(t);
     const oid = git('rev-parse', treePath ? `HEAD:${treePath}` : 'HEAD^{tree}').trim();
-    fs.unlinkSync(path.join(repo, '.git/objects', oid.slice(0, 2), oid.slice(2)));
+    git('repack', '-ad');
+    removeFixtureObject(repo, git, oid);
     const trace = path.join(repo, 'tree-inspection.trace');
     const refs = git('show-ref');
     const before = fs.readdirSync(path.join(repo, '.git/objects'), {recursive: true}).sort();
