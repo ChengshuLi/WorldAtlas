@@ -628,6 +628,16 @@ function reconstructionResidualPointsets(result) {
 // Source-target evidence uses the same retained registry and literal native
 // patch route. It has no invented original-gap inventory or addition polygon.
 export function qualifySourceTargetNativeAuthority(reader, preimage, binding) {
+ return evaluateSourceTargetNativeAuthority(reader, preimage, binding, false);
+}
+
+// Same authenticated preparation and predicates as qualification. This returns
+// observations only, before any authority ledger or native proof construction.
+export function diagnoseSourceTargetNativeAuthority(reader, preimage, binding) {
+ return evaluateSourceTargetNativeAuthority(reader, preimage, binding, true);
+}
+
+function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnostic) {
  demand(preimage?.version===1&&preimage.kind==='source-target-native-rule-v1'
   &&Object.keys(preimage).sort().join(',')==='kind,native_patch,source_evidence,version'
   &&binding?.version===1&&binding.kind==='source-target-native-custody-v1'
@@ -796,6 +806,20 @@ export function qualifySourceTargetNativeAuthority(reader, preimage, binding) {
   demand(!prior||same(prior,rows),'Conflicting sibling native coverage class bindings');
   coverageRowsByOwner.set(target.pixelIndex,rows);
  }
+ const diagnosticRows=new Map(); let firstFailure=null,traceReserve=0;
+ if(diagnostic){
+  const cells=proposed.rows.reduce((n,row)=>n+row.runs.reduce((m,r)=>m+r[1]-r[0],0),0);
+  // Retain exact requested-centre reason/output spans, never whole-world traces.
+  traceReserve=4096+cells*512+proposed.rows.length*128
+   +6*valueBytes({preimage,native_contract:evidence.native_contract}).length;
+  demand(Number.isSafeInteger(traceReserve)&&reader.used+traceReserve<=reader.phaseLimit,
+   'Complete native diagnostic trace exceeds allowance');reader.used+=traceReserve;
+ }
+ const recordDiagnostic=(y,start,end,owner,reason)=>{
+  const runs=diagnosticRows.get(y)??[],prior=runs.at(-1);
+  if(prior&&prior[1]===start&&prior[2]===owner&&prior[3]===reason)prior[1]=end;
+  else runs.push([start,end,owner,reason]);diagnosticRows.set(y,runs);
+ };
  const checked=new Set(),families=new Set();
  for(const family of evidence.families){
   demand(typeof family.source_id==='string'&&!families.has(family.source_id),'Duplicate source family');families.add(family.source_id);
@@ -900,8 +924,10 @@ export function qualifySourceTargetNativeAuthority(reader, preimage, binding) {
    // by selectedAdditiveRows and the emitted native patch application.
    const allowed=deriveSourceTargetNativeDelta({targets:[...resolvedTargets.values()].filter(target=>target.source_family===family.source_id).map(({id,pixelIndex})=>({id,pixelIndex})),
     sourceFeatures,coverageFeatures,territorialExclusions:exclusions,size:262166,latitudes,rowStart,rowEnd,
+    ...(diagnostic?{diagnosticRows:rows.map(row=>({y:row.y,runs:row.runs.filter(r=>selectedOwners.has(r[2]))})).filter(row=>row.runs.length)}:{}),
     ownerRows:Array.from({length:rowEnd-rowStart},(_,i)=>({y:rowStart+i,complete_owner_intervals:[]}))});
    const allowedRows=new Map(allowed.rows.map(row=>[row.y,row.runs]));
+   const decisionRows=diagnostic?new Map(allowed.diagnostic_rows.map(row=>[row.y,row.runs])):null;
    const classAllowed=new Map();let classReserve=0;
    for(const kind of ['mapped_land_support','mapped_inland_water_support'])
     if(selected.some(t=>coverageRowsByOwner.has(t.pixelIndex))){
@@ -924,6 +950,26 @@ export function qualifySourceTargetNativeAuthority(reader, preimage, binding) {
      classAllowed.set(kind,new Map(permitted.rows.map(row=>[row.y,row.runs])));
     }
    for(const row of rows)for(const run of row.runs)if(selectedOwners.has(run[2])){
+    if(diagnostic){
+     const cellReasons=[];
+     for(let x=run[0];x<run[1];x++){
+      const sourceDecision=(decisionRows.get(row.y)??[]).find(span=>span[2]===run[2]&&span[0]<=x&&x<span[1]);
+      demand(sourceDecision,'Incomplete requested native diagnostic trace');
+      let reason=residualHits.has(run[2]+':'+row.y+':'+x)?'physical-reconstruction-residual-or-conflict':sourceDecision[3];
+      const segment=coverageRowsByOwner.get(run[2])?.find(r=>r.y===row.y)?.runs.find(span=>span[0]<=x&&x<span[1]);
+      if(reason==='assigned_cells'&&segment&&!(classAllowed.get(segment[2])?.get(row.y)??[])
+       .some(span=>span[2]===run[2]&&span[0]<=x&&x<span[1]))reason='declared-land-water-class-support';
+      recordDiagnostic(row.y,x,x+1,run[2],reason);cellReasons.push(reason);
+     }
+     if(!firstFailure){
+      const residual=cellReasons.includes('physical-reconstruction-residual-or-conflict');
+      const covered=(allowedRows.get(row.y)??[]).some(span=>span[2]===run[2]&&span[0]<=run[0]&&span[1]>=run[1]);
+      const classFailure=cellReasons.includes('declared-land-water-class-support');
+      if(residual||!covered||classFailure)firstFailure={y:row.y,run:[...run],predicate:residual
+       ?'physical-reconstruction-residual-or-conflict':!covered?'unique-source-target-coverage':'declared-land-water-class-support'};
+     }
+     checked.add(row.y+':'+run.join(':'));continue;
+    }
     for(let x=run[0];x<run[1];x++)demand(!residualHits.has(run[2]+':'+row.y+':'+x),
      'Requested native cells intersect a physical reconstruction residual or conflict witness');
     demand((allowedRows.get(row.y)??[]).some(span=>span[2]===run[2]&&span[0]<=run[0]&&span[1]>=run[1]),
@@ -938,6 +984,27 @@ export function qualifySourceTargetNativeAuthority(reader, preimage, binding) {
   }
  }
  demand(checked.size===proposed.rows.reduce((n,row)=>n+row.runs.length,0),'Unqualified proposed native intervals');
+ if(diagnostic){
+  const decisions=[...diagnosticRows].sort((a,b)=>a[0]-b[0]).map(([y,runs])=>({y,runs:runs.sort((a,b)=>a[0]-b[0])}));
+  const partition=accepted=>decisions.map(row=>{const runs=[];
+   for(const [start,end,owner,reason]of row.runs)if((reason==='assigned_cells')===accepted){
+    const prior=runs.at(-1);if(prior&&prior[1]===start&&prior[2]===owner)prior[1]=end;else runs.push([start,end,owner]);
+   }return {y:row.y,runs};}).filter(row=>row.runs.length);
+  const supported=partition(true),held=partition(false),count=rows=>rows.reduce((n,row)=>n+row.runs.reduce((m,r)=>m+r[1]-r[0],0),0);
+  const requested=count(proposed.rows),supportedCells=count(supported),heldCells=count(held);
+  demand(supportedCells+heldCells===requested,'Incomplete native diagnostic partition');
+  const result={version:1,kind:'source-target-native-diagnostic-v1',requested_rows:proposed.rows,
+   supported_rows:supported,held_rows:held,decision_rows:decisions,first_failure:firstFailure,
+   requested_cells:requested,supported_cells:supportedCells,held_cells:heldCells,
+   original_pins:{source_evidence:binding.source_evidence,native_patch:binding.native_patch},
+   rule_sha256:valueSha(preimage),native_contract:evidence.native_contract,
+   limitations:['Native diagnostic screening only; no authority products, current-owner-zero, acceptance or whole-source clearance.',
+    'All original source, physical, query, witness and territorial limits remain retained.']};
+  const output=valueBytes(result).length;
+  demand(output<=traceReserve&&Number.isSafeInteger(reader.outputBytes)&&output<=reader.outputBytes,
+   'Complete native diagnostic output exceeds allowance');
+  return result;
+ }
  const ledgerRows=[...resolvedTargets.values()].map(target=>{
   const native_rows=rowsByOwner.get(target.pixelIndex)??[];demand(native_rows.length>0,'Zero-cell source-target repair');
   let west=262166,east=0;for(const row of native_rows)for(const run of row.runs){west=Math.min(west,run[0]);east=Math.max(east,run[1]-1);}
