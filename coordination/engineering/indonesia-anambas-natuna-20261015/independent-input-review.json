@@ -1,0 +1,428 @@
+{
+  "publication_projection": "Only local artifact path fields replaced by logical basenames; complete independent dispositions, checks, source pins, hashes and limits retained. Raw review hashes recorded.",
+  "reviews": [
+    {
+      "raw_review_bytes": 11898,
+      "raw_review_sha256": "c620605869182d14386a074a4554f9537c8af4f7e41ca3197ce519133f455536",
+      "review": {
+        "version": 1,
+        "reviewer": "/root/raja_input_review_cont",
+        "disposition": "PASS whole original/current selected two-stage preparation with all historical context and class labels preserved. No scientific qualification or clearance.",
+        "stages": [
+          {
+            "scope": "anambas6619",
+            "target_id": "gb:IDN:ADM2:22746128B99951880476592",
+            "owner": 23206,
+            "own_source_sid": 36412,
+            "source_ordinal": 152,
+            "selected_ordinal": 1104,
+            "stage_bytes": 93366,
+            "stage_sha256": "60e635a531d68c784404b8135366227815933af02c4d3a6443eb25313685cc73",
+            "stage_git_blob_oid": "98091b8d6ac816872b3337777e0ecc37da9f40ce",
+            "original_context_cells": 6619,
+            "repair_land_request_cells": 3031,
+            "source_relative_cells_held": 3588,
+            "metadata_hierarchy_overlap": 0.902548,
+            "semantic_review": {
+              "status": "open",
+              "continent": "Asia",
+              "decision_index": 1942,
+              "evidence_file": "geographic-decisions"
+            }
+          },
+          {
+            "scope": "natuna3612",
+            "target_id": "gb:IDN:ADM2:22746128B6637644559706",
+            "owner": 23006,
+            "own_source_sid": 36623,
+            "source_ordinal": 363,
+            "selected_ordinal": 1310,
+            "stage_bytes": 60070,
+            "stage_sha256": "8418622e1a0e07c96a2627e70b42c0ed35a8c8e605774eed1ce9ff7f2ab95e31",
+            "stage_git_blob_oid": "0cece258f35df8e75d2eb0d310d1766c5cb2a431",
+            "original_context_cells": 3612,
+            "repair_land_request_cells": 1640,
+            "source_relative_cells_held": 1972,
+            "metadata_hierarchy_overlap": 0.976981,
+            "semantic_review": {
+              "status": "open",
+              "continent": "Asia",
+              "decision_index": 1943,
+              "evidence_file": "geographic-decisions"
+            }
+          }
+        ],
+        "source_sid_records": [
+          {
+            "source_index": 36253,
+            "family_index": 152,
+            "source_id": "gb:IDN:ADM1:65028918B90123187256494",
+            "ordinal": 27,
+            "owners": [],
+            "name": "Riau Islands",
+            "geometry_status": "raw-native-supported"
+          },
+          {
+            "source_index": 36412,
+            "family_index": 153,
+            "source_id": "gb:IDN:ADM2:22746128B99951880476592",
+            "ordinal": 152,
+            "owners": [
+              23206
+            ],
+            "name": "Kepulauan Anambas",
+            "geometry_status": "raw-native-supported"
+          },
+          {
+            "source_index": 36623,
+            "family_index": 153,
+            "source_id": "gb:IDN:ADM2:22746128B6637644559706",
+            "ordinal": 363,
+            "owners": [
+              23006
+            ],
+            "name": "Natuna",
+            "geometry_status": "raw-native-supported"
+          }
+        ],
+        "verified_whole_inputs": [
+          {
+            "commit": "5ab660cb68821e6b719f1b86819069ecac419ce1",
+            "artifact_name": "gb-IDN-ADM2-000.bin.gz",
+            "git_blob_oid": "d918c74989043677364ff43f9fbec3d1f0d3a3af",
+            "bytes": 3051391,
+            "sha256": "ef394916ba97454b5592e66eba1df67199731ce7d9636cc3968843801ae904a8",
+            "decoded_bytes": 11002896,
+            "decoded_sha256": "146653d488331086ddc43d159a261b01ea6dd08c7ed422e34a9886c3c690430c"
+          },
+          {
+            "commit": "8c4199fd6455246b98a6fd4b7a6d0f708b9afc70",
+            "artifact_name": "part-10.json",
+            "git_blob_oid": "84b4cf537b801c7f6d3840173c49b7e4293a139d",
+            "bytes": 5144571,
+            "sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+          },
+          {
+            "commit": "2ec1f33cad4b02f2e9bc9e54072e65b5837257dc",
+            "artifact_name": "block-031.json.gz",
+            "git_blob_oid": "12a6bad5bff24b19204b0e176339ce116150a055",
+            "bytes": 141173,
+            "sha256": "08df556a487bd24da8b8c25e0f02f71fc6ad0e4661cf7c00056e8b4f1f9de7f9"
+          },
+          {
+            "commit": "2ec1f33cad4b02f2e9bc9e54072e65b5837257dc",
+            "artifact_name": "block-032.json.gz",
+            "git_blob_oid": "bbc4c7e3ea013c47918d8fa7a38be9c5accbc38d",
+            "bytes": 231217,
+            "sha256": "ff5a8e59b798f1cb61135369efadd8ad6a0eeafd9d40ed33764c7ebb12ae63a8"
+          },
+          {
+            "commit": "2ec1f33cad4b02f2e9bc9e54072e65b5837257dc",
+            "artifact_name": "block-031.json.gz",
+            "git_blob_oid": "4c3a6609b36b20680b0b1e453b33f5182ea350ce",
+            "bytes": 109037,
+            "sha256": "4a36a26c565457a79a7079f71f028a31bb674dcdbf7b2e82d0ae647cbd827b47"
+          },
+          {
+            "commit": "2ec1f33cad4b02f2e9bc9e54072e65b5837257dc",
+            "artifact_name": "block-032.json.gz",
+            "git_blob_oid": "0745ad217fe8625c89c936850e2aebfe582976d0",
+            "bytes": 198520,
+            "sha256": "d08e06fd93ba1fce7e63ef34e2222adc42a39c0b46796f4f2284755c607e8aa6"
+          },
+          {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "artifact_name": "source-feature-roster.json.gz",
+            "git_blob_oid": "e6e380ec13cd4bcc1d24399a76bfa85ca5805b26",
+            "bytes": 1844315,
+            "sha256": "87f2d47e104b3af640351e747d8300d0068a1be23caab9e80558c3f8914eb4aa"
+          },
+          {
+            "commit": "5ab660cb68821e6b719f1b86819069ecac419ce1",
+            "artifact_name": "owners.json.gz",
+            "mode": "100644",
+            "git_blob_oid": "9c44513df64995d417dd3832ae604c703e84a506",
+            "bytes": 2663523,
+            "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+            "decoded_bytes": 11096191,
+            "decoded_sha256": "a8086008b7a072dd86483720a2a166785229753422769dbbe0749497d870f428"
+          }
+        ],
+        "checks": [
+          {
+            "check": "whole immutable body coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IDN-ADM2-000.bin.gz",
+            "pass": true
+          },
+          {
+            "check": "complete original source decoded pin",
+            "pass": true
+          },
+          {
+            "check": "complete original family519 CRS84",
+            "pass": true
+          },
+          {
+            "check": "whole immutable body data/geography/part-10.json",
+            "pass": true
+          },
+          {
+            "check": "whole selected accepted part1500",
+            "pass": true
+          },
+          {
+            "check": "whole immutable body coordination/engineering/indonesia-adm2-current-cell-20261014/source-investigation-v1/consumed-inputs/extraction/repair/block-031.json.gz",
+            "pass": true
+          },
+          {
+            "check": "whole immutable body coordination/engineering/indonesia-adm2-current-cell-20261014/source-investigation-v1/consumed-inputs/extraction/repair/block-032.json.gz",
+            "pass": true
+          },
+          {
+            "check": "whole immutable body coordination/engineering/indonesia-adm2-current-cell-20261014/source-investigation-v1/consumed-inputs/extraction/physical/block-031.json.gz",
+            "pass": true
+          },
+          {
+            "check": "whole immutable body coordination/engineering/indonesia-adm2-current-cell-20261014/source-investigation-v1/consumed-inputs/extraction/physical/block-032.json.gz",
+            "pass": true
+          },
+          {
+            "check": "exact retained original context subset",
+            "pass": true
+          },
+          {
+            "check": "whole immutable body coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz",
+            "pass": true
+          },
+          {
+            "check": "three complete source SID records found",
+            "pass": true
+          },
+          {
+            "check": "parent SID36253 is exact Riau Islands ADM1",
+            "pass": true
+          },
+          {
+            "check": "whole immutable body coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/owners.json.gz",
+            "pass": true
+          },
+          {
+            "check": "complete canonical owner roster49625",
+            "pass": true
+          },
+          {
+            "check": "anambas6619 exact reviewed stage bytes",
+            "pass": true
+          },
+          {
+            "check": "anambas6619 exact one target/consumed/selected schema",
+            "pass": true
+          },
+          {
+            "check": "anambas6619 whole original literal feature no clip/transform",
+            "pass": true
+          },
+          {
+            "check": "anambas6619 whole selected literal feature unchanged",
+            "pass": true
+          },
+          {
+            "check": "anambas6619 exact country sourceADM2 and current identity",
+            "pass": true
+          },
+          {
+            "check": "anambas6619 exact framework parent and unchanged semantic vintage",
+            "pass": true
+          },
+          {
+            "check": "anambas6619 canonical one-based owner identity join",
+            "pass": true
+          },
+          {
+            "check": "anambas6619 own SID whole source/owner/ordinal join",
+            "pass": true
+          },
+          {
+            "check": "anambas6619 full historical context literal tuples",
+            "pass": true
+          },
+          {
+            "check": "anambas6619 original owner/SID identities unchanged",
+            "pass": true
+          },
+          {
+            "check": "anambas6619 all original class partitions retained",
+            "pass": true
+          },
+          {
+            "check": "anambas6619 exact separate land request and held relative files",
+            "pass": true
+          },
+          {
+            "check": "anambas6619 no physical result or unsupported qualification fields in stage",
+            "pass": true
+          },
+          {
+            "check": "natuna3612 exact reviewed stage bytes",
+            "pass": true
+          },
+          {
+            "check": "natuna3612 exact one target/consumed/selected schema",
+            "pass": true
+          },
+          {
+            "check": "natuna3612 whole original literal feature no clip/transform",
+            "pass": true
+          },
+          {
+            "check": "natuna3612 whole selected literal feature unchanged",
+            "pass": true
+          },
+          {
+            "check": "natuna3612 exact country sourceADM2 and current identity",
+            "pass": true
+          },
+          {
+            "check": "natuna3612 exact framework parent and unchanged semantic vintage",
+            "pass": true
+          },
+          {
+            "check": "natuna3612 canonical one-based owner identity join",
+            "pass": true
+          },
+          {
+            "check": "natuna3612 own SID whole source/owner/ordinal join",
+            "pass": true
+          },
+          {
+            "check": "natuna3612 full historical context literal tuples",
+            "pass": true
+          },
+          {
+            "check": "natuna3612 original owner/SID identities unchanged",
+            "pass": true
+          },
+          {
+            "check": "natuna3612 all original class partitions retained",
+            "pass": true
+          },
+          {
+            "check": "natuna3612 exact separate land request and held relative files",
+            "pass": true
+          },
+          {
+            "check": "natuna3612 no physical result or unsupported qualification fields in stage",
+            "pass": true
+          }
+        ],
+        "method": "Independent actual full Git body/OID/hash JSON and literal feature/interval/roster comparisons only. Lazy fetch and replace objects disabled. No scientific source/physical/native producer, predicate, project import, network or Git mutation.",
+        "limits": [
+          "Selected feature snapshot is exact accepted8c part10; no latest native selected ownership proof.",
+          "Both whole target geometries, source2020 metadata/ADM1-framework mismatches and open semantic reviews remain; no whole parent or legal boundary certificate.",
+          "All5560 relative cells remain held:3588 Anambas and1972 Natuna. Land labels3031+1640 are retained request labels, not inferred positive physical support.",
+          "No physical observations/results from unrelated Riau four-target producer are transferred. Actual whole-target land/water/exterior/query/hierarchy/witness evidence must be produced by accepted stock entry.",
+          "Actual immutable stage publication, complete accepted code/runtime/input closure, fresh ordinary admission, finite stock physical call and distinct actual-result review remain future work.",
+          "Combined two-pair stage array review pending its actual data-only file; individual full pairs independently passed."
+        ]
+      }
+    },
+    {
+      "raw_review_bytes": 3909,
+      "raw_review_sha256": "006cc224bbd882dfda0bf7f7ce79b4ab7624055471b46502f5d2d4ff0b7a2dfa",
+      "review": {
+        "version": 1,
+        "reviewer": "/root/raja_input_review_cont",
+        "disposition": "PASS exact two whole pairs and independent41-check individual source/stage/owner/SID/interval review. Data-only assembly, no physical or native qualification.",
+        "combined_stage": {
+          "logical_name": "anambas-natuna-whole-original-stage-inputs.json",
+          "bytes": 153434,
+          "sha256": "a9daf84f41ba1a4602b594eb8e4b1e4dee7f05f1bcfbeee347e1545d8162824c",
+          "git_blob_oid": "f335ce46d83885c050626288ec81d192eb76404f"
+        },
+        "individual_review": {
+          "artifact_name": "individual-stage-input-review.json",
+          "bytes": 11898,
+          "sha256": "c620605869182d14386a074a4554f9537c8af4f7e41ca3197ce519133f455536",
+          "checks_passed": 41
+        },
+        "original_stages": [
+          {
+            "scope": "anambas6619",
+            "target_id": "gb:IDN:ADM2:22746128B99951880476592",
+            "owner": 23206,
+            "own_source_sid": 36412,
+            "source_ordinal": 152,
+            "selected_ordinal": 1104,
+            "stage_bytes": 93366,
+            "stage_sha256": "60e635a531d68c784404b8135366227815933af02c4d3a6443eb25313685cc73",
+            "stage_git_blob_oid": "98091b8d6ac816872b3337777e0ecc37da9f40ce",
+            "original_context_cells": 6619,
+            "repair_land_request_cells": 3031,
+            "source_relative_cells_held": 3588,
+            "metadata_hierarchy_overlap": 0.902548,
+            "semantic_review": {
+              "status": "open",
+              "continent": "Asia",
+              "decision_index": 1942,
+              "evidence_file": "geographic-decisions"
+            }
+          },
+          {
+            "scope": "natuna3612",
+            "target_id": "gb:IDN:ADM2:22746128B6637644559706",
+            "owner": 23006,
+            "own_source_sid": 36623,
+            "source_ordinal": 363,
+            "selected_ordinal": 1310,
+            "stage_bytes": 60070,
+            "stage_sha256": "8418622e1a0e07c96a2627e70b42c0ed35a8c8e605774eed1ce9ff7f2ab95e31",
+            "stage_git_blob_oid": "0cece258f35df8e75d2eb0d310d1766c5cb2a431",
+            "original_context_cells": 3612,
+            "repair_land_request_cells": 1640,
+            "source_relative_cells_held": 1972,
+            "metadata_hierarchy_overlap": 0.976981,
+            "semantic_review": {
+              "status": "open",
+              "continent": "Asia",
+              "decision_index": 1943,
+              "evidence_file": "geographic-decisions"
+            }
+          }
+        ],
+        "checks": [
+          {
+            "check": "exact combined whole hash/size/OID",
+            "pass": true
+          },
+          {
+            "check": "literal source pair interiors unchanged",
+            "pass": true
+          },
+          {
+            "check": "exact two full pairs Anambas then Natuna",
+            "pass": true
+          },
+          {
+            "check": "distinct exact original target identities",
+            "pass": true
+          },
+          {
+            "check": "all10231 context labels held original",
+            "pass": true
+          },
+          {
+            "check": "prior independent41checks all pass",
+            "pass": true
+          }
+        ],
+        "preserved_limits": [
+          "Selected feature snapshot is exact accepted8c part10; no latest native selected ownership proof.",
+          "Both whole target geometries, source2020 metadata/ADM1-framework mismatches and open semantic reviews remain; no whole parent or legal boundary certificate.",
+          "All5560 relative cells remain held:3588 Anambas and1972 Natuna. Land labels3031+1640 are retained request labels, not inferred positive physical support.",
+          "No physical observations/results from unrelated Riau four-target producer are transferred. Actual whole-target land/water/exterior/query/hierarchy/witness evidence must be produced by accepted stock entry.",
+          "Actual immutable stage publication, complete accepted code/runtime/input closure, fresh ordinary admission, finite stock physical call and distinct actual-result review remain future work."
+        ],
+        "publication_next": "Publisher may preserve exact proposed combined stage plus provenance/review. Actual immutable pin, strict25-input config binding/review and accepted code/runtime/admission remain pending. No source/result from unrelated Riau4 may be transferred."
+      }
+    }
+  ]
+}

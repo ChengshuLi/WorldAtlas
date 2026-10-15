@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "kind": "whole-original-two-target-physical-stage-input",
+  "method": "Preserve each original single-record array interior byte-for-byte, joining only array delimiters with one comma. JSON parse confirms exact pair order/value equality; no feature geometry/metadata changed.",
+  "combined_stage": {
+    "path": "anambas-natuna-whole-original-stage-inputs.json",
+    "mode": "100644",
+    "bytes": 153434,
+    "sha256": "a9daf84f41ba1a4602b594eb8e4b1e4dee7f05f1bcfbeee347e1545d8162824c",
+    "git_blob_oid": "f335ce46d83885c050626288ec81d192eb76404f"
+  },
+  "original_source_family": {
+    "commit": "5ab660cb68821e6b719f1b86819069ecac419ce1",
+    "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IDN-ADM2-000.bin.gz",
+    "git_blob_oid": "d918c74989043677364ff43f9fbec3d1f0d3a3af",
+    "bytes": 3051391,
+    "sha256": "ef394916ba97454b5592e66eba1df67199731ce7d9636cc3968843801ae904a8",
+    "decoded_bytes": 11002896,
+    "decoded_sha256": "146653d488331086ddc43d159a261b01ea6dd08c7ed422e34a9886c3c690430c"
+  },
+  "selected_snapshot_part": {
+    "commit": "8c4199fd6455246b98a6fd4b7a6d0f708b9afc70",
+    "path": "data/geography/part-10.json",
+    "git_blob_oid": "84b4cf537b801c7f6d3840173c49b7e4293a139d",
+    "bytes": 5144571,
+    "sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+  },
+  "whole_input_hash_verification": {
+    "source_encoded_bytes": 3051391,
+    "source_encoded_sha256": "ef394916ba97454b5592e66eba1df67199731ce7d9636cc3968843801ae904a8",
+    "source_decoded_bytes": 11002896,
+    "source_decoded_sha256": "146653d488331086ddc43d159a261b01ea6dd08c7ed422e34a9886c3c690430c",
+    "source_feature_count": 519,
+    "selected_encoded_bytes": 5144571,
+    "selected_encoded_sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+  },
+  "pair_order": [
+    "gb:IDN:ADM2:22746128B99951880476592",
+    "gb:IDN:ADM2:22746128B6637644559706"
+  ],
+  "original_single_stage_custody": [
+    {
+      "bytes": 93366,
+      "sha256": "60e635a531d68c784404b8135366227815933af02c4d3a6443eb25313685cc73",
+      "pair_body_bytes": 93363,
+      "pair_body_sha256": "1212616840448690ecea80ae3817f589173b06986902a25e45cd4ea709336bf7",
+      "pair_body_byte_identical_in_combined_array": true
+    },
+    {
+      "bytes": 60070,
+      "sha256": "8418622e1a0e07c96a2627e70b42c0ed35a8c8e605774eed1ce9ff7f2ab95e31",
+      "pair_body_bytes": 60067,
+      "pair_body_sha256": "bd384d0513ebd1a1432f869f5f63576accb750e833ebbd4791245fd4b65862ba",
+      "pair_body_byte_identical_in_combined_array": true
+    }
+  ],
+  "historical_context": {
+    "total_cells": 10231,
+    "repair_land_labels": 4671,
+    "source_relative_held_labels": 5560,
+    "qualified_by_this_assembly": 0,
+    "accepted_by_this_assembly": 0
+  },
+  "limits": [
+    "This is unchanged whole original/selected stage data, not a physical/source/native qualification or acceptance.",
+    "The 4,671 historical land labels and 5,560 source-relative observations are not relabelled or cleared by stage assembly.",
+    "No four-target Riau or North Maluku physical result supplies target-specific evidence for Anambas or Natuna.",
+    "All target-specific physical relations, positive/water/exterior/reconstruction/contradiction/hierarchy witnesses and unknowns await actual stock execution and independent result review.",
+    "Original selected snapshot identity does not prove current native owner-zero or final accepted-predecessor conservation."
+  ],
+  "no_scientific_execution": true
+}
