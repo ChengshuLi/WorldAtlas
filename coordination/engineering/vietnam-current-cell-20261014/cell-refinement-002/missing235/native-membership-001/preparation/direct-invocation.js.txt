@@ -1,0 +1,118 @@
+// One scientific invocation of existing accepted exports; run plain Node on stdin.
+// No SOURCE authority, country assignment or acceptance product is issued.
+(async () => {
+  const fs = require('node:fs'), path = require('node:path'), zlib = require('node:zlib');
+  const {createHash} = require('node:crypto'), {execFileSync} = require('node:child_process');
+  const assert = require('node:assert/strict'), {pathToFileURL} = require('node:url');
+  const task = '/Users/chengshuli/Documents/Codex/2026-10-13/task';
+  const repo = '/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/b516a693506d065f08d8984390ca7e530077d358a0739e0a661a1199da76763a/work';
+  const base = 'b73fdbb1b0e243b773514ea46aaced496a63028f';
+  const prep = path.join(task, 'vietnam-next/physical235/native-membership-preparation');
+  const rawPlan = fs.readFileSync(path.join(prep, 'plan.json'));
+  const sha = raw => createHash('sha256').update(raw).digest('hex');
+  assert.equal(sha(rawPlan), '0dfa7cebdeb082134f3039ea3b7cc18f1eecd8ff4d38a7400d2f4f5ac2c68c9c');
+  const plan = JSON.parse(rawPlan);
+  const guards = await import(pathToFileURL(path.join(repo, 'scripts/native-ownership/native-preparation-guards.mjs')));
+  guards.requirePlainExecution();
+  const codeNames = ['package.json', 'src/native-grid.js', 'scripts/native-ownership/native-preparation-guards.mjs'];
+  const code = guards.committedPreparationFiles(repo, base, codeNames);
+  const runtimePath = fs.realpathSync(process.execPath), runtimeStat = fs.statSync(runtimePath);
+  const runtimeHash = createHash('sha256'); let runtimeBytes = 0;
+  for await (const chunk of fs.createReadStream(runtimePath, {highWaterMark: 1048576})) {
+    runtimeHash.update(chunk); runtimeBytes += chunk.length;
+  }
+  const runtimeEnd = fs.statSync(runtimePath);
+  assert.equal(runtimeBytes, runtimeStat.size); assert.equal(runtimeEnd.ino, runtimeStat.ino);
+  assert.equal(runtimeEnd.size, runtimeBytes);
+  const runtime = {path: runtimePath, bytes: runtimeBytes, sha256: runtimeHash.digest('hex'), version: process.version};
+  const invocation = fs.readFileSync(path.join(prep, 'direct-invocation.js.txt'));
+  const accounting = {...plan.prospective_accounting,
+    runtime_prospective: runtimeBytes,
+    native_index_scan: 41943040,
+    executed_code_bytes: code.reduce((sum, p) => sum + p.bytes, 0),
+    direct_invocation_bytes: invocation.length};
+  delete accounting.prospective_total_bytes;
+  const prospective = Object.values(accounting).reduce((sum, n) => sum + n, 0);
+  const observations = {availableBytes: process.availableMemory(), currentRssBytes: process.memoryUsage().rss,
+    concurrentReservedBytes: 0, headroomBytes: 572882944};
+  const allowance = guards.preparationAllowance({...observations, currentRssBytes: 0,
+    phaseBytes: 201326592, rssBytes: 268435456});
+  assert.ok(prospective <= allowance.phaseBytes);
+  const inputNames = ['physical', 'physical_receipt', 'cells', 'partition', 'whole_owner_source_country_context', 'stage', 'latitudes'];
+  const reserve = prospective - plan.prospective_accounting.encoded_inputs;
+  const budget = guards.candidateBudget([], {reserveBytes: reserve, reserveDescriptors: 0, allowance});
+  const git = (...args) => execFileSync('git', ['-C', repo, ...args], {maxBuffer: 33554433,
+    env: {...process.env, GIT_NO_LAZY_FETCH: '1', GIT_TERMINAL_PROMPT: '0'}});
+  const bodies = {};
+  for (const name of inputNames) {
+    const pin = plan.input_bindings[name];
+    const row = git('ls-tree', '-z', pin.commit, '--', pin.path).toString();
+    assert.equal(row, '100644 blob ' + pin.git_blob_oid + '\t' + pin.path + '\0');
+    assert.equal(Number(git('cat-file', '-s', pin.git_blob_oid)), pin.bytes);
+    budget.add({bytes: pin.bytes});
+    const body = git('cat-file', 'blob', pin.git_blob_oid);
+    assert.equal(body.length, pin.bytes); assert.equal(sha(body), pin.sha256);
+    bodies[name] = body;
+  }
+  const physical = JSON.parse(bodies.physical), original = JSON.parse(bodies.cells);
+  const latRaw = zlib.gunzipSync(bodies.latitudes), latPin = plan.input_bindings.latitudes;
+  assert.equal(latRaw.length, latPin.decoded_bytes); assert.equal(sha(latRaw), latPin.decoded_sha256);
+  const latitudes = Float64Array.from({length: plan.size}, (_, y) => latRaw.readDoubleLE(y * 8));
+  const native = await import(pathToFileURL(path.join(repo, 'src/native-grid.js')));
+  const byTarget = new Map(physical.results.map(result => [result.target, result]));
+  const originalRows = Array.isArray(original) ? original : original.cells;
+  assert.equal(originalRows.length, 235);
+  const originalMap = new Map(originalRows.map(row => [[row.owner, row.x, row.y].join(':'), row]));
+  assert.equal(originalMap.size, 235);
+  let calls = 0; const outputRows = [];
+  const started = performance.now();
+  for (const target of plan.targets) {
+    budget.snapshot(); assert.ok(performance.now() - started < 120000);
+    const result = byTarget.get(target.target); assert.ok(result);
+    assert.deepEqual(result.query_relations, target.query_relations); assert.equal(result.issues.length, 0);
+    const membership = new Map(target.requested_keys_owner_x_y.map(key => [key.join(':'), {}]));
+    for (const leaf of target.geometries) {
+      const geometry = leaf.path.split('.').reduce((object, key) => object[key], result);
+      const empty = geometry.type === 'GeometryCollection' ? geometry.geometries.length === 0 : geometry.coordinates.length === 0;
+      assert.equal(empty, leaf.explicit_empty);
+      let spans;
+      if (!empty) {
+        const index = native.nativeRuntimeIndex([{id: target.target, pixelIndex: target.owner, geometry}]);
+        spans = native.nativePolygonIntervals(index, {size: plan.size, rowStart: leaf.row_extent[0],
+          rowEnd: leaf.row_extent[1], latitudes}); calls++;
+      }
+      for (const key of target.requested_keys_owner_x_y) {
+        const [owner, x, y] = key;
+        const ties = spans?.ties.filter(t => t.y === y && t.owner === owner &&
+          (t.x === x || Number.isInteger(t.start) && t.start <= x && x < t.end)) ?? [];
+        const inside = spans?.rows.get(y)?.some(span => span.owner === owner && span.start <= x && x < span.end) ?? false;
+        membership.get(key.join(':'))[leaf.path] = {state: ties.length ? 'unknown' : inside ? 'inside' : 'outside',
+          basis: empty ? 'retained-explicit-empty' : native.NATIVE_GRID_METHOD, ties};
+      }
+    }
+    for (const key of target.requested_keys_owner_x_y) {
+      const source = originalMap.get(key.join(':')); assert.ok(source);
+      assert.equal(source.qualified, false); assert.ok(source.hold_reasons.includes('foreign-reference-country'));
+      outputRows.push({...source, target: target.target, physical_membership: membership.get(key.join(':')),
+        qualified: false, accepted_repair_credit: 0});
+    }
+  }
+  assert.equal(calls, 10); assert.equal(outputRows.length, 235);
+  const result = {kind: 'native-physical-support-membership-diagnostic-only',
+    plan_sha256: sha(rawPlan), invocation_sha256: sha(invocation), code, runtime,
+    observations, allowance, accounting, prospective_bytes: prospective,
+    inputs: plan.input_bindings, method: native.NATIVE_GRID_METHOD,
+    native_calls: calls, elapsed_seconds: (performance.now() - started) / 1000,
+    observed_process_peak_rss_bytes: process.resourceUsage().maxRSS * 1024,
+    rows: outputRows, physical_context: physical,
+    territorial_held_cells: 235, qualified: 0, accepted_repair_credit: 0,
+    limits: ['Physical numerical membership only; all original foreign-reference holds remain.',
+      'No territorial, source-parent, current-owner-zero or accepted-authority claim.',
+      'RSS checks occur at operation boundaries; no live aggregate process-tree enforcement.']};
+  const raw = Buffer.from(JSON.stringify(result) + '\n');
+  assert.ok(raw.length <= 8388608); budget.snapshot();
+  const destination = guards.createNativeCandidateOutput(repo, '.cache/native-grid-candidates/missing235-membership-001');
+  fs.writeFileSync(path.join(destination, 'result.json'), raw, {flag: 'wx'});
+  console.log(JSON.stringify({destination, result_bytes: raw.length, result_sha256: sha(raw),
+    native_calls: calls, rows: outputRows.length, qualified: 0, accepted_repair_credit: 0}));
+})().catch(error => { console.error(error.stack); process.exitCode = 1; });

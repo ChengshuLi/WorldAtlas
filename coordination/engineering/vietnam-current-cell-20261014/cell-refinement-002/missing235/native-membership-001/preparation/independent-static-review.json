@@ -1,0 +1,1326 @@
+{
+  "status": "ACCEPTED_STATIC_INPUT_AND_DIRECT_INVOCATION_SCOPE_ONLY_NO_SCIENCE_EXECUTED",
+  "plan_sha256": "0dfa7cebdeb082134f3039ea3b7cc18f1eecd8ff4d38a7400d2f4f5ac2c68c9c",
+  "bindings": [
+    {
+      "name": "physical",
+      "bytes": 104970,
+      "sha256": "4ade7d21d33ed399d1cf234396fd426ca5cb37d7e8a7a41c099b71dadefbd405",
+      "git_blob_oid": "8d50335aad2d0c39f7e865455c954cdeca085766",
+      "immutable_commit_path_binding": true
+    },
+    {
+      "name": "physical_receipt",
+      "bytes": 123326,
+      "sha256": "6937cae85bcc83469ddf096a2c824c584c57b9f6dad431361d3714b0600216b2",
+      "git_blob_oid": "f8baf939e65069ffabbe0feb237e1f57b518063b",
+      "immutable_commit_path_binding": true
+    },
+    {
+      "name": "cells",
+      "bytes": 110695,
+      "sha256": "70ee62afb3fce6d82dbe4b61d3267b1c729a74cc739b7a44651dfafdab90f950",
+      "git_blob_oid": "a37c214ad84b0c264274bacf65c32479e80b19a4",
+      "immutable_commit_path_binding": true
+    },
+    {
+      "name": "partition",
+      "bytes": 75789,
+      "sha256": "2230d09ca4298017d62f07ca7cb2a7b3728b1fae33b01f65fe4a17337e07b564",
+      "git_blob_oid": "2547a4b1653153137e25bc9ebf91011346a841d9",
+      "immutable_commit_path_binding": true
+    },
+    {
+      "name": "whole_owner_source_country_context",
+      "bytes": 152123,
+      "sha256": "a4d98e1fcd1a19eedfadf8ea51f83b7cadf77c86fef81a7a99c3f5bb832e3a45",
+      "git_blob_oid": "01472cad7315ba900c2408617d348255dac798ab",
+      "immutable_commit_path_binding": true
+    },
+    {
+      "name": "stage",
+      "bytes": 280465,
+      "sha256": "307048eecf7b7dd7540c8fccf372c9a936fad23f02170afa28eadc81f7e25b2a",
+      "git_blob_oid": "172fc8bb9c9934eb642f80f7bd138a43411a790f",
+      "immutable_commit_path_binding": true
+    },
+    {
+      "name": "programme",
+      "bytes": 36232,
+      "sha256": "7c93720e68fb3a9d584bcd9ba5c7f111b836d99eb3d133b86fdd6d72efe50d48",
+      "git_blob_oid": "736eb39fc9ee6cfd94a4524fa332d9852ea9b635",
+      "immutable_commit_path_binding": true
+    },
+    {
+      "name": "latitudes",
+      "bytes": 1851757,
+      "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+      "git_blob_oid": "de6905e162dc031b1b93248fae91190c39c4ad53",
+      "immutable_commit_path_binding": true
+    }
+  ],
+  "normative_latitudes": {
+    "entries": 262166,
+    "encoded_bytes": 1851757,
+    "decoded_bytes": 2097328,
+    "decoded_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23",
+    "finite_strictly_decreasing": true,
+    "no_latitudes_recomputed": true
+  },
+  "requested_keys": {
+    "unique235": true,
+    "all_owner_x_y_match_original_cells_partition_context": true,
+    "all_original_flags_holds_qualified_false_retained": true,
+    "foreign_reference_counts": {
+      "CHN": 212,
+      "KHM": 23
+    },
+    "expected_observation_rows": 235,
+    "expected_leaf_membership_states": 2115,
+    "expected_nonempty_leaf_states": 235,
+    "expected_explicit_empty_leaf_states": 1880,
+    "all235_literal_row_bytes_match_retained_original_span_lengths_and_sha256": true
+  },
+  "support_body": {
+    "targets": 10,
+    "classes": [
+      "mapped_land_support",
+      "mapped_inland_water_support",
+      "outside_mapped_L1_context",
+      "hierarchy_disagreements",
+      "missing_reconstruction",
+      "extra_reconstruction",
+      "contradictory_land_water_support"
+    ],
+    "hierarchy_keys": [
+      "L2-outside-L1",
+      "L3-outside-L2",
+      "L4-outside-L3"
+    ],
+    "geometry_leaves": 90,
+    "whole_nonempty_polygons": 10,
+    "explicit_empty_leaves": 80,
+    "hidden_line_point_nonpolygon_children": 0,
+    "issues": 0,
+    "query_relations": 11,
+    "all_query_relation_values_exact": true,
+    "edges": 1988,
+    "vertices": 1998,
+    "edge_row_upper_bound": 109806,
+    "maximum_rows_per_call": 167
+  },
+  "independent_per_target_expectations": [
+    {
+      "target": "gb:VNM:ADM2:81297802B5716614329371",
+      "name": "Tra Linh",
+      "owner": 48495,
+      "cells": 1,
+      "reference_country": "CHN",
+      "requested_keys_exact": true,
+      "query_relations": [
+        {
+          "source_id": 0,
+          "periodic_offset": 0,
+          "source_covers_candidate": true,
+          "candidate_covers_source": false,
+          "intersects": true,
+          "disjoint": false,
+          "status": "checked",
+          "witness": "complete-candidate-reconstruction"
+        }
+      ],
+      "geometries": [
+        {
+          "path": "support.mapped_land_support",
+          "type": "Polygon",
+          "explicit_empty": false,
+          "rings": 1,
+          "edges": 147,
+          "vertices": 148,
+          "whole_geometry_value_sha256": "080f7189772d089893a573e1c79dfd48bf5c24a5e251d466d92b29a1ad4691d7"
+        },
+        {
+          "path": "support.mapped_inland_water_support",
+          "type": "GeometryCollection",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        {
+          "path": "support.outside_mapped_L1_context",
+          "type": "Polygon",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "1a38949e1137d71db7b75672549c92800743e343d6a311db21043c94a41105a2"
+        },
+        {
+          "path": "support.hierarchy_disagreements.L2-outside-L1",
+          "type": "GeometryCollection",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        {
+          "path": "support.hierarchy_disagreements.L3-outside-L2",
+          "type": "GeometryCollection",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        {
+          "path": "support.hierarchy_disagreements.L4-outside-L3",
+          "type": "GeometryCollection",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        {
+          "path": "support.missing_reconstruction",
+          "type": "Polygon",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "1a38949e1137d71db7b75672549c92800743e343d6a311db21043c94a41105a2"
+        },
+        {
+          "path": "support.extra_reconstruction",
+          "type": "Polygon",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "1a38949e1137d71db7b75672549c92800743e343d6a311db21043c94a41105a2"
+        },
+        {
+          "path": "support.contradictory_land_water_support",
+          "type": "GeometryCollection",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        }
+      ],
+      "row_extent": [
+        113934,
+        113935
+      ]
+    },
+    {
+      "target": "gb:VNM:ADM2:81297802B24341511138047",
+      "name": "Thach An",
+      "owner": 48249,
+      "cells": 6,
+      "reference_country": "CHN",
+      "requested_keys_exact": true,
+      "query_relations": [
+        {
+          "source_id": 0,
+          "periodic_offset": 0,
+          "source_covers_candidate": true,
+          "candidate_covers_source": false,
+          "intersects": true,
+          "disjoint": false,
+          "status": "checked",
+          "witness": "complete-candidate-reconstruction"
+        }
+      ],
+      "geometries": [
+        {
+          "path": "support.mapped_land_support",
+          "type": "Polygon",
+          "explicit_empty": false,
+          "rings": 1,
+          "edges": 232,
+          "vertices": 233,
+          "whole_geometry_value_sha256": "13e19e2694d5cc65f5726347d6c5ed5dd6264edc2c4035fb0fcfd4bd673d850e"
+        },
+        {
+          "path": "support.mapped_inland_water_support",
+          "type": "GeometryCollection",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        {
+          "path": "support.outside_mapped_L1_context",
+          "type": "Polygon",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "1a38949e1137d71db7b75672549c92800743e343d6a311db21043c94a41105a2"
+        },
+        {
+          "path": "support.hierarchy_disagreements.L2-outside-L1",
+          "type": "GeometryCollection",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        {
+          "path": "support.hierarchy_disagreements.L3-outside-L2",
+          "type": "GeometryCollection",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        {
+          "path": "support.hierarchy_disagreements.L4-outside-L3",
+          "type": "GeometryCollection",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        {
+          "path": "support.missing_reconstruction",
+          "type": "Polygon",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "1a38949e1137d71db7b75672549c92800743e343d6a311db21043c94a41105a2"
+        },
+        {
+          "path": "support.extra_reconstruction",
+          "type": "Polygon",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "1a38949e1137d71db7b75672549c92800743e343d6a311db21043c94a41105a2"
+        },
+        {
+          "path": "support.contradictory_land_water_support",
+          "type": "GeometryCollection",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        }
+      ],
+      "row_extent": [
+        114307,
+        114320
+      ]
+    },
+    {
+      "target": "gb:VNM:ADM2:81297802B42277751936117",
+      "name": "Trung Khanh",
+      "owner": 48382,
+      "cells": 6,
+      "reference_country": "CHN",
+      "requested_keys_exact": true,
+      "query_relations": [
+        {
+          "source_id": 0,
+          "periodic_offset": 0,
+          "source_covers_candidate": true,
+          "candidate_covers_source": false,
+          "intersects": true,
+          "disjoint": false,
+          "status": "checked",
+          "witness": "complete-candidate-reconstruction"
+        }
+      ],
+      "geometries": [
+        {
+          "path": "support.mapped_land_support",
+          "type": "Polygon",
+          "explicit_empty": false,
+          "rings": 1,
+          "edges": 192,
+          "vertices": 193,
+          "whole_geometry_value_sha256": "9dbea0d1530b6211a0dc1333eddb293f1f10b369b6ea75d1256931b87ebf8bec"
+        },
+        {
+          "path": "support.mapped_inland_water_support",
+          "type": "GeometryCollection",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        {
+          "path": "support.outside_mapped_L1_context",
+          "type": "Polygon",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "1a38949e1137d71db7b75672549c92800743e343d6a311db21043c94a41105a2"
+        },
+        {
+          "path": "support.hierarchy_disagreements.L2-outside-L1",
+          "type": "GeometryCollection",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        {
+          "path": "support.hierarchy_disagreements.L3-outside-L2",
+          "type": "GeometryCollection",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        {
+          "path": "support.hierarchy_disagreements.L4-outside-L3",
+          "type": "GeometryCollection",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        {
+          "path": "support.missing_reconstruction",
+          "type": "Polygon",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "1a38949e1137d71db7b75672549c92800743e343d6a311db21043c94a41105a2"
+        },
+        {
+          "path": "support.extra_reconstruction",
+          "type": "Polygon",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "1a38949e1137d71db7b75672549c92800743e343d6a311db21043c94a41105a2"
+        },
+        {
+          "path": "support.contradictory_land_water_support",
+          "type": "GeometryCollection",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        }
+      ],
+      "row_extent": [
+        113926,
+        113928
+      ]
+    },
+    {
+      "target": "gb:VNM:ADM2:81297802B58374178577075",
+      "name": "Ha Quang",
+      "owner": 48503,
+      "cells": 14,
+      "reference_country": "CHN",
+      "requested_keys_exact": true,
+      "query_relations": [
+        {
+          "source_id": 0,
+          "periodic_offset": 0,
+          "source_covers_candidate": true,
+          "candidate_covers_source": false,
+          "intersects": true,
+          "disjoint": false,
+          "status": "checked",
+          "witness": "complete-candidate-reconstruction"
+        }
+      ],
+      "geometries": [
+        {
+          "path": "support.mapped_land_support",
+          "type": "Polygon",
+          "explicit_empty": false,
+          "rings": 1,
+          "edges": 162,
+          "vertices": 163,
+          "whole_geometry_value_sha256": "12ba5309696b91d0a1cffb63839794818b110c719533a5f199fba8d523979dc9"
+        },
+        {
+          "path": "support.mapped_inland_water_support",
+          "type": "GeometryCollection",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        {
+          "path": "support.outside_mapped_L1_context",
+          "type": "Polygon",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "1a38949e1137d71db7b75672549c92800743e343d6a311db21043c94a41105a2"
+        },
+        {
+          "path": "support.hierarchy_disagreements.L2-outside-L1",
+          "type": "GeometryCollection",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        {
+          "path": "support.hierarchy_disagreements.L3-outside-L2",
+          "type": "GeometryCollection",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        {
+          "path": "support.hierarchy_disagreements.L4-outside-L3",
+          "type": "GeometryCollection",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        {
+          "path": "support.missing_reconstruction",
+          "type": "Polygon",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "1a38949e1137d71db7b75672549c92800743e343d6a311db21043c94a41105a2"
+        },
+        {
+          "path": "support.extra_reconstruction",
+          "type": "Polygon",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "1a38949e1137d71db7b75672549c92800743e343d6a311db21043c94a41105a2"
+        },
+        {
+          "path": "support.contradictory_land_water_support",
+          "type": "GeometryCollection",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        }
+      ],
+      "row_extent": [
+        113889,
+        113934
+      ]
+    },
+    {
+      "target": "gb:VNM:ADM2:81297802B22471082550929",
+      "name": "Loc Binh",
+      "owner": 48231,
+      "cells": 22,
+      "reference_country": "CHN",
+      "requested_keys_exact": true,
+      "query_relations": [
+        {
+          "source_id": 0,
+          "periodic_offset": 0,
+          "source_covers_candidate": true,
+          "candidate_covers_source": false,
+          "intersects": true,
+          "disjoint": false,
+          "status": "checked",
+          "witness": "complete-candidate-reconstruction"
+        }
+      ],
+      "geometries": [
+        {
+          "path": "support.mapped_land_support",
+          "type": "Polygon",
+          "explicit_empty": false,
+          "rings": 1,
+          "edges": 248,
+          "vertices": 249,
+          "whole_geometry_value_sha256": "e89940fece3be1c89376bbb3b8460e4f121e0088ae37abab40b71a8638830eaf"
+        },
+        {
+          "path": "support.mapped_inland_water_support",
+          "type": "GeometryCollection",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        {
+          "path": "support.outside_mapped_L1_context",
+          "type": "Polygon",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "1a38949e1137d71db7b75672549c92800743e343d6a311db21043c94a41105a2"
+        },
+        {
+          "path": "support.hierarchy_disagreements.L2-outside-L1",
+          "type": "GeometryCollection",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        {
+          "path": "support.hierarchy_disagreements.L3-outside-L2",
+          "type": "GeometryCollection",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        {
+          "path": "support.hierarchy_disagreements.L4-outside-L3",
+          "type": "GeometryCollection",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        {
+          "path": "support.missing_reconstruction",
+          "type": "Polygon",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "1a38949e1137d71db7b75672549c92800743e343d6a311db21043c94a41105a2"
+        },
+        {
+          "path": "support.extra_reconstruction",
+          "type": "Polygon",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "1a38949e1137d71db7b75672549c92800743e343d6a311db21043c94a41105a2"
+        },
+        {
+          "path": "support.contradictory_land_water_support",
+          "type": "GeometryCollection",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        }
+      ],
+      "row_extent": [
+        114796,
+        114838
+      ]
+    },
+    {
+      "target": "gb:VNM:ADM2:81297802B68440719308655",
+      "name": "Tan Chau",
+      "owner": 48575,
+      "cells": 23,
+      "reference_country": "KHM",
+      "requested_keys_exact": true,
+      "query_relations": [
+        {
+          "source_id": 0,
+          "periodic_offset": 0,
+          "source_covers_candidate": true,
+          "candidate_covers_source": false,
+          "intersects": true,
+          "disjoint": false,
+          "status": "checked",
+          "witness": "complete-candidate-reconstruction"
+        },
+        {
+          "source_id": 187113,
+          "periodic_offset": 0,
+          "source_covers_candidate": false,
+          "candidate_covers_source": false,
+          "intersects": false,
+          "disjoint": true,
+          "status": "checked",
+          "witness": "disjoint-after-explicit-predicate"
+        }
+      ],
+      "geometries": [
+        {
+          "path": "support.mapped_land_support",
+          "type": "Polygon",
+          "explicit_empty": false,
+          "rings": 1,
+          "edges": 219,
+          "vertices": 220,
+          "whole_geometry_value_sha256": "cee31ae259d4738714b9fc95417d7eb4273c8b4176ab2b08bc15c5db33e96594"
+        },
+        {
+          "path": "support.mapped_inland_water_support",
+          "type": "GeometryCollection",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        {
+          "path": "support.outside_mapped_L1_context",
+          "type": "Polygon",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "1a38949e1137d71db7b75672549c92800743e343d6a311db21043c94a41105a2"
+        },
+        {
+          "path": "support.hierarchy_disagreements.L2-outside-L1",
+          "type": "GeometryCollection",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        {
+          "path": "support.hierarchy_disagreements.L3-outside-L2",
+          "type": "GeometryCollection",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        {
+          "path": "support.hierarchy_disagreements.L4-outside-L3",
+          "type": "GeometryCollection",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        {
+          "path": "support.missing_reconstruction",
+          "type": "Polygon",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "1a38949e1137d71db7b75672549c92800743e343d6a311db21043c94a41105a2"
+        },
+        {
+          "path": "support.extra_reconstruction",
+          "type": "Polygon",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "1a38949e1137d71db7b75672549c92800743e343d6a311db21043c94a41105a2"
+        },
+        {
+          "path": "support.contradictory_land_water_support",
+          "type": "GeometryCollection",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        }
+      ],
+      "row_extent": [
+        122483,
+        122516
+      ]
+    },
+    {
+      "target": "gb:VNM:ADM2:81297802B7761745227660",
+      "name": "Bao Lac",
+      "owner": 48634,
+      "cells": 27,
+      "reference_country": "CHN",
+      "requested_keys_exact": true,
+      "query_relations": [
+        {
+          "source_id": 0,
+          "periodic_offset": 0,
+          "source_covers_candidate": true,
+          "candidate_covers_source": false,
+          "intersects": true,
+          "disjoint": false,
+          "status": "checked",
+          "witness": "complete-candidate-reconstruction"
+        }
+      ],
+      "geometries": [
+        {
+          "path": "support.mapped_land_support",
+          "type": "Polygon",
+          "explicit_empty": false,
+          "rings": 1,
+          "edges": 226,
+          "vertices": 227,
+          "whole_geometry_value_sha256": "41883f9cf52d3fe8a12e10aa11301e5324c53f317717cb3c5b4f0e25b978bad6"
+        },
+        {
+          "path": "support.mapped_inland_water_support",
+          "type": "GeometryCollection",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        {
+          "path": "support.outside_mapped_L1_context",
+          "type": "Polygon",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "1a38949e1137d71db7b75672549c92800743e343d6a311db21043c94a41105a2"
+        },
+        {
+          "path": "support.hierarchy_disagreements.L2-outside-L1",
+          "type": "GeometryCollection",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        {
+          "path": "support.hierarchy_disagreements.L3-outside-L2",
+          "type": "GeometryCollection",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        {
+          "path": "support.hierarchy_disagreements.L4-outside-L3",
+          "type": "GeometryCollection",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        {
+          "path": "support.missing_reconstruction",
+          "type": "Polygon",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "1a38949e1137d71db7b75672549c92800743e343d6a311db21043c94a41105a2"
+        },
+        {
+          "path": "support.extra_reconstruction",
+          "type": "Polygon",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "1a38949e1137d71db7b75672549c92800743e343d6a311db21043c94a41105a2"
+        },
+        {
+          "path": "support.contradictory_land_water_support",
+          "type": "GeometryCollection",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        }
+      ],
+      "row_extent": [
+        113912,
+        113922
+      ]
+    },
+    {
+      "target": "gb:VNM:ADM2:81297802B46332855119377",
+      "name": "Phuc Hoa",
+      "owner": 48410,
+      "cells": 33,
+      "reference_country": "CHN",
+      "requested_keys_exact": true,
+      "query_relations": [
+        {
+          "source_id": 0,
+          "periodic_offset": 0,
+          "source_covers_candidate": true,
+          "candidate_covers_source": false,
+          "intersects": true,
+          "disjoint": false,
+          "status": "checked",
+          "witness": "complete-candidate-reconstruction"
+        }
+      ],
+      "geometries": [
+        {
+          "path": "support.mapped_land_support",
+          "type": "Polygon",
+          "explicit_empty": false,
+          "rings": 1,
+          "edges": 141,
+          "vertices": 142,
+          "whole_geometry_value_sha256": "61980bd0ef5c22a98c5bd2c2f2b4fb8be378aba0d61392e82dbd24d9c05a8160"
+        },
+        {
+          "path": "support.mapped_inland_water_support",
+          "type": "GeometryCollection",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        {
+          "path": "support.outside_mapped_L1_context",
+          "type": "Polygon",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "1a38949e1137d71db7b75672549c92800743e343d6a311db21043c94a41105a2"
+        },
+        {
+          "path": "support.hierarchy_disagreements.L2-outside-L1",
+          "type": "GeometryCollection",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        {
+          "path": "support.hierarchy_disagreements.L3-outside-L2",
+          "type": "GeometryCollection",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        {
+          "path": "support.hierarchy_disagreements.L4-outside-L3",
+          "type": "GeometryCollection",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        {
+          "path": "support.missing_reconstruction",
+          "type": "Polygon",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "1a38949e1137d71db7b75672549c92800743e343d6a311db21043c94a41105a2"
+        },
+        {
+          "path": "support.extra_reconstruction",
+          "type": "Polygon",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "1a38949e1137d71db7b75672549c92800743e343d6a311db21043c94a41105a2"
+        },
+        {
+          "path": "support.contradictory_land_water_support",
+          "type": "GeometryCollection",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        }
+      ],
+      "row_extent": [
+        114192,
+        114295
+      ]
+    },
+    {
+      "target": "gb:VNM:ADM2:81297802B55237865359696",
+      "name": "Trang Dinh",
+      "owner": 48473,
+      "cells": 51,
+      "reference_country": "CHN",
+      "requested_keys_exact": true,
+      "query_relations": [
+        {
+          "source_id": 0,
+          "periodic_offset": 0,
+          "source_covers_candidate": true,
+          "candidate_covers_source": false,
+          "intersects": true,
+          "disjoint": false,
+          "status": "checked",
+          "witness": "complete-candidate-reconstruction"
+        }
+      ],
+      "geometries": [
+        {
+          "path": "support.mapped_land_support",
+          "type": "Polygon",
+          "explicit_empty": false,
+          "rings": 1,
+          "edges": 290,
+          "vertices": 291,
+          "whole_geometry_value_sha256": "b4adff062accb9679e87b75633d739e7027730a936a199fb46e6a0cede954c2f"
+        },
+        {
+          "path": "support.mapped_inland_water_support",
+          "type": "GeometryCollection",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        {
+          "path": "support.outside_mapped_L1_context",
+          "type": "Polygon",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "1a38949e1137d71db7b75672549c92800743e343d6a311db21043c94a41105a2"
+        },
+        {
+          "path": "support.hierarchy_disagreements.L2-outside-L1",
+          "type": "GeometryCollection",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        {
+          "path": "support.hierarchy_disagreements.L3-outside-L2",
+          "type": "GeometryCollection",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        {
+          "path": "support.hierarchy_disagreements.L4-outside-L3",
+          "type": "GeometryCollection",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        {
+          "path": "support.missing_reconstruction",
+          "type": "Polygon",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "1a38949e1137d71db7b75672549c92800743e343d6a311db21043c94a41105a2"
+        },
+        {
+          "path": "support.extra_reconstruction",
+          "type": "Polygon",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "1a38949e1137d71db7b75672549c92800743e343d6a311db21043c94a41105a2"
+        },
+        {
+          "path": "support.contradictory_land_water_support",
+          "type": "GeometryCollection",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        }
+      ],
+      "row_extent": [
+        114322,
+        114489
+      ]
+    },
+    {
+      "target": "gb:VNM:ADM2:81297802B2489932619372",
+      "name": "Meo Vac",
+      "owner": 48254,
+      "cells": 52,
+      "reference_country": "CHN",
+      "requested_keys_exact": true,
+      "query_relations": [
+        {
+          "source_id": 0,
+          "periodic_offset": 0,
+          "source_covers_candidate": true,
+          "candidate_covers_source": false,
+          "intersects": true,
+          "disjoint": false,
+          "status": "checked",
+          "witness": "complete-candidate-reconstruction"
+        }
+      ],
+      "geometries": [
+        {
+          "path": "support.mapped_land_support",
+          "type": "Polygon",
+          "explicit_empty": false,
+          "rings": 1,
+          "edges": 131,
+          "vertices": 132,
+          "whole_geometry_value_sha256": "d4fd71d6097f6b937c2b26290684f3cd5ececab832b1fb1da560952f2f7d95c8"
+        },
+        {
+          "path": "support.mapped_inland_water_support",
+          "type": "GeometryCollection",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        {
+          "path": "support.outside_mapped_L1_context",
+          "type": "Polygon",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "1a38949e1137d71db7b75672549c92800743e343d6a311db21043c94a41105a2"
+        },
+        {
+          "path": "support.hierarchy_disagreements.L2-outside-L1",
+          "type": "GeometryCollection",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        {
+          "path": "support.hierarchy_disagreements.L3-outside-L2",
+          "type": "GeometryCollection",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        {
+          "path": "support.hierarchy_disagreements.L4-outside-L3",
+          "type": "GeometryCollection",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        },
+        {
+          "path": "support.missing_reconstruction",
+          "type": "Polygon",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "1a38949e1137d71db7b75672549c92800743e343d6a311db21043c94a41105a2"
+        },
+        {
+          "path": "support.extra_reconstruction",
+          "type": "Polygon",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "1a38949e1137d71db7b75672549c92800743e343d6a311db21043c94a41105a2"
+        },
+        {
+          "path": "support.contradictory_land_water_support",
+          "type": "GeometryCollection",
+          "explicit_empty": true,
+          "rings": 0,
+          "edges": 0,
+          "vertices": 0,
+          "whole_geometry_value_sha256": "47f9e32a5dceb91dfc267be865b11fc0f968d2f469fb7ee7859015161815fdf7"
+        }
+      ],
+      "row_extent": [
+        113614,
+        113737
+      ]
+    }
+  ],
+  "accounting_static": {
+    "encoded_inputs_exact": 2735357,
+    "decoded_inputs_exact": 2980928,
+    "original_prospective_total_bytes": 116865341,
+    "original_runtime_reserve_bytes": 67108864,
+    "root_reported_actual_Node_wholefile_bytes": 121304480,
+    "root_refined_total_before_codecarry": 171060957,
+    "actual_Node_identity_and_codecarry_and_fresh_resource_admission_not_established_by_this_review": true,
+    "revised_native_index_scan_bytes": 41943040,
+    "conservative_existing_formula_per_target": [
+      {
+        "owner": 48495,
+        "conservative_edge_row_work": 147,
+        "span_upper": 74,
+        "tie_upper": 294,
+        "existing_accounting_formula_scratch_bytes": 227584
+      },
+      {
+        "owner": 48249,
+        "conservative_edge_row_work": 3016,
+        "span_upper": 1508,
+        "tie_upper": 3248,
+        "existing_accounting_formula_scratch_bytes": 1163776
+      },
+      {
+        "owner": 48382,
+        "conservative_edge_row_work": 384,
+        "span_upper": 192,
+        "tie_upper": 576,
+        "existing_accounting_formula_scratch_bytes": 355712
+      },
+      {
+        "owner": 48503,
+        "conservative_edge_row_work": 7290,
+        "span_upper": 3645,
+        "tie_upper": 7452,
+        "existing_accounting_formula_scratch_bytes": 2321856
+      },
+      {
+        "owner": 48231,
+        "conservative_edge_row_work": 10416,
+        "span_upper": 5208,
+        "tie_upper": 10664,
+        "existing_accounting_formula_scratch_bytes": 3334528
+      },
+      {
+        "owner": 48575,
+        "conservative_edge_row_work": 7227,
+        "span_upper": 3614,
+        "tie_upper": 7446,
+        "existing_accounting_formula_scratch_bytes": 2380800
+      },
+      {
+        "owner": 48634,
+        "conservative_edge_row_work": 2260,
+        "span_upper": 1130,
+        "tie_upper": 2486,
+        "existing_accounting_formula_scratch_bytes": 959872
+      },
+      {
+        "owner": 48410,
+        "conservative_edge_row_work": 14523,
+        "span_upper": 7262,
+        "tie_upper": 14664,
+        "existing_accounting_formula_scratch_bytes": 4406400
+      },
+      {
+        "owner": 48473,
+        "conservative_edge_row_work": 48430,
+        "span_upper": 24215,
+        "tie_upper": 48720,
+        "existing_accounting_formula_scratch_bytes": 14379328
+      },
+      {
+        "owner": 48254,
+        "conservative_edge_row_work": 16113,
+        "span_upper": 8057,
+        "tie_upper": 16244,
+        "existing_accounting_formula_scratch_bytes": 4874176
+      }
+    ],
+    "max_per_call_formula_bytes": 14379328,
+    "sum_all_call_formula_bytes": 34404032,
+    "accepted_module_and_package_guard_code_bytes": 47498,
+    "direct_invocation_carry_bytes": 8328,
+    "refined_total_including_code_and_invocation_bytes": 196282607,
+    "proposed_phase_bytes": 201326592,
+    "remaining_declared_phase_bytes": 5043985,
+    "resource_values_are_prospective_accounting_not_measured_RSS": true
+  },
+  "native_science_calls_executed": 0,
+  "method_general_tests_repeated": 0,
+  "direct_invocation": {
+    "path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/physical235/native-membership-preparation/direct-invocation.js.txt",
+    "bytes": 8328,
+    "sha256": "d665e2e9df1935318f3b85efe043f58cc11790fad8d466efda76c85eb937ec2e",
+    "read_not_executed": true,
+    "existing_exports_only": true,
+    "immutable_executed_code_expectations": [
+      {
+        "path": "package.json",
+        "bytes": 1417,
+        "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3"
+      },
+      {
+        "path": "src/native-grid.js",
+        "bytes": 36232,
+        "sha256": "7c93720e68fb3a9d584bcd9ba5c7f111b836d99eb3d133b86fdd6d72efe50d48"
+      },
+      {
+        "path": "scripts/native-ownership/native-preparation-guards.mjs",
+        "bytes": 9849,
+        "sha256": "227b982fac966fff5e55483c62ecb181defd55194b2946e31b7606574013f676"
+      }
+    ],
+    "native_module_identity_matches_plan": true,
+    "complete_input_blob_checks_before_scans": true,
+    "exact_owner_x_y_join": true,
+    "tie_overrides_span_and_outside": true,
+    "all235_original_observation_fields_copied": true,
+    "physical_context_whole_body_retained": true,
+    "original_source_families_not_replayed": true,
+    "source_positive_or_country_authority_product": false,
+    "output_creation": "Existing exclusive createNativeCandidateOutput, then result.json flagwx;8MiB prewrite cap.",
+    "process_limit": "Boundary RSS snapshots via existing guard; logical120s checks, root to supply planned OS alarm. Not live aggregate process-tree enforcement."
+  },
+  "pending_execution_conditions": [
+    "Separate actual physical body/witness/query review must pass; if that reviewer finds a defect this plan must hold.",
+    "Root must bind exact complete actual Node file and current plain execution/import files, then admit fresh memory/concurrent headroom before execution.",
+    "Root must preserve exact reviewed invocation or submit changes for targeted review, including planned OS deadline envelope.",
+    "No execution, inside/outside totals, tie counts or native qualification is established by this review."
+  ]
+}
