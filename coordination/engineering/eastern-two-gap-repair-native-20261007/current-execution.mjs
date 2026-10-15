@@ -78,7 +78,11 @@ export function issueCurrentExecution({source,stage,entry='scripts/build-static-
  const record={version:1,issue:1295,kind:'package-issued-current-execution',entry_point:entry,source_root:source,source_commit:commit,source_tree:tree,stage_root:stage,runtime:runtimeStat(),files};
  record.runtime=runtime();
  assert.equal(git(['rev-parse','HEAD']),commit,'Checkout changed while issuing execution binding');
- verifyFiles(stage,files,entry);return record;
+ verifyFiles(stage,files,entry);
+ // This issuer just authenticated the complete actual source, stage and runtime.
+ // Deserialized records still require the full external authentication below.
+ brands.set(record,{root:stage,executingRoot:source,fingerprint:fingerprint(record)});
+ return record;
 }
 export function authenticateCurrentExecution(record,{root,executingRoot=root,sourceRoot}){
  root=fs.realpathSync(root);executingRoot=fs.realpathSync(executingRoot);

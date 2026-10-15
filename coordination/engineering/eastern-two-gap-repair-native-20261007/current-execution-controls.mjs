@@ -84,7 +84,7 @@ const record=readPackageCurrentExecution(process.cwd());requireCurrentExecution(
 async function currentNegative(t){
  const {root,definition}=await executionFixture(t),stage=path.join(root,'test-stage');
  await materializePackageInputs({source:root,destination:stage,definition});
- const record=issueCurrentExecution({source:root,stage});authenticateCurrentExecution(record,{root:stage,executingRoot:root,sourceRoot:root});requireCurrentExecution(record);
+ const record=issueCurrentExecution({source:root,stage});requireCurrentExecution(record);
  assert.throws(()=>requireCurrentExecution(structuredClone(record)),/authenticated/);
  const badHead={...record,source_commit:'0'.repeat(40)};assert.throws(()=>authenticateCurrentExecution(badHead,{root:stage,executingRoot:root,sourceRoot:root}),/HEAD/);
  assert.throws(()=>authenticateCurrentExecution({...record,source_root:stage},{root:stage,executingRoot:root,sourceRoot:root}));

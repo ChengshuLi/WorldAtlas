@@ -5,7 +5,7 @@ import {fileURLToPath, pathToFileURL} from 'node:url';
 import {spawn, spawnSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {loadPackageInputs, validatePackageInputs, containsPackagePath} from './package-inputs.mjs';
-import {issueCurrentExecution,authenticateCurrentExecution,requireCurrentExecution,currentExecutionClosure} from '../coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution.mjs';
+import {issueCurrentExecution,requireCurrentExecution,currentExecutionClosure} from '../coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution.mjs';
 
 // One explicit startup policy for package production and selected consumers.
 // Site hooks, user/PYTHONPATH imports and ambient bytecode cannot run before
@@ -29,6 +29,7 @@ export function packagePythonProbeArgs(rows){
 export function createPackagePythonExecution(stage,{python,sourceHelper,env=process.env}={}) {
   if(!path.isAbsolute(python??'')||/[\r\n]/.test(process.execPath)||/\s/.test(process.execPath))throw Error('Exact executable paths required for current Python launcher');
   const base=fsSync.realpathSync(stage),helperPath=path.join(base,'scripts/package-python-runtime.py');
+  const identities=new Map(),identity=file=>{const resolved=fsSync.realpathSync(file),stat=fsSync.statSync(resolved);return {resolved,...Object.fromEntries(['dev','ino','size','mode','mtimeMs','ctimeMs'].map(key=>[key,stat[key]]))};};
   const pin=file=>{
     const actual=fsSync.realpathSync(file),stat=fsSync.statSync(actual);
     if(!stat.isFile())throw Error('Ordinary current execution tool required');
@@ -36,6 +37,7 @@ export function createPackagePythonExecution(stage,{python,sourceHelper,env=proc
     try{for(;;){const n=fsSync.readSync(fd,buffer,0,buffer.length,null);if(!n)break;bytes+=n;hash.update(buffer.subarray(0,n));}held=fsSync.fstatSync(fd);}finally{fsSync.closeSync(fd);}
     const after=fsSync.statSync(actual),fields=['dev','ino','size','mode','mtimeMs','ctimeMs'];
     if(bytes!==stat.size||fsSync.realpathSync(file)!==actual||fields.some(key=>stat[key]!==held[key]||stat[key]!==after[key]))throw Error('Current execution tool changed while reading');
+    if(!identities.has(file))identities.set(file,{resolved:actual,...Object.fromEntries(fields.map(key=>[key,stat[key]]))});
     return {path:file,resolved:actual,mode:stat.mode&0o777,bytes,sha256:hash.digest('hex')};
   };
   if(fsSync.realpathSync(helperPath)!==helperPath)throw Error('Declared Python helper must be ordinary');
@@ -50,12 +52,16 @@ export function createPackagePythonExecution(stage,{python,sourceHelper,env=proc
   const record={kind:'current-package-isolated-python-execution-v1',source_role:'scripts/package-build.mjs',
     attribution:'Current application execution policy; not a historical scientific invocation',
     interpreter,helper:{...helperPin,source:sourceHelper},node,launcher:launcherPin,startup:['-I','-S','-B'],argv_mode:'--run-cli'};
+  // Only four private same-process change detectors. Stat equality does not
+  // establish content identity; creation and final verify still hash every tool.
+  const check=()=>{for(const [file,expected]of identities)if(JSON.stringify(identity(file))!==JSON.stringify(expected))throw Error('Current Python execution tool changed');};
   const verify=()=>{
+    check();
     for(const expected of [interpreter,helperPin,node,launcherPin])if(JSON.stringify(pin(expected.path))!==JSON.stringify(expected))throw Error('Current Python execution tool changed');
     if(fsSync.realpathSync(launcher)!==launcher||!fsSync.lstatSync(launcher).isFile())throw Error('Current Python launcher replaced');
   };
-  verify();
-  return {env:{...env,PATH:directory+path.delimiter+(env.PATH??'')},record,verify};
+  check();
+  return {env:{...env,PATH:directory+path.delimiter+(env.PATH??'')},record,check,verify};
 }
 
 export function packagePythonSourceDescriptor(root,head) {
@@ -340,9 +346,8 @@ export async function runPackageBuild(kind, {root = repository, execute, preflig
     delete env.WORLDATLAS_PACKAGE_SOURCE_ROOT;
     // Current execution is independent of the historical producer/continuation.
     let currentExecution;
-    if(fsSync.existsSync(path.join(root,'.git'))){
+    if(containsPackagePath(definition.inputs,'data/ownership-selection.json')||containsPackagePath(definition.inputs,'data/native-context-migration/manifest.json')){
       currentExecution=issueCurrentExecution({source:root,stage,entry:entries[kind]});
-      authenticateCurrentExecution(currentExecution,{root:stage,executingRoot:root,sourceRoot:root});
       const raw=Buffer.from(JSON.stringify(currentExecution)+'\n');
       await fs.mkdir(path.join(stage,'.cache'),{recursive:true});
       await fs.writeFile(path.join(stage,'.cache/current-context-execution.json'),raw,{flag:'wx'});
@@ -355,7 +360,7 @@ export async function runPackageBuild(kind, {root = repository, execute, preflig
       child.on('error', reject);
       child.on('exit', (code, signal) => code === 0 ? resolve() : reject(Error(`Package ${kind} build failed (${signal ?? code}); prior outputs retained`)));
     }));
-    pythonExecution?.verify();
+    pythonExecution?.check();
     try{await run(path.join(stage, entries[kind]), {cwd: stage, env});}
     catch(error){
       try{pythonExecution?.verify();}catch(changed){throw new AggregateError([error,changed],'Build failed and current Python execution changed');}
