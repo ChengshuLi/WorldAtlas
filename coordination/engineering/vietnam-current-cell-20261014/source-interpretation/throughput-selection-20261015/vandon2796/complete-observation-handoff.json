@@ -1,0 +1,183 @@
+{
+  "kind": "complete-two-date-native-observation-handoff",
+  "scope": {
+    "owner": 48235,
+    "unchanged_original_keys": 2796,
+    "source_contexts": 48,
+    "original_physical_package": 24880
+  },
+  "observations": [
+    {
+      "item": "S2B_48QYJ_20200131_0_L2A",
+      "acquisition_datetime": "2020-01-31T03:32:07.183000Z",
+      "result": {
+        "path": "actual-two-date-blocks-001/S2B_48QYJ_20200131_0_L2A/native-observations.json",
+        "bytes": 12476088,
+        "sha256": "0eb23d6625cb048ad74651dd49b4c5fe3876563c3a9f78291de5cbeab854f06c"
+      },
+      "nested_file_paths_relative_to": "actual-two-date-blocks-001",
+      "summary": {
+        "count": 2796,
+        "scl_centre_counts": {
+          "4": 1214,
+          "6": 383,
+          "7": 489,
+          "2": 425,
+          "5": 32,
+          "8": 87,
+          "3": 55,
+          "9": 111
+        },
+        "valid_centre_masks_by_band": {
+          "red": {
+            "255": 2796
+          },
+          "green": {
+            "255": 2796
+          },
+          "blue": {
+            "255": 2796
+          },
+          "nir": {
+            "255": 2796
+          },
+          "scl": {
+            "255": 2796
+          }
+        },
+        "interpretation": "Literal source observations only, not physical completion or hold clearance."
+      },
+      "raw_source_tiffs_and_literal_masks": "Existing per-block asset/output and source_mask_output pins in this complete result; no resampling."
+    },
+    {
+      "item": "S2A_48QYJ_20201231_0_L2A",
+      "acquisition_datetime": "2020-12-31T03:32:14.812000Z",
+      "result": {
+        "path": "remaining-december-blocks-003/S2A_48QYJ_20201231_0_L2A/native-observations.json",
+        "bytes": 12502983,
+        "sha256": "98a5deeffd3a6a540705e1ed058c0dd97fb29a07d29e854a21584f9db07c8eb3"
+      },
+      "nested_file_paths_relative_to": ".",
+      "summary": {
+        "count": 2796,
+        "scl_centre_counts": {
+          "4": 981,
+          "6": 206,
+          "2": 409,
+          "7": 716,
+          "10": 334,
+          "8": 118,
+          "3": 23,
+          "5": 6,
+          "9": 2,
+          "11": 1
+        },
+        "valid_centre_masks_by_band": {
+          "red": {
+            "255": 2796
+          },
+          "green": {
+            "255": 2796
+          },
+          "blue": {
+            "255": 2796
+          },
+          "nir": {
+            "255": 2796
+          },
+          "scl": {
+            "255": 2796
+          }
+        },
+        "interpretation": "Literal source observations only, not physical completion or hold clearance."
+      },
+      "raw_source_tiffs_and_literal_masks": "Existing per-block asset/output and source_mask_output pins in this complete result; no resampling."
+    }
+  ],
+  "plan": {
+    "path": "native-block-plan.json",
+    "bytes": 1727684,
+    "sha256": "e3cf324330b41050de2cf07105d47248237c2905f04f90bd075ed5e779ad6cc0"
+  },
+  "failed_first_run": {
+    "path": "failed-run-001-receipt.json",
+    "bytes": 1003,
+    "sha256": "f0ced60e1c3d4291317987293bcf4c1f45e54af0263841ff93451f92d2c60d1d"
+  },
+  "refused_second_run": {
+    "path": "failed-run-002-receipt.json",
+    "bytes": 320,
+    "sha256": "60855bd092363f020a29b6e903e0ea3a1a9b2f67a6ad9579fe854b47dcf5c206"
+  },
+  "successful_continuation": {
+    "path": "remaining-december-blocks-003/execution-receipt.json",
+    "bytes": 3987,
+    "sha256": "ef573e7637a35b3ca7b4d66925c37357019d460e3539f0e005aa23633adb5897"
+  },
+  "successful_continuation_tool_exit_code": 0,
+  "continuation_code": {
+    "path": "read_remaining_december_003.py",
+    "bytes": 17024,
+    "sha256": "9bdbafb775199c745bc9c2c787bbf9410f16f553008a9c27ab86b2c24439dc11"
+  },
+  "first_code": {
+    "path": "read_native_blocks.py",
+    "bytes": 13296,
+    "sha256": "ca1886bbb187817e0a9073d83985ac5635b658959ce4b62e3dbe6985f270628b"
+  },
+  "request_refinement": {
+    "path": "request-refinement-003.json",
+    "bytes": 1034,
+    "sha256": "17d630a5cc4d62cdc8eba2b6e306b32b5c9058f6f4c384b9f5f3072004295f66"
+  },
+  "logs": [
+    {
+      "path": "read.stdout.log",
+      "bytes": 2095,
+      "sha256": "1701af2140c0b4bf4fb37c3b1d43eb3c3330b951444e437ff8e2e21e6bccd559"
+    },
+    {
+      "path": "read.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "remaining-read.stderr.log",
+      "bytes": 2803,
+      "sha256": "8d14cac208db852117d109b26fd7082523252a82d95bb1be092943f81ff84a8f"
+    },
+    {
+      "path": "remaining-read.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "remaining-read-003.stdout.log",
+      "bytes": 2271,
+      "sha256": "ee918164bbefed70f116683ed149b27f3dc88634fe62c13f3017ad26f50c0b5f"
+    },
+    {
+      "path": "remaining-read-003.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "provenance_limits": [
+    "First run timed out after complete January plus two December blocks. Its numeric lifetime RSS and exact child exit wall time were not retained; no whole-run success asserted.",
+    "Second run refused admission before source reads.",
+    "Continuation reused all January and the two completed December blocks; only110missing band and110mask windows were remotely read.",
+    "Source windows are partial COG observations, not whole remote COG hashes. Masks and SCL are retained observations, not physical ground truth.",
+    "No generic unknown, observation alone, or question adoption earns completed-review credit. Actual disjoint geographic review is separate.",
+    "No authority, ownership, repair, parent-source, annual-water or legal-shoreline disposition is made by this observation handoff."
+  ],
+  "source_attribution": [
+    "Copernicus Sentinel-2 L2A, ESA/Copernicus",
+    "Element 84 Earth Search / AWS sentinel-cogs public native assets; exact URLs, item metadata, acquisition and processing baselines in each result"
+  ],
+  "actual_continuation_seconds": 324.0006721660029,
+  "actual_continuation_peak_rss_bytes": 249085952,
+  "actual_continuation_allowance": {
+    "phaseBytes": 805306368,
+    "rssBytes": 805306368
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "started_utc": "2026-10-15T13:21:03.775632+00:00",
+  "admission": {
+    "available": 1703182336,
+    "headroomBytes": 572882944,
+    "currentRssCreditBytes": 0,
+    "concurrentReservedBytes": 0,
+    "allowance": {
+      "phaseBytes": 939524096,
+      "rssBytes": 939524096
+    }
+  },
+  "maximum_declared_live_carry": {
+    "existing_reader_numpy_files": 90300286,
+    "python": 18058560,
+    "node_preflight": 121304480,
+    "accepted_admission_code": 304941,
+    "frozen_input_bytes": 7635169,
+    "parsed_input_carry": 67108864,
+    "per_date_point_observations": 100663296,
+    "source_block_decode": 83886080,
+    "native_arrays_and_masks": 25165824,
+    "gdal_cache": 16777216,
+    "rendering_live_carry": 100663296,
+    "output_write_hash_buffers": 16777216,
+    "metadata_manifest": 16777216,
+    "other_runtime": 25165824,
+    "other_expansion": 67108864
+  },
+  "prospective_total": 757697132,
+  "separate_streamed_disk_output_cap": 1342177280,
+  "limits": "No whole-tile decode or claim that all disk outputs reside in RAM; source windows are hashed as written. No aggregate network-byte/process-tree enforcement claim."
+}

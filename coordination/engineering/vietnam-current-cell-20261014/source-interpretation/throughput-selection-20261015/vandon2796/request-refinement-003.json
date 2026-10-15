@@ -1,0 +1,24 @@
+{
+  "request_bytes": 805306368,
+  "unchanged_complete_live_carry_categories": {
+    "existing_reader_numpy_files": 90300286,
+    "python": 18058560,
+    "node_preflight": 121304480,
+    "accepted_admission_code": 304941,
+    "frozen_input_bytes": 20129284,
+    "parsed_input_carry": 67108864,
+    "per_date_point_observations": 100663296,
+    "source_block_decode": 83886080,
+    "native_arrays_and_masks": 25165824,
+    "gdal_cache": 16777216,
+    "rendering_live_carry": 100663296,
+    "output_write_hash_buffers": 16777216,
+    "metadata_manifest": 16777216,
+    "other_runtime": 25165824,
+    "other_expansion": 67108864
+  },
+  "complete_declared_bytes": 770191247,
+  "margin_bytes": 35115121,
+  "change": "Only fresh output path and finite request896->768MiB; all declared estimates, source scope, masks, runtime, deadline and admission/RSS checks unchanged. No clipping to observed available memory. Attempt002 refused before source reads.",
+  "code_sha256": "9bdbafb775199c745bc9c2c787bbf9410f16f553008a9c27ab86b2c24439dc11"
+}

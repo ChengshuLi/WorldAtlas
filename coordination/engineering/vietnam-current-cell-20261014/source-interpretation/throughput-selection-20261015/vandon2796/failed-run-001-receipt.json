@@ -1,0 +1,25 @@
+{
+  "status": "failed-deadline",
+  "tool_exit_code": 142,
+  "os_alarm_seconds": 300,
+  "started_utc": "2026-10-15T13:21:03.775632+00:00",
+  "exit_observed_by_utc": "2026-10-15T13:26:19Z",
+  "exact_child_exit_wall_time": "not retained by the shell launcher",
+  "peak_rss_bytes": null,
+  "admission": {
+    "available": 1703182336,
+    "headroomBytes": 572882944,
+    "currentRssCreditBytes": 0,
+    "concurrentReservedBytes": 0,
+    "allowance": {
+      "phaseBytes": 939524096,
+      "rssBytes": 939524096
+    }
+  },
+  "complete_january_result": "vietnam-next/original-decisions-20261015/throughput-selection-20261015/vandon2796/actual-two-date-blocks-001/S2B_48QYJ_20200131_0_L2A/native-observations.json",
+  "completed_blocks_from_flushed_stdout": {
+    "S2B_48QYJ_20200131_0_L2A": 24,
+    "S2A_48QYJ_20201231_0_L2A": 2
+  },
+  "limits": "No whole-operation success or completed-review credit. Every retained source window remains available; continuation reads only absent/incomplete asset windows."
+}
