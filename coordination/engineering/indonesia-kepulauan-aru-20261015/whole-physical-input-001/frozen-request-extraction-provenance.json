@@ -1,0 +1,226 @@
+{
+  "target_id": "gb:IDN:ADM2:22746128B17511076551422",
+  "owner_index": 22734,
+  "historical_cells": 11786,
+  "relative_held": 6326,
+  "inland_water_labels_in_target": 27,
+  "interval_rows": 4671,
+  "occupied_rows": 1164,
+  "native_row_min": 134967,
+  "native_row_max": 136264,
+  "source_indices": [
+    36249,
+    36413
+  ],
+  "class_counts": {
+    "land": 5433,
+    "inland-water": 27,
+    "source-relative": 6326
+  },
+  "category_counts": {
+    "repair": 5460,
+    "physical": 6326
+  },
+  "source_patterns": [
+    {
+      "category": "repair",
+      "physical": "land",
+      "source_indices": [
+        36413
+      ],
+      "cells": 1218
+    },
+    {
+      "category": "repair",
+      "physical": "land",
+      "source_indices": [
+        36249,
+        36413
+      ],
+      "cells": 4215
+    },
+    {
+      "category": "repair",
+      "physical": "inland-water",
+      "source_indices": [
+        36249,
+        36413
+      ],
+      "cells": 27
+    },
+    {
+      "category": "physical",
+      "physical": "source-relative",
+      "source_indices": [
+        36413
+      ],
+      "cells": 1353
+    },
+    {
+      "category": "physical",
+      "physical": "source-relative",
+      "source_indices": [
+        36249,
+        36413
+      ],
+      "cells": 4973
+    }
+  ],
+  "request": {
+    "path": "kepulauan-aru11786-requested-intervals.json",
+    "bytes": 305718,
+    "sha256": "6d77f2fc77b6ee6d7c79ec780f9b904984721ad71fdfeece52023e232cc63863",
+    "git_blob_oid": "b48a3302b9bb9d352b5c74b710ffd7da54bc148a"
+  },
+  "immutable_extraction_pins": [
+    {
+      "commit": "2ec1f33cad4b02f2e9bc9e54072e65b5837257dc",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/source-investigation-v1/consumed-inputs/extraction/repair/block-032.json.gz",
+      "git_blob_oid": "bbc4c7e3ea013c47918d8fa7a38be9c5accbc38d",
+      "bytes": 231217,
+      "sha256": "ff5a8e59b798f1cb61135369efadd8ad6a0eeafd9d40ed33764c7ebb12ae63a8"
+    },
+    {
+      "commit": "2ec1f33cad4b02f2e9bc9e54072e65b5837257dc",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/source-investigation-v1/consumed-inputs/extraction/repair/block-033.json.gz",
+      "git_blob_oid": "7cd65cf9224c506f4a44a46b76b73093cb6dbbce",
+      "bytes": 127226,
+      "sha256": "e4e4ee81e00e2fdd94925451221643d9a40f2a6634cc4a20bfcee10ebea81560"
+    },
+    {
+      "commit": "2ec1f33cad4b02f2e9bc9e54072e65b5837257dc",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/source-investigation-v1/consumed-inputs/extraction/physical/block-032.json.gz",
+      "git_blob_oid": "0745ad217fe8625c89c936850e2aebfe582976d0",
+      "bytes": 198520,
+      "sha256": "d08e06fd93ba1fce7e63ef34e2222adc42a39c0b46796f4f2284755c607e8aa6"
+    },
+    {
+      "commit": "2ec1f33cad4b02f2e9bc9e54072e65b5837257dc",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/source-investigation-v1/consumed-inputs/extraction/physical/block-033.json.gz",
+      "git_blob_oid": "2ccf9feded63c2f3752b8b6e51e34fe77f9fa3c8",
+      "bytes": 107079,
+      "sha256": "93e710943ba1fd408446246d41659ee6a6585d2e60b72edb3676fb155cbf9b27"
+    }
+  ],
+  "source_feature_roster_pin": {
+    "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+    "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz",
+    "git_blob_oid": "e6e380ec13cd4bcc1d24399a76bfa85ca5805b26",
+    "bytes": 1844315,
+    "sha256": "87f2d47e104b3af640351e747d8300d0068a1be23caab9e80558c3f8914eb4aa"
+  },
+  "exception_roster_pin": {
+    "commit": "2ec1f33cad4b02f2e9bc9e54072e65b5837257dc",
+    "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/source-investigation-v1/retained-results/session-target-exceptions.json.gz",
+    "bytes": 11135,
+    "sha256": "121a991c92bb2c9e1d4e6f806fdb63ffcf2948536025ceb20254509f29ec33eb",
+    "git_blob_oid": "31d70e8140aeab7f69c6957789985079e48757c2"
+  },
+  "whole_stream_reads": [
+    {
+      "pin": {
+        "commit": "2ec1f33cad4b02f2e9bc9e54072e65b5837257dc",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/source-investigation-v1/consumed-inputs/extraction/repair/block-032.json.gz",
+        "git_blob_oid": "bbc4c7e3ea013c47918d8fa7a38be9c5accbc38d",
+        "bytes": 231217,
+        "sha256": "ff5a8e59b798f1cb61135369efadd8ad6a0eeafd9d40ed33764c7ebb12ae63a8"
+      },
+      "encoded_bytes_read": 231217,
+      "encoded_sha256": "ff5a8e59b798f1cb61135369efadd8ad6a0eeafd9d40ed33764c7ebb12ae63a8",
+      "decoded_bytes_read": 1863344,
+      "decoded_sha256": "20b11e00d9bc195c0cfdbbd117acef1bd59b40a4ad8c9308c03df5c52868c5d2",
+      "records": 37209,
+      "maximum_JSON_buffer_characters": 32817,
+      "read_chunk_bytes": 32768
+    },
+    {
+      "pin": {
+        "commit": "2ec1f33cad4b02f2e9bc9e54072e65b5837257dc",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/source-investigation-v1/consumed-inputs/extraction/repair/block-033.json.gz",
+        "git_blob_oid": "7cd65cf9224c506f4a44a46b76b73093cb6dbbce",
+        "bytes": 127226,
+        "sha256": "e4e4ee81e00e2fdd94925451221643d9a40f2a6634cc4a20bfcee10ebea81560"
+      },
+      "encoded_bytes_read": 127226,
+      "encoded_sha256": "e4e4ee81e00e2fdd94925451221643d9a40f2a6634cc4a20bfcee10ebea81560",
+      "decoded_bytes_read": 1012123,
+      "decoded_sha256": "48adb93f5c517a58a032c9023410b4558a903654e3c833d297ac10d84033cc11",
+      "records": 20103,
+      "maximum_JSON_buffer_characters": 32818,
+      "read_chunk_bytes": 32768
+    },
+    {
+      "pin": {
+        "commit": "2ec1f33cad4b02f2e9bc9e54072e65b5837257dc",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/source-investigation-v1/consumed-inputs/extraction/physical/block-032.json.gz",
+        "git_blob_oid": "0745ad217fe8625c89c936850e2aebfe582976d0",
+        "bytes": 198520,
+        "sha256": "d08e06fd93ba1fce7e63ef34e2222adc42a39c0b46796f4f2284755c607e8aa6"
+      },
+      "encoded_bytes_read": 198520,
+      "encoded_sha256": "d08e06fd93ba1fce7e63ef34e2222adc42a39c0b46796f4f2284755c607e8aa6",
+      "decoded_bytes_read": 1897364,
+      "decoded_sha256": "3e9e981d90c454765c8cd6778c9bac5feb5361e65879e1d9a1cdcbffe97b05d1",
+      "records": 31560,
+      "maximum_JSON_buffer_characters": 32826,
+      "read_chunk_bytes": 32768
+    },
+    {
+      "pin": {
+        "commit": "2ec1f33cad4b02f2e9bc9e54072e65b5837257dc",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/source-investigation-v1/consumed-inputs/extraction/physical/block-033.json.gz",
+        "git_blob_oid": "2ccf9feded63c2f3752b8b6e51e34fe77f9fa3c8",
+        "bytes": 107079,
+        "sha256": "93e710943ba1fd408446246d41659ee6a6585d2e60b72edb3676fb155cbf9b27"
+      },
+      "encoded_bytes_read": 107079,
+      "encoded_sha256": "93e710943ba1fd408446246d41659ee6a6585d2e60b72edb3676fb155cbf9b27",
+      "decoded_bytes_read": 1019303,
+      "decoded_sha256": "8f6722a7745cfbdd440482f9263477e9b629c3c779e2995707f88dd85d148f0b",
+      "records": 16777,
+      "maximum_JSON_buffer_characters": 32823,
+      "read_chunk_bytes": 32768
+    },
+    {
+      "pin": {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz",
+        "git_blob_oid": "e6e380ec13cd4bcc1d24399a76bfa85ca5805b26",
+        "bytes": 1844315,
+        "sha256": "87f2d47e104b3af640351e747d8300d0068a1be23caab9e80558c3f8914eb4aa"
+      },
+      "encoded_bytes_read": 1844315,
+      "encoded_sha256": "87f2d47e104b3af640351e747d8300d0068a1be23caab9e80558c3f8914eb4aa",
+      "decoded_bytes_read": 13496995,
+      "decoded_sha256": "7fa99cbf064121e0130b66758c212ae22b2a7be5649f2e250e9cda89a9bd595e",
+      "records": 73567,
+      "maximum_JSON_buffer_characters": 32955,
+      "read_chunk_bytes": 32768
+    },
+    {
+      "pin": {
+        "commit": "5ab660cb68821e6b719f1b86819069ecac419ce1",
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/owners.json.gz",
+        "mode": "100644",
+        "git_blob_oid": "9c44513df64995d417dd3832ae604c703e84a506",
+        "bytes": 2663523,
+        "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+        "decoded_bytes": 11096191,
+        "decoded_sha256": "a8086008b7a072dd86483720a2a166785229753422769dbbe0749497d870f428"
+      },
+      "encoded_bytes_read": 2663523,
+      "encoded_sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "decoded_bytes_read": 11096191,
+      "decoded_sha256": "a8086008b7a072dd86483720a2a166785229753422769dbbe0749497d870f428",
+      "records": 49625,
+      "maximum_JSON_buffer_characters": 32997,
+      "read_chunk_bytes": 32768
+    }
+  ],
+  "elapsed_seconds": 2.349921084,
+  "python_peak_rss_bytes": 22614016,
+  "scope": "Original record filtering/count arithmetic and exact metadata identity joins only. No new class, predicate, authority, current-owner-zero, physical or source/native/GIS execution. Other targets/holds untouched.",
+  "historical_repair_requests": 5460,
+  "historical_land_labels": 5433,
+  "preparation_correction": "Historical ranking aggregated repair5,460 and called it land. Direct original rows instead retain5,433land+27inland-water. An initial metadata assertion expecting all-land failed before request output; no scientific process ran. Exact original rows and classes were then preserved without reclassification."
+}
