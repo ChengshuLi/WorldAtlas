@@ -1,0 +1,42 @@
+{
+  "status": "actual accepted source-evidence execution exited0",
+  "executing_head": "d59f07769c911d08ffe44d1c33eead0c8207385e",
+  "accepted_method_commit": "b43462432a3a45771b1264fa6b7202cc831f6cec",
+  "selector_commit": "b43462432a3a45771b1264fa6b7202cc831f6cec",
+  "outputs": {
+    "preparation.json": {
+      "bytes": 263,
+      "sha256": "9a27c20d3fd8e8915d6b5afb8209c2b4ba1d06583c69537c7cdf3a29f9737a27"
+    },
+    "source-evidence.json": {
+      "bytes": 119800,
+      "sha256": "51298a44c22e16f7a8c2bdfad7dd1fc50f33b4bb78b6ef72d0296a54985b2413"
+    }
+  },
+  "all_nonderived_scientific_fields_deep_equal": [
+    "catalogue",
+    "families",
+    "kind",
+    "physical_evidence",
+    "physical_input",
+    "physical_reproduction",
+    "targets",
+    "version"
+  ],
+  "derived_fields_different_from_original": [],
+  "source_evidence_byte_identical_c264": false,
+  "fresh_receipt": {
+    "binding": {
+      "config_sha256": "f8ae131bd6b67311c5b27852e1799a2256eb54ac3334d32e387d19522e998b7e",
+      "phase": "source-evidence"
+    },
+    "outputs": {
+      "source-evidence.json": {
+        "bytes": 119800,
+        "sha256": "51298a44c22e16f7a8c2bdfad7dd1fc50f33b4bb78b6ef72d0296a54985b2413"
+      }
+    },
+    "version": 1
+  },
+  "limits": "Metadata assembly only; no source/physical/native replay, new qualification, owner-zero or acceptance. Original3591 constructor/source pin remains unchanged."
+}

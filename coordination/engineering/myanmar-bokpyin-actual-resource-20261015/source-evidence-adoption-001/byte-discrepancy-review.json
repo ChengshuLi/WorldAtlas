@@ -1,0 +1,45 @@
+{
+  "status": "sole two-byte difference is JSON numeric serialization; no scientific value change",
+  "original": {
+    "commit": "c26422bdbf41f369cc7b73cf60cb79376de2c5b2",
+    "path": "coordination/engineering/myanmar-bokpyin-diagnostic-20261015/inputs/source-evidence.json",
+    "bytes": 119802,
+    "sha256": "ed64d3f47ba305b8d336bc0e84a888cdea7c9add8fd8a95536470eec676b239b"
+  },
+  "actual": {
+    "path": "actual-source-evidence.json",
+    "bytes": 119800,
+    "sha256": "51298a44c22e16f7a8c2bdfad7dd1fc50f33b4bb78b6ef72d0296a54985b2413"
+  },
+  "comparison": {
+    "json_values_deep_equal": true,
+    "lexical_token_count_each": 30217,
+    "different_token_count": 1,
+    "whitespace_bytes_each": 1,
+    "byte_changes": [
+      {
+        "original_offset": 96516,
+        "actual_offset": 96516,
+        "original_token": "11.0",
+        "actual_token": "11",
+        "original_context": "],[99.1858063,10.9919415],[99.1677551,10.996664],[99.161377,11.0],[99.1472168,11.0094433],[99.1444397,11.0155544],[99.143418",
+        "actual_context": "],[99.1858063,10.9919415],[99.1677551,10.996664],[99.161377,11],[99.1472168,11.0094433],[99.1444397,11.0155544],[99.143418"
+      }
+    ],
+    "numeric_parser_representation_changes": [
+      {
+        "pointer": "/targets/0/territorial_exclusions/1/coordinates/0/0/397/1",
+        "original_value": 11.0,
+        "original_python_type": "float",
+        "actual_value": 11,
+        "actual_python_type": "int"
+      }
+    ]
+  },
+  "conclusion": "OriginalJSONtoken11.0 became11 through normalJavaScriptJSONparse/stringifyserialization. Both denoteexactlythenumber11. No coordinates/numericvalues/structure/derivedbaselinefields/scientificpremises changed. Literalrawbytes/SHA nevertheless differ.",
+  "custody_disposition": "Preserve original3591constructor c264sourcepin exactly; do notrelabelnewmetadataasoriginal. Newactualsource-evidence outputandreceiptremainseparateadoptionevidenceonly; no rerun,newauthorityorpublicationperformed.",
+  "limits": [
+    "Read-onlybody/token/JSONcomparison; no scientificmethodorresourceaudit.",
+    "Actualacceptedexecutionreportedbyroot/result; thisreviewdidnotexecutehelper."
+  ]
+}
