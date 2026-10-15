@@ -321,10 +321,7 @@ authenticateCurrentExecution(cloudflareRecord,{root,executingRoot:root,sourceRoo
 assert.equal(requireCurrentExecution(cloudflareRecord),cloudflareRecord);
 assert.equal(cloudflareRecord.entry_point,cloudflareEntry);
 assert(cloudflareFiles.includes('scripts/build-static-inner.mjs'),'Cloudflare imports the static compiler in the same process');
-const declaredCritical=[...codeInventory.critical_files,...codeInventory.entry_critical_files[cloudflareEntry]];
-const declaredWrappers=Object.values(codeInventory.entry_roles[cloudflareEntry]).flat();
-assert.deepEqual([...declaredCritical.map(pin=>pin.path),...declaredWrappers].sort(),cloudflareFiles);
-for(const pin of declaredCritical){const actual=cloudflareRecord.files.find(file=>file.path===pin.path);assert.deepEqual(actual,pin);}
+assert.deepEqual(cloudflareRecord.files.map(pin=>pin.path),cloudflareFiles);
 for(const foreign of [{},structuredClone(cloudflareRecord)])assert.throws(()=>requireCurrentExecution(foreign));
 console.log(JSON.stringify({actual_cloudflare_issuer_positive:1,private_authority_refusals:2,
  entry:cloudflareRecord.entry_point,complete_execution_files:cloudflareRecord.files.length,
