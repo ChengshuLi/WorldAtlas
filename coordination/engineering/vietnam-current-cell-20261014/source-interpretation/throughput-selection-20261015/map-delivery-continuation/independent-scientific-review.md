@@ -1,0 +1,49 @@
+# Scientific delivery semantics: adopted dated centre facts
+
+**The adopted island/terrain-body and exposed/developed terrestrial-centre interpretations can supply positive native-centre LAND-location evidence.** The fact is that the unchanged native centre occupies the depicted terrestrial body on the cited date. Native-centre semantics do not require the entire roughly150m cell to be land, dry ground under canopy, annual persistence or an exact legal shoreline. Those stronger limits must remain attached; they are not a reason to discard an actual centre-level land-body interpretation.
+
+This is a positive evidence route, not a generic `reviewed=true` override. It must retain the exact owner/y/x and unchanged centre, the adopted terrestrial interpretation kind, actual dated source/review locator and the source-owner compatibility context. It cannot be inferred from vegetation code, an administrative member, an adopted-answer count or a bare digest. All existing negative guards remain effective.
+
+## Category decisions from the actual adopted vectors
+
+| Adopted evidence | Count | Centre LAND positive? | Scientific reason |
+| --- | ---: | --- | --- |
+|Vân Đồn dated terrestrial-body locations, including vegetated island/landmass and legible exposed/developed coastal-body locations|2106|Yes, positive evidence only|Actual RGB/NIR geographic interpretation places the exact centre on a legible terrestrial body. Canopy/terrain shadow does not negate that morphology or establish dry understory.|
+|Cát Hải visible vegetated island/coastal-body378; dated vegetated-landmass222; exposed/developed coastal5; mixed terrestrial coastal-landmass66|671|Yes, positive evidence only|These adopted claims place the centre on a depicted terrestrial body, rather than merely reporting vegetation in an unresolved wet margin. Their source-parent conflict still prevents present selection.|
+|Nha Trang dated small-island locations|20|Yes, positive evidence only|Actual dated island morphology and the retained named/locality corroboration support the original centre locations; separate selected source-parent hold remains.|
+|Cô Tô three vegetated island/peninsula and one developed terrestrial-island location|4|Yes, positive evidence only|Adopted actual December physical interpretations locate the centres on terrestrial island bodies. Old-parent absence is separate.|
+|Adopted water locations: Vân Đồn94, Cát Hải136, Cô Tô1|231|No|Positive dated water evidence cannot enter a LAND-positive route or be neutralized by an administrative member.|
+|Cát Hải vegetated managed coastal-compartment localities|14|No|The adopted claim intentionally leaves ground wetness/inundation and emerged-ground assignment unspecified; vegetation/locality completion is insufficient for centre LAND.|
+|Cát Hải December vegetation-bearing coastal-fringe locality, index713|1|No|The adopted answer explicitly leaves the exact emerged side and mixed native ground unresolved. This is a completed limited locality question, not a LAND assignment.|
+|Unanswered shore, mixed surface, cloud/visibility or unobserved outside-footprint records|Not part of the3047 answered union|No|Neither a good question nor nearby interpreted geography supplies the missing exact-centre land fact.|
+
+Thus the3047 answered physical/locality facts contain **2801 potential strict terrestrial-centre supports,231 water facts and15 special vegetation/locality facts**. This is a semantic partition, not2801 newly admissible owners, cells or repairs.
+
+## Minimum current candidate and residual guards
+
+The source worker's retained exact join identifies **1153 Vân Đồn terrestrial centres with compatible Quảng Ninh2008 parent membership** as the first bulk input candidate. The other Vân Đồn terrestrial facts remain separately accounted:824 old-parent absences and129 positive Hải Phòng conflicts. Absence does not prove an incompatible parent, but cannot silently become a completed positive source-parent join; actual conflict remains held. All671 Cát Hải strict terrestrial facts retain the selected-parent conflict. Nha Trang20 and Cô Tô4 need their existing source/parent holds carried rather than being admitted by this scientific category alone.
+
+For the1153, actual dated terrestrial-centre facts plus retained complete original member/centre joins support the exact statement **“this original source-backed centre is a dated terrestrial-body location despite being outside the retained mapped land/inland-water classes.”** They do not explain every source-vintage difference or adjudicate all negative witness roles.
+
+The retained4372 diagnostic scanned mapped land/inland-water classes. Its mapped absence is not a per-key exterior result. The original whole physical corpus includes nonempty exterior inputs for Vân Đồn and Cát Hải; issues[] does not establish zero exterior hits at these centres. **Per-key exterior hits remain unknown.** No exterior witness is retyped, ignored or scientifically adjudicated here. A positive centre input may satisfy a missing positive branch while the ordinary constructor still refuses it under existing guards; that would be a real result, not evidence that those guards can be bypassed.
+
+Actual water, exterior-domain refusals, hierarchy/source-parent conflict and reconstruction failure must remain effective vetoes in the current route. In particular, old mapped-class absence is different from actual mapped water or an exterior contradiction. Neither an adopted interpretation boolean nor the phrase “old mask disagreement” may flatten those distinctions.
+
+## Review boundary and inputs
+
+Read the final adopted Vân Đồn2796/2200-answer vector, Cát Hải1156/822-answer vector, Nha Trang20 and Cô Tô5 dispositions, including the literal adopted answer kinds and limits. No source/native operation, imagery reread, geographic predicate, transformation, acquisition or authority-lifetime work was performed. This review earns no new original physical-review credit and changes no adopted claim.
+
+
+## Concrete worker4 plan and consumed-body custody: accept with limits
+
+Read [`worker4-general-plan/implementation-test-review-plan.md`](../worker4-general-plan/implementation-test-review-plan.md), anchored at4aa529. **Stage A is scientifically acceptable as planned:** a typed, authenticated exact dated-centre positive input, with the ordinary source/member/owner reconciliation and every negative predicate unchanged. It does not adjudicate exterior witnesses. The1153 compatible Vân Đồn keys are a conservative first candidate, not a requirement that every future land-location support have positive2008 ADM1 membership. The824 absence cases may have another valid source-owner compatibility resolution; this review neither resolves them nor invents a mandatory old-parent gate.
+
+**Accept the explicitly named retained-interpretation custody route for this positive input.** On the stated actual publication boundary, the immutable public bodies include complete centre observations, source/frame registration and method output, native unmarked RGB/NIR PNGs, the substantive independent interpretations and the root adoption vectors. These are adequate consumed scientific interpretation evidence for the exact native-centre land-location claim. The constructor consumes and authenticates the retained interpretation and its locatable supporting observations; it does not independently infer land from image pixels. The public observation body preserves actual values/masks and the public native PNGs preserve inspectable geographic context. Scientific meaning rests on the adopted substantive review, not on a category string, receipt or hash alone.
+
+The large raw TIFF/mask bodies remain local. Their published hashes do **not** prove pixel truth, make them publicly retrievable or constitute immutable raw-body authentication. This is an explicit limitation, **not a blocker for the retained-interpretation route just accepted**. A different implementation that claims to read/authenticate/replay those raw rasters would have a real missing durable raw-body custody blocker. It must not silently make that stronger claim, substitute metadata for raw bodies, or reacquire/rerun to disguise the gap. Existing whole-original-source and physical evidence contracts remain consumed unchanged; this decision waives none of them.
+
+The implementation review must preserve the exact terrestrial claim and its centre/date limits, exclude the231 water and15 special compartment/fringe facts from LAND support, and bind shared public source/observation/PNG/review/adoption bodies to the exact supported keys. `adopted=true` alone is insufficient. Actual negative water, source/owner conflict, original-domain/hole/tie, reconstruction and exterior contacts still refuse. Stage B remains conditional and unapproved pending an actual relevant refusal and separate scientific decision. No safely deliverable count, production implementation or new original-review credit is established here.
+
+### Actual source-owner clarification:1977 proposed candidates
+
+Worker1 subsequently reports the retained roster binding SID65810→owner48235 and the same actual SID/member coverage, empty flags and empty territorial holds for all824 old-ADM1-absent terrestrial centres. This supplies the existing positive ADM2 source-owner basis; old2008 ADM1 absence creates no new mandatory evidence gate. The proposed same-class candidate scope can therefore be **1977=1153+824**, rather than treating1153 as a ceiling. This changes neither the physical interpretations nor the Stage A method/custody decision. It is not1977 qualified/deliverable cells: all existing negative predicates remain, and the129 contrary Hải Phòng observations stay separately unadjudicated. Prior24 land facts remain outside this proposed bulk input.
