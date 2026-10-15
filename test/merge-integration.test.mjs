@@ -663,17 +663,13 @@ function finalMergeFixture({software = false} = {}) {
     stages: {research: 'complete', implementation: 'implemented', geographic_approval: 'not-requested'},
     change_receipts: files.map(row => ({path: row.filename, status: row.status}))};
   const manifestRaw = Buffer.from(JSON.stringify(manifest));
-  const review = {version: 1, pr_number: 23, head_sha: head, manifest_sha256: sha256(manifestRaw), author_worker_id: 'author',
-    reviewer_worker_id: 'reviewer', inspected_files: files.map(row => row.filename), evidence_hashes: [sha256(baselineRaw), sha256(outputRaw)],
-    outcome: 'accepted', limits: [], domains: {implementation: {outcome: 'accepted', scope: 'Synthetic controls', limits: []},
-      release: {outcome: 'accepted', scope: 'Synthetic preservation', limits: []}}};
   const blobs = new Map(), tree = rows => rows.map(([path, raw]) => {
     const sha = createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex');
     blobs.set(sha, {sha, size: raw.length, encoding: 'base64', content: raw.toString('base64')});
     return {path, sha, size: raw.length, mode: '100644', type: 'blob'};
   });
   const authored = tree([['README.md', baselineRaw], [outputPath, outputRaw], [manifestPath, manifestRaw]]), baseline = tree([['README.md', baselineRaw]]);
-  const f = {repo, head, base, candidate, issue, pr, files, review, manifest, blobs, authored, baseline, calls: [], writes: [], checks: 'success'};
+  const f = {repo, head, base, candidate, issue, pr, files, manifest, blobs, authored, baseline, calls: [], writes: [], checks: 'success'};
   f.api = async (route, method = 'GET', body) => {
     f.calls.push({route, method}); const name = route.split('?')[0];
     if (method !== 'GET') {f.writes.push({route, method, body}); return {merged: true, sha: 'd'.repeat(40)};}
@@ -685,8 +681,6 @@ function finalMergeFixture({software = false} = {}) {
     if (name.endsWith('/check-runs')) return {check_runs: ['scope', 'evidence'].map((name, id) => ({name, id, status: 'completed', conclusion: f.checks}))};
     if (name.endsWith('/status')) return {statuses: []};
     if (name === `/repos/${repo}/git/ref/heads/main`) return {object: {sha: f.base}};
-    if (name === `/repos/${repo}/issues/23/comments`) return [
-      {id: 1, author_association: 'OWNER', body: `<!-- worldatlas-review:v1\n${JSON.stringify(f.review)}\n-->`}];
     if (name.includes('/git/commits/')) {
       const commit = name.split('/').at(-1);
       return {sha: commit, tree: {sha: commit === base ? '1'.repeat(40) : '2'.repeat(40)}, parents: [{sha: base}, {sha: head}]};
@@ -713,14 +707,13 @@ test('actual final validation reads full evidence once and rejects changed bytes
   assert.equal(result.accepted, true);
   assert.equal(f.calls.filter(row => row.route.includes('/git/blobs/')).length, 3);
   assert.equal(f.calls.filter(row => row.route.includes('/pulls/23/files?')).length, 1);
-  assert.equal(f.calls.filter(row => row.route.includes('/issues/23/comments?')).length, 1);
+  assert.equal(f.calls.filter(row => /\/(?:comments|reviews)\?/.test(row.route)).length, 0);
   assert.equal(f.calls.filter(row => row.route.includes('/artifacts?') || row.route === '/rate_limit').length, 0);
   assert.equal(f.writes.filter(row => row.method === 'PUT').length, 1);
-  t.diagnostic(JSON.stringify({actual_api_calls: f.calls.length, final_file_passes: 1, final_review_passes: 1}));
-  for (const changed of ['bytes', 'review', 'issue', 'main']) {
+  t.diagnostic(JSON.stringify({actual_api_calls: f.calls.length, final_file_passes: 1, duplicate_review_receipt_reads: 0}));
+  for (const changed of ['bytes', 'issue', 'main']) {
     const bad = finalMergeFixture(), original = bad.api;
     if (changed === 'bytes') bad.blobs.get(bad.authored.find(row => row.path.endsWith('result.json')).sha).content = Buffer.from('different').toString('base64');
-    if (changed === 'review') bad.review.outcome = 'changes-requested';
     let reads = 0;
     bad.api = async (route, ...args) => {
       if (changed === 'issue' && route.endsWith('/issues/1183') && ++reads === 2) bad.issue.body += '\nChanged acceptance';

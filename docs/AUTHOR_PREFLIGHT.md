@@ -132,8 +132,9 @@ independently derived expectations, source inspection or adverse fixtures.
    references; candidate outputs cannot serve as their own reference. The hosted
    trusted premerge gate additionally checks metric/table bindings, control receipts,
    changed-file accounting and issue/scope bindings. After independent review, the
-   integration workflow rechecks declared scientific evidence and its substantive
-   exact-head review. Ordinary engineering review is checked by the submitting operator. Before review, inspect
+   integration workflow rechecks declared scientific evidence and bytes. The
+   submitting operator verifies substantive current-head independent review for all
+   PRs. Before review, inspect
    those declarations against actual outputs and changed files; the local byte-only
    success is not full premerge acceptance. Read the quick hosted ownership/evidence
    results and resolve their machine-reported errors before requesting review. Long
@@ -191,19 +192,20 @@ not repeatedly change only the first failing fixture. A legitimate unknown can
 remain explicit when acceptance permits it. Required unverified proof cannot
 support completion.
 
-Every new commit, including documentation-only commits, requires a new exact-head
-receipt. Substantive acceptance/PR disposition changes also invalidate contract
-bindings and require renewed relevant review. Ordinary progress comments do not invalidate review.
-Before resubmitting to the queue, inspect the latest receipt from **each reviewer**
+Every new commit, including documentation-only commits, requires renewed
+substantive exact-head review. Substantive acceptance/PR disposition changes also
+require renewed relevant review. Ordinary progress comments do not invalidate it.
+Before resubmitting to the queue, inspect the latest review from **each reviewer**
 for the current head and reconcile every substantive objection. One reviewer's
-acceptance does not clear another reviewer's changes-requested receipt. Ask the
+acceptance does not clear another reviewer's changes-requested review. Ask the
 objecting reviewer to recheck the repair; do not repeatedly submit an unchanged
 head or treat queue rejection as a transient error. Review of a previous head is
-not acceptance of a new head. The final accepting receipt must cover the required
+not acceptance of a new head. The final accepting review must cover the required
 whole-PR domains; a narrow finding or resolution comment is not a full acceptance.
 When a new head addresses earlier objections, request renewed relevant review and
-make the resolution explicit rather than relying on old receipts dropping out of
-the current-head gate. The trusted queue remains the final safeguard.
+make the resolution explicit. The submitting operator verifies the actual review;
+no duplicate machine-format receipt is required. The trusted queue still checks
+current identities, scientific evidence and actual integration results.
 
 After merge, reconcile the issue and direct dependents, preserve the checkpoint,
 and release the owned checkout before taking the next fresh job.

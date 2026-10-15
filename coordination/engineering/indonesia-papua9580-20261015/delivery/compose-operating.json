@@ -1,9 +1,9 @@
 {
+  "started_at": "2026-10-15T20:25:10.351502+00:00",
+  "ended_at": "2026-10-15T20:25:16.042156+00:00",
+  "elapsed_seconds": 5.690138375,
   "exit_code": 0,
-  "started_at": "2026-10-15T18:41:48.128645+00:00",
-  "ended_at": "2026-10-15T18:41:49.613703+00:00",
-  "elapsed_seconds": 1.4849790000589564,
-  "actual_code_commit": "832191562d92440474acf5678de5f3ae2ec20369",
+  "actual_code_commit": "181e66c68218003764b688f51eed60ed9cbb42c9",
   "repo": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/267133ee5fd33696ea7c63ec50cf78bebfb3c92f9a18ca0fb1c4db8be3e0c49e/review",
   "command": [
     "/usr/bin/time",
@@ -11,10 +11,12 @@
     "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
     "scripts/prepare-delivery-handoff.mjs",
     "compose",
-    ".cache/papua9580-after2013-config/compose.json",
-    ".cache/delivery-handoff/papua9580-after2013-compose-001"
+    ".cache/papua9580-after2025-config/compose.json",
+    ".cache/delivery-handoff/papua9580-after2025-compose-001"
   ],
-  "output": ".cache/delivery-handoff/papua9580-after2013-compose-001",
-  "memory_flags": false,
-  "source_producer_replay": false
+  "output": ".cache/delivery-handoff/papua9580-after2025-compose-001",
+  "source_producer_replay": false,
+  "native_qualification_replay": false,
+  "numeric_memory_flags": false,
+  "elapsed_kill": false
 }
