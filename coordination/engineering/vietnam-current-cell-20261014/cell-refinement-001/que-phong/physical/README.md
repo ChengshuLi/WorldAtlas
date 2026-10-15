@@ -6,4 +6,4 @@ The original 50 observations remain in the parent directory. Only 49 unflagged l
 
 The original output and preparation receipts retain their actual local staging/publication paths unchanged. This directory preserves those bytes as durable evidence. The outer configuration binds the actual existing 388-file isolated venv runtime, full stage and complete source inputs. Run 001 failed before scientific inputs because CLI setup loaded three omitted stdlib modules; its failure is preserved, and `runtime-extension.json` records only the six actual added source/cache pins. No completed physical operation was repeated.
 
-Independent actual-result review is pending at this checkpoint. Native-authority qualification and normal current-candidate consumption remain next.
+Independent actual-result review passed all25 checks. The later authority/ directory retains the separate49-cell stock native qualification; normal current-candidate consumption remains pending.

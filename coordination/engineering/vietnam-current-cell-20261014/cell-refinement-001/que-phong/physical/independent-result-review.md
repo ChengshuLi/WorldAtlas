@@ -1,0 +1,22 @@
+# Quế Phong49 actual physical result review
+
+**Positive physical result; 25/25 independent review checks passed, no material defect found.** This review concerns the actual accepted shared1928 run `quephong49-physical-002`, not a proposed execution or a replay. Native qualification remains pending.
+
+The retained `whole-target-support.json` is 22,199 bytes, SHA256 `31701e6f28114770f49de65a52b8570c7a723c4c662409bf0660dc7b3612d424`. Its single target is `gb:VNM:ADM2:81297802B37103290877054`. The executed stage equals the prepared whole-target stage, and its consumed feature equals the complete original feature in the authenticated 708-feature source family; the selected canonical feature separately matches the immutable pinned canonical source. This was a whole-feature computation, not a geometry reduced to the49 requested cells.
+
+The actual query roster is exactly source0, periodic offset0. It records `source_covers_candidate=true`, `candidate_covers_source=false`, `intersects=true`, `disjoint=false`, status `checked`, witness `complete-candidate-reconstruction`, with no issues. Source0 is an original GSHHG level1 land record, not an administrative or country identifier. Authenticated metadata identifies its complete1,181,100-point, valid, closed original record. The pinned method authenticates all18 metadata fragments (188,612 records), conservatively selects overlap candidates at shifts−360/0/360 plus full ancestors, reconstructs complete selected original records and retains tested relations and failures. The actual result contains only that one query; water, exterior, missing/extra reconstruction, contradictory support, and all three hierarchy disagreement witnesses are empty.
+
+The land support contains the complete one-ring Polygon:234 closed-ring coordinates,233 before closure. An exact comparison of every coordinate as IEEE754 binary64 pairs establishes reversed cyclic sequence equality, without rounding, tolerance or geometry predicates. Ordered JSON geometry equality is false because orientation/start differ; the distinct canonical geometry SHA256 values are retained:
+
+- Original: `05fd9421709682b0b59f42d6d58333ec8b7cebc9a655280760e22c7f10bc6632`.
+- Support: `93bd1e533e3be1c8fec4163d4c713578a01221b4e06ff543f98508a2beaf378a`.
+
+This is consistent with the source-covers branch retaining the whole candidate followed by alternating support union operations. No coordinate difference or vertex omission was found. It is not a claim of byte or ordered-serialization identity.
+
+The actual accepted1928 program SHA256 is `58ef81739b264085b2997be7baa3df03ba6bb673f91a160176efd79b71fec081`; frozen scientific comparison SHA256 is `f9c226add23a37a39bf7fd34f5d8bdcb34a8d276b331fabf59bf9867b6f84bfe`. Both accepted bodies and all25 consumed Git input identities/sizes independently resolve. The GSHHG complete member SHA256 is `af9215d58ebc525b2d09654a89959829f09e6edc457f3666759cded37be4ecf6`. The publication correctly hashes raw outer config (`cfb5b1e8…`); admission correctly hashes canonical inner `config.physical` (`fd66ca56…`). Their different roles follow the actual accepted entry/producer contract and are not drift. All388 runtime pins match the receipt.
+
+Actual producer time was4.324657458 seconds; receipt peak RSS382,894,080 bytes is below671,088,640 bytes. The legacy output field `maximum_rss_kib` holds macOS `ru_maxrss` bytes; no1024 multiplication applies. Resource guards are cooperative checks, not a hard process-tree supervisor.
+
+All50 original repair rows remain unchanged, including49 requested unflagged land cells and the excluded adverse cell `(207452,116254)` with `actual_sids=[41305,65133,65643]`, flag `foreign-source-family` (Houaphan41305). The patch contains exactly the49 requested cells and excludes that adverse cell. The physical result does not clear the Houaphan country/source evidence. GSHHG observation-date and authority limits remain. This is positive original-source-relative whole-target physical support for the next reviewed native proof; it supplies no native-cell qualification, new territorial conclusion, repaired credit or delivery authority.
+
+Review scope: static accepted-method reading, actual output/receipt and immutable metadata/binding checks, literal original-cell comparisons, exact binary64 sequence comparison only. No GSHHG geometry decoding, reconstruction, scientific predicate replay, producer execution or native qualification was performed. Detailed checks and pins are in `actual-physical-result-review.json`.

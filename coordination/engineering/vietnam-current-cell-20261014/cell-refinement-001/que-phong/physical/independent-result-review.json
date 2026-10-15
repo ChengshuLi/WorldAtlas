@@ -1,0 +1,697 @@
+{
+  "status": "positive whole-original source-relative land support; suitable physical input for subsequent reviewed native49 proof",
+  "target": "gb:VNM:ADM2:81297802B37103290877054",
+  "owner": 48348,
+  "run": "quephong49-physical-002",
+  "accepted_shared_commit": "2347ff09c3e07fb196422668c6b54e9504e1d860",
+  "actual_output_bindings": [
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/b516a693506d065f08d8984390ca7e530077d358a0739e0a661a1199da76763a/work/.cache/delivery-handoff/quephong49-physical-002/whole-target-support.json",
+      "bytes": 22199,
+      "sha256": "31701e6f28114770f49de65a52b8570c7a723c4c662409bf0660dc7b3612d424"
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/b516a693506d065f08d8984390ca7e530077d358a0739e0a661a1199da76763a/work/.cache/delivery-handoff/quephong49-physical-002/execution-receipt.json",
+      "bytes": 123320,
+      "sha256": "ada22596d2c0f5e2c2fa998b1e1c55c4e4ebdb640b26716a0a1f7f020ee09f61"
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/b516a693506d065f08d8984390ca7e530077d358a0739e0a661a1199da76763a/work/.cache/delivery-handoff/quephong49-physical-002/preparation.json",
+      "bytes": 544,
+      "sha256": "a712f49e6c0a7bf97eb7a64116cf797eb8908617346cfa3405d88926037e1914"
+    }
+  ],
+  "config_binding": {
+    "path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/repair-package/quephong49-physical-preparation/config-002.json",
+    "bytes": 140281,
+    "sha256": "cfb5b1e80c753e31ca09a92c1137e381fe0b0231a66b4d55d3887db999cc7aca"
+  },
+  "methods": [
+    {
+      "path": "scripts/qualify-source-cohort.py",
+      "commit": "2347ff09c3e07fb196422668c6b54e9504e1d860",
+      "bytes": 48543,
+      "sha256": "58ef81739b264085b2997be7baa3df03ba6bb673f91a160176efd79b71fec081",
+      "current_author_copy_equal": true
+    },
+    {
+      "path": "scripts/prepare-delivery-handoff.mjs",
+      "commit": "2347ff09c3e07fb196422668c6b54e9504e1d860",
+      "bytes": 87314,
+      "sha256": "f91c2919d09d4bcae8a0e7c07100ab699f7ea01144acc99ca181c9c8f0c3d458",
+      "current_author_copy_equal": true
+    }
+  ],
+  "comparison_method_functions": [
+    {
+      "name": "decode_record",
+      "start_line": 42,
+      "end_line": 93
+    },
+    {
+      "name": "relation",
+      "start_line": 96,
+      "end_line": 136
+    },
+    {
+      "name": "alternating_support",
+      "start_line": 139,
+      "end_line": 158
+    }
+  ],
+  "checks": [
+    {
+      "check": "exact actual physical body",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "complete actual receipt and publication hashes",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "fresh run002 publication identity",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "outer and materialized physical config distinct hashes match",
+      "passed": true,
+      "details": {
+        "outer_raw": "cfb5b1e80c753e31ca09a92c1137e381fe0b0231a66b4d55d3887db999cc7aca",
+        "outer_canonical_observation_only": "ead8d3385c66f09458cbf4e0f8d8cdc781be3d59ec566ca77cbe397dacdc412e",
+        "physical_canonical": "fd66ca5681651f02f10991091aa44d3900673f9d40dd022c4a59ba9fb5a6195a",
+        "accepted_contract": "prepare-delivery-handoff.mjs sourceBinding hashes raw outer config (903); jsonBytes(phaseConfig) materializes inner config (960), producer authenticates raw inner config (618)"
+      }
+    },
+    {
+      "check": "actual accepted1928 shared program and entry identity",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "complete25 consumed input pins exact",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "all25 actual input Git identities/sizes independently resolve",
+      "passed": true,
+      "details": [
+        {
+          "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/que-phong/original-stage-inputs.json",
+          "git_blob_oid": "7f15c122ef3e288ac1842a24e50027773a6a78c6",
+          "bytes": 35549,
+          "match": true
+        },
+        {
+          "path": "coordination/engineering/global-physical-comparison-20261006/results/transport-map.json",
+          "git_blob_oid": "56943cc4cc0ff21f2fbecca2c0ea7f95f6ca4298",
+          "bytes": 56473,
+          "match": true
+        },
+        {
+          "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-000.jsonl.gz",
+          "git_blob_oid": "df032b45bc2a9be5835bc9a0a016642bc26ebdbc",
+          "bytes": 1257080,
+          "match": true
+        },
+        {
+          "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-001.jsonl.gz",
+          "git_blob_oid": "ac62176e0ad47d91ca17377fedc138416b5278ef",
+          "bytes": 1208965,
+          "match": true
+        },
+        {
+          "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-002.jsonl.gz",
+          "git_blob_oid": "6453614d50cdb31b4215728b09d7ad9ee4cd20d7",
+          "bytes": 1191861,
+          "match": true
+        },
+        {
+          "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-003.jsonl.gz",
+          "git_blob_oid": "13362555c6f6514003b69adbd8e3d81f6ec51bdd",
+          "bytes": 1177247,
+          "match": true
+        },
+        {
+          "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-004.jsonl.gz",
+          "git_blob_oid": "04d608b9715a413ef7f74224a9a85007307c752f",
+          "bytes": 1164683,
+          "match": true
+        },
+        {
+          "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-005.jsonl.gz",
+          "git_blob_oid": "68ff6385969f0a1ae8fb56bc2712706d1a276c38",
+          "bytes": 1155371,
+          "match": true
+        },
+        {
+          "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-006.jsonl.gz",
+          "git_blob_oid": "2de70ab6b927a386d26d62ccf6f4c5bb437bfead",
+          "bytes": 1148156,
+          "match": true
+        },
+        {
+          "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-007.jsonl.gz",
+          "git_blob_oid": "e2eecf3bafe633a148e5e097750601919cf946a9",
+          "bytes": 1140886,
+          "match": true
+        },
+        {
+          "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-008.jsonl.gz",
+          "git_blob_oid": "e0bdaa0a94f2908eeafce0699a1fb0316656b00e",
+          "bytes": 1141102,
+          "match": true
+        },
+        {
+          "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-009.jsonl.gz",
+          "git_blob_oid": "ba39d5f608c13e9e0b8254705f66e93a56a16258",
+          "bytes": 1132445,
+          "match": true
+        },
+        {
+          "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-010.jsonl.gz",
+          "git_blob_oid": "62438f205f76babd1f6c4e1d68cf5a50f3eac272",
+          "bytes": 1128682,
+          "match": true
+        },
+        {
+          "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-011.jsonl.gz",
+          "git_blob_oid": "e476bf703de50711003b90d6323b5d2e9f41c9d9",
+          "bytes": 1125219,
+          "match": true
+        },
+        {
+          "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-012.jsonl.gz",
+          "git_blob_oid": "d028bfb9281e72923155085fe6fc58f254ea169a",
+          "bytes": 1121691,
+          "match": true
+        },
+        {
+          "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-013.jsonl.gz",
+          "git_blob_oid": "a8df23bc26466b2faa4eb2a73405b0b58c352d09",
+          "bytes": 1120633,
+          "match": true
+        },
+        {
+          "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-014.jsonl.gz",
+          "git_blob_oid": "2c5947576e0d34ca4fb99eda81b7779b83518287",
+          "bytes": 1113872,
+          "match": true
+        },
+        {
+          "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-015.jsonl.gz",
+          "git_blob_oid": "ac5b3ec4c499d53f351695e029ae35732ffd3833",
+          "bytes": 1107592,
+          "match": true
+        },
+        {
+          "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-016.jsonl.gz",
+          "git_blob_oid": "5c98a155046742a6b3fc6dce1a7ba38cd0c0f111",
+          "bytes": 1117463,
+          "match": true
+        },
+        {
+          "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-017.jsonl.gz",
+          "git_blob_oid": "2b274cf9312059cac124517c14ac480812a367f3",
+          "bytes": 698664,
+          "match": true
+        },
+        {
+          "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/member-index.json",
+          "git_blob_oid": "a749382ae63a861a8f65a6275a851fea0e79c454",
+          "bytes": 5821,
+          "match": true
+        },
+        {
+          "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/native-00.bin.gz",
+          "git_blob_oid": "1ed08dd7fe8c237c34e9e02ac04c158960362436",
+          "bytes": 22743455,
+          "match": true
+        },
+        {
+          "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/native-01.bin.gz",
+          "git_blob_oid": "7f23a353abcf3dc23aafdcfd5644ff55d0271a7e",
+          "bytes": 23286998,
+          "match": true
+        },
+        {
+          "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/native-02.bin.gz",
+          "git_blob_oid": "39ada13dc05a9b44b08c0221b71d00137fa6d11a",
+          "bytes": 19571844,
+          "match": true
+        },
+        {
+          "path": "coordination/engineering/global-physical-comparison-20261006/comparison.py",
+          "git_blob_oid": "86654c37ec854d862073aaf63c8d8d144956b283",
+          "bytes": 9834,
+          "match": true
+        }
+      ]
+    },
+    {
+      "check": "preserved original scientific comparison bytes",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "executed stage is complete prepared one-target stage",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "whole original consumed feature from authenticated708family",
+      "passed": true,
+      "details": {
+        "source_record": 488,
+        "whole_feature_value_sha256": "dbb3ac9ab80ce9dec592fe093c5e5bb12d3df186c1034fa7a8794d6e5f4f33c6"
+      }
+    },
+    {
+      "check": "selected stage equals unique pinned canonical feature",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "actual exactly one expected target",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "complete-candidate positive source0 witness",
+      "passed": true,
+      "details": [
+        {
+          "source_id": 0,
+          "periodic_offset": 0,
+          "source_covers_candidate": true,
+          "candidate_covers_source": false,
+          "intersects": true,
+          "disjoint": false,
+          "status": "checked",
+          "witness": "complete-candidate-reconstruction"
+        }
+      ]
+    },
+    {
+      "check": "emitted land support retains complete original ring by exact binary64 reversal",
+      "passed": true,
+      "details": {
+        "geometry_type": "Polygon",
+        "original_ring_count": 1,
+        "support_ring_count": 1,
+        "original_closed_coordinates": 234,
+        "support_closed_coordinates": 234,
+        "closed_binary64_equal": true,
+        "raw_ordered_geometry_equal": false,
+        "exact_forward_cycle": false,
+        "exact_reverse_cycle": true,
+        "support_first_vertex_original_open_ring_offsets": [
+          232
+        ],
+        "all_coordinates_compared_as": "big-endian IEEE754 binary64 pairs; no rounding, tolerance or geometry predicates",
+        "original_geometry_value_sha256": "05fd9421709682b0b59f42d6d58333ec8b7cebc9a655280760e22c7f10bc6632",
+        "land_support_value_sha256": "93bd1e533e3be1c8fec4163d4c713578a01221b4e06ff543f98508a2beaf378a"
+      }
+    },
+    {
+      "check": "all water exterior and reconstruction error witnesses empty",
+      "passed": true,
+      "details": {
+        "mapped_inland_water_support": {
+          "type": "GeometryCollection",
+          "geometries": []
+        },
+        "outside_mapped_L1_context": {
+          "type": "Polygon",
+          "coordinates": []
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "coordinates": []
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "coordinates": []
+        },
+        "contradictory_land_water_support": {
+          "type": "GeometryCollection",
+          "geometries": []
+        }
+      }
+    },
+    {
+      "check": "all alternating hierarchy disagreement witnesses empty",
+      "passed": true,
+      "details": {
+        "L2-outside-L1": {
+          "type": "GeometryCollection",
+          "geometries": []
+        },
+        "L3-outside-L2": {
+          "type": "GeometryCollection",
+          "geometries": []
+        },
+        "L4-outside-L3": {
+          "type": "GeometryCollection",
+          "geometries": []
+        }
+      }
+    },
+    {
+      "check": "result physical source identities and complete metadata receipts",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "actual source0 original level1 valid closed metadata",
+      "passed": true,
+      "details": {
+        "ancestor": -1,
+        "complete_original_native_byte_hash_alias": "v1",
+        "container": -1,
+        "declared_range": "GMT_IS_M180_TO_P270_RANGE",
+        "decoded_pointset_binary64_sha256": "e16c72412602f25db211d93fc1669d7692c103fcfc8865faf5060379f14d8ee5",
+        "decoded_pointset_bounds": [
+          -9.500444000000016,
+          1.268694,
+          190.35911099999998,
+          77.719583
+        ],
+        "flag": 84086529,
+        "geometry_issues": [],
+        "header_native_values": [
+          0,
+          1181100,
+          84086529,
+          -9500444,
+          190359111,
+          1268694,
+          77719583,
+          506540508,
+          506540507,
+          -1,
+          -1
+        ],
+        "id": 0,
+        "level": 1,
+        "n": 1181100,
+        "native_closed": true,
+        "native_offset": 0,
+        "native_record_bytes": 9448844,
+        "ordinal": 0,
+        "river_lake": 0,
+        "seam_flags": 3,
+        "source_flag": 1,
+        "whole_original_geometry_valid": true
+      }
+    },
+    {
+      "check": "exact complete original GSHHG member identity",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "388 pinned runtime records consistent with actual receipt",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "actual producer time and bytes below admitted limits",
+      "passed": true,
+      "details": {
+        "producer_seconds": 4.324657457997091,
+        "receipt_seconds": 4.3251161250518635,
+        "shared_entry_seconds": 4.544645667,
+        "peak_rss_bytes": 382894080,
+        "limit_bytes": 671088640,
+        "legacy_maximum_rss_kib_field": 382894080
+      }
+    },
+    {
+      "check": "immutable original cell bank bytes",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "all50 literal original context including Houaphan preserved",
+      "passed": true,
+      "details": [
+        {
+          "accepted_geometry_covers": false,
+          "accepted_hole_covers": false,
+          "actual_sids": [
+            41305,
+            65133,
+            65643
+          ],
+          "country_boundary_ids": [],
+          "covering_owners": [
+            48348
+          ],
+          "declared_sids": [
+            41305,
+            65133,
+            65643
+          ],
+          "flags": [
+            "foreign-source-family"
+          ],
+          "hold_reasons": [
+            "foreign-source-family"
+          ],
+          "owner": 48348,
+          "package": "repair-evaluation",
+          "physical": "land",
+          "qualified": false,
+          "reference_countries": [
+            "VNM"
+          ],
+          "source_boundary_ids": [],
+          "territorial_hold_reasons": [
+            "foreign-source-family"
+          ],
+          "x": 207452,
+          "y": 116254
+        }
+      ]
+    },
+    {
+      "check": "patch exact49 and one adverse excluded",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "no original readiness or actual result file modified by review",
+      "passed": true,
+      "details": null
+    }
+  ],
+  "findings": [],
+  "whole_original_stage_input_pin": {
+    "commit": "2855587c4ae012b64a546f8c4c9a915b3021cd3e",
+    "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/que-phong/original-stage-inputs.json",
+    "git_blob_oid": "7f15c122ef3e288ac1842a24e50027773a6a78c6",
+    "bytes": 35549,
+    "sha256": "6e050718cdae7fa799e8c9df11ada24db5f49a7bfa7df2791824d7bc334e4ba1"
+  },
+  "body_hashes_independently_read": [
+    {
+      "commit": "2347ff09c3e07fb196422668c6b54e9504e1d860",
+      "path": "scripts/qualify-source-cohort.py",
+      "mode": "100644",
+      "type": "blob",
+      "git_blob_oid": "4dea98fd3d75a70327f1f1313619c44eb113971f",
+      "bytes": 48543,
+      "sha256": "58ef81739b264085b2997be7baa3df03ba6bb673f91a160176efd79b71fec081"
+    },
+    {
+      "commit": "2347ff09c3e07fb196422668c6b54e9504e1d860",
+      "path": "scripts/prepare-delivery-handoff.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "git_blob_oid": "1e4e8a4c6d2902071db96d1c16c4f917a90e10fd",
+      "bytes": 87314,
+      "sha256": "f91c2919d09d4bcae8a0e7c07100ab699f7ea01144acc99ca181c9c8f0c3d458"
+    },
+    {
+      "bytes": 5821,
+      "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+      "git_blob_oid": "a749382ae63a861a8f65a6275a851fea0e79c454",
+      "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/member-index.json",
+      "sha256": "1fc10fa094ebd128f21d6440152d391cec879a2ec6ded9d665667f9e42513d12"
+    },
+    {
+      "commit": "2855587c4ae012b64a546f8c4c9a915b3021cd3e",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/que-phong/original-stage-inputs.json",
+      "git_blob_oid": "7f15c122ef3e288ac1842a24e50027773a6a78c6",
+      "bytes": 35549,
+      "sha256": "6e050718cdae7fa799e8c9df11ada24db5f49a7bfa7df2791824d7bc334e4ba1"
+    },
+    {
+      "bytes": 56473,
+      "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+      "git_blob_oid": "56943cc4cc0ff21f2fbecca2c0ea7f95f6ca4298",
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/transport-map.json",
+      "sha256": "644345be3d231431177c416b6ddbe3a1b2486597295af45fd5224857b5612d26"
+    },
+    {
+      "bytes": 9834,
+      "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+      "git_blob_oid": "86654c37ec854d862073aaf63c8d8d144956b283",
+      "path": "coordination/engineering/global-physical-comparison-20261006/comparison.py",
+      "sha256": "f9c226add23a37a39bf7fd34f5d8bdcb34a8d276b331fabf59bf9867b6f84bfe"
+    },
+    {
+      "bytes": 1624579,
+      "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+      "decoded_bytes": 5273788,
+      "decoded_sha256": "2dff75b58e71f736ca9fd6ef7c859be40c6f9a9b7ae5cd0806b36fe8cfa4c4f6",
+      "git_blob_oid": "d6351672b369b2e6919b10b7c959b3b709a3040e",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-VNM-ADM2-000.bin.gz",
+      "sha256": "8fa769599000ab536b18b4a9d18c71fe0fecbe134d4443e36e6b2797b41273a8",
+      "local_file": "inputs/gb-VNM-ADM2-000.bin.gz"
+    },
+    {
+      "bytes": 4863162,
+      "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+      "git_blob_oid": "a6a359c8c566462b280a461b4a5e1591e1f486c4",
+      "path": "data/geography/part-27.json",
+      "sha256": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758",
+      "local_file": "inputs/part-27.json"
+    },
+    {
+      "bytes": 6613963,
+      "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+      "git_blob_oid": "a9e03cb07194a73f643af85d1e6db94abe3b5fc9",
+      "path": "data/geography/part-28.json",
+      "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "local_file": "inputs/part-28.json"
+    },
+    {
+      "bytes": 1257080,
+      "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+      "decoded_bytes": 7012839,
+      "decoded_sha256": "6221acc498dc62b6691624541c6e80ab789b8180bee2b51ecf6c7763c10457b2",
+      "git_blob_oid": "df032b45bc2a9be5835bc9a0a016642bc26ebdbc",
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-000.jsonl.gz",
+      "sha256": "c548e4465e2ad06647d456b74d17395fd6f2b6ad3ff146ecd6d21d61e51933e1"
+    }
+  ],
+  "source0_metadata": {
+    "ancestor": -1,
+    "complete_original_native_byte_hash_alias": "v1",
+    "container": -1,
+    "declared_range": "GMT_IS_M180_TO_P270_RANGE",
+    "decoded_pointset_binary64_sha256": "e16c72412602f25db211d93fc1669d7692c103fcfc8865faf5060379f14d8ee5",
+    "decoded_pointset_bounds": [
+      -9.500444000000016,
+      1.268694,
+      190.35911099999998,
+      77.719583
+    ],
+    "flag": 84086529,
+    "geometry_issues": [],
+    "header_native_values": [
+      0,
+      1181100,
+      84086529,
+      -9500444,
+      190359111,
+      1268694,
+      77719583,
+      506540508,
+      506540507,
+      -1,
+      -1
+    ],
+    "id": 0,
+    "level": 1,
+    "n": 1181100,
+    "native_closed": true,
+    "native_offset": 0,
+    "native_record_bytes": 9448844,
+    "ordinal": 0,
+    "river_lake": 0,
+    "seam_flags": 3,
+    "source_flag": 1,
+    "whole_original_geometry_valid": true
+  },
+  "geometry_representation_observation": {
+    "geometry_type": "Polygon",
+    "original_ring_count": 1,
+    "support_ring_count": 1,
+    "original_closed_coordinates": 234,
+    "support_closed_coordinates": 234,
+    "closed_binary64_equal": true,
+    "raw_ordered_geometry_equal": false,
+    "exact_forward_cycle": false,
+    "exact_reverse_cycle": true,
+    "support_first_vertex_original_open_ring_offsets": [
+      232
+    ],
+    "all_coordinates_compared_as": "big-endian IEEE754 binary64 pairs; no rounding, tolerance or geometry predicates",
+    "original_geometry_value_sha256": "05fd9421709682b0b59f42d6d58333ec8b7cebc9a655280760e22c7f10bc6632",
+    "land_support_value_sha256": "93bd1e533e3be1c8fec4163d4c713578a01221b4e06ff543f98508a2beaf378a"
+  },
+  "scientific_interpretation": "One actual checked source0 level1 covers the complete original candidate; emitted mapped land support retains every complete original closed-ring coordinate exactly as binary64 pairs with reversed cyclic order (distinct ordered geometry hashes retained), with no water/exterior/reconstruction/hierarchy disagreement. This is actual positive original-GSHHG-relative physical support, not flag absence or a native-cell measurement.",
+  "query_completeness_basis": "Accepted physical method authenticates complete18 metadata fragments/188612records, conservatively selects original-bounds overlaps at shifts-360/0/360 plus full ancestor closure, validates complete source records, retains each tested relation; this result has only source0offset0 and no issues. No metadata inventory/geometry/point predicate replay in this review.",
+  "method_scope": "Frozen comparison relation validates complete candidate/source and explicitly evaluates covers/intersects/disjoint; source-covers branch retains whole candidate as witness; alternating_support preserves land/water/exterior and hierarchy differences. Shared1928 input retention does not replace this method.",
+  "original_context": {
+    "whole": 50,
+    "requested49": 49,
+    "adverse1": [
+      {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          41305,
+          65133,
+          65643
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48348
+        ],
+        "declared_sids": [
+          41305,
+          65133,
+          65643
+        ],
+        "flags": [
+          "foreign-source-family"
+        ],
+        "hold_reasons": [
+          "foreign-source-family"
+        ],
+        "owner": 48348,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "VNM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-source-family"
+        ],
+        "x": 207452,
+        "y": 116254
+      }
+    ],
+    "all_original_context_unchanged": true
+  },
+  "measurement_units_note": "On the macOS run resource.ru_maxrss is bytes despite legacy output key maximum_rss_kib. Actual shared receipt independently names peak_rss_bytes382894080; no1024multiplication is applied.",
+  "limits": [
+    "Actual physical source-relative support does not clear Houaphan foreign-source-family evidence or territorial/administrative questions",
+    "Heterogeneous GSHHG observation dates and physical authority limits remain",
+    "This review read result/method/metadata and bindings only; it did not decode/reconstruct GSHHG source geometries or rerun predicates",
+    "Full native coverage/physical-class owner joins, current-owner-zero, constructor and delivery remain pending; no qualification/credit from this review",
+    "RSS/time guards are cooperative boundaries, not hard process-tree supervision"
+  ],
+  "native_qualification_executed": false,
+  "new_country_clearance": false,
+  "qualification_changed": false
+}
