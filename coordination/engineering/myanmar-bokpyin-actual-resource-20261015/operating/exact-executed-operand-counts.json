@@ -1,0 +1,184 @@
+{
+  "scope": "Resource-only exact accepted sourceFeatures per-polygon bbox-overlap metadata roster; no containment, native scanning, geometry clipping, authority or acceptance result",
+  "source_family_pin": {
+    "bytes": 1396414,
+    "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+    "decoded_bytes": 4205367,
+    "decoded_sha256": "94c0c9af839094257d13a6fe6590feddb2dcb04540d87e58b656c9f000fb92a2",
+    "git_blob_oid": "6a91fcb22b44ae00401a0068a6c3e62bfed62374",
+    "mode": "100644",
+    "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz",
+    "sha256": "57de50a588f418601412bb7a34cc2f43a3fd6d7d6f16635cb41b95e5ae505db6"
+  },
+  "complete_source_records": 330,
+  "source_evidence_sha256": "ed64d3f47ba305b8d336bc0e84a888cdea7c9add8fd8a95536470eec676b239b",
+  "complete_input_frame_unchanged": true,
+  "selected_whole_feature_count": 4,
+  "selected_whole_features": [
+    {
+      "shapeID": "66882298B86598910616989",
+      "stats": {
+        "parts": 1,
+        "vertices": 1729,
+        "polygons": 52,
+        "rings": 52,
+        "segments": 0,
+        "points": 0,
+        "blocks": {
+          "29": {
+            "edges": 1677,
+            "crossing_edge_rows": 0,
+            "span_upper_bound": 0,
+            "tie_upper_bound": 0,
+            "scratch_bytes_without_requested_cells": 2299008
+          },
+          "30": {
+            "edges": 1677,
+            "crossing_edge_rows": 5238,
+            "span_upper_bound": 2619,
+            "tie_upper_bound": 5238,
+            "scratch_bytes_without_requested_cells": 3807552
+          }
+        }
+      }
+    },
+    {
+      "shapeID": "66882298B62167174305830",
+      "stats": {
+        "parts": 1,
+        "vertices": 3853,
+        "polygons": 118,
+        "rings": 118,
+        "segments": 0,
+        "points": 0,
+        "blocks": {
+          "29": {
+            "edges": 3735,
+            "crossing_edge_rows": 11462,
+            "span_upper_bound": 5731,
+            "tie_upper_bound": 11462,
+            "scratch_bytes_without_requested_cells": 7775040
+          },
+          "30": {
+            "edges": 3735,
+            "crossing_edge_rows": 0,
+            "span_upper_bound": 0,
+            "tie_upper_bound": 0,
+            "scratch_bytes_without_requested_cells": 4473984
+          }
+        }
+      }
+    },
+    {
+      "shapeID": "66882298B82483484204646",
+      "stats": {
+        "parts": 1,
+        "vertices": 2145,
+        "polygons": 39,
+        "rings": 39,
+        "segments": 0,
+        "points": 0,
+        "blocks": {
+          "29": {
+            "edges": 2106,
+            "crossing_edge_rows": 2488,
+            "span_upper_bound": 1244,
+            "tie_upper_bound": 2488,
+            "scratch_bytes_without_requested_cells": 3441536
+          },
+          "30": {
+            "edges": 2106,
+            "crossing_edge_rows": 4290,
+            "span_upper_bound": 2145,
+            "tie_upper_bound": 4290,
+            "scratch_bytes_without_requested_cells": 3960512
+          }
+        }
+      }
+    },
+    {
+      "shapeID": "66882298B30308301468052",
+      "stats": {
+        "parts": 1,
+        "vertices": 794,
+        "polygons": 1,
+        "rings": 1,
+        "segments": 0,
+        "points": 0,
+        "blocks": {
+          "29": {
+            "edges": 793,
+            "crossing_edge_rows": 3720,
+            "span_upper_bound": 1860,
+            "tie_upper_bound": 3720,
+            "scratch_bytes_without_requested_cells": 2412928
+          },
+          "30": {
+            "edges": 793,
+            "crossing_edge_rows": 0,
+            "span_upper_bound": 0,
+            "tie_upper_bound": 0,
+            "scratch_bytes_without_requested_cells": 1341568
+          }
+        }
+      }
+    }
+  ],
+  "coverage_features": 1,
+  "territorial_exclusions": 3,
+  "all_executed_scan_geometries": {
+    "parts": 8,
+    "vertices": 18013,
+    "polygons": 313,
+    "rings": 313,
+    "segments": 0,
+    "points": 0,
+    "blocks": {
+      "29": {
+        "edges": 17700,
+        "crossing_edge_rows": 34708,
+        "span_upper_bound": 17354,
+        "tie_upper_bound": 34708,
+        "scratch_bytes_without_requested_cells": 28970624
+      },
+      "30": {
+        "edges": 17700,
+        "crossing_edge_rows": 33446,
+        "span_upper_bound": 16723,
+        "tie_upper_bound": 33446,
+        "scratch_bytes_without_requested_cells": 28607168
+      }
+    }
+  },
+  "blocks": [
+    {
+      "block": 29,
+      "requested_cells": 895,
+      "main_scan_reserve": 65338624,
+      "residual_witness_reserve": 7031488,
+      "hit_reserve": 171840,
+      "subtotal": 345269795
+    },
+    {
+      "block": 30,
+      "requested_cells": 2721,
+      "main_scan_reserve": 64611712,
+      "residual_witness_reserve": 9280320,
+      "hit_reserve": 522432,
+      "subtotal": 344893475
+    }
+  ],
+  "static_execution_code_bytes": 531110,
+  "unchanged_operating_policy_cushion_bytes": 134217728,
+  "complete_prospective_bytes": 480018633,
+  "observation": {
+    "elapsed_seconds": 0.891804375,
+    "process_peak_rss_bytes": 58732544,
+    "rss_units": "Darwin bytes"
+  },
+  "proposed_config_bytes_at_512MiB": 510,
+  "proposed_phase_and_rss_bytes": 536870912,
+  "prospective_bytes_at_512MiB_config": 480018631,
+  "margin_at_512MiB": 56852281,
+  "fresh_machine_admission_still_required": true
+}

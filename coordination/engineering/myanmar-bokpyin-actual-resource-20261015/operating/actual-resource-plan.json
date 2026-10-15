@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "status": "Independent actual-operand prospective plan; fresh stock admission pending",
+  "input_change": "Only phase/RSS request changes from1GiB to512MiB. All scientific locators and accepted code unchanged.",
+  "prior_config_commit": "effe78d0ae0cbd8d3e6938e921f6d5da09104bd9",
+  "actual_config_bytes": 510,
+  "actual_config_sha256": "902e75109ed19f2438ebae8b75ff19b886eb8b7f662a8c777d1684306da03113",
+  "complete_prospective_bytes": 480018631,
+  "phase_request_bytes": 536870912,
+  "rss_request_bytes": 536870912,
+  "operating_policy_cushion_bytes": 134217728,
+  "margin_bytes": 56852281,
+  "complete_original_source_records_authenticated_and_parsed": 330,
+  "whole_source_features_selected_by_unchanged_stock_bbox_filter": 4,
+  "whole_coverage_operands": 1,
+  "whole_exclusion_operands": 3,
+  "code_bytes": 531110,
+  "session_headroom_bytes": 572882944,
+  "limits": [
+    "Current-resource-snapshot.json is one read-only observation, not a future grant or historical reconstruction.",
+    "No native diagnostic or qualification executed for this plan.",
+    "Earlier1GiB plan was a conservative all330scan superset, not a measured minimum.",
+    "No scientific record, full input parsing charge, veto, original query, scanner coefficient, copy factor or operating cushion was removed."
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "observed_at": "2026-10-15T02:13:07.435Z",
+  "node_version": "v24.19.0",
+  "total_memory_bytes": 8589934592,
+  "available_memory_bytes": 1335541760,
+  "os_free_memory_bytes": 209502208,
+  "constrained_memory_bytes": 0,
+  "current_rss_bytes": 49053696,
+  "headroom_bytes": 572882944,
+  "concurrent_reserved_bytes": 0,
+  "requested_phase_bytes": 1073741824,
+  "requested_rss_bytes": 1073741824,
+  "growth_bytes": 762658816,
+  "same_process_limit_bytes": 811712512,
+  "request_excess_bytes": 262029312,
+  "separate_child_limit_bytes": 762658816,
+  "guard_sha256": "227b982fac966fff5e55483c62ecb181defd55194b2946e31b7606574013f676",
+  "exact_guard_error": "Requested preparation allowance exceeds current memory admission",
+  "limits": [
+    "This is one fresh read-only diagnostic snapshot, not the numeric state of the two earlier uninstrumented refusals.",
+    "No candidate input, geometry predicate, scientific producer, output destination, reservation or retry.",
+    "Same-process Node RSS credit is distinct from separate-child zero-credit admission."
+  ]
+}
