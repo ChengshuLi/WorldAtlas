@@ -1,0 +1,32 @@
+{
+  "source_family": {
+    "commit": "5ab660cb68821e6b719f1b86819069ecac419ce1",
+    "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IDN-ADM2-000.bin.gz",
+    "mode": "100644",
+    "git_blob_oid": "d918c74989043677364ff43f9fbec3d1f0d3a3af",
+    "bytes": 3051391,
+    "sha256": "ef394916ba97454b5592e66eba1df67199731ce7d9636cc3968843801ae904a8",
+    "decoded_bytes": 11002896,
+    "decoded_sha256": "146653d488331086ddc43d159a261b01ea6dd08c7ed422e34a9886c3c690430c"
+  },
+  "method": "bounded streaming JSON feature extraction and whole decoded hash; no geometry/predicate/coordinate transform",
+  "complete_family_features": 519,
+  "decoded_bytes_streamed": 11002896,
+  "maximum_JSON_buffer_characters": 236690,
+  "selected_geography_parts_checked": [
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-10.json",
+      "mode": "100644",
+      "git_blob_oid": "84b4cf537b801c7f6d3840173c49b7e4293a139d",
+      "bytes": 5144571,
+      "sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2",
+      "role": "current-v8-unchanged-source-body",
+      "kind": "ordinary-immutable-git-source",
+      "custody": "immutable selected-source Git pin authenticated during preservation"
+    }
+  ],
+  "selected_accepted_head": "8c4199fd6455246b98a6fd4b7a6d0f708b9afc70",
+  "source_and_selected_identity_match": "gb:IDN:ADM2:22746128B90221566890304",
+  "status": "prepared whole original and selected stage input; not source qualification"
+}
