@@ -30,7 +30,7 @@ async function fixture(t, {program, promoted = false} = {}) {
 }
 
 async function executionFixture(t){
- const {root}=await fixture(t),ns='coordination/engineering/eastern-two-gap-repair-native-20261007';
+ const {root}=await fixture(t,{program:"import './evidence-quality.mjs'; import fs from 'node:fs'; fs.mkdirSync('dist'); fs.writeFileSync('dist/value.json',fs.readFileSync('src/value.json'));"}),ns='coordination/engineering/eastern-two-gap-repair-native-20261007';
  const files={
   'package.json':'{"type":"module"}\n',
   'scripts/native-ownership/validate-build-context-stage.mjs':"import '../evidence-quality.mjs';\nexport const result='current';\n",
@@ -71,7 +71,7 @@ async function realInnerControls(t){
  const cases=[['positive',''],['missing',"delete process.env.WORLDATLAS_CURRENT_EXECUTION_PATH;"],['hash',"process.env.WORLDATLAS_CURRENT_EXECUTION_SHA256='0'.repeat(64);"],['root',"process.env.WORLDATLAS_PACKAGE_SOURCE_ROOT=process.cwd();"],['path',"process.env.WORLDATLAS_CURRENT_EXECUTION_PATH='../foreign.json';"],['stale',"fs.appendFileSync('scripts/evidence-quality.mjs','// stale');"]];
  for(const [name,mutation]of cases){
   const {root,commit}=await executionFixture(t);
-  const program=`import fs from 'node:fs';import{readPackageCurrentExecution,requireCurrentExecution}from'../${ns}/current-execution.mjs';${mutation}
+  const program=`import './evidence-quality.mjs';import fs from 'node:fs';import{readPackageCurrentExecution,requireCurrentExecution}from'../${ns}/current-execution.mjs';${mutation}
 const record=readPackageCurrentExecution(process.cwd());requireCurrentExecution(record);fs.mkdirSync('dist');fs.writeFileSync('dist/sentinel','authenticated actual child');
 `;
   await fs.writeFile(path.join(root,'scripts/build-static-inner.mjs'),program);commit();

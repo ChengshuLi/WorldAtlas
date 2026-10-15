@@ -155,19 +155,12 @@ export function inspectPackageAncestry(root, definition, requiredAncestors = [])
 
 export function inspectPackageExecutionInputs(root, definition, kind = 'cloudflare') {
   if (!['static', 'hosted', 'cloudflare'].includes(kind)) throw Error('Unknown package build');
-  const errors = [], contextPath = 'data/native-context-migration/manifest.json';
-  let files = [];
-  if (containsPackagePath(definition.inputs, contextPath)) {
-    try {
-      const context = json(path.join(root, contextPath));
-      if (context.version === 2 && context.kind === 'retained-identity-context-continuation-v2' && context.issue === 1295) {
-        files = currentExecutionClosure(root, `scripts/build-${kind}-inner.mjs`);
-        for (const file of files) if (!containsPackagePath(definition.inputs, file)) errors.push({kind: 'execution-declaration', path: file, detail: 'Actual project import is not a declared package input'});
-
-      }
-    } catch (error) { errors.push({kind: 'execution-inputs', detail: error.message}); }
-  }
-  return {files, errors};
+  const errors = [];let files = [];
+  try {
+    files=currentExecutionClosure(root,`scripts/build-${kind}-inner.mjs`);
+    for(const file of files)if(!containsPackagePath(definition.inputs,file))errors.push({kind:'execution-declaration',path:file,detail:'Actual project import is not a declared package input'});
+  } catch(error){errors.push({kind:'execution-inputs',detail:error.message});}
+  return {files,errors};
 }
 
 export function inspectPackageRuntime(root, {python = 'python3'} = {}) {
@@ -345,19 +338,9 @@ export async function runPackageBuild(kind, {root = repository, execute, preflig
     delete env.WORLDATLAS_CURRENT_EXECUTION_PATH;
     delete env.WORLDATLAS_CURRENT_EXECUTION_SHA256;
     delete env.WORLDATLAS_PACKAGE_SOURCE_ROOT;
-    // Bind current checkout execution separately from immutable authored lineage.
-    const contextPath=path.join(stage,'data/native-context-migration/manifest.json');
-    const context=await fs.readFile(contextPath,'utf8').then(JSON.parse,error=>{if(error.code==='ENOENT')return null;throw error;});
+    // Current execution is independent of the historical producer/continuation.
     let currentExecution;
-    if(context?.version===2&&context.kind==='retained-identity-context-continuation-v2'&&context.issue===1295){
-      // Only the explicit successor sidecar adds a whole numerical-input
-      // admission before the first current execution/runtime authentication.
-      const successorSidecar=path.join(stage,'coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/context-stage-v9.json');
-      const successorStat=await fs.lstat(successorSidecar).catch(error=>{if(error.code==='ENOENT')return null;throw error;});
-      if(successorStat){
-        const {preflightOuterArcticPackage}=await import('../coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/arctic-package-preflight.mjs');
-        preflightOuterArcticPackage({source:root,stage,entry:entries[kind]});
-      }
+    if(fsSync.existsSync(path.join(root,'.git'))){
       currentExecution=issueCurrentExecution({source:root,stage,entry:entries[kind]});
       authenticateCurrentExecution(currentExecution,{root:stage,executingRoot:root,sourceRoot:root});
       const raw=Buffer.from(JSON.stringify(currentExecution)+'\n');

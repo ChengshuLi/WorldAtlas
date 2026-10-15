@@ -1,0 +1,134 @@
+{
+  "version": 1,
+  "issue": 2011,
+  "lane": "engineering",
+  "worker_id": "01a14082-5770-7481-9fd3-b44cf12b9000",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "86cfcbef58220fbdb5b322d831a828ab71ab20ba",
+    "files": [
+      {
+        "path": "data/ownership-selection.json",
+        "bytes": 1598,
+        "sha256": "e60efb4a763648793bdf3fc5ea7e1bc540e2befa08bbbac68081d1f44fc6bae0",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/manifest.json",
+        "bytes": 252447,
+        "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography/part-29-application.json.gz",
+        "bytes": 3353763,
+        "sha256": "d7665a1fdf68f0626c7e28da9ac0e40f4e35aaeacdf91bad4ab8e2d77221bc49",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {},
+    "subject_files": {}
+  },
+  "sources": [
+    {
+      "id": "accepted-current-package",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/38757451254",
+      "role": "existing accepted current package outputs",
+      "vintage": "2026-10-15 run 38757451254 attempt 1 artifact 11985611672",
+      "retrieved_at": "2026-10-15",
+      "license": {
+        "status": "unknown",
+        "terms": "Existing repository source and asset attribution remains unchanged; no new licensing determination"
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Retrieve original artifact11985611672; ZIP SHA2562d1e5c97be60135a1510180960bd18fbd718cbf2400ddd7a3db51d0854c9d44b. Exact member/target mapping is in asset-promotion.json.",
+      "limit": "Existing accepted numerical output promotion, no new source science or geographical approval",
+      "temporal_status": "reference"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "coordination/engineering/current-asset-build/asset-promotion.json",
+      "bytes": 134489,
+      "sha256": "f1e31fdc6bb8f3015fa3ff25e727e3cc2929638749087216878668ae1dc97abb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/current-build-context.json",
+      "bytes": 14592,
+      "sha256": "28b93994927f461df6199a1ebfcbdf2953d37e57be6338599caec5d8918846ab",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/current-startup/index.json",
+      "bytes": 12771,
+      "sha256": "bd9d7176df746bbf84297b94495762e3154ab2508fe809109ff6941bd8b281b0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/ownership-history/index.json",
+      "bytes": 588023,
+      "sha256": "2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/ownership-runtime/index.json",
+      "bytes": 582435,
+      "sha256": "35afb94570fbe5537e5f4c70f171ab08a8aeeeedbb8fb74f0fd7a26861539119",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/prepared-evidence/index.json",
+      "bytes": 12337,
+      "sha256": "a80160287489f0ac22ea0805692b8f5cd81a53e282467d27ee0cbf8d52cdd6b2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/reference-attributes/index.json",
+      "bytes": 37285,
+      "sha256": "363ff55d13e54bfa7996442f5a971f3779c1a7d85002676fb97fdabcfc163129",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/geography/part-29.json",
+      "bytes": 12932719,
+      "sha256": "723d16eb63b7f2dcd8260a516eac6571a7ef1eaaf9bff3c926e0c63235b98fd3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/pixel-audit.json",
+      "bytes": 14325660,
+      "sha256": "fb87c4b48428579bb039337c3bd70180844ad6c5d0f14e03d57048215e99deda",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/granularity-audit.json",
+      "bytes": 10365503,
+      "sha256": "a35635051a3347d396553124a15b0b3dcb2013e32051420f476ce34d8d548d15",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "current-asset-consumption",
+      "kind": "code",
+      "description": "Promote existing accepted current products once and consume their whole identities in ordinary builds; retain original scientific reproduction separately.",
+      "software": "Node.js24; Python3 only existing dated-boundary identity path",
+      "units": "whole-file bytes and exact current asset identities"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "partial",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/package-current-additive.test.mjs test/prepared-startup-ownership.test.mjs test/additive-release.test.mjs test/integration-profile-restoration.test.mjs test/prepare-startup-ownership.test.mjs"
+  ]
+}

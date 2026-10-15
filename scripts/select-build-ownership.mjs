@@ -40,7 +40,7 @@ export async function selectBuildOwnership({manifestPath = 'data/canonical-grid/
   }
   const bytes = packaged?repositoryReader(process.cwd())(manifestPath,'candidate'):await fs.readFile(manifestPath);
   const manifest = JSON.parse(bytes), sha256 = digest(bytes);
-  if(packaged){
+  if(packaged&&manifest.method!==NATIVE_METHOD){
     for(const part of [...(manifest.parts??[]),...(manifest.bounds?.path?[manifest.bounds]:[])]){
       if(!safePackagePath(part.path)||!containsPackagePath(definition.inputs,path.posix.join(path.posix.dirname(manifestPath),part.path)))
         throw Error('Selected grid asset must be a declared package input');

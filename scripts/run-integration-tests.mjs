@@ -195,22 +195,8 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   const git=measuredGitSetup();
   const nativeInputs=await observeSetupPhase('immutable-regression-inputs',()=>prepareNativeRegressionInputs(testSelection === 'complete' ? profile : 'evidence',{files,run:git.run}),{counters:git.snapshot});
   console.log(JSON.stringify({native_inputs:nativeInputs}));
-  // Only full checkout readers consume canonical products. The focused evidence
-  // profile deliberately has no canonical namespace in its sparse checkout.
-  if (profile === 'full' && !retained) {
-    const canonicalCheckout=await observeSetupPhase('canonical-checkout',async()=>{
-      const {prepareCanonicalCheckout}=await import('./canonical-restoration.mjs');
-      return prepareCanonicalCheckout();
-    });
-    console.log(JSON.stringify({canonical_checkout:canonicalCheckout}));
-    if ([0,1,2].includes(shard)) {
-      const selectedCheckout=await observeSetupPhase('canonical-checkout',async()=>{
-        const {prepareModelReaderCheckout}=await import('../coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/prepare-model-reader-checkout.mjs');
-        return prepareModelReaderCheckout({root:process.cwd(),profile,shard});
-      });
-      console.log(JSON.stringify({selected_model_reader_checkout:selectedCheckout}));
-    }
-  }
+  // Current prepared products are committed inputs. Historical restoration is
+  // explicit reproduction, never a mutation of ordinary regression inputs.
   prepareIntegrationTests(files);
   console.log(JSON.stringify({profile, test_selection: testSelection, shard, files}));
   process.exitCode = await streamTestProcess(['--test','--test-reporter=tap','--test-concurrency=2', ...files], {

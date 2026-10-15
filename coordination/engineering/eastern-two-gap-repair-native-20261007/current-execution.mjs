@@ -27,7 +27,8 @@ function body(root,p){
 const allowedEntries=new Set(['scripts/build-static-inner.mjs','scripts/build-hosted-inner.mjs','scripts/build-cloudflare-inner.mjs','coordination/engineering/eastern-two-gap-repair-native-20261007/integration-producer.mjs']);
 export function currentExecutionClosure(root,entry='scripts/build-static-inner.mjs'){
  assert(allowedEntries.has(entry),'Unsupported actual execution entry');
- const entries=[ENTRY,SELF,'scripts/package-build.mjs',entry];
+ const entries=[SELF,'scripts/package-build.mjs',entry];
+ if(entry==='coordination/engineering/eastern-two-gap-repair-native-20261007/integration-producer.mjs')entries.push(ENTRY);
  const names=new Set(['package.json','.github/package-inputs.json']);
  function visit(p){
   assert(safe(p));if(names.has(p))return;names.add(p);

@@ -121,6 +121,19 @@ export async function compileEffectiveNativeRuntime(features, options={}) {
 export const ADDITIVE_NATIVE_PATCH_KIND='unassigned-native-cells-v1';
 const installedPatches=new WeakMap();
 const wordDigest=words=>Array.from(sha256(new Uint8Array(words.buffer,words.byteOffset,words.byteLength)),byte=>byte.toString(16).padStart(2,'0')).join('');
+// One current transport-shape contract for packaging and browser application.
+export function validateAdditivePatchFormat(patch,size) {
+  const versioned=patch?.version===2;
+  exactKeys(patch,['version','kind','base_reference','effective_reference','ledger_sha256',versioned?'authority_registry_sha256':'rule_sha256','rows'],'Native additive patch');
+  require((patch.version===1||versioned)&&patch.kind===ADDITIVE_NATIVE_PATCH_KIND,'Unsupported native additive patch');
+  require(Array.isArray(patch.rows),'Missing current additive rows');let previous=-1;
+  for(const row of patch.rows){
+    exactKeys(row,['y','runs'],'Native patch row');
+    require(Number.isSafeInteger(row.y)&&row.y>previous&&row.y>=0&&row.y<size&&Array.isArray(row.runs)&&row.runs.length>0,'Duplicate/unordered/outside native patch row');previous=row.y;let end=0;
+    for(const run of row.runs){require(Array.isArray(run)&&run.length===3&&run.every(Number.isSafeInteger)&&run[0]>=end&&run[1]>run[0]&&run[1]<=size&&run[2]>0&&run[2]<2**26,'Conflicting or foreign current additive run');end=run[1];}
+  }
+}
+
 export function applyAdditiveNativePatch(base,patch,{baseReference,effectiveReference,features}={}) {
   const versioned=patch?.version===2;
   exactKeys(patch,['version','kind','base_reference','effective_reference','ledger_sha256',versioned?'authority_registry_sha256':'rule_sha256','rows'], 'Native additive patch');
@@ -135,6 +148,7 @@ export function applyAdditiveNativePatch(base,patch,{baseReference,effectiveRefe
   require(hex.test(patch.ledger_sha256)&&hex.test(versioned?patch.authority_registry_sha256:patch.rule_sha256),'Missing additive rule/ledger binding');
   require(base?.version===2&&base.method==='native-linear-evenodd-first-owner-v1'&&base.size===262166&&base.coordinateBits===19
     &&base.rows instanceof Uint32Array&&base.rows.length===base.size*2&&base.runs instanceof Uint32Array&&base.runs.length%2===0,'Additive patch requires complete prepared native ownership');
+  validateAdditivePatchFormat(patch,base.size);
   const digest=footprintValueSha256(patch);
   if(base.additive_patch_sha256===undefined)require(base.geographic_release===baseReference.id&&base.footprints_sha256===baseReference.footprints_sha256&&base.hierarchy_sha256===baseReference.hierarchy_sha256,'Native additive base differs from selected bank');
   require(Array.isArray(features)&&features.length>0,'Additive patch requires complete effective feature roster');
@@ -283,35 +297,12 @@ export function loadedBaseFootprintSha256(features) {
   finally{hash.destroy();}
 }
 
-export async function loadAdditiveNativePatch(data,features,base,{fetcher=fetch,effectiveDigest}={}) {
+// Shared current-product binding. Preparation owns source qualification; both
+// packaging and browser consumption verify the accepted ledger against actual
+// current target identities, geometry and the selected base reference.
+export function bindAdditiveLedgerFeatures(features,ledger,release,baseReference) {
   const hasAdditions=features.some(feature=>Object.hasOwn(feature,'additiveFootprint'));
-  if(data.additiveRelease===undefined){require(!hasAdditions,'Effective footprint requires an explicit selected additive release');return base;}
-  const originalFeatures=features;features=[...features];
-  const baseReference=additiveBaseReference(data),release=data.additiveRelease;
-  require(effectiveDigest===undefined||effectiveDigest===data.reference_release.footprints_sha256,'Selected effective footprint digest mismatch');
-  if(features.every(feature=>feature.geometry))require(loadedBaseFootprintSha256(features)===baseReference.footprints_sha256,'Complete loaded original base footprint differs from selected additive bank');
-  require(hex.test(data.pixelMap?.canonical_grid_sha256)&&release.base_manifest.sha256===data.pixelMap.canonical_grid_sha256,'Additive original native manifest is not independently selected');
-  const originalManifest=await readWholeAdditiveAsset(release.base_manifest,fetcher,'Original native manifest');
-  require(originalManifest.geographic_release===baseReference.id&&originalManifest.footprints_sha256===baseReference.footprints_sha256
-    &&originalManifest.hierarchy_sha256===baseReference.hierarchy_sha256&&originalManifest.method===base.method
-    &&originalManifest.size===base.size&&originalManifest.coordinateBits===base.coordinateBits
-    &&originalManifest.original_assets?.bounds?.sha256===release.owner_roster.sha256,'Selected owner roster differs from original native manifest');
-  require(Array.isArray(originalManifest.parts)&&originalManifest.parts.length>0,'Missing original native asset closure');
-  for(const kind of ['rows','runs']){
-    const words=base[kind];require(words instanceof Uint32Array,'Missing actual decoded native asset');let offset=0;
-    for(const part of originalManifest.parts.filter(part=>part.kind===kind).sort((a,b)=>a.offset-b.offset)){
-      require(part.offset===offset&&Number.isSafeInteger(part.words)&&part.words>0&&part.words*4<=32*1024*1024
-        &&offset+part.words<=words.length&&hex.test(part.decoded_sha256),'Incomplete original native asset closure');
-      const raw=new Uint8Array(words.buffer,words.byteOffset+offset*4,part.words*4);
-      require(Array.from(sha256(raw),byte=>byte.toString(16).padStart(2,'0')).join('')===part.decoded_sha256,'Decoded native ownership differs from original selected manifest');offset+=part.words;
-    }
-    require(offset===words.length,'Original manifest omitted decoded native ownership');
-  }
-  require(originalManifest.parts.every(part=>['rows','runs'].includes(part.kind)),'Foreign original native asset');
-  const ledger=await readWholeAdditiveAsset(release.ledger,fetcher,'Native ledger'),patch=await readWholeAdditiveAsset(release.patch,fetcher,'Native patch');
-  require(patch.ledger_sha256===release.ledger.sha256,'Native patch differs from selected whole ledger');
-  // Existing whole base catalog parts stay literal. The explicit selected
-  // ledger supplies every new primitive to a cloned effective feature view.
+  features=[...features];
   if(!hasAdditions&&ledger.version===2){
     const targets=versionedCurrentTargets(ledger),groups=new Map();
     for(const row of ledger.rows??[])if(['assigned','zero-cell'].includes(row.disposition)){
@@ -345,6 +336,37 @@ export async function loadAdditiveNativePatch(data,features,base,{fetcher=fetch,
         additions:rows.map(row=>({component_id:row.component_id,geometry:row.geometry,geometry_sha256:row.geometry_sha256,source_receipt_sha256:row.source_receipt_sha256}))}};
     }
   }
+  return features;
+}
+
+export async function loadAdditiveNativePatch(data,features,base,{fetcher=fetch,effectiveDigest}={}) {
+  const hasAdditions=features.some(feature=>Object.hasOwn(feature,'additiveFootprint'));
+  if(data.additiveRelease===undefined){require(!hasAdditions,'Effective footprint requires an explicit selected additive release');return base;}
+  const originalFeatures=features;features=[...features];
+  const baseReference=additiveBaseReference(data),release=data.additiveRelease;
+  require(effectiveDigest===undefined||effectiveDigest===data.reference_release.footprints_sha256,'Selected effective footprint digest mismatch');
+  if(features.every(feature=>feature.geometry))require(loadedBaseFootprintSha256(features)===baseReference.footprints_sha256,'Complete loaded original base footprint differs from selected additive bank');
+  require(hex.test(data.pixelMap?.canonical_grid_sha256)&&release.base_manifest.sha256===data.pixelMap.canonical_grid_sha256,'Additive original native manifest is not independently selected');
+  const originalManifest=await readWholeAdditiveAsset(release.base_manifest,fetcher,'Original native manifest');
+  require(originalManifest.geographic_release===baseReference.id&&originalManifest.footprints_sha256===baseReference.footprints_sha256
+    &&originalManifest.hierarchy_sha256===baseReference.hierarchy_sha256&&originalManifest.method===base.method
+    &&originalManifest.size===base.size&&originalManifest.coordinateBits===base.coordinateBits
+    &&originalManifest.original_assets?.bounds?.sha256===release.owner_roster.sha256,'Selected owner roster differs from original native manifest');
+  require(Array.isArray(originalManifest.parts)&&originalManifest.parts.length>0,'Missing original native asset closure');
+  for(const kind of ['rows','runs']){
+    const words=base[kind];require(words instanceof Uint32Array,'Missing actual decoded native asset');let offset=0;
+    for(const part of originalManifest.parts.filter(part=>part.kind===kind).sort((a,b)=>a.offset-b.offset)){
+      require(part.offset===offset&&Number.isSafeInteger(part.words)&&part.words>0&&part.words*4<=32*1024*1024
+        &&offset+part.words<=words.length&&hex.test(part.decoded_sha256),'Incomplete original native asset closure');
+      const raw=new Uint8Array(words.buffer,words.byteOffset+offset*4,part.words*4);
+      require(Array.from(sha256(raw),byte=>byte.toString(16).padStart(2,'0')).join('')===part.decoded_sha256,'Decoded native ownership differs from original selected manifest');offset+=part.words;
+    }
+    require(offset===words.length,'Original manifest omitted decoded native ownership');
+  }
+  require(originalManifest.parts.every(part=>['rows','runs'].includes(part.kind)),'Foreign original native asset');
+  const ledger=await readWholeAdditiveAsset(release.ledger,fetcher,'Native ledger'),patch=await readWholeAdditiveAsset(release.patch,fetcher,'Native patch');
+  require(patch.ledger_sha256===release.ledger.sha256,'Native patch differs from selected whole ledger');
+  features=bindAdditiveLedgerFeatures(features,ledger,release,baseReference);
   const actualEffectiveDigest=additiveReleaseFootprintDigest(baseReference,features);
   require(actualEffectiveDigest===data.reference_release.footprints_sha256,'Explicit additive footprint domain differs from selected release');
   verifyAdditiveLedgerSelection(ledger,features,patch);

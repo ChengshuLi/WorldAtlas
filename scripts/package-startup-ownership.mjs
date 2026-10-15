@@ -56,3 +56,67 @@ export async function packageStartupOwnership({manifest, source, destination}) {
     rows_sha256: digest(Buffer.from(original.rows.buffer)), runs_word_stream_sha256: digest(Buffer.from(original.runs.buffer)),
     scope: 'Every decoded canonical GPU word preserved; stream digests are not containing-file hashes or geographic approval'};
 }
+
+// Prepared deployment bytes are regenerated only when a reviewed native bank
+// changes. Ordinary builds authenticate and copy them without decoding the
+// complete GPU stream or recompressing an already accepted transport.
+export async function packagePreparedStartupOwnership({manifest,manifestSha,source,destination}) {
+  if(!validHash(manifestSha))throw Error('Prepared startup requires the selected native manifest hash');
+  const root=await fs.realpath(source);
+  if(root!==path.resolve(source))throw Error('Prepared startup source must be ordinary');
+  const indexFile=path.join(root,'index.json');
+  if(await fs.realpath(indexFile)!==indexFile||!(await fs.lstat(indexFile)).isFile())throw Error('Prepared startup index must be ordinary');
+  const index=JSON.parse(await fs.readFile(indexFile));
+  const metadata=ownershipMetadata(manifest);
+  if(index.version!==1||index.native_manifest_sha256!==manifestSha||index.release_id!==manifest.geographic_release||index.footprints_sha256!==manifest.footprints_sha256||index.hierarchy_sha256!==manifest.hierarchy_sha256)throw Error('Prepared startup differs from selected native reference; regenerate matching startup products');
+  for(const key of ['version','coordinateBits','size','runWords','method','footprints_sha256','hierarchy_sha256','geographic_release'])if(index.pixelMap?.[key]!==metadata[key])throw Error('Prepared startup metadata differs: '+key);
+  if(!Array.isArray(index.files)||!index.files.length||new Set(index.files.map(pin=>pin.path)).size!==index.files.length)throw Error('Incomplete prepared startup roster');
+  const pins=new Map(index.files.map(pin=>[pin.path,pin]));
+  const actual=[];
+  async function inventory(relative=''){
+    for(const entry of await fs.readdir(path.join(root,relative),{withFileTypes:true})){
+      const name=relative?relative+'/'+entry.name:entry.name;
+      if(entry.isDirectory())await inventory(name);
+      else if(entry.isFile()){if(name!=='index.json')actual.push(name);}
+      else throw Error('Prepared startup contains a nonordinary member');
+    }
+  }
+  await inventory();
+  if(JSON.stringify(actual.sort())!==JSON.stringify([...pins.keys()].sort()))throw Error('Prepared startup roster omits or invents a member');
+  const parts=index.pixelMap.parts;
+  if(!Array.isArray(parts)||parts.length<2||new Set(parts.map(pin=>pin.path)).size!==parts.length)throw Error('Incomplete prepared startup ownership parts');
+  const rows=manifest.parts.filter(pin=>pin.kind==='rows');
+  if(JSON.stringify(parts.filter(pin=>pin.kind==='rows'))!==JSON.stringify(rows))throw Error('Prepared startup row identity differs');
+  let words=0;
+  for(const part of parts){
+    const pin=pins.get(part.path);
+    if(!pin||pin.sha256!==part.sha256)throw Error('Prepared startup part is missing or rebound');
+    if(part.kind==='rows')continue;
+    if(part.kind!=='runs'||part.offset!==words||!Number.isSafeInteger(part.words)||part.words<=0||!part.path.startsWith('ownership-vintages/'+manifestSha+'/'))throw Error('Incomplete or foreign prepared startup run stream');
+    words+=part.words;
+  }
+  if(words!==manifest.runWords)throw Error('Prepared startup run stream is incomplete');
+  const latitude=index.pixelMap.native_latitudes;
+  if(!latitude||!pins.has(latitude.transport_path)||pins.get(latitude.transport_path).sha256!==manifest.native_latitudes?.sha256||latitude.sha256!==manifest.native_latitudes.sha256)throw Error('Prepared startup native latitude differs');
+  // Authenticate every current and retained compatibility URL before writing.
+  const bodies=[];
+  for(const pin of index.files){
+    if(typeof pin.path!=='string'||!pin.path.split('/').every(piece=>/^[A-Za-z0-9_.-]+$/.test(piece)&&piece!=='.'&&piece!=='..')||!Number.isSafeInteger(pin.bytes)||pin.bytes<=0||!validHash(pin.sha256))throw Error('Unsafe prepared startup member');
+    const file=path.join(root,pin.path);
+    if(await fs.realpath(file)!==file||!(await fs.lstat(file)).isFile())throw Error('Prepared startup member must be ordinary');
+    const bytes=await fs.readFile(file);
+    if(bytes.length!==pin.bytes||digest(bytes)!==pin.sha256)throw Error('Prepared startup bytes changed: '+pin.path);
+    bodies.push({pin,bytes});
+  }
+  for(const {pin,bytes} of bodies){
+    const file=path.resolve(destination,pin.path);
+    for(let parent=path.dirname(file);;parent=path.dirname(parent)){
+      const stat=await fs.lstat(parent).catch(error=>{if(error.code==='ENOENT')return null;throw error;});
+      if(stat&&(!stat.isDirectory()||stat.isSymbolicLink()))throw Error('Prepared startup destination must be ordinary');
+      if(parent===path.dirname(parent))break;
+    }
+    await fs.mkdir(path.dirname(file),{recursive:true});
+    await fs.writeFile(file,bytes,{flag:'wx'});
+  }
+  return {pixelMap:index.pixelMap};
+}

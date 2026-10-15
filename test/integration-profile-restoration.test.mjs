@@ -18,7 +18,8 @@ test('actual checkout authority covers current code independently of authenticat
   const closure=checkoutExecutionClosure(repo);
   assert.equal(new Set(closure).size,closure.length);
   assert(closure.includes('scripts/run-integration-tests.mjs'));
-  assert(closure.includes('coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifact-consumer.mjs'));
+  assert(!closure.includes('coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifact-consumer.mjs'));
+  assert(!closure.includes('scripts/canonical-restoration.mjs'));
   const pinned=pin=>{
     const raw=execFileSync('git',['show',`HEAD:${pin.path}`],{cwd:repo,maxBuffer:Infinity});
     assert.equal(raw.length,pin.bytes);
@@ -72,19 +73,10 @@ function fixture(t,{full=false,helperBody,selectedHelperBody,omitSelectedHelper=
   for(const name of names)write(`test/${name}.test.mjs`,
     `import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';
 test('actual selected test',${skip?'{skip:true},':''}()=>{
-  assert.equal(fs.existsSync('restored-fixture.json'),${full});
+  assert.equal(fs.existsSync('restored-fixture.json'),false);
   fs.writeFileSync('tests-reached-'+${JSON.stringify(name)},'reached',{flag:'wx'});
 });\n`);
   if(helperBody!==undefined)write(helper,helperBody);
-  if(full&&!omitSelectedHelper)write('coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/prepare-model-reader-checkout.mjs',selectedHelperBody??`import fs from 'node:fs';import assert from 'node:assert/strict';
-export function prepareModelReaderCheckout({root,profile,shard}){
- assert.equal(root,process.cwd());assert.equal(profile,'full');assert([0,1,2].includes(shard));
- assert.equal(fs.existsSync('data/ownership-selection.json'),${selected},'This tiny fixture has no selected artifact');
- fs.writeFileSync('selected-checkout-fixture-reached.json','{"fixture_only":true}',{flag:'wx'});
- return {applicable:false,fixture_only:true};
-}
-`);
-
   const expectations='coordination/engineering/fixture/selected-delivery-expectations.json';
   if(selected){
     const pin=(name,value)=>{const bytes=Buffer.from(JSON.stringify(value));write(name,bytes);return {path:name,bytes:bytes.length,sha256:createHash('sha256').update(bytes).digest('hex')};};
@@ -125,29 +117,10 @@ test('real evidence entry refuses a missing required focused test before executi
   assert.match(r.stderr,/Missing integration test inventory/);
   assert.equal(fs.readdirSync(f.root).filter(n=>n.startsWith('tests-reached-')).length,0);
 });
-test('real full entry calls canonical preparation before selected readers',t=>{
-  const f=fixture(t,{full:true,helperBody:`import fs from 'node:fs';
-export function prepareCanonicalCheckout(){fs.writeFileSync('restored-fixture.json','{"complete":true}',{flag:'wx'});return {fixture_only:true};}\n`});
-  const r=f.run();assert.equal(r.status,0,r.stderr);assert.match(r.stdout,/canonical_checkout/);
+test('real full entry consumes current inputs without a historical restoration helper',t=>{
+  const f=fixture(t,{full:true}),r=f.run();assert.equal(r.status,0,r.stderr);
   assert.match(r.stdout,/# skipped 0/);assert.ok(fs.existsSync(path.join(f.root,'tests-reached-probe')));
-  assert.ok(fs.existsSync(path.join(f.root,'selected-checkout-fixture-reached.json')));assert.match(r.stdout,/selected_model_reader_checkout/);
-});
-test('real full entry refuses a missing selected checkout helper before tests',t=>{
- const f=fixture(t,{full:true,omitSelectedHelper:true,helperBody:`export function prepareCanonicalCheckout(){return {fixture_only:true};}\n`}),r=f.run();
- assert.notEqual(r.status,0);assert.match(r.stderr,/ERR_MODULE_NOT_FOUND/);assert.ok(!fs.existsSync(path.join(f.root,'tests-reached-probe')));
-});
-test('real full entry propagates selected checkout refusal before tests',t=>{
- const f=fixture(t,{full:true,helperBody:`export function prepareCanonicalCheckout(){return {fixture_only:true};}\n`,selectedHelperBody:`export function prepareModelReaderCheckout(){throw Error('selected artifact association rejected');}\n`}),r=f.run();
- assert.notEqual(r.status,0);assert.match(r.stderr,/selected artifact association rejected/);assert.ok(!fs.existsSync(path.join(f.root,'tests-reached-probe')));
-});
-test('real full entry rejects an absent canonical helper before tests',t=>{
-  const f=fixture(t,{full:true}),r=f.run();assert.notEqual(r.status,0);
-  assert.match(r.stderr,/ERR_MODULE_NOT_FOUND/);assert.ok(!fs.existsSync(path.join(f.root,'tests-reached-probe')));
-});
-test('real full entry propagates canonical input rejection before tests',t=>{
-  const f=fixture(t,{full:true,helperBody:"export function prepareCanonicalCheckout(){throw Error('missing authenticated canonical input');}\n"});
-  const r=f.run();assert.notEqual(r.status,0);assert.match(r.stderr,/missing authenticated canonical input/);
-  assert.ok(!fs.existsSync(path.join(f.root,'tests-reached-probe')));
+  assert(!r.stdout.includes('canonical_checkout'));assert(!r.stdout.includes('selected_model_reader_checkout'));
 });
 test('real evidence entry preserves the zero-skips safeguard',t=>{
   const f=fixture(t,{skip:true}),r=f.run();assert.notEqual(r.status,0);
