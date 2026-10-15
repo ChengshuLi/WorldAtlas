@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "phase": "actual-stock-native-authority",
+  "code_commit": "b73fdbb1b0e243b773514ea46aaced496a63028f",
+  "input_commit": "01ff7cfe040a29652c0b9a22c8f608be75450ef2",
+  "exit_code": 0,
+  "external_seconds": 1.79,
+  "external_darwin_peak_rss_bytes": 309952512,
+  "observation": {
+    "elapsed_seconds": 1.513596,
+    "charged_phase_bytes": 327084064,
+    "allowance": {
+      "phaseBytes": 603979776,
+      "rssBytes": 603979776
+    },
+    "normalized_node_lifetime_peak_rss_bytes": 309952512,
+    "qualified_cells": 7904,
+    "limits": [
+      "Original source/physical producers are not replayed.",
+      "Constructor qualification is not actual current-owner-zero or final selected-output acceptance."
+    ]
+  },
+  "fresh_admission": {
+    "at_utc": "2026-10-15T02:31:30.963Z",
+    "availableBytes": 1419231232,
+    "observed_preflight_rss": 52051968,
+    "currentRssBytes": 0,
+    "concurrentReservedBytes": 0,
+    "headroomBytes": 572882944,
+    "phaseBytes": 603979776,
+    "rssBytes": 603979776,
+    "complete_prospective_bytes": 533690304,
+    "code_commit": "b73fdbb1b0e243b773514ea46aaced496a63028f",
+    "config_sha256": "a69bf0fa4254d3e7390eb2aee3638ebb3d65026548f975fddb4a6ef5e161365f",
+    "allowance": {
+      "phaseBytes": 603979776,
+      "rssBytes": 603979776
+    },
+    "admitted": true
+  },
+  "source_relative_held": 3330,
+  "new_accepted_cells": 0,
+  "current_owner_zero": false
+}
