@@ -1,0 +1,111 @@
+{
+  "reviewer": "/root/cell_method_review",
+  "disposition": "PASS for prepared bodies only; executable immutable-stage prerequisite remains pending",
+  "targets": [
+    {
+      "target": "gb:IDN:ADM2:22746128B78411617556279",
+      "owner": 23087,
+      "stage_sha256": "6c24cf5c1c78a71f25ba2f038e94468ec356d2a95cbcadc8316837b6063d7575",
+      "stage_oid": "5c01cf08acbb2d9329106ee438aab52c4e7604fa",
+      "rows": 1490,
+      "cells": 3290,
+      "classes": {
+        "('repair', 'land')": 2096,
+        "('physical', 'source-relative')": 1194
+      },
+      "north_maluku_sid_cells": {
+        "repair": 146,
+        "physical": 32
+      },
+      "full_original_and_selected_equal": true
+    },
+    {
+      "target": "gb:IDN:ADM2:22746128B48169474795911",
+      "owner": 22909,
+      "stage_sha256": "5b4c3dfaff406f20e4eac36dfc0b28daa201599b5bfc6b1c756485659456abaa",
+      "stage_oid": "cd4cec3fe76da0cb2d5db774c97d63d20b7387f1",
+      "rows": 813,
+      "cells": 1635,
+      "classes": {
+        "('repair', 'land')": 1120,
+        "('physical', 'source-relative')": 515
+      },
+      "north_maluku_sid_cells": {},
+      "full_original_and_selected_equal": true
+    }
+  ],
+  "common_inputs": 24,
+  "common_encoded_bytes": 85926037,
+  "common_decoded_bytes": 219157322,
+  "physical_config_checks": [
+    {
+      "cohort": "banggai-laut3290",
+      "logical_input_bytes": 305142446,
+      "runtime_files": 388,
+      "runtime_bytes": 35120510,
+      "fixed_subtotal_excluding_canonical_config": 373953245,
+      "reference_only_three_cohort_changes": true,
+      "immutable_stage_pin_missing": true
+    },
+    {
+      "cohort": "banggai1635",
+      "logical_input_bytes": 305127856,
+      "runtime_files": 388,
+      "runtime_bytes": 35120510,
+      "fixed_subtotal_excluding_canonical_config": 373938655,
+      "reference_only_three_cohort_changes": true,
+      "immutable_stage_pin_missing": true
+    }
+  ],
+  "source_feature_count": 519,
+  "selected_feature_count": 1500,
+  "elapsed_seconds": 8.20455125,
+  "python_peak_rss_bytes": 156852224,
+  "no_scientific_predicates_or_qualification": true,
+  "git_read_environment": {
+    "GIT_NO_LAZY_FETCH": "1",
+    "GIT_NO_REPLACE_OBJECTS": "1"
+  },
+  "source_sid_records_bound_to_original_roster": [
+    {
+      "source_index": 36234,
+      "family_index": 152,
+      "source_id": "gb:IDN:ADM1:65028918B55787629749874",
+      "ordinal": 8,
+      "owners": [],
+      "name": "Central Sulawesi",
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_index": 36250,
+      "family_index": 152,
+      "source_id": "gb:IDN:ADM1:65028918B51364455052819",
+      "ordinal": 24,
+      "owners": [],
+      "name": "North Maluku",
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_index": 36279,
+      "family_index": 153,
+      "source_id": "gb:IDN:ADM2:22746128B48169474795911",
+      "ordinal": 19,
+      "owners": [
+        22909
+      ],
+      "name": "Banggai",
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_index": 36281,
+      "family_index": 153,
+      "source_id": "gb:IDN:ADM2:22746128B78411617556279",
+      "ordinal": 21,
+      "owners": [
+        23087
+      ],
+      "name": "Banggai Laut",
+      "geometry_status": "raw-native-supported"
+    }
+  ]
+}

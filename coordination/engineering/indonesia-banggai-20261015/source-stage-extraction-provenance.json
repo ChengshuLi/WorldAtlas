@@ -1,0 +1,221 @@
+{
+  "status": "data-only full original stages; no source/physical/native qualification",
+  "method": "Complete source and selected part sequential 32KiB streaming; exact identity joins; entire encoded/decoded byte digests checked; no coordinate transform, simplification, geometry predicate or class promotion",
+  "source_read": {
+    "pin": {
+      "commit": "5ab660cb68821e6b719f1b86819069ecac419ce1",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IDN-ADM2-000.bin.gz",
+      "git_blob_oid": "d918c74989043677364ff43f9fbec3d1f0d3a3af",
+      "bytes": 3051391,
+      "sha256": "ef394916ba97454b5592e66eba1df67199731ce7d9636cc3968843801ae904a8",
+      "decoded_bytes": 11002896,
+      "decoded_sha256": "146653d488331086ddc43d159a261b01ea6dd08c7ed422e34a9886c3c690430c"
+    },
+    "encoded_bytes_read": 3051391,
+    "encoded_sha256": "ef394916ba97454b5592e66eba1df67199731ce7d9636cc3968843801ae904a8",
+    "decoded_bytes_read": 11002896,
+    "decoded_sha256": "146653d488331086ddc43d159a261b01ea6dd08c7ed422e34a9886c3c690430c",
+    "feature_count": 519,
+    "maximum_JSON_buffer_characters": 211335,
+    "declared_source_crs": "urn:ogc:def:crs:OGC:1.3:CRS84"
+  },
+  "selected_read": {
+    "pin": {
+      "commit": "8c4199fd6455246b98a6fd4b7a6d0f708b9afc70",
+      "path": "data/geography/part-10.json",
+      "git_blob_oid": "84b4cf537b801c7f6d3840173c49b7e4293a139d",
+      "bytes": 5144571,
+      "sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+    },
+    "encoded_bytes_read": 5144571,
+    "encoded_sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2",
+    "decoded_bytes_read": 5144571,
+    "decoded_sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2",
+    "feature_count": 1500,
+    "maximum_JSON_buffer_characters": 49775,
+    "declared_source_crs": null
+  },
+  "inputs_charge": {
+    "encoded_bytes": 8195962,
+    "decoded_bytes": 16147467,
+    "encoded_plus_decoded_bytes": 24343429,
+    "note": "Full bodies charged once for combined two-target preparation; each separate future request must account for its own complete consumed closure. These totals exclude future physical25GSHHG/runtime/stage/output buffers."
+  },
+  "outputs": [
+    {
+      "target_id": "gb:IDN:ADM2:22746128B78411617556279",
+      "owner_index": 23087,
+      "name": "Banggai Laut",
+      "source_family_ordinal": 21,
+      "selected_part_ordinal": 973,
+      "stage_file": "banggai-laut3290-original-stage-inputs.json",
+      "stage_bytes": 59087,
+      "stage_sha256": "6c24cf5c1c78a71f25ba2f038e94468ec356d2a95cbcadc8316837b6063d7575",
+      "requested_intervals_file": "banggai-laut3290-requested-intervals.json",
+      "requested_intervals_bytes": 95402,
+      "requested_intervals_sha256": "82ab99f95db8cbeb7ee2a397bb0f96b4d1164b65948731435e279706a3b5446a",
+      "requested_cells": 3290,
+      "interval_rows": 1490,
+      "selected_metadata": {
+        "source_id": "gb:IDN:ADM2",
+        "source_name": "geoBoundaries gbOpen",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IDN/ADM2/geoBoundaries-IDN-ADM2.geojson",
+        "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+        "reference_year": "2020",
+        "administrative_level": "ADM2",
+        "parent_source_level": "ADM1",
+        "granularity_version": 3,
+        "source_role": "regency, city",
+        "selection_reason": "Named regency, city territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "original_id": "22746128B78411617556279",
+        "representative_point": [
+          123.09971474654378,
+          -1.8548499999999999
+        ],
+        "hierarchy_version": 4,
+        "hierarchy_source": "gb:IDN:ADM1",
+        "hierarchy_overlap": 0.922759,
+        "topology_version": 1,
+        "reference_version": 3,
+        "geographic_area_code": "SUL",
+        "geographic_region_code": 42,
+        "geographic_match": "largest source overlap",
+        "geographic_overlap": 0.36964,
+        "coverage_version": 1,
+        "semantic_version": 1,
+        "remote_version": 1,
+        "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+        "framework_match": {
+          "source": "Natural Earth",
+          "id": "IDN-557",
+          "overlap": 0.797707
+        },
+        "regional_match": {
+          "reference_iso": "IDN",
+          "source_id": "IDN-557",
+          "overlap": 0.797707,
+          "method": "reference-territory-constrained overlap"
+        },
+        "reference_owner_id": "owner:Q252",
+        "reference_polity": "Indonesia",
+        "reference_polity_status": "reference",
+        "reference_polity_evidence": {
+          "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+          "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+          "reference_territory": "Indonesia",
+          "classification": "Sovereign country",
+          "note": null,
+          "uncertainty": false
+        },
+        "semantic_review": {
+          "status": "open",
+          "continent": "Asia",
+          "decision_index": 741,
+          "evidence_file": "geographic-decisions"
+        }
+      },
+      "retained_source_patterns": {
+        "repair:36281": 573,
+        "repair:36234,36281": 1377,
+        "repair:36250,36281": 146,
+        "physical:36234,36281": 424,
+        "physical:36281": 738,
+        "physical:36250,36281": 32
+      }
+    },
+    {
+      "target_id": "gb:IDN:ADM2:22746128B48169474795911",
+      "owner_index": 22909,
+      "name": "Banggai",
+      "source_family_ordinal": 19,
+      "selected_part_ordinal": 971,
+      "stage_file": "banggai1635-original-stage-inputs.json",
+      "stage_bytes": 44497,
+      "stage_sha256": "5b4c3dfaff406f20e4eac36dfc0b28daa201599b5bfc6b1c756485659456abaa",
+      "requested_intervals_file": "banggai1635-requested-intervals.json",
+      "requested_intervals_bytes": 51032,
+      "requested_intervals_sha256": "61c7c859f21b752bdf410162e926b00d1c513cfb311eaea7a14d1781a790870c",
+      "requested_cells": 1635,
+      "interval_rows": 813,
+      "selected_metadata": {
+        "source_id": "gb:IDN:ADM2",
+        "source_name": "geoBoundaries gbOpen",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IDN/ADM2/geoBoundaries-IDN-ADM2.geojson",
+        "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+        "reference_year": "2020",
+        "administrative_level": "ADM2",
+        "parent_source_level": "ADM1",
+        "granularity_version": 3,
+        "source_role": "regency, city",
+        "selection_reason": "Named regency, city territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "original_id": "22746128B48169474795911",
+        "representative_point": [
+          122.31711936619718,
+          -1.0922
+        ],
+        "hierarchy_version": 4,
+        "hierarchy_source": "gb:IDN:ADM1",
+        "hierarchy_overlap": 0.990334,
+        "topology_version": 1,
+        "reference_version": 3,
+        "geographic_area_code": "SUL",
+        "geographic_region_code": 42,
+        "geographic_match": "largest source overlap",
+        "geographic_overlap": 0.93511,
+        "coverage_version": 1,
+        "semantic_version": 1,
+        "remote_version": 1,
+        "search_aliases": [
+          "Luwuk"
+        ],
+        "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+        "framework_match": {
+          "source": "Natural Earth",
+          "id": "IDN-557",
+          "overlap": 0.969163
+        },
+        "regional_match": {
+          "reference_iso": "IDN",
+          "source_id": "IDN-557",
+          "overlap": 0.969163,
+          "method": "reference-territory-constrained overlap"
+        },
+        "reference_owner_id": "owner:Q252",
+        "reference_polity": "Indonesia",
+        "reference_polity_status": "reference",
+        "reference_polity_evidence": {
+          "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+          "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+          "reference_territory": "Indonesia",
+          "classification": "Sovereign country",
+          "note": null,
+          "uncertainty": false
+        },
+        "semantic_review": {
+          "status": "open",
+          "continent": "Asia",
+          "decision_index": 740,
+          "evidence_file": "geographic-decisions"
+        }
+      },
+      "retained_source_patterns": {
+        "repair:36234,36279": 753,
+        "repair:36279": 367,
+        "physical:36234,36279": 231,
+        "physical:36279": 284
+      }
+    }
+  ],
+  "elapsed_seconds": 0.9148567079999999,
+  "python_peak_rss_bytes": 26865664,
+  "maximum_read_chunk_bytes": 32768,
+  "limits": [
+    "Selected feature unchanged at cited accepted8c snapshot; no latest selector/native-owner proof",
+    "Full source family retained; output stages each contain one complete original target and selected feature only, per stock physical input schema",
+    "No matching physical result exists in inspected scopes; mapped land/water/exterior/query/ambiguity/hierarchy evidence unmeasured",
+    "No new component identity or acceptance credit; preserve NorthMalukuSID178context and original ring holds",
+    "No Git publication/acquisition or compute reservation"
+  ]
+}
