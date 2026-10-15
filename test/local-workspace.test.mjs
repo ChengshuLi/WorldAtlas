@@ -4,7 +4,8 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import {pathToFileURL} from 'node:url';
-import {execFileSync, spawn, spawnSync} from 'node:child_process';
+import childProcess, {execFileSync, spawn, spawnSync} from 'node:child_process';
+import {syncBuiltinESMExports} from 'node:module';
 import {workspaceManager, GiB} from '../scripts/local-workspace.mjs';
 
 function fixture(t, overrides = {}) {
@@ -82,6 +83,61 @@ test('exactly 10 GiB after reservation is allowed, one byte less is refused', t 
   assert.equal(manager.check().freeBytes, available);
   available -= 1;
   assert.throws(() => manager.check(), /breached/);
+});
+
+test('allocation skips legacy usage traversals while report and check retain live diagnostics', t => {
+  let available = 12 * GiB;
+  const {manager, git, head, temporary} = fixture(t, {freeBytes: () => available});
+  for (let index = 0; index < 16; index++) {
+    git('worktree', 'add', '--detach', '--no-checkout', path.join(temporary, `legacy-${index}`), head);
+  }
+  const calls = [];
+  const execute = childProcess.execFileSync;
+  t.mock.method(childProcess, 'execFileSync', (command, args, ...options) => {
+    calls.push({command, args});
+    return execute(command, args, ...options);
+  });
+  syncBuiltinESMExports();
+  t.after(() => {
+    t.mock.restoreAll();
+    syncBuiltinESMExports();
+  });
+  const observe = action => {
+    calls.length = 0;
+    const result = action();
+    return {result, operations: {
+      du: calls.filter(({command}) => command === 'du').length,
+      worktreeList: calls.filter(({command, args}) => command === 'git'
+        && args.slice(2).join(' ') === 'worktree list --porcelain').length
+    }};
+  };
+  const reported = observe(() => manager.report());
+  assert.deepEqual(reported.operations, {du: 17, worktreeList: 1});
+  assert.equal(reported.result.worktrees.length, 17);
+  assert.ok(reported.result.worktrees.every(row => !row.managed && Number.isSafeInteger(row.bytes) && row.bytes >= 0));
+  assert.equal(reported.result.checkoutBytes, reported.result.worktrees.reduce((sum, row) => sum + row.bytes, 0));
+  const checked = observe(() => manager.check());
+  assert.deepEqual(checked.operations, {du: 17, worktreeList: 1});
+  assert.deepEqual(checked.result, reported.result);
+
+  const allocated = observe(() => manager.allocate({worker: 'one', slot: 'review', commit: head, reserveGiB: 2}));
+  t.diagnostic(`allocation diagnostic operations: ${JSON.stringify(allocated.operations)}`);
+  assert.deepEqual(allocated.operations, {du: 0, worktreeList: 0});
+  assert.equal(allocated.result.reservation, 2 * GiB);
+  assert.equal(allocated.result.head, head);
+  assert.equal(fs.readFileSync(path.join(allocated.result.path, 'README.md'), 'utf8'), 'root');
+  available -= 1;
+  const refused = observe(() => assert.throws(() => manager.allocate({worker: 'two',
+    branch: 'engineering/short-with-legacy', reserveGiB: 2}), /headroom/));
+  assert.deepEqual(refused.operations, {du: 0, worktreeList: 0});
+  assert.throws(() => git('rev-parse', '--verify', 'engineering/short-with-legacy'));
+  const after = observe(() => manager.report());
+  assert.deepEqual(after.operations, {du: 18, worktreeList: 1});
+  assert.equal(after.result.freeBytes, available);
+  assert.deepEqual(after.result.entries, [allocated.result]);
+  assert.equal(after.result.worktrees.find(row => row.path === allocated.result.path).managed, true);
+  assert.equal(after.result.checkoutBytes, after.result.worktrees.reduce((sum, row) =>
+    sum + Math.max(row.bytes, row.managed ? allocated.result.reservation : 0), 0));
 });
 
 test('invalid or unsafe reservation sizes fail before branch or slot creation', t => {
