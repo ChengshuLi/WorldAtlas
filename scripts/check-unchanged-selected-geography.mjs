@@ -192,7 +192,7 @@ async function originalAuthority(reader, entry) {
     // fields. Only its versioned consumed roles select further file reads.
     for (const role of ['catalogue', 'native_latitudes', 'owner_roster', 'physical_evidence', 'physical_input', 'physical_reproduction']) reader.pinned(evidence[role]);
     for (const family of array(evidence.families, 'source-target-families')) {
-      keys(family, 'parts,source_id', 'source-target-family');
+      demand(typeof family?.source_id === 'string', 'unsupported-source-target-family');
       for (const pin of array(family.parts, 'source-target-parts')) reader.pinned(pin);
     }
     if (evidence.source_membership !== undefined) {

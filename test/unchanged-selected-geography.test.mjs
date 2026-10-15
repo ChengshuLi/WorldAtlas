@@ -104,7 +104,10 @@ function fixture({missingOrigin = false, splitBaseline = false, rebind = true, m
       const support = commit(files, requests);
       evidence.dated_land_support = pin(P + 'dated-support.json', support);
     }
-    if (unknownSourceField) evidence.descriptive_metadata = {not_consumed_by_current_reader: true};
+    if (unknownSourceField) {
+      evidence.descriptive_metadata = {not_consumed_by_current_reader: true};
+      evidence.families[0].description = 'Metadata ignored by the current scientific reader';
+    }
     if (unknownSourceVersion) { evidence.version = 3; evidence.kind = 'source-target-native-evidence-v3'; }
     if (malformedDatedVersion) { evidence.version = 1; evidence.kind = 'source-target-native-evidence-v1'; evidence.dated_land_support = historical(P + 'source-part.json'); }
     put(P + 'source-target-evidence.json', evidence);
