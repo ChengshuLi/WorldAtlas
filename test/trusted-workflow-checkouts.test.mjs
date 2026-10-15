@@ -8,7 +8,7 @@ import {checkGitScope} from '../scripts/check-handoff-scope.mjs';
 import {createHash} from 'node:crypto';
 
 const root = path.resolve(import.meta.dirname, '..');
-const workflows = ['issue-claims.yml', 'worker-merge.yml', 'merge-integration-checks.yml'];
+const workflows = ['issue-claims.yml', 'worker-merge.yml'];
 
 // Reproduce each declared sparse tree, including cone-mode root files. Load
 // trusted modules without executing workflow entrypoints or contacting GitHub.
@@ -23,7 +23,7 @@ function probe(directories, {geography = false, checkoutTests = false} = {}) {
       fs.cpSync(source, destination, {recursive: true});
     }
     return spawnSync(process.execPath, checkoutTests ? ['--test', '--test-concurrency=1', '--test-name-pattern', 'actual sparse declarations include trusted module dependencies', 'test/trusted-workflow-checkouts.test.mjs'] : ['--input-type=module', '-e',
-      "await import('./scripts/issue-claim-contract.mjs'); await import('./scripts/research-import-gate.mjs'); await import('./scripts/premerge-evidence.mjs'); await import('./scripts/check-pr-gates.mjs');" +
+      "await import('./scripts/issue-claim-contract.mjs'); await import('./scripts/research-import-gate.mjs'); await import('./scripts/premerge-evidence.mjs');" +
       (geography ? "await import('./scripts/check-effective-geographic-regression.mjs'); await import('./coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs'); console.log('complete trusted geography closure imported');" : '')],
     {cwd: directory, encoding: 'utf8', env: {PATH: process.env.PATH}});
   } finally { fs.rmSync(directory, {recursive: true, force: true}); }
@@ -112,32 +112,6 @@ for (const [workflow, expected] of [['worker-merge.yml', 1]]) {
   });
 }
 
-
-test('actual scope candidate sparse declaration contains cold-checkout test imports', () => {
-  const source = fs.readFileSync(path.join(root, '.github/workflows/merge-integration-checks.yml'), 'utf8');
-  const scope = source.split('  scope:\n')[1].split('  geography:\n')[0];
-  const candidate = scope.match(/path: candidate[\s\S]*?sparse-checkout: \|\n((?:            .+\n)+)/);
-  assert.ok(candidate, 'actual scope candidate checkout must be declared');
-  const directories = candidate[1].trim().split('\n').map(row => row.trim());
-  const qualified = probe(directories, {geography: true});
-  assert.equal(qualified.status, 0, qualified.stderr);
-  const missing = probe(directories.filter(row => !row.startsWith('coordination/')), {geography: true});
-  assert.notEqual(missing.status, 0);assert.match(missing.stderr, /selected-geography-effective-prevention-20261009/);
-});
-
-test('scope candidate includes the inputs of its nested actual-checkout probes', () => {
-  const source = fs.readFileSync(path.join(root, '.github/workflows/merge-integration-checks.yml'), 'utf8');
-  const scope = source.split('  scope:\n')[1].split('  geography:\n')[0];
-  const candidate = scope.match(/path: candidate[\s\S]*?sparse-checkout: \|\n((?:            .+\n)+)/);
-  assert.ok(candidate);
-  const directories = candidate[1].trim().split('\n').map(row => row.trim());
-  const result = probe(directories, {checkoutTests: true});
-  assert.equal(result.status, 0, result.stdout + result.stderr);
-  const missing = probe(directories.filter(row => !row.includes('selected-checkpoint-reuse-20261012')), {checkoutTests: true});
-  assert.notEqual(missing.status, 0);
-  assert.match(missing.stdout + missing.stderr, /ENOENT/);
-  assert.match(missing.stdout + missing.stderr, /selected-checkpoint-reuse-20261012/);
-});
 
 // Read the actual workflow declarations and shell bodies. These bounded controls
 // model the status-expression subset used here; hosted execution remains required.
@@ -240,9 +214,7 @@ fs.appendFileSync(process.env.FIXTURE_CALLS,JSON.stringify(call)+'\\n');
 });
 
 test('automatic author compute is absent while final queue and explicit rollout keep current consumers',()=>{
- const author=fs.readFileSync(path.join(root,'.github/workflows/merge-integration-checks.yml'),'utf8');
- assert.deepEqual([...author.matchAll(/^  ([a-z]+):$/gm)].map(m=>m[1]),['profile','evidence','scope']);
- assert.doesNotMatch(author,/npm ci|pip install|playwright|build:cloudflare|native-built-output|package-input-build/);
+ assert.equal(fs.existsSync(path.join(root,'.github/workflows/merge-integration-checks.yml')),false);
  const queue=fs.readFileSync(path.join(root,'.github/workflows/worker-merge.yml'),'utf8');
  assert.match(queue,/run: npm run build:cloudflare/);assert.match(queue,/node scripts\/run-integration-tests.mjs/);
  assert.doesNotMatch(queue,/proof_run|proof_attempt|GEOGRAPHY_PROOF|PROOF_RUN/);
@@ -254,7 +226,7 @@ test('automatic author compute is absent while final queue and explicit rollout 
 });
 
 function checkoutBootstrapBodies() {
-  return ['merge-integration-checks.yml','worker-merge.yml'].flatMap(workflow => {
+  return ['worker-merge.yml'].flatMap(workflow => {
     const source=fs.readFileSync(path.join(root,'.github/workflows',workflow),'utf8');
     return [...source.matchAll(/python3 -I -S -B - <<'CHECKOUT_BOOTSTRAP'\n([\s\S]*?)          CHECKOUT_BOOTSTRAP/g)]
       .map(match=>({workflow,body:match[1].split('\n').map(line=>line.slice(10)).join('\n')}));
@@ -428,7 +400,7 @@ test('full-checkout bootstrap accepts live main movement while authenticating on
 });
 
 test('full-checkout canonical verification executes against real Git and refuses mismatched identity or retained credentials',()=>{
-  const bodies=['merge-integration-checks.yml','worker-merge.yml'].flatMap(workflow=>
+  const bodies=['worker-merge.yml'].flatMap(workflow=>
     [...fs.readFileSync(path.join(root,'.github/workflows',workflow),'utf8').matchAll(/python3 -I -S -B - <<'CHECKOUT_VERIFY'\n([\s\S]*?)          CHECKOUT_VERIFY/g)]
       .map(match=>match[1].split('\n').map(line=>line.slice(10)).join('\n')));
   assert.equal(bodies.length,1);assert.equal(new Set(bodies).size,1);
@@ -506,14 +478,8 @@ test('focused delivery tests receive their real Node/Python runtime without an a
   assert(!inputs.has('research'),'no blanket scientific archive checkout');
   const checker=source.match(/- name: Checkout trusted geographic checker([\s\S]*?)(?=      - uses: actions\/setup-node)/)?.[1];
   assert(checker);assert.doesNotMatch(checker,/sparse-checkout-cone-mode: false/);
-  const scope=fs.readFileSync(path.join(root,'.github/workflows/merge-integration-checks.yml'),'utf8').split('  scope:')[1];
-  const candidate=scope.match(/path: candidate([\s\S]*?)(?=      - uses: actions\/setup-node)/)?.[1];
-  assert(candidate);assert.match(candidate,/sparse-checkout-cone-mode: false/);
   for(const name of ['coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs',
     'coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz',
-    'docs/LOCAL_WORKSPACES.md']) {
-    assert(!checker.includes(name),'ordinary leaves must not enter trusted cone checkout');
-    assert(candidate.split('\n').some(line=>line.trim()===name),name);
-  }
+    'docs/LOCAL_WORKSPACES.md'])assert(!checker.includes(name),'ordinary leaves must not enter trusted cone checkout');
 
 });

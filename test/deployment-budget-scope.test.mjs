@@ -168,13 +168,9 @@ test('quota-blocked classification fails the required package job before expensi
  assert.match(yaml,/package:\n    needs: classify[\s\S]*?if: always\(\)/);
 });
 
-test('only read-only superseded PR work is cancelled; main package and merge scheduling remain separate',()=>{
+test('main package scheduling remains separate from final queue validation',()=>{
  const budget=fs.readFileSync(new URL('../.github/workflows/deployment-budget.yml',import.meta.url),'utf8');
- const regression=fs.readFileSync(new URL('../.github/workflows/merge-integration-checks.yml',import.meta.url),'utf8');
  assert.match(budget,/group: worldatlas-package-main-\$\{\{ github\.sha \}\}/);
  assert.match(budget,/cancel-in-progress: false/);
- assert.match(regression,/concurrency:[\s\S]*?github\.event\.pull_request\.number[\s\S]*?cancel-in-progress: true/);
- assert.match(regression,/group: worldatlas-author-pr-\$\{\{ github\.event\.pull_request\.number \}\}/);
- assert.doesNotMatch(regression,/^  (geography|regression|package):/m);
  assert.doesNotMatch(budget,/^  pull_request:/m);
 });

@@ -15,7 +15,8 @@ qualifier independently checks complete selectors, source/native bindings,
 execution lineage, native conservation and the complete
 present/absent route census before creating its own checkpoint capability.
 
-PR provenance uses `merge-integration-checks.yml` / `pull_request`; the workflow
+Historical PR provenance uses the removed `merge-integration-checks.yml` /
+`pull_request`; its immutable workflow
 head is the reviewed PR head. Queue provenance uses `worker-merge.yml` /
 `workflow_dispatch`; its workflow head is recorded separately from the reviewed
 PR head and tested candidate. Failed-job-only reruns retain the actual original

@@ -46,10 +46,9 @@ test('actual checkout authority refuses concatenated relative imports and missin
   assert.throws(()=>checkoutExecutionClosure(root),{code:'ENOENT'});
 });
 
-function selectedWorkflowCommand(workflow='queue') {
-  const name=workflow==='pr'?'merge-integration-checks':'worker-merge';
-  const step=workflow==='pr'?'Run selected-data consumer checks':'Test applicable combined-tree invariants without publishing or live imports';
-  const yaml=fs.readFileSync(path.join(repo,`.github/workflows/${name}.yml`),'utf8');
+function selectedWorkflowCommand() {
+  const step='Test applicable combined-tree invariants without publishing or live imports';
+  const yaml=fs.readFileSync(path.join(repo,'.github/workflows/worker-merge.yml'),'utf8');
   const start=yaml.indexOf(`      - name: ${step}\n`);assert(start>=0);
   const command=yaml.slice(start).split('\n      - ')[0].split('        run: |\n')[1];assert(command);
   return command.trimEnd().split('\n').map(line=>line.slice(10)).join('\n');

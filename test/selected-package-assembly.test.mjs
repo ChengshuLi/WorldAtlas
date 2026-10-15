@@ -194,7 +194,7 @@ test('production assembly admission is independent of optional proof-reference m
 });
 
 
-function sourceFixture(f){
+function sourceFixture(f,{author=true}={}){
   const write=(name,raw)=>{fs.mkdirSync(path.dirname(path.join(f.root,name)),{recursive:true});fs.writeFileSync(path.join(f.root,name),typeof raw==='string'?raw:JSON.stringify(raw));};
   const git=(...args)=>execFileSync('git',['-C',f.root,...args],{encoding:'utf8'}).trim();
   const commit=()=>{git('add','.');git('-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-qm','source');};
@@ -202,7 +202,7 @@ function sourceFixture(f){
     optional_inputs:[],verification_paths:[],generated_outputs:['dist/']};
   const selection={version:1,additive_release:{path:'coordination/engineering/original/release.json'}};
   write('.github/package-inputs.json',definition);write('data/ownership-selection.json',selection);
-  write('.github/workflows/merge-integration-checks.yml','actual build invocation');
+  if(author)write('.github/workflows/merge-integration-checks.yml','actual build invocation');
   write('.github/workflows/worker-merge.yml','actual final-worker build invocation');
   write('scripts/assemble-selected-package.mjs','// Synthetic current entry point for private admission controls.');
   write('scripts/builder.mjs','actual consumed builder');write('package-lock.json','{}');
@@ -215,16 +215,17 @@ function sourceFixture(f){
   return {write,git,commit,snapshot};
 }
 
-test('private assembly admission uses actual declared inputs and rejects legacy capture semantics',async t=>{
+for(const queueOnly of [false,true])test('private assembly admission uses actual '+(queueOnly?'queue-only':'historical')+' producer and rejects drift',async t=>{
   // Exercise the actual plain-process guard instead of altering execArgv in the test.
   if(process.execArgv.length||process.env.NODE_OPTIONS?.trim()||process.env.NODE_PATH?.trim()){
     execFileSync(process.execPath,[new URL(import.meta.url).pathname,t.name],{env:{...process.env,NODE_OPTIONS:'',NODE_PATH:'',NODE_TEST_CONTEXT:undefined},encoding:'utf8'});return;
   }
-  const f=original(t),s=sourceFixture(f),manifest=JSON.parse(f.manifestRaw),oldFetch=globalThis.fetch,oldEntry=process.argv[1];
+  const f=original(t,{worker:queueOnly}),s=sourceFixture(f,{author:!queueOnly}),manifest=JSON.parse(f.manifestRaw),oldFetch=globalThis.fetch,oldEntry=process.argv[1];
   const stage=fs.mkdtempSync(path.join(f.root,'stage-'));
   t.after(()=>{globalThis.fetch=oldFetch;process.argv[1]=oldEntry;});
   manifest.source=s.snapshot();
   f.origin.head=f.origin.workflow_head=f.run.head_sha=f.job.head_sha=f.artifact.workflow_run.head_sha=f.receipt.original_head=manifest.source.head;
+  if(queueOnly)f.receipt.executed_workflow.sha=manifest.source.head;
   f.workflow.sha=manifest.source.producer.workflows.find(row=>row.path===f.workflow.path).oid;
   const authenticate=async source=>{
     f.manifestRaw=Buffer.from(JSON.stringify({...manifest,source})+'\n');
@@ -253,7 +254,7 @@ test('private assembly admission uses actual declared inputs and rejects legacy 
     s.write('.github/package-inputs.json',declaration);
     if(name.endsWith('.mjs'))fs.unlinkSync(path.join(f.root,name));s.commit();
   }
-  for(const name of ['scripts/builder.mjs','package-lock.json','scripts/package-output-artifact.mjs','scripts/package-node-runtime.mjs','.github/workflows/merge-integration-checks.yml','.github/workflows/worker-merge.yml']){
+  for(const name of ['scripts/builder.mjs','package-lock.json','scripts/package-output-artifact.mjs','scripts/package-node-runtime.mjs',...(!queueOnly?['.github/workflows/merge-integration-checks.yml']:[]),'.github/workflows/worker-merge.yml']){
     const old=fs.readFileSync(path.join(f.root,name),'utf8');s.write(name,'changed');s.commit();
     assert.throws(()=>issue(token),/input changed|producer workflow required/,name);
     s.write(name,old);s.commit();
@@ -262,8 +263,8 @@ test('private assembly admission uses actual declared inputs and rejects legacy 
   await assert.rejects(authenticate(legacy),/Actual executed producer workflow/);
 });
 
-function originalDiscovery(t,{worker=false}={}){
-  const f=original(t,{worker}),s=sourceFixture(f),before=s.snapshot(),repo=f.repo;
+function originalDiscovery(t,{worker=false,queueOnly=false}={}){
+  const f=original(t,{worker}),s=sourceFixture(f,{author:!queueOnly}),before=s.snapshot(),repo=f.repo;
   const rows=s.git('ls-tree','-rlz','HEAD').split('\0').filter(Boolean).map(line=>{
     const [metadata,name]=line.split('\t'),[mode,type,oid,size]=metadata.trim().split(/\s+/);
     return {path:name,mode,type,sha:oid,size:Number(size)};
@@ -431,6 +432,19 @@ test('worker origin rejects substituted source, workflow, job, artifact and inco
   ];
   for(const mutate of cases){const f=original(t,{worker:true});mutate(f);globalThis.fetch=async()=>new Response(f.log());
     await assert.rejects(authenticateOriginalPackageOutput(f));}
+});
+
+test('queue-only discovery never queries the deleted author workflow and admits its genuine original',async t=>{
+  const f=originalDiscovery(t,{worker:true,queueOnly:true}),old=globalThis.fetch;t.after(()=>{globalThis.fetch=old;});
+  globalThis.fetch=async()=>new Response(f.log());
+  const base=f.api,calls=[];
+  const api=async route=>{calls.push(route);if(route.includes('/actions/workflows/merge-integration-checks.yml/'))throw Error('GitHub GET failed (HTTP 404)');return base(route);};
+  api.jobLogRedirect=base.jobLogRedirect;
+  const result=await findOriginalPackage({api,repo:f.repo,current:f.s.snapshot()});
+  assert.equal(result.origin.run_id,17);assert.equal(result.origin.head,f.sourceHead);
+  assert.equal(calls.filter(route=>route.includes('/actions/workflows/')).length,1);
+  assert(calls.some(route=>route.includes('/actions/workflows/worker-merge.yml/')));
+  assert(!calls.some(route=>route.includes('/actions/workflows/merge-integration-checks.yml/')));
 });
 
 test('bounded discovery checks both producer workflows and distinct runs sharing a workflow SHA',async t=>{

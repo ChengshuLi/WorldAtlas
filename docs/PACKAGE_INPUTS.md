@@ -20,8 +20,12 @@ checks to succeed. Authentication compares every retained output byte with that
 inventory, so a later consumer cannot silently change the reusable package.
 
 New manifests identify this boundary as `immediate-cloudflare-build-v1` and retain
-the two genuine build workflows' Git identities (`merge-integration-checks.yml`
-and `worker-merge.yml`). The complete declared source image,
+the genuine queue build workflow's Git identity (`worker-merge.yml`). Historical
+captures retain their exact original two-workflow roster, including the removed
+`merge-integration-checks.yml`. Both rosters are checked against the actual immutable
+source and executed workflow. Their producer identities must still match exactly
+before output reuse; deleting the author workflow requires a fresh queue-only
+full-build capture before a subsequent selected delivery can reuse it. The complete declared source image,
 installed dependencies/runtime and build configuration remain authoritative. The capture
 writer and Node runtime-inventory helper are explicit package inputs; their existing
 input/Python helpers were already declared. The ordinary pre-build snapshot therefore
