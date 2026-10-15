@@ -1,0 +1,19 @@
+{
+  "collections": [
+    "sentinel-2-l2a"
+  ],
+  "bbox": [
+    97.6884111593418,
+    9.67238016355535,
+    98.88170090705893,
+    11.717835709667627
+  ],
+  "datetime": "2020-01-25T00:00:00Z/2020-01-25T23:59:59Z",
+  "limit": 40,
+  "sortby": [
+    {
+      "field": "properties.datetime",
+      "direction": "asc"
+    }
+  ]
+}

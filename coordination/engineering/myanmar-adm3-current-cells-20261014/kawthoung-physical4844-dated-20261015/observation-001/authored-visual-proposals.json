@@ -1,0 +1,870 @@
+{
+  "kind": "two-authored-dated-visible-surface-proposals-from-actual-native-observation",
+  "scene": "S2A_47PMM_20200125_0_L2A",
+  "provider_sensing_time": "2020-01-25T04:05:18.697349Z",
+  "author": "/root/mmr_physical_remaining_sol",
+  "proposals": [
+    {
+      "index": 151,
+      "original_key": {
+        "owner": 30350,
+        "y": 123185,
+        "x": 202659
+      },
+      "source_10m_pixel": [
+        820,
+        2210
+      ],
+      "source_20m_pixel": [
+        410,
+        1105
+      ],
+      "physical_block": [
+        0,
+        2
+      ],
+      "proposed_dated_visible_answer": "visible vegetation cover",
+      "manual_source_reason": "NativeRGB shows textured green coastal canopy at sourcepixel820,2210; NIR-red-green frame shows the co-located stronglyred canopy patch. This is visibly inside the canopy patch rather than its shore edge.",
+      "quality_status": "Actualall5bandcentre+3x3masks255;sourceaffine/shape/CRS verified bynativekernel. No localopaquecloud/shadowin inspectedRGB/NIR. Independentactualreview completed and supports statedvisibleanswer; Mainadoption pending.",
+      "actual_source_record": {
+        "index": 151,
+        "original_key": {
+          "owner": 30350,
+          "y": 123185,
+          "x": 202659
+        },
+        "longitude": 98.28711579686149,
+        "latitude": 10.780477998394515,
+        "physical_block": [
+          0,
+          2
+        ],
+        "request_record_index": 968,
+        "source_sids": [
+          44893,
+          44954,
+          45117
+        ],
+        "planning_group": [
+          0,
+          2
+        ],
+        "assets": {
+          "red": {
+            "value": 213,
+            "valid_mask": 255,
+            "source_pixel": [
+              820,
+              2210
+            ],
+            "local_pixel": [
+              820,
+              163
+            ],
+            "neighbourhood": [
+              [
+                241,
+                245,
+                286
+              ],
+              [
+                210,
+                213,
+                260
+              ],
+              [
+                214,
+                239,
+                262
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ]
+          },
+          "green": {
+            "value": 401,
+            "valid_mask": 255,
+            "source_pixel": [
+              820,
+              2210
+            ],
+            "local_pixel": [
+              820,
+              163
+            ],
+            "neighbourhood": [
+              [
+                519,
+                479,
+                577
+              ],
+              [
+                370,
+                401,
+                570
+              ],
+              [
+                347,
+                422,
+                498
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ]
+          },
+          "blue": {
+            "value": 301,
+            "valid_mask": 255,
+            "source_pixel": [
+              820,
+              2210
+            ],
+            "local_pixel": [
+              820,
+              163
+            ],
+            "neighbourhood": [
+              [
+                322,
+                339,
+                352
+              ],
+              [
+                314,
+                301,
+                334
+              ],
+              [
+                323,
+                310,
+                342
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ]
+          },
+          "nir": {
+            "value": 2194,
+            "valid_mask": 255,
+            "source_pixel": [
+              820,
+              2210
+            ],
+            "local_pixel": [
+              820,
+              163
+            ],
+            "neighbourhood": [
+              [
+                3106,
+                2612,
+                3494
+              ],
+              [
+                2186,
+                2194,
+                3430
+              ],
+              [
+                2152,
+                2742,
+                3376
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ]
+          },
+          "scl": {
+            "value": 4,
+            "valid_mask": 255,
+            "source_pixel": [
+              410,
+              1105
+            ],
+            "local_pixel": [
+              410,
+              82
+            ],
+            "neighbourhood": [
+              [
+                4,
+                4,
+                4
+              ],
+              [
+                4,
+                4,
+                4
+              ],
+              [
+                4,
+                4,
+                4
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ]
+          }
+        }
+      },
+      "status": "INDEPENDENTLY-REVIEWED-SUPPORTED-PROPOSAL; MAIN ADOPTION PENDING"
+    },
+    {
+      "index": 386,
+      "original_key": {
+        "owner": 30361,
+        "y": 123261,
+        "x": 202778
+      },
+      "source_10m_pixel": [
+        1957,
+        3994
+      ],
+      "source_20m_pixel": [
+        978,
+        1997
+      ],
+      "physical_block": [
+        1,
+        3
+      ],
+      "proposed_dated_visible_answer": "visible water surface",
+      "manual_source_reason": "NativeRGB shows smooth green/blue water beyond the visible vegetated island margin at sourcepixel1957,3994; NIR frame shows corresponding darkwater rather than red vegetation.",
+      "quality_status": "Actualall5bandcentre+3x3masks255;sourceaffine/shape/CRS verified bynativekernel. No localopaquecloud/shadowin inspectedRGB/NIR. Independentactualreview completed and supports statedvisibleanswer; Mainadoption pending.",
+      "actual_source_record": {
+        "index": 386,
+        "original_key": {
+          "owner": 30361,
+          "y": 123261,
+          "x": 202778
+        },
+        "longitude": 98.45052371398276,
+        "latitude": 10.677941097883979,
+        "physical_block": [
+          1,
+          3
+        ],
+        "request_record_index": 1073,
+        "source_sids": [
+          44893,
+          44954,
+          45110
+        ],
+        "planning_group": [
+          1,
+          3
+        ],
+        "assets": {
+          "red": {
+            "value": 312,
+            "valid_mask": 255,
+            "source_pixel": [
+              1957,
+              3994
+            ],
+            "local_pixel": [
+              934,
+              923
+            ],
+            "neighbourhood": [
+              [
+                309,
+                325,
+                329
+              ],
+              [
+                311,
+                312,
+                308
+              ],
+              [
+                317,
+                307,
+                305
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ]
+          },
+          "green": {
+            "value": 700,
+            "valid_mask": 255,
+            "source_pixel": [
+              1957,
+              3994
+            ],
+            "local_pixel": [
+              934,
+              923
+            ],
+            "neighbourhood": [
+              [
+                698,
+                703,
+                702
+              ],
+              [
+                705,
+                700,
+                694
+              ],
+              [
+                712,
+                705,
+                708
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ]
+          },
+          "blue": {
+            "value": 612,
+            "valid_mask": 255,
+            "source_pixel": [
+              1957,
+              3994
+            ],
+            "local_pixel": [
+              934,
+              923
+            ],
+            "neighbourhood": [
+              [
+                616,
+                602,
+                597
+              ],
+              [
+                601,
+                612,
+                612
+              ],
+              [
+                609,
+                607,
+                596
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ]
+          },
+          "nir": {
+            "value": 159,
+            "valid_mask": 255,
+            "source_pixel": [
+              1957,
+              3994
+            ],
+            "local_pixel": [
+              934,
+              923
+            ],
+            "neighbourhood": [
+              [
+                170,
+                165,
+                166
+              ],
+              [
+                169,
+                159,
+                155
+              ],
+              [
+                162,
+                152,
+                144
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ]
+          },
+          "scl": {
+            "value": 6,
+            "valid_mask": 255,
+            "source_pixel": [
+              978,
+              1997
+            ],
+            "local_pixel": [
+              467,
+              462
+            ],
+            "neighbourhood": [
+              [
+                6,
+                6,
+                6
+              ],
+              [
+                6,
+                6,
+                6
+              ],
+              [
+                6,
+                6,
+                6
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ]
+          }
+        }
+      },
+      "status": "INDEPENDENTLY-REVIEWED-SUPPORTED-PROPOSAL; MAIN ADOPTION PENDING"
+    }
+  ],
+  "withdrawn_draft_example": {
+    "index": 170,
+    "original_key": {
+      "owner": 30350,
+      "y": 123195,
+      "x": 202658
+    },
+    "draft_answer_withdrawn": "visible vegetation cover",
+    "reason": "Initial display interpretation confused proximity of indexlabel to islandwith actualcentre. Finalsourcepixel969,2194 has NIR189 versusred292/green695 and a waterlike3x3; SCL6 with onevegetationclass4 neighbour at20m. A vegetationanswer is contradicted. Keep unfinished shoreline/context case; no replacementanswer orcompletion inferred.",
+    "actual_source_record": {
+      "index": 170,
+      "original_key": {
+        "owner": 30350,
+        "y": 123195,
+        "x": 202658
+      },
+      "longitude": 98.28574262108737,
+      "latitude": 10.766988289677622,
+      "physical_block": [
+        0,
+        2
+      ],
+      "request_record_index": 980,
+      "source_sids": [
+        44893,
+        44954,
+        45117
+      ],
+      "planning_group": [
+        0,
+        2
+      ],
+      "assets": {
+        "red": {
+          "value": 292,
+          "valid_mask": 255,
+          "source_pixel": [
+            969,
+            2194
+          ],
+          "local_pixel": [
+            969,
+            147
+          ],
+          "neighbourhood": [
+            [
+              301,
+              295,
+              299
+            ],
+            [
+              281,
+              292,
+              294
+            ],
+            [
+              277,
+              289,
+              293
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ]
+        },
+        "green": {
+          "value": 695,
+          "valid_mask": 255,
+          "source_pixel": [
+            969,
+            2194
+          ],
+          "local_pixel": [
+            969,
+            147
+          ],
+          "neighbourhood": [
+            [
+              698,
+              686,
+              659
+            ],
+            [
+              695,
+              695,
+              672
+            ],
+            [
+              717,
+              711,
+              707
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ]
+        },
+        "blue": {
+          "value": 648,
+          "valid_mask": 255,
+          "source_pixel": [
+            969,
+            2194
+          ],
+          "local_pixel": [
+            969,
+            147
+          ],
+          "neighbourhood": [
+            [
+              621,
+              629,
+              584
+            ],
+            [
+              625,
+              648,
+              618
+            ],
+            [
+              659,
+              651,
+              648
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ]
+        },
+        "nir": {
+          "value": 189,
+          "valid_mask": 255,
+          "source_pixel": [
+            969,
+            2194
+          ],
+          "local_pixel": [
+            969,
+            147
+          ],
+          "neighbourhood": [
+            [
+              205,
+              198,
+              207
+            ],
+            [
+              207,
+              189,
+              189
+            ],
+            [
+              185,
+              187,
+              199
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ]
+        },
+        "scl": {
+          "value": 6,
+          "valid_mask": 255,
+          "source_pixel": [
+            484,
+            1097
+          ],
+          "local_pixel": [
+            484,
+            74
+          ],
+          "neighbourhood": [
+            [
+              6,
+              6,
+              4
+            ],
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ]
+        }
+      }
+    }
+  },
+  "explicit_unfinished_example": {
+    "index": 167,
+    "original_key": {
+      "owner": 30350,
+      "y": 123191,
+      "x": 202671
+    },
+    "reason": "Displayed centre appears near narrow shore/water transition; nativecontext insufficient for a robust surface answer here. Retain unfinished, noSCLvote."
+  },
+  "other_observed_keys_without_authored_answers": 2105,
+  "completed_or_adopted_count": 0,
+  "review_needed": "Completed once; two narrow proposals supported. Main actualadoption remains pending before counting acceptedanswers.",
+  "source_observation": {
+    "bytes": 9861264,
+    "sha256": "728d52e06bc8d00685fc44b7930643cbc3c557c25fe33842e5689a1f2b48b481"
+  },
+  "source_frames_inspected": [
+    "block-00-02/rgb-native.png",
+    "block-00-02/rgb-centres.png",
+    "block-00-02/nir-red-green-centres.png",
+    "block-01-03/rgb-centres.png",
+    "block-01-03/nir-red-green-centres.png"
+  ],
+  "limits": [
+    "Only visibly supported datedcover/surface at the nativepixel containing originalcentre.",
+    "No whole-cell landextent,annualwater/tide/legalownership/source2019equivalence/repairauthority orholdclearance.",
+    "SCLnotusedasphysicalclassifier;sourcepixelregistrationuncertainty andlocalquality mustlimitanswers."
+  ],
+  "independent_actual_review": {
+    "path": "independent-review.md",
+    "bytes": 7060,
+    "sha256": "d5edb7d16b730a39f8fca7d93ac2965b877f932b247c712007aa2980361894d7",
+    "reviewer": "/root/mmr_review_key_accounting_sol",
+    "decision": "No blocking method/result finding; two narrow datedsurface proposals supported,Main adoption pending."
+  },
+  "independently_supported_proposal_count": 2
+}

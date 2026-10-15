@@ -1,0 +1,96 @@
+{
+  "kind": "exact-two-adopted-keys-join-to-original-physical-roster",
+  "original_input": {
+    "bytes": 92904,
+    "sha256": "b12b9ed64ecb16fa2b5501648fa4ca91727793fa99ceadffb96d9623519c93aa",
+    "git_blob_oid": "fdb71eb75a58ae1af308846caece2d44733fcda2"
+  },
+  "source_array_pointer": "/packages/2/rows",
+  "scientific_vintage": "f7c358326d776398bc1cffe84df81eac7033091c",
+  "answers": [
+    {
+      "original_key": {
+        "owner": 30350,
+        "y": 123185,
+        "x": 202659
+      },
+      "observation_index": 151,
+      "original_package_row_index": 7960,
+      "original_unchanged_interval": [
+        123185,
+        202659,
+        202660,
+        [
+          30350
+        ],
+        [
+          44893,
+          44954,
+          45117
+        ],
+        "source-relative"
+      ],
+      "package_id": "gb-MMR-ADM3--physical-interpretation",
+      "source_10m_pixel": [
+        820,
+        2210
+      ],
+      "source_20m_pixel": [
+        410,
+        1105
+      ],
+      "new_dated_answer": "visible vegetation cover"
+    },
+    {
+      "original_key": {
+        "owner": 30361,
+        "y": 123261,
+        "x": 202778
+      },
+      "observation_index": 386,
+      "original_package_row_index": 8065,
+      "original_unchanged_interval": [
+        123261,
+        202778,
+        202779,
+        [
+          30361
+        ],
+        [
+          44893,
+          44954,
+          45110
+        ],
+        "source-relative"
+      ],
+      "package_id": "gb-MMR-ADM3--physical-interpretation",
+      "source_10m_pixel": [
+        1957,
+        3994
+      ],
+      "source_20m_pixel": [
+        978,
+        1997
+      ],
+      "new_dated_answer": "visible water surface"
+    }
+  ],
+  "reused_old_disjoint_receipt": {
+    "raw_receipt_pin": {
+      "bytes": 4327,
+      "sha256": "b303e3596a77e597089dbc016cad86eb567ca49be0d3b2f82c3db9190438317a",
+      "git_blob_oid": "60a11d4b925537cac1d064789a7c431b41f3a4ef"
+    },
+    "fact": "OriginalKawthoung4844 and oldMyeikselected2793 havezero exactkeyoverlap. Known2235adoptedMyeikanswers are a subset ofthat2793; no full39315/worldjoin rerun.",
+    "reused_join": {
+      "original4844_equals_held_source_relative_rows_literally": true,
+      "original_cells": 4844,
+      "original_intervals": 2170,
+      "repair_candidate_cells": 7338,
+      "original4844_overlap_repair7338": 0,
+      "myeik_dated_selected_cells": 2793,
+      "original4844_overlap_myeik_selected2793": 0
+    }
+  },
+  "counting": "Exactly2newdatedcentres; no originalintervalcompletecount/globalhistoricaltotal/repaircredit."
+}

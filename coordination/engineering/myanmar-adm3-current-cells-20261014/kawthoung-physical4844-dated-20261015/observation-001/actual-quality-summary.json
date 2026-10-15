@@ -1,0 +1,806 @@
+{
+  "summary": {
+    "count": 2107,
+    "scl_centre_counts": {
+      "4": 1587,
+      "9": 26,
+      "8": 20,
+      "6": 371,
+      "3": 13,
+      "2": 36,
+      "7": 17,
+      "5": 37
+    },
+    "valid_centre_masks_by_band": {
+      "red": {
+        "255": 2107
+      },
+      "green": {
+        "255": 2107
+      },
+      "blue": {
+        "255": 2107
+      },
+      "nir": {
+        "255": 2107
+      },
+      "scl": {
+        "255": 2107
+      }
+    },
+    "interpretation": "Literal source observations only, not physical completion or hold clearance."
+  },
+  "model_cloud_shadow_centre_flags": [
+    {
+      "index": 4,
+      "original_key": {
+        "owner": 30350,
+        "y": 123130,
+        "x": 202910
+      },
+      "physical_block": [
+        0,
+        5
+      ],
+      "scl": 9
+    },
+    {
+      "index": 5,
+      "original_key": {
+        "owner": 30350,
+        "y": 123130,
+        "x": 202911
+      },
+      "physical_block": [
+        0,
+        5
+      ],
+      "scl": 8
+    },
+    {
+      "index": 13,
+      "original_key": {
+        "owner": 30350,
+        "y": 123131,
+        "x": 202897
+      },
+      "physical_block": [
+        0,
+        5
+      ],
+      "scl": 3
+    },
+    {
+      "index": 18,
+      "original_key": {
+        "owner": 30350,
+        "y": 123132,
+        "x": 202813
+      },
+      "physical_block": [
+        0,
+        4
+      ],
+      "scl": 9
+    },
+    {
+      "index": 28,
+      "original_key": {
+        "owner": 30350,
+        "y": 123132,
+        "x": 202899
+      },
+      "physical_block": [
+        0,
+        5
+      ],
+      "scl": 3
+    },
+    {
+      "index": 29,
+      "original_key": {
+        "owner": 30350,
+        "y": 123133,
+        "x": 202583
+      },
+      "physical_block": [
+        0,
+        1
+      ],
+      "scl": 9
+    },
+    {
+      "index": 43,
+      "original_key": {
+        "owner": 30350,
+        "y": 123135,
+        "x": 202900
+      },
+      "physical_block": [
+        0,
+        5
+      ],
+      "scl": 3
+    },
+    {
+      "index": 71,
+      "original_key": {
+        "owner": 30350,
+        "y": 123151,
+        "x": 202817
+      },
+      "physical_block": [
+        0,
+        4
+      ],
+      "scl": 8
+    },
+    {
+      "index": 225,
+      "original_key": {
+        "owner": 30350,
+        "y": 123213,
+        "x": 202623
+      },
+      "physical_block": [
+        1,
+        1
+      ],
+      "scl": 3
+    },
+    {
+      "index": 245,
+      "original_key": {
+        "owner": 30350,
+        "y": 123216,
+        "x": 202804
+      },
+      "physical_block": [
+        1,
+        4
+      ],
+      "scl": 3
+    },
+    {
+      "index": 250,
+      "original_key": {
+        "owner": 30350,
+        "y": 123217,
+        "x": 202804
+      },
+      "physical_block": [
+        1,
+        4
+      ],
+      "scl": 3
+    },
+    {
+      "index": 287,
+      "original_key": {
+        "owner": 30350,
+        "y": 123235,
+        "x": 202790
+      },
+      "physical_block": [
+        1,
+        4
+      ],
+      "scl": 3
+    },
+    {
+      "index": 289,
+      "original_key": {
+        "owner": 30350,
+        "y": 123236,
+        "x": 202790
+      },
+      "physical_block": [
+        1,
+        4
+      ],
+      "scl": 3
+    },
+    {
+      "index": 394,
+      "original_key": {
+        "owner": 30361,
+        "y": 123268,
+        "x": 202625
+      },
+      "physical_block": [
+        2,
+        1
+      ],
+      "scl": 9
+    },
+    {
+      "index": 420,
+      "original_key": {
+        "owner": 30361,
+        "y": 123279,
+        "x": 202629
+      },
+      "physical_block": [
+        2,
+        1
+      ],
+      "scl": 8
+    },
+    {
+      "index": 591,
+      "original_key": {
+        "owner": 30361,
+        "y": 123357,
+        "x": 202802
+      },
+      "physical_block": [
+        3,
+        4
+      ],
+      "scl": 3
+    },
+    {
+      "index": 597,
+      "original_key": {
+        "owner": 30361,
+        "y": 123358,
+        "x": 202802
+      },
+      "physical_block": [
+        3,
+        4
+      ],
+      "scl": 3
+    },
+    {
+      "index": 601,
+      "original_key": {
+        "owner": 30361,
+        "y": 123359,
+        "x": 202799
+      },
+      "physical_block": [
+        3,
+        4
+      ],
+      "scl": 9
+    },
+    {
+      "index": 602,
+      "original_key": {
+        "owner": 30361,
+        "y": 123359,
+        "x": 202800
+      },
+      "physical_block": [
+        3,
+        4
+      ],
+      "scl": 9
+    },
+    {
+      "index": 603,
+      "original_key": {
+        "owner": 30361,
+        "y": 123359,
+        "x": 202801
+      },
+      "physical_block": [
+        3,
+        4
+      ],
+      "scl": 8
+    },
+    {
+      "index": 605,
+      "original_key": {
+        "owner": 30361,
+        "y": 123360,
+        "x": 202799
+      },
+      "physical_block": [
+        3,
+        4
+      ],
+      "scl": 9
+    },
+    {
+      "index": 606,
+      "original_key": {
+        "owner": 30361,
+        "y": 123360,
+        "x": 202800
+      },
+      "physical_block": [
+        3,
+        4
+      ],
+      "scl": 8
+    },
+    {
+      "index": 607,
+      "original_key": {
+        "owner": 30361,
+        "y": 123360,
+        "x": 202801
+      },
+      "physical_block": [
+        3,
+        4
+      ],
+      "scl": 9
+    },
+    {
+      "index": 608,
+      "original_key": {
+        "owner": 30361,
+        "y": 123361,
+        "x": 202799
+      },
+      "physical_block": [
+        3,
+        4
+      ],
+      "scl": 8
+    },
+    {
+      "index": 660,
+      "original_key": {
+        "owner": 30361,
+        "y": 123410,
+        "x": 202807
+      },
+      "physical_block": [
+        4,
+        4
+      ],
+      "scl": 9
+    },
+    {
+      "index": 668,
+      "original_key": {
+        "owner": 30361,
+        "y": 123411,
+        "x": 202807
+      },
+      "physical_block": [
+        4,
+        4
+      ],
+      "scl": 9
+    },
+    {
+      "index": 673,
+      "original_key": {
+        "owner": 30361,
+        "y": 123412,
+        "x": 202573
+      },
+      "physical_block": [
+        4,
+        0
+      ],
+      "scl": 8
+    },
+    {
+      "index": 676,
+      "original_key": {
+        "owner": 30361,
+        "y": 123412,
+        "x": 202808
+      },
+      "physical_block": [
+        4,
+        4
+      ],
+      "scl": 9
+    },
+    {
+      "index": 758,
+      "original_key": {
+        "owner": 30361,
+        "y": 123451,
+        "x": 202826
+      },
+      "physical_block": [
+        4,
+        4
+      ],
+      "scl": 8
+    },
+    {
+      "index": 802,
+      "original_key": {
+        "owner": 30361,
+        "y": 123539,
+        "x": 202820
+      },
+      "physical_block": [
+        5,
+        4
+      ],
+      "scl": 8
+    },
+    {
+      "index": 841,
+      "original_key": {
+        "owner": 30361,
+        "y": 123555,
+        "x": 202824
+      },
+      "physical_block": [
+        6,
+        4
+      ],
+      "scl": 3
+    },
+    {
+      "index": 945,
+      "original_key": {
+        "owner": 30361,
+        "y": 123588,
+        "x": 202627
+      },
+      "physical_block": [
+        6,
+        1
+      ],
+      "scl": 9
+    },
+    {
+      "index": 1019,
+      "original_key": {
+        "owner": 30361,
+        "y": 123628,
+        "x": 202807
+      },
+      "physical_block": [
+        7,
+        4
+      ],
+      "scl": 9
+    },
+    {
+      "index": 1020,
+      "original_key": {
+        "owner": 30361,
+        "y": 123628,
+        "x": 202808
+      },
+      "physical_block": [
+        7,
+        4
+      ],
+      "scl": 8
+    },
+    {
+      "index": 1028,
+      "original_key": {
+        "owner": 30361,
+        "y": 123629,
+        "x": 202807
+      },
+      "physical_block": [
+        7,
+        4
+      ],
+      "scl": 9
+    },
+    {
+      "index": 1029,
+      "original_key": {
+        "owner": 30361,
+        "y": 123629,
+        "x": 202808
+      },
+      "physical_block": [
+        7,
+        4
+      ],
+      "scl": 9
+    },
+    {
+      "index": 1030,
+      "original_key": {
+        "owner": 30361,
+        "y": 123629,
+        "x": 202809
+      },
+      "physical_block": [
+        7,
+        4
+      ],
+      "scl": 9
+    },
+    {
+      "index": 1031,
+      "original_key": {
+        "owner": 30361,
+        "y": 123629,
+        "x": 202810
+      },
+      "physical_block": [
+        7,
+        4
+      ],
+      "scl": 9
+    },
+    {
+      "index": 1036,
+      "original_key": {
+        "owner": 30361,
+        "y": 123630,
+        "x": 202807
+      },
+      "physical_block": [
+        7,
+        4
+      ],
+      "scl": 9
+    },
+    {
+      "index": 1037,
+      "original_key": {
+        "owner": 30361,
+        "y": 123630,
+        "x": 202808
+      },
+      "physical_block": [
+        7,
+        4
+      ],
+      "scl": 9
+    },
+    {
+      "index": 1038,
+      "original_key": {
+        "owner": 30361,
+        "y": 123630,
+        "x": 202809
+      },
+      "physical_block": [
+        7,
+        4
+      ],
+      "scl": 9
+    },
+    {
+      "index": 1039,
+      "original_key": {
+        "owner": 30361,
+        "y": 123630,
+        "x": 202810
+      },
+      "physical_block": [
+        7,
+        4
+      ],
+      "scl": 9
+    },
+    {
+      "index": 1042,
+      "original_key": {
+        "owner": 30361,
+        "y": 123631,
+        "x": 202807
+      },
+      "physical_block": [
+        7,
+        4
+      ],
+      "scl": 8
+    },
+    {
+      "index": 1044,
+      "original_key": {
+        "owner": 30361,
+        "y": 123631,
+        "x": 202809
+      },
+      "physical_block": [
+        7,
+        4
+      ],
+      "scl": 9
+    },
+    {
+      "index": 1045,
+      "original_key": {
+        "owner": 30361,
+        "y": 123632,
+        "x": 202807
+      },
+      "physical_block": [
+        7,
+        4
+      ],
+      "scl": 3
+    },
+    {
+      "index": 1046,
+      "original_key": {
+        "owner": 30361,
+        "y": 123632,
+        "x": 202808
+      },
+      "physical_block": [
+        7,
+        4
+      ],
+      "scl": 8
+    },
+    {
+      "index": 1159,
+      "original_key": {
+        "owner": 30361,
+        "y": 123654,
+        "x": 202575
+      },
+      "physical_block": [
+        7,
+        0
+      ],
+      "scl": 8
+    },
+    {
+      "index": 1196,
+      "original_key": {
+        "owner": 30361,
+        "y": 123658,
+        "x": 202647
+      },
+      "physical_block": [
+        7,
+        1
+      ],
+      "scl": 9
+    },
+    {
+      "index": 1214,
+      "original_key": {
+        "owner": 30361,
+        "y": 123659,
+        "x": 202675
+      },
+      "physical_block": [
+        7,
+        2
+      ],
+      "scl": 8
+    },
+    {
+      "index": 1324,
+      "original_key": {
+        "owner": 30361,
+        "y": 123672,
+        "x": 202584
+      },
+      "physical_block": [
+        7,
+        1
+      ],
+      "scl": 8
+    },
+    {
+      "index": 1415,
+      "original_key": {
+        "owner": 30361,
+        "y": 123683,
+        "x": 202586
+      },
+      "physical_block": [
+        8,
+        1
+      ],
+      "scl": 8
+    },
+    {
+      "index": 1463,
+      "original_key": {
+        "owner": 30361,
+        "y": 123687,
+        "x": 202588
+      },
+      "physical_block": [
+        8,
+        1
+      ],
+      "scl": 8
+    },
+    {
+      "index": 1522,
+      "original_key": {
+        "owner": 30361,
+        "y": 123691,
+        "x": 202828
+      },
+      "physical_block": [
+        8,
+        4
+      ],
+      "scl": 9
+    },
+    {
+      "index": 1546,
+      "original_key": {
+        "owner": 30361,
+        "y": 123694,
+        "x": 202828
+      },
+      "physical_block": [
+        8,
+        4
+      ],
+      "scl": 9
+    },
+    {
+      "index": 1555,
+      "original_key": {
+        "owner": 30361,
+        "y": 123695,
+        "x": 202824
+      },
+      "physical_block": [
+        8,
+        4
+      ],
+      "scl": 9
+    },
+    {
+      "index": 1566,
+      "original_key": {
+        "owner": 30361,
+        "y": 123696,
+        "x": 202824
+      },
+      "physical_block": [
+        8,
+        4
+      ],
+      "scl": 8
+    },
+    {
+      "index": 1567,
+      "original_key": {
+        "owner": 30361,
+        "y": 123696,
+        "x": 202825
+      },
+      "physical_block": [
+        8,
+        4
+      ],
+      "scl": 8
+    },
+    {
+      "index": 1705,
+      "original_key": {
+        "owner": 30361,
+        "y": 123717,
+        "x": 202586
+      },
+      "physical_block": [
+        8,
+        1
+      ],
+      "scl": 8
+    },
+    {
+      "index": 1867,
+      "original_key": {
+        "owner": 30361,
+        "y": 123738,
+        "x": 202832
+      },
+      "physical_block": [
+        8,
+        4
+      ],
+      "scl": 3
+    }
+  ],
+  "cloud_shadow_flag_count": 59,
+  "all2107_valid_source_masks": true,
+  "meaning": "Maskvalidity establishes retained source dataavailability,not cloudclear/physicaltruth. SCLmodel labels retained asqualitycontext only. All2107keys remain uncompleted except any futureexplicitlyreviewedauthoredanswers.",
+  "neighbourhood_or_registration_limits": "Sceneacquisition/geotransform/sourcepixels and3x3values retained. No inferred geometric errorbound,exactvectorfootprint,wholecell extent orannual/tidal condition."
+}

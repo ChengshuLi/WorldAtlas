@@ -1,0 +1,11 @@
+{
+  "status": "INVALID; not a source-coverage observation",
+  "initial_runtime_attempt": "System python did not match retained rasterio cp312 extension; switched to existing bundledPython3.12.",
+  "actual_failure": "Retained GDAL3.9.3 was built without GEOS. OGR Contains reported ERROR6 GEOS support not enabled and returnedfalse. The script did not guard error state; numericexit0 is not semantic success.",
+  "invalid_outputs": [
+    "INVALID-ogr-footprint-attempt.json",
+    "INVALID-ogr-first-centres.json"
+  ],
+  "disposition": "All reported0coverage and zero selectedpointcounts are invalid,excluded from findings. No rasterread or source classification occurred. Actual footprints remain in authenticatedmetadata. Existing GDAL coordinate and affine planning remains usable; no new geometryalgorithm introduced.",
+  "attempt_type": "After specific first observation declaration,small metadata-only OGR calls; no native raster or pixelreads."
+}

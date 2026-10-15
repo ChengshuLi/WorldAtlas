@@ -1,0 +1,19 @@
+{
+  "bbox_candidate_keys": 2108,
+  "first_native_read_candidates": 2107,
+  "exceptions": [
+    {
+      "original_index": 1790,
+      "original_key": {
+        "owner": 30350,
+        "y": 123130,
+        "x": 202593
+      },
+      "reason": "Not inside full3x3-context-safe10m/20m domain for this firstscene; no pixel or surface conclusion.",
+      "other_metadata_candidate_scenes": [
+        "S2A_47PMN_20200125_0_L2A"
+      ]
+    }
+  ],
+  "other_parent_keys_not_selected": 2737
+}

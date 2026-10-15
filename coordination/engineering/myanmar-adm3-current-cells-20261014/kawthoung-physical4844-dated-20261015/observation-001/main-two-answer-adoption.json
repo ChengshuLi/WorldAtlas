@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "kind": "Main-adoption-of-two-original-physical-review-answers",
+  "adopted_at": "2026-10-15T22:29:59.784263+00:00",
+  "adopting_worker": "01a13bc1-4be7-7458-80e5-955cb1d6a00c",
+  "source_author": "/root/mmr_physical_remaining_sol",
+  "distinct_reviewer": "/root/mmr_review_key_accounting_sol",
+  "review_sha256": "d5edb7d16b730a39f8fca7d93ac2965b877f932b247c712007aa2980361894d7",
+  "complete_source_observations": 2107,
+  "new_answered_centres": 2,
+  "original_parent_scope": 4844,
+  "unanswered_by_this_adoption": 4842,
+  "answers": [
+    {
+      "original_key": {
+        "owner": 30350,
+        "y": 123185,
+        "x": 202659
+      },
+      "observation_index": 151,
+      "adopted_dated_visible_answer": "visible vegetation cover",
+      "source_sensing_time": "2020-01-25T04:05:18.697349Z",
+      "source_scene": "S2A_47PMM_20200125_0_L2A",
+      "manual_source_reason": "NativeRGB shows textured green coastal canopy at sourcepixel820,2210; NIR-red-green frame shows the co-located stronglyred canopy patch. This is visibly inside the canopy patch rather than its shore edge.",
+      "status": "ADOPTED_BOUNDED_DATED_PHYSICAL_INTERPRETATION",
+      "holds": "unchanged",
+      "native_or_repair_credit": 0
+    },
+    {
+      "original_key": {
+        "owner": 30361,
+        "y": 123261,
+        "x": 202778
+      },
+      "observation_index": 386,
+      "adopted_dated_visible_answer": "visible water surface",
+      "source_sensing_time": "2020-01-25T04:05:18.697349Z",
+      "source_scene": "S2A_47PMM_20200125_0_L2A",
+      "manual_source_reason": "NativeRGB shows smooth green/blue water beyond the visible vegetated island margin at sourcepixel1957,3994; NIR frame shows corresponding darkwater rather than red vegetation.",
+      "status": "ADOPTED_BOUNDED_DATED_PHYSICAL_INTERPRETATION",
+      "holds": "unchanged",
+      "native_or_repair_credit": 0
+    }
+  ],
+  "withdrawn170": "not adopted; shoreline/context remains unfinished",
+  "other2105_observed": "not answered by this adoption",
+  "unread2737": "remain unread",
+  "counting": "Two bounded physical-centre answers only. No complete-original-interval count or broader historical total asserted; no extra count for raw observations.",
+  "limits": [
+    "Observed visible surface at2020-01-25; not annualwater/dryness orwhole150mcell extent.",
+    "No exact vector-footprint predicate inferred from failedGEOS probe.",
+    "No owner/legalborder/territorial/sourcehold clearance or nativeauthority/repaircredit.",
+    "Allsource masks/quality flags/context/registration/source2019limits retained."
+  ]
+}

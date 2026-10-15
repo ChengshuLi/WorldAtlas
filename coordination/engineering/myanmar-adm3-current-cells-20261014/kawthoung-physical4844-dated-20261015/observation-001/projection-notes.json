@@ -1,0 +1,66 @@
+{
+  "kind": "publication-portability-projection-disclosure-not-scientific-requalification",
+  "copies": [
+    {
+      "file": "source/original-physical-group.json",
+      "private_raw": {
+        "bytes": 393465,
+        "sha256": "465e308b35ca0dc4c29d8f44cc16c301f0e78a8290faf4279d653083baff7590",
+        "git_blob_oid": "576f3b5338b9b48894ae689f23bb3c48c1459159"
+      },
+      "changed_non_scientific_fields": [
+        "original_input.path"
+      ]
+    },
+    {
+      "file": "method.json",
+      "private_raw": {
+        "bytes": 1373,
+        "sha256": "572e839f219349ddfa54d1b3efbfc481a53ff7aa1257ca0474662996069694da",
+        "git_blob_oid": "81d411255768002d74b364374ef0f5eef8de58bd"
+      },
+      "changed_non_scientific_fields": [
+        "source_reader"
+      ]
+    },
+    {
+      "file": "operating/execution-001.json",
+      "private_raw": {
+        "bytes": 1606,
+        "sha256": "1fe654080970cec42c7c0f92a6fdd79c39418ef6ae91acd869c2efa2c5bfc91d",
+        "git_blob_oid": "0081c05050e351233ddef59085983c0d12ac3c29"
+      },
+      "changed_non_scientific_fields": [
+        "source_observation",
+        "complete_output_inventory",
+        "kernel_execution_receipt",
+        "stdout",
+        "stderr",
+        "external_execution_tool_session"
+      ]
+    },
+    {
+      "file": "authored-visual-proposals.json",
+      "private_raw": {
+        "bytes": 19286,
+        "sha256": "24998b35caf661fc11b6b256e2f8bf9330c2e035acc03667439193674d0c3bbf",
+        "git_blob_oid": "b4bb3ca914f598a5bcf29295e54ce677905e292c"
+      },
+      "changed_non_scientific_fields": [
+        "source_observation.path",
+        "independent_actual_review.path"
+      ]
+    }
+  ],
+  "rule": "Only listed unnecessary localcustodypath/toolsession fields changed. All scientific values,rawarrays/masks/nativeframes,adoption,review,quality,withdrawal170 andfailuremeaning retained. Original rawreceipts remainprivatelyretained with recordedwholepins. No source/raster reread orrerender.",
+  "private_complete_outputs": {
+    "output_bytes": 426553034,
+    "inventory": "operating/complete-output-inventory.json",
+    "full2107_observation": {
+      "bytes": 9861264,
+      "sha256": "728d52e06bc8d00685fc44b7930643cbc3c557c25fe33842e5689a1f2b48b481",
+      "git_blob_oid": "b051c6e9f7758e195f1b4f910fa454439d43083a"
+    },
+    "not_public": "Complete562inventoryentries plusinventory/finalreceipt are retained locally. Only the listednativecontext files andliteralrecords are published;otherfullnativearrays/displays/full2107valuebody are NOT claimedpubliclyavailable."
+  }
+}
