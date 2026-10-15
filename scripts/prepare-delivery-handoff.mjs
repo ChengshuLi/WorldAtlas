@@ -8,6 +8,7 @@ import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {gunzipSync} from 'node:zlib';
 import {candidateBudget} from './native-ownership/native-preparation-guards.mjs';
+import {scientificOperationSummary} from './native-ownership/scientific-operation-summary.mjs';
 import {locate, prepareDeliveryRoleStaging} from './delivery-handoff-advance.mjs';
 import {validatePackageInputs} from './package-inputs.mjs';
 import {baselineFiles, validateEvidence} from './evidence-quality.mjs';
@@ -1270,7 +1271,26 @@ export async function sourceEvidence(config, reader) {
   for (const [key, value] of Object.entries(derived))
     need(!Object.hasOwn(config.source_evidence, key) || same(config.source_evidence[key], value),
       'Supplied source evidence changes accepted baseline: ' + key);
-  return {'source-evidence.json': jsonBytes({...config.source_evidence, ...derived})};
+  let evidence = {...config.source_evidence, ...derived};
+  const products = {};
+  if (config.original_request !== undefined) {
+    const request = config.original_request;
+    need(request && same(Object.keys(request).sort(), ['owner', 'rows', 'size'])
+      && request.size === native_contract.size, 'Explicit original request owner, rows and native size required');
+    need(!Object.hasOwn(config, 'native_patch') && Array.isArray(evidence.targets)
+      && evidence.targets.length === 1 && evidence.targets[0].pixelIndex === request.owner,
+      'Original request must name the sole source target without a manual native patch');
+    const target = evidence.targets[0];
+    need(!Object.hasOwn(target, 'coverage_rows') && !Object.hasOwn(target, 'coverage_classes'),
+      'Original request cannot replace manual native coverage fields');
+    const original = reader.json(locate(reader, request.rows));
+    const {normalizeOriginalRequestRows} = await import('./native-ownership/original-request-rows.mjs');
+    const normalized = normalizeOriginalRequestRows(original, {owner: request.owner, size: request.size});
+    evidence = {...evidence, targets: [{...target,
+      coverage_classes: normalized.coverage_classes, coverage_rows: normalized.coverage_rows}]};
+    products['native-patch.json'] = jsonBytes(normalized.patch);
+  }
+  return {...products, 'source-evidence.json': jsonBytes(evidence)};
 }
 
 // Execute the existing modern constructor or its admitted read-only diagnostic,
@@ -1357,6 +1377,11 @@ async function main(args) {
   if (phase === 'package') outputs = packageProjection(config, reader);
   if (phase === 'finalize') outputs = finalizeDelivery(config, reader);
   if (phase === 'evidence') outputs = prepareEvidence(config, reader);
-  console.log(JSON.stringify({...publish(root, destination, outputs, binding, flags.includes('--resume'), reader.budget), ...(observation ? {observation} : {})}));
+  // Format before publication; raw products/receipt and publication stay unchanged.
+  const compact = ['source', 'physical'].includes(phase)
+    ? scientificOperationSummary({destination, binding, observation}, {products: outputs}) : null;
+  const published = publish(root, destination, outputs, binding, flags.includes('--resume'), reader.budget);
+  console.log(JSON.stringify(compact ? {...compact, resumed: published.resumed}
+    : {...published, ...(observation ? {observation} : {})}));
 }
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) main(process.argv.slice(2)).catch(error => { console.error(error.message); process.exitCode = 1; });

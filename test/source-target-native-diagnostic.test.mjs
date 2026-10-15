@@ -199,3 +199,83 @@ test('diagnostic refuses output and trace budgets rather than returning unaccoun
  tight.allowance.phaseBytes=used.used+100;
  assert.throws(()=>diagnoseSourceTargetNativeAuthority(tight,g.preimage,g.binding),/exceeds phase|exceeds allowance/);
 });
+
+// Tiny synthetic contacts model North exterior and Aru's21-line/mixed shapes;
+// no original country centres are evaluated by these metadata integration tests.
+const kinds=['missing_reconstruction','extra_reconstruction','contradictory_land_water_support',
+ 'L2-outside-L1','L3-outside-L2','L4-outside-L3','outside_mapped_L1_context'];
+test('witness attribution reports exterior-only contacts without changing primary holds',()=>{
+ const f=constructorFixture(s=>{exactBoundaryTarget(s);const r=withResiduals(s,[]);
+  r.support.outside_mapped_L1_context=rectangle(-90.001,-89.995,-.01,.01);
+  s.proposed.rows=[{y,runs:[[x,x+3,2]]}];
+ });
+ assert.throws(()=>f.run(),/residual or conflict witness/);
+ const d=f.diagnose();assertPartition(d);assert.equal(d.held_cells,3);assert.equal(d.supported_cells,0);
+ assert.deepEqual(d.decision_rows,[{y,runs:[[x,x+3,2,'physical-reconstruction-residual-or-conflict']]}]);
+ assert.deepEqual(d.first_failure,{y,run:[x,x+3,2],predicate:'physical-reconstruction-residual-or-conflict'});
+ assert.deepEqual(d.physical_witness_kind_legend,kinds);
+ assert.deepEqual(d.physical_witness_kind_rows,[{y,runs:[[x,x+3,2,64]]}]);
+});
+test('witness attribution retains21-line contradiction plus exterior in mixed physical coverage',()=>{
+ const f=constructorFixture(s=>{exactBoundaryTarget(s);
+  const lines={type:'MultiLineString',coordinates:Array.from({length:21},(_,i)=>
+   [[-90.001,latitude+i/10000],[-89.999,latitude+i/10000]])};
+  const r=conflict(s,'contradictory_land_water_support',lines);
+  r.support.outside_mapped_L1_context=rectangle(-90.002,-89.998,-.01,.01);
+  r.support.mapped_inland_water_support=r.support.mapped_land_support;
+  s.targets[0].coverage_classes=['mapped_land_support','mapped_inland_water_support'];
+  s.targets[0].coverage_rows=[{y,runs:[[x,x+1,'mapped_land_support']]}];
+ });
+ assert.throws(()=>f.run(),/residual or conflict witness/);const d=f.diagnose();assertPartition(d);
+ assert.equal(d.decision_rows[0].runs[0][3],'physical-reconstruction-residual-or-conflict');
+ assert.deepEqual(d.physical_witness_kind_rows,[{y,runs:[[x,x+1,2,68]]}]);
+});
+for(const [i,kind]of kinds.slice(0,6).entries())test('witness attribution preserves exact kind '+kind,()=>{
+ const f=constructorFixture(s=>{exactBoundaryTarget(s);conflict(s,kind,{type:'Point',coordinates:[-90,latitude]});});
+ assert.throws(()=>f.run(),/residual or conflict witness/);const d=f.diagnose();assertPartition(d);
+ assert.deepEqual(d.physical_witness_kind_rows,[{y,runs:[[x,x+1,2,1<<i]]}]);
+});
+test('witness attribution isolates owners even when one witness spans another owner centre',()=>{
+ const f=constructorFixture(s=>{
+  const left=rectangle(-90.03,-89.97,-.02,.02),right=rectangle(-89.95,-89.91,-.02,.02);
+  s.originals=[rawFeature('A',left),rawFeature('C',right)];s.membership=false;s.roster=[{id:a,index:1},{id:c,index:2}];
+  s.targets=[{id:a,pixelIndex:1,source_family:family,base_geometry:left,coverage_classes:['mapped_land_support'],territorial_exclusions:[]},
+   {id:c,pixelIndex:2,source_family:family,base_geometry:right,coverage_classes:['mapped_land_support'],territorial_exclusions:[]}];
+  s.physical.results=[{target:a,issues:[],support:{mapped_land_support:left,outside_mapped_L1_context:rectangle(-90.02,-89.90,-.01,.01)}},
+   {target:c,issues:[],support:{mapped_land_support:right}}];
+  s.measured=[{target:a,consumed:{geometry:left},selected:{id:a,geometry:left}},
+   {target:c,consumed:{geometry:right},selected:{id:c,geometry:right}}];
+  s.proposed.rows=[{y,runs:[[x,x+1,1],[x+50,x+51,2]]}];
+ });
+ const d=f.diagnose();assertPartition(d);assert.equal(d.held_cells,1);assert.equal(d.supported_cells,1);
+ assert.deepEqual(d.physical_witness_kind_rows,[{y,runs:[[x,x+1,1,64]]}]);assert.equal(d.decision_rows[0].runs[1][3],'assigned_cells');
+});
+test('witness attribution unions same-owner sibling kinds without duplicate contact rows',()=>{
+ const geometry=rectangle(-.025,-.015,-.01,.01);
+ const f=constructorFixture(s=>{withResiduals(s,[['missing_reconstruction',geometry]],0);
+  withResiduals(s,[],1).support.outside_mapped_L1_context=geometry;});
+ const d=f.diagnose();assertPartition(d);const row=f.state.proposed.rows[0],run=row.runs[0];
+ assert.deepEqual(d.physical_witness_kind_rows,[{y:row.y,runs:[[run[0],run[1],run[2],65]]}]);
+});
+test('witness attribution is absent from authority and empty without contacts',()=>{
+ const f=constructorFixture(),qualified=f.run(),d=f.diagnose();assertPartition(d);
+ assert.equal('physical_witness_kind_rows' in qualified,false);assert.deepEqual(d.physical_witness_kind_rows,[]);assert.equal(d.first_failure,null);
+});
+test('witness attribution does not coalesce across a supported gap or different mask',()=>{
+ const longitude=xx=>(xx+.5)/size*360-180;
+ const f=constructorFixture(s=>{exactBoundaryTarget(s);const r=withResiduals(s,[]);
+  r.support.outside_mapped_L1_context={type:'MultiPolygon',coordinates:[
+   rectangle(longitude(x)-.0004,longitude(x)+.0004,-.01,.01).coordinates,
+   rectangle(longitude(x+2)-.0004,longitude(x+2)+.0004,-.01,.01).coordinates]};
+  s.proposed.rows=[{y,runs:[[x,x+3,2]]}];
+ });
+ const d=f.diagnose();assertPartition(d);assert.equal(d.supported_cells,1);assert.equal(d.held_cells,2);
+ assert.deepEqual(d.physical_witness_kind_rows,[{y,runs:[[x,x+1,2,64],[x+2,x+3,2,64]]}]);
+ const g=constructorFixture(s=>{exactBoundaryTarget(s);
+  const r=conflict(s,'contradictory_land_water_support',{type:'Point',coordinates:[-90,latitude]});
+  r.support.outside_mapped_L1_context=rectangle(-90.001,-89.995,-.01,.01);
+  s.proposed.rows=[{y,runs:[[x,x+3,2]]}];
+ });
+ const mixed=g.diagnose();assertPartition(mixed);
+ assert.deepEqual(mixed.physical_witness_kind_rows,[{y,runs:[[x,x+1,2,68],[x+1,x+3,2,64]]}]);
+});

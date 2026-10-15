@@ -539,6 +539,19 @@ metadata belongs only to separate custody pins. Raw and decoded latitude/owner
 identities are verified before output. No template commit or scientific execution
 is needed for this mechanical assembly.
 
+Optionally, add `original_request: {owner, rows: {commit, path}, size}` to derive
+the native request in the same call. `rows` locates the complete immutable
+seven-column interval packet (`category`, `y`, `start`, `end`, `owners`,
+`source_feature_indices`, `physical`). This mode requires one target with that
+owner and native size; omit manual target `coverage_classes`/`coverage_rows` and
+top-level `native_patch`. It emits both `native-patch.json` and
+`source-evidence.json`, deriving requested land/water classes from the original
+repair labels while leaving source-relative and unknown rows held outside the
+patch. Original interval boundaries and labels remain unchanged; no physical
+support or qualification is inferred. Without `original_request`, the existing
+call and its single `source-evidence.json` output are unchanged. Pass the actual
+immutable emitted source and patch locators to `native-authority`.
+
 Commit the emitted ordinary `source-evidence.json` once, then pass its immutable
 locator to the existing `native-authority` command. This step does not qualify the
 scientific claims or replace their review. Choosing a different same-body custody
@@ -683,6 +696,13 @@ native-cell and witness checks still apply. Exact whole-target support is not
 country approval, native-cell qualification, ownership-zero proof or delivery.
 `--resume` verifies complete original products, code/configuration and input pins
 without repeating physical operations. Invalid or incomplete evidence refuses.
+
+Fresh `source` and `physical` stdout is a compact display summary with the actual
+`resumed` flag and raw artifact references, rather than the full runtime-file
+array. Read `execution-receipt.json` (and source qualification where applicable)
+for complete original runtime/admission records. Raw products and their
+publication binding are unchanged; the summary establishes no qualification.
+The existing early `--resume` response remains unchanged.
 
 ## Derived selected-delivery evidence
 
