@@ -1,0 +1,11 @@
+# Kepulauan Aru: first ordinary native authority result
+
+The unchanged stock native constructor qualified the exact 5,460 requested cells: 5,433 mapped land and 27 mapped inland water, owner 22734. All 6,326 source-relative held cells remain excluded from the original 11,786-cell context. This result adds zero accepted cells; current-owner-zero, conservation, final emitted-output review and ordinary integration remain pending.
+
+Original scientific input commit: `23c9d63be15307b0203f2636210ac0e2a44dee2b`, under `coordination/engineering/indonesia-kepulauan-aru-20261015/native5460-input-001/`. Complete physical evidence remains at `a5ae737a6905f2462ce6148cd006bdc81494b817`, under `coordination/engineering/indonesia-kepulauan-aru-20261015/physical-result-001/whole-target-support.json`: all 238 checked queries and the original 21-segment contradiction are retained.
+
+The ordinary full diagnostic and first authority used accepted code `061f1caeeeb9546c30a417acb218839634013527`. The separate narrow line-incidence result retains its actual module pin at `866c42b854910f17a80427dac19b2c850cd68093:src/native-grid.js`; it alone establishes no positive source/class/territorial qualification. Actual input, combined diagnostic and first authority reviews are copied unchanged here, as are original full products, completion receipts, config and recorded authority operating observations. No scientific producer or operator was replayed for this preservation.
+
+`territorial_exclusions: []` means no additional exclusion geometries supplied. It is not evidence of universal foreign-veto absence or geographic/legal clearance. Known actual witnesses cannot be omitted. Source/reference 2020, heterogeneous source/GSHHG observation dates, selected modified geometry and upstream licensing/factual uncertainty remain as recorded in the original evidence and reviews. No new source, license or absence claim is introduced.
+
+`native-diagnostic-preparation.json` is an exact copy of the full diagnostic's original `preparation.json`, renamed only to coexist with the authority preparation. Other payload renames similarly preserve exact original bytes; the private task-side inventory records each source path. Recorded fresh admission and per-process peaks are actual observations, not aggregate live-process-tree enforcement.

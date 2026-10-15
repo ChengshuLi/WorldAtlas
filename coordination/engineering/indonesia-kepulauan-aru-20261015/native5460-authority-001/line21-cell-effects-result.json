@@ -1,0 +1,86 @@
+{
+  "version": 1,
+  "kind": "accepted-exact-witness-cell-incidence-diagnostic",
+  "target": "gb:IDN:ADM2:22746128B17511076551422",
+  "owner": 22734,
+  "pins": {
+    "module": {
+      "commit": "866c42b854910f17a80427dac19b2c850cd68093",
+      "path": "src/native-grid.js",
+      "bytes": 36232,
+      "sha256": "7c93720e68fb3a9d584bcd9ba5c7f111b836d99eb3d133b86fdd6d72efe50d48"
+    },
+    "physical": {
+      "commit": "a5ae737a6905f2462ce6148cd006bdc81494b817",
+      "path": "coordination/engineering/indonesia-kepulauan-aru-20261015/physical-result-001/whole-target-support.json",
+      "bytes": 959385,
+      "sha256": "02acba9509c36ee1877110799c3a21e0bfb20d9de99c33ef4bf96b6b193d18b3"
+    },
+    "patch": {
+      "commit": "23c9d63be15307b0203f2636210ac0e2a44dee2b",
+      "path": "coordination/engineering/indonesia-kepulauan-aru-20261015/native5460-input-001/native-patch.json",
+      "bytes": 74283,
+      "sha256": "b873a7c60e7c48fd956e85f779c29209de39a655f9d99cfe86b4ab300fb87dd5"
+    },
+    "latitudes": {
+      "commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+      "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+      "bytes": 1851757,
+      "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+      "decoded_bytes": 2097328,
+      "decoded_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+    }
+  },
+  "retained_witness_sha256": "1570c0bb9319811147039c92388465769c909bdd435f0adabb6ce90cb167719d",
+  "request": {
+    "cells": 5460,
+    "rows": 943,
+    "land_requested": 5433,
+    "inland_water_requested": 27,
+    "relative_held_excluded": 6326
+  },
+  "validation": {
+    "parts": 1,
+    "vertices": 42,
+    "polygons": 0,
+    "segments": 21,
+    "points": 0,
+    "empty": false,
+    "edges": 0,
+    "crossing_edge_rows": 0,
+    "span_upper_bound": 0,
+    "tie_upper_bound": 0,
+    "scratch_bytes": 5801216
+  },
+  "effects": {
+    "hits": [],
+    "counts": {
+      "cells": 0,
+      "interior": 0,
+      "boundary": 0,
+      "line": 0,
+      "point": 0
+    },
+    "work": {
+      "requested_cells": 5460,
+      "requested_rows": 943,
+      "geometry_parts": 1,
+      "vertices": 42,
+      "polygon_parts": 0,
+      "line_segments": 21,
+      "points": 0,
+      "stock_scan_blocks": 0,
+      "exact_line_cell_tests": 1123,
+      "exact_point_cell_tests": 0
+    }
+  },
+  "elapsed_seconds": 0.05504929100000001,
+  "actual_node_rss_bytes": 78987264,
+  "actual_node_max_rss_bytes": 78987264,
+  "limits": [
+    "Exact incidence of the retained 21 line segments only; ideal rational native longitude and complete authenticated binary64 normative latitude table are used by the unchanged accepted API.",
+    "No source, mapped land/water class, exterior, hierarchy, territorial exclusion, current ownership or scientific qualification is established by this narrow incidence observation.",
+    "All original physical evidence and 6326 relative holds remain unchanged; no authority, ledger, acceptance or new credit is emitted.",
+    "Fresh actual admission and standard external deadline/time-l are Main-owned; boundary RSS observations are not aggregate live-process-tree enforcement."
+  ]
+}
