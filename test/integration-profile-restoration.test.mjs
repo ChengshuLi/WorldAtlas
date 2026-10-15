@@ -125,6 +125,13 @@ test('real evidence entry runs every selected test with no canonical namespace',
   assert.equal(fs.readdirSync(f.root).filter(n=>n.startsWith('tests-reached-')).length,focused.length);
   assert.ok(!r.stdout.includes('canonical_checkout'));
 });
+test('real evidence entry refuses a missing required focused test before execution',t=>{
+  const f=fixture(t);
+  fs.unlinkSync(path.join(f.root,'test/native-diagnostic-entry.test.mjs'));
+  const r=f.run();assert.equal(r.status,1,r.stderr);
+  assert.match(r.stderr,/Missing integration test inventory/);
+  assert.equal(fs.readdirSync(f.root).filter(n=>n.startsWith('tests-reached-')).length,0);
+});
 test('real full entry calls canonical preparation before selected readers',t=>{
   const f=fixture(t,{full:true,helperBody:`import fs from 'node:fs';
 export function prepareCanonicalCheckout(){fs.writeFileSync('restored-fixture.json','{"complete":true}',{flag:'wx'});return {fixture_only:true};}\n`});

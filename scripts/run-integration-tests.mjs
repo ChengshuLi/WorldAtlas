@@ -76,18 +76,20 @@ export function fullRegressionShard(inventory, shard) {
     (name === COMPONENT_CONTROL_TEST ? 1 : index % 3) === shard)];
 }
 
+// The runner owns this roster; routing controls derive their focused membership.
+export const FOCUSED_INTEGRATION_TESTS = Object.freeze(['handoff-scope','issue-claims','worker-result','regional-research-gate','geography-worker-lane',
+  'evidence-quality','premerge-evidence','trusted-workflow-checkouts','merge-integration','merge-integration-entrypoint','integration-proof',
+  // Actual delivery entry/advance consumers, including scientific dispatch guards.
+  'delivery-evidence-derivation','delivery-finalize-config','delivery-handoff-advance','delivery-handoff','delivery-registry-delta','local-workspace','native-authority-entry','native-diagnostic-entry','native-witness-authority','physical-source-retention','source-cohort','source-completed-staging','source-evidence-derivation','source-member-native-delivery','source-publication-admission','source-target-native-delivery'].map(name => `test/${name}.test.mjs`));
+
 export function integrationTestFiles(profile, shard, testSelection = 'complete') {
   if (!['complete','selected-output'].includes(testSelection) ||
       (testSelection !== 'complete' && (profile !== 'full' || shard !== 0))) throw Error('Invalid trusted test selection');
   if (!['full','evidence'].includes(profile) || !Number.isInteger(shard) || shard < 0 || shard > 2 ||
       (profile === 'evidence' && shard !== 0)) throw Error('Invalid trusted integration test profile');
-  const focused = ['handoff-scope','issue-claims','worker-result','regional-research-gate','geography-worker-lane',
-    'evidence-quality','premerge-evidence','trusted-workflow-checkouts','merge-integration','merge-integration-entrypoint','integration-proof',
-    // Actual delivery entry/advance consumers, including scientific dispatch guards.
-    'delivery-evidence-derivation','delivery-finalize-config','delivery-handoff-advance','delivery-handoff','delivery-registry-delta','local-workspace','native-authority-entry','native-diagnostic-entry','native-witness-authority','physical-source-retention','source-cohort','source-completed-staging','source-evidence-derivation','source-member-native-delivery','source-publication-admission','source-target-native-delivery'];
   const inventory = fs.readdirSync('test').filter(name => name.endsWith('.test.mjs')).sort().map(name=>`test/${name}`);
   const files = testSelection === 'selected-output' ? ['test/compact-ownership.test.mjs']
-    : profile === 'full' ? fullRegressionShard(inventory, shard) : focused.map(name => `test/${name}.test.mjs`);
+    : profile === 'full' ? fullRegressionShard(inventory, shard) : [...FOCUSED_INTEGRATION_TESTS];
   if (!files.length || files.some(name => !fs.existsSync(name))) throw Error('Missing integration test inventory');
   return files;
 }
