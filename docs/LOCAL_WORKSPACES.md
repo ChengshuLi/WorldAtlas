@@ -13,6 +13,8 @@ Worker identity belongs to the chat, not the issue, branch, goal, checkout or Gi
 
 Active legacy work keeps its recorded worker ID only for finishing, renewing and releasing that exact claim/checkout. Do not rename an active claim, take over another chat’s slot or start new work under the legacy ID. After verified merge/handoff and safe release, use this chat’s ID for the next job and allocation. Independent reviewer agents keep their own stable distinct reviewer IDs (actual agent identity when available); an inherited parent CODEX_THREAD_ID does not identify a sub-agent. Never invent a second ID for self-review. Review allocation is exempt from the author-ID check because review sub-agents may inherit their parent’s environment; review identity remains cooperative and must be checked by the reviewer.
 
+New author allocation requires the current chat’s worker ID; the release command instead uses the recorded worker, slot and saved token to select its target, without changing the operator’s identity.
+
 ## Allocate and inspect
 
 ```sh
@@ -221,9 +223,11 @@ their checkpoint and unique work. For a manual finish/release, stop processes us
 the slot and run:
 
 ```sh
-node scripts/local-workspace.mjs release --worker YOUR-WORKER-ID --slot work \
+node scripts/local-workspace.mjs release --worker RECORDED-WORKER-ID --slot work \
   --token EXACT_RETURNED_TOKEN
 ```
+
+With explicit user authorization to delete an exact retired checkout, an operator may release that selected slot after verifying its backup and confirming no live process or live operation depends on it, while leaving `CODEX_THREAD_ID` unchanged. Use the normal release guards; this does not authorize automatic cross-chat cleanup, new work under the recorded worker, registry edits, forced removal or releasing another holder’s live-operation reservation.
 
 Release preserves the current commit at a local `refs/worldatlas-local-recovery/`
 ref, then asks Git to remove the exact owned worktree without `--force`. Branches
@@ -231,7 +235,7 @@ and the shared Git store remain. It rejects uncommitted, untracked **and ignored
 files, plus index trust flags that can hide edits (`assume-unchanged` or materialized `skip-worktree`): first commit/push necessary evidence, preserve unique scratch outputs, and
 remove only verified regenerable artifacts. A review checkout must be clean too.
 Release does not decide whether acceptance is complete or a process is finished;
-the holder must establish that before calling it. It does not delete remote refs,
+the operator must establish that before calling it. It does not delete remote refs,
 original repository evidence, other workers' work or production data.
 
 The token changes on every allocation. Wrong/stale tokens, symlink directories,

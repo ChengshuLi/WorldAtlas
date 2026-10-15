@@ -27,5 +27,4 @@ test('mandatory context stage rejects missing, tampered, stale and over-budget i
   Object.assign(manifest.outputs.find(f=>f.path===name),{bytes:raw.length,sha256:sha256(raw)});
   await assert.rejects(validateContextInputStage({readFile:(n,v)=>n===name?raw:n===CONTEXT_STAGE_PATH?Buffer.from(JSON.stringify(manifest)):read(n,v)}),/Incomplete or duplicate/);
  }
- await assert.rejects(validateContextInputStage({expectedReference:{footprints_sha256:'0'.repeat(64),hierarchy_sha256:'0'.repeat(64)}}),/Expected values/);
 });

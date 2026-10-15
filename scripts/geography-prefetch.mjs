@@ -106,16 +106,23 @@ export function createAcquisition({repo, loadTree, loadDescriptor, execute = exe
       stats.fetch_batches++;
     }
     const started = performance.now();
+    let acquired;
     for (const row of rows) {
       // Verify once per actual OID/hash binding, including multiple aliases.
       const key = row.oid + ':' + (row.sha256 ?? '');
-      if (!verified.has(key)) { body(row); verified.add(key); }
+      if (!verified.has(key)) {
+        const raw = body(row); verified.add(key);
+        if (rows.length === 1) acquired = raw;
+      }
     }
     stats.verification_ms += Math.round(performance.now() - started);
     stats.verified_import_objects += missing.length; stats.verified_import_bytes += missing.reduce((n, r) => n + r.bytes, 0);
+    return acquired;
   }
   async function json(version, name, expected) {
-    const row = await descriptor(version, name, expected); acquire([row]); return JSON.parse(body(row));
+    const row = await descriptor(version, name, expected);
+    const raw = acquire([row]) ?? body(row);
+    return JSON.parse(raw);
   }
   return {tree, descriptor, pin, acquire, json, stats};
 }

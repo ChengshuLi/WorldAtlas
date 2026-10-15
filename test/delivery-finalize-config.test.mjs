@@ -1,3 +1,5 @@
+import {createHash} from 'node:crypto';
+import {selectedDataSelection, SELECTED_SMOKE} from '../scripts/integration-profile.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -5,7 +7,7 @@ import os from 'node:os';
 import path from 'node:path';
 import {execFileSync, spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
-import {digest, jsonBytes, pinReader, resolveFinalizeConfig, finalizeDelivery} from '../scripts/prepare-delivery-handoff.mjs';
+import {digest, jsonBytes, pinReader, resolveFinalizeConfig, finalizeDelivery, finalizedPackageInputs} from '../scripts/prepare-delivery-handoff.mjs';
 
 const entry = fileURLToPath(new URL('../scripts/prepare-delivery-handoff.mjs', import.meta.url));
 const PREFIX = 'coordination/engineering/finalize-config/';
@@ -132,3 +134,73 @@ test('wrong commit, wrong path, missing product and changed product hash fail be
     assert.equal(fs.existsSync(path.join(f.root, destination)), false, 'Refusal cannot create output');
   }
 });
+
+// The actual classifier/finalizer integration belongs with delivery helpers.
+// Its original in-memory fixture is retained literally; no country history is needed.
+{
+const prefix = 'coordination/engineering/fixture-delivery/';
+function fixture({mutate = () => {}, packetPrefix = prefix} = {}) {
+  const prefix = packetPrefix;
+  const blobs = new Map(), baseline = {entries:new Map()}, authored = {entries:new Map()}, reads=[];
+  const put = (name, value, old=false) => {
+    const bytes = Buffer.isBuffer(value) ? value : Buffer.from(typeof value === 'string' ? value : JSON.stringify(value));
+    const sha = createHash('sha1').update(`blob ${bytes.length}\0`).update(bytes).digest('hex');
+    blobs.set(sha,bytes); const row={path:name,type:'blob',mode:'100644',size:bytes.length,sha};
+    authored.entries.set(name,row); if(old)baseline.entries.set(name,row);
+    return {path:name,bytes:bytes.length,sha256:digest(bytes),mode:'100644',git_blob_oid:sha,commit:'a'.repeat(40)};
+  };
+  const leaf = (name, old=false) => put((old?'coordination/engineering/prior/':prefix)+name,{opaque:true},old);
+  put(SELECTED_SMOKE,'// Accepted generic helper',true);
+  const authority = leaf('authority.json',true), rule = leaf('rule.json',true);
+  const entry={authority_sha256:'a'.repeat(64),policy_id:'retained-source-literal-additions',policy_version:1,
+    rule_preimage:rule,rule_sha256:rule.sha256,source_authority:authority};
+  const registryBody={version:1,kind:'registry',entries:[entry]};
+  const oldRegistry=put('coordination/engineering/prior/registry.json',registryBody,true);
+  const base={version:1,method:'native-linear-evenodd-first-owner-v1',artifact_consumption:{certificate:{},review:{}},manifest_path:'unchanged.json',sha256:'a'.repeat(64)};
+  const oldLedger=put('coordination/engineering/prior/ledger.json',{rows:[]},true);
+  const oldSidecar=put('coordination/engineering/prior/sidecar.json',{authority_registry:oldRegistry,logical_asset_map:{ledger:oldLedger}},true);
+  const hook=pin=>({path:pin.path,bytes:pin.bytes,sha256:pin.sha256});
+  put('data/ownership-selection.json',{...base,additive_release:hook(oldSidecar)},true);
+  const registry=put(prefix+'registry.json',registryBody);
+  const original=leaf('composed-original-ledger.json');
+  const plan=put(prefix+'issued-plan.json',{original_inputs:[{...registry,commit:'b'.repeat(40)},original]});
+  const custody=Object.fromEntries(['code_source','terminal','stderr','stdout'].map(name=>[name,leaf(name+'.json')]));
+  custody.issued_plan=plan;
+  const operating=put(prefix+'operating.json',{execution_custody:custody});
+  const certificateBody={version:1,kind:'qualified-native-additive-current-bank-rebind-v1',operating,
+    ...Object.fromEntries(['request','facts','publication','result'].map(name=>[name,leaf(name+'.json')]))};
+  const certificate=put(prefix+'certificate.json',certificateBody);
+  const rows=[{component_id:'old',target_id:'target-old',disposition:'assigned',geometry_sha256:'1'.repeat(64),native_cells:2},
+    {component_id:'new',target_id:'target-new',disposition:'zero-cell',geometry_sha256:'2'.repeat(64),native_cells:0}];
+  const ledgerBody={version:2,kind:'native-additive-repair-ledger-v2',rows,current_rebind:certificate};
+  const ledger=put(prefix+'ledger.json',ledgerBody);
+  const sidecarBody={version:2,kind:'retained-native-additive-selection-v2',base_selection:base,
+    authority_registry:registry,runtime_envelope:leaf('envelope.json'),
+    logical_asset_map:{ledger,patch:leaf('patch.json'),owner_roster:leaf('owners.json',true),base_manifest:leaf('manifest.json',true)}};
+  const sidecar=put(prefix+'selection-sidecar.json',sidecarBody);
+  put('data/ownership-selection.json',{...base,additive_release:hook(sidecar)});
+  const expected={version:1,selected_ledger_sha256:ledger.sha256,cumulative_native_cells:2,
+    cohorts:[{original_batch_id:'complete-original',component_ids:['old','new'],members:rows.map(({native_cells,...member})=>member)}]};
+  put(prefix+'selected-delivery-expectations.json',expected);
+  const policy={version:1,inputs:['.github/package-inputs.json','data/ownership-selection.json'],optional_inputs:[],verification_paths:[],generated_outputs:[]};
+  put('.github/package-inputs.json',policy,true);
+  const definition={...policy,inputs:[...policy.inputs,...[...authored.entries.keys()].filter(name=>name.startsWith(prefix)&&!name.endsWith('selected-delivery-expectations.json'))]};
+  put('.github/package-inputs.json',definition);
+  const f={put,leaf,blobs,baseline,authored,reads,base,rows,expected,definition,policy,sidecarBody,ledgerBody,certificateBody,registryBody,plan,registry,operating};
+  mutate(f);
+  f.files=[...authored.entries].filter(([name,row])=>baseline.entries.get(name)?.sha!==row.sha).map(([filename])=>({filename,status:baseline.entries.has(filename)?'modified':'added'}));
+  f.api=async route=>{const oid=route.split('/').at(-1),bytes=blobs.get(oid);assert(bytes,route);reads.push(oid);return {sha:oid,size:bytes.length,encoding:'base64',content:bytes.toString('base64')};};
+  f.run=(options={})=>selectedDataSelection({api:f.api,repo:'owner/repo',branch:'engineering/fixture-delivery',files:f.files,baseline,authored,...options});
+  return f;
+}
+test('delivery finalizer satisfies actual append-only selected-data classifier and rejects global sorting', async () => {
+  const f=fixture(), paths=f.definition.inputs.filter(p=>p.startsWith(prefix));
+  const definition=finalizedPackageInputs(f.policy,prefix,paths);
+  assert.deepEqual(definition.inputs.slice(0,f.policy.inputs.length),f.policy.inputs);
+  assert.deepEqual(finalizedPackageInputs(definition,prefix,paths),definition);
+  f.put('.github/package-inputs.json',definition);
+  assert.deepEqual(await f.run(),{test_selection:'selected-data',expectations_path:prefix+'selected-delivery-expectations.json',shards:[0]});
+  f.put('.github/package-inputs.json',{...definition,inputs:definition.inputs.toSorted()});
+  assert.equal(await f.run(),null,'the same globally sorted input set must not pass the accepted-prefix classifier');
+});
+}

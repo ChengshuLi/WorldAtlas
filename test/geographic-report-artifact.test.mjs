@@ -617,3 +617,26 @@ test('candidate software report requires explicit expected code identity and can
  assert.equal(checkGeographicReport(old, baseline, candidate), false);
  assert.throws(() => checkGeographicReport(old, baseline, candidate, candidate));
 });
+
+
+test('reviewed focused test-only prepare completes through authenticated queue custody without new tree reads', async () => {
+  for(const failure of [null,'integration','geography','review']) {
+    const f=queueCompletionFixture(),name='test/native-diagnostic-entry.test.mjs';
+    f.files=[{filename:name,status:'modified'}];f.authored[0].path=name;f.integrated=structuredClone(f.authored);
+    const prepared=await prepareIntegration(f.mergeOptions());
+    assert.equal(prepared.profile,'evidence');assert.equal(prepared.geography_software,false);
+    assert.equal(f.treeReads().length,2);f.calls.length=0;
+    if(failure==='review')f.review='withdrawn';
+    const options=failure==='integration'?{integrationResult:'failure'}:failure==='geography'?{geographyResult:'skipped'}:{};
+    if(failure) {
+      await assert.rejects(f.complete(options),failure==='integration'?/Integration tests failed/:failure==='geography'?/Trusted combined geography check/:/exact-head review/);
+      assert.equal(f.writes.length,0);
+    } else {
+      const result=await f.complete(options);assert.equal(result.accepted,true);assert.equal(f.writes.length,1);
+      assert.equal(result.geography.execution,'fresh-queue');
+      assert.equal(result.geography.trusted_code_commit,f.options.baseline);
+      assert.equal(Object.hasOwn(result,'proof'),false);assert.equal(Object.hasOwn(result,'profile'),false);
+    }
+    assert.deepEqual(f.treeReads(),[],'authenticated prepare path must not add recursive completion reads');
+  }
+});

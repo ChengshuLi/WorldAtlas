@@ -180,7 +180,7 @@ class ScientificFixture(unittest.TestCase):
                 raise RuntimeError('Required source scientific controls need repository-pinned NumPy/Shapely') from error
             raise unittest.SkipTest('Pinned NumPy/Shapely runtime unavailable: ' + str(error))
 
-    def scientific_run(self, mutation=None, config_mutation=None, runtime_mutation=None):
+    def scientific_run(self, mutation=None, config_mutation=None, runtime_mutation=None, prepare_only=False):
         temp = tempfile.TemporaryDirectory(); self.addCleanup(temp.cleanup)
         root = Path(temp.name)
         def git(*args):
@@ -243,25 +243,8 @@ class ScientificFixture(unittest.TestCase):
             runtime_files=runtime_files,runtime_inventory_bytes=sum(p['bytes'] for p in runtime_files),execution_reserve_bytes=MAX_TEST_RESERVE,program_sha256=probe.sha(Path(probe.__file__).read_bytes()),config_sha256=probe.sha(config.read_bytes()))))
         output=root/'result'
         self.last_output = output
-        result=probe.run(root,config,admission,output,'coordination/engineering/test/source-001')
+        result=None if prepare_only else probe.run(root,config,admission,output,'coordination/engineering/test/source-001')
         return root,output,result
-
-    def test_actual_entry_products_preserve_holds_and_receipt_hashes(self):
-        root,out,result=self.scientific_run()
-        self.assertTrue(result['complete'])
-        qualification=json.loads((out/'source-qualification.json').read_bytes())
-        self.assertEqual(qualification['candidate_cells'],3)
-        self.assertEqual(qualification['source_prerequisite_repair_candidates'],2)
-        self.assertEqual(qualification['physical_interpretation_held_cells'],1)
-        self.assertEqual(qualification['outside_retained_IDN_reference_cells'],2)
-        self.assertEqual(qualification['native_authority_qualified_cells'],0)
-        self.assertEqual(qualification['repaired_credit'],0)
-        self.assertEqual(len(qualification['complete_families']),9)
-        receipt=json.loads((out/'execution-receipt.json').read_bytes())
-        for pin in receipt['outputs']:
-            self.assertTrue(pin['path'].startswith('coordination/engineering/test/source-001/'))
-            raw=(out/Path(pin['path']).name).read_bytes()
-            self.assertEqual((len(raw),probe.sha(raw)),(pin['bytes'],pin['sha256']))
 
     def test_reference_competitor_withheld_but_source_observations_survive(self):
         def mutate(data,c):
@@ -286,7 +269,7 @@ class ScientificFixture(unittest.TestCase):
 
 
     def test_full_node_source_entry_resume_and_tampered_product(self):
-        root, _, _ = self.scientific_run()
+        root, _, _ = self.scientific_run(prepare_only=True)
         source = json.loads((root / 'config.json').read_bytes())
         runtime_files = json.loads((root / 'admission.json').read_bytes())['runtime_files']
         executable = str(Path(sys.executable).resolve())
@@ -318,6 +301,20 @@ class ScientificFixture(unittest.TestCase):
         self.assertEqual(first.returncode, 0, first.stdout + first.stderr)
         self.assertFalse(json.loads(first.stdout)['resumed'])
         output = root / destination
+        qualification=json.loads((output/'source-qualification.json').read_bytes())
+        self.assertEqual(qualification['candidate_cells'],3)
+        self.assertEqual(qualification['source_prerequisite_repair_candidates'],2)
+        self.assertEqual(qualification['physical_interpretation_held_cells'],1)
+        self.assertEqual(qualification['outside_retained_IDN_reference_cells'],2)
+        self.assertEqual(qualification['native_authority_qualified_cells'],0)
+        self.assertEqual(qualification['repaired_credit'],0)
+        self.assertEqual(len(qualification['complete_families']),9)
+        receipt=json.loads((output/'execution-receipt.json').read_bytes())
+        self.assertTrue(receipt['complete'])
+        for pin in receipt['outputs']:
+            self.assertTrue(pin['path'].startswith(destination+'/'))
+            raw=(output/Path(pin['path']).name).read_bytes()
+            self.assertEqual((len(raw),probe.sha(raw)),(pin['bytes'],pin['sha256']))
         before = {p.name: (p.read_bytes(), p.stat().st_mtime_ns) for p in output.iterdir()}
         resumed = subprocess.run(command + ['--resume'], cwd=root, env=env, capture_output=True, text=True, timeout=30)
         self.assertEqual(resumed.returncode, 0, resumed.stdout + resumed.stderr)

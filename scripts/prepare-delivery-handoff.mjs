@@ -1181,6 +1181,24 @@ export async function sourceCohort(config, reader, root, destination, phase = 's
   admitDestination(root, stagingParent + '/source-staging', false);
   fs.mkdirSync(path.join(root, stagingParent), {recursive: true});
   const staging = fs.mkdtempSync(path.join(root, stagingParent, 'source-'));
+  const stagingIdentity = [];
+  for (let current = staging;; current = path.dirname(current)) {
+    const stat = fs.lstatSync(current);
+    need(stat.isDirectory() && fs.realpathSync(current) === current, 'Nonordinary producer staging ancestor');
+    stagingIdentity.push({path: current, dev: stat.dev, ino: stat.ino});
+    if (current === root) break;
+    need(current.startsWith(root + path.sep), 'Producer staging escaped owned root');
+  }
+  const discardStaging = () => {
+    for (const identity of stagingIdentity) {
+      const stat = fs.lstatSync(identity.path, {throwIfNoEntry: false});
+      need(stat?.isDirectory() && fs.realpathSync(identity.path) === identity.path
+        && stat.dev === identity.dev && stat.ino === identity.ino,
+      'Producer staging identity changed; cleanup refused at ' + identity.path);
+    }
+    fs.rmSync(staging, {recursive: true, force: true});
+  };
+  let completed = false;
   try {
     const sourceFile = path.join(staging, 'source-config.json'), admissionFile = path.join(staging, 'admission.json');
     const admission = {version: 1, observed_unix_seconds: Date.now() / 1000, allowance,
@@ -1201,11 +1219,30 @@ export async function sourceCohort(config, reader, root, destination, phase = 's
     const products = Object.fromEntries(names.map(name => [name, ordinary(root, path.relative(root, path.join(output, name)))]));
     const total = Object.values(products).reduce((n, raw) => n + raw.length, 0);
     need(total <= phaseConfig.resources.output_bytes, 'Complete source output reserve exceeded');
-    return {products, observation: {elapsed_seconds: (performance.now() - started) / 1000, allowance,
+    completed = true;
+    return {products, retained_staging: path.relative(root, staging),
+      discard_staging: discardStaging,
+      observation: {elapsed_seconds: (performance.now() - started) / 1000, allowance,
       runtime_inventory: identities, limits: ['Scientific checks are cooperative boundaries, not hard process-tree enforcement.',
         phase === 'physical' ? 'Original physical source-relative support is not native, owner-zero, factual or selected-output acceptance.'
           : 'Source prerequisites are not physical, native, owner-zero or selected-output acceptance.']}};
-  } finally { fs.rmSync(staging, {recursive: true, force: true}); }
+  } finally { if (!completed) discardStaging(); }
+}
+
+// Completed producer bodies remain available if the existing outer writer refuses.
+// This is not a completed outer publication or an automatic replay/resume route.
+export function publishCompletedSource(root, destination, result, binding, resume, reader) {
+  let publication;
+  try { publication = publish(root, destination, result.products, binding, resume, reader.budget); }
+  catch (error) {
+    throw new Error(error.message + '; completed producer staging retained at ' + result.retained_staging
+      + '; outer publication incomplete', {cause: error});
+  }
+  try { result.discard_staging(); }
+  catch (error) {
+    throw new Error('Outer publication complete at ' + destination + '; producer staging cleanup failed: ' + error.message, {cause: error});
+  }
+  return publication;
 }
 
 // Fill only the accepted baseline block of ordinary source evidence. Scientific
@@ -1346,7 +1383,11 @@ async function main(args) {
     console.log(JSON.stringify(resumeSource(root, destination, config, binding, reader))); return;
   }
   let outputs, observation;
-  if (['source','physical'].includes(phase)) { const result = await sourceCohort(config, reader, root, destination, phase); outputs = result.products; observation = result.observation; }
+  if (['source','physical'].includes(phase)) {
+    const result = await sourceCohort(config, reader, root, destination, phase);
+    console.log(JSON.stringify({...publishCompletedSource(root, destination, result, binding, flags.includes('--resume'), reader), observation: result.observation}));
+    return;
+  }
   if (['native-authority','native-diagnostic'].includes(phase)) { const result = await nativeAuthority(config, reader, root, phase === 'native-diagnostic'); outputs = result.products; observation = result.observation; }
   if (phase === 'source-evidence') outputs = await sourceEvidence(config, reader);
   if (phase === 'requests') outputs = prepareRequests(config, reader);

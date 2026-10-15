@@ -1,4 +1,3 @@
-import {finalizedPackageInputs} from '../scripts/prepare-delivery-handoff.mjs';
 import {readFileSync} from 'node:fs';
 import {gzipSync, gunzipSync, crc32} from 'node:zlib';
 import {CHECKPOINT_MEMBERS} from '../scripts/geographic-report-artifact.mjs';
@@ -952,16 +951,6 @@ test('machine observations tighten admission during reads and immediately before
  }
 });
 
-test('delivery finalizer satisfies actual append-only selected-data classifier and rejects global sorting', async () => {
-  const f=fixture(), paths=f.definition.inputs.filter(p=>p.startsWith(prefix));
-  const definition=finalizedPackageInputs(f.policy,prefix,paths);
-  assert.deepEqual(definition.inputs.slice(0,f.policy.inputs.length),f.policy.inputs);
-  assert.deepEqual(finalizedPackageInputs(definition,prefix,paths),definition);
-  f.put('.github/package-inputs.json',definition);
-  assert.deepEqual(await f.run(),{test_selection:'selected-data',expectations_path:prefix+'selected-delivery-expectations.json',shards:[0]});
-  f.put('.github/package-inputs.json',{...definition,inputs:definition.inputs.toSorted()});
-  assert.equal(await f.run(),null,'the same globally sorted input set must not pass the accepted-prefix classifier');
-});
 
 function ownedFixture({mutate = () => {}} = {}) {
   const packetPrefix = 'coordination/engineering/retained-delivery/new-packet/';
