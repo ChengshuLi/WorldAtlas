@@ -1,0 +1,201 @@
+{
+  "task": "bounded retained coastal country-reference evidence recovery",
+  "date_utc": "2026-10-15",
+  "result": "No actual retained per-cell reference-country receipt for the exact7338 coastal repair candidates was found in the searched known caches and committed metadata. All7338 reference classifications remain unknown. No country/source clearance is inferred.",
+  "scope": {
+    "owners": {
+      "30350": 3617,
+      "30361": 3721
+    },
+    "candidate_cells": 7338,
+    "five_source_conflict_cells": "Separate held package, not included.",
+    "relative_cells": "Separate held package, not included."
+  },
+  "candidate_pin": {
+    "commit": "596c3449500601e2f82d6052f5d0b9513dd72bfd",
+    "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/kawthoung/candidate-native-patch.json",
+    "git_blob_oid": "47ab9e511fd3fd4e976113cea57c2c5848f81e3c",
+    "local_pinned_copy": "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/mmr-coastal-candidate-cell-preparation-001/pinned-inputs/kawthoung/candidate-native-patch.json",
+    "bytes": 72523,
+    "sha256": "b26011eca72b28bcec4bf23b1df9cf75827f81806136440f17461fa865e3e51a"
+  },
+  "actual_retained_classifiers_inspected": [
+    {
+      "cache_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/341d0bbaf81e47cd16ab58ca6d1ab75d5ac120cf732c677e081b12830ea3ef31/work/.cache/mmr-east-source-20261014-001/source-qualification.json",
+      "committed_locator": {
+        "commit": "596c3449500601e2f82d6052f5d0b9513dd72bfd",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/east-source-qualification.json",
+        "git_blob_oid": "6a492b5d9195ee1141f2ee34873ce3134b854cb4",
+        "existing_blob_matches_cache_bytes": true
+      },
+      "bytes": 287998,
+      "sha256": "cfcdf6e6207e349c8c39f9c9d3473e5c740065a4754ea4478eb61218e227e179",
+      "declared_base_commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+      "declared_kind": "exploratory-east-source-qualification",
+      "recorded_cells": 469,
+      "cell_collection": "cells",
+      "observed_cell_keys": [
+        "x",
+        "y",
+        "owners",
+        "sids",
+        "physical",
+        "reference_countries",
+        "reference_boundary",
+        "current_members",
+        "current_holes",
+        "source_holes",
+        "source_boundary_sids",
+        "foreign_source_sids",
+        "foreign_reference_countries",
+        "qualification_flags"
+      ],
+      "coastal_owner_record_count": 0,
+      "exact_x_y_owner_matches_to_coastal_patch": 0,
+      "exact_x_y_matches_to_coastal_patch": 0,
+      "classification_reusable_for_coastal7338": false,
+      "retained_reference_input_pin": [
+        {
+          "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+          "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+          "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+          "bytes": 4719659,
+          "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+          "decoded_bytes": 13287234,
+          "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+        }
+      ],
+      "source_vintages": [
+        {
+          "family": "gb:MMR:ADM1",
+          "represented_year": "2019",
+          "license": "Creative Commons Attribution 4.0 (CC BY 4.0)"
+        },
+        {
+          "family": "gb:MMR:ADM2",
+          "represented_year": "2019",
+          "license": "Creative Commons Attribution 4.0 (CC BY 4.0)"
+        },
+        {
+          "family": "gb:MMR:ADM3",
+          "represented_year": "2019",
+          "license": "Creative Commons Attribution 4.0 (CC BY 4.0)"
+        },
+        {
+          "family": "gb:THA:ADM1",
+          "represented_year": "2017",
+          "license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family": "gb:THA:ADM2",
+          "represented_year": "2019",
+          "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family": "gb:LAO:ADM1",
+          "represented_year": "2017",
+          "license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family": "gb:LAO:ADM2",
+          "represented_year": "2019",
+          "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        }
+      ]
+    },
+    {
+      "cache_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/341d0bbaf81e47cd16ab58ca6d1ab75d5ac120cf732c677e081b12830ea3ef31/work/.cache/mmr-ayeyarwady-source-execution-20261014-001/source-qualification.json",
+      "committed_locator": {
+        "commit": "596c3449500601e2f82d6052f5d0b9513dd72bfd",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/evidence/ayeyarwady-source-qualification.json",
+        "git_blob_oid": "e41f2f5aaae44bd4c6ebc9a62a52522c510de3b9",
+        "existing_blob_matches_cache_bytes": true
+      },
+      "bytes": 4271090,
+      "sha256": "a6a59a039760c38cb9bba81a05f5d86c14c2a94884156d9739628559ac7c21a3",
+      "declared_base_commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+      "declared_kind": "exploratory-ayeyarwady-source-qualification",
+      "recorded_cells": 7069,
+      "cell_collection": "cells",
+      "observed_cell_keys": [
+        "x",
+        "y",
+        "owners",
+        "sids",
+        "physical",
+        "reference_countries",
+        "reference_contains",
+        "reference_boundary",
+        "current_members",
+        "current_contains",
+        "current_boundary",
+        "current_holes",
+        "source_holes",
+        "source_boundary_sids",
+        "foreign_source_sids",
+        "foreign_reference_countries",
+        "qualification_flags"
+      ],
+      "coastal_owner_record_count": 0,
+      "exact_x_y_owner_matches_to_coastal_patch": 0,
+      "exact_x_y_matches_to_coastal_patch": 0,
+      "classification_reusable_for_coastal7338": false
+    }
+  ],
+  "committed_global_source_products_inspected": [
+    {
+      "commit": "596c3449500601e2f82d6052f5d0b9513dd72bfd",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-029.json.gz",
+      "git_blob_oid": "3fc846f1a3a57841d82c695b97ad31b93af681e6",
+      "bytes": 613896,
+      "sha256": "7775f315311056808bfead2394034459a83a3590a201fe0deedb66fea1866528",
+      "decoded_bytes": 4552072,
+      "decoded_sha256": "a497602aa36f61e9d86b2078d6811e2362612fe7a11920f50df315b991106798",
+      "reference_countries_key_occurrences": 0,
+      "schema_limit": "Recorded block rows are {y,runs:[x0,x1,owner_indices,source_feature_indices]}; no per-cell country-reference membership/boundary fields."
+    },
+    {
+      "commit": "596c3449500601e2f82d6052f5d0b9513dd72bfd",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-030.json.gz",
+      "git_blob_oid": "bcb16439246dfebc52708996ca21897070c8bc46",
+      "bytes": 636933,
+      "sha256": "c28ed9ba4a3b04ec9cee0884a025c4e5c207c5b8fee543883f43e94164b013c7",
+      "decoded_bytes": 4588685,
+      "decoded_sha256": "01e0ec3866ba7469d8091118d8e5a7efd56d6dc68c0788f29b4fd9546de804ab",
+      "reference_countries_key_occurrences": 0,
+      "schema_limit": "Recorded block rows are {y,runs:[x0,x1,owner_indices,source_feature_indices]}; no per-cell country-reference membership/boundary fields."
+    },
+    {
+      "commit": "596c3449500601e2f82d6052f5d0b9513dd72bfd",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-census-summary.json",
+      "git_blob_oid": "fa1e4d101edb54b02bd1ff42a240f2f80ac65832",
+      "bytes": 120963,
+      "sha256": "8a4a6792237259328e56e38d91d0cb22f977de4a35caf4781f0d605e3db1653d",
+      "decoded_bytes": 120963,
+      "decoded_sha256": "8a4a6792237259328e56e38d91d0cb22f977de4a35caf4781f0d605e3db1653d",
+      "reference_countries_key_occurrences": 0,
+      "schema_limit": "Counts/blocks/families/limits summary only; no per-cell country-reference result. Declared current_commit a61b6f9e7f88b1da380e3a834f89d7509132ed71."
+    }
+  ],
+  "search_limits": [
+    "Filename-first searches used rg --files --hidden and --no-ignore inside the known old Myanmar cache, author cache and task2 cache. Narrow source/reference/census/classifier terms were used before reading selected JSON.",
+    "Read-only git ls-tree listed committed paths at596c3449500601e2f82d6052f5d0b9513dd72bfd. Selected existing local blobs were read with GIT_NO_LAZY_FETCH=1; no Git acquisition/fetch or working-tree mutation.",
+    "No global object-store scan, broad blob hydration or classification/source/geometry/GIS/native/raster/GSHHG process was performed. This search cannot establish that a missing receipt never existed elsewhere.",
+    "The recovery checks match JSON tuples and inspect recorded keys only. Whole source/reference bodies are operands, not per-cell observations."
+  ],
+  "other_retained_evidence_limits": [
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/fa678ed92d9b60765f8935b6a7afd117bc7c744c96057999400c37180373dd2e/work/.cache/mmr-kawthoung-preparation-001/input-provenance.json",
+      "observed_fact": "It explicitly records no complete competitor/reference cell study found and source SID absence is not foreign/reference clearance. It authenticates retained reference-country operand bytes but does not record coastal per-cell membership."
+    },
+    {
+      "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/mmr-coastal-candidate-cell-preparation-001/foreign-veto-custody.json",
+      "observed_fact": "Existing coast preparation expressly states no retained per-cell reference-country result was supplied. Whole THA/Chumphon/ThaSae veto operand custody does not fill that observation gap."
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/fa678ed92d9b60765f8935b6a7afd117bc7c744c96057999400c37180373dd2e/work/.cache/mmr-hpapun-preparation-001/candidate-source-records.json",
+      "observed_fact": "Actual Hpapun per-cell reference-country records cover only Hpapun; not coastal7338."
+    }
+  ],
+  "required_missing_artifact": "Existing genuine classifier receipt whose cells (or equivalent exact intervals) cover these7338 x/y/owner tuples and preserve reference_countries, reference_boundary, foreign references, source/current holes and competitor results, with actual source/reference pins. No such coastal receipt was recovered; do not synthesize those fields from SIDs or whole reference geometry."
+}
