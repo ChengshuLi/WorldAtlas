@@ -1,0 +1,95 @@
+{
+  "version": 1,
+  "kind": "derived-public-delivery-operating-observation",
+  "omitted": [],
+  "phases": [
+    {
+      "phase": "compose",
+      "outcome": "EXIT0",
+      "at_utc": "2026-10-15T03:27:42.297Z",
+      "available_bytes": 1710800896,
+      "phase_and_rss_request_bytes": 536870912,
+      "actual_grant": {
+        "phaseBytes": 536870912,
+        "rssBytes": 536870912
+      },
+      "complete_prospective_bytes": 387406545,
+      "session_headroom_bytes": 572882944,
+      "preflight_child_rss_credit": 0,
+      "concurrent_reserved_bytes": 0,
+      "config_sha256": "a3db52e741f2a74f9f54709517f8bc2971b0ee836d2bc9af745e943008043c15",
+      "accepted_code_commit": "b73fdbb1b0e243b773514ea46aaced496a63028f",
+      "accepted_baseline": "eef3694c364471482633129ef7968a2bdd3b7128",
+      "external_seconds": 1.68,
+      "external_peak_rss_bytes": 210305024,
+      "raw_time_sha256": "9f33bfa13e2702519dfc2f57af7fdaf37a48b4422c1edbd723c8dc3ea08faaae",
+      "original_fresh_admission": {
+        "at_utc": "2026-10-15T03:27:42.297Z",
+        "availableBytes": 1710800896,
+        "observed_preflight_rss": 51560448,
+        "currentRssBytes": 0,
+        "concurrentReservedBytes": 0,
+        "headroomBytes": 572882944,
+        "phaseBytes": 536870912,
+        "rssBytes": 536870912,
+        "complete_prospective_bytes": 387406545,
+        "code_commit": "b73fdbb1b0e243b773514ea46aaced496a63028f",
+        "accepted_baseline": "eef3694c364471482633129ef7968a2bdd3b7128",
+        "config_sha256": "a3db52e741f2a74f9f54709517f8bc2971b0ee836d2bc9af745e943008043c15",
+        "allowance": {
+          "phaseBytes": 536870912,
+          "rssBytes": 536870912
+        },
+        "admitted": true
+      },
+      "raw_admission_sha256": "e4b0ee6e50abf89f4b13fc4fe86602027db8c2d5629e7f16b3b214acbbcddbea"
+    },
+    {
+      "phase": "finalize",
+      "outcome": "EXIT0",
+      "at_utc": "2026-10-15T03:36:20.272Z",
+      "available_bytes": 1797128192,
+      "phase_and_rss_request_bytes": 536870912,
+      "actual_grant": {
+        "phaseBytes": 536870912,
+        "rssBytes": 536870912
+      },
+      "complete_prospective_bytes": 492137717,
+      "session_headroom_bytes": 572882944,
+      "preflight_child_rss_credit": 0,
+      "concurrent_reserved_bytes": 0,
+      "config_sha256": "e9ae76d46ea7ba6c8e1ba842d5050e752be47e6f02c9eac96ad6c2e2c3dcba48",
+      "accepted_code_commit": "b73fdbb1b0e243b773514ea46aaced496a63028f",
+      "accepted_baseline": "eef3694c364471482633129ef7968a2bdd3b7128",
+      "external_seconds": 4.87,
+      "external_peak_rss_bytes": 264306688,
+      "raw_time_sha256": "0af47da2c3367fe747d8706ea47ca2dfaa7d103e20f9d2d505092de1feeac1a9",
+      "original_fresh_admission": {
+        "at_utc": "2026-10-15T03:36:20.272Z",
+        "availableBytes": 1797128192,
+        "observed_preflight_rss": 50921472,
+        "currentRssBytes": 0,
+        "concurrentReservedBytes": 0,
+        "headroomBytes": 572882944,
+        "phaseBytes": 536870912,
+        "rssBytes": 536870912,
+        "complete_prospective_bytes": 492137717,
+        "code_commit": "b73fdbb1b0e243b773514ea46aaced496a63028f",
+        "accepted_baseline": "eef3694c364471482633129ef7968a2bdd3b7128",
+        "composition_commit": "6cbe0b4382719f0c7f9c1be88cb6f9b7d230dc51",
+        "config_sha256": "e9ae76d46ea7ba6c8e1ba842d5050e752be47e6f02c9eac96ad6c2e2c3dcba48",
+        "allowance": {
+          "phaseBytes": 536870912,
+          "rssBytes": 536870912
+        },
+        "admitted": true
+      },
+      "raw_admission_sha256": "45d432f4a30d388b474fa866f312bc12b40b3e8e2ab26e021ae4be2dbfb55d85"
+    }
+  ],
+  "limits": [
+    "No source/GSHHG/physical/native-qualification replay; actual current-owner-zero/conservation/consumer acceptance remain pending coordinated integration.",
+    "Original Bokpyin qualification before/after executing-code snapshot was not captured; config commit is not a substitute."
+  ],
+  "derived_not_byte_identical_to_original_admission_receipts": true
+}
