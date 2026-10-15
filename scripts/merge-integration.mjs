@@ -296,7 +296,7 @@ export async function prepareIntegration(options) {
     ]);
     checkCandidateParents(integrated.object, fresh.base, state.pr.head.sha);
     checkReviewedTrees(state.files, authored.entries, integrated.entries);
-    const profile = integrationProfile(state.pr.head.ref, state.files, state.reservation);
+    const profile = integrationProfile(state.pr.head.ref, state.files, state.reservation, authored?.entries);
     let baseline, selection = null;
     if (profile === 'full' && selectedDataCandidate(state.pr.head.ref, state.files, state.reservation)) {
       try {
@@ -364,7 +364,7 @@ export async function completeIntegration(options) {
   // The authenticated main queue's geography job depends on successful prepare,
   // which compares these immutable trees before exposing its candidate output.
   // Ordinary reports and supplied/historical custody retain the full comparison.
-  const profile = integrationProfile(state.pr.head.ref, state.files, state.reservation);
+  const profile = integrationProfile(state.pr.head.ref, state.files, state.reservation, authored?.entries);
   let baseline, selection = null;
   if (profile === 'full' && selectedDataCandidate(state.pr.head.ref, state.files, state.reservation)) {
     authored ??= await tree(options.api, options.repo, state.pr.head.sha);

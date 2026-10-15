@@ -296,6 +296,9 @@ jobs:
             drizzle
             hosted
             coordination/engineering/selected-geography-effective-prevention-20261009
+            coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs
+            coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz
+            docs/LOCAL_WORKSPACES.md
             coordination/engineering/selected-checkpoint-reuse-20261012/accepted-checkpoints.json
             data/research-geography-gate.json
             package.json
@@ -333,10 +336,12 @@ jobs:
           assert len(body) == blob['size'] and hashlib.sha1(('blob ' + str(len(body)) + '\0').encode() + body).hexdigest() == blob['sha']
           exec(compile(body, '<authenticated selected package bootstrap>', 'exec'), {'__name__':'__main__'})
           PACKAGE_BOOTSTRAP
+      # The focused delivery tests import @noble/hashes and exercise tiny
+      # source/physical CLI fixtures with NumPy/Shapely. Keep their real runtime.
       - run: npm ci --no-audit --no-fund
-        if: needs.prepare.outputs.profile == 'full'
+        if: needs.prepare.outputs.profile == 'full' || needs.prepare.outputs.profile == 'evidence'
       - run: python -m pip install -r requirements.txt
-        if: needs.prepare.outputs.profile == 'full'
+        if: needs.prepare.outputs.profile == 'full' || needs.prepare.outputs.profile == 'evidence'
       - name: Assemble unchanged base with current selected output
         id: assembly
         if: needs.prepare.outputs.profile == 'full' && matrix.shard == 0 && needs.prepare.outputs.test_selection == 'selected-data'

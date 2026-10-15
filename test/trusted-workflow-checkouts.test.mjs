@@ -454,3 +454,36 @@ for (const workflow of ['worker-merge.yml']) {
     assert.match(source,/pip install[^\n]*requirements\.txt/);
   });
 }
+
+
+test('focused delivery tests receive their real Node/Python runtime without an atlas build', () => {
+  const {source,integration}=queueWorkflow();
+  for(const command of ['npm ci --no-audit --no-fund','python -m pip install -r requirements.txt']) {
+    const steps=integration.steps.filter(step=>step.text.includes('run: '+command));
+    assert.equal(steps.length,1,command);
+    for(const profile of ['full','evidence'])assert.equal(workflowCondition(steps[0].condition,queueContext({profile})),true);
+    assert.equal(workflowCondition(steps[0].condition,queueContext({profile:'unknown'})),false);
+    assert.equal(workflowCondition(steps[0].condition,queueContext({profile:'evidence'}),{success:false}),false);
+  }
+  const build=integration.steps.find(step=>step.run==='npm run build:cloudflare');assert(build);
+  assert.equal(workflowCondition(build.condition,queueContext({profile:'evidence'})),false);
+  assert.equal(workflowCondition(build.condition,queueContext({profile:'full'})),true);
+  const match=source.match(/- name: Checkout only focused-test inputs for evidence regression[\s\S]*?sparse-checkout: \|\n((?:            .+\n)+)/);
+  assert(match);const inputs=new Set(match[1].trim().split('\n').map(line=>line.trim()));
+  for(const name of ['coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs',
+    'coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz',
+    'docs/LOCAL_WORKSPACES.md'])assert(inputs.has(name),name);
+  assert(!inputs.has('research'),'no blanket scientific archive checkout');
+  const checker=source.match(/- name: Checkout trusted geographic checker([\s\S]*?)(?=      - uses: actions\/setup-node)/)?.[1];
+  assert(checker);assert.doesNotMatch(checker,/sparse-checkout-cone-mode: false/);
+  const scope=fs.readFileSync(path.join(root,'.github/workflows/merge-integration-checks.yml'),'utf8').split('  scope:')[1];
+  const candidate=scope.match(/path: candidate([\s\S]*?)(?=      - uses: actions\/setup-node)/)?.[1];
+  assert(candidate);assert.match(candidate,/sparse-checkout-cone-mode: false/);
+  for(const name of ['coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs',
+    'coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz',
+    'docs/LOCAL_WORKSPACES.md']) {
+    assert(!checker.includes(name),'ordinary leaves must not enter trusted cone checkout');
+    assert(candidate.split('\n').some(line=>line.trim()===name),name);
+  }
+
+});

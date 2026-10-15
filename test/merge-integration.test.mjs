@@ -160,11 +160,49 @@ test('trusted profile uses focused invariants only for isolated evidence and doc
  assert.equal(integrationProfile('geography/example',[{filename:'research/geography/packet/a.json'}],{owned_paths:['research/geography/packet/']}),'evidence');
  assert.equal(integrationProfile('research/example',[{filename:'research/campaigns/example/a.json'}],{}),'evidence');
  assert.equal(integrationProfile('research/example',[{filename:'research/example/a.json'}],{}),'full');
+ for(const helper of ['scripts/prepare-delivery-handoff.mjs','scripts/delivery-handoff-advance.mjs']) {
+   assert.equal(integrationProfile('engineering/example',[{filename:helper}],{}),'evidence');
+   for(const scientific of ['scripts/native-ownership/native-preparation-guards.mjs','scripts/native-ownership/validate-build-context-stage.mjs','scripts/native-ownership/chained-build-context.mjs','src/native-grid.js','coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs']) {
+     assert.equal(integrationProfile('engineering/example',[{filename:helper},{filename:scientific}],{}),'full');
+     assert.equal(integrationProfile('engineering/example',[{filename:helper,previous_filename:scientific}],{}),'full');
+   }
+ }
  assert.equal(integrationProfile('engineering/example',[{filename:'docs/WORKER_COORDINATION.md'},{filename:'coordination/engineering/example/receipt.json'}],{}),'evidence');
  for(const filename of ['src/attributes.js','data/hierarchy.json','drizzle/0001.sql','scripts/build-hosted.mjs'])
    assert.equal(integrationProfile('engineering/example',[{filename}],{}),'full');
  assert.equal(integrationProfile('engineering/example',[{filename:'docs/a.md',previous_filename:'src/attributes.js'}],{}),'full');
  assert.equal(integrationProfile('engineering/example',[{filename:'coordination/engineering/other/receipt.json'}],{}),'full');
+});
+
+test('only complete ordinary modified focused tests use the test-only lane', () => {
+  const files=integrationTestFiles('evidence',0).map(filename=>({filename,status:'modified'}));
+  const tree=new Map(files.map(file=>[file.filename,{type:'blob',mode:'100644',sha:'1'.repeat(40)}]));
+  assert.equal(integrationProfile('engineering/tests',files,{},tree),'evidence');
+  for(const file of files) {
+    assert.equal(integrationProfile('engineering/tests',[file],{},tree),'evidence');
+    for(const status of [undefined,'added','removed','renamed','copied'])
+      assert.equal(integrationProfile('engineering/tests',[{...file,status}],{},tree),'full');
+    for(const previous_filename of [file.filename,'src/native-grid.js','test/unknown.test.mjs'])
+      assert.equal(integrationProfile('engineering/tests',[{...file,previous_filename}],{},tree),'full');
+    for(const entry of [undefined,{type:'blob',mode:'120000'},{type:'blob',mode:'100755'},{type:'tree',mode:'040000'},{type:'blob',mode:'100644'},{type:'blob',mode:'100644',sha:'unknown'}]) {
+      const changed=new Map(tree);entry ? changed.set(file.filename,entry) : changed.delete(file.filename);
+      assert.equal(integrationProfile('engineering/tests',[file],{},changed),'full');
+    }
+    assert.equal(integrationProfile('engineering/tests',[file]),'full');
+    for(const filename of ['scripts/prepare-delivery-handoff.mjs','scripts/native-ownership/native-preparation-guards.mjs',
+      'scripts/native-ownership/chained-build-context.mjs','src/native-grid.js','test/unknown.test.mjs','docs/LOCAL_WORKSPACES.md'])
+      assert.equal(integrationProfile('engineering/tests',[file,{filename,status:'modified'}],{},tree),'full');
+  }
+  // These package-contract, asset-dependent and Python-helper tests are not
+  // executed by the exact focused Node roster, even with ordinary tree proof.
+  for(const filename of ['test/deployment-budget-scope.test.mjs','test/package-inputs.test.mjs',
+    'test/package-build.test.mjs','test/deployment-budget.test.mjs','test/pr-gates.test.mjs',
+    'test/canonical-compact-repack.test.mjs','test/source-cohort.test.py','test/physical-source-retention.test.py']) {
+    assert.ok(!files.some(file=>file.filename===filename));
+    const ordinary=new Map([[filename,{type:'blob',mode:'100644',sha:'1'.repeat(40)}]]);
+    assert.equal(integrationProfile('engineering/tests',[{filename,status:'modified'}],{},ordinary),'full');
+  }
+  assert.equal(integrationProfile('engineering/tests',[],{},tree),'full');
 });
 
 test('parallel full-regression shards cover each unit file once and focused profile retains core gates', () => {
@@ -177,6 +215,8 @@ test('parallel full-regression shards cover each unit file once and focused prof
  }
  assert.deepEqual([...shards].sort(),expected);assert.equal(new Set(shards).size,expected.length);
  const focused=integrationTestFiles('evidence',0);
+ for(const name of ['delivery-evidence-derivation', 'delivery-finalize-config', 'delivery-handoff-advance', 'delivery-handoff', 'delivery-registry-delta', 'delivery-role-staging', 'local-workspace', 'native-authority-entry', 'native-diagnostic-entry', 'native-witness-authority', 'physical-source-retention', 'source-cohort', 'source-completed-staging', 'source-evidence-derivation', 'source-member-native-delivery', 'source-publication-admission', 'source-target-native-delivery'])assert.equal(focused.filter(file=>file===`test/${name}.test.mjs`).length,1);
+ assert.equal(focused.length,28);
  for(const name of ['premerge-evidence','regional-research-gate','handoff-scope','merge-integration'])assert.ok(focused.includes(`test/${name}.test.mjs`));
  assert.throws(()=>integrationTestFiles('evidence',1),/Invalid/);
  assert.equal(integrationNeedsBrowser('evidence',0),false);

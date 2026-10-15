@@ -1,6 +1,9 @@
 // Only these coordination controls have an audited focused test inventory.
 // Unknown docs/scripts/workflows retain full regression, including rename origins.
 export const COORDINATION_PATHS = new Set([
+  // Delivery orchestration is not imported by the atlas builder. Shared native
+  // operators and native-preparation-guards remain outside this exact list.
+  'scripts/prepare-delivery-handoff.mjs', 'scripts/delivery-handoff-advance.mjs',
   'docs/WORKER_COORDINATION.md', 'docs/PREMERGE_EVIDENCE_REVIEW.md',
   'scripts/issue-claim-contract.mjs', 'scripts/run-issue-claim.mjs',
   'scripts/worker-result.mjs', 'scripts/check-handoff-scope.mjs', 'scripts/check-linked-github-issue.mjs',
@@ -8,15 +11,44 @@ export const COORDINATION_PATHS = new Set([
   'scripts/check-pr-evidence.mjs', 'scripts/merge-integration.mjs', 'scripts/integration-proof.mjs',
   'scripts/integration-profile.mjs',
   'scripts/classify-deployment-budget.mjs',
-  '.github/workflows/deployment-budget.yml', 'test/deployment-budget-scope.test.mjs',
+  '.github/workflows/deployment-budget.yml',
   // Test-runner changes require full regression to validate the real inventory.
   'scripts/run-worker-merge.mjs',
   '.github/workflows/handoff-scope.yml',
   '.github/workflows/merge-integration-checks.yml', '.github/workflows/worker-merge.yml',
-  '.github/evidence-policy.json',
-  ...['handoff-scope','issue-claims','worker-result','regional-research-gate','geography-worker-lane',
-    'evidence-quality','premerge-evidence','trusted-workflow-checkouts','merge-integration',
-    'merge-integration-entrypoint','integration-proof'].map(name=>`test/${name}.test.mjs`)
+  '.github/evidence-policy.json'
+]);
+// Only the actual focused runner inventory is eligible for this test-only route.
+// A provider filename/status alone cannot establish an ordinary candidate file.
+const FOCUSED_TEST_PATHS = new Set([
+  'test/handoff-scope.test.mjs',
+  'test/issue-claims.test.mjs',
+  'test/worker-result.test.mjs',
+  'test/regional-research-gate.test.mjs',
+  'test/geography-worker-lane.test.mjs',
+  'test/evidence-quality.test.mjs',
+  'test/premerge-evidence.test.mjs',
+  'test/trusted-workflow-checkouts.test.mjs',
+  'test/merge-integration.test.mjs',
+  'test/merge-integration-entrypoint.test.mjs',
+  'test/integration-proof.test.mjs',
+  'test/delivery-evidence-derivation.test.mjs',
+  'test/delivery-finalize-config.test.mjs',
+  'test/delivery-handoff-advance.test.mjs',
+  'test/delivery-handoff.test.mjs',
+  'test/delivery-registry-delta.test.mjs',
+  'test/delivery-role-staging.test.mjs',
+  'test/local-workspace.test.mjs',
+  'test/native-authority-entry.test.mjs',
+  'test/native-diagnostic-entry.test.mjs',
+  'test/native-witness-authority.test.mjs',
+  'test/physical-source-retention.test.mjs',
+  'test/source-cohort.test.mjs',
+  'test/source-completed-staging.test.mjs',
+  'test/source-evidence-derivation.test.mjs',
+  'test/source-member-native-delivery.test.mjs',
+  'test/source-publication-admission.test.mjs',
+  'test/source-target-native-delivery.test.mjs',
 ]);
 // Callers supply the current linked issue's validated lane and declared scope.
 // Candidate metadata is never an ownership source.
@@ -29,9 +61,19 @@ function engineeringOwnedScopes(reservation) {
       .filter(owned => /^coordination\/engineering\/[^/]+\//.test(owned));
   } catch { return []; }
 }
-export function integrationProfile(branch, files, reservation = {}) {
+export function integrationProfile(branch, files, reservation = {}, authoredEntries) {
   const names = files.flatMap(file => [file.filename, ...(file.previous_filename ? [file.previous_filename] : [])]);
   if (!names.length) return 'full';
+  if (names.some(name => FOCUSED_TEST_PATHS.has(name))) {
+    // Intercept before generic coordination/doc/owned-packet rules: no fallback
+    // may turn a missing, renamed, deleted or mixed production change into this lane.
+    return branch.startsWith('engineering/') && authoredEntries instanceof Map &&
+      files.every(file => FOCUSED_TEST_PATHS.has(file.filename) && file.status === 'modified' &&
+        file.previous_filename === undefined && authoredEntries.get(file.filename)?.type === 'blob' &&
+        authoredEntries.get(file.filename)?.mode === '100644' &&
+        /^[a-f0-9]{40}$/.test(authoredEntries.get(file.filename)?.sha ?? '')) ? 'evidence' : 'full';
+  }
+
   if (branch.startsWith('geography/') && Array.isArray(reservation.owned_paths) &&
       names.every(name => reservation.owned_paths.some(prefix => name.startsWith(prefix)))) return 'evidence';
   const job = branch.split('/').slice(1).join('/');
