@@ -130,13 +130,6 @@
         "uncompressed_sha256": "a8086008b7a072dd86483720a2a166785229753422769dbbe0749497d870f428"
       },
       {
-        "bytes": 2350442,
-        "commit": "7cd7f93f94ddefe12b22188a5a4357cf38d06bda",
-        "hash_kind": "file-bytes",
-        "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/source-stage/whole32-target-stage-inputs.json",
-        "sha256": "10348d6cc032e0f6df463b167aeaebc9c25916196194c724c3bb7e923137e28f"
-      },
-      {
         "bytes": 9834,
         "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
         "hash_kind": "file-bytes",
@@ -627,26 +620,80 @@
   "limits": [
     "No selected data changes,0acceptedrepaircredit; actual qualification metrics are archivedexecution446a, not mislabeled866c/currentselected evaluations.",
     "All files listed whole; no local absolutepaths or ownership/runtime credentials.",
-    "The161543827 encoded inventory bytes are a bounded evidence transport inventory, not complete physical producer memory/logical-input charge. The reviewed actual physical512MiB processing contract and its complete encoded+decoded accounting remain authoritative and unchanged.",
-    "Complete49-file ownedprefix inventory at b5823fc6a5088f5005122669ab29b70f4ab4b28c, including final independent original-to-qualified review; evidence-quality manifest selfexcluded. All scientific products unchanged from their actual execution vintages."
+    "The 159247958 encoded inventory bytes are a bounded evidence transport inventory, not complete physical producer memory/logical-input charge. The reviewed actual physical512MiB processing contract and its complete encoded+decoded accounting remain authoritative and unchanged.",
+    "Complete49-file ownedprefix inventory at b5823fc6a5088f5005122669ab29b70f4ab4b28c, including final independent original-to-qualified review; evidence-quality manifest selfexcluded. All scientific products unchanged from their actual execution vintages.",
+    "The newly prepared7cd physical-stage bytes are candidate outputs, not an ancestor-main baseline. Their exact original source-evidence custody remains unchanged."
   ],
   "methods": [
     {
       "area_method": "No area statistic claimed; retain original source-relative planar physical support/residual products.",
       "axis_order": "longitude-latitude",
-      "crs": "Retained source EPSG:4326 / WGS84 coordinate convention; no reprojection during native qualification.",
+      "crs": "Original source declares CRS84 longitude-latitude/WGS84 coordinates; no formal EPSG axis declaration or reprojection is claimed.",
       "description": "Existing complete original-family/whole-target physical method and admitted exact native source/country observations; sources are not replayed during qualification.",
       "distance_method": "No distance statistic claimed.",
       "id": "original-complete-source-and-physical",
-      "kind": "geography",
+      "kind": "source",
       "software": "Accepted scripts/qualify-source-cohort.py SHA58ef81739b264085b2997be7baa3df03ba6bb673f91a160176efd79b71fec081; Python3.12.14/Shapely2.1.2/GEOS3.13.1; unchanged src/native-grid.js.",
       "units": "Native cells; longitude/latitude degrees for original coordinates."
     },
     {
       "description": "Existing stock source-evidence preparation plus two exhaustive whole-owner native-diagnostic and native-authority calls:30 land-only owners34304cells and2mixed owners4262cells. Complete source/stage/physical/roster/latitude inputs admitted separately in each phase; no clipping/source split, custom wrapper or algorithm change.",
       "id": "stock-owner-scoped-native-authority",
+      "kind": "code",
       "software": "Plain Node scripts/prepare-delivery-handoff.mjs native-authority/native-diagnostic at exact execution446a9a0050d6b96c520e2a94358b6228d1d00605.",
       "units": "Native cells, charged bytes, lifetime Node RSS bytes and seconds; no external process-tree peak enforcement claim."
+    }
+  ],
+  "metric_bindings": [
+    {
+      "json_pointer": "/observation/qualified_cells",
+      "metric_id": "land30-qualified_cells",
+      "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-land30-authority-001/actual-stdout.json"
+    },
+    {
+      "json_pointer": "/observation/elapsed_seconds",
+      "metric_id": "land30-elapsed_seconds",
+      "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-land30-authority-001/actual-stdout.json"
+    },
+    {
+      "json_pointer": "/observation/charged_phase_bytes",
+      "metric_id": "land30-charged_phase_bytes",
+      "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-land30-authority-001/actual-stdout.json"
+    },
+    {
+      "json_pointer": "/observation/normalized_node_lifetime_peak_rss_bytes",
+      "metric_id": "land30-normalized_node_lifetime_peak_rss_bytes",
+      "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-land30-authority-001/actual-stdout.json"
+    },
+    {
+      "json_pointer": "/observation/qualified_cells",
+      "metric_id": "mixed2-qualified_cells",
+      "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-mixed2-authority-001/actual-stdout.json"
+    },
+    {
+      "json_pointer": "/observation/elapsed_seconds",
+      "metric_id": "mixed2-elapsed_seconds",
+      "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-mixed2-authority-001/actual-stdout.json"
+    },
+    {
+      "json_pointer": "/observation/charged_phase_bytes",
+      "metric_id": "mixed2-charged_phase_bytes",
+      "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-mixed2-authority-001/actual-stdout.json"
+    },
+    {
+      "json_pointer": "/observation/normalized_node_lifetime_peak_rss_bytes",
+      "metric_id": "mixed2-normalized_node_lifetime_peak_rss_bytes",
+      "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-mixed2-authority-001/actual-stdout.json"
+    },
+    {
+      "json_pointer": "/qualified_cells",
+      "metric_id": "total-qualified-cells",
+      "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/qualification-summary.json"
+    },
+    {
+      "json_pointer": "/accepted_repair_credit",
+      "metric_id": "accepted-repair-credit",
+      "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/qualification-summary.json"
     }
   ],
   "metrics": [
@@ -656,9 +703,9 @@
       "id": "land30-qualified_cells",
       "input_file": {
         "commit": "candidate",
-        "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-land30-authority-001/actual-stdout.json"
+        "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-land30-authority-001/config.json"
       },
-      "input_sha256": "622668a83d1e53243d90565d53a5015fed9f96c3f53d8df91427de8e1df1a401",
+      "input_sha256": "2f0c4106c72152daf36f84c4006eaaf468fdcaeb44c7c94960ad76a45ef8be45",
       "unit": "native cells",
       "value": 34304,
       "vintage": "archived"
@@ -669,9 +716,9 @@
       "id": "land30-elapsed_seconds",
       "input_file": {
         "commit": "candidate",
-        "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-land30-authority-001/actual-stdout.json"
+        "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-land30-authority-001/config.json"
       },
-      "input_sha256": "622668a83d1e53243d90565d53a5015fed9f96c3f53d8df91427de8e1df1a401",
+      "input_sha256": "2f0c4106c72152daf36f84c4006eaaf468fdcaeb44c7c94960ad76a45ef8be45",
       "unit": "seconds",
       "value": 7.059182999999999,
       "vintage": "archived"
@@ -682,9 +729,9 @@
       "id": "land30-charged_phase_bytes",
       "input_file": {
         "commit": "candidate",
-        "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-land30-authority-001/actual-stdout.json"
+        "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-land30-authority-001/config.json"
       },
-      "input_sha256": "622668a83d1e53243d90565d53a5015fed9f96c3f53d8df91427de8e1df1a401",
+      "input_sha256": "2f0c4106c72152daf36f84c4006eaaf468fdcaeb44c7c94960ad76a45ef8be45",
       "unit": "bytes",
       "value": 313943153,
       "vintage": "archived"
@@ -695,9 +742,9 @@
       "id": "land30-normalized_node_lifetime_peak_rss_bytes",
       "input_file": {
         "commit": "candidate",
-        "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-land30-authority-001/actual-stdout.json"
+        "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-land30-authority-001/config.json"
       },
-      "input_sha256": "622668a83d1e53243d90565d53a5015fed9f96c3f53d8df91427de8e1df1a401",
+      "input_sha256": "2f0c4106c72152daf36f84c4006eaaf468fdcaeb44c7c94960ad76a45ef8be45",
       "unit": "bytes",
       "value": 295649280,
       "vintage": "archived"
@@ -708,9 +755,9 @@
       "id": "mixed2-qualified_cells",
       "input_file": {
         "commit": "candidate",
-        "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-mixed2-authority-001/actual-stdout.json"
+        "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-mixed2-authority-001/config.json"
       },
-      "input_sha256": "352c9335c268f7c6ca00edaae00c6ca55532586a2930585d332867dbf3bf38c9",
+      "input_sha256": "efb9edfc88a980e2d05aa3a4c66ed6d6831407e3c6fe12c9b298930b32eaf488",
       "unit": "native cells",
       "value": 4262,
       "vintage": "archived"
@@ -721,9 +768,9 @@
       "id": "mixed2-elapsed_seconds",
       "input_file": {
         "commit": "candidate",
-        "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-mixed2-authority-001/actual-stdout.json"
+        "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-mixed2-authority-001/config.json"
       },
-      "input_sha256": "352c9335c268f7c6ca00edaae00c6ca55532586a2930585d332867dbf3bf38c9",
+      "input_sha256": "efb9edfc88a980e2d05aa3a4c66ed6d6831407e3c6fe12c9b298930b32eaf488",
       "unit": "seconds",
       "value": 6.577856709,
       "vintage": "archived"
@@ -734,9 +781,9 @@
       "id": "mixed2-charged_phase_bytes",
       "input_file": {
         "commit": "candidate",
-        "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-mixed2-authority-001/actual-stdout.json"
+        "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-mixed2-authority-001/config.json"
       },
-      "input_sha256": "352c9335c268f7c6ca00edaae00c6ca55532586a2930585d332867dbf3bf38c9",
+      "input_sha256": "efb9edfc88a980e2d05aa3a4c66ed6d6831407e3c6fe12c9b298930b32eaf488",
       "unit": "bytes",
       "value": 307647889,
       "vintage": "archived"
@@ -747,35 +794,35 @@
       "id": "mixed2-normalized_node_lifetime_peak_rss_bytes",
       "input_file": {
         "commit": "candidate",
-        "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-mixed2-authority-001/actual-stdout.json"
+        "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-mixed2-authority-001/config.json"
       },
-      "input_sha256": "352c9335c268f7c6ca00edaae00c6ca55532586a2930585d332867dbf3bf38c9",
+      "input_sha256": "efb9edfc88a980e2d05aa3a4c66ed6d6831407e3c6fe12c9b298930b32eaf488",
       "unit": "bytes",
       "value": 252133376,
       "vintage": "archived"
     },
     {
-      "description": "Actual execution at446a, not accepted selected/current output; JSON source /qualified_cells",
+      "description": "Exhaustive original candidate domain partitioned into the same-owner whole-owner scopes; combined actual qualified count. JSON source /qualified_cells",
       "evaluation_commit": "446a9a0050d6b96c520e2a94358b6228d1d00605",
       "id": "total-qualified-cells",
       "input_file": {
         "commit": "candidate",
-        "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/qualification-summary.json"
+        "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/native-inputs-001/native-patch.json"
       },
-      "input_sha256": "c18921f4b981a2ca04c697b2e5211546c9f531bcc82c4d850022921ce6fdf94e",
+      "input_sha256": "c4e0388c1245816683378630385fe05b9ff7ba40b0c090cbd4b729db00e11cf0",
       "unit": "native cells",
       "value": 38566,
       "vintage": "archived"
     },
     {
-      "description": "Actual execution at446a, not accepted selected/current output; JSON source /accepted_repair_credit",
+      "description": "Qualification-vintage accepted selector remains unchanged; no selected delivery or accepted repair credit is claimed. JSON source /accepted_repair_credit",
       "evaluation_commit": "446a9a0050d6b96c520e2a94358b6228d1d00605",
       "id": "accepted-repair-credit",
       "input_file": {
-        "commit": "candidate",
-        "path": "coordination/engineering/bahamas-adm1-current-cells-20261015/qualification-summary.json"
+        "commit": "866c42b854910f17a80427dac19b2c850cd68093",
+        "path": "data/ownership-selection.json"
       },
-      "input_sha256": "c18921f4b981a2ca04c697b2e5211546c9f531bcc82c4d850022921ce6fdf94e",
+      "input_sha256": "ec6f0ba88b2d0f66eaf66586a93200b3b4348e298ba6973943ccc2231b9fff94",
       "unit": "native cells",
       "value": 0,
       "vintage": "archived"
@@ -1236,9 +1283,9 @@
     }
   ],
   "transport_bounds": {
-    "baseline_files": 44,
+    "baseline_files": 43,
     "candidate_outputs": 49,
-    "encoded_whole_file_bytes": 161598400,
+    "encoded_whole_file_bytes": 159247958,
     "max_individual_file_bytes": 33554432,
     "max_total_bytes": 268435456,
     "scope": "Evidence transport inspection only, separate from actual512MiB physical/native processing contracts and full encoded+decoded/parse/scratch accounting."
