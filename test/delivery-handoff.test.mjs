@@ -9,7 +9,7 @@ import {gzipSync} from 'node:zlib';
 import {candidateBudget} from '../scripts/native-ownership/native-preparation-guards.mjs';
 import {renderClaim} from '../scripts/issue-claim-contract.mjs';
 import {subjectsHash} from '../scripts/evidence-quality.mjs';
-import {jsonBytes, digest, pinReader, publish, prepareRequests, retainProducts, nativeRequests,
+import {jsonBytes, digest, pinReader, publish, admitPublication, prepareRequests, retainProducts, nativeRequests,
   composeAuthorities, packageProjection, rebindCustody, requestProfile, finalizedSelection, finalizedPackageInputs, finalizeDelivery, prepareEvidence} from '../scripts/prepare-delivery-handoff.mjs';
 
 const commit = 'a'.repeat(40), prefix = 'coordination/engineering/control/';
@@ -446,12 +446,7 @@ test('finalization admits only an exact committed restoration of absent canonica
   const g=setup(); g.config.restored_read_roles.paths=[];
   assert.throws(()=>finalizeDelivery(g.config,g.reader), /inventory required/);
   const h=setup(); delete h.config.restored_read_roles;
-  const automatic = finalizeDelivery(h.config,h.reader);
-  for (const name of ['custody.json','operating.json']) {
-    const originalPath = 'coordination/engineering/accepted-original/' + name;
-    assert.deepEqual(automatic['restored-read-roles/' + originalPath], h.reader.read(h.reader.pin('b'.repeat(40),originalPath)));
-    assert.ok(JSON.parse(automatic['package-inputs.json']).inputs.includes(originalPath));
-  }
+  assert.throws(() => finalizeDelivery(h.config,h.reader), /accepted path identity/);
 });
 
 test('finalization refuses a new identity at an accepted package path', () => {
@@ -925,7 +920,6 @@ test('generated sidecar refuses foreign/colliding outputs and changed release jo
     {...config, sidecar_output: 'coordination/engineering/foreign/sidecar.json'},
     {...config, sidecar_output: f.owned + 'preparation.json'},
     {...config, sidecar_output: f.owned + 'package-inputs.json'},
-    {...config, sidecar_output: f.owned + 'restored-read-roles'},
     {...config, sidecar_output: occupied},
     {...config, sidecar: f.r.pin(f.config.selector.commit, JSON.parse(f.accepted['ownership-selection.json']).additive_release.path)},
     {...config, patch: {...config.patch, sha256: '0'.repeat(64)}},
@@ -1034,44 +1028,25 @@ test('multiple modern source-evidence carry is aggregate rather than reset per o
   assert.equal(fs.existsSync(path.join(f.root, destination)), false);
 });
 
-test('final handoff publishes exact original roles locally with one receipt and exact resume', t => {
-  const root = directory(t), name = 'coordination/engineering/original/source.json', raw = jsonBytes({original: true});
-  const pin = {commit, path: name, mode: '100644', bytes: raw.length, sha256: digest(raw),
-    git_blob_oid: execFileSync('git', ['hash-object', '--stdin'], {input: raw}).toString().trim()};
-  const products = {'package-roles.json': jsonBytes({paths: [pin]}), 'ownership-selection.json': jsonBytes({selected: true}),
-    ['restored-read-roles/' + name]: raw};
-  const destination = '.cache/delivery-handoff/restored', binding = {phase: 'finalize', input: commit};
-  assert.equal(publish(root, destination, products, binding).resumed, false);
-  assert.deepEqual(fs.readFileSync(path.join(root,destination,'restored-read-roles',name)),raw);
-  assert.equal(fs.existsSync(path.join(root,name)),false, 'original repository path is never written');
-  assert.equal(publish(root,destination,products,binding,true).resumed,true);
-  const receipt = JSON.parse(fs.readFileSync(path.join(root,destination,'preparation.json')));
-  assert.deepEqual(Object.keys(receipt.outputs).sort(),Object.keys(products).sort());
-  assert.throws(()=>publish(root,destination,products,{phase:'changed'},true),/bytes\/binding changed/);
-  fs.mkdirSync(path.join(root,destination,'foreign-empty'));
-  assert.throws(()=>publish(root,destination,products,binding,true),/foreign resumed output inventory/);
+test('publication refuses nested original-role copies before creating output', t => {
+  const root = directory(t), raw = jsonBytes({original: true});
+  const destination = '.cache/delivery-handoff/refused-nested';
+  assert.throws(() => publish(root, destination, {'package-roles.json': jsonBytes({paths: []}),
+    'restored-read-roles/coordination/engineering/original/source.json': raw}, {}), /flat product filenames/);
+  assert.equal(fs.existsSync(path.join(root, '.cache')), false);
 });
 
-test('original role publication refuses unbound or corrupt roles before creating output', t => {
-  for (const kind of ['unbound','corrupt','nonlocal']) {
-    const root=directory(t), raw=jsonBytes({original:true}), name='coordination/engineering/original/source.json';
-    const pin={commit,path:name,mode:'100644',bytes:raw.length,sha256:digest(raw),
-      git_blob_oid:execFileSync('git',['hash-object','--stdin'],{input:raw}).toString().trim()};
-    const products={'package-roles.json':jsonBytes({paths:kind==='unbound'?[]:[pin]}),
-      ['restored-read-roles/'+name]:kind==='corrupt'?Buffer.from('changed'):raw};
-    const destination=kind==='nonlocal'?'coordination/engineering/control/output':'.cache/delivery-handoff/refused';
-    assert.throws(()=>publish(root,destination,products,{}),/authenticated package role|body differs|local delivery output tree/);
-    assert.equal(fs.existsSync(path.join(root,destination)),false);
-  }
-});
-
-
-test('complete publication namespace rejects flat staging-directory collision before mutation', t => {
-  const root=directory(t), raw=jsonBytes({original:true}), name='coordination/engineering/original/source.json';
-  const pin={commit,path:name,mode:'100644',bytes:raw.length,sha256:digest(raw),
-    git_blob_oid:execFileSync('git',['hash-object','--stdin'],{input:raw}).toString().trim()};
-  const products={'package-roles.json':jsonBytes({paths:[pin]}), 'restored-read-roles':jsonBytes({sidecar:true}),
-    ['restored-read-roles/'+name]:raw};
-  assert.throws(()=>publish(root,'.cache/delivery-handoff/collision',products,{}),/Product file\/directory collision/);
-  assert.equal(fs.existsSync(path.join(root,'.cache')),false);
+test('flat publication preserves prior completed trees and refuses post-admission mutation', t => {
+  const root = directory(t), destination = '.cache/delivery-handoff/historical';
+  const oldBody = jsonBytes({original: true}), receipt = jsonBytes({historical: true});
+  write(root, destination + '/restored-read-roles/original.json', oldBody);
+  write(root, destination + '/preparation.json', receipt);
+  assert.throws(() => publish(root, destination, {'flat.json': jsonBytes({new: true})}, {}, true), /foreign resumed output inventory/);
+  assert.deepEqual(fs.readFileSync(path.join(root, destination, 'restored-read-roles/original.json')), oldBody);
+  assert.deepEqual(fs.readFileSync(path.join(root, destination, 'preparation.json')), receipt);
+  const products = {'flat.json': jsonBytes({value: 1})};
+  const publishAdmitted = admitPublication(root, '.cache/delivery-handoff/fresh', products, {});
+  products['flat.json'].fill(0);
+  assert.throws(publishAdmitted, /Admitted products changed/);
+  assert.equal(fs.existsSync(path.join(root, '.cache/delivery-handoff/fresh')), false);
 });
