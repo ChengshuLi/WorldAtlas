@@ -1188,6 +1188,71 @@ export async function sourceCohort(config, reader, root, destination, phase = 's
   } finally { fs.rmSync(staging, {recursive: true, force: true}); }
 }
 
+// Fill only the accepted baseline block of ordinary source evidence. Scientific
+// claims stay explicit; this metadata preparation does not qualify their support.
+// In particular, the normative manifest descriptor is not a Git custody pin.
+export async function sourceEvidence(config, reader) {
+  need(config.version === 1 && config.source_evidence?.version === 1
+    && config.source_evidence.kind === 'source-target-native-evidence-v1', 'Explicit ordinary source evidence required');
+  const {locate} = await import('./delivery-handoff-advance.mjs');
+  const selectorPin = locate(reader, config.selector);
+  need(selectorPin.path === 'data/ownership-selection.json', 'Original accepted selector locator required');
+  const selection = reader.json(selectorPin), hook = selection.additive_release;
+  need(hook && same(Object.keys(hook).sort(), ['bytes', 'path', 'sha256']), 'Existing cumulative selection required');
+  const sidecarPin = reader.pin(selectorPin.commit, hook.path);
+  need(sidecarPin.bytes === hook.bytes && sidecarPin.sha256 === hook.sha256, 'Original selected sidecar differs');
+  const sidecar = reader.json(sidecarPin), base = {...selection}; delete base.additive_release;
+  need(sidecar.version === 2 && sidecar.kind === 'retained-native-additive-selection-v2'
+    && same(sidecar.base_selection, base), 'Original selected base differs');
+  const assets = sidecar.logical_asset_map;
+  need(assets && same(Object.keys(assets).sort(), ['base_manifest', 'ledger', 'owner_roster', 'patch']),
+    'Complete prior logical assets required');
+  const wrapped = reader.json(sidecar.runtime_envelope), envelope = wrapped.additiveRelease ?? wrapped;
+  need(envelope.version === 2 && envelope.kind === 'retained-native-base-plus-delta-v2', 'Existing v2 runtime envelope required');
+  for (const [role, pin] of Object.entries(assets)) {
+    const declared = envelope[role];
+    need(declared?.bytes === pin.bytes && declared?.sha256 === pin.sha256
+      && (declared.decoded_bytes ?? declared.bytes) === (pin.decoded_bytes ?? pin.bytes)
+      && (declared.decoded_sha256 ?? declared.sha256) === (pin.decoded_sha256 ?? pin.sha256),
+    'Prior envelope asset binding differs: ' + role);
+  }
+  const manifest = reader.json(assets.base_manifest);
+  const selectedManifest = reader.pin(selectorPin.commit, selection.manifest_path);
+  need(selectedManifest.sha256 === selection.sha256 && assets.base_manifest.sha256 === selection.sha256
+    && selectedManifest.bytes === assets.base_manifest.bytes && selection.method === manifest.method,
+  'Original selected native manifest/method differs');
+  const contractKeys = ['size', 'coordinateBits', 'method', 'native_latitudes', 'hierarchy_sha256', 'original_assets'];
+  need(contractKeys.every(key => Object.hasOwn(manifest, key)), 'Complete original native contract required');
+  const native_contract = Object.fromEntries(contractKeys.map(key => [key, manifest[key]]));
+  need(same(envelope.base_reference, {id: selection.release_id, footprints_sha256: manifest.footprints_sha256,
+    hierarchy_sha256: manifest.hierarchy_sha256}) && manifest.geographic_release === selection.release_id
+    && hex(manifest.footprints_sha256, 64) && hex(manifest.hierarchy_sha256, 64),
+  'Original selected base reference differs');
+  need(assets.owner_roster.sha256 === manifest.original_assets?.bounds?.sha256,
+    'Original selected owner asset differs');
+  const latitude = manifest.native_latitudes;
+  const latitudePin = locate(reader, {commit: latitude.commit, path: latitude.path});
+  need(latitudePin.bytes === latitude.bytes && latitudePin.sha256 === latitude.sha256,
+    'Original native latitude body differs');
+  const native_latitudes = {...latitudePin, decoded_bytes: latitude.decoded_bytes, decoded_sha256: latitude.decoded_sha256};
+  // Authenticate both encoded and decoded custody without promoting their Git
+  // metadata into the literal normative contract or replaying native science.
+  for (const [role, pin] of Object.entries({native_latitudes, owner_roster: assets.owner_roster})) {
+    const raw = reader.read(pin);
+    need(Number.isSafeInteger(pin.decoded_bytes) && pin.decoded_bytes > 0 && pin.decoded_bytes <= 33554432
+      && hex(pin.decoded_sha256, 64), 'Bounded decoded baseline identity required: ' + role);
+    reader.budget.add({bytes: pin.decoded_bytes});
+    const decoded = gunzipSync(raw, {maxOutputLength: pin.decoded_bytes});
+    need(decoded.length === pin.decoded_bytes && digest(decoded) === pin.decoded_sha256,
+      'Decoded baseline identity differs: ' + role);
+  }
+  const derived = {native_contract, native_latitudes, owner_roster: assets.owner_roster, base_reference: envelope.base_reference};
+  for (const [key, value] of Object.entries(derived))
+    need(!Object.hasOwn(config.source_evidence, key) || same(config.source_evidence[key], value),
+      'Supplied source evidence changes accepted baseline: ' + key);
+  return {'source-evidence.json': jsonBytes({...config.source_evidence, ...derived})};
+}
+
 // Execute the existing modern constructor or its admitted read-only diagnostic,
 // rather than authoring a country wrapper. Only qualification emits authority.
 export async function nativeAuthority(config, reader, root, diagnostic = false) {
@@ -1250,8 +1315,8 @@ async function main(args) {
     console.log(JSON.stringify({...publishComplete(), acquisition: result, acquisition_ms: performance.now() - started}));
     return;
   }
-  need(['source', 'physical', 'native-authority', 'native-diagnostic', 'requests', 'native-requests', 'retain', 'rebind-operating', 'rebind-certificate', 'compose', 'package', 'finalize', 'evidence'].includes(phase) && configFile && destination && flags.every(f => f === '--resume') && flags.length <= 1,
-    'Use prepare-delivery-handoff.mjs requests|native-requests|retain|rebind-operating|rebind-certificate|compose|package|finalize|evidence|source|physical|native-authority|native-diagnostic CONFIG DESTINATION [--resume]');
+  need(['source', 'physical', 'source-evidence', 'native-authority', 'native-diagnostic', 'requests', 'native-requests', 'retain', 'rebind-operating', 'rebind-certificate', 'compose', 'package', 'finalize', 'evidence'].includes(phase) && configFile && destination && flags.every(f => f === '--resume') && flags.length <= 1,
+    'Use prepare-delivery-handoff.mjs requests|native-requests|retain|rebind-operating|rebind-certificate|compose|package|finalize|evidence|source|physical|source-evidence|native-authority|native-diagnostic CONFIG DESTINATION [--resume]');
   need(!process.execArgv.length && !process.env.NODE_OPTIONS?.trim() && !process.env.NODE_PATH?.trim(), 'Plain Node launch required');
   const root = fs.realpathSync(process.cwd()); admitDestination(root, destination, flags.includes('--resume'));
   const raw = ordinary(root, configFile), config = JSON.parse(raw), reader = pinReader(root, {allowance: config.preparation_allowance});
@@ -1263,6 +1328,7 @@ async function main(args) {
   let outputs, observation;
   if (['source','physical'].includes(phase)) { const result = await sourceCohort(config, reader, root, destination, phase); outputs = result.products; observation = result.observation; }
   if (['native-authority','native-diagnostic'].includes(phase)) { const result = await nativeAuthority(config, reader, root, phase === 'native-diagnostic'); outputs = result.products; observation = result.observation; }
+  if (phase === 'source-evidence') outputs = await sourceEvidence(config, reader);
   if (phase === 'requests') outputs = prepareRequests(config, reader);
   if (phase === 'native-requests') outputs = nativeRequests(config, reader);
   if (phase.startsWith('rebind-')) outputs = rebindCustody(config, reader, phase === 'rebind-certificate');
