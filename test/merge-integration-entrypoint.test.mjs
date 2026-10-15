@@ -184,9 +184,9 @@ test('actual owned prepare skips preview polling and cleans its ref when notific
     ['/commits/'+head+'/check-runs']:{check_runs:[{id:1,name:'scope',app:{id:1},status:'completed',conclusion:'success'}]},
     ['/commits/'+head+'/status']:{statuses:[]},'/git/ref/heads/main':{object:{sha:base}},
     ['/git/commits/'+candidate]:{sha:candidate,parents:[{sha:sha('d')},{sha:head}]},
-    ['/git/commits/'+owned]:{sha:owned,tree:{sha:'combined'},parents:[{sha:base},{sha:head}]},
-    ['/git/commits/'+head]:{tree:{sha:'combined'}},
-    '/git/trees/combined':{truncated:false,tree:[{path:'src/a.js',sha:'blob',mode:'100644',type:'blob'}]}
+    ['/git/commits/'+owned]:{sha:owned,tree:{sha:sha('6')},parents:[{sha:base},{sha:head}]},
+    ['/git/commits/'+head]:{tree:{sha:sha('6')}},
+    ['/git/trees/'+sha('6')]:{truncated:false,tree:[{path:'src/a.js',sha:'blob',mode:'100644',type:'blob'}]}
   };
   fs.writeFileSync(path.join(directory,'mock.mjs'),capacityShim+`import fs from 'node:fs';const routes=${JSON.stringify(routes)},refs=new Map();
     const originalSetTimeout=globalThis.setTimeout;globalThis.setTimeout=(fn,ms,...args)=>{if(ms===2000)throw Error('Unexpected candidate polling sleep');return originalSetTimeout(fn,ms,...args);};
