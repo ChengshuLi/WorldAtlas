@@ -1,0 +1,196 @@
+{
+  "version": 1,
+  "reviewer": "/root/raja_input_review_cont",
+  "disposition": "ACCEPTED WITH LIMITS: actual stock-qualified10617 cells/one original source-target component. No result-review blockers. No current-owner-zero or selected acceptance.",
+  "actual_products": [
+    {
+      "path": "original-rule-preimage.json",
+      "bytes": 743,
+      "sha256": "ba1ca181f2a062f2dbf01eaef45e6801f0d4e04a643625ab91d90c311e3ff4e7"
+    },
+    {
+      "path": "authority-binding.json",
+      "bytes": 746,
+      "sha256": "f6aaa0c69b1953e3c567485d313e990d862ebd5f2780716fe3b99859678f0fbd"
+    },
+    {
+      "path": "constructor-result.json",
+      "bytes": 114035,
+      "sha256": "a97e90c778f8858f657a13e692683cf1fa873eb38a767ef9cf25ca980d0bd36b"
+    },
+    {
+      "path": "preparation.json",
+      "bytes": 502,
+      "sha256": "9553935696c64d6976570ea336678b3c9dd1da13478eed2875d1d6dfe6bef279"
+    }
+  ],
+  "input_review": {
+    "path": "idn-raja10617-independent-review-001/review.json",
+    "sha256": "e27e6234550927cadc775744dea66abc77dd6abfa3100f1f1a340f4c7057141b",
+    "checks_reused": 1090
+  },
+  "config_sha256": "8d97898cdd7056cb626fad2491a269750adb1ce36540164e33223e83e987e2da",
+  "input_commit": "4af11a67282b6238137abfe54172fc5b5884832a",
+  "component_id": "source-target:88714fd8cbdb4318117a68a0036374893fdaa0aa875d39844dd3f300fcd7c461",
+  "actual_counts": {
+    "native_cells": 10617,
+    "native_rows": 1048,
+    "native_spans": 3463,
+    "components": 1,
+    "owner": 23160,
+    "source_relative_cells_held": 6871,
+    "original_physical_queries": 729
+  },
+  "actual_operating": {
+    "elapsed_seconds": 1.4573866670000002,
+    "charged_phase_bytes": 331947170,
+    "allowance": {
+      "phaseBytes": 603979776,
+      "rssBytes": 603979776
+    },
+    "normalized_node_lifetime_peak_rss_bytes": 255918080,
+    "qualified_cells": 10617,
+    "limits": [
+      "Original source/physical producers are not replayed.",
+      "Constructor qualification is not actual current-owner-zero or final selected-output acceptance."
+    ],
+    "exit_code": 0,
+    "external_elapsed_seconds": 1.91,
+    "external_time_l_peak_rss_bytes": 256098304,
+    "compute_released": true,
+    "source_relative_cells_held": 6871,
+    "current_owner_zero": "UNRUN",
+    "accepted_credit": 0
+  },
+  "checks": [
+    {
+      "check": "reuse exact prior distinct typed-input review",
+      "pass": true
+    },
+    {
+      "check": "exact reviewed original source/patch bodies unchanged",
+      "pass": true
+    },
+    {
+      "check": "complete actual four-file product inventory",
+      "pass": true
+    },
+    {
+      "check": "actual preparation completion receipt exact outputs",
+      "pass": true
+    },
+    {
+      "check": "actual config whole byte binding8d97898",
+      "pass": true
+    },
+    {
+      "check": "actual owned execution config exact",
+      "pass": true
+    },
+    {
+      "check": "first execution not resume",
+      "pass": true
+    },
+    {
+      "check": "full constructor expected kind/complete scope",
+      "pass": true
+    },
+    {
+      "check": "original quartet pin identities retained",
+      "pass": true
+    },
+    {
+      "check": "actual immutable source_evidence full pin",
+      "pass": true
+    },
+    {
+      "check": "actual warm immutable source_evidence equals reviewed body",
+      "pass": true
+    },
+    {
+      "check": "actual immutable native_patch full pin",
+      "pass": true
+    },
+    {
+      "check": "actual warm immutable native_patch equals reviewed body",
+      "pass": true
+    },
+    {
+      "check": "actual component exact original namespace/hash",
+      "pass": true
+    },
+    {
+      "check": "rule SHA exact preimage canonical binding",
+      "pass": true
+    },
+    {
+      "check": "single original target/owner/native representation",
+      "pass": true
+    },
+    {
+      "check": "whole requested native primitive union literal equality",
+      "pass": true
+    },
+    {
+      "check": "10617 actual cells3463 original spans1048 rows",
+      "pass": true
+    },
+    {
+      "check": "base geometry whole field/hash unchanged",
+      "pass": true
+    },
+    {
+      "check": "original full physical729-query custody unchanged",
+      "pass": true
+    },
+    {
+      "check": "positive/exterior original whole witnesses retained",
+      "pass": true
+    },
+    {
+      "check": "all6871 source-relative cells remain separate",
+      "pass": true
+    },
+    {
+      "check": "fresh576MiB ordinary admission no other reservation",
+      "pass": true
+    },
+    {
+      "check": "actual allowance agrees with request/admission",
+      "pass": true
+    },
+    {
+      "check": "actual operating values match stdout",
+      "pass": true
+    },
+    {
+      "check": "actual331947170 charge below grant",
+      "pass": true
+    },
+    {
+      "check": "Darwin time-l raw bytes and elapsed match",
+      "pass": true
+    },
+    {
+      "check": "elapsed below finite deadline no hardtree claim",
+      "pass": true
+    },
+    {
+      "check": "actual accepted closure byte identities",
+      "pass": true
+    },
+    {
+      "check": "scientific and output limitations explicit",
+      "pass": true
+    }
+  ],
+  "method": "Independent whole product/hash/config/pin/tuple/code-custody and receipt review. Prior distinct scientific input/method/operating analysis reused. No constructor/source/physical replay, predicate, project import, new control, fetch or Git mutation.",
+  "retained_source_limits": [
+    "Complete729 checked physical queries, original source_member and18 metadata receipts, nonempty positive mapped land and exterior, all water/hierarchy/reconstruction/conflict witnesses remain in exact full physical pin.",
+    "Whole519-feature source family and original owner roster/native latitude/base contracts remain exact through4af typed evidence and original preimage/binding.",
+    "2020 ADM2/ADM1/framework mismatch overlap0.922844 and open semantic review remain; no complete parent/administrative/legal boundary certificate.",
+    "All6871 source-relative cells remain held and excluded. No expanded request, inferred class promotion or changed source evidence.",
+    "Actual native constructor qualification is distinct from base/current selected owner-zero, conservation, ordinary integration and acceptance.",
+    "RSS/time are observed cooperative boundary/lifetime measurements, not continuous aggregate process-tree or harddeadline guarantees."
+  ]
+}
