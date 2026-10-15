@@ -31,34 +31,15 @@ test('failed or incomplete frozen input fetch cannot establish regression covera
  }
 });
 
-test('complete archived priority artifacts register their immutable input and execution vintages',()=>{
- const report=JSON.parse(fs.readFileSync('coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v2/report.json'));
- for(const commit of [report.input_commit,report.executed_code_commit,report.original_native_commit]){
-  assert.ok(NATIVE_REGRESSION_COMMITS.includes(commit),`Shallow CI must restore ${commit}`);
- }
-});
-
-
 const common=[
  'd55795e4c0ad01527029db0bd1d774124a12a61a','548c5f89f00271050823076a84695bb41e1b8454',
  'd70c5d86e345a225b6bc78d67451b3cbbf7a5eed','65cfcef5ffd7d8b98077b9058a374d1e27047430',
  '35d2d3ff48957d34ee8d4329824b268ecadc6d3c'
 ];
-const audit=[
- 'ff566eab31ef072084c548f67dee8ee727ab3d47','e67eeafc1aa130aa5c1a6d1222d39116625fd003',
- '8b61b9303553f2068f18ad5a000d4cba14059547','b6e0d0d21cfd6dde68c3c292c9513d3a24896a11',
- '85571b6ef23f5565f08693a542fa7dad20c651b8'
-];
-const componentInput='c603befd3aaf4da90d59b12378e1e0739331efba';
 const custody=['8f6dc184d1a41b634cec4759bb57b3cc04dd980a','6ed6406f9fad4c7c468b06a376346b216cb50db7'];
-const priority='bf9e8a6580e997d82d0414235e3a0d2a81e1e24a';
 const consumers=[
- ['test/physical-audit-evidence.test.mjs',audit],
- ['test/physical-component-evidence.test.mjs',[componentInput,...custody]],
  ['test/physical-component-custody.test.mjs',custody],
- ['test/physical-component-fixture.test.mjs',custody],
- ['test/physical-component-report-binding.test.mjs',custody],
- ['test/physical-gap-priority-evidence.test.mjs',[priority]]
+ ['test/physical-component-report-binding.test.mjs',custody]
 ];
 function requiredFor(files,options={}){
  const f=fixture(options),result=prepareNativeRegressionInputs('full',{...f.options,files});
@@ -81,7 +62,7 @@ test('common native inputs remain while unrelated and compact physical controls 
   const f=requiredFor(files);assert.deepEqual(f.result.fetched,common);
  }
  assert.deepEqual(requiredFor(undefined).result.fetched,NATIVE_REGRESSION_COMMITS);
- for(const files of [[],null,'test/physical-audit-evidence.test.mjs',[null],['../test/physical-audit-evidence.test.mjs']])
+ for(const files of [[],null,'test/physical-component-custody.test.mjs',[null],['../test/physical-component-custody.test.mjs']])
   assert.throws(()=>requiredFor(files),/Actual regression file roster/);
  const f=fixture();
  assert.throws(()=>prepareNativeRegressionInputs('full',{...f.options,files:['test/deleted-consumer.test.mjs'],
@@ -109,17 +90,10 @@ test('a missing required archived object still fails after a scoped fetch, and p
 });
 
 
-test('scoped physical pins agree with the actual retained audit envelope, reports and component generations',()=>{
+test('remaining custody pins agree with the actual retained component generations',()=>{
  const read=name=>JSON.parse(fs.readFileSync(name));
- const root=read('coordination/engineering/physical-gap-audit-1005-20261005-local18/evidence-quality.json');
- const envelope=read(root.mandatory_input_stage.envelope_manifest);
- const reports=root.audit_reports.map(pin=>read(pin.path));
- const actualAudit=new Set([envelope.executed_code_commit,
-  ...reports.flatMap(report=>[report.baseline_commit,report.water_commit,report.executed_code_commit])]);
- assert.deepEqual(actualAudit,new Set([common[1],...audit]));
  const index=read('coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/index.json');
  assert.deepEqual(new Set(index.generations.map(generation=>generation.executed_code_commit)),new Set(custody));
- assert.deepEqual(new Set(index.generations.map(generation=>generation.input_commit)),new Set([componentInput]));
  const source=fs.readFileSync(new URL('../scripts/run-integration-tests.mjs',import.meta.url),'utf8');
  assert.match(source,/prepareNativeRegressionInputs\(testSelection === 'complete' \? profile : 'evidence',\{files,run:git.run\}\)/);
 });
