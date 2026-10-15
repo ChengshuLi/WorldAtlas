@@ -102,6 +102,22 @@ async function readEmittedAdditive(base,atlas,selected){
 
 async function builtOutputReadback(report){
  const target=reportDestination(report),base=path.join(root,'dist/client');
+ const currentAtlas=JSON.parse(emittedFile(base,'atlas-geography.json'));
+ if(currentAtlas.nativeContextInputStage?.status==='accepted-prepared-assets'){
+  // Accepted-main workflows may still call this historical entry after checkout
+  // of a current-assets candidate. Reuse the existing complete output gate;
+  // never invent the old scientific comparison/report for a current build.
+  const {verifyPackageOutput}=await import('../../../scripts/package-output-artifact.mjs');
+  const manifest=JSON.parse(emittedFile(root,'.cache/package-output-manifest.json'));
+  verifyPackageOutput(root,manifest);
+  const selected=JSON.parse(emittedFile(root,'data/ownership-selection.json'));
+  assert.equal(manifest.source.head,execFileSync(process.platform==='darwin'?'/Library/Developer/CommandLineTools/usr/bin/git':'/usr/bin/git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),'Current output belongs to another checkout');
+  assert.deepEqual(manifest.source.selection,selected,'Current output selection differs');
+  assert.equal(currentAtlas.nativeContextInputStage.native_manifest_sha256,selected.sha256,'Current prepared native identity differs');
+  assert.equal(currentAtlas.pixelMap.canonical_grid_sha256,selected.sha256,'Current emitted native identity differs');
+  console.log('Current prepared output verified by the existing package inventory; historical native readback is inapplicable and no report is claimed.');
+  return;
+ }
  const {gunzipSync}=await import('node:zlib');
  const {unshuffleOwnershipBytes}=await import('../../../src/ownership-codec.js');
  const {validateCoverageManifest}=await import('../../../src/coverage-classification.js');

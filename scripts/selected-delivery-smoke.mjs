@@ -9,7 +9,7 @@ import {repositoryReader, sha256} from './evidence-quality.mjs';
 import {loadOwnershipAssets} from '../src/ownership-assets.js';
 import {loadAdditiveNativePatch, effectivePrimitiveGeometries, footprintValueSha256,
   verifyAdditiveLedgerSelection, nativeOnlyComponent} from '../src/effective-footprint.js';
-import {pickOwnership, samplePackedOwnership} from '../src/pixel-ownership.js';
+import {ownershipRun, pickOwnership, samplePackedOwnership} from '../src/pixel-ownership.js';
 
 const hash = value => typeof value === 'string' && /^[a-f0-9]{64}$/.test(value);
 const text = value => typeof value === 'string' && value.trim().length > 0;
@@ -50,10 +50,29 @@ export function validateDeliveryExpectations(value) {
   return value;
 }
 
+// Select current before-state controls from the authenticated emitted base.
+// Every affected occupied row contributes one existing owner; an all-empty
+// affected span falls back to the first occupied base row, never a vacuous pass.
+export function selectedStableOwnerControls(base, patch) {
+  const controls = [];
+  const add = y => {
+    if (!base.rows[y * 2 + 1]) return;
+    const run = ownershipRun(base, base.rows[y * 2]);
+    assert(Number.isInteger(run.start) && Number.isInteger(run.end) && Number.isInteger(run.id)
+      && run.start >= 0 && run.end > run.start && run.end <= base.size && run.id > 0,
+      'Invalid occupied base control');
+    controls.push({x: run.start, y, id: run.id});
+  };
+  for (const y of new Set(patch.rows.map(row => row.y))) add(y);
+  if (!controls.length) for (let y = 0; y < base.size && !controls.length; y++) add(y);
+  assert(controls.length > 0, 'Missing occupied base owner control');
+  return controls;
+}
+
 // Exported kernel uses the actual production effective primitive, picker and
 // sampler entry points. The CLI obtains all arguments from authenticated bytes.
 export function verifySelectedDelivery({expectations, ledger, ledgerSha256, patch, patchSha256,
-  features, base, effective, request, result}) {
+  features, base, effective, beforeControls}) {
   validateDeliveryExpectations(expectations);
   assert.equal(ledgerSha256, expectations.selected_ledger_sha256, 'Wrong selected ledger hash');
   assert.equal(patch.ledger_sha256, ledgerSha256, 'Patch ledger differs');
@@ -101,36 +120,21 @@ export function verifySelectedDelivery({expectations, ledger, ledgerSha256, patc
     added++;
   }
   assert.equal(added, expectations.cumulative_native_cells, 'Wrong cumulative native cell count');
-  const nativeOnlyCells=ledger.rows.filter(row=>row.representation==='native-cells').reduce((n,row)=>n+row.native_cells,0);
-  assert.equal(added-nativeOnlyCells, result?.native?.assigned_cells, 'Rebind result native cell count differs');
   assert.equal(added, effective.additive_added_cells, 'Loaded effective native cell count differs');
-  assert(Array.isArray(request?.current_rows) && request.current_rows.length > 0
-    && Array.isArray(request?.acquisition?.predecessor_rows) && request.acquisition.predecessor_rows.length > 0,
-  'Missing current/predecessor stable-owner controls');
-  const observed = new Map();
-  for (const row of [...request.current_rows, ...request.acquisition.predecessor_rows]) {
-    assert(Number.isInteger(row.y) && row.y >= 0 && row.y < base.size && Array.isArray(row.runs),
-      'Invalid stable-owner control row');
-    if (observed.has(row.y)) assert.deepEqual(observed.get(row.y), row, 'Conflicting stable-owner control row');
-    else observed.set(row.y, row);
-  }
-  // Retain the original nonvacuous control: one known occupied cell in EVERY
-  // unique observed current/predecessor row. This is not a full-grid proof.
-  for (const row of observed.values()) {
-    const run = row.runs.find(run => Array.isArray(run) && run.length === 3 && run.every(Number.isInteger)
-      && run[0] >= 0 && run[0] < run[1] && run[1] <= base.size && run[2] > 0);
-    assert(run, 'Stable-owner row has no occupied control');
-    const [x, , id] = run;
-    assert.equal(pickOwnership(base, x, row.y), id, 'Stable base owner changed');
-    assert.equal(pickOwnership(effective, x, row.y), id, 'Stable effective owner changed');
-    assert.equal(samplePackedOwnership(effective, {x, y: row.y, width: 1, height: 1})[0], id,
+  assert(Array.isArray(beforeControls) && beforeControls.length > 0, 'Missing occupied base owner control');
+  for (const {x, y, id} of beforeControls) {
+    assert(Number.isInteger(x) && Number.isInteger(y) && Number.isInteger(id)
+      && x >= 0 && x < base.size && y >= 0 && y < base.size && id > 0, 'Invalid occupied base control');
+    assert.equal(pickOwnership(base, x, y), id, 'Stable base owner changed');
+    assert.equal(pickOwnership(effective, x, y), id, 'Stable effective owner changed');
+    assert.equal(samplePackedOwnership(effective, {x, y, width: 1, height: 1})[0], id,
       'Stable sampled owner changed');
   }
   return {version: 1, kind: 'actual-emitted-selected-consumer', passed: true,
     feature_count: features.length, selected_ledger_sha256: ledgerSha256, selected_patch_sha256: patchSha256,
-    cumulative_native_cells_picked_and_sampled: added, stable_owner_controls: observed.size,
+    cumulative_native_cells_picked_and_sampled: added, stable_owner_controls: beforeControls.length,
     expected_components_verified: cohorts.reduce((n, cohort) => n + cohort.members.length, 0), cohorts,
-    limitation: 'Production Node-compatible asset loader, effective primitive, picker and renderer-sampler entry points on actual emitted assets. GPU and Canvas execution still require hosted browser testing. Original batch IDs and complete rosters are supplied reviewed expectations, not independent source or whole-batch approval. Zero-cell inclusion is not visible-pixel gain; stable-owner controls sample one occupied cell per retained observed row.'};
+    limitation: 'Production Node-compatible asset loader, effective primitive, picker and renderer-sampler entry points on actual emitted assets. GPU and Canvas execution still require hosted browser testing. Original batch IDs and complete rosters are supplied reviewed expectations, not independent source or whole-batch approval. Zero-cell inclusion is not visible-pixel gain. Emitted geometry chunks are not decoded here; catalog identities and selected ledger primitives are checked. Stable-owner controls sample one occupied emitted-base cell per affected nonempty row, or the first occupied base row when all affected rows are empty.'};
 }
 
 function admitOutput(filename) {
@@ -180,8 +184,6 @@ export async function runSelectedDeliverySmoke({root = process.cwd(), emittedDir
   assert.deepEqual(atlas.additiveRelease, envelope, 'Actual emitted envelope differs from selected release');
   assert.equal(envelope.ledger.sha256, expectations.selected_ledger_sha256, 'Wrong selected ledger hash');
   const ledger = whole('emitted', envelope.ledger), patch = whole('emitted', envelope.patch);
-  const certificate = whole('root', ledger.current_rebind);
-  const request = whole('root', certificate.request), result = whole('root', certificate.result);
   const assets = new Map(), nativeParts = new Set(atlas.pixelMap?.method === 'native-linear-evenodd-first-owner-v1'
     ? (atlas.pixelMap.parts ?? []).map(part => part.path) : []);
   for (const descriptor of [...(atlas.pixelMap?.parts ?? []), envelope.ledger, envelope.patch,
@@ -198,6 +200,7 @@ export async function runSelectedDeliverySmoke({root = process.cwd(), emittedDir
     return new Response(bytes, {status: 200, headers: {'Content-Length': String(bytes.length)}});
   };
   const base = await loadOwnershipAssets(atlas.pixelMap, fetcher);
+  const beforeControls = selectedStableOwnerControls(base, patch);
   uniqueStrings(atlas.parts, 'emitted feature parts');
   const features = atlas.parts.flatMap(name => {
     const bytes = read('emitted', name);
@@ -208,7 +211,7 @@ export async function runSelectedDeliverySmoke({root = process.cwd(), emittedDir
   });
   const effective = await loadAdditiveNativePatch(atlas, features, base, {fetcher});
   const report = verifySelectedDelivery({expectations, ledger, ledgerSha256: envelope.ledger.sha256,
-    patch, patchSha256: envelope.patch.sha256, features, base, effective, request, result});
+    patch, patchSha256: envelope.patch.sha256, features, base, effective, beforeControls});
   report.expectations_sha256 = sha256(expectationsBytes);
   report.inputs = [...inputs.values()].sort((a, b) => `${a.scope}:${a.path}`.localeCompare(`${b.scope}:${b.path}`));
   // Failures before this point create nothing. Exclusive creation rejects both

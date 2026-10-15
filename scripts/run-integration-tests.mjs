@@ -78,7 +78,7 @@ export function fullRegressionShard(inventory, shard) {
 
 // The runner owns this roster; routing controls derive their focused membership.
 export const FOCUSED_INTEGRATION_TESTS = Object.freeze(['handoff-scope','issue-claims','worker-result','regional-research-gate','geography-worker-lane',
-  'evidence-quality','premerge-evidence','trusted-workflow-checkouts','merge-integration','merge-integration-entrypoint','integration-proof',
+  'evidence-quality','premerge-evidence','geographic-adjudication-api','trusted-workflow-checkouts','merge-integration','merge-integration-entrypoint','integration-proof',
   // Actual delivery entry/advance consumers, including scientific dispatch guards.
   'delivery-evidence-derivation','delivery-finalize-config','delivery-handoff-advance','delivery-handoff','delivery-registry-delta','local-workspace','native-authority-entry','native-diagnostic-entry','native-witness-authority','physical-source-retention','source-cohort','source-completed-staging','source-evidence-derivation','source-member-native-delivery','source-target-native-delivery'].map(name => `test/${name}.test.mjs`));
 
@@ -195,22 +195,8 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   const git=measuredGitSetup();
   const nativeInputs=await observeSetupPhase('immutable-regression-inputs',()=>prepareNativeRegressionInputs(testSelection === 'complete' ? profile : 'evidence',{files,run:git.run}),{counters:git.snapshot});
   console.log(JSON.stringify({native_inputs:nativeInputs}));
-  // Only full checkout readers consume canonical products. The focused evidence
-  // profile deliberately has no canonical namespace in its sparse checkout.
-  if (profile === 'full' && !retained) {
-    const canonicalCheckout=await observeSetupPhase('canonical-checkout',async()=>{
-      const {prepareCanonicalCheckout}=await import('./canonical-restoration.mjs');
-      return prepareCanonicalCheckout();
-    });
-    console.log(JSON.stringify({canonical_checkout:canonicalCheckout}));
-    if ([0,1,2].includes(shard)) {
-      const selectedCheckout=await observeSetupPhase('canonical-checkout',async()=>{
-        const {prepareModelReaderCheckout}=await import('../coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/prepare-model-reader-checkout.mjs');
-        return prepareModelReaderCheckout({root:process.cwd(),profile,shard});
-      });
-      console.log(JSON.stringify({selected_model_reader_checkout:selectedCheckout}));
-    }
-  }
+  // Current prepared products are committed inputs. Historical restoration is
+  // explicit reproduction, never a mutation of ordinary regression inputs.
   prepareIntegrationTests(files);
   console.log(JSON.stringify({profile, test_selection: testSelection, shard, files}));
   process.exitCode = await streamTestProcess(['--test','--test-reporter=tap','--test-concurrency=2', ...files], {

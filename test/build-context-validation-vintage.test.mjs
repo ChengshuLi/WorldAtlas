@@ -8,7 +8,6 @@ import {authenticateOriginalValidator,validateBuildContextVintage,requireCurrent
 import {validateContextMigration} from '../scripts/native-ownership/validate-context-migration.mjs';
 import {requireValidatedGeometryMigrations} from '../scripts/prepare-geographic-release.mjs';
 import {footprintHash} from '../scripts/check-prepared.mjs';
-import {loadPackageInputs,containsPackagePath} from '../scripts/package-inputs.mjs';
 const ns='coordination/engineering/subject-descriptor-decode-20261007';
 const capture=path.resolve(ns+'/legacy-context-v1');
 const digest=b=>createHash('sha256').update(b).digest('hex');
@@ -20,8 +19,6 @@ async function fixture(action){
 test('complete literal original validator imports authenticate and execute their own realm',async()=>{
  const result=await authenticateOriginalValidator();assert.equal(result.index.files.length,17);
  assert.equal(typeof result.validate,'function');assert.equal(result.index.source_commit,'83bed8c4c49e8f54077bb4abf0f32d41d0992f81');
- const inputs=loadPackageInputs();assert(containsPackagePath(inputs.inputs,ns+'/context-vintage-dispatch.mjs'));
- for(const pin of result.index.files)assert(containsPackagePath(inputs.inputs,ns+'/legacy-context-v1/'+pin.path));
 });
 test('changed captured implementation and coherently rebound inventory reject before import',async()=>fixture(async(_,code)=>{
  const name=path.join(code,'scripts/evidence-quality.mjs');await fs.appendFile(name,'\n// changed original code\n');

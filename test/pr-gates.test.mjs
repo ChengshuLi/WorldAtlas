@@ -211,13 +211,15 @@ test('new retained-prefix additions do not exempt package inputs, module configu
     assert.equal(integrationProfile(f.pr.head.ref, [{filename: f.owned + 'custody/' + name, status: 'added'}], reservation), 'full', name);
   for (const mode of ['120000', '160000', '040000'])
     assert.equal(integrationProfile(f.pr.head.ref, [{filename: f.owned + 'new.py', status: 'added', mode}], reservation), 'full');
-  const active = 'coordination/engineering/additive-native-activation-20261009/';
-  const claimed = {...reservation, owned_paths: [active]};
-  assert.equal(integrationProfile(f.pr.head.ref, [{filename: active + 'new-input.json', status: 'added'}], claimed), 'full',
-    'Existing package directory grants remain active input authority');
-  const selected = 'coordination/engineering/selected-geography-effective-prevention-20261009/';
-  assert.equal(integrationProfile(f.pr.head.ref, [{filename: selected + 'selected-neighbor-prevention.mjs', status: 'added'}],
-    {...reservation, owned_paths: [selected]}), 'full', 'Declared exact dependency cannot use a claimed-added status to waive full tests');
+  const actualInputs=loadPackageInputs().inputs.filter(name=>name.startsWith('coordination/engineering/'));
+  assert(actualInputs.length>0,'Current declared coordination inputs must actually be checked');
+  for(const input of actualInputs){
+    const filename=input.endsWith('/')?input+'new-input.json':input;
+    const prefix=filename.slice(0,filename.lastIndexOf('/')+1);
+    assert.equal(integrationProfile(f.pr.head.ref,[{filename,status:'added'}],
+      {...reservation,owned_paths:[prefix]}),'full','Actual declared input cannot use claimed-added status: '+input);
+  }
+
 });
 
 test('retained engineering scope changes during actual composed inspection still refuse', async () => {
