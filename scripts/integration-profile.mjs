@@ -20,7 +20,13 @@ export const COORDINATION_PATHS = new Set([
 ]);
 // Only the actual focused runner inventory is eligible for this test-only route.
 // A provider filename/status alone cannot establish an ordinary candidate file.
+export const SOURCE_DATABASE_TEST_PATHS = Object.freeze([
+  'test/postgres-runtime-role.test.mjs',
+  'test/temporal-geography.test.mjs',
+  'test/typed-integration.test.mjs',
+]);
 const FOCUSED_TEST_PATHS = new Set([
+  ...SOURCE_DATABASE_TEST_PATHS,
   'test/handoff-scope.test.mjs',
   'test/issue-claims.test.mjs',
   'test/worker-result.test.mjs',
@@ -50,6 +56,22 @@ const FOCUSED_TEST_PATHS = new Set([
   'test/source-publication-admission.test.mjs',
   'test/source-target-native-delivery.test.mjs',
 ]);
+export function isFocusedIntegrationTest(name) { return FOCUSED_TEST_PATHS.has(name); }
+export function focusedTestOnlyFiles(branch, files, authoredEntries) {
+  return branch.startsWith('engineering/') && files.length > 0 && authoredEntries instanceof Map &&
+    new Set(files.map(file => file.filename)).size === files.length &&
+    files.every(file => FOCUSED_TEST_PATHS.has(file.filename) && file.status === 'modified' &&
+      file.previous_filename === undefined && authoredEntries.get(file.filename)?.type === 'blob' &&
+      authoredEntries.get(file.filename)?.mode === '100644' &&
+      /^[a-f0-9]{40}$/.test(authoredEntries.get(file.filename)?.sha ?? ''))
+    ? files.map(file => file.filename).sort() : null;
+}
+// A source database test-only change runs its actual changed consumers. Other
+// evidence work keeps the existing focused inventory and pays no database cost.
+export function sourceDatabaseFocusedTests(branch, files, authoredEntries) {
+  return files.some(file => SOURCE_DATABASE_TEST_PATHS.includes(file.filename))
+    ? focusedTestOnlyFiles(branch, files, authoredEntries) : null;
+}
 // Callers supply the current linked issue's validated lane and declared scope.
 // Candidate metadata is never an ownership source.
 function engineeringOwnedScopes(reservation) {
@@ -67,11 +89,7 @@ export function integrationProfile(branch, files, reservation = {}, authoredEntr
   if (names.some(name => FOCUSED_TEST_PATHS.has(name))) {
     // Intercept before generic coordination/doc/owned-packet rules: no fallback
     // may turn a missing, renamed, deleted or mixed production change into this lane.
-    return branch.startsWith('engineering/') && authoredEntries instanceof Map &&
-      files.every(file => FOCUSED_TEST_PATHS.has(file.filename) && file.status === 'modified' &&
-        file.previous_filename === undefined && authoredEntries.get(file.filename)?.type === 'blob' &&
-        authoredEntries.get(file.filename)?.mode === '100644' &&
-        /^[a-f0-9]{40}$/.test(authoredEntries.get(file.filename)?.sha ?? '')) ? 'evidence' : 'full';
+    return focusedTestOnlyFiles(branch, files, authoredEntries) ? 'evidence' : 'full';
   }
 
   if (branch.startsWith('geography/') && Array.isArray(reservation.owned_paths) &&

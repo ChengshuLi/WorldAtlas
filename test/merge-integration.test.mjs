@@ -880,3 +880,23 @@ test('workflow candidate geography is selected by trusted profile output without
   assert.doesNotMatch(job, /secrets\.|contents: write|issues: write|pull-requests: write|id-token:/);
  }
 });
+
+
+test('trusted preparation emits the complete exact source-database roster for the existing worker output', async () => {
+  const f = fixture(), original = f.api;
+  const files = ['test/typed-integration.test.mjs','test/postgres-runtime-role.test.mjs','test/temporal-geography.test.mjs']
+    .map(filename => ({filename,status:'modified'}));
+  f.pr.changed_files = files.length;
+  f.authored = files.map(file => ({path:file.filename,type:'blob',mode:'100644',sha:sha('d')}));
+  f.integrated = structuredClone(f.authored);
+  f.api = async (route,...args) => route.includes('/pulls/2/files') ? files : original(route,...args);
+  const prepared = await prepareIntegration(f.options());
+  assert.equal(prepared.profile, 'evidence');
+  assert.equal(prepared.geography_software, false);
+  assert.deepEqual(prepared.focused_test_files, files.map(file => file.filename).sort());
+  assert.deepEqual(integrationTestFiles(prepared.profile,0,'complete',prepared.focused_test_files), prepared.focused_test_files);
+  const normal = await prepareIntegration(fixture().options());
+  assert.equal(normal.focused_test_files, null);
+  const wrapper = fs.readFileSync(new URL('../scripts/run-worker-merge.mjs',import.meta.url),'utf8');
+  assert(wrapper.includes('focused_test_files=${JSON.stringify(state.focused_test_files ?? null)}'));
+});

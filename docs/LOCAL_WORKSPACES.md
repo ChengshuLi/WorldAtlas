@@ -49,6 +49,14 @@ as literal `data/`, `research/` or `coordination/` paths. Include new owned pack
 paths too. Scope is a storage choice, not permission to omit required evidence or
 weaken a check. Resolve pinned baseline bytes with Git when a reproducer supports
 that; otherwise include their exact paths. Verify required inputs are present.
+The focused CI route also admits ordinary modified test-only changes to
+`postgres-runtime-role`, `temporal-geography` and `typed-integration`. Those
+consumers run their exact changed test roster against committed SQL, catalogs
+and ephemeral databases, without building or downloading application output.
+Other evidence work keeps its existing focused inventory. Model tests still need
+real canonical/model-reader source preparation and retain full validation, as do
+mixed production, runner/helper, unknown, added, deleted or renamed changes.
+
 Use `--profile full` only when the actual build/test needs it, with an adequate
 `--reserve-gib` estimate. There is no allocation-time limit bypass.
 

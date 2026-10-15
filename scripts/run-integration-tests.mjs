@@ -3,6 +3,7 @@ import {createHash} from 'node:crypto';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {spawn, spawnSync} from 'node:child_process';
+import {isFocusedIntegrationTest, SOURCE_DATABASE_TEST_PATHS} from './integration-profile.mjs';
 import {compileHostedMigrations} from './compile-hosted-migrations.mjs';
 import {observeSetupPhase,measuredGitSetup} from './ci-setup-observations.mjs';
 
@@ -76,11 +77,19 @@ export function fullRegressionShard(inventory, shard) {
     (name === COMPONENT_CONTROL_TEST ? 1 : index % 3) === shard)];
 }
 
-export function integrationTestFiles(profile, shard, testSelection = 'complete') {
+export function integrationTestFiles(profile, shard, testSelection = 'complete', focusedFiles = null) {
   if (!['complete','selected-output'].includes(testSelection) ||
       (testSelection !== 'complete' && (profile !== 'full' || shard !== 0))) throw Error('Invalid trusted test selection');
   if (!['full','evidence'].includes(profile) || !Number.isInteger(shard) || shard < 0 || shard > 2 ||
       (profile === 'evidence' && shard !== 0)) throw Error('Invalid trusted integration test profile');
+  if (focusedFiles !== null) {
+    if (profile !== 'evidence' || shard !== 0 || testSelection !== 'complete' || !Array.isArray(focusedFiles) ||
+        !focusedFiles.length || new Set(focusedFiles).size !== focusedFiles.length ||
+        !focusedFiles.some(name => SOURCE_DATABASE_TEST_PATHS.includes(name)) ||
+        focusedFiles.some(name => !isFocusedIntegrationTest(name) || !fs.existsSync(name)))
+      throw Error('Invalid trusted focused test files');
+    return [...focusedFiles];
+  }
   const focused = ['handoff-scope','issue-claims','worker-result','regional-research-gate','geography-worker-lane',
     'evidence-quality','premerge-evidence','trusted-workflow-checkouts','merge-integration','merge-integration-entrypoint','integration-proof',
     // Actual delivery entry/advance consumers, including scientific dispatch guards.
@@ -91,8 +100,8 @@ export function integrationTestFiles(profile, shard, testSelection = 'complete')
   if (!files.length || files.some(name => !fs.existsSync(name))) throw Error('Missing integration test inventory');
   return files;
 }
-export function integrationNeedsBrowser(profile, shard, testSelection = 'complete') {
-  return integrationTestFiles(profile, shard, testSelection).some(name => /['"](?:@playwright\/test|playwright)['"]/.test(fs.readFileSync(name, 'utf8')));
+export function integrationNeedsBrowser(profile, shard, testSelection = 'complete', focusedFiles = null) {
+  return integrationTestFiles(profile, shard, testSelection, focusedFiles).some(name => /['"](?:@playwright\/test|playwright)['"]/.test(fs.readFileSync(name, 'utf8')));
 }
 export function prepareIntegrationTests(files) {
   if (files.some(name=>PACKAGED_ASSET_TESTS.includes(name)) && !fs.existsSync('dist/client/atlas-geography.json')) {
@@ -187,7 +196,12 @@ export function requireCurrentPackageAssembly({directory=process.cwd(),expected=
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const profile = process.env.INTEGRATION_PROFILE, shard = Number(process.env.INTEGRATION_SHARD);
   const testSelection = process.env.INTEGRATION_TEST_SELECTION || 'complete';
-  const files = integrationTestFiles(profile, shard, testSelection);
+  const focusedMetadata = process.env.INTEGRATION_FOCUSED_TEST_FILES;
+  if (process.env.GITHUB_ACTIONS === 'true' && profile === 'evidence' &&
+      (typeof focusedMetadata !== 'string' || !focusedMetadata.trim()))
+    throw Error('Trusted focused test metadata is missing');
+  const focusedFiles = JSON.parse(focusedMetadata || 'null');
+  const files = integrationTestFiles(profile, shard, testSelection, focusedFiles);
   const retained=testSelection==='selected-output'?requireCurrentPackageAssembly():null;
   if(retained)console.log(JSON.stringify({package_assembly:retained}));
   const git=measuredGitSetup();

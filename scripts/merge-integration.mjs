@@ -1,5 +1,5 @@
 import {collectGeographicApproval, bindingHash} from './geographic-adjudication-api.mjs';
-import {integrationProfile, selectedDataCandidate, selectedDataSelection, candidateGeographyCode} from './integration-profile.mjs';
+import {integrationProfile, selectedDataCandidate, selectedDataSelection, candidateGeographyCode, sourceDatabaseFocusedTests} from './integration-profile.mjs';
 import {githubPages, verifyIssueScope, workSpec} from './issue-claim-contract.mjs';
 import {validateIssuePRBody, validateLanePaths} from './check-handoff-scope.mjs';
 import {checkPremergeEvidence} from './premerge-evidence.mjs';
@@ -244,7 +244,8 @@ export async function prepareIntegration(options) {
       } catch { /* Unknown applicability retains the complete suite. */ }
     }
     const software = candidateGeographyCode(profile, state.files, selection?.test_selection);
-    return {...state, candidate, profile, ...selection, geography_software: software,
+    const focusedFiles = sourceDatabaseFocusedTests(state.pr.head.ref, state.files, authored.entries);
+    return {...state, candidate, profile, ...selection, focused_test_files: focusedFiles, geography_software: software,
       candidate_ref: fresh.reference};
   } catch (error) {
     if (fresh.reference) {

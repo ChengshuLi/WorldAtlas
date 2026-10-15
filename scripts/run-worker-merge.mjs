@@ -70,7 +70,7 @@ try {
       tested_base: state.base, tested_candidate: state.candidate, reviewed_head: input.expected_head, profile: state.profile, geography_software: state.geography_software, test_selection: state.test_selection ?? 'complete', expectations_path: state.expectations_path,
       candidate_ref: state.candidate_ref};
     // Only validated commit IDs and owned ref identifiers become job outputs.
-    fs.appendFileSync(process.env.GITHUB_OUTPUT, `geography_software=${state.geography_software === true}\ncandidate_ref=${state.candidate_ref ?? ''}\ncandidate=${state.candidate ?? ''}\nbase=${state.base ?? ''}\nprofile=${state.profile ?? 'evidence'}\nshards=${JSON.stringify(state.shards ?? (state.profile === 'full' ? [0,1,2] : [0]))}\ntest_selection=${state.test_selection ?? 'complete'}\nexpectations_path=${state.expectations_path ?? ''}\n`);
+    fs.appendFileSync(process.env.GITHUB_OUTPUT, `geography_software=${state.geography_software === true}\ncandidate_ref=${state.candidate_ref ?? ''}\ncandidate=${state.candidate ?? ''}\nbase=${state.base ?? ''}\nprofile=${state.profile ?? 'evidence'}\nshards=${JSON.stringify(state.shards ?? (state.profile === 'full' ? [0,1,2] : [0]))}\ntest_selection=${state.test_selection ?? 'complete'}\nfocused_test_files=${JSON.stringify(state.focused_test_files ?? null)}\nexpectations_path=${state.expectations_path ?? ''}\n`);
   } else {
     const completed = await completeIntegration({...options, integrationResult: process.env.INTEGRATION_RESULT,
       geographyResult: process.env.GEOGRAPHY_RESULT,

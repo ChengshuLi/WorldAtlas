@@ -44,6 +44,7 @@ jobs:
       geography_software: ${{ steps.prepare.outputs.geography_software }}
       shards: ${{ steps.prepare.outputs.shards }}
       test_selection: ${{ steps.prepare.outputs.test_selection }}
+      focused_test_files: ${{ steps.prepare.outputs.focused_test_files }}
       expectations_path: ${{ steps.prepare.outputs.expectations_path }}
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
@@ -300,6 +301,10 @@ jobs:
             docs/LOCAL_WORKSPACES.md
             coordination/engineering/selected-checkpoint-reuse-20261012/accepted-checkpoints.json
             data/research-geography-gate.json
+            postgres
+            data/hosted-type-catalog.json
+            data/typed-entity-types-v1.json
+            data/observation-registry-history
             package.json
             package-lock.json
             requirements.txt
@@ -386,9 +391,10 @@ jobs:
           INTEGRATION_PROFILE: ${{ needs.prepare.outputs.profile }}
           INTEGRATION_SHARD: ${{ matrix.shard }}
           INTEGRATION_TEST_SELECTION: ${{ steps.assembly.outputs.assembled == 'true' && 'selected-output' || needs.prepare.outputs.test_selection }}
+          INTEGRATION_FOCUSED_TEST_FILES: ${{ needs.prepare.outputs.focused_test_files }}
           SELECTED_EXPECTATIONS_PATH: ${{ needs.prepare.outputs.expectations_path }}
         run: |
-          if node --input-type=module -e "import {integrationNeedsBrowser} from './scripts/run-integration-tests.mjs'; process.exit(integrationNeedsBrowser(process.env.INTEGRATION_PROFILE, Number(process.env.INTEGRATION_SHARD), process.env.INTEGRATION_TEST_SELECTION || 'complete') ? 0 : 1)"; then
+          if node --input-type=module -e "import {integrationNeedsBrowser} from './scripts/run-integration-tests.mjs'; process.exit(integrationNeedsBrowser(process.env.INTEGRATION_PROFILE, Number(process.env.INTEGRATION_SHARD), process.env.INTEGRATION_TEST_SELECTION || 'complete', JSON.parse(process.env.INTEGRATION_FOCUSED_TEST_FILES || 'null')) ? 0 : 1)"; then
             npx playwright install --with-deps chromium
           fi
       - name: Read back qualified native build outputs when selected
@@ -420,6 +426,7 @@ jobs:
           INTEGRATION_SHARD: ${{ matrix.shard }}
           INTEGRATION_TEST_SELECTION: ${{ steps.assembly.outputs.assembled == 'true' && 'selected-output' || needs.prepare.outputs.test_selection }}
           SELECTED_PACKAGE_ASSEMBLY_SHA256: ${{ steps.assembly.outputs.assembly_sha256 }}
+          INTEGRATION_FOCUSED_TEST_FILES: ${{ needs.prepare.outputs.focused_test_files }}
           SELECTED_EXPECTATIONS_PATH: ${{ needs.prepare.outputs.expectations_path }}
         run: |
           if test "$INTEGRATION_TEST_SELECTION" = selected-data || test "$INTEGRATION_TEST_SELECTION" = selected-output; then

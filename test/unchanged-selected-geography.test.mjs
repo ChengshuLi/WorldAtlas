@@ -16,6 +16,7 @@ const canonical = value => Array.isArray(value) ? value.map(canonical) : value &
 const HANDOFFS = 'coordination/engineering/melanesia363-additive-delivery-20261010/accepted-administrative-handoffs.json';
 const RECEIVING = 'coordination/engineering/receiving-metadata-fixture/';
 const METADATA = [RECEIVING + 'README.md', RECEIVING + 'evidence-quality.json'];
+const TESTS = ['test/model.test.mjs', 'test/ordinary-unknown.test.mjs'];
 const body = value => Buffer.isBuffer(value) ? value : Buffer.from(typeof value === 'string' ? value : JSON.stringify(value));
 const sha = value => createHash('sha256').update(body(value)).digest('hex');
 
@@ -147,6 +148,7 @@ function fixture({missingOrigin = false, splitBaseline = false, rebind = true, m
   }
   put(METADATA[0], 'Receiving packet description.\n');
   put(METADATA[1], {version: 1, description: 'Receiving packet metadata.'});
+  for (const name of TESTS) put(name, '// Existing ordinary test.');
   const baseline = commit(files, assets), candidateFiles = {...files, 'research/geography/new-packet/source.json': body('unactivated source publication')};
   const candidate = commit(candidateFiles, baseline);
   const inspect = (head = candidate, base = baseline, options = {}) => inspectUnchangedSelectedGeography({repo: directory, baseline: base, candidate: head, ...options});
@@ -676,4 +678,130 @@ test('production collector rejects a moving-main policy label different from its
     assert.equal(rejected.status, 'full-check-required');
     assert.equal(rejected.reason, 'executing-checkout-mismatch');
   } finally { f.close(); }
+});
+
+
+test('ordinary test-only applicability keeps the complete consumed-input proof and production CLI binding', async () => {
+  const f = fixture({checkpoint:true}); try {
+    for (const names of [[TESTS[0]], [TESTS[1]], [...TESTS].reverse()]) {
+      const files = {...f.files, ...Object.fromEntries(names.map(name => [name, body('// Changed test only.')]))};
+      const candidate = f.commit(files, f.baseline);
+      const result = await f.inspect(candidate);
+      assert.equal(result.status,'unchanged-selected-inputs',result.reason);
+      assert.equal(result.candidate_code_executed,false); assert.equal(result.science_reexecuted,false);
+      assert(result.immutable_descriptors.some(pin => pin.path === P + 'issued-plan.json'));
+      assert(result.current_and_absent_alternatives.some(pin => pin.path === P + 'checkpoint-absent' && pin.absent));
+      assert(result.metadata_bodies_read > 0);
+      assert.equal((await f.inspect(candidate,f.baseline,{limits:{member:32*1024*1024,metadata:1,entries:4096}})).status,'full-check-required');
+      f.git(['update-ref','HEAD',f.baseline]);
+      const output = execFileSync(process.execPath,[path.join(ROOT,'scripts/check-unchanged-selected-geography.mjs'),f.directory,f.baseline,candidate]);
+      assert.equal(JSON.parse(output).status,'unchanged-selected-inputs');
+    }
+  } finally { f.close(); }
+});
+
+test('test-only applicability refuses added, deleted, renamed, nonordinary, helper, mixed and divergent changes', async () => {
+  const f = fixture(); try {
+    const target=TESTS[0], changed={...f.files,[target]:body('// Changed test.')};
+    const decline = async (files,base=f.baseline,modes={}) => {
+      const candidate=f.commit(files,base,modes),result=await f.inspect(candidate,base);
+      assert.equal(result.status,'full-check-required',JSON.stringify({files:Object.keys(files),reason:result.reason}));
+    };
+    const deleted={...f.files};delete deleted[target];
+    await decline({...f.files,'test/new.test.mjs':body('// Added test.')});
+    await decline(deleted);await decline({...deleted,'test/renamed.test.mjs':body('// Existing ordinary test.')});
+    for (const mode of ['100755','120000']) {
+      await decline(changed,f.baseline,{[target]:mode});
+      const baseline=f.commit(f.files,f.baseline,{[target]:mode});await decline(changed,baseline);
+    }
+    for (const name of ['test/helper.py','test/fixtures/helper.mjs','scripts/other.mjs','data/changed.json',
+      'research/geography/mixed-packet/source.json']) await decline({...changed,[name]:body('mixed change')});
+    const candidate=f.commit(changed,f.baseline),baseline=f.commit({...f.files,'unrelated-main.txt':body('advanced')},f.baseline);
+    assert.equal((await f.inspect(candidate,baseline)).status,'full-check-required');
+  } finally { f.close(); }
+});
+
+test('a test filename cannot exempt selected current, historical or fallback scientific routes', async () => {
+  const f=fixture();try {
+    const [target,other]=TESTS;
+    for (const route of ['source-map','native-manifest','historical-source','fallback-source','historical-receipt','fallback-receipt']) {
+      const files={...f.files},selection=JSON.parse(files['data/ownership-selection.json']);
+      if(route==='source-map') {
+        files[target]=files[selection.selected_geography.path];
+        selection.selected_geography={...selection.selected_geography,path:target};
+      } else if(route==='native-manifest') {
+        files[target]=files[selection.manifest_path];selection.manifest_path=target;
+      } else {
+        files[target]=body('opaque consumed historical leaf');
+        const original=f.commit(files,f.baseline),commit=route.startsWith('fallback-')?'d'.repeat(40):original;
+        if(route.endsWith('-source')) {
+          const name=selection.selected_geography.path,bank=JSON.parse(files[name]);
+          bank.unchanged_files.push({commit,path:target,mode:'100644',git_blob_oid:f.git(['hash-object','--stdin'],files[target]),
+            bytes:files[target].length,sha256:sha(files[target])});
+          files[name]=body(bank);selection.selected_geography={...selection.selected_geography,bytes:files[name].length,sha256:sha(files[name])};
+        } else {
+          const name='scripts/native-ownership/verified-candidates.json',verified=JSON.parse(files[name]);
+          verified.candidates[selection.sha256]={...verified.candidates[selection.sha256],commit,path:target};files[name]=body(verified);
+        }
+      }
+      files['data/ownership-selection.json']=body(selection);
+      const baseline=f.commit(files,f.baseline),control=f.commit({...files,[other]:body('// Inert test control.')},baseline);
+      const accepted=await f.inspect(control,baseline);
+      assert.equal(accepted.status,'unchanged-selected-inputs',route+': '+accepted.reason);
+      assert(accepted.current_and_absent_alternatives.some(pin=>pin.path===target&&!pin.absent));
+      const candidate=f.commit({...files,[target]:body('changed consumed route')},baseline),result=await f.inspect(candidate,baseline);
+      assert.equal(result.status,'full-check-required',route);assert.equal(result.reason,'changed-current-input:'+target,route);
+    }
+  } finally {f.close();}
+});
+
+test('test-only applicability cannot hide a current artifact application or consumer-code role', async () => {
+  const f=fixture();try {
+    const other=TESTS[1];
+    for(const target of [TESTS[0], METADATA[0], P+'current-artifact-role.json'])
+    for(const role of ['application-input','critical-file','entry-critical-file','entry-wrapper']) {
+      const files={...f.files,[target]:body('existing consumed role')},selection=JSON.parse(files['data/ownership-selection.json']);
+      const pin=name=>({path:name,mode:'100644',bytes:files[name].length,sha256:sha(files[name])});
+      const codePath=P+'application-code.json',qualification=P+'qualification.json',review=P+'review.json',certificatePath=P+'artifact-certificate.json';
+      files[qualification]=body({version:1});files[review]=body({reviewed:true});
+      const input=pin(target),code={version:1,kind:'qualified-artifact-application-code-closure-v1',critical_files:[],entry_critical_files:{},entry_roles:{}};
+      if(role==='critical-file')code.critical_files=[input];
+      if(role==='entry-critical-file')code.entry_critical_files={'scripts/run-integration-tests.mjs':[input]};
+      if(role==='entry-wrapper')code.entry_roles={'scripts/run-integration-tests.mjs':{wrappers:[target]}};
+      files[codePath]=body(code);
+      files[certificatePath]=body({version:1,kind:'qualified-arctic-immutable-product-certificate-v1',
+        application_consumer_code:pin(codePath),qualification_inventory:pin(qualification),application_inputs:role==='application-input'?[{...input,space:'root'}]:[]});
+      selection.artifact_consumption={certificate:pin(certificatePath),review:pin(review)};files['data/ownership-selection.json']=body(selection);
+      const baseline=f.commit(files,f.baseline),control=f.commit({...files,[other]:body('// Unrelated test control.')},baseline);
+      assert.equal((await f.inspect(control,baseline)).status,'unchanged-selected-inputs',role+' control must be admissible');
+      const candidate=f.commit({...files,[target]:body('// Changed current artifact role.')},baseline);
+      const options=target===METADATA[0]?{metadataPaths:[target]}:{};
+      const result=await f.inspect(candidate,baseline,options);
+      assert.equal(result.status,'full-check-required',role+' must remain an actual consumed input');
+      assert.equal(result.reason,'changed-current-input:'+target);
+      if(target===P+'current-artifact-role.json') {
+        const sourceOnly=f.commit({...files,[P+'unrelated-source.json']:body('source publication')},baseline);
+        const advanced=f.commit({...files,[target]:body('baseline-only current role drift')},baseline);
+        assert.equal((await f.inspect(sourceOnly,advanced)).reason,'changed-current-input:'+target,
+          role+' baseline-only drift cannot escape current-root equality');
+      }
+      if(target===TESTS[0] && role==='application-input') {
+        for(const space of ['prior','image']) {
+          const historicalCertificate=JSON.parse(files[certificatePath]);historicalCertificate.application_inputs[0].space=space;
+          const historical={...files,[certificatePath]:body(historicalCertificate)},historicalSelection=JSON.parse(historical['data/ownership-selection.json']);
+          historicalSelection.artifact_consumption.certificate={path:certificatePath,mode:'100644',bytes:historical[certificatePath].length,sha256:sha(historical[certificatePath])};
+          historical['data/ownership-selection.json']=body(historicalSelection);
+          const historicalBase=f.commit(historical,baseline),historicalHead=f.commit({...historical,[target]:body('// Unrelated current-root change.')},historicalBase);
+          assert.equal((await f.inspect(historicalHead,historicalBase)).status,'unchanged-selected-inputs',
+            space+' restored historical role is not a current-root role');
+        }
+        const certificate=JSON.parse(files[certificatePath]);certificate.application_inputs[0].space='unknown';
+        const invalid={...files,[certificatePath]:body(certificate)},badSelection=JSON.parse(invalid['data/ownership-selection.json']);
+        badSelection.artifact_consumption.certificate={path:certificatePath,mode:'100644',bytes:invalid[certificatePath].length,sha256:sha(invalid[certificatePath])};
+        invalid['data/ownership-selection.json']=body(badSelection);
+        const badBase=f.commit(invalid,baseline),badHead=f.commit({...invalid,[other]:body('// Test change.')},badBase);
+        assert.equal((await f.inspect(badHead,badBase)).status,'full-check-required','Unknown artifact role spaces cannot be omitted');
+      }
+    }
+  }finally{f.close();}
 });

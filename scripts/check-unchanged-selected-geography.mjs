@@ -321,6 +321,8 @@ async function collect(reader, {baseline, candidate, trusted, metadataPaths}) {
   const mergeBase = reader.mergeBase().toString().trim();
   demand(oid(mergeBase), 'source-scope-merge-base-unavailable');
   const changed = reader.git('diff-tree', '--no-commit-id', '--name-only', '-r', '-z', '--no-renames', mergeBase, candidate).toString().split('\0').filter(Boolean);
+  const testOnly = metadataPaths === undefined && mergeBase === baseline && changed.length > 0 && changed.length <= 512 &&
+    changed.every(name => /^test\/[A-Za-z0-9_.-]+\.test\.mjs$/.test(name));
   if (metadataPaths !== undefined) {
     // The trusted PR caller separately binds the issue-owned receiving packet,
     // complete tree delta and original successful report. This option only
@@ -334,6 +336,14 @@ async function collect(reader, {baseline, candidate, trusted, metadataPaths}) {
     for (const name of changed) {
       const before = reader.descriptor(baseline, name), after = reader.descriptor(candidate, name);
       demand(before.mode === '100644' && after.mode === '100644', 'nonordinary-receiving-metadata');
+    }
+  } else if (testOnly) {
+    // Test edits widen only scope admission. Every consumed method/input and
+    // present/absent alternative below must still match the exact baseline.
+    // Add/delete/rename and executable/link changes retain the full checker.
+    for (const name of changed) {
+      const before = reader.descriptor(baseline, name), after = reader.descriptor(candidate, name);
+      demand(before.mode === '100644' && after.mode === '100644', 'nonordinary-test-only-input');
     }
   } else {
     demand(changed.length > 0 && changed.length <= 512 && changed.every(name => safe(name)
@@ -420,6 +430,21 @@ async function collect(reader, {baseline, candidate, trusted, metadataPaths}) {
     const certificate = await reader.jsonAt(reader.currentPin(hook.certificate), hook.certificate);
     demand(certificate.version === 1 && certificate.kind === 'qualified-arctic-immutable-product-certificate-v1', 'unsupported-artifact-certificate');
     for (const p of [certificate.application_consumer_code, certificate.qualification_inventory]) reader.currentPin(p);
+    {
+      // An unchanged role manifest does not bind each current root input.
+      // Historical prior/image roles retain their existing immutable custody.
+      const code = await reader.jsonAt(reader.currentPin(certificate.application_consumer_code), certificate.application_consumer_code);
+      demand(code.version === 1 && code.kind === 'qualified-artifact-application-code-closure-v1', 'unsupported-artifact-consumer-code');
+      const pins = [...array(certificate.application_inputs, 'artifact-application-inputs', 0),
+        ...array(code.critical_files, 'artifact-critical-files', 0),
+        ...Object.values(code.entry_critical_files ?? {}).flatMap(value => array(value, 'artifact-entry-critical', 0))];
+      demand(pins.every(pin => pin && ['root', 'prior', 'image'].includes(pin.space ?? 'root') && safe(pin.path)),
+        'unsupported-artifact-current-role');
+      const paths = [...pins.filter(pin => (pin.space ?? 'root') === 'root').map(pin => pin.path),
+        ...Object.values(code.entry_roles ?? {}).flatMap(roles => Object.values(roles).flatMap(value => array(value, 'artifact-entry-role', 0)))];
+      demand(paths.every(safe), 'unsupported-artifact-current-role');
+      for (const name of new Set(paths)) reader.equalCurrent(name);
+    }
     if (certificate.release_product_catalogue !== undefined) {
       reader.currentPin(certificate.release_product_catalogue);
       reader.currentPin(certificate.selected_artifact_bindings?.registry);
