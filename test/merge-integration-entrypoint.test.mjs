@@ -248,9 +248,9 @@ test('actual queue entry points omit geography only for independently rechecked 
       '/pulls/2':pr,'/issues/1':issue,'/pulls/2/files':files,
       ['/commits/'+head+'/check-runs']:{check_runs:[{id:1,name:'scope',app:{id:1},status:'completed',conclusion:'success'}]},
       ['/commits/'+head+'/status']:{statuses:[]},'/git/ref/heads/main':{object:{sha:base}},
-      ['/git/commits/'+head]:{tree:{sha:'authored'}},'/git/trees/authored':{truncated:false,tree:rows},
-      ['/git/commits/'+candidate]:{sha:candidate,tree:{sha:'integrated'},parents:[{sha:base},{sha:head}]},
-      '/git/trees/integrated':{truncated:false,tree:rows}
+      ['/git/commits/'+head]:{tree:{sha:sha('6')}},['/git/trees/'+sha('6')]:{truncated:false,tree:rows},
+      ['/git/commits/'+candidate]:{sha:candidate,tree:{sha:sha('7')},parents:[{sha:base},{sha:head}]},
+      ['/git/trees/'+sha('7')]:{truncated:false,tree:rows}
     };
     fs.mkdirSync(path.join(directory,'.github'));
     fs.copyFileSync(path.join(root,'.github/evidence-policy.json'),path.join(directory,'.github/evidence-policy.json'));

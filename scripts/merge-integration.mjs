@@ -2,7 +2,7 @@ import {collectGeographicApproval, bindingHash} from './geographic-adjudication-
 import {COORDINATION_PATHS, integrationProfile, selectedDataCandidate, selectedDataSelection, candidateGeographyCode} from './integration-profile.mjs';
 import {FOCUSED_INTEGRATION_TESTS} from './run-integration-tests.mjs';
 import {EXECUTION_CODE, REBIND_CODE} from './check-unchanged-selected-geography.mjs';
-import {loadPackageInputs, packagePathRequired} from './package-inputs.mjs';
+import {loadPackageInputs, packagePathRequired, readPackageInputs, selectedDataCheckoutPatterns} from './package-inputs.mjs';
 import {githubPages, verifyIssueScope} from './issue-claim-contract.mjs';
 import {validateIssuePRBody, validateLanePaths} from './check-handoff-scope.mjs';
 import {checkPremergeEvidence} from './premerge-evidence.mjs';
@@ -255,8 +255,13 @@ export async function prepareIntegration(options) {
       } catch { /* Unknown applicability retains the complete suite. */ }
     }
     const software = candidateGeographyCode(profile, state.files, selection?.test_selection);
+    const checkoutPatterns = selection?.test_selection === 'selected-data'
+      ? selectedDataCheckoutPatterns(await readPackageInputs({api: options.api, route: root(options.repo), base: candidate, maximumBytes: 8 * 1024 * 1024}),
+        integrated.entries, selection.expectations_path)
+      : ['/*','!/data/regional-review/','!/research/campaigns/'];
     return {...state, candidate, profile, ...selection, geography_software: software,
       geography_required: geographyRequired(state.pr.head.ref, state.files, state.reservation, authored.entries),
+      candidate_tree: integrated.object.tree.sha, checkout_patterns: checkoutPatterns,
       candidate_ref: fresh.reference};
   } catch (error) {
     if (fresh.reference) {
