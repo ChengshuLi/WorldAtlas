@@ -1,0 +1,5 @@
+The original source at b1301fa07270bcf0d91be48a6d49445c307562cf remains retained. Its descriptor sweep added mode and git_blob_oid inside native_contract.native_latitudes, making the normative contract structurally different from the accepted base manifest. This new source removes only those two keys. The independent top-level native_latitudes descriptor retains both custody fields; all bytes outside that nested object remain unchanged.
+
+The corrected source was committed at 469433d7a8c5515e9dfc59b64852e384efba93e1 before this single stock qualification. The original patch and all source, physical, query, witness, class and territorial inputs remain pinned. Actual tool exit was 0, with the standard 120-second OS alarm and time-l capture. The existing entry qualified all 3,718 cells. This does not establish current owner zero, selected conservation or acceptance.
+
+The first 4,330-cell compose attempt refused before publication because of the exact contract mismatch. It produced no composition directory. Its stderr is retained alongside the new delivery; no guard was relaxed.
