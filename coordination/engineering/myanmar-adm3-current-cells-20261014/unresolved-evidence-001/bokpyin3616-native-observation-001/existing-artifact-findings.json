@@ -1,0 +1,102 @@
+{
+  "status": "existing-artifact-diagnosis-only-no-execution",
+  "concrete_known_cause": "At least one requested contiguous owner run was not contained in a computed allowed same-owner interval. This is an actual native coverage-domain refusal after input authentication and native scans, not an observed resource rejection. The precise failed cells and predicate cause are not recorded.",
+  "refinement": "The actual executed deriveSourceTargetNativeDelta merges every adjacent same-owner accepted segment. Therefore mere segmentation of otherwise fully permitted contiguous same-owner centres does not independently explain this containment refusal. At least one centre in the offending requested run is absent from the same-owner allowed domain.",
+  "unavailable": [
+    "First failing requestedrun/y/owner; affectedcentrecount/coordinates; complete allowedRows; reasons for each excluded centre; whether source absence/ambiguity, coverage-member failure, territorial exclusion or exact boundary tie caused refusal.",
+    "A source-census SID/parent/reference flag is not the computed full original-family native membership/physical/exclusion/tie outcome; cannot infer exactcause from retainedcensus alone."
+  ],
+  "guard_order_limits": "For each run residualHits is checked before the genericallowed-span demand, then declaredland/waterclass checks. Thus offendingrun passed its residual veto, and earlier traversedruns passed thoseguards; later requests were not fully checked before abort. No global residual/class clearance follows.",
+  "observation": {
+    "exit_code": 1,
+    "execution_head": "b9b111196554d3e04cc2a8b6c6a5e737d13a063e",
+    "recorded_at": "2026-10-15T00:24:13.540192+00:00",
+    "error": "Proposed native cells lack unique source-target coverage",
+    "authority_products": false,
+    "compute_released": true
+  },
+  "actual_stdout_empty": true,
+  "requested_cells": 3616,
+  "requested_rows": 519,
+  "request_runs": 1109,
+  "source_targets": [
+    {
+      "id": "gb:MMR:ADM3:66882298B82483484204646",
+      "owner": 30350,
+      "coverage_classes": [
+        "mapped_land_support"
+      ],
+      "territorial_exclusions": 3
+    }
+  ],
+  "disposition": "Retain original3616failedproposal. Exact diagnosis needs one separatelyreviewed bounded shared native diagnostic; no binarysearch constructorcalls, physical/source/GSHHG reexecution or countrywrapper.",
+  "held": "Original4target-onlyparentmissingcells and5foreignownerconflicts remain excluded; ready3724batch unaffected.",
+  "locators": [
+    {
+      "commit": "5585b47a083e11b060b186db17a8420a0cf49c17",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/bokpyin3616-native-observation-001/admission.json",
+      "bytes": 364,
+      "sha256": "566311dfaa6a22893016852caa7dd014066d28c89f9d0952415f951c6d21ee72"
+    },
+    {
+      "commit": "5585b47a083e11b060b186db17a8420a0cf49c17",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/bokpyin3616-native-observation-001/terminal.json",
+      "bytes": 268,
+      "sha256": "dd9746d9df2827d86f473bfe73f34a6b3b1cbe77955a95df9abbc5acca617274"
+    },
+    {
+      "commit": "5585b47a083e11b060b186db17a8420a0cf49c17",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/bokpyin3616-native-observation-001/independent-failure-review.json",
+      "bytes": 4376,
+      "sha256": "4c788b9b2ea389d7d7e31d9b289b03807a03c930718c622845f4858cbb013a96"
+    },
+    {
+      "commit": "5585b47a083e11b060b186db17a8420a0cf49c17",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/bokpyin3616-native-observation-001/stderr.txt",
+      "bytes": 834,
+      "sha256": "41caf69f45c7e896b83d950be7ea3d4932814c5b29083453b1b48465a4860498"
+    },
+    {
+      "commit": "5585b47a083e11b060b186db17a8420a0cf49c17",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/bokpyin3616-native-observation-001/stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "commit": "5585b47a083e11b060b186db17a8420a0cf49c17",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/coastal-candidate-cell-preparation-001/bokpyin/native-authority-config.json",
+      "bytes": 636,
+      "sha256": "be4ca67fe62126bd3bf52772e92c75dd532199e210a9ebdd0cc1fd3eaa3ac628"
+    },
+    {
+      "commit": "b1301fa07270bcf0d91be48a6d49445c307562cf",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/coastal-candidate-cell-preparation-001/bokpyin/parent-sid-narrow/candidate-native-patch.json",
+      "bytes": 35827,
+      "sha256": "e4d91372be68cc43b382d8f712346fc4cffd694e5f95a3cff3a95644f235317a"
+    },
+    {
+      "commit": "b1301fa07270bcf0d91be48a6d49445c307562cf",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/coastal-candidate-cell-preparation-001/bokpyin/source-evidence.json",
+      "bytes": 119876,
+      "sha256": "98cba4003fba8da904a36fcbb5700978a717b81cef73600ef4b7cdde8be77297"
+    },
+    {
+      "commit": "b9b111196554d3e04cc2a8b6c6a5e737d13a063e",
+      "path": "src/native-grid.js",
+      "bytes": 34213,
+      "sha256": "81ebf5207b2f0127ed8bdacf2f50f02c01d4be80b7586b470d049def3156faee"
+    },
+    {
+      "commit": "b9b111196554d3e04cc2a8b6c6a5e737d13a063e",
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "bytes": 167971,
+      "sha256": "dc7241616985ec84e9bb02c1f986a4e720550ed2f0441cd74c76323372d19f3f"
+    },
+    {
+      "commit": "b9b111196554d3e04cc2a8b6c6a5e737d13a063e",
+      "path": "scripts/prepare-delivery-handoff.mjs",
+      "bytes": 87314,
+      "sha256": "f91c2919d09d4bcae8a0e7c07100ab699f7ea01144acc99ca181c9c8f0c3d458"
+    }
+  ]
+}
