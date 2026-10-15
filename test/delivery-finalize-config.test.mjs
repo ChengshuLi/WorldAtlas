@@ -204,3 +204,42 @@ test('delivery finalizer satisfies actual append-only selected-data classifier a
   assert.equal(await f.run(),null,'the same globally sorted input set must not pass the accepted-prefix classifier');
 });
 }
+
+test('canonical originals remain in the candidate while absent historical roles require explicit exact restoration', t => {
+  const f = fixture(t), read = () => pinReader(f.root), config = {...f.full,
+    new_prefix: PREFIX + 'compose/', sidecar_output: PREFIX + 'compose/sidecar.json'};
+  const original = read().json(config.registry).entries[0].rule_preimage;
+  const filename = path.join(f.root, original.path), raw = fs.readFileSync(filename);
+  const retained = f.run(config, '.cache/delivery-handoff/canonical');
+  assert.equal(retained.status, 0, retained.stderr);
+  const products = JSON.parse(fs.readFileSync(path.join(f.root, '.cache/delivery-handoff/canonical/preparation.json'))).outputs;
+  assert.ok(Object.keys(products).every(name => !name.includes('/')));
+  assert.deepEqual(fs.readFileSync(filename), raw);
+
+  // This snapshot intentionally lacks one required original. The candidate then
+  // restores its exact canonical path, without a second local-output copy.
+  fs.unlinkSync(filename);
+  const missing = f.commit();
+  config.package_inputs = read().pin(missing, '.github/package-inputs.json');
+  fs.writeFileSync(filename, raw, {flag: 'wx'});
+  const restored = f.commit();
+  config.restored_read_roles = {commit: restored, paths: [original.path]};
+  const result = f.run(config, '.cache/delivery-handoff/restored');
+  assert.equal(result.status, 0, result.stderr);
+  const receipt = JSON.parse(fs.readFileSync(path.join(f.root, '.cache/delivery-handoff/restored/preparation.json')));
+  assert.ok(Object.keys(receipt.outputs).every(name => !name.includes('/')));
+  assert.deepEqual(fs.readFileSync(filename), raw);
+
+  const withoutSnapshot = {...config}; delete withoutSnapshot.restored_read_roles;
+  const refused = f.run(withoutSnapshot, '.cache/delivery-handoff/missing-snapshot');
+  assert.notEqual(refused.status, 0); assert.match(refused.stderr, /accepted path identity/);
+  assert.equal(fs.existsSync(path.join(f.root, '.cache/delivery-handoff/missing-snapshot')), false);
+  assert.deepEqual(fs.readFileSync(filename), raw);
+  f.write(original.path, {retained: false});
+  const changed = f.commit(), changedRaw = fs.readFileSync(filename);
+  config.restored_read_roles = {commit: changed, paths: [original.path]};
+  const divergent = f.run(config, '.cache/delivery-handoff/changed-snapshot');
+  assert.notEqual(divergent.status, 0); assert.match(divergent.stderr, /Restored snapshot differs/);
+  assert.equal(fs.existsSync(path.join(f.root, '.cache/delivery-handoff/changed-snapshot')), false);
+  assert.deepEqual(fs.readFileSync(filename), changedRaw);
+});

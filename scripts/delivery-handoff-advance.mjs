@@ -724,7 +724,7 @@ export function deliveryAcquisitionExecute({execute = execFileSync,
 }
 
 // Exact-body acquisition reuses the existing prefetch importer and ordinary writer.
-export const {acquireDeliveryInputs, prepareDeliveryRoleStaging} = (() => {
+export const {acquireDeliveryInputs} = (() => {
 // Thin adapter for the existing exact Git object acquisition. It does not
 // decode scientific records, restore logical products or execute operators.
 const CAP=33554432;
@@ -759,73 +759,6 @@ function writeExactFile(root,relative,pin,raw){
  if(readExactFile(root,relative,pin))return false;
  const file=ordinaryPath(root,relative);fs.mkdirSync(path.dirname(file),{recursive:true});ordinaryPath(root,relative);
  fs.writeFileSync(file,raw,{flag:'wx',mode:0o644});readExactFile(root,relative,pin);return true;
-}
-
-// Preflight before the caller publishes its flat products. This stages exact
-// already-authenticated role bodies only; the caller retains its receipt-last
-// publication and resume inventory. No Git acquisition or authority is inferred.
-function prepareDeliveryRoleStaging(root, destination, entries, {limits, budget} = {}) {
- need(safe(destination) && destination.startsWith('.cache/delivery-handoff/'),
-  'Role staging requires a standard local delivery output tree');
- need(limits && Number.isSafeInteger(limits.total) && limits.total >= 0,
-  'Explicit finite role staging allowance required');
- const allowance = {member: CAP, entries: 512, ...limits};
- need(Object.keys(allowance).every(k => ['member', 'entries', 'total'].includes(k))
-  && Object.values(allowance).every(v => Number.isSafeInteger(v) && v >= 0)
-  && allowance.member <= CAP && allowance.entries <= 512, 'Bounded role staging allowance required');
- need(Array.isArray(entries) && entries.length <= allowance.entries, 'Bounded role staging entries required');
- const files = new Map(); let total = 0;
- for (const entry of entries) {
-  const pin = entry?.pin, body = entry?.body;
-  need(pin && safe(pin.path) && hex(pin.commit, 40) && pin.mode === '100644'
-   && hex(pin.git_blob_oid ?? pin.blob, 40) && hex(pin.sha256, 64)
-   && Number.isSafeInteger(pin.bytes) && pin.bytes >= 0 && pin.bytes <= allowance.member
-   && (pin.git_blob_oid === undefined || pin.blob === undefined || pin.git_blob_oid === pin.blob),
-  'Complete immutable role pin required');
-  need(Buffer.isBuffer(body) && body.length === pin.bytes && sha(body) === pin.sha256
-   && oid(body) === (pin.git_blob_oid ?? pin.blob), 'Authenticated role body differs');
-  const prior = files.get(pin.path);
-  need(!prior || prior.pin.sha256 === pin.sha256 && prior.pin.bytes === pin.bytes
-   && (prior.pin.git_blob_oid ?? prior.pin.blob) === (pin.git_blob_oid ?? pin.blob),
-  'Conflicting duplicate role destination');
-  if (!prior) {
-   total += pin.bytes;
-   need(Number.isSafeInteger(total) && total <= allowance.total, 'Complete role staging budget exceeded');
-   // Retain references only until the entire batch and shared budget admit it.
-   files.set(pin.path, {pin: {...pin}, body, relative: destination + '/' + pin.path});
-  }
- }
- for (const name of files.keys()) {
-  const parts = name.split('/');
-  for (let i = 1; i < parts.length; i++) need(!files.has(parts.slice(0, i).join('/')),
-   'Role file/directory collision');
- }
- // A destination is a directory, whereas ordinaryPath's last component is a
- // file. A sentinel path checks the entire directory chain without creating it.
- ordinaryPath(root, destination + '/.role-staging-preflight');
- for (const file of files.values()) readExactFile(root, file.relative, file.pin);
- if (budget) {
-  need(typeof budget.add === 'function' && typeof budget.snapshot === 'function', 'Existing candidate budget required');
-  budget.add({bytes: total}); budget.snapshot();
- }
- // Budget callbacks may mutate caller-owned buffers. Revalidate the complete
- // batch before allocating any retained copies, then capture synchronously.
- for (const {pin, body} of files.values()) need(body.length === pin.bytes
-  && sha(body) === pin.sha256 && oid(body) === (pin.git_blob_oid ?? pin.blob),
- 'Role body changed during admission');
- for (const file of files.values()) file.body = Buffer.from(file.body);
- // Recheck the entire set before any write, including changes after preflight.
- // Runtime I/O failures may leave exact completed files; matching resume accepts
- // those files and refuses partial/divergent ones through the same writer.
- return () => {
-  ordinaryPath(root, destination + '/.role-staging-preflight');
-  for (const file of files.values()) readExactFile(root, file.relative, file.pin);
-  const outcomes = [];
-  for (const file of files.values()) outcomes.push({path: file.relative, bytes: file.pin.bytes,
-   sha256: file.pin.sha256, created: writeExactFile(root, file.relative, file.pin, file.body)});
-  return {files: outcomes, created_files: outcomes.filter(f => f.created).length,
-   resumed_files: outcomes.filter(f => !f.created).length, bytes: total};
- };
 }
 
 async function acquireDeliveryInputs(plan,root,{execute=execFileSync,token,onMaterialized=()=>{},limits,budget}={}){
@@ -891,5 +824,5 @@ async function acquireDeliveryInputs(plan,root,{execute=execFileSync,token,onMat
   admission:{limits:allowance,declared_encoded_bytes:declared,declared_decoded_bytes:decodedTotal,physical_alias_bytes:materializedTotal,physical_aliases:destinations.size,total_modeled_bytes:totalModeled,...(budget?{shared_budget:budget.snapshot()}:{})},
   limits:['Transport and exact-byte physical aliases only. Every scientific operator still authenticates and accounts for its own complete inputs.','Completed objects/files resume by their actual identities; partial or corrupted destination files are refused and preserved.']};
 }
-return {acquireDeliveryInputs, prepareDeliveryRoleStaging};
+return {acquireDeliveryInputs};
 })();

@@ -425,7 +425,7 @@ prepare templates with fresh candidate destinations and the admitted resource
 configuration; the driver does not silently rename historical requests or rerun
 operators. `destination_prefix` is used only by the existing greedy constructor.
 
-### Inherited package read roles and exact local staging
+### Inherited package read roles and committed restoration
 
 Finalization derives package read roles from authenticated authority, original
 custody and current release metadata. An out-of-prefix role already present at
@@ -433,28 +433,24 @@ the accepted package baseline must retain its exact ordinary mode, Git object,
 size and SHA-256. Existing package declarations remain an unchanged prefix;
 covered directory members are not redundantly appended.
 
-Absent original roles are emitted automatically beneath
-`restored-read-roles/<original repository path>` in the standard local
-`.cache/delivery-handoff/` finalization output. Their original pins remain in the
-existing `package-roles.json`; no duplicate authority or new manifest is created.
-Adopt these exact bodies at their original repository paths alongside the normal
-selector, package declaration and one canonical receiving expectation. Declare
-those exact write paths in the ordinary issue scope. The command never writes
-those repository paths or mutates Git. No manual restoration inventory or prior
-restoration commit is needed for a fresh invocation.
+Keep original cohort files at their canonical repository paths. Finalization emits
+only flat delivery metadata products; it does not copy original bodies into its
+local output tree. Whole-cohort retention keeps new owned originals available
+without a second staging/adoption pass.
 
-The entire staged batch is checked before publication, including immutable body
-identities, finite byte allowance, collisions and ordinary paths. Completion is
-written last. Exact `--resume` checks all output files and directories, original
-body bytes and configuration; foreign, changed or incomplete output refuses.
-Changed accepted paths always refuse rather than being replaced.
+For historical or cross-prefix roles absent from the accepted package baseline,
+supply an exact committed `restored_read_roles` snapshot:
+`{"commit":"<exact commit>","paths":["<original role path>"]}`.
+Declare the exact restored write paths in the ordinary issue scope. The snapshot
+must preserve each original ordinary mode, Git object, size and SHA-256. Duplicate,
+unbound, changed, nonordinary, missing or accepted-path-overwriting entries fail.
+Absent roles without that explicit snapshot also fail. Original custody commits
+remain unchanged; this readback grants no additional write scope.
 
-Existing `restored_read_roles` configuration remains an exact committed-snapshot
-readback: `{"commit":"<exact commit>","paths":["<original role path>"]}`.
-Duplicate, unbound, changed, nonordinary, missing or accepted-path-overwriting
-entries still fail. Original custody commits remain unchanged. Changed inputs
-require a fresh preparation destination, never replacement of completed output.
-Published legacy receipts retain their existing consumers.
+Completion is written last. Exact `--resume` checks every flat output and its
+configuration. Changed, foreign or incomplete output refuses. Historical completed
+receipts retain their original bytes and consumers; use a fresh preparation
+vintage after a changed output inventory rather than replacing an earlier run.
 
 ## Reusable source and modern native entries
 
@@ -604,8 +600,8 @@ qualified handoff. Run the stock phases without separate descriptor/config
 attestation reviews, repeated whole-pin receipts or handoff acknowledgment gates.
 The stock reader authenticates each ordinary commit/path, Git object, size and
 whole-file hash; composition checks the original joins and conservation, and
-finalization derives package read roles and exact original staging. Preserve the
-real commit boundaries between phases and every original scientific limit.
+finalization derives package read roles and checks canonical original identities.
+Preserve the real commit boundaries between phases and every original scientific limit.
 
 Keep one substantive independent actual-output scientific review for the delivery,
 reusing original qualification reviews and applicable unchanged intermediate
@@ -707,7 +703,7 @@ ordinary scoped commits in one fail-fast shell sequence:
    derived product pins. Existing explicit configurations remain supported.
 3. Run `finalize CONFIG .cache/delivery-handoff/final-UNIQUE` and use the existing
    [canonical staging/adoption contract](#configurations-and-explicit-commit-boundaries),
-   including any [original-path restorations](#inherited-package-read-roles-and-exact-local-staging).
+   including any [original-path restorations](#inherited-package-read-roles-and-committed-restoration).
    Finish intended candidate changes and commit the installed canonical tree.
    Capture `candidate_commit=$(git rev-parse HEAD)`. Run applicable checks at
    their ordinary working-tree or exact-commit boundaries.

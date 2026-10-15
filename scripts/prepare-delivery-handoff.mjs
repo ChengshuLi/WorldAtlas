@@ -8,7 +8,7 @@ import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {gunzipSync} from 'node:zlib';
 import {candidateBudget} from './native-ownership/native-preparation-guards.mjs';
-import {locate, prepareDeliveryRoleStaging} from './delivery-handoff-advance.mjs';
+import {locate} from './delivery-handoff-advance.mjs';
 import {validatePackageInputs} from './package-inputs.mjs';
 import {baselineFiles, validateEvidence} from './evidence-quality.mjs';
 import {composeRetainedLedgers} from '../coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs';
@@ -89,25 +89,11 @@ function admitDestination(root, destination, resume) {
 export function admitPublication(root, destination, products, binding, resume = false, sharedBudget = null) {
   const target = admitDestination(root, destination, resume);
   const budget = sharedBudget ?? candidateBudget([], {reserveBytes: 0, reserveDescriptors: 0});
-  const names = new Set(Object.keys(products));
-  for (const name of names) {
-    const parts = name.split('/');
-    for (let i = 1; i < parts.length; i++)
-      need(!names.has(parts.slice(0, i).join('/')), 'Product file/directory collision');
-  }
-  const staged = [], stagingPrefix = 'restored-read-roles/';
-  const rolePins = products['package-roles.json'] ? JSON.parse(products['package-roles.json']).paths : [];
   for (const [name, raw] of Object.entries(products)) {
-    need(safe(name) && name !== 'preparation.json' && Buffer.isBuffer(raw), 'Safe unique product filenames required');
-    if (name.includes('/')) {
-      need(name.startsWith(stagingPrefix) && Array.isArray(rolePins), 'Only derived original roles may use nested output paths');
-      const matches = rolePins.filter(pin => pin.path === name.slice(stagingPrefix.length));
-      need(matches.length === 1, 'Staged body must have one authenticated package role');
-      staged.push({pin: matches[0], body: raw});
-    } else budget.add({bytes: raw.length});
+    need(safe(name) && !name.includes('/') && name !== 'preparation.json' && Buffer.isBuffer(raw),
+      'Safe flat product filenames required');
+    budget.add({bytes: raw.length});
   }
-  const publishRoles = staged.length ? prepareDeliveryRoleStaging(root, destination + '/restored-read-roles', staged,
-    {limits: {total: staged.reduce((sum, entry) => sum + entry.body.length, 0)}, budget}) : null;
   need(Object.keys(products).length > 0, 'No empty completion');
   const outputs = Object.fromEntries(Object.entries(products).map(([name, raw]) => [name, {bytes: raw.length, sha256: digest(raw)}]));
   const receipt = jsonBytes({version: 1, binding, outputs});
@@ -115,21 +101,9 @@ export function admitPublication(root, destination, products, binding, resume = 
   const inspectExisting = () => {
     admitDestination(root, destination, resume);
     if (!fs.existsSync(target)) return false;
-    const expected = new Set([...Object.keys(products), 'preparation.json']);
-    for (const name of Object.keys(products)) {
-      const parts = name.split('/');
-      for (let i = 1; i < parts.length; i++) expected.add(parts.slice(0, i).join('/') + '/');
-    }
-    const found = [];
-    const walk = relative => {
-      for (const name of fs.readdirSync(path.join(target, relative))) {
-        const item = relative + name, stat = fs.lstatSync(path.join(target, item));
-        need(!stat.isSymbolicLink() && (stat.isFile() || stat.isDirectory()), 'Nonordinary resumed output');
-        if (stat.isDirectory()) { found.push(item + '/'); walk(item + '/'); } else found.push(item);
-      }
-    };
-    walk('');
-    need(same(found.sort(), [...expected].sort()), 'Incomplete or foreign resumed output inventory');
+    const expected = [...Object.keys(products), 'preparation.json'].sort();
+    const found = fs.readdirSync(target).sort();
+    need(same(found, expected), 'Incomplete or foreign resumed output inventory');
     for (const [name, raw] of Object.entries({...products, 'preparation.json': receipt}))
       need(ordinary(root, destination + '/' + name).equals(raw), 'Resumed bytes/binding changed: ' + name);
     return true;
@@ -144,9 +118,8 @@ export function admitPublication(root, destination, products, binding, resume = 
     if (inspectExisting()) return {destination, resumed: true, binding};
     fs.mkdirSync(path.dirname(target), {recursive: true});
     fs.mkdirSync(target);
-    for (const [name, raw] of Object.entries(products)) if (!name.includes('/'))
+    for (const [name, raw] of Object.entries(products))
       fs.writeFileSync(path.join(target, name), raw, {flag: 'wx'});
-    if (publishRoles) publishRoles();
     fs.writeFileSync(path.join(target, 'preparation.json'), receipt, {flag: 'wx'});
     return {destination, resumed: false, binding};
   };
@@ -983,7 +956,7 @@ export function finalizeDelivery(config, reader) {
   }
   if (config.sidecar_output !== undefined) {
     need(!config.sidecar && safe(config.sidecar_output) && path.posix.dirname(config.sidecar_output) + '/' === config.new_prefix
-      && !['ownership-selection.json', 'package-inputs.json', 'package-roles.json', 'selected-delivery-expectations.json', 'preparation.json', 'restored-read-roles']
+      && !['ownership-selection.json', 'package-inputs.json', 'package-roles.json', 'selected-delivery-expectations.json', 'preparation.json']
         .includes(path.posix.basename(config.sidecar_output)) && config.patch && config.runtime_envelope,
     'Fresh flat owned sidecar output and committed patch/envelope required');
     generatedSidecar = jsonBytes({...prior, authority_registry: config.registry, runtime_envelope: config.runtime_envelope,
@@ -1040,9 +1013,9 @@ export function finalizeDelivery(config, reader) {
   validatePackageInputs(baselinePackage);
   const covered = name => baselinePackage.inputs.some(p => p === name || p.endsWith('/') && name.startsWith(p));
   // This is a closed consumed-role traversal, never caller-granted write scope.
-  // Missing original roles are staged from their authenticated immutable bodies.
-  // Existing committed restoration descriptors remain exact readback checks;
-  // ordinary issue/PR guards separately authorize adoption into the repository.
+  // Absent historical roles require an exact committed restoration snapshot.
+  // Finalization never emits a second copy of original role bodies.
+  // Ordinary issue/PR guards separately authorize adoption into the repository.
   const restored = config.restored_read_roles;
   if (restored) need(same(Object.keys(restored).sort(), ['commit', 'paths'])
     && hex(restored.commit, 40) && unique(restored.paths) && restored.paths.every(safe)
@@ -1054,9 +1027,7 @@ export function finalizeDelivery(config, reader) {
   for (const pin of projection.paths.filter(p => !p.path.startsWith(config.new_prefix) || covered(p.path))) {
     try {
       const missing = typeof reader.hasPath === 'function' && !reader.hasPath(config.package_inputs.commit, pin.path);
-      if (missing && !restored) {
-        outputs['restored-read-roles/' + pin.path] = reader.read(pin);
-      } else if (missing && requested.has(pin.path)) {
+      if (missing && requested.has(pin.path)) {
         const snapshot = reader.pin(restored.commit, pin.path);
         need(identity(snapshot, pin), 'Restored snapshot differs from original consumed role');
         matched.add(pin.path);

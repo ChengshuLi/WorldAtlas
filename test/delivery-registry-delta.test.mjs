@@ -180,17 +180,9 @@ test('wrong selector hook, prior base, prebuilt base and unavailable parse allow
   assert.ok(!budget.parsed.includes(budget.priorRegistry.path));
 });
 
-test('caller config cannot replace the accepted registry and missing originals stage without a restoration list', () => {
+test('caller config cannot replace the accepted registry or silently restore missing original roles', () => {
   const f = fixture(); f.config.accepted_registry = {version: 1, entries: []}; f.config.new_authorities = [];
   assert.equal(JSON.parse(finalizeDelivery(f.config, f.reader)['package-roles.json']).new_authorities, 7);
   delete f.config.restored_read_roles;
-  const outputs = finalizeDelivery(f.config, f.reader);
-  const projection = JSON.parse(outputs['package-roles.json']);
-  assert.equal(projection.new_authorities, 7);
-  const staged = Object.keys(outputs).filter(name => name.startsWith('restored-read-roles/'));
-  assert.equal(staged.length, 28);
-  for (const name of staged) {
-    const pin = projection.paths.find(value => value.path === name.slice('restored-read-roles/'.length));
-    assert.ok(pin); assert.deepEqual(outputs[name], f.reader.read(pin));
-  }
+  assert.throws(() => finalizeDelivery(f.config, f.reader), /accepted path identity/);
 });
