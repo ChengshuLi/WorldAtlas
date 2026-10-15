@@ -22,7 +22,7 @@ const sha = value => createHash('sha256').update(body(value)).digest('hex');
 // These intentionally tiny opaque leaf bodies test immutable routing/equality,
 // not scientific validity. Historical collector replay is compared separately
 // with retained original full-reader logs; these leaf sentinels are not decoded.
-function fixture({missingOrigin = false, splitBaseline = false, rebind = true, missingStrictOrigin = false, checkpoint = false} = {}) {
+function fixture({missingOrigin = false, splitBaseline = false, rebind = true, missingStrictOrigin = false, checkpoint = false, sourceTarget = false, membership = false, dated = false, unknownSourceField = false, unknownSourceVersion = false, malformedDatedVersion = false} = {}) {
   const cache = path.join(ROOT, '.cache/unchanged-selected-fixtures');
   fs.mkdirSync(cache, {recursive: true});
   const directory = fs.mkdtempSync(path.join(cache, 'case-'));
@@ -60,7 +60,7 @@ function fixture({missingOrigin = false, splitBaseline = false, rebind = true, m
   const world = {parts: ['geography/source.json']};
   put('data/world-index.json', world);
   for (const name of ['data/geography/source.json', 'data/canonical-grid/bounds.json.gz', 'data/hierarchy.json', 'data/canonical-grid/manifest.json', 'data/geographic-releases/index.json', 'data/geographic-releases/current.json.gz']) put(name, 'opaque complete scientific leaf');
-  for (const name of ['handoff', 'receipt', 'source-publication', 'source-inventory', 'source-operating', 'native-publication', 'native-inventory', 'native-operating', 'native-asset', 'source-facts', 'native-facts', 'original-ledger', 'original-manifest', 'rule', 'predecessor', 'code-source', 'terminal', 'stderr', 'stdout']) put(P + name + '.json', {leaf: name});
+  for (const name of ['handoff', 'receipt', 'source-publication', 'source-inventory', 'source-operating', 'native-publication', 'native-inventory', 'native-operating', 'native-asset', 'source-facts', 'native-facts', 'original-ledger', 'original-manifest', 'rule', 'predecessor', 'code-source', 'terminal', 'stderr', 'stdout', 'source-catalogue', 'physical-input', 'physical-reproduction', 'physical-evidence', 'latitudes', 'source-part', 'membership-lineage', 'membership-index', 'membership-part', 'dated-adoption', 'dated-review', 'dated-observation', 'dated-frame']) put(P + name + '.json', {leaf: name});
   put(P + 'original-source-map.json', {kind: 'complete-world-index-with-exact-encoded-overrides'});
   put('data/ownership-selection.json', {selected_geography: {kind: 'complete-world-index-with-exact-encoded-overrides', path: P + 'original-source-map.json'}});
   const original = commit();
@@ -86,9 +86,31 @@ function fixture({missingOrigin = false, splitBaseline = false, rebind = true, m
   const originalPins = Object.fromEntries(['ledger', 'native_facts', 'native_manifest', 'source_facts'].map(role => [role, historical(P + ({ledger: 'original-ledger', native_facts: 'native-facts', native_manifest: 'original-manifest', source_facts: 'source-facts'}[role]) + '.json')]));
   originalPins.source_request = pin(P + 'source-request.json', requests);
   originalPins.native_request = pin(P + 'native-request.json', requests);
-  const binding = {version: 1, kind: 'original-issued-rule-source-custody-v1', original_pins: originalPins,
+  let binding = {version: 1, kind: 'original-issued-rule-source-custody-v1', original_pins: originalPins,
     source_output_aliases: [{original: aliasOriginal, published: pin(P + 'source-publication.json', original, missingStrictOrigin ? {commit: 'e'.repeat(40)} : {})}],
     native_proof: {publication: historical(P + 'native-publication.json'), inventory: historical(P + 'native-inventory.json'), operating: historical(P + 'native-operating.json'), assets: [historical(P + 'native-asset.json')]}};
+  if (sourceTarget) {
+    const roles = {catalogue: 'source-catalogue', physical_input: 'physical-input', physical_reproduction: 'physical-reproduction',
+      physical_evidence: 'physical-evidence', native_latitudes: 'latitudes', owner_roster: 'native-asset'};
+    const evidence = {version: dated ? 2 : 1, kind: 'source-target-native-evidence-v' + (dated ? 2 : 1),
+      base_reference: {}, native_contract: {}, targets: [{id: 'opaque-scientific-target'}],
+      families: [{source_id: 'fixture', parts: [historical(P + 'source-part.json')]}],
+      ...Object.fromEntries(Object.entries(roles).map(([role, name]) => [role, historical(P + name + '.json')]))};
+    if (membership) evidence.source_membership = {index: historical(P + 'membership-index.json'), lineage: historical(P + 'membership-lineage.json'), parts: [historical(P + 'membership-part.json')]};
+    if (dated) {
+      put(P + 'dated-support.json', {version: 1, kind: 'adopted-dated-native-centre-land-support-v1', native_contract_sha256: 'a'.repeat(64), records: [{}],
+        provenance: ['adoption', 'review', 'observation', 'frame'].map(role => ({id: role, role, pin: historical(P + 'dated-' + role + '.json'),
+          ...(role === 'frame' ? {observation: 'observation', block_pointer: '/block', display_pointer: '/display', channels: 'rgb', display_base: 'fixture'} : {})}))});
+      const support = commit(files, requests);
+      evidence.dated_land_support = pin(P + 'dated-support.json', support);
+    }
+    if (unknownSourceField) evidence.descriptive_metadata = {not_consumed_by_current_reader: true};
+    if (unknownSourceVersion) { evidence.version = 3; evidence.kind = 'source-target-native-evidence-v3'; }
+    if (malformedDatedVersion) { evidence.version = 1; evidence.kind = 'source-target-native-evidence-v1'; evidence.dated_land_support = historical(P + 'source-part.json'); }
+    put(P + 'source-target-evidence.json', evidence);
+    const sourceEvidence = commit(files, requests);
+    binding = {version: 1, kind: 'source-target-native-custody-v1', native_patch: historical(P + 'native-asset.json'), source_evidence: pin(P + 'source-target-evidence.json', sourceEvidence)};
+  }
   put(P + 'binding.json', binding);
   const bindings = commit(files, requests);
   const entry = {authority_sha256: 'a'.repeat(64), rule_sha256: sha(files[P + 'rule.json']), policy_id: 'retained-source-literal-additions', policy_version: 1,
@@ -163,6 +185,50 @@ test('complete typed closure accepts a source-only addition without scientific l
     assert(result.immutable_descriptors.some(p => p.path === P + 'issued-plan.json'));
     assert(result.metadata_bytes_read < 1024 * 1024);
   } finally { f.close(); }
+});
+
+test('current source-target authority keeps every nested leaf and current fallback alias', async () => {
+  const f = fixture({sourceTarget: true, membership: true, dated: true}); try {
+    const result = await f.inspect();
+    assert.equal(result.status, 'unchanged-selected-inputs', result.reason);
+    assert.equal(result.science_reexecuted, false);
+    const leaves = ['source-catalogue', 'physical-input', 'physical-reproduction', 'physical-evidence',
+      'latitudes', 'native-asset', 'source-part', 'membership-index', 'membership-lineage', 'membership-part',
+      'dated-adoption', 'dated-review', 'dated-observation', 'dated-frame'];
+    for (const name of [...leaves, 'source-target-evidence', 'dated-support', 'binding']) {
+      const target = P + name + '.json';
+      assert(result.current_and_absent_alternatives.some(p => p.path === target), target);
+      const changed = f.commit({...f.candidateFiles, [target]: body('changed consumed input')}, f.baseline);
+      const rejected = await f.inspect(changed);
+      assert.equal(rejected.status, 'full-check-required', target);
+      assert.equal(rejected.reason, 'changed-current-input:' + target);
+    }
+    // Leaf sentinels are not valid scientific JSON inputs. The proof only reads
+    // the evidence/binding/support routing bodies, never requalifying science.
+    assert(result.metadata_bytes_read < 1024 * 1024);
+    const target = P + 'source-part.json', baselineFiles = {...f.files};
+    delete baselineFiles[target];
+    const baseline = f.commit(baselineFiles, f.baseline);
+    const candidate = f.commit({...baselineFiles, 'docs/delivery.md': body('ordinary delivery')}, baseline);
+    const absent = await f.inspect(candidate, baseline);
+    assert.equal(absent.status, 'unchanged-selected-inputs', absent.reason);
+    assert(absent.current_and_absent_alternatives.some(p => p.path === target && p.absent));
+    const added = f.commit({...baselineFiles, [target]: f.files[target]}, baseline);
+    assert.equal((await f.inspect(added, baseline)).reason, 'changed-current-input:' + target);
+  } finally { f.close(); }
+});
+
+test('current source-target authority supports retained fallback and descriptive fields but rejects unknown versions', async () => {
+  for (const options of [{missingOrigin: true}, {unknownSourceField: true}, {unknownSourceVersion: true}, {malformedDatedVersion: true}]) {
+    const f = fixture({sourceTarget: true, ...options}); try {
+      const result = await f.inspect();
+      if (!options.unknownSourceVersion && !options.malformedDatedVersion) assert.equal(result.status, 'unchanged-selected-inputs', result.reason);
+      else {
+        assert.equal(result.status, 'full-check-required');
+        assert.equal(result.reason, 'unsupported-source-target-evidence');
+      }
+    } finally { f.close(); }
+  }
 });
 
 test('checkpoint roots and complete present/absent route aliases are collected without scientific decoding', async () => {
@@ -267,6 +333,26 @@ test('native materialization absence, source map, transport and selected registr
   } finally { f.close(); }
 });
 
+test('ordinary queue docs and focused tests do not change selected science while consumed code still rejects', async () => {
+  const f = fixture(); try {
+    const unrelated = {'scripts/run-worker-merge.mjs':body('changed delivery queue'),
+      'docs/WORKER_COORDINATION.md':body('updated review instructions'),
+      'test/merge-integration.test.mjs':body('updated queue control')};
+    const candidate = f.commit({...f.files,...unrelated},f.baseline);
+    const accepted = await f.inspect(candidate);
+    assert.equal(accepted.status,'unchanged-selected-inputs',accepted.reason);
+    assert.equal(accepted.science_reexecuted,false);
+    assert.equal(accepted.candidate_code_executed,false);
+    for (const name of ['scripts/check-effective-geographic-regression.mjs','src/native-grid.js',
+      'src/ownership-codec.js','src/effective-footprint.js','package.json','package-lock.json']) {
+      const changed = f.commit({...f.files,...unrelated,[name]:body('changed consumed method or runtime')},f.baseline);
+      const rejected = await f.inspect(changed);
+      assert.equal(rejected.status,'full-check-required',name);
+      assert.equal(rejected.reason,'changed-current-input:'+name);
+    }
+  } finally { f.close(); }
+});
+
 test('baseline-only relevant code differs even when candidate authored scope is only source', async () => {
   const f = fixture(); try {
     const baseline = f.commit({...f.files, 'src/effective-footprint.js': body('changed current custody code')}, f.baseline);
@@ -298,7 +384,7 @@ test('artifact transport code is equality-bound without a scientific reader hash
     const changed = f.commit({...f.candidateFiles, [code]: body('different candidate transport code')}, baseline);
     const refused = await f.inspect(changed, baseline);
     assert.equal(refused.status, 'full-check-required');
-    assert.equal(refused.reason, 'outside-source-publication-scope');
+    assert.equal(refused.reason, 'changed-current-input:' + code);
     const differentBaseline = await f.inspect(f.candidate, baseline);
     assert.equal(differentBaseline.status, 'full-check-required');
     assert.equal(differentBaseline.reason, 'changed-current-input:' + code);
@@ -321,12 +407,14 @@ test('reviewed equal readers need no hash catalogue; unsafe modes, limits and id
   } finally { f.close(); }
 });
 
-test('CLI emits bounded explicit full fallback for invalid or engineering inputs', async () => {
+test('invalid commits fail closed while unrelated engineering changes retain unchanged scientific identities', async () => {
   const f = fixture(); try {
     const output = execFileSync(process.execPath, [path.join(ROOT, 'scripts/check-unchanged-selected-geography.mjs'), f.directory, f.baseline, f.baseline]);
     assert.equal(JSON.parse(output).status, 'full-check-required');
     const candidate = f.commit({...f.candidateFiles, 'scripts/other.mjs': body('engineering')}, f.baseline);
-    assert.match((await f.inspect(candidate)).reason, /outside-source-publication-scope/);
+    const result = await f.inspect(candidate);
+    assert.equal(result.status, 'unchanged-selected-inputs', result.reason);
+    assert.equal(result.science_reexecuted, false);
   } finally { f.close(); }
 });
 
@@ -553,7 +641,7 @@ test('receiving metadata admits exact inert modifications without executing scie
         assert(pins.every(p => p.mode === '100644'));
         assert.notEqual(pins[0].git_blob_oid, pins[1].git_blob_oid);
       }
-      assert.match((await f.inspect(candidate)).reason, /outside-source-publication-scope/);
+      assert.equal((await f.inspect(candidate)).status, 'unchanged-selected-inputs');
     }
   } finally { f.close(); }
 });

@@ -176,6 +176,42 @@ async function originalAuthority(reader, entry) {
   keys(entry, 'authority_sha256,policy_id,policy_version,rule_preimage,rule_sha256,source_authority', 'authority-entry');
   reader.pinned(entry.rule_preimage);
   const binding = await reader.pinnedJson(entry.source_authority);
+  if (binding.kind === 'source-target-native-custody-v1') {
+    // These are the complete file reads in evaluateSourceTargetNativeAuthority.
+    // Inspect only its existing routing metadata; the scientific leaves remain
+    // opaque and every historical pin retains its present/absent current alias.
+    keys(binding, 'kind,native_patch,source_evidence,version', 'source-target-binding');
+    demand(binding.version === 1, 'unsupported-source-target-binding');
+    reader.pinned(binding.native_patch);
+    const evidence = await reader.pinnedJson(binding.source_evidence);
+    const dated = evidence.version === 2;
+    demand([1, 2].includes(evidence.version) && evidence.kind === 'source-target-native-evidence-v' + evidence.version
+      && (dated ? evidence.dated_land_support !== undefined : evidence.dated_land_support === undefined),
+      'unsupported-source-target-evidence');
+    // Like the bound scientific reader, ignore extra descriptive evidence
+    // fields. Only its versioned consumed roles select further file reads.
+    for (const role of ['catalogue', 'native_latitudes', 'owner_roster', 'physical_evidence', 'physical_input', 'physical_reproduction']) reader.pinned(evidence[role]);
+    for (const family of array(evidence.families, 'source-target-families')) {
+      keys(family, 'parts,source_id', 'source-target-family');
+      for (const pin of array(family.parts, 'source-target-parts')) reader.pinned(pin);
+    }
+    if (evidence.source_membership !== undefined) {
+      const membership = evidence.source_membership;
+      keys(membership, 'index,lineage,parts', 'source-target-membership');
+      for (const pin of [membership.index, membership.lineage, ...array(membership.parts, 'source-target-membership-parts')]) reader.pinned(pin);
+    }
+    if (dated) {
+      const support = await reader.pinnedJson(evidence.dated_land_support);
+      keys(support, 'kind,native_contract_sha256,provenance,records,version', 'dated-land-support');
+      demand(support.version === 1 && support.kind === 'adopted-dated-native-centre-land-support-v1', 'unsupported-dated-land-support');
+      for (const item of array(support.provenance, 'dated-land-provenance')) {
+        demand(['adoption', 'review', 'observation', 'frame'].includes(item.role), 'unsupported-dated-land-role');
+        keys(item, item.role === 'frame' ? 'block_pointer,channels,display_base,display_pointer,id,observation,pin,role' : 'id,pin,role', 'dated-land-provenance');
+        reader.pinned(item.pin);
+      }
+    }
+    return;
+  }
   keys(binding, 'kind,native_proof,original_pins,version' + (Object.hasOwn(binding, 'source_output_aliases') ? ',source_output_aliases' : ''), 'authority-binding');
   demand(binding.version === 1 && binding.kind === 'original-issued-rule-source-custody-v1', 'unsupported-authority-binding');
   keys(binding.original_pins, 'ledger,native_facts,native_manifest,native_request,source_facts,source_request', 'original-custody');
@@ -336,10 +372,9 @@ async function collect(reader, {baseline, candidate, trusted, metadataPaths}) {
       demand(before.mode === '100644' && after.mode === '100644', 'nonordinary-receiving-metadata');
     }
   } else {
-    demand(changed.length > 0 && changed.length <= 512 && changed.every(name => safe(name)
-      && (name.startsWith('research/geography/') || name.startsWith('data/regional-review/'))), 'outside-source-publication-scope');
+    demand(changed.length > 0 && changed.length <= 512 && changed.every(safe), 'invalid-changed-path-inventory');
     for (const name of changed) {
-      // Addition/deletion are permitted only as ordinary source-packet entries.
+      // Unrelated ordinary changes do not alter the consumed scientific roles.
       reader.descriptor(mergeBase, name, true);
       reader.descriptor(candidate, name, true);
     }
