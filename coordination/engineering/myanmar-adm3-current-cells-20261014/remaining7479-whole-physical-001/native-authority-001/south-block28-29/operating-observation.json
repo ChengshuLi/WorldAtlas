@@ -1,0 +1,32 @@
+{
+  "external": {
+    "group": "south-block28-29",
+    "argv": [
+      "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/mmr7479-native-preparation-001/accepted-9f40/scripts/prepare-delivery-handoff.mjs",
+      "native-authority",
+      ".cache/mmr4334-native-authority-input-001/south-block28-29.json",
+      ".cache/delivery-handoff/mmr4334-south-block28-29-native-authority-001"
+    ],
+    "started": "2026-10-15T10:03:52.291332+00:00",
+    "ended": "2026-10-15T10:03:56.660194+00:00",
+    "exit_code": 0,
+    "external_seconds": 4.368938833940774,
+    "darwin_children_lifetime_maxrss_bytes": 438337536,
+    "destination_exists": true
+  },
+  "stock_observation": {
+    "elapsed_seconds": 4.1048719590000005,
+    "charged_phase_bytes": 431837712,
+    "allowance": {
+      "phaseBytes": 1073741824,
+      "rssBytes": 1073741824
+    },
+    "normalized_node_lifetime_peak_rss_bytes": 438337536,
+    "qualified_cells": 3958,
+    "limits": [
+      "Original source/physical producers are not replayed.",
+      "Constructor qualification is not actual current-owner-zero or final selected-output acceptance."
+    ]
+  }
+}
