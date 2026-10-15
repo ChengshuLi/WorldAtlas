@@ -9,7 +9,7 @@ import {pinReader, prepareEvidence, digest, jsonBytes} from '../scripts/prepare-
 import {validateEvidence, repositoryReader} from '../scripts/evidence-quality.mjs';
 import {validatePremergeManifest} from '../scripts/premerge-evidence.mjs';
 const entry=fileURLToPath(new URL('../scripts/prepare-delivery-handoff.mjs',import.meta.url));
-function fixture(t, paddingBytes=0) {
+function fixture(t, paddingBytes=0, twoGroups=false) {
  const root=fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(),'delivery-evidence-')));
  t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
  const git=(...args)=>execFileSync('git',args,{cwd:root,stdio:['ignore','pipe','pipe']});
@@ -28,9 +28,13 @@ function fixture(t, paddingBytes=0) {
  const oldSide=pin(side,prefix+'sidecar-old.json');
  write('data/ownership-selection.json',{...baseSelection,additive_release:{path:oldSide.path,bytes:oldSide.bytes,sha256:oldSide.sha256}});
  write('.github/package-inputs.json',{version:1,inputs:['data/']});const baseline=commit();
- git('checkout','-qb','unmerged-original');write('original/constructor.json',{ledger_rows:[{component_id:'new',target_id:'target:new',native_cells:2}]});
+ const newRow={component_id:'new',target_id:'target:new',native_cells:2},secondRow={component_id:'new-two',target_id:'target:new-two',native_cells:3};
+ const constructed=row=>({version:1,component_ids:[row.component_id],rule_sha256:'d'.repeat(64),ledger_rows:[row]});
+ const selected=row=>({...row,authority_sha256:'e'.repeat(64),rule_sha256:'d'.repeat(64)});
+ git('checkout','-qb','unmerged-original');write('original/constructor.json',constructed(newRow));
+ if(twoGroups)write('original/constructor-two.json',constructed(secondRow));
  const originalCommit=commit(),original=pin(originalCommit,'original/constructor.json');git('checkout','-q','--detach',baseline);
- write(prefix+'ledger-new.json',{rows:[old,{component_id:'new',target_id:'target:new',native_cells:2}]});write(prefix+'registry-new.json',{entries:[]});
+ write(prefix+'ledger-new.json',{rows:[old,selected(newRow),...(twoGroups?[selected(secondRow)]:[])]});write(prefix+'registry-new.json',{entries:[]});
  write(prefix+'retained-input.json',{source:'unchanged complete source body'});
  write(prefix+'control.json',{method_id:'retained-selected-delivery',kind:'negative-control',outcome:'passed'});const newBodies=commit();
  const newSide=sidecar(newBodies,'new');write(prefix+'sidecar-new.json',newSide);
@@ -43,6 +47,9 @@ function fixture(t, paddingBytes=0) {
    role:'Original full constructor checkpoint custody',vintage:'Original qualification',retrieved_at:'2026-10-15',
    license:{status:'unknown',terms:'Original terms and limits remain unchanged'},retention:'restoration-only',verification:'unverified',
    temporal_status:'reference',restoration:'Read original immutable checkpoint body',limit:'Not ancestor baseline; no new source certification',original_pin:original}]}};
+ if(twoGroups){const second=pin(originalCommit,'original/constructor-two.json');config.delivery.subject_ids.push(secondRow.target_id);
+  config.delivery.qualified_constructor_pins.push({id:'retained-second',pin:second});
+  config.delivery.sources.push({...config.delivery.sources[0],id:'retained-second',original_pin:second});}
  return {root,git,write,commit,pin,baseline,candidate,config,prefix,old,original};
 }
 test('existing evidence entry derives real ancestor pins and complete immutable candidate bytes without metrics',t=>{
@@ -119,4 +126,11 @@ test('actual entry preserves supplied controls and rejects silently ignored evid
  const falseClaim=JSON.parse(prepareEvidence(f.config,pinReader(f.root))['evidence-quality.json']);assert.throws(()=>check(falseClaim),/Control bytes do not match receipt/);
  f.config.delivery.baseline_pins={constructor:f.original.sha256};
  assert.throws(()=>prepareEvidence(f.config,pinReader(f.root)),/Unknown delivery evidence field/);
+});
+
+test('two actual original groups refuse coherent removal of constructor and matching citation',t=>{
+ const f=fixture(t,0,true);const run=()=>JSON.parse(prepareEvidence(f.config,pinReader(f.root))['evidence-quality.json']);
+ assert.equal(run().qualified_constructor_pins.length,2);
+ f.config.delivery.qualified_constructor_pins.pop();f.config.delivery.sources.pop();
+ assert.throws(run,/Incomplete original constructor coverage/);
 });
