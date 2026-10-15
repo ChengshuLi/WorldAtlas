@@ -1,0 +1,22 @@
+{
+  "started_at": "2026-10-15T20:25:10.351502+00:00",
+  "ended_at": "2026-10-15T20:25:16.042156+00:00",
+  "elapsed_seconds": 5.690138375,
+  "exit_code": 0,
+  "actual_code_commit": "181e66c68218003764b688f51eed60ed9cbb42c9",
+  "repo": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/267133ee5fd33696ea7c63ec50cf78bebfb3c92f9a18ca0fb1c4db8be3e0c49e/review",
+  "command": [
+    "/usr/bin/time",
+    "-l",
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "scripts/prepare-delivery-handoff.mjs",
+    "compose",
+    ".cache/papua9580-after2025-config/compose.json",
+    ".cache/delivery-handoff/papua9580-after2025-compose-001"
+  ],
+  "output": ".cache/delivery-handoff/papua9580-after2025-compose-001",
+  "source_producer_replay": false,
+  "native_qualification_replay": false,
+  "numeric_memory_flags": false,
+  "elapsed_kill": false
+}

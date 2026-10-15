@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "selector": {
+    "path": "data/ownership-selection.json",
+    "commit": "f9c1abc4acba3e2dd6be2e1f157839532924fd78",
+    "mode": "100644",
+    "git_blob_oid": "ed62e6e59d84fe0ed7f6b17ab032884df924c2d7",
+    "bytes": 1576,
+    "sha256": "1ae16fd4be5d6e69266894f5c4e3270b8466526a91f0f588740c435abfc6c064"
+  },
+  "effective_release_id": "geography:indonesia-papua9580-native-followup-20261015",
+  "authorities": [
+    {
+      "rule_preimage": {
+        "commit": "1cad8d1957a2a06db89e884dcb03aa0f85deac0f",
+        "path": "coordination/engineering/indonesia-papua9580-20261015/native9580-authority-001/original-rule-preimage.json",
+        "mode": "100644",
+        "git_blob_oid": "6a57d32fc3c32e46a6be39ecd8906cb1d61026de",
+        "bytes": 739,
+        "sha256": "db0a72fed747461b1f8e3b37a75b371e4b081be4cdc83a20cda112c7ebd53251"
+      },
+      "source_authority": {
+        "commit": "1cad8d1957a2a06db89e884dcb03aa0f85deac0f",
+        "path": "coordination/engineering/indonesia-papua9580-20261015/native9580-authority-001/authority-binding.json",
+        "mode": "100644",
+        "git_blob_oid": "59aae5d9ed742aa1aad4a19351cd525ee7868595",
+        "bytes": 742,
+        "sha256": "c85c614a946cb17bd08a504dd2ec4dffa8e362aebb852e604154e7a9f0420771"
+      },
+      "ledger": {
+        "commit": "1cad8d1957a2a06db89e884dcb03aa0f85deac0f",
+        "path": "coordination/engineering/indonesia-papua9580-20261015/native9580-authority-001/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "db6e6d0d3a6995de9c2753d9d83f68e4e61f5930",
+        "bytes": 166787,
+        "sha256": "eb95ea5f1395eaf7f2b00acabda42aa9f91a8189ccc1e8cb951316d200567ba7"
+      },
+      "native_patch": {
+        "commit": "370caa99104e548cf170ef4ce38d6b6f855fec3d",
+        "path": "coordination/engineering/indonesia-papua9580-20261015/native9580-input-001/candidate-native-patch.json",
+        "mode": "100644",
+        "git_blob_oid": "e286606e6c3a64d2ebce90885fab2e378e9a18c9",
+        "bytes": 126511,
+        "sha256": "428c8a506a6a029d17fb19d1c8795675ce6789be03b634151094ec42ae5b3958"
+      }
+    }
+  ]
+}
