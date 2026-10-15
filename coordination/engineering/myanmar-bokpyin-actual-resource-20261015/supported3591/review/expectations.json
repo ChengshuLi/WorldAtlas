@@ -1,0 +1,106 @@
+{
+  "version": 1,
+  "status": "independent-input-expectations-before-constructor-output-read",
+  "reviewer": "/root/hpapun_border_evidence",
+  "config": {
+    "commit": "443cd176902794ad65cd9b843074aeee6d0f55f6",
+    "path": "coordination/engineering/myanmar-bokpyin-actual-resource-20261015/supported3591/native-authority-config.json",
+    "bytes": 430,
+    "sha256": "cd445869ededa7bb4765ef2d5035f1b23bdfbc3f6d64fc134c984b0a0da660f6",
+    "git_blob_oid": "efae61aa11264373da3058231c7090f266425a87"
+  },
+  "pins": {
+    "source_evidence": {
+      "commit": "c26422bdbf41f369cc7b73cf60cb79376de2c5b2",
+      "path": "coordination/engineering/myanmar-bokpyin-diagnostic-20261015/inputs/source-evidence.json",
+      "mode": "100644",
+      "bytes": 119802,
+      "sha256": "ed64d3f47ba305b8d336bc0e84a888cdea7c9add8fd8a95536470eec676b239b",
+      "git_blob_oid": "6e641f70d0425194ba7e577b7339cb3072142018"
+    },
+    "native_patch": {
+      "commit": "8caae2c4c89edf26376ac6c216203c404513d7aa",
+      "path": "coordination/engineering/myanmar-bokpyin-actual-resource-20261015/supported3591/native-patch.json",
+      "mode": "100644",
+      "bytes": 35431,
+      "sha256": "df574bfa3b24327868d27e00c6cf3ee0adcdca6003c8f90e2814a0d3d70fda06",
+      "git_blob_oid": "5239a0c76681fcf304d0139293931b390564236b"
+    }
+  },
+  "diagnostic": {
+    "commit": "482d6f606d5f8b5a085d7aa2aa182af7ec9a75a1",
+    "path": "coordination/engineering/myanmar-bokpyin-actual-resource-20261015/diagnostic-001/native-diagnostic.json",
+    "sha256": "6a169db11590c0562c4ad66d4d9ff1f88acccc45bf7c498e4279ebdad9f5803b",
+    "git_blob_oid": "941428143fcac398620ac83d2d1f58794cf694ad"
+  },
+  "expected_rule_sha256": "4971440de26d9b9c7fe83d44978e24a9293a0e07c08049be0772e343414e90f3",
+  "expected_binding_sha256": "46a15d05ba1f0506207fd98637bb478707b06ee1aa427f9ef99c84f0efdfbbec",
+  "expected_component_id": "source-target:ee36dce2cb93630b41450ee9cf0f099cb067fa78bd23d16b0f5db2e0d08eb7ed",
+  "expected_target_id": "gb:MMR:ADM3:66882298B82483484204646",
+  "expected_owner": 30350,
+  "expected_native_cells": 3591,
+  "expected_native_row_count": 517,
+  "expected_native_run_count": 1093,
+  "expected_native_rows_sha256": "867b07b30c24e432465153d36fdb2e8f08bfd923a9b6bfa10c1881a0017df848",
+  "expected_base_geometry_sha256": "aeb8ba992687d02a127bd8e033f25fecf3424a2ad0919e0f919f10ca834b93f5",
+  "expected_source_receipt_sha256": "e7f8a3c3b9ff0184d8d5a909381d38f343bff0c05a93f0c7f2d6f82af71ecf4f",
+  "held_cells": 25,
+  "requested_cells": 3616,
+  "exact_supported_and_held_partition_checked": true,
+  "source_territorial_exclusions": 3,
+  "complete_source_family_parts": [
+    {
+      "parts": [
+        {
+          "bytes": 1396414,
+          "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+          "decoded_bytes": 4205367,
+          "decoded_sha256": "94c0c9af839094257d13a6fe6590feddb2dcb04540d87e58b656c9f000fb92a2",
+          "git_blob_oid": "6a91fcb22b44ae00401a0068a6c3e62bfed62374",
+          "mode": "100644",
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz",
+          "sha256": "57de50a588f418601412bb7a34cc2f43a3fd6d7d6f16635cb41b95e5ae505db6"
+        }
+      ],
+      "source_id": "gb:MMR:ADM3"
+    }
+  ],
+  "source_native_contract": {
+    "coordinateBits": 19,
+    "hierarchy_sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+    "method": "native-linear-evenodd-first-owner-v1",
+    "native_latitudes": {
+      "bytes": 1851757,
+      "commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+      "decoded_bytes": 2097328,
+      "decoded_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23",
+      "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+      "role": "immutable-normative-rule-input",
+      "root": "repository",
+      "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147"
+    },
+    "original_assets": {
+      "bounds": {
+        "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+        "path": "data/canonical-grid/bounds.json.gz",
+        "role": "original-identity-parent-camera-context",
+        "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f"
+      },
+      "province_membership": {
+        "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+        "path": "data/canonical-grid/province-membership.bin.gz",
+        "role": "original-identity-crosswalk",
+        "sha256": "01f42b69ca969090d10c42d6a1311215a19ce436b0f3e720f7f873f4a18f90da"
+      }
+    },
+    "size": 262166
+  },
+  "expected_ledger_limits": [
+    "Physical interpretation and semantic reconciliation are retained reviewed source evidence; actual current owner-zero is checked by native consumers.",
+    "Witness exclusion applies only to requested native centres. Original whole-source physical/hierarchy issues and historical source/resource limits remain retained; no whole-parent certification or acceptance is inferred."
+  ],
+  "read_limits": [
+    "System obsolete Node refused module flag before execution; existing actual operator Node24 used for data-only calculation.",
+    "c264source path is sparse-absent; read already authenticated119802B local cache whose SHA256/GitOID match actual c264API body. No Git fetch, hydration or qualifier invocation."
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "reviewer": "/root/hpapun_border_evidence",
+  "operator": "/root/runtime_inventory_simplification",
+  "outcome": "accepted-with-limits-for-stock3591-constructor-result",
+  "review_scope": "Full actual constructor products/completion receipt after operatorreportedEXIT0; independent metadata/tuple/hash arithmetic only; no native qualification rerun.",
+  "input_expectations": "expectations.json",
+  "config": {
+    "commit": "443cd176902794ad65cd9b843074aeee6d0f55f6",
+    "path": "coordination/engineering/myanmar-bokpyin-actual-resource-20261015/supported3591/native-authority-config.json",
+    "bytes": 430,
+    "sha256": "cd445869ededa7bb4765ef2d5035f1b23bdfbc3f6d64fc134c984b0a0da660f6",
+    "git_blob_oid": "efae61aa11264373da3058231c7090f266425a87"
+  },
+  "rule_sha256": "4971440de26d9b9c7fe83d44978e24a9293a0e07c08049be0772e343414e90f3",
+  "component_ids": [
+    "source-target:ee36dce2cb93630b41450ee9cf0f099cb067fa78bd23d16b0f5db2e0d08eb7ed"
+  ],
+  "counts": {
+    "ledger_rows": 1,
+    "cells": 3591,
+    "native_rows": 517,
+    "native_runs": 1093,
+    "held_excluded": 25
+  },
+  "native_bounds": [
+    97.88614847081618,
+    10.690085438410131,
+    99.04098929685773,
+    11.71514657999412
+  ],
+  "outputs": {
+    "authority-binding.json": {
+      "path": "coordination/engineering/myanmar-bokpyin-actual-resource-20261015/supported3591/authority-001/authority-binding.json",
+      "bytes": 730,
+      "sha256": "46a15d05ba1f0506207fd98637bb478707b06ee1aa427f9ef99c84f0efdfbbec",
+      "git_blob_oid": "347b8e3e76eddfd882004917798e6577c7ed9d4b"
+    },
+    "constructor-result.json": {
+      "path": "coordination/engineering/myanmar-bokpyin-actual-resource-20261015/supported3591/authority-001/constructor-result.json",
+      "bytes": 46725,
+      "sha256": "775e97ec0b8006811f69c8ee5b2f27266879a93961375ca51f0b97a0c1d301ac",
+      "git_blob_oid": "b8d111f7b508fef85eb62f3414b5183f85592fd9"
+    },
+    "original-rule-preimage.json": {
+      "path": "coordination/engineering/myanmar-bokpyin-actual-resource-20261015/supported3591/authority-001/original-rule-preimage.json",
+      "bytes": 727,
+      "sha256": "4971440de26d9b9c7fe83d44978e24a9293a0e07c08049be0772e343414e90f3",
+      "git_blob_oid": "498455c278b88eeb392bdd8568b68931f8997371"
+    },
+    "preparation.json": {
+      "path": "coordination/engineering/myanmar-bokpyin-actual-resource-20261015/supported3591/authority-001/preparation.json",
+      "bytes": 501,
+      "sha256": "4d51568695272159d8316b4a1e334f5a069d4421e95e8e67eb97397ec3939ffe",
+      "git_blob_oid": "ba466d21566ce59ad976042696a707c3faddff61"
+    }
+  },
+  "checks": [
+    "Exactly3 constructor products plus completion receipt; no extras",
+    "Ordinary whole output authority-binding.json",
+    "Ordinary whole output constructor-result.json",
+    "Ordinary whole output original-rule-preimage.json",
+    "Ordinary whole output preparation.json",
+    "Binding exact immutable source+supported patch whole pins",
+    "Preimage exact custody except rule kind",
+    "Raw preimage SHA and constructor rule hash independently derived",
+    "Raw binding SHA independently derived",
+    "Constructor exact two config locators",
+    "Stock constructor result kind/version",
+    "Exactly1 independently derived source-target component",
+    "Exact target/owner/component representation joins",
+    "Literal full base geometry and independently derived geometry hash preserved",
+    "Original whole physical receipt identity preserved",
+    "All native rows literal-equal immutable patch and diagnostic supported set",
+    "Exactly3591 unique complete owner tuples",
+    "Actual517 rows and1093 intervals",
+    "All25held absent; output plus holds exactly partition original3616",
+    "Normative latitude encoded body authenticated",
+    "Normative latitude decoded body authenticated",
+    "Native bounds independently joined to exact x and pinned f64 latitude table",
+    "Stock source/physical/current-owner/whole-parent limitations retained exactly",
+    "Completion receipt binds actual config and native-authority phase",
+    "Completion receipt declares complete3product set",
+    "Complete receipt output identity authority-binding.json",
+    "Complete receipt output identity constructor-result.json",
+    "Complete receipt output identity original-rule-preimage.json",
+    "Complete3 serialized products within unchanged4MiB reserve",
+    "Original source/patch bytes unchanged after review"
+  ],
+  "original_constructor_limits": [
+    "Physical interpretation and semantic reconciliation are retained reviewed source evidence; actual current owner-zero is checked by native consumers.",
+    "Witness exclusion applies only to requested native centres. Original whole-source physical/hierarchy issues and historical source/resource limits remain retained; no whole-parent certification or acceptance is inferred."
+  ],
+  "limits": [
+    "ActualEXIT0/one invocation supplied by distinct runtime operator and corroborated by retained stdout/execution observation; reviewer did not invoke qualifier or witness the running process.",
+    "Full c264119802B source,330-record family and477whole physical queries plus3whole territorial vetoes remain bound; no source/physical/native/GSHHG producer replay in this review.",
+    "Constructor result qualifies exactly3591 requested centres under retained source/native rule, not whole-source or whole-parent truth, legal border clearance, actual current-owner-zero, conservation, or selected-output/final delivery acceptance.",
+    "All25territorial holds remain excluded; original4target-only and5foreign-conflict holds are outside original3616 request and are not promoted.",
+    "No adversarial native-entry rerun or two-run reproduction performed; existing stock helper tests and prior input/diagnostic reviews retained with their scopes. No dispatch, merge or tracked edit."
+  ],
+  "read_limits": [
+    "System obsolete Node refused module flag before execution; existing actual operator Node24 used for data-only calculation.",
+    "c264source path is sparse-absent; read already authenticated119802B local cache whose SHA256/GitOID match actual c264API body. No Git fetch, hydration or qualifier invocation."
+  ]
+}

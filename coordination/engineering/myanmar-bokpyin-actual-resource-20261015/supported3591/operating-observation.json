@@ -1,0 +1,77 @@
+{
+  "operator_agent": "/root/runtime_inventory_simplification",
+  "delegating_agent": "/root",
+  "execution_exit_code": 0,
+  "process_exited_compute_released": true,
+  "retried": false,
+  "destination": "coordination/engineering/myanmar-bokpyin-actual-resource-20261015/supported3591/authority-001",
+  "stdout": {
+    "destination": "coordination/engineering/myanmar-bokpyin-actual-resource-20261015/supported3591/authority-001",
+    "resumed": false,
+    "binding": {
+      "phase": "native-authority",
+      "config_sha256": "cd445869ededa7bb4765ef2d5035f1b23bdfbc3f6d64fc134c984b0a0da660f6"
+    },
+    "observation": {
+      "elapsed_seconds": 1.4698805830000001,
+      "charged_phase_bytes": 275725097,
+      "allowance": {
+        "phaseBytes": 536870912,
+        "rssBytes": 536870912
+      },
+      "normalized_node_lifetime_peak_rss_bytes": 241926144,
+      "qualified_cells": 3591,
+      "limits": [
+        "Original source/physical producers are not replayed.",
+        "Constructor qualification is not actual current-owner-zero or final selected-output acceptance."
+      ]
+    }
+  },
+  "products_and_completion_receipt": [
+    {
+      "path": "coordination/engineering/myanmar-bokpyin-actual-resource-20261015/supported3591/authority-001/authority-binding.json",
+      "bytes": 730,
+      "sha256": "46a15d05ba1f0506207fd98637bb478707b06ee1aa427f9ef99c84f0efdfbbec"
+    },
+    {
+      "path": "coordination/engineering/myanmar-bokpyin-actual-resource-20261015/supported3591/authority-001/constructor-result.json",
+      "bytes": 46725,
+      "sha256": "775e97ec0b8006811f69c8ee5b2f27266879a93961375ca51f0b97a0c1d301ac"
+    },
+    {
+      "path": "coordination/engineering/myanmar-bokpyin-actual-resource-20261015/supported3591/authority-001/original-rule-preimage.json",
+      "bytes": 727,
+      "sha256": "4971440de26d9b9c7fe83d44978e24a9293a0e07c08049be0772e343414e90f3"
+    },
+    {
+      "path": "coordination/engineering/myanmar-bokpyin-actual-resource-20261015/supported3591/authority-001/preparation.json",
+      "bytes": 501,
+      "sha256": "4d51568695272159d8316b4a1e334f5a069d4421e95e8e67eb97397ec3939ffe"
+    }
+  ],
+  "constructor": {
+    "ledger_rows": 1,
+    "native_cells_counted_from_actual_rows": 3591,
+    "native_row_count": 517,
+    "native_run_count": 1093,
+    "component_ids": [
+      "source-target:ee36dce2cb93630b41450ee9cf0f099cb067fa78bd23d16b0f5db2e0d08eb7ed"
+    ],
+    "rule_sha256": "4971440de26d9b9c7fe83d44978e24a9293a0e07c08049be0772e343414e90f3"
+  },
+  "limits": [
+    "Stock qualification only; no actual current-owner-zero, consumer/selected-output acceptance or country/legal clearance.",
+    "25previouslyheldcells stayexcluded/held.",
+    "time-lpeak is measuredprocesslifetimeRSS, not aggregateprocess-tree enforcement.",
+    "No authorclaim,allocator/releaseownership,Gitmutation,dispatchintegration,source/physical/GSHHG replay."
+  ],
+  "recorded_at_utc": "2026-10-15T02:37:09.468563+00:00",
+  "external_elapsed_seconds": 1.89,
+  "darwin_time_l_maximum_resident_set_bytes": 242679808,
+  "complete_prospective_policy_bytes": 478081727,
+  "configuration_commit": "443cd176902794ad65cd9b843074aeee6d0f55f6",
+  "code_base": "b73fdbb1b0e243b773514ea46aaced496a63028f",
+  "session_headroom_bytes": 572882944,
+  "concurrent_reserved_bytes": 0,
+  "deadline_seconds": 120
+}
