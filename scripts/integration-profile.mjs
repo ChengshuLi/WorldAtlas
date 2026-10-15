@@ -1,3 +1,5 @@
+import {FOCUSED_INTEGRATION_TESTS} from './run-integration-tests.mjs';
+
 // Only these coordination controls have an audited focused test inventory.
 // Unknown docs/scripts/workflows retain full regression, including rename origins.
 export const COORDINATION_PATHS = new Set([
@@ -20,35 +22,7 @@ export const COORDINATION_PATHS = new Set([
 ]);
 // Only the actual focused runner inventory is eligible for this test-only route.
 // A provider filename/status alone cannot establish an ordinary candidate file.
-const FOCUSED_TEST_PATHS = new Set([
-  'test/handoff-scope.test.mjs',
-  'test/issue-claims.test.mjs',
-  'test/worker-result.test.mjs',
-  'test/regional-research-gate.test.mjs',
-  'test/geography-worker-lane.test.mjs',
-  'test/evidence-quality.test.mjs',
-  'test/premerge-evidence.test.mjs',
-  'test/trusted-workflow-checkouts.test.mjs',
-  'test/merge-integration.test.mjs',
-  'test/merge-integration-entrypoint.test.mjs',
-  'test/integration-proof.test.mjs',
-  'test/delivery-evidence-derivation.test.mjs',
-  'test/delivery-finalize-config.test.mjs',
-  'test/delivery-handoff-advance.test.mjs',
-  'test/delivery-handoff.test.mjs',
-  'test/delivery-registry-delta.test.mjs',
-  'test/local-workspace.test.mjs',
-  'test/native-authority-entry.test.mjs',
-  'test/native-diagnostic-entry.test.mjs',
-  'test/native-witness-authority.test.mjs',
-  'test/physical-source-retention.test.mjs',
-  'test/source-cohort.test.mjs',
-  'test/source-completed-staging.test.mjs',
-  'test/source-evidence-derivation.test.mjs',
-  'test/source-member-native-delivery.test.mjs',
-  'test/source-publication-admission.test.mjs',
-  'test/source-target-native-delivery.test.mjs',
-]);
+const FOCUSED_TEST_PATHS = new Set(FOCUSED_INTEGRATION_TESTS);
 // Callers supply the current linked issue's validated lane and declared scope.
 // Candidate metadata is never an ownership source.
 function engineeringOwnedScopes(reservation) {

@@ -8,7 +8,7 @@ import fs from 'node:fs';
 import {createHash} from 'node:crypto';
 import os from 'node:os';
 import path from 'node:path';
-import {integrationTestFiles, integrationNeedsBrowser, prepareIntegrationTests} from '../scripts/run-integration-tests.mjs';
+import {FOCUSED_INTEGRATION_TESTS, integrationTestFiles, integrationNeedsBrowser, prepareIntegrationTests} from '../scripts/run-integration-tests.mjs';
 import {renderClaim, githubAPI} from '../scripts/issue-claim-contract.mjs';
 import {prepareIntegration, completeIntegration, checkCurrentChecks, integrationProfile, createCandidate, cleanupCandidate, cleanupMergedHead} from '../scripts/merge-integration.mjs';
 
@@ -179,7 +179,7 @@ test('trusted profile uses focused invariants only for isolated evidence and doc
    }
  }
  assert.equal(integrationProfile('engineering/example',[{filename:'docs/WORKER_COORDINATION.md'},{filename:'coordination/engineering/example/receipt.json'}],{}),'evidence');
- for(const filename of ['src/attributes.js','data/hierarchy.json','drizzle/0001.sql','scripts/build-hosted.mjs'])
+ for(const filename of ['src/attributes.js','data/hierarchy.json','drizzle/0001.sql','scripts/build-hosted.mjs','scripts/run-integration-tests.mjs'])
    assert.equal(integrationProfile('engineering/example',[{filename}],{}),'full');
  assert.equal(integrationProfile('engineering/example',[{filename:'docs/a.md',previous_filename:'src/attributes.js'}],{}),'full');
  assert.equal(integrationProfile('engineering/example',[{filename:'coordination/engineering/other/receipt.json'}],{}),'full');
@@ -226,8 +226,8 @@ test('parallel full-regression shards cover each unit file once and focused prof
  }
  assert.deepEqual([...shards].sort(),expected);assert.equal(new Set(shards).size,expected.length);
  const focused=integrationTestFiles('evidence',0);
- for(const name of ['delivery-evidence-derivation', 'delivery-finalize-config', 'delivery-handoff-advance', 'delivery-handoff', 'delivery-registry-delta', 'local-workspace', 'native-authority-entry', 'native-diagnostic-entry', 'native-witness-authority', 'physical-source-retention', 'source-cohort', 'source-completed-staging', 'source-evidence-derivation', 'source-member-native-delivery', 'source-publication-admission', 'source-target-native-delivery'])assert.equal(focused.filter(file=>file===`test/${name}.test.mjs`).length,1);
- assert.equal(focused.length,27);
+ assert.deepEqual(focused,FOCUSED_INTEGRATION_TESTS);
+ assert.equal(new Set(focused).size,focused.length);
  for(const name of ['premerge-evidence','regional-research-gate','handoff-scope','merge-integration'])assert.ok(focused.includes(`test/${name}.test.mjs`));
  assert.throws(()=>integrationTestFiles('evidence',1),/Invalid/);
  assert.equal(integrationNeedsBrowser('evidence',0),false);
