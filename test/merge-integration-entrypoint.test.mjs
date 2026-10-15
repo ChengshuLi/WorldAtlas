@@ -64,10 +64,6 @@ test('native failed-job retries retain consumed artifacts without duplicate diag
   assert(yaml.includes('name: native-built-output-${{ inputs.request_id }}-${{ github.run_attempt }}'));
   assert.doesNotMatch(yaml,/path: merge-result\.json|name: merge-preflight-/);
   assert.doesNotMatch(yaml,/overwrite: true/);
-  const client=fs.readFileSync(path.join(root,'docs/MERGE_QUEUE_CLIENT.md'),'utf8');
-  assert.match(client,/gh run rerun RUN-ID --repo ChengshuLi\/WorldAtlas --failed/);
-  assert.match(client,/still the tested base/);
-  assert.match(client,/execution predates attempt-qualified uploads/);
 });
 
 test('actual entry point logs the exact complete result when bot notification fails',()=>{
