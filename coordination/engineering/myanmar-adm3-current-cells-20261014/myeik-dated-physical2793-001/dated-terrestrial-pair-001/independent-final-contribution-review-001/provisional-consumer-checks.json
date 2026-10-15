@@ -1,0 +1,193 @@
+{
+  "reviewer": "/root/myeik_repair_scope_review",
+  "status": "completed corrected provisional selected-native result reviewed; no accepted input/delivery claim",
+  "execution": {
+    "command": [
+      "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs",
+      "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/019691611b258742619f49634549be315e3d03bee8ced03f3317fe9f0e793ba4/work",
+      "4f39603ea79bd4b618a96562941676def29d193a",
+      "f43770d6b60a7826cd861d2c3954b9db7c886e9d",
+      "0cb5aef6e5bd29fa577eccfbf3c005b6a1a0651a",
+      "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/019691611b258742619f49634549be315e3d03bee8ced03f3317fe9f0e793ba4/work/.cache/myeik2-provisional-selected-native-001"
+    ],
+    "cwd": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/019691611b258742619f49634549be315e3d03bee8ced03f3317fe9f0e793ba4/work",
+    "executing_commit": "4f39603ea79bd4b618a96562941676def29d193a",
+    "accepted_code_body_equivalence": "f43770d6b60a7826cd861d2c3954b9db7c886e9d: all22code+2policy wholebodies/modes equal",
+    "baseline_commit": "f43770d6b60a7826cd861d2c3954b9db7c886e9d",
+    "candidate_commit": "0cb5aef6e5bd29fa577eccfbf3c005b6a1a0651a",
+    "started_utc": "2026-10-15T19:33:26.195328+00:00",
+    "ended_utc": "2026-10-15T19:41:10.760602+00:00",
+    "elapsed_seconds": 464.560290584,
+    "exit_code": 0,
+    "status": "PROVISIONAL reviewed-unmerged input-adoption execution; actual input merge and literal input/code equivalence pending",
+    "input_adoption_pr": 2027,
+    "input_adoption_merge_confirmed": false,
+    "candidate_code_executed": false,
+    "source_physical_native_qualification_rerun": false,
+    "map_repair_or_adoption_credit": 0
+  },
+  "provisional_candidate": "0cb5aef6e5bd29fa577eccfbf3c005b6a1a0651a",
+  "native_mode": "authenticated-checkpoint-append-v1",
+  "native_status": "no-new-native-loss",
+  "affected_and_acquired_rows": [
+    122215,
+    122216
+  ],
+  "lost_or_reassigned_cells": 0,
+  "displayed_component_witness": {
+    "component_id": "source-target:8eaf07e5a739a7606b8a54b40f3d32f542b286dc321322d5c43287ebb45e1ac7",
+    "native_rows_sha256": "620953d4471d762ab177fc33ca8cba2c3c41f71d3dd560f50335f1782ee69c61",
+    "x": 202763,
+    "y": 122215,
+    "previous_owner": 0,
+    "candidate_owner": 30271
+  },
+  "component_native_rows_hash_matches_both_exact_requested_keys": true,
+  "both_keys_previously_zero_supported_by_executed_stock_contract": true,
+  "both_keys_zero_reason": "qualifyTransition rejects each added authority patch run overlapping any prior selected patch run; compareSelectedCheckpointNative projects the complete shared base on both changed rows and applyNativeAdditiveRows rejects every cumulative candidate patch/base overlap. With the previously reviewed exact-two-only contribution, successful completion proves both keys absent from baseline base+patch. The single visibility witness alone proves only its displayed key.",
+  "source_code_contract_locations": [
+    "selected-checkpoint.mjs:1012-1014",
+    "scripts/selected-checkpoint-native.mjs:28-36",
+    "scripts/selected-checkpoint-native.mjs:83-97"
+  ],
+  "original15_input_pin_custody_present": [
+    {
+      "commit": "9140c516be8b1a1fe5dc422782ef8cf8a64595f7",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/myeik-dated-physical2793-001/dated-terrestrial-pair-001/stock-source-evidence-001/source-evidence.json",
+      "sha256": "6c3693eb97229bd3569f0dbb08273b5bda218fd1af616ccf06c5fd1447a9baba"
+    },
+    {
+      "commit": "9140c516be8b1a1fe5dc422782ef8cf8a64595f7",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/myeik-dated-physical2793-001/dated-terrestrial-pair-001/stock-source-evidence-001/candidate-native-patch.json",
+      "sha256": "d4189021223c14b3324ae5baa289b5921ffc3af7586b88583c98ec8b06bdd997"
+    },
+    {
+      "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+      "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9"
+    },
+    {
+      "commit": "b413bc5c660142f7dd22f76a11ce411b78e812c4",
+      "path": "coordination/engineering/source-target-native-delivery-20261014/evidence/physical-support.json",
+      "sha256": "c13f3ca095f875c8fd18d02ebb3ebd771620e11fa411fabfa115901414db6338"
+    },
+    {
+      "commit": "b413bc5c660142f7dd22f76a11ce411b78e812c4",
+      "path": "coordination/engineering/source-target-native-delivery-20261014/evidence/original-stage-inputs.json",
+      "sha256": "f6b617fdbf5cedc183a09e0f62341fe455f9f9ad23ed9cd3aa93dc90e8a8fad2"
+    },
+    {
+      "commit": "b413bc5c660142f7dd22f76a11ce411b78e812c4",
+      "path": "coordination/engineering/source-target-native-delivery-20261014/evidence/physical-reproduction.py",
+      "sha256": "05af43d7d7722e8d7bb201f5876a43d9c7f9a2d0f4ea39e467229351a35c9bc3"
+    },
+    {
+      "commit": "7e423077552651d6ec1d6bf6b879c34e956f985a",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/owners.json.gz",
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f"
+    },
+    {
+      "commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+      "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+      "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147"
+    },
+    {
+      "commit": "f3e52a1cd9e7f2765e1bec6a3e33a2f48eee9e36",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/myeik-dated-physical2793-001/dated-terrestrial-pair-001/myeik2-land-support-v1.json",
+      "sha256": "b8756a52f4b9c4569e61e7ffc920ed814602eab423a3d5f6805ff298d776c49f"
+    },
+    {
+      "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz",
+      "sha256": "57de50a588f418601412bb7a34cc2f43a3fd6d7d6f16635cb41b95e5ae505db6"
+    },
+    {
+      "commit": "08ed829d2c698f55481bc4f3011223a55e88412d",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/myeik-dated-physical2793-001/dated-terrestrial-pair-001/adopted-terrestrial-body-pair.json",
+      "sha256": "9056e545d7dd567ef6c878d46822b79758d9123d34c52509fd4b58e7564dd822"
+    },
+    {
+      "commit": "08ed829d2c698f55481bc4f3011223a55e88412d",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/myeik-dated-physical2793-001/dated-terrestrial-pair-001/developed-pair-substantive-review.json",
+      "sha256": "7b594c73ab8f3705371b1b7a0d3f07115991ae8375636f688bc3e8e6ca4eda73"
+    },
+    {
+      "commit": "af05531ab877884ef0fea7f5e7f4a5616540c8a7",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/myeik-dated-physical2793-001/actual-native-blocks-001/S2A_47PMP_20200105_0_L2A/native-observations.json",
+      "sha256": "54679419579293e030dbd90b5cad885e79522098af9f3e09f55cfd72f95c6c94"
+    },
+    {
+      "commit": "08ed829d2c698f55481bc4f3011223a55e88412d",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/myeik-dated-physical2793-001/dated-terrestrial-pair-001/actual-native-blocks-001/S2A_47PMP_20200105_0_L2A/block-06-03/rgb-native.png",
+      "sha256": "20f13d1d60c0b8b536169e5647d0164a9ad3c09322ffeed6b807d958840590fd"
+    },
+    {
+      "commit": "08ed829d2c698f55481bc4f3011223a55e88412d",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/myeik-dated-physical2793-001/dated-terrestrial-pair-001/actual-native-blocks-001/S2A_47PMP_20200105_0_L2A/block-06-03/nir-red-green-native.png",
+      "sha256": "cef3199b463a4fdbcf6b5f2d2c0c8ec8b19c25b040a4427a092910a2b562e4ac"
+    }
+  ],
+  "actual_candidate_inventory_entries": 31,
+  "actual_baseline_inventory_entries": 495,
+  "executing22code_and2policy_body_identity_equal_accepted": true,
+  "original_typed_anchor_descriptor_at_executing_HEAD": {
+    "bytes": 4843,
+    "commit": "4f39603ea79bd4b618a96562941676def29d193a",
+    "git_blob_oid": "286c681afa7a8e0de7d6af1bf31f604d09a0e20d",
+    "mode": "100644",
+    "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/myeik-dated-physical2793-001/dated-terrestrial-pair-001/myeik2-land-support-v1.json"
+  },
+  "original_typed_whole_body_read_at_original_f3_pin": {
+    "bytes": 4843,
+    "commit": "f3e52a1cd9e7f2765e1bec6a3e33a2f48eee9e36",
+    "git_blob_oid": "286c681afa7a8e0de7d6af1bf31f604d09a0e20d",
+    "mode": "100644",
+    "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/myeik-dated-physical2793-001/dated-terrestrial-pair-001/myeik2-land-support-v1.json",
+    "sha256": "b8756a52f4b9c4569e61e7ffc920ed814602eab423a3d5f6805ff298d776c49f",
+    "whole_body_consumed": true
+  },
+  "native_result_inverse_hash_verified": "61974fd3618da0f98878d0692a9dacde124080b5182a279bd36fb4d47795ce93",
+  "candidate_bindings_verified": {
+    "ledger_sha256": "09e731dce4aebc6a85a08a99a7f9ee46b3f4e9e7e23c329b9ac401217cfcfc82",
+    "manifest_sha256": "8b8f5f6f96b4f85b91929764edc2f5cf37530f0245cca066a9399de0de0ed35e",
+    "patch_sha256": "241c12f6b468198e061706d45de4ec36f906af32390413a38dcfc5c0210aa2b4",
+    "registry_sha256": "0d3c4ac7de5b968099219edc4a7b802852f811fbd23ba9722969cf1b790105d7"
+  },
+  "derived_product_pins": [
+    {
+      "path": ".cache/mmr-myeik-dated-interface-preparation-001/typed-main-adoption-001/provisional-consumer-001/complete-output/derived-publication.json",
+      "bytes": 660,
+      "sha256": "220893330e5088d31e48e489dfa6e41115f059da7ebb96f724a290ff58d6609e"
+    },
+    {
+      "path": ".cache/mmr-myeik-dated-interface-preparation-001/typed-main-adoption-001/provisional-consumer-001/complete-output/derived-facts.json",
+      "bytes": 470704,
+      "sha256": "28adba582eb74ce2608ff6207ea24c145c75116de6f89f511d7b7f592fef1eb4"
+    },
+    {
+      "path": ".cache/mmr-myeik-dated-interface-preparation-001/typed-main-adoption-001/provisional-consumer-001/complete-output/checkpoint-routes.json",
+      "bytes": 248571,
+      "sha256": "2e081c1d91ee155d965fa292146ade0301e65226a4934f7523f452c447d736af"
+    },
+    {
+      "path": ".cache/mmr-myeik-dated-interface-preparation-001/typed-main-adoption-001/provisional-consumer-001/complete-output/derived-certificate.json.gz",
+      "bytes": 7517544,
+      "sha256": "5b8dff2f9b427ea6fb2beb880b20ae204e9176abe2f7562e6833fbf766920416"
+    }
+  ],
+  "derived_certificate_decoded_sha256": "35b2945b03427c878d9958a8f2545610b40cf8520118676e0649ffc532824546",
+  "derived_certificate_entry_count": 49625,
+  "derived_certificate_complete_phase_bytes": 299113571,
+  "derived_checkpoint_is_accepted": false,
+  "failed_first_attempt_retained_at": ".cache/mmr-myeik-dated-interface-preparation-001/delivery-preparation-001/selected-native-execution.json",
+  "operating_limits": [
+    "Elapsed464.560290584seconds and exit0, empty stderr observed.",
+    "Certificate complete_phase_bytes299113571 is reported accounting, not an independently measured peakRSS or process-tree peak.",
+    "No empirical live peak, termination-guard enforcement or deployment/readback is inferred.",
+    "Genuine reviewed-unmerged inputHEAD4f used; actual accepted input merge and code/input-equivalence reconciliation remain pending.",
+    "No new science/native qualification/consumer/test rerun was performed for this review."
+  ],
+  "map_repair_or_adoption_credit": 0,
+  "findings": []
+}

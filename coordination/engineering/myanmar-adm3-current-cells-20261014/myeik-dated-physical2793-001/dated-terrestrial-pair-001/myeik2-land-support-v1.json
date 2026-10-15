@@ -1,0 +1,133 @@
+{
+  "version": 1,
+  "kind": "adopted-dated-native-centre-land-support-v1",
+  "native_contract_sha256": "6eb8ff4856810dcf83908443755e33229fc4779401a3272880e120af610f5ce0",
+  "provenance": [
+    {
+      "id": "adoption",
+      "role": "adoption",
+      "pin": {
+        "commit": "08ed829d2c698f55481bc4f3011223a55e88412d",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/myeik-dated-physical2793-001/dated-terrestrial-pair-001/adopted-terrestrial-body-pair.json",
+        "mode": "100644",
+        "git_blob_oid": "236790f8adaaf69da1229e1fc09a22ec6315c564",
+        "bytes": 6678,
+        "sha256": "9056e545d7dd567ef6c878d46822b79758d9123d34c52509fd4b58e7564dd822"
+      }
+    },
+    {
+      "id": "review",
+      "role": "review",
+      "pin": {
+        "commit": "08ed829d2c698f55481bc4f3011223a55e88412d",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/myeik-dated-physical2793-001/dated-terrestrial-pair-001/developed-pair-substantive-review.json",
+        "mode": "100644",
+        "git_blob_oid": "4d826ef680ad9c5a8c12b894aeeb9f163199f4b6",
+        "bytes": 9788,
+        "sha256": "7b594c73ab8f3705371b1b7a0d3f07115991ae8375636f688bc3e8e6ca4eda73"
+      }
+    },
+    {
+      "id": "observation",
+      "role": "observation",
+      "pin": {
+        "commit": "af05531ab877884ef0fea7f5e7f4a5616540c8a7",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/myeik-dated-physical2793-001/actual-native-blocks-001/S2A_47PMP_20200105_0_L2A/native-observations.json",
+        "mode": "100644",
+        "git_blob_oid": "2b3c49f8fe189dce1adc9376727d521918e541d1",
+        "bytes": 13113508,
+        "sha256": "54679419579293e030dbd90b5cad885e79522098af9f3e09f55cfd72f95c6c94"
+      }
+    },
+    {
+      "id": "rgb",
+      "role": "frame",
+      "pin": {
+        "commit": "08ed829d2c698f55481bc4f3011223a55e88412d",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/myeik-dated-physical2793-001/dated-terrestrial-pair-001/actual-native-blocks-001/S2A_47PMP_20200105_0_L2A/block-06-03/rgb-native.png",
+        "mode": "100644",
+        "git_blob_oid": "26bd392d0a4d8e67e7d50b443e51e485f48d8987",
+        "bytes": 1393737,
+        "sha256": "20f13d1d60c0b8b536169e5647d0164a9ad3c09322ffeed6b807d958840590fd"
+      },
+      "observation": "observation",
+      "block_pointer": "/blocks/32",
+      "display_pointer": "/blocks/32/displays/0",
+      "channels": "rgb",
+      "display_base": "coordination/engineering/myanmar-adm3-current-cells-20261014/myeik-dated-physical2793-001/dated-terrestrial-pair-001/actual-native-blocks-001"
+    },
+    {
+      "id": "nir-red-green",
+      "role": "frame",
+      "pin": {
+        "commit": "08ed829d2c698f55481bc4f3011223a55e88412d",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/myeik-dated-physical2793-001/dated-terrestrial-pair-001/actual-native-blocks-001/S2A_47PMP_20200105_0_L2A/block-06-03/nir-red-green-native.png",
+        "mode": "100644",
+        "git_blob_oid": "40a29028c536c103f86e31d0985c3a3455cb78dc",
+        "bytes": 1332044,
+        "sha256": "cef3199b463a4fdbcf6b5f2d2c0c8ec8b19c25b040a4427a092910a2b562e4ac"
+      },
+      "observation": "observation",
+      "block_pointer": "/blocks/32",
+      "display_pointer": "/blocks/32/displays/2",
+      "channels": "nir-red-green",
+      "display_base": "coordination/engineering/myanmar-adm3-current-cells-20261014/myeik-dated-physical2793-001/dated-terrestrial-pair-001/actual-native-blocks-001"
+    }
+  ],
+  "records": [
+    {
+      "source_id": "gb:MMR:ADM3:66882298B62167174305830",
+      "pixelIndex": 30271,
+      "y": 122215,
+      "x": 202763,
+      "longitude": 98.4299260773708,
+      "latitude": 12.085996589427584,
+      "adoption": {
+        "id": "adoption",
+        "pointer": "/records/0"
+      },
+      "review": {
+        "id": "review",
+        "pointer": "/records/0",
+        "interpretation_pointer": "/review_result"
+      },
+      "observations": [
+        {
+          "id": "observation",
+          "pointer": "/points/1823",
+          "frames": [
+            "rgb",
+            "nir-red-green"
+          ]
+        }
+      ]
+    },
+    {
+      "source_id": "gb:MMR:ADM3:66882298B62167174305830",
+      "pixelIndex": 30271,
+      "y": 122216,
+      "x": 202763,
+      "longitude": 98.4299260773708,
+      "latitude": 12.084653847495268,
+      "adoption": {
+        "id": "adoption",
+        "pointer": "/records/1"
+      },
+      "review": {
+        "id": "review",
+        "pointer": "/records/1",
+        "interpretation_pointer": "/review_result"
+      },
+      "observations": [
+        {
+          "id": "observation",
+          "pointer": "/points/1824",
+          "frames": [
+            "rgb",
+            "nir-red-green"
+          ]
+        }
+      ]
+    }
+  ]
+}
