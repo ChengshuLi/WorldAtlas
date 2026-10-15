@@ -446,8 +446,12 @@ test('finalization admits only an exact committed restoration of absent canonica
   const g=setup(); g.config.restored_read_roles.paths=[];
   assert.throws(()=>finalizeDelivery(g.config,g.reader), /inventory required/);
   const h=setup(); delete h.config.restored_read_roles;
-  assert.throws(()=>finalizeDelivery(h.config,h.reader), error => h.reader &&
-    error.message.includes('accepted-original/custody.json') && error.message.includes('accepted-original/operating.json'));
+  const automatic = finalizeDelivery(h.config,h.reader);
+  for (const name of ['custody.json','operating.json']) {
+    const originalPath = 'coordination/engineering/accepted-original/' + name;
+    assert.deepEqual(automatic['restored-read-roles/' + originalPath], h.reader.read(h.reader.pin('b'.repeat(40),originalPath)));
+    assert.ok(JSON.parse(automatic['package-inputs.json']).inputs.includes(originalPath));
+  }
 });
 
 test('finalization refuses a new identity at an accepted package path', () => {
@@ -1027,4 +1031,35 @@ test('multiple modern source-evidence carry is aggregate rather than reset per o
   const destination = '.cache/delivery-handoff/multiple-budget-refused', result = f.run('compose', destination, [], config);
   assert.notEqual(result.status, 0); assert.match(result.stderr, /composition carry exceeds/);
   assert.equal(fs.existsSync(path.join(f.root, destination)), false);
+});
+
+test('final handoff publishes exact original roles locally with one receipt and exact resume', t => {
+  const root = directory(t), name = 'coordination/engineering/original/source.json', raw = jsonBytes({original: true});
+  const pin = {commit, path: name, mode: '100644', bytes: raw.length, sha256: digest(raw),
+    git_blob_oid: execFileSync('git', ['hash-object', '--stdin'], {input: raw}).toString().trim()};
+  const products = {'package-roles.json': jsonBytes({paths: [pin]}), 'ownership-selection.json': jsonBytes({selected: true}),
+    ['restored-read-roles/' + name]: raw};
+  const destination = '.cache/delivery-handoff/restored', binding = {phase: 'finalize', input: commit};
+  assert.equal(publish(root, destination, products, binding).resumed, false);
+  assert.deepEqual(fs.readFileSync(path.join(root,destination,'restored-read-roles',name)),raw);
+  assert.equal(fs.existsSync(path.join(root,name)),false, 'original repository path is never written');
+  assert.equal(publish(root,destination,products,binding,true).resumed,true);
+  const receipt = JSON.parse(fs.readFileSync(path.join(root,destination,'preparation.json')));
+  assert.deepEqual(Object.keys(receipt.outputs).sort(),Object.keys(products).sort());
+  assert.throws(()=>publish(root,destination,products,{phase:'changed'},true),/bytes\/binding changed/);
+  fs.mkdirSync(path.join(root,destination,'foreign-empty'));
+  assert.throws(()=>publish(root,destination,products,binding,true),/foreign resumed output inventory/);
+});
+
+test('original role publication refuses unbound or corrupt roles before creating output', t => {
+  for (const kind of ['unbound','corrupt','nonlocal']) {
+    const root=directory(t), raw=jsonBytes({original:true}), name='coordination/engineering/original/source.json';
+    const pin={commit,path:name,mode:'100644',bytes:raw.length,sha256:digest(raw),
+      git_blob_oid:execFileSync('git',['hash-object','--stdin'],{input:raw}).toString().trim()};
+    const products={'package-roles.json':jsonBytes({paths:kind==='unbound'?[]:[pin]}),
+      ['restored-read-roles/'+name]:kind==='corrupt'?Buffer.from('changed'):raw};
+    const destination=kind==='nonlocal'?'coordination/engineering/control/output':'.cache/delivery-handoff/refused';
+    assert.throws(()=>publish(root,destination,products,{}),/authenticated package role|body differs|local delivery output tree/);
+    assert.equal(fs.existsSync(path.join(root,destination)),false);
+  }
 });
