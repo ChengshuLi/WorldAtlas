@@ -5,12 +5,13 @@ import path from 'node:path';
 import {spawnSync, execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
+import {integrationTestFiles} from '../scripts/run-integration-tests.mjs';
 import {checkoutExecutionClosure} from '../coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/artifact-checkout-execution.mjs';
 
 const repo=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
-const focused=['handoff-scope','issue-claims','worker-result','regional-research-gate','geography-worker-lane',
-  'evidence-quality','premerge-evidence','trusted-workflow-checkouts','merge-integration',
-  'merge-integration-entrypoint','integration-proof'];
+// Routing controls check roster eligibility separately; this fixture exercises
+// the actual entry without duplicating its selected inventory.
+const focused=integrationTestFiles('evidence',0).map(file=>path.basename(file,'.test.mjs'));
 const helper='scripts/canonical-restoration.mjs';
 
 test('actual checkout authority matches the selected certificate role closure and critical bytes',()=>{

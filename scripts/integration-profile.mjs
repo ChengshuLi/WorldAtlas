@@ -16,10 +16,7 @@ export const COORDINATION_PATHS = new Set([
   'scripts/run-worker-merge.mjs',
   '.github/workflows/handoff-scope.yml',
   '.github/workflows/merge-integration-checks.yml', '.github/workflows/worker-merge.yml',
-  '.github/evidence-policy.json',
-  ...['handoff-scope','issue-claims','worker-result','regional-research-gate','geography-worker-lane',
-    'evidence-quality','premerge-evidence','trusted-workflow-checkouts','merge-integration',
-    'merge-integration-entrypoint','integration-proof'].map(name=>`test/${name}.test.mjs`)
+  '.github/evidence-policy.json'
 ]);
 // Only the actual focused runner inventory is eligible for this test-only route.
 // A provider filename/status alone cannot establish an ordinary candidate file.
