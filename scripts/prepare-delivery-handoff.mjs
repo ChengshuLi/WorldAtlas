@@ -1002,9 +1002,14 @@ export function resumeSource(root, destination, config, binding, reader) {
 export async function sourceCohort(config, reader, root, destination, phase = 'source') {
   need(['source', 'physical'].includes(phase), 'Unknown scientific delivery phase');
   const phaseConfig = config[phase];
-  need(same(Object.keys(config).sort(), ['preparation_allowance', 'processing_allowance', 'runtime_inventory', phase, 'version'].sort())
-    && config.version === 1 && config.preparation_allowance && phaseConfig?.version === 1,
-    'Explicit source configuration, runtime inventory and allowances required');
+  need(same(Object.keys(config).filter(key => key !== 'preparation_allowance').sort(),
+    ['processing_allowance', 'runtime_inventory', phase, 'version'].sort())
+    && config.version === 1 && phaseConfig?.version === 1,
+    'Explicit source configuration, runtime inventory and child allowance required');
+  if (Object.hasOwn(config, 'preparation_allowance')) need(config.preparation_allowance
+    && same(Object.keys(config.preparation_allowance).sort(), ['phaseBytes', 'rssBytes'])
+    && Object.values(config.preparation_allowance).every(value => Number.isSafeInteger(value) && value > 0),
+  'Explicit parent preparation allowance must remain finite and positive');
   need(same(Object.keys(config.processing_allowance ?? {}).sort(), ['phaseBytes', 'rssBytes']), 'Explicit source processing allowance required');
   const runtime = config.runtime_inventory;
   need(runtime && same(Object.keys(runtime).sort(), ['files', 'python']) && Array.isArray(runtime.files)
@@ -1037,6 +1042,17 @@ export async function sourceCohort(config, reader, root, destination, phase = 's
       && ['dev', 'ino', 'size', 'mtimeMs', 'ctimeMs'].every(key => before[key] === after[key]), 'Installed source runtime identity differs');
     return {path: pin.path, resolved, bytes, sha256: pin.sha256};
   };
+  // The Node parent already owns a freshly admitted candidate budget. Reserve
+  // the child's declared output before execution, rather than discovering a
+  // mismatched manual parent cap after successful scientific work.
+  const outputReserve = phaseConfig.resources.output_bytes;
+  need(Number.isSafeInteger(outputReserve) && outputReserve > 0, 'Complete source output reserve required');
+  const parentBudget = reader.budget.snapshot();
+  const prospective = parentBudget.accounted_bytes + parentBudget.reserved_review_bytes + outputReserve;
+  need(Number.isSafeInteger(prospective) && prospective <= parentBudget.limit_bytes,
+    'Source output reserve exceeds parent preparation budget');
+  // Publication charges the actual products once; this aggregate check is not
+  // an ordinary-file charge or a second permanently retained output copy.
   const identities = runtime.files.map(runtimeIdentity);
   const stagingParent = '.cache/delivery-handoff';
   admitDestination(root, stagingParent + '/source-staging', false);

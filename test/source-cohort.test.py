@@ -293,7 +293,6 @@ class ScientificFixture(unittest.TestCase):
         python_pin = next(pin for pin in runtime_files if str(Path(pin['path']).resolve()) == executable)
         python_pin['path'] = sys.executable
         config = dict(version=1, source=source, runtime_inventory=dict(python=python_pin, files=runtime_files),
-                      preparation_allowance=dict(phaseBytes=536870912, rssBytes=536870912),
                       processing_allowance=dict(phaseBytes=536870912, rssBytes=536870912))
         (root / 'cli-config.json').write_text(json.dumps(config))
         destination = '.cache/delivery-handoff/source-fixture-001'
@@ -301,6 +300,20 @@ class ScientificFixture(unittest.TestCase):
                    'source', 'cli-config.json', destination]
         env = {k: v for k, v in os.environ.items() if k not in ('NODE_OPTIONS', 'NODE_PATH')}
         env['GIT_NO_LAZY_FETCH'] = '1'
+        # Fresh automatic Node admission replaces the duplicated manual parent
+        # cap. Explicit intentional caps and unavailable memory still refuse
+        # before scientific scratch or outputs are created.
+        limited = dict(config, preparation_allowance=dict(phaseBytes=1, rssBytes=536870912))
+        (root / 'cli-config.json').write_text(json.dumps(limited))
+        denied = subprocess.run(command, cwd=root, env=env, capture_output=True, text=True, timeout=30)
+        self.assertNotEqual(denied.returncode, 0)
+        self.assertFalse((root / '.cache/delivery-handoff').exists())
+        (root / 'cli-config.json').write_text(json.dumps(config))
+        exhausted = dict(env, WORLDATLAS_MEMORY_HEADROOM_BYTES=str(2**52))
+        denied = subprocess.run(command, cwd=root, env=exhausted, capture_output=True, text=True, timeout=30)
+        self.assertNotEqual(denied.returncode, 0)
+        self.assertIn('Insufficient current preparation memory', denied.stderr)
+        self.assertFalse((root / '.cache/delivery-handoff').exists())
         first = subprocess.run(command, cwd=root, env=env, capture_output=True, text=True, timeout=30)
         self.assertEqual(first.returncode, 0, first.stdout + first.stderr)
         self.assertFalse(json.loads(first.stdout)['resumed'])
