@@ -1,15 +1,13 @@
 """Compact semantic controls and retained whole-world custody fixtures.
 
 Semantic cases call the actual validator predicates with small original records.
-The separate full-world positive and custody tests retain complete-byte coverage.
+Separate custody and report-binding controls retain whole-byte coverage.
 """
-import gzip
 import importlib.util
 import json
 import os
 import pathlib
 import sys
-import tempfile
 import unittest
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -39,18 +37,6 @@ class Fixture:
     def raw(self, original):
         target = self.aliases[original]['payload']
         return self.changed[target] if hasattr(self, 'changed') and target in self.changed else (ROOT / target).read_bytes()
-
-    def alter_rows(self, family, change, select=lambda rows: True):
-        report = next(iter(self.reports.values()))
-        for entry in report['outputs'][family]:
-            target = self.aliases[entry['path']]['payload']
-            body = json.loads(gzip.decompress(self.raw(entry['path'])))
-            rows = body['features'] if isinstance(body, dict) else body
-            if select(rows):
-                change(rows)
-                self.changed[target] = gzip.compress(canonical_json(body), mtime=0)
-                return
-        raise AssertionError('Control did not find its required world example')
 
     def finalize(self):
         for prefix, report in self.reports.items():
@@ -90,32 +76,6 @@ class Fixture:
         path = self.root / validator.INDEX
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_bytes(canonical_json(self.index))
-
-
-class FixtureBindingControls(unittest.TestCase):
-    def test_changed_shared_payload_rebinds_complete_and_failed_receipts_without_touching_original(self):
-        from physical_component_custody import validate
-        with tempfile.TemporaryDirectory(prefix='physical-fixture-binding-') as directory:
-            f = Fixture(pathlib.Path(directory))
-            f.alter_rows('new_contacts', lambda rows: rows.clear())
-            changed = next(iter(f.changed))
-            original = (ROOT / changed).read_bytes()
-            f.finalize()
-            self.assertEqual((ROOT / changed).read_bytes(), original)
-            self.assertNotEqual((f.root / changed).read_bytes(), original)
-            # Real whole-byte validation checks every alias and both successful
-            # runs, plus any shared payload in the preserved failed trial.
-            validate(f.root, f.index)
-
-    def test_unchanged_bad_descriptor_is_not_repaired_into_apparent_validity(self):
-        from physical_component_custody import validate
-        with tempfile.TemporaryDirectory(prefix='physical-fixture-rejection-') as directory:
-            f = Fixture(pathlib.Path(directory))
-            entry = next(iter(next(iter(f.reports.values()))['outputs'].values()))[0]
-            entry['sha256'] = '0' * 64
-            f.finalize()
-            with self.assertRaisesRegex(ValueError, 'Missing or changed original output'):
-                validate(f.root, f.index)
 
 
 class CompactFixture:

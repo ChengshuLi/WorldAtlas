@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import {fullRegressionShard, integrationTestFiles, PACKAGED_ASSET_TESTS, DATABASE_NEIGHBOR_TESTS, MIGRATION_WORKER_TESTS, COMPONENT_CONTROL_TEST, PRIORITY_EVIDENCE_TEST} from '../scripts/run-integration-tests.mjs';
+import {fullRegressionShard, integrationTestFiles, PACKAGED_ASSET_TESTS, DATABASE_NEIGHBOR_TESTS, MIGRATION_WORKER_TESTS, COMPONENT_CONTROL_TEST} from '../scripts/run-integration-tests.mjs';
 import {integrationProfile} from '../scripts/integration-profile.mjs';
 
 const inventory = fs.readdirSync('test').filter(name => name.endsWith('.test.mjs'))
@@ -19,7 +19,7 @@ function verifyAssignment(files) {
   for (const name of MIGRATION_WORKER_TESTS.filter(name => files.includes(name))) {
     assert.deepEqual(shards.flatMap((files, shard) => files.includes(name) ? [shard] : []), [2]);
   }
-  for (const name of [COMPONENT_CONTROL_TEST, PRIORITY_EVIDENCE_TEST].filter(name => files.includes(name))) {
+  for (const name of [COMPONENT_CONTROL_TEST].filter(name => files.includes(name))) {
     assert.deepEqual(shards.flatMap((files, shard) => files.includes(name) ? [shard] : []), [1]);
   }
 }

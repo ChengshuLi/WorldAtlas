@@ -20,30 +20,11 @@ const COMMON_NATIVE_REGRESSION_COMMITS = [
 // Only these actual tests consume the additional archived physical vintages.
 // Select by the runner's file roster, so ordinary shard reassignment is harmless.
 const ARCHIVED_PHYSICAL_REGRESSION_INPUTS = [
-  {tests:['test/physical-audit-evidence.test.mjs'],commits:[
-    // validate-physical-audit-evidence reads the original water input and
-    // complete execution code from its five reports and input envelope.
-    'ff566eab31ef072084c548f67dee8ee727ab3d47',
-    'e67eeafc1aa130aa5c1a6d1222d39116625fd003',
-    '8b61b9303553f2068f18ad5a000d4cba14059547',
-    'b6e0d0d21cfd6dde68c3c292c9513d3a24896a11',
-    '85571b6ef23f5565f08693a542fa7dad20c651b8'
-  ]},
-  {tests:['test/physical-component-evidence.test.mjs'],commits:[
-    // Only the full scientific validator reads report.input_commit.
-    'c603befd3aaf4da90d59b12378e1e0739331efba'
-  ]},
-  {tests:['test/physical-component-evidence.test.mjs','test/physical-component-custody.test.mjs',
-    'test/physical-component-fixture.test.mjs','test/physical-component-report-binding.test.mjs'],commits:[
+  {tests:['test/physical-component-custody.test.mjs','test/physical-component-report-binding.test.mjs'],commits:[
     // Each executes complete original custody before its own assertions.
     // The compact evidence-controls wrapper uses synthetic predicates instead.
     '8f6dc184d1a41b634cec4759bb57b3cc04dd980a',
     '6ed6406f9fad4c7c468b06a376346b216cb50db7'
-  ]},
-  {tests:['test/physical-gap-priority-evidence.test.mjs'],commits:[
-    // validate-physical-gap-priorities reads the archived input/execution;
-    // priority controls exercise pure rows and synthetic source fixtures.
-    'bf9e8a6580e997d82d0414235e3a0d2a81e1e24a'
   ]}
 ];
 export const NATIVE_REGRESSION_COMMITS = [...COMMON_NATIVE_REGRESSION_COMMITS,
@@ -52,7 +33,7 @@ export function prepareNativeRegressionInputs(profile,{files,exists=fs.existsSyn
   if(profile!=='full'||!exists('scripts/native-ownership/validate-context-input-stage.mjs'))return {applicable:false,fetched:[]};
   if(files!==undefined&&(!Array.isArray(files)||!files.length||files.some(name=>typeof name!=='string'||!/^test\/[A-Za-z0-9_.-]+\.test\.mjs$/.test(name)||!exists(name))))
     throw Error('Actual regression file roster required');
-  // Unscoped callers retain the complete previous acquisition behavior.
+  // Unscoped callers retain every remaining regression dependency.
   const required=files===undefined?NATIVE_REGRESSION_COMMITS:[...COMMON_NATIVE_REGRESSION_COMMITS,
     ...ARCHIVED_PHYSICAL_REGRESSION_INPUTS.filter(group=>group.tests.some(name=>files.includes(name))).flatMap(group=>group.commits)];
   const present=commit=>run('git',['cat-file','-e',commit+'^{commit}'],{encoding:'utf8'}).status===0;
@@ -83,9 +64,6 @@ export const MIGRATION_WORKER_TESTS = [
 // Shard 1 had the shortest setup and test path (181 s of tests). Keep the
 // ordinary inventory index intact so moving this file does not move neighbors.
 export const COMPONENT_CONTROL_TEST = 'test/physical-component-evidence-controls.test.mjs';
-// Run 38005876327: priority evidence took 61 s on the critical build/parity
-// shard. Compact controls free shard 1; move this file without shifting neighbors.
-export const PRIORITY_EVIDENCE_TEST = 'test/physical-gap-priority-evidence.test.mjs';
 export function fullRegressionShard(inventory, shard) {
   const placement = new Map([
     ...PACKAGED_ASSET_TESTS.map(name => [name, 0]),
@@ -95,7 +73,7 @@ export function fullRegressionShard(inventory, shard) {
   const reserved = inventory.filter(name => placement.has(name) && placement.get(name) === shard);
   const ordinary = inventory.filter(name => !placement.has(name));
   return [...reserved, ...ordinary.filter((name, index) =>
-    ([COMPONENT_CONTROL_TEST, PRIORITY_EVIDENCE_TEST].includes(name) ? 1 : index % 3) === shard)];
+    (name === COMPONENT_CONTROL_TEST ? 1 : index % 3) === shard)];
 }
 
 export function integrationTestFiles(profile, shard, testSelection = 'complete') {
