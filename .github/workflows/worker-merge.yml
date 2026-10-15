@@ -61,7 +61,6 @@ jobs:
         name: Validate ready reviewed head and pin current integration candidate
         env:
           GH_TOKEN: ${{ github.token }}
-          PREPARE_FALLBACK: 'true'
           MERGE_PHASE: prepare
         run: node scripts/run-worker-merge.mjs
   geography:

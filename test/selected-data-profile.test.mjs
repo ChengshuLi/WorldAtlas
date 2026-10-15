@@ -226,6 +226,8 @@ function mergeFixture({selectedFixture,gateReady=false} = {}) {
   f.api=async(route,method='GET',body)=>{
     f.mergeReads.push(route);
     if(method==='PUT'){f.writes.push(body);return {merged:true,sha:'f'.repeat(40)};}
+    if(route===root+'/git/refs'&&method==='POST')return {ref:body.ref};
+    if(route===root+'/merges'&&method==='POST'){assert.notEqual(body.base,'main');assert.equal(body.head,f.head);return {sha:candidate};}
     if(route===root+'/git/ref/heads/main')return {object:{sha:f.base}};
     if(route===root+'/git/commits/'+candidate)return {sha:candidate,tree:{sha:'head-tree'},parents:[{sha:f.base},{sha:f.head}]};
     if(route.includes('/check-runs'))return {check_runs:['scope',...(f.evidenceQuality?['evidence']:[])].map((name,id)=>({id:id+1,name,status:'completed',conclusion:'success',app:{id:1}}))};
@@ -234,7 +236,7 @@ function mergeFixture({selectedFixture,gateReady=false} = {}) {
     return source(route);
   };
   f.options={api:f.api,repo:'owner/repo',number:20,expectedHead:f.head,policy:{version:1,mode:'enforce-new',activation_time:'2100-01-01T00:00:00Z'},
-    evidenceCheck:async()=>({status:'legacy'}),candidateSleep:async()=>{}};
+    evidenceCheck:async()=>({status:'legacy'}),integrationRequestId:'selected-candidate-test-request'};
   f.complete=(overrides={})=>completeIntegration({...f.options,integrationResult:'success',geographyResult:'success',
     testedBase:f.base,testedCandidate:candidate,
     geographyReportLoader:async()=>({version:1,method_id:'worldatlas-trusted-geography-check-v1',baseline_commit:f.base,trusted_code_commit:f.base,
