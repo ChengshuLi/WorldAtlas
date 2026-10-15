@@ -185,7 +185,7 @@ test('trusted profile uses focused invariants only for isolated evidence and doc
  assert.equal(integrationProfile('engineering/example',[{filename:'coordination/engineering/other/receipt.json'}],{}),'full');
 });
 
-test('only complete ordinary modified focused tests use the test-only lane', () => {
+test('ordinary modified focused tests compose with coordination while unknown setup stays full', () => {
   const files=integrationTestFiles('evidence',0).map(filename=>({filename,status:'modified'}));
   const tree=new Map(files.map(file=>[file.filename,{type:'blob',mode:'100644',sha:'1'.repeat(40)}]));
   assert.equal(integrationProfile('engineering/tests',files,{},tree),'evidence');
@@ -200,8 +200,13 @@ test('only complete ordinary modified focused tests use the test-only lane', () 
       assert.equal(integrationProfile('engineering/tests',[file],{},changed),'full');
     }
     assert.equal(integrationProfile('engineering/tests',[file]),'full');
-    for(const filename of ['scripts/prepare-delivery-handoff.mjs','scripts/native-ownership/native-preparation-guards.mjs',
-      'scripts/native-ownership/chained-build-context.mjs','src/native-grid.js','test/unknown.test.mjs','docs/LOCAL_WORKSPACES.md'])
+    for(const filename of ['scripts/prepare-delivery-handoff.mjs','docs/LOCAL_WORKSPACES.md',
+      'coordination/engineering/tests/receipt.json'])
+      assert.equal(integrationProfile('engineering/tests',[file,{filename,status:'modified'}],{},tree),'evidence');
+    for(const filename of ['scripts/native-ownership/native-preparation-guards.mjs',
+      'scripts/native-ownership/chained-build-context.mjs','src/native-grid.js','src/main.js','hosted/app.mjs',
+      'scripts/run-integration-tests.mjs','scripts/build-cloudflare.mjs','vite.config.js','package.json',
+      'package-lock.json','requirements.txt','.github/package-inputs.json','data/hierarchy.json','test/unknown.test.mjs'])
       assert.equal(integrationProfile('engineering/tests',[file,{filename,status:'modified'}],{},tree),'full');
   }
   // These package-contract, asset-dependent and Python-helper tests are not
@@ -214,6 +219,25 @@ test('only complete ordinary modified focused tests use the test-only lane', () 
     assert.equal(integrationProfile('engineering/tests',[{filename,status:'modified'}],{},ordinary),'full');
   }
   assert.equal(integrationProfile('engineering/tests',[],{},tree),'full');
+});
+
+test('actual review-receipt PR 2010 paths use the complete applicable focused inventory', () => {
+  const names = ['docs/AUTHOR_PREFLIGHT.md','docs/GEOGRAPHIC_GAP_ADJUDICATION.md',
+    'docs/PREMERGE_EVIDENCE_REVIEW.md','docs/prompts/ENGINEERING.txt','docs/prompts/GEOGRAPHY.txt',
+    'docs/prompts/LUNA_HISTORY.txt','scripts/geographic-adjudication-api.mjs','scripts/merge-integration.mjs',
+    'scripts/premerge-evidence.mjs','test/geographic-adjudication-api.test.mjs',
+    'test/merge-integration.test.mjs','test/premerge-evidence.test.mjs'];
+  const files = names.map(filename => ({filename, status: 'modified'}));
+  const authored = new Map(names.map(name => [name, {type:'blob', mode:'100644', sha:'1'.repeat(40)}]));
+  assert.equal(integrationProfile('engineering/remove-duplicate-review-receipts-20261015', files, {}, authored), 'evidence');
+  for (const file of files.filter(file => file.filename.startsWith('test/')))
+    assert(integrationTestFiles('evidence',0).includes(file.filename), file.filename);
+  const yaml = fs.readFileSync('.github/workflows/worker-merge.yml','utf8');
+  const focused = yaml.split('      - name: Checkout only focused-test inputs for evidence regression\n')[1].split('      - uses:')[0];
+  assert.match(focused,/coverage-gaps-907-20261005-local01\/sources\/natural-earth-lakes\.geojson\.gz/);
+  const unknown = {filename:'test/new-emitted-asset.test.mjs',status:'added'};
+  authored.set(unknown.filename,{type:'blob',mode:'100644',sha:'2'.repeat(40)});
+  assert.equal(integrationProfile('engineering/example',[...files,unknown],{},authored),'full');
 });
 
 test('parallel full-regression shards cover each unit file once and focused profile retains core gates', () => {
