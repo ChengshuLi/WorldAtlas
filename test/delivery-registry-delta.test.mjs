@@ -19,7 +19,8 @@ function fixture({count = 7, generated = true, cumulative = true} = {}) {
     pin(commit, name) { const entry = records.get(commit + ':' + name); assert.ok(entry, 'Missing exact snapshot: ' + name); return entry.pin; },
     read(pin) {
       const actual = records.get(pin.commit + ':' + pin.path); assert.ok(actual, 'Missing original body');
-      assert.deepEqual(pin, actual.pin, 'Changed whole original pin'); reads.push(pin.path); return actual.raw;
+      const {roles, ...identity} = pin; // Projection annotations are not part of immutable identity.
+      assert.deepEqual(identity, actual.pin, 'Changed whole original pin'); reads.push(pin.path); return actual.raw;
     },
     json(pin) { parsed.push(pin.path); return JSON.parse(reader.read(pin)); },
     hasPath(commit, name) { return records.has(commit + ':' + name); },
@@ -179,9 +180,17 @@ test('wrong selector hook, prior base, prebuilt base and unavailable parse allow
   assert.ok(!budget.parsed.includes(budget.priorRegistry.path));
 });
 
-test('caller config cannot replace the authenticated accepted registry and original restorations remain mandatory', () => {
+test('caller config cannot replace the accepted registry and missing originals stage without a restoration list', () => {
   const f = fixture(); f.config.accepted_registry = {version: 1, entries: []}; f.config.new_authorities = [];
   assert.equal(JSON.parse(finalizeDelivery(f.config, f.reader)['package-roles.json']).new_authorities, 7);
   delete f.config.restored_read_roles;
-  assert.throws(() => finalizeDelivery(f.config, f.reader), /accepted path identity/);
+  const outputs = finalizeDelivery(f.config, f.reader);
+  const projection = JSON.parse(outputs['package-roles.json']);
+  assert.equal(projection.new_authorities, 7);
+  const staged = Object.keys(outputs).filter(name => name.startsWith('restored-read-roles/'));
+  assert.equal(staged.length, 28);
+  for (const name of staged) {
+    const pin = projection.paths.find(value => value.path === name.slice('restored-read-roles/'.length));
+    assert.ok(pin); assert.deepEqual(outputs[name], f.reader.read(pin));
+  }
 });
