@@ -1,0 +1,519 @@
+{
+  "kind": "actual-source-output-contract-and-selected-raw-pixel-review",
+  "reviewer": "/root/physical_remainder_source_limits",
+  "report": {
+    "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/source-observations.json",
+    "bytes": 511288,
+    "sha256": "d0a36f806ed4a270f6075332f8f4a20fa6c5a53afb8068d07ec6fa315a479e07"
+  },
+  "reader_sha256": "250bbdfe05bc55b1e2a19a3affce7d0ded10766508376e40a47a328a0595d12f",
+  "tile_headers": 55,
+  "first_headers": [
+    {
+      "tile": "N00E105",
+      "keys": 1965,
+      "native_grid_confirmed": true,
+      "product_year_version_license_confirmed": true,
+      "identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:31:00 GMT",
+        "etag": "\"b536cfd16452a63cef6be9693a48ef95\"",
+        "accept-ranges": "bytes",
+        "content-length": "2730765"
+      }
+    },
+    {
+      "tile": "N00E126",
+      "keys": 4122,
+      "native_grid_confirmed": true,
+      "product_year_version_license_confirmed": true,
+      "identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:31:01 GMT",
+        "etag": "\"03cc824a3ae7fc916a63e75fc1920ff7\"",
+        "accept-ranges": "bytes",
+        "content-length": "6897024"
+      }
+    },
+    {
+      "tile": "N00E129",
+      "keys": 533,
+      "native_grid_confirmed": true,
+      "product_year_version_license_confirmed": true,
+      "identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:31:01 GMT",
+        "etag": "\"2a32d3bc1b1c2abf3167676b0f05edcc\"",
+        "accept-ranges": "bytes",
+        "content-length": "2430173"
+      }
+    },
+    {
+      "tile": "N03E105",
+      "keys": 2846,
+      "native_grid_confirmed": true,
+      "product_year_version_license_confirmed": true,
+      "identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:31:12 GMT",
+        "etag": "\"0ea003e4d7f53d233e4d128823c66415\"",
+        "accept-ranges": "bytes",
+        "content-length": "2710852"
+      }
+    },
+    {
+      "tile": "N03E108",
+      "keys": 1060,
+      "native_grid_confirmed": true,
+      "product_year_version_license_confirmed": true,
+      "identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:31:12 GMT",
+        "etag": "\"0b53323523ad958b3980693e1b010398\"",
+        "accept-ranges": "bytes",
+        "content-length": "3492493"
+      }
+    },
+    {
+      "tile": "S09E126",
+      "keys": 1323,
+      "native_grid_confirmed": true,
+      "product_year_version_license_confirmed": true,
+      "identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:42:18 GMT",
+        "etag": "\"5f9fb0047257d2d33b6997506d9c293e-2\"",
+        "accept-ranges": "bytes",
+        "content-length": "9060223"
+      }
+    },
+    {
+      "tile": "S09E129",
+      "keys": 2108,
+      "native_grid_confirmed": true,
+      "product_year_version_license_confirmed": true,
+      "identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:42:18 GMT",
+        "etag": "\"384003546c1e499b887e466354bd132b\"",
+        "accept-ranges": "bytes",
+        "content-length": "4776981"
+      }
+    },
+    {
+      "tile": "S09E132",
+      "keys": 3204,
+      "native_grid_confirmed": true,
+      "product_year_version_license_confirmed": true,
+      "identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:42:18 GMT",
+        "etag": "\"c45f617b8fb8b8ad432dc9d6fdbcb023\"",
+        "accept-ranges": "bytes",
+        "content-length": "4767330"
+      }
+    },
+    {
+      "tile": "S09E135",
+      "keys": 227,
+      "native_grid_confirmed": true,
+      "product_year_version_license_confirmed": true,
+      "identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:42:18 GMT",
+        "etag": "\"3300ec1a91ca56aa6d5e2e46f1160138\"",
+        "accept-ranges": "bytes",
+        "content-length": "4025006"
+      }
+    },
+    {
+      "tile": "S12E138",
+      "keys": 19,
+      "native_grid_confirmed": true,
+      "product_year_version_license_confirmed": true,
+      "identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:42:32 GMT",
+        "etag": "\"6ca3b7a30b6cf9c867d8521b68a81b09\"",
+        "accept-ranges": "bytes",
+        "content-length": "2050871"
+      }
+    }
+  ],
+  "old_object_identity_matches": 45,
+  "new_coreblock_metadata_checked": 2709,
+  "output_rows_checked": 80712,
+  "coverage_status_counts": {
+    "valid-native-value": 80712
+  },
+  "literal_class_counts": {
+    "10": 29102,
+    "80": 23455,
+    "60": 4006,
+    "30": 3662,
+    "95": 18647,
+    "50": 1204,
+    "90": 212,
+    "40": 254,
+    "20": 170
+  },
+  "incomplete_context_indices": [
+    50356,
+    60852,
+    67780,
+    67781
+  ],
+  "cached_centres_needing_new_context_indices": [
+    2530,
+    50542,
+    50543,
+    50544,
+    50545,
+    50546
+  ],
+  "raw_pixel_cases": [
+    {
+      "case": "all-cache",
+      "point_index": 15287,
+      "original_key": [
+        31,
+        11836,
+        130390,
+        202408
+      ],
+      "tile": "N00E096",
+      "actual_arrays": [
+        "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/N00E096/block-24-22.npz"
+      ],
+      "centre_and_available_full_context": "raw-byte-match"
+    },
+    {
+      "case": "new-block-border",
+      "point_index": 9461,
+      "original_key": [
+        31,
+        6551,
+        129442,
+        204421
+      ],
+      "tile": "N00E099",
+      "actual_arrays": [
+        "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N00E099/new-block-08-19.npz",
+        "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N00E099/new-block-08-20.npz"
+      ],
+      "centre_and_available_full_context": "raw-byte-match"
+    },
+    {
+      "case": "first-header-N00E105",
+      "point_index": 6035,
+      "original_key": [
+        31,
+        4342,
+        128897,
+        208134
+      ],
+      "tile": "N00E105",
+      "actual_arrays": [
+        "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N00E105/new-block-00-09.npz"
+      ],
+      "centre_and_available_full_context": "raw-byte-match"
+    },
+    {
+      "case": "first-header-N00E126",
+      "point_index": 8360,
+      "original_key": [
+        31,
+        5472,
+        129156,
+        224708
+      ],
+      "tile": "N00E126",
+      "actual_arrays": [
+        "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N00E126/new-block-04-30.npz"
+      ],
+      "centre_and_available_full_context": "raw-byte-match"
+    },
+    {
+      "case": "first-header-N00E129",
+      "point_index": 19294,
+      "original_key": [
+        31,
+        14886,
+        130659,
+        226617
+      ],
+      "tile": "N00E129",
+      "actual_arrays": [
+        "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N00E129/new-block-28-25.npz"
+      ],
+      "centre_and_available_full_context": "raw-byte-match"
+    },
+    {
+      "case": "cache-centre-missing-context-2530",
+      "point_index": 2530,
+      "original_key": [
+        31,
+        2226,
+        128476,
+        201677
+      ],
+      "tile": "N03E096",
+      "actual_arrays": [
+        "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N03E096/new-block-28-10.npz",
+        "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/N03E096/block-28-11.npz"
+      ],
+      "centre_and_available_full_context": "raw-byte-match"
+    },
+    {
+      "case": "first-header-N03E105",
+      "point_index": 318,
+      "original_key": [
+        31,
+        363,
+        127605,
+        209727
+      ],
+      "tile": "N03E105",
+      "actual_arrays": [
+        "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N03E105/new-block-14-35.npz"
+      ],
+      "centre_and_available_full_context": "raw-byte-match"
+    },
+    {
+      "case": "first-header-N03E108",
+      "point_index": 266,
+      "original_key": [
+        31,
+        347,
+        127590,
+        209739
+      ],
+      "tile": "N03E108",
+      "actual_arrays": [
+        "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N03E108/new-block-14-00.npz"
+      ],
+      "centre_and_available_full_context": "raw-byte-match"
+    },
+    {
+      "case": "cache-centre-missing-context-50542",
+      "point_index": 50542,
+      "original_key": [
+        32,
+        18675,
+        133134,
+        219187
+      ],
+      "tile": "S03E120",
+      "actual_arrays": [
+        "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S03E120/new-block-32-11.npz",
+        "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/S03E120/block-33-11.npz"
+      ],
+      "centre_and_available_full_context": "raw-byte-match"
+    },
+    {
+      "case": "cache-centre-missing-context-50543",
+      "point_index": 50543,
+      "original_key": [
+        32,
+        18675,
+        133134,
+        219188
+      ],
+      "tile": "S03E120",
+      "actual_arrays": [
+        "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S03E120/new-block-32-11.npz",
+        "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/S03E120/block-33-11.npz"
+      ],
+      "centre_and_available_full_context": "raw-byte-match"
+    },
+    {
+      "case": "cache-centre-missing-context-50544",
+      "point_index": 50544,
+      "original_key": [
+        32,
+        18676,
+        133134,
+        219190
+      ],
+      "tile": "S03E120",
+      "actual_arrays": [
+        "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S03E120/new-block-32-11.npz",
+        "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/S03E120/block-33-11.npz"
+      ],
+      "centre_and_available_full_context": "raw-byte-match"
+    },
+    {
+      "case": "cache-centre-missing-context-50545",
+      "point_index": 50545,
+      "original_key": [
+        32,
+        18676,
+        133134,
+        219191
+      ],
+      "tile": "S03E120",
+      "actual_arrays": [
+        "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S03E120/new-block-32-11.npz",
+        "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/S03E120/block-33-11.npz"
+      ],
+      "centre_and_available_full_context": "raw-byte-match"
+    },
+    {
+      "case": "cache-centre-missing-context-50546",
+      "point_index": 50546,
+      "original_key": [
+        32,
+        18676,
+        133134,
+        219192
+      ],
+      "tile": "S03E120",
+      "actual_arrays": [
+        "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S03E120/new-block-32-11.npz",
+        "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-worldcover2020-53134-001/worker1-source/tiles/S03E120/block-33-11.npz"
+      ],
+      "centre_and_available_full_context": "raw-byte-match"
+    },
+    {
+      "case": "edge-50356",
+      "point_index": 50356,
+      "original_key": [
+        32,
+        18487,
+        133094,
+        227210
+      ],
+      "tile": "S03E129",
+      "actual_arrays": [
+        "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S03E129/new-block-32-35.npz"
+      ],
+      "centre_and_available_full_context": "raw-byte-match"
+    },
+    {
+      "case": "edge-60852",
+      "point_index": 60852,
+      "original_key": [
+        32,
+        29955,
+        135002,
+        227210
+      ],
+      "tile": "S06E129",
+      "actual_arrays": [
+        "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S06E129/new-block-27-35.npz"
+      ],
+      "centre_and_available_full_context": "raw-byte-match"
+    },
+    {
+      "case": "first-header-S09E126",
+      "point_index": 72072,
+      "original_key": [
+        33,
+        6219,
+        136239,
+        224741
+      ],
+      "tile": "S09E126",
+      "actual_arrays": [
+        "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S09E126/new-block-12-30.npz"
+      ],
+      "centre_and_available_full_context": "raw-byte-match"
+    },
+    {
+      "case": "first-header-S09E129",
+      "point_index": 68810,
+      "original_key": [
+        33,
+        3235,
+        135674,
+        225744
+      ],
+      "tile": "S09E129",
+      "actual_arrays": [
+        "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S09E129/new-block-03-11.npz"
+      ],
+      "centre_and_available_full_context": "raw-byte-match"
+    },
+    {
+      "case": "edge-67780",
+      "point_index": 67780,
+      "original_key": [
+        33,
+        2529,
+        135460,
+        227827
+      ],
+      "tile": "S09E132",
+      "actual_arrays": [
+        "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S09E132/new-block-00-09.npz"
+      ],
+      "centre_and_available_full_context": "raw-byte-match"
+    },
+    {
+      "case": "first-header-S09E132",
+      "point_index": 67780,
+      "original_key": [
+        33,
+        2529,
+        135460,
+        227827
+      ],
+      "tile": "S09E132",
+      "actual_arrays": [
+        "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S09E132/new-block-00-09.npz"
+      ],
+      "centre_and_available_full_context": "raw-byte-match"
+    },
+    {
+      "case": "edge-67781",
+      "point_index": 67781,
+      "original_key": [
+        33,
+        2529,
+        135460,
+        227828
+      ],
+      "tile": "S09E132",
+      "actual_arrays": [
+        "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S09E132/new-block-00-09.npz"
+      ],
+      "centre_and_available_full_context": "raw-byte-match"
+    },
+    {
+      "case": "first-header-S09E135",
+      "point_index": 74295,
+      "original_key": [
+        33,
+        8372,
+        136682,
+        231578
+      ],
+      "tile": "S09E135",
+      "actual_arrays": [
+        "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S09E135/new-block-19-35.npz"
+      ],
+      "centre_and_available_full_context": "raw-byte-match"
+    },
+    {
+      "case": "first-header-S12E138",
+      "point_index": 79977,
+      "original_key": [
+        33,
+        15376,
+        137687,
+        233644
+      ],
+      "tile": "S12E138",
+      "actual_arrays": [
+        "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S12E138/new-block-00-33.npz"
+      ],
+      "centre_and_available_full_context": "raw-byte-match"
+    }
+  ],
+  "distinct_local_npz_arrays_decoded": 19,
+  "result": "PASS WITH LIMITS",
+  "source_process_exit_confirmation": {
+    "author_reported_exit": 0,
+    "actual_execution_receipt_read": true,
+    "path": "idn-physical-remainder80712-001/worker1-source/attempt-001.execution.json",
+    "bytes": 1856,
+    "sha256": "4fcde7b1fcb493a22da8c9d8d369b9417567b481e1fbdcc81b649d788b7b60d6",
+    "shell_exit_code": 0,
+    "source_report_pin_matches": true
+  },
+  "limits": [
+    "No remote/source access, raster reopen, native imports or producer execution by reviewer.",
+    "All-row result contract and selected actual bytes checked; not exhaustive raw-byte re-extraction of 80,712 rows or old53,134 audit.",
+    "Raw WorldCover predictions/validity are not adopted geographic answers, confidence, ownership, repair or current truth."
+  ]
+}

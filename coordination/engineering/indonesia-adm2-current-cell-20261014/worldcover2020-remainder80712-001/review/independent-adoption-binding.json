@@ -1,0 +1,48 @@
+{
+  "reviewer": "/root/cell_method_review",
+  "status": "PASS_ACTUAL_ROOT_ADOPTION_OUTPUT_BINDING",
+  "root_adoption_utc": "2026-10-15T23:05:04.366792+00:00",
+  "original_issue": 1884,
+  "author_proposal_sha256": "8f8efe8988f8e744570dd941f7e922b9bf57afd0e45b10ac673670ff10ad8590",
+  "records_compared": 80712,
+  "scientific_row_value_or_context_flag_changes": 0,
+  "allowed_row_changes": [
+    "proposed_bounded_answer renamed adopted_bounded_answer",
+    "completed_question_credit_proposed renamed completed_question_credit",
+    "credit_scope changed to actual Root adopted bounded scope"
+  ],
+  "actual_new_adopted_keys": 55781,
+  "actual_new_residual_keys": 24931,
+  "prior_adopted_keys_unchanged": 36760,
+  "prior_residual_keys_unchanged": 16374,
+  "actual_known_adopted_union": 92541,
+  "specific_residual_union": 41305,
+  "original_keys": 133846,
+  "new_vs_old_read_key_overlap": 0,
+  "adopted_vs_residual_overlap": 0,
+  "all38941interval_counts_and_original_arrays_match": true,
+  "products": [
+    {
+      "path": "adopted-physical-interpretations.json.gz",
+      "bytes": 5900045,
+      "sha256": "5cdb32086f485d6d43f2df4ec86da415c4821071426e3acf8840c54a4fb4be69",
+      "decoded_bytes": 272464670,
+      "decoded_sha256": "f55805f89904e9d1c7dc3edd1bd40e3a56bee5cc31967aaf16a8b74c516f2f85"
+    },
+    {
+      "path": "known-exact-adopted-physical-keyset55781.json.gz",
+      "bytes": 159693,
+      "sha256": "66e162aba4756f7b1d9c0fab6f34d92111fa4eb837be4a3222814a0b203d675d"
+    },
+    {
+      "path": "exact-original-accounting.json",
+      "bytes": 12682902,
+      "sha256": "51cb163c702a62e95335370b2d401d57995932542b935b51c66e3572b0dcd4f1"
+    }
+  ],
+  "accepted_selection_distinction": "Retain prior exact89ff272335additivepatch0overlap fixedsnapshot only; no new current-bank ownerzero/repair/acceptance inferred",
+  "native_credit": 0,
+  "source_or_native_replay": false,
+  "public_publication_by_this_worker": false,
+  "elapsed_metadata_seconds": 14.757878667
+}

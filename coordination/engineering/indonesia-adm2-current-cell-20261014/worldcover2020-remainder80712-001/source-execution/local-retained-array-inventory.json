@@ -1,0 +1,1080 @@
+{
+  "kind": "source-product-handoff-inventory",
+  "source_report": {
+    "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/source-observations.json",
+    "bytes": 511288,
+    "sha256": "d0a36f806ed4a270f6075332f8f4a20fa6c5a53afb8068d07ec6fa315a479e07"
+  },
+  "execution": {
+    "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/attempt-001.execution.json",
+    "bytes": 1856,
+    "sha256": "4fcde7b1fcb493a22da8c9d8d369b9417567b481e1fbdcc81b649d788b7b60d6"
+  },
+  "point_plan": {
+    "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/point-plan.jsonl",
+    "bytes": 87956807,
+    "sha256": "53ce34ad1897ed61f7404729ed19dbed373dc1005b38055c4349559070294a8e"
+  },
+  "scope_and_cache_plan": {
+    "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/scope-and-cache-plan.json",
+    "bytes": 191324,
+    "sha256": "53edd6ff2eae40f1c5a26433efb92348cd16f672171edb6e12d48d26a0f83dfd"
+  },
+  "cache_inputs": {
+    "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/cache-inputs.json",
+    "bytes": 2078286,
+    "sha256": "6f7a96239ba2f4d982bedb76b76b4833c6a609115f1e0d2ccee3882cd378137d"
+  },
+  "reader": {
+    "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/read_points.py",
+    "bytes": 13109,
+    "sha256": "250bbdfe05bc55b1e2a19a3affce7d0ded10766508376e40a47a328a0595d12f"
+  },
+  "tile_products": [
+    {
+      "tile": "N00E096",
+      "keys": 171,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N00E096/point-observations.jsonl",
+        "bytes": 381935,
+        "sha256": "458150fe66bf0dc93cfea036bf7a0559b271492bb57d04967b26d0670f55635a"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N00E096/tile-complete.json",
+        "bytes": 3432,
+        "sha256": "25c9a0dfe5f0f32881e769cb5e58d7dbe5d0ab547befa3b101443d90ba876080"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N00E096/source.json",
+        "bytes": 1957,
+        "sha256": "1915603e56baf995ca8959f6f0a561c8350937f41e42450eb33a8eab67bba0fe"
+      }
+    },
+    {
+      "tile": "N00E099",
+      "keys": 1187,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N00E099/point-observations.jsonl",
+        "bytes": 2557924,
+        "sha256": "d2a6d2652d075e4cc4aa8c080da5c12bebebed9db905790ecd95f5b56c936d81"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N00E099/tile-complete.json",
+        "bytes": 12459,
+        "sha256": "146f5e7c619f6e3bf0d171370218f087679c1be03da17c14b9483b2a5abfc1fe"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N00E099/source.json",
+        "bytes": 1998,
+        "sha256": "eff8b111545223b5f1a194f2ae52dd9840d1d42f230b4aab04c87e02e46e40d7"
+      }
+    },
+    {
+      "tile": "N00E102",
+      "keys": 6015,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N00E102/point-observations.jsonl",
+        "bytes": 13072961,
+        "sha256": "3a439ad204eb382ba534a22495316af9ad8745dfd93b6a302ef2fbce4f8666c5"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N00E102/tile-complete.json",
+        "bytes": 60023,
+        "sha256": "ab867eb0d3d495e166369a6882501d29829d7598737991d29908a610863904c2"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N00E102/source.json",
+        "bytes": 1999,
+        "sha256": "a840a8c047d25fff899411e63d0cca789e2fb125fe133f7c731ff0f8a9b2c560"
+      }
+    },
+    {
+      "tile": "N00E105",
+      "keys": 1965,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N00E105/point-observations.jsonl",
+        "bytes": 4299240,
+        "sha256": "e4c1815df3eeb54340003d6ccc559e8788362bee4f01cde24fd5c3e4f8ccbda7"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N00E105/tile-complete.json",
+        "bytes": 16951,
+        "sha256": "4d66fdcc804b69f695cc34f55df1233159aa19857c690241f4e102fa134a6a3b"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N00E105/source.json",
+        "bytes": 1993,
+        "sha256": "bf2d8e739eacf3dfaf120c19222eb7ce35d7b9c3ee54c5471ae7a2ae64d2fd27"
+      }
+    },
+    {
+      "tile": "N00E108",
+      "keys": 815,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N00E108/point-observations.jsonl",
+        "bytes": 1769855,
+        "sha256": "8e1e72245f4cae5c5a4db0b9f00e812a97e1117018032e1df0efbd99a6a94813"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N00E108/tile-complete.json",
+        "bytes": 9975,
+        "sha256": "6e52bfa2b85063d8e9569b3da5864c95b0a7969d78357794a22d805c1234c788"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N00E108/source.json",
+        "bytes": 1998,
+        "sha256": "4f964a09e8d7a85cd7e3ed50a9f30cc50ef20bae9bdcf9565cbe168969d89248"
+      }
+    },
+    {
+      "tile": "N00E117",
+      "keys": 668,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N00E117/point-observations.jsonl",
+        "bytes": 1475956,
+        "sha256": "cae1793e8186fcf51bb2cf338936720faa05fff62f39a2a428aa1057081a09a9"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N00E117/tile-complete.json",
+        "bytes": 6822,
+        "sha256": "aed98078f45b6bbd0c81ecb4947c1f46f18668a8ca055bc6440f1d6117a1d3cf"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N00E117/source.json",
+        "bytes": 1958,
+        "sha256": "1d589fa0611efd23e452d0ce54eedbf429e7aff25245d0d8d518ad1f72842559"
+      }
+    },
+    {
+      "tile": "N00E120",
+      "keys": 1245,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N00E120/point-observations.jsonl",
+        "bytes": 2683595,
+        "sha256": "9edb95f5f4beb6a5c64980ec4192d5dbe8fd1b87a9554fa22617c1fbcd18e943"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N00E120/tile-complete.json",
+        "bytes": 12567,
+        "sha256": "eb705799755899a1d497b7a750d253b404b3b36947e7bcca4bd2109d6c412c12"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N00E120/source.json",
+        "bytes": 1959,
+        "sha256": "b9d44a5222d5a59d496a8910472a20d98a7f2f4ae337bca2b0535e233aa2d0b4"
+      }
+    },
+    {
+      "tile": "N00E123",
+      "keys": 1159,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N00E123/point-observations.jsonl",
+        "bytes": 2559706,
+        "sha256": "c498bcfdf9a62499987d574be0c0cb54aafad76c4014e9078e9bddc700f35367"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N00E123/tile-complete.json",
+        "bytes": 14468,
+        "sha256": "a60108f12b6b70500b94b53ecad7830d47d62617f489adfc78ab88f2584292cf"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N00E123/source.json",
+        "bytes": 1993,
+        "sha256": "973ed83d0a21f110fd4a8476721eac935dc260fd691bce1c64191b84046fe339"
+      }
+    },
+    {
+      "tile": "N00E126",
+      "keys": 4122,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N00E126/point-observations.jsonl",
+        "bytes": 9238332,
+        "sha256": "113749af2cc18d683b308715e0454da194e152babf7bd94a1e64a5a8e5f3b08c"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N00E126/tile-complete.json",
+        "bytes": 46400,
+        "sha256": "f7ab81047ac603e967b97b5aa2d3ee35d3e51fbc29814825a0059f8c90d2c922"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N00E126/source.json",
+        "bytes": 1993,
+        "sha256": "fa11f7d47007d37c7b3695fec8bf6e926ebcdb4b3cc433aaa45bf1884ac1a2e5"
+      }
+    },
+    {
+      "tile": "N00E129",
+      "keys": 533,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N00E129/point-observations.jsonl",
+        "bytes": 1133268,
+        "sha256": "d01d47dd478cbf15e3aabafe81bd09c89a2e03a4cb9c248aaee62ba651a54bcb"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N00E129/tile-complete.json",
+        "bytes": 6004,
+        "sha256": "d5540a6b2221c0b792c88f401ec8de9d30db95ca272bf0598bc204e40e0cd964"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N00E129/source.json",
+        "bytes": 1992,
+        "sha256": "6700dac52092c2d1e60515c13c9028ff608f066609762bb0bd48ea3c2435db9d"
+      }
+    },
+    {
+      "tile": "N03E093",
+      "keys": 447,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N03E093/point-observations.jsonl",
+        "bytes": 972855,
+        "sha256": "d4c3dd3b70da2156a9632c2214173b4025a244739b4b9f0cc237d3143c158e49"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N03E093/tile-complete.json",
+        "bytes": 4359,
+        "sha256": "9e26f2ad964c4dc7d29e272d8c827bfc07242e1b50741f73f4840dc9eadd8c5a"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N03E093/source.json",
+        "bytes": 1991,
+        "sha256": "8f630e1a19afd76605f7b5255fe1ed46b9da8dd712f1eb1524a3355faaf8701b"
+      }
+    },
+    {
+      "tile": "N03E096",
+      "keys": 489,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N03E096/point-observations.jsonl",
+        "bytes": 1080263,
+        "sha256": "f861aaa7e394ea0a56e05b6ceb311a34b71be95f55208c79efd371286cc54ee5"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N03E096/tile-complete.json",
+        "bytes": 6642,
+        "sha256": "77cc351fe955e8fe014e555fa2c5f36eda906e295773a77e9c7d319676136af2"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N03E096/source.json",
+        "bytes": 1997,
+        "sha256": "097d326e7ae3b506cc6f036e9ead29e2cf3b12859dc7f5fdc8628b84acfe64fb"
+      }
+    },
+    {
+      "tile": "N03E099",
+      "keys": 44,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N03E099/point-observations.jsonl",
+        "bytes": 94537,
+        "sha256": "cb8aa40c4f0d61f16a91b4d6a3d0c741001686a81a501e3c32345314c33f3766"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N03E099/tile-complete.json",
+        "bytes": 1276,
+        "sha256": "22fdfe9f6fa3300045e9c3d9ba0cd7b27d925ff2178e78347ccc3cad0eeb686e"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N03E099/source.json",
+        "bytes": 1996,
+        "sha256": "cb2a0c3f2b3c7a16d7be03aaede0d1a8418850a3ad7c675fccb9f3761fb5e187"
+      }
+    },
+    {
+      "tile": "N03E105",
+      "keys": 2846,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N03E105/point-observations.jsonl",
+        "bytes": 6248604,
+        "sha256": "5240561d6c4b4b59c379ccd466cc4c22b565e9b501f9a04d814ce1452768bb1e"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N03E105/tile-complete.json",
+        "bytes": 21370,
+        "sha256": "cdbb6e35a7253cde9fe90a25589c04bcf38704c314e996db18d61cba08191270"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N03E105/source.json",
+        "bytes": 1953,
+        "sha256": "70d182fe3d1e7a45a3a02225d5698ca0484c7067f28d2007d3a2cffa23acc5c8"
+      }
+    },
+    {
+      "tile": "N03E108",
+      "keys": 1060,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N03E108/point-observations.jsonl",
+        "bytes": 2367261,
+        "sha256": "c8ec8b48504e1cadc3b080ee116a9baa883ed269a1398b32b76e87cca45c3a16"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N03E108/tile-complete.json",
+        "bytes": 9331,
+        "sha256": "df603e12d59b4d3e628bf24f263b4930c2f08308e0b16c4186d6218ea895bb6b"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N03E108/source.json",
+        "bytes": 1973,
+        "sha256": "0c5005d0fd79dccf5119fdcc4f848ee3edf8e8ccd4de2760ef31a1ae42dae75f"
+      }
+    },
+    {
+      "tile": "N03E117",
+      "keys": 1149,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N03E117/point-observations.jsonl",
+        "bytes": 2543100,
+        "sha256": "722a55562474add89c9de298ed9f94455de2437d31126ab677396ef07503a377"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N03E117/tile-complete.json",
+        "bytes": 12550,
+        "sha256": "384b668ea91d61d8f614de0ab62707a157e332e65085973e27c741daf59b8f02"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/N03E117/source.json",
+        "bytes": 1999,
+        "sha256": "454d302631333fa27479b660860e7208d67fee8a51436ca08f713c3270a55453"
+      }
+    },
+    {
+      "tile": "S03E099",
+      "keys": 99,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S03E099/point-observations.jsonl",
+        "bytes": 209555,
+        "sha256": "3ee6774dc99a8301ca5267593259b9ccc178adf4cc673dc2ee4800306d1496f1"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S03E099/tile-complete.json",
+        "bytes": 3367,
+        "sha256": "75384b768df1bb74ff5beb572a78d86c44981495eca97028dffaca332dc992f8"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S03E099/source.json",
+        "bytes": 1996,
+        "sha256": "777f02effc2b1c7cf473c1160bbf6d59cda168aedaf3a1c0b851c2cc24c902cd"
+      }
+    },
+    {
+      "tile": "S03E102",
+      "keys": 944,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S03E102/point-observations.jsonl",
+        "bytes": 2028900,
+        "sha256": "ca20f02dd2033e6c330ca1dd549e6e7c6276faf77b6b0025a8837c37191984c4"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S03E102/tile-complete.json",
+        "bytes": 13492,
+        "sha256": "5274229c9703978735f2b0c803834f2bd9a4091065767f5cedf792fb566d0eab"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S03E102/source.json",
+        "bytes": 1958,
+        "sha256": "66de25367f5666696180e373195d8dc9558631280543318ed552ff90903aa079"
+      }
+    },
+    {
+      "tile": "S03E105",
+      "keys": 376,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S03E105/point-observations.jsonl",
+        "bytes": 813903,
+        "sha256": "38b4e27c82e6859b94775b675c45774f22a90ab35929ae80ff08e36261a658ee"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S03E105/tile-complete.json",
+        "bytes": 6638,
+        "sha256": "3eeeef4695e679ea9cd58730252a9de19b92096c487a5d8df8f3f33ac5481f24"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S03E105/source.json",
+        "bytes": 1958,
+        "sha256": "87d27822d899e6faf4ccf5ce16cb2a2a60f9eeb73ee8abeb750389bc8041f3f3"
+      }
+    },
+    {
+      "tile": "S03E108",
+      "keys": 895,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S03E108/point-observations.jsonl",
+        "bytes": 1968842,
+        "sha256": "d825102e2f66b86765c08b4ff3d6d8596641c2afe88ce27977812f033dafbeea"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S03E108/tile-complete.json",
+        "bytes": 11252,
+        "sha256": "3403d6453014199956a2705dba9d10c50de95bdfa445af70565c4bf884db0694"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S03E108/source.json",
+        "bytes": 1998,
+        "sha256": "3d5d79da873e7363938c4fecd4c269b3d0743d5048c8891796c54fdbfc02b5fb"
+      }
+    },
+    {
+      "tile": "S03E114",
+      "keys": 86,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S03E114/point-observations.jsonl",
+        "bytes": 188547,
+        "sha256": "483a61461417f42058fd3bbae4132050a3ef54af57605afe6b6c06c492eedb70"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S03E114/tile-complete.json",
+        "bytes": 1978,
+        "sha256": "ec21d073dfc7bf6e6e34b1d4adb8b6816dbc9cc74b8cb01772c93b3cb117021a"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S03E114/source.json",
+        "bytes": 1957,
+        "sha256": "13935ed7ecfaca9235c6b7f0d2a98e7df8fa89ac0b0dd59b1ec1cc7ec569d97c"
+      }
+    },
+    {
+      "tile": "S03E117",
+      "keys": 423,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S03E117/point-observations.jsonl",
+        "bytes": 955437,
+        "sha256": "6c24fe5b44095d037356c580a371144f9e2e268c45324009701535ec357d8a20"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S03E117/tile-complete.json",
+        "bytes": 7066,
+        "sha256": "cc709d9af3d41eff7b116a58c9cb2f8cbb9c6af98e05dc0c6ade87d17d07d104"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S03E117/source.json",
+        "bytes": 1958,
+        "sha256": "be721c44ea97bb2812eff6d005c476f07020e8bce838416f180fad41c25f06a7"
+      }
+    },
+    {
+      "tile": "S03E120",
+      "keys": 2340,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S03E120/point-observations.jsonl",
+        "bytes": 5114517,
+        "sha256": "327ee01fd0383fa05f091ddca766d74cd20f6bf4d3ad5253656ddc67b578cdd8"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S03E120/tile-complete.json",
+        "bytes": 28544,
+        "sha256": "58bbc55ee5b4bdaa73a4aa01b1926235cadd502b7b3f0872ce7a9f3e7a59993a"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S03E120/source.json",
+        "bytes": 1999,
+        "sha256": "cbff2939b04bf1514ff2467fd9d8cc6aabb741d80f6568e1b0ee21446793078e"
+      }
+    },
+    {
+      "tile": "S03E123",
+      "keys": 2499,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S03E123/point-observations.jsonl",
+        "bytes": 5409245,
+        "sha256": "24ef48a45e03e20f3be565581fad7074d7bbbe013931c7278f3b8f714a659c72"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S03E123/tile-complete.json",
+        "bytes": 30172,
+        "sha256": "04c1019346cf901cb021584a4f7c7f508d9e0dca47de8db3110c87a778fc93bc"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S03E123/source.json",
+        "bytes": 1993,
+        "sha256": "493f0fe92b96e82e9fd16b3f1cb6d17e24bf81f57fc404b42dd35ba38a020e3e"
+      }
+    },
+    {
+      "tile": "S03E126",
+      "keys": 5620,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S03E126/point-observations.jsonl",
+        "bytes": 12324042,
+        "sha256": "54eefc6f29b956624a8a6050d507e4d95d1c8833dc4d9c00550db08aada06cb0"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S03E126/tile-complete.json",
+        "bytes": 52654,
+        "sha256": "52afb206876fcb65f179dca32a9286c31c19d7b4b0b34a822f8caf520920d714"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S03E126/source.json",
+        "bytes": 1993,
+        "sha256": "5aa69caee16066e045c4daebbad55d73250b2cb7a62ec8c3582e681e6aea3a45"
+      }
+    },
+    {
+      "tile": "S03E129",
+      "keys": 7074,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S03E129/point-observations.jsonl",
+        "bytes": 15033637,
+        "sha256": "71f5ede8fb34f84d0a5c968bf2179b6c17bbf1bf44fca2833fcfc1950c20f17a"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S03E129/tile-complete.json",
+        "bytes": 71618,
+        "sha256": "7476d1cdef1aaf3b62ff767e5f8a1b30259260ca18f8f93567526e5fbba2bc16"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S03E129/source.json",
+        "bytes": 1993,
+        "sha256": "157df6ab4403dcf1afa71d4da3c5e8e6cb8770e3c4686c76946d2d980a987d6a"
+      }
+    },
+    {
+      "tile": "S03E132",
+      "keys": 4252,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S03E132/point-observations.jsonl",
+        "bytes": 9241005,
+        "sha256": "f654fceefde538ef21ab53130628753060808a54e73ae9b03389fa986abe4a26"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S03E132/tile-complete.json",
+        "bytes": 44153,
+        "sha256": "60e356b3b5bd3ae1b09d4cc4930b1adb025c0c96316c5c04c5a8ef4193968b08"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S03E132/source.json",
+        "bytes": 1999,
+        "sha256": "baa6a6627221dcccb4c8af2bc0cd8001878238f014f02a6401afbf0c5a7f99af"
+      }
+    },
+    {
+      "tile": "S03E135",
+      "keys": 2881,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S03E135/point-observations.jsonl",
+        "bytes": 6365951,
+        "sha256": "aa630309fed137ec35c136a06d415865a3f3e9be3e6b3b2d0ad9be28cf26ae11"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S03E135/tile-complete.json",
+        "bytes": 31930,
+        "sha256": "b039bddbceaae28ca9e8934c2b6acc491522bfb80f4f1558195c2463bd2e5296"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S03E135/source.json",
+        "bytes": 1993,
+        "sha256": "5ff662021fff0cbc978423acb5255be444a3157eb3c7aed01fcebc68b72970d5"
+      }
+    },
+    {
+      "tile": "S03E138",
+      "keys": 250,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S03E138/point-observations.jsonl",
+        "bytes": 553945,
+        "sha256": "6d0364f7d53a5d151d13253c5f14f70f977f3f2ec64c5568ca585407513334d9"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S03E138/tile-complete.json",
+        "bytes": 3788,
+        "sha256": "85b0309f5c9e46a89747abdfe61914467c8135f7cdb74b367d1a9e1627ac2244"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S03E138/source.json",
+        "bytes": 1992,
+        "sha256": "9ac754f55f3bab8484e5d016c7036fcf815fbed2becc58bf77e231913d48a5da"
+      }
+    },
+    {
+      "tile": "S06E102",
+      "keys": 153,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S06E102/point-observations.jsonl",
+        "bytes": 338945,
+        "sha256": "3e0840b0532d9aa8dbf4b2d14b9f7531ef6b566530a72e200a7968f9f68bcc77"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S06E102/tile-complete.json",
+        "bytes": 3580,
+        "sha256": "c7452f2f4b95279f27ad97da565b6296e4bdf1a53ae2308654e24572bba447b4"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S06E102/source.json",
+        "bytes": 1999,
+        "sha256": "a6a7fec8794a1bcae58632e49965b8a6a09db21ba81b46412199c0ecae881477"
+      }
+    },
+    {
+      "tile": "S06E105",
+      "keys": 270,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S06E105/point-observations.jsonl",
+        "bytes": 567409,
+        "sha256": "7f3c62dc3c7e072c912d96214796e4286653f80fb2463c43b6800c78ef9add32"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S06E105/tile-complete.json",
+        "bytes": 5623,
+        "sha256": "a0a409aeb917a1c6b8a81f8874b48ec8ecc71ce88f23eedc5caf44f1c9d55a48"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S06E105/source.json",
+        "bytes": 1999,
+        "sha256": "a695bfdf2dd98aade576dbd95a22fb343c7c16a4877b7c6dde97923b3a2dd0f3"
+      }
+    },
+    {
+      "tile": "S06E111",
+      "keys": 363,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S06E111/point-observations.jsonl",
+        "bytes": 792051,
+        "sha256": "047ab091f72664d85fc7507f909363d8c28454a7f829db5d5b12804ad9061705"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S06E111/tile-complete.json",
+        "bytes": 5932,
+        "sha256": "e401138a4b92a897894e3f6b716998b1b086b8183ac35005ca6257353e7cafc5"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S06E111/source.json",
+        "bytes": 1959,
+        "sha256": "11043a5f66d01a02cbd3b8b30e9074de013416c093d7badc8f7ef9b0c88dec91"
+      }
+    },
+    {
+      "tile": "S06E114",
+      "keys": 19,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S06E114/point-observations.jsonl",
+        "bytes": 39451,
+        "sha256": "adb7608ee24ffe073347049806e5e7c5fec23672f1b92ced5c97366f73f89a9a"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S06E114/tile-complete.json",
+        "bytes": 1029,
+        "sha256": "6a9664d7c7b47da06ff0eeb4fba155c4a3e65594862989de0574c263a2650a4f"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S06E114/source.json",
+        "bytes": 1938,
+        "sha256": "84b81cc426b5758e8f42d286a7f03b1ecc2698db2394c1e59ba1d47284a4d832"
+      }
+    },
+    {
+      "tile": "S06E117",
+      "keys": 888,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S06E117/point-observations.jsonl",
+        "bytes": 1877532,
+        "sha256": "eacf356d32cedc86cda851cb41cd97ddc0e5336c2ea145e1ba0e149c7c117f10"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S06E117/tile-complete.json",
+        "bytes": 10622,
+        "sha256": "043e26ce5531a85d85ab082387eff56696529d5aca1db06ae2ad620a4cfd3058"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S06E117/source.json",
+        "bytes": 1999,
+        "sha256": "8ac70f13845d0e746c34fd3696f5597d891e68f8d39b48f2eaebdb906322726b"
+      }
+    },
+    {
+      "tile": "S06E120",
+      "keys": 3815,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S06E120/point-observations.jsonl",
+        "bytes": 8368058,
+        "sha256": "4216f6608716ec4b04bae9c2d12325849b9491028f2be05caf5dc4c10571b47a"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S06E120/tile-complete.json",
+        "bytes": 43215,
+        "sha256": "f3358dc390c8b2de8af2dd280607df704396ec31ccb759c3d7f1ed167d6c16cd"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S06E120/source.json",
+        "bytes": 2000,
+        "sha256": "a5ff4c5722435ec9ca89a5e28212d02d5c9309a5098625b31ef21588bd23a13c"
+      }
+    },
+    {
+      "tile": "S06E123",
+      "keys": 145,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S06E123/point-observations.jsonl",
+        "bytes": 315014,
+        "sha256": "3ceb8e4320cb77ced700ec61b5929affc89fb2879b4aab5244ece73a6da28874"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S06E123/tile-complete.json",
+        "bytes": 2876,
+        "sha256": "2cf78e881b278110d58ca1fb04d760e923ffeae8b3aab1f2f2ba311b90bbd8c2"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S06E123/source.json",
+        "bytes": 1973,
+        "sha256": "3142f4cda6a872b4adfa7a6b371f0c734d0dde42beacb371b4a7a5ceceb7de05"
+      }
+    },
+    {
+      "tile": "S06E126",
+      "keys": 879,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S06E126/point-observations.jsonl",
+        "bytes": 1954037,
+        "sha256": "9b3e14834a242832c5716544d33e40ef3df6aa1310d8d8e255a4109105b999c3"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S06E126/tile-complete.json",
+        "bytes": 13479,
+        "sha256": "13a1b371040cd3102c77eceefcc1218f22ddf5f08202113698bb27b186ce9d12"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S06E126/source.json",
+        "bytes": 1993,
+        "sha256": "042b5e2118c6f82c4667047ff896f57bd8c744fcb6f6e93f1e28ed76f90cce85"
+      }
+    },
+    {
+      "tile": "S06E129",
+      "keys": 677,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S06E129/point-observations.jsonl",
+        "bytes": 1507958,
+        "sha256": "11034a329e2d72c5ed888b0bd4d9094a2f6ca6aac7131bb4da3fe1be84f247cf"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S06E129/tile-complete.json",
+        "bytes": 8333,
+        "sha256": "0fa1e6e97fe59cd7df60ee138c47ccc2cca053c60cc6c9120932f4ff031d0c30"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S06E129/source.json",
+        "bytes": 1953,
+        "sha256": "ee4e1654516e99cdf1cd9552271d3498de4a0a9a2f3592f1fe14ede48ffe8828"
+      }
+    },
+    {
+      "tile": "S06E132",
+      "keys": 8686,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S06E132/point-observations.jsonl",
+        "bytes": 19053161,
+        "sha256": "cf595d644cb107e1b778a89049df0c1481c1f684ebaa23ca8f0127bc8c0f7db5"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S06E132/tile-complete.json",
+        "bytes": 76371,
+        "sha256": "10e28e8227d59e562c55a9195a7e7303d84e34bd5a829b2cf1e8165e4cabbb36"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S06E132/source.json",
+        "bytes": 1954,
+        "sha256": "2fc7b548a1fd743bd6b496a8a2622cfa4d3772e36e2a86035a15a71a718fa2f9"
+      }
+    },
+    {
+      "tile": "S06E135",
+      "keys": 231,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S06E135/point-observations.jsonl",
+        "bytes": 507220,
+        "sha256": "f818010a3808dbc1f4bf0df8d95c0e0bc58d72b5752f2689670270aaeeb563b4"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S06E135/tile-complete.json",
+        "bytes": 3793,
+        "sha256": "18235380f4c1507c077ce36ed89fd1ff6ed2b1f9de2201300287196c04ec0b5c"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S06E135/source.json",
+        "bytes": 1999,
+        "sha256": "2f4cf62ef50a98701716cea5dcd53ba18e79ec6739604f1d711d1df807712a0b"
+      }
+    },
+    {
+      "tile": "S09E105",
+      "keys": 311,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S09E105/point-observations.jsonl",
+        "bytes": 687412,
+        "sha256": "d0aed1a1a48afe20694b59f0b7518bc599a6f1f4ef5e09be16df300a1027fb7e"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S09E105/tile-complete.json",
+        "bytes": 5463,
+        "sha256": "3bd14dd3a3117b1566f32e38c6f667672cd5b08aee9f3534e70916c7edd77ded"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S09E105/source.json",
+        "bytes": 1999,
+        "sha256": "3f4f80ff09e62eb287d1c636b2da7c4ac427612fdc8f558270174e3d64241f7b"
+      }
+    },
+    {
+      "tile": "S09E108",
+      "keys": 311,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S09E108/point-observations.jsonl",
+        "bytes": 685277,
+        "sha256": "f62ae1f6d5c94cc5acea97cabc7e56da37465aeeaafd01f148bc179d575cf1f6"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S09E108/tile-complete.json",
+        "bytes": 5331,
+        "sha256": "35dd6a172c104b20009b1b48bf8dfed362bc4acfcf14f2987faefeb9287decb9"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S09E108/source.json",
+        "bytes": 1999,
+        "sha256": "1b6489313cf060c50acbb6d40b56c8c9b4c7ff9a6c19803510bbed1ce074df74"
+      }
+    },
+    {
+      "tile": "S09E111",
+      "keys": 912,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S09E111/point-observations.jsonl",
+        "bytes": 2012756,
+        "sha256": "3711a502ee44dbbeba6cd54f81c934f6b86534d3d512a9911ce2d19b486d50c1"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S09E111/tile-complete.json",
+        "bytes": 14695,
+        "sha256": "7338a75eea2b09a4622050c1290dc0b9b558efc36066f85b09b2f873f127ec3f"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S09E111/source.json",
+        "bytes": 1999,
+        "sha256": "ba6afe7b1fe1e47f581f46cd74e30e5e5a046f5ea99ace747d92ca8e7f50995d"
+      }
+    },
+    {
+      "tile": "S09E114",
+      "keys": 546,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S09E114/point-observations.jsonl",
+        "bytes": 1218088,
+        "sha256": "3ea42ccae577d988320b2fb88a8dc6787927f822e63a97e1bd1f0fd05e098372"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S09E114/tile-complete.json",
+        "bytes": 7108,
+        "sha256": "9a5416fc433ba89e1bb0ca73da8189562ebb63c184d4f84fe86c494641575590"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S09E114/source.json",
+        "bytes": 1999,
+        "sha256": "ba7457972297af4ffad2948ca37b72d2a2a6cdf60ad94539ac60fb6bcfb0afc9"
+      }
+    },
+    {
+      "tile": "S09E117",
+      "keys": 1139,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S09E117/point-observations.jsonl",
+        "bytes": 2528949,
+        "sha256": "b7cc51e9cffbc27ce8724d5f17d5e105afcba7fafb8d020e13028cdac328e4c1"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S09E117/tile-complete.json",
+        "bytes": 13499,
+        "sha256": "da129bc8b3ab79d6d2394e9adca0503f948fc64049d3bed2fe124ef2b00da81e"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S09E117/source.json",
+        "bytes": 1980,
+        "sha256": "86e4815118dd8eac9f890c886c839437702f2069547212dcaff3078e6df3a589"
+      }
+    },
+    {
+      "tile": "S09E120",
+      "keys": 721,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S09E120/point-observations.jsonl",
+        "bytes": 1624841,
+        "sha256": "56aa5158c7af1ef8064f5fc283258860268efc0e2c9fcfcd4d44d13905c05515"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S09E120/tile-complete.json",
+        "bytes": 10440,
+        "sha256": "d2445fa15726ee647fa4e48b7689350a5ffaf2e387932180e22494ee7f55d464"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S09E120/source.json",
+        "bytes": 1999,
+        "sha256": "90abd2f9256ed78750434143e8dd2f711079a0105f2d8377424907b3e786641b"
+      }
+    },
+    {
+      "tile": "S09E123",
+      "keys": 405,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S09E123/point-observations.jsonl",
+        "bytes": 883820,
+        "sha256": "7b7a678a42ead50853a2246c64196cedc2ebc69f08d209613efedf74aa6d205c"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S09E123/tile-complete.json",
+        "bytes": 5644,
+        "sha256": "fa7e3a3a5e7783c3f0f3a78e99584cd8195b2e463310e0af3270ce37bd614e39"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S09E123/source.json",
+        "bytes": 1999,
+        "sha256": "9299bc4705746cb9e32743e07db05c69cb2f050bc4365e85679969cd34ea4680"
+      }
+    },
+    {
+      "tile": "S09E126",
+      "keys": 1323,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S09E126/point-observations.jsonl",
+        "bytes": 2975271,
+        "sha256": "dc2623b4bb0c0161e8114a141ee8b28217bc1fc475615f9ec8cdb39fb685d67d"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S09E126/tile-complete.json",
+        "bytes": 16741,
+        "sha256": "5ba7e0a6689fafc67158c040ccf4bda87afd473db6b94361319ff9c9bbffbbd1"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S09E126/source.json",
+        "bytes": 1998,
+        "sha256": "4b85b33fd471a1f0c4f4f79ee2e3a9c69626c0636df950f686c5fc149a2529ef"
+      }
+    },
+    {
+      "tile": "S09E129",
+      "keys": 2108,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S09E129/point-observations.jsonl",
+        "bytes": 4679378,
+        "sha256": "690ae56a9a24c6bed5a5d396682a8234063abc7293267b7f05a5ec46a63055be"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S09E129/tile-complete.json",
+        "bytes": 27447,
+        "sha256": "7d8dc4c55574075c0ad5531c26d3bad2d4b87436cb60e2a5ba897657af3ccf92"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S09E129/source.json",
+        "bytes": 1954,
+        "sha256": "20984bf720c9dd22a27626e49eab826f789ee1c4480dba1775e7357d87587f7a"
+      }
+    },
+    {
+      "tile": "S09E132",
+      "keys": 3204,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S09E132/point-observations.jsonl",
+        "bytes": 7187017,
+        "sha256": "55b6b171b7fb80791d0b1297607e87b4b6ea1a053737ef8d10e44ce670817911"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S09E132/tile-complete.json",
+        "bytes": 28304,
+        "sha256": "00132e97e4f42e544ab50174a626c22424ca663fa160623fda4277e462f0c3b7"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S09E132/source.json",
+        "bytes": 1954,
+        "sha256": "1689abcc919f196b7ea87ccd084feb3e32c821f99c73d4d04ce550ce79c5f381"
+      }
+    },
+    {
+      "tile": "S09E135",
+      "keys": 227,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S09E135/point-observations.jsonl",
+        "bytes": 509099,
+        "sha256": "ab989133e7d352369792ef207e64e2c347c86c16636d9e8fe6d464a6d4da8a72"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S09E135/tile-complete.json",
+        "bytes": 3901,
+        "sha256": "ae58db8bef8faba7186c0a4308d6caaf003bf16362a845730bf0eb739daa75ed"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S09E135/source.json",
+        "bytes": 1993,
+        "sha256": "dcb2eaae0d1f1e5c36cc98d5cda0e5725d9741d31fcaa17c8ec784e827a15ab7"
+      }
+    },
+    {
+      "tile": "S09E138",
+      "keys": 933,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S09E138/point-observations.jsonl",
+        "bytes": 2079003,
+        "sha256": "da1dae5336eb2cc9c180d5f5545f20489bc569366f4c07a2de93d248f90d6687"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S09E138/tile-complete.json",
+        "bytes": 13854,
+        "sha256": "07032e094e63b10e73a02cf8e29c89cc1e48ab937bc2e58e0d0d2d7277e19c4a"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S09E138/source.json",
+        "bytes": 1999,
+        "sha256": "6518f7ec5aef25078e2654f91b879c325941d1a6bd459f7cf96745386d933411"
+      }
+    },
+    {
+      "tile": "S12E117",
+      "keys": 208,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S12E117/point-observations.jsonl",
+        "bytes": 464809,
+        "sha256": "9d2736654396272d4c33b265396369a6aa5e86371821185cb0ec7fb6153deb75"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S12E117/tile-complete.json",
+        "bytes": 4024,
+        "sha256": "5e70b0d8f170d06d7883520fc15f1d46721858146b09db41d4a3441eacaac2f7"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S12E117/source.json",
+        "bytes": 1953,
+        "sha256": "a1891003a290cbd76967d48ec642a99e42eaba49ce6a59a0f9b60f01da111b15"
+      }
+    },
+    {
+      "tile": "S12E123",
+      "keys": 565,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S12E123/point-observations.jsonl",
+        "bytes": 1257574,
+        "sha256": "18c9fbeddd010a60a591e0d316806a0445f422579444cf8537b4c42bdb330213"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S12E123/tile-complete.json",
+        "bytes": 9531,
+        "sha256": "d481e98b8f866c4efce942b97ac0ee5f69f9f11de9fb6fc89b106c5e9f26e4ff"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S12E123/source.json",
+        "bytes": 1999,
+        "sha256": "777205f79cd32f1d6ab1bdd7769faab3e6135d1d74c7d83d13e3f54377484378"
+      }
+    },
+    {
+      "tile": "S12E138",
+      "keys": 19,
+      "observations": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S12E138/point-observations.jsonl",
+        "bytes": 41387,
+        "sha256": "27ca830139c76df4e1e497678706dfa207cac5ade1562cce88e354235a4614a6"
+      },
+      "tile_complete": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S12E138/tile-complete.json",
+        "bytes": 1168,
+        "sha256": "609799046c05d92f5d42ec9c10dbae47fcd414cbc1de601c182767bbd0c4f1f5"
+      },
+      "source_header": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S12E138/source.json",
+        "bytes": 1992,
+        "sha256": "89eb5330a71295d9e8edf0a81c85e952f4ca8f0b5a54bb5e72eec80294ada65c"
+      }
+    }
+  ]
+}

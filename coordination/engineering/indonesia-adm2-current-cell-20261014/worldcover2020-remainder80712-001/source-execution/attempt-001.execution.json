@@ -1,0 +1,45 @@
+{
+  "kind": "actual-source-execution-receipt-not-scientific-adoption",
+  "attempt": 1,
+  "pid": 26899,
+  "shell_exit_code": 0,
+  "exit_observed_via": "unified exec session15452 final completion",
+  "started_utc": "2026-10-15T22:51:17.006880+00:00",
+  "ended_utc": "2026-10-15T22:57:06.248903+00:00",
+  "elapsed_seconds": 349.23897737497464,
+  "observed_process_peak_rss_bytes": 647561216,
+  "source_report": {
+    "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/source-observations.json",
+    "bytes": 511288,
+    "sha256": "d0a36f806ed4a270f6075332f8f4a20fa6c5a53afb8068d07ec6fa315a479e07"
+  },
+  "reader": {
+    "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/read_points.py",
+    "bytes": 13109,
+    "sha256": "250bbdfe05bc55b1e2a19a3affce7d0ded10766508376e40a47a328a0595d12f"
+  },
+  "stdout": {
+    "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/attempt-001.stdout.jsonl",
+    "bytes": 343206,
+    "sha256": "c6842a5995f879ca4ffe268f81c0b88871f5f129b5eab10443345593cf92ca4c"
+  },
+  "stderr": {
+    "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/attempt-001.stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "complete": true,
+  "requested_keys": 80712,
+  "observed_keys": 80712,
+  "tile_count": 55,
+  "coverage_status_counts": {
+    "valid-native-value": 80712
+  },
+  "new_native_blocks": 2709,
+  "prior_saved_arrays_used": 86,
+  "incomplete_source_tile_edge_contexts": 4,
+  "application_memory_budget_or_heap_flags": false,
+  "source_or_native_qualification_replay": false,
+  "scientific_answers_or_adoption_claimed": false,
+  "git_mutation": false
+}

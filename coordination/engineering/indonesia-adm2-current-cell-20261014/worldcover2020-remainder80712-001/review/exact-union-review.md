@@ -1,0 +1,25 @@
+# Exact prospective original133846 union accounting
+
+Worker `/root/cell_method_review`. **PASS for exact prospective set accounting; Root adoption pending.** This is neither scientific adoption nor native/repair acceptance. Reused the completed source and distinct scientific review; no source/native/Git scientific work was replayed.
+
+Independently streamed the canonical proposal (encoded5,920,626 bytes/SHA256 `8f8efe8988f8e744570dd941f7e922b9bf57afd0e45b10ac673670ff10ad8590`; decoded275,449,262 bytes/SHA256 `63ed54f3fa1b78118dda5d10bd56d0083104c7d8c4448413613304cc070ccac6`) and joined every record by unchanged point_index to the actual80,712 manifest SHA256 `53ce34ad1897ed61f7404729ed19dbed373dc1005b38055c4349559070294a8e`. Proposal source report remains actual completed `d0a36f806ed4a270f6075332f8f4a20fa6c5a53afb8068d07ec6fa315a479e07`.
+
+All80,712 distinct keys are present exactly once, with zero extras, omissions or repeated point indices. Every original owner/y/x, whole interval, block/ordinal, full owner/SID arrays, physical category/class and unchanged centre literal matches. Answer/residual flags, proposed credit0/1, actual-answer versus remaining-question fields and zero native/repair credit are internally consistent. This tests exact identity and bookkeeping; Worker3's substantive source/association/interpretation limits remain applicable and are not independently re-run here.
+
+| Distinct original owner/y/x set | Existing adopted/read scope | New proposal | Prospective exact union |
+|---|---:|---:|---:|
+| Bounded body-location answers | 36,760 | 55,781 | **92,541** |
+| Specific residual questions | 16,374 | 24,931 | **41,305** |
+| Complete source-read scope | 53,134 | 80,712 | **133,846** |
+
+The new scope has zero overlap with the entire previous53,134 read keys, including its unresolved16,374; the old/new answer sets are disjoint. The prospective answer and residual unions are disjoint and their union is exactly the original133,846 keys, reproducing full original digest `af326dc20490724feada9948dcbdf5df636f8cf9b93b063e9d677b288d56134f`. Neither coordinates nor owner keys have duplicates. Literal original owner IDs remain161+152=313, with no cross-scope owner-ID overlap; these are not canonical ADM2/source-member counts.
+
+Every original interval remains present. The new38,941 intervals comprise23,986 wholly answered,4,054 partly answered and10,901 with no proposed bounded answer. Combined with the unchanged old27,306 intervals, all66,247 original intervals comprise40,476 wholly answered,6,627 partly answered and19,144 with no bounded answer. Actual per-interval original arrays and answer counts are preserved in `prospective-original-interval-accounting.jsonl.gz`; its decoded SHA256 is `63f09bac234b423c1a4ddf69e11b5ef6ded0a3bc7aa8a3985c064faec3340bbc`.
+
+The new proposed categories remain35,209 cover/body-location answers and20,572 water/body-location answers, with6,068 water/wet-cover edge residuals,18,859 wetland/intertidal body-relation residuals and4 incomplete-native-context residuals. Combined bounded answer types would be59,060 cover/body and33,481 water/body. These are answer types, not land/water native-cell acceptance or legal allocation. The foreign/other-claim9, parent554 and selected-portion27,059 flags and their nonexclusive meanings remain intact under the substantive review; this counter worker does not clear them.
+
+Saved four exact sorted owner/y/x keysets for the two new proposed sets and the two prospective unions. Whole encoded/decoded hashes and counts appear in `prospective-union-accounting.json`. These are task preparation outputs. Until Root adopts, the **actual known adopted set remains36,760**;55,781 and92,541 must be labelled proposed/prospective.41,305 are residuals of this bounded annual2020 body-location interpretation, not a globally reconciled historical unanswered count or closure of every original scientific/legal question. Earlier historical adoptions outside the prior known union are not silently reclassified.
+
+Accepted selection remains a separate snapshot comparison. The earlier exact readback of accepted `89ff38674f0c2afbd7af0a5f9c33caf90a9d3481` authenticated its272,335-cell additive patch SHA256 `b116649b92249b55055c3e1a20d940b542ba5ccc6714e3633017c3b430545d1f` and found zero same-owner-key or different-owner-coordinate overlap across the entire original133,846 universe. Every prospective subset inherits that **specific-snapshot** disjointness. No newer accepted base is assumed, no selected native-bank owner was read, and no current-owner-zero or additional native credit follows. Refresh the actual accepted selection before publishing any newer overlap claim.
+
+Worker3's actual completed review independently permits bounded adoption with limits; this worker supplies exact bookkeeping only. Root adoption, durable public checkpoint and ordinary publication on original issue1884 remain separate pending actions. No new source/qualification run, public comment, selected-data PR, accepted repair cell or hold release was made by this worker. Metadata streaming/join elapsed13.3774s; no scientific predicates were executed.

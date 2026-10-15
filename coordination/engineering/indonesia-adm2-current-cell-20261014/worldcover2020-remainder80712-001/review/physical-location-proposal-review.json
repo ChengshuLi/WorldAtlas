@@ -1,0 +1,737 @@
+{
+  "reviewer": "/root/remaining474_malinau_mahakam105",
+  "status": "PASS_WITH_LIMITS_FOR_BOUNDED_PHYSICAL_LOCATION_ADOPTION",
+  "actual_source_report": "d0a36f806ed4a270f6075332f8f4a20fa6c5a53afb8068d07ec6fa315a479e07",
+  "actual_source_association_body": "9ccedb86117912a6ca875148d79607f95932fe0b58f8c3a11437d999dbcbe9ac",
+  "original_remainder_keys": 80712,
+  "proposed_answer_count": 55781,
+  "specific_remaining_question_count": 24931,
+  "categories": {
+    "annual2020-source-supported-cover-body-location": 35209,
+    "annual2020-source-supported-water-body-location": 20572,
+    "unresolved-specific-water-wet-cover-edge-location": 6068,
+    "unresolved-specific-wetland-intertidal-body-relation": 18859,
+    "unresolved-specific-native-context-coverage": 4
+  },
+  "retained_context_flags": {
+    "keys": 80712,
+    "proposed_answers": 55781,
+    "parent_discrepancy_keys": 554,
+    "answer_parent_discrepancy_keys": 453,
+    "portion_keys": 27059,
+    "answer_portion_keys": 17015,
+    "foreign_or_other_claim_keys": 9,
+    "answer_foreign_or_other_claim_keys": 7
+  },
+  "source_disposition_or_association_binding_mismatches": 0,
+  "broader_original_question_closure": null,
+  "authority_or_repair_credit": 0,
+  "formal_adoption_by_this_reviewer": false,
+  "existing53134_adoption_unchanged": {
+    "adopted": 36760,
+    "specific_remaining": 16374
+  },
+  "prospective_combined_if_root_adopts": {
+    "bounded_answers": 92541,
+    "specific_remaining": 41305,
+    "original_denominator": 133846
+  },
+  "proposal_pin": {
+    "bytes": 5920626,
+    "sha256": "8f8efe8988f8e744570dd941f7e922b9bf57afd0e45b10ac673670ff10ad8590",
+    "decoded_bytes": 275449262,
+    "decoded_sha256": "63ed54f3fa1b78118dda5d10bd56d0083104c7d8c4448413613304cc070ccac6"
+  },
+  "concrete_examples": {
+    "50356": {
+      "point_index": 50356,
+      "original_key": {
+        "owner": 23090,
+        "y": 133094,
+        "x": 227210
+      },
+      "category": "unresolved-specific-native-context-coverage",
+      "actual_answer": null,
+      "remaining_physical_question": "The centre has a valid annual cover observation but its required local native context is incomplete; no adjacent-frame value or coastal relation is invented.",
+      "separate_unadopted_questions": [
+        "Annual2020 model, native point scale and source-registration limits remain; independent current/legal jurisdiction is not adjudicated.",
+        "Canopy flooding/understorey wetness is not answered by tree cover."
+      ],
+      "source_native_association": {
+        "basis": "Authenticated frozen source-candidate interval coverage preserved by original physical extraction; exact519member, roster, owner and reverse lineage bindings. Not a fresh strict-INTERIOR or boundary/tie measurement.",
+        "original_ADM2_claim": {
+          "source_index": 36362,
+          "family_index": 153,
+          "source_id": "gb:IDN:ADM2:22746128B79106566109504",
+          "ordinal": 102,
+          "owners": [
+            23090
+          ],
+          "name": "Fakfak",
+          "geometry_status": "raw-native-supported"
+        },
+        "actual_ADM1_claims": [
+          {
+            "source_index": 36255,
+            "family_index": 152,
+            "source_id": "gb:IDN:ADM1:65028918B84835514626455",
+            "ordinal": 29,
+            "owners": [],
+            "name": "West Papua",
+            "geometry_status": "raw-native-supported"
+          }
+        ],
+        "other_recorded_source_claims": [],
+        "retained_stage_original_member_equality_available": true,
+        "frozen_framework_parent": "framework:province:west-papua:8b60f6de353b",
+        "historical9f40_parent": "framework:province:west-papua:8b60f6de353b",
+        "parent_discrepancy_claims": [],
+        "documented_selected_geographic_portion": false,
+        "whole_report_cohort": "papua6",
+        "complete_association_record": "per-original-key-source-associations.jsonl",
+        "association_point_index": 50356
+      }
+    },
+    "60852": {
+      "point_index": 60852,
+      "original_key": {
+        "owner": 23094,
+        "y": 135002,
+        "x": 227210
+      },
+      "category": "unresolved-specific-native-context-coverage",
+      "actual_answer": null,
+      "remaining_physical_question": "The centre has a valid annual cover observation but its required local native context is incomplete; no adjacent-frame value or coastal relation is invented.",
+      "separate_unadopted_questions": [
+        "Annual2020 model, native point scale and source-registration limits remain; independent current/legal jurisdiction is not adjudicated.",
+        "Water kind, exact river association/bank/thalweg and jurisdiction remain separate where consequential.",
+        "A source administrative unit is not identical to its selected geographic portion; no selected-footprint inclusion is established."
+      ],
+      "source_native_association": {
+        "basis": "Authenticated frozen source-candidate interval coverage preserved by original physical extraction; exact519member, roster, owner and reverse lineage bindings. Not a fresh strict-INTERIOR or boundary/tie measurement.",
+        "original_ADM2_claim": {
+          "source_index": 36530,
+          "family_index": 153,
+          "source_id": "gb:IDN:ADM2:22746128B79752231805890",
+          "ordinal": 270,
+          "owners": [
+            23094
+          ],
+          "name": "Kota Tual",
+          "geometry_status": "raw-native-supported"
+        },
+        "actual_ADM1_claims": [],
+        "other_recorded_source_claims": [],
+        "retained_stage_original_member_equality_available": true,
+        "frozen_framework_parent": "framework:province:maluku:f39da568968f",
+        "historical9f40_parent": "framework:province:maluku:f39da568968f",
+        "parent_discrepancy_claims": [],
+        "documented_selected_geographic_portion": true,
+        "whole_report_cohort": "remaining264",
+        "complete_association_record": "per-original-key-source-associations.jsonl",
+        "association_point_index": 60852
+      }
+    },
+    "owner17": {
+      "point_index": 68106,
+      "original_key": {
+        "owner": 17,
+        "y": 135526,
+        "x": 208805
+      },
+      "category": "annual2020-source-supported-cover-body-location",
+      "actual_answer": "The annual2020 WorldCover Map supports built-up cover at this unchanged native source-associated location; this annual modeled cover observation is not an independent dated ground-truth or dry-ground assertion.",
+      "remaining_physical_question": null,
+      "separate_unadopted_questions": [
+        "Annual2020 model, native point scale and source-registration limits remain; independent current/legal jurisdiction is not adjudicated."
+      ],
+      "source_native_association": {
+        "basis": "Authenticated frozen source-candidate interval coverage preserved by original physical extraction; exact519member, roster, owner and reverse lineage bindings. Not a fresh strict-INTERIOR or boundary/tie measurement.",
+        "original_ADM2_claim": {
+          "source_index": 36466,
+          "family_index": 153,
+          "source_id": "gb:IDN:ADM2:22746128B85966169947265",
+          "ordinal": 206,
+          "owners": [
+            17
+          ],
+          "name": "Kota Jakarta Utara",
+          "geometry_status": "raw-native-supported"
+        },
+        "actual_ADM1_claims": [
+          {
+            "source_index": 36259,
+            "family_index": 152,
+            "source_id": "gb:IDN:ADM1:65028918B14696209246677",
+            "ordinal": 33,
+            "owners": [],
+            "name": "Jakarta Special Capital Region",
+            "geometry_status": "raw-native-supported"
+          }
+        ],
+        "other_recorded_source_claims": [],
+        "retained_stage_original_member_equality_available": true,
+        "frozen_framework_parent": "framework:province:jakarta-special-capital-region:533c2d0c0661",
+        "historical9f40_parent": "framework:province:jakarta-special-capital-region:533c2d0c0661",
+        "parent_discrepancy_claims": [],
+        "documented_selected_geographic_portion": false,
+        "whole_report_cohort": "remaining34",
+        "complete_association_record": "per-original-key-source-associations.jsonl",
+        "association_point_index": 68106
+      }
+    },
+    "67780": {
+      "point_index": 67780,
+      "original_key": {
+        "owner": 22996,
+        "y": 135460,
+        "x": 227827
+      },
+      "category": "unresolved-specific-native-context-coverage",
+      "actual_answer": null,
+      "remaining_physical_question": "The centre has a valid annual cover observation but its required local native context is incomplete; no adjacent-frame value or coastal relation is invented.",
+      "separate_unadopted_questions": [
+        "Annual2020 model, native point scale and source-registration limits remain; independent current/legal jurisdiction is not adjudicated.",
+        "Canopy flooding/understorey wetness is not answered by tree cover.",
+        "A source administrative unit is not identical to its selected geographic portion; no selected-footprint inclusion is established."
+      ],
+      "source_native_association": {
+        "basis": "Authenticated frozen source-candidate interval coverage preserved by original physical extraction; exact519member, roster, owner and reverse lineage bindings. Not a fresh strict-INTERIOR or boundary/tie measurement.",
+        "original_ADM2_claim": {
+          "source_index": 36581,
+          "family_index": 153,
+          "source_id": "gb:IDN:ADM2:22746128B6545713511337",
+          "ordinal": 321,
+          "owners": [
+            22996
+          ],
+          "name": "Maluku Tenggara",
+          "geometry_status": "raw-native-supported"
+        },
+        "actual_ADM1_claims": [
+          {
+            "source_index": 36249,
+            "family_index": 152,
+            "source_id": "gb:IDN:ADM1:65028918B48178230554278",
+            "ordinal": 23,
+            "owners": [],
+            "name": "Maluku",
+            "geometry_status": "raw-native-supported"
+          }
+        ],
+        "other_recorded_source_claims": [],
+        "retained_stage_original_member_equality_available": true,
+        "frozen_framework_parent": "framework:province:maluku:f39da568968f",
+        "historical9f40_parent": "framework:province:maluku:f39da568968f",
+        "parent_discrepancy_claims": [],
+        "documented_selected_geographic_portion": true,
+        "whole_report_cohort": "remaining264",
+        "complete_association_record": "per-original-key-source-associations.jsonl",
+        "association_point_index": 67780
+      }
+    },
+    "67781": {
+      "point_index": 67781,
+      "original_key": {
+        "owner": 22996,
+        "y": 135460,
+        "x": 227828
+      },
+      "category": "unresolved-specific-native-context-coverage",
+      "actual_answer": null,
+      "remaining_physical_question": "The centre has a valid annual cover observation but its required local native context is incomplete; no adjacent-frame value or coastal relation is invented.",
+      "separate_unadopted_questions": [
+        "Annual2020 model, native point scale and source-registration limits remain; independent current/legal jurisdiction is not adjudicated.",
+        "Canopy flooding/understorey wetness is not answered by tree cover.",
+        "A source administrative unit is not identical to its selected geographic portion; no selected-footprint inclusion is established."
+      ],
+      "source_native_association": {
+        "basis": "Authenticated frozen source-candidate interval coverage preserved by original physical extraction; exact519member, roster, owner and reverse lineage bindings. Not a fresh strict-INTERIOR or boundary/tie measurement.",
+        "original_ADM2_claim": {
+          "source_index": 36581,
+          "family_index": 153,
+          "source_id": "gb:IDN:ADM2:22746128B6545713511337",
+          "ordinal": 321,
+          "owners": [
+            22996
+          ],
+          "name": "Maluku Tenggara",
+          "geometry_status": "raw-native-supported"
+        },
+        "actual_ADM1_claims": [
+          {
+            "source_index": 36249,
+            "family_index": 152,
+            "source_id": "gb:IDN:ADM1:65028918B48178230554278",
+            "ordinal": 23,
+            "owners": [],
+            "name": "Maluku",
+            "geometry_status": "raw-native-supported"
+          }
+        ],
+        "other_recorded_source_claims": [],
+        "retained_stage_original_member_equality_available": true,
+        "frozen_framework_parent": "framework:province:maluku:f39da568968f",
+        "historical9f40_parent": "framework:province:maluku:f39da568968f",
+        "parent_discrepancy_claims": [],
+        "documented_selected_geographic_portion": true,
+        "whole_report_cohort": "remaining264",
+        "complete_association_record": "per-original-key-source-associations.jsonl",
+        "association_point_index": 67781
+      }
+    },
+    "80111": {
+      "point_index": 80111,
+      "original_key": {
+        "owner": 22792,
+        "y": 137912,
+        "x": 221416
+      },
+      "category": "unresolved-specific-wetland-intertidal-body-relation",
+      "actual_answer": null,
+      "remaining_physical_question": "The wetland/intertidal cover is observed, but water/ground interface, inundation or tide-dependent body relation at this exact original location remains unanswered in this bounded adoption.",
+      "separate_unadopted_questions": [
+        "Annual2020 model, native point scale and source-registration limits remain; independent current/legal jurisdiction is not adjudicated.",
+        "Actual additional foreign/source claim remains an explicit territorial association question; no foreign hold is removed."
+      ],
+      "source_native_association": {
+        "basis": "Authenticated frozen source-candidate interval coverage preserved by original physical extraction; exact519member, roster, owner and reverse lineage bindings. Not a fresh strict-INTERIOR or boundary/tie measurement.",
+        "original_ADM2_claim": {
+          "source_index": 36539,
+          "family_index": 153,
+          "source_id": "gb:IDN:ADM2:22746128B27765258797580",
+          "ordinal": 279,
+          "owners": [
+            22792
+          ],
+          "name": "Kupang",
+          "geometry_status": "raw-native-supported"
+        },
+        "actual_ADM1_claims": [],
+        "other_recorded_source_claims": [
+          {
+            "source_index": 58354,
+            "family_index": 327,
+            "source_id": "gb:TLS:ADM1:58719522B69518090574338",
+            "ordinal": 0,
+            "owners": [],
+            "name": "Oecusse",
+            "geometry_status": "raw-native-supported"
+          }
+        ],
+        "retained_stage_original_member_equality_available": true,
+        "frozen_framework_parent": "framework:province:east-nusa-tenggara:5b5b49121e97",
+        "historical9f40_parent": "framework:province:east-nusa-tenggara:5b5b49121e97",
+        "parent_discrepancy_claims": [],
+        "documented_selected_geographic_portion": false,
+        "whole_report_cohort": "remaining34",
+        "complete_association_record": "per-original-key-source-associations.jsonl",
+        "association_point_index": 80111
+      }
+    },
+    "80114": {
+      "point_index": 80114,
+      "original_key": {
+        "owner": 22792,
+        "y": 137913,
+        "x": 221415
+      },
+      "category": "annual2020-source-supported-cover-body-location",
+      "actual_answer": "The annual2020 WorldCover Map supports grassland at this unchanged native source-associated location; this annual modeled cover observation is not an independent dated ground-truth or dry-ground assertion.",
+      "remaining_physical_question": null,
+      "separate_unadopted_questions": [
+        "Annual2020 model, native point scale and source-registration limits remain; independent current/legal jurisdiction is not adjudicated.",
+        "Actual additional foreign/source claim remains an explicit territorial association question; no foreign hold is removed."
+      ],
+      "source_native_association": {
+        "basis": "Authenticated frozen source-candidate interval coverage preserved by original physical extraction; exact519member, roster, owner and reverse lineage bindings. Not a fresh strict-INTERIOR or boundary/tie measurement.",
+        "original_ADM2_claim": {
+          "source_index": 36539,
+          "family_index": 153,
+          "source_id": "gb:IDN:ADM2:22746128B27765258797580",
+          "ordinal": 279,
+          "owners": [
+            22792
+          ],
+          "name": "Kupang",
+          "geometry_status": "raw-native-supported"
+        },
+        "actual_ADM1_claims": [],
+        "other_recorded_source_claims": [
+          {
+            "source_index": 58354,
+            "family_index": 327,
+            "source_id": "gb:TLS:ADM1:58719522B69518090574338",
+            "ordinal": 0,
+            "owners": [],
+            "name": "Oecusse",
+            "geometry_status": "raw-native-supported"
+          }
+        ],
+        "retained_stage_original_member_equality_available": true,
+        "frozen_framework_parent": "framework:province:east-nusa-tenggara:5b5b49121e97",
+        "historical9f40_parent": "framework:province:east-nusa-tenggara:5b5b49121e97",
+        "parent_discrepancy_claims": [],
+        "documented_selected_geographic_portion": false,
+        "whole_report_cohort": "remaining34",
+        "complete_association_record": "per-original-key-source-associations.jsonl",
+        "association_point_index": 80114
+      }
+    },
+    "80115": {
+      "point_index": 80115,
+      "original_key": {
+        "owner": 22792,
+        "y": 137913,
+        "x": 221416
+      },
+      "category": "unresolved-specific-wetland-intertidal-body-relation",
+      "actual_answer": null,
+      "remaining_physical_question": "The wetland/intertidal cover is observed, but water/ground interface, inundation or tide-dependent body relation at this exact original location remains unanswered in this bounded adoption.",
+      "separate_unadopted_questions": [
+        "Annual2020 model, native point scale and source-registration limits remain; independent current/legal jurisdiction is not adjudicated.",
+        "Actual additional foreign/source claim remains an explicit territorial association question; no foreign hold is removed."
+      ],
+      "source_native_association": {
+        "basis": "Authenticated frozen source-candidate interval coverage preserved by original physical extraction; exact519member, roster, owner and reverse lineage bindings. Not a fresh strict-INTERIOR or boundary/tie measurement.",
+        "original_ADM2_claim": {
+          "source_index": 36539,
+          "family_index": 153,
+          "source_id": "gb:IDN:ADM2:22746128B27765258797580",
+          "ordinal": 279,
+          "owners": [
+            22792
+          ],
+          "name": "Kupang",
+          "geometry_status": "raw-native-supported"
+        },
+        "actual_ADM1_claims": [],
+        "other_recorded_source_claims": [
+          {
+            "source_index": 58354,
+            "family_index": 327,
+            "source_id": "gb:TLS:ADM1:58719522B69518090574338",
+            "ordinal": 0,
+            "owners": [],
+            "name": "Oecusse",
+            "geometry_status": "raw-native-supported"
+          }
+        ],
+        "retained_stage_original_member_equality_available": true,
+        "frozen_framework_parent": "framework:province:east-nusa-tenggara:5b5b49121e97",
+        "historical9f40_parent": "framework:province:east-nusa-tenggara:5b5b49121e97",
+        "parent_discrepancy_claims": [],
+        "documented_selected_geographic_portion": false,
+        "whole_report_cohort": "remaining34",
+        "complete_association_record": "per-original-key-source-associations.jsonl",
+        "association_point_index": 80115
+      }
+    },
+    "80119": {
+      "point_index": 80119,
+      "original_key": {
+        "owner": 22792,
+        "y": 137914,
+        "x": 221415
+      },
+      "category": "annual2020-source-supported-cover-body-location",
+      "actual_answer": "The annual2020 WorldCover Map supports tree canopy at this unchanged native source-associated location; tree cover includes flooded forest and does not prove dry ground beneath the canopy.",
+      "remaining_physical_question": null,
+      "separate_unadopted_questions": [
+        "Annual2020 model, native point scale and source-registration limits remain; independent current/legal jurisdiction is not adjudicated.",
+        "Canopy flooding/understorey wetness is not answered by tree cover.",
+        "Actual additional foreign/source claim remains an explicit territorial association question; no foreign hold is removed."
+      ],
+      "source_native_association": {
+        "basis": "Authenticated frozen source-candidate interval coverage preserved by original physical extraction; exact519member, roster, owner and reverse lineage bindings. Not a fresh strict-INTERIOR or boundary/tie measurement.",
+        "original_ADM2_claim": {
+          "source_index": 36539,
+          "family_index": 153,
+          "source_id": "gb:IDN:ADM2:22746128B27765258797580",
+          "ordinal": 279,
+          "owners": [
+            22792
+          ],
+          "name": "Kupang",
+          "geometry_status": "raw-native-supported"
+        },
+        "actual_ADM1_claims": [],
+        "other_recorded_source_claims": [
+          {
+            "source_index": 58354,
+            "family_index": 327,
+            "source_id": "gb:TLS:ADM1:58719522B69518090574338",
+            "ordinal": 0,
+            "owners": [],
+            "name": "Oecusse",
+            "geometry_status": "raw-native-supported"
+          }
+        ],
+        "retained_stage_original_member_equality_available": true,
+        "frozen_framework_parent": "framework:province:east-nusa-tenggara:5b5b49121e97",
+        "historical9f40_parent": "framework:province:east-nusa-tenggara:5b5b49121e97",
+        "parent_discrepancy_claims": [],
+        "documented_selected_geographic_portion": false,
+        "whole_report_cohort": "remaining34",
+        "complete_association_record": "per-original-key-source-associations.jsonl",
+        "association_point_index": 80119
+      }
+    },
+    "80120": {
+      "point_index": 80120,
+      "original_key": {
+        "owner": 22792,
+        "y": 137914,
+        "x": 221416
+      },
+      "category": "annual2020-source-supported-cover-body-location",
+      "actual_answer": "The annual2020 WorldCover Map supports tree canopy at this unchanged native source-associated location; tree cover includes flooded forest and does not prove dry ground beneath the canopy.",
+      "remaining_physical_question": null,
+      "separate_unadopted_questions": [
+        "Annual2020 model, native point scale and source-registration limits remain; independent current/legal jurisdiction is not adjudicated.",
+        "Canopy flooding/understorey wetness is not answered by tree cover.",
+        "Actual additional foreign/source claim remains an explicit territorial association question; no foreign hold is removed."
+      ],
+      "source_native_association": {
+        "basis": "Authenticated frozen source-candidate interval coverage preserved by original physical extraction; exact519member, roster, owner and reverse lineage bindings. Not a fresh strict-INTERIOR or boundary/tie measurement.",
+        "original_ADM2_claim": {
+          "source_index": 36539,
+          "family_index": 153,
+          "source_id": "gb:IDN:ADM2:22746128B27765258797580",
+          "ordinal": 279,
+          "owners": [
+            22792
+          ],
+          "name": "Kupang",
+          "geometry_status": "raw-native-supported"
+        },
+        "actual_ADM1_claims": [],
+        "other_recorded_source_claims": [
+          {
+            "source_index": 58354,
+            "family_index": 327,
+            "source_id": "gb:TLS:ADM1:58719522B69518090574338",
+            "ordinal": 0,
+            "owners": [],
+            "name": "Oecusse",
+            "geometry_status": "raw-native-supported"
+          }
+        ],
+        "retained_stage_original_member_equality_available": true,
+        "frozen_framework_parent": "framework:province:east-nusa-tenggara:5b5b49121e97",
+        "historical9f40_parent": "framework:province:east-nusa-tenggara:5b5b49121e97",
+        "parent_discrepancy_claims": [],
+        "documented_selected_geographic_portion": false,
+        "whole_report_cohort": "remaining34",
+        "complete_association_record": "per-original-key-source-associations.jsonl",
+        "association_point_index": 80120
+      }
+    },
+    "80126": {
+      "point_index": 80126,
+      "original_key": {
+        "owner": 22792,
+        "y": 137915,
+        "x": 221415
+      },
+      "category": "annual2020-source-supported-cover-body-location",
+      "actual_answer": "The annual2020 WorldCover Map supports tree canopy at this unchanged native source-associated location; tree cover includes flooded forest and does not prove dry ground beneath the canopy.",
+      "remaining_physical_question": null,
+      "separate_unadopted_questions": [
+        "Annual2020 model, native point scale and source-registration limits remain; independent current/legal jurisdiction is not adjudicated.",
+        "Canopy flooding/understorey wetness is not answered by tree cover.",
+        "Actual additional foreign/source claim remains an explicit territorial association question; no foreign hold is removed."
+      ],
+      "source_native_association": {
+        "basis": "Authenticated frozen source-candidate interval coverage preserved by original physical extraction; exact519member, roster, owner and reverse lineage bindings. Not a fresh strict-INTERIOR or boundary/tie measurement.",
+        "original_ADM2_claim": {
+          "source_index": 36539,
+          "family_index": 153,
+          "source_id": "gb:IDN:ADM2:22746128B27765258797580",
+          "ordinal": 279,
+          "owners": [
+            22792
+          ],
+          "name": "Kupang",
+          "geometry_status": "raw-native-supported"
+        },
+        "actual_ADM1_claims": [],
+        "other_recorded_source_claims": [
+          {
+            "source_index": 58354,
+            "family_index": 327,
+            "source_id": "gb:TLS:ADM1:58719522B69518090574338",
+            "ordinal": 0,
+            "owners": [],
+            "name": "Oecusse",
+            "geometry_status": "raw-native-supported"
+          }
+        ],
+        "retained_stage_original_member_equality_available": true,
+        "frozen_framework_parent": "framework:province:east-nusa-tenggara:5b5b49121e97",
+        "historical9f40_parent": "framework:province:east-nusa-tenggara:5b5b49121e97",
+        "parent_discrepancy_claims": [],
+        "documented_selected_geographic_portion": false,
+        "whole_report_cohort": "remaining34",
+        "complete_association_record": "per-original-key-source-associations.jsonl",
+        "association_point_index": 80126
+      }
+    },
+    "80127": {
+      "point_index": 80127,
+      "original_key": {
+        "owner": 22792,
+        "y": 137915,
+        "x": 221416
+      },
+      "category": "annual2020-source-supported-cover-body-location",
+      "actual_answer": "The annual2020 WorldCover Map supports tree canopy at this unchanged native source-associated location; tree cover includes flooded forest and does not prove dry ground beneath the canopy.",
+      "remaining_physical_question": null,
+      "separate_unadopted_questions": [
+        "Annual2020 model, native point scale and source-registration limits remain; independent current/legal jurisdiction is not adjudicated.",
+        "Canopy flooding/understorey wetness is not answered by tree cover.",
+        "Actual additional foreign/source claim remains an explicit territorial association question; no foreign hold is removed."
+      ],
+      "source_native_association": {
+        "basis": "Authenticated frozen source-candidate interval coverage preserved by original physical extraction; exact519member, roster, owner and reverse lineage bindings. Not a fresh strict-INTERIOR or boundary/tie measurement.",
+        "original_ADM2_claim": {
+          "source_index": 36539,
+          "family_index": 153,
+          "source_id": "gb:IDN:ADM2:22746128B27765258797580",
+          "ordinal": 279,
+          "owners": [
+            22792
+          ],
+          "name": "Kupang",
+          "geometry_status": "raw-native-supported"
+        },
+        "actual_ADM1_claims": [],
+        "other_recorded_source_claims": [
+          {
+            "source_index": 58354,
+            "family_index": 327,
+            "source_id": "gb:TLS:ADM1:58719522B69518090574338",
+            "ordinal": 0,
+            "owners": [],
+            "name": "Oecusse",
+            "geometry_status": "raw-native-supported"
+          }
+        ],
+        "retained_stage_original_member_equality_available": true,
+        "frozen_framework_parent": "framework:province:east-nusa-tenggara:5b5b49121e97",
+        "historical9f40_parent": "framework:province:east-nusa-tenggara:5b5b49121e97",
+        "parent_discrepancy_claims": [],
+        "documented_selected_geographic_portion": false,
+        "whole_report_cohort": "remaining34",
+        "complete_association_record": "per-original-key-source-associations.jsonl",
+        "association_point_index": 80127
+      }
+    },
+    "80135": {
+      "point_index": 80135,
+      "original_key": {
+        "owner": 22792,
+        "y": 137916,
+        "x": 221416
+      },
+      "category": "annual2020-source-supported-cover-body-location",
+      "actual_answer": "The annual2020 WorldCover Map supports tree canopy at this unchanged native source-associated location; tree cover includes flooded forest and does not prove dry ground beneath the canopy.",
+      "remaining_physical_question": null,
+      "separate_unadopted_questions": [
+        "Annual2020 model, native point scale and source-registration limits remain; independent current/legal jurisdiction is not adjudicated.",
+        "Canopy flooding/understorey wetness is not answered by tree cover.",
+        "Actual additional foreign/source claim remains an explicit territorial association question; no foreign hold is removed."
+      ],
+      "source_native_association": {
+        "basis": "Authenticated frozen source-candidate interval coverage preserved by original physical extraction; exact519member, roster, owner and reverse lineage bindings. Not a fresh strict-INTERIOR or boundary/tie measurement.",
+        "original_ADM2_claim": {
+          "source_index": 36539,
+          "family_index": 153,
+          "source_id": "gb:IDN:ADM2:22746128B27765258797580",
+          "ordinal": 279,
+          "owners": [
+            22792
+          ],
+          "name": "Kupang",
+          "geometry_status": "raw-native-supported"
+        },
+        "actual_ADM1_claims": [],
+        "other_recorded_source_claims": [
+          {
+            "source_index": 58354,
+            "family_index": 327,
+            "source_id": "gb:TLS:ADM1:58719522B69518090574338",
+            "ordinal": 0,
+            "owners": [],
+            "name": "Oecusse",
+            "geometry_status": "raw-native-supported"
+          }
+        ],
+        "retained_stage_original_member_equality_available": true,
+        "frozen_framework_parent": "framework:province:east-nusa-tenggara:5b5b49121e97",
+        "historical9f40_parent": "framework:province:east-nusa-tenggara:5b5b49121e97",
+        "parent_discrepancy_claims": [],
+        "documented_selected_geographic_portion": false,
+        "whole_report_cohort": "remaining34",
+        "complete_association_record": "per-original-key-source-associations.jsonl",
+        "association_point_index": 80135
+      }
+    },
+    "80146": {
+      "point_index": 80146,
+      "original_key": {
+        "owner": 22792,
+        "y": 137917,
+        "x": 221416
+      },
+      "category": "annual2020-source-supported-cover-body-location",
+      "actual_answer": "The annual2020 WorldCover Map supports tree canopy at this unchanged native source-associated location; tree cover includes flooded forest and does not prove dry ground beneath the canopy.",
+      "remaining_physical_question": null,
+      "separate_unadopted_questions": [
+        "Annual2020 model, native point scale and source-registration limits remain; independent current/legal jurisdiction is not adjudicated.",
+        "Canopy flooding/understorey wetness is not answered by tree cover.",
+        "Actual additional foreign/source claim remains an explicit territorial association question; no foreign hold is removed."
+      ],
+      "source_native_association": {
+        "basis": "Authenticated frozen source-candidate interval coverage preserved by original physical extraction; exact519member, roster, owner and reverse lineage bindings. Not a fresh strict-INTERIOR or boundary/tie measurement.",
+        "original_ADM2_claim": {
+          "source_index": 36539,
+          "family_index": 153,
+          "source_id": "gb:IDN:ADM2:22746128B27765258797580",
+          "ordinal": 279,
+          "owners": [
+            22792
+          ],
+          "name": "Kupang",
+          "geometry_status": "raw-native-supported"
+        },
+        "actual_ADM1_claims": [],
+        "other_recorded_source_claims": [
+          {
+            "source_index": 58354,
+            "family_index": 327,
+            "source_id": "gb:TLS:ADM1:58719522B69518090574338",
+            "ordinal": 0,
+            "owners": [],
+            "name": "Oecusse",
+            "geometry_status": "raw-native-supported"
+          }
+        ],
+        "retained_stage_original_member_equality_available": true,
+        "frozen_framework_parent": "framework:province:east-nusa-tenggara:5b5b49121e97",
+        "historical9f40_parent": "framework:province:east-nusa-tenggara:5b5b49121e97",
+        "parent_discrepancy_claims": [],
+        "documented_selected_geographic_portion": false,
+        "whole_report_cohort": "remaining34",
+        "complete_association_record": "per-original-key-source-associations.jsonl",
+        "association_point_index": 80146
+      }
+    }
+  },
+  "source_native_HTTP_or_scientific_replay_by_reviewer": false,
+  "substantive_review": {
+    "path": "idn-physical-remainder80712-001/worker3-verification/physical-location-proposal-review.md",
+    "bytes": 6513,
+    "sha256": "3bf35e6795a0a46e7a26cd9809ee0d232c1199747e74b07e210b81363cbcc219"
+  }
+}

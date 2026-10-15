@@ -1,0 +1,805 @@
+{
+  "kind": "final-proposed-remainder80712-physical-body-location-dispositions",
+  "complete_source_tiles_interpreted": 55,
+  "original_remainder_denominator": 80712,
+  "counts": {
+    "keys": 80712,
+    "proposed_answers": 55781,
+    "parent_discrepancy_keys": 554,
+    "portion_keys": 27059,
+    "foreign_or_other_claim_keys": 9,
+    "answer_parent_discrepancy_keys": 453,
+    "answer_portion_keys": 17015,
+    "answer_foreign_or_other_claim_keys": 7
+  },
+  "categories": {
+    "annual2020-source-supported-cover-body-location": 35209,
+    "annual2020-source-supported-water-body-location": 20572,
+    "unresolved-specific-water-wet-cover-edge-location": 6068,
+    "unresolved-specific-wetland-intertidal-body-relation": 18859,
+    "unresolved-specific-native-context-coverage": 4
+  },
+  "literal_class_counts": {
+    "10": 29102,
+    "80": 23455,
+    "60": 4006,
+    "30": 3662,
+    "95": 18647,
+    "50": 1204,
+    "90": 212,
+    "40": 254,
+    "20": 170
+  },
+  "whole_source_complete": true,
+  "root_adoption": null,
+  "authority_or_repair_credit": 0,
+  "source_association_summary": {
+    "path": "idn-physical-remainder80712-001/worker2-interpretation/source-association-summary.json",
+    "bytes": 260989,
+    "sha256": "90325a3f43b851ca06e6fe289819ecc4e2dd3bb000ce661112b4f5f3a9583d15"
+  },
+  "scope_choice": "Reuse previous adopted bounded physical-body scope where actual source and frozen association support it. Context scope is transparent observed evidence, not a confidence metric; unresolved rows retain specific useful source facts, not universal impossibility.",
+  "source_report": {
+    "path": "idn-physical-remainder80712-001/worker1-source/source-observations.json",
+    "bytes": 511288,
+    "sha256": "d0a36f806ed4a270f6075332f8f4a20fa6c5a53afb8068d07ec6fa315a479e07"
+  },
+  "point_plan": {
+    "path": "idn-physical-remainder80712-001/worker1-source/point-plan.jsonl",
+    "bytes": 87956807,
+    "sha256": "53ce34ad1897ed61f7404729ed19dbed373dc1005b38055c4349559070294a8e"
+  },
+  "full_source_associations": {
+    "path": "idn-physical-remainder80712-001/worker2-interpretation/source-associations.jsonl.gz",
+    "bytes": 5402808,
+    "sha256": "b93c2d4b4aa9718c5969143d1c7d4f66f4297528a5900c787f12af8a86fc3816",
+    "decoded_bytes": 267112581,
+    "decoded_sha256": "9ccedb86117912a6ca875148d79607f95932fe0b58f8c3a11437d999dbcbe9ac",
+    "records": 80712,
+    "gzip_mtime": 0
+  },
+  "proposed_per_key_dispositions": {
+    "path": "idn-physical-remainder80712-001/worker2-interpretation/proposed-physical-location-dispositions.jsonl.gz",
+    "bytes": 5920626,
+    "sha256": "8f8efe8988f8e744570dd941f7e922b9bf57afd0e45b10ac673670ff10ad8590",
+    "decoded_bytes": 275449262,
+    "decoded_sha256": "63ed54f3fa1b78118dda5d10bd56d0083104c7d8c4448413613304cc070ccac6",
+    "records": 80712,
+    "gzip_mtime": 0
+  },
+  "literal_source_tile_outputs": [
+    {
+      "tile": "N00E096",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/N00E096/point-observations.jsonl",
+        "bytes": 381935,
+        "sha256": "458150fe66bf0dc93cfea036bf7a0559b271492bb57d04967b26d0670f55635a"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/N00E096.jsonl",
+        "bytes": 584853,
+        "sha256": "3a9288ec729e7aa2ec75cb09f426d4890b057e0834950db076d0d539795e3f3e"
+      }
+    },
+    {
+      "tile": "N00E099",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/N00E099/point-observations.jsonl",
+        "bytes": 2557924,
+        "sha256": "d2a6d2652d075e4cc4aa8c080da5c12bebebed9db905790ecd95f5b56c936d81"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/N00E099.jsonl",
+        "bytes": 3936747,
+        "sha256": "076000cab38b11e9131eb103b79d240e755b95ea14d4ee982576858636449336"
+      }
+    },
+    {
+      "tile": "N00E102",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/N00E102/point-observations.jsonl",
+        "bytes": 13072961,
+        "sha256": "3a439ad204eb382ba534a22495316af9ad8745dfd93b6a302ef2fbce4f8666c5"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/N00E102.jsonl",
+        "bytes": 20796616,
+        "sha256": "dd8d224315bf984ba2db5d43e504fb25156f3ef004f150f8a46a809e60ea8934"
+      }
+    },
+    {
+      "tile": "N00E105",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/N00E105/point-observations.jsonl",
+        "bytes": 4299240,
+        "sha256": "e4c1815df3eeb54340003d6ccc559e8788362bee4f01cde24fd5c3e4f8ccbda7"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/N00E105.jsonl",
+        "bytes": 6857789,
+        "sha256": "4f407b51bde51c55d2064bd281648664fedb34473ced98421beb08ce169dc19f"
+      }
+    },
+    {
+      "tile": "N00E108",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/N00E108/point-observations.jsonl",
+        "bytes": 1769855,
+        "sha256": "8e1e72245f4cae5c5a4db0b9f00e812a97e1117018032e1df0efbd99a6a94813"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/N00E108.jsonl",
+        "bytes": 2807554,
+        "sha256": "ce6b32ecab53ca74d9fc84b2ed2559d3ef5268b5c3f59ea17c09666d67da964a"
+      }
+    },
+    {
+      "tile": "N00E117",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/N00E117/point-observations.jsonl",
+        "bytes": 1475956,
+        "sha256": "cae1793e8186fcf51bb2cf338936720faa05fff62f39a2a428aa1057081a09a9"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/N00E117.jsonl",
+        "bytes": 2245811,
+        "sha256": "f86c42f56039683fe96e59f254530b4f04073f104268484181c04318e2995f26"
+      }
+    },
+    {
+      "tile": "N00E120",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/N00E120/point-observations.jsonl",
+        "bytes": 2683595,
+        "sha256": "9edb95f5f4beb6a5c64980ec4192d5dbe8fd1b87a9554fa22617c1fbcd18e943"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/N00E120.jsonl",
+        "bytes": 4124050,
+        "sha256": "eec567829af91242650e6f47c4b2fe1e7f4a768b448cf068256c4b74de629566"
+      }
+    },
+    {
+      "tile": "N00E123",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/N00E123/point-observations.jsonl",
+        "bytes": 2559706,
+        "sha256": "c498bcfdf9a62499987d574be0c0cb54aafad76c4014e9078e9bddc700f35367"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/N00E123.jsonl",
+        "bytes": 3932429,
+        "sha256": "79f2c21061a41e91b4cf94e4bf977a7def58605c0701a7c93626cdf7ffcc0c95"
+      }
+    },
+    {
+      "tile": "N00E126",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/N00E126/point-observations.jsonl",
+        "bytes": 9238332,
+        "sha256": "113749af2cc18d683b308715e0454da194e152babf7bd94a1e64a5a8e5f3b08c"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/N00E126.jsonl",
+        "bytes": 13974245,
+        "sha256": "a0d251faa31bcdf68a8c8225ad0990233bc69147a530687f5f19e99a90e8241c"
+      }
+    },
+    {
+      "tile": "N00E129",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/N00E129/point-observations.jsonl",
+        "bytes": 1133268,
+        "sha256": "d01d47dd478cbf15e3aabafe81bd09c89a2e03a4cb9c248aaee62ba651a54bcb"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/N00E129.jsonl",
+        "bytes": 1781177,
+        "sha256": "1a01a1facd361b3e1ce1b65e9539a5d32c5a84e6760fd70cf504e912b1dff0d9"
+      }
+    },
+    {
+      "tile": "N03E093",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/N03E093/point-observations.jsonl",
+        "bytes": 972855,
+        "sha256": "d4c3dd3b70da2156a9632c2214173b4025a244739b4b9f0cc237d3143c158e49"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/N03E093.jsonl",
+        "bytes": 1506011,
+        "sha256": "ac04b6cbb540f35680e44f102e6929097e8057361b55f7ea1da6ec6684e153b1"
+      }
+    },
+    {
+      "tile": "N03E096",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/N03E096/point-observations.jsonl",
+        "bytes": 1080263,
+        "sha256": "f861aaa7e394ea0a56e05b6ceb311a34b71be95f55208c79efd371286cc54ee5"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/N03E096.jsonl",
+        "bytes": 1644131,
+        "sha256": "3e7bd00a1251ecd4f2024a3c546f8692154069e14f9f3c7ed9490d57b2e913a6"
+      }
+    },
+    {
+      "tile": "N03E099",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/N03E099/point-observations.jsonl",
+        "bytes": 94537,
+        "sha256": "cb8aa40c4f0d61f16a91b4d6a3d0c741001686a81a501e3c32345314c33f3766"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/N03E099.jsonl",
+        "bytes": 145440,
+        "sha256": "9437844fe73b8d409f71ebc5ce3e8a8515289778a96292b0e4c9c7a003793776"
+      }
+    },
+    {
+      "tile": "N03E105",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/N03E105/point-observations.jsonl",
+        "bytes": 6248604,
+        "sha256": "5240561d6c4b4b59c379ccd466cc4c22b565e9b501f9a04d814ce1452768bb1e"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/N03E105.jsonl",
+        "bytes": 9933649,
+        "sha256": "c7482f4016c509795253a5bf04e06e58f10e802801cd79b5edc3260bea381904"
+      }
+    },
+    {
+      "tile": "N03E108",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/N03E108/point-observations.jsonl",
+        "bytes": 2367261,
+        "sha256": "c8ec8b48504e1cadc3b080ee116a9baa883ed269a1398b32b76e87cca45c3a16"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/N03E108.jsonl",
+        "bytes": 3727901,
+        "sha256": "5e9c39635c220553ccebc0176ed0c8cfcf6ac7cdc260c34d2c8addf3eaa71b3c"
+      }
+    },
+    {
+      "tile": "N03E117",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/N03E117/point-observations.jsonl",
+        "bytes": 2543100,
+        "sha256": "722a55562474add89c9de298ed9f94455de2437d31126ab677396ef07503a377"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/N03E117.jsonl",
+        "bytes": 3883857,
+        "sha256": "8a4ccbc99a2fee45465222a037687c439a73efdd547bef7b1f1d54adb0f3fb15"
+      }
+    },
+    {
+      "tile": "S03E099",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/S03E099/point-observations.jsonl",
+        "bytes": 209555,
+        "sha256": "3ee6774dc99a8301ca5267593259b9ccc178adf4cc673dc2ee4800306d1496f1"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/S03E099.jsonl",
+        "bytes": 328221,
+        "sha256": "54008f2be3f383cb638aa03e15fe4136ec26fc1a7462ee7022a51b3743cc5e75"
+      }
+    },
+    {
+      "tile": "S03E102",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/S03E102/point-observations.jsonl",
+        "bytes": 2028900,
+        "sha256": "ca20f02dd2033e6c330ca1dd549e6e7c6276faf77b6b0025a8837c37191984c4"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/S03E102.jsonl",
+        "bytes": 3270299,
+        "sha256": "d17107d1462249e59aa5652be7e0d4284ce86b012a23443c33d573cd831b4677"
+      }
+    },
+    {
+      "tile": "S03E105",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/S03E105/point-observations.jsonl",
+        "bytes": 813903,
+        "sha256": "38b4e27c82e6859b94775b675c45774f22a90ab35929ae80ff08e36261a658ee"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/S03E105.jsonl",
+        "bytes": 1282561,
+        "sha256": "4eb25c2aec338c34c37c1498d98ab1d6f50bc4c9a3fbee5e551a34e882aac48e"
+      }
+    },
+    {
+      "tile": "S03E108",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/S03E108/point-observations.jsonl",
+        "bytes": 1968842,
+        "sha256": "d825102e2f66b86765c08b4ff3d6d8596641c2afe88ce27977812f033dafbeea"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/S03E108.jsonl",
+        "bytes": 3156356,
+        "sha256": "0f1689feaf7251996863d7dbcf4bdc66d38783b477635f1f03ae19d53d3789d8"
+      }
+    },
+    {
+      "tile": "S03E114",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/S03E114/point-observations.jsonl",
+        "bytes": 188547,
+        "sha256": "483a61461417f42058fd3bbae4132050a3ef54af57605afe6b6c06c492eedb70"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/S03E114.jsonl",
+        "bytes": 286915,
+        "sha256": "31dd1a214b333f27dce57a8f49e39c02902e17fbf1118d20abbb4d0078257c2a"
+      }
+    },
+    {
+      "tile": "S03E117",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/S03E117/point-observations.jsonl",
+        "bytes": 955437,
+        "sha256": "6c24fe5b44095d037356c580a371144f9e2e268c45324009701535ec357d8a20"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/S03E117.jsonl",
+        "bytes": 1447625,
+        "sha256": "6fbb106722efb87698363bfa8d73beca20b9c3d61bc1d817931b2bdcd0467f67"
+      }
+    },
+    {
+      "tile": "S03E120",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/S03E120/point-observations.jsonl",
+        "bytes": 5114517,
+        "sha256": "327ee01fd0383fa05f091ddca766d74cd20f6bf4d3ad5253656ddc67b578cdd8"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/S03E120.jsonl",
+        "bytes": 7898239,
+        "sha256": "451e7ad1925c0611af29e98a3cef952b0544aae78a48c00b00c142e17bdb7d86"
+      }
+    },
+    {
+      "tile": "S03E123",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/S03E123/point-observations.jsonl",
+        "bytes": 5409245,
+        "sha256": "24ef48a45e03e20f3be565581fad7074d7bbbe013931c7278f3b8f714a659c72"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/S03E123.jsonl",
+        "bytes": 8391887,
+        "sha256": "c2364d4d291d5ab5a2490231424dddacf921c72c7aa7e623691987cc7626f419"
+      }
+    },
+    {
+      "tile": "S03E126",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/S03E126/point-observations.jsonl",
+        "bytes": 12324042,
+        "sha256": "54eefc6f29b956624a8a6050d507e4d95d1c8833dc4d9c00550db08aada06cb0"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/S03E126.jsonl",
+        "bytes": 18876481,
+        "sha256": "2dff7605472a2bb8df4dff82673ecfcb2c5f7a350c11ae618eee362e63dc3a19"
+      }
+    },
+    {
+      "tile": "S03E129",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/S03E129/point-observations.jsonl",
+        "bytes": 15033637,
+        "sha256": "71f5ede8fb34f84d0a5c968bf2179b6c17bbf1bf44fca2833fcfc1950c20f17a"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/S03E129.jsonl",
+        "bytes": 23729596,
+        "sha256": "0c0fca65f4acd470c487f8718dba54967c7fdfd086bb49f4a32bf593f7ca411b"
+      }
+    },
+    {
+      "tile": "S03E132",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/S03E132/point-observations.jsonl",
+        "bytes": 9241005,
+        "sha256": "f654fceefde538ef21ab53130628753060808a54e73ae9b03389fa986abe4a26"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/S03E132.jsonl",
+        "bytes": 14363563,
+        "sha256": "2a4d4c90097ca754918a715ca3d0efb606509e2a61d7e75a92240a353d7fa235"
+      }
+    },
+    {
+      "tile": "S03E135",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/S03E135/point-observations.jsonl",
+        "bytes": 6365951,
+        "sha256": "aa630309fed137ec35c136a06d415865a3f3e9be3e6b3b2d0ad9be28cf26ae11"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/S03E135.jsonl",
+        "bytes": 9711346,
+        "sha256": "097b575114f7028056a656b4885ccb1ab0b1aad34e40c43e02de3a436aaedf15"
+      }
+    },
+    {
+      "tile": "S03E138",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/S03E138/point-observations.jsonl",
+        "bytes": 553945,
+        "sha256": "6d0364f7d53a5d151d13253c5f14f70f977f3f2ec64c5568ca585407513334d9"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/S03E138.jsonl",
+        "bytes": 845122,
+        "sha256": "3242c9269de9270184e55f6e44a55a486551fd3499ae800a458cddf99a08f8ed"
+      }
+    },
+    {
+      "tile": "S06E102",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/S06E102/point-observations.jsonl",
+        "bytes": 338945,
+        "sha256": "3e0840b0532d9aa8dbf4b2d14b9f7531ef6b566530a72e200a7968f9f68bcc77"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/S06E102.jsonl",
+        "bytes": 522685,
+        "sha256": "dbb97f83fa484508585e4d76b52e08d7d258f1f6e8da88763c956165f3266887"
+      }
+    },
+    {
+      "tile": "S06E105",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/S06E105/point-observations.jsonl",
+        "bytes": 567409,
+        "sha256": "7f3c62dc3c7e072c912d96214796e4286653f80fb2463c43b6800c78ef9add32"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/S06E105.jsonl",
+        "bytes": 889616,
+        "sha256": "4fe54a3ef1df576eaa55f2bef20ced902eb0e188fa13bf83745996add6fb1749"
+      }
+    },
+    {
+      "tile": "S06E111",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/S06E111/point-observations.jsonl",
+        "bytes": 792051,
+        "sha256": "047ab091f72664d85fc7507f909363d8c28454a7f829db5d5b12804ad9061705"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/S06E111.jsonl",
+        "bytes": 1224891,
+        "sha256": "3b41bc25cd3d6f4b72d428d135b5796f0648f77d7fea53f06a3aa1772d40b868"
+      }
+    },
+    {
+      "tile": "S06E114",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/S06E114/point-observations.jsonl",
+        "bytes": 39451,
+        "sha256": "adb7608ee24ffe073347049806e5e7c5fec23672f1b92ced5c97366f73f89a9a"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/S06E114.jsonl",
+        "bytes": 61309,
+        "sha256": "41cc7b9b385817ad5d3ede51f8780973e715bc2a0dd1337682b5d245171fd6e8"
+      }
+    },
+    {
+      "tile": "S06E117",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/S06E117/point-observations.jsonl",
+        "bytes": 1877532,
+        "sha256": "eacf356d32cedc86cda851cb41cd97ddc0e5336c2ea145e1ba0e149c7c117f10"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/S06E117.jsonl",
+        "bytes": 2950336,
+        "sha256": "f9a6dc0bdaf2f523afc3378cad4398c1210896e95366eb96e63707ad7f45a0ed"
+      }
+    },
+    {
+      "tile": "S06E120",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/S06E120/point-observations.jsonl",
+        "bytes": 8368058,
+        "sha256": "4216f6608716ec4b04bae9c2d12325849b9491028f2be05caf5dc4c10571b47a"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/S06E120.jsonl",
+        "bytes": 12976966,
+        "sha256": "3311f572c573e59e35c1ba927263cb58b9fea142d6c4a37030eaf9883efa5d24"
+      }
+    },
+    {
+      "tile": "S06E123",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/S06E123/point-observations.jsonl",
+        "bytes": 315014,
+        "sha256": "3ceb8e4320cb77ced700ec61b5929affc89fb2879b4aab5244ece73a6da28874"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/S06E123.jsonl",
+        "bytes": 499894,
+        "sha256": "415e23b04a1c939f54f697d9e74b7c5b884f5b88e7db0ce556611d23803c6f2c"
+      }
+    },
+    {
+      "tile": "S06E126",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/S06E126/point-observations.jsonl",
+        "bytes": 1954037,
+        "sha256": "9b3e14834a242832c5716544d33e40ef3df6aa1310d8d8e255a4109105b999c3"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/S06E126.jsonl",
+        "bytes": 3106108,
+        "sha256": "cea4d49344567c267c728b2a7fa114a45b1b740da86a4d7227ddc0f3d2800972"
+      }
+    },
+    {
+      "tile": "S06E129",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/S06E129/point-observations.jsonl",
+        "bytes": 1507958,
+        "sha256": "11034a329e2d72c5ed888b0bd4d9094a2f6ca6aac7131bb4da3fe1be84f247cf"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/S06E129.jsonl",
+        "bytes": 2397868,
+        "sha256": "ca6ce82fe96a14e68a22bc69ab637907c9daab67262cf4a3dd00514878965cf7"
+      }
+    },
+    {
+      "tile": "S06E132",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/S06E132/point-observations.jsonl",
+        "bytes": 19053161,
+        "sha256": "cf595d644cb107e1b778a89049df0c1481c1f684ebaa23ca8f0127bc8c0f7db5"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/S06E132.jsonl",
+        "bytes": 29944972,
+        "sha256": "6edebaa390cacefc1db16b6ed361dcec73802559fe8fcf9390529c90ef2c12a4"
+      }
+    },
+    {
+      "tile": "S06E135",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/S06E135/point-observations.jsonl",
+        "bytes": 507220,
+        "sha256": "f818010a3808dbc1f4bf0df8d95c0e0bc58d72b5752f2689670270aaeeb563b4"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/S06E135.jsonl",
+        "bytes": 776146,
+        "sha256": "d370759cab3b5a981258406dc22c83853a0fd52ed5ab1f62df52b31f75d707e9"
+      }
+    },
+    {
+      "tile": "S09E105",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/S09E105/point-observations.jsonl",
+        "bytes": 687412,
+        "sha256": "d0aed1a1a48afe20694b59f0b7518bc599a6f1f4ef5e09be16df300a1027fb7e"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/S09E105.jsonl",
+        "bytes": 1054301,
+        "sha256": "9b7ae393f64b690d0a053d5eacb0c689e29f02acfa498577eecfbaf2441bec38"
+      }
+    },
+    {
+      "tile": "S09E108",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/S09E108/point-observations.jsonl",
+        "bytes": 685277,
+        "sha256": "f62ae1f6d5c94cc5acea97cabc7e56da37465aeeaafd01f148bc179d575cf1f6"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/S09E108.jsonl",
+        "bytes": 1069635,
+        "sha256": "3b348a198d201142255c18988cd5955f6a1a8ba1565846aca52a41570f0c3168"
+      }
+    },
+    {
+      "tile": "S09E111",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/S09E111/point-observations.jsonl",
+        "bytes": 2012756,
+        "sha256": "3711a502ee44dbbeba6cd54f81c934f6b86534d3d512a9911ce2d19b486d50c1"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/S09E111.jsonl",
+        "bytes": 3076763,
+        "sha256": "dd77c55e6932cb48ce8702be5c205c4b993bfbc9cb83640add024e99e9062fa0"
+      }
+    },
+    {
+      "tile": "S09E114",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/S09E114/point-observations.jsonl",
+        "bytes": 1218088,
+        "sha256": "3ea42ccae577d988320b2fb88a8dc6787927f822e63a97e1bd1f0fd05e098372"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/S09E114.jsonl",
+        "bytes": 1855729,
+        "sha256": "3ee79e6078deb46dd996fa594f0914216a5a7ff896393ead70625fb2432e4be3"
+      }
+    },
+    {
+      "tile": "S09E117",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/S09E117/point-observations.jsonl",
+        "bytes": 2528949,
+        "sha256": "b7cc51e9cffbc27ce8724d5f17d5e105afcba7fafb8d020e13028cdac328e4c1"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/S09E117.jsonl",
+        "bytes": 3887262,
+        "sha256": "e853a167c772e312e8da5165483ef2facfe4417bfba8bbd8713e04610c460f1d"
+      }
+    },
+    {
+      "tile": "S09E120",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/S09E120/point-observations.jsonl",
+        "bytes": 1624841,
+        "sha256": "56aa5158c7af1ef8064f5fc283258860268efc0e2c9fcfcd4d44d13905c05515"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/S09E120.jsonl",
+        "bytes": 2476109,
+        "sha256": "11496962291cf5b623bb4862d079dbf4ef7fc2cc30a23b34e0407c504751e74f"
+      }
+    },
+    {
+      "tile": "S09E123",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/S09E123/point-observations.jsonl",
+        "bytes": 883820,
+        "sha256": "7b7a678a42ead50853a2246c64196cedc2ebc69f08d209613efedf74aa6d205c"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/S09E123.jsonl",
+        "bytes": 1390771,
+        "sha256": "352c239776afd3d993c0eddeda677cd16c25b069d04da1adbefea17ad2f77d81"
+      }
+    },
+    {
+      "tile": "S09E126",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/S09E126/point-observations.jsonl",
+        "bytes": 2975271,
+        "sha256": "dc2623b4bb0c0161e8114a141ee8b28217bc1fc475615f9ec8cdb39fb685d67d"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/S09E126.jsonl",
+        "bytes": 4665952,
+        "sha256": "2db410a0dbe12f54c5e6a5e78d31293995d683dfe91ed0710a1c5acc0b817ea0"
+      }
+    },
+    {
+      "tile": "S09E129",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/S09E129/point-observations.jsonl",
+        "bytes": 4679378,
+        "sha256": "690ae56a9a24c6bed5a5d396682a8234063abc7293267b7f05a5ec46a63055be"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/S09E129.jsonl",
+        "bytes": 7339819,
+        "sha256": "a419ad8d61fc8bcd8a744aa0015bdd1e9dddba4d1f7b81da2bb76c5b3af0e3b6"
+      }
+    },
+    {
+      "tile": "S09E132",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/S09E132/point-observations.jsonl",
+        "bytes": 7187017,
+        "sha256": "55b6b171b7fb80791d0b1297607e87b4b6ea1a053737ef8d10e44ce670817911"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/S09E132.jsonl",
+        "bytes": 11199628,
+        "sha256": "22757e63aa1cf0024af55e11864ff0cdb8b6082d87db8c5d1855772515caf419"
+      }
+    },
+    {
+      "tile": "S09E135",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/S09E135/point-observations.jsonl",
+        "bytes": 509099,
+        "sha256": "ab989133e7d352369792ef207e64e2c347c86c16636d9e8fe6d464a6d4da8a72"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/S09E135.jsonl",
+        "bytes": 759270,
+        "sha256": "6ffce3dad6daf4f264789a06ecae84432d3e8c2d710d891f2371f5ff6c939125"
+      }
+    },
+    {
+      "tile": "S09E138",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/S09E138/point-observations.jsonl",
+        "bytes": 2079003,
+        "sha256": "da1dae5336eb2cc9c180d5f5545f20489bc569366f4c07a2de93d248f90d6687"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/S09E138.jsonl",
+        "bytes": 3146574,
+        "sha256": "90e7ae55c92c164c4f3e4d8da0c93fa0ba346971f2e68ff28646e9036a0ad10f"
+      }
+    },
+    {
+      "tile": "S12E117",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/S12E117/point-observations.jsonl",
+        "bytes": 464809,
+        "sha256": "9d2736654396272d4c33b265396369a6aa5e86371821185cb0ec7fb6153deb75"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/S12E117.jsonl",
+        "bytes": 713698,
+        "sha256": "20f98d220f2caa25fe450874a27cb98a1c2396b754b8eb581558c65f46d19e09"
+      }
+    },
+    {
+      "tile": "S12E123",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/S12E123/point-observations.jsonl",
+        "bytes": 1257574,
+        "sha256": "18c9fbeddd010a60a591e0d316806a0445f422579444cf8537b4c42bdb330213"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/S12E123.jsonl",
+        "bytes": 1929196,
+        "sha256": "21810277f1531fc77aa4c283b2fec0a0f5415c62132392a26b6ae51aafaa738d"
+      }
+    },
+    {
+      "tile": "S12E138",
+      "source_jsonl": {
+        "path": "idn-physical-remainder80712-001/worker1-source/tiles/S12E138/point-observations.jsonl",
+        "bytes": 41387,
+        "sha256": "27ca830139c76df4e1e497678706dfa207cac5ade1562cce88e354235a4614a6"
+      },
+      "interpretation_output": {
+        "path": "idn-physical-remainder80712-001/worker2-interpretation/tile-dispositions/S12E138.jsonl",
+        "bytes": 63293,
+        "sha256": "76b5d00f6bf746f197c6edd142acfaa96825cef48d34f5b387e4c3f0972d1454"
+      }
+    }
+  ],
+  "independent_review": "pending final binding",
+  "completed_question_credit_proposed": 55781,
+  "specific_remaining_keys": 24931,
+  "existing53134_adoption_unchanged": {
+    "previous_source_keys": 53134,
+    "adopted_bounded_answers": 36760,
+    "specific_unresolved": 16374,
+    "public_checkpoint": "d307c50204158260405d6a703a5f1d8190472752",
+    "descriptor_erratum_only": "prior53134-part-binding-erratum.json"
+  },
+  "original_physical_package_prospective_accounting_if_adopted": {
+    "original_denominator": 133846,
+    "previous_adopted": 36760,
+    "new_proposed": 55781,
+    "total_bounded_answers_if_Root_adopts": 92541,
+    "remaining_physical_questions_if_Root_adopts": 41305,
+    "original_repair_or_authority_credit": 0
+  }
+}

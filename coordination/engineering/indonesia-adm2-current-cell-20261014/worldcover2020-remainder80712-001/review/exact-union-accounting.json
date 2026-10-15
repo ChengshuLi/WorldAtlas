@@ -1,0 +1,84 @@
+{
+  "reviewer": "/root/cell_method_review",
+  "status": "PROSPECTIVE_EXACT_ACCOUNTING_ONLY_ROOT_ADOPTION_PENDING",
+  "original_keys": 133846,
+  "old_read_keys": 53134,
+  "old_adopted_answers": 36760,
+  "old_read_unresolved": 16374,
+  "new_actual_source_keys": 80712,
+  "new_proposed_answers": 55781,
+  "new_proposed_residual": 24931,
+  "prospective_answer_union": 92541,
+  "prospective_residual_union": 41305,
+  "new_vs_old_key_overlap": 0,
+  "answer_vs_residual_overlap": 0,
+  "duplicate_or_omitted_proposal_keys": 0,
+  "original_owner_interval_sid_class_or_centre_mismatches": 0,
+  "proposal_pin": {
+    "path": "idn-physical-remainder80712-001/worker2-interpretation/proposed-physical-location-dispositions.jsonl.gz",
+    "bytes": 5920626,
+    "sha256": "8f8efe8988f8e744570dd941f7e922b9bf57afd0e45b10ac673670ff10ad8590",
+    "decoded_bytes": 275449262,
+    "decoded_sha256": "63ed54f3fa1b78118dda5d10bd56d0083104c7d8c4448413613304cc070ccac6",
+    "records": 80712,
+    "gzip_mtime": 0
+  },
+  "source_report_sha256": "d0a36f806ed4a270f6075332f8f4a20fa6c5a53afb8068d07ec6fa315a479e07",
+  "all_proposal_original_rows_join_actual_plan": true,
+  "keysets": {
+    "new-proposed-answers55781": {
+      "path": "new-proposed-answers55781-owner-y-x.jsonl.gz",
+      "keys": 55781,
+      "bytes": 159524,
+      "sha256": "c4176da6af7d478c34814091a0fdbe86f20351b0c6989a9507a0c29252539a21",
+      "decoded_bytes": 1226924,
+      "decoded_sha256": "de25d8efe3f1cdf4f561297fcfae8d8492169654bfefeeeea7b3c47c3c559796",
+      "unit": "sorted[owner,y,x] compactJSONL LF"
+    },
+    "new-proposed-residual24931": {
+      "path": "new-proposed-residual24931-owner-y-x.jsonl.gz",
+      "keys": 24931,
+      "bytes": 79655,
+      "sha256": "a685cb79c8eea0acc9477c8cdcc17b8900c4b6086042c9c1c88e5fccf7198890",
+      "decoded_bytes": 548425,
+      "decoded_sha256": "ee69ba84409cfd20ce075fce59be1bf14b34a03897388786a9c6301079c61288",
+      "unit": "sorted[owner,y,x] compactJSONL LF"
+    },
+    "prospective-answer-union92541": {
+      "path": "prospective-answer-union92541-owner-y-x.jsonl.gz",
+      "keys": 92541,
+      "bytes": 267259,
+      "sha256": "06707d6ecacdd27a8ef06fcf87b4468c0fc94c2ec7cbb86e82418f1e5f6a6adb",
+      "decoded_bytes": 2035644,
+      "decoded_sha256": "74ba6946d22d70eb6e9e12c4246f2aa61d80acae59e695ace93b66f7408e0165",
+      "unit": "sorted[owner,y,x] compactJSONL LF"
+    },
+    "prospective-residual-union41305": {
+      "path": "prospective-residual-union41305-owner-y-x.jsonl.gz",
+      "keys": 41305,
+      "bytes": 135001,
+      "sha256": "bde05648fd0ebebe857999e752cbe7f4bb67ead81f8f7253b6a87828e06e5c5c",
+      "decoded_bytes": 908653,
+      "decoded_sha256": "54ae4b7612fa0ccdd909ba59bb5d41e26d36518b360479d96b1460c82e0fc648",
+      "unit": "sorted[owner,y,x] compactJSONL LF"
+    }
+  },
+  "new_interval_summary": {
+    "wholly_answered": 23986,
+    "no_bounded_answer": 10901,
+    "partly_answered": 4054
+  },
+  "prospective_full_interval_summary": {
+    "wholly_answered": 40476,
+    "partly_answered": 6627,
+    "no_bounded_answer": 19144
+  },
+  "prospective_full_interval_rows": 66247,
+  "prospective_interval_decoded_sha256": "63f09bac234b423c1a4ddf69e11b5ef6ded0a3bc7aa8a3985c064faec3340bbc",
+  "original_key_digest_unchanged": "af326dc20490724feada9948dcbdf5df636f8cf9b93b063e9d677b288d56134f",
+  "accepted_patch_comparison": "Reuse exact89ff accepted272335 additive-patch overlap0 over all133846; no new baseline assumed or native-bank read",
+  "actual_known_adopted_union_before_Root_action": 36760,
+  "new_adoption_by_this_worker": 0,
+  "native_qualification_or_repair_credit": 0,
+  "elapsed_metadata_seconds": 13.377439665999999
+}
