@@ -1,0 +1,46 @@
+{
+  "pin": {
+    "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+    "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz",
+    "bytes": 1844315,
+    "sha256": "87f2d47e104b3af640351e747d8300d0068a1be23caab9e80558c3f8914eb4aa",
+    "git_blob_oid": "e6e380ec13cd4bcc1d24399a76bfa85ca5805b26",
+    "decoded_bytes": 13496995,
+    "decoded_sha256": "7fa99cbf064121e0130b66758c212ae22b2a7be5649f2e250e9cda89a9bd595e"
+  },
+  "records": [
+    {
+      "ordinal": 36248,
+      "record": {
+        "source_index": 36249,
+        "family_index": 152,
+        "source_id": "gb:IDN:ADM1:65028918B48178230554278",
+        "ordinal": 23,
+        "owners": [],
+        "name": "Maluku",
+        "geometry_status": "raw-native-supported"
+      }
+    },
+    {
+      "ordinal": 36578,
+      "record": {
+        "source_index": 36579,
+        "family_index": 153,
+        "source_id": "gb:IDN:ADM2:22746128B88480653802061",
+        "ordinal": 319,
+        "owners": [
+          23148
+        ],
+        "name": "Maluku Barat Daya",
+        "geometry_status": "raw-native-supported"
+      }
+    }
+  ],
+  "complete_records": 73567,
+  "encoded_bytes_read": 1844315,
+  "decoded_bytes_read": 13496995,
+  "decoded_sha256": "7fa99cbf064121e0130b66758c212ae22b2a7be5649f2e250e9cda89a9bd595e",
+  "read_chunk_bytes": 32768,
+  "maximum_JSON_buffer_characters": 32955,
+  "method": "Complete bounded metadata stream, whole hashes; no scientific execution"
+}

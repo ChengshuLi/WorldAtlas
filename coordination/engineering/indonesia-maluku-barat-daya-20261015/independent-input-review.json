@@ -1,0 +1,399 @@
+{
+  "kind": "independent-data-only-whole-stage-input-review",
+  "reviewer": "/root/manifest_handoff_cont",
+  "disposition": "PASS WITH LIMITS",
+  "stage": {
+    "file": "maluku-barat-daya4158-original-stage-inputs.json",
+    "bytes": 54535,
+    "sha256": "b799259d84bde2e54f545ae045f051e55fe62211acc695c9fdedb21d8bb31620"
+  },
+  "checks": [
+    {
+      "check": "Exact stage whole length/hash",
+      "pass": true
+    },
+    {
+      "check": "Exactly one original target and exact role keys",
+      "pass": true
+    },
+    {
+      "check": "Immutable path/OID coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IDN-ADM2-000.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "Complete JSON termination coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IDN-ADM2-000.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "Complete Git stream exit coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IDN-ADM2-000.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "Whole encoded bytes/hash coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IDN-ADM2-000.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "Whole decoded bytes/hash coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IDN-ADM2-000.bin.gz",
+      "pass": true
+    },
+    {
+      "check": "Immutable path/OID data/geography/part-10.json",
+      "pass": true
+    },
+    {
+      "check": "Complete JSON termination data/geography/part-10.json",
+      "pass": true
+    },
+    {
+      "check": "Complete Git stream exit data/geography/part-10.json",
+      "pass": true
+    },
+    {
+      "check": "Whole encoded bytes/hash data/geography/part-10.json",
+      "pass": true
+    },
+    {
+      "check": "Whole source family519 and unique ordinal319",
+      "pass": true
+    },
+    {
+      "check": "Whole selected part1500 and unique ordinal1266",
+      "pass": true
+    },
+    {
+      "check": "Whole original consumed feature equals source, including every coordinate/property",
+      "pass": true
+    },
+    {
+      "check": "Whole selected feature equals actual selected part, including every coordinate/property",
+      "pass": true
+    },
+    {
+      "check": "Exact source country/class/original identity",
+      "pass": true
+    },
+    {
+      "check": "Exact framework Maluku parent retained, separate same-name scope excluded",
+      "pass": true
+    },
+    {
+      "check": "No added source-qualified flag or feature clipping/transform",
+      "pass": true
+    },
+    {
+      "check": "Immutable path/OID coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/owners.json.gz",
+      "pass": true
+    },
+    {
+      "check": "Complete JSON termination coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/owners.json.gz",
+      "pass": true
+    },
+    {
+      "check": "Complete Git stream exit coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/owners.json.gz",
+      "pass": true
+    },
+    {
+      "check": "Whole encoded bytes/hash coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/owners.json.gz",
+      "pass": true
+    },
+    {
+      "check": "Whole decoded bytes/hash coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/owners.json.gz",
+      "pass": true
+    },
+    {
+      "check": "Whole owner roster49625 and exact original one-owner join",
+      "pass": true
+    },
+    {
+      "check": "Owner identity and exact expected parent",
+      "pass": true
+    },
+    {
+      "check": "Immutable path/OID coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz",
+      "pass": true
+    },
+    {
+      "check": "Complete JSON termination coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz",
+      "pass": true
+    },
+    {
+      "check": "Complete Git stream exit coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz",
+      "pass": true
+    },
+    {
+      "check": "Whole encoded bytes/hash coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz",
+      "pass": true
+    },
+    {
+      "check": "Whole decoded bytes/hash coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz",
+      "pass": true
+    },
+    {
+      "check": "Whole SID roster73567 and exact parent/target rows",
+      "pass": true
+    },
+    {
+      "check": "Own SID36579 binds owner23148 and source ordinal319",
+      "pass": true
+    },
+    {
+      "check": "Expected ADM1 SID36249 identity",
+      "pass": true
+    },
+    {
+      "check": "Immutable path/OID coordination/engineering/indonesia-adm2-current-cell-20261014/source-investigation-v1/consumed-inputs/extraction/repair/block-032.json.gz",
+      "pass": true
+    },
+    {
+      "check": "Complete JSON termination coordination/engineering/indonesia-adm2-current-cell-20261014/source-investigation-v1/consumed-inputs/extraction/repair/block-032.json.gz",
+      "pass": true
+    },
+    {
+      "check": "Complete Git stream exit coordination/engineering/indonesia-adm2-current-cell-20261014/source-investigation-v1/consumed-inputs/extraction/repair/block-032.json.gz",
+      "pass": true
+    },
+    {
+      "check": "Whole encoded bytes/hash coordination/engineering/indonesia-adm2-current-cell-20261014/source-investigation-v1/consumed-inputs/extraction/repair/block-032.json.gz",
+      "pass": true
+    },
+    {
+      "check": "Immutable path/OID coordination/engineering/indonesia-adm2-current-cell-20261014/source-investigation-v1/consumed-inputs/extraction/repair/block-033.json.gz",
+      "pass": true
+    },
+    {
+      "check": "Complete JSON termination coordination/engineering/indonesia-adm2-current-cell-20261014/source-investigation-v1/consumed-inputs/extraction/repair/block-033.json.gz",
+      "pass": true
+    },
+    {
+      "check": "Complete Git stream exit coordination/engineering/indonesia-adm2-current-cell-20261014/source-investigation-v1/consumed-inputs/extraction/repair/block-033.json.gz",
+      "pass": true
+    },
+    {
+      "check": "Whole encoded bytes/hash coordination/engineering/indonesia-adm2-current-cell-20261014/source-investigation-v1/consumed-inputs/extraction/repair/block-033.json.gz",
+      "pass": true
+    },
+    {
+      "check": "Immutable path/OID coordination/engineering/indonesia-adm2-current-cell-20261014/source-investigation-v1/consumed-inputs/extraction/physical/block-032.json.gz",
+      "pass": true
+    },
+    {
+      "check": "Complete JSON termination coordination/engineering/indonesia-adm2-current-cell-20261014/source-investigation-v1/consumed-inputs/extraction/physical/block-032.json.gz",
+      "pass": true
+    },
+    {
+      "check": "Complete Git stream exit coordination/engineering/indonesia-adm2-current-cell-20261014/source-investigation-v1/consumed-inputs/extraction/physical/block-032.json.gz",
+      "pass": true
+    },
+    {
+      "check": "Whole encoded bytes/hash coordination/engineering/indonesia-adm2-current-cell-20261014/source-investigation-v1/consumed-inputs/extraction/physical/block-032.json.gz",
+      "pass": true
+    },
+    {
+      "check": "Immutable path/OID coordination/engineering/indonesia-adm2-current-cell-20261014/source-investigation-v1/consumed-inputs/extraction/physical/block-033.json.gz",
+      "pass": true
+    },
+    {
+      "check": "Complete JSON termination coordination/engineering/indonesia-adm2-current-cell-20261014/source-investigation-v1/consumed-inputs/extraction/physical/block-033.json.gz",
+      "pass": true
+    },
+    {
+      "check": "Complete Git stream exit coordination/engineering/indonesia-adm2-current-cell-20261014/source-investigation-v1/consumed-inputs/extraction/physical/block-033.json.gz",
+      "pass": true
+    },
+    {
+      "check": "Whole encoded bytes/hash coordination/engineering/indonesia-adm2-current-cell-20261014/source-investigation-v1/consumed-inputs/extraction/physical/block-033.json.gz",
+      "pass": true
+    },
+    {
+      "check": "Exact all original intervals/order/classes/SIDs equal original immutable extraction",
+      "pass": true
+    },
+    {
+      "check": "Exact1874 records and no unrelated owners",
+      "pass": true
+    },
+    {
+      "check": "All4158 original cells preserved",
+      "pass": true
+    },
+    {
+      "check": "Only2145 repair-land and2013 physical-relative labels preserved",
+      "pass": true
+    },
+    {
+      "check": "Every interval includes ownSID36579 with only expectedparent36249 optional",
+      "pass": true
+    },
+    {
+      "check": "Exactly24 common existing immutable physical descriptors reused literally",
+      "pass": true
+    },
+    {
+      "check": "Installed runtime388 reference retained literally without imports",
+      "pass": true
+    },
+    {
+      "check": "All other physical fields unchanged except scoped logical bytes and missing stage",
+      "pass": true
+    },
+    {
+      "check": "Exact common role mapping and stage explicitly absent",
+      "pass": true
+    },
+    {
+      "check": "Exact logical input charge305137894",
+      "pass": true
+    },
+    {
+      "check": "Reference finite output/deadline and phase/RSS requests retained",
+      "pass": true
+    },
+    {
+      "check": "Missing immutable stage pin remains explicit, no future commit invented",
+      "pass": true
+    },
+    {
+      "check": "Final canonical phase bytes/actual charge still pending",
+      "pass": true
+    },
+    {
+      "check": "Reference fixed subtotal correct",
+      "pass": true
+    }
+  ],
+  "pass_count": 63,
+  "whole_stream_reads": [
+    {
+      "pin": {
+        "commit": "5ab660cb68821e6b719f1b86819069ecac419ce1",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IDN-ADM2-000.bin.gz",
+        "git_blob_oid": "d918c74989043677364ff43f9fbec3d1f0d3a3af",
+        "bytes": 3051391,
+        "sha256": "ef394916ba97454b5592e66eba1df67199731ce7d9636cc3968843801ae904a8",
+        "decoded_bytes": 11002896,
+        "decoded_sha256": "146653d488331086ddc43d159a261b01ea6dd08c7ed422e34a9886c3c690430c"
+      },
+      "records": 519,
+      "encoded_bytes": 3051391,
+      "decoded_bytes": 11002896,
+      "decoded_sha256": "146653d488331086ddc43d159a261b01ea6dd08c7ed422e34a9886c3c690430c",
+      "maximum_buffer_characters": 211335
+    },
+    {
+      "pin": {
+        "commit": "8c4199fd6455246b98a6fd4b7a6d0f708b9afc70",
+        "path": "data/geography/part-10.json",
+        "git_blob_oid": "84b4cf537b801c7f6d3840173c49b7e4293a139d",
+        "bytes": 5144571,
+        "sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+      },
+      "records": 1500,
+      "encoded_bytes": 5144571,
+      "decoded_bytes": 5144571,
+      "decoded_sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2",
+      "maximum_buffer_characters": 49775
+    },
+    {
+      "pin": {
+        "commit": "5ab660cb68821e6b719f1b86819069ecac419ce1",
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/owners.json.gz",
+        "mode": "100644",
+        "git_blob_oid": "9c44513df64995d417dd3832ae604c703e84a506",
+        "bytes": 2663523,
+        "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+        "decoded_bytes": 11096191,
+        "decoded_sha256": "a8086008b7a072dd86483720a2a166785229753422769dbbe0749497d870f428"
+      },
+      "records": 49625,
+      "encoded_bytes": 2663523,
+      "decoded_bytes": 11096191,
+      "decoded_sha256": "a8086008b7a072dd86483720a2a166785229753422769dbbe0749497d870f428",
+      "maximum_buffer_characters": 32997
+    },
+    {
+      "pin": {
+        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz",
+        "bytes": 1844315,
+        "sha256": "87f2d47e104b3af640351e747d8300d0068a1be23caab9e80558c3f8914eb4aa",
+        "git_blob_oid": "e6e380ec13cd4bcc1d24399a76bfa85ca5805b26",
+        "decoded_bytes": 13496995,
+        "decoded_sha256": "7fa99cbf064121e0130b66758c212ae22b2a7be5649f2e250e9cda89a9bd595e"
+      },
+      "records": 73567,
+      "encoded_bytes": 1844315,
+      "decoded_bytes": 13496995,
+      "decoded_sha256": "7fa99cbf064121e0130b66758c212ae22b2a7be5649f2e250e9cda89a9bd595e",
+      "maximum_buffer_characters": 32955
+    },
+    {
+      "pin": {
+        "commit": "2ec1f33cad4b02f2e9bc9e54072e65b5837257dc",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/source-investigation-v1/consumed-inputs/extraction/repair/block-032.json.gz",
+        "git_blob_oid": "bbc4c7e3ea013c47918d8fa7a38be9c5accbc38d",
+        "bytes": 231217,
+        "sha256": "ff5a8e59b798f1cb61135369efadd8ad6a0eeafd9d40ed33764c7ebb12ae63a8"
+      },
+      "records": 37209,
+      "encoded_bytes": 231217,
+      "decoded_bytes": 1863344,
+      "decoded_sha256": "20b11e00d9bc195c0cfdbbd117acef1bd59b40a4ad8c9308c03df5c52868c5d2",
+      "maximum_buffer_characters": 32817
+    },
+    {
+      "pin": {
+        "commit": "2ec1f33cad4b02f2e9bc9e54072e65b5837257dc",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/source-investigation-v1/consumed-inputs/extraction/repair/block-033.json.gz",
+        "git_blob_oid": "7cd65cf9224c506f4a44a46b76b73093cb6dbbce",
+        "bytes": 127226,
+        "sha256": "e4e4ee81e00e2fdd94925451221643d9a40f2a6634cc4a20bfcee10ebea81560"
+      },
+      "records": 20103,
+      "encoded_bytes": 127226,
+      "decoded_bytes": 1012123,
+      "decoded_sha256": "48adb93f5c517a58a032c9023410b4558a903654e3c833d297ac10d84033cc11",
+      "maximum_buffer_characters": 32818
+    },
+    {
+      "pin": {
+        "commit": "2ec1f33cad4b02f2e9bc9e54072e65b5837257dc",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/source-investigation-v1/consumed-inputs/extraction/physical/block-032.json.gz",
+        "git_blob_oid": "0745ad217fe8625c89c936850e2aebfe582976d0",
+        "bytes": 198520,
+        "sha256": "d08e06fd93ba1fce7e63ef34e2222adc42a39c0b46796f4f2284755c607e8aa6"
+      },
+      "records": 31560,
+      "encoded_bytes": 198520,
+      "decoded_bytes": 1897364,
+      "decoded_sha256": "3e9e981d90c454765c8cd6778c9bac5feb5361e65879e1d9a1cdcbffe97b05d1",
+      "maximum_buffer_characters": 32826
+    },
+    {
+      "pin": {
+        "commit": "2ec1f33cad4b02f2e9bc9e54072e65b5837257dc",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/source-investigation-v1/consumed-inputs/extraction/physical/block-033.json.gz",
+        "git_blob_oid": "2ccf9feded63c2f3752b8b6e51e34fe77f9fa3c8",
+        "bytes": 107079,
+        "sha256": "93e710943ba1fd408446246d41659ee6a6585d2e60b72edb3676fb155cbf9b27"
+      },
+      "records": 16777,
+      "encoded_bytes": 107079,
+      "decoded_bytes": 1019303,
+      "decoded_sha256": "8f6722a7745cfbdd440482f9263477e9b629c3c779e2995707f88dd85d148f0b",
+      "maximum_buffer_characters": 32823
+    }
+  ],
+  "elapsed_seconds": 2.938050667,
+  "peak_rss_bytes": 22282240,
+  "no_scientific_execution": true,
+  "no_network": true,
+  "no_git_mutation": true,
+  "limits": [
+    "This is complete source/selected/owner/SID/interval/config custody review, not geometry/native qualification or legal/current effectivity certification.",
+    "All 2,013 relative observations and all unrelated 61 water and other country holds remain unchanged. Historical land labels are requested context only.",
+    "No target-specific physical outcome or query/witness status is predicted; no existing other-cohort result transfers.",
+    "Actual reviewed immutable stage publication, real final stage pin/config, chosen accepted execution schema/import/runtime binding, full actual canonical accounting and fresh ordinary finite admission remain pending.",
+    "Source reference_year 2020 and selected historical metadata do not prove contemporary or historical legal ownership.",
+    "Selected snapshot 8c identity is the exact cited retained snapshot, not a new current-selector or native-owner-zero check."
+  ]
+}
