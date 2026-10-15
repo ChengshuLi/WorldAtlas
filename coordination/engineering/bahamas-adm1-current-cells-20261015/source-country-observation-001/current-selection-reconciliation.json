@@ -1,0 +1,23 @@
+{
+  "kind": "accepted-baseline-cumulative-patch-interval-reconciliation",
+  "created_utc": "2026-10-15T04:36:02.350560+00:00",
+  "accepted_selection_commit": "866c42b854910f17a80427dac19b2c850cd68093",
+  "inherited_base_selection_unchanged": true,
+  "current_patch": {
+    "bytes": 1024297,
+    "commit": "6cbe0b4382719f0c7f9c1be88cb6f9b7d230dc51",
+    "git_blob_oid": "1d4d5d7800fd4d0809f5d8a825c319fb68ed467c",
+    "mode": "100644",
+    "path": "coordination/engineering/indonesia-myanmar-followups-20261015/delivery/patch.json",
+    "sha256": "92b1dd216f04220bd6a11a23d7fb3193568fb59cc0abdb2e62cb0132e1b60300"
+  },
+  "accepted_patch_cells": 99127,
+  "all_prior_82961_cells_same_owner_preserved": true,
+  "candidate_cells": 38566,
+  "current_all_owner_patch_intersections": [],
+  "remaining_candidates": 38566,
+  "limits": [
+    "Exact interval subtraction and unchanged-base compatibility only; actual selected consumer must establish owner-zero, conservation and delivery.",
+    "No source/physical or native scan repeated."
+  ]
+}
