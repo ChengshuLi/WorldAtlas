@@ -461,7 +461,7 @@ test('finalization refuses a new identity at an accepted package path', () => {
 // Actual Git/plain-Node fixture for metadata assembly. The source interpretation
 // and native construction controls live in source-member-native-delivery.test;
 // this fixture exercises the consumed-role boundary without replaying science.
-function modernFinalizationFixture(t, {mixed = false, membership = true} = {}) {
+function modernFinalizationFixture(t, {mixed = false, membership = true, dated = false} = {}) {
   const root = directory(t), owned = 'coordination/engineering/modern-finalize/';
   const git = (...args) => execFileSync('git', args, {cwd: root, stdio: ['pipe', 'pipe', 'pipe']}).toString().trim();
   git('init'); git('config', 'user.name', 'Finalizer fixture'); git('config', 'user.email', 'finalizer@example.invalid');
@@ -501,6 +501,21 @@ function modernFinalizationFixture(t, {mixed = false, membership = true} = {}) {
     families: [{source_id: 'source', parts: [{...pin(familyPart), decoded_bytes: familyRaw.length, decoded_sha256: digest(familyRaw)}]}],
     native_contract: {incidental_reproducer_operand: pin(incidental)},
     ...(membership ? {source_membership: {index: pin(memberPaths[0]), lineage: pin(memberPaths[1]), parts: [pin(memberPaths[2])]}} : {})};
+  let datedSupport;
+  if (dated) {
+    const provenance = ['adoption', 'review', 'observation', 'frame'].map(role => {
+      const name = inherited + 'dated-' + role + (role === 'frame' ? '.png' : '.json');
+      save(name, role === 'frame' ? Buffer.from('encoded frame fixture; never decoded by package projection') : {retained: role});
+      return {id: role, role, name};
+    });
+    commitAll();
+    const entries = provenance.map(({id, role, name}) => ({id, role, pin: pin(name)}));
+    entries.push({...entries[3], id: 'same-frame-second-reference'});
+    const body = {version: 1, kind: 'adopted-dated-native-centre-land-support-v1', provenance: entries, records: []};
+    const supportPath = inherited + 'dated-support.json'; save(supportPath, body); commitAll();
+    datedSupport = {body, path: supportPath, pin: pin(supportPath)};
+    Object.assign(evidenceBody, {version: 2, kind: 'source-target-native-evidence-v2', dated_land_support: datedSupport.pin});
+  }
   save(owned + 'source-evidence.json', evidenceBody); save(owned + 'native-patch.json', {rows: [{y: 2, runs: [[2, 4, 1]]}]}); commitAll();
   const authority = binding => {
     const stem = binding.kind === 'source-target-native-custody-v1' ? 'modern' : 'legacy';
@@ -580,7 +595,7 @@ function modernFinalizationFixture(t, {mixed = false, membership = true} = {}) {
     return spawnSync(process.execPath, [script, phase, 'config.json', destination, ...flags], {cwd: root, env, encoding: 'utf8'});
   };
   return {root, r, config, run, git, save, commitAll, pin, evidenceBody, originalSelector, originalPackage, assets,
-    consumed: [...Object.values(roles), familyPart, ...(membership ? memberPaths : [])], incidental, withEvidence};
+    consumed: [...Object.values(roles), familyPart, ...(membership ? memberPaths : [])], incidental, withEvidence, datedSupport};
 }
 
 for (const mixed of [false, true]) test('real finalizer supports ' + (mixed ? 'mixed legacy/modern' : 'modern') + ' roles, flat envelope aliases and exact resume', t => {
@@ -605,6 +620,42 @@ for (const mixed of [false, true]) test('real finalizer supports ' + (mixed ? 'm
   const repeated = f.run('finalize', second); assert.equal(repeated.status, 0, repeated.stderr);
   for (const name of ['ownership-selection.json', 'package-inputs.json', 'package-roles.json', 'selected-delivery-expectations.json'])
     assert.deepEqual(fs.readFileSync(path.join(f.root, second, name)), products(name));
+});
+
+test('real v2 package command closes dated support and fixed provenance once without original-role copies', t => {
+  const f = modernFinalizationFixture(t, {dated: true}), destination = '.cache/delivery-handoff/dated';
+  const run = f.run('package', destination); assert.equal(run.status, 0, run.stderr);
+  const projection = JSON.parse(fs.readFileSync(path.join(f.root, destination, 'package-roles.json')));
+  const needed = [f.datedSupport.pin, ...f.datedSupport.body.provenance.map(entry => entry.pin)];
+  for (const pin of needed) {
+    const matches = projection.paths.filter(entry => entry.path === pin.path);
+    assert.equal(matches.length, 1, pin.path);
+    assert.equal(matches[0].sha256, pin.sha256); assert.equal(matches[0].bytes, pin.bytes);
+  }
+  for (const role of ['adoption', 'review', 'observation', 'frame']) assert.ok(projection.paths.some(entry =>
+    entry.roles.includes('source-target dated ' + role)), role);
+  assert.deepEqual(fs.readdirSync(path.join(f.root, destination)).sort(),
+    ['package-roles.json', 'preparation.json', 'selected-delivery-expectations.json']);
+  assert.ok(!projection.paths.some(pin => pin.path === f.incidental));
+});
+
+test('v2 package refuses altered typed or declared provenance and unknown roles before publication', t => {
+  const f = modernFinalizationFixture(t, {dated: true}); let ordinal = 0;
+  for (const change of ['typed-pin', 'declared-frame', 'unknown-role', 'missing-pin']) {
+    const evidence = structuredClone(f.evidenceBody), support = structuredClone(f.datedSupport.body);
+    if (change === 'typed-pin') evidence.dated_land_support.sha256 = '0'.repeat(64);
+    else {
+      if (change === 'declared-frame') support.provenance[3].pin.sha256 = '0'.repeat(64);
+      if (change === 'unknown-role') support.provenance[3].role = 'nested-source-tree';
+      if (change === 'missing-pin') delete support.provenance[3].pin;
+      f.save(f.datedSupport.path, support); f.commitAll(); evidence.dated_land_support = f.pin(f.datedSupport.path);
+    }
+    const destination = '.cache/delivery-handoff/refused-dated-' + ordinal++;
+    const run = f.run('package', destination, [], f.withEvidence(evidence));
+    assert.notEqual(run.status, 0, change);
+    assert.match(run.stderr, /hash differs|Unknown dated support provenance role|Missing whole consumed package role/, change);
+    assert.equal(fs.existsSync(path.join(f.root, destination)), false);
+  }
 });
 
 test('real modern package command accepts absent optional membership and refuses omitted or altered consumed dependencies before publication', t => {

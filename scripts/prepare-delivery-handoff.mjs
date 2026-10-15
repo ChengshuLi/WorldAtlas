@@ -814,7 +814,8 @@ export function packageProjection(config, reader, acceptedRegistry = null) {
         && same(preimage, {...binding, kind: 'source-target-native-rule-v1'}), 'Source-target authority inputs differ');
       add(binding.source_evidence, 'original source evidence'); add(binding.native_patch, 'original native patch');
       const evidence = reader.json(binding.source_evidence);
-      need(evidence.version === 1 && evidence.kind === 'source-target-native-evidence-v1'
+      need((evidence.version === 1 && evidence.kind === 'source-target-native-evidence-v1'
+        || evidence.version === 2 && evidence.kind === 'source-target-native-evidence-v2')
         && Array.isArray(evidence.targets) && evidence.targets.length > 0
         && Array.isArray(evidence.families) && evidence.families.length > 0, 'Missing source-target evidence roles');
       // Closed whole-body read roles of qualifySourceTargetNativeAuthority. Its
@@ -822,6 +823,28 @@ export function packageProjection(config, reader, acceptedRegistry = null) {
       // operands/native contracts are not a recursive package declaration.
       for (const role of ['catalogue', 'physical_input', 'physical_reproduction', 'physical_evidence', 'native_latitudes', 'owner_roster'])
         add(evidence[role], 'source-target ' + role);
+      if (evidence.version === 2) {
+        const pin = evidence.dated_land_support;
+        add(pin, 'source-target dated land support');
+        let raw = reader.read(pin);
+        if (pin.decoded_bytes !== undefined) {
+          need(Number.isSafeInteger(pin.decoded_bytes) && pin.decoded_bytes > 0 && pin.decoded_bytes <= 33554432
+            && hex(pin.decoded_sha256, 64), 'Bounded decoded dated support identity required');
+          reader.budget.add({bytes: pin.decoded_bytes});
+          raw = gunzipSync(raw, {maxOutputLength: pin.decoded_bytes});
+          need(raw.length === pin.decoded_bytes && digest(raw) === pin.decoded_sha256,
+            'Decoded dated support identity differs');
+        }
+        const support = JSON.parse(raw);
+        need(support.version === 1 && support.kind === 'adopted-dated-native-centre-land-support-v1'
+          && Array.isArray(support.provenance) && support.provenance.length > 0,
+        'Missing dated support provenance roles');
+        for (const provenance of support.provenance) {
+          need(['adoption', 'review', 'observation', 'frame'].includes(provenance?.role),
+            'Unknown dated support provenance role');
+          add(provenance.pin, 'source-target dated ' + provenance.role);
+        }
+      }
       for (const family of evidence.families) {
         need(typeof family.source_id === 'string' && family.source_id && Array.isArray(family.parts)
           && family.parts.length > 0, 'Missing complete source family roles');
@@ -1220,8 +1243,11 @@ export function publishCompletedSource(root, destination, result, binding, resum
 // claims stay explicit; this metadata preparation does not qualify their support.
 // In particular, the normative manifest descriptor is not a Git custody pin.
 export async function sourceEvidence(config, reader) {
-  need(config.version === 1 && config.source_evidence?.version === 1
-    && config.source_evidence.kind === 'source-target-native-evidence-v1', 'Explicit ordinary source evidence required');
+  need(config.version === 1 && (config.source_evidence?.version === 1
+    && config.source_evidence.kind === 'source-target-native-evidence-v1'
+    || config.source_evidence?.version === 2 && config.source_evidence.kind === 'source-target-native-evidence-v2'),
+  'Explicit ordinary source evidence required');
+  if (config.source_evidence.version === 2) reader.read(config.source_evidence.dated_land_support);
   const {locate} = await import('./delivery-handoff-advance.mjs');
   const selectorPin = locate(reader, config.selector);
   need(selectorPin.path === 'data/ownership-selection.json', 'Original accepted selector locator required');

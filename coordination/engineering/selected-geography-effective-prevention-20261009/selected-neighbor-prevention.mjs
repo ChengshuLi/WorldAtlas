@@ -657,7 +657,9 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
   demand(decoded.length===p.decoded_bytes&&sha(decoded)===p.decoded_sha256,'Source-target decoded body differs');return decoded;
  };
  const evidence=JSON.parse(read(binding.source_evidence)), proposed=JSON.parse(read(binding.native_patch));
- demand(evidence?.version===1&&evidence.kind==='source-target-native-evidence-v1'
+ const dated = evidence?.version===2&&evidence.kind==='source-target-native-evidence-v2';
+ demand((dated||evidence?.version===1&&evidence.kind==='source-target-native-evidence-v1')
+  &&(dated?evidence.dated_land_support!==undefined:evidence.dated_land_support===undefined)
   &&Array.isArray(evidence.targets)&&evidence.targets.length>0&&Array.isArray(proposed.rows)
   &&Object.keys(proposed).join(',')==='rows',
  'Incomplete source-target evidence');
@@ -740,6 +742,139 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
   }
   return {id:change.id,pixelIndex:owners.get(change.id),feature:accepted};
  };
+
+ // The executing accepted tree, not reader.version or a caller's review flag,
+ // anchors the typed interpretation. Upstream public bodies retain their pins.
+ const datedCentres=[];
+ if(dated){
+  const pin=evidence.dated_land_support;pinCheck(pin);
+  const moduleRoot=fileURLToPath(new URL('../../../',import.meta.url));
+  const currentVersion=execFileSync(reader.gitExecutable,['-c','core.hooksPath=/dev/null','-C',moduleRoot,'rev-parse','HEAD'],{encoding:'utf8'}).trim();
+  const current=reader.descriptor(pin.path,currentVersion);
+  demand(current.mode===pin.mode&&current.git_blob_oid===pin.git_blob_oid&&current.bytes===pin.bytes,
+   'Dated land support differs from executing accepted input');
+  const data=JSON.parse(read(pin));
+  const keys=(v,list)=>v&&typeof v==='object'&&!Array.isArray(v)&&Object.keys(v).sort().join(',')===list.split(',').sort().join(',');
+  demand(keys(data,'version,kind,native_contract_sha256,provenance,records')&&data.version===1
+   &&data.kind==='adopted-dated-native-centre-land-support-v1'
+   &&data.native_contract_sha256===valueSha(evidence.native_contract)
+   &&Array.isArray(data.provenance)&&data.provenance.length>0&&data.provenance.length<=512
+   &&Array.isArray(data.records)&&data.records.length>0,'Incomplete adopted dated land support');
+  const pointer=(body,name)=>{
+   demand(typeof name==='string'&&name.startsWith('/')&&!/~(?![01])/.test(name),'Invalid dated evidence pointer');
+   let value=body;
+   for(const part of name.slice(1).split('/').map(p=>p.replace(/~1/g,'/').replace(/~0/g,'~'))){
+    demand(value&&typeof value==='object'&&Object.hasOwn(value,part),'Missing dated evidence record');value=value[part];
+   }
+   return value;
+  };
+  const relative=(base,name,levels=1)=>{
+   demand(typeof name==='string'&&!name.includes('\\')&&name.split('/').every(p=>p&&p!=='.'&&p!=='..'),
+    'Unsafe dated evidence relative path');
+   return [...base.split('/').slice(0,-levels),...name.split('/')].join('/');
+  };
+  const instant=value=>{
+   const m=typeof value==='string'&&/^(\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d)(?:\.(\d+))?Z$/.exec(value);
+   demand(m&&Number.isFinite(Date.parse(value))&&new Date(value).toISOString().slice(0,19)===m[1],
+    'Invalid dated acquisition instant');
+   const fraction=(m[2]??'').replace(/0+$/,'');return m[1]+(fraction?'.'+fraction:'')+'Z';
+  };
+  // Only this fixed native-PNG role is binary: authenticate the complete
+  // encoded body plus one additional buffer, without inventing parsed pixels.
+  // The existing v1/JSON reader and all its sixfold reservations are unchanged.
+  const readFrame=p=>{
+   pinCheck(p);demand(p.decoded_bytes===undefined,'Native PNG context must be an ordinary encoded body');
+   let version=p.commit;try{reader.git('cat-file','-e',version+'^{commit}');}catch{version=reader.version;}
+   const d=reader.descriptor(p.path,version);
+   demand(d.mode===p.mode&&d.git_blob_oid===p.git_blob_oid&&d.bytes===p.bytes,'Dated frame whole identity differs');
+   demand(reader.used+p.bytes<=reader.phaseLimit,'Dated encoded frame buffer exceeds phase');
+   reader.used+=p.bytes;reader.admit(d);
+   return reader.read(p.path,{version,expected:p.sha256});
+  };
+  const provenance=new Map(),loaded=new Map(),used=new Set();
+  for(const item of data.provenance){
+   demand(item&&typeof item.id==='string'&&item.id&&!provenance.has(item.id)
+    &&['adoption','review','observation','frame'].includes(item.role)
+    &&keys(item,item.role==='frame'?'id,role,pin,observation,block_pointer,display_pointer,channels,display_base':'id,role,pin'),
+   'Foreign or duplicate dated evidence role');
+   pinCheck(item.pin);const identity=item.pin.commit+':'+item.pin.path;
+   let content=loaded.get(identity);
+   if(content)demand(same(content.pin,item.pin)&&content.frame===(item.role==='frame'),'Conflicting dated evidence body role');
+   else{
+    const frame=item.role==='frame',raw=frame?readFrame(item.pin):read(item.pin);
+    demand(!frame||raw.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10])),'Missing native PNG context');
+    content={pin:item.pin,frame,body:frame?null:JSON.parse(raw)};loaded.set(identity,content);
+   }
+   provenance.set(item.id,{...item,body:content.body});
+  }
+  const reference=(ref,role,fields='id,pointer')=>{
+   demand(keys(ref,fields),'Malformed dated evidence reference');const item=provenance.get(ref.id);
+   demand(item?.role===role,'Missing dated evidence role: '+role);used.add(item.id);
+   return {item,value:pointer(item.body,ref.pointer)};
+  };
+  const seen=new Set();
+  for(const record of data.records){
+   demand(keys(record,'source_id,pixelIndex,y,x,longitude,latitude,adoption,review,observations')
+    &&typeof record.source_id==='string'&&record.source_id&&Number.isSafeInteger(record.pixelIndex)&&record.pixelIndex>0
+    &&Number.isSafeInteger(record.y)&&record.y>=0&&record.y<262166
+    &&Number.isSafeInteger(record.x)&&record.x>=0&&record.x<262166
+    &&record.longitude===(record.x+.5)/262166*360-180&&record.latitude===latitudes[record.y],
+   'Dated land native centre differs');
+   const identity=record.pixelIndex+':'+record.y+':'+record.x;
+   demand(!seen.has(identity),'Duplicate dated land centre');seen.add(identity);
+   const target=evidence.targets.find(t=>t.id===record.source_id);
+   demand(target?.pixelIndex===record.pixelIndex&&target.coverage_classes?.includes('mapped_land_support'),
+    'Dated land lacks exact requested source member and land class');
+   const key={owner:record.pixelIndex,y:record.y,x:record.x};
+   const adoption=reference(record.adoption,'adoption'),a=adoption.value;
+   demand(a&&same(a.original_key,key)&&same(a.centre_unchanged,{...key,longitude:record.longitude,latitude:record.latitude})
+    &&a.original_record_unchanged&&['owner','y','x'].every(k=>a.original_record_unchanged[k]===key[k])
+    &&Number.isSafeInteger(a.original_source_array_index)&&a.original_source_array_index>=0
+    &&Number.isSafeInteger(a.plan_index)&&a.plan_index>=0&&a.adopted_bounded_answer===true
+    &&a.category==='dated-terrestrial-body-location'&&a.remaining_physical_question===null
+    &&typeof a.actual_answer==='string'&&a.actual_answer.trim()&&typeof a.source_review_kind==='string'&&a.source_review_kind
+    &&Array.isArray(a.answer_dates)&&a.answer_dates.length>0,'Missing adopted terrestrial centre interpretation');
+   const review=reference(record.review,'review','id,pointer,interpretation_pointer'),r=review.value;
+   demand(a.review&&review.item.pin.path===relative(adoption.item.pin.path,a.review.path)
+    &&r&&same(r.original_key,key)&&r.index===a.review.record_index
+    &&r.original_source_array_index===a.original_source_array_index
+    &&(review.item.body.records?.includes(r)||review.item.body.points?.includes(r))
+    &&pointer(r,record.review.interpretation_pointer)===a.source_review_kind,
+   'Dated centre substantive review differs');
+   const dates=a.answer_dates.map(value=>{
+    if(typeof value==='string'&&/^\d{4}-\d\d-\d\d$/.test(value)){instant(value+'T00:00:00Z');return value;}
+    return instant(value);
+   }),observed=new Set();
+   demand(new Set(dates).size===dates.length&&Array.isArray(record.observations)&&record.observations.length===dates.length,
+    'Incomplete dated centre observation dates');
+   for(const ref of record.observations){
+    const observation=reference(ref,'observation','id,pointer,frames'),o=observation.value,body=observation.item.body;
+    const date=instant(body.acquisition_datetime);
+    const matched=dates.filter(d=>d===date||d.length===10&&date.startsWith(d+'T'));
+    demand(matched.length===1&&!observed.has(matched[0])&&typeof body.item==='string'&&body.item
+     &&o&&same(o.original_key,key)&&o.index===a.plan_index&&o.longitude===record.longitude&&o.latitude===record.latitude
+     &&Array.isArray(body.points)&&body.points.includes(o)&&Array.isArray(o.physical_block)
+     &&Array.isArray(ref.frames)&&ref.frames.length===2,'Dated centre observation or scene differs');observed.add(matched[0]);
+    const channels=new Set();
+    for(const id of ref.frames){
+     const f=provenance.get(id);demand(f?.role==='frame'&&f.observation===ref.id
+      &&['rgb','nir-red-green'].includes(f.channels)&&!channels.has(f.channels),'Dated centre native frame differs');
+     used.add(id);channels.add(f.channels);
+     const block=pointer(body,f.block_pointer),display=pointer(body,f.display_pointer);
+     demand(Array.isArray(body.blocks)&&body.blocks.includes(block)&&same(block.block,o.physical_block)
+      &&Array.isArray(block.indices)&&block.indices.includes(o.index)&&Array.isArray(block.displays)&&block.displays.includes(display)
+      &&typeof display.path==='string'&&display.path.split('/').includes(body.item)
+      &&display.path.endsWith('/'+f.channels+'-native.png')
+      &&typeof f.display_base==='string'&&!f.display_base.includes('\\')
+      &&f.display_base.split('/').every(p=>p&&p!=='.'&&p!=='..')
+      &&f.pin.path===relative(f.display_base+'/_',display.path)
+      &&display.bytes===f.pin.bytes&&display.sha256===f.pin.sha256,'Dated native frame registration differs');
+    }
+   }
+   datedCentres.push({source_id:record.source_id,pixelIndex:record.pixelIndex,y:record.y,x:record.x});
+  }
+  demand(used.size===provenance.size,'Unused dated evidence provenance');
+ }
  const targets=new Map(), resolvedTargets=new Map(), residualsByOwner=new Map(), generalOwners=new Set();
  for(const target of evidence.targets){
   const ownerId=target.target_id??target.id;
@@ -762,7 +897,9 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
    &&target.coverage_classes.every(kind=>['mapped_land_support','mapped_inland_water_support'].includes(kind))
    &&new Set(target.coverage_classes).size===target.coverage_classes.length,
    'Unresolved physical support cannot qualify a repair');
-  const polygons=target.coverage_classes.flatMap(kind=>{const geometry=support.support[kind];coordinateBounds(geometry);
+  const hasDated=datedCentres.some(p=>p.source_id===target.id);
+  const polygons=target.coverage_classes.flatMap(kind=>{const geometry=support.support[kind];
+   if(hasDated&&validateWitnessGeometry(geometry).empty)return [];coordinateBounds(geometry);
    return geometry.type==='Polygon'?[geometry.coordinates]:geometry.coordinates;});
   target.coverage_geometry={type:'MultiPolygon',coordinates:polygons};
   coordinateBounds(target.base_geometry);
@@ -880,13 +1017,14 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
    demand(Array.isArray(target.territorial_exclusions),
     'General physical conflict qualification requires explicit territorial exclusions');
   }
-  const bounds=selected.flatMap(target=>coordinateBounds(target.coverage_geometry));
+  const bounds=selected.flatMap(target=>coordinateBounds(datedCentres.some(p=>p.source_id===target.id)
+   ?originals.get(target.id).geometry:target.coverage_geometry));
   const intersects=(a,b)=>a[0]<=b[2]&&b[0]<=a[2]&&a[1]<=b[3]&&b[1]<=a[3];
   const sourceFeatures=product.features.filter(feature=>coordinateBounds(feature.geometry).some(part=>bounds.some(box=>intersects(part,box))))
    .map(feature=>{const id=family.source_id+':'+feature.properties.shapeID;
     const owner=reconcile(id,originals);
     return {id,target_id:owner.id,pixelIndex:owner.pixelIndex,geometry:feature.geometry};});
-  const coverageFeatures=selected.map(target=>({id:target.target_id??target.id,source_id:target.id,pixelIndex:target.pixelIndex,geometry:target.coverage_geometry}));
+  const coverageFeatures=selected.filter(t=>t.coverage_geometry.coordinates.length).map(target=>({id:target.target_id??target.id,source_id:target.id,pixelIndex:target.pixelIndex,geometry:target.coverage_geometry}));
   let exclusions=selected.flatMap(target=>(target.territorial_exclusions??[]).map(geometry=>({id:target.target_id??target.id,pixelIndex:target.pixelIndex,geometry})));
   // Qualification requires coverage; discard only whole exclusions proven
   // disjoint from every complete coverage part. Keep diagnostic reasons intact.
@@ -926,18 +1064,21 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
    // Class masks share the complete source/exclusion scan below, but retain
    // independent member coverage and boundary adjudication. Keep the existing
    // complete class reservations live until this block finishes.
-   const classes=[],coverageFeatureGroups=[];let classReserve=0;
+   const blockCentres=datedCentres.filter(p=>selected.some(t=>t.id===p.source_id)&&p.y>=rowStart&&p.y<rowEnd);
+   const classes=[],coverageFeatureGroups=[],coverageCentreGroups=[];let classReserve=0;
    for(const kind of ['mapped_land_support','mapped_inland_water_support'])
     if(selected.some(t=>coverageRowsByOwner.has(t.pixelIndex))){
      if(selected.every(t=>t.coverage_classes.length===1&&t.coverage_classes[0]===kind)){
       classes.push({kind,combined:true});continue;
      }
-     const features=selected.filter(t=>t.coverage_classes.includes(kind)).map(t=>{
+     const features=selected.filter(t=>t.coverage_classes.includes(kind)).flatMap(t=>{
       const geometry=physical.results.find(r=>r.target===t.id).support[kind];
-      return {id:t.target_id??t.id,source_id:t.id,pixelIndex:t.pixelIndex,geometry};
+      if(datedCentres.some(p=>p.source_id===t.id)&&validateWitnessGeometry(geometry).empty)return [];
+      return [{id:t.target_id??t.id,source_id:t.id,pixelIndex:t.pixelIndex,geometry}];
      });
-     if(features.length===0){classes.push({kind,empty:true});continue;}
-     classes.push({kind,group:coverageFeatureGroups.length});coverageFeatureGroups.push(features);
+     const centres=kind==='mapped_land_support'?blockCentres:[];
+     if(features.length===0&&centres.length===0){classes.push({kind,empty:true});continue;}
+     classes.push({kind,group:coverageFeatureGroups.length});coverageFeatureGroups.push(features);coverageCentreGroups.push(centres);
     }
    if(coverageFeatureGroups.length){
     // Shared scans need one statistics traversal, while each retained class
@@ -957,7 +1098,8 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
    // by selectedAdditiveRows and the emitted native patch application.
    const allowed=deriveSourceTargetNativeDelta({targets:[...resolvedTargets.values()].filter(target=>target.source_family===family.source_id).map(({id,pixelIndex})=>({id,pixelIndex})),
     sourceFeatures,coverageFeatures,territorialExclusions:exclusions,size:262166,latitudes,rowStart,rowEnd,
-    ...(coverageFeatureGroups.length?{coverageFeatureGroups}:{}),
+    ...(dated?{coverageCentres:blockCentres}:{}),
+    ...(coverageFeatureGroups.length?{coverageFeatureGroups,...(dated?{coverageCentreGroups}:{})}:{}),
     ...(diagnostic?{diagnosticRows:rows.map(row=>({y:row.y,runs:row.runs.filter(r=>selectedOwners.has(r[2]))})).filter(row=>row.runs.length)}:{}),
     ownerRows:Array.from({length:rowEnd-rowStart},(_,i)=>({y:rowStart+i,complete_owner_intervals:[]}))});
    const allowedRows=new Map(allowed.rows.map(row=>[row.y,row.runs]));
