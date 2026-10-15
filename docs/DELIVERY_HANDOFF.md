@@ -521,6 +521,31 @@ say which format was consumed. Equivalent cells/results do not establish the
 original selector's byte identity, and new runtime/timing/path observations must
 not replace the historical ones.
 
+### Derive the canonical source-evidence baseline
+
+`node scripts/prepare-delivery-handoff.mjs source-evidence CONFIG DESTINATION [--resume]`
+replaces manual assembly of the accepted baseline block. The local configuration
+contains `version: 1`, `selector: {commit, path}`, an explicit `source_evidence`
+scientific payload, and optional ordinary `preparation_allowance`. The payload
+uses the existing `source-target-native-evidence-v1` format; source/physical pins,
+targets, geometry, exclusions and other scientific claims remain the operator's
+explicit reviewed inputs.
+
+The entry authenticates the selected sidecar, base manifest and runtime envelope,
+then fills only `native_contract`, `native_latitudes`, `owner_roster` and
+`base_reference`. Supplied versions of those fields must match exactly. The
+normative contract is copied literally from the base manifest; Git mode/blob
+metadata belongs only to separate custody pins. Raw and decoded latitude/owner
+identities are verified before output. No template commit or scientific execution
+is needed for this mechanical assembly.
+
+Commit the emitted ordinary `source-evidence.json` once, then pass its immutable
+locator to the existing `native-authority` command. This step does not qualify the
+scientific claims or replace their review. Choosing a different same-body custody
+commit can change evidence bytes and authority IDs: use normal qualification of
+the new evidence, never relabel old constructor products. Exact resume uses the
+existing configuration/output binding and safe writer.
+
 ### Modern native authority
 
 `node scripts/prepare-delivery-handoff.mjs native-authority CONFIG DESTINATION [--resume]`
