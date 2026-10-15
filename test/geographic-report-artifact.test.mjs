@@ -651,7 +651,7 @@ test('candidate software report requires explicit expected code identity and can
 
 
 test('reviewed focused test-only prepare retains final ordinary-file proof through authenticated custody', async () => {
-  for(const failure of [null,'integration','geography','review']) {
+  for(const failure of [null,'integration','geography','cancelled-geography','review']) {
     const f=queueCompletionFixture(),name='test/native-diagnostic-entry.test.mjs';
     f.files=[{filename:name,status:'modified'}];f.authored[0].path=name;f.integrated=structuredClone(f.authored);
     const prepared=await prepareIntegration(f.mergeOptions());
@@ -659,9 +659,10 @@ test('reviewed focused test-only prepare retains final ordinary-file proof throu
     assert.equal(prepared.profile,'evidence');assert.equal(prepared.geography_software,false);
     assert.equal(f.treeReads().length,2);f.calls.length=0;
     if(failure==='review')f.review='withdrawn';
-    const options=failure==='integration'?{integrationResult:'failure'}:failure==='geography'?{geographyResult:'skipped'}:{};
+    const options=failure==='integration'?{integrationResult:'failure'}:failure==='geography'?{geographyResult:'failure'}:
+      failure==='cancelled-geography'?{geographyResult:'cancelled'}:{};
     if(failure) {
-      await assert.rejects(f.complete(options),failure==='integration'?/Integration tests failed/:failure==='geography'?/Trusted combined geography check/:/exact-head review/);
+      await assert.rejects(f.complete(options),failure==='integration'?/Integration tests failed/:['geography','cancelled-geography'].includes(failure)?/Trusted combined geography check/:/exact-head review/);
       assert.equal(f.writes.length,0);
     } else {
       const result=await f.complete(options);assert.equal(result.accepted,true);assert.equal(f.writes.length,1);
@@ -669,7 +670,30 @@ test('reviewed focused test-only prepare retains final ordinary-file proof throu
       assert.equal(result.geography.trusted_code_commit,f.options.baseline);
       assert.equal(Object.hasOwn(result,'proof'),false);assert.equal(Object.hasOwn(result,'profile'),false);
     }
-    assert.deepEqual(f.treeReads(),failure ? [] : [`/repos/owner/repo/git/trees/${'2'.repeat(40)}?recursive=1`],
-      'Only successful final focused eligibility needs its ordinary authored entries');
+    assert.deepEqual(f.treeReads(),['integration','review'].includes(failure) ? [] : [`/repos/owner/repo/git/trees/${'2'.repeat(40)}?recursive=1`],
+      'Final focused eligibility reads ordinary authored entries before accepting or refusing geography');
+  }
+});
+
+
+test('eligible skipped geography verifies current authored and candidate trees without loading a report', async () => {
+  for (const drift of [false, true]) {
+    const f=queueCompletionFixture(),name='test/native-diagnostic-entry.test.mjs';
+    f.files=[{filename:name,status:'modified'}];f.authored[0].path=name;f.integrated=structuredClone(f.authored);
+    const prepared=await prepareIntegration(f.mergeOptions());
+    assert.equal(prepared.geography_required,false);
+    f.calls.length=0;
+    if(drift)f.integrated[0].sha='f'.repeat(40);
+    const complete=()=>f.complete({geographyResult:'skipped',geographyReportLoader:async()=>{throw Error('Skipped geography must not load a report');}});
+    if(drift) {
+      await assert.rejects(complete,/changes reviewed bytes/);
+      assert.equal(f.writes.length,0);
+    } else {
+      const result=await complete();
+      assert.equal(result.accepted,true);assert.equal(f.writes.length,1);
+      assert.deepEqual(result.geography,{status:'not-applicable',reason:'non-geographic-controls'});
+    }
+    assert.deepEqual(f.treeReads(),['2'.repeat(40),f.commit.tree.sha].map(sha=>`/repos/owner/repo/git/trees/${sha}?recursive=1`),
+      'A skipped job cannot substitute historical prepared custody for current ordinary-file proof');
   }
 });
