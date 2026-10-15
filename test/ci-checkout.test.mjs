@@ -387,8 +387,7 @@ for (const role of ['inputs', 'verification_paths']) test(`cold selected-data an
 
 for (const role of ['inputs', 'verification_paths']) test(`cold selected-data data ancestor in ${role} retains every original descendant`, t => {
   const f = fixture(t);
-  // The existing regional-review omission remains a separate fail-closed policy.
-  fs.rmSync(path.join(f.source, 'data/regional-review'), {recursive: true});
+  // A whole-data grant includes regional evidence as well as current assets.
   const definition = {...packageDefinition,
     inputs: role === 'inputs' ? [...packageDefinition.inputs.filter(name => !name.startsWith('data/')), 'data/']
       : [...packageDefinition.inputs], verification_paths: role === 'verification_paths' ? ['data/'] : []};
@@ -397,7 +396,7 @@ for (const role of ['inputs', 'verification_paths']) test(`cold selected-data da
   Object.assign(f.env, {INTEGRATION_PROFILE: 'full', INTEGRATION_TEST_SELECTION: 'selected-data'});
   const result = f.run(['--sha', f.git(['rev-parse', 'HEAD']), '--tree', f.git(['rev-parse', 'HEAD^{tree}'])]);
   assert.equal(result.status, 0, result.stdout + result.stderr);
-  for (const name of ['data/geography/required/body.txt', 'data/unconsumed/body.txt'])
+  for (const name of ['data/geography/required/body.txt', 'data/unconsumed/body.txt', 'data/regional-review/source-only/body.txt'])
     assert.deepEqual(fs.readFileSync(path.join(f.workspace, name)), fs.readFileSync(path.join(f.source, name)), name);
   assert.deepEqual(inspectPackageInputs(f.workspace, definition).errors, []);
   f.clean(); noSecrets(result);
@@ -443,7 +442,30 @@ test('selected-data symlink package declaration refuses before checkout', t => {
   assert.deepEqual(fs.readdirSync(f.workspace), []); f.clean(); noSecrets(result);
 });
 
-for (const name of ['data/regional-review/source-only/body.txt', 'research/campaigns/source-only/body.txt']) {
+test('selected-data explicit regional evidence declaration retains exact current input without undeclared siblings', async t => {
+  const f = fixture(t), name = 'data/regional-review/source-only/body.txt';
+  const sibling = 'data/regional-review/source-only/undeclared.txt';
+  const definition = {...packageDefinition, inputs: [...packageDefinition.inputs, name]};
+  fs.writeFileSync(path.join(f.source, sibling), 'undeclared cold regional evidence');
+  fs.writeFileSync(path.join(f.source, '.github/package-inputs.json'), JSON.stringify(definition) + '\n');
+  f.git(['add', '.']); f.git(['commit', '--quiet', '-m', 'require exact current regional evidence']);
+  const sha = f.git(['rev-parse', 'HEAD']), tree = f.git(['rev-parse', 'HEAD^{tree}']);
+  Object.assign(f.env, {INTEGRATION_PROFILE: 'full', INTEGRATION_TEST_SELECTION: 'selected-data'});
+  const result = f.run(['--sha', sha, '--tree', tree]);
+  assert.equal(result.status, 0, result.stdout + result.stderr);
+  assert.deepEqual(fs.readFileSync(path.join(f.workspace, name)), fs.readFileSync(path.join(f.source, name)));
+  assert.deepEqual(inspectPackageInputs(f.workspace, definition).errors, []);
+  const destination = path.join(f.directory, 'package-stage');
+  await materializePackageInputs({source: f.workspace, destination, definition});
+  assert.deepEqual(fs.readFileSync(path.join(destination, name)), fs.readFileSync(path.join(f.source, name)));
+  assert.ok(!fs.existsSync(path.join(f.workspace, sibling)));
+  assert.ok(!fs.existsSync(path.join(destination, sibling)));
+  assert.notEqual(spawnSync(realGit, ['-C', f.workspace, 'cat-file', '-e', f.git(['rev-parse', `${sha}:${sibling}`])],
+    {env: {...fixtureEnv, GIT_NO_LAZY_FETCH: '1'}, timeout: 2000}).status, 0);
+  f.clean(); noSecrets(result);
+});
+
+for (const name of ['research/campaigns/source-only/body.txt']) {
   test(`selected-data future required input ${name} fails existing package admission and fallback materialization`, async t => {
     const f = fixture(t), definition = {...packageDefinition, inputs: [...packageDefinition.inputs, name]};
     fs.writeFileSync(path.join(f.source, '.github/package-inputs.json'), JSON.stringify(definition) + '\n');

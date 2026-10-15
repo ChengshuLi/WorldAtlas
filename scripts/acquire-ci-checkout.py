@@ -188,7 +188,7 @@ def package_namespace_patterns(definition, prefix, extra=()):
                 or name.startswith('/') or any(part in ('', '.', '..') for part in (name[:-1] if name.endswith('/') else name).split('/'))):
             raise AcquisitionError('invalid-package-inputs')
     if any(name.endswith('/') and prefix.startswith(name) for name in paths):
-        return []
+        return ['/' + prefix + '**']
     retained = [name for name in paths if name.startswith(prefix)]
     directories = set()
     for name in retained:
@@ -267,10 +267,9 @@ def acquire(repository, sha, tree, workspace, token=None, git_executable=None, e
         supervisor.run(common + ['init', '--template=', '--quiet', str(staging)], staging, env, 'initialize')
         supervisor.run(common + ['remote', 'add', 'origin', remote], staging, env, 'initialize')
         if regression:
-            # Source-only work is checked by the existing evidence/geography
-            # readers, not by current software regressions or package inputs.
-            # Required selected reads and full-build declared-input preflight
-            # fail closed if future dependencies enter these namespaces.
+            # Complete regressions omit source-only packet namespaces. Selected
+            # package declarations below can retain consumed data/ evidence;
+            # unrelated regional packets and historical campaigns stay omitted.
             supervisor.run(common + ['sparse-checkout', 'init', '--no-cone'], staging, env, 'initialize')
             (staging / '.git/info/sparse-checkout').write_text(
                 '/*\n!/data/regional-review/\n!/research/campaigns/\n', encoding='utf-8')
