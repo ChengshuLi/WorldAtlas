@@ -1,0 +1,123 @@
+{
+  "kind": "actual-two-new-native-context-block-read",
+  "new_requested_blocks": 2,
+  "completed_blocks": 2,
+  "blocks": [
+    {
+      "kind": "new-bounded-adjacent-frame-native-block",
+      "tile": "N15E096",
+      "source_url": "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v100/2020/map/ESA_WorldCover_10m_2020_v100_N15E096_Map.tif",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:32:35 GMT",
+        "etag": "\"c0de21a1a10d8fe0814ea892dc4bb1f3-7\"",
+        "accept-ranges": "bytes",
+        "content-length": "58272433"
+      },
+      "http": {
+        "status": 200,
+        "headers": {
+          "x-amz-id-2": "bBCWqUBcbuW7LrcDoPDzZaR5dP35mvGaekOAMUTaMhEI7kKMjpIAviYPR35nC9l8fwQFbXX1W/0=",
+          "x-amz-request-id": "CE34RDX0FDRXRFRH",
+          "Server": "AmazonS3",
+          "Date": "Thu, 15 Oct 2026 23:25:46 GMT",
+          "Last-Modified": "Tue, 25 Oct 2022 13:32:35 GMT",
+          "ETag": "\"c0de21a1a10d8fe0814ea892dc4bb1f3-7\"",
+          "x-amz-server-side-encryption": "AES256",
+          "Accept-Ranges": "bytes",
+          "Content-Length": "58272433",
+          "Content-Type": "image/tiff",
+          "Connection": "close"
+        }
+      },
+      "transform": [
+        8.333333333333333e-05,
+        0.0,
+        96.0,
+        0.0,
+        -8.333333333333333e-05,
+        18.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "crs": "EPSG:4326",
+      "native_block": [
+        35,
+        20
+      ],
+      "window": {
+        "row_off": 35840,
+        "col_off": 20480,
+        "height": 160,
+        "width": 1024
+      },
+      "array": {
+        "path": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/retained-frame-edge-followup-001/N15E096/new-block-35-20.npz",
+        "bytes": 2417,
+        "sha256": "1d36e7afe7ac19205ccccb127470722f00c698a43bddc48eb6e35e19a7f6025c"
+      },
+      "acquired_at": "2026-10-15T23:25:47.003188+00:00"
+    },
+    {
+      "kind": "new-bounded-adjacent-frame-native-block",
+      "tile": "N09E096",
+      "source_url": "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v100/2020/map/ESA_WorldCover_10m_2020_v100_N09E096_Map.tif",
+      "source_identity": {
+        "last-modified": "Tue, 25 Oct 2022 13:31:55 GMT",
+        "etag": "\"0b65ab52512721af33f117fc70ea284e-2\"",
+        "accept-ranges": "bytes",
+        "content-length": "8619585"
+      },
+      "http": {
+        "status": 200,
+        "headers": {
+          "x-amz-id-2": "w19/83RLwkTkHgNHeIFUCzP64U4y2ZSLYKKQ3InzjZCAxjmha3K7TmNmFkojb53bj4U+0Ws4sNI=",
+          "x-amz-request-id": "6027YFFZXHPJ5AE4",
+          "Server": "AmazonS3",
+          "Date": "Thu, 15 Oct 2026 23:25:48 GMT",
+          "Last-Modified": "Tue, 25 Oct 2022 13:31:55 GMT",
+          "ETag": "\"0b65ab52512721af33f117fc70ea284e-2\"",
+          "x-amz-server-side-encryption": "AES256",
+          "Accept-Ranges": "bytes",
+          "Content-Length": "8619585",
+          "Content-Type": "image/tiff",
+          "Connection": "close"
+        }
+      },
+      "transform": [
+        8.333333333333333e-05,
+        0.0,
+        96.0,
+        0.0,
+        -8.333333333333333e-05,
+        12.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "crs": "EPSG:4326",
+      "native_block": [
+        0,
+        20
+      ],
+      "window": {
+        "row_off": 0,
+        "col_off": 20480,
+        "height": 1024,
+        "width": 1024
+      },
+      "array": {
+        "path": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/retained-frame-edge-followup-001/N09E096/new-block-00-20.npz",
+        "bytes": 3190,
+        "sha256": "47284225e8e870e72ba1c40b32bc4cfe6d618c8822c46ed66e5d66a84f842409"
+      },
+      "acquired_at": "2026-10-15T23:25:48.175340+00:00"
+    }
+  ],
+  "failures": [],
+  "elapsed_seconds": 2.9807862079469487,
+  "peak_rss_bytes": 67977216,
+  "completed_original_blocks_reread": 0,
+  "source_year": 2020,
+  "reader_source_sha256": "0c1214a2bb8d5074a6d152d9c8791176ce88dce7b835eb48607919f0205eb73e"
+}

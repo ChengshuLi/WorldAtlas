@@ -1,0 +1,55 @@
+{
+  "kind": "new-bounded-adjacent-frame-native-block",
+  "tile": "N15E096",
+  "source_url": "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v100/2020/map/ESA_WorldCover_10m_2020_v100_N15E096_Map.tif",
+  "source_identity": {
+    "last-modified": "Tue, 25 Oct 2022 13:32:35 GMT",
+    "etag": "\"c0de21a1a10d8fe0814ea892dc4bb1f3-7\"",
+    "accept-ranges": "bytes",
+    "content-length": "58272433"
+  },
+  "http": {
+    "status": 200,
+    "headers": {
+      "x-amz-id-2": "bBCWqUBcbuW7LrcDoPDzZaR5dP35mvGaekOAMUTaMhEI7kKMjpIAviYPR35nC9l8fwQFbXX1W/0=",
+      "x-amz-request-id": "CE34RDX0FDRXRFRH",
+      "Server": "AmazonS3",
+      "Date": "Thu, 15 Oct 2026 23:25:46 GMT",
+      "Last-Modified": "Tue, 25 Oct 2022 13:32:35 GMT",
+      "ETag": "\"c0de21a1a10d8fe0814ea892dc4bb1f3-7\"",
+      "x-amz-server-side-encryption": "AES256",
+      "Accept-Ranges": "bytes",
+      "Content-Length": "58272433",
+      "Content-Type": "image/tiff",
+      "Connection": "close"
+    }
+  },
+  "transform": [
+    8.333333333333333e-05,
+    0.0,
+    96.0,
+    0.0,
+    -8.333333333333333e-05,
+    18.0,
+    0.0,
+    0.0,
+    1.0
+  ],
+  "crs": "EPSG:4326",
+  "native_block": [
+    35,
+    20
+  ],
+  "window": {
+    "row_off": 35840,
+    "col_off": 20480,
+    "height": 160,
+    "width": 1024
+  },
+  "array": {
+    "path": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/retained-frame-edge-followup-001/N15E096/new-block-35-20.npz",
+    "bytes": 2417,
+    "sha256": "1d36e7afe7ac19205ccccb127470722f00c698a43bddc48eb6e35e19a7f6025c"
+  },
+  "acquired_at": "2026-10-15T23:25:47.003188+00:00"
+}

@@ -1,0 +1,1871 @@
+{
+  "kind": "four-original-frameedge-actual-source-context-outcomes",
+  "raw_original_open_sha256": "ffd37d3a840c82dd488dc75fce9c4d2c951dc5b4aaf6f32209ea6e0bfc5c140a",
+  "actual_new_block_read": "actual-two-block-read.json",
+  "original_keys": 4,
+  "proposals": 4,
+  "open": 0,
+  "outcomes": [
+    {
+      "original_open_row": {
+        "point_index": 5726,
+        "original_key": {
+          "owner": 30327,
+          "y": 120032,
+          "x": 202298
+        },
+        "original_package": "gb-MMR-ADM3--physical-interpretation",
+        "original_record_unchanged": {
+          "original_block": 29,
+          "original_record_ordinal": 3246,
+          "original_owners": [
+            30327
+          ],
+          "original_SIDs": [
+            44891,
+            44932,
+            45093
+          ],
+          "original_class": "source-relative",
+          "original_interval": [
+            120032,
+            202298,
+            202299,
+            [
+              30327
+            ],
+            [
+              44891,
+              44932,
+              45093
+            ],
+            "source-relative"
+          ]
+        },
+        "unchanged_centre": {
+          "longitude": 97.7913993424014,
+          "latitude": 14.999938044092211,
+          "ideal_longitude_numerator": 25637580,
+          "ideal_longitude_denominator": 262166
+        },
+        "source_year": 2020,
+        "source_product": "ESA WorldCover2020v100 Map",
+        "source_observation": {
+          "coverage_status": "valid-native-value",
+          "class_code": 60,
+          "valid_mask": 255,
+          "nodata_match": false,
+          "neighbourhood_complete": false,
+          "neighbourhood_codes": null,
+          "neighbourhood_masks": null,
+          "centre_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-00-20.npz",
+          "source_object_identity": {
+            "last-modified": "Tue, 25 Oct 2022 13:32:16 GMT",
+            "etag": "\"de229d470bb0477e3f7f7bb1a82aa0d6-2\"",
+            "accept-ranges": "bytes",
+            "content-length": "11672438"
+          }
+        },
+        "source_point_reference": {
+          "path": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/point-observations.jsonl",
+          "jsonl_line_zero_based": 0,
+          "source_point_index": 5726
+        },
+        "tile": "N12E096",
+        "native_row": 0,
+        "native_col": 21496,
+        "positive_original_source_body_association": {
+          "original_key": {
+            "owner": 30327,
+            "y": 120032,
+            "x": 202298
+          },
+          "original_package": "gb-MMR-ADM3--physical-interpretation",
+          "original_interval_pointer": "/packages/2/rows/3246",
+          "source_sids": [
+            44891,
+            44932,
+            45093
+          ],
+          "owner_name": "Ye",
+          "framework_province_id": "framework:province:mawlamyine:86e6c5e7a4d8",
+          "original_owner_source_atom": "gb:MMR:ADM3:66882298B73191723482857",
+          "source_ADM3_member": {
+            "source_index": 45093,
+            "feature_ordinal": 122,
+            "source_id": "gb:MMR:ADM3:66882298B73191723482857",
+            "feature_name": "Ye",
+            "feature_geometry_pointer": "/features/122/geometry"
+          },
+          "owner_complete_source_polygon_parts": [
+            {
+              "part_ordinal": 4,
+              "source_geometry_pointer": "/features/122/geometry/coordinates/4",
+              "contact": "interior",
+              "observation_pointer": "/operations/289"
+            }
+          ],
+          "whole_ADM2_source_contacts": [
+            {
+              "source_index": 44932,
+              "contact": "interior",
+              "source_geometry_pointer": "/features/35/geometry",
+              "observation_pointer": "/operations/466"
+            }
+          ],
+          "outside_all_whole_ADM2_source_features": false,
+          "other_original_source_sids": [
+            44891,
+            44932
+          ],
+          "foreign_original_source_sids": [],
+          "other_SID_observation_note": "Original source-candidate references are preserved. ADM1/foreign geometry is not newly observed in this association operation.",
+          "normative_centre": {
+            "latitude": 14.999938044092211,
+            "longitude_numerator": 25637580,
+            "longitude_denominator": 262166
+          },
+          "remaining_after_known2237_adopted_answers": true
+        },
+        "specific_annual_source_fact": "The annual2020 WorldCover v100 Map supports modeled bare or sparse vegetation at this unchanged original-source-associated native location. This source-specific annual cover facet does not establish dry ground,material type or independent groundtruth.",
+        "proposed_bounded_answer": false,
+        "category": "unresolved-native-context-coverage",
+        "proposed_answer": null,
+        "remaining_physical_question": "Valid annual centre observation lacks complete actual same-tile3x3context; no cross-tile pixels or precise shore relation is invented.",
+        "separate_unadopted_questions": [
+          "Annual2020 modeled source at the containing10m-scale pixel,not independent instantaneous/groundtruth or wholeAtlas-cell coverage.",
+          "Original2019 source-version body association is affirmative; not current/legal ownership,territorial clearance,source2019shoreline equivalence or native/repair authority."
+        ],
+        "retained_native_observation": null,
+        "status": "OPEN SPECIFIC PHYSICAL QUESTION",
+        "authority_or_repair_credit": 0
+      },
+      "actual_complete_cross_frame_codes": [
+        [
+          60,
+          60,
+          60
+        ],
+        [
+          60,
+          60,
+          60
+        ],
+        [
+          10,
+          10,
+          10
+        ]
+      ],
+      "actual_complete_cross_frame_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "actual_native_pixel_positions": [
+        [
+          {
+            "retained_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/retained-frame-edge-followup-001/N15E096/new-block-35-20.npz",
+            "bytes": 2417,
+            "sha256": "1d36e7afe7ac19205ccccb127470722f00c698a43bddc48eb6e35e19a7f6025c",
+            "tile": "N15E096",
+            "row": 35999,
+            "col": 21495,
+            "window": {
+              "row_off": 35840,
+              "col_off": 20480,
+              "height": 160,
+              "width": 1024
+            },
+            "transform": [
+              8.333333333333333e-05,
+              0.0,
+              96.0,
+              0.0,
+              -8.333333333333333e-05,
+              18.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "source_identity": {
+              "last-modified": "Tue, 25 Oct 2022 13:32:35 GMT",
+              "etag": "\"c0de21a1a10d8fe0814ea892dc4bb1f3-7\"",
+              "accept-ranges": "bytes",
+              "content-length": "58272433"
+            }
+          },
+          {
+            "retained_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/retained-frame-edge-followup-001/N15E096/new-block-35-20.npz",
+            "bytes": 2417,
+            "sha256": "1d36e7afe7ac19205ccccb127470722f00c698a43bddc48eb6e35e19a7f6025c",
+            "tile": "N15E096",
+            "row": 35999,
+            "col": 21496,
+            "window": {
+              "row_off": 35840,
+              "col_off": 20480,
+              "height": 160,
+              "width": 1024
+            },
+            "transform": [
+              8.333333333333333e-05,
+              0.0,
+              96.0,
+              0.0,
+              -8.333333333333333e-05,
+              18.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "source_identity": {
+              "last-modified": "Tue, 25 Oct 2022 13:32:35 GMT",
+              "etag": "\"c0de21a1a10d8fe0814ea892dc4bb1f3-7\"",
+              "accept-ranges": "bytes",
+              "content-length": "58272433"
+            }
+          },
+          {
+            "retained_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/retained-frame-edge-followup-001/N15E096/new-block-35-20.npz",
+            "bytes": 2417,
+            "sha256": "1d36e7afe7ac19205ccccb127470722f00c698a43bddc48eb6e35e19a7f6025c",
+            "tile": "N15E096",
+            "row": 35999,
+            "col": 21497,
+            "window": {
+              "row_off": 35840,
+              "col_off": 20480,
+              "height": 160,
+              "width": 1024
+            },
+            "transform": [
+              8.333333333333333e-05,
+              0.0,
+              96.0,
+              0.0,
+              -8.333333333333333e-05,
+              18.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "source_identity": {
+              "last-modified": "Tue, 25 Oct 2022 13:32:35 GMT",
+              "etag": "\"c0de21a1a10d8fe0814ea892dc4bb1f3-7\"",
+              "accept-ranges": "bytes",
+              "content-length": "58272433"
+            }
+          }
+        ],
+        [
+          {
+            "retained_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-00-20.npz",
+            "bytes": 3944,
+            "sha256": "fa8d22f457fa0f44b62cb62a12d7ef3819680d3d6ac7a566d339558167608f70",
+            "tile": "N12E096",
+            "row": 0,
+            "col": 21495,
+            "window": {
+              "row_off": 0,
+              "col_off": 20480,
+              "height": 1024,
+              "width": 1024
+            },
+            "transform": [
+              8.333333333333333e-05,
+              0.0,
+              96.0,
+              0.0,
+              -8.333333333333333e-05,
+              15.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "source_identity": {
+              "last-modified": "Tue, 25 Oct 2022 13:32:16 GMT",
+              "etag": "\"de229d470bb0477e3f7f7bb1a82aa0d6-2\"",
+              "accept-ranges": "bytes",
+              "content-length": "11672438"
+            }
+          },
+          {
+            "retained_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-00-20.npz",
+            "bytes": 3944,
+            "sha256": "fa8d22f457fa0f44b62cb62a12d7ef3819680d3d6ac7a566d339558167608f70",
+            "tile": "N12E096",
+            "row": 0,
+            "col": 21496,
+            "window": {
+              "row_off": 0,
+              "col_off": 20480,
+              "height": 1024,
+              "width": 1024
+            },
+            "transform": [
+              8.333333333333333e-05,
+              0.0,
+              96.0,
+              0.0,
+              -8.333333333333333e-05,
+              15.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "source_identity": {
+              "last-modified": "Tue, 25 Oct 2022 13:32:16 GMT",
+              "etag": "\"de229d470bb0477e3f7f7bb1a82aa0d6-2\"",
+              "accept-ranges": "bytes",
+              "content-length": "11672438"
+            }
+          },
+          {
+            "retained_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-00-20.npz",
+            "bytes": 3944,
+            "sha256": "fa8d22f457fa0f44b62cb62a12d7ef3819680d3d6ac7a566d339558167608f70",
+            "tile": "N12E096",
+            "row": 0,
+            "col": 21497,
+            "window": {
+              "row_off": 0,
+              "col_off": 20480,
+              "height": 1024,
+              "width": 1024
+            },
+            "transform": [
+              8.333333333333333e-05,
+              0.0,
+              96.0,
+              0.0,
+              -8.333333333333333e-05,
+              15.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "source_identity": {
+              "last-modified": "Tue, 25 Oct 2022 13:32:16 GMT",
+              "etag": "\"de229d470bb0477e3f7f7bb1a82aa0d6-2\"",
+              "accept-ranges": "bytes",
+              "content-length": "11672438"
+            }
+          }
+        ],
+        [
+          {
+            "retained_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-00-20.npz",
+            "bytes": 3944,
+            "sha256": "fa8d22f457fa0f44b62cb62a12d7ef3819680d3d6ac7a566d339558167608f70",
+            "tile": "N12E096",
+            "row": 1,
+            "col": 21495,
+            "window": {
+              "row_off": 0,
+              "col_off": 20480,
+              "height": 1024,
+              "width": 1024
+            },
+            "transform": [
+              8.333333333333333e-05,
+              0.0,
+              96.0,
+              0.0,
+              -8.333333333333333e-05,
+              15.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "source_identity": {
+              "last-modified": "Tue, 25 Oct 2022 13:32:16 GMT",
+              "etag": "\"de229d470bb0477e3f7f7bb1a82aa0d6-2\"",
+              "accept-ranges": "bytes",
+              "content-length": "11672438"
+            }
+          },
+          {
+            "retained_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-00-20.npz",
+            "bytes": 3944,
+            "sha256": "fa8d22f457fa0f44b62cb62a12d7ef3819680d3d6ac7a566d339558167608f70",
+            "tile": "N12E096",
+            "row": 1,
+            "col": 21496,
+            "window": {
+              "row_off": 0,
+              "col_off": 20480,
+              "height": 1024,
+              "width": 1024
+            },
+            "transform": [
+              8.333333333333333e-05,
+              0.0,
+              96.0,
+              0.0,
+              -8.333333333333333e-05,
+              15.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "source_identity": {
+              "last-modified": "Tue, 25 Oct 2022 13:32:16 GMT",
+              "etag": "\"de229d470bb0477e3f7f7bb1a82aa0d6-2\"",
+              "accept-ranges": "bytes",
+              "content-length": "11672438"
+            }
+          },
+          {
+            "retained_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-00-20.npz",
+            "bytes": 3944,
+            "sha256": "fa8d22f457fa0f44b62cb62a12d7ef3819680d3d6ac7a566d339558167608f70",
+            "tile": "N12E096",
+            "row": 1,
+            "col": 21497,
+            "window": {
+              "row_off": 0,
+              "col_off": 20480,
+              "height": 1024,
+              "width": 1024
+            },
+            "transform": [
+              8.333333333333333e-05,
+              0.0,
+              96.0,
+              0.0,
+              -8.333333333333333e-05,
+              15.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "source_identity": {
+              "last-modified": "Tue, 25 Oct 2022 13:32:16 GMT",
+              "etag": "\"de229d470bb0477e3f7f7bb1a82aa0d6-2\"",
+              "accept-ranges": "bytes",
+              "content-length": "11672438"
+            }
+          }
+        ]
+      ],
+      "source_year": 2020,
+      "grid_registration": "Allthree actual sourceheaders nativeEPSG4326 1/12000degree east/south spacing,sameoriginlongitude96; frames meet atlatitude15 and12. Exactnine containing/nativeadjacent cells assembled without resampling/clamping.",
+      "category": "annual2020-source-supported-specific-cover-body-location",
+      "proposed_bounded_answer": true,
+      "proposed_answer": "The annual2020 WorldCover v100 Map supports modeled bare or sparse vegetation at this unchanged original-source-associated native location. This source-specific annual cover facet does not establish dry ground,material type or independent groundtruth.",
+      "remaining_physical_question": null,
+      "status": "AUTHOR-PROPOSED; independentreview/Mainadoptionpending",
+      "new_adopted_count": 0
+    },
+    {
+      "original_open_row": {
+        "point_index": 9790,
+        "original_key": {
+          "owner": 30271,
+          "y": 122279,
+          "x": 202270
+        },
+        "original_package": "gb-MMR-ADM3--physical-interpretation",
+        "original_record_unchanged": {
+          "original_block": 29,
+          "original_record_ordinal": 6026,
+          "original_owners": [
+            30271
+          ],
+          "original_SIDs": [
+            44893,
+            44955,
+            45111
+          ],
+          "original_class": "source-relative",
+          "original_interval": [
+            122279,
+            202270,
+            202272,
+            [
+              30271
+            ],
+            [
+              44893,
+              44955,
+              45111
+            ],
+            "source-relative"
+          ]
+        },
+        "unchanged_centre": {
+          "longitude": 97.75295042072577,
+          "latitude": 12.000047552752804,
+          "ideal_longitude_numerator": 25627500,
+          "ideal_longitude_denominator": 262166
+        },
+        "source_year": 2020,
+        "source_product": "ESA WorldCover2020v100 Map",
+        "source_observation": {
+          "coverage_status": "valid-native-value",
+          "class_code": 10,
+          "valid_mask": 255,
+          "nodata_match": false,
+          "neighbourhood_complete": false,
+          "neighbourhood_codes": null,
+          "neighbourhood_masks": null,
+          "centre_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-35-20.npz",
+          "source_object_identity": {
+            "last-modified": "Tue, 25 Oct 2022 13:32:16 GMT",
+            "etag": "\"de229d470bb0477e3f7f7bb1a82aa0d6-2\"",
+            "accept-ranges": "bytes",
+            "content-length": "11672438"
+          }
+        },
+        "source_point_reference": {
+          "path": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/point-observations.jsonl",
+          "jsonl_line_zero_based": 3891,
+          "source_point_index": 9790
+        },
+        "tile": "N12E096",
+        "native_row": 35999,
+        "native_col": 21035,
+        "positive_original_source_body_association": {
+          "original_key": {
+            "owner": 30271,
+            "y": 122279,
+            "x": 202270
+          },
+          "original_package": "gb-MMR-ADM3--physical-interpretation",
+          "original_interval_pointer": "/packages/2/rows/6026",
+          "source_sids": [
+            44893,
+            44955,
+            45111
+          ],
+          "owner_name": "Kyunsu",
+          "framework_province_id": "framework:province:myeik:2820a791707f",
+          "original_owner_source_atom": "gb:MMR:ADM3:66882298B62167174305830",
+          "source_ADM3_member": {
+            "source_index": 45111,
+            "feature_ordinal": 140,
+            "source_id": "gb:MMR:ADM3:66882298B62167174305830",
+            "feature_name": "Kyunsu",
+            "feature_geometry_pointer": "/features/140/geometry"
+          },
+          "owner_complete_source_polygon_parts": [
+            {
+              "part_ordinal": 26,
+              "source_geometry_pointer": "/features/140/geometry/coordinates/26",
+              "contact": "interior",
+              "observation_pointer": "/operations/168"
+            }
+          ],
+          "whole_ADM2_source_contacts": [
+            {
+              "source_index": 44955,
+              "contact": "interior",
+              "source_geometry_pointer": "/features/58/geometry",
+              "observation_pointer": "/operations/489"
+            }
+          ],
+          "outside_all_whole_ADM2_source_features": false,
+          "other_original_source_sids": [
+            44893,
+            44955
+          ],
+          "foreign_original_source_sids": [],
+          "other_SID_observation_note": "Original source-candidate references are preserved. ADM1/foreign geometry is not newly observed in this association operation.",
+          "normative_centre": {
+            "latitude": 12.000047552752804,
+            "longitude_numerator": 25627500,
+            "longitude_denominator": 262166
+          },
+          "remaining_after_known2237_adopted_answers": true
+        },
+        "specific_annual_source_fact": "The annual2020 WorldCover v100 Map supports modeled tree canopy at this unchanged original-source-associated native location. Tree cover can include floodedforest; no dry-understorey or whole-cell claim.",
+        "proposed_bounded_answer": false,
+        "category": "unresolved-native-context-coverage",
+        "proposed_answer": null,
+        "remaining_physical_question": "Valid annual centre observation lacks complete actual same-tile3x3context; no cross-tile pixels or precise shore relation is invented.",
+        "separate_unadopted_questions": [
+          "Annual2020 modeled source at the containing10m-scale pixel,not independent instantaneous/groundtruth or wholeAtlas-cell coverage.",
+          "Original2019 source-version body association is affirmative; not current/legal ownership,territorial clearance,source2019shoreline equivalence or native/repair authority.",
+          "Flooded understorey is not ruled out by tree canopy."
+        ],
+        "retained_native_observation": null,
+        "status": "OPEN SPECIFIC PHYSICAL QUESTION",
+        "authority_or_repair_credit": 0
+      },
+      "actual_complete_cross_frame_codes": [
+        [
+          10,
+          10,
+          10
+        ],
+        [
+          10,
+          10,
+          10
+        ],
+        [
+          10,
+          10,
+          10
+        ]
+      ],
+      "actual_complete_cross_frame_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "actual_native_pixel_positions": [
+        [
+          {
+            "retained_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-35-20.npz",
+            "bytes": 1757,
+            "sha256": "6319191dcc8925f999ed0289d57dc77b861ba58809da8268d8dc926381980f6f",
+            "tile": "N12E096",
+            "row": 35998,
+            "col": 21034,
+            "window": {
+              "row_off": 35840,
+              "col_off": 20480,
+              "height": 160,
+              "width": 1024
+            },
+            "transform": [
+              8.333333333333333e-05,
+              0.0,
+              96.0,
+              0.0,
+              -8.333333333333333e-05,
+              15.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "source_identity": {
+              "last-modified": "Tue, 25 Oct 2022 13:32:16 GMT",
+              "etag": "\"de229d470bb0477e3f7f7bb1a82aa0d6-2\"",
+              "accept-ranges": "bytes",
+              "content-length": "11672438"
+            }
+          },
+          {
+            "retained_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-35-20.npz",
+            "bytes": 1757,
+            "sha256": "6319191dcc8925f999ed0289d57dc77b861ba58809da8268d8dc926381980f6f",
+            "tile": "N12E096",
+            "row": 35998,
+            "col": 21035,
+            "window": {
+              "row_off": 35840,
+              "col_off": 20480,
+              "height": 160,
+              "width": 1024
+            },
+            "transform": [
+              8.333333333333333e-05,
+              0.0,
+              96.0,
+              0.0,
+              -8.333333333333333e-05,
+              15.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "source_identity": {
+              "last-modified": "Tue, 25 Oct 2022 13:32:16 GMT",
+              "etag": "\"de229d470bb0477e3f7f7bb1a82aa0d6-2\"",
+              "accept-ranges": "bytes",
+              "content-length": "11672438"
+            }
+          },
+          {
+            "retained_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-35-20.npz",
+            "bytes": 1757,
+            "sha256": "6319191dcc8925f999ed0289d57dc77b861ba58809da8268d8dc926381980f6f",
+            "tile": "N12E096",
+            "row": 35998,
+            "col": 21036,
+            "window": {
+              "row_off": 35840,
+              "col_off": 20480,
+              "height": 160,
+              "width": 1024
+            },
+            "transform": [
+              8.333333333333333e-05,
+              0.0,
+              96.0,
+              0.0,
+              -8.333333333333333e-05,
+              15.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "source_identity": {
+              "last-modified": "Tue, 25 Oct 2022 13:32:16 GMT",
+              "etag": "\"de229d470bb0477e3f7f7bb1a82aa0d6-2\"",
+              "accept-ranges": "bytes",
+              "content-length": "11672438"
+            }
+          }
+        ],
+        [
+          {
+            "retained_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-35-20.npz",
+            "bytes": 1757,
+            "sha256": "6319191dcc8925f999ed0289d57dc77b861ba58809da8268d8dc926381980f6f",
+            "tile": "N12E096",
+            "row": 35999,
+            "col": 21034,
+            "window": {
+              "row_off": 35840,
+              "col_off": 20480,
+              "height": 160,
+              "width": 1024
+            },
+            "transform": [
+              8.333333333333333e-05,
+              0.0,
+              96.0,
+              0.0,
+              -8.333333333333333e-05,
+              15.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "source_identity": {
+              "last-modified": "Tue, 25 Oct 2022 13:32:16 GMT",
+              "etag": "\"de229d470bb0477e3f7f7bb1a82aa0d6-2\"",
+              "accept-ranges": "bytes",
+              "content-length": "11672438"
+            }
+          },
+          {
+            "retained_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-35-20.npz",
+            "bytes": 1757,
+            "sha256": "6319191dcc8925f999ed0289d57dc77b861ba58809da8268d8dc926381980f6f",
+            "tile": "N12E096",
+            "row": 35999,
+            "col": 21035,
+            "window": {
+              "row_off": 35840,
+              "col_off": 20480,
+              "height": 160,
+              "width": 1024
+            },
+            "transform": [
+              8.333333333333333e-05,
+              0.0,
+              96.0,
+              0.0,
+              -8.333333333333333e-05,
+              15.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "source_identity": {
+              "last-modified": "Tue, 25 Oct 2022 13:32:16 GMT",
+              "etag": "\"de229d470bb0477e3f7f7bb1a82aa0d6-2\"",
+              "accept-ranges": "bytes",
+              "content-length": "11672438"
+            }
+          },
+          {
+            "retained_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-35-20.npz",
+            "bytes": 1757,
+            "sha256": "6319191dcc8925f999ed0289d57dc77b861ba58809da8268d8dc926381980f6f",
+            "tile": "N12E096",
+            "row": 35999,
+            "col": 21036,
+            "window": {
+              "row_off": 35840,
+              "col_off": 20480,
+              "height": 160,
+              "width": 1024
+            },
+            "transform": [
+              8.333333333333333e-05,
+              0.0,
+              96.0,
+              0.0,
+              -8.333333333333333e-05,
+              15.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "source_identity": {
+              "last-modified": "Tue, 25 Oct 2022 13:32:16 GMT",
+              "etag": "\"de229d470bb0477e3f7f7bb1a82aa0d6-2\"",
+              "accept-ranges": "bytes",
+              "content-length": "11672438"
+            }
+          }
+        ],
+        [
+          {
+            "retained_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/retained-frame-edge-followup-001/N09E096/new-block-00-20.npz",
+            "bytes": 3190,
+            "sha256": "47284225e8e870e72ba1c40b32bc4cfe6d618c8822c46ed66e5d66a84f842409",
+            "tile": "N09E096",
+            "row": 0,
+            "col": 21034,
+            "window": {
+              "row_off": 0,
+              "col_off": 20480,
+              "height": 1024,
+              "width": 1024
+            },
+            "transform": [
+              8.333333333333333e-05,
+              0.0,
+              96.0,
+              0.0,
+              -8.333333333333333e-05,
+              12.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "source_identity": {
+              "last-modified": "Tue, 25 Oct 2022 13:31:55 GMT",
+              "etag": "\"0b65ab52512721af33f117fc70ea284e-2\"",
+              "accept-ranges": "bytes",
+              "content-length": "8619585"
+            }
+          },
+          {
+            "retained_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/retained-frame-edge-followup-001/N09E096/new-block-00-20.npz",
+            "bytes": 3190,
+            "sha256": "47284225e8e870e72ba1c40b32bc4cfe6d618c8822c46ed66e5d66a84f842409",
+            "tile": "N09E096",
+            "row": 0,
+            "col": 21035,
+            "window": {
+              "row_off": 0,
+              "col_off": 20480,
+              "height": 1024,
+              "width": 1024
+            },
+            "transform": [
+              8.333333333333333e-05,
+              0.0,
+              96.0,
+              0.0,
+              -8.333333333333333e-05,
+              12.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "source_identity": {
+              "last-modified": "Tue, 25 Oct 2022 13:31:55 GMT",
+              "etag": "\"0b65ab52512721af33f117fc70ea284e-2\"",
+              "accept-ranges": "bytes",
+              "content-length": "8619585"
+            }
+          },
+          {
+            "retained_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/retained-frame-edge-followup-001/N09E096/new-block-00-20.npz",
+            "bytes": 3190,
+            "sha256": "47284225e8e870e72ba1c40b32bc4cfe6d618c8822c46ed66e5d66a84f842409",
+            "tile": "N09E096",
+            "row": 0,
+            "col": 21036,
+            "window": {
+              "row_off": 0,
+              "col_off": 20480,
+              "height": 1024,
+              "width": 1024
+            },
+            "transform": [
+              8.333333333333333e-05,
+              0.0,
+              96.0,
+              0.0,
+              -8.333333333333333e-05,
+              12.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "source_identity": {
+              "last-modified": "Tue, 25 Oct 2022 13:31:55 GMT",
+              "etag": "\"0b65ab52512721af33f117fc70ea284e-2\"",
+              "accept-ranges": "bytes",
+              "content-length": "8619585"
+            }
+          }
+        ]
+      ],
+      "source_year": 2020,
+      "grid_registration": "Allthree actual sourceheaders nativeEPSG4326 1/12000degree east/south spacing,sameoriginlongitude96; frames meet atlatitude15 and12. Exactnine containing/nativeadjacent cells assembled without resampling/clamping.",
+      "category": "annual2020-source-supported-specific-cover-body-location",
+      "proposed_bounded_answer": true,
+      "proposed_answer": "The annual2020 WorldCover v100 Map supports modeled tree canopy at this unchanged original-source-associated native location. Tree cover can include floodedforest; no dry-understorey or whole-cell claim.",
+      "remaining_physical_question": null,
+      "status": "AUTHOR-PROPOSED; independentreview/Mainadoptionpending",
+      "new_adopted_count": 0
+    },
+    {
+      "original_open_row": {
+        "point_index": 9791,
+        "original_key": {
+          "owner": 30271,
+          "y": 122279,
+          "x": 202271
+        },
+        "original_package": "gb-MMR-ADM3--physical-interpretation",
+        "original_record_unchanged": {
+          "original_block": 29,
+          "original_record_ordinal": 6026,
+          "original_owners": [
+            30271
+          ],
+          "original_SIDs": [
+            44893,
+            44955,
+            45111
+          ],
+          "original_class": "source-relative",
+          "original_interval": [
+            122279,
+            202270,
+            202272,
+            [
+              30271
+            ],
+            [
+              44893,
+              44955,
+              45111
+            ],
+            "source-relative"
+          ]
+        },
+        "unchanged_centre": {
+          "longitude": 97.75432359649989,
+          "latitude": 12.000047552752804,
+          "ideal_longitude_numerator": 25627860,
+          "ideal_longitude_denominator": 262166
+        },
+        "source_year": 2020,
+        "source_product": "ESA WorldCover2020v100 Map",
+        "source_observation": {
+          "coverage_status": "valid-native-value",
+          "class_code": 80,
+          "valid_mask": 255,
+          "nodata_match": false,
+          "neighbourhood_complete": false,
+          "neighbourhood_codes": null,
+          "neighbourhood_masks": null,
+          "centre_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-35-20.npz",
+          "source_object_identity": {
+            "last-modified": "Tue, 25 Oct 2022 13:32:16 GMT",
+            "etag": "\"de229d470bb0477e3f7f7bb1a82aa0d6-2\"",
+            "accept-ranges": "bytes",
+            "content-length": "11672438"
+          }
+        },
+        "source_point_reference": {
+          "path": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/point-observations.jsonl",
+          "jsonl_line_zero_based": 3892,
+          "source_point_index": 9791
+        },
+        "tile": "N12E096",
+        "native_row": 35999,
+        "native_col": 21051,
+        "positive_original_source_body_association": {
+          "original_key": {
+            "owner": 30271,
+            "y": 122279,
+            "x": 202271
+          },
+          "original_package": "gb-MMR-ADM3--physical-interpretation",
+          "original_interval_pointer": "/packages/2/rows/6026",
+          "source_sids": [
+            44893,
+            44955,
+            45111
+          ],
+          "owner_name": "Kyunsu",
+          "framework_province_id": "framework:province:myeik:2820a791707f",
+          "original_owner_source_atom": "gb:MMR:ADM3:66882298B62167174305830",
+          "source_ADM3_member": {
+            "source_index": 45111,
+            "feature_ordinal": 140,
+            "source_id": "gb:MMR:ADM3:66882298B62167174305830",
+            "feature_name": "Kyunsu",
+            "feature_geometry_pointer": "/features/140/geometry"
+          },
+          "owner_complete_source_polygon_parts": [
+            {
+              "part_ordinal": 26,
+              "source_geometry_pointer": "/features/140/geometry/coordinates/26",
+              "contact": "interior",
+              "observation_pointer": "/operations/168"
+            }
+          ],
+          "whole_ADM2_source_contacts": [
+            {
+              "source_index": 44955,
+              "contact": "interior",
+              "source_geometry_pointer": "/features/58/geometry",
+              "observation_pointer": "/operations/489"
+            }
+          ],
+          "outside_all_whole_ADM2_source_features": false,
+          "other_original_source_sids": [
+            44893,
+            44955
+          ],
+          "foreign_original_source_sids": [],
+          "other_SID_observation_note": "Original source-candidate references are preserved. ADM1/foreign geometry is not newly observed in this association operation.",
+          "normative_centre": {
+            "latitude": 12.000047552752804,
+            "longitude_numerator": 25627860,
+            "longitude_denominator": 262166
+          },
+          "remaining_after_known2237_adopted_answers": true
+        },
+        "specific_annual_source_fact": "The annual2020 WorldCover v100 Map supports a modeled persistent-water body at this unchanged original-source-associated native location. It does not identify sea/river/lake,fresh/saltwater,bank/thalweg,tide or jurisdiction.",
+        "proposed_bounded_answer": false,
+        "category": "unresolved-native-context-coverage",
+        "proposed_answer": null,
+        "remaining_physical_question": "Valid annual centre observation lacks complete actual same-tile3x3context; no cross-tile pixels or precise shore relation is invented.",
+        "separate_unadopted_questions": [
+          "Annual2020 modeled source at the containing10m-scale pixel,not independent instantaneous/groundtruth or wholeAtlas-cell coverage.",
+          "Original2019 source-version body association is affirmative; not current/legal ownership,territorial clearance,source2019shoreline equivalence or native/repair authority.",
+          "Water kind,exact river/sea association,shore/bank/thalweg,tide and jurisdiction remain separate where consequential."
+        ],
+        "retained_native_observation": null,
+        "status": "OPEN SPECIFIC PHYSICAL QUESTION",
+        "authority_or_repair_credit": 0
+      },
+      "actual_complete_cross_frame_codes": [
+        [
+          80,
+          80,
+          80
+        ],
+        [
+          80,
+          80,
+          80
+        ],
+        [
+          80,
+          80,
+          80
+        ]
+      ],
+      "actual_complete_cross_frame_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "actual_native_pixel_positions": [
+        [
+          {
+            "retained_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-35-20.npz",
+            "bytes": 1757,
+            "sha256": "6319191dcc8925f999ed0289d57dc77b861ba58809da8268d8dc926381980f6f",
+            "tile": "N12E096",
+            "row": 35998,
+            "col": 21050,
+            "window": {
+              "row_off": 35840,
+              "col_off": 20480,
+              "height": 160,
+              "width": 1024
+            },
+            "transform": [
+              8.333333333333333e-05,
+              0.0,
+              96.0,
+              0.0,
+              -8.333333333333333e-05,
+              15.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "source_identity": {
+              "last-modified": "Tue, 25 Oct 2022 13:32:16 GMT",
+              "etag": "\"de229d470bb0477e3f7f7bb1a82aa0d6-2\"",
+              "accept-ranges": "bytes",
+              "content-length": "11672438"
+            }
+          },
+          {
+            "retained_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-35-20.npz",
+            "bytes": 1757,
+            "sha256": "6319191dcc8925f999ed0289d57dc77b861ba58809da8268d8dc926381980f6f",
+            "tile": "N12E096",
+            "row": 35998,
+            "col": 21051,
+            "window": {
+              "row_off": 35840,
+              "col_off": 20480,
+              "height": 160,
+              "width": 1024
+            },
+            "transform": [
+              8.333333333333333e-05,
+              0.0,
+              96.0,
+              0.0,
+              -8.333333333333333e-05,
+              15.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "source_identity": {
+              "last-modified": "Tue, 25 Oct 2022 13:32:16 GMT",
+              "etag": "\"de229d470bb0477e3f7f7bb1a82aa0d6-2\"",
+              "accept-ranges": "bytes",
+              "content-length": "11672438"
+            }
+          },
+          {
+            "retained_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-35-20.npz",
+            "bytes": 1757,
+            "sha256": "6319191dcc8925f999ed0289d57dc77b861ba58809da8268d8dc926381980f6f",
+            "tile": "N12E096",
+            "row": 35998,
+            "col": 21052,
+            "window": {
+              "row_off": 35840,
+              "col_off": 20480,
+              "height": 160,
+              "width": 1024
+            },
+            "transform": [
+              8.333333333333333e-05,
+              0.0,
+              96.0,
+              0.0,
+              -8.333333333333333e-05,
+              15.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "source_identity": {
+              "last-modified": "Tue, 25 Oct 2022 13:32:16 GMT",
+              "etag": "\"de229d470bb0477e3f7f7bb1a82aa0d6-2\"",
+              "accept-ranges": "bytes",
+              "content-length": "11672438"
+            }
+          }
+        ],
+        [
+          {
+            "retained_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-35-20.npz",
+            "bytes": 1757,
+            "sha256": "6319191dcc8925f999ed0289d57dc77b861ba58809da8268d8dc926381980f6f",
+            "tile": "N12E096",
+            "row": 35999,
+            "col": 21050,
+            "window": {
+              "row_off": 35840,
+              "col_off": 20480,
+              "height": 160,
+              "width": 1024
+            },
+            "transform": [
+              8.333333333333333e-05,
+              0.0,
+              96.0,
+              0.0,
+              -8.333333333333333e-05,
+              15.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "source_identity": {
+              "last-modified": "Tue, 25 Oct 2022 13:32:16 GMT",
+              "etag": "\"de229d470bb0477e3f7f7bb1a82aa0d6-2\"",
+              "accept-ranges": "bytes",
+              "content-length": "11672438"
+            }
+          },
+          {
+            "retained_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-35-20.npz",
+            "bytes": 1757,
+            "sha256": "6319191dcc8925f999ed0289d57dc77b861ba58809da8268d8dc926381980f6f",
+            "tile": "N12E096",
+            "row": 35999,
+            "col": 21051,
+            "window": {
+              "row_off": 35840,
+              "col_off": 20480,
+              "height": 160,
+              "width": 1024
+            },
+            "transform": [
+              8.333333333333333e-05,
+              0.0,
+              96.0,
+              0.0,
+              -8.333333333333333e-05,
+              15.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "source_identity": {
+              "last-modified": "Tue, 25 Oct 2022 13:32:16 GMT",
+              "etag": "\"de229d470bb0477e3f7f7bb1a82aa0d6-2\"",
+              "accept-ranges": "bytes",
+              "content-length": "11672438"
+            }
+          },
+          {
+            "retained_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-35-20.npz",
+            "bytes": 1757,
+            "sha256": "6319191dcc8925f999ed0289d57dc77b861ba58809da8268d8dc926381980f6f",
+            "tile": "N12E096",
+            "row": 35999,
+            "col": 21052,
+            "window": {
+              "row_off": 35840,
+              "col_off": 20480,
+              "height": 160,
+              "width": 1024
+            },
+            "transform": [
+              8.333333333333333e-05,
+              0.0,
+              96.0,
+              0.0,
+              -8.333333333333333e-05,
+              15.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "source_identity": {
+              "last-modified": "Tue, 25 Oct 2022 13:32:16 GMT",
+              "etag": "\"de229d470bb0477e3f7f7bb1a82aa0d6-2\"",
+              "accept-ranges": "bytes",
+              "content-length": "11672438"
+            }
+          }
+        ],
+        [
+          {
+            "retained_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/retained-frame-edge-followup-001/N09E096/new-block-00-20.npz",
+            "bytes": 3190,
+            "sha256": "47284225e8e870e72ba1c40b32bc4cfe6d618c8822c46ed66e5d66a84f842409",
+            "tile": "N09E096",
+            "row": 0,
+            "col": 21050,
+            "window": {
+              "row_off": 0,
+              "col_off": 20480,
+              "height": 1024,
+              "width": 1024
+            },
+            "transform": [
+              8.333333333333333e-05,
+              0.0,
+              96.0,
+              0.0,
+              -8.333333333333333e-05,
+              12.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "source_identity": {
+              "last-modified": "Tue, 25 Oct 2022 13:31:55 GMT",
+              "etag": "\"0b65ab52512721af33f117fc70ea284e-2\"",
+              "accept-ranges": "bytes",
+              "content-length": "8619585"
+            }
+          },
+          {
+            "retained_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/retained-frame-edge-followup-001/N09E096/new-block-00-20.npz",
+            "bytes": 3190,
+            "sha256": "47284225e8e870e72ba1c40b32bc4cfe6d618c8822c46ed66e5d66a84f842409",
+            "tile": "N09E096",
+            "row": 0,
+            "col": 21051,
+            "window": {
+              "row_off": 0,
+              "col_off": 20480,
+              "height": 1024,
+              "width": 1024
+            },
+            "transform": [
+              8.333333333333333e-05,
+              0.0,
+              96.0,
+              0.0,
+              -8.333333333333333e-05,
+              12.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "source_identity": {
+              "last-modified": "Tue, 25 Oct 2022 13:31:55 GMT",
+              "etag": "\"0b65ab52512721af33f117fc70ea284e-2\"",
+              "accept-ranges": "bytes",
+              "content-length": "8619585"
+            }
+          },
+          {
+            "retained_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/retained-frame-edge-followup-001/N09E096/new-block-00-20.npz",
+            "bytes": 3190,
+            "sha256": "47284225e8e870e72ba1c40b32bc4cfe6d618c8822c46ed66e5d66a84f842409",
+            "tile": "N09E096",
+            "row": 0,
+            "col": 21052,
+            "window": {
+              "row_off": 0,
+              "col_off": 20480,
+              "height": 1024,
+              "width": 1024
+            },
+            "transform": [
+              8.333333333333333e-05,
+              0.0,
+              96.0,
+              0.0,
+              -8.333333333333333e-05,
+              12.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "source_identity": {
+              "last-modified": "Tue, 25 Oct 2022 13:31:55 GMT",
+              "etag": "\"0b65ab52512721af33f117fc70ea284e-2\"",
+              "accept-ranges": "bytes",
+              "content-length": "8619585"
+            }
+          }
+        ]
+      ],
+      "source_year": 2020,
+      "grid_registration": "Allthree actual sourceheaders nativeEPSG4326 1/12000degree east/south spacing,sameoriginlongitude96; frames meet atlatitude15 and12. Exactnine containing/nativeadjacent cells assembled without resampling/clamping.",
+      "category": "annual2020-source-supported-water-body-location",
+      "proposed_bounded_answer": true,
+      "proposed_answer": "The annual2020 WorldCover v100 Map supports a modeled persistent-water body at this unchanged original-source-associated native location. It does not identify sea/river/lake,fresh/saltwater,bank/thalweg,tide or jurisdiction.",
+      "remaining_physical_question": null,
+      "status": "AUTHOR-PROPOSED; independentreview/Mainadoptionpending",
+      "new_adopted_count": 0
+    },
+    {
+      "original_open_row": {
+        "point_index": 9792,
+        "original_key": {
+          "owner": 30271,
+          "y": 122279,
+          "x": 202392
+        },
+        "original_package": "gb-MMR-ADM3--physical-interpretation",
+        "original_record_unchanged": {
+          "original_block": 29,
+          "original_record_ordinal": 6027,
+          "original_owners": [
+            30271
+          ],
+          "original_SIDs": [
+            44893,
+            44955,
+            45111
+          ],
+          "original_class": "source-relative",
+          "original_interval": [
+            122279,
+            202392,
+            202393,
+            [
+              30271
+            ],
+            [
+              44893,
+              44955,
+              45111
+            ],
+            "source-relative"
+          ]
+        },
+        "unchanged_centre": {
+          "longitude": 97.9204778651694,
+          "latitude": 12.000047552752804,
+          "ideal_longitude_numerator": 25671420,
+          "ideal_longitude_denominator": 262166
+        },
+        "source_year": 2020,
+        "source_product": "ESA WorldCover2020v100 Map",
+        "source_observation": {
+          "coverage_status": "valid-native-value",
+          "class_code": 80,
+          "valid_mask": 255,
+          "nodata_match": false,
+          "neighbourhood_complete": false,
+          "neighbourhood_codes": null,
+          "neighbourhood_masks": null,
+          "centre_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-35-22.npz",
+          "source_object_identity": {
+            "last-modified": "Tue, 25 Oct 2022 13:32:16 GMT",
+            "etag": "\"de229d470bb0477e3f7f7bb1a82aa0d6-2\"",
+            "accept-ranges": "bytes",
+            "content-length": "11672438"
+          }
+        },
+        "source_point_reference": {
+          "path": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/point-observations.jsonl",
+          "jsonl_line_zero_based": 3893,
+          "source_point_index": 9792
+        },
+        "tile": "N12E096",
+        "native_row": 35999,
+        "native_col": 23045,
+        "positive_original_source_body_association": {
+          "original_key": {
+            "owner": 30271,
+            "y": 122279,
+            "x": 202392
+          },
+          "original_package": "gb-MMR-ADM3--physical-interpretation",
+          "original_interval_pointer": "/packages/2/rows/6027",
+          "source_sids": [
+            44893,
+            44955,
+            45111
+          ],
+          "owner_name": "Kyunsu",
+          "framework_province_id": "framework:province:myeik:2820a791707f",
+          "original_owner_source_atom": "gb:MMR:ADM3:66882298B62167174305830",
+          "source_ADM3_member": {
+            "source_index": 45111,
+            "feature_ordinal": 140,
+            "source_id": "gb:MMR:ADM3:66882298B62167174305830",
+            "feature_name": "Kyunsu",
+            "feature_geometry_pointer": "/features/140/geometry"
+          },
+          "owner_complete_source_polygon_parts": [
+            {
+              "part_ordinal": 24,
+              "source_geometry_pointer": "/features/140/geometry/coordinates/24",
+              "contact": "interior",
+              "observation_pointer": "/operations/166"
+            }
+          ],
+          "whole_ADM2_source_contacts": [
+            {
+              "source_index": 44955,
+              "contact": "interior",
+              "source_geometry_pointer": "/features/58/geometry",
+              "observation_pointer": "/operations/489"
+            }
+          ],
+          "outside_all_whole_ADM2_source_features": false,
+          "other_original_source_sids": [
+            44893,
+            44955
+          ],
+          "foreign_original_source_sids": [],
+          "other_SID_observation_note": "Original source-candidate references are preserved. ADM1/foreign geometry is not newly observed in this association operation.",
+          "normative_centre": {
+            "latitude": 12.000047552752804,
+            "longitude_numerator": 25671420,
+            "longitude_denominator": 262166
+          },
+          "remaining_after_known2237_adopted_answers": true
+        },
+        "specific_annual_source_fact": "The annual2020 WorldCover v100 Map supports a modeled persistent-water body at this unchanged original-source-associated native location. It does not identify sea/river/lake,fresh/saltwater,bank/thalweg,tide or jurisdiction.",
+        "proposed_bounded_answer": false,
+        "category": "unresolved-native-context-coverage",
+        "proposed_answer": null,
+        "remaining_physical_question": "Valid annual centre observation lacks complete actual same-tile3x3context; no cross-tile pixels or precise shore relation is invented.",
+        "separate_unadopted_questions": [
+          "Annual2020 modeled source at the containing10m-scale pixel,not independent instantaneous/groundtruth or wholeAtlas-cell coverage.",
+          "Original2019 source-version body association is affirmative; not current/legal ownership,territorial clearance,source2019shoreline equivalence or native/repair authority.",
+          "Water kind,exact river/sea association,shore/bank/thalweg,tide and jurisdiction remain separate where consequential."
+        ],
+        "retained_native_observation": null,
+        "status": "OPEN SPECIFIC PHYSICAL QUESTION",
+        "authority_or_repair_credit": 0
+      },
+      "actual_complete_cross_frame_codes": [
+        [
+          80,
+          80,
+          80
+        ],
+        [
+          80,
+          80,
+          80
+        ],
+        [
+          80,
+          80,
+          80
+        ]
+      ],
+      "actual_complete_cross_frame_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "actual_native_pixel_positions": [
+        [
+          {
+            "retained_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-35-22.npz",
+            "bytes": 977,
+            "sha256": "1c257b1af4da6cb4dbbe7ba115d6e57b9f2868dc1ddcb10aaffe6dc81c4eaedc",
+            "tile": "N12E096",
+            "row": 35998,
+            "col": 23044,
+            "window": {
+              "row_off": 35840,
+              "col_off": 22528,
+              "height": 160,
+              "width": 1024
+            },
+            "transform": [
+              8.333333333333333e-05,
+              0.0,
+              96.0,
+              0.0,
+              -8.333333333333333e-05,
+              15.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "source_identity": {
+              "last-modified": "Tue, 25 Oct 2022 13:32:16 GMT",
+              "etag": "\"de229d470bb0477e3f7f7bb1a82aa0d6-2\"",
+              "accept-ranges": "bytes",
+              "content-length": "11672438"
+            }
+          },
+          {
+            "retained_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-35-22.npz",
+            "bytes": 977,
+            "sha256": "1c257b1af4da6cb4dbbe7ba115d6e57b9f2868dc1ddcb10aaffe6dc81c4eaedc",
+            "tile": "N12E096",
+            "row": 35998,
+            "col": 23045,
+            "window": {
+              "row_off": 35840,
+              "col_off": 22528,
+              "height": 160,
+              "width": 1024
+            },
+            "transform": [
+              8.333333333333333e-05,
+              0.0,
+              96.0,
+              0.0,
+              -8.333333333333333e-05,
+              15.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "source_identity": {
+              "last-modified": "Tue, 25 Oct 2022 13:32:16 GMT",
+              "etag": "\"de229d470bb0477e3f7f7bb1a82aa0d6-2\"",
+              "accept-ranges": "bytes",
+              "content-length": "11672438"
+            }
+          },
+          {
+            "retained_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-35-22.npz",
+            "bytes": 977,
+            "sha256": "1c257b1af4da6cb4dbbe7ba115d6e57b9f2868dc1ddcb10aaffe6dc81c4eaedc",
+            "tile": "N12E096",
+            "row": 35998,
+            "col": 23046,
+            "window": {
+              "row_off": 35840,
+              "col_off": 22528,
+              "height": 160,
+              "width": 1024
+            },
+            "transform": [
+              8.333333333333333e-05,
+              0.0,
+              96.0,
+              0.0,
+              -8.333333333333333e-05,
+              15.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "source_identity": {
+              "last-modified": "Tue, 25 Oct 2022 13:32:16 GMT",
+              "etag": "\"de229d470bb0477e3f7f7bb1a82aa0d6-2\"",
+              "accept-ranges": "bytes",
+              "content-length": "11672438"
+            }
+          }
+        ],
+        [
+          {
+            "retained_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-35-22.npz",
+            "bytes": 977,
+            "sha256": "1c257b1af4da6cb4dbbe7ba115d6e57b9f2868dc1ddcb10aaffe6dc81c4eaedc",
+            "tile": "N12E096",
+            "row": 35999,
+            "col": 23044,
+            "window": {
+              "row_off": 35840,
+              "col_off": 22528,
+              "height": 160,
+              "width": 1024
+            },
+            "transform": [
+              8.333333333333333e-05,
+              0.0,
+              96.0,
+              0.0,
+              -8.333333333333333e-05,
+              15.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "source_identity": {
+              "last-modified": "Tue, 25 Oct 2022 13:32:16 GMT",
+              "etag": "\"de229d470bb0477e3f7f7bb1a82aa0d6-2\"",
+              "accept-ranges": "bytes",
+              "content-length": "11672438"
+            }
+          },
+          {
+            "retained_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-35-22.npz",
+            "bytes": 977,
+            "sha256": "1c257b1af4da6cb4dbbe7ba115d6e57b9f2868dc1ddcb10aaffe6dc81c4eaedc",
+            "tile": "N12E096",
+            "row": 35999,
+            "col": 23045,
+            "window": {
+              "row_off": 35840,
+              "col_off": 22528,
+              "height": 160,
+              "width": 1024
+            },
+            "transform": [
+              8.333333333333333e-05,
+              0.0,
+              96.0,
+              0.0,
+              -8.333333333333333e-05,
+              15.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "source_identity": {
+              "last-modified": "Tue, 25 Oct 2022 13:32:16 GMT",
+              "etag": "\"de229d470bb0477e3f7f7bb1a82aa0d6-2\"",
+              "accept-ranges": "bytes",
+              "content-length": "11672438"
+            }
+          },
+          {
+            "retained_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-35-22.npz",
+            "bytes": 977,
+            "sha256": "1c257b1af4da6cb4dbbe7ba115d6e57b9f2868dc1ddcb10aaffe6dc81c4eaedc",
+            "tile": "N12E096",
+            "row": 35999,
+            "col": 23046,
+            "window": {
+              "row_off": 35840,
+              "col_off": 22528,
+              "height": 160,
+              "width": 1024
+            },
+            "transform": [
+              8.333333333333333e-05,
+              0.0,
+              96.0,
+              0.0,
+              -8.333333333333333e-05,
+              15.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "source_identity": {
+              "last-modified": "Tue, 25 Oct 2022 13:32:16 GMT",
+              "etag": "\"de229d470bb0477e3f7f7bb1a82aa0d6-2\"",
+              "accept-ranges": "bytes",
+              "content-length": "11672438"
+            }
+          }
+        ],
+        [
+          {
+            "retained_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N09E096/new-block-00-22.npz",
+            "bytes": 3816,
+            "sha256": "9ab11ac175fbbb890ec3cd34a46f09a09df483bf932817459055b52e752672ec",
+            "tile": "N09E096",
+            "row": 0,
+            "col": 23044,
+            "window": {
+              "row_off": 0,
+              "col_off": 22528,
+              "height": 1024,
+              "width": 1024
+            },
+            "transform": [
+              8.333333333333333e-05,
+              0.0,
+              96.0,
+              0.0,
+              -8.333333333333333e-05,
+              12.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "source_identity": {
+              "last-modified": "Tue, 25 Oct 2022 13:31:55 GMT",
+              "etag": "\"0b65ab52512721af33f117fc70ea284e-2\"",
+              "accept-ranges": "bytes",
+              "content-length": "8619585"
+            }
+          },
+          {
+            "retained_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N09E096/new-block-00-22.npz",
+            "bytes": 3816,
+            "sha256": "9ab11ac175fbbb890ec3cd34a46f09a09df483bf932817459055b52e752672ec",
+            "tile": "N09E096",
+            "row": 0,
+            "col": 23045,
+            "window": {
+              "row_off": 0,
+              "col_off": 22528,
+              "height": 1024,
+              "width": 1024
+            },
+            "transform": [
+              8.333333333333333e-05,
+              0.0,
+              96.0,
+              0.0,
+              -8.333333333333333e-05,
+              12.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "source_identity": {
+              "last-modified": "Tue, 25 Oct 2022 13:31:55 GMT",
+              "etag": "\"0b65ab52512721af33f117fc70ea284e-2\"",
+              "accept-ranges": "bytes",
+              "content-length": "8619585"
+            }
+          },
+          {
+            "retained_array": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N09E096/new-block-00-22.npz",
+            "bytes": 3816,
+            "sha256": "9ab11ac175fbbb890ec3cd34a46f09a09df483bf932817459055b52e752672ec",
+            "tile": "N09E096",
+            "row": 0,
+            "col": 23046,
+            "window": {
+              "row_off": 0,
+              "col_off": 22528,
+              "height": 1024,
+              "width": 1024
+            },
+            "transform": [
+              8.333333333333333e-05,
+              0.0,
+              96.0,
+              0.0,
+              -8.333333333333333e-05,
+              12.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "source_identity": {
+              "last-modified": "Tue, 25 Oct 2022 13:31:55 GMT",
+              "etag": "\"0b65ab52512721af33f117fc70ea284e-2\"",
+              "accept-ranges": "bytes",
+              "content-length": "8619585"
+            }
+          }
+        ]
+      ],
+      "source_year": 2020,
+      "grid_registration": "Allthree actual sourceheaders nativeEPSG4326 1/12000degree east/south spacing,sameoriginlongitude96; frames meet atlatitude15 and12. Exactnine containing/nativeadjacent cells assembled without resampling/clamping.",
+      "category": "annual2020-source-supported-water-body-location",
+      "proposed_bounded_answer": true,
+      "proposed_answer": "The annual2020 WorldCover v100 Map supports a modeled persistent-water body at this unchanged original-source-associated native location. It does not identify sea/river/lake,fresh/saltwater,bank/thalweg,tide or jurisdiction.",
+      "remaining_physical_question": null,
+      "status": "AUTHOR-PROPOSED; independentreview/Mainadoptionpending",
+      "new_adopted_count": 0
+    }
+  ],
+  "remote_blocks_reread": 0,
+  "repair_or_native_credit": 0
+}
