@@ -809,7 +809,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
  // Optional reconciliation uses existing complete aggregation lineage, not an
  // authored source-to-owner guess. Canonical parts retain the accepted members
  // and base geometry; the complete lineage exposes omitted competing owners.
- const memberOwners=new Map(), canonicalOwners=new Map();
+ const memberOwners=new Map(), canonicalOwners=new Map(), semanticOwners=new Map();
  if(evidence.source_membership!==undefined){
   const membership=evidence.source_membership;
   demand(membership&&Object.keys(membership).sort().join(',')==='index,lineage,parts'
@@ -833,8 +833,11 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
   const lineage=current(membership.lineage),index=current(membership.index);
   demand(Array.isArray(lineage.changes)&&Array.isArray(index.parts)&&index.parts.length>0
    &&new Set(index.parts).size===index.parts.length,'Incomplete accepted membership inventory');
-  for(const change of lineage.changes)if(Array.isArray(change.replaces))for(const member of change.replaces){
-   const changes=memberOwners.get(member)??[];changes.push(change);memberOwners.set(member,changes);
+  for(const change of lineage.changes){
+   const records=semanticOwners.get(change.id)??[];records.push(change);semanticOwners.set(change.id,records);
+   if(Array.isArray(change.replaces))for(const member of change.replaces){
+    const changes=memberOwners.get(member)??[];changes.push(change);memberOwners.set(member,changes);
+   }
   }
   const paths=new Set();
   for(const pin of membership.parts){
@@ -866,6 +869,43 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
     'Missing or conflicting complete source aggregation member');
   }
   return {id:change.id,pixelIndex:owners.get(change.id),feature:accepted};
+ };
+
+ // A split original cannot supply a positive owner. It can remain a complete
+ // negative competitor after every accepted descendant is authenticated.
+ const splitCompetitor = (id, originals) => {
+  const changes = memberOwners.get(id) ?? [];
+  const canonical = [...canonicalOwners.values()].filter(feature =>
+   feature.properties?.metadata?.source_member_ids?.includes(id)).map(feature => feature.id);
+  if (owners.has(id) || changes.length < 2 && canonical.length < 2) return null;
+  demand(changes.length > 1 && canonical.length > 1,
+   'Incomplete accepted split-source descendant inventory');
+  demand(!evidence.targets.some(target => target.id === id),
+   'Split original source cannot supply a positive native target');
+  const original = originals.get(id), descendants = new Set();
+  for (const change of changes) {
+   const accepted = canonicalOwners.get(change.id), properties = accepted?.properties;
+   const metadata = properties?.metadata;
+   demand(typeof change.id === 'string' && !descendants.has(change.id)
+    && semanticOwners.get(change.id)?.length === 1 && semanticOwners.get(change.id)[0] === change
+    && same(change.replaces, [id]) && accepted && owners.has(change.id)
+    && properties.id === change.id && same(metadata?.source_member_ids, [id])
+    && metadata.original_id === original?.properties?.shapeID,
+   'Incomplete or ambiguous accepted split-source descendant');
+   demand(typeof properties.parent_id === 'string' && properties.parent_id
+    && roster[owners.get(change.id)-1]?.province_id === properties.parent_id
+    && typeof change.basis === 'string' && change.basis
+    && metadata.location_basis === change.basis
+    && typeof change.source === 'string' && change.source
+    && metadata.source_url === change.source,
+   'Accepted split-source descendant parent or source identity differs');
+   descendants.add(change.id);
+  }
+  demand(same([...descendants].sort(), canonical.sort()),
+   'Incomplete accepted split-source descendant inventory');
+  return {source_id: id, geometry_sha256: valueSha(original.geometry),
+   descendants: [...descendants].sort().map(target_id => ({target_id,
+    pixelIndex: owners.get(target_id), parent_id: canonicalOwners.get(target_id).properties.parent_id}))};
  };
 
  // Adoption belongs to the exact selected candidate, independently of which
@@ -1265,7 +1305,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
  // county geometry or relax the v1/v2 original-source join.
  const revision = revised ? readAdoptedOsmRevision({evidence,proposed,owners,latitudes,
   read,readAdopted,reader,physicalInputs,keys}) : null;
- const checked=new Set(),families=new Set(),physicalContextHits=[],providerCompetitors=[],providerVetoes=[];
+ const checked=new Set(),families=new Set(),physicalContextHits=[],providerCompetitors=[],providerVetoes=[],splitCompetitors=[];
  for(const [source_family,adopted]of adoptedFamilies)for(const [source_id,feature]of adopted.originals){
   const bound=adopted.bindings.has(source_id);
   const veto_targets=[...resolvedTargets.values()].filter(target=>!bound||target.source_family!==source_family)
@@ -1345,16 +1385,37 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
   const bounds=selected.flatMap(target=>coordinateBounds(datedCentres.some(p=>p.source_id===target.id)
    ?nativeOriginals.get(target.id).geometry:target.coverage_geometry));
   const intersects=(a,b)=>a[0]<=b[2]&&b[0]<=a[2]&&a[1]<=b[3]&&b[1]<=a[3];
-  const sourceFeatures=[...nativeOriginals].filter(([id,feature])=>(!adopted||adopted.bindings.has(id))
-    &&coordinateBounds(feature.geometry).some(part=>bounds.some(box=>intersects(part,box))))
-   .map(([id,feature])=>{
+  const sourceFeatures=[],splitVetoes=[];
+  for(const [id,feature] of nativeOriginals){
+   if(adopted&&!adopted.bindings.has(id))continue;
+   if(!coordinateBounds(feature.geometry).some(part=>bounds.some(box=>intersects(part,box))))continue;
+   const split=!adopted&&!revised?splitCompetitor(id,originals):null;
+   if(split){
+    splitCompetitors.push(split);
+    splitVetoes.push({...split,geometry:feature.geometry});
+   }else{
     const owner=resolve(id);
-    return {id,target_id:owner.id,pixelIndex:owner.pixelIndex,geometry:feature.geometry};});
+    sourceFeatures.push({id,target_id:owner.id,pixelIndex:owner.pixelIndex,geometry:feature.geometry});
+   }
+  }
   const coverageFeatures=selected.filter(t=>t.coverage_geometry.coordinates.length).map(target=>({id:target.target_id??target.id,source_id:target.id,pixelIndex:target.pixelIndex,geometry:target.coverage_geometry}));
   let exclusions=selected.flatMap(target=>(target.territorial_exclusions??[]).map((geometry,ordinal)=>({
    id:target.target_id??target.id,pixelIndex:target.pixelIndex,geometry,
    ...(evidence.territorial_applicability===undefined?{}:{source_id:target.id,negative_ordinal:ordinal,geometry_sha256:valueSha(geometry),
     operand_sha256:territorialOperands.get(JSON.stringify([target.id,ordinal]))})})));
+  for(const member of splitVetoes){
+   // Every original ring remains a veto. No child is used as a surrogate
+   // owner and no applicability exception can turn this negative positive.
+   const memberBounds=coordinateBounds(member.geometry);
+   for(const target of selected){
+    const targetBounds=coordinateBounds(datedCentres.some(point=>point.source_id===target.id)
+     ?nativeOriginals.get(target.id).geometry:target.coverage_geometry);
+    if(!memberBounds.some(part=>targetBounds.some(box=>intersects(part,box))))continue;
+    exclusions.push({id:target.target_id??target.id,pixelIndex:target.pixelIndex,
+     geometry:member.geometry,split_source_id:member.source_id,
+     negative_ordinal:null,geometry_sha256:member.geometry_sha256});
+   }
+  }
   for(const member of providerVetoes){
    // This is a negative operand for an existing target, not a fabricated owner.
    // It has no original negative ordinal and cannot match an applicability
@@ -1507,6 +1568,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
    requested_cells:requested,supported_cells:supportedCells,held_cells:heldCells,
    original_pins:{source_evidence:binding.source_evidence,native_patch:binding.native_patch},
    ...(adoptedFamilies.size?{provider_competitors:providerCompetitors}:{}),
+   ...(splitCompetitors.length?{split_source_competitors:splitCompetitors}:{}),
    ...(dated?{physical_context_hits:physicalContextHits}:{}),
    ...(evidence.territorial_applicability===undefined?{}:{territorial_contacts:territorialContextHits}),
    rule_sha256:valueSha(preimage),native_contract:evidence.native_contract,
@@ -1530,6 +1592,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
   native_proof:{native_contract:evidence.native_contract,native_patches:[{base_reference:evidence.base_reference,rows:proposed.rows}]},
   original_pins:{source_evidence:binding.source_evidence,native_patch:binding.native_patch},
   ...(adoptedFamilies.size?{provider_competitors:providerCompetitors}:{}),
+   ...(splitCompetitors.length?{split_source_competitors:splitCompetitors}:{}),
   ...(dated?{physical_context_hits:physicalContextHits}:{}),
   ...(evidence.territorial_applicability===undefined?{}:{territorial_contacts:territorialContextHits}),
   limitations:['Physical interpretation and semantic reconciliation are retained reviewed source evidence; actual current owner-zero is checked by native consumers.',
