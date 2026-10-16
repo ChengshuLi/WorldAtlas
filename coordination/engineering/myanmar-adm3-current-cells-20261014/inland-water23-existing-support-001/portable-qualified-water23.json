@@ -1,0 +1,644 @@
+{
+  "kind": "portable-genuinely-qualified-original-MMR-inland-water23",
+  "head": "e4350f152a42399b5f93d7731b16c4c9d373d995",
+  "tree": "cf5a9e0d0644f46478fa88241d466e1b39ce5e14",
+  "input_commit": "8b47071996d254174e90aac2c277a35b9cf39892",
+  "actual_execution_tree": "9fd3c87e27e7bb3008734229be4b642bffa029e1",
+  "unchanged_stock_code": "168ac2ab36663e31ca16f767340c0ab46bea4185",
+  "authorities": [
+    {
+      "rule_preimage": {
+        "commit": "e4350f152a42399b5f93d7731b16c4c9d373d995",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group0/authority/original-rule-preimage.json",
+        "mode": "100644",
+        "git_blob_oid": "8a4afd499849f859bdf6b3e9d77de66d140a0a35",
+        "bytes": 796,
+        "sha256": "6474252e375b08dc5c3d553afc34801281d55021ab1d22dd0f52b4f1dcffe546"
+      },
+      "source_authority": {
+        "commit": "e4350f152a42399b5f93d7731b16c4c9d373d995",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group0/authority/authority-binding.json",
+        "mode": "100644",
+        "git_blob_oid": "bbfeae6349b59db9d6e55ec8199b8dc38a06b124",
+        "bytes": 799,
+        "sha256": "97ebb82e2d9b1fe57a3f88fc39c562ac05e3deac04215c2ef1a5226a3c490a54"
+      },
+      "ledger": {
+        "commit": "e4350f152a42399b5f93d7731b16c4c9d373d995",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group0/authority/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "77aa73959f11c449049454003b8932b3ae2c27ba",
+        "bytes": 6382,
+        "sha256": "202c5592f1073a275d2c0cfde02c6eb996d7f4abfa249bcac55902e59b592f67"
+      },
+      "native_patch": {
+        "bytes": 2176,
+        "commit": "8b47071996d254174e90aac2c277a35b9cf39892",
+        "git_blob_oid": "46650a34969953903b876e4a4783c78c7da1ded6",
+        "mode": "100644",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group0/candidate-native-patch.json",
+        "sha256": "5445b90c4e8ba9fd449efa69a8a98c817dafe265d4c103f08150b4a3d551a921"
+      }
+    },
+    {
+      "rule_preimage": {
+        "commit": "e4350f152a42399b5f93d7731b16c4c9d373d995",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group1/authority/original-rule-preimage.json",
+        "mode": "100644",
+        "git_blob_oid": "f195698ad926706956d713ac4b27eda3acf8235c",
+        "bytes": 795,
+        "sha256": "0cddbf75d4be422658ea26259211a9501a6bfbff7e2355ca2c4aba5832a700eb"
+      },
+      "source_authority": {
+        "commit": "e4350f152a42399b5f93d7731b16c4c9d373d995",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group1/authority/authority-binding.json",
+        "mode": "100644",
+        "git_blob_oid": "e95d7dbe0f6f5b0fc867c3e747260b6f99427950",
+        "bytes": 798,
+        "sha256": "339e0760baaec1f602c6451da7e3598edbae2a9f04f112ed9dc722f4ae889481"
+      },
+      "ledger": {
+        "commit": "e4350f152a42399b5f93d7731b16c4c9d373d995",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group1/authority/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "627db974f2f9805abc63306bfe865fe550cf8b15",
+        "bytes": 4181,
+        "sha256": "f346cf8f646b5fc15996765bded3b4b0eeafb123ccfe0377042e35220710be49"
+      },
+      "native_patch": {
+        "bytes": 476,
+        "commit": "8b47071996d254174e90aac2c277a35b9cf39892",
+        "git_blob_oid": "125045db0f6cf8085eb21102f02b4b9702cde5b2",
+        "mode": "100644",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group1/candidate-native-patch.json",
+        "sha256": "839207182f82478095ae3b4035d12bb45eb872a6230a9527560f4c2869bfbb0c"
+      }
+    }
+  ],
+  "groups": [
+    {
+      "authority": {
+        "rule_preimage": {
+          "commit": "e4350f152a42399b5f93d7731b16c4c9d373d995",
+          "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group0/authority/original-rule-preimage.json",
+          "mode": "100644",
+          "git_blob_oid": "8a4afd499849f859bdf6b3e9d77de66d140a0a35",
+          "bytes": 796,
+          "sha256": "6474252e375b08dc5c3d553afc34801281d55021ab1d22dd0f52b4f1dcffe546"
+        },
+        "source_authority": {
+          "commit": "e4350f152a42399b5f93d7731b16c4c9d373d995",
+          "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group0/authority/authority-binding.json",
+          "mode": "100644",
+          "git_blob_oid": "bbfeae6349b59db9d6e55ec8199b8dc38a06b124",
+          "bytes": 799,
+          "sha256": "97ebb82e2d9b1fe57a3f88fc39c562ac05e3deac04215c2ef1a5226a3c490a54"
+        },
+        "ledger": {
+          "commit": "e4350f152a42399b5f93d7731b16c4c9d373d995",
+          "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group0/authority/constructor-result.json",
+          "mode": "100644",
+          "git_blob_oid": "77aa73959f11c449049454003b8932b3ae2c27ba",
+          "bytes": 6382,
+          "sha256": "202c5592f1073a275d2c0cfde02c6eb996d7f4abfa249bcac55902e59b592f67"
+        },
+        "native_patch": {
+          "bytes": 2176,
+          "commit": "8b47071996d254174e90aac2c277a35b9cf39892",
+          "git_blob_oid": "46650a34969953903b876e4a4783c78c7da1ded6",
+          "mode": "100644",
+          "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group0/candidate-native-patch.json",
+          "sha256": "5445b90c4e8ba9fd449efa69a8a98c817dafe265d4c103f08150b4a3d551a921"
+        }
+      },
+      "keys": [
+        [
+          30104,
+          115908,
+          198689
+        ],
+        [
+          30104,
+          115909,
+          198689
+        ],
+        [
+          30104,
+          115909,
+          198690
+        ],
+        [
+          30104,
+          115910,
+          198690
+        ],
+        [
+          30104,
+          115911,
+          198690
+        ],
+        [
+          30104,
+          115911,
+          198691
+        ],
+        [
+          30104,
+          115912,
+          198690
+        ],
+        [
+          30104,
+          115912,
+          198691
+        ],
+        [
+          30104,
+          115913,
+          198690
+        ],
+        [
+          30104,
+          115913,
+          198691
+        ],
+        [
+          30104,
+          115914,
+          198690
+        ],
+        [
+          30104,
+          115914,
+          198691
+        ],
+        [
+          30332,
+          115962,
+          198711
+        ],
+        [
+          30332,
+          115963,
+          198711
+        ],
+        [
+          30332,
+          115965,
+          198710
+        ],
+        [
+          30332,
+          115967,
+          198709
+        ],
+        [
+          30332,
+          115968,
+          198709
+        ],
+        [
+          30332,
+          115970,
+          198708
+        ],
+        [
+          30332,
+          115972,
+          198707
+        ]
+      ],
+      "rows": 2
+    },
+    {
+      "authority": {
+        "rule_preimage": {
+          "commit": "e4350f152a42399b5f93d7731b16c4c9d373d995",
+          "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group1/authority/original-rule-preimage.json",
+          "mode": "100644",
+          "git_blob_oid": "f195698ad926706956d713ac4b27eda3acf8235c",
+          "bytes": 795,
+          "sha256": "0cddbf75d4be422658ea26259211a9501a6bfbff7e2355ca2c4aba5832a700eb"
+        },
+        "source_authority": {
+          "commit": "e4350f152a42399b5f93d7731b16c4c9d373d995",
+          "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group1/authority/authority-binding.json",
+          "mode": "100644",
+          "git_blob_oid": "e95d7dbe0f6f5b0fc867c3e747260b6f99427950",
+          "bytes": 798,
+          "sha256": "339e0760baaec1f602c6451da7e3598edbae2a9f04f112ed9dc722f4ae889481"
+        },
+        "ledger": {
+          "commit": "e4350f152a42399b5f93d7731b16c4c9d373d995",
+          "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group1/authority/constructor-result.json",
+          "mode": "100644",
+          "git_blob_oid": "627db974f2f9805abc63306bfe865fe550cf8b15",
+          "bytes": 4181,
+          "sha256": "f346cf8f646b5fc15996765bded3b4b0eeafb123ccfe0377042e35220710be49"
+        },
+        "native_patch": {
+          "bytes": 476,
+          "commit": "8b47071996d254174e90aac2c277a35b9cf39892",
+          "git_blob_oid": "125045db0f6cf8085eb21102f02b4b9702cde5b2",
+          "mode": "100644",
+          "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group1/candidate-native-patch.json",
+          "sha256": "839207182f82478095ae3b4035d12bb45eb872a6230a9527560f4c2869bfbb0c"
+        }
+      },
+      "keys": [
+        [
+          30100,
+          116636,
+          199277
+        ],
+        [
+          30100,
+          116637,
+          199276
+        ],
+        [
+          30100,
+          116637,
+          199277
+        ],
+        [
+          30100,
+          116638,
+          199274
+        ]
+      ],
+      "rows": 1
+    }
+  ],
+  "keys": [
+    [
+      30100,
+      116636,
+      199277
+    ],
+    [
+      30100,
+      116637,
+      199276
+    ],
+    [
+      30100,
+      116637,
+      199277
+    ],
+    [
+      30100,
+      116638,
+      199274
+    ],
+    [
+      30104,
+      115908,
+      198689
+    ],
+    [
+      30104,
+      115909,
+      198689
+    ],
+    [
+      30104,
+      115909,
+      198690
+    ],
+    [
+      30104,
+      115910,
+      198690
+    ],
+    [
+      30104,
+      115911,
+      198690
+    ],
+    [
+      30104,
+      115911,
+      198691
+    ],
+    [
+      30104,
+      115912,
+      198690
+    ],
+    [
+      30104,
+      115912,
+      198691
+    ],
+    [
+      30104,
+      115913,
+      198690
+    ],
+    [
+      30104,
+      115913,
+      198691
+    ],
+    [
+      30104,
+      115914,
+      198690
+    ],
+    [
+      30104,
+      115914,
+      198691
+    ],
+    [
+      30332,
+      115962,
+      198711
+    ],
+    [
+      30332,
+      115963,
+      198711
+    ],
+    [
+      30332,
+      115965,
+      198710
+    ],
+    [
+      30332,
+      115967,
+      198709
+    ],
+    [
+      30332,
+      115968,
+      198709
+    ],
+    [
+      30332,
+      115970,
+      198708
+    ],
+    [
+      30332,
+      115972,
+      198707
+    ]
+  ],
+  "original_physical_class": "inland-water",
+  "selected_existing_support_class": "mapped_inland_water_support",
+  "native_class_rows": "Every exact original key is explicitly class-bound.",
+  "all_original_source_and_physical_pins_geometries_issues_territorial_exclusions_retained": true,
+  "prior_land_only_diagnostic_superseded_as_physical_negative": true,
+  "source_or_physical_replays": 0,
+  "accepted_credit": 0,
+  "whole_staged_files": [
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group0/authority/authority-binding.json",
+      "mode": "100644",
+      "git_blob_oid": "bbfeae6349b59db9d6e55ec8199b8dc38a06b124",
+      "bytes": 799,
+      "sha256": "97ebb82e2d9b1fe57a3f88fc39c562ac05e3deac04215c2ef1a5226a3c490a54"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group0/authority/original-rule-preimage.json",
+      "mode": "100644",
+      "git_blob_oid": "8a4afd499849f859bdf6b3e9d77de66d140a0a35",
+      "bytes": 796,
+      "sha256": "6474252e375b08dc5c3d553afc34801281d55021ab1d22dd0f52b4f1dcffe546"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group0/authority/preparation.json",
+      "mode": "100644",
+      "git_blob_oid": "8db4bb074ca451b867690974bfd9851b9405adf5",
+      "bytes": 500,
+      "sha256": "a53da9f9f92ba55e1e15a0e1f1da94e9642bb342c3e0cdb56be8c6f284700cfb"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group0/authority/constructor-result.json",
+      "mode": "100644",
+      "git_blob_oid": "77aa73959f11c449049454003b8932b3ae2c27ba",
+      "bytes": 6382,
+      "sha256": "202c5592f1073a275d2c0cfde02c6eb996d7f4abfa249bcac55902e59b592f67"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group0/execution/group0-authority-stderr.log",
+      "mode": "100644",
+      "git_blob_oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group0/execution/group0-classed-stderr.log",
+      "mode": "100644",
+      "git_blob_oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group0/execution/group0-classed-config.json",
+      "mode": "100644",
+      "git_blob_oid": "74569f252a0c4a06cade41406307985f608f3aa0",
+      "bytes": 473,
+      "sha256": "62d81649a850908f7af0b9c133ede6a85585a013cdf8700f5233a4df247ea2ac"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group0/execution/group0-stdout.json",
+      "mode": "100644",
+      "git_blob_oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group0/execution/group0-classed-stdout.json",
+      "mode": "100644",
+      "git_blob_oid": "bb8213f5f12fe3fb68f91b03819c394f77b1d8aa",
+      "bytes": 491,
+      "sha256": "b158e17b41d7b07bf260b76738155b92743e0ef114f1dd46e440a6f390fb1754"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group0/execution/group0-authority-execution.json",
+      "mode": "100644",
+      "git_blob_oid": "0b507c40da4af595c4898479dad6405902383697",
+      "bytes": 648,
+      "sha256": "b062a93bb46f3c2097d2d8ad8e0445258507684f22be68793d7443b909884f76"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group0/execution/group0-execution.json",
+      "mode": "100644",
+      "git_blob_oid": "26212126eaf45f1a7aa86a0c248d60944ffd10f7",
+      "bytes": 584,
+      "sha256": "d01dfb4889130fba8ee04c65c0fdca1db1955778a2e1ac47d3b500b66fca3151"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group0/execution/group0-authority-stdout.json",
+      "mode": "100644",
+      "git_blob_oid": "1863dc219518cf0ab48eca7aef29c6d0ff65509a",
+      "bytes": 455,
+      "sha256": "60c35869ef82cc591e304dc3cbef721f78e0798045c30b22381788df7d8bd6e3"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group0/execution/group0-stderr.log",
+      "mode": "100644",
+      "git_blob_oid": "0d459f1b7d93d6ab7f221dbf90575ca41c5c36cc",
+      "bytes": 69,
+      "sha256": "173442e9d9fd0b1fa4fdfdca8ed02241be83760714b73701466ddf587ee5665d"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group0/execution/group0-classed-execution.json",
+      "mode": "100644",
+      "git_blob_oid": "4845ec47ddac7ea00852d99182a6415f1385d0eb",
+      "bytes": 580,
+      "sha256": "97f19a0a6bd02e5e9b5b0af05f7c28c16f4325bd3782bbfbefe1d6b847af32d0"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group0/execution/group0-config.json",
+      "mode": "100644",
+      "git_blob_oid": "83dc633d02bd55ebad9a654e0fbce7e4afe5d626",
+      "bytes": 473,
+      "sha256": "44c387efef99465968b2ff5734a9b84e0155c1f60677a5966a7fbd4e76acb825"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group0/classed-diagnostic/preparation.json",
+      "mode": "100644",
+      "git_blob_oid": "9165e0c7a063d86e158e6011a76ed2a61d52b496",
+      "bytes": 265,
+      "sha256": "f1415715acc084733143d580cf9bedef078288b26344762abbed1ebf2c7efb1d"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group0/classed-diagnostic/native-diagnostic.json",
+      "mode": "100644",
+      "git_blob_oid": "a90939a9ecdc019d62b071b368185bac168750e8",
+      "bytes": 4603,
+      "sha256": "3e16b3d132be8eb04d29c8f321c11b362a2f913abb6ba6be1234fea5ca6951f5"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group1/authority/authority-binding.json",
+      "mode": "100644",
+      "git_blob_oid": "e95d7dbe0f6f5b0fc867c3e747260b6f99427950",
+      "bytes": 798,
+      "sha256": "339e0760baaec1f602c6451da7e3598edbae2a9f04f112ed9dc722f4ae889481"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group1/authority/original-rule-preimage.json",
+      "mode": "100644",
+      "git_blob_oid": "f195698ad926706956d713ac4b27eda3acf8235c",
+      "bytes": 795,
+      "sha256": "0cddbf75d4be422658ea26259211a9501a6bfbff7e2355ca2c4aba5832a700eb"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group1/authority/preparation.json",
+      "mode": "100644",
+      "git_blob_oid": "361e654efd232a22eba7d131bbffcbc1792e9ad4",
+      "bytes": 500,
+      "sha256": "16e7baa969bc1346bc222cf84c4057637e533bd17e0b2df5597b60ecab7853a7"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group1/authority/constructor-result.json",
+      "mode": "100644",
+      "git_blob_oid": "627db974f2f9805abc63306bfe865fe550cf8b15",
+      "bytes": 4181,
+      "sha256": "f346cf8f646b5fc15996765bded3b4b0eeafb123ccfe0377042e35220710be49"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group1/execution/group1-authority-execution.json",
+      "mode": "100644",
+      "git_blob_oid": "be66c8ae37a0686a65398c4b0a13b37461de1aa6",
+      "bytes": 648,
+      "sha256": "20a1882d2842a2136f9e5c72c93fef24d9913f0a34510c5cdb24f739cf21a80b"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group1/execution/group1-classed-stdout.json",
+      "mode": "100644",
+      "git_blob_oid": "0e3f59de0816641098b7a9944a3e1af3492808a9",
+      "bytes": 482,
+      "sha256": "02a2ba5aead051385cc6ae91fdf0148574bfd6b95996212a383628a6c9697646"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group1/execution/group1-stdout.json",
+      "mode": "100644",
+      "git_blob_oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group1/execution/group1-classed-stderr.log",
+      "mode": "100644",
+      "git_blob_oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group1/execution/group1-execution.json",
+      "mode": "100644",
+      "git_blob_oid": "f418c33fa5eb8f4b0e069c12911791be16884733",
+      "bytes": 584,
+      "sha256": "3ccf4cf746a000c12d3aff5c22481c4d84afefe88958bd151708642e43b16d8e"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group1/execution/group1-authority-stderr.log",
+      "mode": "100644",
+      "git_blob_oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group1/execution/group1-classed-config.json",
+      "mode": "100644",
+      "git_blob_oid": "fa1521f35b75d203c3ae3d2ff1171c9b1f6bb374",
+      "bytes": 473,
+      "sha256": "5c61bef32a41f9dbf856195856ac1f4b9a926b404bc7976471d75df69ec2235a"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group1/execution/group1-classed-execution.json",
+      "mode": "100644",
+      "git_blob_oid": "ce14c2a1260c6f9a4ce67d11f706fa3471e33657",
+      "bytes": 580,
+      "sha256": "4949a024f257e107017ee4889ad4dfe6150302cb60feeb5fb4d1b85afc27eced"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group1/execution/group1-config.json",
+      "mode": "100644",
+      "git_blob_oid": "5c22ceb26d062638544ec5491846d7e2e8f2bd6d",
+      "bytes": 473,
+      "sha256": "396b1adf6196f74ea4ed845ff988a86efa1cc19a0d254318f2c1967160258f06"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group1/execution/group1-stderr.log",
+      "mode": "100644",
+      "git_blob_oid": "0d459f1b7d93d6ab7f221dbf90575ca41c5c36cc",
+      "bytes": 69,
+      "sha256": "173442e9d9fd0b1fa4fdfdca8ed02241be83760714b73701466ddf587ee5665d"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group1/execution/group1-authority-stdout.json",
+      "mode": "100644",
+      "git_blob_oid": "5ab48ff636111869e8beced44de978bc94227ecc",
+      "bytes": 454,
+      "sha256": "2ce39e311f13eab7d7275df01f604ba9cc26cef530fc8fc0f38d4a673c39bc7c"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group1/classed-diagnostic/preparation.json",
+      "mode": "100644",
+      "git_blob_oid": "2eb8efcc93247a9d27c844cde0eefc892b8b04a6",
+      "bytes": 265,
+      "sha256": "726637de10f6f8da29c9cac44ce6fd364b9c635b67402fc1634a65a6d155b9aa"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group1/classed-diagnostic/native-diagnostic.json",
+      "mode": "100644",
+      "git_blob_oid": "822ebcec5ee1a64cb04ad22750ef08aca6c431e8",
+      "bytes": 2873,
+      "sha256": "4eb2043bf20d45bdb1434538940e336a96ca1ff27bd3c13c5d250ec2ed9baab7"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/diagnose-water23.py",
+      "mode": "100644",
+      "git_blob_oid": "43712204258886c2f814457c355f558f7edc281b",
+      "bytes": 3798,
+      "sha256": "4f6b893197344bc2a67b75b0df87076a80316356ae2124efa40060f36ee5d17f"
+    }
+  ]
+}
