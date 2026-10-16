@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "selected_ledger_sha256": "5cfdf82ef4c95c2c7d7c7f2a96cb7a074e7b04fcdad054cbdf914121ad41b9ca",
-  "cumulative_native_cells": 302543,
+  "selected_ledger_sha256": "9c34f50557b2b0c3fddc7ed3e2a2c3727942ad95fa48898dbf34556dc2528e1b",
+  "cumulative_native_cells": 306212,
   "cohorts": [
     {
       "original_batch_id": "retained-authority-scope:0037ca1e3f6f3c91f641977f10e592da91fd068935cd3a0aa83ce6b895149140",
@@ -2349,6 +2349,118 @@
       ]
     },
     {
+      "original_batch_id": "retained-authority-scope:6110f0e63d248a852f5fd199844c0763e7d5a2e36eb519c59be59efd6275de0c",
+      "component_ids": [
+        "source-target:06b178ab494f9b4980395a9e7cbda4ee427ed540751c16b45fa7e2d9a12b0489",
+        "source-target:0b54abd36a969c20bbe8be31fc7718bbc542fc19cd01c2271e88d19c2d231530",
+        "source-target:1c086477a954aa892d778827ed7ac85a46dcf1860ba14d6018eaf128ca605968",
+        "source-target:242e7080168938113163c60ec650d3020f9d6333a1e235a6efc7fb6cf1f85a0f",
+        "source-target:41e671bfb5b42bd88cc5dfe05d5fb75acafb0f3b1b7aa3121e066d1bcdab6a13",
+        "source-target:44a0cf2a864816004d37c04e50cdbbd6260bb556254c04d3db1fe8594160498e",
+        "source-target:4c4f58aa4760c38e2081560f4a01ecb296c37d3125040c0bc0a30573fed28f53",
+        "source-target:4cb217a08a163e5d0899979859132db68d6d989887a9388355d06c203a921622",
+        "source-target:5b38d7ff8e6f8c581a0fe5dd3e30a4eb71bd5da0226a6c33d0160f145f816ff2",
+        "source-target:75ac26e4cc860d2d24eca8c6b3232b6e33f92e79f36ff182051ed987342d26b3",
+        "source-target:778d9d52dcd456a4059b7243a41203f292b14281de3a8a09ed93fbbfde406a89",
+        "source-target:a9b1fba4da87e9b4237e0f9dbef8295ed4a92169ba34414499458c7b4144ab49",
+        "source-target:b5a7ca9fae85585e277b02b375db39906951c883ff800516e6aa4850c4ab998b",
+        "source-target:c05aee773dbd90feb1bdb4dbbcef6cf5c6da9814b28441cae3f0c78efabd8407",
+        "source-target:cf11f39c28b4a7a579bcce2e9246c4730e8536e7c115f62aeb4cea781dc3c9c9"
+      ],
+      "members": [
+        {
+          "component_id": "source-target:06b178ab494f9b4980395a9e7cbda4ee427ed540751c16b45fa7e2d9a12b0489",
+          "target_id": "gb:PLW:ADM1:51375826B48991434772650",
+          "disposition": "assigned",
+          "native_rows_sha256": "0d218cc6537bbc05c1a63f88cd2afcdf401975a01c2fcefd2f50feeb0660ee50"
+        },
+        {
+          "component_id": "source-target:0b54abd36a969c20bbe8be31fc7718bbc542fc19cd01c2271e88d19c2d231530",
+          "target_id": "gb:PLW:ADM1:51375826B36601808440460",
+          "disposition": "assigned",
+          "native_rows_sha256": "8ed4c3cea9185a1cce8d58ed9b9947d849875975e606407b0edeaf166d056dae"
+        },
+        {
+          "component_id": "source-target:1c086477a954aa892d778827ed7ac85a46dcf1860ba14d6018eaf128ca605968",
+          "target_id": "gb:PLW:ADM1:51375826B68373509078236",
+          "disposition": "assigned",
+          "native_rows_sha256": "68d36b1b188541aa70c0f5e32f6454358d4c8d89395897008ec9ff0183406e0a"
+        },
+        {
+          "component_id": "source-target:242e7080168938113163c60ec650d3020f9d6333a1e235a6efc7fb6cf1f85a0f",
+          "target_id": "gb:PLW:ADM1:51375826B32695076810418",
+          "disposition": "assigned",
+          "native_rows_sha256": "dcc062fcd166f241700c297985091a5ed2cb6aa19c526219e23cf15c88b15bf8"
+        },
+        {
+          "component_id": "source-target:41e671bfb5b42bd88cc5dfe05d5fb75acafb0f3b1b7aa3121e066d1bcdab6a13",
+          "target_id": "gb:PLW:ADM1:51375826B1021187793063",
+          "disposition": "assigned",
+          "native_rows_sha256": "57510d1c13f3be42f251103b6fdc2c0ab824a7fc5d354ad5db6b9fafa87549b6"
+        },
+        {
+          "component_id": "source-target:44a0cf2a864816004d37c04e50cdbbd6260bb556254c04d3db1fe8594160498e",
+          "target_id": "gb:PLW:ADM1:51375826B14634142702996",
+          "disposition": "assigned",
+          "native_rows_sha256": "b4d331c537f8435dabe1af051ab16f518cd87ac924f3827bd03e254d8b0b1281"
+        },
+        {
+          "component_id": "source-target:4c4f58aa4760c38e2081560f4a01ecb296c37d3125040c0bc0a30573fed28f53",
+          "target_id": "gb:PLW:ADM1:51375826B83906845617852",
+          "disposition": "assigned",
+          "native_rows_sha256": "c897ab19e84de35cfd8ed1bfee2b6d64e0e118d66b2c43416a3ff80a36659eed"
+        },
+        {
+          "component_id": "source-target:4cb217a08a163e5d0899979859132db68d6d989887a9388355d06c203a921622",
+          "target_id": "gb:PLW:ADM1:51375826B6202415756314",
+          "disposition": "assigned",
+          "native_rows_sha256": "a76e5ef833eda2551b7575b1d2b9e683a3fd651d119af3ac03cdbe001b0351fe"
+        },
+        {
+          "component_id": "source-target:5b38d7ff8e6f8c581a0fe5dd3e30a4eb71bd5da0226a6c33d0160f145f816ff2",
+          "target_id": "gb:PLW:ADM1:51375826B21693494950446",
+          "disposition": "assigned",
+          "native_rows_sha256": "e4dc1e682a2ab3c951c8280c977b119a721ea9001c3418702cd28b71127ec578"
+        },
+        {
+          "component_id": "source-target:75ac26e4cc860d2d24eca8c6b3232b6e33f92e79f36ff182051ed987342d26b3",
+          "target_id": "gb:PLW:ADM1:51375826B25708098730444",
+          "disposition": "assigned",
+          "native_rows_sha256": "7ebda436a8e8a480161f4a8d27e313a073398c484262838ec057f817ac94ad92"
+        },
+        {
+          "component_id": "source-target:778d9d52dcd456a4059b7243a41203f292b14281de3a8a09ed93fbbfde406a89",
+          "target_id": "gb:PLW:ADM1:51375826B16617280953256",
+          "disposition": "assigned",
+          "native_rows_sha256": "8e46ad63fcb5d31ea782ca3e9c397191c5fa28a1c1642d67ba4317af3840113a"
+        },
+        {
+          "component_id": "source-target:a9b1fba4da87e9b4237e0f9dbef8295ed4a92169ba34414499458c7b4144ab49",
+          "target_id": "gb:PLW:ADM1:51375826B59587402164376",
+          "disposition": "assigned",
+          "native_rows_sha256": "9e608271291768eeb5cd44517594b4f3e53bb7d6dfa810e34ff60f1b461f7e58"
+        },
+        {
+          "component_id": "source-target:b5a7ca9fae85585e277b02b375db39906951c883ff800516e6aa4850c4ab998b",
+          "target_id": "gb:PLW:ADM1:51375826B80300454073965",
+          "disposition": "assigned",
+          "native_rows_sha256": "c384f4d4586c7ef0fdb25b2bfde9c4f99482447eec7e43fcddb48137f0492fbd"
+        },
+        {
+          "component_id": "source-target:c05aee773dbd90feb1bdb4dbbcef6cf5c6da9814b28441cae3f0c78efabd8407",
+          "target_id": "gb:PLW:ADM1:51375826B95953962908269",
+          "disposition": "assigned",
+          "native_rows_sha256": "e5a713b115d5911531126c6bc7aa2b40d12f0f7d3a70ae799a8c8d4188abfd95"
+        },
+        {
+          "component_id": "source-target:cf11f39c28b4a7a579bcce2e9246c4730e8536e7c115f62aeb4cea781dc3c9c9",
+          "target_id": "gb:PLW:ADM1:51375826B69298749218873",
+          "disposition": "assigned",
+          "native_rows_sha256": "1fc35d12f822bb0c68b1c32d28d935d3f15f83eba6fd8c4506658174d6527d6c"
+        }
+      ]
+    },
+    {
       "original_batch_id": "retained-authority-scope:61f276496557025e974c25e5477c84b26a27e44e3d6eb017de5f618f8532a923",
       "component_ids": [
         "source-target:5429962f985c4e9fb9922029e0b82330e2369f7d5b8de2751c011f1093eaea4f",
@@ -2674,6 +2786,34 @@
           "target_id": "gb:GRC:ADM3:53547021B72748856763578",
           "disposition": "assigned",
           "geometry_sha256": "a63b534fc22678a8eb30a94d686c44d2cc2f837ae1d980a3c318b5d8bdc2619a"
+        }
+      ]
+    },
+    {
+      "original_batch_id": "retained-authority-scope:7eded2871004dc389334e01fa7c0b38af2396fae17d1d7260af18d8885efd335",
+      "component_ids": [
+        "source-target:09ff3cd79734a8ef8f2315e922a917db53035bead89e089ed93ac6a2806576a0",
+        "source-target:83ac9e1ca88ea227010393223a522cd0e2eb150aede5fc8965b73806b5e1440b",
+        "source-target:a51c3eb099ada4064df0adc03e2df4d6830305dca6e4ae94fed9970e2018d573"
+      ],
+      "members": [
+        {
+          "component_id": "source-target:09ff3cd79734a8ef8f2315e922a917db53035bead89e089ed93ac6a2806576a0",
+          "target_id": "gb:KIR:ADM1:97431129B35506555718846",
+          "disposition": "assigned",
+          "native_rows_sha256": "63107c181767543084e0a0a9d6e20910f7cfb22cb32b4d101171328a5b8219f9"
+        },
+        {
+          "component_id": "source-target:83ac9e1ca88ea227010393223a522cd0e2eb150aede5fc8965b73806b5e1440b",
+          "target_id": "gb:KIR:ADM1:97431129B36644055464690",
+          "disposition": "assigned",
+          "native_rows_sha256": "baa6ea2eec36278607e77f9298443c661a726ae8c166abdca761031fd7cdc34b"
+        },
+        {
+          "component_id": "source-target:a51c3eb099ada4064df0adc03e2df4d6830305dca6e4ae94fed9970e2018d573",
+          "target_id": "gb:KIR:ADM1:97431129B55805139245338",
+          "disposition": "assigned",
+          "native_rows_sha256": "675d08601c0ee0a998b4f3b7cc3e19c49c191bca39fe4a1ef0ca814ae0261068"
         }
       ]
     },
