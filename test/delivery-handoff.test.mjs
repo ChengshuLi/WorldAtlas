@@ -5,7 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {execFileSync, spawnSync} from 'node:child_process';
-import {gzipSync} from 'node:zlib';
+import zlib, {gzipSync} from 'node:zlib';
 import crypto from 'node:crypto';
 import {syncBuiltinESMExports} from 'node:module';
 import {renderClaim} from '../scripts/issue-claim-contract.mjs';
@@ -109,6 +109,51 @@ test('retention joins genuine terminal, request, facts and every published outpu
   write(root, f.config.terminal, jsonBytes(f.terminal)); fs.unlinkSync(path.join(root, 'run/inventory.jsonl.gz'));
   assert.throws(() => retainProducts(f.config, root, f.reader), /ENOENT/);
   write(root, 'run/inventory.jsonl.gz', Buffer.from('changed')); assert.throws(() => retainProducts(f.config, root, f.reader), /Incomplete/);
+});
+
+test('retention decodes and hashes the inventory once per invocation without changing products', t => {
+  const root = directory(t), f = terminalFixture(root), decoded = zlib.gunzipSync(f.inventory);
+  const gunzip = zlib.gunzipSync, hash = crypto.createHash; let decodes = 0, hashes = 0;
+  zlib.gunzipSync = (raw, ...args) => {
+    if (Buffer.isBuffer(raw) && raw.equals(f.inventory)) decodes++;
+    return gunzip(raw, ...args);
+  };
+  crypto.createHash = (algorithm, ...args) => {
+    const result = hash(algorithm, ...args), update = result.update;
+    result.update = function(raw, ...rest) {
+      if (algorithm === 'sha256' && Buffer.isBuffer(raw) && raw.equals(decoded)) hashes++;
+      return update.call(this, raw, ...rest);
+    }; return result;
+  }; syncBuiltinESMExports();
+  try {
+    const first = retainProducts(f.config, root, f.reader);
+    assert.equal(decodes, 1); assert.equal(hashes, 1);
+    assert.deepEqual(first['inventory.jsonl.gz'], f.inventory);
+    assert.deepEqual(retainProducts(f.config, root, f.reader), first);
+    assert.equal(decodes, 2); assert.equal(hashes, 2);
+  } finally { zlib.gunzipSync = gunzip; crypto.createHash = hash; syncBuiltinESMExports(); }
+});
+
+test('retention still rejects missing, invalid and changed decoded inventory identities', t => {
+  const root = directory(t), f = terminalFixture(root);
+  for (const mutate of [p => delete p.uncompressed_bytes, p => p.uncompressed_bytes = 0,
+    p => p.uncompressed_bytes = -1, p => p.uncompressed_bytes = 1.5,
+    p => p.uncompressed_bytes--, p => p.uncompressed_bytes++,
+    p => delete p.uncompressed_sha256, p => p.uncompressed_sha256 = '0'.repeat(64)]) {
+    const publication = structuredClone(f.publication); mutate(publication.inventory);
+    write(root, 'run/publication.json', jsonBytes(publication));
+    assert.throws(() => retainProducts(f.config, root, f.reader), /inventory|outputLength|larger than/);
+  }
+});
+
+test('explicit output inventories still authenticate a compressed inventory-named member', t => {
+  const root = directory(t), f = terminalFixture(root);
+  const publication = {...f.publication, outputs: {
+    facts: {path: 'facts.json', ...f.publication.facts},
+    inventory: {path: 'inventory.jsonl.gz', ...f.publication.inventory, uncompressed_sha256: '0'.repeat(64)}
+  }};
+  write(root, 'run/publication.json', jsonBytes(publication));
+  assert.throws(() => retainProducts(f.config, root, f.reader), /Decoded output differs/);
 });
 
 test('native preparation requires committed genuine SOURCE products and preserves immutable runtime/resource fields', t => {
@@ -247,8 +292,17 @@ test('native self-consistent target substitutions fail the independent immutable
       assets: Object.entries(products).map(([path, raw]) => ({path, bytes: raw.length, sha256: digest(raw)}))};
     for (const [name, raw] of Object.entries({...products, 'facts.json': facts, 'inventory.jsonl.gz': inventory, 'publication.json': jsonBytes(publication)})) write(root, 'run/' + name, raw);
     write(root, f.config.terminal, jsonBytes({...f.terminal, request_sha256: pin.sha256}));
+    return publication;
   }
-  candidate('target'); assert.ok(retainProducts({...f.config, request: pin}, root, r)['ledger-batch.json']);
+  const publication = candidate('target');
+  assert.ok(retainProducts({...f.config, request: pin}, root, r)['ledger-batch.json']);
+  const owners = publication.assets.find(row => row.path === 'owners-batch.json.gz');
+  owners.uncompressed_bytes = 2; owners.uncompressed_sha256 = digest(Buffer.from('{}'));
+  write(root, 'run/publication.json', jsonBytes(publication));
+  assert.ok(retainProducts({...f.config, request: pin}, root, r)['owners-batch.json.gz']);
+  owners.uncompressed_sha256 = '0'.repeat(64);
+  write(root, 'run/publication.json', jsonBytes(publication));
+  assert.throws(() => retainProducts({...f.config, request: pin}, root, r), /Decoded output differs/);
   candidate('foreign-native-target');
   assert.throws(() => retainProducts({...f.config, request: pin}, root, r), /immutable SOURCE handoff/);
 });
