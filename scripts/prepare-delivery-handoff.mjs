@@ -1171,9 +1171,11 @@ export function finalizeDelivery(config, reader) {
   // Finalization never emits a second copy of original role bodies.
   // Ordinary issue/PR guards separately authorize adoption into the repository.
   const restored = config.restored_read_roles;
-  if (restored) need(same(Object.keys(restored).sort(), ['commit', 'paths'])
-    && hex(restored.commit, 40) && unique(restored.paths) && restored.paths.every(safe)
+  if (restored) need((same(Object.keys(restored).sort(), ['commit'])
+      || same(Object.keys(restored).sort(), ['commit', 'paths']) && unique(restored.paths) && restored.paths.every(safe))
+    && hex(restored.commit, 40)
     && typeof reader.hasPath === 'function', 'Exact committed restored read-role inventory required');
+  const deriveRestorations = restored && !Object.hasOwn(restored, 'paths');
   const requested = new Set(restored?.paths ?? []), matched = new Set(), conflicts = [];
   const identity = (a, b) => a.mode === '100644' && a.mode === b.mode
     && (a.git_blob_oid ?? a.blob) === (b.git_blob_oid ?? b.blob)
@@ -1181,6 +1183,9 @@ export function finalizeDelivery(config, reader) {
   for (const pin of projection.paths.filter(p => !p.path.startsWith(config.new_prefix) || covered(p.path))) {
     try {
       const missing = typeof reader.hasPath === 'function' && !reader.hasPath(config.package_inputs.commit, pin.path);
+      // Snapshot-only intent derives its closed scope from this already
+      // authenticated projection, without a second author traversal.
+      if (missing && deriveRestorations) requested.add(pin.path);
       if (!missing && pin.roles.length === 1 && pin.roles[0] === 'source-target physical_reproduction') {
         // packageProjection authenticated the original commit/path/body. The
         // live accepted helper remains a separate unchanged filesystem input;
