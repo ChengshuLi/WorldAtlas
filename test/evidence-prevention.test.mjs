@@ -10,7 +10,7 @@ test('shared evidence execution/admission regressions run without provider crede
   });
   assert.equal(result.error, undefined);
   assert.equal(result.status, 0, result.stdout + result.stderr);
-  assert.match(result.stderr, /Ran 7 tests/);
+  assert.match(result.stderr, /Ran 8 tests/);
   assert.doesNotMatch(result.stderr, /skipped/);
 });
 
