@@ -5,6 +5,7 @@ import path from 'node:path';
 import assert from 'node:assert/strict';
 import {fileURLToPath} from 'node:url';
 import {gunzipSync} from 'node:zlib';
+import {repairComponentKey} from '../src/native-grid.js';
 import {repositoryReader, sha256} from './evidence-quality.mjs';
 import {loadOwnershipAssets} from '../src/ownership-assets.js';
 import {loadAdditiveNativePatch, effectivePrimitiveGeometries, footprintValueSha256,
@@ -39,8 +40,8 @@ export function validateDeliveryExpectations(value) {
     for (const member of cohort.members) {
       const representationHash = Object.hasOwn(member,'native_rows_sha256') ? 'native_rows_sha256' : 'geometry_sha256';
       exactKeys(member, ['component_id', 'target_id', 'disposition', representationHash], 'Expected member');
-      assert(text(member.component_id) && !components.has(member.component_id), 'Missing/duplicate expected member');
-      components.add(member.component_id);
+      assert(text(member.component_id) && !components.has(JSON.stringify([cohort.original_batch_id, member.component_id])), 'Missing/duplicate expected member');
+      components.add(JSON.stringify([cohort.original_batch_id, member.component_id]));
       assert(text(member.target_id) && ['assigned', 'zero-cell'].includes(member.disposition)
         && hash(member[representationHash]), 'Invalid expected target/disposition/geometry');
     }
@@ -77,10 +78,10 @@ export function verifySelectedDelivery({expectations, ledger, ledgerSha256, patc
   assert.equal(ledgerSha256, expectations.selected_ledger_sha256, 'Wrong selected ledger hash');
   assert.equal(patch.ledger_sha256, ledgerSha256, 'Patch ledger differs');
   verifyAdditiveLedgerSelection(ledger, features, patch);
-  const selected = new Map(), loaded = new Map();
+  const selected = new Map(), loaded = new Map(), covered = new Set();
   for (const row of ledger.rows) {
-    assert(!selected.has(row.component_id), 'Duplicate selected component');
-    selected.set(row.component_id, row);
+    assert(!selected.has(repairComponentKey(row)), 'Duplicate selected component');
+    selected.set(repairComponentKey(row), row);
   }
   for (const feature of features) {
     assert(text(feature.id) && !loaded.has(feature.id), 'Duplicate/missing loaded target');
@@ -89,7 +90,12 @@ export function verifySelectedDelivery({expectations, ledger, ledgerSha256, patc
   const cohorts = expectations.cohorts.map(cohort => ({
     original_batch_id: cohort.original_batch_id,
     members: cohort.members.map(member => {
-      const row = selected.get(member.component_id);
+      const authority = /^retained-authority-scope:([a-f0-9]{64})$/.exec(cohort.original_batch_id)?.[1];
+      const found = [...selected.values()].filter(row => row.component_id === member.component_id
+        && (!authority || row.authority_sha256 === authority));
+      assert.equal(found.length, 1, 'Missing or ambiguous selected member authority');
+      const row = found[0], key = repairComponentKey(row);
+      assert(!covered.has(key), 'Duplicate selected member coverage'); covered.add(key);
       assert(row, `Missing selected member: ${member.component_id}`);
       const nativeOnly = nativeOnlyComponent(row);
       for (const field of ['target_id', 'disposition', ...(nativeOnly ? [] : ['geometry_sha256'])])
@@ -98,7 +104,7 @@ export function verifySelectedDelivery({expectations, ledger, ledgerSha256, patc
       assert(target && target.pixelIndex === row.pixelIndex, `Missing/wrong loaded target: ${member.target_id}`);
       const components = target.additiveFootprint?.components;
       assert(Array.isArray(components), 'Expected selected V2 target components');
-      const matches = components.filter(component => component.component_id === member.component_id);
+      const matches = components.filter(component => repairComponentKey(component) === key);
       assert.equal(matches.length, 1, 'Expected exactly one loaded component');
       assert.deepEqual(matches[0], row, 'Loaded component differs from selected row');
       if (nativeOnly) {

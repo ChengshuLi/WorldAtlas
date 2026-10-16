@@ -8,6 +8,7 @@ import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {gunzipSync} from 'node:zlib';
 import {locate} from './delivery-handoff-advance.mjs';
+import {repairComponentKey, compareRepairComponents} from '../src/native-grid.js';
 import {scientificNativeSelection,originalNativeReference,validateReferenceMetadataHeader} from '../src/reference-metadata.js';
 import {prepareReferenceMetadataProjection,validateReferenceMetadataProjection} from './selected-reference-metadata.mjs';
 import {validatePackageInputs} from './package-inputs.mjs';
@@ -196,11 +197,11 @@ export function prepareEvidence(config, reader) {
     const before = selected(d.baseline_commit), after = selected(d.candidate_commit);
     validateDeliverySelectionTransition(before, after, reader);
     need(Array.isArray(before.rows) && Array.isArray(after.rows), 'Delivery base/rows differ');
-    const prior = new Map(before.rows.map(row => [row.component_id, row]));
-    const current = new Map(after.rows.map(row => [row.component_id, row]));
+    const prior = new Map(before.rows.map(row => [repairComponentKey(row), row]));
+    const current = new Map(after.rows.map(row => [repairComponentKey(row), row]));
     need(prior.size === before.rows.length && current.size === after.rows.length
       && [...prior].every(([id, row]) => current.has(id) && same(row, current.get(id))), 'Inherited delivery row changed');
-    const targets = [...new Set(after.rows.filter(row => !prior.has(row.component_id)).map(row => row.target_id))].sort();
+    const targets = [...new Set(after.rows.filter(row => !prior.has(repairComponentKey(row))).map(row => row.target_id))].sort();
     need(same(targets, [...d.subject_ids].sort()), 'Delivery subjects differ from actual added rows');
     const baseline = {version: 2, commit: d.baseline_commit, files: [], pins: {}, pin_files: {}};
     const baselineRoles = {...before, package_inputs: reader.pin(d.baseline_commit, '.github/package-inputs.json')};
@@ -227,12 +228,14 @@ export function prepareEvidence(config, reader) {
         && same(constructed.component_ids, constructed.ledger_rows.map(row => row.component_id))
         && hex(constructed.rule_sha256, 64), 'Complete original constructor rows required');
       for (const row of constructed.ledger_rows) {
-        const selected = current.get(row.component_id);
-        need(selected && !prior.has(row.component_id) && !boundComponents.has(row.component_id), 'Original constructor scope differs');
+        const matches = after.rows.filter(selected => selected.component_id === row.component_id && selected.rule_sha256 === constructed.rule_sha256);
+        need(matches.length === 1, 'Original constructor identity is missing or ambiguous');
+        const selected = matches[0], key = repairComponentKey(selected);
+        need(selected && !prior.has(key) && !boundComponents.has(key), 'Original constructor scope differs');
         const {authority_sha256, rule_sha256, ...literal} = selected;
         need(hex(authority_sha256, 64) && rule_sha256 === constructed.rule_sha256 && same(literal, row),
           'Original constructor row differs from actual added row');
-        boundComponents.add(row.component_id);
+        boundComponents.add(key);
       }
       const source = d.sources.filter(source => source.id === original.id);
       need(source.length === 1 && source[0].retention === 'restoration-only'
@@ -633,7 +636,6 @@ export function composeAuthorities(config, reader) {
       && same(priorPatch.effective_reference, envelope.effective_reference), 'Prior cumulative patch bindings differ');
     const entries = [...priorRegistry.entries], addedRows = [], candidates = [];
     const authorityIds = new Set(entries.map(entry => entry.authority_sha256));
-    const oldIds = new Set(priorLedger.rows.map(row => row.component_id));
     for (const original of authorities) {
       const constructed = reader.json(original.ledger), candidate = reader.json(original.native_patch);
       const binding = reader.json(original.source_authority), preimage = reader.json(original.rule_preimage);
@@ -668,13 +670,12 @@ export function composeAuthorities(config, reader) {
       }
       const added = constructed.ledger_rows.map(row => {
         need(row.representation === 'native-cells' && row.component_id === 'source-target:' + digest(jsonBytes({target_id: row.target_id,
-          evidence: binding.source_evidence.sha256})) && !oldIds.has(row.component_id)
+          evidence: binding.source_evidence.sha256}))
           && !Object.hasOwn(row, 'authority_sha256') && !Object.hasOwn(row, 'rule_sha256'), 'Foreign or duplicate modern component');
         const target = targets.get(row.target_id);
         need(target?.pixelIndex === row.pixelIndex && same(target.base_geometry, row.base_geometry)
           && target.source_receipt_sha256 === evidence.physical_evidence?.sha256 && row.source_receipt_sha256 === target.source_receipt_sha256,
         'Modern row changes the original source target/owner/receipt');
-        oldIds.add(row.component_id);
         return {...row, authority_sha256: entry.authority_sha256, rule_sha256: entry.rule_sha256};
       });
       need(added.length === targets.size, 'Modern constructor omits an original source target');
@@ -682,10 +683,10 @@ export function composeAuthorities(config, reader) {
       candidates.push({candidate, added});
     }
     const registry = {...priorRegistry, entries: entries.sort((a, b) => a.authority_sha256.localeCompare(b.authority_sha256))};
-    const rows = [...priorLedger.rows, ...addedRows].sort((a, b) => a.component_id.localeCompare(b.component_id));
+    const rows = [...priorLedger.rows, ...addedRows].sort(compareRepairComponents);
     const ledger = {...priorLedger, authority_registry_sha256: digest(jsonBytes(registry)), rows, scope_ids: rows.map(row => row.component_id)};
     compareVersionedRepairLedgers(priorLedger, ledger, {beforeRegistry: priorRegistry, afterRegistry: registry});
-    need(priorLedger.rows.every(row => same(row, rows.find(next => next.component_id === row.component_id))), 'Literal inherited row/exception changed');
+    need(priorLedger.rows.every(row => same(row, rows.find(next => repairComponentKey(next) === repairComponentKey(row)))), 'Literal inherited row/exception changed');
     const normalized = normaliseRetainedRepairLedger(ledger, registry), ledgerRaw = jsonBytes(ledger);
     const union = patches => {
       const byRow = new Map();
@@ -741,7 +742,7 @@ export function composeAuthorities(config, reader) {
     // Native outputs retain accepted handoff order. The existing composer uses
     // canonical component order. Preserve every raw row and the original pin;
     // only this in-memory view is ordered for its existing validator.
-    const rows = [...original.rows].sort((a, b) => a.component_id.localeCompare(b.component_id));
+    const rows = [...original.rows].sort(compareRepairComponents);
     return {...original, rows, scope_ids: rows.map(row => row.component_id)};
   });
   const ledger = composeRetainedLedgers(members, registry);

@@ -6,7 +6,7 @@ import {fileURLToPath} from 'node:url';
 import {execFileSync} from 'node:child_process';
 import {gunzipSync} from 'node:zlib';
 import {ImmutableReader, SelectedGeometrySources, NativeAssetImage, selectedBaseAssetAlias, selectedGeometrySourceAlias, selectedReferenceOwners, selectedNativeSourceMembership} from '../../../scripts/check-effective-geographic-regression.mjs';
-import {nativeOnlyComponent, deriveSourceTargetNativeDelta, nativePolygonIntervals, polygonParts, witnessCellEffects, validateWitnessGeometry} from '../../../src/native-grid.js';
+import {repairComponentKey, compareRepairComponents, nativeOnlyComponent, deriveSourceTargetNativeDelta, nativePolygonIntervals, polygonParts, witnessCellEffects, validateWitnessGeometry} from '../../../src/native-grid.js';
 import {unshuffleOwnershipBytes} from '../../../src/ownership-codec.js';
 import {scientificNativeSelection} from '../../../src/reference-metadata.js';
 const certificates=new WeakMap(), originalAuthorities=new WeakMap(), selectedAdditions=new WeakMap();
@@ -1532,18 +1532,20 @@ export function readRetainedRegistryAuthority(reader, entry, observationReader, 
 export function normaliseRetainedRepairLedger(ledger,registry) {
  const authorities=authorityRegistry(registry),legacy=ledger?.version===1&&ledger.kind==='native-additive-repair-ledger-v1';
  demand(legacy||ledger?.version===2&&ledger.kind==='native-additive-repair-ledger-v2'&&ledger.authority_registry_sha256===valueSha(registry),'Unsupported or unbound versioned repair ledger');
- demand(Array.isArray(ledger.scope_ids)&&Array.isArray(ledger.rows)&&ledger.scope_ids.length===ledger.rows.length&&new Set(ledger.scope_ids).size===ledger.rows.length,'Incomplete complete ledger scope');
+ demand(Array.isArray(ledger.scope_ids)&&Array.isArray(ledger.rows)&&ledger.scope_ids.length===ledger.rows.length,'Incomplete complete ledger scope');
  let legacyEntry;if(legacy){demand(hash(ledger.rule_sha256),'Missing original v1 rule');const matches=registry.entries.filter(e=>e.rule_sha256===ledger.rule_sha256);demand(matches.length===1,'Original v1 authority omitted or ambiguous');legacyEntry=matches[0];}
- const rows=new Map();let previous='';
+ const rows=new Map();let previous;
  for(let i=0;i<ledger.rows.length;i++){
-  const row=ledger.rows[i];demand(row.component_id===ledger.scope_ids[i]&&row.component_id>previous,'Foreign/duplicate/unordered component');previous=row.component_id;
+  const row=ledger.rows[i],identity=legacy?{...row,authority_sha256:legacyEntry.authority_sha256}:row;
+  demand(typeof row.component_id==='string'&&row.component_id&&row.component_id===ledger.scope_ids[i]
+   &&(!previous||compareRepairComponents(previous,identity)<0),'Foreign/duplicate/unordered component');previous=identity;
   demand(['assigned','zero-cell','already-resolved','rejected','awaiting-evidence'].includes(row.disposition),'Unknown original ledger disposition');
   if(!['assigned','zero-cell'].includes(row.disposition))continue;
   const entry=legacy?legacyEntry:authorities.get(row.authority_sha256);demand(entry&&(!Object.hasOwn(row,'rule_sha256')||row.rule_sha256===entry.rule_sha256),'Per-component original authority rebound');
-  if(nativeOnlyComponent({...row,rule_sha256:entry.rule_sha256,authority_sha256:entry.authority_sha256},valueSha)){rows.set(row.component_id,{...row,rule_sha256:entry.rule_sha256,authority_sha256:entry.authority_sha256});continue;}
+  if(nativeOnlyComponent({...row,rule_sha256:entry.rule_sha256,authority_sha256:entry.authority_sha256},valueSha)){rows.set(repairComponentKey({...row,authority_sha256:entry.authority_sha256}),{...row,rule_sha256:entry.rule_sha256,authority_sha256:entry.authority_sha256});continue;}
   demand(typeof row.target_id==='string'&&Number.isSafeInteger(row.pixelIndex)&&row.pixelIndex>0&&hash(row.base_geometry_sha256)&&hash(row.geometry_sha256)&&hash(row.source_receipt_sha256)&&valueSha(row.geometry)===row.geometry_sha256,'Missing complete original primitive identity');
   coordinateBounds(row.geometry);demand(Number.isSafeInteger(row.native_cells)&&(row.disposition==='assigned'?row.native_cells>0:row.native_cells===0),'False original native contribution');
-  rows.set(row.component_id,{...row,rule_sha256:entry.rule_sha256,authority_sha256:entry.authority_sha256});
+  rows.set(repairComponentKey({...row,authority_sha256:entry.authority_sha256}),{...row,rule_sha256:entry.rule_sha256,authority_sha256:entry.authority_sha256});
  }
  return {rows,authorities,registry_sha256:valueSha(registry)};
 }
@@ -1644,9 +1646,11 @@ export function requirePriorAdditiveConservation(snapshot,registry,ledger) {
  demand(prior&&selectedAdditions.get(prior)?.snapshot===snapshot,
   'Require actual privately consumed prior additive selection');
  const proof=compareVersionedRepairLedgers(prior.ledger,ledger,{beforeRegistry:prior.registry,afterRegistry:registry});
- const byId=new Map(ledger.rows.map(row=>[row.component_id,row]));
+ const byId=new Map(ledger.rows.map(row=>[repairComponentKey(row),row]));
+ const legacyAuthority=prior.ledger.version===1?prior.registry.entries.find(entry=>entry.rule_sha256===prior.ledger.rule_sha256).authority_sha256:null;
+ const priorKey=row=>repairComponentKey(legacyAuthority?{...row,authority_sha256:legacyAuthority}:row);
  const literal=row=>{if(prior.ledger.version!==1)return row;const {authority_sha256,rule_sha256,...body}=row;return body;};
- for(const row of prior.ledger.rows)demand(byId.has(row.component_id)&&same(literal(byId.get(row.component_id)),literal(row)),
+ for(const row of prior.ledger.rows)demand(byId.has(priorKey(row))&&same(literal(byId.get(priorKey(row))),literal(row)),
   'Previously selected complete row or exception changed');
  return {prior_components:proof.preserved_components,prior_authorities:proof.preserved_authorities};
 }
@@ -2010,11 +2014,12 @@ export function readSelectedAdditive(snapshot) {
  for(const proof of proofs){
   if(proof.original_ledger.parent_inventory!==undefined)demand(same(named.ledger.parent_inventory,proof.original_ledger.parent_inventory),'Selected ledger changes complete original inventory denominator');
   for(const original of proof.original_ledger.rows){
-   demand(!expectedScope.has(original.component_id),'Ambiguous repeated original authority component');expectedScope.set(original.component_id,{original,proof});
+   const key=repairComponentKey({...original,authority_sha256:named.ledger.version===1?undefined:proof.authority_sha256});
+   demand(!expectedScope.has(key),'Ambiguous repeated original authority component');expectedScope.set(key,{original,proof});
   }
  }
- demand(named.ledger.rows.length===expectedScope.size&&named.ledger.scope_ids.every(id=>expectedScope.has(id)),'Selected ledger omits/invents complete original native scope or exceptions');
- for(const row of named.ledger.rows){const {original,proof}=expectedScope.get(row.component_id);
+ demand(named.ledger.rows.length===expectedScope.size&&named.ledger.rows.every(row=>expectedScope.has(repairComponentKey(row))),'Selected ledger omits/invents complete original native scope or exceptions');
+ for(const row of named.ledger.rows){const {original,proof}=expectedScope.get(repairComponentKey(row));
   if(named.ledger.version===1)demand(same(row,original),'Selected original v1 row rebound');
   else{const {authority_sha256,rule_sha256,...literal}=row;demand(authority_sha256===proof.authority_sha256&&(rule_sha256===undefined||rule_sha256===proof.rule_sha256)&&same(literal,original),'Selected v2 row rebinds original full primitive/exception authority');}
  }

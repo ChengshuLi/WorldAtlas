@@ -2056,3 +2056,25 @@ test('selected-data role walk requires the exact new provider-adoption leaf and 
   }});assert.equal(await broken.run(),null,defect);
  }
 });
+
+
+test('selected expectations distinguish the same original component label across authority scopes',()=>{
+ const a='a'.repeat(64),b='b'.repeat(64),hash='c'.repeat(64),geometry='d'.repeat(64);
+ const row=authority=>({component_id:'original-shared-label',authority_sha256:authority,rule_sha256:hash,
+  target_id:'target',disposition:'assigned',native_cells:1,geometry_sha256:geometry});
+ const member={component_id:'original-shared-label',target_id:'target',disposition:'assigned',geometry_sha256:geometry};
+ const cohort=authority=>({original_batch_id:'retained-authority-scope:'+authority,component_ids:[member.component_id],members:[{...member}]});
+ const ledger={version:2,kind:'native-additive-repair-ledger-v2',rows:[row(a),row(b)]};
+ const expected={version:1,selected_ledger_sha256:hash,cumulative_native_cells:2,cohorts:[cohort(a),cohort(b)]};
+ assert.doesNotThrow(()=>validateSelectedExpectations(expected,ledger,hash));
+ for(const change of [
+  value=>{value.cohorts[1].original_batch_id='legacy-ambiguous-label';},
+  value=>{value.cohorts[1].original_batch_id='retained-authority-scope:'+'e'.repeat(64);},
+  value=>{value.cohorts[1].original_batch_id=value.cohorts[0].original_batch_id;}
+ ]){const value=structuredClone(expected);change(value);assert.throws(()=>validateSelectedExpectations(value,ledger,hash));}
+ const single={...expected,cumulative_native_cells:1,cohorts:[{...cohort(a),original_batch_id:'legacy-original'}]};
+ assert.doesNotThrow(()=>validateSelectedExpectations(single,{...ledger,rows:[row(a)]},hash));
+ const held={...row(a),component_id:'held',disposition:'rejected',native_cells:0};
+ assert.throws(()=>validateSelectedExpectations(expected,{...ledger,rows:[...ledger.rows,{...held,authority_sha256:b}]},hash,
+  {...ledger,rows:[...ledger.rows,held]}),/held\/rejected/);
+});

@@ -1,3 +1,4 @@
+import {repairComponentKey} from '../src/native-grid.js';
 import {FOCUSED_INTEGRATION_TESTS} from './run-integration-tests.mjs';
 
 // Only these coordination controls have an audited focused test inventory.
@@ -125,11 +126,12 @@ export function validateSelectedExpectations(expected, ledger, ledgerHash, previ
     'invalid reviewed expectations');
   needSelected(ledger?.version === 2 && ledger.kind === 'native-additive-repair-ledger-v2' &&
     Array.isArray(ledger.rows) && ledger.rows.length > 0, 'invalid selected ledger');
-  const actual = new Map(), allRows = new Map(), members = new Map(), batches = new Set();
+  const actual = new Map(), allRows = new Map(), byComponent = new Map(), members = new Map(), batches = new Set();
   let cells = 0;
   for (const row of ledger.rows) {
-    needSelected(text(row.component_id) && !allRows.has(row.component_id), 'duplicate/invalid ledger member');
-    allRows.set(row.component_id, row);
+    const id = repairComponentKey(row);
+    needSelected(text(row.component_id) && !allRows.has(id), 'duplicate/invalid ledger member');
+    allRows.set(id, row);
     if (!['assigned','zero-cell'].includes(row.disposition)) {
       needSelected(['awaiting-evidence','rejected'].includes(row.disposition) &&
         (row.native_cells === undefined || row.native_cells === 0) && hash(row.authority_sha256) && hash(row.rule_sha256),
@@ -137,7 +139,8 @@ export function validateSelectedExpectations(expected, ledger, ledgerHash, previ
       continue;
     }
     needSelected(Number.isSafeInteger(row.native_cells) && row.native_cells >= 0, 'invalid active native cells');
-    actual.set(row.component_id, row); cells += row.native_cells;
+    actual.set(id, row); cells += row.native_cells;
+    const matches = byComponent.get(row.component_id) ?? []; matches.push(row); byComponent.set(row.component_id, matches);
   }
   needSelected(Number.isSafeInteger(cells) && cells === expected.cumulative_native_cells, 'native cell expectation differs');
   for (const cohort of expected.cohorts) {
@@ -146,24 +149,28 @@ export function validateSelectedExpectations(expected, ledger, ledgerHash, previ
       Array.isArray(cohort.members) && same([...cohort.component_ids].sort(), cohort.members.map(m => m.component_id).sort()),
       'invalid complete cohort roster');
     batches.add(cohort.original_batch_id);
+    const authority = /^retained-authority-scope:([a-f0-9]{64})$/.exec(cohort.original_batch_id)?.[1];
     for (const member of cohort.members) {
-      const row = actual.get(member.component_id);
+      const matches = byComponent.get(member.component_id) ?? [];
+      const row = authority ? actual.get(repairComponentKey({authority_sha256:authority, component_id:member.component_id}))
+        : matches.length === 1 ? matches[0] : undefined;
+      const id = row && repairComponentKey(row);
       const nativeOnly=row?.representation==='native-cells', representationHash=nativeOnly?'native_rows_sha256':'geometry_sha256';
       const canonical=value=>Array.isArray(value)?value.map(canonical):value&&typeof value==='object'
         ?Object.fromEntries(Object.keys(value).sort().map(key=>[key,canonical(value[key])])):value;
       const actualHash=nativeOnly?sha256(Buffer.from(JSON.stringify(canonical(row.native_rows))+'\n')):row?.geometry_sha256;
       needSelected(keys(member, ['component_id','target_id','disposition',representationHash]) && row &&
-        !members.has(member.component_id) && text(member.target_id) &&
+        !members.has(id) && text(member.target_id) &&
         ['assigned','zero-cell'].includes(member.disposition) && hash(member[representationHash]) && actualHash===member[representationHash] &&
         ['target_id','disposition'].every(key => row[key] === member[key]), 'member differs from selected ledger');
-      members.set(member.component_id, member);
+      members.set(id, member);
     }
   }
   needSelected(members.size === actual.size && actual.size > 0, 'expectations omit selected members');
   if (previousLedger) {
     needSelected(Array.isArray(previousLedger.rows), 'missing previous ledger roster');
     for (const old of previousLedger.rows.filter(row => ['awaiting-evidence','rejected'].includes(row.disposition)))
-      needSelected(same(allRows.get(old.component_id), old), 'previous held/rejected row changed or disappeared');
+      needSelected(same(allRows.get(repairComponentKey(old)), old), 'previous held/rejected row changed or disappeared');
   }
   return expected;
 }
