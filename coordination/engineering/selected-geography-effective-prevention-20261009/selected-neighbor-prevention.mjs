@@ -1461,8 +1461,9 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
     'All original source, physical, query, witness and territorial limits remain retained.']};
   return result;
  }
- const ledgerRows=[...resolvedTargets.values()].map(target=>{
-  const native_rows=rowsByOwner.get(target.pixelIndex)??[];demand(native_rows.length>0,'Zero-cell source-target repair');
+ demand(rowsByOwner.size>0,'Empty source-target native patch');
+ const ledgerRows=[...resolvedTargets.values()].filter(target=>rowsByOwner.has(target.pixelIndex)).map(target=>{
+  const native_rows=rowsByOwner.get(target.pixelIndex);
   let west=262166,east=0;for(const row of native_rows)for(const run of row.runs){west=Math.min(west,run[0]);east=Math.max(east,run[1]-1);}
   const native_bounds=[(west+.5)/262166*360-180,latitudes[native_rows.at(-1).y],
    (east+.5)/262166*360-180,latitudes[native_rows[0].y]];
@@ -1533,18 +1534,20 @@ export function verifyCompletedSourceTargetNativeAuthority({constructed,binding,
     &&same(prior.base_geometry,target.base_geometry)),'Conflicting original source target/family/receipt');
   targets.set(id,target);
  }
+ const size=evidence.native_contract.size,candidateRows=mergeCompletedNativePatches([candidate],size);
+ const requestedOwners=new Set(candidateRows.flatMap(row=>row.runs.map(run=>run[2])));
+ const requestedTargets=new Map([...targets].filter(([,target])=>requestedOwners.has(target.pixelIndex)));
  for(const row of constructed.ledger_rows){
   demand(row.representation==='native-cells'
    &&row.component_id==='source-target:'+valueSha({target_id:row.target_id,evidence:binding.source_evidence.sha256})
    &&!Object.hasOwn(row,'authority_sha256')&&!Object.hasOwn(row,'rule_sha256'),'Foreign or duplicate modern component');
-  const target=targets.get(row.target_id);
+  const target=requestedTargets.get(row.target_id);
   demand(target?.pixelIndex===row.pixelIndex&&same(target.base_geometry,row.base_geometry)
    &&target.source_receipt_sha256===evidence.physical_evidence?.sha256
    &&row.source_receipt_sha256===target.source_receipt_sha256,'Modern row changes the original source target/owner/receipt');
  }
- demand(constructed.ledger_rows.length===targets.size,'Modern constructor omits an original source target');
- const size=evidence.native_contract.size;
- demand(same(mergeCompletedNativePatches([candidate],size),
+ demand(constructed.ledger_rows.length===requestedTargets.size,'Modern constructor omits a requested source target');
+ demand(same(candidateRows,
   mergeCompletedNativePatches(constructed.ledger_rows.map(row=>({rows:row.native_rows})),size)),
  'Modern ledger intervals differ from original patch');
  return {source_scope_ids:constructed.component_ids,
