@@ -63,14 +63,8 @@ export async function acquireAcceptedCheckpoint({api, repo, locator, token, reta
   need(acceptedCommit.sha === receipt.merge_commit && testedCommit.sha === receipt.tested_candidate &&
     acceptedCommit.tree?.sha === source.tree && testedCommit.tree?.sha === source.tree,
     'Accepted checkpoint tree differs from actual merge or tested candidate');
-  let report;
-  try {
-    report = await loadGeographicReport({api, repo, runId: source.run_id, artifactName: source.artifact_name,
-      expectedHash: source.report_sha256, source, token, retainedArchive, fetchImpl});
-  } catch (error) {
-    if (error.geographyUnavailable) return unavailable(error.message);
-    throw error;
-  }
+  const report = await loadGeographicReport({api, repo, runId: source.run_id, artifactName: source.artifact_name,
+    expectedHash: source.report_sha256, source, token, retainedArchive, fetchImpl});
   checkGeographicReport(report, source.baseline, source.candidate_commit);
   if (!report.checkpoint) return unavailable('Accepted legacy report has no complete checkpoint products');
   const artifact = geographicReportProducts(report);

@@ -273,7 +273,8 @@ graphs are retained original evidence, not replayed to compare unchanged outputs
 The collector reads only direct routing metadata and authenticates selected
 outputs by their immutable Git descriptors; scientific leaf bodies stay opaque.
 It retains at most 64 MiB of raw routing bodies with eviction. The 32 MiB member,
-4096-descriptor, per-operation and 25-minute hosted-job bounds remain unchanged.
+4096-descriptor and per-operation bounds remain unchanged. The geography job
+uses the hosting provider's default execution limit.
 Owned process-group cleanup remains. Cumulative I/O, unique planned bytes and
 live-cache peaks are reported separately; this is not a process-RSS guarantee.
 One exact baseline-to-candidate tree delta lets unchanged candidate paths reuse

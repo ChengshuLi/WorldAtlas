@@ -84,7 +84,7 @@ elif sys.argv[1] == 'wrapper':
         raise ValueError('Controlled wrapper path failed: ' + result.stderr + (output.read_text() if output.exists() else ''))
     raw = output.read_bytes()
     digest = hashlib.sha256(raw).hexdigest()
-    if (repo / 'trusted-job-output.txt').read_text() != 'report_sha256=' + digest + '\n':
+    if (repo / 'trusted-job-output.txt').read_text() != 'report_sha256=' + digest + '\nreport_bytes=' + str(len(raw)) + '\n':
         raise ValueError('Trusted step output does not bind exact report bytes')
     print(raw.decode(), end='')
 elif sys.argv[1] == 'validate':

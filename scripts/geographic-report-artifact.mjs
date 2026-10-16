@@ -38,35 +38,6 @@ export function validateGeographyProof(value) {
   return value;
 }
 
-export function readGeographyJobReceipt(raw, artifactName) {
-  need(Buffer.isBuffer(raw) && raw.length > 0 &&
-    (/^(?:proposed-geography-[1-9]\d*|geography-[-a-zA-Z0-9]{16,100})-[1-9]\d*$/).test(artifactName ?? ''), 'Invalid bounded geography job log');
-  const lines = raw.toString('utf8').split(/\r?\n/).map(line => line.replace(/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d\.\d+Z /, ''));
-  const receipts = [];
-  for (const line of lines) {
-    if (!line.startsWith('{')) continue;
-    let value; try { value = JSON.parse(line); } catch { continue; }
-    if (Object.hasOwn(value, 'report_sha256') || Object.hasOwn(value, 'report_bytes')) receipts.push(value);
-  }
-  const uploadLines = lines.filter(line => /^Artifact (?:proposed-geography-|geography-)/.test(line) && line.includes('has been successfully uploaded!'));
-  const uploads = uploadLines.map(line => /^Artifact ((?:proposed-geography-([1-9]\d*)|geography-[-a-zA-Z0-9]{16,100})-([1-9]\d*)) has been successfully uploaded! Final size is ([1-9]\d*) bytes\. Artifact ID is ([1-9]\d*)$/.exec(line)).filter(Boolean);
-  const digests = lines.map(line => /^SHA256 digest of uploaded artifact zip is ([a-f0-9]{64})$/.exec(line)).filter(Boolean);
-  need(receipts.length === 1 && uploads.length === 1 && uploadLines.length === 1 && digests.length === 1 &&
-    uploads[0][1] === artifactName &&
-    hash(receipts[0].report_sha256) && positive(receipts[0].report_bytes),
-    'Missing, ambiguous or malformed original geographic job receipt');
-  const result = {artifact_name: uploads[0][1], artifact_id: Number(uploads[0][5]),
-    artifact_bytes: Number(uploads[0][4]), artifact_digest: digests[0][1],
-    report_sha256: receipts[0].report_sha256, report_bytes: receipts[0].report_bytes};
-  need(positive(result.artifact_id) && positive(result.artifact_bytes),
-    'Invalid original geographic artifact receipt');
-  if (Object.hasOwn(receipts[0], 'candidate_commit')) {
-    need(commit(receipts[0].candidate_commit), 'Invalid geographic candidate receipt');
-    result.candidate_commit = receipts[0].candidate_commit;
-  }
-  return result;
-}
-
 export const CHECKPOINT_MEMBERS = Object.freeze([
   'derived-certificate.json.gz', 'derived-facts.json', 'derived-publication.json',
   'checkpoint-routes.json'
@@ -293,82 +264,58 @@ export async function validateGeographyOrigin(options) {
 }
 
 export async function loadGeographicReport({api, repo, runId, artifactName, expectedHash, source, fresh, retainedArchive, token, fetchImpl = fetch, onRequest = () => {}}) {
+  need(/^[-\w.]+\/[-\w.]+$/.test(repo ?? '') && /^[1-9]\d*$/.test(String(runId)) &&
+    hash(expectedHash) && token && (source || fresh), 'Missing trusted geographic artifact outputs');
   if (fresh) {
     const originAttempt = Number(artifactName?.split('-').at(-1));
-    need(!source && positive(Number(runId)) && positive(fresh.run_attempt) &&
+    need(!source && positive(fresh.run_attempt) && positive(fresh.artifact_id) &&
+      positive(fresh.report_bytes) && hash(fresh.artifact_digest) &&
       [fresh.head, fresh.baseline, fresh.candidate_commit, fresh.workflow_head].every(commit) &&
       /^[-a-zA-Z0-9]{16,100}$/.test(fresh.request_id ?? '') &&
       positive(originAttempt) && originAttempt <= fresh.run_attempt &&
-      artifactName === `geography-${fresh.request_id}-${originAttempt}`, 'Invalid fresh queue geography identity');
+      artifactName === `geography-${fresh.request_id}-${originAttempt}`, 'Invalid fresh queue geography identity or native upload outputs');
     const identity = {run_id: Number(runId), run_attempt: originAttempt, head: fresh.head,
       baseline: fresh.baseline, candidate_commit: fresh.candidate_commit,
       workflow_path: QUEUE_WORKFLOW_PATH, event: 'workflow_dispatch', workflow_head: fresh.workflow_head};
     const {job, run} = await readGeographyOriginJob({api, repo, source: identity});
     need(run.head_branch === 'main', 'Fresh queue geography requires an authenticated main producer');
-    const client = typeof api.jobLogRedirect === 'function' ? api : githubAPI(token, {fetchImpl, onRequest});
-    const response = await client.jobLogRedirect(`/repos/${repo}/actions/jobs/${job.id}/logs`);
-    const receipt = readGeographyJobReceipt(await downloadRedirect(response, fetchImpl), artifactName);
-    need(receipt.report_sha256 === expectedHash, 'Fresh geographic job report differs from trusted output');
     const candidate = await api(`/repos/${repo}/git/commits/${fresh.candidate_commit}`);
     need(candidate.sha === fresh.candidate_commit && commit(candidate.tree?.sha), 'Fresh geographic candidate tree unavailable');
-    source = validateGeographyProof({...identity, tree: candidate.tree.sha, job_id: job.id, ...receipt});
-  }
-  if (source) {
+    source = {...identity, tree: candidate.tree.sha, job_id: job.id, artifact_name: artifactName,
+      artifact_id: fresh.artifact_id, artifact_digest: fresh.artifact_digest,
+      report_sha256: expectedHash, report_bytes: fresh.report_bytes};
+  } else {
     validateGeographyProof(source);
     need(Number(runId) === source.run_id && artifactName === source.artifact_name && expectedHash === source.report_sha256,
       'Original geographic artifact outputs changed');
   }
-  need(/^[-\w.]+\/[-\w.]+$/.test(repo ?? '') && /^[1-9]\d*$/.test(String(runId)) &&
-    (source || /^geography-[-a-zA-Z0-9]{16,100}-[1-9]\d*$/.test(artifactName ?? '')) &&
-    /^[a-f0-9]{64}$/.test(expectedHash ?? '') && token, 'Missing trusted geographic artifact outputs');
-  const matches = []; let total = 0;
-  for (let page = 1; page <= 100; page++) {
-    const result = await api(`/repos/${repo}/actions/runs/${runId}/artifacts?per_page=100&page=${page}`);
-    need(Array.isArray(result.artifacts) && Number.isSafeInteger(result.total_count) && result.total_count <= 10000,
-      'Incomplete geographic artifact inventory');
-    total += result.artifacts.length;
-    matches.push(...result.artifacts.filter(row => row.name === artifactName));
-    if (total === result.total_count) break;
-    need(result.artifacts.length === 100 && page < 100 && total < result.total_count,
-      'Incomplete geographic artifact inventory');
-  }
-  need(matches.length <= 1, 'Duplicate geographic artifact');
-  if (source && matches.length) need(matches[0].id === source.artifact_id && matches[0].size_in_bytes === source.artifact_bytes &&
-    matches[0].digest === `sha256:${source.artifact_digest}` && matches[0].workflow_run?.id === source.run_id &&
-    matches[0].workflow_run?.head_sha === (source.workflow_head ?? source.head), 'Original geographic artifact identity changed');
-  const unavailable = !matches.length || matches[0].expired;
-  if (unavailable) {
-    if (!source || typeof retainedArchive !== 'function') {
-      const error = Error('Missing or expired geographic artifact; no exact retained copy supplied');
-      error.geographyUnavailable = true; throw error;
+  let bytes, origin = 'actions';
+  // Historical callers authenticate the original acceptance/run/job first.
+  // An absent optional copy may use remote transport; malformed materialized
+  // bytes and read failures are never treated as absence.
+  if (!fresh && typeof retainedArchive === 'function') {
+    bytes = await retainedArchive(source.artifact_bytes);
+    if (bytes != null) {
+      need(Buffer.isBuffer(bytes) && bytes.length === source.artifact_bytes && reportHash(bytes) === source.artifact_digest,
+        'Retained geographic archive differs from accepted artifact digest');
+      origin = 'retained-exact';
     }
-    // A retained location is only a hint. The accepted original digest remains
-    // authority, including when Actions has deleted the original after expiry.
-
-    const bytes = await retainedArchive(source.artifact_bytes);
-    need(Buffer.isBuffer(bytes) && bytes.length === source.artifact_bytes && reportHash(bytes) === source.artifact_digest,
-      'Retained geographic archive differs from accepted artifact digest');
-    const report = readReportArchive(bytes, expectedHash, source.report_bytes);
-    reportProducts.set(report, {...reportProducts.get(report), source, archive_bytes: bytes, archive_origin: 'retained-exact'});
-    if (fresh) preparedQueueSources.set(report, Object.freeze({...source}));
-    return report;
   }
-  need(Number.isSafeInteger(matches[0].id) && matches[0].id > 0 &&
-    positive(matches[0].size_in_bytes),
-    'Missing, duplicate, expired or oversized geographic artifact');
-
-  // The initial fixed API host receives the token. Redirect delivery receives
-  // no credentials, and its signed URL is never included in errors or logs.
-  const client = typeof api.artifactRedirect === 'function' ? api : githubAPI(token, {fetchImpl, onRequest});
-  const response = await client.artifactRedirect(`/repos/${repo}/actions/artifacts/${matches[0].id}/zip`);
-
-  const bytes = await downloadRedirect(response, fetchImpl, matches[0].size_in_bytes);
-  if (source) need(bytes.length === source.artifact_bytes && reportHash(bytes) === source.artifact_digest,
-    'Original geographic archive differs from trusted upload receipt');
-  const report = readReportArchive(bytes, expectedHash, source?.report_bytes);
-  // Only fresh queue loading authenticates this main-run producer and its job
-  // receipt here. Supplied/historical custody cannot attest queue preparation.
-  reportProducts.set(report, {...reportProducts.get(report), source: source ?? null, archive_bytes: bytes, archive_origin: 'actions'});
+  if (bytes == null) {
+    // The fixed API host receives credentials; exact-ID signed delivery does
+    // not. Permission, expiry and transport errors propagate without guessing
+    // whether a missing remote object means access was denied.
+    const client = typeof api.artifactRedirect === 'function' ? api : githubAPI(token, {fetchImpl, onRequest});
+    const response = await client.artifactRedirect(`/repos/${repo}/actions/artifacts/${source.artifact_id}/zip`);
+    bytes = await downloadRedirect(response, fetchImpl, source.artifact_bytes);
+    need((fresh || bytes.length === source.artifact_bytes) && reportHash(bytes) === source.artifact_digest,
+      'Original geographic archive differs from trusted upload identity');
+  }
+  // The native upload digest authenticates the complete newly downloaded ZIP;
+  // its observed byte length is then retained literally in original custody.
+  if (fresh) source = validateGeographyProof({...source, artifact_bytes: bytes.length});
+  const report = readReportArchive(bytes, expectedHash, source.report_bytes);
+  reportProducts.set(report, {...reportProducts.get(report), source, archive_bytes: bytes, archive_origin: origin});
   if (fresh) preparedQueueSources.set(report, Object.freeze({...source}));
   return report;
 }
