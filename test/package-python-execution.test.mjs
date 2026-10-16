@@ -28,7 +28,9 @@ test('real script, inline code and import probe share isolated startup and insta
  await fs.writeFile(script,'import science,sibling,sys,json\nprint(json.dumps([science.value,sibling.value,sys.argv[1:],sys.stdin.read(),__file__]))\n');
  assert.deepEqual(JSON.parse(f.run(packagePythonArgs([script,'arg']))),['installed','authored',['arg'],'payload',script]);
  assert.deepEqual(JSON.parse(f.run(packagePythonArgs(['-c','import science,sys,json;print(json.dumps([science.value,sys.argv[1:],sys.stdin.read()]))','arg']))),['installed',['arg'],'payload']);
- assert.equal(JSON.parse(f.run(packagePythonProbeArgs([{name:'science',version:'1.0'}]))).imports[0].actual,'1.0');
+ const probe=JSON.parse(f.run(packagePythonProbeArgs([{name:'science',version:'1.0'},{name:'absent_module',version:'1'}])));
+ assert.equal(probe.imports[0].actual,'1.0');assert.match(probe.imports[1].error,/absent_module/);
+ assert.equal(probe.executable,f.python);assert.match(probe.version,/^3\./);
  await assert.rejects(fs.stat(f.marker),{code:'ENOENT'});
  f.run(['-c','pass']);assert.equal(await fs.readFile(f.marker,'utf8'),'executed');
 });

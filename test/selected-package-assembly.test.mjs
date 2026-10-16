@@ -204,7 +204,7 @@ function sourceFixture(f,{author=true}={}){
   const write=(name,raw)=>{fs.mkdirSync(path.dirname(path.join(f.root,name)),{recursive:true});fs.writeFileSync(path.join(f.root,name),typeof raw==='string'?raw:JSON.stringify(raw));};
   const git=(...args)=>execFileSync('git',['-C',f.root,...args],{encoding:'utf8'}).trim();
   const commit=()=>{git('add','.');git('-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-qm','source');};
-  const definition={version:1,inputs:['.github/package-inputs.json','data/ownership-selection.json','scripts/builder.mjs','package-lock.json','scripts/package-output-artifact.mjs','scripts/package-node-runtime.mjs'],
+  const definition={version:1,inputs:['.github/package-inputs.json','data/ownership-selection.json','scripts/builder.mjs','package-lock.json','scripts/package-output-artifact.mjs'],
     optional_inputs:[],verification_paths:[],generated_outputs:['dist/']};
   const selection={version:1,additive_release:{path:'coordination/engineering/original/release.json'}};
   write('.github/package-inputs.json',definition);write('data/ownership-selection.json',selection);
@@ -212,7 +212,7 @@ function sourceFixture(f,{author=true}={}){
   write('.github/workflows/worker-merge.yml','actual final-worker build invocation');
   write('scripts/assemble-selected-package.mjs','// Synthetic current entry point for private admission controls.');
   write('scripts/builder.mjs','actual consumed builder');write('package-lock.json','{}');
-  write('scripts/package-output-artifact.mjs','capture writer');write('scripts/package-node-runtime.mjs','runtime inventory');
+  write('scripts/package-output-artifact.mjs','capture writer');
   git('init','-q');commit();
   const snapshot=()=>({head:git('rev-parse','HEAD'),tree:git('rev-parse','HEAD^{tree}'),
     definition:JSON.parse(fs.readFileSync(path.join(f.root,'.github/package-inputs.json'))),
@@ -273,7 +273,7 @@ for(const queueOnly of [false,true])test('private assembly admission uses actual
     s.write('.github/package-inputs.json',declaration);
     if(name.endsWith('.mjs'))fs.unlinkSync(path.join(f.root,name));s.commit();
   }
-  for(const name of ['scripts/builder.mjs','package-lock.json','scripts/package-output-artifact.mjs','scripts/package-node-runtime.mjs',...(!queueOnly?['.github/workflows/merge-integration-checks.yml']:[]),'.github/workflows/worker-merge.yml']){
+  for(const name of ['scripts/builder.mjs','package-lock.json','scripts/package-output-artifact.mjs',...(!queueOnly?['.github/workflows/merge-integration-checks.yml']:[]),'.github/workflows/worker-merge.yml']){
     const old=fs.readFileSync(path.join(f.root,name),'utf8');s.write(name,'changed');s.commit();
     assert.throws(()=>issue(token),/input changed|producer workflow required/,name);
     s.write(name,old);s.commit();
@@ -319,7 +319,7 @@ test('original discovery ignores observer trees but refuses changed build inputs
   for(const name of ['test/incidental.test.mjs','scripts/observer.mjs','.github/workflows/unrelated.yml']){
     f.s.write(name,'new observer');f.s.commit();assert.equal((await discover()).origin.head,f.sourceHead,name);
   }
-  for(const name of ['scripts/builder.mjs','package-lock.json','scripts/package-output-artifact.mjs','scripts/package-node-runtime.mjs','.github/workflows/merge-integration-checks.yml','.github/workflows/worker-merge.yml']){
+  for(const name of ['scripts/builder.mjs','package-lock.json','scripts/package-output-artifact.mjs','.github/workflows/merge-integration-checks.yml','.github/workflows/worker-merge.yml']){
     const old=fs.readFileSync(path.join(f.root,name),'utf8');f.s.write(name,'changed');f.s.commit();assert.equal(await discover(),null,name);
     f.s.write(name,old);f.s.commit();
   }
@@ -727,7 +727,6 @@ test('shared selected-input admission covers actual builders and refuses undecla
     const actual=inspectPackageExecutionInputs(root,definition,kind);
     assert.deepEqual(actual.errors,[],'Actual '+kind+' preflight must include its complete current import closure');
     assert(!actual.files.includes('scripts/package-output-artifact.mjs'));
-    assert(!actual.files.includes('scripts/package-node-runtime.mjs'));
     for(const name of actual.files)files.add(name);
   }
   const fixture=fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(),'atlas-output-role-closure-')));

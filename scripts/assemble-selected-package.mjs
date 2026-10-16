@@ -14,10 +14,9 @@ import {integrationTree} from './integration-profile.mjs';
 import {loadPackageInputs, readPackageInputs, containsPackagePath} from './package-inputs.mjs';
 import {inspectPackageNodeRuntime, verifyPackageDependencies} from './package-build.mjs';
 import {committedPackageInputs, committedPackageProducer, PACKAGE_PRODUCER_WORKFLOWS, PACKAGE_PRODUCER_KIND, packageBuildConfiguration,
-  validatePackageOutputManifest, admitPackageInputTransition, admitPackageOutputTransition, inertSelectedPackageInput, streamedPackageFile, installedPackageDifferences, resolvePackagePythonExecutable} from './package-output-artifact.mjs';
+  validatePackageOutputManifest, admitPackageInputTransition, admitPackageOutputTransition, inertSelectedPackageInput, streamedPackageFile, resolvePackagePythonExecutable} from './package-output-artifact.mjs';
 import {authenticateOriginalPackageOutput, readOriginalPackageInventory, requireOriginalPackageOutput, issuePackageAssemblyExecution, requirePackageAssemblyExecution}
   from '../coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs';
-import {installedNodeIdentity} from './package-node-runtime.mjs';
 
 const need=(ok,message)=>{if(!ok)throw Error(message);};
 const hash=raw=>createHash('sha256').update(raw).digest('hex');
@@ -247,30 +246,12 @@ export async function assembleSelectedPackage({api,repo,expectedHead,originalRun
     need(same(streamedPackageFile(root,extractorName),extractor)&&same(resolvePackagePythonExecutable(python.sha256),python),'Package extraction execution changed');
     const manifestRaw=fs.readFileSync(path.join(originalRoot,'.cache/package-output-manifest.json')),manifest=validatePackageOutputManifest(JSON.parse(manifestRaw));
     for(const key of ['head','tree','definition','files','producer','selection'])need(same(manifest.source[key],found.source[key]),'Retained manifest differs from original immutable source: '+key);
-    need(manifest.runtime.installed?.version===2,
-      'Version 2 original installed-byte evidence required; legacy aggregate evidence requires a full build');
     const original=await authenticateOriginalPackageOutput({api,repo,origin:found.origin,root:originalRoot,manifestRaw});
-    // Only JavaScript dependencies execute during current-product consumption.
-    // Original GIS runtime evidence remains literal in the original manifest;
-    // assembly does not import or claim to reexecute those scientific packages.
-    const installed={version:2,...installedNodeIdentity(root),python:null};
-    const differences=installedPackageDifferences({...manifest.runtime.installed,python:null},installed);
-    const recordAndRequireRuntime=()=>{
-      fs.writeFileSync(path.join(root,'.cache/package-runtime-comparison.json'),JSON.stringify({version:2,
-        original_manifest_sha256:hash(manifestRaw),compared_components:['node','dependencies'],current:installed,extractor:{python,source:extractor,startup:['-I','-S','-B']},differences})+'\n',{flag:'wx'});
-      need(differences.length===0,'Original runtime incompatibility: '+JSON.stringify(differences.map(row=>
-        ({component:row.component,...(row.changed_components?{changed_components:row.changed_components}:{}),...(row.changed_files?{changed_files:row.changed_files.slice(0,10),changed_file_count:row.changed_files.length}: {})}))));
-    };
-    if(differences.length)recordAndRequireRuntime();
+    // Admit the current locked installation for the computation we actually run.
+    // Original runtime metadata stays in the retained artifact as history.
     const runtime=inspectPackageNodeRuntime(root);
-    if(runtime.errors.length){differences.push({component:'runtime.preflight',errors:runtime.errors});recordAndRequireRuntime();}
-    const actualRuntime={node:process.version,platform:process.platform,arch:process.arch,
-      versions:process.versions,dependencies:runtime.package_lock_sha256};
-    for(const [component,value] of Object.entries(actualRuntime))if(!same(manifest.runtime[component],value))
-      differences.push({component:'runtime.'+component,original:manifest.runtime[component],current:value});
-    if(!same(manifest.configuration,packageBuildConfiguration()))differences.push({component:'configuration',
-      original:manifest.configuration,current:packageBuildConfiguration()});
-    recordAndRequireRuntime();
+    need(runtime.errors.length===0,'Current package runtime admission failed: '+JSON.stringify(runtime.errors));
+    need(same(manifest.configuration,packageBuildConfiguration()),'Original build configuration differs');
     const stage=path.join(scratch,'assembly');fs.mkdirSync(stage);
     const execution=issuePackageAssemblyExecution({original,source:root,stage,executingRoot:root,
       acceptedInputs:current.accepted_selected_inputs});
@@ -278,7 +259,7 @@ export async function assembleSelectedPackage({api,repo,expectedHead,originalRun
     requireAssemblyWithoutReferenceMetadata(manifest.source.selection);
     const {atlas,selectedGrid,geographicRelease,features}=readOriginalPackageGeography(original);
     // The authenticated execution closure includes this literal deferred import.
-    // Installed bytes are admitted above; no dependency sees API credentials.
+    // Current locked dependencies are admitted above; no dependency sees API credentials.
     need(!process.env.GH_TOKEN&&!process.env.GITHUB_TOKEN,'Current additive consumption must be credential-free');
     const {prepareCurrentSelectedAdditive}=await import('./package-current-additive.mjs');
     const publication=await prepareCurrentSelectedAdditive({root,selectedGrid,geographicRelease,features});
@@ -311,7 +292,7 @@ export async function assembleSelectedPackage({api,repo,expectedHead,originalRun
     for(const pin of manifest.output.files)if(!mutable.has(pin.path))need(same(streamedPackageFile(stage,pin.path),pin),'Invariant output changed during assembly');
     requirePackageAssemblyExecution(execution);
     const assembly={kind:'retained-original-output-plus-current-additive',origin:found.origin,
-      original_manifest_sha256:hash(manifestRaw),runtime_identity_version:2,transition,current_execution:execution,
+      original_manifest_sha256:hash(manifestRaw),transition,current_execution:execution,
       original_base_context_retained:true,base_restoration_invoked:false,invariant_build_invoked:false,
       current_selected_inputs:consumed,elapsed_seconds:(performance.now()-started)/1000};
     const receipt={version:1,kind:'cloudflare',input_definition_sha256:current.input_definition_sha256,assembly,
