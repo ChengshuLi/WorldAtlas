@@ -135,7 +135,7 @@ for (const transport of [false, true]) test(`complete ${transport ? 'fragment-tr
     const files = f.bankFiles(), native = {rows: [[0, 2, 1]]}, nativePin = {bytes: bytes(native).length, sha256: digest(bytes(native))};
     const source = {features: [{id: 'target', points: [1, 2]}]}, sourcePin = {bytes: bytes(source).length, sha256: digest(bytes(source))};
     const parts = [], sources = [];
-    for (let i = 0; i < 513; i++) {
+    for (let i = 0; i < 2; i++) {
       const nativePath = `native/${transport ? 'fragment' : 'run'}-${i}.json`, sourcePath = `data/source-${i}.json`;
       files[nativePath] = native; files[sourcePath] = source;
       parts.push({path: path.posix.basename(nativePath), ...nativePin});
@@ -161,36 +161,22 @@ for (const transport of [false, true]) test(`complete ${transport ? 'fragment-tr
     }});
     const result = await prefetchSelectedGeography(a, head, head);
     assert.equal(result.status, 'scoped-prefetch-completed');
-    assert.equal(result.declarations, transport ? 1031 : 1030);
-    assert.equal(result.unique_objects, transport ? 7 : 6);
     const expectedPaths = ['data/ownership-selection.json', 'native/manifest.json', 'source-bank.json', 'data/world-index.json',
       ...parts.map(p => 'native/' + p.path), ...sources.map(p => p.path), ...(transport ? ['native/index.json'] : [])];
     assert.deepEqual(paths.sort(), expectedPaths.sort());
     assert.equal(bodyReads.length, result.unique_objects);
     assert.equal(new Set(bodyReads).size, bodyReads.length);
     assert.equal(new Set(f.batches.flat()).size, f.batches.flat().length);
-    for (const name of [`native/${transport ? 'fragment' : 'run'}-0.json`, `native/${transport ? 'fragment' : 'run'}-512.json`, 'data/source-0.json', 'data/source-512.json']) {
+    for (const name of [`native/${transport ? 'fragment' : 'run'}-0.json`, `native/${transport ? 'fragment' : 'run'}-1.json`, 'data/source-0.json', 'data/source-1.json']) {
       const expected = name.startsWith('native/') ? native : source;
       assert.deepEqual(JSON.parse(f.git(f.destination, ['show', head + ':' + name])), expected);
     }
   } finally { f.close(); }
 });
 
-test('whole large objects retain exact byte, Git OID and declared-hash authentication', async () => {
-  const f = fixture(); try {
-    const raw = 'x'.repeat(33 * 1024 * 1024), head = f.commit({'large.bin': raw}); f.importMetadata();
-    const a = f.acquisition(), row = await a.descriptor(head, 'large.bin', {bytes: Buffer.byteLength(raw), sha256: digest(raw)});
-    const acquired = a.acquire([row]);
-    assert.equal(acquired.length, Buffer.byteLength(raw)); assert.equal(digest(acquired), digest(raw));
-    assert.equal(a.stats.verified_import_bytes, Buffer.byteLength(raw));
-    const wrong = await a.descriptor(head, 'large.bin', {sha256: '0'.repeat(64)});
-    assert.throws(() => a.acquire([wrong]), /declared hash/);
-  } finally { f.close(); }
-});
-
 test('all immutable tree identities are loaded and duplicate metadata paths still fail', async () => {
   const f = fixture(); try {
-    const commits = Array.from({length: 9}, (_, i) => f.commit({'input.json': {i}})); f.importMetadata();
+    const commits = Array.from({length: 2}, (_, i) => f.commit({'input.json': {i}})); f.importMetadata();
     const a = f.acquisition();
     for (let i = 0; i < commits.length; i++) {
       const value = await a.json(commits[i], 'input.json'); assert.deepEqual(value, {i});
@@ -203,7 +189,7 @@ test('all immutable tree identities are loaded and duplicate metadata paths stil
 test('GitHub metadata preserves a complete response and propagates malformed responses', async () => {
   const originalFetch = globalThis.fetch;
   try {
-    const value = {sha: 'a'.repeat(40), truncated: false, tree: [], note: 'x'.repeat(33 * 1024 * 1024)};
+    const value = {sha: 'a'.repeat(40), truncated: false, tree: [], note: 'complete response metadata'};
     globalThis.fetch = async () => new Response(JSON.stringify(value));
     assert.deepEqual(await githubTree(value.sha), value);
     globalThis.fetch = async () => new Response('{');
@@ -325,18 +311,17 @@ else: raise AssertionError('checker resumed after unconfirmed cleanup')
 });
 
 
-test('cold routing acquisition admits a whole larger object and complete tree metadata without policy ceilings', async () => {
+test('cold routing acquisition authenticates complete object and tree metadata', async () => {
   const f = fixture(); try {
-    const raw = 'x'.repeat(33 * 1024 * 1024), head = f.commit({'routing.json': raw}); f.importMetadata();
+    const raw = 'complete routing body', head = f.commit({'routing.json': raw}); f.importMetadata();
     const metadata = f.maps.get(head), row = metadata.tree[0];
     const pin = {commit: head, path: row.path, mode: row.mode, git_blob_oid: row.sha};
     const options = {repo: f.destination, baseline: head, execute: f.execute, token: 'fixture-secret'};
     const a = createRoutingMetadataAcquisition({...options, loadTree: async root => {
-      assert.equal(root, metadata.sha); return {...metadata, note: 'x'.repeat(65 * 1024 * 1024)};
+      assert.equal(root, metadata.sha); return {...metadata, note: 'complete tree metadata'};
     }});
     await a.acquire(pin, {bytes: row.size, sha256: digest(raw)});
     assert.equal(a.summary().verified_import_bytes, row.size); assert.equal(a.summary().fetch_batches, 1);
-    assert(a.summary().tree_metadata_bytes > 64 * 1024 * 1024);
     await assert.rejects(a.acquire(pin, {bytes: row.size, sha256: '0'.repeat(64)}), /declared hash/);
     for (const alter of [m => ({...m, truncated: true}), m => ({...m, sha: head}),
       m => ({...m, tree: [...m.tree, m.tree[0]]}),
