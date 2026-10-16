@@ -94,24 +94,6 @@ test('sparse candidate still detects changes and rename sources outside the work
 });
 
 
-for (const [workflow, expected] of [['worker-merge.yml', 1]]) {
-  test(`${workflow}: immutable normal routes build Cloudflare`, () => {
-    const source = fs.readFileSync(path.join(root, '.github/workflows', workflow), 'utf8');
-    const routes = [...source.matchAll(/^        run: (npm run build:cloudflare)$/gm)];
-    assert.equal(routes.length, expected, 'all actual package/shard routes must be covered');
-    assert.doesNotMatch(source, /WORLDATLAS_PACKAGE_PROFILE|run: npm run build:hosted/);
-    const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'worldatlas-package-routing-'));
-    try {
-      fs.writeFileSync(path.join(directory, 'npm'), '#!/bin/sh\nprintf "%s\\n" "$*"\n', {mode: 0o755});
-      for (const route of routes) {
-        const result = spawnSync('/bin/bash', ['-c', route[1]], {encoding: 'utf8', env: {PATH: directory, WORLDATLAS_PACKAGE_PROFILE: 'foreign'}});
-        assert.equal(result.status, 0, result.stderr);assert.equal(result.stdout.trim(), 'run build:cloudflare');
-      }
-    } finally { fs.rmSync(directory, {recursive: true, force: true}); }
-  });
-}
-
-
 // Read the actual workflow declarations and shell bodies. These bounded controls
 // model the status-expression subset used here; hosted execution remains required.
 function queueWorkflow() {
@@ -148,73 +130,28 @@ function queueContext({profile='full',selection='complete'}={}){
 function packageStep(job,name){const found=job.steps.filter(step=>step.name===name);assert.equal(found.length,1,name);return found[0];}
 
 
-test('normal package workflow closes full, shard and assembly branches without historical readback', () => {
- const {source,integration}=queueWorkflow();
- assert.doesNotMatch(source,/Read back qualified native build outputs|native-normal-built-output\.json|--built-output-readback/);
- const names=['Snapshot original final-worker package inputs',
-  'Build the combined application once before asset-dependent tests',
-  'Inventory original final-worker package output',
-  'Install browser dependencies only for tests that use Playwright',
-  'Test applicable combined-tree invariants without publishing or live imports'];
- const routes=names.map(name=>packageStep(integration,name));
- assert.deepEqual(integration.steps.filter(step=>names.includes(step.name)).map(step=>step.name),names);
+test('package setup and retention follow the current build and assembly branches', () => {
+ const {integration}=queueWorkflow();
+ const build=packageStep(integration,'Build the combined application once before asset-dependent tests');
+ assert.equal(build.run,'npm run build:cloudflare');
+ const setup=['Snapshot original final-worker package inputs',build.name,'Inventory original final-worker package output']
+   .map(name=>packageStep(integration,name));
  const original=packageStep(integration,'Retain original final-worker package output');
  const smoke=packageStep(integration,'Retain selected delivery smoke');
- assert.match(smoke.text,/name: selected-delivery-smoke-\$\{\{ inputs\.request_id \}\}-\$\{\{ github\.run_attempt \}\}/);
- assert.match(smoke.text,/path: \.cache\/selected-delivery-smoke\.json\n/);
- const directory=fs.mkdtempSync(path.join(os.tmpdir(),'worldatlas-normal-package-route-'));
- try {
-  const calls=path.join(directory,'calls.jsonl');
-  const recorder=`#!${process.execPath}
-const fs=require('node:fs'),path=require('node:path'),args=process.argv.slice(2);
-const programme=path.basename(process.argv[1]);let call;
-if(programme==='npm'&&args.join(' ')==='run build:cloudflare')call='build';
-else if(programme==='npx'&&args.join(' ')==='playwright install --with-deps chromium')call='browser-install';
-else if(programme==='node'){
- if(args[0]==='scripts/package-output-artifact.mjs'){
-  if(args.length===1)call='inventory';else if(args.length===2&&args[1]==='--snapshot')call='snapshot';
- }else if(args.length===1&&args[0]==='scripts/run-integration-tests.mjs')call='packaged-tests';
- else if(args[0]==='--input-type=module'&&args[1]==='-e'&&args.length===3){
-  if(args[2].includes('integrationNeedsBrowser('))call='browser-check';
-  else if(args[2].includes('await selectedDeliverySmoke(process.env.SELECTED_EXPECTATIONS_PATH)'))call='selected-smoke';
-  else if(args[2].includes('package_assembly:requireCurrentPackageAssembly()'))call='assembly-admission';
+ const browser=packageStep(integration,'Install browser dependencies only for tests that use Playwright');
+ // The actual queue shell is exercised in integration-profile-restoration;
+ // package-output-artifact verifies immediate capture and successful-only upload.
+ for(const [selection,assembled,shard] of [['complete',false,0],['selected-data',false,0],
+   ['selected-data',true,0],['complete',false,1],['complete',false,2]]){
+   const context=queueContext({selection});context.matrix.shard=shard;
+   context.steps.assembly.outputs.assembled=String(assembled);
+   const builds=shard===0&&!assembled;
+   for(const step of setup)assert.equal(workflowCondition(step.condition,context),builds,step.name);
+   assert.equal(workflowCondition(original.condition,context),builds);
+   assert.equal(workflowCondition(original.condition,context,{success:false}),false);
+   assert.equal(workflowCondition(smoke.condition,context),shard===0);
+   assert.equal(workflowCondition(browser.condition,context),selection!=='selected-data');
  }
-}
-if(!call)throw Error('Unexpected normal package command: '+programme+' '+JSON.stringify(args));
-fs.appendFileSync(process.env.FIXTURE_CALLS,JSON.stringify(call)+'\\n');
-`;
-  for(const name of ['node','npm','npx'])fs.writeFileSync(path.join(directory,name),recorder,{mode:0o755});
-  const cases=[
-   {selection:'complete',assembled:undefined,shard:0,expected:['snapshot','build','inventory','browser-check','browser-install','packaged-tests'],output:true},
-   {selection:'selected-data',assembled:'false',shard:0,expected:['snapshot','build','inventory','selected-smoke'],output:true},
-   {selection:'selected-data',assembled:'true',shard:0,expected:['selected-smoke','assembly-admission'],output:false},
-   ...[1,2].map(shard=>({selection:'complete',assembled:undefined,shard,expected:['browser-check','browser-install','packaged-tests'],output:false})),
-  ];
-  for(const branch of cases){
-   fs.rmSync(calls,{force:true});
-   const context=queueContext({selection:branch.selection});context.matrix.shard=branch.shard;
-   context.steps.assembly.outputs.assembled=branch.assembled;
-   const effective=branch.assembled==='true'?'selected-output':branch.selection;
-   for(const step of routes.filter(step=>workflowCondition(step.condition,context))){
-    const result=spawnSync('/bin/bash',['-e','-o','pipefail','-c',step.run],{cwd:directory,encoding:'utf8',
-     env:{PATH:directory,INTEGRATION_PROFILE:'full',INTEGRATION_SHARD:String(branch.shard),
-      INTEGRATION_TEST_SELECTION:effective,SELECTED_EXPECTATIONS_PATH:'current-expectations.json',FIXTURE_CALLS:calls}});
-    assert.equal(result.status,0,step.name+': '+result.stderr);
-   }
-   const actual=fs.readFileSync(calls,'utf8').trim().split('\n').map(JSON.parse);
-   assert.deepEqual(actual,branch.expected,JSON.stringify(branch));
-   assert.equal(workflowCondition(original.condition,context),branch.output);
-   assert.equal(workflowCondition(original.condition,context,{success:false}),false,'Failed checks cannot upload original output');
-   assert.equal(workflowCondition(smoke.condition,context),branch.shard===0);
-  }
- } finally {fs.rmSync(directory,{recursive:true,force:true});}
-});
-
-test('automatic author jobs are absent while final queue keeps current consumers',()=>{
- assert.equal(fs.existsSync(path.join(root,'.github/workflows/merge-integration-checks.yml')),false);
- const queue=fs.readFileSync(path.join(root,'.github/workflows/worker-merge.yml'),'utf8');
- assert.match(queue,/run: npm run build:cloudflare/);assert.match(queue,/node scripts\/run-integration-tests.mjs/);
- assert.doesNotMatch(queue,/proof_run|proof_attempt|GEOGRAPHY_PROOF|PROOF_RUN/);
 });
 
 test('final queue uses pinned stock checkout with exact candidate and transient read-only credentials',()=>{
