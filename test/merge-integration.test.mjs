@@ -1,7 +1,7 @@
 import {execFileSync, spawnSync} from 'node:child_process';
 import {gitBlobTransport} from '../scripts/git-blob-transport.mjs';
 import {memoizeImmutableGitBlobs} from '../scripts/immutable-git-blobs.mjs';
-import {fullCheckoutPatterns} from '../scripts/package-inputs.mjs';
+import {fullCheckoutPatterns,focusedCheckoutPatterns,loadPackageInputs} from '../scripts/package-inputs.mjs';
 import {sha256, subjectsHash} from '../scripts/evidence-quality.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -411,8 +411,8 @@ function controlFixture() {
 test('actual prepare and complete omit unrelated geography without reading or fabricating a report', async () => {
   const f=controlFixture(), prepared=await prepareIntegration(f.options());
   assert.equal(prepared.profile,'evidence');assert.equal(prepared.geography_required,false);
-  assert.deepEqual(prepared.checkout_patterns,['/*','!/data/regional-review/','!/research/campaigns/']);
-  assert(!f.calls.some(row=>row.route.includes('/contents/.github/package-inputs.json')));
+  assert.deepEqual(prepared.checkout_patterns,focusedCheckoutPatterns(f.packageInputs));
+  assert(f.calls.some(row=>row.route.endsWith('/contents/.github/package-inputs.json?ref='+f.candidate)));
   const result=await f.complete({geographyResult:'skipped',geographyReportLoader:()=>{throw Error('Unrelated geography must not run');}});
   assert.equal(result.accepted,true);assert.equal(f.writes.length,1);
   assert.deepEqual(result.geography,{status:'not-applicable',reason:'non-geographic-controls'});
@@ -466,7 +466,8 @@ test('actual review-receipt PR 2010 paths use the complete applicable focused in
     assert(integrationTestFiles('evidence',0).includes(file.filename), file.filename);
   const yaml = fs.readFileSync('.github/workflows/worker-merge.yml','utf8');
   const focused = yaml.split('      - name: Checkout only focused-test inputs for evidence regression\n')[1].split('      - uses:')[0];
-  assert.match(focused,/coverage-gaps-907-20261005-local01\/sources\/natural-earth-lakes\.geojson\.gz/);
+  assert.match(focused,/sparse-checkout: \$\{\{ needs\.prepare\.outputs\.checkout_patterns \}\}/);
+  assert(focusedCheckoutPatterns(loadPackageInputs()).includes('/coordination/engineering/coverage-gaps-907-20261005-local01/sources/natural-earth-lakes.geojson.gz'));
   const unknown = {filename:'test/new-emitted-asset.test.mjs',status:'added'};
   authored.set(unknown.filename,{type:'blob',mode:'100644',sha:'2'.repeat(40)});
   assert.equal(integrationProfile('engineering/example',[...files,unknown],{},authored),'full');
@@ -955,7 +956,10 @@ function finalTransportFixture(mode = 'complete', f = finalMergeFixture()) {
   http.setHTTPAdmission = hook => {admission = hook; return () => {admission = null;};};
   const transport = gitBlobTransport(http, {repo: f.repo, token: 'synthetic-transport-token', directory,
     execute: (command, args, options) => {
-      if (!args.includes('fetch')) return execFileSync(command, args, options);
+      if (!args.includes('fetch')) {
+        if (mode === 'corrupt' && args.includes('blob')) return Buffer.from('changed evidence');
+        return execFileSync(command, args, options);
+      }
       fetches++; events.push({kind: 'fetch'});
       const requested = options.input.trimEnd().split('\n');
       for (const sha of mode === 'incomplete' ? requested.slice(0, -1) : requested) {
@@ -966,12 +970,11 @@ function finalTransportFixture(mode = 'complete', f = finalMergeFixture()) {
       return Buffer.alloc(0);
     }});
   f.api = (...args) => transport.api(...args);
-  for (const name of ['setHTTPAdmission', 'prefetchGitBlobs', 'hasGitBlobs']) {
+  for (const name of ['setHTTPAdmission', 'prefetchGitBlobs']) {
     if (mode === 'missing' && name !== 'setHTTPAdmission') continue;
     f.api[name] = function (...args) {
       assert.equal(this, f.api, `${name} must preserve its original receiver through every wrapper`);
       if (mode === 'declined' && name === 'prefetchGitBlobs') return;
-      if (mode === 'declined' && name === 'hasGitBlobs') return false;
       return transport.api[name](...args);
     };
   }
@@ -995,13 +998,13 @@ test('actual final completion retains byte transport and safe REST fallback', as
 });
 
 test('incomplete actual transport and changed mutable authority cannot reach merge after feature forwarding', async () => {
-  for (const mode of ['incomplete', 'complete']) {
+  for (const mode of ['incomplete', 'corrupt', 'complete']) {
     const t = finalTransportFixture(mode), {f} = t;
     try {
       await assert.rejects(f.complete({geographyReportLoader: async () => {
         f.issue.body += '\nChanged acceptance';
         return {version: 1, method_id: 'worldatlas-trusted-geography-check-v1', baseline_commit: f.base, trusted_code_commit: f.base, candidate_commit: f.candidate, candidate_code_executed: false, published: false, source_approval: false, gate_status: 'passed', status: 'not-applicable'};
-      }}), mode === 'incomplete' ? /Exact immutable Git transport failed/ : /Head\/body or issue contract changed/);
+      }}), mode === 'incomplete' ? /Exact immutable Git transport failed/ : mode === 'corrupt' ? /object changed/ : /Head\/body or issue contract changed/);
       assert.equal(t.fetches, 1); assert.equal(f.writes.length, 0);
     } finally {t.close();}
   }

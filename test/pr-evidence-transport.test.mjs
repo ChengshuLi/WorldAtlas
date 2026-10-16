@@ -43,7 +43,7 @@ function fixture(t, {corrupt = false, quota = false, stale = false} = {}) {
   const claim={version:1,active:true,issue_number:100,worker_id:'author',claim_id:'fixture',branch:'engineering/transport-probe',expires_at:'2099-01-01T00:00:00Z'};
   const pr={number:101,head:{sha:stale?base:head,ref:claim.branch},base:{sha:base},body:'Refs #100\n',changed_files:files.length};
   const event={repository:{full_name:repo},pull_request:{number:101,head:{sha:head}}};
-  let rest=0,blobReads=0,fetches=0,closed=false;
+  let rest=0,blobReads=0,transportBodyReads=0,fetches=0,closed=false;
   const apiFactory=(_, {onRequest})=>async(route,method='GET')=>{
     rest++; assert.equal(method,'GET','Candidate must not mutate GitHub');
     if(quota)throw Object.assign(Error('Explicit shared quota rejection'),{github:{http_status:403,rate_remaining:'0',rate_reset:String(Math.ceil(Date.now()/1000)+60)}});
@@ -65,27 +65,26 @@ function fixture(t, {corrupt = false, quota = false, stale = false} = {}) {
       // exercise real Git fetch/cat-file. Hash/size validation remains real here.
       if(args.includes('fetch')){fetches++;return Buffer.alloc(0);}
       if(args.includes('cat-file')){
-        if(args.includes('-t'))return Buffer.from('blob\n');
-        return corrupt?Buffer.from('coherently truncated body'):blobs.get(args.at(-1));
+        transportBodyReads++;return corrupt?Buffer.from('coherently truncated body'):blobs.get(args.at(-1));
       }
       return execFileSync(command,args,settings);
     }});
     return {...transport,close(){transport.close();closed=true;}};
   };
   return {run:()=>runPREvidence({event,env:{GITHUB_REPOSITORY:repo,GH_TOKEN:'private-fixture-token'},directory,apiFactory,transportFactory,
-    verify:options=>checkPremergeEvidence({...options,policy})}),counts:()=>({rest,blobReads,fetches,closed}),directory,event,apiFactory};
+    verify:options=>checkPremergeEvidence({...options,policy})}),counts:()=>({rest,blobReads,transportBodyReads,fetches,closed}),directory,event,apiFactory};
 }
 
 test('real premerge entry authenticates 302 complete bodies with one REST manifest and one Git batch',async t=>{
   const f=fixture(t), result=await f.run();
   assert.equal(result.status,'bytes-verified',result.reason);assert.equal(result.change_files_checked,302);
-  assert.equal(f.counts().blobReads,1);assert.equal(f.counts().fetches,1);assert(f.counts().rest<25);
+  assert.equal(f.counts().transportBodyReads,302);assert.equal(f.counts().blobReads,1);assert.equal(f.counts().fetches,1);assert(f.counts().rest<25);
   assert(f.counts().closed);assert.equal(fs.readdirSync(f.directory).length,0);
   assert.equal(result.immutable_transport[0].blob_count,302);
 });
 test('corrupt transported bytes cannot become a successful gate and temporary objects are released',async t=>{
   const f=fixture(t,{corrupt:true}),result=await f.run();assert.equal(result.status,'incomplete-or-invalid');
-  assert.match(result.reason,/bytes differ/);assert(f.counts().closed);assert.equal(fs.readdirSync(f.directory).length,0);
+  assert.match(result.reason,/object changed/);assert(f.counts().closed);assert.equal(fs.readdirSync(f.directory).length,0);
 });
 test('quota refusal retains its real reset and refuses without a retry storm',async t=>{
   const f=fixture(t,{quota:true}),result=await f.run();assert.equal(result.status,'incomplete-or-invalid');

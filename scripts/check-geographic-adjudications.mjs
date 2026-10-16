@@ -16,7 +16,6 @@ export async function runGeographicApproval({repo,number,expectedHead,token,dire
   if(!transport)transport=transportFactory(direct,{repo,token,directory,onFetch:row=>downloads.push(row)});
   return transport.api.prefetchGitBlobs(targetRepo,rows);
  };
- api.hasGitBlobs=(targetRepo,rows)=>transport?.api.hasGitBlobs(targetRepo,rows)??false;
  let result;
  try{result=await collect({api,repo,number,expectedHead});}
  catch(error){

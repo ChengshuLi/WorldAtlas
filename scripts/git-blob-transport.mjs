@@ -34,12 +34,8 @@ export function gitBlobTransport(api,{repo,token,directory,onFetch=()=>{},execut
   // Git streams the admitted inventory to disk; aggregate bytes are not resident memory.
   git(['-c','fetch.unpackLimit=1','fetch','--no-tags','--no-write-fetch-head','--recurse-submodules=no','--filter=blob:none',
     '--stdin','https://github.com/'+repo+'.git'],undefined,[...pending.keys()].join('\n')+'\n');
-  // Verify every object before publishing any success from this batch.
-  for(const [sha,size] of pending){
-   if(git(['cat-file','-t',sha]).toString().trim()!=='blob')throw Error('Immutable object is not a blob');
-   const content=git(['cat-file','blob',sha],Math.max(1,addBytes(size,1)));
-   if(content.length!==size||createHash('sha1').update(`blob ${content.length}\0`).update(content).digest('hex')!==sha)throw Error('Immutable object bytes differ from tree binding');
-  }
+  // Acquisition is not evidence acceptance. Each consumed body is authenticated
+  // below before returning bytes to the complete evidence validator.
   for(const [sha,size] of pending)known.set(sha,size);
   onFetch({blob_count:pending.size,decoded_bytes:extra});
  };
@@ -53,6 +49,5 @@ export function gitBlobTransport(api,{repo,token,directory,onFetch=()=>{},execut
   return {sha:match[2],size:bytes.length,encoding:'base64',content:bytes.toString('base64')};
  };
  copyAPIFeatures(wrapped,api);wrapped.prefetchGitBlobs=prefetch;
- wrapped.hasGitBlobs=(targetRepo,rows)=>targetRepo===repo&&Array.isArray(rows)&&rows.every(row=>known.has(row.sha)&&known.get(row.sha)===row.size);
  return {api:wrapped,close(){fs.rmSync(store,{recursive:true,force:true});}};
 }
