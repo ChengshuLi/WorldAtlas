@@ -47,7 +47,7 @@ jobs:
       test_selection: ${{ steps.prepare.outputs.test_selection }}
       expectations_path: ${{ steps.prepare.outputs.expectations_path }}
       candidate_tree: ${{ steps.prepare.outputs.candidate_tree }}
-      checkout_patterns: ${{ steps.prepare.outputs.checkout_patterns }}
+      checkout_patterns_base64: ${{ steps.prepare.outputs.checkout_patterns_base64 }}
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
@@ -146,14 +146,16 @@ jobs:
       # Candidate code runs only in this isolated job, without write credentials,
       # repository secrets, persistent checkout authentication, or OIDC rights.
       - name: Checkout exact candidate for application regression
-        if: needs.prepare.outputs.profile == 'full'
+        if: needs.prepare.outputs.profile == 'full' || needs.prepare.outputs.profile == 'evidence'
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
           ref: ${{ needs.prepare.outputs.candidate }}
           persist-credentials: false
           fetch-depth: 1
           sparse-checkout-cone-mode: false
-          sparse-checkout: ${{ needs.prepare.outputs.checkout_patterns }}
+          sparse-checkout: |
+            /*
+            !/*/
           lfs: false
           submodules: false
           set-safe-directory: false
@@ -166,8 +168,49 @@ jobs:
           GIT_CONFIG_VALUE_0: /dev/null
           GIT_CONFIG_KEY_1: credential.helper
           GIT_CONFIG_VALUE_1: ''
+      # Keep the prepared path list in the runner's script file and Git stdin,
+      # not one action environment value or process argument (Linux E2BIG).
+      - name: Materialize exact prepared checkout inputs
+        if: needs.prepare.outputs.profile == 'full' || needs.prepare.outputs.profile == 'evidence'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CI_CHECKOUT_REPOSITORY: ${{ github.repository }}
+          CI_CHECKOUT_SHA: ${{ needs.prepare.outputs.candidate }}
+          CI_CHECKOUT_TREE: ${{ needs.prepare.outputs.candidate_tree }}
+          GIT_CONFIG_NOSYSTEM: '1'
+          GIT_CONFIG_GLOBAL: /dev/null
+          GIT_TERMINAL_PROMPT: '0'
+          GIT_CONFIG_COUNT: '2'
+          GIT_CONFIG_KEY_0: core.hooksPath
+          GIT_CONFIG_VALUE_0: /dev/null
+          GIT_CONFIG_KEY_1: credential.helper
+          GIT_CONFIG_VALUE_1: ''
+        run: |
+          python3 -I -S -B - <<'CHECKOUT_INPUTS'
+          import base64, os, re, subprocess
+          # Trusted preparation emits only base64; decoded repository paths are data.
+          patterns = base64.b64decode('${{ needs.prepare.outputs.checkout_patterns_base64 }}', validate=True)
+          sha, tree, repo = (os.environ[key] for key in ('CI_CHECKOUT_SHA', 'CI_CHECKOUT_TREE', 'CI_CHECKOUT_REPOSITORY'))
+          assert re.fullmatch('[0-9a-f]{40}', sha) and re.fullmatch('[0-9a-f]{40}', tree) and repo == 'ChengshuLi/WorldAtlas'
+          token = os.environ.pop('GH_TOKEN')
+          assert token
+          env = dict(os.environ, GIT_NO_LAZY_FETCH='1')
+          def git(*args): return subprocess.check_output(['git', *args], env=env).decode().strip()
+          assert git('rev-parse', '--verify', 'HEAD') == sha and git('rev-parse', '--verify', 'HEAD^{tree}') == tree
+          for item in git('config', '--local', '--null', '--list').split('\0'):
+              if not item: continue
+              key, _, value = item.partition('\n')
+              assert 'extraheader' not in key.lower() and not key.lower().startswith(('credential.', 'url.', 'include'))
+              if key.startswith('remote.') and key.endswith(('.url', '.pushurl')):
+                  assert value in ('https://github.com/' + repo, 'https://github.com/' + repo + '.git')
+          assert git('remote', 'get-url', 'origin') in ('https://github.com/' + repo, 'https://github.com/' + repo + '.git')
+          env.pop('GIT_NO_LAZY_FETCH')
+          env.update(GIT_CONFIG_COUNT='3', GIT_CONFIG_KEY_2='http.https://github.com/.extraheader',
+                     GIT_CONFIG_VALUE_2='AUTHORIZATION: basic ' + base64.b64encode(('x-access-token:' + token).encode()).decode())
+          subprocess.run(['git', 'sparse-checkout', 'set', '--no-cone', '--stdin'], input=patterns, env=env, check=True)
+          CHECKOUT_INPUTS
       - name: Checkout complete candidate for application regression
-        if: needs.prepare.outputs.profile == 'full'
+        if: needs.prepare.outputs.profile == 'full' || needs.prepare.outputs.profile == 'evidence'
         env:
           CI_CHECKOUT_REPOSITORY: ${{ github.repository }}
           CI_CHECKOUT_SHA: ${{ needs.prepare.outputs.candidate }}
@@ -197,15 +240,6 @@ jobs:
           assert result.returncode in (0, 5)
           print('Exact detached candidate commit/tree verified; checkout credentials absent')
           CHECKOUT_VERIFY
-      # Include the original retained delivery specimens read by the classifier tests.
-      - name: Checkout only focused-test inputs for evidence regression
-        if: needs.prepare.outputs.profile == 'evidence'
-        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
-        with:
-          ref: ${{ needs.prepare.outputs.candidate }}
-          persist-credentials: false
-          sparse-checkout-cone-mode: false
-          sparse-checkout: ${{ needs.prepare.outputs.checkout_patterns }}
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
         with:
           node-version: '24'
