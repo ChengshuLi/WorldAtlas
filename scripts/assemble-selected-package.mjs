@@ -228,6 +228,7 @@ export function requireAssemblyWithoutReferenceMetadata(selection) {
 
 export async function assembleSelectedPackage({api,repo,expectedHead,originalRunId,trustedBase}){
   const started=performance.now(),current=currentSource();need(current.head===expectedHead,'Actual selected head changed');
+  requireAssemblyWithoutReferenceMetadata(current.selection);
   const found=await findOriginalPackage({api,repo,current,originalRunId,trustedBase});if(!found)return {assembled:false,reason:'No applicable retained original output in bounded recent-result search'};
   if(trustedBase!==undefined)current.accepted_selected_inputs=found.accepted_selected_inputs;
   await verifyPackageDependencies(path.join(root,'node_modules'));
@@ -255,7 +256,6 @@ export async function assembleSelectedPackage({api,repo,expectedHead,originalRun
     const stage=path.join(scratch,'assembly');fs.mkdirSync(stage);
     const execution=issuePackageAssemblyExecution({original,source:root,stage,executingRoot:root,
       acceptedInputs:current.accepted_selected_inputs});
-    requireAssemblyWithoutReferenceMetadata(current.selection);
     requireAssemblyWithoutReferenceMetadata(manifest.source.selection);
     const {atlas,selectedGrid,geographicRelease,features}=readOriginalPackageGeography(original);
     // The authenticated execution closure includes this literal deferred import.

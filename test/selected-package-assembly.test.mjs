@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import {fileURLToPath,pathToFileURL} from 'node:url';
 import {createHash} from 'node:crypto';
 import {authenticateOriginalPackageOutput, requireOriginalPackageOutput,
   requirePackageAssemblyExecution, issuePackageAssemblyExecution} from '../coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs';
@@ -224,6 +225,57 @@ function sourceFixture(f,{author=true}={}){
     files:committedPackageInputs(f.root,JSON.parse(fs.readFileSync(path.join(f.root,'.github/package-inputs.json')))),producer:committedPackageProducer(f.root)});
   return {write,git,commit,snapshot};
 }
+
+
+test('actual assembly declines current reference metadata before discovery while preserving source and head checks',async t=>{
+  const f=original(t),s=sourceFixture(f,{author:false});
+  // Copy the literal executing entry and its relative imports into a small real
+  // repository, so currentSource authenticates actual fixture Git metadata.
+  const sourceRoot=fileURLToPath(new URL('../',import.meta.url)),copied=new Set();
+  const copy=name=>{
+    if(copied.has(name))return;copied.add(name);
+    const raw=fs.readFileSync(path.join(sourceRoot,name));s.write(name,raw.toString('utf8'));
+    for(const match of raw.toString('utf8').matchAll(/(?:from\s*|import\s*(?:\(\s*)?)['"]([^'"]+)['"]/g))
+      if(match[1].startsWith('.'))copy(path.posix.normalize(path.posix.join(path.posix.dirname(name),match[1])));
+  };
+  copy('scripts/assemble-selected-package.mjs');copy('package.json');
+  const selection=s.snapshot().selection;
+  s.write('data/ownership-selection.json',{...selection,reference_projection:{path:'retained-reference.json'}});s.commit();
+  fs.symlinkSync(fs.realpathSync(path.join(sourceRoot,'node_modules')),path.join(f.root,'node_modules'),'dir');
+  fs.appendFileSync(path.join(f.root,'.git/info/exclude'),'\nnode_modules/\n');
+  const {assembleSelectedPackage}=await import(pathToFileURL(path.join(f.root,'scripts/assemble-selected-package.mjs')));
+  const calls=[],api=async route=>{calls.push(route);return {workflow_runs:[]};};
+  const args=()=>({api,repo:f.repo,expectedHead:s.git('rev-parse','HEAD')});
+  for(const extra of [{},{originalRunId:17,trustedBase:'a'.repeat(40)}])
+    await assert.rejects(assembleSelectedPackage({...args(),...extra}),/^Error: Reference metadata application requires a full build$/);
+  await assert.rejects(assembleSelectedPackage({...args(),expectedHead:'f'.repeat(40)}),/Actual selected head changed/);
+  const selected=path.join(f.root,'data/ownership-selection.json'),raw=fs.readFileSync(selected);
+  fs.appendFileSync(selected,' ');
+  await assert.rejects(assembleSelectedPackage(args()),/Current selected metadata differs from Git/);
+  fs.writeFileSync(selected,raw);
+  assert.deepEqual(calls,[],'An already-refused current selection must not discover or download originals');
+  assert.equal(fs.existsSync(path.join(f.root,'.cache')),false,'No original-output scratch was created');
+  // Exercise the real CLI fallback too, with a local network tripwire rather
+  // than a real token or remote call.
+  const event=path.join(f.root,'event.json');fs.writeFileSync(event,'{}');
+  const entry=path.join(f.root,'scripts/assemble-selected-package.mjs');
+  const probe=path.join(f.root,'cli-probe.mjs');
+  fs.writeFileSync(probe,`globalThis.fetch=async()=>{throw Error('Unexpected network discovery');};process.argv=[process.execPath,${JSON.stringify(entry)}];await import(${JSON.stringify(pathToFileURL(entry).href)});`);
+  const child=spawnSync(process.execPath,[probe],{encoding:'utf8',env:{...process.env,NODE_OPTIONS:'',NODE_PATH:'',
+    GH_TOKEN:'local-fixture-only',GITHUB_TOKEN:'',GITHUB_REPOSITORY:f.repo,GITHUB_EVENT_PATH:event,
+    GITHUB_EVENT_NAME:'workflow_dispatch',GITHUB_WORKFLOW:'Serialize worker PR merges',GITHUB_REF:'refs/heads/main',
+    INTEGRATION_PROFILE:'full',INTEGRATION_SHARD:'0',INTEGRATION_TEST_SELECTION:'selected-data',
+    SELECTED_PACKAGE_CANDIDATE:args().expectedHead,SELECTED_PACKAGE_TRUSTED_BASE:undefined,GITHUB_OUTPUT:undefined}});
+  assert.equal(child.status,0,child.stderr);
+  assert.deepEqual(JSON.parse(child.stdout),{assembled:false,reason:'Reference metadata application requires a full build'});
+  for(const file of [event,probe])fs.unlinkSync(file);
+  s.write('data/ownership-selection.json',selection);s.commit();
+  assert.deepEqual(await assembleSelectedPackage(args()),{assembled:false,reason:'No applicable retained original output in bounded recent-result search'});
+  assert.equal(calls.length,1);assert.match(calls[0],/actions\/workflows\/worker-merge.yml\/runs/);
+  s.write('data/ownership-selection.json',{...selection,reference_projection:null});s.commit();calls.length=0;
+  await assert.rejects(assembleSelectedPackage(args()),/Reference metadata application requires a full build/);
+  assert.deepEqual(calls,[],'Explicit null remains unsupported');
+});
 
 for(const queueOnly of [false,true])test('private assembly admission uses actual '+(queueOnly?'queue-only':'historical')+' producer and rejects drift',async t=>{
   // Exercise the actual plain-process guard instead of altering execArgv in the test.
