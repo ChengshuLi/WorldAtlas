@@ -1,0 +1,147 @@
+{
+  "status": "APPROVE_10_BOUNDED_DATED_VISIBLE_FACETS_RETAIN_81_HOLDS",
+  "reviewer": "review_batam91_observations",
+  "author": "finish_indonesia_packages",
+  "reviewed_at_utc": "2026-10-16T06:44:27.736903+00:00",
+  "scope": 91,
+  "source_item": "S2A_48NVF_20200103_0_L2A",
+  "acquisition_datetime": "2020-01-03T03:27:57.821000Z",
+  "accepted_bounded_facets": 10,
+  "accepted_categories": {
+    "dated_visible_vegetation_cover": 9,
+    "dated_visible_exposed_or_constructed_ground_like_strip": 1
+  },
+  "remaining_holds": 81,
+  "hold_categories": {
+    "nodata_centres": 73,
+    "valid_but_ambiguous_cloud_haze_shadow_or_fringe": 8
+  },
+  "accepted_point_indices": [
+    18404,
+    18411,
+    18531,
+    18547,
+    18548,
+    18567,
+    18568,
+    18593,
+    19867,
+    20875
+  ],
+  "held_valid_point_indices": [
+    17910,
+    18441,
+    18466,
+    18467,
+    18468,
+    18524,
+    18566,
+    18611
+  ],
+  "incomplete_edges_held": [
+    15862,
+    15863
+  ],
+  "source_selection": "The unchanged complete 91-key item and earliest distinct January 3 choice are pinned to the independent acquisition-plan review. No new source selection or replay was performed.",
+  "visual_review": {
+    "contact_pages_personally_viewed": 4,
+    "all_valid_native_details_personally_viewed": 18,
+    "incomplete_frame_details_personally_viewed": 2,
+    "all91_detail_pixels_independently_reconstructed": true
+  },
+  "custody_and_scope": {
+    "whole_product_bodies_verified": 126,
+    "whole_npz_files_verified": 60,
+    "decoded_npy_members_verified": 120,
+    "encoded_npz_bytes": 15589106,
+    "decoded_values_masks_bytes": 157286400,
+    "point_asset_native_values_masks_and_3x3_joins": 455,
+    "exact_held471_key_joins": 91,
+    "held_commit": "46f8b217ec2e7e633ad5369cd96e0a21f624ec53",
+    "prior91_records_preserved": true,
+    "literal_accepted10_matches_author": true,
+    "source_replay_calls": 0
+  },
+  "renderer_review": {
+    "all91_details_and4_pages_pixel_equal": true,
+    "SCL_edge_padding_synthetic_controls": 2,
+    "missing_context_remains_mask0_magenta": true,
+    "fractional_markers_preserved": true,
+    "no_clamping_imputation_resampling_gain_offset_or_index": true
+  },
+  "scope_limits": [
+    "Only the January 3, 2020 visible facet at the unchanged source-associated marker is reviewed. Prior observations remain unchanged.",
+    "Fixed uncalibrated raw-DN qualitative RGB and NIR-R-G display only; no BOA reflectance normalization, derived index or quantitative radiometry claim.",
+    "SCL is retained as separate coarser source context, including cloud/cirrus classifications and the ground-like strip\u2019s contrary SCL6. It is not used as surface truth.",
+    "No dry-understory, pure-pixel, whole-output-cell, water/ground-under-cover, tide, permanent-land or current-state conclusion.",
+    "All independent source-native association, owner, parent, selected geographic portion, boundary, territorial and legal questions remain unchanged.",
+    "No native authority, raw-native repair or whole-remote-TIFF authentication credit. Review approval is not a merged public adoption."
+  ],
+  "projection_requirement": "Preserve this narrow answer and its retained limitations per literal key. A null remaining_question in the author-proposal subobject only closes the dated visible-facet question; it must not erase independent questions, contrary SCL, prior source evidence or hidden-surface/whole-cell uncertainty.",
+  "author_input_pins": [
+    {
+      "file": "author-proposed91-nextdated-dispositions.jsonl",
+      "bytes": 3801862,
+      "sha256": "92cd175798b299c75109addd4484a54dc7f427d373bdf96ea4cff6313a0b1430"
+    },
+    {
+      "file": "author-proposed10-owner-y-x.jsonl",
+      "bytes": 220,
+      "sha256": "50056ceab2b3775f7911d1594c4b6ede16424cae9d6b8038a36145bebbcd9451"
+    },
+    {
+      "file": "actual-observation-custody-verification.json",
+      "bytes": 38715,
+      "sha256": "19e3584c5d7517e060336c2c3663bea00b3be8d6fe458566f412f081bc04f7f3"
+    },
+    {
+      "file": "render_saved_next91_rawDN.py",
+      "bytes": 8547,
+      "sha256": "23240776da1216417d37fcecd2594af1b7aa49cb6d3b11a6db9a0e36f91ad9c4"
+    },
+    {
+      "file": "renderer-frame-edge-offline-controls.json",
+      "bytes": 772,
+      "sha256": "7cea3625a2c6cc2e22431b2244011cdcd1540cdd731c2724a61360e519b9082f"
+    },
+    {
+      "file": "contact-inventory.json",
+      "bytes": 217462,
+      "sha256": "3b942c1279d7b8859cd1a7da98efe9c7f4fd3c536a97688bc0e607de477eff25"
+    }
+  ],
+  "review_artifacts": [
+    {
+      "file": "accepted10-owner-y-x.jsonl",
+      "bytes": 220,
+      "sha256": "50056ceab2b3775f7911d1594c4b6ede16424cae9d6b8038a36145bebbcd9451"
+    },
+    {
+      "file": "held81-owner-y-x.jsonl",
+      "bytes": 1782,
+      "sha256": "ad620ad5cea413a1f348240b383f19e7e99061b024c11379d2d80e075b77e77a"
+    },
+    {
+      "file": "reviewed91-dated-facets.jsonl",
+      "bytes": 141730,
+      "sha256": "738136edc1fd4f5f6491e86aa69d13d394fc2adcbad825a3fc13c090d3a3e81e"
+    },
+    {
+      "file": "verification.json",
+      "bytes": 2592,
+      "sha256": "d4e505e8952481ce8350d5f6ff8044662626ceb3f66e779b70a6bc4275a44db1"
+    },
+    {
+      "file": "verified-pins.json",
+      "bytes": 46154,
+      "sha256": "087bb8b9ce988bf8708b0329361a855311dfa58db127b736e86842016f6befe4"
+    },
+    {
+      "file": "verify_saved_observations.py",
+      "bytes": 12127,
+      "sha256": "bada0438e219567de05066c7b78fdf2fd9a0d57cd33bff135e4695fb76e1f909"
+    }
+  ],
+  "public_adopted_credit": 0,
+  "native_authority_credit": 0
+}

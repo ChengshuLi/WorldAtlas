@@ -1,0 +1,25 @@
+--- reviewed-whole72-reader
++++ complete-whole91-reader
+@@ -7,8 +7,8 @@
+ import rasterio
+ from rasterio.windows import Window
+ ROOT=Path(__file__).resolve().parent
+-PLAN=ROOT/'next-distinct-native-block-plan72.json'
+-PLAN_SHA='e3b1689644c1bd30f928e24f91b19e349984d54e368318784280d8cb9e01e098'
++PLAN=ROOT/'next-distinct-native-block-plan91.json'
++PLAN_SHA='6bf1cfeac003a93fb55b30fe5f7ecf85b135632cdf0b1f96d0c7ca2457a5dba9'
+ OUT=ROOT/'next-distinct-raw-native-observation-001'
+ OUT.mkdir(exist_ok=True)
+ def utc():return datetime.datetime.now(datetime.timezone.utc).isoformat()
+@@ -23,9 +23,9 @@
+  os.replace(temporary,path);return pin(path)
+ def identity(headers):return {k.lower():v for k,v in headers.items() if k.lower() in ('etag','content-length','last-modified','accept-ranges')}
+ raw=PLAN.read_bytes();assert hashlib.sha256(raw).hexdigest()==PLAN_SHA;plan=json.loads(raw)
+-assert plan['exact_original_scope']==72 and plan['total_asset_native_block_windows']==55 and len(plan['items'])==1
++assert plan['exact_original_scope']==91 and plan['total_asset_native_block_windows']==60 and len(plan['items'])==1
+ reader=pin(Path(__file__));start=time.monotonic();started=utc();remote_blocks=0;remote_data_calls=0;remote_mask_calls=0;reused_blocks=0;failures=[];complete_items=[]
+-atomic_json(OUT/'attempt-001.started.json',{'started_utc':started,'pid':os.getpid(),'plan_sha256':PLAN_SHA,'reader':reader,'phase':'rawDN+nativeMasks+SCL-only','Root_authorization':'Launch requires distinct complete whole72 plan review and explicit parent instruction; original first-date f9d57d96 review is historical method context only','normalization_display_indices':False})
++atomic_json(OUT/'attempt-001.started.json',{'started_utc':started,'pid':os.getpid(),'plan_sha256':PLAN_SHA,'reader':reader,'phase':'rawDN+nativeMasks+SCL-only','Root_authorization':'Launch requires distinct complete whole91 plan review and explicit parent instruction; original first-date f9d57d96 review is historical method context only','normalization_display_indices':False})
+ def status(state):
+  return atomic_json(OUT/'execution-status.json',{'state':state,'started_utc':started,'updated_utc':utc(),'elapsed_seconds':time.monotonic()-start,'pid':os.getpid(),'plan_sha256':PLAN_SHA,'reader':reader,'remote_value_block_calls':remote_data_calls,'remote_mask_block_calls':remote_mask_calls,'reused_complete_block_arrays':reused_blocks,'complete_items':complete_items,'failures':failures,'new_scientific_or_native_credit':0})
+ status('running')

@@ -1,0 +1,260 @@
+{
+  "status": "APPROVE_RAW_COMPLETE91_ACQUISITION_PENDING_ROOT_LAUNCH",
+  "reviewer": "/root/review_batam91_acquisition_plan",
+  "author": "finish_indonesia_packages",
+  "reviewed_at_utc": "2026-10-16T06:21:13.454773+00:00",
+  "plan": {
+    "bytes": 565384,
+    "sha256": "6bf1cfeac003a93fb55b30fe5f7ecf85b135632cdf0b1f96d0c7ca2457a5dba9"
+  },
+  "reader": {
+    "bytes": 12094,
+    "sha256": "1e99bc47aab15c012f99066c7e5f86299d052fee0d72970149b74d7316b65576"
+  },
+  "reader_delta": "Exact plan filename/hash, scope91/block60 assertions, and whole91 authorization wording only; source method, fail-fast, cache, orphan and 10GiB disk floor controls unchanged.",
+  "prior_guard_controls_reused": {
+    "file": "/workspace/scratch/127991fc8b8e/batam72-independent-review/wholeitem-controls-732199db.json",
+    "sha256": "95ed6ea626969bdcdeec0391ae47990eeeb92e7302974cccf8215c44d85a934b",
+    "passing_cases": 14
+  },
+  "literal_original778_current_held471_key_joins": 91,
+  "current_held_commit": "46f8b217ec2e7e633ad5369cd96e0a21f624ec53",
+  "current_held_commit_bytes_verified": true,
+  "disjoint_prior106": true,
+  "prior_actual_item_counts": {
+    "S2B_48NVF_20200101_1_L2A": 80,
+    "S2B_48NVG_20200101_0_L2A": 11
+  },
+  "all_prior_dates": "2020-01-01",
+  "selected_complete_natural_item": "S2A_48NVF_20200103_0_L2A",
+  "unchanged_frozen197_metadata_choices_replayed": 197,
+  "native_positions_checked": 455,
+  "actual_headers": 5,
+  "native_blocks": 60,
+  "native_blocks_per_asset": {
+    "red": 12,
+    "green": 12,
+    "blue": 12,
+    "nir": 12,
+    "scl": 12
+  },
+  "true_frame_incomplete_key_count": 2,
+  "incomplete_contexts": [
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130424,
+        "x": 206960
+      },
+      "asset": "red",
+      "requested": [
+        1002,
+        -18,
+        49,
+        49
+      ],
+      "available": [
+        1002,
+        0,
+        49,
+        31
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130424,
+        "x": 206960
+      },
+      "asset": "green",
+      "requested": [
+        1002,
+        -18,
+        49,
+        49
+      ],
+      "available": [
+        1002,
+        0,
+        49,
+        31
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130424,
+        "x": 206960
+      },
+      "asset": "blue",
+      "requested": [
+        1002,
+        -18,
+        49,
+        49
+      ],
+      "available": [
+        1002,
+        0,
+        49,
+        31
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130424,
+        "x": 206960
+      },
+      "asset": "nir",
+      "requested": [
+        1002,
+        -18,
+        49,
+        49
+      ],
+      "available": [
+        1002,
+        0,
+        49,
+        31
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130424,
+        "x": 206960
+      },
+      "asset": "scl",
+      "requested": [
+        501,
+        -9,
+        25,
+        25
+      ],
+      "available": [
+        501,
+        0,
+        25,
+        16
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130424,
+        "x": 206961
+      },
+      "asset": "red",
+      "requested": [
+        1017,
+        -18,
+        49,
+        49
+      ],
+      "available": [
+        1017,
+        0,
+        49,
+        31
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130424,
+        "x": 206961
+      },
+      "asset": "green",
+      "requested": [
+        1017,
+        -18,
+        49,
+        49
+      ],
+      "available": [
+        1017,
+        0,
+        49,
+        31
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130424,
+        "x": 206961
+      },
+      "asset": "blue",
+      "requested": [
+        1017,
+        -18,
+        49,
+        49
+      ],
+      "available": [
+        1017,
+        0,
+        49,
+        31
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130424,
+        "x": 206961
+      },
+      "asset": "nir",
+      "requested": [
+        1017,
+        -18,
+        49,
+        49
+      ],
+      "available": [
+        1017,
+        0,
+        49,
+        31
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130424,
+        "x": 206961
+      },
+      "asset": "scl",
+      "requested": [
+        508,
+        -9,
+        25,
+        25
+      ],
+      "available": [
+        508,
+        0,
+        25,
+        16
+      ]
+    }
+  ],
+  "npz_encoded_upper_bound_bytes": 180037800,
+  "decoded_values_masks_bytes": 157286400,
+  "joint_encoded_decoded_metadata_upper_bound_bytes": 371001512,
+  "acquisition_disk_upper_bound_bytes": 196815016,
+  "separate_future_three_copy_disk_bound_bytes": 590445048,
+  "future_copies_re_admit_against_actual_output": true,
+  "minimum_free_filesystem_bytes": 10737418240,
+  "actual_free_filesystem_bytes": 11285610496,
+  "free_after_acquisition_bound_bytes": 11088795480,
+  "free_margin_above_floor_after_acquisition_bytes": 351377240,
+  "future_copy_bound_is_not_current_acquisition_launch_restriction": true,
+  "source_value_or_mask_calls": 0,
+  "new_source_calls": 0,
+  "launch_performed": false,
+  "scientific_adoption_credit": 0,
+  "scope": "Approval for unchanged raw complete91 item acquisition only. True-frame context truncation remains explicit. Actual raw output custody and later scientific review remain separate; no source-body interpretation, adoption, normalization or generic 256MiB gate credit."
+}
