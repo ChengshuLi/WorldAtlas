@@ -1056,6 +1056,24 @@ export function resolveFinalizeConfig(config, reader) {
 
 export function finalizeDelivery(config, reader) {
   config = resolveFinalizeConfig(config, reader);
+  // The cumulative route uses one exact selected ledger in several roles.
+  // Authenticate it once here; this snapshot cannot survive another invocation.
+  const originalReader = reader;
+  const snapshotIdentity = pin => JSON.stringify([pin?.commit, pin?.path, pin?.mode,
+    pin?.git_blob_oid ?? pin?.blob, pin?.bytes, pin?.sha256,
+    pin?.decoded_bytes, pin?.decoded_sha256, pin?.uncompressed_bytes, pin?.uncompressed_sha256]);
+  const selectedIdentity = config.selected_ledger && snapshotIdentity(config.selected_ledger);
+  let selectedRaw, selectedJSON;
+  const read = pin => {
+    if (!selectedIdentity || snapshotIdentity(pin) !== selectedIdentity) return originalReader.read(pin);
+    if (selectedRaw === undefined) selectedRaw = Buffer.from(originalReader.read(pin));
+    return selectedRaw;
+  };
+  reader = {...originalReader, read, json(pin) {
+    if (!selectedIdentity || snapshotIdentity(pin) !== selectedIdentity) return originalReader.json(pin);
+    if (selectedJSON === undefined) selectedJSON = JSON.parse(read(pin));
+    return selectedJSON;
+  }};
   need(typeof config.new_prefix === 'string' && config.new_prefix.endsWith('/')
     && safe(config.new_prefix.slice(0, -1)), 'Exact owned output prefix required');
   const originalSelector = reader.read(config.selector), selection = JSON.parse(originalSelector);

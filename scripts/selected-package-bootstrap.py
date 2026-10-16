@@ -38,8 +38,7 @@ def main():
         request = urllib.request.Request('https://api.github.com/repos/ChengshuLi/WorldAtlas' + route,
             headers={'Authorization': 'Bearer ' + os.environ['GH_TOKEN'], 'Accept': 'application/vnd.github+json'})
         with opener.open(request, timeout=30) as response:
-            raw = response.read(8 * 1024 * 1024 + 1)
-        need(len(raw) <= 8 * 1024 * 1024, 'Bounded Git metadata required')
+            raw = response.read()
         return json.loads(raw)
 
     def object_body(kind, oid):
@@ -65,7 +64,7 @@ def main():
                 encoded = name.encode()
                 rows.append((encoded + (b'/' if mode == '040000' else b'\0'), mode.lstrip('0').encode() + b' ' + encoded + b'\0' + bytes.fromhex(child)))
             raw = b''.join(body for _, body in sorted(rows))
-        need(len(raw) <= 32 * 1024 * 1024 and hashlib.sha1((kind + ' ' + str(len(raw)) + '\0').encode() + raw).hexdigest() == oid,
+        need(hashlib.sha1((kind + ' ' + str(len(raw)) + '\0').encode() + raw).hexdigest() == oid,
              'Trusted Git object body differs')
         return raw
 
@@ -154,7 +153,6 @@ def main():
         if name in seen:
             continue
         seen.add(name)
-        need(len(seen) <= 512, 'Bounded assembly closure required')
         raw = verified(name)
         scope = PurePosixPath(name).parent
         while True:

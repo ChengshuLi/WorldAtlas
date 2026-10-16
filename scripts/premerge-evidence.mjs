@@ -13,7 +13,7 @@ const geometryPolicy = {
 };
 
 /** Optional v1 semantic bindings in the existing evidence manifest, never candidate execution. */
-export function validateRecordChecks(manifest, readFile) {
+export function validateRecordChecks(manifest, readFile, readJSON) {
   const checks = manifest.record_checks ?? [];
   need(Array.isArray(checks), 'Record checks must be an array');
   const at = (path, pointer, vintage) => {
@@ -21,9 +21,13 @@ export function validateRecordChecks(manifest, readFile) {
     const descriptor = vintage === 'candidate' ? manifest.outputs.find(file => file.path === path)
       : manifest.baseline.files.find(file => file.path === path && (file.commit ?? manifest.baseline.commit) === vintage);
     need(descriptor, 'Record input is outside exact manifest scope');
-    let raw = readFile(path, vintage, descriptor);
-    if (path.endsWith('.gz') || descriptor.uncompressed_sha256 !== undefined) raw = decodeEvidenceGzip(raw, descriptor);
-    let value = JSON.parse(raw);
+    let value;
+    if (readJSON) value = readJSON(path, vintage, descriptor);
+    else {
+      let raw = readFile(path, vintage, descriptor);
+      if (path.endsWith('.gz') || descriptor.uncompressed_sha256 !== undefined) raw = decodeEvidenceGzip(raw, descriptor);
+      value = JSON.parse(raw);
+    }
     for (const key of pointer === '' ? [] : pointer.slice(1).split('/').map(key => key.replaceAll('~1', '/').replaceAll('~0', '~'))) {
       need(value && Object.hasOwn(value, key), 'Required record input is absent'); value = value[key];
     }
@@ -69,9 +73,43 @@ export function validatePremergeManifest(manifest, {readFile, files, manifestPat
     evidenceBytePlan([...baselineFiles(manifest), ...manifest.sources.flatMap(source => source.files ?? []),
       ...manifest.outputs, ...[...originals.values()].map(file => ({...file, commit: 'base'}))]);
   }
+  // Retain only bodies needed by later semantic checks, for this call alone.
+  // Whole-file inspection still authenticates every declared body first.
+  const semanticPaths = new Set([
+    ...(manifest.metric_bindings ?? []).map(binding => binding.path),
+    ...(manifest.record_checks ?? []).flatMap(check => [check.path, check.reference_path]),
+    ...(manifest.rendered_tables ?? []).map(table => table.path),
+    ...(manifest.validation ?? []).map(control => control.evidence_path)
+  ]);
+  const checkedBodies = new Map(), parsed = new Map();
+  const key = (name, vintage) => JSON.stringify([vintage, name]);
+  const identity = file => JSON.stringify([file.path, file.bytes, file.sha256, file.hash_kind,
+    file.uncompressed_bytes, file.uncompressed_sha256]);
   const result = validateEvidence(manifest, {readFile, expectedIssue: issue.number,
-    expectedLane: spec.mode, expectedSubjects: quality.subject_ids, expectedPins: quality.pins});
-  const recordChecks = validateRecordChecks(manifest, readFile);
+    expectedLane: spec.mode, expectedSubjects: quality.subject_ids, expectedPins: quality.pins,
+    onFileChecked(file, vintage, raw, unpacked) {
+      if (semanticPaths.has(file.path)) checkedBodies.set(key(file.path, vintage),
+        {identity: identity(file), raw, unpacked});
+    }});
+  const originalRead = readFile;
+  readFile = (name, vintage, descriptor) => {
+    const body = checkedBodies.get(key(name, vintage));
+    if (!body) return originalRead(name, vintage, descriptor);
+    need(identity(descriptor) === body.identity, 'Checked evidence descriptor changed');
+    return body.raw;
+  };
+  const readJSON = (name, vintage, descriptor, decode = true) => {
+    const bodyKey = key(name, vintage), parsedKey = JSON.stringify([vintage, name, decode]);
+    // Check identity even when an earlier pointer already parsed this body.
+    let raw = readFile(name, vintage, descriptor);
+    if (!parsed.has(parsedKey)) {
+      if (decode && (name.endsWith('.gz') || descriptor.uncompressed_sha256 !== undefined))
+        raw = checkedBodies.get(bodyKey)?.unpacked ?? decodeEvidenceGzip(raw, descriptor);
+      parsed.set(parsedKey, JSON.parse(raw));
+    }
+    return parsed.get(parsedKey);
+  };
+  const recordChecks = validateRecordChecks(manifest, readFile, readJSON);
   const receipts = manifest.change_receipts;
   // Git's complete immutable diff and exact-head review already bind code changes.
   // Retained legacy receipts remain checked when supplied, but need not be recopied.
@@ -107,9 +145,7 @@ export function validatePremergeManifest(manifest, {readFile, files, manifestPat
     const binding = bindings.find(row => row.metric_id === metric.id);
     need(binding && outputs.has(binding.path) && typeof binding.json_pointer === 'string' && binding.json_pointer.startsWith('/'), 'Invalid metric output binding');
     const descriptor = manifest.outputs.find(file => file.path === binding.path);
-    let raw = readFile(binding.path, 'candidate', descriptor);
-    if (binding.path.endsWith('.gz') || descriptor.uncompressed_sha256 !== undefined) raw = decodeEvidenceGzip(raw, descriptor);
-    let value = JSON.parse(raw);
+    let value = readJSON(binding.path, 'candidate', descriptor);
     for (const key of binding.json_pointer.slice(1).split('/').map(key => key.replaceAll('~1', '/').replaceAll('~0', '~'))) {
       need(value && Object.hasOwn(value, key), 'Metric pointer does not resolve'); value = value[key];
     }
@@ -148,7 +184,7 @@ export function validatePremergeManifest(manifest, {readFile, files, manifestPat
       control.outcome === 'passed' && outputs.has(control.evidence_path), 'Invalid declared control');
     controlKeys.add(key);
     const descriptor = manifest.outputs.find(file => file.path === control.evidence_path);
-    const evidence = JSON.parse(readFile(control.evidence_path, 'candidate', descriptor));
+    const evidence = readJSON(control.evidence_path, 'candidate', descriptor, false);
     need(evidence.method_id === control.method_id && evidence.kind === control.kind && evidence.outcome === 'passed', 'Control bytes do not match receipt');
     if (control.kind === 'reproducibility') need(evidence.run_one_sha256 === evidence.run_two_sha256 && /^[a-f0-9]{64}$/.test(evidence.run_one_sha256), 'Two-run reproducibility hashes differ');
   }

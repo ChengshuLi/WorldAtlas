@@ -72,3 +72,22 @@ test('actual control CLI rejects files, dangling destinations and symlink parent
     }
   }finally{fs.rmSync(root,{recursive:true,force:true});}
 });
+
+
+test('complete-family custody reads and gunzips one checked snapshot while retaining both record joins',()=>{
+  const f=fixture(),original=zlib.gunzipSync,read=f.readFile;let reads=0,gunzips=0;
+  f.readFile=Object.assign((...args)=>{reads++;return read(...args);},{assertAncestor:read.assertAncestor});
+  zlib.gunzipSync=(...args)=>{gunzips++;return original(...args);};syncBuiltinESMExports();
+  try{assert.equal(run(f).limits.length,2);assert.equal(reads,1);assert.equal(gunzips,1);}
+  finally{zlib.gunzipSync=original;syncBuiltinESMExports();}
+});
+
+test('family snapshot rejects late descriptor/vintage drift and never carries trust across calls',()=>{
+  let f=fixture();
+  assert.throws(()=>validateEvidence(f.manifest,{readFile:f.readFile,onFileChecked(){f.file.uncompressed_sha256='0'.repeat(64);}}),/Checked subject descriptor changed/);
+  f=fixture();
+  assert.throws(()=>validateEvidence(f.manifest,{readFile:f.readFile,onFileChecked(){f.manifest.baseline.subject_files[ids[0]].commit='b'.repeat(40);}}),/unpinned/);
+  f=fixture();
+  assert.equal(validateEvidence(f.manifest,{readFile:f.readFile,onFileChecked(){f.raw.fill(0);}}).limits.length,2);
+  assert.throws(()=>run(f),/Input bytes mismatch/);
+});

@@ -6,6 +6,8 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {execFileSync, spawnSync} from 'node:child_process';
 import {gzipSync} from 'node:zlib';
+import crypto from 'node:crypto';
+import {syncBuiltinESMExports} from 'node:module';
 import {renderClaim} from '../scripts/issue-claim-contract.mjs';
 import {subjectsHash} from '../scripts/evidence-quality.mjs';
 import {jsonBytes, digest, pinReader, publish, admitPublication, prepareRequests, retainProducts, nativeRequests,
@@ -1162,4 +1164,78 @@ test('real package projection retains the provider-adoption leaf and its existin
  const failed=f.run('package','.cache/delivery-handoff/provider-refused',[],f.withEvidence(evidence));
  assert.notEqual(failed.status,0);assert.match(failed.stderr,/hash differs/);
  assert.equal(fs.existsSync(path.join(f.root,'.cache/delivery-handoff/provider-refused','preparation.json')),false);
+});
+
+
+test('finalizer authenticates and parses a shared cumulative selected ledger only once per invocation',t=>{
+  const f=modernFinalizationFixture(t),reader=f.r;
+  f.config.ledger=f.config.selected_ledger;
+  const selected=reader.read(f.config.selected_ledger),oid=f.config.selected_ledger.git_blob_oid;
+  const read=reader.read,json=reader.json,hash=crypto.createHash,parse=JSON.parse;let reads=0,parses=0,hashes=0;
+  reader.read=pin=>{if(pin.git_blob_oid===oid)reads++;return read(pin);};
+  reader.json=pin=>JSON.parse(reader.read(pin));
+  JSON.parse=(raw,...args)=>{if(Buffer.isBuffer(raw)&&raw.equals(selected))parses++;return parse(raw,...args);};
+  crypto.createHash=(algorithm,...args)=>{
+    const result=hash(algorithm,...args),update=result.update;
+    result.update=function(raw,...rest){
+      if(algorithm==='sha256'&&Buffer.isBuffer(raw)&&raw.equals(selected))hashes++;
+      return update.call(this,raw,...rest);
+    };return result;
+  };syncBuiltinESMExports();
+  try{
+    const products=finalizeDelivery(f.config,reader);
+    assert.equal(JSON.parse(products['selected-delivery-expectations.json']).selected_ledger_sha256,f.config.selected_ledger.sha256);
+    console.log('ACTUAL_SELECTED_LEDGER_WORK',JSON.stringify({reads,parses,hashes}));
+    assert.equal(reads,1);assert.equal(parses,1);assert.equal(hashes,1);
+  }finally{reader.read=read;reader.json=json;JSON.parse=parse;crypto.createHash=hash;syncBuiltinESMExports();}
+});
+
+
+test('finalizer selected snapshot isolates mutable reader bytes and authenticates anew on the next call',t=>{
+  const f=modernFinalizationFixture(t),reader=f.r;
+  f.config.ledger=f.config.selected_ledger;
+  const raw=reader.read(f.config.selected_ledger),json=reader.json;let changed=false;
+  reader.json=pin=>{
+    if(!changed&&pin.path===f.config.registry.path){raw.fill(0);changed=true;}
+    return json(pin);
+  };
+  const result=finalizeDelivery(f.config,reader);
+  assert.equal(JSON.parse(result['selected-delivery-expectations.json']).selected_ledger_sha256,f.config.selected_ledger.sha256);
+  assert.equal(changed,true);
+  assert.throws(()=>finalizeDelivery(f.config,reader),/Whole body hash differs/);
+});
+
+test('finalizer snapshot does not hide a changed selected-ledger role descriptor',t=>{
+  const f=modernFinalizationFixture(t),reader=f.r;
+  f.config.ledger=f.config.selected_ledger;
+  const json=reader.json;let changed=false;
+  reader.json=pin=>{
+    if(!changed&&pin.path===f.config.registry.path){f.config.ledger.sha256='0'.repeat(64);changed=true;}
+    return json(pin);
+  };
+  assert.throws(()=>finalizeDelivery(f.config,reader),/Whole body hash differs/);
+  assert.equal(changed,true);
+});
+
+test('cumulative snapshot retains coherent changed-row and rebind refusals',t=>{
+  for(const kind of ['rows','rebind']){
+    const f=modernFinalizationFixture(t),r=f.r,sidecar=r.json(f.config.sidecar);
+    const selected=r.json(f.config.selected_ledger),patch=r.json(sidecar.logical_asset_map.patch);
+    const wrapped=r.json(sidecar.runtime_envelope),envelope=wrapped.additiveRelease;
+    if(kind==='rows')selected.rows[0].native_cells++;
+    else selected.current_rebind=f.config.registry;
+    f.save(f.config.selected_ledger.path,selected);f.commitAll();
+    const next=f.pin(f.config.selected_ledger.path);
+    f.config.ledger=next;f.config.selected_ledger=next;
+    patch.ledger_sha256=next.sha256;
+    f.save(sidecar.logical_asset_map.patch.path,patch);f.commitAll();
+    const nextPatch=f.pin(sidecar.logical_asset_map.patch.path);
+    Object.assign(envelope.ledger,{bytes:next.bytes,sha256:next.sha256});
+    Object.assign(envelope.patch,{bytes:nextPatch.bytes,sha256:nextPatch.sha256});
+    f.save(sidecar.runtime_envelope.path,wrapped);f.commitAll();
+    sidecar.runtime_envelope=f.pin(sidecar.runtime_envelope.path);
+    sidecar.logical_asset_map.ledger=next;sidecar.logical_asset_map.patch=nextPatch;
+    f.save(f.config.sidecar.path,sidecar);f.commitAll();f.config.sidecar=f.pin(f.config.sidecar.path);
+    assert.throws(()=>finalizeDelivery(f.config,r),kind==='rows'?/Native component cell count differs/:/metadata joins differ/);
+  }
 });

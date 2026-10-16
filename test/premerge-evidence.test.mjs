@@ -3,6 +3,8 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
+import zlib from 'node:zlib';
+import {syncBuiltinESMExports} from 'node:module';
 import {memoizeImmutableGitBlobs} from '../scripts/immutable-git-blobs.mjs';
 import {sha256, subjectsHash, repositoryReader} from '../scripts/evidence-quality.mjs';
 import {evidenceRequirement} from '../scripts/evidence-policy.mjs';
@@ -33,6 +35,86 @@ function fixture() {
   return {manifest, spec, issue, files, reservation, pr, readFile, manifestPath, branch};
 }
 const validate = f => validatePremergeManifest(f.manifest, f);
+function sharedResultFixture() {
+  const f = fixture(), values = Object.fromEntries(Array.from({length: 8}, (_,i) => ['field' + i, i + 1]));
+  const decoded = Buffer.from(JSON.stringify(values)), compressed = zlib.gzipSync(decoded);
+  f.manifest.outputs = [{...desc(outputPath, compressed), uncompressed_bytes: decoded.length,
+    uncompressed_sha256: sha256(decoded)}];
+  f.manifest.metrics = Object.entries(values).map(([field, value]) => ({id: field, value, unit: 'count',
+    vintage: 'archived', input_sha256: sha256(baseline), evaluation_commit: commit}));
+  f.manifest.metric_bindings = Object.keys(values).map(field => ({metric_id: field, path: outputPath, json_pointer: '/' + field}));
+  f.manifest.summaries = [];
+  const reads = new Map(), bodies = new Map([[commit + ':baseline.txt', baseline], ['candidate:' + outputPath, compressed]]);
+  f.readFile = (name, vintage) => {
+    const key = vintage + ':' + name; reads.set(key, (reads.get(key) ?? 0) + 1);
+    assert.ok(bodies.has(key), 'No undeclared synthetic body'); return bodies.get(key);
+  };
+  return {...f, reads, bodies, decoded, compressed};
+}
+
+test('eight shared-result metrics reuse one authenticated read and gzip decode in the actual validator', () => {
+  const f = sharedResultFixture(), original = zlib.gunzipSync, parse = JSON.parse; let gunzips = 0, parses = 0;
+  zlib.gunzipSync = (...args) => {gunzips++; return original(...args);}; syncBuiltinESMExports();
+  JSON.parse = (raw, ...args) => {if (Buffer.isBuffer(raw) && raw.equals(f.decoded)) parses++; return parse(raw, ...args);};
+  try {
+    assert.equal(validate(f).metric_bindings_checked, 8);
+    assert.equal(f.reads.get('candidate:' + outputPath), 1);
+    assert.equal(f.reads.get(commit + ':baseline.txt'), 1);
+    assert.equal(gunzips, 1); assert.equal(parses, 1);
+  } finally {JSON.parse = parse; zlib.gunzipSync = original; syncBuiltinESMExports();}
+});
+
+test('record and metric checks share the authenticated decoded result while retaining exact reference joins', () => {
+  const f = sharedResultFixture(), rows = [{id: 'a', owner: 'expected'}];
+  const decoded = Buffer.from(JSON.stringify({...JSON.parse(f.decoded), rows})), raw = zlib.gzipSync(decoded);
+  const reference = Buffer.from(JSON.stringify(rows));
+  f.bodies.set('candidate:' + outputPath, raw); f.bodies.set(commit + ':baseline.txt', reference);
+  Object.assign(f.manifest.outputs[0], desc(outputPath, raw), {uncompressed_bytes: decoded.length, uncompressed_sha256: sha256(decoded)});
+  f.manifest.baseline.files = [desc('baseline.txt', reference)];
+  f.manifest.metrics.forEach(metric => {metric.input_sha256 = sha256(reference);});
+  f.manifest.record_checks = [{version: 1, path: outputPath, json_pointer: '/rows', id_key: 'id',
+    reference_path: 'baseline.txt', reference_json_pointer: '', reference_id_key: 'id', fields: {owner: 'owner'}}];
+  assert.equal(validate(f).record_checks_checked, 1);
+  assert.equal(f.reads.get('candidate:' + outputPath), 1); assert.equal(f.reads.get(commit + ':baseline.txt'), 1);
+  f.bodies.set(commit + ':baseline.txt', Buffer.from(JSON.stringify([{id: 'a', owner: 'foreign'}])));
+  f.manifest.baseline.files = [desc('baseline.txt', f.bodies.get(commit + ':baseline.txt'))];
+  f.manifest.metrics.forEach(metric => {metric.input_sha256 = f.manifest.baseline.files[0].sha256;});
+  assert.throws(() => validate(f), /Independent record join mismatch/);
+});
+
+test('shared-result reuse preserves every pointer/value check and reauthenticates each fresh call', () => {
+  const f = sharedResultFixture(); validate(f);
+  f.manifest.metrics[7].value++; assert.throws(() => validate(f), /Generated result differs/);
+  f.manifest.metrics[7].value--;
+  f.manifest.metric_bindings[7].json_pointer = '/absent'; assert.throws(() => validate(f), /pointer does not resolve/);
+  f.manifest.metric_bindings[7].json_pointer = '/field7';
+  const changed = zlib.gzipSync(Buffer.from(JSON.stringify({field0: 99})));
+  f.bodies.set('candidate:' + outputPath, changed);
+  assert.throws(() => validate(f), /Input bytes mismatch/);
+  Object.assign(f.manifest.outputs[0], desc(outputPath, changed));
+  assert.throws(() => validate(f), /Uncompressed bytes mismatch/);
+  const decoded = Buffer.from(JSON.stringify({...JSON.parse(f.decoded), field7: 99}));
+  const raw = zlib.gzipSync(decoded); f.bodies.set('candidate:' + outputPath, raw);
+  Object.assign(f.manifest.outputs[0], desc(outputPath, raw), {uncompressed_bytes: decoded.length, uncompressed_sha256: sha256(decoded)});
+  assert.throws(() => validate(f), /Generated result differs/);
+});
+
+test('reuse checks descriptor identity on a cache hit and keeps historical/candidate same paths distinct', () => {
+  const drifted = sharedResultFixture();
+  Object.defineProperty(drifted.manifest.metric_bindings[1], 'json_pointer', {get() {
+    drifted.manifest.outputs[0].sha256 = '0'.repeat(64); return '/field1';
+  }});
+  assert.throws(() => validate(drifted), /Checked evidence descriptor changed/);
+  const f = sharedResultFixture();
+  f.manifest.baseline = {version: 2, commit, files: [{...desc(outputPath, baseline), commit}], pins: {}};
+  f.bodies.delete(commit + ':baseline.txt'); f.bodies.set(commit + ':' + outputPath, baseline);
+  f.readFile.assertAncestor = actual => assert.equal(actual, commit);
+  f.manifest.metrics.forEach(metric => {metric.input_file = {path: outputPath, commit};});
+  assert.equal(validate(f).metric_bindings_checked, 8);
+  assert.equal(f.reads.get(commit + ':' + outputPath), 1);
+  assert.equal(f.reads.get('candidate:' + outputPath), 1);
+});
+
 test('independent record bindings reject coherent wrong joins, incomplete and vacuous coverage', () => {
   const reference = [{id: 'a', parent: 'province-a', unit: 'm2'}, {id: 'b', parent: 'province-b', unit: 'm2'}];
   const manifest = {outputs: [{path: 'candidate.json'}], baseline: {commit, files: [{path: 'reference.json'}]}, record_checks: [{

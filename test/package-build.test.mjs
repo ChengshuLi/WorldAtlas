@@ -141,3 +141,30 @@ test('producer and selected runtime probes genuinely import without Python start
   execFileSync(python,['-c','pass']);
   assert.equal(await fs.readFile(marker,'utf8'),'executed');
 });
+
+
+test('the actual build caller validates prepared products once and retains release/grid comparisons', async () => {
+  const source = await fs.readFile(new URL('../scripts/build-static-inner.mjs', import.meta.url), 'utf8');
+  const start = source.indexOf('  reference.pixelMissing='), end = source.indexOf('    const bytes=selectedGrid.bounds;', start);
+  assert(start > 0 && end > start);
+  // Execute the actual caller statements before allocation/build, with explicit
+  // fixture dependencies. The real checker/Python path has its own control.
+  const run = new (Object.getPrototypeOf(async function() {}).constructor)('context', `with(context){${source.slice(start, end)}}}`);
+  const {createHash} = await import('node:crypto'), hierarchy = Buffer.from('fixture hierarchy');
+  const hierarchySHA = createHash('sha256').update(hierarchy).digest('hex');
+  const fixture = () => {
+    const value = {calls: 0, fs: {readFile: async name => {assert.equal(name, 'data/hierarchy.json');return hierarchy;}}, createHash,
+      reference: {features: []}, pixelAudit: {missing: []}, preparedEvidence: {}, currentContext: null,
+      geographicRelease: {footprints_sha256: 'actual-footprints', hierarchy_sha256: hierarchySHA},
+      fixedGrid: {footprints_sha256: 'actual-footprints', hierarchy_sha256: hierarchySHA}, selectedGrid: {},
+      validatePreparedEvidenceIndex: () => {}};
+    value.checkPrepared = features => {assert.equal(features, value.reference.features);value.calls++;return 'actual-footprints';};
+    return value;
+  };
+  for (const fixed of [true, false]) {const f=fixture();if(!fixed)f.fixedGrid=null;await run(f);assert.equal(f.calls,1);}
+  for (const [target, key] of [['geographicRelease','footprints_sha256'],['geographicRelease','hierarchy_sha256'],['fixedGrid','footprints_sha256'],['fixedGrid','hierarchy_sha256']]) {
+    const f=fixture();f[target][key]='changed';await assert.rejects(run(f),/Reference release|canonical grid/);assert.equal(f.calls,1);
+  }
+  const projected=fixture();projected.fixedGrid.hierarchy_sha256='original';projected.selectedGrid.applicationReference={hierarchy_sha256:hierarchySHA};await run(projected);assert.equal(projected.calls,1);
+  const invalid=fixture();invalid.checkPrepared=()=>{throw Error('actual prepared bytes changed');};await assert.rejects(run(invalid),/actual prepared bytes changed/);
+});
