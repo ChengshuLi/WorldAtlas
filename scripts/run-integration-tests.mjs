@@ -76,14 +76,26 @@ export function fullRegressionShard(inventory, shard) {
     (name === COMPONENT_CONTROL_TEST ? 1 : index % 3) === shard)];
 }
 
-// The runner owns this roster; routing controls derive their focused membership.
-export const FOCUSED_INTEGRATION_TESTS = Object.freeze(['handoff-scope','issue-claims','worker-result','regional-research-gate','geography-worker-lane',
-  'evidence-quality','historical-evidence','premerge-evidence','geographic-adjudication-api','trusted-workflow-checkouts','merge-integration','merge-integration-entrypoint','integration-proof',
-  // Classification controls exercise their real retained-input routing cases.
-  'selected-data-profile',
-  'git-blob-transport','immutable-git-blobs','pr-evidence-transport',
-  // Actual delivery entry/advance consumers, including scientific dispatch guards.
-  'delivery-evidence-derivation','delivery-finalize-config','delivery-handoff-advance','delivery-handoff','delivery-registry-delta','local-workspace','native-authority-entry','native-diagnostic-entry','native-witness-authority','physical-source-retention','source-cohort','source-completed-staging','source-evidence-derivation','source-member-native-delivery','source-target-native-delivery'].map(name => `test/${name}.test.mjs`));
+// Focused regression follows delivery-control test families. The same predicate
+// routes changed tests and selects the actual discovered files, so adding or
+// removing a control does not require a second inventory edit. App/rendering,
+// database, prepared-output and scientific-kernel suites remain full regression.
+const FOCUSED_TEST_FAMILIES = [
+  'delivery-[\\w-]+', 'integration-[\\w-]+', 'ci-[\\w-]+', 'github-[\\w-]+',
+  'issue-[\\w-]+', 'worker-[\\w-]+',
+  'package-(?:build(?:-preflight)?|inputs|output-artifact|python-execution|python-runtime)',
+  'selected-package-(?:assembly|bootstrap)',
+  'source-(?:cohort|completed-staging|evidence-derivation|member-native-delivery|target-native-delivery)',
+  'handoff-scope', 'regional-research-gate', 'geography-worker-lane',
+  'evidence-quality', 'historical-evidence', 'premerge-evidence',
+  'geographic-adjudication-api', 'geographic-report-artifact', 'trusted-workflow-checkouts',
+  'merge-integration(?:-entrypoint)?', 'selected-data-profile', 'git-blob-transport',
+  'immutable-git-blobs', 'pr-evidence-transport', 'local-workspace',
+  'native-(?:authority-entry|diagnostic-entry|witness-authority|regression-inputs)',
+  'physical-source-retention', 'revised-source-native', 'dated-centre-authority', 'full-regression-shards'
+];
+const focusedTest = new RegExp('^test/(?:' + FOCUSED_TEST_FAMILIES.join('|') + ')\\.test\\.(?:mjs|py)$');
+export const focusedIntegrationTest = name => focusedTest.test(name);
 
 export function integrationTestFiles(profile, shard, testSelection = 'complete') {
   if (!['complete','selected-output'].includes(testSelection) ||
@@ -92,7 +104,7 @@ export function integrationTestFiles(profile, shard, testSelection = 'complete')
       (profile === 'evidence' && shard !== 0)) throw Error('Invalid trusted integration test profile');
   const inventory = fs.readdirSync('test').filter(name => name.endsWith('.test.mjs')).sort().map(name=>`test/${name}`);
   const files = testSelection === 'selected-output' ? ['test/compact-ownership.test.mjs']
-    : profile === 'full' ? fullRegressionShard(inventory, shard) : [...FOCUSED_INTEGRATION_TESTS];
+    : profile === 'full' ? fullRegressionShard(inventory, shard) : inventory.filter(focusedIntegrationTest);
   if (!files.length || files.some(name => !fs.existsSync(name))) throw Error('Missing integration test inventory');
   return files;
 }

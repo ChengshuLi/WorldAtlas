@@ -6,6 +6,7 @@ import {spawnSync, execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {integrationTestFiles} from '../scripts/run-integration-tests.mjs';
+import {integrationProfile} from '../scripts/integration-profile.mjs';
 import {checkoutExecutionClosure} from '../coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/artifact-checkout-execution.mjs';
 
 const repo=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
@@ -109,12 +110,11 @@ test('real evidence entry runs every selected test with no canonical namespace',
   assert.equal(fs.readdirSync(f.root).filter(n=>n.startsWith('tests-reached-')).length,focused.length);
   assert.ok(!r.stdout.includes('canonical_checkout'));
 });
-test('real evidence entry refuses a missing required focused test before execution',t=>{
+test('real evidence entry discovers the remaining focused controls after a test is removed',t=>{
   const f=fixture(t);
   fs.unlinkSync(path.join(f.root,'test/native-diagnostic-entry.test.mjs'));
-  const r=f.run();assert.equal(r.status,1,r.stderr);
-  assert.match(r.stderr,/Missing integration test inventory/);
-  assert.equal(fs.readdirSync(f.root).filter(n=>n.startsWith('tests-reached-')).length,0);
+  const r=f.run();assert.equal(r.status,0,r.stderr);
+  assert.equal(fs.readdirSync(f.root).filter(n=>n.startsWith('tests-reached-')).length,focused.length-1);
 });
 test('real full entry consumes current inputs without a historical restoration helper',t=>{
   const f=fixture(t,{full:true}),r=f.run();assert.equal(r.status,0,r.stderr);
@@ -203,4 +203,23 @@ test('actual retained-output runner executes current tests without any model res
   assert(!fs.existsSync(path.join(f.root,'tests-reached-canonical-compact-repack')));
   assert(!fs.existsSync(path.join(f.root,'tests-reached-prepared-parity')));
   assert(!result.stdout.includes('selected_model_reader_checkout'));assert(!result.stdout.includes('canonical_checkout'));
+});
+
+
+test('focused routing cannot accept a deleted helper imported by the retained real runner',t=>{
+  const name='scripts/ci-setup-observations.mjs',f=fixture(t);
+  assert.equal(integrationProfile('engineering/deleted-control',[{filename:name,status:'removed'}],{},new Map()),'evidence');
+  fs.unlinkSync(path.join(f.root,name));
+  const result=f.run();assert.notEqual(result.status,0);
+  assert.match(result.stderr,/ERR_MODULE_NOT_FOUND/);
+  assert(!fs.readdirSync(f.root).some(name=>name.startsWith('tests-reached-')));
+});
+
+test('deleting an isolated retired workflow needs only the remaining focused consumers',t=>{
+  const filename='.github/workflows/retired-isolated-stage.yml';
+  assert.equal(integrationProfile('engineering/retired-stage',[{filename,status:'removed'}],{},new Map()),'evidence');
+  const f=fixture(t),result=f.run();assert.equal(result.status,0,result.stderr);
+  assert.equal(fs.readdirSync(f.root).filter(name=>name.startsWith('tests-reached-')).length,focused.length);
+  for(const filename of ['scripts/build-static-inner.mjs','src/native-grid.js','hosted/geographic-releases.js'])
+    assert.equal(integrationProfile('engineering/retired-stage',[{filename,status:'removed'}],{},new Map()),'full');
 });

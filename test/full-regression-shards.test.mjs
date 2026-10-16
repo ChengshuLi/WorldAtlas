@@ -40,10 +40,10 @@ test('a partial or future inventory never invents a reserved test or omits an un
 test('duplicate inventory entries are rejected by the exhaustive coverage control', () => {
   assert.throws(() => verifyAssignment([...inventory, inventory[0]]));
 });
-test('test-runner edits and renames require actual full-suite validation', () => {
+test('test-runner edits use actual focused runner controls', () => {
   for (const file of [{filename:'scripts/run-integration-tests.mjs'},
     {filename:'docs/runner.md', previous_filename:'scripts/run-integration-tests.mjs'}]) {
-    assert.equal(integrationProfile('engineering/example', [file]), 'full');
+    assert.equal(integrationProfile('engineering/example', [file]), 'evidence');
   }
   assert.equal(integrationProfile('engineering/example', [{filename:'docs/runner.md'}]), 'evidence');
 });

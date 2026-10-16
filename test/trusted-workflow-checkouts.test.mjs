@@ -15,7 +15,9 @@ function probe(directories, {geography = false, checkoutTests = false} = {}) {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'worldatlas-checkout-'));
   try {
     fs.copyFileSync(path.join(root, 'package.json'), path.join(directory, 'package.json'));
-    for (const relative of directories) {
+    const paths = new Set(directories.flatMap(pattern => pattern.includes('*')
+      ? fs.globSync(pattern.replace(/^\//,''),{cwd:root}) : [pattern]));
+    for (const relative of paths) {
       const source = path.join(root, relative);
       const destination = path.join(directory, relative);
       fs.mkdirSync(path.dirname(destination), {recursive: true});
