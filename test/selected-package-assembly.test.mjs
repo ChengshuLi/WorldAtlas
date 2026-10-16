@@ -227,7 +227,7 @@ function sourceFixture(f,{author=true}={}){
 }
 
 
-test('actual assembly declines current reference metadata before discovery while preserving source and head checks',async t=>{
+test('actual assembly discovers identical reference candidates only after source and head checks',async t=>{
   const f=original(t),s=sourceFixture(f,{author:false});
   // Copy the literal executing entry and its relative imports into a small real
   // repository, so currentSource authenticates actual fixture Git metadata.
@@ -246,35 +246,32 @@ test('actual assembly declines current reference metadata before discovery while
   const {assembleSelectedPackage}=await import(pathToFileURL(path.join(f.root,'scripts/assemble-selected-package.mjs')));
   const calls=[],api=async route=>{calls.push(route);return {workflow_runs:[]};};
   const args=()=>({api,repo:f.repo,expectedHead:s.git('rev-parse','HEAD')});
-  for(const extra of [{},{originalRunId:17,trustedBase:'a'.repeat(40)}])
-    await assert.rejects(assembleSelectedPackage({...args(),...extra}),/^Error: Reference metadata application requires a full build$/);
   await assert.rejects(assembleSelectedPackage({...args(),expectedHead:'f'.repeat(40)}),/Actual selected head changed/);
   const selected=path.join(f.root,'data/ownership-selection.json'),raw=fs.readFileSync(selected);
   fs.appendFileSync(selected,' ');
   await assert.rejects(assembleSelectedPackage(args()),/Current selected metadata differs from Git/);
   fs.writeFileSync(selected,raw);
-  assert.deepEqual(calls,[],'An already-refused current selection must not discover or download originals');
+  assert.deepEqual(calls,[],'Changed source/head must fail before discovering or downloading originals');
+  assert.deepEqual(await assembleSelectedPackage(args()),{assembled:false,reason:'No applicable retained original output in bounded recent-result search'});
+  assert.equal(calls.length,1);calls.length=0;
   assert.equal(fs.existsSync(path.join(f.root,'.cache')),false,'No original-output scratch was created');
-  // Exercise the real CLI fallback too, with a local network tripwire rather
-  // than a real token or remote call.
+  // Exercise the real CLI fallback with a local empty-discovery transport,
+  // without sending a token or making a remote call.
   const event=path.join(f.root,'event.json');fs.writeFileSync(event,'{}');
   const entry=path.join(f.root,'scripts/assemble-selected-package.mjs');
   const probe=path.join(f.root,'cli-probe.mjs');
-  fs.writeFileSync(probe,`globalThis.fetch=async()=>{throw Error('Unexpected network discovery');};process.argv=[process.execPath,${JSON.stringify(entry)}];await import(${JSON.stringify(pathToFileURL(entry).href)});`);
+  fs.writeFileSync(probe,`globalThis.fetch=async()=>Response.json({workflow_runs:[]});process.argv=[process.execPath,${JSON.stringify(entry)}];await import(${JSON.stringify(pathToFileURL(entry).href)});`);
   const child=spawnSync(process.execPath,[probe],{encoding:'utf8',env:{...process.env,NODE_OPTIONS:'',NODE_PATH:'',
     GH_TOKEN:'local-fixture-only',GITHUB_TOKEN:'',GITHUB_REPOSITORY:f.repo,GITHUB_EVENT_PATH:event,
     GITHUB_EVENT_NAME:'workflow_dispatch',GITHUB_WORKFLOW:'Serialize worker PR merges',GITHUB_REF:'refs/heads/main',
     INTEGRATION_PROFILE:'full',INTEGRATION_SHARD:'0',INTEGRATION_TEST_SELECTION:'selected-data',
     SELECTED_PACKAGE_CANDIDATE:args().expectedHead,SELECTED_PACKAGE_TRUSTED_BASE:undefined,GITHUB_OUTPUT:undefined}});
   assert.equal(child.status,0,child.stderr);
-  assert.deepEqual(JSON.parse(child.stdout),{assembled:false,reason:'Reference metadata application requires a full build'});
+  assert.deepEqual(JSON.parse(child.stdout),{assembled:false,reason:'No applicable retained original output in bounded recent-result search'});
   for(const file of [event,probe])fs.unlinkSync(file);
   s.write('data/ownership-selection.json',selection);s.commit();
   assert.deepEqual(await assembleSelectedPackage(args()),{assembled:false,reason:'No applicable retained original output in bounded recent-result search'});
   assert.equal(calls.length,1);assert.match(calls[0],/actions\/workflows\/worker-merge.yml\/runs/);
-  s.write('data/ownership-selection.json',{...selection,reference_projection:null});s.commit();calls.length=0;
-  await assert.rejects(assembleSelectedPackage(args()),/Reference metadata application requires a full build/);
-  assert.deepEqual(calls,[],'Explicit null remains unsupported');
 });
 
 for(const queueOnly of [false,true])test('private assembly admission uses actual '+(queueOnly?'queue-only':'historical')+' producer and rejects drift',async t=>{
@@ -695,16 +692,21 @@ test('discovery and actual private execution admit data leaves and a later accep
 
 // A small real current-product fixture. It exercises the same consumer after
 // private original-output admission, without any scientific custody inputs.
-async function currentProductFixture(t,{changeCatalog=()=>{},changeGeometry=()=>{}}={}) {
+async function currentProductFixture(t,{changeCatalog=()=>{},changeGeometry=()=>{},reference=false,sourceRevision=false}={}) {
   const {gzipSync}=await import('node:zlib');
   const {footprintHash}=await import('../scripts/check-prepared.mjs');
   const {footprintValueSha256,additiveReleaseFootprintDigest}=await import('../src/effective-footprint.js');
-  const feature={id:'owner',pixelIndex:1,properties:{parent_id:'parent'},
+  const referenceRevision='7'.repeat(64);
+  const properties=reference?{id:'owner',name:'Owner',parent_id:'parent',metadata:{}}:{parent_id:'parent'};
+  if(reference)properties.metadata.reference_revision=referenceRevision;
+  const feature={id:'owner',pixelIndex:1,properties,
     geometry:{type:'Polygon',coordinates:[[[0,0],[1,0],[1,1],[0,1],[0,0]]]}};
   const addition={type:'Polygon',coordinates:[[[1,0],[2,0],[2,1],[1,1],[1,0]]]};
   const base={id:'geography:base',footprints_sha256:footprintHash([feature]),hierarchy_sha256:'a'.repeat(64)};
-  const rosterRaw=Buffer.from(JSON.stringify([{id:feature.id,index:1,province_id:'parent',bounds:[0,0,1,1]}])),bounds=gzipSync(rosterRaw);
-  const manifestRaw=Buffer.from(JSON.stringify({size:262166,original_assets:{bounds:{sha256:sha(bounds)}}}));
+  const native=reference?{...base,id:'geography:native',hierarchy_sha256:'9'.repeat(64)}:base;
+  const rosterRaw=Buffer.from(JSON.stringify([{id:feature.id,index:1,province_id:reference?'old-parent':'parent',bounds:[0,0,1,1]}])),bounds=gzipSync(rosterRaw);
+  const manifestRaw=Buffer.from(JSON.stringify({size:262166,geographic_release:native.id,footprints_sha256:native.footprints_sha256,
+    hierarchy_sha256:native.hierarchy_sha256,original_assets:{bounds:{sha256:sha(bounds)}}}));
   const ledger={version:1,kind:'native-additive-repair-ledger-v1',rule_sha256:'b'.repeat(64),base_reference:base,
     parent_inventory:{components:1,report_sha256:'c'.repeat(64),roster_sha256:'d'.repeat(64)},scope_ids:['gap'],assigned_cells:2,
     rows:[{component_id:'gap',disposition:'assigned',target_id:'owner',pixelIndex:1,base_geometry:feature.geometry,
@@ -727,13 +729,29 @@ async function currentProductFixture(t,{changeCatalog=()=>{},changeGeometry=()=>
   const prefix='coordination/engineering/current-fixture/',currentRoot=fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(),'atlas-current-products-')));
   t.after(()=>fs.rmSync(currentRoot,{recursive:true,force:true}));
   const files=new Map(Object.entries(bodies).map(([role,raw])=>[prefix+names[role],raw]));
-  const selection={version:1,method:'native-linear-evenodd-first-owner-v1',release_id:base.id,manifest_path:prefix+'base.json',sha256:sha(manifestRaw)};
+  const selection={version:1,method:'native-linear-evenodd-first-owner-v1',release_id:native.id,manifest_path:prefix+'base.json',sha256:sha(manifestRaw)};
   const envelopeRaw=Buffer.from(JSON.stringify(envelope));files.set(prefix+'envelope.json',envelopeRaw);
   const sidecar={version:2,kind:'retained-native-additive-selection-v2',base_selection:selection,
     runtime_envelope:pin(prefix+'envelope.json',envelopeRaw),logical_asset_map:Object.fromEntries(Object.entries(bodies).map(([role,raw])=>[role,
       {...pin(prefix+names[role],raw),...(role==='owner_roster'?{decoded_bytes:rosterRaw.length,decoded_sha256:sha(rosterRaw)}:{})}]))};
   const sidecarRaw=Buffer.from(JSON.stringify(sidecar));files.set(prefix+'sidecar.json',sidecarRaw);
   const currentSelection={...selection,additive_release:pin(prefix+'sidecar.json',sidecarRaw)};
+  let projection,projectionRaw,referenceMetadata;
+  if(reference){
+    const before={...properties,parent_id:'old-parent',metadata:sourceRevision?{reference_revision:referenceRevision}:{}};
+    const after={...properties,metadata:{...before.metadata,reference_corrections:[{id:'owner',action:'reparent',current_name:'Owner',
+      current_parent_id:'old-parent',new_parent_id:'parent',rationale:'Synthetic sourced correction',
+      evidence:[{url:'https://example.invalid/reference',title:'Fixture',inspected_fact:'Owner belongs to parent'}]}]}};
+    feature.properties={...after,metadata:{...after.metadata,reference_revision:referenceRevision}};
+    const originalPin=(name,digest)=>({commit:'a'.repeat(40),path:name,mode:'100644',git_blob_oid:'b'.repeat(40),bytes:1,sha256:digest});
+    projection={version:1,kind:'native-reference-metadata-projection-v1',native_selection:selection,native_reference:native,reference:base,
+      original_owner_roster_sha256:sha(bounds),hierarchy:{before:originalPin('before.json',native.hierarchy_sha256),after:originalPin('after.json',base.hierarchy_sha256)},
+      receipts:[originalPin('receipt.json','c'.repeat(64))],source_updates:[],location_changes:[{location_id:'owner',before_properties:before,after_properties:after}],
+      group_changes:[],provinces:['parent']};
+    projectionRaw=Buffer.from(JSON.stringify(projection));currentSelection.reference_projection=pin(prefix+'reference.json',projectionRaw);
+    files.set(currentSelection.reference_projection.path,projectionRaw);
+    referenceMetadata={version:1,asset:pin('reference-metadata/current.json',projectionRaw),native_reference:native,reference:base,application_reference_revision:referenceRevision};
+  }
   files.set('data/ownership-selection.json',Buffer.from(JSON.stringify(currentSelection)));
   files.set('.github/package-inputs.json',Buffer.from(JSON.stringify({version:1,inputs:['.github/package-inputs.json',...files.keys()],
     optional_inputs:[],verification_paths:[],generated_outputs:['dist/']})));
@@ -752,14 +770,17 @@ async function currentProductFixture(t,{changeCatalog=()=>{},changeGeometry=()=>
   const priorBodies={...bodies,ledger:priorLedgerRaw,patch:priorPatchRaw},priorEnvelope={...envelope,effective_reference:priorEffective,
     ledger:pin(envelope.ledger.path,priorLedgerRaw),patch:pin(envelope.patch.path,priorPatchRaw)};
   const catalog=[{...feature,geometry:null}],geometry=[{id:feature.id,geometry:feature.geometry}];changeCatalog(catalog);changeGeometry(geometry);
-  const atlas={additiveRelease:priorEnvelope,reference_release:priorEffective,parts:['geography/catalog-0.json.gz'],geometryParts:['geography/part-0.json.gz']};
-  const f=original(t,{bodies:{'dist/client/atlas-geography.json':JSON.stringify(atlas),
+  const atlas={...(reference?{pixelMap:JSON.parse(manifestRaw),referenceMetadata}:{}),additiveRelease:priorEnvelope,reference_release:priorEffective,parts:['geography/catalog-0.json.gz'],geometryParts:['geography/part-0.json.gz']};
+  const f=original(t,{bodies:{...(reference?{'dist/client/reference-metadata/current.json':projectionRaw}:{}),'dist/client/atlas-geography.json':JSON.stringify(atlas),
     'dist/client/geography/catalog-0.json.gz':gzipSync(JSON.stringify(catalog)),
     'dist/client/geography/part-0.json.gz':gzipSync(JSON.stringify(geometry)),
     ...Object.fromEntries(Object.entries(priorBodies).map(([role,raw])=>['dist/client/'+priorEnvelope[role].path,raw]))}});
   const prior=globalThis.fetch;globalThis.fetch=async()=>new Response(f.log());t.after(()=>{globalThis.fetch=prior;});
+  const captured=JSON.parse(f.manifestRaw);captured.source.selection=currentSelection;
+  f.manifestRaw=Buffer.from(JSON.stringify(captured)+'\n');
+  f.receipt.package_output_manifest_sha256=sha(f.manifestRaw);f.receipt.package_output_manifest_bytes=f.manifestRaw.length;
   const originalToken=await authenticateOriginalPackageOutput(f);
-  return {f,currentRoot,originalToken,files,sidecar,currentSelection,feature,bodies,envelope,priorBodies,priorEnvelope};
+  return {f,currentRoot,originalToken,files,sidecar,currentSelection,feature,bodies,envelope,priorBodies,priorEnvelope,projection,projectionRaw,referenceRevision};
 }
 
 test('shared current consumer publishes authenticated original context with historical custody entirely cold',async t=>{
@@ -843,6 +864,172 @@ test('shared selected-input admission covers actual builders and refuses undecla
     assert(rejected.errors.some(error=>error.kind==='execution-declaration'&&error.path==='undeclared-fixture.mjs'),
       'The real '+kind+' entry must refuse undeclared imports');
   }
+});
+
+
+for(const sourceRevision of [false,true])test('identical original reference metadata retains '+(sourceRevision?'source-authored':'generated')+' revision and complete current properties',async t=>{
+  const f=await currentProductFixture(t,{reference:true,sourceRevision}),context=readOriginalPackageGeography(f.originalToken);
+  const {prepareCurrentSelectedAdditive}=await import('../scripts/package-current-additive.mjs');
+  assert.equal(context.referenceRevision,f.referenceRevision);
+  const publication=await prepareCurrentSelectedAdditive({root:f.currentRoot,...context});
+  assert.deepEqual(publication.referenceMetadata,context.atlas.referenceMetadata);
+  const destination=path.join(f.currentRoot,'output');await publication.publish(destination);
+  assert.deepEqual(fs.readFileSync(path.join(destination,'reference-metadata/current.json')),f.projectionRaw);
+  assert.equal(publication.input_inventory.length,7);
+  await assert.rejects(publication.publish(destination),/already exists/);
+  for(const mutation of [row=>row.properties.metadata.reference_revision='8'.repeat(64),row=>row.properties.parent_id='foreign',
+    row=>row.properties.name='Changed',row=>delete row.properties.metadata.reference_corrections]){
+    const features=structuredClone(context.features);mutation(features[0]);
+    await assert.rejects(prepareCurrentSelectedAdditive({root:f.currentRoot,...context,features}),/reference revision|properties differ|owner identity or parent/);
+  }
+  const projectionFile=path.join(f.currentRoot,f.currentSelection.reference_projection.path);
+  fs.appendFileSync(projectionFile,' ');
+  await assert.rejects(prepareCurrentSelectedAdditive({root:f.currentRoot,...context}),/whole length|checksum/);
+});
+
+test('original reference metadata refuses coherent source, native, revision and emitted-body mismatches',async t=>{
+  const f=await currentProductFixture(t,{reference:true}),base=JSON.parse(f.f.manifestRaw);
+  const atlasFile=path.join(f.f.root,'dist/client/atlas-geography.json'),atlasRaw=fs.readFileSync(atlasFile);
+  const projectionFile=path.join(f.f.root,'dist/client/reference-metadata/current.json'),projectionRaw=fs.readFileSync(projectionFile);
+  const authenticate=async mutate=>{
+    fs.writeFileSync(atlasFile,atlasRaw);fs.writeFileSync(projectionFile,projectionRaw);
+    const manifest=structuredClone(base),atlas=JSON.parse(atlasRaw),projection=JSON.parse(projectionRaw);
+    const rebind=mutate({manifest,atlas,projection}),raw=Buffer.from(JSON.stringify(projection));
+    if(rebind===true){
+      Object.assign(manifest.source.selection.reference_projection,{bytes:raw.length,sha256:sha(raw)});
+      Object.assign(atlas.referenceMetadata.asset,{bytes:raw.length,sha256:sha(raw)});
+    }
+    fs.writeFileSync(atlasFile,JSON.stringify(atlas));fs.writeFileSync(projectionFile,raw);
+    manifest.output.files=manifest.output.files.map(pin=>{const raw=fs.readFileSync(path.join(f.f.root,pin.path));return {...pin,bytes:raw.length,sha256:sha(raw)};});
+    manifest.output.bytes=manifest.output.files.reduce((sum,pin)=>sum+pin.bytes,0);
+    f.f.manifestRaw=Buffer.from(JSON.stringify(manifest)+'\n');
+    f.f.receipt.package_output_manifest_sha256=sha(f.f.manifestRaw);f.f.receipt.package_output_manifest_bytes=f.f.manifestRaw.length;
+    return authenticateOriginalPackageOutput(f.f);
+  };
+  for(const mutate of [
+    ({manifest})=>delete manifest.source.selection.reference_projection,
+    ({manifest})=>manifest.source.selection.reference_projection.sha256='f'.repeat(64),
+    ({atlas})=>delete atlas.referenceMetadata,
+    ({atlas})=>delete atlas.referenceMetadata.application_reference_revision,
+    ({atlas})=>atlas.referenceMetadata.application_reference_revision='invalid',
+    ({atlas})=>atlas.referenceMetadata.native_reference.id='geography:foreign',
+    ({atlas})=>atlas.referenceMetadata.asset.path='a.bin',
+    ({projection})=>{projection.original_owner_roster_sha256='f'.repeat(64);return true;},
+    ({projection})=>{projection.native_selection.release_id='geography:foreign';return true;},
+    ({projection})=>{projection.receipts=[];return true;},
+  ]){const token=await authenticate(mutate);assert.throws(()=>readOriginalPackageGeography(token),/reference|Reference|native selection/);}
+});
+
+
+test('actual assembly reuses identical reference output and updates only the four current additive assets and atlas',async t=>{
+  if(process.execArgv.length||process.env.NODE_OPTIONS?.trim()||process.env.NODE_PATH?.trim()){
+    execFileSync(process.execPath,[new URL(import.meta.url).pathname,t.name],{env:{...process.env,NODE_OPTIONS:'',NODE_PATH:'',NODE_TEST_CONTEXT:undefined},encoding:'utf8'});return;
+  }
+  const f=await currentProductFixture(t,{reference:true}),directory=f.currentRoot;
+  const sourceRoot=fileURLToPath(new URL('../',import.meta.url)),copied=new Set();
+  const write=(name,raw)=>{fs.mkdirSync(path.dirname(path.join(directory,name)),{recursive:true});fs.writeFileSync(path.join(directory,name),raw);};
+  const copy=name=>{
+    if(copied.has(name))return;copied.add(name);
+    const raw=fs.readFileSync(path.join(sourceRoot,name));write(name,raw);
+    if(/\.[mc]?js$/.test(name))for(const match of raw.toString('utf8').matchAll(/(?:from\s*|import\s*(?:\(\s*)?)['"]([^'"]+)['"]/g))
+      if(match[1].startsWith('.'))copy(path.posix.normalize(path.posix.join(path.posix.dirname(name),match[1])));
+  };
+  for(const name of ['scripts/assemble-selected-package.mjs','scripts/extract-package-output.py','package.json','package-lock.json'])copy(name);
+  fs.symlinkSync(fs.realpathSync(path.join(sourceRoot,'node_modules')),path.join(directory,'node_modules'),'dir');
+  write('.gitignore','node_modules/\n.cache/\ndist/\n');
+  for(const name of ['merge-integration-checks.yml','worker-merge.yml'])write('.github/workflows/'+name,'unchanged original producer');
+  const pin=(name,raw)=>({path:name,bytes:raw.length,sha256:sha(raw)}),prefix='coordination/engineering/prior-fixture/';
+  const priorMap={};
+  for(const [role,raw]of Object.entries(f.priorBodies)){
+    const name=prefix+path.posix.basename(f.priorEnvelope[role].path);write(name,raw);
+    priorMap[role]={...pin(name,raw),...(role==='owner_roster'?{decoded_bytes:f.priorEnvelope[role].decoded_bytes,decoded_sha256:f.priorEnvelope[role].decoded_sha256}:{})};
+  }
+  const priorEnvelopeRaw=Buffer.from(JSON.stringify(f.priorEnvelope)),priorEnvelopePin=pin(prefix+'envelope.json',priorEnvelopeRaw);write(priorEnvelopePin.path,priorEnvelopeRaw);
+  const priorSidecar={...f.sidecar,runtime_envelope:priorEnvelopePin,logical_asset_map:priorMap},priorSidecarRaw=Buffer.from(JSON.stringify(priorSidecar));
+  const priorPin=pin(prefix+'sidecar.json',priorSidecarRaw);write(priorPin.path,priorSidecarRaw);
+  const priorSelection={...f.currentSelection,additive_release:priorPin};write('data/ownership-selection.json',JSON.stringify(priorSelection));
+  const definition=loadPackageInputs(directory);definition.inputs.push(...copied,prefix);
+  write('.github/package-inputs.json',JSON.stringify(definition));
+  const git=(...args)=>execFileSync('git',['-C',directory,...args],{encoding:'utf8'}).trim();
+  git('init','-q');const commit=()=>{git('add','.');git('-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-qm','fixture');};commit();
+  const source={head:git('rev-parse','HEAD'),tree:git('rev-parse','HEAD^{tree}'),definition,selection:priorSelection,
+    input_definition_sha256:sha(fs.readFileSync(path.join(directory,'.github/package-inputs.json'))),
+    files:committedPackageInputs(directory,definition),producer:committedPackageProducer(directory)};
+  const manifest=JSON.parse(f.f.manifestRaw),{packageBuildConfiguration}=await import('../scripts/package-output-artifact.mjs');
+  manifest.source=source;manifest.runtime={node:process.version,platform:process.platform,arch:process.arch,dependencies:sha(fs.readFileSync(path.join(directory,'package-lock.json')))};
+  manifest.configuration=packageBuildConfiguration();
+  const receipt=Buffer.from(JSON.stringify({version:1,kind:'cloudflare',preflight:{passed:true}}));
+  manifest.original_build_receipt=pin('.cache/package-input-build.json',receipt);
+  fs.mkdirSync(path.join(f.f.root,'.cache'));
+  fs.writeFileSync(path.join(f.f.root,'.cache/package-input-build.json'),receipt);
+  f.f.manifestRaw=Buffer.from(JSON.stringify(manifest)+'\n');fs.writeFileSync(path.join(f.f.root,'.cache/package-output-manifest.json'),f.f.manifestRaw);
+  const zip=path.join(f.f.root,'original.zip');
+  execFileSync('python3',['-I','-S','-B','-c',`import pathlib,sys,zipfile
+root=pathlib.Path(sys.argv[1])
+with zipfile.ZipFile(sys.argv[2],'w',zipfile.ZIP_DEFLATED) as z:
+ for prefix in ('dist','.cache'):
+  for p in sorted((root/prefix).rglob('*')):
+   if p.is_file(): z.write(p,p.relative_to(root).as_posix())`,f.f.root,zip]);
+  const archive=fs.readFileSync(zip),origin=f.f.origin;
+  origin.head=origin.workflow_head=f.f.run.head_sha=f.f.job.head_sha=f.f.artifact.workflow_run.head_sha=f.f.receipt.original_head=source.head;
+  f.f.receipt.executed_workflow.sha=source.head;f.f.workflow.sha=source.producer.workflows.find(row=>row.path===f.f.workflow.path).oid;
+  origin.artifact_bytes=f.f.artifact.size_in_bytes=archive.length;origin.artifact_digest=sha(archive);f.f.artifact.digest='sha256:'+origin.artifact_digest;
+  f.f.receipt.package_output_manifest_sha256=sha(f.f.manifestRaw);f.f.receipt.package_output_manifest_bytes=f.f.manifestRaw.length;
+  f.f.log=()=>[JSON.stringify(f.f.receipt),`SHA256 digest of uploaded artifact zip is ${origin.artifact_digest}`,
+    `Artifact ${origin.artifact_name} has been successfully uploaded! Final size is ${archive.length} bytes. Artifact ID is ${origin.artifact_id}`].join('\n');
+  const api=async route=>{
+    if(route.endsWith('/actions/runs/17'))return f.f.run;
+    if(route.includes('/attempts/2/jobs'))return {jobs:[f.f.job]};
+    if(route.includes('/artifacts?'))return {total_count:1,artifacts:[f.f.artifact]};
+    const commit=/\/git\/commits\/([a-f0-9]{40})$/.exec(route);
+    if(commit)return {sha:commit[1],tree:{sha:git('rev-parse',commit[1]+'^{tree}')}};
+    const tree=/\/git\/trees\/([a-f0-9]{40})(\?recursive=1)?$/.exec(route);
+    if(tree)return {truncated:false,tree:git('ls-tree',...(tree[2]?['-r']:[]),'-lz',tree[1]).split('\0').filter(Boolean).map(line=>{
+      const [meta,path]=line.split('\t'),[mode,type,sha,size]=meta.trim().split(/\s+/);return {path,mode,type,sha,size:Number(size)};
+    })};
+    const content=/\/contents\/(.+)\?ref=([a-f0-9]{40})$/.exec(route),blob=/\/git\/blobs\/([a-f0-9]{40})$/.exec(route);
+    if(content||blob){const spec=blob?blob[1]:content[2]+':'+content[1],raw=execFileSync('git',['-C',directory,'cat-file','blob',spec]);
+      return {type:'file',...(content?{path:content[1]}:{}),encoding:'base64',content:raw.toString('base64'),sha:git('rev-parse',spec),size:raw.length};}
+    return f.f.api(route);
+  };api.jobLogRedirect=f.f.api.jobLogRedirect;
+  let downloads=0;api.artifactRedirect=async()=>{downloads++;return new Response(null,{status:302,headers:{location:'https://fixture.blob.core.windows.net/original.zip'}});};
+  const oldFetch=globalThis.fetch,oldEntry=process.argv[1];t.after(()=>{globalThis.fetch=oldFetch;process.argv[1]=oldEntry;});
+  globalThis.fetch=async url=>new Response(String(url).endsWith('/original.zip')?archive:f.f.log());
+  write('data/ownership-selection.json',JSON.stringify(f.currentSelection));commit();
+  const entry=path.join(directory,'scripts/assemble-selected-package.mjs'),{assembleSelectedPackage}=await import(pathToFileURL(entry));process.argv[1]=entry;
+  const assemble=()=>assembleSelectedPackage({api,repo:f.f.repo,expectedHead:git('rev-parse','HEAD'),originalRunId:17});
+  const result=await assemble();assert.equal(result.assembled,true);assert.equal(downloads,1);
+  assert.equal(result.current_additive_assets,4);
+  const changed=new Set(['dist/client/atlas-geography.json',...Object.values(f.priorEnvelope).filter(pin=>pin?.path).map(pin=>'dist/client/'+pin.path)]);
+  for(const output of manifest.output.files)if(!changed.has(output.path)){
+    const raw=fs.readFileSync(path.join(directory,output.path));assert.equal(raw.length,output.bytes);assert.equal(sha(raw),output.sha256,output.path);
+  }
+  const atlas=JSON.parse(fs.readFileSync(path.join(directory,'dist/client/atlas-geography.json')));
+  assert.deepEqual(atlas.referenceMetadata,JSON.parse(fs.readFileSync(path.join(f.f.root,'dist/client/atlas-geography.json'))).referenceMetadata);
+  assert.deepEqual(atlas.reference_release,f.envelope.effective_reference);
+  for(const [role,raw]of Object.entries(f.bodies))assert.deepEqual(fs.readFileSync(path.join(directory,'dist/client',atlas.additiveRelease[role].path)),raw);
+  const published=sha(fs.readFileSync(path.join(directory,'dist/client/atlas-geography.json')));
+  // A later mutable staging write is still checked against the original whole
+  // output inventory. Identical metadata is never added to the mutable set.
+  const writeFile=fs.promises.writeFile;
+  fs.promises.writeFile=async function(file,...args){
+    const result=await writeFile.call(this,file,...args);
+    if(String(file).endsWith('/assembly/dist/reference-metadata/current.json'))fs.appendFileSync(file,' ');
+    return result;
+  };
+  try{await assert.rejects(assemble(),/Invariant output changed during assembly/);}
+  finally{fs.promises.writeFile=writeFile;}
+  assert.equal(downloads,2);
+  assert.equal(sha(fs.readFileSync(path.join(directory,'dist/client/atlas-geography.json'))),published,'Failed staging preserves the previous publication');
+  for(const mutation of [selection=>selection.reference_projection.sha256='f'.repeat(64),selection=>delete selection.reference_projection,
+    selection=>selection.reference_projection=null]){
+    const selection=structuredClone(f.currentSelection);mutation(selection);write('data/ownership-selection.json',JSON.stringify(selection));commit();
+    assert.equal((await assemble()).assembled,false);assert.equal(downloads,2,'Changed projection must fail original compatibility before archive download');
+    assert.equal(sha(fs.readFileSync(path.join(directory,'dist/client/atlas-geography.json'))),published);
+  }
+  write('data/ownership-selection.json',JSON.stringify(f.currentSelection));
+  fs.appendFileSync(path.join(directory,f.currentSelection.reference_projection.path),' ');commit();
+  assert.equal((await assemble()).assembled,false);assert.equal(downloads,2,'Changed projection body remains an invariant source refusal');
 });
 
 if(probeName&&!probeRegistered)throw Error('Unknown private assembly probe: '+probeName);

@@ -6,9 +6,11 @@ import fsp from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
+import {isDeepStrictEqual} from 'node:util';
 import {execFileSync} from 'node:child_process';
 import {gunzipSync} from 'node:zlib';
 import {footprintHash} from './check-prepared.mjs';
+import {originalNativeReference,validateReferenceMetadataHeader} from '../src/reference-metadata.js';
 import {githubAPI, githubPages} from './issue-claim-contract.mjs';
 import {integrationTree} from './integration-profile.mjs';
 import {loadPackageInputs, readPackageInputs, containsPackagePath} from './package-inputs.mjs';
@@ -217,18 +219,26 @@ export function readOriginalPackageGeography(original) {
   });
   const geographicRelease=atlas.additiveRelease.base_reference;
   need(ids.size===geometries.size&&footprintHash(features)===geographicRelease.footprints_sha256,'Original complete base geometry differs');
-  return {atlas,selectedGrid,geographicRelease,features};
-}
-
-// A metadata application needs newly prepared current catalog/hierarchy output.
-// Ordinary full builds consume it without rerunning original native science.
-export function requireAssemblyWithoutReferenceMetadata(selection) {
-  need(selection?.reference_projection===undefined,'Reference metadata application requires a full build');
+  let referenceRevision;
+  if(manifest.source.selection?.reference_projection!==undefined||atlas.referenceMetadata!==undefined){
+    const metadata=atlas.referenceMetadata;
+    need(metadata,'Original reference metadata descriptor missing');
+    const name='dist/client/reference-metadata/current.json',raw=read(name),pin=manifest.source.selection?.reference_projection;
+    need(pin&&raw.length===pin.bytes&&hash(raw)===pin.sha256&&
+      isDeepStrictEqual(metadata.asset,{path:'reference-metadata/current.json',bytes:raw.length,sha256:hash(raw)}),
+    'Original reference metadata source/output identity differs');
+    const projection=validateReferenceMetadataHeader(JSON.parse(raw),{selection:manifest.source.selection,manifest:selectedGrid.manifest});
+    need(isDeepStrictEqual(projection.native,originalNativeReference(atlas.pixelMap))&&isDeepStrictEqual(projection.native,metadata.native_reference)&&
+      isDeepStrictEqual(projection.reference,metadata.reference)&&isDeepStrictEqual(projection.reference,geographicRelease),
+      'Original reference metadata application differs');
+    referenceRevision=metadata.application_reference_revision;
+    need(/^[a-f0-9]{64}$/.test(referenceRevision??''),'Original application reference revision required');
+  }
+  return {atlas,selectedGrid,geographicRelease,features,...(referenceRevision===undefined?{}:{referenceRevision})};
 }
 
 export async function assembleSelectedPackage({api,repo,expectedHead,originalRunId,trustedBase}){
   const started=performance.now(),current=currentSource();need(current.head===expectedHead,'Actual selected head changed');
-  requireAssemblyWithoutReferenceMetadata(current.selection);
   const found=await findOriginalPackage({api,repo,current,originalRunId,trustedBase});if(!found)return {assembled:false,reason:'No applicable retained original output in bounded recent-result search'};
   if(trustedBase!==undefined)current.accepted_selected_inputs=found.accepted_selected_inputs;
   await verifyPackageDependencies(path.join(root,'node_modules'));
@@ -256,14 +266,14 @@ export async function assembleSelectedPackage({api,repo,expectedHead,originalRun
     const stage=path.join(scratch,'assembly');fs.mkdirSync(stage);
     const execution=issuePackageAssemblyExecution({original,source:root,stage,executingRoot:root,
       acceptedInputs:current.accepted_selected_inputs});
-    requireAssemblyWithoutReferenceMetadata(manifest.source.selection);
-    const {atlas,selectedGrid,geographicRelease,features}=readOriginalPackageGeography(original);
+    const {atlas,selectedGrid,geographicRelease,features,referenceRevision}=readOriginalPackageGeography(original);
     // The authenticated execution closure includes this literal deferred import.
     // Current locked dependencies are admitted above; no dependency sees API credentials.
     need(!process.env.GH_TOKEN&&!process.env.GITHUB_TOKEN,'Current additive consumption must be credential-free');
     const {prepareCurrentSelectedAdditive}=await import('./package-current-additive.mjs');
-    const publication=await prepareCurrentSelectedAdditive({root,selectedGrid,geographicRelease,features});
+    const publication=await prepareCurrentSelectedAdditive({root,selectedGrid,geographicRelease,features,referenceRevision});
     need(publication&&same(publication.selection,current.selection),'Genuine same-source current additive publication required');
+    need(isDeepStrictEqual(publication.referenceMetadata,atlas.referenceMetadata),'Current reference metadata differs from retained output');
     const consumed=publication.input_inventory.map(pin=>{
       const row=current.files.find(row=>row.path===pin.path);
       need(row&&row.mode===pin.mode&&row.oid===pin.git_blob_oid&&pin.whole_body_consumed===true,'Current additive input differs from actual source');
@@ -280,10 +290,14 @@ export async function assembleSelectedPackage({api,repo,expectedHead,originalRun
     }
     atlas.reference_release=publication.reference_release;atlas.additiveRelease=publication.additiveRelease;
     const atlasRaw=Buffer.from(JSON.stringify(atlas));
-    admitDisk(atlasRaw.length+['base_manifest','ledger','owner_roster','patch'].reduce((sum,role)=>sum+publication.additiveRelease[role].bytes,0)+6*4096,
+    admitDisk(atlasRaw.length+['base_manifest','ledger','owner_roster','patch'].reduce((sum,role)=>sum+publication.additiveRelease[role].bytes,0)+(atlas.referenceMetadata?.asset.bytes??0)+6*4096,
       'the actual current additive assets and atlas');
     fs.renameSync(path.join(originalRoot,'dist/client'),path.join(stage,'dist'));
     for(const pin of oldAssets)fs.unlinkSync(path.join(stage,'dist',pin.path));
+    // The existing publisher requires a fresh destination. Replace only this
+    // authenticated identical body in our owned stage; it remains invariant
+    // below, unlike the genuinely changed additive assets and atlas.
+    if(atlas.referenceMetadata)fs.unlinkSync(path.join(stage,'dist',atlas.referenceMetadata.asset.path));
     await publication.publish(path.join(stage,'dist'));
     fs.writeFileSync(path.join(stage,'dist/atlas-geography.json'),atlasRaw);
     fs.renameSync(path.join(stage,'dist'),path.join(stage,'client'));
