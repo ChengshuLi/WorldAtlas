@@ -626,3 +626,14 @@ test('removed and nonordinary fallback alias paths cannot reuse earlier qualific
  assert.throws(()=>readRetainedRegistryAuthority(symlink,f.entry),/whole ordinary Git input/);
  assert.ok(missing.bodyReads.length>0&&symlink.bodyReads.length>0);
 });
+
+
+test('an alternate body reader cannot inherit or seed an ordinary-reader qualification',t=>{
+ const f=retainedComparisonFixture(t),proof=readRetainedRegistryAuthority(f.reader(),f.entry);
+ const after=f.reader(f.next()),read=after.read.bind(after),reads=[];
+ after.read=(name,options)=>{reads.push(name);return read(name,options);};
+ assert.notStrictEqual(readRetainedRegistryAuthority(after,f.entry),proof);
+ assert.ok(reads.includes('original-source.json'),'alternate-reader semantics still execute');
+ const rejecting=f.reader(after.version);rejecting.read=()=>{throw Error('Alternate reader rejected this body');};
+ assert.throws(()=>readRetainedRegistryAuthority(rejecting,f.entry),/Alternate reader rejected/);
+});

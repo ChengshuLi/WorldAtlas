@@ -1564,12 +1564,13 @@ export function verifyCompletedSourceTargetNativeAuthority({constructed,binding,
 // calls include guards that do not consume bodies. Commit probes retain the
 // original immutable-versus-current fallback decision. Any new direct Git use
 // makes reuse unavailable until its dependency semantics are reviewed.
+const ordinaryRetainedReader=reader=>reader.read===ImmutableReader.prototype.read&&reader.descriptor===ImmutableReader.prototype.descriptor;
 function retainedQualificationReader(reader) {
  return new class extends ImmutableReader {
  constructor() {
   super(reader.repo,reader.version,{gitExecutable:reader.gitExecutable,invocation:reader.invocation});
   this.input=reader;this.inventory=reader.inventory;this.dependencies=new Map();this.commitPresence=new Map();
-  this.reusable=reader.read===ImmutableReader.prototype.read&&reader.descriptor===ImmutableReader.prototype.descriptor;
+  this.reusable=ordinaryRetainedReader(reader);
  }
  descriptor(name,version=this.version) {
   const pin=this.input.descriptor(name,version),key=version+':'+name;
@@ -1647,7 +1648,7 @@ export function readRetainedRegistryAuthority(reader,entry,observationReader,{sn
  let qualifications=retainedQualifications.get(reader.invocation);
  if(!qualifications){qualifications=new Map();retainedQualifications.set(reader.invocation,qualifications);}
  const prior=qualifications.get(key);
- if(prior&&unchangedRetainedDependencies(reader,prior)){
+ if(prior&&ordinaryRetainedReader(reader)&&unchangedRetainedDependencies(reader,prior)){
   for(const {pin}of prior.dependencies)if(pin.whole_body_consumed===true){
    const key=pin.commit+':'+pin.path,actual=reader.inventory.get(key);
    demand(actual&&retainedDescriptorEqual(actual,pin)&&(actual.sha256===undefined||actual.sha256===pin.sha256),
