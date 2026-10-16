@@ -1,0 +1,2275 @@
+{
+  "kind": "retained-source-observation-custody-and-exact-twenty-key-join",
+  "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+  "pins": [
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/observations/idn-native-comparison-001/gb-IDN-ADM2.json.gz",
+      "bytes": 93905,
+      "sha256": "9a2dc222984859dafd4f47ce5526088295db6bb4fef64b2566eefcc3a789f0fd"
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/observations/native-comparison-002/gb-MYS-ADM2.json",
+      "bytes": 266781,
+      "sha256": "43cfd77e3da7f7b5995b28769ccb8ed5786acbad316e41db6418f18bdb81f682"
+    },
+    {
+      "commit": "b6382262f8d03d9e7d33b26d8adb40a55197262b",
+      "path": "src/native-grid.js",
+      "bytes": 37995,
+      "sha256": "78c1e2bc2df944f11b2b638645d20defa82511a1cb17debbf865921945b14740"
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "src/native-grid.js",
+      "bytes": 42965,
+      "sha256": "3ef6bc5ec66e3184c254ea66404add0824e3ee18e39c8658f234d2e236d840ad"
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/government-primary-source-001/observations/layer-9.json",
+      "bytes": 133860,
+      "sha256": "8d3be2e80ff36ea61aa34d8a6beced4aa8cfb0cd6b10b4969322946cfa042b02"
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/government-primary-source-001/primary/layer-9-DistrictCoverageSarawak-whole4326.geojson.gz",
+      "bytes": 2157614,
+      "sha256": "20446f8a5db39127ba8ea9c1d23219f7d741238394c558c5adb3b848fe8da31f"
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/government-primary-source-001/observations/layer-10.json",
+      "bytes": 122552,
+      "sha256": "16698ec197deae081800c942918306eb0d9fe20d05475dbca449e10f9b368660"
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/government-primary-source-001/primary/layer-10-DistrictCoverageSabah-whole4326.geojson.gz",
+      "bytes": 1814454,
+      "sha256": "b1dda9c27d74f99b1bfea3167929439cce195b085300a1ed552ad79a8a27837d"
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IDN-ADM2-000.bin.gz",
+      "bytes": 3051391,
+      "sha256": "ef394916ba97454b5592e66eba1df67199731ce7d9636cc3968843801ae904a8"
+    }
+  ],
+  "unchanged_native_geometry_predicate_prefix": {
+    "bytes": 11939,
+    "sha256": "8598cbac45c1667f5e00e6927aa9164533588bee35381b4aa27e61380959ea5f",
+    "comparison": "Everything before deriveSourceTargetNativeDelta is byte-identical between the original observation kernel and current accepted kernel; only the later constructor applicability interface changes."
+  },
+  "original_source_input_context": {
+    "IDN": {
+      "key": "gb:IDN:ADM2",
+      "country": "IDN",
+      "original": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining474-source-research-001/worker1-kapuas257/competent-source-followup-002/gb-IDN-ADM2-original-consumed.json",
+        "bytes": 11002896,
+        "sha256": "146653d488331086ddc43d159a261b01ea6dd08c7ed422e34a9886c3c690430c"
+      },
+      "full": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining474-source-research-001/worker1-kapuas257/competent-source-followup-002/geoBoundaries-IDN-ADM2.geojson",
+        "bytes": 158892831,
+        "sha256": "947cedc058888c0c2b2628071d289956c85fe279adb369dcf1327ce2236a5602"
+      },
+      "actual_original_features": 519,
+      "actual_full_features": 519,
+      "all_feature_properties_identical": true,
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IDN/ADM2/geoBoundaries-IDN-ADM2_simplified.geojson",
+      "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "represented_year_claim": "2020"
+    },
+    "MYS": {
+      "key": "gb:MYS:ADM2",
+      "country": "MYS",
+      "original": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining474-source-research-001/worker1-kapuas257/competent-source-followup-002/gb-MYS-ADM2-original-consumed.json",
+        "bytes": 1161210,
+        "sha256": "2370e1df1da8e8db2d582ea404d2bcb538127a01785dd994cbe4c1bbf33a951f"
+      },
+      "full": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining474-source-research-001/worker1-kapuas257/competent-source-followup-002/geoBoundaries-MYS-ADM2.geojson",
+        "bytes": 1932621,
+        "sha256": "1a7db3b44563073171b02eba59b109fc1bc6256ab0b011531ea6d5053515e550"
+      },
+      "original_corpus_part": {
+        "bytes": 293141,
+        "hash_kind": "file-bytes",
+        "offset": 0,
+        "ordinal": 0,
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MYS-ADM2-000.bin.gz",
+        "sha256": "825f65a4ca40cdc12d5914e07f5153d606d2d0a06c7c76d4ac12c729c0920ee6",
+        "uncompressed_bytes": 1161210,
+        "uncompressed_sha256": "2370e1df1da8e8db2d582ea404d2bcb538127a01785dd994cbe4c1bbf33a951f"
+      },
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MYS/ADM2/geoBoundaries-MYS-ADM2_simplified.geojson",
+      "license": "Creative Commons Attribution 3.0 License",
+      "represented_year_claim": "2020",
+      "actual_original_features": 159,
+      "actual_full_features": 159,
+      "all_feature_properties_identical": true,
+      "advertised_feature_count": 160
+    }
+  },
+  "government_source_context": [
+    {
+      "layer": 9,
+      "decoded_bytes": 5379842,
+      "decoded_sha256": "6ca083d7bc396417ae83e05830ad2eea7a63136010839f1f1341a0861cf7f941",
+      "complete_features": 32,
+      "input_observation": {
+        "path": "retained-task/idn-remaining474-source-research-001/worker1-kapuas257/competent-source-followup-002/government-fine-whole-followup-003/layer-9-DistrictCoverageSarawak-whole4326.geojson",
+        "bytes": 5379842,
+        "sha256": "6ca083d7bc396417ae83e05830ad2eea7a63136010839f1f1341a0861cf7f941"
+      }
+    },
+    {
+      "layer": 10,
+      "decoded_bytes": 4499127,
+      "decoded_sha256": "d3c01612219c307f899d0f01c291e0db3067f972ea2cde1c7b22459a2d02f32b",
+      "complete_features": 25,
+      "input_observation": {
+        "path": "retained-task/idn-remaining474-source-research-001/worker1-kapuas257/competent-source-followup-002/government-fine-whole-followup-003/layer-10-DistrictCoverageSabah-whole4326.geojson",
+        "bytes": 4499127,
+        "sha256": "d3c01612219c307f899d0f01c291e0db3067f972ea2cde1c7b22459a2d02f32b"
+      }
+    }
+  ],
+  "positive_original_geometry_validity": [
+    {
+      "source_id": "gb:IDN:ADM2:22746128B82886709098386",
+      "valid": true,
+      "validity": "Valid Geometry"
+    },
+    {
+      "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+      "valid": true,
+      "validity": "Valid Geometry"
+    },
+    {
+      "source_id": "gb:IDN:ADM2:22746128B24707766174966",
+      "valid": true,
+      "validity": "Valid Geometry"
+    }
+  ],
+  "government_used_geometry_validity": [
+    {
+      "source_id": "government:JMG:Demarcation:layer9:OBJECTID:3",
+      "valid": true,
+      "validity": "Valid Geometry",
+      "geometry_sha256": "7500bf0e2331e430073b2424f0d695bc5b8622594507535bd19f2ae130e1c1d5"
+    },
+    {
+      "source_id": "government:JMG:Demarcation:layer9:OBJECTID:8",
+      "valid": true,
+      "validity": "Valid Geometry",
+      "geometry_sha256": "553a5dbbd6116c61a6fac43d75acc78989cde71146d5d12160cea2f4d2d814c0"
+    },
+    {
+      "source_id": "government:JMG:Demarcation:layer9:OBJECTID:19",
+      "valid": true,
+      "validity": "Valid Geometry",
+      "geometry_sha256": "49f138c6b2b57f446b8d14bba20c8a797809b37025cc1489f853cc299585ef38"
+    },
+    {
+      "source_id": "government:JMG:Demarcation:layer9:OBJECTID:21",
+      "valid": true,
+      "validity": "Valid Geometry",
+      "geometry_sha256": "09d6ca55ba9f0011468264f8df5c093d034c22ed9e25bdb8390051a061b14fa5"
+    },
+    {
+      "source_id": "government:JMG:Demarcation:layer9:OBJECTID:32",
+      "valid": true,
+      "validity": "Valid Geometry",
+      "geometry_sha256": "49f138c6b2b57f446b8d14bba20c8a797809b37025cc1489f853cc299585ef38"
+    },
+    {
+      "source_id": "government:JMG:Demarcation:layer10:OBJECTID:6",
+      "valid": true,
+      "validity": "Valid Geometry",
+      "geometry_sha256": "89f58c3a8c4fc38fe77534ce2160055bbe9651576df656ed3b066498cd0d5cc6"
+    }
+  ],
+  "records": [
+    {
+      "original": {
+        "id": "repair:22771:127919:215666",
+        "original_package": "repair",
+        "country": "MYS",
+        "owner": 22771,
+        "y": 127919,
+        "x": 215666,
+        "original_held_interval": [
+          127919,
+          215666,
+          215669,
+          22771
+        ],
+        "original_request_custody": {
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+          "bytes": 11275,
+          "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+        },
+        "original_foreign_source_indices": [
+          45976,
+          45977
+        ],
+        "original_held_reason": "territorial_exclusion_cells"
+      },
+      "positive_original_and_full_IDN": {
+        "original_request_id": "repair:22771:127919:215666",
+        "y": 127919,
+        "x": 215666,
+        "original_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B24707766174966",
+            "feature_ordinal": 372,
+            "shapeName": "Nunukan",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B24707766174966",
+            "feature_ordinal": 372,
+            "shapeName": "Nunukan",
+            "kind": "interior"
+          }
+        ]
+      },
+      "contrary_retained_original_and_full_MYS_fine": {
+        "original_request_id": "repair:22771:127919:215666",
+        "y": 127919,
+        "x": 215666,
+        "original_memberships": [],
+        "full_memberships": []
+      },
+      "contrary_government_fine_districts": [
+        {
+          "source_id": "government:JMG:Demarcation:layer10:OBJECTID:6",
+          "feature_ordinal": 5,
+          "OBJECTID": 6,
+          "provider_name": "PENSIANGAN",
+          "kind": "interior"
+        }
+      ],
+      "reference": {
+        "original": {
+          "id": "repair:22771:127919:215666",
+          "original_package": "repair",
+          "country": "MYS",
+          "owner": 22771,
+          "y": 127919,
+          "x": 215666,
+          "original_held_interval": [
+            127919,
+            215666,
+            215669,
+            22771
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            45976,
+            45977
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "assessment_category": "MYS_genuine_IDN_vs_government_country_overlap",
+        "latitude": 4.3398856922150255,
+        "longitude_numerator": 30450060,
+        "longitude_denominator": 262166,
+        "country_hits": [
+          {
+            "ordinal": 0,
+            "ADM0_A3": "IDN",
+            "ADMIN": "Indonesia",
+            "ISO_A3_EH": "IDN"
+          }
+        ],
+        "country_ties": []
+      },
+      "recommended_display_target_id": "gb:IDN:ADM2:22746128B24707766174966",
+      "recommended_display_owner": 22771,
+      "accepted_credit": 0
+    },
+    {
+      "original": {
+        "id": "repair:22935:128572:215275",
+        "original_package": "repair",
+        "country": "MYS",
+        "owner": 22935,
+        "y": 128572,
+        "x": 215275,
+        "original_held_interval": [
+          128572,
+          215274,
+          215276,
+          22935
+        ],
+        "original_request_custody": {
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+          "bytes": 11275,
+          "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+        },
+        "original_foreign_source_indices": [
+          45977
+        ],
+        "original_held_reason": "territorial_exclusion_cells"
+      },
+      "positive_original_and_full_IDN": {
+        "original_request_id": "repair:22935:128572:215275",
+        "y": 128572,
+        "x": 215275,
+        "original_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+            "feature_ordinal": 318,
+            "shapeName": "Malinau",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+            "feature_ordinal": 318,
+            "shapeName": "Malinau",
+            "kind": "interior"
+          }
+        ]
+      },
+      "contrary_retained_original_and_full_MYS_fine": {
+        "original_request_id": "repair:22935:128572:215275",
+        "y": 128572,
+        "x": 215275,
+        "original_memberships": [],
+        "full_memberships": []
+      },
+      "contrary_government_fine_districts": [
+        {
+          "source_id": "government:JMG:Demarcation:layer9:OBJECTID:3",
+          "feature_ordinal": 1,
+          "OBJECTID": 3,
+          "provider_name": "Marudi",
+          "kind": "interior"
+        }
+      ],
+      "reference": {
+        "original": {
+          "id": "repair:22935:128572:215275",
+          "original_package": "repair",
+          "country": "MYS",
+          "owner": 22935,
+          "y": 128572,
+          "x": 215275,
+          "original_held_interval": [
+            128572,
+            215274,
+            215276,
+            22935
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            45977
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "assessment_category": "MYS_genuine_IDN_vs_government_country_overlap",
+        "latitude": 3.445279665157685,
+        "longitude_numerator": 30309300,
+        "longitude_denominator": 262166,
+        "country_hits": [
+          {
+            "ordinal": 0,
+            "ADM0_A3": "IDN",
+            "ADMIN": "Indonesia",
+            "ISO_A3_EH": "IDN"
+          }
+        ],
+        "country_ties": []
+      },
+      "recommended_display_target_id": "gb:IDN:ADM2:22746128B54632748429230",
+      "recommended_display_owner": 22935,
+      "accepted_credit": 0
+    },
+    {
+      "original": {
+        "id": "repair:22935:128573:215275",
+        "original_package": "repair",
+        "country": "MYS",
+        "owner": 22935,
+        "y": 128573,
+        "x": 215275,
+        "original_held_interval": [
+          128573,
+          215274,
+          215276,
+          22935
+        ],
+        "original_request_custody": {
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+          "bytes": 11275,
+          "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+        },
+        "original_foreign_source_indices": [
+          45977
+        ],
+        "original_held_reason": "territorial_exclusion_cells"
+      },
+      "positive_original_and_full_IDN": {
+        "original_request_id": "repair:22935:128573:215275",
+        "y": 128573,
+        "x": 215275,
+        "original_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+            "feature_ordinal": 318,
+            "shapeName": "Malinau",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+            "feature_ordinal": 318,
+            "shapeName": "Malinau",
+            "kind": "interior"
+          }
+        ]
+      },
+      "contrary_retained_original_and_full_MYS_fine": {
+        "original_request_id": "repair:22935:128573:215275",
+        "y": 128573,
+        "x": 215275,
+        "original_memberships": [],
+        "full_memberships": []
+      },
+      "contrary_government_fine_districts": [
+        {
+          "source_id": "government:JMG:Demarcation:layer9:OBJECTID:3",
+          "feature_ordinal": 1,
+          "OBJECTID": 3,
+          "provider_name": "Marudi",
+          "kind": "interior"
+        }
+      ],
+      "reference": {
+        "original": {
+          "id": "repair:22935:128573:215275",
+          "original_package": "repair",
+          "country": "MYS",
+          "owner": 22935,
+          "y": 128573,
+          "x": 215275,
+          "original_held_interval": [
+            128573,
+            215274,
+            215276,
+            22935
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            45977
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "assessment_category": "MYS_genuine_IDN_vs_government_country_overlap",
+        "latitude": 3.443908970209119,
+        "longitude_numerator": 30309300,
+        "longitude_denominator": 262166,
+        "country_hits": [
+          {
+            "ordinal": 0,
+            "ADM0_A3": "IDN",
+            "ADMIN": "Indonesia",
+            "ISO_A3_EH": "IDN"
+          }
+        ],
+        "country_ties": []
+      },
+      "recommended_display_target_id": "gb:IDN:ADM2:22746128B54632748429230",
+      "recommended_display_owner": 22935,
+      "accepted_credit": 0
+    },
+    {
+      "original": {
+        "id": "repair:22935:128574:215276",
+        "original_package": "repair",
+        "country": "MYS",
+        "owner": 22935,
+        "y": 128574,
+        "x": 215276,
+        "original_held_interval": [
+          128574,
+          215275,
+          215277,
+          22935
+        ],
+        "original_request_custody": {
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+          "bytes": 11275,
+          "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+        },
+        "original_foreign_source_indices": [
+          45977
+        ],
+        "original_held_reason": "territorial_exclusion_cells"
+      },
+      "positive_original_and_full_IDN": {
+        "original_request_id": "repair:22935:128574:215276",
+        "y": 128574,
+        "x": 215276,
+        "original_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+            "feature_ordinal": 318,
+            "shapeName": "Malinau",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+            "feature_ordinal": 318,
+            "shapeName": "Malinau",
+            "kind": "interior"
+          }
+        ]
+      },
+      "contrary_retained_original_and_full_MYS_fine": {
+        "original_request_id": "repair:22935:128574:215276",
+        "y": 128574,
+        "x": 215276,
+        "original_memberships": [],
+        "full_memberships": []
+      },
+      "contrary_government_fine_districts": [
+        {
+          "source_id": "government:JMG:Demarcation:layer9:OBJECTID:3",
+          "feature_ordinal": 1,
+          "OBJECTID": 3,
+          "provider_name": "Marudi",
+          "kind": "interior"
+        }
+      ],
+      "reference": {
+        "original": {
+          "id": "repair:22935:128574:215276",
+          "original_package": "repair",
+          "country": "MYS",
+          "owner": 22935,
+          "y": 128574,
+          "x": 215276,
+          "original_held_interval": [
+            128574,
+            215275,
+            215277,
+            22935
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            45977
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "assessment_category": "MYS_genuine_IDN_vs_government_country_overlap",
+        "latitude": 3.4425382732871643,
+        "longitude_numerator": 30309660,
+        "longitude_denominator": 262166,
+        "country_hits": [
+          {
+            "ordinal": 0,
+            "ADM0_A3": "IDN",
+            "ADMIN": "Indonesia",
+            "ISO_A3_EH": "IDN"
+          }
+        ],
+        "country_ties": []
+      },
+      "recommended_display_target_id": "gb:IDN:ADM2:22746128B54632748429230",
+      "recommended_display_owner": 22935,
+      "accepted_credit": 0
+    },
+    {
+      "original": {
+        "id": "repair:22935:128575:215276",
+        "original_package": "repair",
+        "country": "MYS",
+        "owner": 22935,
+        "y": 128575,
+        "x": 215276,
+        "original_held_interval": [
+          128575,
+          215275,
+          215277,
+          22935
+        ],
+        "original_request_custody": {
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+          "bytes": 11275,
+          "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+        },
+        "original_foreign_source_indices": [
+          45977
+        ],
+        "original_held_reason": "territorial_exclusion_cells"
+      },
+      "positive_original_and_full_IDN": {
+        "original_request_id": "repair:22935:128575:215276",
+        "y": 128575,
+        "x": 215276,
+        "original_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+            "feature_ordinal": 318,
+            "shapeName": "Malinau",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+            "feature_ordinal": 318,
+            "shapeName": "Malinau",
+            "kind": "interior"
+          }
+        ]
+      },
+      "contrary_retained_original_and_full_MYS_fine": {
+        "original_request_id": "repair:22935:128575:215276",
+        "y": 128575,
+        "x": 215276,
+        "original_memberships": [],
+        "full_memberships": []
+      },
+      "contrary_government_fine_districts": [
+        {
+          "source_id": "government:JMG:Demarcation:layer9:OBJECTID:3",
+          "feature_ordinal": 1,
+          "OBJECTID": 3,
+          "provider_name": "Marudi",
+          "kind": "interior"
+        }
+      ],
+      "reference": {
+        "original": {
+          "id": "repair:22935:128575:215276",
+          "original_package": "repair",
+          "country": "MYS",
+          "owner": 22935,
+          "y": 128575,
+          "x": 215276,
+          "original_held_interval": [
+            128575,
+            215275,
+            215277,
+            22935
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            45977
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "assessment_category": "MYS_genuine_IDN_vs_government_country_overlap",
+        "latitude": 3.4411675743926056,
+        "longitude_numerator": 30309660,
+        "longitude_denominator": 262166,
+        "country_hits": [
+          {
+            "ordinal": 0,
+            "ADM0_A3": "IDN",
+            "ADMIN": "Indonesia",
+            "ISO_A3_EH": "IDN"
+          }
+        ],
+        "country_ties": []
+      },
+      "recommended_display_target_id": "gb:IDN:ADM2:22746128B54632748429230",
+      "recommended_display_owner": 22935,
+      "accepted_credit": 0
+    },
+    {
+      "original": {
+        "id": "repair:22935:128576:215276",
+        "original_package": "repair",
+        "country": "MYS",
+        "owner": 22935,
+        "y": 128576,
+        "x": 215276,
+        "original_held_interval": [
+          128576,
+          215276,
+          215278,
+          22935
+        ],
+        "original_request_custody": {
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+          "bytes": 11275,
+          "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+        },
+        "original_foreign_source_indices": [
+          45977
+        ],
+        "original_held_reason": "territorial_exclusion_cells"
+      },
+      "positive_original_and_full_IDN": {
+        "original_request_id": "repair:22935:128576:215276",
+        "y": 128576,
+        "x": 215276,
+        "original_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+            "feature_ordinal": 318,
+            "shapeName": "Malinau",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+            "feature_ordinal": 318,
+            "shapeName": "Malinau",
+            "kind": "interior"
+          }
+        ]
+      },
+      "contrary_retained_original_and_full_MYS_fine": {
+        "original_request_id": "repair:22935:128576:215276",
+        "y": 128576,
+        "x": 215276,
+        "original_memberships": [],
+        "full_memberships": []
+      },
+      "contrary_government_fine_districts": [
+        {
+          "source_id": "government:JMG:Demarcation:layer9:OBJECTID:3",
+          "feature_ordinal": 1,
+          "OBJECTID": 3,
+          "provider_name": "Marudi",
+          "kind": "interior"
+        }
+      ],
+      "reference": {
+        "original": {
+          "id": "repair:22935:128576:215276",
+          "original_package": "repair",
+          "country": "MYS",
+          "owner": 22935,
+          "y": 128576,
+          "x": 215276,
+          "original_held_interval": [
+            128576,
+            215276,
+            215278,
+            22935
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            45977
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "assessment_category": "MYS_genuine_IDN_vs_government_country_overlap",
+        "latitude": 3.439796873526224,
+        "longitude_numerator": 30309660,
+        "longitude_denominator": 262166,
+        "country_hits": [
+          {
+            "ordinal": 0,
+            "ADM0_A3": "IDN",
+            "ADMIN": "Indonesia",
+            "ISO_A3_EH": "IDN"
+          }
+        ],
+        "country_ties": []
+      },
+      "recommended_display_target_id": "gb:IDN:ADM2:22746128B54632748429230",
+      "recommended_display_owner": 22935,
+      "accepted_credit": 0
+    },
+    {
+      "original": {
+        "id": "repair:22935:128578:215278",
+        "original_package": "repair",
+        "country": "MYS",
+        "owner": 22935,
+        "y": 128578,
+        "x": 215278,
+        "original_held_interval": [
+          128578,
+          215277,
+          215279,
+          22935
+        ],
+        "original_request_custody": {
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+          "bytes": 11275,
+          "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+        },
+        "original_foreign_source_indices": [
+          45977
+        ],
+        "original_held_reason": "territorial_exclusion_cells"
+      },
+      "positive_original_and_full_IDN": {
+        "original_request_id": "repair:22935:128578:215278",
+        "y": 128578,
+        "x": 215278,
+        "original_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+            "feature_ordinal": 318,
+            "shapeName": "Malinau",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+            "feature_ordinal": 318,
+            "shapeName": "Malinau",
+            "kind": "interior"
+          }
+        ]
+      },
+      "contrary_retained_original_and_full_MYS_fine": {
+        "original_request_id": "repair:22935:128578:215278",
+        "y": 128578,
+        "x": 215278,
+        "original_memberships": [],
+        "full_memberships": []
+      },
+      "contrary_government_fine_districts": [
+        {
+          "source_id": "government:JMG:Demarcation:layer9:OBJECTID:3",
+          "feature_ordinal": 1,
+          "OBJECTID": 3,
+          "provider_name": "Marudi",
+          "kind": "interior"
+        }
+      ],
+      "reference": {
+        "original": {
+          "id": "repair:22935:128578:215278",
+          "original_package": "repair",
+          "country": "MYS",
+          "owner": 22935,
+          "y": 128578,
+          "x": 215278,
+          "original_held_interval": [
+            128578,
+            215277,
+            215279,
+            22935
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            45977
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "assessment_category": "MYS_genuine_IDN_vs_government_country_overlap",
+        "latitude": 3.4370554658811185,
+        "longitude_numerator": 30310380,
+        "longitude_denominator": 262166,
+        "country_hits": [
+          {
+            "ordinal": 0,
+            "ADM0_A3": "IDN",
+            "ADMIN": "Indonesia",
+            "ISO_A3_EH": "IDN"
+          }
+        ],
+        "country_ties": []
+      },
+      "recommended_display_target_id": "gb:IDN:ADM2:22746128B54632748429230",
+      "recommended_display_owner": 22935,
+      "accepted_credit": 0
+    },
+    {
+      "original": {
+        "id": "repair:22935:128579:215278",
+        "original_package": "repair",
+        "country": "MYS",
+        "owner": 22935,
+        "y": 128579,
+        "x": 215278,
+        "original_held_interval": [
+          128579,
+          215277,
+          215279,
+          22935
+        ],
+        "original_request_custody": {
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+          "bytes": 11275,
+          "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+        },
+        "original_foreign_source_indices": [
+          45977
+        ],
+        "original_held_reason": "territorial_exclusion_cells"
+      },
+      "positive_original_and_full_IDN": {
+        "original_request_id": "repair:22935:128579:215278",
+        "y": 128579,
+        "x": 215278,
+        "original_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+            "feature_ordinal": 318,
+            "shapeName": "Malinau",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+            "feature_ordinal": 318,
+            "shapeName": "Malinau",
+            "kind": "interior"
+          }
+        ]
+      },
+      "contrary_retained_original_and_full_MYS_fine": {
+        "original_request_id": "repair:22935:128579:215278",
+        "y": 128579,
+        "x": 215278,
+        "original_memberships": [],
+        "full_memberships": []
+      },
+      "contrary_government_fine_districts": [
+        {
+          "source_id": "government:JMG:Demarcation:layer9:OBJECTID:3",
+          "feature_ordinal": 1,
+          "OBJECTID": 3,
+          "provider_name": "Marudi",
+          "kind": "interior"
+        }
+      ],
+      "reference": {
+        "original": {
+          "id": "repair:22935:128579:215278",
+          "original_package": "repair",
+          "country": "MYS",
+          "owner": 22935,
+          "y": 128579,
+          "x": 215278,
+          "original_held_interval": [
+            128579,
+            215277,
+            215279,
+            22935
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            45977
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "assessment_category": "MYS_genuine_IDN_vs_government_country_overlap",
+        "latitude": 3.435684759103957,
+        "longitude_numerator": 30310380,
+        "longitude_denominator": 262166,
+        "country_hits": [
+          {
+            "ordinal": 0,
+            "ADM0_A3": "IDN",
+            "ADMIN": "Indonesia",
+            "ISO_A3_EH": "IDN"
+          }
+        ],
+        "country_ties": []
+      },
+      "recommended_display_target_id": "gb:IDN:ADM2:22746128B54632748429230",
+      "recommended_display_owner": 22935,
+      "accepted_credit": 0
+    },
+    {
+      "original": {
+        "id": "repair:22935:128580:215278",
+        "original_package": "repair",
+        "country": "MYS",
+        "owner": 22935,
+        "y": 128580,
+        "x": 215278,
+        "original_held_interval": [
+          128580,
+          215277,
+          215279,
+          22935
+        ],
+        "original_request_custody": {
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+          "bytes": 11275,
+          "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+        },
+        "original_foreign_source_indices": [
+          45977
+        ],
+        "original_held_reason": "territorial_exclusion_cells"
+      },
+      "positive_original_and_full_IDN": {
+        "original_request_id": "repair:22935:128580:215278",
+        "y": 128580,
+        "x": 215278,
+        "original_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+            "feature_ordinal": 318,
+            "shapeName": "Malinau",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+            "feature_ordinal": 318,
+            "shapeName": "Malinau",
+            "kind": "interior"
+          }
+        ]
+      },
+      "contrary_retained_original_and_full_MYS_fine": {
+        "original_request_id": "repair:22935:128580:215278",
+        "y": 128580,
+        "x": 215278,
+        "original_memberships": [],
+        "full_memberships": []
+      },
+      "contrary_government_fine_districts": [
+        {
+          "source_id": "government:JMG:Demarcation:layer9:OBJECTID:3",
+          "feature_ordinal": 1,
+          "OBJECTID": 3,
+          "provider_name": "Marudi",
+          "kind": "interior"
+        }
+      ],
+      "reference": {
+        "original": {
+          "id": "repair:22935:128580:215278",
+          "original_package": "repair",
+          "country": "MYS",
+          "owner": 22935,
+          "y": 128580,
+          "x": 215278,
+          "original_held_interval": [
+            128580,
+            215277,
+            215279,
+            22935
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            45977
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "assessment_category": "MYS_genuine_IDN_vs_government_country_overlap",
+        "latitude": 3.4343140503581004,
+        "longitude_numerator": 30310380,
+        "longitude_denominator": 262166,
+        "country_hits": [
+          {
+            "ordinal": 0,
+            "ADM0_A3": "IDN",
+            "ADMIN": "Indonesia",
+            "ISO_A3_EH": "IDN"
+          }
+        ],
+        "country_ties": []
+      },
+      "recommended_display_target_id": "gb:IDN:ADM2:22746128B54632748429230",
+      "recommended_display_owner": 22935,
+      "accepted_credit": 0
+    },
+    {
+      "original": {
+        "id": "repair:22935:128581:215278",
+        "original_package": "repair",
+        "country": "MYS",
+        "owner": 22935,
+        "y": 128581,
+        "x": 215278,
+        "original_held_interval": [
+          128581,
+          215278,
+          215279,
+          22935
+        ],
+        "original_request_custody": {
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+          "bytes": 11275,
+          "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+        },
+        "original_foreign_source_indices": [
+          45977
+        ],
+        "original_held_reason": "territorial_exclusion_cells"
+      },
+      "positive_original_and_full_IDN": {
+        "original_request_id": "repair:22935:128581:215278",
+        "y": 128581,
+        "x": 215278,
+        "original_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+            "feature_ordinal": 318,
+            "shapeName": "Malinau",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+            "feature_ordinal": 318,
+            "shapeName": "Malinau",
+            "kind": "interior"
+          }
+        ]
+      },
+      "contrary_retained_original_and_full_MYS_fine": {
+        "original_request_id": "repair:22935:128581:215278",
+        "y": 128581,
+        "x": 215278,
+        "original_memberships": [],
+        "full_memberships": []
+      },
+      "contrary_government_fine_districts": [
+        {
+          "source_id": "government:JMG:Demarcation:layer9:OBJECTID:3",
+          "feature_ordinal": 1,
+          "OBJECTID": 3,
+          "provider_name": "Marudi",
+          "kind": "interior"
+        }
+      ],
+      "reference": {
+        "original": {
+          "id": "repair:22935:128581:215278",
+          "original_package": "repair",
+          "country": "MYS",
+          "owner": 22935,
+          "y": 128581,
+          "x": 215278,
+          "original_held_interval": [
+            128581,
+            215278,
+            215279,
+            22935
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            45977
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "assessment_category": "MYS_genuine_IDN_vs_government_country_overlap",
+        "latitude": 3.4329433396443285,
+        "longitude_numerator": 30310380,
+        "longitude_denominator": 262166,
+        "country_hits": [
+          {
+            "ordinal": 0,
+            "ADM0_A3": "IDN",
+            "ADMIN": "Indonesia",
+            "ISO_A3_EH": "IDN"
+          }
+        ],
+        "country_ties": []
+      },
+      "recommended_display_target_id": "gb:IDN:ADM2:22746128B54632748429230",
+      "recommended_display_owner": 22935,
+      "accepted_credit": 0
+    },
+    {
+      "original": {
+        "id": "repair:22935:128582:215278",
+        "original_package": "repair",
+        "country": "MYS",
+        "owner": 22935,
+        "y": 128582,
+        "x": 215278,
+        "original_held_interval": [
+          128582,
+          215278,
+          215279,
+          22935
+        ],
+        "original_request_custody": {
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+          "bytes": 11275,
+          "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+        },
+        "original_foreign_source_indices": [
+          45977
+        ],
+        "original_held_reason": "territorial_exclusion_cells"
+      },
+      "positive_original_and_full_IDN": {
+        "original_request_id": "repair:22935:128582:215278",
+        "y": 128582,
+        "x": 215278,
+        "original_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+            "feature_ordinal": 318,
+            "shapeName": "Malinau",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+            "feature_ordinal": 318,
+            "shapeName": "Malinau",
+            "kind": "interior"
+          }
+        ]
+      },
+      "contrary_retained_original_and_full_MYS_fine": {
+        "original_request_id": "repair:22935:128582:215278",
+        "y": 128582,
+        "x": 215278,
+        "original_memberships": [],
+        "full_memberships": []
+      },
+      "contrary_government_fine_districts": [
+        {
+          "source_id": "government:JMG:Demarcation:layer9:OBJECTID:3",
+          "feature_ordinal": 1,
+          "OBJECTID": 3,
+          "provider_name": "Marudi",
+          "kind": "interior"
+        }
+      ],
+      "reference": {
+        "original": {
+          "id": "repair:22935:128582:215278",
+          "original_package": "repair",
+          "country": "MYS",
+          "owner": 22935,
+          "y": 128582,
+          "x": 215278,
+          "original_held_interval": [
+            128582,
+            215278,
+            215279,
+            22935
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            45977
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "assessment_category": "MYS_genuine_IDN_vs_government_country_overlap",
+        "latitude": 3.4315726269634235,
+        "longitude_numerator": 30310380,
+        "longitude_denominator": 262166,
+        "country_hits": [
+          {
+            "ordinal": 0,
+            "ADM0_A3": "IDN",
+            "ADMIN": "Indonesia",
+            "ISO_A3_EH": "IDN"
+          }
+        ],
+        "country_ties": []
+      },
+      "recommended_display_target_id": "gb:IDN:ADM2:22746128B54632748429230",
+      "recommended_display_owner": 22935,
+      "accepted_credit": 0
+    },
+    {
+      "original": {
+        "id": "repair:22935:128591:215282",
+        "original_package": "repair",
+        "country": "MYS",
+        "owner": 22935,
+        "y": 128591,
+        "x": 215282,
+        "original_held_interval": [
+          128591,
+          215282,
+          215283,
+          22935
+        ],
+        "original_request_custody": {
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+          "bytes": 11275,
+          "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+        },
+        "original_foreign_source_indices": [
+          45977
+        ],
+        "original_held_reason": "territorial_exclusion_cells"
+      },
+      "positive_original_and_full_IDN": {
+        "original_request_id": "repair:22935:128591:215282",
+        "y": 128591,
+        "x": 215282,
+        "original_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+            "feature_ordinal": 318,
+            "shapeName": "Malinau",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+            "feature_ordinal": 318,
+            "shapeName": "Malinau",
+            "kind": "interior"
+          }
+        ]
+      },
+      "contrary_retained_original_and_full_MYS_fine": {
+        "original_request_id": "repair:22935:128591:215282",
+        "y": 128591,
+        "x": 215282,
+        "original_memberships": [],
+        "full_memberships": []
+      },
+      "contrary_government_fine_districts": [
+        {
+          "source_id": "government:JMG:Demarcation:layer9:OBJECTID:3",
+          "feature_ordinal": 1,
+          "OBJECTID": 3,
+          "provider_name": "Marudi",
+          "kind": "interior"
+        }
+      ],
+      "reference": {
+        "original": {
+          "id": "repair:22935:128591:215282",
+          "original_package": "repair",
+          "country": "MYS",
+          "owner": 22935,
+          "y": 128591,
+          "x": 215282,
+          "original_held_interval": [
+            128591,
+            215282,
+            215283,
+            22935
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            45977
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "assessment_category": "MYS_genuine_IDN_vs_government_country_overlap",
+        "latitude": 3.419236124443288,
+        "longitude_numerator": 30311820,
+        "longitude_denominator": 262166,
+        "country_hits": [
+          {
+            "ordinal": 0,
+            "ADM0_A3": "IDN",
+            "ADMIN": "Indonesia",
+            "ISO_A3_EH": "IDN"
+          }
+        ],
+        "country_ties": []
+      },
+      "recommended_display_target_id": "gb:IDN:ADM2:22746128B54632748429230",
+      "recommended_display_owner": 22935,
+      "accepted_credit": 0
+    },
+    {
+      "original": {
+        "id": "repair:22935:128878:215168",
+        "original_package": "repair",
+        "country": "MYS",
+        "owner": 22935,
+        "y": 128878,
+        "x": 215168,
+        "original_held_interval": [
+          128878,
+          215167,
+          215171,
+          22935
+        ],
+        "original_request_custody": {
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+          "bytes": 11275,
+          "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+        },
+        "original_foreign_source_indices": [
+          45977
+        ],
+        "original_held_reason": "territorial_exclusion_cells"
+      },
+      "positive_original_and_full_IDN": {
+        "original_request_id": "repair:22935:128878:215168",
+        "y": 128878,
+        "x": 215168,
+        "original_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+            "feature_ordinal": 318,
+            "shapeName": "Malinau",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+            "feature_ordinal": 318,
+            "shapeName": "Malinau",
+            "kind": "interior"
+          }
+        ]
+      },
+      "contrary_retained_original_and_full_MYS_fine": {
+        "original_request_id": "repair:22935:128878:215168",
+        "y": 128878,
+        "x": 215168,
+        "original_memberships": [],
+        "full_memberships": []
+      },
+      "contrary_government_fine_districts": [
+        {
+          "source_id": "government:JMG:Demarcation:layer9:OBJECTID:3",
+          "feature_ordinal": 1,
+          "OBJECTID": 3,
+          "provider_name": "Marudi",
+          "kind": "interior"
+        }
+      ],
+      "reference": {
+        "original": {
+          "id": "repair:22935:128878:215168",
+          "original_package": "repair",
+          "country": "MYS",
+          "owner": 22935,
+          "y": 128878,
+          "x": 215168,
+          "original_held_interval": [
+            128878,
+            215167,
+            215171,
+            22935
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            45977
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "assessment_category": "MYS_genuine_IDN_vs_government_country_overlap",
+        "latitude": 3.025758620928929,
+        "longitude_numerator": 30270780,
+        "longitude_denominator": 262166,
+        "country_hits": [
+          {
+            "ordinal": 0,
+            "ADM0_A3": "IDN",
+            "ADMIN": "Indonesia",
+            "ISO_A3_EH": "IDN"
+          }
+        ],
+        "country_ties": []
+      },
+      "recommended_display_target_id": "gb:IDN:ADM2:22746128B54632748429230",
+      "recommended_display_owner": 22935,
+      "accepted_credit": 0
+    },
+    {
+      "original": {
+        "id": "repair:22935:128908:215107",
+        "original_package": "repair",
+        "country": "MYS",
+        "owner": 22935,
+        "y": 128908,
+        "x": 215107,
+        "original_held_interval": [
+          128908,
+          215106,
+          215108,
+          22935
+        ],
+        "original_request_custody": {
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+          "bytes": 11275,
+          "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+        },
+        "original_foreign_source_indices": [
+          45977
+        ],
+        "original_held_reason": "territorial_exclusion_cells"
+      },
+      "positive_original_and_full_IDN": {
+        "original_request_id": "repair:22935:128908:215107",
+        "y": 128908,
+        "x": 215107,
+        "original_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+            "feature_ordinal": 318,
+            "shapeName": "Malinau",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+            "feature_ordinal": 318,
+            "shapeName": "Malinau",
+            "kind": "interior"
+          }
+        ]
+      },
+      "contrary_retained_original_and_full_MYS_fine": {
+        "original_request_id": "repair:22935:128908:215107",
+        "y": 128908,
+        "x": 215107,
+        "original_memberships": [],
+        "full_memberships": []
+      },
+      "contrary_government_fine_districts": [
+        {
+          "source_id": "government:JMG:Demarcation:layer9:OBJECTID:3",
+          "feature_ordinal": 1,
+          "OBJECTID": 3,
+          "provider_name": "Marudi",
+          "kind": "interior"
+        }
+      ],
+      "reference": {
+        "original": {
+          "id": "repair:22935:128908:215107",
+          "original_package": "repair",
+          "country": "MYS",
+          "owner": 22935,
+          "y": 128908,
+          "x": 215107,
+          "original_held_interval": [
+            128908,
+            215106,
+            215108,
+            22935
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            45977
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "assessment_category": "MYS_genuine_IDN_vs_government_country_overlap",
+        "latitude": 2.9846200007222006,
+        "longitude_numerator": 30248820,
+        "longitude_denominator": 262166,
+        "country_hits": [
+          {
+            "ordinal": 0,
+            "ADM0_A3": "IDN",
+            "ADMIN": "Indonesia",
+            "ISO_A3_EH": "IDN"
+          }
+        ],
+        "country_ties": []
+      },
+      "recommended_display_target_id": "gb:IDN:ADM2:22746128B54632748429230",
+      "recommended_display_owner": 22935,
+      "accepted_credit": 0
+    },
+    {
+      "original": {
+        "id": "repair:22935:128910:215091",
+        "original_package": "repair",
+        "country": "MYS",
+        "owner": 22935,
+        "y": 128910,
+        "x": 215091,
+        "original_held_interval": [
+          128910,
+          215091,
+          215096,
+          22935
+        ],
+        "original_request_custody": {
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+          "bytes": 11275,
+          "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+        },
+        "original_foreign_source_indices": [
+          45977
+        ],
+        "original_held_reason": "territorial_exclusion_cells"
+      },
+      "positive_original_and_full_IDN": {
+        "original_request_id": "repair:22935:128910:215091",
+        "y": 128910,
+        "x": 215091,
+        "original_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+            "feature_ordinal": 318,
+            "shapeName": "Malinau",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+            "feature_ordinal": 318,
+            "shapeName": "Malinau",
+            "kind": "interior"
+          }
+        ]
+      },
+      "contrary_retained_original_and_full_MYS_fine": {
+        "original_request_id": "repair:22935:128910:215091",
+        "y": 128910,
+        "x": 215091,
+        "original_memberships": [],
+        "full_memberships": []
+      },
+      "contrary_government_fine_districts": [
+        {
+          "source_id": "government:JMG:Demarcation:layer9:OBJECTID:3",
+          "feature_ordinal": 1,
+          "OBJECTID": 3,
+          "provider_name": "Marudi",
+          "kind": "interior"
+        }
+      ],
+      "reference": {
+        "original": {
+          "id": "repair:22935:128910:215091",
+          "original_package": "repair",
+          "country": "MYS",
+          "owner": 22935,
+          "y": 128910,
+          "x": 215091,
+          "original_held_interval": [
+            128910,
+            215091,
+            215096,
+            22935
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            45977
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "assessment_category": "MYS_genuine_IDN_vs_government_country_overlap",
+        "latitude": 2.981877371048207,
+        "longitude_numerator": 30243060,
+        "longitude_denominator": 262166,
+        "country_hits": [
+          {
+            "ordinal": 0,
+            "ADM0_A3": "IDN",
+            "ADMIN": "Indonesia",
+            "ISO_A3_EH": "IDN"
+          }
+        ],
+        "country_ties": []
+      },
+      "recommended_display_target_id": "gb:IDN:ADM2:22746128B54632748429230",
+      "recommended_display_owner": 22935,
+      "accepted_credit": 0
+    },
+    {
+      "original": {
+        "id": "repair:22935:129595:214726",
+        "original_package": "repair",
+        "country": "MYS",
+        "owner": 22935,
+        "y": 129595,
+        "x": 214726,
+        "original_held_interval": [
+          129595,
+          214726,
+          214727,
+          22935
+        ],
+        "original_request_custody": {
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+          "bytes": 11275,
+          "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+        },
+        "original_foreign_source_indices": [
+          45977
+        ],
+        "original_held_reason": "territorial_exclusion_cells"
+      },
+      "positive_original_and_full_IDN": {
+        "original_request_id": "repair:22935:129595:214726",
+        "y": 129595,
+        "x": 214726,
+        "original_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+            "feature_ordinal": 318,
+            "shapeName": "Malinau",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+            "feature_ordinal": 318,
+            "shapeName": "Malinau",
+            "kind": "interior"
+          }
+        ]
+      },
+      "contrary_retained_original_and_full_MYS_fine": {
+        "original_request_id": "repair:22935:129595:214726",
+        "y": 129595,
+        "x": 214726,
+        "original_memberships": [],
+        "full_memberships": []
+      },
+      "contrary_government_fine_districts": [
+        {
+          "source_id": "government:JMG:Demarcation:layer9:OBJECTID:8",
+          "feature_ordinal": 6,
+          "OBJECTID": 8,
+          "provider_name": "Belaga",
+          "kind": "interior"
+        }
+      ],
+      "reference": {
+        "original": {
+          "id": "repair:22935:129595:214726",
+          "original_package": "repair",
+          "country": "MYS",
+          "owner": 22935,
+          "y": 129595,
+          "x": 214726,
+          "original_held_interval": [
+            129595,
+            214726,
+            214727,
+            22935
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            45977
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "assessment_category": "MYS_genuine_IDN_vs_government_country_overlap",
+        "latitude": 2.042166435398298,
+        "longitude_numerator": 30111660,
+        "longitude_denominator": 262166,
+        "country_hits": [
+          {
+            "ordinal": 0,
+            "ADM0_A3": "IDN",
+            "ADMIN": "Indonesia",
+            "ISO_A3_EH": "IDN"
+          }
+        ],
+        "country_ties": []
+      },
+      "recommended_display_target_id": "gb:IDN:ADM2:22746128B54632748429230",
+      "recommended_display_owner": 22935,
+      "accepted_credit": 0
+    },
+    {
+      "original": {
+        "id": "repair:22935:129596:214725",
+        "original_package": "repair",
+        "country": "MYS",
+        "owner": 22935,
+        "y": 129596,
+        "x": 214725,
+        "original_held_interval": [
+          129596,
+          214725,
+          214726,
+          22935
+        ],
+        "original_request_custody": {
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+          "bytes": 11275,
+          "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+        },
+        "original_foreign_source_indices": [
+          45977
+        ],
+        "original_held_reason": "territorial_exclusion_cells"
+      },
+      "positive_original_and_full_IDN": {
+        "original_request_id": "repair:22935:129596:214725",
+        "y": 129596,
+        "x": 214725,
+        "original_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+            "feature_ordinal": 318,
+            "shapeName": "Malinau",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+            "feature_ordinal": 318,
+            "shapeName": "Malinau",
+            "kind": "interior"
+          }
+        ]
+      },
+      "contrary_retained_original_and_full_MYS_fine": {
+        "original_request_id": "repair:22935:129596:214725",
+        "y": 129596,
+        "x": 214725,
+        "original_memberships": [],
+        "full_memberships": []
+      },
+      "contrary_government_fine_districts": [
+        {
+          "source_id": "government:JMG:Demarcation:layer9:OBJECTID:8",
+          "feature_ordinal": 6,
+          "OBJECTID": 8,
+          "provider_name": "Belaga",
+          "kind": "interior"
+        }
+      ],
+      "reference": {
+        "original": {
+          "id": "repair:22935:129596:214725",
+          "original_package": "repair",
+          "country": "MYS",
+          "owner": 22935,
+          "y": 129596,
+          "x": 214725,
+          "original_held_interval": [
+            129596,
+            214725,
+            214726,
+            22935
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            45977
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "assessment_category": "MYS_genuine_IDN_vs_government_country_overlap",
+        "latitude": 2.040794131180219,
+        "longitude_numerator": 30111300,
+        "longitude_denominator": 262166,
+        "country_hits": [
+          {
+            "ordinal": 0,
+            "ADM0_A3": "IDN",
+            "ADMIN": "Indonesia",
+            "ISO_A3_EH": "IDN"
+          }
+        ],
+        "country_ties": []
+      },
+      "recommended_display_target_id": "gb:IDN:ADM2:22746128B54632748429230",
+      "recommended_display_owner": 22935,
+      "accepted_credit": 0
+    },
+    {
+      "original": {
+        "id": "repair:22935:129924:214573",
+        "original_package": "repair",
+        "country": "MYS",
+        "owner": 22935,
+        "y": 129924,
+        "x": 214573,
+        "original_held_interval": [
+          129924,
+          214573,
+          214574,
+          22935
+        ],
+        "original_request_custody": {
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+          "bytes": 11275,
+          "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+        },
+        "original_foreign_source_indices": [
+          45977
+        ],
+        "original_held_reason": "territorial_exclusion_cells"
+      },
+      "positive_original_and_full_IDN": {
+        "original_request_id": "repair:22935:129924:214573",
+        "y": 129924,
+        "x": 214573,
+        "original_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+            "feature_ordinal": 318,
+            "shapeName": "Malinau",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+            "feature_ordinal": 318,
+            "shapeName": "Malinau",
+            "kind": "interior"
+          }
+        ]
+      },
+      "contrary_retained_original_and_full_MYS_fine": {
+        "original_request_id": "repair:22935:129924:214573",
+        "y": 129924,
+        "x": 214573,
+        "original_memberships": [],
+        "full_memberships": []
+      },
+      "contrary_government_fine_districts": [
+        {
+          "source_id": "government:JMG:Demarcation:layer9:OBJECTID:8",
+          "feature_ordinal": 6,
+          "OBJECTID": 8,
+          "provider_name": "Belaga",
+          "kind": "interior"
+        }
+      ],
+      "reference": {
+        "original": {
+          "id": "repair:22935:129924:214573",
+          "original_package": "repair",
+          "country": "MYS",
+          "owner": 22935,
+          "y": 129924,
+          "x": 214573,
+          "original_held_interval": [
+            129924,
+            214573,
+            214574,
+            22935
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            45977
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "assessment_category": "MYS_genuine_IDN_vs_government_country_overlap",
+        "latitude": 1.590619778837366,
+        "longitude_numerator": 30056580,
+        "longitude_denominator": 262166,
+        "country_hits": [
+          {
+            "ordinal": 0,
+            "ADM0_A3": "IDN",
+            "ADMIN": "Indonesia",
+            "ISO_A3_EH": "IDN"
+          }
+        ],
+        "country_ties": []
+      },
+      "recommended_display_target_id": "gb:IDN:ADM2:22746128B54632748429230",
+      "recommended_display_owner": 22935,
+      "accepted_credit": 0
+    },
+    {
+      "original": {
+        "id": "repair:23115:129950:213148",
+        "original_package": "repair",
+        "country": "MYS",
+        "owner": 23115,
+        "y": 129950,
+        "x": 213148,
+        "original_held_interval": [
+          129950,
+          213146,
+          213149,
+          23115
+        ],
+        "original_request_custody": {
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+          "bytes": 11275,
+          "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+        },
+        "original_foreign_source_indices": [
+          45977
+        ],
+        "original_held_reason": "territorial_exclusion_cells"
+      },
+      "positive_original_and_full_IDN": {
+        "original_request_id": "repair:23115:129950:213148",
+        "y": 129950,
+        "x": 213148,
+        "original_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B82886709098386",
+            "feature_ordinal": 138,
+            "shapeName": "Kapuas Hulu",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B82886709098386",
+            "feature_ordinal": 138,
+            "shapeName": "Kapuas Hulu",
+            "kind": "interior"
+          }
+        ]
+      },
+      "contrary_retained_original_and_full_MYS_fine": {
+        "original_request_id": "repair:23115:129950:213148",
+        "y": 129950,
+        "x": 213148,
+        "original_memberships": [],
+        "full_memberships": []
+      },
+      "contrary_government_fine_districts": [
+        {
+          "source_id": "government:JMG:Demarcation:layer9:OBJECTID:21",
+          "feature_ordinal": 19,
+          "OBJECTID": 21,
+          "provider_name": "Song",
+          "kind": "interior"
+        }
+      ],
+      "reference": {
+        "original": {
+          "id": "repair:23115:129950:213148",
+          "original_package": "repair",
+          "country": "MYS",
+          "owner": 23115,
+          "y": 129950,
+          "x": 213148,
+          "original_held_interval": [
+            129950,
+            213146,
+            213149,
+            23115
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            45977
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "assessment_category": "MYS_genuine_IDN_vs_government_country_overlap",
+        "latitude": 1.55493065953505,
+        "longitude_numerator": 29543580,
+        "longitude_denominator": 262166,
+        "country_hits": [
+          {
+            "ordinal": 0,
+            "ADM0_A3": "IDN",
+            "ADMIN": "Indonesia",
+            "ISO_A3_EH": "IDN"
+          }
+        ],
+        "country_ties": []
+      },
+      "recommended_display_target_id": "gb:IDN:ADM2:22746128B82886709098386",
+      "recommended_display_owner": 23115,
+      "accepted_credit": 0
+    },
+    {
+      "original": {
+        "id": "repair:23115:130258:212675",
+        "original_package": "repair",
+        "country": "MYS",
+        "owner": 23115,
+        "y": 130258,
+        "x": 212675,
+        "original_held_interval": [
+          130258,
+          212673,
+          212676,
+          23115
+        ],
+        "original_request_custody": {
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+          "bytes": 11275,
+          "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+        },
+        "original_foreign_source_indices": [
+          45977
+        ],
+        "original_held_reason": "territorial_exclusion_cells"
+      },
+      "positive_original_and_full_IDN": {
+        "original_request_id": "repair:23115:130258:212675",
+        "y": 130258,
+        "x": 212675,
+        "original_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B82886709098386",
+            "feature_ordinal": 138,
+            "shapeName": "Kapuas Hulu",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B82886709098386",
+            "feature_ordinal": 138,
+            "shapeName": "Kapuas Hulu",
+            "kind": "interior"
+          }
+        ]
+      },
+      "contrary_retained_original_and_full_MYS_fine": {
+        "original_request_id": "repair:23115:130258:212675",
+        "y": 130258,
+        "x": 212675,
+        "original_memberships": [],
+        "full_memberships": []
+      },
+      "contrary_government_fine_districts": [
+        {
+          "source_id": "government:JMG:Demarcation:layer9:OBJECTID:19",
+          "feature_ordinal": 17,
+          "OBJECTID": 19,
+          "provider_name": "Lubok Antu",
+          "kind": "interior"
+        },
+        {
+          "source_id": "government:JMG:Demarcation:layer9:OBJECTID:32",
+          "feature_ordinal": 30,
+          "OBJECTID": 32,
+          "provider_name": "Lubok Antu",
+          "kind": "interior"
+        }
+      ],
+      "reference": {
+        "original": {
+          "id": "repair:23115:130258:212675",
+          "original_package": "repair",
+          "country": "MYS",
+          "owner": 23115,
+          "y": 130258,
+          "x": 212675,
+          "original_held_interval": [
+            130258,
+            212673,
+            212676,
+            23115
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            45977
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "assessment_category": "MYS_genuine_IDN_vs_government_country_overlap",
+        "latitude": 1.1321097522397394,
+        "longitude_numerator": 29373300,
+        "longitude_denominator": 262166,
+        "country_hits": [
+          {
+            "ordinal": 0,
+            "ADM0_A3": "IDN",
+            "ADMIN": "Indonesia",
+            "ISO_A3_EH": "IDN"
+          }
+        ],
+        "country_ties": []
+      },
+      "recommended_display_target_id": "gb:IDN:ADM2:22746128B82886709098386",
+      "recommended_display_owner": 23115,
+      "accepted_credit": 0
+    }
+  ],
+  "elapsed_seconds": 0.6741082019871101,
+  "new_native_or_physical_producer_runs": 0,
+  "limits": [
+    "Government district objects are genuine retained provider district footprints but are not mapped to an Atlas foreign target by this assessment. Some are legacy multi-target aggregates.",
+    "The existing positive IDN source and target stay unchanged; the only proposed change is exact country/display applicability of contrary contacts.",
+    "No positive geometry is created from a country mask, government state or name match."
+  ]
+}

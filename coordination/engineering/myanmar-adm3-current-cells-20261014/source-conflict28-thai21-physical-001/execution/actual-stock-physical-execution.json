@@ -1,0 +1,22 @@
+{
+  "kind": "actual-new-six-target-stock-physical-observation",
+  "command": [
+    "node",
+    "scripts/prepare-delivery-handoff.mjs",
+    "physical",
+    ".takeover/source28-thai21/stock-physical-config.json",
+    ".cache/delivery-handoff/source28-thai21-whole-physical-001"
+  ],
+  "actual_executing_tree": "6cd25c448c1352b22e1d7c1dc83830984fc29f4b",
+  "unchanged_accepted_operator_code": "64fc78d219cc0d4db062a7ebc27ffec6aa1dc18e",
+  "immutable_stage_commit": "4aa6e168f1cf5028d303a64afa5c861d16ef2e24",
+  "original_source28_keys": 21,
+  "complete_targets": 6,
+  "exit_code": 1,
+  "elapsed_seconds": 0.46313345100497827,
+  "max_child_rss_kib": 100452,
+  "completed_utc": "2026-10-16T06:25:50.860895+00:00",
+  "source_downloads": 0,
+  "new_installations": 0,
+  "native_credit": 0
+}

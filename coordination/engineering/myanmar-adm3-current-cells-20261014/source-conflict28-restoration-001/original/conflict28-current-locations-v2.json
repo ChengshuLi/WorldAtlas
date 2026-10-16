@@ -1,0 +1,1113 @@
+{
+  "current_commit": "5a02b6c609fa281ee1b9fcc052c18a941632e8b8",
+  "bank_path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography-bank.json",
+  "bank_sha256": "3750f72a48bb9fd498ca129e20e299904239bfe1b4191919fbc89b636234c776",
+  "parts": [
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-15.json",
+      "mode": "100644",
+      "git_blob_oid": "4ef51307797f81b8cf7a647495f037a089f8b368",
+      "bytes": 5180426,
+      "sha256": "6f763059820d14a4eab78173a756a8869821dd810e94f77c20eb5510c6cfb1df",
+      "role": "current-v8-unchanged-source-body"
+    },
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-23.json",
+      "mode": "100644",
+      "git_blob_oid": "371e95033d9c542bbf07c42afe7111074e35f246",
+      "bytes": 4962410,
+      "sha256": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2",
+      "role": "current-v8-unchanged-source-body"
+    }
+  ],
+  "records": [
+    {
+      "part": "data/geography/part-15.json",
+      "array_index": 1038,
+      "record": {
+        "type": "Feature",
+        "properties": {
+          "id": "gb:MMR:ADM3:66882298B82483484204646",
+          "name": "Bokpyin",
+          "parent_id": "framework:province:kawthoung:25f2b1f750b9",
+          "reference_owner": "Myanmar",
+          "metadata": {
+            "source_id": "gb:MMR:ADM3",
+            "source_name": "geoBoundaries gbOpen",
+            "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM3/geoBoundaries-MMR-ADM3.geojson",
+            "license": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+            "reference_year": "2019",
+            "administrative_level": "ADM3",
+            "parent_source_level": "ADM2",
+            "granularity_version": 3,
+            "source_role": "Township",
+            "selection_reason": "Named Township territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+            "parent_match": "Named source administrative unit grouped within this geographic area",
+            "original_id": "66882298B82483484204646",
+            "representative_point": [
+              99.00377483670596,
+              11.221790710382532
+            ],
+            "hierarchy_version": 4,
+            "hierarchy_source": "gb:MMR:ADM2",
+            "hierarchy_overlap": 0.981794,
+            "topology_version": 1,
+            "topology_reconciled": true,
+            "topology_conflicts": 3,
+            "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+            "original_geometry_sha256": "8dd3ae3ce165febb3d0833cf71f068c777fda51aa0dd8ccef6b12eed5575a242",
+            "reference_version": 3,
+            "geographic_area_code": "MYA",
+            "geographic_region_code": 41,
+            "geographic_match": "largest source overlap",
+            "geographic_overlap": 0.84626,
+            "coverage_version": 1,
+            "semantic_version": 1,
+            "remote_version": 1,
+            "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+            "framework_match": {
+              "source": "Natural Earth",
+              "id": "MMR-3279",
+              "overlap": 0.938137
+            },
+            "regional_match": {
+              "reference_iso": "MMR",
+              "source_id": "MMR-3279",
+              "overlap": 0.938137,
+              "method": "reference-territory-constrained overlap"
+            },
+            "reference_owner_id": "owner:Q836",
+            "reference_polity": "Myanmar",
+            "reference_polity_status": "reference",
+            "reference_polity_evidence": {
+              "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+              "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+              "reference_territory": "Myanmar",
+              "classification": "Sovereign country",
+              "note": null,
+              "uncertainty": false
+            },
+            "semantic_review": {
+              "status": "open",
+              "continent": "Asia",
+              "decision_index": 1292,
+              "evidence_file": "geographic-decisions"
+            }
+          }
+        },
+        "id": "gb:MMR:ADM3:66882298B82483484204646"
+      }
+    },
+    {
+      "part": "data/geography/part-15.json",
+      "array_index": 1043,
+      "record": {
+        "type": "Feature",
+        "properties": {
+          "id": "gb:MMR:ADM3:66882298B33854457780857",
+          "name": "Hlaingbwe",
+          "parent_id": "framework:province:hpa-an:3b606d253d82",
+          "reference_owner": "Myanmar",
+          "metadata": {
+            "source_id": "gb:MMR:ADM3",
+            "source_name": "geoBoundaries gbOpen",
+            "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM3/geoBoundaries-MMR-ADM3.geojson",
+            "license": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+            "reference_year": "2019",
+            "administrative_level": "ADM3",
+            "parent_source_level": "ADM2",
+            "granularity_version": 3,
+            "source_role": "Township",
+            "selection_reason": "Named Township territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+            "parent_match": "Named source administrative unit grouped within this geographic area",
+            "original_id": "66882298B33854457780857",
+            "representative_point": [
+              97.903269,
+              17.26235
+            ],
+            "hierarchy_version": 4,
+            "hierarchy_source": "gb:MMR:ADM2",
+            "hierarchy_overlap": 0.997269,
+            "topology_version": 1,
+            "topology_reconciled": true,
+            "topology_conflicts": 2,
+            "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+            "original_geometry_sha256": "d56166573c95413a8432f5c73776712cfcc5eaace45b3d19aaddc589a85075ed",
+            "reference_version": 3,
+            "geographic_area_code": "MYA",
+            "geographic_region_code": 41,
+            "geographic_match": "largest source overlap",
+            "geographic_overlap": 0.99186,
+            "coverage_version": 1,
+            "semantic_version": 1,
+            "remote_version": 1,
+            "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+            "framework_match": {
+              "source": "Natural Earth",
+              "id": "MMR-3266",
+              "overlap": 0.952143
+            },
+            "regional_match": {
+              "reference_iso": "MMR",
+              "source_id": "MMR-3266",
+              "overlap": 0.952143,
+              "method": "reference-territory-constrained overlap"
+            },
+            "reference_owner_id": "owner:Q836",
+            "reference_polity": "Myanmar",
+            "reference_polity_status": "reference",
+            "reference_polity_evidence": {
+              "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+              "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+              "reference_territory": "Myanmar",
+              "classification": "Sovereign country",
+              "note": null,
+              "uncertainty": false
+            },
+            "semantic_review": {
+              "status": "open",
+              "continent": "Asia",
+              "decision_index": 1113,
+              "evidence_file": "geographic-decisions"
+            }
+          }
+        },
+        "id": "gb:MMR:ADM3:66882298B33854457780857"
+      }
+    },
+    {
+      "part": "data/geography/part-15.json",
+      "array_index": 1045,
+      "record": {
+        "type": "Feature",
+        "properties": {
+          "id": "gb:MMR:ADM3:66882298B59879554977018",
+          "name": "Myawaddy",
+          "parent_id": "framework:province:myawaddy:32bf363d965b",
+          "reference_owner": "Myanmar",
+          "metadata": {
+            "source_id": "gb:MMR:ADM3",
+            "source_name": "geoBoundaries gbOpen",
+            "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM3/geoBoundaries-MMR-ADM3.geojson",
+            "license": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+            "reference_year": "2019",
+            "administrative_level": "ADM3",
+            "parent_source_level": "ADM2",
+            "granularity_version": 3,
+            "source_role": "Township",
+            "selection_reason": "Named Township territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+            "parent_match": "Named source administrative unit grouped within this geographic area",
+            "original_id": "66882298B59879554977018",
+            "representative_point": [
+              98.4950727912307,
+              16.566361665470207
+            ],
+            "hierarchy_version": 4,
+            "hierarchy_source": "gb:MMR:ADM2",
+            "hierarchy_overlap": 0.993651,
+            "topology_version": 1,
+            "topology_reconciled": true,
+            "topology_conflicts": 5,
+            "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+            "original_geometry_sha256": "c2e60c2521af22455f36a4614184f2311424861d7409cf0708a14ef0c450775e",
+            "reference_version": 3,
+            "geographic_area_code": "MYA",
+            "geographic_region_code": 41,
+            "geographic_match": "largest source overlap",
+            "geographic_overlap": 0.96051,
+            "coverage_version": 1,
+            "semantic_version": 1,
+            "remote_version": 1,
+            "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+            "framework_match": {
+              "source": "Natural Earth",
+              "id": "MMR-3266",
+              "overlap": 0.927982
+            },
+            "regional_match": {
+              "reference_iso": "MMR",
+              "source_id": "MMR-3266",
+              "overlap": 0.927982,
+              "method": "reference-territory-constrained overlap"
+            },
+            "reference_owner_id": "owner:Q836",
+            "reference_polity": "Myanmar",
+            "reference_polity_status": "reference",
+            "reference_polity_evidence": {
+              "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+              "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+              "reference_territory": "Myanmar",
+              "classification": "Sovereign country",
+              "note": null,
+              "uncertainty": false
+            },
+            "semantic_review": {
+              "status": "open",
+              "continent": "Asia",
+              "decision_index": 1613,
+              "evidence_file": "geographic-decisions"
+            }
+          }
+        },
+        "id": "gb:MMR:ADM3:66882298B59879554977018"
+      }
+    },
+    {
+      "part": "data/geography/part-15.json",
+      "array_index": 1057,
+      "record": {
+        "type": "Feature",
+        "properties": {
+          "id": "gb:MMR:ADM3:66882298B30308301468052",
+          "name": "Tanintharyi",
+          "parent_id": "framework:province:myeik:2820a791707f",
+          "reference_owner": "Myanmar",
+          "metadata": {
+            "source_id": "gb:MMR:ADM3",
+            "source_name": "geoBoundaries gbOpen",
+            "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM3/geoBoundaries-MMR-ADM3.geojson",
+            "license": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+            "reference_year": "2019",
+            "administrative_level": "ADM3",
+            "parent_source_level": "ADM2",
+            "granularity_version": 3,
+            "source_role": "Township",
+            "selection_reason": "Named Township territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+            "parent_match": "Named source administrative unit grouped within this geographic area",
+            "original_id": "66882298B30308301468052",
+            "representative_point": [
+              99.17630781653747,
+              12.39265
+            ],
+            "hierarchy_version": 4,
+            "hierarchy_source": "gb:MMR:ADM2",
+            "hierarchy_overlap": 0.998393,
+            "topology_version": 1,
+            "topology_reconciled": true,
+            "topology_conflicts": 10,
+            "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+            "original_geometry_sha256": "1a395f65d057dcdfdc7f02ac60778d030e14b77a4af6eb2bf265afe5e76f63a6",
+            "reference_version": 3,
+            "geographic_area_code": "MYA",
+            "geographic_region_code": 41,
+            "geographic_match": "largest source overlap",
+            "geographic_overlap": 0.94782,
+            "coverage_version": 1,
+            "semantic_version": 1,
+            "remote_version": 1,
+            "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+            "framework_match": {
+              "source": "Natural Earth",
+              "id": "MMR-3279",
+              "overlap": 0.953029
+            },
+            "regional_match": {
+              "reference_iso": "MMR",
+              "source_id": "MMR-3279",
+              "overlap": 0.953029,
+              "method": "reference-territory-constrained overlap"
+            },
+            "reference_owner_id": "owner:Q836",
+            "reference_polity": "Myanmar",
+            "reference_polity_status": "reference",
+            "reference_polity_evidence": {
+              "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+              "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+              "reference_territory": "Myanmar",
+              "classification": "Sovereign country",
+              "note": null,
+              "uncertainty": false
+            },
+            "semantic_review": {
+              "status": "open",
+              "continent": "Asia",
+              "decision_index": 1614,
+              "evidence_file": "geographic-decisions"
+            }
+          }
+        },
+        "id": "gb:MMR:ADM3:66882298B30308301468052"
+      }
+    },
+    {
+      "part": "data/geography/part-15.json",
+      "array_index": 1152,
+      "record": {
+        "type": "Feature",
+        "properties": {
+          "id": "gb:MMR:ADM3:66882298B21195914889348",
+          "name": "Tachileik",
+          "parent_id": "framework:province:tachileik:d7c859e72d59",
+          "reference_owner": "Myanmar",
+          "metadata": {
+            "source_id": "gb:MMR:ADM3",
+            "source_name": "geoBoundaries gbOpen",
+            "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM3/geoBoundaries-MMR-ADM3.geojson",
+            "license": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+            "reference_year": "2019",
+            "administrative_level": "ADM3",
+            "parent_source_level": "ADM2",
+            "granularity_version": 3,
+            "source_role": "Township",
+            "selection_reason": "Named Township territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+            "parent_match": "Named source administrative unit grouped within this geographic area",
+            "original_id": "66882298B21195914889348",
+            "representative_point": [
+              99.84970244373207,
+              20.68065
+            ],
+            "hierarchy_version": 4,
+            "hierarchy_source": "gb:MMR:ADM2",
+            "hierarchy_overlap": 0.998504,
+            "topology_version": 1,
+            "topology_reconciled": true,
+            "topology_conflicts": 6,
+            "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+            "original_geometry_sha256": "5261cadcd396d7d77b347280e49e7f8a8f531a8a6b8d24736f2a0cc58a60b925",
+            "reference_version": 3,
+            "geographic_area_code": "MYA",
+            "geographic_region_code": 41,
+            "geographic_match": "largest source overlap",
+            "geographic_overlap": 0.95031,
+            "coverage_version": 1,
+            "semantic_version": 1,
+            "remote_version": 1,
+            "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+            "framework_match": {
+              "source": "Natural Earth",
+              "id": "MMR-3277",
+              "overlap": 0.993497
+            },
+            "regional_match": {
+              "reference_iso": "MMR",
+              "source_id": "MMR-3277",
+              "overlap": 0.993497,
+              "method": "reference-territory-constrained overlap"
+            },
+            "reference_owner_id": "owner:Q836",
+            "reference_polity": "Myanmar",
+            "reference_polity_status": "reference",
+            "reference_polity_evidence": {
+              "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+              "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+              "reference_territory": "Myanmar",
+              "classification": "Sovereign country",
+              "note": null,
+              "uncertainty": false
+            },
+            "semantic_review": {
+              "status": "open",
+              "continent": "Asia",
+              "decision_index": 2173,
+              "evidence_file": "geographic-decisions"
+            }
+          }
+        },
+        "id": "gb:MMR:ADM3:66882298B21195914889348"
+      }
+    },
+    {
+      "part": "data/geography/part-23.json",
+      "array_index": 278,
+      "record": {
+        "type": "Feature",
+        "properties": {
+          "id": "gb:THA:ADM2:78962969B53971782347722",
+          "name": "Bang Saphan",
+          "parent_id": "framework:province:prachuap-khiri-khan-province:49d24b9208bd",
+          "reference_owner": "Thailand",
+          "metadata": {
+            "source_id": "gb:THA:ADM2",
+            "source_name": "geoBoundaries gbOpen",
+            "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/THA/ADM2/geoBoundaries-THA-ADM2.geojson",
+            "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+            "reference_year": "2019",
+            "administrative_level": "ADM2",
+            "parent_source_level": "ADM1",
+            "granularity_version": 3,
+            "source_role": "districts",
+            "selection_reason": "Named districts territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+            "parent_match": "Named source administrative unit grouped within this geographic area",
+            "original_id": "78962969B53971782347722",
+            "representative_point": [
+              99.43600245457958,
+              11.30658452442161
+            ],
+            "hierarchy_version": 4,
+            "hierarchy_source": "gb:THA:ADM1",
+            "hierarchy_overlap": 0.99229,
+            "topology_version": 1,
+            "topology_reconciled": true,
+            "topology_conflicts": 2,
+            "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+            "original_geometry_sha256": "56e0fe106f2c6416b7a3729955db2d66981b10710619d5031d3d9feb0b51d447",
+            "reference_version": 3,
+            "geographic_area_code": "THA",
+            "geographic_region_code": 41,
+            "geographic_match": "largest source overlap",
+            "geographic_overlap": 0.99198,
+            "coverage_version": 1,
+            "semantic_version": 1,
+            "remote_version": 1,
+            "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+            "framework_match": {
+              "source": "Natural Earth",
+              "id": "THA-420",
+              "overlap": 0.999929
+            },
+            "regional_match": {
+              "reference_iso": "THA",
+              "source_id": "THA-420",
+              "overlap": 0.999929,
+              "method": "reference-territory-constrained overlap"
+            },
+            "reference_owner_id": "owner:Q869",
+            "reference_polity": "Thailand",
+            "reference_polity_status": "reference",
+            "reference_polity_evidence": {
+              "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+              "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+              "reference_territory": "Thailand",
+              "classification": "Sovereign country",
+              "note": null,
+              "uncertainty": false
+            },
+            "semantic_review": {
+              "status": "open",
+              "continent": "Asia",
+              "decision_index": 1848,
+              "evidence_file": "geographic-decisions"
+            }
+          }
+        },
+        "id": "gb:THA:ADM2:78962969B53971782347722"
+      }
+    },
+    {
+      "part": "data/geography/part-23.json",
+      "array_index": 334,
+      "record": {
+        "type": "Feature",
+        "properties": {
+          "id": "gb:THA:ADM2:78962969B57964456122026",
+          "name": "Chiang Saen",
+          "parent_id": "framework:province:chiang-rai-province:b821624f1d59",
+          "reference_owner": "Thailand",
+          "metadata": {
+            "source_id": "gb:THA:ADM2",
+            "source_name": "geoBoundaries gbOpen",
+            "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/THA/ADM2/geoBoundaries-THA-ADM2.geojson",
+            "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+            "reference_year": "2019",
+            "administrative_level": "ADM2",
+            "parent_source_level": "ADM1",
+            "granularity_version": 3,
+            "source_role": "districts",
+            "selection_reason": "Named districts territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+            "parent_match": "Named source administrative unit grouped within this geographic area",
+            "original_id": "78962969B57964456122026",
+            "representative_point": [
+              100.2391741334977,
+              20.291800000000002
+            ],
+            "hierarchy_version": 4,
+            "hierarchy_source": "gb:THA:ADM1",
+            "hierarchy_overlap": 0.993776,
+            "topology_version": 1,
+            "topology_reconciled": true,
+            "topology_conflicts": 2,
+            "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+            "original_geometry_sha256": "4ada18d406afc6a63b0f905e1f4c2ecdd2bdf937820ddafbf012086b28786867",
+            "reference_version": 3,
+            "geographic_area_code": "THA",
+            "geographic_region_code": 41,
+            "geographic_match": "largest source overlap",
+            "geographic_overlap": 0.97754,
+            "coverage_version": 1,
+            "semantic_version": 1,
+            "remote_version": 1,
+            "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+            "framework_match": {
+              "source": "Natural Earth",
+              "id": "THA-389",
+              "overlap": 0.930604
+            },
+            "regional_match": {
+              "reference_iso": "THA",
+              "source_id": "THA-389",
+              "overlap": 0.930604,
+              "method": "reference-territory-constrained overlap"
+            },
+            "reference_owner_id": "owner:Q869",
+            "reference_polity": "Thailand",
+            "reference_polity_status": "reference",
+            "reference_polity_evidence": {
+              "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+              "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+              "reference_territory": "Thailand",
+              "classification": "Sovereign country",
+              "note": null,
+              "uncertainty": false
+            },
+            "semantic_review": {
+              "status": "open",
+              "continent": "Asia",
+              "decision_index": 775,
+              "evidence_file": "geographic-decisions"
+            }
+          }
+        },
+        "id": "gb:THA:ADM2:78962969B57964456122026"
+      }
+    },
+    {
+      "part": "data/geography/part-23.json",
+      "array_index": 384,
+      "record": {
+        "type": "Feature",
+        "properties": {
+          "id": "gb:THA:ADM2:78962969B56213444646576",
+          "name": "Hua Hin",
+          "parent_id": "framework:province:prachuap-khiri-khan-province:49d24b9208bd",
+          "reference_owner": "Thailand",
+          "metadata": {
+            "source_id": "gb:THA:ADM2",
+            "source_name": "geoBoundaries gbOpen",
+            "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/THA/ADM2/geoBoundaries-THA-ADM2.geojson",
+            "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+            "reference_year": "2019",
+            "administrative_level": "ADM2",
+            "parent_source_level": "ADM1",
+            "granularity_version": 3,
+            "source_role": "districts",
+            "selection_reason": "Named districts territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+            "parent_match": "Named source administrative unit grouped within this geographic area",
+            "original_id": "78962969B56213444646576",
+            "representative_point": [
+              99.70067,
+              12.494150000000001
+            ],
+            "hierarchy_version": 4,
+            "hierarchy_source": "gb:THA:ADM1",
+            "hierarchy_overlap": 0.89826,
+            "topology_version": 1,
+            "topology_reconciled": true,
+            "topology_conflicts": 1,
+            "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+            "original_geometry_sha256": "ef67840d712e85faae6b90589820f65df60663869067658317616841c419ee84",
+            "reference_version": 3,
+            "geographic_area_code": "THA",
+            "geographic_region_code": 41,
+            "geographic_match": "largest source overlap",
+            "geographic_overlap": 0.99998,
+            "coverage_version": 1,
+            "semantic_version": 1,
+            "remote_version": 1,
+            "search_aliases": [
+              "Hua Hin"
+            ],
+            "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+            "framework_match": {
+              "source": "Natural Earth",
+              "id": "THA-420",
+              "overlap": 0.901069
+            },
+            "regional_match": {
+              "reference_iso": "THA",
+              "source_id": "THA-420",
+              "overlap": 0.901069,
+              "method": "reference-territory-constrained overlap"
+            },
+            "reference_owner_id": "owner:Q869",
+            "reference_polity": "Thailand",
+            "reference_polity_status": "reference",
+            "reference_polity_evidence": {
+              "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+              "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+              "reference_territory": "Thailand",
+              "classification": "Sovereign country",
+              "note": null,
+              "uncertainty": false
+            },
+            "semantic_review": {
+              "status": "open",
+              "continent": "Asia",
+              "decision_index": 1849,
+              "evidence_file": "geographic-decisions"
+            }
+          }
+        },
+        "id": "gb:THA:ADM2:78962969B56213444646576"
+      }
+    },
+    {
+      "part": "data/geography/part-23.json",
+      "array_index": 551,
+      "record": {
+        "type": "Feature",
+        "properties": {
+          "id": "gb:THA:ADM2:78962969B11376495373152",
+          "name": "Mae Sai",
+          "parent_id": "framework:province:chiang-rai-province:b821624f1d59",
+          "reference_owner": "Thailand",
+          "metadata": {
+            "source_id": "gb:THA:ADM2",
+            "source_name": "geoBoundaries gbOpen",
+            "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/THA/ADM2/geoBoundaries-THA-ADM2.geojson",
+            "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+            "reference_year": "2019",
+            "administrative_level": "ADM2",
+            "parent_source_level": "ADM1",
+            "granularity_version": 3,
+            "source_role": "districts",
+            "selection_reason": "Named districts territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+            "parent_match": "Named source administrative unit grouped within this geographic area",
+            "original_id": "78962969B11376495373152",
+            "representative_point": [
+              99.91366426553672,
+              20.36025
+            ],
+            "hierarchy_version": 4,
+            "hierarchy_source": "gb:THA:ADM1",
+            "hierarchy_overlap": 0.992605,
+            "topology_version": 1,
+            "topology_reconciled": true,
+            "topology_conflicts": 1,
+            "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+            "original_geometry_sha256": "530caf650d9b20154f58da88632c0ad558519f11e431cc2b0f54e695c3b4483b",
+            "reference_version": 3,
+            "geographic_area_code": "THA",
+            "geographic_region_code": 41,
+            "geographic_match": "largest source overlap",
+            "geographic_overlap": 0.96593,
+            "coverage_version": 1,
+            "semantic_version": 1,
+            "remote_version": 1,
+            "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+            "framework_match": {
+              "source": "Natural Earth",
+              "id": "THA-389",
+              "overlap": 0.859583
+            },
+            "regional_match": {
+              "reference_iso": "THA",
+              "source_id": "THA-389",
+              "overlap": 0.859583,
+              "method": "reference-territory-constrained overlap"
+            },
+            "reference_owner_id": "owner:Q869",
+            "reference_polity": "Thailand",
+            "reference_polity_status": "reference",
+            "reference_polity_evidence": {
+              "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+              "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+              "reference_territory": "Thailand",
+              "classification": "Sovereign country",
+              "note": null,
+              "uncertainty": false
+            },
+            "semantic_review": {
+              "status": "open",
+              "continent": "Asia",
+              "decision_index": 775,
+              "evidence_file": "geographic-decisions"
+            }
+          }
+        },
+        "id": "gb:THA:ADM2:78962969B11376495373152"
+      }
+    },
+    {
+      "part": "data/geography/part-23.json",
+      "array_index": 553,
+      "record": {
+        "type": "Feature",
+        "properties": {
+          "id": "gb:THA:ADM2:78962969B92609473950758",
+          "name": "Mae Sot",
+          "parent_id": "framework:province:tak-province:0acaef8f5815",
+          "reference_owner": "Thailand",
+          "metadata": {
+            "source_id": "gb:THA:ADM2",
+            "source_name": "geoBoundaries gbOpen",
+            "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/THA/ADM2/geoBoundaries-THA-ADM2.geojson",
+            "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+            "reference_year": "2019",
+            "administrative_level": "ADM2",
+            "parent_source_level": "ADM1",
+            "granularity_version": 3,
+            "source_role": "districts",
+            "selection_reason": "Named districts territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+            "parent_match": "Named source administrative unit grouped within this geographic area",
+            "original_id": "78962969B92609473950758",
+            "representative_point": [
+              98.69797245874274,
+              16.754350000000002
+            ],
+            "hierarchy_version": 4,
+            "hierarchy_source": "gb:THA:ADM1",
+            "hierarchy_overlap": 0.996216,
+            "topology_version": 1,
+            "topology_reconciled": true,
+            "topology_conflicts": 1,
+            "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+            "original_geometry_sha256": "db53be0efed87e3fc67c69de0278cc8a9175db4efe0e12dc0e127a0c733d588f",
+            "reference_version": 3,
+            "geographic_area_code": "THA",
+            "geographic_region_code": 41,
+            "geographic_match": "largest source overlap",
+            "geographic_overlap": 0.8845,
+            "coverage_version": 1,
+            "semantic_version": 1,
+            "remote_version": 1,
+            "search_aliases": [
+              "Mae Sot"
+            ],
+            "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+            "framework_match": {
+              "source": "Natural Earth",
+              "id": "THA-404",
+              "overlap": 0.999968
+            },
+            "regional_match": {
+              "reference_iso": "THA",
+              "source_id": "THA-404",
+              "overlap": 0.999968,
+              "method": "reference-territory-constrained overlap"
+            },
+            "reference_owner_id": "owner:Q869",
+            "reference_polity": "Thailand",
+            "reference_polity_status": "reference",
+            "reference_polity_evidence": {
+              "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+              "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+              "reference_territory": "Thailand",
+              "classification": "Sovereign country",
+              "note": null,
+              "uncertainty": false
+            },
+            "semantic_review": {
+              "status": "open",
+              "continent": "Asia",
+              "decision_index": 2187,
+              "evidence_file": "geographic-decisions"
+            }
+          }
+        },
+        "id": "gb:THA:ADM2:78962969B92609473950758"
+      }
+    },
+    {
+      "part": "data/geography/part-23.json",
+      "array_index": 990,
+      "record": {
+        "type": "Feature",
+        "properties": {
+          "id": "gb:THA:ADM2:78962969B56380938562562",
+          "name": "Tha Sae",
+          "parent_id": "framework:province:chumphon-province:1a04f4d4375e",
+          "reference_owner": "Thailand",
+          "metadata": {
+            "source_id": "gb:THA:ADM2",
+            "source_name": "geoBoundaries gbOpen",
+            "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/THA/ADM2/geoBoundaries-THA-ADM2.geojson",
+            "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+            "reference_year": "2019",
+            "administrative_level": "ADM2",
+            "parent_source_level": "ADM1",
+            "granularity_version": 3,
+            "source_role": "districts",
+            "selection_reason": "Named districts territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+            "parent_match": "Named source administrative unit grouped within this geographic area",
+            "original_id": "78962969B56380938562562",
+            "representative_point": [
+              99.06031474820145,
+              10.78735
+            ],
+            "hierarchy_version": 4,
+            "hierarchy_source": "gb:THA:ADM1",
+            "hierarchy_overlap": 0.963424,
+            "topology_version": 1,
+            "topology_reconciled": true,
+            "topology_conflicts": 2,
+            "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+            "original_geometry_sha256": "73b8f625beb428718596f0a859aa8c759d8e696a3db8e0fd654e12adc5b43628",
+            "reference_version": 3,
+            "geographic_area_code": "THA",
+            "geographic_region_code": 41,
+            "geographic_match": "largest source overlap",
+            "geographic_overlap": 1.0,
+            "coverage_version": 1,
+            "semantic_version": 1,
+            "remote_version": 1,
+            "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+            "framework_match": {
+              "source": "Natural Earth",
+              "id": "THA-375",
+              "overlap": 0.959219
+            },
+            "regional_match": {
+              "reference_iso": "THA",
+              "source_id": "THA-375",
+              "overlap": 0.959219,
+              "method": "reference-territory-constrained overlap"
+            },
+            "reference_owner_id": "owner:Q869",
+            "reference_polity": "Thailand",
+            "reference_polity_status": "reference",
+            "reference_polity_evidence": {
+              "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+              "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+              "reference_territory": "Thailand",
+              "classification": "Sovereign country",
+              "note": null,
+              "uncertainty": false
+            },
+            "semantic_review": {
+              "status": "open",
+              "continent": "Asia",
+              "decision_index": 800,
+              "evidence_file": "geographic-decisions"
+            }
+          }
+        },
+        "id": "gb:THA:ADM2:78962969B56380938562562"
+      }
+    },
+    {
+      "part": "data/geography/part-23.json",
+      "array_index": 992,
+      "record": {
+        "type": "Feature",
+        "properties": {
+          "id": "gb:THA:ADM2:78962969B58793256407954",
+          "name": "Tha Song Yang",
+          "parent_id": "framework:province:tak-province:0acaef8f5815",
+          "reference_owner": "Thailand",
+          "metadata": {
+            "source_id": "gb:THA:ADM2",
+            "source_name": "geoBoundaries gbOpen",
+            "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/THA/ADM2/geoBoundaries-THA-ADM2.geojson",
+            "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+            "reference_year": "2019",
+            "administrative_level": "ADM2",
+            "parent_source_level": "ADM1",
+            "granularity_version": 3,
+            "source_role": "districts",
+            "selection_reason": "Named districts territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+            "parent_match": "Named source administrative unit grouped within this geographic area",
+            "original_id": "78962969B58793256407954",
+            "representative_point": [
+              98.17791533849064,
+              17.46085
+            ],
+            "hierarchy_version": 4,
+            "hierarchy_source": "gb:THA:ADM1",
+            "hierarchy_overlap": 0.671724,
+            "topology_version": 1,
+            "topology_reconciled": true,
+            "topology_conflicts": 2,
+            "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+            "original_geometry_sha256": "b22712dd9da7c00c8ec079248efe73b5a7bba81b9310723780e8bd5f86ec0fa1",
+            "reference_version": 3,
+            "geographic_area_code": "THA",
+            "geographic_region_code": 41,
+            "geographic_match": "largest source overlap",
+            "geographic_overlap": 0.94924,
+            "coverage_version": 1,
+            "semantic_version": 1,
+            "remote_version": 1,
+            "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+            "framework_match": {
+              "source": "Natural Earth",
+              "id": "THA-404",
+              "overlap": 0.675888
+            },
+            "regional_match": {
+              "reference_iso": "THA",
+              "source_id": "THA-404",
+              "overlap": 0.675888,
+              "method": "reference-territory-constrained overlap"
+            },
+            "reference_owner_id": "owner:Q869",
+            "reference_polity": "Thailand",
+            "reference_polity_status": "reference",
+            "reference_polity_evidence": {
+              "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+              "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+              "reference_territory": "Thailand",
+              "classification": "Sovereign country",
+              "note": null,
+              "uncertainty": false
+            },
+            "semantic_review": {
+              "status": "open",
+              "continent": "Asia",
+              "decision_index": 2188,
+              "evidence_file": "geographic-decisions"
+            }
+          }
+        },
+        "id": "gb:THA:ADM2:78962969B58793256407954"
+      }
+    },
+    {
+      "part": "data/geography/part-23.json",
+      "array_index": 1007,
+      "record": {
+        "type": "Feature",
+        "properties": {
+          "id": "gb:THA:ADM2:78962969B3750900919123",
+          "name": "Thap Sakae",
+          "parent_id": "framework:province:prachuap-khiri-khan-province:49d24b9208bd",
+          "reference_owner": "Thailand",
+          "metadata": {
+            "source_id": "gb:THA:ADM2",
+            "source_name": "geoBoundaries gbOpen",
+            "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/THA/ADM2/geoBoundaries-THA-ADM2.geojson",
+            "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+            "reference_year": "2019",
+            "administrative_level": "ADM2",
+            "parent_source_level": "ADM1",
+            "granularity_version": 3,
+            "source_role": "districts",
+            "selection_reason": "Named districts territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+            "parent_match": "Named source administrative unit grouped within this geographic area",
+            "original_id": "78962969B3750900919123",
+            "representative_point": [
+              99.56140215753425,
+              11.5465
+            ],
+            "hierarchy_version": 4,
+            "hierarchy_source": "gb:THA:ADM1",
+            "hierarchy_overlap": 0.991812,
+            "topology_version": 1,
+            "topology_reconciled": true,
+            "topology_conflicts": 1,
+            "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+            "original_geometry_sha256": "30b81b277c892d561a3dc0dd012fb9ebdd976e86e3aedaf2219d00ea87545b2e",
+            "reference_version": 3,
+            "geographic_area_code": "THA",
+            "geographic_region_code": 41,
+            "geographic_match": "largest source overlap",
+            "geographic_overlap": 0.96946,
+            "coverage_version": 1,
+            "semantic_version": 1,
+            "remote_version": 1,
+            "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+            "framework_match": {
+              "source": "Natural Earth",
+              "id": "THA-420",
+              "overlap": 0.998917
+            },
+            "regional_match": {
+              "reference_iso": "THA",
+              "source_id": "THA-420",
+              "overlap": 0.998917,
+              "method": "reference-territory-constrained overlap"
+            },
+            "reference_owner_id": "owner:Q869",
+            "reference_polity": "Thailand",
+            "reference_polity_status": "reference",
+            "reference_polity_evidence": {
+              "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+              "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+              "reference_territory": "Thailand",
+              "classification": "Sovereign country",
+              "note": null,
+              "uncertainty": false
+            },
+            "semantic_review": {
+              "status": "open",
+              "continent": "Asia",
+              "decision_index": 1848,
+              "evidence_file": "geographic-decisions"
+            }
+          }
+        },
+        "id": "gb:THA:ADM2:78962969B3750900919123"
+      }
+    },
+    {
+      "part": "data/geography/part-23.json",
+      "array_index": 1033,
+      "record": {
+        "type": "Feature",
+        "properties": {
+          "id": "gb:THA:ADM2:78962969B38032656496356",
+          "name": "Umphang",
+          "parent_id": "framework:province:tak-province:0acaef8f5815",
+          "reference_owner": "Thailand",
+          "metadata": {
+            "source_id": "gb:THA:ADM2",
+            "source_name": "geoBoundaries gbOpen",
+            "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/THA/ADM2/geoBoundaries-THA-ADM2.geojson",
+            "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+            "reference_year": "2019",
+            "administrative_level": "ADM2",
+            "parent_source_level": "ADM1",
+            "granularity_version": 3,
+            "source_role": "districts",
+            "selection_reason": "Named districts territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+            "parent_match": "Named source administrative unit grouped within this geographic area",
+            "original_id": "78962969B38032656496356",
+            "representative_point": [
+              98.85103096205961,
+              15.778649999999999
+            ],
+            "hierarchy_version": 4,
+            "hierarchy_source": "gb:THA:ADM1",
+            "hierarchy_overlap": 0.988461,
+            "topology_version": 1,
+            "topology_reconciled": true,
+            "topology_conflicts": 2,
+            "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+            "original_geometry_sha256": "f58fba5440d77998bd207445f26075418d95b0468aed737960be942013cb4433",
+            "reference_version": 3,
+            "geographic_area_code": "THA",
+            "geographic_region_code": 41,
+            "geographic_match": "largest source overlap",
+            "geographic_overlap": 0.94663,
+            "coverage_version": 1,
+            "semantic_version": 1,
+            "remote_version": 1,
+            "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+            "framework_match": {
+              "source": "Natural Earth",
+              "id": "THA-404",
+              "overlap": 0.913156
+            },
+            "regional_match": {
+              "reference_iso": "THA",
+              "source_id": "THA-404",
+              "overlap": 0.913156,
+              "method": "reference-territory-constrained overlap"
+            },
+            "reference_owner_id": "owner:Q869",
+            "reference_polity": "Thailand",
+            "reference_polity_status": "reference",
+            "reference_polity_evidence": {
+              "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+              "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+              "reference_territory": "Thailand",
+              "classification": "Sovereign country",
+              "note": null,
+              "uncertainty": false
+            },
+            "semantic_review": {
+              "status": "open",
+              "continent": "Asia",
+              "decision_index": 2187,
+              "evidence_file": "geographic-decisions"
+            }
+          }
+        },
+        "id": "gb:THA:ADM2:78962969B38032656496356"
+      }
+    }
+  ],
+  "bank_git_blob_oid": "fd6d98e7cc62c97a21f80c122f43a528cfba5bdd",
+  "api_source_custody": "current-api-source-custody.json"
+}

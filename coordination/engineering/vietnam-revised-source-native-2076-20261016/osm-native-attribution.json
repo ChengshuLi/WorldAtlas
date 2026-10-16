@@ -1,0 +1,26 @@
+{
+  "provider": "OpenStreetMap contributors",
+  "license": "ODbL",
+  "license_url": "https://opendatacommons.org/licenses/odbl/1-0/",
+  "copyright_url": "https://www.openstreetmap.org/copyright",
+  "notice": "© OpenStreetMap contributors. The retained OSM snapshot, literal staged boundary database and OSM-derived native additions are made available under the Open Database License (ODbL)1.0.",
+  "source_snapshot": "2026-10-16T00:19:04Z",
+  "stage_sha256": "620c3aab733389f4511491ba5c1f916f22c9235188b6e00d6a20053ef1020988",
+  "raw_snapshot_sha256": "b625ee0e686f239dd8eecf3eb21799228371ca5a1eef1c34c79a38905cf2d692",
+  "public_source_archive": {
+    "commit": "a4c4bf38d9f1c38ee4003da7db5cb6ed8153d679",
+    "prefix": "coordination/engineering/vietnam-revised-source-native-2076-20261016/distinct-source-assessment/",
+    "raw_file": "osm-full-county-relations.json",
+    "literal_stage_file": "whole-new-source-stage-inputs.json"
+  },
+  "adaptation_scope": "Explicit new OSM relation/snapshot identities, stable-target crosswalk and bounded native additions; original source facts, old target metadata and other source products keep their own notices and vintages.",
+  "machine_readable_alteration_offer": "The public packet retains the whole raw snapshot, literal stage, exact accepted/blocked original-key roster and explicit crosswalk. Any qualified native patch and complete executable derivation/selection recipe will be retained in the linked delivery before publication. These machine-readable data and methods are offered free over the internet under ODbL1.0 for the OSM-derived database.",
+  "publication_requirements": [
+    "Retain the attribution and ODbL URI in the database or its accompanying directory/documentation.",
+    "Keep the existing visible map attribution linking OpenStreetMap contributors and the copyright/license page.",
+    "Before a public derived-map delivery, link the actual immutable OSM-derived patch, complete alteration method and additional input contents; do not substitute a hash alone for the accessible data.",
+    "Preserve the ODbL share-alike obligations for the derived database. This notice does not certify the licensing status of all unrelated mixed Atlas content."
+  ],
+  "native_qualification": false,
+  "accepted_map_cells": 0
+}
