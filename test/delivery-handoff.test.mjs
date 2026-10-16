@@ -453,7 +453,7 @@ test('finalization refuses a new identity at an accepted package path', () => {
 // Actual Git/plain-Node fixture for metadata assembly. The source interpretation
 // and native construction controls live in source-member-native-delivery.test;
 // this fixture exercises the consumed-role boundary without replaying science.
-function modernFinalizationFixture(t, {mixed = false, membership = true, dated = false, territorial = false, territorialParts = false} = {}) {
+function modernFinalizationFixture(t, {mixed = false, membership = true, dated = false, territorial = false, territorialParts = false, provider = false} = {}) {
   const root = directory(t), owned = 'coordination/engineering/modern-finalize/';
   const git = (...args) => execFileSync('git', args, {cwd: root, stdio: ['pipe', 'pipe', 'pipe']}).toString().trim();
   git('init'); git('config', 'user.name', 'Finalizer fixture'); git('config', 'user.email', 'finalizer@example.invalid');
@@ -523,6 +523,12 @@ function modernFinalizationFixture(t, {mixed = false, membership = true, dated =
     }
     const name=inherited+'territorial-applicability.json';save(name,body);commitAll();
     territorialSupport={body,path:name,pin:pin(name)};evidenceBody.territorial_applicability=territorialSupport.pin;
+  }
+  let providerAdoption;
+  if(provider){
+    const name=inherited+'adopted-provider-families.json';
+    save(name,{version:1,kind:'adopted-provider-source-families-v1',families:[]});commitAll();
+    providerAdoption=pin(name);evidenceBody.adopted_provider_families=providerAdoption;
   }
   save(owned + 'source-evidence.json', evidenceBody); save(owned + 'native-patch.json', {rows: [{y: 2, runs: [[2, 4, 1]]}]}); commitAll();
   const authority = binding => {
@@ -603,7 +609,7 @@ function modernFinalizationFixture(t, {mixed = false, membership = true, dated =
     return spawnSync(process.execPath, [script, phase, 'config.json', destination, ...flags], {cwd: root, env, encoding: 'utf8'});
   };
   return {root, r, config, run, git, save, commitAll, pin, evidenceBody, originalSelector, originalPackage, assets,
-    consumed: [...Object.values(roles), familyPart, ...(membership ? memberPaths : [])], incidental, withEvidence, datedSupport, territorialSupport};
+    consumed: [...Object.values(roles), familyPart, ...(membership ? memberPaths : [])], incidental, withEvidence, datedSupport, territorialSupport, providerAdoption};
 }
 
 for (const mixed of [false, true]) test('real finalizer supports ' + (mixed ? 'mixed legacy/modern' : 'modern') + ' roles, flat envelope aliases and exact resume', t => {
@@ -1138,4 +1144,18 @@ test('flat publication preserves prior completed trees and refuses post-admissio
   products['flat.json'].fill(0);
   assert.throws(publishAdmitted, /Admitted products changed/);
   assert.equal(fs.existsSync(path.join(root, '.cache/delivery-handoff/fresh')), false);
+});
+
+test('real package projection retains the provider-adoption leaf and its existing family/member roles',t=>{
+ const f=modernFinalizationFixture(t,{provider:true}),destination='.cache/delivery-handoff/provider';
+ const run=f.run('package',destination);assert.equal(run.status,0,run.stderr);
+ const projection=JSON.parse(fs.readFileSync(path.join(f.root,destination,'package-roles.json')));
+ const matches=projection.paths.filter(pin=>pin.path===f.providerAdoption.path);
+ assert.equal(matches.length,1);assert.equal(matches[0].sha256,f.providerAdoption.sha256);
+ assert.ok(matches[0].roles.includes('source-target adopted provider families'));
+ for(const name of f.consumed)assert.ok(projection.paths.some(pin=>pin.path===name),name);
+ const evidence=structuredClone(f.evidenceBody);evidence.adopted_provider_families.sha256='0'.repeat(64);
+ const failed=f.run('package','.cache/delivery-handoff/provider-refused',[],f.withEvidence(evidence));
+ assert.notEqual(failed.status,0);assert.match(failed.stderr,/hash differs/);
+ assert.equal(fs.existsSync(path.join(f.root,'.cache/delivery-handoff/provider-refused','preparation.json')),false);
 });
