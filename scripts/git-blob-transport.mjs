@@ -5,13 +5,13 @@ import {createHash} from 'node:crypto';
 import {copyAPIFeatures} from './github-quota.mjs';
 import {addBytes} from './evidence-quality.mjs';
 
-const MAX_BYTES=272*1024*1024, MAX_ENTRIES=512;
+const MAX_ENTRIES=512;
 const oid=value=>/^[a-f0-9]{40}$/.test(value??'');
 // Fetch exact tree-bound blob OIDs into a disposable bare object store. No
 // candidate checkout, hooks, persistent credential or executable candidate code.
 export function gitBlobTransport(api,{repo,token,directory,onFetch=()=>{},execute=execFileSync}){
  if(!/^[-\w.]+\/[-\w.]+$/.test(repo??'')||!token||!path.isAbsolute(directory))throw Error('Invalid immutable transport configuration');
- const store=fs.mkdtempSync(path.join(directory,'quota-blobs-')),known=new Map();let total=0;
+ const store=fs.mkdtempSync(path.join(directory,'quota-blobs-')),known=new Map();
  const env=Object.fromEntries(Object.entries(process.env).filter(([key])=>!key.startsWith('GIT_')));
  Object.assign(env,{GIT_CONFIG_NOSYSTEM:'1',GIT_CONFIG_GLOBAL:'/dev/null',GIT_TERMINAL_PROMPT:'0',
    GIT_CONFIG_COUNT:'3',GIT_CONFIG_KEY_0:'http.extraHeader',GIT_CONFIG_VALUE_0:'AUTHORIZATION: basic '+Buffer.from('x-access-token:'+token).toString('base64'),
@@ -32,12 +32,10 @@ export function gitBlobTransport(api,{repo,token,directory,onFetch=()=>{},execut
   }
   if(!pending.size)return;
   const extra=[...pending.values()].reduce((a,b)=>addBytes(a,b),0);
-  if(known.size+pending.size>MAX_ENTRIES||addBytes(total,extra)>MAX_BYTES)return; // Keep the bounded optimization; exact REST fallback retains validation.
+  if(known.size+pending.size>MAX_ENTRIES)return; // Exact REST fallback retains validation.
+  // Git streams the admitted inventory to disk; aggregate bytes are not resident memory.
   git(['-c','fetch.unpackLimit=1','fetch','--no-tags','--no-write-fetch-head','--recurse-submodules=no','--filter=blob:none',
     'https://github.com/'+repo+'.git',...[...pending.keys()]]);
-  let storedBytes=0;
-  const measure=directory=>{for(const entry of fs.readdirSync(directory,{withFileTypes:true})){const target=path.join(directory,entry.name);if(entry.isSymbolicLink())throw Error('Unexpected object-store symlink');if(entry.isDirectory())measure(target);else storedBytes+=fs.statSync(target).size;}};
-  measure(path.join(store,'objects'));if(storedBytes>MAX_BYTES+32*1024*1024)throw Error('Immutable object store exceeds finite budget');
   // Verify every object before publishing any success from this batch.
   for(const [sha,size] of pending){
    if(git(['cat-file','-t',sha]).toString().trim()!=='blob')throw Error('Immutable object is not a blob');
@@ -45,7 +43,7 @@ export function gitBlobTransport(api,{repo,token,directory,onFetch=()=>{},execut
    if(content.length!==size||createHash('sha1').update(`blob ${content.length}\0`).update(content).digest('hex')!==sha)throw Error('Immutable object bytes differ from tree binding');
   }
   for(const [sha,size] of pending)known.set(sha,size);
-  total+=extra;onFetch({blob_count:pending.size,decoded_bytes:extra});
+  onFetch({blob_count:pending.size,decoded_bytes:extra});
  };
  const wrapped=async(route,method='GET',body,options)=>{
   const match=/^\/repos\/([-\w.]+\/[-\w.]+)\/git\/blobs\/([a-f0-9]{40})$/.exec(route);

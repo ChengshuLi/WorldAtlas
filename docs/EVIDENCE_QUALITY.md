@@ -166,9 +166,12 @@ decode. Explicitly supplied smaller caller operating limits remain enforced.
 
 There is no universal scientific byte ceiling in this admission path. Actual
 memory, storage, provider and job limits still apply, and large inputs can need
-streaming or another reviewed execution approach. The existing 272 MiB immutable
-cache/object-store capacity, 512-entry inventory and HTTP/Git/job timeouts are not
-expanded. Cache overflow uses the authenticated REST fallback or stays uncached.
+streaming or another reviewed execution approach. The 272 MiB in-memory immutable
+cache, 512-entry inventory and HTTP/Git/job timeouts remain. Git prefetch streams
+the exact admitted inventory to a disposable disk object store without an
+aggregate byte cutoff; each complete body is verified with its exact tree-bound
+buffer before reuse. Memory-cache overflow stays uncached. Actual disk or Git
+failures fail the operation without accepting a partial batch.
 Unplanned raw readers retain their legacy 32 MiB operating guard; legacy gzip
 without a declared decoded descriptor retains its bounded decoder. The metadata
 manifest bootstrap retains its separate 1 MiB envelope guard. These compatibility

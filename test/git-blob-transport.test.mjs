@@ -51,9 +51,9 @@ test('missing object in a partial batch fails without accepting the available pr
  const f=fixture();try{await assert.rejects(f.transport.api.prefetchGitBlobs('a/b',[...f.rows,{sha:'f'.repeat(40),size:1}]));await f.transport.api('/repos/a/b/git/blobs/'+f.rows[0].sha);assert.equal(f.rest,1);}finally{f.close();}
 });
 
-test('Git transport verifies an exact Vietnam-sized object and keeps large-inventory REST fallback bounded',async()=>{
- const directory=fs.mkdtempSync(path.join(process.cwd(),'.cache-large-git-')),raw=Buffer.alloc(36065990,23),row=binding(raw);let fetches=0,restOptions;
- const transport=gitBlobTransport(async(...args)=>{restOptions=args[3];return {fallback:true};},{repo:'a/b',token:'synthetic-token',directory,execute:(cmd,args,options)=>{
+test('Git transport verifies an exact Vietnam-sized object with a tree-bound per-body buffer',async()=>{
+ const directory=fs.mkdtempSync(path.join(process.cwd(),'.cache-large-git-')),raw=Buffer.alloc(36065990,23),row=binding(raw);let fetches=0;
+ const transport=gitBlobTransport(async()=>{throw Error('Unexpected REST fallback');},{repo:'a/b',token:'synthetic-token',directory,execute:(cmd,args,options)=>{
   if(args.includes('fetch')){fetches++;execFileSync('git',[args[0],'hash-object','-w','--stdin'],{input:raw,env:options.env});return Buffer.alloc(0);}
   if(args.includes('blob'))assert.equal(options.maxBuffer,raw.length+1);
   return execFileSync(cmd,args,options);
@@ -62,7 +62,23 @@ test('Git transport verifies an exact Vietnam-sized object and keeps large-inven
   await transport.api.prefetchGitBlobs('a/b',[row]);assert.equal(fetches,1);
   const options={expectedImmutableBytes:raw.length};assert.equal((await transport.api('/repos/a/b/git/blobs/'+row.sha,'GET',undefined,options)).size,raw.length);
   await assert.rejects(transport.api('/repos/a/b/git/blobs/'+row.sha,'GET',undefined,{expectedImmutableBytes:raw.length-1}),/tree size/);
-  const huge={sha:'f'.repeat(40),size:300*1024*1024};await transport.api.prefetchGitBlobs('a/b',[huge]);assert.equal(fetches,1);
-  assert.deepEqual(await transport.api('/repos/a/b/git/blobs/'+huge.sha,'GET',undefined,{expectedImmutableBytes:huge.size}),{fallback:true});assert.equal(restOptions.expectedImmutableBytes,huge.size);
+ }finally{transport.close();fs.rmdirSync(directory);}
+});
+
+// PR2082's exact manifest has 360 unique blobs / 327,390,322 bytes. Model its
+// admission boundary without copying 327 MB into every unrelated CI run. The
+// separate real-manifest replay checks all original bodies and OIDs.
+test('PR2082-sized inventories reach Git instead of silently falling off the old aggregate byte cliff',async()=>{
+ const directory=fs.mkdtempSync(path.join(os.tmpdir(),'quota-transport-inventory-'));let fetches=0,requested;
+ const rows=Array.from({length:360},(_,i)=>({sha:(i+1).toString(16).padStart(40,'0'),size:i===0?327390322-359*800000:800000}));
+ const transport=gitBlobTransport(async()=>({fallback:true}),{repo:'a/b',token:'synthetic-token',directory,execute:(cmd,args,options)=>{
+  if(args.includes('fetch')){fetches++;requested=args.slice(-rows.length);throw Error('Simulated Git failure');}
+  return execFileSync(cmd,args,options);
+ }});
+ try{
+  assert.equal(rows.reduce((sum,row)=>sum+row.size,0),327390322);
+  await assert.rejects(transport.api.prefetchGitBlobs('a/b',rows),/Exact immutable Git transport failed/);
+  assert.equal(fetches,1);assert.deepEqual(requested,rows.map(row=>row.sha));
+  assert.equal(transport.api.hasGitBlobs('a/b',rows),false);
  }finally{transport.close();fs.rmdirSync(directory);}
 });
