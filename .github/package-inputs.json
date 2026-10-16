@@ -217,12 +217,10 @@
     "scripts/native-ownership/validate-context-input-stage.mjs",
     "scripts/native-ownership/validate-context-migration.mjs",
     "scripts/native-ownership/verified-candidates.json",
-    "scripts/package-build-preflight.mjs",
     "scripts/package-build.mjs",
     "scripts/package-current-additive.mjs",
     "scripts/package-inputs.mjs",
     "scripts/package-native-latitudes.mjs",
-    "scripts/package-node-runtime.mjs",
     "scripts/package-output-artifact.mjs",
     "scripts/package-ownership-history.mjs",
     "scripts/package-python-runtime.py",
@@ -278,12 +276,9 @@
     "drizzle-source/"
   ],
   "verification_paths": [
-    ".github/workflows/deployment-budget.yml",
-    "scripts/classify-deployment-budget.mjs",
     "scripts/package-inputs.mjs",
     "scripts/package-build.mjs",
     "scripts/package-python-runtime.py",
-    "test/deployment-budget-scope.test.mjs",
     "test/package-inputs.test.mjs",
     "test/package-build.test.mjs",
     "test/deployment-budget.test.mjs"

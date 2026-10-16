@@ -509,11 +509,11 @@ function queueCompletionFixture(f = freshQueueTransport()) {
   return f;
 }
 
-test('authenticated main queue reuses successful prepared tree comparison without recursive final reads', async () => {
+test('authenticated main queue retains candidate identity without recursive final reads', async () => {
   const f = queueCompletionFixture();
   await prepareIntegration(f.mergeOptions());
   assert.deepEqual(f.preparationWrites, [`/repos/${f.options.repo}/git/refs`, `/repos/${f.options.repo}/merges`]);
-  assert.equal(f.treeReads().length, 2, 'Preparation still compares both complete trees');
+  assert.equal(f.treeReads().length, 2, 'Preparation still inventories authored and candidate trees');
   f.calls.length = 0;
   const result = await f.complete();
   assert.equal(result.accepted, true); assert.equal(f.writes.length, 1);
@@ -560,7 +560,7 @@ test('authenticated custody never substitutes for candidate identity, ordered pa
   }
 });
 
-test('forged metadata on plain, archive-only, historical and supplied queue reports cannot skip comparison', async () => {
+test('forged prepared metadata cannot waive exact candidate report identity', async () => {
   for (const kind of ['plain', 'archive-only', 'historical', 'supplied-queue']) {
     const f = queueCompletionFixture(kind === 'historical' ? combinedTransport() : freshQueueTransport());
     const fresh = await f.load(); let geography = fresh;
@@ -573,9 +573,9 @@ test('forged metadata on plain, archive-only, historical and supplied queue repo
     geography.prepared_queue = true;
     assert.equal(preparedQueueSource(geography), null);
     f.calls.length = 0;
-    f.integrated[0].sha = 'f'.repeat(40);
-    await assert.rejects(f.complete({geographyReportLoader: async () => geography}), /changes reviewed bytes/);
-    assert.equal(f.treeReads().length, 2, kind); assert.equal(f.writes.length, 0, kind);
+    geography.candidate_commit = 'f'.repeat(40);
+    await assert.rejects(f.complete({geographyReportLoader: async () => geography}), /source differs|exact trusted combined check/);
+    assert.equal(f.writes.length, 0, kind);
   }
 });
 
@@ -672,24 +672,24 @@ test('reviewed focused test-only prepare retains final ordinary-file proof throu
 });
 
 
-test('eligible skipped geography verifies current authored and candidate trees without loading a report', async () => {
+test('eligible skipped geography still verifies current authored ordinary files without loading a report', async () => {
   for (const drift of [false, true]) {
     const f=queueCompletionFixture(),name='test/native-diagnostic-entry.test.mjs';
     f.files=[{filename:name,status:'modified'}];f.authored[0].path=name;f.integrated=structuredClone(f.authored);
     const prepared=await prepareIntegration(f.mergeOptions());
     assert.equal(prepared.geography_required,false);
     f.calls.length=0;
-    if(drift)f.integrated[0].sha='f'.repeat(40);
+    if(drift)f.authored[0].mode='120000';
     const complete=()=>f.complete({geographyResult:'skipped',geographyReportLoader:async()=>{throw Error('Skipped geography must not load a report');}});
     if(drift) {
-      await assert.rejects(complete,/changes reviewed bytes/);
+      await assert.rejects(complete,/Trusted combined geography check missing/);
       assert.equal(f.writes.length,0);
     } else {
       const result=await complete();
       assert.equal(result.accepted,true);assert.equal(f.writes.length,1);
       assert.deepEqual(result.geography,{status:'not-applicable',reason:'non-geographic-controls'});
     }
-    assert.deepEqual(f.treeReads(),['2'.repeat(40),f.commit.tree.sha].map(sha=>`/repos/owner/repo/git/trees/${sha}?recursive=1`),
+    assert.deepEqual(f.treeReads(),['2'.repeat(40)].map(sha=>`/repos/owner/repo/git/trees/${sha}?recursive=1`),
       'A skipped job cannot substitute historical prepared custody for current ordinary-file proof');
   }
 });

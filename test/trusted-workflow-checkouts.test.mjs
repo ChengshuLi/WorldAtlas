@@ -93,13 +93,11 @@ test('sparse candidate still detects changes and rename sources outside the work
 
 
 for (const [workflow, expected] of [['worker-merge.yml', 1]]) {
-  test(`${workflow}: immutable normal routes build Cloudflare and retain the separate Site gate`, () => {
+  test(`${workflow}: immutable normal routes build Cloudflare`, () => {
     const source = fs.readFileSync(path.join(root, '.github/workflows', workflow), 'utf8');
     const routes = [...source.matchAll(/^        run: (npm run build:cloudflare)$/gm)];
     assert.equal(routes.length, expected, 'all actual package/shard routes must be covered');
     assert.doesNotMatch(source, /WORLDATLAS_PACKAGE_PROFILE|run: npm run build:hosted/);
-    const site = fs.readFileSync(path.join(root, '.github/workflows/deployment-budget.yml'), 'utf8');
-    assert.match(site, /run: npm run build:hosted/);
     const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'worldatlas-package-routing-'));
     try {
       fs.writeFileSync(path.join(directory, 'npm'), '#!/bin/sh\nprintf "%s\\n" "$*"\n', {mode: 0o755});
@@ -215,8 +213,6 @@ test('automatic author jobs are absent while final queue keeps current consumers
  const queue=fs.readFileSync(path.join(root,'.github/workflows/worker-merge.yml'),'utf8');
  assert.match(queue,/run: npm run build:cloudflare/);assert.match(queue,/node scripts\/run-integration-tests.mjs/);
  assert.doesNotMatch(queue,/proof_run|proof_attempt|GEOGRAPHY_PROOF|PROOF_RUN/);
- const site=fs.readFileSync(path.join(root,'.github/workflows/deployment-budget.yml'),'utf8');
- assert.match(site,/run: npm run build:hosted/);assert.match(site,/path: \.cache\/deployment-budget.json/);
 });
 
 test('final queue uses pinned stock checkout with exact candidate and transient read-only credentials',()=>{
