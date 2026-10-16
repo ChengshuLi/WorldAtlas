@@ -1,4 +1,4 @@
-import {execFileSync} from 'node:child_process';
+import {execFileSync, spawnSync} from 'node:child_process';
 import {gitBlobTransport} from '../scripts/git-blob-transport.mjs';
 import {memoizeImmutableGitBlobs} from '../scripts/immutable-git-blobs.mjs';
 import {sha256, subjectsHash} from '../scripts/evidence-quality.mjs';
@@ -46,8 +46,8 @@ test('only staging-test shards prepare the immutable migration derivative', () =
     assert.deepEqual(fs.readFileSync('drizzle/0002_geographic_reference_releases.sql'),original);
   } finally { process.chdir(cwd); fs.rmSync(temporary,{recursive:true,force:true}); }
 });
-function fixture() {
-  const repo = 'owner/repo', head = sha('a'), base = sha('b'), candidate = sha('c');
+function fixture({head=sha('a'),base=sha('b'),candidate=sha('c')}={}) {
+  const repo = 'owner/repo';
   const issue = {number: 1, state: 'open', created_at: '2026-10-03T00:00:00Z', labels: ['type:engineering','kind:work-item','status:ready'],
     body: '<!-- worldatlas-work:v1\n'+JSON.stringify({mode:'engineering',max_prs:3,depends_on:[],scope:'code'})+'\n-->'};
   const pr = {number: 2, state: 'open', draft: false, body: 'Closes #1', title: 'Repair code', changed_files: 1,
@@ -116,10 +116,47 @@ test('two reviewed PRs sharing a base integrate serially without changing author
   await b.complete({testedBase:b.base});assert.equal(b.writes[0].sha,b.head);
   assert.equal(b.writes[0].merge_method,'squash');assert.equal(b.writes[0].commit_title,b.pr.title);
 });
-test('conflicts and non-conflicting changes to reviewed bytes require intervention', async () => {
+test('Git conflicts refuse while cleanly composed blobs retain candidate verification', async () => {
   const a=fixture();a.pr.mergeable=false;await assert.rejects(prepareIntegration(a.options()),/conflict/);assert.equal(a.writes.length,0);
   const b=fixture();b.integrated[0].sha='different-reviewed-file';
-  await assert.rejects(prepareIntegration(b.options()),/changes reviewed bytes/);assert.equal(b.writes.length,0);
+  const prepared=await prepareIntegration(b.options());
+  assert.equal(prepared.candidate,b.candidate);assert.equal(b.writes.length,0);
+  assert.equal((await b.complete()).accepted,true);assert.equal(b.writes.length,1);
+});
+test('real clean disjoint same-file Git composition proceeds and actual conflicts refuse', async t => {
+  const directory=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-clean-composition-'));
+  t.after(()=>fs.rmSync(directory,{recursive:true,force:true}));
+  const git=(...args)=>execFileSync('git',args,{cwd:directory,encoding:'utf8',stdio:['ignore','pipe','pipe']}).trim();
+  git('init','-b','main');git('config','user.name','WorldAtlas fixture');git('config','user.email','fixture@example.invalid');
+  fs.mkdirSync(path.join(directory,'src'));
+  const body=(first,second)=>`export const first = ${first};\n${'// unchanged separation\n'.repeat(8)}export const second = ${second};\n`;
+  const write=(first,second)=>fs.writeFileSync(path.join(directory,'src/a.js'),body(first,second));
+  const commit=message=>{git('add','src/a.js');git('commit','-m',message);return git('rev-parse','HEAD');};
+  write(0,0);const ancestor=commit('initial');
+  git('checkout','-b','author');write(1,0);const head=commit('reviewed first change');
+  git('checkout','main');write(0,2);const base=commit('independently merged second change');
+  git('merge','--no-ff','--no-edit','author');const candidate=git('rev-parse','HEAD');
+  assert.equal(git('show',candidate+':src/a.js'),body(1,2).trim());
+  assert.equal(git('show','-s','--format=%P',candidate),base+' '+head);
+  const row=revision=>({path:'src/a.js',type:'blob',mode:'100644',sha:git('rev-parse',revision+':src/a.js')});
+  const f=fixture({head,base,candidate});f.authored=[row(head)];f.integrated=[row(candidate)];
+  assert.notEqual(f.authored[0].sha,f.integrated[0].sha,'Composition deliberately changes the whole authored blob');
+  const prepared=await prepareIntegration(f.options());assert.equal(prepared.candidate,candidate);
+  const verified=execFileSync(process.execPath,['--input-type=module','-e',
+    `import {first,second} from ${JSON.stringify('file://'+path.join(directory,'src/a.js'))}; if(first!==1||second!==2)process.exit(1);`],{encoding:'utf8'});
+  assert.equal(verified,'');assert.equal((await f.complete()).accepted,true);
+  assert.equal(f.writes[0].sha,head,'The final API merge remains SHA-bound to reviewed head');
+  const wrong=fixture({head,base,candidate});
+  await assert.rejects(wrong.complete({geographyReportLoader:async()=>({version:1,method_id:'worldatlas-trusted-geography-check-v1',
+    baseline_commit:base,trusted_code_commit:base,candidate_commit:ancestor,candidate_code_executed:false,
+    published:false,source_approval:false,gate_status:'passed',status:'not-applicable'})}),/exact trusted combined check/);
+  assert.equal(wrong.writes.length,0);
+  git('checkout','-b','conflicting-author',ancestor);write(3,0);commit('competing first change');
+  git('checkout','-b','conflicting-main',ancestor);write(4,0);commit('different first change');
+  const conflict=spawnSync('git',['merge','--no-ff','--no-edit','conflicting-author'],{cwd:directory,encoding:'utf8'});
+  assert.equal(conflict.status,1);assert.match(conflict.stdout,/CONFLICT/);
+  const blocked=fixture();blocked.pr.mergeable=false;
+  await assert.rejects(prepareIntegration(blocked.options()),/conflict/);assert.equal(blocked.writes.length,0);
 });
 test('stale merge object and truncated inventories fail closed', async () => {
   const a=fixture();a.parentBase=sha('e');await assert.rejects(prepareIntegration(a.options()),/exact current main/);
@@ -324,14 +361,12 @@ test('final omission independently rechecks current method and ordinary focused-
 });
 
 test('omitted geography retains exact candidate, review, statuses and both main guards', async () => {
-  for (const kind of ['head','early-base','late-base','parents','tree','truncated','review','status','integration']) {
+  for (const kind of ['head','early-base','late-base','parents','review','status','integration']) {
     const f=controlFixture(), options={geographyResult:'skipped'};
     if(kind==='head')f.pr.head.sha=sha('d');
     if(kind==='early-base')f.advanceOnRead=1;
     if(kind==='late-base')f.advanceOnRead=3;
     if(kind==='parents')f.parentBase=sha('d');
-    if(kind==='tree')f.integrated[0].sha=sha('d');
-    if(kind==='truncated')f.truncated=true;
     if(kind==='review')f.staleReview=true;
     if(kind==='status')f.failStatusOnRead=2;
     if(kind==='integration')options.integrationResult='skipped';
@@ -517,9 +552,9 @@ test('isolated conflict or wrong parents is rejected and only the owned ref is d
     assert.equal(f.refs.size,0);assert.equal(f.writes.length,0);
   }
 });
-test('owned preparation retains reviewed-byte and authority guards and cleans rejected candidates',async()=>{
-  const f=isolatedFixture();f.parentBase=sha('d');f.integrated[0].sha='unreviewed';
-  await assert.rejects(prepareIntegration(f.options()),/changes reviewed bytes/);
+test('owned preparation retains complete candidate trees and current authority',async()=>{
+  const f=isolatedFixture();f.parentBase=sha('d');f.truncated=true;
+  await assert.rejects(prepareIntegration(f.options()),/Incomplete integration tree/);
   assert.equal(f.refs.size,0);assert.equal(f.writes.length,0);
   const g=isolatedFixture();g.parentBase=sha('d');g.staleReview=true;
   await assert.rejects(prepareIntegration(g.options()),/exact-head review/);
@@ -532,9 +567,9 @@ test('cleanup refuses another request, main/worker refs and changed owned refs',
   assert.equal(f.refs.size,1);assert.equal(f.operations.some(row=>row.method==='DELETE'),false);
 });
 test('failed cleanup retains its exact resource for inspection without hiding rejection',async()=>{
-  const f=isolatedFixture();f.parentBase=sha('d');f.integrated[0].sha='unreviewed';f.deleteDenied=true;
+  const f=isolatedFixture();f.parentBase=sha('d');f.truncated=true;f.deleteDenied=true;
   await assert.rejects(prepareIntegration(f.options()),error=>{
-    assert.match(error.message,/changes reviewed bytes/);assert.equal(error.candidateCleanup.status,'pending');
+    assert.match(error.message,/Incomplete integration tree/);assert.equal(error.candidateCleanup.status,'pending');
     assert.match(error.candidateCleanup.reference,/^worldatlas-integration\/pr-2-/);return true;
   });assert.equal(f.writes.length,0);
 });
@@ -549,7 +584,7 @@ test('isolated candidate follows the existing final tests/main/head merge guards
 });
 
 test('same-candidate failed-job retry survives owned ref cleanup and keeps final authority guards',async()=>{
-  for(const changed of [null,'base','head','tree','parents','review','checks','integration','geography']){
+  for(const changed of [null,'base','head','parents','review','checks','integration','geography']){
     const f=isolatedFixture();f.parentBase=sha('d');
     const prepared=await prepareIntegration(f.options());
     await cleanupCandidate(f.options(),prepared.candidate_ref,prepared.candidate);
@@ -557,7 +592,6 @@ test('same-candidate failed-job retry survives owned ref cleanup and keeps final
     const options={testedCandidate:prepared.candidate,testedBase:prepared.base};
     if(changed==='base')f.base=sha('d');
     if(changed==='head')f.pr.head.sha=sha('d');
-    if(changed==='tree')f.integrated[0].sha='changed-after-tests';
     if(changed==='parents')f.wrongSyntheticParent=true;
     if(changed==='review')f.staleReview=true;
     if(changed==='checks')f.checks[0].conclusion='failure';
