@@ -112,7 +112,7 @@ export function validateMetadataStages(before,after,receiptFiles,{mode='macro'}=
   for(const d of receipt.changed_location_properties){const old=locations.get(d.location_id);if(!equal({...old,kind:null,parent_id:null},{...d.before_properties,kind:null,parent_id:null}))throw Error('Original location properties changed');locations.set(d.location_id,{...d.after_properties,kind:'location'});}
  });
  if(!equal([...records].sort(),[...after.groups].sort()))throw Error('Candidate hierarchy contains unreceipted metadata');
- for(const [id,f]of after.locations)if(locations.get(id)?.parent_id!==f.properties.parent_id)throw Error('Unreceipted location parent');
+ for(const [id,f]of after.locations){const {kind,...properties}=locations.get(id)??{};if(!equal(properties,f.properties))throw Error('Unreceipted location properties');}
 }
 export function gridProjection(manifest,bounds,before,after){
  if(manifest.footprints_sha256!==before.proof.footprints_sha256||manifest.hierarchy_sha256!==before.proof.hierarchy_sha256||bounds.length!==after.locations.size)throw Error('Grid baseline is stale');
