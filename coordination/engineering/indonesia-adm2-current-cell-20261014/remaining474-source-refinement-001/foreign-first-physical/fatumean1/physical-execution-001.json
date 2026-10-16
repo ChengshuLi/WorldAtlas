@@ -1,0 +1,57 @@
+{
+  "kind": "first-whole-Fatumean-stock-physical-call",
+  "outcome": "EXIT0",
+  "exit_code": 0,
+  "started_utc": "2026-10-16T00:35:27.137878+00:00",
+  "completed_utc": "2026-10-16T00:35:40.706396+00:00",
+  "elapsed_seconds": 13.561497292,
+  "command": [
+    "/usr/bin/time",
+    "-l",
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "scripts/prepare-delivery-handoff.mjs",
+    "physical",
+    ".cache/fatumean1-worker5-first-physical-001/config.json",
+    ".cache/delivery-handoff/fatumean1-worker5-first-whole-physical-001"
+  ],
+  "cwd": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/267133ee5fd33696ea7c63ec50cf78bebfb3c92f9a18ca0fb1c4db8be3e0c49e/review",
+  "executing_head": "b6382262f8d03d9e7d33b26d8adb40a55197262b",
+  "executing_entry_sha256": "063d023438be21dc452ba4833965ca6dd3698c47452f37a0b78bd4c784a435ae",
+  "immutable_stage": {
+    "commit": "58baf6149eed8655e8a7d62a362fb1d5fa1b9a13",
+    "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/foreign-first-physical/fatumean1/whole-original-stage-inputs.json",
+    "mode": "100644",
+    "bytes": 7158,
+    "sha256": "d4c5e1c6ab41c0fa40c1c2d6502a0e1f3b7c89b16343cba943cf1c02cb1caa15",
+    "git_blob_oid": "db9c2ee368dbc2d9cb3fd31b1d78ac9caf905a00"
+  },
+  "successful_runtime_and_common24_template_unchanged": true,
+  "target": "gb:TLS:ADM2:22284137B11881161065747",
+  "original_package": "gb-IDN-ADM2--source-conflict",
+  "original_conflict_key": {
+    "y": 137844,
+    "x": 222101,
+    "candidate_owner": 42172
+  },
+  "first_whole_target_physical_call": true,
+  "source_classifier_replay": false,
+  "native_qualification_or_owner_change": false,
+  "products": [
+    {
+      "path": "actual-stock-physical-001/execution-receipt.json",
+      "bytes": 123437,
+      "sha256": "2b6069bfa52bb53e6cbdd61fbaa87e752f0b9925d05bcddbaf86b97041cbdc22"
+    },
+    {
+      "path": "actual-stock-physical-001/preparation.json",
+      "bytes": 544,
+      "sha256": "66513968015a3882dc84f682701cd31f3ee365e2156e43d08883d86494e39a70"
+    },
+    {
+      "path": "actual-stock-physical-001/whole-target-support.json",
+      "bytes": 15672,
+      "sha256": "32f4133eb382ad0ff6284b0510d9efc4caae59ff39f34d5f83bd2a500afedeb6"
+    }
+  ],
+  "actual_stderr_tail": null
+}
