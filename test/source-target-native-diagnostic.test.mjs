@@ -10,7 +10,7 @@ import {gzipSync} from 'node:zlib';
 import {deriveSourceTargetNativeDelta,nativeRowLatitudes,nativePolygonIntervals,polygonParts,witnessCellEffects,validateWitnessGeometry} from '../src/native-grid.js';
 import {ImmutableReader} from '../scripts/check-effective-geographic-regression.mjs';
 import {constructOriginalAuthority} from '../scripts/delivery-handoff-advance.mjs';
-import {qualifySourceTargetNativeAuthority,diagnoseSourceTargetNativeAuthority,readRetainedRegistryAuthority,valueBytes,valueSha} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {qualifySourceTargetNativeAuthority,diagnoseSourceTargetNativeAuthority,readRetainedRegistryAuthority,verifyCompletedSourceTargetNativeAuthority,valueBytes,valueSha} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 import {bindPackageImmutableCommits} from '../coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs';
 
 test('optional territorial interpretation preserves default output and every other native guard',()=>{
@@ -389,4 +389,73 @@ test('complete diagnostic retains whole consumed-input custody and rejects body 
  const g=constructorFixture(),pin=g.binding.source_evidence;
  g.byBlob.set(pin.git_blob_oid,Buffer.alloc(pin.bytes,32));
  assert.throws(()=>g.diagnose(),/hash|identity|body|differs|SHA/i);
+});
+
+// The retained Vietnam17 shape has twelve authentic context targets but only
+// five requested output owners. These are new tiny synthetic operands, not a
+// replay or rewrite of that original qualification.
+function twelveContextTargets(state){
+  const members=Array.from({length:12},(_,i)=>{
+    const left=-.6+i*.1,geometry=rectangle(left,left+.04,-.02,.02);
+    return {id:family+':context-'+i,shapeID:'context-'+i,pixelIndex:i+1,geometry,
+      x:Math.floor((left+.02+180)/360*size)};
+  });
+  state.originals=members.map(m=>rawFeature(m.shapeID,m.geometry));
+  state.roster=members.map(m=>({id:m.id,index:m.pixelIndex}));
+  state.lineage={changes:[]};state.membership=false;
+  state.targets=members.map(m=>({id:m.id,pixelIndex:m.pixelIndex,source_family:family,
+    base_geometry:m.geometry,coverage_classes:['mapped_land_support'],territorial_exclusions:[]}));
+  state.physical.results=members.map(m=>({target:m.id,issues:[],support:{mapped_land_support:m.geometry}}));
+  state.measured=members.map(m=>({target:m.id,consumed:{geometry:m.geometry},selected:{id:m.id,geometry:m.geometry}}));
+  state.proposed={rows:[{y:size/2,runs:members.slice(0,5).map(m=>[m.x,m.x+1,m.pixelIndex])}]};
+}
+test('requested-owner scope validates twelve complete context targets and emits only five owners',()=>{
+  const f=constructorFixture(twelveContextTargets),reader=f.reader();
+  const before=[...f.files].map(([name,{raw}])=>[name,Buffer.from(raw)]);
+  const proof=qualifySourceTargetNativeAuthority(reader,f.preimage,f.binding);
+  assert.equal(proof.source_rows.length,5);
+  assert.deepEqual(proof.source_rows.map(r=>r.pixelIndex).sort((a,b)=>a-b),[1,2,3,4,5]);
+  assert.equal(proof.source_rows.reduce((n,r)=>n+r.native_cells,0),5);
+  assert.deepEqual(proof.native_proof.native_patches[0].rows,f.state.proposed.rows);
+  for(const name of ['source-evidence.json','original-source.json','physical.json','measured.json','owners.json'])
+    assert.equal(reader.inventory.get(version+':'+name).whole_body_consumed,true,name);
+  assert.equal(JSON.parse(f.files.get('source-evidence.json').raw).targets.length,12);
+  assert.equal(JSON.parse(f.files.get('physical.json').raw).results.length,12);
+  for(const [name,raw] of before)assert.deepEqual(f.files.get(name).raw,raw,name);
+});
+test('requested-owner scope still rejects missing requests, wrong rows and malformed unused context',()=>{
+  const mutations=[
+    [s=>s.targets.shift(),/Foreign or conflicting proposed/],
+    [s=>{s.proposed.rows[0].runs[0][0]-=100;s.proposed.rows[0].runs[0][1]-=100;},/unique source-target coverage/],
+    [s=>s.proposed.rows=[],/Empty source-target native patch/],
+    [s=>s.targets.at(-1).coverage_classes=['unreviewed'],/Unresolved physical support/],
+    [s=>s.physical.results.pop(),/Missing or duplicate physical source member/],
+    [s=>s.measured.at(-1).selected.geometry=rectangle(30,31),/Physical source query or selected target differs/],
+    [s=>s.originals.at(-1).geometry=rectangle(30,31),/Physical source query or selected target differs/]
+  ];
+  for(const [change,message]of mutations)
+    assert.throws(()=>constructorFixture(s=>{twelveContextTargets(s);change(s);}).run(),message);
+});
+test('requested-owner completed reuse keeps exact output roster and patch conservation',()=>{
+  const f=constructorFixture(twelveContextTargets),proof=f.run();
+  const evidence=JSON.parse(f.files.get('source-evidence.json').raw),candidate=f.state.proposed;
+  const constructed={version:1,kind:'existing-source-target-native-constructor-result',
+    inputs:Object.fromEntries(['source_evidence','native_patch'].map(role=>[role,{commit:version,path:f.binding[role].path}])),
+    rule_sha256:valueSha(f.preimage),component_ids:proof.source_scope_ids,ledger_rows:proof.source_rows,limitations:proof.limitations};
+  const run=(result=constructed,source=evidence,patch=candidate)=>verifyCompletedSourceTargetNativeAuthority({
+    constructed:result,binding:f.binding,preimage:f.preimage,evidence:source,candidate:patch});
+  assert.deepEqual(run().original_ledger.rows,proof.source_rows);
+  const missing=structuredClone(constructed);missing.component_ids.pop();missing.ledger_rows.pop();
+  assert.throws(()=>run(missing),/requested source target/);
+  const changed=structuredClone(constructed);changed.ledger_rows[0].native_rows[0].runs[0][1]++;
+  assert.throws(()=>run(changed),/intervals differ/);
+  const extra=structuredClone(constructed),target=evidence.targets.at(-1),row=structuredClone(extra.ledger_rows[0]);
+  row.target_id=target.id;row.pixelIndex=target.pixelIndex;row.base_geometry=target.base_geometry;
+  row.component_id='source-target:'+valueSha({target_id:target.id,evidence:f.binding.source_evidence.sha256});
+  row.native_rows[0].runs[0][2]=target.pixelIndex;extra.ledger_rows.push(row);extra.component_ids.push(row.component_id);
+  assert.throws(()=>run(extra),/original source target/);
+  const absent=structuredClone(evidence);absent.targets.shift();assert.throws(()=>run(constructed,absent),/original source target/);
+  const context=structuredClone(evidence);context.targets.at(-1).source_receipt_sha256='0'.repeat(64);
+  assert.throws(()=>run(constructed,context),/Conflicting original source target/);
+  assert.throws(()=>run(constructed,evidence,{rows:[]}),/original source target/);
 });
