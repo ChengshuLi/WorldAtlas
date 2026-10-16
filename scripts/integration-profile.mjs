@@ -169,19 +169,11 @@ export function validateSelectedExpectations(expected, ledger, ledgerHash, previ
 
 const branchScope = branch => `coordination/engineering/${branch.slice('engineering/'.length)}/`;
 const inScope = (name, scopes) => containsPackagePath(scopes, name);
-function supportingText(name, branch, reservation) {
-  // Names do not establish consumption. The selected-role/package checks below
-  // prove new ordinary text is supporting evidence, regardless of title.
-  return inScope(name, [branchScope(branch), ...engineeringOwnedScopes(reservation)]) &&
-    /\.(?:md|txt)$/.test(name) &&
-    !/\/(?:requirements|constraints)(?:[.-].*)?\.txt$/i.test(name);
-}
-// A historical source/helper copy is evidence only after the complete fixed
-// reader and package exclusions below. Suffixes admit a custody check, never
-// execution. Keep loader/configuration names out even in owned packet paths.
-function retainedSupportingEvidence(name) {
-  return /\.(?:mjs|py|jsonl|xml|lfs-pointer|geojson\.gz|f64le\.gz)$/.test(name) &&
-    !/^(?:setup\.py|__init__\.py|(?:site|user)customize\.py)$/i.test(name.split('/').at(-1));
+// Implicit loader/configuration files can change behavior merely by existing,
+// outside the explicit reader graph. Other owned ordinary blobs are eligible
+// for the complete unconsumed-role proof below; a suffix grants no authority.
+function implicitLoader(name) {
+  return /^(?:package(?:-lock)?\.json|npm-shrinkwrap\.json|(?:requirements|constraints)(?:[.-].*)?\.txt|pyproject\.toml|setup\.(?:py|cfg)|__init__\.py|(?:site|user)customize\.py|(?:js|ts)config(?:\.[^.]+)?\.json|import[-_.]?map\.json|binding\.gyp|(?:binding|deno|composer)\.json)$/i.test(name.split('/').at(-1));
 }
 function nativeOperandPath(name, branch, reservation) {
   return /^(?:rows|runs)-[0-9]+\.bin\.gz$/.test(name.split('/').at(-1)) &&
@@ -203,9 +195,7 @@ export function selectedDataCandidate(branch, files, reservation = {}) {
     files.every(file => !file.previous_filename && (file.filename === CHECKPOINT_LOCATOR
       ? ['added', 'modified'].includes(file.status) : [SELECTION, PACKAGE_INPUT_FILE, ADMINISTRATIVE_REGISTRY].includes(file.filename)
       ? file.status === 'modified' : file.filename === manifest && file.status === 'modified' || file.status === 'added' && inScope(file.filename, scopes) && safe(file.filename) &&
-        (/\.(?:json|jsonl\.gz|json\.gz|log)$/.test(file.filename) || supportingText(file.filename, branch, reservation) ||
-          retainedSupportingEvidence(file.filename) || nativeOperandPath(file.filename, branch, reservation) || file.filename.endsWith('/geography-artifact.zip')) &&
-        !/(?:^|\/)(?:package(?:-lock)?|tsconfig|jsconfig|binding|deno|composer)\.json$/.test(file.filename)));
+        !implicitLoader(file.filename)));
 }
 export async function integrationTree(api, repo, commit) {
   const object = await api(`/repos/${repo}/git/commits/${commit}`);
@@ -269,14 +259,6 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       return JSON.parse(bytes);
     };
     const json = async (name, tree, retain = true) => parseJSON(await read(name, tree, retain));
-    const jsonLines = bytes => {
-      needSelected(bytes.length > 0, 'empty supporting JSONL');
-      for (let start = 0; start < bytes.length;) {
-        const newline = bytes.indexOf(10, start), end = newline < 0 ? bytes.length : newline;
-        parseJSON(bytes.subarray(start, end));
-        start = end + 1;
-      }
-    };
     let packageAdditions = [];
     if (files.some(file => file.filename === PACKAGE_INPUT_FILE)) {
       const {inputs: before, ...oldPolicy} = validatePackageInputs(await json(PACKAGE_INPUT_FILE, baseline));
@@ -579,21 +561,17 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
     const oldSide = parseJSON(oldSideBytes), oldRegistryPin = oldSide.authority_registry;
     const oldLedgerPin = oldSide.logical_asset_map?.ledger, oldLedgerBytes = await read(oldLedgerPin?.path, baseline);
     needSelected(oldLedgerBytes.length === oldLedgerPin.bytes && sha256(oldLedgerBytes) === oldLedgerPin.sha256, 'preceding ledger differs');
-    const templates = [];
     for (const name of expectedPaths) {
-      const expected = await json(name);
-      if (expected.selected_ledger_sha256 === null) {
-        // A prospective package projection is not the authoritative smoke input.
-        // Its complete roster must still agree, and its fixed preparation custody
-        // is checked below against the actually consumed original/current roles.
-        validateSelectedExpectations({...expected, selected_ledger_sha256: sidecar.logical_asset_map.ledger.sha256},
-          ledger, sidecar.logical_asset_map.ledger.sha256, parseJSON(oldLedgerBytes));
-        templates.push(name);
-      } else {
-        validateSelectedExpectations(expected, ledger, sidecar.logical_asset_map.ledger.sha256, parseJSON(oldLedgerBytes));
-        needSelected(!expectationsPath, 'multiple authoritative expectations');
-        expectationsPath = name;
-      }
+      const bytes = await read(name);
+      let expected;
+      try { expected = parseJSON(bytes); } catch { continue; }
+      // Historical finalizations and prospective templates are not the current
+      // smoke input. Their names confer no role: the unconsumed proof below is
+      // mandatory, just as for every other supporting blob.
+      if (expected?.selected_ledger_sha256 !== sidecar.logical_asset_map.ledger.sha256) continue;
+      validateSelectedExpectations(expected, ledger, sidecar.logical_asset_map.ledger.sha256, parseJSON(oldLedgerBytes));
+      needSelected(!expectationsPath, 'multiple authoritative expectations');
+      expectationsPath = name;
     }
     needSelected(expectationsPath, 'one reviewed expectations file required');
     const oldRegistryBytes = await read(oldRegistryPin.path, baseline);
@@ -601,7 +579,6 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
     const oldRegistry = parseJSON(oldRegistryBytes);
     needSelected(Array.isArray(oldRegistry.entries) && oldRegistry.entries.every(old =>
       registry.entries.filter(entry => same(entry, old)).length === 1), 'existing authority changed or disappeared');
-    let originalLedger;
     const operating = async (value, current = false) => {
       pin(value);
       if (!added.has(value.path)) return;
@@ -614,7 +591,6 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
         ['path','mode','bytes','sha256','git_blob_oid'].every(key => plan.original_inputs[0]?.[key] === sidecar.authority_registry[key]) &&
         plan.original_inputs[1].path?.endsWith('/composed-original-ledger.json'), 'unsupported original data inputs');
       pin(plan.original_inputs[1]);
-      originalLedger = plan.original_inputs[1];
     };
     // Existing deliveries resolve new authority first; only unresolved native
     // operands require a bounded second pass through retained custody.
@@ -738,42 +714,8 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
     // Only declarations beyond that graph need the administrative extension.
     if (registryChanged || packageAdditions.some(name => baseline.entries.has(name) && !reachable.has(name)))
       for (const authority of sourceAuthorities) await sourceRoles(authority);
-    for (const name of templates) {
-      // A null template needs immutable input/output provenance, never mutable
-      // runtime journal state. Legacy published intent pairs remain supported.
-      const directory = name.slice(0, name.lastIndexOf('/'));
-      const intentPath = directory + '.intent.json', receiptPath = directory + '/preparation.json';
-      const receipt = await json(receiptPath), embedded = Object.hasOwn(receipt, 'input');
-      needSelected([name, receiptPath, ...(embedded ? [] : [intentPath])].every(path => added.has(path) &&
-        inScope(path, engineeringOwnedScopes(reservation)) && !reachable.has(path) && !packageAdditions.includes(path)),
-        'unbound prospective expectations');
-      const template = await json(name), finalized = await json(expectationsPath);
-      needSelected(same({...template, selected_ledger_sha256: finalized.selected_ledger_sha256}, finalized),
-        'prospective and finalized expectations differ');
-      const intent = embedded ? {version: 1, stage: 'package', binding: receipt.binding, config: receipt.input} : await json(intentPath);
-      if (embedded && added.has(intentPath)) needSelected(same(await json(intentPath), intent), 'Conflicting legacy package input');
-      const config = intent.config;
-      const canonical = value => Array.isArray(value) ? value.map(canonical) : value && typeof value === 'object'
-        ? Object.fromEntries(Object.keys(value).sort().map(key => [key, canonical(value[key])])) : value;
-      const binding = {phase: 'package', config_sha256: sha256(Buffer.from(JSON.stringify(canonical(config)) + '\n'))};
-      needSelected(keys(intent, ['version','stage','binding','config']) && intent.version === 1 && intent.stage === 'package' &&
-        keys(config, ['version','registry','ledger','rebind','new_prefix']) && config.version === 1 &&
-        same(config.registry, sidecar.authority_registry) && same(config.ledger, originalLedger) &&
-        same(config.rebind, ledger.current_rebind) && typeof config.new_prefix === 'string' &&
-        config.new_prefix.endsWith('/') && safe(config.new_prefix.slice(0, -1)) &&
-        inScope(config.new_prefix, engineeringOwnedScopes(reservation)) && name.startsWith(config.new_prefix) &&
-        same(intent.binding, binding) && keys(receipt, ['version','binding','outputs', ...(embedded ? ['input'] : [])]) && receipt.version === 1 &&
-        same(receipt.binding, binding) && keys(receipt.outputs, ['package-roles.json','selected-delivery-expectations.json']),
-        'prospective expectations preparation differs');
-      for (const [filename, descriptor] of Object.entries(receipt.outputs)) {
-        const member = directory + '/' + filename;
-        needSelected(added.has(member) && keys(descriptor, ['bytes','sha256']), 'missing prospective preparation member');
-        const bytes = await read(member);
-        needSelected(descriptor.bytes === bytes.length && descriptor.sha256 === sha256(bytes), 'prospective preparation bytes differ');
-      }
-    }
-    const transport = new Set(), archives = [...added].filter(name => name.endsWith('.zip'));
-    if (files.some(file => file.filename === CHECKPOINT_LOCATOR) || archives.length) {
+    const transport = new Set();
+    if (files.some(file => file.filename === CHECKPOINT_LOCATOR)) {
       // This admits inert custody to the selected-data test inventory, not a
       // checkpoint capability. The unchanged real geography job still performs
       // original-job authentication and complete private scientific admission.
@@ -785,7 +727,7 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       const locator = validateAcceptedCheckpointLocator(await json(ACCEPTED_CHECKPOINT_LOCATOR));
       const archive = locator.retained_artifact?.path;
       needSelected(files.some(file => file.filename === ACCEPTED_CHECKPOINT_LOCATOR) &&
-        archives.length === 1 && archives[0] === archive &&
+        added.has(archive) &&
         inScope(archive, [branchScope(branch), ...engineeringOwnedScopes(reservation)]), 'unbound checkpoint archive');
       const definition = validatePackageInputs(await json(PACKAGE_INPUT_FILE));
       needSelected([ACCEPTED_CHECKPOINT_LOCATOR, archive].every(name => !reachable.has(name) &&
@@ -825,65 +767,19 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
     }
     const updatedManifest = scientificManifest(branch, reservation);
     const manifestChanged = updatedManifest && files.some(file => file.filename === updatedManifest && file.status === 'modified');
-    const supporting = new Set([...added].filter(retainedSupportingEvidence));
+    // Unconsumed bytes are custody, not configuration or executable input. Do
+    // not decode, parse, unpack or execute them according to their filename.
+    // The complete fixed-role proof below excludes them from all current roles;
+    // actual scientific validators continue to qualify any scientific claims.
+    const supporting = new Set([...added].filter(name => !reachable.has(name) &&
+      !transport.has(name) && name !== expectationsPath));
     if (manifestChanged) {
       needSelected(ordinary(baseline.entries.get(updatedManifest)), 'nonordinary scientific manifest');
       supporting.add(updatedManifest);
     }
-    const manifest = `coordination/engineering/${branch.slice('engineering/'.length)}/evidence-quality.json`;
-    for (const name of added) {
-      if (retainedSupportingEvidence(name)) {
-        // Authenticate and discard each whole original body. Do not execute a
-        // retained module, follow XML entities/LFS pointers, or turn an archive
-        // into package input. Scientific interpretation stays with its validator.
-        let bytes = await read(name, authored, false);
-        if (name.endsWith('.gz')) {
-          bytes = gunzipSync(bytes);
-          diagnostics.decoded_bytes += bytes.length;
-        }
-        if (name.endsWith('.geojson.gz')) parseJSON(bytes);
-        else if (name.endsWith('.jsonl') && (bytes.length || !name.endsWith('.stdout.jsonl'))) jsonLines(bytes);
-        else if (!name.endsWith('.f64le.gz'))
-          needSelected(!bytes.includes(0) && isUtf8(bytes), 'nontext retained evidence');
-        continue;
-      }
-      if (supportingText(name, branch, reservation)) {
-        needSelected(!reachable.has(name) && !sourceDeclarations.has(name) &&
-          !packagePathRequired(name, validatePackageInputs(await json(PACKAGE_INPUT_FILE))), 'supporting text is a consumed role');
-        const bytes = await read(name, authored, false);
-        needSelected(!bytes.includes(0) && Buffer.from(bytes.toString('utf8')).equals(bytes), 'nontext packet documentation');
-        continue;
-      }
-      if (reachable.has(name) || transport.has(name) || name === expectationsPath || name === manifest) continue;
-      // Non-consumed supporting evidence cannot become package input. It must
-      // still be ordinary inert JSON/text, never a module, configuration or opaque archive.
-      // Validate syntax, then discard it: arbitrary preparation records confer no
-      // reader/package role and must not consume retained structural-metadata space.
-      if (name.endsWith('.json')) {
-        const bytes = await read(name, authored, false);
-        // Original HTTP metadata may be XML despite a retained .json name.
-        // Preserve that response verbatim; it earns only unconsumed custody,
-        // under the same base/package exclusion as a named XML source.
-        if (bytes.subarray(0, 5).equals(Buffer.from('<?xml'))) {
-          needSelected(!bytes.includes(0) && isUtf8(bytes), 'nontext retained XML response');
-          supporting.add(name);
-        } else parseJSON(bytes);
-      }
-      else if (/\.jsonl?\.gz$/.test(name)) {
-        const bytes = await read(name, authored, false);
-        // No decoded-size pin is declared for inert supporting evidence.
-        // The codec validates every complete gzip member, including concatenated
-        // members, before the whole decoded JSON/JSONL body is parsed.
-        const decoded=gunzipSync(bytes);
-        diagnostics.decoded_bytes += decoded.length;
-        if (name.endsWith('.json.gz')) parseJSON(decoded);
-        else jsonLines(decoded);
-      }
-      else {
-        needSelected(name.endsWith('.log'), 'unknown opaque evidence type');
-        const bytes = await read(name, authored, false);
-        needSelected(!bytes.includes(0) && Buffer.from(bytes.toString('utf8')).equals(bytes), 'nontext evidence log');
-      }
+    for (const name of supporting) {
+      needSelected(!nativeOperandPath(name, branch, reservation), 'unbound native operand');
+      if (name !== updatedManifest || !manifestChanged) await read(name, authored, false);
     }
     if (supporting.size) {
       // Issue ownership and a historical-looking filename establish no role.
