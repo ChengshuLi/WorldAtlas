@@ -1,0 +1,7 @@
+# Adopted annual wetland22576 source-location supplement
+
+Root adopted the exact independently reviewed22,576 annual2020 source-category/location answers:22,182 mangrove and394 herbaceous wetland. Original complete records, positive source-version associations, actual saved native category context, author interpretation and distinct review are preserved. The only canonical-row changes are explicit adoption metadata listed in adoption.json; the prior specific actual-body question remains attached. Historical pending-adoption words in verbatim originals are provenance, not the current adoption status.
+
+All8,174 wetland keys within priorRGB9332 are excluded, including440 still-unadopted pond/reef/placement questions. Both Kupang/Oecusse source claims,58 parent-context and2,860 selected-portion facts remain literal. The category prediction does not decide binary dry-ground/open-water status, instantaneous tide, jurisdiction, current ownership or native repair. Known exact original133,846 accounting becomes123,675 adopted source-review keys and10,171 specific residuals, zero overlap.
+
+All8 original handoff files are preserved as original bodies or exact lossless gzip. portable-original-body-map.json records both compressed and original SHA/length. Source arrays are not reacquired or replayed; their full retained metadata/hash joins remain in the original records and prior source corpus. Prior public keyset identities are pinned to actual checkpoint7a2bd915736663f9813281995ac4c48a507ced4e. No native/accepted-map-cell credit follows.

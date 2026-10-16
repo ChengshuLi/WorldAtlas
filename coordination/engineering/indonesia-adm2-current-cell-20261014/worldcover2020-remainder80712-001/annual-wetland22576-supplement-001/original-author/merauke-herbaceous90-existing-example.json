@@ -1,0 +1,138 @@
+{
+  "point_index": 73111,
+  "original_key": {
+    "owner": 23001,
+    "y": 136479,
+    "x": 232165
+  },
+  "original_record_unchanged": {
+    "original_category": "physical",
+    "original_block": 33,
+    "original_record_ordinal": 7517,
+    "original_owners": [
+      23001
+    ],
+    "original_SIDs": [
+      36254,
+      36601
+    ],
+    "original_class": "source-relative",
+    "original_interval": [
+      136479,
+      232165,
+      232166,
+      [
+        23001
+      ],
+      [
+        36254,
+        36601
+      ],
+      "source-relative"
+    ]
+  },
+  "centre_unchanged": {
+    "longitude": 138.80404018827767,
+    "latitude": -7.389769608322466,
+    "ideal_longitude_numerator": 36389700,
+    "ideal_longitude_denominator": 262166
+  },
+  "source_observation": {
+    "coverage_status": "valid-native-value",
+    "class_code": 90,
+    "valid_mask": 255,
+    "nodata_match": false,
+    "neighbourhood_complete": true,
+    "neighbourhood_codes": [
+      [
+        90,
+        90,
+        90
+      ],
+      [
+        90,
+        90,
+        90
+      ],
+      [
+        10,
+        10,
+        10
+      ]
+    ],
+    "neighbourhood_masks": [
+      [
+        255,
+        255,
+        255
+      ],
+      [
+        255,
+        255,
+        255
+      ],
+      [
+        255,
+        255,
+        255
+      ]
+    ],
+    "centre_array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-remainder80712-001/worker1-source/tiles/S09E138/new-block-16-09.npz",
+    "source_object_identity": {
+      "last-modified": "Tue, 25 Oct 2022 13:42:18 GMT",
+      "etag": "\"da695e484008c15a1b4ed8f481a141ff-5\"",
+      "accept-ranges": "bytes",
+      "content-length": "39117092"
+    }
+  },
+  "source_observation_checkpoint": "idn-physical-remainder80712-001/worker1-source/tiles/S09E138/tile-complete.json",
+  "tile": "S09E138",
+  "native_row": 16677,
+  "native_col": 9648,
+  "specific_supported_2020_surface_fact": "The annual2020 WorldCover Map supports herbaceous wetland at this unchanged native source-associated location; the instantaneous flooded/ground state and precise water interface remain unresolved.",
+  "source_native_association": {
+    "basis": "Authenticated frozen source-candidate interval coverage preserved by original physical extraction; exact519member, roster, owner and reverse lineage bindings. Not a fresh strict-INTERIOR or boundary/tie measurement.",
+    "original_ADM2_claim": {
+      "source_index": 36601,
+      "family_index": 153,
+      "source_id": "gb:IDN:ADM2:22746128B65756496772256",
+      "ordinal": 341,
+      "owners": [
+        23001
+      ],
+      "name": "Merauke",
+      "geometry_status": "raw-native-supported"
+    },
+    "actual_ADM1_claims": [
+      {
+        "source_index": 36254,
+        "family_index": 152,
+        "source_id": "gb:IDN:ADM1:65028918B16658067687714",
+        "ordinal": 28,
+        "owners": [],
+        "name": "Papua",
+        "geometry_status": "raw-native-supported"
+      }
+    ],
+    "other_recorded_source_claims": [],
+    "retained_stage_original_member_equality_available": true,
+    "frozen_framework_parent": "framework:province:papua:856ef2fb442b",
+    "historical9f40_parent": "framework:province:papua:856ef2fb442b",
+    "parent_discrepancy_claims": [],
+    "documented_selected_geographic_portion": false,
+    "whole_report_cohort": "remaining34",
+    "complete_association_record": "per-original-key-source-associations.jsonl",
+    "association_point_index": 73111
+  },
+  "proposed_bounded_answer": false,
+  "category": "unresolved-specific-wetland-intertidal-body-relation",
+  "actual_answer": null,
+  "remaining_physical_question": "The wetland/intertidal cover is observed, but water/ground interface, inundation or tide-dependent body relation at this exact original location remains unanswered in this bounded adoption.",
+  "separate_unadopted_questions": [
+    "Annual2020 model, native point scale and source-registration limits remain; independent current/legal jurisdiction is not adjudicated."
+  ],
+  "completed_question_credit_proposed": 0,
+  "credit_scope": "Bounded annual2020 source-associated body-location review only; pending independent review and Root adoption.",
+  "formal_broader_original_question_closure": null,
+  "authority_or_repair_credit": 0
+}

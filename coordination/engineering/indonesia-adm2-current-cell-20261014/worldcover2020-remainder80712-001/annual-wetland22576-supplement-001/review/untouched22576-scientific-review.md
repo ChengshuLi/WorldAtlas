@@ -1,0 +1,11 @@
+# Untouched wetland22576 independent scientific review
+
+PASS WITH LIMITS for exact proposal `1397602aa99b3c45a080bb1ed2b84803f45e641512453d2605b72d90a0e2cc9a`: **22,576 bounded annual2020 category/source-body-location answers (22,182 mangrove,394 herbaceous wetland)**. This review does not adopt them.
+
+A streamed full-record comparison binds all22,576 original rows and their coordinates, literal class observations, affirmative original source-version associations and holds. All947 added first-cohort metadata bodies match their retained hashes and exact source context; the remainder's full source observations are structurally unchanged. The old unresolved actual-body relation remains explicit per row. Only the declared interpretation/credit fields and appended followup metadata change.
+
+The category-specific interpretation is substantive and bounded: the source predicts mangrove canopy/vegetation or wet/flooded herbaceous vegetation at a native containing pixel, while independent retained original-source evidence supplies location in that source version. It does not establish binary exposed ground/open water, dry understorey, instantaneous tide, current truth or jurisdiction. The actual adopted Vietnam8184 precedent includes381 class95 and20 class90 records with this same narrower claim scope; no Vietnam spatial facts transfer. A universal tide/dryness or uniform3x3 gate would impose a stronger criterion than the accepted canopy/crop/category answers.
+
+All8,174 wetland keys within priorRGB9332 are excluded, including440 still-unadopted cases. Known pond/reef/registration contradictions are not cleared. The22576 keys have zero overlap with the current101099 adopted keys and all lie in its32747 residual set. If Root adopts this exact delta, the known original133846 union becomes123675 adopted plus10171 residual, zero intersection.
+
+All58 parent-context and2860 selected-portion facts remain literal. Both Kupang/Oecusse competing-source records remain structurally present; the prose explicitly says original-source-version association, not an unqualified country/owner winner. These observations do not repair source/parent/territorial/portion/current-owner holds, grant native authority or certify an accepted map-cell repair. No source, raster, predicate or native execution was repeated.

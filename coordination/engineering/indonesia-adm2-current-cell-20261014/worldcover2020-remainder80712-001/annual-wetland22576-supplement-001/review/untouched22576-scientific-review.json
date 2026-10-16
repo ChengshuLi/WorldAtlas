@@ -1,0 +1,162 @@
+{
+  "reviewer": "/root/cell_method_review",
+  "reviewed_utc": "2026-10-16T01:08:38.376983+00:00",
+  "disposition": "PASS WITH LIMITS: exact22576 bounded annual2020 category-specific source-body/original-source-version location proposals; NOT adopted",
+  "proposal": {
+    "path": "idn-physical-residual41305-policy-001/worker6-untouched-wetland-assessment/proposed-untouched22576-wetland-source-location-dispositions.jsonl.gz",
+    "bytes": 2471088,
+    "sha256": "1397602aa99b3c45a080bb1ed2b84803f45e641512453d2605b72d90a0e2cc9a"
+  },
+  "decoded_bytes": 175026146,
+  "decoded_sha256": "2348b36f05718fbd1ae0677060c1cc2349ec4f243e48ebdc3ff250c535a0dda9",
+  "exact_keys": {
+    "path": "idn-physical-residual41305-policy-001/worker6-untouched-wetland-assessment/exact-untouched22576-owner-y-x.jsonl.gz",
+    "bytes": 70832,
+    "sha256": "0eec8d72600fa95b325405f15bebbc0a7b62692e83ef3bb6d006ca015bfcc6ae"
+  },
+  "source_predecessor_inputs": [
+    {
+      "path": "idn-worldcover2020-53134-001/worker2-interpretation/proposed-physical-location-dispositions.jsonl.gz",
+      "bytes": 4673679,
+      "sha256": "91f1dd7a50dd66fbc971d42347e7d8dfa0c0acff98c6067aee23d6e15f573433"
+    },
+    {
+      "path": "idn-physical-remainder80712-001/worker2-interpretation/proposed-physical-location-dispositions.jsonl.gz",
+      "bytes": 5920626,
+      "sha256": "8f8efe8988f8e744570dd941f7e922b9bf57afd0e45b10ac673670ff10ad8590"
+    }
+  ],
+  "source_context_metadata_bodies_verified": 947,
+  "source_context_metadata_complete_hash_roster_matches_author": true,
+  "literal_original_rows_coordinates_categories_source_associations_and_holds_preserved": true,
+  "only_changed_interpretation_fields": [
+    "actual_answer",
+    "authority_or_repair_credit",
+    "category",
+    "completed_question_credit_proposed",
+    "credit_scope",
+    "formal_broader_original_question_closure",
+    "proposed_bounded_answer",
+    "remaining_physical_question"
+  ],
+  "new_fields": [
+    "annual_wetland_interpretation",
+    "input_cohort",
+    "prior_wetland_disposition",
+    "root_adoption"
+  ],
+  "prior_specific_body_relation_question_retained_per_row": true,
+  "counts": {
+    "original_wetland": 30750,
+    "proposed": 22576,
+    "already_adopted": 7734,
+    "all_RGB_excluded": 8174
+  },
+  "classes": {
+    "95": 22182,
+    "90": 394
+  },
+  "cohorts": {
+    "first53134": 11891,
+    "remainder80712": 10685
+  },
+  "separate_hold_flags": {
+    "parent_context": 58,
+    "selected_portion_context": 2860
+  },
+  "preserved_competing_source_records": [
+    {
+      "original_key": {
+        "owner": 22792,
+        "y": 137912,
+        "x": 221416
+      },
+      "point_index": 80111,
+      "original_source": {
+        "source_index": 36539,
+        "family_index": 153,
+        "source_id": "gb:IDN:ADM2:22746128B27765258797580",
+        "ordinal": 279,
+        "owners": [
+          22792
+        ],
+        "name": "Kupang",
+        "geometry_status": "raw-native-supported"
+      },
+      "other_claims": [
+        {
+          "source_index": 58354,
+          "family_index": 327,
+          "source_id": "gb:TLS:ADM1:58719522B69518090574338",
+          "ordinal": 0,
+          "owners": [],
+          "name": "Oecusse",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22792,
+        "y": 137913,
+        "x": 221416
+      },
+      "point_index": 80115,
+      "original_source": {
+        "source_index": 36539,
+        "family_index": 153,
+        "source_id": "gb:IDN:ADM2:22746128B27765258797580",
+        "ordinal": 279,
+        "owners": [
+          22792
+        ],
+        "name": "Kupang",
+        "geometry_status": "raw-native-supported"
+      },
+      "other_claims": [
+        {
+          "source_index": 58354,
+          "family_index": 327,
+          "source_id": "gb:TLS:ADM1:58719522B69518090574338",
+          "ordinal": 0,
+          "owners": [],
+          "name": "Oecusse",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    }
+  ],
+  "known_RGB9332_wetland_remaining_excluded": 440,
+  "whole_RGB_wetland_scope_excluded": 8174,
+  "original_wetland_known_adopted": 7734,
+  "known101099_overlap": 0,
+  "prospective_only_if_Root_adopts": {
+    "new_disjoint_keys": 22576,
+    "known_adopted": 123675,
+    "specific_residual": 10171,
+    "original_denominator": 133846,
+    "adopted_residual_intersection": 0,
+    "original_union_preserved": true
+  },
+  "precedent": {
+    "path": "idn-physical-residual41305-policy-001/worker4-wetland-category-review-001/vietnam-wetland-precedent-extract.json",
+    "bytes": 11827,
+    "sha256": "cca8840bf629dd4587ea98df5120bbad564d2693799a1eed93d82bc402b669e8"
+  },
+  "scientific_judgment": "Credible native annual2020 WorldCover model predictions give category-specific mangrove vegetation/canopy or wet/flooded herbaceous vegetation at these unchanged source-associated points. Existing affirmative original source-version association supplies the independent geographic facet, not a jurisdiction winner. The original class-only blanket wetness/tide deferral imposed a stronger requirement than accepted canopy/crop and the actual Vietnam annual-category precedent; this proposal corrects that scope asymmetry while retaining the prior actual-body question separately. Actual code/mask alone is not elevated to certain ground truth or binary LAND/WATER. All known prior RGB9332 contradictions/ambiguities are excluded. Mixed neighbours, missing coarse parents, documented selected portions or competing coarse source claims do not automatically erase the narrower observation; their consequential stronger claims remain unresolved.",
+  "limits": [
+    "Annual2020 WorldCover v100 is credible thematic model-source evidence, not dated RGB, current truth, per-key certainty or an instantaneous wetness/tide observation.",
+    "Mangrove cover means modeled mangrove vegetation/canopy in a wet/intertidal environment; herbaceous wetland means modeled wet/flooded herbaceous vegetation. Neither is a dry-land conversion.",
+    "The containing native source pixel supports this unchanged point-scale interpretation, not complete coverage of the larger Atlas cell, surveyed coastline/bank or a selected geographic portion.",
+    "Valid masks establish an actual source observation, not thematic correctness. Product-wide quality does not supply per-key accuracy or total positional error; source registration/mixing remains applicable.",
+    "Native3x3 is observed surrounding category context, not an acceptance, majority or unanimity rule. Mixed neighbours do not erase the centre observation.",
+    "Original source-version membership is affirmative retained numerical source evidence, not an independent current owner, strict-new-predicate, parent correction, treaty, shoreline/title or sovereignty finding.",
+    "Binary exposed ground versus open water, permanently dry substrate, water beneath canopy and instantaneous inundation are not established by this bounded category/location answer.",
+    "Every original source, foreign/coarse-parent, geographic-portion, territorial and ownership hold remains; no native-authority, current-selection or repair credit.",
+    "22576 is proposed only; Root adoption and immutable publication remain separate.",
+    "Known exact original133846 accounting only; no broader historical completeness claim.",
+    "All440 unadopted wetland keys within earlierRGB9332 remain outside this proposal; no false clearance of known pond/reef/placement contradictions."
+  ],
+  "source_native_predicate_or_scientific_execution": false,
+  "authority_or_repair_credit": 0
+}
