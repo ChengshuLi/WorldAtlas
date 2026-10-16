@@ -27,7 +27,7 @@ full checkout omits six historical engineering archive roots:
 Those six engineering exclusions retain an entire root when a declared package
 or verification path intersects it. The research archive under
 `research/geography/` is omitted except for actual package and verification
-inputs. Its ten current regression fixture paths are declared in the existing
+inputs. Its twelve current regression fixture paths are declared in the existing
 `.github/package-inputs.json` `verification_paths` list. Both complete and
 selected-data checkouts reuse the same stock sparse-pattern renderer; no new
 transport, validator, extension catalogue or archive-body rewrite is involved.
@@ -35,12 +35,13 @@ Original files and history remain in Git. A new test consuming additional
 research data declares that dependency alongside its code change.
 
 The accepted `225e0d36` tree contains 7,499 research archive files totaling 2,796,658,781
-logical bytes. The ten required fixture paths total 5,919,531 bytes. This removes
-2,790,739,250 logical bytes per full worktree, 99.79% of that namespace. These are
-not Git pack/wire bytes or measured hosted duration savings. The fixture set
-was checked against direct source consumers and all 316 selected-data controls'
-actual Git reads, including object aliases retained outside the research tree.
-This bounded trace does not prove every possible future dynamic consumer.
+logical bytes. The twelve required fixture paths total 7,197,655 bytes. This removes
+2,789,461,126 logical bytes per full worktree, 99.74% of that namespace. These are
+not Git pack/wire bytes or measured hosted duration savings. The original bounded trace covered cat-file reads but missed git-show reads.
+Independent exact-head review found two original Ukraine bodies missing from
+that trace. With those literal paths retained, all 299 exact-head selected-data
+controls passed in a cold, no-alternates Git object database. This verifies the
+applicable roster rather than every possible future dynamic consumer.
 
 Selected-data requests retain
 the existing package/verification roles, ordinary engineering execution files
