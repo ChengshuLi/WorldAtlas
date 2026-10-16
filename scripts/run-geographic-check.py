@@ -51,8 +51,6 @@ def prefetch_declared_inputs(repo, baseline, candidate, timeout=120):
                 child.communicate(timeout=5)
             except subprocess.TimeoutExpired as error:
                 raise RuntimeError('Prefetch process group did not terminate') from error
-        if len(stdout) > 1024 * 1024:
-            raise ValueError('Prefetch summary exceeds bound')
         summary = json.loads(stdout)
         if not isinstance(summary, dict) or summary.get('complete_scientific_closure') is not False:
             raise ValueError('Prefetch cannot assert scientific closure')
@@ -278,8 +276,6 @@ def unchanged_selected_inputs(repo, baseline, candidate, *, code_commit=None):
             str(repo), baseline, candidate, code_commit], env)
         if result.returncode:
             return applicability_decline('collector-process-failed')
-        if len(result.stdout) > 2 * 1024 * 1024:
-            return applicability_decline('collector-output-limit')
         proof = json.loads(result.stdout)
         if (not isinstance(proof, dict) or proof.get('version') != 1
                 or proof.get('baseline_commit') != baseline

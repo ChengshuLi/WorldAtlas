@@ -1,6 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
+import fs from 'node:fs';
+import os from 'node:os';
+import {execFileSync} from 'node:child_process';
 import {syncBuiltinESMExports} from 'node:module';
 import path from 'node:path';
 import {pathToFileURL} from 'node:url';
@@ -19,7 +22,7 @@ function fixture() {
   class ControlledReader extends ImmutableReader {
     git(...args) {
       this.calls.push(args);
-      if(args[0]==='ls-tree')return Buffer.from(`100644 blob ${this.blob}\t${name}\0`);
+      if(args[0]==='ls-tree')return Buffer.from(`${this.mode??'100644'} blob ${this.blob}\t${args[4]}\0`);
       if(args[0]==='cat-file'&&args[1]==='-s')return Buffer.from(String(this.declaredBytes));
       if(args[0]==='cat-file'&&args[1]==='blob')return this.body;
       throw Error('Unexpected fixture Git call: '+args.join(' '));
@@ -84,11 +87,88 @@ test('each call rereads and reauthenticates; a later same-size body drift preser
   assert.deepEqual(pin(reader),before);
 });
 
-test('descriptor drift is rejected before a second body read and leaves the original inventory intact',t=>{
+test('repeated immutable descriptors reuse their inventory entry while whole bodies are still read',t=>{
   const reader=fixture(),expected=hash(reader.body),algorithms=observeHashes(t);
-  reader.read(name,{expected});const before={...pin(reader)};
-  reader.blob='b'.repeat(40);
-  assert.throws(()=>reader.read(name,{expected}),/Immutable descriptor drift/);
-  assert.deepEqual(algorithms,['sha256']);assert.equal(wholeReads(reader),1);
-  assert.deepEqual(pin(reader),before);
+  const first=reader.descriptor(name);assert.equal(reader.descriptor(name),first);
+  reader.read(name,{expected});reader.read(name,{expected});
+  assert.equal(reader.calls.filter(args=>args[0]==='ls-tree').length,1);
+  assert.equal(reader.calls.filter(args=>args[0]==='cat-file'&&args[1]==='-s').length,1);
+  assert.equal(wholeReads(reader),2);assert.deepEqual(algorithms,['sha256','sha256']);
+});
+
+test('changed immutable commit or path gets fresh metadata and a separate descriptor',()=>{
+  const reader=fixture(),first=reader.descriptor(name);
+  reader.blob='b'.repeat(40);reader.mode='100755';
+  const other=reader.descriptor(name,'2'.repeat(40));
+  assert.notEqual(other,first);assert.equal(other.git_blob_oid,reader.blob);assert.equal(other.mode,'100755');
+  const another=reader.descriptor('tiny/other.json');assert.equal(another.path,'tiny/other.json');
+  assert.notEqual(another,first);assert.equal(reader.calls.filter(args=>args[0]==='ls-tree').length,3);
+  assert.equal(reader.descriptor(name),first);assert.equal(first.mode,'100644');
+});
+
+test('fresh readers authenticate independently and unsafe mutable refs never hit the cache',()=>{
+  const first=fixture();first.descriptor(name);
+  const second=fixture();second.descriptor(name);
+  assert.notEqual(first.inventory,second.inventory);assert.equal(second.calls.length,2);
+  first.inventory.set('main:'+name,pin(first));
+  assert.throws(()=>first.descriptor(name,'main'),/Unsafe immutable path\/commit/);
+  assert.throws(()=>first.descriptor('../body.json'),/Unsafe immutable path\/commit/);
+  assert.equal(first.calls.length,2);
+});
+
+for(const mode of ['120000','040000'])test(`fresh descriptor rejects non-ordinary mode ${mode}`,()=>{
+  const reader=fixture();reader.mode=mode;
+  assert.throws(()=>reader.descriptor(name),/Require whole ordinary Git input/);
+  assert.equal(reader.inventory.size,0);assert.equal(wholeReads(reader),0);
+});
+
+function treeFixture(t) {
+  const root=fs.mkdtempSync(path.join(os.tmpdir(),'immutable-tree-'));
+  t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
+  const git=(...args)=>execFileSync('git',['-c','core.hooksPath=/dev/null','-c','user.name=Tree fixture',
+    '-c','user.email=tree@example.invalid','-C',root,...args],{stdio:['ignore','pipe','pipe']});
+  git('init','-q');fs.mkdirSync(path.join(root,'dir'));
+  fs.writeFileSync(path.join(root,'dir','ordinary'),'one');
+  fs.writeFileSync(path.join(root,'executable'),'#!/bin/sh\n');fs.chmodSync(path.join(root,'executable'),0o755);
+  fs.writeFileSync(path.join(root,'literal[1]'),'literal');fs.writeFileSync(path.join(root,'literal1'),'different');
+  fs.symlinkSync('dir/ordinary',path.join(root,'link'));git('add','.');git('commit','-qm','Tree fixture');
+  const head=git('rev-parse','HEAD').toString().trim();
+  git('update-index','--add','--cacheinfo',`160000,${head},submodule`);git('commit','-qm','Gitlink fixture');
+  const version=git('rev-parse','HEAD').toString().trim(),reader=new ImmutableReader(root,version);
+  const calls=[],original=reader.git.bind(reader);reader.git=(...args)=>{calls.push(args);return original(...args);};
+  return {root,git,version,reader,calls};
+}
+
+test('one complete Git tree serves literal files, modes, directories, gitlinks and absences',t=>{
+  const f=treeFixture(t);
+  for(const name of ['dir/ordinary','dir','executable','link','submodule','missing','dir/missing','literal[1]']) {
+    const expected=f.git('--literal-pathspecs','ls-tree','-z',f.version,'--',name).toString();
+    assert.equal(f.reader.treeRoute(name),expected);
+    assert.equal(f.reader.treeRoute(name),expected);
+  }
+  assert.equal(f.calls.length,1);assert.deepEqual(f.calls[0],['ls-tree','-rtz','--full-tree',f.version]);
+  assert.equal(f.reader.inventory.size,0,'Route metadata is not consumed-body custody');
+});
+
+test('fresh readers and changed exact commits obtain their own complete tree',t=>{
+  const f=treeFixture(t),old=f.reader.treeRoute('dir/ordinary');
+  fs.writeFileSync(path.join(f.root,'dir','ordinary'),'two');f.git('add','.');f.git('commit','-qm','Changed tree');
+  const next=f.git('rev-parse','HEAD').toString().trim();
+  assert.notEqual(f.reader.treeRoute('dir/ordinary',next),old);
+  assert.equal(f.reader.treeRoute('dir/ordinary',f.version),old);assert.equal(f.calls.length,2);
+  const fresh=new ImmutableReader(f.root,f.version);let calls=0;const git=fresh.git.bind(fresh);
+  fresh.git=(...args)=>{calls++;return git(...args);};assert.equal(fresh.treeRoute('dir/ordinary'),old);assert.equal(calls,1);
+  assert.throws(()=>f.reader.treeRoute('dir/ordinary','HEAD'),/Unsafe immutable/);
+  assert.throws(()=>f.reader.treeRoute('../outside'),/Unsafe immutable/);
+});
+
+test('complete tree command failure and truncated or malformed output never establish absence',t=>{
+  const f=treeFixture(t),failure=new ImmutableReader(f.root,'0'.repeat(40));
+  assert.throws(()=>failure.treeRoute('missing'),/Command failed/);
+  for(const output of ['100644 blob '+'a'.repeat(40)+'\tfile','bad\0',
+    ('100644 blob '+'a'.repeat(40)+'\tfile\0').repeat(2)]) {
+    const reader=new ImmutableReader(f.root,f.version);reader.git=()=>Buffer.from(output);
+    assert.throws(()=>reader.treeRoute('missing'),/Incomplete immutable tree output|Invalid immutable tree entry/);
+    reader.git=(...args)=>f.git(...args);assert.equal(reader.treeRoute('missing'),'');
+  }
 });

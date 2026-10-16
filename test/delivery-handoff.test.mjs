@@ -989,7 +989,7 @@ test('late modern composition refuses scope, source-contract, patch and occupied
   for (const [change, pattern] of [
     [s => { s.component_id = 'held:fixture'; }, /Foreign or duplicate/],
     [s => { s.row.native_cells = 3; }, /Native component cell count/],
-    [s => { s.native.rows[0].runs[0][2] = 2; }, /ledger intervals differ/],
+    [s => { s.native.rows[0].runs[0][2] = 2; }, /source target\/owner\/receipt/],
     [s => { s.row.pixelIndex = 2; s.row.native_rows[0].runs[0][2] = 2; s.native.rows[0].runs[0][2] = 2; }, /source target\/owner\/receipt/],
     [s => { s.native.rows[0].y = 2; s.row.native_rows[0].y = 2; }, /overlap/],
     [s => { s.source.base_reference.id = 'geography:wrong'; }, /baseline\/contract/],
@@ -997,7 +997,7 @@ test('late modern composition refuses scope, source-contract, patch and occupied
     [s => { s.source.targets.push({...s.source.targets[0], id: 'source:B', source_family: 'foreign'}); }, /target\/family\/receipt/],
     [s => { const correct = {...s.source.targets[0], id: 'source:B'}; s.source.targets[0].source_receipt_sha256 = 'f'.repeat(64);
       s.source.targets.push(correct); }, /target\/family\/receipt/],
-    [s => { s.native.rows = []; }, /ledger intervals differ/],
+    [s => { s.native.rows = []; }, /source target\/owner\/receipt/],
     [s => { s.row.native_rows[0].runs[0][0] = -1; }, /native-only|native-cell|interval|primitive identity/i],
   ]) {
     const config = f.makeAppend(change), destination = '.cache/delivery-handoff/refused-compose-' + ordinal++;
@@ -1119,7 +1119,7 @@ test('multiple modern originals reject mixed/empty groups, duplicate authorities
     [s => { s.source.native_contract.method = 'wrong'; }, /baseline\/contract/],
     [s => { s.source.base_reference.id = 'geography:wrong'; }, /baseline\/contract/],
     [s => { s.row.source_receipt_sha256 = '0'.repeat(64); }, /source target\/owner\/receipt/],
-    [s => { s.native.rows[0].runs[0][2] = 2; }, /ledger intervals differ/],
+    [s => { s.native.rows[0].runs[0][2] = 2; }, /source target\/owner\/receipt/],
   ]) {
     const next = f.makeAppend(s => { secondModernDelta(s); change(s); }, f.owned + 'bad-' + ordinal + '/');
     refusal(modernGroups(f.config, [f.config, next]), pattern);

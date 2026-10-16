@@ -5,15 +5,10 @@ import path from 'node:path';
 import {spawnSync, execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
-import {integrationTestFiles} from '../scripts/run-integration-tests.mjs';
 import {integrationProfile} from '../scripts/integration-profile.mjs';
 import {checkoutExecutionClosure} from '../coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/artifact-checkout-execution.mjs';
 
 const repo=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
-// Routing controls check roster eligibility separately; this fixture exercises
-// the actual entry without duplicating its selected inventory.
-const focused=integrationTestFiles('evidence',0).map(file=>path.basename(file,'.test.mjs'));
-const helper='scripts/canonical-restoration.mjs';
 
 test('actual checkout authority covers current code independently of authenticated historical provenance',()=>{
   const closure=checkoutExecutionClosure(repo);
@@ -47,7 +42,7 @@ test('actual checkout authority refuses concatenated relative imports and missin
   assert.throws(()=>checkoutExecutionClosure(root),{code:'ENOENT'});
 });
 
-function selectedWorkflowCommand() {
+function workflowCommand() {
   const step='Test applicable combined-tree invariants without publishing or live imports';
   const yaml=fs.readFileSync(path.join(repo,'.github/workflows/worker-merge.yml'),'utf8');
   const start=yaml.indexOf(`      - name: ${step}\n`);assert(start>=0);
@@ -55,8 +50,9 @@ function selectedWorkflowCommand() {
   return command.trimEnd().split('\n').map(line=>line.slice(10)).join('\n');
 }
 
-function fixture(t,{full=false,helperBody,selectedHelperBody,omitSelectedHelper=false,skip=false,selected=false,smokeBody}={}) {
-  // This is a tiny actual runner boundary fixture, not a scientific restoration.
+function fixture(t,{selected=false,smokeBody,fail=false}={}) {
+  // One marker exercises runner dispatch. Real inventory, skip and process-lifecycle
+  // behavior are covered by full-regression-shards and integration-streaming.
   const sources=['src/native-grid.js','scripts/run-integration-tests.mjs','scripts/integration-profile.mjs','scripts/check-handoff-scope.mjs','scripts/package-inputs.mjs','scripts/compile-hosted-migrations.mjs','scripts/ci-setup-observations.mjs'];
   const bodies=sources.map(name=>{
     const p=path.join(repo,name),s=fs.lstatSync(p);
@@ -69,14 +65,13 @@ function fixture(t,{full=false,helperBody,selectedHelperBody,omitSelectedHelper=
   function write(name,body) {const p=path.join(root,name);fs.mkdirSync(path.dirname(p),{recursive:true});fs.writeFileSync(p,body,{flag:'wx'});}
   write('package.json','{"type":"module"}\n');
   sources.forEach((name,i)=>write(name,bodies[i]));
-  const names=selected?[...focused,'compact-ownership','canonical-compact-repack','prepared-parity']:full?['probe']:focused;
+  const names=selected?['integration-fixture','compact-ownership']:['integration-fixture'];
   for(const name of names)write(`test/${name}.test.mjs`,
     `import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';
-test('actual selected test',${skip?'{skip:true},':''}()=>{
-  assert.equal(fs.existsSync('restored-fixture.json'),false);
+test('actual runner marker',()=>{
+  assert.equal(${fail},false);
   fs.writeFileSync('tests-reached-'+${JSON.stringify(name)},'reached',{flag:'wx'});
 });\n`);
-  if(helperBody!==undefined)write(helper,helperBody);
   const expectations='coordination/engineering/fixture/selected-delivery-expectations.json';
   if(selected){
     const pin=(name,value)=>{const bytes=Buffer.from(JSON.stringify(value));write(name,bytes);return {path:name,bytes:bytes.length,sha256:createHash('sha256').update(bytes).digest('hex')};};
@@ -93,72 +88,48 @@ export async function runSelectedDeliverySmoke({root,expectationsPath,emittedDir
   fs.writeFileSync(outputPath,'{"fixture_only":true}',{flag:'wx'});return {fixture_only:true};
 }`);
   }
-  return {root,expectations,run(profile=full?'full':'evidence',shard='0',workflow='queue') {
-    const env={...process.env,INTEGRATION_PROFILE:profile,INTEGRATION_SHARD:shard,...(selected?{INTEGRATION_TEST_SELECTION:'selected-data',SELECTED_EXPECTATIONS_PATH:expectations}:{})};
+  return {root,expectations,run(profile=selected?'full':'evidence',shard='0') {
+    const env={...process.env,INTEGRATION_PROFILE:profile,INTEGRATION_SHARD:shard,INTEGRATION_TEST_SELECTION:selected?'selected-data':'complete',...(selected?{SELECTED_EXPECTATIONS_PATH:expectations}:{})};
     // Match a plain CLI launch, rather than inheriting node:test's recursion tag.
     delete env.NODE_TEST_CONTEXT;
-    return spawnSync(selected?'bash':process.execPath,selected?['-e','-o','pipefail','-c',selectedWorkflowCommand(workflow)]:['scripts/run-integration-tests.mjs'],{
+    return spawnSync('bash',['-e','-o','pipefail','-c',workflowCommand()],{
       cwd:root,encoding:'utf8',timeout:30000,maxBuffer:1024*1024,
       env
     });
   }};
 }
 
-test('real evidence entry runs every selected test with no canonical namespace',t=>{
-  const f=fixture(t),r=f.run();assert.equal(r.status,0,r.stderr);assert.match(r.stdout,/# skipped 0/);
-  assert.ok(!fs.existsSync(path.join(f.root,'coordination')));
-  assert.equal(fs.readdirSync(f.root).filter(n=>n.startsWith('tests-reached-')).length,focused.length);
-  assert.ok(!r.stdout.includes('canonical_checkout'));
-});
-test('real evidence entry discovers the remaining focused controls after a test is removed',t=>{
-  const f=fixture(t);
-  fs.unlinkSync(path.join(f.root,'test/native-diagnostic-entry.test.mjs'));
-  const r=f.run();assert.equal(r.status,0,r.stderr);
-  assert.equal(fs.readdirSync(f.root).filter(n=>n.startsWith('tests-reached-')).length,focused.length-1);
-});
-test('real full entry consumes current inputs without a historical restoration helper',t=>{
-  const f=fixture(t,{full:true}),r=f.run();assert.equal(r.status,0,r.stderr);
-  assert.match(r.stdout,/# skipped 0/);assert.ok(fs.existsSync(path.join(f.root,'tests-reached-probe')));
-  assert(!r.stdout.includes('canonical_checkout'));assert(!r.stdout.includes('selected_model_reader_checkout'));
-});
-test('real evidence entry follows a successful Node exit with intentional skips',t=>{
-  const f=fixture(t,{skip:true}),r=f.run();assert.equal(r.status,0,r.stderr);
-  assert.match(r.stdout,new RegExp('# skipped '+focused.length+'(?:\\n|$)'));
-});
-test('invalid profile rejects before either restoration or tests',t=>{
-  const f=fixture(t),r=f.run('invalid');assert.notEqual(r.status,0);
-  assert.match(r.stderr,/Invalid trusted integration test profile/);
-  assert.ok(!fs.readdirSync(f.root).some(n=>n.startsWith('tests-reached-')));
+test('actual queue shell runs tests and propagates failure in both live profiles',t=>{
+  for(const profile of ['evidence','full'])for(const fail of [false,true]){
+    const f=fixture(t,{fail}),result=f.run(profile);
+    assert.equal(result.status,fail?1:0,result.stderr);
+    assert.equal(fs.existsSync(path.join(f.root,'tests-reached-integration-fixture')),!fail);
+  }
+  const invalid=fixture(t),result=invalid.run('invalid');
+  assert.notEqual(result.status,0);
+  assert(!fs.existsSync(path.join(invalid.root,'tests-reached-integration-fixture')));
 });
 
-const restored=`import fs from 'node:fs';export function prepareCanonicalCheckout(){fs.writeFileSync('restored-fixture.json','{}',{flag:'wx'});return {fixture_only:true};}`;
-test('actual queue selected command runs current smoke without unit tests, restoration or historical readback receipt',t=>{
-  const f=fixture(t,{selected:true}),r=f.run('full');
-  assert.equal(r.status,0,r.stderr);
-  assert(fs.existsSync(path.join(f.root,'.cache/selected-delivery-smoke.json')));
-  assert(!fs.existsSync(path.join(f.root,'.cache/native-normal-built-output.json')));
-  assert(!fs.readdirSync(f.root).some(n=>n.startsWith('tests-reached-')));
-  assert(!r.stdout.includes('canonical_checkout'));
-  assert(!r.stdout.includes('selected_model_reader_checkout'));
-});
-for(const missing of ['dist/client/atlas-geography.json','scripts/selected-delivery-smoke.mjs','coordination/engineering/fixture/selected-delivery-expectations.json'])
- test('real selected-data entry refuses missing actual '+missing+' before tests',t=>{
-  const f=fixture(t,{full:true,selected:true,helperBody:restored});fs.unlinkSync(path.join(f.root,missing));const r=f.run();
-  assert.notEqual(r.status,0);assert(!fs.readdirSync(f.root).some(n=>n.startsWith('tests-reached-')));
-});
-test('real selected-data entry propagates actual smoke failure',t=>{
-  const f=fixture(t,{selected:true,smokeBody:"export async function runSelectedDeliverySmoke(){throw Error('actual smoke refused');}"}),r=f.run();
-  assert.notEqual(r.status,0);assert.match(r.stderr,/actual smoke refused/);
+test('actual selected queue shell runs smoke and propagates its failure without unit regression',t=>{
+  for(const fail of [false,true]){
+    const f=fixture(t,fail?{selected:true,smokeBody:"export async function runSelectedDeliverySmoke(){throw Error('actual smoke refused');}"}:{selected:true});
+    const result=f.run();
+    assert.equal(result.status,fail?1:0,result.stderr);
+    assert.equal(fs.existsSync(path.join(f.root,'.cache/selected-delivery-smoke.json')),!fail);
+    assert(!fs.readdirSync(f.root).some(name=>name.startsWith('tests-reached-')));
+  }
 });
 
-test('ordinary selected data cannot accidentally invoke unit regression or restore context',t=>{
-  const f=fixture(t,{selected:true}),result=spawnSync(process.execPath,['scripts/run-integration-tests.mjs'],{
-    cwd:f.root,env:{...process.env,INTEGRATION_PROFILE:'full',INTEGRATION_SHARD:'0',INTEGRATION_TEST_SELECTION:'selected-data'},encoding:'utf8'});
-  assert.notEqual(result.status,0);assert.match(result.stderr,/Invalid trusted test selection/);
-  assert(!fs.readdirSync(f.root).some(n=>n.startsWith('tests-reached-')));
+test('selected queue shell refuses missing consumed inputs',t=>{
+  for(const missing of ['dist/client/atlas-geography.json','scripts/selected-delivery-smoke.mjs',
+    'coordination/engineering/fixture/selected-delivery-expectations.json']){
+    const f=fixture(t,{selected:true});fs.unlinkSync(path.join(f.root,missing));
+    assert.notEqual(f.run().status,0,missing);
+    assert(!fs.readdirSync(f.root).some(name=>name.startsWith('tests-reached-')));
+  }
 });
 
-test('actual assembled queue command runs current smoke and requires the same-head trusted receipt without restoration',t=>{
+test('actual assembled queue shell runs smoke and rejects a changed trusted receipt',t=>{
   for(const altered of [false,true]){
     const f=fixture(t,{selected:true});
     const git=(...args)=>execFileSync('git',['-C',f.root,...args],{encoding:'utf8'}).trim();
@@ -171,38 +142,12 @@ test('actual assembled queue command runs current smoke and requires the same-he
     const env={...process.env,INTEGRATION_PROFILE:'full',INTEGRATION_SHARD:'0',INTEGRATION_TEST_SELECTION:'selected-output',
       SELECTED_EXPECTATIONS_PATH:f.expectations,SELECTED_PACKAGE_ASSEMBLY_SHA256:createHash('sha256').update(receipt).digest('hex')};
     delete env.NODE_TEST_CONTEXT;
-    const result=spawnSync('bash',['-e','-o','pipefail','-c',selectedWorkflowCommand()],{cwd:f.root,env,encoding:'utf8',timeout:30000});
+    const result=spawnSync('bash',['-e','-o','pipefail','-c',workflowCommand()],{cwd:f.root,env,encoding:'utf8',timeout:30000});
     assert.equal(result.status,altered?1:0,result.stderr);
-    if(altered)assert.match(result.stderr,/receipt digest differs/);
-    else assert.match(result.stdout,/package_assembly/);
+    assert.equal(result.stdout.includes('package_assembly'),!altered);
     assert(fs.existsSync(path.join(f.root,'.cache/selected-delivery-smoke.json')));
-    assert(!fs.existsSync(path.join(f.root,'.cache/native-normal-built-output.json')));
     assert(!fs.readdirSync(f.root).some(n=>n.startsWith('tests-reached-')));
-    assert(!result.stdout.includes('canonical_checkout'));
   }
-});
-
-
-test('actual retained-output runner executes current tests without any model restoration helper',t=>{
-  const f=fixture(t,{selected:true});
-  const git=(...args)=>execFileSync('git',['-C',f.root,...args],{encoding:'utf8'}).trim();
-  git('init','-q');git('add','.');git('-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-qm','fixture');
-  const head=git('rev-parse','HEAD');
-  const receipt=JSON.stringify({kind:'cloudflare',preflight:{inputs:{head}},assembly:{
-    kind:'retained-original-output-plus-current-additive',current_execution:{source_commit:head},
-    base_restoration_invoked:false,invariant_build_invoked:false,
-    origin:{run_id:17}}});
-  fs.writeFileSync(path.join(f.root,'.cache/package-input-build.json'),receipt);
-  const env={...process.env,INTEGRATION_PROFILE:'full',INTEGRATION_SHARD:'0',INTEGRATION_TEST_SELECTION:'selected-output',
-    SELECTED_PACKAGE_ASSEMBLY_SHA256:createHash('sha256').update(receipt).digest('hex')};
-  delete env.NODE_TEST_CONTEXT;
-  const result=spawnSync(process.execPath,['scripts/run-integration-tests.mjs'],{cwd:f.root,env,encoding:'utf8',timeout:30000});
-  assert.equal(result.status,0,result.stderr);assert.match(result.stdout,/# skipped 0/);
-  assert.equal(fs.readdirSync(f.root).filter(name=>name.startsWith('tests-reached-')).length,1);
-  assert(fs.existsSync(path.join(f.root,'tests-reached-compact-ownership')));
-  assert(!fs.existsSync(path.join(f.root,'tests-reached-canonical-compact-repack')));
-  assert(!fs.existsSync(path.join(f.root,'tests-reached-prepared-parity')));
-  assert(!result.stdout.includes('selected_model_reader_checkout'));assert(!result.stdout.includes('canonical_checkout'));
 });
 
 
@@ -215,11 +160,9 @@ test('focused routing cannot accept a deleted helper imported by the retained re
   assert(!fs.readdirSync(f.root).some(name=>name.startsWith('tests-reached-')));
 });
 
-test('deleting an isolated retired workflow needs only the remaining focused consumers',t=>{
+test('deleted workflow routing retains full fallback for actual runtime inputs',()=>{
   const filename='.github/workflows/retired-isolated-stage.yml';
   assert.equal(integrationProfile('engineering/retired-stage',[{filename,status:'removed'}],{},new Map()),'evidence');
-  const f=fixture(t),result=f.run();assert.equal(result.status,0,result.stderr);
-  assert.equal(fs.readdirSync(f.root).filter(name=>name.startsWith('tests-reached-')).length,focused.length);
   for(const filename of ['scripts/build-static-inner.mjs','src/native-grid.js','hosted/geographic-releases.js'])
     assert.equal(integrationProfile('engineering/retired-stage',[{filename,status:'removed'}],{},new Map()),'full');
 });

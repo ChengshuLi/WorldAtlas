@@ -6,6 +6,7 @@ import path from 'node:path';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {createAcquisition, prefetchSelectedGeography, githubTree} from '../scripts/geography-prefetch.mjs';
+import {createRoutingMetadataAcquisition} from '../scripts/geography-routing-metadata.mjs';
 
 const digest = b => createHash('sha256').update(b).digest('hex');
 const bytes = value => Buffer.from(typeof value === 'string' ? value : JSON.stringify(value));
@@ -321,4 +322,27 @@ except RuntimeError as error: assert 'Cannot terminate owned' in str(error)
 else: raise AssertionError('checker resumed after unconfirmed cleanup')
 `;
   execFileSync('python', ['-B', '-c', code], {stdio: ['ignore', 'pipe', 'pipe']});
+});
+
+
+test('cold routing acquisition admits a whole larger object and complete tree metadata without policy ceilings', async () => {
+  const f = fixture(); try {
+    const raw = 'x'.repeat(33 * 1024 * 1024), head = f.commit({'routing.json': raw}); f.importMetadata();
+    const metadata = f.maps.get(head), row = metadata.tree[0];
+    const pin = {commit: head, path: row.path, mode: row.mode, git_blob_oid: row.sha};
+    const options = {repo: f.destination, baseline: head, execute: f.execute, token: 'fixture-secret'};
+    const a = createRoutingMetadataAcquisition({...options, loadTree: async root => {
+      assert.equal(root, metadata.sha); return {...metadata, note: 'x'.repeat(65 * 1024 * 1024)};
+    }});
+    await a.acquire(pin, {bytes: row.size, sha256: digest(raw)});
+    assert.equal(a.summary().verified_import_bytes, row.size); assert.equal(a.summary().fetch_batches, 1);
+    assert(a.summary().tree_metadata_bytes > 64 * 1024 * 1024);
+    await assert.rejects(a.acquire(pin, {bytes: row.size, sha256: '0'.repeat(64)}), /declared hash/);
+    for (const alter of [m => ({...m, truncated: true}), m => ({...m, sha: head}),
+      m => ({...m, tree: [...m.tree, m.tree[0]]}),
+      m => ({...m, tree: m.tree.map(r => ({...r, size: r.size + 1}))})]) {
+      const bad = createRoutingMetadataAcquisition({...options, loadTree: async () => alter(metadata)});
+      await assert.rejects(bad.acquire(pin, {bytes: row.size, sha256: digest(raw)}), /tree-response|differs from tree/);
+    }
+  } finally { f.close(); }
 });

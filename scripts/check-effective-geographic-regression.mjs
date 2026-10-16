@@ -92,6 +92,7 @@ const NS='coordination/engineering/eastern-two-gap-repair-native-20261007/canoni
 const STOCK_INDEX='b82b195d94530d9b1f48153f7e47616f8b841cb1438ddf59994ba4869a1d7876';
 
 export class ImmutableReader {
+  #trees = new Map();
   constructor(repo,version,{gitExecutable='git',invocation}={}) {
     demand(commit(version),'Require immutable input commit');
     this.repo=repo;this.version=version;this.gitExecutable=gitExecutable;
@@ -105,15 +106,33 @@ export class ImmutableReader {
     }
     return execFileSync(this.gitExecutable,['-c','core.hooksPath=/dev/null','-C',this.repo,...args],options);
   }
+  // Complete immutable tree metadata answers both present and absent routes.
+  // Keep nonordinary entries: a directory or symlink must never look absent.
+  treeRoute(name,version=this.version) {
+    demand(safe(name)&&commit(version),'Unsafe immutable path/commit');
+    let entries=this.#trees.get(version);
+    if(!entries){
+      const output=this.git('ls-tree','-rtz','--full-tree',version).toString();
+      demand(output===''||output.endsWith('\0'),'Incomplete immutable tree output');
+      entries=new Map();
+      for(const row of output.split('\0').slice(0,-1)){
+        const match=/^[0-7]{6} (?:blob|tree|commit) [a-f0-9]{40}\t([\s\S]+)$/.exec(row);
+        demand(match&&!entries.has(match[1]),'Invalid immutable tree entry');
+        entries.set(match[1],row+'\0');
+      }
+      this.#trees.set(version,entries);
+    }
+    return entries.get(name)??'';
+  }
   descriptor(name,version=this.version) {
     demand(safe(name)&&commit(version),'Unsafe immutable path/commit');
+    const key=version+':'+name,previous=this.inventory.get(key);
+    if(previous)return previous;
     const row=this.git('ls-tree','-z',version,'--',name).toString();
     demand(/^100(644|755) blob [a-f0-9]{40}\t/.test(row)&&row.slice(row.indexOf('\t')+1)===name+'\0','Require whole ordinary Git input: '+name);
     const [mode,,blob]=row.slice(0,row.indexOf('\t')).split(' '),bytes=Number(this.git('cat-file','-s',blob));
     demand(Number.isSafeInteger(bytes)&&bytes>=0,'Invalid whole ordinary file size: '+name);
-    const key=version+':'+name,previous=this.inventory.get(key);
     const pin={commit:version,path:name,mode,git_blob_oid:blob,bytes};
-    if(previous){demand(previous.git_blob_oid===blob&&previous.bytes===bytes&&previous.mode===mode,'Immutable descriptor drift');return previous;}
     this.inventory.set(key,pin);return pin;
   }
   read(name,{version=this.version,expected}={}) {

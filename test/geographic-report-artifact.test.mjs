@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {deflateRawSync, crc32} from 'node:zlib';
+import {createHash} from 'node:crypto';
 import {githubAPI} from '../scripts/issue-claim-contract.mjs';
 import {requestAccounting} from '../scripts/github-quota.mjs';
 import {completeIntegration, prepareIntegration} from '../scripts/merge-integration.mjs';
@@ -455,6 +456,8 @@ test('actual fresh software archive binds candidate code without impersonating a
 function queueCompletionFixture(f = freshQueueTransport()) {
   const {repo, head, baseline: base} = f.options, candidate = f.commit.sha;
   const root = `/repos/${repo}`, original = f.loadOptions.api;
+  const packageRaw = Buffer.from(JSON.stringify({version:1, inputs:['.github/package-inputs.json'],
+    optional_inputs:[], verification_paths:[], generated_outputs:[]}));
   const integrationRequestId = 'queue-report-fixture-0001';
   const reference = `worldatlas-integration/pr-2-${integrationRequestId}`;
   f.calls = []; f.writes = []; f.preparationWrites = [];
@@ -470,6 +473,10 @@ function queueCompletionFixture(f = freshQueueTransport()) {
   f.integrated = structuredClone(f.authored); f.baseline = [];
   f.api = async (route, method = 'GET', body) => {
     f.calls.push(route); const name = route.split('?')[0];
+    if (route === root + '/contents/.github/package-inputs.json?ref=' + candidate) return {
+      type:'file', path:'.github/package-inputs.json', encoding:'base64', size:packageRaw.length,
+      sha:createHash('sha1').update(`blob ${packageRaw.length}\0`).update(packageRaw).digest('hex'),
+      content:packageRaw.toString('base64')};
     if (method === 'POST' && name === root + '/git/refs') {
       assert.deepEqual(body, {ref: `refs/heads/${reference}`, sha: base});
       f.preparationWrites.push(name);
@@ -514,6 +521,7 @@ test('authenticated main queue retains candidate identity without recursive fina
   await prepareIntegration(f.mergeOptions());
   assert.deepEqual(f.preparationWrites, [`/repos/${f.options.repo}/git/refs`, `/repos/${f.options.repo}/merges`]);
   assert.equal(f.treeReads().length, 2, 'Preparation still inventories authored and candidate trees');
+  assert(f.calls.includes(`/repos/${f.options.repo}/contents/.github/package-inputs.json?ref=${f.commit.sha}`));
   f.calls.length = 0;
   const result = await f.complete();
   assert.equal(result.accepted, true); assert.equal(f.writes.length, 1);

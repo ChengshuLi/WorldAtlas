@@ -471,7 +471,7 @@ class UnchangedSelectedApplicabilityControls(unittest.TestCase):
                 result = self.g.unchanged_selected_inputs(ROOT, self.baseline, self.candidate)
                 self.assertEqual(result, self.proof if value == self.proof else None)
 
-    def test_helper_failures_and_bounds_preserve_full_validation(self):
+    def test_helper_failures_and_malformed_output_preserve_full_validation(self):
         for output in [subprocess.CompletedProcess([], 1, json.dumps(self.proof).encode(), b''),
                        subprocess.CompletedProcess([], 0, b'x' * (2 * 1024 * 1024 + 1), b''),
                        subprocess.CompletedProcess([], 0, b'{', b'')]:
@@ -480,6 +480,38 @@ class UnchangedSelectedApplicabilityControls(unittest.TestCase):
         for error in [OSError('missing'), subprocess.TimeoutExpired('node', 60)]:
             with self.mock.patch.object(self.g, 'run_applicability_collector', side_effect=error):
                 self.assertIsNone(self.g.unchanged_selected_inputs(ROOT, self.baseline, self.candidate))
+
+    def test_large_complete_applicability_output_retains_its_exact_binding(self):
+        proof = {**self.proof, 'immutable_descriptors': [{'path': 'exact-retained-path', 'note': 'x' * (3 * 1024 * 1024)}]}
+        raw = json.dumps(proof).encode()
+        with self.mock.patch.object(self.g, 'run_applicability_collector', return_value=
+                subprocess.CompletedProcess([], 0, raw, b'')):
+            self.assertEqual(self.g.unchanged_selected_inputs(ROOT, self.baseline, self.candidate), proof)
+        proof['candidate_commit'] = self.baseline
+        with self.mock.patch.object(self.g, 'run_applicability_collector', return_value=
+                subprocess.CompletedProcess([], 0, json.dumps(proof).encode(), b'')):
+            self.assertIsNone(self.g.unchanged_selected_inputs(ROOT, self.baseline, self.candidate))
+
+    def test_large_prefetch_summary_keeps_completion_truth_and_owned_cleanup(self):
+        import io
+        summary = {'complete_scientific_closure': False, 'status': 'scoped-prefetch-completed',
+                   'note': 'x' * (2 * 1024 * 1024)}
+        for status in [0, 1]:
+            child = self.mock.Mock(pid=123456, returncode=status)
+            child.communicate.return_value = (json.dumps(summary).encode(), b'')
+            stream = io.StringIO()
+            with self.mock.patch.object(self.g.subprocess, 'Popen', return_value=child), \
+                 self.mock.patch.object(self.g.os, 'killpg') as kill, \
+                 self.mock.patch.object(self.g.sys, 'stderr', stream):
+                self.g.prefetch_declared_inputs(ROOT, self.baseline, self.candidate)
+            result = json.loads(stream.getvalue())['geography_prefetch']
+            self.assertEqual(result['note'], summary['note'])
+            self.assertFalse(result['complete_scientific_closure'])
+            self.assertEqual(result['status'], 'scoped-prefetch-unavailable' if status else summary['status'])
+            if status:
+                self.assertTrue(result['partial_import_possible'])
+            kill.assert_called_once_with(child.pid, self.g.signal.SIGKILL)
+            self.assertEqual(child.communicate.call_args_list, [self.mock.call(timeout=120), self.mock.call(timeout=5)])
 
     def test_decline_diagnostic_preserves_safe_category_and_operation_only(self):
         import io
