@@ -120,6 +120,26 @@ test('actual selected queue shell runs smoke and propagates its failure without 
   }
 });
 
+test('actual selected queue shell keeps complete smoke details in the existing artifact',t=>{
+  const scalars={version:1,kind:'actual-emitted-selected-consumer',passed:true,feature_count:49625,
+    cumulative_native_cells_picked_and_sampled:1037224,stable_owner_controls:48206,expected_components_verified:1288,
+    selected_ledger_sha256:'a'.repeat(64),selected_patch_sha256:'b'.repeat(64),expectations_sha256:'c'.repeat(64),
+    limitation:'Fixture measurements only',optional:null};
+  const report={...scalars,components:Array.from({length:1288},(_,i)=>({component_id:`component-${i}`,native_rows_sha256:'d'.repeat(64)})),
+    input_inventory:{original:'complete retained input details'}};
+  const bytes=JSON.stringify(report,null,2)+'\n';
+  const f=fixture(t,{selected:true,smokeBody:`import fs from 'node:fs';
+export async function runSelectedDeliverySmoke({outputPath}){
+  fs.writeFileSync(outputPath,${JSON.stringify(bytes)},{flag:'wx'});return ${JSON.stringify(report)};
+}`});
+  const result=f.run();assert.equal(result.status,0,result.stderr);
+  assert.equal(fs.readFileSync(path.join(f.root,'.cache/selected-delivery-smoke.json'),'utf8'),bytes);
+  assert.deepEqual(JSON.parse(result.stdout.trim()),{selected_delivery_smoke:scalars});
+  const yaml=fs.readFileSync(path.join(repo,'.github/workflows/worker-merge.yml'),'utf8');
+  assert.match(yaml,/name: selected-delivery-smoke-\$\{\{ inputs\.request_id \}\}-\$\{\{ github\.run_attempt \}\}/);
+  assert.match(yaml,/path: \.cache\/selected-delivery-smoke\.json/);
+});
+
 test('selected queue shell refuses missing consumed inputs',t=>{
   for(const missing of ['dist/client/atlas-geography.json','scripts/selected-delivery-smoke.mjs',
     'coordination/engineering/fixture/selected-delivery-expectations.json']){
