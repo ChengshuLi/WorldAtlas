@@ -8,10 +8,9 @@ import {createHash} from 'node:crypto';
 import {createPackageOutputManifest, snapshotPackageOutputSource, inventoryPackageOutput, validatePackageOutputManifest,
   verifyPackageOutput, streamedPackageFile, installedPackageIdentity, admitPackageInputTransition, admitPackageOutputTransition, committedPackageInputs, committedPackageProducer, packageWorkflowExecution} from '../scripts/package-output-artifact.mjs';
 
-import {compareSelectedPackageOutput,compareSelectedPackageReadback,normalizeDeclarationReadAccounting} from '../scripts/compare-selected-package-output.mjs';
 
 const hash = raw => createHash('sha256').update(raw).digest('hex');
-function fixture(t) {
+function fixture(t,{author=true}={}) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'atlas-package-output-'));
   t.after(() => fs.rmSync(root, {recursive: true, force: true}));
   const write = (name, value) => { fs.mkdirSync(path.dirname(path.join(root, name)), {recursive: true});
@@ -22,7 +21,7 @@ function fixture(t) {
   write('package-lock.json', {lockfileVersion: 3});
   write('scripts/package-output-artifact.mjs','synthetic capture writer');
   write('scripts/package-node-runtime.mjs','synthetic runtime inventory');
-  write('.github/workflows/merge-integration-checks.yml', 'genuine package build and immediate capture');
+  if(author)write('.github/workflows/merge-integration-checks.yml', 'genuine package build and immediate capture');
   write('.github/workflows/worker-merge.yml','genuine final-worker package producer');
   write('node_modules/example/index.js','original dependency body');
   const git = (...args) => execFileSync('git', ['-C', root, ...args], {encoding: 'utf8'}).trim();
@@ -42,6 +41,53 @@ test('retains complete actual Cloudflare output and original input identity', t 
   assert.equal(manifest.source.files.length, 5); assert.equal(manifest.output.files.length, 4);
   assert.equal(verifyPackageOutput(root, manifest), true);
   assert.match(manifest.semantics, /Original full/);
+});
+
+test('queue-only captures bind their actual producer and cannot adopt historical two-workflow identity',t=>{
+  const current=fixture(t,{author:false}), historical=fixture(t);
+  const manifest=createPackageOutputManifest(current.root);
+  assert.deepEqual(manifest.source.producer.workflows.map(row=>row.path),['.github/workflows/worker-merge.yml']);
+  assert.equal(validatePackageOutputManifest(manifest),manifest);
+  assert.equal(verifyPackageOutput(current.root,manifest),true);
+  const before=createPackageOutputManifest(historical.root).source;
+  before.selection={additive_release:{path:'coordination/engineering/old/release.json'}};
+  const after={...structuredClone(before),producer:manifest.source.producer};
+  assert.throws(()=>admitPackageInputTransition(before,after),/unchanged producer workflow/);
+  for(const workflows of [[],[before.producer.workflows[0]],
+    [{...manifest.source.producer.workflows[0],path:'.github/workflows/foreign.yml'}],
+    [{...manifest.source.producer.workflows[0],mode:'120000'}],
+    [{...manifest.source.producer.workflows[0],oid:'invalid'}],
+    [manifest.source.producer.workflows[0],manifest.source.producer.workflows[0]]]) {
+    const changed=structuredClone(manifest);changed.source.producer.workflows=workflows;
+    assert.throws(()=>validatePackageOutputManifest(changed),/producer identity/);
+  }
+  current.git('rm','.github/workflows/worker-merge.yml');
+  current.git('-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-qm','remove queue');
+  assert.throws(()=>committedPackageProducer(current.root),/Complete package producer workflows/);
+});
+
+test('read-only output custody does not execute or upgrade original scientific runtime evidence', async t => {
+  const f=fixture(t),manifest=createPackageOutputManifest(f.root);
+  // Output custody keeps these authenticated original bytes opaque. They cannot
+  // establish an installed-Python claim when a caller actually asks to use one.
+  manifest.runtime.installed.python={historical_evidence:'not current execution'};
+  const {validateInstalledPackageIdentity}=await import('../scripts/package-output-artifact.mjs');
+  const previous=process.env.PATH;
+  try {
+    process.env.PATH='';
+    assert.equal(validatePackageOutputManifest(manifest),manifest);
+    assert.equal(verifyPackageOutput(f.root,manifest),true);
+    assert.throws(()=>validateInstalledPackageIdentity(manifest.runtime.installed),/Python installed identity failed/);
+    const changed=structuredClone(manifest);delete changed.runtime.installed.dependencies.inventory;
+    assert.throws(()=>validatePackageOutputManifest(changed),'Executing Node inventory remains mandatory');
+  } finally {if(previous===undefined)delete process.env.PATH;else process.env.PATH=previous;}
+});
+
+test('minting original full output still validates the complete scientific installed identity',t=>{
+  const f=fixture(t),source=JSON.parse(fs.readFileSync(path.join(f.root,'.cache/package-output-source.json')));
+  source.installed_runtime.python={historical_evidence:'cannot mint a current runtime claim'};
+  f.write('.cache/package-output-source.json',source);
+  assert.throws(()=>createPackageOutputManifest(f.root),/Python installed identity failed/);
 });
 
 test('missing, extra, truncated and same-size substituted output cannot pass custody', t => {
@@ -252,117 +298,6 @@ test('installed identity detects dependency body substitution under unchanged lo
 });
 
 
-for(const retainedCode of [false,true])test('changed-declaration full/readback comparison authenticates '+(retainedCode?'retained typed code':'inert data')+' and the actual current delta',t=>{
-  const source=fixture(t),full=fixture(t),assembled=fixture(t);
-  const declaration='.github/package-inputs.json',added=retainedCode?'scripts/accepted-source.py':'coordination/engineering/next/selected.json';
-  const definition=JSON.parse(fs.readFileSync(path.join(source.root,declaration)));
-  const commit=()=>source.git('-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-qm','selection');
-  source.write('data/ownership-selection.json',{version:1,additive_release:{state:'original'}});
-  source.git('add','data/ownership-selection.json');commit();
-  const originalHead=source.git('rev-parse','HEAD');
-  const descriptor=head=>{
-    const raw=execFileSync('git',['-C',source.root,'show',head+':'+declaration]);
-    return {path:declaration,mode:'100644',bytes:raw.length,sha256:hash(raw),
-      git_blob:createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex')};
-  };
-  const atlas=(head,pin)=>({nativeContextInputStage:{current_execution:{source_head:head,
-    runtime:{sha256:'c'.repeat(64)},full_code_closure:[pin,{path:'scripts/invariant.mjs',sha256:'d'.repeat(64)}]},
-    consumed_input_bytes:{encoded:42+pin.bytes,decoded:80}},additiveRelease:{ledger:'current'}});
-  source.write('.cache/package-input-build.json',{version:1,kind:'cloudflare',input_definition_sha256:descriptor(originalHead).sha256,
-    preflight:{passed:true,errors:[],inputs:{head:originalHead}}});
-  source.write('.cache/package-output-source.json',snapshotPackageOutputSource(source.root));
-  const manifest=createPackageOutputManifest(source.root),originalManifest=path.join(source.root,'.cache/original.json');
-  source.write('.cache/original.json',manifest);const manifestSha=hash(fs.readFileSync(originalManifest));
-  let trustedBase,acceptedInputs;
-  if(retainedCode){
-    source.write(added,'accepted source code');source.git('add',added);commit();trustedBase=source.git('rev-parse','HEAD');
-    acceptedInputs={commit:trustedBase,files:[{path:added,mode:'100644',oid:source.git('rev-parse','HEAD:'+added),bytes:fs.statSync(path.join(source.root,added)).size}]};
-  }
-  source.write(declaration,{...definition,inputs:[...definition.inputs,added]});if(!retainedCode)source.write(added,{selected:true});
-  source.write('data/ownership-selection.json',{version:1,additive_release:{state:'current'}});
-  source.git('add',declaration,added,'data/ownership-selection.json');commit();
-  const currentHead=source.git('rev-parse','HEAD'),current=snapshotPackageOutputSource(source.root);
-  const pin={commit:currentHead,path:added,mode:'100644',git_blob_oid:source.git('rev-parse','HEAD:'+added),
-    bytes:fs.statSync(path.join(source.root,added)).size,sha256:hash(fs.readFileSync(path.join(source.root,added))),whole_body_consumed:true};
-  const receipt={version:1,kind:'cloudflare',input_definition_sha256:descriptor(currentHead).sha256,
-    preflight:{passed:true,errors:[],inputs:{head:currentHead}},assembly:{kind:'retained-original-output-plus-current-additive',
-      origin:{head:originalHead},original_manifest_sha256:manifestSha,
-      current_execution:{source_commit:currentHead,source_tree:current.tree},
-      original_base_context_retained:true,base_restoration_invoked:false,invariant_build_invoked:false,
-      transition:admitPackageOutputTransition(manifest,current,{acceptedInputs,typedInputs:[pin]}),current_selected_inputs:[pin]}};
-  const originalAtlas=atlas(originalHead,descriptor(originalHead)),currentAtlas=atlas(currentHead,descriptor(currentHead));
-  const reset=()=>{full.write('dist/client/atlas-geography.json',currentAtlas);
-    assembled.write('dist/client/atlas-geography.json',originalAtlas);assembled.write('.cache/package-input-build.json',receipt);};
-  const args={full:full.root,assembled:assembled.root,originalHead,currentHead,sourceRoot:source.root,originalManifest,trustedBase};
-  reset();assert.equal(compareSelectedPackageOutput(args).exact_byte_files,3);
-  if(retainedCode){
-    assert.throws(()=>compareSelectedPackageOutput({...args,trustedBase:undefined}),/Exact trusted comparison base/);
-    assert.throws(()=>compareSelectedPackageOutput({...args,trustedBase:originalHead}),/Ordinary unchanged trusted comparison input/);
-    const forged=structuredClone(receipt);forged.assembly.transition.accepted_selected_inputs.commit=currentHead;
-    assembled.write('.cache/package-input-build.json',forged);
-    assert.throws(()=>compareSelectedPackageOutput(args),/Assembly delta transition differs/);reset();
-  }
-  const fullInventory=inventoryPackageOutput(full.root).files;
-  const client=fullInventory.filter(row=>row.path.startsWith('dist/client/')).map(row=>({...row,path:row.path.slice('dist/client/'.length)}));
-  const readback={version:1,kind:'ordinary-cloudflare-built-output-readback',head:currentHead,
-    static_assets:{files:client,count:client.length,bytes:client.reduce((sum,row)=>sum+row.bytes,0)},
-    worker_bundle_files:fullInventory.filter(row=>row.path.startsWith('dist/cloudflare/')).map(row=>({...row,path:row.path.slice('dist/cloudflare/'.length)})),
-    nativeContextInputStage:structuredClone(currentAtlas.nativeContextInputStage)};
-  assert.equal(compareSelectedPackageReadback({...args,readback}).atlas_exact_after_authenticated_provenance,true);
-  if(retainedCode)assert.throws(()=>compareSelectedPackageReadback({...args,readback,trustedBase:undefined}),/Exact trusted comparison base/);
-  for(const mutate of [value=>value.head=originalHead,value=>value.static_assets.files.pop(),
-    value=>value.static_assets.files.push(value.static_assets.files[0]),value=>value.static_assets.files[0].sha256='0'.repeat(64),
-    value=>value.worker_bundle_files[0].bytes++,value=>value.nativeContextInputStage.consumed_input_bytes.encoded++,
-    value=>value.nativeContextInputStage.consumed_input_bytes.decoded++,
-    value=>value.static_assets.files[0].path='../escape',value=>value.static_assets.bytes++]){
-    const changed=structuredClone(readback);mutate(changed);assert.throws(()=>compareSelectedPackageReadback({...args,readback:changed}));
-  }
-  const unknownField=structuredClone(originalAtlas);unknownField.unreported_extra_field='must still fail exact full atlas hash';
-  assembled.write('dist/client/atlas-geography.json',unknownField);
-  assert.throws(()=>compareSelectedPackageReadback({...args,readback}),/Complete atlas bytes/);
-  reset();
-
-  for(const mutate of [
-    value=>value.nativeContextInputStage.consumed_input_bytes.encoded++,
-    value=>value.nativeContextInputStage.consumed_input_bytes.decoded++,
-    value=>value.nativeContextInputStage.current_execution.runtime.sha256='e'.repeat(64),
-    value=>value.nativeContextInputStage.current_execution.full_code_closure[1].sha256='e'.repeat(64),
-    value=>value.nativeContextInputStage.current_execution.full_code_closure[0].sha256='e'.repeat(64),
-    value=>value.nativeContextInputStage.current_execution.full_code_closure.shift(),
-    value=>value.nativeContextInputStage.current_execution.full_code_closure.push(value.nativeContextInputStage.current_execution.full_code_closure[0])]){
-    reset();const changed=structuredClone(originalAtlas);mutate(changed);assembled.write('dist/client/atlas-geography.json',changed);
-    assert.throws(()=>compareSelectedPackageOutput(args));
-  }
-  for(const mutate of [value=>value.assembly.original_manifest_sha256='0'.repeat(64),
-    value=>value.assembly.current_selected_inputs[0].git_blob_oid='0'.repeat(40),
-    value=>value.assembly.current_selected_inputs[0].bytes++,
-    value=>value.assembly.current_selected_inputs[0].sha256='0'.repeat(64),
-    value=>value.assembly.current_selected_inputs[0].whole_body_consumed=false,
-    value=>value.assembly.current_selected_inputs=[],value=>value.assembly.transition.added_selected_inputs=[],
-    value=>value.assembly.current_execution.source_tree='0'.repeat(40)]){
-    reset();const changed=structuredClone(receipt);mutate(changed);assembled.write('.cache/package-input-build.json',changed);
-    assert.throws(()=>compareSelectedPackageOutput(args));
-  }
-  reset();const alteredManifest=structuredClone(manifest);
-  alteredManifest.source.definition.inputs.push('coordination/engineering/forged/source.json');
-  source.write('.cache/original.json',alteredManifest);
-  const alteredReceipt=structuredClone(receipt);alteredReceipt.assembly.original_manifest_sha256=hash(fs.readFileSync(originalManifest));
-  assembled.write('.cache/package-input-build.json',alteredReceipt);
-  assert.throws(()=>compareSelectedPackageOutput(args),/immutable Git/);
-  source.write('.cache/original.json',manifest);
-  reset();source.write('.github/workflows/merge-integration-checks.yml','changed build command');source.git('add','.github/workflows/merge-integration-checks.yml');commit();
-  const changedHead=source.git('rev-parse','HEAD'),changedFull=structuredClone(currentAtlas),changedReceipt=structuredClone(receipt);
-  changedFull.nativeContextInputStage.current_execution.source_head=changedHead;
-  changedReceipt.preflight.inputs.head=changedHead;changedReceipt.assembly.current_execution.source_commit=changedHead;
-  changedReceipt.assembly.current_execution.source_tree=source.git('rev-parse','HEAD^{tree}');
-  changedReceipt.assembly.transition.current_head=changedHead;
-  full.write('dist/client/atlas-geography.json',changedFull);assembled.write('.cache/package-input-build.json',changedReceipt);
-  assert.throws(()=>compareSelectedPackageOutput({...args,currentHead:changedHead}),/producer workflow required/);
-  reset();assembled.write('dist/client/assets/a.js','different bytes');
-  assert.throws(()=>compareSelectedPackageOutput(args),/Output bytes differ/);
-});
-
-
 test('original installed input identity is captured before generated consumer caches',t=>{
   const f=fixture(t),before=JSON.parse(fs.readFileSync(path.join(f.root,'.cache/package-output-source.json'))).installed_runtime;
   f.write('node_modules/.vite/deps/generated-cache.js','generated consumer cache');
@@ -385,23 +320,6 @@ test('installed identity admits ordinary scoped and punctuated filenames without
   assert.throws(()=>installedPackageIdentity(f.root),/link escapes/);
 });
 
-
-test('declaration accounting preserves actual observations and every nondeclaration byte', () => {
-  const original={consumed_input_bytes:{encoded:321352440,decoded:192828074}};
-  const current={consumed_input_bytes:{encoded:321356198,decoded:192828074}};
-  const a={bytes:92514},b={bytes:96272};
-  const observed=structuredClone(current),result=normalizeDeclarationReadAccounting(current,original,b,a);
-  assert.deepEqual(current,observed);assert.deepEqual(result.normalized,original);
-  assert.equal(result.accounting.unchanged_other_encoded_bytes,321259926);
-  for (const delta of [-1,1,3758]) {
-    const wrong=structuredClone(current);wrong.consumed_input_bytes.encoded+=delta;
-    assert.throws(()=>normalizeDeclarationReadAccounting(wrong,original,b,a),/Consumed bytes/);
-  }
-  for (const descriptor of [{bytes:0},{bytes:96273},{bytes:96271},{bytes:0.5}])
-    assert.throws(()=>normalizeDeclarationReadAccounting(current,original,descriptor,a));
-  const changedDecoded=structuredClone(current);changedDecoded.consumed_input_bytes.decoded++;
-  assert.notDeepEqual(normalizeDeclarationReadAccounting(changedDecoded,original,b,a).normalized,original);
-});
 
 test('versioned runtime evidence requires complete bound inventories before summary equality',async t=>{
   const {installedPackageDifferences,validateInstalledPackageIdentity}=await import('../scripts/package-output-artifact.mjs');
@@ -445,12 +363,12 @@ test('parent independently binds Python executable before any consumer identity 
   finally{process.env.PATH=before;}
 });
 
-test('assembly admits original custody and installed bytes before scientific imports',()=>{
+test('assembly admits original custody and actual Node bytes before current-product imports',()=>{
   const source=fs.readFileSync(new URL('../scripts/assemble-selected-package.mjs',import.meta.url),'utf8');
-  const custody=source.indexOf('const original=await authenticateOriginalPackageOutput('),identity=source.indexOf('const installed=installedPackageIdentity('),admission=source.indexOf('if(differences.length)recordAndRequireRuntime();'),probe=source.indexOf('const runtime=inspectPackageRuntime(root)');
+  const custody=source.indexOf('const original=await authenticateOriginalPackageOutput('),identity=source.indexOf('const installed={version:2,...installedNodeIdentity(root)'),admission=source.indexOf('if(differences.length)recordAndRequireRuntime();'),probe=source.indexOf('const runtime=inspectPackageNodeRuntime(root)');
   assert.ok(custody>0&&identity>custody&&admission>identity&&probe>admission);
-  assert.match(source,/expectedParser:manifest\.runtime\.installed\.python\.parser/);
-  assert.match(source,/expectedExecutable:manifest\.runtime\.installed\.python\.executable_sha256/);
+  assert.doesNotMatch(source,/declaredPackagePythonRoots|installedPackageIdentity|expectedParser|expectedExecutable/);
+  assert.match(source,/resolvePackagePythonExecutable\(python\.sha256\)/);
   assert.ok(source.indexOf('if(runtime.errors.length)')<source.indexOf('const actualRuntime='));
 });
 

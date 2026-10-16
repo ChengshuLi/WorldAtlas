@@ -999,7 +999,9 @@ export function finalizeDelivery(config, reader) {
     outputs['package-roles.json'] = jsonBytes(projection);
     outputs[path.posix.basename(config.sidecar.path)] = generatedSidecar;
   }
-  const paths = [...new Set(projection.paths.map(p => p.path))];
+  // Keep the complete preparation/custody projection above as evidence. The
+  // current package consumer reads only the sidecar, envelope and four assets.
+  const paths = [...new Set([config.sidecar, sidecar.runtime_envelope, ...Object.values(assets)].map(p => p.path))];
   const baselinePackage = reader.json(config.package_inputs);
   validatePackageInputs(baselinePackage);
   const covered = name => baselinePackage.inputs.some(p => p === name || p.endsWith('/') && name.startsWith(p));

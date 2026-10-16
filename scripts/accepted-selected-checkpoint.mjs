@@ -17,7 +17,7 @@ export const ACCEPTED_CHECKPOINT_CODE = Object.freeze([
   'scripts/accepted-selected-checkpoint.mjs', 'scripts/check-handoff-scope.mjs',
   'scripts/evidence-policy.mjs', 'scripts/evidence-quality.mjs', 'scripts/geographic-report-artifact.mjs',
   'scripts/github-quota.mjs', 'scripts/github-snapshots.mjs', 'scripts/integration-proof.mjs',
-  'scripts/issue-claim-contract.mjs', 'scripts/job-deadline.mjs', 'scripts/research-import-gate.mjs',
+  'scripts/issue-claim-contract.mjs', 'scripts/research-import-gate.mjs',
   'scripts/worker-result.mjs', 'src/regional-import-gate.js'
 ]);
 const need = (ok, message) => { if (!ok) throw Error(message); };

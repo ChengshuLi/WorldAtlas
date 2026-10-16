@@ -254,8 +254,7 @@ Historical author geography/package artifact readers remain available only where
 original provenance and accepted-checkpoint acquisition consume them. Original
 records preserve their actual head, workflow, candidate, attempt and checksum;
 they are never relabeled as current execution. New ordinary package originals
-come from the final queue. Explicit selected-package equivalence proof retains
-its accepted source, successful queue readback and current browser consumers.
+come from the final queue.
 
 Full-profile changes to checker/producer code or its dependencies run the exact
 combined candidate checker, with
@@ -490,9 +489,9 @@ has recovered. The premerge evidence entry point uses the same bounded,
 exact-tree-bound Git blob transport as the merge queue, rather than one REST
 request per evidence file. It still verifies complete bytes and every declared
 binding; mutable issue, claim, PR, tree, ancestry and review authority stay fresh.
-The read-only author authority workflow cancels superseded
-runs for the same PR; main package push observations remain separate. This does
-not cancel merge workflows, claim mutations or publication.
+The final queue is the single automatic PR validation path. It rechecks current
+authority and exact candidate evidence; main package push observations remain
+separate from merge workflows, claim mutations and publication.
 
 Premerge evidence, linked-issue checks, profile selection, deployment classification,
 claims and the existing
@@ -509,8 +508,9 @@ same failure or rerun a long regression simply to retry a refused API operation.
 Wait until the recorded condition can change, then inspect the current canonical
 claim/request/head and retry only the required bounded operation. Permission
 errors and unknown transport outcomes are different; do not guess a reset or
-blindly replay writes. Existing queue capacity and job-deadline safeguards remain
-mandatory; no check or authority is waived by waiting.
+blindly replay writes. GitHub Actions job timeouts and bounded actual HTTP
+attempts remain mandatory; no check or authority is waived by waiting. There is no
+separate current-job metadata admission or authenticated job-clock protocol.
 
 Claim jobs retain `claim-result.json` even when a notification cannot be posted.
 A known quota refusal defers that doomed notification. `mutation_attempted` and
@@ -532,7 +532,7 @@ are finalized, so a fast rejection cannot hide other already-started attempts.
 
 Ordinary delivery performs actual conservation, build/assembly and applicable
 regression on the single final composed candidate. Authenticated retained-output
-assembly still proves its actual original successful producer/readback and all
+assembly still authenticates its actual original successful producer and all
 unchanged output bytes; it does not transfer an author's regression claim.
 
 For unchanged-method selected deliveries, the setup profile remains `full` while
@@ -566,23 +566,30 @@ rendered selections. Reclassifying those old rows takes the full route. Do not d
 assets. Missing or ambiguous expectations retain full regression. Batch labels
 remain reviewed source-side statements, not a new independent source approval.
 
-Selected data runs ownership, scope and evidence checks on the author head, without
-an author geography, regression or package execution. The serialized queue composes
+The automatic author workflow is removed. The serialized queue checks current
+ownership, complete changed paths and evidence directly, then composes
 current main with the reviewed head, then runs one fresh geography conservation pass
 and one actual package assembly or full Cloudflare build on that candidate. The
 generic emitted-asset smoke checks the complete selected roster, every additive
 patch cell with the actual picker/sampler and retained stable-owner controls.
-New full builds keep qualified native output readback. Authenticated assembly
-retains the successful original readback and verifies unchanged output bytes.
+New full builds capture the complete output inventory immediately after the
+genuine build. Authenticated assembly retains that original inventory and
+verifies unchanged output bytes.
 Ordinary selected data does not rerun unchanged-base unit/browser tests or restore
 canonical/model-reader/SQLite context solely for those tests. Software, content,
-unknown or base-changing work keeps full regression; explicit rollout proof keeps
-its current consumer tests.
+unknown or base-changing work keeps full regression.
 
-There is no automatic author computation or regression proof to transfer. The final gate
-requires successful current queue integration and geography, the exact candidate
+There are no automatic author jobs or prequeue check-name prerequisites. Existing
+failed/pending external checks and commit statuses still block admission. There is
+no automatic author computation or regression proof to transfer. The final gate
+requires successful current queue integration and applicable geography, the exact candidate
 parents/tree, current authority and independent review. Missing, skipped, failed
-or stale final checks prevent merge. Software, dependency and unknown changes
+or stale required final checks prevent merge. Only existing engineering coordination
+scripts and validated focused-test edits outside scientific/current-method and
+package input/verification roles omit the entire unrelated geography job. Final
+acceptance recomputes that scope and records the actual skipped job as not applicable;
+docs, workflow definitions, packets and ambiguous inputs retain geography.
+Software, dependency and unknown changes
 keep their complete CI route. The runner reports setup profile and actual test
 selection separately and rejects skipped tests. Hosted adoption and elapsed
 savings must be recorded when observed, not inferred from local controls or added

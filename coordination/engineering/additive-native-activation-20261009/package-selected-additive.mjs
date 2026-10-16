@@ -1,13 +1,13 @@
+// Original-output custody and current assembly execution remain separate from
+// scientific preparation. Assembly consumes the same current products as builds.
 import fs from 'node:fs';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
-import {ImmutableReader,loadSelection} from '../../../scripts/check-effective-geographic-regression.mjs';
+import {isDeepStrictEqual} from 'node:util';
 import {loadPackageInputs,containsPackagePath,admitPackageInputTransition} from '../../../scripts/package-inputs.mjs';
-import {valueSha} from '../selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 
 const demand=(v,m)=>{if(!v)throw Error(m);};
-const publications=new WeakMap();
 const ordinary=name=>{
   demand(path.isAbsolute(name)&&path.resolve(name)===name,'Canonical ordinary path required');
   let at=path.parse(name).root;
@@ -16,23 +16,6 @@ const ordinary=name=>{
   }
   const stat=fs.lstatSync(name);demand(stat.isFile(),'Ordinary whole file required');return stat;
 };
-
-// A selected reader deliberately freezes its accepted descriptors. A new copy
-// reauthenticates the four already accepted whole pins. Returned bytes grant
-// no authority.
-export function readBoundPublicationAssets(reader,roster,declared) {
-  demand(roster.length===4&&new Set(roster.map(p=>p.pin.path)).size===4,'Four distinct bound publication bodies required');
-  const copy=new ImmutableReader(reader.repo,reader.version,{gitExecutable:reader.gitExecutable,invocation:reader.invocation});
-  const actual=roster.map(({pin})=>{
-    demand(declared(pin.path),'Undeclared additive publication body');
-    let version=pin.commit;try{copy.git('cat-file','-e',version+'^{commit}');}catch{version=copy.version;}
-    const p=copy.descriptor(pin.path,version);
-    demand(p.mode===pin.mode&&p.git_blob_oid===pin.git_blob_oid&&p.bytes===pin.bytes,'Additive publication whole custody differs');
-    return {pin,version};
-  });
-  const bodies=actual.map(({pin,version})=>copy.read(pin.path,{version,expected:pin.sha256}));
-  return {bodies,input_inventory:structuredClone([...reader.inventory.values(),...copy.inventory.values()])};
-}
 
 // Acquire only a genuinely requested missing immutable tree. This does not
 // substitute current bytes for historical provenance or move the checkout.
@@ -51,136 +34,12 @@ export function bindPackageImmutableCommits(reader,declared){
  return fetched;
 }
 
-// The already-authenticated trusted-base descriptors bound the only names this
-// observer may carry. Actual detached readers invoke it only after typed success.
-export function retainSelectedPackageInputs(expected, inputs, retained) {
-  for(const pin of inputs){
-    const accepted=expected.find(row=>row.path===pin.path);
-    if(!accepted||pin.whole_body_consumed!==true||!/^[a-f0-9]{64}$/.test(pin.sha256??'')||retained.has(pin.path)||accepted.mode!==pin.mode||accepted.oid!==pin.git_blob_oid||accepted.bytes!==pin.bytes)continue;
-    retained.set(pin.path,{...pin});
-  }
-}
-
-// Called before context/database allocations. The package issuer authenticates
-// its executing closure; the existing private selected reader authenticates all
-// source/rule/current-rebind authority. This bridge grants no new authority.
-export async function preparePackageSelectedAdditive({root,currentExecution,consumedContext,restoredReceipt,selectedGrid,geographicRelease,originalPackage,assemblyExecution}) {
-  const selectionPath=path.resolve(root,'data/ownership-selection.json');
-  let stat;try{stat=ordinary(selectionPath);}catch(error){if(error.code==='ENOENT')return null;throw error;}
-  demand(Number.isSafeInteger(stat.size)&&stat.size>0,'Invalid whole selection metadata size');
-  const selectionFd=fs.openSync(selectionPath,fs.constants.O_RDONLY|fs.constants.O_NOFOLLOW);
-  let selectionRaw;
-  try{
-    const buffer=Buffer.alloc(stat.size+1);let offset=0;
-    while(offset<buffer.length){const count=fs.readSync(selectionFd,buffer,offset,buffer.length-offset,null);if(!count)break;offset+=count;}
-    demand(offset===stat.size,'Whole selection length changed');selectionRaw=buffer.subarray(0,offset);
-    const held=fs.fstatSync(selectionFd),end=ordinary(selectionPath);
-    for(const key of ['dev','ino','size','mode','mtimeMs','ctimeMs'])demand(stat[key]===held[key]&&held[key]===end[key],'Selection whole identity changed');
-  }finally{fs.closeSync(selectionFd);}
-  const selection=JSON.parse(selectionRaw);
-  if(selection.additive_release===undefined)return null;
-  const assembling=originalPackage!==undefined;
-  let execution,requireExecution,original,consumed;
-  if(assembling){
-    demand(consumedContext===undefined&&restoredReceipt===undefined&&currentExecution===undefined,'Assembly cannot impersonate fresh base consumption');
-    original=requireOriginalPackageOutput(originalPackage);
-    execution=requirePackageAssemblyExecution(assemblyExecution);
-    requireExecution=requirePackageAssemblyExecution;
-    demand(execution.original===originalPackage,'Assembly execution belongs to another original package');
-  }else{
-    demand(consumedContext&&restoredReceipt,'Selected V4 artifact consumption and original restoration required');
-    const {requireConsumedArcticArtifacts}=await import('../arctic-three-retained-land-fit-repair-native-20261008/qualified-artifact-consumer.mjs');
-    consumed=requireConsumedArcticArtifacts(consumedContext);
-    const {requireCurrentExecution:requireCurrent}=await import('../eastern-two-gap-repair-native-20261007/current-execution.mjs');
-    if(currentExecution!==undefined)demand(currentExecution===consumed.currentExecution,'Foreign outer package execution');
-    requireExecution=requireCurrent;execution=requireExecution(consumed.currentExecution);
-  }
-  demand(execution.stage_root===fs.realpathSync(root),'Additive bridge belongs to another package stage');
-  const definition=loadPackageInputs(root);
-  const git=process.platform==='darwin'?'/Library/Developer/CommandLineTools/usr/bin/git':'/usr/bin/git';
-  const gitStat=ordinary(git);
-  // Retain the exact accepted original restoration identity. Its canonical,
-  // prior and membership indexes remain separate immutable sources.
-  if(!assembling)demand(restoredReceipt.issue===1295&&restoredReceipt.canonical_index_sha256==='b82b195d94530d9b1f48153f7e47616f8b841cb1438ddf59994ba4869a1d7876'
-    &&restoredReceipt.prior_index_sha256==='ca1ab5fc3ef24470bcb79412f1d47a88281c6df0931461c5eb356079b75986fe'
-    &&restoredReceipt.new_release_memberships?.index_sha256==='9e21c69da2d4eb68ff66a586c3efa716a71224ce9344338fb2c9da1b2d62989c',
-    'Different inherited restoration requires explicit original source identities');
-  const selectedInputs=new Map();
-  const pending=assembling?currentAssemblies.get(execution).transition.accepted_selected_inputs?.files??[]:[];
-  const reader=new ImmutableReader(execution.source_root,execution.source_commit,{gitExecutable:git});
-  if(pending.length)reader.captureSelectedInputs=inputs=>retainSelectedPackageInputs(pending,inputs,selectedInputs);
-  bindPackageImmutableCommits(reader,name=>containsPackagePath(definition.inputs,name)||execution.files.some(p=>p.path===name));
-  const wholeRead=reader.read.bind(reader);
-  reader.read=(name,options)=>{
-    demand(containsPackagePath(definition.inputs,name)||execution.files.some(p=>p.path===name),
-      'Undeclared additive package source/code payload: '+name);
-    return wholeRead(name,options);
-  };
-  const gitFd=fs.openSync(git,fs.constants.O_RDONLY|fs.constants.O_NOFOLLOW);
-  let gitHash;
-  try{gitHash=createHash('sha256').update(fs.readFileSync(gitFd)).digest('hex');
-    const end=fs.fstatSync(gitFd);for(const k of ['dev','ino','size','mode','mtimeMs','ctimeMs'])demand(end[k]===gitStat[k],'Git program drift');
-  }finally{fs.closeSync(gitFd);}
-  const snapshot=loadSelection(reader);
-  demand(snapshot&&valueSha(snapshot.selection)===valueSha(selection),'Package selection differs from actual immutable selected source');
-  demand(snapshot.manifest&&snapshot.selection.sha256===selectedGrid.sha256
-    &&snapshot.selection.release_id===geographicRelease.id,'Additive bridge differs from selected build bank');
-  const view=snapshot.additive;demand(view,'Require privately consumed additive authority');
-  const envelope=view.envelope;
-  demand(valueSha(envelope.base_reference)===valueSha(Object.fromEntries(['id','footprints_sha256','hierarchy_sha256'].map(k=>[k,geographicRelease[k]]))),
-    'Additive runtime reference differs from actual build source');
-  const roster=Object.entries(view.sidecar.logical_asset_map).map(([role,pin])=>({role,pin,logical:envelope[role]}));
-  for(const {pin,logical} of roster){
-    demand(containsPackagePath(definition.inputs,pin.path),'Undeclared additive package payload: '+pin.path);
-    demand(/^additive-repairs\/[A-Za-z0-9_.-]+$/.test(logical.path),'Unsafe additive public asset path');
-  }
-  demand(new Set(roster.map(p=>p.logical.path)).size===4,'Four distinct additive public assets required');
-  const copied=readBoundPublicationAssets(reader,roster,name=>containsPackagePath(definition.inputs,name)||execution.files.some(p=>p.path===name));
-  const bodies=copied.bodies,inputInventory=[...copied.input_inventory,...selectedInputs.values()];
-  if(assembling){
-    const held=currentAssemblies.get(execution);
-    admitPackageInputTransition(original.manifest.source,held.source,{acceptedInputs:held.acceptedInputs,typedInputs:inputInventory});
-  }
-  requireExecution(execution);
-  const gitEnd=ordinary(git);for(const k of ['dev','ino','size','mode','mtimeMs','ctimeMs'])demand(gitEnd[k]===gitStat[k],'Git program pathname drift');
-  demand(createHash('sha256').update(fs.readFileSync(git)).digest('hex')===gitHash,'Whole executing Git program drift');
-  const token=Object.freeze({additiveRelease:envelope,reference_release:envelope.effective_reference});
-  publications.set(token,{root:fs.realpathSync(root),roster,bodies,gitHash,input_inventory:inputInventory});
-  return token;
-}
-
-export function prepareOrdinaryPublicationDirectory(root,relative) {
-  demand(relative==='dist/additive-repairs','Exact additive publication directory required');
-  let at=fs.realpathSync(root);
-  for(const component of relative.split('/')){
-    at=path.join(at,component);
-    let stat;try{stat=fs.lstatSync(at);}catch(error){if(error.code!=='ENOENT')throw error;}
-    if(stat)demand(stat.isDirectory()&&!stat.isSymbolicLink(),'Ordinary publication ancestors required');
-    else{fs.mkdirSync(at,{mode:0o755});stat=fs.lstatSync(at);demand(stat.isDirectory()&&!stat.isSymbolicLink(),'Fresh ordinary publication directory required');}
-  }
-  return at;
-}
-
-export function publishPackageSelectedAdditive(token,{root,destination='dist'}) {
-  if(token===null)return null;
-  const retained=publications.get(token);demand(retained&&retained.root===fs.realpathSync(root),'Privately authenticated package additive publication required');
-  demand(destination==='dist','Stock public destination required');
-  // Bodies were whole authenticated before application allocation.
-  // No new source reads or authority parsing occur during this publication.
-  for(let i=0;i<retained.roster.length;i++){
-    const name=path.resolve(root,destination,retained.roster[i].logical.path);
-    prepareOrdinaryPublicationDirectory(root,'dist/additive-repairs');
-    const fd=fs.openSync(name,fs.constants.O_WRONLY|fs.constants.O_CREAT|fs.constants.O_EXCL|fs.constants.O_NOFOLLOW,0o644);
-    try{fs.writeFileSync(fd,retained.bodies[i]);fs.fsyncSync(fd);}finally{fs.closeSync(fd);}
-  }
-  publications.delete(token);return token;
-}
-
 // A distinct package assembly capability. Serialized build/context receipts
 // never enter the existing consumedContext or current-execution WeakMaps.
 const packageAssemblies = new WeakMap();
 const assemblyHash = bytes => createHash('sha256').update(bytes).digest('hex');
-const assemblySame = (a,b) => valueSha(a) === valueSha(b);
+const assemblySame = isDeepStrictEqual;
+const assemblyFingerprint = value => assemblyHash(JSON.stringify(value));
 const assemblySafe = value => typeof value === 'string' && /^[A-Za-z0-9_.\/-]+$/.test(value) &&
   !value.startsWith('/') && value.split('/').every(part => part && part !== '.' && part !== '..');
 const assemblyCommit = value => /^[a-f0-9]{40}$/.test(value ?? '');
@@ -235,26 +94,21 @@ export async function readOriginalPackageInventory({api,repo,origin}) {
   demand(job.id===origin.job_id&&job.run_id===origin.run_id&&job.run_attempt===origin.run_attempt&&job.head_sha===workflowHead&&
     job.status==='completed'&&job.conclusion==='success'&&Array.isArray(job.steps),'Original package producer did not succeed');
   const step=name=>job.steps.filter(row=>row.name===name&&row.status==='completed'&&row.conclusion==='success').length===1;
-  const full=pullRequest&&job.name==='regression (0)'&&['Snapshot original full-regression package inputs','Verify full-regression package controls',
-    'Build hosted assets','Read back qualified native build outputs when selected','Complete regression shard','Verify full-regression package receipt',
-    'Inventory original full-regression package output','Retain original full-regression package output'].every(step);
-  const selected=pullRequest&&job.name==='package'&&['Snapshot original selected package inputs','Verify package controls',
-    'Build Cloudflare package without publishing','Read back qualified native build outputs when selected',
-    'Run selected-data consumer checks','Inventory original selected package output','Retain original selected package output'].every(step);
-  const finalWorker=worker&&job.name==='integration (0)'&&['Snapshot original final-worker package inputs',
-    'Build the combined application once before asset-dependent tests','Inventory original final-worker package output',
-    'Read back qualified native build outputs when selected','Test applicable combined-tree invariants without publishing or live imports',
-    'Retain original final-worker package output'].every(step);
-  demand(full||selected||finalWorker,'Original package producer lacks required actual steps');
-  const sequence=full?['Snapshot original full-regression package inputs','Build hosted assets','Inventory original full-regression package output',
-    'Read back qualified native build outputs when selected','Complete regression shard','Retain original full-regression package output']:
-    selected?['Snapshot original selected package inputs','Build Cloudflare package without publishing','Inventory original selected package output',
-      'Read back qualified native build outputs when selected','Run selected-data consumer checks','Retain original selected package output']:
-      ['Snapshot original final-worker package inputs','Build the combined application once before asset-dependent tests','Inventory original final-worker package output',
-        'Read back qualified native build outputs when selected','Test applicable combined-tree invariants without publishing or live imports','Retain original final-worker package output'];
+  const full=pullRequest&&job.name==='regression (0)',selected=pullRequest&&job.name==='package',
+    finalWorker=worker&&job.name==='integration (0)';
+  demand(full||selected||finalWorker,'Original package producer differs');
+  // Authenticate actual capture/build/inventory/upload. Removed historical
+  // scientific readback is not a current producer or consumer role.
+  const sequence=full?['Snapshot original full-regression package inputs','Build hosted assets',
+    'Inventory original full-regression package output','Complete regression shard','Retain original full-regression package output']:
+    selected?['Snapshot original selected package inputs','Build Cloudflare package without publishing',
+      'Inventory original selected package output','Run selected-data consumer checks','Retain original selected package output']:
+      ['Snapshot original final-worker package inputs','Build the combined application once before asset-dependent tests',
+        'Inventory original final-worker package output','Test applicable combined-tree invariants without publishing or live imports','Retain original final-worker package output'];
+  demand(sequence.every(step),'Original package producer lacks required actual steps');
   const numbers=sequence.map(name=>job.steps.find(row=>row.name===name).number);
   demand(numbers.every((number,index)=>assemblyPositive(number)&&(index===0||number>numbers[index-1]))&&numbers[2]===numbers[1]+1,
-    'Original inventory must immediately follow the build and upload must follow successful tests');
+    'Original inventory must immediately follow the build and upload must follow successful current tests');
   const artifact=await api(`/repos/${repo}/actions/artifacts/${origin.artifact_id}`);
   demand(artifact.id===origin.artifact_id&&artifact.name===artifactName&&!artifact.expired&&artifact.size_in_bytes===origin.artifact_bytes&&
     artifact.digest==='sha256:'+origin.artifact_digest&&artifact.workflow_run?.id===origin.run_id&&
@@ -323,13 +177,13 @@ export async function authenticateOriginalPackageOutput({api,repo,origin,root,ma
     else{demand(stat.isFile(),'Original output must be ordinary');found.push(relative);}};
   visit('dist');demand(assemblySame(found.sort(),[...expected].sort()),'Original output complete inventory differs');
   const token=Object.freeze({kind:'authenticated-original-cloudflare-output',source_head:origin.head});
-  packageAssemblies.set(token,{root,manifest,origin:structuredClone(origin),manifest_sha256:assemblyHash(manifestRaw),fingerprint:valueSha(manifest)});
+  packageAssemblies.set(token,{root,manifest,origin:structuredClone(origin),manifest_sha256:assemblyHash(manifestRaw),fingerprint:assemblyFingerprint(manifest)});
   return token;
 }
 
 export function requireOriginalPackageOutput(token) {
   const value=packageAssemblies.get(token);
-  demand(value&&value.fingerprint===valueSha(value.manifest),'Privately authenticated original package output required');
+  demand(value&&value.fingerprint===assemblyFingerprint(value.manifest),'Privately authenticated original package output required');
   return value;
 }
 
@@ -373,15 +227,15 @@ function assemblySourceAdmission(original,source,acceptedInputs) {
   const plain=rows.map(({type,...row})=>row);
   const workflowPaths=['.github/workflows/merge-integration-checks.yml','.github/workflows/worker-merge.yml'];
   const workflows=all.filter(row=>workflowPaths.includes(row.path));
-  demand(workflows.length===workflowPaths.length&&workflows.every(row=>row.type==='blob'&&row.mode==='100644'),
+  demand((workflows.length===1||workflows.length===2)&&workflows.some(row=>row.path===workflowPaths[1])&&
+    workflows.every(row=>row.type==='blob'&&row.mode==='100644'),
     'Ordinary original producer workflows required');
   const workflowPins=workflows.map(({type,...row})=>row);
   demand(before.producer?.kind==='immediate-cloudflare-build-v1'&&assemblySame(before.producer,{kind:'immediate-cloudflare-build-v1',workflows:workflowPins}),
     'Immediate original build capture and unchanged producer workflow required');
   const current={head:assemblyGit(source,['rev-parse','HEAD']).trim(),definition,selection,files:plain,
     producer:{kind:'immediate-cloudflare-build-v1',workflows:workflowPins}};
-  const transition=admitPackageInputTransition(before,current,{acceptedInputs,preliminary:true});
-  return {current,transition};
+  admitPackageInputTransition(before,current,{acceptedInputs,preliminary:true});
 }
 
 // Separate from package-issued full-build execution: this authenticates only the
@@ -390,7 +244,7 @@ export function issuePackageAssemblyExecution({original,source,stage,executingRo
   requireOriginalPackageOutput(original);
   demand(process.execArgv.length===0&&!process.env.NODE_OPTIONS?.trim()&&!process.env.NODE_PATH?.trim(),'Plain assembly Node execution required');
   source=fs.realpathSync(source);stage=fs.realpathSync(stage);executingRoot=fs.realpathSync(executingRoot);
-  const admittedSource=assemblySourceAdmission(original,source,acceptedInputs);
+  assemblySourceAdmission(original,source,acceptedInputs);
   demand(path.resolve(process.argv[1])===path.join(executingRoot,'scripts/assemble-selected-package.mjs'),'Actual assembly driver required');
   const files=assemblyCode(source,executingRoot), executable=fs.realpathSync(process.execPath);
   const runtime={...assemblyFile(path.dirname(executable),path.basename(executable)),
@@ -399,10 +253,10 @@ export function issuePackageAssemblyExecution({original,source,stage,executingRo
   const record=Object.freeze({kind:'current-selected-package-assembly',source_root:source,
     source_commit:assemblyGit(source,['rev-parse','HEAD']).trim(),source_tree:assemblyGit(source,['rev-parse','HEAD^{tree}']).trim(),
     stage_root:stage,entry_point:'scripts/assemble-selected-package.mjs',files,runtime,original});
-  currentAssemblies.set(record,{executingRoot,fingerprint:valueSha(record),source:admittedSource.current,transition:structuredClone(admittedSource.transition),acceptedInputs:structuredClone(acceptedInputs)});return record;
+  currentAssemblies.set(record,{executingRoot,fingerprint:assemblyFingerprint(record)});return record;
 }
 export function requirePackageAssemblyExecution(record) {
-  const held=currentAssemblies.get(record);demand(held&&held.fingerprint===valueSha(record),'Private current assembly execution required');
+  const held=currentAssemblies.get(record);demand(held&&held.fingerprint===assemblyFingerprint(record),'Private current assembly execution required');
   requireOriginalPackageOutput(record.original);
   demand(assemblyGit(record.source_root,['rev-parse','HEAD']).trim()===record.source_commit&&
     assemblyGit(record.source_root,['rev-parse','HEAD^{tree}']).trim()===record.source_tree,'Assembly source changed');
@@ -410,10 +264,4 @@ export function requirePackageAssemblyExecution(record) {
   const runtime=assemblyFile(path.dirname(record.runtime.executable),path.basename(record.runtime.executable));
   demand(runtime.bytes===record.runtime.bytes&&runtime.sha256===record.runtime.sha256&&record.runtime.version===process.version,'Assembly runtime changed');
   return record;
-}
-
-export function packageSelectedPublicationInventory(token,{root}) {
-  const value=publications.get(token);
-  demand(value&&value.root===fs.realpathSync(root),'Authenticated publication inventory required');
-  return structuredClone(value.input_inventory);
 }

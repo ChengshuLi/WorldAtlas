@@ -202,3 +202,19 @@ test('a capped read keeps its byte allowance through the actual reset-capacity p
   await assert.rejects(api('/repos/a/b/pulls/2','GET',undefined,{maxResponseBytes:16}),/caller byte allowance/);
   assert.deepEqual(routes,['https://api.github.com/repos/a/b/pulls/1','https://api.github.com/repos/a/b']);
 });
+
+test('existing final HTTP-admission hook composes with job timing rather than replacing it', async () => {
+  const old = globalThis.fetch;let calls = 0, left = 40_000, budget = 0;
+  globalThis.fetch = async () => {calls++;return new Response('{}', {status: 200});};
+  try {
+    const api = githubAPI('synthetic', {deadlineRemaining: () => left});
+    const dispose = api.setHTTPAdmission(() => {budget++;});
+    await api('/repos/a/b');assert.equal(calls, 1);assert.equal(budget, 1);
+    left = 20_000;await assert.rejects(api('/repos/a/b'), /deadline/);assert.equal(calls, 1);assert.equal(budget, 1);
+    dispose();left = 40_000;await api('/repos/a/b');assert.equal(calls, 2);assert.equal(budget, 1);
+    left = Infinity;await assert.rejects(api('/repos/a/b'), /Invalid job deadline/);assert.equal(calls, 2);
+    left = 40_000;const slowHook = githubAPI('synthetic', {deadlineRemaining: () => left});
+    slowHook.setHTTPAdmission(() => {left = 19_000;});
+    await assert.rejects(slowHook('/repos/a/b'), /deadline/);assert.equal(calls, 2);
+  } finally {globalThis.fetch = old;}
+});

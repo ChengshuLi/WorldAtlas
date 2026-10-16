@@ -1,9 +1,14 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import {execFileSync} from 'node:child_process';
 import {deriveSourceTargetNativeDelta,nativeRowLatitudes,nativePolygonIntervals,polygonParts,witnessCellEffects,validateWitnessGeometry} from '../src/native-grid.js';
 import {ImmutableReader} from '../scripts/check-effective-geographic-regression.mjs';
 import {qualifySourceTargetNativeAuthority,diagnoseSourceTargetNativeAuthority,readRetainedRegistryAuthority,valueBytes,valueSha} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {bindPackageImmutableCommits} from '../coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs';
 
 const rectangle=(left,right,bottom=-40,top=40)=>({type:'Polygon',coordinates:[[[left,bottom],[right,bottom],[right,top],[left,top],[left,bottom]]]});
 const feature=(id,pixelIndex,geometry,target_id)=>({id,pixelIndex,geometry,...(target_id?{target_id}:{})});
@@ -14,6 +19,24 @@ const digest=raw=>createHash('sha256').update(raw).digest('hex');
 const blob=raw=>createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex');
 const collection=features=>({type:'FeatureCollection',features});
 const rawFeature=(id,geometry)=>({type:'Feature',properties:{shapeID:id},geometry});
+
+test('historical programme reads use the original Git version and preserve the live helper',t=>{
+  const root=fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(),'atlas-original-programme-')));
+  t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
+  const git=(...args)=>execFileSync('git',['-C',root,...args],{encoding:'utf8'}).trim();
+  git('init','-q');git('config','user.name','Fixture');git('config','user.email','fixture@example.invalid');
+  const name='physical-reproducer.py',oldBody=Buffer.from('# original physical producer\n');
+  fs.writeFileSync(path.join(root,name),oldBody);git('add',name);git('commit','-qm','Original programme');
+  const original=git('rev-parse','HEAD'),live=Buffer.from('# current live helper\n');
+  fs.writeFileSync(path.join(root,name),live);git('add',name);git('commit','-qm','Current programme');
+  const reader=new ImmutableReader(root,git('rev-parse','HEAD')),fetched=bindPackageImmutableCommits(reader,file=>file===name);
+  assert.deepEqual(reader.read(name,{version:original,expected:digest(oldBody)}),oldBody);
+  assert.deepEqual(reader.read(name,{expected:digest(live)}),live);
+  assert.deepEqual(fetched,[]);assert.deepEqual(fs.readFileSync(path.join(root,name)),live);
+  assert.throws(()=>reader.read(name,{version:original,expected:digest(live)}),/Whole immutable input differs/);
+  assert.throws(()=>reader.read('undeclared.json',{version:original}),/Undeclared additive package/);
+});
+
 function constructorFixture(change=()=>{}){
   const first=rectangle(-.03,.006,-.02,.02),second=rectangle(.004,.03,-.02,.02);
   const cityGeometry={type:'MultiPolygon',coordinates:[first.coordinates,second.coordinates]};

@@ -16,29 +16,6 @@ def need(value, message):
 
 
 
-PACKAGE_GIT_ORIGIN = 'https://github.com/ChengshuLi/WorldAtlas.git'
-
-
-def package_git_environment(env):
-    # The actual immutable reader requests its historical objects from Git.
-    # Keep acquisition child-local and fixed to this repository; do not maintain
-    # a second, incomplete implementation of the reader's input graph.
-    result = dict(env, GIT_NO_LAZY_FETCH='0', GIT_NO_REPLACE_OBJECTS='1',
-                  GIT_CONFIG_NOSYSTEM='1', GIT_CONFIG_GLOBAL='/dev/null',
-                  GIT_TERMINAL_PROMPT='0')
-    for key in list(result):
-        if key.startswith('GIT_CONFIG_') and key not in ('GIT_CONFIG_NOSYSTEM', 'GIT_CONFIG_GLOBAL'):
-            result.pop(key)
-    options = [('remote.origin.promisor', 'true'),
-               ('remote.origin.partialclonefilter', 'blob:none'),
-               ('core.hooksPath', '/dev/null'), ('credential.helper', '')]
-    result['GIT_CONFIG_COUNT'] = str(len(options))
-    for index, (key, value) in enumerate(options):
-        result['GIT_CONFIG_KEY_' + str(index)] = key
-        result['GIT_CONFIG_VALUE_' + str(index)] = value
-    return result
-
-
 def main():
     root = Path.cwd()
     base = os.environ['SELECTED_PACKAGE_TRUSTED_BASE']
@@ -170,8 +147,7 @@ def main():
     cache = Path(os.environ['RUNNER_TOOL_CACHE']).resolve()
     need(node.is_file() and not node.is_symlink() and node.resolve().is_relative_to(cache / 'node'), 'Verified setup-node executable required')
     entry_point = os.environ.get('SELECTED_PACKAGE_ENTRY_POINT', 'scripts/assemble-selected-package.mjs')
-    need(entry_point in ('scripts/assemble-selected-package.mjs', 'scripts/run-selected-package-proof.mjs'),
-         'Unknown trusted package entry point')
+    need(entry_point == 'scripts/assemble-selected-package.mjs', 'Unknown trusted package entry point')
     pending, seen, external = [entry_point], set(), set()
     while pending:
         name = pending.pop()
@@ -206,23 +182,8 @@ def main():
                 external.add(spec)
     need(not external, 'External credential-bearing startup module is not admitted')
     verified('package-lock.json')
-    if 'scripts/package-output-artifact.mjs' in seen:
-        verified('scripts/package-python-runtime.py')
-    if entry_point == 'scripts/run-selected-package-proof.mjs':
-        # This current observer is separately checked out. It reuses this same
-        # verifier before importing the frozen, unchanged assembly programme.
-        verified('scripts/selected-package-bootstrap.py')
-        verified('scripts/extract-package-output.py')
-    if os.environ.get('SELECTED_PACKAGE_VERIFY_ONLY') == 'true':
-        print(json.dumps({'kind': 'authenticated-package-startup-closure', 'trusted_base': base,
-                          'entry_point': entry_point, 'files': sorted(seen)}))
-        return
+    verified('scripts/extract-package-output.py')
     launch_env = dict(env, GH_TOKEN=os.environ['GH_TOKEN'])
-    if entry_point == 'scripts/assemble-selected-package.mjs':
-        launch_env = package_git_environment(launch_env)
-        origin_env = {key:value for key,value in launch_env.items() if key != 'GH_TOKEN'}
-        effective_origin = subprocess.check_output(['git', 'remote', 'get-url', 'origin'], env=origin_env).decode().strip()
-        need(effective_origin in (PACKAGE_GIT_ORIGIN, PACKAGE_GIT_ORIGIN.removesuffix('.git')), 'Package Git origin was redirected')
     os.execve(node, [str(node), entry_point], launch_env)
 
 

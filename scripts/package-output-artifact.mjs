@@ -121,7 +121,9 @@ export function packageBuildConfiguration(env = process.env) {
 }
 
 // The staged image inventories build and capture code, dependencies and config.
-// Only the two genuine workflow invocations are outside that source boundary.
+// Historical author captures retain both original workflow identities. Current
+// captures require the remaining queue producer; immutable source comparison
+// prevents transferring an old two-workflow capture into a queue-only producer.
 // Post-build tests/observers run after capture, not as producer identity inputs.
 export const PACKAGE_PRODUCER_WORKFLOWS = [
   '.github/workflows/merge-integration-checks.yml', '.github/workflows/worker-merge.yml',
@@ -132,7 +134,8 @@ export function committedPackageProducer(root, head = 'HEAD') {
     need(match, 'Ordinary package producer workflow required');
     return {path:match[2],mode:'100644',oid:match[1]};
   });
-  need(same(workflows.map(row=>row.path),PACKAGE_PRODUCER_WORKFLOWS),'Complete package producer workflows required');
+  need(same(workflows.map(row=>row.path),PACKAGE_PRODUCER_WORKFLOWS) ||
+    same(workflows.map(row=>row.path),[PACKAGE_PRODUCER_WORKFLOWS[1]]),'Complete package producer workflows required');
   return {kind:PACKAGE_PRODUCER_KIND,workflows};
 }
 
@@ -272,6 +275,7 @@ export function createPackageOutputManifest(root = process.cwd()) {
     'Original pre-build source snapshot differs');
   const output = inventoryPackageOutput(root);
   const {installed_runtime,...manifestSource}=source;
+  validateInstalledPackageIdentity(installed_runtime);
   const manifest = {version: 1, kind: 'original-cloudflare-package-output', source:manifestSource,
     runtime: {installed: installed_runtime, node: process.version, versions: process.versions, platform: process.platform, arch: process.arch,
       dependencies: streamedPackageFile(root, 'package-lock.json').sha256,
@@ -293,8 +297,10 @@ export function validatePackageOutputManifest(value) {
   // capture policy explicitly rather than reinterpreting the old programme.
   const producer=value.source.producer;
   if(producer!==undefined)need(producer?.kind===PACKAGE_PRODUCER_KIND&&
-    Array.isArray(producer.workflows)&&producer.workflows.length===PACKAGE_PRODUCER_WORKFLOWS.length&&
-    producer.workflows.every((row,index)=>row.path===PACKAGE_PRODUCER_WORKFLOWS[index]&&row.mode==='100644'&&commit(row.oid)),
+    Array.isArray(producer.workflows)&&
+    (same(producer.workflows.map(row=>row?.path),PACKAGE_PRODUCER_WORKFLOWS)||
+     same(producer.workflows.map(row=>row?.path),[PACKAGE_PRODUCER_WORKFLOWS[1]]))&&
+    producer.workflows.every(row=>row.mode==='100644'&&commit(row.oid)),
     'Invalid immediate package producer identity');
   need(value.source.selection && typeof value.source.selection === 'object' &&
     value.runtime && typeof value.runtime.node === 'string' && typeof value.runtime.platform === 'string' &&
@@ -302,7 +308,14 @@ export function validatePackageOutputManifest(value) {
     hash(value.runtime.installed?.node?.sha256) && hash(value.runtime.installed?.dependencies?.sha256) &&
     value.configuration && typeof value.configuration === 'object' && !Array.isArray(value.configuration) &&
     Object.values(value.configuration).every(item => typeof item === 'string'), 'Missing original runtime/configuration');
-  if(value.runtime.installed?.version===2)validateInstalledPackageIdentity(value.runtime.installed);
+  // Read-only output custody consumes Node identity, not the original scientific
+  // runtime. Keep Python evidence literal here; minting and actual installed
+  // runtime comparison validate its complete inventory before using that claim.
+  if(value.runtime.installed?.version===2){
+    need(same(Object.keys(value.runtime.installed).sort(),['dependencies','node','python','version']),
+      'Exact versioned installed identity fields required');
+    validateNodeIdentity({node:value.runtime.installed.node,dependencies:value.runtime.installed.dependencies});
+  }
   const sources = new Set();
   for (const row of value.source.files) {
     need(safePackagePath(row.path) && !sources.has(row.path) && ['100644','100755'].includes(row.mode) && commit(row.oid),

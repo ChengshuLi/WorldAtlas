@@ -15,13 +15,17 @@ When adding a genuine package dependency outside declared directories, add its p
 ## Retained original Cloudflare output
 
 The original output inventory is captured immediately after the genuine Cloudflare
-build, before package controls, browser-selection/install code, readback and regression consumers. Upload still waits for required
+build, before package controls, browser-selection/install code and regression consumers. Upload still waits for required
 checks to succeed. Authentication compares every retained output byte with that
 inventory, so a later consumer cannot silently change the reusable package.
 
 New manifests identify this boundary as `immediate-cloudflare-build-v1` and retain
-the two genuine build workflows' Git identities (`merge-integration-checks.yml`
-and `worker-merge.yml`). The complete declared source image,
+the genuine queue build workflow's Git identity (`worker-merge.yml`). Historical
+captures retain their exact original two-workflow roster, including the removed
+`merge-integration-checks.yml`. Both rosters are checked against the actual immutable
+source and executed workflow. Their producer identities must still match exactly
+before output reuse; deleting the author workflow requires a fresh queue-only
+full-build capture before a subsequent selected delivery can reuse it. The complete declared source image,
 installed dependencies/runtime and build configuration remain authoritative. The capture
 writer and Node runtime-inventory helper are explicit package inputs; their existing
 input/Python helpers were already declared. The ordinary pre-build snapshot therefore
@@ -37,20 +41,18 @@ existing scientific loading and copied-publication checks remain authoritative.
 
 The final worker retains genuine full-build originals at this same boundary.
 For selected-data candidates it authenticates eligible author or final-worker
-archives through the trusted bootstrap, then runs current native readback and
-delivery-smoke consumers and validates the trusted assembly receipt. Ordinary
-unchanged-producer selected-data batches do not reinstall or rerun the browser
-suite; full software profiles and the explicit selected-output equivalence proof
-retain browser qualification. A selected-data full-build fallback retains the
-canonical/parity CPU checks. A worker run's workflow commit and built
-candidate commit are distinct: the authenticated inventory log binds the candidate,
+archives through the trusted bootstrap, verifies their complete output inventory
+and the trusted assembly receipt, then runs current delivery-smoke consumers.
+Ordinary unchanged-producer selected-data batches do not reinstall or rerun the
+browser suite; full software profiles retain browser qualification. A selected-data
+full-build fallback retains the ordinary build preflight and delivery smoke.
+A worker run's workflow commit and built candidate commit are distinct: the authenticated inventory log binds the candidate,
 and the executed workflow must match its captured descriptor. The existing capture
 log records `GITHUB_WORKFLOW_SHA` and the workflow path/ref, including the distinct
 merge-ref workflow commit for pull requests. Missing execution provenance cannot
 be inferred from the source or Actions run head. A missing or
-incompatible original takes the ordinary full-build path; the explicit equivalence
-proof still requires actual assembly. Assembled output is never retained as a new
-full-build original.
+incompatible original takes the ordinary full-build path. Assembled output is
+never retained as a new full-build original.
 
 Legacy manifests keep their original provenance. They cannot establish immediate
 build capture and therefore require the ordinary full-build path under the new

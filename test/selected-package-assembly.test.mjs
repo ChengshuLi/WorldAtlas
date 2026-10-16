@@ -5,15 +5,12 @@ import os from 'node:os';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {authenticateOriginalPackageOutput, requireOriginalPackageOutput,
-  requirePackageAssemblyExecution, issuePackageAssemblyExecution,retainSelectedPackageInputs} from '../coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs';
+  requirePackageAssemblyExecution, issuePackageAssemblyExecution} from '../coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs';
 import {requireCurrentPackageAssembly, integrationTestFiles} from '../scripts/run-integration-tests.mjs';
-import {createPackageAssemblyScratch,packageAssemblyInvocation,findOriginalPackage,acceptedSelectedPackageInputs} from '../scripts/assemble-selected-package.mjs';
+import {createPackageAssemblyScratch,packageAssemblyInvocation,findOriginalPackage,acceptedSelectedPackageInputs,readOriginalPackageGeography} from '../scripts/assemble-selected-package.mjs';
 import {execFileSync,spawnSync} from 'node:child_process';
-import {inspectPackageExecutionInputs} from '../scripts/package-build.mjs';
+import {inspectPackageExecutionInputs,inspectPackageNodeRuntime,inspectPackageRuntime} from '../scripts/package-build.mjs';
 import {loadPackageInputs} from '../scripts/package-inputs.mjs';
-import {ImmutableReader} from '../scripts/check-effective-geographic-regression.mjs';
-import {nativeRowLatitudes} from '../src/native-grid.js';
-import {readRetainedRegistryAuthority,valueBytes,valueSha} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 import {admitPackageInputTransition,committedPackageInputs,committedPackageProducer} from '../scripts/package-output-artifact.mjs';
 
 // Private execution must run in a plain child, but only its requested probe.
@@ -23,11 +20,11 @@ const test=(name,...args)=>{
   probeRegistered=true;return nodeTest(name,...args);
 };
 const sha=raw=>createHash('sha256').update(raw).digest('hex');
-function original(t,{worker=false}={}){
+function original(t,{worker=false,bodies:extraBodies={}}={}){
   const root=fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(),'atlas-original-package-')));
   t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
   const bodies={'dist/client/atlas-geography.json':'{}','dist/client/a.bin':'invariant',
-    'dist/cloudflare/index.js':'worker','dist/cloudflare/wrangler.json':'{}'};
+    'dist/cloudflare/index.js':'worker','dist/cloudflare/wrangler.json':'{}',...extraBodies};
   for(const [name,body]of Object.entries(bodies)){fs.mkdirSync(path.dirname(path.join(root,name)),{recursive:true});fs.writeFileSync(path.join(root,name),body);}
   const head='a'.repeat(40),workflowHead=worker?'c'.repeat(40):head,repo='ChengshuLi/WorldAtlas';
   const origin={run_id:17,run_attempt:2,job_id:29,artifact_id:41,head,workflow_head:workflowHead,
@@ -42,7 +39,7 @@ function original(t,{worker=false}={}){
   const run={id:17,run_attempt:2,head_sha:workflowHead,event:worker?'workflow_dispatch':'pull_request',path:workflow.path,head_branch:worker?'main':'engineering/fixture',
     status:'completed',repository:{full_name:repo},head_repository:{full_name:repo}};
   const names=worker?['Snapshot original final-worker package inputs','Build the combined application once before asset-dependent tests',
-    'Inventory original final-worker package output','Read back qualified native build outputs when selected',
+    'Inventory original final-worker package output',
     'Test applicable combined-tree invariants without publishing or live imports','Retain original final-worker package output']:
     ['Snapshot original selected package inputs','Build Cloudflare package without publishing','Inventory original selected package output',
       'Verify package controls','Read back qualified native build outputs when selected','Run selected-data consumer checks','Retain original selected package output'];
@@ -100,8 +97,8 @@ test('origin, successful actual steps, upload receipt and output mutations fail 
     f=>{f.job.run_attempt=1;},
     f=>{f.job.conclusion='failure';},
     f=>{f.job.steps.find(row=>row.name==='Build Cloudflare package without publishing').conclusion='skipped';},
-    f=>{f.job.steps.find(row=>row.name==='Read back qualified native build outputs when selected').conclusion='failure';},
-    f=>{f.job.steps=f.job.steps.filter(row=>row.name!=='Run selected-data consumer checks');},
+    f=>{f.job.steps.find(row=>row.name.startsWith('Inventory')).conclusion='skipped';},
+    f=>{f.job.steps=f.job.steps.filter(row=>!row.name.startsWith('Snapshot'));},
     f=>{f.artifact.expired=true;},
     f=>{f.artifact.digest='sha256:'+'d'.repeat(64);},
     f=>{f.receipt.package_output_manifest_sha256='e'.repeat(64);},
@@ -118,7 +115,12 @@ test('retained consumer roster keeps current coverage and GPU/Canvas tests',()=>
   assert(files.includes('test/compact-ownership.test.mjs'));
   assert(!files.includes('test/prepared-parity.test.mjs'));assert(!files.includes('test/canonical-compact-repack.test.mjs'));
   const full=integrationTestFiles('full',0,'complete');
-  assert(full.includes('test/canonical-compact-repack.test.mjs'));assert(full.includes('test/prepared-parity.test.mjs'));
+  assert(!full.includes('test/canonical-compact-repack.test.mjs'));
+  assert(!full.includes('test/context-input-stage.test.mjs'));
+  assert(full.includes('test/prepared-parity.test.mjs'));
+  const complete=[0,1,2].flatMap(shard=>integrationTestFiles('full',shard,'complete'));
+  for(const name of ['compact-context-inputs','reference-context','runtime-ownership','compact-ownership'])
+    assert(complete.includes(`test/${name}.test.mjs`));
   assert.throws(()=>integrationTestFiles('full',1,'selected-output'));
   assert.throws(()=>requireCurrentPackageAssembly({expected:null}),/Trusted current/);
 });
@@ -143,19 +145,19 @@ test('consumer reduction binds actual current head and trusted assembly receipt 
   assert.throws(()=>requireCurrentPackageAssembly({directory:root,expected:write(receipt)}),/same-head/);
 });
 
-test('explicit hosted proof cannot silently report normal fallback success',t=>{
-  const temporary=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-proof-invocation-'));
-  t.after(()=>fs.rmSync(temporary,{recursive:true,force:true}));
-  for(const [event,workflow,status] of [['workflow_dispatch','Selected package equivalence proof',1],
-    ['pull_request','Integration queue regression',0],['workflow_dispatch','Serialize worker PR merges',0],['workflow_dispatch','Unrelated workflow',0]]){
-    const result=spawnSync(process.execPath,['scripts/assemble-selected-package.mjs'],{
-      env:{...process.env,GH_TOKEN:'',GITHUB_TOKEN:'',GITHUB_EVENT_NAME:event,
-        GITHUB_WORKFLOW:workflow,GITHUB_OUTPUT:path.join(temporary,workflow)},encoding:'utf8'});
-    assert.equal(result.status,status,result.stderr);assert.equal(JSON.parse(result.stdout).assembled,false);
-    assert.match(fs.readFileSync(path.join(temporary,workflow),'utf8'),/^assembled=false\n/);
-  }
+test('current assembly admits its Node runtime without scientific requirements or GIS imports',t=>{
+  const root=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-assembly-node-runtime-'));t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
+  fs.mkdirSync(path.join(root,'node_modules'));
+  fs.writeFileSync(path.join(root,'package.json'),JSON.stringify({engines:{node:'>=24'}}));
+  const lock=JSON.stringify({lockfileVersion:3,packages:{}});
+  fs.writeFileSync(path.join(root,'package-lock.json'),lock);fs.writeFileSync(path.join(root,'node_modules/.package-lock.json'),lock);
+  assert.deepEqual(inspectPackageNodeRuntime(root).errors,[]);
+  assert(inspectPackageRuntime(root).errors.some(error=>error.kind==='python-runtime'),'Full build runtime still checks its separate Python requirements');
+  const source=fs.readFileSync(new URL('../scripts/assemble-selected-package.mjs',import.meta.url),'utf8');
+  assert.doesNotMatch(source,/inspectPackageRuntime|declaredPackagePythonRoots|installedPackageIdentity/);
+  assert.match(source,/resolvePackagePythonExecutable\(python\.sha256\)/);
+  assert.match(source,/Executing package extractor differs from current source/);
 });
-
 
 test('fresh selected assembly creates owned ordinary scratch without depending on a previous build',async t=>{
   const root=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-fresh-assembly-'));
@@ -181,20 +183,24 @@ test('selected assembly rejects symlink, dangling-link and non-directory scratch
 });
 
 
-test('production assembly admission is independent of optional proof-reference metadata',()=>{
-  const environment={GITHUB_EVENT_NAME:'workflow_dispatch',GITHUB_WORKFLOW:'Selected package equivalence proof'};
-  const inputs={source_head:'a'.repeat(40),original_run_id:'17'};
-  const expected={proofMode:true,expectedHead:inputs.source_head,originalRunId:17};
-  assert.deepEqual(packageAssemblyInvocation({inputs},environment),expected);
-  assert.deepEqual(packageAssemblyInvocation({inputs:{...inputs,readback_run_id:'not-an-authority',readback_attempt:'missing'}},environment),expected);
-  for(const mutation of [{source_head:'main'},{original_run_id:'0'},{original_run_id:'9007199254740993'}])
-    assert.throws(()=>packageAssemblyInvocation({inputs:{...inputs,...mutation}},environment),/Exact/);
+test('production assembly admits only the actual selected-data queue invocation',()=>{
+  const environment={GITHUB_EVENT_NAME:'workflow_dispatch',GITHUB_WORKFLOW:'Serialize worker PR merges',GITHUB_REF:'refs/heads/main',
+    INTEGRATION_PROFILE:'full',INTEGRATION_SHARD:'0',INTEGRATION_TEST_SELECTION:'selected-data',SELECTED_PACKAGE_CANDIDATE:'a'.repeat(40)};
+  assert.deepEqual(packageAssemblyInvocation({},environment),{expectedHead:environment.SELECTED_PACKAGE_CANDIDATE});
+  for(const mutation of [{GITHUB_EVENT_NAME:'pull_request'},{GITHUB_WORKFLOW:'Selected package equivalence proof'},
+    {INTEGRATION_TEST_SELECTION:'complete'},{INTEGRATION_SHARD:'1'},{SELECTED_PACKAGE_CANDIDATE:'main'}])
+    assert.throws(()=>packageAssemblyInvocation({},{...environment,...mutation}),/Trusted|Exact/);
   const source=fs.readFileSync(new URL('../scripts/assemble-selected-package.mjs',import.meta.url),'utf8');
-  assert.doesNotMatch(source,/loadSelectedPackageReadback|compareSelectedPackageReadback|proofReadback/);
+  assert.doesNotMatch(source,/proofMode|loadSelectedPackageReadback|compareSelectedPackageReadback|proofReadback/);
+  const body=source.slice(source.indexOf('export async function assembleSelectedPackage'));
+  assert(body.indexOf('issuePackageAssemblyExecution(')<body.indexOf("await import('./package-current-additive.mjs')"));
+  assert(body.indexOf('verifyPackageDependencies(')<body.indexOf("await import('./package-current-additive.mjs')"));
+  assert(body.indexOf('Current additive consumption must be credential-free')<body.indexOf("await import('./package-current-additive.mjs')"));
+  assert.doesNotMatch(source,/preparePackageSelectedAdditive|loadSelection|ImmutableReader/);
 });
 
 
-function sourceFixture(f){
+function sourceFixture(f,{author=true}={}){
   const write=(name,raw)=>{fs.mkdirSync(path.dirname(path.join(f.root,name)),{recursive:true});fs.writeFileSync(path.join(f.root,name),typeof raw==='string'?raw:JSON.stringify(raw));};
   const git=(...args)=>execFileSync('git',['-C',f.root,...args],{encoding:'utf8'}).trim();
   const commit=()=>{git('add','.');git('-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-qm','source');};
@@ -202,7 +208,7 @@ function sourceFixture(f){
     optional_inputs:[],verification_paths:[],generated_outputs:['dist/']};
   const selection={version:1,additive_release:{path:'coordination/engineering/original/release.json'}};
   write('.github/package-inputs.json',definition);write('data/ownership-selection.json',selection);
-  write('.github/workflows/merge-integration-checks.yml','actual build invocation');
+  if(author)write('.github/workflows/merge-integration-checks.yml','actual build invocation');
   write('.github/workflows/worker-merge.yml','actual final-worker build invocation');
   write('scripts/assemble-selected-package.mjs','// Synthetic current entry point for private admission controls.');
   write('scripts/builder.mjs','actual consumed builder');write('package-lock.json','{}');
@@ -215,16 +221,17 @@ function sourceFixture(f){
   return {write,git,commit,snapshot};
 }
 
-test('private assembly admission uses actual declared inputs and rejects legacy capture semantics',async t=>{
+for(const queueOnly of [false,true])test('private assembly admission uses actual '+(queueOnly?'queue-only':'historical')+' producer and rejects drift',async t=>{
   // Exercise the actual plain-process guard instead of altering execArgv in the test.
   if(process.execArgv.length||process.env.NODE_OPTIONS?.trim()||process.env.NODE_PATH?.trim()){
     execFileSync(process.execPath,[new URL(import.meta.url).pathname,t.name],{env:{...process.env,NODE_OPTIONS:'',NODE_PATH:'',NODE_TEST_CONTEXT:undefined},encoding:'utf8'});return;
   }
-  const f=original(t),s=sourceFixture(f),manifest=JSON.parse(f.manifestRaw),oldFetch=globalThis.fetch,oldEntry=process.argv[1];
+  const f=original(t,{worker:queueOnly}),s=sourceFixture(f,{author:!queueOnly}),manifest=JSON.parse(f.manifestRaw),oldFetch=globalThis.fetch,oldEntry=process.argv[1];
   const stage=fs.mkdtempSync(path.join(f.root,'stage-'));
   t.after(()=>{globalThis.fetch=oldFetch;process.argv[1]=oldEntry;});
   manifest.source=s.snapshot();
   f.origin.head=f.origin.workflow_head=f.run.head_sha=f.job.head_sha=f.artifact.workflow_run.head_sha=f.receipt.original_head=manifest.source.head;
+  if(queueOnly)f.receipt.executed_workflow.sha=manifest.source.head;
   f.workflow.sha=manifest.source.producer.workflows.find(row=>row.path===f.workflow.path).oid;
   const authenticate=async source=>{
     f.manifestRaw=Buffer.from(JSON.stringify({...manifest,source})+'\n');
@@ -236,6 +243,19 @@ test('private assembly admission uses actual declared inputs and rejects legacy 
   process.argv[1]=path.join(f.root,'scripts/assemble-selected-package.mjs');
   const issue=original=>issuePackageAssemblyExecution({original,source:f.root,stage,executingRoot:f.root});
   assert.doesNotThrow(()=>requirePackageAssemblyExecution(issue(token)));
+  // Literal deferred project imports are authenticated before evaluation, even
+  // when their module bodies deliberately cannot be executed during admission.
+  s.write('scripts/assemble-selected-package.mjs', "export async function current(){return import('./package-current-additive.mjs');}");
+  s.write('scripts/package-current-additive.mjs', "import '../src/effective-footprint.js';throw Error('must not evaluate current consumer');");
+  s.write('src/effective-footprint.js', "throw Error('must not evaluate current helper');");s.commit();
+  const deferred=issue(token);assert(deferred.files.some(pin=>pin.path==='scripts/package-current-additive.mjs'));
+  assert(deferred.files.some(pin=>pin.path==='src/effective-footprint.js'));
+  for(const name of ['scripts/package-current-additive.mjs','src/effective-footprint.js']){
+    const originalBody=fs.readFileSync(path.join(f.root,name));fs.appendFileSync(path.join(f.root,name),'// substituted');
+    assert.throws(()=>issue(token),/Executing assembly code differs/);
+    assert.throws(()=>requirePackageAssemblyExecution(deferred),/Executing assembly code differs/);
+    fs.writeFileSync(path.join(f.root,name),originalBody);
+  }
   for(const name of ['test/incidental.test.mjs','scripts/observer.mjs','.github/workflows/unrelated.yml']){
     s.write(name,'unconsumed observer');s.commit();assert.doesNotThrow(()=>requirePackageAssemblyExecution(issue(token)),name);
   }
@@ -253,7 +273,7 @@ test('private assembly admission uses actual declared inputs and rejects legacy 
     s.write('.github/package-inputs.json',declaration);
     if(name.endsWith('.mjs'))fs.unlinkSync(path.join(f.root,name));s.commit();
   }
-  for(const name of ['scripts/builder.mjs','package-lock.json','scripts/package-output-artifact.mjs','scripts/package-node-runtime.mjs','.github/workflows/merge-integration-checks.yml','.github/workflows/worker-merge.yml']){
+  for(const name of ['scripts/builder.mjs','package-lock.json','scripts/package-output-artifact.mjs','scripts/package-node-runtime.mjs',...(!queueOnly?['.github/workflows/merge-integration-checks.yml']:[]),'.github/workflows/worker-merge.yml']){
     const old=fs.readFileSync(path.join(f.root,name),'utf8');s.write(name,'changed');s.commit();
     assert.throws(()=>issue(token),/input changed|producer workflow required/,name);
     s.write(name,old);s.commit();
@@ -262,8 +282,8 @@ test('private assembly admission uses actual declared inputs and rejects legacy 
   await assert.rejects(authenticate(legacy),/Actual executed producer workflow/);
 });
 
-function originalDiscovery(t,{worker=false}={}){
-  const f=original(t,{worker}),s=sourceFixture(f),before=s.snapshot(),repo=f.repo;
+function originalDiscovery(t,{worker=false,queueOnly=false}={}){
+  const f=original(t,{worker}),s=sourceFixture(f,{author:!queueOnly}),before=s.snapshot(),repo=f.repo;
   const rows=s.git('ls-tree','-rlz','HEAD').split('\0').filter(Boolean).map(line=>{
     const [metadata,name]=line.split('\t'),[mode,type,oid,size]=metadata.trim().split(/\s+/);
     return {path:name,mode,type,sha:oid,size:Number(size)};
@@ -404,6 +424,18 @@ test('final-worker original binds candidate source separately from successful pr
   assert.throws(()=>requireOriginalPackageOutput(structuredClone(token)),/Privately authenticated/);
 });
 
+test('actual current queue step roster admits an original donor without historical readback',async t=>{
+  const f=original(t,{worker:true}),old=globalThis.fetch;t.after(()=>{globalThis.fetch=old;});
+  const workflow=fs.readFileSync(new URL('../.github/workflows/worker-merge.yml',import.meta.url),'utf8');
+  const integration=workflow.split('\n  integration:\n')[1].split('\n  merge:\n')[0];
+  const names=[...integration.matchAll(/^      - name: (.+)$/gm)].map(match=>match[1]);
+  for(const name of f.job.steps.map(row=>row.name))assert(names.includes(name),'Actual current workflow must contain '+name);
+  assert(!names.includes('Read back qualified native build outputs when selected'));
+  f.job.steps=names.map((name,index)=>({name,number:index+1,status:'completed',conclusion:'success'}));
+  globalThis.fetch=async()=>new Response(f.log());
+  const token=await authenticateOriginalPackageOutput(f);assert.equal(requireOriginalPackageOutput(token).manifest.source.head,f.origin.head);
+});
+
 test('worker origin rejects substituted source, workflow, job, artifact and incomplete producer steps',async t=>{
   const old=globalThis.fetch;t.after(()=>{globalThis.fetch=old;});
   const cases=[
@@ -417,20 +449,32 @@ test('worker origin rejects substituted source, workflow, job, artifact and inco
     f=>{f.job.head_sha=f.origin.head;},
     f=>{f.job.name='integration (1)';},
     f=>{f.job.conclusion='failure';},
-    f=>{f.job.steps.find(row=>row.name==='Read back qualified native build outputs when selected').conclusion='failure';},
+    f=>{f.job.steps.find(row=>row.name.startsWith('Inventory')).conclusion='skipped';},
     f=>{f.artifact.workflow_run.head_sha=f.origin.head;},
     f=>{f.workflow.sha='f'.repeat(40);},
     f=>{f.workflow.mode='120000';},
     f=>{f.receipt.original_head=f.origin.workflow_head;},
     f=>{f.job.steps.find(row=>row.name.startsWith('Inventory')).number=5;},
-    f=>{f.job.steps.find(row=>row.name.startsWith('Retain')).number=4;},
+    f=>{f.job.steps.find(row=>row.name.startsWith('Retain')).number=2;},
     ...['Snapshot original final-worker package inputs','Build the combined application once before asset-dependent tests',
-      'Inventory original final-worker package output','Read back qualified native build outputs when selected',
-      'Test applicable combined-tree invariants without publishing or live imports','Retain original final-worker package output']
+      'Inventory original final-worker package output','Test applicable combined-tree invariants without publishing or live imports','Retain original final-worker package output']
       .map(name=>f=>{f.job.steps.find(row=>row.name===name).conclusion='skipped';}),
   ];
   for(const mutate of cases){const f=original(t,{worker:true});mutate(f);globalThis.fetch=async()=>new Response(f.log());
     await assert.rejects(authenticateOriginalPackageOutput(f));}
+});
+
+test('queue-only discovery never queries the deleted author workflow and admits its genuine original',async t=>{
+  const f=originalDiscovery(t,{worker:true,queueOnly:true}),old=globalThis.fetch;t.after(()=>{globalThis.fetch=old;});
+  globalThis.fetch=async()=>new Response(f.log());
+  const base=f.api,calls=[];
+  const api=async route=>{calls.push(route);if(route.includes('/actions/workflows/merge-integration-checks.yml/'))throw Error('GitHub GET failed (HTTP 404)');return base(route);};
+  api.jobLogRedirect=base.jobLogRedirect;
+  const result=await findOriginalPackage({api,repo:f.repo,current:f.s.snapshot()});
+  assert.equal(result.origin.run_id,17);assert.equal(result.origin.head,f.sourceHead);
+  assert.equal(calls.filter(route=>route.includes('/actions/workflows/')).length,1);
+  assert(calls.some(route=>route.includes('/actions/workflows/worker-merge.yml/')));
+  assert(!calls.some(route=>route.includes('/actions/workflows/merge-integration-checks.yml/')));
 });
 
 test('bounded discovery checks both producer workflows and distinct runs sharing a workflow SHA',async t=>{
@@ -463,7 +507,7 @@ test('worker invocation uses only trusted candidate and exact selected integrati
   const environment={GITHUB_EVENT_NAME:'workflow_dispatch',GITHUB_WORKFLOW:'Serialize worker PR merges',GITHUB_REF:'refs/heads/main',
     INTEGRATION_PROFILE:'full',INTEGRATION_SHARD:'0',INTEGRATION_TEST_SELECTION:'selected-data',SELECTED_PACKAGE_CANDIDATE:candidate};
   const event={pull_request:{head:{sha:injected}},inputs:{source_head:injected,original_run_id:'99',candidate:injected}};
-  assert.deepEqual(packageAssemblyInvocation(event,environment),{proofMode:false,expectedHead:candidate,originalRunId:undefined});
+  assert.deepEqual(packageAssemblyInvocation(event,environment),{expectedHead:candidate});
   for(const mutation of [{GITHUB_REF:'refs/heads/engineering/fixture'},{GITHUB_WORKFLOW:'Unrelated workflow'},
     {INTEGRATION_PROFILE:'evidence'},{INTEGRATION_SHARD:'1'},{INTEGRATION_TEST_SELECTION:'complete'},
     {SELECTED_PACKAGE_CANDIDATE:undefined},{SELECTED_PACKAGE_CANDIDATE:'main'}])
@@ -503,7 +547,8 @@ test('PR discovery checks actual merge-ref workflow bytes even when source and r
 
 test('trusted invocation carries the existing exact selected base without receipt-derived authority',()=>{
   const base='b'.repeat(40),head='a'.repeat(40);
-  const env={GITHUB_EVENT_NAME:'pull_request',SELECTED_PACKAGE_TRUSTED_BASE:base};
+  const env={GITHUB_EVENT_NAME:'workflow_dispatch',GITHUB_WORKFLOW:'Serialize worker PR merges',GITHUB_REF:'refs/heads/main',
+    INTEGRATION_PROFILE:'full',INTEGRATION_SHARD:'0',INTEGRATION_TEST_SELECTION:'selected-data',SELECTED_PACKAGE_CANDIDATE:head,SELECTED_PACKAGE_TRUSTED_BASE:base};
   assert.equal(packageAssemblyInvocation({pull_request:{head:{sha:head}}},env).trustedBase,base);
   assert.throws(()=>packageAssemblyInvocation({pull_request:{head:{sha:head}}},{...env,SELECTED_PACKAGE_TRUSTED_BASE:'main'}),/Exact trusted selected base/);
 });
@@ -547,90 +592,134 @@ test('discovery and actual private execution admit32 leaves including a later ac
   }
 });
 
-// Bounded real typed-reader bridge: one requested native cell, in-memory Git
-// operands and the existing SOURCE evaluator. No original country dataset or
-// physical producer is launched by this regression.
-function detachedSourceFixture({invalid=false}={}){
-  const version='a'.repeat(40),family='gb:TST:ADM2',id=family+':A',size=262166;
-  const geometry={type:'Polygon',coordinates:[[[-.03,-.02],[.03,-.02],[.03,.02],[-.03,.02],[-.03,-.02]]]};
-  const files=new Map(),byBlob=new Map();
-  const put=(name,value)=>{
-    const raw=Buffer.isBuffer(value)?value:valueBytes(value);
-    const oid=createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex');
-    const pin={commit:version,path:name,mode:'100644',git_blob_oid:oid,bytes:raw.length,sha256:sha(raw)};
-    files.set(name,{raw,pin});byBlob.set(oid,raw);return pin;
-  };
-  const source=put('original-source.json',{type:'FeatureCollection',features:[{type:'Feature',properties:{shapeID:'A'},geometry}]}),
-    roster=put('owners.json',[{id,index:1}]),physical=put('physical.json',{results:[{target:id,issues:[],support:{mapped_land_support:geometry}}]}),
-    measured=put('measured.json',[{target:id,consumed:{geometry},selected:{id,geometry}}]),
-    helper=put('scripts/retained-role.py',Buffer.from('# retained typed SOURCE fixture')),
-    unreferenced=put('scripts/unreferenced-role.py',Buffer.from('# no typed SOURCE role'));
-  const catalogue=put('coordination/engineering/original-geography-source-corpus-20261006/catalogue.json',{
-    products:[{key:family,parts:[{path:source.path,bytes:source.bytes,sha256:source.sha256}],feature_count:1,
-      original_bytes:source.bytes,original_sha256:source.sha256}]});
-  const latitudes=nativeRowLatitudes(size),raw=Buffer.alloc(size*8);
-  for(let i=0;i<size;i++)raw.writeDoubleLE(latitudes[i],i*8);
-  const nativeLatitudes=put('latitudes.f64le',raw);
-  const evidence=put('source-evidence.json',{version:1,kind:'source-target-native-evidence-v1',catalogue,
-    owner_roster:roster,physical_evidence:physical,physical_input:measured,physical_reproduction:helper,
-    native_latitudes:nativeLatitudes,native_contract:{size,native_latitudes:nativeLatitudes,original_assets:{bounds:{sha256:roster.sha256}}},
-    base_reference:{id:'fixture-base'},families:[{source_id:family,parts:[source]}],
-    targets:[{id,pixelIndex:1,source_family:family,base_geometry:geometry,coverage_classes:['mapped_land_support'],
-      territorial_exclusions:[],source_receipt_sha256:physical.sha256}],arbitrary_pin_shaped_metadata:unreferenced});
-  const x=Math.floor(size/2+(invalid?1:.01)/360*size),patch=put('patch.json',{rows:[{y:size/2,runs:[[x,x+1,1]]}]}),
-    binding={version:1,kind:'source-target-native-custody-v1',source_evidence:evidence,native_patch:patch},
-    preimage={...binding,kind:'source-target-native-rule-v1'},
-    authority={policy_id:'retained-source-literal-additions',policy_version:1,rule_preimage:put('rule.json',preimage),
-      rule_sha256:valueSha(preimage),source_authority:put('binding.json',binding)},
-    entry={...authority,authority_sha256:valueSha(authority)};
-  class FixtureReader extends ImmutableReader{
-    git(...args){
-      if(args[0]==='ls-tree'){
-        const name=args.at(-1),item=files.get(name);assert.ok(item,name);
-        return Buffer.from(`100644 blob ${item.pin.git_blob_oid}\t${name}\0`);
-      }
-      if(args[0]==='cat-file'&&args[1]==='-e')return Buffer.alloc(0);
-      if(args[0]==='cat-file'&&args[1]==='-s')return Buffer.from(String(byBlob.get(args[2]).length));
-      if(args[0]==='cat-file'&&args[1]==='blob')return byBlob.get(args[2]);
-      throw Error('Unexpected bounded fixture Git request: '+args.join(' '));
-    }
-  }
-  const reader=()=>new FixtureReader('.',version);
-  const accepted={commit:version,files:[helper,unreferenced].map(p=>({path:p.path,mode:p.mode,oid:p.git_blob_oid,bytes:p.bytes}))};
-  const definition={version:1,inputs:['.github/package-inputs.json','data/ownership-selection.json'],
-    optional_inputs:[],verification_paths:[],generated_outputs:['dist/']},producer={kind:'immediate-cloudflare-build-v1',workflows:[]},
-    before={head:version,definition,selection:{version:1,additive_release:{path:'coordination/engineering/old/release.json'}},producer,
-      files:definition.inputs.map(path=>({path,mode:'100644',oid:'b'.repeat(40)}))};
-  const current=names=>({...before,definition:{...definition,inputs:[...definition.inputs,...names]},
-    files:[...before.files,...names.map(path=>({path,mode:'100644',oid:files.get(path).pin.git_blob_oid}))]});
-  return {reader,entry,helper,unreferenced,accepted,before,current};
+// A small real current-product fixture. It exercises the same consumer after
+// private original-output admission, without any scientific custody inputs.
+async function currentProductFixture(t,{changeCatalog=()=>{},changeGeometry=()=>{}}={}) {
+  const {gzipSync}=await import('node:zlib');
+  const {footprintHash}=await import('../scripts/check-prepared.mjs');
+  const {footprintValueSha256,additiveReleaseFootprintDigest}=await import('../src/effective-footprint.js');
+  const feature={id:'owner',pixelIndex:1,properties:{parent_id:'parent'},
+    geometry:{type:'Polygon',coordinates:[[[0,0],[1,0],[1,1],[0,1],[0,0]]]}};
+  const addition={type:'Polygon',coordinates:[[[1,0],[2,0],[2,1],[1,1],[1,0]]]};
+  const base={id:'geography:base',footprints_sha256:footprintHash([feature]),hierarchy_sha256:'a'.repeat(64)};
+  const rosterRaw=Buffer.from(JSON.stringify([{id:feature.id,index:1,province_id:'parent',bounds:[0,0,1,1]}])),bounds=gzipSync(rosterRaw);
+  const manifestRaw=Buffer.from(JSON.stringify({size:262166,original_assets:{bounds:{sha256:sha(bounds)}}}));
+  const ledger={version:1,kind:'native-additive-repair-ledger-v1',rule_sha256:'b'.repeat(64),base_reference:base,
+    parent_inventory:{components:1,report_sha256:'c'.repeat(64),roster_sha256:'d'.repeat(64)},scope_ids:['gap'],assigned_cells:2,
+    rows:[{component_id:'gap',disposition:'assigned',target_id:'owner',pixelIndex:1,base_geometry:feature.geometry,
+      base_geometry_sha256:footprintValueSha256(feature.geometry),geometry:addition,geometry_sha256:footprintValueSha256(addition),
+      source_receipt_sha256:'e'.repeat(64),native_cells:2}]};
+  const ledgerRaw=Buffer.from(JSON.stringify(ledger));
+  const effectiveFeature={...feature,additiveFootprint:{version:1,kind:'retained-base-plus-additions',
+    baseline_release_sha256:base.footprints_sha256,base_geometry_sha256:footprintValueSha256(feature.geometry),
+    ledger_sha256:sha(ledgerRaw),rule_sha256:ledger.rule_sha256,additions:[{component_id:'gap',geometry:addition,
+      geometry_sha256:footprintValueSha256(addition),source_receipt_sha256:'e'.repeat(64)}]}};
+  const effective={...base,id:'geography:effective',footprints_sha256:additiveReleaseFootprintDigest(base,[effectiveFeature])};
+  const patchRaw=Buffer.from(JSON.stringify({version:1,kind:'unassigned-native-cells-v1',base_reference:base,
+    effective_reference:effective,ledger_sha256:sha(ledgerRaw),rule_sha256:ledger.rule_sha256,rows:[{y:3,runs:[[3,5,1]]}]}));
+  const bodies={base_manifest:manifestRaw,owner_roster:bounds,ledger:ledgerRaw,patch:patchRaw};
+  const names={base_manifest:'base.json',owner_roster:'owners.json.gz',ledger:'ledger.json',patch:'patch.json'};
+  const pin=(name,raw)=>({path:name,bytes:raw.length,sha256:sha(raw)});
+  const envelope={version:1,kind:'retained-native-base-plus-delta-v1',base_reference:base,effective_reference:effective,
+    ...Object.fromEntries(Object.entries(bodies).map(([role,raw])=>[role,pin('additive-repairs/'+names[role],raw)]))};
+  Object.assign(envelope.owner_roster,{encoding:'gzip',decoded_bytes:rosterRaw.length,decoded_sha256:sha(rosterRaw)});
+  const prefix='coordination/engineering/current-fixture/',currentRoot=fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(),'atlas-current-products-')));
+  t.after(()=>fs.rmSync(currentRoot,{recursive:true,force:true}));
+  const files=new Map(Object.entries(bodies).map(([role,raw])=>[prefix+names[role],raw]));
+  const selection={version:1,method:'native-linear-evenodd-first-owner-v1',release_id:base.id,manifest_path:prefix+'base.json',sha256:sha(manifestRaw)};
+  const envelopeRaw=Buffer.from(JSON.stringify(envelope));files.set(prefix+'envelope.json',envelopeRaw);
+  const sidecar={version:2,kind:'retained-native-additive-selection-v2',base_selection:selection,
+    runtime_envelope:pin(prefix+'envelope.json',envelopeRaw),logical_asset_map:Object.fromEntries(Object.entries(bodies).map(([role,raw])=>[role,
+      {...pin(prefix+names[role],raw),...(role==='owner_roster'?{decoded_bytes:rosterRaw.length,decoded_sha256:sha(rosterRaw)}:{})}]))};
+  const sidecarRaw=Buffer.from(JSON.stringify(sidecar));files.set(prefix+'sidecar.json',sidecarRaw);
+  const currentSelection={...selection,additive_release:pin(prefix+'sidecar.json',sidecarRaw)};
+  files.set('data/ownership-selection.json',Buffer.from(JSON.stringify(currentSelection)));
+  files.set('.github/package-inputs.json',Buffer.from(JSON.stringify({version:1,inputs:['.github/package-inputs.json',...files.keys()],
+    optional_inputs:[],verification_paths:[],generated_outputs:['dist/']})));
+  for(const [name,raw]of files){fs.mkdirSync(path.dirname(path.join(currentRoot,name)),{recursive:true});fs.writeFileSync(path.join(currentRoot,name),raw);}
+  // The retained producer really predates the selected addition. Its own valid
+  // one-cell product shares only the invariant native base and owner roster.
+  const priorAddition={type:'Polygon',coordinates:[[[1,0],[1.5,0],[1.5,1],[1,1],[1,0]]]};
+  const priorLedger=structuredClone(ledger);priorLedger.assigned_cells=1;
+  Object.assign(priorLedger.rows[0],{native_cells:1,geometry:priorAddition,geometry_sha256:footprintValueSha256(priorAddition)});
+  const priorLedgerRaw=Buffer.from(JSON.stringify(priorLedger)),priorFeature=structuredClone(effectiveFeature);
+  priorFeature.additiveFootprint.ledger_sha256=sha(priorLedgerRaw);
+  Object.assign(priorFeature.additiveFootprint.additions[0],{geometry:priorAddition,geometry_sha256:footprintValueSha256(priorAddition)});
+  const priorEffective={...base,id:'geography:prior-effective',footprints_sha256:additiveReleaseFootprintDigest(base,[priorFeature])};
+  const priorPatchRaw=Buffer.from(JSON.stringify({version:1,kind:'unassigned-native-cells-v1',base_reference:base,
+    effective_reference:priorEffective,ledger_sha256:sha(priorLedgerRaw),rule_sha256:ledger.rule_sha256,rows:[{y:3,runs:[[3,4,1]]}]}));
+  const priorBodies={...bodies,ledger:priorLedgerRaw,patch:priorPatchRaw},priorEnvelope={...envelope,effective_reference:priorEffective,
+    ledger:pin(envelope.ledger.path,priorLedgerRaw),patch:pin(envelope.patch.path,priorPatchRaw)};
+  const catalog=[{...feature,geometry:null}],geometry=[{id:feature.id,geometry:feature.geometry}];changeCatalog(catalog);changeGeometry(geometry);
+  const atlas={additiveRelease:priorEnvelope,reference_release:priorEffective,parts:['geography/catalog-0.json.gz'],geometryParts:['geography/part-0.json.gz']};
+  const f=original(t,{bodies:{'dist/client/atlas-geography.json':JSON.stringify(atlas),
+    'dist/client/geography/catalog-0.json.gz':gzipSync(JSON.stringify(catalog)),
+    'dist/client/geography/part-0.json.gz':gzipSync(JSON.stringify(geometry)),
+    ...Object.fromEntries(Object.entries(priorBodies).map(([role,raw])=>['dist/client/'+priorEnvelope[role].path,raw]))}});
+  const prior=globalThis.fetch;globalThis.fetch=async()=>new Response(f.log());t.after(()=>{globalThis.fetch=prior;});
+  const originalToken=await authenticateOriginalPackageOutput(f);
+  return {f,currentRoot,originalToken,files,sidecar,currentSelection,feature,bodies,envelope,priorBodies,priorEnvelope};
 }
 
-test('detached typed SOURCE success retains only requested exact descriptors before final admission',()=>{
-  const f=detachedSourceFixture(),parent=f.reader(),child=f.reader(),retained=new Map();
-  parent.captureSelectedInputs=inputs=>retainSelectedPackageInputs(f.accepted.files,inputs,retained);
-  const proof=readRetainedRegistryAuthority(child,f.entry,parent);
-  assert.equal(proof.kind,'authenticated-registry-source-custody-v1');
-  assert.ok(retained.has(f.helper.path),'Actual child SOURCE read must reach the final package gate');
-  assert.equal(retained.has(f.unreferenced.path),false,'Pin-shaped arbitrary metadata is not typed reachability');
-  assert(parent.inventory.size>0,'Complete successful child input custody survives');
-  assert.doesNotThrow(()=>admitPackageInputTransition(f.before,f.current([f.helper.path]),
-    {acceptedInputs:f.accepted,typedInputs:[...retained.values()]}));
-  assert.throws(()=>admitPackageInputTransition(f.before,f.current([f.helper.path,f.unreferenced.path]),
-    {acceptedInputs:f.accepted,typedInputs:[...retained.values()]}),/lacks authenticated typed consumption/);
-  const ordinary=f.reader();assert.deepEqual(readRetainedRegistryAuthority(ordinary,f.entry),proof,
-    'Default reader proof is unchanged by optional descriptor observation');
-  assert.equal(ordinary.captureSelectedInputs,undefined);
+test('shared current consumer publishes authenticated original context with historical custody entirely cold',async t=>{
+  const f=await currentProductFixture(t),context=readOriginalPackageGeography(f.originalToken);
+  const git=(root,...args)=>execFileSync('git',['-C',root,...args],{encoding:'utf8',stdio:['ignore','pipe','pipe']}).trim();
+  const historicalNames=['code-source.json','issued-plan.json','stderr.log','stdout.json','terminal.json'];
+  const historicalDirectory='coordination/engineering/historical-custody/';
+  for(const name of historicalNames){const file=path.join(f.currentRoot,historicalDirectory,name);fs.mkdirSync(path.dirname(file),{recursive:true});fs.writeFileSync(file,'retained original science');}
+  git(f.currentRoot,'init','-q');git(f.currentRoot,'add','.');
+  const commit=()=>git(f.currentRoot,'-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-qm','fixture');
+  commit();const historical=git(f.currentRoot,'rev-parse','HEAD');
+  fs.rmSync(path.join(f.currentRoot,historicalDirectory),{recursive:true});git(f.currentRoot,'add','.');commit();
+  const shallow=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-current-shallow-'));fs.rmdirSync(shallow);t.after(()=>fs.rmSync(shallow,{recursive:true,force:true}));
+  execFileSync('git',['clone','--quiet','--depth=1','file://'+f.currentRoot,shallow]);
+  assert.notEqual(spawnSync('git',['-C',shallow,'cat-file','-e',historical+'^{commit}'],{stdio:'pipe'}).status,0);
+  git(shallow,'remote','set-url','origin','file:///unavailable-historical-repository');
+  const head=git(shallow,'rev-parse','HEAD');
+  const {prepareCurrentSelectedAdditive}=await import('../scripts/package-current-additive.mjs');
+  const publication=await prepareCurrentSelectedAdditive({root:shallow,...context});
+  assert.deepEqual(context.features,[f.feature]);assert.deepEqual(publication.selection,f.currentSelection);
+  assert.notDeepEqual(publication.reference_release,context.atlas.reference_release,'The actual current effective reference must change');
+  assert.deepEqual(publication.reference_release,f.envelope.effective_reference);
+  for(const role of ['base_manifest','owner_roster'])assert.deepEqual(f.bodies[role],f.priorBodies[role],'Invariant '+role+' stays byte-exact');
+  for(const role of ['ledger','patch'])assert.notEqual(sha(f.bodies[role]),sha(f.priorBodies[role]),'Current '+role+' is a genuinely different product');
+  assert.equal(publication.input_inventory.length,6);
+  assert.deepEqual(publication.input_inventory.map(pin=>pin.path).sort(),
+    [f.currentSelection.additive_release.path,f.sidecar.runtime_envelope.path,...Object.values(f.sidecar.logical_asset_map).map(pin=>pin.path)].sort());
+  for(const pin of publication.input_inventory){assert.equal(pin.whole_body_consumed,true);assert.equal(pin.sha256,sha(f.files.get(pin.path)));}
+  for(const name of historicalNames)assert.equal(fs.existsSync(path.join(shallow,historicalDirectory,name)),false);
+  assert.equal(git(shallow,'rev-parse','HEAD'),head);
+  const out=path.join(f.currentRoot,'out');await publication.publish(out);
+  for(const [role,raw]of Object.entries(f.bodies))assert.deepEqual(fs.readFileSync(path.join(out,f.envelope[role].path)),raw);
+  for(const pin of requireOriginalPackageOutput(f.originalToken).manifest.output.files)
+    assert.equal(sha(fs.readFileSync(path.join(f.f.root,pin.path))),pin.sha256,'Original invariant/output remains intact: '+pin.path);
+  await assert.rejects(publication.publish(out),/already exists/);
+  const patch=f.sidecar.logical_asset_map.patch.path;fs.appendFileSync(path.join(shallow,patch),'x');
+  await assert.rejects(prepareCurrentSelectedAdditive({root:shallow,...context}),/whole length|whole checksum/);
 });
 
-test('failed detached SOURCE validation cannot retain admission evidence',()=>{
-  const f=detachedSourceFixture({invalid:true}),parent=f.reader(),retained=new Map();
-  parent.captureSelectedInputs=inputs=>retainSelectedPackageInputs(f.accepted.files,inputs,retained);
-  assert.throws(()=>readRetainedRegistryAuthority(f.reader(),f.entry,parent));
-  assert.equal(retained.size,0);assert.equal(parent.inventory.size,0);
-
+test('original emitted geometry join rejects coherent missing, duplicate, foreign and drifted bodies',async t=>{
+  for(const change of [rows=>rows.length=0,rows=>rows.push(structuredClone(rows[0])),rows=>rows[0].id='foreign',
+    rows=>rows[0].geometry.coordinates[0][1][0]=3]){
+    const f=await currentProductFixture(t,{changeGeometry:change});
+    assert.throws(()=>readOriginalPackageGeography(f.originalToken),/Nonempty|Duplicate|identity join|base geometry/);
+  }
+  for(const change of [rows=>rows.push(structuredClone(rows[0])),rows=>rows[0].id='foreign']){
+    const f=await currentProductFixture(t,{changeCatalog:change});
+    assert.throws(()=>readOriginalPackageGeography(f.originalToken),/identity join/);
+  }
 });
 
+test('shared current consumer retains independent owner and base checks and refuses linked selection',async t=>{
+  const f=await currentProductFixture(t),context=readOriginalPackageGeography(f.originalToken);
+  const {prepareCurrentSelectedAdditive}=await import('../scripts/package-current-additive.mjs');
+  await assert.rejects(prepareCurrentSelectedAdditive({root:f.currentRoot,...context,
+    selectedGrid:{...context.selectedGrid,sha256:'f'.repeat(64)}}),/native selection/);
+  const features=context.features.map(feature=>({...feature,properties:{parent_id:'foreign'}}));
+  await assert.rejects(prepareCurrentSelectedAdditive({root:f.currentRoot,...context,features}),/owner identity or parent/);
+  const selection=path.join(f.currentRoot,'data/ownership-selection.json');fs.renameSync(selection,selection+'.original');fs.symlinkSync(selection+'.original',selection);
+  await assert.rejects(prepareCurrentSelectedAdditive({root:f.currentRoot,...context}),/selection must be ordinary/);
+});
 
 test('shared selected-input admission covers actual builders and refuses undeclared imports',t=>{
   const root=fs.realpathSync(process.cwd()),definition=loadPackageInputs(root),files=new Set();

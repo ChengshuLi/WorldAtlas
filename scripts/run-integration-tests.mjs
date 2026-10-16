@@ -6,7 +6,7 @@ import {spawn, spawnSync} from 'node:child_process';
 import {compileHostedMigrations} from './compile-hosted-migrations.mjs';
 import {observeSetupPhase,measuredGitSetup} from './ci-setup-observations.mjs';
 
-export const PACKAGED_ASSET_TESTS = ['test/compact-ownership.test.mjs','test/canonical-compact-repack.test.mjs','test/prepared-parity.test.mjs'];
+export const PACKAGED_ASSET_TESTS = ['test/compact-ownership.test.mjs','test/prepared-parity.test.mjs'];
 
 // Both PR CI and the trusted queue's isolated candidate checkout are shallow.
 // Keep the common native/context vintages for every full regression shard.
@@ -78,7 +78,7 @@ export function fullRegressionShard(inventory, shard) {
 
 // The runner owns this roster; routing controls derive their focused membership.
 export const FOCUSED_INTEGRATION_TESTS = Object.freeze(['handoff-scope','issue-claims','worker-result','regional-research-gate','geography-worker-lane',
-  'evidence-quality','premerge-evidence','geographic-adjudication-api','trusted-workflow-checkouts','merge-integration','merge-integration-entrypoint','integration-proof',
+  'evidence-quality','historical-evidence','premerge-evidence','geographic-adjudication-api','trusted-workflow-checkouts','merge-integration','merge-integration-entrypoint','integration-proof',
   // Actual delivery entry/advance consumers, including scientific dispatch guards.
   'delivery-evidence-derivation','delivery-finalize-config','delivery-handoff-advance','delivery-handoff','delivery-registry-delta','local-workspace','native-authority-entry','native-diagnostic-entry','native-witness-authority','physical-source-retention','source-cohort','source-completed-staging','source-evidence-derivation','source-member-native-delivery','source-target-native-delivery'].map(name => `test/${name}.test.mjs`));
 

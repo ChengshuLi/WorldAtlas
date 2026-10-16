@@ -11,7 +11,6 @@ import {createHash} from 'node:crypto';
 import {verifyIssueScope} from '../scripts/issue-claim-contract.mjs';
 import {checkPremergeEvidence} from '../scripts/premerge-evidence.mjs';
 import {prepareIntegration, completeIntegration} from '../scripts/merge-integration.mjs';
-import {checkPRGates} from '../scripts/check-pr-gates.mjs';
 import {integrationProfile, selectedDataSelection, selectedDataCandidate, validateSelectedExpectations, SELECTED_SMOKE} from '../scripts/integration-profile.mjs';
 const prefix = 'coordination/engineering/fixture-delivery/';
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -176,12 +175,10 @@ function gateFixture(f=fixture()) {
       ...(prepared.test_selection?{test_selection:prepared.test_selection,expectations_path:prepared.expectations_path}:{}),
       geography_software:prepared.geography_software};
   };
-  f.gate=()=>checkPRGates({event:f.event,repo:'owner/repo',token:'fixture',api:f.api,phase:'metadata'});
   return f;
 }
-test('trusted author authority and actual queue classification keep separate consumed roles',async()=>{
-  const f=gateFixture(), result=await f.gate();
-  assert.equal(result.status,'checked');assert.equal(result.profile,undefined);assert.equal(result.package,undefined);
+test('actual queue classification validates current issue authority without author jobs',async()=>{
+  const f=gateFixture();
   assert.equal((await f.select()).test_selection,'selected-data');
   f.claim.active=false;assert.equal((await f.select()).test_selection,'selected-data');
   f.issue.state='closed';await assert.rejects(f.select());
@@ -229,6 +226,11 @@ function mergeFixture({selectedFixture,gateReady=false} = {}) {
     if(route===root+'/merges'&&method==='POST'){assert.notEqual(body.base,'main');assert.equal(body.head,f.head);return {sha:candidate};}
     if(route===root+'/git/ref/heads/main')return {object:{sha:f.base}};
     if(route===root+'/git/commits/'+candidate)return {sha:candidate,tree:{sha:'head-tree'},parents:[{sha:f.base},{sha:f.head}]};
+    if(route===root+'/contents/.github/package-inputs.json?ref='+candidate){
+      const row=f.authored.entries.get('.github/package-inputs.json'),bytes=f.blobs.get(row.sha);
+      assert(bytes,'Candidate definition must come from its actual authored tree');
+      return {type:'file',path:row.path,sha:row.sha,size:row.size,encoding:'base64',content:bytes.toString('base64')};
+    }
     if(route.includes('/check-runs'))return {check_runs:['scope',...(f.evidenceQuality?['evidence']:[])].map((name,id)=>({id:id+1,name,status:'completed',conclusion:'success',app:{id:1}}))};
     if(route===root+'/commits/'+f.head+'/status')return {statuses:[]};
     if(route.includes('/actions/runs/99/artifacts'))return {total_count:0,artifacts:[]};
@@ -246,6 +248,10 @@ test('real selected prepare has no author proof and final merge accepts the fres
   const preparedFixture=mergeFixture(), prepared=await prepareIntegration(preparedFixture.options);
   assert.equal(prepared.profile,'full');assert.equal(prepared.test_selection,'selected-data');assert.deepEqual(prepared.shards,[0]);
   assert(!('proof' in prepared));assert(!('geography_proof' in prepared));
+  assert.equal(prepared.candidate_tree,'head-tree');
+  assert(prepared.checkout_patterns.includes('/'+prepared.expectations_path));
+  assert(preparedFixture.mergeReads.includes('/repos/owner/repo/contents/.github/package-inputs.json?ref='+'9'.repeat(40)),
+    'Checkout selection must authenticate the actual integrated candidate definition');
   // A separate final-phase fixture has no cross-job byte cache or evidence overlap.
   const first=mergeFixture(),result=await first.complete();assert.equal(result.accepted,true);assert.equal(first.writes.length,1);
   assert(!first.mergeReads.some(route=>route.includes('/actions/')), 'No speculative proof or artifact discovery');
@@ -532,8 +538,8 @@ test('registry changes preserve every original entry and cannot remove or rewrit
 });
 
 test('real SOURCE metadata entry and cold final merge preserve applicability',async()=>{
-  const gate=gateFixture(retainedSourceFixture()),authority=await gate.gate();
-  assert.equal(authority.status,'checked');assert.equal(authority.profile,undefined);assert.equal((await gate.select()).test_selection,'selected-data');
+  const gate=gateFixture(retainedSourceFixture());
+  assert.equal((await gate.select()).test_selection,'selected-data');
   const prep=mergeFixture({selectedFixture:retainedSourceFixture()}),prepared=await prepareIntegration(prep.options);
   assert.equal(prepared.test_selection,'selected-data');assert(!('proof' in prepared));assert(!('geography_proof' in prepared));
   const cold=mergeFixture({selectedFixture:retainedSourceFixture()}),result=await cold.complete();
@@ -754,8 +760,8 @@ async function fixedConsumerFixture(options={}) {
   return options.gate?gateFixture(f):mergeFixture({...options,selectedFixture:f});
 }
 test('fixed COD/PHL lean declarations reach actual queue selection and cold final merge validation',async()=>{
-  const gate=await fixedConsumerFixture({gate:true}),authority=await gate.gate();
-  assert.equal(authority.status,'checked');assert.equal(authority.profile,undefined);assert.equal((await gate.select()).test_selection,'selected-data');
+  const gate=await fixedConsumerFixture({gate:true});
+  assert.equal((await gate.select()).test_selection,'selected-data');
   const prep=await fixedConsumerFixture(),prepared=await prepareIntegration(prep.options);
   assert.equal(prepared.test_selection,'selected-data');assert(!('proof' in prepared));assert(!('geography_proof' in prepared));
   const cold=await fixedConsumerFixture(),result=await cold.complete();
@@ -843,8 +849,8 @@ test('supporting logs retain complete whole-body text identity',async()=>{
 });
 test('real PR1753 selection reaches cold queue classification and final validation',async()=>{
   const ready=async()=>{const f=real1753();assert.equal((await f.run()).test_selection,'selected-data');f.reads.length=0;return f;};
-  const gate=gateFixture(await ready()),authority=await gate.gate();
-  assert.equal(authority.status,'checked');assert.equal(authority.profile,undefined);assert.equal((await gate.select()).test_selection,'selected-data');
+  const gate=gateFixture(await ready());
+  assert.equal((await gate.select()).test_selection,'selected-data');
   const cold=mergeFixture({selectedFixture:await ready()}),result=await cold.complete();
   assert.equal(result.accepted,true);assert(!('proof' in result));
 });

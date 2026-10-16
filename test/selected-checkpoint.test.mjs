@@ -309,3 +309,64 @@ test('failed complete literal check preserves authenticated baseline and permits
  assert.equal(f.api.qualifyTransition({state,reader:retryReader}).available,true);
  f.api.releaseCheckpoint(state);
 });
+
+test('an unconsumed logical source shadowed by the exact accepted override does not replay science',async t=>{
+ const f=await trustedFixture(t,{sourceOverride:true});
+ f.save('data/source.json',{unselected:'different ordinary source'});const baseline=f.commit();
+ const reader=new f.native.ImmutableReader(f.root,baseline),qualified=f.api.qualifyCheckpoint({reader});
+ assert.equal(qualified.available,true);
+ f.save('data/source.json',{unselected:'changed again'});const candidate=f.commit();
+ const after=new f.native.ImmutableReader(f.root,candidate,{invocation:reader.invocation});
+ const transition=f.api.qualifyTransition({state:qualified.state,reader:after});
+ assert.equal(transition.available,true);assert.deepEqual(transition.changedNativeRows,[]);
+ const census=f.api.checkpointRouteCensus({transition});
+ assert.equal(census.routes.find(p=>p.path==='data/source.json').tree,f.git('ls-tree','-z',candidate,'--','data/source.json').toString());
+ assert.equal(f.api.projectSourceFeatures({state:transition.candidate,ids:['A']}).features[0].id,'A');
+ assert.ok(![...after.inventory.values()].some(p=>p.path==='data/source.json'));
+ assert.ok(![...after.inventory.values()].some(p=>p.path.startsWith('data/native/')),'Unchanged rows do not acquire native bodies');
+ f.api.releaseCheckpoint(qualified.state);
+});
+
+test('a shadowed logical path that was also a physical input remains protected',async t=>{
+ const f=await trustedFixture(t,{sourceOverride:true,physicalLogicalSource:true});
+ const qualified=f.api.qualifyCheckpoint({reader:f.reader});assert.equal(qualified.available,true);
+ f.save('data/source.json',{changed:'actually consumed elsewhere'});const candidate=f.commit();
+ const after=new f.native.ImmutableReader(f.root,candidate,{invocation:f.reader.invocation});
+ const transition=f.api.qualifyTransition({state:qualified.state,reader:after});
+ assert.equal(transition.available,false);assert.match(transition.reason,/present\/absent route changed/);
+ f.api.releaseCheckpoint(qualified.state);
+});
+
+test('a wrong override logical mapping cannot exempt an ordinary source route',async t=>{
+ const f=await trustedFixture(t,{sourceOverride:true,overrideLogicalPath:'data/somewhere-else.json'});
+ f.save('data/source.json',{changed:'unmatched logical path'});const candidate=f.commit();
+ const result=f.api.qualifyCheckpoint({reader:new f.native.ImmutableReader(f.root,candidate)});
+ assert.equal(result.available,false);assert.match(result.reason,/routing alternative changed/);
+});
+
+test('physical override bytes and native source routes remain binding',async t=>{
+ for(const name of ['data/selected-source.json.gz','data/native/runs.bin.gz']){
+  const f=await trustedFixture(t,{sourceOverride:true}),qualified=f.api.qualifyCheckpoint({reader:f.reader});
+  f.save(name,Buffer.from('different physical bytes'));const candidate=f.commit();
+  const after=new f.native.ImmutableReader(f.root,candidate,{invocation:f.reader.invocation});
+  const transition=f.api.qualifyTransition({state:qualified.state,reader:after});
+  assert.equal(transition.available,false);assert.match(transition.reason,/present\/absent route changed/);
+  f.api.releaseCheckpoint(qualified.state);
+ }
+});
+
+test('new actual physical use of a shadowed source revokes its next-transition exemption',async t=>{
+ const f=await trustedFixture(t,{nativeAppend:true,sourceOverride:true});
+ const qualified=f.api.qualifyCheckpoint({reader:f.reader});assert.equal(qualified.available,true);
+ const appended=await appendNativeAuthority(f,{membershipPath:'data/source.json'});
+ const reader=new f.native.ImmutableReader(f.root,appended.candidate,{invocation:f.reader.invocation});
+ const transition=f.api.qualifyTransition({state:qualified.state,reader});assert.equal(transition.available,true);
+ assert.ok([...reader.inventory.values()].some(p=>p.path==='data/source.json'&&p.whole_body_consumed));
+ const census=f.api.checkpointRouteCensus({transition});
+ assert.equal(census.routes.find(p=>p.path==='data/source.json').tree,f.git('ls-tree','-z',appended.candidate,'--','data/source.json').toString());
+ f.save('data/source.json',{changed:'now a real physical dependency'});const next=f.commit();
+ const after=new f.native.ImmutableReader(f.root,next,{invocation:f.reader.invocation});
+ const rejected=f.api.qualifyTransition({state:transition.candidate,reader:after});
+ assert.equal(rejected.available,false);assert.match(rejected.reason,/present\/absent route changed/);
+ f.api.releaseCheckpoint(qualified.state);
+});

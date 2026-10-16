@@ -1,21 +1,23 @@
 // Executed only after trusted selected-data classification proves this complete
 // programme is unchanged from the PR base. API credentials stay in trusted code;
-// subprocesses and the current scientific reader receive no token environment.
+// subprocesses and current-product consumption receive no token environment.
 import fs from 'node:fs';
 import fsp from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
+import {gunzipSync} from 'node:zlib';
+import {footprintHash} from './check-prepared.mjs';
 import {githubAPI, githubPages} from './issue-claim-contract.mjs';
 import {integrationTree} from './integration-profile.mjs';
 import {loadPackageInputs, readPackageInputs, containsPackagePath} from './package-inputs.mjs';
-import {inspectPackageRuntime, verifyPackageDependencies} from './package-build.mjs';
+import {inspectPackageNodeRuntime, verifyPackageDependencies} from './package-build.mjs';
 import {committedPackageInputs, committedPackageProducer, PACKAGE_PRODUCER_WORKFLOWS, PACKAGE_PRODUCER_KIND, packageBuildConfiguration,
-  validatePackageOutputManifest, admitPackageInputTransition, admitPackageOutputTransition, inertSelectedPackageInput, streamedPackageFile, installedPackageIdentity, installedPackageDifferences, declaredPackagePythonRoots} from './package-output-artifact.mjs';
-import {authenticateOriginalPackageOutput, readOriginalPackageInventory, issuePackageAssemblyExecution, preparePackageSelectedAdditive,
-  publishPackageSelectedAdditive, packageSelectedPublicationInventory, requirePackageAssemblyExecution}
+  validatePackageOutputManifest, admitPackageInputTransition, admitPackageOutputTransition, inertSelectedPackageInput, streamedPackageFile, installedPackageDifferences, resolvePackagePythonExecutable} from './package-output-artifact.mjs';
+import {authenticateOriginalPackageOutput, readOriginalPackageInventory, requireOriginalPackageOutput, issuePackageAssemblyExecution, requirePackageAssemblyExecution}
   from '../coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs';
+import {installedNodeIdentity} from './package-node-runtime.mjs';
 
 const need=(ok,message)=>{if(!ok)throw Error(message);};
 const hash=raw=>createHash('sha256').update(raw).digest('hex');
@@ -50,7 +52,7 @@ function sourceCompatible(before,current){
 
 // This is the bootstrap's actual trusted PR/combined-candidate base, not the
 // originating package head. Read only tree metadata for explicit retained leaves;
-// the existing private selected reader authenticates their typed consumption.
+// the current-product consumer records their actual whole-body consumption.
 function acceptedInputsFromTree(base,tree,current){
   const files=[];
   for(const name of current.definition.inputs){
@@ -79,10 +81,12 @@ export async function findOriginalPackage({api,repo,current,originalRunId,truste
     trustedCommit=await api(`/repos/${repo}/git/commits/${trustedBase}`);
     need(trustedCommit.sha===trustedBase&&/^[a-f0-9]{40}$/.test(trustedCommit.tree?.sha??''),'Trusted selected base commit differs');
   }
-  const responses=originalRunId===undefined?await Promise.all([
-    api(`/repos/${repo}/actions/workflows/merge-integration-checks.yml/runs?event=pull_request&per_page=20&page=1`),
-    api(`/repos/${repo}/actions/workflows/worker-merge.yml/runs?event=workflow_dispatch&per_page=20&page=1`)
-  ]):[{workflow_runs:[await api(`/repos/${repo}/actions/runs/${originalRunId}`)]}];
+  const workflows=current.producer?.workflows?.map(row=>row.path);
+  need(same(workflows,PACKAGE_PRODUCER_WORKFLOWS)||same(workflows,[PACKAGE_PRODUCER_WORKFLOWS[1]]),
+    'Complete current package producer workflows required');
+  const responses=originalRunId===undefined?await Promise.all(workflows.map(workflow=>
+    api(`/repos/${repo}/actions/workflows/${path.posix.basename(workflow)}/runs?event=${workflow===PACKAGE_PRODUCER_WORKFLOWS[0]?'pull_request':'workflow_dispatch'}&per_page=20&page=1`)
+  )):[{workflow_runs:[await api(`/repos/${repo}/actions/runs/${originalRunId}`)]}];
   need(responses.every(response=>Array.isArray(response.workflow_runs)&&response.workflow_runs.length<=20),'Bounded original run discovery unavailable');
   const runs=responses.flatMap(response=>response.workflow_runs).sort((a,b)=>b.id-a.id||b.run_attempt-a.run_attempt);
   if(originalRunId!==undefined)need(runs.length===1&&runs[0]?.id===originalRunId,'Pinned original run identity differs');
@@ -175,6 +179,48 @@ function currentSource(){
     files:committedPackageInputs(root,definition),producer:committedPackageProducer(root)};
 }
 
+// Reuse the independently authenticated emitted base, including actual geometry.
+// The current ledger cannot supply its own supposedly independent target shape.
+export function readOriginalPackageGeography(original) {
+  const {root:originalRoot,manifest}=requireOriginalPackageOutput(original);
+  const output=new Map(manifest.output.files.map(pin=>[pin.path,pin]));
+  const read=name=>{
+    const pin=output.get(name);need(pin,'Original geography is absent from authenticated output');
+    const raw=fs.readFileSync(path.join(originalRoot,name));
+    need(raw.length===pin.bytes&&hash(raw)===pin.sha256,'Original geography output differs');return raw;
+  };
+  const atlas=JSON.parse(read('dist/client/atlas-geography.json'));
+  need(atlas.additiveRelease?.base_reference,'Original additive base descriptor missing');
+  const asset=pin=>{
+    need(/^additive-repairs\/[A-Za-z0-9_.-]+$/.test(pin?.path??''),'Original additive asset path differs');
+    const name='dist/client/'+pin.path;
+    need(same(output.get(name),{path:name,bytes:pin.bytes,sha256:pin.sha256}),'Original additive asset pin differs');
+    return read(name);
+  };
+  const selectedGrid={sha256:atlas.additiveRelease.base_manifest.sha256,
+    manifest:JSON.parse(asset(atlas.additiveRelease.base_manifest)),bounds:asset(atlas.additiveRelease.owner_roster)};
+  const parts=(names,kind)=>{
+    need(Array.isArray(names)&&names.length>0&&new Set(names).size===names.length,'Complete distinct original '+kind+' parts required');
+    return names.flatMap(name=>{
+      need(typeof name==='string'&&name.startsWith('geography/'+kind+'-')&&/^geography\/(?:catalog|part)-[0-9]+\.json\.gz$/.test(name),'Original geography part path differs');
+      const rows=JSON.parse(gunzipSync(read('dist/client/'+name)));
+      need(Array.isArray(rows)&&rows.length>0,'Nonempty original geography part required');return rows;
+    });
+  };
+  const catalog=parts(atlas.parts,'catalog'),geometries=new Map();
+  for(const row of parts(atlas.geometryParts,'part')){
+    need(typeof row.id==='string'&&!geometries.has(row.id)&&row.geometry,'Duplicate or missing original geometry');
+    geometries.set(row.id,row.geometry);
+  }
+  const ids=new Set(),features=catalog.map(feature=>{
+    need(typeof feature.id==='string'&&!ids.has(feature.id)&&feature.geometry===null&&geometries.has(feature.id),'Original geography identity join differs');
+    ids.add(feature.id);return {...feature,geometry:geometries.get(feature.id)};
+  });
+  const geographicRelease=atlas.additiveRelease.base_reference;
+  need(ids.size===geometries.size&&footprintHash(features)===geographicRelease.footprints_sha256,'Original complete base geometry differs');
+  return {atlas,selectedGrid,geographicRelease,features};
+}
+
 export async function assembleSelectedPackage({api,repo,expectedHead,originalRunId,trustedBase}){
   const started=performance.now(),current=currentSource();need(current.head===expectedHead,'Actual selected head changed');
   const found=await findOriginalPackage({api,repo,current,originalRunId,trustedBase});if(!found)return {assembled:false,reason:'No applicable retained original output in bounded recent-result search'};
@@ -186,50 +232,54 @@ export async function assembleSelectedPackage({api,repo,expectedHead,originalRun
   try{
     const archive=path.join(scratch,'original.zip'),originalRoot=path.join(scratch,'original');
     await downloadOriginal(api,repo,found.origin,archive);
-    const pythonArgs=['-I','-S','-B',path.join(root,'scripts/extract-package-output.py')];
+    const extractorName='scripts/extract-package-output.py',extractorRaw=fs.readFileSync(path.join(root,extractorName));
+    const extractor=streamedPackageFile(root,extractorName),extractorOid=createHash('sha1').update(`blob ${extractorRaw.length}\0`).update(extractorRaw).digest('hex');
+    need(git(['ls-tree','HEAD','--',extractorName])===`100644 blob ${extractorOid}\t${extractorName}`&&hash(extractorRaw)===extractor.sha256,'Executing package extractor differs from current source');
+    const python=resolvePackagePythonExecutable(),pythonArgs=['-I','-S','-B',path.join(root,extractorName)];
     // Authenticate and consume the archive once through the extractor's held descriptor.
-    execFileSync('python3',[...pythonArgs,archive,originalRoot,found.origin.artifact_digest,found.receipt.package_output_manifest_sha256,String(found.receipt.package_output_manifest_bytes)],{stdio:'pipe',maxBuffer:1048576});
+    execFileSync(python.executable,[...pythonArgs,archive,originalRoot,found.origin.artifact_digest,found.receipt.package_output_manifest_sha256,String(found.receipt.package_output_manifest_bytes)],{stdio:'pipe',maxBuffer:1048576});
+    need(same(streamedPackageFile(root,extractorName),extractor)&&same(resolvePackagePythonExecutable(python.sha256),python),'Package extraction execution changed');
     const manifestRaw=fs.readFileSync(path.join(originalRoot,'.cache/package-output-manifest.json')),manifest=validatePackageOutputManifest(JSON.parse(manifestRaw));
     for(const key of ['head','tree','definition','files','producer','selection'])need(same(manifest.source[key],found.source[key]),'Retained manifest differs from original immutable source: '+key);
-    need(manifest.runtime.installed?.version===2&&manifest.runtime.installed.python?.parser,
-      'Version 2 original installed parser evidence required; legacy aggregate evidence requires a full build');
+    need(manifest.runtime.installed?.version===2,
+      'Version 2 original installed-byte evidence required; legacy aggregate evidence requires a full build');
     const original=await authenticateOriginalPackageOutput({api,repo,origin:found.origin,root:originalRoot,manifestRaw});
-    const installed=installedPackageIdentity(root,declaredPackagePythonRoots(root),{expectedParser:manifest.runtime.installed.python.parser,expectedExecutable:manifest.runtime.installed.python.executable_sha256});
-    const differences=installedPackageDifferences(manifest.runtime.installed,installed);
+    // Only JavaScript dependencies execute during current-product consumption.
+    // Original GIS runtime evidence remains literal in the original manifest;
+    // assembly does not import or claim to reexecute those scientific packages.
+    const installed={version:2,...installedNodeIdentity(root),python:null};
+    const differences=installedPackageDifferences({...manifest.runtime.installed,python:null},installed);
     const recordAndRequireRuntime=()=>{
       fs.writeFileSync(path.join(root,'.cache/package-runtime-comparison.json'),JSON.stringify({version:2,
-        original_manifest_sha256:hash(manifestRaw),current:installed,differences})+'\n',{flag:'wx'});
+        original_manifest_sha256:hash(manifestRaw),compared_components:['node','dependencies'],current:installed,extractor:{python,source:extractor,startup:['-I','-S','-B']},differences})+'\n',{flag:'wx'});
       need(differences.length===0,'Original runtime incompatibility: '+JSON.stringify(differences.map(row=>
         ({component:row.component,...(row.changed_components?{changed_components:row.changed_components}:{}),...(row.changed_files?{changed_files:row.changed_files.slice(0,10),changed_file_count:row.changed_files.length}: {})}))));
     };
     if(differences.length)recordAndRequireRuntime();
-    // Actual scientific imports run only after original custody and complete
-    // installed-byte admission, with the same no-site startup as measurement.
-    const runtime=inspectPackageRuntime(root);
+    const runtime=inspectPackageNodeRuntime(root);
     if(runtime.errors.length){differences.push({component:'runtime.preflight',errors:runtime.errors});recordAndRequireRuntime();}
     const actualRuntime={node:process.version,platform:process.platform,arch:process.arch,
-      versions:process.versions,dependencies:runtime.package_lock_sha256,
-      python:{version:runtime.python.version,imports:runtime.python.imports}};
+      versions:process.versions,dependencies:runtime.package_lock_sha256};
     for(const [component,value] of Object.entries(actualRuntime))if(!same(manifest.runtime[component],value))
       differences.push({component:'runtime.'+component,original:manifest.runtime[component],current:value});
     if(!same(manifest.configuration,packageBuildConfiguration()))differences.push({component:'configuration',
       original:manifest.configuration,current:packageBuildConfiguration()});
     recordAndRequireRuntime();
     const stage=path.join(scratch,'assembly');fs.mkdirSync(stage);
-    for(const name of ['.github/package-inputs.json','data/ownership-selection.json']){
-      fs.mkdirSync(path.dirname(path.join(stage,name)),{recursive:true});fs.copyFileSync(path.join(root,name),path.join(stage,name),fs.constants.COPYFILE_EXCL);
-    }
-    const atlasPath=path.join(originalRoot,'dist/client/atlas-geography.json');
-    const atlasPin=manifest.output.files.find(pin=>pin.path==='dist/client/atlas-geography.json');
-    // Authenticate the actual emitted atlas before consuming its selected base.
-    need(atlasPin&&fs.statSync(atlasPath).size===atlasPin.bytes,'Authenticated whole atlas size differs');
-    const atlas=JSON.parse(fs.readFileSync(atlasPath));need(atlas.additiveRelease?.base_reference,'Original additive base descriptor missing');
     const execution=issuePackageAssemblyExecution({original,source:root,stage,executingRoot:root,
       acceptedInputs:current.accepted_selected_inputs});
-    const publication=await preparePackageSelectedAdditive({root:stage,originalPackage:original,assemblyExecution:execution,
-      selectedGrid:{sha256:current.selection.sha256},geographicRelease:atlas.additiveRelease.base_reference});
-    need(publication,'Genuine current additive publication required');
-    const consumed=packageSelectedPublicationInventory(publication,{root:stage});
+    const {atlas,selectedGrid,geographicRelease,features}=readOriginalPackageGeography(original);
+    // The authenticated execution closure includes this literal deferred import.
+    // Installed bytes are admitted above; no dependency sees API credentials.
+    need(!process.env.GH_TOKEN&&!process.env.GITHUB_TOKEN,'Current additive consumption must be credential-free');
+    const {prepareCurrentSelectedAdditive}=await import('./package-current-additive.mjs');
+    const publication=await prepareCurrentSelectedAdditive({root,selectedGrid,geographicRelease,features});
+    need(publication&&same(publication.selection,current.selection),'Genuine same-source current additive publication required');
+    const consumed=publication.input_inventory.map(pin=>{
+      const row=current.files.find(row=>row.path===pin.path);
+      need(row&&row.mode===pin.mode&&row.oid===pin.git_blob_oid&&pin.whole_body_consumed===true,'Current additive input differs from actual source');
+      return {...pin,commit:current.head};
+    });
     const transition=admitPackageOutputTransition(manifest,current,{acceptedInputs:current.accepted_selected_inputs,typedInputs:consumed});
     const oldAssets=['base_manifest','ledger','owner_roster','patch'].map(role=>atlas.additiveRelease[role]);
     need(oldAssets.every(pin=>/^additive-repairs\/[A-Za-z0-9_.-]+$/.test(pin?.path??''))&&new Set(oldAssets.map(pin=>pin.path)).size===4,'Original four public additive assets required');
@@ -245,7 +295,7 @@ export async function assembleSelectedPackage({api,repo,expectedHead,originalRun
       'the actual current additive assets and atlas');
     fs.renameSync(path.join(originalRoot,'dist/client'),path.join(stage,'dist'));
     for(const pin of oldAssets)fs.unlinkSync(path.join(stage,'dist',pin.path));
-    publishPackageSelectedAdditive(publication,{root:stage});
+    await publication.publish(path.join(stage,'dist'));
     fs.writeFileSync(path.join(stage,'dist/atlas-geography.json'),atlasRaw);
     fs.renameSync(path.join(stage,'dist'),path.join(stage,'client'));
     fs.mkdirSync(path.join(stage,'dist'));fs.renameSync(path.join(stage,'client'),path.join(stage,'dist/client'));
@@ -257,7 +307,7 @@ export async function assembleSelectedPackage({api,repo,expectedHead,originalRun
       original_base_context_retained:true,base_restoration_invoked:false,invariant_build_invoked:false,
       current_selected_inputs:consumed,elapsed_seconds:(performance.now()-started)/1000};
     const receipt={version:1,kind:'cloudflare',input_definition_sha256:current.input_definition_sha256,assembly,
-      preflight:{passed:true,errors:[],inputs:{head:current.head},runtime,
+      preflight:{passed:true,errors:[],inputs:{head:current.head},runtime:{...runtime,extractor:{python,source:extractor,startup:['-I','-S','-B']}},
         limitation:'Current assembly code, dependency and selected-source admission; original invariant build is reused, not reexecuted.'}};
     const receiptRaw=Buffer.from(JSON.stringify(receipt,null,2)+'\n');
     const receiptTarget=path.join(root,'.cache/package-input-build.json'),stagedReceipt=path.join(scratch,'receipt.json');
@@ -289,26 +339,17 @@ export async function assembleSelectedPackage({api,repo,expectedHead,originalRun
   }
 }
 
-// Production assembly binds source and original output custody. Reference-run
-// authentication and output equivalence belong to the independent observer.
+// Production assembly runs only inside the authenticated selected-data queue.
 export function packageAssemblyInvocation(event, environment = process.env) {
-  const proofMode=environment.GITHUB_EVENT_NAME==='workflow_dispatch'&&environment.GITHUB_WORKFLOW==='Selected package equivalence proof';
-  const workerMode=environment.GITHUB_EVENT_NAME==='workflow_dispatch'&&environment.GITHUB_WORKFLOW==='Serialize worker PR merges'&&
-    environment.GITHUB_REF==='refs/heads/main';
-  need(proofMode||workerMode||environment.GITHUB_EVENT_NAME==='pull_request','Trusted selected-data CI invocation required');
-  if(workerMode)need(environment.INTEGRATION_PROFILE==='full'&&environment.INTEGRATION_SHARD==='0'&&
+  need(environment.GITHUB_EVENT_NAME==='workflow_dispatch'&&environment.GITHUB_WORKFLOW==='Serialize worker PR merges'&&
+    environment.GITHUB_REF==='refs/heads/main','Trusted selected-data worker invocation required');
+  need(environment.INTEGRATION_PROFILE==='full'&&environment.INTEGRATION_SHARD==='0'&&
     environment.INTEGRATION_TEST_SELECTION==='selected-data','Trusted selected-data worker integration (0) required');
-  const expectedHead=proofMode?event.inputs?.source_head:workerMode?environment.SELECTED_PACKAGE_CANDIDATE:event.pull_request?.head?.sha;
-  need(/^[a-f0-9]{40}$/.test(expectedHead??''),proofMode?'Exact proof source head required':'Exact selected package candidate required');
-  let originalRunId;
-  if(proofMode){
-    need(/^[1-9]\d*$/.test(event.inputs?.original_run_id??'')&&Number.isSafeInteger(Number(event.inputs.original_run_id)),
-      'Exact original package run identity required');
-    originalRunId=Number(event.inputs.original_run_id);
-  }
+  const expectedHead=environment.SELECTED_PACKAGE_CANDIDATE;
+  need(/^[a-f0-9]{40}$/.test(expectedHead??''),'Exact selected package candidate required');
   const trustedBase=environment.SELECTED_PACKAGE_TRUSTED_BASE;
   need(trustedBase===undefined||/^[a-f0-9]{40}$/.test(trustedBase),'Exact trusted selected base required');
-  return {proofMode,expectedHead,originalRunId,...(trustedBase===undefined?{}:{trustedBase})};
+  return {expectedHead,...(trustedBase===undefined?{}:{trustedBase})};
 }
 
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
@@ -317,10 +358,9 @@ if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.ur
     need(process.argv.length===2&&process.env.GH_TOKEN&&process.env.GITHUB_REPOSITORY&&process.env.GITHUB_EVENT_PATH,'Trusted selected-data CI invocation required');
     const event=JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH,'utf8'));
     const api=githubAPI(process.env.GH_TOKEN,{conditionalReads:false});delete process.env.GH_TOKEN;delete process.env.GITHUB_TOKEN;
-    const {proofMode,expectedHead,originalRunId,trustedBase}=packageAssemblyInvocation(event);
-    result=await assembleSelectedPackage({api,repo:process.env.GITHUB_REPOSITORY,expectedHead,originalRunId,trustedBase});
-    if(proofMode)need(result.assembled,'Actual assembly required; fallback cannot establish equivalence');
-  }catch(error){if(process.env.GITHUB_EVENT_NAME==='workflow_dispatch'&&process.env.GITHUB_WORKFLOW==='Selected package equivalence proof')process.exitCode=1;result={assembled:false,reason:String(error.message).replace(/https?:\/\/\S+/g,'[delivery address]').slice(0,600)};}
+    const {expectedHead,trustedBase}=packageAssemblyInvocation(event);
+    result=await assembleSelectedPackage({api,repo:process.env.GITHUB_REPOSITORY,expectedHead,trustedBase});
+  }catch(error){result={assembled:false,reason:String(error.message).replace(/https?:\/\/\S+/g,'[delivery address]').slice(0,600)};}
   console.log(JSON.stringify(result));
   if(process.env.GITHUB_OUTPUT)fs.appendFileSync(process.env.GITHUB_OUTPUT,`assembled=${result.assembled}\nassembly_sha256=${result.receipt_sha256??''}\n`);
 }
