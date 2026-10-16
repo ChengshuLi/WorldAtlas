@@ -1,34 +1,52 @@
 {
-  "kind": "metadata-only-existing-runtime-paths-and-prior-inventory-union",
-  "executed_at_utc": "2026-10-15T23:54:15.644013+00:00",
-  "elapsed_seconds": 0.2592380839632824,
-  "actual_executable_alias": "/Users/chengshuli/.cache/worldatlas-python-envs/requirements-a911b499659c266373447ffef081b16be803c5b5b2cd22889cc5c7a22811c0ae-python-3.12.14-macos-arm64/bin/python",
-  "actual_prefix": "/Users/chengshuli/.cache/worldatlas-python-envs/requirements-a911b499659c266373447ffef081b16be803c5b5b2cd22889cc5c7a22811c0ae-python-3.12.14-macos-arm64",
-  "helper": {
-    "path": "scripts/qualify-source-cohort.py",
-    "bytes": 43642,
-    "sha256": "abc801b9a35d20c9f0dfe3bbc9bb2cb7dc107f1758414970d9cde11380574a18"
+  "public_record": {
+    "kind": "metadata-only-existing-runtime-paths-and-prior-inventory-union",
+    "executed_at_utc": "2026-10-15T23:54:15.644013+00:00",
+    "elapsed_seconds": 0.2592380839632824,
+    "actual_executable_alias": "[local machine path or invocation omitted; original private record hash retained]",
+    "actual_prefix": "[local machine path or invocation omitted; original private record hash retained]",
+    "helper": {
+      "path": "scripts/qualify-source-cohort.py",
+      "bytes": 43642,
+      "sha256": "abc801b9a35d20c9f0dfe3bbc9bb2cb7dc107f1758414970d9cde11380574a18"
+    },
+    "actual_loaded_runtime_paths": 204,
+    "prior_inventory_paths": 387,
+    "final_inventory_paths": 388,
+    "new_actual_paths": [
+      "[local machine path or invocation omitted; original private record hash retained]"
+    ],
+    "runtime": {
+      "python": "3.12.14 (main, Aug 25 2026, 13:50:33) [Clang 22.1.3 ]",
+      "numpy": "2.3.5",
+      "shapely": "2.1.2",
+      "geos": "3.13.1"
+    },
+    "operation": "Imported exact existing helper under metadata-only name, actual run_physical import set and argparse option parsing only. Invoked existing runtime_paths(); hashed union with prior successful387 inventory. No run/run_physical/source/native/GIS/raster operation.",
+    "limits": [
+      "Loaded runtime file inventory is not hermetic OS-loader/system-library closure.",
+      "Stock Node/Python checks are authoritative for actual later launch; no arbitrary omission allowlist.",
+      "No installation, environment mutation, helper edit or nonexistent runtime-inventory CLI."
+    ],
+    "executing_HEAD": "f82acf8da15646afd9ef51d57e2bd0c186f4aabd",
+    "public_omissions": [
+      "Local helper checkout prefix omitted; exact rawlocal metadata retained. Installed runtimepaths are required real identities and retained."
+    ]
   },
-  "actual_loaded_runtime_paths": 204,
-  "prior_inventory_paths": 387,
-  "final_inventory_paths": 388,
-  "new_actual_paths": [
-    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12"
+  "original_private_body_sha256": "e9059d8264e9eb21cd6ec17e8c252cfd3e1b4fea0c8f406f28e38137bee2c4a9",
+  "omitted_local_machine_fields": [
+    {
+      "field": "/actual_executable_alias",
+      "value_sha256": "e137ff7febb6df2538a0a85b5eef07db496dd22c3df097663c6d23b9ee7ba9ca"
+    },
+    {
+      "field": "/actual_prefix",
+      "value_sha256": "9f4b0dbdcf185733869b673714caacb5831e1dab9cb9b88e335d61318f166784"
+    },
+    {
+      "field": "/new_actual_paths/0",
+      "value_sha256": "f857818e5b6252aa66cae49cf122fe5baef73c58877cdb115868ef4d548d3acb"
+    }
   ],
-  "runtime": {
-    "python": "3.12.14 (main, Aug 25 2026, 13:50:33) [Clang 22.1.3 ]",
-    "numpy": "2.3.5",
-    "shapely": "2.1.2",
-    "geos": "3.13.1"
-  },
-  "operation": "Imported exact existing helper under metadata-only name, actual run_physical import set and argparse option parsing only. Invoked existing runtime_paths(); hashed union with prior successful387 inventory. No run/run_physical/source/native/GIS/raster operation.",
-  "limits": [
-    "Loaded runtime file inventory is not hermetic OS-loader/system-library closure.",
-    "Stock Node/Python checks are authoritative for actual later launch; no arbitrary omission allowlist.",
-    "No installation, environment mutation, helper edit or nonexistent runtime-inventory CLI."
-  ],
-  "executing_HEAD": "f82acf8da15646afd9ef51d57e2bd0c186f4aabd",
-  "public_omissions": [
-    "Local helper checkout prefix omitted; exact rawlocal metadata retained. Installed runtimepaths are required real identities and retained."
-  ]
+  "scientific_fields_unchanged": true
 }

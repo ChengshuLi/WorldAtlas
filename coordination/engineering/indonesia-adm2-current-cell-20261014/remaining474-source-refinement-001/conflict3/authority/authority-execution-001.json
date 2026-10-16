@@ -1,64 +1,78 @@
 {
-  "kind": "original-conflict3-first-stock-native-authority",
-  "outcome": "EXIT0",
-  "exit_code": 0,
-  "started_utc": "2026-10-15T23:59:42.360787+00:00",
-  "completed_utc": "2026-10-15T23:59:53.989618+00:00",
-  "elapsed_seconds": 11.628186166999999,
-  "command": [
-    "/usr/bin/time",
-    "-l",
-    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
-    "scripts/prepare-delivery-handoff.mjs",
-    "native-authority",
-    ".cache/conflict3-worker5-native-authority-001/config.json",
-    ".cache/delivery-handoff/conflict3-worker5-native-authority-001"
-  ],
-  "cwd": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/267133ee5fd33696ea7c63ec50cf78bebfb3c92f9a18ca0fb1c4db8be3e0c49e/review",
-  "executing_checkout_head": "f82acf8da15646afd9ef51d57e2bd0c186f4aabd",
-  "executing_entry_sha256": "6ca4f00e7617506c2d1276fd100f5c16a79e84c1a5a45715200be85afb9d5146",
-  "input_bindings": [
+  "public_record": {
+    "kind": "original-conflict3-first-stock-native-authority",
+    "outcome": "EXIT0",
+    "exit_code": 0,
+    "started_utc": "2026-10-15T23:59:42.360787+00:00",
+    "completed_utc": "2026-10-15T23:59:53.989618+00:00",
+    "elapsed_seconds": 11.628186166999999,
+    "command": [
+      "/usr/bin/time",
+      "-l",
+      "[local machine path or invocation omitted; original private record hash retained]",
+      "scripts/prepare-delivery-handoff.mjs",
+      "native-authority",
+      ".cache/conflict3-worker5-native-authority-001/config.json",
+      ".cache/delivery-handoff/conflict3-worker5-native-authority-001"
+    ],
+    "cwd": "[local machine path or invocation omitted; original private record hash retained]",
+    "executing_checkout_head": "f82acf8da15646afd9ef51d57e2bd0c186f4aabd",
+    "executing_entry_sha256": "6ca4f00e7617506c2d1276fd100f5c16a79e84c1a5a45715200be85afb9d5146",
+    "input_bindings": [
+      {
+        "commit": "4b14731f2a8cc602ed0a5a7e220f0d0a5b9d72d3",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/conflict3/source-evidence.json",
+        "bytes": 14687615,
+        "sha256": "c0b3d974fe666c7c8c0f60df3a41a1cd4af29a63f2ad58ed0034a2bb76c2dc3a"
+      },
+      {
+        "commit": "4b14731f2a8cc602ed0a5a7e220f0d0a5b9d72d3",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/conflict3/candidate-native-patch.json",
+        "bytes": 143,
+        "sha256": "bd99c1ef53c688c16e2e8c92a4412ffcbf47c771f730fb9745fc6bcab61add08"
+      }
+    ],
+    "original_package": "gb-IDN-ADM2--source-conflict",
+    "original_denominator": 27,
+    "requested_original_cells": 3,
+    "repair474_requested_cells": 0,
+    "source_or_physical_producer_replayed": false,
+    "shared_index_or_branch_mutation": false,
+    "products": [
+      {
+        "path": "actual-native-authority-001/authority-binding.json",
+        "bytes": 806,
+        "sha256": "c81db79d519b28996ed00a26f75250c7c6540ca353e4d6ff0cf840a3df78e1ec"
+      },
+      {
+        "path": "actual-native-authority-001/constructor-result.json",
+        "bytes": 21793,
+        "sha256": "eda8e9f7d198537906ce1cabfc1f890919bb56fc331e7ff2864633c1ed84a28a"
+      },
+      {
+        "path": "actual-native-authority-001/original-rule-preimage.json",
+        "bytes": 803,
+        "sha256": "1b127881e4adc75cedb031124797eea54241ac9851a61d03765f9465bd956346"
+      },
+      {
+        "path": "actual-native-authority-001/preparation.json",
+        "bytes": 501,
+        "sha256": "35efb44e258b5a6a083c695060b3ae3dbf0eb93aa2e9f596effd6a1409edc2f5"
+      }
+    ],
+    "actual_stderr_tail": null,
+    "adoption_or_repair_credit": 0
+  },
+  "original_private_body_sha256": "736647a93cb81ec6530d864faf602292968c3855aa05c566021d0d561392b186",
+  "omitted_local_machine_fields": [
     {
-      "commit": "4b14731f2a8cc602ed0a5a7e220f0d0a5b9d72d3",
-      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/conflict3/source-evidence.json",
-      "bytes": 14687615,
-      "sha256": "c0b3d974fe666c7c8c0f60df3a41a1cd4af29a63f2ad58ed0034a2bb76c2dc3a"
+      "field": "/command/2",
+      "value_sha256": "985b934eadc5dc71cb5457c2da636f6c87265154e8c80be160275a4d3b0c48d3"
     },
     {
-      "commit": "4b14731f2a8cc602ed0a5a7e220f0d0a5b9d72d3",
-      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/conflict3/candidate-native-patch.json",
-      "bytes": 143,
-      "sha256": "bd99c1ef53c688c16e2e8c92a4412ffcbf47c771f730fb9745fc6bcab61add08"
+      "field": "/cwd",
+      "value_sha256": "cbc9e134ce9b6beb39b351863a78dfd87f6ac3d21f0814be85cc34cd1c630597"
     }
   ],
-  "original_package": "gb-IDN-ADM2--source-conflict",
-  "original_denominator": 27,
-  "requested_original_cells": 3,
-  "repair474_requested_cells": 0,
-  "source_or_physical_producer_replayed": false,
-  "shared_index_or_branch_mutation": false,
-  "products": [
-    {
-      "path": "actual-native-authority-001/authority-binding.json",
-      "bytes": 806,
-      "sha256": "c81db79d519b28996ed00a26f75250c7c6540ca353e4d6ff0cf840a3df78e1ec"
-    },
-    {
-      "path": "actual-native-authority-001/constructor-result.json",
-      "bytes": 21793,
-      "sha256": "eda8e9f7d198537906ce1cabfc1f890919bb56fc331e7ff2864633c1ed84a28a"
-    },
-    {
-      "path": "actual-native-authority-001/original-rule-preimage.json",
-      "bytes": 803,
-      "sha256": "1b127881e4adc75cedb031124797eea54241ac9851a61d03765f9465bd956346"
-    },
-    {
-      "path": "actual-native-authority-001/preparation.json",
-      "bytes": 501,
-      "sha256": "35efb44e258b5a6a083c695060b3ae3dbf0eb93aa2e9f596effd6a1409edc2f5"
-    }
-  ],
-  "actual_stderr_tail": null,
-  "adoption_or_repair_credit": 0
+  "scientific_fields_unchanged": true
 }
