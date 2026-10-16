@@ -1,0 +1,436 @@
+{
+  "status": "complete-prepared-release-installer-blocked",
+  "accepted_code_commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+  "actual_release": {
+    "id": "geography:review:211cb423e8c3bdcb3cbe88a4327fbd47eb10ccb61cd0ca4b884ed376564e7718",
+    "version": 10,
+    "source_id": "source:atlas:geographic-review:211cb423e8c3bdcb3cbe88a4327fbd47eb10ccb61cd0ca4b884ed376564e7718",
+    "reference_date": "2026-10-16",
+    "hierarchy_sha256": "e5ddbf3f2577f4dbb9e0ce16bdf758675ba665cba04cceff363b3b097943a144",
+    "footprints_sha256": "2deeff1457ff9238cb3dbe599e9a858dcce29d8ba88e2a66abe2785ddec0aed9",
+    "membership_sha256": "2f1b4b11b4ecb9efed28ef4a8cc0cbe6d0db62aa2bde82abbb4dcaee5f60f4bb",
+    "location_ids_sha256": "b8eb3ab175f84531156e4f61297aca4205cefe63a660909b0a5db79fed36e8d1",
+    "changes_sha256": "c19e8ffb40ceb3d37a90bdb5774be868c8410ef329a23af98dba4721978164c0",
+    "expected_counts": {
+      "location": 49625,
+      "province": 5137,
+      "area": 480,
+      "region": 81,
+      "subcontinent": 29,
+      "continent": 6
+    },
+    "metadata": {
+      "reference_only": true,
+      "historical_membership_not_asserted": true,
+      "original_registry_preserved": true,
+      "decision_sha256": {
+        "africa.json": "5d40bf508409b004368b6f77456ed60a1e76caa8a0528f7294f46f7c6cb904f7",
+        "asia.json": "a66b5e57b1c8c54dc9480360c61e0f91752c6fc6a0b710dfdf5131abc9dd6807",
+        "europe.json": "c936e3a251bedc827f7861345edbfd15b7da2ca4030966b702ba1c21ed2f0c6f",
+        "north-america.json": "0c66d322180fecc0ec978e98cadfd031cf11f4b24058cd18b6bd1ce4187e07a1",
+        "oceania.json": "48326f9de56a3700b4b7ab33499dcf00bd4258fdfe7b081c3ce97f2d645ace34",
+        "south-america.json": "f3621775ce1d21d873ff16972bbf37639c1b72aa32ea8e880e44a82fa11221f6"
+      },
+      "migration_sha256": "8ded9175b78142d2e56dc5dc3f91ae830049409190bd9dc9a158dd14f1006324",
+      "geometry_proof_sha256": {
+        "geometry-0": {
+          "manifest_sha256": "ae64e938771d28e6cbd9d79e97f83b1893bb43c99c0e22e50145043293cbb4c1",
+          "receipt_sha256": "c53b644a641f85d6bc225997e8f6836afd0a4ae82d46e0a86d5147a3d9255c3e",
+          "before_footprints_sha256": "1c8c1584520d7360375c8ac79f12fe840dd8a47efb10f3d05c8517689667dd58",
+          "after_footprints_sha256": "5d7236fe7e9d2f83c07c0b5cc1d5e703bf685f860fd49c850edd18eea27c61a8"
+        },
+        "geometry-1": {
+          "manifest_sha256": "ebab41faa03d9dad97463959870af47ae4f2a9aae45e873934f1a82da21daec3",
+          "receipt_sha256": "30022e81d3363ab8b6b62866255165844bc7b67f2dd83617072e0f3e45c0837a",
+          "before_footprints_sha256": "5d7236fe7e9d2f83c07c0b5cc1d5e703bf685f860fd49c850edd18eea27c61a8",
+          "after_footprints_sha256": "6fcebdf0f62064fc56af1681d0c1c7ab4755dfa61d49551c0f910eef660fd0d1"
+        },
+        "geometry-2": {
+          "manifest_sha256": "028e882cd2f8e372922ed2a3fa442edb1babc9c49abeee15940728f9f186d27c",
+          "receipt_sha256": "952eda1e94bae652cb6c7f48e606c5102b32f21a4a53451f9307a538fc49d562",
+          "before_footprints_sha256": "6fcebdf0f62064fc56af1681d0c1c7ab4755dfa61d49551c0f910eef660fd0d1",
+          "after_footprints_sha256": "711b3dcfbed97cc3b72d0602fde1999cd50768ba5d8363d0a4571ef47ed6e338"
+        },
+        "geometry-3": {
+          "manifest_sha256": "c2db31d0e0eecf50148dc00f30032d8bfe59021ea1ff804a7eff784537ae063b",
+          "receipt_sha256": "1f5266158232abf60e88719aed7a693960507e5df6e3d125d7e277bb97609f34",
+          "before_footprints_sha256": "711b3dcfbed97cc3b72d0602fde1999cd50768ba5d8363d0a4571ef47ed6e338",
+          "after_footprints_sha256": "c806a9aff96b6a7e9e19726b5810e58de3cd0de8e1ac433844fd7aa434708e09"
+        },
+        "geometry-4": {
+          "manifest_sha256": "de04ca036fb210452b6f8a50b075c816a57a46483fb1371248e162e6992bddd0",
+          "receipt_sha256": "01be7e7e383e1ba7be7a1d8292a61e928f6195e3a11ce4a03839cbb96889f58b",
+          "before_footprints_sha256": "c806a9aff96b6a7e9e19726b5810e58de3cd0de8e1ac433844fd7aa434708e09",
+          "after_footprints_sha256": "2ac42eeb9fef8af923a0d4c4e55af49ca0a103de891ffbfb2c1181ad75950286"
+        },
+        "geometry-5": {
+          "manifest_sha256": "67c5a2508055fe49abff3d4e5484c7f29b31b0bec9cc120f83881115d5cf48fb",
+          "receipt_sha256": "e2eb810a57988535c24354a3b45d73e32e004ecfb6597ecdcde272f1c65730d0",
+          "before_footprints_sha256": "2ac42eeb9fef8af923a0d4c4e55af49ca0a103de891ffbfb2c1181ad75950286",
+          "after_footprints_sha256": "6ea7c3613759d7b747c800c399b70c1be24e1f6aea21fc81c389cfdcc78d3eb1"
+        },
+        "geometry-6": {
+          "manifest_sha256": "f650f6786107145d657bdcbcfbe0c84a9e1e97af4922d4db6c641b7a241442ef",
+          "receipt_sha256": "84af24772c716b5252ef7b2048c0a2787bfa72d8c8723fb5220d6a89a85aba23",
+          "before_footprints_sha256": "6ea7c3613759d7b747c800c399b70c1be24e1f6aea21fc81c389cfdcc78d3eb1",
+          "after_footprints_sha256": "b9a3c8bf375217dba3a50d1a022ec7e4ac6c6f1cdedff22845da953c805b7433"
+        },
+        "geometry-7": {
+          "manifest_sha256": "09b5eb619d15eef705fff210e78360734de5804e1c573c984f78254d62a78bb0",
+          "receipt_sha256": "fbcdc93980b55dd679cf7343da7c22e5ef8b7f37278f340f932a70b3770014b6",
+          "before_footprints_sha256": "b9a3c8bf375217dba3a50d1a022ec7e4ac6c6f1cdedff22845da953c805b7433",
+          "after_footprints_sha256": "2deeff1457ff9238cb3dbe599e9a858dcce29d8ba88e2a66abe2785ddec0aed9"
+        }
+      },
+      "metadata_migration_sha256": {
+        "metadata-0": "cac2a3ce614d913a4d16e7434739a0e1f7be02b0cdab2f5063d311a629c64ba5",
+        "metadata-1": "290a21230e5371d635e38cf1f760cb77b1c1f03fc8f366f6e965e3f3b3e24937",
+        "metadata-2": "5057ddb926e859a148487e89894b11e365cf015f0a659f43049ef9aadeda9468",
+        "metadata-3": "09eb32e599c29f960f9b1965e17d5ded3700bad4fcbab66f93fb1af0372e241f",
+        "metadata-4": "ddf8546553aaeb32905d6d60fbe3d001876f40b41b0c6f337f55978776c2367f",
+        "metadata-5": "a87cb569e4394aa5ac4b722dc41625d8310e8c994a35b14b7eeafbe5a1c32f0f",
+        "metadata-6": "93188024a4937986e5553b49b63e8cdfad8a38a9f46a6f599c41e0ffa4cbf6f5"
+      },
+      "registered_identity_manifest_sha256": {
+        "f7d2fd73cdffa5e73ed68033f3c97732a106423106c9a21315c3365187feeebd": "geography:review:dbb133d7b123bacd1d38253c467891bff656d011000a9f11d369ac9262302bfb",
+        "387fae929ec86fd6076ae1e667bf0f1c63ed8aef6b2d19b91c758110412d438e": "geography:review:dbb133d7b123bacd1d38253c467891bff656d011000a9f11d369ac9262302bfb",
+        "a9b84f8a8ef2a07ef4407614750b744ca9bde1841d2888de10a13382da58eb32": "geography:review:dbb133d7b123bacd1d38253c467891bff656d011000a9f11d369ac9262302bfb"
+      }
+    }
+  },
+  "release_preparation": {
+    "status": "complete",
+    "start": "2026-10-16T00:11:48.036Z",
+    "finish": "2026-10-16T00:13:13.208Z",
+    "new_entities": 0,
+    "total_memberships": 84833,
+    "changes": 740,
+    "batches": 856,
+    "releases": [
+      {
+        "id": "geography:baseline:9e4ca20b4211795f90f1ab8cac59cfb1ff079396e22979bfb4d1fa9d3f5f55d1",
+        "version": 1,
+        "source_id": "source:atlas:geographic-baseline:9e4ca20b4211795f90f1ab8cac59cfb1ff079396e22979bfb4d1fa9d3f5f55d1",
+        "reference_date": "2026-10-01",
+        "hierarchy_sha256": "ababc53ece8f080ff266af21a57276cab8e47a79be0763635f731dcc9df25fca",
+        "footprints_sha256": "1c8c1584520d7360375c8ac79f12fe840dd8a47efb10f3d05c8517689667dd58",
+        "membership_sha256": "3bbbe026a2fa7aad69251e44ebf09653b1e57c9cf3c1641f8e32cc0cea61d6ce",
+        "location_ids_sha256": "9b30889a8e738b25ed3356bcc473911185f7bf035f19dfec4ab6372a77a922b4",
+        "changes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "expected_counts": {
+          "location": 49614,
+          "province": 5220,
+          "area": 489,
+          "region": 66,
+          "subcontinent": 29,
+          "continent": 6
+        },
+        "metadata": {
+          "reference_only": true,
+          "historical_membership_not_asserted": true,
+          "original_registry_preserved": true,
+          "decision_sha256": {
+            "africa.json": "5d40bf508409b004368b6f77456ed60a1e76caa8a0528f7294f46f7c6cb904f7",
+            "asia.json": "a66b5e57b1c8c54dc9480360c61e0f91752c6fc6a0b710dfdf5131abc9dd6807",
+            "europe.json": "c936e3a251bedc827f7861345edbfd15b7da2ca4030966b702ba1c21ed2f0c6f",
+            "north-america.json": "0c66d322180fecc0ec978e98cadfd031cf11f4b24058cd18b6bd1ce4187e07a1",
+            "oceania.json": "48326f9de56a3700b4b7ab33499dcf00bd4258fdfe7b081c3ce97f2d645ace34",
+            "south-america.json": "f3621775ce1d21d873ff16972bbf37639c1b72aa32ea8e880e44a82fa11221f6"
+          },
+          "migration_sha256": "8ded9175b78142d2e56dc5dc3f91ae830049409190bd9dc9a158dd14f1006324"
+        }
+      },
+      {
+        "id": "geography:review:211cb423e8c3bdcb3cbe88a4327fbd47eb10ccb61cd0ca4b884ed376564e7718",
+        "version": 10,
+        "source_id": "source:atlas:geographic-review:211cb423e8c3bdcb3cbe88a4327fbd47eb10ccb61cd0ca4b884ed376564e7718",
+        "reference_date": "2026-10-16",
+        "hierarchy_sha256": "e5ddbf3f2577f4dbb9e0ce16bdf758675ba665cba04cceff363b3b097943a144",
+        "footprints_sha256": "2deeff1457ff9238cb3dbe599e9a858dcce29d8ba88e2a66abe2785ddec0aed9",
+        "membership_sha256": "2f1b4b11b4ecb9efed28ef4a8cc0cbe6d0db62aa2bde82abbb4dcaee5f60f4bb",
+        "location_ids_sha256": "b8eb3ab175f84531156e4f61297aca4205cefe63a660909b0a5db79fed36e8d1",
+        "changes_sha256": "c19e8ffb40ceb3d37a90bdb5774be868c8410ef329a23af98dba4721978164c0",
+        "expected_counts": {
+          "location": 49625,
+          "province": 5137,
+          "area": 480,
+          "region": 81,
+          "subcontinent": 29,
+          "continent": 6
+        },
+        "metadata": {
+          "reference_only": true,
+          "historical_membership_not_asserted": true,
+          "original_registry_preserved": true,
+          "decision_sha256": {
+            "africa.json": "5d40bf508409b004368b6f77456ed60a1e76caa8a0528f7294f46f7c6cb904f7",
+            "asia.json": "a66b5e57b1c8c54dc9480360c61e0f91752c6fc6a0b710dfdf5131abc9dd6807",
+            "europe.json": "c936e3a251bedc827f7861345edbfd15b7da2ca4030966b702ba1c21ed2f0c6f",
+            "north-america.json": "0c66d322180fecc0ec978e98cadfd031cf11f4b24058cd18b6bd1ce4187e07a1",
+            "oceania.json": "48326f9de56a3700b4b7ab33499dcf00bd4258fdfe7b081c3ce97f2d645ace34",
+            "south-america.json": "f3621775ce1d21d873ff16972bbf37639c1b72aa32ea8e880e44a82fa11221f6"
+          },
+          "migration_sha256": "8ded9175b78142d2e56dc5dc3f91ae830049409190bd9dc9a158dd14f1006324",
+          "geometry_proof_sha256": {
+            "geometry-0": {
+              "manifest_sha256": "ae64e938771d28e6cbd9d79e97f83b1893bb43c99c0e22e50145043293cbb4c1",
+              "receipt_sha256": "c53b644a641f85d6bc225997e8f6836afd0a4ae82d46e0a86d5147a3d9255c3e",
+              "before_footprints_sha256": "1c8c1584520d7360375c8ac79f12fe840dd8a47efb10f3d05c8517689667dd58",
+              "after_footprints_sha256": "5d7236fe7e9d2f83c07c0b5cc1d5e703bf685f860fd49c850edd18eea27c61a8"
+            },
+            "geometry-1": {
+              "manifest_sha256": "ebab41faa03d9dad97463959870af47ae4f2a9aae45e873934f1a82da21daec3",
+              "receipt_sha256": "30022e81d3363ab8b6b62866255165844bc7b67f2dd83617072e0f3e45c0837a",
+              "before_footprints_sha256": "5d7236fe7e9d2f83c07c0b5cc1d5e703bf685f860fd49c850edd18eea27c61a8",
+              "after_footprints_sha256": "6fcebdf0f62064fc56af1681d0c1c7ab4755dfa61d49551c0f910eef660fd0d1"
+            },
+            "geometry-2": {
+              "manifest_sha256": "028e882cd2f8e372922ed2a3fa442edb1babc9c49abeee15940728f9f186d27c",
+              "receipt_sha256": "952eda1e94bae652cb6c7f48e606c5102b32f21a4a53451f9307a538fc49d562",
+              "before_footprints_sha256": "6fcebdf0f62064fc56af1681d0c1c7ab4755dfa61d49551c0f910eef660fd0d1",
+              "after_footprints_sha256": "711b3dcfbed97cc3b72d0602fde1999cd50768ba5d8363d0a4571ef47ed6e338"
+            },
+            "geometry-3": {
+              "manifest_sha256": "c2db31d0e0eecf50148dc00f30032d8bfe59021ea1ff804a7eff784537ae063b",
+              "receipt_sha256": "1f5266158232abf60e88719aed7a693960507e5df6e3d125d7e277bb97609f34",
+              "before_footprints_sha256": "711b3dcfbed97cc3b72d0602fde1999cd50768ba5d8363d0a4571ef47ed6e338",
+              "after_footprints_sha256": "c806a9aff96b6a7e9e19726b5810e58de3cd0de8e1ac433844fd7aa434708e09"
+            },
+            "geometry-4": {
+              "manifest_sha256": "de04ca036fb210452b6f8a50b075c816a57a46483fb1371248e162e6992bddd0",
+              "receipt_sha256": "01be7e7e383e1ba7be7a1d8292a61e928f6195e3a11ce4a03839cbb96889f58b",
+              "before_footprints_sha256": "c806a9aff96b6a7e9e19726b5810e58de3cd0de8e1ac433844fd7aa434708e09",
+              "after_footprints_sha256": "2ac42eeb9fef8af923a0d4c4e55af49ca0a103de891ffbfb2c1181ad75950286"
+            },
+            "geometry-5": {
+              "manifest_sha256": "67c5a2508055fe49abff3d4e5484c7f29b31b0bec9cc120f83881115d5cf48fb",
+              "receipt_sha256": "e2eb810a57988535c24354a3b45d73e32e004ecfb6597ecdcde272f1c65730d0",
+              "before_footprints_sha256": "2ac42eeb9fef8af923a0d4c4e55af49ca0a103de891ffbfb2c1181ad75950286",
+              "after_footprints_sha256": "6ea7c3613759d7b747c800c399b70c1be24e1f6aea21fc81c389cfdcc78d3eb1"
+            },
+            "geometry-6": {
+              "manifest_sha256": "f650f6786107145d657bdcbcfbe0c84a9e1e97af4922d4db6c641b7a241442ef",
+              "receipt_sha256": "84af24772c716b5252ef7b2048c0a2787bfa72d8c8723fb5220d6a89a85aba23",
+              "before_footprints_sha256": "6ea7c3613759d7b747c800c399b70c1be24e1f6aea21fc81c389cfdcc78d3eb1",
+              "after_footprints_sha256": "b9a3c8bf375217dba3a50d1a022ec7e4ac6c6f1cdedff22845da953c805b7433"
+            },
+            "geometry-7": {
+              "manifest_sha256": "09b5eb619d15eef705fff210e78360734de5804e1c573c984f78254d62a78bb0",
+              "receipt_sha256": "fbcdc93980b55dd679cf7343da7c22e5ef8b7f37278f340f932a70b3770014b6",
+              "before_footprints_sha256": "b9a3c8bf375217dba3a50d1a022ec7e4ac6c6f1cdedff22845da953c805b7433",
+              "after_footprints_sha256": "2deeff1457ff9238cb3dbe599e9a858dcce29d8ba88e2a66abe2785ddec0aed9"
+            }
+          },
+          "metadata_migration_sha256": {
+            "metadata-0": "cac2a3ce614d913a4d16e7434739a0e1f7be02b0cdab2f5063d311a629c64ba5",
+            "metadata-1": "290a21230e5371d635e38cf1f760cb77b1c1f03fc8f366f6e965e3f3b3e24937",
+            "metadata-2": "5057ddb926e859a148487e89894b11e365cf015f0a659f43049ef9aadeda9468",
+            "metadata-3": "09eb32e599c29f960f9b1965e17d5ded3700bad4fcbab66f93fb1af0372e241f",
+            "metadata-4": "ddf8546553aaeb32905d6d60fbe3d001876f40b41b0c6f337f55978776c2367f",
+            "metadata-5": "a87cb569e4394aa5ac4b722dc41625d8310e8c994a35b14b7eeafbe5a1c32f0f",
+            "metadata-6": "93188024a4937986e5553b49b63e8cdfad8a38a9f46a6f599c41e0ffa4cbf6f5"
+          },
+          "registered_identity_manifest_sha256": {
+            "f7d2fd73cdffa5e73ed68033f3c97732a106423106c9a21315c3365187feeebd": "geography:review:dbb133d7b123bacd1d38253c467891bff656d011000a9f11d369ac9262302bfb",
+            "387fae929ec86fd6076ae1e667bf0f1c63ed8aef6b2d19b91c758110412d438e": "geography:review:dbb133d7b123bacd1d38253c467891bff656d011000a9f11d369ac9262302bfb",
+            "a9b84f8a8ef2a07ef4407614750b744ca9bde1841d2888de10a13382da58eb32": "geography:review:dbb133d7b123bacd1d38253c467891bff656d011000a9f11d369ac9262302bfb"
+          }
+        }
+      }
+    ]
+  },
+  "release_process_exit_code": 0,
+  "release_index_sha256": "d10e1d41ea52ab67a55d5318b312670ab3d5f04fc9281cc9757becfea14776ea",
+  "actual_batches_verified": 856,
+  "actual_output_files_including_index": 857,
+  "actual_output_bytes": 152544039,
+  "all_batch_hashes_match_manifest": true,
+  "all_current_active_entities_equal_actual_after_geography": true,
+  "complete_active_id_count": 55358,
+  "all_registered_membership_rows": 84833,
+  "inactive_registered_context_rows": 29475,
+  "new_entities": 0,
+  "net_current_membership_changes": [
+    "gb:VNM:ADM2:81297802B5756602808944"
+  ],
+  "net_current_membership_before_after": [
+    {
+      "id": "gb:VNM:ADM2:81297802B5756602808944",
+      "before": [
+        "Cat Hai",
+        "framework:province:quang-ninh:2ff0c77cb3e5",
+        "location"
+      ],
+      "after": [
+        "Cat Hai",
+        "framework:province:hai-phong:9b1802d93923",
+        "location"
+      ]
+    }
+  ],
+  "unchanged_world_part_bytes": [
+    {
+      "path": "geography/part-0.json",
+      "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3"
+    },
+    {
+      "path": "geography/part-1.json",
+      "sha256": "4f267b0bd2e29d2b6fcac27695dc60c919317f58d43cabef21518b5cdfde5ee7"
+    },
+    {
+      "path": "geography/part-2.json",
+      "sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf"
+    },
+    {
+      "path": "geography/part-3.json",
+      "sha256": "e28e1ef867d6550ad65964125bd86a8f1d0919e4834e0d920af4046145a00617"
+    },
+    {
+      "path": "geography/part-4.json",
+      "sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c"
+    },
+    {
+      "path": "geography/part-5.json",
+      "sha256": "20215ef8574bcf8958b3177868a7e7a8bbe206e4770ae7824915e233a90e7cbc"
+    },
+    {
+      "path": "geography/part-6.json",
+      "sha256": "dc494911da2e31191a3e3020006f67a19678a678d0590f379649302d1a2c299a"
+    },
+    {
+      "path": "geography/part-7.json",
+      "sha256": "1b2ecda65dc41e5327f4a3ef364066f3a5285aaa85e1cdfa552fc0deb2213387"
+    },
+    {
+      "path": "geography/part-8.json",
+      "sha256": "2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1"
+    },
+    {
+      "path": "geography/part-9.json",
+      "sha256": "9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6"
+    },
+    {
+      "path": "geography/part-10.json",
+      "sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+    },
+    {
+      "path": "geography/part-11.json",
+      "sha256": "d1b2fb15c9427497de740eb33a529ef382b58cb319028f2aa38f5878de4c9b02"
+    },
+    {
+      "path": "geography/part-12.json",
+      "sha256": "24b44617b0164913f598c94c2c1b36e1a2321f0456644cc20e7f2856955b03f7"
+    },
+    {
+      "path": "geography/part-13.json",
+      "sha256": "90b032861ecae8a4df9a8b5386eccfb20a7243c264dbf79994b54c5297e6f6c1"
+    },
+    {
+      "path": "geography/part-14.json",
+      "sha256": "c8d08cd2264f3bcc94d672ba84d0b4b8c5a2d83205b23ca43104054ceaa971f0"
+    },
+    {
+      "path": "geography/part-15.json",
+      "sha256": "6f763059820d14a4eab78173a756a8869821dd810e94f77c20eb5510c6cfb1df"
+    },
+    {
+      "path": "geography/part-16.json",
+      "sha256": "b51719f7ff906a3c2c4dfdfea706ea51aa9541d550cc990b14191c046fb20797"
+    },
+    {
+      "path": "geography/part-17.json",
+      "sha256": "1ae1a9ef25c1f71b66084aadf57933132383d4271b888ab38866905da5678af3"
+    },
+    {
+      "path": "geography/part-18.json",
+      "sha256": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123"
+    },
+    {
+      "path": "geography/part-19.json",
+      "sha256": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269"
+    },
+    {
+      "path": "geography/part-20.json",
+      "sha256": "9dda1b495f3e9934d23c99d3ba1c6a631078798c42c5ddb060dc5238a32b7c9f"
+    },
+    {
+      "path": "geography/part-21.json",
+      "sha256": "d7b850e9fd2e3cc49044aa10218351831acc1d159b6f5eb1ef67a2ddae9f46d7"
+    },
+    {
+      "path": "geography/part-22.json",
+      "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3"
+    },
+    {
+      "path": "geography/part-23.json",
+      "sha256": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2"
+    },
+    {
+      "path": "geography/part-24.json",
+      "sha256": "b816b89f2d6b9e4aed1bca44748e1ca74e775a8f850793c7b3e8751d88a9705c"
+    },
+    {
+      "path": "geography/part-25.json",
+      "sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394"
+    },
+    {
+      "path": "geography/part-26.json",
+      "sha256": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632"
+    },
+    {
+      "path": "geography/part-28.json",
+      "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d"
+    },
+    {
+      "path": "geography/part-29.json",
+      "sha256": "723d16eb63b7f2dcd8260a516eac6571a7ef1eaaf9bff3c926e0c63235b98fd3"
+    },
+    {
+      "path": "geography/part-30.json",
+      "sha256": "d575442fef21582fe3e262a829059b71c40976e2a0708dcccd451d54c03adb0a"
+    },
+    {
+      "path": "geography/part-31.json",
+      "sha256": "44aa2906be9146ea8640a019c5a377c74395063999409061aec46bde66ef040e"
+    },
+    {
+      "path": "geography/part-32.json",
+      "sha256": "00f3dbcca1a5ff99c8b7c430ca96287acc88bd95e52524e01984ee23aba7ef64"
+    },
+    {
+      "path": "geography/part-33.json",
+      "sha256": "d928d47bb6fa49813b6582ad650c7c91c771c13e3caeca488abf97ad3d4a55fe"
+    },
+    {
+      "path": "geography/source-restoration-additions.json",
+      "sha256": "04c557f16bab13aad0f23233f97fc750e113e9faffbd1556e4dd93cc69f5b9f9"
+    },
+    {
+      "path": "geography/macro-loose-ends-v5-additions.json",
+      "sha256": "8f49c003f2277593041f3526c97b58252599cd53f20abf27fd6a6eb62cfdb5d1"
+    }
+  ],
+  "cumulative_registry_crosswalk_entries": 740,
+  "cumulative_crosswalk_types": {
+    "rename": 117,
+    "split": 29,
+    "reparent": 392,
+    "retire": 29,
+    "merge": 131,
+    "retain": 42
+  },
+  "cumulative_crosswalk_limit": "740 entries reflect the unchanged preparer comparison to immutable registered definitions; they are not740 new current geography changes. Exactly one net active current membership changes.",
+  "installer_process_exit_code": 1,
+  "installer_actual_result": {
+    "status": "blocked-by-existing-check",
+    "start": "2026-10-16T00:13:25.955Z",
+    "finish": "2026-10-16T00:13:32.588Z",
+    "error": "Non-parent location mutation",
+    "stack": "Error: Non-parent location mutation\n    at validateMetadataStages (file://bulk-completion/cathai671-reference-release-001/independent-data-plan/execution-base/scripts/install-macro-reference.mjs:59:201)\n    at prepareInstall (file://bulk-completion/cathai671-reference-release-001/independent-data-plan/execution-base/scripts/install-macro-reference.mjs:116:62)\n    at file://[eval1]:1:600"
+  },
+  "installed": false,
+  "published": false,
+  "live_data_changed": false,
+  "correction_history_removed": false,
+  "next_action": "Integration owner must resolve existing installer support for the preserved exact reference_corrections append; reuse these actual prepared release bytes and receipt, without replaying source or constructor science."
+}
