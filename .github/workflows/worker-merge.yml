@@ -337,7 +337,7 @@ jobs:
           SELECTED_EXPECTATIONS_PATH: ${{ needs.prepare.outputs.expectations_path }}
         run: |
           if test "$INTEGRATION_TEST_SELECTION" = selected-data || test "$INTEGRATION_TEST_SELECTION" = selected-output; then
-            node --input-type=module -e 'import {selectedDeliverySmoke} from "./scripts/integration-profile.mjs"; console.log(JSON.stringify({selected_delivery_smoke:await selectedDeliverySmoke(process.env.SELECTED_EXPECTATIONS_PATH)}));'
+            node --input-type=module -e 'import {selectedDeliverySmoke} from "./scripts/integration-profile.mjs"; const report=await selectedDeliverySmoke(process.env.SELECTED_EXPECTATIONS_PATH); console.log(JSON.stringify({selected_delivery_smoke:Object.fromEntries(Object.entries(report).filter(([,value])=>value===null||typeof value!=="object"))}));'
           fi
           if test "$INTEGRATION_TEST_SELECTION" = selected-output; then
             node --input-type=module -e "import {requireCurrentPackageAssembly} from './scripts/run-integration-tests.mjs'; console.log(JSON.stringify({package_assembly:requireCurrentPackageAssembly()}))"
