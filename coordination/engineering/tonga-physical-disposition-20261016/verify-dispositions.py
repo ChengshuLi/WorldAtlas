@@ -13,6 +13,7 @@ import re
 import struct
 import subprocess
 import sys
+import tempfile
 
 from shapely.geometry import Point, shape
 
@@ -31,6 +32,32 @@ def read_pin(pin):
         raw = gzip.decompress(raw)
         assert len(raw) == pin['decoded_bytes'] and hashlib.sha256(raw).hexdigest() == pin['decoded_sha256']
     return raw
+
+# Authenticate the complete original stock image, then compare its actual extracted
+# output. Temporary work never touches the checkout or the original products.
+queue = bindings['stock_extraction']
+assert len(queue['files']) == 19
+queue_bodies = {}
+for pin in queue['files']:
+    assert pin['commit'] == queue['commit']
+    name = pathlib.PurePosixPath(pin['path']).name
+    assert name not in queue_bodies
+    queue_bodies[name] = read_pin(pin)
+with tempfile.TemporaryDirectory(prefix='worldatlas-tonga-review-') as directory:
+    temporary = pathlib.Path(directory)
+    image = temporary / 'queue'
+    image.mkdir()
+    for name, raw in queue_bodies.items():
+        (image / name).write_bytes(raw)
+    environment = {key: value for key, value in os.environ.items() if key not in ('NODE_OPTIONS', 'NODE_PATH')}
+    extracted = temporary / 'extracted'
+    subprocess.run(['node', str(image / 'source-batch-intervals.mjs'),
+                    'gb-TON-ADM1--physical-interpretation', str(extracted)],
+                   env=environment, check=True, capture_output=True, text=True)
+    assert {file.name for file in extracted.iterdir()} == {'package.json', 'block-034.json.gz', 'block-035.json.gz', 'block-036.json.gz'}
+    assert (extracted / 'package.json').read_bytes() == (packet / 'package.json').read_bytes()
+    for block in (34, 35, 36):
+        assert (extracted / f'block-{block:03d}.json.gz').read_bytes() == (packet / f'frozen-block-{block:03d}.json.gz').read_bytes()
 
 inputs = {name: read_pin(pin) for name, pin in bindings['inputs'].items()}
 source = json.loads(inputs['original_source'])
