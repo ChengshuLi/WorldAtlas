@@ -1,0 +1,285 @@
+{
+  "kind": "Truthful public execution view; complete original receipt retained locally with private absolute runtimepaths",
+  "actual_execution": {
+    "exit_code": 0,
+    "started_utc": "2026-10-16T01:06:02.075591+00:00",
+    "ended_utc": "2026-10-16T01:06:07.871295+00:00",
+    "elapsed_seconds": 5.795570667018183,
+    "darwin_child_lifetime_peak_rss_bytes": 474939392,
+    "input_checkpoint": "1d7376468776177b69714270248b49c5b6d18a23",
+    "physical_producer_completed": true,
+    "numeric_memory_policy": false,
+    "custom_deadline": false,
+    "source_migration_validated": false,
+    "new_qualified_or_accepted_centres": 0
+  },
+  "pre_input_failed_attempt_preserved": {
+    "exit_code": 1,
+    "started_utc": "2026-10-16T01:05:06.994543+00:00",
+    "ended_utc": "2026-10-16T01:05:07.146810+00:00",
+    "elapsed_seconds": 0.1522079159040004,
+    "darwin_child_lifetime_peak_rss_bytes": 39206912,
+    "input_checkpoint": "1d7376468776177b69714270248b49c5b6d18a23",
+    "physical_producer_completed": false,
+    "numeric_memory_policy": false,
+    "custom_deadline": false,
+    "source_migration_validated": false,
+    "new_qualified_or_accepted_centres": 0
+  },
+  "pre_input_failure_reason": "Copiedroles.stagesnamedpreviousOSMstage, failedCompletephysicalrolesguard beforeinputreads/science; correctedliteralpointeronly in002configuration. No physicalreplay.",
+  "actual_invocation": "Direct unchanged accepted scripts/qualify-source-cohort.py --phase physical with fresh program/config admission",
+  "stage_commit": "1d7376468776177b69714270248b49c5b6d18a23",
+  "program": {
+    "path": "scripts/qualify-source-cohort.py",
+    "sha256": "abc801b9a35d20c9f0dfe3bbc9bb2cb7dc107f1758414970d9cde11380574a18"
+  },
+  "input_pins": [
+    {
+      "bytes": 1901913,
+      "commit": "1d7376468776177b69714270248b49c5b6d18a23",
+      "git_blob_oid": "baa3e734bd005aa9a5bad2f08abfb299c175784a",
+      "path": "coordination/engineering/vietnam-qijin12-official-source-update-20261016/whole-new-official-city-stage-inputs.json",
+      "sha256": "006bd83567f353c41efe6419f2925aa0dd842943ba577f8776df3f96fc981ed8"
+    },
+    {
+      "bytes": 56473,
+      "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+      "git_blob_oid": "56943cc4cc0ff21f2fbecca2c0ea7f95f6ca4298",
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/transport-map.json",
+      "sha256": "644345be3d231431177c416b6ddbe3a1b2486597295af45fd5224857b5612d26"
+    },
+    {
+      "bytes": 1257080,
+      "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+      "decoded_bytes": 7012839,
+      "decoded_sha256": "6221acc498dc62b6691624541c6e80ab789b8180bee2b51ecf6c7763c10457b2",
+      "git_blob_oid": "df032b45bc2a9be5835bc9a0a016642bc26ebdbc",
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-000.jsonl.gz",
+      "sha256": "c548e4465e2ad06647d456b74d17395fd6f2b6ad3ff146ecd6d21d61e51933e1"
+    },
+    {
+      "bytes": 1208965,
+      "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+      "decoded_bytes": 7014642,
+      "decoded_sha256": "a73007a3b420340633aca019bd7cd1dd296d40555a4746215f10ad72bd2be6f6",
+      "git_blob_oid": "ac62176e0ad47d91ca17377fedc138416b5278ef",
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-001.jsonl.gz",
+      "sha256": "0969ea1fbd0732c135f470089e3f83cb64a6d21446dc72e65a87a53f81548f9f"
+    },
+    {
+      "bytes": 1191861,
+      "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+      "decoded_bytes": 7014694,
+      "decoded_sha256": "3d897da85e15160acd6353a35a84d4267698182cad78bedab61cad0c0bd23668",
+      "git_blob_oid": "6453614d50cdb31b4215728b09d7ad9ee4cd20d7",
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-002.jsonl.gz",
+      "sha256": "cef9a67165d875695263e2c729b5379e329ccf906356a885dbbf114fa1abe264"
+    },
+    {
+      "bytes": 1177247,
+      "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+      "decoded_bytes": 7014749,
+      "decoded_sha256": "2e96abf8a8211ec815df65f24af98d6a1a03d26e8941baee61185d446483665f",
+      "git_blob_oid": "13362555c6f6514003b69adbd8e3d81f6ec51bdd",
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-003.jsonl.gz",
+      "sha256": "f67073921a62be3e8d4f5433d1aa3f1690baf72a667820e44a40d2c2b817a32b"
+    },
+    {
+      "bytes": 1164683,
+      "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+      "decoded_bytes": 7014199,
+      "decoded_sha256": "26fcb4f9da76f475f9f3315cc882f90f24ffabda0edbad869c477c6783bd63a1",
+      "git_blob_oid": "04d608b9715a413ef7f74224a9a85007307c752f",
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-004.jsonl.gz",
+      "sha256": "58bc6035a98a29762527078ee91dafd3499804ccd9411f51c8b3b11980dbcf22"
+    },
+    {
+      "bytes": 1155371,
+      "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+      "decoded_bytes": 7014174,
+      "decoded_sha256": "489d49bf2ce07498122d9f8dc6c8d1db5ad5dee1b7b4bc88d81ee5daaf0cac5a",
+      "git_blob_oid": "68ff6385969f0a1ae8fb56bc2712706d1a276c38",
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-005.jsonl.gz",
+      "sha256": "ded396a5db78a6768a3c237568fd2c43b2753976d3bf67e1bbf3eb931f048f49"
+    },
+    {
+      "bytes": 1148156,
+      "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+      "decoded_bytes": 7013520,
+      "decoded_sha256": "25c663cc296c1777fad7497bf6ca860d8aa340e90a86b72a7fce26a83da315b4",
+      "git_blob_oid": "2de70ab6b927a386d26d62ccf6f4c5bb437bfead",
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-006.jsonl.gz",
+      "sha256": "c6410e64029a6e4beaf9adaa009060e55c71cf9f0cb8f06efed9f9fba0d8ef34"
+    },
+    {
+      "bytes": 1140886,
+      "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+      "decoded_bytes": 7012813,
+      "decoded_sha256": "7bdc09e3b789589c2074b3c5af8f5ede24fdd2e7bcc75a8f394ce284d91adeaf",
+      "git_blob_oid": "e2eecf3bafe633a148e5e097750601919cf946a9",
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-007.jsonl.gz",
+      "sha256": "341324e9950ff86b6d38205a7bdb6940ba87a779a7201d21b8a0ad146f87f319"
+    },
+    {
+      "bytes": 1141102,
+      "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+      "decoded_bytes": 7012443,
+      "decoded_sha256": "57cab3c2c3bf49abab7b906343c28430cd65847f9463439392a3eaf633f94236",
+      "git_blob_oid": "e0bdaa0a94f2908eeafce0699a1fb0316656b00e",
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-008.jsonl.gz",
+      "sha256": "343be75a5e6a7687f44cc51848216ea102e7fa8bfbe3942641312f1dfd66edde"
+    },
+    {
+      "bytes": 1132445,
+      "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+      "decoded_bytes": 7015134,
+      "decoded_sha256": "6f036d9fb94b850f81de3c831429fbc10d135ebc3da22ecc6bea1c5dd0e986d3",
+      "git_blob_oid": "ba39d5f608c13e9e0b8254705f66e93a56a16258",
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-009.jsonl.gz",
+      "sha256": "a5ceddd483762da22405fd629a3a4a1b3182069de970524ceaf2a9c7599a7b14"
+    },
+    {
+      "bytes": 1128682,
+      "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+      "decoded_bytes": 7016591,
+      "decoded_sha256": "58d061b7e8cef2aa7f6d00e2531aa11d07f82d8f3880567e0d3e0380422b72fe",
+      "git_blob_oid": "62438f205f76babd1f6c4e1d68cf5a50f3eac272",
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-010.jsonl.gz",
+      "sha256": "87726c6fce692d786b0a8d14c1220d2e8db1c663e898b688b3b633dc10c1b66f"
+    },
+    {
+      "bytes": 1125219,
+      "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+      "decoded_bytes": 7016280,
+      "decoded_sha256": "7641a6edc182863b077b56490fbcb1e3ac5b442ed32457f01ea7d5963a1e864d",
+      "git_blob_oid": "e476bf703de50711003b90d6323b5d2e9f41c9d9",
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-011.jsonl.gz",
+      "sha256": "457d4cc8279bd36eadaac16e1b5a2b7ed5d572040192f090edfd4933d4c6f8f1"
+    },
+    {
+      "bytes": 1121691,
+      "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+      "decoded_bytes": 7016007,
+      "decoded_sha256": "f9b0d86a82edd023e24aa812486ca07b9624dad18a173eb14b1ab8eafce445fa",
+      "git_blob_oid": "d028bfb9281e72923155085fe6fc58f254ea169a",
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-012.jsonl.gz",
+      "sha256": "c00491f50f55fdc7baca221394ad23aa2aa9a000f7b333733a9223fb8ddfe498"
+    },
+    {
+      "bytes": 1120633,
+      "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+      "decoded_bytes": 7017004,
+      "decoded_sha256": "7cd8ba527146ce246c815ab2e7bdab31875d13e8652f2f782f2125a1cf7f39ef",
+      "git_blob_oid": "a8df23bc26466b2faa4eb2a73405b0b58c352d09",
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-013.jsonl.gz",
+      "sha256": "0cd35cddcd698907ce1211429fa393086a29bc6bc1729bb68e711221ea737eb5"
+    },
+    {
+      "bytes": 1113872,
+      "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+      "decoded_bytes": 7015008,
+      "decoded_sha256": "7760399c48419566282104e557c3bc8cc1ba4d616896b36daca163b65e8d4a3a",
+      "git_blob_oid": "2c5947576e0d34ca4fb99eda81b7779b83518287",
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-014.jsonl.gz",
+      "sha256": "fbc3a4810a36f33f0724e176d61ad13bdf6a36b741640aa65508130c8ebbf6fe"
+    },
+    {
+      "bytes": 1107592,
+      "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+      "decoded_bytes": 7016846,
+      "decoded_sha256": "ea833e3041e389ed5be390aad1b5067a54835850abd3fca43c12695a55c21f1c",
+      "git_blob_oid": "ac5b3ec4c499d53f351695e029ae35732ffd3833",
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-015.jsonl.gz",
+      "sha256": "df4d45b2c2b1f7d96c57ab30f9974b7849e16626deb0ad6aa50efc0acc102819"
+    },
+    {
+      "bytes": 1117463,
+      "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+      "decoded_bytes": 7019678,
+      "decoded_sha256": "75f47541ccf2611712193d93664a6c58376ba2f2e1a3be1bedbaac5092f07b4a",
+      "git_blob_oid": "5c98a155046742a6b3fc6dce1a7ba38cd0c0f111",
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-016.jsonl.gz",
+      "sha256": "c90919472ed35d2a4a223abcda6c253e6d529eff0070b23b933e42e7ff9dae0e"
+    },
+    {
+      "bytes": 698664,
+      "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+      "decoded_bytes": 4091365,
+      "decoded_sha256": "ec752ab13dd319e7bada205c154974b1bde2edcffea2adce401fb72277070afb",
+      "git_blob_oid": "2b274cf9312059cac124517c14ac480812a367f3",
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-017.jsonl.gz",
+      "sha256": "0015c9a348e6eebd18a4d5f6491a0cda7b60e89ee76cf8f4c6cc54a6a3986eff"
+    },
+    {
+      "bytes": 5821,
+      "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+      "git_blob_oid": "a749382ae63a861a8f65a6275a851fea0e79c454",
+      "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/member-index.json",
+      "sha256": "1fc10fa094ebd128f21d6440152d391cec879a2ec6ded9d665667f9e42513d12"
+    },
+    {
+      "bytes": 22743455,
+      "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+      "decoded_bytes": 33554432,
+      "decoded_sha256": "020aa63a7bbd7e4945e99b96389f0e0580aad7204c91f631f4e92aeeddba3281",
+      "git_blob_oid": "1ed08dd7fe8c237c34e9e02ac04c158960362436",
+      "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/native-00.bin.gz",
+      "sha256": "99546c4a2bf41fe8f8a050fb425ab372c22e9c9821bf592d66ed9748b36301eb"
+    },
+    {
+      "bytes": 23286998,
+      "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+      "decoded_bytes": 33554432,
+      "decoded_sha256": "2460722a7cbbc6d8f383b64d39e0c49a50831ffc01f0241942f90975ee698e0c",
+      "git_blob_oid": "7f23a353abcf3dc23aafdcfd5644ff55d0271a7e",
+      "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/native-01.bin.gz",
+      "sha256": "c4a508d91e40bdd66e48f2533530916c773566e75277826c0806218c3997bcbf"
+    },
+    {
+      "bytes": 19571844,
+      "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+      "decoded_bytes": 28700472,
+      "decoded_sha256": "aae9796235376f1f520b9b216c3a887e60e1c0d91d3f12463db1d403b835ae0f",
+      "git_blob_oid": "39ada13dc05a9b44b08c0221b71d00137fa6d11a",
+      "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/native-02.bin.gz",
+      "sha256": "b7070a55d8edfbead17c14a014ed0c430586606bf0f38ea10c0c1e038f31c7c0"
+    },
+    {
+      "bytes": 9834,
+      "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+      "git_blob_oid": "86654c37ec854d862073aaf63c8d8d144956b283",
+      "path": "coordination/engineering/global-physical-comparison-20261006/comparison.py",
+      "sha256": "f9c226add23a37a39bf7fd34f5d8bdcb34a8d276b331fabf59bf9867b6f84bfe"
+    }
+  ],
+  "runtime_versions": {
+    "geos": "3.13.1",
+    "numpy": "2.3.5",
+    "python": "3.12.14 (main, Aug 25 2026, 13:50:33) [Clang 22.1.3 ]",
+    "shapely": "2.1.2"
+  },
+  "runtime_file_count": 204,
+  "runtime_identity": "Actual204fileinventory freshly size/hashverified andunchangedstockproducer verifiedloadedruntime before/after",
+  "original_local_receipt_pin": {
+    "bytes": 67518,
+    "sha256": "c61a74b765255efc3541fcd66f733fceb68430bb194b061e5552383f8cade587"
+  },
+  "fresh_phase_config_sha256": "0e200bb922bfd4312d3a1c27a34b466da6f0970d86833aad0227f9438fbe9a15",
+  "independent_result_review": {
+    "bytes": 25011,
+    "sha256": "822bf4c7687ae4cd9a8e288f3782a6912f7fcb579a817358da092b065a8610a8"
+  },
+  "scientific_result_issues": [
+    "extra_reconstruction"
+  ],
+  "scope_limits": [
+    "FirstwholeNEWofficial2020Kaohsiungsourcegeometry; originalGBunchanged.",
+    "Nominalsourcecoordinateoperation; Taiping10.38N outsidePROJoperationarea south17.36N, reported1maccuracynotapplicable.",
+    "GSHHGheterogeneousdates/source-relativephysicalsupport, notdated2020dryness/exclusivetitle.",
+    "Fullreportedextra_reconstructiongeometryretainedunchanged; no tolerance or issueelision.",
+    "No native revised-source admission/currentmigrationvalidation/repaircredit."
+  ],
+  "geometry_stage_validated": false,
+  "revised_source_native_authority": false,
+  "qualified_or_accepted_credit": 0
+}

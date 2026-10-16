@@ -1,0 +1,18 @@
+{
+  "first_launch_failed_before_input_science": true,
+  "failed_attempt_records": [
+    "physical-execution-001.json",
+    "physical-001.stderr.log"
+  ],
+  "only_physical_config_change": {
+    "field": "roles.stages",
+    "before": "coordination/engineering/vietnam-chn365-source-update-20261016/whole-new-source-stage-inputs.json",
+    "after": "coordination/engineering/vietnam-qijin12-official-source-update-20261016/whole-new-official-city-stage-inputs.json"
+  },
+  "program_unchanged": true,
+  "all24_source_pins_unchanged": true,
+  "stage_unchanged": true,
+  "runtime_files_freshly_verified": 204,
+  "verified_utc": "2026-10-16T01:06:02.025571+00:00",
+  "new_config_sha256": "0e200bb922bfd4312d3a1c27a34b466da6f0970d86833aad0227f9438fbe9a15"
+}
