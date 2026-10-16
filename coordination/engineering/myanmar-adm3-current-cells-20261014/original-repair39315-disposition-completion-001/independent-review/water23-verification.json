@@ -1,0 +1,55 @@
+{
+  "head": "e4350f152a42399b5f93d7731b16c4c9d373d995",
+  "tree": "cf5a9e0d0644f46478fa88241d466e1b39ce5e14",
+  "input_commit": "8b47071996d254174e90aac2c277a35b9cf39892",
+  "original_water_keys": 23,
+  "requested_supported_and_emitted_exact_keys": 23,
+  "held_keys": 0,
+  "original_target_change_only": [
+    "coverage_classes: mapped_land_support to mapped_inland_water_support",
+    "coverage_rows: exact original water keys explicitly class-bound"
+  ],
+  "all_other_target_fields_and_source_pins_identical": true,
+  "whole_physical_issues_and_territorial_operands_retained": true,
+  "groups": [
+    {
+      "group": 0,
+      "keys": 19,
+      "ledger_rows": 2,
+      "owners": {
+        "30104": 12,
+        "30332": 7
+      },
+      "native_authority_seconds": 2.397437078994699,
+      "source_evidence": {
+        "bytes": 279407,
+        "commit": "8b47071996d254174e90aac2c277a35b9cf39892",
+        "git_blob_oid": "c41dc16fb85337bb9a8a032bc774ceb3fa1ce543",
+        "mode": "100644",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group0/source-evidence.json",
+        "sha256": "177524feca19e89e7bc8909a0784ba8917c8e313ae8e0a2349bfcd8231300b35"
+      }
+    },
+    {
+      "group": 1,
+      "keys": 4,
+      "ledger_rows": 1,
+      "owners": {
+        "30100": 4
+      },
+      "native_authority_seconds": 2.368373066012282,
+      "source_evidence": {
+        "bytes": 129359,
+        "commit": "8b47071996d254174e90aac2c277a35b9cf39892",
+        "git_blob_oid": "d8455007d2c4e18bfba208f8b338252603bd5b97",
+        "mode": "100644",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/inland-water23-existing-support-001/group1/source-evidence.json",
+        "sha256": "c5d3abf1406fa9b1221c7e89c833da6e0f24b1ad96a75115b0e543c98bfa459b"
+      }
+    }
+  ],
+  "authenticated_bodies": 39,
+  "accepted_credit": 0,
+  "repaired_package_credit": 0,
+  "new_source_or_kernel_calls_by_reviewer": 0
+}
