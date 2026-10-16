@@ -554,9 +554,11 @@ async function collect(reader, {baseline, candidate, trusted, metadataPaths}) {
     for (const p of [sidecar.runtime_envelope, ...Object.values(sidecar.logical_asset_map)]) reader.pinned(p);
     const [registry, ledger] = await joined([reader.pinnedJson(sidecar.authority_registry), reader.pinnedJson(sidecar.logical_asset_map.ledger)]);
     demand(registry.version === 1 && registry.kind === 'retained-rule-authority-registry-v1', 'unsupported-authority-registry');
-    await joined(array(registry.entries, 'authorities').map(entry => originalAuthority(reader, entry)));
     demand([1, 2].includes(ledger.version) && ledger.kind === 'native-additive-repair-ledger-v' + ledger.version, 'unsupported-selected-ledger');
-    if (Object.hasOwn(ledger, 'current_rebind')) await currentRebind(reader, ledger.current_rebind, parts.map(p => 'data/' + p));
+    // Independent typed branches share the existing discovery round. A strict
+    // rebind origin must not be discovered only after rereading every authority.
+    await joined([...array(registry.entries, 'authorities').map(entry => originalAuthority(reader, entry)),
+      ...(Object.hasOwn(ledger, 'current_rebind') ? [currentRebind(reader, ledger.current_rebind, parts.map(p => 'data/' + p))] : [])]);
   }
 }
 

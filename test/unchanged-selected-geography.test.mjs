@@ -23,7 +23,7 @@ const sha = value => createHash('sha256').update(body(value)).digest('hex');
 // These intentionally tiny opaque leaf bodies test immutable routing/equality,
 // not scientific validity. Historical collector replay is compared separately
 // with retained original full-reader logs; these leaf sentinels are not decoded.
-function fixture({missingOrigin = false, splitBaseline = false, rebind = true, missingStrictOrigin = false, checkpoint = false, sourceTarget = false, membership = false, dated = false, unknownSourceField = false, unknownSourceVersion = false, malformedDatedVersion = false, rebindCode = LEGACY_CURRENT_REBIND_CODE, historicalMetadataAbsent = false, consumedRole} = {}) {
+function fixture({missingOrigin = false, splitBaseline = false, rebind = true, missingStrictOrigin = false, separatePublicationOrigin = false, checkpoint = false, sourceTarget = false, membership = false, dated = false, unknownSourceField = false, unknownSourceVersion = false, malformedDatedVersion = false, rebindCode = LEGACY_CURRENT_REBIND_CODE, historicalMetadataAbsent = false, consumedRole} = {}) {
   const cache = path.join(ROOT, '.cache/unchanged-selected-fixtures');
   fs.mkdirSync(cache, {recursive: true});
   const directory = fs.mkdtempSync(path.join(cache, 'case-'));
@@ -92,8 +92,9 @@ function fixture({missingOrigin = false, splitBaseline = false, rebind = true, m
   const originalPins = Object.fromEntries(['ledger', 'native_facts', 'native_manifest', 'source_facts'].map(role => [role, historical(P + ({ledger: 'original-ledger', native_facts: 'native-facts', native_manifest: 'original-manifest', source_facts: 'source-facts'}[role]) + '.json')]));
   originalPins.source_request = pin(P + 'source-request.json', requests);
   originalPins.native_request = pin(P + 'native-request.json', requests);
+  const publicationOrigin = separatePublicationOrigin ? commit({...files, [P + 'detached-publication-marker']: body('detached original')}, original) : original;
   let binding = {version: 1, kind: 'original-issued-rule-source-custody-v1', original_pins: originalPins,
-    source_output_aliases: [{original: aliasOriginal, published: pin(P + 'source-publication.json', original, missingStrictOrigin ? {commit: 'e'.repeat(40)} : {})}],
+    source_output_aliases: [{original: aliasOriginal, published: pin(P + 'source-publication.json', publicationOrigin, missingStrictOrigin ? {commit: 'e'.repeat(40)} : {})}],
     native_proof: {publication: historical(P + 'native-publication.json'), inventory: historical(P + 'native-inventory.json'), operating: historical(P + 'native-operating.json'), assets: [historical(P + 'native-asset.json')]}};
   if (sourceTarget) {
     const roles = {catalogue: 'source-catalogue', physical_input: 'physical-input', physical_reproduction: 'physical-reproduction',
@@ -741,6 +742,21 @@ test('cold absent historical origins retain fallback versus strict semantics', a
       assert(!cold.batches.flat().includes('e'.repeat(40)));
     } finally { f.close(); }
   }
+});
+
+test('cold authority and rebind strict origins share the same independent discovery round', async () => {
+  const f = fixture({separatePublicationOrigin: true}); try {
+    const cold = coldFixture(f, {shallowCandidate: true});
+    const rebind = JSON.parse(f.files[P + 'ledger.json']).current_rebind.commit;
+    const publication = JSON.parse(f.files[P + 'binding.json']).source_output_aliases[0].published.commit;
+    for (const id of [publication, rebind]) assert.equal(cold.git(['cat-file', '--batch-check'], id + '\n'), id + ' missing');
+    const result = await f.inspect(f.candidate, f.baseline, {repo: cold.destination, acquisition: cold.acquisition});
+    assert.equal(result.status, 'unchanged-selected-inputs', result.reason);
+    assert(cold.originBatches.some(batch => batch.includes(publication) && batch.includes(rebind)));
+    assert(result.immutable_descriptors.some(p => p.commit === rebind && p.path === P + 'rebind-certificate.json'));
+    assert(result.immutable_descriptors.some(p => p.commit === publication && p.path === P + 'source-publication.json'));
+    assert.equal(result.metadata_acquisition.scientific_leaf_imports, 0);
+  } finally { f.close(); }
 });
 
 test('cold evolved same-path aliases acquire their exact original metadata instead of rebinding a pin', async () => {
