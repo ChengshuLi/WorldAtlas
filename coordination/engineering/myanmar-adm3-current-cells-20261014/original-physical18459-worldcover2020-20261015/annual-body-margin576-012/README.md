@@ -1,0 +1,13 @@
+# 576 retained annual2020 modeled body/location facets
+
+This scientific checkpoint adopts the exact independently reviewed 576-key proposal at unchanged original coordinates in issue1880's physical18,459 scope. It preserves all380 specific questions in its frozen956-key planning set, including349 dated/active reservations and31 weak annual patterns. It changes no selected ownership or map authority.
+
+The bounded modeled facets are316 persistent-waterbody margins,125 tree-cover margins,59 cropland margins,58 bare/sparse-cover margins,11 herbaceous margins,six built-cover margins andone shrub-cover margin. The full literal mixed3x3 context remains. These finite source interpretations are not a new purity, majority, minimum-width or confidence classifier.
+
+The exact published-key union before this packet is17482. If all576 keys are published and read back, that union is18058 of18459, leaving401 original keys without a published accepted facet. The380-question scoped planning complement is a different vintage/denominator; this packet does not claim that every earlier dated adoption is already public. No older answer is counted again.
+
+The original proposal,334 literal case groups,607 actually assessed annual cases,956 planning questions,380 holds, author summaries and independent substantive review are retained whole. The source interpretation concerns annual modeled cover at a location with a positive original2019 ADM3 source-body association. It does not establish an instantaneous dry substrate, measured hydroperiod, water type, species, material identity, tide, exact shoreline, subpixel purity or wholeAtlas-cell ground truth. Five ADM2-exterior andtwo foreign-reference keys remain explicit and uncleared as territorial questions.
+
+Every adopted coordinate, original interval/SID list, literal native3x3 codes/masks, containing native row/column and positive complete original body association was already public in immutablea2fba641. existing-public-original576-provenance.json independently joins those actual576 rows. The existing review authenticates219 compressed native-array bodies andseven actual source affine headers; its full source-contract examination is reused with its stated limits. No producer, raster read, geometry predicate, native qualification or renderer was rerun.
+
+cloud-annual576-adoption.json records the later adoption. Pending-adoption fields in unchanged author/review records remain genuine historical observations. projection-notes.json explains the retained original paths and immutable public source restoration route. SOURCE-NOTICE.md retains the source attribution. Publication and whole remote byte verification are separate from the private adoption and from any map delivery.

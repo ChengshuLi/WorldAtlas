@@ -1,0 +1,1947 @@
+{
+  "checks": "PASS",
+  "proposal_sha256": "0e6c824c5ca3a2435787aeea9c6c50cda4ecbb705fd2624ba6cc74f29d575576",
+  "proposal_keys": 576,
+  "current_exact_keys": 956,
+  "original_exact_keys": 18459,
+  "disjoint_current_adopted_complement": 17503,
+  "whole_remainder_partition": {
+    "proposed": 576,
+    "reserved_active_dated": 349,
+    "specific_manual_annual_holds": 31,
+    "all_preserved_questions": 380
+  },
+  "groups_inspected": 334,
+  "proposed_case_groups": 303,
+  "facets": {
+    "modeled-annual-tree-cover-body-margin": 125,
+    "modeled-annual-permanent-waterbody-margin": 316,
+    "modeled-annual-bare-sparse-cover-body-margin": 58,
+    "modeled-annual-cropland-body-margin": 59,
+    "modeled-annual-herbaceous-cover-body-margin": 11,
+    "modeled-annual-built-cover-body-margin": 6,
+    "modeled-annual-shrub-cover-body-margin": 1
+  },
+  "owner_counts": {
+    "Myebon": 31,
+    "Thandwe": 24,
+    "Palaw": 57,
+    "Kawthoung": 74,
+    "Ngapudaw": 20,
+    "Launglon": 45,
+    "Pauktaw": 29,
+    "Sittwe": 6,
+    "Ramree": 17,
+    "Paung": 21,
+    "Pyapon": 16,
+    "Yebyu": 20,
+    "Kyaukpyu": 23,
+    "Mawlamyine": 3,
+    "Thabaung": 15,
+    "Minbya": 2,
+    "Toungup": 16,
+    "Thayetchaung": 18,
+    "Rathedaung": 4,
+    "Munaung": 9,
+    "Thanbyuzayat": 1,
+    "Bogale": 4,
+    "Ye": 14,
+    "Cocokyun": 10,
+    "Chaungzon": 4,
+    "Myeik": 3,
+    "Kayan": 1,
+    "Kungyangon": 6,
+    "Ann": 3,
+    "Labutta": 10,
+    "Kyunsu": 2,
+    "Mrauk-U": 9,
+    "Dedaye": 19,
+    "Maungdaw": 3,
+    "Bilin": 2,
+    "Gwa": 4,
+    "Pathein": 9,
+    "Thaton": 6,
+    "Kyauktan": 3,
+    "Thanatpin": 2,
+    "Dala": 4,
+    "Ponnagyun": 1,
+    "Thaketa": 3,
+    "Thanlyin": 1,
+    "Kyaikto": 2
+  },
+  "source_tiles": 7,
+  "original_compressed_array_bodies_authenticated_without_decoding": 219,
+  "all_point_observation_affine_positions_match": true,
+  "all_original_body_associations_literal": true,
+  "ADM2_exterior_proposed_keys": 5,
+  "foreign_reference_proposed_keys": 2,
+  "all576_actual_dated_observation_fields_null": true,
+  "original_PUM_PDF_SHA_verified": true,
+  "prior_full_source_contract_review_reused": true,
+  "new_source_raster_native_kernel_or_classifier_calls": 0,
+  "main_adoption": "pending",
+  "new_answer_credit": 0,
+  "repair_credit": 0,
+  "inputs": {
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/retained-annual-residual956-assessment-020/proposed-retained-annual-body-margin576.jsonl.gz": {
+      "bytes": 165717,
+      "sha256": "0e6c824c5ca3a2435787aeea9c6c50cda4ecbb705fd2624ba6cc74f29d575576"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/retained-annual-residual956-assessment-020/preserved-specific-questions380.jsonl.gz": {
+      "bytes": 60731,
+      "sha256": "56d7ad74c4f11da2b69b3fe1cad4264958bc5a6891dd4c2a8140c3a9ac1f0886"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/mmr-current-open956-001/current-open956.jsonl": {
+      "bytes": 665051,
+      "sha256": "0e9d286c358b2b7ad38568a3c0cf6e6b49a2e9a790ad163e1b61a98d95bc17b8"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/retained-annual-residual956-assessment-020/exact-current956-planning-only.jsonl.gz": {
+      "bytes": 122438,
+      "sha256": "c4cd774e914461cb940e424f273b2348aef6671d6146631593556c0b8de1b221"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/retained-annual-residual956-assessment-020/reserved-active-or-dated-questions.jsonl.gz": {
+      "bytes": 46452,
+      "sha256": "b734f2ad0277b1a24d0c04664539c8c75a32cd200b934a0bdee0c257b336dbc5"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/retained-annual-residual956-assessment-020/actual-case-pattern-groups.json": {
+      "bytes": 3793593,
+      "sha256": "5bfa2eb9db0b39d57a2dd9a05cc884aeff1fedb3dd455dd81342dc93a73b2b47"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/retained-annual-residual956-assessment-020/authored-summary.json": {
+      "bytes": 8634,
+      "sha256": "1c460ee828fbbb20a3ae0fa7e53e1d0ea6809f7446ac34c4bea9e660592bbe1f"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/mmr-original-physical-metadata-shortlist-001/retained-original-remaining-intervals.json.gz": {
+      "bytes": 92904,
+      "sha256": "b12b9ed64ecb16fa2b5501648fa4ca91727793fa99ceadffb96d9623519c93aa"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/authored-interpretation-001/open-physical-questions.jsonl.gz": {
+      "bytes": 367278,
+      "sha256": "ffd37d3a840c82dd488dc75fce9c4d2c951dc5b4aaf6f32209ea6e0bfc5c140a"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker5-mmr-body-location-association-001/physical-remaining16222-associations.jsonl": {
+      "bytes": 21741929,
+      "sha256": "8e27de8a72a7ea649992a656778e65b6f980583d92c0a5065729115f36de08c7"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker4-mmr-bulk-physical-review-001/worldcover-source-result-review.json": {
+      "bytes": 1672,
+      "sha256": "ad1ef5c379d3f5f4bf68e8a680cd6cfbb973d2564078a4ab47c3e110a22ff41c"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/source-observations.json": {
+      "bytes": 110009,
+      "sha256": "12c49030b9e082d7381965b907c93a5f979d11d217b40b53ede5447c705e03ec"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/point-observations.jsonl": {
+      "bytes": 7785176,
+      "sha256": "61cf2a4798deae93b9d54df77f0566714d7582c468a1948418b262f8ff57f1f8"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/source.json": {
+      "bytes": 2001,
+      "sha256": "e2679bbe66ae4695f750b5b60efd9ab5ac445788abf3ee8aa51bbe5ef0bd9849"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-12-04.json": {
+      "bytes": 748,
+      "sha256": "faf02f5b2286e245474c20f3c1b45cb44ea94db4e099b5d4b6aa81ea30508983"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-12-04.npz": {
+      "bytes": 12659,
+      "sha256": "3d1063cecf400a7387231487229757f37e45fc65a086fa7f1eeee7afb13259a7"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-30-15.json": {
+      "bytes": 750,
+      "sha256": "763254b262c4c4cab12ebd3e596f246d0d5e3eef989bbb6588fdaf22be8af36d"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-30-15.npz": {
+      "bytes": 29170,
+      "sha256": "6ef93fc5a61f0eb7ea30ab3e75bf3fe90114e25f084856d57f7263d6f517da02"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/point-observations.jsonl": {
+      "bytes": 11843040,
+      "sha256": "9ea8304d08610ba0950fdaf3c3a9f6bf5fcf597e8a1723d0f9b85c4c3181d2a1"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/source.json": {
+      "bytes": 1999,
+      "sha256": "f04e0d9af834f8444015a24ca79813545db96853cf78b9283ff57e93760f25c5"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-22-27.json": {
+      "bytes": 748,
+      "sha256": "43e53d3b561b9c55a8616977230e0acee0290cd683678fd042fe0e6e165432d9"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-22-27.npz": {
+      "bytes": 7705,
+      "sha256": "122bfd3bdc44c174f39efc0a17c8c7546b9e261e6298a2d0dd5d6eba6a185a20"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-23-27.json": {
+      "bytes": 748,
+      "sha256": "51bf15e0ceba8ad5a6824bbad98226b56964be51a479202bf7d5663e9eb02de7"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-23-27.npz": {
+      "bytes": 3729,
+      "sha256": "eac037b0131fa92f3c75ac822066d764cd0ea4cddda942e7090d00b61583f8eb"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-23-30.json": {
+      "bytes": 749,
+      "sha256": "f8034e18af044b015587f7e87e82c07be765219b5dc9db99735508cdf8944b8d"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-23-30.npz": {
+      "bytes": 28136,
+      "sha256": "5bc363f838252956474bc0efbff4a0b54c9fb56060492391c15cd310192a8df8"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-24-27.json": {
+      "bytes": 748,
+      "sha256": "bdbb53271f0b98a1efd56cd18baefd40f6d443a6f7dd76b24e7efb07257332bc"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-24-27.npz": {
+      "bytes": 4826,
+      "sha256": "4b49a6fcf7b28e08bdcfc9d6fea2a57be43ae74f15f3853df86db59797f16a72"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N09E096/point-observations.jsonl": {
+      "bytes": 20217583,
+      "sha256": "a3c536442d5455cc061c1b180f35283634f76ec9933e2fcc8b40ecdfe8a7047a"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N09E096/source.json": {
+      "bytes": 1997,
+      "sha256": "433449d8880853629072e2f50b46e58e52f19aadf71b017e3851ee45feae30d3"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N09E096/new-block-21-23.json": {
+      "bytes": 748,
+      "sha256": "3b748d679383f98b0fbf703246d43acddba7a37b117e6f3b60be6d368546ea73"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N09E096/new-block-21-23.npz": {
+      "bytes": 10091,
+      "sha256": "7c9a43cf844990022d64736390ec8a6cbb36a3ab84fdc92b0fd49fabf6956056"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N09E096/new-block-21-22.json": {
+      "bytes": 747,
+      "sha256": "1e1d6f6e6125252bef69dc18904cb681668926e4afb8c8086025a68e09b02b23"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N09E096/new-block-21-22.npz": {
+      "bytes": 4718,
+      "sha256": "ff8011e35ee7d500c824e7a690790673c03675ce50206efb40354d033a312a3b"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N09E096/new-block-25-24.json": {
+      "bytes": 747,
+      "sha256": "a96976f0f012c4302c716ed7b20651e27ad52851b0aa3613ccd9c593edeaedf0"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N09E096/new-block-25-24.npz": {
+      "bytes": 8819,
+      "sha256": "63e410018c3534962d976e9cfa6db5f21d65b5eddd5bd1111ed4bda699e313e4"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/point-observations.jsonl": {
+      "bytes": 3540809,
+      "sha256": "fffd9998b1f03c0ba3ed83a01f7efd516127567635d5dae3daf10580cd10574c"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/source.json": {
+      "bytes": 1999,
+      "sha256": "d2005830c1f9d9fd7bd95c6aebbc228de4ade2c384197d381b589230df0b450e"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-15-15.json": {
+      "bytes": 749,
+      "sha256": "ec88af306b265d6adfc498f0bc8a5907f6f09d55cd74208de6ad5e769a8341b3"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-15-15.npz": {
+      "bytes": 12837,
+      "sha256": "9aea70e8eac95601001fd5c5cdef2f121bc53588b436bc5ac93900ee25995c6d"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-12-24.json": {
+      "bytes": 749,
+      "sha256": "70890be7c489a0b2d4ad76aab35df37093a45574fc976d9e2295b1ebb3f4de12"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-12-24.npz": {
+      "bytes": 27263,
+      "sha256": "79ca20007376f2cc374a72a876deace8d75bb9a92ab9bcc9776c86768ea07b82"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-21-29.json": {
+      "bytes": 749,
+      "sha256": "ad46535dc71b75915102d9858ce05b6ea9f1691d0c42ae46649593d55b3f2515"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-21-29.npz": {
+      "bytes": 26744,
+      "sha256": "7e4f3124cd46d76cfc6e7c753fc739795542fb41ce3f1b953a3629d0f1e35b92"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-24-25.json": {
+      "bytes": 748,
+      "sha256": "a2e0089aed2326b4bf09fda0d510c63e42097f2f94e75edbb7ce52ace74b722f"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-24-25.npz": {
+      "bytes": 4501,
+      "sha256": "c2a39ed21e95c067b704238b37da2d8295ca81e9dbfef6a849f6e84daa949db4"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-24-30.json": {
+      "bytes": 749,
+      "sha256": "ac6bf3b5cbaac530ad3f02e2e1d9d1c7df5760e2996259c6edaf7844fdd70d30"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-24-30.npz": {
+      "bytes": 21844,
+      "sha256": "f54e3d44dfad62cf8a15c62cb5aae979b50e65907b7d3d30bcf1df528ac017e4"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-25-30.json": {
+      "bytes": 748,
+      "sha256": "73ba793d6b376adf8e899a317122d76dee934b02e33215cc264cee4ee9ec94e0"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-25-30.npz": {
+      "bytes": 7700,
+      "sha256": "cc625c9865a382b1fa47eb4e91fd38bdb0ae0d4bc741ad50b9858eb9ebf225cc"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N09E096/new-block-16-23.json": {
+      "bytes": 748,
+      "sha256": "aeab916e00b594980442ebbe5c0521e6090c453f242e87e5172dea54fdb36ee3"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N09E096/new-block-16-23.npz": {
+      "bytes": 10199,
+      "sha256": "e84169fd324e1f283a76678ef0b6c365ac4c66a0adbcd77d0f41863926ddfdc0"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N09E096/new-block-18-22.json": {
+      "bytes": 748,
+      "sha256": "8abb77b92364a1355c9bbd189bf8ada2e9d0ac6d9b22668d988e1639c8942bbb"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N09E096/new-block-18-22.npz": {
+      "bytes": 14303,
+      "sha256": "56a76b8126b60f119409d05cc4281bb850292756c08b10310060c853b33a2faf"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-13-00.json": {
+      "bytes": 744,
+      "sha256": "0c0b7877d53ebcff20ae6ffd3f1545da00dcd7d25245961ab10ae80be1e7e676"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-13-00.npz": {
+      "bytes": 9683,
+      "sha256": "d07df530854be36266520c0ea3e13b86d531cee3a2c7d2c3100a746a210c873f"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-12-22.json": {
+      "bytes": 748,
+      "sha256": "96676abb5cf74e8ff7f7cd6617cff65f757f530eda7c39a0bc4ac2a75976711b"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-12-22.npz": {
+      "bytes": 6080,
+      "sha256": "57db95f5532d987826689e52a8e84716a53244feef280ba62efa0893981c2b32"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-13-22.json": {
+      "bytes": 748,
+      "sha256": "e236061a4780135276cd91e34168629d22fb15fa61f1f098040842ef9b44a75d"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-13-22.npz": {
+      "bytes": 9788,
+      "sha256": "9ee655e6a5fc997feac9506deb516d3fd83c1537df2680810c8ca862084f994c"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-24-29.json": {
+      "bytes": 748,
+      "sha256": "6701f629548ab17d9aedd46b90397bc0063916f84a574578ea27055eacc61643"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-24-29.npz": {
+      "bytes": 4014,
+      "sha256": "3413398664b4a82b62fc736fa411a14fb8688db3a8281e7661b5cca550d8cb61"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N09E096/new-block-17-22.json": {
+      "bytes": 747,
+      "sha256": "8424af6048bc5317e5891b38a3442dccee8f8fab90960c1a9bad421b7f40d726"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N09E096/new-block-17-22.npz": {
+      "bytes": 7934,
+      "sha256": "efe616d4f794e6fe2a842f0e9215842692bbeed235e547894d4bfcbb7745d498"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N09E096/new-block-19-22.json": {
+      "bytes": 747,
+      "sha256": "5d7331bfbde2d3c848a486f25ed474371526acc4d551bf114cea880ff857907e"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N09E096/new-block-19-22.npz": {
+      "bytes": 3794,
+      "sha256": "9466ffdf6da1877d4d98b643057b13f51d9f97f4f0b1d069ef27808bd3ee7c3f"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N09E096/new-block-19-23.json": {
+      "bytes": 747,
+      "sha256": "61fdf4387b4b6f498ac987b81c9f9fcd920c2962ced0b243fe6fc56cae01e2e3"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N09E096/new-block-19-23.npz": {
+      "bytes": 6074,
+      "sha256": "ba04f9168fb5a77019161823b6d11eb0336a2993c444ad73e5f45620e169e5c1"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N09E096/new-block-25-23.json": {
+      "bytes": 747,
+      "sha256": "be0e3acb6c5232924dcefed974471437139af3872d361dcdfc4ecb376b8ad3ad"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N09E096/new-block-25-23.npz": {
+      "bytes": 7757,
+      "sha256": "c136f78feb7f07512e82c86c311fdcb28f50050d81886cd19a8ac1aaf9b87c96"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E090/point-observations.jsonl": {
+      "bytes": 1116961,
+      "sha256": "130894a2e252ffa90a0c3afa121257c0318ff5ff5ec394fbe176f190e4bd2086"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E090/source.json": {
+      "bytes": 1992,
+      "sha256": "8001d847b41a35ede5daa1fca3a3918e7a7154072660205c0a62066d06fcfff0"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E090/new-block-10-33.json": {
+      "bytes": 746,
+      "sha256": "ace7f5fe68ea5cd93cc733ace15980296602891962071a6cc85cc7e53ee482be"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E090/new-block-10-33.npz": {
+      "bytes": 27618,
+      "sha256": "78148051e6320ff7d2df46249ea1300a3f511a6e5e8fd59fcb709a33178a60cc"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-23-08.json": {
+      "bytes": 748,
+      "sha256": "cded516bf9314d588ad788408b9056d76cc2c15eb62768ab93ddf847c4f122c8"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-23-08.npz": {
+      "bytes": 52946,
+      "sha256": "7a7a95170858163893b0a0ca52db1fd9b3c5efb5ce6b4900cd4d0d8a3720ecc3"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/point-observations.jsonl": {
+      "bytes": 4723270,
+      "sha256": "dc1e4f55e76a1af942911bb56c49aa8955cfbcf94ca8e7d835099d365050f92b"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/source.json": {
+      "bytes": 1999,
+      "sha256": "555220cb90e6c4217a1e9cf7869626661d305e1bfe241f0bba5b5aa94383509e"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-17-18.json": {
+      "bytes": 749,
+      "sha256": "3824396eee3fe55f0c4e9d5047409f8cf964cba8997b889dccf1fa0eab951edc"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-17-18.npz": {
+      "bytes": 58587,
+      "sha256": "f572c8e27a566cea46f29bd4db3207391608055a768b8df4b5f6da6e2175a831"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-21-17.json": {
+      "bytes": 749,
+      "sha256": "30c40a6bf11fef9fced45d0e6a6639c39c8c4efe08057b9bc1cdb7d0a261b84a"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-21-17.npz": {
+      "bytes": 33259,
+      "sha256": "3ca077d727f8e9267d5d8912fa41c4c1348cb6212d5de28a9262b5b815a7c5cb"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-24-16.json": {
+      "bytes": 749,
+      "sha256": "9ff539a2d1070c74401d609ae1600e49a1e9f7844d935330007c01e67f18e471"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-24-16.npz": {
+      "bytes": 75071,
+      "sha256": "7177d1c8450cb0f23879495b07204e138ffb3e6c66e488b60e4973b9ae14e4b7"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-27-26.json": {
+      "bytes": 748,
+      "sha256": "27b109d6091b136f4f9729c140d959787d364dd08ab673f568eb53072897fa51"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-27-26.npz": {
+      "bytes": 8850,
+      "sha256": "5b09da78fc5e4753e35570a5a7997522b30cc06d5d7b268ef10a8717d745dfb7"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-04-22.json": {
+      "bytes": 747,
+      "sha256": "584e0ad4a120594d1b94cbb4db7b84266a0b850c2193aed7550cca5f080ab075"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-04-22.npz": {
+      "bytes": 43997,
+      "sha256": "8053703db6beddb10ca28b98ef673fc2f43039030541ce01544989f754826ecd"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-13-01.json": {
+      "bytes": 748,
+      "sha256": "e8dbeee057e7578db6f5a3cbd116fc4874dd83823e18f34f20ffa22151819d15"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-13-01.npz": {
+      "bytes": 11845,
+      "sha256": "8ea65a7170ccd15e30ae2fb0dcacfedb0131024243c6ddfe1344360cfcd62830"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-19-07.json": {
+      "bytes": 748,
+      "sha256": "6fde6469c70b83d8404cdb04d592ca5edb36a3f262d87c206d698359bc07af6a"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-19-07.npz": {
+      "bytes": 57486,
+      "sha256": "41b43d9440877d035a26f5dcfc4792a9369c19ccf210e2a2ebc8878f2a830d8e"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-16-19.json": {
+      "bytes": 749,
+      "sha256": "3e5ae807c3e90cf96b5a28ca31c7ea5b1d4e8f74bdb5aedd3e909c28c60b7c75"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-16-19.npz": {
+      "bytes": 70670,
+      "sha256": "1525c0319bf30b08c68851d188f42ef1e41c36fd4fe44d8d6975c6d6d6a951e2"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-16-24.json": {
+      "bytes": 748,
+      "sha256": "3d159c6fd26e4b67e25538c3233d56e712c885f7cb43026259ee62d8e5a00aeb"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-16-24.npz": {
+      "bytes": 7463,
+      "sha256": "770b09a7f291bccf498ca7763fdd02769a2d69cef3e9f3421b33ff3e40485f0f"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-21-26.json": {
+      "bytes": 749,
+      "sha256": "7c91054ae1050b34227d72203b6eb77676c7ef99f7488978602fbd66bea80181"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-21-26.npz": {
+      "bytes": 11317,
+      "sha256": "12331424d705fb1780aa2c6c434bc1d92cb4a22072ee154ef098167158f622f2"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-23-26.json": {
+      "bytes": 748,
+      "sha256": "deed9cf9f1cb4e48124da12f8a55a9dc0f1c45e167dadbfe650d0be08fdbe819"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-23-26.npz": {
+      "bytes": 8264,
+      "sha256": "79045d6e8bf882c51a35c8b55efb0de4fa41bab1d74a93f54582b4e123328a78"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-20-09.json": {
+      "bytes": 748,
+      "sha256": "1a460533f9e11b79181993fdcf9eac5a88c4e4adcf2969bf10f2a44bf2058bd4"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-20-09.npz": {
+      "bytes": 35689,
+      "sha256": "17d1a40d0e17033881935f2f6f0b41e9927b7bff461abf65d0ec603f7ca9c000"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-25-11.json": {
+      "bytes": 750,
+      "sha256": "1ece09a1104b54fd5af60a77f017c70879eb99ad8b942dbdd421b7caf4384d82"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-25-11.npz": {
+      "bytes": 30031,
+      "sha256": "5bfd1c4bc03fcdd9dba7c44328958d7411743ba618245986211dc886ab7fca83"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-09-17.json": {
+      "bytes": 747,
+      "sha256": "946c3a0c6ddecea8acaef799ace703f1378907adc0312368fb9da50a6542ffa4"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-09-17.npz": {
+      "bytes": 37477,
+      "sha256": "a0e8a022bc8b09f22709b2ace2f26ece52cb3020178518e069cade14036eb9b4"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-19-14.json": {
+      "bytes": 749,
+      "sha256": "d334af17acf70152ff9c2cbc933601dfa3be33da134a5fb7d8b3ab957368758d"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-19-14.npz": {
+      "bytes": 28292,
+      "sha256": "a69c8b56a222ab544b82eca413e3b84658f387bab02f6bcb07d0c92bfe7cec76"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-09-21.json": {
+      "bytes": 746,
+      "sha256": "6561d69f304925a6f5ed897310975c56d31232c852d95db31c1fa58c38b3022d"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-09-21.npz": {
+      "bytes": 7504,
+      "sha256": "7f4236455ae43fc68b04de369b314641e53ca721ee950a6d42adf5963d6caa3c"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N09E096/new-block-26-23.json": {
+      "bytes": 747,
+      "sha256": "894f2d8aaa7ddbf4e1f6c47eaa17679ef87591e471fb7607249da966d6124f19"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N09E096/new-block-26-23.npz": {
+      "bytes": 4721,
+      "sha256": "49e61f0d56aeee4bc2698cbaffb6087aa4b8e75ce654fb7533b6f89f0b8e67d1"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-09-03.json": {
+      "bytes": 746,
+      "sha256": "cc4905a817404af9d466a4a087d79ff1033e9432ee8e9c475c4501c6b0e05e5a"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-09-03.npz": {
+      "bytes": 65562,
+      "sha256": "22636f514e5f23c96585222d47d4def4820c8507177a4e35d2bdc8aa1e5b2d9b"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-22-07.json": {
+      "bytes": 748,
+      "sha256": "cc007ae0e5e1779f2291e3d96116878be192d8dc922c70348d52b49c89d116b7"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-22-07.npz": {
+      "bytes": 35587,
+      "sha256": "454b36949ef9bba07e25299f26579db592bafc99c59aba05c0b9f4ac5e35762b"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-26-13.json": {
+      "bytes": 750,
+      "sha256": "ed0b9cf0ae52cea3a69c4bac6f86d5b3178ac3d8f44b4f12117f10f9d77c97b5"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-26-13.npz": {
+      "bytes": 27719,
+      "sha256": "cf92fcd5fec0ea695d00585dac2f445539b7b603025dae022a756606b0586888"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-17-15.json": {
+      "bytes": 749,
+      "sha256": "2099c61b11af74fbf7776ef5621a16ee646caaccfc1a76bfdb8f64b74e341198"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-17-15.npz": {
+      "bytes": 13746,
+      "sha256": "4f6ce7fc729828c790dc488317b3b6db1494ff474385e1b962ff3ae54d939d34"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-10-24.json": {
+      "bytes": 749,
+      "sha256": "e26ebe59946372e25ad3540f35102f2bce0580ab7f31fd947ab1380f11f6f257"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-10-24.npz": {
+      "bytes": 26640,
+      "sha256": "39932331ae8dafffc438fd4a0675f840d155f4028008f5a0b3efd58af4f40a81"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-18-28.json": {
+      "bytes": 749,
+      "sha256": "addd0b795419079402e1da0e7492550624cb0911c241625566f756525471ff88"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-18-28.npz": {
+      "bytes": 20440,
+      "sha256": "c4ac956ffad3622f230a84408013279ffea73c79b27f507d36225dba7f4ec104"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-19-28.json": {
+      "bytes": 749,
+      "sha256": "ec1531e83b732072ba0b86fcd9138154b0db0bf0099e653a911dbbc41c297e93"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-19-28.npz": {
+      "bytes": 13207,
+      "sha256": "be53d51e3560d264f8694ad1e28eb5ab6ce964b18ee795434e66e25edb846791"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E090/new-block-07-32.json": {
+      "bytes": 744,
+      "sha256": "35da2e4a990c230e997a9407c3a4be6f374d8911a4b43247f5a6b8c6b55c7da0"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E090/new-block-07-32.npz": {
+      "bytes": 59090,
+      "sha256": "7d28856f6a6e5a33ea48c61e4f9f88f5451b68d2ad3379339a58749cd0ea721f"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-27-09.json": {
+      "bytes": 748,
+      "sha256": "a43c4bf1d47ccd01ba619d65308dbffb81c4cc56824edc1a17a62bb4eab135e6"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-27-09.npz": {
+      "bytes": 14111,
+      "sha256": "00701574dd12abf56d3a04c62dbb8adb316bff4cbb08c7231f11d0a3a46851a7"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-23-18.json": {
+      "bytes": 749,
+      "sha256": "89e4fd93f33793d3968ae2791696742886bb699d6b453a4d2d5fc846ee3ea489"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-23-18.npz": {
+      "bytes": 19335,
+      "sha256": "a0fefca813baa86f3d938bbdaa6ea93e7eb2df85c8d25b19e4ce9d72a9b75c5e"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-23-24.json": {
+      "bytes": 749,
+      "sha256": "626b324c2397d66cf98dbdbe43f40af6f477c9e152cd3326120eeadd33b98fd2"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-23-24.npz": {
+      "bytes": 39470,
+      "sha256": "5be5e8b241cc5bcad908123d4086d31c43a3fc20006e35333b0461f0106fd1ed"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-29-19.json": {
+      "bytes": 748,
+      "sha256": "5fe07e6970b7f661349a4e280a66dec2a8f6a034b4e501e74d29762145dc53f6"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-29-19.npz": {
+      "bytes": 4938,
+      "sha256": "c976e24685fc4f706ce4bb9cb2860c1a8de020b2d6148bea4f4c9695eb83af85"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-34-20.json": {
+      "bytes": 748,
+      "sha256": "e70f9b8c6b15b3ceff71d3af48b881a22f35106d76b8157f11c65ee12417c9c4"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-34-20.npz": {
+      "bytes": 8965,
+      "sha256": "9cfb50ff786faa90edec629f2c77cedb78c4f6e38539de1cbd138e1948c24747"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-03-21.json": {
+      "bytes": 747,
+      "sha256": "b81af49b8434b6d316340aa26608c58e2d310d58e169d07300661902dd69f9c4"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-03-21.npz": {
+      "bytes": 16356,
+      "sha256": "15d3b6e19650a3c8504a673e8e93e36d8317544af629d7bb251fce60d839487d"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-14-22.json": {
+      "bytes": 748,
+      "sha256": "9be8f55ea2ad4376ba9b02755efd40b7dc269c3e8b460530fd2000f014b6a96d"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-14-22.npz": {
+      "bytes": 4478,
+      "sha256": "66f4a98e766b342e86e3620d9546638beb71208bbfe767f08e57d2ef99decbda"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-32-16.json": {
+      "bytes": 750,
+      "sha256": "160409de84851c6ca56d87e7f6a59bec6b595c4f575d69220fc2ca88022c68fd"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-32-16.npz": {
+      "bytes": 32218,
+      "sha256": "64523a28c2a622e8d70abd71cfc6c5704bd4e44afd6117e16760db680c565b27"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-33-16.json": {
+      "bytes": 750,
+      "sha256": "46730437a288ca6ac8939cabba4c7d6febbc9b5240d468caea7217537b796014"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-33-16.npz": {
+      "bytes": 12401,
+      "sha256": "85a09a658ae8978e16ac4a25ba010e177f455d732136c46592b47eb9b5355fd7"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-07-23.json": {
+      "bytes": 747,
+      "sha256": "040dfbd805042f32444e30573146b1b5affa502eb4dbaeccc9b8e0e5da4533a1"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-07-23.npz": {
+      "bytes": 34763,
+      "sha256": "635f7b30ea4f7cb3e10189c18726851eeb3d4294e5a65445a7d546eae92e133f"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-17-05.json": {
+      "bytes": 747,
+      "sha256": "582b6db6aaa477b0c03c0b6686499055806a0da82d8eea6111ee3bc687119502"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-17-05.npz": {
+      "bytes": 3968,
+      "sha256": "0347aa7b4ca70028f52db9cf697823893a0c15798e13805926df8baf881cdf3c"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-18-07.json": {
+      "bytes": 748,
+      "sha256": "e6e5dfd1051ff1026a6e995229f5ff0dfffbc09dec643d80eb2e900d8d592c42"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-18-07.npz": {
+      "bytes": 38428,
+      "sha256": "ce51fc203ed328c32db452fdaa4e0259ac2bc2b9517a8aabc41bf5b64444d781"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E093/point-observations.jsonl": {
+      "bytes": 527684,
+      "sha256": "2ebcee54ce2ce80f456ff97bb086c8926838c4023dc15723de44ed069ae2de25"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E093/source.json": {
+      "bytes": 1992,
+      "sha256": "71062ee8890c40d88d2c7136898fe5c457a5974bec9c120c71903e58d4420cd6"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E093/new-block-01-07.json": {
+      "bytes": 741,
+      "sha256": "6267807287bfdcabd122003495919ab8486cd8e1374d2b89c7a5cf264fe4b9ef"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E093/new-block-01-07.npz": {
+      "bytes": 8530,
+      "sha256": "73717c6dae301c079942a86b07bf671b6c22e84eb97e9f4d41b1e74d503a5562"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-08-21.json": {
+      "bytes": 746,
+      "sha256": "f50b8c0591f1fceb63f970deeccdaa53f7e8b9a9554f70b19c53f2e0ed4398ba"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-08-21.npz": {
+      "bytes": 4469,
+      "sha256": "4dfd9d2fd9352cea4bd5211d6bc84e16058dd25a57a1d8fefae8930b10778749"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-09-20.json": {
+      "bytes": 746,
+      "sha256": "2604a334d1b68eb78e6e6225094eb8ca156e62a74799d9d6a005ccf053b8c88f"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-09-20.npz": {
+      "bytes": 5267,
+      "sha256": "d1d2ec5f059fe9d6a3b7224b6a1cedd53039b223d1dfc60d7ae0e1c904bb1cc6"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N09E096/new-block-16-22.json": {
+      "bytes": 747,
+      "sha256": "bffb245aada3f3da63680b777ee2ff80a7760f0d3caa66e327fe4957a334e924"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N09E096/new-block-16-22.npz": {
+      "bytes": 4183,
+      "sha256": "64e1ca667ba57aa7096c5ebf32b43303b6a8cf2833ddc7d6720588acc0a5b7b0"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E090/new-block-10-34.json": {
+      "bytes": 746,
+      "sha256": "0da0cf30737193ad08985458ed45def12724226a688ad1e3a699ccaf4a3e8291"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E090/new-block-10-34.npz": {
+      "bytes": 22940,
+      "sha256": "6ed622e472794b67e778c40f5d090046d226556b2a2002c7ff21392788fd47a0"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-18-16.json": {
+      "bytes": 748,
+      "sha256": "fb01c486d8743abdd179f764740f876c8cdbe8055b7c32c49342990bdb35d311"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-18-16.npz": {
+      "bytes": 9373,
+      "sha256": "dbeadda81045075a195bd28c1bc9ddbf6917f4500ef73b41fc9b86f591231699"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-24-26.json": {
+      "bytes": 749,
+      "sha256": "1284b378f7316ede83ddb6d63c2c8552952542a3574a73b84e187e5926653579"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-24-26.npz": {
+      "bytes": 22400,
+      "sha256": "8d5ca035d78ebf8c810f47ccbb65bfd290e6b8afbdf5479234d2491961314167"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-14-25.json": {
+      "bytes": 749,
+      "sha256": "a518b5a4999565618bdc3d330232f632fec0cebfca42460e5b7576c55c8daa24"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-14-25.npz": {
+      "bytes": 34248,
+      "sha256": "e5b3c1da876fc124fb4ca22bbe9f82decd7ead5c26e168b411449a021188057a"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-27-31.json": {
+      "bytes": 749,
+      "sha256": "4a825b585b1f1fbf2b64590ffbd89d736a01c21ffa5f4167879e05d827f9974b"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-27-31.npz": {
+      "bytes": 29574,
+      "sha256": "c3ce47684ebc0b093aae5f86ddfe48f3cf6619c1ae56d35cbdabca60ae931476"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N09E096/new-block-17-23.json": {
+      "bytes": 747,
+      "sha256": "0926ad82cab150b96df93e4ac8d64c951214a2170807cf9bff1513beb9fe1848"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N09E096/new-block-17-23.npz": {
+      "bytes": 4756,
+      "sha256": "13051ee93b5cfdf51554e83b33d8b783771097cb3099edd79146bbf35e34c942"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-14-09.json": {
+      "bytes": 747,
+      "sha256": "6f486d4b0880de3f92ed4265799602be21397f06379381f7694eb097e6b96f2e"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-14-09.npz": {
+      "bytes": 19074,
+      "sha256": "8ad82dd86233eabc21a5fff4dc36d53fe8cd2ac3a5caa3ed9b9c95112dda3d31"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-19-01.json": {
+      "bytes": 747,
+      "sha256": "73958dea0cc1202f80b4884320c6a3eb4d393d34a18f8064a97a43286b469761"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-19-01.npz": {
+      "bytes": 24248,
+      "sha256": "d785eab189d0e9433295101d0e602ace4dde985c1c62e70809fa64feb07d9635"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-23-15.json": {
+      "bytes": 749,
+      "sha256": "32195887d0242dfef0381c1b01d40f5c76557f521101a142f9f526745223106d"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-23-15.npz": {
+      "bytes": 39212,
+      "sha256": "c80f351109e946abc3a50b3b6d1a602553acca1a777411a4122142aca66e4c09"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-26-29.json": {
+      "bytes": 749,
+      "sha256": "1615d3df86f16d64b70dc83a1ab38af0085678635cd393080aec74db5b4e77ad"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-26-29.npz": {
+      "bytes": 11757,
+      "sha256": "cc939b149ccdf8c462b8d3053046767ad2606cd793fd4ba993518e7fa7106b8a"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N09E096/new-block-21-21.json": {
+      "bytes": 747,
+      "sha256": "e89af697b513ccdcce1bb509e59df25081b4460c29bc9d4368b364a7e0f90baa"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N09E096/new-block-21-21.npz": {
+      "bytes": 3991,
+      "sha256": "c3d105ba397e3e5f1e216c212140a8c6a46ceb0cc63481d82f835775e90bce92"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-10-01.json": {
+      "bytes": 748,
+      "sha256": "d27b507fdac09ddbe42d603802037a7320ac436428ce7c0a7a4c6dfdc570f519"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-10-01.npz": {
+      "bytes": 71854,
+      "sha256": "6d19519780f075cb11e5a198221460650a200c365acd0301024da8f1f0d46433"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-14-05.json": {
+      "bytes": 748,
+      "sha256": "ac4941ce945bbc3547e1b168b86a5893b3b0726e5e48e238666884b461a9859f"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-14-05.npz": {
+      "bytes": 29127,
+      "sha256": "3236145edd027e006e8f0e32fe46e468105e43afa63ddf3db057749938e183bf"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-15-06.json": {
+      "bytes": 748,
+      "sha256": "0ac782b6566639a543c7b2ae54e25ecef8d67fba519fd5fda4127505fc022aae"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-15-06.npz": {
+      "bytes": 17886,
+      "sha256": "37f861b6b3d6907e31ac462f9c51a1391f34bc34ea659527085ed0ef9d02e5c1"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-19-08.json": {
+      "bytes": 748,
+      "sha256": "25b47cba7da537d3f884ee2b55de19e9c8865d9871e32fbad687fd6bf32bee08"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-19-08.npz": {
+      "bytes": 23825,
+      "sha256": "0d01349c3bf1d1dcadd109152171c5571a1c24b00209c2cfaabc5eb541a6c832"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-25-12.json": {
+      "bytes": 750,
+      "sha256": "7d8cd0569475daf4d05abd41f072cbc20d58809924c6534169785a3b6724c043"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-25-12.npz": {
+      "bytes": 25889,
+      "sha256": "009708afe90a1588963881a6553aa20b97d63862325c207253c580d73debba1d"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-13-26.json": {
+      "bytes": 749,
+      "sha256": "e3482a96815bf7777e8edb8edcf1938f85065f95276c27e2e35f907364e3764f"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-13-26.npz": {
+      "bytes": 40483,
+      "sha256": "cdc01c439f213fd7610fcb96db862d2d24ab4334eb78076e248fb2837a0daf2a"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-17-10.json": {
+      "bytes": 750,
+      "sha256": "4593f7ddb0a494343523dc3f726337346f2c14cb5db11d556141be8a3e39f387"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-17-10.npz": {
+      "bytes": 56284,
+      "sha256": "e48bf6f5b92eefa31565a413b5ddf9be5d26823e35f666ce65157f41ae5c0777"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-18-11.json": {
+      "bytes": 750,
+      "sha256": "f65ba523c0f44b73befef4496ebed60cebdb8efed994f3c0078795e35e99756e"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-18-11.npz": {
+      "bytes": 49948,
+      "sha256": "05d0c1748f941b5eb8672596c346583c0ea96edede107dfa46543f60dd40a439"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-24-21.json": {
+      "bytes": 749,
+      "sha256": "30ed36badb09a85637b66027c3610261d0b93230cc72e4fdf32c217c22674f38"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-24-21.npz": {
+      "bytes": 73870,
+      "sha256": "033e48a28cdb774d6c00f6abd267228ca4c783e94199526054986fb820d3bc7b"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-17-17.json": {
+      "bytes": 749,
+      "sha256": "fa61d51c8076340cd090cf1be2355fa24321a4b6fdacefcbf102e1a17c474e21"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-17-17.npz": {
+      "bytes": 33639,
+      "sha256": "cc748d9e32f4804d7890604fcc03d6c1e853a214edfcd0232d46358052917972"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-29-20.json": {
+      "bytes": 749,
+      "sha256": "bf4c10bd626f2c45e3755487742527ab8f7b7da6f9e4b3f6d854f86f3af556c0"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-29-20.npz": {
+      "bytes": 40040,
+      "sha256": "a3a8e439c0c4d0c24e1160b84dac183ffe981e0e302031ef5ff746d5b8acbe11"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-10-21.json": {
+      "bytes": 748,
+      "sha256": "e538e79948cc5bb8e6999cc4565cd2a75253ffd3e9a82991023acd8d0361e435"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-10-21.npz": {
+      "bytes": 5158,
+      "sha256": "f32d348b75627d610a457f3137f68c8ab7db52ab6be12270001c880ca6bdbcc0"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-25-21.json": {
+      "bytes": 748,
+      "sha256": "61d36200ebcb74475f0627280db30f434289c90c20bbce052ff07935d24feb73"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-25-21.npz": {
+      "bytes": 6499,
+      "sha256": "bfc989e9756e9e7d440fe58ef12d40e3088a680e294db7c4b0b75c295b614fff"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-20-29.json": {
+      "bytes": 749,
+      "sha256": "a27d270ac439b955078087e0f43c725fd3abc1750fb03a89a247f78aa512e23b"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-20-29.npz": {
+      "bytes": 58084,
+      "sha256": "cfac3a5f08a732b7ef9138ac949f3702f70e296938654481c0c249be7a140145"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-06-00.json": {
+      "bytes": 743,
+      "sha256": "dd5a8fc2edc4ab4b7df54178cd64fc28f96b83727cfe18010c42c4dac3833973"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-06-00.npz": {
+      "bytes": 36441,
+      "sha256": "cd78742dea25763291e9a00a391b278896556952e3d388dcb93952c76d9a2166"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-07-00.json": {
+      "bytes": 743,
+      "sha256": "dfe6a40b813360f8b8ae6d63346c263f772119b43387e2ab536aa0e607f7ad32"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-07-00.npz": {
+      "bytes": 49383,
+      "sha256": "35c1c25d051a94e851dda338c4eb1bd71a31b12f4a8e9ef92fbf1e2480f965bc"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-11-04.json": {
+      "bytes": 748,
+      "sha256": "1e55227ff8ccce294b1f0c6c22912852988417ee02339f4306dfbf0136ac1b80"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-11-04.npz": {
+      "bytes": 34853,
+      "sha256": "983f3d08cdb3cd2d73a4ece4af75fc95e640370c15f60432d19c1bf17051f698"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-21-33.json": {
+      "bytes": 749,
+      "sha256": "b91fe45bdbf8ed3fcfbb4edc961774e5eb66ff4c88e5f396d71035f27bba929c"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-21-33.npz": {
+      "bytes": 15398,
+      "sha256": "8954bc98d7672891775984145cf2a9a0cb6de8c9ec5ffbf8d5eb0b8226afac29"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-10-03.json": {
+      "bytes": 748,
+      "sha256": "612e95869e3a3ca69a7cbdb91253b59b66680487deed4eab677ca9c974b8f00f"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-10-03.npz": {
+      "bytes": 66599,
+      "sha256": "9956df0c3a0c9ce13348c1e737b69b1046ba8a4ae20eb995494f0eb5d6da1806"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-28-14.json": {
+      "bytes": 750,
+      "sha256": "7ca1cee8675b6474ccfe5c4d1d502d90d98c83c4a112b408cafd8337e82a3271"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-28-14.npz": {
+      "bytes": 33332,
+      "sha256": "afb49685d5afbe6715582597c9ee675f4848508730ef24d9269d904edc97ab20"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-32-21.json": {
+      "bytes": 749,
+      "sha256": "d524829951d2a3edc903b3c076a866ef640bbeffb18d9b7a37a4473afa17df55"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-32-21.npz": {
+      "bytes": 73606,
+      "sha256": "522eb09d54f3b56ad50d22dba9f25482353d921b8a85d448533dcf86e31c4f65"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-28-19.json": {
+      "bytes": 748,
+      "sha256": "15f2edd853bda56a339cccfc82d31252323d1108e1fed1a7bc776db13a71f3ef"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-28-19.npz": {
+      "bytes": 9552,
+      "sha256": "602d0bcdc266e3a09d997c451fc348a0730a6cfaa5591d4c3c68a7868af9ebe3"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N09E096/new-block-22-23.json": {
+      "bytes": 747,
+      "sha256": "05976e9783f8ef2feed924f3cef9a7dfbf7999118a8a3c4c36666c9e02addbf7"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N09E096/new-block-22-23.npz": {
+      "bytes": 5392,
+      "sha256": "0a2da31a2d0974ca19b31c8d165a7f7fb40f1c2783a91db25993296a7011e907"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-29-14.json": {
+      "bytes": 749,
+      "sha256": "a958a4301f252f88b85fb066913ccfde7963062ec9cc6c7d35c822eb80f5c0fe"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-29-14.npz": {
+      "bytes": 8768,
+      "sha256": "c34cdabf5697f2108a22ce33d56c7b331e240a58c5a38f9d9251cc2902f062e7"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-17-19.json": {
+      "bytes": 749,
+      "sha256": "f88d4aa26e40f447caa6e053d1db8e5fa1c258e20cf960b5a789bda981b5cc49"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-17-19.npz": {
+      "bytes": 89239,
+      "sha256": "b93c8e7a9f8036e174a2d0520bba9f80c055139a2a73b5a7e3333390b6c9b64a"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-06-20.json": {
+      "bytes": 746,
+      "sha256": "3f5a92b0bafa999ec6b4fe4aea8662ed4328c88042c961c5989d377fa5a3d2fa"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-06-20.npz": {
+      "bytes": 5405,
+      "sha256": "8fa6c21d04d61edbabcae2005cc473a1c79be2f22ac99b02c9bf06f964e813b2"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E090/new-block-04-29.json": {
+      "bytes": 744,
+      "sha256": "b6cc46d6cf4d62c3d5fd1cee8bca6b7b1108a25d1f5bd05e4b85753b8f4f1439"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E090/new-block-04-29.npz": {
+      "bytes": 34410,
+      "sha256": "d94b1bdcb2a4613fca482bdb68b3550bc9d7de3b3722871b14f2e061848433de"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E090/new-block-05-29.json": {
+      "bytes": 744,
+      "sha256": "58cb10cd98cd3e0ec935861f9dac016c2b1cf4d45c04736ed82d75ca15f4a2b5"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E090/new-block-05-29.npz": {
+      "bytes": 21135,
+      "sha256": "ed0af1a915ff7319314f590d197ab1c0e09e9d797b276c32f4f25ff5d3340464"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-11-13.json": {
+      "bytes": 749,
+      "sha256": "8ad11cfce3ef93232363cbc9c1f3ed26d9416d2e4db3b9fbcb93b605fa3d3c34"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-11-13.npz": {
+      "bytes": 44895,
+      "sha256": "d274d0cc8f1af1f47de0d57dc15ff7547f5ff7952d5d6bad7de04995e8ead05e"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-14-04.json": {
+      "bytes": 747,
+      "sha256": "642911c767e20f566fda72c04a489c4eac8e26c60e0bb78a6d4c24465c9b83a5"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-14-04.npz": {
+      "bytes": 4727,
+      "sha256": "5e4df204b7b5cb6e459058ca217022ce810fd0a1bd29d5da9eabc4a287c31bc8"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-19-05.json": {
+      "bytes": 748,
+      "sha256": "11925ac34dbcbc3beae33178383bf11957e3cd6d40cd235b4614a4a05ffaaca8"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-19-05.npz": {
+      "bytes": 28728,
+      "sha256": "effc18be056b8124d80441198454a6ca4a360e2991cf1365d33a71d8620d04f3"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-07-20.json": {
+      "bytes": 746,
+      "sha256": "37cde24650c402399e026c7e694f46b69c023e46661a037f23d7b118c8a95afb"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-07-20.npz": {
+      "bytes": 4454,
+      "sha256": "728f77171fa32b18cab4e6b53f1a2aff0f08d6400fe74d08c0a344655f42b43c"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E090/new-block-11-34.json": {
+      "bytes": 746,
+      "sha256": "aedab082b08314c93c3929095596d6fcb4cbd7d27e7b0d698b3b4b467d99d118"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E090/new-block-11-34.npz": {
+      "bytes": 25950,
+      "sha256": "bc0c33e7095b751136c60560f8f180ce9e59102c585dada1506124b63c2acbd2"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-03-17.json": {
+      "bytes": 746,
+      "sha256": "03de3f40206c3199cd841fff738bcb870bb30d07d4f0d96e55b24209ba9ab927"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-03-17.npz": {
+      "bytes": 4777,
+      "sha256": "977fa05e5f78dbbcd13553b886ddeebceccfce62214a98118c19b405e7bf4844"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N09E096/new-block-20-23.json": {
+      "bytes": 747,
+      "sha256": "7a8e586dd9b9e97cd688b8fe3d2f58e7436ef3db433f4ea7e394886b190972ed"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N09E096/new-block-20-23.npz": {
+      "bytes": 3084,
+      "sha256": "cfbac71fd6d50baef96a9c03185a0ab927a1860a2f10fcaeb9e9aa4c1bd90bf4"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-21-11.json": {
+      "bytes": 750,
+      "sha256": "6ca744de5d522909f66c43078ab408de0998687f6f9d7a2ba717872ee1c961e2"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-21-11.npz": {
+      "bytes": 35308,
+      "sha256": "162fe4378a31df5fab95fb32fc84088d97893a9f9a32f2131994440757890e60"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-22-11.json": {
+      "bytes": 750,
+      "sha256": "c0527d45cea6ff60279d0c2ed05900105b380b1c9a2a611fe57254205d1a28c6"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-22-11.npz": {
+      "bytes": 19458,
+      "sha256": "cc0b0383b0ec3abe077abe6f232af9ee1688bec1ecb66ac1e3c12d4355b35e25"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-24-12.json": {
+      "bytes": 750,
+      "sha256": "f1c959f4fdeba40487aba2c445784f40e13873fa063c1b1089983263071786db"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-24-12.npz": {
+      "bytes": 46791,
+      "sha256": "c0dda0d0844709f57eb76a773d0c164a4d59e1f17edfe82963dfca8582ae32c0"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-19-00.json": {
+      "bytes": 744,
+      "sha256": "657421b1a1ac9083e018a148f34a21a208350a60c8c4469a2b3e30f7960dacd5"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-19-00.npz": {
+      "bytes": 37666,
+      "sha256": "070cfa739a464b62b959ae7f85208ea92dcdc68c0993c75218f3731808477ab4"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E090/new-block-01-27.json": {
+      "bytes": 744,
+      "sha256": "1009b2504843369efef7c3413e042174e44661241d3529625e1031a23d2ddbf8"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E090/new-block-01-27.npz": {
+      "bytes": 80129,
+      "sha256": "736e7f46538ebc37e86fce2effd40601dc58023a70628332fb71138d15ad30d8"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-25-21.json": {
+      "bytes": 749,
+      "sha256": "886b466b2d50ef1bbd7869a07fbe335dbf08b32fc7eb2ce25076aea6d42fcb06"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-25-21.npz": {
+      "bytes": 49961,
+      "sha256": "84fef23931206cb254e06abf579739e1ef81ed77f40defefae531ce68c6725e1"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-16-25.json": {
+      "bytes": 749,
+      "sha256": "2cf9ac1c4e3b37735c9f86c546f4b1ff565b112fc5dfd232fd68115ccb99cfbe"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-16-25.npz": {
+      "bytes": 19609,
+      "sha256": "256b16a7647bad2ac4c0fe34dbba82eae6752fa1af0b82578a9a00255671067b"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N09E096/new-block-26-25.json": {
+      "bytes": 747,
+      "sha256": "2078c7cfb92da591e1204f8313826ee86e37cbc5ac1c374a94607f602cbaa47f"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N09E096/new-block-26-25.npz": {
+      "bytes": 5418,
+      "sha256": "7d59d7fd9af415fb5820d2f60003a305043f62656a0b09e64ffdb212f90e393a"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-20-34.json": {
+      "bytes": 749,
+      "sha256": "3bb3b3e42d3eee83820f6f5fab4eba39cbd8ec2a0d8ba5fcf49e134d125ef1cc"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-20-34.npz": {
+      "bytes": 31285,
+      "sha256": "30b75e8e6ae0b6d4bd3b39bbda69761d743528b10b76704669dad710932dbb2d"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-17-07.json": {
+      "bytes": 748,
+      "sha256": "af82c37687042439e9f07eea7e187847e26e329a1a335b270cd99bc3e72ad465"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-17-07.npz": {
+      "bytes": 59221,
+      "sha256": "5efdf1423d7ee952e3430d3cb42407da7053ec9c502a9c4683dbab16c0091ec7"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-19-09.json": {
+      "bytes": 748,
+      "sha256": "0c3225a2cc0dddc1f5218e00c308a2a3f02c4a60fa8dc4272dc6284d286dab3d"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-19-09.npz": {
+      "bytes": 49966,
+      "sha256": "87edb1c2b5699f1cfe6b67aabb38325a4a8d215f28a90dbda313b30872f0581d"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-13-24.json": {
+      "bytes": 749,
+      "sha256": "f3c3515745295696cdc5b6254cfce074debf8a9570af665851489e2e19a80129"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-13-24.npz": {
+      "bytes": 12752,
+      "sha256": "e4a54c5219d3b051b264053a2c6e870441bb5b8eed4c7c7b986162446dd37d9f"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-11-00.json": {
+      "bytes": 745,
+      "sha256": "c8fe680611c87d537e15aa31effca82e0a6c20106f7c9ae051e1a32e9a28be2d"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-11-00.npz": {
+      "bytes": 43183,
+      "sha256": "5ceb924eb42d2189870d056b618e4a83bb4379ea2c63dd4bfd6080e3aa45f6da"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-14-14.json": {
+      "bytes": 749,
+      "sha256": "5647ed1ba4231a0c1b9e90bcc2efa8a7725758650a57a30bfe147df3699d1a3b"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-14-14.npz": {
+      "bytes": 32609,
+      "sha256": "3d01e5413a63d39d9140a9c518512ee65ed474d9c9577be5da4212e67067f64d"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-11-03.json": {
+      "bytes": 748,
+      "sha256": "e636f0d9798e5cbe2c0c69ce7ad953a139313b83c02c6060e8e608579b4849fa"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-11-03.npz": {
+      "bytes": 25403,
+      "sha256": "759609dd7dff0557d371ce50cb211d966997e458e2c072ba6d1803a4ff59d031"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-12-26.json": {
+      "bytes": 749,
+      "sha256": "6a0c74dd84bb3df95e75f2ee8821d9c0829a7bd5ba53a9725a35622ad5c678de"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-12-26.npz": {
+      "bytes": 37121,
+      "sha256": "5f89cd7f92e9a0e767ed056166d468752d90b6ada468591eccca0048169993bd"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-07-01.json": {
+      "bytes": 746,
+      "sha256": "d4f9b700aefee1b6846d1bc723e1c4694aa422b691b15d3937a3de78432dfec1"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-07-01.npz": {
+      "bytes": 55713,
+      "sha256": "144628e2471c0b6da7454b82044629423e3fa0b384be137e11e759da92a904d9"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-17-06.json": {
+      "bytes": 747,
+      "sha256": "9b7ca2240adcb3d1b47640d94341b2dd38b73e3222b1f365a164ebbc2e04d3f8"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-17-06.npz": {
+      "bytes": 40972,
+      "sha256": "555f2399beedbc0b87780fda545438223e81539e2f188f9cab0780e6a98bfdf0"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-10-12.json": {
+      "bytes": 749,
+      "sha256": "583770eee47090982ef6260dcdb1cc628f80db8611dd8586a428080b68c9525d"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-10-12.npz": {
+      "bytes": 57611,
+      "sha256": "cd18370853eac3b893272b10c76c9a91d83e29d73290bf9fd5d7affb73d026de"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-24-08.json": {
+      "bytes": 748,
+      "sha256": "f9fc778a861e68dbb6b8f2f1ee9a5f07d99a20f6e62c86b8139e06c084bb86fb"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-24-08.npz": {
+      "bytes": 10319,
+      "sha256": "4f9485ae955d577b07b1c182d812bc51ab765e79d9b35f2a65db751438be802d"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-21-14.json": {
+      "bytes": 749,
+      "sha256": "323b4db402e94923aafb88abe20b98a2f316ef5902df2ab12b6ecb848161e19a"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-21-14.npz": {
+      "bytes": 32115,
+      "sha256": "c631cb9c23b2a971c3f98965877571c08e16a5c758e5ca25d2d8321218c36a2c"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-22-14.json": {
+      "bytes": 749,
+      "sha256": "39f5e5f1ec47c8475e64b8ef934c071b7cd6ac9039b9ddc6a133d750264f9336"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-22-14.npz": {
+      "bytes": 15778,
+      "sha256": "cac0b9cd7a8493307a53349cc677578ebbd99422edf6668f4b9369614b8058e4"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-15-25.json": {
+      "bytes": 749,
+      "sha256": "d98b05684b2d8406a155d8e2c0f81a3ffa6cab30749762ea69836e6fc8725f44"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-15-25.npz": {
+      "bytes": 24678,
+      "sha256": "699d9a5688cb535752b1eb148d2a5aa513ce98baa5f4fa0d045045c1a465a2b0"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-19-12.json": {
+      "bytes": 750,
+      "sha256": "900626a9446829bb9fba2d10829ea54d407a940e222e4fb5bcff1e425f5766d2"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-19-12.npz": {
+      "bytes": 66085,
+      "sha256": "e4e08e2ac827b8f48df5d23991ee032fd8d9c320a0087b465ca6ae3818241b9e"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-12-25.json": {
+      "bytes": 749,
+      "sha256": "65826bd03d76ef778b13837c9e8171174cd5f094e9026eef5a67393c47e5337e"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-12-25.npz": {
+      "bytes": 43493,
+      "sha256": "985bcd78c3ac4a4facfef7539c12b07722cf53dcf7534440d7524b0e64e0db85"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-12-08.json": {
+      "bytes": 748,
+      "sha256": "757ae8513c16b19bc58cb9add5eed9a9f3050ec211b09d7e3bfe322259ae1c2f"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-12-08.npz": {
+      "bytes": 40822,
+      "sha256": "6824ae3184254a76b14803ba7ce622007e971d17dae633ce446531ce4fe71199"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-13-06.json": {
+      "bytes": 748,
+      "sha256": "aaed96eecb5362a7dc0d3f19d5fc81556e0e1175889533d4e112f6326dee4e0b"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-13-06.npz": {
+      "bytes": 42984,
+      "sha256": "8aef56fdb977dd18f97e4af3e392d88a5a0050650a0561f7081fa618953cc0b6"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-14-06.json": {
+      "bytes": 748,
+      "sha256": "7d6967bb723396d34305f125135ef0fe0fb105f80b927b1ab745db148924654d"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-14-06.npz": {
+      "bytes": 38823,
+      "sha256": "bc85f4b939c07e7fcb60d7d8cbb5ec3c675f33a0cd9e3b7f7fc3308f0ad3e05f"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-17-09.json": {
+      "bytes": 748,
+      "sha256": "4b58f584300f8b0ded23195814c63fe50b2661e474e8eb9734be9e10a04dd4c0"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-17-09.npz": {
+      "bytes": 60846,
+      "sha256": "98dbbf9e1e07b90b8baca9c01b7bbf3f9dcea4fbab1f4a31948c01e1870a4f4d"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-20-10.json": {
+      "bytes": 750,
+      "sha256": "562940e77c1ad74ace2b3f8b0e825f4b0e580a1b78c8b4bfd485a7cccac30356"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-20-10.npz": {
+      "bytes": 33725,
+      "sha256": "298092466b8e0ad24e66bfc4586e098433fe0a61877ac532e044fb9395c9aab9"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-12-16.json": {
+      "bytes": 749,
+      "sha256": "6e52d6649d65aa910f4077d4f437c9d76bcdf94284f028779b42acf3c601effe"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-12-16.npz": {
+      "bytes": 35574,
+      "sha256": "833417116530783c6ccd39caed0f62ed06f79c748188ca4b94e55c6ea20510b9"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-23-14.json": {
+      "bytes": 749,
+      "sha256": "99ccd549105d93037d9ae47442e88d4fbda693afcf2089f7de8d00074bb7e7e2"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-23-14.npz": {
+      "bytes": 40125,
+      "sha256": "65fbc2e200b28b5b5be100858ab9437bf0121de66fb7c65fbf7f5bceffa8d319"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-07-18.json": {
+      "bytes": 747,
+      "sha256": "2f74171066bc126b7f9c1297155230db423427997f2be32f3473fdd7496c8c9e"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-07-18.npz": {
+      "bytes": 30970,
+      "sha256": "62e5fe0e0182aff71c759d402f4f2caf1cb5b2dc4f3da58baf5292f81b482bba"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-22-30.json": {
+      "bytes": 749,
+      "sha256": "de51ed807a898d884246ebf13f6d9ca6a5cad20dbb48ee26533bd6e9b8988a1f"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-22-30.npz": {
+      "bytes": 32817,
+      "sha256": "9ae7f94c8dc28ed719f6b2d29af6ba276c07b7a342206a3f6d345b43789798cf"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-26-22.json": {
+      "bytes": 749,
+      "sha256": "176883b57ecff71406295b1781952bcdb24bb813ab1477947708fddf75a2e93c"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-26-22.npz": {
+      "bytes": 25029,
+      "sha256": "c6e797136ce352b54ff92663f5bea9d7feb23b14b9b106947ea87b1360d31ea0"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-31-15.json": {
+      "bytes": 750,
+      "sha256": "fa7d01beb0373f6f00a9716cfc660aa0f689d5e8d44612a845d14da1c5e92fbd"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-31-15.npz": {
+      "bytes": 17904,
+      "sha256": "4a992621e2a3a170fb3318b4c3541fc677db742b5baddbe86c2b1d4be2bc8188"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-26-30.json": {
+      "bytes": 749,
+      "sha256": "525b168c24153ee11e08aa3a7eb3461788eb418739417f8c62efe54d120c80fc"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-26-30.npz": {
+      "bytes": 12287,
+      "sha256": "603e068509382e04f9772b23dbedce55b231cb57457ca97c80a02f06de60f5c1"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-14-16.json": {
+      "bytes": 749,
+      "sha256": "503723462820abf32f1a7874322e96ffbe8e1932c75512e090758e9995ac0705"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-14-16.npz": {
+      "bytes": 38005,
+      "sha256": "06cceffe08225d252fe470460459f7a126ef3bfdabbf0cdf9ab03a2162a398bd"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-25-20.json": {
+      "bytes": 749,
+      "sha256": "3cd48fdcc895bcfa5aee9608e9adae14811bf5f3bda89d1cc3e0b28f2b6be46b"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-25-20.npz": {
+      "bytes": 37226,
+      "sha256": "07c7ac73f033874afb089b95452c853ffe7d809eba33bb73493915c61677d762"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-12-05.json": {
+      "bytes": 748,
+      "sha256": "90bc457eb1a4a553d49d739b1ecd3358f604572e6e1d03617dac6caa73f7897b"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-12-05.npz": {
+      "bytes": 40699,
+      "sha256": "18f482aa3a43951154372612825380065d3a5dd234b7f623a372ba907eddd6e1"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-24-17.json": {
+      "bytes": 749,
+      "sha256": "e88bc3c0045bb551c0ebdba61383d0c9a77f0242beba2c481b75593974c94871"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-24-17.npz": {
+      "bytes": 15307,
+      "sha256": "aceef39535976b07b5b0f9e78193b4a7f1d6f3ca18b97d76308113ffb1472525"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-10-11.json": {
+      "bytes": 749,
+      "sha256": "5aab9c6be069d931c7d0af9b2fde93f78abe8ec2ba859516e71a33ea6c22e324"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-10-11.npz": {
+      "bytes": 40215,
+      "sha256": "ec34820b959d8aa6bf34f153a58bbb4034dc445e204dadc8e13acf407e045271"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-14-02.json": {
+      "bytes": 747,
+      "sha256": "bc1a8900d989b7c8b510871a772c689c3919961243421b3720a2c5498a76af03"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-14-02.npz": {
+      "bytes": 78504,
+      "sha256": "0a5300d173b619e403f5f3b2edff3d4c1db1207990becdd04a9e058192502864"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-13-14.json": {
+      "bytes": 749,
+      "sha256": "2cd80fb0a3ec511b63a88db7408279da3ac6324b224e6d1721b4ca6c24d51e58"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-13-14.npz": {
+      "bytes": 52458,
+      "sha256": "99e941a5021ee54a84ae4de746546209a8c0ff11f4b3535975111338297dc30b"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-15-02.json": {
+      "bytes": 747,
+      "sha256": "85cf4c8cb43c1c69b24b9753b8342e172da0dc0f34d86093e6aeb361196dfd46"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-15-02.npz": {
+      "bytes": 47137,
+      "sha256": "2cfd24572933159818122442c472f90eb753e992f9b94b9731a5b9ccdd4cd112"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-09-01.json": {
+      "bytes": 746,
+      "sha256": "82d54cc6e576e34e777c2294e459907aebe846f97a693741159b18b92b5f5197"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-09-01.npz": {
+      "bytes": 64767,
+      "sha256": "443d8ba6b4eac8c0362ee2277de09a6f1486136518000f2a16b50b3f6504089f"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-08-00.json": {
+      "bytes": 743,
+      "sha256": "a6594e6e10ccf26369f3fce5aa769eb1bafaa4e6c5354ce0c7ce1669db55d7af"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-08-00.npz": {
+      "bytes": 51219,
+      "sha256": "58259e532f7e68351c9e4810979985cf8fb48ae0cf9fdad5f3204a93bc6928eb"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-26-14.json": {
+      "bytes": 750,
+      "sha256": "e574ff7ff261260a7b2a1e205e63c3263d59c2ae505c8bfa8414a2b151b12f53"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-26-14.npz": {
+      "bytes": 47572,
+      "sha256": "33710c51586c36a559563b3fb3ac1b9d3e2617c10d91c09736c28a1e7f788c9d"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-15-26.json": {
+      "bytes": 749,
+      "sha256": "987cb75f9c78b2b73f9510ea31cb8d3ed7817f21cb1def0ad8d68939b8181549"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-15-26.npz": {
+      "bytes": 21309,
+      "sha256": "8ff936afba10d6839e97fedad0ed610fb0b398f98f77283e1c4924879ae13ef7"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E090/new-block-09-34.json": {
+      "bytes": 744,
+      "sha256": "f5f383b426941b7b71385755e307ea50840664c6eebfe24c87c97647a41e13b9"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E090/new-block-09-34.npz": {
+      "bytes": 47216,
+      "sha256": "6573d7c7796dc21283e0a6681e3990fa37ce9de7757884f6aa17097fdfb1b97a"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-25-16.json": {
+      "bytes": 748,
+      "sha256": "f45b447977fc05bb61fa608b46c2d1118fcf1cea32de41f882574704657ef756"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-25-16.npz": {
+      "bytes": 7892,
+      "sha256": "f735ec688d70a25b4a9906d32e5a3b2e3e120a2266442a80596bf9f2e57b7e33"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-23-18.json": {
+      "bytes": 749,
+      "sha256": "e558de911fc66caaa06cd3d2fd8d3c14177edf8d8cce04ccf8a89331cd2d6c44"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-23-18.npz": {
+      "bytes": 51158,
+      "sha256": "0030e28c36769a4c064930716f1ada23ccb78ccf9133b131fd4daf1a339938ce"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-20-26.json": {
+      "bytes": 748,
+      "sha256": "bb02d6cd767efd9aba03ff32bd3eb2870b211944adb7be33fec52d4e4db0f9c7"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-20-26.npz": {
+      "bytes": 3753,
+      "sha256": "4a942d0c12d02ca1414c2e3eec528c5f1f8297e3b7fb37cbb0d5946c53588e6c"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-13-02.json": {
+      "bytes": 748,
+      "sha256": "4d7f3f6179630d5ab9e379342c84e8eee7bc27ab2ec5caf5808ac65b113f387f"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-13-02.npz": {
+      "bytes": 15932,
+      "sha256": "011914385850ef7d32132fc2d6f4c38667189c1fe520fc1d02ee9073cd3efdb4"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-22-31.json": {
+      "bytes": 749,
+      "sha256": "509ebb6c3c89926f4b88b4b3094bf7cbcc52202fca5bb744e8232a954b97f60d"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-22-31.npz": {
+      "bytes": 39685,
+      "sha256": "56458a83a03d8657b0c1bc97efa32c19faba03c8dd05405317af4f3fe56c2c53"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-18-14.json": {
+      "bytes": 749,
+      "sha256": "40335476e7284ba53edaec873ea55aa0a1860434c1564b7b987d7268d650dd53"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-18-14.npz": {
+      "bytes": 26098,
+      "sha256": "721e24a280545332c62c222f2d8e44a7d54b7b2c5d0d2117b63770b811a84101"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-08-17.json": {
+      "bytes": 747,
+      "sha256": "bfde261d9551d706f2d4fa0742b4ce73ffdd755ac2b25b261546037d85bf0ce7"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-08-17.npz": {
+      "bytes": 20569,
+      "sha256": "6b8f9abe35e061e3275b231b7d39d1176f94decd373f8a7cc70952bec84ce8b7"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E093/new-block-10-04.json": {
+      "bytes": 744,
+      "sha256": "6ed8e09ca18aa217fb9bbc5f5e38b92a1bd994f80c8cf6f3d27524455581c1e6"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E093/new-block-10-04.npz": {
+      "bytes": 13961,
+      "sha256": "a3c05e0f3d268b732570294aa8b53cbcc80d4e43860ebeb5a2bbca08c8f11ae9"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-14-07.json": {
+      "bytes": 748,
+      "sha256": "466b5e2780f994e4205e403b4a68e88f407e6965521ddbc1dbd2582d9975a724"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-14-07.npz": {
+      "bytes": 63552,
+      "sha256": "b9832dad34a3338a025d1bddaf33c7aef25cb952a613252cefa318f78e02bb79"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-19-29.json": {
+      "bytes": 749,
+      "sha256": "f0d6add995055eecb1e8ac9e99aaab528c971173b763b1d97b91ecea672f9d67"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-19-29.npz": {
+      "bytes": 36847,
+      "sha256": "7aaee8b25ae91676c96e2f1fccb99af734ebc5b10e8e156a7a8718029c5c7c37"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-18-00.json": {
+      "bytes": 744,
+      "sha256": "de561cda65e82be7e1b684b79ae29b298b900218285a1b59f26acecce56e550e"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-18-00.npz": {
+      "bytes": 58367,
+      "sha256": "65d281548f485ea5ac8078cd889134082096694c1f249f78fb9fb100eba7dbc1"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-12-02.json": {
+      "bytes": 748,
+      "sha256": "80f189679a41272de804e9f2baf3bdf517876fcb5dfb473cd4b197e6c7ffaa89"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-12-02.npz": {
+      "bytes": 11470,
+      "sha256": "9289767286314b3aad9f90ff2dfac680c88d5dfc6048709ff318995c41d71177"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-08-18.json": {
+      "bytes": 747,
+      "sha256": "f8813ad9d9151d8c331d7d2426b66812af7a6f09e2a2ced3b0b908632232c6cb"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-08-18.npz": {
+      "bytes": 30332,
+      "sha256": "138a126880537b2c38817d2b12285700e614755826a46a38b0df625edde1a909"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-14-26.json": {
+      "bytes": 749,
+      "sha256": "f6ac047c7ee26ce7701db74329247e85b2a8c943f56ed093c6aabc55cf054e26"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-14-26.npz": {
+      "bytes": 46429,
+      "sha256": "3e3b1a69f1a7e651d555717898d51dabcc4b1b7936a7b62d945599e9432f5e31"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-07-17.json": {
+      "bytes": 746,
+      "sha256": "358ceeb3eabc12f7b01ea4547901efd5436d6d942a1aa271402eb812b8ce726e"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-07-17.npz": {
+      "bytes": 3156,
+      "sha256": "617c82199831bb352eb57bdec8481981847e5cbd522d536c8d4c68da8ecef001"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-24-24.json": {
+      "bytes": 749,
+      "sha256": "17bc5764ce7a4636421ae6e5ea091ad7a869aeb09c169810165ae05e741fa207"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-24-24.npz": {
+      "bytes": 36317,
+      "sha256": "d51748c8b78c5bf4fbdd2ebf21d308824f37fffcc84a23cbb17d4f8d0dfff86a"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-20-08.json": {
+      "bytes": 748,
+      "sha256": "824a75f61927c848f5ce534e068c0dad248e4f6876b733b787f873165d5753ca"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-20-08.npz": {
+      "bytes": 53423,
+      "sha256": "3393ca6174302b9343532d2d6c678464c6e4adf763676fcf02b06bba0a0ac75a"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-21-32.json": {
+      "bytes": 749,
+      "sha256": "36fc16657745159e418e22adcb568f8356eb496ea049bcfce94f8fccebc1b29a"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-21-32.npz": {
+      "bytes": 59466,
+      "sha256": "cd15327b78c6a8ed7a1aa4113db5ef68bd6a229ebfee8cfb30b6f7708d5a08bd"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-03-18.json": {
+      "bytes": 747,
+      "sha256": "025c0d13cdcd3f3a9306d87bcc2bd5f4aa7cbf96ada457fbca37ce15ac48a70e"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-03-18.npz": {
+      "bytes": 44329,
+      "sha256": "b403a5e4a759aaaa8ffb14c29fdf57144307642e09c1a4e763b844eeef02b4fa"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-17-25.json": {
+      "bytes": 748,
+      "sha256": "e45770f0b9a4efd0bbb85b2124115fe27edc57a17b79335a193ecf7d09701665"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-17-25.npz": {
+      "bytes": 4393,
+      "sha256": "91962a5981bb3daa8f20eb32d3d8b900643894d4b6fd6cdf06c2f952161c99d3"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-26-11.json": {
+      "bytes": 749,
+      "sha256": "4dea2f2b75b57dee3d8dc88f99012cf34d0d01625c1cba1b7708efef462a2ef2"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-26-11.npz": {
+      "bytes": 9599,
+      "sha256": "3059b7fe511dc1863e7343a2813d22e18033f176dc0a620b8a2f1d5a6a80c3f7"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-08-11.json": {
+      "bytes": 747,
+      "sha256": "9363891c886ea3e55253454c25723816a08ce845832f7468a022c5ea9cae7304"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-08-11.npz": {
+      "bytes": 66261,
+      "sha256": "ec97a64c6ebc76861008d498f597de22aae8d9d62af4f62742fd158107f14095"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-20-33.json": {
+      "bytes": 749,
+      "sha256": "0b6edff6f3d7f2dff8a0a3b0b89b8aa2e895ddaede4c2fa13b13a2dd2f03f7c1"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-20-33.npz": {
+      "bytes": 52960,
+      "sha256": "d886b3572a71579e8563709805244ba3f37c1c7d25b3ac03a57e99719ab25d36"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-27-14.json": {
+      "bytes": 750,
+      "sha256": "43f3b0603609daacd4e90b9090e195a21e9a21763f5b57e472e0ef3aab229526"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-27-14.npz": {
+      "bytes": 47118,
+      "sha256": "b33587bb643f1c62b75454264e3cc83097d5c81979f3c762f4118b69e1dda61a"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-23-12.json": {
+      "bytes": 750,
+      "sha256": "e5b79a03d6afbd81d0829ba36333d6a7282e6337551783b6b71bd25aaf78b88a"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-23-12.npz": {
+      "bytes": 72954,
+      "sha256": "12387c6fcf21015edcf41f06804763e033af915f0f93300481cc25f187adfde2"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-17-16.json": {
+      "bytes": 749,
+      "sha256": "84262dc754911ab8367f82416b8246316a7a8265c10f63c6dc47a62d97232f89"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-17-16.npz": {
+      "bytes": 27237,
+      "sha256": "6aa77bf93c4a33b6c3c954e675f49f2d81ce8cd7d8318bde77e3179d3e8666bc"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E093/new-block-11-04.json": {
+      "bytes": 743,
+      "sha256": "bcf899ec385d6178ad26c687d2dd3817852753a5f682fe50460143f5e97a8857"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E093/new-block-11-04.npz": {
+      "bytes": 3291,
+      "sha256": "8c14993f4eca76bde4505f9c8a738b9585d189bcd29849c7d09f505463adb19f"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-24-07.json": {
+      "bytes": 748,
+      "sha256": "15815a8f1126db83ae505ae9ab9c024040d1fc4c6124bcad75ccdc5b467ad643"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-24-07.npz": {
+      "bytes": 28129,
+      "sha256": "50d1cc73f7bcf94224cbd4c46a1a6ff7ef6b71dd43e07ffe3963ecdc603837e5"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-02-17.json": {
+      "bytes": 747,
+      "sha256": "226948cf7a8ff14f82389cba88fe81ffbf6ad56a0c1b4baa04485d5afdfd5903"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-02-17.npz": {
+      "bytes": 35850,
+      "sha256": "067a25097afe38ad3802b0049f0feef8dcfe6f51ca0ffb22d80d29b8a8b62b5c"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-10-02.json": {
+      "bytes": 748,
+      "sha256": "525e6af7268a9a0a99ff8ba8ad218203c8342877bc65d31aeafff8941de353af"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-10-02.npz": {
+      "bytes": 75162,
+      "sha256": "25aa72563ba0e60767bc7ae76d5387a37995eac8d07e57ede0a25e6de6435d78"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-21-30.json": {
+      "bytes": 749,
+      "sha256": "70ed855771acd08ecfac0acb473cd4ba1053569452d8bec7dd80a0cbb992feb9"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-21-30.npz": {
+      "bytes": 40398,
+      "sha256": "9db096c9838fbdd32af5b90304d260e3466e83854c194eb1590f417c5419ba28"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-19-10.json": {
+      "bytes": 750,
+      "sha256": "1b18c42df6c90e0b9dd4b37c6e85285ed16135d4679504ac3f03e061ea40cb03"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-19-10.npz": {
+      "bytes": 51153,
+      "sha256": "e4b2fd5e9110dc85620331b27cf70ed1a83e54dc12aaf9311cedaca5f8c901cb"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-17-14.json": {
+      "bytes": 749,
+      "sha256": "c6c2cdfbee8364e0bd2063064981d98f2950c0ae4b21d9411310823b25761998"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-17-14.npz": {
+      "bytes": 20919,
+      "sha256": "52fe948b23c43041b427e01c28c80b9940626f3981a9ce9c06a6edd9df88353f"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-14-24.json": {
+      "bytes": 749,
+      "sha256": "fa1171332ff19739288da80f79c18b6648fb1c4193b42c804bd3606eda23545e"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-14-24.npz": {
+      "bytes": 19600,
+      "sha256": "8a9f82936ff50fd3d3ab3424dff5c2f2b24d7eb9750feff2952647fef64ff42f"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-13-04.json": {
+      "bytes": 747,
+      "sha256": "eca7edd788853887eb5a157cf7323f23d4447b134ea2f09095876c99b5f82384"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-13-04.npz": {
+      "bytes": 3105,
+      "sha256": "8cd7f24c54ee79d06d2e141bd7a5a0be8bbb13afbf7d94049cedc56646650db7"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-34-21.json": {
+      "bytes": 749,
+      "sha256": "eb608d2a6f0c70db32576c087f24ebaa002a30a74c7fd51631e4104347726cb5"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-34-21.npz": {
+      "bytes": 30833,
+      "sha256": "f5cb289088d615a9e511d9670aadcce779cb239d349bbb8ccf3db1d1044e52ae"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-22-13.json": {
+      "bytes": 748,
+      "sha256": "fe57bc725e5f81f2816dd56c93f0d92561497dfcd3dcb051c3f6ed8bf2079037"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-22-13.npz": {
+      "bytes": 2842,
+      "sha256": "4c710d36290e00b92d0ae8b84912264380f7ccef2f2abe6647971109b9bd2af4"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-26-09.json": {
+      "bytes": 747,
+      "sha256": "cdcc572ced59f8d8d860d86867bef087bf1c03bdbc52e1aa7a898c7024e71f3d"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-26-09.npz": {
+      "bytes": 4996,
+      "sha256": "f5f9185e22df7ac19bd90b33dc086ec35141dff327cf3504c64fca4368952129"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E090/new-block-08-32.json": {
+      "bytes": 744,
+      "sha256": "3be71ffe41e15f06e525a815f4676fd384687ecb92fd5eef05e86b1ab80e48d9"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E090/new-block-08-32.npz": {
+      "bytes": 45332,
+      "sha256": "88b909fff811e8ea54c21fa329609d8d6fea2f66dff358a0137b2585131830f5"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-15-24.json": {
+      "bytes": 749,
+      "sha256": "9dc17d22fd8959cfd81c1728ff0e6de1d7e57b83bdcd5b0b7ed7f1515ee8827e"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-15-24.npz": {
+      "bytes": 16436,
+      "sha256": "a53f1ca3a9d798d939e6ca603eafe671e6bca2cb387b12785b343c0413ce8e8d"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E093/new-block-09-04.json": {
+      "bytes": 741,
+      "sha256": "37e5db9dec383e3c395b68f9933a3453cb2273b0452510712b9003125af2b392"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E093/new-block-09-04.npz": {
+      "bytes": 6545,
+      "sha256": "ce9310016ead4700338c8903e2bf17541f9e9b95f7176d70693c5aacc1cecf67"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-14-08.json": {
+      "bytes": 748,
+      "sha256": "98e2fc747516f66f5f6cea99d6388e1495c2c33f72f3b7fd6c9b72a08c77fdb8"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-14-08.npz": {
+      "bytes": 66722,
+      "sha256": "6d954e325a609f94f5ca03d19c2008388f7751379585a23d5e3dac898cb897d3"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-22-19.json": {
+      "bytes": 749,
+      "sha256": "e593644454c44fd62847db82c3412e9ab9638656dc60eca13a2794e67a094c43"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E093/new-block-22-19.npz": {
+      "bytes": 42795,
+      "sha256": "5294d9af2da1c8dd38343579d7564650ee08874823887de761d3eb4b6efc60c4"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-25-25.json": {
+      "bytes": 748,
+      "sha256": "b5aecac476259021629afc9b76e046ee43b4f9fc896f66e5fc548a1169f05d2f"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-25-25.npz": {
+      "bytes": 2899,
+      "sha256": "7e888e83d15381ba15d477258281e0fed246e9258e20a52a32030afb19eb778f"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-09-00.json": {
+      "bytes": 743,
+      "sha256": "2aafcff72c2faa15673c21e7e26e9fb59c68bc6a642d48371eec86f96836b555"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-09-00.npz": {
+      "bytes": 50296,
+      "sha256": "19f5693bb36ef924932b26ce56626ae5d925c49f8293cad7c71ef4b056e19691"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-32-15.json": {
+      "bytes": 750,
+      "sha256": "bef5045352df88680069127ba1f9e004f12bb673a73e391951a78252f65f72d8"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-32-15.npz": {
+      "bytes": 12121,
+      "sha256": "359c63ac6889e6bcfa19c60700464c37611c791886d000736fb651a091524a08"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-25-29.json": {
+      "bytes": 748,
+      "sha256": "fcf738bcea15d8af216e89e233ae8395b6539ee17b8c73849b2b4317f30bcaa6"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-25-29.npz": {
+      "bytes": 3166,
+      "sha256": "b2adfa6a391c616141d795601ec772736aa14e0b4427017b61b584be8a2c479e"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-24-05.json": {
+      "bytes": 747,
+      "sha256": "81b03378d520a5a49efea28f5a95ef07879b04a7fdc34b5d02361fde12349314"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-24-05.npz": {
+      "bytes": 5535,
+      "sha256": "79a423182e535fc39f969cbefa12a32300d4a3673ea30aa58bd1da0f14697172"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-14-01.json": {
+      "bytes": 747,
+      "sha256": "6bfe546af9beb5872efd3fa36b324acf0c2b829f459be67fa8b0d142cfdb018e"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N15E096/new-block-14-01.npz": {
+      "bytes": 72924,
+      "sha256": "41f55676c4fc8496731e02f5929d11bbb1e18ebc264f4a47c93f2e0835585226"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-13-25.json": {
+      "bytes": 749,
+      "sha256": "835fbe0d2bc2cc1edb2c83609b9ce97bcbc6c2bbe94a81e59bda67a7168bd495"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N12E096/new-block-13-25.npz": {
+      "bytes": 36456,
+      "sha256": "77e9342570adbafb8e2fd616ec11e289a1df462ab3380f53872a137c859d4ed0"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-10-00.json": {
+      "bytes": 745,
+      "sha256": "ba1938df27248e9e252c9f3e5edd4c981cae3984c3a92fb60727cfc9305d8f10"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-10-00.npz": {
+      "bytes": 57756,
+      "sha256": "d5ebeb3676398ebc8a4f4a55809070bc80cb6e897e449bf4370fecbf2bf0224d"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-12-01.json": {
+      "bytes": 748,
+      "sha256": "929273b701a7aeaf3fb87e4c253c3606b05e46accb0cd452c4c3605bf82d31aa"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-12-01.npz": {
+      "bytes": 22891,
+      "sha256": "ed6a9c0d520b7421e4d796ab36c380c1377224e16dca6f0a5160812da8d8496d"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-25-13.json": {
+      "bytes": 750,
+      "sha256": "74fe261fbaf6bb182c6856d98671c163089d044dda57be5a255c02a9610d18fd"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-25-13.npz": {
+      "bytes": 46231,
+      "sha256": "35d2b92872b06929fc7d8de196e0b2178147975b90ab432ef8a1163ac397201a"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-21-10.json": {
+      "bytes": 750,
+      "sha256": "6cca1d2e048ac15a20aa06e55f3f5ca8e0405f1f034f0913fc529d0c0133e237"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-21-10.npz": {
+      "bytes": 57874,
+      "sha256": "49176da4d4b7968ef994b01f1d0722146a048835fff3406bb7114abf64ccab09"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-11-01.json": {
+      "bytes": 748,
+      "sha256": "ea58852d06ee1b77897b6f82db59c68b9e49f8b5b007740da471f8e2d622ce9c"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N18E093/new-block-11-01.npz": {
+      "bytes": 69521,
+      "sha256": "2512be69359640ad867df9b66b47e3ba390e23dc3490d04aa972ccf25f41e965"
+    },
+    "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/source-docs/WorldCover_PUM_V1.0.pdf": {
+      "bytes": 2786899,
+      "sha256": "1fa66044c95a19ee94003105fe3104e74a9b397c692eeafce648bd3ec75141f8"
+    }
+  }
+}
