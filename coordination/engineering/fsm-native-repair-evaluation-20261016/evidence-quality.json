@@ -1,0 +1,298 @@
+{
+  "version": 1,
+  "issue": 2248,
+  "lane": "engineering",
+  "worker_id": "01a14679-9ff5-7641-93a1-aba47e83a00c",
+  "subject_ids": [
+    "gb:FSM:ADM1:64989084B14644801478174",
+    "gb:FSM:ADM1:64989084B22448563958302",
+    "gb:FSM:ADM1:64989084B48422588925966",
+    "gb:FSM:ADM1:64989084B53067458551386"
+  ],
+  "subject_ids_sha256": "ac0bd99443008269ea495558afabf3af5d6ad8eaa829fca60e0a0c6236fe33c5",
+  "baseline": {
+    "commit": "b90b037def1e8f065483c3c342468a833c34a140",
+    "files": [
+      {
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+        "bytes": 1754890,
+        "sha256": "78007430b6f9faedb188ef0619b7ff0a7a2cc7fff2ec9f1c41ee69936ec4ebd8",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-FSM-ADM1-000.bin.gz",
+        "bytes": 27910,
+        "sha256": "28931f324604106d714eb0859a42313d11e869484890c943644b74d4d647eb75",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 89804,
+        "uncompressed_sha256": "86db8036dd0ccd0573fd9545e22d1a478976b2703812e28479880a5ff3c774fc"
+      },
+      {
+        "path": "data/geography/part-8.json",
+        "bytes": 5097739,
+        "sha256": "2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+        "bytes": 403376,
+        "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/administrative-sources.json",
+        "bytes": 661416,
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json": "78007430b6f9faedb188ef0619b7ff0a7a2cc7fff2ec9f1c41ee69936ec4ebd8",
+      "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-FSM-ADM1-000.bin.gz": "28931f324604106d714eb0859a42313d11e869484890c943644b74d4d647eb75",
+      "data/geography/part-8.json": "2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1"
+    },
+    "pin_files": {
+      "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+      "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-FSM-ADM1-000.bin.gz": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-FSM-ADM1-000.bin.gz",
+      "data/geography/part-8.json": "data/geography/part-8.json"
+    },
+    "subject_files": {
+      "gb:FSM:ADM1:64989084B14644801478174": "data/geography/part-8.json",
+      "gb:FSM:ADM1:64989084B22448563958302": "data/geography/part-8.json",
+      "gb:FSM:ADM1:64989084B48422588925966": "data/geography/part-8.json",
+      "gb:FSM:ADM1:64989084B53067458551386": "data/geography/part-8.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "fsm-original-reference",
+      "url": "https://github.com/wmgeolab/geoBoundaries/blob/9469f09/releaseData/gbOpen/FSM/ADM1/geoBoundaries-FSM-ADM1_simplified.geojson",
+      "role": "Complete original simplified four-State reference, with exact source-to-target identity and complete-family competitor checks.",
+      "vintage": "Recorded 2019 geographic reference; underlying attribution includes FSM 2010 Census.",
+      "retrieved_at": "2026-10-16",
+      "license": {
+        "status": "redistributable",
+        "terms": "Recorded Creative Commons Attribution 3.0 Intergovernmental Organisations. Attribute OCHA ROP / FSM Division of Statistics 2010 Census / SPC Statistics for Development, via geoBoundaries gbOpen; retain original source and indicate derived reference-native additions."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Read original corpus catalogue and payload from the exact baseline; decoded 89804-byte SHA256 86db8036dd0ccd0573fd9545e22d1a478976b2703812e28479880a5ff3c774fc. Full and simplified bodies remain distinct.",
+      "limit": "Bounded reference-state candidate repair; current legal coastline, marine jurisdiction, every island and regional semantics remain uncertified.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "fsm-primary-territorial-context",
+      "url": "https://national.doe.fm/PublicDocuments/SDG/FSM%20SDG%20VNR_FINAL%20r5-27%20Aug%20-%20%28Option%201%29.pdf",
+      "role": "National map/state and named island-group corroboration, with linked four State constitutional provisions in source-scope-review.md.",
+      "vintage": "June 2020 national review; constitutional texts accessed 2026-10-16.",
+      "retrieved_at": "2026-10-16",
+      "license": {
+        "status": "unknown",
+        "terms": "Raw contextual PDF/images are not redistributed. Publisher acknowledgement and requested-publication-copy provisions retained as limits."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Inspect actual PDF page 7 map and four insets; original PDF 6378559 bytes SHA256 87972f53b595199aeead36af3588f52d666a539b2a939c4005afa29e461fd9a9. Follow explicit constitutional citations in source-scope-review.md.",
+      "limit": "Group-level territorial corroboration, not individual coast surveys, current local linework, precision legal currency or whole-country approval.",
+      "temporal_status": "reference"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "coordination/engineering/fsm-native-repair-evaluation-20261016/authority/authority-binding.json",
+      "bytes": 733,
+      "sha256": "2fab9619b75bd7d6427e9513d055fcf5b26b0ba3b7822a04b5ffb68c9eea1742",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/fsm-native-repair-evaluation-20261016/authority/constructor-result.json",
+      "bytes": 28900,
+      "sha256": "fa9e0d544ef7ac4472f988d9213588e18c5a9ebad63a77a0fc25dd359960a539",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/fsm-native-repair-evaluation-20261016/authority/original-rule-preimage.json",
+      "bytes": 730,
+      "sha256": "b08083b566176e19c736573b769ab3af06b9de067768d3c406ef3ec13854abb4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/fsm-native-repair-evaluation-20261016/authority/preparation.json",
+      "bytes": 501,
+      "sha256": "7ada73027afda2240ff27de2c234aeb9f0333df258e69328f704a1246a538013",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/fsm-native-repair-evaluation-20261016/candidate-native-patch.json",
+      "bytes": 22363,
+      "sha256": "d868616151364175dea2cac7bffbc93cdff4dcd307e991b297a47007a1fa5767",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/fsm-native-repair-evaluation-20261016/composition/authority-registry.json",
+      "bytes": 158634,
+      "sha256": "2a4f716da7d1dfbca6234b226e89c22c09d778ecdcd534ba662d27623d586246",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/fsm-native-repair-evaluation-20261016/composition/patch.json",
+      "bytes": 2918807,
+      "sha256": "2d32da42591db2f33f7f94fc30b2619044e3534b250cb63fe0ce5ba20368ea39",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/fsm-native-repair-evaluation-20261016/composition/preparation.json",
+      "bytes": 597,
+      "sha256": "3192771bd7cf172fe4a92f85b63c9ca554864f8783602def0939e9e2edced15a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/fsm-native-repair-evaluation-20261016/composition/runtime-envelope.json",
+      "bytes": 1384,
+      "sha256": "9f19e073c43980d0593022127a18f06f2ec7460e3f3e728739e1f0ef164a102f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/fsm-native-repair-evaluation-20261016/composition/selected-ledger.json",
+      "bytes": 7952215,
+      "sha256": "d794282c51d35a9ac2488403125d6b416f806d196703c98d1aea9efe1ebef620",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/fsm-native-repair-evaluation-20261016/evidence/accepted-emitted-owner-zero.json",
+      "bytes": 5541,
+      "sha256": "e1bdab57eb56497d7dee611f62dd00bc12b21be0b9f54a2b5ff76b474f87e4e6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/fsm-native-repair-evaluation-20261016/evidence/original-stage-inputs.json",
+      "bytes": 90341,
+      "sha256": "2dde0c47f3347c549056e052486bca91a2ceca1d9c0908e767eddce9c5df060c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/fsm-native-repair-evaluation-20261016/evidence/retained-component-candidates.json",
+      "bytes": 74655,
+      "sha256": "61120a9598882d039faf746c1c233cb4f57aa814e5a6496923c141819c00d705",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/fsm-native-repair-evaluation-20261016/evidence/retained-island-group-review.json",
+      "bytes": 6212,
+      "sha256": "f4831f1271bb04c1d4ac8b754bb4f967c9a4e7500a0f97bba1241ee47eb3b412",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/fsm-native-repair-evaluation-20261016/evidence/source-target-topology.json",
+      "bytes": 2324,
+      "sha256": "33329e27f7be514aeabfe080904fa8efc759cc079a6f5f692723d9e1234daf00",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/fsm-native-repair-evaluation-20261016/intervals/block-030.json.gz",
+      "bytes": 2933,
+      "sha256": "442de58d89fd5fd95555334a4cf016505c823ff0c855f8845e9557e43c1a8464",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 24704,
+      "uncompressed_sha256": "4217641e0d6ec4f852d664daebe4d2a5d8e2b0e252b1bd11446816c4c0e1c3a4"
+    },
+    {
+      "path": "coordination/engineering/fsm-native-repair-evaluation-20261016/intervals/block-031.json.gz",
+      "bytes": 506,
+      "sha256": "747e1c593ce2cbbbd1ad061c42940be2beb5e17a893c9f88d1933b953e772331",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 3636,
+      "uncompressed_sha256": "8c65bb90b7a747c876a6b159266ed1c88214dfb82e362c00dae1076ee0e06abc"
+    },
+    {
+      "path": "coordination/engineering/fsm-native-repair-evaluation-20261016/intervals/package.json",
+      "bytes": 2331,
+      "sha256": "d920e02ac2739d7957c786d458b16674e856b4bcb30be25a117c9deceadb04d1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/fsm-native-repair-evaluation-20261016/native-diagnostic/native-diagnostic.json",
+      "bytes": 79873,
+      "sha256": "9498bf2bd3538d5c6537a2f951d66e6cf7518b32bb11c5ddd7547e3c781ebb3b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/fsm-native-repair-evaluation-20261016/native-diagnostic/preparation.json",
+      "bytes": 266,
+      "sha256": "af56f61e7826c0407e2dacef17d6c8b99783ece78eb5ffb6a97f8a621ef822b9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/fsm-native-repair-evaluation-20261016/physical/execution-receipt.json",
+      "bytes": 58149,
+      "sha256": "9559d92141b88e8b1eb12d9ef07b4c29e6c6a848257238bb0a8ddc2f52d6b8b4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/fsm-native-repair-evaluation-20261016/physical/preparation.json",
+      "bytes": 544,
+      "sha256": "a46f6d2c76d56cd2bdb1eab55329d89833899df6c6d92db3fdd9b571ffa52516",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/fsm-native-repair-evaluation-20261016/physical/whole-target-support.json",
+      "bytes": 487515,
+      "sha256": "7b97f096c7c284cfae61fe12a3aa1fda3bdbbe8b06ce835f46b1618aa74f9b4c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/fsm-native-repair-evaluation-20261016/source-evidence/preparation.json",
+      "bytes": 262,
+      "sha256": "3c0c659a3c92e0671472a243fd664b7ca558de979530bf6614983848bca77865",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/fsm-native-repair-evaluation-20261016/source-evidence/source-evidence.json",
+      "bytes": 40648,
+      "sha256": "9e62aba9a6cb50871332c3f4b2239a084ad6e5905f5fdaca948db658d5177fdb",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "original-fsm-qualification-custody",
+      "kind": "code",
+      "description": "Retain actual immutable source/physical/native constructor inputs and results, native diagnostic and authenticated accepted-emitted owner-zero readback. Scientific interpretation is bounded in source-scope-review.md and separately reviewed; byte matching alone is not approval.",
+      "software": "Accepted WorldAtlas stock prepare-delivery-handoff phases at b90b037; Node 24.19.0; actual physical Python/runtime recorded in execution-receipt.json.",
+      "units": "Whole-file bytes, SHA-256 and exact native centre/half-open interval identities"
+    }
+  ],
+  "metrics": [],
+  "metric_bindings": [],
+  "summaries": [],
+  "conclusions": [
+    {
+      "status": "supported",
+      "text": "Complete original source and physical/native candidate evidence support the bounded 1902-cell FSM repair proposal. Whole-source Chuuk reconstruction residuals remain preserved and intersect no candidate centres.",
+      "source_ids": [
+        "fsm-original-reference",
+        "fsm-primary-territorial-context"
+      ]
+    },
+    {
+      "status": "unresolved",
+      "text": "No final selector, accepted delivery, whole-source legal currency, complete island inventory, regional approval or website publication is established by this qualification checkpoint.",
+      "source_ids": [
+        "fsm-original-reference",
+        "fsm-primary-territorial-context"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "partial",
+    "implementation": "proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "node coordination/engineering/global-current-cell-work-queue-20261014/source-batch-intervals.mjs gb-FSM-ADM1--repair-evaluation FRESH_OUTPUT",
+    "env -u NODE_OPTIONS -u NODE_PATH node scripts/prepare-delivery-handoff.mjs physical CONFIG FRESH_OUTPUT",
+    "env -u NODE_OPTIONS -u NODE_PATH node scripts/prepare-delivery-handoff.mjs source-evidence CONFIG FRESH_OUTPUT",
+    "env -u NODE_OPTIONS -u NODE_PATH node scripts/prepare-delivery-handoff.mjs native-diagnostic CONFIG FRESH_OUTPUT",
+    "env -u NODE_OPTIONS -u NODE_PATH node scripts/prepare-delivery-handoff.mjs native-authority CONFIG FRESH_OUTPUT"
+  ]
+}
