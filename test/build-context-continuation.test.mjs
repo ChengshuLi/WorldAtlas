@@ -154,3 +154,72 @@ test('arctic release catalogue authenticates complete gzip bytes and decoded ide
   await fs.writeFile(file,raw.subarray(0,raw.length-1));assert.throws(()=>authenticateReleaseCatalogueMetadata(root,pin));
  }finally{await fs.rm(root,{recursive:true,force:true});}
 });
+
+// Exercise the literal current restoration/copy/getter/cleanup bodies with small
+// ordinary files. Only original-image acquisition and byte inversion are stubbed;
+// this fixture does not claim to reproduce the original geographic products.
+test('canonical restoration authenticates copied bytes once and later getters revalidate mutable files', async t => {
+ const source=await fs.readFile('scripts/canonical-restoration.mjs','utf8');
+ const readers=source.slice(0,source.indexOf('function readIndexObject(')).replace(/^import .*;\n/gm,'');
+ const body=source.slice(source.indexOf('const membershipIndex ='),source.indexOf('// Select an exact member')).replace(/^export /gm,'');
+ const temporary=syncFs.mkdtempSync(path.join(os.tmpdir(),'canonical-copy-boundary-'));
+ t.after(()=>syncFs.rmSync(temporary,{recursive:true,force:true}));
+ const raw=Buffer.from('ordinary fixture'),pin=name=>({path:name,bytes:raw.length,sha256:digest(raw),mode:'100644'});
+ const map={issue:1295,version:1,kind:'complete-accepted-canonical-product-byte-map',distinct_objects:[pin('objects/current')],
+  logical_targets:Array.from({length:302},(_,i)=>({...pin('unused'),target:`data/canonical-grid/eastern-v8/fixture-${i}.json`,object:'objects/current'}))};
+ const old={kind:'complete-prior-v1-mode-whole-byte-bijection',
+  original_index_sha256:'e34743a84df2aaaa668b4e7b23c4f6870379edfe7eb88a427d6005b47333a393',
+  shared_canonical_index_sha256:'3a343812f25b02f4472dbe5338a72e9541e4de180b916e0cf8bbc9a00464f097',
+  logical_targets:Array.from({length:122},(_,i)=>({...pin(`data/prior-${i}.json`),object:'objects/prior'}))};
+ old.original_index={files:old.logical_targets.map(({object,...p})=>p)};
+ const membershipBodies=new Map(),membershipPins=[];
+ for(let i=0;i<340;i++){
+  const rows=Array.from({length:Math.min(250,84833-i*250)},(_,j)=>({entity_id:`fixture-${i*250+j}`}));
+  const decoded=Buffer.from(JSON.stringify({release_id:'geography:review:896bf79dd6e5661dfbbffba60da96fa987b9971af2b884cf52347189861ebe9e',memberships:rows}));
+  const wire=gzipSync(decoded),name=`data/geographic-releases/8-memberships-${i*250}.json.gz`;
+  const p={path:name,bytes:wire.length,sha256:digest(wire),mode:'100644'};
+  p.original_binding={...p,kind:'unaccepted-generated-v8-membership-output',commit:'bad783529fa35d0bd45cd65ed899c02ea96c93b6',scientific_records_recomputed:false,
+   blob:createHash('sha1').update(Buffer.from(`blob ${wire.length}\0`)).update(wire).digest('hex'),decoded_bytes:decoded.length,decoded_sha256:digest(decoded),memberships:rows.length};
+  membershipBodies.set(name,wire);membershipPins.push(p);
+ }
+ let serial=0;
+ const fixture=(corruption=null)=>{
+  const directory=path.join(temporary,String(serial++)),root=path.join(directory,'root');syncFs.mkdirSync(root,{recursive:true});
+  let reads=0,decoded=0;
+  const observed={...syncFs,
+   openSync(file,...args){if(String(file).startsWith(root+'/')||String(file).includes('/original-v1-image/'))reads++;return syncFs.openSync(file,...args);},
+   copyFileSync(from,to,...args){syncFs.copyFileSync(from,to,...args);if(corruption&&to===path.join(root,map.logical_targets[0].target)){
+    if(corruption==='bytes')syncFs.writeFileSync(to,Buffer.alloc(raw.length,90));
+    if(corruption==='missing')syncFs.unlinkSync(to);
+    if(corruption==='mode')syncFs.chmodSync(to,0o755);
+   }}
+  };
+  const write=(directory,name,bytes)=>{const file=path.join(directory,name);syncFs.mkdirSync(path.dirname(file),{recursive:true});syncFs.writeFileSync(file,bytes);};
+  const image=(input,destination)=>{
+   const members=input.endsWith('/release-memberships')?membershipBodies:new Map(input.endsWith('/canonical-products')
+    ?[['objects/current',raw],['canonical-path-map.json',Buffer.from(JSON.stringify(map))]]
+    :[['objects/prior',raw],['prior-path-map.json',Buffer.from(JSON.stringify(old))]]);
+   for(const [name,bytes] of members)write(destination,name,bytes);
+   return {files:members===membershipBodies?membershipPins:[...members].map(([name,bytes])=>({path:name,bytes:bytes.length,sha256:digest(bytes),mode:'100644'}))};
+  };
+  const api=new Function('fs','path','assert','createHash','gunzipSync','restoreWholeImage','restoreByteDerivedObjects','process',
+   readers+'\n'+body+'\nreturn {restoreCanonicalProducts,getRestoredCanonicalProducts};')(
+   observed,path,assert,createHash,(...args)=>{decoded++;return gunzipSync(...args);},image,()=>({synthetic_fixture_only:true}),
+   {env:{WORLDATLAS_PACKAGE_STAGE:root}});
+  return {root,run:()=>api.restoreCanonicalProducts({root,temporaryRoot:directory}),get:()=>api.getRestoredCanonicalProducts(root),counts:()=>({reads,decoded})};
+ };
+ const f=fixture(),receipt=f.run();
+ console.log('CANONICAL_COPY_BOUNDARY_WORK',JSON.stringify(f.counts()));
+ assert.deepEqual(f.counts(),{reads:764,decoded:340});
+ assert.equal(receipt.canonical_paths,302);assert.equal(receipt.prior_paths,122);
+ assert.equal(receipt.reproducible_staging_objects_released.length,3);
+ for(const item of receipt.reproducible_staging_objects_released)assert.equal(syncFs.existsSync(item.directory),false);
+ assert.equal(f.get(),receipt);assert.deepEqual(f.counts(),{reads:1528,decoded:680});
+ assert.equal(f.run(),receipt);assert.deepEqual(f.counts(),{reads:2292,decoded:1020});
+ const target=path.join(f.root,map.logical_targets[0].target);syncFs.writeFileSync(target,Buffer.alloc(raw.length,90));
+ assert.throws(f.get);assert.throws(f.run);assert.deepEqual(syncFs.readFileSync(target),Buffer.alloc(raw.length,90));
+ syncFs.writeFileSync(target,raw);
+ const member=path.join(f.root,membershipPins[0].path);syncFs.writeFileSync(member,Buffer.alloc(membershipPins[0].bytes,90));
+ assert.throws(f.get);assert.throws(f.run);
+ for(const corruption of ['bytes','missing','mode']){const failed=fixture(corruption);assert.throws(failed.run);assert.throws(failed.get,/must precede/);}
+});
