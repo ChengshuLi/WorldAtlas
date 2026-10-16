@@ -39,10 +39,14 @@ obligations, and `evidence/license-provenance.json` for exact upstream hashes.
 - Authenticated selected native acquisition covered all 424 affected rows:
   zero occupied-base or accepted-additive overlap at accepted main
   b66316835ec65fc3f40d4f02d8bf1ffd0e7c93a0.
-- Stock `composition-reference/` and finalization preserve accepted 294,376
-  additive cells and add 2,251, for **296,627 proposed cumulative cells**.
-  Prior authorities, complete ledger rows and Vanuatu's 1,203 exact holds remain
-  intact. This is a cumulative patch count, not a campaign-wide repair total.
+- Stock `composition-after-pacific/` and finalization use accepted Pacific main
+  5c65b213d005607e769af66d39bf03d4554882d6. They preserve all 306,212 additive
+  cells and add 2,251, for **308,463 proposed cumulative cells**. All 934 prior
+  ledger rows and 152 authorities are literal-preserved; 14 rows and one authority
+  are added. Vanuatu's 1,203 holds, Kiribati's 284 holds and Tonga's 1,984
+  review-only unresolved cells are unchanged and absent from the selected patch.
+  The native base selection, manifest and owner roster are unchanged. This is a
+  cumulative patch count, not a campaign-wide repair total.
 
 Final actual emitted loader/picker/sampler and hosted integration checks remain
 required. Constructor qualification, physical support and source custody alone
@@ -63,7 +67,10 @@ locators in `authority-reference/constructor-result.json`, a fresh owned output
 and the existing preparation allowance. Those original rule/binding/constructor
 and native patch pins feed stock `compose`; the committed composed ledger and
 original selector/package/rebind feed stock `finalize`. The active sidecar is
-`ownership-selection-reference.json`. No country-specific delivery helper is added.
+`ownership-selection-after-pacific.json`. The earlier full-scope
+`composition-reference/` and `ownership-selection-reference.json` are retained
+as superseded pre-Pacific selection evidence; their original source authority
+remains unchanged. No country-specific delivery helper is added.
 
 The first unjoined physical-input attempt is retained in
 `original-stage-inputs.json`, `physical-support.json` and the first diagnostic
