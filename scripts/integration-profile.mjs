@@ -1,4 +1,5 @@
 import {repairComponentKey} from '../src/native-grid.js';
+import {scientificNativeSelection} from '../src/reference-metadata.js';
 import {focusedIntegrationTest} from './run-integration-tests.mjs';
 
 // These delivery controls use their actual focused consumers. Unknown runtime
@@ -294,6 +295,17 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       const before = baseline.entries.get(name), after = authored.entries.get(name);
       return ordinary(before) && ordinary(after) && before.sha === after.sha && before.size === after.size;
     };
+    if (selection.reference_projection !== undefined) {
+      // The native base excludes this independently qualified metadata pointer.
+      // Its complete selector value and retained body must still be unchanged;
+      // the actual geography/build readers authenticate all projection operands.
+      const projection = selection.reference_projection;
+      needSelected(keys(projection, ['path','bytes','sha256']) && safe(projection.path) &&
+        unchangedRole(projection.path), 'reference projection changed or unavailable');
+      const bytes = await read(projection.path);
+      needSelected(bytes.length === projection.bytes && sha256(bytes) === projection.sha256,
+        'reference projection pin differs');
+    }
     // Fixed consumer roles establish how these bodies are read. Their filenames
     // do not determine whether a source body is data; exact ordinary-object
     // identity remains required and actual consumers validate their contents.
@@ -563,7 +575,7 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
     const sidecar = await pinnedJSON(hook);
     needSelected(sidecar.version === 2 && sidecar.kind === 'retained-native-additive-selection-v2' &&
       keys(sidecar, ['version','kind','base_selection','runtime_envelope','authority_registry','logical_asset_map']) &&
-      same(sidecar.base_selection, newBase) && keys(sidecar.logical_asset_map, ['base_manifest','ledger','owner_roster','patch']),
+      same(sidecar.base_selection, scientificNativeSelection(selection)) && keys(sidecar.logical_asset_map, ['base_manifest','ledger','owner_roster','patch']),
       'unsupported selected sidecar');
     pin(sidecar.runtime_envelope);
     for (const value of Object.values(sidecar.logical_asset_map)) pin(value);
