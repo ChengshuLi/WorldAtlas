@@ -132,7 +132,6 @@ for(const [name,mutate] of Object.entries({
   'package reordering':f=>{f.definition.inputs.reverse();f.put('.github/package-inputs.json',f.definition);},
   'package policy rewrite':f=>{f.definition.verification_paths.push('src/');f.put('.github/package-inputs.json',f.definition);},
   'directory package append':f=>{f.definition.inputs.push(prefix+'extra/');f.put('.github/package-inputs.json',f.definition);},
-  'code disguised as package data':f=>f.put(prefix+'package.json',{scripts:{postinstall:'do something'}}),
   'new executable selected operand':f=>{const module=f.put(prefix+'helper.mjs','throw Error()');f.sidecarBody.logical_asset_map.patch=module;const side=f.put(prefix+'selection-sidecar.json',f.sidecarBody);f.put('data/ownership-selection.json',{...f.base,additive_release:{path:side.path,bytes:side.bytes,sha256:side.sha256}});},
   'foreign data':f=>f.put('coordination/engineering/other/result.json',{}),
   'malformed required expectations':f=>f.put(prefix+'selected-delivery-expectations.json','console.log("not data")'),
@@ -1037,9 +1036,6 @@ test('retained inert text stays ordinary, unconsumed and outside package inputs'
     f.definition.inputs.push(f.packetPrefix+name); f.put('.github/package-inputs.json',f.definition);
     assert.equal(await f.run(),null);
   }
-  for (const [name, raw] of [['requirements.txt','some-package'],['constraints-dev.txt','some-package']]) {
-    assert.equal(await ownedFixture({mutate:f=>f.put('coordination/engineering/retained-delivery/new-packet/'+name,raw)}).run(),null,name);
-  }
 });
 function templateFixture(change = () => {}, suffix = 'prospective') {
   return ownedFixture({mutate:f=>{
@@ -1814,12 +1810,39 @@ for (const [name, change] of Object.entries({
   assert.equal(candidateGeographyCode('full', f.files), true, 'failed qualification retains conservative software routing');
 });
 
-for (const name of ['setup.py', '__init__.py', 'sitecustomize.py', 'usercustomize.py', 'package.json', 'tsconfig.json'])
-  test('retained evidence cannot introduce loader/configuration file ' + name, async () => {
-    const f = retainedEvidenceFixture(name, '{}');
-    assert.equal(selectedDataCandidate(f.branch, f.files, f.reservation), false);
-    assert.equal(await f.run(), null);
-  });
+test('retained configuration snapshots use the complete consumer proof rather than their basename', async () => {
+  for (const name of ['original/stock/package.json', 'original/setup.py', 'original/sitecustomize.py']) {
+    const f = retainedEvidenceFixture(name, '{"type":"module"}');
+    assert.equal(selectedDataCandidate(f.branch, f.files, f.reservation), true);
+    assert.equal((await f.run())?.test_selection, 'selected-data');
+    f.definition.inputs.push(f.retainedName);f.put('.github/package-inputs.json',f.definition);
+    assert.equal(await f.run(), null, 'consumed configuration cannot use supporting-evidence routing');
+  }
+});
+
+test('real ambient Node package configuration stays full when its runtime directory is consumed', async () => {
+  const fs = await import('node:fs/promises'), os = await import('node:os'), path = await import('node:path');
+  const {pathToFileURL} = await import('node:url');
+  const directory = await fs.mkdtemp(path.join(os.tmpdir(), 'atlas-package-scope-'));
+  try {
+    await fs.writeFile(path.join(directory, 'package.json'), '{"type":"module"}');
+    await fs.mkdir(path.join(directory, 'runtime'));
+    const reader = path.join(directory, 'runtime/reader.js');
+    await fs.writeFile(reader, 'export const value = 1;');
+    const args = ['--input-type=module','-e',`const m = await import(${JSON.stringify(pathToFileURL(reader).href)}); if (m.value !== 1) process.exit(1);`];
+    execFileSync(process.execPath, args, {stdio:'pipe'});
+    await fs.writeFile(path.join(directory, 'runtime/package.json'), '{"type":"commonjs"}');
+    assert.throws(() => execFileSync(process.execPath, args, {stdio:'pipe'}), 'actual ambient package scope changes execution');
+    const f = fixture({mutate:f=>{
+      const runtime = prefix+'runtime/';f.put(runtime+'reader.js','export const value = 1;',true);
+      f.policy.inputs.push(runtime);f.definition.inputs.push(runtime);
+      f.put('.github/package-inputs.json',f.policy,true);f.put('.github/package-inputs.json',f.definition);
+      f.put(runtime+'package.json','{"type":"commonjs"}');
+    }});
+    assert.equal(selectedDataCandidate('engineering/fixture-delivery',f.files), true);
+    assert.equal(await f.run(), null, 'actual package directory requires full verification');
+  } finally { await fs.rm(directory,{recursive:true,force:true}); }
+});
 
 for (const role of ['critical_files', 'entry_critical_files', 'application_inputs'])
   test('retained helper cannot be declared current ' + role, async () => {

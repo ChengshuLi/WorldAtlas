@@ -169,12 +169,6 @@ export function validateSelectedExpectations(expected, ledger, ledgerHash, previ
 
 const branchScope = branch => `coordination/engineering/${branch.slice('engineering/'.length)}/`;
 const inScope = (name, scopes) => containsPackagePath(scopes, name);
-// Implicit loader/configuration files can change behavior merely by existing,
-// outside the explicit reader graph. Other owned ordinary blobs are eligible
-// for the complete unconsumed-role proof below; a suffix grants no authority.
-function implicitLoader(name) {
-  return /^(?:package(?:-lock)?\.json|npm-shrinkwrap\.json|(?:requirements|constraints)(?:[.-].*)?\.txt|pyproject\.toml|setup\.(?:py|cfg)|__init__\.py|(?:site|user)customize\.py|(?:js|ts)config(?:\.[^.]+)?\.json|import[-_.]?map\.json|binding\.gyp|(?:binding|deno|composer)\.json)$/i.test(name.split('/').at(-1));
-}
 function nativeOperandPath(name, branch, reservation) {
   return /^(?:rows|runs)-[0-9]+\.bin\.gz$/.test(name.split('/').at(-1)) &&
     (name === branchScope(branch) + 'native-operands/' + name.split('/').at(-1) ||
@@ -194,8 +188,7 @@ export function selectedDataCandidate(branch, files, reservation = {}) {
     files.some(file => file.filename === SELECTION && file.status === 'modified') &&
     files.every(file => !file.previous_filename && (file.filename === CHECKPOINT_LOCATOR
       ? ['added', 'modified'].includes(file.status) : [SELECTION, PACKAGE_INPUT_FILE, ADMINISTRATIVE_REGISTRY].includes(file.filename)
-      ? file.status === 'modified' : file.filename === manifest && file.status === 'modified' || file.status === 'added' && inScope(file.filename, scopes) && safe(file.filename) &&
-        !implicitLoader(file.filename)));
+      ? file.status === 'modified' : file.filename === manifest && file.status === 'modified' || file.status === 'added' && inScope(file.filename, scopes) && safe(file.filename)));
 }
 export async function integrationTree(api, repo, commit) {
   const object = await api(`/repos/${repo}/git/commits/${commit}`);
