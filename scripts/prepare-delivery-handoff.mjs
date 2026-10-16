@@ -794,25 +794,32 @@ export function packageProjection(config, reader, acceptedRegistry = null) {
       // operands/native contracts are not a recursive package declaration.
       for (const role of ['catalogue', 'physical_input', 'physical_reproduction', 'physical_evidence', 'native_latitudes', 'owner_roster'])
         add(evidence[role], 'source-target ' + role);
-      if (evidence.version === 2) {
-        const pin = evidence.dated_land_support;
-        add(pin, 'source-target dated land support');
+      const interpretations = [
+        ...(evidence.version === 2 ? [{pin: evidence.dated_land_support,
+          kind: 'adopted-dated-native-centre-land-support-v1', role: 'dated', label: 'dated support',
+          root: 'dated land support', roles: ['adoption', 'review', 'observation', 'frame']}] : []),
+        ...(evidence.territorial_applicability === undefined ? [] : [{pin: evidence.territorial_applicability,
+          kind: 'adopted-native-territorial-applicability-v1', role: 'territorial', label: 'territorial applicability',
+          root: 'territorial applicability', roles: ['adoption', 'scope', 'original-source']}])
+      ];
+      for (const typed of interpretations) {
+        const pin = typed.pin;
+        add(pin, 'source-target ' + typed.root);
         let raw = reader.read(pin);
         if (pin.decoded_bytes !== undefined) {
           need(Number.isSafeInteger(pin.decoded_bytes) && pin.decoded_bytes > 0
-            && hex(pin.decoded_sha256, 64), 'Decoded dated support identity required');
+            && hex(pin.decoded_sha256, 64), 'Decoded ' + typed.label + ' identity required');
           raw = gunzipSync(raw, {maxOutputLength: pin.decoded_bytes});
           need(raw.length === pin.decoded_bytes && digest(raw) === pin.decoded_sha256,
-            'Decoded dated support identity differs');
+            'Decoded ' + typed.label + ' identity differs');
         }
         const support = JSON.parse(raw);
-        need(support.version === 1 && support.kind === 'adopted-dated-native-centre-land-support-v1'
+        need(support.version === 1 && support.kind === typed.kind
           && Array.isArray(support.provenance) && support.provenance.length > 0,
-        'Missing dated support provenance roles');
+        'Missing ' + typed.label + ' provenance roles');
         for (const provenance of support.provenance) {
-          need(['adoption', 'review', 'observation', 'frame'].includes(provenance?.role),
-            'Unknown dated support provenance role');
-          add(provenance.pin, 'source-target dated ' + provenance.role);
+          need(typed.roles.includes(provenance?.role), 'Unknown ' + typed.label + ' provenance role');
+          add(provenance.pin, 'source-target ' + typed.role + ' ' + provenance.role);
         }
       }
       for (const family of evidence.families) {
@@ -1197,6 +1204,7 @@ export async function sourceEvidence(config, reader) {
     || config.source_evidence?.version === 2 && config.source_evidence.kind === 'source-target-native-evidence-v2'),
   'Explicit ordinary source evidence required');
   if (config.source_evidence.version === 2) reader.read(config.source_evidence.dated_land_support);
+  if (config.source_evidence.territorial_applicability !== undefined) reader.read(config.source_evidence.territorial_applicability);
   const {locate} = await import('./delivery-handoff-advance.mjs');
   const selectorPin = locate(reader, config.selector);
   need(selectorPin.path === 'data/ownership-selection.json', 'Original accepted selector locator required');
@@ -1283,7 +1291,8 @@ export async function nativeAuthority(config, reader, root, diagnostic = false) 
       kind: 'existing-source-target-native-constructor-result', inputs,
       component_ids: result.component_ids, rule_sha256: result.rule_sha256, ledger_rows: result.ledger_rows,
       limitations: result.limitations,
-      ...(Object.hasOwn(result,'physical_context_hits') ? {physical_context_hits: result.physical_context_hits} : {})})};
+      ...(Object.hasOwn(result,'physical_context_hits') ? {physical_context_hits: result.physical_context_hits} : {}),
+      ...(Object.hasOwn(result,'territorial_contacts') ? {territorial_contacts: result.territorial_contacts} : {})})};
   }
   return {products, observation: {elapsed_seconds: (performance.now() - started) / 1000,
     ...(diagnostic ? {requested_cells: result.requested_cells, supported_cells: result.supported_cells, held_cells: result.held_cells}

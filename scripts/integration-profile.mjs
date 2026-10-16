@@ -641,11 +641,35 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
           &&keys(rule,['version','kind','source_evidence','native_patch'])
           &&same(rule.source_evidence,authority.source_evidence)&&same(rule.native_patch,authority.native_patch),
           'source-target rule/input join differs');
-        needSelected(evidence.version===1&&evidence.kind==='source-target-native-evidence-v1'
+        needSelected((evidence.version===1&&evidence.kind==='source-target-native-evidence-v1'
+          ||evidence.version===2&&evidence.kind==='source-target-native-evidence-v2')
           &&Array.isArray(evidence.families)&&evidence.families.length>0&&Array.isArray(evidence.targets)&&evidence.targets.length>0,
           'missing source-target evidence roles');
         for (const role of ['catalogue','physical_evidence','physical_input','owner_roster','native_latitudes']) pin(evidence[role]);
         await physicalReproduction(evidence.physical_reproduction);
+        // Match the closed whole-body source-reader roles, not arbitrary JSON pins.
+        for (const typed of [
+          ...(evidence.version === 2 ? [{pin: evidence.dated_land_support,
+            kind: 'adopted-dated-native-centre-land-support-v1', roles: ['adoption','review','observation','frame']}] : []),
+          ...(evidence.territorial_applicability === undefined ? [] : [{pin: evidence.territorial_applicability,
+            kind: 'adopted-native-territorial-applicability-v1', roles: ['adoption','scope','original-source']}])
+        ]) {
+          const name=pin(typed.pin);let raw=await read(name);
+          needSelected(sha256(raw)===typed.pin.sha256,'typed source role content differs');
+          if(typed.pin.decoded_bytes!==undefined){
+            needSelected(Number.isSafeInteger(typed.pin.decoded_bytes)&&typed.pin.decoded_bytes>0
+              &&/^[a-f0-9]{64}$/.test(typed.pin.decoded_sha256),'typed source decoded identity missing');
+            raw=gunzipSync(raw,{maxOutputLength:typed.pin.decoded_bytes});
+            needSelected(raw.length===typed.pin.decoded_bytes&&sha256(raw)===typed.pin.decoded_sha256,
+              'typed source decoded identity differs');
+          }
+          const body=parseJSON(raw);
+          needSelected(body.version===1&&body.kind===typed.kind&&Array.isArray(body.provenance)
+            &&body.provenance.length>0,'missing typed source provenance');
+          for(const item of body.provenance){
+            needSelected(typed.roles.includes(item?.role),'unknown typed source provenance role');pin(item.pin);
+          }
+        }
         if(evidence.source_membership!==undefined){
           const membership=evidence.source_membership;
           needSelected(keys(membership,['index','lineage','parts'])&&Array.isArray(membership.parts)&&membership.parts.length>0,
