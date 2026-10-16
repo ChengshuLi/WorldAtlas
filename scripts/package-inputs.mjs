@@ -46,6 +46,46 @@ export function packagePathRequired(file, definition) {
   return containsPackagePath(definition.inputs, file) || containsPackagePath(definition.verification_paths, file);
 }
 
+// These whole historical archives have no complete-regression consumers. Keep
+// their originals in Git, and retain an entire root if package/verification roles
+// ever explicitly need a member or ancestor. Unlisted siblings remain included.
+export function fullCheckoutPatterns(definition) {
+  validatePackageInputs(definition);
+  const archives = [
+    'coordination/engineering/global-source-comparisons-b-package3-20261006/',
+    'coordination/engineering/global-source-comparisons-a-20261006/',
+    'coordination/engineering/global-source-comparisons-a-001-20261006/',
+    'coordination/engineering/global-source-comparisons-b-20261006/',
+    'coordination/engineering/reference-source-custody-20261007/',
+    'coordination/engineering/complete-numeric-closure-diagnosis-20261007/'
+  ];
+  const declared = [...definition.inputs, ...definition.verification_paths];
+  return ['/*','!/data/regional-review/','!/research/campaigns/', ...archives
+    .filter(prefix => !declared.some(name => name.startsWith(prefix) ||
+      name.endsWith('/') && prefix.startsWith(name)))
+    .map(prefix => '!/' + prefix), ...scopedCheckoutPatterns('research/geography/', declared)];
+}
+
+function scopedCheckoutPatterns(prefix, paths) {
+  if (paths.some(name => name.endsWith('/') && prefix.startsWith(name))) {
+    return ['/' + prefix + '**'];
+  }
+  const retained = paths.filter(name => name.startsWith(prefix)), directories = new Set();
+  for (const name of retained) {
+    let parent = name.endsWith('/') ? name.slice(0,-1) : name.slice(0,name.lastIndexOf('/'));
+    while (parent !== prefix.slice(0,-1)) {
+      directories.add(parent + '/'); parent = parent.slice(0,parent.lastIndexOf('/'));
+    }
+  }
+  const patterns = ['!/' + prefix + '*'];
+  for (const directory of [...directories].sort((a,b) => a.split('/').length-b.split('/').length || a.localeCompare(b,'en'))) {
+    patterns.push('/' + directory);
+    if (!retained.some(name => name.endsWith('/') && directory.startsWith(name))) patterns.push('!/' + directory + '*');
+  }
+  patterns.push(...retained.filter(name => !name.endsWith('/')).map(name => '/' + name));
+  return patterns;
+}
+
 // Preserve the existing selected-data checkout boundary while the standard
 // checkout action owns transport and materialization. Preparation supplies the
 // authenticated complete candidate tree; package roles never authorize code.
@@ -68,22 +108,7 @@ export function selectedDataCheckoutPatterns(definition, entries, expectationsPa
   for (const prefix of ['research/geography/','coordination/engineering/','data/']) {
     const paths = [...definition.inputs, ...definition.verification_paths, expectationsPath,
       ...(prefix === 'coordination/engineering/' ? execution : [])];
-    if (paths.some(name => name.endsWith('/') && prefix.startsWith(name))) {
-      patterns.push('/' + prefix + '**'); continue;
-    }
-    const retained = paths.filter(name => name.startsWith(prefix)), directories = new Set();
-    for (const name of retained) {
-      let parent = name.endsWith('/') ? name.slice(0,-1) : name.slice(0,name.lastIndexOf('/'));
-      while (parent !== prefix.slice(0,-1)) {
-        directories.add(parent + '/'); parent = parent.slice(0,parent.lastIndexOf('/'));
-      }
-    }
-    patterns.push('!/' + prefix + '*');
-    for (const directory of [...directories].sort((a,b) => a.split('/').length-b.split('/').length || a.localeCompare(b,'en'))) {
-      patterns.push('/' + directory);
-      if (!retained.some(name => name.endsWith('/') && directory.startsWith(name))) patterns.push('!/' + directory + '*');
-    }
-    patterns.push(...retained.filter(name => !name.endsWith('/')).map(name => '/' + name));
+    patterns.push(...scopedCheckoutPatterns(prefix, paths));
   }
   return patterns;
 }
