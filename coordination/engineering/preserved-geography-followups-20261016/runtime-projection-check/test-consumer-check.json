@@ -1,0 +1,75 @@
+{
+  "status": "bounded-controls-passed; full integration pending",
+  "test_implementation_commit": "460a033c93f900cb546ea9594021b4fa3c743c33",
+  "prior_reviewed_head": "538b4e2ab629f007e109f3f0b307403ebe3e20aa",
+  "failed_run": 38904960475,
+  "runtime_scientific_and_source_outputs_unchanged": true,
+  "whole_model_tests_passed": 12,
+  "whole_model_tests_failed": 0,
+  "historical_git_unavailable": true,
+  "actual_emitted_probe": {
+    "kind": "actual-emitted-selected-additive-ownership",
+    "selected_envelope_sha256": "645d9273b191ee5a8e01430b7df47f2f6a39bff19d35dea853273b9b4a1b8a4b",
+    "owners": 49625,
+    "added_cells": 287288,
+    "patch_rows": 22209,
+    "owners_with_native_gain": 704,
+    "stable_before_controls": 22209,
+    "exact_picker_and_sampler_checks": 309497
+  },
+  "hosted_failures": [
+    {
+      "job": 116986417484,
+      "shard": 0,
+      "test": "actual emitted selected additive cells retain exact owners and sampler output",
+      "cause": "Old test included reference_projection in the original native selector and expected original unprojected province parents.",
+      "repair": "Authenticate whole repository/emitted M; use scientificNativeSelection and validated projectReferenceOwners; preserve every original owner, picker and sampler assertion.",
+      "log_sha256": "7974f4018dae0de4b66aaf56e0370ff483e2c3ac7177543ebeaf3441230b4d88"
+    },
+    {
+      "job": 116986417659,
+      "shard": 1,
+      "tests": [
+        "worker-merge.yml: actual sparse declarations include trusted module dependencies",
+        "queue focused candidate includes the inputs of its nested actual-checkout probes"
+      ],
+      "cause": "Missing duplicate GRC physical-custody components-054.jsonl.gz fixture in the reduced checkout.",
+      "repair_external_pr": 2196,
+      "repair_head": "59d7bd2cb2e79ddd380e423c56f5de209709e718",
+      "repair_source_commit": "a4fae2c10f571fc581d01434706424689c432705",
+      "review": "https://github.com/ChengshuLi/WorldAtlas/pull/2196#issuecomment-6216229215",
+      "log_sha256": "54b2340ecb4d12d11db026591374af742a9f8d78f3f44c4db6532e925f188234"
+    },
+    {
+      "job": 116986417535,
+      "shard": 2,
+      "test": "real seeded database exports the exact complete revision into current selected metadata packaging",
+      "cause": "Test setup asked shallow CI Git for absent historical commit913db0624b8aa79b188ff17a7f5c4ae0c0f63965.",
+      "repair": "Consume the ordinary current bounds snapshot after complete manifest SHA and original/current bounds SHA authentication, preserving the real seedDatabase/geography/package chain and all adverse cases.",
+      "log_sha256": "897909015139f6f1075299ed2e639d9b31d9e7a2f421e87a96feb857a779ae9e"
+    }
+  ],
+  "model_setup": "Existing locked Node dependencies and pinned Python environment; GIT_DIR points to a separate empty bare repository with no remotes. The original historical commit is absent. Current input bodies are included by the actual CI sparse policy.",
+  "commands": [
+    "node --test test/model.test.mjs (with the empty GIT_DIR, GIT_NO_LAZY_FETCH=1, GIT_CONFIG_NOSYSTEM=1, GIT_CONFIG_GLOBAL=/dev/null and existing Python environment on PATH)",
+    "node --test --test-name-pattern=\"actual emitted selected additive cells\" test/compact-ownership.test.mjs (same no-history environment, unchanged actual dist/client)",
+    "node --import LOCAL_SYSTEM_CHROMIUM_ADAPTER --test test/compact-ownership.test.mjs (full-file attempt; browser launch blocked, stopped with exit130)"
+  ],
+  "browser_evidence": {
+    "local_full_file": "not passed: Chromium socket() EPERM; requested unsandboxed launch failed before execution in bubblewrap with /root/.codex Not a directory",
+    "official_pinned_downloads": "Both Chromium and headless-shell returned invalid ZIP archives",
+    "local_available_browser": "Debian Chromium154.0.8037.57; explicit executablePath adapter only, no changed test assertions",
+    "unchanged_cases_passed_on_actual_hosted_538b": [
+      "startup diagnostics expose caught app errors and distinguish delayed rendering from a stall",
+      "real WebGL framebuffer agrees for legacy/compact holes, odd runs, maximum coordinates and high IDs",
+      "packaged coverage supports all modes, gap explanations and unavailable-reference policy"
+    ],
+    "hosted_job": 116986417484
+  },
+  "limits": [
+    "No full local compact browser pass is claimed. The changed emitted probe and complete model file pass independently; hosted integration remains required.",
+    "The initial full-model attempt lacked the existing Python environment; after correcting PATH, all twelve tests passed.",
+    "The two shard1 fixture failures require independently reviewed PR2196; no duplicate workflow or fixture edits are included here.",
+    "No scientific producer, installer, application build, or native comparison was replayed for these test-only corrections. The unchanged real emitted output is reused."
+  ]
+}
