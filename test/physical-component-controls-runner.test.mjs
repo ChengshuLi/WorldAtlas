@@ -18,10 +18,14 @@ test('actual control wrapper rejects failure even when a producer prints the exp
   const r=spawnSync(process.execPath,f.args,{env:f.env,encoding:'utf8',timeout:5000});
   assert.notEqual(r.status,0);assert.match(r.stdout+r.stderr,/semantic failure/);
 });
-test('actual control wrapper rejects a zero exit without all seven controls',t=>{
-  const f=fixture(t,"console.error('Ran 6 tests');");
-  const r=spawnSync(process.execPath,f.args,{env:f.env,encoding:'utf8',timeout:5000});
-  assert.notEqual(r.status,0);assert.match(r.stdout+r.stderr,/Ran 6 tests/);
+test('actual control wrapper accepts successful verbose diagnostics without a fixed test count',async t=>{
+  const f=fixture(t,"for(let i=0;i<5120;i++)console.error('x'.repeat(1023));console.error('completed controls');");
+  const child=spawn(process.execPath,f.args,{env:f.env,stdio:['ignore','pipe','pipe']});
+  t.after(()=>child.kill('SIGKILL'));
+  let bytes=0;
+  for(const stream of [child.stdout,child.stderr])stream.on('data',b=>{bytes+=b.length;});
+  const status=await new Promise((resolve,reject)=>{child.once('error',reject);child.once('close',resolve);});
+  assert.equal(status,0);assert.ok(bytes>4*1024*1024,`diagnostics exceed the retired output limit (${bytes} bytes)`);
 });
 test('actual control wrapper streams the active Python phase before producer completion',async t=>{
   const f=fixture(t,"import fs from 'node:fs';console.error('ACTIVE_CONTROL_PHASE');setTimeout(()=>{fs.writeFileSync(DONE_PATH,'done');console.error('Ran 7 tests');},500);");

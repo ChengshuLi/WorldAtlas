@@ -16,7 +16,7 @@ node --test test/coverage-source-policy.test.mjs test/source-policy-corrections.
 node --test test/coverage-source-policy.browser.mjs
 ```
 
-Regenerate the bounded projection explicitly with `python scripts/prepare-source-policy-summary.py` after a reviewed full-bundle revision. The producer preserves a source-bundle hash and rejects output over 80 KB. Fresh clones need no scratch files or live source requests. The standalone browser test exercises the real coverage module, asset transport, failure/retry, selected counts and evidence disclosure without waiting for a full map build.
+Regenerate the bounded projection explicitly with `python scripts/prepare-source-policy-summary.py` after a reviewed full-bundle revision. The producer preserves the exact source-bundle hash and length; verification compares the complete regenerated projection. Fresh clones need no scratch files or live source requests. The standalone browser test exercises the real coverage module, asset transport, failure/retry, selected counts and evidence disclosure without waiting for a full map build.
 
 ## Future global-review producer integration
 

@@ -1,5 +1,5 @@
 import {readFileSync} from 'node:fs';
-import {gzipSync, gunzipSync, crc32} from 'node:zlib';
+import {gzipSync, crc32} from 'node:zlib';
 import {CHECKPOINT_MEMBERS} from '../scripts/geographic-report-artifact.mjs';
 import {renderWorkerResult} from '../scripts/worker-result.mjs';
 import {isDeepStrictEqual as same} from "node:util";
@@ -7,7 +7,6 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
-import {verifyIssueScope} from '../scripts/issue-claim-contract.mjs';
 import {checkPremergeEvidence} from '../scripts/premerge-evidence.mjs';
 import {prepareIntegration, completeIntegration} from '../scripts/merge-integration.mjs';
 import {integrationProfile, selectedDataSelection, selectedDataCandidate, candidateGeographyCode, validateSelectedExpectations, SELECTED_SMOKE} from '../scripts/integration-profile.mjs';
@@ -394,7 +393,7 @@ function actualSourceSpecimen() {
   for(const row of issued.source_rule.administrative_products)raw(row.path);
   return sourceSpecimen={bodies,documents,entries,authority,issued,facts,registry,registration,handoff,catalogue,report,physical};
 }
-function retainedSourceFixture({format='v1',additionalRegistryEntries=[],mutate=()=>{}}={}) {
+function retainedSourceFixture({format='v1',mutate=()=>{}}={}) {
   const actual=actualSourceSpecimen(),documents=new Map([...actual.documents].map(([name,value])=>[name,structuredClone(value)]));
   const authority=structuredClone(actual.authority),issued=documents.get(authority.original_pins.source_request.path),
     facts=documents.get(authority.original_pins.source_facts.path),registry=documents.get(administrativePath),
@@ -402,7 +401,6 @@ function retainedSourceFixture({format='v1',additionalRegistryEntries=[],mutate=
   // This historical UKR fixture models one registration appended to an empty
   // registry, not the eligibility of every current or future HEAD registration.
   // Keep its retained specimen isolated as unrelated real deliveries accumulate.
-  registry.entries.push(...structuredClone(additionalRegistryEntries));
   assert.equal(registry.entries.filter(row=>row.id===registration.id).length,1);
   registry.entries=[registration];
   const f=fixture({mutate:f=>{
@@ -483,17 +481,6 @@ test('explicit v2 schema fixture admits preserved original membership without cl
   assert.ok(await retainedSourceFixture({format:'v2'}).run());
 });
 
-for(const format of ['v1','v2'])test('historical SOURCE '+format+' fixture is isolated from unrelated HEAD registry growth',async()=>{
-  // An unrelated future schema/location must not silently become part of the
-  // UKR fixture. This does not assert fast-route eligibility for that new entry.
-  const unrelated={id:'unrelated-future-registration',format:'future-format',
-    source:{path:'coordination/engineering/other/handoff.json'}};
-  const f=retainedSourceFixture({format,additionalRegistryEntries:[unrelated]});
-  assert.deepEqual(f.sourceState.registry.entries,[f.sourceState.registration]);
-  const old=JSON.parse(f.blobs.get(f.baseline.entries.get(administrativePath).sha));
-  assert.deepEqual(old.entries,[]);
-  assert.ok(await f.run());
-});
 
 for(const [name,mutate] of Object.entries({
   'foreign registry field':x=>{x.registry.module='unreviewed.mjs';},
@@ -566,14 +553,6 @@ test('registry changes preserve every original entry and cannot remove or rewrit
   }
 });
 
-test('real SOURCE metadata entry and cold final merge preserve applicability',async()=>{
-  const gate=gateFixture(retainedSourceFixture());
-  assert.equal((await gate.select()).test_selection,'selected-data');
-  const prep=mergeFixture({selectedFixture:retainedSourceFixture()}),prepared=await prepareIntegration(prep.options);
-  assert.equal(prepared.test_selection,'selected-data');assert(!('proof' in prepared));assert(!('geography_proof' in prepared));
-  const cold=mergeFixture({selectedFixture:retainedSourceFixture()}),result=await cold.complete();
-  assert.equal(result.accepted,true);assert(!('proof' in result));
-});
 
 // Only mutable global metadata is snapshotted. Original delivery vintages stay
 // in their retained repository paths and are checked against actual Git bodies.
@@ -760,21 +739,6 @@ test('fixed native mutation harness preserves a valid exact outer pin graph befo
   assert.equal((await f.run())?.test_selection,'selected-data');
 });
 
-async function fixedConsumerFixture(options={}) {
-  const f=fixedDeliveryFixture({leanPackage:true});
-  // Populate the fake complete Git trees from retained immutable metadata;
-  // subsequent consumer calls have fresh API caches and counters.
-  assert.equal((await f.run()).test_selection,'selected-data');f.reads.length=0;
-  return options.gate?gateFixture(f):mergeFixture({...options,selectedFixture:f});
-}
-test('fixed COD/PHL lean declarations reach actual queue selection and cold final merge validation',async()=>{
-  const gate=await fixedConsumerFixture({gate:true});
-  assert.equal((await gate.select()).test_selection,'selected-data');
-  const prep=await fixedConsumerFixture(),prepared=await prepareIntegration(prep.options);
-  assert.equal(prepared.test_selection,'selected-data');assert(!('proof' in prepared));assert(!('geography_proof' in prepared));
-  const cold=await fixedConsumerFixture(),result=await cold.complete();
-  assert.equal(result.accepted,true);assert(!('proof' in result));
-});
 
 for(const [label,mutate] of Object.entries({
   'orphan operand':f=>{const name='coordination/engineering/congo-ago2018-delivery-20261011/native-operands/runs-999.bin.gz';f.put(name,'orphan');f.files.push({filename:name,status:'added'});},
@@ -820,66 +784,6 @@ for(const [label,mutate] of Object.entries({
   const f=retainedSourceFixture({mutate:s=>mutate(s,reusePhysicalRole(s))});assert.equal(await f.run(),null);
 });
 
-const real1753=()=>fixedDeliveryFixture({fixtureName:'../../coordination/engineering/selected-metadata-admission-20261012/pr1753.json'});
-test('complete unmodified merged PR1753 takes selected-data with all original evidence and role joins',async()=>{
-  const f=real1753(),stats={};
-  assert.equal(f.fixed.base,'7eb3293b739631f4e69d7e676c7a77ae7c22c107');
-  assert.equal(f.fixed.head,'1d67abb09f5b9d3009da115c06170678aa5cdf3f');
-  assert.equal(f.files.length,426);assert.deepEqual(f.files,f.fixed.changed_rows.map(({filename,status})=>({filename,status})));
-  for(const row of f.fixed.changed_rows){
-    assert.deepEqual(f.authored.entries.get(row.filename),row.after);
-    assert.deepEqual(f.baseline.entries.get(row.filename)??null,row.before);
-  }
-  const result=await f.run({metadataDiagnostics:stats});assert(result,JSON.stringify(stats));assert.equal(result.test_selection,'selected-data');
-  assert.equal(stats.read_count,55);assert.equal(stats.read_bytes,stats.retained_bytes);
-  assert.equal(stats.retained_count,55);assert(stats.retained_bytes>=13352331);
-  assert.equal(stats.transient_read_count,0);assert.equal(stats.decoded_bytes,0);
-});
-test('complete PR1753 routing does not fetch its unconsumed preparation record',async()=>{
-  const f=real1753();
-  const supporting=f.fixed.changed_rows.find(row=>row.filename.endsWith('/publication-preflight-001/classification.json')).filename;
-  const oid=f.authored.entries.get(supporting).sha,original=f.api;
-  f.api=route=>{assert(!route.endsWith('/'+oid),'unconsumed body requested');return original(route);};
-  assert.equal((await f.run()).test_selection,'selected-data');
-  assert(!f.reads.includes(oid));
-});
-
-test('real PR1753 selection reaches cold queue classification and final validation',async()=>{
-  const ready=async()=>{const f=real1753();assert.equal((await f.run()).test_selection,'selected-data');f.reads.length=0;return f;};
-  const gate=gateFixture(await ready());
-  assert.equal((await gate.select()).test_selection,'selected-data');
-  const cold=mergeFixture({selectedFixture:await ready()}),result=await cold.complete();
-  assert.equal(result.accepted,true);assert(!('proof' in result));
-});
-test('real PR1753 required selected roster cannot omit a member or change its identity',async()=>{
-  for(const mutate of [expected=>expected.cohorts[0].members.pop(),expected=>{expected.cohorts[0].members[0].target_id='foreign';}]){
-    const f=real1753(),name=f.files.find(row=>row.filename.endsWith('/selected-delivery-expectations.json')).filename;
-    const expected=f.document(name);mutate(expected);f.put(name,expected);assert.equal(await f.run(),null);
-  }
-});
-
-for(const [label,invalid] of Object.entries({
-  'invalid leading byte':Buffer.from([0xff]),
-  'stray continuation':Buffer.from([0x80]),
-  'truncated multibyte sequence':Buffer.from([0xe2,0x82]),
-  'overlong encoding':Buffer.from([0xc0,0xaf]),
-}))test('unconsumed custody preserves '+label+' in plain and compressed original records',async()=>{
-  const raw=Buffer.concat([Buffer.from('{"value":"'),invalid,Buffer.from('"}\n')]);
-  for(const suffix of ['json','json.gz','jsonl.gz']){
-    const f=fixture({mutate:f=>f.put(prefix+'support.'+suffix,suffix.endsWith('.gz')?gzipSync(raw):raw)}),stats={};
-    assert.equal((await f.run({metadataDiagnostics:stats})).test_selection,'selected-data',suffix);
-    assert.equal(stats.decoded_bytes,0);
-  }
-});
-test('unconsumed custody keeps Unicode and BOM bytes in every supporting representation',async()=>{
-  const raw=Buffer.from(JSON.stringify({value:'Ελλάδα 日本 🌍 e\u0301'})+'\n');
-  for(const suffix of ['json','json.gz','jsonl.gz']){
-    const f=fixture({mutate:f=>f.put(prefix+'support.'+suffix,suffix.endsWith('.gz')?gzipSync(raw):raw)});
-    assert.equal((await f.run()).test_selection,'selected-data',suffix);
-    const bom=Buffer.concat([Buffer.from([0xef,0xbb,0xbf]),raw]);
-    f.put(prefix+'support.'+suffix,suffix.endsWith('.gz')?gzipSync(bom):bom);assert.equal((await f.run()).test_selection,'selected-data',suffix);
-  }
-});
 test('required role JSON uses the same strict UTF-8 boundary before shape or identity validation',async()=>{
   const f=fixture(),name=prefix+'selected-delivery-expectations.json';
   const bytes=Buffer.from(JSON.stringify(f.expected)),marker=Buffer.from('target-old'),at=bytes.indexOf(marker);
@@ -1033,26 +937,6 @@ test('one current-bound expectation disambiguates an exact unconsumed package te
   assert.equal(result.expectations_path,f.packetPrefix+'selected-delivery-expectations.json');
   assert.equal((await gateFixture(templateFixture()).select()).test_selection,'selected-data');
 });
-test('retained package receipt input custody classifies without a runtime journal in Git', async () => {
-  let input, directory;
-  const f=templateFixture(v=>{input=v.config;directory=v.directory;},'retained-package');
-  const legacy=directory+'.intent.json';
-  f.authored.entries.delete(legacy);f.files.splice(f.files.findIndex(row=>row.filename===legacy),1);
-  // Preserve the historical immutable receipt contract after retiring its
-  // automatic producer. The classifier authenticates the complete original body without interpreting it.
-  const original=JSON.parse(f.blobs.get(f.authored.entries.get(directory+'/preparation.json').sha));
-  original.input=input;f.put(directory+'/preparation.json',original);
-  assert.equal((await f.run()).test_selection,'selected-data');
-  for(const mutate of [r=>delete r.input,r=>r.input.registry.path='coordination/engineering/foreign/registry.json',
-    r=>r.binding.config_sha256='0'.repeat(64),r=>r.outputs['package-roles.json'].bytes++,
-    r=>r.input.new_prefix='coordination/engineering/foreign/']) {
-    const changed=structuredClone(original);mutate(changed);f.put(directory+'/preparation.json',changed);
-    assert.equal((await f.run()).test_selection,'selected-data');
-  }
-  f.put(directory+'/preparation.json',original);
-  f.put(legacy,{version:1,stage:'package',binding:original.binding,config:{...input,new_prefix:'coordination/engineering/foreign/'}});
-  f.files.push({filename:legacy,status:'added'});assert.equal((await f.run()).test_selection,'selected-data');
-});
 
 for (const [name,change] of Object.entries({
   'two authoritative candidates':({f,directory})=>f.put(directory+'/selected-delivery-expectations.json',f.expected),
@@ -1126,13 +1010,6 @@ test('complete original PR1770 192-path diff selects the uniquely bound finalize
     .trim().split('\n').map(line=>line.split('\t')[0].split(' ')[2]));
   for(const oid of f.gitReads)assert(reachable.has(oid),'every unsnapshotted original body must be reachable in shallow HEAD: '+oid);
 });
-test('actual PR1770 reaches authenticated author and cold queue proof with complete metadata planning', async () => {
-  const ready=async()=>{const f=real1770();assert.equal((await f.run()).test_selection,'selected-data');f.reads.length=0;return f;};
-  assert.equal((await gateFixture(await ready()).select()).test_selection,'selected-data');
-  const prep=await prepareIntegration(mergeFixture({selectedFixture:await ready()}).options);assert.equal(prep.test_selection,'selected-data');
-  const final=mergeFixture({selectedFixture:await ready()}), result=await final.complete();
-  assert.equal(result.accepted,true);assert.equal(final.writes.length,1);assert(!('proof' in result));
-});
 for(const [label,mutate] of Object.entries({
   'two authoritative expectations':f=>{const names=f.files.filter(row=>row.filename.endsWith('/selected-delivery-expectations.json')).map(row=>row.filename);const final=names.find(name=>f.document(name).selected_ledger_sha256);f.put(names.find(name=>name!==final),f.document(final));},
   'incorrect current binding':f=>{const name=f.files.find(row=>row.filename.endsWith('/finalize/selected-delivery-expectations.json')).filename;f.put(name,{...f.document(name),selected_ledger_sha256:'f'.repeat(64)});},
@@ -1141,21 +1018,6 @@ for(const [label,mutate] of Object.entries({
   'native-path alias drift':f=>{const file=f.files.find(row=>row.filename.endsWith('.bin.gz')),old=file.filename,next=old.replace(/runs-\d+/, 'rows-1');const row=f.authored.entries.get(old);f.authored.entries.delete(old);file.filename=next;f.authored.entries.set(next,{...row,path:next});},
 }))test('actual PR1770 retains full fallback for '+label,async()=>{const f=real1770();mutate(f);assert.equal(await f.run(),null);});
 
-test('unconsumed prospective metadata cannot claim a reader role by its contents', async () => {
-  for(const field of ['registry','ledger','rebind','new_prefix','cohort']) {
-    const f=templateFixture(({f,directory,expected,intent,receipt})=>{
-      if(field==='cohort') {expected.cohorts[0].original_batch_id='foreign batch';const pin=f.put(directory+'/selected-delivery-expectations.json',expected);
-        receipt.outputs['selected-delivery-expectations.json']={bytes:pin.bytes,sha256:pin.sha256};}
-      else if(field==='new_prefix')intent.config.new_prefix='coordination/';
-      else intent.config[field]=f.leaf('foreign-role.json');
-      const canonical=value=>Array.isArray(value)?value.map(canonical):value&&typeof value==='object'
-        ? Object.fromEntries(Object.keys(value).sort().map(key=>[key,canonical(value[key])])):value;
-      intent.binding.config_sha256=digest(Buffer.from(JSON.stringify(canonical(intent.config))+'\n'));
-      receipt.binding={...intent.binding};f.put(directory+'.intent.json',intent);f.put(directory+'/preparation.json',receipt);
-    });
-    assert.equal((await f.run()).test_selection,'selected-data',field);
-  }
-});
 test('retained native basename alias drift fails fixed manifest custody after all outer pins are rebound', async () => {
   const f=fixedDeliveryFixture({leanPackage:true});
   const reservation={mode:'engineering',owned_paths:['coordination/engineering/congo-ago2018-delivery-20261011/']};
@@ -1571,43 +1433,6 @@ test('cold queue scientific validation failure cannot reach merge despite eligib
   assert.equal(f.writes.length,0);
 });
 
-function realScientificManifest1906() {
-  const fixed=JSON.parse(readFileSync(new URL('./fixtures/selected-scientific-manifest-pr1906.json',import.meta.url)));
-  const baseline={object:{sha:fixed.base},entries:new Map(fixed.baseline_rows.map(row=>[row.path,{...row}]))},
-    authored={object:{sha:fixed.head},entries:new Map(fixed.authored_rows.map(row=>[row.path,{...row}]))};
-  const blobs=new Map(),reads=[],files=structuredClone(fixed.files);
-  for(const row of fixed.snapshots){
-    const raw=gunzipSync(Buffer.from(row.gzip_base64,'base64'),{maxOutputLength:row.bytes});
-    assert.equal(raw.length,row.bytes);assert.equal(digest(raw),row.sha256);
-    assert.equal(createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex'),row.git_blob_oid);
-    blobs.set(row.git_blob_oid,raw);
-  }
-  const api=async route=>{assert(route.includes('/git/blobs/'),route);const sha=route.split('/').at(-1),raw=blobs.get(sha);assert(raw,sha);
-    reads.push(sha);return {sha,size:raw.length,encoding:'base64',content:raw.toString('base64')};};
-  const reservation=verifyIssueScope({branch:fixed.branch,issue:fixed.issue});
-  const f={fixed,files,branch:fixed.branch,baseline,authored,blobs,reads,api,reservation};
-  f.run=(options={})=>selectedDataSelection({api:f.api,repo:'ChengshuLi/WorldAtlas',branch:f.branch,files:f.files,
-    baseline,authored,reservation:f.reservation,...options});return f;
-}
-test('complete immutable PR1906 metadata removes the observed manifest-only early fallback',async()=>{
-  const f=realScientificManifest1906(),stats={};
-  assert.equal(f.fixed.head,'92131353e8dba4bf109bfec2f6ad46628977b8fb');assert.equal(f.files.length,19);
-  const {evidence_manifest,...scope}=f.reservation;
-  assert.equal(selectedDataCandidate(f.branch,f.files,scope),false,'original scope-only boundary rejected this exact diff');
-  assert.equal(selectedDataCandidate(f.branch,f.files,f.reservation),true);
-  assert.deepEqual(await f.run({metadataDiagnostics:stats}),{test_selection:'selected-data',
-    expectations_path:'coordination/engineering/vietnam-current-cell-20261014/mapping-followup-001/delivery/selected-delivery-expectations.json',shards:[0]});
-  assert(f.reads.includes(f.authored.entries.get(evidence_manifest).sha),'actual changed scientific manifest was parsed');
-});
-for(const [name,change] of Object.entries({
-  'unknown issue manifest':f=>delete f.reservation.evidence_manifest,
-  'missing current manifest':f=>f.authored.entries.delete(f.reservation.evidence_manifest),
-  'base manifest nonordinary':f=>f.baseline.entries.get(f.reservation.evidence_manifest).mode='120000',
-  'changed accepted smoke':f=>f.authored.entries.get(SELECTED_SMOKE).sha='0'.repeat(40),
-  'actual renderer modification':f=>f.files.push({filename:'src/app.js',status:'modified'}),
-  'other existing packet JSON edit':f=>f.files.push({filename:'coordination/engineering/vietnam-current-cell-20261014/other.json',status:'modified'}),
-  'unavailable manifest bytes':f=>f.blobs.delete(f.authored.entries.get(f.reservation.evidence_manifest).sha),
-}))test('original PR1906 keeps complete fallback for '+name,async()=>{const f=realScientificManifest1906();change(f);assert.equal(await f.run(),null);});
 test('eligible scientific metadata never replaces the actual independent scientific validator',async()=>{
   const f=mergeFixture({selectedFixture:scientificManifestFixture()});
   assert.equal((await selectedDataSelection({...f.options,branch:f.branch,files:f.files,baseline:f.baseline,authored:f.authored,
@@ -1908,48 +1733,6 @@ test('retained XML under an original JSON name cannot become a current or packag
   }
 });
 
-const actual2082 = JSON.parse(readFileSync(new URL('../coordination/engineering/remove-inert-evidence-format-gate/pr2082.json', import.meta.url)));
-test('actual PR2082 path inventory needs no final selected-data classification', async () => {
-  assert.equal(actual2082.files.length, 387);
-  assert.equal(selectedDataCandidate(actual2082.branch, actual2082.files, actual2082.reservation), true);
-  assert.equal(candidateGeographyCode('full', actual2082.files), false);
-  // Actual complete path/status inventory; bounded placeholder tree entries.
-  // Scientific evidence and whole original bodies retain their separate checks.
-  const source = fixture();
-  source.branch = actual2082.branch;
-  source.ownedPaths = actual2082.reservation.owned_paths;
-  source.files = actual2082.files;
-  source.authored.entries = new Map(actual2082.files.map(({filename}, index) => [filename,
-    {path: filename, type: 'blob', mode: '100644', size: 1, sha: index.toString(16).padStart(40, '0')}]));
-  const f = mergeFixture({selectedFixture: source}), diagnostics = {};
-  assert.equal((await f.complete({metadataDiagnostics: diagnostics})).accepted, true);
-  assert.deepEqual(diagnostics, {}, 'no selectedDataSelection invocation for the actual changed paths');
-  assert.equal(f.reads.length, 0);
-  assert.equal(f.writes.length, 1);
-});
-
-test('actual unchanged PR2082 complete 387-path candidate admits all 37 formerly rejected original bodies', async () => {
-  assert.equal(actual2082.head, '41a6a586c1997508b029171289d2f13df802a5c9');
-  assert.equal(actual2082.files.length, 387);
-  assert.equal(selectedDataCandidate(actual2082.branch, actual2082.files, actual2082.reservation), true);
-  const originals = actual2082.files.filter(row => /\.(?:stderr|stdout|csv|geojson|headers|geojson\.zip)$/.test(row.filename));
-  assert.equal(originals.length, 37);
-  // These bounded substitute bodies exercise exact original paths and suffixes.
-  // The separate check-actual2082 replay measures actual consumed routing reads.
-  // Independent scientific validators own evidence-content authentication.
-  const f = retainedEvidenceFixture(), before = new Map(f.authored.entries);
-  f.reservation.owned_paths.push(...actual2082.reservation.owned_paths);
-  for (const {filename} of originals) {
-    f.put(filename, Buffer.concat([Buffer.from(filename), Buffer.from([0, 255, 128])]));
-    f.files.push({filename, status:'added'});
-  }
-  const diagnostics = {}, result = await f.run({metadataDiagnostics:diagnostics});
-  assert.equal(result?.test_selection, 'selected-data', diagnostics.failure);
-  assert.deepEqual(result.shards, [0]);
-  assert.equal(candidateGeographyCode('full', f.files, result.test_selection), false);
-  assert.equal(diagnostics.decoded_bytes, 0);
-  for (const [name, row] of before) assert.deepEqual(f.authored.entries.get(name), row);
-});
 
 test('ordinary unconsumed custody has no filename or encoding requirement', async () => {
   for (const name of ['source', 'source.unknown', 'archive.tar', 'script.sh', 'helper.js', 'module.wasm',

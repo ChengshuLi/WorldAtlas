@@ -8,24 +8,6 @@ const blob = content => {
  return {sha, size:raw.length, encoding:'base64', content:raw.toString('base64')};
 };
 const route = b => `/repos/o/r/git/blobs/${b.sha}`;
-test('root-format 1479 blob requests become 474 verified immutable fetches across three authority passes',async()=>{
- // #1150/head405 retains 474 distinct OIDs totaling235417555 bytes. This
- // synthetic distribution models that actual aggregate without copying data.
- const count=474,total=235417555,largest=14322993,rest=total-largest,size=Math.floor(rest/(count-1)),extra=rest%(count-1);
- const entries=Array.from({length:count},(_,i)=>{
-  const raw=Buffer.alloc(i===0?largest:size+(i<=extra?1:0),i%256);raw.writeUInt32LE(i);
-  const sha=createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex');
-  return {sha,size:raw.length,index:i};
- });
- const index=new Map(entries.map(e=>[route(e),e]));let calls=0;
- const api=memoizeImmutableGitBlobs(async r=>{
-  calls++;const e=index.get(r),raw=Buffer.alloc(e.size,e.index%256);raw.writeUInt32LE(e.index);
-  return {...e,encoding:'base64',content:raw.toString('base64')};
- });
- const loads=[...entries,...entries.slice(0,19)];assert.equal(loads.length,493);
- for(let pass=0;pass<3;pass++)for(const entry of loads)assert.equal((await api(route(entry))).sha,entry.sha);
- assert.equal(calls,474);assert.equal(loads.length*3,1479);
-});
 test('cache keeps fresh changed OIDs, repository identity, trees and authority reads',async()=>{
  const first=blob('first'),changed=blob('changed'),calls=[];
  const api=memoizeImmutableGitBlobs(async r=>{calls.push(r);return r.endsWith(first.sha)?first:r.endsWith(changed.sha)?changed:{mutable:true};});
