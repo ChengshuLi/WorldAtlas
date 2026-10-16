@@ -74,5 +74,5 @@ operator authority; performance investigation does not authorize live writes.
 
 Local profiling uses a managed slot, bounded temporary fixtures and actual task
 memory observations. A geography packet's percentage threshold is not a universal
-CI admission rule. Recheck the shared storage budget before generation; preserve
+CI admission rule. Consider actual available storage and output growth before generation; preserve
 necessary evidence and release the completed owned slot after verified merge.
