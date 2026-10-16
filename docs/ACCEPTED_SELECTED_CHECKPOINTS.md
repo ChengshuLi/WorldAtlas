@@ -105,9 +105,7 @@ all run artifacts. Historical accepted receipts remain literal. Fresh runs made
 with an older workflow lacking these outputs need normal redispatch after the
 workflow update; there is no log-parser fallback.
 
-The locator and optional archive are transport hints, not scientific inputs.
-Hint-only changes do not prevent unchanged-scientific-input applicability. When
-a checkpoint is actually used, its original source and complete bytes still
+When a checkpoint is actually used, its original source and complete bytes still
 require authentication; the hint itself grants no authority.
 
 ## Initial reviewed seed
