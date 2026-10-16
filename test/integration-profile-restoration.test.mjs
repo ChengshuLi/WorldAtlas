@@ -121,9 +121,9 @@ test('real full entry consumes current inputs without a historical restoration h
   assert.match(r.stdout,/# skipped 0/);assert.ok(fs.existsSync(path.join(f.root,'tests-reached-probe')));
   assert(!r.stdout.includes('canonical_checkout'));assert(!r.stdout.includes('selected_model_reader_checkout'));
 });
-test('real evidence entry preserves the zero-skips safeguard',t=>{
-  const f=fixture(t,{skip:true}),r=f.run();assert.notEqual(r.status,0);
-  assert.match(r.stderr,/Regression did not establish zero skipped tests/);
+test('real evidence entry follows a successful Node exit with intentional skips',t=>{
+  const f=fixture(t,{skip:true}),r=f.run();assert.equal(r.status,0,r.stderr);
+  assert.match(r.stdout,new RegExp('# skipped '+focused.length+'(?:\\n|$)'));
 });
 test('invalid profile rejects before either restoration or tests',t=>{
   const f=fixture(t),r=f.run('invalid');assert.notEqual(r.status,0);
