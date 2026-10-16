@@ -542,9 +542,17 @@ main. Only the additive selection changes; all existing method/base authority an
 registry entries remain intact. New files must be ordinary inert data/evidence in
 the worker's own delivery directory. The package definition may only append exact
 new data file entries reachable through the fixed selected-reader roles, preserving
-all existing entries, order and other policy fields. Supporting JSON/log evidence
-cannot create package/import authority. Unknown boundaries retain all three full
-regression shards.
+all existing entries, order and other policy fields. Supporting evidence cannot
+create package/import authority. New retained Python/JavaScript helper copies,
+JSONL stdout, original XML responses (including retained `.json` names), LFS pointer text and compressed GeoJSON/latitude evidence may
+accompany DATA only after the fixed selected/base-reader walk excludes every such
+file from current consumed roles and package inputs/verification paths. Authenticate
+whole ordinary Git bodies without executing helpers, resolving XML entities or
+following LFS pointers; decode complete gzip members and check structured syntax.
+Loader/configuration files, changed current code, executable modes and unavailable
+role proof retain full regression. Retained science is still independently checked;
+this route grants no new source authority. Unknown boundaries retain all three
+full regression shards.
 
 The linked issue's explicitly declared scientific evidence manifest may also be
 updated as metadata. Its exact path comes from the current validated issue contract,
