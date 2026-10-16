@@ -7,7 +7,7 @@ import tempfile
 import unittest
 from unittest.mock import patch
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
-from evidence.immutable import Baseline, NewVintage, descriptor, canonical_json
+from evidence.immutable import Baseline, NewVintage, descriptor, canonical_json, write_new_vintage
 from evidence.contracts import exact_rows, join_rows, finite_metrics, require_source_text
 
 
@@ -110,6 +110,28 @@ class Prevention(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'including output'):
             NewVintage(tight, self.owned, 'oversize', ['one.json']).publish({'one.json': {'value': 'x' * 100}})
         self.assertFalse((self.root / 'coordination').exists())
+
+    def test_publication_reuses_completed_input_authentication(self):
+        # The actual operand is authenticated when read, before computation.
+        rows = json.loads(self.baseline.pinned_bytes('scope.json'))
+        value = {'rows': rows, 'count': len(rows)}
+        output = canonical_json(value)
+        run = NewVintage(self.baseline, self.owned, 'completed-inputs', ['rows.json'])
+        with patch.object(self.baseline, '_git', wraps=self.baseline._git) as reads:
+            records = run.publish({'rows.json': value})
+            legacy = write_new_vintage(self.baseline, self.owned, 'completed-legacy', 'rows.json', value)
+        self.assertEqual(reads.call_count, 0, 'Publication must not scan unchanged immutable inputs again')
+        for record in [*records, legacy]:
+            raw = (self.root / record['path']).read_bytes()
+            self.assertEqual(raw, output)
+            self.assertEqual(descriptor(record['path'], raw), record)
+        receipt = json.loads((run.root / 'publication.json').read_bytes())
+        self.assertEqual(receipt, {'version': 1, 'status': 'complete', 'outputs': records})
+        # A later actual read still authenticates its operands; publication does
+        # not turn a completed read into permission for changed source bytes.
+        with patch.object(self.baseline, 'read', return_value=b'changed source'):
+            with self.assertRaisesRegex(ValueError, 'immutable bytes disagree'):
+                self.baseline.pinned_bytes('scope.json')
 
     def test_fresh_runs_preserve_sentinels_and_reject_symlinks(self):
         outputs = {'one.json': self.rows, 'two.json': {'count': 2}}

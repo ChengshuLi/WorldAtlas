@@ -280,10 +280,8 @@ class NewVintage:
         receipt = canonical_json({'version': 1, 'status': 'complete', 'outputs': records})
         if len(receipt) > 4096:
             raise ValueError('Completion receipt exceeds admitted reserve')
-        # Check the entire set and all pins again immediately before first mutation.
+        # Recheck the complete owned destination immediately before first mutation.
         NewVintage(self.baseline, self.owned_path, self.vintage, self.filenames)
-        for name in self.baseline.pins:
-            self.baseline.pinned_bytes(name)
         self.root.parent.mkdir(parents=True, exist_ok=True)
         self.root.mkdir()  # Exclusive run reservation; never reuse a retained run.
         try:
@@ -313,11 +311,6 @@ def write_new_vintage(baseline, owned_path, vintage, filename, value):
     target = admit_destination(baseline, owned_path, vintage, [filename]) / filename
     if not re.fullmatch('[a-z0-9][a-z0-9-]{0,63}', vintage) or not re.fullmatch(r'[a-zA-Z0-9_-]+\.json(?:\.gz)?', filename):
         raise ValueError('Use a named new vintage and a plain JSON filename')
-    # Recheck every pin before even creating directories; changed working-tree
-    # evidence is irrelevant, a caller cannot substitute a different baseline.
-    for name, pin in baseline.pins.items():
-        if sha256(baseline.read(name)) != pin['sha256']:
-            raise ValueError('Immutable baseline input changed')
     raw = canonical_json(value)
     encoded = deterministic_gzip(raw) if filename.endswith('.gz') else raw
     output_bytes = len(encoded) + (len(raw) if filename.endswith('.gz') else 0)
