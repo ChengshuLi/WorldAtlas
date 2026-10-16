@@ -1,0 +1,1735 @@
+{
+  "kind": "exact12-actual-foreign-ADM-conflict-source-choice-request",
+  "count": 12,
+  "source_only": true,
+  "source": {
+    "title": "Myanmar: Tonzang Township, Chin State (20 April 2020) [EN/MY]",
+    "producer": "Myanmar Information Management Unit (MIMU)",
+    "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-tonzang-township-chin-state-20-april-2020-enmy",
+    "body_url": "https://reliefweb.int/attachments/12dbfbb6-f1bb-4156-b7e7-65c9ac831a71/Tsp_Map_VL_Tonzang_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+    "local_pdf": "MIMU2020-Tonzang.pdf",
+    "bytes": 4721549,
+    "sha256": "af093524c4875060cfcbd2f362e8a9a3307878c719de8b49bdb1f96f5433695c",
+    "printed_production_date": "2020-04-20",
+    "map_id": "MIMU154v05",
+    "projection_datum": "Geographic/WGS84",
+    "boundary_source_printed": "MIMU",
+    "map_country_context": "India is labelled across the western international border; Tonzang is the named Myanmar township.",
+    "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+  },
+  "requirements": "Consequentially review exact panels. If supported, explicitly choose this dated township border depiction over every contrary actual administrative/reference input listed per key, retaining raw contacts/pins as contextual disagreement. No country, state-name or administrative-level blanket priority.",
+  "native_accepted_repairs": 0,
+  "cleared_holds": 0,
+  "points": [
+    {
+      "local_index": 13,
+      "owner": 30165,
+      "y": 113032,
+      "x": 199048,
+      "original_interval": 906,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/855/runs/0"
+      },
+      "inside": [
+        18
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.3285780764859,
+      "longitude_exact_rational": "12233790/131083",
+      "latitude_degrees_north": 24.047699629651557,
+      "latitude_native_f64le_hex": "7f62fd0a360c3840",
+      "registered_pdf_point": [
+        428.6243640392495,
+        1405.105630142927
+      ],
+      "render_scale1_pixel": [
+        429,
+        323
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        193,
+        196,
+        172
+      ],
+      "name": "Tonzang",
+      "review_order_rank": 0,
+      "source_point_interpretation": "Registered centre is depicted on the named Tonzang/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Tonzang-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "foreign-administrative-only",
+      "original_hit_operands": [
+        {
+          "index": 18,
+          "hash": "57764d6419435e0da397433928c9dc476f3b7b98bc69f6171a6b9a8745494e9b",
+          "registry_index": 110,
+          "id": "gb:IND:ADM3:7132399B8947963734886",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4037",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 7,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70783,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B8947963734886",
+            "ordinal": 4037,
+            "owners": [],
+            "name": "Ngopa",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Tonzang Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-tonzang-township-chin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/12dbfbb6-f1bb-4156-b7e7-65c9ac831a71/Tsp_Map_VL_Tonzang_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Tonzang.pdf",
+        "bytes": 4721549,
+        "sha256": "af093524c4875060cfcbd2f362e8a9a3307878c719de8b49bdb1f96f5433695c",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Tonzang is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2111.6672330583483,
+          "intercept_points": -196650.27586800375,
+          "controls": 16,
+          "distinct_label_values": 8,
+          "max_residual_pdf_points": 0.10507238481659442,
+          "rms_residual_pdf_points": 0.06639370799043227,
+          "alternating_label_holdout_max_pdf_points": 0.1261451720201876
+        },
+        "N": {
+          "slope_points_per_degree": 2111.9832092285164,
+          "intercept_points": -49383.232208251975,
+          "controls": 8,
+          "distinct_label_values": 4,
+          "max_residual_pdf_points": 0.07360534667532193,
+          "rms_residual_pdf_points": 0.054126467936135146,
+          "alternating_label_holdout_max_pdf_points": 0.1240081787618692
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            93.16666666666667,
+            94.33333333333333
+          ],
+          "target_degrees": 93.3285780764859,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            23.5,
+            24.0
+          ],
+          "target_degrees": 24.047699629651557,
+          "extrapolation_beyond_label_range_degrees": 0.047699629651557274
+        }
+      },
+      "review_panel": "reviewed-Tonzang-013.png",
+      "review_contact_sheet": "contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 57,
+      "owner": 30165,
+      "y": 113242,
+      "x": 199099,
+      "original_interval": 1047,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/980/runs/0"
+      },
+      "inside": [
+        17
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.39861004096642,
+      "longitude_exact_rational": "12242970/131083",
+      "latitude_degrees_north": 23.78409178564441,
+      "latitude_native_f64le_hex": "ad67403dbac83740",
+      "registered_pdf_point": [
+        576.5085686994717,
+        848.3702897789044
+      ],
+      "render_scale1_pixel": [
+        577,
+        880
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        237,
+        240,
+        216
+      ],
+      "name": "Tonzang",
+      "review_order_rank": 1,
+      "source_point_interpretation": "Registered centre is depicted on the named Tonzang/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Tonzang-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "foreign-administrative-only",
+      "original_hit_operands": [
+        {
+          "index": 17,
+          "hash": "fd126b35b94952e5e090fd676ae7070fc012a6d1ca30881e65463e7c7f5f1a18",
+          "registry_index": 109,
+          "id": "gb:IND:ADM3:7132399B36076747890795",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4036",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 55,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70782,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B36076747890795",
+            "ordinal": 4036,
+            "owners": [],
+            "name": "Champhai",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Tonzang Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-tonzang-township-chin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/12dbfbb6-f1bb-4156-b7e7-65c9ac831a71/Tsp_Map_VL_Tonzang_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Tonzang.pdf",
+        "bytes": 4721549,
+        "sha256": "af093524c4875060cfcbd2f362e8a9a3307878c719de8b49bdb1f96f5433695c",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Tonzang is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2111.6672330583483,
+          "intercept_points": -196650.27586800375,
+          "controls": 16,
+          "distinct_label_values": 8,
+          "max_residual_pdf_points": 0.10507238481659442,
+          "rms_residual_pdf_points": 0.06639370799043227,
+          "alternating_label_holdout_max_pdf_points": 0.1261451720201876
+        },
+        "N": {
+          "slope_points_per_degree": 2111.9832092285164,
+          "intercept_points": -49383.232208251975,
+          "controls": 8,
+          "distinct_label_values": 4,
+          "max_residual_pdf_points": 0.07360534667532193,
+          "rms_residual_pdf_points": 0.054126467936135146,
+          "alternating_label_holdout_max_pdf_points": 0.1240081787618692
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            93.16666666666667,
+            94.33333333333333
+          ],
+          "target_degrees": 93.39861004096642,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            23.5,
+            24.0
+          ],
+          "target_degrees": 23.78409178564441,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Tonzang-057.png",
+      "review_contact_sheet": "contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 9,
+      "owner": 30165,
+      "y": 113030,
+      "x": 199047,
+      "original_interval": 899,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/853/runs/0"
+      },
+      "inside": [
+        15
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.32720490071176,
+      "longitude_exact_rational": "12233610/131083",
+      "latitude_degrees_north": 24.050207591315232,
+      "latitude_native_f64le_hex": "b9b59a67da0c3840",
+      "registered_pdf_point": [
+        425.72467375177075,
+        1410.4024030660003
+      ],
+      "render_scale1_pixel": [
+        426,
+        318
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        224,
+        227,
+        203
+      ],
+      "name": "Tonzang",
+      "review_order_rank": 2,
+      "source_point_interpretation": "Registered centre is depicted on the named Tonzang/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Tonzang-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "foreign-administrative-only",
+      "original_hit_operands": [
+        {
+          "index": 15,
+          "hash": "5444004a80f6dfcb02a292ddf3ca779c4b275a5fbe1b73281fcc2a492196b66d",
+          "registry_index": 107,
+          "id": "gb:IND:ADM3:7132399B49846761574186",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/3578",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 10,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70324,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B49846761574186",
+            "ordinal": 3578,
+            "owners": [],
+            "name": "Mualnuam",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Tonzang Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-tonzang-township-chin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/12dbfbb6-f1bb-4156-b7e7-65c9ac831a71/Tsp_Map_VL_Tonzang_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Tonzang.pdf",
+        "bytes": 4721549,
+        "sha256": "af093524c4875060cfcbd2f362e8a9a3307878c719de8b49bdb1f96f5433695c",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Tonzang is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2111.6672330583483,
+          "intercept_points": -196650.27586800375,
+          "controls": 16,
+          "distinct_label_values": 8,
+          "max_residual_pdf_points": 0.10507238481659442,
+          "rms_residual_pdf_points": 0.06639370799043227,
+          "alternating_label_holdout_max_pdf_points": 0.1261451720201876
+        },
+        "N": {
+          "slope_points_per_degree": 2111.9832092285164,
+          "intercept_points": -49383.232208251975,
+          "controls": 8,
+          "distinct_label_values": 4,
+          "max_residual_pdf_points": 0.07360534667532193,
+          "rms_residual_pdf_points": 0.054126467936135146,
+          "alternating_label_holdout_max_pdf_points": 0.1240081787618692
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            93.16666666666667,
+            94.33333333333333
+          ],
+          "target_degrees": 93.32720490071176,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            23.5,
+            24.0
+          ],
+          "target_degrees": 24.050207591315232,
+          "extrapolation_beyond_label_range_degrees": 0.05020759131523178
+        }
+      },
+      "review_panel": "reviewed-Tonzang-009.png",
+      "review_contact_sheet": "contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 11,
+      "owner": 30165,
+      "y": 113031,
+      "x": 199047,
+      "original_interval": 903,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/854/runs/0"
+      },
+      "inside": [
+        18
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.32720490071176,
+      "longitude_exact_rational": "12233610/131083",
+      "latitude_degrees_north": 24.04895361660704,
+      "latitude_native_f64le_hex": "21596639880c3840",
+      "registered_pdf_point": [
+        425.72467375177075,
+        1407.7540295375002
+      ],
+      "render_scale1_pixel": [
+        426,
+        320
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        209,
+        212,
+        188
+      ],
+      "name": "Tonzang",
+      "review_order_rank": 3,
+      "source_point_interpretation": "Registered centre is depicted on the named Tonzang/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Tonzang-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "foreign-administrative-only",
+      "original_hit_operands": [
+        {
+          "index": 18,
+          "hash": "57764d6419435e0da397433928c9dc476f3b7b98bc69f6171a6b9a8745494e9b",
+          "registry_index": 110,
+          "id": "gb:IND:ADM3:7132399B8947963734886",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4037",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 7,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70783,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B8947963734886",
+            "ordinal": 4037,
+            "owners": [],
+            "name": "Ngopa",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Tonzang Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-tonzang-township-chin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/12dbfbb6-f1bb-4156-b7e7-65c9ac831a71/Tsp_Map_VL_Tonzang_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Tonzang.pdf",
+        "bytes": 4721549,
+        "sha256": "af093524c4875060cfcbd2f362e8a9a3307878c719de8b49bdb1f96f5433695c",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Tonzang is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2111.6672330583483,
+          "intercept_points": -196650.27586800375,
+          "controls": 16,
+          "distinct_label_values": 8,
+          "max_residual_pdf_points": 0.10507238481659442,
+          "rms_residual_pdf_points": 0.06639370799043227,
+          "alternating_label_holdout_max_pdf_points": 0.1261451720201876
+        },
+        "N": {
+          "slope_points_per_degree": 2111.9832092285164,
+          "intercept_points": -49383.232208251975,
+          "controls": 8,
+          "distinct_label_values": 4,
+          "max_residual_pdf_points": 0.07360534667532193,
+          "rms_residual_pdf_points": 0.054126467936135146,
+          "alternating_label_holdout_max_pdf_points": 0.1240081787618692
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            93.16666666666667,
+            94.33333333333333
+          ],
+          "target_degrees": 93.32720490071176,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            23.5,
+            24.0
+          ],
+          "target_degrees": 24.04895361660704,
+          "extrapolation_beyond_label_range_degrees": 0.04895361660704012
+        }
+      },
+      "review_panel": "reviewed-Tonzang-011.png",
+      "review_contact_sheet": "contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 28,
+      "owner": 30165,
+      "y": 113190,
+      "x": 199092,
+      "original_interval": 994,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/942/runs/0"
+      },
+      "inside": [
+        17
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.38899781054752,
+      "longitude_exact_rational": "12241710/131083",
+      "latitude_degrees_north": 23.849416175428466,
+      "latitude_native_f64le_hex": "9e28a65673d93740",
+      "registered_pdf_point": [
+        556.2107366872951,
+        986.3343041559274
+      ],
+      "render_scale1_pixel": [
+        556,
+        742
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        242,
+        245,
+        221
+      ],
+      "name": "Tonzang",
+      "review_order_rank": 4,
+      "source_point_interpretation": "Registered centre is depicted on the named Tonzang/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Tonzang-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "foreign-administrative-only",
+      "original_hit_operands": [
+        {
+          "index": 17,
+          "hash": "fd126b35b94952e5e090fd676ae7070fc012a6d1ca30881e65463e7c7f5f1a18",
+          "registry_index": 109,
+          "id": "gb:IND:ADM3:7132399B36076747890795",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4036",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 55,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70782,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B36076747890795",
+            "ordinal": 4036,
+            "owners": [],
+            "name": "Champhai",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Tonzang Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-tonzang-township-chin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/12dbfbb6-f1bb-4156-b7e7-65c9ac831a71/Tsp_Map_VL_Tonzang_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Tonzang.pdf",
+        "bytes": 4721549,
+        "sha256": "af093524c4875060cfcbd2f362e8a9a3307878c719de8b49bdb1f96f5433695c",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Tonzang is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2111.6672330583483,
+          "intercept_points": -196650.27586800375,
+          "controls": 16,
+          "distinct_label_values": 8,
+          "max_residual_pdf_points": 0.10507238481659442,
+          "rms_residual_pdf_points": 0.06639370799043227,
+          "alternating_label_holdout_max_pdf_points": 0.1261451720201876
+        },
+        "N": {
+          "slope_points_per_degree": 2111.9832092285164,
+          "intercept_points": -49383.232208251975,
+          "controls": 8,
+          "distinct_label_values": 4,
+          "max_residual_pdf_points": 0.07360534667532193,
+          "rms_residual_pdf_points": 0.054126467936135146,
+          "alternating_label_holdout_max_pdf_points": 0.1240081787618692
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            93.16666666666667,
+            94.33333333333333
+          ],
+          "target_degrees": 93.38899781054752,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            23.5,
+            24.0
+          ],
+          "target_degrees": 23.849416175428466,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Tonzang-028.png",
+      "review_contact_sheet": "contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 55,
+      "owner": 30165,
+      "y": 113241,
+      "x": 199099,
+      "original_interval": 1046,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/979/runs/0"
+      },
+      "inside": [
+        17
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.39861004096642,
+      "longitude_exact_rational": "12242970/131083",
+      "latitude_degrees_north": 23.785348333830495,
+      "latitude_native_f64le_hex": "23c5a1960cc93740",
+      "registered_pdf_point": [
+        576.5085686994717,
+        851.0240984495031
+      ],
+      "render_scale1_pixel": [
+        577,
+        877
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        220,
+        223,
+        199
+      ],
+      "name": "Tonzang",
+      "review_order_rank": 5,
+      "source_point_interpretation": "Registered centre is depicted on the named Tonzang/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Tonzang-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "foreign-administrative-only",
+      "original_hit_operands": [
+        {
+          "index": 17,
+          "hash": "fd126b35b94952e5e090fd676ae7070fc012a6d1ca30881e65463e7c7f5f1a18",
+          "registry_index": 109,
+          "id": "gb:IND:ADM3:7132399B36076747890795",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4036",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 55,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70782,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B36076747890795",
+            "ordinal": 4036,
+            "owners": [],
+            "name": "Champhai",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Tonzang Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-tonzang-township-chin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/12dbfbb6-f1bb-4156-b7e7-65c9ac831a71/Tsp_Map_VL_Tonzang_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Tonzang.pdf",
+        "bytes": 4721549,
+        "sha256": "af093524c4875060cfcbd2f362e8a9a3307878c719de8b49bdb1f96f5433695c",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Tonzang is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2111.6672330583483,
+          "intercept_points": -196650.27586800375,
+          "controls": 16,
+          "distinct_label_values": 8,
+          "max_residual_pdf_points": 0.10507238481659442,
+          "rms_residual_pdf_points": 0.06639370799043227,
+          "alternating_label_holdout_max_pdf_points": 0.1261451720201876
+        },
+        "N": {
+          "slope_points_per_degree": 2111.9832092285164,
+          "intercept_points": -49383.232208251975,
+          "controls": 8,
+          "distinct_label_values": 4,
+          "max_residual_pdf_points": 0.07360534667532193,
+          "rms_residual_pdf_points": 0.054126467936135146,
+          "alternating_label_holdout_max_pdf_points": 0.1240081787618692
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            93.16666666666667,
+            94.33333333333333
+          ],
+          "target_degrees": 93.39861004096642,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            23.5,
+            24.0
+          ],
+          "target_degrees": 23.785348333830495,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Tonzang-055.png",
+      "review_contact_sheet": "contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 2,
+      "owner": 30165,
+      "y": 113001,
+      "x": 199051,
+      "original_interval": 874,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/835/runs/0"
+      },
+      "inside": [
+        0,
+        15
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.33269760380827,
+      "longitude_exact_rational": "12234330/131083",
+      "latitude_degrees_north": 24.086567528118316,
+      "latitude_native_f64le_hex": "ea291e4a29163840",
+      "registered_pdf_point": [
+        437.3234349015984,
+        1487.1939790827237
+      ],
+      "render_scale1_pixel": [
+        437,
+        241
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        246,
+        249,
+        225
+      ],
+      "name": "Tonzang",
+      "review_order_rank": 6,
+      "source_point_interpretation": "Registered centre is depicted on the named Tonzang/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Tonzang-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 28,
+          "boundary": 0
+        },
+        {
+          "index": 15,
+          "hash": "5444004a80f6dfcb02a292ddf3ca779c4b275a5fbe1b73281fcc2a492196b66d",
+          "registry_index": 107,
+          "id": "gb:IND:ADM3:7132399B49846761574186",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/3578",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 10,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70324,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B49846761574186",
+            "ordinal": 3578,
+            "owners": [],
+            "name": "Mualnuam",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Tonzang Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-tonzang-township-chin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/12dbfbb6-f1bb-4156-b7e7-65c9ac831a71/Tsp_Map_VL_Tonzang_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Tonzang.pdf",
+        "bytes": 4721549,
+        "sha256": "af093524c4875060cfcbd2f362e8a9a3307878c719de8b49bdb1f96f5433695c",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Tonzang is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2111.6672330583483,
+          "intercept_points": -196650.27586800375,
+          "controls": 16,
+          "distinct_label_values": 8,
+          "max_residual_pdf_points": 0.10507238481659442,
+          "rms_residual_pdf_points": 0.06639370799043227,
+          "alternating_label_holdout_max_pdf_points": 0.1261451720201876
+        },
+        "N": {
+          "slope_points_per_degree": 2111.9832092285164,
+          "intercept_points": -49383.232208251975,
+          "controls": 8,
+          "distinct_label_values": 4,
+          "max_residual_pdf_points": 0.07360534667532193,
+          "rms_residual_pdf_points": 0.054126467936135146,
+          "alternating_label_holdout_max_pdf_points": 0.1240081787618692
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            93.16666666666667,
+            94.33333333333333
+          ],
+          "target_degrees": 93.33269760380827,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            23.5,
+            24.0
+          ],
+          "target_degrees": 24.086567528118316,
+          "extrapolation_beyond_label_range_degrees": 0.0865675281183158
+        }
+      },
+      "review_panel": "reviewed-Tonzang-002.png",
+      "review_contact_sheet": "contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 12,
+      "owner": 30165,
+      "y": 113032,
+      "x": 199047,
+      "original_interval": 906,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/855/runs/0"
+      },
+      "inside": [
+        18
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.32720490071176,
+      "longitude_exact_rational": "12233610/131083",
+      "latitude_degrees_north": 24.047699629651557,
+      "latitude_native_f64le_hex": "7f62fd0a360c3840",
+      "registered_pdf_point": [
+        425.72467375177075,
+        1405.105630142927
+      ],
+      "render_scale1_pixel": [
+        426,
+        323
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        213,
+        216,
+        192
+      ],
+      "name": "Tonzang",
+      "review_order_rank": 7,
+      "source_point_interpretation": "Registered centre is depicted on the named Tonzang/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Tonzang-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "foreign-administrative-only",
+      "original_hit_operands": [
+        {
+          "index": 18,
+          "hash": "57764d6419435e0da397433928c9dc476f3b7b98bc69f6171a6b9a8745494e9b",
+          "registry_index": 110,
+          "id": "gb:IND:ADM3:7132399B8947963734886",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4037",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 7,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70783,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B8947963734886",
+            "ordinal": 4037,
+            "owners": [],
+            "name": "Ngopa",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Tonzang Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-tonzang-township-chin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/12dbfbb6-f1bb-4156-b7e7-65c9ac831a71/Tsp_Map_VL_Tonzang_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Tonzang.pdf",
+        "bytes": 4721549,
+        "sha256": "af093524c4875060cfcbd2f362e8a9a3307878c719de8b49bdb1f96f5433695c",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Tonzang is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2111.6672330583483,
+          "intercept_points": -196650.27586800375,
+          "controls": 16,
+          "distinct_label_values": 8,
+          "max_residual_pdf_points": 0.10507238481659442,
+          "rms_residual_pdf_points": 0.06639370799043227,
+          "alternating_label_holdout_max_pdf_points": 0.1261451720201876
+        },
+        "N": {
+          "slope_points_per_degree": 2111.9832092285164,
+          "intercept_points": -49383.232208251975,
+          "controls": 8,
+          "distinct_label_values": 4,
+          "max_residual_pdf_points": 0.07360534667532193,
+          "rms_residual_pdf_points": 0.054126467936135146,
+          "alternating_label_holdout_max_pdf_points": 0.1240081787618692
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            93.16666666666667,
+            94.33333333333333
+          ],
+          "target_degrees": 93.32720490071176,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            23.5,
+            24.0
+          ],
+          "target_degrees": 24.047699629651557,
+          "extrapolation_beyond_label_range_degrees": 0.047699629651557274
+        }
+      },
+      "review_panel": "reviewed-Tonzang-012.png",
+      "review_contact_sheet": "contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 15,
+      "owner": 30165,
+      "y": 113033,
+      "x": 199048,
+      "original_interval": 909,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/856/runs/0"
+      },
+      "inside": [
+        18
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.3285780764859,
+      "longitude_exact_rational": "12233790/131083",
+      "latitude_degrees_north": 24.046445630449256,
+      "latitude_native_f64le_hex": "58d25fdce30b3840",
+      "registered_pdf_point": [
+        428.6243640392495,
+        1402.4572048832779
+      ],
+      "render_scale1_pixel": [
+        429,
+        326
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        200,
+        203,
+        179
+      ],
+      "name": "Tonzang",
+      "review_order_rank": 8,
+      "source_point_interpretation": "Registered centre is depicted on the named Tonzang/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Tonzang-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "foreign-administrative-only",
+      "original_hit_operands": [
+        {
+          "index": 18,
+          "hash": "57764d6419435e0da397433928c9dc476f3b7b98bc69f6171a6b9a8745494e9b",
+          "registry_index": 110,
+          "id": "gb:IND:ADM3:7132399B8947963734886",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4037",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 7,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70783,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B8947963734886",
+            "ordinal": 4037,
+            "owners": [],
+            "name": "Ngopa",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Tonzang Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-tonzang-township-chin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/12dbfbb6-f1bb-4156-b7e7-65c9ac831a71/Tsp_Map_VL_Tonzang_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Tonzang.pdf",
+        "bytes": 4721549,
+        "sha256": "af093524c4875060cfcbd2f362e8a9a3307878c719de8b49bdb1f96f5433695c",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Tonzang is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2111.6672330583483,
+          "intercept_points": -196650.27586800375,
+          "controls": 16,
+          "distinct_label_values": 8,
+          "max_residual_pdf_points": 0.10507238481659442,
+          "rms_residual_pdf_points": 0.06639370799043227,
+          "alternating_label_holdout_max_pdf_points": 0.1261451720201876
+        },
+        "N": {
+          "slope_points_per_degree": 2111.9832092285164,
+          "intercept_points": -49383.232208251975,
+          "controls": 8,
+          "distinct_label_values": 4,
+          "max_residual_pdf_points": 0.07360534667532193,
+          "rms_residual_pdf_points": 0.054126467936135146,
+          "alternating_label_holdout_max_pdf_points": 0.1240081787618692
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            93.16666666666667,
+            94.33333333333333
+          ],
+          "target_degrees": 93.3285780764859,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            23.5,
+            24.0
+          ],
+          "target_degrees": 24.046445630449256,
+          "extrapolation_beyond_label_range_degrees": 0.04644563044925576
+        }
+      },
+      "review_panel": "reviewed-Tonzang-015.png",
+      "review_contact_sheet": "contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 30,
+      "owner": 30165,
+      "y": 113191,
+      "x": 199092,
+      "original_interval": 995,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/943/runs/0"
+      },
+      "inside": [
+        17
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.38899781054752,
+      "longitude_exact_rational": "12241710/131083",
+      "latitude_degrees_north": 23.848160247291055,
+      "latitude_native_f64le_hex": "e2e1ab0721d93740",
+      "registered_pdf_point": [
+        556.2107366872951,
+        983.6818050177171
+      ],
+      "render_scale1_pixel": [
+        556,
+        744
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        245,
+        248,
+        224
+      ],
+      "name": "Tonzang",
+      "review_order_rank": 9,
+      "source_point_interpretation": "Registered centre is depicted on the named Tonzang/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Tonzang-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "foreign-administrative-only",
+      "original_hit_operands": [
+        {
+          "index": 17,
+          "hash": "fd126b35b94952e5e090fd676ae7070fc012a6d1ca30881e65463e7c7f5f1a18",
+          "registry_index": 109,
+          "id": "gb:IND:ADM3:7132399B36076747890795",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4036",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 55,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70782,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B36076747890795",
+            "ordinal": 4036,
+            "owners": [],
+            "name": "Champhai",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Tonzang Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-tonzang-township-chin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/12dbfbb6-f1bb-4156-b7e7-65c9ac831a71/Tsp_Map_VL_Tonzang_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Tonzang.pdf",
+        "bytes": 4721549,
+        "sha256": "af093524c4875060cfcbd2f362e8a9a3307878c719de8b49bdb1f96f5433695c",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Tonzang is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2111.6672330583483,
+          "intercept_points": -196650.27586800375,
+          "controls": 16,
+          "distinct_label_values": 8,
+          "max_residual_pdf_points": 0.10507238481659442,
+          "rms_residual_pdf_points": 0.06639370799043227,
+          "alternating_label_holdout_max_pdf_points": 0.1261451720201876
+        },
+        "N": {
+          "slope_points_per_degree": 2111.9832092285164,
+          "intercept_points": -49383.232208251975,
+          "controls": 8,
+          "distinct_label_values": 4,
+          "max_residual_pdf_points": 0.07360534667532193,
+          "rms_residual_pdf_points": 0.054126467936135146,
+          "alternating_label_holdout_max_pdf_points": 0.1240081787618692
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            93.16666666666667,
+            94.33333333333333
+          ],
+          "target_degrees": 93.38899781054752,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            23.5,
+            24.0
+          ],
+          "target_degrees": 23.848160247291055,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Tonzang-030.png",
+      "review_contact_sheet": "contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 31,
+      "owner": 30165,
+      "y": 113192,
+      "x": 199092,
+      "original_interval": 996,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/944/runs/0"
+      },
+      "inside": [
+        17
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.38899781054752,
+      "longitude_exact_rational": "12241710/131083",
+      "latitude_degrees_north": 23.846904306983667,
+      "latitude_native_f64le_hex": "1e567db8ced83740",
+      "registered_pdf_point": [
+        556.2107366872951,
+        981.0292801767209
+      ],
+      "render_scale1_pixel": [
+        556,
+        747
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        230,
+        233,
+        209
+      ],
+      "name": "Tonzang",
+      "review_order_rank": 10,
+      "source_point_interpretation": "Registered centre is depicted on the named Tonzang/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Tonzang-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "foreign-administrative-only",
+      "original_hit_operands": [
+        {
+          "index": 17,
+          "hash": "fd126b35b94952e5e090fd676ae7070fc012a6d1ca30881e65463e7c7f5f1a18",
+          "registry_index": 109,
+          "id": "gb:IND:ADM3:7132399B36076747890795",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4036",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 55,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70782,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B36076747890795",
+            "ordinal": 4036,
+            "owners": [],
+            "name": "Champhai",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Tonzang Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-tonzang-township-chin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/12dbfbb6-f1bb-4156-b7e7-65c9ac831a71/Tsp_Map_VL_Tonzang_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Tonzang.pdf",
+        "bytes": 4721549,
+        "sha256": "af093524c4875060cfcbd2f362e8a9a3307878c719de8b49bdb1f96f5433695c",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Tonzang is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2111.6672330583483,
+          "intercept_points": -196650.27586800375,
+          "controls": 16,
+          "distinct_label_values": 8,
+          "max_residual_pdf_points": 0.10507238481659442,
+          "rms_residual_pdf_points": 0.06639370799043227,
+          "alternating_label_holdout_max_pdf_points": 0.1261451720201876
+        },
+        "N": {
+          "slope_points_per_degree": 2111.9832092285164,
+          "intercept_points": -49383.232208251975,
+          "controls": 8,
+          "distinct_label_values": 4,
+          "max_residual_pdf_points": 0.07360534667532193,
+          "rms_residual_pdf_points": 0.054126467936135146,
+          "alternating_label_holdout_max_pdf_points": 0.1240081787618692
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            93.16666666666667,
+            94.33333333333333
+          ],
+          "target_degrees": 93.38899781054752,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            23.5,
+            24.0
+          ],
+          "target_degrees": 23.846904306983667,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Tonzang-031.png",
+      "review_contact_sheet": "contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 1,
+      "owner": 30165,
+      "y": 113000,
+      "x": 199052,
+      "original_interval": 871,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/834/runs/0"
+      },
+      "inside": [
+        0,
+        15
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.3340707795824,
+      "longitude_exact_rational": "12234510/131083",
+      "latitude_degrees_north": 24.08782113518412,
+      "latitude_native_f64le_hex": "6e8327727b163840",
+      "registered_pdf_point": [
+        440.223125189048,
+        1489.841576156672
+      ],
+      "render_scale1_pixel": [
+        440,
+        238
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        250,
+        253,
+        229
+      ],
+      "name": "Tonzang",
+      "review_order_rank": 15,
+      "source_point_interpretation": "Registered centre is depicted on the named Tonzang/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Tonzang-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 28,
+          "boundary": 0
+        },
+        {
+          "index": 15,
+          "hash": "5444004a80f6dfcb02a292ddf3ca779c4b275a5fbe1b73281fcc2a492196b66d",
+          "registry_index": 107,
+          "id": "gb:IND:ADM3:7132399B49846761574186",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/3578",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 10,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70324,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B49846761574186",
+            "ordinal": 3578,
+            "owners": [],
+            "name": "Mualnuam",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Tonzang Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-tonzang-township-chin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/12dbfbb6-f1bb-4156-b7e7-65c9ac831a71/Tsp_Map_VL_Tonzang_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Tonzang.pdf",
+        "bytes": 4721549,
+        "sha256": "af093524c4875060cfcbd2f362e8a9a3307878c719de8b49bdb1f96f5433695c",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Tonzang is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2111.6672330583483,
+          "intercept_points": -196650.27586800375,
+          "controls": 16,
+          "distinct_label_values": 8,
+          "max_residual_pdf_points": 0.10507238481659442,
+          "rms_residual_pdf_points": 0.06639370799043227,
+          "alternating_label_holdout_max_pdf_points": 0.1261451720201876
+        },
+        "N": {
+          "slope_points_per_degree": 2111.9832092285164,
+          "intercept_points": -49383.232208251975,
+          "controls": 8,
+          "distinct_label_values": 4,
+          "max_residual_pdf_points": 0.07360534667532193,
+          "rms_residual_pdf_points": 0.054126467936135146,
+          "alternating_label_holdout_max_pdf_points": 0.1240081787618692
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            93.16666666666667,
+            94.33333333333333
+          ],
+          "target_degrees": 93.3340707795824,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            23.5,
+            24.0
+          ],
+          "target_degrees": 24.08782113518412,
+          "extrapolation_beyond_label_range_degrees": 0.0878211351841216
+        }
+      },
+      "review_panel": "reviewed-Tonzang-001.png",
+      "review_contact_sheet": "contact-01.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    }
+  ]
+}

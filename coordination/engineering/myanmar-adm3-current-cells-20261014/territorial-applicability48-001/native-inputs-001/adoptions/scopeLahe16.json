@@ -1,0 +1,2585 @@
+{
+  "kind": "exact16-actual-foreign-ADM-conflict-source-choice-request",
+  "count": 16,
+  "source_only": true,
+  "source": {
+    "title": "Myanmar: Lahe Township, Sagaing Region (20 April 2020) [EN/MY]",
+    "producer": "Myanmar Information Management Unit (MIMU)",
+    "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-lahe-township-sagaing-region-20-april-2020-enmy",
+    "body_url": "https://reliefweb.int/attachments/da87ff21-b923-4814-8d68-12338f658d54/Tsp_Map_VL_Lahe_-_Sagaing_MIMU154v05_20Apr2020_A1_Eng.pdf",
+    "local_pdf": "MIMU2020-Lahe.pdf",
+    "bytes": 7290596,
+    "sha256": "43e08e080176227409fb35984ee809a1bc37692bfb2b799545e3bd2f3d26e84c",
+    "printed_production_date": "2020-04-20",
+    "map_id": "MIMU154v05",
+    "projection_datum": "Geographic/WGS84",
+    "boundary_source_printed": "MIMU",
+    "map_country_context": "India is labelled across the western international border; Lahe is the named Myanmar township.",
+    "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+  },
+  "requirements": "Consequentially review exact panels. If supported, explicitly choose this dated township border depiction over every contrary actual administrative/reference input listed per key, retaining raw contacts/pins as contextual disagreement. No country, state-name or administrative-level blanket priority.",
+  "native_accepted_repairs": 0,
+  "cleared_holds": 0,
+  "points": [
+    {
+      "local_index": 18,
+      "owner": 30145,
+      "y": 110911,
+      "x": 200444,
+      "original_interval": 475,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/450/runs/0"
+      },
+      "inside": [
+        0,
+        9
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 95.24553145716835,
+      "longitude_exact_rational": "12485070/131083",
+      "latitude_degrees_north": 26.67913079122225,
+      "latitude_native_f64le_hex": "9401fa83dbad3a40",
+      "registered_pdf_point": [
+        475.74614049945376,
+        2183.500772177351
+      ],
+      "render_scale1_pixel": [
+        476,
+        408
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        238,
+        240,
+        216
+      ],
+      "name": "Lahe",
+      "review_order_rank": 1,
+      "source_point_interpretation": "Registered centre is depicted on the named Lahe/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Lahe-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 49,
+          "boundary": 0
+        },
+        {
+          "index": 9,
+          "hash": "30e5c7366bcc70861a960fedebfdaaf955b12ee6177860b0c5bb327a6d563a6a",
+          "registry_index": 68,
+          "id": "gb:IND:ADM3:7132399B90482940347245",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/908",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 49,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 67654,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B90482940347245",
+            "ordinal": 908,
+            "owners": [],
+            "name": "Pangchao Sdo",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Lahe Township, Sagaing Region (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-lahe-township-sagaing-region-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/da87ff21-b923-4814-8d68-12338f658d54/Tsp_Map_VL_Lahe_-_Sagaing_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Lahe.pdf",
+        "bytes": 7290596,
+        "sha256": "43e08e080176227409fb35984ee809a1bc37692bfb2b799545e3bd2f3d26e84c",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Lahe is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 1808.5937046596532,
+          "intercept_points": -171784.7224498982,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.0014049710589461029,
+          "rms_residual_pdf_points": 0.0007211780831119499,
+          "alternating_label_holdout_max_pdf_points": 0.0025736491370480508
+        },
+        "N": {
+          "slope_points_per_degree": 1808.6605486188535,
+          "intercept_points": -46069.99056134883,
+          "controls": 14,
+          "distinct_label_values": 7,
+          "max_residual_pdf_points": 0.003967285163525958,
+          "rms_residual_pdf_points": 0.002123200741674865,
+          "alternating_label_holdout_max_pdf_points": 0.005047607432061341
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            95.0,
+            95.83333333333333
+          ],
+          "target_degrees": 95.24553145716835,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            25.666666666666668,
+            26.666666666666668
+          ],
+          "target_degrees": 26.67913079122225,
+          "extrapolation_beyond_label_range_degrees": 0.012464124555581435
+        }
+      },
+      "review_panel": "reviewed-Lahe-018.png",
+      "review_contact_sheet": "contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 25,
+      "owner": 30145,
+      "y": 110912,
+      "x": 200447,
+      "original_interval": 477,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/451/runs/0"
+      },
+      "inside": [
+        0,
+        9
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 95.24965098449074,
+      "longitude_exact_rational": "12485610/131083",
+      "latitude_degrees_north": 26.67790380402266,
+      "latitude_native_f64le_hex": "7f1c8c1a8bad3a40",
+      "registered_pdf_point": [
+        483.1966916809033,
+        2181.2815688357878
+      ],
+      "render_scale1_pixel": [
+        483,
+        411
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        244,
+        246,
+        222
+      ],
+      "name": "Lahe",
+      "review_order_rank": 2,
+      "source_point_interpretation": "Registered centre is depicted on the named Lahe/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Lahe-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 49,
+          "boundary": 0
+        },
+        {
+          "index": 9,
+          "hash": "30e5c7366bcc70861a960fedebfdaaf955b12ee6177860b0c5bb327a6d563a6a",
+          "registry_index": 68,
+          "id": "gb:IND:ADM3:7132399B90482940347245",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/908",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 49,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 67654,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B90482940347245",
+            "ordinal": 908,
+            "owners": [],
+            "name": "Pangchao Sdo",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Lahe Township, Sagaing Region (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-lahe-township-sagaing-region-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/da87ff21-b923-4814-8d68-12338f658d54/Tsp_Map_VL_Lahe_-_Sagaing_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Lahe.pdf",
+        "bytes": 7290596,
+        "sha256": "43e08e080176227409fb35984ee809a1bc37692bfb2b799545e3bd2f3d26e84c",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Lahe is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 1808.5937046596532,
+          "intercept_points": -171784.7224498982,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.0014049710589461029,
+          "rms_residual_pdf_points": 0.0007211780831119499,
+          "alternating_label_holdout_max_pdf_points": 0.0025736491370480508
+        },
+        "N": {
+          "slope_points_per_degree": 1808.6605486188535,
+          "intercept_points": -46069.99056134883,
+          "controls": 14,
+          "distinct_label_values": 7,
+          "max_residual_pdf_points": 0.003967285163525958,
+          "rms_residual_pdf_points": 0.002123200741674865,
+          "alternating_label_holdout_max_pdf_points": 0.005047607432061341
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            95.0,
+            95.83333333333333
+          ],
+          "target_degrees": 95.24965098449074,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            25.666666666666668,
+            26.666666666666668
+          ],
+          "target_degrees": 26.67790380402266,
+          "extrapolation_beyond_label_range_degrees": 0.011237137355990967
+        }
+      },
+      "review_panel": "reviewed-Lahe-025.png",
+      "review_contact_sheet": "contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 19,
+      "owner": 30145,
+      "y": 110911,
+      "x": 200445,
+      "original_interval": 475,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/450/runs/0"
+      },
+      "inside": [
+        0,
+        9
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 95.24690463294249,
+      "longitude_exact_rational": "12485250/131083",
+      "latitude_degrees_north": 26.67913079122225,
+      "latitude_native_f64le_hex": "9401fa83dbad3a40",
+      "registered_pdf_point": [
+        478.22965755994665,
+        2183.500772177351
+      ],
+      "render_scale1_pixel": [
+        478,
+        408
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        242,
+        244,
+        220
+      ],
+      "name": "Lahe",
+      "review_order_rank": 3,
+      "source_point_interpretation": "Registered centre is depicted on the named Lahe/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Lahe-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 49,
+          "boundary": 0
+        },
+        {
+          "index": 9,
+          "hash": "30e5c7366bcc70861a960fedebfdaaf955b12ee6177860b0c5bb327a6d563a6a",
+          "registry_index": 68,
+          "id": "gb:IND:ADM3:7132399B90482940347245",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/908",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 49,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 67654,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B90482940347245",
+            "ordinal": 908,
+            "owners": [],
+            "name": "Pangchao Sdo",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Lahe Township, Sagaing Region (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-lahe-township-sagaing-region-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/da87ff21-b923-4814-8d68-12338f658d54/Tsp_Map_VL_Lahe_-_Sagaing_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Lahe.pdf",
+        "bytes": 7290596,
+        "sha256": "43e08e080176227409fb35984ee809a1bc37692bfb2b799545e3bd2f3d26e84c",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Lahe is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 1808.5937046596532,
+          "intercept_points": -171784.7224498982,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.0014049710589461029,
+          "rms_residual_pdf_points": 0.0007211780831119499,
+          "alternating_label_holdout_max_pdf_points": 0.0025736491370480508
+        },
+        "N": {
+          "slope_points_per_degree": 1808.6605486188535,
+          "intercept_points": -46069.99056134883,
+          "controls": 14,
+          "distinct_label_values": 7,
+          "max_residual_pdf_points": 0.003967285163525958,
+          "rms_residual_pdf_points": 0.002123200741674865,
+          "alternating_label_holdout_max_pdf_points": 0.005047607432061341
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            95.0,
+            95.83333333333333
+          ],
+          "target_degrees": 95.24690463294249,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            25.666666666666668,
+            26.666666666666668
+          ],
+          "target_degrees": 26.67913079122225,
+          "extrapolation_beyond_label_range_degrees": 0.012464124555581435
+        }
+      },
+      "review_panel": "reviewed-Lahe-019.png",
+      "review_contact_sheet": "contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 30,
+      "owner": 30145,
+      "y": 110913,
+      "x": 200449,
+      "original_interval": 479,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/452/runs/0"
+      },
+      "inside": [
+        0,
+        9
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 95.252397336039,
+      "longitude_exact_rational": "12485970/131083",
+      "latitude_degrees_north": 26.67667680362022,
+      "latitude_native_f64le_hex": "bb82e5b03aad3a40",
+      "registered_pdf_point": [
+        488.16372580186,
+        2179.0623416147646
+      ],
+      "render_scale1_pixel": [
+        488,
+        413
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        179,
+        181,
+        157
+      ],
+      "name": "Lahe",
+      "review_order_rank": 4,
+      "source_point_interpretation": "Registered centre is depicted on the named Lahe/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Lahe-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 49,
+          "boundary": 0
+        },
+        {
+          "index": 9,
+          "hash": "30e5c7366bcc70861a960fedebfdaaf955b12ee6177860b0c5bb327a6d563a6a",
+          "registry_index": 68,
+          "id": "gb:IND:ADM3:7132399B90482940347245",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/908",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 49,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 67654,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B90482940347245",
+            "ordinal": 908,
+            "owners": [],
+            "name": "Pangchao Sdo",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Lahe Township, Sagaing Region (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-lahe-township-sagaing-region-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/da87ff21-b923-4814-8d68-12338f658d54/Tsp_Map_VL_Lahe_-_Sagaing_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Lahe.pdf",
+        "bytes": 7290596,
+        "sha256": "43e08e080176227409fb35984ee809a1bc37692bfb2b799545e3bd2f3d26e84c",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Lahe is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 1808.5937046596532,
+          "intercept_points": -171784.7224498982,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.0014049710589461029,
+          "rms_residual_pdf_points": 0.0007211780831119499,
+          "alternating_label_holdout_max_pdf_points": 0.0025736491370480508
+        },
+        "N": {
+          "slope_points_per_degree": 1808.6605486188535,
+          "intercept_points": -46069.99056134883,
+          "controls": 14,
+          "distinct_label_values": 7,
+          "max_residual_pdf_points": 0.003967285163525958,
+          "rms_residual_pdf_points": 0.002123200741674865,
+          "alternating_label_holdout_max_pdf_points": 0.005047607432061341
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            95.0,
+            95.83333333333333
+          ],
+          "target_degrees": 95.252397336039,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            25.666666666666668,
+            26.666666666666668
+          ],
+          "target_degrees": 26.67667680362022,
+          "extrapolation_beyond_label_range_degrees": 0.010010136953553683
+        }
+      },
+      "review_panel": "reviewed-Lahe-030.png",
+      "review_contact_sheet": "contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 26,
+      "owner": 30145,
+      "y": 110912,
+      "x": 200448,
+      "original_interval": 477,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/451/runs/0"
+      },
+      "inside": [
+        0,
+        9
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 95.25102416026488,
+      "longitude_exact_rational": "12485790/131083",
+      "latitude_degrees_north": 26.67790380402266,
+      "latitude_native_f64le_hex": "7f1c8c1a8bad3a40",
+      "registered_pdf_point": [
+        485.6802087413962,
+        2181.2815688357878
+      ],
+      "render_scale1_pixel": [
+        486,
+        411
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        244,
+        246,
+        222
+      ],
+      "name": "Lahe",
+      "review_order_rank": 5,
+      "source_point_interpretation": "Registered centre is depicted on the named Lahe/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Lahe-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 49,
+          "boundary": 0
+        },
+        {
+          "index": 9,
+          "hash": "30e5c7366bcc70861a960fedebfdaaf955b12ee6177860b0c5bb327a6d563a6a",
+          "registry_index": 68,
+          "id": "gb:IND:ADM3:7132399B90482940347245",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/908",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 49,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 67654,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B90482940347245",
+            "ordinal": 908,
+            "owners": [],
+            "name": "Pangchao Sdo",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Lahe Township, Sagaing Region (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-lahe-township-sagaing-region-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/da87ff21-b923-4814-8d68-12338f658d54/Tsp_Map_VL_Lahe_-_Sagaing_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Lahe.pdf",
+        "bytes": 7290596,
+        "sha256": "43e08e080176227409fb35984ee809a1bc37692bfb2b799545e3bd2f3d26e84c",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Lahe is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 1808.5937046596532,
+          "intercept_points": -171784.7224498982,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.0014049710589461029,
+          "rms_residual_pdf_points": 0.0007211780831119499,
+          "alternating_label_holdout_max_pdf_points": 0.0025736491370480508
+        },
+        "N": {
+          "slope_points_per_degree": 1808.6605486188535,
+          "intercept_points": -46069.99056134883,
+          "controls": 14,
+          "distinct_label_values": 7,
+          "max_residual_pdf_points": 0.003967285163525958,
+          "rms_residual_pdf_points": 0.002123200741674865,
+          "alternating_label_holdout_max_pdf_points": 0.005047607432061341
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            95.0,
+            95.83333333333333
+          ],
+          "target_degrees": 95.25102416026488,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            25.666666666666668,
+            26.666666666666668
+          ],
+          "target_degrees": 26.67790380402266,
+          "extrapolation_beyond_label_range_degrees": 0.011237137355990967
+        }
+      },
+      "review_panel": "reviewed-Lahe-026.png",
+      "review_contact_sheet": "contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 20,
+      "owner": 30145,
+      "y": 110911,
+      "x": 200446,
+      "original_interval": 475,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/450/runs/0"
+      },
+      "inside": [
+        0,
+        9
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 95.24827780871661,
+      "longitude_exact_rational": "12485430/131083",
+      "latitude_degrees_north": 26.67913079122225,
+      "latitude_native_f64le_hex": "9401fa83dbad3a40",
+      "registered_pdf_point": [
+        480.7131746204104,
+        2183.500772177351
+      ],
+      "render_scale1_pixel": [
+        481,
+        408
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        240,
+        242,
+        218
+      ],
+      "name": "Lahe",
+      "review_order_rank": 6,
+      "source_point_interpretation": "Registered centre is depicted on the named Lahe/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Lahe-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 49,
+          "boundary": 0
+        },
+        {
+          "index": 9,
+          "hash": "30e5c7366bcc70861a960fedebfdaaf955b12ee6177860b0c5bb327a6d563a6a",
+          "registry_index": 68,
+          "id": "gb:IND:ADM3:7132399B90482940347245",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/908",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 49,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 67654,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B90482940347245",
+            "ordinal": 908,
+            "owners": [],
+            "name": "Pangchao Sdo",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Lahe Township, Sagaing Region (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-lahe-township-sagaing-region-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/da87ff21-b923-4814-8d68-12338f658d54/Tsp_Map_VL_Lahe_-_Sagaing_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Lahe.pdf",
+        "bytes": 7290596,
+        "sha256": "43e08e080176227409fb35984ee809a1bc37692bfb2b799545e3bd2f3d26e84c",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Lahe is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 1808.5937046596532,
+          "intercept_points": -171784.7224498982,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.0014049710589461029,
+          "rms_residual_pdf_points": 0.0007211780831119499,
+          "alternating_label_holdout_max_pdf_points": 0.0025736491370480508
+        },
+        "N": {
+          "slope_points_per_degree": 1808.6605486188535,
+          "intercept_points": -46069.99056134883,
+          "controls": 14,
+          "distinct_label_values": 7,
+          "max_residual_pdf_points": 0.003967285163525958,
+          "rms_residual_pdf_points": 0.002123200741674865,
+          "alternating_label_holdout_max_pdf_points": 0.005047607432061341
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            95.0,
+            95.83333333333333
+          ],
+          "target_degrees": 95.24827780871661,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            25.666666666666668,
+            26.666666666666668
+          ],
+          "target_degrees": 26.67913079122225,
+          "extrapolation_beyond_label_range_degrees": 0.012464124555581435
+        }
+      },
+      "review_panel": "reviewed-Lahe-020.png",
+      "review_contact_sheet": "contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 11,
+      "owner": 30145,
+      "y": 110910,
+      "x": 200442,
+      "original_interval": 473,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/449/runs/0"
+      },
+      "inside": [
+        0,
+        9
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 95.2427851056201,
+      "longitude_exact_rational": "12484710/131083",
+      "latitude_degrees_north": 26.680357765218584,
+      "latitude_native_f64le_hex": "87312fed2bae3a40",
+      "registered_pdf_point": [
+        470.7791063784971,
+        2185.7199516387045
+      ],
+      "render_scale1_pixel": [
+        471,
+        406
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        161,
+        163,
+        139
+      ],
+      "name": "Lahe",
+      "review_order_rank": 7,
+      "source_point_interpretation": "Registered centre is depicted on the named Lahe/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Lahe-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 49,
+          "boundary": 0
+        },
+        {
+          "index": 9,
+          "hash": "30e5c7366bcc70861a960fedebfdaaf955b12ee6177860b0c5bb327a6d563a6a",
+          "registry_index": 68,
+          "id": "gb:IND:ADM3:7132399B90482940347245",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/908",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 49,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 67654,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B90482940347245",
+            "ordinal": 908,
+            "owners": [],
+            "name": "Pangchao Sdo",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Lahe Township, Sagaing Region (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-lahe-township-sagaing-region-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/da87ff21-b923-4814-8d68-12338f658d54/Tsp_Map_VL_Lahe_-_Sagaing_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Lahe.pdf",
+        "bytes": 7290596,
+        "sha256": "43e08e080176227409fb35984ee809a1bc37692bfb2b799545e3bd2f3d26e84c",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Lahe is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 1808.5937046596532,
+          "intercept_points": -171784.7224498982,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.0014049710589461029,
+          "rms_residual_pdf_points": 0.0007211780831119499,
+          "alternating_label_holdout_max_pdf_points": 0.0025736491370480508
+        },
+        "N": {
+          "slope_points_per_degree": 1808.6605486188535,
+          "intercept_points": -46069.99056134883,
+          "controls": 14,
+          "distinct_label_values": 7,
+          "max_residual_pdf_points": 0.003967285163525958,
+          "rms_residual_pdf_points": 0.002123200741674865,
+          "alternating_label_holdout_max_pdf_points": 0.005047607432061341
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            95.0,
+            95.83333333333333
+          ],
+          "target_degrees": 95.2427851056201,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            25.666666666666668,
+            26.666666666666668
+          ],
+          "target_degrees": 26.680357765218584,
+          "extrapolation_beyond_label_range_degrees": 0.013691098551916525
+        }
+      },
+      "review_panel": "reviewed-Lahe-011.png",
+      "review_contact_sheet": "contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 12,
+      "owner": 30145,
+      "y": 110910,
+      "x": 200443,
+      "original_interval": 473,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/449/runs/0"
+      },
+      "inside": [
+        0,
+        9
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 95.24415828139423,
+      "longitude_exact_rational": "12484890/131083",
+      "latitude_degrees_north": 26.680357765218584,
+      "latitude_native_f64le_hex": "87312fed2bae3a40",
+      "registered_pdf_point": [
+        473.26262343899,
+        2185.7199516387045
+      ],
+      "render_scale1_pixel": [
+        473,
+        406
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        172,
+        174,
+        150
+      ],
+      "name": "Lahe",
+      "review_order_rank": 8,
+      "source_point_interpretation": "Registered centre is depicted on the named Lahe/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Lahe-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 49,
+          "boundary": 0
+        },
+        {
+          "index": 9,
+          "hash": "30e5c7366bcc70861a960fedebfdaaf955b12ee6177860b0c5bb327a6d563a6a",
+          "registry_index": 68,
+          "id": "gb:IND:ADM3:7132399B90482940347245",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/908",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 49,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 67654,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B90482940347245",
+            "ordinal": 908,
+            "owners": [],
+            "name": "Pangchao Sdo",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Lahe Township, Sagaing Region (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-lahe-township-sagaing-region-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/da87ff21-b923-4814-8d68-12338f658d54/Tsp_Map_VL_Lahe_-_Sagaing_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Lahe.pdf",
+        "bytes": 7290596,
+        "sha256": "43e08e080176227409fb35984ee809a1bc37692bfb2b799545e3bd2f3d26e84c",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Lahe is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 1808.5937046596532,
+          "intercept_points": -171784.7224498982,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.0014049710589461029,
+          "rms_residual_pdf_points": 0.0007211780831119499,
+          "alternating_label_holdout_max_pdf_points": 0.0025736491370480508
+        },
+        "N": {
+          "slope_points_per_degree": 1808.6605486188535,
+          "intercept_points": -46069.99056134883,
+          "controls": 14,
+          "distinct_label_values": 7,
+          "max_residual_pdf_points": 0.003967285163525958,
+          "rms_residual_pdf_points": 0.002123200741674865,
+          "alternating_label_holdout_max_pdf_points": 0.005047607432061341
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            95.0,
+            95.83333333333333
+          ],
+          "target_degrees": 95.24415828139423,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            25.666666666666668,
+            26.666666666666668
+          ],
+          "target_degrees": 26.680357765218584,
+          "extrapolation_beyond_label_range_degrees": 0.013691098551916525
+        }
+      },
+      "review_panel": "reviewed-Lahe-012.png",
+      "review_contact_sheet": "contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 13,
+      "owner": 30145,
+      "y": 110910,
+      "x": 200444,
+      "original_interval": 473,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/449/runs/0"
+      },
+      "inside": [
+        0,
+        9
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 95.24553145716835,
+      "longitude_exact_rational": "12485070/131083",
+      "latitude_degrees_north": 26.680357765218584,
+      "latitude_native_f64le_hex": "87312fed2bae3a40",
+      "registered_pdf_point": [
+        475.74614049945376,
+        2185.7199516387045
+      ],
+      "render_scale1_pixel": [
+        476,
+        406
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        213,
+        215,
+        191
+      ],
+      "name": "Lahe",
+      "review_order_rank": 9,
+      "source_point_interpretation": "Registered centre is depicted on the named Lahe/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Lahe-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 49,
+          "boundary": 0
+        },
+        {
+          "index": 9,
+          "hash": "30e5c7366bcc70861a960fedebfdaaf955b12ee6177860b0c5bb327a6d563a6a",
+          "registry_index": 68,
+          "id": "gb:IND:ADM3:7132399B90482940347245",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/908",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 49,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 67654,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B90482940347245",
+            "ordinal": 908,
+            "owners": [],
+            "name": "Pangchao Sdo",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Lahe Township, Sagaing Region (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-lahe-township-sagaing-region-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/da87ff21-b923-4814-8d68-12338f658d54/Tsp_Map_VL_Lahe_-_Sagaing_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Lahe.pdf",
+        "bytes": 7290596,
+        "sha256": "43e08e080176227409fb35984ee809a1bc37692bfb2b799545e3bd2f3d26e84c",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Lahe is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 1808.5937046596532,
+          "intercept_points": -171784.7224498982,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.0014049710589461029,
+          "rms_residual_pdf_points": 0.0007211780831119499,
+          "alternating_label_holdout_max_pdf_points": 0.0025736491370480508
+        },
+        "N": {
+          "slope_points_per_degree": 1808.6605486188535,
+          "intercept_points": -46069.99056134883,
+          "controls": 14,
+          "distinct_label_values": 7,
+          "max_residual_pdf_points": 0.003967285163525958,
+          "rms_residual_pdf_points": 0.002123200741674865,
+          "alternating_label_holdout_max_pdf_points": 0.005047607432061341
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            95.0,
+            95.83333333333333
+          ],
+          "target_degrees": 95.24553145716835,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            25.666666666666668,
+            26.666666666666668
+          ],
+          "target_degrees": 26.680357765218584,
+          "extrapolation_beyond_label_range_degrees": 0.013691098551916525
+        }
+      },
+      "review_panel": "reviewed-Lahe-013.png",
+      "review_contact_sheet": "contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 14,
+      "owner": 30145,
+      "y": 110910,
+      "x": 200445,
+      "original_interval": 473,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/449/runs/0"
+      },
+      "inside": [
+        0,
+        9
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 95.24690463294249,
+      "longitude_exact_rational": "12485250/131083",
+      "latitude_degrees_north": 26.680357765218584,
+      "latitude_native_f64le_hex": "87312fed2bae3a40",
+      "registered_pdf_point": [
+        478.22965755994665,
+        2185.7199516387045
+      ],
+      "render_scale1_pixel": [
+        478,
+        406
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        233,
+        235,
+        211
+      ],
+      "name": "Lahe",
+      "review_order_rank": 10,
+      "source_point_interpretation": "Registered centre is depicted on the named Lahe/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Lahe-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 49,
+          "boundary": 0
+        },
+        {
+          "index": 9,
+          "hash": "30e5c7366bcc70861a960fedebfdaaf955b12ee6177860b0c5bb327a6d563a6a",
+          "registry_index": 68,
+          "id": "gb:IND:ADM3:7132399B90482940347245",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/908",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 49,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 67654,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B90482940347245",
+            "ordinal": 908,
+            "owners": [],
+            "name": "Pangchao Sdo",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Lahe Township, Sagaing Region (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-lahe-township-sagaing-region-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/da87ff21-b923-4814-8d68-12338f658d54/Tsp_Map_VL_Lahe_-_Sagaing_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Lahe.pdf",
+        "bytes": 7290596,
+        "sha256": "43e08e080176227409fb35984ee809a1bc37692bfb2b799545e3bd2f3d26e84c",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Lahe is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 1808.5937046596532,
+          "intercept_points": -171784.7224498982,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.0014049710589461029,
+          "rms_residual_pdf_points": 0.0007211780831119499,
+          "alternating_label_holdout_max_pdf_points": 0.0025736491370480508
+        },
+        "N": {
+          "slope_points_per_degree": 1808.6605486188535,
+          "intercept_points": -46069.99056134883,
+          "controls": 14,
+          "distinct_label_values": 7,
+          "max_residual_pdf_points": 0.003967285163525958,
+          "rms_residual_pdf_points": 0.002123200741674865,
+          "alternating_label_holdout_max_pdf_points": 0.005047607432061341
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            95.0,
+            95.83333333333333
+          ],
+          "target_degrees": 95.24690463294249,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            25.666666666666668,
+            26.666666666666668
+          ],
+          "target_degrees": 26.680357765218584,
+          "extrapolation_beyond_label_range_degrees": 0.013691098551916525
+        }
+      },
+      "review_panel": "reviewed-Lahe-014.png",
+      "review_contact_sheet": "contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 27,
+      "owner": 30145,
+      "y": 110912,
+      "x": 200449,
+      "original_interval": 477,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/451/runs/0"
+      },
+      "inside": [
+        0,
+        9
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 95.252397336039,
+      "longitude_exact_rational": "12485970/131083",
+      "latitude_degrees_north": 26.67790380402266,
+      "latitude_native_f64le_hex": "7f1c8c1a8bad3a40",
+      "registered_pdf_point": [
+        488.16372580186,
+        2181.2815688357878
+      ],
+      "render_scale1_pixel": [
+        488,
+        411
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        236,
+        238,
+        214
+      ],
+      "name": "Lahe",
+      "review_order_rank": 11,
+      "source_point_interpretation": "Registered centre is depicted on the named Lahe/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Lahe-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 49,
+          "boundary": 0
+        },
+        {
+          "index": 9,
+          "hash": "30e5c7366bcc70861a960fedebfdaaf955b12ee6177860b0c5bb327a6d563a6a",
+          "registry_index": 68,
+          "id": "gb:IND:ADM3:7132399B90482940347245",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/908",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 49,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 67654,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B90482940347245",
+            "ordinal": 908,
+            "owners": [],
+            "name": "Pangchao Sdo",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Lahe Township, Sagaing Region (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-lahe-township-sagaing-region-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/da87ff21-b923-4814-8d68-12338f658d54/Tsp_Map_VL_Lahe_-_Sagaing_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Lahe.pdf",
+        "bytes": 7290596,
+        "sha256": "43e08e080176227409fb35984ee809a1bc37692bfb2b799545e3bd2f3d26e84c",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Lahe is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 1808.5937046596532,
+          "intercept_points": -171784.7224498982,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.0014049710589461029,
+          "rms_residual_pdf_points": 0.0007211780831119499,
+          "alternating_label_holdout_max_pdf_points": 0.0025736491370480508
+        },
+        "N": {
+          "slope_points_per_degree": 1808.6605486188535,
+          "intercept_points": -46069.99056134883,
+          "controls": 14,
+          "distinct_label_values": 7,
+          "max_residual_pdf_points": 0.003967285163525958,
+          "rms_residual_pdf_points": 0.002123200741674865,
+          "alternating_label_holdout_max_pdf_points": 0.005047607432061341
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            95.0,
+            95.83333333333333
+          ],
+          "target_degrees": 95.252397336039,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            25.666666666666668,
+            26.666666666666668
+          ],
+          "target_degrees": 26.67790380402266,
+          "extrapolation_beyond_label_range_degrees": 0.011237137355990967
+        }
+      },
+      "review_panel": "reviewed-Lahe-027.png",
+      "review_contact_sheet": "contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 21,
+      "owner": 30145,
+      "y": 110911,
+      "x": 200447,
+      "original_interval": 475,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/450/runs/0"
+      },
+      "inside": [
+        0,
+        9
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 95.24965098449074,
+      "longitude_exact_rational": "12485610/131083",
+      "latitude_degrees_north": 26.67913079122225,
+      "latitude_native_f64le_hex": "9401fa83dbad3a40",
+      "registered_pdf_point": [
+        483.1966916809033,
+        2183.500772177351
+      ],
+      "render_scale1_pixel": [
+        483,
+        408
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        244,
+        246,
+        222
+      ],
+      "name": "Lahe",
+      "review_order_rank": 12,
+      "source_point_interpretation": "Registered centre is depicted on the named Lahe/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Lahe-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 49,
+          "boundary": 0
+        },
+        {
+          "index": 9,
+          "hash": "30e5c7366bcc70861a960fedebfdaaf955b12ee6177860b0c5bb327a6d563a6a",
+          "registry_index": 68,
+          "id": "gb:IND:ADM3:7132399B90482940347245",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/908",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 49,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 67654,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B90482940347245",
+            "ordinal": 908,
+            "owners": [],
+            "name": "Pangchao Sdo",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Lahe Township, Sagaing Region (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-lahe-township-sagaing-region-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/da87ff21-b923-4814-8d68-12338f658d54/Tsp_Map_VL_Lahe_-_Sagaing_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Lahe.pdf",
+        "bytes": 7290596,
+        "sha256": "43e08e080176227409fb35984ee809a1bc37692bfb2b799545e3bd2f3d26e84c",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Lahe is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 1808.5937046596532,
+          "intercept_points": -171784.7224498982,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.0014049710589461029,
+          "rms_residual_pdf_points": 0.0007211780831119499,
+          "alternating_label_holdout_max_pdf_points": 0.0025736491370480508
+        },
+        "N": {
+          "slope_points_per_degree": 1808.6605486188535,
+          "intercept_points": -46069.99056134883,
+          "controls": 14,
+          "distinct_label_values": 7,
+          "max_residual_pdf_points": 0.003967285163525958,
+          "rms_residual_pdf_points": 0.002123200741674865,
+          "alternating_label_holdout_max_pdf_points": 0.005047607432061341
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            95.0,
+            95.83333333333333
+          ],
+          "target_degrees": 95.24965098449074,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            25.666666666666668,
+            26.666666666666668
+          ],
+          "target_degrees": 26.67913079122225,
+          "extrapolation_beyond_label_range_degrees": 0.012464124555581435
+        }
+      },
+      "review_panel": "reviewed-Lahe-021.png",
+      "review_contact_sheet": "contact-01.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 10,
+      "owner": 30145,
+      "y": 110910,
+      "x": 200441,
+      "original_interval": 473,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/449/runs/0"
+      },
+      "inside": [
+        0,
+        9
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 95.24141192984598,
+      "longitude_exact_rational": "12484530/131083",
+      "latitude_degrees_north": 26.680357765218584,
+      "latitude_native_f64le_hex": "87312fed2bae3a40",
+      "registered_pdf_point": [
+        468.2955893180333,
+        2185.7199516387045
+      ],
+      "render_scale1_pixel": [
+        468,
+        406
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        161,
+        163,
+        139
+      ],
+      "name": "Lahe",
+      "review_order_rank": 13,
+      "source_point_interpretation": "Registered centre is depicted on the named Lahe/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Lahe-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 49,
+          "boundary": 0
+        },
+        {
+          "index": 9,
+          "hash": "30e5c7366bcc70861a960fedebfdaaf955b12ee6177860b0c5bb327a6d563a6a",
+          "registry_index": 68,
+          "id": "gb:IND:ADM3:7132399B90482940347245",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/908",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 49,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 67654,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B90482940347245",
+            "ordinal": 908,
+            "owners": [],
+            "name": "Pangchao Sdo",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Lahe Township, Sagaing Region (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-lahe-township-sagaing-region-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/da87ff21-b923-4814-8d68-12338f658d54/Tsp_Map_VL_Lahe_-_Sagaing_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Lahe.pdf",
+        "bytes": 7290596,
+        "sha256": "43e08e080176227409fb35984ee809a1bc37692bfb2b799545e3bd2f3d26e84c",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Lahe is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 1808.5937046596532,
+          "intercept_points": -171784.7224498982,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.0014049710589461029,
+          "rms_residual_pdf_points": 0.0007211780831119499,
+          "alternating_label_holdout_max_pdf_points": 0.0025736491370480508
+        },
+        "N": {
+          "slope_points_per_degree": 1808.6605486188535,
+          "intercept_points": -46069.99056134883,
+          "controls": 14,
+          "distinct_label_values": 7,
+          "max_residual_pdf_points": 0.003967285163525958,
+          "rms_residual_pdf_points": 0.002123200741674865,
+          "alternating_label_holdout_max_pdf_points": 0.005047607432061341
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            95.0,
+            95.83333333333333
+          ],
+          "target_degrees": 95.24141192984598,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            25.666666666666668,
+            26.666666666666668
+          ],
+          "target_degrees": 26.680357765218584,
+          "extrapolation_beyond_label_range_degrees": 0.013691098551916525
+        }
+      },
+      "review_panel": "reviewed-Lahe-010.png",
+      "review_contact_sheet": "contact-01.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 9,
+      "owner": 30145,
+      "y": 110910,
+      "x": 200440,
+      "original_interval": 473,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/449/runs/0"
+      },
+      "inside": [
+        0,
+        9
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 95.24003875407185,
+      "longitude_exact_rational": "12484350/131083",
+      "latitude_degrees_north": 26.680357765218584,
+      "latitude_native_f64le_hex": "87312fed2bae3a40",
+      "registered_pdf_point": [
+        465.8120722575404,
+        2185.7199516387045
+      ],
+      "render_scale1_pixel": [
+        466,
+        406
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        165,
+        167,
+        145
+      ],
+      "name": "Lahe",
+      "review_order_rank": 16,
+      "source_point_interpretation": "Registered centre is depicted on the named Lahe/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Lahe-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 49,
+          "boundary": 0
+        },
+        {
+          "index": 9,
+          "hash": "30e5c7366bcc70861a960fedebfdaaf955b12ee6177860b0c5bb327a6d563a6a",
+          "registry_index": 68,
+          "id": "gb:IND:ADM3:7132399B90482940347245",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/908",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 49,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 67654,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B90482940347245",
+            "ordinal": 908,
+            "owners": [],
+            "name": "Pangchao Sdo",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Lahe Township, Sagaing Region (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-lahe-township-sagaing-region-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/da87ff21-b923-4814-8d68-12338f658d54/Tsp_Map_VL_Lahe_-_Sagaing_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Lahe.pdf",
+        "bytes": 7290596,
+        "sha256": "43e08e080176227409fb35984ee809a1bc37692bfb2b799545e3bd2f3d26e84c",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Lahe is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 1808.5937046596532,
+          "intercept_points": -171784.7224498982,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.0014049710589461029,
+          "rms_residual_pdf_points": 0.0007211780831119499,
+          "alternating_label_holdout_max_pdf_points": 0.0025736491370480508
+        },
+        "N": {
+          "slope_points_per_degree": 1808.6605486188535,
+          "intercept_points": -46069.99056134883,
+          "controls": 14,
+          "distinct_label_values": 7,
+          "max_residual_pdf_points": 0.003967285163525958,
+          "rms_residual_pdf_points": 0.002123200741674865,
+          "alternating_label_holdout_max_pdf_points": 0.005047607432061341
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            95.0,
+            95.83333333333333
+          ],
+          "target_degrees": 95.24003875407185,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            25.666666666666668,
+            26.666666666666668
+          ],
+          "target_degrees": 26.680357765218584,
+          "extrapolation_beyond_label_range_degrees": 0.013691098551916525
+        }
+      },
+      "review_panel": "reviewed-Lahe-009.png",
+      "review_contact_sheet": "contact-01.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 15,
+      "owner": 30145,
+      "y": 110910,
+      "x": 200446,
+      "original_interval": 473,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/449/runs/0"
+      },
+      "inside": [
+        0,
+        9
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 95.24827780871661,
+      "longitude_exact_rational": "12485430/131083",
+      "latitude_degrees_north": 26.680357765218584,
+      "latitude_native_f64le_hex": "87312fed2bae3a40",
+      "registered_pdf_point": [
+        480.7131746204104,
+        2185.7199516387045
+      ],
+      "render_scale1_pixel": [
+        481,
+        406
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        226,
+        226,
+        215
+      ],
+      "name": "Lahe",
+      "review_order_rank": 17,
+      "source_point_interpretation": "Registered centre is depicted on the named Lahe/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Lahe-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 49,
+          "boundary": 0
+        },
+        {
+          "index": 9,
+          "hash": "30e5c7366bcc70861a960fedebfdaaf955b12ee6177860b0c5bb327a6d563a6a",
+          "registry_index": 68,
+          "id": "gb:IND:ADM3:7132399B90482940347245",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/908",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 49,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 67654,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B90482940347245",
+            "ordinal": 908,
+            "owners": [],
+            "name": "Pangchao Sdo",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Lahe Township, Sagaing Region (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-lahe-township-sagaing-region-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/da87ff21-b923-4814-8d68-12338f658d54/Tsp_Map_VL_Lahe_-_Sagaing_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Lahe.pdf",
+        "bytes": 7290596,
+        "sha256": "43e08e080176227409fb35984ee809a1bc37692bfb2b799545e3bd2f3d26e84c",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Lahe is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 1808.5937046596532,
+          "intercept_points": -171784.7224498982,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.0014049710589461029,
+          "rms_residual_pdf_points": 0.0007211780831119499,
+          "alternating_label_holdout_max_pdf_points": 0.0025736491370480508
+        },
+        "N": {
+          "slope_points_per_degree": 1808.6605486188535,
+          "intercept_points": -46069.99056134883,
+          "controls": 14,
+          "distinct_label_values": 7,
+          "max_residual_pdf_points": 0.003967285163525958,
+          "rms_residual_pdf_points": 0.002123200741674865,
+          "alternating_label_holdout_max_pdf_points": 0.005047607432061341
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            95.0,
+            95.83333333333333
+          ],
+          "target_degrees": 95.24827780871661,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            25.666666666666668,
+            26.666666666666668
+          ],
+          "target_degrees": 26.680357765218584,
+          "extrapolation_beyond_label_range_degrees": 0.013691098551916525
+        }
+      },
+      "review_panel": "reviewed-Lahe-015.png",
+      "review_contact_sheet": "contact-01.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 31,
+      "owner": 30145,
+      "y": 110913,
+      "x": 200450,
+      "original_interval": 479,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/452/runs/0"
+      },
+      "inside": [
+        0,
+        9
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 95.25377051181313,
+      "longitude_exact_rational": "12486150/131083",
+      "latitude_degrees_north": 26.67667680362022,
+      "latitude_native_f64le_hex": "bb82e5b03aad3a40",
+      "registered_pdf_point": [
+        490.64724286235287,
+        2179.0623416147646
+      ],
+      "render_scale1_pixel": [
+        491,
+        413
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        193,
+        195,
+        171
+      ],
+      "name": "Lahe",
+      "review_order_rank": 18,
+      "source_point_interpretation": "Registered centre is depicted on the named Lahe/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Lahe-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 49,
+          "boundary": 0
+        },
+        {
+          "index": 9,
+          "hash": "30e5c7366bcc70861a960fedebfdaaf955b12ee6177860b0c5bb327a6d563a6a",
+          "registry_index": 68,
+          "id": "gb:IND:ADM3:7132399B90482940347245",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/908",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 49,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 67654,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B90482940347245",
+            "ordinal": 908,
+            "owners": [],
+            "name": "Pangchao Sdo",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Lahe Township, Sagaing Region (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-lahe-township-sagaing-region-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/da87ff21-b923-4814-8d68-12338f658d54/Tsp_Map_VL_Lahe_-_Sagaing_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Lahe.pdf",
+        "bytes": 7290596,
+        "sha256": "43e08e080176227409fb35984ee809a1bc37692bfb2b799545e3bd2f3d26e84c",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Lahe is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 1808.5937046596532,
+          "intercept_points": -171784.7224498982,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.0014049710589461029,
+          "rms_residual_pdf_points": 0.0007211780831119499,
+          "alternating_label_holdout_max_pdf_points": 0.0025736491370480508
+        },
+        "N": {
+          "slope_points_per_degree": 1808.6605486188535,
+          "intercept_points": -46069.99056134883,
+          "controls": 14,
+          "distinct_label_values": 7,
+          "max_residual_pdf_points": 0.003967285163525958,
+          "rms_residual_pdf_points": 0.002123200741674865,
+          "alternating_label_holdout_max_pdf_points": 0.005047607432061341
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            95.0,
+            95.83333333333333
+          ],
+          "target_degrees": 95.25377051181313,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            25.666666666666668,
+            26.666666666666668
+          ],
+          "target_degrees": 26.67667680362022,
+          "extrapolation_beyond_label_range_degrees": 0.010010136953553683
+        }
+      },
+      "review_panel": "reviewed-Lahe-031.png",
+      "review_contact_sheet": "contact-01.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    }
+  ]
+}
