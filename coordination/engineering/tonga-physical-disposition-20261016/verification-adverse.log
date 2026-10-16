@@ -1,0 +1,54 @@
+missing-literal: rejected (exit 1)
+Traceback (most recent call last):
+  File "<review-packet>/verify-dispositions.py", line 97, in <module>
+    assert len(literals) == len(literal_map) == 1984
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+false-water-approval: rejected (exit 1)
+Traceback (most recent call last):
+  File "<review-packet>/verify-dispositions.py", line 128, in <module>
+    assert cell['land_or_water_classification'] is None
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+corrupt-source-pin: rejected (exit 1)
+Traceback (most recent call last):
+  File "<review-packet>/verify-dispositions.py", line 62, in <module>
+    inputs = {name: read_pin(pin) for name, pin in bindings['inputs'].items()}
+                    ^^^^^^^^^^^^^
+  File "<review-packet>/verify-dispositions.py", line 29, in read_pin
+    assert len(raw) == pin['bytes'] and hashlib.sha256(raw).hexdigest() == pin['sha256']
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+incorrect-native-coordinate: rejected (exit 1)
+Traceback (most recent call last):
+  File "<review-packet>/verify-dispositions.py", line 125, in <module>
+    assert cell['longitude'] == longitude and cell['latitude'] == latitude
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+corrupt-queue-pin: rejected (exit 1)
+Traceback (most recent call last):
+  File "<review-packet>/verify-dispositions.py", line 45, in <module>
+    queue_bodies[name] = read_pin(pin)
+                         ^^^^^^^^^^^^^
+  File "<review-packet>/verify-dispositions.py", line 29, in read_pin
+    assert len(raw) == pin['bytes'] and hashlib.sha256(raw).hexdigest() == pin['sha256']
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+false-package-scope: rejected (exit 1)
+Traceback (most recent call last):
+  File "<review-packet>/verify-dispositions.py", line 58, in <module>
+    assert (extracted / 'package.json').read_bytes() == (packet / 'package.json').read_bytes()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+changed-frozen-block: rejected (exit 1)
+Traceback (most recent call last):
+  File "<review-packet>/verify-dispositions.py", line 60, in <module>
+    assert (extracted / f'block-{block:03d}.json.gz').read_bytes() == (packet / f'frozen-block-{block:03d}.json.gz').read_bytes()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
