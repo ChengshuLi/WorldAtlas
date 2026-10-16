@@ -1,0 +1,69 @@
+{
+  "verdict": "PASS_WITH_ONE_CONSEQUENTIAL_NARROWING",
+  "independent_reviewer": "/root/remaining474_malinau_mahakam105",
+  "author": "/root/cell_method_review",
+  "candidate": {
+    "file": "idn-physical-dated778-plan-001/worker2-bulungan131-actual-review/proposed-bulungan131-dated-dispositions.jsonl.gz",
+    "bytes": 116164,
+    "sha256": "2244fe3c1f44065fb7dbe8b110b4412a3f439e3d1820e0d51ca32ad4fa488df1"
+  },
+  "scope": 131,
+  "author_proposed_answers": 63,
+  "scientifically_supported_answers": 62,
+  "supported_facets": {
+    "vegetation_or_canopy": 29,
+    "visible_water_like_body": 21,
+    "exposed_or_constructed_surface_corridor": 12
+  },
+  "deferred_author_positive": [
+    {
+      "original_key": {
+        "owner": 22698,
+        "y": 129024,
+        "x": 216756
+      },
+      "original_point_index": 7228,
+      "author_manual_code": "L",
+      "author_bounded_answer": "Visible exposed/constructed corridor or surface at the dated source point.",
+      "independent_status": "DEFER_AS_UNRESOLVED",
+      "reason": "The exact fractional marker is at the transition between the red vegetated strip and broad brown low-NIR body. The saved17/49native contexts do not show an unambiguous exposed constructed corridor under this point; the bare-bank versus turbid/shallow-water or mixed fringe placement is still material. A nearby corridor is not a positive body location for the marked centre. No new legal/tide/substrate prerequisite is imposed."
+    }
+  ],
+  "remaining_questions": 69,
+  "original22_actual_nodata_preserved_unknown": true,
+  "original68_unknown_answers_promoted": false,
+  "original131_full_record_and_separate_holds_preserved": true,
+  "actual_raw_point_observations_preserved": true,
+  "actual_review": "All6saved49pixelcontext sheets and all10saved17pixeldetail sheets independently visually examined; SCL labels not used as automatictruth. No rerender/source/native/HTTP operations.",
+  "source_date": "2020-02-22T02:36:53.904000Z",
+  "item": "S2B_50NNJ_20200222_0_L2A",
+  "source_version_location": "Unchanged original22698Bulungan source-native association, notnewstrictgeometry/currentjurisdiction/legalownership orwholecelltruth.",
+  "native_scope_limits": [
+    "Datednative10m support, not survey registration or exact subpixel bank reconstruction.",
+    "Canopy does not establish dry substrate.",
+    "Water-like body does not establish permanence, hydrologic kind, tide, name or bank.",
+    "Exposed/constructed surface does not establish material, engineering function or permanent dryness.",
+    "No annual-composite orSCL fallback; PB02fixed display only, no index or quantitative truth gate."
+  ],
+  "formal_root_adoption": null,
+  "native_or_repair_or_accepted_credit": 0,
+  "source_or_producer_or_native_calls": 0,
+  "author_proposal_edited": false,
+  "outputs": [
+    {
+      "file": "scientifically-supported62-original-keys.jsonl",
+      "bytes": 16797,
+      "sha256": "90a28e67dfa99fd47d05e2d7d87605c0b86857e3affbcb61565a4bcfed926a9a"
+    },
+    {
+      "file": "deferred1-original-key.jsonl",
+      "bytes": 691,
+      "sha256": "cafedd51907a91fbd1eaff063af0ce3af76df18289e145aa65369ff105515c23"
+    },
+    {
+      "file": "remaining-original69-question-keys.jsonl",
+      "bytes": 10007,
+      "sha256": "f0abb30b41b3b4976a668e090b5123c97a287c5f22540ff35a32e97f2113bfad"
+    }
+  ]
+}

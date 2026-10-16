@@ -1,0 +1,211 @@
+{
+  "kind": "four-fine-and-three-country-validity-plus-original-catalogue-context",
+  "pins": [
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+      "bytes": 4719659,
+      "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075"
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IDN-ADM2-000.bin.gz",
+      "bytes": 3051391,
+      "sha256": "ef394916ba97454b5592e66eba1df67199731ce7d9636cc3968843801ae904a8"
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MYS-ADM2-000.bin.gz",
+      "bytes": 293141,
+      "sha256": "825f65a4ca40cdc12d5914e07f5153d606d2d0a06c7c76d4ac12c729c0920ee6"
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-PNG-ADM3-000.bin.gz",
+      "bytes": 614771,
+      "sha256": "a549dbcb1c0f84f1bafaee70e2d9853f6458421433ca3efeee6739d5e1056384"
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+      "bytes": 403376,
+      "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9"
+    }
+  ],
+  "country_geometry": [
+    {
+      "country": "IDN",
+      "valid": true,
+      "validity": "Valid Geometry",
+      "empty": false,
+      "bounds": [
+        95.012706,
+        -10.922621,
+        140.977627,
+        5.910102
+      ]
+    },
+    {
+      "country": "MYS",
+      "valid": true,
+      "validity": "Valid Geometry",
+      "empty": false,
+      "bounds": [
+        99.645228,
+        0.85137,
+        119.278087,
+        7.35578
+      ]
+    },
+    {
+      "country": "PNG",
+      "valid": true,
+      "validity": "Valid Geometry",
+      "empty": false,
+      "bounds": [
+        140.849211,
+        -11.636326,
+        155.96754,
+        -1.346368
+      ]
+    }
+  ],
+  "fine_geometry": [
+    {
+      "id": "gb:IDN:ADM2:22746128B65756496772256",
+      "valid": true,
+      "validity": "Valid Geometry",
+      "empty": false,
+      "bounds": [
+        137.640274,
+        -9.12036269999993,
+        141.0194,
+        -6.618179099999963
+      ],
+      "geometry_sha256": "6ddff4895ad2a03a0eb8ef4c7f1d73ddc8653469ec2918dfbc1f3621e18d4d48"
+    },
+    {
+      "id": "gb:IDN:ADM2:22746128B74989070523542",
+      "valid": true,
+      "validity": "Valid Geometry",
+      "empty": false,
+      "bounds": [
+        109.834741,
+        -0.498427199999981,
+        111.05382580000008,
+        1.199933100000067
+      ],
+      "geometry_sha256": "4512a95e12193c636629d49f650b7791f7c2b9f7db2a0ab72343c98265ca080d"
+    },
+    {
+      "id": "gb:MYS:ADM2:92858781B78299501514110",
+      "valid": true,
+      "validity": "Valid Geometry",
+      "empty": false,
+      "bounds": [
+        110.27280993700003,
+        0.855363806000071,
+        110.63367994700008,
+        1.225560554000026
+      ],
+      "geometry_sha256": "0b9c25f08c3c3340cdf88062d0055465ba3a8ef8af4066589cad465d36148580"
+    },
+    {
+      "id": "gb:PNG:ADM3:22992897B97542007702415",
+      "valid": true,
+      "validity": "Valid Geometry",
+      "empty": false,
+      "bounds": [
+        140.84389404,
+        -7.658424989999958,
+        142.13264292000008,
+        -6.175608029999978
+      ],
+      "geometry_sha256": "01c7722f5f7ec0bb2597dddf36f38cc298b190f6ff4f56ab47a5eeb548e4e29c"
+    }
+  ],
+  "catalogue_products": [
+    {
+      "advertised_feature_count": 519,
+      "cohort": "administrative-registry",
+      "feature_count": 519,
+      "key": "gb:IDN:ADM2",
+      "metadata_sha256": "d013dc8421984003f0466cedb71895d3914882a5d7a544a41bf97144f811e36f",
+      "original_bytes": 11002896,
+      "original_metadata_file": "data/administrative-sources.json",
+      "original_sha256": "146653d488331086ddc43d159a261b01ea6dd08c7ed422e34a9886c3c690430c",
+      "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+      "parts": [
+        {
+          "bytes": 3051391,
+          "hash_kind": "file-bytes",
+          "offset": 0,
+          "ordinal": 0,
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IDN-ADM2-000.bin.gz",
+          "sha256": "ef394916ba97454b5592e66eba1df67199731ce7d9636cc3968843801ae904a8",
+          "uncompressed_bytes": 11002896,
+          "uncompressed_sha256": "146653d488331086ddc43d159a261b01ea6dd08c7ed422e34a9886c3c690430c"
+        }
+      ],
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IDN/ADM2/geoBoundaries-IDN-ADM2_simplified.geojson",
+      "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "source_represented_year_claim": "2020"
+    },
+    {
+      "advertised_feature_count": 160,
+      "cohort": "administrative-registry",
+      "feature_count": 159,
+      "key": "gb:MYS:ADM2",
+      "metadata_sha256": "98c0b38c9d4791def1d5ab9ade4a6bc7dc31aa394c1d5e4ea7bc445333167ad6",
+      "original_bytes": 1161210,
+      "original_metadata_file": "data/administrative-sources.json",
+      "original_sha256": "2370e1df1da8e8db2d582ea404d2bcb538127a01785dd994cbe4c1bbf33a951f",
+      "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+      "parts": [
+        {
+          "bytes": 293141,
+          "hash_kind": "file-bytes",
+          "offset": 0,
+          "ordinal": 0,
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MYS-ADM2-000.bin.gz",
+          "sha256": "825f65a4ca40cdc12d5914e07f5153d606d2d0a06c7c76d4ac12c729c0920ee6",
+          "uncompressed_bytes": 1161210,
+          "uncompressed_sha256": "2370e1df1da8e8db2d582ea404d2bcb538127a01785dd994cbe4c1bbf33a951f"
+        }
+      ],
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MYS/ADM2/geoBoundaries-MYS-ADM2_simplified.geojson",
+      "recorded_license": "Creative Commons Attribution 3.0 License",
+      "source_represented_year_claim": "2020"
+    },
+    {
+      "advertised_feature_count": 326,
+      "cohort": "administrative-registry",
+      "feature_count": 326,
+      "key": "gb:PNG:ADM3",
+      "metadata_sha256": "260de99473d950eb285e61f9cfb6ea1ce45818a0117357313c86d42489b476aa",
+      "original_bytes": 2197437,
+      "original_metadata_file": "data/administrative-sources.json",
+      "original_sha256": "c3a6d49a9f6c150c66a745aa12fff624dcc10a8f67b2478e1f99997f89856590",
+      "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+      "parts": [
+        {
+          "bytes": 614771,
+          "hash_kind": "file-bytes",
+          "offset": 0,
+          "ordinal": 0,
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-PNG-ADM3-000.bin.gz",
+          "sha256": "a549dbcb1c0f84f1bafaee70e2d9853f6458421433ca3efeee6739d5e1056384",
+          "uncompressed_bytes": 2197437,
+          "uncompressed_sha256": "c3a6d49a9f6c150c66a745aa12fff624dcc10a8f67b2478e1f99997f89856590"
+        }
+      ],
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/PNG/ADM3/geoBoundaries-PNG-ADM3_simplified.geojson",
+      "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "source_represented_year_claim": "2019"
+    }
+  ],
+  "no_geometric_changes": true,
+  "elapsed_seconds": 0.7364713310089428,
+  "maximum_rss_kib_self_only": 198816,
+  "scope_limit": "Validity and catalogue context only; not a sovereign-boundary finding or full current competitor scan."
+}

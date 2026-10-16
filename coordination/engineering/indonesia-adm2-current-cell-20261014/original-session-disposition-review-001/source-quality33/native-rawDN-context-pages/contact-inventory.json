@@ -1,0 +1,2748 @@
+{
+  "scope": 33,
+  "source_plan_sha256": "c9af923499de2aeef4ecfa01fd4c3daccb9ddb2f7b1be879463e908bff369076",
+  "current_original_Batam_held_scope": 105,
+  "prior_actual_cloud_haze_held_cohort": 33,
+  "new_PB05_raw_only_hold_count": 5,
+  "pages": [
+    {
+      "page_1based": 1,
+      "file": "native-rawDN-context-pages/batam-next33-rawDN-01.png",
+      "bytes": 311634,
+      "sha256": "762065878131acbeba952016ac8174866fdb822b87aa85ab8618cba51bf642de",
+      "panels": [
+        {
+          "global_index_zero_based": 0,
+          "panel_1based": 1,
+          "point_index": 15876,
+          "original_key": {
+            "owner": 22727,
+            "y": 130425,
+            "x": 206851
+          },
+          "item_id": "S2A_48NUF_20200126_0_L2A",
+          "acquisition_datetime": "2020-01-26T03:37:54.843000Z",
+          "raw_RGBNIR": [
+            1892,
+            1898,
+            1698,
+            2318
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 8,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.655065897510212,
+            24.015884999571426
+          ],
+          "native_requested_window": [
+            9333,
+            -3,
+            49,
+            49
+          ],
+          "context_complete": false,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUF_20200126_0_L2A/red/block-00-09.npz",
+              "bytes": 1323967,
+              "sha256": "01f0beb0f2a19708833c6658d1ff5debcd246fac6277e2bf011a226c48b2225f"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUF_20200126_0_L2A/green/block-00-09.npz",
+              "bytes": 1210300,
+              "sha256": "16032622cb3a86de747d572f05e1d575a83991c78799b6cfb54c4b6502790a0e"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUF_20200126_0_L2A/blue/block-00-09.npz",
+              "bytes": 1224524,
+              "sha256": "f76d9990d2caaf1c99bf38bd4786e46ab9d30ec14eee16041988614517bd4bb9"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUF_20200126_0_L2A/nir/block-00-09.npz",
+              "bytes": 1320369,
+              "sha256": "d9a5c706c93d8145d9290c92ff69506016e6975576f1535e3e8ff0a94b3f39ab"
+            }
+          ],
+          "native_scl_requested_window": [
+            4666,
+            -2,
+            25,
+            25
+          ],
+          "native_scl_available_window": [
+            4666,
+            0,
+            25,
+            23
+          ]
+        },
+        {
+          "global_index_zero_based": 1,
+          "panel_1based": 2,
+          "point_index": 18887,
+          "original_key": {
+            "owner": 22727,
+            "y": 130623,
+            "x": 206845
+          },
+          "item_id": "S2A_48NUF_20200126_0_L2A",
+          "acquisition_datetime": "2020-01-26T03:37:54.843000Z",
+          "raw_RGBNIR": [
+            362,
+            664,
+            569,
+            276
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 6,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.98125375608197,
+            24.656785468607268
+          ],
+          "native_requested_window": [
+            9240,
+            3002,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUF_20200126_0_L2A/red/block-02-09.npz",
+              "bytes": 1187752,
+              "sha256": "1912e9bfb59ff6fde8dd69523ba44fdc31309808226430db42c67a26ce5fe8f9"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUF_20200126_0_L2A/green/block-02-09.npz",
+              "bytes": 1158827,
+              "sha256": "0b063d8ef1612e5c788d714262083cfd3213db5e82b8e1d8c5bff65451dc4f3d"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUF_20200126_0_L2A/blue/block-02-09.npz",
+              "bytes": 1129519,
+              "sha256": "62376dfab2f707c7be79350717b7a45aed900065911b14993a58ec22eb7f2590"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUF_20200126_0_L2A/nir/block-02-09.npz",
+              "bytes": 1143788,
+              "sha256": "ebd83cfa1c9db5ccfae85375065f1c18884b8fd92dbe15c298b4434c966e63f4"
+            }
+          ],
+          "native_scl_requested_window": [
+            4620,
+            1501,
+            25,
+            25
+          ],
+          "native_scl_available_window": [
+            4620,
+            1501,
+            25,
+            25
+          ]
+        },
+        {
+          "global_index_zero_based": 2,
+          "panel_1based": 3,
+          "point_index": 12136,
+          "original_key": {
+            "owner": 22727,
+            "y": 130229,
+            "x": 206739
+          },
+          "item_id": "S2A_48NUG_20200205_0_L2A",
+          "acquisition_datetime": "2020-02-05T03:37:38.805000Z",
+          "raw_RGBNIR": [
+            901,
+            965,
+            579,
+            2126
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 7,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.254360977825854,
+            24.629222624273098
+          ],
+          "native_requested_window": [
+            7622,
+            7024,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/red/block-06-07.npz",
+              "bytes": 1256827,
+              "sha256": "27d8755cbcc5cad8f33abba40060463b6eddeef05ac7465f35f7f75fb4406a74"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/green/block-06-07.npz",
+              "bytes": 1285334,
+              "sha256": "d64d7d1b7f7a11e7db620d1b5d69f76c55fb45f070669d8669dadcca60c59bc9"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/blue/block-06-07.npz",
+              "bytes": 1284257,
+              "sha256": "b50af785a7f870e1fc87f6401c5d086df6f14a3be765d3ba1aedacfdc7ae3dce"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/nir/block-06-07.npz",
+              "bytes": 1231371,
+              "sha256": "bed1afedf3b9a2d2621666369f18923a5479ff8bb4bf484fe666bf043ab097cf"
+            }
+          ],
+          "native_scl_requested_window": [
+            3811,
+            3512,
+            25,
+            25
+          ],
+          "native_scl_available_window": [
+            3811,
+            3512,
+            25,
+            25
+          ]
+        },
+        {
+          "global_index_zero_based": 3,
+          "panel_1based": 4,
+          "point_index": 12162,
+          "original_key": {
+            "owner": 22727,
+            "y": 130235,
+            "x": 206732
+          },
+          "item_id": "S2A_48NUG_20200205_0_L2A",
+          "acquisition_datetime": "2020-02-05T03:37:38.805000Z",
+          "raw_RGBNIR": [
+            1198,
+            1212,
+            821,
+            1966
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 6,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.27705192000758,
+            24.634728382901812
+          ],
+          "native_requested_window": [
+            7515,
+            7115,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/red/block-06-07.npz",
+              "bytes": 1256827,
+              "sha256": "27d8755cbcc5cad8f33abba40060463b6eddeef05ac7465f35f7f75fb4406a74"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/green/block-06-07.npz",
+              "bytes": 1285334,
+              "sha256": "d64d7d1b7f7a11e7db620d1b5d69f76c55fb45f070669d8669dadcca60c59bc9"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/blue/block-06-07.npz",
+              "bytes": 1284257,
+              "sha256": "b50af785a7f870e1fc87f6401c5d086df6f14a3be765d3ba1aedacfdc7ae3dce"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/nir/block-06-07.npz",
+              "bytes": 1231371,
+              "sha256": "bed1afedf3b9a2d2621666369f18923a5479ff8bb4bf484fe666bf043ab097cf"
+            }
+          ],
+          "native_scl_requested_window": [
+            3757,
+            3557,
+            25,
+            25
+          ],
+          "native_scl_available_window": [
+            3757,
+            3557,
+            25,
+            25
+          ]
+        },
+        {
+          "global_index_zero_based": 4,
+          "panel_1based": 5,
+          "point_index": 12242,
+          "original_key": {
+            "owner": 22727,
+            "y": 130244,
+            "x": 206733
+          },
+          "item_id": "S2A_48NUG_20200205_0_L2A",
+          "acquisition_datetime": "2020-02-05T03:37:38.805000Z",
+          "raw_RGBNIR": [
+            748,
+            703,
+            582,
+            1698
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 6,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.881447304302128,
+            24.86066079341981
+          ],
+          "native_requested_window": [
+            7530,
+            7251,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/red/block-07-07.npz",
+              "bytes": 1492241,
+              "sha256": "93af7fbabc108b9956286dc9b1a82cfa566fb880605854f7ce8c563bcdb0fd89"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/green/block-07-07.npz",
+              "bytes": 1503322,
+              "sha256": "b873232eaecf84756b2cb9a91bfe89804545cda782e94764c28000eb4d2e2176"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/blue/block-07-07.npz",
+              "bytes": 1496116,
+              "sha256": "c4ecb2ada6b952285bd5c2356aa83cf1d21ec4f132ee414c0d3f42e09f1265af"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/nir/block-07-07.npz",
+              "bytes": 1475154,
+              "sha256": "7942d872d9fb1c2f7571c4d8228c5ad8477a45940b579082edb694721af46f1c"
+            }
+          ],
+          "native_scl_requested_window": [
+            3765,
+            3625,
+            25,
+            25
+          ],
+          "native_scl_available_window": [
+            3765,
+            3625,
+            25,
+            25
+          ]
+        },
+        {
+          "global_index_zero_based": 5,
+          "panel_1based": 6,
+          "point_index": 12300,
+          "original_key": {
+            "owner": 22727,
+            "y": 130249,
+            "x": 206809
+          },
+          "item_id": "S2A_48NUG_20200205_0_L2A",
+          "acquisition_datetime": "2020-02-05T03:37:38.805000Z",
+          "raw_RGBNIR": [
+            1017,
+            924,
+            646,
+            1970
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 5,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.201400092475524,
+            24.083981593881617
+          ],
+          "native_requested_window": [
+            8692,
+            7328,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/red/block-07-08.npz",
+              "bytes": 1648533,
+              "sha256": "3cd4b0d078d8917c95b6f7a401de9ef381f8258b29f1e3f49a85946f0093119c"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/green/block-07-08.npz",
+              "bytes": 1641817,
+              "sha256": "1519f26d2a0cfd222d3c3be25ad410f576b735264352ee1fbf20427b648a5d7b"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/blue/block-07-08.npz",
+              "bytes": 1633306,
+              "sha256": "11cc10f726f7e09ef6b115b855814db29eb2db20db02f6520791ade8edab5a2a"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/nir/block-07-08.npz",
+              "bytes": 1647930,
+              "sha256": "1ea2e66a4a0be58bff5dd06dc67550475e3d3bea048ed0aa5dfbf0771ea40316"
+            }
+          ],
+          "native_scl_requested_window": [
+            4346,
+            3664,
+            25,
+            25
+          ],
+          "native_scl_available_window": [
+            4346,
+            3664,
+            25,
+            25
+          ]
+        },
+        {
+          "global_index_zero_based": 6,
+          "panel_1based": 7,
+          "point_index": 12304,
+          "original_key": {
+            "owner": 22727,
+            "y": 130250,
+            "x": 206739
+          },
+          "item_id": "S2A_48NUG_20200205_0_L2A",
+          "acquisition_datetime": "2020-02-05T03:37:38.805000Z",
+          "raw_RGBNIR": [
+            794,
+            760,
+            616,
+            836
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 6,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.982904432346913,
+            24.504433513997355
+          ],
+          "native_requested_window": [
+            7622,
+            7342,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/red/block-07-07.npz",
+              "bytes": 1492241,
+              "sha256": "93af7fbabc108b9956286dc9b1a82cfa566fb880605854f7ce8c563bcdb0fd89"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/green/block-07-07.npz",
+              "bytes": 1503322,
+              "sha256": "b873232eaecf84756b2cb9a91bfe89804545cda782e94764c28000eb4d2e2176"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/blue/block-07-07.npz",
+              "bytes": 1496116,
+              "sha256": "c4ecb2ada6b952285bd5c2356aa83cf1d21ec4f132ee414c0d3f42e09f1265af"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/nir/block-07-07.npz",
+              "bytes": 1475154,
+              "sha256": "7942d872d9fb1c2f7571c4d8228c5ad8477a45940b579082edb694721af46f1c"
+            }
+          ],
+          "native_scl_requested_window": [
+            3811,
+            3671,
+            25,
+            25
+          ],
+          "native_scl_available_window": [
+            3811,
+            3671,
+            25,
+            25
+          ]
+        },
+        {
+          "global_index_zero_based": 7,
+          "panel_1based": 8,
+          "point_index": 12349,
+          "original_key": {
+            "owner": 22727,
+            "y": 130254,
+            "x": 206872
+          },
+          "item_id": "S2A_48NUG_20200205_0_L2A",
+          "acquisition_datetime": "2020-02-05T03:37:38.805000Z",
+          "raw_RGBNIR": [
+            955,
+            962,
+            762,
+            1126
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 6,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.411093880567933,
+            24.648414027564286
+          ],
+          "native_requested_window": [
+            9654,
+            7404,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/red/block-07-09.npz",
+              "bytes": 1692256,
+              "sha256": "a141b28d581456ad22c54e4050b1930d32c40737e2a467cdd2ba2dc30c9ae0c9"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/green/block-07-09.npz",
+              "bytes": 1670377,
+              "sha256": "62c2dbf9e9a725f1f12f12b97848b3edb7741d24c48c4b99cd6c9317eecaea51"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/blue/block-07-09.npz",
+              "bytes": 1664403,
+              "sha256": "d98a1623005f474bdadb8fac0687834e9b17d14b2c4f95acd55741fe16120530"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/nir/block-07-09.npz",
+              "bytes": 1689096,
+              "sha256": "b490150d1e2848efea110cc9781a849b5600a2a0e194e5b331c8c861ea56fb16"
+            }
+          ],
+          "native_scl_requested_window": [
+            4827,
+            3702,
+            25,
+            25
+          ],
+          "native_scl_available_window": [
+            4827,
+            3702,
+            25,
+            25
+          ]
+        },
+        {
+          "global_index_zero_based": 8,
+          "panel_1based": 9,
+          "point_index": 12388,
+          "original_key": {
+            "owner": 22727,
+            "y": 130257,
+            "x": 206864
+          },
+          "item_id": "S2A_48NUG_20200205_0_L2A",
+          "acquisition_datetime": "2020-02-05T03:37:38.805000Z",
+          "raw_RGBNIR": [
+            793,
+            745,
+            535,
+            1336
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 6,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.90210366007159,
+            24.401187151561317
+          ],
+          "native_requested_window": [
+            9532,
+            7449,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/red/block-07-09.npz",
+              "bytes": 1692256,
+              "sha256": "a141b28d581456ad22c54e4050b1930d32c40737e2a467cdd2ba2dc30c9ae0c9"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/green/block-07-09.npz",
+              "bytes": 1670377,
+              "sha256": "62c2dbf9e9a725f1f12f12b97848b3edb7741d24c48c4b99cd6c9317eecaea51"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/blue/block-07-09.npz",
+              "bytes": 1664403,
+              "sha256": "d98a1623005f474bdadb8fac0687834e9b17d14b2c4f95acd55741fe16120530"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/nir/block-07-09.npz",
+              "bytes": 1689096,
+              "sha256": "b490150d1e2848efea110cc9781a849b5600a2a0e194e5b331c8c861ea56fb16"
+            }
+          ],
+          "native_scl_requested_window": [
+            4766,
+            3724,
+            25,
+            25
+          ],
+          "native_scl_available_window": [
+            4766,
+            3724,
+            25,
+            25
+          ]
+        },
+        {
+          "global_index_zero_based": 9,
+          "panel_1based": 10,
+          "point_index": 12467,
+          "original_key": {
+            "owner": 22727,
+            "y": 130263,
+            "x": 206740
+          },
+          "item_id": "S2A_48NUG_20200205_0_L2A",
+          "acquisition_datetime": "2020-02-05T03:37:38.805000Z",
+          "raw_RGBNIR": [
+            350,
+            549,
+            410,
+            749
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 2,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.29844026887622,
+            24.708703919503023
+          ],
+          "native_requested_window": [
+            7637,
+            7540,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/red/block-07-07.npz",
+              "bytes": 1492241,
+              "sha256": "93af7fbabc108b9956286dc9b1a82cfa566fb880605854f7ce8c563bcdb0fd89"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/green/block-07-07.npz",
+              "bytes": 1503322,
+              "sha256": "b873232eaecf84756b2cb9a91bfe89804545cda782e94764c28000eb4d2e2176"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/blue/block-07-07.npz",
+              "bytes": 1496116,
+              "sha256": "c4ecb2ada6b952285bd5c2356aa83cf1d21ec4f132ee414c0d3f42e09f1265af"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/nir/block-07-07.npz",
+              "bytes": 1475154,
+              "sha256": "7942d872d9fb1c2f7571c4d8228c5ad8477a45940b579082edb694721af46f1c"
+            }
+          ],
+          "native_scl_requested_window": [
+            3818,
+            3770,
+            25,
+            25
+          ],
+          "native_scl_available_window": [
+            3818,
+            3770,
+            25,
+            25
+          ]
+        },
+        {
+          "global_index_zero_based": 10,
+          "panel_1based": 11,
+          "point_index": 12479,
+          "original_key": {
+            "owner": 22727,
+            "y": 130264,
+            "x": 206741
+          },
+          "item_id": "S2A_48NUG_20200205_0_L2A",
+          "acquisition_datetime": "2020-02-05T03:37:38.805000Z",
+          "raw_RGBNIR": [
+            330,
+            533,
+            334,
+            1166
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 6,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.481951350462623,
+            24.98290179439209
+          ],
+          "native_requested_window": [
+            7652,
+            7555,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/red/block-07-07.npz",
+              "bytes": 1492241,
+              "sha256": "93af7fbabc108b9956286dc9b1a82cfa566fb880605854f7ce8c563bcdb0fd89"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/green/block-07-07.npz",
+              "bytes": 1503322,
+              "sha256": "b873232eaecf84756b2cb9a91bfe89804545cda782e94764c28000eb4d2e2176"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/blue/block-07-07.npz",
+              "bytes": 1496116,
+              "sha256": "c4ecb2ada6b952285bd5c2356aa83cf1d21ec4f132ee414c0d3f42e09f1265af"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/nir/block-07-07.npz",
+              "bytes": 1475154,
+              "sha256": "7942d872d9fb1c2f7571c4d8228c5ad8477a45940b579082edb694721af46f1c"
+            }
+          ],
+          "native_scl_requested_window": [
+            3826,
+            3777,
+            25,
+            25
+          ],
+          "native_scl_available_window": [
+            3826,
+            3777,
+            25,
+            25
+          ]
+        },
+        {
+          "global_index_zero_based": 11,
+          "panel_1based": 12,
+          "point_index": 12493,
+          "original_key": {
+            "owner": 22727,
+            "y": 130265,
+            "x": 206734
+          },
+          "item_id": "S2A_48NUG_20200205_0_L2A",
+          "acquisition_datetime": "2020-02-05T03:37:38.805000Z",
+          "raw_RGBNIR": [
+            1086,
+            1030,
+            659,
+            1760
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 7,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.61897844194027,
+            24.01720181712153
+          ],
+          "native_requested_window": [
+            7546,
+            7570,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/red/block-07-07.npz",
+              "bytes": 1492241,
+              "sha256": "93af7fbabc108b9956286dc9b1a82cfa566fb880605854f7ce8c563bcdb0fd89"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/green/block-07-07.npz",
+              "bytes": 1503322,
+              "sha256": "b873232eaecf84756b2cb9a91bfe89804545cda782e94764c28000eb4d2e2176"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/blue/block-07-07.npz",
+              "bytes": 1496116,
+              "sha256": "c4ecb2ada6b952285bd5c2356aa83cf1d21ec4f132ee414c0d3f42e09f1265af"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/nir/block-07-07.npz",
+              "bytes": 1475154,
+              "sha256": "7942d872d9fb1c2f7571c4d8228c5ad8477a45940b579082edb694721af46f1c"
+            }
+          ],
+          "native_scl_requested_window": [
+            3773,
+            3785,
+            25,
+            25
+          ],
+          "native_scl_available_window": [
+            3773,
+            3785,
+            25,
+            25
+          ]
+        },
+        {
+          "global_index_zero_based": 12,
+          "panel_1based": 13,
+          "point_index": 12590,
+          "original_key": {
+            "owner": 22727,
+            "y": 130276,
+            "x": 206768
+          },
+          "item_id": "S2A_48NUG_20200205_0_L2A",
+          "acquisition_datetime": "2020-02-05T03:37:38.805000Z",
+          "raw_RGBNIR": [
+            877,
+            900,
+            647,
+            656
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 2,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.76653934297792,
+            24.473003299128322
+          ],
+          "native_requested_window": [
+            8065,
+            7737,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/red/block-07-07.npz",
+              "bytes": 1492241,
+              "sha256": "93af7fbabc108b9956286dc9b1a82cfa566fb880605854f7ce8c563bcdb0fd89"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/green/block-07-07.npz",
+              "bytes": 1503322,
+              "sha256": "b873232eaecf84756b2cb9a91bfe89804545cda782e94764c28000eb4d2e2176"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/blue/block-07-07.npz",
+              "bytes": 1496116,
+              "sha256": "c4ecb2ada6b952285bd5c2356aa83cf1d21ec4f132ee414c0d3f42e09f1265af"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/nir/block-07-07.npz",
+              "bytes": 1475154,
+              "sha256": "7942d872d9fb1c2f7571c4d8228c5ad8477a45940b579082edb694721af46f1c"
+            }
+          ],
+          "native_scl_requested_window": [
+            4032,
+            3868,
+            25,
+            25
+          ],
+          "native_scl_available_window": [
+            4032,
+            3868,
+            25,
+            25
+          ]
+        },
+        {
+          "global_index_zero_based": 13,
+          "panel_1based": 14,
+          "point_index": 13610,
+          "original_key": {
+            "owner": 22727,
+            "y": 130333,
+            "x": 206892
+          },
+          "item_id": "S2A_48NUG_20200205_0_L2A",
+          "acquisition_datetime": "2020-02-05T03:37:38.805000Z",
+          "raw_RGBNIR": [
+            2362,
+            2554,
+            2580,
+            2836
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 8,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.486285018647322,
+            24.87164985306299
+          ],
+          "native_requested_window": [
+            9959,
+            8603,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/red/block-08-09.npz",
+              "bytes": 1646339,
+              "sha256": "7de7fda007b546e5a88eb83c67299711516e6f28ade3c99ce76fca07c66f07f6"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/green/block-08-09.npz",
+              "bytes": 1649402,
+              "sha256": "04dfb29bb5e55b30cdf0af9e93652f2a6b44e9a315265c908dbf7158bbc0db79"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/blue/block-08-09.npz",
+              "bytes": 1644483,
+              "sha256": "79c04ebcddca00145bef30e9ec1e05c6a04a41b421801c2a1a5f296018ef2f56"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/nir/block-08-09.npz",
+              "bytes": 1668452,
+              "sha256": "29c289dfb1d9312df68316bb7cd8a28acd5fb60b1126ba8dafc9c74a5e99312a"
+            }
+          ],
+          "native_scl_requested_window": [
+            4979,
+            4301,
+            25,
+            25
+          ],
+          "native_scl_available_window": [
+            4979,
+            4301,
+            25,
+            25
+          ]
+        },
+        {
+          "global_index_zero_based": 14,
+          "panel_1based": 15,
+          "point_index": 14255,
+          "original_key": {
+            "owner": 22727,
+            "y": 130350,
+            "x": 206797
+          },
+          "item_id": "S2A_48NUG_20200205_0_L2A",
+          "acquisition_datetime": "2020-02-05T03:37:38.805000Z",
+          "raw_RGBNIR": [
+            410,
+            615,
+            429,
+            2408
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 4,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.070267298522595,
+            24.213374772480165
+          ],
+          "native_requested_window": [
+            8508,
+            8861,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/red/block-08-08.npz",
+              "bytes": 1678669,
+              "sha256": "f7ec082ea08f5260c78bfc354ba81656f66dafac3d2b1836934d8b440eae7bf5"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/green/block-08-08.npz",
+              "bytes": 1673555,
+              "sha256": "aefb55d4de9c92a37fd3097057d7eebbeea7d97809ab7f2030c8273fde8a5278"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/blue/block-08-08.npz",
+              "bytes": 1672630,
+              "sha256": "e8b7cdc5b8766279516f2563c1cc87e9a840fcb77d7a6cff69b4b7d4ae99a28b"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/nir/block-08-08.npz",
+              "bytes": 1686800,
+              "sha256": "84bfd01e8fdb5578c7ea8d51c805aa270c8ef6d6682d5f1da422126d680db8dd"
+            }
+          ],
+          "native_scl_requested_window": [
+            4254,
+            4430,
+            25,
+            25
+          ],
+          "native_scl_available_window": [
+            4254,
+            4430,
+            25,
+            25
+          ]
+        },
+        {
+          "global_index_zero_based": 15,
+          "panel_1based": 16,
+          "point_index": 14348,
+          "original_key": {
+            "owner": 22727,
+            "y": 130353,
+            "x": 206692
+          },
+          "item_id": "S2A_48NUG_20200205_0_L2A",
+          "acquisition_datetime": "2020-02-05T03:37:38.805000Z",
+          "raw_RGBNIR": [
+            388,
+            529,
+            426,
+            995
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 6,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.06406432548465,
+            24.742265668654
+          ],
+          "native_requested_window": [
+            6903,
+            8906,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/red/block-08-06.npz",
+              "bytes": 1387556,
+              "sha256": "7527b8d8df3fbcc287610fd1b7c7e5d99fc80054a1686a7b8d11150e2c95a494"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/green/block-08-06.npz",
+              "bytes": 1424682,
+              "sha256": "30aeb551f325842447ac6418bebd34f809f03b6e4f0c8bee9e940d7f939213e8"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/blue/block-08-06.npz",
+              "bytes": 1427448,
+              "sha256": "5fdb2dc167ced406d9a141ab70fee97483383bdc54f1c2f87218f04bd8c6f947"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/nir/block-08-06.npz",
+              "bytes": 1495819,
+              "sha256": "629889ff1484d75696e0b11bc774bfaf195174597ff84553bc313fd03e7f0162"
+            }
+          ],
+          "native_scl_requested_window": [
+            3451,
+            4453,
+            25,
+            25
+          ],
+          "native_scl_available_window": [
+            3451,
+            4453,
+            25,
+            25
+          ]
+        },
+        {
+          "global_index_zero_based": 16,
+          "panel_1based": 17,
+          "point_index": 14605,
+          "original_key": {
+            "owner": 22727,
+            "y": 130365,
+            "x": 206881
+          },
+          "item_id": "S2A_48NUG_20200205_0_L2A",
+          "acquisition_datetime": "2020-02-05T03:37:38.805000Z",
+          "raw_RGBNIR": [
+            480,
+            656,
+            514,
+            1494
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 4,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.114246015531535,
+            24.660869763654773
+          ],
+          "native_requested_window": [
+            9791,
+            9089,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/red/block-08-09.npz",
+              "bytes": 1646339,
+              "sha256": "7de7fda007b546e5a88eb83c67299711516e6f28ade3c99ce76fca07c66f07f6"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/green/block-08-09.npz",
+              "bytes": 1649402,
+              "sha256": "04dfb29bb5e55b30cdf0af9e93652f2a6b44e9a315265c908dbf7158bbc0db79"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/blue/block-08-09.npz",
+              "bytes": 1644483,
+              "sha256": "79c04ebcddca00145bef30e9ec1e05c6a04a41b421801c2a1a5f296018ef2f56"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/nir/block-08-09.npz",
+              "bytes": 1668452,
+              "sha256": "29c289dfb1d9312df68316bb7cd8a28acd5fb60b1126ba8dafc9c74a5e99312a"
+            }
+          ],
+          "native_scl_requested_window": [
+            4895,
+            4544,
+            25,
+            25
+          ],
+          "native_scl_available_window": [
+            4895,
+            4544,
+            25,
+            25
+          ]
+        },
+        {
+          "global_index_zero_based": 17,
+          "panel_1based": 18,
+          "point_index": 14615,
+          "original_key": {
+            "owner": 22727,
+            "y": 130366,
+            "x": 206790
+          },
+          "item_id": "S2A_48NUG_20200205_0_L2A",
+          "acquisition_datetime": "2020-02-05T03:37:38.805000Z",
+          "raw_RGBNIR": [
+            2630,
+            2724,
+            2618,
+            3044
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 9,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.884224531844666,
+            24.175549247804156
+          ],
+          "native_requested_window": [
+            8401,
+            9103,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/red/block-08-08.npz",
+              "bytes": 1678669,
+              "sha256": "f7ec082ea08f5260c78bfc354ba81656f66dafac3d2b1836934d8b440eae7bf5"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/green/block-08-08.npz",
+              "bytes": 1673555,
+              "sha256": "aefb55d4de9c92a37fd3097057d7eebbeea7d97809ab7f2030c8273fde8a5278"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/blue/block-08-08.npz",
+              "bytes": 1672630,
+              "sha256": "e8b7cdc5b8766279516f2563c1cc87e9a840fcb77d7a6cff69b4b7d4ae99a28b"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/nir/block-08-08.npz",
+              "bytes": 1686800,
+              "sha256": "84bfd01e8fdb5578c7ea8d51c805aa270c8ef6d6682d5f1da422126d680db8dd"
+            }
+          ],
+          "native_scl_requested_window": [
+            4200,
+            4551,
+            25,
+            25
+          ],
+          "native_scl_available_window": [
+            4200,
+            4551,
+            25,
+            25
+          ]
+        },
+        {
+          "global_index_zero_based": 18,
+          "panel_1based": 19,
+          "point_index": 14741,
+          "original_key": {
+            "owner": 22727,
+            "y": 130372,
+            "x": 206852
+          },
+          "item_id": "S2A_48NUG_20200205_0_L2A",
+          "acquisition_datetime": "2020-02-05T03:37:38.805000Z",
+          "raw_RGBNIR": [
+            1556,
+            1750,
+            1584,
+            1542
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 8,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.233508034523766,
+            24.51598536590609
+          ],
+          "native_requested_window": [
+            9348,
+            9195,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/red/block-09-09.npz",
+              "bytes": 1607871,
+              "sha256": "b332d572dff90d8f05cad0f2caf5d653b72444b374c21323a846b20e769156cf"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/green/block-09-09.npz",
+              "bytes": 1602108,
+              "sha256": "2a18cf38068a2fc550958cd79f92ddb069a3b5de062fbf659ffa31e944b52176"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/blue/block-09-09.npz",
+              "bytes": 1605404,
+              "sha256": "c87c92fefe61dc14237cb9d2240fa6c7dbce97f35cdaae33cd21c5d9d357dad9"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/nir/block-09-09.npz",
+              "bytes": 1619678,
+              "sha256": "296f2d641dde3f5124fa9cc839482a4f6edca2999d86bb2b7f1d07a1340f6c3d"
+            }
+          ],
+          "native_scl_requested_window": [
+            4674,
+            4597,
+            25,
+            25
+          ],
+          "native_scl_available_window": [
+            4674,
+            4597,
+            25,
+            25
+          ]
+        },
+        {
+          "global_index_zero_based": 19,
+          "panel_1based": 20,
+          "point_index": 15116,
+          "original_key": {
+            "owner": 22727,
+            "y": 130382,
+            "x": 206870
+          },
+          "item_id": "S2A_48NUG_20200205_0_L2A",
+          "acquisition_datetime": "2020-02-05T03:37:38.805000Z",
+          "raw_RGBNIR": [
+            760,
+            1018,
+            644,
+            3298
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 4,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.086631835001754,
+            24.51232391753001
+          ],
+          "native_requested_window": [
+            9623,
+            9347,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/red/block-09-09.npz",
+              "bytes": 1607871,
+              "sha256": "b332d572dff90d8f05cad0f2caf5d653b72444b374c21323a846b20e769156cf"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/green/block-09-09.npz",
+              "bytes": 1602108,
+              "sha256": "2a18cf38068a2fc550958cd79f92ddb069a3b5de062fbf659ffa31e944b52176"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/blue/block-09-09.npz",
+              "bytes": 1605404,
+              "sha256": "c87c92fefe61dc14237cb9d2240fa6c7dbce97f35cdaae33cd21c5d9d357dad9"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/nir/block-09-09.npz",
+              "bytes": 1619678,
+              "sha256": "296f2d641dde3f5124fa9cc839482a4f6edca2999d86bb2b7f1d07a1340f6c3d"
+            }
+          ],
+          "native_scl_requested_window": [
+            4811,
+            4673,
+            25,
+            25
+          ],
+          "native_scl_available_window": [
+            4811,
+            4673,
+            25,
+            25
+          ]
+        },
+        {
+          "global_index_zero_based": 20,
+          "panel_1based": 21,
+          "point_index": 15216,
+          "original_key": {
+            "owner": 22727,
+            "y": 130386,
+            "x": 206878
+          },
+          "item_id": "S2A_48NUG_20200205_0_L2A",
+          "acquisition_datetime": "2020-02-05T03:37:38.805000Z",
+          "raw_RGBNIR": [
+            5332,
+            5532,
+            5620,
+            5172
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 9,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.830163953347437,
+            24.734998132800683
+          ],
+          "native_requested_window": [
+            9745,
+            9407,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/red/block-09-09.npz",
+              "bytes": 1607871,
+              "sha256": "b332d572dff90d8f05cad0f2caf5d653b72444b374c21323a846b20e769156cf"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/green/block-09-09.npz",
+              "bytes": 1602108,
+              "sha256": "2a18cf38068a2fc550958cd79f92ddb069a3b5de062fbf659ffa31e944b52176"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/blue/block-09-09.npz",
+              "bytes": 1605404,
+              "sha256": "c87c92fefe61dc14237cb9d2240fa6c7dbce97f35cdaae33cd21c5d9d357dad9"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/nir/block-09-09.npz",
+              "bytes": 1619678,
+              "sha256": "296f2d641dde3f5124fa9cc839482a4f6edca2999d86bb2b7f1d07a1340f6c3d"
+            }
+          ],
+          "native_scl_requested_window": [
+            4872,
+            4703,
+            25,
+            25
+          ],
+          "native_scl_available_window": [
+            4872,
+            4703,
+            25,
+            25
+          ]
+        },
+        {
+          "global_index_zero_based": 21,
+          "panel_1based": 22,
+          "point_index": 15268,
+          "original_key": {
+            "owner": 22727,
+            "y": 130389,
+            "x": 206840
+          },
+          "item_id": "S2A_48NUG_20200205_0_L2A",
+          "acquisition_datetime": "2020-02-05T03:37:38.805000Z",
+          "raw_RGBNIR": [
+            614,
+            830,
+            759,
+            479
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 10,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.203764585545287,
+            24.082590085941774
+          ],
+          "native_requested_window": [
+            9165,
+            9453,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/red/block-09-08.npz",
+              "bytes": 1469188,
+              "sha256": "e404e04b5e660cb055fd3cbcf83fef432ab9d58619a9efe2d8f1ac7cdcb4eabc"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/green/block-09-08.npz",
+              "bytes": 1485496,
+              "sha256": "94f5410955e9ccb9e2e2bc4811319058a08f13e77fa48426c0a8d03f664940e6"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/blue/block-09-08.npz",
+              "bytes": 1490418,
+              "sha256": "14d5fc050f393b5d1024c0cff4d45e83420bc417ff66a4a982528438079ea852"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/nir/block-09-08.npz",
+              "bytes": 1507835,
+              "sha256": "f6b491e921591e4fc81ebd85f03544f1683d47a8e14fd7e1521a0a35ba91b85b"
+            }
+          ],
+          "native_scl_requested_window": [
+            4582,
+            4726,
+            25,
+            25
+          ],
+          "native_scl_available_window": [
+            4582,
+            4726,
+            25,
+            25
+          ]
+        },
+        {
+          "global_index_zero_based": 22,
+          "panel_1based": 23,
+          "point_index": 15344,
+          "original_key": {
+            "owner": 22727,
+            "y": 130392,
+            "x": 206649
+          },
+          "item_id": "S2A_48NUG_20200205_0_L2A",
+          "acquisition_datetime": "2020-02-05T03:37:38.805000Z",
+          "raw_RGBNIR": [
+            618,
+            726,
+            654,
+            487
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 6,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.807704736340384,
+            24.43860662451334
+          ],
+          "native_requested_window": [
+            6246,
+            9497,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/red/block-09-06.npz",
+              "bytes": 1377736,
+              "sha256": "2cb8bbfa5b3ef76be96f88dfbcb458c7cf3ab728c4cbd328259a4badab5aedd3"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/green/block-09-06.npz",
+              "bytes": 1390509,
+              "sha256": "920b3cbb6bf6da5a0122e410c6f6ffe91510784d6058acf95e17f93eb20a2588"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/blue/block-09-06.npz",
+              "bytes": 1406614,
+              "sha256": "e3b2e01a4dff98725b3ce941a8e0ad4466c4898c9bb008f70516b3e970ed168d"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/nir/block-09-06.npz",
+              "bytes": 1426447,
+              "sha256": "5ddd547cc64a2da8125bc0ccb0bdd12a973c9aa32751586d00fe1ecbfe73c007"
+            }
+          ],
+          "native_scl_requested_window": [
+            3123,
+            4748,
+            25,
+            25
+          ],
+          "native_scl_available_window": [
+            3123,
+            4748,
+            25,
+            25
+          ]
+        },
+        {
+          "global_index_zero_based": 23,
+          "panel_1based": 24,
+          "point_index": 15401,
+          "original_key": {
+            "owner": 22727,
+            "y": 130396,
+            "x": 206652
+          },
+          "item_id": "S2A_48NUG_20200205_0_L2A",
+          "acquisition_datetime": "2020-02-05T03:37:38.805000Z",
+          "raw_RGBNIR": [
+            307,
+            447,
+            336,
+            275
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 6,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.54086373372411,
+            24.26155253406614
+          ],
+          "native_requested_window": [
+            6292,
+            9558,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/red/block-09-06.npz",
+              "bytes": 1377736,
+              "sha256": "2cb8bbfa5b3ef76be96f88dfbcb458c7cf3ab728c4cbd328259a4badab5aedd3"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/green/block-09-06.npz",
+              "bytes": 1390509,
+              "sha256": "920b3cbb6bf6da5a0122e410c6f6ffe91510784d6058acf95e17f93eb20a2588"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/blue/block-09-06.npz",
+              "bytes": 1406614,
+              "sha256": "e3b2e01a4dff98725b3ce941a8e0ad4466c4898c9bb008f70516b3e970ed168d"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/nir/block-09-06.npz",
+              "bytes": 1426447,
+              "sha256": "5ddd547cc64a2da8125bc0ccb0bdd12a973c9aa32751586d00fe1ecbfe73c007"
+            }
+          ],
+          "native_scl_requested_window": [
+            3146,
+            4779,
+            25,
+            25
+          ],
+          "native_scl_available_window": [
+            3146,
+            4779,
+            25,
+            25
+          ]
+        }
+      ]
+    },
+    {
+      "page_1based": 2,
+      "file": "native-rawDN-context-pages/batam-next33-rawDN-02.png",
+      "bytes": 126958,
+      "sha256": "7dea281d03a00547858b6b228d52088451a1726e3be58276d6c1cd5e87b5bce0",
+      "panels": [
+        {
+          "global_index_zero_based": 24,
+          "panel_1based": 1,
+          "point_index": 15404,
+          "original_key": {
+            "owner": 22727,
+            "y": 130396,
+            "x": 206826
+          },
+          "item_id": "S2A_48NUG_20200205_0_L2A",
+          "acquisition_datetime": "2020-02-05T03:37:38.805000Z",
+          "raw_RGBNIR": [
+            557,
+            694,
+            619,
+            464
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 3,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.388650671509822,
+            24.129868694661127
+          ],
+          "native_requested_window": [
+            8951,
+            9559,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/red/block-09-08.npz",
+              "bytes": 1469188,
+              "sha256": "e404e04b5e660cb055fd3cbcf83fef432ab9d58619a9efe2d8f1ac7cdcb4eabc"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/green/block-09-08.npz",
+              "bytes": 1485496,
+              "sha256": "94f5410955e9ccb9e2e2bc4811319058a08f13e77fa48426c0a8d03f664940e6"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/blue/block-09-08.npz",
+              "bytes": 1490418,
+              "sha256": "14d5fc050f393b5d1024c0cff4d45e83420bc417ff66a4a982528438079ea852"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/nir/block-09-08.npz",
+              "bytes": 1507835,
+              "sha256": "f6b491e921591e4fc81ebd85f03544f1683d47a8e14fd7e1521a0a35ba91b85b"
+            }
+          ],
+          "native_scl_requested_window": [
+            4475,
+            4779,
+            25,
+            25
+          ],
+          "native_scl_available_window": [
+            4475,
+            4779,
+            25,
+            25
+          ]
+        },
+        {
+          "global_index_zero_based": 25,
+          "panel_1based": 2,
+          "point_index": 15706,
+          "original_key": {
+            "owner": 22727,
+            "y": 130413,
+            "x": 206859
+          },
+          "item_id": "S2A_48NUG_20200205_0_L2A",
+          "acquisition_datetime": "2020-02-05T03:37:38.805000Z",
+          "raw_RGBNIR": [
+            1136,
+            1390,
+            1274,
+            1192
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 7,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.552029708658665,
+            24.30561998234043
+          ],
+          "native_requested_window": [
+            9455,
+            9817,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/red/block-09-09.npz",
+              "bytes": 1607871,
+              "sha256": "b332d572dff90d8f05cad0f2caf5d653b72444b374c21323a846b20e769156cf"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/green/block-09-09.npz",
+              "bytes": 1602108,
+              "sha256": "2a18cf38068a2fc550958cd79f92ddb069a3b5de062fbf659ffa31e944b52176"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/blue/block-09-09.npz",
+              "bytes": 1605404,
+              "sha256": "c87c92fefe61dc14237cb9d2240fa6c7dbce97f35cdaae33cd21c5d9d357dad9"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/nir/block-09-09.npz",
+              "bytes": 1619678,
+              "sha256": "296f2d641dde3f5124fa9cc839482a4f6edca2999d86bb2b7f1d07a1340f6c3d"
+            }
+          ],
+          "native_scl_requested_window": [
+            4727,
+            4908,
+            25,
+            25
+          ],
+          "native_scl_available_window": [
+            4727,
+            4908,
+            25,
+            25
+          ]
+        },
+        {
+          "global_index_zero_based": 26,
+          "panel_1based": 3,
+          "point_index": 15786,
+          "original_key": {
+            "owner": 22727,
+            "y": 130419,
+            "x": 206784
+          },
+          "item_id": "S2A_48NUG_20200205_0_L2A",
+          "acquisition_datetime": "2020-02-05T03:37:38.805000Z",
+          "raw_RGBNIR": [
+            844,
+            1064,
+            949,
+            978
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 10,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.302301386065665,
+            24.250143474513607
+          ],
+          "native_requested_window": [
+            8309,
+            9908,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/red/block-09-08.npz",
+              "bytes": 1469188,
+              "sha256": "e404e04b5e660cb055fd3cbcf83fef432ab9d58619a9efe2d8f1ac7cdcb4eabc"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/green/block-09-08.npz",
+              "bytes": 1485496,
+              "sha256": "94f5410955e9ccb9e2e2bc4811319058a08f13e77fa48426c0a8d03f664940e6"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/blue/block-09-08.npz",
+              "bytes": 1490418,
+              "sha256": "14d5fc050f393b5d1024c0cff4d45e83420bc417ff66a4a982528438079ea852"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/nir/block-09-08.npz",
+              "bytes": 1507835,
+              "sha256": "f6b491e921591e4fc81ebd85f03544f1683d47a8e14fd7e1521a0a35ba91b85b"
+            }
+          ],
+          "native_scl_requested_window": [
+            4154,
+            4954,
+            25,
+            25
+          ],
+          "native_scl_available_window": [
+            4154,
+            4954,
+            25,
+            25
+          ]
+        },
+        {
+          "global_index_zero_based": 27,
+          "panel_1based": 4,
+          "point_index": 16531,
+          "original_key": {
+            "owner": 22727,
+            "y": 130452,
+            "x": 206908
+          },
+          "item_id": "S2A_48NVF_20200126_0_L2A",
+          "acquisition_datetime": "2020-01-26T03:37:51.124000Z",
+          "raw_RGBNIR": [
+            834,
+            780,
+            568,
+            1426
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 5,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.673821263948412,
+            24.88441485682415
+          ],
+          "native_requested_window": [
+            207,
+            407,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVF_20200126_0_L2A/red/block-00-00.npz",
+              "bytes": 1498328,
+              "sha256": "3430ca79977384aea1a9179a0ec6e32b8a3d5b1344b4d1be7dffe12314d22d21"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVF_20200126_0_L2A/green/block-00-00.npz",
+              "bytes": 1471934,
+              "sha256": "19c8070cd917b1437e4cd036326489462a2a7acbfcda7a35ad885f9b68e565ef"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVF_20200126_0_L2A/blue/block-00-00.npz",
+              "bytes": 1459339,
+              "sha256": "f9b6bb1d2dda88b9b894d52d75626e3eafb4dad1006ec655e6afff49e718f363"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVF_20200126_0_L2A/nir/block-00-00.npz",
+              "bytes": 1532966,
+              "sha256": "da7f2002fd011be3a7a6c2c5860cb4abb075b26d29a35b1d019211275ee486ba"
+            }
+          ],
+          "native_scl_requested_window": [
+            103,
+            203,
+            25,
+            25
+          ],
+          "native_scl_available_window": [
+            103,
+            203,
+            25,
+            25
+          ]
+        },
+        {
+          "global_index_zero_based": 28,
+          "panel_1based": 5,
+          "point_index": 14459,
+          "original_key": {
+            "owner": 22727,
+            "y": 130358,
+            "x": 206922
+          },
+          "item_id": "S2A_48NVG_20200126_1_L2A",
+          "acquisition_datetime": "2020-01-26T03:37:36.891000Z",
+          "raw_RGBNIR": [
+            224,
+            390,
+            504,
+            151
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 6,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.040550274206907,
+            24.15232902225398
+          ],
+          "native_requested_window": [
+            422,
+            8983,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200126_1_L2A/red/block-08-00.npz",
+              "bytes": 1311103,
+              "sha256": "4f2dc5b253cb98a18c0991bee0d09deb113f005a890484d865e823b4ed1a7362"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200126_1_L2A/green/block-08-00.npz",
+              "bytes": 1350852,
+              "sha256": "bd8fbe9d5472ca78a5879ba0ac1abab2d898f9f2e15afe9256cf918b20807711"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200126_1_L2A/blue/block-08-00.npz",
+              "bytes": 1356964,
+              "sha256": "7057086ba352835196c6dcdd3b1b0a90d171c8a4575e66ed20c470f2cbd06510"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200126_1_L2A/nir/block-08-00.npz",
+              "bytes": 1283944,
+              "sha256": "5217813597bde25934f8b8ef6965896825f95d8919cd88193b0a239f8470047a"
+            }
+          ],
+          "native_scl_requested_window": [
+            211,
+            4491,
+            25,
+            25
+          ],
+          "native_scl_available_window": [
+            211,
+            4491,
+            25,
+            25
+          ]
+        },
+        {
+          "global_index_zero_based": 29,
+          "panel_1based": 6,
+          "point_index": 14752,
+          "original_key": {
+            "owner": 22727,
+            "y": 130372,
+            "x": 206948
+          },
+          "item_id": "S2A_48NVG_20200126_1_L2A",
+          "acquisition_datetime": "2020-01-26T03:37:36.891000Z",
+          "raw_RGBNIR": [
+            662,
+            1096,
+            1172,
+            669
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 2,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.621163359768616,
+            24.363644280623703
+          ],
+          "native_requested_window": [
+            819,
+            9195,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200126_1_L2A/red/block-09-00.npz",
+              "bytes": 1514816,
+              "sha256": "ecac8cc89c8bb61f2b5d1c895130137c27834e8579d7bff5d06e1fdb030d7960"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200126_1_L2A/green/block-09-00.npz",
+              "bytes": 1527111,
+              "sha256": "5962a5ec9110b80375e0dd0d8d53ef486436ab5c33e3934fb136552b08443f71"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200126_1_L2A/blue/block-09-00.npz",
+              "bytes": 1525513,
+              "sha256": "391285ce65ffddd2af25d553c750c1f72a013b001e3a7d813a02b91fae529904"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200126_1_L2A/nir/block-09-00.npz",
+              "bytes": 1497942,
+              "sha256": "4c71f108bcd5a2a77a2c8c9ba8a2d18fe045a9e097ec0717a05f49fe9ded6cc8"
+            }
+          ],
+          "native_scl_requested_window": [
+            409,
+            4597,
+            25,
+            25
+          ],
+          "native_scl_available_window": [
+            409,
+            4597,
+            25,
+            25
+          ]
+        },
+        {
+          "global_index_zero_based": 30,
+          "panel_1based": 7,
+          "point_index": 14797,
+          "original_key": {
+            "owner": 22727,
+            "y": 130373,
+            "x": 206926
+          },
+          "item_id": "S2A_48NVG_20200126_1_L2A",
+          "acquisition_datetime": "2020-01-26T03:37:36.891000Z",
+          "raw_RGBNIR": [
+            331,
+            598,
+            787,
+            314
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 2,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.7146630743664,
+            24.211801452715008
+          ],
+          "native_requested_window": [
+            483,
+            9210,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200126_1_L2A/red/block-09-00.npz",
+              "bytes": 1514816,
+              "sha256": "ecac8cc89c8bb61f2b5d1c895130137c27834e8579d7bff5d06e1fdb030d7960"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200126_1_L2A/green/block-09-00.npz",
+              "bytes": 1527111,
+              "sha256": "5962a5ec9110b80375e0dd0d8d53ef486436ab5c33e3934fb136552b08443f71"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200126_1_L2A/blue/block-09-00.npz",
+              "bytes": 1525513,
+              "sha256": "391285ce65ffddd2af25d553c750c1f72a013b001e3a7d813a02b91fae529904"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200126_1_L2A/nir/block-09-00.npz",
+              "bytes": 1497942,
+              "sha256": "4c71f108bcd5a2a77a2c8c9ba8a2d18fe045a9e097ec0717a05f49fe9ded6cc8"
+            }
+          ],
+          "native_scl_requested_window": [
+            241,
+            4605,
+            25,
+            25
+          ],
+          "native_scl_available_window": [
+            241,
+            4605,
+            25,
+            25
+          ]
+        },
+        {
+          "global_index_zero_based": 31,
+          "panel_1based": 8,
+          "point_index": 15299,
+          "original_key": {
+            "owner": 22727,
+            "y": 130390,
+            "x": 206957
+          },
+          "item_id": "S2A_48NVG_20200126_1_L2A",
+          "acquisition_datetime": "2020-01-26T03:37:36.891000Z",
+          "raw_RGBNIR": [
+            1084,
+            668,
+            972,
+            447
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 6,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.843186009711644,
+            24.812981355571537
+          ],
+          "native_requested_window": [
+            956,
+            9468,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200126_1_L2A/red/block-09-00.npz",
+              "bytes": 1514816,
+              "sha256": "ecac8cc89c8bb61f2b5d1c895130137c27834e8579d7bff5d06e1fdb030d7960"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200126_1_L2A/green/block-09-00.npz",
+              "bytes": 1527111,
+              "sha256": "5962a5ec9110b80375e0dd0d8d53ef486436ab5c33e3934fb136552b08443f71"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200126_1_L2A/blue/block-09-00.npz",
+              "bytes": 1525513,
+              "sha256": "391285ce65ffddd2af25d553c750c1f72a013b001e3a7d813a02b91fae529904"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200126_1_L2A/nir/block-09-00.npz",
+              "bytes": 1497942,
+              "sha256": "4c71f108bcd5a2a77a2c8c9ba8a2d18fe045a9e097ec0717a05f49fe9ded6cc8"
+            }
+          ],
+          "native_scl_requested_window": [
+            478,
+            4734,
+            25,
+            25
+          ],
+          "native_scl_available_window": [
+            478,
+            4734,
+            25,
+            25
+          ]
+        },
+        {
+          "global_index_zero_based": 32,
+          "panel_1based": 9,
+          "point_index": 15378,
+          "original_key": {
+            "owner": 22727,
+            "y": 130394,
+            "x": 206927
+          },
+          "item_id": "S2A_48NVG_20200126_1_L2A",
+          "acquisition_datetime": "2020-01-26T03:37:36.891000Z",
+          "raw_RGBNIR": [
+            342,
+            559,
+            722,
+            323
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 5,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.442255660622322,
+            24.41190607890894
+          ],
+          "native_requested_window": [
+            498,
+            9529,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200126_1_L2A/red/block-09-00.npz",
+              "bytes": 1514816,
+              "sha256": "ecac8cc89c8bb61f2b5d1c895130137c27834e8579d7bff5d06e1fdb030d7960"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200126_1_L2A/green/block-09-00.npz",
+              "bytes": 1527111,
+              "sha256": "5962a5ec9110b80375e0dd0d8d53ef486436ab5c33e3934fb136552b08443f71"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200126_1_L2A/blue/block-09-00.npz",
+              "bytes": 1525513,
+              "sha256": "391285ce65ffddd2af25d553c750c1f72a013b001e3a7d813a02b91fae529904"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200126_1_L2A/nir/block-09-00.npz",
+              "bytes": 1497942,
+              "sha256": "4c71f108bcd5a2a77a2c8c9ba8a2d18fe045a9e097ec0717a05f49fe9ded6cc8"
+            }
+          ],
+          "native_scl_requested_window": [
+            249,
+            4764,
+            25,
+            25
+          ],
+          "native_scl_available_window": [
+            249,
+            4764,
+            25,
+            25
+          ]
+        }
+      ]
+    }
+  ],
+  "all_loaded_source_array_pins": [
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUF_20200126_0_L2A/blue/block-00-09.npz",
+      "bytes": 1224524,
+      "sha256": "f76d9990d2caaf1c99bf38bd4786e46ab9d30ec14eee16041988614517bd4bb9"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUF_20200126_0_L2A/blue/block-02-09.npz",
+      "bytes": 1129519,
+      "sha256": "62376dfab2f707c7be79350717b7a45aed900065911b14993a58ec22eb7f2590"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUF_20200126_0_L2A/green/block-00-09.npz",
+      "bytes": 1210300,
+      "sha256": "16032622cb3a86de747d572f05e1d575a83991c78799b6cfb54c4b6502790a0e"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUF_20200126_0_L2A/green/block-02-09.npz",
+      "bytes": 1158827,
+      "sha256": "0b063d8ef1612e5c788d714262083cfd3213db5e82b8e1d8c5bff65451dc4f3d"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUF_20200126_0_L2A/nir/block-00-09.npz",
+      "bytes": 1320369,
+      "sha256": "d9a5c706c93d8145d9290c92ff69506016e6975576f1535e3e8ff0a94b3f39ab"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUF_20200126_0_L2A/nir/block-02-09.npz",
+      "bytes": 1143788,
+      "sha256": "ebd83cfa1c9db5ccfae85375065f1c18884b8fd92dbe15c298b4434c966e63f4"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUF_20200126_0_L2A/red/block-00-09.npz",
+      "bytes": 1323967,
+      "sha256": "01f0beb0f2a19708833c6658d1ff5debcd246fac6277e2bf011a226c48b2225f"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUF_20200126_0_L2A/red/block-02-09.npz",
+      "bytes": 1187752,
+      "sha256": "1912e9bfb59ff6fde8dd69523ba44fdc31309808226430db42c67a26ce5fe8f9"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUF_20200126_0_L2A/scl/block-00-09.npz",
+      "bytes": 10127,
+      "sha256": "2e06041af879c58d758c1a8c1f0028cfa0b200ffeaa02814132562ae9cfa65ad"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUF_20200126_0_L2A/scl/block-02-09.npz",
+      "bytes": 3919,
+      "sha256": "94f693c83447cba0f7823ca18a9b5608bbb97596ec6cf77d90405ec2e37848ff"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/blue/block-06-07.npz",
+      "bytes": 1284257,
+      "sha256": "b50af785a7f870e1fc87f6401c5d086df6f14a3be765d3ba1aedacfdc7ae3dce"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/blue/block-07-07.npz",
+      "bytes": 1496116,
+      "sha256": "c4ecb2ada6b952285bd5c2356aa83cf1d21ec4f132ee414c0d3f42e09f1265af"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/blue/block-07-08.npz",
+      "bytes": 1633306,
+      "sha256": "11cc10f726f7e09ef6b115b855814db29eb2db20db02f6520791ade8edab5a2a"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/blue/block-07-09.npz",
+      "bytes": 1664403,
+      "sha256": "d98a1623005f474bdadb8fac0687834e9b17d14b2c4f95acd55741fe16120530"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/blue/block-08-06.npz",
+      "bytes": 1427448,
+      "sha256": "5fdb2dc167ced406d9a141ab70fee97483383bdc54f1c2f87218f04bd8c6f947"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/blue/block-08-08.npz",
+      "bytes": 1672630,
+      "sha256": "e8b7cdc5b8766279516f2563c1cc87e9a840fcb77d7a6cff69b4b7d4ae99a28b"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/blue/block-08-09.npz",
+      "bytes": 1644483,
+      "sha256": "79c04ebcddca00145bef30e9ec1e05c6a04a41b421801c2a1a5f296018ef2f56"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/blue/block-09-06.npz",
+      "bytes": 1406614,
+      "sha256": "e3b2e01a4dff98725b3ce941a8e0ad4466c4898c9bb008f70516b3e970ed168d"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/blue/block-09-08.npz",
+      "bytes": 1490418,
+      "sha256": "14d5fc050f393b5d1024c0cff4d45e83420bc417ff66a4a982528438079ea852"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/blue/block-09-09.npz",
+      "bytes": 1605404,
+      "sha256": "c87c92fefe61dc14237cb9d2240fa6c7dbce97f35cdaae33cd21c5d9d357dad9"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/green/block-06-07.npz",
+      "bytes": 1285334,
+      "sha256": "d64d7d1b7f7a11e7db620d1b5d69f76c55fb45f070669d8669dadcca60c59bc9"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/green/block-07-07.npz",
+      "bytes": 1503322,
+      "sha256": "b873232eaecf84756b2cb9a91bfe89804545cda782e94764c28000eb4d2e2176"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/green/block-07-08.npz",
+      "bytes": 1641817,
+      "sha256": "1519f26d2a0cfd222d3c3be25ad410f576b735264352ee1fbf20427b648a5d7b"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/green/block-07-09.npz",
+      "bytes": 1670377,
+      "sha256": "62c2dbf9e9a725f1f12f12b97848b3edb7741d24c48c4b99cd6c9317eecaea51"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/green/block-08-06.npz",
+      "bytes": 1424682,
+      "sha256": "30aeb551f325842447ac6418bebd34f809f03b6e4f0c8bee9e940d7f939213e8"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/green/block-08-08.npz",
+      "bytes": 1673555,
+      "sha256": "aefb55d4de9c92a37fd3097057d7eebbeea7d97809ab7f2030c8273fde8a5278"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/green/block-08-09.npz",
+      "bytes": 1649402,
+      "sha256": "04dfb29bb5e55b30cdf0af9e93652f2a6b44e9a315265c908dbf7158bbc0db79"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/green/block-09-06.npz",
+      "bytes": 1390509,
+      "sha256": "920b3cbb6bf6da5a0122e410c6f6ffe91510784d6058acf95e17f93eb20a2588"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/green/block-09-08.npz",
+      "bytes": 1485496,
+      "sha256": "94f5410955e9ccb9e2e2bc4811319058a08f13e77fa48426c0a8d03f664940e6"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/green/block-09-09.npz",
+      "bytes": 1602108,
+      "sha256": "2a18cf38068a2fc550958cd79f92ddb069a3b5de062fbf659ffa31e944b52176"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/nir/block-06-07.npz",
+      "bytes": 1231371,
+      "sha256": "bed1afedf3b9a2d2621666369f18923a5479ff8bb4bf484fe666bf043ab097cf"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/nir/block-07-07.npz",
+      "bytes": 1475154,
+      "sha256": "7942d872d9fb1c2f7571c4d8228c5ad8477a45940b579082edb694721af46f1c"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/nir/block-07-08.npz",
+      "bytes": 1647930,
+      "sha256": "1ea2e66a4a0be58bff5dd06dc67550475e3d3bea048ed0aa5dfbf0771ea40316"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/nir/block-07-09.npz",
+      "bytes": 1689096,
+      "sha256": "b490150d1e2848efea110cc9781a849b5600a2a0e194e5b331c8c861ea56fb16"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/nir/block-08-06.npz",
+      "bytes": 1495819,
+      "sha256": "629889ff1484d75696e0b11bc774bfaf195174597ff84553bc313fd03e7f0162"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/nir/block-08-08.npz",
+      "bytes": 1686800,
+      "sha256": "84bfd01e8fdb5578c7ea8d51c805aa270c8ef6d6682d5f1da422126d680db8dd"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/nir/block-08-09.npz",
+      "bytes": 1668452,
+      "sha256": "29c289dfb1d9312df68316bb7cd8a28acd5fb60b1126ba8dafc9c74a5e99312a"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/nir/block-09-06.npz",
+      "bytes": 1426447,
+      "sha256": "5ddd547cc64a2da8125bc0ccb0bdd12a973c9aa32751586d00fe1ecbfe73c007"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/nir/block-09-08.npz",
+      "bytes": 1507835,
+      "sha256": "f6b491e921591e4fc81ebd85f03544f1683d47a8e14fd7e1521a0a35ba91b85b"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/nir/block-09-09.npz",
+      "bytes": 1619678,
+      "sha256": "296f2d641dde3f5124fa9cc839482a4f6edca2999d86bb2b7f1d07a1340f6c3d"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/red/block-06-07.npz",
+      "bytes": 1256827,
+      "sha256": "27d8755cbcc5cad8f33abba40060463b6eddeef05ac7465f35f7f75fb4406a74"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/red/block-07-07.npz",
+      "bytes": 1492241,
+      "sha256": "93af7fbabc108b9956286dc9b1a82cfa566fb880605854f7ce8c563bcdb0fd89"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/red/block-07-08.npz",
+      "bytes": 1648533,
+      "sha256": "3cd4b0d078d8917c95b6f7a401de9ef381f8258b29f1e3f49a85946f0093119c"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/red/block-07-09.npz",
+      "bytes": 1692256,
+      "sha256": "a141b28d581456ad22c54e4050b1930d32c40737e2a467cdd2ba2dc30c9ae0c9"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/red/block-08-06.npz",
+      "bytes": 1387556,
+      "sha256": "7527b8d8df3fbcc287610fd1b7c7e5d99fc80054a1686a7b8d11150e2c95a494"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/red/block-08-08.npz",
+      "bytes": 1678669,
+      "sha256": "f7ec082ea08f5260c78bfc354ba81656f66dafac3d2b1836934d8b440eae7bf5"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/red/block-08-09.npz",
+      "bytes": 1646339,
+      "sha256": "7de7fda007b546e5a88eb83c67299711516e6f28ade3c99ce76fca07c66f07f6"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/red/block-09-06.npz",
+      "bytes": 1377736,
+      "sha256": "2cb8bbfa5b3ef76be96f88dfbcb458c7cf3ab728c4cbd328259a4badab5aedd3"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/red/block-09-08.npz",
+      "bytes": 1469188,
+      "sha256": "e404e04b5e660cb055fd3cbcf83fef432ab9d58619a9efe2d8f1ac7cdcb4eabc"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/red/block-09-09.npz",
+      "bytes": 1607871,
+      "sha256": "b332d572dff90d8f05cad0f2caf5d653b72444b374c21323a846b20e769156cf"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/scl/block-06-07.npz",
+      "bytes": 4057,
+      "sha256": "78cd2f822b157f88758f5c6a677adfaaaa7caf256a5bde771e7931fe64e298fc"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/scl/block-07-07.npz",
+      "bytes": 22428,
+      "sha256": "b483bd51de5e8579e55cede6ff803420b10e226d0bcbc75ceab8c674f15ce234"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/scl/block-07-08.npz",
+      "bytes": 34728,
+      "sha256": "d65673da19fd2bacc7237d5fa4e1dd51cef932de925b7af4d871fb90b0d005eb"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/scl/block-07-09.npz",
+      "bytes": 34561,
+      "sha256": "ee4343a32f618e3e50f1de6a37751c26446ab19cc50f39eef0e8e671038b7fba"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/scl/block-08-06.npz",
+      "bytes": 13621,
+      "sha256": "3936b69fa7c1641950fed58a331f471a727ae490b93372f40ae21e64d62eb5e1"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/scl/block-08-08.npz",
+      "bytes": 40314,
+      "sha256": "70aca1d04ff12a4dcebb179830e98bf862ec4d373cd768726f199b371eb19b71"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/scl/block-08-09.npz",
+      "bytes": 32613,
+      "sha256": "c3d630c20fbb2d12747acfb13240518074c7994cb6032894af813c003bd95d7d"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/scl/block-09-06.npz",
+      "bytes": 9573,
+      "sha256": "8b7aa5516efbdab7b50d180210562aaefa2911cd7b8a76a8a14ebceb21009f22"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/scl/block-09-08.npz",
+      "bytes": 19785,
+      "sha256": "180c698d5a18783ae32f6190658d5eff23322a8865234fc97d5d41cddf23d7e2"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUG_20200205_0_L2A/scl/block-09-09.npz",
+      "bytes": 28690,
+      "sha256": "635ca3d67b9e34645e845f7407bf87a62fe1fe3b9ce81b4e36e61bcb40bcd7d2"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NVF_20200126_0_L2A/blue/block-00-00.npz",
+      "bytes": 1459339,
+      "sha256": "f9b6bb1d2dda88b9b894d52d75626e3eafb4dad1006ec655e6afff49e718f363"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NVF_20200126_0_L2A/green/block-00-00.npz",
+      "bytes": 1471934,
+      "sha256": "19c8070cd917b1437e4cd036326489462a2a7acbfcda7a35ad885f9b68e565ef"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NVF_20200126_0_L2A/nir/block-00-00.npz",
+      "bytes": 1532966,
+      "sha256": "da7f2002fd011be3a7a6c2c5860cb4abb075b26d29a35b1d019211275ee486ba"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NVF_20200126_0_L2A/red/block-00-00.npz",
+      "bytes": 1498328,
+      "sha256": "3430ca79977384aea1a9179a0ec6e32b8a3d5b1344b4d1be7dffe12314d22d21"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NVF_20200126_0_L2A/scl/block-00-00.npz",
+      "bytes": 18303,
+      "sha256": "9f03a15d5c78e0ba12ff428b2d1daa2576c7079b884a83438f56d22c850b3e49"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200126_1_L2A/blue/block-08-00.npz",
+      "bytes": 1356964,
+      "sha256": "7057086ba352835196c6dcdd3b1b0a90d171c8a4575e66ed20c470f2cbd06510"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200126_1_L2A/blue/block-09-00.npz",
+      "bytes": 1525513,
+      "sha256": "391285ce65ffddd2af25d553c750c1f72a013b001e3a7d813a02b91fae529904"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200126_1_L2A/green/block-08-00.npz",
+      "bytes": 1350852,
+      "sha256": "bd8fbe9d5472ca78a5879ba0ac1abab2d898f9f2e15afe9256cf918b20807711"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200126_1_L2A/green/block-09-00.npz",
+      "bytes": 1527111,
+      "sha256": "5962a5ec9110b80375e0dd0d8d53ef486436ab5c33e3934fb136552b08443f71"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200126_1_L2A/nir/block-08-00.npz",
+      "bytes": 1283944,
+      "sha256": "5217813597bde25934f8b8ef6965896825f95d8919cd88193b0a239f8470047a"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200126_1_L2A/nir/block-09-00.npz",
+      "bytes": 1497942,
+      "sha256": "4c71f108bcd5a2a77a2c8c9ba8a2d18fe045a9e097ec0717a05f49fe9ded6cc8"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200126_1_L2A/red/block-08-00.npz",
+      "bytes": 1311103,
+      "sha256": "4f2dc5b253cb98a18c0991bee0d09deb113f005a890484d865e823b4ed1a7362"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200126_1_L2A/red/block-09-00.npz",
+      "bytes": 1514816,
+      "sha256": "ecac8cc89c8bb61f2b5d1c895130137c27834e8579d7bff5d06e1fdb030d7960"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200126_1_L2A/scl/block-08-00.npz",
+      "bytes": 15759,
+      "sha256": "0e741d23c105d995f1b53d261fa7858c367214c316407641f1b04f1c511e7d0a"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200126_1_L2A/scl/block-09-00.npz",
+      "bytes": 32218,
+      "sha256": "bc5174e309b050aeaa8446a4eaed8900e3b0c5adef79fa001eed9445feb20a05"
+    }
+  ],
+  "display": "4 columns x 6 rows; each panel left RGB, right NIR-R-G. Literal uncalibrated rawDN fixed RGB0..3000/FCC0..5000 qualitative display only for every point. No gain/offset, BOA units, indices or quantitative reflectance interpretation. The four source items retain distinct contracts:Five PB05 centres has the literal declared-offset/provider-applied conflict and is raw qualitative-only;28 PB02.13 centres also remain unnormalized in this display. No offset is silently applied or subtracted twice. All prior source radiometry limits remain unchanged. Nearest enlargement; hollow actual fractional-centre cross leaves centre unpainted. Magenta denotes an actual mask0 or absent source context; no clamp or imputation.",
+  "detail_images": "point-ID-native17-RGB-FCC-SCL25.png: left17-native RGB, middle17-native raw NIR-R-G, right separate25-native20m SCL. SCL is source context only, never body truth; native512px blocks indexed as512. Nearest enlargement with actual fractional marker; no cross-grid resampling.",
+  "new_physical_credit": 0
+}

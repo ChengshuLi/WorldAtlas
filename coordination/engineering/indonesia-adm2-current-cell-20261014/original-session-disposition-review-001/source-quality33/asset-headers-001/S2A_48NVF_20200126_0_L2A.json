@@ -1,0 +1,622 @@
+{
+  "item_id": "S2A_48NVF_20200126_0_L2A",
+  "owner": 22727,
+  "acquisition": "2020-01-26T03:37:51.124000Z",
+  "properties": {
+    "created": "2022-11-03T20:29:54.917Z",
+    "platform": "sentinel-2a",
+    "constellation": "sentinel-2",
+    "instruments": [
+      "msi"
+    ],
+    "eo:cloud_cover": 8.384741,
+    "proj:epsg": 32648,
+    "mgrs:utm_zone": 48,
+    "mgrs:latitude_band": "N",
+    "mgrs:grid_square": "VF",
+    "grid:code": "MGRS-48NVF",
+    "view:sun_azimuth": 130.534865604341,
+    "view:sun_elevation": 59.5449422362732,
+    "s2:degraded_msi_data_percentage": 0,
+    "s2:nodata_pixel_percentage": 66.452903,
+    "s2:saturated_defective_pixel_percentage": 0,
+    "s2:dark_features_percentage": 0.286427,
+    "s2:cloud_shadow_percentage": 0.513998,
+    "s2:vegetation_percentage": 7.311627,
+    "s2:not_vegetated_percentage": 0.977576,
+    "s2:water_percentage": 81.830132,
+    "s2:unclassified_percentage": 0.687806,
+    "s2:medium_proba_clouds_percentage": 2.29103,
+    "s2:high_proba_clouds_percentage": 4.204892,
+    "s2:thin_cirrus_percentage": 1.88882,
+    "s2:snow_ice_percentage": 0.007694,
+    "s2:product_type": "S2MSI2A",
+    "s2:processing_baseline": "02.13",
+    "s2:product_uri": "S2A_MSIL2A_20200126T032011_N0213_R118_T48NVF_20200126T071110.SAFE",
+    "s2:generation_time": "2020-01-26T07:11:10.000000Z",
+    "s2:datatake_id": "GS2A_20200126T032011_023996_N02.13",
+    "s2:datatake_type": "INS-NOBS",
+    "s2:datastrip_id": "S2A_OPER_MSI_L2A_DS_EPAE_20200126T071110_S20200126T032624_N02.13",
+    "s2:granule_id": "S2A_OPER_MSI_L2A_TL_EPAE_20200126T071110_A023996_T48NVF_N02.13",
+    "s2:mgrs_tile": "48NVF",
+    "s2:reflectance_conversion_factor": 1.03254736477084,
+    "datetime": "2020-01-26T03:37:51.124000Z",
+    "s2:sequence": "0",
+    "earthsearch:s3_path": "s3://sentinel-cogs/sentinel-s2-l2a-cogs/48/N/VF/2020/1/S2A_48NVF_20200126_0_L2A",
+    "earthsearch:payload_id": "roda-sentinel2/workflow-sentinel2-to-stac/e97120f00bf538b6a18abf65e6db0cea",
+    "earthsearch:boa_offset_applied": false,
+    "processing:software": {
+      "sentinel2-to-stac": "0.1.0"
+    },
+    "updated": "2022-11-05T19:10:06.611Z"
+  },
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          104.10090053749532,
+          0.9047903687202914
+        ],
+        [
+          104.5400631868531,
+          0.9048731660141129
+        ],
+        [
+          104.32175634724365,
+          -0.08846743939295265
+        ],
+        [
+          104.10101083561777,
+          -0.0884627162702113
+        ],
+        [
+          104.10090053749532,
+          0.9047903687202914
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    104.10090053749532,
+    -0.08846743939295265,
+    104.5400631868531,
+    0.9048731660141129
+  ],
+  "license_links": [
+    {
+      "rel": "license",
+      "href": "https://sentinel.esa.int/documents/247904/690755/Sentinel_Data_Legal_Notice"
+    }
+  ],
+  "assets": {
+    "red": {
+      "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/VF/2020/1/S2A_48NVF_20200126_0_L2A/B04.tif",
+      "declared_asset": {
+        "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/VF/2020/1/S2A_48NVF_20200126_0_L2A/B04.tif",
+        "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+        "title": "Red (band 4) - 10m",
+        "eo:bands": [
+          {
+            "name": "red",
+            "common_name": "red",
+            "description": "Red (band 4)",
+            "center_wavelength": 0.665,
+            "full_width_half_max": 0.038
+          }
+        ],
+        "gsd": 10,
+        "proj:shape": [
+          10980,
+          10980
+        ],
+        "proj:transform": [
+          10,
+          0,
+          399960,
+          0,
+          -10,
+          100020
+        ],
+        "raster:bands": [
+          {
+            "nodata": 0,
+            "data_type": "uint16",
+            "bits_per_sample": 15,
+            "spatial_resolution": 10,
+            "scale": 0.0001,
+            "offset": 0
+          }
+        ],
+        "roles": [
+          "data",
+          "reflectance"
+        ]
+      },
+      "inspected_utc": "2026-10-16T08:34:16.110241+00:00",
+      "HEAD": {
+        "status": 200,
+        "headers": {
+          "x-amz-id-2": "dyzinA8cdP2RZv7ndhrg1JQPDTWg6lPY4wA9d9AKq+6/eEqjzCiVk+psoxiKhi9ovuBiLgeGrUI=",
+          "x-amz-request-id": "H6WV0VQ8WV09NMH5",
+          "Date": "Fri, 16 Oct 2026 08:34:20 GMT",
+          "Last-Modified": "Wed, 23 Sep 2020 16:13:23 GMT",
+          "ETag": "\"dff4a84ce949971c490c9ed6137d7c03-8\"",
+          "x-amz-storage-class": "INTELLIGENT_TIERING",
+          "Cache-Control": "public, max-age=31536000, immutable",
+          "Accept-Ranges": "bytes",
+          "Content-Type": "image/tiff; application=geotiff; profile=cloud-optimized",
+          "Content-Length": "66451116",
+          "Server": "AmazonS3",
+          "Connection": "close"
+        }
+      },
+      "actual_header": {
+        "driver": "GTiff",
+        "crs": "EPSG:32648",
+        "epsg": 32648,
+        "width": 10980,
+        "height": 10980,
+        "transform": [
+          10.0,
+          0.0,
+          399960.0,
+          0.0,
+          -10.0,
+          100020.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "count": 1,
+        "dtypes": [
+          "uint16"
+        ],
+        "nodata": 0.0,
+        "block_shapes": [
+          [
+            1024,
+            1024
+          ]
+        ],
+        "scales": [
+          1.0
+        ],
+        "offsets": [
+          0.0
+        ],
+        "tags": {
+          "OVR_RESAMPLING_ALG": "AVERAGE",
+          "AREA_OR_POINT": "Area"
+        },
+        "band1_tags": {},
+        "mask_flag_enums": [
+          [
+            "nodata"
+          ]
+        ]
+      },
+      "status": "actual-header-matches-declared-grid"
+    },
+    "green": {
+      "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/VF/2020/1/S2A_48NVF_20200126_0_L2A/B03.tif",
+      "declared_asset": {
+        "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/VF/2020/1/S2A_48NVF_20200126_0_L2A/B03.tif",
+        "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+        "title": "Green (band 3) - 10m",
+        "eo:bands": [
+          {
+            "name": "green",
+            "common_name": "green",
+            "description": "Green (band 3)",
+            "center_wavelength": 0.56,
+            "full_width_half_max": 0.045
+          }
+        ],
+        "gsd": 10,
+        "proj:shape": [
+          10980,
+          10980
+        ],
+        "proj:transform": [
+          10,
+          0,
+          399960,
+          0,
+          -10,
+          100020
+        ],
+        "raster:bands": [
+          {
+            "nodata": 0,
+            "data_type": "uint16",
+            "bits_per_sample": 15,
+            "spatial_resolution": 10,
+            "scale": 0.0001,
+            "offset": 0
+          }
+        ],
+        "roles": [
+          "data",
+          "reflectance"
+        ]
+      },
+      "inspected_utc": "2026-10-16T08:34:20.581371+00:00",
+      "HEAD": {
+        "status": 200,
+        "headers": {
+          "x-amz-id-2": "4uhZlXUFCC6hmR7+3IK+KoG0ce2DsXHrDemRKaV6eALlkheH1Xmr+LGyY39xcwgmUZlHRlfxZfg=",
+          "x-amz-request-id": "X829WP5J3QFX1JEW",
+          "Date": "Fri, 16 Oct 2026 08:34:24 GMT",
+          "Last-Modified": "Wed, 23 Sep 2020 16:12:48 GMT",
+          "ETag": "\"57b936ddd7a54b2b9345fbc3e00a5c20-8\"",
+          "x-amz-storage-class": "INTELLIGENT_TIERING",
+          "Cache-Control": "public, max-age=31536000, immutable",
+          "Accept-Ranges": "bytes",
+          "Content-Type": "image/tiff; application=geotiff; profile=cloud-optimized",
+          "Content-Length": "66422251",
+          "Server": "AmazonS3",
+          "Connection": "close"
+        }
+      },
+      "actual_header": {
+        "driver": "GTiff",
+        "crs": "EPSG:32648",
+        "epsg": 32648,
+        "width": 10980,
+        "height": 10980,
+        "transform": [
+          10.0,
+          0.0,
+          399960.0,
+          0.0,
+          -10.0,
+          100020.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "count": 1,
+        "dtypes": [
+          "uint16"
+        ],
+        "nodata": 0.0,
+        "block_shapes": [
+          [
+            1024,
+            1024
+          ]
+        ],
+        "scales": [
+          1.0
+        ],
+        "offsets": [
+          0.0
+        ],
+        "tags": {
+          "OVR_RESAMPLING_ALG": "AVERAGE",
+          "AREA_OR_POINT": "Area"
+        },
+        "band1_tags": {},
+        "mask_flag_enums": [
+          [
+            "nodata"
+          ]
+        ]
+      },
+      "status": "actual-header-matches-declared-grid"
+    },
+    "blue": {
+      "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/VF/2020/1/S2A_48NVF_20200126_0_L2A/B02.tif",
+      "declared_asset": {
+        "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/VF/2020/1/S2A_48NVF_20200126_0_L2A/B02.tif",
+        "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+        "title": "Blue (band 2) - 10m",
+        "eo:bands": [
+          {
+            "name": "blue",
+            "common_name": "blue",
+            "description": "Blue (band 2)",
+            "center_wavelength": 0.49,
+            "full_width_half_max": 0.098
+          }
+        ],
+        "gsd": 10,
+        "proj:shape": [
+          10980,
+          10980
+        ],
+        "proj:transform": [
+          10,
+          0,
+          399960,
+          0,
+          -10,
+          100020
+        ],
+        "raster:bands": [
+          {
+            "nodata": 0,
+            "data_type": "uint16",
+            "bits_per_sample": 15,
+            "spatial_resolution": 10,
+            "scale": 0.0001,
+            "offset": 0
+          }
+        ],
+        "roles": [
+          "data",
+          "reflectance"
+        ]
+      },
+      "inspected_utc": "2026-10-16T08:34:24.880267+00:00",
+      "HEAD": {
+        "status": 200,
+        "headers": {
+          "x-amz-id-2": "pYnerjK7SPyHAVB5KDITvFhkZGI3zJnLeoTm+UGXIR46uaoCXjjLPdzdCa/6B/zsdyMtXhDZDPo=",
+          "x-amz-request-id": "CA4S9JYWTY7KHZXA",
+          "Date": "Fri, 16 Oct 2026 08:34:29 GMT",
+          "Last-Modified": "Wed, 23 Sep 2020 16:12:16 GMT",
+          "ETag": "\"9c97a22a8995c0dd7b1189b249f26538-8\"",
+          "x-amz-storage-class": "INTELLIGENT_TIERING",
+          "Cache-Control": "public, max-age=31536000, immutable",
+          "Accept-Ranges": "bytes",
+          "Content-Type": "image/tiff; application=geotiff; profile=cloud-optimized",
+          "Content-Length": "66529292",
+          "Server": "AmazonS3",
+          "Connection": "close"
+        }
+      },
+      "actual_header": {
+        "driver": "GTiff",
+        "crs": "EPSG:32648",
+        "epsg": 32648,
+        "width": 10980,
+        "height": 10980,
+        "transform": [
+          10.0,
+          0.0,
+          399960.0,
+          0.0,
+          -10.0,
+          100020.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "count": 1,
+        "dtypes": [
+          "uint16"
+        ],
+        "nodata": 0.0,
+        "block_shapes": [
+          [
+            1024,
+            1024
+          ]
+        ],
+        "scales": [
+          1.0
+        ],
+        "offsets": [
+          0.0
+        ],
+        "tags": {
+          "OVR_RESAMPLING_ALG": "AVERAGE",
+          "AREA_OR_POINT": "Area"
+        },
+        "band1_tags": {},
+        "mask_flag_enums": [
+          [
+            "nodata"
+          ]
+        ]
+      },
+      "status": "actual-header-matches-declared-grid"
+    },
+    "nir": {
+      "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/VF/2020/1/S2A_48NVF_20200126_0_L2A/B08.tif",
+      "declared_asset": {
+        "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/VF/2020/1/S2A_48NVF_20200126_0_L2A/B08.tif",
+        "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+        "title": "NIR 1 (band 8) - 10m",
+        "eo:bands": [
+          {
+            "name": "nir",
+            "common_name": "nir",
+            "description": "NIR 1 (band 8)",
+            "center_wavelength": 0.842,
+            "full_width_half_max": 0.145
+          }
+        ],
+        "gsd": 10,
+        "proj:shape": [
+          10980,
+          10980
+        ],
+        "proj:transform": [
+          10,
+          0,
+          399960,
+          0,
+          -10,
+          100020
+        ],
+        "raster:bands": [
+          {
+            "nodata": 0,
+            "data_type": "uint16",
+            "bits_per_sample": 15,
+            "spatial_resolution": 10,
+            "scale": 0.0001,
+            "offset": 0
+          }
+        ],
+        "roles": [
+          "data",
+          "reflectance"
+        ]
+      },
+      "inspected_utc": "2026-10-16T08:34:29.172078+00:00",
+      "HEAD": {
+        "status": 200,
+        "headers": {
+          "x-amz-id-2": "TTNICBnBqpb7KmH7t3mqvfcdi31nUzyNC3sbQELCB5KXRCDyih8eCg1EwY3fUvevowL9AtfHOl0yXqjKeECUKS1XCSbiT0jv",
+          "x-amz-request-id": "BXJEDZ9SFAX9DDCA",
+          "Server": "AmazonS3",
+          "Date": "Fri, 16 Oct 2026 08:34:33 GMT",
+          "Last-Modified": "Wed, 23 Sep 2020 16:14:49 GMT",
+          "ETag": "\"a1dbdbc487bd2f3a597f5fd971211f24-8\"",
+          "x-amz-storage-class": "INTELLIGENT_TIERING",
+          "Cache-Control": "public, max-age=31536000, immutable",
+          "Accept-Ranges": "bytes",
+          "Content-Length": "66162289",
+          "Content-Type": "image/tiff; application=geotiff; profile=cloud-optimized",
+          "Connection": "close"
+        }
+      },
+      "actual_header": {
+        "driver": "GTiff",
+        "crs": "EPSG:32648",
+        "epsg": 32648,
+        "width": 10980,
+        "height": 10980,
+        "transform": [
+          10.0,
+          0.0,
+          399960.0,
+          0.0,
+          -10.0,
+          100020.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "count": 1,
+        "dtypes": [
+          "uint16"
+        ],
+        "nodata": 0.0,
+        "block_shapes": [
+          [
+            1024,
+            1024
+          ]
+        ],
+        "scales": [
+          1.0
+        ],
+        "offsets": [
+          0.0
+        ],
+        "tags": {
+          "OVR_RESAMPLING_ALG": "AVERAGE",
+          "AREA_OR_POINT": "Area"
+        },
+        "band1_tags": {},
+        "mask_flag_enums": [
+          [
+            "nodata"
+          ]
+        ]
+      },
+      "status": "actual-header-matches-declared-grid"
+    },
+    "scl": {
+      "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/VF/2020/1/S2A_48NVF_20200126_0_L2A/SCL.tif",
+      "declared_asset": {
+        "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/VF/2020/1/S2A_48NVF_20200126_0_L2A/SCL.tif",
+        "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+        "title": "Scene classification map (SCL)",
+        "proj:shape": [
+          5490,
+          5490
+        ],
+        "proj:transform": [
+          20,
+          0,
+          399960,
+          0,
+          -20,
+          100020
+        ],
+        "raster:bands": [
+          {
+            "nodata": 0,
+            "data_type": "uint8",
+            "spatial_resolution": 20
+          }
+        ],
+        "roles": [
+          "data",
+          "reflectance"
+        ]
+      },
+      "inspected_utc": "2026-10-16T08:34:33.593173+00:00",
+      "HEAD": {
+        "status": 200,
+        "headers": {
+          "x-amz-id-2": "IthH2EZXvhzcCGGTkcx69y2eUueMH+dBLp5iK+QtOvmrexBrYCElSKpKvAdAmEuQGluwjRb6bls=",
+          "x-amz-request-id": "TV3Q9YN02D113G66",
+          "Date": "Fri, 16 Oct 2026 08:34:38 GMT",
+          "Last-Modified": "Wed, 23 Sep 2020 16:16:49 GMT",
+          "ETag": "\"bd5d08d3dc6e6ebe06f39fed23360cad\"",
+          "x-amz-storage-class": "INTELLIGENT_TIERING",
+          "Cache-Control": "public, max-age=31536000, immutable",
+          "Accept-Ranges": "bytes",
+          "Content-Type": "image/tiff; application=geotiff; profile=cloud-optimized",
+          "Content-Length": "644789",
+          "Server": "AmazonS3",
+          "Connection": "close"
+        }
+      },
+      "actual_header": {
+        "driver": "GTiff",
+        "crs": "EPSG:32648",
+        "epsg": 32648,
+        "width": 5490,
+        "height": 5490,
+        "transform": [
+          20.0,
+          0.0,
+          399960.0,
+          0.0,
+          -20.0,
+          100020.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "count": 1,
+        "dtypes": [
+          "uint8"
+        ],
+        "nodata": 0.0,
+        "block_shapes": [
+          [
+            512,
+            512
+          ]
+        ],
+        "scales": [
+          1.0
+        ],
+        "offsets": [
+          0.0
+        ],
+        "tags": {
+          "OVR_RESAMPLING_ALG": "MODE",
+          "AREA_OR_POINT": "Area"
+        },
+        "band1_tags": {},
+        "mask_flag_enums": [
+          [
+            "nodata"
+          ]
+        ]
+      },
+      "status": "actual-header-matches-declared-grid"
+    }
+  },
+  "value_or_mask_reads": 0
+}

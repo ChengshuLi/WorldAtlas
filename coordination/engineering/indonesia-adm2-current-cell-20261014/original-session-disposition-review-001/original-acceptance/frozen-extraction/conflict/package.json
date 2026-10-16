@@ -1,0 +1,122 @@
+{
+  "package_id": "gb-IDN-ADM2--source-conflict",
+  "primary_source": "gb:IDN:ADM2",
+  "source_family_index": 153,
+  "category": "source-conflict",
+  "native_cells": 27,
+  "land_cells": 27,
+  "inland_water_cells": 0,
+  "source_relative_cells": 0,
+  "interval_segments": 21,
+  "owners": [
+    22771,
+    22839,
+    22935,
+    22947,
+    23001,
+    23065,
+    23071,
+    23115,
+    31030,
+    31076,
+    31106,
+    31127,
+    31140,
+    31151,
+    35754,
+    42172,
+    42189,
+    42215
+  ],
+  "source_features": [
+    36233,
+    36248,
+    36254,
+    36257,
+    36306,
+    36398,
+    36576,
+    36578,
+    36601,
+    36632,
+    36691,
+    36712,
+    45977,
+    46076,
+    46079,
+    46091,
+    46101,
+    46102,
+    46110,
+    50902,
+    50953,
+    51139,
+    58358,
+    58374,
+    58385,
+    58422
+  ],
+  "source_families": [
+    152,
+    153,
+    230,
+    231,
+    263,
+    264,
+    265,
+    327,
+    328
+  ],
+  "native_blocks": [
+    31,
+    33
+  ],
+  "provinces": [
+    "framework:province:bobonaro:f2ee924e8e8b",
+    "framework:province:cova-lima:77efc0acc95b",
+    "framework:province:east-nusa-tenggara:5b5b49121e97",
+    "framework:province:middle-fly-district:db865ab83af9",
+    "framework:province:north-kalimantan:c38f2f263afa",
+    "framework:province:papua:856ef2fb442b",
+    "framework:province:sabah:195a4dcb4f73",
+    "framework:province:sarawak:8a5fb64d0d51",
+    "framework:province:west-kalimantan:16a25aa9e8c0"
+  ],
+  "location_count": 18,
+  "source_feature_count": 26,
+  "locality_count": 9,
+  "cost": {
+    "primary_source_decoded_bytes": 11002896,
+    "all_required_source_decoded_bytes": 21889103,
+    "primary_full_source_raster_measured_seconds": 1.652,
+    "source_interval_segments": 21,
+    "maximum_native_rows_per_execution_frame": 4096,
+    "observed_global_census_peak_rss_bytes": 884973568
+  },
+  "evidence": {
+    "selection": "ownership-binding.json",
+    "lineage": "lineage.json",
+    "territorial_source_catalogue": "retained-source-catalogue.json",
+    "territorial_catalogue_sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+    "source_features": "source-feature-roster.json",
+    "territorial_native_blocks": "source-candidates-block-NNN.json.gz",
+    "physical": "physical-unassigned-summary.json",
+    "source_domain_transform": []
+  },
+  "work": {
+    "question": "Resolve overlapping retained source-feature mappings with no common current location, checking vintage, legitimate aggregation and actual territorial exclusions.",
+    "completion": "Retain competing source evidence, decide the applicable source mapping if supported, and rerun the affected intervals; do not silently select a source or call ancestry a jurisdiction dispute.",
+    "priority": 2
+  },
+  "execution": {
+    "command": "node source-batch-intervals.mjs gb-IDN-ADM2--source-conflict OUTPUT_DIRECTORY",
+    "output_columns": [
+      "y",
+      "start",
+      "end",
+      "candidate_owner_indices",
+      "source_feature_indices",
+      "physical_class"
+    ]
+  }
+}

@@ -1,0 +1,141 @@
+{
+  "reviewer": "01a12753-bff2-74b6-b6c9-db64be422011",
+  "author_proposals_sha256": "a14bbc70967c9b7d9234baf86cf493b44a06080dfc0b7e35391639586631541a",
+  "plan_sha256": "2be527b5ee1c06b0295ceaa177f9ea68a744e36778b7a04a2f57f715c8a81e01",
+  "status": "support six bounded dated answers; retain sixteen questions",
+  "supported_point_indices": [
+    2494,
+    2507,
+    3441,
+    3489,
+    3823,
+    3828
+  ],
+  "supported_original_keys": [
+    {
+      "owner": 22698,
+      "y": 128473,
+      "x": 216626
+    },
+    {
+      "owner": 22698,
+      "y": 128474,
+      "x": 216626
+    },
+    {
+      "owner": 22698,
+      "y": 128696,
+      "x": 216620
+    },
+    {
+      "owner": 22698,
+      "y": 128698,
+      "x": 216572
+    },
+    {
+      "owner": 22698,
+      "y": 128739,
+      "x": 216530
+    },
+    {
+      "owner": 22698,
+      "y": 128740,
+      "x": 216523
+    }
+  ],
+  "held_original_keys": [
+    {
+      "owner": 22698,
+      "y": 128471,
+      "x": 216624
+    },
+    {
+      "owner": 22698,
+      "y": 128472,
+      "x": 216625
+    },
+    {
+      "owner": 22698,
+      "y": 128475,
+      "x": 216660
+    },
+    {
+      "owner": 22698,
+      "y": 128700,
+      "x": 216574
+    },
+    {
+      "owner": 22698,
+      "y": 128704,
+      "x": 216577
+    },
+    {
+      "owner": 22698,
+      "y": 128706,
+      "x": 216579
+    },
+    {
+      "owner": 22698,
+      "y": 128715,
+      "x": 216588
+    },
+    {
+      "owner": 22698,
+      "y": 128715,
+      "x": 216592
+    },
+    {
+      "owner": 22698,
+      "y": 128740,
+      "x": 216524
+    },
+    {
+      "owner": 22698,
+      "y": 128740,
+      "x": 216525
+    },
+    {
+      "owner": 22698,
+      "y": 128740,
+      "x": 216528
+    },
+    {
+      "owner": 22698,
+      "y": 128740,
+      "x": 216529
+    },
+    {
+      "owner": 22698,
+      "y": 128741,
+      "x": 216520
+    },
+    {
+      "owner": 22698,
+      "y": 128741,
+      "x": 216523
+    },
+    {
+      "owner": 22698,
+      "y": 128741,
+      "x": 216524
+    },
+    {
+      "owner": 22698,
+      "y": 128741,
+      "x": 216528
+    }
+  ],
+  "additional_held_point": 3829,
+  "additional_hold_reason": "The marked centre is in a dark brown basin interior. The saved RGB and false-colour views establish basin placement, but do not sufficiently distinguish water surface from wet or drained basin floor there. Adjacent darker water-like interiors do not transfer their answer to this centre. SCL2 is contextual and neither proves nor disproves water. This is a keyed surface/body ambiguity, not a general purity, tide or whole-cell requirement.",
+  "actual_review": [
+    "Viewed the complete 22-point paired 49-pixel contact sheet and all seven proposed positive 17-pixel RGB/FCC plus separate 20m SCL details.",
+    "Whole-hash authenticated all20 saved NPZ arrays and all viewed image references. Recomputed all110 raw-centre value and mask joins directly from those saved blocks.",
+    "Previously independently joined exact22 genuine prior all-five-band nodata keys and unchanged centres; projected all22x5 native positions from actual header affine transforms with pyproj.",
+    "Read all seven proposal reasons and retained the other15 specific questions without promoting them."
+  ],
+  "supported_scope": "Five dated coherent dark water-like basin-body observations (2494,2507,3441,3489,3828), and visible vegetation/cover at3823. No permanent dryness/water, hydrologic identity, exact subpixel or whole-cell truth, territorial/native ownership or repair claim.",
+  "pb05": "Two supported PB05 observations are qualitative raw morphology only. All five new offset conflicts remain unresolved; no BOA/index/absolute-radiometry assertion.",
+  "new_source_reads": 0,
+  "new_adoption_or_native_credit": 0,
+  "source_acquisitions": "Genuine separate March16 and July19 observations; original February22 nodata and prior895 arrays remain unchanged."
+}

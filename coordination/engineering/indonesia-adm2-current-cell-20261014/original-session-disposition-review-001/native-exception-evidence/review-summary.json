@@ -1,0 +1,38 @@
+{
+  "accepted_code_commit": "cd68e89523901acf477d0365470410b8b970bb48",
+  "operating_scope": "Read-only source identity review of original 14 old-fine-gap keys plus parent-added 21 IDN/government overlap keys, all with exclusive existing MYS country-reference observation and retained government fine contacts. No predicate/producer/consumer changes, new raster/imagery, feature clipping, geometry repair, ownership selection, qualification, release, adoption, acceptance, or repository/worktree mutation.",
+  "counts": {
+    "reviewed_keys": 35,
+    "supported_administrative_identity_only": 14,
+    "unresolved_aggregate_or_partition": 21
+  },
+  "supported_identity_keys_by_original_class": {
+    "MYS_country_positive_no_existing_fine_source_coverage": 8,
+    "MYS_genuine_IDN_vs_government_country_overlap": 6
+  },
+  "unresolved_keys_by_original_class": {
+    "MYS_country_positive_no_existing_fine_source_coverage": 6,
+    "MYS_genuine_IDN_vs_government_country_overlap": 15
+  },
+  "source_count_reconciliation": {
+    "original_MYS_features": 159,
+    "full_MYS_features": 159,
+    "current_selected_MYS_features": 159,
+    "current_MYS_roster_entries": 159,
+    "ordered_original_full_selected_source_ids_equal": true,
+    "roster_source_id_set_equal": true,
+    "upstream_metadata_admUnitCount": 160,
+    "metadata_count_limit": "Actual bodies and accepted roster are 159; no unobserved 160th geometry was invented."
+  },
+  "government_lubok_antu_duplicate": {
+    "source_ids": [
+      "government:JMG:Demarcation:layer9:OBJECTID:19",
+      "government:JMG:Demarcation:layer9:OBJECTID:32"
+    ],
+    "distinct_records": true,
+    "decoded_geometry_objects_exactly_equal": true,
+    "preserve_both_source_records": true,
+    "candidate_distinct_owner_count": 1
+  },
+  "adoption_or_repair_credit": 0
+}
