@@ -764,6 +764,11 @@ test('trusted geography outputs bind attempted artifact digest through the privi
  const geography=workflow.match(/\n  geography:\n([\s\S]*?)(?=\n  integration:)/)[1];
  assert.match(geography,/report_sha256: \$\{\{ steps\.check\.outputs\.report_sha256 \}\}/);
  assert.match(geography,/artifact_name: \$\{\{ steps\.check\.outputs\.artifact_name \}\}/);
+ for(const [output,step,field] of [['report_bytes','check','report_bytes'],['artifact_id','upload','artifact-id'],['artifact_digest','upload','artifact-digest']]) {
+  assert(geography.includes(`${output}: \${{ steps.${step}.outputs.${field} }}`));
+  assert(workflow.includes(`GEOGRAPHY_${output.toUpperCase()}: \${{ needs.geography.outputs.${output} }}`));
+ }
+ assert.match(geography,/id: upload/);
  assert.match(geography,/id: check/);
  assert.match(geography,/GEOGRAPHY_PR_NUMBER: \$\{\{ inputs\.pr_number \}\}/);
  assert.match(geography,/GEOGRAPHY_REVIEWED_HEAD: \$\{\{ inputs\.expected_head \}\}/);
@@ -775,6 +780,9 @@ test('trusted geography outputs bind attempted artifact digest through the privi
  assert.match(runner,/geographyReportLoader: \(\{api: reportAPI = api\} = \{\}\) => loadGeographicReport\(\{api: reportAPI/);
  assert.match(runner,/runId: process\.env\.GITHUB_RUN_ID/);
  assert.match(runner,/expectedHash: process\.env\.GEOGRAPHY_REPORT_SHA256/);
+ assert.match(runner,/artifact_id: Number\(process\.env\.GEOGRAPHY_ARTIFACT_ID\)/);
+ assert.match(runner,/artifact_digest: process\.env\.GEOGRAPHY_ARTIFACT_DIGEST/);
+ assert.match(runner,/report_bytes: Number\(process\.env\.GEOGRAPHY_REPORT_BYTES\)/);
  assert.doesNotMatch(workflow,/GEOGRAPHY_PROOF:|proof_run:|proof_attempt:/);
  assert.doesNotMatch(workflow,/actions\/download-artifact/,'privileged job must not extract an unverified archive');
 });

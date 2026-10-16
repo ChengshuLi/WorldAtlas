@@ -121,7 +121,6 @@ export async function selectedJointStage(repo, trusted, baseline, candidate, des
         retainedArchive:archiveName ? () => {
           const input = checkpointTransportInput(afterReader, archiveName);
           transportInputs[archiveIndex] = input.pin;
-          demand(input.body, 'Declared retained checkpoint archive is absent');
           return input.body;
         } : undefined});
       if (!proof.available) return coldDecision({cold:'baseline-and-candidate', reason:proof.reason});

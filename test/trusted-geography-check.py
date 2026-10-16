@@ -106,10 +106,15 @@ class TrustedCheckControls(unittest.TestCase):
     def test_software_candidate_valid_joint_move_passes(self):
         self.f.write('data/geography/part.json', collection(left=.9, right=.9))
         candidate = self.f.commit('software-joint-move')
-        result, report = self.f.run(candidate, rewind=False, extra_env={'GEOGRAPHY_CODE_COMMIT': candidate})
+        outputs = self.f.repo / 'job-outputs'
+        result, report = self.f.run(candidate, rewind=False, extra_env={
+            'GEOGRAPHY_CODE_COMMIT': candidate, 'GITHUB_OUTPUT': str(outputs)})
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertTrue(report['candidate_code_executed'])
         self.assertEqual(report['status'], 'no-new-regression')
+        raw = (self.f.repo / 'geography-check.json').read_bytes()
+        self.assertEqual(dict(line.split('=', 1) for line in outputs.read_text().splitlines()), {
+            'report_sha256': hashlib.sha256(raw).hexdigest(), 'report_bytes': str(len(raw))})
 
     def test_software_candidate_requires_actual_execution_checkout(self):
         self.f.write('data/geography/part.json', collection(left=.9))

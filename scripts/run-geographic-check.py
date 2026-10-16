@@ -516,7 +516,7 @@ def main():
     digest = hashlib.sha256(raw).hexdigest()
     if os.environ.get('GITHUB_OUTPUT'):
         with open(os.environ['GITHUB_OUTPUT'], 'a') as stream:
-            stream.write('report_sha256=' + digest + '\n')
+            stream.write('report_sha256=' + digest + '\nreport_bytes=' + str(len(raw)) + '\n')
     print(json.dumps({'status': result['status'], 'regressions': result['regressions'],
                       'report_bytes': len(raw), 'report_sha256': hashlib.sha256(raw).hexdigest(),
                       **({'candidate_commit': args.candidate} if comparison else {})}))

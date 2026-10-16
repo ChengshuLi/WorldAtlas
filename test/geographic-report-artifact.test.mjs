@@ -6,7 +6,7 @@ import {requestAccounting} from '../scripts/github-quota.mjs';
 import {completeIntegration, prepareIntegration} from '../scripts/merge-integration.mjs';
 import fs from 'node:fs';
 import {readReportArchive, loadGeographicReport, reportHash, validateGeographyOrigin, validatePRGeographyCandidate,
-  readGeographyJobReceipt, validateGeographyProof, geographicReportProducts, checkGeographicReport,
+  validateGeographyProof, geographicReportProducts, checkGeographicReport,
   preparedQueueSource} from '../scripts/geographic-report-artifact.mjs';
 
 // Real single-file ZIP records, with both archive formats used by uploaders.
@@ -55,34 +55,36 @@ test('inflation is bounded even when claimed uncompressed size is small', () => 
   assert.throws(() => readReportArchive(raw, digest));
 });
 function transport(overrides = {}) {
-  const calls = [], artifact = {id: 12, name: 'geography-1234567890123456-1', expired: false, size_in_bytes: 300};
-  const options = {repo: 'owner/repo', runId: '123', artifactName: artifact.name, expectedHash: digest, token: 'synthetic-token',
-    api: async route => { calls.push(route); return {total_count: 1, artifacts: [artifact]}; },
+  const calls = [], zip = archive(report), artifact = {id: 12, name: 'geography-1234567890123456-1'};
+  const source = {run_id: 123, run_attempt: 1, job_id: 55, tree: 'a'.repeat(40), head: 'b'.repeat(40), baseline: 'c'.repeat(40),
+    workflow_path: '.github/workflows/worker-merge.yml', event: 'workflow_dispatch', workflow_head: 'b'.repeat(40), candidate_commit: 'b'.repeat(40),
+    artifact_id: artifact.id, artifact_name: artifact.name, artifact_bytes: zip.length, artifact_digest: reportHash(zip),
+    report_sha256: digest, report_bytes: report.length};
+  const options = {repo: 'owner/repo', runId: '123', artifactName: artifact.name, expectedHash: digest, source, token: 'synthetic-token',
+    api: async route => { throw Error('Unexpected metadata rediscovery: ' + route); },
     fetchImpl: async (url, init) => {
       calls.push({url, init});
       if (url.startsWith('https://api.github.com/')) return new Response(null, {status: 302, headers: {location: 'https://results.blob.core.windows.net/artifact?signature=fixture'}});
-      return new Response(archive(report));
+      return new Response(zip);
     }, ...overrides};
   return {options, calls, artifact};
 }
 test('bounded actual ZIP download authenticates only fixed API host, retains exact report digest', async () => {
   const f = transport(); assert.deepEqual(await loadGeographicReport(f.options), JSON.parse(report));
-  assert.equal(f.calls[1].init.headers.Authorization, 'Bearer synthetic-token');
-  assert.equal(f.calls[2].init.headers, undefined); assert.equal(f.calls[2].init.redirect, 'error');
+  assert.equal(f.calls[0].init.headers.Authorization, 'Bearer synthetic-token');
+  assert.equal(f.calls[1].init.headers, undefined); assert.equal(f.calls[1].init.redirect, 'error');
 });
 test('missing trusted digest and poisoned same-name artifact are blocked', async () => {
   const a = transport({expectedHash: undefined}); await assert.rejects(loadGeographicReport(a.options), /trusted geographic artifact outputs/);
   const b = transport(); const original = b.options.fetchImpl;
   b.options.fetchImpl = async (url, init) => url.startsWith('https://api.github.com/') ? original(url, init) : new Response(archive(Buffer.from('{}')));
-  await assert.rejects(loadGeographicReport(b.options), /trusted geography job digest/);
+  await assert.rejects(loadGeographicReport(b.options), /trusted upload identity/);
 });
-test('duplicate, expired and incomplete artifact inventories are blocked', async () => {
-  for (const kind of ['duplicate', 'expired', 'incomplete']) {
-    const f = transport();
-    if (kind === 'expired') f.artifact.expired = true;
-    else f.options.api = async () => ({total_count: 2, artifacts: kind === 'duplicate' ? [f.artifact, f.artifact] : [f.artifact]});
-    await assert.rejects(loadGeographicReport(f.options)); assert.equal(f.calls.filter(call => typeof call === 'object').length, 0);
-  }
+test('exact authenticated artifact ID needs no whole-run inventory or same-name uniqueness', async () => {
+  const f = transport();
+  assert.deepEqual(await loadGeographicReport(f.options), JSON.parse(report));
+  assert.equal(f.calls.length, 2);
+  assert.equal(f.calls[0].url, 'https://api.github.com/repos/owner/repo/actions/artifacts/12/zip');
 });
 test('foreign or credential-bearing delivery addresses never receive a fetch', async () => {
   for (const location of ['https://attacker.example/a?secret=x', 'http://results.blob.core.windows.net/a', 'https://u:p@results.blob.core.windows.net/a']) {
@@ -91,26 +93,25 @@ test('foreign or credential-bearing delivery addresses never receive a fetch', a
   }
 });
 
-test('real shared client accounts inventory and redirect, signed delivery remains token-free', async () => {
+test('real shared client accounts exact redirect, signed delivery remains token-free', async () => {
   const f = transport(), accounting = requestAccounting('geographic-download'), requests = [];
   const api = githubAPI(f.options.token, {onRequest: accounting.observe, fetchImpl: async (url, init) => {
     requests.push({url, init});
-    if (url.includes('/actions/runs/')) return Response.json({total_count: 1, artifacts: [f.artifact]});
     return new Response(null, {status: 302, headers: {location: 'https://results.blob.core.windows.net/a?signature=private-secret'}});
   }});
   const delivery = [];
   const result = await loadGeographicReport({...f.options, api, fetchImpl: async (url, init) => {
     delivery.push({url, init}); return new Response(archive(report));
   }});
-  assert.deepEqual(result, JSON.parse(report)); assert.equal(requests.length, 2);
-  assert.equal(accounting.receipt().actual_http_attempts, 2);
+  assert.deepEqual(result, JSON.parse(report)); assert.equal(requests.length, 1);
+  assert.equal(accounting.receipt().actual_http_attempts, 1);
   assert.equal(delivery.length, 1); assert.equal(delivery[0].init.headers, undefined);
   assert(!JSON.stringify(accounting.receipt()).includes('private-secret'));
 });
 test('shared admission refusal stops artifact download before credential-free delivery', async () => {
   const f = transport(); let delivery = false;
   const api = githubAPI(f.options.token, {fetchImpl: async () => Response.json({total_count: 1, artifacts: [f.artifact]})});
-  let budget = 1;
+  let budget = 0;
   api.setHTTPAdmission(() => {if (!budget--) throw Error('shared admission refused');});
   await assert.rejects(loadGeographicReport({...f.options, api, fetchImpl: async () => {delivery = true; return new Response(archive(report));}}), /shared admission refused/);
   assert.equal(delivery, false);
@@ -120,30 +121,26 @@ function originalTransport() {
   const zip = archive(report), name = 'proposed-geography-2-1', requests = [], deliveries = [];
   const artifact = {id: 12, name, expired: false, size_in_bytes: zip.length,
     digest: `sha256:${reportHash(zip)}`, workflow_run: {id: 123, head_sha: 'b'.repeat(40)}};
-  const log = Buffer.from([
-    JSON.stringify({status: 'not-applicable', regressions: null, report_bytes: report.length, report_sha256: digest}),
-    `SHA256 digest of uploaded artifact zip is ${reportHash(zip)}`,
-    `Artifact ${name} has been successfully uploaded! Final size is ${zip.length} bytes. Artifact ID is 12`
-  ].map(line => `2026-10-10T23:11:37.4984934Z ${line}`).join('\n'));
-  const f = {zip, log, artifact, requests, deliveries};
+  const f = {zip, artifact, requests, deliveries};
   const accounting = requestAccounting('original-geography');
   const api = githubAPI('synthetic-token', {onRequest: accounting.observe, fetchImpl: async (url, init) => {
     requests.push({url, init});
-    if (url.includes('/artifacts?')) return Response.json({total_count: 1, artifacts: [f.artifact]});
+    assert.equal(url, `https://api.github.com/repos/owner/repo/actions/artifacts/${f.artifact.id}/zip`);
     return new Response(null, {status: 302, headers: {
-      location: `https://results.blob.core.windows.net/${url.endsWith('/logs') ? 'log' : 'zip'}?signature=private-secret`
+      location: 'https://results.blob.core.windows.net/zip?signature=private-secret'
     }});
   }});
   f.options = {api, repo: 'owner/repo', number: 2, head: 'b'.repeat(40), baseline: 'c'.repeat(40), token: 'synthetic-token',
     proof: {run_id: 123, run_attempt: 1, tree: 'a'.repeat(40), geography_job_id: 55},
     fetchImpl: async (url, init) => {
-      deliveries.push({url, init}); return new Response(url.includes('/log?') ? f.log : f.zip);
+      deliveries.push({url, init}); return new Response(f.zip);
     }};
   f.source = validateGeographyProof({run_id: 123, run_attempt: 1, job_id: 55,
     tree: f.options.proof.tree, head: f.options.head, baseline: f.options.baseline,
     workflow_path: '.github/workflows/merge-integration-checks.yml', event: 'pull_request',
     workflow_head: f.options.head, candidate_commit: f.options.head,
-    ...readGeographyJobReceipt(log, name)});
+    artifact_name: name, artifact_id: artifact.id, artifact_bytes: zip.length, artifact_digest: reportHash(zip),
+    report_sha256: digest, report_bytes: report.length});
   f.loadOptions = {api, repo: f.options.repo, runId: 123, artifactName: name,
     expectedHash: digest, source: f.source, token: f.options.token, fetchImpl: f.options.fetchImpl};
   f.accounting = accounting;
@@ -157,27 +154,16 @@ test('accepted original source binds the exact archive and raw report without re
   assert.equal(f.source.job_id, 55); assert.equal(f.source.run_id, 123);
   assert.equal(f.source.head, 'b'.repeat(40)); assert.equal(f.source.baseline, 'c'.repeat(40));
   assert.equal(f.source.artifact_id, 12); assert.equal(f.source.report_bytes, report.length);
-  assert.equal(f.accounting.receipt().actual_http_attempts, 2);
+  assert.equal(f.accounting.receipt().actual_http_attempts, 1);
   assert(f.requests.every(row => row.init.headers.Authorization === 'Bearer synthetic-token'));
   assert(f.deliveries.every(row => row.init.headers === undefined && row.init.redirect === 'error'));
   assert(!JSON.stringify(f.accounting.receipt()).includes('private-secret'));
 });
 
-test('original job receipt rejects ambiguity, malformed counts and missing upload identity', () => {
-  const f = originalTransport(), name = f.artifact.name;
-  assert.equal(readGeographyJobReceipt(f.log, name).artifact_id, 12);
-  for (const raw of [Buffer.concat([f.log, Buffer.from('\n'), f.log]),
-    Buffer.from(f.log.toString().replace('"report_bytes":' + report.length, '"report_bytes":0')),
-    Buffer.from(f.log.toString().replace('Artifact ID is 12', 'Artifact ID is 0')),
-    Buffer.from(f.log.toString().replace(name, 'proposed-geography-3-1')),
-    Buffer.alloc(2 * 1024 * 1024 + 1)]) assert.throws(() => readGeographyJobReceipt(raw, name));
-});
-
-test('pinned source refuses overwritten, foreign, expired and tampered original artifacts', async () => {
+test('pinned source refuses a changed exact ID, length, digest or complete archive', async () => {
   for (const mutate of [
-    f => {f.artifact.id++;}, f => {f.artifact.expired = true;},
-    f => {f.artifact.workflow_run.id++;}, f => {f.artifact.workflow_run.head_sha = 'd'.repeat(40);},
-    f => {f.artifact.digest = 'sha256:' + 'f'.repeat(64);}, f => {f.artifact.size_in_bytes++;},
+    f => {f.artifact.id++;}, f => {f.source.artifact_bytes++;},
+    f => {f.source.artifact_digest = 'f'.repeat(64);},
     f => {f.zip = archive(Buffer.from('{}'));},
   ]) {
     const f = originalTransport(); mutate(f); await assert.rejects(loadGeographicReport({...f.loadOptions, fetchImpl: f.options.fetchImpl}));
@@ -187,35 +173,6 @@ test('pinned source refuses overwritten, foreign, expired and tampered original 
   assert.throws(() => validateGeographyProof({...source, extra: 'untrusted'}));
   await assert.rejects(loadGeographicReport({...f.options, runId: 124, artifactName: source.artifact_name,
     expectedHash: source.report_sha256, source}), /outputs changed/);
-});
-
-test('job-log capability retains shared admission and refuses arbitrary redirect routes', async () => {
-  const f = originalTransport(); let delivered = false;
-  f.options.api.setHTTPAdmission(() => {throw Error('shared admission refused');});
-  await assert.rejects(f.options.api.jobLogRedirect('/repos/owner/repo/actions/jobs/55/logs'), /shared admission refused/);
-  assert.equal(delivered, false); assert.equal(f.requests.length, 0);
-  assert.throws(() => f.options.api.jobLogRedirect('/repos/owner/repo/issues/2'), /job log redirect route/);
-});
-
-// Verbatim receipt lines from successful job 114478521619 (run 38142298387,
-// attempt 1). Job 114483839359, exposed by attempt 2 after failed-job-only retry,
-// returned the byte-identical complete log. No geographic experiment is rerun.
-const retained1726Receipt = Buffer.from(`2026-10-11T13:28:18.8017747Z {"status": "not-applicable", "regressions": null, "report_bytes": 274717, "report_sha256": "00ba911099849b347811c5dabc4b79f3e797a4ec25ab7fce81b0439260555cb7"}
-2026-10-11T13:28:19.2767025Z SHA256 digest of uploaded artifact zip is 799a31398a52ae11c73c8646337aa0c02e810d175fc8c69741d868a24db1381e
-2026-10-11T13:28:19.4818073Z Artifact proposed-geography-1726-1 has been successfully uploaded! Final size is 39994 bytes. Artifact ID is 11703004023`);
-test('retained failed-job-only retry log keeps its exact origin instead of relabeling attempt two', () => {
-  assert.throws(() => readGeographyJobReceipt(retained1726Receipt, 'proposed-geography-1726-2'), /receipt/);
-  assert.deepEqual(readGeographyJobReceipt(retained1726Receipt, 'proposed-geography-1726-1'), {
-    artifact_name: 'proposed-geography-1726-1', artifact_id: 11703004023, artifact_bytes: 39994,
-    artifact_digest: '799a31398a52ae11c73c8646337aa0c02e810d175fc8c69741d868a24db1381e',
-    report_sha256: '00ba911099849b347811c5dabc4b79f3e797a4ec25ab7fce81b0439260555cb7', report_bytes: 274717
-  });
-  for (const raw of [Buffer.from(retained1726Receipt.toString().replace('proposed-geography-1726-1', 'proposed-geography-1726-3')),
-    Buffer.from(retained1726Receipt.toString().replace('proposed-geography-1726-1', 'proposed-geography-1727-1')),
-    Buffer.from(retained1726Receipt.toString().split('\n').slice(0, 2).join('\n')),
-    Buffer.concat([retained1726Receipt, Buffer.from('\nArtifact proposed-geography-1726-2 has been successfully uploaded! Final size is 39994 bytes. Artifact ID is 99')]),
-    Buffer.concat([retained1726Receipt, Buffer.from('\nArtifact proposed-geography-1727-1 has been successfully uploaded! Final size is 39994 bytes. Artifact ID is 99')])])
-    assert.throws(() => readGeographyJobReceipt(raw, 'proposed-geography-1726-1'), /receipt/);
 });
 
 function carriedTransport() {
@@ -237,12 +194,6 @@ function carriedTransport() {
     return original(...args);
   };
   f.options.api.artifactRedirect = original.artifactRedirect;
-  f.options.api.jobLogRedirect = async route => {
-    f.metadata.push(route);
-    return new Response(null, {status: 302, headers: {location: `https://results.blob.core.windows.net/${route.includes('/55/') ? 'origin-log' : 'log'}?fixture`}});
-  };
-  const fetch = f.options.fetchImpl;
-  f.options.fetchImpl = async (url, init) => url.includes('/origin-log?') ? new Response(f.originLog ?? f.log) : fetch(url, init);
   return f;
 }
 test('accepted carried geography authenticates its exact successful original producer', async () => {
@@ -286,16 +237,12 @@ function combinedTransport(changeReport = value => value) {
     baseline_commit: f.options.baseline, trusted_code_commit: f.options.baseline, candidate_commit: candidate,
     candidate_code_executed: false, published: false, source_approval: false, gate_status: 'passed', status: 'not-applicable'})));
   f.zip = archive(body); f.artifact.size_in_bytes = f.zip.length; f.artifact.digest = `sha256:${reportHash(f.zip)}`;
-  f.log = Buffer.from([JSON.stringify({status: 'not-applicable', regressions: null,
-    candidate_commit: candidate, report_bytes: body.length, report_sha256: reportHash(body)}),
-    `SHA256 digest of uploaded artifact zip is ${reportHash(f.zip)}`,
-    `Artifact ${f.artifact.name} has been successfully uploaded! Final size is ${f.zip.length} bytes. Artifact ID is 12`].join('\n'));
   f.commit = {sha: candidate, tree: {sha: f.options.proof.tree}, parents: [{sha: f.options.baseline}, {sha: f.options.head}]};
   const original = f.options.api;
   f.options.api = async route => route.endsWith(`/git/commits/${candidate}`) ? structuredClone(f.commit) : original(route);
-  f.options.api.jobLogRedirect = original.jobLogRedirect;
   f.options.api.artifactRedirect = original.artifactRedirect;
-  f.source = {...f.source, ...readGeographyJobReceipt(f.log, f.artifact.name)};
+  f.source = {...f.source, candidate_commit: candidate, artifact_bytes: f.zip.length, artifact_digest: reportHash(f.zip),
+    report_bytes: body.length, report_sha256: reportHash(body)};
   f.loadOptions = {...f.loadOptions, api: f.options.api, source: f.source,
     expectedHash: f.source.report_sha256};
   return f;
@@ -326,8 +273,7 @@ test('retained combined geography rejects foreign tree, stale parents and relabe
     const result = await loadGeographicReport(f.loadOptions);
     assert.throws(() => checkGeographicReport(result, f.options.baseline, f.commit.sha), /exact trusted combined check/);
   }
-  const f = combinedTransport(); f.log = Buffer.from(f.log.toString().replace('"candidate_commit":"' + f.commit.sha + '"', '"candidate_commit":"invalid"'));
-  assert.throws(() => readGeographyJobReceipt(f.log, f.artifact.name), /candidate receipt/);
+
 });
 test('accepted producer ignores stale step projections while preserving actual successful job identity', async () => {
   for (const steps of [undefined, [], [{name: 'old checker label', status: 'in_progress', conclusion: null}]]) {
@@ -340,10 +286,9 @@ test('accepted producer ignores stale step projections while preserving actual s
 
 function freshQueueTransport(changeReport) {
   const f = combinedTransport(changeReport), original = f.options.api;
-  const oldName = f.artifact.name, name = 'geography-fixture-request-12345678-1';
+  const name = 'geography-fixture-request-12345678-1';
   f.artifact.name = name;
   f.artifact.workflow_run.head_sha = 'e'.repeat(40);
-  f.log = Buffer.from(f.log.toString().replace(oldName, name));
   f.run = {id: 123, run_attempt: 1, head_sha: 'e'.repeat(40), head_branch: 'main', event: 'workflow_dispatch',
     path: '.github/workflows/worker-merge.yml', repository: {full_name: 'owner/repo'},
     head_repository: {full_name: 'owner/repo'}, status: 'in_progress'};
@@ -356,16 +301,11 @@ function freshQueueTransport(changeReport) {
     if (route.includes('/attempts/1/jobs')) return {jobs: structuredClone(f.jobs)};
     return original(route);
   };
-  api.jobLogRedirect = async route => {
-    f.metadata.push(route);
-    assert.equal(route, '/repos/owner/repo/actions/jobs/55/logs');
-    return original.jobLogRedirect(route);
-  };
   api.artifactRedirect = original.artifactRedirect;
   f.loadOptions = {api, repo: 'owner/repo', runId: 123, artifactName: name,
-    expectedHash: JSON.parse(f.log.toString().split('\n')[0]).report_sha256,
+    expectedHash: f.source.report_sha256,
     token: f.options.token, fetchImpl: f.options.fetchImpl,
-    fresh: {run_attempt: 1, workflow_head: f.run.head_sha, head: f.options.head,
+    fresh: {run_attempt: 1, artifact_id: f.artifact.id, artifact_digest: reportHash(f.zip), report_bytes: f.source.report_bytes, workflow_head: f.run.head_sha, head: f.options.head,
       baseline: f.options.baseline, candidate_commit: f.commit.sha, request_id: 'fixture-request-12345678'}};
   return f;
 }
@@ -386,7 +326,8 @@ for (const [label, steps] of [['missing', undefined], ['empty', []], ['stale', [
     assert.equal(source.workflow_head, f.run.head_sha); assert.equal(source.head, f.options.head);
     assert.equal(source.tree, f.commit.tree.sha); assert.equal(source.candidate_commit, f.commit.sha);
     assert.equal(source.artifact_digest, reportHash(f.zip));
-    assert(f.metadata.some(route => route.endsWith('/jobs/55/logs')));
+    assert(!f.metadata.some(route => route.includes('/logs') || route.includes('/artifacts?')));
+    assert.equal(source.artifact_bytes, f.zip.length);
   });
 }
 
@@ -413,14 +354,10 @@ test('fresh queue loader rejects foreign or unsuccessful producers and altered r
     f => {f.jobs[0].head_sha = 'f'.repeat(40);}, f => {f.jobs[0].status = 'in_progress';},
     ...['failure', 'cancelled', 'skipped'].map(conclusion => f => {f.jobs[0].conclusion = conclusion;}),
     f => {f.jobs.push(structuredClone(f.jobs[0]));}, f => {f.jobs = [];},
-    f => {f.log = Buffer.from('no upload receipt');},
-    f => {f.log = Buffer.from(f.log.toString().replace('"report_bytes":', '"report_bytes":0,"unused":'));},
-    f => {f.log = Buffer.concat([f.log, Buffer.from('\n'), f.log]);},
-    f => {f.log = Buffer.alloc(2 * 1024 * 1024 + 1);},
-    f => {f.log = Buffer.from(f.log.toString().replace('Artifact ID is 12', 'Artifact ID is 13'));},
-    f => {f.loadOptions.expectedHash = 'f'.repeat(64);},
-    f => {f.artifact.workflow_run.id++;}, f => {f.artifact.workflow_run.head_sha = 'f'.repeat(40);},
-    f => {f.artifact.digest = `sha256:${'f'.repeat(64)}`;},
+    ...['artifact_id', 'artifact_digest', 'report_bytes'].map(key => f => {delete f.loadOptions.fresh[key];}),
+    f => {f.loadOptions.fresh.artifact_id = 0;}, f => {f.loadOptions.fresh.report_bytes = 0;},
+    f => {f.loadOptions.fresh.artifact_id++;}, f => {f.loadOptions.fresh.artifact_digest = 'f'.repeat(64);},
+    f => {f.loadOptions.fresh.report_bytes++;}, f => {f.loadOptions.expectedHash = 'f'.repeat(64);},
     f => {f.zip = archive(Buffer.from('{}'));}, f => {f.commit.sha = 'f'.repeat(40);},
     f => {f.commit.tree.sha = 'invalid';}
   ]) {
@@ -450,7 +387,7 @@ test('actual fresh software archive binds candidate code without impersonating a
   assert.equal(source.artifact_digest, reportHash(f.zip));
 });
 
-// Reuse the actual ZIP/run/job/log producer fixture through the final merge
+// Reuse the actual ZIP/run/job/native-output producer fixture through the final merge
 // boundary. The only replaced components are GitHub responses and byte delivery.
 function queueCompletionFixture(f = freshQueueTransport()) {
   const {repo, head, baseline: base} = f.options, candidate = f.commit.sha;
@@ -498,7 +435,7 @@ function queueCompletionFixture(f = freshQueueTransport()) {
     if (name === root + '/git/trees/' + f.commit.tree.sha) return {truncated: false, tree: f.integrated};
     return original(route, method, body);
   };
-  f.api.jobLogRedirect = original.jobLogRedirect; f.api.artifactRedirect = original.artifactRedirect;
+  f.api.artifactRedirect = original.artifactRedirect;
   f.mergeOptions = () => ({api: f.api, repo, number: 2, expectedHead: head, integrationRequestId,
     policy: {version: 1, mode: 'enforce-new', activation_time: '2100-01-01T00:00:00Z'},
     evidenceCheck: async () => {assert.notEqual(f.review, 'withdrawn', 'Fresh exact-head review is required'); return {status: 'legacy'};}});

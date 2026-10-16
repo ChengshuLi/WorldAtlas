@@ -79,6 +79,9 @@ jobs:
     outputs:
       report_sha256: ${{ steps.check.outputs.report_sha256 }}
       artifact_name: ${{ steps.check.outputs.artifact_name }}
+      report_bytes: ${{ steps.check.outputs.report_bytes }}
+      artifact_id: ${{ steps.upload.outputs.artifact-id }}
+      artifact_digest: ${{ steps.upload.outputs.artifact-digest }}
     steps:
       # Full software runs the exact candidate checker without credentials.
       # Selected data and source-only work retain the trusted baseline checker.
@@ -116,6 +119,7 @@ jobs:
           python -I -B scripts/run-geographic-check.py --fetch --out geography-check.json
           echo "artifact_name=$GEOGRAPHY_ARTIFACT_NAME" >> "$GITHUB_OUTPUT"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        id: upload
         if: always()
         with:
           name: geography-${{ inputs.request_id }}-${{ github.run_attempt }}
@@ -597,4 +601,7 @@ jobs:
           GEOGRAPHY_RESULT: ${{ needs.geography.result }}
           GEOGRAPHY_REPORT_SHA256: ${{ needs.geography.outputs.report_sha256 }}
           GEOGRAPHY_ARTIFACT_NAME: ${{ needs.geography.outputs.artifact_name }}
+          GEOGRAPHY_REPORT_BYTES: ${{ needs.geography.outputs.report_bytes }}
+          GEOGRAPHY_ARTIFACT_ID: ${{ needs.geography.outputs.artifact_id }}
+          GEOGRAPHY_ARTIFACT_DIGEST: ${{ needs.geography.outputs.artifact_digest }}
         run: node scripts/run-worker-merge.mjs
