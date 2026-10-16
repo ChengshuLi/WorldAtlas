@@ -1,0 +1,172 @@
+{
+  "reviewer": "/root/cell_method_review",
+  "disposition": "PASS actual original-conflict3 qualification with retained scope/acceptance limits",
+  "original_package": "gb-IDN-ADM2--source-conflict",
+  "original_denominator": 27,
+  "actual_qualified_original_conflict_keys": [
+    [
+      22839,
+      137791,
+      222157
+    ],
+    [
+      22947,
+      138001,
+      222176
+    ],
+    [
+      23115,
+      130021,
+      212814
+    ]
+  ],
+  "original_repair474_overlap": 0,
+  "separate_actual_repair_qualified": 26,
+  "potential_combined_delivery_cells": 29,
+  "combined_components": 11,
+  "combined_original_constructor_groups": 4,
+  "full_original_quartet": [
+    {
+      "path": "idn-physical-remainder80712-001/worker5-remainder-verification/conflict3-typed-inputs/actual-native-authority-001/constructor-result.json",
+      "bytes": 21793,
+      "sha256": "eda8e9f7d198537906ce1cabfc1f890919bb56fc331e7ff2864633c1ed84a28a"
+    },
+    {
+      "path": "idn-physical-remainder80712-001/worker5-remainder-verification/conflict3-typed-inputs/actual-native-authority-001/original-rule-preimage.json",
+      "bytes": 803,
+      "sha256": "1b127881e4adc75cedb031124797eea54241ac9851a61d03765f9465bd956346"
+    },
+    {
+      "path": "idn-physical-remainder80712-001/worker5-remainder-verification/conflict3-typed-inputs/actual-native-authority-001/authority-binding.json",
+      "bytes": 806,
+      "sha256": "c81db79d519b28996ed00a26f75250c7c6540ca353e4d6ff0cf840a3df78e1ec"
+    },
+    {
+      "path": "idn-physical-remainder80712-001/worker5-remainder-verification/conflict3-typed-inputs/actual-native-authority-001/preparation.json",
+      "bytes": 501,
+      "sha256": "35efb44e258b5a6a083c695060b3ae3dbf0eb93aa2e9f596effd6a1409edc2f5"
+    }
+  ],
+  "execution_receipt": {
+    "path": "idn-physical-remainder80712-001/worker5-remainder-verification/conflict3-typed-inputs/authority-execution-001.json",
+    "bytes": 2681,
+    "sha256": "736647a93cb81ec6530d864faf602292968c3855aa05c566021d0d561392b186"
+  },
+  "original_input_custody": {
+    "path": "idn-physical-remainder80712-001/worker5-remainder-verification/conflict3-typed-inputs/exact-original-conflict3-and-source-refinement.json",
+    "bytes": 9326,
+    "sha256": "266fef69b28da8ca1cf5180266c7a1022697bb0fee3aaa54b4c0b694cdc7f8d4"
+  },
+  "actual_rows": [
+    {
+      "base_geometry_sha256": "1367e476a89b1463839432312b6efd9c8ffbbd43aaf499123d33049b57fc172e",
+      "component_id": "source-target:a2b174c0c4521a169c807b93c03b8a3dbc16b23267c8f85d17a0d55b19694389",
+      "disposition": "assigned",
+      "native_bounds": [
+        125.08738738051466,
+        -9.457080530789579,
+        125.08738738051466,
+        -9.457080530789579
+      ],
+      "native_cells": 1,
+      "native_rows": [
+        {
+          "runs": [
+            [
+              222176,
+              222177,
+              22947
+            ]
+          ],
+          "y": 138001
+        }
+      ],
+      "pixelIndex": 22947,
+      "representation": "native-cells",
+      "source_receipt_sha256": "9556cc79ae09c88f499be6c05400c5cc417fd6f5d795138cd8fed2664016fe4e",
+      "target_id": "gb:IDN:ADM2:22746128B56140662064287"
+    },
+    {
+      "base_geometry_sha256": "e6dbaf32e798bc0acae2be486badbade851730ef8b8cf163b6bdea5ab7f30956",
+      "component_id": "source-target:cc71058a45179005d762928c31c98cb4c34b89aa13d4e1078da968601f017313",
+      "disposition": "assigned",
+      "native_bounds": [
+        125.06129704080621,
+        -9.172516348627843,
+        125.06129704080621,
+        -9.172516348627843
+      ],
+      "native_cells": 1,
+      "native_rows": [
+        {
+          "runs": [
+            [
+              222157,
+              222158,
+              22839
+            ]
+          ],
+          "y": 137791
+        }
+      ],
+      "pixelIndex": 22839,
+      "representation": "native-cells",
+      "source_receipt_sha256": "9556cc79ae09c88f499be6c05400c5cc417fd6f5d795138cd8fed2664016fe4e",
+      "target_id": "gb:IDN:ADM2:22746128B36840991830224"
+    },
+    {
+      "base_geometry_sha256": "a93609b75243b26fde46079a01ee9eed948e99506816b336842cfb1ef9540469",
+      "component_id": "source-target:eae04571572e67875a31001349650179fe0d61004730f7feed67e233414e5bb2",
+      "disposition": "assigned",
+      "native_bounds": [
+        112.23171578312974,
+        1.4574688773321887,
+        112.23171578312974,
+        1.4574688773321887
+      ],
+      "native_cells": 1,
+      "native_rows": [
+        {
+          "runs": [
+            [
+              212814,
+              212815,
+              23115
+            ]
+          ],
+          "y": 130021
+        }
+      ],
+      "pixelIndex": 23115,
+      "representation": "native-cells",
+      "source_receipt_sha256": "9556cc79ae09c88f499be6c05400c5cc417fd6f5d795138cd8fed2664016fe4e",
+      "target_id": "gb:IDN:ADM2:22746128B82886709098386"
+    }
+  ],
+  "source_evidence": {
+    "bytes": 14687615,
+    "commit": "4b14731f2a8cc602ed0a5a7e220f0d0a5b9d72d3",
+    "git_blob_oid": "9e96f511fd163f841185bd20ca98022b4a00febc",
+    "mode": "100644",
+    "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/conflict3/source-evidence.json",
+    "sha256": "c0b3d974fe666c7c8c0f60df3a41a1cd4af29a63f2ad58ed0034a2bb76c2dc3a"
+  },
+  "native_patch": {
+    "bytes": 143,
+    "commit": "4b14731f2a8cc602ed0a5a7e220f0d0a5b9d72d3",
+    "git_blob_oid": "5cb471dda8f171aa76abd55dcb3635d8983a3c5b",
+    "mode": "100644",
+    "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/conflict3/candidate-native-patch.json",
+    "sha256": "bd99c1ef53c688c16e2e8c92a4412ffcbf47c771f730fb9745fc6bcab61add08"
+  },
+  "limits": [
+    "Physical interpretation and semantic reconciliation are retained reviewed source evidence; actual current owner-zero is checked by native consumers.",
+    "Witness exclusion applies only to requested native centres. Original whole-source physical/hierarchy issues and historical source/resource limits remain retained; no whole-parent certification or acceptance is inferred.",
+    "Actual26repair and3conflict groups are disjoint but retain separate original denominators; remaining448repair/24conflict keys are not qualified by these results.",
+    "Actual selected675 owner0 evidence is retained separately and joined for each3; finalcurrentowner/conservation/selectedemitted/picker/integration gates remain.",
+    "No whole-source issues, original physical witnesses, legal-territorial or parent/source-vintage limits are cleared by these requested-centre results.",
+    "Alltrueoriginalquartets/ledgerrows must be retained; no source/native/predicate execution or publication by reviewer."
+  ],
+  "new_accepted_cells": 0,
+  "source_or_native_replay": false
+}

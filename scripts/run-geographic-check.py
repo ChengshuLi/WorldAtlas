@@ -219,9 +219,11 @@ def selected_joint(repo, baseline, candidate, *, trusted=None, checkpoint_destin
 
 
 
-def run_applicability_collector(command, env, timeout=120):
-    # Metadata acquisition may launch Git. A timeout must reap that owned group
-    # before ordinary prefetch/full checks can resume in the same object store.
+def run_applicability_collector(command, env, timeout=None):
+    # The hosted geography job owns the overall 25-minute deadline. A separate
+    # shortcut cutoff can turn finite cold acquisition into a much longer replay.
+    # Keep explicit timeout injection for cleanup controls, and always reap Git's
+    # owned group before ordinary prefetch/full checks can use the object store.
     if os.name != 'posix':
         raise OSError('Owned applicability process groups unavailable')
     child = subprocess.Popen(command, env=env, stdout=subprocess.PIPE,
@@ -261,18 +263,19 @@ def applicability_decline(reason, collector_reason=None):
     return None
 
 
-def unchanged_selected_inputs(repo, baseline, candidate):
+def unchanged_selected_inputs(repo, baseline, candidate, *, code_commit=None):
     """Bounded applicability only; incomplete identity discovery keeps full checks."""
     if baseline == candidate:
         # A self-comparison must still execute its applicable scientific checks.
         return None
+    code_commit = code_commit or baseline
     env = dict(os.environ, GIT_NO_LAZY_FETCH='1', GIT_TERMINAL_PROMPT='0')
     for name in ['NODE_OPTIONS', 'NODE_PATH']:
         env.pop(name, None)
     try:
         result = run_applicability_collector([
             env.get('NODE', 'node'), str(repo / 'scripts/check-unchanged-selected-geography.mjs'),
-            str(repo), baseline, candidate], env)
+            str(repo), baseline, candidate, code_commit], env)
         if result.returncode:
             return applicability_decline('collector-process-failed')
         if len(result.stdout) > 2 * 1024 * 1024:
@@ -281,7 +284,7 @@ def unchanged_selected_inputs(repo, baseline, candidate):
         if (not isinstance(proof, dict) or proof.get('version') != 1
                 or proof.get('baseline_commit') != baseline
                 or proof.get('candidate_commit') != candidate
-                or proof.get('trusted_reader_policy_commit') != baseline
+                or proof.get('trusted_reader_policy_commit') != code_commit
                 or proof.get('candidate_code_executed') is not False):
             return applicability_decline('collector-binding-invalid')
         if proof.get('status') != 'unchanged-selected-inputs':
@@ -316,13 +319,13 @@ def inspect(repo, baseline, candidate, *, code_commit=None, prefetch=False, chec
             'Candidate checker code executed against distinct baseline and candidate data; no checkpoint reuse or new checkpoint authority.',
             'Authenticated source adjudication remains baseline-only; deliver checker upgrades separately from data corrections that require it.',
             'Nested child receipts retain their legacy candidate_code_executed=false marker verbatim. That marker is not evidence that candidate checker code was absent; this report binds actual executing code.']
-    if not software and before == after and baseline != candidate:
+    if before == after and baseline != candidate:
         with stage_timing('unchanged-selected-inputs'):
-            applicability = unchanged_selected_inputs(repo, baseline, candidate)
+            applicability = unchanged_selected_inputs(repo, baseline, candidate, code_commit=code_commit)
         if applicability is not None:
             return {**report, 'status': 'not-applicable', 'regressions': None,
                     'unchanged_selected_inputs': applicability,
-                    'limits': ['Complete selected consumed-input and method identities are unchanged; applicability only, not fresh scientific validation or global gap clearance.',
+                    'limits': ['Complete selected consumed-data identities are unchanged under the actual executing checker; applicability only, not fresh scientific validation or global gap clearance.',
                                'Independent source quality, evidence, review and current combined-tree consumer gates remain required.']}
     selected = any(git(repo, 'ls-tree', '-z', version, '--', 'data/ownership-selection.json')
                    for version in [baseline, candidate])
@@ -340,8 +343,8 @@ def inspect(repo, baseline, candidate, *, code_commit=None, prefetch=False, chec
         else:
             # Eager whole-bank transport helps the legacy cold consumers, but
             # needlessly downloads sources/native assets for a qualified warm
-            # checkpoint. Software always takes this genuine cold path; other
-            # callers require the joint entry's explicit unavailable decision.
+            # checkpoint. Software with changed or unknown consumed data takes this cold path;
+            # baseline-code callers require the joint entry's explicit unavailable decision.
             if prefetch:
                 with stage_timing('selected-prefetch'):
                     prefetch_declared_inputs(repo, baseline, candidate)

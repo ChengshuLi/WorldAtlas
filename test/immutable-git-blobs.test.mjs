@@ -90,3 +90,18 @@ test('transient immutable reads authenticate without retention across nested cac
  await assert.rejects(corrupt(route(transient),'GET',undefined,{retainImmutableBlob:false}));
  assert(calls.filter(args=>args[0]===route(transient)).slice(0,3).every(args=>args[3].retainImmutableBlob===false));
 });
+
+test('a reviewed exact Vietnam-sized blob passes REST authentication without expanding the bounded cache',async()=>{
+ const raw=Buffer.alloc(36065990,19),good=blob(raw),calls=[];
+ const api=memoizeImmutableGitBlobs(async(...args)=>{calls.push(args);return good;},{maxBytes:1});
+ const options={expectedImmutableBytes:raw.length};
+ assert.equal((await api(route(good),'GET',undefined,options)).size,raw.length);
+ assert.equal((await api(route(good),'GET',undefined,options)).size,raw.length);assert.equal(calls.length,2,'overflow stays uncached');
+ assert.ok(Number.isSafeInteger(calls[0][3].maxResponseBytes));assert.ok(calls[0][3].maxResponseBytes>good.content.length);
+ await assert.rejects(api(route(good),'GET',undefined,{expectedImmutableBytes:raw.length-1}),/unsupported/);
+ await assert.rejects(api(route(good)),/unsupported/,'unplanned legacy calls keep their operating guard');
+ const cached=memoizeImmutableGitBlobs(async()=>good);
+ await cached(route(good),'GET',undefined,options);
+ await assert.rejects(cached(route(good),'GET',undefined,{expectedImmutableBytes:raw.length+1}),/tree size/);
+ await assert.rejects(cached(route(good)),/tree size/);
+});

@@ -258,10 +258,25 @@ come from the final queue.
 
 Full-profile changes to checker/producer code or its dependencies run the exact
 combined candidate checker, with
-checker-code identity separate from baseline and candidate data identities. It
-runs the genuine cold native-conservation and continuous-geometry comparisons;
-the actual final queue candidate executes this check once. Historical artifacts
+checker-code identity separate from baseline and candidate data identities. The existing bounded applicability collector first compares the complete consumed
+DATA identities under that one executing checkout. Identical inputs and complete
+present/absent routes make the differential check not applicable, including for
+software changes. Changed or unknown data/layouts retain the genuine cold
+native-conservation comparison; the actual final queue candidate executes this
+check once. Current executable changes do not change either data operand.
+Historical code consumed as custody remains authenticated at its original vintage. Historical artifacts
 cannot replace that current final job.
+The collector admits only its finite typed routing-body plan, using existing
+immutable descriptors and declared sizes. It retains at most 64 MiB of raw bodies
+with eviction, rather than treating cumulative legitimate reads as live memory.
+Every role still checks its own origin/path/mode/OID/length/SHA binding on cache
+hits and rereads. The 32 MiB member, 4096 descriptor, per-operation and existing
+25-minute hosted-job bounds remain. There is no duplicate shortcut deadline that
+turns finite cold metadata acquisition into a longer scientific replay; owned
+process-group cleanup remains. Cumulative I/O, unique planned bytes and live-cache peaks are
+reported separately. The raw-cache bound is not a total process-RSS guarantee.
+One exact baseline-to-candidate tree delta lets unchanged candidate paths reuse
+already authenticated baseline descriptors; changed paths retain separate reads.
 There is no finite software hash exception, baseline self-comparison substitute,
 checkpoint reuse or new checkpoint authority for this route. Selected-data and
 source-only work, data-only full changes and unrelated application changes retain

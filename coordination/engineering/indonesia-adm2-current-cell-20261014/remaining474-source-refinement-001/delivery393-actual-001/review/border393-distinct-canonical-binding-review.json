@@ -1,0 +1,164 @@
+{
+  "reviewer": "/root/physical_remainder_exact_scope",
+  "review_utc": "2026-10-16T02:05:35.428797+00:00",
+  "outcome": "PASS WITH LIMITS for actual finalizer/canonical binding",
+  "candidate_commit": "8fa52b146f6f53ca124e934522bf0f10b4355f68",
+  "composition_commit": "cbc5df2f22f4be35680ca8494cdad7953e506676",
+  "source_cohort_commit": "a0f4203cea5ce7bef97a9bc6d72e4aa0475a3891",
+  "actual_accepted_code_base": "71d95f45ea0457d60d4b8263bf36ab78316cf0cc",
+  "selected_baseline": "675cf6285b8d1cdaed3a7d8915146e7d45ce9052",
+  "actual_finalize_receipt": {
+    "path": "idn-border393-execution-001/finalize-execution.json",
+    "bytes": 916,
+    "sha256": "e69ea56a93d193a1fdb280aad9aefd148a974fbceb6a585f8c95a77b3c353215"
+  },
+  "actual_finalize_elapsed_seconds": 128.436500291,
+  "actual_finalize_exit_code": 0,
+  "canonical_snapshot_receipt": {
+    "path": "idn-border343-delivery-001/finalize-preparation-001/canonical-snapshot-commit.json",
+    "bytes": 3675,
+    "sha256": "b28e1c843f28ebcc9d24be8ebc33ad3c431f925ca5b260d7d95b6ef619d55c87"
+  },
+  "composition_snapshot_receipt": {
+    "path": "idn-border343-delivery-001/retention-preparation-001/composition-commit.json",
+    "bytes": 2318,
+    "sha256": "d28d685a3ec1b4b246136fafbac6aa0f4eb0e45b67dcf6af9407d37156063f3a"
+  },
+  "six_exact_stock_output_bindings": [
+    {
+      "emission": "ownership-selection.json",
+      "canonical": "data/ownership-selection.json",
+      "bytes": 1607,
+      "sha256": "c47702aadec2baa8075ab3375660a716dcd63fc76fd552d68f36ab6427e39d5d",
+      "git_blob_oid": "a8c84ec0549c5f120ebc3651125ae8b3d9d49f54"
+    },
+    {
+      "emission": "package-inputs.json",
+      "canonical": ".github/package-inputs.json",
+      "bytes": 15024,
+      "sha256": "4da506842d5473858fe3a861c17801bf30e01f13636eb401326f4e0904961da5",
+      "git_blob_oid": "e9c1af1f9198701f7dd845c852c775b51911e7b7"
+    },
+    {
+      "emission": "ownership-selection-v2.json",
+      "canonical": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/ownership-selection-v2.json",
+      "bytes": 3581,
+      "sha256": "7ebffc9396a83c08579e0fbc2e35479e677680efc84989e0ce617cd72dd2f4c0",
+      "git_blob_oid": "28826210ae4bb79bb1914d9b1cbe52131fc45d02"
+    },
+    {
+      "emission": "package-roles.json",
+      "canonical": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/package-roles.json",
+      "bytes": 45575,
+      "sha256": "c2f5628e13690a3d843219b3445e961334d46ab42358efac5b955545cfef2a41",
+      "git_blob_oid": "f7e12fd829531c6fcf77915f736ae33b18c5f096"
+    },
+    {
+      "emission": "selected-delivery-expectations.json",
+      "canonical": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/selected-delivery-expectations.json",
+      "bytes": 316948,
+      "sha256": "dc65d930ac070ec82bb5142e38b9830669206003c87f4a0883e8b4577071c776",
+      "git_blob_oid": "8bc312f83ebba317bca256b36499b9cc620122b4"
+    },
+    {
+      "emission": "preparation.json",
+      "canonical": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/composition/finalizer-preparation.json",
+      "bytes": 737,
+      "sha256": "a939f335d7fff2e599c43f6a36941ca27b6fb395e34028d260d46ab55005c5c7",
+      "git_blob_oid": "d4d849e71b7c74e47e09217697be07316dc2ff47"
+    }
+  ],
+  "four_reviewed_composition_products": [
+    {
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/composition/authority-registry.json",
+      "mode": "100644",
+      "git_blob_oid": "7a1578b82a7f18eeeaa0871a25142e00f1c1ad80",
+      "bytes": 98905,
+      "sha256": "dccc2765bc382039f8845e9917d84a78ca37a4ddda2c7a1b97d1fa910a7bcf7c"
+    },
+    {
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/composition/selected-ledger.json",
+      "mode": "100644",
+      "git_blob_oid": "1cc8f8cc1be09b8f7cd3f2d0d2b0cf2fbc588bff",
+      "bytes": 6957873,
+      "sha256": "81edb7cc814bf8993988191ac76bf7d6ee44d66dbd25b5aa66da8e54f318408a"
+    },
+    {
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/composition/patch.json",
+      "mode": "100644",
+      "git_blob_oid": "336c020f649d8c3e88366afe1d9d13c6c1930b23",
+      "bytes": 2723238,
+      "sha256": "b88cd153fbf2a117cb2523761f5a807a672b17e65c8af76625b6332f59f7b633"
+    },
+    {
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/composition/runtime-envelope.json",
+      "mode": "100644",
+      "git_blob_oid": "137ef16c51fb8334d47db6de8765f5711849ec0d",
+      "bytes": 1395,
+      "sha256": "ce8dc7fbd2f753b5e2856d76d63c2677d1490e765b37bf48ca61a1d2c573d98c"
+    }
+  ],
+  "whole_P_preservation": {
+    "source_leaf_files": 497,
+    "retained_composition_leaf_files": 501,
+    "canonical_leaf_files": 505,
+    "all_original_source_entries_mode_kind_oid_identical": true,
+    "all_retained_composition_entries_identical": true,
+    "source_to_composition_only_additions": [
+      "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/composition/authority-registry.json",
+      "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/composition/selected-ledger.json",
+      "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/composition/patch.json",
+      "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/composition/runtime-envelope.json"
+    ],
+    "composition_to_canonical_only_additions": [
+      "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/ownership-selection-v2.json",
+      "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/package-roles.json",
+      "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/selected-delivery-expectations.json",
+      "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/composition/finalizer-preparation.json"
+    ],
+    "outside_P_changes_from_accepted_code_base": [
+      ".github/package-inputs.json",
+      "data/ownership-selection.json"
+    ]
+  },
+  "inherited675_binding": {
+    "selector_key_order_preserved": true,
+    "all_selector_fields_except_explicit_additive_release_preserved": true,
+    "entire_ordered_input_declaration_prefix_preserved": 257,
+    "new_input_declarations": [
+      "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/composition/patch.json",
+      "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/composition/runtime-envelope.json",
+      "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/composition/selected-ledger.json",
+      "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/ownership-selection-v2.json"
+    ],
+    "new_input_count": 261,
+    "other_package_fields_preserved": true,
+    "base_selection_native_manifest_and_owner_roster_descriptors_unchanged": true
+  },
+  "cohort_binding": {
+    "cumulative_native_cells": 282308,
+    "original393_compose_review": {
+      "path": "idn-physical-remainder80712-001/worker5-remainder-verification/border393-distinct-actual-compose-review.json",
+      "bytes": 4905,
+      "sha256": "9dd3a48fbd0377c8745cc8402e55bfbfe2fb6c913f5de64675e171d99c2bf326"
+    },
+    "stock_expectation_cohorts": 101,
+    "stock_expectation_members": 712,
+    "prospective_role_paths": 111,
+    "role_status_limit": [
+      "Compare actual completed selected-reader inventory, preserving prior declarations; run real package/consumer checks."
+    ]
+  },
+  "consequential_findings": [
+    "All6 canonical flat products equal the actual emitted finalizer bytes, not retyped projections. The4 sidecar composition descriptors resolve to the exact products previously independently reviewed at actual71d composition.",
+    "Every original source-cohort P leaf is preserved byte-identically by Git mode/type/blob identity through sourcea0\u2192compositioncbc\u2192canonical8fa. The only P additions are4 actual composition products and4 emitted metadata products; no original source or predecessor body is replaced.",
+    "Outside P, only the exact stock ownership selector and package declaration files change relative to accepted code71d. Original675 declaration order, all257 previous input paths, native-base/owner-roster descriptors, and all unaffected selector/package fields remain unchanged.",
+    "Stock expectations bind282308 cells,101 cohorts and712 active members to the reviewed720 literal-row ledger. This is emitted metadata, not a fresh selected-reader/picker/current-owner proof."
+  ],
+  "limits": [
+    "The actual finalizer/canonical snapshot is not accepted delivery or actual current ownerzero/conservation/native visibility. Root selected-joint execution on this real8fa candidate remains separate and pending.",
+    "The emitted111-path fixed-role projection is prospective; its literal pending real reader/package/consumer check is retained and not relabelled as executed source consumption.",
+    "Earlier source priority, original conflicting claims, physical/member/tie/witness, datum/vintage and operating limits remain unchanged. No source/native producer/predicate/operator was rerun by this review and no2057/2056/code change occurred."
+  ],
+  "new_accepted_credit": 0
+}

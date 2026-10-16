@@ -1,8 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
+import fs from 'node:fs';
+import path from 'node:path';
 import {memoizeImmutableGitBlobs} from '../scripts/immutable-git-blobs.mjs';
-import {sha256, subjectsHash} from '../scripts/evidence-quality.mjs';
+import {sha256, subjectsHash, repositoryReader} from '../scripts/evidence-quality.mjs';
 import {evidenceRequirement} from '../scripts/evidence-policy.mjs';
 import {validatePremergeManifest, validateRecordChecks, validateReviewReceipt, checkPremergeEvidence, GEOMETRY_VERSION} from '../scripts/premerge-evidence.mjs';
 
@@ -121,6 +123,26 @@ test('Washington-style generated narrative/table mismatch fails against the same
   f.manifest.rendered_tables[0].rows[0].template = 'Wrong | {value}%'; assert.throws(() => validate(f), /table differs/);
   f.manifest.rendered_tables = []; assert.throws(() => validate(f), /ledger-bound/);
 });
+test('large table and control rereads retain exact descriptors through the real local reader', () => {
+  const f = fixture(), directory = fs.mkdtempSync(path.join(process.cwd(), '.cache-premerge-reread-'));
+  const tablePath = 'coordination/engineering/synthetic/table.md', controlPath = 'coordination/engineering/synthetic/control.json';
+  const table = Buffer.alloc(36065990, 32); table.write('Share | 50.00%\n');
+  const control = Buffer.from(JSON.stringify({method_id: 'synthetic', kind: 'positive-control', outcome: 'passed'}) + ' '.repeat(36065990));
+  try {
+    for (const [name, raw] of [[outputPath, output], [tablePath, table], [controlPath, control]]) {
+      const target = path.join(directory, name); fs.mkdirSync(path.dirname(target), {recursive: true}); fs.writeFileSync(target, raw, {flag: 'wx'});
+      if (name === outputPath) continue;
+      f.manifest.outputs.push({...desc(name, raw), ...(name === tablePath ? {role: 'generated-table'} : {})});
+      f.files.push({filename: name, status: 'added'}); f.manifest.change_receipts.push({path: name, status: 'added'});
+    }
+    f.manifest.rendered_tables = [{path: tablePath, rows: [{metric_id: 'share', line: 1, template: 'Share | {value}%', decimals: 2, scale: 100}]}];
+    f.manifest.validation = [{method_id: 'synthetic', kind: 'positive-control', outcome: 'passed', evidence_path: controlPath}];
+    const reader = repositoryReader(directory);
+    f.readFile = (name, vintage, descriptor) => name === 'baseline.txt' ? baseline : reader(name, vintage, descriptor);
+    assert.equal(validate(f).change_files_checked, 4);
+    fs.appendFileSync(path.join(directory, controlPath), 'x'); assert.throws(() => validate(f), /budget/);
+  } finally { fs.rmSync(directory, {recursive: true, force: true}); }
+});
 test('scientific reviews reject self approval, stale heads and absent factual/geometry review', () => {
   for (const mutate of [r => r.reviewer_worker_id = 'author', r => r.head_sha = commit, r => r.outcome = 'changes-requested', r => delete r.domains.implementation]) {
     const f = fixture(), r = receipt(f); mutate(r); assert.throws(() => review(f, r));
@@ -146,6 +168,21 @@ function remoteFixture(f, extraContents = []) {
   };
   return {api, calls, bytes, tree, blobs};
 }
+
+test('hosted whole-manifest loading forwards exact large sizes through nested immutable REST readers',async()=>{
+ const f=fixture(),raw=Buffer.alloc(36065990,17),extras=[];
+ for(let i=0;i<8;i++){
+  const name='coordination/engineering/synthetic/large-'+i+'.bin';extras.push([name,raw]);
+  f.manifest.outputs.push(desc(name,raw));f.files.push({filename:name,status:'added'});f.manifest.change_receipts.push({path:name,status:'added'});
+ }
+ assert.ok(f.manifest.outputs.reduce((sum,file)=>sum+file.bytes,0)>256*1024*1024);f.pr.changed_files=f.files.length;
+ const remote=remoteFixture(f,extras),forwarded=[];
+ const api=memoizeImmutableGitBlobs(memoizeImmutableGitBlobs(async(...args)=>{forwarded.push(args);return remote.api(...args);}));
+ assert.equal((await checkPremergeEvidence({...f,api,repo:'test/repo',policy})).status,'bytes-verified');
+ assert.ok(forwarded.some(([, , ,options])=>options?.expectedImmutableBytes===raw.length&&Number.isSafeInteger(options.maxResponseBytes)));
+ const changed=remote.tree.find(row=>row.path===extras[0][0]);changed.size--;
+ await assert.rejects(checkPremergeEvidence({...f,api,repo:'test/repo',policy}),/Manifest\/tree evidence size differs/);
+});
 test('scientific byte checks need no duplicate review comment and do not certify review', async () => {
   const f = fixture(), remote = remoteFixture(f);
   const result = await checkPremergeEvidence({...f, api: remote.api, repo: 'test/repo', policy});

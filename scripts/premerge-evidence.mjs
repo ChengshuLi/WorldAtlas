@@ -1,11 +1,11 @@
-import {gunzipSync} from 'node:zlib';
 import {sha256, validateEvidence, safeEvidencePath, baselineFiles, baselineFile} from './evidence-quality.mjs';
+import {finiteBytes, addBytes, evidenceBytePlan, decodeEvidenceGzip, immutableResponseBytes, LEGACY_FILE_BYTES} from './evidence-quality.mjs';
 import {workSpec} from './issue-claim-contract.mjs';
 import {validateLanePaths} from './check-handoff-scope.mjs';
 import {evidenceRequirement, loadEvidencePolicy} from './evidence-policy.mjs';
 
 const need = (ok, message) => { if (!ok) throw Error(message); };
-const MAX_FILE = 32 * 1024 * 1024;
+const MAX_FILE = LEGACY_FILE_BYTES;
 export const GEOMETRY_VERSION = 'worldatlas-evidence-geometry-v1';
 export const PREPARATION_VERSION = 'worldatlas-evidence-preparation-v1';
 const geometryPolicy = {
@@ -19,8 +19,11 @@ export function validateRecordChecks(manifest, readFile) {
   need(Array.isArray(checks), 'Record checks must be an array');
   const at = (path, pointer, vintage) => {
     need(typeof pointer === 'string' && (pointer === '' || pointer.startsWith('/')), 'Invalid record pointer');
-    let raw = readFile(path, vintage);
-    if (path.endsWith('.gz')) raw = gunzipSync(raw, {maxOutputLength: MAX_FILE});
+    const descriptor = vintage === 'candidate' ? manifest.outputs.find(file => file.path === path)
+      : manifest.baseline.files.find(file => file.path === path && (file.commit ?? manifest.baseline.commit) === vintage);
+    need(descriptor, 'Record input is outside exact manifest scope');
+    let raw = readFile(path, vintage, descriptor);
+    if (path.endsWith('.gz') || descriptor.uncompressed_sha256 !== undefined) raw = decodeEvidenceGzip(raw, descriptor);
     let value = JSON.parse(raw);
     for (const key of pointer === '' ? [] : pointer.slice(1).split('/').map(key => key.replaceAll('~1', '/').replaceAll('~0', '~'))) {
       need(value && Object.hasOwn(value, key), 'Required record input is absent'); value = value[key];
@@ -56,6 +59,17 @@ export function validateRecordChecks(manifest, readFile) {
 export function validatePremergeManifest(manifest, {readFile, files, manifestPath, issue, spec, reservation, branch, pr}) {
   const quality = spec.evidence_quality;
   validateLanePaths(branch, [manifestPath], {ownedPaths: reservation.owned_paths});
+  const originals = new Map();
+  if (manifest.change_receipts !== undefined && typeof readFile.descriptor === 'function') {
+    for (const file of files.filter(file => file.status !== 'added')) {
+      const name = file.previous_filename ?? file.filename; safeEvidencePath(name);
+      originals.set(name, readFile.descriptor(name, 'base'));
+    }
+    // These receipt bodies are planned, hashed reads of the actual immutable
+    // PR base, just like the hosted reader's complete prefetch union.
+    evidenceBytePlan([...baselineFiles(manifest), ...manifest.sources.flatMap(source => source.files ?? []),
+      ...manifest.outputs, ...[...originals.values()].map(file => ({...file, commit: 'base'}))]);
+  }
   const result = validateEvidence(manifest, {readFile, expectedIssue: issue.number,
     expectedLane: spec.mode, expectedSubjects: quality.subject_ids, expectedPins: quality.pins});
   const recordChecks = validateRecordChecks(manifest, readFile);
@@ -73,7 +87,7 @@ export function validatePremergeManifest(manifest, {readFile, files, manifestPat
     for (const name of [file.filename, file.previous_filename].filter(Boolean)) safeEvidencePath(name);
     if (receipts !== undefined && file.status !== 'added') {
       const original = file.previous_filename ?? file.filename;
-      need(/^[a-f0-9]{64}$/.test(row.original_sha256) && sha256(readFile(original, 'base')) === row.original_sha256,
+      need(/^[a-f0-9]{64}$/.test(row.original_sha256) && sha256(readFile(original, 'base', originals.get(original))) === row.original_sha256,
         `Original change bytes mismatch: ${original}`);
     }
     if (receipts !== undefined && file.status === 'removed') need(typeof row.reason === 'string' && row.reason.trim(), 'Deletion needs a preservation explanation');
@@ -95,8 +109,9 @@ export function validatePremergeManifest(manifest, {readFile, files, manifestPat
   for (const metric of manifest.metrics) {
     const binding = bindings.find(row => row.metric_id === metric.id);
     need(binding && outputs.has(binding.path) && typeof binding.json_pointer === 'string' && binding.json_pointer.startsWith('/'), 'Invalid metric output binding');
-    let raw = readFile(binding.path, 'candidate');
-    if (binding.path.endsWith('.gz')) raw = gunzipSync(raw, {maxOutputLength: MAX_FILE});
+    const descriptor = manifest.outputs.find(file => file.path === binding.path);
+    let raw = readFile(binding.path, 'candidate', descriptor);
+    if (binding.path.endsWith('.gz') || descriptor.uncompressed_sha256 !== undefined) raw = decodeEvidenceGzip(raw, descriptor);
     let value = JSON.parse(raw);
     for (const key of binding.json_pointer.slice(1).split('/').map(key => key.replaceAll('~1', '/').replaceAll('~0', '~'))) {
       need(value && Object.hasOwn(value, key), 'Metric pointer does not resolve'); value = value[key];
@@ -107,7 +122,7 @@ export function validatePremergeManifest(manifest, {readFile, files, manifestPat
   for (const output of manifest.outputs.filter(file => file.role === 'generated-table')) {
     const table = tables.find(table => table.path === output.path);
     need(table && Array.isArray(table.rows) && table.rows.length, 'Generated table needs ledger-bound rows');
-    const lines = readFile(output.path, 'candidate').toString('utf8').split('\n');
+    const lines = readFile(output.path, 'candidate', output).toString('utf8').split('\n');
     for (const row of table.rows) {
       const metric = manifest.metrics.find(metric => metric.id === row.metric_id);
       need(metric && Number.isSafeInteger(row.line) && row.line > 0 && typeof row.template === 'string' && row.template.includes('{value}') &&
@@ -135,7 +150,8 @@ export function validatePremergeManifest(manifest, {readFile, files, manifestPat
       ['positive-control', 'negative-control', 'reproducibility'].includes(control.kind) &&
       control.outcome === 'passed' && outputs.has(control.evidence_path), 'Invalid declared control');
     controlKeys.add(key);
-    const evidence = JSON.parse(readFile(control.evidence_path, 'candidate'));
+    const descriptor = manifest.outputs.find(file => file.path === control.evidence_path);
+    const evidence = JSON.parse(readFile(control.evidence_path, 'candidate', descriptor));
     need(evidence.method_id === control.method_id && evidence.kind === control.kind && evidence.outcome === 'passed', 'Control bytes do not match receipt');
     if (control.kind === 'reproducibility') need(evidence.run_one_sha256 === evidence.run_two_sha256 && /^[a-f0-9]{64}$/.test(evidence.run_one_sha256), 'Two-run reproducibility hashes differ');
   }
@@ -177,28 +193,39 @@ async function remoteReader(api, repo, commits) {
     }
     trees.set(vintage, commitTrees.get(commit));
   }
-  let total = 0;
-  async function load(name, vintage, max = MAX_FILE) {
+  let total = 0, allowance;
+  const planned = new Map();
+  async function load(name, vintage, max) {
     safeEvidencePath(name); const key = `${vintage}:${name}`;
-    if (cache.has(key)) return cache.get(key);
     const entry = trees.get(vintage)?.get(name);
-    need(entry?.type === 'blob' && ['100644', '100755'].includes(entry.mode) && entry.size <= max, 'Missing/oversized/nonordinary evidence file');
-    total += entry.size; need(total <= 256 * 1024 * 1024, 'Remote evidence budget exceeded');
-    const blob = await api(`/repos/${repo}/git/blobs/${entry.sha}`);
+    const bound = max === undefined ? planned.get(key)?.size ?? MAX_FILE : finiteBytes(max, 'remote file budget');
+    need(entry?.type === 'blob' && ['100644', '100755'].includes(entry.mode) && Number.isSafeInteger(entry.size)
+      && entry.size >= 0 && entry.size <= bound && (allowance === undefined || planned.has(key)), 'Missing/oversized/nonordinary evidence file');
+    if (cache.has(key)) return cache.get(key);
+    total = addBytes(total, entry.size); need(total <= (allowance ?? bound), 'Remote evidence budget exceeded');
+    const blob = await api(`/repos/${repo}/git/blobs/${entry.sha}`, 'GET', undefined,
+      {expectedImmutableBytes: entry.size, maxResponseBytes: immutableResponseBytes(entry.size)});
     need(blob.encoding === 'base64', 'Unsupported Git blob encoding');
     const bytes = Buffer.from(blob.content, 'base64'); need(bytes.length === entry.size, 'Incomplete Git blob bytes');
     cache.set(key, bytes); return bytes;
   }
   async function prefetch(loads) {
-    if(typeof api.prefetchGitBlobs!=='function')return;
-    const rows=loads.map(([name,vintage])=>{safeEvidencePath(name);const row=trees.get(vintage)?.get(name);need(row?.type==='blob'&&['100644','100755'].includes(row.mode)&&Number.isSafeInteger(row.size)&&row.size>=0&&row.size<=MAX_FILE,'Invalid prefetch evidence binding');return row;});
+    const rows=loads.map(([name,vintage,descriptor])=>{safeEvidencePath(name);const row=trees.get(vintage)?.get(name);need(row?.type==='blob'&&['100644','100755'].includes(row.mode)&&Number.isSafeInteger(row.size)&&row.size>=0,'Missing/nonordinary/invalid prefetch evidence binding');
+      if(descriptor!==undefined)need(row.size===finiteBytes(descriptor.bytes,'encoded descriptor'),'Manifest/tree evidence size differs');return row;});
     const byOID=new Map(),byPath=new Map();
-    for(let i=0;i<rows.length;i++){const row=rows[i];need(!byOID.has(row.sha)||byOID.get(row.sha).size===row.size,'Conflicting immutable tree sizes');byOID.set(row.sha,row);byPath.set(JSON.stringify(loads[i]),row);}
+    for(let i=0;i<rows.length;i++){const row=rows[i],key=`${loads[i][1]}:${loads[i][0]}`;need(!byOID.has(row.sha)||byOID.get(row.sha).size===row.size,'Conflicting immutable tree sizes');byOID.set(row.sha,row);byPath.set(key,row);}
     const unique=[...byOID.values()];
-    need([...byPath.values()].reduce((sum,row)=>sum+row.size,0)<=256*1024*1024,'Remote evidence budget exceeded');
-    if(unique.length<=512)await api.prefetchGitBlobs(repo,unique);
+    allowance=[...byPath.values()].reduce((sum,row)=>addBytes(sum,row.size),0);
+    for(const [key,row]of byPath)planned.set(key,row);
+    if(typeof api.prefetchGitBlobs==='function'&&unique.length<=512)await api.prefetchGitBlobs(repo,unique);
   }
-  return {load, prefetch, read: (name, vintage) => { const bytes = cache.get(`${vintage}:${name}`); need(bytes, 'Unloaded evidence bytes'); return bytes; }};
+  const read = (name, vintage) => { const bytes = cache.get(`${vintage}:${name}`); need(bytes, 'Unloaded evidence bytes'); return bytes; };
+  read.descriptor = (name, vintage) => {
+    safeEvidencePath(name); const entry = planned.get(`${vintage}:${name}`);
+    need(entry && entry.type === 'blob' && ['100644', '100755'].includes(entry.mode), 'Unplanned evidence descriptor');
+    return {path: name, mode: entry.mode, git_blob_oid: entry.sha, bytes: entry.size};
+  };
+  return {load, prefetch, read};
 }
 
 export async function checkPremergeEvidence({api, repo, pr, issue, reservation, files, policy = loadEvidencePolicy()}) {
@@ -216,6 +243,7 @@ export async function checkPremergeEvidence({api, repo, pr, issue, reservation, 
       'Invalid or oversized evidence inventory');
     need(/^[a-f0-9]{40}$/.test(manifest.baseline?.commit ?? ''), 'Invalid evidence baseline');
     const historical = baselineFiles(manifest);
+    evidenceBytePlan([...historical, ...manifest.sources.flatMap(source => source.files ?? []), ...manifest.outputs]);
     const commits = [...new Set([manifest.baseline.commit, ...historical.map(file => file.commit)])];
     for (const commit of commits) {
       const comparison = await api(`/repos/${repo}/compare/${commit}...${pr.base.sha}`);
@@ -224,11 +252,11 @@ export async function checkPremergeEvidence({api, repo, pr, issue, reservation, 
     const reader = await remoteReader(api, repo, {candidate: pr.head.sha, base: pr.base.sha,
       ...Object.fromEntries(commits.map(commit => [commit, commit]))});
     reader.read.assertAncestor = commit => need(commits.includes(commit), 'Historical commit ancestry was not verified');
-    const loads = [...historical.map(file => [file.path, file.commit]),
-      ...manifest.sources.flatMap(source => source.files ?? []).map(file => [file.path, 'candidate']), ...manifest.outputs.map(file => [file.path, 'candidate']),
+    const loads = [...historical.map(file => [file.path, file.commit, file]),
+      ...manifest.sources.flatMap(source => source.files ?? []).map(file => [file.path, 'candidate', file]), ...manifest.outputs.map(file => [file.path, 'candidate', file]),
       ...(manifest.change_receipts === undefined ? [] : files.filter(file => file.status !== 'added').map(file => [file.previous_filename ?? file.filename, 'base']))];
     await reader.prefetch(loads);
-    for (const [name, vintage] of loads) await reader.load(name, vintage);
+    for (const [name, vintage, descriptor] of loads) await reader.load(name, vintage, descriptor?.bytes);
     const checked = validatePremergeManifest(manifest, {readFile: reader.read, files, manifestPath: requirement.manifestPath,
       issue, spec, reservation, branch: pr.head.ref, pr});
     const result = {status: 'checked', head_sha: pr.head.sha, manifest_sha256: sha256(manifestBytes), ...checked};

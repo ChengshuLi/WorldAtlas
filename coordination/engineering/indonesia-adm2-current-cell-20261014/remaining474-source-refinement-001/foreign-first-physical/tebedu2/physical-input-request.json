@@ -1,0 +1,127 @@
+{
+  "kind": "first-whole-original-Tebedu-stock-physical-input-request;not-executed",
+  "target": "gb:MYS:ADM2:92858781B78299501514110",
+  "Atlas_owner_index": 31151,
+  "reference_owner": "Malaysia",
+  "reference_year": "2020",
+  "source_family": "gb:MYS:ADM2",
+  "original_requested_conflict_keys": [
+    {
+      "id": "conflict:Borneo:13:130389:211487",
+      "original_package": "conflict",
+      "country": "MYS",
+      "y": 130389,
+      "x": 211487,
+      "original_record": {
+        "outcome_interval_index": 11,
+        "pair": [
+          "Sanggau",
+          "Tebedu"
+        ],
+        "stable_ids": [
+          "gb:IDN:ADM2:22746128B74989070523542",
+          "gb:MYS:ADM2:92858781B78299501514110"
+        ],
+        "y": 130389,
+        "x": 211487,
+        "longitude_rational": "14472810/131083",
+        "longitude_display": 110.40951153086212,
+        "latitude_native_f64": 0.9522535572637714,
+        "latitude_hex": "0x1.e78dc73be526cp-1"
+      },
+      "original_request_custody": {
+        "bytes": 10134,
+        "sha256": "7371905d83d903e8f84a66e6373de337985af0c1e8f301417f66c7a0852e2957",
+        "local_source_path_omitted": true
+      }
+    },
+    {
+      "id": "conflict:Borneo:14:130389:211488",
+      "original_package": "conflict",
+      "country": "MYS",
+      "y": 130389,
+      "x": 211488,
+      "original_record": {
+        "outcome_interval_index": 11,
+        "pair": [
+          "Sanggau",
+          "Tebedu"
+        ],
+        "stable_ids": [
+          "gb:IDN:ADM2:22746128B74989070523542",
+          "gb:MYS:ADM2:92858781B78299501514110"
+        ],
+        "y": 130389,
+        "x": 211488,
+        "longitude_rational": "14472990/131083",
+        "longitude_display": 110.41088470663625,
+        "latitude_native_f64": 0.9522535572637714,
+        "latitude_hex": "0x1.e78dc73be526cp-1"
+      },
+      "original_request_custody": {
+        "bytes": 10134,
+        "sha256": "7371905d83d903e8f84a66e6373de337985af0c1e8f301417f66c7a0852e2957",
+        "local_source_path_omitted": true
+      }
+    }
+  ],
+  "requested_rows": [
+    {
+      "y": 130389,
+      "runs": [
+        [
+          211487,
+          211489,
+          31151
+        ]
+      ]
+    }
+  ],
+  "stage_schema": "Existing producer list of whole {target,consumed,selected}; no clipping to requested keys.",
+  "actual_current_canonical_body": {
+    "commit": "675cf6285b8d1cdaed3a7d8915146e7d45ce9052",
+    "path": "data/geography/part-16.json",
+    "mode": "100644",
+    "git_blob_oid": "02d53ca01dc014a3c9481eb1017a89487fc2bd89",
+    "bytes": 5213846,
+    "sha256": "b51719f7ff906a3c2c4dfdfea706ea51aa9541d550cc990b14191c046fb20797"
+  },
+  "original_consumed_family": {
+    "path": "idn-remaining474-source-research-001/worker1-kapuas257/competent-source-followup-002/gb-MYS-ADM2-original-consumed.json",
+    "bytes": 1161210,
+    "sha256": "2370e1df1da8e8db2d582ea404d2bcb538127a01785dd994cbe4c1bbf33a951f",
+    "original_whole_corpus_pin": {
+      "commit": "5ab660cb68821e6b719f1b86819069ecac419ce1",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MYS-ADM2-000.bin.gz",
+      "encoded_sha256": "825f65a4ca40cdc12d5914e07f5153d606d2d0a06c7c76d4ac12c729c0920ee6",
+      "decoded_sha256": "2370e1df1da8e8db2d582ea404d2bcb538127a01785dd994cbe4c1bbf33a951f"
+    }
+  },
+  "positive_source_readiness": "Both original and full fine Tebedu interiors and both original/full Sarawak context are actual existing-native results; complete full IDN family is outside. Source-only location proposal, no legal winner or physical class inferred.",
+  "actual_current_owner": "Worker6 all501 accepted675 owner0 observation; no owned transfer.",
+  "scope_limits": [
+    "First actual Tebedu whole physical interpretation has not run.",
+    "No Indonesian physical receipt is renamed/borrowed.",
+    "Complete parent context retained separately; no clipping/omitting original parent source.",
+    "JMG Sarawak contains second key but not first, actual cross-source disagreement preserved.",
+    "No new frame/model threshold or source operator."
+  ],
+  "common_stock_inputs": "idn-three-target11234-physical-preparation-001/canonical-physical-config.json, reuse unchanged country-agnostic25 role pins excluding old target stage/resources; current runtime/config binding pending.",
+  "required_before_launch": [
+    "Distinct substantive stage/physical-input-readiness review",
+    "Immutable stage commit/path pin from Root",
+    "Current stock physical config/runtime with ordinary defaults; no old memory fields"
+  ],
+  "outputs": {
+    "whole-original-stage-inputs.json": {
+      "path": "idn-remaining474-source-research-001/worker2-malinau-mahakam105/resumed-001/tebedu2-first-whole-physical/whole-original-stage-inputs.json",
+      "bytes": 6334,
+      "sha256": "1977d9398e36eeb4c35df9b59b948f92986cca597557c73496ef2d20fd76d0c0"
+    },
+    "whole-parent-source-context.json": {
+      "path": "idn-remaining474-source-research-001/worker2-malinau-mahakam105/resumed-001/tebedu2-first-whole-physical/whole-parent-source-context.json",
+      "bytes": 482611,
+      "sha256": "89bca4a66d881a1b185d6d02fc3d3a7d9ff6e4b14481d16016942e36b263f4dd"
+    }
+  }
+}

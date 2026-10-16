@@ -2,8 +2,56 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
-import {gunzipSync} from 'node:zlib';
 import {fileURLToPath} from 'node:url';
+import {gunzipSync} from 'node:zlib';
+
+// Unplanned legacy callers keep their existing operating guard. Reviewed
+// whole-file descriptors instead supply their own exact finite byte bounds.
+export const LEGACY_FILE_BYTES = 32 * 1024 * 1024;
+export function finiteBytes(value, label = 'byte bound') {
+  if (!Number.isSafeInteger(value) || value < 0) throw Error('Invalid finite ' + label);
+  return value;
+}
+export function addBytes(left, right, label = 'byte total') {
+  finiteBytes(left, label); finiteBytes(right, label);
+  return finiteBytes(left + right, label);
+}
+export function evidenceBytePlan(files) {
+  let encodedBytes = 0, decodedBytes = 0, maxFileBytes = 0;
+  const seen = new Set();
+  for (const file of files) {
+    const key = (file.commit ?? 'candidate') + ':' + file.path;
+    if (seen.has(key)) throw Error('Duplicate file descriptor');
+    seen.add(key);
+    const encoded = finiteBytes(file.bytes, 'encoded descriptor');
+    encodedBytes = addBytes(encodedBytes, encoded);
+    maxFileBytes = Math.max(maxFileBytes, encoded);
+    if (file.uncompressed_sha256 !== undefined || file.uncompressed_bytes !== undefined) {
+      if (!/^[a-f0-9]{64}$/.test(file.uncompressed_sha256 ?? '')) throw Error('Invalid uncompressed descriptor');
+      const decoded = finiteBytes(file.uncompressed_bytes, 'decoded descriptor');
+      decodedBytes = addBytes(decodedBytes, decoded);
+      maxFileBytes = Math.max(maxFileBytes, decoded);
+    }
+  }
+  return {encodedBytes, decodedBytes, maxFileBytes, totalBytes: addBytes(encodedBytes, decodedBytes)};
+}
+export function decodeEvidenceGzip(raw, file, {maxFileBytes} = {}) {
+  if (maxFileBytes !== undefined) finiteBytes(maxFileBytes, 'caller file budget');
+  const declared = file?.uncompressed_bytes;
+  const bound = declared === undefined ? maxFileBytes ?? LEGACY_FILE_BYTES : finiteBytes(declared, 'decoded descriptor');
+  if (maxFileBytes !== undefined && bound > maxFileBytes) throw Error('Uncompressed file exceeds budget');
+  const unpacked = gunzipSync(raw, {maxOutputLength: Math.max(1, bound)});
+  if (declared !== undefined && unpacked.length !== declared) throw Error('Uncompressed bytes mismatch');
+  if (file?.uncompressed_sha256 !== undefined && createHash('sha256').update(unpacked).digest('hex') !== file.uncompressed_sha256)
+    throw Error('Uncompressed bytes mismatch');
+  return unpacked;
+}
+export function immutableResponseBytes(bytes) {
+  finiteBytes(bytes, 'immutable blob size');
+  // Account for base64, escaped line breaks and the ordinary REST envelope.
+  return addBytes(finiteBytes(8 * Math.ceil(bytes / 3), 'base64 response size'), 64 * 1024);
+}
+
 
 export const sha256 = bytes => createHash('sha256').update(bytes).digest('hex');
 export const subjectsHash = ids => sha256(JSON.stringify([...ids].sort()));
@@ -82,9 +130,9 @@ export function metricInput(manifest, metric) {
 // Subject JSON uses the same declared gzip transport as whole-file inspection.
 // Legacy .gz files remain supported; arbitrary binary files are never sniffed.
 function subjectJSON(file, name, vintage, readFile, maxFileBytes) {
-  const raw = readFile(name, vintage);
+  const raw = readFile(name, vintage, file);
   const compressed = file.uncompressed_sha256 !== undefined || name.endsWith('.gz');
-  return JSON.parse(compressed ? gunzipSync(raw, {maxOutputLength: maxFileBytes}) : raw);
+  return JSON.parse(compressed ? decodeEvidenceGzip(raw, file, {maxFileBytes}) : raw);
 }
 
 function subjectFileBinding(value, manifest) {
@@ -151,10 +199,10 @@ function composedSubjectIds(collection, binding) {
 function familyRecordPart(file, readFile, maxFileBytes) {
   require(file.bytes <= maxFileBytes && file.uncompressed_bytes <= maxFileBytes,
     'Family record source exceeds ordinary decoded budget');
-  const raw = Buffer.from(readFile(file.path, file.commit));
+  const raw = Buffer.from(readFile(file.path, file.commit, file));
   require(raw.length === file.bytes && sha256(raw) === file.sha256,
     'Family record whole encoded source drift');
-  const body = gunzipSync(raw, {maxOutputLength: maxFileBytes});
+  const body = decodeEvidenceGzip(raw, file, {maxFileBytes});
   require(body.length === file.uncompressed_bytes && sha256(body) === file.uncompressed_sha256,
     'Family record whole decoded source drift');
   const records = new Map(), ids = new Set();
@@ -224,7 +272,7 @@ function verifySubjectInventory(manifest, readFile, maxFileBytes, limits) {
 
 /** Reader returns bytes from an immutable baseline or candidate; never executes packet code. */
 export function validateEvidence(manifest, {readFile, expectedIssue, expectedSubjects, expectedPins,
-  expectedLane, maxFileBytes = 32 * 1024 * 1024, maxTotalBytes = 256 * 1024 * 1024} = {}) {
+  expectedLane, maxFileBytes, maxTotalBytes} = {}) {
   require(manifest?.version === 1, 'Unsupported evidence version');
   require(Number.isSafeInteger(manifest.issue) && manifest.issue > 0 &&
     (!expectedIssue || manifest.issue === expectedIssue), 'Wrong evidence issue');
@@ -243,6 +291,15 @@ export function validateEvidence(manifest, {readFile, expectedIssue, expectedSub
   for (const source of manifest.sources) for (const file of source.files ?? [])
     require(!Object.hasOwn(file, 'commit'), 'Candidate source file cannot declare historical commit');
   const historicalFiles = baselineFiles(manifest);
+  const explicitMaxFileBytes = maxFileBytes;
+  const completeFiles = [...historicalFiles, ...manifest.sources.filter(source => source.retention === 'retained')
+    .flatMap(source => source.files ?? []), ...manifest.outputs];
+  for (const file of completeFiles) fileDescriptor(file);
+  const bytePlan = evidenceBytePlan(completeFiles);
+  maxFileBytes = maxFileBytes === undefined ? bytePlan.maxFileBytes : finiteBytes(maxFileBytes, 'caller file budget');
+  maxTotalBytes = maxTotalBytes === undefined ? bytePlan.totalBytes : finiteBytes(maxTotalBytes, 'caller phase budget');
+  require(bytePlan.maxFileBytes <= maxFileBytes, 'Evidence file exceeds budget');
+  require(bytePlan.totalBytes <= maxTotalBytes, 'Complete evidence phase exceeds byte budget');
   if (readFile && manifest.baseline.version === 2) {
     require(typeof readFile.assertAncestor === 'function', 'Historical vintages require ancestry verification');
     for (const commit of new Set([manifest.baseline.commit, ...historicalFiles.map(file => file.commit)])) readFile.assertAncestor(commit);
@@ -260,8 +317,6 @@ export function validateEvidence(manifest, {readFile, expectedIssue, expectedSub
       require(file.uncompressed_bytes <= maxFileBytes, 'Family record source exceeds ordinary decoded budget');
       decoded.set(`${file.commit}:${file.path}`, file.uncompressed_bytes);
     }
-    const completeFiles = [...historicalFiles, ...manifest.sources.filter(source => source.retention === 'retained')
-      .flatMap(source => source.files ?? []), ...manifest.outputs];
     require(completeFiles.every(file => Number.isSafeInteger(file.bytes) && file.bytes >= 0 && file.bytes <= maxFileBytes),
       'Complete record phase has invalid/oversized encoded descriptor');
     require(completeFiles.reduce((sum, file) => sum + file.bytes, 0) +
@@ -285,13 +340,13 @@ export function validateEvidence(manifest, {readFile, expectedIssue, expectedSub
     const key = `${vintage}:${file.path}`;
     require(!allPaths.has(key), 'Duplicate file descriptor'); allPaths.add(key);
     require(file.bytes <= maxFileBytes, 'Evidence file exceeds budget');
-    total += file.bytes; require(total <= maxTotalBytes, 'Evidence total exceeds budget');
+    total = addBytes(total, file.bytes); require(total <= maxTotalBytes, 'Evidence total exceeds budget');
     if (!readFile) { limits.push(`Bytes not checked: ${key}`); return; }
-    const raw = Buffer.from(readFile(file.path, vintage));
+    const raw = Buffer.from(readFile(file.path, vintage, file));
     require(raw.length === file.bytes && sha256(raw) === file.sha256, `Input bytes mismatch: ${key}`);
     if (file.uncompressed_sha256 !== undefined) {
       require(file.uncompressed_bytes <= maxFileBytes, 'Uncompressed file exceeds budget');
-      const unpacked = gunzipSync(raw, {maxOutputLength: maxFileBytes});
+      const unpacked = decodeEvidenceGzip(raw, file, {maxFileBytes: explicitMaxFileBytes});
       require(unpacked.length === file.uncompressed_bytes && sha256(unpacked) === file.uncompressed_sha256,
         `Uncompressed bytes mismatch: ${key}`);
     }
@@ -321,7 +376,7 @@ export function validateEvidence(manifest, {readFile, expectedIssue, expectedSub
         if (readFile) {
           if (!recordParts.has(key)) {
             require(total + file.uncompressed_bytes <= maxTotalBytes, 'Complete original family record phase exceeds byte budget');
-            total += file.uncompressed_bytes;
+            total = addBytes(total, file.uncompressed_bytes);
             recordParts.set(key, familyRecordPart(file, readFile, maxFileBytes));
           }
           const record = recordParts.get(key).get(binding.record_offset);
@@ -333,7 +388,7 @@ export function validateEvidence(manifest, {readFile, expectedIssue, expectedSub
         continue;
       }
       if (readFile) {
-        if (!parsed.has(key)) parsed.set(key, subjectJSON(file, file.path, file.commit, readFile, maxFileBytes));
+        if (!parsed.has(key)) parsed.set(key, subjectJSON(file, file.path, file.commit, readFile, explicitMaxFileBytes));
         if (binding.kind === 'direct') {
           require(parsed.get(key).features?.some(f => (f.id ?? f.properties?.id) === id),
             `Subject missing from claimed containing file: ${id}`);
@@ -372,7 +427,7 @@ export function validateEvidence(manifest, {readFile, expectedIssue, expectedSub
   }
   require(Array.isArray(manifest.outputs), 'Missing output inventory');
   for (const file of manifest.outputs) inspect(file, 'candidate');
-  if (manifest.baseline.subject_inventory) verifySubjectInventory(manifest, readFile, maxFileBytes, limits);
+  if (manifest.baseline.subject_inventory) verifySubjectInventory(manifest, readFile, explicitMaxFileBytes, limits);
   require(Array.isArray(manifest.methods) && manifest.methods.every(x => text(x.id) && text(x.description) &&
     text(x.software) && text(x.units)), 'Missing method/environment');
   for (const method of manifest.methods) if (method.kind === 'geography') {
@@ -409,20 +464,46 @@ export function validateEvidence(manifest, {readFile, expectedIssue, expectedSub
     factual_validation: 'Requires independent source/method review; hashes do not establish truth'};
 }
 
-export function repositoryReader(root, {maxFileBytes = 32 * 1024 * 1024} = {}) {
+export function gitEvidenceDescriptor(root, name, commit) {
+  safeEvidencePath(name);
+  require(typeof commit === 'string' && /^[a-f0-9]{40}$/.test(commit), 'Unsafe immutable evidence commit');
+  const entry = execFileSync('git', ['-C', root, 'ls-tree', '-l', '-z', commit, '--', name], {encoding: 'utf8'});
+  const match = /^(100644|100755) blob ([a-f0-9]{40}) +(\d+)\t([^\0]+)\0$/.exec(entry);
+  require(match && match[4] === name, 'Evidence must be an ordinary exact Git blob');
+  return {path: name, commit, mode: match[1], git_blob_oid: match[2], bytes: finiteBytes(Number(match[3]), 'immutable tree size')};
+}
+
+export function repositoryReader(root, {maxFileBytes} = {}) {
   root = fs.realpathSync(root);
-  const read = (name, vintage) => {
+  if (maxFileBytes !== undefined) finiteBytes(maxFileBytes, 'caller file budget');
+  const read = (name, vintage, descriptor) => {
     safeEvidencePath(name);
+    const bound = descriptor === undefined ? maxFileBytes ?? LEGACY_FILE_BYTES : finiteBytes(descriptor.bytes, 'encoded descriptor');
+    if (maxFileBytes !== undefined) require(bound <= maxFileBytes, 'Candidate exceeds budget');
     if (vintage !== 'candidate') {
-      require(/^[a-f0-9]{40}$/.test(vintage), 'Unsafe baseline commit');
-      const mode = execFileSync('git', ['-C', root, 'ls-tree', vintage, '--', name], {encoding: 'utf8'});
-      require(mode.startsWith('100644 ') || mode.startsWith('100755 '), 'Baseline must be an ordinary file');
-      return execFileSync('git', ['-C', root, 'show', `${vintage}:${name}`], {maxBuffer: maxFileBytes});
+      const actual = gitEvidenceDescriptor(root, name, vintage), size = actual.bytes;
+      require(size <= bound && (descriptor === undefined || size === descriptor.bytes), 'Baseline exceeds exact file budget');
+      const raw = execFileSync('git', ['-C', root, 'cat-file', 'blob', actual.git_blob_oid], {maxBuffer: Math.max(1, addBytes(size, 1))});
+      require(raw.length === size, 'Baseline bytes changed from exact tree size');
+      return raw;
     }
     const target = path.join(root, name);
     require(fs.realpathSync(target) === target && fs.lstatSync(target).isFile(), 'Candidate must be an ordinary file without symlinks');
-    require(fs.statSync(target).size <= maxFileBytes, 'Candidate exceeds budget');
-    return fs.readFileSync(target);
+    const fd = fs.openSync(target, 'r');
+    try {
+      const stat = fs.fstatSync(fd), size = finiteBytes(stat.size, 'candidate file size');
+      require(stat.isFile() && size <= bound && (descriptor === undefined || size === descriptor.bytes), 'Candidate exceeds exact file budget');
+      const raw = Buffer.alloc(addBytes(size, 1)); let length = 0, count;
+      while (length < raw.length && (count = fs.readSync(fd, raw, length, raw.length - length, null))) length += count;
+      require(length === size, 'Candidate bytes changed from exact file size');
+      return raw.subarray(0, size);
+    } finally { fs.closeSync(fd); }
+  };
+  read.descriptor = (name, vintage) => {
+    if (vintage !== 'candidate') return gitEvidenceDescriptor(root, name, vintage);
+    safeEvidencePath(name); const target = path.join(root, name);
+    require(fs.realpathSync(target) === target && fs.lstatSync(target).isFile(), 'Candidate must be an ordinary file without symlinks');
+    return {path: name, bytes: finiteBytes(fs.statSync(target).size, 'candidate file size')};
   };
   read.assertAncestor = commit => {
     require(/^[a-f0-9]{40}$/.test(commit ?? ''), 'Unsafe historical commit');

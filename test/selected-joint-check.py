@@ -134,22 +134,58 @@ class InspectRouting(unittest.TestCase):
             self.assertNotIn('selected_continuous_report', report)
             self.assertNotIn('differential_report', report)
 
-    def test_software_inspect_runs_cold_native_with_distinct_data_and_no_checkpoint_reuse(self):
-        result = native()
+    def test_software_identical_consumed_inputs_use_applicability_without_native_or_checkpoint(self):
+        proof = {'version': 1, 'kind': 'trusted-unchanged-selected-geography-v1',
+                 'status': 'unchanged-selected-inputs', 'baseline_commit': BASE,
+                 'candidate_commit': NEXT, 'trusted_reader_policy_commit': NEXT,
+                 'candidate_code_executed': False, 'science_reexecuted': False,
+                 'source_approval': False, 'published': False}
         with self.fixture(), no_polygons(), \
              mock.patch.object(G, 'verify_trusted_checkout', return_value='fixture') as verify, \
-             mock.patch.object(G, 'unchanged_selected_inputs', side_effect=AssertionError('software shortcut')), \
+             mock.patch.object(G, 'unchanged_selected_inputs', return_value=proof) as applicability, \
              mock.patch.object(G, 'selected_joint', side_effect=AssertionError('software checkpoint reuse')), \
-             mock.patch.object(G.subprocess, 'check_output', return_value=raw(result)) as child:
-            report = G.inspect(ROOT, BASE, NEXT, code_commit=NEXT, checkpoint_destination=ROOT)
+             mock.patch.object(G, 'prefetch_declared_inputs', side_effect=AssertionError('identical-data prefetch')), \
+             mock.patch.object(G.subprocess, 'check_output', side_effect=AssertionError('identical-data science')):
+            report = G.inspect(ROOT, BASE, NEXT, code_commit=NEXT, prefetch=True, checkpoint_destination=ROOT)
         verify.assert_called_once_with(ROOT, NEXT)
-        self.assertEqual(child.call_args.args[0][-3:-1], [BASE, NEXT])
-        self.assertEqual(child.call_count, 1)
+        applicability.assert_called_once_with(ROOT, BASE, NEXT, code_commit=NEXT)
         self.assertEqual(report['trusted_code_commit'], NEXT)
         self.assertTrue(report['candidate_code_executed'])
-        self.assertEqual(report['selected_native_report'], result)
+        self.assertEqual(report['status'], 'not-applicable')
+        self.assertIsNone(report['regressions'])
+        self.assertEqual(report['unchanged_selected_inputs'], proof)
+        self.assertNotIn('selected_native_report', report)
         self.assertNotIn('selected_continuous_report', report)
         self.assertNotIn('checkpoint', report)
+
+    def test_software_changed_or_unknown_inputs_keep_cold_native_and_no_checkpoint_reuse(self):
+        for changed in [False, True]:
+            for loss in [False, True]:
+                result = native(status='native-regressions-found', intervals=[{'row': 1}],
+                                lost_or_reassigned_cells=1) if loss else native()
+                inventories = [['before'], ['after']] if changed else [[], []]
+                with self.subTest(changed=changed, loss=loss), self.fixture(), no_polygons(), \
+                     mock.patch.object(G, 'verify_trusted_checkout', return_value='fixture') as verify, \
+                     mock.patch.object(G, 'inventory', side_effect=inventories), \
+                     mock.patch.object(G, 'unchanged_selected_inputs', return_value=None) as applicability, \
+                     mock.patch.object(G, 'selected_joint', side_effect=AssertionError('software checkpoint reuse')), \
+                     mock.patch.object(G.subprocess, 'check_output', return_value=raw(result)) as child:
+                    report = G.inspect(ROOT, BASE, NEXT, code_commit=NEXT, checkpoint_destination=ROOT)
+                verify.assert_called_once_with(ROOT, NEXT)
+                if changed:
+                    applicability.assert_not_called()
+                else:
+                    applicability.assert_called_once_with(ROOT, BASE, NEXT, code_commit=NEXT)
+                self.assertEqual(child.call_args.args[0][-3:-1], [BASE, NEXT])
+                self.assertEqual(child.call_count, 1)
+                self.assertEqual(report['trusted_code_commit'], NEXT)
+                self.assertTrue(report['candidate_code_executed'])
+                self.assertEqual(report['selected_native_report'], result)
+                self.assertEqual(report['status'], 'native-regressions-found' if loss else 'no-new-native-loss')
+                self.assertEqual(report['regressions'], int(loss))
+                self.assertNotIn('unchanged_selected_inputs', report)
+                self.assertNotIn('selected_continuous_report', report)
+                self.assertNotIn('checkpoint', report)
 
     def test_warm_and_cold_invalid_native_results_fail_closed(self):
         for cold in [False, True]:

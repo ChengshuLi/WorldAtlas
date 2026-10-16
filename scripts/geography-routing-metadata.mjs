@@ -18,7 +18,7 @@ export function createRoutingMetadataAcquisition({repo, baseline, execute = exec
       {env, maxBuffer: FILE, timeout: 30000, stdio: ['ignore', 'pipe', 'pipe']}).toString().trim(); }
     catch { throw Error('routing-metadata-tree-unavailable'); }
   };
-  const trees = new Map(); let index;
+  const trees = new Map(), planned = new Map(); let index;
   const stats = {tree_metadata_bytes: 0, tree_metadata_requests: 0, discovery_batches: 0,
     strict_origin_commits: [], strict_origin_fetch_batches: 0, strict_origin_fetch_ms: 0,
     graph_metadata_imported_objects: 0, graph_metadata_imported_bytes: 0, unexpected_graph_blob_imports: 0,
@@ -63,6 +63,13 @@ export function createRoutingMetadataAcquisition({repo, baseline, execute = exec
       demand(row && row.type === 'blob' && row.mode === match[1] && row.sha === match[2], 'routing-metadata-remote-identity');
       size = row.size;
     }
+    // Admit the finite typed routing plan before any body fetch. The reader's
+    // metadata limit bounds live raw retention, not cumulative legitimate I/O.
+    demand(Number.isSafeInteger(size) && size > 0 && size <= limits.member && size <= limits.metadata,
+      'metadata-byte-limit');
+    demand(!planned.has(match[2]) || planned.get(match[2]) === size, 'routing-metadata-conflicting-size');
+    demand(planned.has(match[2]) || planned.size < limits.entries, 'identity-entry-limit');
+    planned.set(match[2], size);
     return {path: name, type: 'blob', mode: match[1], sha: match[2], size};
   }
   function objectInventory() {

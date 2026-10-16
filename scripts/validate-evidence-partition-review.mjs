@@ -4,7 +4,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {sha256,safeEvidencePath,validateEvidence} from './evidence-quality.mjs';
 import {validateReviewReceipt} from './premerge-evidence.mjs';
-import {validateEvidencePartitions,readGitPRFiles} from './validate-evidence-partitions.mjs';
+import {validateEvidencePartitions,readGitPRFiles,partitionGitReader} from './validate-evidence-partitions.mjs';
 import {githubPages} from './issue-claim-contract.mjs';
 const need=(ok,message)=>{if(!ok)throw Error(message);};
 const qualified=comment=>['OWNER','MEMBER','COLLABORATOR'].includes(comment.author_association);
@@ -40,12 +40,7 @@ const repo='ChengshuLi/WorldAtlas';
 const gh=route=>JSON.parse(execFileSync('gh',['api',route],{encoding:'utf8',maxBuffer:8*1024*1024}));
 const pr=gh(`repos/${repo}/pulls/${number}`),head=pr.head.sha,base=pr.base.sha;
 need(execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim()===head,'Local checkout differs from actual PR head');
-const read=(name,vintage)=>{
- safeEvidencePath(name);const commit=vintage==='candidate'?head:vintage==='base'?base:vintage;
- const mode=execFileSync('git',['ls-tree',commit,'--',name],{encoding:'utf8'});
- need(mode.startsWith('100644 ')||mode.startsWith('100755 '),'Ordinary immutable Git evidence required');
- return execFileSync('git',['show',commit+':'+name],{maxBuffer:32*1024*1024});
-};
+const read=partitionGitReader({head,base});
 const indexRaw=read(indexPath,'candidate'),index=JSON.parse(indexRaw);
 need(indexPath===index.index_path,'Executed index path differs');
 const files=readGitPRFiles(base,head);
@@ -61,7 +56,7 @@ need(aggregate.reviewer_worker_id!==index.worker_id&&aggregate.reviewer_worker_i
 checkPartitionReviewInventory(aggregate,index);
 const reviewed=[];
 for(const part of [{path:index.root_manifest_path,change_paths:index.root_change_paths,is_root:true},...index.partitions]){
- const manifestRaw=read(part.path,'candidate'),manifest=JSON.parse(manifestRaw),limits=validateEvidence(manifest,{readFile:read}).limits;
+ const manifestRaw=read(part.path,'candidate',part.is_root?undefined:part),manifest=JSON.parse(manifestRaw),limits=validateEvidence(manifest,{readFile:read}).limits;
  let receipt=rootReceipt,comment=root;
  if(!part.is_root){
   const binding=aggregate.partitions.find(row=>row.manifest_path===part.path);

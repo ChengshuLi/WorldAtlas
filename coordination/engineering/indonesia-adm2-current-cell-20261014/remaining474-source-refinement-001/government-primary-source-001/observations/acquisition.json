@@ -1,0 +1,922 @@
+{
+  "started": "2026-10-16T00:18:17.677943+00:00",
+  "finished": "2026-10-16T00:19:08.184188+00:00",
+  "layers": [
+    {
+      "layer_id": 9,
+      "label": "DistrictCoverageSarawak",
+      "records": [
+        {
+          "url": "https://mygems.jmg.gov.my/server/rest/services/Demarcation_MIL1/MapServer/9?f=pjson",
+          "name": "layer-9-DistrictCoverageSarawak-layer.json",
+          "exit_code": 0,
+          "elapsed_seconds": 3.45037425,
+          "acquired_at": "2026-10-16T00:18:21.128844+00:00",
+          "bytes": 4981,
+          "sha256": "d46753789750bcaae3ae0c61089a18ba15aa0d9b00f8231f8fd78ed0ee1aec21"
+        },
+        {
+          "url": "https://mygems.jmg.gov.my/server/rest/services/Demarcation_MIL1/MapServer/9/metadata",
+          "name": "layer-9-DistrictCoverageSarawak-metadata.xml",
+          "exit_code": 0,
+          "elapsed_seconds": 0.9462016250000005,
+          "acquired_at": "2026-10-16T00:18:22.077965+00:00",
+          "bytes": 8151,
+          "sha256": "e7977c8db36b7047f11685981e4d56c6fe94204dc413e02427e067eb0412ae4f"
+        },
+        {
+          "url": "https://mygems.jmg.gov.my/server/rest/services/Demarcation_MIL1/MapServer/9/query?f=json&where=1%3D1&returnIdsOnly=true",
+          "name": "layer-9-DistrictCoverageSarawak-ids.json",
+          "exit_code": 0,
+          "elapsed_seconds": 1.0256253750000006,
+          "acquired_at": "2026-10-16T00:18:23.105008+00:00",
+          "bytes": 135,
+          "sha256": "dd2037a5c4395af41a87f096751afcab69847c1f2c2064f1b795b5948d05e1b0"
+        },
+        {
+          "url": "https://mygems.jmg.gov.my/server/rest/services/Demarcation_MIL1/MapServer/9/query?f=json&where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&orderByFields=OBJECTID",
+          "name": "layer-9-DistrictCoverageSarawak-whole4326.json",
+          "exit_code": 0,
+          "elapsed_seconds": 17.895214667,
+          "acquired_at": "2026-10-16T00:18:41.002646+00:00",
+          "bytes": 5378771,
+          "sha256": "d9bfb09d72471290ee69eacbca7c6efc46c9f3331cd15c15ef7546f8b1d40cc4"
+        }
+      ],
+      "complete_whole_provider_family": true,
+      "feature_count": 32,
+      "whole_object_ids": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        432
+      ],
+      "geometry_type": "esriGeometryPolygon",
+      "actual_spatial_reference": {
+        "wkid": 4326,
+        "latestWkid": 4326
+      },
+      "layername": "District Coverage Sarawak",
+      "fields": [
+        {
+          "name": "OBJECTID",
+          "alias": "OBJECTID"
+        },
+        {
+          "name": "NAM",
+          "alias": "NAM"
+        },
+        {
+          "name": "ARK",
+          "alias": "ARK"
+        },
+        {
+          "name": "SHAPE",
+          "alias": "SHAPE"
+        },
+        {
+          "name": "SHAPE.STArea()",
+          "alias": "SHAPE.STArea()"
+        },
+        {
+          "name": "SHAPE.STLength()",
+          "alias": "SHAPE.STLength()"
+        }
+      ],
+      "attributes": [
+        {
+          "OBJECTID": 2,
+          "NAM": "Miri",
+          "ARK": 4715.81152344,
+          "SHAPE.STArea()": 4715811422.02094,
+          "SHAPE.STLength()": 488570.59703771124
+        },
+        {
+          "OBJECTID": 3,
+          "NAM": "Marudi",
+          "ARK": 22019.49414063,
+          "SHAPE.STArea()": 22019493254.903156,
+          "SHAPE.STLength()": 930890.3604370812
+        },
+        {
+          "OBJECTID": 4,
+          "NAM": "Kuching",
+          "ARK": 1817.43151855,
+          "SHAPE.STArea()": 1817431467.2288225,
+          "SHAPE.STLength()": 420945.10613986914
+        },
+        {
+          "OBJECTID": 5,
+          "NAM": "Selangau",
+          "ARK": 3898.22949219,
+          "SHAPE.STArea()": 3898229483.1610727,
+          "SHAPE.STLength()": 440459.66452005674
+        },
+        {
+          "OBJECTID": 6,
+          "NAM": "Tatau",
+          "ARK": 5109.02148438,
+          "SHAPE.STArea()": 5109021727.407621,
+          "SHAPE.STLength()": 675505.0199690075
+        },
+        {
+          "OBJECTID": 7,
+          "NAM": "Bintulu",
+          "ARK": 7100.24462891,
+          "SHAPE.STArea()": 7100244707.453918,
+          "SHAPE.STLength()": 586111.7053629052
+        },
+        {
+          "OBJECTID": 8,
+          "NAM": "Belaga",
+          "ARK": 19209.31835938,
+          "SHAPE.STArea()": 19209318891.91773,
+          "SHAPE.STLength()": 1003781.0630113353
+        },
+        {
+          "OBJECTID": 9,
+          "NAM": "Limbang",
+          "ARK": 3939.52368164,
+          "SHAPE.STArea()": 3939523654.773525,
+          "SHAPE.STLength()": 468036.2264305821
+        },
+        {
+          "OBJECTID": 10,
+          "NAM": "Lawas",
+          "ARK": 3720.16674805,
+          "SHAPE.STArea()": 3720166671.0893874,
+          "SHAPE.STLength()": 427025.0784119382
+        },
+        {
+          "OBJECTID": 11,
+          "NAM": "Lundu",
+          "ARK": 1789.24072266,
+          "SHAPE.STArea()": 1789240691.10838,
+          "SHAPE.STLength()": 335813.12868815573
+        },
+        {
+          "OBJECTID": 12,
+          "NAM": "Bau",
+          "ARK": 895.20098877,
+          "SHAPE.STArea()": 895201017.023715,
+          "SHAPE.STLength()": 157727.09829768047
+        },
+        {
+          "OBJECTID": 13,
+          "NAM": "Serian",
+          "ARK": 2042.05419922,
+          "SHAPE.STArea()": 2042054254.509736,
+          "SHAPE.STLength()": 268514.93988911354
+        },
+        {
+          "OBJECTID": 14,
+          "NAM": "Simunjan",
+          "ARK": 2209.13330078,
+          "SHAPE.STArea()": 2209133377.161719,
+          "SHAPE.STLength()": 244176.27971281533
+        },
+        {
+          "OBJECTID": 15,
+          "NAM": "Sri Aman",
+          "ARK": 2303.57006836,
+          "SHAPE.STArea()": 2303570102.7003493,
+          "SHAPE.STLength()": 277616.26664465497
+        },
+        {
+          "OBJECTID": 16,
+          "NAM": "Betong",
+          "ARK": 2506.64379883,
+          "SHAPE.STArea()": 2506643836.1826744,
+          "SHAPE.STLength()": 278924.61151702254
+        },
+        {
+          "OBJECTID": 17,
+          "NAM": "Saratok",
+          "ARK": 1685.0,
+          "SHAPE.STArea()": 1684999943.0715594,
+          "SHAPE.STLength()": 238255.8759519363
+        },
+        {
+          "OBJECTID": 18,
+          "NAM": "Pakan",
+          "ARK": 1026.2746582,
+          "SHAPE.STArea()": 1026274647.1125491,
+          "SHAPE.STLength()": 193372.0319682363
+        },
+        {
+          "OBJECTID": 19,
+          "NAM": "Lubok Antu",
+          "ARK": 3166.80004883,
+          "SHAPE.STArea()": 3166800128.7391176,
+          "SHAPE.STLength()": 303743.74164440733
+        },
+        {
+          "OBJECTID": 20,
+          "NAM": "Julau",
+          "ARK": 1612.08093262,
+          "SHAPE.STArea()": 1612080885.086836,
+          "SHAPE.STLength()": 237691.4355188999
+        },
+        {
+          "OBJECTID": 21,
+          "NAM": "Song",
+          "ARK": 3903.61450195,
+          "SHAPE.STArea()": 3903614410.724958,
+          "SHAPE.STLength()": 458529.0213579734
+        },
+        {
+          "OBJECTID": 22,
+          "NAM": "Kanowit",
+          "ARK": 2248.09594727,
+          "SHAPE.STArea()": 2248095889.122118,
+          "SHAPE.STLength()": 275539.6815749705
+        },
+        {
+          "OBJECTID": 23,
+          "NAM": "Julau",
+          "ARK": 748.20471191,
+          "SHAPE.STArea()": 748204705.7888137,
+          "SHAPE.STLength()": 146936.38733909966
+        },
+        {
+          "OBJECTID": 24,
+          "NAM": "Daro",
+          "ARK": 1933.99108887,
+          "SHAPE.STArea()": 1933991096.6834252,
+          "SHAPE.STLength()": 365127.40942003357
+        },
+        {
+          "OBJECTID": 25,
+          "NAM": "Sibu",
+          "ARK": 2176.19702148,
+          "SHAPE.STArea()": 2176197027.0744696,
+          "SHAPE.STLength()": 237003.47023549653
+        },
+        {
+          "OBJECTID": 26,
+          "NAM": "Matu",
+          "ARK": 1774.16625977,
+          "SHAPE.STArea()": 1774166210.7741838,
+          "SHAPE.STLength()": 218630.20361451965
+        },
+        {
+          "OBJECTID": 27,
+          "NAM": "Dalat",
+          "ARK": 935.18884277,
+          "SHAPE.STArea()": 935188854.4790778,
+          "SHAPE.STLength()": 153458.59927059352
+        },
+        {
+          "OBJECTID": 28,
+          "NAM": "Mukah",
+          "ARK": 2426.82592773,
+          "SHAPE.STArea()": 2426825820.8822713,
+          "SHAPE.STLength()": 263880.1635888049
+        },
+        {
+          "OBJECTID": 29,
+          "NAM": "Samarahan",
+          "ARK": 440.54681396,
+          "SHAPE.STArea()": 440546799.6654922,
+          "SHAPE.STLength()": 111438.75250036574
+        },
+        {
+          "OBJECTID": 30,
+          "NAM": "Asajaya",
+          "ARK": 260.23855591,
+          "SHAPE.STArea()": 260238558.85867512,
+          "SHAPE.STLength()": 103086.15244728382
+        },
+        {
+          "OBJECTID": 31,
+          "NAM": "Sarikei",
+          "ARK": 976.97485352,
+          "SHAPE.STArea()": 976974855.7327626,
+          "SHAPE.STLength()": 175213.37977114154
+        },
+        {
+          "OBJECTID": 32,
+          "NAM": "Lubok Antu",
+          "ARK": 3166.80004883,
+          "SHAPE.STArea()": 3166800128.7391176,
+          "SHAPE.STLength()": 303743.74164440733
+        },
+        {
+          "OBJECTID": 432,
+          "NAM": "Betong",
+          "ARK": 2506.64379883,
+          "SHAPE.STArea()": 2506643836.1826744,
+          "SHAPE.STLength()": 278924.61151702254
+        }
+      ]
+    },
+    {
+      "layer_id": 10,
+      "label": "DistrictCoverageSabah",
+      "records": [
+        {
+          "url": "https://mygems.jmg.gov.my/server/rest/services/Demarcation_MIL1/MapServer/10?f=pjson",
+          "name": "layer-10-DistrictCoverageSabah-layer.json",
+          "exit_code": 0,
+          "elapsed_seconds": 0.9313667499999987,
+          "acquired_at": "2026-10-16T00:18:42.099928+00:00",
+          "bytes": 5350,
+          "sha256": "92c4dc4160563e451fa57ddfdef50f96fd55937da03fbfccd26dd127e5627960"
+        },
+        {
+          "url": "https://mygems.jmg.gov.my/server/rest/services/Demarcation_MIL1/MapServer/10/metadata",
+          "name": "layer-10-DistrictCoverageSabah-metadata.xml",
+          "exit_code": 0,
+          "elapsed_seconds": 1.3278546250000005,
+          "acquired_at": "2026-10-16T00:18:43.429012+00:00",
+          "bytes": 16580,
+          "sha256": "f5d437b58f0b092fe8e24938129e5deee6ced065723e47e3423ae1dc0c572e4f"
+        },
+        {
+          "url": "https://mygems.jmg.gov.my/server/rest/services/Demarcation_MIL1/MapServer/10/query?f=json&where=1%3D1&returnIdsOnly=true",
+          "name": "layer-10-DistrictCoverageSabah-ids.json",
+          "exit_code": 0,
+          "elapsed_seconds": 0.9395571660000002,
+          "acquired_at": "2026-10-16T00:18:44.369849+00:00",
+          "bytes": 112,
+          "sha256": "19bdeab4b539a7bfff8ba150ff6844fd73f96b4283fc6edc938b59313f9806de"
+        },
+        {
+          "url": "https://mygems.jmg.gov.my/server/rest/services/Demarcation_MIL1/MapServer/10/query?f=json&where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&orderByFields=OBJECTID",
+          "name": "layer-10-DistrictCoverageSabah-whole4326.json",
+          "exit_code": 0,
+          "elapsed_seconds": 11.008389916000002,
+          "acquired_at": "2026-10-16T00:18:55.379596+00:00",
+          "bytes": 4497865,
+          "sha256": "96e201bb1662984c689dcc97541221b7712dcf70714aff7c8e95eaadef3d2b0d"
+        }
+      ],
+      "complete_whole_provider_family": true,
+      "feature_count": 25,
+      "whole_object_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "geometry_type": "esriGeometryPolygon",
+      "actual_spatial_reference": {
+        "wkid": 4326,
+        "latestWkid": 4326
+      },
+      "layername": "District Coverage Sabah",
+      "fields": [
+        {
+          "name": "OBJECTID",
+          "alias": "OBJECTID"
+        },
+        {
+          "name": "CODE",
+          "alias": "CODE"
+        },
+        {
+          "name": "CAP_NAME",
+          "alias": "CAP_NAME"
+        },
+        {
+          "name": "RIVER",
+          "alias": "RIVER"
+        },
+        {
+          "name": "NAME",
+          "alias": "NAME"
+        },
+        {
+          "name": "CLASS",
+          "alias": "CLASS"
+        },
+        {
+          "name": "Shape",
+          "alias": "Shape"
+        },
+        {
+          "name": "Shape.STArea()",
+          "alias": "Shape.STArea()"
+        },
+        {
+          "name": "Shape.STLength()",
+          "alias": "Shape.STLength()"
+        }
+      ],
+      "attributes": [
+        {
+          "OBJECTID": 1,
+          "CODE": "DA0140",
+          "CAP_NAME": " ",
+          "RIVER": 0.0,
+          "NAME": "TONGOT",
+          "CLASS": " ",
+          "Shape.STArea()": 9928940588.181221,
+          "Shape.STLength()": 574449.2025682327
+        },
+        {
+          "OBJECTID": 2,
+          "CODE": "DA0140",
+          "CAP_NAME": " ",
+          "RIVER": 0.0,
+          "NAME": "KINABATANGAN",
+          "CLASS": " ",
+          "Shape.STArea()": 7109214645.865775,
+          "Shape.STLength()": 618059.7348185023
+        },
+        {
+          "OBJECTID": 3,
+          "CODE": "DA0140",
+          "CAP_NAME": " ",
+          "RIVER": 0.0,
+          "NAME": "LAHAD DATU",
+          "CLASS": " ",
+          "Shape.STArea()": 7452427236.316572,
+          "Shape.STLength()": 800816.0840545838
+        },
+        {
+          "OBJECTID": 4,
+          "CODE": "DA0140",
+          "CAP_NAME": " ",
+          "RIVER": 0.0,
+          "NAME": "SIPITANG",
+          "CLASS": " ",
+          "Shape.STArea()": 2743393805.251295,
+          "Shape.STLength()": 358627.54328046995
+        },
+        {
+          "OBJECTID": 5,
+          "CODE": "DA0140",
+          "CAP_NAME": " ",
+          "RIVER": 0.0,
+          "NAME": "TENOM",
+          "CLASS": " ",
+          "Shape.STArea()": 2334453638.4517336,
+          "Shape.STLength()": 304577.4336715624
+        },
+        {
+          "OBJECTID": 6,
+          "CODE": "DA0140",
+          "CAP_NAME": " ",
+          "RIVER": 0.0,
+          "NAME": "PENSIANGAN",
+          "CLASS": " ",
+          "Shape.STArea()": 5944693251.391236,
+          "Shape.STLength()": 522865.9355963153
+        },
+        {
+          "OBJECTID": 7,
+          "CODE": "DA0140",
+          "CAP_NAME": " ",
+          "RIVER": 0.0,
+          "NAME": "TAWAU",
+          "CLASS": " ",
+          "Shape.STArea()": 6062854288.880384,
+          "Shape.STLength()": 777047.761462955
+        },
+        {
+          "OBJECTID": 8,
+          "CODE": "DA0140",
+          "CAP_NAME": " ",
+          "RIVER": 0.0,
+          "NAME": "RANAU",
+          "CLASS": " ",
+          "Shape.STArea()": 3032285240.6015334,
+          "Shape.STLength()": 328616.4225420552
+        },
+        {
+          "OBJECTID": 9,
+          "CODE": "DA0140",
+          "CAP_NAME": " ",
+          "RIVER": 0.0,
+          "NAME": "LABUK & SUGUT",
+          "CLASS": " ",
+          "Shape.STArea()": 8493201774.01835,
+          "Shape.STLength()": 826566.2090347578
+        },
+        {
+          "OBJECTID": 10,
+          "CODE": "DA0140",
+          "CAP_NAME": " ",
+          "RIVER": 0.0,
+          "NAME": "BEAUFORT",
+          "CLASS": " ",
+          "Shape.STArea()": 1762548662.9713871,
+          "Shape.STLength()": 272910.7588499569
+        },
+        {
+          "OBJECTID": 11,
+          "CODE": "DA0140",
+          "CAP_NAME": " ",
+          "RIVER": 0.0,
+          "NAME": "PAPAR",
+          "CLASS": " ",
+          "Shape.STArea()": 1256610861.7965784,
+          "Shape.STLength()": 215076.83838010186
+        },
+        {
+          "OBJECTID": 12,
+          "CODE": "DA0140",
+          "CAP_NAME": " ",
+          "RIVER": 0.0,
+          "NAME": "KENINGAU",
+          "CLASS": " ",
+          "Shape.STArea()": 3672061033.5671315,
+          "Shape.STLength()": 353632.71183804044
+        },
+        {
+          "OBJECTID": 13,
+          "CODE": "DA0140",
+          "CAP_NAME": " ",
+          "RIVER": 0.0,
+          "NAME": "TAMBUNAN",
+          "CLASS": " ",
+          "Shape.STArea()": 1339692927.649292,
+          "Shape.STLength()": 176239.38171845835
+        },
+        {
+          "OBJECTID": 14,
+          "CODE": "DA0140",
+          "CAP_NAME": " ",
+          "RIVER": 0.0,
+          "NAME": "KOTA KINABALU",
+          "CLASS": " ",
+          "Shape.STArea()": 344553407.9086605,
+          "Shape.STLength()": 147416.63040519398
+        },
+        {
+          "OBJECTID": 15,
+          "CODE": "DA0140",
+          "CAP_NAME": " ",
+          "RIVER": 0.0,
+          "NAME": "KOTA BELUT",
+          "CLASS": " ",
+          "Shape.STArea()": 1387397476.4473846,
+          "Shape.STLength()": 265786.6175865616
+        },
+        {
+          "OBJECTID": 16,
+          "CODE": "DA0140",
+          "CAP_NAME": " ",
+          "RIVER": 0.0,
+          "NAME": "KOTA MARUDU",
+          "CLASS": " ",
+          "Shape.STArea()": 1736120865.2024572,
+          "Shape.STLength()": 261709.5033884562
+        },
+        {
+          "OBJECTID": 17,
+          "CODE": "DA0140",
+          "CAP_NAME": " ",
+          "RIVER": 0.0,
+          "NAME": "SANDAKAN",
+          "CLASS": " ",
+          "Shape.STArea()": 2225539845.981723,
+          "Shape.STLength()": 611076.7486037931
+        },
+        {
+          "OBJECTID": 18,
+          "CODE": "DA0140",
+          "CAP_NAME": " ",
+          "RIVER": 0.0,
+          "NAME": "PITAS",
+          "CLASS": " ",
+          "Shape.STArea()": 1551733644.4700742,
+          "Shape.STLength()": 279706.86179481813
+        },
+        {
+          "OBJECTID": 19,
+          "CODE": "DA0140",
+          "CAP_NAME": " ",
+          "RIVER": 0.0,
+          "NAME": "SEMPORNA",
+          "CLASS": " ",
+          "Shape.STArea()": 1090594503.4800944,
+          "Shape.STLength()": 520835.3288319991
+        },
+        {
+          "OBJECTID": 20,
+          "CODE": "DA0140",
+          "CAP_NAME": " ",
+          "RIVER": 0.0,
+          "NAME": "KOTA KINABALU",
+          "CLASS": " ",
+          "Shape.STArea()": 22054502.8323782,
+          "Shape.STLength()": 58646.36572372886
+        },
+        {
+          "OBJECTID": 21,
+          "CODE": "DA0140",
+          "CAP_NAME": " ",
+          "RIVER": 0.0,
+          "NAME": "KUALA PENYU",
+          "CLASS": " ",
+          "Shape.STArea()": 12672930,
+          "Shape.STLength()": 40196.462515823194
+        },
+        {
+          "OBJECTID": 22,
+          "CODE": "DA0140",
+          "CAP_NAME": " ",
+          "RIVER": 0.0,
+          "NAME": "KUNAK",
+          "CLASS": " ",
+          "Shape.STArea()": 1145050580.7104073,
+          "Shape.STLength()": 288614.59866405145
+        },
+        {
+          "OBJECTID": 23,
+          "CODE": "DA0140",
+          "CAP_NAME": " ",
+          "RIVER": 0.0,
+          "NAME": "KUDAT",
+          "CLASS": " ",
+          "Shape.STArea()": 1193475602.6432831,
+          "Shape.STLength()": 569748.1687627893
+        },
+        {
+          "OBJECTID": 24,
+          "CODE": "DA0140",
+          "CAP_NAME": " ",
+          "RIVER": 0.0,
+          "NAME": "PENAMPANG",
+          "CLASS": " ",
+          "Shape.STArea()": 470878028.9327235,
+          "Shape.STLength()": 105025.69388989343
+        },
+        {
+          "OBJECTID": 25,
+          "CODE": "DA0140",
+          "CAP_NAME": " ",
+          "RIVER": 0.0,
+          "NAME": "TUARAN",
+          "CLASS": " ",
+          "Shape.STArea()": 1169656192.0309289,
+          "Shape.STLength()": 206676.9987856929
+        }
+      ]
+    },
+    {
+      "layer_id": 12,
+      "label": "StateCoverageSabah",
+      "records": [
+        {
+          "url": "https://mygems.jmg.gov.my/server/rest/services/Demarcation_MIL1/MapServer/12?f=pjson",
+          "name": "layer-12-StateCoverageSabah-layer.json",
+          "exit_code": 0,
+          "elapsed_seconds": 0.950281541999999,
+          "acquired_at": "2026-10-16T00:18:56.489166+00:00",
+          "bytes": 5347,
+          "sha256": "08778d521c2466250d9a6b2972e1cd2272f57833f0699c1cab1c3e5c1e70a1f2"
+        },
+        {
+          "url": "https://mygems.jmg.gov.my/server/rest/services/Demarcation_MIL1/MapServer/12/metadata",
+          "name": "layer-12-StateCoverageSabah-metadata.xml",
+          "exit_code": 0,
+          "elapsed_seconds": 1.2418051669999954,
+          "acquired_at": "2026-10-16T00:18:57.734963+00:00",
+          "bytes": 9986,
+          "sha256": "2b5b5365aca0e19a67682ab867ae93446daca7597874a1918be48fc629762dbe"
+        },
+        {
+          "url": "https://mygems.jmg.gov.my/server/rest/services/Demarcation_MIL1/MapServer/12/query?f=json&where=1%3D1&returnIdsOnly=true",
+          "name": "layer-12-StateCoverageSabah-ids.json",
+          "exit_code": 0,
+          "elapsed_seconds": 0.9997690419999969,
+          "acquired_at": "2026-10-16T00:18:58.739980+00:00",
+          "bytes": 50,
+          "sha256": "281a8a2089868dd76a75f70e34eb357e8e40e28eef92f08f64290d9aca81a04e"
+        },
+        {
+          "url": "https://mygems.jmg.gov.my/server/rest/services/Demarcation_MIL1/MapServer/12/query?f=json&where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&orderByFields=OBJECTID",
+          "name": "layer-12-StateCoverageSabah-whole4326.json",
+          "exit_code": 0,
+          "elapsed_seconds": 4.1612905,
+          "acquired_at": "2026-10-16T00:19:02.906060+00:00",
+          "bytes": 1144153,
+          "sha256": "5d78087670da0692afdb7d3180473503c1f3a85f365299bb272343ac5c016e19"
+        }
+      ],
+      "complete_whole_provider_family": true,
+      "feature_count": 2,
+      "whole_object_ids": [
+        1,
+        2
+      ],
+      "geometry_type": "esriGeometryPolygon",
+      "actual_spatial_reference": {
+        "wkid": 4326,
+        "latestWkid": 4326
+      },
+      "layername": "State Coverage Sabah",
+      "fields": [
+        {
+          "name": "OBJECTID",
+          "alias": "OBJECTID"
+        },
+        {
+          "name": "CODE",
+          "alias": "CODE"
+        },
+        {
+          "name": "CAP_NAME",
+          "alias": "CAP_NAME"
+        },
+        {
+          "name": "RIVER",
+          "alias": "RIVER"
+        },
+        {
+          "name": "NAME",
+          "alias": "NAME"
+        },
+        {
+          "name": "CLASS",
+          "alias": "CLASS"
+        },
+        {
+          "name": "Shape",
+          "alias": "Shape"
+        },
+        {
+          "name": "Shape.STArea()",
+          "alias": "Shape.STArea()"
+        },
+        {
+          "name": "Shape.STLength()",
+          "alias": "Shape.STLength()"
+        }
+      ],
+      "attributes": [
+        {
+          "OBJECTID": 1,
+          "CODE": "DA0130",
+          "CAP_NAME": " ",
+          "RIVER": 0.0,
+          "NAME": "SABAH",
+          "CLASS": " ",
+          "Shape.STArea()": 73481500614.15921,
+          "Shape.STLength()": 4299937.061350845
+        },
+        {
+          "OBJECTID": 2,
+          "CODE": null,
+          "CAP_NAME": null,
+          "RIVER": null,
+          "NAME": null,
+          "CLASS": null,
+          "Shape.STArea()": null,
+          "Shape.STLength()": null
+        }
+      ]
+    },
+    {
+      "layer_id": 5,
+      "label": "CountryBoundarySabah",
+      "records": [
+        {
+          "url": "https://mygems.jmg.gov.my/server/rest/services/Demarcation_MIL1/MapServer/5?f=pjson",
+          "name": "layer-5-CountryBoundarySabah-layer.json",
+          "exit_code": 0,
+          "elapsed_seconds": 0.9003550409999974,
+          "acquired_at": "2026-10-16T00:19:03.870627+00:00",
+          "bytes": 6196,
+          "sha256": "80690eee01e51e2b233186123a6c2482ad613b733fc65f4b3dcc8ebb90ab1238"
+        },
+        {
+          "url": "https://mygems.jmg.gov.my/server/rest/services/Demarcation_MIL1/MapServer/5/metadata",
+          "name": "layer-5-CountryBoundarySabah-metadata.xml",
+          "exit_code": 0,
+          "elapsed_seconds": 0.9398137909999988,
+          "acquired_at": "2026-10-16T00:19:04.813080+00:00",
+          "bytes": 8199,
+          "sha256": "e964b378f34e806fe9f7a1289a876d7570a4b244bee2da275f133b558d0fbf12"
+        },
+        {
+          "url": "https://mygems.jmg.gov.my/server/rest/services/Demarcation_MIL1/MapServer/5/query?f=json&where=1%3D1&returnIdsOnly=true",
+          "name": "layer-5-CountryBoundarySabah-ids.json",
+          "exit_code": 0,
+          "elapsed_seconds": 0.9331399169999983,
+          "acquired_at": "2026-10-16T00:19:05.748548+00:00",
+          "bytes": 48,
+          "sha256": "1cdb82d29226b6f6577db63ec7ed10c00188e36164f977c46a4f35354a3ca105"
+        },
+        {
+          "url": "https://mygems.jmg.gov.my/server/rest/services/Demarcation_MIL1/MapServer/5/query?f=json&where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&orderByFields=OBJECTID",
+          "name": "layer-5-CountryBoundarySabah-whole4326.json",
+          "exit_code": 0,
+          "elapsed_seconds": 2.4058337499999993,
+          "acquired_at": "2026-10-16T00:19:08.159625+00:00",
+          "bytes": 446394,
+          "sha256": "66ebaf658ee05c2493ee8921f62488c31b4691416289f254717a1af77873200b"
+        }
+      ],
+      "complete_whole_provider_family": true,
+      "feature_count": 1,
+      "whole_object_ids": [
+        1
+      ],
+      "geometry_type": "esriGeometryPolyline",
+      "actual_spatial_reference": {
+        "wkid": 4326,
+        "latestWkid": 4326
+      },
+      "layername": "Country Boundary Sabah",
+      "fields": [
+        {
+          "name": "OBJECTID",
+          "alias": "OBJECTID"
+        },
+        {
+          "name": "FID_DA0020_CountryCoverage_Srwk",
+          "alias": "FID_DA0020_CountryCoverage_Srwk_50K"
+        },
+        {
+          "name": "NAM",
+          "alias": "NAM"
+        },
+        {
+          "name": "ARK",
+          "alias": "ARK"
+        },
+        {
+          "name": "RuleID",
+          "alias": "RuleID"
+        },
+        {
+          "name": "Override",
+          "alias": "Override"
+        },
+        {
+          "name": "SHAPE",
+          "alias": "SHAPE"
+        },
+        {
+          "name": "SHAPE.STLength()",
+          "alias": "SHAPE.STLength()"
+        }
+      ],
+      "attributes": [
+        {
+          "OBJECTID": 1,
+          "FID_DA0020_CountryCoverage_Srwk": 564,
+          "NAM": "Borneo",
+          "ARK": null,
+          "RuleID": 1,
+          "Override": null,
+          "SHAPE.STLength()": 409216.8303119766
+        }
+      ]
+    }
+  ],
+  "new_predicate_calls": 0
+}
