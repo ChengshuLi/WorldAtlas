@@ -258,6 +258,46 @@ test('ordinary modified focused tests compose with coordination while unknown se
   assert.equal(integrationProfile('engineering/tests',[],{},tree),'full');
 });
 
+test('classifier repairs run their complete retained-input regression on the focused route', () => {
+  const regression = 'test/selected-data-profile.test.mjs';
+  const files = ['scripts/integration-profile.mjs', regression].map(filename => ({filename, status:'modified'}));
+  const authored = new Map(files.map(file => [file.filename, {type:'blob', mode:'100644', sha:sha('a')}]));
+  assert(integrationTestFiles('evidence', 0).includes(regression));
+  assert.equal(integrationProfile('engineering/classifier', files, {}, authored), 'evidence');
+  assert.equal(geographyRequired('engineering/classifier', files, {}, authored), false);
+  for (const filename of ['scripts/native-ownership/native-preparation-guards.mjs', 'src/native-grid.js',
+    'scripts/package-build.mjs', '.github/package-inputs.json', 'data/ownership-selection.json']) {
+    const changed = [...files, {filename, status:'modified'}];
+    const tree = new Map(authored).set(filename, {type:'blob', mode:'100644', sha:sha('b')});
+    assert.equal(integrationProfile('engineering/classifier', changed, {}, tree), 'full', filename);
+    assert.equal(geographyRequired('engineering/classifier', changed, {}, tree), true, filename);
+  }
+  const full = [0, 1, 2].flatMap(shard => integrationTestFiles('full', shard));
+  assert.equal(full.filter(name => name === regression).length, 1);
+});
+
+test('transport orchestration keeps whole-byte regressions without unrelated application or scientific replay', () => {
+  const controls = ['scripts/git-blob-transport.mjs','scripts/immutable-git-blobs.mjs'];
+  const tests = ['test/git-blob-transport.test.mjs','test/immutable-git-blobs.test.mjs','test/pr-evidence-transport.test.mjs'];
+  const files = [...controls,...tests].map(filename => ({filename,status:'modified'}));
+  const authored = new Map(files.map(file => [file.filename,{type:'blob',mode:'100644',sha:sha('a')}]));
+  for (const name of tests) assert(integrationTestFiles('evidence',0).includes(name));
+  assert.equal(integrationNeedsBrowser('evidence',0),false);
+  assert.equal(integrationProfile('engineering/transport',files,{},authored),'evidence');
+  assert.equal(geographyRequired('engineering/transport',files,{},authored),false);
+  for (const filename of ['src/main.js','scripts/package-build.mjs',
+    'scripts/native-ownership/native-preparation-guards.mjs','scripts/qualify-source-cohort.py','scripts/package-python-runtime.py',
+    'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs',
+    'src/native-grid.js','data/ownership-selection.json','.github/package-inputs.json']) {
+    const tree = new Map(authored).set(filename,{type:'blob',mode:'100644',sha:sha('b')});
+    for (const changed of [[...files,{filename,status:'modified'}],
+      [{filename:controls[0],previous_filename:filename,status:'renamed'}]]) {
+      assert.equal(integrationProfile('engineering/transport',changed,{},tree),'full',filename);
+      assert.equal(geographyRequired('engineering/transport',changed,{},tree),true,filename);
+    }
+  }
+});
+
 test('geography omission derives only non-scientific control and validated focused-test changes', () => {
   const ordinary = name => new Map([[name,{type:'blob',mode:'100644',sha:sha('a')}]]);
   const required = (filename, extra = {}) => geographyRequired('engineering/controls',
