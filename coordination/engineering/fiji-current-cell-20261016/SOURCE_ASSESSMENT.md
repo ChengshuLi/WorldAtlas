@@ -105,7 +105,10 @@ reproduction and stock source/native/compose/finalize phases passed. The shared
 fresh-vintage publisher now handles reproduction outputs; actual occupied
 destination, symlink destination and symlink ancestor controls reject before
 mutation and retain identical bytes. The three retained-report verifiers are
-read-only comparisons, not report overwriters.
+read-only comparisons, not report overwriters. The actual-Fiji regression test
+authenticates the original encoded/decoded latitude bytes; it does not regenerate
+latitudes with platform math. Production and reproduction already used that
+exact normative table.
 
 This is local source/native qualification and exact literal conservation. Final
 hosted combined geographic verification and emitted selected-consumer smoke,
