@@ -12,7 +12,9 @@ The original source has 10,007 encoded bytes, SHA-256 `638e35c5cf6de869400843894
 
 ## Exact proposed transition
 
-`verification/patch-conservation.json` compares the actual committed candidate with accepted baseline `e67e5518a68aa031c05573c487bb4a94804b94c0`. All 291,213 earlier additive assignments, 886 selected ledger rows and 146 authority entries remain literal. The disjoint 2,302 additions produce 293,515 proposed cumulative assignments, 891 rows and 147 authorities. Zero prior cells are removed or reassigned. Per-owner additions are Vava'u 981, Ha'apai 702, Niuas 69, Tongatapu 489 and 'Eua 61.
+`verification/patch-conservation-after-vut.json` compares the actual committed candidate with accepted Vanuatu baseline `b90b037def1e8f065483c3c342468a833c34a140`. All 294,376 earlier additive assignments, 892 selected ledger rows, 147 authority entries and all 8 held rows remain literal. The disjoint 2,302 additions produce 296,678 proposed cumulative assignments, 897 rows and 148 authorities. Zero prior cells are removed or reassigned. Per-owner additions remain Vava'u 981, Ha'apai 702, Niuas 69, Tongatapu 489 and 'Eua 61. The earlier pre-Vanuatu conservation report, composition and expectations remain retained as historical products. The original Tonga physical/native constructor bytes are unchanged.
+
+The separate physical-interpretation packet records 1,984 reviewed cells, all explicitly unresolved, zero repaired cells, and zero approved land/water classifications. It is disjoint from both the accepted Vanuatu union and the Tonga repair cohort. These two package counts remain separate.
 
 Only the additive selector and package input roles change. Current display geometry, hierarchy, scientific native grid and reference metadata projection remain unchanged. These are candidate offline results until verified queue integration. No deployment, full-region approval, historical membership or GPU/Canvas publication claim is made.
 
@@ -23,3 +25,9 @@ Production phases use unchanged accepted `scripts/prepare-delivery-handoff.mjs`:
 Bounded constructor, native diagnostic, registry, finalization, evidence and smoke controls contain 86 distinct tests. The initial suite passed 85 and failed one because its native-latitude fixture was absent from the sparse checkout. After materializing the exact accepted fixture, that complete four-test file passed. Logs retain both attempts. No full local global regression was run.
 
 Final acceptance requires independent substantive exact-head review, the normal hosted selected-geography/conservation pass, and an actually executed emitted selected-delivery picker/sampler smoke against the authenticated build artifact. Code-level smoke controls do not establish emitted output success. Until those are verified, no accepted Tonga repair credit or publication result is claimed.
+
+## Post-Vanuatu refresh
+
+The accepted stock compose phase uses `config/compose-after-vut.json` and preserves the original constructor quartet. Finalization uses `config/finalize-after-vut-003.json`, the original full owned prefix, and a fresh flat `ownership-selection-after-vut.json` output. Two earlier post-Vanuatu finalizer configurations were rejected before producing output: the first narrowed the owned prefix so genuine original Tonga roles were no longer granted; the second used a nested sidecar path where the accepted contract requires a flat path. Both are retained as rejected invocations. No physical or native constructor was rerun.
+
+Companion verification authenticates all nineteen stock queue bodies, re-extracts their exact package in a fresh temporary directory, compares all frozen bytes, and checks every literal source/physical observation. The complete positive run passed against accepted b90. Seven concrete corruption controls reject missing literals, false water approval, corrupted source and queue hashes, wrong native latitude, false package scope and changed frozen blocks. Independent review additionally checked wrong owners and duplicate literals. These are read-only review checks, not new physical evidence or repair qualification.
