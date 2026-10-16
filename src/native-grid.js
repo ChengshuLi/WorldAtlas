@@ -57,7 +57,13 @@ function firstAtOrBelow(latitudes,value,start,end){
   return lo;
 }
 
-export function nativePolygonIntervals(index,{size,rowStart,rowEnd,latitudes}){
+export function nativePolygonIntervals(index,options){
+  return scanNativePolygonIntervals(index,options,180);
+}
+
+// The wider bound is private to exact comparison of an explicitly supplied
+// retained seam view. Ordinary scanning and every assignment path stay strict.
+function scanNativePolygonIntervals(index,{size,rowStart,rowEnd,latitudes},longitudeLimit){
   if(!Number.isSafeInteger(size)||size<2||size>2**31||
      !Number.isInteger(rowStart)||!Number.isInteger(rowEnd)||rowStart<0||rowEnd>size||
      rowStart>=rowEnd||latitudes?.length!==size)
@@ -77,7 +83,7 @@ export function nativePolygonIntervals(index,{size,rowStart,rowEnd,latitudes}){
         if(ring.length<8||ring.length%2||ring[0]!==ring.at(-2)||ring[1]!==ring.at(-1))
           throw Error('Unclosed native ring');
         for(let k=0;k<ring.length;k+=2)if(!Number.isFinite(ring[k])||!Number.isFinite(ring[k+1])||
-          Math.abs(ring[k])>180||Math.abs(ring[k+1])>90)throw Error('Invalid native lon/lat coordinate');
+          Math.abs(ring[k])>longitudeLimit||Math.abs(ring[k+1])>90)throw Error('Invalid native lon/lat coordinate');
         for(let k=0;k<ring.length-2;k+=2){
           let x1=ring[k],y1=ring[k+1],x2=ring[k+2],y2=ring[k+3];
           if(y1>y2){[x1,x2]=[x2,x1];[y1,y2]=[y2,y1];}
@@ -127,6 +133,70 @@ export function nativePolygonIntervals(index,{size,rowStart,rowEnd,latitudes}){
 
 // Source-native input and additive interval admission share this dependency-free
 // numerical boundary with trusted readers and runtime consumers.
+// Validate a reviewed canonical view without changing either input. The
+// original is admitted only at the retained four-ULP antimeridian overrun,
+// never as a general periodic-coordinate or approximate-geometry allowance.
+// Comparison covers the complete latitude extent, all native columns and all
+// exact boundary ties. Matching candidate cells alone would be insufficient.
+export function verifyNativeSeamView(original,view,{size,latitudes}) {
+  if(!Number.isSafeInteger(size)||size<2||size>2**31||latitudes?.length!==size)
+    throw Error('Require explicit latitude table and valid canonical seam lattice');
+  for(let y=0;y<size;y++)if(!Number.isFinite(latitudes[y])||Math.abs(latitudes[y])>=90
+    ||y&&latitudes[y]>=latitudes[y-1])throw Error('Invalid decreasing native latitude table');
+  const limit=180.0000000000001;
+  let south=90,north=-90,overruns=0;
+  function index(geometry,originalFrame) {
+    if(!geometry||!['Polygon','MultiPolygon'].includes(geometry.type))
+      throw Error('Canonical seam view requires whole polygon geometry');
+    const polygons=geometry.type==='Polygon'?[geometry.coordinates]:geometry.coordinates;
+    if(!Array.isArray(polygons)||!polygons.length)throw Error('Empty canonical seam view');
+    return [{index:1,polygons:polygons.map(polygon=>{
+      if(!Array.isArray(polygon)||!polygon.length)throw Error('Missing canonical seam rings');
+      return polygon.map(ring=>{
+        if(!Array.isArray(ring))throw Error('Missing canonical seam ring');
+        for(const point of ring){
+          if(!Array.isArray(point)||point.length!==2||!point.every(Number.isFinite)
+            ||Math.abs(point[0])>(originalFrame?limit:180)||Math.abs(point[1])>90)
+            throw Error('Canonical seam coordinate exceeds retained roundoff frame');
+          if(originalFrame&&Math.abs(point[0])>180)overruns++;
+          south=Math.min(south,point[1]);north=Math.max(north,point[1]);
+        }
+        return Float64Array.from(ring.flat());
+      });
+    })}];
+  }
+  const raw=index(original,true),canonical=index(view,false);
+  if(!overruns)throw Error('Canonical seam view requires an actual retained seam overrun');
+  // Let the unchanged scanner authenticate the full normative latitude table,
+  // even when this geometry lies outside all native latitude centres.
+  const rowStart=firstAtOrBelow(latitudes,north,0,size);
+  const rowEnd=firstAtOrBelow(latitudes,south,0,size);
+  const spans=rows=>[...rows].map(([y,runs])=>{
+    const joined=[];
+    for(const run of [...runs].sort((a,b)=>a.start-b.start||a.end-b.end)){
+      const prior=joined.at(-1);
+      if(prior&&prior[1]>=run.start)prior[1]=Math.max(prior[1],run.end);
+      else joined.push([run.start,run.end]);
+    }
+    return [y,joined];
+  }).sort((a,b)=>a[0]-b[0]);
+  const ties=rows=>[...new Set(rows.map(row=>JSON.stringify(row)))].sort();
+  let cells=0,checkedRows=0;
+  // Include an exact lower-vertex row, which may carry a boundary-only tie.
+  const end=Math.min(size,rowEnd+1),start=Math.min(rowStart,size-1);
+  for(let y=start;y<end;y+=4096){
+    const options={size,latitudes,rowStart:y,rowEnd:Math.min(y+4096,end)};
+    const before=scanNativePolygonIntervals(raw,options,limit);
+    const after=nativePolygonIntervals(canonical,options);
+    const a=spans(before.rows),b=spans(after.rows);
+    if(JSON.stringify(a)!==JSON.stringify(b)||JSON.stringify(ties(before.ties))!==JSON.stringify(ties(after.ties)))
+      throw Error('Canonical seam view changes complete native spans or boundary ties');
+    cells+=a.reduce((sum,[,runs])=>sum+runs.reduce((n,[a,z])=>n+z-a,0),0);
+    checkedRows+=options.rowEnd-options.rowStart;
+  }
+  return {overrun_vertices:overruns,checked_rows:checkedRows,native_cells:cells};
+}
+
 export function nativeRuntimeIndex(features) {
   if (!Array.isArray(features)) throw Error('Explicit native feature roster required');
   const ids=new Set(),owners=new Set();

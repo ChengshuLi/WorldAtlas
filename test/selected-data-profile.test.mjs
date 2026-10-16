@@ -1894,3 +1894,24 @@ for(const retainedCode of [false,true])test('selected routing uses actual merged
   f.integrated.entries.set(SELECTED_SMOKE,oldSmoke);
   assert.equal((await prepareIntegration(f.options)).test_selection,undefined,'actual candidate smoke drift still selects full CI');
 });
+
+
+test('selected-data closes canonical seam view and method bodies without arbitrary provenance walking',async()=>{
+  const setup=({f,roles})=>{
+    const method=f.put('scripts/majority.py','# retained canonical method',true);
+    roles.canonical_seam_views=f.put(prefix+'canonical-seam-views.json',{version:1,
+      kind:'retained-periodic-native-views-v1',method:{pin:method,export:'canonical'},records:[]});
+  };
+  const accepted=sourceTargetRoleFixture({mutateRoles:setup}),diagnostics={};
+  assert.ok(await accepted.run({metadataDiagnostics:diagnostics}),diagnostics.failure);
+  for(const defect of ['missing','wrong-pin','foreign-method']){
+    const mutateRoles=args=>{
+      setup(args);
+      if(defect==='missing')args.f.authored.entries.delete(args.roles.canonical_seam_views.path);
+      if(defect==='wrong-pin')args.roles.canonical_seam_views.git_blob_oid='0'.repeat(40);
+      if(defect==='foreign-method')args.roles.canonical_seam_views=args.f.put(prefix+'canonical-seam-views.json',
+        {version:1,kind:'retained-periodic-native-views-v1',method:{pin:args.f.leaf('alternate.py'),export:'canonical'},records:[]});
+    };
+    assert.equal(await sourceTargetRoleFixture({mutateRoles}).run(),null,defect);
+  }
+});

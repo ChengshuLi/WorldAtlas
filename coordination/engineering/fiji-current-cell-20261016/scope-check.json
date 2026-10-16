@@ -1,0 +1,323 @@
+{
+  "package_id": "gb-FJI-ADM2--repair-evaluation",
+  "queue_sha256": "78007430b6f9faedb188ef0619b7ff0a7a2cc7fff2ec9f1c41ee69936ec4ebd8",
+  "frozen_selected_commit": "a61b6f9e7f88b1da380e3a834f89d7509132ed71",
+  "current_accepted_commit": "ab0d2088bc66e0d9847b273eb8519a92c0f109b1",
+  "original_cells": 3963,
+  "original_segments": 1882,
+  "original_owners": 15,
+  "current_selected_overlap_cells": 0,
+  "current_selected_overlap_rows": [],
+  "remaining_owner_zero_cells": 3963,
+  "unchanged_native_base_selection": true,
+  "unchanged_fiji_current_source_part": {
+    "path": "data/geography/part-8.json",
+    "bytes": 5097739,
+    "sha256": "2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1"
+  },
+  "owners": [
+    {
+      "id": "gb:FJI:ADM2:14151628B20319301670654",
+      "index": 19891,
+      "bounds": [
+        261232.25209666666,
+        143828.4114862679,
+        261762.04588833332,
+        144504.087964668
+      ],
+      "province_id": "framework:province:eastern:40803850f50c",
+      "province_index": 1633,
+      "name": "Lomaiviti",
+      "reference_owner": "Fiji",
+      "source_id": "gb:FJI:ADM2",
+      "source_atoms": [
+        "gb:FJI:ADM2:14151628B20319301670654"
+      ],
+      "original_candidate_cells": 405
+    },
+    {
+      "id": "gb:FJI:ADM2:14151628B28251361437248",
+      "index": 19892,
+      "bounds": [
+        260640.84929500002,
+        144348.01924755136,
+        260930.68837277777,
+        144579.04696340163
+      ],
+      "province_id": "framework:province:central:782a9671170f",
+      "province_index": 1231,
+      "name": "Namosi",
+      "reference_owner": "Fiji",
+      "source_id": "gb:FJI:ADM2",
+      "source_atoms": [
+        "gb:FJI:ADM2:14151628B28251361437248"
+      ],
+      "original_candidate_cells": 30
+    },
+    {
+      "id": "gb:FJI:ADM2:14151628B39642918357252",
+      "index": 19893,
+      "bounds": [
+        260771.2040561111,
+        144431.23852858978,
+        261175.01251999996,
+        144739.60722600637
+      ],
+      "province_id": "framework:province:central:782a9671170f",
+      "province_index": 1231,
+      "name": "Rewa",
+      "reference_owner": "Fiji",
+      "source_id": "gb:FJI:ADM2",
+      "source_atoms": [
+        "gb:FJI:ADM2:14151628B39642918357252"
+      ],
+      "original_candidate_cells": 129
+    },
+    {
+      "id": "gb:FJI:ADM2:14151628B42533076410957",
+      "index": 19894,
+      "bounds": [
+        0,
+        142668.68117464185,
+        262166,
+        143459.85008634915
+      ],
+      "province_id": "framework:province:northern:a3c9676c58e4",
+      "province_index": 3393,
+      "name": "Macuata",
+      "reference_owner": "Fiji",
+      "source_id": "gb:FJI:ADM2",
+      "source_atoms": [
+        "gb:FJI:ADM2:14151628B42533076410957"
+      ],
+      "original_candidate_cells": 181
+    },
+    {
+      "id": "gb:FJI:ADM2:14151628B48978228339800",
+      "index": 19895,
+      "bounds": [
+        260905.27283555557,
+        144069.944281047,
+        261228.10113499998,
+        144487.9979420454
+      ],
+      "province_id": "framework:province:central:782a9671170f",
+      "province_index": 1231,
+      "name": "Tailevu",
+      "reference_owner": "Fiji",
+      "source_id": "gb:FJI:ADM2",
+      "source_atoms": [
+        "gb:FJI:ADM2:14151628B48978228339800"
+      ],
+      "original_candidate_cells": 125
+    },
+    {
+      "id": "gb:FJI:ADM2:14151628B53541640625043",
+      "index": 19896,
+      "bounds": [
+        260676.31452888885,
+        143857.54119198647,
+        261036.28301166667,
+        144180.12813409453
+      ],
+      "province_id": "framework:province:western:2f1c11ee875a",
+      "province_index": 4942,
+      "name": "Ra",
+      "reference_owner": "Fiji",
+      "source_id": "gb:FJI:ADM2",
+      "source_atoms": [
+        "gb:FJI:ADM2:14151628B53541640625043"
+      ],
+      "original_candidate_cells": 85
+    },
+    {
+      "id": "gb:FJI:ADM2:14151628B53702400461405",
+      "index": 19897,
+      "bounds": [
+        259992.64385999998,
+        144078.65186836425,
+        260780.6711616667,
+        144873.54389387314
+      ],
+      "province_id": "framework:province:western:2f1c11ee875a",
+      "province_index": 4942,
+      "name": "Nadroga-Navosa",
+      "reference_owner": "Fiji",
+      "source_id": "gb:FJI:ADM2",
+      "source_atoms": [
+        "gb:FJI:ADM2:14151628B53702400461405"
+      ],
+      "original_candidate_cells": 77
+    },
+    {
+      "id": "gb:FJI:ADM2:14151628B59272471160482",
+      "index": 19898,
+      "bounds": [
+        260911.75416166667,
+        143321.0467566075,
+        261491.50514111112,
+        143661.22251272283
+      ],
+      "province_id": "framework:province:northern:a3c9676c58e4",
+      "province_index": 3393,
+      "name": "Bua",
+      "reference_owner": "Fiji",
+      "source_id": "gb:FJI:ADM2",
+      "source_atoms": [
+        "gb:FJI:ADM2:14151628B59272471160482"
+      ],
+      "original_candidate_cells": 308
+    },
+    {
+      "id": "gb:FJI:ADM2:14151628B61046117406534",
+      "index": 19899,
+      "bounds": [
+        260667.1387188889,
+        144958.24657631989,
+        261130.29865222223,
+        145327.21947240434
+      ],
+      "province_id": "framework:province:eastern:40803850f50c",
+      "province_index": 1633,
+      "name": "Kadavu",
+      "reference_owner": "Fiji",
+      "source_id": "gb:FJI:ADM2",
+      "source_atoms": [
+        "gb:FJI:ADM2:14151628B61046117406534"
+      ],
+      "original_candidate_cells": 43
+    },
+    {
+      "id": "gb:FJI:ADM2:14151628B68154180840071",
+      "index": 19900,
+      "bounds": [
+        260546.83365444446,
+        144403.21233260015,
+        260854.15046555555,
+        144720.955989346
+      ],
+      "province_id": "framework:province:central:782a9671170f",
+      "province_index": 1231,
+      "name": "Serua",
+      "reference_owner": "Fiji",
+      "source_id": "gb:FJI:ADM2",
+      "source_atoms": [
+        "gb:FJI:ADM2:14151628B68154180840071"
+      ],
+      "original_candidate_cells": 33
+    },
+    {
+      "id": "gb:FJI:ADM2:14151628B71764118664060",
+      "index": 19901,
+      "bounds": [
+        259985.9440622222,
+        140244.00209852416,
+        260083.23677777775,
+        140277.41960780777
+      ],
+      "province_id": "framework:province:rotuma:29a91f2e1d93",
+      "province_index": 3978,
+      "name": "Rotuma",
+      "reference_owner": "Fiji",
+      "source_id": "gb:FJI:ADM2",
+      "source_atoms": [
+        "gb:FJI:ADM2:14151628B71764118664060"
+      ],
+      "original_candidate_cells": 97
+    },
+    {
+      "id": "gb:FJI:ADM2:14151628B80423492752803",
+      "index": 19902,
+      "bounds": [
+        82.36381833333542,
+        143653.6830732592,
+        262131.48147666664,
+        145347.34646573898
+      ],
+      "province_id": "framework:province:eastern:40803850f50c",
+      "province_index": 1633,
+      "name": "Lau",
+      "reference_owner": "Fiji",
+      "source_id": "gb:FJI:ADM2",
+      "source_atoms": [
+        "gb:FJI:ADM2:14151628B80423492752803"
+      ],
+      "original_candidate_cells": 1442
+    },
+    {
+      "id": "gb:FJI:ADM2:14151628B8492423103487",
+      "index": 19903,
+      "bounds": [
+        260689.35000500001,
+        144092.09623808693,
+        261103.6451088889,
+        144504.85420433866
+      ],
+      "province_id": "framework:province:central:782a9671170f",
+      "province_index": 1231,
+      "name": "Naitasiri",
+      "reference_owner": "Fiji",
+      "source_id": "gb:FJI:ADM2",
+      "source_atoms": [
+        "gb:FJI:ADM2:14151628B8492423103487"
+      ],
+      "original_candidate_cells": 8
+    },
+    {
+      "id": "gb:FJI:ADM2:14151628B95966095088914",
+      "index": 19904,
+      "bounds": [
+        0,
+        142983.17616979417,
+        262166,
+        143852.66040166494
+      ],
+      "province_id": "framework:province:northern:a3c9676c58e4",
+      "province_index": 3393,
+      "name": "Cakaudrove",
+      "reference_owner": "Fiji",
+      "source_id": "gb:FJI:ADM2",
+      "source_atoms": [
+        "gb:FJI:ADM2:14151628B95966095088914"
+      ],
+      "original_candidate_cells": 685
+    },
+    {
+      "id": "gb:FJI:ADM2:14151628B98370545668292",
+      "index": 19905,
+      "bounds": [
+        259887.63181222221,
+        143379.56214469427,
+        260738.72460166665,
+        144400.53253659332
+      ],
+      "province_id": "framework:province:western:2f1c11ee875a",
+      "province_index": 4942,
+      "name": "Ba",
+      "reference_owner": "Fiji",
+      "source_id": "gb:FJI:ADM2",
+      "source_atoms": [
+        "gb:FJI:ADM2:14151628B98370545668292"
+      ],
+      "original_candidate_cells": 315
+    }
+  ],
+  "complete_available_source_families": [
+    {
+      "key": "gb:FJI:ADM1",
+      "sha256": "95e8d9a124d0dc1181b87164c1b999f0c081f6406ca3c2848697986e08b360a8",
+      "bytes": 37225,
+      "features": 4
+    },
+    {
+      "key": "gb:FJI:ADM2",
+      "sha256": "0339f90794264719b98c93a9a7c2d71fdb473c0a2f9c1e9b74ecd98a67ddb93f",
+      "bytes": 335438,
+      "features": 15
+    }
+  ],
+  "companion_physical_package": "gb-FJI-ADM2--physical-interpretation",
+  "companion_physical_cells": 9706,
+  "companion_assigned": false,
+  "accepted_outcome_credit": 0
+}
