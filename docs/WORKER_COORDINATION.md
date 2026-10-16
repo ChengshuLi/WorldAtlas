@@ -457,23 +457,20 @@ pass. The full scientific byte validator retains its ancestry, descriptor and
 byte limits. The final current issue/check/source/base guards and SHA-guarded
 merge remain required.
 
-The existing HTTP client admits every actual request using response-header core
-quota, including concurrent charges and conditional 304 refunds. It retains a
-16-request recovery floor, bounded GET-only retries after recognized quota
-rejections and a fresh repository probe after a reset. No ordinary permission
-failure, ambiguous transport outcome or write is automatically retried.
+The shared HTTP client uses actual response status and numeric retry/reset
+information for bounded GET-only retries after recognized quota rejections.
+Successful responses do not require capacity headers. There is no predictive
+request floor, cleanup allocation, startup barrier or capacity probe. Ordinary
+permission failure, ambiguous transport outcomes and writes are never
+automatically retried merely because quota might recover.
 
-The worker entrypoint binds its deadline to the authenticated current prepare or
-merge job's start and the executing workflow's immutable literal timeout (10 or
-75 minutes). Setup time is charged. Workflow/job metadata share a finite startup
-budget; requests and waits must fit a complete 20-second HTTP attempt before the
-existing 30-second finalization reserve. Local entrypoint runs also have finite
-deadlines. Failed startup authority or deadline admission closes all further
-HTTP, including optional cleanup/notification. Once a deadline is admitted, only
-the client's already-restricted exact-owned candidate cleanup
-and result-notification routes can use that final reserve; they keep the same
-quota state and bounded recovery allocation. This is best-effort cleanup, not a
-guarantee against concurrent quota depletion or a slow provider.
+Each HTTP attempt has a 20-second abort signal. A caller-supplied deadline also
+must fit the complete next attempt and any retry wait; Actions owns the worker
+job timeout. No separate startup job-clock or finalization-reserve protocol is
+used. Exact-owned candidate cleanup and result notification retain their
+restricted, single-attempt dispatcher. Actual provider rejection can leave
+cleanup or notification pending for reconciliation; local forecasts cannot
+reserve capacity against other jobs.
 
 Inspect the same Actions execution rather than canceling or duplicating a long
 job. Reconcile terminal failure and actual PR state before retrying; retained

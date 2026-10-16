@@ -72,13 +72,12 @@ test('entry and byte bounds retain no oversized snapshot and overflow remains fr
     const api=githubAPI('private',settings);await api('/repos/a/b/issues/1');await api('/repos/a/b/issues/1');
   });
 });
-test('capacity probes, generic quota, blobs and writes never use conditional authority',async()=>{
+test('generic quota, blobs and writes never use conditional authority',async()=>{
   await mocked(async(url,options)=>{
     assert.equal(options.headers['If-None-Match'],undefined);
     return fresh({ok:true},'"one"',{'x-ratelimit-limit':'1000','x-ratelimit-remaining':'42','x-ratelimit-reset':'100','x-ratelimit-resource':'core'});
   },async()=>{
     const api=githubAPI('private');
-    await api.readRepositoryCapacity('a/b');await api.readRepositoryCapacity('a/b');
     for(const route of ['/rate_limit','/repos/a/b/git/blobs/'+'a'.repeat(40)]){await api(route);await api(route);}
     await api('/repos/a/b/issues/1');await api('/repos/a/b/issues/1','PATCH',{body:'changed'});
   });

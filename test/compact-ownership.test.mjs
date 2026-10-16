@@ -27,7 +27,7 @@ async function waitForStartup(page,errors,startupErrors,{timeout=60000}={}){
 }
 
 test('startup diagnostics expose caught app errors and distinguish delayed rendering from a stall', {timeout:30000},async()=>{
- const server=await createServer({server:{host:'127.0.0.1',port:0},logLevel:'error'});let browser;
+ const server=await createServer({server:{watch:null,host:'127.0.0.1',port:0},logLevel:'error'});let browser;
  try{
   await server.listen();const base=server.resolvedUrls.local[0];
   browser=await chromium.launch();const page=await browser.newPage(),errors=[],startupErrors=captureStartupErrors(page);
@@ -109,7 +109,7 @@ test('shuffled and row-local varint transports reconstruct every packed bit acro
  assert.throws(()=>decodeOwnershipVarints(Uint8Array.of(128),{rows:grid.rows,offset:0,words:2,coordinateBits:grid.coordinateBits,size}),/Incomplete/);
 });
 test('real WebGL framebuffer agrees for legacy/compact holes, odd runs, maximum coordinates and high IDs',async()=>{
- const server=await createServer({server:{port:3294,strictPort:true},logLevel:'error'});let browser;
+ const server=await createServer({server:{watch:null,port:3294,strictPort:true},logLevel:'error'});let browser;
  try{
   await server.listen();
   browser=await chromium.launch({args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
