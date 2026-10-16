@@ -1,0 +1,81 @@
+{
+  "kind": "existing-whole-target-physical-input-request-data-only-no-execution",
+  "target": "gb:TLS:ADM2:22284137B63057021325797",
+  "pixelIndex": 42215,
+  "original_request_ids": [
+    "conflict:TimorPNG:1:137710:222103",
+    "conflict:TimorPNG:2:137711:222102"
+  ],
+  "requested_rows": [
+    {
+      "y": 137710,
+      "runs": [
+        [
+          222103,
+          222104,
+          42215
+        ]
+      ]
+    },
+    {
+      "y": 137711,
+      "runs": [
+        [
+          222102,
+          222103,
+          42215
+        ]
+      ]
+    }
+  ],
+  "actual_stage": {
+    "path": "idn-remaining474-source-research-001/worker5-timor14/worker6-followup-001/balibo-whole-original-stage-inputs.json",
+    "bytes": 9471,
+    "sha256": "dde6e1784cef5cd6786936bf9a6b6bcfaa24767a4698ddef4ff523b103cbcbf3"
+  },
+  "stage_schema": "Existing producer list of {target,consumed,selected}; both geometries are whole, never clipped to requested cells",
+  "original_consumed_family": {
+    "path": "idn-remaining474-source-research-001/worker5-timor14/worker6-followup-001/original-tls-adm2-family.geojson",
+    "bytes": 335036,
+    "sha256": "84106c050c23cb5cedee5f4bc4823c3d3bfcd2400754c67ba4244c6b4c347177"
+  },
+  "original_family_custody": {
+    "path": "idn-remaining474-source-research-001/worker5-timor14/worker6-followup-001/original-tls-adm2-custody.json",
+    "bytes": 970,
+    "sha256": "315ed999e03cd81d705b80f06cb58e156d0cc09d404b29e85af580a3d1e7c468"
+  },
+  "actual_selected_containing_body": {
+    "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+    "path": "data/geography/part-23.json",
+    "mode": "100644",
+    "git_blob_oid": "371e95033d9c542bbf07c42afe7111074e35f246",
+    "bytes": 4962410,
+    "sha256": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2",
+    "whole_body_consumed": true
+  },
+  "symmetric_scope_join": {
+    "path": "idn-remaining474-source-research-001/worker5-timor14/worker6-followup-001/symmetric117-source-owner-neighbor-join.json",
+    "bytes": 217058,
+    "sha256": "09613c2240609c0a57a9c0dff08ddbab82ebcbe5ebe08f4288b44a7e17d8771e"
+  },
+  "common_existing_physical_input_inventory": {
+    "path": "idn-three-target11234-physical-preparation-001/canonical-physical-config.json",
+    "bytes": 11045,
+    "sha256": "42910722a5c24b031c11e5a20831ca771bd2d70d15229aef767238f5baba75fc"
+  },
+  "common_input_reuse": "Reuse verified country-agnostic original comparison/native-GSHHG/transport roles; replace only stages with this separately retained Balibo stage. Do not inherit that historical config resources/custom limiters or target identity. This is a request, not a mutated/executable config.",
+  "constructor_restrictions": {
+    "module": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+    "accepted_commit": "675cf6285b8d1cdaed3a7d8915146e7d45ce9052",
+    "target_result_lines": "805-812",
+    "original_and_selected_geometry_lines": "899-906",
+    "meaning": "A physical result and source receipt are bound to this exact target; measured consumed must equal the original catalogue geometry, selected.id/base must equal existing Atlas owner. A source-point observation cannot be renamed from an IDN target receipt."
+  },
+  "launch_status": "NOT_LAUNCHED",
+  "next_required": "Distinct stage/source-scope review, immutable stage retention/pin, ordinary existing producer config and Root launch decision; actual target support and result review remain unexecuted",
+  "not_in_request": {
+    "Fatululic42184": "Original fine source has no centre hit; full-positive source correction/corpus binding is an additional blocker",
+    "Nitibe42234": "Original fine source has no centre hit; full-positive source correction/corpus binding is an additional blocker",
+    "Fatumean42172": "Fine original/full positive but coarse2017 source parent absence remains explicitly flagged for substantive parent interpretation; not described as physical-receipt-only"
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "kind": "same-release-unsimplified-TLS-body-source-compatibility-not-spatial-result",
+  "source": {
+    "path": "idn-remaining474-source-research-001/worker5-timor14/worker6-followup-001/geoBoundaries-TLS-ADM1.geojson",
+    "bytes": 452378,
+    "sha256": "93f5059719b17c0d7ea475f79b53e2c6d7c6883726cb0e4464c656c3bdf31b95"
+  },
+  "metadata": {
+    "boundaryID": "TLS-ADM1-58719522",
+    "boundaryISO": "TLS",
+    "boundaryYear": "2017",
+    "boundaryType": "ADM1",
+    "boundarySource": "OpenStreetMap, Wambacher",
+    "boundaryCanonical": "Municipalities",
+    "boundaryLicense": "Open Data Commons Open Database License 1.0",
+    "licenseDetail": "Open Data Commons Open Database License 1.0",
+    "licenseSource": "https//www.openstreetmap.org/copyright",
+    "boundarySourceURL": "https//wambachers-osm.website/boundaries/",
+    "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023",
+    "buildDate": "Dec 12, 2023",
+    "admUnitCount": "13",
+    "meanVertices": "1207.0",
+    "minVertices": "51",
+    "maxVertices": "5067",
+    "meanPerimeterLengthKM": "178.81124478100352",
+    "maxPerimeterLengthKM": "234.97774842088717",
+    "minPerimeterLengthKM": "124.59279214218161",
+    "meanAreaSqKM": "1145.3249931260707",
+    "minAreaSqKM": "345.66161266531384",
+    "maxAreaSqKM": "1952.5580021962242"
+  },
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "feature_count": 13,
+  "same_release_simplified_lfs_oid_matches_actual_original_family": true,
+  "original_selected_feature_correspondence": [
+    {
+      "source_index": 58354,
+      "shapeID": "58719522B69518090574338",
+      "properties_equal": true,
+      "old_geometry_type": "Polygon",
+      "full_geometry_type": "Polygon",
+      "geometry_changed": true
+    },
+    {
+      "source_index": 58358,
+      "shapeID": "58719522B64128847782213",
+      "properties_equal": true,
+      "old_geometry_type": "Polygon",
+      "full_geometry_type": "Polygon",
+      "geometry_changed": true
+    },
+    {
+      "source_index": 58359,
+      "shapeID": "58719522B58123781478976",
+      "properties_equal": true,
+      "old_geometry_type": "Polygon",
+      "full_geometry_type": "Polygon",
+      "geometry_changed": true
+    }
+  ],
+  "source_or_native_predicate_executed": false,
+  "hold_change": false,
+  "interpretation": "Same release/schema/feature identities and original simplified custody. Full geometry offers a concrete source-refinement comparison, not a new sovereign/district authority or automatic owner correction."
+}

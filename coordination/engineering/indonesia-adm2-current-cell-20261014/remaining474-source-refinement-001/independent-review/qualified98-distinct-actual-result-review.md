@@ -1,0 +1,11 @@
+# Independent actual98 result review
+
+**PASS WITH LIMITS for actual qualification and ordinary delivery preparation.** The four acceptedb638 stock calls emitted exactly98 distinct assigned cells in8 original constructor components:95 original repair cells and3 original conflict cells. These results grant no accepted-cell credit.
+
+The95 repairs are Malinau58, Mahakam Ulu5, Sintang17, Sanggau8, Nunukan4 and Bengkayang3. Every exact key retains its same sole original/full fine IDN member. Its full MYS contact is only coarse Sarawak, with no fine Malaysian contact ignored, and its already-executed government JMG observation is outside. The typed negatives preserve all175 full MYS geometries except the single coarse Sarawak operand, replaced by the exact whole government polygon. Original positive geometry, member, class and physical receipt fields remain unchanged. This is the previously reviewed bounded coarse-source correction, not blanket government precedence or a new country default.
+
+The3 conflicts are Tebedu's second cell(y130389,x211488), and the two original Balibo cells. Their existing foreign fine members and parent context are affirmative, complete full IDN sources are outside, and each uses its own first whole-target physical receipt. Tebedu's first cell(y130389,x211487) remains excluded because the government source is outside there. Original competing claims and package identities remain retained.
+
+I authenticated all28 payload files and immutable source/patch bindings, compared actual constructor rows to requested tuples and original501 requests, checked unchanged positive operands and the exact government substitution, and confirmed no overlaps with the prior26 repairs,216 Kapuas repairs or3 IDN conflict cells. This supports Root's combined343 qualified scope:337 repair plus6 conflict, with0 newly accepted by this review. No predicates or source acquisitions were repeated.
+
+The exact quartet hashes, component IDs, counts and limits are in `qualified98-distinct-actual-result-review.json`. Ordinary composition/finalization, current ownerzero, conservation and selected visibility remain required. Government edition/accuracy/default-datum and explicit reuse-license uncertainties remain recorded; no survey-grade sovereignty or whole-parent approval is claimed.
