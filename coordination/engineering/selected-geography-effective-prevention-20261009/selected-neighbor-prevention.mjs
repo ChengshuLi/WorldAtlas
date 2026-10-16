@@ -809,7 +809,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
  // Optional reconciliation uses existing complete aggregation lineage, not an
  // authored source-to-owner guess. Canonical parts retain the accepted members
  // and base geometry; the complete lineage exposes omitted competing owners.
- const memberOwners=new Map(), canonicalOwners=new Map();
+ const memberOwners=new Map(), canonicalOwners=new Map(), semanticOwners=new Map();
  if(evidence.source_membership!==undefined){
   const membership=evidence.source_membership;
   demand(membership&&Object.keys(membership).sort().join(',')==='index,lineage,parts'
@@ -833,8 +833,11 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
   const lineage=current(membership.lineage),index=current(membership.index);
   demand(Array.isArray(lineage.changes)&&Array.isArray(index.parts)&&index.parts.length>0
    &&new Set(index.parts).size===index.parts.length,'Incomplete accepted membership inventory');
-  for(const change of lineage.changes)if(Array.isArray(change.replaces))for(const member of change.replaces){
-   const changes=memberOwners.get(member)??[];changes.push(change);memberOwners.set(member,changes);
+  for(const change of lineage.changes){
+   const records=semanticOwners.get(change.id)??[];records.push(change);semanticOwners.set(change.id,records);
+   if(Array.isArray(change.replaces))for(const member of change.replaces){
+    const changes=memberOwners.get(member)??[];changes.push(change);memberOwners.set(member,changes);
+   }
   }
   const paths=new Set();
   for(const pin of membership.parts){
@@ -884,6 +887,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
    const accepted = canonicalOwners.get(change.id), properties = accepted?.properties;
    const metadata = properties?.metadata;
    demand(typeof change.id === 'string' && !descendants.has(change.id)
+    && semanticOwners.get(change.id)?.length === 1 && semanticOwners.get(change.id)[0] === change
     && same(change.replaces, [id]) && accepted && owners.has(change.id)
     && properties.id === change.id && same(metadata?.source_member_ids, [id])
     && metadata.original_id === original?.properties?.shapeID,
