@@ -1,0 +1,35 @@
+✔ actual CLI checks complete mixed assigned/zero-cell cohort, every new cell and stable rows (271.95593ms)
+✔ smoke rejects wrong ledger hash without creating output (23.892448ms)
+✔ smoke rejects wrong cumulative count without creating output (107.689684ms)
+✔ smoke rejects duplicate member without creating output (17.769478ms)
+✔ smoke rejects missing member without creating output (15.862046ms)
+✔ smoke rejects duplicate roster without creating output (25.311021ms)
+✔ smoke rejects duplicate batch without creating output (15.66986ms)
+✔ smoke rejects wrong target without creating output (86.566431ms)
+✔ smoke rejects wrong disposition without creating output (126.585179ms)
+✔ smoke rejects wrong geometry without creating output (99.055654ms)
+✔ smoke rejects empty cohorts without creating output (17.630471ms)
+✔ smoke rejects undeclared field without creating output (15.332657ms)
+✔ actual kernel rejects missing/duplicate selected rows, target drift and omitted effective primitive (456.694098ms)
+✔ saved before-state controls reject real owner mutation without changing added cells (276.479077ms)
+✔ current base controls use every affected occupied row and a nonvacuous fallback (93.928397ms)
+✔ actual loaded target custody agrees with the current pinned roster (62.296466ms)
+✔ actual loader rejects additions over already occupied native cells (58.068157ms)
+✔ whole-file checks reject corrupted assets, absent assets, path traversal and symlinks (185.746791ms)
+✔ every output collision and symlink rejects before work and preserves originals (91.120244ms)
+✔ CLI fails on missing required arguments and duplicate/unknown options (388.423939ms)
+✔ genuine startup native descriptor without encoded bytes passes with actual whole-file hash and size (393.294314ms)
+✔ genuine startup native descriptor still rejects wrong encoded SHA and missing selected custody bytes (102.573704ms)
+✔ actual emitted smoke keeps distinct authority pointsets with the same original component label (174.457535ms)
+✔ missing current rows and foreign target joins fail closed (3.167528ms)
+✔ native-only default and affected historical contexts retain exact cells and bounds (687.604395ms)
+✔ multiple territorial masks for one target combine without source-ID relaxation (2.274759ms)
+✔ trusted reader, source constructor and profile execute without installed npm packages (103.114615ms)
+ℹ tests 27
+ℹ suites 0
+ℹ pass 27
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3246.189075
