@@ -1,0 +1,19 @@
+import gzip,json,hashlib
+from pathlib import Path
+from PIL import Image,ImageDraw
+P=Path(__file__).resolve().parent;WS=P.parents[3];ROOT=P.parent.parent;source=ROOT/'mixed-wetland-body-facets-005/remaining-if-mixed-facets-adopted1279.jsonl.gz';rows=[json.loads(x)for x in gzip.decompress(source.read_bytes()).splitlines()];current={tuple(r['original_key'][k]for k in['owner','y','x'])for r in map(json.loads,(WS/'.cache/worker6-mmr-original-scope-0400-001/current-open1216.jsonl').read_text().splitlines())};rows=[r for r in rows if tuple(r['original_key'][k]for k in['owner','y','x'])in current and(r['retained_native_observation']or{}).get('item')=='S2A_47PMM_20200125_0_L2A'];assert len(rows)==138;bodypath=WS/rows[0]['retained_native_observation']['path'];raw=bodypath.read_bytes();assert hashlib.sha256(raw).hexdigest()=='728d52e06bc8d00685fc44b7930643cbc3c557c25fe33842e5689a1f2b48b481';body=json.loads(raw);images={};records=[];pins={}
+for i,original in enumerate(rows):
+ pointer=original['retained_native_observation']['pointer'];nativeindex=int(pointer.split('/')[-1]);p=body['points'][nativeindex];assert p['index']==nativeindex and p['original_key']==original['original_key'];r,c=p['assets']['red']['local_pixel'];br,bc=p['physical_block'];folder=bodypath.parent/f'block-{br:02d}-{bc:02d}';panel=Image.new('RGB',(264,158),'white');frames={}
+ for j,name in enumerate(['rgb-native.png','nir-red-green-native.png']):
+  fp=folder/name
+  if str(fp)not in images:
+   b=fp.read_bytes();images[str(fp)]=Image.open(fp).convert('RGB');pins[str(fp)]={'path':str(fp),'bytes':len(b),'sha256':hashlib.sha256(b).hexdigest()}
+  im=images[str(fp)];left,top=c-32,r-32;box=(max(0,left),max(0,top),min(im.width,c+32),min(im.height,r+32));patch=Image.new('RGB',(64,64),(100,100,100));patch.paste(im.crop(box),(box[0]-left,box[1]-top));panel.paste(patch.resize((128,128),Image.Resampling.NEAREST),(j*132,0));draw=ImageDraw.Draw(panel);cx=j*132+65;cy=65
+  for line in[(cx-7,cy,cx-3,cy),(cx+3,cy,cx+7,cy),(cx,cy-7,cx,cy-3),(cx,cy+3,cx,cy+7)]:draw.line(line,fill='yellow',width=1)
+  frames[name]=pins[str(fp)]
+ draw=ImageDraw.Draw(panel);draw.text((1,129),f'q{i} PMM{nativeindex} bulk{original["point_index"]} W{original["source_observation"]["class_code"]} S{p["assets"]["scl"]["value"]}',fill='black');k=original['original_key'];draw.text((1,143),f'{k["owner"]}/{k["y"]}/{k["x"]}',fill='black')
+ if i%24==0:sheet=Image.new('RGB',(1056,948),'white')
+ sheet.paste(panel,((i%4)*264,((i%24)//4)*158))
+ if i%24==23 or i==len(rows)-1:sheet.save(P/f'page-{i//24:02d}.png')
+ records.append({'context_index':i,'item':body['item'],'retained_point_index':nativeindex,'original_key':p['original_key'],'original_bulk_point_index':original['point_index'],'unchanged_original_question_record':original,'actual_retained_native_observation':p,'existing_source_frames':frames,'page':i//24,'prior_PMM170_vegetation_draft_withdrawn_must_remain_unanswered_without_new_evidence':nativeindex==170})
+result={'source_body':{'path':str(bodypath),'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest()},'exact_current_original_keys':138,'records':records,'sourcecalls':0,'native_raster_kernel_or_oldpoint_producer_replay':0,'context_assembly':'OnlyexistingnativePNG pixels,cropnearest2x withbracketatcontainingpixel,graypaddingunavailablenotwater/nodata. No newnative renderer.','existing_frame_pins':list(pins.values()),'original_PMMapproval_and_2adopted_answers':'Untouched; initial151/386andlater12datedcanopyalreadyexcludedbycurrentoriginalquestionroster;170withdrawalpreserved.','new_answer_credit':0};(P/'exact-retained138-contexts.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps({'exact_current_questions':138,'pages':6,'existingPNGframes':len(images),'sourcecalls':0,'PMM170_in_scope':any(r['retained_point_index']==170 for r in records)}))
