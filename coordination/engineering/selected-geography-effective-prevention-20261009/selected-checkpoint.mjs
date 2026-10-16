@@ -5,7 +5,8 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
-import {ImmutableReader, NativeAssetImage, decodeVisibilityLatitudes} from '../../../scripts/check-effective-geographic-regression.mjs';
+import {ImmutableReader, NativeAssetImage, decodeVisibilityLatitudes,
+  loadBaseSelection, selectedGeometrySourceAlias, selectedReferenceOwners} from '../../../scripts/check-effective-geographic-regression.mjs';
 import {repairComponentKey, nativeOnlyComponent} from '../../../src/native-grid.js';
 import {unshuffleOwnershipBytes} from '../../../src/ownership-codec.js';
 import {valueBytes, valueSha, coordinateBounds, nativeBaseSelection,
@@ -57,8 +58,11 @@ function bindPhysicalLogicalSources(reader,certificate,inventory) {
 }
 const sameScientificRoutes = (reader,routes,executablePaths,masked = new Set()) => routes.every(p => p.path === PROGRAMME_POLICY
   || executablePaths.has(p.path) || masked.has(p.path) || reader.treeRoute(p.path) === p.tree);
-const currentMaskedRoutes = (reader,routes,masked) => routes.map(p => masked.has(p.path)
-  ? {...p,tree:reader.treeRoute(p.path)} : p);
+const currentMaskedRoutes = (reader,routes,masked) => {
+  const current=new Map(routes.map(p=>[p.path,p]));
+  for (const name of masked) current.set(name,{path:name,tree:reader.treeRoute(name)});
+  return [...current.values()].sort((a,b)=>a.path.localeCompare(b.path));
+};
 // Older route censuses excluded .mjs/.py but also retained executable .js.
 // Keep the complete archived census. Identify code by its authenticated executed
 // role and whole bytes, never by an extension, changed-file list or new hashes.
@@ -257,7 +261,7 @@ function coordinateCheck(certificate, facts, additions) {
     demand(hash(input.whole_body_sha256) && input.bytes === (input.source.decoded_bytes ?? input.source.bytes)
       && input.whole_body_sha256 === (input.source.decoded_sha256 ?? input.source.sha256),
     'Checkpoint source whole decoded identity differs');
-    supported(['ordinary-immutable-git-source','selected-exact-encoded-override'].includes(input.source.kind),
+    supported(['ordinary-immutable-git-source','selected-exact-encoded-override','metadata-projected-selected-source'].includes(input.source.kind),
       'Unsupported retained selected source transport');
   }
 }
@@ -1007,7 +1011,9 @@ function qualifyAppendedAuthorities(session,reader,state,selected,prior,addedEnt
     const contract=Object.fromEntries(['size','coordinateBits','method','native_latitudes','hierarchy_sha256','original_assets'].map(k => [k,state.manifest[k]]));
     demand(same(proof.contract,contract) && (same(proof.ledger.parent_inventory,state.ledger.parent_inventory) || proof.nativeOnly && proof.ledger.parent_inventory===undefined),
       'Appended producer changed native contract or complete original source denominator');
-    if (proof.nativeOnly) demand(proof.patches.every(p=>same(p.base_reference,selected.envelope.base_reference)),
+    if (proof.nativeOnly) demand(proof.patches.every(p=>same(p.base_reference,selected.envelope.base_reference)
+      || selected.selection.reference_projection && same(p.base_reference,{id:state.manifest.geographic_release,
+        hierarchy_sha256:state.manifest.hierarchy_sha256,footprints_sha256:state.manifest.footprints_sha256})),
       'Native source-target authority belongs to a different selected base');
     for (const original of proof.ledger.rows) {
       demand(!oldRows.has(repairComponentKey({...original,authority_sha256:entry.authority_sha256})) && !expectedAdded.has(repairComponentKey({...original,authority_sha256:entry.authority_sha256})), 'Appended producer repeats original component');
@@ -1029,6 +1035,59 @@ function qualifyAppendedAuthorities(session,reader,state,selected,prior,addedEnt
   return authorities;
 }
 
+// Apply the existing complete reference-metadata proof to a retained coordinate
+// product. This reads the small base/metadata context, never additive authorities
+// or native rows. Only the proof's actual current aliases may refresh old routes.
+function projectCheckpointMetadata(state,reader,selection) {
+  if (same(state.selection.reference_projection,selection.reference_projection))
+    return {certificate:state.certificate,paths:new Set()};
+  supported(selection.reference_projection, 'Removing a selected reference metadata application requires cold comparison');
+  const snapshot=loadBaseSelection(reader), resolver=selectedGeometrySourceAlias(snapshot);
+  demand(same(snapshot.selection,selection) && same(snapshot.manifest,state.manifest),
+    'Checkpoint metadata application changes the selected native manifest');
+  const projection=resolver.metadataProjection, owners=selectedReferenceOwners(snapshot);
+  demand(projection && owners.length===state.certificate.entries.length
+    && same(resolver.paths,state.certificate.inputs.map(input=>input.path)),
+    'Checkpoint metadata application changes the complete source/owner roster');
+  // Historical encoded aliases do not change the original scientific source.
+  const identity=p=>Object.fromEntries(['commit','path','mode','git_blob_oid','bytes','sha256',
+    'encoding','decoded_bytes','decoded_sha256'].filter(k=>Object.hasOwn(p,k)).map(k=>[k,p[k]]));
+  const entries=state.certificate.entries.map(row=>[...row]);
+  const inputs=state.certificate.inputs.map((input,i)=>{
+    const source=resolver.sources[i], original=source.original_source??source;
+    const priorOriginal=input.source.original_source??input.source;
+    demand(same(identity(priorOriginal),identity(original)),
+      'Checkpoint metadata application changes an original scientific source');
+    if (same(identity(input.source),identity(source))) return input;
+    const actual=resolver.read(input.path), rows=entries.filter(row=>row[4]===input.path);
+    demand(rows.length===actual.collection.features.length,
+      'Checkpoint metadata application changes complete source membership');
+    for (const row of rows) {
+      const feature=actual.collection.features[row[5]], owner=owners[row[1]-1];
+      demand(feature?.type==='Feature' && (feature.id??feature.properties?.id)===row[0]
+        && owner?.id===row[0] && owner.index===row[1]
+        && feature.properties?.parent_id===owner.province_id && valueSha(feature.geometry)===row[7],
+        'Checkpoint metadata application changes original geometry/ordinal/owner');
+      row[6]=valueSha(feature);
+    }
+    return {path:input.path,source:actual.source,whole_body_sha256:actual.whole_sha256,bytes:actual.body.length};
+  });
+  for (const row of entries) {
+    const owner=owners[row[1]-1];
+    demand(owner?.id===row[0] && owner.index===row[1], 'Checkpoint metadata application rebinds stable owner/index');
+    row[2]=owner.province_id; row[3]=owner.province_index;
+  }
+  const certificate={...state.certificate,inputs,entries,binding:{...state.certificate.binding,
+    selection,release:resolver.release,sources:inputs.map(input=>input.source),owners_sha256:valueSha(owners)}};
+  // These are validated roles, not arbitrary changed paths: current full source,
+  // hierarchy, release pointer/body and the selected metadata application.
+  const pointer=reader.json('data/geographic-releases/current-manifest.json');
+  const paths=new Set([selection.reference_projection.path,projection.hierarchy.after.path,
+    'data/geographic-releases/current-manifest.json',path.posix.join('data/geographic-releases',pointer.path),
+    ...projection.source_updates.map(update=>update.logical_path)]);
+  return {certificate:freeze(certificate),paths,reference:projection.reference,nativeReference:projection.native_reference};
+}
+
 /** Exhaustive actual append-only transition. Never reacquires a full selection.
  * A valid baseline remains usable when an unsupported candidate needs cold work. */
 export function qualifyTransition({state,reader}) {
@@ -1037,7 +1096,8 @@ export function qualifyTransition({state,reader}) {
 
     const selected=readSelection(session,reader);
     supported(same(nativeBaseSelection(selected.selection),state.baseSelection), 'Selected native/source/domain/owner base changed');
-    const masked = maskedLogicalSources(state.certificate,baseProof.physicalPaths);
+    const metadata=projectCheckpointMetadata(state,reader,selected.selection);
+    const masked = new Set([...maskedLogicalSources(state.certificate,baseProof.physicalPaths),...metadata.paths]);
     supported(sameScientificRoutes(reader,baseProof.routes,session.executablePaths,masked), 'Selected input or present/absent route changed');
     for (const role of ['base_manifest','owner_roster'])
       supported(same(selected.sidecar.logical_asset_map[role],baseProof.selected.sidecar.logical_asset_map[role]), 'Selected original manifest/owner alias changed');
@@ -1065,7 +1125,7 @@ export function qualifyTransition({state,reader}) {
       nativeRows:new Map(baseProof.nativeRows),sourceTargets:new Map(baseProof.sourceTargets),nativeContext:null};
     // Projection authority is still the genuine baseline, while its operands
     // use this candidate's identical base routes. No SelectedSnapshot is forged.
-    const operandState=newState(session,{...state,selected_commit:reader.version},{...proof});
+    const operandState=newState(session,{...state,certificate:metadata.certificate,selected_commit:reader.version},{...proof});
     const operandProof=states.get(operandState); operandProof.state=operandState;
     let currentTargets;
     if (same(legacyRegistry(selected.registry,authorities),legacyRegistry(state.registry,baseProof.oldAuthorities))
@@ -1081,10 +1141,14 @@ export function qualifyTransition({state,reader}) {
       base_reference:selected.envelope.base_reference,authority_registry_sha256:valueSha(selected.registry),
       ledger_sha256:selected.sidecar.logical_asset_map.ledger.sha256,components:[...selected.normalized.rows.values()]}),
     'Candidate effective release does not bind the complete ledger/authority set');
-    demand(same(selected.envelope.base_reference,baseProof.selected.envelope.base_reference)
+    const priorReference=Object.fromEntries(['id','hierarchy_sha256','footprints_sha256'].map(k=>[k,state.certificate.binding.release[k]]));
+    demand((same(selected.envelope.base_reference,baseProof.selected.envelope.base_reference)
+      || metadata.reference && same(selected.envelope.base_reference,metadata.reference)
+        && same(baseProof.selected.envelope.base_reference,priorReference)
+        && priorReference.footprints_sha256===metadata.nativeReference.footprints_sha256)
       && selected.envelope.effective_reference.hierarchy_sha256===selected.envelope.base_reference.hierarchy_sha256,
     'Candidate silently changes complete base release or hierarchy');
-    const {certificate,changedIds}=deriveCoordinateDelta({certificate:state.certificate,oldAdditions:state.additions,additions,selection:selected.selection});
+    const {certificate,changedIds}=deriveCoordinateDelta({certificate:metadata.certificate,oldAdditions:state.additions,additions,selection:selected.selection});
     const candidate=newState(session,{...state,selected_commit:reader.version,selection:selected.selection,certificate,
       additions,ledger:selected.ledger,registry:selected.registry,patch:selected.patch},
       {...operandProof,selected,oldAuthorities:authorities,

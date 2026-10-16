@@ -155,3 +155,23 @@ batch B's actual baseline through the joint entry point, with original results,
 lineage and measured timing retained and no cold authentication replay. The
 initial reviewed seed and that actual adoption remain distinct from shipping
 transport code.
+
+
+## Reference metadata during append-only advancement
+
+A retained checkpoint may predate a selected reference-metadata application.
+The existing base reader authenticates the complete projection, original/current
+hierarchies, source bodies and correction receipts before the checkpoint advances.
+Every original scientific source identity, geometry, stable owner/index and native
+contract must remain unchanged. Only those validated metadata roles refresh the
+current route census; certificate source hashes and parent metadata are updated
+from the actual complete current bodies. A later unchanged projection remains
+bound by that census, including newly introduced projection and release paths.
+
+Original native constructors may still name the native reference preceding the
+metadata application. Their complete native contract and original output/input
+joins remain required. The current envelope names the independently validated
+metadata reference, while appended native intervals still undergo the existing
+owner-zero, overlap and conservation checks. This reuses accepted qualification;
+it does not turn a cold candidate-code report into an accepted checkpoint artifact
+or claim that historical scientific predicates ran again.

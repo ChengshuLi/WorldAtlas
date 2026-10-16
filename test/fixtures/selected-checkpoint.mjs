@@ -8,6 +8,7 @@ import {createHash} from 'node:crypto';
 import {shuffleOwnershipBytes} from '../../src/ownership-codec.js';
 import {nativeRowLatitudes} from '../../src/native-grid.js';
 import {valueBytes,valueSha,coordinateBounds} from '../../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {mapCellSelectionFixture} from './map-cell-selection.mjs';
 import {deriveCoordinateDelta} from '../../coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs';
 const MODULE='coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs';
 const PROGRAMME='coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json';
@@ -169,3 +170,83 @@ async function appendNativeAuthority(f,{owner=0,name='appended',mutateEvidence=(
 }
 
 export {MODULE,PROGRAMME,CATALOGUE,CODE,sha,polygon,feature,fixtures,addition,trustedFixture,appendNativeAuthority};
+
+// The existing three-owner reference fixture supplies the complete real base
+// reader contract. The catalogue below is synthetic accepted custody, with one
+// retained rejected component and no additive cells; no scientific run is claimed.
+export async function referenceCheckpointFixture(t) {
+ const f=mapCellSelectionFixture(t), current=f.current;
+ const raw=(version,name)=>execFileSync('git',['-C',f.repo,'show',version+':'+name],{maxBuffer:Infinity});
+ const json=(version,name)=>JSON.parse(raw(version,name));
+ const manifest=json(f.base,f.selection.manifest_path), baseSelection=structuredClone(f.selection);
+ delete baseSelection.additive_release; delete baseSelection.reference_projection;
+ for(const name of ['data/hierarchy.json','data/geography/fixture.json','data/geographic-releases/current-manifest.json','data/geographic-releases/releases.json.gz'])
+  f.write(name,raw(f.base,name));
+ for(const name of [...CODE,'scripts/selected-checkpoint-native.mjs'])f.write(name,fs.readFileSync(name));
+ f.write(PROGRAMME,fs.readFileSync(PROGRAMME));f.write('package.json',{type:'module'});
+ const put=(name,value)=>{f.write(name,value);const version=f.commit();return f.pin(name,version);};
+ const patchPin=put('accepted/empty-patch.json',{version:1,kind:'unassigned-native-cells-v1',rows:[]});
+ const rule=put('accepted/rule.json',{synthetic:'retained rejected component'});
+ const publication=put('accepted/native-publication.json',{assets:[{path:'patch-empty.json',bytes:patchPin.bytes,sha256:patchPin.sha256}]});
+ // The original publication name and actual immutable asset locator must join.
+ const asset=put('accepted/patch-empty.json',JSON.parse(raw(patchPin.commit,patchPin.path)));
+ const binding=put('accepted/binding.json',{native_proof:{publication,assets:[asset]}});
+ const entry={policy_id:'retained-source-literal-additions',policy_version:1,rule_preimage:rule,rule_sha256:rule.sha256,source_authority:binding};
+ entry.authority_sha256=valueSha(entry);
+ const registry={version:1,kind:'retained-rule-authority-registry-v1',entries:[entry]},registryPin=put('accepted/registry.json',registry);
+ const request={base_selection:baseSelection,authority_registry_sha256:valueSha(registry),current_targets:[],current_rows:[],
+  original_patch_sha256s:[valueSha({version:1,kind:'unassigned-native-cells-v1',rows:[]})],acquisition:{predecessor_rows:[],predecessor_proof:null,native_inputs:[]}};
+ const products={request,result:{native:{rows:[]}},facts:{acquisition_phases:[]},publication:{},operating:{}};
+ const pins=Object.fromEntries(Object.entries(products).map(([name,body])=>[name,put('accepted/rebind-'+name+'.json',body)]));
+ const rebind=put('accepted/rebind.json',{version:1,kind:'qualified-native-additive-current-bank-rebind-v1',execution_commit:f.original,
+  base_selection:baseSelection,authority_registry_sha256:valueSha(registry),...pins});
+ const ledger={version:2,kind:'native-additive-repair-ledger-v2',authority_registry_sha256:valueSha(registry),scope_ids:['rejected'],
+  rows:[{component_id:'rejected',disposition:'rejected',reason:'synthetic retained exception',authority_sha256:entry.authority_sha256}],
+  parent_inventory:{components:1,roster_sha256:'e'.repeat(64)},current_rebind:rebind,current_targets:[]};
+ const ledgerPin=put('accepted/ledger.json',ledger),reference={id:manifest.geographic_release,hierarchy_sha256:manifest.hierarchy_sha256,footprints_sha256:manifest.footprints_sha256};
+ const effective={...reference,footprints_sha256:valueSha({domain:'worldatlas-effective-native-footprints:v2',base_reference:reference,
+  authority_registry_sha256:valueSha(registry),ledger_sha256:ledgerPin.sha256,components:[]})};
+ const patch={version:2,kind:'unassigned-native-cells-v1',authority_registry_sha256:valueSha(registry),ledger_sha256:ledgerPin.sha256,
+  base_reference:reference,effective_reference:effective,rows:[]};
+ const bounds=f.pin('data/canonical-grid/bounds.json.gz',f.original);
+ const assets={base_manifest:f.pin(f.selection.manifest_path,f.base),owner_roster:bounds,ledger:ledgerPin,patch:put('accepted/patch.json',patch)};
+ const envelope={version:2,kind:'retained-native-base-plus-delta-v2',base_reference:reference,effective_reference:effective,...assets};
+ const sidecar={version:2,kind:'retained-native-additive-selection-v2',base_selection:baseSelection,authority_registry:registryPin,
+  logical_asset_map:assets,runtime_envelope:put('accepted/envelope.json',envelope)};
+ const side=put('accepted/sidecar.json',sidecar),selection={...baseSelection,additive_release:{path:side.path,bytes:side.bytes,sha256:side.sha256}};
+ f.write('data/ownership-selection.json',selection);const selected=f.commit();
+ const api=await import(pathToFileURL(path.join(f.repo,MODULE))),native=await import(pathToFileURL(path.join(f.repo,'scripts/check-effective-geographic-regression.mjs')));
+ const neighbors=await import(pathToFileURL(path.join(f.repo,CODE[1]))),reader=new native.ImmutableReader(f.repo,selected);
+ const snapshot=native.loadBaseSelection(reader),resolver=native.selectedGeometrySourceAlias(snapshot);
+ const certificate=neighbors.joinSelectedCoordinateCertificate(resolver,[neighbors.selectedCoordinateShard(resolver,resolver.paths)]);
+ const execution_code=CODE.map(name=>f.pin(name,selected)),runtime=[{path:process.execPath,bytes:fs.statSync(process.execPath).size,sha256:'f'.repeat(64)}];
+ const facts={version:1,kind:'trusted-selected-coordinate-stage-v1',candidate_code_executed:false,selected_commit:selected,executing_commit:selected,
+  execution_code,runtime,binding:certificate.binding,complete_owners:3,complete_sources:1};
+ const compressed=gzipSync(valueBytes(certificate)),certificatePin=put('accepted/certificate.json.gz',compressed),factsPin=put('accepted/facts.json',facts);
+ const output={version:1,kind:facts.kind,complete:true,facts:{path:'facts.json',bytes:factsPin.bytes,sha256:factsPin.sha256},
+  certificate:{path:'certificate.json.gz',bytes:compressed.length,sha256:sha(compressed),decoded_bytes:valueBytes(certificate).length,decoded_sha256:valueSha(certificate)}};
+ const outputPin=put('accepted/publication.json',output);
+ const inventory=[...reader.inventory.values(),f.pin(PROGRAMME,selected)];
+ const custody=put('accepted/custody.json',{complete_cold_custody:[{facts,publication:output,effective_additions:[],inventory}]});
+ const paths=new Set(inventory.map(p=>p.path).filter(p=>!/\.(mjs|py)$/.test(p)&&p!=='requirements.txt'));paths.delete('data/ownership-selection.json');
+ for(const part of manifest.parts)paths.add(path.posix.join(path.posix.dirname(selection.manifest_path),part.path));
+ for(const input of certificate.inputs){paths.add(input.path);paths.add(input.source.path);}
+ const routes=put('accepted/routes.json',[...paths].sort().map(name=>({path:name,tree:reader.treeRoute(name)})));
+ const rootRow={id:'reference-fixture',accepted_head:selected,selected_commit:selected,selection_sha256:valueSha(selection),execution_commit:selected,
+  execution_code_sha256:valueSha(execution_code),runtime_sha256:valueSha(runtime),facts:factsPin,
+  certificate:{...certificatePin,decoded_bytes:valueBytes(certificate).length,decoded_sha256:valueSha(certificate)},publication:outputPin,custody,routes};
+ put(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',checkpoints:[rootRow]});
+ const qualified=api.qualifyCheckpoint({reader});assert.equal(qualified.available,true);t.after(()=>api.releaseCheckpoint(qualified.state));
+ for(const name of ['data/hierarchy.json','data/geography/fixture.json','data/geographic-releases/current-manifest.json','data/geographic-releases/releases.json.gz'])f.write(name,raw(current,name));
+ const currentReference=f.projection.reference;
+ const currentEffective={...currentReference,footprints_sha256:valueSha({domain:'worldatlas-effective-native-footprints:v2',
+  base_reference:currentReference,authority_registry_sha256:valueSha(registry),ledger_sha256:ledgerPin.sha256,components:[]})};
+ const currentPatch={...patch,base_reference:currentReference,effective_reference:currentEffective};
+ const currentAssets={...assets,patch:put('current/patch.json',currentPatch)};
+ const currentEnvelope={...envelope,...currentAssets,base_reference:currentReference,effective_reference:currentEffective};
+ const currentSidecar={...sidecar,logical_asset_map:currentAssets,runtime_envelope:put('current/envelope.json',currentEnvelope)};
+ const currentSide=put('current/sidecar.json',currentSidecar);
+ Object.assign(f.selection,selection,{additive_release:{path:currentSide.path,bytes:currentSide.bytes,sha256:currentSide.sha256}});
+ const candidate=f.project();
+ return {...f,api,native,selected,candidate,state:qualified.state,reader,certificate,manifest,sidecar:currentSidecar,selection};
+}
