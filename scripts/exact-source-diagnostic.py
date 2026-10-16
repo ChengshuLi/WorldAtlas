@@ -3,7 +3,7 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
-from evidence.exact_predicates import MAX_FILE_BYTES, DiagnosticError, diagnose, segment_certificate, read_inputs, original_segment, unique_json_object
+from evidence.exact_predicates import MAX_FILE_BYTES, DiagnosticError, _diagnose_with_inputs, segment_certificate, original_segment, unique_json_object
 
 
 def run(root, request_path, output):
@@ -17,13 +17,9 @@ def run(root, request_path, output):
     certificates = request.get('crossings', [])
     if not isinstance(certificates, list) or len(certificates) > 512:
         raise ValueError('Crossing descriptor budget exceeded')
-    result = diagnose(Path(root), request)
+    result, prepared = _diagnose_with_inputs(Path(root), request)
     result['request_sha256'] = hashlib.sha256(raw).hexdigest()
     result['crossings'] = []
-    try:
-        prepared, _ = read_inputs(Path(root), request)
-    except DiagnosticError:
-        prepared = None
     for crossing in certificates:
         try:
             if not isinstance(crossing, dict) or prepared is None:
