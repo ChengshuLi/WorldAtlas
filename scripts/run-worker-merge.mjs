@@ -77,21 +77,14 @@ fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, `${result.status} PR #${numbe
 console.log(JSON.stringify(result));
 transport.close();
 // Preserve the decision before attempting its remote notification. A comment
-// permission/network failure must not discard the original result or reason.
+// permission/network failure cannot invalidate a prepared candidate or merge.
 try { await (api.recovery ?? api)(`/repos/${repo}/issues/${number}/comments`, 'POST', {body: renderWorkerResult('merge', result)}); }
 catch (error) {
   result.notification_error = error.message;
   if (error.github) result.notification_api_error = error.github;
-  // Failed preparation notification prevents the downstream final job from
-  // running, so dispose of a confirmed owned candidate here rather than leak it.
-  if (phase === 'prepare' && !result.accepted && result.candidate_ref) {
-    try { result.candidate_cleanup = await cleanupCandidate(options, result.candidate_ref, result.tested_candidate); }
-    catch (cleanupError) { result.candidate_cleanup = {status: 'pending', reference: result.candidate_ref, reason: cleanupError.message}; }
-  }
   result.request_accounting=accounting.receipt();
   fs.writeFileSync('merge-result.json', JSON.stringify(result, null, 2) + '\n');
   console.log(JSON.stringify(result));
-  if (!result.accepted) throw error;
 }
 
 result.request_accounting=accounting.receipt();
