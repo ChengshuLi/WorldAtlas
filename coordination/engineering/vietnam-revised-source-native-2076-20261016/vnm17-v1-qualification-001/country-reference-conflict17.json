@@ -1,0 +1,691 @@
+{
+  "kind": "original17-retained-NE-versus-official-LSIB-country-reference-conflict",
+  "scope": "Exactly17 original VNM owners; all17 held, no contextual override or new authority",
+  "source_and_edition_identities": {
+    "Natural_Earth": {
+      "retained_full_source": {
+        "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+        "commit": "415d90d08d33fde27dd66189a4d1a21e4802c21f",
+        "mode": "100644",
+        "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+        "bytes": 4719659,
+        "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075"
+      },
+      "source_manifest": {
+        "path": "data/retained-geographic-sources/namibia/manifest.json",
+        "commit": "415d90d08d33fde27dd66189a4d1a21e4802c21f",
+        "mode": "100644",
+        "git_blob_oid": "e4e9c044589a3c73367a63b936933c7538021292",
+        "bytes": 10452,
+        "sha256": "aa50635f372959d7c36045648e8e426737da4d6039e7ebcb4309160fcc917894"
+      },
+      "upstream_snapshot": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/ca96624a56bd078437bca8184e78163e5039ad19/geojson/ne_10m_admin_0_countries.geojson",
+      "retained_snapshot_reference_date": "2026-10-01",
+      "encoded_bytes": 4719659,
+      "decoded_bytes": 13287234,
+      "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255",
+      "whole_country_features": 258,
+      "release_version": "Not separately asserted: exact upstream commit and whole-body hashes identify the retained edition."
+    },
+    "official_LSIB": {
+      "old_whole_feature_metadata": {
+        "path": "vietnam-next/original-decisions-20261015/bulk-completion/repair/chn1506-source-reconciliation/world-polygons-china-feature.json",
+        "bytes": 4004905,
+        "sha256": "4a3a6c63b642177d9ab61285cc70422aa167ce0fea6c006b6e4c8bdcc45e32d4",
+        "response_metadata": {
+          "type": "FeatureCollection",
+          "totalFeatures": "unknown",
+          "numberReturned": 1,
+          "timeStamp": "2026-10-15T23:57:17.074Z",
+          "crs": {
+            "type": "name",
+            "properties": {
+              "name": "urn:ogc:def:crs:EPSG::4326"
+            }
+          }
+        },
+        "feature_id": "DoS_WP_High_Resolution.123248",
+        "properties": {
+          "fid": 56,
+          "WP_Name": "China",
+          "WP_Name_ND": "China",
+          "DOS_Short": "China",
+          "DOS_Long": "People’s Republic of China",
+          "Map_Label": "CHINA",
+          "US_Recog": "Independent",
+          "Show_Disp": null,
+          "Map_Disp": null,
+          "NOTES": "With the establishment of diplomatic relations with China on January 1, 1979, the US Government recognized the People’s Republic of China as the sole legal government of China and acknowledged the Chinese position that there is only one Chi",
+          "NOTES_Cont": "na and that Taiwan is part of China.",
+          "MapTint_2": "CN",
+          "MapTint_3": "CHN",
+          "GENC_Short": "China",
+          "GENC_Full": "People’s Republic of China",
+          "GENC_2": "CN",
+          "GENC_3": "CHN",
+          "ISO_3166_1": null,
+          "ISO_3166_2": null,
+          "WP_ID": "422131df-82bc-4f1b-9a1f-ee89cc970e19",
+          "WP_PREV_ID": "422131df-82bc-4f1b-9a1f-ee89cc970e19",
+          "WP_PAR_ID": "422131df-82bc-4f1b-9a1f-ee89cc970e19"
+        },
+        "valid": false,
+        "validity_detail": "Self-intersection[80.5954 42.9033]",
+        "geometry_type": "Polygon",
+        "bounds": [
+          73.4993,
+          20.2231,
+          134.7755,
+          53.561
+        ],
+        "vertex_count": 216061
+      },
+      "metadata_receipt": {
+        "path": "coordination/engineering/vietnam-current-cell-20261014/border-chn274-20261016/country274-input-context.json",
+        "commit": "6ef487cd8f29e714dd10ae963d9fd58c41fd1b54",
+        "mode": "100644",
+        "git_blob_oid": "e1357aa89dacc5ec5e6e05a8fffb0714d6ded123",
+        "bytes": 919295,
+        "sha256": "cbed2cfac8389cfef87621549644219c0a11b71af920c87bd26bc6adb8448af9"
+      },
+      "exact_unchanged_whole_geometry": {
+        "pin": {
+          "bytes": 36065990,
+          "commit": "a6fb19a5b4e095c82d5b667cbe372ec4df9ad195",
+          "git_blob_oid": "8ef6d858b7e05cbb200319e25e435eb0fd525c44",
+          "mode": "100644",
+          "path": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/native-source-evidence-next351-818-PROPOSED.json",
+          "sha256": "33416e7976b0ec2a1f7618e182359b97272da4d2fd4c07411fd13aceb26661d6"
+        },
+        "pointer": "/targets/6/territorial_exclusions/0"
+      },
+      "geometry_sha256": "1faef81cbf6c0c4776387d85842b76b4d0514793e096a9309872524abcce41a2",
+      "geometry_bytes": 4003795,
+      "whole_geometry_vertices": 216061,
+      "geometry_type": "Polygon",
+      "original_observation": {
+        "path": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/literal-CN-native-kernel-comparison.json",
+        "commit": "6ef487cd8f29e714dd10ae963d9fd58c41fd1b54",
+        "mode": "100644",
+        "git_blob_oid": "1f06945d8c4a016762a8ddb158516372ea8caadf",
+        "bytes": 436149,
+        "sha256": "d326aef83d771657a67a3e8abaf4ce6d0a583df328b10f29eff89a2a04457cf5"
+      },
+      "global_OGC_defect": "Self-intersection[80.5954 42.9033] disclosed, not repaired",
+      "edition_limit": "The old source metadata records feature ID, whole feature hash and2026-10-15 WFS response timestamp, but no independently authenticated dataset edition identifier. Complete unrepaired geometry is retained in the genuine old source evidence and reused by fresh diagnostics. The original4,004,905-byte WFS FeatureCollection itself has not been acquired or re-read in this cloud handoff."
+    }
+  },
+  "prior_display_convention": {
+    "document": {
+      "path": "docs/DATA_SOURCES.md",
+      "commit": "415d90d08d33fde27dd66189a4d1a21e4802c21f",
+      "mode": "100644",
+      "git_blob_oid": "d9f3f06ef1dd6809342f8440634b24d20a52c766",
+      "bytes": 16836,
+      "sha256": "b820065d55515e0de1e35f74e7670a7b270b0d0f8450497fdc9cd921dd20e65a"
+    },
+    "implementation": {
+      "path": "scripts/reconcile-topology.py",
+      "commit": "415d90d08d33fde27dd66189a4d1a21e4802c21f",
+      "mode": "100644",
+      "git_blob_oid": "1573b3a7814f903196b17c0c1ea34f10f5745669",
+      "bytes": 8419,
+      "sha256": "1739883a9ada57e346f12c009beb4c14091429e810ec7cc77f8b01e8bd3ae763"
+    },
+    "actual_rule": "Shared interiors use supported Natural Earth reference borders, then finer source polygon and stable ID; this is a display convention, not a sovereignty ruling.",
+    "explicit_LSIB_vs_NE_ranking": false,
+    "limit": "Neither the documented shared-interior rule nor the source28 comparator explicitly assesses/ranks a contrary official LSIB country-mask veto at these17. Parent earlier17 decision addressed original VNM versus new OSM CHN source choice; the official-country conflict is now retained for separate substantive treatment."
+  },
+  "observations": {
+    "retained_NE_full_country_scan": {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/distinct-source-assessment/full-country365-exact-native-observation.json",
+      "commit": "4587fd821b40ff5e54f5b05ce228418b63f5b7b3",
+      "mode": "100644",
+      "git_blob_oid": "8fe35ab541ec5d4410cdcbee27f758b975d20ce8",
+      "bytes": 354254,
+      "sha256": "ed44a49fec93797b9bba24c3cba546b5a78d2a7313f38dfa2dae92b525124f03"
+    },
+    "fresh_actual_constructor_and_diagnostic": [
+      {
+        "group": 0,
+        "requested_cells": 2,
+        "held_cells": 2,
+        "diagnostic": {
+          "path": ".cache/delivery-handoff/vietnam17-v1-diagnostic-group-0-001/native-diagnostic.json",
+          "bytes": 2808,
+          "sha256": "ad085938b8d85bcaf139f6d756742f2d85a312c3ab91fe8e1b6872f6b66680c4"
+        },
+        "actual_qualification": {
+          "kind": "bounded-captured-stock-native348-actual-execution-v1",
+          "exit_code": 1,
+          "elapsed_seconds": 3.8962910280097276,
+          "termination_reason": null,
+          "enforced_process_group_rss_limit_bytes": 805306368,
+          "observed_sampled_process_group_peak_rss_bytes": 333156352,
+          "enforced_wall_deadline_seconds": 120,
+          "admission_sha256": "8c75fe88dccdd6711898481fc021c4c8b673dd5ad3f844f27de8f8caa256d926",
+          "executing_tree_head_after": "3638e4376fce2139899f626280bd40536f622c6b",
+          "successful_qualification": false,
+          "current_owner_zero": false,
+          "predecessor_conservation": false,
+          "accepted_credit": 0
+        }
+      },
+      {
+        "group": 1,
+        "requested_cells": 14,
+        "held_cells": 14,
+        "diagnostic": {
+          "path": ".cache/delivery-handoff/vietnam17-v1-diagnostic-group-1-001/native-diagnostic.json",
+          "bytes": 3946,
+          "sha256": "5bfaefb3a2b9163d961ab11cba91a61844abcf0fa6f8c3b56c738075e71c4d10"
+        },
+        "actual_qualification": {
+          "kind": "bounded-captured-stock-native348-actual-execution-v1",
+          "exit_code": 1,
+          "elapsed_seconds": 4.248062106984435,
+          "termination_reason": null,
+          "enforced_process_group_rss_limit_bytes": 805306368,
+          "observed_sampled_process_group_peak_rss_bytes": 443703296,
+          "enforced_wall_deadline_seconds": 120,
+          "admission_sha256": "b0d98b139e24dd1591c04aa26bafda5a81859c4f4a72d1bba83790ece2268c57",
+          "executing_tree_head_after": "3638e4376fce2139899f626280bd40536f622c6b",
+          "successful_qualification": false,
+          "current_owner_zero": false,
+          "predecessor_conservation": false,
+          "accepted_credit": 0
+        }
+      },
+      {
+        "group": 2,
+        "requested_cells": 1,
+        "held_cells": 1,
+        "diagnostic": {
+          "path": ".cache/delivery-handoff/vietnam17-v1-diagnostic-group-2-001/native-diagnostic.json",
+          "bytes": 2646,
+          "sha256": "bc8c69e52285582c5d3d10827ddab64ed4d163267e5c0521037ce6a46052429c"
+        },
+        "actual_qualification": {
+          "kind": "bounded-captured-stock-native348-actual-execution-v1",
+          "exit_code": 1,
+          "elapsed_seconds": 3.586014618020272,
+          "termination_reason": null,
+          "enforced_process_group_rss_limit_bytes": 805306368,
+          "observed_sampled_process_group_peak_rss_bytes": 327843840,
+          "enforced_wall_deadline_seconds": 120,
+          "admission_sha256": "1a4b1aef6ff22c5ba6a50d0f61f337609abc1b1cbd3112744d9e865cbee8e12d",
+          "executing_tree_head_after": "3638e4376fce2139899f626280bd40536f622c6b",
+          "successful_qualification": false,
+          "current_owner_zero": false,
+          "predecessor_conservation": false,
+          "accepted_credit": 0
+        }
+      }
+    ]
+  },
+  "records": [
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114199,
+        "x": 208760
+      },
+      "original_VNM_source_id": "gb:VNM:ADM2:81297802B75623207701482",
+      "longitude": 106.6648611948155,
+      "latitude": 22.57607990419722,
+      "retained_Natural_Earth_country_hits": [
+        {
+          "ordinal": 55,
+          "ADM0_A3": "VNM",
+          "ADMIN": "Vietnam",
+          "ISO_A3_EH": "VNM"
+        }
+      ],
+      "retained_Natural_Earth_boundary_ties": [],
+      "original_official_country_result": "CHN",
+      "literal_whole_LSIB_CHN_native_interior": true,
+      "literal_whole_LSIB_CHN_native_boundary_ties": [],
+      "fresh_stock_v1_diagnostic": "territorial_exclusion_cells",
+      "contrary_OSM_source_ids": [
+        "osm:relation:2773868"
+      ],
+      "native_qualification": false
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114200,
+        "x": 208753
+      },
+      "original_VNM_source_id": "gb:VNM:ADM2:81297802B75623207701482",
+      "longitude": 106.6552489643966,
+      "latitude": 22.574811948261406,
+      "retained_Natural_Earth_country_hits": [
+        {
+          "ordinal": 55,
+          "ADM0_A3": "VNM",
+          "ADMIN": "Vietnam",
+          "ISO_A3_EH": "VNM"
+        }
+      ],
+      "retained_Natural_Earth_boundary_ties": [],
+      "original_official_country_result": "CHN",
+      "literal_whole_LSIB_CHN_native_interior": true,
+      "literal_whole_LSIB_CHN_native_boundary_ties": [],
+      "fresh_stock_v1_diagnostic": "territorial_exclusion_cells",
+      "contrary_OSM_source_ids": [
+        "osm:relation:2773868"
+      ],
+      "native_qualification": false
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114200,
+        "x": 208754
+      },
+      "original_VNM_source_id": "gb:VNM:ADM2:81297802B75623207701482",
+      "longitude": 106.65662214017073,
+      "latitude": 22.574811948261406,
+      "retained_Natural_Earth_country_hits": [
+        {
+          "ordinal": 55,
+          "ADM0_A3": "VNM",
+          "ADMIN": "Vietnam",
+          "ISO_A3_EH": "VNM"
+        }
+      ],
+      "retained_Natural_Earth_boundary_ties": [],
+      "original_official_country_result": "CHN",
+      "literal_whole_LSIB_CHN_native_interior": true,
+      "literal_whole_LSIB_CHN_native_boundary_ties": [],
+      "fresh_stock_v1_diagnostic": "territorial_exclusion_cells",
+      "contrary_OSM_source_ids": [
+        "osm:relation:2773868"
+      ],
+      "native_qualification": false
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114200,
+        "x": 208755
+      },
+      "original_VNM_source_id": "gb:VNM:ADM2:81297802B75623207701482",
+      "longitude": 106.65799531594485,
+      "latitude": 22.574811948261406,
+      "retained_Natural_Earth_country_hits": [
+        {
+          "ordinal": 55,
+          "ADM0_A3": "VNM",
+          "ADMIN": "Vietnam",
+          "ISO_A3_EH": "VNM"
+        }
+      ],
+      "retained_Natural_Earth_boundary_ties": [],
+      "original_official_country_result": "CHN",
+      "literal_whole_LSIB_CHN_native_interior": true,
+      "literal_whole_LSIB_CHN_native_boundary_ties": [],
+      "fresh_stock_v1_diagnostic": "territorial_exclusion_cells",
+      "contrary_OSM_source_ids": [
+        "osm:relation:2773868"
+      ],
+      "native_qualification": false
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114200,
+        "x": 208756
+      },
+      "original_VNM_source_id": "gb:VNM:ADM2:81297802B75623207701482",
+      "longitude": 106.65936849171902,
+      "latitude": 22.574811948261406,
+      "retained_Natural_Earth_country_hits": [
+        {
+          "ordinal": 55,
+          "ADM0_A3": "VNM",
+          "ADMIN": "Vietnam",
+          "ISO_A3_EH": "VNM"
+        }
+      ],
+      "retained_Natural_Earth_boundary_ties": [],
+      "original_official_country_result": "CHN",
+      "literal_whole_LSIB_CHN_native_interior": true,
+      "literal_whole_LSIB_CHN_native_boundary_ties": [],
+      "fresh_stock_v1_diagnostic": "territorial_exclusion_cells",
+      "contrary_OSM_source_ids": [
+        "osm:relation:2773868"
+      ],
+      "native_qualification": false
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114200,
+        "x": 208757
+      },
+      "original_VNM_source_id": "gb:VNM:ADM2:81297802B75623207701482",
+      "longitude": 106.66074166749314,
+      "latitude": 22.574811948261406,
+      "retained_Natural_Earth_country_hits": [
+        {
+          "ordinal": 55,
+          "ADM0_A3": "VNM",
+          "ADMIN": "Vietnam",
+          "ISO_A3_EH": "VNM"
+        }
+      ],
+      "retained_Natural_Earth_boundary_ties": [],
+      "original_official_country_result": "CHN",
+      "literal_whole_LSIB_CHN_native_interior": true,
+      "literal_whole_LSIB_CHN_native_boundary_ties": [],
+      "fresh_stock_v1_diagnostic": "territorial_exclusion_cells",
+      "contrary_OSM_source_ids": [
+        "osm:relation:2773868"
+      ],
+      "native_qualification": false
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114200,
+        "x": 208758
+      },
+      "original_VNM_source_id": "gb:VNM:ADM2:81297802B75623207701482",
+      "longitude": 106.66211484326726,
+      "latitude": 22.574811948261406,
+      "retained_Natural_Earth_country_hits": [
+        {
+          "ordinal": 55,
+          "ADM0_A3": "VNM",
+          "ADMIN": "Vietnam",
+          "ISO_A3_EH": "VNM"
+        }
+      ],
+      "retained_Natural_Earth_boundary_ties": [],
+      "original_official_country_result": "CHN",
+      "literal_whole_LSIB_CHN_native_interior": true,
+      "literal_whole_LSIB_CHN_native_boundary_ties": [],
+      "fresh_stock_v1_diagnostic": "territorial_exclusion_cells",
+      "contrary_OSM_source_ids": [
+        "osm:relation:2773868"
+      ],
+      "native_qualification": false
+    },
+    {
+      "original_key": {
+        "owner": 48755,
+        "y": 114173,
+        "x": 205644
+      },
+      "original_VNM_source_id": "gb:VNM:ADM2:81297802B94651516294700",
+      "longitude": 102.38604548263316,
+      "latitude": 22.609042662138076,
+      "retained_Natural_Earth_country_hits": [
+        {
+          "ordinal": 55,
+          "ADM0_A3": "VNM",
+          "ADMIN": "Vietnam",
+          "ISO_A3_EH": "VNM"
+        }
+      ],
+      "retained_Natural_Earth_boundary_ties": [],
+      "original_official_country_result": "CHN",
+      "literal_whole_LSIB_CHN_native_interior": true,
+      "literal_whole_LSIB_CHN_native_boundary_ties": [],
+      "fresh_stock_v1_diagnostic": "territorial_exclusion_cells",
+      "contrary_OSM_source_ids": [
+        "osm:relation:2719413"
+      ],
+      "native_qualification": false
+    },
+    {
+      "original_key": {
+        "owner": 48535,
+        "y": 113896,
+        "x": 207441
+      },
+      "original_VNM_source_id": "gb:VNM:ADM2:81297802B6357673458882",
+      "longitude": 104.85364234874083,
+      "latitude": 22.959730875836318,
+      "retained_Natural_Earth_country_hits": [
+        {
+          "ordinal": 55,
+          "ADM0_A3": "VNM",
+          "ADMIN": "Vietnam",
+          "ISO_A3_EH": "VNM"
+        }
+      ],
+      "retained_Natural_Earth_boundary_ties": [],
+      "original_official_country_result": "CHN",
+      "literal_whole_LSIB_CHN_native_interior": true,
+      "literal_whole_LSIB_CHN_native_boundary_ties": [],
+      "fresh_stock_v1_diagnostic": "territorial_exclusion_cells",
+      "contrary_OSM_source_ids": [
+        "osm:relation:2723223"
+      ],
+      "native_qualification": false
+    },
+    {
+      "original_key": {
+        "owner": 48535,
+        "y": 113898,
+        "x": 207442
+      },
+      "original_VNM_source_id": "gb:VNM:ADM2:81297802B6357673458882",
+      "longitude": 104.85501552451501,
+      "latitude": 22.95720206869549,
+      "retained_Natural_Earth_country_hits": [
+        {
+          "ordinal": 55,
+          "ADM0_A3": "VNM",
+          "ADMIN": "Vietnam",
+          "ISO_A3_EH": "VNM"
+        }
+      ],
+      "retained_Natural_Earth_boundary_ties": [],
+      "original_official_country_result": "CHN",
+      "literal_whole_LSIB_CHN_native_interior": true,
+      "literal_whole_LSIB_CHN_native_boundary_ties": [],
+      "fresh_stock_v1_diagnostic": "territorial_exclusion_cells",
+      "contrary_OSM_source_ids": [
+        "osm:relation:2723223"
+      ],
+      "native_qualification": false
+    },
+    {
+      "original_key": {
+        "owner": 48535,
+        "y": 113900,
+        "x": 207443
+      },
+      "original_VNM_source_id": "gb:VNM:ADM2:81297802B6357673458882",
+      "longitude": 104.85638870028913,
+      "latitude": 22.954673214275896,
+      "retained_Natural_Earth_country_hits": [
+        {
+          "ordinal": 55,
+          "ADM0_A3": "VNM",
+          "ADMIN": "Vietnam",
+          "ISO_A3_EH": "VNM"
+        }
+      ],
+      "retained_Natural_Earth_boundary_ties": [],
+      "original_official_country_result": "CHN",
+      "literal_whole_LSIB_CHN_native_interior": true,
+      "literal_whole_LSIB_CHN_native_boundary_ties": [],
+      "fresh_stock_v1_diagnostic": "territorial_exclusion_cells",
+      "contrary_OSM_source_ids": [
+        "osm:relation:2723223"
+      ],
+      "native_qualification": false
+    },
+    {
+      "original_key": {
+        "owner": 48535,
+        "y": 113902,
+        "x": 207444
+      },
+      "original_VNM_source_id": "gb:VNM:ADM2:81297802B6357673458882",
+      "longitude": 104.85776187606325,
+      "latitude": 22.952144312581556,
+      "retained_Natural_Earth_country_hits": [
+        {
+          "ordinal": 55,
+          "ADM0_A3": "VNM",
+          "ADMIN": "Vietnam",
+          "ISO_A3_EH": "VNM"
+        }
+      ],
+      "retained_Natural_Earth_boundary_ties": [],
+      "original_official_country_result": "CHN",
+      "literal_whole_LSIB_CHN_native_interior": true,
+      "literal_whole_LSIB_CHN_native_boundary_ties": [],
+      "fresh_stock_v1_diagnostic": "territorial_exclusion_cells",
+      "contrary_OSM_source_ids": [
+        "osm:relation:2723223"
+      ],
+      "native_qualification": false
+    },
+    {
+      "original_key": {
+        "owner": 48535,
+        "y": 113989,
+        "x": 207352
+      },
+      "original_VNM_source_id": "gb:VNM:ADM2:81297802B6357673458882",
+      "longitude": 104.73142970484349,
+      "latitude": 22.8420913922618,
+      "retained_Natural_Earth_country_hits": [
+        {
+          "ordinal": 55,
+          "ADM0_A3": "VNM",
+          "ADMIN": "Vietnam",
+          "ISO_A3_EH": "VNM"
+        }
+      ],
+      "retained_Natural_Earth_boundary_ties": [],
+      "original_official_country_result": "CHN",
+      "literal_whole_LSIB_CHN_native_interior": true,
+      "literal_whole_LSIB_CHN_native_boundary_ties": [],
+      "fresh_stock_v1_diagnostic": "territorial_exclusion_cells",
+      "contrary_OSM_source_ids": [
+        "osm:relation:2723223"
+      ],
+      "native_qualification": false
+    },
+    {
+      "original_key": {
+        "owner": 48156,
+        "y": 114072,
+        "x": 206522
+      },
+      "original_VNM_source_id": "gb:VNM:ADM2:81297802B11536853186467",
+      "longitude": 103.59169381231737,
+      "latitude": 22.737015308929383,
+      "retained_Natural_Earth_country_hits": [
+        {
+          "ordinal": 55,
+          "ADM0_A3": "VNM",
+          "ADMIN": "Vietnam",
+          "ISO_A3_EH": "VNM"
+        }
+      ],
+      "retained_Natural_Earth_boundary_ties": [],
+      "original_official_country_result": "CHN",
+      "literal_whole_LSIB_CHN_native_interior": true,
+      "literal_whole_LSIB_CHN_native_boundary_ties": [],
+      "fresh_stock_v1_diagnostic": "territorial_exclusion_cells",
+      "contrary_OSM_source_ids": [
+        "osm:relation:2719410"
+      ],
+      "native_qualification": false
+    },
+    {
+      "original_key": {
+        "owner": 48156,
+        "y": 114073,
+        "x": 206522
+      },
+      "original_VNM_source_id": "gb:VNM:ADM2:81297802B11536853186467",
+      "longitude": 103.59169381231737,
+      "latitude": 22.73574883871993,
+      "retained_Natural_Earth_country_hits": [
+        {
+          "ordinal": 55,
+          "ADM0_A3": "VNM",
+          "ADMIN": "Vietnam",
+          "ISO_A3_EH": "VNM"
+        }
+      ],
+      "retained_Natural_Earth_boundary_ties": [],
+      "original_official_country_result": "CHN",
+      "literal_whole_LSIB_CHN_native_interior": true,
+      "literal_whole_LSIB_CHN_native_boundary_ties": [],
+      "fresh_stock_v1_diagnostic": "territorial_exclusion_cells",
+      "contrary_OSM_source_ids": [
+        "osm:relation:2719410"
+      ],
+      "native_qualification": false
+    },
+    {
+      "original_key": {
+        "owner": 48439,
+        "y": 114029,
+        "x": 207192
+      },
+      "original_VNM_source_id": "gb:VNM:ADM2:81297802B50713424689894",
+      "longitude": 104.51172158098302,
+      "latitude": 22.79146242332274,
+      "retained_Natural_Earth_country_hits": [
+        {
+          "ordinal": 55,
+          "ADM0_A3": "VNM",
+          "ADMIN": "Vietnam",
+          "ISO_A3_EH": "VNM"
+        }
+      ],
+      "retained_Natural_Earth_boundary_ties": [],
+      "original_official_country_result": "CHN",
+      "literal_whole_LSIB_CHN_native_interior": true,
+      "literal_whole_LSIB_CHN_native_boundary_ties": [],
+      "fresh_stock_v1_diagnostic": "territorial_exclusion_cells",
+      "contrary_OSM_source_ids": [
+        "osm:relation:2723222"
+      ],
+      "native_qualification": false
+    },
+    {
+      "original_key": {
+        "owner": 48439,
+        "y": 114030,
+        "x": 207191
+      },
+      "original_VNM_source_id": "gb:VNM:ADM2:81297802B50713424689894",
+      "longitude": 104.5103484052089,
+      "latitude": 22.790196458021803,
+      "retained_Natural_Earth_country_hits": [
+        {
+          "ordinal": 55,
+          "ADM0_A3": "VNM",
+          "ADMIN": "Vietnam",
+          "ISO_A3_EH": "VNM"
+        }
+      ],
+      "retained_Natural_Earth_boundary_ties": [],
+      "original_official_country_result": "CHN",
+      "literal_whole_LSIB_CHN_native_interior": true,
+      "literal_whole_LSIB_CHN_native_boundary_ties": [],
+      "fresh_stock_v1_diagnostic": "territorial_exclusion_cells",
+      "contrary_OSM_source_ids": [
+        "osm:relation:2723222"
+      ],
+      "native_qualification": false
+    }
+  ],
+  "supported_cells": 0,
+  "held_cells": 17,
+  "accepted_credit": 0,
+  "next_action": "Keep all17 held until exact country-reference conflict is substantively resolved; existing348+9 delivery can proceed independently."
+}
