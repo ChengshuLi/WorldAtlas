@@ -1,5 +1,5 @@
 import {sha256, validateEvidence, safeEvidencePath, baselineFiles, baselineFile} from './evidence-quality.mjs';
-import {finiteBytes, addBytes, evidenceBytePlan, decodeEvidenceGzip, immutableResponseBytes, LEGACY_FILE_BYTES} from './evidence-byte-bounds.mjs';
+import {finiteBytes, addBytes, evidenceBytePlan, decodeEvidenceGzip, immutableResponseBytes, LEGACY_FILE_BYTES} from './evidence-quality.mjs';
 import {workSpec} from './issue-claim-contract.mjs';
 import {validateLanePaths} from './check-handoff-scope.mjs';
 import {evidenceRequirement, loadEvidencePolicy} from './evidence-policy.mjs';

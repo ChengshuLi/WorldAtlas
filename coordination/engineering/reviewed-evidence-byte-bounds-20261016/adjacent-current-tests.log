@@ -1,0 +1,45 @@
+✔ joint transport closure includes every authenticated acquisition import and Python retention role (1.03001ms)
+✔ immutable locator and retained archive metadata stay outside the scientific inventory (52.202661ms)
+✔ transport rejects unsafe paths and nonordinary inputs before body reads (36.836674ms)
+✔ quota retry only retries an explicit read rejection, and accounts every attempt (6.527967ms)
+✔ shared GET retries explicit HTTP500 within its existing attempt and phase allowance (1.934975ms)
+✔ shared GET retries explicit HTTP502 within its existing attempt and phase allowance (0.89551ms)
+✔ shared GET retries explicit HTTP503 within its existing attempt and phase allowance (0.808711ms)
+✔ shared GET retries explicit HTTP504 within its existing attempt and phase allowance (1.108467ms)
+✔ exhausted transient reads preserve the actual server failure after only two bounded retries (1.641348ms)
+✔ quota and transient server responses share one unchanged retry ceiling (1.002539ms)
+✔ transient response cannot add a wait when the caller or next complete HTTP attempt lacks allowance (0.74053ms)
+✔ transient retry rechecks deadline after an oversleep before another HTTP send (0.812747ms)
+✔ server failures never retry writes, body-bearing reads, transport ambiguity or unsupported status (2.478001ms)
+✔ ordinary permission denial, write denial, and ambiguous write never retry (0.842211ms)
+✔ read retry respects its finite phase deadline and repeated concurrent exhaustion (2.159558ms)
+✔ actual repository capacity overrides unrelated generic capacity (0.61911ms)
+✔ secondary limits cannot masquerade as positive capacity (0.406995ms)
+✔ invalid capacity headers fail closed and concurrent reads cannot replace probe headers (0.709424ms)
+✔ actual read quota rejection honors secondary retry-after within its finite deadline (0.790544ms)
+✔ quota classifier rejects malformed or irrelevant error metadata (0.126979ms)
+✔ deadline refuses a quota wait that cannot fit one complete HTTP attempt (0.433244ms)
+✔ deadline is rechecked after an oversleep before a retry actually sends HTTP (0.423339ms)
+✔ accounting observes real repository headers without an extra capacity poll or retained secrets (1.111461ms)
+✔ unknown or wrong-resource headers cannot manufacture an observed repository quota (0.220628ms)
+✔ deployment classification quota refusal does not authorize a wasteful full-build fallback (3.564004ms)
+✔ deployment transport ambiguity counts its attempt without inventing quota or retrying (0.644718ms)
+✔ caller response admission bounds the real JSON stream while preserving request accounting (17.784408ms)
+✔ bounded metadata reads cannot use larger ETag snapshots or grant writes an admission bypass (2.57823ms)
+✔ a capped read keeps its byte allowance through the actual reset-capacity probe (1.330776ms)
+✔ existing final HTTP-admission hook composes with job timing rather than replacing it (0.674071ms)
+✔ actual joint CLI reports unseeded baseline as explicit cold validation, never unchanged success (1081.206611ms)
+✔ actual joint CLI preserves a qualified baseline but requires cold validation of unsupported candidate (1676.289994ms)
+✔ joint output collision and dangling symlink fail before qualification and preserve originals (702.679993ms)
+✔ joint launcher authenticates its additional consumer module before importing it (596.123684ms)
+✔ actual joint CLI qualifies once, runs the real native consumer and releases once (1682.655632ms)
+✔ actual warm joint entry reuses native-only custody without requiring addition polygons or a legacy target (2369.939673ms)
+✔ actual warm native-only transition rejects coherently repinned same-count owner reassignment (1607.764551ms)
+ℹ tests 37
+ℹ suites 0
+ℹ pass 37
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 9988.587655

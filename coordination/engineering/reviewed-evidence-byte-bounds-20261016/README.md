@@ -62,7 +62,7 @@ coordinated additive composition before data delivery.
 
 ## Reproduction and controls
 
-`focused-tests.log` records 74 passing focused tests, zero skips. Run:
+`focused-tests.log` records 75 passing focused tests, zero skips. Run:
 
 ```sh
 node --test --test-concurrency=2 \
@@ -76,7 +76,11 @@ Controls include real 36,065,990-byte candidate/Git/REST reads, a packet above t
 old aggregate cap, exact gzip expansion above the old cap, empty expansion,
 wrong encoded/decoded hashes and lengths, malformed/overflow bounds rejected
 before body I/O, real large table/control rereads, nested forwarding and stale
-tree rejection, and unchanged cache-overflow fallback. Existing source/subject,
+tree rejection, and unchanged cache-overflow fallback. The byte helpers live inside the already
+authenticated evidence-quality module, so no new current-code custody roster
+member is introduced. A same-size mutation of the actual finite-byte helper is
+refused by the real joint launcher before output creation. Historical code and
+scientific proof rosters remain unchanged. Existing source/subject,
 ancestry, path/mode, record, metric and historic-vintage controls also run.
 
 For a locally acquired complete immutable PR #2062 packet, obtain fresh ordinary
@@ -90,3 +94,7 @@ node coordination/engineering/reviewed-evidence-byte-bounds-20261016/check-froze
 This engineering change satisfies only the generic transport-bound acceptance.
 It does not rewrite scientific execution-helper operating limits or manufacture
 qualified scientific receipts, factual approval, selected counts or publication.
+
+The earlier a56afc76 review is superseded by the import-custody correction.
+The actual frozen-packet probe was rerun after inlining the helpers; the earlier
+scientific executions remain untouched.

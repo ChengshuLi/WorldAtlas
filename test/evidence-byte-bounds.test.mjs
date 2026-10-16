@@ -2,9 +2,9 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
-import {execFileSync} from 'node:child_process';
+import {execFileSync, spawnSync} from 'node:child_process';
 import {gzipSync} from 'node:zlib';
-import {finiteBytes, addBytes, evidenceBytePlan, decodeEvidenceGzip, immutableResponseBytes} from '../scripts/evidence-byte-bounds.mjs';
+import {finiteBytes, addBytes, evidenceBytePlan, decodeEvidenceGzip, immutableResponseBytes} from '../scripts/evidence-quality.mjs';
 import {validateEvidence, repositoryReader, sha256, subjectsHash} from '../scripts/evidence-quality.mjs';
 
 const size = 36065990, commit = 'a'.repeat(40);
@@ -60,6 +60,22 @@ test('manifest arithmetic failures are rejected before any reader or decoder', (
     const m = manifest(Buffer.from('baseline'), [descriptor('next.bin', Buffer.from('next'))]); let reads = 0; mutate(m);
     assert.throws(() => validateEvidence(m, {readFile: () => {reads++;}})); assert.equal(reads, 0);
   }
+});
+test('current joint code custody authenticates the inlined byte helpers before execution', async t => {
+  const {trustedFixture} = await import('./helpers/selected-joint-fixture.mjs');
+  const f = await trustedFixture(t), name = 'scripts/evidence-quality.mjs', target = path.join(f.root, name);
+  const original = fs.readFileSync(target, 'utf8');
+  assert.ok(original.includes('export function finiteBytes('));
+  assert.equal([...original.matchAll(/from ['"]([^'"]+)['"]/g)].some(match => !match[1].startsWith('node:')), false);
+  const changed = original.replace('value < 0', 'value < 1'); assert.notEqual(changed, original);
+  assert.equal(changed.length, original.length); fs.writeFileSync(target, changed);
+  const env = {...process.env}; delete env.NODE_OPTIONS; delete env.NODE_PATH;
+  const head = f.git('rev-parse', 'HEAD').toString().trim(), destination = path.join(f.root, 'byte-helper-refused');
+  const result = spawnSync(process.execPath, [path.join(f.root,
+    'coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs'),
+  f.root, head, f.selected, f.selected, destination], {encoding: 'utf8', env, timeout: 30000});
+  assert.notEqual(result.status, 0); assert.match(result.stderr, /Joint code body\/mode differs/);
+  assert.equal(fs.existsSync(destination), false);
 });
 test('real candidate and immutable Git readers use exact descriptors while unplanned callers retain their guard', () => {
   const directory = fs.mkdtempSync(path.join(process.cwd(), '.cache-byte-reader-')), raw = Buffer.alloc(size, 13), name = 'source.bin';

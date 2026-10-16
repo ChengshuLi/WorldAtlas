@@ -1,6 +1,6 @@
 import {copyAPIFeatures} from './github-quota.mjs';
 import {createHash} from 'node:crypto';
-import {finiteBytes, immutableResponseBytes, LEGACY_FILE_BYTES} from './evidence-byte-bounds.mjs';
+import {finiteBytes, immutableResponseBytes, LEGACY_FILE_BYTES} from './evidence-quality.mjs';
 
 export const IMMUTABLE_CACHE_BYTES = 272 * 1024 * 1024;
 export const IMMUTABLE_CACHE_ENTRIES = 512;

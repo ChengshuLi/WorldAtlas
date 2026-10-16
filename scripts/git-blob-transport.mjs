@@ -3,7 +3,7 @@ import path from 'node:path';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {copyAPIFeatures} from './github-quota.mjs';
-import {addBytes} from './evidence-byte-bounds.mjs';
+import {addBytes} from './evidence-quality.mjs';
 
 const MAX_BYTES=272*1024*1024, MAX_ENTRIES=512;
 const oid=value=>/^[a-f0-9]{40}$/.test(value??'');

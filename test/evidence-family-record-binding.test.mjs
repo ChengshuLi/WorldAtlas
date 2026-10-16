@@ -55,7 +55,6 @@ test('actual control CLI rejects files, dangling destinations and symlink parent
     fs.mkdirSync(packet,{recursive:true});fs.mkdirSync(path.join(root,'scripts'));fs.mkdirSync(parent);
     fs.copyFileSync(new URL('../coordination/engineering/immutable-family-record-subject-bindings-20261008/verify-original-records.mjs',import.meta.url),path.join(packet,'verify-original-records.mjs'));
     fs.copyFileSync(new URL('../scripts/evidence-quality.mjs',import.meta.url),path.join(root,'scripts/evidence-quality.mjs'));
-    fs.copyFileSync(new URL('../scripts/evidence-byte-bounds.mjs',import.meta.url),path.join(root,'scripts/evidence-byte-bounds.mjs'));
     const preload=path.join(root,'instrument.mjs'),receipt=path.join(root,'calls.json');
     fs.writeFileSync(preload,`import fs from 'node:fs';import cp from 'node:child_process';import z from 'node:zlib';import {syncBuiltinESMExports} from 'node:module';const counts={git:0,body_reads:0,gunzips:0};const write=fs.writeFileSync,read=fs.readFileSync;cp.execFileSync=()=>{counts.git++;throw Error('Control executed Git before admission');};fs.readFileSync=(...args)=>{if(new Error().stack.includes('getSourceSync'))return read(...args);counts.body_reads++;throw Error('Control read body before admission');};z.gunzipSync=()=>{counts.gunzips++;throw Error('Control decoded before admission');};syncBuiltinESMExports();process.on('exit',()=>write(process.env.CONTROL_CALLS,JSON.stringify(counts)));`,{flag:'wx'});
     const script=path.join(packet,'verify-original-records.mjs');
