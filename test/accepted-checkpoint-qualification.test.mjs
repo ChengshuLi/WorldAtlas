@@ -30,13 +30,15 @@ function addition(id,target,index,base,x){const geometry=polygon(x);return {comp
 // This is a fresh miniature trusted repository, not a test-only authority hook.
 // The real entry reads its ordinary committed catalogue and products exactly as
 // production does. Candidate edits never control that executing catalogue.
-async function trustedFixture(t,{incompleteNative=false,sourcePaths,sourceOverride=false,physicalLogicalSource=false}={}){
+async function trustedFixture(t,{incompleteNative=false,sourcePaths,sourceOverride=false,physicalLogicalSource=false,inheritedCode=false}={}){
  const root=fs.mkdtempSync(path.join(process.cwd(),'.checkpoint-test-'));
  t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
  const git=(...a)=>execFileSync('git',['-c','core.hooksPath=/dev/null','-c','user.name=Checkpoint fixture','-c','user.email=checkpoint@example.invalid','-C',root,...a],{env:{...process.env,GIT_CONFIG_NOSYSTEM:'1',GIT_CONFIG_GLOBAL:'/dev/null',GIT_NO_LAZY_FETCH:'1'},stdio:['ignore','pipe','pipe']});
  const save=(name,value)=>{const f=path.join(root,name);fs.mkdirSync(path.dirname(f),{recursive:true});fs.writeFileSync(f,Buffer.isBuffer(value)?value:valueBytes(value));};
  const commit=()=>{git('add','.');git('commit','-qm','Checkpoint fixture');return git('rev-parse','HEAD').toString().trim();};
  git('init','-q');save(PROGRAMME,fs.readFileSync(PROGRAMME));for(const name of CODE)save(name,fs.readFileSync(name));save('package.json',{type:'module'});
+ const inheritedName='fixture/historical-execution.json';
+ if(inheritedCode)save(inheritedName,{original:'executed configuration'});
  const {features,certificate}=fixtures(sourcePaths), paths=sourcePaths??['data/source.json'];
  for(const name of paths){
   const source={type:'FeatureCollection',features:features.filter((_,i)=>certificate.entries[i][4]===name)};
@@ -55,6 +57,13 @@ async function trustedFixture(t,{incompleteNative=false,sourcePaths,sourceOverri
  const originalPatch={version:1,kind:'unassigned-native-cells-v1',rows:[{y:1,runs:[[2,3,1]]}]};
  save('original/patch-one.json',originalPatch);save('original/rule.json',{version:1});const one=commit();
  const pin=(name,at=git('rev-parse','HEAD').toString().trim())=>{const body=git('show',at+':'+name),tree=git('ls-tree',at,'--',name).toString().split(/\s+/);return {commit:at,path:name,mode:tree[0],git_blob_oid:tree[2],bytes:body.length,sha256:sha(body)};};
+ const inherited=inheritedCode?pin(inheritedName,one):null;
+ if(inherited){
+  const {bytes,sha256}=inherited,role={path:inherited.path,bytes,sha256};
+  const policy=JSON.parse(fs.readFileSync(path.join(root,PROGRAMME)));
+  policy.programs.push({preimage_version:3,source_profile:'fixture-inherited-role',accepted_head:one,
+   independent_review_comment:1,source_executed_code:[role],native_executed_code:[role]});save(PROGRAMME,policy);
+ }
  save('original/publication.json',{assets:[{path:'patch-one.json',bytes:pin('original/patch-one.json').bytes,sha256:pin('original/patch-one.json').sha256}]});
  const two=commit();save('original/binding.json',{native_proof:{publication:pin('original/publication.json'),assets:[pin('original/patch-one.json',one)]}});const three=commit();
  const entry={policy_id:'retained-source-literal-additions',policy_version:1,rule_preimage:pin('original/rule.json',one),rule_sha256:pin('original/rule.json',one).sha256,source_authority:pin('original/binding.json',three)};entry.authority_sha256=valueSha(entry);
@@ -62,7 +71,7 @@ async function trustedFixture(t,{incompleteNative=false,sourcePaths,sourceOverri
  const baseSelection={version:1,method:manifest.method,manifest_path:'data/manifest.json',sha256:pin('data/manifest.json',one).sha256,release_id:reference.id,selected_geography:{version:1,kind:'complete-world-index-with-exact-encoded-overrides',path:'data/bank.json',bytes:1,sha256:'d'.repeat(64)}};
  const target={target_id:'A',pixelIndex:1,geometry:features[0].geometry,geometry_sha256:valueSha(features[0].geometry)};
  const currentRows=[{y:1,runs:[[0,1,2]]}];
- const request={base_selection:baseSelection,authority_registry_sha256:valueSha(registry),current_targets:[target],current_rows:currentRows,original_patch_sha256s:[valueSha(originalPatch)],acquisition:{predecessor_rows:[],predecessor_proof:null,native_inputs:[]}};
+ const request={...(inherited?{execution_commit:inheritedCode==='wrong-commit'?'a'.repeat(40):one,executed_code:inheritedCode==='no-role'?[]:[{path:inherited.path,bytes:inherited.bytes,sha256:inheritedCode==='wrong-hash'?'f'.repeat(64):inherited.sha256}]}:{}),base_selection:baseSelection,authority_registry_sha256:valueSha(registry),current_targets:[target],current_rows:currentRows,original_patch_sha256s:[valueSha(originalPatch)],acquisition:{predecessor_rows:[],predecessor_proof:null,native_inputs:[]}};
  const rebind={request,result:{native:{rows:originalPatch.rows}},facts:{acquisition_phases:[]},publication:{},operating:{}};
  for(const [name,body]of Object.entries(rebind))save('accepted-rebind/'+name+'.json',body);const four=commit();
  const rc={version:1,kind:'qualified-native-additive-current-bank-rebind-v1',execution_commit:one,base_selection:baseSelection,authority_registry_sha256:valueSha(registry),...Object.fromEntries(Object.keys(rebind).map(name=>[name,pin('accepted-rebind/'+name+'.json',four)]))};save('accepted-rebind/certificate.json',rc);const five=commit();
@@ -84,14 +93,14 @@ async function trustedFixture(t,{incompleteNative=false,sourcePaths,sourceOverri
  const facts={version:1,kind:'trusted-selected-coordinate-stage-v1',candidate_code_executed:false,selected_commit:selected,executing_commit:one,execution_code,runtime,binding:full.binding,complete_owners:features.length,complete_sources:paths.length};
  const compressed=gzipSync(valueBytes(full));save('accepted/certificate.json.gz',compressed);save('accepted/facts.json',facts);
  const publication={version:1,kind:facts.kind,complete:true,facts:{path:'facts.json',bytes:valueBytes(facts).length,sha256:valueSha(facts)},certificate:{path:'certificate.json.gz',bytes:compressed.length,sha256:sha(compressed),decoded_bytes:valueBytes(full).length,decoded_sha256:valueSha(full)}};save('accepted/publication.json',publication);
- const inventory=[PROGRAMME,...sourcePins.map(p=>p.path),...(sourceOverride&&physicalLogicalSource?paths:[]),'data/manifest.json','data/owners.json','data/registry.json','data/ledger.json','data/patch.json','data/sidecar.json','data/envelope.json','data/native/rows.bin.gz','data/native/runs.bin.gz'].map(name=>pin(name,selected));
+ const inventory=[PROGRAMME,...(inherited?[inherited.path]:[]),...sourcePins.map(p=>p.path),...(sourceOverride&&physicalLogicalSource?paths:[]),'data/manifest.json','data/owners.json','data/registry.json','data/ledger.json','data/patch.json','data/sidecar.json','data/envelope.json','data/native/rows.bin.gz','data/native/runs.bin.gz'].map(name=>pin(name,selected));
  save('accepted/custody.json',{complete_cold_custody:[{facts,publication,effective_additions:additions,inventory}]});
  save('accepted/routes.json',[...new Set([...inventory.map(p=>p.path),...paths])].sort().map(name=>({path:name,tree:git('ls-tree','-z',selected,'--',name).toString()})));const accepted=commit();
  const rootRow={id:'fixture',accepted_head:accepted,selected_commit:selected,selection_sha256:valueSha(selection),execution_commit:one,execution_code_sha256:valueSha(execution_code),runtime_sha256:valueSha(runtime),facts:pin('accepted/facts.json'),certificate:{...pin('accepted/certificate.json.gz'),decoded_bytes:valueBytes(full).length,decoded_sha256:valueSha(full)},publication:pin('accepted/publication.json'),custody:pin('accepted/custody.json'),routes:pin('accepted/routes.json')};
  save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',checkpoints:[rootRow]});commit();
  const api=await import(pathToFileURL(path.join(root,MODULE))),native=await import(pathToFileURL(path.join(root,'scripts/check-effective-geographic-regression.mjs')));
  const reader=new native.ImmutableReader(root,selected);
- return {api,native,reader,selected,root,git,save,commit,pin,ledger,patch,sidecar,envelope,selection,rootRow};
+ return {api,native,reader,selected,root,git,save,commit,pin,ledger,patch,sidecar,envelope,selection,rootRow,inherited};
 }
 
 function zipMembers(members, {descriptor = false, method = 8} = {}) {
@@ -241,10 +250,11 @@ const JSON_BODY=valueBytes;
 const P='coordination/engineering/selected-geography-effective-prevention-20261009/';
 const {JOINT_CODE:JOINT}=await import('../coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs');
 const MEMBERS=['derived-certificate.json.gz','derived-facts.json','derived-publication.json','checkpoint-routes.json'];
-async function acceptedProducts(t,{sourcePaths,actualProducer=false,nativeOnly=false,sourceOverride=false,physicalLogicalSource=false}={}) {
-  const f=nativeOnly?await trustedNativeFixture(t,{nativeOnly:true}):await trustedFixture(t,{sourcePaths,sourceOverride,physicalLogicalSource});
+async function acceptedProducts(t,{sourcePaths,actualProducer=false,nativeOnly=false,sourceOverride=false,physicalLogicalSource=false,inheritedCode=false}={}) {
+  const f=nativeOnly?await trustedNativeFixture(t,{nativeOnly:true}):await trustedFixture(t,{sourcePaths,sourceOverride,physicalLogicalSource,inheritedCode});
   for(const name of [...JOINT,...(actualProducer?['scripts/check-geographic-regression.py','scripts/evidence/immutable.py','scripts/evidence/geometry.py','scripts/ellipsoidal_area.py','requirements.txt']:[])])f.save(name,fs.readFileSync(name));
   f.save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',checkpoints:[f.rootRow]});
+  if(f.inherited)f.save(f.inherited.path,{reviewed:'successor configuration'});
   const trusted=f.commit();
   const reader=new f.native.ImmutableReader(f.root,trusted);
   const {state}=f.api.qualifyCheckpoint({reader});
@@ -335,6 +345,64 @@ async function acquire(f,mutate,{merged=f.trusted,tree=f.git('rev-parse',f.trust
   return {handle:result.handle,reader};
 }
 async function qualify(f,a) {return f.api.qualifyAcceptedCheckpoint({reader:a.reader,acceptedHandle:a.handle});}
+
+test('accepted derived inventory recovers inherited executed roles from the original rebind commit',async t=>{
+ const f=await acceptedProducts(t,{inheritedCode:true});
+ assert(!Object.values(f.products.facts.actual_reader_inventories).flat().some(p=>p.path===f.inherited.path));
+ const a=await acquire(f),result=await qualify(f,a);assert.equal(result.available,true,result.reason);
+ const pin=a.reader.inventory.get(f.inherited.commit+':'+f.inherited.path);
+ assert.deepEqual(pin,{...f.inherited,whole_body_consumed:true});
+ assert.notEqual(pin.git_blob_oid,f.pin(f.inherited.path,f.trusted).git_blob_oid);
+ assert(!f.products.facts.execution_code.some(p=>p.path===f.inherited.path));
+ const candidate=new f.native.ImmutableReader(f.root,f.trusted,{invocation:a.reader.invocation});
+ const transition=f.api.qualifyTransition({state:result.state,reader:candidate});assert.equal(transition.available,true);
+ assert.equal(f.api.checkpointRouteCensus({transition}).routes.find(p=>p.path===f.inherited.path).tree,
+  f.git('ls-tree','-z',f.inherited.commit,'--',f.inherited.path).toString());
+ fs.appendFileSync(path.join(f.root,'src/native-grid.js'),'\n// Uncommitted actual execution drift.\n');
+ await assert.rejects(()=>qualify(f,a),/changed executing checkpoint method/);
+ f.api.releaseCheckpoint(result.state);f.transport.releaseAcceptedCheckpoint(a.handle);
+});
+
+test('inherited role recovery refuses a different original route and unknown code role',async t=>{
+ const f=await acceptedProducts(t,{inheritedCode:true});
+ const a=await acquire(f,p=>{p.census.routes.find(p=>p.path===f.inherited.path).tree=
+  f.git('ls-tree','-z',f.trusted,'--',f.inherited.path).toString();});
+ await assert.rejects(()=>qualify(f,a),/inherited code route differs/);f.transport.releaseAcceptedCheckpoint(a.handle);
+ const b=await acquire(f,p=>{
+  const policy=JSON.parse(p.facts.executing_policy.body);policy.programs=policy.programs.filter(p=>p.source_profile!=='fixture-inherited-role');
+  const body=valueBytes(policy);p.facts.executing_policy.body=body.toString();
+  const changed={...p.facts.executing_policy.pin,bytes:body.length,sha256:sha(body)};
+  p.facts.executing_policy.pin=changed;p.facts.executing_authority_pins[0]=changed;
+  const i=p.facts.actual_reader_inventories.baseline.findIndex(p=>p.commit===changed.commit&&p.path===changed.path);
+  p.facts.actual_reader_inventories.baseline[i]=changed;
+ });
+ const refused=await qualify(f,b);assert.equal(refused.available,false);assert.match(refused.reason,/routing alternative changed/);
+ f.transport.releaseAcceptedCheckpoint(b.handle);
+});
+
+for(const inheritedCode of ['wrong-commit','no-role','wrong-hash'])test(`inherited recovery refuses ${inheritedCode} original rebind custody`,async t=>{
+ const f=await acceptedProducts(t,{inheritedCode}),a=await acquire(f);
+ if(inheritedCode==='wrong-commit')await assert.rejects(()=>qualify(f,a),/rebind execution identity differs/);
+ else {const result=await qualify(f,a);assert.equal(result.available,false);assert.match(result.reason,/routing alternative changed/);}
+ f.transport.releaseAcceptedCheckpoint(a.handle);
+});
+
+test('inherited recovery still authenticates the original whole body and ordinary mode',async t=>{
+ const f=await acceptedProducts(t,{inheritedCode:true});
+ const a=await acquire(f),readGit=a.reader.git.bind(a.reader);
+ a.reader.git=(...args)=>{const raw=readGit(...args);if(args[0]==='cat-file'&&args[1]==='blob'&&args[2]===f.inherited.git_blob_oid){const bad=Buffer.from(raw);bad[0]^=1;return bad;}return raw;};
+ await assert.rejects(()=>qualify(f,a),/Whole immutable input differs/);f.transport.releaseAcceptedCheckpoint(a.handle);
+ const b=await acquire(f),descriptor=b.reader.descriptor.bind(b.reader);
+ b.reader.descriptor=(name,version)=>{const pin=descriptor(name,version);return name===f.inherited.path&&version===f.inherited.commit?{...pin,mode:'100755'}:pin;};
+ await assert.rejects(()=>qualify(f,b),/inherited code route differs/);f.transport.releaseAcceptedCheckpoint(b.handle);
+});
+
+test('a present non-code consumed role cannot inherit a historical code exemption',async t=>{
+ const f=await acceptedProducts(t,{inheritedCode:true});
+ const a=await acquire(f,p=>p.facts.actual_reader_inventories.candidate.push({...f.pin(f.inherited.path,f.trusted),whole_body_consumed:true}));
+ const result=await qualify(f,a);assert.equal(result.available,false);assert.match(result.reason,/routing alternative changed/);
+ f.transport.releaseAcceptedCheckpoint(a.handle);
+});
 
 test('accepted original archive admits a private successor without a catalogue row for that selector',async t=>{
   const f=await acceptedProducts(t),a=await acquire(f);
