@@ -1,0 +1,128 @@
+{
+  "reviewer": "/root/physical_remainder_exact_scope",
+  "review_utc": "2026-10-16T01:10:25.653046+00:00",
+  "outcome": "PASS WITH LIMITS",
+  "scope": "Distinct actual stock composition contribution review, original343 additions only",
+  "actual_execution": {
+    "receipt": {
+      "path": "idn-border343-delivery-001/execution-001/compose-execution.json",
+      "bytes": 911,
+      "sha256": "85fe167afc99431bd7807c7ed02a79b6eb212ff19f2b8e1af4fd81f2b713251d"
+    },
+    "code_commit": "b6382262f8d03d9e7d33b26d8adb40a55197262b",
+    "exit_code": 0,
+    "started_at": "2026-10-16T00:50:02.048925+00:00",
+    "ended_at": "2026-10-16T00:50:29.264036+00:00",
+    "elapsed_seconds": 27.214098792
+  },
+  "actual_products": {
+    "selected-ledger.json": {
+      "local_output": ".cache/delivery-handoff/indonesia-border343-compose-001/selected-ledger.json",
+      "bytes": 6885481,
+      "sha256": "09d55481a2c0d5625bbc149e9aca4c58df7be58365986f7c152bca154df80b7a"
+    },
+    "authority-registry.json": {
+      "local_output": ".cache/delivery-handoff/indonesia-border343-compose-001/authority-registry.json",
+      "bytes": 89171,
+      "sha256": "9f73f45eccd6d084de3e825b86e5dcf3e656b29355531180933fea7df211ffef"
+    },
+    "patch.json": {
+      "local_output": ".cache/delivery-handoff/indonesia-border343-compose-001/patch.json",
+      "bytes": 2722842,
+      "sha256": "08dc40425b1b239d35435aec1a7e9cd44de28f33aab2152002b7cbd93bbe8cd9"
+    },
+    "preparation.json": {
+      "local_output": ".cache/delivery-handoff/indonesia-border343-compose-001/preparation.json",
+      "bytes": 596,
+      "sha256": "a7849cb8227cfb3182d08207aca10fd2d02023198f124bd2dc2aefb9d1be26ef"
+    },
+    "runtime-envelope.json": {
+      "local_output": ".cache/delivery-handoff/indonesia-border343-compose-001/runtime-envelope.json",
+      "bytes": 1395,
+      "sha256": "1077f27d479996a1b58f443ac752dbcc786bda28929d93a813dddd0055a75786"
+    }
+  },
+  "independent_observation_custody": {
+    "path": "idn-physical-remainder80712-001/worker5-remainder-verification/border343-compose-review-observations.json",
+    "bytes": 21407,
+    "sha256": "21e41a4ad6ae96efc6c74de61f0e2ca9305fd7c6b305df141774c206739be357"
+  },
+  "consequential_findings": {
+    "nine_immutable_authority_quartet_cell_counts": [
+      7,
+      5,
+      14,
+      3,
+      216,
+      63,
+      32,
+      1,
+      2
+    ],
+    "new_components": 20,
+    "new_native_tuples": 343,
+    "original_repair474_tuples": 337,
+    "original_conflict27_tuples": [
+      [
+        130021,
+        212814,
+        23115
+      ],
+      [
+        137791,
+        222157,
+        22839
+      ],
+      [
+        138001,
+        222176,
+        22947
+      ],
+      [
+        130389,
+        211488,
+        31151
+      ],
+      [
+        137710,
+        222103,
+        42215
+      ],
+      [
+        137711,
+        222102,
+        42215
+      ]
+    ],
+    "original_scope_reference": {
+      "path": "idn-remaining474-source-research-001/worker1-kapuas257/competent-source-followup-002/exact501-original-requests.json",
+      "sha256": "7bf6cec7f4d601303695e03ad0f5236252a43dbd2c1172fab44e33e4d9bfeea5"
+    },
+    "immutable_component_custody": "All nine original rule preimages, authority bindings, constructor results and exact native patches were read from already-local pinned Git blobs. Each source constructor row is preserved in output with only stock rule_sha256/authority_sha256 additions. All20 component identities and requested tuples match the input constructors and patches exactly.",
+    "inherited_accepted675_cells": 281915,
+    "composed_patch_cells": 282258,
+    "new_inherited_overlap": 0,
+    "duplicate_coordinates": 0,
+    "inherited_ledger_rows_preserved": 691,
+    "composed_ledger_rows": 711,
+    "inherited_registry_entries_preserved": 83,
+    "composed_registry_entries": 92,
+    "preserved_ledger_metadata": [
+      "current_targets",
+      "current_rebind",
+      "parent_inventory",
+      "kind",
+      "version"
+    ],
+    "preserved_ledger_scope_ids": true,
+    "inherited_base_reference_preserved": true,
+    "fatumean1_included": false,
+    "government43_included": false
+  },
+  "scientific_scope": "The6 conflicts are exactly the reviewed3 IDN-only full-source cases plus second Tebedu1 and Balibo2. No first Tebedu, Fly1, Fatumean1, extra repair or new owner is inserted. The343 additions retain their original source/physical review meaning and package distinction. Country-side correction is retained source evidence, not an unreviewed geometry edit or new legal certification.",
+  "limits": [
+    "This is actual composition review, not delivery acceptance or a fresh current-native owner-zero/conservation finding. Subsequent ordinary current-consumer/finalization results remain separate.",
+    "Fatumean1 is a later separately qualified original conflict addition and must receive a distinct literal append review if included. Gov43 templates/results remain separate.",
+    "No source acquisition, GIS/native predicate, physical producer, native qualification,2057/2056 implementation or stock operator rerun occurred."
+  ]
+}
