@@ -9,17 +9,25 @@ import {observeSetupPhase,measuredGitSetup} from './ci-setup-observations.mjs';
 export const PACKAGED_ASSET_TESTS = ['test/compact-ownership.test.mjs','test/prepared-parity.test.mjs'];
 
 // Both PR CI and the trusted queue's isolated candidate checkout are shallow.
-// Keep the common native/context vintages for every full regression shard.
-const COMMON_NATIVE_REGRESSION_COMMITS = [
-  'd55795e4c0ad01527029db0bd1d774124a12a61a',
-  '548c5f89f00271050823076a84695bb41e1b8454',
-  'd70c5d86e345a225b6bc78d67451b3cbbf7a5eed',
-  '65cfcef5ffd7d8b98077b9058a374d1e27047430',
-  '35d2d3ff48957d34ee8d4329824b268ecadc6d3c'
-];
-// Only these actual tests consume the additional archived physical vintages.
-// Select by the runner's file roster, so ordinary shard reassignment is harmless.
-const ARCHIVED_PHYSICAL_REGRESSION_INPUTS = [
+// Acquire historical inputs for the actual consuming test files, independently
+// of shard placement. Unscoped/manual callers retain the complete old roster.
+const NATIVE_REGRESSION_INPUTS = [
+  {tests:['test/select-build-ownership.test.mjs'],commits:[
+    'd55795e4c0ad01527029db0bd1d774124a12a61a',
+    '548c5f89f00271050823076a84695bb41e1b8454'
+  ]},
+  // This context vintage is still available to unscoped historical reproducers.
+  // Scheduled context tests authenticate ordinary captured snapshots instead.
+  {tests:[],commits:['d70c5d86e345a225b6bc78d67451b3cbbf7a5eed']},
+  {tests:['test/pinned-native-package-inputs.test.mjs'],commits:[
+    '65cfcef5ffd7d8b98077b9058a374d1e27047430'
+  ]},
+  {tests:['test/native-latitudes.test.mjs'],commits:[
+    '35d2d3ff48957d34ee8d4329824b268ecadc6d3c'
+  ]},
+  {tests:['test/native-materialization-gate.test.mjs'],commits:[
+    '548c5f89f00271050823076a84695bb41e1b8454'
+  ]},
   {tests:['test/physical-component-custody.test.mjs','test/physical-component-report-binding.test.mjs'],commits:[
     // Each executes complete original custody before its own assertions.
     // The compact evidence-controls wrapper uses synthetic predicates instead.
@@ -27,15 +35,14 @@ const ARCHIVED_PHYSICAL_REGRESSION_INPUTS = [
     '6ed6406f9fad4c7c468b06a376346b216cb50db7'
   ]}
 ];
-export const NATIVE_REGRESSION_COMMITS = [...COMMON_NATIVE_REGRESSION_COMMITS,
-  ...ARCHIVED_PHYSICAL_REGRESSION_INPUTS.flatMap(group=>group.commits)];
+export const NATIVE_REGRESSION_COMMITS = [...new Set(NATIVE_REGRESSION_INPUTS.flatMap(group=>group.commits))];
 export function prepareNativeRegressionInputs(profile,{files,exists=fs.existsSync,run=spawnSync}={}) {
   if(profile!=='full'||!exists('scripts/native-ownership/validate-context-input-stage.mjs'))return {applicable:false,fetched:[]};
   if(files!==undefined&&(!Array.isArray(files)||!files.length||files.some(name=>typeof name!=='string'||!/^test\/[A-Za-z0-9_.-]+\.test\.mjs$/.test(name)||!exists(name))))
     throw Error('Actual regression file roster required');
   // Unscoped callers retain every remaining regression dependency.
-  const required=files===undefined?NATIVE_REGRESSION_COMMITS:[...COMMON_NATIVE_REGRESSION_COMMITS,
-    ...ARCHIVED_PHYSICAL_REGRESSION_INPUTS.filter(group=>group.tests.some(name=>files.includes(name))).flatMap(group=>group.commits)];
+  const required=files===undefined?NATIVE_REGRESSION_COMMITS:[...new Set(NATIVE_REGRESSION_INPUTS
+    .filter(group=>group.tests.some(name=>files.includes(name))).flatMap(group=>group.commits))];
   const present=commit=>run('git',['cat-file','-e',commit+'^{commit}'],{encoding:'utf8'}).status===0;
   const missing=required.filter(commit=>!present(commit));
   if(missing.length){
