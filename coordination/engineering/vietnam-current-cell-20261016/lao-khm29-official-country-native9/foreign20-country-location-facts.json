@@ -1,0 +1,2722 @@
+{
+  "kind": "new-primary-country-location-facts-existing-finer-owner-not-inferred",
+  "count": 20,
+  "scope": "Outside CLOSED1233; source/location evidence only; no qualification/currentownerzero/selectedcredit",
+  "source_basis": "Official WorldPolygons11.4 named whole mainland/component source and matched LSIB11.4 fid106/266 countryWPIDs; original older GSO/COD overlap/gap facts retained verbatim",
+  "records": [
+    {
+      "original_record_and_all_prior_country_source_facts_unchanged": {
+        "original_key": {
+          "owner": 48661,
+          "y": 116097,
+          "x": 207477
+        },
+        "original_bank_index": 8522,
+        "original_record": {
+          "accepted_geometry_covers": false,
+          "accepted_hole_covers": false,
+          "actual_sids": [
+            65633
+          ],
+          "country_boundary_ids": [],
+          "covering_owners": [
+            48661
+          ],
+          "declared_sids": [
+            65633
+          ],
+          "flags": [
+            "foreign-reference-country"
+          ],
+          "hold_reasons": [
+            "foreign-reference-country"
+          ],
+          "owner": 48661,
+          "package": "repair-evaluation",
+          "physical": "land",
+          "qualified": false,
+          "reference_countries": [
+            "LAO"
+          ],
+          "source_boundary_ids": [],
+          "territorial_hold_reasons": [
+            "foreign-reference-country"
+          ],
+          "x": 207477,
+          "y": 116097
+        },
+        "original_VNM_existing_Atlas_location": {
+          "id": "gb:VNM:ADM2:81297802B81765499113898",
+          "index": 48661,
+          "bounds": [
+            207263.41595639728,
+            115895.72139710415,
+            207640.4968483333,
+            116136.97522039247
+          ],
+          "province_id": "framework:province:thanh-hoa:d4ffcc7255ac",
+          "province_index": 4577,
+          "name": "Quan Son",
+          "reference_owner": "Viet Nam",
+          "source_id": "gb:VNM:ADM2",
+          "source_atoms": [
+            "gb:VNM:ADM2:81297802B81765499113898"
+          ]
+        },
+        "original_VNM_positive_source_atoms": [
+          {
+            "source_index": 65633,
+            "family_index": 354,
+            "source_id": "gb:VNM:ADM2:81297802B81765499113898",
+            "ordinal": 477,
+            "owners": [
+              48661
+            ],
+            "name": "Quan Son",
+            "geometry_status": "raw-native-supported"
+          }
+        ],
+        "longitude": 104.90307667660949,
+        "latitude": 20.14909723866638,
+        "official_country_status": "both-official-countries",
+        "VNM_GSO_2025_contacts": [
+          {
+            "id": "cod:VNM:ADM0:VN",
+            "index": 1,
+            "index_namespace": "country-source-feature-ordinal",
+            "properties": {
+              "iso2": "VN",
+              "iso3": "VNM",
+              "adm0_name": "Viet Nam",
+              "adm0_name1": "Việt Nam",
+              "adm0_name2": null,
+              "adm0_name3": null,
+              "adm0_pcode": "VN",
+              "valid_on": "2025-09-25",
+              "valid_to": null,
+              "version": "v02",
+              "area_sqkm": 333721.56239698,
+              "lang": "en",
+              "lang1": "vi",
+              "lang2": null,
+              "lang3": null,
+              "adm0_ref_name": null,
+              "center_lat": null,
+              "center_lon": null
+            }
+          }
+        ],
+        "neighbor_government_COD_2019_LAO_or2018_KHM_country_contacts": [
+          {
+            "source_feature_index": 1,
+            "source_id": "cod:LAO:cod-adm0:LA",
+            "ordinal": 0,
+            "properties": {
+              "iso2": "LA",
+              "iso3": "LAO",
+              "adm0_name": "Lao People's Democratic Republic",
+              "adm0_name1": "ສາທາລະນະລັດ ປະຊາທ",
+              "adm0_name2": null,
+              "adm0_name3": null,
+              "adm0_pcode": "LA",
+              "valid_on": "2019-11-12",
+              "valid_to": null,
+              "version": "v01",
+              "area_sqkm": 230405.11745275,
+              "lang": "en",
+              "lang1": "lo",
+              "lang2": null,
+              "lang3": null,
+              "adm0_ref_name": "Lao Peoples Democratic Republic (the)",
+              "center_lat": 18.20947085,
+              "center_lon": 104.69407219
+            },
+            "original_sid": null,
+            "existing_atlas_owners": []
+          }
+        ],
+        "neighbor_government_ADM2_contacts": [
+          {
+            "source_feature_index": 131,
+            "source_id": "cod:LAO:cod-adm2:LA0706",
+            "ordinal": 130,
+            "properties": {
+              "adm2_name": "Xamtay",
+              "adm2_name1": "ມ. ຊຳໃຕ້",
+              "adm2_name2": null,
+              "adm2_name3": null,
+              "adm2_pcode": "LA0706",
+              "adm1_name": "Houaphan",
+              "adm1_name1": "ຫົວພັນ",
+              "adm1_name2": null,
+              "adm1_name3": null,
+              "adm1_pcode": "LA07",
+              "adm0_name": "Lao People's Democratic Republic",
+              "adm0_name1": "ສາທາລະນະລັດ ປະຊາທ",
+              "adm0_name2": null,
+              "adm0_name3": null,
+              "adm0_pcode": "LA",
+              "valid_on": "2019-11-12",
+              "valid_to": null,
+              "area_sqkm": 2380.03533892,
+              "version": "v01",
+              "lang": "en",
+              "lang1": "lo",
+              "lang2": null,
+              "lang3": null,
+              "adm2_ref_name": "Xamtay",
+              "center_lat": 19.98538211,
+              "center_lon": 104.51334495
+            },
+            "original_sid": null,
+            "existing_atlas_owners": []
+          }
+        ],
+        "original_foreign_ADM2_positive_contacts": [],
+        "original_foreign_ADM2_negative_reused": null,
+        "current89ff_eight_applicable_foreign_map_contacts": [],
+        "boundary_ties": {
+          "VNM": [],
+          "neighbor_country": [],
+          "neighbor_district": [],
+          "original_foreign": [],
+          "current8map": []
+        },
+        "supported_location_proposal": null,
+        "factual_remaining_question": "Both complete official country datasets include the centre; need a local applicable country-side/course observation or explicit resolution of their conflicting source footprints.",
+        "proposal_only": true,
+        "current_native_owner_zero_checked": false,
+        "ownership_mutation": false,
+        "repair_credit": 0
+      },
+      "prior_status": "both-official-countries",
+      "prior_record_locator": {
+        "path": "bulk-completion/vn-lao-khm178/official-overlap8-conflicts.json",
+        "records_array_index": 2
+      },
+      "original_key": {
+        "owner": 48661,
+        "y": 116097,
+        "x": 207477
+      },
+      "longitude": 104.90307667660949,
+      "latitude": 20.14909723866638,
+      "official_new_country_contacts": [
+        {
+          "country": "LAO",
+          "WP_ID": "28ca6d68-ef25-4567-ae37-81647849455d",
+          "source_feature_id": "DoS_WP_High_Resolution.212514"
+        }
+      ],
+      "official_new_country_boundary_contacts": [],
+      "new_country_disposition": "LAO-only",
+      "supported_existing_location_proposal": null,
+      "proposal_only": true,
+      "qualified_cells": 0,
+      "accepted_repair_credit": 0,
+      "prior_mainland_only_disposition": "LAO-only",
+      "additional_whole_Vietnam_component": {
+        "source_feature_id": "DoS_WP_High_Resolution.349076",
+        "WP_ID": "535ebfe0-a1de-460e-ae4f-fa7d8fc7d097",
+        "inside": false,
+        "boundary_contacts": []
+      }
+    },
+    {
+      "original_record_and_all_prior_country_source_facts_unchanged": {
+        "original_key": {
+          "owner": 48597,
+          "y": 115833,
+          "x": 207102
+        },
+        "original_bank_index": 8414,
+        "original_record": {
+          "accepted_geometry_covers": false,
+          "accepted_hole_covers": false,
+          "actual_sids": [
+            65527
+          ],
+          "country_boundary_ids": [],
+          "covering_owners": [
+            48597
+          ],
+          "declared_sids": [
+            65527
+          ],
+          "flags": [
+            "foreign-reference-country"
+          ],
+          "hold_reasons": [
+            "foreign-reference-country"
+          ],
+          "owner": 48597,
+          "package": "repair-evaluation",
+          "physical": "land",
+          "qualified": false,
+          "reference_countries": [
+            "LAO"
+          ],
+          "source_boundary_ids": [],
+          "territorial_hold_reasons": [
+            "foreign-reference-country"
+          ],
+          "x": 207102,
+          "y": 115833
+        },
+        "original_VNM_existing_Atlas_location": {
+          "id": "gb:VNM:ADM2:81297802B72565329345275",
+          "index": 48597,
+          "bounds": [
+            207093.66226666665,
+            115706.29028767927,
+            207458.14583055553,
+            115927.06320501858
+          ],
+          "province_id": "framework:province:thanh-hoa:d4ffcc7255ac",
+          "province_index": 4577,
+          "name": "Muong Lat",
+          "reference_owner": "Viet Nam",
+          "source_id": "gb:VNM:ADM2",
+          "source_atoms": [
+            "gb:VNM:ADM2:81297802B72565329345275"
+          ]
+        },
+        "original_VNM_positive_source_atoms": [
+          {
+            "source_index": 65527,
+            "family_index": 354,
+            "source_id": "gb:VNM:ADM2:81297802B72565329345275",
+            "ordinal": 371,
+            "owners": [
+              48597
+            ],
+            "name": "Muong Lat",
+            "geometry_status": "raw-native-supported"
+          }
+        ],
+        "longitude": 104.3881357613115,
+        "latitude": 20.48905670837143,
+        "official_country_status": "neither-official-country",
+        "VNM_GSO_2025_contacts": [],
+        "neighbor_government_COD_2019_LAO_or2018_KHM_country_contacts": [],
+        "neighbor_government_ADM2_contacts": [],
+        "original_foreign_ADM2_positive_contacts": [],
+        "original_foreign_ADM2_negative_reused": null,
+        "current89ff_eight_applicable_foreign_map_contacts": [],
+        "boundary_ties": {
+          "VNM": [],
+          "neighbor_country": [],
+          "neighbor_district": [],
+          "original_foreign": [],
+          "current8map": []
+        },
+        "supported_location_proposal": null,
+        "factual_remaining_question": "Neither complete official country dataset includes the centre. Need positive applicable local location/country evidence, preserving originalVNMsource and foreign witnesses.",
+        "proposal_only": true,
+        "current_native_owner_zero_checked": false,
+        "ownership_mutation": false,
+        "repair_credit": 0
+      },
+      "prior_status": "neither-official-country",
+      "prior_record_locator": {
+        "path": "bulk-completion/vn-lao-khm178/official-gap21-unresolved.json",
+        "records_array_index": 0
+      },
+      "original_key": {
+        "owner": 48597,
+        "y": 115833,
+        "x": 207102
+      },
+      "longitude": 104.3881357613115,
+      "latitude": 20.48905670837143,
+      "official_new_country_contacts": [
+        {
+          "country": "LAO",
+          "WP_ID": "28ca6d68-ef25-4567-ae37-81647849455d",
+          "source_feature_id": "DoS_WP_High_Resolution.212514"
+        }
+      ],
+      "official_new_country_boundary_contacts": [],
+      "new_country_disposition": "LAO-only",
+      "supported_existing_location_proposal": null,
+      "proposal_only": true,
+      "qualified_cells": 0,
+      "accepted_repair_credit": 0,
+      "prior_mainland_only_disposition": "LAO-only",
+      "additional_whole_Vietnam_component": {
+        "source_feature_id": "DoS_WP_High_Resolution.349076",
+        "WP_ID": "535ebfe0-a1de-460e-ae4f-fa7d8fc7d097",
+        "inside": false,
+        "boundary_contacts": []
+      }
+    },
+    {
+      "original_record_and_all_prior_country_source_facts_unchanged": {
+        "original_key": {
+          "owner": 48597,
+          "y": 115833,
+          "x": 207103
+        },
+        "original_bank_index": 8415,
+        "original_record": {
+          "accepted_geometry_covers": false,
+          "accepted_hole_covers": false,
+          "actual_sids": [
+            65527
+          ],
+          "country_boundary_ids": [],
+          "covering_owners": [
+            48597
+          ],
+          "declared_sids": [
+            65527
+          ],
+          "flags": [
+            "foreign-reference-country"
+          ],
+          "hold_reasons": [
+            "foreign-reference-country"
+          ],
+          "owner": 48597,
+          "package": "repair-evaluation",
+          "physical": "land",
+          "qualified": false,
+          "reference_countries": [
+            "LAO"
+          ],
+          "source_boundary_ids": [],
+          "territorial_hold_reasons": [
+            "foreign-reference-country"
+          ],
+          "x": 207103,
+          "y": 115833
+        },
+        "original_VNM_existing_Atlas_location": {
+          "id": "gb:VNM:ADM2:81297802B72565329345275",
+          "index": 48597,
+          "bounds": [
+            207093.66226666665,
+            115706.29028767927,
+            207458.14583055553,
+            115927.06320501858
+          ],
+          "province_id": "framework:province:thanh-hoa:d4ffcc7255ac",
+          "province_index": 4577,
+          "name": "Muong Lat",
+          "reference_owner": "Viet Nam",
+          "source_id": "gb:VNM:ADM2",
+          "source_atoms": [
+            "gb:VNM:ADM2:81297802B72565329345275"
+          ]
+        },
+        "original_VNM_positive_source_atoms": [
+          {
+            "source_index": 65527,
+            "family_index": 354,
+            "source_id": "gb:VNM:ADM2:81297802B72565329345275",
+            "ordinal": 371,
+            "owners": [
+              48597
+            ],
+            "name": "Muong Lat",
+            "geometry_status": "raw-native-supported"
+          }
+        ],
+        "longitude": 104.38950893708568,
+        "latitude": 20.48905670837143,
+        "official_country_status": "neither-official-country",
+        "VNM_GSO_2025_contacts": [],
+        "neighbor_government_COD_2019_LAO_or2018_KHM_country_contacts": [],
+        "neighbor_government_ADM2_contacts": [],
+        "original_foreign_ADM2_positive_contacts": [],
+        "original_foreign_ADM2_negative_reused": null,
+        "current89ff_eight_applicable_foreign_map_contacts": [],
+        "boundary_ties": {
+          "VNM": [],
+          "neighbor_country": [],
+          "neighbor_district": [],
+          "original_foreign": [],
+          "current8map": []
+        },
+        "supported_location_proposal": null,
+        "factual_remaining_question": "Neither complete official country dataset includes the centre. Need positive applicable local location/country evidence, preserving originalVNMsource and foreign witnesses.",
+        "proposal_only": true,
+        "current_native_owner_zero_checked": false,
+        "ownership_mutation": false,
+        "repair_credit": 0
+      },
+      "prior_status": "neither-official-country",
+      "prior_record_locator": {
+        "path": "bulk-completion/vn-lao-khm178/official-gap21-unresolved.json",
+        "records_array_index": 1
+      },
+      "original_key": {
+        "owner": 48597,
+        "y": 115833,
+        "x": 207103
+      },
+      "longitude": 104.38950893708568,
+      "latitude": 20.48905670837143,
+      "official_new_country_contacts": [
+        {
+          "country": "LAO",
+          "WP_ID": "28ca6d68-ef25-4567-ae37-81647849455d",
+          "source_feature_id": "DoS_WP_High_Resolution.212514"
+        }
+      ],
+      "official_new_country_boundary_contacts": [],
+      "new_country_disposition": "LAO-only",
+      "supported_existing_location_proposal": null,
+      "proposal_only": true,
+      "qualified_cells": 0,
+      "accepted_repair_credit": 0,
+      "prior_mainland_only_disposition": "LAO-only",
+      "additional_whole_Vietnam_component": {
+        "source_feature_id": "DoS_WP_High_Resolution.349076",
+        "WP_ID": "535ebfe0-a1de-460e-ae4f-fa7d8fc7d097",
+        "inside": false,
+        "boundary_contacts": []
+      }
+    },
+    {
+      "original_record_and_all_prior_country_source_facts_unchanged": {
+        "original_key": {
+          "owner": 48597,
+          "y": 115834,
+          "x": 207105
+        },
+        "original_bank_index": 8419,
+        "original_record": {
+          "accepted_geometry_covers": false,
+          "accepted_hole_covers": false,
+          "actual_sids": [
+            65527
+          ],
+          "country_boundary_ids": [],
+          "covering_owners": [
+            48597
+          ],
+          "declared_sids": [
+            65527
+          ],
+          "flags": [
+            "foreign-reference-country"
+          ],
+          "hold_reasons": [
+            "foreign-reference-country"
+          ],
+          "owner": 48597,
+          "package": "repair-evaluation",
+          "physical": "land",
+          "qualified": false,
+          "reference_countries": [
+            "LAO"
+          ],
+          "source_boundary_ids": [],
+          "territorial_hold_reasons": [
+            "foreign-reference-country"
+          ],
+          "x": 207105,
+          "y": 115834
+        },
+        "original_VNM_existing_Atlas_location": {
+          "id": "gb:VNM:ADM2:81297802B72565329345275",
+          "index": 48597,
+          "bounds": [
+            207093.66226666665,
+            115706.29028767927,
+            207458.14583055553,
+            115927.06320501858
+          ],
+          "province_id": "framework:province:thanh-hoa:d4ffcc7255ac",
+          "province_index": 4577,
+          "name": "Muong Lat",
+          "reference_owner": "Viet Nam",
+          "source_id": "gb:VNM:ADM2",
+          "source_atoms": [
+            "gb:VNM:ADM2:81297802B72565329345275"
+          ]
+        },
+        "original_VNM_positive_source_atoms": [
+          {
+            "source_index": 65527,
+            "family_index": 354,
+            "source_id": "gb:VNM:ADM2:81297802B72565329345275",
+            "ordinal": 371,
+            "owners": [
+              48597
+            ],
+            "name": "Muong Lat",
+            "geometry_status": "raw-native-supported"
+          }
+        ],
+        "longitude": 104.39225528863392,
+        "latitude": 20.48777039559154,
+        "official_country_status": "neither-official-country",
+        "VNM_GSO_2025_contacts": [],
+        "neighbor_government_COD_2019_LAO_or2018_KHM_country_contacts": [],
+        "neighbor_government_ADM2_contacts": [],
+        "original_foreign_ADM2_positive_contacts": [],
+        "original_foreign_ADM2_negative_reused": null,
+        "current89ff_eight_applicable_foreign_map_contacts": [],
+        "boundary_ties": {
+          "VNM": [],
+          "neighbor_country": [],
+          "neighbor_district": [],
+          "original_foreign": [],
+          "current8map": []
+        },
+        "supported_location_proposal": null,
+        "factual_remaining_question": "Neither complete official country dataset includes the centre. Need positive applicable local location/country evidence, preserving originalVNMsource and foreign witnesses.",
+        "proposal_only": true,
+        "current_native_owner_zero_checked": false,
+        "ownership_mutation": false,
+        "repair_credit": 0
+      },
+      "prior_status": "neither-official-country",
+      "prior_record_locator": {
+        "path": "bulk-completion/vn-lao-khm178/official-gap21-unresolved.json",
+        "records_array_index": 2
+      },
+      "original_key": {
+        "owner": 48597,
+        "y": 115834,
+        "x": 207105
+      },
+      "longitude": 104.39225528863392,
+      "latitude": 20.48777039559154,
+      "official_new_country_contacts": [
+        {
+          "country": "LAO",
+          "WP_ID": "28ca6d68-ef25-4567-ae37-81647849455d",
+          "source_feature_id": "DoS_WP_High_Resolution.212514"
+        }
+      ],
+      "official_new_country_boundary_contacts": [],
+      "new_country_disposition": "LAO-only",
+      "supported_existing_location_proposal": null,
+      "proposal_only": true,
+      "qualified_cells": 0,
+      "accepted_repair_credit": 0,
+      "prior_mainland_only_disposition": "LAO-only",
+      "additional_whole_Vietnam_component": {
+        "source_feature_id": "DoS_WP_High_Resolution.349076",
+        "WP_ID": "535ebfe0-a1de-460e-ae4f-fa7d8fc7d097",
+        "inside": false,
+        "boundary_contacts": []
+      }
+    },
+    {
+      "original_record_and_all_prior_country_source_facts_unchanged": {
+        "original_key": {
+          "owner": 48597,
+          "y": 115842,
+          "x": 207103
+        },
+        "original_bank_index": 8428,
+        "original_record": {
+          "accepted_geometry_covers": false,
+          "accepted_hole_covers": false,
+          "actual_sids": [
+            65148,
+            65527
+          ],
+          "country_boundary_ids": [],
+          "covering_owners": [
+            48597
+          ],
+          "declared_sids": [
+            65148,
+            65527
+          ],
+          "flags": [
+            "foreign-reference-country"
+          ],
+          "hold_reasons": [
+            "foreign-reference-country"
+          ],
+          "owner": 48597,
+          "package": "repair-evaluation",
+          "physical": "land",
+          "qualified": false,
+          "reference_countries": [
+            "LAO"
+          ],
+          "source_boundary_ids": [],
+          "territorial_hold_reasons": [
+            "foreign-reference-country"
+          ],
+          "x": 207103,
+          "y": 115842
+        },
+        "original_VNM_existing_Atlas_location": {
+          "id": "gb:VNM:ADM2:81297802B72565329345275",
+          "index": 48597,
+          "bounds": [
+            207093.66226666665,
+            115706.29028767927,
+            207458.14583055553,
+            115927.06320501858
+          ],
+          "province_id": "framework:province:thanh-hoa:d4ffcc7255ac",
+          "province_index": 4577,
+          "name": "Muong Lat",
+          "reference_owner": "Viet Nam",
+          "source_id": "gb:VNM:ADM2",
+          "source_atoms": [
+            "gb:VNM:ADM2:81297802B72565329345275"
+          ]
+        },
+        "original_VNM_positive_source_atoms": [
+          {
+            "source_index": 65527,
+            "family_index": 354,
+            "source_id": "gb:VNM:ADM2:81297802B72565329345275",
+            "ordinal": 371,
+            "owners": [
+              48597
+            ],
+            "name": "Muong Lat",
+            "geometry_status": "raw-native-supported"
+          }
+        ],
+        "longitude": 104.38950893708568,
+        "latitude": 20.477479504952345,
+        "official_country_status": "neither-official-country",
+        "VNM_GSO_2025_contacts": [],
+        "neighbor_government_COD_2019_LAO_or2018_KHM_country_contacts": [],
+        "neighbor_government_ADM2_contacts": [],
+        "original_foreign_ADM2_positive_contacts": [],
+        "original_foreign_ADM2_negative_reused": null,
+        "current89ff_eight_applicable_foreign_map_contacts": [],
+        "boundary_ties": {
+          "VNM": [],
+          "neighbor_country": [],
+          "neighbor_district": [],
+          "original_foreign": [],
+          "current8map": []
+        },
+        "supported_location_proposal": null,
+        "factual_remaining_question": "Neither complete official country dataset includes the centre. Need positive applicable local location/country evidence, preserving originalVNMsource and foreign witnesses.",
+        "proposal_only": true,
+        "current_native_owner_zero_checked": false,
+        "ownership_mutation": false,
+        "repair_credit": 0
+      },
+      "prior_status": "neither-official-country",
+      "prior_record_locator": {
+        "path": "bulk-completion/vn-lao-khm178/official-gap21-unresolved.json",
+        "records_array_index": 3
+      },
+      "original_key": {
+        "owner": 48597,
+        "y": 115842,
+        "x": 207103
+      },
+      "longitude": 104.38950893708568,
+      "latitude": 20.477479504952345,
+      "official_new_country_contacts": [
+        {
+          "country": "LAO",
+          "WP_ID": "28ca6d68-ef25-4567-ae37-81647849455d",
+          "source_feature_id": "DoS_WP_High_Resolution.212514"
+        }
+      ],
+      "official_new_country_boundary_contacts": [],
+      "new_country_disposition": "LAO-only",
+      "supported_existing_location_proposal": null,
+      "proposal_only": true,
+      "qualified_cells": 0,
+      "accepted_repair_credit": 0,
+      "prior_mainland_only_disposition": "LAO-only",
+      "additional_whole_Vietnam_component": {
+        "source_feature_id": "DoS_WP_High_Resolution.349076",
+        "WP_ID": "535ebfe0-a1de-460e-ae4f-fa7d8fc7d097",
+        "inside": false,
+        "boundary_contacts": []
+      }
+    },
+    {
+      "original_record_and_all_prior_country_source_facts_unchanged": {
+        "original_key": {
+          "owner": 48597,
+          "y": 115847,
+          "x": 207095
+        },
+        "original_bank_index": 8435,
+        "original_record": {
+          "accepted_geometry_covers": false,
+          "accepted_hole_covers": false,
+          "actual_sids": [
+            65527
+          ],
+          "country_boundary_ids": [],
+          "covering_owners": [
+            48597
+          ],
+          "declared_sids": [
+            65527
+          ],
+          "flags": [
+            "foreign-reference-country"
+          ],
+          "hold_reasons": [
+            "foreign-reference-country"
+          ],
+          "owner": 48597,
+          "package": "repair-evaluation",
+          "physical": "land",
+          "qualified": false,
+          "reference_countries": [
+            "LAO"
+          ],
+          "source_boundary_ids": [],
+          "territorial_hold_reasons": [
+            "foreign-reference-country"
+          ],
+          "x": 207095,
+          "y": 115847
+        },
+        "original_VNM_existing_Atlas_location": {
+          "id": "gb:VNM:ADM2:81297802B72565329345275",
+          "index": 48597,
+          "bounds": [
+            207093.66226666665,
+            115706.29028767927,
+            207458.14583055553,
+            115927.06320501858
+          ],
+          "province_id": "framework:province:thanh-hoa:d4ffcc7255ac",
+          "province_index": 4577,
+          "name": "Muong Lat",
+          "reference_owner": "Viet Nam",
+          "source_id": "gb:VNM:ADM2",
+          "source_atoms": [
+            "gb:VNM:ADM2:81297802B72565329345275"
+          ]
+        },
+        "original_VNM_positive_source_atoms": [
+          {
+            "source_index": 65527,
+            "family_index": 354,
+            "source_id": "gb:VNM:ADM2:81297802B72565329345275",
+            "ordinal": 371,
+            "owners": [
+              48597
+            ],
+            "name": "Muong Lat",
+            "geometry_status": "raw-native-supported"
+          }
+        ],
+        "longitude": 104.37852353089261,
+        "latitude": 20.47104734774853,
+        "official_country_status": "neither-official-country",
+        "VNM_GSO_2025_contacts": [],
+        "neighbor_government_COD_2019_LAO_or2018_KHM_country_contacts": [],
+        "neighbor_government_ADM2_contacts": [],
+        "original_foreign_ADM2_positive_contacts": [],
+        "original_foreign_ADM2_negative_reused": null,
+        "current89ff_eight_applicable_foreign_map_contacts": [],
+        "boundary_ties": {
+          "VNM": [],
+          "neighbor_country": [],
+          "neighbor_district": [],
+          "original_foreign": [],
+          "current8map": []
+        },
+        "supported_location_proposal": null,
+        "factual_remaining_question": "Neither complete official country dataset includes the centre. Need positive applicable local location/country evidence, preserving originalVNMsource and foreign witnesses.",
+        "proposal_only": true,
+        "current_native_owner_zero_checked": false,
+        "ownership_mutation": false,
+        "repair_credit": 0
+      },
+      "prior_status": "neither-official-country",
+      "prior_record_locator": {
+        "path": "bulk-completion/vn-lao-khm178/official-gap21-unresolved.json",
+        "records_array_index": 4
+      },
+      "original_key": {
+        "owner": 48597,
+        "y": 115847,
+        "x": 207095
+      },
+      "longitude": 104.37852353089261,
+      "latitude": 20.47104734774853,
+      "official_new_country_contacts": [
+        {
+          "country": "LAO",
+          "WP_ID": "28ca6d68-ef25-4567-ae37-81647849455d",
+          "source_feature_id": "DoS_WP_High_Resolution.212514"
+        }
+      ],
+      "official_new_country_boundary_contacts": [],
+      "new_country_disposition": "LAO-only",
+      "supported_existing_location_proposal": null,
+      "proposal_only": true,
+      "qualified_cells": 0,
+      "accepted_repair_credit": 0,
+      "prior_mainland_only_disposition": "LAO-only",
+      "additional_whole_Vietnam_component": {
+        "source_feature_id": "DoS_WP_High_Resolution.349076",
+        "WP_ID": "535ebfe0-a1de-460e-ae4f-fa7d8fc7d097",
+        "inside": false,
+        "boundary_contacts": []
+      }
+    },
+    {
+      "original_record_and_all_prior_country_source_facts_unchanged": {
+        "original_key": {
+          "owner": 48479,
+          "y": 118957,
+          "x": 208819
+        },
+        "original_bank_index": 9630,
+        "original_record": {
+          "accepted_geometry_covers": false,
+          "accepted_hole_covers": false,
+          "actual_sids": [
+            41312,
+            65142,
+            65428
+          ],
+          "country_boundary_ids": [],
+          "covering_owners": [
+            48479
+          ],
+          "declared_sids": [
+            41312,
+            65142,
+            65428
+          ],
+          "flags": [
+            "foreign-reference-country",
+            "foreign-source-family"
+          ],
+          "hold_reasons": [
+            "foreign-reference-country",
+            "foreign-source-family"
+          ],
+          "owner": 48479,
+          "package": "repair-evaluation",
+          "physical": "land",
+          "qualified": false,
+          "reference_countries": [
+            "LAO"
+          ],
+          "source_boundary_ids": [],
+          "territorial_hold_reasons": [
+            "foreign-reference-country",
+            "foreign-source-family"
+          ],
+          "x": 208819,
+          "y": 118957
+        },
+        "original_VNM_existing_Atlas_location": {
+          "id": "gb:VNM:ADM2:81297802B55643895945103",
+          "index": 48479,
+          "bounds": [
+            208650.85548277778,
+            118518.33296128351,
+            208881.34309111114,
+            118965.14557107232
+          ],
+          "province_id": "framework:province:quang-tri:e08fa03038a8",
+          "province_index": 3859,
+          "name": "Huong Hoa",
+          "reference_owner": "Viet Nam",
+          "source_id": "gb:VNM:ADM2",
+          "source_atoms": [
+            "gb:VNM:ADM2:81297802B55643895945103"
+          ]
+        },
+        "original_VNM_positive_source_atoms": [
+          {
+            "source_index": 65428,
+            "family_index": 354,
+            "source_id": "gb:VNM:ADM2:81297802B55643895945103",
+            "ordinal": 272,
+            "owners": [
+              48479
+            ],
+            "name": "Huong Hoa",
+            "geometry_status": "raw-native-supported"
+          }
+        ],
+        "longitude": 106.74587856548902,
+        "latitude": 16.420914009412993,
+        "official_country_status": "neither-official-country",
+        "VNM_GSO_2025_contacts": [],
+        "neighbor_government_COD_2019_LAO_or2018_KHM_country_contacts": [],
+        "neighbor_government_ADM2_contacts": [],
+        "original_foreign_ADM2_positive_contacts": [],
+        "original_foreign_ADM2_negative_reused": null,
+        "current89ff_eight_applicable_foreign_map_contacts": [],
+        "boundary_ties": {
+          "VNM": [],
+          "neighbor_country": [],
+          "neighbor_district": [],
+          "original_foreign": [],
+          "current8map": []
+        },
+        "supported_location_proposal": null,
+        "factual_remaining_question": "Neither complete official country dataset includes the centre. Need positive applicable local location/country evidence, preserving originalVNMsource and foreign witnesses.",
+        "proposal_only": true,
+        "current_native_owner_zero_checked": false,
+        "ownership_mutation": false,
+        "repair_credit": 0
+      },
+      "prior_status": "neither-official-country",
+      "prior_record_locator": {
+        "path": "bulk-completion/vn-lao-khm178/official-gap21-unresolved.json",
+        "records_array_index": 6
+      },
+      "original_key": {
+        "owner": 48479,
+        "y": 118957,
+        "x": 208819
+      },
+      "longitude": 106.74587856548902,
+      "latitude": 16.420914009412993,
+      "official_new_country_contacts": [
+        {
+          "country": "LAO",
+          "WP_ID": "28ca6d68-ef25-4567-ae37-81647849455d",
+          "source_feature_id": "DoS_WP_High_Resolution.212514"
+        }
+      ],
+      "official_new_country_boundary_contacts": [],
+      "new_country_disposition": "LAO-only",
+      "supported_existing_location_proposal": null,
+      "proposal_only": true,
+      "qualified_cells": 0,
+      "accepted_repair_credit": 0,
+      "prior_mainland_only_disposition": "LAO-only",
+      "additional_whole_Vietnam_component": {
+        "source_feature_id": "DoS_WP_High_Resolution.349076",
+        "WP_ID": "535ebfe0-a1de-460e-ae4f-fa7d8fc7d097",
+        "inside": false,
+        "boundary_contacts": []
+      }
+    },
+    {
+      "original_record_and_all_prior_country_source_facts_unchanged": {
+        "original_key": {
+          "owner": 48352,
+          "y": 122464,
+          "x": 208350
+        },
+        "original_bank_index": 13110,
+        "original_record": {
+          "accepted_geometry_covers": false,
+          "accepted_hole_covers": false,
+          "actual_sids": [
+            65145,
+            65686
+          ],
+          "country_boundary_ids": [],
+          "covering_owners": [
+            48352
+          ],
+          "declared_sids": [
+            65145,
+            65686
+          ],
+          "flags": [
+            "foreign-reference-country"
+          ],
+          "hold_reasons": [
+            "foreign-reference-country"
+          ],
+          "owner": 48352,
+          "package": "repair-evaluation",
+          "physical": "land",
+          "qualified": false,
+          "reference_countries": [
+            "KHM"
+          ],
+          "source_boundary_ids": [],
+          "territorial_hold_reasons": [
+            "foreign-reference-country"
+          ],
+          "x": 208350,
+          "y": 122464
+        },
+        "original_VNM_existing_Atlas_location": {
+          "id": "gb:VNM:ADM2:81297802B37342354446447",
+          "index": 48352,
+          "bounds": [
+            208137.88400944442,
+            122443.93031590876,
+            208365.74995777776,
+            122725.3805839174
+          ],
+          "province_id": "framework:province:tay-ninh:ce04ab3eb69e",
+          "province_index": 4536,
+          "name": "Tan Bien",
+          "reference_owner": "Viet Nam",
+          "source_id": "gb:VNM:ADM2",
+          "source_atoms": [
+            "gb:VNM:ADM2:81297802B37342354446447"
+          ]
+        },
+        "original_VNM_positive_source_atoms": [
+          {
+            "source_index": 65686,
+            "family_index": 354,
+            "source_id": "gb:VNM:ADM2:81297802B37342354446447",
+            "ordinal": 530,
+            "owners": [
+              48352
+            ],
+            "name": "Tan Bien",
+            "geometry_status": "raw-native-supported"
+          }
+        ],
+        "longitude": 106.1018591274231,
+        "latitude": 11.751447619985974,
+        "official_country_status": "neither-official-country",
+        "VNM_GSO_2025_contacts": [],
+        "neighbor_government_COD_2019_LAO_or2018_KHM_country_contacts": [],
+        "neighbor_government_ADM2_contacts": [],
+        "original_foreign_ADM2_positive_contacts": [],
+        "original_foreign_ADM2_negative_reused": null,
+        "current89ff_eight_applicable_foreign_map_contacts": [],
+        "boundary_ties": {
+          "VNM": [],
+          "neighbor_country": [],
+          "neighbor_district": [],
+          "original_foreign": [],
+          "current8map": []
+        },
+        "supported_location_proposal": null,
+        "factual_remaining_question": "Neither complete official country dataset includes the centre. Need positive applicable local location/country evidence, preserving originalVNMsource and foreign witnesses.",
+        "proposal_only": true,
+        "current_native_owner_zero_checked": false,
+        "ownership_mutation": false,
+        "repair_credit": 0
+      },
+      "prior_status": "neither-official-country",
+      "prior_record_locator": {
+        "path": "bulk-completion/vn-lao-khm178/official-gap21-unresolved.json",
+        "records_array_index": 7
+      },
+      "original_key": {
+        "owner": 48352,
+        "y": 122464,
+        "x": 208350
+      },
+      "longitude": 106.1018591274231,
+      "latitude": 11.751447619985974,
+      "official_new_country_contacts": [
+        {
+          "country": "KHM",
+          "WP_ID": "ee1a5616-4c18-4325-8011-a2533b7df777",
+          "source_feature_id": "DoS_WP_High_Resolution.18239"
+        }
+      ],
+      "official_new_country_boundary_contacts": [],
+      "new_country_disposition": "KHM-only",
+      "supported_existing_location_proposal": null,
+      "proposal_only": true,
+      "qualified_cells": 0,
+      "accepted_repair_credit": 0,
+      "prior_mainland_only_disposition": "KHM-only",
+      "additional_whole_Vietnam_component": {
+        "source_feature_id": "DoS_WP_High_Resolution.349076",
+        "WP_ID": "535ebfe0-a1de-460e-ae4f-fa7d8fc7d097",
+        "inside": false,
+        "boundary_contacts": []
+      }
+    },
+    {
+      "original_record_and_all_prior_country_source_facts_unchanged": {
+        "original_key": {
+          "owner": 48575,
+          "y": 122485,
+          "x": 208464
+        },
+        "original_bank_index": 13137,
+        "original_record": {
+          "accepted_geometry_covers": false,
+          "accepted_hole_covers": false,
+          "actual_sids": [
+            65688
+          ],
+          "country_boundary_ids": [],
+          "covering_owners": [
+            48575
+          ],
+          "declared_sids": [
+            65688
+          ],
+          "flags": [
+            "foreign-reference-country"
+          ],
+          "hold_reasons": [
+            "foreign-reference-country"
+          ],
+          "owner": 48575,
+          "package": "repair-evaluation",
+          "physical": "land",
+          "qualified": false,
+          "reference_countries": [
+            "KHM"
+          ],
+          "source_boundary_ids": [],
+          "territorial_hold_reasons": [
+            "foreign-reference-country"
+          ],
+          "x": 208464,
+          "y": 122485
+        },
+        "original_VNM_existing_Atlas_location": {
+          "id": "gb:VNM:ADM2:81297802B68440719308655",
+          "index": 48575,
+          "bounds": [
+            208356.13720444444,
+            122463.12214082245,
+            208634.90705111108,
+            122719.95736870299
+          ],
+          "province_id": "framework:province:tay-ninh:ce04ab3eb69e",
+          "province_index": 4536,
+          "name": "Tan Chau",
+          "reference_owner": "Viet Nam",
+          "source_id": "gb:VNM:ADM2",
+          "source_atoms": [
+            "gb:VNM:ADM2:81297802B68440719308655"
+          ]
+        },
+        "original_VNM_positive_source_atoms": [
+          {
+            "source_index": 65688,
+            "family_index": 354,
+            "source_id": "gb:VNM:ADM2:81297802B68440719308655",
+            "ordinal": 532,
+            "owners": [
+              48575
+            ],
+            "name": "Tan Chau",
+            "geometry_status": "raw-native-supported"
+          }
+        ],
+        "longitude": 106.25840116567366,
+        "latitude": 11.723213890475026,
+        "official_country_status": "neither-official-country",
+        "VNM_GSO_2025_contacts": [],
+        "neighbor_government_COD_2019_LAO_or2018_KHM_country_contacts": [],
+        "neighbor_government_ADM2_contacts": [],
+        "original_foreign_ADM2_positive_contacts": [],
+        "original_foreign_ADM2_negative_reused": null,
+        "current89ff_eight_applicable_foreign_map_contacts": [],
+        "boundary_ties": {
+          "VNM": [],
+          "neighbor_country": [],
+          "neighbor_district": [],
+          "original_foreign": [],
+          "current8map": []
+        },
+        "supported_location_proposal": null,
+        "factual_remaining_question": "Neither complete official country dataset includes the centre. Need positive applicable local location/country evidence, preserving originalVNMsource and foreign witnesses.",
+        "proposal_only": true,
+        "current_native_owner_zero_checked": false,
+        "ownership_mutation": false,
+        "repair_credit": 0
+      },
+      "prior_status": "neither-official-country",
+      "prior_record_locator": {
+        "path": "bulk-completion/vn-lao-khm178/official-gap21-unresolved.json",
+        "records_array_index": 8
+      },
+      "original_key": {
+        "owner": 48575,
+        "y": 122485,
+        "x": 208464
+      },
+      "longitude": 106.25840116567366,
+      "latitude": 11.723213890475026,
+      "official_new_country_contacts": [
+        {
+          "country": "KHM",
+          "WP_ID": "ee1a5616-4c18-4325-8011-a2533b7df777",
+          "source_feature_id": "DoS_WP_High_Resolution.18239"
+        }
+      ],
+      "official_new_country_boundary_contacts": [],
+      "new_country_disposition": "KHM-only",
+      "supported_existing_location_proposal": null,
+      "proposal_only": true,
+      "qualified_cells": 0,
+      "accepted_repair_credit": 0,
+      "prior_mainland_only_disposition": "KHM-only",
+      "additional_whole_Vietnam_component": {
+        "source_feature_id": "DoS_WP_High_Resolution.349076",
+        "WP_ID": "535ebfe0-a1de-460e-ae4f-fa7d8fc7d097",
+        "inside": false,
+        "boundary_contacts": []
+      }
+    },
+    {
+      "original_record_and_all_prior_country_source_facts_unchanged": {
+        "original_key": {
+          "owner": 48575,
+          "y": 122486,
+          "x": 208466
+        },
+        "original_bank_index": 13140,
+        "original_record": {
+          "accepted_geometry_covers": false,
+          "accepted_hole_covers": false,
+          "actual_sids": [
+            65688
+          ],
+          "country_boundary_ids": [],
+          "covering_owners": [
+            48575
+          ],
+          "declared_sids": [
+            65688
+          ],
+          "flags": [
+            "foreign-reference-country"
+          ],
+          "hold_reasons": [
+            "foreign-reference-country"
+          ],
+          "owner": 48575,
+          "package": "repair-evaluation",
+          "physical": "land",
+          "qualified": false,
+          "reference_countries": [
+            "KHM"
+          ],
+          "source_boundary_ids": [],
+          "territorial_hold_reasons": [
+            "foreign-reference-country"
+          ],
+          "x": 208466,
+          "y": 122486
+        },
+        "original_VNM_existing_Atlas_location": {
+          "id": "gb:VNM:ADM2:81297802B68440719308655",
+          "index": 48575,
+          "bounds": [
+            208356.13720444444,
+            122463.12214082245,
+            208634.90705111108,
+            122719.95736870299
+          ],
+          "province_id": "framework:province:tay-ninh:ce04ab3eb69e",
+          "province_index": 4536,
+          "name": "Tan Chau",
+          "reference_owner": "Viet Nam",
+          "source_id": "gb:VNM:ADM2",
+          "source_atoms": [
+            "gb:VNM:ADM2:81297802B68440719308655"
+          ]
+        },
+        "original_VNM_positive_source_atoms": [
+          {
+            "source_index": 65688,
+            "family_index": 354,
+            "source_id": "gb:VNM:ADM2:81297802B68440719308655",
+            "ordinal": 532,
+            "owners": [
+              48575
+            ],
+            "name": "Tan Chau",
+            "geometry_status": "raw-native-supported"
+          }
+        ],
+        "longitude": 106.26114751722196,
+        "latitude": 11.7218693550924,
+        "official_country_status": "neither-official-country",
+        "VNM_GSO_2025_contacts": [],
+        "neighbor_government_COD_2019_LAO_or2018_KHM_country_contacts": [],
+        "neighbor_government_ADM2_contacts": [],
+        "original_foreign_ADM2_positive_contacts": [],
+        "original_foreign_ADM2_negative_reused": null,
+        "current89ff_eight_applicable_foreign_map_contacts": [],
+        "boundary_ties": {
+          "VNM": [],
+          "neighbor_country": [],
+          "neighbor_district": [],
+          "original_foreign": [],
+          "current8map": []
+        },
+        "supported_location_proposal": null,
+        "factual_remaining_question": "Neither complete official country dataset includes the centre. Need positive applicable local location/country evidence, preserving originalVNMsource and foreign witnesses.",
+        "proposal_only": true,
+        "current_native_owner_zero_checked": false,
+        "ownership_mutation": false,
+        "repair_credit": 0
+      },
+      "prior_status": "neither-official-country",
+      "prior_record_locator": {
+        "path": "bulk-completion/vn-lao-khm178/official-gap21-unresolved.json",
+        "records_array_index": 9
+      },
+      "original_key": {
+        "owner": 48575,
+        "y": 122486,
+        "x": 208466
+      },
+      "longitude": 106.26114751722196,
+      "latitude": 11.7218693550924,
+      "official_new_country_contacts": [
+        {
+          "country": "KHM",
+          "WP_ID": "ee1a5616-4c18-4325-8011-a2533b7df777",
+          "source_feature_id": "DoS_WP_High_Resolution.18239"
+        }
+      ],
+      "official_new_country_boundary_contacts": [],
+      "new_country_disposition": "KHM-only",
+      "supported_existing_location_proposal": null,
+      "proposal_only": true,
+      "qualified_cells": 0,
+      "accepted_repair_credit": 0,
+      "prior_mainland_only_disposition": "KHM-only",
+      "additional_whole_Vietnam_component": {
+        "source_feature_id": "DoS_WP_High_Resolution.349076",
+        "WP_ID": "535ebfe0-a1de-460e-ae4f-fa7d8fc7d097",
+        "inside": false,
+        "boundary_contacts": []
+      }
+    },
+    {
+      "original_record_and_all_prior_country_source_facts_unchanged": {
+        "original_key": {
+          "owner": 48575,
+          "y": 122488,
+          "x": 208470
+        },
+        "original_bank_index": 13142,
+        "original_record": {
+          "accepted_geometry_covers": false,
+          "accepted_hole_covers": false,
+          "actual_sids": [
+            65688
+          ],
+          "country_boundary_ids": [],
+          "covering_owners": [
+            48575
+          ],
+          "declared_sids": [
+            65688
+          ],
+          "flags": [
+            "foreign-reference-country"
+          ],
+          "hold_reasons": [
+            "foreign-reference-country"
+          ],
+          "owner": 48575,
+          "package": "repair-evaluation",
+          "physical": "land",
+          "qualified": false,
+          "reference_countries": [
+            "KHM"
+          ],
+          "source_boundary_ids": [],
+          "territorial_hold_reasons": [
+            "foreign-reference-country"
+          ],
+          "x": 208470,
+          "y": 122488
+        },
+        "original_VNM_existing_Atlas_location": {
+          "id": "gb:VNM:ADM2:81297802B68440719308655",
+          "index": 48575,
+          "bounds": [
+            208356.13720444444,
+            122463.12214082245,
+            208634.90705111108,
+            122719.95736870299
+          ],
+          "province_id": "framework:province:tay-ninh:ce04ab3eb69e",
+          "province_index": 4536,
+          "name": "Tan Chau",
+          "reference_owner": "Viet Nam",
+          "source_id": "gb:VNM:ADM2",
+          "source_atoms": [
+            "gb:VNM:ADM2:81297802B68440719308655"
+          ]
+        },
+        "original_VNM_positive_source_atoms": [
+          {
+            "source_index": 65688,
+            "family_index": 354,
+            "source_id": "gb:VNM:ADM2:81297802B68440719308655",
+            "ordinal": 532,
+            "owners": [
+              48575
+            ],
+            "name": "Tan Chau",
+            "geometry_status": "raw-native-supported"
+          }
+        ],
+        "longitude": 106.26664022031838,
+        "latitude": 11.71918026468799,
+        "official_country_status": "neither-official-country",
+        "VNM_GSO_2025_contacts": [],
+        "neighbor_government_COD_2019_LAO_or2018_KHM_country_contacts": [],
+        "neighbor_government_ADM2_contacts": [],
+        "original_foreign_ADM2_positive_contacts": [],
+        "original_foreign_ADM2_negative_reused": null,
+        "current89ff_eight_applicable_foreign_map_contacts": [],
+        "boundary_ties": {
+          "VNM": [],
+          "neighbor_country": [],
+          "neighbor_district": [],
+          "original_foreign": [],
+          "current8map": []
+        },
+        "supported_location_proposal": null,
+        "factual_remaining_question": "Neither complete official country dataset includes the centre. Need positive applicable local location/country evidence, preserving originalVNMsource and foreign witnesses.",
+        "proposal_only": true,
+        "current_native_owner_zero_checked": false,
+        "ownership_mutation": false,
+        "repair_credit": 0
+      },
+      "prior_status": "neither-official-country",
+      "prior_record_locator": {
+        "path": "bulk-completion/vn-lao-khm178/official-gap21-unresolved.json",
+        "records_array_index": 10
+      },
+      "original_key": {
+        "owner": 48575,
+        "y": 122488,
+        "x": 208470
+      },
+      "longitude": 106.26664022031838,
+      "latitude": 11.71918026468799,
+      "official_new_country_contacts": [
+        {
+          "country": "KHM",
+          "WP_ID": "ee1a5616-4c18-4325-8011-a2533b7df777",
+          "source_feature_id": "DoS_WP_High_Resolution.18239"
+        }
+      ],
+      "official_new_country_boundary_contacts": [],
+      "new_country_disposition": "KHM-only",
+      "supported_existing_location_proposal": null,
+      "proposal_only": true,
+      "qualified_cells": 0,
+      "accepted_repair_credit": 0,
+      "prior_mainland_only_disposition": "KHM-only",
+      "additional_whole_Vietnam_component": {
+        "source_feature_id": "DoS_WP_High_Resolution.349076",
+        "WP_ID": "535ebfe0-a1de-460e-ae4f-fa7d8fc7d097",
+        "inside": false,
+        "boundary_contacts": []
+      }
+    },
+    {
+      "original_record_and_all_prior_country_source_facts_unchanged": {
+        "original_key": {
+          "owner": 48575,
+          "y": 122492,
+          "x": 208471
+        },
+        "original_bank_index": 13148,
+        "original_record": {
+          "accepted_geometry_covers": false,
+          "accepted_hole_covers": false,
+          "actual_sids": [
+            65145,
+            65688
+          ],
+          "country_boundary_ids": [],
+          "covering_owners": [
+            48575
+          ],
+          "declared_sids": [
+            65145,
+            65688
+          ],
+          "flags": [
+            "foreign-reference-country"
+          ],
+          "hold_reasons": [
+            "foreign-reference-country"
+          ],
+          "owner": 48575,
+          "package": "repair-evaluation",
+          "physical": "land",
+          "qualified": false,
+          "reference_countries": [
+            "KHM"
+          ],
+          "source_boundary_ids": [],
+          "territorial_hold_reasons": [
+            "foreign-reference-country"
+          ],
+          "x": 208471,
+          "y": 122492
+        },
+        "original_VNM_existing_Atlas_location": {
+          "id": "gb:VNM:ADM2:81297802B68440719308655",
+          "index": 48575,
+          "bounds": [
+            208356.13720444444,
+            122463.12214082245,
+            208634.90705111108,
+            122719.95736870299
+          ],
+          "province_id": "framework:province:tay-ninh:ce04ab3eb69e",
+          "province_index": 4536,
+          "name": "Tan Chau",
+          "reference_owner": "Viet Nam",
+          "source_id": "gb:VNM:ADM2",
+          "source_atoms": [
+            "gb:VNM:ADM2:81297802B68440719308655"
+          ]
+        },
+        "original_VNM_positive_source_atoms": [
+          {
+            "source_index": 65688,
+            "family_index": 354,
+            "source_id": "gb:VNM:ADM2:81297802B68440719308655",
+            "ordinal": 532,
+            "owners": [
+              48575
+            ],
+            "name": "Tan Chau",
+            "geometry_status": "raw-native-supported"
+          }
+        ],
+        "longitude": 106.26801339609256,
+        "latitude": 11.713802005342393,
+        "official_country_status": "neither-official-country",
+        "VNM_GSO_2025_contacts": [],
+        "neighbor_government_COD_2019_LAO_or2018_KHM_country_contacts": [],
+        "neighbor_government_ADM2_contacts": [],
+        "original_foreign_ADM2_positive_contacts": [],
+        "original_foreign_ADM2_negative_reused": null,
+        "current89ff_eight_applicable_foreign_map_contacts": [],
+        "boundary_ties": {
+          "VNM": [],
+          "neighbor_country": [],
+          "neighbor_district": [],
+          "original_foreign": [],
+          "current8map": []
+        },
+        "supported_location_proposal": null,
+        "factual_remaining_question": "Neither complete official country dataset includes the centre. Need positive applicable local location/country evidence, preserving originalVNMsource and foreign witnesses.",
+        "proposal_only": true,
+        "current_native_owner_zero_checked": false,
+        "ownership_mutation": false,
+        "repair_credit": 0
+      },
+      "prior_status": "neither-official-country",
+      "prior_record_locator": {
+        "path": "bulk-completion/vn-lao-khm178/official-gap21-unresolved.json",
+        "records_array_index": 11
+      },
+      "original_key": {
+        "owner": 48575,
+        "y": 122492,
+        "x": 208471
+      },
+      "longitude": 106.26801339609256,
+      "latitude": 11.713802005342393,
+      "official_new_country_contacts": [
+        {
+          "country": "KHM",
+          "WP_ID": "ee1a5616-4c18-4325-8011-a2533b7df777",
+          "source_feature_id": "DoS_WP_High_Resolution.18239"
+        }
+      ],
+      "official_new_country_boundary_contacts": [],
+      "new_country_disposition": "KHM-only",
+      "supported_existing_location_proposal": null,
+      "proposal_only": true,
+      "qualified_cells": 0,
+      "accepted_repair_credit": 0,
+      "prior_mainland_only_disposition": "KHM-only",
+      "additional_whole_Vietnam_component": {
+        "source_feature_id": "DoS_WP_High_Resolution.349076",
+        "WP_ID": "535ebfe0-a1de-460e-ae4f-fa7d8fc7d097",
+        "inside": false,
+        "boundary_contacts": []
+      }
+    },
+    {
+      "original_record_and_all_prior_country_source_facts_unchanged": {
+        "original_key": {
+          "owner": 48516,
+          "y": 122965,
+          "x": 208401
+        },
+        "original_bank_index": 13525,
+        "original_record": {
+          "accepted_geometry_covers": false,
+          "accepted_hole_covers": false,
+          "actual_sids": [
+            40831,
+            65145,
+            65202
+          ],
+          "country_boundary_ids": [],
+          "covering_owners": [
+            48516
+          ],
+          "declared_sids": [
+            40831,
+            65145,
+            65202
+          ],
+          "flags": [
+            "foreign-source-family"
+          ],
+          "hold_reasons": [
+            "foreign-source-family"
+          ],
+          "owner": 48516,
+          "package": "repair-evaluation",
+          "physical": "land",
+          "qualified": false,
+          "reference_countries": [
+            "VNM"
+          ],
+          "source_boundary_ids": [],
+          "territorial_hold_reasons": [
+            "foreign-source-family"
+          ],
+          "x": 208401,
+          "y": 122965
+        },
+        "original_VNM_existing_Atlas_location": {
+          "id": "gb:VNM:ADM2:81297802B61263365113672",
+          "index": 48516,
+          "bounds": [
+            208286.8816861111,
+            122869.15667341066,
+            208472.43695499998,
+            122983.90041970997
+          ],
+          "province_id": "framework:province:tay-ninh:ce04ab3eb69e",
+          "province_index": 4536,
+          "name": "Ben Cau",
+          "reference_owner": "Viet Nam",
+          "source_id": "gb:VNM:ADM2",
+          "source_atoms": [
+            "gb:VNM:ADM2:81297802B61263365113672"
+          ]
+        },
+        "original_VNM_positive_source_atoms": [
+          {
+            "source_index": 65202,
+            "family_index": 354,
+            "source_id": "gb:VNM:ADM2:81297802B61263365113672",
+            "ordinal": 46,
+            "owners": [
+              48516
+            ],
+            "name": "Ben Cau",
+            "geometry_status": "raw-native-supported"
+          }
+        ],
+        "longitude": 106.1718910919036,
+        "latitude": 11.07709732431809,
+        "official_country_status": "neither-official-country",
+        "VNM_GSO_2025_contacts": [],
+        "neighbor_government_COD_2019_LAO_or2018_KHM_country_contacts": [],
+        "neighbor_government_ADM2_contacts": [],
+        "original_foreign_ADM2_positive_contacts": [],
+        "original_foreign_ADM2_negative_reused": {
+          "path": "vietnam-next/repair-package/cambodia-resolution/bencau-membership-admission-20261015/execution-001/one-row-result.json",
+          "sha256": "68fe13434db3004ee63cb26d2c246539410525ecb132d054363208b282e663f4",
+          "review": "vietnam-next/repair-package/cambodia-resolution/bencau-membership-admission-20261015/independent-actual-review/review.md"
+        },
+        "current89ff_eight_applicable_foreign_map_contacts": [],
+        "boundary_ties": {
+          "VNM": [],
+          "neighbor_country": [],
+          "neighbor_district": [],
+          "original_foreign": [],
+          "current8map": []
+        },
+        "supported_location_proposal": null,
+        "factual_remaining_question": "Neither complete official country dataset includes the centre. Need positive applicable local location/country evidence, preserving originalVNMsource and foreign witnesses.",
+        "proposal_only": true,
+        "current_native_owner_zero_checked": false,
+        "ownership_mutation": false,
+        "repair_credit": 0
+      },
+      "prior_status": "neither-official-country",
+      "prior_record_locator": {
+        "path": "bulk-completion/vn-lao-khm178/official-gap21-unresolved.json",
+        "records_array_index": 12
+      },
+      "original_key": {
+        "owner": 48516,
+        "y": 122965,
+        "x": 208401
+      },
+      "longitude": 106.1718910919036,
+      "latitude": 11.07709732431809,
+      "official_new_country_contacts": [
+        {
+          "country": "KHM",
+          "WP_ID": "ee1a5616-4c18-4325-8011-a2533b7df777",
+          "source_feature_id": "DoS_WP_High_Resolution.18239"
+        }
+      ],
+      "official_new_country_boundary_contacts": [],
+      "new_country_disposition": "KHM-only",
+      "supported_existing_location_proposal": null,
+      "proposal_only": true,
+      "qualified_cells": 0,
+      "accepted_repair_credit": 0,
+      "prior_mainland_only_disposition": "KHM-only",
+      "additional_whole_Vietnam_component": {
+        "source_feature_id": "DoS_WP_High_Resolution.349076",
+        "WP_ID": "535ebfe0-a1de-460e-ae4f-fa7d8fc7d097",
+        "inside": false,
+        "boundary_contacts": []
+      }
+    },
+    {
+      "original_record_and_all_prior_country_source_facts_unchanged": {
+        "original_key": {
+          "owner": 48373,
+          "y": 123052,
+          "x": 207626
+        },
+        "original_bank_index": 13583,
+        "original_record": {
+          "accepted_geometry_covers": false,
+          "accepted_hole_covers": false,
+          "actual_sids": [
+            40818,
+            65164
+          ],
+          "country_boundary_ids": [],
+          "covering_owners": [
+            48373
+          ],
+          "declared_sids": [
+            40818,
+            65164
+          ],
+          "flags": [
+            "foreign-reference-country",
+            "foreign-source-family"
+          ],
+          "hold_reasons": [
+            "foreign-reference-country",
+            "foreign-source-family"
+          ],
+          "owner": 48373,
+          "package": "repair-evaluation",
+          "physical": "inland-water",
+          "qualified": false,
+          "reference_countries": [
+            "KHM"
+          ],
+          "source_boundary_ids": [],
+          "territorial_hold_reasons": [
+            "foreign-reference-country",
+            "foreign-source-family"
+          ],
+          "x": 207626,
+          "y": 123052
+        },
+        "original_VNM_existing_Atlas_location": {
+          "id": "gb:VNM:ADM2:81297802B41294306698552",
+          "index": 48373,
+          "bounds": [
+            207568.7653177778,
+            123052.07966834502,
+            207664.74720333336,
+            123237.59258885164
+          ],
+          "province_id": "framework:province:an-giang:80041a5add12",
+          "province_index": 575,
+          "name": "An Phu",
+          "reference_owner": "Viet Nam",
+          "source_id": "gb:VNM:ADM2",
+          "source_atoms": [
+            "gb:VNM:ADM2:81297802B41294306698552"
+          ]
+        },
+        "original_VNM_positive_source_atoms": [
+          {
+            "source_index": 65164,
+            "family_index": 354,
+            "source_id": "gb:VNM:ADM2:81297802B41294306698552",
+            "ordinal": 8,
+            "owners": [
+              48373
+            ],
+            "name": "An Phu",
+            "geometry_status": "raw-native-supported"
+          }
+        ],
+        "longitude": 105.10767986695453,
+        "latitude": 10.959833338820665,
+        "official_country_status": "neither-official-country",
+        "VNM_GSO_2025_contacts": [],
+        "neighbor_government_COD_2019_LAO_or2018_KHM_country_contacts": [],
+        "neighbor_government_ADM2_contacts": [],
+        "original_foreign_ADM2_positive_contacts": [],
+        "original_foreign_ADM2_negative_reused": null,
+        "current89ff_eight_applicable_foreign_map_contacts": [],
+        "boundary_ties": {
+          "VNM": [],
+          "neighbor_country": [],
+          "neighbor_district": [],
+          "original_foreign": [],
+          "current8map": []
+        },
+        "supported_location_proposal": null,
+        "factual_remaining_question": "Neither complete official country dataset includes the centre. Need positive applicable local location/country evidence, preserving originalVNMsource and foreign witnesses.",
+        "proposal_only": true,
+        "current_native_owner_zero_checked": false,
+        "ownership_mutation": false,
+        "repair_credit": 0
+      },
+      "prior_status": "neither-official-country",
+      "prior_record_locator": {
+        "path": "bulk-completion/vn-lao-khm178/official-gap21-unresolved.json",
+        "records_array_index": 13
+      },
+      "original_key": {
+        "owner": 48373,
+        "y": 123052,
+        "x": 207626
+      },
+      "longitude": 105.10767986695453,
+      "latitude": 10.959833338820665,
+      "official_new_country_contacts": [
+        {
+          "country": "KHM",
+          "WP_ID": "ee1a5616-4c18-4325-8011-a2533b7df777",
+          "source_feature_id": "DoS_WP_High_Resolution.18239"
+        }
+      ],
+      "official_new_country_boundary_contacts": [],
+      "new_country_disposition": "KHM-only",
+      "supported_existing_location_proposal": null,
+      "proposal_only": true,
+      "qualified_cells": 0,
+      "accepted_repair_credit": 0,
+      "prior_mainland_only_disposition": "KHM-only",
+      "additional_whole_Vietnam_component": {
+        "source_feature_id": "DoS_WP_High_Resolution.349076",
+        "WP_ID": "535ebfe0-a1de-460e-ae4f-fa7d8fc7d097",
+        "inside": false,
+        "boundary_contacts": []
+      }
+    },
+    {
+      "original_record_and_all_prior_country_source_facts_unchanged": {
+        "original_key": {
+          "owner": 48373,
+          "y": 123053,
+          "x": 207624
+        },
+        "original_bank_index": 13588,
+        "original_record": {
+          "accepted_geometry_covers": false,
+          "accepted_hole_covers": false,
+          "actual_sids": [
+            40818,
+            65092,
+            65164
+          ],
+          "country_boundary_ids": [],
+          "covering_owners": [
+            48373
+          ],
+          "declared_sids": [
+            40818,
+            65092,
+            65164
+          ],
+          "flags": [
+            "foreign-reference-country",
+            "foreign-source-family"
+          ],
+          "hold_reasons": [
+            "foreign-reference-country",
+            "foreign-source-family"
+          ],
+          "owner": 48373,
+          "package": "repair-evaluation",
+          "physical": "inland-water",
+          "qualified": false,
+          "reference_countries": [
+            "KHM"
+          ],
+          "source_boundary_ids": [],
+          "territorial_hold_reasons": [
+            "foreign-reference-country",
+            "foreign-source-family"
+          ],
+          "x": 207624,
+          "y": 123053
+        },
+        "original_VNM_existing_Atlas_location": {
+          "id": "gb:VNM:ADM2:81297802B41294306698552",
+          "index": 48373,
+          "bounds": [
+            207568.7653177778,
+            123052.07966834502,
+            207664.74720333336,
+            123237.59258885164
+          ],
+          "province_id": "framework:province:an-giang:80041a5add12",
+          "province_index": 575,
+          "name": "An Phu",
+          "reference_owner": "Viet Nam",
+          "source_id": "gb:VNM:ADM2",
+          "source_atoms": [
+            "gb:VNM:ADM2:81297802B41294306698552"
+          ]
+        },
+        "original_VNM_positive_source_atoms": [
+          {
+            "source_index": 65164,
+            "family_index": 354,
+            "source_id": "gb:VNM:ADM2:81297802B41294306698552",
+            "ordinal": 8,
+            "owners": [
+              48373
+            ],
+            "name": "An Phu",
+            "geometry_status": "raw-native-supported"
+          }
+        ],
+        "longitude": 105.10493351540629,
+        "latitude": 10.958485205730481,
+        "official_country_status": "neither-official-country",
+        "VNM_GSO_2025_contacts": [],
+        "neighbor_government_COD_2019_LAO_or2018_KHM_country_contacts": [],
+        "neighbor_government_ADM2_contacts": [],
+        "original_foreign_ADM2_positive_contacts": [],
+        "original_foreign_ADM2_negative_reused": null,
+        "current89ff_eight_applicable_foreign_map_contacts": [],
+        "boundary_ties": {
+          "VNM": [],
+          "neighbor_country": [],
+          "neighbor_district": [],
+          "original_foreign": [],
+          "current8map": []
+        },
+        "supported_location_proposal": null,
+        "factual_remaining_question": "Neither complete official country dataset includes the centre. Need positive applicable local location/country evidence, preserving originalVNMsource and foreign witnesses.",
+        "proposal_only": true,
+        "current_native_owner_zero_checked": false,
+        "ownership_mutation": false,
+        "repair_credit": 0
+      },
+      "prior_status": "neither-official-country",
+      "prior_record_locator": {
+        "path": "bulk-completion/vn-lao-khm178/official-gap21-unresolved.json",
+        "records_array_index": 14
+      },
+      "original_key": {
+        "owner": 48373,
+        "y": 123053,
+        "x": 207624
+      },
+      "longitude": 105.10493351540629,
+      "latitude": 10.958485205730481,
+      "official_new_country_contacts": [
+        {
+          "country": "KHM",
+          "WP_ID": "ee1a5616-4c18-4325-8011-a2533b7df777",
+          "source_feature_id": "DoS_WP_High_Resolution.18239"
+        }
+      ],
+      "official_new_country_boundary_contacts": [],
+      "new_country_disposition": "KHM-only",
+      "supported_existing_location_proposal": null,
+      "proposal_only": true,
+      "qualified_cells": 0,
+      "accepted_repair_credit": 0,
+      "prior_mainland_only_disposition": "KHM-only",
+      "additional_whole_Vietnam_component": {
+        "source_feature_id": "DoS_WP_High_Resolution.349076",
+        "WP_ID": "535ebfe0-a1de-460e-ae4f-fa7d8fc7d097",
+        "inside": false,
+        "boundary_contacts": []
+      }
+    },
+    {
+      "original_record_and_all_prior_country_source_facts_unchanged": {
+        "original_key": {
+          "owner": 48373,
+          "y": 123053,
+          "x": 207625
+        },
+        "original_bank_index": 13589,
+        "original_record": {
+          "accepted_geometry_covers": false,
+          "accepted_hole_covers": false,
+          "actual_sids": [
+            65092,
+            65164
+          ],
+          "country_boundary_ids": [],
+          "covering_owners": [
+            48373
+          ],
+          "declared_sids": [
+            65092,
+            65164
+          ],
+          "flags": [
+            "foreign-reference-country"
+          ],
+          "hold_reasons": [
+            "foreign-reference-country",
+            "foreign-source-family"
+          ],
+          "owner": 48373,
+          "package": "repair-evaluation",
+          "physical": "inland-water",
+          "qualified": false,
+          "reference_countries": [
+            "KHM"
+          ],
+          "source_boundary_ids": [],
+          "territorial_hold_reasons": [
+            "foreign-reference-country",
+            "foreign-source-family"
+          ],
+          "x": 207625,
+          "y": 123053
+        },
+        "original_VNM_existing_Atlas_location": {
+          "id": "gb:VNM:ADM2:81297802B41294306698552",
+          "index": 48373,
+          "bounds": [
+            207568.7653177778,
+            123052.07966834502,
+            207664.74720333336,
+            123237.59258885164
+          ],
+          "province_id": "framework:province:an-giang:80041a5add12",
+          "province_index": 575,
+          "name": "An Phu",
+          "reference_owner": "Viet Nam",
+          "source_id": "gb:VNM:ADM2",
+          "source_atoms": [
+            "gb:VNM:ADM2:81297802B41294306698552"
+          ]
+        },
+        "original_VNM_positive_source_atoms": [
+          {
+            "source_index": 65164,
+            "family_index": 354,
+            "source_id": "gb:VNM:ADM2:81297802B41294306698552",
+            "ordinal": 8,
+            "owners": [
+              48373
+            ],
+            "name": "An Phu",
+            "geometry_status": "raw-native-supported"
+          }
+        ],
+        "longitude": 105.10630669118041,
+        "latitude": 10.958485205730481,
+        "official_country_status": "neither-official-country",
+        "VNM_GSO_2025_contacts": [],
+        "neighbor_government_COD_2019_LAO_or2018_KHM_country_contacts": [],
+        "neighbor_government_ADM2_contacts": [],
+        "original_foreign_ADM2_positive_contacts": [],
+        "original_foreign_ADM2_negative_reused": null,
+        "current89ff_eight_applicable_foreign_map_contacts": [],
+        "boundary_ties": {
+          "VNM": [],
+          "neighbor_country": [],
+          "neighbor_district": [],
+          "original_foreign": [],
+          "current8map": []
+        },
+        "supported_location_proposal": null,
+        "factual_remaining_question": "Neither complete official country dataset includes the centre. Need positive applicable local location/country evidence, preserving originalVNMsource and foreign witnesses.",
+        "proposal_only": true,
+        "current_native_owner_zero_checked": false,
+        "ownership_mutation": false,
+        "repair_credit": 0
+      },
+      "prior_status": "neither-official-country",
+      "prior_record_locator": {
+        "path": "bulk-completion/vn-lao-khm178/official-gap21-unresolved.json",
+        "records_array_index": 15
+      },
+      "original_key": {
+        "owner": 48373,
+        "y": 123053,
+        "x": 207625
+      },
+      "longitude": 105.10630669118041,
+      "latitude": 10.958485205730481,
+      "official_new_country_contacts": [
+        {
+          "country": "KHM",
+          "WP_ID": "ee1a5616-4c18-4325-8011-a2533b7df777",
+          "source_feature_id": "DoS_WP_High_Resolution.18239"
+        }
+      ],
+      "official_new_country_boundary_contacts": [],
+      "new_country_disposition": "KHM-only",
+      "supported_existing_location_proposal": null,
+      "proposal_only": true,
+      "qualified_cells": 0,
+      "accepted_repair_credit": 0,
+      "prior_mainland_only_disposition": "KHM-only",
+      "additional_whole_Vietnam_component": {
+        "source_feature_id": "DoS_WP_High_Resolution.349076",
+        "WP_ID": "535ebfe0-a1de-460e-ae4f-fa7d8fc7d097",
+        "inside": false,
+        "boundary_contacts": []
+      }
+    },
+    {
+      "original_record_and_all_prior_country_source_facts_unchanged": {
+        "original_key": {
+          "owner": 48373,
+          "y": 123054,
+          "x": 207622
+        },
+        "original_bank_index": 13593,
+        "original_record": {
+          "accepted_geometry_covers": false,
+          "accepted_hole_covers": false,
+          "actual_sids": [
+            40818,
+            65092,
+            65164
+          ],
+          "country_boundary_ids": [],
+          "covering_owners": [
+            48373
+          ],
+          "declared_sids": [
+            40818,
+            65092,
+            65164
+          ],
+          "flags": [
+            "foreign-reference-country",
+            "foreign-source-family"
+          ],
+          "hold_reasons": [
+            "foreign-reference-country",
+            "foreign-source-family"
+          ],
+          "owner": 48373,
+          "package": "repair-evaluation",
+          "physical": "inland-water",
+          "qualified": false,
+          "reference_countries": [
+            "KHM"
+          ],
+          "source_boundary_ids": [],
+          "territorial_hold_reasons": [
+            "foreign-reference-country",
+            "foreign-source-family"
+          ],
+          "x": 207622,
+          "y": 123054
+        },
+        "original_VNM_existing_Atlas_location": {
+          "id": "gb:VNM:ADM2:81297802B41294306698552",
+          "index": 48373,
+          "bounds": [
+            207568.7653177778,
+            123052.07966834502,
+            207664.74720333336,
+            123237.59258885164
+          ],
+          "province_id": "framework:province:an-giang:80041a5add12",
+          "province_index": 575,
+          "name": "An Phu",
+          "reference_owner": "Viet Nam",
+          "source_id": "gb:VNM:ADM2",
+          "source_atoms": [
+            "gb:VNM:ADM2:81297802B41294306698552"
+          ]
+        },
+        "original_VNM_positive_source_atoms": [
+          {
+            "source_index": 65164,
+            "family_index": 354,
+            "source_id": "gb:VNM:ADM2:81297802B41294306698552",
+            "ordinal": 8,
+            "owners": [
+              48373
+            ],
+            "name": "An Phu",
+            "geometry_status": "raw-native-supported"
+          }
+        ],
+        "longitude": 105.10218716385805,
+        "latitude": 10.95713706649823,
+        "official_country_status": "neither-official-country",
+        "VNM_GSO_2025_contacts": [],
+        "neighbor_government_COD_2019_LAO_or2018_KHM_country_contacts": [],
+        "neighbor_government_ADM2_contacts": [],
+        "original_foreign_ADM2_positive_contacts": [],
+        "original_foreign_ADM2_negative_reused": null,
+        "current89ff_eight_applicable_foreign_map_contacts": [],
+        "boundary_ties": {
+          "VNM": [],
+          "neighbor_country": [],
+          "neighbor_district": [],
+          "original_foreign": [],
+          "current8map": []
+        },
+        "supported_location_proposal": null,
+        "factual_remaining_question": "Neither complete official country dataset includes the centre. Need positive applicable local location/country evidence, preserving originalVNMsource and foreign witnesses.",
+        "proposal_only": true,
+        "current_native_owner_zero_checked": false,
+        "ownership_mutation": false,
+        "repair_credit": 0
+      },
+      "prior_status": "neither-official-country",
+      "prior_record_locator": {
+        "path": "bulk-completion/vn-lao-khm178/official-gap21-unresolved.json",
+        "records_array_index": 16
+      },
+      "original_key": {
+        "owner": 48373,
+        "y": 123054,
+        "x": 207622
+      },
+      "longitude": 105.10218716385805,
+      "latitude": 10.95713706649823,
+      "official_new_country_contacts": [
+        {
+          "country": "KHM",
+          "WP_ID": "ee1a5616-4c18-4325-8011-a2533b7df777",
+          "source_feature_id": "DoS_WP_High_Resolution.18239"
+        }
+      ],
+      "official_new_country_boundary_contacts": [],
+      "new_country_disposition": "KHM-only",
+      "supported_existing_location_proposal": null,
+      "proposal_only": true,
+      "qualified_cells": 0,
+      "accepted_repair_credit": 0,
+      "prior_mainland_only_disposition": "KHM-only",
+      "additional_whole_Vietnam_component": {
+        "source_feature_id": "DoS_WP_High_Resolution.349076",
+        "WP_ID": "535ebfe0-a1de-460e-ae4f-fa7d8fc7d097",
+        "inside": false,
+        "boundary_contacts": []
+      }
+    },
+    {
+      "original_record_and_all_prior_country_source_facts_unchanged": {
+        "original_key": {
+          "owner": 48373,
+          "y": 123054,
+          "x": 207623
+        },
+        "original_bank_index": 13594,
+        "original_record": {
+          "accepted_geometry_covers": false,
+          "accepted_hole_covers": false,
+          "actual_sids": [
+            65092,
+            65164
+          ],
+          "country_boundary_ids": [],
+          "covering_owners": [
+            48373
+          ],
+          "declared_sids": [
+            65092,
+            65164
+          ],
+          "flags": [
+            "foreign-reference-country"
+          ],
+          "hold_reasons": [
+            "foreign-reference-country",
+            "foreign-source-family"
+          ],
+          "owner": 48373,
+          "package": "repair-evaluation",
+          "physical": "inland-water",
+          "qualified": false,
+          "reference_countries": [
+            "KHM"
+          ],
+          "source_boundary_ids": [],
+          "territorial_hold_reasons": [
+            "foreign-reference-country",
+            "foreign-source-family"
+          ],
+          "x": 207623,
+          "y": 123054
+        },
+        "original_VNM_existing_Atlas_location": {
+          "id": "gb:VNM:ADM2:81297802B41294306698552",
+          "index": 48373,
+          "bounds": [
+            207568.7653177778,
+            123052.07966834502,
+            207664.74720333336,
+            123237.59258885164
+          ],
+          "province_id": "framework:province:an-giang:80041a5add12",
+          "province_index": 575,
+          "name": "An Phu",
+          "reference_owner": "Viet Nam",
+          "source_id": "gb:VNM:ADM2",
+          "source_atoms": [
+            "gb:VNM:ADM2:81297802B41294306698552"
+          ]
+        },
+        "original_VNM_positive_source_atoms": [
+          {
+            "source_index": 65164,
+            "family_index": 354,
+            "source_id": "gb:VNM:ADM2:81297802B41294306698552",
+            "ordinal": 8,
+            "owners": [
+              48373
+            ],
+            "name": "An Phu",
+            "geometry_status": "raw-native-supported"
+          }
+        ],
+        "longitude": 105.10356033963217,
+        "latitude": 10.95713706649823,
+        "official_country_status": "neither-official-country",
+        "VNM_GSO_2025_contacts": [],
+        "neighbor_government_COD_2019_LAO_or2018_KHM_country_contacts": [],
+        "neighbor_government_ADM2_contacts": [],
+        "original_foreign_ADM2_positive_contacts": [],
+        "original_foreign_ADM2_negative_reused": null,
+        "current89ff_eight_applicable_foreign_map_contacts": [],
+        "boundary_ties": {
+          "VNM": [],
+          "neighbor_country": [],
+          "neighbor_district": [],
+          "original_foreign": [],
+          "current8map": []
+        },
+        "supported_location_proposal": null,
+        "factual_remaining_question": "Neither complete official country dataset includes the centre. Need positive applicable local location/country evidence, preserving originalVNMsource and foreign witnesses.",
+        "proposal_only": true,
+        "current_native_owner_zero_checked": false,
+        "ownership_mutation": false,
+        "repair_credit": 0
+      },
+      "prior_status": "neither-official-country",
+      "prior_record_locator": {
+        "path": "bulk-completion/vn-lao-khm178/official-gap21-unresolved.json",
+        "records_array_index": 17
+      },
+      "original_key": {
+        "owner": 48373,
+        "y": 123054,
+        "x": 207623
+      },
+      "longitude": 105.10356033963217,
+      "latitude": 10.95713706649823,
+      "official_new_country_contacts": [
+        {
+          "country": "KHM",
+          "WP_ID": "ee1a5616-4c18-4325-8011-a2533b7df777",
+          "source_feature_id": "DoS_WP_High_Resolution.18239"
+        }
+      ],
+      "official_new_country_boundary_contacts": [],
+      "new_country_disposition": "KHM-only",
+      "supported_existing_location_proposal": null,
+      "proposal_only": true,
+      "qualified_cells": 0,
+      "accepted_repair_credit": 0,
+      "prior_mainland_only_disposition": "KHM-only",
+      "additional_whole_Vietnam_component": {
+        "source_feature_id": "DoS_WP_High_Resolution.349076",
+        "WP_ID": "535ebfe0-a1de-460e-ae4f-fa7d8fc7d097",
+        "inside": false,
+        "boundary_contacts": []
+      }
+    },
+    {
+      "original_record_and_all_prior_country_source_facts_unchanged": {
+        "original_key": {
+          "owner": 48373,
+          "y": 123055,
+          "x": 207620
+        },
+        "original_bank_index": 13596,
+        "original_record": {
+          "accepted_geometry_covers": false,
+          "accepted_hole_covers": false,
+          "actual_sids": [
+            40818,
+            65092,
+            65164
+          ],
+          "country_boundary_ids": [],
+          "covering_owners": [
+            48373
+          ],
+          "declared_sids": [
+            40818,
+            65092,
+            65164
+          ],
+          "flags": [
+            "foreign-reference-country",
+            "foreign-source-family"
+          ],
+          "hold_reasons": [
+            "foreign-reference-country",
+            "foreign-source-family"
+          ],
+          "owner": 48373,
+          "package": "repair-evaluation",
+          "physical": "inland-water",
+          "qualified": false,
+          "reference_countries": [
+            "KHM"
+          ],
+          "source_boundary_ids": [],
+          "territorial_hold_reasons": [
+            "foreign-reference-country",
+            "foreign-source-family"
+          ],
+          "x": 207620,
+          "y": 123055
+        },
+        "original_VNM_existing_Atlas_location": {
+          "id": "gb:VNM:ADM2:81297802B41294306698552",
+          "index": 48373,
+          "bounds": [
+            207568.7653177778,
+            123052.07966834502,
+            207664.74720333336,
+            123237.59258885164
+          ],
+          "province_id": "framework:province:an-giang:80041a5add12",
+          "province_index": 575,
+          "name": "An Phu",
+          "reference_owner": "Viet Nam",
+          "source_id": "gb:VNM:ADM2",
+          "source_atoms": [
+            "gb:VNM:ADM2:81297802B41294306698552"
+          ]
+        },
+        "original_VNM_positive_source_atoms": [
+          {
+            "source_index": 65164,
+            "family_index": 354,
+            "source_id": "gb:VNM:ADM2:81297802B41294306698552",
+            "ordinal": 8,
+            "owners": [
+              48373
+            ],
+            "name": "An Phu",
+            "geometry_status": "raw-native-supported"
+          }
+        ],
+        "longitude": 105.09944081230975,
+        "latitude": 10.95578892112464,
+        "official_country_status": "neither-official-country",
+        "VNM_GSO_2025_contacts": [],
+        "neighbor_government_COD_2019_LAO_or2018_KHM_country_contacts": [],
+        "neighbor_government_ADM2_contacts": [],
+        "original_foreign_ADM2_positive_contacts": [],
+        "original_foreign_ADM2_negative_reused": null,
+        "current89ff_eight_applicable_foreign_map_contacts": [],
+        "boundary_ties": {
+          "VNM": [],
+          "neighbor_country": [],
+          "neighbor_district": [],
+          "original_foreign": [],
+          "current8map": []
+        },
+        "supported_location_proposal": null,
+        "factual_remaining_question": "Neither complete official country dataset includes the centre. Need positive applicable local location/country evidence, preserving originalVNMsource and foreign witnesses.",
+        "proposal_only": true,
+        "current_native_owner_zero_checked": false,
+        "ownership_mutation": false,
+        "repair_credit": 0
+      },
+      "prior_status": "neither-official-country",
+      "prior_record_locator": {
+        "path": "bulk-completion/vn-lao-khm178/official-gap21-unresolved.json",
+        "records_array_index": 18
+      },
+      "original_key": {
+        "owner": 48373,
+        "y": 123055,
+        "x": 207620
+      },
+      "longitude": 105.09944081230975,
+      "latitude": 10.95578892112464,
+      "official_new_country_contacts": [
+        {
+          "country": "KHM",
+          "WP_ID": "ee1a5616-4c18-4325-8011-a2533b7df777",
+          "source_feature_id": "DoS_WP_High_Resolution.18239"
+        }
+      ],
+      "official_new_country_boundary_contacts": [],
+      "new_country_disposition": "KHM-only",
+      "supported_existing_location_proposal": null,
+      "proposal_only": true,
+      "qualified_cells": 0,
+      "accepted_repair_credit": 0,
+      "prior_mainland_only_disposition": "KHM-only",
+      "additional_whole_Vietnam_component": {
+        "source_feature_id": "DoS_WP_High_Resolution.349076",
+        "WP_ID": "535ebfe0-a1de-460e-ae4f-fa7d8fc7d097",
+        "inside": false,
+        "boundary_contacts": []
+      }
+    },
+    {
+      "original_record_and_all_prior_country_source_facts_unchanged": {
+        "original_key": {
+          "owner": 48323,
+          "y": 123094,
+          "x": 207822
+        },
+        "original_bank_index": 13652,
+        "original_record": {
+          "accepted_geometry_covers": false,
+          "accepted_hole_covers": false,
+          "actual_sids": [
+            40829,
+            65112,
+            65691
+          ],
+          "country_boundary_ids": [],
+          "covering_owners": [
+            48323
+          ],
+          "declared_sids": [
+            40829,
+            65112,
+            65691
+          ],
+          "flags": [
+            "foreign-source-family"
+          ],
+          "hold_reasons": [
+            "foreign-source-family"
+          ],
+          "owner": 48323,
+          "package": "repair-evaluation",
+          "physical": "land",
+          "qualified": false,
+          "reference_countries": [
+            "VNM"
+          ],
+          "source_boundary_ids": [],
+          "territorial_hold_reasons": [
+            "foreign-source-family"
+          ],
+          "x": 207822,
+          "y": 123094
+        },
+        "original_VNM_existing_Atlas_location": {
+          "id": "gb:VNM:ADM2:81297802B34572770830938",
+          "index": 48323,
+          "bounds": [
+            207818.11431333335,
+            123042.06554966958,
+            207992.89164666666,
+            123182.44424669689
+          ],
+          "province_id": "framework:province:ong-thap:831b00388f10",
+          "province_index": 3491,
+          "name": "Tan Hong",
+          "reference_owner": "Viet Nam",
+          "source_id": "gb:VNM:ADM2",
+          "source_atoms": [
+            "gb:VNM:ADM2:81297802B34572770830938"
+          ]
+        },
+        "original_VNM_positive_source_atoms": [
+          {
+            "source_index": 65691,
+            "family_index": 354,
+            "source_id": "gb:VNM:ADM2:81297802B34572770830938",
+            "ordinal": 535,
+            "owners": [
+              48323
+            ],
+            "name": "Tan Hong",
+            "geometry_status": "raw-native-supported"
+          }
+        ],
+        "longitude": 105.3768223186836,
+        "latitude": 10.903206468967818,
+        "official_country_status": "neither-official-country",
+        "VNM_GSO_2025_contacts": [],
+        "neighbor_government_COD_2019_LAO_or2018_KHM_country_contacts": [],
+        "neighbor_government_ADM2_contacts": [],
+        "original_foreign_ADM2_positive_contacts": [],
+        "original_foreign_ADM2_negative_reused": null,
+        "current89ff_eight_applicable_foreign_map_contacts": [],
+        "boundary_ties": {
+          "VNM": [],
+          "neighbor_country": [],
+          "neighbor_district": [],
+          "original_foreign": [],
+          "current8map": []
+        },
+        "supported_location_proposal": null,
+        "factual_remaining_question": "Neither complete official country dataset includes the centre. Need positive applicable local location/country evidence, preserving originalVNMsource and foreign witnesses.",
+        "proposal_only": true,
+        "current_native_owner_zero_checked": false,
+        "ownership_mutation": false,
+        "repair_credit": 0
+      },
+      "prior_status": "neither-official-country",
+      "prior_record_locator": {
+        "path": "bulk-completion/vn-lao-khm178/official-gap21-unresolved.json",
+        "records_array_index": 19
+      },
+      "original_key": {
+        "owner": 48323,
+        "y": 123094,
+        "x": 207822
+      },
+      "longitude": 105.3768223186836,
+      "latitude": 10.903206468967818,
+      "official_new_country_contacts": [
+        {
+          "country": "KHM",
+          "WP_ID": "ee1a5616-4c18-4325-8011-a2533b7df777",
+          "source_feature_id": "DoS_WP_High_Resolution.18239"
+        }
+      ],
+      "official_new_country_boundary_contacts": [],
+      "new_country_disposition": "KHM-only",
+      "supported_existing_location_proposal": null,
+      "proposal_only": true,
+      "qualified_cells": 0,
+      "accepted_repair_credit": 0,
+      "prior_mainland_only_disposition": "KHM-only",
+      "additional_whole_Vietnam_component": {
+        "source_feature_id": "DoS_WP_High_Resolution.349076",
+        "WP_ID": "535ebfe0-a1de-460e-ae4f-fa7d8fc7d097",
+        "inside": false,
+        "boundary_contacts": []
+      }
+    }
+  ],
+  "source_bindings": "source-bindings.json",
+  "additional_VNM_component": "additional-vietnam-component-binding-and-precision.json",
+  "initial_actual_comparison": "exact29-official-country-comparison.json",
+  "necessary_source_scope_correction": "additional-vietnam-component-existing-kernel.json",
+  "accepted_repair_credit": 0
+}

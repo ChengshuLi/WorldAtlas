@@ -1,0 +1,63 @@
+{
+  "country": "VNM",
+  "source": {
+    "path": "bulk-completion/vn-lao-khm29-primary-followup/source/anphu-locality-whole-features.json",
+    "bytes": 569877,
+    "sha256": "7cd3f777114274782ade04272dd1b4b0c51b6fd5a987744033a9e388882a9311"
+  },
+  "feature_id": "DoS_WP_High_Resolution.349076",
+  "properties": {
+    "fid": 313,
+    "WP_Name": "Vietnam",
+    "WP_Name_ND": "Vietnam",
+    "DOS_Short": "Vietnam",
+    "DOS_Long": "Socialist Republic of Vietnam",
+    "Map_Label": "VIETNAM",
+    "US_Recog": "Independent",
+    "Show_Disp": null,
+    "Map_Disp": null,
+    "NOTES": null,
+    "NOTES_Cont": null,
+    "MapTint_2": "VN",
+    "MapTint_3": "VNM",
+    "GENC_Short": "Vietnam",
+    "GENC_Full": "Socialist Republic of Vietnam",
+    "GENC_2": "VN",
+    "GENC_3": "VNM",
+    "ISO_3166_1": null,
+    "ISO_3166_2": null,
+    "WP_ID": "535ebfe0-a1de-460e-ae4f-fa7d8fc7d097",
+    "WP_PREV_ID": "535ebfe0-a1de-460e-ae4f-fa7d8fc7d097",
+    "WP_PAR_ID": "535ebfe0-a1de-460e-ae4f-fa7d8fc7d097"
+  },
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:EPSG::4326"
+    }
+  },
+  "valid": true,
+  "validity_detail": "Valid Geometry",
+  "bounds": [
+    104.4392,
+    8.5611,
+    106.214,
+    10.9625
+  ],
+  "vertex_count": 31378,
+  "geometry_type": "Polygon",
+  "scope": "Complete additional official Vietnam polygon component; acquired by localGetFeatureInfo, not clipped",
+  "source_coordinate_precision": "4decimaldegree servicecoordinates",
+  "original_key": {
+    "owner": 48373,
+    "y": 123097,
+    "x": 207578
+  },
+  "nominal_distances_m": {
+    "point_to_component_boundary": 16.02946733634172,
+    "point_to_exact_LSIB": 10.607623982291685,
+    "nearest_component_boundary_point_to_exact_LSIB": 5.421640062043065,
+    "nearest_exact_LSIB_point_to_component_boundary": 5.421977884412412
+  },
+  "meaning": "Actualsourcecomponent-scoperesolution, not same-mainland rerun or improvedcoordinateprecision; originalphysical=land retained; no buffer/rounding/crop/title/nativequalification"
+}
