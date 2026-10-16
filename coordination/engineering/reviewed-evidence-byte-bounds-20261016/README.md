@@ -98,3 +98,39 @@ qualified scientific receipts, factual approval, selected counts or publication.
 The earlier a56afc76 review is superseded by the import-custody correction.
 The actual frozen-packet probe was rerun after inlining the helpers; the earlier
 scientific executions remain untouched.
+
+## Partition integration correction
+
+The first full integration exposed an old test that changed only a baseline
+file's declared size to 32 MiB + 1 and expected the removed default file cap.
+Under exact reviewed sizes, its unchanged 18-byte body correctly fails the exact
+byte check instead. The 512-descriptor partition inventory bound remains intact.
+Explicit caller `maxFileBytes` and `maxTotalBytes` limits remain effective in
+`validateEvidence`, including refusal before body reads. The partition wrapper
+has never exposed a separate per-partition caller-limit option.
+
+A real adjacent CLI defect was also reproduced: the voluntary partition checker
+and review checker dropped the descriptor and still used a fixed 32 MiB Git
+output buffer. Both now use one shared ordinary immutable-tree reader. Planned
+body sizes must exactly match the tree before the finite body read; unplanned
+bootstrap metadata keeps its existing legacy guard. No cache or scientific
+execution-helper limit changes.
+
+`partition-regression-tests.log` records 90 passing tests, including a complete
+Git-backed partition CLI with a genuine 33,554,433-byte source, same-size changed
+candidate rejection, wrong actual/declared lengths, invalid operating sizes,
+explicit smaller file/phase admission and the unchanged descriptor-count guard.
+The real CLI initially failed with `ENOBUFS` before this reader correction.
+
+```sh
+node --test --test-concurrency=2 \
+  test/evidence-partitions.test.mjs test/evidence-partition-review.test.mjs \
+  test/evidence-byte-bounds.test.mjs test/evidence-quality.test.mjs \
+  test/premerge-evidence.test.mjs test/historical-evidence.test.mjs \
+  test/evidence-family-record-binding.test.mjs \
+  test/immutable-git-blobs.test.mjs test/git-blob-transport.test.mjs
+```
+
+The original frozen-packet and joint-launcher custody checks remain applicable:
+their production modules and literal helper bodies did not change in this
+partition-only correction. Genuine prior scientific executions remain untouched.

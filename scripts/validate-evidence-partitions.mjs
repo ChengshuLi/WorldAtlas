@@ -6,7 +6,7 @@ import {fileURLToPath} from 'node:url';
 import {execFileSync} from 'node:child_process';
 import {isDeepStrictEqual} from 'node:util';
 import {gunzipSync} from 'node:zlib';
-import {sha256,safeEvidencePath} from './evidence-quality.mjs';
+import {sha256,safeEvidencePath,finiteBytes,addBytes} from './evidence-quality.mjs';
 import {validatePremergeManifest} from './premerge-evidence.mjs';
 const need=(ok,message)=>{if(!ok)throw Error(message);};
 export function readGitPRFiles(base,head,{cwd=process.cwd()}={}){
@@ -15,6 +15,24 @@ export function readGitPRFiles(base,head,{cwd=process.cwd()}={}){
  const raw=execFileSync('git',['diff','--name-status','-z','--find-renames',`${base}...${head}`],{cwd,encoding:'utf8',maxBuffer:8*1024*1024}).split('\0'),files=[];
  for(let i=0;i<raw.length&&raw[i];){const status=raw[i++],first=raw[i++];files.push(status.startsWith('R')?{filename:raw[i++],previous_filename:first,status:'renamed'}:{filename:first,status:{A:'added',M:'modified',D:'removed'}[status]});}
  return files;
+}
+// Share the exact whole-body reader with the voluntary review CLI. Bootstrap
+// metadata keeps its legacy bound; reviewed payloads use their own descriptor.
+export function partitionGitReader({head,base,cwd=process.cwd()}){
+ need([head,base].every(value=>typeof value==='string'&&/^[a-f0-9]{40}$/.test(value)),
+  'Exact immutable partition commits required');
+ return (name,vintage,descriptor)=>{
+  safeEvidencePath(name);const commit=vintage==='candidate'?head:vintage==='base'?base:vintage;
+  need(typeof commit==='string'&&/^[a-f0-9]{40}$/.test(commit),'Exact immutable partition vintage required');
+  const bound=descriptor===undefined?32*1024*1024:finiteBytes(descriptor.bytes,'partition file descriptor');
+  const entry=execFileSync('git',['ls-tree','-lz',commit,'--',name],{cwd,encoding:'utf8'});
+  const match=/^(100644|100755) blob ([a-f0-9]{40}) +(\d+)\t([^\0]+)\0$/.exec(entry);
+  need(match&&match[4]===name,'Evidence must be an ordinary exact Git blob');
+  const bytes=finiteBytes(Number(match[3]),'partition Git tree size');
+  need(descriptor===undefined?bytes<=bound:bytes===bound,'Partition Git body differs from exact file budget');
+  const raw=execFileSync('git',['cat-file','blob',match[2]],{cwd,maxBuffer:addBytes(bound,1)});
+  need(raw.length===bytes,'Partition Git body length changed');return raw;
+ };
 }
 export function validateEvidencePartitions(index,{readFile,files,branch,workerId,issueNumber}){
  need(index.version===1&&index.issue===issueNumber&&index.worker_id===workerId&&index.queue_enforces_aggregate===false,'Wrong aggregate context');
@@ -67,16 +85,11 @@ if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.ur
  if(!file||!base)throw Error('Use INDEX.json BASE-COMMIT [CANDIDATE-COMMIT]');
  const root=process.cwd(),resolve=ref=>execFileSync('git',['rev-parse','--verify',ref+'^{commit}'],{encoding:'utf8'}).trim();
  const baseCommit=resolve(base),headCommit=resolve(head);
- const blob=(name,commit)=>{
-  safeEvidencePath(name);
-  const entry=execFileSync('git',['ls-tree',commit,'--',name],{encoding:'utf8'});
-  need(entry.startsWith('100644 ')||entry.startsWith('100755 '),'Evidence must be an ordinary Git blob');
-  return execFileSync('git',['show',commit+':'+name],{maxBuffer:32*1024*1024});
- };
+ const read=partitionGitReader({head:headCommit,base:baseCommit,cwd:root});
  const relative=path.relative(root,path.resolve(file));
- const index=JSON.parse(blob(relative,headCommit));
+ const index=JSON.parse(read(relative,'candidate'));
  need(relative===index.index_path,'Executed index path differs from declared index');
  const files=readGitPRFiles(baseCommit,headCommit);
- const result=validateEvidencePartitions(index,{readFile:(name,vintage)=>blob(name,vintage==='candidate'?headCommit:vintage==='base'?baseCommit:vintage),files,branch:execFileSync('git',['branch','--show-current'],{encoding:'utf8'}).trim(),workerId:index.worker_id,issueNumber:index.issue});
+ const result=validateEvidencePartitions(index,{readFile:read,files,branch:execFileSync('git',['branch','--show-current'],{encoding:'utf8'}).trim(),workerId:index.worker_id,issueNumber:index.issue});
  console.log(JSON.stringify({...result,base_commit:baseCommit,head_commit:headCommit},null,2));
 }
