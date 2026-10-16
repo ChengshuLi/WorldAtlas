@@ -370,3 +370,29 @@ test('new actual physical use of a shadowed source revokes its next-transition e
  assert.equal(rejected.available,false);assert.match(rejected.reason,/present\/absent route changed/);
  f.api.releaseCheckpoint(qualified.state);
 });
+
+
+test('checkpoint admission, transition and census share one complete route tree',async t=>{
+ const f=await trustedFixture(t),git=f.reader.git.bind(f.reader),calls=[];
+ f.reader.git=(...args)=>{calls.push(args);return git(...args);};
+ const qualified=f.api.qualifyCheckpoint({reader:f.reader});assert.equal(qualified.available,true);
+ const transition=f.api.qualifyTransition({state:qualified.state,reader:f.reader});assert.equal(transition.available,true);
+ const census=f.api.checkpointRouteCensus({transition});
+ for(const row of census.routes)assert.equal(row.tree,f.git('ls-tree','-z',f.selected,'--',row.path).toString());
+ assert.equal(calls.filter(args=>args[0]==='ls-tree'&&args[1]==='-rtz').length,1);
+ f.api.releaseCheckpoint(qualified.state);
+});
+
+test('checkpoint route comparison refuses disappeared files, directories, symlinks and executable-mode drift',async t=>{
+ const f=await trustedFixture(t),original=fs.readFileSync(path.join(f.root,'data/source.json'));
+ const file=path.join(f.root,'data/source.json');
+ for(const kind of ['absent','directory','symlink','executable']){
+  fs.rmSync(file,{recursive:true,force:true});
+  if(kind==='directory'){fs.mkdirSync(file);fs.writeFileSync(path.join(file,'child'),'present directory');}
+  if(kind==='symlink')fs.symlinkSync('owners.json',file);
+  if(kind==='executable'){fs.writeFileSync(file,original);fs.chmodSync(file,0o755);}
+  const candidate=f.commit(),reader=new f.native.ImmutableReader(f.root,candidate);
+  const result=f.api.qualifyCheckpoint({reader});assert.equal(result.available,false,kind);
+  assert.match(result.reason,/routing alternative changed/);
+ }
+});
