@@ -644,6 +644,15 @@ test('candidate software report requires explicit expected code identity and can
   {trusted_code_inventory_sha256: ''}, {checkpoint: {}}, {unchanged_selected_inputs: {}}, {reused_baseline_proof: {}}]) {
   assert.throws(() => checkGeographicReport({...report, ...mutation}, baseline, candidate, candidate));
  }
+ const applicability = {version: 1, kind: 'trusted-unchanged-selected-geography-v1', status: 'unchanged-selected-inputs',
+  baseline_commit: baseline, candidate_commit: candidate, trusted_reader_policy_commit: candidate,
+  candidate_code_executed: false, science_reexecuted: false, source_approval: false, published: false};
+ assert.equal(checkGeographicReport({...report, unchanged_selected_inputs: applicability}, baseline, candidate, candidate), false);
+ for (const mutation of [{trusted_reader_policy_commit: baseline}, {candidate_commit: baseline}, {baseline_commit: candidate},
+  {science_reexecuted: true}, {candidate_code_executed: true}, {status: 'full-check-required'}, {published: true}, {source_approval: true}]) {
+  assert.throws(() => checkGeographicReport({...report, unchanged_selected_inputs: {...applicability, ...mutation}}, baseline, candidate, candidate));
+ }
+ assert.throws(() => checkGeographicReport({...report, status: 'no-new-native-loss', unchanged_selected_inputs: applicability}, baseline, candidate, candidate));
  const old = {...report, trusted_code_commit: baseline, candidate_code_executed: false};
  assert.equal(checkGeographicReport(old, baseline, candidate), false);
  assert.throws(() => checkGeographicReport(old, baseline, candidate, candidate));

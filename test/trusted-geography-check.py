@@ -548,6 +548,31 @@ class UnchangedSelectedApplicabilityControls(unittest.TestCase):
         self.assertNotIn('selected_native_report', result)
         self.assertNotIn('selected_continuous_report', result)
 
+    def test_software_identity_uses_actual_executing_commit_and_never_runs_science_or_mints_checkpoint(self):
+        proof = {**self.proof, 'trusted_reader_policy_commit': self.candidate}
+        g = self.g
+        with self.mock.patch.object(g, 'verify_trusted_checkout', return_value='actual-inventory'), \
+             self.mock.patch.object(g, 'inventory', return_value=['same']), \
+             self.mock.patch.object(g, 'run_applicability_collector', return_value=
+                subprocess.CompletedProcess([], 0, json.dumps(proof).encode(), b'')) as child, \
+             self.mock.patch.object(g, 'prefetch_declared_inputs', side_effect=AssertionError('prefetch ran')), \
+             self.mock.patch.object(g, 'selected_joint', side_effect=AssertionError('checkpoint ran')), \
+             self.mock.patch.object(g.subprocess, 'check_output', side_effect=AssertionError('science ran')):
+            result = g.inspect(ROOT, self.baseline, self.candidate, code_commit=self.candidate,
+                               prefetch=True, checkpoint_destination=ROOT / 'must-not-create')
+        self.assertEqual(result['status'], 'not-applicable')
+        self.assertEqual(result['unchanged_selected_inputs'], proof)
+        self.assertEqual(result['trusted_code_commit'], self.candidate)
+        self.assertEqual(result['trusted_code_inventory_sha256'], 'actual-inventory')
+        self.assertTrue(result['candidate_code_executed'])
+        self.assertEqual(child.call_args.args[0][-3:], [self.baseline, self.candidate, self.candidate])
+        self.assertNotIn('checkpoint', result)
+        self.assertNotIn('selected_native_report', result)
+        with self.mock.patch.object(g, 'run_applicability_collector', return_value=
+                subprocess.CompletedProcess([], 0, json.dumps(self.proof).encode(), b'')):
+            self.assertIsNone(g.unchanged_selected_inputs(ROOT, self.baseline, self.candidate,
+                                                       code_commit=self.candidate))
+
     def test_changed_raw_inputs_never_consult_selected_shortcut(self):
         g = self.g
         with self.mock.patch.object(g, 'verify_trusted_checkout', return_value='fixture'), \
