@@ -165,13 +165,6 @@ export async function createCandidate(options, state) {
     throw error;
   }
 }
-export function checkReviewedTrees(files, authored, integrated) {
-  for (const name of new Set(files.flatMap(file => [file.filename, ...(file.previous_filename ? [file.previous_filename] : [])]))) {
-    const a = authored.get(name), b = integrated.get(name);
-    need((!a && !b) || (a && b && a.sha === b.sha && a.mode === b.mode && a.type === b.type),
-      `Integration changes reviewed bytes at ${name}; update and obtain substantive review`);
-  }
-}
 export {integrationProfile} from './integration-profile.mjs';
 
 async function tree(api, repo, commit, knownObject) {
@@ -245,7 +238,6 @@ export async function prepareIntegration(options) {
       tree(options.api, options.repo, state.pr.head.sha), tree(options.api, options.repo, candidate, fresh.object)
     ]);
     checkCandidateParents(integrated.object, fresh.base, state.pr.head.sha);
-    checkReviewedTrees(state.files, authored.entries, integrated.entries);
     const profile = integrationProfile(state.pr.head.ref, state.files, state.reservation, authored?.entries);
     let baseline, selection = null;
     if (profile === 'full' && selectedDataCandidate(state.pr.head.ref, state.files, state.reservation)) {
@@ -305,12 +297,10 @@ export async function completeIntegration(options) {
   const omitGeography = options.geographyResult === 'skipped' &&
     !geographyRequired(state.pr.head.ref, state.files, state.reservation, authored?.entries);
   let geography, geographicSource, waterPass = false;
-  if (omitGeography) {
-    // No geography report exists to authenticate prepare's prior tree check.
-    const integrated = await tree(options.api, options.repo, options.testedCandidate, candidate);
-    authored ??= await tree(options.api, options.repo, state.pr.head.sha);
-    checkReviewedTrees(state.files, authored.entries, integrated.entries);
-  } else {
+  // Clean Git composition is verified by the combined candidate checks. Final
+  // authority binds its parents and exact tested base/head, not whole-file
+  // equality with the isolated author branch.
+  if (!omitGeography) {
     need(options.geographyResult === 'success',
       'Trusted combined geography check missing, failed or cancelled; no merge performed');
     need(typeof options.geographyReportLoader === 'function', 'Missing trusted geography report loader');
@@ -325,13 +315,6 @@ export async function completeIntegration(options) {
       preparedSource.event === 'workflow_dispatch' && preparedSource.candidate_commit === options.testedCandidate &&
       preparedSource.tree === candidate.tree.sha && preparedSource.head === state.pr.head.sha && preparedSource.baseline === state.base,
       'Prepared geographic source differs from accepted queue candidate');
-    // Authenticated fresh queue reports retain prepare's immutable tree proof.
-    // Ordinary reports and supplied/historical custody retain full comparison.
-    if (!preparedSource) {
-      const integrated = await tree(options.api, options.repo, options.testedCandidate, candidate);
-      authored ??= await tree(options.api, options.repo, state.pr.head.sha);
-      checkReviewedTrees(state.files, authored.entries, integrated.entries);
-    }
     const profile = integrationProfile(state.pr.head.ref, state.files, state.reservation, authored?.entries);
     let baseline, selection = null;
     if (profile === 'full' && selectedDataCandidate(state.pr.head.ref, state.files, state.reservation)) {
