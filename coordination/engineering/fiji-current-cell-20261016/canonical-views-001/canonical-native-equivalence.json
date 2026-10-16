@@ -1,0 +1,86 @@
+{
+  "version": 1,
+  "method": "complete-native-span-and-boundary-tie-equality",
+  "proofs": [
+    {
+      "role": "source",
+      "source_id": "gb:FJI:ADM2:14151628B95966095088914",
+      "pointer": "/geometry",
+      "overrun_vertices": 8,
+      "checked_rows": 872,
+      "native_cells": 152102
+    },
+    {
+      "role": "source",
+      "source_id": "gb:FJI:ADM2:14151628B42533076410957",
+      "pointer": "/geometry",
+      "overrun_vertices": 2,
+      "checked_rows": 795,
+      "native_cells": 106757
+    },
+    {
+      "role": "physical",
+      "source_id": "gb:FJI:ADM2:14151628B95966095088914",
+      "pointer": "/support/mapped_land_support",
+      "overrun_vertices": 6,
+      "checked_rows": 862,
+      "native_cells": 133323
+    },
+    {
+      "role": "physical",
+      "source_id": "gb:FJI:ADM2:14151628B95966095088914",
+      "pointer": "/support/outside_mapped_L1_context",
+      "overrun_vertices": 8,
+      "checked_rows": 872,
+      "native_cells": 18779
+    },
+    {
+      "role": "physical",
+      "source_id": "gb:FJI:ADM2:14151628B95966095088914",
+      "pointer": "/query_relations/5/witness_geometry",
+      "overrun_vertices": 2,
+      "checked_rows": 507,
+      "native_cells": 107547
+    },
+    {
+      "role": "physical",
+      "source_id": "gb:FJI:ADM2:14151628B95966095088914",
+      "pointer": "/query_relations/10/witness_geometry",
+      "overrun_vertices": 2,
+      "checked_rows": 162,
+      "native_cells": 6306
+    },
+    {
+      "role": "physical",
+      "source_id": "gb:FJI:ADM2:14151628B95966095088914",
+      "pointer": "/query_relations/20/witness_geometry",
+      "overrun_vertices": 3,
+      "checked_rows": 41,
+      "native_cells": 359
+    },
+    {
+      "role": "physical",
+      "source_id": "gb:FJI:ADM2:14151628B42533076410957",
+      "pointer": "/support/mapped_land_support",
+      "overrun_vertices": 2,
+      "checked_rows": 788,
+      "native_cells": 94904
+    },
+    {
+      "role": "physical",
+      "source_id": "gb:FJI:ADM2:14151628B42533076410957",
+      "pointer": "/support/outside_mapped_L1_context",
+      "overrun_vertices": 1,
+      "checked_rows": 672,
+      "native_cells": 11853
+    },
+    {
+      "role": "physical",
+      "source_id": "gb:FJI:ADM2:14151628B42533076410957",
+      "pointer": "/query_relations/5/witness_geometry",
+      "overrun_vertices": 3,
+      "checked_rows": 464,
+      "native_cells": 93419
+    }
+  ]
+}

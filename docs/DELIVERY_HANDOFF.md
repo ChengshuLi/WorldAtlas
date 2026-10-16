@@ -737,3 +737,30 @@ have fed the next steps without the intermediate remote readbacks. Separate
 evidence-helper start and final-GET durations were not retained, so these records
 do not establish minutes saved. Record subsequent adoption with the existing
 delivery receipts; this sequence adds no reporting gate.
+
+### Explicit retained antimeridian views
+
+Original source/physical inputs occasionally retain the IEEE value
+`180.0000000000001` at the antimeridian. Ordinary coordinate validation remains
+strict. A retained original-family evidence body may optionally pin
+`canonical_seam_views`: a version-1 `retained-periodic-native-views-v1` document
+with the exact selected `scripts/majority.py` pin and `canonical` export as its
+`method`. Each record names its `role` (`source` or `physical`), exact
+`source_id`, closed `pointer`, canonical-value `original_geometry_sha256`, and
+explicit derived `geometry`. Source pointers are `/geometry`; physical pointers
+are the supported land/water/outside-context fields or complete query witnesses.
+
+The original catalogue, complete family products, whole measured stages and
+physical receipt remain unchanged. The shared qualifier authenticates the view
+and method bodies, joins every view to its original geometry, and compares all
+native spans and exact boundary ties across the whole geometry extent before
+using the view. Only this explicit comparison admits the retained four-ULP seam
+frame; materially out-of-range coordinates, changed native outcomes, duplicate,
+foreign or unused operands fail. Every source family member is checked before
+spatial filtering, including competitors omitted from the positive targets.
+Physical query predicates, IDs, frames and residuals retain their original roles.
+
+The shared package and cold-profile role walkers retain both the explicit view
+body and canonical method. A view is a reviewed derived operand, not a new source
+product or permission to clamp coordinates, omit vertices, change owner IDs,
+ignore physical holds or qualify cells outside the exact original claim.

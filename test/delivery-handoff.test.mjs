@@ -455,7 +455,7 @@ test('finalization refuses a new identity at an accepted package path', () => {
 // Actual Git/plain-Node fixture for metadata assembly. The source interpretation
 // and native construction controls live in source-member-native-delivery.test;
 // this fixture exercises the consumed-role boundary without replaying science.
-function modernFinalizationFixture(t, {mixed = false, membership = true, dated = false, territorial = false, territorialParts = false, provider = false} = {}) {
+function modernFinalizationFixture(t, {mixed = false, membership = true, dated = false, territorial = false, territorialParts = false, provider = false, seam = false} = {}) {
   const root = directory(t), owned = 'coordination/engineering/modern-finalize/';
   const git = (...args) => execFileSync('git', args, {cwd: root, stdio: ['pipe', 'pipe', 'pipe']}).toString().trim();
   git('init'); git('config', 'user.name', 'Finalizer fixture'); git('config', 'user.email', 'finalizer@example.invalid');
@@ -531,6 +531,13 @@ function modernFinalizationFixture(t, {mixed = false, membership = true, dated =
     const name=inherited+'adopted-provider-families.json';
     save(name,{version:1,kind:'adopted-provider-source-families-v1',families:[]});commitAll();
     providerAdoption=pin(name);evidenceBody.adopted_provider_families=providerAdoption;
+  }
+  let seamViews;
+  if(seam){
+    save('scripts/majority.py',Buffer.from('# retained canonical method'));commitAll();
+    const name=inherited+'canonical-seam-views.json',method=pin('scripts/majority.py');
+    save(name,{version:1,kind:'retained-periodic-native-views-v1',method:{pin:method,export:'canonical'},records:[]});commitAll();
+    seamViews={pin:pin(name),method};evidenceBody.canonical_seam_views=seamViews.pin;
   }
   save(owned + 'source-evidence.json', evidenceBody); save(owned + 'native-patch.json', {rows: [{y: 2, runs: [[2, 4, 1]]}]}); commitAll();
   const authority = binding => {
@@ -611,7 +618,7 @@ function modernFinalizationFixture(t, {mixed = false, membership = true, dated =
     return spawnSync(process.execPath, [script, phase, 'config.json', destination, ...flags], {cwd: root, env, encoding: 'utf8'});
   };
   return {root, r, config, run, git, save, commitAll, pin, evidenceBody, originalSelector, originalPackage, assets,
-    consumed: [...Object.values(roles), familyPart, ...(membership ? memberPaths : [])], incidental, withEvidence, datedSupport, territorialSupport, providerAdoption};
+    consumed: [...Object.values(roles), familyPart, ...(membership ? memberPaths : [])], incidental, withEvidence, datedSupport, territorialSupport, providerAdoption, seamViews};
 }
 
 for (const mixed of [false, true]) test('real finalizer supports ' + (mixed ? 'mixed legacy/modern' : 'modern') + ' roles, flat envelope aliases and exact resume', t => {
@@ -1238,4 +1245,17 @@ test('cumulative snapshot retains coherent changed-row and rebind refusals',t=>{
     f.save(f.config.sidecar.path,sidecar);f.commitAll();f.config.sidecar=f.pin(f.config.sidecar.path);
     assert.throws(()=>finalizeDelivery(f.config,r),kind==='rows'?/Native component cell count differs/:/metadata joins differ/);
   }
+});
+
+
+test('package roles retain the explicit canonical seam table and exact retained method',t=>{
+  const f=modernFinalizationFixture(t,{seam:true}),destination='.cache/delivery-handoff/seam';
+  const run=f.run('package',destination);assert.equal(run.status,0,run.stderr);
+  const projection=JSON.parse(fs.readFileSync(path.join(f.root,destination,'package-roles.json')));
+  for(const pin of [f.seamViews.pin,f.seamViews.method]){
+    const matches=projection.paths.filter(entry=>entry.path===pin.path);
+    assert.equal(matches.length,1);assert.equal(matches[0].sha256,pin.sha256);
+  }
+  for(const label of ['views','method'])assert.ok(projection.paths.some(entry=>
+    entry.roles.includes('source-target canonical seam '+label)));
 });

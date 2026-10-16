@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "baseline": "ab0d2088bc66e0d9847b273eb8519a92c0f109b1",
+  "complete_families": [
+    {
+      "key": "gb:FJI:ADM1",
+      "features": 4,
+      "original_bytes": 37225,
+      "original_sha256": "95e8d9a124d0dc1181b87164c1b999f0c081f6406ca3c2848697986e08b360a8",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/FJI/ADM1/geoBoundaries-FJI-ADM1_simplified.geojson",
+      "represented_year_claim": "2006",
+      "recorded_license": "Creative Commons Attribution 2.5 Generic"
+    },
+    {
+      "key": "gb:FJI:ADM2",
+      "features": 15,
+      "original_bytes": 335438,
+      "original_sha256": "0339f90794264719b98c93a9a7c2d71fdb473c0a2f9c1e9b74ecd98a67ddb93f",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/FJI/ADM2/geoBoundaries-FJI-ADM2_simplified.geojson",
+      "represented_year_claim": "2020",
+      "recorded_license": "Creative Commons Attribution 4.0 (CC BY 4.0)"
+    }
+  ],
+  "exact_direct_source_target_joins": 15,
+  "frozen_normalization": {
+    "path": "coordination/engineering/global-current-cell-work-queue-20261014/normalized-source-seams.json",
+    "sha256": "0e74bb81ae45ae9913ee5d43afd303fa33a4b7da8b06e4e6f1cd4419ecd264b4",
+    "comparisons": [
+      {
+        "source_id": "gb:FJI:ADM1:53030831B91072554514863",
+        "name": "Northern",
+        "method": "retained-majority-canonical-periodic-unwrap-make-valid-v1",
+        "original_geometry_sha256": "3fba432705b3372c67cadbb4315a43c0e1b5a08edb449945a376ea236934f3cf",
+        "overrun_vertices": 7,
+        "checked_rows": 690,
+        "native_cells": 306203
+      },
+      {
+        "source_id": "gb:FJI:ADM2:14151628B95966095088914",
+        "name": "Cakaudrove",
+        "method": "retained-majority-canonical-periodic-unwrap-make-valid-v1",
+        "original_geometry_sha256": "75c30ed2a72e7a780c069767a97b1dd60541ab76d488bbe3547eb093453f08bf",
+        "overrun_vertices": 8,
+        "checked_rows": 872,
+        "native_cells": 152102
+      },
+      {
+        "source_id": "gb:FJI:ADM2:14151628B42533076410957",
+        "name": "Macuata",
+        "method": "retained-majority-canonical-periodic-unwrap-make-valid-v1",
+        "original_geometry_sha256": "71f50eb232f08ba4dfb519d0e946f789b80e0664c79df0477ea2c3f6bafcad00",
+        "overrun_vertices": 2,
+        "checked_rows": 795,
+        "native_cells": 106757
+      }
+    ]
+  },
+  "limits": [
+    "ADM1 is complete reviewed source context only; no ADM1 assignment.",
+    "The 2020 and 2006 fields are retained source vintage claims, not newly verified present-day legal applicability.",
+    "The simplified consumed products remain distinct from full-resolution URLs in selected display metadata."
+  ]
+}
