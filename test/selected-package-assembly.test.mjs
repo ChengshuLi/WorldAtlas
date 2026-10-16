@@ -907,10 +907,10 @@ test('original reference metadata refuses coherent source, native, revision and 
     return authenticateOriginalPackageOutput(f.f);
   };
   for(const mutate of [
-    ({manifest})=>delete manifest.source.selection.reference_projection,
+    ({manifest})=>{delete manifest.source.selection.reference_projection;},
     ({manifest})=>manifest.source.selection.reference_projection.sha256='f'.repeat(64),
-    ({atlas})=>delete atlas.referenceMetadata,
-    ({atlas})=>delete atlas.referenceMetadata.application_reference_revision,
+    ({atlas})=>{delete atlas.referenceMetadata;},
+    ({atlas})=>{delete atlas.referenceMetadata.application_reference_revision;},
     ({atlas})=>atlas.referenceMetadata.application_reference_revision='invalid',
     ({atlas})=>atlas.referenceMetadata.native_reference.id='geography:foreign',
     ({atlas})=>atlas.referenceMetadata.asset.path='a.bin',
@@ -925,6 +925,8 @@ test('actual assembly reuses identical reference output and updates only the fou
   if(process.execArgv.length||process.env.NODE_OPTIONS?.trim()||process.env.NODE_PATH?.trim()){
     execFileSync(process.execPath,[new URL(import.meta.url).pathname,t.name],{env:{...process.env,NODE_OPTIONS:'',NODE_PATH:'',NODE_TEST_CONTEXT:undefined},encoding:'utf8'});return;
   }
+  const oldFetch=globalThis.fetch,oldEntry=process.argv[1];
+  t.after(()=>{globalThis.fetch=oldFetch;process.argv[1]=oldEntry;});
   const f=await currentProductFixture(t,{reference:true}),directory=f.currentRoot;
   const sourceRoot=fileURLToPath(new URL('../',import.meta.url)),copied=new Set();
   const write=(name,raw)=>{fs.mkdirSync(path.dirname(path.join(directory,name)),{recursive:true});fs.writeFileSync(path.join(directory,name),raw);};
@@ -993,7 +995,6 @@ with zipfile.ZipFile(sys.argv[2],'w',zipfile.ZIP_DEFLATED) as z:
     return f.f.api(route);
   };api.jobLogRedirect=f.f.api.jobLogRedirect;
   let downloads=0;api.artifactRedirect=async()=>{downloads++;return new Response(null,{status:302,headers:{location:'https://fixture.blob.core.windows.net/original.zip'}});};
-  const oldFetch=globalThis.fetch,oldEntry=process.argv[1];t.after(()=>{globalThis.fetch=oldFetch;process.argv[1]=oldEntry;});
   globalThis.fetch=async url=>new Response(String(url).endsWith('/original.zip')?archive:f.f.log());
   write('data/ownership-selection.json',JSON.stringify(f.currentSelection));commit();
   const entry=path.join(directory,'scripts/assemble-selected-package.mjs'),{assembleSelectedPackage}=await import(pathToFileURL(entry));process.argv[1]=entry;
