@@ -72,6 +72,11 @@ function createReader({repo, baseline, candidate, trusted, limits, acquisition})
   };
   const git = (...args) => runGit(args);
   function mergeBase() {
+    // Queue candidates authenticate their baseline as the literal first parent.
+    // That already establishes the merge base, even when a depth-one checkout
+    // omits the reviewed second parent and its unrelated ancestry.
+    const header = git('cat-file', 'commit', candidate).toString().split('\n\n', 1)[0];
+    if (header.match(/^parent ([a-f0-9]{40})$/m)?.[1] === baseline) return Buffer.from(baseline + '\n');
     // A shallow baseline is already a valid common ancestor of a fresh source
     // branch. Do not traverse its intentionally absent parent in that case.
     try { return git('merge-base', baseline, candidate); }

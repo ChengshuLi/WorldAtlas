@@ -467,9 +467,9 @@ function coldFixture(f, options = {}) {
   f.git(['config', 'uploadpack.allowFilter', 'true']);
   f.git(['update-ref', 'refs/heads/fixture', f.candidate]);
   f.git(['symbolic-ref', 'HEAD', 'refs/heads/fixture']);
-  if (options.shallowStart) {
+  if (options.shallowStart || options.shallowCandidate) {
     execFileSync('git', ['init', '--bare', destination], {env: f.env, stdio: ['ignore', 'pipe', 'pipe']});
-    for (const args of [['--depth=1', f.baseline], [f.candidate]]) {
+    for (const args of [['--depth=1', f.baseline], [...(options.shallowCandidate ? ['--depth=1'] : []), f.candidate]]) {
       execFileSync('git', ['-C', destination, 'fetch', '--filter=blob:none', '--no-tags', '--no-write-fetch-head',
         ...(args.length === 2 ? [args[0]] : []), pathToFileURL(f.directory).href, args.at(-1)],
         {env: f.env, stdio: ['ignore', 'pipe', 'pipe']});
@@ -558,6 +558,46 @@ test('shallow descendant admits its baseline without traversing an absent parent
     assert.equal(result.status, 'unchanged-selected-inputs', result.reason);
     assert.equal(result.metadata_acquisition.scientific_leaf_imports, 0);
     assert.equal(fs.readFileSync(path.join(cold.destination, 'shallow'), 'utf8'), f.baseline + '\n');
+  } finally { f.close(); }
+});
+
+test('true depth-one merge admits only its actual first parent without fetching the missing second parent', async () => {
+  const f = fixture(); try {
+    const reviewed = f.commit({...f.files, 'reviewed-head-note': body('reviewed branch')}, f.baseline);
+    const tree = f.git(['rev-parse', f.candidate + '^{tree}']);
+    const candidate = f.git(['commit-tree', tree, '-p', f.baseline, '-p', reviewed], 'combined candidate\n');
+    const cold = coldFixture({...f, candidate}, {shallowCandidate: true});
+    const missing = () => assert.equal(cold.git(['cat-file', '--batch-check'], reviewed + '\n'), reviewed + ' missing');
+    missing();
+    assert.throws(() => cold.git(['merge-base', f.baseline, candidate]));
+    assert.throws(() => execFileSync('git', ['-C', cold.destination, 'merge-base', f.baseline, candidate],
+      {env: {...f.env, GIT_SHALLOW_FILE: '/dev/null'}, stdio: ['ignore', 'pipe', 'pipe']}));
+    const shallow = fs.readFileSync(path.join(cold.destination, 'shallow'), 'utf8');
+    const result = await f.inspect(candidate, f.baseline, {repo: cold.destination, acquisition: cold.acquisition});
+    assert.equal(result.status, 'unchanged-selected-inputs', result.reason);
+    assert.equal(result.metadata_acquisition.scientific_leaf_imports, 0);
+    assert.equal(fs.readFileSync(path.join(cold.destination, 'shallow'), 'utf8'), shallow);
+    missing();
+
+    // A present same-data sibling is not the candidate's first parent. It must
+    // retain the existing ancestry query and decline when that history is absent.
+    const wrongBaseline = f.commit(f.files, f.baseline);
+    cold.git(['fetch', '--filter=blob:none', '--depth=1', '--no-tags', '--no-write-fetch-head',
+      pathToFileURL(f.directory).href, wrongBaseline]);
+    const before = cold.batches.length + cold.originBatches.length;
+    const rejected = await f.inspect(candidate, wrongBaseline, {repo: cold.destination, acquisition: cold.acquisition});
+    assert.equal(rejected.status, 'full-check-required');
+    assert.match(rejected.reason, /^immutable-object-unavailable:merge-base:/);
+    assert.equal(cold.batches.length + cold.originBatches.length, before);
+    missing();
+    const messageOnly = f.git(['commit-tree', tree, '-p', f.baseline, '-p', reviewed], 'parent ' + wrongBaseline + '\n');
+    cold.git(['fetch', '--filter=blob:none', '--depth=1', '--no-tags', '--no-write-fetch-head',
+      pathToFileURL(f.directory).href, messageOnly]);
+    const forged = await f.inspect(messageOnly, wrongBaseline, {repo: cold.destination, acquisition: cold.acquisition});
+    assert.equal(forged.status, 'full-check-required');
+    assert.match(forged.reason, /^immutable-object-unavailable:merge-base:/);
+    assert.equal(cold.batches.length + cold.originBatches.length, before);
+    missing();
   } finally { f.close(); }
 });
 
