@@ -58,8 +58,11 @@ function bindPhysicalLogicalSources(reader,certificate,inventory) {
 }
 const sameScientificRoutes = (reader,routes,executablePaths,masked = new Set()) => routes.every(p => p.path === PROGRAMME_POLICY
   || executablePaths.has(p.path) || masked.has(p.path) || reader.treeRoute(p.path) === p.tree);
-const currentMaskedRoutes = (reader,routes,masked) => routes.map(p => masked.has(p.path)
-  ? {...p,tree:reader.treeRoute(p.path)} : p);
+const currentMaskedRoutes = (reader,routes,masked) => {
+  const current=new Map(routes.map(p=>[p.path,p]));
+  for (const name of masked) current.set(name,{path:name,tree:reader.treeRoute(name)});
+  return [...current.values()].sort((a,b)=>a.path.localeCompare(b.path));
+};
 // Older route censuses excluded .mjs/.py but also retained executable .js.
 // Keep the complete archived census. Identify code by its authenticated executed
 // role and whole bytes, never by an extension, changed-file list or new hashes.
