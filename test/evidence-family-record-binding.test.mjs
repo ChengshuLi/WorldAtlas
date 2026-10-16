@@ -33,7 +33,7 @@ test('encoded, decoded, combined and future output admission reject before any b
     f.readFile=Object.assign(()=>{reads++;return f.raw},{assertAncestor:()=>{}});
     zlib.gunzipSync=(...args)=>{gunzips++;return orig(...args)};syncBuiltinESMExports();
     const options={readFile:f.readFile,maxTotalBytes:f.file.bytes+f.file.uncompressed_bytes-1};
-    if(scenario==='decoded'){f.file.uncompressed_bytes=33554433;options.maxTotalBytes=268435456;}
+    if(scenario==='decoded'){f.file.uncompressed_bytes=33554433;options.maxTotalBytes=268435456;options.maxFileBytes=33554432;}
     if(scenario==='future-output')f.manifest.outputs=[{path:'future.txt',bytes:200,sha256:'0'.repeat(64),hash_kind:'file-bytes'}];
     if(scenario==='future-source')f.manifest.sources=[{id:'future',retention:'retained',files:[{path:'future-source.txt',bytes:200,sha256:'0'.repeat(64),hash_kind:'file-bytes'}]}];
     try{assert.throws(()=>validateEvidence(f.manifest,options),/budget|phase/);assert.equal(reads,0);assert.equal(gunzips,0);}
