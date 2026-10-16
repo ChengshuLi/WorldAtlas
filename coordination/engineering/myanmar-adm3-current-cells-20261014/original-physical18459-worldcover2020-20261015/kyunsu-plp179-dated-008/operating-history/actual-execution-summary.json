@@ -1,0 +1,45 @@
+{
+  "numeric_exit": 0,
+  "kernel_receipt": ".cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu179-PLP-native-001/actual-native-blocks-001/execution-receipt.json",
+  "summary": {
+    "count": 179,
+    "scl_centre_counts": {
+      "2": 30,
+      "4": 93,
+      "7": 8,
+      "6": 40,
+      "5": 5,
+      "8": 3
+    },
+    "valid_centre_masks_by_band": {
+      "red": {
+        "255": 179
+      },
+      "green": {
+        "255": 179
+      },
+      "blue": {
+        "255": 179
+      },
+      "nir": {
+        "255": 179
+      },
+      "scl": {
+        "255": 179
+      }
+    },
+    "interpretation": "Literal source observations only, not physical completion or hold clearance."
+  },
+  "elapsed_seconds": 291.12282716599293,
+  "peak_rss_bytes": 277823488,
+  "native_body": {
+    "path": ".cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu179-PLP-native-001/actual-native-blocks-001/S2A_47PLP_20200105_0_L2A/native-observations.json",
+    "bytes": 998414,
+    "sha256": "3b04a04e53ed6e70f8e86253d49e5dca83c4dee3b5b96046941f806d8acbf49c"
+  },
+  "source_observations": 179,
+  "stored_native_context_blocks": 32,
+  "physical_answers": 0,
+  "awaiting": "authoractualsurfaceinterpretation+distinctreview/Mainadoption",
+  "no_completed_sourceblock_replay": true
+}

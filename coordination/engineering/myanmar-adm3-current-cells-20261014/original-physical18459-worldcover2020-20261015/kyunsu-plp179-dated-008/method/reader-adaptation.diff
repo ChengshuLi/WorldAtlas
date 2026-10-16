@@ -1,0 +1,26 @@
+--- retained-private:.cache/worker1-mmr-physical-followup-001/new-dated-source-001/first-native-observation-001/read_native_blocks.py
++++ retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu179-PLP-native-001/read_native_blocks.py
+@@ -28,12 +28,12 @@
+ input_path = ROOT / 'chosen-centres.json'
+ plan_data = plan_path.read_bytes()
+ plan = json.loads(plan_data)
+-assert plan['original_package'] == 'gb-MMR-ADM3--physical-interpretation' and plan['selected_count'] == 2107 and plan['count'] == 2107 and plan['block_count'] == 40
+-assert len({tuple(p['original_key'][k] for k in ['owner','y','x']) for p in plan['points']}) == 2107
++assert plan['original_package'] == 'gb-MMR-ADM3--physical-interpretation' and plan['selected_count'] == 179 and plan['count'] == 179 and plan['block_count'] == 32
++assert len({tuple(p['original_key'][k] for k in ['owner','y','x']) for p in plan['points']}) == 179
+ assert hashlib.sha256(input_path.read_bytes()).hexdigest() == plan['source_input_sha256']
+ scene_paths = [ROOT/'scene-item.json']
+ items = [json.loads(p.read_text()) for p in scene_paths]
+-assert [i['id'] for i in items] == ['S2A_47PMM_20200125_0_L2A']
++assert [i['id'] for i in items] == ['S2A_47PLP_20200105_0_L2A']
+ assert all(i['properties']['earthsearch:boa_offset_applied'] is False for i in items)
+ cost = {'existing_reader_numpy_files':90300286, 'python':18058560,
+         'node_preflight':121304480, 'accepted_admission_code':304941,
+@@ -198,6 +198,6 @@
+     'dates':dates,'method':'Existing native-GDAL window observation, source blocks streamed for one complete coherent original-key group; no new classifier.'}
+ guard()
+ write_json(OUT/'execution-receipt.json',receipt)
+-print(json.dumps({'status':'completed','original_centres':2107,'dates':1,'source_context_blocks':40,
++print(json.dumps({'status':'completed','original_centres':179,'dates':1,'source_context_blocks':32,
+     'seconds':time.monotonic()-start,'observed_peak_rss_bytes':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
+     'disk_output_bytes':disk_bytes,'resolved_review_credit':0}),flush=True)

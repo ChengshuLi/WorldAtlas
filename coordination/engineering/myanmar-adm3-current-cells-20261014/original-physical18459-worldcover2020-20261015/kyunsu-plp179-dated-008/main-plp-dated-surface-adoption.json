@@ -1,0 +1,35 @@
+{
+  "kind": "main-adoption106-dated-Kyunsu-physical-body-location-facets",
+  "adopted_at": "2026-10-16T00:32:33.086859+00:00",
+  "author_packet": {
+    "path": ".cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu179-PLP-native-001/authored-dated-surface-008/proposed-dated-surface-answers.jsonl.gz",
+    "bytes": 47866,
+    "sha256": "e8d2207950a820815a301f34ee4b93ebe551a32b3c989654f25a93e97353f002"
+  },
+  "independent_review": {
+    "path": ".cache/worker4-mmr-plp179-review-001/authored106-review.json",
+    "bytes": 1573,
+    "sha256": "581de8775a7ebe26a0ed5f55c5bb43eeb996a1c7a81252669da13de053d5782f"
+  },
+  "source_acquisition": "Sentinel-2A S2A_47PLP_20200105_0_L2A; actual producer2020-01-05T04:04:54.511104Z",
+  "new_disjoint_answers": 106,
+  "facets": {
+    "dated_visible_vegetation": 105,
+    "dated_visible_channel_water": 1
+  },
+  "previous_known_original_answered": 17243,
+  "known_original_answered_union": 17349,
+  "original_physical_denominator": 18459,
+  "remaining_specific_physical_questions": 1110,
+  "judgment": "Adopt the106 exact authored and independently reviewed dated surface/body-location answers. Actual paired RGB/NIR appearances, literal native observations, source georeferencing and positive complete original source-body associations support these bounded facets; no classification is inherited solely from WorldCover/SCL labels.",
+  "limits": [
+    "Vegetation near coast/beach is a visible contribution at the containing native observation and associated body. It does not establish exclusive subpixel ground cover, whole-pixel/Atlas-cell vegetation, dryground or hidden understorey.",
+    "The sole p114 channel-water answer is dated visible local water, with sediment/shallowness, tide, persistence, precise shoreline and 2019 shoreline correspondence unresolved.",
+    "All73 specific cloud/material/shore/dark or registration questions in this observed179 remain open; masks255 alone do not clear SCL8/9 or material ambiguity.",
+    "Annual predictions and instantaneous/interface questions remain explicit. Original foreign/ADM2/territorial/source-version disagreements remain preserved.",
+    "No owner transfer, native authority, original repair or legal sovereignty credit."
+  ],
+  "new_source_raster_geometry_calls_by_Main": 0,
+  "native_or_repair_credit": 0,
+  "publication": "pending"
+}

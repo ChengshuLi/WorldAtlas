@@ -1,0 +1,142 @@
+{
+  "producer_xml_sha256": "d5a35dbf7b72cf68066933cd8269df05d62c22d89932cd1133694a4f8b9183ae",
+  "producer_facts": {
+    "SENSING_TIME": [
+      {
+        "text": "2020-01-05T04:04:54.511104Z",
+        "attributes": {
+          "metadataLevel": "Standard"
+        }
+      }
+    ],
+    "HORIZONTAL_CS_NAME": [
+      {
+        "text": "WGS84 / UTM zone 47N",
+        "attributes": {}
+      }
+    ],
+    "HORIZONTAL_CS_CODE": [
+      {
+        "text": "EPSG:32647",
+        "attributes": {}
+      }
+    ],
+    "NROWS": [
+      {
+        "text": "10980",
+        "attributes": {}
+      },
+      {
+        "text": "5490",
+        "attributes": {}
+      },
+      {
+        "text": "1830",
+        "attributes": {}
+      }
+    ],
+    "NCOLS": [
+      {
+        "text": "10980",
+        "attributes": {}
+      },
+      {
+        "text": "5490",
+        "attributes": {}
+      },
+      {
+        "text": "1830",
+        "attributes": {}
+      }
+    ],
+    "ULX": [
+      {
+        "text": "300000",
+        "attributes": {}
+      },
+      {
+        "text": "300000",
+        "attributes": {}
+      },
+      {
+        "text": "300000",
+        "attributes": {}
+      }
+    ],
+    "ULY": [
+      {
+        "text": "1400040",
+        "attributes": {}
+      },
+      {
+        "text": "1400040",
+        "attributes": {}
+      },
+      {
+        "text": "1400040",
+        "attributes": {}
+      }
+    ],
+    "XDIM": [
+      {
+        "text": "10",
+        "attributes": {}
+      },
+      {
+        "text": "20",
+        "attributes": {}
+      },
+      {
+        "text": "60",
+        "attributes": {}
+      }
+    ],
+    "YDIM": [
+      {
+        "text": "-10",
+        "attributes": {}
+      },
+      {
+        "text": "-20",
+        "attributes": {}
+      },
+      {
+        "text": "-60",
+        "attributes": {}
+      }
+    ],
+    "CLOUDY_PIXEL_PERCENTAGE": [
+      {
+        "text": "0.064293",
+        "attributes": {}
+      }
+    ],
+    "DEGRADED_MSI_DATA_PERCENTAGE": [
+      {
+        "text": "0",
+        "attributes": {}
+      }
+    ],
+    "NODATA_PIXEL_PERCENTAGE": [
+      {
+        "text": "0.000000",
+        "attributes": {}
+      }
+    ]
+  },
+  "STAC_native_affine": [
+    10,
+    0,
+    300000,
+    0,
+    -10,
+    1400040
+  ],
+  "STAC_native_shape": [
+    10980,
+    10980
+  ],
+  "STAC_source_year": 2020,
+  "source_limit": "Nativeaffine/sourceassets available; actualvalidpixels/cloud/localphysicalsurface notyetobserved. No GEOS/vectorfootprintinference orannual/binarygroundtruth.",
+  "rights": "OfficialCopernicusSentinelpublicdata; retainedunchangedSentinelLegalNotice/attribution sameaspreviousPMM/PMP,willreuseimmutable1e5publiclegalnotice."
+}
