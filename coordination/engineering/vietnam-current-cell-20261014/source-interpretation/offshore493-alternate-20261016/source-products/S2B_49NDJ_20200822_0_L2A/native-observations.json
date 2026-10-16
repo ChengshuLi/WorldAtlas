@@ -1,0 +1,1213 @@
+{
+  "item": "S2B_49NDJ_20200822_0_L2A",
+  "acquisition_datetime": "2020-08-22T03:15:53.609000Z",
+  "properties": {
+    "created": "2022-11-06T09:51:18.031Z",
+    "platform": "sentinel-2b",
+    "constellation": "sentinel-2",
+    "instruments": [
+      "msi"
+    ],
+    "eo:cloud_cover": 2.879712,
+    "proj:epsg": 32649,
+    "mgrs:utm_zone": 49,
+    "mgrs:latitude_band": "N",
+    "mgrs:grid_square": "DJ",
+    "grid:code": "MGRS-49NDJ",
+    "view:sun_azimuth": 77.4667648615122,
+    "view:sun_elevation": 68.7777583151905,
+    "s2:degraded_msi_data_percentage": 0,
+    "s2:nodata_pixel_percentage": 3.944725,
+    "s2:saturated_defective_pixel_percentage": 0,
+    "s2:dark_features_percentage": 0,
+    "s2:cloud_shadow_percentage": 0,
+    "s2:vegetation_percentage": 0.00056,
+    "s2:not_vegetated_percentage": 0.003862,
+    "s2:water_percentage": 97.115868,
+    "s2:unclassified_percentage": 0,
+    "s2:medium_proba_clouds_percentage": 1.324938,
+    "s2:high_proba_clouds_percentage": 1.554774,
+    "s2:thin_cirrus_percentage": 0,
+    "s2:snow_ice_percentage": 0,
+    "s2:product_type": "S2MSI2A",
+    "s2:processing_baseline": "02.14",
+    "s2:product_uri": "S2B_MSIL2A_20200822T025549_N0214_R032_T49NDJ_20200822T063221.SAFE",
+    "s2:generation_time": "2020-08-22T06:32:21.000000Z",
+    "s2:datatake_id": "GS2B_20200822T025549_018076_N02.14",
+    "s2:datatake_type": "INS-NOBS",
+    "s2:datastrip_id": "S2B_OPER_MSI_L2A_DS_EPAE_20200822T063221_S20200822T031313_N02.14",
+    "s2:granule_id": "S2B_OPER_MSI_L2A_TL_EPAE_20200822T063221_A018076_T49NDJ_N02.14",
+    "s2:reflectance_conversion_factor": 0.976443694785541,
+    "datetime": "2020-08-22T03:15:53.609000Z",
+    "s2:sequence": "0",
+    "earthsearch:s3_path": "s3://sentinel-cogs/sentinel-s2-l2a-cogs/49/N/DJ/2020/8/S2B_49NDJ_20200822_0_L2A",
+    "earthsearch:payload_id": "roda-sentinel2/workflow-sentinel2-to-stac/39b79d95ec44010b92d01421558cf722",
+    "earthsearch:boa_offset_applied": false,
+    "processing:software": {
+      "sentinel2-to-stac": "0.1.0"
+    },
+    "updated": "2022-11-06T09:51:18.031Z"
+  },
+  "owner_counts": {
+    "48238": 3
+  },
+  "source_targets": [
+    "gb:VNM:ADM2:81297802B23443064350281"
+  ],
+  "source_metadata": {
+    "red": {
+      "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/49/N/DJ/2020/8/S2B_49NDJ_20200822_0_L2A/B04.tif",
+      "shape": [
+        10980,
+        10980
+      ],
+      "transform": [
+        10.0,
+        0.0,
+        399960.0,
+        0.0,
+        -10.0,
+        900000.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "blocks": [
+        [
+          1024,
+          1024
+        ]
+      ],
+      "dtype": "uint16",
+      "crs": "EPSG:32649",
+      "nodata": 0.0,
+      "raster_bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint16",
+          "bits_per_sample": 15,
+          "spatial_resolution": 10,
+          "scale": 0.0001,
+          "offset": 0
+        }
+      ]
+    },
+    "green": {
+      "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/49/N/DJ/2020/8/S2B_49NDJ_20200822_0_L2A/B03.tif",
+      "shape": [
+        10980,
+        10980
+      ],
+      "transform": [
+        10.0,
+        0.0,
+        399960.0,
+        0.0,
+        -10.0,
+        900000.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "blocks": [
+        [
+          1024,
+          1024
+        ]
+      ],
+      "dtype": "uint16",
+      "crs": "EPSG:32649",
+      "nodata": 0.0,
+      "raster_bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint16",
+          "bits_per_sample": 15,
+          "spatial_resolution": 10,
+          "scale": 0.0001,
+          "offset": 0
+        }
+      ]
+    },
+    "blue": {
+      "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/49/N/DJ/2020/8/S2B_49NDJ_20200822_0_L2A/B02.tif",
+      "shape": [
+        10980,
+        10980
+      ],
+      "transform": [
+        10.0,
+        0.0,
+        399960.0,
+        0.0,
+        -10.0,
+        900000.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "blocks": [
+        [
+          1024,
+          1024
+        ]
+      ],
+      "dtype": "uint16",
+      "crs": "EPSG:32649",
+      "nodata": 0.0,
+      "raster_bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint16",
+          "bits_per_sample": 15,
+          "spatial_resolution": 10,
+          "scale": 0.0001,
+          "offset": 0
+        }
+      ]
+    },
+    "nir": {
+      "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/49/N/DJ/2020/8/S2B_49NDJ_20200822_0_L2A/B08.tif",
+      "shape": [
+        10980,
+        10980
+      ],
+      "transform": [
+        10.0,
+        0.0,
+        399960.0,
+        0.0,
+        -10.0,
+        900000.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "blocks": [
+        [
+          1024,
+          1024
+        ]
+      ],
+      "dtype": "uint16",
+      "crs": "EPSG:32649",
+      "nodata": 0.0,
+      "raster_bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint16",
+          "bits_per_sample": 15,
+          "spatial_resolution": 10,
+          "scale": 0.0001,
+          "offset": 0
+        }
+      ]
+    },
+    "scl": {
+      "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/49/N/DJ/2020/8/S2B_49NDJ_20200822_0_L2A/SCL.tif",
+      "shape": [
+        5490,
+        5490
+      ],
+      "transform": [
+        20.0,
+        0.0,
+        399960.0,
+        0.0,
+        -20.0,
+        900000.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "blocks": [
+        [
+          512,
+          512
+        ]
+      ],
+      "dtype": "uint8",
+      "crs": "EPSG:32649",
+      "nodata": 0.0,
+      "raster_bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint8",
+          "spatial_resolution": 20
+        }
+      ]
+    }
+  },
+  "points": [
+    {
+      "index": 468,
+      "original_key": {
+        "owner": 48238,
+        "y": 125178,
+        "x": 211575
+      },
+      "longitude": 110.53035099898534,
+      "latitude": 8.080990829375322,
+      "input_scope_array_index": 24343,
+      "original_source_array_index": 39988,
+      "original_interval_index": 9676,
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "original_packet_index": 9668,
+      "original_offshore_item": "S2B_49NDJ_20200325_0_L2A",
+      "source_pixels": {
+        "red": [
+          671,
+          4829
+        ],
+        "green": [
+          671,
+          4829
+        ],
+        "blue": [
+          671,
+          4829
+        ],
+        "nir": [
+          671,
+          4829
+        ],
+        "scl": [
+          335,
+          2414
+        ]
+      },
+      "source_subpixels": {
+        "red": [
+          671.8657139024581,
+          4829.476705613888
+        ],
+        "green": [
+          671.8657139024581,
+          4829.476705613888
+        ],
+        "blue": [
+          671.8657139024581,
+          4829.476705613888
+        ],
+        "nir": [
+          671.8657139024581,
+          4829.476705613888
+        ],
+        "scl": [
+          335.93285695122904,
+          2414.738352806944
+        ]
+      },
+      "inside_native_assets": {
+        "red": true,
+        "green": true,
+        "blue": true,
+        "nir": true,
+        "scl": true
+      },
+      "assets": {
+        "red": {
+          "value": 896,
+          "valid_mask": 255,
+          "source_pixel": [
+            671,
+            4829
+          ],
+          "local_pixel": [
+            671,
+            734
+          ],
+          "neighbourhood": [
+            [
+              779,
+              839,
+              890
+            ],
+            [
+              799,
+              896,
+              926
+            ],
+            [
+              872,
+              863,
+              881
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "green": {
+          "value": 897,
+          "valid_mask": 255,
+          "source_pixel": [
+            671,
+            4829
+          ],
+          "local_pixel": [
+            671,
+            734
+          ],
+          "neighbourhood": [
+            [
+              815,
+              867,
+              973
+            ],
+            [
+              777,
+              897,
+              878
+            ],
+            [
+              972,
+              862,
+              824
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "blue": {
+          "value": 894,
+          "valid_mask": 255,
+          "source_pixel": [
+            671,
+            4829
+          ],
+          "local_pixel": [
+            671,
+            734
+          ],
+          "neighbourhood": [
+            [
+              1015,
+              932,
+              1096
+            ],
+            [
+              1110,
+              894,
+              1038
+            ],
+            [
+              1124,
+              962,
+              966
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "nir": {
+          "value": 737,
+          "valid_mask": 255,
+          "source_pixel": [
+            671,
+            4829
+          ],
+          "local_pixel": [
+            671,
+            734
+          ],
+          "neighbourhood": [
+            [
+              780,
+              761,
+              857
+            ],
+            [
+              841,
+              737,
+              874
+            ],
+            [
+              885,
+              824,
+              803
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "scl": {
+          "value": 6,
+          "valid_mask": 255,
+          "source_pixel": [
+            335,
+            2414
+          ],
+          "local_pixel": [
+            335,
+            367
+          ],
+          "neighbourhood": [
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        }
+      },
+      "inside_native_frame": true,
+      "source_block": [
+        0,
+        4
+      ]
+    },
+    {
+      "index": 469,
+      "original_key": {
+        "owner": 48238,
+        "y": 125383,
+        "x": 211562
+      },
+      "longitude": 110.51249971392173,
+      "latitude": 7.8021898359940085,
+      "input_scope_array_index": 24627,
+      "original_source_array_index": 40272,
+      "original_interval_index": 9827,
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "original_packet_index": 9690,
+      "original_offshore_item": "S2B_49NDJ_20200325_0_L2A",
+      "source_pixels": {
+        "red": [
+          3753,
+          4629
+        ],
+        "green": [
+          3753,
+          4629
+        ],
+        "blue": [
+          3753,
+          4629
+        ],
+        "nir": [
+          3753,
+          4629
+        ],
+        "scl": [
+          1876,
+          2314
+        ]
+      },
+      "source_subpixels": {
+        "red": [
+          3753.922311550021,
+          4629.1658728419425
+        ],
+        "green": [
+          3753.922311550021,
+          4629.1658728419425
+        ],
+        "blue": [
+          3753.922311550021,
+          4629.1658728419425
+        ],
+        "nir": [
+          3753.922311550021,
+          4629.1658728419425
+        ],
+        "scl": [
+          1876.9611557750104,
+          2314.5829364209712
+        ]
+      },
+      "inside_native_assets": {
+        "red": true,
+        "green": true,
+        "blue": true,
+        "nir": true,
+        "scl": true
+      },
+      "assets": {
+        "red": {
+          "value": 905,
+          "valid_mask": 255,
+          "source_pixel": [
+            3753,
+            4629
+          ],
+          "local_pixel": [
+            682,
+            534
+          ],
+          "neighbourhood": [
+            [
+              1010,
+              937,
+              938
+            ],
+            [
+              935,
+              905,
+              951
+            ],
+            [
+              945,
+              916,
+              836
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "green": {
+          "value": 938,
+          "valid_mask": 255,
+          "source_pixel": [
+            3753,
+            4629
+          ],
+          "local_pixel": [
+            682,
+            534
+          ],
+          "neighbourhood": [
+            [
+              982,
+              973,
+              993
+            ],
+            [
+              979,
+              938,
+              1068
+            ],
+            [
+              955,
+              1004,
+              913
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "blue": {
+          "value": 1072,
+          "valid_mask": 255,
+          "source_pixel": [
+            3753,
+            4629
+          ],
+          "local_pixel": [
+            682,
+            534
+          ],
+          "neighbourhood": [
+            [
+              1034,
+              1120,
+              1032
+            ],
+            [
+              1076,
+              1072,
+              1058
+            ],
+            [
+              1009,
+              1132,
+              1094
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "nir": {
+          "value": 891,
+          "valid_mask": 255,
+          "source_pixel": [
+            3753,
+            4629
+          ],
+          "local_pixel": [
+            682,
+            534
+          ],
+          "neighbourhood": [
+            [
+              896,
+              935,
+              938
+            ],
+            [
+              894,
+              891,
+              962
+            ],
+            [
+              833,
+              883,
+              856
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "scl": {
+          "value": 6,
+          "valid_mask": 255,
+          "source_pixel": [
+            1876,
+            2314
+          ],
+          "local_pixel": [
+            341,
+            267
+          ],
+          "neighbourhood": [
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        }
+      },
+      "inside_native_frame": true,
+      "source_block": [
+        3,
+        4
+      ]
+    },
+    {
+      "index": 470,
+      "original_key": {
+        "owner": 48238,
+        "y": 125384,
+        "x": 211561
+      },
+      "longitude": 110.51112653814761,
+      "latitude": 7.800829369971872,
+      "input_scope_array_index": 24628,
+      "original_source_array_index": 40273,
+      "original_interval_index": 9828,
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "original_packet_index": 9691,
+      "original_offshore_item": "S2B_49NDJ_20200325_0_L2A",
+      "source_pixels": {
+        "red": [
+          3768,
+          4614
+        ],
+        "green": [
+          3768,
+          4614
+        ],
+        "blue": [
+          3768,
+          4614
+        ],
+        "nir": [
+          3768,
+          4614
+        ],
+        "scl": [
+          1884,
+          2307
+        ]
+      },
+      "source_subpixels": {
+        "red": [
+          3768.9453496795322,
+          4614.008429510526
+        ],
+        "green": [
+          3768.9453496795322,
+          4614.008429510526
+        ],
+        "blue": [
+          3768.9453496795322,
+          4614.008429510526
+        ],
+        "nir": [
+          3768.9453496795322,
+          4614.008429510526
+        ],
+        "scl": [
+          1884.4726748397661,
+          2307.004214755263
+        ]
+      },
+      "inside_native_assets": {
+        "red": true,
+        "green": true,
+        "blue": true,
+        "nir": true,
+        "scl": true
+      },
+      "assets": {
+        "red": {
+          "value": 926,
+          "valid_mask": 255,
+          "source_pixel": [
+            3768,
+            4614
+          ],
+          "local_pixel": [
+            697,
+            519
+          ],
+          "neighbourhood": [
+            [
+              863,
+              1030,
+              857
+            ],
+            [
+              897,
+              926,
+              880
+            ],
+            [
+              1017,
+              996,
+              857
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "green": {
+          "value": 957,
+          "valid_mask": 255,
+          "source_pixel": [
+            3768,
+            4614
+          ],
+          "local_pixel": [
+            697,
+            519
+          ],
+          "neighbourhood": [
+            [
+              896,
+              1018,
+              1018
+            ],
+            [
+              1060,
+              957,
+              898
+            ],
+            [
+              1058,
+              1058,
+              848
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "blue": {
+          "value": 1120,
+          "valid_mask": 255,
+          "source_pixel": [
+            3768,
+            4614
+          ],
+          "local_pixel": [
+            697,
+            519
+          ],
+          "neighbourhood": [
+            [
+              1080,
+              1017,
+              1156
+            ],
+            [
+              1084,
+              1120,
+              1042
+            ],
+            [
+              980,
+              1200,
+              1034
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "nir": {
+          "value": 886,
+          "valid_mask": 255,
+          "source_pixel": [
+            3768,
+            4614
+          ],
+          "local_pixel": [
+            697,
+            519
+          ],
+          "neighbourhood": [
+            [
+              902,
+              916,
+              984
+            ],
+            [
+              915,
+              886,
+              860
+            ],
+            [
+              890,
+              1020,
+              848
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "scl": {
+          "value": 6,
+          "valid_mask": 255,
+          "source_pixel": [
+            1884,
+            2307
+          ],
+          "local_pixel": [
+            349,
+            260
+          ],
+          "neighbourhood": [
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        }
+      },
+      "inside_native_frame": true,
+      "source_block": [
+        3,
+        4
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "path": "products/S2B_49NDJ_20200822_0_L2A/block-00-04/block-observations.json",
+      "bytes": 12843,
+      "sha256": "78486635accde6827eef2d665354afce231bd11e603a24826a71a4bcabf23d30"
+    },
+    {
+      "path": "products/S2B_49NDJ_20200822_0_L2A/block-03-04/block-observations.json",
+      "bytes": 18717,
+      "sha256": "0975212913a8fe42f39bbee45f5256fedcb8ef95839508b6751d09230190cc6c"
+    }
+  ],
+  "summary": {
+    "requested_original_keys": 3,
+    "actually_sampled_native_centres": 3,
+    "outside_native_frame_indices": [],
+    "scl_centre_counts": {
+      "6": 3
+    },
+    "valid_centre_masks_by_band": {
+      "red": {
+        "255": 3
+      },
+      "green": {
+        "255": 3
+      },
+      "blue": {
+        "255": 3
+      },
+      "nir": {
+        "255": 3
+      },
+      "scl": {
+        "255": 3
+      }
+    },
+    "physical_interpretation": null
+  },
+  "limits": [
+    "Partial native windows; no whole remote COG hash.",
+    "Validity and SCL are literal source observations, not physical truth.",
+    "No fitted shift, shoreline extraction, classifier, authority, repair or review credit."
+  ]
+}

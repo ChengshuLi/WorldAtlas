@@ -1,0 +1,6009 @@
+{
+  "purpose": "Actual saved different-date native pixels at19exact original centres; source hashes and equal original/candidate grid affine/CRS checked, no remote read or classifier.",
+  "records": [
+    {
+      "index": 8021,
+      "original_point_unchanged": {
+        "index": 8021,
+        "original_key": {
+          "owner": 48238,
+          "y": 123964,
+          "x": 215975
+        },
+        "longitude": 116.57232440514787,
+        "latitude": 9.727875449192625,
+        "input_scope_array_index": 20678,
+        "original_source_array_index": 36323,
+        "original_interval_index": 8182,
+        "original_record": {
+          "accepted_geometry_covers": false,
+          "accepted_hole_covers": false,
+          "actual_sids": [
+            65788
+          ],
+          "country_boundary_ids": [],
+          "covering_owners": [
+            48238
+          ],
+          "declared_sids": [
+            65788
+          ],
+          "flags": [
+            "disputed-island-territory-research"
+          ],
+          "hold_reasons": [
+            "disputed-island-territory-research",
+            "foreign-reference-country",
+            "source-relative-physical-interpretation-unresolved"
+          ],
+          "owner": 48238,
+          "package": "physical-interpretation",
+          "physical": "source-relative",
+          "qualified": false,
+          "reference_countries": [],
+          "source_boundary_ids": [],
+          "territorial_hold_reasons": [
+            "disputed-island-territory-research",
+            "foreign-reference-country"
+          ],
+          "x": 215975,
+          "y": 123964
+        },
+        "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+        "source_SID_sets": [
+          {
+            "actual_sids": [
+              65788
+            ],
+            "keys": 9824
+          }
+        ],
+        "assigned_item": "S2A_50PMR_20200203_1_L2A"
+      },
+      "original_scene": "S2A_50PMR_20200203_1_L2A",
+      "retained_alternate_item": "S2A_50PMR_20200420_0_L2A",
+      "acquisition_datetime": "2020-04-20T02:45:14.992000Z",
+      "block_record": "bulk-completion/offshore13649-observation-001/products/S2A_50PMR_20200420_0_L2A/block-02-05/block-observations.json",
+      "assets": {
+        "red": {
+          "value": 250,
+          "valid_mask": 255,
+          "source_pixel": [
+            2468,
+            5312
+          ],
+          "local_pixel": [
+            421,
+            193
+          ],
+          "local_subpixel": [
+            421.4731170955347,
+            193.97900071943877
+          ],
+          "neighbourhood": [
+            [
+              260,
+              246,
+              230
+            ],
+            [
+              262,
+              250,
+              249
+            ],
+            [
+              252,
+              257,
+              249
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ]
+        },
+        "green": {
+          "value": 386,
+          "valid_mask": 255,
+          "source_pixel": [
+            2468,
+            5312
+          ],
+          "local_pixel": [
+            421,
+            193
+          ],
+          "local_subpixel": [
+            421.4731170955347,
+            193.97900071943877
+          ],
+          "neighbourhood": [
+            [
+              380,
+              370,
+              374
+            ],
+            [
+              379,
+              386,
+              351
+            ],
+            [
+              383,
+              372,
+              366
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ]
+        },
+        "blue": {
+          "value": 918,
+          "valid_mask": 255,
+          "source_pixel": [
+            2468,
+            5312
+          ],
+          "local_pixel": [
+            421,
+            193
+          ],
+          "local_subpixel": [
+            421.4731170955347,
+            193.97900071943877
+          ],
+          "neighbourhood": [
+            [
+              873,
+              894,
+              868
+            ],
+            [
+              838,
+              918,
+              844
+            ],
+            [
+              857,
+              871,
+              861
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ]
+        },
+        "nir": {
+          "value": 217,
+          "valid_mask": 255,
+          "source_pixel": [
+            2468,
+            5312
+          ],
+          "local_pixel": [
+            421,
+            193
+          ],
+          "local_subpixel": [
+            421.4731170955347,
+            193.97900071943877
+          ],
+          "neighbourhood": [
+            [
+              218,
+              209,
+              221
+            ],
+            [
+              224,
+              217,
+              229
+            ],
+            [
+              212,
+              217,
+              216
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ]
+        },
+        "scl": {
+          "value": 6,
+          "valid_mask": 255,
+          "source_pixel": [
+            1234,
+            2656
+          ],
+          "local_pixel": [
+            211,
+            97
+          ],
+          "local_subpixel": [
+            211.23655854776734,
+            97.48950035971939
+          ],
+          "neighbourhood": [
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "index": 8022,
+      "original_point_unchanged": {
+        "index": 8022,
+        "original_key": {
+          "owner": 48238,
+          "y": 123964,
+          "x": 215976
+        },
+        "longitude": 116.57369758092199,
+        "latitude": 9.727875449192625,
+        "input_scope_array_index": 20679,
+        "original_source_array_index": 36324,
+        "original_interval_index": 8182,
+        "original_record": {
+          "accepted_geometry_covers": false,
+          "accepted_hole_covers": false,
+          "actual_sids": [
+            65788
+          ],
+          "country_boundary_ids": [],
+          "covering_owners": [
+            48238
+          ],
+          "declared_sids": [
+            65788
+          ],
+          "flags": [
+            "disputed-island-territory-research"
+          ],
+          "hold_reasons": [
+            "disputed-island-territory-research",
+            "foreign-reference-country",
+            "source-relative-physical-interpretation-unresolved"
+          ],
+          "owner": 48238,
+          "package": "physical-interpretation",
+          "physical": "source-relative",
+          "qualified": false,
+          "reference_countries": [],
+          "source_boundary_ids": [],
+          "territorial_hold_reasons": [
+            "disputed-island-territory-research",
+            "foreign-reference-country"
+          ],
+          "x": 215976,
+          "y": 123964
+        },
+        "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+        "source_SID_sets": [
+          {
+            "actual_sids": [
+              65788
+            ],
+            "keys": 9824
+          }
+        ],
+        "assigned_item": "S2A_50PMR_20200203_1_L2A"
+      },
+      "original_scene": "S2A_50PMR_20200203_1_L2A",
+      "retained_alternate_item": "S2A_50PMR_20200420_0_L2A",
+      "acquisition_datetime": "2020-04-20T02:45:14.992000Z",
+      "block_record": "bulk-completion/offshore13649-observation-001/products/S2A_50PMR_20200420_0_L2A/block-02-05/block-observations.json",
+      "assets": {
+        "red": {
+          "value": 165,
+          "valid_mask": 255,
+          "source_pixel": [
+            2468,
+            5328
+          ],
+          "local_pixel": [
+            421,
+            209
+          ],
+          "local_subpixel": [
+            421.4920839691913,
+            209.04114008200122
+          ],
+          "neighbourhood": [
+            [
+              165,
+              150,
+              146
+            ],
+            [
+              169,
+              165,
+              160
+            ],
+            [
+              183,
+              187,
+              157
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ]
+        },
+        "green": {
+          "value": 271,
+          "valid_mask": 255,
+          "source_pixel": [
+            2468,
+            5328
+          ],
+          "local_pixel": [
+            421,
+            209
+          ],
+          "local_subpixel": [
+            421.4920839691913,
+            209.04114008200122
+          ],
+          "neighbourhood": [
+            [
+              278,
+              275,
+              273
+            ],
+            [
+              262,
+              271,
+              271
+            ],
+            [
+              287,
+              306,
+              288
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ]
+        },
+        "blue": {
+          "value": 739,
+          "valid_mask": 255,
+          "source_pixel": [
+            2468,
+            5328
+          ],
+          "local_pixel": [
+            421,
+            209
+          ],
+          "local_subpixel": [
+            421.4920839691913,
+            209.04114008200122
+          ],
+          "neighbourhood": [
+            [
+              727,
+              781,
+              750
+            ],
+            [
+              706,
+              739,
+              732
+            ],
+            [
+              706,
+              754,
+              735
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ]
+        },
+        "nir": {
+          "value": 139,
+          "valid_mask": 255,
+          "source_pixel": [
+            2468,
+            5328
+          ],
+          "local_pixel": [
+            421,
+            209
+          ],
+          "local_subpixel": [
+            421.4920839691913,
+            209.04114008200122
+          ],
+          "neighbourhood": [
+            [
+              146,
+              127,
+              115
+            ],
+            [
+              138,
+              139,
+              129
+            ],
+            [
+              154,
+              143,
+              145
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ]
+        },
+        "scl": {
+          "value": 6,
+          "valid_mask": 255,
+          "source_pixel": [
+            1234,
+            2664
+          ],
+          "local_pixel": [
+            211,
+            105
+          ],
+          "local_subpixel": [
+            211.24604198459565,
+            105.02057004100061
+          ],
+          "neighbourhood": [
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "index": 8023,
+      "original_point_unchanged": {
+        "index": 8023,
+        "original_key": {
+          "owner": 48238,
+          "y": 123965,
+          "x": 215976
+        },
+        "longitude": 116.57369758092199,
+        "latitude": 9.726522015051874,
+        "input_scope_array_index": 20689,
+        "original_source_array_index": 36334,
+        "original_interval_index": 8187,
+        "original_record": {
+          "accepted_geometry_covers": false,
+          "accepted_hole_covers": false,
+          "actual_sids": [
+            65788
+          ],
+          "country_boundary_ids": [],
+          "covering_owners": [
+            48238
+          ],
+          "declared_sids": [
+            65788
+          ],
+          "flags": [
+            "disputed-island-territory-research"
+          ],
+          "hold_reasons": [
+            "disputed-island-territory-research",
+            "foreign-reference-country",
+            "source-relative-physical-interpretation-unresolved"
+          ],
+          "owner": 48238,
+          "package": "physical-interpretation",
+          "physical": "source-relative",
+          "qualified": false,
+          "reference_countries": [],
+          "source_boundary_ids": [],
+          "territorial_hold_reasons": [
+            "disputed-island-territory-research",
+            "foreign-reference-country"
+          ],
+          "x": 215976,
+          "y": 123965
+        },
+        "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+        "source_SID_sets": [
+          {
+            "actual_sids": [
+              65788
+            ],
+            "keys": 9824
+          }
+        ],
+        "assigned_item": "S2A_50PMR_20200203_1_L2A"
+      },
+      "original_scene": "S2A_50PMR_20200203_1_L2A",
+      "retained_alternate_item": "S2A_50PMR_20200420_0_L2A",
+      "acquisition_datetime": "2020-04-20T02:45:14.992000Z",
+      "block_record": "bulk-completion/offshore13649-observation-001/products/S2A_50PMR_20200420_0_L2A/block-02-05/block-observations.json",
+      "assets": {
+        "red": {
+          "value": 231,
+          "valid_mask": 255,
+          "source_pixel": [
+            2483,
+            5328
+          ],
+          "local_pixel": [
+            436,
+            209
+          ],
+          "local_subpixel": [
+            436.4562801591528,
+            209.02232813968294
+          ],
+          "neighbourhood": [
+            [
+              205,
+              209,
+              217
+            ],
+            [
+              211,
+              231,
+              217
+            ],
+            [
+              212,
+              213,
+              213
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ]
+        },
+        "green": {
+          "value": 358,
+          "valid_mask": 255,
+          "source_pixel": [
+            2483,
+            5328
+          ],
+          "local_pixel": [
+            436,
+            209
+          ],
+          "local_subpixel": [
+            436.4562801591528,
+            209.02232813968294
+          ],
+          "neighbourhood": [
+            [
+              345,
+              350,
+              363
+            ],
+            [
+              336,
+              358,
+              355
+            ],
+            [
+              340,
+              366,
+              353
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ]
+        },
+        "blue": {
+          "value": 774,
+          "valid_mask": 255,
+          "source_pixel": [
+            2483,
+            5328
+          ],
+          "local_pixel": [
+            436,
+            209
+          ],
+          "local_subpixel": [
+            436.4562801591528,
+            209.02232813968294
+          ],
+          "neighbourhood": [
+            [
+              741,
+              764,
+              811
+            ],
+            [
+              711,
+              774,
+              800
+            ],
+            [
+              766,
+              781,
+              790
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ]
+        },
+        "nir": {
+          "value": 194,
+          "valid_mask": 255,
+          "source_pixel": [
+            2483,
+            5328
+          ],
+          "local_pixel": [
+            436,
+            209
+          ],
+          "local_subpixel": [
+            436.4562801591528,
+            209.02232813968294
+          ],
+          "neighbourhood": [
+            [
+              186,
+              188,
+              188
+            ],
+            [
+              181,
+              194,
+              172
+            ],
+            [
+              185,
+              199,
+              184
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ]
+        },
+        "scl": {
+          "value": 6,
+          "valid_mask": 255,
+          "source_pixel": [
+            1241,
+            2664
+          ],
+          "local_pixel": [
+            218,
+            105
+          ],
+          "local_subpixel": [
+            218.7281400795764,
+            105.01116406984147
+          ],
+          "neighbourhood": [
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "index": 8024,
+      "original_point_unchanged": {
+        "index": 8024,
+        "original_key": {
+          "owner": 48238,
+          "y": 123965,
+          "x": 215977
+        },
+        "longitude": 116.57507075669616,
+        "latitude": 9.726522015051874,
+        "input_scope_array_index": 20690,
+        "original_source_array_index": 36335,
+        "original_interval_index": 8187,
+        "original_record": {
+          "accepted_geometry_covers": false,
+          "accepted_hole_covers": false,
+          "actual_sids": [
+            65788
+          ],
+          "country_boundary_ids": [],
+          "covering_owners": [
+            48238
+          ],
+          "declared_sids": [
+            65788
+          ],
+          "flags": [
+            "disputed-island-territory-research"
+          ],
+          "hold_reasons": [
+            "disputed-island-territory-research",
+            "foreign-reference-country",
+            "source-relative-physical-interpretation-unresolved"
+          ],
+          "owner": 48238,
+          "package": "physical-interpretation",
+          "physical": "source-relative",
+          "qualified": false,
+          "reference_countries": [],
+          "source_boundary_ids": [],
+          "territorial_hold_reasons": [
+            "disputed-island-territory-research",
+            "foreign-reference-country"
+          ],
+          "x": 215977,
+          "y": 123965
+        },
+        "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+        "source_SID_sets": [
+          {
+            "actual_sids": [
+              65788
+            ],
+            "keys": 9824
+          }
+        ],
+        "assigned_item": "S2A_50PMR_20200203_1_L2A"
+      },
+      "original_scene": "S2A_50PMR_20200203_1_L2A",
+      "retained_alternate_item": "S2A_50PMR_20200420_0_L2A",
+      "acquisition_datetime": "2020-04-20T02:45:14.992000Z",
+      "block_record": "bulk-completion/offshore13649-observation-001/products/S2A_50PMR_20200420_0_L2A/block-02-05/block-observations.json",
+      "assets": {
+        "red": {
+          "value": 251,
+          "valid_mask": 255,
+          "source_pixel": [
+            2483,
+            5343
+          ],
+          "local_pixel": [
+            436,
+            224
+          ],
+          "local_subpixel": [
+            436.47518350181053,
+            224.08452555433178
+          ],
+          "neighbourhood": [
+            [
+              219,
+              240,
+              250
+            ],
+            [
+              224,
+              251,
+              275
+            ],
+            [
+              234,
+              261,
+              304
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ]
+        },
+        "green": {
+          "value": 962,
+          "valid_mask": 255,
+          "source_pixel": [
+            2483,
+            5343
+          ],
+          "local_pixel": [
+            436,
+            224
+          ],
+          "local_subpixel": [
+            436.47518350181053,
+            224.08452555433178
+          ],
+          "neighbourhood": [
+            [
+              865,
+              897,
+              975
+            ],
+            [
+              895,
+              962,
+              1064
+            ],
+            [
+              919,
+              1030,
+              1146
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ]
+        },
+        "blue": {
+          "value": 887,
+          "valid_mask": 255,
+          "source_pixel": [
+            2483,
+            5343
+          ],
+          "local_pixel": [
+            436,
+            224
+          ],
+          "local_subpixel": [
+            436.47518350181053,
+            224.08452555433178
+          ],
+          "neighbourhood": [
+            [
+              894,
+              847,
+              909
+            ],
+            [
+              898,
+              887,
+              974
+            ],
+            [
+              885,
+              948,
+              1002
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ]
+        },
+        "nir": {
+          "value": 167,
+          "valid_mask": 255,
+          "source_pixel": [
+            2483,
+            5343
+          ],
+          "local_pixel": [
+            436,
+            224
+          ],
+          "local_subpixel": [
+            436.47518350181053,
+            224.08452555433178
+          ],
+          "neighbourhood": [
+            [
+              162,
+              175,
+              166
+            ],
+            [
+              169,
+              167,
+              163
+            ],
+            [
+              159,
+              163,
+              170
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ]
+        },
+        "scl": {
+          "value": 6,
+          "valid_mask": 255,
+          "source_pixel": [
+            1241,
+            2671
+          ],
+          "local_pixel": [
+            218,
+            112
+          ],
+          "local_subpixel": [
+            218.73759175090527,
+            112.54226277716589
+          ],
+          "neighbourhood": [
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "index": 9705,
+      "original_point_unchanged": {
+        "index": 9705,
+        "original_key": {
+          "owner": 48238,
+          "y": 123952,
+          "x": 215987
+        },
+        "longitude": 116.58880251443742,
+        "latitude": 9.744116231167013,
+        "input_scope_array_index": 20583,
+        "original_source_array_index": 36228,
+        "original_interval_index": 8141,
+        "original_record": {
+          "accepted_geometry_covers": false,
+          "accepted_hole_covers": false,
+          "actual_sids": [
+            65788
+          ],
+          "country_boundary_ids": [],
+          "covering_owners": [
+            48238
+          ],
+          "declared_sids": [
+            65788
+          ],
+          "flags": [
+            "disputed-island-territory-research"
+          ],
+          "hold_reasons": [
+            "disputed-island-territory-research",
+            "foreign-reference-country",
+            "source-relative-physical-interpretation-unresolved"
+          ],
+          "owner": 48238,
+          "package": "physical-interpretation",
+          "physical": "source-relative",
+          "qualified": false,
+          "reference_countries": [],
+          "source_boundary_ids": [],
+          "territorial_hold_reasons": [
+            "disputed-island-territory-research",
+            "foreign-reference-country"
+          ],
+          "x": 215987,
+          "y": 123952
+        },
+        "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+        "source_SID_sets": [
+          {
+            "actual_sids": [
+              65788
+            ],
+            "keys": 9824
+          }
+        ],
+        "assigned_item": "S2A_50PMR_20200420_0_L2A"
+      },
+      "original_scene": "S2A_50PMR_20200420_0_L2A",
+      "retained_alternate_item": "S2A_50PMR_20200203_1_L2A",
+      "acquisition_datetime": "2020-02-03T02:55:01.287000Z",
+      "block_record": "bulk-completion/offshore13649-observation-001/products/S2A_50PMR_20200203_1_L2A/block-02-05/block-observations.json",
+      "assets": {
+        "red": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2289,
+            5493
+          ],
+          "local_pixel": [
+            242,
+            374
+          ],
+          "local_subpixel": [
+            242.13130482334236,
+            374.94243998799357
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "green": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2289,
+            5493
+          ],
+          "local_pixel": [
+            242,
+            374
+          ],
+          "local_subpixel": [
+            242.13130482334236,
+            374.94243998799357
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "blue": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2289,
+            5493
+          ],
+          "local_pixel": [
+            242,
+            374
+          ],
+          "local_subpixel": [
+            242.13130482334236,
+            374.94243998799357
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "nir": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2289,
+            5493
+          ],
+          "local_pixel": [
+            242,
+            374
+          ],
+          "local_subpixel": [
+            242.13130482334236,
+            374.94243998799357
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "scl": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            1144,
+            2746
+          ],
+          "local_pixel": [
+            121,
+            187
+          ],
+          "local_subpixel": [
+            121.56565241167118,
+            187.97121999399678
+          ],
+          "neighbourhood": [
+            [
+              6,
+              0,
+              0
+            ],
+            [
+              6,
+              0,
+              0
+            ],
+            [
+              6,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              0,
+              0
+            ],
+            [
+              255,
+              0,
+              0
+            ],
+            [
+              255,
+              0,
+              0
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "index": 9706,
+      "original_point_unchanged": {
+        "index": 9706,
+        "original_key": {
+          "owner": 48238,
+          "y": 123958,
+          "x": 215988
+        },
+        "longitude": 116.59017569021154,
+        "latitude": 9.735995938913984,
+        "input_scope_array_index": 20641,
+        "original_source_array_index": 36286,
+        "original_interval_index": 8158,
+        "original_record": {
+          "accepted_geometry_covers": false,
+          "accepted_hole_covers": false,
+          "actual_sids": [
+            65788
+          ],
+          "country_boundary_ids": [],
+          "covering_owners": [
+            48238
+          ],
+          "declared_sids": [
+            65788
+          ],
+          "flags": [
+            "disputed-island-territory-research"
+          ],
+          "hold_reasons": [
+            "disputed-island-territory-research",
+            "foreign-reference-country",
+            "source-relative-physical-interpretation-unresolved"
+          ],
+          "owner": 48238,
+          "package": "physical-interpretation",
+          "physical": "source-relative",
+          "qualified": false,
+          "reference_countries": [],
+          "source_boundary_ids": [],
+          "territorial_hold_reasons": [
+            "disputed-island-territory-research",
+            "foreign-reference-country"
+          ],
+          "x": 215988,
+          "y": 123958
+        },
+        "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+        "source_SID_sets": [
+          {
+            "actual_sids": [
+              65788
+            ],
+            "keys": 9824
+          }
+        ],
+        "assigned_item": "S2A_50PMR_20200420_0_L2A"
+      },
+      "original_scene": "S2A_50PMR_20200420_0_L2A",
+      "retained_alternate_item": "S2A_50PMR_20200203_1_L2A",
+      "acquisition_datetime": "2020-02-03T02:55:01.287000Z",
+      "block_record": "bulk-completion/offshore13649-observation-001/products/S2A_50PMR_20200203_1_L2A/block-02-05/block-observations.json",
+      "assets": {
+        "red": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2378,
+            5508
+          ],
+          "local_pixel": [
+            331,
+            389
+          ],
+          "local_subpixel": [
+            331.9311781690194,
+            389.89517512534076
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "green": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2378,
+            5508
+          ],
+          "local_pixel": [
+            331,
+            389
+          ],
+          "local_subpixel": [
+            331.9311781690194,
+            389.89517512534076
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "blue": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2378,
+            5508
+          ],
+          "local_pixel": [
+            331,
+            389
+          ],
+          "local_subpixel": [
+            331.9311781690194,
+            389.89517512534076
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "nir": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2378,
+            5508
+          ],
+          "local_pixel": [
+            331,
+            389
+          ],
+          "local_subpixel": [
+            331.9311781690194,
+            389.89517512534076
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "scl": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            1189,
+            2754
+          ],
+          "local_pixel": [
+            166,
+            195
+          ],
+          "local_subpixel": [
+            166.4655890845097,
+            195.44758756267038
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "index": 9707,
+      "original_point_unchanged": {
+        "index": 9707,
+        "original_key": {
+          "owner": 48238,
+          "y": 123959,
+          "x": 215988
+        },
+        "longitude": 116.59017569021154,
+        "latitude": 9.734642537669226,
+        "input_scope_array_index": 20644,
+        "original_source_array_index": 36289,
+        "original_interval_index": 8161,
+        "original_record": {
+          "accepted_geometry_covers": false,
+          "accepted_hole_covers": false,
+          "actual_sids": [
+            65788
+          ],
+          "country_boundary_ids": [],
+          "covering_owners": [
+            48238
+          ],
+          "declared_sids": [
+            65788
+          ],
+          "flags": [
+            "disputed-island-territory-research"
+          ],
+          "hold_reasons": [
+            "disputed-island-territory-research",
+            "foreign-reference-country",
+            "source-relative-physical-interpretation-unresolved"
+          ],
+          "owner": 48238,
+          "package": "physical-interpretation",
+          "physical": "source-relative",
+          "qualified": false,
+          "reference_countries": [],
+          "source_boundary_ids": [],
+          "territorial_hold_reasons": [
+            "disputed-island-territory-research",
+            "foreign-reference-country"
+          ],
+          "x": 215988,
+          "y": 123959
+        },
+        "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+        "source_SID_sets": [
+          {
+            "actual_sids": [
+              65788
+            ],
+            "keys": 9824
+          }
+        ],
+        "assigned_item": "S2A_50PMR_20200420_0_L2A"
+      },
+      "original_scene": "S2A_50PMR_20200420_0_L2A",
+      "retained_alternate_item": "S2A_50PMR_20200203_1_L2A",
+      "acquisition_datetime": "2020-02-03T02:55:01.287000Z",
+      "block_record": "bulk-completion/offshore13649-observation-001/products/S2A_50PMR_20200203_1_L2A/block-02-05/block-observations.json",
+      "assets": {
+        "red": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2393,
+            5508
+          ],
+          "local_pixel": [
+            346,
+            389
+          ],
+          "local_subpixel": [
+            346.8949878976564,
+            389.87707587282057
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "green": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2393,
+            5508
+          ],
+          "local_pixel": [
+            346,
+            389
+          ],
+          "local_subpixel": [
+            346.8949878976564,
+            389.87707587282057
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "blue": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2393,
+            5508
+          ],
+          "local_pixel": [
+            346,
+            389
+          ],
+          "local_subpixel": [
+            346.8949878976564,
+            389.87707587282057
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "nir": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2393,
+            5508
+          ],
+          "local_pixel": [
+            346,
+            389
+          ],
+          "local_subpixel": [
+            346.8949878976564,
+            389.87707587282057
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "scl": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            1196,
+            2754
+          ],
+          "local_pixel": [
+            173,
+            195
+          ],
+          "local_subpixel": [
+            173.9474939488282,
+            195.43853793641028
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "index": 9708,
+      "original_point_unchanged": {
+        "index": 9708,
+        "original_key": {
+          "owner": 48238,
+          "y": 123960,
+          "x": 215987
+        },
+        "longitude": 116.58880251443742,
+        "latitude": 9.733289130939971,
+        "input_scope_array_index": 20648,
+        "original_source_array_index": 36293,
+        "original_interval_index": 8164,
+        "original_record": {
+          "accepted_geometry_covers": false,
+          "accepted_hole_covers": false,
+          "actual_sids": [
+            65788
+          ],
+          "country_boundary_ids": [],
+          "covering_owners": [
+            48238
+          ],
+          "declared_sids": [
+            65788
+          ],
+          "flags": [
+            "disputed-island-territory-research"
+          ],
+          "hold_reasons": [
+            "disputed-island-territory-research",
+            "foreign-reference-country",
+            "source-relative-physical-interpretation-unresolved"
+          ],
+          "owner": 48238,
+          "package": "physical-interpretation",
+          "physical": "source-relative",
+          "qualified": false,
+          "reference_countries": [],
+          "source_boundary_ids": [],
+          "territorial_hold_reasons": [
+            "disputed-island-territory-research",
+            "foreign-reference-country"
+          ],
+          "x": 215987,
+          "y": 123960
+        },
+        "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+        "source_SID_sets": [
+          {
+            "actual_sids": [
+              65788
+            ],
+            "keys": 9824
+          }
+        ],
+        "assigned_item": "S2A_50PMR_20200420_0_L2A"
+      },
+      "original_scene": "S2A_50PMR_20200420_0_L2A",
+      "retained_alternate_item": "S2A_50PMR_20200203_1_L2A",
+      "acquisition_datetime": "2020-02-03T02:55:01.287000Z",
+      "block_record": "bulk-completion/offshore13649-observation-001/products/S2A_50PMR_20200203_1_L2A/block-02-05/block-observations.json",
+      "assets": {
+        "red": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2408,
+            5493
+          ],
+          "local_pixel": [
+            361,
+            374
+          ],
+          "local_subpixel": [
+            361.8406124789908,
+            374.7971122146482
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "green": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2408,
+            5493
+          ],
+          "local_pixel": [
+            361,
+            374
+          ],
+          "local_subpixel": [
+            361.8406124789908,
+            374.7971122146482
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "blue": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2408,
+            5493
+          ],
+          "local_pixel": [
+            361,
+            374
+          ],
+          "local_subpixel": [
+            361.8406124789908,
+            374.7971122146482
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "nir": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2408,
+            5493
+          ],
+          "local_pixel": [
+            361,
+            374
+          ],
+          "local_subpixel": [
+            361.8406124789908,
+            374.7971122146482
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "scl": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            1204,
+            2746
+          ],
+          "local_pixel": [
+            181,
+            187
+          ],
+          "local_subpixel": [
+            181.4203062394954,
+            187.8985561073241
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "index": 9709,
+      "original_point_unchanged": {
+        "index": 9709,
+        "original_key": {
+          "owner": 48238,
+          "y": 123960,
+          "x": 215988
+        },
+        "longitude": 116.59017569021154,
+        "latitude": 9.733289130939971,
+        "input_scope_array_index": 20649,
+        "original_source_array_index": 36294,
+        "original_interval_index": 8164,
+        "original_record": {
+          "accepted_geometry_covers": false,
+          "accepted_hole_covers": false,
+          "actual_sids": [
+            65788
+          ],
+          "country_boundary_ids": [],
+          "covering_owners": [
+            48238
+          ],
+          "declared_sids": [
+            65788
+          ],
+          "flags": [
+            "disputed-island-territory-research"
+          ],
+          "hold_reasons": [
+            "disputed-island-territory-research",
+            "foreign-reference-country",
+            "source-relative-physical-interpretation-unresolved"
+          ],
+          "owner": 48238,
+          "package": "physical-interpretation",
+          "physical": "source-relative",
+          "qualified": false,
+          "reference_countries": [],
+          "source_boundary_ids": [],
+          "territorial_hold_reasons": [
+            "disputed-island-territory-research",
+            "foreign-reference-country"
+          ],
+          "x": 215988,
+          "y": 123960
+        },
+        "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+        "source_SID_sets": [
+          {
+            "actual_sids": [
+              65788
+            ],
+            "keys": 9824
+          }
+        ],
+        "assigned_item": "S2A_50PMR_20200420_0_L2A"
+      },
+      "original_scene": "S2A_50PMR_20200420_0_L2A",
+      "retained_alternate_item": "S2A_50PMR_20200203_1_L2A",
+      "acquisition_datetime": "2020-02-03T02:55:01.287000Z",
+      "block_record": "bulk-completion/offshore13649-observation-001/products/S2A_50PMR_20200203_1_L2A/block-02-05/block-observations.json",
+      "assets": {
+        "red": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2408,
+            5508
+          ],
+          "local_pixel": [
+            361,
+            389
+          ],
+          "local_subpixel": [
+            361.8588570881984,
+            389.85897904029116
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "green": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2408,
+            5508
+          ],
+          "local_pixel": [
+            361,
+            389
+          ],
+          "local_subpixel": [
+            361.8588570881984,
+            389.85897904029116
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "blue": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2408,
+            5508
+          ],
+          "local_pixel": [
+            361,
+            389
+          ],
+          "local_subpixel": [
+            361.8588570881984,
+            389.85897904029116
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "nir": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2408,
+            5508
+          ],
+          "local_pixel": [
+            361,
+            389
+          ],
+          "local_subpixel": [
+            361.8588570881984,
+            389.85897904029116
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "scl": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            1204,
+            2754
+          ],
+          "local_pixel": [
+            181,
+            195
+          ],
+          "local_subpixel": [
+            181.4294285440992,
+            195.42948952014558
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "index": 9710,
+      "original_point_unchanged": {
+        "index": 9710,
+        "original_key": {
+          "owner": 48238,
+          "y": 123961,
+          "x": 215987
+        },
+        "longitude": 116.58880251443742,
+        "latitude": 9.73193571872695,
+        "input_scope_array_index": 20657,
+        "original_source_array_index": 36302,
+        "original_interval_index": 8169,
+        "original_record": {
+          "accepted_geometry_covers": false,
+          "accepted_hole_covers": false,
+          "actual_sids": [
+            65788
+          ],
+          "country_boundary_ids": [],
+          "covering_owners": [
+            48238
+          ],
+          "declared_sids": [
+            65788
+          ],
+          "flags": [
+            "disputed-island-territory-research"
+          ],
+          "hold_reasons": [
+            "disputed-island-territory-research",
+            "foreign-reference-country",
+            "source-relative-physical-interpretation-unresolved"
+          ],
+          "owner": 48238,
+          "package": "physical-interpretation",
+          "physical": "source-relative",
+          "qualified": false,
+          "reference_countries": [],
+          "source_boundary_ids": [],
+          "territorial_hold_reasons": [
+            "disputed-island-territory-research",
+            "foreign-reference-country"
+          ],
+          "x": 215987,
+          "y": 123961
+        },
+        "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+        "source_SID_sets": [
+          {
+            "actual_sids": [
+              65788
+            ],
+            "keys": 9824
+          }
+        ],
+        "assigned_item": "S2A_50PMR_20200420_0_L2A"
+      },
+      "original_scene": "S2A_50PMR_20200420_0_L2A",
+      "retained_alternate_item": "S2A_50PMR_20200203_1_L2A",
+      "acquisition_datetime": "2020-02-03T02:55:01.287000Z",
+      "block_record": "bulk-completion/offshore13649-observation-001/products/S2A_50PMR_20200203_1_L2A/block-02-05/block-observations.json",
+      "assets": {
+        "red": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2423,
+            5493
+          ],
+          "local_pixel": [
+            376,
+            374
+          ],
+          "local_subpixel": [
+            376.80454356248083,
+            374.7789571691246
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "green": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2423,
+            5493
+          ],
+          "local_pixel": [
+            376,
+            374
+          ],
+          "local_subpixel": [
+            376.80454356248083,
+            374.7789571691246
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "blue": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2423,
+            5493
+          ],
+          "local_pixel": [
+            376,
+            374
+          ],
+          "local_subpixel": [
+            376.80454356248083,
+            374.7789571691246
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "nir": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2423,
+            5493
+          ],
+          "local_pixel": [
+            376,
+            374
+          ],
+          "local_subpixel": [
+            376.80454356248083,
+            374.7789571691246
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "scl": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            1211,
+            2746
+          ],
+          "local_pixel": [
+            188,
+            187
+          ],
+          "local_subpixel": [
+            188.90227178124042,
+            187.8894785845623
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "index": 9711,
+      "original_point_unchanged": {
+        "index": 9711,
+        "original_key": {
+          "owner": 48238,
+          "y": 123962,
+          "x": 215986
+        },
+        "longitude": 116.5874293386633,
+        "latitude": 9.730582301030894,
+        "input_scope_array_index": 20665,
+        "original_source_array_index": 36310,
+        "original_interval_index": 8174,
+        "original_record": {
+          "accepted_geometry_covers": false,
+          "accepted_hole_covers": false,
+          "actual_sids": [
+            65788
+          ],
+          "country_boundary_ids": [],
+          "covering_owners": [
+            48238
+          ],
+          "declared_sids": [
+            65788
+          ],
+          "flags": [
+            "disputed-island-territory-research"
+          ],
+          "hold_reasons": [
+            "disputed-island-territory-research",
+            "foreign-reference-country",
+            "source-relative-physical-interpretation-unresolved"
+          ],
+          "owner": 48238,
+          "package": "physical-interpretation",
+          "physical": "source-relative",
+          "qualified": false,
+          "reference_countries": [],
+          "source_boundary_ids": [],
+          "territorial_hold_reasons": [
+            "disputed-island-territory-research",
+            "foreign-reference-country"
+          ],
+          "x": 215986,
+          "y": 123962
+        },
+        "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+        "source_SID_sets": [
+          {
+            "actual_sids": [
+              65788
+            ],
+            "keys": 9824
+          }
+        ],
+        "assigned_item": "S2A_50PMR_20200420_0_L2A"
+      },
+      "original_scene": "S2A_50PMR_20200420_0_L2A",
+      "retained_alternate_item": "S2A_50PMR_20200203_1_L2A",
+      "acquisition_datetime": "2020-02-03T02:55:01.287000Z",
+      "block_record": "bulk-completion/offshore13649-observation-001/products/S2A_50PMR_20200203_1_L2A/block-02-05/block-observations.json",
+      "assets": {
+        "red": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2438,
+            5478
+          ],
+          "local_pixel": [
+            391,
+            359
+          ],
+          "local_subpixel": [
+            391.7502333431912,
+            359.69881400931627
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "green": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2438,
+            5478
+          ],
+          "local_pixel": [
+            391,
+            359
+          ],
+          "local_subpixel": [
+            391.7502333431912,
+            359.69881400931627
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "blue": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2438,
+            5478
+          ],
+          "local_pixel": [
+            391,
+            359
+          ],
+          "local_subpixel": [
+            391.7502333431912,
+            359.69881400931627
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "nir": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2438,
+            5478
+          ],
+          "local_pixel": [
+            391,
+            359
+          ],
+          "local_subpixel": [
+            391.7502333431912,
+            359.69881400931627
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "scl": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            1219,
+            2739
+          ],
+          "local_pixel": [
+            196,
+            180
+          ],
+          "local_subpixel": [
+            196.3751166715956,
+            180.34940700465813
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "index": 9712,
+      "original_point_unchanged": {
+        "index": 9712,
+        "original_key": {
+          "owner": 48238,
+          "y": 123962,
+          "x": 215987
+        },
+        "longitude": 116.58880251443742,
+        "latitude": 9.730582301030894,
+        "input_scope_array_index": 20666,
+        "original_source_array_index": 36311,
+        "original_interval_index": 8174,
+        "original_record": {
+          "accepted_geometry_covers": false,
+          "accepted_hole_covers": false,
+          "actual_sids": [
+            65788
+          ],
+          "country_boundary_ids": [],
+          "covering_owners": [
+            48238
+          ],
+          "declared_sids": [
+            65788
+          ],
+          "flags": [
+            "disputed-island-territory-research"
+          ],
+          "hold_reasons": [
+            "disputed-island-territory-research",
+            "foreign-reference-country",
+            "source-relative-physical-interpretation-unresolved"
+          ],
+          "owner": 48238,
+          "package": "physical-interpretation",
+          "physical": "source-relative",
+          "qualified": false,
+          "reference_countries": [],
+          "source_boundary_ids": [],
+          "territorial_hold_reasons": [
+            "disputed-island-territory-research",
+            "foreign-reference-country"
+          ],
+          "x": 215987,
+          "y": 123962
+        },
+        "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+        "source_SID_sets": [
+          {
+            "actual_sids": [
+              65788
+            ],
+            "keys": 9824
+          }
+        ],
+        "assigned_item": "S2A_50PMR_20200420_0_L2A"
+      },
+      "original_scene": "S2A_50PMR_20200420_0_L2A",
+      "retained_alternate_item": "S2A_50PMR_20200203_1_L2A",
+      "acquisition_datetime": "2020-02-03T02:55:01.287000Z",
+      "block_record": "bulk-completion/offshore13649-observation-001/products/S2A_50PMR_20200203_1_L2A/block-02-05/block-observations.json",
+      "assets": {
+        "red": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2438,
+            5493
+          ],
+          "local_pixel": [
+            391,
+            374
+          ],
+          "local_subpixel": [
+            391.76853409208707,
+            374.76080455180636
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "green": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2438,
+            5493
+          ],
+          "local_pixel": [
+            391,
+            374
+          ],
+          "local_subpixel": [
+            391.76853409208707,
+            374.76080455180636
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "blue": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2438,
+            5493
+          ],
+          "local_pixel": [
+            391,
+            374
+          ],
+          "local_subpixel": [
+            391.76853409208707,
+            374.76080455180636
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "nir": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2438,
+            5493
+          ],
+          "local_pixel": [
+            391,
+            374
+          ],
+          "local_subpixel": [
+            391.76853409208707,
+            374.76080455180636
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "scl": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            1219,
+            2746
+          ],
+          "local_pixel": [
+            196,
+            187
+          ],
+          "local_subpixel": [
+            196.38426704604353,
+            187.88040227590318
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "index": 9713,
+      "original_point_unchanged": {
+        "index": 9713,
+        "original_key": {
+          "owner": 48238,
+          "y": 123963,
+          "x": 215986
+        },
+        "longitude": 116.5874293386633,
+        "latitude": 9.729228877852542,
+        "input_scope_array_index": 20671,
+        "original_source_array_index": 36316,
+        "original_interval_index": 8178,
+        "original_record": {
+          "accepted_geometry_covers": false,
+          "accepted_hole_covers": false,
+          "actual_sids": [
+            65788
+          ],
+          "country_boundary_ids": [],
+          "covering_owners": [
+            48238
+          ],
+          "declared_sids": [
+            65788
+          ],
+          "flags": [
+            "disputed-island-territory-research"
+          ],
+          "hold_reasons": [
+            "disputed-island-territory-research",
+            "foreign-reference-country",
+            "source-relative-physical-interpretation-unresolved"
+          ],
+          "owner": 48238,
+          "package": "physical-interpretation",
+          "physical": "source-relative",
+          "qualified": false,
+          "reference_countries": [],
+          "source_boundary_ids": [],
+          "territorial_hold_reasons": [
+            "disputed-island-territory-research",
+            "foreign-reference-country"
+          ],
+          "x": 215986,
+          "y": 123963
+        },
+        "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+        "source_SID_sets": [
+          {
+            "actual_sids": [
+              65788
+            ],
+            "keys": 9824
+          }
+        ],
+        "assigned_item": "S2A_50PMR_20200420_0_L2A"
+      },
+      "original_scene": "S2A_50PMR_20200420_0_L2A",
+      "retained_alternate_item": "S2A_50PMR_20200203_1_L2A",
+      "acquisition_datetime": "2020-02-03T02:55:01.287000Z",
+      "block_record": "bulk-completion/offshore13649-observation-001/products/S2A_50PMR_20200203_1_L2A/block-02-05/block-observations.json",
+      "assets": {
+        "red": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2453,
+            5478
+          ],
+          "local_pixel": [
+            406,
+            359
+          ],
+          "local_subpixel": [
+            406.71428575809114,
+            359.68060320337827
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "green": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2453,
+            5478
+          ],
+          "local_pixel": [
+            406,
+            359
+          ],
+          "local_subpixel": [
+            406.71428575809114,
+            359.68060320337827
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "blue": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2453,
+            5478
+          ],
+          "local_pixel": [
+            406,
+            359
+          ],
+          "local_subpixel": [
+            406.71428575809114,
+            359.68060320337827
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "nir": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2453,
+            5478
+          ],
+          "local_pixel": [
+            406,
+            359
+          ],
+          "local_subpixel": [
+            406.71428575809114,
+            359.68060320337827
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "scl": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            1226,
+            2739
+          ],
+          "local_pixel": [
+            203,
+            180
+          ],
+          "local_subpixel": [
+            203.85714287904557,
+            180.34030160168913
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "index": 9714,
+      "original_point_unchanged": {
+        "index": 9714,
+        "original_key": {
+          "owner": 48238,
+          "y": 123963,
+          "x": 215987
+        },
+        "longitude": 116.58880251443742,
+        "latitude": 9.729228877852542,
+        "input_scope_array_index": 20672,
+        "original_source_array_index": 36317,
+        "original_interval_index": 8178,
+        "original_record": {
+          "accepted_geometry_covers": false,
+          "accepted_hole_covers": false,
+          "actual_sids": [
+            65788
+          ],
+          "country_boundary_ids": [],
+          "covering_owners": [
+            48238
+          ],
+          "declared_sids": [
+            65788
+          ],
+          "flags": [
+            "disputed-island-territory-research"
+          ],
+          "hold_reasons": [
+            "disputed-island-territory-research",
+            "foreign-reference-country",
+            "source-relative-physical-interpretation-unresolved"
+          ],
+          "owner": 48238,
+          "package": "physical-interpretation",
+          "physical": "source-relative",
+          "qualified": false,
+          "reference_countries": [],
+          "source_boundary_ids": [],
+          "territorial_hold_reasons": [
+            "disputed-island-territory-research",
+            "foreign-reference-country"
+          ],
+          "x": 215987,
+          "y": 123963
+        },
+        "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+        "source_SID_sets": [
+          {
+            "actual_sids": [
+              65788
+            ],
+            "keys": 9824
+          }
+        ],
+        "assigned_item": "S2A_50PMR_20200420_0_L2A"
+      },
+      "original_scene": "S2A_50PMR_20200420_0_L2A",
+      "retained_alternate_item": "S2A_50PMR_20200203_1_L2A",
+      "acquisition_datetime": "2020-02-03T02:55:01.287000Z",
+      "block_record": "bulk-completion/offshore13649-observation-001/products/S2A_50PMR_20200203_1_L2A/block-02-05/block-observations.json",
+      "assets": {
+        "red": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2453,
+            5493
+          ],
+          "local_pixel": [
+            406,
+            374
+          ],
+          "local_subpixel": [
+            406.7325840596459,
+            374.7426543627371
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "green": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2453,
+            5493
+          ],
+          "local_pixel": [
+            406,
+            374
+          ],
+          "local_subpixel": [
+            406.7325840596459,
+            374.7426543627371
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "blue": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2453,
+            5493
+          ],
+          "local_pixel": [
+            406,
+            374
+          ],
+          "local_subpixel": [
+            406.7325840596459,
+            374.7426543627371
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "nir": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2453,
+            5493
+          ],
+          "local_pixel": [
+            406,
+            374
+          ],
+          "local_subpixel": [
+            406.7325840596459,
+            374.7426543627371
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "scl": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            1226,
+            2746
+          ],
+          "local_pixel": [
+            203,
+            187
+          ],
+          "local_subpixel": [
+            203.86629202982294,
+            187.87132718136854
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "index": 9715,
+      "original_point_unchanged": {
+        "index": 9715,
+        "original_key": {
+          "owner": 48238,
+          "y": 123964,
+          "x": 215985
+        },
+        "longitude": 116.58605616288918,
+        "latitude": 9.727875449192625,
+        "input_scope_array_index": 20680,
+        "original_source_array_index": 36325,
+        "original_interval_index": 8183,
+        "original_record": {
+          "accepted_geometry_covers": false,
+          "accepted_hole_covers": false,
+          "actual_sids": [
+            65788
+          ],
+          "country_boundary_ids": [],
+          "covering_owners": [
+            48238
+          ],
+          "declared_sids": [
+            65788
+          ],
+          "flags": [
+            "disputed-island-territory-research"
+          ],
+          "hold_reasons": [
+            "disputed-island-territory-research",
+            "foreign-reference-country",
+            "source-relative-physical-interpretation-unresolved"
+          ],
+          "owner": 48238,
+          "package": "physical-interpretation",
+          "physical": "source-relative",
+          "qualified": false,
+          "reference_countries": [],
+          "source_boundary_ids": [],
+          "territorial_hold_reasons": [
+            "disputed-island-territory-research",
+            "foreign-reference-country"
+          ],
+          "x": 215985,
+          "y": 123964
+        },
+        "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+        "source_SID_sets": [
+          {
+            "actual_sids": [
+              65788
+            ],
+            "keys": 9824
+          }
+        ],
+        "assigned_item": "S2A_50PMR_20200420_0_L2A"
+      },
+      "original_scene": "S2A_50PMR_20200420_0_L2A",
+      "retained_alternate_item": "S2A_50PMR_20200203_1_L2A",
+      "acquisition_datetime": "2020-02-03T02:55:01.287000Z",
+      "block_record": "bulk-completion/offshore13649-observation-001/products/S2A_50PMR_20200203_1_L2A/block-02-05/block-observations.json",
+      "assets": {
+        "red": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2468,
+            5463
+          ],
+          "local_pixel": [
+            421,
+            344
+          ],
+          "local_subpixel": [
+            421.6600407473452,
+            344.6002805979733
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "green": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2468,
+            5463
+          ],
+          "local_pixel": [
+            421,
+            344
+          ],
+          "local_subpixel": [
+            421.6600407473452,
+            344.6002805979733
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "blue": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2468,
+            5463
+          ],
+          "local_pixel": [
+            421,
+            344
+          ],
+          "local_subpixel": [
+            421.6600407473452,
+            344.6002805979733
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "nir": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2468,
+            5463
+          ],
+          "local_pixel": [
+            421,
+            344
+          ],
+          "local_subpixel": [
+            421.6600407473452,
+            344.6002805979733
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "scl": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            1234,
+            2731
+          ],
+          "local_pixel": [
+            211,
+            172
+          ],
+          "local_subpixel": [
+            211.3300203736726,
+            172.80014029898666
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "index": 9716,
+      "original_point_unchanged": {
+        "index": 9716,
+        "original_key": {
+          "owner": 48238,
+          "y": 123964,
+          "x": 215986
+        },
+        "longitude": 116.5874293386633,
+        "latitude": 9.727875449192625,
+        "input_scope_array_index": 20681,
+        "original_source_array_index": 36326,
+        "original_interval_index": 8183,
+        "original_record": {
+          "accepted_geometry_covers": false,
+          "accepted_hole_covers": false,
+          "actual_sids": [
+            65788
+          ],
+          "country_boundary_ids": [],
+          "covering_owners": [
+            48238
+          ],
+          "declared_sids": [
+            65788
+          ],
+          "flags": [
+            "disputed-island-territory-research"
+          ],
+          "hold_reasons": [
+            "disputed-island-territory-research",
+            "foreign-reference-country",
+            "source-relative-physical-interpretation-unresolved"
+          ],
+          "owner": 48238,
+          "package": "physical-interpretation",
+          "physical": "source-relative",
+          "qualified": false,
+          "reference_countries": [],
+          "source_boundary_ids": [],
+          "territorial_hold_reasons": [
+            "disputed-island-territory-research",
+            "foreign-reference-country"
+          ],
+          "x": 215986,
+          "y": 123964
+        },
+        "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+        "source_SID_sets": [
+          {
+            "actual_sids": [
+              65788
+            ],
+            "keys": 9824
+          }
+        ],
+        "assigned_item": "S2A_50PMR_20200420_0_L2A"
+      },
+      "original_scene": "S2A_50PMR_20200420_0_L2A",
+      "retained_alternate_item": "S2A_50PMR_20200203_1_L2A",
+      "acquisition_datetime": "2020-02-03T02:55:01.287000Z",
+      "block_record": "bulk-completion/offshore13649-observation-001/products/S2A_50PMR_20200203_1_L2A/block-02-05/block-observations.json",
+      "assets": {
+        "red": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2468,
+            5478
+          ],
+          "local_pixel": [
+            421,
+            359
+          ],
+          "local_subpixel": [
+            421.67839760310017,
+            359.66239483386016
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "green": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2468,
+            5478
+          ],
+          "local_pixel": [
+            421,
+            359
+          ],
+          "local_subpixel": [
+            421.67839760310017,
+            359.66239483386016
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "blue": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2468,
+            5478
+          ],
+          "local_pixel": [
+            421,
+            359
+          ],
+          "local_subpixel": [
+            421.67839760310017,
+            359.66239483386016
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "nir": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2468,
+            5478
+          ],
+          "local_pixel": [
+            421,
+            359
+          ],
+          "local_subpixel": [
+            421.67839760310017,
+            359.66239483386016
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "scl": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            1234,
+            2739
+          ],
+          "local_pixel": [
+            211,
+            180
+          ],
+          "local_subpixel": [
+            211.33919880155008,
+            180.33119741693008
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "index": 9717,
+      "original_point_unchanged": {
+        "index": 9717,
+        "original_key": {
+          "owner": 48238,
+          "y": 123964,
+          "x": 215987
+        },
+        "longitude": 116.58880251443742,
+        "latitude": 9.727875449192625,
+        "input_scope_array_index": 20682,
+        "original_source_array_index": 36327,
+        "original_interval_index": 8183,
+        "original_record": {
+          "accepted_geometry_covers": false,
+          "accepted_hole_covers": false,
+          "actual_sids": [
+            65788
+          ],
+          "country_boundary_ids": [],
+          "covering_owners": [
+            48238
+          ],
+          "declared_sids": [
+            65788
+          ],
+          "flags": [
+            "disputed-island-territory-research"
+          ],
+          "hold_reasons": [
+            "disputed-island-territory-research",
+            "foreign-reference-country",
+            "source-relative-physical-interpretation-unresolved"
+          ],
+          "owner": 48238,
+          "package": "physical-interpretation",
+          "physical": "source-relative",
+          "qualified": false,
+          "reference_countries": [],
+          "source_boundary_ids": [],
+          "territorial_hold_reasons": [
+            "disputed-island-territory-research",
+            "foreign-reference-country"
+          ],
+          "x": 215987,
+          "y": 123964
+        },
+        "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+        "source_SID_sets": [
+          {
+            "actual_sids": [
+              65788
+            ],
+            "keys": 9824
+          }
+        ],
+        "assigned_item": "S2A_50PMR_20200420_0_L2A"
+      },
+      "original_scene": "S2A_50PMR_20200420_0_L2A",
+      "retained_alternate_item": "S2A_50PMR_20200203_1_L2A",
+      "acquisition_datetime": "2020-02-03T02:55:01.287000Z",
+      "block_record": "bulk-completion/offshore13649-observation-001/products/S2A_50PMR_20200203_1_L2A/block-02-05/block-observations.json",
+      "assets": {
+        "red": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2468,
+            5493
+          ],
+          "local_pixel": [
+            421,
+            374
+          ],
+          "local_subpixel": [
+            421.69669345735747,
+            374.72450660196773
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "green": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2468,
+            5493
+          ],
+          "local_pixel": [
+            421,
+            374
+          ],
+          "local_subpixel": [
+            421.69669345735747,
+            374.72450660196773
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "blue": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2468,
+            5493
+          ],
+          "local_pixel": [
+            421,
+            374
+          ],
+          "local_subpixel": [
+            421.69669345735747,
+            374.72450660196773
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "nir": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2468,
+            5493
+          ],
+          "local_pixel": [
+            421,
+            374
+          ],
+          "local_subpixel": [
+            421.69669345735747,
+            374.72450660196773
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "scl": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            1234,
+            2746
+          ],
+          "local_pixel": [
+            211,
+            187
+          ],
+          "local_subpixel": [
+            211.34834672867873,
+            187.86225330098387
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "index": 9718,
+      "original_point_unchanged": {
+        "index": 9718,
+        "original_key": {
+          "owner": 48238,
+          "y": 123965,
+          "x": 215985
+        },
+        "longitude": 116.58605616288918,
+        "latitude": 9.726522015051874,
+        "input_scope_array_index": 20691,
+        "original_source_array_index": 36336,
+        "original_interval_index": 8188,
+        "original_record": {
+          "accepted_geometry_covers": false,
+          "accepted_hole_covers": false,
+          "actual_sids": [
+            65788
+          ],
+          "country_boundary_ids": [],
+          "covering_owners": [
+            48238
+          ],
+          "declared_sids": [
+            65788
+          ],
+          "flags": [
+            "disputed-island-territory-research"
+          ],
+          "hold_reasons": [
+            "disputed-island-territory-research",
+            "foreign-reference-country",
+            "source-relative-physical-interpretation-unresolved"
+          ],
+          "owner": 48238,
+          "package": "physical-interpretation",
+          "physical": "source-relative",
+          "qualified": false,
+          "reference_countries": [],
+          "source_boundary_ids": [],
+          "territorial_hold_reasons": [
+            "disputed-island-territory-research",
+            "foreign-reference-country"
+          ],
+          "x": 215985,
+          "y": 123965
+        },
+        "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+        "source_SID_sets": [
+          {
+            "actual_sids": [
+              65788
+            ],
+            "keys": 9824
+          }
+        ],
+        "assigned_item": "S2A_50PMR_20200420_0_L2A"
+      },
+      "original_scene": "S2A_50PMR_20200420_0_L2A",
+      "retained_alternate_item": "S2A_50PMR_20200203_1_L2A",
+      "acquisition_datetime": "2020-02-03T02:55:01.287000Z",
+      "block_record": "bulk-completion/offshore13649-observation-001/products/S2A_50PMR_20200203_1_L2A/block-02-05/block-observations.json",
+      "assets": {
+        "red": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2483,
+            5463
+          ],
+          "local_pixel": [
+            436,
+            344
+          ],
+          "local_subpixel": [
+            436.6242144701537,
+            344.5820140642172
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "green": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2483,
+            5463
+          ],
+          "local_pixel": [
+            436,
+            344
+          ],
+          "local_subpixel": [
+            436.6242144701537,
+            344.5820140642172
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "blue": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2483,
+            5463
+          ],
+          "local_pixel": [
+            436,
+            344
+          ],
+          "local_subpixel": [
+            436.6242144701537,
+            344.5820140642172
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "nir": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2483,
+            5463
+          ],
+          "local_pixel": [
+            436,
+            344
+          ],
+          "local_subpixel": [
+            436.6242144701537,
+            344.5820140642172
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "scl": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            1241,
+            2731
+          ],
+          "local_pixel": [
+            218,
+            172
+          ],
+          "local_subpixel": [
+            218.81210723507684,
+            172.7910070321086
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "index": 9719,
+      "original_point_unchanged": {
+        "index": 9719,
+        "original_key": {
+          "owner": 48238,
+          "y": 123966,
+          "x": 215984
+        },
+        "longitude": 116.58468298711506,
+        "latitude": 9.725168575431022,
+        "input_scope_array_index": 20699,
+        "original_source_array_index": 36344,
+        "original_interval_index": 8193,
+        "original_record": {
+          "accepted_geometry_covers": false,
+          "accepted_hole_covers": false,
+          "actual_sids": [
+            65788
+          ],
+          "country_boundary_ids": [],
+          "covering_owners": [
+            48238
+          ],
+          "declared_sids": [
+            65788
+          ],
+          "flags": [
+            "disputed-island-territory-research"
+          ],
+          "hold_reasons": [
+            "disputed-island-territory-research",
+            "foreign-reference-country",
+            "source-relative-physical-interpretation-unresolved"
+          ],
+          "owner": 48238,
+          "package": "physical-interpretation",
+          "physical": "source-relative",
+          "qualified": false,
+          "reference_countries": [],
+          "source_boundary_ids": [],
+          "territorial_hold_reasons": [
+            "disputed-island-territory-research",
+            "foreign-reference-country"
+          ],
+          "x": 215984,
+          "y": 123966
+        },
+        "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+        "source_SID_sets": [
+          {
+            "actual_sids": [
+              65788
+            ],
+            "keys": 9824
+          }
+        ],
+        "assigned_item": "S2A_50PMR_20200420_0_L2A"
+      },
+      "original_scene": "S2A_50PMR_20200420_0_L2A",
+      "retained_alternate_item": "S2A_50PMR_20200203_1_L2A",
+      "acquisition_datetime": "2020-02-03T02:55:01.287000Z",
+      "block_record": "bulk-completion/offshore13649-observation-001/products/S2A_50PMR_20200203_1_L2A/block-02-05/block-observations.json",
+      "assets": {
+        "red": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2498,
+            5448
+          ],
+          "local_pixel": [
+            451,
+            329
+          ],
+          "local_subpixel": [
+            451.5700346773374,
+            329.5015120700991
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "green": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2498,
+            5448
+          ],
+          "local_pixel": [
+            451,
+            329
+          ],
+          "local_subpixel": [
+            451.5700346773374,
+            329.5015120700991
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "blue": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2498,
+            5448
+          ],
+          "local_pixel": [
+            451,
+            329
+          ],
+          "local_subpixel": [
+            451.5700346773374,
+            329.5015120700991
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "nir": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            2498,
+            5448
+          ],
+          "local_pixel": [
+            451,
+            329
+          ],
+          "local_subpixel": [
+            451.5700346773374,
+            329.5015120700991
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "scl": {
+          "value": 0,
+          "valid_mask": 0,
+          "source_pixel": [
+            1249,
+            2724
+          ],
+          "local_pixel": [
+            226,
+            165
+          ],
+          "local_subpixel": [
+            226.2850173386687,
+            165.25075603504956
+          ],
+          "neighbourhood": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,590 @@
+{
+  "item": "S2A_49NEJ_20200526_1_L2A",
+  "acquisition_datetime": "2020-05-26T03:05:57.891000Z",
+  "properties": {
+    "created": "2022-11-06T11:56:15.164Z",
+    "platform": "sentinel-2a",
+    "constellation": "sentinel-2",
+    "instruments": [
+      "msi"
+    ],
+    "eo:cloud_cover": 1.35414,
+    "proj:epsg": 32649,
+    "mgrs:utm_zone": 49,
+    "mgrs:latitude_band": "N",
+    "mgrs:grid_square": "EJ",
+    "grid:code": "MGRS-49NEJ",
+    "view:sun_azimuth": 54.3496930738024,
+    "view:sun_elevation": 65.3895400750921,
+    "s2:degraded_msi_data_percentage": 0,
+    "s2:nodata_pixel_percentage": 0,
+    "s2:saturated_defective_pixel_percentage": 0,
+    "s2:dark_features_percentage": 0,
+    "s2:cloud_shadow_percentage": 0,
+    "s2:vegetation_percentage": 0.000176,
+    "s2:not_vegetated_percentage": 0.000149,
+    "s2:water_percentage": 98.645538,
+    "s2:unclassified_percentage": 0,
+    "s2:medium_proba_clouds_percentage": 0.490533,
+    "s2:high_proba_clouds_percentage": 0.414773,
+    "s2:thin_cirrus_percentage": 0.448834,
+    "s2:snow_ice_percentage": 0,
+    "s2:product_type": "S2MSI2A",
+    "s2:processing_baseline": "02.14",
+    "s2:product_uri": "S2A_MSIL2A_20200526T024551_N0214_R132_T49NEJ_20200526T084151.SAFE",
+    "s2:generation_time": "2020-05-26T08:41:51.000000Z",
+    "s2:datatake_id": "GS2A_20200526T024551_025726_N02.14",
+    "s2:datatake_type": "INS-NOBS",
+    "s2:datastrip_id": "S2A_OPER_MSI_L2A_DS_EPAE_20200526T084151_S20200526T030543_N02.14",
+    "s2:granule_id": "S2A_OPER_MSI_L2A_TL_EPAE_20200526T084151_A025726_T49NEJ_N02.14",
+    "s2:reflectance_conversion_factor": 0.975784494231493,
+    "datetime": "2020-05-26T03:05:57.891000Z",
+    "s2:sequence": "1",
+    "earthsearch:s3_path": "s3://sentinel-cogs/sentinel-s2-l2a-cogs/49/N/EJ/2020/5/S2A_49NEJ_20200526_1_L2A",
+    "earthsearch:payload_id": "roda-sentinel2/workflow-sentinel2-to-stac/3bf5df3bdba2d73e86f0d927690a1516",
+    "earthsearch:boa_offset_applied": false,
+    "processing:software": {
+      "sentinel2-to-stac": "0.1.0"
+    },
+    "updated": "2022-11-06T11:56:15.164Z"
+  },
+  "owner_counts": {
+    "48238": 1
+  },
+  "source_targets": [
+    "gb:VNM:ADM2:81297802B23443064350281"
+  ],
+  "source_metadata": {
+    "red": {
+      "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/49/N/EJ/2020/5/S2A_49NEJ_20200526_1_L2A/B04.tif",
+      "shape": [
+        10980,
+        10980
+      ],
+      "transform": [
+        10.0,
+        0.0,
+        499980.0,
+        0.0,
+        -10.0,
+        900000.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "blocks": [
+        [
+          1024,
+          1024
+        ]
+      ],
+      "dtype": "uint16",
+      "crs": "EPSG:32649",
+      "nodata": 0.0,
+      "raster_bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint16",
+          "bits_per_sample": 15,
+          "spatial_resolution": 10,
+          "scale": 0.0001,
+          "offset": 0
+        }
+      ]
+    },
+    "green": {
+      "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/49/N/EJ/2020/5/S2A_49NEJ_20200526_1_L2A/B03.tif",
+      "shape": [
+        10980,
+        10980
+      ],
+      "transform": [
+        10.0,
+        0.0,
+        499980.0,
+        0.0,
+        -10.0,
+        900000.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "blocks": [
+        [
+          1024,
+          1024
+        ]
+      ],
+      "dtype": "uint16",
+      "crs": "EPSG:32649",
+      "nodata": 0.0,
+      "raster_bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint16",
+          "bits_per_sample": 15,
+          "spatial_resolution": 10,
+          "scale": 0.0001,
+          "offset": 0
+        }
+      ]
+    },
+    "blue": {
+      "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/49/N/EJ/2020/5/S2A_49NEJ_20200526_1_L2A/B02.tif",
+      "shape": [
+        10980,
+        10980
+      ],
+      "transform": [
+        10.0,
+        0.0,
+        499980.0,
+        0.0,
+        -10.0,
+        900000.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "blocks": [
+        [
+          1024,
+          1024
+        ]
+      ],
+      "dtype": "uint16",
+      "crs": "EPSG:32649",
+      "nodata": 0.0,
+      "raster_bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint16",
+          "bits_per_sample": 15,
+          "spatial_resolution": 10,
+          "scale": 0.0001,
+          "offset": 0
+        }
+      ]
+    },
+    "nir": {
+      "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/49/N/EJ/2020/5/S2A_49NEJ_20200526_1_L2A/B08.tif",
+      "shape": [
+        10980,
+        10980
+      ],
+      "transform": [
+        10.0,
+        0.0,
+        499980.0,
+        0.0,
+        -10.0,
+        900000.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "blocks": [
+        [
+          1024,
+          1024
+        ]
+      ],
+      "dtype": "uint16",
+      "crs": "EPSG:32649",
+      "nodata": 0.0,
+      "raster_bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint16",
+          "bits_per_sample": 15,
+          "spatial_resolution": 10,
+          "scale": 0.0001,
+          "offset": 0
+        }
+      ]
+    },
+    "scl": {
+      "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/49/N/EJ/2020/5/S2A_49NEJ_20200526_1_L2A/SCL.tif",
+      "shape": [
+        5490,
+        5490
+      ],
+      "transform": [
+        20.0,
+        0.0,
+        499980.0,
+        0.0,
+        -20.0,
+        900000.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "blocks": [
+        [
+          512,
+          512
+        ]
+      ],
+      "dtype": "uint8",
+      "crs": "EPSG:32649",
+      "nodata": 0.0,
+      "raster_bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint8",
+          "spatial_resolution": 20
+        }
+      ]
+    }
+  },
+  "points": [
+    {
+      "index": 473,
+      "original_key": {
+        "owner": 48238,
+        "y": 125336,
+        "x": 212349
+      },
+      "longitude": 111.59318904816035,
+      "latitude": 7.8661267331473725,
+      "input_scope_array_index": 24578,
+      "original_source_array_index": 40223,
+      "original_interval_index": 9790,
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "original_packet_index": 9819,
+      "original_offshore_item": "S2A_49NEJ_20200327_0_L2A",
+      "source_pixels": {
+        "red": [
+          3045,
+          6541
+        ],
+        "green": [
+          3045,
+          6541
+        ],
+        "blue": [
+          3045,
+          6541
+        ],
+        "nir": [
+          3045,
+          6541
+        ],
+        "scl": [
+          1522,
+          3270
+        ]
+      },
+      "source_subpixels": {
+        "red": [
+          3045.566986204649,
+          6541.123051170893
+        ],
+        "green": [
+          3045.566986204649,
+          6541.123051170893
+        ],
+        "blue": [
+          3045.566986204649,
+          6541.123051170893
+        ],
+        "nir": [
+          3045.566986204649,
+          6541.123051170893
+        ],
+        "scl": [
+          1522.7834931023244,
+          3270.5615255854464
+        ]
+      },
+      "inside_native_assets": {
+        "red": true,
+        "green": true,
+        "blue": true,
+        "nir": true,
+        "scl": true
+      },
+      "assets": {
+        "red": {
+          "value": 6,
+          "valid_mask": 255,
+          "source_pixel": [
+            3045,
+            6541
+          ],
+          "local_pixel": [
+            998,
+            398
+          ],
+          "neighbourhood": [
+            [
+              2,
+              3,
+              1
+            ],
+            [
+              1,
+              6,
+              5
+            ],
+            [
+              5,
+              5,
+              1
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "green": {
+          "value": 60,
+          "valid_mask": 255,
+          "source_pixel": [
+            3045,
+            6541
+          ],
+          "local_pixel": [
+            998,
+            398
+          ],
+          "neighbourhood": [
+            [
+              48,
+              46,
+              63
+            ],
+            [
+              64,
+              60,
+              48
+            ],
+            [
+              43,
+              46,
+              46
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "blue": {
+          "value": 176,
+          "valid_mask": 255,
+          "source_pixel": [
+            3045,
+            6541
+          ],
+          "local_pixel": [
+            998,
+            398
+          ],
+          "neighbourhood": [
+            [
+              174,
+              167,
+              178
+            ],
+            [
+              179,
+              176,
+              178
+            ],
+            [
+              183,
+              187,
+              188
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "nir": {
+          "value": 1,
+          "valid_mask": 255,
+          "source_pixel": [
+            3045,
+            6541
+          ],
+          "local_pixel": [
+            998,
+            398
+          ],
+          "neighbourhood": [
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "scl": {
+          "value": 6,
+          "valid_mask": 255,
+          "source_pixel": [
+            1522,
+            3270
+          ],
+          "local_pixel": [
+            499,
+            199
+          ],
+          "neighbourhood": [
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        }
+      },
+      "inside_native_frame": true,
+      "source_block": [
+        2,
+        6
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "path": "products/S2A_49NEJ_20200526_1_L2A/block-02-06/block-observations.json",
+      "bytes": 12809,
+      "sha256": "890fdf38af45b321fadb520a50feec39ce3189b839bce4d09b4d1f18b980dbdf"
+    }
+  ],
+  "summary": {
+    "requested_original_keys": 1,
+    "actually_sampled_native_centres": 1,
+    "outside_native_frame_indices": [],
+    "scl_centre_counts": {
+      "6": 1
+    },
+    "valid_centre_masks_by_band": {
+      "red": {
+        "255": 1
+      },
+      "green": {
+        "255": 1
+      },
+      "blue": {
+        "255": 1
+      },
+      "nir": {
+        "255": 1
+      },
+      "scl": {
+        "255": 1
+      }
+    },
+    "physical_interpretation": null
+  },
+  "limits": [
+    "Partial native windows; no whole remote COG hash.",
+    "Validity and SCL are literal source observations, not physical truth.",
+    "No fitted shift, shoreline extraction, classifier, authority, repair or review credit."
+  ]
+}

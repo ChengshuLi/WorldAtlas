@@ -1,0 +1,85 @@
+{
+  "scene_number": 12,
+  "item": "S2B_49NDJ_20200822_0_L2A",
+  "acquisition_datetime": "2020-08-22T03:15:53.609000Z",
+  "method": "Human visual reading of each finite unchanged-centre RGB/NIR context at native scale using saved source displays; explicit perkey manual body/quality decisions, no spectral/SCL/model threshold, shoreline fit or producer qualification.",
+  "source_quality": {
+    "requested_original_keys": 3,
+    "actually_sampled_native_centres": 3,
+    "outside_native_frame_indices": [],
+    "scl_centre_counts": {
+      "6": 3
+    },
+    "valid_centre_masks_by_band": {
+      "red": {
+        "255": 3
+      },
+      "green": {
+        "255": 3
+      },
+      "blue": {
+        "255": 3
+      },
+      "nir": {
+        "255": 3
+      },
+      "scl": {
+        "255": 3
+      }
+    },
+    "physical_interpretation": null
+  },
+  "blocks": [
+    {
+      "block": [
+        0,
+        4
+      ],
+      "points": 1,
+      "water_indices": [
+        468
+      ],
+      "reef_body_indices": [],
+      "terrestrial_body_indices": [],
+      "unresolved_indices": [],
+      "finding": "Single unchanged centre lies in clear continuous wave-textured water, separated from the small cloudlets.",
+      "native_crop_viewed": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene12-block-00-04-native-crop.png",
+      "crop_locator": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene12-block-00-04-crop-locator.json",
+      "block_marker_pin": {
+        "path": "products/S2B_49NDJ_20200822_0_L2A/block-00-04/block-observations.json",
+        "bytes": 12843,
+        "sha256": "78486635accde6827eef2d665354afce231bd11e603a24826a71a4bcabf23d30"
+      }
+    },
+    {
+      "block": [
+        3,
+        4
+      ],
+      "points": 2,
+      "water_indices": [
+        469,
+        470
+      ],
+      "reef_body_indices": [],
+      "terrestrial_body_indices": [],
+      "unresolved_indices": [],
+      "finding": "Two requested centres lie in clear textured water; the cumulus/shadow cluster is well northeast of them, not at the exactcentres.",
+      "native_crop_viewed": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene12-block-03-04-native-crop.png",
+      "crop_locator": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene12-block-03-04-crop-locator.json",
+      "block_marker_pin": {
+        "path": "products/S2B_49NDJ_20200822_0_L2A/block-03-04/block-observations.json",
+        "bytes": 18717,
+        "sha256": "0975212913a8fe42f39bbee45f5256fedcb8ef95839508b6751d09230190cc6c"
+      }
+    }
+  ],
+  "counts": {
+    "original_keys": 3,
+    "proposed_dated_water_body_locations": 3,
+    "proposed_dated_reef_body_locations": 0,
+    "proposed_dated_terrestrial_body_locations": 0,
+    "questions": 0
+  },
+  "scope_limit": "Bounded dated visible body LOCALITY at unchanged originalcentre. Finewetness, substrate emergence, finepixel shoreline and owner/sovereignty remain separate."
+}

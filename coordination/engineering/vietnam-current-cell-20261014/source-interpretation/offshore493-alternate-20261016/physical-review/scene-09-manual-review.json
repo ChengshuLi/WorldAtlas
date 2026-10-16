@@ -1,0 +1,118 @@
+{
+  "scene_number": 9,
+  "item": "S2A_49PGL_20200327_0_L2A",
+  "acquisition_datetime": "2020-03-27T03:05:12.617000Z",
+  "method": "Human visual reading of each finite unchanged-centre RGB/NIR context at native scale using saved source displays; explicit perkey manual body/quality decisions, no spectral/SCL/model threshold, shoreline fit or producer qualification.",
+  "source_quality": {
+    "requested_original_keys": 14,
+    "actually_sampled_native_centres": 14,
+    "outside_native_frame_indices": [],
+    "scl_centre_counts": {
+      "6": 10,
+      "8": 1,
+      "5": 3
+    },
+    "valid_centre_masks_by_band": {
+      "red": {
+        "255": 14
+      },
+      "green": {
+        "255": 14
+      },
+      "blue": {
+        "255": 14
+      },
+      "nir": {
+        "255": 14
+      },
+      "scl": {
+        "255": 14
+      }
+    },
+    "physical_interpretation": null
+  },
+  "blocks": [
+    {
+      "block": [
+        3,
+        1
+      ],
+      "points": 2,
+      "water_indices": [
+        449,
+        450
+      ],
+      "reef_body_indices": [],
+      "terrestrial_body_indices": [],
+      "unresolved_indices": [],
+      "finding": "Two exactcentres lie in clear textured water around the visible small reef complex.",
+      "native_crop_viewed": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene09-block-03-01-native-crop.png",
+      "crop_locator": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene09-block-03-01-crop-locator.json",
+      "block_marker_pin": {
+        "path": "products/S2A_49PGL_20200327_0_L2A/block-03-01/block-observations.json",
+        "bytes": 18704,
+        "sha256": "a87e471275114c73d8a80020a6c18ea30fac3fc1062e9933e7025baa33a1b6c8"
+      }
+    },
+    {
+      "block": [
+        3,
+        2
+      ],
+      "points": 8,
+      "water_indices": [
+        441,
+        442,
+        443,
+        444,
+        445,
+        446,
+        447,
+        448
+      ],
+      "reef_body_indices": [],
+      "terrestrial_body_indices": [],
+      "unresolved_indices": [],
+      "finding": "Eight exactcentres locate clear reef-associated water with continuous visible-water texture and darkNIR context.",
+      "native_crop_viewed": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene09-block-03-02-native-crop.png",
+      "crop_locator": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene09-block-03-02-crop-locator.json",
+      "block_marker_pin": {
+        "path": "products/S2A_49PGL_20200327_0_L2A/block-03-02/block-observations.json",
+        "bytes": 53723,
+        "sha256": "b040c2e1cd1a726068143a0de74a83bbdb1d99c2f0e232216eea7dd7a2b36192"
+      }
+    },
+    {
+      "block": [
+        4,
+        0
+      ],
+      "points": 4,
+      "water_indices": [],
+      "reef_body_indices": [],
+      "terrestrial_body_indices": [
+        451,
+        452,
+        453,
+        454
+      ],
+      "unresolved_indices": [],
+      "finding": "All four exactcentres locate a clearly visible reclaimed island/runway/building complex at the unchanged mapped locality. Visible straight runway, paved areas and rectilinear buildings provide concrete structure/body evidence. Literal SCL8 at451 remains a source conflict; no claim about fine seawall pixel dryness, sovereignty or owner follows.",
+      "native_crop_viewed": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene09-block-04-00-native-crop.png",
+      "crop_locator": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene09-block-04-00-crop-locator.json",
+      "block_marker_pin": {
+        "path": "products/S2A_49PGL_20200327_0_L2A/block-04-00/block-observations.json",
+        "bytes": 30411,
+        "sha256": "42490b9fba3bafd9591c35bae4333a375cf9196fa5de461f324a03f3658730b7"
+      }
+    }
+  ],
+  "counts": {
+    "original_keys": 14,
+    "proposed_dated_water_body_locations": 10,
+    "proposed_dated_reef_body_locations": 0,
+    "proposed_dated_terrestrial_body_locations": 4,
+    "questions": 0
+  },
+  "scope_limit": "Bounded dated visible body LOCALITY at unchanged originalcentre. Finewetness, substrate emergence, finepixel shoreline and owner/sovereignty remain separate."
+}

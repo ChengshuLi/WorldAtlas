@@ -1,0 +1,267 @@
+{
+  "scene_number": 1,
+  "item": "S2A_49QFU_20200229_0_L2A",
+  "acquisition_datetime": "2020-02-29T03:13:13.993000Z",
+  "method": "Human visual reading of every saved native markedRGB and unmarkedNIR frame plus finite requested-centre crops; literal manual exceptions, no spectral/SCL/classifier/majority threshold or registration fit.",
+  "source_quality": "All114 centres in actualframe withfive masks255. Validity isnotphysicaltruth. SCL and neighbourhoods retained separately; no cloud/absentpixel becomeswater.",
+  "blocks": [
+    {
+      "block": [
+        8,
+        1
+      ],
+      "points": 9,
+      "water_indices": [
+        6,
+        7,
+        8,
+        10,
+        11
+      ],
+      "terrestrial_indices": [],
+      "unresolved_indices": [],
+      "finding": "Exact6/7/8/10/11 are clear dark fore-reef water. Exact9/12/13/14 locate the coherent visible breaking-surf/reef-crest BODY in RGB and dark-blue NIR context; fine dry exposure versus foamy shallow water remains undetermined and is not a primary locality rejection. Literal SCL8 at13 is retained alongside the visible linear reef/surf morphology.",
+      "images_viewed": [
+        "bulk-completion/offshore493-alternate2020-source-001/products/S2A_49QFU_20200229_0_L2A/block-08-01/rgb-centres.png",
+        "bulk-completion/offshore493-alternate2020-source-001/products/S2A_49QFU_20200229_0_L2A/block-08-01/nir-red-green-native.png"
+      ],
+      "native_crop_viewed": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene01-block-08-01-native-crop.png",
+      "block_marker_pin": {
+        "path": "products/S2A_49QFU_20200229_0_L2A/block-08-01/block-observations.json",
+        "bytes": 59447,
+        "sha256": "9ad6a2cc26aecfc1e0321e3ced7cb23b8c1f4e702793a52f306cef7602e23822"
+      },
+      "reef_body_indices": [
+        9,
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "block": [
+        8,
+        5
+      ],
+      "points": 6,
+      "water_indices": [],
+      "terrestrial_indices": [],
+      "unresolved_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "finding": "All six requested centres lie within or immediately at the cumulus/cloud-shadow cluster; raw SCL6 at0\u20132 does not override visible cloud/shadow context.",
+      "images_viewed": [
+        "bulk-completion/offshore493-alternate2020-source-001/products/S2A_49QFU_20200229_0_L2A/block-08-05/rgb-centres.png",
+        "bulk-completion/offshore493-alternate2020-source-001/products/S2A_49QFU_20200229_0_L2A/block-08-05/nir-red-green-native.png"
+      ],
+      "native_crop_viewed": null,
+      "block_marker_pin": {
+        "path": "products/S2A_49QFU_20200229_0_L2A/block-08-05/block-observations.json",
+        "bytes": 42046,
+        "sha256": "e4ba856d599ca268c83f8269227afd5c6969f6489489a27642f24b4b3f88a77c"
+      }
+    },
+    {
+      "block": [
+        9,
+        1
+      ],
+      "points": 22,
+      "water_indices": [
+        16,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36
+      ],
+      "terrestrial_indices": [],
+      "unresolved_indices": [
+        15,
+        17
+      ],
+      "finding": "Cyan lagoon/reef-associated water and dark outer slope are spatially continuous at16/18\u201336, NIR dark relative to visible cyan.15/17 are bright cloud/reef-fringe mixtures and remain questions; no claim about reef substrate emergence.",
+      "images_viewed": [
+        "bulk-completion/offshore493-alternate2020-source-001/products/S2A_49QFU_20200229_0_L2A/block-09-01/rgb-centres.png",
+        "bulk-completion/offshore493-alternate2020-source-001/products/S2A_49QFU_20200229_0_L2A/block-09-01/nir-red-green-native.png"
+      ],
+      "native_crop_viewed": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene01-block-09-01-native-crop.png",
+      "block_marker_pin": {
+        "path": "products/S2A_49QFU_20200229_0_L2A/block-09-01/block-observations.json",
+        "bytes": 135321,
+        "sha256": "5cb57b70978ff027ada2fa55a5ab29ff1a7a9afc4c2ffc1f9941fe1cae019256"
+      }
+    },
+    {
+      "block": [
+        9,
+        3
+      ],
+      "points": 6,
+      "water_indices": [],
+      "terrestrial_indices": [],
+      "unresolved_indices": [
+        108,
+        109,
+        110,
+        111,
+        112,
+        113
+      ],
+      "finding": "Requested cluster at right frame margin intersects cloudlet/shadow/fringe context. Retain all six exact centres as quality questions despite SCL6.",
+      "images_viewed": [
+        "bulk-completion/offshore493-alternate2020-source-001/products/S2A_49QFU_20200229_0_L2A/block-09-03/rgb-centres.png",
+        "bulk-completion/offshore493-alternate2020-source-001/products/S2A_49QFU_20200229_0_L2A/block-09-03/nir-red-green-native.png"
+      ],
+      "native_crop_viewed": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene01-block-09-03-native-crop.png",
+      "block_marker_pin": {
+        "path": "products/S2A_49QFU_20200229_0_L2A/block-09-03/block-observations.json",
+        "bytes": 41907,
+        "sha256": "5e2c91359fffc6c96577fbdbc2ec80ea2678b16b95a1dc08212dee7cdc3b93e3"
+      }
+    },
+    {
+      "block": [
+        9,
+        4
+      ],
+      "points": 64,
+      "water_indices": [
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100,
+        101,
+        102,
+        103,
+        104,
+        105,
+        106
+      ],
+      "terrestrial_indices": [],
+      "unresolved_indices": [
+        107
+      ],
+      "finding": "Requested wave-textured dark-water cluster is clear at44\u2013106, with small cloudlets around it.107 touches a visible gray/white cloud fringe and remains unresolved.",
+      "images_viewed": [
+        "bulk-completion/offshore493-alternate2020-source-001/products/S2A_49QFU_20200229_0_L2A/block-09-04/rgb-centres.png",
+        "bulk-completion/offshore493-alternate2020-source-001/products/S2A_49QFU_20200229_0_L2A/block-09-04/nir-red-green-native.png"
+      ],
+      "native_crop_viewed": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene01-block-09-04-native-crop.png",
+      "block_marker_pin": {
+        "path": "products/S2A_49QFU_20200229_0_L2A/block-09-04/block-observations.json",
+        "bytes": 379062,
+        "sha256": "49f704181e846cf5ac3c4d012e3575f6caae9c889f2c8b20a35af74ce6dbc878"
+      }
+    },
+    {
+      "block": [
+        9,
+        5
+      ],
+      "points": 7,
+      "water_indices": [
+        37,
+        40,
+        41,
+        42,
+        43
+      ],
+      "terrestrial_indices": [],
+      "unresolved_indices": [
+        38,
+        39
+      ],
+      "finding": "Clear wave-textured water at37/40\u201343;38/39 are visibly in a gray cloud-fringe patch and retained, regardless of SCL6.",
+      "images_viewed": [
+        "bulk-completion/offshore493-alternate2020-source-001/products/S2A_49QFU_20200229_0_L2A/block-09-05/rgb-centres.png",
+        "bulk-completion/offshore493-alternate2020-source-001/products/S2A_49QFU_20200229_0_L2A/block-09-05/nir-red-green-native.png"
+      ],
+      "native_crop_viewed": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene01-block-09-05-native-crop.png",
+      "block_marker_pin": {
+        "path": "products/S2A_49QFU_20200229_0_L2A/block-09-05/block-observations.json",
+        "bytes": 47739,
+        "sha256": "b6d909fab3364a5b59c497a308c7a243e4bf264e77dcbbfbc6e9350c3359086b"
+      }
+    }
+  ],
+  "counts": {
+    "original_keys": 114,
+    "proposed_dated_water_body_locations": 93,
+    "proposed_dated_reef_body_locations": 4,
+    "questions": 17
+  },
+  "scope_limit": "Dated visible body location at unchanged original centre; no sovereignty/owner change or fine reef emergence/pixel shoreline assertion."
+}

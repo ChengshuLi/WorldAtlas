@@ -1,0 +1,206 @@
+{
+  "scene_number": 4,
+  "item": "S2B_49PHK_20200508_0_L2A",
+  "acquisition_datetime": "2020-05-08T02:55:30.570000Z",
+  "method": "Human visual reading of finite unchanged-centre markedRGB/unmarkedRGB/NIR native contexts; explicit manual exceptions, no spectral/SCL/model/classifier threshold, automated shoreline or registration fit.",
+  "source_quality": {
+    "requested_original_keys": 50,
+    "actually_sampled_native_centres": 50,
+    "outside_native_frame_indices": [],
+    "scl_centre_counts": {
+      "6": 50
+    },
+    "valid_centre_masks_by_band": {
+      "red": {
+        "255": 50
+      },
+      "green": {
+        "255": 50
+      },
+      "blue": {
+        "255": 50
+      },
+      "nir": {
+        "255": 50
+      },
+      "scl": {
+        "255": 50
+      }
+    },
+    "physical_interpretation": null
+  },
+  "blocks": [
+    {
+      "block": [
+        1,
+        9
+      ],
+      "points": 25,
+      "water_indices": [
+        275,
+        276,
+        277,
+        278,
+        289,
+        290,
+        291,
+        292,
+        293,
+        294,
+        295,
+        297,
+        298,
+        299,
+        300,
+        301,
+        302,
+        304,
+        305,
+        306
+      ],
+      "terrestrial_indices": [],
+      "unresolved_indices": [
+        286,
+        287,
+        288,
+        296,
+        303
+      ],
+      "finding": "Clear textured water at the upper group and most lower positions. Finite exceptions286/287/288/296/303 coincide with visible cloud-shadow or fringe context; extreme-dark literalDN1 values at286/288 remain valid-mask observations rather than proof of water.",
+      "images_viewed": [],
+      "native_crop_viewed": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene04-block-01-09-native-crop.png",
+      "block_marker_pin": {
+        "path": "products/S2B_49PHK_20200508_0_L2A/block-01-09/block-observations.json",
+        "bytes": 152192,
+        "sha256": "736b3e8f89155881579791e983fa4c244e896bc6c7a5928e44e406cc6dfd9ea4"
+      }
+    },
+    {
+      "block": [
+        1,
+        10
+      ],
+      "points": 7,
+      "water_indices": [
+        279,
+        280,
+        281,
+        282,
+        284
+      ],
+      "terrestrial_indices": [],
+      "unresolved_indices": [
+        283,
+        285
+      ],
+      "finding": "Water texture is exposed at279/280/281/282/284.283/285 touch the visible cloud/fringe cluster and remain surface questions despite source SCL6.",
+      "images_viewed": [],
+      "native_crop_viewed": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene04-block-01-10-native-crop.png",
+      "block_marker_pin": {
+        "path": "products/S2B_49PHK_20200508_0_L2A/block-01-10/block-observations.json",
+        "bytes": 47844,
+        "sha256": "370d8d276ed032ae8c96ca1de025b5e769682f1dfee796f6464b0b26603a57cb"
+      }
+    },
+    {
+      "block": [
+        2,
+        4
+      ],
+      "points": 3,
+      "water_indices": [],
+      "terrestrial_indices": [],
+      "unresolved_indices": [
+        307,
+        308,
+        309
+      ],
+      "finding": "All three requested positions are immediately within cloud/shadow/fringe context at the native right edge; retain quality questions rather than promote SCL6 to truth.",
+      "images_viewed": [],
+      "native_crop_viewed": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene04-block-02-04-native-crop.png",
+      "block_marker_pin": {
+        "path": "products/S2B_49PHK_20200508_0_L2A/block-02-04/block-observations.json",
+        "bytes": 24495,
+        "sha256": "8e71acd60470a794ca50ab2aa00b2bca1a454dcb6ff4e07b441dac81c59dda86"
+      }
+    },
+    {
+      "block": [
+        3,
+        5
+      ],
+      "points": 5,
+      "water_indices": [
+        310,
+        311,
+        312,
+        313,
+        314
+      ],
+      "terrestrial_indices": [],
+      "unresolved_indices": [],
+      "finding": "All five exact centres are visibly in clear wave-textured water, separated from the nearby cumulus and shadows.",
+      "images_viewed": [],
+      "native_crop_viewed": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene04-block-03-05-native-crop.png",
+      "block_marker_pin": {
+        "path": "products/S2B_49PHK_20200508_0_L2A/block-03-05/block-observations.json",
+        "bytes": 36128,
+        "sha256": "9ddef5f8606fe923f60475fa663b94af6cd326dc6b49b47a931c40d297a6d6c5"
+      }
+    },
+    {
+      "block": [
+        9,
+        8
+      ],
+      "points": 4,
+      "water_indices": [
+        321,
+        322,
+        323,
+        324
+      ],
+      "terrestrial_indices": [],
+      "unresolved_indices": [],
+      "finding": "Four exact centres lie in a continuous clear water-texture field; clouds are north of the requested strip.",
+      "images_viewed": [],
+      "native_crop_viewed": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene04-block-09-08-native-crop.png",
+      "block_marker_pin": {
+        "path": "products/S2B_49PHK_20200508_0_L2A/block-09-08/block-observations.json",
+        "bytes": 30293,
+        "sha256": "d07ca252d6205e0aa9d8fb3966a2039f5d6955b57e26287342b63e26cbd087a7"
+      }
+    },
+    {
+      "block": [
+        9,
+        9
+      ],
+      "points": 6,
+      "water_indices": [
+        315,
+        316,
+        317,
+        318,
+        319,
+        320
+      ],
+      "terrestrial_indices": [],
+      "unresolved_indices": [],
+      "finding": "Six exact centres lie in continuous clear textured water without a cloud/shadow or reef/surf boundary at the centre.",
+      "images_viewed": [],
+      "native_crop_viewed": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene04-block-09-09-native-crop.png",
+      "block_marker_pin": {
+        "path": "products/S2B_49PHK_20200508_0_L2A/block-09-09/block-observations.json",
+        "bytes": 41917,
+        "sha256": "0d28fea3450b1189d273c897c6d0e395a11839f5da6b37ca2a14186adc580eb5"
+      }
+    }
+  ],
+  "counts": {
+    "original_keys": 50,
+    "proposed_dated_water_body_locations": 40,
+    "questions": 10
+  },
+  "scope_limit": "Dated visible water/reef body location at unchanged original centre; fine substrate emergence, exact tidal shoreline, owner and sovereignty are not inferred."
+}

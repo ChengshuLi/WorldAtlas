@@ -1,0 +1,114 @@
+{
+  "scene_number": 6,
+  "item": "S2A_49PFT_20200310_0_L2A",
+  "acquisition_datetime": "2020-03-10T03:13:29.004000Z",
+  "method": "Human visual reading of each finite unchanged-centre RGB/NIR context at native scale using saved source displays; explicit perkey manual body/quality decisions, no spectral/SCL/model threshold, shoreline fit or producer qualification.",
+  "source_quality": {
+    "requested_original_keys": 32,
+    "actually_sampled_native_centres": 32,
+    "outside_native_frame_indices": [],
+    "scl_centre_counts": {
+      "6": 32
+    },
+    "valid_centre_masks_by_band": {
+      "red": {
+        "255": 32
+      },
+      "green": {
+        "255": 32
+      },
+      "blue": {
+        "255": 32
+      },
+      "nir": {
+        "255": 32
+      },
+      "scl": {
+        "255": 32
+      }
+    },
+    "physical_interpretation": null
+  },
+  "blocks": [
+    {
+      "block": [
+        2,
+        5
+      ],
+      "points": 1,
+      "water_indices": [],
+      "reef_body_indices": [
+        371
+      ],
+      "terrestrial_body_indices": [],
+      "unresolved_indices": [],
+      "finding": "Exact371 locates the visible reef/lagoon complex and adjacent narrow linear feature through it; body locality is clear in RGB/NIR. Whether its10mpixel is water, wet reef or emergent feature is deliberately undetermined.",
+      "native_crop_viewed": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene06-block-02-05-native-crop.png",
+      "crop_locator": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene06-block-02-05-crop-locator.json",
+      "block_marker_pin": {
+        "path": "products/S2A_49PFT_20200310_0_L2A/block-02-05/block-observations.json",
+        "bytes": 12895,
+        "sha256": "5ff47267196ac864761e87ad9f5e94502d328044195dfa585c411c14897e9e1c"
+      }
+    },
+    {
+      "block": [
+        5,
+        3
+      ],
+      "points": 31,
+      "water_indices": [
+        372,
+        373,
+        374,
+        375,
+        376,
+        377,
+        378,
+        379,
+        380,
+        381,
+        382,
+        383,
+        384,
+        385,
+        386,
+        387,
+        388,
+        389,
+        390,
+        391,
+        392,
+        393,
+        394,
+        395,
+        396,
+        397,
+        398,
+        399,
+        400,
+        401,
+        402
+      ],
+      "reef_body_indices": [],
+      "terrestrial_body_indices": [],
+      "unresolved_indices": [],
+      "finding": "All31requested centres lie in clear continuously wave-textured water; no native-centre cloud/shadow or land-body overlap is visible.",
+      "native_crop_viewed": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene06-block-05-03-native-crop.png",
+      "crop_locator": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene06-block-05-03-crop-locator.json",
+      "block_marker_pin": {
+        "path": "products/S2A_49PFT_20200310_0_L2A/block-05-03/block-observations.json",
+        "bytes": 187381,
+        "sha256": "17eec91e51ca8da12adf811bc6e2395fa5fe09a4a7dbdd888a0b32ae5b916c92"
+      }
+    }
+  ],
+  "counts": {
+    "original_keys": 32,
+    "proposed_dated_water_body_locations": 31,
+    "proposed_dated_reef_body_locations": 1,
+    "proposed_dated_terrestrial_body_locations": 0,
+    "questions": 0
+  },
+  "scope_limit": "Bounded dated visible body LOCALITY at unchanged originalcentre. Finewetness, substrate emergence, finepixel shoreline and owner/sovereignty remain separate."
+}

@@ -1,0 +1,71 @@
+{
+  "scene_number": 10,
+  "item": "S2B_49QEU_20200504_0_L2A",
+  "acquisition_datetime": "2020-05-04T03:13:18.976000Z",
+  "method": "Human visual reading of each finite unchanged-centre RGB/NIR context at native scale using saved source displays; explicit perkey manual body/quality decisions, no spectral/SCL/model threshold, shoreline fit or producer qualification.",
+  "source_quality": {
+    "requested_original_keys": 9,
+    "actually_sampled_native_centres": 9,
+    "outside_native_frame_indices": [],
+    "scl_centre_counts": {
+      "6": 9
+    },
+    "valid_centre_masks_by_band": {
+      "red": {
+        "255": 9
+      },
+      "green": {
+        "255": 9
+      },
+      "blue": {
+        "255": 9
+      },
+      "nir": {
+        "255": 9
+      },
+      "scl": {
+        "255": 9
+      }
+    },
+    "physical_interpretation": null
+  },
+  "blocks": [
+    {
+      "block": [
+        0,
+        5
+      ],
+      "points": 9,
+      "water_indices": [],
+      "reef_body_indices": [
+        455,
+        456,
+        457,
+        458,
+        459,
+        460,
+        461,
+        462,
+        463
+      ],
+      "terrestrial_body_indices": [],
+      "unresolved_indices": [],
+      "finding": "Nine exactcentres locate the visible patchy reef/lagoon BODY; RGB cyan/dark reef textures and NIR-blue morphology are coherent. Fine substrate emergence/wetness is undetermined rather than a strictdryness gate.",
+      "native_crop_viewed": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene10-block-00-05-native-crop.png",
+      "crop_locator": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene10-block-00-05-crop-locator.json",
+      "block_marker_pin": {
+        "path": "products/S2B_49QEU_20200504_0_L2A/block-00-05/block-observations.json",
+        "bytes": 59379,
+        "sha256": "6020ba8838a5d3d87377cf980755f9583921eac975d2e7feb4de694272fc0deb"
+      }
+    }
+  ],
+  "counts": {
+    "original_keys": 9,
+    "proposed_dated_water_body_locations": 0,
+    "proposed_dated_reef_body_locations": 9,
+    "proposed_dated_terrestrial_body_locations": 0,
+    "questions": 0
+  },
+  "scope_limit": "Bounded dated visible body LOCALITY at unchanged originalcentre. Finewetness, substrate emergence, finepixel shoreline and owner/sovereignty remain separate."
+}

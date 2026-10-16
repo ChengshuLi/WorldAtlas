@@ -1,0 +1,97 @@
+{
+  "scene_number": 8,
+  "item": "S2B_50PMQ_20200405_0_L2A",
+  "acquisition_datetime": "2020-04-05T02:45:25.898000Z",
+  "method": "Human visual reading of each finite unchanged-centre RGB/NIR context at native scale using saved source displays; explicit perkey manual body/quality decisions, no spectral/SCL/model threshold, shoreline fit or producer qualification.",
+  "source_quality": {
+    "requested_original_keys": 14,
+    "actually_sampled_native_centres": 14,
+    "outside_native_frame_indices": [],
+    "scl_centre_counts": {
+      "6": 14
+    },
+    "valid_centre_masks_by_band": {
+      "red": {
+        "255": 14
+      },
+      "green": {
+        "255": 14
+      },
+      "blue": {
+        "255": 14
+      },
+      "nir": {
+        "255": 14
+      },
+      "scl": {
+        "255": 14
+      }
+    },
+    "physical_interpretation": null
+  },
+  "blocks": [
+    {
+      "block": [
+        1,
+        1
+      ],
+      "points": 1,
+      "water_indices": [],
+      "reef_body_indices": [
+        440
+      ],
+      "terrestrial_body_indices": [],
+      "unresolved_indices": [],
+      "finding": "Exact440 locates the clear hooked reef BODY in visibleRGB and NIR-blue morphology; finer wetness/emergence is undetermined.",
+      "native_crop_viewed": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene08-block-01-01-native-crop.png",
+      "crop_locator": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene08-block-01-01-crop-locator.json",
+      "block_marker_pin": {
+        "path": "products/S2B_50PMQ_20200405_0_L2A/block-01-01/block-observations.json",
+        "bytes": 12880,
+        "sha256": "3b83ed94829bd7acfc1621b7576e7bd8fa00303ac792ca3291ac17b7b2f52115"
+      }
+    },
+    {
+      "block": [
+        1,
+        2
+      ],
+      "points": 13,
+      "water_indices": [],
+      "reef_body_indices": [
+        427,
+        429,
+        430,
+        431,
+        432,
+        433,
+        434,
+        435,
+        436,
+        437,
+        438,
+        439
+      ],
+      "terrestrial_body_indices": [],
+      "unresolved_indices": [
+        428
+      ],
+      "finding": "Exact427 and429\u2013439 locate the coherent visible elongated reef BODY.428 touches the actual cloud/fringe at the northern hook and remains unresolved. Do not turn the neighboring cloud or sourceSCL6 into an answer.",
+      "native_crop_viewed": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene08-block-01-02-native-crop.png",
+      "crop_locator": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene08-block-01-02-crop-locator.json",
+      "block_marker_pin": {
+        "path": "products/S2B_50PMQ_20200405_0_L2A/block-01-02/block-observations.json",
+        "bytes": 82782,
+        "sha256": "be9ab0fc584139da3d4a3cd0192b82afc390af010ae2295f9157193d1a030e23"
+      }
+    }
+  ],
+  "counts": {
+    "original_keys": 14,
+    "proposed_dated_water_body_locations": 0,
+    "proposed_dated_reef_body_locations": 13,
+    "proposed_dated_terrestrial_body_locations": 0,
+    "questions": 1
+  },
+  "scope_limit": "Bounded dated visible body LOCALITY at unchanged originalcentre. Finewetness, substrate emergence, finepixel shoreline and owner/sovereignty remain separate."
+}

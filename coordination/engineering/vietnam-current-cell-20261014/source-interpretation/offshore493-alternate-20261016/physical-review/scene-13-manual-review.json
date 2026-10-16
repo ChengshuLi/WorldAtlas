@@ -1,0 +1,64 @@
+{
+  "scene_number": 13,
+  "item": "S2A_49NHJ_20200821_0_L2A",
+  "acquisition_datetime": "2020-08-21T02:55:52.889000Z",
+  "method": "Human visual reading of each finite unchanged-centre RGB/NIR context at native scale using saved source displays; explicit perkey manual body/quality decisions, no spectral/SCL/model threshold, shoreline fit or producer qualification.",
+  "source_quality": {
+    "requested_original_keys": 2,
+    "actually_sampled_native_centres": 2,
+    "outside_native_frame_indices": [],
+    "scl_centre_counts": {
+      "6": 2
+    },
+    "valid_centre_masks_by_band": {
+      "red": {
+        "255": 2
+      },
+      "green": {
+        "255": 2
+      },
+      "blue": {
+        "255": 2
+      },
+      "nir": {
+        "255": 2
+      },
+      "scl": {
+        "255": 2
+      }
+    },
+    "physical_interpretation": null
+  },
+  "blocks": [
+    {
+      "block": [
+        5,
+        0
+      ],
+      "points": 2,
+      "water_indices": [
+        471,
+        472
+      ],
+      "reef_body_indices": [],
+      "terrestrial_body_indices": [],
+      "unresolved_indices": [],
+      "finding": "Both exactcentres locate clear dark wave-textured water; the visible cyan reef margin is south of them and spatially separate.",
+      "native_crop_viewed": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene13-block-05-00-native-crop.png",
+      "crop_locator": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene13-block-05-00-crop-locator.json",
+      "block_marker_pin": {
+        "path": "products/S2A_49NHJ_20200821_0_L2A/block-05-00/block-observations.json",
+        "bytes": 18630,
+        "sha256": "a7584dd1050cb076ccdd41d539343230c6fae249ca705f968a70613d9564611f"
+      }
+    }
+  ],
+  "counts": {
+    "original_keys": 2,
+    "proposed_dated_water_body_locations": 2,
+    "proposed_dated_reef_body_locations": 0,
+    "proposed_dated_terrestrial_body_locations": 0,
+    "questions": 0
+  },
+  "scope_limit": "Bounded dated visible body LOCALITY at unchanged originalcentre. Finewetness, substrate emergence, finepixel shoreline and owner/sovereignty remain separate."
+}

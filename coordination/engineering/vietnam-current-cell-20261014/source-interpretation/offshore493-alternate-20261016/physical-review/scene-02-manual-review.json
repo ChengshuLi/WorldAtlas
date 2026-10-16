@@ -1,0 +1,214 @@
+{
+  "scene_number": 2,
+  "item": "S2B_50PMS_20200215_0_L2A",
+  "acquisition_datetime": "2020-02-15T02:44:55.084000Z",
+  "method": "Human visual reading of finite unchanged-centre markedRGB/unmarkedRGB/NIR native contexts; explicit manual exceptions, no spectral/SCL/model/classifier threshold, automated shoreline or registration fit.",
+  "source_quality": {
+    "requested_original_keys": 86,
+    "actually_sampled_native_centres": 86,
+    "outside_native_frame_indices": [],
+    "scl_centre_counts": {
+      "6": 86
+    },
+    "valid_centre_masks_by_band": {
+      "red": {
+        "255": 86
+      },
+      "green": {
+        "255": 86
+      },
+      "blue": {
+        "255": 86
+      },
+      "nir": {
+        "255": 86
+      },
+      "scl": {
+        "255": 86
+      }
+    },
+    "physical_interpretation": null
+  },
+  "blocks": [
+    {
+      "block": [
+        3,
+        5
+      ],
+      "points": 5,
+      "water_indices": [
+        115,
+        118,
+        123,
+        160,
+        161
+      ],
+      "terrestrial_indices": [],
+      "unresolved_indices": [],
+      "finding": "Five unchanged centres lie in clear dark water; neighboring faint blue reef patches provide coherent submerged-body context and are NIR-dark.",
+      "images_viewed": [
+        "bulk-completion/offshore493-alternate2020-source-001/products/S2B_50PMS_20200215_0_L2A/block-03-05/rgb-centres.png",
+        "bulk-completion/offshore493-alternate2020-source-001/products/S2B_50PMS_20200215_0_L2A/block-03-05/nir-red-green-native.png"
+      ],
+      "native_crop_viewed": null,
+      "block_marker_pin": {
+        "path": "products/S2B_50PMS_20200215_0_L2A/block-03-05/block-observations.json",
+        "bytes": 35998,
+        "sha256": "ec59b4d3b1148fdfcfaeff07d7e1c211230aae7e2865ee782ccfd3e354fde9a1"
+      }
+    },
+    {
+      "block": [
+        3,
+        6
+      ],
+      "points": 41,
+      "water_indices": [
+        114,
+        116,
+        117,
+        119,
+        120,
+        121,
+        122,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137,
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144,
+        145,
+        146,
+        147,
+        162,
+        163,
+        164,
+        165,
+        175,
+        176,
+        177,
+        178,
+        179,
+        180
+      ],
+      "terrestrial_indices": [],
+      "unresolved_indices": [],
+      "finding": "Both requested clusters are visibly continuous dark water, alongside small blue reef-associated patches; no cloud/shadow fringe at the centres.",
+      "images_viewed": [
+        "bulk-completion/offshore493-alternate2020-source-001/products/S2B_50PMS_20200215_0_L2A/block-03-06/rgb-centres.png",
+        "bulk-completion/offshore493-alternate2020-source-001/products/S2B_50PMS_20200215_0_L2A/block-03-06/nir-red-green-native.png"
+      ],
+      "native_crop_viewed": null,
+      "block_marker_pin": {
+        "path": "products/S2B_50PMS_20200215_0_L2A/block-03-06/block-observations.json",
+        "bytes": 244351,
+        "sha256": "fccbf81f8d1bdaa3a847bb52dfe7c3893cb132c7a0cd88e7a2e51723fe4186fd"
+      }
+    },
+    {
+      "block": [
+        3,
+        8
+      ],
+      "points": 22,
+      "water_indices": [
+        148,
+        149,
+        150,
+        151,
+        152,
+        153,
+        154,
+        155,
+        156,
+        157,
+        158,
+        159,
+        166,
+        167,
+        168,
+        169,
+        170,
+        171,
+        172,
+        173,
+        174,
+        181
+      ],
+      "terrestrial_indices": [],
+      "unresolved_indices": [],
+      "finding": "The requested strips lie in the same continuous water/reef-associated setting; dark NIR corroborates the visible blue underwater pattern, without deciding substrate emergence.",
+      "images_viewed": [
+        "bulk-completion/offshore493-alternate2020-source-001/products/S2B_50PMS_20200215_0_L2A/block-03-08/rgb-centres.png",
+        "bulk-completion/offshore493-alternate2020-source-001/products/S2B_50PMS_20200215_0_L2A/block-03-08/nir-red-green-native.png"
+      ],
+      "native_crop_viewed": null,
+      "block_marker_pin": {
+        "path": "products/S2B_50PMS_20200215_0_L2A/block-03-08/block-observations.json",
+        "bytes": 134448,
+        "sha256": "072b73d92fabc29d0cb91f6d61f4f481f152fddd33a3fd6cfb0e5cc3dabc0fbd"
+      }
+    },
+    {
+      "block": [
+        4,
+        8
+      ],
+      "points": 18,
+      "water_indices": [
+        182,
+        183,
+        184,
+        185,
+        186,
+        187,
+        188,
+        189,
+        190,
+        191,
+        192,
+        193,
+        194,
+        195,
+        196,
+        197,
+        198,
+        199
+      ],
+      "terrestrial_indices": [],
+      "unresolved_indices": [],
+      "finding": "Requested centres occupy clear dark water bordering the visible blue reef complex; no opaque cloud or terrestrial body obscures their dated body locations.",
+      "images_viewed": [
+        "bulk-completion/offshore493-alternate2020-source-001/products/S2B_50PMS_20200215_0_L2A/block-04-08/rgb-centres.png",
+        "bulk-completion/offshore493-alternate2020-source-001/products/S2B_50PMS_20200215_0_L2A/block-04-08/nir-red-green-native.png"
+      ],
+      "native_crop_viewed": null,
+      "block_marker_pin": {
+        "path": "products/S2B_50PMS_20200215_0_L2A/block-04-08/block-observations.json",
+        "bytes": 111070,
+        "sha256": "ed93d404746c673e0bea2f87f3f5db0c85ff4ec471eb1f8a9191178c2c484949"
+      }
+    }
+  ],
+  "counts": {
+    "original_keys": 86,
+    "proposed_dated_water_body_locations": 86,
+    "questions": 0
+  },
+  "scope_limit": "Dated visible water/reef body location at unchanged original centre; fine substrate emergence, exact tidal shoreline, owner and sovereignty are not inferred."
+}

@@ -1,0 +1,167 @@
+{
+  "scene_number": 7,
+  "item": "S2B_50PMR_20200309_0_L2A",
+  "acquisition_datetime": "2020-03-09T02:55:07.210000Z",
+  "method": "Human visual reading of each finite unchanged-centre RGB/NIR context at native scale using saved source displays; explicit perkey manual body/quality decisions, no spectral/SCL/model threshold, shoreline fit or producer qualification.",
+  "source_quality": {
+    "requested_original_keys": 24,
+    "actually_sampled_native_centres": 24,
+    "outside_native_frame_indices": [],
+    "scl_centre_counts": {
+      "6": 23,
+      "8": 1
+    },
+    "valid_centre_masks_by_band": {
+      "red": {
+        "255": 24
+      },
+      "green": {
+        "255": 24
+      },
+      "blue": {
+        "255": 24
+      },
+      "nir": {
+        "255": 24
+      },
+      "scl": {
+        "255": 24
+      }
+    },
+    "physical_interpretation": null
+  },
+  "blocks": [
+    {
+      "block": [
+        1,
+        3
+      ],
+      "points": 13,
+      "water_indices": [
+        405,
+        406,
+        407,
+        408,
+        409,
+        410,
+        411,
+        412,
+        413,
+        414,
+        415,
+        416,
+        417
+      ],
+      "reef_body_indices": [],
+      "terrestrial_body_indices": [],
+      "unresolved_indices": [],
+      "finding": "All13exactcentres lie in visibly continuous glinted water with coherent wave texture; the dark linear surface patterns do not obscure the water body.",
+      "native_crop_viewed": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene07-block-01-03-native-crop.png",
+      "crop_locator": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene07-block-01-03-crop-locator.json",
+      "block_marker_pin": {
+        "path": "products/S2B_50PMR_20200309_0_L2A/block-01-03/block-observations.json",
+        "bytes": 82847,
+        "sha256": "090180ba3861ef61790eeca8df8807a9e0c245366574f13b34c00f2738558939"
+      }
+    },
+    {
+      "block": [
+        1,
+        4
+      ],
+      "points": 3,
+      "water_indices": [
+        403,
+        404,
+        418
+      ],
+      "reef_body_indices": [],
+      "terrestrial_body_indices": [],
+      "unresolved_indices": [],
+      "finding": "All three requested centres locate continuous wave-textured water around a clearly visible reef body; no opacity/noData at those centres.",
+      "native_crop_viewed": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene07-block-01-04-native-crop.png",
+      "crop_locator": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene07-block-01-04-crop-locator.json",
+      "block_marker_pin": {
+        "path": "products/S2B_50PMR_20200309_0_L2A/block-01-04/block-observations.json",
+        "bytes": 24586,
+        "sha256": "9a8587dfad51dfd24537f60b9cbdfad50ff87097e37bfadd97b219d88094dd93"
+      }
+    },
+    {
+      "block": [
+        3,
+        0
+      ],
+      "points": 1,
+      "water_indices": [],
+      "reef_body_indices": [
+        419
+      ],
+      "terrestrial_body_indices": [],
+      "unresolved_indices": [],
+      "finding": "Exact419 locates a sharply bounded visible cyan reef complex. Literal SCL8 is retained as a conflict with the coherent reef morphology; no cloud is visibly obscuring the reef body. Fine substrate exposure is undetermined.",
+      "native_crop_viewed": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene07-block-03-00-native-crop.png",
+      "crop_locator": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene07-block-03-00-crop-locator.json",
+      "block_marker_pin": {
+        "path": "products/S2B_50PMR_20200309_0_L2A/block-03-00/block-observations.json",
+        "bytes": 12878,
+        "sha256": "303e8b81105f222e6db1aebf12bd1e48409e0ee968ac535b9c22291a6861cc9e"
+      }
+    },
+    {
+      "block": [
+        3,
+        1
+      ],
+      "points": 5,
+      "water_indices": [
+        420,
+        421,
+        422,
+        423,
+        424
+      ],
+      "reef_body_indices": [],
+      "terrestrial_body_indices": [],
+      "unresolved_indices": [],
+      "finding": "Five exactcentres locate continuous wave-textured water, with broad coherent visible and NIR context.",
+      "native_crop_viewed": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene07-block-03-01-native-crop.png",
+      "crop_locator": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene07-block-03-01-crop-locator.json",
+      "block_marker_pin": {
+        "path": "products/S2B_50PMR_20200309_0_L2A/block-03-01/block-observations.json",
+        "bytes": 36093,
+        "sha256": "443c180c4dafe7e7b18fa123ce527168f9bced236b8ec00b3519dbb054130dac"
+      }
+    },
+    {
+      "block": [
+        8,
+        3
+      ],
+      "points": 2,
+      "water_indices": [],
+      "reef_body_indices": [
+        425,
+        426
+      ],
+      "terrestrial_body_indices": [],
+      "unresolved_indices": [],
+      "finding": "Exact425/426 have actualmask255 and locate the visible reef-body edge, immediately beside the true black noData wedge. Only the coherent visible reef BODY location is proposed; adjacent noData and fineedge/wetness questions remain, and no black pixel becomes water.",
+      "native_crop_viewed": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene07-block-08-03-native-crop.png",
+      "crop_locator": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene07-block-08-03-crop-locator.json",
+      "block_marker_pin": {
+        "path": "products/S2B_50PMR_20200309_0_L2A/block-08-03/block-observations.json",
+        "bytes": 18772,
+        "sha256": "144f99db1cf5b4ed1c3810170a4bca88e599400560080e466b1fd30c58574e25"
+      }
+    }
+  ],
+  "counts": {
+    "original_keys": 24,
+    "proposed_dated_water_body_locations": 21,
+    "proposed_dated_reef_body_locations": 3,
+    "proposed_dated_terrestrial_body_locations": 0,
+    "questions": 0
+  },
+  "scope_limit": "Bounded dated visible body LOCALITY at unchanged originalcentre. Finewetness, substrate emergence, finepixel shoreline and owner/sovereignty remain separate."
+}
