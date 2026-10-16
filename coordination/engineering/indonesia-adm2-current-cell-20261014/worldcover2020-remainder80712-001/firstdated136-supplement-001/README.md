@@ -1,0 +1,13 @@
+# Original Indonesia physical review: 136 additional dated bounded answers
+
+This review-only continuation adopts exactly67 Aru and69 Batam answers from the literal distinct-reviewed136keyset, after retaining7 Aru and1 Batam ambiguous marked-fringe proposals as unknown. Complete original532proposal records, current native views and source bodies are retained unchanged. The original-source archive preserves historical superseded SCL displays only as predecessors; corrected native512px SCL views are the actual current evidence. Operational stop instructions and unfinished draft notes are not published.
+
+Exact original accounting is133,160 previously adopted +136 new =133,296 of133,846;550specific questions remain (Bulungan69,Halmahera85,Aru159,Batam237). The complete778first-dated-stage record retains228bounded adopted answers and550specific holds with actual source reasons and next actions. This does not assert that the independent original source/territorial holds are cleared or that any whole session is closed.
+
+Five supported Batam points use qualitative uncalibrated PB05 raw-DN body morphology only. All93original PB05 radiometry/offset conflicts remain held; there is no BOA normalization, quantitative reflectance or index claim. Native masks/SCL/cloud percentages remain context, not automatic classifiers. No neighbourhood majority/unanimity or blanket shoreline/cloud-label veto is imposed. Actual mixed fringe, cloud/shadow, nodata, georegistration and finite native support limits remain.
+
+These are dated visible body/cover plus original-source-version location answers, not dry understory, permanent or present truth, binary whole-Atlas-cell land/water, hydrologic kind/tide/bank, strict native inclusion, current jurisdiction, parent correction, legal title, native authority or accepted repair credit. All original independent holds remain unchanged. No source/network pixel read, raw-array reread, geometry predicate or native operator was repeated.
+
+The complete15-item original point/header/block metadata and source method are referenced by immutable724a0b7f pins.895raw NPZ arrays remain privately preserved and are not claimed committed. The source archive member inventory and whole/decoded publication inventory bind the actual supplied bodies. The public review receipt omits only its private Library identifier; its original whole-file hash is retained and no scientific field changes.
+
+Contains modified Copernicus Sentinel data [2020]. Source legal notice: https://sentinels.copernicus.eu/documents/247904/690755/Sentinel_Data_Legal_Notice. This packet changes no main, selector, ownership or deployment and does not close1884or1202.

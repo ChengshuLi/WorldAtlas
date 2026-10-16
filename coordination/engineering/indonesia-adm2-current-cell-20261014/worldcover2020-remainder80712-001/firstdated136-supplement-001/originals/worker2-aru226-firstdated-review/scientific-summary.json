@@ -1,0 +1,125 @@
+{
+  "status": "actual-saved-source-visual-interpretation-proposal-awaiting-independent-review-and-root-adoption",
+  "authored_utc": "2026-10-16T02:18:25.761837+00:00",
+  "original_package": "physical-review133846; exact778 still-unanswered dated-followup scope; this author owns Aru226 only",
+  "exact_original_owner": 22734,
+  "exact_original_source_name": "Kepulauan Aru",
+  "keys": 226,
+  "unique_keys": 226,
+  "proposed_bounded_dated_answers": 74,
+  "proposed_visible_water_body_locations": 44,
+  "proposed_visible_canopy_body_locations": 30,
+  "unanswered": 152,
+  "unanswered_shore_or_surface_mixture": 77,
+  "unanswered_cloud_haze_or_shadow": 75,
+  "actual_adopted_review_credit": 0,
+  "authority_or_repair_credit": 0,
+  "new_owner_or_selected_state_change": 0,
+  "processing_baseline_counts": {
+    "02.13": 226
+  },
+  "PB05_unresolved_normalization": 0,
+  "all_centre_five_band_masks255_no_nodata": true,
+  "SCL_literal_counts_context_only": {
+    "2": 16,
+    "3": 10,
+    "4": 60,
+    "5": 5,
+    "6": 90,
+    "7": 18,
+    "8": 10,
+    "9": 13,
+    "10": 4
+  },
+  "scenes": {
+    "S2B_53MMQ_20200122_0_L2A": {
+      "acquisition_datetime": "2020-01-22T01:28:34.385000Z",
+      "processing_baseline": "02.13",
+      "total": 25,
+      "categories": {
+        "unanswered-native-shore-or-surface-mixture": 9,
+        "unanswered-cloud-haze-or-shadow-obscuration": 10,
+        "proposed-dated-visible-canopy-body-location": 1,
+        "proposed-dated-visible-water-body-location": 5
+      }
+    },
+    "S2A_53MMP_20200127_0_L2A": {
+      "acquisition_datetime": "2020-01-27T01:28:48.548000Z",
+      "processing_baseline": "02.13",
+      "total": 136,
+      "categories": {
+        "proposed-dated-visible-canopy-body-location": 17,
+        "unanswered-native-shore-or-surface-mixture": 51,
+        "proposed-dated-visible-water-body-location": 17,
+        "unanswered-cloud-haze-or-shadow-obscuration": 51
+      }
+    },
+    "S2A_53MMN_20200127_0_L2A": {
+      "acquisition_datetime": "2020-01-27T01:29:01.492000Z",
+      "processing_baseline": "02.13",
+      "total": 65,
+      "categories": {
+        "proposed-dated-visible-water-body-location": 22,
+        "unanswered-cloud-haze-or-shadow-obscuration": 14,
+        "unanswered-native-shore-or-surface-mixture": 17,
+        "proposed-dated-visible-canopy-body-location": 12
+      }
+    }
+  },
+  "interpretation": "Per-point human visual judgments on saved exact-date RGB/NIR native contexts and actual fractional markers, with SCL/masks as context. No majority, uniformity, SCL, annual-label or spectral-index classification rule. Annual ambiguous observations remain explicit in each row.",
+  "positive_original_source_association": "Exact frozen source-candidate/member/owner/SID interval association is retained, not a fresh strict-interior, boundary/tie, current territorial or legal finding. All226 retain the documented selected-geographic-portion flag and any source/parent/foreign limits verbatim.",
+  "remaining_limits": [
+    "Visible canopy is not dry ground and does not rule out water beneath it.",
+    "Visible water is not a river/lake/sea, freshwater/saline, bank-allocation or jurisdiction finding.",
+    "Nominal10m native pixels, georegistration, fractional centre and the represented source footprint are retained; no exact surveyed shoreline or tide claim.",
+    "Masks255 establish raster validity, not cloudfree truth. SCL2/3/4/6/7/10 and nearby cloud are reviewed contextually rather than automatic class/veto.",
+    "No completion or adoption of the other dated778 cohorts or of remaining152 Aru keys is inferred; exact unanswered rows remain explicit.",
+    "No new scene/source retrieval, native predicate, physical producer, repair qualification or selected-state change."
+  ],
+  "inputs": {
+    "exact_original778_inventory": {
+      "path": "idn-physical-dated778-plan-001/worker6-metadata/exact778-original-source-coordinate-current-reason.jsonl.gz",
+      "bytes": 189628,
+      "sha256": "6159516f9ffcdaf35e8febbf89ff32f658151767ad9d7f04948e1aa3627d892c"
+    },
+    "actual_source_execution": {
+      "path": "idn-physical-dated778-plan-001/worker6-metadata/first-raw-native-observation-001/attempt-001.execution.json",
+      "bytes": 744,
+      "sha256": "1a40b40cfa5895126a22940b50a3fb40113357a5a40d3b6f6e7addc1741ad4d4"
+    },
+    "raw_array_manifest": {
+      "path": "idn-physical-dated778-plan-001/worker6-metadata/first-raw-native-observation-001/raw-array-manifest.json",
+      "bytes": 192621,
+      "sha256": "72a970569452a1b6d3347700d096075dd2ceb5d4903029044e4ad4e06e4f82e8"
+    },
+    "manual_point_judgments": {
+      "path": "idn-physical-dated778-plan-001/worker2-aru226-firstdated-review/manual-visual-judgments.tsv",
+      "bytes": 25153,
+      "sha256": "85523846a423b4695e039e01a7ae2bd398f706ed065f8e4ed09d4db8fba4d1e7"
+    },
+    "render_script": {
+      "path": "idn-physical-dated778-plan-001/worker2-aru226-firstdated-review/render_saved_native_contexts.py",
+      "bytes": 4936,
+      "sha256": "4ec512c531c63bebe9f2fc3c53da01fd8f020b81f54ddfadb716cdd4b444e45b"
+    },
+    "zoom_render_script": {
+      "path": "idn-physical-dated778-plan-001/worker2-aru226-firstdated-review/render_saved_candidate_zooms.py",
+      "bytes": 2415,
+      "sha256": "a2c34d6ee935985f6b0e14b154598bae50d9c49071063ef33c08ce1be06337e1"
+    }
+  },
+  "outputs": {
+    "decoded": {
+      "path": "idn-physical-dated778-plan-001/worker2-aru226-firstdated-review/proposed-aru226-firstdated-dispositions.jsonl",
+      "bytes": 3638436,
+      "sha256": "2d8034229c27f08b44d5debb3f71a69ab29f6804abe55f68120f0eeba618c610"
+    },
+    "encoded": {
+      "path": "idn-physical-dated778-plan-001/worker2-aru226-firstdated-review/proposed-aru226-firstdated-dispositions.jsonl.gz",
+      "bytes": 184705,
+      "sha256": "537c09c506a021870b428ef2c9bd2a7c29677aa5b202bbb91451623a12cc1c93"
+    },
+    "gzip_mtime": 0
+  },
+  "display_correction": "Initial SCL-only display assumed1024 storage blocks; actual SCL uses512. Initial pages are preserved as superseded-display-layout-001. Corrected15pages use actual per-band block_shapes. No scientific judgment or adoption relied on wrong SCL panels; RGB/NIR arrays were unchanged."
+}
