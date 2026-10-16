@@ -1,0 +1,51 @@
+{
+  "issue": 2061,
+  "purpose": "New child manifest uses actual accepted ancestor whole-file custody while retaining literal original scope hashes and original recorded source vintage; no original scientific input or source-authority pin is changed.",
+  "rows": [
+    {
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/lineage.json.gz",
+      "original_recorded_commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+      "actual_ancestor_commit": "b6382262f8d03d9e7d33b26d8adb40a55197262b",
+      "declared_sha256": "bacfc99714f832aa4b5719b9fb4ae9837080b948f10df9e9be2b150b281e20d4",
+      "declared_bytes": 4404456,
+      "original": {
+        "mode_oid": "100644 blob 4ef0728e74e11e069bd7bb11e287c6fbb59946fa",
+        "bytes": 4404456,
+        "sha256": "bacfc99714f832aa4b5719b9fb4ae9837080b948f10df9e9be2b150b281e20d4"
+      },
+      "accepted": {
+        "mode_oid": "100644 blob 4ef0728e74e11e069bd7bb11e287c6fbb59946fa",
+        "bytes": 4404456,
+        "sha256": "bacfc99714f832aa4b5719b9fb4ae9837080b948f10df9e9be2b150b281e20d4"
+      },
+      "identical_whole_mode_oid_bytes_hash": true
+    },
+    {
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+      "original_recorded_commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+      "actual_ancestor_commit": "b6382262f8d03d9e7d33b26d8adb40a55197262b",
+      "declared_sha256": "78007430b6f9faedb188ef0619b7ff0a7a2cc7fff2ec9f1c41ee69936ec4ebd8",
+      "declared_bytes": 1754890,
+      "original": {
+        "mode_oid": "100644 blob 9c9a9bc83627afd3e8435ff4009e39530543bf54",
+        "bytes": 1754890,
+        "sha256": "78007430b6f9faedb188ef0619b7ff0a7a2cc7fff2ec9f1c41ee69936ec4ebd8"
+      },
+      "accepted": {
+        "mode_oid": "100644 blob 9c9a9bc83627afd3e8435ff4009e39530543bf54",
+        "bytes": 1754890,
+        "sha256": "78007430b6f9faedb188ef0619b7ff0a7a2cc7fff2ec9f1c41ee69936ec4ebd8"
+      },
+      "identical_whole_mode_oid_bytes_hash": true
+    }
+  ],
+  "local_ancestry_observation": {
+    "is_shallow_repository": true,
+    "shallow_boundary_count": 4,
+    "shallow_metadata_sha256": "c2702a665d2f92cf6f20acbe0e195b05a7012bacd4d576c7cf7b91581b8bf109",
+    "f7_literal_is_boundary": false,
+    "observed_merge_base_is_ancestor_f7_to_finalE_exit_code": 1,
+    "observed_merge_base_is_ancestor_b638_to_finalE_exit_code": 0,
+    "limit": "Exit1 in this shallow local graph does not establish full historical non-ancestry. No deep fetch was performed. The new manifest uses the independently established actual b638 ancestor and identical same-path whole-file bodies; original f7 provenance remains historical."
+  }
+}

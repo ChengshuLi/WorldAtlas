@@ -1,0 +1,65 @@
+{
+  "outcome": "ready for parent integration of exact reviewed candidate; no material substantive finding",
+  "candidate": "afaac0b5d8dfc320f8f2a8fb81fddb25092094ae",
+  "accepted_baseline": "b6382262f8d03d9e7d33b26d8adb40a55197262b",
+  "actual_consumer": {
+    "exit_code": 0,
+    "start_utc": "2026-10-16T00:50:16.581075Z",
+    "end_utc": "2026-10-16T01:14:28.583784Z",
+    "elapsed_seconds": 1451.9753756250002,
+    "stderr_bytes": 0,
+    "status": "no-new-native-loss",
+    "lost_or_reassigned_cells": 0,
+    "failure_intervals": 0,
+    "affected_rows": 21712,
+    "phases": 41,
+    "actual_baseline_and_candidate_phase_rows_exactly_cover_all_selected_patch_rows": true,
+    "candidate_selection_matches_reviewed_canonical": true,
+    "candidate_code_executed": false,
+    "execution_code_files": 5
+  },
+  "component_visibility": {
+    "new_components": 41,
+    "witnesses": 41,
+    "exactly_all_41_added_components": true,
+    "all_witnesses_previous_zero_and_expected_new_owner_at_original_key": true,
+    "limit": "41 component witnesses are not 1233 independent physical observations or all-cell query counts"
+  },
+  "accepted_conservation": {
+    "prior_native_cells": 281915,
+    "delta_native_cells": 1233,
+    "total_native_cells": 283148,
+    "accepted_full_ledger_rows_preserved": 691,
+    "candidate_ledger_rows": 732,
+    "consumer_active_preserved_components": 683,
+    "consumer_preserved_authorities": 83,
+    "consumer_appended_authorities": 9,
+    "limit": "683 active consumer components and691 full accepted ledger rows are distinct quantities"
+  },
+  "new_physical_classes": {
+    "mapped_land_support": 1227,
+    "mapped_inland_water_support": 6
+  },
+  "current_native_overlap_result": "Completed actual application on every selected patch row passed the accepted selectedAdditiveRows preexisting-native-overlap guard; no new assignments overwrite assigned native cells.",
+  "source_limits": [
+    "LAO2019/KHM2018 completecountrymasks plusVNM2025countrylocation are adopted defined-sourceapplicability;original2020district/parent retained,notbackdatedsurvey.",
+    "CNmask remainswholeliteralofficialWorldPolygons11.4 matchedLSIB11.4 withremoteOGCdefect and4decimalprecision/localdisplacement retained;all118OSMcontraryfacts remain for1092keys.",
+    "PhysicalsupportGSHHG isoriginalsource-relative heterogeneousvintage,notdated2020image/currentriver/legalboundary.",
+    "HongNgu3 wholemixedwater/land contradiction/hierarchy pointsets remain;finite3qualifiedlandcentres are not whole-owner certification."
+  ],
+  "consumer_limits": [
+    "Native owner conservation is not sub-cell polygon coverage or source authority approval.",
+    "Only explicit authenticated committed additive hooks are consumed; proposal files never select a release. Continuous primitive-set coverage is enforced separately."
+  ],
+  "authority_limitations": [
+    "Registry and source bodies require independent committed-selector authentication; this comparison approves no appended row."
+  ],
+  "no_671_authority_patch_or_hierarchy_change": true,
+  "merge_owner": "Parent/Main only",
+  "remaining_blockers": [],
+  "actual_receipts": {
+    "execution": "bulk-completion/vn-lao-khm178/native141-input-checkpoint/consumer1233-b638-002.execution.json",
+    "stdout": "bulk-completion/vn-lao-khm178/native141-input-checkpoint/consumer1233-b638-002.stdout.json",
+    "stderr": "bulk-completion/vn-lao-khm178/native141-input-checkpoint/consumer1233-b638-002.stderr"
+  }
+}

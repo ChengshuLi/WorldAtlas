@@ -1,0 +1,81 @@
+{
+  "status": "completed",
+  "started_utc": "2026-10-15T23:33:01.734Z",
+  "finished_utc": "2026-10-15T23:33:02.388Z",
+  "elapsed_ms": 653.217583,
+  "internal_lifetime_max_rss_bytes": 225607680,
+  "final_rss_bytes": 216727552,
+  "resourceObservation": {
+    "availableBytes": 1806319616,
+    "entryRss": 50135040,
+    "task_complete_phase_bound_bytes": 536870912
+  },
+  "results": [
+    {
+      "country": "LAO",
+      "kind": "cod-adm0",
+      "features": 1,
+      "keys": 129,
+      "positive_keys": 11,
+      "tie_keys": 0,
+      "runs": 34,
+      "elapsed_ms": 198.41466699999998
+    },
+    {
+      "country": "LAO",
+      "kind": "cod-adm2",
+      "features": 148,
+      "keys": 129,
+      "positive_keys": 11,
+      "tie_keys": 0,
+      "runs": 34,
+      "elapsed_ms": 493.87925000000007
+    },
+    {
+      "country": "LAO",
+      "kind": "original-adm2",
+      "features": 148,
+      "keys": 129,
+      "positive_keys": 0,
+      "tie_keys": 0,
+      "runs": 34,
+      "elapsed_ms": 586.427625
+    },
+    {
+      "country": "KHM",
+      "kind": "cod-adm0",
+      "features": 1,
+      "keys": 49,
+      "positive_keys": 5,
+      "tie_keys": 0,
+      "runs": 16,
+      "elapsed_ms": 598.01125
+    },
+    {
+      "country": "KHM",
+      "kind": "cod-adm2",
+      "features": 197,
+      "keys": 49,
+      "positive_keys": 5,
+      "tie_keys": 0,
+      "runs": 16,
+      "elapsed_ms": 631.031833
+    },
+    {
+      "country": "KHM",
+      "kind": "original-adm2",
+      "features": 197,
+      "keys": 49,
+      "positive_keys": 0,
+      "tie_keys": 0,
+      "runs": 15,
+      "elapsed_ms": 653.139083
+    }
+  ],
+  "no_new_kernel": true,
+  "no_source_geometry_edits": true,
+  "no_current_owner_zero_claim": true,
+  "proposed_owner_assignment_only": true,
+  "ownership_mutation": false,
+  "repair_credit": 0
+}

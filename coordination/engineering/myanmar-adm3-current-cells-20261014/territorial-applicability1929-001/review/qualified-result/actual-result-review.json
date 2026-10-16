@@ -1,0 +1,65 @@
+{
+  "immutable_actual_product_commit": "9139b3302fc40daa5037996046b1eff60966f9b0",
+  "immutable_actual_product_tree": "21f970844a4c627fbcc358f66abd377776aa410a",
+  "all_four_committed_products_equal_actual_execution_bytes": true,
+  "verdict": "ACCEPT exact actual1929 constructor contributions and custody; no accepted repair credit",
+  "executing_head": "71dea04934feafa954c9bb0328619af5cac94078",
+  "executing_base_unaccepted": true,
+  "qualified_original_keys": 1929,
+  "components": 27,
+  "raw_context_contacts": 1942,
+  "all_original_negative_copies_retained": 248,
+  "extras_omissions_duplicate_contributions": 0,
+  "all_rawcontacts_exact_adopted_key_target_negativehash_originalpointer_operand_and_decision_identity": true,
+  "inputpins": {
+    "source": {
+      "bytes": 13154851,
+      "commit": "6dae88eb2d62e5bec0de98f3215ce02648f1fe81",
+      "git_blob_oid": "c817a5768dde6211c94eac4d60e74204f205d33b",
+      "mode": "100644",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/native-inputs-001/source-evidence.json",
+      "sha256": "946fbaffcaaba75e3dcbd9e8d00d029cbba1fe7474cdc59c2ffac180a562b2b6"
+    },
+    "request": {
+      "bytes": 52723,
+      "commit": "bfc7e2b4417ca8b1eec0b1d4439b35019e472bf6",
+      "git_blob_oid": "f47b5fd30942a16d00dee1d65b50c8971e041524",
+      "mode": "100644",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/native-inputs-001/candidate-native-patch.json",
+      "sha256": "8eaeb5b8826c81159870a785a1bda6a5793b435463e3c892521b977264e835eb"
+    },
+    "applicability": {
+      "commit": "4940057f3859b2a1aba55c91d75fc98851d81992",
+      "path": "coordination/engineering/myanmar-native-territorial-applicability-20261015/adopted-territorial-applicability1929-v1.json",
+      "mode": "100644",
+      "git_blob_oid": "f386f54c0acb5ea58075519b3c2788949a3a1346",
+      "bytes": 916727,
+      "sha256": "7b7b6948ee4aa660a69db6d9826ad9dc45d08ce8caca6b03d62739014308d9f8"
+    }
+  },
+  "products": [
+    {
+      "path": "authority-binding.json",
+      "bytes": 820,
+      "sha256": "1642b6cf21502041bd3900f901c85a3007a6f50b5e0690e30d2933f3567e976f"
+    },
+    {
+      "path": "constructor-result.json",
+      "bytes": 1252284,
+      "sha256": "b03a429e224cb39f30f0b1cd2faea34b5d4facf5d67bbfc87e5011f51d68fbeb"
+    },
+    {
+      "path": "original-rule-preimage.json",
+      "bytes": 817,
+      "sha256": "1fc1386bd604a2c7d8f8bf643522d5101219a23c83f41e230c0591d351543082"
+    },
+    {
+      "path": "preparation.json",
+      "bytes": 503,
+      "sha256": "a0e93316efac51789f71e0df1a882555b8f83ce3e555d3d4c9cc6e0070fb71de"
+    }
+  ],
+  "source_or_native_producer_replays_by_reviewer": 0,
+  "current_owner_check_reused_not_repeated": true,
+  "accepted_selected_output_or_repair_credit": 0
+}
