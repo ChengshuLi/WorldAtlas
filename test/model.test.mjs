@@ -4,7 +4,6 @@ import fs from 'node:fs';
 import {createHash} from 'node:crypto';
 import {prepareCurrentSelectedAdditive} from '../scripts/package-current-additive.mjs';
 import {readGeographicReleaseManifest} from '../scripts/read-geographic-release-manifest.mjs';
-import {readPinnedBuildFile} from '../scripts/native-ownership/read-pinned-build-file.mjs';
 import {gunzipSync} from 'node:zlib';
 import { validateHierarchy } from '../hierarchy.mjs';
 import { openDatabase, seedDatabase, snapshot, importRecords, validateGeometry, geography } from '../database.mjs';
@@ -32,8 +31,17 @@ test('real seeded database exports the exact complete revision into current sele
  const source=read('world-index.json').parts.flatMap(name=>read(name).features);
  const derived=createHash('sha256').update(JSON.stringify(source)).update(JSON.stringify(read('hierarchy.json'))).digest('hex');
  assert.equal(referenceRevision,derived);
- const manifest=JSON.parse(fs.readFileSync(selection.manifest_path));
- const bounds=readPinnedBuildFile(manifest.original_assets.bounds),indices=new Map(JSON.parse(gunzipSync(bounds)).map(row=>[row.id,row.index]));
+ const manifestBytes=fs.readFileSync(selection.manifest_path),manifest=JSON.parse(manifestBytes);
+ assert.equal(createHash('sha256').update(manifestBytes).digest('hex'),selection.sha256);
+ // This model control consumes the same complete ordinary bounds snapshot as
+ // the offline package image, without requiring historical Git in shallow CI.
+ const pin=manifest.original_assets.bounds;
+ assert.equal(pin.path,'data/canonical-grid/bounds.json.gz');
+ assert.equal(pin.sha256,manifest.bounds.sha256);
+ assert.ok(fs.lstatSync(pin.path).isFile());
+ const bounds=fs.readFileSync(pin.path);
+ assert.equal(createHash('sha256').update(bounds).digest('hex'),pin.sha256);
+ const indices=new Map(JSON.parse(gunzipSync(bounds)).map(row=>[row.id,row.index]));
  const features=geography(db).features.map(feature=>({...feature,pixelIndex:indices.get(feature.id)}));
  const args={root:process.cwd(),selectedGrid:{manifest,sha256:selection.sha256,bounds},geographicRelease:readGeographicReleaseManifest().releases.at(-1),features,referenceRevision};
  const packaged=await prepareCurrentSelectedAdditive(args);
