@@ -10,6 +10,7 @@ import {repairComponentKey, compareRepairComponents, nativeOnlyComponent, derive
 import {unshuffleOwnershipBytes} from '../../../src/ownership-codec.js';
 import {scientificNativeSelection} from '../../../src/reference-metadata.js';
 const certificates=new WeakMap(), originalAuthorities=new WeakMap(), selectedAdditions=new WeakMap();
+const retainedQualifications=new WeakMap(), retainedBaseContexts=new WeakMap(), metadataMembershipReaders=new WeakSet();
 // Original accepted source/native programs. Case rosters are not policy IDs.
 // Changing a complete program requires ordinary trusted-code/rule review.
 const PROGRAMME_CATALOGUE='coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json';
@@ -824,6 +825,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
     demand(snapshot?.selection.reference_projection,'Source membership differs from selected canonical bytes');
     demand(snapshot.reader.repo===reader.repo&&snapshot.reader.version===reader.version,
      'Source membership belongs to another actual selected reader');
+    metadataMembershipReaders.add(reader);
     selectedNativeSourceMembership(snapshot,p);
    }
    return JSON.parse(read(p));
@@ -1558,12 +1560,66 @@ export function verifyCompletedSourceTargetNativeAuthority({constructed,binding,
   limitations:constructed.limitations};
 }
 
-// One detached authority acquisition. The returned view cannot authorize a
-// selected release: the committed hook must additionally authenticate the
-// qualified native publication, operating proof and actual current bank.
-export function readRetainedRegistryAuthority(reader, entry, observationReader, {snapshot}={}) {
- // Retain every actual whole input consumed by a detached authority reader.
- const observed=proof=>{
+// Track the complete dependency boundary of this one qualification. Descriptor
+// calls include guards that do not consume bodies. Commit probes retain the
+// original immutable-versus-current fallback decision. Any new direct Git use
+// makes reuse unavailable until its dependency semantics are reviewed.
+function retainedQualificationReader(reader) {
+ return new class extends ImmutableReader {
+ constructor() {
+  super(reader.repo,reader.version,{gitExecutable:reader.gitExecutable,invocation:reader.invocation});
+  this.input=reader;this.inventory=reader.inventory;this.dependencies=new Map();this.commitPresence=new Map();
+  this.reusable=reader.read===ImmutableReader.prototype.read&&reader.descriptor===ImmutableReader.prototype.descriptor;
+ }
+ descriptor(name,version=this.version) {
+  const pin=this.input.descriptor(name,version),key=version+':'+name;
+  this.dependencies.set(key,{pin,current:version===this.version});return pin;
+ }
+ read(name,{version=this.version,...options}={}) {
+  this.descriptor(name,version);return this.input.read(name,{version,...options});
+ }
+ git(...args) {
+  if(args.length===3&&args[0]==='cat-file'&&args[1]==='-e'&&/^[a-f0-9]{40}\^\{commit\}$/.test(args[2])){
+   const version=args[2].slice(0,40),record=present=>{
+    if(this.commitPresence.has(version)&&this.commitPresence.get(version)!==present)this.reusable=false;
+    this.commitPresence.set(version,present);
+   };
+   try{const result=this.input.git(...args);record(true);return result;}
+   catch(error){record(false);throw error;}
+  }
+  if(!(args.length===3&&args[0]==='cat-file'&&args[1]==='blob'))this.reusable=false;
+  return this.input.git(...args);
+ }
+ }();
+}
+const retainedDescriptorEqual=(a,b)=>['commit','path','mode','git_blob_oid','bytes'].every(key=>a[key]===b[key]);
+function retainedBaseContext(snapshot,reader) {
+ if(snapshot===undefined)return null;
+ demand(snapshot.reader.repo===reader.repo&&snapshot.reader.version===reader.version,
+  'Retained authority requires the actual selected snapshot context');
+ // Verify private base authentication on every use, including legacy source banks.
+ const manifestPin=snapshot.reader.descriptor(snapshot.selection.manifest_path);
+ selectedBaseAssetAlias(snapshot,'base_manifest',{...manifestPin,sha256:snapshot.selection.sha256});
+ let context=retainedBaseContexts.get(snapshot);
+ if(!context){context=valueSha({selection:nativeBaseSelection(snapshot.selection),manifest:snapshot.manifest,owners:snapshot.owners});retainedBaseContexts.set(snapshot,context);}
+ return context;
+}
+function unchangedRetainedDependencies(reader,record) {
+ try{
+  for(const [version,expected]of record.commitPresence){
+   let present;try{reader.git('cat-file','-e',version+'^{commit}');present=true;}catch{present=false;}
+   if(present!==expected)return false;
+  }
+  for(const {pin,current}of record.dependencies){
+   if(!retainedDescriptorEqual(reader.descriptor(pin.path,pin.commit),pin))return false;
+   // When an explicit immutable pin equals the original selected commit, also
+   // checking the candidate path is conservative. Its custody remains pinned.
+   if(current&&!retainedDescriptorEqual(reader.descriptor(pin.path),{...pin,commit:reader.version}))return false;
+  }
+  return true;
+ }catch{return false;} // The ordinary reader supplies the actual failure or qualification.
+}
+function observeRetainedAuthority(reader,observationReader,proof) {
   if(observationReader!==undefined){
    demand(observationReader instanceof ImmutableReader&&observationReader.repo===reader.repo,'Require an actual immutable authority observer');
    for(const pin of reader.inventory.values())if(pin.whole_body_consumed===true){
@@ -1576,7 +1632,47 @@ export function readRetainedRegistryAuthority(reader, entry, observationReader, 
     observationReader.captureSelectedInputs([...reader.inventory.values()].filter(pin=>pin.whole_body_consumed===true));
   }
   return proof;
- };
+}
+
+// Only a fully qualified frozen modern result can survive from baseline to
+// candidate inside the same invocation. No caller supplies a result/cache, and
+// no certificate or inventory is serialized. Legacy programme acquisition and
+// special metadata-membership applicability retain their ordinary reader path.
+export function readRetainedRegistryAuthority(reader,entry,observationReader,{snapshot}={}) {
+ demand(reader instanceof ImmutableReader,'Require actual immutable authority reader');
+ if(observationReader!==undefined)demand(observationReader instanceof ImmutableReader&&observationReader.repo===reader.repo,
+  'Require an actual immutable authority observer');
+ authorityRegistry({version:1,kind:'retained-rule-authority-registry-v1',entries:[entry]});
+ const key=valueSha({repo:reader.repo,git:reader.gitExecutable,entry,base:retainedBaseContext(snapshot,reader)});
+ let qualifications=retainedQualifications.get(reader.invocation);
+ if(!qualifications){qualifications=new Map();retainedQualifications.set(reader.invocation,qualifications);}
+ const prior=qualifications.get(key);
+ if(prior&&unchangedRetainedDependencies(reader,prior)){
+  for(const {pin}of prior.dependencies)if(pin.whole_body_consumed===true){
+   const key=pin.commit+':'+pin.path,actual=reader.inventory.get(key);
+   demand(actual&&retainedDescriptorEqual(actual,pin)&&(actual.sha256===undefined||actual.sha256===pin.sha256),
+    'Reused authority consumed-input custody differs');
+   // This whole body was consumed at this exact commit earlier in this same
+   // invocation. Candidate descriptors remain descriptor-only, never rereads.
+   reader.inventory.set(key,{...pin});
+  }
+  if(observationReader!==undefined)for(const {pin,current}of prior.dependencies)if(current){
+   const actual=reader.inventory.get(reader.version+':'+pin.path);
+   observationReader.descriptor(actual.path,actual.commit);
+  }
+  return observeRetainedAuthority(reader,observationReader,prior.proof);
+ }
+ const tracked=retainedQualificationReader(reader),proof=qualifyRetainedRegistryAuthority(tracked,entry,{snapshot});
+ if(proof.original_pins?.source_evidence!==undefined&&tracked.reusable&&!metadataMembershipReaders.has(tracked)){
+  const record=freeze({proof,dependencies:[...tracked.dependencies.values()].map(({pin,current})=>({pin:{...pin},current})),
+   commitPresence:[...tracked.commitPresence]});qualifications.set(key,record);
+ }
+ return observeRetainedAuthority(reader,observationReader,proof);
+}
+
+// One detached authority acquisition. This view cannot authorize a selected
+// release: publication, operating proof and actual current bank remain separate.
+function qualifyRetainedRegistryAuthority(reader,entry,{snapshot}={}) {
  const singleton={version:1,kind:'retained-rule-authority-registry-v1',entries:[entry]};
  authorityRegistry(singleton);
  const pins=[entry.rule_preimage,entry.source_authority];
@@ -1595,9 +1691,9 @@ export function readRetainedRegistryAuthority(reader, entry, observationReader, 
    ?qualifySourceTargetNativeAuthority(reader,preimage,binding,{snapshot})
    :verifyCompletedSourceTargetNativeAuthority({constructed:whole(entry.completed_constructor),preimage,binding,
      evidence:whole(binding.source_evidence),candidate:whole(binding.native_patch)});
-  return observed(freeze({...proof,version:1,kind:'authenticated-registry-source-custody-v1',authority_sha256:entry.authority_sha256,
+  return freeze({...proof,version:1,kind:'authenticated-registry-source-custody-v1',authority_sha256:entry.authority_sha256,
    rule_sha256:entry.rule_sha256,policy_id:entry.policy_id,policy_version:entry.policy_version,
-   pins:entry.completed_constructor===undefined?pins:[...pins,entry.completed_constructor]}));
+   pins:entry.completed_constructor===undefined?pins:[...pins,entry.completed_constructor]});
  }
  demand(entry.completed_constructor===undefined,'Completed constructor requires a modern source-target authority');
  demand(binding?.version===1&&binding.kind==='original-issued-rule-source-custody-v1'&&['kind,native_proof,original_pins,version','kind,native_proof,original_pins,source_output_aliases,version'].includes(Object.keys(binding).sort().join(',')),'Unsupported original authority binding');
@@ -1607,11 +1703,11 @@ export function readRetainedRegistryAuthority(reader, entry, observationReader, 
  const codeIdentity=rows=>rows.map(p=>{demand(Object.keys(p).sort().join(',')==='bytes,path,sha256','Unsupported original complete code roster shape');return {path:p.path,bytes:p.bytes,sha256:p.sha256};});
  const programmeAuthority=readSupportedProgrammeAuthority(reader,{preimageVersion:preimage.version,sourceProfile:custody.source_rule.profile??null,sourceCode:codeIdentity(original.source_request.executed_code),nativeCode:codeIdentity(original.native_request.executed_code)});
  const source=qualifyOriginalSourceAuthority(custody),native=qualifyOriginalNativeAuthority(custody,binding.native_proof);
- return observed(freeze({version:1,kind:'authenticated-registry-source-custody-v1',authority_sha256:entry.authority_sha256,
+ return freeze({version:1,kind:'authenticated-registry-source-custody-v1',authority_sha256:entry.authority_sha256,
   rule_sha256:entry.rule_sha256,original_program_authority:programmeAuthority,policy_id:entry.policy_id,policy_version:entry.policy_version,
   pins,original_pins:binding.original_pins,source_scope_ids:custody.source_scope_ids,
   source_rows:source.rows,native_proof:native,original_ledger:custody.ledger,
-  limitations:['Whole original preimage, issued requests and qualified source predecessor authenticated. Policy semantics and actual current selected-bank applicability remain separately required; this view cannot authorize selection.']}));
+  limitations:['Whole original preimage, issued requests and qualified source predecessor authenticated. Policy semantics and actual current selected-bank applicability remain separately required; this view cannot authorize selection.']});
 }
 
 export function normaliseRetainedRepairLedger(ledger,registry) {

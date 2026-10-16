@@ -8,7 +8,8 @@ import {execFileSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import {gzipSync} from 'node:zlib';
 import {deriveSourceTargetNativeDelta,nativeRowLatitudes,nativePolygonIntervals,polygonParts,witnessCellEffects,validateWitnessGeometry} from '../src/native-grid.js';
-import {ImmutableReader} from '../scripts/check-effective-geographic-regression.mjs';
+import {ImmutableReader,loadBaseSelection} from '../scripts/check-effective-geographic-regression.mjs';
+import {shuffleOwnershipBytes} from '../src/ownership-codec.js';
 import {constructOriginalAuthority} from '../scripts/delivery-handoff-advance.mjs';
 import {qualifySourceTargetNativeAuthority,diagnoseSourceTargetNativeAuthority,readRetainedRegistryAuthority,verifyCompletedSourceTargetNativeAuthority,valueBytes,valueSha} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 import {bindPackageImmutableCommits} from '../coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs';
@@ -458,4 +459,170 @@ test('requested-owner completed reuse keeps exact output roster and patch conser
   const context=structuredClone(evidence);context.targets.at(-1).source_receipt_sha256='0'.repeat(64);
   assert.throws(()=>run(constructed,context),/Conflicting original source target/);
   assert.throws(()=>run(constructed,evidence,{rows:[]}),/original source target/);
+});
+
+// Exercise the real immutable reader and actual qualification; the Git fixture
+// contains only this small synthetic authority, never retained geographic data.
+function retainedComparisonFixture(t,{historical=true,adoption=false}={}) {
+ const chosen=adoption?state=>{directTarget(state);state.targets[0].territorial_exclusions=[structuredClone(state.originals[2].geometry)];}:()=>{};
+ const f=constructorFixture(chosen,adoption?{}:undefined);
+ const root=fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(),'atlas-retained-comparison-')));
+ t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
+ const git=(...args)=>execFileSync('git',['-c','core.hooksPath=/dev/null','-C',root,...args],{encoding:'utf8',stdio:['ignore','pipe','pipe']}).trim();
+ git('init','-q');git('config','user.name','Fixture');git('config','user.email','fixture@example.invalid');
+ const write=(name,body)=>{const file=path.join(root,name);fs.mkdirSync(path.dirname(file),{recursive:true});fs.writeFileSync(file,Buffer.isBuffer(body)?body:valueBytes(body));};
+ const commit=()=>{git('add','.');git('commit','-qm','Fixture immutable inputs');return git('rev-parse','HEAD');};
+ for(const [name,{raw}]of f.files)write(name,raw);
+ const original=commit(),pin=(name,at)=>{
+  const body=Buffer.from(execFileSync('git',['-C',root,'show',at+':'+name],{maxBuffer:8*1024*1024}));
+  return {commit:at,path:name,mode:'100644',git_blob_oid:blob(body),bytes:body.length,sha256:digest(body)};
+ };
+ let binding=f.binding,preimage=f.preimage;
+ if(historical){
+  const oldPins=value=>JSON.parse(JSON.stringify(value).replaceAll('"'+version+'"','"'+original+'"'));
+  const evidence=oldPins(JSON.parse(f.files.get('source-evidence.json').raw));
+  if(adoption){
+   const name='adopted-territorial-applicability.json';write(name,oldPins(JSON.parse(f.files.get(name).raw)));
+   evidence.territorial_applicability=pin(name,commit());
+  }
+  write('source-evidence.json',evidence);const evidenceCommit=commit();
+  binding={version:1,kind:'source-target-native-custody-v1',source_evidence:pin('source-evidence.json',evidenceCommit),native_patch:pin('patch.json',original)};
+  preimage={...binding,kind:'source-target-native-rule-v1'};
+ }
+ write('rule.json',preimage);write('binding.json',binding);const baseline=commit();
+ const declared=name=>{const result=pin(name,baseline);return historical?result:{...result,commit:version};};
+ const identity={policy_id:'retained-source-literal-additions',policy_version:1,rule_sha256:valueSha(preimage),rule_preimage:declared('rule.json'),source_authority:declared('binding.json')};
+ const entry={...identity,authority_sha256:valueSha(identity)},invocation=Object.freeze({});
+ class CountingReader extends ImmutableReader {
+  bodyReads=[];
+  git(...args){if(args[0]==='cat-file'&&args[1]==='blob')this.bodyReads.push(args[2]);return super.git(...args);}
+ }
+ const reader=(at=baseline,options={})=>new CountingReader(root,at,{invocation,...options});
+ return {root,git,write,commit,pin,original,baseline,entry,reader,binding,preimage,
+  next(){write('unrelated.txt',Buffer.from('Unrelated candidate\n'));return commit();},
+  change(name){fs.appendFileSync(path.join(root,name),'\n');return commit();}};
+}
+
+test('one comparison reuses the frozen full result and preserves actual prior read custody',t=>{
+ const f=retainedComparisonFixture(t),before=f.reader(),proof=readRetainedRegistryAuthority(before,f.entry);
+ const candidate=f.next(),after=f.reader(candidate),observer=f.reader(candidate);
+ const reused=readRetainedRegistryAuthority(after,f.entry,observer);
+ assert.strictEqual(reused,proof);assert.ok(Object.isFrozen(reused.original_ledger.rows[0]));
+ assert.throws(()=>{reused.original_ledger.rows[0].native_cells++;},TypeError);
+ assert.ok(before.bodyReads.length>10);assert.equal(after.bodyReads.length,0);
+ for(const pin of before.inventory.values())if(pin.whole_body_consumed)assert.deepEqual(observer.inventory.get(pin.commit+':'+pin.path),pin);
+ const catalogue='coordination/engineering/original-geography-source-corpus-20261006/catalogue.json';
+ assert.equal(observer.inventory.get(candidate+':'+catalogue).whole_body_consumed,undefined,'candidate catalogue was checked as a descriptor, not falsely reread');
+ const fresh=f.reader(candidate,{invocation:Object.freeze({})});
+ assert.deepEqual(readRetainedRegistryAuthority(fresh,f.entry),proof);assert.ok(fresh.bodyReads.length>10,'another invocation performs genuine qualification');
+});
+
+for(const [label,name,message]of [
+ ['catalogue','coordination/engineering/original-geography-source-corpus-20261006/catalogue.json',/Source catalogue differs/],
+ ['membership index','data/world-index.json',/Source membership differs/],
+ ['membership lineage','data/semantic-report.json',/Source membership differs/],
+ ['membership part','data/geography/part-0.json',/Source membership differs/],
+ ['adoption','adopted-territorial-applicability.json',/differs from selected candidate input/]
+])test('unchanged historical bodies do not bypass the changed descriptor-only '+label+' guard',t=>{
+ const f=retainedComparisonFixture(t,{adoption:label==='adoption'}),first=f.reader();readRetainedRegistryAuthority(first,f.entry);
+ assert.equal(first.inventory.get(f.baseline+':'+name).whole_body_consumed,undefined);
+ const candidate=f.change(name),after=f.reader(candidate);
+ assert.throws(()=>readRetainedRegistryAuthority(after,f.entry),message);
+ assert.ok(after.bodyReads.length>0,'ordinary qualification actually reruns and rejects');
+});
+
+test('same-path fallback aliases reuse only unchanged candidate bytes and retain baseline provenance',t=>{
+ const f=retainedComparisonFixture(t,{historical:false}),before=f.reader(),proof=readRetainedRegistryAuthority(before,f.entry);
+ const candidate=f.next(),after=f.reader(candidate),observer=f.reader(candidate);
+ assert.strictEqual(readRetainedRegistryAuthority(after,f.entry,observer),proof);assert.equal(after.bodyReads.length,0);
+ assert.ok([...observer.inventory.values()].some(p=>p.commit===f.baseline&&p.whole_body_consumed));
+ assert.ok([...observer.inventory.values()].filter(p=>p.commit===candidate).every(p=>p.whole_body_consumed===undefined));
+ const changed=f.change('physical.json'),bad=f.reader(changed);
+ assert.throws(()=>readRetainedRegistryAuthority(bad,f.entry),/Source-target whole identity differs/);
+ assert.ok(bad.bodyReads.length>0);
+});
+
+test('full authority-entry changes requalify instead of aliasing an old authority identity',t=>{
+ const f=retainedComparisonFixture(t),proof=readRetainedRegistryAuthority(f.reader(),f.entry);
+ const {authority_sha256,...identity}=f.entry;identity.policy_version++;
+ const entry={...identity,authority_sha256:valueSha(identity)},after=f.reader(f.next());
+ const changed=readRetainedRegistryAuthority(after,entry);
+ assert.notStrictEqual(changed,proof);assert.equal(changed.policy_version,2);assert.ok(after.bodyReads.length>10);
+ const corrupt={...f.entry,source_authority:{...f.entry.source_authority,sha256:'f'.repeat(64)}};
+ const {authority_sha256:_,...corruptIdentity}=corrupt;corrupt.authority_sha256=valueSha(corruptIdentity);
+ assert.throws(()=>readRetainedRegistryAuthority(f.reader(),corrupt),/Whole immutable input differs/);
+});
+
+test('a newly available original commit changes the fallback route and forces qualification',t=>{
+ const f=retainedComparisonFixture(t,{historical:false});readRetainedRegistryAuthority(f.reader(),f.entry);
+ const after=f.reader(f.next()),originalGit=after.git.bind(after);let probes=0;
+ after.git=(...args)=>{
+  if(args[0]==='cat-file'&&args[1]==='-e'&&args[2]===version+'^{commit}'){
+   probes++;return Buffer.alloc(0); // Simulate availability changing after the first read.
+  }
+  return originalGit(...args);
+ };
+ assert.throws(()=>readRetainedRegistryAuthority(after,f.entry),/ls-tree|not a valid object|not a tree|bad object/);
+ assert.ok(probes>=2,'hit admission observes the change, then the ordinary pinned route is executed');
+});
+
+test('a disappearing original commit cannot silently reuse its prior immutable route',t=>{
+ const f=retainedComparisonFixture(t);const proof=readRetainedRegistryAuthority(f.reader(),f.entry);
+ const after=f.reader(f.next()),originalGit=after.git.bind(after);
+ after.git=(...args)=>{if(args[0]==='cat-file'&&args[1]==='-e')throw Error('Fixture original commit unavailable');return originalGit(...args);};
+ const changed=readRetainedRegistryAuthority(after,f.entry);
+ assert.deepEqual(changed,proof);assert.notStrictEqual(changed,proof);assert.ok(after.bodyReads.length>10,'valid same-path fallback is genuinely requalified');
+});
+
+function selectedFixtureBase(f,{changed=false}={}) {
+ const owners=[{id:'city',index:1},{id:c,index:2}],ownerBytes=valueBytes(owners),ownerPath='data/canonical-grid/bounds.json.gz';
+ f.write(ownerPath,gzipSync(ownerBytes));f.write('base-vintage.txt',Buffer.from(String(changed)));const origin=f.commit();
+ const parts=[];
+ for(const [kind,words]of [['rows',Uint32Array.from([0,1,1,0,1,0,1,0])],['runs',Uint32Array.from([4,changed?1:0])]]){
+  const raw=Buffer.from(words.buffer),encoded=gzipSync(shuffleOwnershipBytes(words)),name='native-v1/ownership/'+kind+'.gz';
+  f.write('fixture-base/'+name,encoded);parts.push({kind,offset:0,words:words.length,path:name,bytes:encoded.length,sha256:digest(encoded),decoded_bytes:raw.length,decoded_sha256:digest(raw),encoding:'byte-shuffle'});
+ }
+ const bounds=f.pin(ownerPath,origin),manifest={version:2,method:'native-linear-evenodd-first-owner-v1',size:4,coordinateBits:2,runWords:2,parts,
+  geographic_release:'fixture-base',bounds:{sha256:bounds.sha256,decoded_bytes:ownerBytes.length},
+  original_assets:{bounds:{role:'original-identity-parent-camera-context',commit:origin,path:ownerPath,sha256:bounds.sha256}},native_latitudes:{sha256:'1'.repeat(64)}};
+ f.write('fixture-base/manifest.json',manifest);const raw=valueBytes(manifest),products=[{path:'manifest.json',bytes:raw.length,sha256:digest(raw)},...parts];
+ const receipt={method:manifest.method,checked_rows:4,checked_cells:16,unchecked_cells:0,checked_runs:1,installation_ready:false,products,two_run_products:products.length,run_one_sha256:digest(Buffer.from(JSON.stringify(JSON.parse(valueBytes(products))))),run_two_sha256:digest(Buffer.from(JSON.stringify(JSON.parse(valueBytes(products)))))};
+ f.write('fixture-base/receipt.json',receipt);const receiptCommit=f.commit(),receiptPin=f.pin('fixture-base/receipt.json',receiptCommit);
+ f.write('scripts/native-ownership/verified-candidates.json',{version:1,candidates:{[digest(raw)]:{commit:receiptCommit,path:receiptPin.path,sha256:receiptPin.sha256,role:'reviewed-exhaustive-native-rule-comparison',installation_approval:false}}});
+ f.write('data/ownership-selection.json',{version:1,method:manifest.method,manifest_path:'fixture-base/manifest.json',sha256:digest(raw),release_id:manifest.geographic_release});
+ return f.commit();
+}
+
+test('reuse binds genuine scientific base context and rejects copied or altered snapshot handles',t=>{
+ const f=retainedComparisonFixture(t),baseline=selectedFixtureBase(f),before=f.reader(baseline),snapshot=loadBaseSelection(before);
+ const proof=readRetainedRegistryAuthority(before,f.entry,undefined,{snapshot});
+ const after=f.reader(f.next()),current=loadBaseSelection(after),reads=after.bodyReads.length;
+ assert.strictEqual(readRetainedRegistryAuthority(after,f.entry,undefined,{snapshot:current}),proof);
+ assert.equal(after.bodyReads.length,reads,'only normal selected-base acquisition has read candidate bodies');
+ assert.throws(()=>readRetainedRegistryAuthority(after,f.entry,undefined,{snapshot:{...current}}),/privately authenticated selected base/);
+ current.selection.sha256='f'.repeat(64);
+ assert.throws(()=>readRetainedRegistryAuthority(after,f.entry,undefined,{snapshot:current}),/metadata drift/);
+ const changed=f.reader(selectedFixtureBase(f,{changed:true})),different=loadBaseSelection(changed),prior=changed.bodyReads.length;
+ const requalified=readRetainedRegistryAuthority(changed,f.entry,undefined,{snapshot:different});
+ assert.notStrictEqual(requalified,proof);assert.deepEqual(requalified,proof);
+ assert.ok(changed.bodyReads.length>prior+10,'a changed authenticated base cannot use the old qualification');
+});
+
+test('an unchanged blob with a changed current mode takes ordinary qualification',t=>{
+ const f=retainedComparisonFixture(t),proof=readRetainedRegistryAuthority(f.reader(),f.entry);
+ const name='coordination/engineering/original-geography-source-corpus-20261006/catalogue.json';
+ fs.chmodSync(path.join(f.root,name),0o755);const after=f.reader(f.commit());
+ const requalified=readRetainedRegistryAuthority(after,f.entry);
+ assert.deepEqual(requalified,proof);assert.notStrictEqual(requalified,proof);assert.ok(after.bodyReads.length>10);
+});
+
+test('removed and nonordinary fallback alias paths cannot reuse earlier qualification',t=>{
+ const f=retainedComparisonFixture(t,{historical:false});readRetainedRegistryAuthority(f.reader(),f.entry);
+ const name='physical.json',file=path.join(f.root,name),raw=fs.readFileSync(file);
+ fs.unlinkSync(file);const missing=f.reader(f.commit());
+ assert.throws(()=>readRetainedRegistryAuthority(missing,f.entry),/whole ordinary Git input/);
+ fs.writeFileSync(path.join(f.root,'actual-physical.json'),raw);fs.symlinkSync('actual-physical.json',file);
+ const symlink=f.reader(f.commit());
+ assert.throws(()=>readRetainedRegistryAuthority(symlink,f.entry),/whole ordinary Git input/);
+ assert.ok(missing.bodyReads.length>0&&symlink.bodyReads.length>0);
 });
