@@ -6,8 +6,9 @@ import {createHash} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
 import {execFileSync} from 'node:child_process';
 import {isDeepStrictEqual} from 'node:util';
-import {ImmutableReader, loadBaseSelection, loadNativeRowTable, acquireNativeRows} from './check-effective-geographic-regression.mjs';
+import {ImmutableReader, loadBaseSelection, selectedReferenceOwners, loadNativeRowTable, acquireNativeRows} from './check-effective-geographic-regression.mjs';
 import {normaliseRetainedRepairLedger} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {scientificNativeSelection} from '../src/reference-metadata.js';
 import {nativeRuntimeIndex} from '../src/native-runtime.js';
 import {nativePolygonIntervals, NATIVE_GRID_METHOD} from '../src/native-grid.js';
 import {loadNativeLatitudes} from '../src/native-latitudes.js';
@@ -108,6 +109,7 @@ export async function diagnoseCells({repo, commit, cells, original = [], consume
   demand(Array.isArray(cells) && cells.length > 0, 'Supply at least one cell');
   const reader = new ImmutableReader(repo, commit), snapshot = loadBaseSelection(reader);
   demand(snapshot, 'No committed native selection');
+  const referenceOwners = selectedReferenceOwners(snapshot);
   const {size} = snapshot.manifest;
   for (const cell of cells) demand(Number.isInteger(cell.x) && Number.isInteger(cell.y) && cell.x >= 0 && cell.y >= 0 && cell.x < size && cell.y < size, 'Cell outside canonical grid');
   const readPin = pin => {
@@ -126,7 +128,9 @@ export async function diagnoseCells({repo, commit, cells, original = [], consume
   let patch = {rows: []}, additions = [];
   if (snapshot.selection.additive_release) {
     const sidecar = json(readPin(snapshot.selection.additive_release));
-    const {additive_release, ...base} = snapshot.selection;
+    // loadBaseSelection separately authenticates and applies reference metadata.
+    // The retained sidecar still binds the original scientific native selection.
+    const base = scientificNativeSelection(snapshot.selection);
     demand(isDeepStrictEqual(sidecar.base_selection, base), 'Additive selection belongs to a different base');
     const ledger = json(readPin(sidecar.logical_asset_map.ledger));
     patch = json(readPin(sidecar.logical_asset_map.patch));
@@ -143,7 +147,7 @@ export async function diagnoseCells({repo, commit, cells, original = [], consume
     for (const run of row) { demand(run.length === 3 && run.every(Number.isSafeInteger) && run[0] >= end && run[1] > run[0] && run[1] <= size && snapshot.owners[run[2] - 1], 'Invalid or overlapping effective native row'); end = run[1]; }
     const owner = row.find(r => r[0] <= cell.x && cell.x < r[1])?.[2] ?? 0;
     return {cell: {...cell, longitude: (cell.x + .5) / size * 360 - 180, latitude: latitudes[cell.y]},
-      effectiveOwner: owner ? snapshot.owners[owner - 1] : {index: 0, id: null},
+      effectiveOwner: owner ? referenceOwners[owner - 1] : {index: 0, id: null},
       physicalEvidence: [], lineage: {original: [], consumed: [], selected: empty(), native: {first_owner: owner, method: NATIVE_GRID_METHOD}}, transitions: []};
   });
   const owners = new Map(snapshot.owners.map(o => [o.id, o.index])), seen = new Set();
