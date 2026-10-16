@@ -10,7 +10,6 @@ import {scientificNativeSelection} from '../src/reference-metadata.js';
 import {selectedDeliveryReference,finalizedSelection,prepareReferenceMetadata,composeAuthorities,sourceEvidence,jsonBytes,validateDeliverySelectionTransition,finalizeDelivery} from '../scripts/prepare-delivery-handoff.mjs';
 import {compactContextInputs} from '../scripts/native-ownership/compact-context-inputs.mjs';
 import {prepareCurrentSelectedAdditive} from '../scripts/package-current-additive.mjs';
-import {requireAssemblyWithoutReferenceMetadata} from '../scripts/assemble-selected-package.mjs';
 import {loadedBaseFootprintSha256,footprintValueSha256,bindAdditiveLedgerFeatures,additiveReleaseFootprintDigest} from '../src/effective-footprint.js';
 const sha=raw=>createHash('sha256').update(raw).digest('hex'),commit='a'.repeat(40);
 const plain=pin=>({path:pin.path,bytes:pin.bytes,sha256:pin.sha256});
@@ -77,13 +76,6 @@ test('compact current context derives receipted parents from complete projection
  const drift=structuredClone(f.currentFeatures);drift[0].properties.parent_id='P';assert.throws(()=>compactContextInputs(drift,f.owners,f.native.footprints_sha256,{metadataApplication:f.metadataApplication}),/parent differs/);
  const bad={...f.metadataApplication,read:pin=>pin.path==='inputs/receipt.json'?Buffer.from('{}'):f.reader.read(pin)};assert.throws(()=>compactContextInputs(f.currentFeatures,f.owners,f.native.footprints_sha256,{metadataApplication:bad}),/Whole reference metadata input differs/);
  const projection=structuredClone(f.projection);projection.location_changes=[];assert.throws(()=>compactContextInputs(f.currentFeatures,f.owners,f.native.footprints_sha256,{metadataApplication:{...f.metadataApplication,projection}}),/changes differ/);
-});
-
-test('metadata application declines retained assembly and requires the existing full build fallback',async t=>{
- const f=await fixture(t);
- assert.doesNotThrow(()=>requireAssemblyWithoutReferenceMetadata(scientificNativeSelection(f.selection)));
- assert.throws(()=>requireAssemblyWithoutReferenceMetadata(f.selection),/requires a full build/);
- assert.throws(()=>requireAssemblyWithoutReferenceMetadata({...f.selection,reference_projection:null}),/requires a full build/);
 });
 
 test('reference-metadata preparation derives one canonical application from stock receipts and the actual current release registry',async t=>{

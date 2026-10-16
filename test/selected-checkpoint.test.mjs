@@ -373,14 +373,30 @@ test('new actual physical use of a shadowed source revokes its next-transition e
 
 
 test('checkpoint admission, transition and census share one complete route tree',async t=>{
- const f=await trustedFixture(t),git=f.reader.git.bind(f.reader),calls=[];
+ const f=await trustedFixture(t),git=f.reader.git.bind(f.reader),calls=[],layers=[];
  f.reader.git=(...args)=>{calls.push(args);return git(...args);};
+ const readPinned=f.reader.readPinned.bind(f.reader);
+ f.reader.readPinned=pins=>{layers.push(pins.map(p=>p.path));return readPinned(pins);};
  const qualified=f.api.qualifyCheckpoint({reader:f.reader});assert.equal(qualified.available,true);
  const transition=f.api.qualifyTransition({state:qualified.state,reader:f.reader});assert.equal(transition.available,true);
  const census=f.api.checkpointRouteCensus({transition});
  for(const row of census.routes)assert.equal(row.tree,f.git('ls-tree','-z',f.selected,'--',row.path).toString());
  assert.equal(calls.filter(args=>args[0]==='ls-tree'&&args[1]==='-rtz').length,1);
+ assert.deepEqual(layers.slice(0,4),[
+  ['data/registry.json','data/ledger.json','data/patch.json','data/envelope.json'],
+  ['original/binding.json'],['original/publication.json'],['original/patch-one.json']]);
  f.api.releaseCheckpoint(qualified.state);
+});
+
+test('real checkpoint admission cannot accept a corrupted known-pin body batch',async t=>{
+ const f=await trustedFixture(t),batch=f.reader.gitBatch.bind(f.reader);let altered=false;
+ f.reader.gitBatch=(args,...rest)=>{
+  const output=batch(args,...rest);
+  if(args[1]==='--batch'&&!altered){altered=true;output[output.indexOf(10)+1]^=1;}
+  return output;
+ };
+ assert.throws(()=>f.api.qualifyCheckpoint({reader:f.reader}),/Whole immutable input differs/);
+ assert.equal(altered,true,'The actual admitted body transport must execute');
 });
 
 test('checkpoint route comparison refuses disappeared files, directories, symlinks and executable-mode drift',async t=>{

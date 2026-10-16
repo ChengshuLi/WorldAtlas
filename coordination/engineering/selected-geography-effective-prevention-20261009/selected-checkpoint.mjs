@@ -122,9 +122,17 @@ function resolvePin(reader, p) {
   return {actual, version};
 }
 function readBody(session, reader, p, {json = true} = {}) {
-  const {version} = resolvePin(reader, p), decoded = p.decoded_bytes ?? 0;
+  const {version} = resolvePin(reader, p);
 
   const encoded = reader.read(p.path, {version, expected:p.sha256});
+  return decodeBody(p,encoded,{json});
+}
+function readBodies(session,reader,pins) {
+  pins.forEach(pin);
+  return reader.readPinned(pins).map((encoded,i)=>decodeBody(pins[i],encoded));
+}
+function decodeBody(p,encoded,{json = true} = {}) {
+  const decoded=p.decoded_bytes??0;
   let body = encoded;
   if (decoded) {
     demand(encoded.length >= 18 && encoded.readUInt32LE(encoded.length-4) === decoded,
@@ -193,10 +201,9 @@ function readSelection(session, reader) {
   supported(sidecar.version === 2 && sidecar.kind === 'retained-native-additive-selection-v2', 'Unsupported additive sidecar version');
   demand(same(sidecar.base_selection,nativeBaseSelection(selection)), 'Stale actual native base selection');
   keys(sidecar.logical_asset_map,'base_manifest,ledger,owner_roster,patch','Incomplete additive asset map');
-  const registry = readBody(session,reader,sidecar.authority_registry);
-  const ledger = readBody(session,reader,sidecar.logical_asset_map.ledger);
-  const patch = readBody(session,reader,sidecar.logical_asset_map.patch);
-  const wrapped = readBody(session,reader,sidecar.runtime_envelope), envelope = wrapped.additiveRelease ?? wrapped;
+  const [registry,ledger,patch,wrapped] = readBodies(session,reader,[sidecar.authority_registry,
+    sidecar.logical_asset_map.ledger,sidecar.logical_asset_map.patch,sidecar.runtime_envelope]);
+  const envelope = wrapped.additiveRelease ?? wrapped;
   keys(envelope,'version,kind,base_manifest,base_reference,effective_reference,ledger,owner_roster,patch','Unknown additive envelope');
   supported(envelope.version === 2 && envelope.kind === 'retained-native-base-plus-delta-v2'
     && ledger.version === 2 && patch.version === 2, 'Unsupported non-v2 additive products');
@@ -369,26 +376,39 @@ function acceptedAuthorities(session,reader,selected) {
   const oldAuthorities = new Map();
   // Read only original small patch products already accepted by the checkpoint.
   // No original source/native qualification or selected acquisition is repeated.
-  for (const entry of selected.registry.entries) {
-    const binding = readBody(session,reader,entry.source_authority);
+  const entries=selected.registry.entries;
+  const bindings=readBodies(session,reader,entries.map(entry=>entry.source_authority));
+  const productPins=bindings.map(binding=>{
     if (binding.kind === 'source-target-native-custody-v1') {
       keys(binding,'version,kind,source_evidence,native_patch','Unknown accepted native source custody');
       demand(binding.version===1,'Unknown accepted native source custody version');
-      oldAuthorities.set(entry.authority_sha256,{entry,nativeOnly:true,patches:[readBody(session,reader,binding.native_patch)]});
+      return binding.native_patch;
+    }
+    return binding.native_proof.publication;
+  });
+  const products=readBodies(session,reader,productPins),patchPins=[],patchesByEntry=new Map();
+  for (let e=0;e<entries.length;e++) {
+    const entry=entries[e],binding=bindings[e];
+    if (binding.kind === 'source-target-native-custody-v1') {
+      oldAuthorities.set(entry.authority_sha256,{entry,nativeOnly:true,patches:[products[e]]});
       continue;
     }
-    const publication = readBody(session,reader,binding.native_proof.publication);
+    const publication = products[e];
     demand(publication.assets.length === binding.native_proof.assets.length, 'Accepted native asset roster differs');
     const patches = [];
     for (let i=0;i<publication.assets.length;i++) if (publication.assets[i].path.startsWith('patch-')) {
       const p = binding.native_proof.assets[i], q = publication.assets[i];
       demand(p.path.endsWith('/'+q.path) && p.sha256 === q.sha256 && p.bytes === q.bytes,
         'Accepted original native patch alias differs');
-      patches.push(readBody(session,reader,p));
+      patches.push(patchPins.length);patchPins.push(p);
     }
     demand(patches.length > 0, 'Accepted native authority has no complete patches');
-    oldAuthorities.set(entry.authority_sha256,{entry,patches});
+    oldAuthorities.set(entry.authority_sha256,{entry,patches:[]});
+    patchesByEntry.set(entry,patches);
   }
+  const patches=readBodies(session,reader,patchPins);
+  for(const [entry,indices]of patchesByEntry)oldAuthorities.set(entry.authority_sha256,
+    {entry,patches:indices.map(index=>patches[index])});
   return oldAuthorities;
 }
 function legacyRegistry(registry,authorities) {
