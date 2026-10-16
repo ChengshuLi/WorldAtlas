@@ -197,3 +197,39 @@ test('invalid/self comparisons and finite identity/metadata bounds retain the fu
     assert.match((await f.inspect(f.candidate, f.baseline, {limits: {member: 1024 * 1024, metadata: 1024 * 1024, entries: 1}})).reason, /identity-entry-limit/);
   } finally { f.close(); }
 });
+
+
+test('optional checkpoint transport may be added, changed or removed without changing selected science',async()=>{
+ const f=fixture();try{
+  const locator='data/selected-checkpoint.json',archive=P+'retained-checkpoint.zip';
+  const hints={...f.files,[locator]:body({transport_hint:'original',retained_artifact:{path:archive}}),
+   [archive]:body('unconsumed original archive')};
+  const baseline=f.commit(hints,f.baseline);
+  const cases=[
+   {...f.files,[locator]:body({transport_hint:'new',retained_artifact:{path:archive}}),[archive]:body('new archive')},
+   {...hints,[locator]:body('malformed optional hint is not scientific input')},
+   {...hints,[archive]:body('different optional transport')},
+   {...f.files}
+  ];
+  for(const files of cases){
+   const result=await f.inspect(f.commit(files,baseline),baseline);
+   assert.equal(result.status,'unchanged-selected-inputs',result.reason);
+   assert.equal(result.science_reexecuted,false);assert.equal(result.source_approval,false);
+   assert(!result.current_and_absent_alternatives.some(p=>[locator,archive].includes(p.path)));
+  }
+  const added=await f.inspect(f.commit(hints,f.baseline));
+  assert.equal(added.status,'unchanged-selected-inputs',added.reason);
+  assert.deepEqual(f.calls,{acquire:0,origins:0});
+ }finally{f.close();}
+});
+
+test('checkpoint hints cannot exempt actual selected source, selector or consumed code identities',async()=>{
+ const f=fixture();try{
+  for(const name of ['data/geography/source.json','data/ownership-selection.json',P+'code.json']){
+   const files={...f.files,'data/selected-checkpoint.json':body({retained_artifact:{path:name}}),
+    [name]:body('changed actual scientific operand')};
+   const result=await f.inspect(f.commit(files,f.baseline));
+   assert.equal(result.status,'full-check-required',name);assert.match(result.reason,/changed-current-input/);
+  }
+ }finally{f.close();}
+});
