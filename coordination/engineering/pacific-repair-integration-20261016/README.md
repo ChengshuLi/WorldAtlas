@@ -23,3 +23,11 @@ The 1,984 Tonga companion cells remain explicit questions about source-vintage/g
 ## Acceptance boundary
 
 Stock current-baseline composition and finalization, literal conservation, complete accepted fixed-role classification and a fresh joint evidence manifest will be recorded here. Root owns independent integrated review and serialized dispatch. Actual hosted geography and the authenticated emitted picker/sampler consumer remain mandatory. No full local global regression or repeated scientific producer is planned. Accepted repair credit stays zero before verified integration. Repository integration, website publication, contemporary legal geography, complete regional certification and historical imports remain distinct.
+
+## Current proposed selection
+
+The accepted comparison baseline is `e143ae59177efa2114e9075dac2d99008ed43894`, after genuine Fiji helper integration. Unchanged stock `compose` uses `config/compose-001.json`; stock `finalize` uses `config/finalize-001.json` with its committed restoration snapshot. No source or native constructor was rerun.
+
+`verification/literal-conservation.json` derives the complete selected union from committed inputs: all 294,376 prior cells plus 8,167 qualified additions give 302,543 proposed cumulative cells. All 892 prior rows and 147 authorities remain literal; totals are 916 rows and 150 authorities. The same eight held/rejected rows remain. There are zero removals, reassignments or overlapping additions. All 1,203 Vanuatu held cells and all 1,984 Tonga unresolved-review cells are outside every selected assignment. The nonadditive selector is unchanged.
+
+The complete Tonga repair (52 files), Tonga companion (12), FSM source (23) and accepted Fiji source (48) subtrees match their original reviewed modes, paths and Git blobs. Historical constituent manifests remain unchanged. This packet's `evidence-quality.json` is the joint delivery manifest; its baseline, outputs and metric bindings describe this actual proposal. Source licenses, unresolved questions and hosted/publication limits above remain applicable.
