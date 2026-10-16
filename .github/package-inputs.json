@@ -275,14 +275,26 @@
   ],
   "verification_paths": [
     ".github/workflows/deployment-budget.yml",
+    "research/geography/alaska-thirteen-geometry-measurement-20261008/vintages/run-fourteen/measurement.json",
+    "research/geography/alaska-thirteen-source-fitness-20261008/sources/candidate-components.geojson",
+    "research/geography/alaska-thirteen-source-fitness-20261008/sources/native-atlas-target-features.geojson",
+    "research/geography/alaska-thirteen-source-fitness-20261008/sources/physical-query-rows.jsonl",
+    "research/geography/aus19-original-source-20261011/vintages/source-handoff-001/source-handoff.json",
+    "research/geography/gap-source-angola-drc-shared-seams-20261006/vintages/cohort100-source-handoff-003/source-handoff.json",
+    "research/geography/gap-source-angola-drc-shared-seams-20261006/vintages/congo-physical-custody-002/components-059.jsonl.gz",
+    "research/geography/gap-source-angola-drc-shared-seams-20261006/vintages/congo-source-handoff-003/source-handoff.json",
+    "research/geography/gap-source-namibia-angola-20261006/inputs/source-contact-features.geojson",
+    "research/geography/grc12-original-source-20261011/vintages/source-handoff-002/source-handoff.json",
+    "research/geography/ukraine-original-singleton-source-fit-20261010/vintages/physical-restoration-001/components-030.jsonl.gz",
+    "research/geography/ukraine-original-singleton-source-fit-20261010/vintages/source-handoff-003/source-handoff.json",
     "scripts/classify-deployment-budget.mjs",
-    "scripts/package-inputs.mjs",
     "scripts/package-build.mjs",
+    "scripts/package-inputs.mjs",
     "scripts/package-python-runtime.py",
     "test/deployment-budget-scope.test.mjs",
-    "test/package-inputs.test.mjs",
+    "test/deployment-budget.test.mjs",
     "test/package-build.test.mjs",
-    "test/deployment-budget.test.mjs"
+    "test/package-inputs.test.mjs"
   ],
   "version": 1
 }

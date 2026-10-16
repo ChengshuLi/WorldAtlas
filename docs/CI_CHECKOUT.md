@@ -15,7 +15,7 @@ custom Git executor, staging/promotion protocol and legacy fallback branch.
 Complete regressions retain every discovered test across the existing three
 shards and the actual hosted build/parity/runtime checks. In addition to the
 existing `data/regional-review/` and `research/campaigns/` exclusions, ordinary
-full checkout omits eight historical archive roots:
+full checkout omits six historical engineering archive roots:
 
 - `coordination/engineering/global-source-comparisons-b-package3-20261006/`
 - `coordination/engineering/global-source-comparisons-a-20261006/`
@@ -23,16 +23,25 @@ full checkout omits eight historical archive roots:
 - `coordination/engineering/global-source-comparisons-b-20261006/`
 - `coordination/engineering/reference-source-custody-20261007/`
 - `coordination/engineering/complete-numeric-closure-diagnosis-20261007/`
-- `research/geography/lithuania-latvia-gap-source-fitness-20261007/`
-- `research/geography/shared-seam-prt-esp-20261006/`
 
-These are exact whole-directory exclusions, not broad research or engineering
-namespace filters. Their original files and history remain in Git; neighboring
-roots remain checked out. Trusted preparation reads the authenticated candidate's
-package definition and retains an entire archive root when any declared package
-or verification path intersects it, including directory ancestors. Unavailable
-or malformed definitions fail preparation. New actual regression consumers of
-these archives must restore the needed checkout inputs through review.
+Those six engineering exclusions retain an entire root when a declared package
+or verification path intersects it. The research archive under
+`research/geography/` is omitted except for actual package and verification
+inputs. Its twelve current regression fixture paths are declared in the existing
+`.github/package-inputs.json` `verification_paths` list. Both complete and
+selected-data checkouts reuse the same stock sparse-pattern renderer; no new
+transport, validator, extension catalogue or archive-body rewrite is involved.
+Original files and history remain in Git. A new test consuming additional
+research data declares that dependency alongside its code change.
+
+The accepted `225e0d36` tree contains 7,499 research archive files totaling 2,796,658,781
+logical bytes. The twelve required fixture paths total 7,197,655 bytes. This removes
+2,789,461,126 logical bytes per full worktree, 99.74% of that namespace. These are
+not Git pack/wire bytes or measured hosted duration savings. The original bounded trace covered cat-file reads but missed git-show reads.
+Independent exact-head review found two original Ukraine bodies missing from
+that trace. With those literal paths retained, all 299 exact-head selected-data
+controls passed in a cold, no-alternates Git object database. This verifies the
+applicable roster rather than every possible future dynamic consumer.
 
 Selected-data requests retain
 the existing package/verification roles, ordinary engineering execution files
