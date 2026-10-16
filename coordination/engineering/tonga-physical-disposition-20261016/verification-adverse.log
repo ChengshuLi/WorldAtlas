@@ -1,0 +1,30 @@
+missing-literal: rejected (exit 1)
+Traceback (most recent call last):
+  File "/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/93270244c1bd4b709ced476a1d69d3b55a2bef392af8449e290e0220b48b4e46/work/coordination/engineering/tonga-physical-disposition-20261016/verify-dispositions.py", line 70, in <module>
+    assert len(literals) == len(literal_map) == 1984
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+false-water-approval: rejected (exit 1)
+Traceback (most recent call last):
+  File "/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/93270244c1bd4b709ced476a1d69d3b55a2bef392af8449e290e0220b48b4e46/work/coordination/engineering/tonga-physical-disposition-20261016/verify-dispositions.py", line 101, in <module>
+    assert cell['land_or_water_classification'] is None
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+corrupt-source-pin: rejected (exit 1)
+Traceback (most recent call last):
+  File "/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/93270244c1bd4b709ced476a1d69d3b55a2bef392af8449e290e0220b48b4e46/work/coordination/engineering/tonga-physical-disposition-20261016/verify-dispositions.py", line 35, in <module>
+    inputs = {name: read_pin(pin) for name, pin in bindings['inputs'].items()}
+                    ^^^^^^^^^^^^^
+  File "/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/93270244c1bd4b709ced476a1d69d3b55a2bef392af8449e290e0220b48b4e46/work/coordination/engineering/tonga-physical-disposition-20261016/verify-dispositions.py", line 28, in read_pin
+    assert len(raw) == pin['bytes'] and hashlib.sha256(raw).hexdigest() == pin['sha256']
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+incorrect-native-coordinate: rejected (exit 1)
+Traceback (most recent call last):
+  File "/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/93270244c1bd4b709ced476a1d69d3b55a2bef392af8449e290e0220b48b4e46/work/coordination/engineering/tonga-physical-disposition-20261016/verify-dispositions.py", line 98, in <module>
+    assert cell['longitude'] == longitude and cell['latitude'] == latitude
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

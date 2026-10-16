@@ -1,6 +1,6 @@
 # Tonga exact source-relative native repair
 
-Issue #2232. Exactly the frozen `gb-TON-ADM1--repair-evaluation` cohort is selected: 2,302 land cells in 731 segments, blocks 34–36, owners 42236–42240. The 1,984-cell physical-interpretation companion is excluded. No country-total or full-family completion denominator is claimed.
+Issue #2232. Exactly the frozen `gb-TON-ADM1--repair-evaluation` cohort is selected: 2,302 land cells in 731 segments, blocks 34–36, owners 42236–42240. The 1,984-cell physical-interpretation companion is excluded from repair qualification and credit. Its separately identified #2240 reviewed-disposition packet is at `coordination/engineering/tonga-physical-disposition-20261016/`, with all 1,984 cells explicitly unresolved and zero repaired/approved-land/approved-water cells. No country-total or full-family completion denominator is claimed.
 
 ## Result and retained limits
 
