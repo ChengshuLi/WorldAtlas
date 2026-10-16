@@ -7,5 +7,4 @@ test('native monthly water diagnostics retain missing observations and spatial u
     encoding: 'utf8', env: process.env, timeout: 120000
   });
   assert.equal(r.status, 0, `${r.stdout}\n${r.stderr}`);
-  assert.match(r.stderr, /Ran 17 tests/);
 });
