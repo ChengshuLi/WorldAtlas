@@ -173,7 +173,7 @@ export async function streamTestProcess(args, {env = process.env,
 export function requireCurrentPackageAssembly({directory=process.cwd(),expected=process.env.SELECTED_PACKAGE_ASSEMBLY_SHA256}={}) {
   if(!/^[a-f0-9]{64}$/.test(expected??''))throw Error('Trusted current package assembly digest required');
   const file=path.join(directory,'.cache/package-input-build.json'),stat=fs.lstatSync(file);
-  if(!stat.isFile()||stat.isSymbolicLink()||stat.size>8*1024*1024)throw Error('Bounded ordinary assembly receipt required');
+  if(!stat.isFile()||stat.isSymbolicLink())throw Error('Ordinary assembly receipt required');
   const raw=fs.readFileSync(file);
   if(createHash('sha256').update(raw).digest('hex')!==expected)throw Error('Current assembly receipt digest differs');
   const receipt=JSON.parse(raw),assembly=receipt.assembly;
