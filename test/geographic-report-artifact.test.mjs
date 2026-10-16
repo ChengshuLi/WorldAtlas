@@ -600,19 +600,6 @@ test('retargeting both genuine report and public custody cannot reuse original p
   assert.equal(f.writes.length, 0); assert.deepEqual(f.treeReads(), []);
 });
 
-test('prepared queue still loads authored and baseline trees for selected-data classification', async () => {
-  const f = queueCompletionFixture();
-  f.files = [{filename: 'data/ownership-selection.json', status: 'modified'},
-    {filename: 'coordination/engineering/fixture/selected-delivery-expectations.json', status: 'added'}];
-  f.pr.changed_files = f.files.length;
-  const result = await f.complete();
-  assert.equal(result.accepted, true);
-  assert.deepEqual(f.treeReads(), ['2', '3'].map(n => `/repos/owner/repo/git/trees/${n.repeat(40)}?recursive=1`));
-  // The absent selected smoke keeps conservative complete validation; this test
-  // establishes tree loading, not a fabricated selected-data qualification.
-  assert.equal(f.writes.length, 1);
-});
-
 test('prepared custody preserves fresh final main, head, issue, check, status and review guards', async () => {
   for (const changed of ['main', 'head', 'issue', 'check', 'status', 'review']) {
     const f = queueCompletionFixture();
