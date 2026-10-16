@@ -1,0 +1,99 @@
+{
+  "version": 1,
+  "kind": "adopted-provider-source-families-v1",
+  "families": [
+    {
+      "source_id": "gb-full:LAO:ADM2:9469f09",
+      "product": {
+        "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/lao9-full-source-observation-001/geoBoundaries-LAO-ADM2-full-exact9469.geojson.gz",
+        "commit": "ee625db13259a815e28a21c81adf4e0f2044740c",
+        "mode": "100644",
+        "git_blob_oid": "a7fa420792aff50cf13131c26e79e2bd8bc458fd",
+        "bytes": 2707094,
+        "sha256": "dd9a272d91e9d0f90ce269205b97f23b41223b9dd72a7fcb87ea2cc0bc944307",
+        "decoded_bytes": 8806051,
+        "decoded_sha256": "ff1eb94f1bd134e01a8180b8ef81477075388359c0d27c0cac04645cef453dcc"
+      },
+      "feature_count": 148,
+      "id_property": "shapeID",
+      "id_prefix": "gb-full:LAO:ADM2:9469f09:",
+      "bindings": [
+        {
+          "source_id": "gb-full:LAO:ADM2:9469f09:54806243B33031915083472",
+          "feature_ordinal": 15,
+          "source_property": "54806243B33031915083472",
+          "properties_sha256": "d7567903086fad069948339a5d9bd41bc2da6af5fd89d2aec7acfb6fbe05597a",
+          "geometry_sha256": "bc6617df925d350c06d3f02666680d0b98c09f7f8d5e6a6c679f9814f029d1b4",
+          "target_id": "gb:LAO:ADM2:54806243B33031915083472",
+          "pixelIndex": 26808,
+          "base_geometry_sha256": "fb572fdcfe752a25add81d5dd1654f1c24699f7727a867c90b6cea7e63a725b6",
+          "decision": "Exact parent-adopted9 source choice; full same-build shapeID and all properties match the original simplified sibling, all9 unique full fine and exclusive LAO reference interiors, with original VNM/simplified/COD contrasts retained.",
+          "scope": [
+            {
+              "y": 119659,
+              "x": 209305
+            },
+            {
+              "y": 119660,
+              "x": 209302
+            },
+            {
+              "y": 119872,
+              "x": 209450
+            },
+            {
+              "y": 119872,
+              "x": 209455
+            }
+          ]
+        },
+        {
+          "source_id": "gb-full:LAO:ADM2:9469f09:54806243B58703699561211",
+          "feature_ordinal": 50,
+          "source_property": "54806243B58703699561211",
+          "properties_sha256": "e317ce9584a10535079a45c013e4f3b435074aa3e3d59bbc51e434a0d5d7c040",
+          "geometry_sha256": "5d7b7e07312fb4480edb0fb6a207940e9a410afde166bb2198b6364ab6b1eec2",
+          "target_id": "gb:LAO:ADM2:54806243B58703699561211",
+          "pixelIndex": 26855,
+          "base_geometry_sha256": "6ff783ef40589c2f9aa37e6a6a54382998d60fc972d4d7db65b9594c90f9fad0",
+          "decision": "Exact parent-adopted9 source choice; full same-build shapeID and all properties match the original simplified sibling, all9 unique full fine and exclusive LAO reference interiors, with original VNM/simplified/COD contrasts retained.",
+          "scope": [
+            {
+              "y": 114786,
+              "x": 205956
+            },
+            {
+              "y": 114861,
+              "x": 205963
+            },
+            {
+              "y": 115242,
+              "x": 205967
+            }
+          ]
+        },
+        {
+          "source_id": "gb-full:LAO:ADM2:9469f09:54806243B53408209397741",
+          "feature_ordinal": 130,
+          "source_property": "54806243B53408209397741",
+          "properties_sha256": "90c097c1ecc002042a4dddc72334600da87d6868a4c0ac185afb3ff7882b0055",
+          "geometry_sha256": "ae4325c6cf77df589372f0c82b86fdb2176ba36b94f414f6f46a1abc0735ae43",
+          "target_id": "gb:LAO:ADM2:54806243B53408209397741",
+          "pixelIndex": 26845,
+          "base_geometry_sha256": "ed669f2798d45503caab200a2b62b566674e3f695e185e5ac2ffc0fd996cca65",
+          "decision": "Exact parent-adopted9 source choice; full same-build shapeID and all properties match the original simplified sibling, all9 unique full fine and exclusive LAO reference interiors, with original VNM/simplified/COD contrasts retained.",
+          "scope": [
+            {
+              "y": 116097,
+              "x": 207477
+            },
+            {
+              "y": 116098,
+              "x": 207474
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

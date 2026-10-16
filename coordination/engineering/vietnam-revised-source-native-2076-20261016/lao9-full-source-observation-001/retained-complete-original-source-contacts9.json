@@ -1,0 +1,480 @@
+{
+  "kind": "original-complete-source-contact-join-not-new-science",
+  "scope_keys": 9,
+  "original_products": 368,
+  "original_features": 73567,
+  "keys_with_contrary_original_mapped_source_contact": 9,
+  "family_contact_counts": {
+    "gb:VNM:ADM1": 2,
+    "gb:VNM:ADM2": 9
+  },
+  "whole_input_pins": [
+    {
+      "commit": "6ef487cd8f29e714dd10ae963d9fd58c41fd1b54",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-census-summary.json",
+      "mode": "100644",
+      "git_blob_oid": "fa1e4d101edb54b02bd1ff42a240f2f80ac65832",
+      "bytes": 120963,
+      "sha256": "8a4a6792237259328e56e38d91d0cb22f977de4a35caf4781f0d605e3db1653d"
+    },
+    {
+      "commit": "6ef487cd8f29e714dd10ae963d9fd58c41fd1b54",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-raster-summary.json",
+      "mode": "100644",
+      "git_blob_oid": "e17b10b5643c1f6b0c492d02edc70a0d7afc5ee3",
+      "bytes": 110705,
+      "sha256": "2eec390eb9f9b6595bd0f3c7059b75f271dba013fbad0b3ac0c404114d48eea9"
+    },
+    {
+      "commit": "6ef487cd8f29e714dd10ae963d9fd58c41fd1b54",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "e6e380ec13cd4bcc1d24399a76bfa85ca5805b26",
+      "bytes": 1844315,
+      "sha256": "87f2d47e104b3af640351e747d8300d0068a1be23caab9e80558c3f8914eb4aa"
+    },
+    {
+      "commit": "6ef487cd8f29e714dd10ae963d9fd58c41fd1b54",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+      "mode": "100644",
+      "git_blob_oid": "09afab19371f0814da61e79e5f310c5fb2405b6d",
+      "bytes": 403376,
+      "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9"
+    },
+    {
+      "commit": "6ef487cd8f29e714dd10ae963d9fd58c41fd1b54",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-028.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "242c191e5cb4822c969247f4d4af99b56a5ec160",
+      "bytes": 476733,
+      "sha256": "2000877ef3d698ee43b6e1ae0d7bb0cb8cf505a94b21255076691311fb5c3ba4"
+    },
+    {
+      "commit": "6ef487cd8f29e714dd10ae963d9fd58c41fd1b54",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-029.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "3fc846f1a3a57841d82c695b97ad31b93af681e6",
+      "bytes": 613896,
+      "sha256": "7775f315311056808bfead2394034459a83a3590a201fe0deedb66fea1866528"
+    }
+  ],
+  "records": [
+    {
+      "original_key": {
+        "owner": 48365,
+        "y": 114786,
+        "x": 205956
+      },
+      "new_source_identity": "gb-full:LAO:ADM2:9469f09:54806243B58703699561211",
+      "proposed_target_id": "gb:LAO:ADM2:54806243B58703699561211",
+      "proposed_target_owner": 26855,
+      "frozen_lineage_candidates": [
+        48365
+      ],
+      "complete_original_contacts": [
+        {
+          "source_index": 65110,
+          "family_index": 353,
+          "source_id": "gb:VNM:ADM1:63759600B72990231521734",
+          "ordinal": 18,
+          "owners": [],
+          "name": "\u0110i\u1ec7n Bi\u00ean",
+          "geometry_status": "raw-native-supported",
+          "source_family": "gb:VNM:ADM1",
+          "source_represented_year_claim": "2008"
+        },
+        {
+          "source_index": 65545,
+          "family_index": 354,
+          "source_id": "gb:VNM:ADM2:81297802B39086824409595",
+          "ordinal": 389,
+          "owners": [
+            48365
+          ],
+          "name": "Nam Po",
+          "geometry_status": "raw-native-supported",
+          "source_family": "gb:VNM:ADM2",
+          "source_represented_year_claim": "2020"
+        }
+      ],
+      "contrary_mapped_source_contacts": [
+        {
+          "source_index": 65545,
+          "family_index": 354,
+          "source_id": "gb:VNM:ADM2:81297802B39086824409595",
+          "ordinal": 389,
+          "owners": [
+            48365
+          ],
+          "name": "Nam Po",
+          "geometry_status": "raw-native-supported",
+          "source_family": "gb:VNM:ADM2",
+          "source_represented_year_claim": "2020"
+        }
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 48365,
+        "y": 114861,
+        "x": 205963
+      },
+      "new_source_identity": "gb-full:LAO:ADM2:9469f09:54806243B58703699561211",
+      "proposed_target_id": "gb:LAO:ADM2:54806243B58703699561211",
+      "proposed_target_owner": 26855,
+      "frozen_lineage_candidates": [
+        48365
+      ],
+      "complete_original_contacts": [
+        {
+          "source_index": 65545,
+          "family_index": 354,
+          "source_id": "gb:VNM:ADM2:81297802B39086824409595",
+          "ordinal": 389,
+          "owners": [
+            48365
+          ],
+          "name": "Nam Po",
+          "geometry_status": "raw-native-supported",
+          "source_family": "gb:VNM:ADM2",
+          "source_represented_year_claim": "2020"
+        }
+      ],
+      "contrary_mapped_source_contacts": [
+        {
+          "source_index": 65545,
+          "family_index": 354,
+          "source_id": "gb:VNM:ADM2:81297802B39086824409595",
+          "ordinal": 389,
+          "owners": [
+            48365
+          ],
+          "name": "Nam Po",
+          "geometry_status": "raw-native-supported",
+          "source_family": "gb:VNM:ADM2",
+          "source_represented_year_claim": "2020"
+        }
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 48168,
+        "y": 115242,
+        "x": 205967
+      },
+      "new_source_identity": "gb-full:LAO:ADM2:9469f09:54806243B58703699561211",
+      "proposed_target_id": "gb:LAO:ADM2:54806243B58703699561211",
+      "proposed_target_owner": 26855,
+      "frozen_lineage_candidates": [
+        48168
+      ],
+      "complete_original_contacts": [
+        {
+          "source_index": 65110,
+          "family_index": 353,
+          "source_id": "gb:VNM:ADM1:63759600B72990231521734",
+          "ordinal": 18,
+          "owners": [],
+          "name": "\u0110i\u1ec7n Bi\u00ean",
+          "geometry_status": "raw-native-supported",
+          "source_family": "gb:VNM:ADM1",
+          "source_represented_year_claim": "2008"
+        },
+        {
+          "source_index": 65319,
+          "family_index": 354,
+          "source_id": "gb:VNM:ADM2:81297802B1284717956892",
+          "ordinal": 163,
+          "owners": [
+            48168
+          ],
+          "name": "Dien Bien",
+          "geometry_status": "raw-native-supported",
+          "source_family": "gb:VNM:ADM2",
+          "source_represented_year_claim": "2020"
+        }
+      ],
+      "contrary_mapped_source_contacts": [
+        {
+          "source_index": 65319,
+          "family_index": 354,
+          "source_id": "gb:VNM:ADM2:81297802B1284717956892",
+          "ordinal": 163,
+          "owners": [
+            48168
+          ],
+          "name": "Dien Bien",
+          "geometry_status": "raw-native-supported",
+          "source_family": "gb:VNM:ADM2",
+          "source_represented_year_claim": "2020"
+        }
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 48661,
+        "y": 116097,
+        "x": 207477
+      },
+      "new_source_identity": "gb-full:LAO:ADM2:9469f09:54806243B53408209397741",
+      "proposed_target_id": "gb:LAO:ADM2:54806243B53408209397741",
+      "proposed_target_owner": 26845,
+      "frozen_lineage_candidates": [
+        48661
+      ],
+      "complete_original_contacts": [
+        {
+          "source_index": 65633,
+          "family_index": 354,
+          "source_id": "gb:VNM:ADM2:81297802B81765499113898",
+          "ordinal": 477,
+          "owners": [
+            48661
+          ],
+          "name": "Quan Son",
+          "geometry_status": "raw-native-supported",
+          "source_family": "gb:VNM:ADM2",
+          "source_represented_year_claim": "2020"
+        }
+      ],
+      "contrary_mapped_source_contacts": [
+        {
+          "source_index": 65633,
+          "family_index": 354,
+          "source_id": "gb:VNM:ADM2:81297802B81765499113898",
+          "ordinal": 477,
+          "owners": [
+            48661
+          ],
+          "name": "Quan Son",
+          "geometry_status": "raw-native-supported",
+          "source_family": "gb:VNM:ADM2",
+          "source_represented_year_claim": "2020"
+        }
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 48661,
+        "y": 116098,
+        "x": 207474
+      },
+      "new_source_identity": "gb-full:LAO:ADM2:9469f09:54806243B53408209397741",
+      "proposed_target_id": "gb:LAO:ADM2:54806243B53408209397741",
+      "proposed_target_owner": 26845,
+      "frozen_lineage_candidates": [
+        48661
+      ],
+      "complete_original_contacts": [
+        {
+          "source_index": 65633,
+          "family_index": 354,
+          "source_id": "gb:VNM:ADM2:81297802B81765499113898",
+          "ordinal": 477,
+          "owners": [
+            48661
+          ],
+          "name": "Quan Son",
+          "geometry_status": "raw-native-supported",
+          "source_family": "gb:VNM:ADM2",
+          "source_represented_year_claim": "2020"
+        }
+      ],
+      "contrary_mapped_source_contacts": [
+        {
+          "source_index": 65633,
+          "family_index": 354,
+          "source_id": "gb:VNM:ADM2:81297802B81765499113898",
+          "ordinal": 477,
+          "owners": [
+            48661
+          ],
+          "name": "Quan Son",
+          "geometry_status": "raw-native-supported",
+          "source_family": "gb:VNM:ADM2",
+          "source_represented_year_claim": "2020"
+        }
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 48596,
+        "y": 119659,
+        "x": 209305
+      },
+      "new_source_identity": "gb-full:LAO:ADM2:9469f09:54806243B33031915083472",
+      "proposed_target_id": "gb:LAO:ADM2:54806243B33031915083472",
+      "proposed_target_owner": 26808,
+      "frozen_lineage_candidates": [
+        48596
+      ],
+      "complete_original_contacts": [
+        {
+          "source_index": 65543,
+          "family_index": 354,
+          "source_id": "gb:VNM:ADM2:81297802B72423367852086",
+          "ordinal": 387,
+          "owners": [
+            48596
+          ],
+          "name": "Nam Giang",
+          "geometry_status": "raw-native-supported",
+          "source_family": "gb:VNM:ADM2",
+          "source_represented_year_claim": "2020"
+        }
+      ],
+      "contrary_mapped_source_contacts": [
+        {
+          "source_index": 65543,
+          "family_index": 354,
+          "source_id": "gb:VNM:ADM2:81297802B72423367852086",
+          "ordinal": 387,
+          "owners": [
+            48596
+          ],
+          "name": "Nam Giang",
+          "geometry_status": "raw-native-supported",
+          "source_family": "gb:VNM:ADM2",
+          "source_represented_year_claim": "2020"
+        }
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 48596,
+        "y": 119660,
+        "x": 209302
+      },
+      "new_source_identity": "gb-full:LAO:ADM2:9469f09:54806243B33031915083472",
+      "proposed_target_id": "gb:LAO:ADM2:54806243B33031915083472",
+      "proposed_target_owner": 26808,
+      "frozen_lineage_candidates": [
+        48596
+      ],
+      "complete_original_contacts": [
+        {
+          "source_index": 65543,
+          "family_index": 354,
+          "source_id": "gb:VNM:ADM2:81297802B72423367852086",
+          "ordinal": 387,
+          "owners": [
+            48596
+          ],
+          "name": "Nam Giang",
+          "geometry_status": "raw-native-supported",
+          "source_family": "gb:VNM:ADM2",
+          "source_represented_year_claim": "2020"
+        }
+      ],
+      "contrary_mapped_source_contacts": [
+        {
+          "source_index": 65543,
+          "family_index": 354,
+          "source_id": "gb:VNM:ADM2:81297802B72423367852086",
+          "ordinal": 387,
+          "owners": [
+            48596
+          ],
+          "name": "Nam Giang",
+          "geometry_status": "raw-native-supported",
+          "source_family": "gb:VNM:ADM2",
+          "source_represented_year_claim": "2020"
+        }
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 48212,
+        "y": 119872,
+        "x": 209450
+      },
+      "new_source_identity": "gb-full:LAO:ADM2:9469f09:54806243B33031915083472",
+      "proposed_target_id": "gb:LAO:ADM2:54806243B33031915083472",
+      "proposed_target_owner": 26808,
+      "frozen_lineage_candidates": [
+        48212
+      ],
+      "complete_original_contacts": [
+        {
+          "source_index": 65302,
+          "family_index": 354,
+          "source_id": "gb:VNM:ADM2:81297802B20367953633835",
+          "ordinal": 146,
+          "owners": [
+            48212
+          ],
+          "name": "Dak Glei",
+          "geometry_status": "raw-native-supported",
+          "source_family": "gb:VNM:ADM2",
+          "source_represented_year_claim": "2020"
+        }
+      ],
+      "contrary_mapped_source_contacts": [
+        {
+          "source_index": 65302,
+          "family_index": 354,
+          "source_id": "gb:VNM:ADM2:81297802B20367953633835",
+          "ordinal": 146,
+          "owners": [
+            48212
+          ],
+          "name": "Dak Glei",
+          "geometry_status": "raw-native-supported",
+          "source_family": "gb:VNM:ADM2",
+          "source_represented_year_claim": "2020"
+        }
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 48212,
+        "y": 119872,
+        "x": 209455
+      },
+      "new_source_identity": "gb-full:LAO:ADM2:9469f09:54806243B33031915083472",
+      "proposed_target_id": "gb:LAO:ADM2:54806243B33031915083472",
+      "proposed_target_owner": 26808,
+      "frozen_lineage_candidates": [
+        48212
+      ],
+      "complete_original_contacts": [
+        {
+          "source_index": 65302,
+          "family_index": 354,
+          "source_id": "gb:VNM:ADM2:81297802B20367953633835",
+          "ordinal": 146,
+          "owners": [
+            48212
+          ],
+          "name": "Dak Glei",
+          "geometry_status": "raw-native-supported",
+          "source_family": "gb:VNM:ADM2",
+          "source_represented_year_claim": "2020"
+        }
+      ],
+      "contrary_mapped_source_contacts": [
+        {
+          "source_index": 65302,
+          "family_index": 354,
+          "source_id": "gb:VNM:ADM2:81297802B20367953633835",
+          "ordinal": 146,
+          "owners": [
+            48212
+          ],
+          "name": "Dak Glei",
+          "geometry_status": "raw-native-supported",
+          "source_family": "gb:VNM:ADM2",
+          "source_represented_year_claim": "2020"
+        }
+      ]
+    }
+  ],
+  "source_adoption": false,
+  "native_qualification": false,
+  "accepted_credit": 0,
+  "limits": [
+    "The original complete raw-source raster domain and method are reused unchanged; exact contact join only.",
+    "This is not the new twelve-source native comparison or actual current-owner-zero validation.",
+    "Every contrary retained source contact requires distinct substantive applicability assessment; no source wins by date."
+  ]
+}
