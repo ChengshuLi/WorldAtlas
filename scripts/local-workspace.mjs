@@ -76,17 +76,21 @@ export function workspaceManager(repo, {freeBytes} = {}) {
     }
     try { return operation(); } finally { fs.rmdirSync(lock); }
   };
-  const worktrees = (measure = true) => git('worktree', 'list', '--porcelain').trim().split('\n\n').map(block => {
-    const lines = block.split('\n');
-    const directory = lines.find(line => line.startsWith('worktree '))?.slice(9);
-    if (!directory) throw Error('Incomplete worktree inventory');
-    ordinaryDirectory(directory);
-    if (!measure) return {path: directory};
-    // Missing/prunable paths need explicit inspection; they are not zero-cost proof.
-    const bytes = Number(execFileSync('du', ['-sk', directory], {encoding: 'utf8'}).split(/\s/)[0]) * 1024;
-    if (!Number.isSafeInteger(bytes) || bytes < 0) throw Error('Unknown checkout usage');
-    return {path: directory, bytes};
-  });
+  const worktrees = (measure = true) => {
+    const output = git('worktree', 'list', '--porcelain', '-z');
+    if (!output.endsWith('\0\0')) throw Error('Incomplete worktree inventory');
+    return output.slice(0, -2).split('\0\0').map(block => {
+      const [first, ...fields] = block.split('\0');
+      const directory = first.startsWith('worktree ') ? first.slice(9) : null;
+      if (!directory || !path.isAbsolute(directory) || fields.some(field => field.startsWith('worktree '))) throw Error('Incomplete worktree inventory');
+      ordinaryDirectory(directory);
+      if (!measure) return {path: directory};
+      // Missing/prunable paths need explicit inspection; they are not zero-cost proof.
+      const bytes = Number(execFileSync('du', ['-sk', directory], {encoding: 'utf8'}).split(/\s/)[0]) * 1024;
+      if (!Number.isSafeInteger(bytes) || bytes < 0) throw Error('Unknown checkout usage');
+      return {path: directory, bytes};
+    });
+  };
   const availableBytes = () => {
     const stats = fs.statfsSync(common);
     return freeBytes ? freeBytes() : stats.bavail * stats.bsize;
@@ -178,35 +182,59 @@ export function workspaceManager(repo, {freeBytes} = {}) {
       selectedBytes: missing.length ? null : estimated,
       inputs: inputs.map(({name, oid, bytes}) => ({path: name, oid, bytes})), missing};
   };
-  const allocate = ({worker, slot = 'work', branch, commit, profile = 'sparse', include = []}) => locked(() => {
+  const allocate = ({worker, slot = 'work', branch, commit, profile = 'sparse', include = []}) => {
     if (!id(worker) || !['work', 'review'].includes(slot)) throw Error('Supply a safe unique worker ID and work/review slot');
     if (!['sparse', 'full'].includes(profile) || !Array.isArray(include) || !include.every(safeInclude)) throw Error('Use sparse/full profile and literal data/research/coordination paths without traversal or globs');
     if (slot === 'work' && (!/^(engineering|geography|research)\/[a-z0-9][a-z0-9-]{0,63}$/.test(branch ?? '') || commit)) throw Error('Work needs a fresh lane branch; main is fetched by the allocator');
     if (slot === 'review' && (branch || !/^[a-f0-9]{40}$/.test(commit ?? ''))) throw Error('Review needs an exact detached 40-character commit');
-    const value = state();
-    if (value.entries.some(entry => entry.worker === worker && entry.slot === slot)) throw Error('Slot occupied; finish and release it before allocating another checkout');
-    const destination = slotPath(worker, slot);
-    ordinaryDirectory(destination);
-    if (fs.existsSync(destination)) throw Error('Unregistered checkout directory exists; inspect instead of overwriting');
-    if (slot === 'work') git('fetch', 'origin', 'main');
-    const head = slot === 'work' ? git('rev-parse', '--verify', 'origin/main').trim() : commit;
-    const {sparsePatterns, missing} = inputInventory(head, profile, include);
-    if (missing.length) throw Error(`Unknown input size; selected blobs must be available locally. Run inspect --commit ${head} with this same profile/include scope to list missing paths/OIDs.`);
-    const entry = {worker, slot, path: destination, token: randomUUID(), head, branch: branch ?? null,
-      profile, include, reservation: 0, status: 'preparing', createdAt: new Date().toISOString()};
-    value.entries.push(entry);
-    save(value); // Preserve interrupted attempts for inspection, even if Git fails below.
-    fs.mkdirSync(path.dirname(destination), {recursive: true});
-    git('worktree', 'add', '--no-checkout', ...(slot === 'work' ? ['-b', branch] : ['--detach']), destination, head);
-    if (profile === 'sparse') {
-      execFileSync('git', ['-C', destination, 'sparse-checkout', 'set', '--no-cone', '--stdin'], {
-        input: ['/*', '!/*/', ...sparsePatterns].join('\n') + '\n', encoding: 'utf8', env: noLazyFetch});
+    if (slot === 'work') {
+      if (git('for-each-ref', '--format=%(refname)', `refs/heads/${branch}`).split('\n').includes(`refs/heads/${branch}`)) {
+        throw Error('Fresh lane branch already exists; choose a new branch without changing its history');
+      }
+      // Network interruption must not strand the registry lock. Freeze the
+      // fetched commit before reserving; later ref movement cannot change it.
+      git('fetch', 'origin', 'main');
     }
-    execFileSync('git', ['-C', destination, 'read-tree', '-mu', 'HEAD'], {env: noLazyFetch});
-    entry.status = 'ready';
-    save(value);
-    return entry;
-  });
+    const head = slot === 'work' ? git('rev-parse', '--verify', 'origin/main').trim() : commit;
+    return locked(() => {
+      const value = state();
+      if (value.entries.some(entry => entry.worker === worker && entry.slot === slot)) throw Error('Slot occupied; finish and release it before allocating another checkout');
+      const destination = slotPath(worker, slot);
+      ordinaryDirectory(destination);
+      if (fs.lstatSync(destination, {throwIfNoEntry: false})) throw Error('Unregistered checkout directory exists; inspect instead of overwriting');
+      const {sparsePatterns, missing} = inputInventory(head, profile, include);
+      if (missing.length) throw Error(`Unknown input size; selected blobs must be available locally. Run inspect --commit ${head} with this same profile/include scope to list missing paths/OIDs.`);
+      const entry = {worker, slot, path: destination, token: randomUUID(), head, branch: branch ?? null,
+        profile, include, reservation: 0, status: 'preparing', createdAt: new Date().toISOString()};
+      value.entries.push(entry);
+      save(value);
+      try {
+        fs.mkdirSync(path.dirname(destination), {recursive: true});
+        git('worktree', 'add', '--no-checkout', ...(slot === 'work' ? ['-b', branch] : ['--detach']), destination, head);
+      } catch (error) {
+        // Undo only our reservation when both filesystem and Git prove no checkout
+        // was created. Any partial checkout, unknown state or hard interruption
+        // remains recorded for operator inspection. Never remove files or refs.
+        try {
+          if (!fs.lstatSync(destination, {throwIfNoEntry: false}) && !worktrees(false).some(item => item.path === destination)) {
+            value.entries = value.entries.filter(item => item !== entry);
+            save(value);
+          }
+        } catch (inspectionError) {
+          throw new AggregateError([error, inspectionError], 'Allocation failed; reservation recovery requires operator inspection');
+        }
+        throw error;
+      }
+      if (profile === 'sparse') {
+        execFileSync('git', ['-C', destination, 'sparse-checkout', 'set', '--no-cone', '--stdin'], {
+          input: ['/*', '!/*/', ...sparsePatterns].join('\n') + '\n', encoding: 'utf8', env: noLazyFetch});
+      }
+      execFileSync('git', ['-C', destination, 'read-tree', '-mu', 'HEAD'], {env: noLazyFetch});
+      entry.status = 'ready';
+      save(value);
+      return entry;
+    });
+  };
   const release = ({worker, slot = 'work', token}) => locked(() => {
     const value = state();
     const entry = value.entries.find(entry => entry.worker === worker && entry.slot === slot);

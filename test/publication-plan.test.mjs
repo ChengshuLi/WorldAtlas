@@ -90,3 +90,30 @@ test('rejects backwards delivery history instead of losing already delivered cha
  f.routes.set(root+'/compare/'+other+'...'+base+'?per_page=1',{status:'behind',merge_base_commit:{sha:base}});
  await assert.rejects(()=>publicationPlan(f.api,{bootstrap}),/Non-monotone/);
 });
+
+function longComparison(change=()=>{}){
+ const f=fixture(),commits=Array.from({length:10001},(_,i)=>({sha:(i+1).toString(16).padStart(40,'0')})),pages=[];
+ const api=async route=>{
+  if(route.startsWith(root+'/compare/')){
+   const page=Number(new URL(route,'https://api.github.com').searchParams.get('page'));pages.push(page);
+   const result={status:'ahead',merge_base_commit:{sha:base},total_commits:commits.length,commits:commits.slice((page-1)*100,page*100)};
+   if(page===101)change(result);return result;
+  }
+  if(route.includes('/commits/')&&route.includes('/pulls?'))return [];
+  return f.api(route);
+ };
+ return {api,pages,commits};
+}
+test('publication reads more than 100 comparison pages and every associated commit',async()=>{
+ const f=longComparison(),plan=await publicationPlan(f.api,{bootstrap:delivery()});
+ assert.deepEqual(f.pages,Array.from({length:101},(_,i)=>i+1));
+ assert.deepEqual(plan.commits.map(row=>row.sha),f.commits.map(row=>row.sha));
+ assert.deepEqual(plan.unlinked_commits,f.commits.map(row=>row.sha));assert.equal(plan.target_commit,target);
+});
+for(const [name,change] of [
+ ['changed total',row=>row.total_commits++],['short page',row=>row.commits=[]],
+ ['duplicate commit',row=>row.commits[0]={sha:'1'.padStart(40,'0')}],['invalid identity',row=>row.commits[0]={sha:'unknown'}],
+ ['changed ancestry',row=>row.merge_base_commit.sha=other],['provider error',()=>{throw Error('comparison unavailable');}]
+])test('long comparison still rejects '+name,async()=>{
+ const f=longComparison(change);await assert.rejects(()=>publicationPlan(f.api,{bootstrap:delivery()}));assert.equal(f.pages.length,101);
+});

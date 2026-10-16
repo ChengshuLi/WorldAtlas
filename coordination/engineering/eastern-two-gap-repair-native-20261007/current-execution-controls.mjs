@@ -84,7 +84,18 @@ const record=readPackageCurrentExecution(process.cwd());requireCurrentExecution(
 async function currentNegative(t){
  const {root,definition}=await executionFixture(t),stage=path.join(root,'test-stage');
  await materializePackageInputs({source:root,destination:stage,definition});
- const record=issueCurrentExecution({source:root,stage});requireCurrentExecution(record);
+ const opened=new Map(),open=syncFs.openSync;let record;
+ try{
+  syncFs.openSync=(name,...args)=>{if(typeof name==='string'&&name.startsWith(stage+'/'))opened.set(name.slice(stage.length+1),(opened.get(name.slice(stage.length+1))??0)+1);return open(name,...args);};
+  record=issueCurrentExecution({source:root,stage});
+ }finally{syncFs.openSync=open;}
+ assert.deepEqual([...opened.keys()].sort(),record.files.map(pin=>pin.path));
+ assert([...opened.values()].every(count=>count===1),'Issuer authenticates each copied stage body once');
+ requireCurrentExecution(record);
+ const stageBody=path.join(stage,'scripts/evidence-quality.mjs'),original=await fs.readFile(stageBody);
+ await fs.appendFile(stageBody,'// changed before issue');
+ assert.throws(()=>issueCurrentExecution({source:root,stage}),/Materialized execution body/);
+ await fs.writeFile(stageBody,original);
  assert.throws(()=>requireCurrentExecution(structuredClone(record)),/authenticated/);
  const badHead={...record,source_commit:'0'.repeat(40)};assert.throws(()=>authenticateCurrentExecution(badHead,{root:stage,executingRoot:root,sourceRoot:root}),/HEAD/);
  assert.throws(()=>authenticateCurrentExecution({...record,source_root:stage},{root:stage,executingRoot:root,sourceRoot:root}));

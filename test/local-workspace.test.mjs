@@ -212,7 +212,7 @@ test('allocation and free-space checks skip legacy usage traversals while report
     return {result, operations: {
       du: calls.filter(({command}) => command === 'du').length,
       worktreeList: calls.filter(({command, args}) => command === 'git'
-        && args.slice(2).join(' ') === 'worktree list --porcelain').length
+        && args.slice(2).join(' ') === 'worktree list --porcelain -z').length
     }};
   };
   const reported = observe(() => manager.report());
@@ -320,15 +320,173 @@ test('invalid scopes and identities are rejected', t => {
   assert.throws(() => manager.allocate({worker: 'one', slot: 'review', commit: 'main'}), /exact detached/);
 });
 
-test('an interrupted Git mutation is recorded and occupies its slot', t => {
-  const {manager, git} = fixture(t);
+test('an existing branch fails before fetching or reserving and preserves its history', t => {
+  const {manager, git, head, repo} = fixture(t);
   git('branch', 'engineering/already-exists');
-  assert.throws(() => manager.allocate({worker: 'one', branch: 'engineering/already-exists'}));
-  const entry = manager.report().entries[0];
-  assert.equal(entry.status, 'preparing');
-  assert.throws(() => manager.allocate({worker: 'one', branch: 'engineering/new'}), /occupied/);
-  assert.throws(() => manager.release({worker: 'one', token: entry.token}), /inspection/);
+  git('remote', 'set-url', 'origin', path.join(repo, 'unavailable'));
+  assert.throws(() => manager.allocate({worker: 'one', branch: 'engineering/already-exists'}), /already exists/);
+  assert.equal(git('rev-parse', 'engineering/already-exists').trim(), head);
+  assert.deepEqual(manager.report().entries, []);
+  assert.ok(!fs.existsSync(manager.report().registry));
+  git('remote', 'set-url', 'origin', repo);
+  const entry = manager.allocate({worker: 'one', branch: 'engineering/new'});
+  manager.release({worker: 'one', token: entry.token});
 });
+
+test('failed fetch never acquires a registry lock and keeps other workers intact', t => {
+  const {manager, head} = fixture(t);
+  const existing = manager.allocate({worker: 'existing', slot: 'review', commit: head});
+  const {registry} = manager.report(), before = fs.readFileSync(path.join(registry, 'state.json'));
+  const execute = childProcess.execFileSync;
+  t.mock.method(childProcess, 'execFileSync', (command, args, ...options) => {
+    if (command === 'git' && args.slice(2).join(' ') === 'fetch origin main') {
+      assert.ok(!fs.existsSync(path.join(registry, 'lock')));
+      throw Error('interrupted fetch');
+    }
+    return execute(command, args, ...options);
+  });
+  syncBuiltinESMExports();
+  t.after(() => { t.mock.restoreAll(); syncBuiltinESMExports(); });
+  assert.throws(() => manager.allocate({worker: 'one', branch: 'engineering/fetch-failure'}), /interrupted fetch/);
+  assert.ok(fs.readFileSync(path.join(registry, 'state.json')).equals(before));
+  assert.deepEqual(manager.report().entries, [existing]);
+  assert.ok(!fs.existsSync(path.join(registry, 'lock')));
+});
+
+test('hard process interruption during fetch leaves no allocator lock or reservation', t => {
+  const {manager, repo, git, head} = fixture(t);
+  const moduleURL = new URL('../scripts/local-workspace.mjs', import.meta.url).href;
+  const code = `import fs from 'node:fs';import cp from 'node:child_process';import {syncBuiltinESMExports} from 'node:module';
+    import {workspaceManager} from ${JSON.stringify(moduleURL)};
+    const execute=cp.execFileSync;
+    cp.execFileSync=(command,args,...options)=>{
+      if(command==='git'&&args.slice(2).join(' ')==='fetch origin main'){
+        fs.writeFileSync(${JSON.stringify(path.join(repo, 'fetch-started'))},'started');process.kill(process.pid,'SIGTERM');
+      }
+      return execute(command,args,...options);
+    };syncBuiltinESMExports();workspaceManager(${JSON.stringify(repo)}).allocate({worker:'interrupted',branch:'engineering/interrupted-fetch'});`;
+  const result = spawnSync(process.execPath, ['--input-type=module', '-e', code]);
+  assert.equal(result.signal, 'SIGTERM');
+  assert.equal(fs.readFileSync(path.join(repo, 'fetch-started'), 'utf8'), 'started');
+  assert.ok(!fs.existsSync(manager.report().registry));
+  assert.deepEqual(manager.report().entries, []);
+  assert.equal(git('rev-parse', 'HEAD').trim(), head);
+});
+
+test('allocation freezes its fetched head before taking the registry lock', t => {
+  const {manager, git, head, repo} = fixture(t);
+  fs.writeFileSync(path.join(repo, 'README.md'), 'later main');
+  git('add', '.'); git('commit', '-m', 'later main');
+  const later = git('rev-parse', 'HEAD').trim();
+  git('reset', '--hard', head);
+  const {registry} = manager.report(), mkdir = fs.mkdirSync;
+  let moved = false;
+  t.mock.method(fs, 'mkdirSync', (directory, ...options) => {
+    if (directory === path.join(registry, 'lock')) {
+      git('update-ref', 'refs/remotes/origin/main', later);
+      moved = true;
+    }
+    return mkdir(directory, ...options);
+  });
+  const entry = manager.allocate({worker: 'one', branch: 'engineering/pinned'});
+  assert.ok(moved);
+  assert.equal(entry.head, head);
+  assert.equal(git('rev-parse', 'origin/main').trim(), later);
+  assert.equal(fs.readFileSync(path.join(entry.path, 'README.md'), 'utf8'), 'root');
+  manager.release({worker: 'one', token: entry.token});
+});
+
+for (const scenario of ['before-add', 'created-branch', 'branch-race', 'partial-checkout', 'git-entry-only', 'unknown-inventory', 'dangling-path']) {
+  test(`failed initial allocation recovers only proven absent checkout: ${scenario}`, t => {
+    const {manager, head, git} = fixture(t);
+    const existing = manager.allocate({worker: 'existing', slot: 'review', commit: head});
+    const {registry} = manager.report(), stateFile = path.join(registry, 'state.json');
+    const execute = childProcess.execFileSync;
+    let destination, failed = false;
+    t.mock.method(childProcess, 'execFileSync', (command, args, ...options) => {
+      if (command === 'git' && args[2] === 'worktree' && args[3] === 'add') {
+        destination = args.at(-2); failed = true;
+        assert.ok(fs.existsSync(path.join(registry, 'lock')));
+        if (scenario === 'created-branch' || scenario === 'branch-race') git('branch', 'engineering/failure');
+        if (scenario === 'branch-race') return execute(command, args, ...options);
+        if (scenario === 'partial-checkout' || scenario === 'git-entry-only') {
+          execute(command, args, ...options);
+          if (scenario === 'git-entry-only') fs.rmSync(destination, {recursive: true});
+        }
+        if (scenario === 'dangling-path') fs.symlinkSync(destination + '-absent', destination);
+        throw Error('initial add failed');
+      }
+      if (failed && scenario === 'unknown-inventory' && args.slice(2).join(' ') === 'worktree list --porcelain -z') throw Error('inventory unreadable');
+      return execute(command, args, ...options);
+    });
+    syncBuiltinESMExports();
+    t.after(() => { t.mock.restoreAll(); syncBuiltinESMExports(); });
+    assert.throws(() => manager.allocate({worker: 'one', branch: 'engineering/failure'}));
+    const entries = JSON.parse(fs.readFileSync(stateFile)).entries;
+    assert.deepEqual(entries[0], existing);
+    assert.equal(fs.readFileSync(path.join(existing.path, 'README.md'), 'utf8'), 'root');
+    assert.ok(!fs.existsSync(path.join(registry, 'lock')));
+    const absent = ['before-add', 'created-branch', 'branch-race'].includes(scenario);
+    assert.equal(entries.length, absent ? 1 : 2);
+    if (!absent) {
+      assert.equal(entries[1].status, 'preparing');
+      assert.equal(entries[1].path, destination);
+      assert.throws(() => manager.release({worker: 'one', token: entries[1].token}), /inspection/);
+    }
+    if (scenario === 'created-branch' || scenario === 'branch-race') assert.equal(git('rev-parse', 'engineering/failure').trim(), head);
+    t.mock.restoreAll(); syncBuiltinESMExports();
+    if (absent) {
+      const retry = manager.allocate({worker: 'one', branch: 'engineering/retry'});
+      assert.equal(retry.head, head);
+      manager.release({worker: 'one', token: retry.token});
+    }
+  });
+}
+
+test('a registered checkout under a newline-containing parent prevents reservation rollback', t => {
+  const fixtureState = fixture(t), parent = path.join(fixtureState.temporary, 'line\nbreak"\\tab\t');
+  fs.mkdirSync(parent);
+  const repo = path.join(parent, 'repo'); fs.renameSync(fixtureState.repo, repo);
+  const manager = workspaceManager(repo), execute = childProcess.execFileSync;
+  let destination;
+  t.mock.method(childProcess, 'execFileSync', (command, args, ...options) => {
+    const result = execute(command, args, ...options);
+    if (command === 'git' && args[2] === 'worktree' && args[3] === 'add') {
+      destination = args.at(-2);
+      fs.rmSync(destination, {recursive: true});
+      throw Error('initial add interrupted after Git registration');
+    }
+    return result;
+  });
+  syncBuiltinESMExports();
+  t.after(() => { t.mock.restoreAll(); syncBuiltinESMExports(); });
+  assert.throws(() => manager.allocate({worker: 'one', slot: 'review', commit: fixtureState.head}), /interrupted/);
+  const inventory = execFileSync('git', ['-C', repo, 'worktree', 'list', '--porcelain', '-z'], {encoding: 'utf8'});
+  assert.ok(inventory.includes('worktree ' + destination + '\0'));
+  assert.ok(!fs.existsSync(destination));
+  const entries = JSON.parse(fs.readFileSync(path.join(repo, '.git/worldatlas-local-workspaces/state.json'))).entries;
+  assert.equal(entries.length, 1);assert.equal(entries[0].path, destination);assert.equal(entries[0].status, 'preparing');
+  assert.throws(() => manager.release({worker: 'one', slot: 'review', token: entries[0].token}), /inspection/);
+});
+
+for (const malformed of ['unterminated', 'empty', 'duplicate-path-field']) {
+  test(`uncertain worktree inventory preserves the failed reservation: ${malformed}`, t => {
+    const {manager, head, repo} = fixture(t), execute = childProcess.execFileSync;
+    t.mock.method(childProcess, 'execFileSync', (command, args, ...options) => {
+      if (command === 'git' && args[2] === 'worktree' && args[3] === 'add') throw Error('initial add failed');
+      if (command === 'git' && args.slice(2).join(' ') === 'worktree list --porcelain -z') {
+        if (malformed === 'empty') return '';
+        return 'worktree ' + repo + (malformed === 'unterminated' ? '\0HEAD ' + head : '\0worktree /unknown\0\0');
+      }
+      return execute(command, args, ...options);
+    });
+    syncBuiltinESMExports();
+    t.after(() => { t.mock.restoreAll(); syncBuiltinESMExports(); });
+    assert.throws(() => manager.allocate({worker: 'one', slot: 'review', commit: head}), /operator inspection/);
+    const entries = JSON.parse(fs.readFileSync(path.join(repo, '.git/worldatlas-local-workspaces/state.json'))).entries;
+    assert.equal(entries.length, 1);assert.equal(entries[0].status, 'preparing');
+  });
+}
 
 test('symlink root cannot redirect allocation or release outside the managed directory', t => {
   const {manager, temporary} = fixture(t);

@@ -151,3 +151,19 @@ test('engineering scope carries only the existing validated owned scientific man
  const template=scoped({...quality,manifest_path:'coordination/engineering/{job}/evidence-quality.json'});
  assert.equal(verifyIssueScope({issue:template,branch:'engineering/repair-a'}).evidence_manifest,'coordination/engineering/repair-a/evidence-quality.json');
 });
+
+for(const count of [10000,10001])test(`pagination reads all ${count} records through the real final page`,async()=>{
+ const calls=[];const rows=await githubPages(async route=>{
+  calls.push(route);const url=new URL(route,'https://api.github.com'),page=Number(url.searchParams.get('page'));
+  assert.equal(url.searchParams.get('state'),'open');assert.equal(url.searchParams.get('per_page'),'100');
+  return {check_runs:Array.from({length:Math.min(100,Math.max(0,count-(page-1)*100))},(_,i)=>({id:(page-1)*100+i}))};
+ },'/check-runs?state=open');
+ assert.equal(calls.length,101);assert.equal(rows.length,count);assert.deepEqual(rows.map(row=>row.id),Array.from({length:count},(_,i)=>i));
+});
+for(const failure of ['malformed','error'])test(`pagination propagates a late ${failure} instead of returning partial records`,async()=>{
+ let calls=0;await assert.rejects(()=>githubPages(async()=>{
+  if(++calls<=100)return Array.from({length:100},(_,id)=>({id}));
+  if(failure==='error')throw Error('provider denied page');return {check_runs:null};
+ },'/comments'),failure==='error'?/provider denied page/:/Invalid paginated/);
+ assert.equal(calls,101);
+});

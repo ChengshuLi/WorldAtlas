@@ -97,16 +97,16 @@ export async function publicationPlan(api,{bootstrap=null}={}){
  const plan={version:1,target_commit:target,last_delivery:delivery,unsettled_operations:state.unsettled,commits:[],pull_requests:[],issues:[],unlinked_commits:[],blockers:[]};
  if(!delivery)plan.blockers.push('No verified primary delivery boundary: reconstruct from original build/deployment evidence; never substitute mirror SHA or current main');
  else{
-  // Compare API pagination is bounded independently of files (files are irrelevant).
+  // Read the complete pinned commit comparison; its file inventory is irrelevant.
   const commits=[];let total;
-  for(let page=1;page<=100;page++){
+  for(let page=1;;page++){
    const comparison=await api(root+'/compare/'+delivery.primary_commit+'...'+target+'?per_page=100&page='+page);
    need(['ahead','identical'].includes(comparison.status)&&comparison.merge_base_commit?.sha===delivery.primary_commit,'Delivered commit is not an ancestor of pinned main');
    need(Number.isSafeInteger(comparison.total_commits)&&comparison.total_commits>=0&&Array.isArray(comparison.commits),'Incomplete comparison');
    if(total===undefined)total=comparison.total_commits;need(total===comparison.total_commits,'Comparison changed during pagination');
    commits.push(...comparison.commits);
    if(commits.length===total)break;
-   need(commits.length<total&&comparison.commits.length===100&&page<100,'Incomplete commit pagination');
+   need(commits.length<total&&comparison.commits.length===100,'Incomplete commit pagination');
   }
   need(commits.length===total&&new Set(commits.map(c=>c.sha)).size===total&&commits.every(c=>sha(c.sha)),'Incomplete/duplicate commit inventory');
   // Check successive delivered receipts are monotone; a stale or divergent delivery cannot silently replace one.
