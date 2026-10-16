@@ -1147,8 +1147,10 @@ export function finalizeDelivery(config, reader) {
     outputs[path.posix.basename(config.sidecar.path)] = generatedSidecar;
   }
   // Keep the complete preparation/custody projection above as evidence. The
-  // current package consumer reads only the sidecar, envelope and four assets.
-  const paths = [...new Set([config.sidecar, sidecar.runtime_envelope, ...Object.values(assets)].map(p => p.path))];
+  // current package consumer reads only the sidecar, envelope, four assets and
+  // the optional current metadata application. Historical custody stays cold.
+  const paths = [...new Set([config.sidecar, sidecar.runtime_envelope, ...Object.values(assets),
+    ...(references.projectionPin ? [references.projectionPin] : [])].map(p => p.path))];
   const baselinePackage = reader.json(config.package_inputs);
   validatePackageInputs(baselinePackage);
   const covered = name => baselinePackage.inputs.some(p => p === name || p.endsWith('/') && name.startsWith(p));

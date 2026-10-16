@@ -7,8 +7,9 @@ import {createHash} from 'node:crypto';
 import {gzipSync} from 'node:zlib';
 import {prepareReferenceMetadataProjection} from '../scripts/selected-reference-metadata.mjs';
 import {scientificNativeSelection} from '../src/reference-metadata.js';
-import {selectedDeliveryReference,finalizedSelection,prepareReferenceMetadata,composeAuthorities,sourceEvidence,jsonBytes,validateDeliverySelectionTransition} from '../scripts/prepare-delivery-handoff.mjs';
+import {selectedDeliveryReference,finalizedSelection,prepareReferenceMetadata,composeAuthorities,sourceEvidence,jsonBytes,validateDeliverySelectionTransition,finalizeDelivery} from '../scripts/prepare-delivery-handoff.mjs';
 import {compactContextInputs} from '../scripts/native-ownership/compact-context-inputs.mjs';
+import {prepareCurrentSelectedAdditive} from '../scripts/package-current-additive.mjs';
 import {requireAssemblyWithoutReferenceMetadata} from '../scripts/assemble-selected-package.mjs';
 import {loadedBaseFootprintSha256,footprintValueSha256,bindAdditiveLedgerFeatures,additiveReleaseFootprintDigest} from '../src/effective-footprint.js';
 const sha=raw=>createHash('sha256').update(raw).digest('hex'),commit='a'.repeat(40);
@@ -171,4 +172,46 @@ test('composition qualification passes original encoded whole source bytes to th
  await f.saveProjection(projection);const result=composeAuthorities(f.config,f.reader);
  assert.deepEqual(JSON.parse(result['runtime-envelope.json']).additiveRelease.base_reference,f.current);
  assert.deepEqual(f.reader.read(f.sidecar.logical_asset_map.owner_roster),f.reader.read(f.preparationConfig.owner_roster));
+});
+
+// Exercise both production boundaries, substituting only whole immutable Git
+// transport with the bounded fixture reader. No package declarations or final
+// selector are synthesized after finalizeDelivery emits the actual products.
+test('actual finalizer declares a fresh M projection and its exact seven-body output is consumable by ordinary packaging',async t=>{
+ const f=await compositionFixture(t,{prior:'current'}),prefix='coordination/engineering/metadata-finalize-consumption/';
+ f.reader.git=(...args)=>{assert.deepEqual(args,['rev-parse','HEAD']);return Buffer.from(commit);};
+ f.reader.hasPath=(version,name)=>{assert.equal(version,commit);return f.pins.has(name);};
+ const originalManifest=Buffer.from(f.reader.read(f.preparationConfig.native_manifest)),originalRoster=Buffer.from(f.reader.read(f.preparationConfig.owner_roster));
+ const projectionPin=await f.put(prefix+'reference-metadata.json',f.projection);f.selection.reference_projection=plain(projectionPin);
+ const selector=await f.put('data/ownership-selection.json',f.selection),baselinePin=f.pins.get('.github/package-inputs.json'),baseline=f.reader.json(baselinePin);
+ assert.ok(!baseline.inputs.some(name=>name===projectionPin.path||name.endsWith('/')&&projectionPin.path.startsWith(name)));
+ const custody=await f.put('inputs/finalize-custody.json',{whole:'retained custody'}),operating=await f.put('inputs/finalize-operating.json',{execution_custody:{terminal:custody}});
+ const rebind=await f.put('inputs/finalize-rebind.json',{request:custody,facts:custody,publication:custody,result:custody,operating});
+ const ledger={...f.priorLedger,current_rebind:rebind},ledgerPin=await f.put(prefix+'selected-ledger.json',jsonBytes(ledger));
+ const envelope={...structuredClone(f.envelope),ledger:{...f.envelope.ledger,bytes:ledgerPin.bytes,sha256:ledgerPin.sha256}};
+ const effective={...f.current,id:'geography:finalized-effective',footprints_sha256:additiveReleaseFootprintDigest(f.current,bindAdditiveLedgerFeatures(f.currentFeatures,ledger,envelope,f.current))};
+ envelope.effective_reference=effective;
+ const patchPin=await f.put(prefix+'patch.json',jsonBytes({...f.priorPatch,base_reference:f.current,effective_reference:effective,ledger_sha256:ledgerPin.sha256}));
+ envelope.patch={...envelope.patch,bytes:patchPin.bytes,sha256:patchPin.sha256};
+ const runtimeEnvelope=await f.put(prefix+'runtime-envelope.json',{reference_release:effective,additiveRelease:envelope}),sidecarPath=prefix+'selection-sidecar.json';
+ const config={version:1,selector,package_inputs:baselinePin,new_prefix:prefix,sidecar_output:sidecarPath,registry:f.sidecar.authority_registry,ledger:ledgerPin,selected_ledger:ledgerPin,rebind,patch:patchPin,runtime_envelope:runtimeEnvelope};
+ const products=finalizeDelivery(config,f.reader),definition=JSON.parse(products['package-inputs.json']),selection=JSON.parse(products['ownership-selection.json']),sidecar=JSON.parse(products['selection-sidecar.json']);
+ assert.deepEqual(definition.inputs.slice(0,baseline.inputs.length),baseline.inputs);
+ assert.ok(definition.inputs.includes(projectionPin.path),'The actual consumed projection must be declared, beyond preparation evidence');
+ assert.ok(JSON.parse(products['package-roles.json']).paths.some(pin=>pin.path===projectionPin.path));
+ const currentPaths=[sidecarPath,runtimeEnvelope.path,...Object.values(sidecar.logical_asset_map).map(pin=>pin.path),projectionPin.path];
+ assert.equal(new Set(currentPaths).size,7);
+ assert.deepEqual(definition.inputs.slice(baseline.inputs.length),currentPaths.filter(name=>!baseline.inputs.some(old=>old===name||old.endsWith('/')&&name.startsWith(old))).sort());
+ assert.deepEqual(selection.reference_projection,plain(projectionPin));assert.equal(selection.release_id,f.native.id);assert.deepEqual(sidecar.base_selection,scientificNativeSelection(f.selection));
+ await f.put(sidecarPath,products['selection-sidecar.json']);await f.put('data/ownership-selection.json',products['ownership-selection.json']);await f.put('.github/package-inputs.json',products['package-inputs.json']);
+ const args={root:f.root,selectedGrid:{manifest:f.manifest,sha256:f.selection.sha256,bounds:originalRoster},geographicRelease:f.current,features:f.currentFeatures};
+ const result=await prepareCurrentSelectedAdditive(args);
+ assert.equal(result.input_inventory.length,7);assert.deepEqual(result.input_inventory.map(pin=>pin.path).sort(),[...currentPaths].sort());
+ assert.deepEqual(result.referenceMetadata.reference,f.current);assert.deepEqual(result.referenceMetadata.native_reference,f.native);assert.deepEqual(result.additiveRelease.base_reference,f.current);assert.equal(f.currentFeatures[0].properties.parent_id,'Q');assert.equal(f.owners[0].province_id,'P');
+ const destination=path.join(f.root,'finalized-package');await result.publish(destination);
+ assert.deepEqual(await fs.readFile(path.join(destination,result.referenceMetadata.asset.path)),f.reader.read(projectionPin));
+ assert.deepEqual(await fs.readFile(path.join(destination,result.additiveRelease.base_manifest.path)),originalManifest);assert.deepEqual(await fs.readFile(path.join(destination,result.additiveRelease.owner_roster.path)),originalRoster);
+ await f.put('.github/package-inputs.json',{...definition,inputs:definition.inputs.filter(name=>name!==projectionPin.path)});
+ await assert.rejects(prepareCurrentSelectedAdditive(args),/Undeclared current additive input/);
+ assert.deepEqual(await fs.readFile(path.join(f.root,f.preparationConfig.native_manifest.path)),originalManifest);assert.deepEqual(await fs.readFile(path.join(f.root,f.preparationConfig.owner_roster.path)),originalRoster);
 });
