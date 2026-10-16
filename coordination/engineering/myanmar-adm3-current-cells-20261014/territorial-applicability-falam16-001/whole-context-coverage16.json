@@ -1,0 +1,65 @@
+{
+  "owner": 30341,
+  "target_id": "gb:MMR:ADM3:66882298B80362939759062",
+  "original_source_evidence_body": ".cache/mmr7479-source-evidence-execution-001/products/north-block26-27/source-evidence.json",
+  "source_target_pointer": "/targets/25",
+  "whole_original_negative_operands": 7,
+  "physical_result_pointer": "/results/62",
+  "stage_pointer": "/62",
+  "physical_issues": [],
+  "source_queries": [
+    0
+  ],
+  "support_classes": [
+    "mapped_land_support",
+    "mapped_inland_water_support",
+    "outside_mapped_L1_context",
+    "hierarchy_disagreements",
+    "missing_reconstruction",
+    "extra_reconstruction",
+    "contradictory_land_water_support"
+  ],
+  "physical_input": {
+    "bytes": 1063861,
+    "commit": "68cd14edf82d22aed380d57afe5cde0a3ebe318b",
+    "git_blob_oid": "9b05e3bdb59305458adb4a6318abddaa16792545",
+    "mode": "100644",
+    "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/remaining7479-whole-physical-001/original-stage-inputs.json",
+    "sha256": "de4fc9a0c00cd74817afb314f77740ea02ee7bcf3566c2fe1d38c4bde52a2d97"
+  },
+  "physical_evidence": {
+    "bytes": 2090876,
+    "commit": "e9b1b8696557d673583460d27e790087a2f60809",
+    "git_blob_oid": "908e8c9d8157e84188e5d64c528fa40479aa9215",
+    "mode": "100644",
+    "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/remaining7479-whole-physical-001/physical-result-001/whole-target-support.json",
+    "sha256": "2b404937f2f6629905c208e97718f766a01ee8bded8d0f5b1b3bb694cc9947f9"
+  },
+  "physical_reproduction": {
+    "bytes": 48543,
+    "commit": "596c3449500601e2f82d6052f5d0b9513dd72bfd",
+    "git_blob_oid": "4dea98fd3d75a70327f1f1313619c44eb113971f",
+    "mode": "100644",
+    "path": "scripts/qualify-source-cohort.py",
+    "sha256": "58ef81739b264085b2997be7baa3df03ba6bb673f91a160176efd79b71fec081"
+  },
+  "all_original_global_headers_retained": true,
+  "whole_source_family330": [
+    {
+      "parts": [
+        {
+          "bytes": 1396414,
+          "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+          "decoded_bytes": 4205367,
+          "decoded_sha256": "94c0c9af839094257d13a6fe6590feddb2dcb04540d87e58b656c9f000fb92a2",
+          "git_blob_oid": "6a91fcb22b44ae00401a0068a6c3e62bfed62374",
+          "mode": "100644",
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz",
+          "sha256": "57de50a588f418601412bb7a34cc2f43a3fd6d7d6f16635cb41b95e5ae505db6"
+        }
+      ],
+      "source_id": "gb:MMR:ADM3"
+    }
+  ],
+  "new_physical_needed": false
+}
