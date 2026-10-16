@@ -214,7 +214,7 @@ export function nativeOnlyComponent(row, hashValue) {
   return true;
 }
 export function deriveSourceTargetNativeDelta({targets, sourceFeatures, coverageFeatures,
-  territorialExclusions = [], ownerRows, size, latitudes, rowStart, rowEnd, diagnosticRows, coverageFeatureGroups,
+  territorialExclusions = [], territorialApplicability, ownerRows, size, latitudes, rowStart, rowEnd, diagnosticRows, coverageFeatureGroups,
   coverageCentres, coverageCentreGroups}) {
   require(Array.isArray(targets) && targets.length > 0, 'Missing source targets');
   const targetByOwner = new Map(), targetById = new Map();
@@ -271,6 +271,36 @@ export function deriveSourceTargetNativeDelta({targets, sourceFeatures, coverage
       validateCoverage(features,centres);
     }
   } else require(coverageCentreGroups===undefined,'Centre groups require coverage groups');
+  // The closed source reader authenticates adoption and complete geometries.
+  // This numerical seam can contextualize only one original member/operand
+  // interior contact at one native centre; it never suppresses a boundary.
+  const contextual=new Map();
+  if(territorialApplicability!==undefined){
+    require(Array.isArray(territorialApplicability)&&territorialApplicability.length>0,
+      'Missing territorial applicability records');
+    for(const record of territorialApplicability){
+      require(record&&Object.keys(record).sort().join(',')===
+        'decision_sha256,exclusion_geometry_sha256,exclusion_index,operand_sha256,pixelIndex,source_id,x,y'
+        &&Number.isSafeInteger(record.y)&&record.y>=rowStart&&record.y<rowEnd
+        &&Number.isSafeInteger(record.x)&&record.x>=0&&record.x<size
+        &&Number.isSafeInteger(record.exclusion_index)&&record.exclusion_index>=0
+        &&/^[a-f0-9]{64}$/.test(record.decision_sha256)
+        &&/^[a-f0-9]{64}$/.test(record.operand_sha256)
+        &&/^[a-f0-9]{64}$/.test(record.exclusion_geometry_sha256),
+      'Invalid territorial applicability record');
+      const source=sourceIds.get(record.source_id),negative=territorialExclusions[record.exclusion_index];
+      require(source?.owner===record.pixelIndex&&targetByOwner.get(record.pixelIndex)?.id===source.id
+        &&negative?.pixelIndex===record.pixelIndex
+        &&negative.operand_sha256===record.operand_sha256
+        &&negative.geometry_sha256===record.exclusion_geometry_sha256,
+      'Territorial applicability member or operand differs');
+      const key=JSON.stringify([record.source_id,record.pixelIndex,record.y,record.x,record.exclusion_index]);
+      require(!contextual.has(key),'Duplicate territorial applicability contact');contextual.set(key,record);
+    }
+  }
+  const contactFor=(member,owner,y,x,index)=>contextual.get(JSON.stringify([member,owner,y,x,index]))
+    ??[...contextual.values()].find(record=>record.source_id===member&&record.pixelIndex===owner
+      &&record.y===y&&record.x===x&&record.operand_sha256===territorialExclusions[index].operand_sha256);
   const options = {size, latitudes, rowStart, rowEnd};
   const scan = (features, masks = false) => {
     if (!features.length) return {rows:new Map(),ties:[]};
@@ -311,7 +341,17 @@ export function deriveSourceTargetNativeDelta({targets, sourceFeatures, coverage
     return coverage;
   };
   let coverage=withCentres(scanCoverage(coverageFeatures),coverageCentres);
-  const excluded=scan(territorialExclusions,true);
+  let excluded;
+  if(territorialApplicability===undefined)excluded=scan(territorialExclusions,true);
+  else{
+    // Preserve every complete negative and its ordinal instead of losing
+    // operand identity in the owner union. The original ties remain vetoes.
+    excluded=scan(territorialExclusions.map((feature,i)=>({...feature,id:String(i),pixelIndex:i+1})));
+    for(const spans of excluded.rows.values())for(const span of spans){
+      span.exclusion_index=span.owner-1;span.owner=territorialExclusions[span.exclusion_index].pixelIndex;
+    }
+    for(const tie of excluded.ties){tie.exclusion_index=tie.owner-1;tie.owner=territorialExclusions[tie.exclusion_index].pixelIndex;}
+  }
   const current = new Map();
   for (const row of ownerRows) {
     require(Number.isSafeInteger(row.y) && row.y >= rowStart && row.y < rowEnd
@@ -356,12 +396,13 @@ export function deriveSourceTargetNativeDelta({targets, sourceFeatures, coverage
     }
     const counts = {assigned_cells: 0, already_owned_cells: 0, ambiguous_owner_cells: 0,
       unsupported_coverage_cells: 0, territorial_exclusion_cells: 0, boundary_cells: 0};
-    const rows = [], perTarget = new Map(targets.map(target => [target.id, 0]));
+    const rows = [], perTarget = new Map(targets.map(target => [target.id, 0])),contextualContacts=new Map();
     for (let y = rowStart; y < rowEnd; y++) {
       const source = sources.rows.get(y) ?? [], support = coverage.rows.get(y) ?? [];
       const holes = excluded.rows.get(y) ?? [], owned = current.get(y), boundary = ties.get(y) ?? [];
       const cuts = new Set();
       for (const run of requested.get(y) ?? []) { cuts.add(run[0]); cuts.add(run[1]); }
+      for(const record of contextual.values())if(record.y===y){cuts.add(record.x);cuts.add(record.x+1);}
       for (const run of [...source, ...support, ...holes]) { cuts.add(run.start); cuts.add(run.end); }
       for (const run of [...owned, ...boundary]) { cuts.add(run[0]); cuts.add(run[1]); }
       const points = [...cuts].sort((a, b) => a - b), runs = [], trace = [];
@@ -372,9 +413,16 @@ export function deriveSourceTargetNativeDelta({targets, sourceFeatures, coverage
         if (boundary.some(run => run[0] <= start && start < run[1])) return {reason: 'boundary_cells'};
         if (owners.size !== 1) return {reason: 'ambiguous_owner_cells'};
         const owner = [...owners][0];
-        if (holes.some(run => run.owner === owner && run.start <= start && start < run.end))
-          return {reason: 'territorial_exclusion_cells'};
         const activeMembers = activeSourceMembers(source,owner,start);
+        let territorial=false;
+        for(const run of holes.filter(run=>run.owner===owner&&run.start<=start&&start<run.end)){
+          const matches=[...activeMembers].map(member=>contactFor(member,owner,y,start,run.exclusion_index)).filter(Boolean);
+          // Every active member needs its own adopted interpretation. A
+          // sibling's interpretation cannot clear this shared owner's veto.
+          if(matches.length!==activeMembers.size)territorial=true;
+          else for(const record of matches)contextualContacts.set(JSON.stringify(record),{...record,kind:'interior'});
+        }
+        if(territorial)return {reason:'territorial_exclusion_cells'};
         if (!support.some(run => run.owner === owner && activeMembers.has(run.source_id) && run.start <= start && start < run.end))
           return {reason: 'unsupported_coverage_cells'};
         return {reason: 'assigned_cells', owner};
@@ -400,8 +448,29 @@ export function deriveSourceTargetNativeDelta({targets, sourceFeatures, coverage
       if (runs.length) rows.push({y, runs});
       if (trace.length) diagnostic.push({y, runs: trace});
     }
+    const territorialContacts=[];
+    if(territorialApplicability!==undefined){
+      const points=new Map([...contextual.values()].map(record=>[
+        JSON.stringify([record.source_id,record.pixelIndex,record.y,record.x]),record]));
+      for(const point of points.values())for(const [exclusion_index,negative]of territorialExclusions.entries()){
+        if(negative.pixelIndex!==point.pixelIndex)continue;
+        const kinds=[];
+        if((excluded.rows.get(point.y)??[]).some(run=>run.exclusion_index===exclusion_index
+          &&run.start<=point.x&&point.x<run.end))kinds.push('interior');
+        for(const tie of excluded.ties)if(tie.exclusion_index===exclusion_index&&tie.y===point.y
+          &&(tie.start??tie.x)<=point.x&&point.x<(tie.end??tie.x+1))kinds.push(tie.kind);
+        const record=contactFor(point.source_id,point.pixelIndex,point.y,point.x,exclusion_index);
+        for(const kind of new Set(kinds))territorialContacts.push({source_id:point.source_id,pixelIndex:point.pixelIndex,
+          y:point.y,x:point.x,exclusion_index,exclusion_geometry_sha256:negative.geometry_sha256,kind,
+          ...(negative.operand_sha256?{operand_sha256:negative.operand_sha256}:{}),
+          resolution:kind!=='interior'?'retained-boundary-veto'
+            :record&&contextualContacts.has(JSON.stringify(record))?'contextual':'retained-territorial-veto',
+          ...(record?{decision_sha256:record.decision_sha256}:{})});
+      }
+    }
     return {rows, ...counts, removed_cells: 0, reassigned_cells: 0,
       targets: targets.map(target => ({...target, native_cells: perTarget.get(target.id)})),
+      ...(territorialApplicability===undefined?{}:{territorial_contacts:territorialContacts}),
       ...(diagnosticRows === undefined ? {} : {diagnostic_rows: diagnostic})};
   };
   const result=evaluate(coverage,diagnosticRows);

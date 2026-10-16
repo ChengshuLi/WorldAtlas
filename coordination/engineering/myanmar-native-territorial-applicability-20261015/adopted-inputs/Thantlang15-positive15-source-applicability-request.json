@@ -1,0 +1,2569 @@
+{
+  "kind": "exact15-actual-foreign-ADM-conflict-source-choice-request",
+  "count": 15,
+  "source_only": true,
+  "source": {
+    "title": "Myanmar: Thantlang Township, Chin State (20 April 2020) [EN/MY]",
+    "producer": "Myanmar Information Management Unit (MIMU)",
+    "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-thantlang-township-chin-state-20-april-2020-enmy",
+    "body_url": "https://reliefweb.int/attachments/34c913de-a0b5-40ef-8315-ac7e559a6917/Tsp_Map_VL_Thantlang_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+    "local_pdf": "MIMU2020-Thantlang.pdf",
+    "bytes": 5045598,
+    "sha256": "d14128e5e45d3b331d9bb154490242c74ba18f42e0e1fe68d59854e5e7aad3bc",
+    "printed_production_date": "2020-04-20",
+    "map_id": "MIMU154v05",
+    "projection_datum": "Geographic/WGS84",
+    "boundary_source_printed": "MIMU",
+    "map_country_context": "India is labelled across the western international border; Thantlang is the named Myanmar township.",
+    "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+  },
+  "requirements": "Consequentially review exact panels. If supported, explicitly choose this dated township border depiction over every contrary actual administrative/reference input listed per key, retaining raw contacts/pins as contextual disagreement. No country, state-name or administrative-level blanket priority.",
+  "native_accepted_repairs": 0,
+  "cleared_holds": 0,
+  "points": [
+    {
+      "local_index": 56,
+      "owner": 30146,
+      "y": 113998,
+      "x": 198890,
+      "original_interval": 1372,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/1262/runs/0"
+      },
+      "inside": [
+        0,
+        2,
+        10
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.1116163041737,
+      "longitude_exact_rational": "12205350/131083",
+      "latitude_degrees_north": 22.830701515509773,
+      "latitude_native_f64le_hex": "24dac1daa8d43640",
+      "registered_pdf_point": [
+        446.6965004586091,
+        1882.2673290977255
+      ],
+      "render_scale1_pixel": [
+        447,
+        710
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        176,
+        178,
+        154
+      ],
+      "name": "Thantlang",
+      "review_order_rank": 0,
+      "source_point_interpretation": "Registered centre is depicted on the named Thantlang/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Thantlang-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 88,
+          "boundary": 0
+        },
+        {
+          "index": 2,
+          "hash": "dc80ff501425e87baeaf2c8d6a46459a79e4ec3216ff6b33e32c18d2dac62221",
+          "registry_index": 6,
+          "id": "gb:IND:ADM1:1811400B49281905528064",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/18",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM1-000.bin.gz",
+              "git_blob_oid": "6c717053e0e9893cbe32ee9e09e4cba76760798a",
+              "mode": "100644",
+              "bytes": 2009868,
+              "sha256": "4a716fa04288d6742b1f43031ea90a26998c86becb1389f46acd3200b3acb1e0",
+              "decoded_bytes": 5103747,
+              "decoded_sha256": "4c63fe43294a391e8f2de4e9f86f3edb60f8688275b9fee90c61fb2aa0c26061"
+            }
+          ],
+          "inside": 39,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 36797,
+            "family_index": 154,
+            "source_id": "gb:IND:ADM1:1811400B49281905528064",
+            "ordinal": 18,
+            "owners": [],
+            "name": "Mizoram",
+            "geometry_status": "raw-native-supported"
+          }
+        },
+        {
+          "index": 10,
+          "hash": "2aa725a40846f769d494cf184d7e70dc0ee16f616c533a9cafd42fe09744f722",
+          "registry_index": 89,
+          "id": "gb:IND:ADM3:7132399B64543007464155",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4025",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 61,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70771,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B64543007464155",
+            "ordinal": 4025,
+            "owners": [],
+            "name": "Hnahthial",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Thantlang Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-thantlang-township-chin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/34c913de-a0b5-40ef-8315-ac7e559a6917/Tsp_Map_VL_Thantlang_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Thantlang.pdf",
+        "bytes": 5045598,
+        "sha256": "d14128e5e45d3b331d9bb154490242c74ba18f42e0e1fe68d59854e5e7aad3bc",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Thantlang is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2034.66968994135,
+          "intercept_points": -189004.68697509242,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.0010192871268372983,
+          "rms_residual_pdf_points": 0.0005740550279479829,
+          "alternating_label_holdout_max_pdf_points": 0.0015258788771461695
+        },
+        "N": {
+          "slope_points_per_degree": 2034.371808733262,
+          "intercept_points": -44563.86820765912,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.09247698103717994,
+          "rms_residual_pdf_points": 0.0588526968128855,
+          "alternating_label_holdout_max_pdf_points": 0.09908040365553461
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            93.0,
+            93.66666666666667
+          ],
+          "target_degrees": 93.1116163041737,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            22.166666666666668,
+            23.0
+          ],
+          "target_degrees": 22.830701515509773,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Thantlang-056.png",
+      "review_contact_sheet": "102-contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 62,
+      "owner": 30146,
+      "y": 114001,
+      "x": 198889,
+      "original_interval": 1376,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/1265/runs/0"
+      },
+      "inside": [
+        0,
+        10
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.11024312839956,
+      "longitude_exact_rational": "12205170/131083",
+      "latitude_degrees_north": 22.826904678064995,
+      "latitude_native_f64le_hex": "d5326506b0d33640",
+      "registered_pdf_point": [
+        443.90254133203416,
+        1874.5431500377235
+      ],
+      "render_scale1_pixel": [
+        444,
+        717
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        208,
+        210,
+        186
+      ],
+      "name": "Thantlang",
+      "review_order_rank": 1,
+      "source_point_interpretation": "Registered centre is depicted on the named Thantlang/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Thantlang-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 88,
+          "boundary": 0
+        },
+        {
+          "index": 10,
+          "hash": "2aa725a40846f769d494cf184d7e70dc0ee16f616c533a9cafd42fe09744f722",
+          "registry_index": 89,
+          "id": "gb:IND:ADM3:7132399B64543007464155",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4025",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 61,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70771,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B64543007464155",
+            "ordinal": 4025,
+            "owners": [],
+            "name": "Hnahthial",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Thantlang Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-thantlang-township-chin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/34c913de-a0b5-40ef-8315-ac7e559a6917/Tsp_Map_VL_Thantlang_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Thantlang.pdf",
+        "bytes": 5045598,
+        "sha256": "d14128e5e45d3b331d9bb154490242c74ba18f42e0e1fe68d59854e5e7aad3bc",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Thantlang is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2034.66968994135,
+          "intercept_points": -189004.68697509242,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.0010192871268372983,
+          "rms_residual_pdf_points": 0.0005740550279479829,
+          "alternating_label_holdout_max_pdf_points": 0.0015258788771461695
+        },
+        "N": {
+          "slope_points_per_degree": 2034.371808733262,
+          "intercept_points": -44563.86820765912,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.09247698103717994,
+          "rms_residual_pdf_points": 0.0588526968128855,
+          "alternating_label_holdout_max_pdf_points": 0.09908040365553461
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            93.0,
+            93.66666666666667
+          ],
+          "target_degrees": 93.11024312839956,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            22.166666666666668,
+            23.0
+          ],
+          "target_degrees": 22.826904678064995,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Thantlang-062.png",
+      "review_contact_sheet": "102-contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 52,
+      "owner": 30146,
+      "y": 113996,
+      "x": 198891,
+      "original_interval": 1368,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/1260/runs/0"
+      },
+      "inside": [
+        0,
+        10
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.11298947994781,
+      "longitude_exact_rational": "12205530/131083",
+      "latitude_degrees_north": 22.833232681628672,
+      "latitude_native_f64le_hex": "b48dadbc4ed53640",
+      "registered_pdf_point": [
+        449.490459585184,
+        1887.4166620932301
+      ],
+      "render_scale1_pixel": [
+        449,
+        705
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        210,
+        212,
+        188
+      ],
+      "name": "Thantlang",
+      "review_order_rank": 2,
+      "source_point_interpretation": "Registered centre is depicted on the named Thantlang/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Thantlang-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 88,
+          "boundary": 0
+        },
+        {
+          "index": 10,
+          "hash": "2aa725a40846f769d494cf184d7e70dc0ee16f616c533a9cafd42fe09744f722",
+          "registry_index": 89,
+          "id": "gb:IND:ADM3:7132399B64543007464155",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4025",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 61,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70771,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B64543007464155",
+            "ordinal": 4025,
+            "owners": [],
+            "name": "Hnahthial",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Thantlang Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-thantlang-township-chin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/34c913de-a0b5-40ef-8315-ac7e559a6917/Tsp_Map_VL_Thantlang_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Thantlang.pdf",
+        "bytes": 5045598,
+        "sha256": "d14128e5e45d3b331d9bb154490242c74ba18f42e0e1fe68d59854e5e7aad3bc",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Thantlang is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2034.66968994135,
+          "intercept_points": -189004.68697509242,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.0010192871268372983,
+          "rms_residual_pdf_points": 0.0005740550279479829,
+          "alternating_label_holdout_max_pdf_points": 0.0015258788771461695
+        },
+        "N": {
+          "slope_points_per_degree": 2034.371808733262,
+          "intercept_points": -44563.86820765912,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.09247698103717994,
+          "rms_residual_pdf_points": 0.0588526968128855,
+          "alternating_label_holdout_max_pdf_points": 0.09908040365553461
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            93.0,
+            93.66666666666667
+          ],
+          "target_degrees": 93.11298947994781,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            22.166666666666668,
+            23.0
+          ],
+          "target_degrees": 22.833232681628672,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Thantlang-052.png",
+      "review_contact_sheet": "102-contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 60,
+      "owner": 30146,
+      "y": 114000,
+      "x": 198889,
+      "original_interval": 1375,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/1264/runs/0"
+      },
+      "inside": [
+        0,
+        2,
+        10
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.11024312839956,
+      "longitude_exact_rational": "12205170/131083",
+      "latitude_degrees_north": 22.828170302314767,
+      "latitude_native_f64le_hex": "daf50bf802d43640",
+      "registered_pdf_point": [
+        443.90254133203416,
+        1877.1179003319048
+      ],
+      "render_scale1_pixel": [
+        444,
+        715
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        163,
+        165,
+        141
+      ],
+      "name": "Thantlang",
+      "review_order_rank": 3,
+      "source_point_interpretation": "Registered centre is depicted on the named Thantlang/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Thantlang-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 88,
+          "boundary": 0
+        },
+        {
+          "index": 2,
+          "hash": "dc80ff501425e87baeaf2c8d6a46459a79e4ec3216ff6b33e32c18d2dac62221",
+          "registry_index": 6,
+          "id": "gb:IND:ADM1:1811400B49281905528064",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/18",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM1-000.bin.gz",
+              "git_blob_oid": "6c717053e0e9893cbe32ee9e09e4cba76760798a",
+              "mode": "100644",
+              "bytes": 2009868,
+              "sha256": "4a716fa04288d6742b1f43031ea90a26998c86becb1389f46acd3200b3acb1e0",
+              "decoded_bytes": 5103747,
+              "decoded_sha256": "4c63fe43294a391e8f2de4e9f86f3edb60f8688275b9fee90c61fb2aa0c26061"
+            }
+          ],
+          "inside": 39,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 36797,
+            "family_index": 154,
+            "source_id": "gb:IND:ADM1:1811400B49281905528064",
+            "ordinal": 18,
+            "owners": [],
+            "name": "Mizoram",
+            "geometry_status": "raw-native-supported"
+          }
+        },
+        {
+          "index": 10,
+          "hash": "2aa725a40846f769d494cf184d7e70dc0ee16f616c533a9cafd42fe09744f722",
+          "registry_index": 89,
+          "id": "gb:IND:ADM3:7132399B64543007464155",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4025",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 61,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70771,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B64543007464155",
+            "ordinal": 4025,
+            "owners": [],
+            "name": "Hnahthial",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Thantlang Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-thantlang-township-chin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/34c913de-a0b5-40ef-8315-ac7e559a6917/Tsp_Map_VL_Thantlang_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Thantlang.pdf",
+        "bytes": 5045598,
+        "sha256": "d14128e5e45d3b331d9bb154490242c74ba18f42e0e1fe68d59854e5e7aad3bc",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Thantlang is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2034.66968994135,
+          "intercept_points": -189004.68697509242,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.0010192871268372983,
+          "rms_residual_pdf_points": 0.0005740550279479829,
+          "alternating_label_holdout_max_pdf_points": 0.0015258788771461695
+        },
+        "N": {
+          "slope_points_per_degree": 2034.371808733262,
+          "intercept_points": -44563.86820765912,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.09247698103717994,
+          "rms_residual_pdf_points": 0.0588526968128855,
+          "alternating_label_holdout_max_pdf_points": 0.09908040365553461
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            93.0,
+            93.66666666666667
+          ],
+          "target_degrees": 93.11024312839956,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            22.166666666666668,
+            23.0
+          ],
+          "target_degrees": 22.828170302314767,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Thantlang-060.png",
+      "review_contact_sheet": "102-contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 25,
+      "owner": 30146,
+      "y": 113901,
+      "x": 198912,
+      "original_interval": 1320,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/1224/runs/0"
+      },
+      "inside": [
+        0,
+        10
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.1418261712045,
+      "longitude_exact_rational": "12209310/131083",
+      "latitude_degrees_north": 22.953408769337816,
+      "latitude_native_f64le_hex": "8906dc9812f43640",
+      "registered_pdf_point": [
+        508.1636012433446,
+        2131.8995070125675
+      ],
+      "render_scale1_pixel": [
+        508,
+        460
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        241,
+        243,
+        219
+      ],
+      "name": "Thantlang",
+      "review_order_rank": 4,
+      "source_point_interpretation": "Registered centre is depicted on the named Thantlang/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Thantlang-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 88,
+          "boundary": 0
+        },
+        {
+          "index": 10,
+          "hash": "2aa725a40846f769d494cf184d7e70dc0ee16f616c533a9cafd42fe09744f722",
+          "registry_index": 89,
+          "id": "gb:IND:ADM3:7132399B64543007464155",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4025",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 61,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70771,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B64543007464155",
+            "ordinal": 4025,
+            "owners": [],
+            "name": "Hnahthial",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Thantlang Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-thantlang-township-chin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/34c913de-a0b5-40ef-8315-ac7e559a6917/Tsp_Map_VL_Thantlang_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Thantlang.pdf",
+        "bytes": 5045598,
+        "sha256": "d14128e5e45d3b331d9bb154490242c74ba18f42e0e1fe68d59854e5e7aad3bc",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Thantlang is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2034.66968994135,
+          "intercept_points": -189004.68697509242,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.0010192871268372983,
+          "rms_residual_pdf_points": 0.0005740550279479829,
+          "alternating_label_holdout_max_pdf_points": 0.0015258788771461695
+        },
+        "N": {
+          "slope_points_per_degree": 2034.371808733262,
+          "intercept_points": -44563.86820765912,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.09247698103717994,
+          "rms_residual_pdf_points": 0.0588526968128855,
+          "alternating_label_holdout_max_pdf_points": 0.09908040365553461
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            93.0,
+            93.66666666666667
+          ],
+          "target_degrees": 93.1418261712045,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            22.166666666666668,
+            23.0
+          ],
+          "target_degrees": 22.953408769337816,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Thantlang-025.png",
+      "review_contact_sheet": "102-contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 45,
+      "owner": 30146,
+      "y": 113993,
+      "x": 198892,
+      "original_interval": 1364,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/1257/runs/0"
+      },
+      "inside": [
+        0,
+        2,
+        10
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.11436265572195,
+      "longitude_exact_rational": "12205710/131083",
+      "latitude_degrees_north": 22.837029342530432,
+      "latitude_native_f64le_hex": "e9f5138e47d63640",
+      "registered_pdf_point": [
+        452.284418711788,
+        1895.140481999093
+      ],
+      "render_scale1_pixel": [
+        452,
+        697
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        186,
+        188,
+        164
+      ],
+      "name": "Thantlang",
+      "review_order_rank": 5,
+      "source_point_interpretation": "Registered centre is depicted on the named Thantlang/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Thantlang-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 88,
+          "boundary": 0
+        },
+        {
+          "index": 2,
+          "hash": "dc80ff501425e87baeaf2c8d6a46459a79e4ec3216ff6b33e32c18d2dac62221",
+          "registry_index": 6,
+          "id": "gb:IND:ADM1:1811400B49281905528064",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/18",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM1-000.bin.gz",
+              "git_blob_oid": "6c717053e0e9893cbe32ee9e09e4cba76760798a",
+              "mode": "100644",
+              "bytes": 2009868,
+              "sha256": "4a716fa04288d6742b1f43031ea90a26998c86becb1389f46acd3200b3acb1e0",
+              "decoded_bytes": 5103747,
+              "decoded_sha256": "4c63fe43294a391e8f2de4e9f86f3edb60f8688275b9fee90c61fb2aa0c26061"
+            }
+          ],
+          "inside": 39,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 36797,
+            "family_index": 154,
+            "source_id": "gb:IND:ADM1:1811400B49281905528064",
+            "ordinal": 18,
+            "owners": [],
+            "name": "Mizoram",
+            "geometry_status": "raw-native-supported"
+          }
+        },
+        {
+          "index": 10,
+          "hash": "2aa725a40846f769d494cf184d7e70dc0ee16f616c533a9cafd42fe09744f722",
+          "registry_index": 89,
+          "id": "gb:IND:ADM3:7132399B64543007464155",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4025",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 61,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70771,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B64543007464155",
+            "ordinal": 4025,
+            "owners": [],
+            "name": "Hnahthial",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Thantlang Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-thantlang-township-chin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/34c913de-a0b5-40ef-8315-ac7e559a6917/Tsp_Map_VL_Thantlang_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Thantlang.pdf",
+        "bytes": 5045598,
+        "sha256": "d14128e5e45d3b331d9bb154490242c74ba18f42e0e1fe68d59854e5e7aad3bc",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Thantlang is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2034.66968994135,
+          "intercept_points": -189004.68697509242,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.0010192871268372983,
+          "rms_residual_pdf_points": 0.0005740550279479829,
+          "alternating_label_holdout_max_pdf_points": 0.0015258788771461695
+        },
+        "N": {
+          "slope_points_per_degree": 2034.371808733262,
+          "intercept_points": -44563.86820765912,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.09247698103717994,
+          "rms_residual_pdf_points": 0.0588526968128855,
+          "alternating_label_holdout_max_pdf_points": 0.09908040365553461
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            93.0,
+            93.66666666666667
+          ],
+          "target_degrees": 93.11436265572195,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            22.166666666666668,
+            23.0
+          ],
+          "target_degrees": 22.837029342530432,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Thantlang-045.png",
+      "review_contact_sheet": "102-contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 54,
+      "owner": 30146,
+      "y": 113997,
+      "x": 198890,
+      "original_interval": 1370,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/1261/runs/0"
+      },
+      "inside": [
+        0,
+        10
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.1116163041737,
+      "longitude_exact_rational": "12205350/131083",
+      "latitude_degrees_north": 22.831967104453994,
+      "latitude_native_f64le_hex": "4cfad0cbfbd43640",
+      "registered_pdf_point": [
+        446.6965004586091,
+        1884.8420075672911
+      ],
+      "render_scale1_pixel": [
+        447,
+        707
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        209,
+        211,
+        187
+      ],
+      "name": "Thantlang",
+      "review_order_rank": 6,
+      "source_point_interpretation": "Registered centre is depicted on the named Thantlang/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Thantlang-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 88,
+          "boundary": 0
+        },
+        {
+          "index": 10,
+          "hash": "2aa725a40846f769d494cf184d7e70dc0ee16f616c533a9cafd42fe09744f722",
+          "registry_index": 89,
+          "id": "gb:IND:ADM3:7132399B64543007464155",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4025",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 61,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70771,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B64543007464155",
+            "ordinal": 4025,
+            "owners": [],
+            "name": "Hnahthial",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Thantlang Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-thantlang-township-chin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/34c913de-a0b5-40ef-8315-ac7e559a6917/Tsp_Map_VL_Thantlang_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Thantlang.pdf",
+        "bytes": 5045598,
+        "sha256": "d14128e5e45d3b331d9bb154490242c74ba18f42e0e1fe68d59854e5e7aad3bc",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Thantlang is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2034.66968994135,
+          "intercept_points": -189004.68697509242,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.0010192871268372983,
+          "rms_residual_pdf_points": 0.0005740550279479829,
+          "alternating_label_holdout_max_pdf_points": 0.0015258788771461695
+        },
+        "N": {
+          "slope_points_per_degree": 2034.371808733262,
+          "intercept_points": -44563.86820765912,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.09247698103717994,
+          "rms_residual_pdf_points": 0.0588526968128855,
+          "alternating_label_holdout_max_pdf_points": 0.09908040365553461
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            93.0,
+            93.66666666666667
+          ],
+          "target_degrees": 93.1116163041737,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            22.166666666666668,
+            23.0
+          ],
+          "target_degrees": 22.831967104453994,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Thantlang-054.png",
+      "review_contact_sheet": "102-contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 49,
+      "owner": 30146,
+      "y": 113995,
+      "x": 198891,
+      "original_interval": 1367,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/1259/runs/0"
+      },
+      "inside": [
+        0,
+        10
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.11298947994781,
+      "longitude_exact_rational": "12205530/131083",
+      "latitude_degrees_north": 22.83449824703331,
+      "latitude_native_f64le_hex": "d09357ada1d53640",
+      "registered_pdf_point": [
+        449.490459585184,
+        1889.991292674531
+      ],
+      "render_scale1_pixel": [
+        449,
+        702
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        233,
+        235,
+        211
+      ],
+      "name": "Thantlang",
+      "review_order_rank": 7,
+      "source_point_interpretation": "Registered centre is depicted on the named Thantlang/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Thantlang-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 88,
+          "boundary": 0
+        },
+        {
+          "index": 10,
+          "hash": "2aa725a40846f769d494cf184d7e70dc0ee16f616c533a9cafd42fe09744f722",
+          "registry_index": 89,
+          "id": "gb:IND:ADM3:7132399B64543007464155",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4025",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 61,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70771,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B64543007464155",
+            "ordinal": 4025,
+            "owners": [],
+            "name": "Hnahthial",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Thantlang Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-thantlang-township-chin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/34c913de-a0b5-40ef-8315-ac7e559a6917/Tsp_Map_VL_Thantlang_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Thantlang.pdf",
+        "bytes": 5045598,
+        "sha256": "d14128e5e45d3b331d9bb154490242c74ba18f42e0e1fe68d59854e5e7aad3bc",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Thantlang is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2034.66968994135,
+          "intercept_points": -189004.68697509242,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.0010192871268372983,
+          "rms_residual_pdf_points": 0.0005740550279479829,
+          "alternating_label_holdout_max_pdf_points": 0.0015258788771461695
+        },
+        "N": {
+          "slope_points_per_degree": 2034.371808733262,
+          "intercept_points": -44563.86820765912,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.09247698103717994,
+          "rms_residual_pdf_points": 0.0588526968128855,
+          "alternating_label_holdout_max_pdf_points": 0.09908040365553461
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            93.0,
+            93.66666666666667
+          ],
+          "target_degrees": 93.11298947994781,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            22.166666666666668,
+            23.0
+          ],
+          "target_degrees": 22.83449824703331,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Thantlang-049.png",
+      "review_contact_sheet": "102-contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 58,
+      "owner": 30146,
+      "y": 113999,
+      "x": 198889,
+      "original_interval": 1374,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/1263/runs/0"
+      },
+      "inside": [
+        0,
+        2,
+        10
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.11024312839956,
+      "longitude_exact_rational": "12205170/131083",
+      "latitude_degrees_north": 22.829435914796527,
+      "latitude_native_f64le_hex": "ce2d80e955d43640",
+      "registered_pdf_point": [
+        443.90254133203416,
+        1879.6926266855808
+      ],
+      "render_scale1_pixel": [
+        444,
+        712
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        161,
+        163,
+        139
+      ],
+      "name": "Thantlang",
+      "review_order_rank": 8,
+      "source_point_interpretation": "Registered centre is depicted on the named Thantlang/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Thantlang-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 88,
+          "boundary": 0
+        },
+        {
+          "index": 2,
+          "hash": "dc80ff501425e87baeaf2c8d6a46459a79e4ec3216ff6b33e32c18d2dac62221",
+          "registry_index": 6,
+          "id": "gb:IND:ADM1:1811400B49281905528064",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/18",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM1-000.bin.gz",
+              "git_blob_oid": "6c717053e0e9893cbe32ee9e09e4cba76760798a",
+              "mode": "100644",
+              "bytes": 2009868,
+              "sha256": "4a716fa04288d6742b1f43031ea90a26998c86becb1389f46acd3200b3acb1e0",
+              "decoded_bytes": 5103747,
+              "decoded_sha256": "4c63fe43294a391e8f2de4e9f86f3edb60f8688275b9fee90c61fb2aa0c26061"
+            }
+          ],
+          "inside": 39,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 36797,
+            "family_index": 154,
+            "source_id": "gb:IND:ADM1:1811400B49281905528064",
+            "ordinal": 18,
+            "owners": [],
+            "name": "Mizoram",
+            "geometry_status": "raw-native-supported"
+          }
+        },
+        {
+          "index": 10,
+          "hash": "2aa725a40846f769d494cf184d7e70dc0ee16f616c533a9cafd42fe09744f722",
+          "registry_index": 89,
+          "id": "gb:IND:ADM3:7132399B64543007464155",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4025",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 61,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70771,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B64543007464155",
+            "ordinal": 4025,
+            "owners": [],
+            "name": "Hnahthial",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Thantlang Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-thantlang-township-chin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/34c913de-a0b5-40ef-8315-ac7e559a6917/Tsp_Map_VL_Thantlang_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Thantlang.pdf",
+        "bytes": 5045598,
+        "sha256": "d14128e5e45d3b331d9bb154490242c74ba18f42e0e1fe68d59854e5e7aad3bc",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Thantlang is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2034.66968994135,
+          "intercept_points": -189004.68697509242,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.0010192871268372983,
+          "rms_residual_pdf_points": 0.0005740550279479829,
+          "alternating_label_holdout_max_pdf_points": 0.0015258788771461695
+        },
+        "N": {
+          "slope_points_per_degree": 2034.371808733262,
+          "intercept_points": -44563.86820765912,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.09247698103717994,
+          "rms_residual_pdf_points": 0.0588526968128855,
+          "alternating_label_holdout_max_pdf_points": 0.09908040365553461
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            93.0,
+            93.66666666666667
+          ],
+          "target_degrees": 93.11024312839956,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            22.166666666666668,
+            23.0
+          ],
+          "target_degrees": 22.829435914796527,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Thantlang-058.png",
+      "review_contact_sheet": "102-contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 78,
+      "owner": 30146,
+      "y": 114092,
+      "x": 198877,
+      "original_interval": 1404,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/1292/runs/0"
+      },
+      "inside": [
+        12
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.09376501911002,
+      "longitude_exact_rational": "12203010/131083",
+      "latitude_degrees_north": 22.711683676461416,
+      "latitude_native_f64le_hex": "b37fc3e630b63640",
+      "registered_pdf_point": [
+        410.37503181307693,
+        1640.1407926013926
+      ],
+      "render_scale1_pixel": [
+        410,
+        952
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        245,
+        247,
+        223
+      ],
+      "name": "Thantlang",
+      "review_order_rank": 9,
+      "source_point_interpretation": "Registered centre is depicted on the named Thantlang/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Thantlang-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "foreign-administrative-only",
+      "original_hit_operands": [
+        {
+          "index": 12,
+          "hash": "f363f7a9a4dffd781fbb5291ae3f4a6ca6117351cf6d026dd365d88bde64daf2",
+          "registry_index": 91,
+          "id": "gb:IND:ADM3:7132399B97126218056957",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4029",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 16,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70775,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B97126218056957",
+            "ordinal": 4029,
+            "owners": [],
+            "name": "Sangau",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Thantlang Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-thantlang-township-chin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/34c913de-a0b5-40ef-8315-ac7e559a6917/Tsp_Map_VL_Thantlang_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Thantlang.pdf",
+        "bytes": 5045598,
+        "sha256": "d14128e5e45d3b331d9bb154490242c74ba18f42e0e1fe68d59854e5e7aad3bc",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Thantlang is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2034.66968994135,
+          "intercept_points": -189004.68697509242,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.0010192871268372983,
+          "rms_residual_pdf_points": 0.0005740550279479829,
+          "alternating_label_holdout_max_pdf_points": 0.0015258788771461695
+        },
+        "N": {
+          "slope_points_per_degree": 2034.371808733262,
+          "intercept_points": -44563.86820765912,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.09247698103717994,
+          "rms_residual_pdf_points": 0.0588526968128855,
+          "alternating_label_holdout_max_pdf_points": 0.09908040365553461
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            93.0,
+            93.66666666666667
+          ],
+          "target_degrees": 93.09376501911002,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            22.166666666666668,
+            23.0
+          ],
+          "target_degrees": 22.711683676461416,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Thantlang-078.png",
+      "review_contact_sheet": "102-contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 38,
+      "owner": 30146,
+      "y": 113916,
+      "x": 198916,
+      "original_interval": 1344,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/1239/runs/0"
+      },
+      "inside": [
+        0,
+        10
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.14731887430102,
+      "longitude_exact_rational": "12210030/131083",
+      "latitude_degrees_north": 22.934440677368325,
+      "latitude_native_f64le_hex": "5b59158137ef3640",
+      "registered_pdf_point": [
+        519.3394377497025,
+        2093.311355444377
+      ],
+      "render_scale1_pixel": [
+        519,
+        499
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        216,
+        218,
+        194
+      ],
+      "name": "Thantlang",
+      "review_order_rank": 10,
+      "source_point_interpretation": "Registered centre is depicted on the named Thantlang/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Thantlang-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 88,
+          "boundary": 0
+        },
+        {
+          "index": 10,
+          "hash": "2aa725a40846f769d494cf184d7e70dc0ee16f616c533a9cafd42fe09744f722",
+          "registry_index": 89,
+          "id": "gb:IND:ADM3:7132399B64543007464155",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4025",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 61,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70771,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B64543007464155",
+            "ordinal": 4025,
+            "owners": [],
+            "name": "Hnahthial",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Thantlang Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-thantlang-township-chin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/34c913de-a0b5-40ef-8315-ac7e559a6917/Tsp_Map_VL_Thantlang_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Thantlang.pdf",
+        "bytes": 5045598,
+        "sha256": "d14128e5e45d3b331d9bb154490242c74ba18f42e0e1fe68d59854e5e7aad3bc",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Thantlang is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2034.66968994135,
+          "intercept_points": -189004.68697509242,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.0010192871268372983,
+          "rms_residual_pdf_points": 0.0005740550279479829,
+          "alternating_label_holdout_max_pdf_points": 0.0015258788771461695
+        },
+        "N": {
+          "slope_points_per_degree": 2034.371808733262,
+          "intercept_points": -44563.86820765912,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.09247698103717994,
+          "rms_residual_pdf_points": 0.0588526968128855,
+          "alternating_label_holdout_max_pdf_points": 0.09908040365553461
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            93.0,
+            93.66666666666667
+          ],
+          "target_degrees": 93.14731887430102,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            22.166666666666668,
+            23.0
+          ],
+          "target_degrees": 22.934440677368325,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Thantlang-038.png",
+      "review_contact_sheet": "102-contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 47,
+      "owner": 30146,
+      "y": 113994,
+      "x": 198891,
+      "original_interval": 1365,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/1258/runs/0"
+      },
+      "inside": [
+        0,
+        2,
+        10
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.11298947994781,
+      "longitude_exact_rational": "12205530/131083",
+      "latitude_degrees_north": 22.835763800667397,
+      "latitude_native_f64le_hex": "110ccf9df4d53640",
+      "registered_pdf_point": [
+        449.490459585184,
+        1892.5658993101606
+      ],
+      "render_scale1_pixel": [
+        449,
+        699
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        171,
+        173,
+        149
+      ],
+      "name": "Thantlang",
+      "review_order_rank": 11,
+      "source_point_interpretation": "Registered centre is depicted on the named Thantlang/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Thantlang-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 88,
+          "boundary": 0
+        },
+        {
+          "index": 2,
+          "hash": "dc80ff501425e87baeaf2c8d6a46459a79e4ec3216ff6b33e32c18d2dac62221",
+          "registry_index": 6,
+          "id": "gb:IND:ADM1:1811400B49281905528064",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/18",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM1-000.bin.gz",
+              "git_blob_oid": "6c717053e0e9893cbe32ee9e09e4cba76760798a",
+              "mode": "100644",
+              "bytes": 2009868,
+              "sha256": "4a716fa04288d6742b1f43031ea90a26998c86becb1389f46acd3200b3acb1e0",
+              "decoded_bytes": 5103747,
+              "decoded_sha256": "4c63fe43294a391e8f2de4e9f86f3edb60f8688275b9fee90c61fb2aa0c26061"
+            }
+          ],
+          "inside": 39,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 36797,
+            "family_index": 154,
+            "source_id": "gb:IND:ADM1:1811400B49281905528064",
+            "ordinal": 18,
+            "owners": [],
+            "name": "Mizoram",
+            "geometry_status": "raw-native-supported"
+          }
+        },
+        {
+          "index": 10,
+          "hash": "2aa725a40846f769d494cf184d7e70dc0ee16f616c533a9cafd42fe09744f722",
+          "registry_index": 89,
+          "id": "gb:IND:ADM3:7132399B64543007464155",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4025",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 61,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70771,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B64543007464155",
+            "ordinal": 4025,
+            "owners": [],
+            "name": "Hnahthial",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Thantlang Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-thantlang-township-chin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/34c913de-a0b5-40ef-8315-ac7e559a6917/Tsp_Map_VL_Thantlang_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Thantlang.pdf",
+        "bytes": 5045598,
+        "sha256": "d14128e5e45d3b331d9bb154490242c74ba18f42e0e1fe68d59854e5e7aad3bc",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Thantlang is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2034.66968994135,
+          "intercept_points": -189004.68697509242,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.0010192871268372983,
+          "rms_residual_pdf_points": 0.0005740550279479829,
+          "alternating_label_holdout_max_pdf_points": 0.0015258788771461695
+        },
+        "N": {
+          "slope_points_per_degree": 2034.371808733262,
+          "intercept_points": -44563.86820765912,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.09247698103717994,
+          "rms_residual_pdf_points": 0.0588526968128855,
+          "alternating_label_holdout_max_pdf_points": 0.09908040365553461
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            93.0,
+            93.66666666666667
+          ],
+          "target_degrees": 93.11298947994781,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            22.166666666666668,
+            23.0
+          ],
+          "target_degrees": 22.835763800667397,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Thantlang-047.png",
+      "review_contact_sheet": "102-contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 65,
+      "owner": 30146,
+      "y": 114004,
+      "x": 198888,
+      "original_interval": 1379,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/1268/runs/0"
+      },
+      "inside": [
+        0,
+        10
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.10886995262544,
+      "longitude_exact_rational": "12204990/131083",
+      "latitude_degrees_north": 22.823107734712686,
+      "latitude_native_f64le_hex": "f6ac4130b7d23640",
+      "registered_pdf_point": [
+        441.10858220545924,
+        1866.8187555224285
+      ],
+      "render_scale1_pixel": [
+        441,
+        725
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        203,
+        205,
+        181
+      ],
+      "name": "Thantlang",
+      "review_order_rank": 13,
+      "source_point_interpretation": "Registered centre is depicted on the named Thantlang/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Thantlang-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 88,
+          "boundary": 0
+        },
+        {
+          "index": 10,
+          "hash": "2aa725a40846f769d494cf184d7e70dc0ee16f616c533a9cafd42fe09744f722",
+          "registry_index": 89,
+          "id": "gb:IND:ADM3:7132399B64543007464155",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4025",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 61,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70771,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B64543007464155",
+            "ordinal": 4025,
+            "owners": [],
+            "name": "Hnahthial",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Thantlang Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-thantlang-township-chin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/34c913de-a0b5-40ef-8315-ac7e559a6917/Tsp_Map_VL_Thantlang_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Thantlang.pdf",
+        "bytes": 5045598,
+        "sha256": "d14128e5e45d3b331d9bb154490242c74ba18f42e0e1fe68d59854e5e7aad3bc",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Thantlang is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2034.66968994135,
+          "intercept_points": -189004.68697509242,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.0010192871268372983,
+          "rms_residual_pdf_points": 0.0005740550279479829,
+          "alternating_label_holdout_max_pdf_points": 0.0015258788771461695
+        },
+        "N": {
+          "slope_points_per_degree": 2034.371808733262,
+          "intercept_points": -44563.86820765912,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.09247698103717994,
+          "rms_residual_pdf_points": 0.0588526968128855,
+          "alternating_label_holdout_max_pdf_points": 0.09908040365553461
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            93.0,
+            93.66666666666667
+          ],
+          "target_degrees": 93.10886995262544,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            22.166666666666668,
+            23.0
+          ],
+          "target_degrees": 22.823107734712686,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Thantlang-065.png",
+      "review_contact_sheet": "102-contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 51,
+      "owner": 30146,
+      "y": 113996,
+      "x": 198890,
+      "original_interval": 1368,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/1260/runs/0"
+      },
+      "inside": [
+        0,
+        10
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.1116163041737,
+      "longitude_exact_rational": "12205350/131083",
+      "latitude_degrees_north": 22.833232681628672,
+      "latitude_native_f64le_hex": "b48dadbc4ed53640",
+      "registered_pdf_point": [
+        446.6965004586091,
+        1887.4166620932301
+      ],
+      "render_scale1_pixel": [
+        447,
+        705
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        208,
+        210,
+        186
+      ],
+      "name": "Thantlang",
+      "review_order_rank": 18,
+      "source_point_interpretation": "Registered centre is depicted on the named Thantlang/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Thantlang-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 88,
+          "boundary": 0
+        },
+        {
+          "index": 10,
+          "hash": "2aa725a40846f769d494cf184d7e70dc0ee16f616c533a9cafd42fe09744f722",
+          "registry_index": 89,
+          "id": "gb:IND:ADM3:7132399B64543007464155",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4025",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 61,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70771,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B64543007464155",
+            "ordinal": 4025,
+            "owners": [],
+            "name": "Hnahthial",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Thantlang Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-thantlang-township-chin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/34c913de-a0b5-40ef-8315-ac7e559a6917/Tsp_Map_VL_Thantlang_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Thantlang.pdf",
+        "bytes": 5045598,
+        "sha256": "d14128e5e45d3b331d9bb154490242c74ba18f42e0e1fe68d59854e5e7aad3bc",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Thantlang is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2034.66968994135,
+          "intercept_points": -189004.68697509242,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.0010192871268372983,
+          "rms_residual_pdf_points": 0.0005740550279479829,
+          "alternating_label_holdout_max_pdf_points": 0.0015258788771461695
+        },
+        "N": {
+          "slope_points_per_degree": 2034.371808733262,
+          "intercept_points": -44563.86820765912,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.09247698103717994,
+          "rms_residual_pdf_points": 0.0588526968128855,
+          "alternating_label_holdout_max_pdf_points": 0.09908040365553461
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            93.0,
+            93.66666666666667
+          ],
+          "target_degrees": 93.1116163041737,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            22.166666666666668,
+            23.0
+          ],
+          "target_degrees": 22.833232681628672,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Thantlang-051.png",
+      "review_contact_sheet": "102-contact-01.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 27,
+      "owner": 30146,
+      "y": 113902,
+      "x": 198912,
+      "original_interval": 1322,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/1225/runs/0"
+      },
+      "inside": [
+        0,
+        10
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.1418261712045,
+      "longitude_exact_rational": "12209310/131083",
+      "latitude_degrees_north": 22.952144312581556,
+      "latitude_native_f64le_hex": "359ccbbabff33640",
+      "registered_pdf_point": [
+        508.1636012433446,
+        2129.327131834274
+      ],
+      "render_scale1_pixel": [
+        508,
+        463
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        173,
+        175,
+        155
+      ],
+      "name": "Thantlang",
+      "review_order_rank": 19,
+      "source_point_interpretation": "Registered centre is depicted on the named Thantlang/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Thantlang-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 88,
+          "boundary": 0
+        },
+        {
+          "index": 10,
+          "hash": "2aa725a40846f769d494cf184d7e70dc0ee16f616c533a9cafd42fe09744f722",
+          "registry_index": 89,
+          "id": "gb:IND:ADM3:7132399B64543007464155",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4025",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 61,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70771,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B64543007464155",
+            "ordinal": 4025,
+            "owners": [],
+            "name": "Hnahthial",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Thantlang Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-thantlang-township-chin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/34c913de-a0b5-40ef-8315-ac7e559a6917/Tsp_Map_VL_Thantlang_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Thantlang.pdf",
+        "bytes": 5045598,
+        "sha256": "d14128e5e45d3b331d9bb154490242c74ba18f42e0e1fe68d59854e5e7aad3bc",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Thantlang is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2034.66968994135,
+          "intercept_points": -189004.68697509242,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.0010192871268372983,
+          "rms_residual_pdf_points": 0.0005740550279479829,
+          "alternating_label_holdout_max_pdf_points": 0.0015258788771461695
+        },
+        "N": {
+          "slope_points_per_degree": 2034.371808733262,
+          "intercept_points": -44563.86820765912,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.09247698103717994,
+          "rms_residual_pdf_points": 0.0588526968128855,
+          "alternating_label_holdout_max_pdf_points": 0.09908040365553461
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            93.0,
+            93.66666666666667
+          ],
+          "target_degrees": 93.1418261712045,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            22.166666666666668,
+            23.0
+          ],
+          "target_degrees": 22.952144312581556,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Thantlang-027.png",
+      "review_contact_sheet": "102-contact-01.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    }
+  ]
+}
