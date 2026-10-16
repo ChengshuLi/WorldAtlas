@@ -256,7 +256,9 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
         cache.set(row.sha, bytes);
         diagnostics.retained_bytes += bytes.length; diagnostics.retained_count = cache.size;
       }
-      return cache.get(row.sha);
+      const bytes = cache.get(row.sha);
+      needSelected(bytes.length === row.size, 'cached blob size differs from role tree');
+      return bytes;
     };
     const read = (name, tree = authored, retain = true) => readRow(tree.entries.get(name), retain);
     const parseJSON = bytes => {

@@ -1875,3 +1875,12 @@ test('retained XML under an original JSON name cannot become a current or packag
     assert.equal(await f.run(), null);
   }
 });
+
+test('retained evidence cannot use cached bytes to hide a conflicting tree size', async () => {
+  const f = retainedEvidenceFixture();
+  const original = f.authored.entries.get('data/ownership-selection.json');
+  f.authored.entries.set(f.retainedName, {...original, path:f.retainedName, size:original.size + 1});
+  const diagnostics = {};
+  assert.equal(await f.run({metadataDiagnostics:diagnostics}), null);
+  assert.match(diagnostics.failure, /cached blob size differs/);
+});
