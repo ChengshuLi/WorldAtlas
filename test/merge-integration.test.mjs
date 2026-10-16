@@ -13,6 +13,22 @@ import {renderClaim, githubAPI} from '../scripts/issue-claim-contract.mjs';
 import {prepareIntegration, completeIntegration, checkCurrentChecks, integrationProfile, geographyRequired, createCandidate, cleanupCandidate, cleanupMergedHead} from '../scripts/merge-integration.mjs';
 
 const sha = letter => letter.repeat(40);
+
+test('actual sparse preparation imports method inventories without scientific coordination files', () => {
+  const temporary = fs.mkdtempSync(path.join(os.tmpdir(), 'atlas-sparse-prepare-'));
+  try {
+    // Exactly the namespaces selected by worker-merge.yml prepare, plus its
+    // ordinary root package metadata. No coordination files or dependencies.
+    for (const name of ['scripts', 'src', '.github']) fs.cpSync(name, path.join(temporary, name), {recursive: true});
+    fs.copyFileSync('package.json', path.join(temporary, 'package.json'));
+    assert.equal(fs.existsSync(path.join(temporary, 'coordination')), false);
+    const output = execFileSync(process.execPath, ['--input-type=module', '-e',
+      "await import('./scripts/merge-integration.mjs'); console.log('sparse-prepare-import-passed');"],
+      {cwd: temporary, encoding: 'utf8'});
+    assert.equal(output.trim(), 'sparse-prepare-import-passed');
+  } finally { fs.rmSync(temporary, {recursive: true, force: true}); }
+});
+
 test('only staging-test shards prepare the immutable migration derivative', () => {
   const cwd=process.cwd(), temporary=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-integration-prerequisite-'));
   fs.cpSync('drizzle',path.join(temporary,'drizzle'),{recursive:true});
