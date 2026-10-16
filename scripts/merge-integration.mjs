@@ -216,7 +216,9 @@ export async function prepareIntegration(options) {
     if (profile === 'full' && selectedDataCandidate(state.pr.head.ref, state.files, state.reservation)) {
       try {
         baseline = await tree(options.api, options.repo, state.base);
-        selection = await selectedDataSelection({...options, branch: state.pr.head.ref, files: state.files, reservation: state.reservation, baseline, authored});
+        // Applicability belongs to the actual combined candidate; older author
+        // snapshots need not reproduce accepted-main smoke or package edits.
+        selection = await selectedDataSelection({...options, branch: state.pr.head.ref, files: state.files, reservation: state.reservation, baseline, authored: integrated});
       } catch { /* Unknown applicability retains the complete suite. */ }
     }
     const software = candidateGeographyCode(profile, state.files, selection?.test_selection);
@@ -293,11 +295,11 @@ export async function completeIntegration(options) {
     // Selection can only exempt candidate checker code. When no changed path
     // selects that code, another whole-data classification cannot affect it.
     if (candidateGeographyCode(profile, state.files) && selectedDataCandidate(state.pr.head.ref, state.files, state.reservation)) {
-      authored ??= await tree(options.api, options.repo, state.pr.head.sha);
       try {
         baseline = await tree(options.api, options.repo, state.base);
+        const integrated = await tree(options.api, options.repo, options.testedCandidate, candidate);
         selection = await selectedDataSelection({...options, branch: state.pr.head.ref, files: state.files,
-          reservation: state.reservation, baseline, authored});
+          reservation: state.reservation, baseline, authored: integrated});
       } catch { /* Unknown applicability retains full software validation. */ }
     }
     const software = candidateGeographyCode(profile, state.files, selection?.test_selection);
