@@ -294,11 +294,11 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       const before = baseline.entries.get(name), after = authored.entries.get(name);
       return ordinary(before) && ordinary(after) && before.sha === after.sha && before.size === after.size;
     };
-    // The fixed walk may retain accepted code or binary sources. Their exact
-    // unchanged tree identity, not their suffix, establishes that this PR adds
-    // no executable change. New leaves keep the inert/native-operand boundary.
+    // Fixed consumer roles establish how these bodies are read. Their filenames
+    // do not determine whether a source body is data; exact ordinary-object
+    // identity remains required and actual consumers validate their contents.
     const pin = value => {
-      needSelected(value && safe(value.path) && (unchangedRole(value.path) || /\.(?:json|jsonl\.gz|json\.gz|log)$/.test(value.path) || nativeOperands.has(value.path)) &&
+      needSelected(value && safe(value.path) &&
         hash(value.sha256) && Number.isSafeInteger(value.bytes) && value.bytes >= 0, 'invalid inert role pin');
       const row = authored.entries.get(value.path);
       needSelected(ordinary(row) && row.size === value.bytes &&
