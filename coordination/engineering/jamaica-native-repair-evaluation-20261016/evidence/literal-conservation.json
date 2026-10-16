@@ -1,0 +1,93 @@
+{
+  "status": "passed",
+  "baseline_commit": "b66316835ec65fc3f40d4f02d8bf1ffd0e7c93a0",
+  "candidate_commit": "aba3bc2839cbe6542b4339e9704c49c4b085f7ea",
+  "inputs": {
+    "before": {
+      "selector": {
+        "path": "data/ownership-selection.json",
+        "commit": "b66316835ec65fc3f40d4f02d8bf1ffd0e7c93a0",
+        "mode": "100644",
+        "git_blob_oid": "0090f9afd86a84e1de1ea1bd757ff43e72e95c82",
+        "bytes": 1849,
+        "sha256": "8f64e06d626fbf272c06c5fad8e2157216e45a7f3b3f92bdd0385c88fdbce28a"
+      },
+      "sidecar": {
+        "path": "coordination/engineering/vanuatu-native-repair-evaluation-20261016/ownership-selection-after-slb.json",
+        "commit": "b66316835ec65fc3f40d4f02d8bf1ffd0e7c93a0",
+        "mode": "100644",
+        "git_blob_oid": "6c1e0c5a6af387fefcf259d0ea7dcaa35d46316a",
+        "bytes": 3502,
+        "sha256": "1a74d1175ed08a43414bf10658bf090aaab73d2dbb1fcffc3c9d666768c62be1"
+      },
+      "patch": {
+        "bytes": 2898066,
+        "commit": "17edf8f17b8d926c8d0d40462c0a0dedd04fdbf9",
+        "git_blob_oid": "fd5980a8eea59923631893f35453f65a50bacb0f",
+        "mode": "100644",
+        "path": "coordination/engineering/vanuatu-native-repair-evaluation-20261016/composition-after-slb/patch.json",
+        "sha256": "60b5b9a37bf55efc5938725c024840c33ffa8995ad33f9c6019d420d144caaef"
+      },
+      "ledger": {
+        "bytes": 7923584,
+        "commit": "17edf8f17b8d926c8d0d40462c0a0dedd04fdbf9",
+        "git_blob_oid": "2bc6eb6fe101e93b032546acfa213fbb2d975a8d",
+        "mode": "100644",
+        "path": "coordination/engineering/vanuatu-native-repair-evaluation-20261016/composition-after-slb/selected-ledger.json",
+        "sha256": "aa6d9775f8f2c4999b59e4b99304ccca33bd560b936111b98963daf53113b603"
+      }
+    },
+    "after": {
+      "selector": {
+        "path": "data/ownership-selection.json",
+        "commit": "aba3bc2839cbe6542b4339e9704c49c4b085f7ea",
+        "mode": "100644",
+        "git_blob_oid": "a5cb0077c036d98b0d3bf85e53c59b20402d07a0",
+        "bytes": 1849,
+        "sha256": "3abd536a9a1af42a0dd7bfcf8dde47d20fba30e06a7dca8563f91cc61da551a1"
+      },
+      "sidecar": {
+        "path": "coordination/engineering/jamaica-native-repair-evaluation-20261016/ownership-selection-reference.json",
+        "commit": "aba3bc2839cbe6542b4339e9704c49c4b085f7ea",
+        "mode": "100644",
+        "git_blob_oid": "d34590ab458cba3cd461d658222e2ea1999e54d9",
+        "bytes": 3502,
+        "sha256": "4b1e572ebe8a0429cf9faefd95c46bf1fcbad0a6e99ed8e972109df1dade0769"
+      },
+      "patch": {
+        "bytes": 2919632,
+        "commit": "38c16919906232947bd92e2b5956f57eef945f78",
+        "git_blob_oid": "240c9343dae7b42342c947388bf8afc8dabca1c0",
+        "mode": "100644",
+        "path": "coordination/engineering/jamaica-native-repair-evaluation-20261016/composition-reference/patch.json",
+        "sha256": "5ce53f5eea5de664ca5728ef77dad072548da31b9c30b15d10463ed979d56a45"
+      },
+      "ledger": {
+        "bytes": 7971724,
+        "commit": "38c16919906232947bd92e2b5956f57eef945f78",
+        "git_blob_oid": "fb7cac50eff40e41124715b8a48c9d17c54b61dd",
+        "mode": "100644",
+        "path": "coordination/engineering/jamaica-native-repair-evaluation-20261016/composition-reference/selected-ledger.json",
+        "sha256": "756357fa384abef4f940ffee13c0de8b4a04e7d8851c09cb638eb040ffb1efb4"
+      }
+    },
+    "candidate": {
+      "path": "coordination/engineering/jamaica-native-repair-evaluation-20261016/candidate-native-reference-patch.json",
+      "commit": "aba3bc2839cbe6542b4339e9704c49c4b085f7ea",
+      "mode": "100644",
+      "git_blob_oid": "57cb24d5a854e4239a2f828c0039a637e558c4f7",
+      "bytes": 24679,
+      "sha256": "8bd6ea6b67a57982a5a7b56cb1978065b9d992c5dfe7b57e08b7d8ba9a5b5eea"
+    }
+  },
+  "inherited_cells": 294376,
+  "proposed_cells": 2251,
+  "composed_cells": 296627,
+  "lost_cells": 0,
+  "reassigned_cells": 0,
+  "prior_candidate_intersection": 0,
+  "unexpected_new_cells": 0,
+  "inherited_rows": 892,
+  "composed_rows": 906,
+  "limit": "Literal native patch/ledger conservation only. Does not replace final actual native selected-output consumer, source review, hosted checks or integration."
+}
