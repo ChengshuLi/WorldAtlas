@@ -12,8 +12,11 @@ physical-interpretation package is outside this work.
 Proposed per-owner additions are Shefa 777, Malampa 669, Tafea 174, Sanma 260,
 Penama 586 and Torba 697. Exact before-state native acquisition checked all
 1,570 affected rows and found no occupied-base or accepted-additive intersection.
-The selected cumulative additive patch retains all 287,288 inherited cells and
-adds 3,163, for 290,451. This patch count is not the campaign-wide repaired count.
+The initial cumulative additive patch retained all 287,288 inherited cells and
+added 3,163, for 290,451. After Solomon Islands #2222 was accepted, stock
+composition reused the unchanged original Vanuatu authority and added its 3,163
+cells to the accepted 291,213-cell selection, for 294,376. The complete
+composed ledger has 892 rows and the registry has 147 authorities. This patch count is not the campaign-wide repaired count.
 Repository integration and website publication are separate outcomes.
 
 ## Source and scope
@@ -80,6 +83,20 @@ fresh `.cache/full-census/gshhg-direct/`, and run the retained Python program wi
 its stated dependencies. It writes `whole-target-support.json`. Never reuse an
 occupied output directory or overwrite earlier evidence; preserve the original
 source bodies, statement dates and all unresolved witnesses.
+
+## Accepted-Solomon union
+
+The final baseline is accepted main
+`0dd8c2d7e6e6d44344feae589345d0457fc9b590`, containing verified Solomon
+Islands merge `425f3ac1927d6ab645c1e271aa024d114d2b7b2e`. The original Vanuatu
+rule, binding, constructor and native patch are unchanged.
+`composition-after-slb/` contains the actual stock literal union;
+`ownership-selection-after-slb.json` is the active sidecar.
+`evidence/literal-conservation-after-slb.json` checks exact cell and ledger
+preservation against that accepted baseline. Earlier composition and conservation
+evidence are retained as prior proposed snapshots, not current delivery claims.
+Final trusted hosted selected-output and cumulative geography checks remain
+required; source qualification has not been replayed merely for composition.
 
 ## Remaining work
 

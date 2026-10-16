@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "selected_ledger_sha256": "b683d52171ae4e4f91f1d49742e25223bacc9309a5426db69878e7c070d7f399",
-  "cumulative_native_cells": 290451,
+  "selected_ledger_sha256": "aa6d9775f8f2c4999b59e4b99304ccca33bd560b936111b98963daf53113b603",
+  "cumulative_native_cells": 294376,
   "cohorts": [
     {
       "original_batch_id": "retained-authority-scope:0037ca1e3f6f3c91f641977f10e592da91fd068935cd3a0aa83ce6b895149140",
@@ -1435,6 +1435,76 @@
           "target_id": "gb:GRC:ADM3:53547021B16096881973590",
           "disposition": "assigned",
           "geometry_sha256": "8dfcd4f6faf80c75a5a5ecebc1fe70a98e7b8dd543b05431efe57eb2af1a8d7c"
+        }
+      ]
+    },
+    {
+      "original_batch_id": "retained-authority-scope:4a8739fe620a3861555315bceea2f9350db67a6dd8fec86cae75cca4e2eac5d1",
+      "component_ids": [
+        "source-target:1fa124c039e55e7b1cb0993dcf252c367f4dd21d8379085121d7295ae05063fc",
+        "source-target:23a6b4fcaf72072b4ae9ec27e18c482682832b8cec7d129405594d4e197f9c9f",
+        "source-target:2c028d7a66b8a5c98e30dc7651e01c3fc06c9478310298b77fcc15cb3ceeacdc",
+        "source-target:8a3b31b7bad2e23d47ea26f9a603f5765a92cd9b676aa78873b8aee779b79af2",
+        "source-target:d61c8499829516818c07aa276705790e40ba0361e62bd656d1d9f690716c3c35",
+        "source-target:f519dc1c0371318d932537d97065817e0cddd54d4cff29b3d91c3b1ad41bf703",
+        "source-target:f6a2c6e8ef0d62e89457fc3729ffab78cf7344e4fc6f3cd8139f1fca32284c75",
+        "source-target:fe82e63b157a7c38ff331c743fbec35071da03427d082651ae04cbaccc6409db",
+        "source-target:ff480b16fbea6ff9d1933d67c198bcf657934c26c9b8d04d94fac9d7bca91f25"
+      ],
+      "members": [
+        {
+          "component_id": "source-target:1fa124c039e55e7b1cb0993dcf252c367f4dd21d8379085121d7295ae05063fc",
+          "target_id": "gb:SLB:ADM1:17018030B21762340724861",
+          "disposition": "assigned",
+          "native_rows_sha256": "1af87e3fdbf4d8e17d0b9ca6df76c614fffb74a689301333b98c669239cc32f1"
+        },
+        {
+          "component_id": "source-target:23a6b4fcaf72072b4ae9ec27e18c482682832b8cec7d129405594d4e197f9c9f",
+          "target_id": "gb:SLB:ADM1:17018030B68013150931387",
+          "disposition": "assigned",
+          "native_rows_sha256": "515a7c082a4c6daa43c76c49c4b0cc2a87afddf55d52d995954e91a01c3644d2"
+        },
+        {
+          "component_id": "source-target:2c028d7a66b8a5c98e30dc7651e01c3fc06c9478310298b77fcc15cb3ceeacdc",
+          "target_id": "gb:SLB:ADM1:17018030B84591335552725",
+          "disposition": "assigned",
+          "native_rows_sha256": "052488903dc167f839c10af01d2d8f8f06dd5f17f61fdbcb658b6df8a4157a7a"
+        },
+        {
+          "component_id": "source-target:8a3b31b7bad2e23d47ea26f9a603f5765a92cd9b676aa78873b8aee779b79af2",
+          "target_id": "gb:SLB:ADM1:17018030B28135645457785",
+          "disposition": "assigned",
+          "native_rows_sha256": "0b1ea8dddce4500b68c0cdb367626bbec27aa4bd01083dea3807e0844dcdda1b"
+        },
+        {
+          "component_id": "source-target:d61c8499829516818c07aa276705790e40ba0361e62bd656d1d9f690716c3c35",
+          "target_id": "gb:SLB:ADM1:17018030B8659224027401",
+          "disposition": "assigned",
+          "native_rows_sha256": "3e383496a12fd5e8c3e162aa636d6b42d117cbc764a914ced1b477e93c5ab5fe"
+        },
+        {
+          "component_id": "source-target:f519dc1c0371318d932537d97065817e0cddd54d4cff29b3d91c3b1ad41bf703",
+          "target_id": "gb:SLB:ADM1:17018030B19935783635883",
+          "disposition": "assigned",
+          "native_rows_sha256": "45329b96ee64d5ba92ee5d2dfddb2f9f62b3824a0fae7de5b555cd2f55e1208e"
+        },
+        {
+          "component_id": "source-target:f6a2c6e8ef0d62e89457fc3729ffab78cf7344e4fc6f3cd8139f1fca32284c75",
+          "target_id": "gb:SLB:ADM1:17018030B21058058503942",
+          "disposition": "assigned",
+          "native_rows_sha256": "6ab85231cca1baa688784af9cc69cc5ef6050c725def9c58cd19fcf22445b9c9"
+        },
+        {
+          "component_id": "source-target:fe82e63b157a7c38ff331c743fbec35071da03427d082651ae04cbaccc6409db",
+          "target_id": "gb:SLB:ADM1:17018030B36628097040544",
+          "disposition": "assigned",
+          "native_rows_sha256": "2eb7b23be44643d393ffef449c69c2278fe06a5e7b0da45921af23efa745a262"
+        },
+        {
+          "component_id": "source-target:ff480b16fbea6ff9d1933d67c198bcf657934c26c9b8d04d94fac9d7bca91f25",
+          "target_id": "gb:SLB:ADM1:17018030B43755880178831",
+          "disposition": "assigned",
+          "native_rows_sha256": "08b62ca48889b73254438dc233eec2f7ac188538dc5ef13071135bef3e7c7e69"
         }
       ]
     },
