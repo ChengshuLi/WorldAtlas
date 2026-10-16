@@ -116,7 +116,7 @@ body sizes must exactly match the tree before the finite body read; unplanned
 bootstrap metadata keeps its existing legacy guard. No cache or scientific
 execution-helper limit changes.
 
-`partition-regression-tests.log` records 90 passing tests, including a complete
+`partition-regression-tests.log` records 91 passing tests, including a complete
 Git-backed partition CLI with a genuine 33,554,433-byte source, same-size changed
 candidate rejection, wrong actual/declared lengths, invalid operating sizes,
 explicit smaller file/phase admission and the unchanged descriptor-count guard.
@@ -131,6 +131,23 @@ node --test --test-concurrency=2 \
   test/immutable-git-blobs.test.mjs test/git-blob-transport.test.mjs
 ```
 
-The original frozen-packet and joint-launcher custody checks remain applicable:
-their production modules and literal helper bodies did not change in this
-partition-only correction. Genuine prior scientific executions remain untouched.
+The literal inlined byte-helper bodies and their current import closure remain
+unchanged. Planned original change-receipt reads also obtain fresh exact tree
+descriptors, with their complete finite byte union admitted before manifest body
+checks. The frozen production premerge probe was rerun after this correction:
+11.5867 seconds, the same 243 immutable requests / 274,806,024 transported bytes
+and all 11 original limitations. See the separately retained
+`partition-correction-frozen-vietnam2062-check.json`. No scientific producer ran.
+
+Independent adjacent review also reproduced later unplanned reads of a large
+preservation report and a declared large decoded baseline inventory. Known
+child/index/report/inventory descriptors now survive every partition reread;
+the inventory uses the existing exact decoded-size/hash helper. A combined real
+Git fixture covers a 33,554,433-byte child manifest, preservation report and
+declared decoded gzip inventory through the complete API and CLI paths.
+
+The combined real Git control also retains a 33,554,433-byte original modified
+file, authenticates its receipt through fresh base-tree metadata, and rejects a
+wrong original hash. Duplicate cross-partition descriptors preserve a previously
+verified decoded declaration rather than downgrading it to the legacy fallback.
+The voluntary review CLI carries each known child descriptor in its second pass.

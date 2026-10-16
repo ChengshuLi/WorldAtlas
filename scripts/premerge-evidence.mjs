@@ -59,6 +59,17 @@ export function validateRecordChecks(manifest, readFile) {
 export function validatePremergeManifest(manifest, {readFile, files, manifestPath, issue, spec, reservation, branch, pr}) {
   const quality = spec.evidence_quality;
   validateLanePaths(branch, [manifestPath], {ownedPaths: reservation.owned_paths});
+  const originals = new Map();
+  if (manifest.change_receipts !== undefined && typeof readFile.descriptor === 'function') {
+    for (const file of files.filter(file => file.status !== 'added')) {
+      const name = file.previous_filename ?? file.filename; safeEvidencePath(name);
+      originals.set(name, readFile.descriptor(name, 'base'));
+    }
+    // These receipt bodies are planned, hashed reads of the actual immutable
+    // PR base, just like the hosted reader's complete prefetch union.
+    evidenceBytePlan([...baselineFiles(manifest), ...manifest.sources.flatMap(source => source.files ?? []),
+      ...manifest.outputs, ...[...originals.values()].map(file => ({...file, commit: 'base'}))]);
+  }
   const result = validateEvidence(manifest, {readFile, expectedIssue: issue.number,
     expectedLane: spec.mode, expectedSubjects: quality.subject_ids, expectedPins: quality.pins});
   const recordChecks = validateRecordChecks(manifest, readFile);
@@ -76,7 +87,7 @@ export function validatePremergeManifest(manifest, {readFile, files, manifestPat
     for (const name of [file.filename, file.previous_filename].filter(Boolean)) safeEvidencePath(name);
     if (receipts !== undefined && file.status !== 'added') {
       const original = file.previous_filename ?? file.filename;
-      need(/^[a-f0-9]{64}$/.test(row.original_sha256) && sha256(readFile(original, 'base')) === row.original_sha256,
+      need(/^[a-f0-9]{64}$/.test(row.original_sha256) && sha256(readFile(original, 'base', originals.get(original))) === row.original_sha256,
         `Original change bytes mismatch: ${original}`);
     }
     if (receipts !== undefined && file.status === 'removed') need(typeof row.reason === 'string' && row.reason.trim(), 'Deletion needs a preservation explanation');
@@ -208,7 +219,13 @@ async function remoteReader(api, repo, commits) {
     for(const [key,row]of byPath)planned.set(key,row);
     if(typeof api.prefetchGitBlobs==='function'&&unique.length<=512)await api.prefetchGitBlobs(repo,unique);
   }
-  return {load, prefetch, read: (name, vintage) => { const bytes = cache.get(`${vintage}:${name}`); need(bytes, 'Unloaded evidence bytes'); return bytes; }};
+  const read = (name, vintage) => { const bytes = cache.get(`${vintage}:${name}`); need(bytes, 'Unloaded evidence bytes'); return bytes; };
+  read.descriptor = (name, vintage) => {
+    safeEvidencePath(name); const entry = planned.get(`${vintage}:${name}`);
+    need(entry && entry.type === 'blob' && ['100644', '100755'].includes(entry.mode), 'Unplanned evidence descriptor');
+    return {path: name, mode: entry.mode, git_blob_oid: entry.sha, bytes: entry.size};
+  };
+  return {load, prefetch, read};
 }
 
 export async function checkPremergeEvidence({api, repo, pr, issue, reservation, files, policy = loadEvidencePolicy()}) {

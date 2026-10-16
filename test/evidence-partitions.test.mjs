@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {gzipSync} from 'node:zlib';
+import {gzipSync,gunzipSync} from 'node:zlib';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
@@ -104,6 +104,59 @@ test('partition whole-body lengths and same-size hashes still reject drift',()=>
  assert.throws(()=>validateEvidencePartitions(f.index,f.options),/Input bytes mismatch/);
  f=fixture();f.bytes.set('data/input.json',Buffer.from('Immutable baseline'));
  assert.throws(()=>validateEvidencePartitions(f.index,f.options),/Input bytes mismatch/);
+});
+
+test('partition metadata and original receipts forward every planned whole-body bound',()=>{
+ const directory=fs.mkdtempSync(path.join(os.tmpdir(),'worldatlas-partition-metadata-'));
+ const env={...process.env,GIT_CONFIG_NOSYSTEM:'1',GIT_CONFIG_GLOBAL:'/dev/null',GIT_NO_LAZY_FETCH:'1',NODE_PATH:'',NODE_OPTIONS:''};
+ const git=(...args)=>execFileSync('git',['-c','core.hooksPath=/dev/null','-c','user.name=Partition fixture','-c','user.email=partition@example.invalid',...args],{cwd:directory,env,stdio:['ignore','pipe','pipe']}).toString().trim();
+ try{
+  git('init','-q','-b','engineering/partition-test');fs.mkdirSync(path.join(directory,'data'));fs.mkdirSync(path.join(directory,'docs'));
+  const size=32*1024*1024+1,originalResult=Buffer.alloc(size,67);
+  fs.writeFileSync(path.join(directory,'docs/result.md'),originalResult);
+  fs.writeFileSync(path.join(directory,'data/input.json'),'immutable baseline');git('add','.');git('commit','-qm','Metadata original input');
+  const f=fixture({baselineCommit:git('rev-parse','HEAD')});
+  const child=JSON.parse(f.bytes.get(f.childPath));
+  child.change_receipts[0]={path:'docs/result.md',status:'modified',original_sha256:sha256(originalResult)};
+  f.bytes.set(f.childPath,encode(child));f.options.files.find(row=>row.filename==='docs/result.md').status='modified';
+  const padded=raw=>Buffer.concat([raw,Buffer.alloc(size-raw.length,32)]);
+  const reportPath=f.index.preservation_report.path;
+  f.bytes.set(reportPath,padded(f.bytes.get(reportPath)));f.index.preservation_report.sha256=sha256(f.bytes.get(reportPath));
+  const decoded=padded(gunzipSync(f.bytes.get(f.inventoryPath)));
+  f.bytes.set(f.inventoryPath,gzipSync(decoded));f.index.baseline_inventory.sha256=sha256(f.bytes.get(f.inventoryPath));
+  // The later partition repeats only encoded custody. It must not erase the
+  // root's already verified exact decoded declaration at the final reread.
+  child.outputs.push(descriptor(f.inventoryPath,f.bytes.get(f.inventoryPath)));
+  f.bytes.set(f.childPath,padded(encode(child)));
+  Object.assign(f.index.partitions[0],descriptor(f.childPath,f.bytes.get(f.childPath)));
+  const root=JSON.parse(f.bytes.get(f.rootPath));
+  root.outputs=root.outputs.map(row=>[reportPath,f.childPath,f.inventoryPath].includes(row.path)?
+   {...descriptor(row.path,f.bytes.get(row.path)),...(row.path===f.inventoryPath?{uncompressed_bytes:decoded.length,uncompressed_sha256:sha256(decoded)}:{})}:row);
+  f.bytes.set(f.rootPath,encode(root));bindIndex(f);
+  for(const [name,raw]of f.bytes){fs.mkdirSync(path.dirname(path.join(directory,name)),{recursive:true});fs.writeFileSync(path.join(directory,name),raw);}
+  git('add','.');git('commit','-qm','Exact oversized metadata controls');
+  const read=partitionGitReader({head:git('rev-parse','HEAD'),base:f.index.baseline_commit,cwd:directory});
+  const known=new Set([f.childPath,f.inventoryPath,reportPath]);
+  const checkedRead=(name,vintage,pin)=>{
+   if(known.has(name))assert.ok(pin,'Known metadata descriptor omitted: '+name);
+   if(name==='docs/result.md'&&vintage==='base')assert.equal(pin?.bytes,originalResult.length);
+   return read(name,vintage,pin);
+  };checkedRead.descriptor=read.descriptor;
+  const result=validateEvidencePartitions(f.index,{...f.options,readFile:checkedRead});
+  assert.equal(result.validated,true);assert.equal(result.partitions.length,2);
+  const script=fileURLToPath(new URL('../scripts/validate-evidence-partitions.mjs',import.meta.url));
+  assert.equal(JSON.parse(execFileSync(process.execPath,[script,f.indexPath,f.index.baseline_commit,'HEAD'],
+   {cwd:directory,env,encoding:'utf8'})).validated,true);
+  child.change_receipts[0].original_sha256='0'.repeat(64);f.bytes.set(f.childPath,padded(encode(child)));
+  Object.assign(f.index.partitions[0],descriptor(f.childPath,f.bytes.get(f.childPath)));
+  const changedRoot=JSON.parse(f.bytes.get(f.rootPath));
+  changedRoot.outputs=changedRoot.outputs.map(row=>row.path===f.childPath?descriptor(row.path,f.bytes.get(row.path)):row);
+  f.bytes.set(f.rootPath,encode(changedRoot));bindIndex(f);
+  for(const name of [f.childPath,f.rootPath,f.indexPath])fs.writeFileSync(path.join(directory,name),f.bytes.get(name));
+  git('add','.');git('commit','-qm','Wrong original receipt hash control');
+  assert.throws(()=>execFileSync(process.execPath,[script,f.indexPath,f.index.baseline_commit,'HEAD'],
+   {cwd:directory,env,encoding:'utf8',stdio:['ignore','pipe','pipe']}),error=>/Original change bytes mismatch/.test(error.stderr));
+ }finally{fs.rmSync(directory,{recursive:true,force:true});}
 });
 
 test('explicit validator file and phase operating limits reject before body reads',()=>{

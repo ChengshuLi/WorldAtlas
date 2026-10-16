@@ -56,7 +56,7 @@ need(aggregate.reviewer_worker_id!==index.worker_id&&aggregate.reviewer_worker_i
 checkPartitionReviewInventory(aggregate,index);
 const reviewed=[];
 for(const part of [{path:index.root_manifest_path,change_paths:index.root_change_paths,is_root:true},...index.partitions]){
- const manifestRaw=read(part.path,'candidate'),manifest=JSON.parse(manifestRaw),limits=validateEvidence(manifest,{readFile:read}).limits;
+ const manifestRaw=read(part.path,'candidate',part.is_root?undefined:part),manifest=JSON.parse(manifestRaw),limits=validateEvidence(manifest,{readFile:read}).limits;
  let receipt=rootReceipt,comment=root;
  if(!part.is_root){
   const binding=aggregate.partitions.find(row=>row.manifest_path===part.path);

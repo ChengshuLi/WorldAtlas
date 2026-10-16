@@ -464,6 +464,15 @@ export function validateEvidence(manifest, {readFile, expectedIssue, expectedSub
     factual_validation: 'Requires independent source/method review; hashes do not establish truth'};
 }
 
+export function gitEvidenceDescriptor(root, name, commit) {
+  safeEvidencePath(name);
+  require(typeof commit === 'string' && /^[a-f0-9]{40}$/.test(commit), 'Unsafe immutable evidence commit');
+  const entry = execFileSync('git', ['-C', root, 'ls-tree', '-l', '-z', commit, '--', name], {encoding: 'utf8'});
+  const match = /^(100644|100755) blob ([a-f0-9]{40}) +(\d+)\t([^\0]+)\0$/.exec(entry);
+  require(match && match[4] === name, 'Evidence must be an ordinary exact Git blob');
+  return {path: name, commit, mode: match[1], git_blob_oid: match[2], bytes: finiteBytes(Number(match[3]), 'immutable tree size')};
+}
+
 export function repositoryReader(root, {maxFileBytes} = {}) {
   root = fs.realpathSync(root);
   if (maxFileBytes !== undefined) finiteBytes(maxFileBytes, 'caller file budget');
@@ -472,13 +481,9 @@ export function repositoryReader(root, {maxFileBytes} = {}) {
     const bound = descriptor === undefined ? maxFileBytes ?? LEGACY_FILE_BYTES : finiteBytes(descriptor.bytes, 'encoded descriptor');
     if (maxFileBytes !== undefined) require(bound <= maxFileBytes, 'Candidate exceeds budget');
     if (vintage !== 'candidate') {
-      require(/^[a-f0-9]{40}$/.test(vintage), 'Unsafe baseline commit');
-      const entry = execFileSync('git', ['-C', root, 'ls-tree', '-l', '-z', vintage, '--', name], {encoding: 'utf8'});
-      const match = /^(100644|100755) blob ([a-f0-9]{40}) +(\d+)\t([^\0]+)\0$/.exec(entry);
-      require(match && match[4] === name, 'Baseline must be an ordinary file');
-      const size = finiteBytes(Number(match[3]), 'immutable tree size');
+      const actual = gitEvidenceDescriptor(root, name, vintage), size = actual.bytes;
       require(size <= bound && (descriptor === undefined || size === descriptor.bytes), 'Baseline exceeds exact file budget');
-      const raw = execFileSync('git', ['-C', root, 'cat-file', 'blob', match[2]], {maxBuffer: Math.max(1, addBytes(size, 1))});
+      const raw = execFileSync('git', ['-C', root, 'cat-file', 'blob', actual.git_blob_oid], {maxBuffer: Math.max(1, addBytes(size, 1))});
       require(raw.length === size, 'Baseline bytes changed from exact tree size');
       return raw;
     }
@@ -493,6 +498,12 @@ export function repositoryReader(root, {maxFileBytes} = {}) {
       require(length === size, 'Candidate bytes changed from exact file size');
       return raw.subarray(0, size);
     } finally { fs.closeSync(fd); }
+  };
+  read.descriptor = (name, vintage) => {
+    if (vintage !== 'candidate') return gitEvidenceDescriptor(root, name, vintage);
+    safeEvidencePath(name); const target = path.join(root, name);
+    require(fs.realpathSync(target) === target && fs.lstatSync(target).isFile(), 'Candidate must be an ordinary file without symlinks');
+    return {path: name, bytes: finiteBytes(fs.statSync(target).size, 'candidate file size')};
   };
   read.assertAncestor = commit => {
     require(/^[a-f0-9]{40}$/.test(commit ?? ''), 'Unsafe historical commit');
